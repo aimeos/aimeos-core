@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ * @version $Id: image-body-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
+ */
+
+$mediaItems = $this->detailProductItem->getRefItems( 'media', 'default', 'default' );
+
+?>
+<div class="catalog-detail-image">
+	<div class="image-single">
+		<a id="prev-image" class="disabled"></a>
+		<a id="next-image" class="disabled"></a>
+		<div class="carousel">
+<?php foreach( $mediaItems as $id => $mediaItem ) : ?>
+			<div id="image-<?php echo $id; ?>" class="item" style="background-image: url('<?php echo $this->config( 'baseurl-content' ) . $mediaItem->getUrl(); ?>')"></div>
+<?php endforeach; ?>
+		</div>
+	</div>
+	<div class="image-thumbs">
+		<a id="prev-thumbs" class="disabled"></a>
+		<a id="next-thumbs" class="disabled"></a>
+		<div class="thumbs">
+<?php
+$class = 'item selected';
+foreach( $mediaItems as $id => $mediaItem ) {
+	printf( '<a href="#image-%1$s" class="%2$s" style="background-image: url(\'%3$s\')"></a>', $id, $class, $this->config( 'baseurl-content' ) . $mediaItem->getUrl() );
+	$class = 'item';
+}
+?>
+		</div>
+	</div>
+<?php echo $this->imageBody; ?>
+</div>

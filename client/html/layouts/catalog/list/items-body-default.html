@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ * @version $Id: items-body-default.html 1351 2012-10-28 11:29:07Z nsendetzky $
+ */
+
+$priceFormat = $this->translate( 'core/client/html', '%1$s€' );
+$percentFormat = $this->translate( 'core/client/html', '%1$s%%' );
+
+?>
+<div class="catalog-list-items">
+<?php foreach( $this->listProductItems as $id => $productItem ) : ?>
+<?php	$name = $productItem->getName(); $firstImage = true; ?>
+	<div class="single">
+		<a href="<?php echo $this->url( $this->config( 'catalog-detail-target' ), 'catalog', 'detail', array( 'l-product-id' => $id ) + $this->listParams, array( $name ) ); ?>">
+			<div class="media-list">
+<?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
+<?php		if( $firstImage === true ) : $firstImage = false; ?>
+				<noscript><div class="media-item" style="background-image: url('<?php echo $this->config( 'baseurl-content' ) . $mediaItem->getUrl(); ?>')"></div></noscript>
+				<div class="media-item lazy-image" data-src="<?php echo $this->config( 'baseurl-content' ) . $mediaItem->getUrl(); ?>"></div>
+<?php		else : ?>
+				<div class="media-item" data-src="<?php echo $this->config( 'baseurl-content' ) . $mediaItem->getUrl(); ?>"></div>
+<?php		endif; ?>
+<?php	endforeach; ?>
+			</div>
+			<div class="text-list">
+				<h1><?php echo $name; ?></h1>
+<?php	foreach( $productItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>
+				<div class="text-item">
+<?php		echo $textItem->getContent(); ?><br/>
+				</div>
+<?php	endforeach; ?>
+			</div>
+			<div class="price-list">
+<?php	foreach( $productItem->getRefItems( 'price', 'default', 'default' ) as $priceItem ) : ?>
+				<div class="price-item">
+					<span class="price-quantity"><?php echo $priceItem->getQuantity(); ?></span>
+					<span class="price-value"><?php printf( $priceFormat, $this->number( $priceItem->getValue() ) ); ?></span>
+<?php		if( ( $rebate = $priceItem->getRebate() ) > 0 ) : ?>
+					<span class="price-rebate"><?php printf( $priceFormat, $this->number( $rebate ) ); ?></span>
+					<span class="price-rebatepercent"><?php printf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ); ?></span>
+<?php		endif; ?>
+					<span class="price-shipping"><?php printf( $priceFormat, $this->number( $priceItem->getShipping() ) ); ?></span>
+					<span class="price-taxrate"><?php printf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ); ?></span>
+				</div>
+<?php	endforeach; ?>
+			</div>
+		</a>
+<?php	echo $this->itemsBody; ?>
+	</div>
+<?php endforeach; ?>
+</div>

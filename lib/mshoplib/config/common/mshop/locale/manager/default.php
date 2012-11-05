@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ * @version $Id: default.php 14408 2011-12-17 13:24:46Z nsendetzky $
+ */
+
+return array(
+	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_locale"
+			WHERE "id" = ?
+		',
+		'insert' => '
+			INSERT INTO "mshop_locale" ( "siteid", "langid", "currencyid", "pos", "status", "mtime", "editor", "ctime" )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+		',
+		'update' => '
+			UPDATE "mshop_locale"
+			SET "siteid" = ?, "langid" = ?, "currencyid" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			WHERE "id" = ?
+		',
+		'search' => '
+			SELECT DISTINCT mloc."id", mloc."siteid", mloc."langid", mloc."currencyid", mloc."pos", mloc."status",
+				mloc."mtime", mloc."editor", mloc."ctime"
+			FROM "mshop_locale" AS mloc
+			LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")
+			LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
+			LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
+			WHERE :cond
+			ORDER BY :order
+			LIMIT :size OFFSET :start
+		',
+		'count' => '
+			SELECT COUNT(DISTINCT mloc."id") AS "count"
+			FROM "mshop_locale" AS mloc
+			LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")
+			LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
+			LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
+			WHERE :cond
+		',
+	),
+);

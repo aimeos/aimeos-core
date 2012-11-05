@@ -1,0 +1,17 @@
+/*
+ * Uses icons from http://www.famfamfam.com/lab/icons/silk/ theme
+ * licensed via Creative Commons Attribution 2.5 License
+ * http://creativecommons.org/licenses/by/2.5/
+ */
+
+#header{
+   background:#EEE;
+}
+
+#header .api-title {
+    color:#000;
+	font-weight: bold;
+	padding-left: 22px;
+	background: url( '../images/arcavias.gif' ) no-repeat 0 center;
+}
+

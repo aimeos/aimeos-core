@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ * @version $Id: basket-body-default.html 1351 2012-10-28 11:29:07Z nsendetzky $
+ */
+
+$priceFormat = $this->translate( 'core/client/html', '%1$s€' );
+$percentFormat = $this->translate( 'core/client/html', '%1$s%%' );
+
+?>
+<div class="catalog-detail-basket">
+	<div class="basket-price">
+<?php $pricelist = $this->detailProductItem->getRefItems( 'price', 'default', 'default' ); ?>
+<?php if( ( $priceItem = reset( $pricelist ) ) !== false ) : ?>
+		<div class="price-item">
+			<span class="price-quantity"><?php echo $priceItem->getQuantity(); ?></span>
+			<span class="price-value"><?php printf( $priceFormat, $this->number( $priceItem->getValue() ) ); ?></span>
+<?php	if( ( $rebate = $priceItem->getRebate() ) > 0 ) : ?>
+			<span class="price-rebate"><?php printf( $priceFormat, $this->number( $rebate ) ); ?></span>
+			<span class="price-rebatepercent"><?php printf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ); ?></span>
+<?php	endif; ?>
+			<span class="price-shipping"><?php printf( $priceFormat, $this->number( $priceItem->getShipping() ) ); ?></span>
+			<span class="price-taxrate"><?php printf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ); ?></span>
+		</div>
+<?php endif; ?>
+	</div>
+	<form method="POST" action="<?php echo $this->url( $this->config( 'basket-target' ) ); ?>">
+<?php echo $this->basketBody; ?>
+		<div class="basket-add">
+			<div class="basket-group">
+				<input name="quantity" type="text" value="1" />
+				<button class="standardbutton" type="submit" value=""><?php echo $this->translate( 'core/client/html', 'Add to basket' ); ?></button>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,13 @@
+/* $Id: ie.css 1320 2012-10-19 19:57:38Z nsendetzky $ */
+
+.filter-tree a {
+	padding-top: 2px;
+}
+
+#productInformations div {
+	margin-top: 0;
+}
+
+#productsearch button {
+	width: 150px;
+}

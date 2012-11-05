@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="bootstrap.php">
+	<testsuites>
+		<testsuite name="MShop suite">
+			<directory>MShop/</directory>
+		</testsuite>
+		<testsuite name="MAdmin suite">
+			<directory>MAdmin/</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../src</directory>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="coverage-html" target="coverage" charset="UTF-8"/>
+	</logging>
+</phpunit>

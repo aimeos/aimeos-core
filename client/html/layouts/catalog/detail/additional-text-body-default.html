@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ * @version $Id: additional-text-body-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
+ */
+
+?>
+<h2 class="tabheader"><?php echo $this->translate( 'core/client/html', 'Description' ); ?></h2>
+<div class="tabcontent">
+<?php foreach( $this->detailProductItem->getRefItems( 'text', 'long', 'default' ) as $textItem ) : ?> 
+	<p><?php echo $textItem->getContent(); ?></p>
+<?php endforeach; ?>
+<?php echo $this->textBody; ?>
+</div>
