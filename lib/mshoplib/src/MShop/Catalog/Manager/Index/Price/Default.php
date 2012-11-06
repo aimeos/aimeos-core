@@ -17,6 +17,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Catalog_Manager_Index_Price_Interface
 {
+	private $_productManager;
 
 	private $_searchConfig = array(
 		'catalog.index.price.id' => array(
@@ -56,6 +57,9 @@ class MShop_Catalog_Manager_Index_Price_Default
 	{
 		parent::__construct( $context );
 
+		$this->_productManager = MShop_Product_Manager_Factory::createManager( $context );
+
+
 		$site = $context->getLocale()->getSitePath();
 		$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_INT );
 
@@ -81,7 +85,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function createItem()
 	{
-		return MShop_Product_Manager_Factory::createManager( $this->_getContext() )->createItem();
+		return $this->_productManager->createItem();
 	}
 
 
@@ -93,7 +97,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function createSearch( $default = false )
 	{
-		return MShop_Product_Manager_Factory::createManager( $this->_getContext() )->createSearch( $default );
+		return $this->_productManager->createSearch( $default );
 	}
 
 
@@ -170,8 +174,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
-		$list = array_merge( $list, $productManager->getSearchAttributes() );
+		$list = array_merge( $list, $this->_productManager->getSearchAttributes( false ) );
 
 		if( $withsub === true )
 		{
@@ -205,7 +208,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return MShop_Product_Manager_Factory::createManager( $this->_getContext() )->getItem( $id, $ref );
+		return $this->_productManager->getItem( $id, $ref );
 	}
 
 
@@ -255,11 +258,9 @@ class MShop_Catalog_Manager_Index_Price_Default
 			throw $e;
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
-
-		$search = $productManager->createSearch();
+		$search = $this->_productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
-		$products = $productManager->searchItems( $search, $ref, $total );
+		$products = $this->_productManager->searchItems( $search, $ref, $total );
 
 		foreach( $ids as $id )
 		{
