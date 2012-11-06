@@ -122,19 +122,16 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	public function optimize()
 	{
 		$context = $this->_getContext();
-		$config = $context->getConfig();
-
-		if( ( $sql = $config->get( 'mshop/catalog/manager/index/attribute/default/optimize', null ) ) === null ) {
-			return;
-		}
-
-
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
 		try
 		{
-			$stmt = $conn->create( $sql )->execute()->finish();
+			$path = 'mshop/catalog/manager/index/attribute/default/optimize';
+			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
+				$conn->create( $sql )->execute()->finish();
+			}
+
 			$dbm->release( $conn );
 		}
 		catch( Exception $e )

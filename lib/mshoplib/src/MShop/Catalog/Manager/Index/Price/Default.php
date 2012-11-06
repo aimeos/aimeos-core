@@ -117,20 +117,16 @@ class MShop_Catalog_Manager_Index_Price_Default
 	public function optimize()
 	{
 		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$path = 'mshop/catalog/manager/index/price/default/optimize';
-
-		if( ( $sql = $config->get( $path, null ) ) === null ) {
-			return;
-		}
-
-
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
 		try
 		{
-			$stmt = $conn->create( $sql )->execute()->finish();
+			$path = 'mshop/catalog/manager/index/price/default/optimize';
+			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
+				$conn->create( $sql )->execute()->finish();
+			}
+
 			$dbm->release( $conn );
 		}
 		catch( Exception $e )
