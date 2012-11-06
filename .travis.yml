@@ -2,5 +2,7 @@ language: php
 php:
   - "5.4"
   - "5.3"
-install: phing
+before_script:
+  - pear install pear.phing.info/phing
+  - pear install pear/PHP_CodeSniffer
 script: "phing"
