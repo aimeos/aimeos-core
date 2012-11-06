@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            Release Notes for Ext JS 3.4.0
+        </title>
+        <style type="text/css">
+
+        * { margin: 0; padding: 0; }
+        body { 
+        color: #333; 
+        font-family: Helvetica, Arial, sans-serif; 
+        font-size: 12px;
+        padding: 0 40px 40px; 
+        width: 800px;
+        margin: 0 auto;
+        }
+        h1, h2, h3 { 
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+        font-weight: 600; 
+        margin: 1em 0;
+        }
+        h1 { font-size: 23px; }
+        h2 { font-size: 16px; margin-top: 1em; }
+        h3 { font-size: 14px; }
+        ul li { padding: 2px 0; font-size: 13px; }
+        ul ul li { font-size: 12px; font-weight: normal; }
+        .doc { color: blue; }
+        .change { color: #196cb4; }
+        .new { color: #6e7a32; }
+        ul { padding: .1em 1.5em; }
+        .notes { color: #777; }
+        a { color: rgb(4, 100, 187); }
+        a:hover { color: rgb(28, 65, 124); }
+        </style>
+    </head>
+    <body>
+        <p>
+            <a href="http://www.sencha.com/" id="logo" name="logo"><img src="http://www.sencha.com/assets/images/logo-sencha-sm.png" alt=""></a>
+        </p>
+        <h1>
+            Release Notes for <a href="http://www.sencha.com/products/js/">Ext JS</a> 3.4.0
+        </h1>
+        <p class="notes">
+            Release Date: June 9, 2011<br>
+            Current Version: 3.4.0 (rev 7395/288)<br>
+            Previous Version: 3.3.3 (rev 7389/286)
+        </p>
+        <h2 class="new">
+            Changes
+        </h2>
+        <h3>
+            Menu
+        </h3>
+        <ul>
+            <li>Incorrect menu width on IE9
+            </li>
+            <li>Fix Reorderable example
+            </li>
+        </ul>
+        <h3>
+            Form/Field
+        </h3>
+        <ul>
+            <li>Fix an issue with composite fields being marked incorrectly
+            </li>
+            <li>Trigger fields are now flushed with fields on IE9
+            </li>
+            <li>Fix field width in IE9
+            </li>
+            <li>Fix fieldset header checkboxes in IE9 quirks
+            </li>
+        </ul>
+        <h3>
+            Misc
+        </h3>
+        <ul>
+            <li>Allow altText to be specified on a per item basis for grid columns
+            </li>
+            <li>Ensure there's no bottom margin on the multi-select
+            </li>
+            <li>Apply additional css classes for IE9 (ext-ie9 and x-quirks)
+            </li>
+            <li>Apply additional boolean flags for IE9 (Ext.isIE9 and Ext.isIEQuirks)
+            </li>
+            <li>Add support to insertHTML method to prevent createContextualFragment errors with IE9
+            </li>
+        </ul>
+    </body>
+</html>
