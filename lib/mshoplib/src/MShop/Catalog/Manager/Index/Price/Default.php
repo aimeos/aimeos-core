@@ -18,6 +18,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	implements MShop_Catalog_Manager_Index_Price_Interface
 {
 	private $_productManager;
+	private $_submanagers = array();
 
 	private $_searchConfig = array(
 		'catalog.index.price.id' => array(
@@ -75,6 +76,13 @@ class MShop_Catalog_Manager_Index_Price_Default
 		str_replace( ':site', $string, $this->_searchConfig['catalog.index.price.id']['internalcode'] );
 
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.value'], 'mcatinpr."siteid"', $site );
+
+
+		$confpath = 'mshop/catalog/manager/index/price/default/submanagers';
+
+		foreach( $context->getConfig()->get( $confpath, array() ) as $domain ) {
+			$this->_submanagers[ $domain ] = $this->getSubManager( $domain );
+		}
 	}
 
 
@@ -116,6 +124,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			return;
 		}
 
+
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
@@ -129,6 +138,11 @@ class MShop_Catalog_Manager_Index_Price_Default
 			$dbm->release( $conn );
 			throw $e;
 		}
+
+
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->optimize();
+		}
 	}
 
 
@@ -139,6 +153,11 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function deleteItem( $id )
 	{
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->deleteItem( $id );
+		}
+
+
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
@@ -178,9 +197,8 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 		if( $withsub === true )
 		{
-			$path = 'mshop/catalog/manager/index/price/default/submanagers';
-			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
+			foreach( $this->_submanagers as $submanager ) {
+				$list = array_merge( $list, $submanager->getSearchAttributes( $withsub ) );
 			}
 		}
 
@@ -285,17 +303,13 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
 
-		$path = 'mshop/catalog/manager/index/price/default/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-			$this->getSubManager( $domain )->rebuildIndex( $items );
-		}
-
-		$this->_begin();
-
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
+
+
+		$this->_begin();
 
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
@@ -349,5 +363,10 @@ class MShop_Catalog_Manager_Index_Price_Default
 		}
 
 		$this->_commit();
+
+
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->rebuildIndex( $items );
+		}
 	}
 }

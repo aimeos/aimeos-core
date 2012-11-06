@@ -20,7 +20,7 @@ class MShop_Catalog_Manager_Index_Default
 	implements MShop_Catalog_Manager_Index_Interface
 {
 	private $_productManager;
-	private $_submanager = array();
+	private $_submanagers = array();
 
 
 	/**
@@ -38,7 +38,7 @@ class MShop_Catalog_Manager_Index_Default
 		$default = array( 'price', 'catalog', 'attribute', 'text' );
 
 		foreach( $context->getConfig()->get( $confpath, $default ) as $domain ) {
-			$this->_submanager[ $domain ] = $this->getSubManager( $domain );
+			$this->_submanagers[ $domain ] = $this->getSubManager( $domain );
 		}
 	}
 
@@ -73,7 +73,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function deleteItem( $id )
 	{
-		foreach( $this->_submanager as $submanager ) {
+		foreach( $this->_submanagers as $submanager ) {
 			$submanager->deleteItem( $id );
 		}
 	}
@@ -92,11 +92,13 @@ class MShop_Catalog_Manager_Index_Default
 			throw new MShop_Catalog_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
 		}
 
+
 		$itemId = $item->getId();
 
 		if( $itemId === null ) {
 			throw new MShop_Catalog_Exception( 'Item ID must not be null' );
 		}
+
 
 		$confpath = 'mshop/catalog/manager/index/default/domains';
 		$default = array( 'attribute', 'price', 'text', 'product' );
@@ -105,7 +107,7 @@ class MShop_Catalog_Manager_Index_Default
 
 		$this->deleteItem( $itemId );
 
-		foreach ( $this->_submanager as $submanager ) {
+		foreach ( $this->_submanagers as $submanager ) {
 			$submanager->saveItem( $item );
 		}
 
@@ -171,7 +173,7 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		$list = $this->_productManager->getSearchAttributes( false );
 
-		foreach( $this->_submanager as $submanager ) {
+		foreach( $this->_submanagers as $submanager ) {
 			$list = array_merge( $list, $submanager->getSearchAttributes( $withsub ) );
 		}
 
@@ -198,7 +200,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function optimize()
 	{
-		foreach( $this->_submanager as $submanager ) {
+		foreach( $this->_submanagers as $submanager ) {
 			$submanager->optimize();
 		}
 	}
@@ -247,7 +249,7 @@ class MShop_Catalog_Manager_Index_Default
 				$this->deleteItem( $id );
 			}
 
-			foreach ( $this->_submanager as $submanager ) {
+			foreach ( $this->_submanagers as $submanager ) {
 				$submanager->rebuildIndex( $result );
 			}
 
@@ -315,7 +317,7 @@ class MShop_Catalog_Manager_Index_Default
 					$itemList[] = $refItem;
 				}
 
-				foreach( $this->_submanager as $submanager ) {
+				foreach( $this->_submanagers as $submanager ) {
 					$submanager->rebuildIndex( $itemList );
 				}
 
