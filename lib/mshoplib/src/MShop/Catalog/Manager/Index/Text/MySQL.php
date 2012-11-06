@@ -85,14 +85,6 @@ class MShop_Catalog_Manager_Index_Text_MySQL
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
-		if( $withsub === true )
-		{
-			$path = 'mshop/catalog/manager/index/text/mysql/submanagers';
-			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
-			}
-		}
-
 		return $list;
 	}
 
