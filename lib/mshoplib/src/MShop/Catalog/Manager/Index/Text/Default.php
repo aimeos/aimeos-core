@@ -18,6 +18,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	implements MShop_Catalog_Manager_Index_Text_Interface
 {
 	private $_productManager;
+	private $_submanagers = array();
 
 	private $_searchConfig = array(
 		'catalog.index.text.id' => array(
@@ -99,6 +100,13 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.value'], 'mcatinte."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['sort:catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
+
+
+		$confpath = 'mshop/catalog/manager/index/text/default/submanagers';
+
+		foreach( $context->getConfig()->get( $confpath, array() ) as $domain ) {
+			$this->_submanagers[ $domain ] = $this->getSubManager( $domain );
+		}
 	}
 
 
@@ -133,25 +141,27 @@ class MShop_Catalog_Manager_Index_Text_Default
 	public function optimize()
 	{
 		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$path = 'mshop/catalog/manager/index/text/default/optimize';
-
-		if( ( $sql = $config->get( $path, null ) ) === null ) {
-			return;
-		}
-
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
 		try
 		{
-			$stmt = $conn->create( $sql )->execute()->finish();
+			$path = 'mshop/catalog/manager/index/text/default/optimize';
+			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
+				$conn->create( $sql )->execute()->finish();
+			}
+
 			$dbm->release( $conn );
 		}
 		catch( Exception $e )
 		{
 			$dbm->release( $conn );
 			throw $e;
+		}
+
+
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->optimize();
 		}
 	}
 
@@ -163,6 +173,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function deleteItem( $id )
 	{
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->deleteItem( $id );
+		}
+
+
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
@@ -202,9 +217,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		if( $withsub === true )
 		{
-			$path = 'mshop/catalog/manager/index/text/default/submanagers';
-			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
+			foreach( $this->_submanagers as $submanager ) {
+				$list = array_merge( $list, $submanager->getSearchAttributes( $withsub ) );
 			}
 		}
 
@@ -345,16 +359,12 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
 
-		$path = 'mshop/catalog/manager/index/text/default/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-			$this->getSubManager( $domain )->rebuildIndex( $items );
-		}
-
 		$context = $this->_getContext();
 		$locale = $context->getLocale();
 		$siteid = $context->getLocale()->getSiteId();
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
+
 
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
@@ -420,6 +430,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 		{
 			$dbm->release( $conn );
 			throw $e;
+		}
+
+
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->rebuildIndex( $items );
 		}
 	}
 }
