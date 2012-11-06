@@ -27,11 +27,11 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.index.catalog.count' => array(
-			'code'=>'catalog.index.catalog.count()',
+		'catalog.index.catalogcount' => array(
+			'code'=>'catalog.index.catalogcount()',
 			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinca2."catid")
 				FROM "mshop_catalog_index_catalog" AS mcatinca2
-				WHERE mcatinca."prodid" = mcatinca2."prodid" AND :site
+				WHERE mpro."id" = mcatinca2."prodid" AND :site
 				AND mcatinca2."catid" IN ( $2 ) AND mcatinca2."listtype" = $1 )',
 			'label'=>'Number of product categories, parameter(<list type code>,<category IDs>)',
 			'type'=> 'integer',
@@ -80,8 +80,8 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$this->_searchConfig['catalog.index.catalog.id']['internalcode'] =
 			str_replace( ':site', $string, $this->_searchConfig['catalog.index.catalog.id']['internalcode'] );
 
-		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.catalog.count'], 'mcatinca2."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.catalog.position'], 'mcatinca."siteid"', $site );
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.catalogcount'], 'mcatinca2."siteid"', $site );
 	}
 
 
@@ -180,6 +180,9 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		foreach( $this->_searchConfig as $key => $fields ) {
 			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
+
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
+		$list = array_merge( $list, $productManager->getSearchAttributes() );
 
 		if( $withsub === true )
 		{

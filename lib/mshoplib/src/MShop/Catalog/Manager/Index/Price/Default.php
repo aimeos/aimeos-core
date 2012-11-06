@@ -170,6 +170,9 @@ class MShop_Catalog_Manager_Index_Price_Default
 			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
+		$list = array_merge( $list, $productManager->getSearchAttributes() );
+
 		if( $withsub === true )
 		{
 			$path = 'mshop/catalog/manager/index/price/default/submanagers';
