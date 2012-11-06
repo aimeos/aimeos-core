@@ -12,17 +12,9 @@
  */
 class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MShop_Catalog_Manager_MySQL
-	 * @access protected
-	 */
 	protected $_object;
+	protected $_editor;
 
-	/**
-	 * @var string
-	 * @access protected
-	 */
-	protected $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.
@@ -41,7 +33,8 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 
 	public static function setUpBeforeClass()
 	{
-		$context = TestHelper::getContext();
+		$context = clone TestHelper::getContext();
+		$context->getConfig()->set( 'classes/catalog/manager/index/text/name', 'MySQL' );
 
 		$manager = new MShop_Catalog_Manager_Index_MySQL( $context );
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
@@ -70,16 +63,19 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
-		$config = TestHelper::getContext()->getConfig();
+		$context = clone TestHelper::getContext();
+		$context->getConfig()->set( 'classes/catalog/manager/index/text/name', 'MySQL' );
+
+		$this->_editor = $context->getEditor();
+		$config = $context->getConfig();
+
 		$dbadapter = $config->get( 'resource/db/adapter' );
 
 		if( $dbadapter !== 'mysql' ) {
 			$this->markTestSkipped( 'MySQL specific test' );
 		}
 
-		$config->set( 'classes/catalog/manager/index/text/name', 'MySQL' );
-		$this->_object = new MShop_Catalog_Manager_Index_MySQL( TestHelper::getContext() );
+		$this->_object = new MShop_Catalog_Manager_Index_MySQL( $context );
 	}
 
 
@@ -91,7 +87,6 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		TestHelper::getContext()->getConfig()->set( 'classes/catalog/manager/index/text/name', null );
 		unset( $this->object );
 	}
 
