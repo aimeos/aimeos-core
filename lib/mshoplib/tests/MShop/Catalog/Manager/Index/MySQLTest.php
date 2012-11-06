@@ -78,6 +78,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 			$this->markTestSkipped( 'MySQL specific test' );
 		}
 
+		$config->set( 'classes/catalog/manager/index/text/name', 'MySQL' );
 		$this->_object = new MShop_Catalog_Manager_Index_MySQL( TestHelper::getContext() );
 	}
 
@@ -90,6 +91,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
+		TestHelper::getContext()->getConfig()->set( 'classes/catalog/manager/index/text/name', null );
 		unset( $this->object );
 	}
 
