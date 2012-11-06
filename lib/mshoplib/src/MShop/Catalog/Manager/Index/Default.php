@@ -200,6 +200,26 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function optimize()
 	{
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		try
+		{
+			$path = 'mshop/catalog/manager/index/default/optimize';
+			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
+				$conn->create( $sql )->execute()->finish();
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+
+
 		foreach( $this->_submanagers as $submanager ) {
 			$submanager->optimize();
 		}
