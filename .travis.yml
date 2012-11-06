@@ -3,6 +3,7 @@ php:
   - "5.4"
   - "5.3"
 before_script:
+  - pear config-set auto_discover 1
   - pear install pear.phing.info/phing
   - pear install pear/PHP_CodeSniffer
 script: "phing"
