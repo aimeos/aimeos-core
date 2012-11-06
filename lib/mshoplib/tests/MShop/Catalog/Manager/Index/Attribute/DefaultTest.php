@@ -181,7 +181,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 
 
 		$attrIds = array( (int) $attrSizeItem->getId(), (int) $attrColorItem->getId() );
-		$func = $search->createFunction( 'catalog.index.attribute.count', array( 'default', $attrIds ) );
+		$func = $search->createFunction( 'catalog.index.attributecount', array( 'default', $attrIds ) );
 		$search->setConditions( $search->compare( '==', $func, 1 ) ); // count attributes
 
 		$result = $this->_object->searchItems( $search, array() );

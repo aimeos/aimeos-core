@@ -171,7 +171,7 @@ class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'catalog.index.catalog.id', (int) $this->_catItem->getId() ),
-			$search->compare( '==', $search->createFunction( 'catalog.index.catalog.count', array( 'default', $catIds ) ), 2 ),
+			$search->compare( '==', $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) ), 2 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -307,7 +307,7 @@ class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'catalog.index.catalog.id', (int) $this->_catItem->getId() ),
-			$search->compare( '>=', $search->createFunction( 'catalog.index.catalog.count', array( 'default', $catIds ) ), 2 ),
+			$search->compare( '>=', $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) ), 2 ),
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'default', 'en', 'plain' ) ), 0 ),
 			$search->compare( '>=', $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
 		);
