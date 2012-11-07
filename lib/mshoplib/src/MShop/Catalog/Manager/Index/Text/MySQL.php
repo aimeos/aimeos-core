@@ -90,40 +90,6 @@ class MShop_Catalog_Manager_Index_Text_MySQL
 
 
 	/**
-	 * Optimizes the index if necessary.
-	 * Execution of this operation can take a very long time and shouldn't be
-	 * called through a web server enviroment.
-	 */
-	public function optimize()
-	{
-		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$path = 'mshop/catalog/manager/index/text/mysql/cleanup';
-
-		if( ( $sql = $config->get( $path, null ) ) === null ) {
-			return;
-		}
-
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
-	}
-
-
-	/**
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
