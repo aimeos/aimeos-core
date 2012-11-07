@@ -122,39 +122,6 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 
 	/**
-	 * Optimizes the index if necessary.
-	 * Execution of this operation can take a very long time and shouldn't be
-	 * called through a web server enviroment.
-	 */
-	public function optimize()
-	{
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$path = 'mshop/catalog/manager/index/catalog/default/optimize';
-			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
-				$conn->create( $sql )->execute()->finish();
-			}
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
-
-
-		foreach( $this->_submanagers as $submanager ) {
-			$submanager->optimize();
-		}
-	}
-
-
-	/**
 	 * Removes an item from the index.
 	 *
 	 * @param integer $id Product ID
@@ -190,6 +157,19 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 
 	/**
+	 * Returns the catalog item for the given ID
+	 *
+	 * @param integer $id Id of item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Catalog_Item_Interface Item object
+	 */
+	public function getItem( $id, array $ref = array() )
+	{
+		return $this->_productManager->getItem( $id, $ref );
+	}
+
+
+	/**
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
@@ -215,30 +195,6 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 
 	/**
-	 * Stores a new item in the index.
-	 *
-	 * @param MShop_Common_Item_Interface $item Product item
-	 * @param boolean $fetch True if the new ID should be returned in the item
-	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
-	{
-		$this->rebuildIndex( array( $item ) );
-	}
-
-
-	/**
-	 * Returns the catalog item for the given ID
-	 *
-	 * @param integer $id Id of item
-	 * @return MShop_Catalog_Item_Interface Item object
-	 */
-	public function getItem( $id, array $ref = array() )
-	{
-		return $this->_productManager->getItem( $id, $ref );
-	}
-
-
-	/**
 	 * Returns a new manager for product extensions.
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
@@ -252,28 +208,21 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 
 	/**
-	 * Searches for items matching the given criteria.
-	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
-	 * @param integer &$total Total number of items matched by the given criteria
-	 * @return array List of items implementing MShop_Product_Item_Interface with ids as keys
+	 * Optimizes the index if necessary.
+	 * Execution of this operation can take a very long time and shouldn't be
+	 * called through a web server enviroment.
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function optimize()
 	{
-		$items = $ids = array();
-		$dbm = $this->_getContext()->getDatabaseManager();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
 		try
 		{
-			$cfgPathSearch = 'mshop/catalog/manager/index/catalog/default/item/search';
-			$cfgPathCount =  'mshop/catalog/manager/index/catalog/default/item/count';
-			$required = array( 'product' );
-
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
-
-			while( ( $row = $results->fetch() ) !== false )	{
-				$ids[] = $row['id'];
+			$path = 'mshop/catalog/manager/index/catalog/default/optimize';
+			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
+				$conn->create( $sql )->execute()->finish();
 			}
 
 			$dbm->release( $conn );
@@ -284,17 +233,10 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			throw $e;
 		}
 
-		$search = $this->_productManager->createSearch();
-		$search->setConditions( $search->compare('==', 'product.id', $ids) );
-		$products = $this->_productManager->searchItems( $search, $ref, $total );
 
-		foreach ($ids as $id) {
-			if( isset( $products[$id] ) ) {
-				$items[ $id ] = $products[ $id ];
-			}
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->optimize();
 		}
-
-		return $items;
 	}
 
 
@@ -373,5 +315,65 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		foreach( $this->_submanagers as $submanager ) {
 			$submanager->rebuildIndex( $items );
 		}
+	}
+
+
+	/**
+	 * Stores a new item in the index.
+	 *
+	 * @param MShop_Common_Item_Interface $item Product item
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 */
+	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	{
+		$this->rebuildIndex( array( $item ) );
+	}
+
+
+	/**
+	 * Searches for items matching the given criteria.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param integer &$total Total number of items matched by the given criteria
+	 * @return array List of items implementing MShop_Product_Item_Interface with ids as keys
+	 */
+	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	{
+		$items = $ids = array();
+		$dbm = $this->_getContext()->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		try
+		{
+			$cfgPathSearch = 'mshop/catalog/manager/index/catalog/default/item/search';
+			$cfgPathCount =  'mshop/catalog/manager/index/catalog/default/item/count';
+			$required = array( 'product' );
+
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+
+			while( ( $row = $results->fetch() ) !== false )	{
+				$ids[] = $row['id'];
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+
+		$search = $this->_productManager->createSearch();
+		$search->setConditions( $search->compare('==', 'product.id', $ids) );
+		$products = $this->_productManager->searchItems( $search, $ref, $total );
+
+		foreach ($ids as $id) {
+			if( isset( $products[$id] ) ) {
+				$items[ $id ] = $products[ $id ];
+			}
+		}
+
+		return $items;
 	}
 }
