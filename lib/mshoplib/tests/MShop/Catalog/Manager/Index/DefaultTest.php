@@ -310,7 +310,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 
 		$attrIds = array( (int) $attrSizeItem->getId(), (int) $attrLenItem->getId() );
-		$func = $search->createFunction( 'catalog.index.attribute.count', array( 'default', $attrIds ) );
+		$func = $search->createFunction( 'catalog.index.attributecount', array( 'default', $attrIds ) );
 		$conditions = array(
 			$search->compare( '==', $func, 2 ), // count attributes
 			$search->compare( '==', 'product.editor', $this->_editor )
@@ -420,7 +420,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 
 		$catIds = array( (int) $catItem->getId(), (int) $catNewItem->getId() );
-		$func = $search->createFunction( 'catalog.index.catalog.count', array( 'default', $catIds ) );
+		$func = $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) );
 		$conditions = array(
 			$search->compare( '==', $func, 2 ), // count categories
 			$search->compare( '==', 'product.editor', $this->_editor )

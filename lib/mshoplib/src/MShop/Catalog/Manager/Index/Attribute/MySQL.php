@@ -67,48 +67,6 @@ class MShop_Catalog_Manager_Index_Attribute_MySQL
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
-		if( $withsub === true )
-		{
-			$path = 'mshop/catalog/manager/index/attribute/mysql/submanagers';
-			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
-			}
-		}
-
 		return $list;
-	}
-
-
-	/**
-	 * Optimizes the index if necessary.
-	 * Execution of this operation can take a very long time and shouldn't be
-	 * called through a web server enviroment.
-	 */
-	public function optimize()
-	{
-		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$path = 'mshop/catalog/manager/index/attribute/mysql/cleanup';
-
-		if( ( $sql = $config->get( $path, null ) ) === null ) {
-			return;
-		}
-
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
 	}
 }

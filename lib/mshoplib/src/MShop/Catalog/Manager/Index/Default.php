@@ -20,7 +20,7 @@ class MShop_Catalog_Manager_Index_Default
 	implements MShop_Catalog_Manager_Index_Interface
 {
 	private $_productManager;
-	private $_submanager = array();
+	private $_submanagers = array();
 
 
 	/**
@@ -38,7 +38,7 @@ class MShop_Catalog_Manager_Index_Default
 		$default = array( 'price', 'catalog', 'attribute', 'text' );
 
 		foreach( $context->getConfig()->get( $confpath, $default ) as $domain ) {
-			$this->_submanager[ $domain ] = $this->getSubManager( $domain );
+			$this->_submanagers[ $domain ] = $this->getSubManager( $domain );
 		}
 	}
 
@@ -55,14 +55,14 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
-	 * Returns the product item for the given product ID.
+	 * Creates a search object and optionally sets base criteria.
 	 *
-	 * @param integer $id Unique ID to search for
-	 * @return MShop_Product_Item_Interface Product item
+	 * @param boolean $default Add default criteria
+	 * @return MW_Common_Criteria_Interface Criteria object
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function createSearch( $default = false )
 	{
-		return $this->_productManager->getItem( $id, $ref );
+		return $this->_productManager->createSearch( $default );
 	}
 
 
@@ -73,91 +73,22 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function deleteItem( $id )
 	{
-		foreach( $this->_submanager as $submanager ) {
+		foreach( $this->_submanagers as $submanager ) {
 			$submanager->deleteItem( $id );
 		}
 	}
 
 
 	/**
-	 * Stores a new item in the index.
+	 * Returns the product item for the given product ID.
 	 *
-	 * @param MShop_Common_Item_Interface $item Product item
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param integer $id Unique ID to search for
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Product_Item_Interface Product item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function getItem( $id, array $ref = array() )
 	{
-		$iface = 'MShop_Product_Item_Interface';
-		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Catalog_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
-		}
-
-		$itemId = $item->getId();
-
-		if( $itemId === null ) {
-			throw new MShop_Catalog_Exception( 'Item ID must not be null' );
-		}
-
-		$confpath = 'mshop/catalog/manager/index/default/domains';
-		$default = array( 'attribute', 'price', 'text', 'product' );
-
-		$item = $this->getItem( $itemId, $this->_getContext()->getConfig()->get( $confpath, $default ) );
-
-		$this->deleteItem( $itemId );
-
-		foreach ( $this->_submanager as $submanager ) {
-			$submanager->saveItem( $item );
-		}
-
-		$this->saveSubProducts( array ( $itemId => $item ) );
-	}
-
-
-	/**
-	 * Searches for items matching the given criteria.
-	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
-	 * @param integer &$total Total number of items matched by the given criteria
-	 * @return array List of items implementing MShop_Product_Item_Interface
-	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
-	{
-		$items = $ids = array();
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$cfgPathSearch = 'mshop/catalog/manager/index/default/item/search';
-			$cfgPathCount =  'mshop/catalog/manager/index/default/item/count';
-			$required = array( 'product' );
-
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
-
-			while( ( $row = $results->fetch() ) !== false ) {
-				$ids[] = $row['id'];
-			}
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
-
-		$search = $this->_productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
-		$products = $this->_productManager->searchItems( $search, $ref );
-
-		foreach( $ids as $id )
-		{
-			if( isset( $products[$id] ) ) {
-				$items[$id] = $products[$id];
-			}
-		}
-
-		return $items;
+		return $this->_productManager->getItem( $id, $ref );
 	}
 
 
@@ -171,7 +102,7 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		$list = $this->_productManager->getSearchAttributes( false );
 
-		foreach( $this->_submanager as $submanager ) {
+		foreach( $this->_submanagers as $submanager ) {
 			$list = array_merge( $list, $submanager->getSearchAttributes( $withsub ) );
 		}
 
@@ -180,14 +111,15 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
-	 * Creates a search object and optionally sets base criteria.
+	 * Returns a new manager for product extensions.
 	 *
-	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Interface Criteria object
+	 * @param string $manager Name of the sub manager type in lower case
+	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
+	 * @return mixed Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function createSearch( $default = false )
+	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_productManager->createSearch( $default );
+		return $this->_getSubManager( 'catalog', 'index/' . $manager, $name );
 	}
 
 
@@ -198,7 +130,27 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function optimize()
 	{
-		foreach( $this->_submanager as $submanager ) {
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		try
+		{
+			$path = 'mshop/catalog/manager/index/default/optimize';
+			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
+				$conn->create( $sql )->execute()->finish();
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+
+
+		foreach( $this->_submanagers as $submanager ) {
 			$submanager->optimize();
 		}
 	}
@@ -247,11 +199,11 @@ class MShop_Catalog_Manager_Index_Default
 				$this->deleteItem( $id );
 			}
 
-			foreach ( $this->_submanager as $submanager ) {
+			foreach ( $this->_submanagers as $submanager ) {
 				$submanager->rebuildIndex( $result );
 			}
 
-			$this->saveSubProducts( $result );
+			$this->_saveSubProducts( $result );
 
 			$count = count( $result );
 			$start += $count;
@@ -264,15 +216,87 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
-	 * Returns a new manager for product extensions.
+	 * Stores a new item in the index.
 	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @param MShop_Common_Item_Interface $item Product item
+	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		return $this->_getSubManager( 'catalog', 'index/' . $manager, $name );
+		$iface = 'MShop_Product_Item_Interface';
+		if( !( $item instanceof $iface ) ) {
+			throw new MShop_Catalog_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+		}
+
+
+		$itemId = $item->getId();
+
+		if( $itemId === null ) {
+			throw new MShop_Catalog_Exception( 'Item ID must not be null' );
+		}
+
+
+		$confpath = 'mshop/catalog/manager/index/default/domains';
+		$default = array( 'attribute', 'price', 'text', 'product' );
+
+		$item = $this->getItem( $itemId, $this->_getContext()->getConfig()->get( $confpath, $default ) );
+
+		$this->deleteItem( $itemId );
+
+		foreach ( $this->_submanagers as $submanager ) {
+			$submanager->saveItem( $item );
+		}
+
+		$this->_saveSubProducts( array ( $itemId => $item ) );
+	}
+
+
+	/**
+	 * Searches for items matching the given criteria.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param integer &$total Total number of items matched by the given criteria
+	 * @return array List of items implementing MShop_Product_Item_Interface
+	 */
+	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	{
+		$items = $ids = array();
+		$dbm = $this->_getContext()->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		try
+		{
+			$cfgPathSearch = 'mshop/catalog/manager/index/default/item/search';
+			$cfgPathCount =  'mshop/catalog/manager/index/default/item/count';
+			$required = array( 'product' );
+
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+
+			while( ( $row = $results->fetch() ) !== false ) {
+				$ids[] = $row['id'];
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+
+		$search = $this->_productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
+		$products = $this->_productManager->searchItems( $search, $ref );
+
+		foreach( $ids as $id )
+		{
+			if( isset( $products[$id] ) ) {
+				$items[$id] = $products[$id];
+			}
+		}
+
+		return $items;
 	}
 
 
@@ -281,7 +305,7 @@ class MShop_Catalog_Manager_Index_Default
 	 *
 	 * @param MShop_Product_Item_Interface $items Product items
 	 */
-	public function saveSubProducts( array $items )
+	protected function _saveSubProducts( array $items )
 	{
 		$context = $this->_getContext();
 		$default = array( 'attribute', 'price', 'text', 'product' );
@@ -290,7 +314,6 @@ class MShop_Catalog_Manager_Index_Default
 
 		foreach( $items as $id => $product )
 		{
-
 			$search = $this->_productManager->createSearch( true );
 			$search->setSlice( 0, $size );
 			$start = 0;
@@ -315,7 +338,7 @@ class MShop_Catalog_Manager_Index_Default
 					$itemList[] = $refItem;
 				}
 
-				foreach( $this->_submanager as $submanager ) {
+				foreach( $this->_submanagers as $submanager ) {
 					$submanager->rebuildIndex( $itemList );
 				}
 
@@ -324,7 +347,6 @@ class MShop_Catalog_Manager_Index_Default
 				$search->setSlice( $start, $size );
 			}
 			while( $count > 0 );
-
 		}
 	}
 }

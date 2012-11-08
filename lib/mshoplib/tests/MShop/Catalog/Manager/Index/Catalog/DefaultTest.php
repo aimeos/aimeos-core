@@ -202,7 +202,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 
 
 		$catIds = array( (int) $catItem->getId(), (int) $catNewItem->getId() );
-		$func = $search->createFunction( 'catalog.index.catalog.count', array( 'default', $catIds ) );
+		$func = $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) );
 		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count categories
 
 		$result = $this->_object->searchItems( $search, array() );
