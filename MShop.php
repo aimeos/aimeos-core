@@ -34,7 +34,7 @@ class MShop
 		}
 
 		$incpath = get_include_path();
-		set_include_path( $basedir . $ds . 'lib' . $ds . 'mwlib' . PATH_SEPARATOR . $incpath );
+		set_include_path( $basedir . $ds . 'lib' . $ds . 'mwlib' . $ds .'src' . PATH_SEPARATOR . $incpath );
 
 		$criteria = new MW_Common_Criteria_PHP();
 		$this->_manifests[$basedir] = $this->_getManifestFile( $basedir );

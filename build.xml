@@ -18,6 +18,7 @@
 		<phing target="coverage" dir="controller/frontend" />
 		<phing target="coverage" dir="controller/extjs" />
 		<phing target="coverage" dir="client/html" />
+		<phing target="coverage" dir="lib/mwlib" />
 		<phing target="coverage">
 			<fileset dir="ext" expandsymboliclinks="true" >
 				<include name="**/build.xml" />
@@ -36,6 +37,7 @@
 		<phing target="test" dir="controller/extjs" />
 		<phing target="test" dir="client/extjs" />
 		<phing target="test" dir="client/html" />
+		<phing target="test" dir="lib/mwlib" />
 		<phing target="test">
 			<fileset dir="ext" expandsymboliclinks="true" >
 				<include name="**/build.xml" />
@@ -64,6 +66,7 @@
 		<phing target="check" dir="controller/extjs" />
 		<phing target="check" dir="client/extjs" />
 		<phing target="check" dir="client/html" />
+		<phing target="check" dir="lib/mwlib" />
 		<phing target="check">
 			<fileset dir="ext" expandsymboliclinks="true" >
 				<include name="**/build.xml" />
@@ -100,7 +103,7 @@
 			<fileset dir="lib/mshoplib/src">
 				<include name="**/*.php" />
 			</fileset>
-			<fileset dir="lib/mwlib">
+			<fileset dir="lib/mwlib/src">
 				<include name="**/*.php" />
 			</fileset>
 		</phpdocext>
@@ -113,6 +116,7 @@
 		<phing target="clean" dir="controller/extjs" />
 		<phing target="clean" dir="client/extjs" />
 		<phing target="clean" dir="client/html" />
+		<phing target="clean" dir="lib/mwlib" />
 		<phing target="clean">
 			<fileset dir="ext" expandsymboliclinks="true" >
 				<include name="**/build.xml" />
