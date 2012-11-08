@@ -538,7 +538,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			{
 				$nodes = array();
 				while( ( $row = $result->fetch() ) !== false ) {
-					$nodes[] = $this->_createNode( $row );
+					$nodes[$row['id']] = $this->_createNode( $row );
 				}
 			}
 			catch( Exception $e )
