@@ -620,7 +620,7 @@ class MShop_Product_Manager_Default
 			$config = $this->_getContext()->getConfig();
 			$path = 'classes/product/manager/submanagers';
 
-			foreach ( $config->get($path, array( 'type', 'stock', 'list', 'site' )) as $domain ) {
+			foreach ( $config->get($path, array( 'type', 'stock', 'list' )) as $domain ) {
 				$list = array_merge($list, $this->getSubManager($domain)->getSearchAttributes(true));
 			}
 		}

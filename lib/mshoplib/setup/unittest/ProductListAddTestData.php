@@ -305,7 +305,6 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 */
 	private function _addProductData( array $testdata, $productManager, array $refIds, array $keys )
 	{
-		$productSiteManager = $productManager->getSubManager( 'site', 'Default' );
 		$productListManager = $productManager->getSubManager( 'list', 'Default' );
 		$productListTypeManager = $productListManager->getSubmanager( 'type', 'Default' );
 
