@@ -397,35 +397,3 @@ CREATE INDEX "idx_msprost_sid_ctime" ON "mshop_product_stock" ("siteid", "ctime"
 CREATE INDEX "idx_msprost_sid_mtime" ON "mshop_product_stock" ("siteid", "mtime");
 
 CREATE INDEX "idx_msprost_sid_editor" ON "mshop_product_stock" ("siteid", "editor");
-
-
-CREATE TABLE "mshop_product_site" (
-	-- Unique id
-	"id" INTEGER NOT NULL AUTO_INCREMENT,
-	-- site id, references mshop_locale_site.id
-	"siteid" INTEGER NOT NULL,
-	-- parent id references mshop_product.id
-	"parentid" INTEGER NOT NULL,
-	-- value
-	"value" SMALLINT NOT NULL,
-	-- Date of last modification of this database entry
-	"mtime" DATETIME NOT NULL,
-	-- Date of creation of this database entry
-	"ctime" DATETIME NOT NULL,
-	-- Editor who modified this entry at last
-	"editor" VARCHAR(255) NOT NULL,
-CONSTRAINT "pk_msprosi_id"
-	PRIMARY KEY ("id"),
-CONSTRAINT "unq_msprosi_sid_pid"
-	UNIQUE ("siteid", "parentid"),
-CONSTRAINT "fk_msprosi_parentid"
-	FOREIGN KEY ("parentid")
-	REFERENCES "mshop_product" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_msprosi_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;

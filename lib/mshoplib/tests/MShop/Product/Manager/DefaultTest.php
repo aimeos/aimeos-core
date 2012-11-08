@@ -286,13 +286,6 @@ class MShop_Product_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'product.stock.warehouse.code', 'unit_warehouse1' );
 		$expr[] = $search->compare( '==', 'product.stock.warehouse.editor', $this->_editor );
 
-		$expr[] = $search->compare( '!=', 'product.site.id', null );
-		$expr[] = $search->compare( '!=', 'product.site.siteid', null );
-		$expr[] = $search->compare( '==', 'product.site.value', 1 );
-		$expr[] = $search->compare( '>=', 'product.site.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'product.site.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'product.site.editor', $this->_editor );
-
 
 		$search->setConditions( $search->combine('&&', $expr) );
 		$search->setSlice(0, 1);
@@ -341,9 +334,6 @@ class MShop_Product_Manager_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type') );
 		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('type', 'Default') );
-
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('site') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('site', 'Default') );
 
 		$this->setExpectedException('MShop_Exception');
 		$this->_object->getSubManager('unknown');

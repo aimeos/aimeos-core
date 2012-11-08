@@ -400,7 +400,7 @@ class MShop_Catalog_Manager_Default
 		if( $withsub === true )
 		{
 			$path = 'classes/catalog/manager/submanagers';
-			foreach( $this->_getContext()->getConfig()->get( $path, array( 'list', 'site' ) ) as $domain ) {
+			foreach( $this->_getContext()->getConfig()->get( $path, array( 'list' ) ) as $domain ) {
 				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
 			}
 		}

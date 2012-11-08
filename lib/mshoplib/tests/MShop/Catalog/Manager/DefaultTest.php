@@ -121,13 +121,6 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>=', 'catalog.list.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.list.type.editor', $this->_editor );
 
-		$expr[] = $search->compare( '!=', 'catalog.site.id', null );
-		$expr[] = $search->compare( '!=', 'catalog.site.siteid', null );
-		$expr[] = $search->compare( '==', 'catalog.site.value', 0 );
-		$expr[] = $search->compare( '>=', 'catalog.site.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.site.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.site.editor', $this->_editor );
-
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -293,8 +286,6 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 		$target = 'MShop_Common_Manager_Interface';
 		$this->assertInstanceOf( $target, $this->_object->getSubManager('list') );
 		$this->assertInstanceOf( $target, $this->_object->getSubManager('list', 'Default') );
-		$this->assertInstanceOf( $target, $this->_object->getSubManager('site') );
-		$this->assertInstanceOf( $target, $this->_object->getSubManager('site', 'Default') );
 
 		$this->setExpectedException('MShop_Exception');
 		$this->_object->getSubManager('unknown');
