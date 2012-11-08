@@ -1,0 +1,16 @@
+{
+	"projectName": "Jsb2 Test",
+	"deployDir": "deploy",
+	"licenseText": "LGPLv3, http://www.gnu.org/licenses/lgpl.html",
+	"pkgs": [{
+		"name": "Jsb2 Test",
+		"file": "js/jsb2-test.js",
+		"isDebug": true,
+		"fileIncludes": [{
+			"text": "test.js",
+			"path": "./"
+		}]
+	}],
+	"resources" : []
+}
+	
