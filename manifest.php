@@ -22,7 +22,7 @@ return array(
 		'controller/frontend/src',
 		'client/html/src',
 		'controller/extjs/src',
-		'lib/mwlib',
+		'lib/src/mwlib',
 		'lib/zendlib',
 		'lib/phpexcel',
 	),
