@@ -6,7 +6,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Logger_ZendTest extends PHPUnit_Extensions_OutputTestCase
+class MW_Logger_ZendTest extends MW_Unittest_Testcase
 {
 	/**
 	 * @var    MW_Logger_Zend
@@ -38,15 +38,15 @@ class MW_Logger_ZendTest extends PHPUnit_Extensions_OutputTestCase
 			$this->markTestSkipped( 'Class Zend_Log not found' );
 		}
 
-		$writer = new Zend_Log_Writer_Stream('php://output');
+		$writer = new Zend_Log_Writer_Stream( 'error.log' );
 
-		$formatter = new Zend_Log_Formatter_Simple('log: %message%' . PHP_EOL);
-		$writer->setFormatter($formatter);
+		$formatter = new Zend_Log_Formatter_Simple( 'log: %message%' . PHP_EOL );
+		$writer->setFormatter( $formatter );
 
-		$logger = new Zend_Log($writer);
+		$logger = new Zend_Log( $writer );
 
-		$filter = new Zend_Log_Filter_Priority(Zend_Log::INFO);
-		$logger->addFilter($filter);
+		$filter = new Zend_Log_Filter_Priority( Zend_Log::INFO );
+		$logger->addFilter( $filter );
 
 		$this->_object = new MW_Logger_Zend( $logger );
 	}
@@ -59,29 +59,30 @@ class MW_Logger_ZendTest extends PHPUnit_Extensions_OutputTestCase
 	 */
 	protected function tearDown()
 	{
+		unlink( 'error.log' );
 	}
 
 	public function testLog()
 	{
-		$this->expectOutputString("log: <message> error\n");
 		$this->_object->log( 'error' );
+		$this->assertEquals( 'log: <message> error' . PHP_EOL, file_get_contents( 'error.log' ) );
 	}
 
 	public function testNonScalarLog()
 	{
-		$this->expectOutputString('log: <message> ["error","error2",2]' . PHP_EOL);
 		$this->_object->log( array ('error', 'error2', 2) );
+		$this->assertEquals( 'log: <message> ["error","error2",2]' . PHP_EOL, file_get_contents( 'error.log' ) );
+	}
+
+	public function testLogDebug()
+	{
+		$this->_object->log( 'debug', MW_Logger_Abstract::DEBUG );
+		$this->assertEquals( '', file_get_contents( 'error.log' ) );
 	}
 
 	public function testBadPriority()
 	{
 		$this->setExpectedException('MW_Logger_Exception');
 		$this->_object->log( 'error', -1 );
-	}
-
-	public function testLogDebug()
-	{
-		$this->expectOutputString('');
-		$this->_object->log( 'debug', MW_Logger_Abstract::DEBUG );
 	}
 }

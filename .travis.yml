@@ -4,9 +4,7 @@ php:
   - "5.3"
 before_script:
   - pear channel-discover pear.phing.info
-  - pear channel-discover pear.phpunit.de
   - pear install phing/phing
-  - pear install phpunit/PHPUnit
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
   - mysql -e 'create database arcavias;'

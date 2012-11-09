@@ -11,7 +11,7 @@
 	<target name="coverage" description="Generates code coverage report">
 		<echo msg="Generating code coverage report" />
 		<delete dir="deploy/coverage" quiet="true" failonerror="false" />
-		<exec command="phpunit --include-path=/opt/local/ZendFramework/1.11/library --configuration=phpunit-coverage.xml ."
+		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit-coverage.xml ."
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	
