@@ -4,7 +4,7 @@
 	
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
-		<exec command="phpunit --include-path=/opt/local/ZendFramework/1.11/library --configuration=phpunit.xml ."
+		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit.xml ."
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	

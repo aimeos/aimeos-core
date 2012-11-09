@@ -9,4 +9,5 @@ before_script:
   - phpenv rehash
   - mysql -e 'create database arcavias;'
   - cp config/.resource.php.travis config/resource.php
+  - cp lib/mwlib/tests/config/.resource.php.travis lib/mwlib/tests/config/resource.php
 script: "phing setup && phing"
