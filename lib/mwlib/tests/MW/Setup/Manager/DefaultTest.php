@@ -6,7 +6,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Setup_Manager_DefaultTest extends PHPUnit_Extensions_OutputTestCase
+class MW_Setup_Manager_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_config;
 	protected $_dbm;
@@ -41,10 +41,10 @@ class MW_Setup_Manager_DefaultTest extends PHPUnit_Extensions_OutputTestCase
 
 	public function testRun()
 	{
-		$this->expectOutputString('
+		$expected = '
 Executing OneTask                                                     OK
 Executing TwoTask                                                     OK
-');
+';
 
 		$conn = $this->_dbm->acquire();
 
@@ -53,16 +53,23 @@ Executing TwoTask                                                     OK
 
 		$this->_dbm->release( $conn );
 
+		ob_start();
+
 		$object->run( 'mysql' );
+
+		$result = ob_get_contents();
+		ob_end_clean();
+
+		$this->assertEquals( $expected, $result );
 	}
 
 	public function testRun2()
 	{
-		$this->expectOutputString('
+		$expected = '
 Executing OneTask                                                     OK
 Executing TwoTask                                                     OK
 Executing ThreeTask                                                   OK
-');
+';
 
 		$conn = $this->_dbm->acquire();
 
@@ -75,6 +82,13 @@ Executing ThreeTask                                                   OK
 
 		$this->_dbm->release( $conn );
 
+		ob_start();
+
 		$object->run( 'mysql' );
+
+		$result = ob_get_contents();
+		ob_end_clean();
+
+		$this->assertEquals( $expected, $result );
 	}
 }

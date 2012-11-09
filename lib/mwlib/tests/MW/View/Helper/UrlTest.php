@@ -55,26 +55,26 @@ class MW_View_Helper_UrlTest extends MW_Unittest_Testcase
 
 	public function testTransform()
 	{
-		$expected = '/baseurl/index/some/nice/text?plain=1&multi%5Bsub%5D=1';
+		$expected = '/baseurl/module/test/index/some/nice/text?plain=1&multi%5Bsub%5D=1';
 		$params = array( 'plain' => 1, 'multi' => array( 'sub' => true ) );
 		$trailing = array( 'some', 'nice', 'text' );
 
-		$this->assertEquals( $expected, $this->_object->transform( '/index/', $params, $trailing ) );
+		$this->assertEquals( $expected, $this->_object->transform( 'module', 'test', 'index', $params, $trailing ) );
 	}
 
 
 	public function testTransformNoTrailing()
 	{
-		$expected = '/baseurl/index?plain=1&multi%5Bsub%5D=1';
+		$expected = '/baseurl/module/test/index/?plain=1&multi%5Bsub%5D=1';
 		$params = array( 'plain' => 1, 'multi' => array( 'sub' => true ) );
 
-		$this->assertEquals( $expected, $this->_object->transform( '/index/', $params ) );
+		$this->assertEquals( $expected, $this->_object->transform( 'module', 'test', 'index', $params ) );
 	}
 
 
 	public function testTransformOnlyBase()
 	{
-		$this->assertEquals( '/baseurl/index', $this->_object->transform( '/index/' ) );
+		$this->assertEquals( '/baseurl/', $this->_object->transform() );
 	}
 
 }

@@ -6,7 +6,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Logger_ErrorlogTest extends PHPUnit_Extensions_OutputTestCase
+class MW_Logger_ErrorlogTest extends MW_Unittest_Testcase
 {
 	protected $_object;
 
