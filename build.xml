@@ -14,12 +14,12 @@
 
 
 	<target name="coverage" description="Creates coverage reports">
-		<phing target="coverage" dir="lib/mshoplib" />
-		<phing target="coverage" dir="controller/frontend" />
-		<phing target="coverage" dir="controller/extjs" />
-		<phing target="coverage" dir="client/html" />
-		<phing target="coverage" dir="lib/mwlib" />
-		<phing target="coverage">
+		<phing target="coverage" haltonfailure="true" dir="lib/mshoplib" />
+		<phing target="coverage" haltonfailure="true" dir="controller/frontend" />
+		<phing target="coverage" haltonfailure="true" dir="controller/extjs" />
+		<phing target="coverage" haltonfailure="true" dir="client/html" />
+		<phing target="coverage" haltonfailure="true" dir="lib/mwlib" />
+		<phing target="coverage" haltonfailure="true">
 			<fileset dir="ext" expandsymboliclinks="true" >
 				<include name="**/build.xml" />
 			</fileset>
@@ -27,18 +27,18 @@
 	</target>
 
 	<target name="coverageext" description="Creates coverage report for specific extension directory">
-		<phing target="coverage" dir="${dir}" phingfile="phing.xml" />
+		<phing target="coverage" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
 	</target>
 
 
 	<target name="test" description="Executes unit tests">
-		<phing target="test" dir="lib/mshoplib" />
-		<phing target="test" dir="controller/frontend" />
-		<phing target="test" dir="controller/extjs" />
-		<phing target="test" dir="client/extjs" />
-		<phing target="test" dir="client/html" />
-		<phing target="test" dir="lib/mwlib" />
-		<phing target="test">
+		<phing target="test" haltonfailure="true" dir="lib/mshoplib" />
+		<phing target="test" haltonfailure="true" dir="controller/frontend" />
+		<phing target="test" haltonfailure="true" dir="controller/extjs" />
+		<phing target="test" haltonfailure="true" dir="client/extjs" />
+		<phing target="test" haltonfailure="true" dir="client/html" />
+		<phing target="test" haltonfailure="true" dir="lib/mwlib" />
+		<phing target="test" haltonfailure="true">
 			<fileset dir="ext" expandsymboliclinks="true" >
 				<include name="**/build.xml" />
 			</fileset>
@@ -46,7 +46,7 @@
 	</target>
 
 	<target name="testext" description="Executes tests of specific extension directory">
-		<phing target="test" dir="${dir}" phingfile="phing.xml" />
+		<phing target="test" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
 	</target>
 
 	<target name="testperf" description="Executes performance tests">
