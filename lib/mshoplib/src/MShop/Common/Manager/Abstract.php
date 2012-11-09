@@ -35,6 +35,12 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 */
 	const SITE_SUBTREE = 2;
 
+	/**
+	 * Current site and sub-sites.
+	 * Use all site IDs from the current site and its sub-sites.
+	 */
+	const SITE_PATHSUBTREE = 3;
+
 
 	private $_context;
 	private $_stmts = array();
@@ -825,12 +831,16 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 		switch( $sitelevel )
 		{
-			case self::SITE_PATH:
-				$siteIds = $this->_context->getLocale()->getSitePath();
+			case self::SITE_PATHSUBTREE:
+				$siteIds = $this->_context->getLocale()->getSiteSubTree() + $this->_context->getLocale()->getSitePath();
 				break;
 
 			case self::SITE_SUBTREE:
 				$siteIds = $this->_context->getLocale()->getSiteSubTree();
+				break;
+
+			case self::SITE_PATH:
+				$siteIds = $this->_context->getLocale()->getSitePath();
 				break;
 
 			case self::SITE_ONE:
