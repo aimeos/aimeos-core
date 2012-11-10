@@ -95,12 +95,12 @@ class MShop_Locale_Manager_Default
 	 * @param string $lang Language code (optional)
 	 * @param string $currency Currency code (optional)
 	 * @param boolean $active Flag to get only active items (optional)
-	 * @param integer $sites Constant from abstract class if site IDs for different  (optional)
+	 * @param integer|null $level Constant from abstract class which site ID levels should be available (optional),
+	 * 	based on config or value for SITE_PATH if null
 	 * @return MShop_Locale_Item_Interface Locale item for the given parameters
 	 * @throws MShop_Locale_Exception If no locale item is found
 	 */
-	public function bootstrap( $site, $lang = '', $currency = '', $active = true,
-		$sites = MShop_Locale_Manager_Abstract::SITE_PATH )
+	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null )
 	{
 		$siteManager = $this->getSubManager( 'site' );
 		$siteSearch = $siteManager->createSearch();
@@ -111,9 +111,9 @@ class MShop_Locale_Manager_Default
 			throw new MShop_Locale_Exception( sprintf( 'No site for code "%1$s" found', $site ) );
 		}
 
-		$siteIds = $sitePath = $siteSubTree = array( $siteItem->getId() );
+		$siteIds = array( $siteItem->getId() );
 
-		return $this->_bootstrap( $site, $lang, $currency, $active, $siteItem, $siteIds, $sitePath, $siteSubTree );
+		return $this->_bootstrap( $site, $lang, $currency, $active, $siteItem, $siteIds, $siteIds );
 	}
 
 
@@ -325,21 +325,20 @@ class MShop_Locale_Manager_Default
 	 * @param string $currency Currency code
 	 * @param boolean $active Flag to get only active items
 	 * @param MShop_Locale_Item_Site_Interface Site item
-	 * @param array $siteIds List of site IDs for searching locale items
 	 * @param array $sitePath List of site IDs up to the root site
 	 * @param array $siteSubTree List of site IDs below and including the current site
 	 * @return MShop_Locale_Item_Interface Locale item for the given parameters
 	 * @throws MShop_Locale_Exception If no locale item is found
 	 */
 	protected function _bootstrap( $site, $lang, $currency, $active,
-		MShop_Locale_Item_Site_Interface $siteItem, array $siteIds, array $sitePath, array $siteSubTree )
+		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
 	{
 		$siteId = $siteItem->getId();
 
 		// Try to find exact match
 		$search = $this->createSearch( $active );
 		$expr = array(
-			$search->compare( '==', 'locale.siteid', $siteIds ),
+			$search->compare( '==', 'locale.siteid', $sitePath ),
 			$search->compare( '==', 'locale.languageid', $lang ),
 			$search->compare( '==', 'locale.currencyid', $currency ),
 			$search->getConditions(),
@@ -373,7 +372,7 @@ class MShop_Locale_Manager_Default
 		$search = $this->createSearch( $active );
 
 		$expr = array (
-			$search->compare( '==', 'locale.siteid', $siteIds ),
+			$search->compare( '==', 'locale.siteid', $sitePath ),
 			$search->getConditions()
 		);
 

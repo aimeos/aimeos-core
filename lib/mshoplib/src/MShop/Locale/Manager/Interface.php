@@ -25,10 +25,10 @@ interface MShop_Locale_Manager_Interface
 	 * @param string $lang Language code (optional)
 	 * @param string $currency Currency code (optional)
 	 * @param boolean $active Flag to get only active items (optional)
-	 * @param integer $sites Constant from abstract class if site IDs for different  (optional)
+	 * @param integer|null $level Constant from abstract class which site ID levels should be available (optional),
+	 * 	based on config or value for SITE_PATH if null
 	 * @return MShop_Locale_Item_Interface Locale item for the given parameters
 	 * @throws MShop_Locale_Exception If no locale item is found
 	 */
-	public function bootstrap( $site, $lang = '', $currency = '', $active = true,
-		$sites = MShop_Locale_Manager_Abstract::SITE_PATH );
+	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null );
 }
