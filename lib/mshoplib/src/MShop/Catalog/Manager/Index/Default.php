@@ -166,26 +166,45 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		$context = $this->_getContext();
 		$search = $this->_productManager->createSearch( true );
-		$size = $context->getConfig()->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
+		$config = $context->getConfig();
+		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
 		$search->setSlice( 0, $size );
 
+		$ids = array();
 
 		if( !empty( $items ) )
 		{
 			MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
 
-			$ids = array();
 			foreach( $items as $item ) {
 				$ids[] = $item->getId();
 			}
 
+		}
+		else
+		{
+			if( $config->get( 'mshop/catalog/manager/index/default/index', 'all' ) == 'categorized' )
+			{
+				$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
+				$categorySearch = $catalogListManager->createSearch();
+				$categorySearch->setConditions( $categorySearch->combine( '&&', array(
+						$categorySearch->compare( '==', 'catalog.list.domain', 'product' ),
+				) ) );
+
+				foreach( $catalogListManager->searchItems( $categorySearch ) as $catalogListItem ) {
+					$ids[] = $catalogListItem->getRefId();
+				}
+			}
+		}
+
+		if ( !empty( $ids ) )
+		{
 			$expr = array(
 				$search->getConditions(),
 				$search->compare( '==', 'product.id', $ids )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 		}
-
 
 		$default = array( 'attribute', 'price', 'text', 'product' );
 		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/default/domains', $default );

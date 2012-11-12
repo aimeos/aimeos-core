@@ -29,4 +29,5 @@ return array(
 			) AS list
 		',
 	),
+	'index' => 'all',
 );
