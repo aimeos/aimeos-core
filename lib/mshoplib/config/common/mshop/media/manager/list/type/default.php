@@ -35,6 +35,7 @@ return array(
 			FROM "mshop_media_list_type" AS mmedlity
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

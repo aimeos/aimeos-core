@@ -45,6 +45,7 @@ return array(
 			UPDATE "mshop_product_stock"
 			SET "stocklevel" = "stocklevel" + ?, "mtime" = ?, "editor" = ?
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

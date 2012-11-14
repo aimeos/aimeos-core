@@ -59,6 +59,7 @@ return array(
 			FROM "mshop_product_list" AS mproli
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

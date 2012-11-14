@@ -35,8 +35,8 @@ return array(
 			SELECT COUNT(DISTINCT mplu."id" ) AS "count"
 			FROM "mshop_plugin" mplu
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	)
 );

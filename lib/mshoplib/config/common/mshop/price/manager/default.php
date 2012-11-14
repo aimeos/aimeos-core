@@ -38,6 +38,7 @@ return array(
 			FROM "mshop_price" AS mpri
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

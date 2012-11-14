@@ -35,6 +35,7 @@ return array(
 			FROM "mshop_plugin_type" mpluty
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	)
 );

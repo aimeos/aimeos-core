@@ -28,6 +28,7 @@ return array(
 			FROM "mshop_product" AS mpro
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	)
 );

@@ -60,6 +60,7 @@ return array(
 			FROM "mshop_customer_list" AS mcusli
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

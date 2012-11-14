@@ -60,6 +60,7 @@ return array(
 			FROM "mshop_service_list" AS mserli
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

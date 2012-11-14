@@ -35,6 +35,7 @@ return array(
 			FROM "mshop_product_site" AS mprosi
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

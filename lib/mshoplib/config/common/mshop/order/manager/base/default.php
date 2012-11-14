@@ -39,6 +39,7 @@ return array(
 			FROM "mshop_order_base" AS mordba
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

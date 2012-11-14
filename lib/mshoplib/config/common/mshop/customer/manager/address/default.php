@@ -43,6 +43,7 @@ return array(
 			FROM "mshop_customer_address" AS mcusad
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

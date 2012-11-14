@@ -36,6 +36,7 @@ return array(
 			FROM "mshop_order_base_service_attr" AS mordbaseat
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

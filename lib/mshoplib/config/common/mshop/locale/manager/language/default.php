@@ -33,6 +33,7 @@ return array(
 			SELECT COUNT( mlocla."id" ) AS "count"
 			FROM "mshop_locale_language" AS mlocla
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

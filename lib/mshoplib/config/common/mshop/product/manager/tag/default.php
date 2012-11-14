@@ -36,8 +36,8 @@ return array(
 			SELECT COUNT( mprota."id" ) AS "count"
 			FROM "mshop_product_tag" AS mprota
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

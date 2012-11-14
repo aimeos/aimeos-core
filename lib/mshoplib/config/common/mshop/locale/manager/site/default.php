@@ -34,6 +34,7 @@ return array(
 			SELECT COUNT( mlocsi."id" ) AS "count"
 			FROM "mshop_locale_site" AS mlocsi
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

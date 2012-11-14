@@ -39,6 +39,7 @@ return array(
 			LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
 			LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

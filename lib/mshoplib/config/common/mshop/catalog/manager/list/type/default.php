@@ -38,6 +38,7 @@ return array(
 			:joins
 			WHERE
 				:cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

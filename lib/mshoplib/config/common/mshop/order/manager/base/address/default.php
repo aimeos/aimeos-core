@@ -42,6 +42,7 @@ return array(
 			FROM "mshop_order_base_address" AS mordbaad
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

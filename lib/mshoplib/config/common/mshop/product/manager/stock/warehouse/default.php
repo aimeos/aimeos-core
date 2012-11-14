@@ -36,8 +36,8 @@ return array(
 			SELECT COUNT( mprostwa."id" ) AS "count"
 			FROM "mshop_product_stock_warehouse" AS mprostwa
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

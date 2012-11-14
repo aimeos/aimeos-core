@@ -36,6 +36,7 @@ return array(
 			FROM "mshop_attribute_type" AS mattty
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

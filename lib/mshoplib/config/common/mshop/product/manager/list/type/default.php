@@ -36,6 +36,7 @@ return array(
 			FROM "mshop_product_list_type" AS mprolity
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

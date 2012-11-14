@@ -44,6 +44,7 @@ return array(
 			FROM "mshop_customer" AS mcus
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

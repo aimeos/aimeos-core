@@ -60,6 +60,7 @@ return array(
 			FROM "mshop_media_list" AS mmedli
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

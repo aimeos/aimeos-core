@@ -60,6 +60,7 @@ return array(
 			FROM "mshop_text_list" AS mtexli
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

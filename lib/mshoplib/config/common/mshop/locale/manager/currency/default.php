@@ -33,6 +33,7 @@ return array(
 			SELECT COUNT( mloccu."id" ) AS "count"
 			FROM "mshop_locale_currency" AS mloccu
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

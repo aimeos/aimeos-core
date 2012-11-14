@@ -36,6 +36,7 @@ return array(
 			FROM "mshop_catalog_site" AS mcatsi
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

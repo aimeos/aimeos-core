@@ -37,8 +37,8 @@ return array(
 			SELECT count( DISTINCT mser."id" ) as "count"
 			FROM "mshop_service" AS mser
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

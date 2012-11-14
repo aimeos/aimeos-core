@@ -38,6 +38,7 @@ return array(
 			FROM "mshop_order" AS mord
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

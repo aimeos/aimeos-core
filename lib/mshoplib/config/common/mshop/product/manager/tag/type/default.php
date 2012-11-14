@@ -36,6 +36,7 @@ return array(
 			FROM "mshop_product_tag_type" mprotaty
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );

@@ -68,6 +68,7 @@ return array(
 			FROM "mshop_catalog" AS mcat
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 		'usage' => array(
 			'update' => '

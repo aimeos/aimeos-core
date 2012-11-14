@@ -36,6 +36,7 @@ return array(
 			FROM "mshop_service_type" AS mserty
 			:joins
 			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 	),
 );
