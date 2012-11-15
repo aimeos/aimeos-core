@@ -38,14 +38,13 @@ return array(
 			SELECT COUNT( mprost."id" ) AS "count"
 			FROM "mshop_product_stock" AS mprost
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
+			LIMIT 10000 OFFSET 0
 		',
 		'stocklevel' => '
 			UPDATE "mshop_product_stock"
 			SET "stocklevel" = "stocklevel" + ?, "mtime" = ?, "editor" = ?
 			WHERE :cond
-			LIMIT 10000 OFFSET 0
 		',
 	),
 );
