@@ -31,11 +31,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mprity."id" ) AS "count"
-			FROM "mshop_price_type" AS mprity
-			:joins
-			WHERE :cond
-			LIMIT 10000 OFFSET 0
+			SELECT COUNT(*) AS "count"
+			FROM(
+				SELECT DISTINCT mprity."id"
+				FROM "mshop_price_type" AS mprity
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

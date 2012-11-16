@@ -26,9 +26,12 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT( DISTINCT mpro."id" ) AS "count"
-			FROM "mshop_product" AS mpro
-			:joins
-			WHERE :cond
+			FROM(
+				SELECT DISTINCT mpro."id"
+				FROM "mshop_product" AS mpro
+				:joins
+				WHERE :cond
+			) AS list
 		',
 	),
 	'text' => array(

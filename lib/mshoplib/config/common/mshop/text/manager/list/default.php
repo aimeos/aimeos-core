@@ -56,11 +56,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mtexli."id" ) AS "count"
-			FROM "mshop_text_list" AS mtexli
-			:joins
-			WHERE :cond
-			LIMIT 10000 OFFSET 0
+			SELECT COUNT(*) AS "count"
+			FROM(
+				SELECT DISTINCT mtexli."id"
+				FROM "mshop_text_list" AS mtexli
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

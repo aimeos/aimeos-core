@@ -64,11 +64,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT(DISTINCT mcat."id") AS "count"
-			FROM "mshop_catalog" AS mcat
-			:joins
-			WHERE :cond
-			LIMIT 10000 OFFSET 0
+			SELECT COUNT(*) AS "count"
+			FROM(
+				SELECT DISTINCT mcat."id"
+				FROM "mshop_catalog" AS mcat
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 		'usage' => array(
 			'update' => '

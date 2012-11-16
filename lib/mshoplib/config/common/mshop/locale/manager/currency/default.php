@@ -30,10 +30,13 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mloccu."id" ) AS "count"
-			FROM "mshop_locale_currency" AS mloccu
-			WHERE :cond
-			LIMIT 10000 OFFSET 0
+			SELECT COUNT(*) AS "count"
+			FROM(
+				SELECT DISTINCT mloccu."id"
+				FROM "mshop_locale_currency" AS mloccu
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );
