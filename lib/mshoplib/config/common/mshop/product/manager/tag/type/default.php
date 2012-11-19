@@ -32,7 +32,7 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mprotaty."id" ) AS "count"
+			SELECT COUNT(*) AS "count"
 			FROM (
 				SELECT DISTINCT mprotaty."id"
 				FROM "mshop_product_tag_type" mprotaty
