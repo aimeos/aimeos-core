@@ -32,8 +32,8 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
-				SELECT DISTINCT mpluty."id" 
+			FROM (
+				SELECT DISTINCT mpluty."id"
 				FROM "mshop_plugin_type" mpluty
 				:joins
 				WHERE :cond

@@ -34,7 +34,7 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
+			FROM (
 				SELECT DISTINCT mloc."id"
 				FROM "mshop_locale" AS mloc
 				LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")

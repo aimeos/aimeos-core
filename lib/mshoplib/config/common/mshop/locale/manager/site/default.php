@@ -32,7 +32,7 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
+			FROM (
 				SELECT DISTINCT mlocsi."id"
 				FROM "mshop_locale_site" AS mlocsi
 				WHERE :cond

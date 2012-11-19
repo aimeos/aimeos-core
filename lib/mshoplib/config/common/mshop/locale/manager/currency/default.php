@@ -31,7 +31,7 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
+			FROM (
 				SELECT DISTINCT mloccu."id"
 				FROM "mshop_locale_currency" AS mloccu
 				WHERE :cond

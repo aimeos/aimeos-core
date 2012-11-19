@@ -34,13 +34,13 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-				FROM( 
-					SELECT DISTINCT mprostwa."id"
-					FROM "mshop_product_stock_warehouse" AS mprostwa
-					:joins
-					WHERE :cond
-					LIMIT 10000 OFFSET 0
-					) AS list
+			FROM (
+				SELECT DISTINCT mprostwa."id"
+				FROM "mshop_product_stock_warehouse" AS mprostwa
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

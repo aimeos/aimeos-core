@@ -33,7 +33,7 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
+			FROM (
 				SELECT DISTINCT mtexlity."id"
 				FROM "mshop_text_list_type" as mtexlity
 				:joins

@@ -56,12 +56,12 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
+			FROM (
 				SELECT DISTINCT mattli."id"
-					FROM "mshop_attribute_list" AS mattli
-					:joins
-					WHERE :cond
-					LIMIT 10000 OFFSET 0
+				FROM "mshop_attribute_list" AS mattli
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
 			) AS list
 		',
 	),

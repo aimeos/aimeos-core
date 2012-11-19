@@ -34,12 +34,11 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
+			FROM (
 				SELECT DISTINCT mcuslity."id"
 				FROM "mshop_customer_list_type" as mcuslity
 				:joins
-				WHERE
-					:cond
+				WHERE :cond
 				LIMIT 10000 OFFSET 0
 			) AS LIST
 		',

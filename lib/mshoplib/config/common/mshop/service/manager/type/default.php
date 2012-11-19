@@ -33,8 +33,8 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
-				SELECT DISTINCT mserty."id" 
+			FROM (
+				SELECT DISTINCT mserty."id"
 				FROM "mshop_service_type" AS mserty
 				:joins
 				WHERE :cond

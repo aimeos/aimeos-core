@@ -26,13 +26,13 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
+			FROM (
 				SELECT DISTINCT mpro."id"
 				FROM "mshop_product" AS mpro
 				:joins
 				WHERE :cond
 				LIMIT 10000 OFFSET 0
-			) AS list 
+			) AS list
 		',
 	)
 );

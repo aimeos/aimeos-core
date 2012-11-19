@@ -32,7 +32,7 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
+			FROM (
 				SELECT DISTINCT mprity."id"
 				FROM "mshop_price_type" AS mprity
 				:joins

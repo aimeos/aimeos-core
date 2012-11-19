@@ -26,7 +26,7 @@ return array(
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"
-			FROM(
+			FROM (
 				SELECT DISTINCT mpro."id"
 				FROM "mshop_product" AS mpro
 				:joins
