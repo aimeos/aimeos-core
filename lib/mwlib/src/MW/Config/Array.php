@@ -45,14 +45,6 @@ class MW_Config_Array implements MW_Config_Interface
 		}
 	}
 
-	public function __destruct()
-	{
-		//var_dump( $this->_cache );
-		//var_dump( $this->_fileCache );
-		//var_dump( $this->_includeCache );
-		//var_dump( $this->_negCache );
-	}
-
 
 	/**
 	 * Returns the value of the requested config key.
@@ -139,7 +131,13 @@ class MW_Config_Array implements MW_Config_Interface
 		}
 	}
 
-
+	/**
+	 * Creates a configuration array that can be merged into $_config
+	 *
+	 * @param array $keys path from configuration root to the new configuration part
+	 * @param array $inner new configuration part
+	 * @return array with all keys matching the $_config
+	 */
 	protected function _makeMap( $keys, $inner )
 	{
 		$map = array();
@@ -155,6 +153,12 @@ class MW_Config_Array implements MW_Config_Interface
 	}
 
 
+	/**
+	 * Finds files within a configuration path
+	 *
+	 * @param array $path configuration path
+	 * @return array of pairs of file paths and prefixes
+	 */
 	protected function _findFile( array $path )
 	{
 		if( isset( $this->_fileCache[ implode( $path, '/' ) ] ) ) {
@@ -197,7 +201,13 @@ class MW_Config_Array implements MW_Config_Interface
 		return $return;
 	}
 
-
+	/**
+	 * Finds all .php files in a folder, including sub-folders
+	 *
+	 * @param String $path Path in the file system
+	 * @param array $prefix list of prefix elements
+	 * @param &array $return array with pairs of files and prefixes
+	 */
 	protected function _getAllFiles( $path, $prefix, &$return )
 	{
 		$dir = opendir( $path );
@@ -227,12 +237,12 @@ class MW_Config_Array implements MW_Config_Interface
 	}
 
 	/**
+	 * Merges a multi-dimensional array into another one
 	 *
-	 * @param array $left
-	 * @param array $right
-	 * @return array
+	 * @param array $left Array to be merged into
+	 * @param array $right Array to merge in
 	 */
-	protected function _merge( array &$left, array $right )
+ 	protected function _merge( array &$left, array $right )
 	{
 		$match = false;
 		foreach( $left as $lkey => $lvalue )
