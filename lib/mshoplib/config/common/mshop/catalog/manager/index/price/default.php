@@ -25,10 +25,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( DISTINCT mpro."id" ) AS "count"
-			FROM "mshop_product" AS mpro
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mpro."id"
+				FROM "mshop_product" AS mpro
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	)
 );
