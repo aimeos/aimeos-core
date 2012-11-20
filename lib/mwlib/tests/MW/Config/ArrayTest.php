@@ -35,7 +35,7 @@ class MW_Config_ArrayTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		if( class_exists( 'Array_Config' ) === false ) {
+		if( class_exists( 'MW_Config_Array' ) === false ) {
 			$this->markTestSkipped( 'Class Array_Config not found' );
 		}
 
@@ -98,18 +98,17 @@ class MW_Config_ArrayTest extends MW_Unittest_Testcase
 		$this->assertEquals(
 			array(
 				'subitem' => array (
-						'a' => array(
-							'aa' => '111',
-						),
-					),
-					'subbla' => array(
-						'b' => array (
-							'bb' => '22',
-						),
+					'a' => array(
+						'aa' => '111',
 					),
 				),
-				$this->_object->get( 'subconfig/default'
-			)
+				'subbla' => array(
+					'b' => array (
+						'bb' => '22',
+					),
+				),
+			),
+			$this->_object->get( 'subconfig/default' )
 		);
 	}
 
@@ -135,4 +134,5 @@ class MW_Config_ArrayTest extends MW_Unittest_Testcase
 		$this->_object->set( 'resource/ldap/', array( 'host' => 'localhost', 'port' => 389 ) );
 		$this->assertEquals( array( 'host' => 'localhost', 'port' => 389 ), $this->_object->get( 'resource/ldap' ) );
 	}
+
 }

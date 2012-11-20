@@ -65,7 +65,7 @@ try
 
 	$ctx = new MShop_Context_Item_Default();
 
-	$conf = new MW_Config_Zend( new Zend_Config( array(), true ), $mshop->getConfigPaths( 'mysql' ) );
+	$conf = new MW_Config_Array( array(), $mshop->getConfigPaths( 'mysql' ) );
 	$ctx->setConfig( $conf );
 
 	if( ( $dbconfig = $conf->get( 'resource/db' ) ) === null ) {

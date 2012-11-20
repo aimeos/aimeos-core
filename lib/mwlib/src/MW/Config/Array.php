@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Config
@@ -12,22 +12,45 @@
 /**
  * Configuration setting class using arrays
  *
- * @author jevers
- *
  * @package MW
  * @subpackage Config
  */
 class MW_Config_Array implements MW_Config_Interface
 {
 	private $_config = array();
-	private $_cache = array();
 	private $_paths = array();
+	private $_cache = array();
+	private $_fileCache = array();
+	private $_includeCache = array();
+	private $_negCache = array();
 
 
 	public function __construct( $config = array(), $paths = array() )
 	{
+		if( $config instanceof Zend_Config ){
+			$config = $config->toArray();
+		}
+
+		if( !is_array( $config ) ) {
+			throw new Exception( 'Wrong type.' );
+		}
+
 		$this->_config = $config;
-		$this->_paths = (array) $paths;
+
+		foreach( (array)$paths as $path )
+		{
+			if( file_exists( $path ) ) {
+				$this->_paths[] = $path;
+			}
+		}
+	}
+
+	public function __destruct()
+	{
+		//var_dump( $this->_cache );
+		//var_dump( $this->_fileCache );
+		//var_dump( $this->_includeCache );
+		//var_dump( $this->_negCache );
 	}
 
 
@@ -42,7 +65,11 @@ class MW_Config_Array implements MW_Config_Interface
 	{
 		$name = trim( $name, '/' );
 
-		if( array_key_exists( $name, $this->_cache ) ) {
+		if( isset( $this->_negCache[ $name ] ) && ( $this->_negCache[ $name ] === true ) ) {
+			return $default;
+		}
+
+		if( isset( $this->_cache[ $name ] ) ) {
 			return $this->_cache[ $name ];
 		}
 
@@ -54,17 +81,33 @@ class MW_Config_Array implements MW_Config_Interface
 		{
 			$filePaths = $this->_findFile( $path );
 
-			foreach( $filePaths as $filePath ) {
-				$this->_addFileToConfig( $filePath['prefix'], $filePath['file'] );
+			$innerPath = $subConfig = array();
+			foreach( $filePaths as $filePath )
+			{
+				if( isset( $this->_includeCache[ $filePath['file'] ] ) ) {
+					$add = $this->_includeCache[ $filePath['file'] ];
+				} else {
+					$add = include $filePath['file'];
+					$this->_includeCache[ $filePath['file'] ] = $add;
+				}
+
+				if( is_array( $add ) )
+				{
+					$inner = array_diff( $path, $filePath['prefix'] );
+					$this->_merge( $subConfig, $this->_makeMap( $filePath['prefix'], $add ) );
+				}
 			}
 
-			$return = $this->_get( $path, $this->_config );
+			$return = $this->_get( $path, $subConfig );
 		}
 
-		if( $return === null ) {
+		if( $return === null || $return === array() )
+		{
+			$this->_negCache[ $name ] = true;
 			return $default;
 		}
 
+		$this->_cache[ $name ] = $return;
 		return $return;
 	}
 
@@ -77,40 +120,47 @@ class MW_Config_Array implements MW_Config_Interface
 	 */
 	public function set( $name, $value )
 	{
-		$name = trim( $name, '/' );
-		$this->_cache[ $name ] = $value;
+		if( $value === null ) {
+			$this->_negCache[ $name ] = true;
+		} else {
+			$name = trim( $name, '/' );
+			$path = explode( '/', $name );
+
+			$new = $this->_makeMap( $path, $value );
+			$this->_merge( $this->_config, $new );
+
+			if( isset( $this->_cache[ $name ] ) ) {
+				$this->_cache[ $name ] = $value;
+			}
+
+			if( isset( $this->_negCache[ $name ] ) ) {
+				unset( $this->_negCache[ $name ] );
+			}
+		}
 	}
 
 
 	protected function _makeMap( $keys, $inner )
 	{
-		$r = array();
+		$map = array();
 		$key = array_shift( $keys );
 
 		if( !empty( $keys ) ) {
-			$r[ $key ] = $this->_makeMap( $keys, $inner );
+			$map[ $key ] = $this->_makeMap( $keys, $inner );
 		} else {
-			$r[ $key ] = $inner;
+			$map[ $key ] = $inner;
 		}
 
-		return $r;
-	}
-
-
-	protected function _addFileToConfig( $keys, $path )
-	{
-		$input = include $path;
-
-		$map = $this->_makeMap( $keys, $input );
-
-		if( is_array( $input ) ) {
-			$this->_config = $this->_merge( $this->_config, $map );
-		}
+		return $map;
 	}
 
 
 	protected function _findFile( array $path )
 	{
+		if( isset( $this->_fileCache[ implode( $path, '/' ) ] ) ) {
+			return $this->_fileCache[ implode( $path, '/' ) ];
+		}
+
 		$ds = DIRECTORY_SEPARATOR;
 
 		$return = array();
@@ -119,6 +169,8 @@ class MW_Config_Array implements MW_Config_Interface
 		{
 			$dirs = '';
 			$prefix = array();
+
+			$found = false;
 
 			foreach( $path as $dir )
 			{
@@ -129,18 +181,58 @@ class MW_Config_Array implements MW_Config_Interface
 				if( file_exists( $currentPath ) )
 				{
 					$return[] = array( 'file' => $currentPath, 'prefix' => $prefix );
+					$found = true;
 					continue;
 				}
 			}
+
+			if( $found === false && file_exists( $configPath . $ds . implode( $path, $ds ) ) )
+			{
+				$folder = $configPath . $ds . implode( $path, $ds );
+				$this->_getAllFiles( $folder, $path, $return );
+			}
 		}
+
+		$this->_fileCache[ implode( $path, '/' ) ] = $return;
 		return $return;
 	}
 
 
+	protected function _getAllFiles( $path, $prefix, &$return )
+	{
+		$dir = opendir( $path );
+		$content = array();
+		while( $entry = readdir( $dir ) )
+		{
+			if( substr( $entry, 0, 1 ) !== '.' ) {
+				$content[] = $entry;
+			}
+		}
+		closedir( $dir );
+
+		foreach( $content as $entry )
+		{
+			if( substr( $entry, -4, 4 ) == '.php' )
+			{
+				$prefix[] = substr( $entry, 0, -4 );
+				$return[] = array( 'file' => $path . DIRECTORY_SEPARATOR . $entry, 'prefix' => $prefix );
+				continue;
+			}
+
+			if( is_dir( $entry ) )
+			{
+				$this->_getAllFiles( $path . DIRECTORY_SEPARATOR . $entry, $return );
+			}
+		}
+	}
+
 	/**
 	 *
+	 * @param array $left
+	 * @param array $right
+	 * @return array
 	 */
-	protected function _merge( array $left, array $right )
+	protected function _merge( array &$left, array $right )
 	{
 		$match = false;
 		foreach( $left as $lkey => $lvalue )
@@ -151,34 +243,36 @@ class MW_Config_Array implements MW_Config_Interface
 				{
 					$match = true;
 					if( is_array( $lvalue ) && is_array( $rvalue ) ) {
-						$lvalue = $this->_merge( $lvalue, $rvalue );
+						$this->_merge( $lvalue, $rvalue );
 					} else {
 						$lvalue = $rvalue;
 					}
-					$left[ $lkey ] = $lvalue;
 				}
 			}
+			$left[ $lkey ] = $lvalue;
 		}
 
 		if( $match === false ) {
 			$left = array_merge( $left, $right );
 		}
-
-		return $left;
 	}
 
 
 	/**
 	 * Gets a configuration value from an array
 	 *
-	 * @param String $path Configuration path to look for inside the array
+	 * @param Array $path Configuration path to look for inside the array
 	 * @param Array $config The array to search in
 	 */
 	protected function _get( $path, $config )
 	{
+		if( count( $path ) == 0 ) {
+			return $config;
+		}
+
 		$current = array_shift( $path );
 
-		if( array_key_exists( $current, $config ) )
+		if( isset( $config[ $current ] ) )
 		{
 			if( count( $path ) > 0 ) {
 				return $this->_get( $path, $config[ $current ] );
@@ -187,5 +281,4 @@ class MW_Config_Array implements MW_Config_Interface
 		}
 		return null;
 	}
-
 }

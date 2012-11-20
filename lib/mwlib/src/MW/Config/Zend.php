@@ -100,6 +100,7 @@ class MW_Config_Zend implements MW_Config_Interface
 	public function set( $path, $value )
 	{
 		$path = trim($path, '/');
+
 		$parts = explode('/', $path);
 
 		$config = $this->_config;
