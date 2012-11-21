@@ -187,9 +187,7 @@ class MShop_Catalog_Manager_Index_Default
 			{
 				$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
 				$categorySearch = $catalogListManager->createSearch();
-				$categorySearch->setConditions( $categorySearch->combine( '&&', array(
-						$categorySearch->compare( '==', 'catalog.list.domain', 'product' ),
-				) ) );
+				$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
 
 				foreach( $catalogListManager->searchItems( $categorySearch ) as $catalogListItem ) {
 					$ids[] = $catalogListItem->getRefId();
