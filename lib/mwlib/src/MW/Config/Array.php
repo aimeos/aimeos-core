@@ -32,7 +32,7 @@ class MW_Config_Array implements MW_Config_Interface
 		}
 
 		if( !is_array( $config ) ) {
-			throw new Exception( 'Wrong type.' );
+			throw new Exception( 'First argument must be an array.' );
 		}
 
 		$this->_config = $config;
@@ -83,9 +83,7 @@ class MW_Config_Array implements MW_Config_Interface
 					$this->_includeCache[ $filePath['file'] ] = $add;
 				}
 
-				if( is_array( $add ) )
-				{
-					$inner = array_diff( $path, $filePath['prefix'] );
+				if( is_array( $add ) ) {
 					$this->_merge( $subConfig, $this->_makeMap( $filePath['prefix'], $add ) );
 				}
 			}
@@ -116,20 +114,14 @@ class MW_Config_Array implements MW_Config_Interface
 			$this->_negCache[ $name ] = true;
 		} else {
 			$name = trim( $name, '/' );
-			$path = explode( '/', $name );
-
-			$new = $this->_makeMap( $path, $value );
-			$this->_merge( $this->_config, $new );
-
-			if( isset( $this->_cache[ $name ] ) ) {
-				$this->_cache[ $name ] = $value;
-			}
+			$this->_cache[ $name ] = $value;
 
 			if( isset( $this->_negCache[ $name ] ) ) {
 				unset( $this->_negCache[ $name ] );
 			}
 		}
 	}
+
 
 	/**
 	 * Creates a configuration array that can be merged into $_config
