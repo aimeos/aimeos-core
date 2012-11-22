@@ -201,6 +201,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 
 		$medListTypes = array();
 		$medListType = $mediaListTypeManager->createItem();
+		$this->_conn->begin();
 		foreach( $testdata['media/list/type'] as $key => $dataset )
 		{
 			$medListType->setId( null );
@@ -239,5 +240,6 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 
 			$mediaListManager->saveItem( $medList, false );
 		}
+		$this->_conn->commit();
 	}
 }

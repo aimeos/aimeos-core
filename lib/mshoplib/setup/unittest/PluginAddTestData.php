@@ -81,6 +81,7 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Abstract
 
 		$plugTypeIds = array();
 		$type = $pluginTypeManager->createItem();
+		$this->_conn->begin();
 		foreach( $testdata['plugin/type'] as $key => $dataset )
 		{
 			$type->setId( null );
@@ -108,5 +109,6 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Abstract
 			$plugin->setProvider( $dataset['provider'] );
 			$pluginManager->saveItem( $plugin, false );
 		}
+		$this->_conn->commit();
 	}
 }

@@ -208,6 +208,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 
 		$listItemTypeIds = array();
 		$listItemType = $catalogListTypeManager->createItem();
+		$this->_conn->begin();
 		foreach( $testdata['catalog/list/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
@@ -246,5 +247,6 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 
 			$catalogListManager->saveItem( $listItem, false );
 		}
+		$this->_conn->commit();
 	}
 }

@@ -166,6 +166,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 
 		$listItemTypeIds = array();
 		$listItemType = $priceListTypeManager->createItem();
+		$this->_conn->begin();
 		foreach( $testdata['price/list/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
@@ -204,5 +205,6 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 
 			$priceListManager->saveItem( $listItem, false );
 		}
+		$this->_conn->commit();
 	}
 }

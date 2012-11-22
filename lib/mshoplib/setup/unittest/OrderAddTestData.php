@@ -116,7 +116,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 		$bases = array();
 		$locale = $localeManager->createItem();
-
+		$this->_conn->begin();
 		foreach( $testdata['order/base'] as $key => $dataset )
 		{
 			$bases['items'][ $key ] = $orderBaseManager->createItem();
@@ -166,7 +166,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderBaseAddressManager->saveItem( $orderAddr, false );
 		}
-
+		$this->_conn->commit();
 		return $bases;
 	}
 
@@ -187,7 +187,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 		$ordServices = array ();
 		$ordServ = $orderBaseServiceManager->createItem();
-
+		$this->_conn->begin();
 		foreach( $testdata['order/base/service'] as $key => $dataset )
 		{
 			if( !isset( $bases['ids'][ $dataset['baseid'] ] ) ) {
@@ -233,7 +233,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderBaseServiceAttrManager->saveItem( $ordServAttr, false );
 		}
-
+		$this->_conn->commit();
 		return $bases['items'];
 	}
 
@@ -270,6 +270,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$ordProds = $prices = array();
+		$this->_conn->begin();
 		foreach( $testdata['order/base/product'] as $key => $dataset )
 		{
 			if( !isset( $bases['ids'][ $dataset['baseid'] ] ) ) {
@@ -331,6 +332,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderBaseProductAttrManager->saveItem( $ordProdAttr, false );
 		}
+		$this->_conn->commit();
 
 		return $bases['items'];
 	}
@@ -350,6 +352,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 		$ords = array();
 		$ordItem = $orderManager->createItem();
+		$this->_conn->begin();
 		foreach( $testdata['order'] as $key => $dataset )
 		{
 			if( !isset( $baseIds[ $dataset['baseid'] ] ) ) {
@@ -385,5 +388,6 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderStatusManager->saveItem( $ordStat, false );
 		}
+		$this->_conn->commit();
 	}
 }

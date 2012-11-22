@@ -105,6 +105,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 
 		$wareIds = array();
 		$ware = $productStockWarehouse->createItem();
+		$this->_conn->begin();
 		foreach( $testdata['product/stock/warehouse'] as $key => $dataset )
 		{
 			$ware->setId( null );
@@ -135,5 +136,6 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 
 			$productStockManager->saveItem( $stock, false );
 		}
+		$this->_conn->commit();
 	}
 }

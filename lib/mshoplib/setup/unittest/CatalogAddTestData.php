@@ -81,6 +81,7 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Abstract
 
 		$parentIds['init'] = null;
 		$catalog = $catalogManager->createItem();
+		$this->_conn->begin();
 		foreach( $testdata['catalog'] as $key => $dataset )
 		{
 			$catalog->setId( null );
@@ -91,5 +92,6 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Abstract
 			$catalogManager->insertItem( $catalog, $parentIds[ $dataset['parent'] ] );
 			$parentIds[ $key ] = $catalog->getId();
 		}
+		$this->_conn->commit();
 	}
 }

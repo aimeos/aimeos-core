@@ -84,6 +84,7 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 
 		$typeIds = array();
 		$type = $productTypeManager->createItem();
+		$this->_conn->begin();
 		foreach( $testdata['product/type'] as $key => $dataset )
 		{
 			$type->setId( null );
@@ -112,5 +113,6 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 
 			$productManager->saveItem( $product, false );
 		}
+		$this->_conn->commit();
 	}
 }

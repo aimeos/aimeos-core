@@ -141,6 +141,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 
 		$listItemTypeIds = array();
 		$listItemType = $customerListTypeManager->createItem();
+		$this->_conn->begin();
 		foreach( $testdata['customer/list/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
@@ -179,5 +180,6 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 
 			$customerListManager->saveItem( $listItem, false );
 		}
+		$this->_conn->commit();
 	}
 }
