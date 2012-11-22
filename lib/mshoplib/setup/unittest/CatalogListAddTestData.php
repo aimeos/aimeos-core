@@ -247,6 +247,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 
 			$catalogListManager->saveItem( $listItem, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

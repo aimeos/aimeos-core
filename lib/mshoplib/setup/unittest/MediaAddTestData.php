@@ -113,6 +113,7 @@ class MW_Setup_Task_MediaAddTestData extends MW_Setup_Task_Abstract
 
 			$mediaManager->saveItem( $media, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

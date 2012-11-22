@@ -240,6 +240,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 
 			$mediaListManager->saveItem( $medList, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

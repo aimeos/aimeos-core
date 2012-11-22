@@ -110,6 +110,7 @@ class MW_Setup_Task_ProductAddTagTestData extends MW_Setup_Task_Abstract
 
 			$productTagManager->saveItem( $prodTag, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

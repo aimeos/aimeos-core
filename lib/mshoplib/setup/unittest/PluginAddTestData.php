@@ -109,6 +109,7 @@ class MW_Setup_Task_PluginAddTestData extends MW_Setup_Task_Abstract
 			$plugin->setProvider( $dataset['provider'] );
 			$pluginManager->saveItem( $plugin, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

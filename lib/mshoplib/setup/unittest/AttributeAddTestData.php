@@ -112,6 +112,7 @@ class MW_Setup_Task_AttributeAddTestData extends MW_Setup_Task_Abstract
 
 			$attributeManager->saveItem($attribute, false);
 		}
+
 		$this->_conn->commit();
 	}
 }

@@ -92,6 +92,7 @@ class MW_Setup_Task_JobAddTestData extends MW_Setup_Task_Abstract
 
 			$adminJobManager->saveItem( $job, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

@@ -166,7 +166,9 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderBaseAddressManager->saveItem( $orderAddr, false );
 		}
+
 		$this->_conn->commit();
+
 		return $bases;
 	}
 
@@ -233,7 +235,9 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderBaseServiceAttrManager->saveItem( $ordServAttr, false );
 		}
+
 		$this->_conn->commit();
+
 		return $bases['items'];
 	}
 
@@ -332,6 +336,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderBaseProductAttrManager->saveItem( $ordProdAttr, false );
 		}
+
 		$this->_conn->commit();
 
 		return $bases['items'];
@@ -388,6 +393,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderStatusManager->saveItem( $ordStat, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

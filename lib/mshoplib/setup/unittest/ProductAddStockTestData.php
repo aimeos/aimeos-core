@@ -136,6 +136,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 
 			$productStockManager->saveItem( $stock, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

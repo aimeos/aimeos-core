@@ -184,6 +184,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 
 			$textListManager->saveItem( $tList, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

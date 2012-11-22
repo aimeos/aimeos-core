@@ -205,6 +205,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 
 			$priceListManager->saveItem( $listItem, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

@@ -112,6 +112,7 @@ class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Abstract
 
 			$textManager->saveItem( $text, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

@@ -180,6 +180,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 
 			$customerListManager->saveItem( $listItem, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

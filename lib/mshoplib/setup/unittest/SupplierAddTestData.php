@@ -122,6 +122,7 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 
 			$supplierAddressManager->saveItem( $supAdr, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

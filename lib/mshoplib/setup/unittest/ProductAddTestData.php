@@ -113,6 +113,7 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 
 			$productManager->saveItem( $product, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

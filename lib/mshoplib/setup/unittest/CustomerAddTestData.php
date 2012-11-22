@@ -146,6 +146,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 
 			$customerAddressManager->saveItem( $address, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

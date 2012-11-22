@@ -92,6 +92,7 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Abstract
 			$catalogManager->insertItem( $catalog, $parentIds[ $dataset['parent'] ] );
 			$parentIds[ $key ] = $catalog->getId();
 		}
+
 		$this->_conn->commit();
 	}
 }

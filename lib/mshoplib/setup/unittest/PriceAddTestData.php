@@ -116,6 +116,7 @@ class MW_Setup_Task_PriceAddTestData extends MW_Setup_Task_Abstract
 
 			$priceManager->saveItem( $price, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

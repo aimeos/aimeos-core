@@ -263,6 +263,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 
 			$serviceListManager->saveItem( $listItem, false );
 		}
+
 		$this->_conn->commit();
 	}
 }

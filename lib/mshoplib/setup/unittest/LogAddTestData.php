@@ -90,6 +90,7 @@ class MW_Setup_Task_LogAddTestData extends MW_Setup_Task_Abstract
 
 			$adminLogManager->saveItem( $log, false );
 		}
+
 		$this->_conn->commit();
 	}
 

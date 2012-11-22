@@ -114,6 +114,7 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 
 			$serviceManager->saveItem( $parent, false );
 		}
+
 		$this->_conn->commit();
 	}
 }
