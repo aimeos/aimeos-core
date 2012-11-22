@@ -315,15 +315,15 @@ class MShop_Catalog_Manager_Index_Text_Default
 					$stmt = $this->_getCachedStatement($conn, 'mshop/catalog/manager/index/text/default/item/insert');
 
 					$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 2, $locale->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+					$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 					$stmt->bind( 3, null );
 					$stmt->bind( 4, $locale->getLanguageId() );
 					$stmt->bind( 5, 'default' );
 					$stmt->bind( 6, 'name' );
 					$stmt->bind( 7, $item->getLabel() );
-					$stmt->bind( 8, date('Y-m-d H:i:s', time()) );//mtime
-					$stmt->bind( 9, $context->getEditor(), MW_DB_Statement_Abstract::PARAM_STR );
-					$stmt->bind( 10, date('Y-m-d H:i:s', time()) );//ctime
+					$stmt->bind( 8, $date );//mtime
+					$stmt->bind( 9, $editor, MW_DB_Statement_Abstract::PARAM_STR );
+					$stmt->bind( 10, $date );//ctime
 					$stmt->execute()->finish();
 				}
 			}
@@ -337,6 +337,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			throw $e;
 		}
 
+		$this->_saveAttributeTexts( $items );
 
 		foreach( $this->_submanagers as $submanager ) {
 			$submanager->rebuildIndex( $items );
@@ -438,5 +439,102 @@ class MShop_Catalog_Manager_Index_Text_Default
 		}
 
 		return $list;
+	}
+
+
+	protected function _saveAttributeTexts( array $items )
+	{
+		$attrIds = array();
+		$prodIds = array();
+		foreach( $items as $item ) {
+			foreach( $item->getRefItems( 'attribute' ) as $attrItem )
+			{
+				$attrIds[$attrItem->getId()] = $attrItem->getId();
+				$prodIds[$attrItem->getId()] = $item->getId();
+			}
+		}
+
+		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
+		$search = $attrManager->createSearch(true);
+		$expr = array(
+			$search->getConditions(),
+			$search->compare( '==', 'attribute.id', $attrIds)
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$attributeItems = $attrManager->searchItems( $search, array('text') );
+
+
+		$context = $this->_getContext();
+		$locale = $context->getLocale();
+		$siteid = $context->getLocale()->getSiteId();
+		$editor = $context->getEditor();
+		$date = date( 'Y-m-d H:i:s' );
+
+
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		try
+		{
+			foreach ( $attributeItems as $item )
+			{
+				$listTypes = array();
+				foreach( $item->getListItems( 'text' ) as $listItem ) {
+					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
+				}
+
+				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
+
+				foreach( $item->getRefItems( 'text' ) as $refItem )
+				{
+					if( !isset( $listTypes[ $refItem->getId() ] ) ) {
+						$msg = sprintf( 'No list type for text item with ID "%1$s"', $refItem->getId() );
+						throw new MShop_Catalog_Exception( $msg );
+					}
+
+					foreach( $listTypes[ $refItem->getId() ] as $listType )
+					{
+						$stmt->bind( 1, $prodIds[$item->getId()], MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 3, $refItem->getId(), MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 4, $refItem->getLanguageId() );
+						$stmt->bind( 5, $listType );
+						$stmt->bind( 6, $refItem->getType() );
+						$stmt->bind( 7, $refItem->getContent() );
+						$stmt->bind( 8, $date );//mtime
+						$stmt->bind( 9, $editor );
+						$stmt->bind( 10, $date );//ctime
+						$stmt->execute()->finish();
+					}
+				}
+
+				$names = $item->getRefItems( 'text', 'name' );
+
+				if( empty( $names ) )
+				{
+					$stmt = $this->_getCachedStatement($conn, 'mshop/catalog/manager/index/text/default/item/insert');
+
+					$stmt->bind( 1, $prodIds[$item->getId()], MW_DB_Statement_Abstract::PARAM_INT );
+					$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+					$stmt->bind( 3, null );
+					$stmt->bind( 4, $locale->getLanguageId() );
+					$stmt->bind( 5, 'default' );
+					$stmt->bind( 6, 'name' );
+					$stmt->bind( 7, $item->getLabel() );
+					$stmt->bind( 8, $date );//mtime
+					$stmt->bind( 9, $editor, MW_DB_Statement_Abstract::PARAM_STR );
+					$stmt->bind( 10, $date );//ctime
+					$stmt->execute()->finish();
+				}
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
 	}
 }

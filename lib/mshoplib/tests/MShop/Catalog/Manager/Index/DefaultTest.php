@@ -140,18 +140,18 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		$this->_object->saveItem( $item );
 
-		$cntAttributeA = $this->_getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
-		$cntCatalogA = $this->_getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
-		$cntPriceA = $this->_getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
-		$cntTextA = $this->_getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
+		$cntAttributeA = $this->_getValues( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
+		$cntCatalogA = $this->_getValues( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
+		$cntPriceA = $this->_getValues( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
+		$cntTextA = $this->_getValues( $dbm, $sqlText, 'count', $siteId, $item->getId() );
 
 
 		$this->_object->deleteItem( $item->getId() );
 
-		$cntAttributeB = $this->_getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
-		$cntCatalogB = $this->_getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
-		$cntPriceB = $this->_getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
-		$cntTextB = $this->_getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
+		$cntAttributeB = $this->_getValues( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
+		$cntCatalogB = $this->_getValues( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
+		$cntPriceB = $this->_getValues( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
+		$cntTextB = $this->_getValues( $dbm, $sqlText, 'count', $siteId, $item->getId() );
 
 
 		// recreate index for CNE
@@ -161,7 +161,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 6, $cntAttributeA );
 		$this->assertEquals( 15, $cntCatalogA );
 		$this->assertEquals( 6, $cntPriceA );
-		$this->assertEquals( 8, $cntTextA );
+		$this->assertEquals( 16, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
@@ -191,10 +191,11 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\'';
 
 		$this->_object->saveItem( $item );
-		$name = $this->_getValue( $dbm, $sqlText, 'value', $siteId, $item->getId() );
+		$names = $this->_getValues( $dbm, $sqlText, 'value', $siteId, $item->getId() );
 		$this->_object->deleteItem( $item->getId() );
 
-		$this->assertEquals( '16 discs', $name );
+		$this->assertContains( '16 discs', $names );
+		$this->assertContains( 'M', $names );
 	}
 
 
@@ -651,9 +652,20 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	protected function _getValue( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
+	/**
+	 * Gets array if more than one result.
+	 *
+	 * @param MW_DB_Manager_Interface $dbm
+	 * @param string $sql DB query
+	 * @param string $column Column where to search
+	 * @param integer $siteId Siteid
+	 * @param integer $productId Product id
+	 * @return mixed $values result
+	 * @throws Exception
+	 */
+	protected function _getValues( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
 	{
-		$value = null;
+		$values = array();
 		$conn = $dbm->acquire();
 
 		try
@@ -663,15 +675,17 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 			$stmt->bind( 2, $productId, MW_DB_Statement_Abstract::PARAM_INT );
 			$result = $stmt->execute();
 
-			if( ( $row = $result->fetch() ) === false ) {
+			if( $result === false ) {
 				throw new Exception( 'No rows available' );
 			}
 
-			if( !isset( $row[$column] ) ) {
-				throw new Exception( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
-			}
 
-			$value = $row[$column];
+			while( ( $row = $result->fetch() ) !== false ) {
+				if( !isset( $row[$column] ) ) {
+					throw new Exception( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
+				}
+				$values[] = $row[$column];
+			}
 
 			$dbm->release( $conn );
 		}
@@ -681,7 +695,11 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 			throw $e;
 		}
 
-		return $value;
+		if( count( $values ) == 1 ) {
+			return $values[0];
+		}
+
+		return $values;
 	}
 
 	/**
