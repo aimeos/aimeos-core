@@ -34,5 +34,8 @@ return array(
 				LIMIT 10000 OFFSET 0
 			) AS list
 		',
+	),
+	'list' => array(
+		'delete' => 'DELETE FROM "mshop_catalog_index_catalog" WHERE "prodid" IN ? AND "siteid" = ?',
 	)
 );

@@ -195,13 +195,16 @@ class MShop_Catalog_Manager_Index_Default
 		{
 			$result = $this->_productManager->searchItems( $search, $domains );
 
-			foreach( $result as $id => $product ) {
-				$this->deleteItem( $id );
-			}
+			$this->_deleteIndex( array_keys( $result ) );
+
+			$this->_begin();
 
 			foreach ( $this->_submanagers as $submanager ) {
 				$submanager->rebuildIndex( $result );
 			}
+
+			$this->_commit();
+
 
 			$this->_saveSubProducts( $result );
 
@@ -301,6 +304,53 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
+	 *  Deletes the catalog index for a given list of products
+	 *
+	 * @param array $ids list of product ids
+	 */
+	protected function _deleteIndex( $ids )
+	{
+		if( !is_array( $ids ) || count( $ids ) === 0 ) { return; }
+
+		$domains = array_keys( $this->_submanagers );
+
+		$context = $this->_getContext();
+		$siteid = $context->getLocale()->getSiteId();
+
+		$idList = '( ' . implode( $ids, ', ' ) . ' )' ;
+
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		foreach( $domains as $domain )
+		{
+			$stmts[$domain] = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/' . $domain . '/default/list/delete' );
+			$stmts[$domain]->bind( 1, $idList, -1 );
+			$stmts[$domain]->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+		}
+
+		try
+		{
+			$conn->begin();
+
+			foreach( $stmts as $stmt ) {
+				$stmt->execute()->finish();
+			}
+
+			$conn->commit();
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$conn->rollback();
+			$dbm->release( $conn );
+			throw $e;
+		}
+
+	}
+
+
+	/**
 	 * Saves catalog, price, text and attribute of subproduct.
 	 *
 	 * @param MShop_Product_Item_Interface $items Product items
@@ -317,6 +367,8 @@ class MShop_Catalog_Manager_Index_Default
 			$search = $this->_productManager->createSearch( true );
 			$search->setSlice( 0, $size );
 			$start = 0;
+
+			$this->_begin();
 
 			do
 			{
@@ -347,6 +399,8 @@ class MShop_Catalog_Manager_Index_Default
 				$search->setSlice( $start, $size );
 			}
 			while( $count > 0 );
+
+			$this->_commit();
 		}
 	}
 }

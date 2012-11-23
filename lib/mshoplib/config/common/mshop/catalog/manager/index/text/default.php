@@ -44,5 +44,8 @@ return array(
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
+	),
+	'list' => array(
+		'delete' => 'DELETE FROM "mshop_catalog_index_text" WHERE "prodid" IN ? AND "siteid" = ?',
 	)
 );

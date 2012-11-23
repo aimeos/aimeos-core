@@ -251,8 +251,6 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		$date = date( 'Y-m-d H:i:s' );
 
 
-		$this->_begin();
-
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
@@ -299,8 +297,6 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 			$dbm->release( $conn );
 			throw $e;
 		}
-
-		$this->_commit();
 
 
 		foreach( $this->_submanagers as $submanager ) {
