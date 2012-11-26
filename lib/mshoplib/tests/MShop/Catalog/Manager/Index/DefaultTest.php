@@ -665,9 +665,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		// get number of unique categorized products
 		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
 		$categorySearch = $catalogListManager->createSearch();
-		$categorySearch->setConditions( $categorySearch->combine( '&&', array(
-				$categorySearch->compare( '==', 'catalog.list.domain', 'product' ),
-		) ) );
+		$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
 
 		$productIds = array();
 		foreach( $catalogListManager->searchItems( $categorySearch ) as $item ){

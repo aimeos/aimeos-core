@@ -179,19 +179,9 @@ class MShop_Catalog_Manager_Index_Default
 			foreach( $items as $item ) {
 				$ids[] = $item->getId();
 			}
-
-		}
-		else
-		{
-			if( $config->get( 'mshop/catalog/manager/index/default/index', 'all' ) == 'categorized' )
-			{
-				$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
-				$categorySearch = $catalogListManager->createSearch();
-				$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
-
-				foreach( $catalogListManager->searchItems( $categorySearch ) as $catalogListItem ) {
-					$ids[] = $catalogListItem->getRefId();
-				}
+		} else {
+			if( $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' ) == 'categorized' ) {
+				$ids = $this->_getCategorizedProductIds();
 			}
 		}
 
@@ -205,7 +195,7 @@ class MShop_Catalog_Manager_Index_Default
 		}
 
 		$default = array( 'attribute', 'price', 'text', 'product' );
-		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/default/domains', $default );
+		$domains = $config->get( 'mshop/catalog/manager/index/default/domains', $default );
 		$start = 0;
 
 		do
@@ -365,5 +355,44 @@ class MShop_Catalog_Manager_Index_Default
 			}
 			while( $count > 0 );
 		}
+	}
+
+
+	/**
+	 * Gets the ids of all products in categories.
+	 *
+	 * @return array List of product ids
+	 */
+	protected function _getCategorizedProductIds()
+	{
+		$context = $this->_getContext();
+		$config = $context->getConfig();
+		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
+
+		$return = array();
+		
+		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
+		$categorySearch = $catalogListManager->createSearch();
+		$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
+
+		$start = 0;
+		$categorySearch->setSlice( $start, $size );
+
+		do
+		{
+		 	$result = $catalogListManager->searchItems( $categorySearch );
+
+			foreach( $result as $catalogListItem ) {
+				$return[] = $catalogListItem->getRefId();
+			}
+
+			$count = count( $result );
+			$start += $count;
+			$categorySearch->setSlice( $start, $size );
+
+		}
+		while ( $count > 0 );
+
+		return $return;
 	}
 }
