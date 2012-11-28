@@ -246,7 +246,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 *
 	 * @param MW_Tree_Node_Interface $node New node that should be inserted
 	 * @param mixed $parentId ID of the parent node where the new node should be inserted below (null for root node)
-	 * @param mixed $refId ID of the node where the node node should be inserted before (null to append)
+	 * @param mixed $refId ID of the node where the node should be inserted before (null to append)
 	 */
 	public function insertNode( MW_Tree_Node_Interface $node, $parentId = null, $refId = null )
 	{
@@ -258,6 +258,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$node->left = $refNode->left;
 			$node->right = $refNode->left + 1;
 			$node->level = $refNode->level;
+			$parentId = $refNode->getParentId();
 		}
 		else if( $parentId !== null )
 		{
@@ -271,6 +272,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$node->left = 1;
 			$node->right = 2;
 			$node->level = 0;
+			$parentId = 0;
 
 			if( ( $root = $this->_getRootNode( '-' ) ) !== null )
 			{
@@ -301,9 +303,10 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$stmt->bind( 1, $node->getLabel(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 2, $node->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 3, $node->getStatus(), MW_DB_Statement_Abstract::PARAM_BOOL );
-			$stmt->bind( 4, $node->level, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 5, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 6, $node->right, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $parentId, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 5, $node->level, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 6, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 7, $node->right, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
 

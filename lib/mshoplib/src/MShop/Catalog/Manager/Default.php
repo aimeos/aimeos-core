@@ -50,6 +50,14 @@ class MShop_Catalog_Manager_Default
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'parentid' => array(
+			'code'=>'catalog.parentid',
+			'internalcode'=>'mcat."parentid"',
+			'label'=>'Catalog node parentid',
+			'type'=> 'integer',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
 		'level' => array(
 			'code'=>'catalog.level',
 			'internalcode'=>'mcat."level"',
@@ -420,7 +428,7 @@ class MShop_Catalog_Manager_Default
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
 
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->insertNode($node, $parentId, $refId );
+		$this->_createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
 		$this->_updateUsage( $node->getId(), true );
 		$this->_commit();
 	}
@@ -591,6 +599,14 @@ class MShop_Catalog_Manager_Default
 		}
 
 		throw new MShop_Catalog_Exception( sprintf( 'No catalog node found for ID "%1$s"', $id ) );
+	}
+
+
+	public function getTreeFromIds( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, array $parentIds = array() )
+	{
+		if(!empty($parentIds)) {
+
+		}
 	}
 
 
@@ -772,6 +788,20 @@ class MShop_Catalog_Manager_Default
 	 * @return Associated list of ID / node object pairs
 	 */
 	protected function _getNodeMap( MW_Tree_Node_Interface $node )
+	{
+		$map = array();
+
+		$map[ (string) $node->getId() ] = $node;
+
+		foreach( $node->getChildren() as $child ) {
+			$map += $this->_getNodeMap( $child );
+		}
+
+		return $map;
+	}
+
+
+	protected function _getParentNodeMap( MW_Tree_Node_Interface $node )
 	{
 		$map = array();
 

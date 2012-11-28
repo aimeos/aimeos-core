@@ -22,10 +22,10 @@ class MW_Tree_Node_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$child1 = new MW_Tree_Node_Default( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'custom' => 'test' ) );
-		$child2 = new MW_Tree_Node_Default( array( 'id' => null, 'label' => 'child2', 'status' => '1', 'custom' => 'test' ) );
+		$child1 = new MW_Tree_Node_Default( array( 'id' => null, 'parentid' => 1, 'label' => 'child1', 'status' => '0', 'custom' => 'test' ) );
+		$child2 = new MW_Tree_Node_Default( array( 'id' => null, 'parentid' => 1, 'label' => 'child2', 'status' => '1', 'custom' => 'test' ) );
 
-		$this->_object = new MW_Tree_Node_Default( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'custom' => 'test' ), array( $child1, $child2 ) );
+		$this->_object = new MW_Tree_Node_Default( array( 'id' => 1, 'parentid' => 0, 'label' => 'parent', 'status' => '1', 'custom' => 'test' ), array( $child1, $child2 ) );
 	}
 
 	/**
@@ -68,6 +68,13 @@ class MW_Tree_Node_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setLabel( 'ancestor' );
 		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 'ancestor', $this->_object->getLabel() );
+	}
+
+	public function testParent()
+	{
+		$this->assertEquals( 1, $this->_object->getChild( 0 )->getParentId() );
+		$this->assertEquals( 1, $this->_object->getChild( 1 )->getParentId() );
+		$this->assertEquals( 0, $this->_object->getParentId() );
 	}
 
 	public function testStatus()

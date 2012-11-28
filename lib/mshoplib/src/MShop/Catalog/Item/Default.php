@@ -76,6 +76,32 @@ class MShop_Catalog_Item_Default
 
 
 	/**
+	* Returns the parent ID of the node.
+	*
+	* @return string|null Unique ID of the node
+	*/
+	public function getParentId()
+	{
+		return $this->_node->getParentId();
+	}
+
+
+	/**
+	 * Sets the parent ID of the node.
+	 *
+	 * @param string|null Unique ID of the node
+	 */
+	public function setParentId( $parentid )
+	{
+		if ( $parentid === $this->getParentId() ) {
+			return;
+		}
+
+		$this->_node->setParentId( $parentid );
+	}
+
+
+	/**
 	 * Returns the site ID of the item.
 	 *
 	 * @return integer|null Site ID of the item

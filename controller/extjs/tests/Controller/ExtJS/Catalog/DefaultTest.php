@@ -75,6 +75,7 @@ class Controller_ExtJS_Catalog_DefaultTest extends MW_Unittest_Testcase
 				'catalog.code' => 'test node',
 				'catalog.label' => 'controller test node',
 				'catalog.status' => 0,
+				'catalog.parentid' => $this->_rootnode->{'catalog.id'}
 			),
 			'parentid' => $this->_rootnode->{'catalog.id'},
 			'refid' => $this->_rootnode->{'children'}[1]->{'catalog.id'},
