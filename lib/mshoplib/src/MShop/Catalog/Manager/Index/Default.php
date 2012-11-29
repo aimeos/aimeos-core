@@ -181,17 +181,8 @@ class MShop_Catalog_Manager_Index_Default
 			}
 		} else {
 			if( $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' ) == 'categorized' ) {
-				$ids = $this->_getCategorizedProductIds();
+				$ids = array_unique( $this->_getCategorizedProductIds() );
 			}
-		}
-
-		if ( !empty( $ids ) )
-		{
-			$expr = array(
-				$search->getConditions(),
-				$search->compare( '==', 'product.id', $ids )
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
 		}
 
 		$default = array( 'attribute', 'price', 'text', 'product' );
@@ -200,23 +191,40 @@ class MShop_Catalog_Manager_Index_Default
 
 		do
 		{
-			$result = $this->_productManager->searchItems( $search, $domains );
+			$idChunk = array_slice( $ids, 0, $size );
 
-			foreach( $result as $id => $product ) {
-				$this->deleteItem( $id );
+			if( count( $ids ) > 0 )
+			{
+				$expr = array(
+					$search->getConditions(),
+					$search->compare( '==', 'product.id', $idChunk )
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
 			}
 
-			foreach ( $this->_submanagers as $submanager ) {
-				$submanager->rebuildIndex( $result );
+			$ids = array_slice( $ids, $size );
+
+			do
+			{
+				$result = $this->_productManager->searchItems( $search, $domains );
+
+				foreach( $result as $id => $product ) {
+					$this->deleteItem( $id );
+				}
+
+				foreach ( $this->_submanagers as $submanager ) {
+					$submanager->rebuildIndex( $result );
+				}
+
+				$this->_saveSubProducts( $result );
+
+				$count = count( $result );
+				$start += $count;
+				$search->setSlice( $start, $size );
 			}
-
-			$this->_saveSubProducts( $result );
-
-			$count = count( $result );
-			$start += $count;
-			$search->setSlice( $start, $size );
+			while( $count > 0 );
 		}
-		while( $count > 0 );
+		while( count( $ids ) !== 0 );
 
 		$this->optimize();
 	}

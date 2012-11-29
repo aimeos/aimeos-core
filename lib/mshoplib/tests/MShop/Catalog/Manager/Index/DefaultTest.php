@@ -654,6 +654,8 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	public function testRebuildIndexCategorizedOnly()
 	{
 		$context = TestHelper::getContext();
+		$config = $context->getConfig();
+
 		$manager = MShop_Product_Manager_Factory::createManager( $context );
 
 		//delete whole catalog
@@ -673,7 +675,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		}
 		$count = count( array_unique( $productIds ) );
 
-		$config = $context->getConfig();
 		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
 
 		$this->_object->rebuildIndex();
