@@ -560,10 +560,15 @@ class MShop_Catalog_Manager_Default
 		{
 			try
 			{
-				$node = $this->_createTreeManager( $siteId )->getNode( $id, $level );
+				$treeMgr = $this->_createTreeManager( $siteId );
+				$node = $treeMgr->getNode( $id, $level );
 
 				$listItems = $listItemMap = $refIdMap = array();
+				$parentNodeMap = $this->_getUpperNodeMap( $node, $treeMgr );
 				$nodeMap = $this->_getNodeMap( $node );
+				$nodeMap = $nodeMap + $parentNodeMap;
+
+				echo var_dump( array_keys($parentNodeMap) );
 
 				if( count( $ref ) > 0 ) {
 					$listItems = $this->_getListItems( array_keys( $nodeMap ), $ref, 'catalog' );
@@ -599,14 +604,6 @@ class MShop_Catalog_Manager_Default
 		}
 
 		throw new MShop_Catalog_Exception( sprintf( 'No catalog node found for ID "%1$s"', $id ) );
-	}
-
-
-	public function getTreeFromIds( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, array $parentIds = array() )
-	{
-		if(!empty($parentIds)) {
-
-		}
 	}
 
 
@@ -800,17 +797,25 @@ class MShop_Catalog_Manager_Default
 		return $map;
 	}
 
-
-	protected function _getParentNodeMap( MW_Tree_Node_Interface $node )
+	/**
+	 * Creates a flat list node items of upper nodes.
+	 *
+	 * @param MW_Tree_Node_Interface $node
+	 */
+	protected function _getUpperNodeMap( MW_Tree_Node_Interface $node, MW_Tree_Manager_DBNestedSet $treeMgr )
 	{
 		$map = array();
 
-		$map[ (string) $node->getId() ] = $node;
+		if( $node->getParentId() != 0 )
+		{
+			$parentNode = $treeMgr->getNode( $node->getParentId(), MW_Tree_Manager_Abstract::LEVEL_LIST );
+			$map[ (string) $node->getParentId() ] = $parentNode;
 
-		foreach( $node->getChildren() as $child ) {
-			$map += $this->_getNodeMap( $child );
+			foreach( $parentNode->getChildren() as $child ) {
+				$map[$child->getId()] = $child;
+			}
+			$map += $this->_getUpperNodeMap( $parentNode, $treeMgr );
 		}
-
 		return $map;
 	}
 

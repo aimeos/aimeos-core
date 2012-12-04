@@ -199,6 +199,27 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetTree2()
+	{
+		$search = $this->_object->createSearch();
+		$conditions = array(
+			$search->compare( '==', 'catalog.code', 'group' ),
+			$search->compare( '==', 'catalog.editor', $this->_editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$items = $this->_object->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Catalog item not found' );
+		}
+
+		$tree = $this->_object->getTree( $item->getId() );
+
+		$test = $tree->getChild(0);
+		$this->assertEquals( 'Neu', $test->getLabel() );
+	}
+
+
 	public function testGetPath()
 	{
 		$search = $this->_object->createSearch();
