@@ -124,7 +124,11 @@ class MShop_Locale_Manager_Default
 	 */
 	public function createItem()
 	{
-		return $this->_createItem();
+		try {
+			return $this->_createItem( array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() ) );
+		} catch ( Exception $e ) {
+			return $this->_createItem();
+		}
 	}
 
 
