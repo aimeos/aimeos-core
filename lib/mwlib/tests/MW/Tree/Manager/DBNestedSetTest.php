@@ -91,6 +91,7 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 		$sql = '
 			CREATE TABLE IF NOT EXISTS "mw_tree_test" (
 				"id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+				"parentid" INTEGER NOT NULL,
 				"label" VARCHAR(16) NOT NULL,
 				"code" VARCHAR(32) NOT NULL,
 				"level" INTEGER NOT NULL,
@@ -101,7 +102,7 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 		';
 		$conn->create( $sql )->execute()->finish();
 
-		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (1, \'root\', \'root\', 0, 1, 18)';
+		$sql = 'INSERT INTO "mw_tree_test" (parentid, status, label, code, level, nleft, nright) VALUES (0, 1, \'root\', \'root\', 0, 1, 18)';
 		$conn->create( $sql )->execute()->finish();
 
 		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (1, \'l1n1\', \'l1n1\', 1, 2, 7)';
