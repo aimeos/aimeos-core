@@ -44,7 +44,7 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 			'get' => '
 				SELECT
 					node."id", node."label", node."code", node."status", node."level",
-					node."nleft" AS "left", node."nright" AS "right"
+					node."parentid", node."nleft" AS "left", node."nright" AS "right"
 				FROM "mw_tree_test" AS parent, "mw_tree_test" AS node
 				WHERE
 					node.nleft >= parent.nleft AND node.nleft <= parent.nright
@@ -53,7 +53,7 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 				ORDER BY node.nleft
 			',
 			'insert' => '
-				INSERT INTO "mw_tree_test" ( label, code, status, level, nleft, nright ) VALUES ( ?, ?, ?, ?, ?, ? )
+				INSERT INTO "mw_tree_test" ( label, code, status, parentid, level, nleft, nright ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
 			',
 			'move-left' => '
 				UPDATE "mw_tree_test"
