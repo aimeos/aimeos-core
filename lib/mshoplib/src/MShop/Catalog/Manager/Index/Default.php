@@ -167,10 +167,16 @@ class MShop_Catalog_Manager_Index_Default
 		$context = $this->_getContext();
 		$search = $this->_productManager->createSearch( true );
 		$config = $context->getConfig();
+
+		$start = 0;
 		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
-		$search->setSlice( 0, $size );
+		$search->setSlice( $start, $size );
+
+		$default = array( 'attribute', 'price', 'text', 'product' );
+		$domains = $config->get( 'mshop/catalog/manager/index/default/domains', $default );
 
 		$ids = array();
+		$getIds = true;
 
 		if( !empty( $items ) )
 		{
@@ -179,21 +185,30 @@ class MShop_Catalog_Manager_Index_Default
 			foreach( $items as $item ) {
 				$ids[] = $item->getId();
 			}
-		} else {
-			if( $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' ) == 'categorized' ) {
-				$ids = array_unique( $this->_getCategorizedProductIds() );
-			}
+
+			$getIds = false;
 		}
 
-		$default = array( 'attribute', 'price', 'text', 'product' );
-		$domains = $config->get( 'mshop/catalog/manager/index/default/domains', $default );
-		$start = 0;
-
+		$position = 0;
 		do
 		{
-			$idChunk = array_slice( $ids, 0, $size );
+			if( $getIds === true )
+			{
+				if( $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' ) == 'categorized' )
+				{
+					$ids = array_unique( $this->_getCategorizedProductIds( $position, $size ) );
+					$position += count( $ids );
+				}
+				$idChunk = $ids;
+			} 
+			else
+			{
+				$idChunk = array_slice( $ids, $position, $size );
+				$ids = array_slice( $ids, $size );
+				$position += count( $ids );
+			}
 
-			if( count( $ids ) > 0 )
+			if( count( $idChunk ) > 0 )
 			{
 				$expr = array(
 					$search->getConditions(),
@@ -202,29 +217,30 @@ class MShop_Catalog_Manager_Index_Default
 				$search->setConditions( $search->combine( '&&', $expr ) );
 			}
 
-			$ids = array_slice( $ids, $size );
-
-			do
+			if( count( $ids > 0 ) || $getIds === false )
 			{
-				$result = $this->_productManager->searchItems( $search, $domains );
+				do
+				{
+					$result = $this->_productManager->searchItems( $search, $domains );
 
-				foreach( $result as $id => $product ) {
-					$this->deleteItem( $id );
+					foreach( $result as $id => $product ) {
+						$this->deleteItem( $id );
+					}
+
+					foreach ( $this->_submanagers as $submanager ) {
+						$submanager->rebuildIndex( $result );
+					}
+
+					$this->_saveSubProducts( $result );
+
+					$count = count( $result );
+					$start += $count;
+					$search->setSlice( $start, $size );
 				}
-
-				foreach ( $this->_submanagers as $submanager ) {
-					$submanager->rebuildIndex( $result );
-				}
-
-				$this->_saveSubProducts( $result );
-
-				$count = count( $result );
-				$start += $count;
-				$search->setSlice( $start, $size );
+				while( $count > 0 );
 			}
-			while( $count > 0 );
 		}
-		while( count( $ids ) !== 0 );
+		while( count( $ids ) > 0 );
 
 		$this->optimize();
 	}
@@ -371,11 +387,9 @@ class MShop_Catalog_Manager_Index_Default
 	 *
 	 * @return array List of product ids
 	 */
-	protected function _getCategorizedProductIds()
+	protected function _getCategorizedProductIds( $start = 0, $size = 1000 )
 	{
 		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
 
 		$return = array();
 		
@@ -383,23 +397,12 @@ class MShop_Catalog_Manager_Index_Default
 		$categorySearch = $catalogListManager->createSearch();
 		$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
 
-		$start = 0;
 		$categorySearch->setSlice( $start, $size );
+	 	$result = $catalogListManager->searchItems( $categorySearch );
 
-		do
-		{
-		 	$result = $catalogListManager->searchItems( $categorySearch );
-
-			foreach( $result as $catalogListItem ) {
-				$return[] = $catalogListItem->getRefId();
-			}
-
-			$count = count( $result );
-			$start += $count;
-			$categorySearch->setSlice( $start, $size );
-
+		foreach( $result as $catalogListItem ) {
+			$return[] = $catalogListItem->getRefId();
 		}
-		while ( $count > 0 );
 
 		return $return;
 	}
