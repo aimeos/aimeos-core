@@ -568,8 +568,6 @@ class MShop_Catalog_Manager_Default
 				$nodeMap = $this->_getNodeMap( $node );
 				$nodeMap = $nodeMap + $parentNodeMap;
 
-				echo var_dump( array_keys($parentNodeMap) );
-
 				if( count( $ref ) > 0 ) {
 					$listItems = $this->_getListItems( array_keys( $nodeMap ), $ref, 'catalog' );
 				}
