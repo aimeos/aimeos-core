@@ -281,7 +281,6 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 		try
 		{
-//			$conn->begin();
 			foreach ( $items as $key => $item )
 			{
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/catalog/default/item/insert' );
@@ -300,12 +299,10 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 				}
 			}
 
-//			$conn->commit();
 			$dbm->release( $conn );
 		}
 		catch( Exception $e )
 		{
-//			$conn->rollback();
 			$dbm->release( $conn );
 			throw $e;
 		}
