@@ -251,6 +251,8 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 		try
 		{
+//			$conn->begin();
+
 			foreach ( $items as $item )
 			{
 				$listTypes = array();
@@ -289,10 +291,12 @@ class MShop_Catalog_Manager_Index_Price_Default
 				}
 			}
 
+//			$conn->commit();
 			$dbm->release( $conn );
 		}
 		catch( Exception $e )
 		{
+//			$conn->rollback();
 			$dbm->release( $conn );
 			throw $e;
 		}

@@ -225,8 +225,20 @@ class MShop_Catalog_Manager_Index_Default
 
 					$this->_deleteIndex( array_keys( $result ) );
 
-					foreach ( $this->_submanagers as $submanager ) {
-						$submanager->rebuildIndex( $result );
+					try
+					{
+						$this->_begin();
+
+						foreach ( $this->_submanagers as $submanager ) {
+							$submanager->rebuildIndex( $result );
+						}
+
+						$this->_commit();
+					}
+					catch( Exception $e )
+					{
+						$this->_rollback();
+						throw $e;
 					}
 
 					$this->_saveSubProducts( $result );
@@ -394,8 +406,6 @@ class MShop_Catalog_Manager_Index_Default
 			$search->setSlice( 0, $size );
 			$start = 0;
 
-			$this->_begin();
-
 			do
 			{
 				$ids = array_keys( $product->getRefItems( 'product', null, 'default' ) );
@@ -416,8 +426,20 @@ class MShop_Catalog_Manager_Index_Default
 					$itemList[] = $refItem;
 				}
 
-				foreach( $this->_submanagers as $submanager ) {
-					$submanager->rebuildIndex( $itemList );
+				try
+				{
+					$this->_begin();
+
+					foreach( $this->_submanagers as $submanager ) {
+						$submanager->rebuildIndex( $itemList );
+					}
+
+					$this->_commit();
+				}
+				catch( Exception $e )
+				{
+					$this->_rollback();
+					throw $e;
 				}
 
 				$count = count( $result );
@@ -426,7 +448,6 @@ class MShop_Catalog_Manager_Index_Default
 			}
 			while( $count > 0 );
 
-			$this->_commit();
 		}
 	}
 

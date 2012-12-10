@@ -48,6 +48,31 @@ class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
 	}
 
+	public function testRebuildIndex()
+	{
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$indexManager = $catalogManager->getSubManager( 'index' );
+
+		$this->_context->getConfig()->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
+		
+		$start = microtime( true );
+
+		$indexManager->rebuildIndex();
+
+		$stop = microtime( true );
+		printf( "\n    catalog index rebuildIndex (categorized): %1\$f sec\n", ( $stop - $start ) );
+
+
+		$this->_context->getConfig()->set( 'mshop/catalog/manager/index/default/index', 'all' );
+		
+		$start = microtime( true );
+
+		$indexManager->rebuildIndex();
+
+		$stop = microtime( true );
+		printf( "\n    catalog index rebuildIndex (all): %1\$f sec\n", ( $stop - $start ) );
+	}
+
 
 	public function testListByPos()
 	{
