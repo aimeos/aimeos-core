@@ -372,11 +372,12 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/catalog/manager/index/text/default/item/search';
 			$cfgPathCount = 'mshop/catalog/manager/index/text/default/item/count';
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			$ids = array();
 			while( ( $row = $results->fetch() ) !== false )	{
@@ -420,10 +421,12 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/catalog/manager/index/text/default/text/search';
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, '', $required );
+			$total = null;
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$list[ $row['prodid'] ] = $row['value'];

@@ -252,11 +252,12 @@ class MShop_Product_Manager_Stock_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/product/manager/stock/default/item/search';
 			$cfgPathCount =  'mshop/product/manager/stock/default/item/count';
 			$required = array( 'product.stock' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[ $row['id'] ] = $this->_createItem( $row );
 			}
@@ -357,7 +358,7 @@ class MShop_Product_Manager_Stock_Default
 
 			if ($result->affectedRows() !== 1 ) {
 				$msg = 'Possible problem while changing stock level for product "%1$s" and warehouse "%2$s" by "%3$s": Affected stocks are "%4$s"';
-				$context->getLogger()->log( sprintf( $msg, $productCode, $warehouseCode, $amount, $affectedRows ), MW_Logger_Abstract::WARN );
+				$context->getLogger()->log( sprintf( $msg, $productCode, $warehouseCode, $amount, $result->affectedRows() ), MW_Logger_Abstract::WARN );
 			}
 
 			$result->finish();

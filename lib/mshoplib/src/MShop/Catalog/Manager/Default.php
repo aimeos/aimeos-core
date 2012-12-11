@@ -484,11 +484,12 @@ class MShop_Catalog_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ONE;
 			$cfgPathSearch = 'mshop/catalog/manager/default/item/search-item';
 			$cfgPathCount = 'mshop/catalog/manager/default/item/count';
 			$required = array( 'catalog' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[ $row['id'] ] = new MW_Tree_Node_Default( $row );

@@ -755,11 +755,12 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/customer/manager/default/item/search';
 			$cfgPathCount = 'mshop/customer/manager/default/item/count';
 			$required = array( 'customer' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[ $row['id'] ] = $row;
 			}

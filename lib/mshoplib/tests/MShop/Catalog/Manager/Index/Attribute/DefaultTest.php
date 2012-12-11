@@ -100,28 +100,30 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 			throw new Exception( 'No product item with code CNE found!' );
 		}
 
-		$product->setId( null );
-		$product->setCode( 'ModifiedCNC' );
-		$productManager->saveItem( $product );
-
-		$this->_object->saveItem( $product );
-
 		$attributes = $product->getRefItems( 'attribute' );
 		if( ( $attrItem = reset( $attributes ) ) === false ) {
 			throw new Exception( 'Product doesnt have any attribute item' );
 		}
 
+		$product->setId( null );
+		$product->setCode( 'ModifiedCNC' );
+		$productManager->saveItem( $product );
+		$this->_object->saveItem( $product );
+
+
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrItem->getId() ) );
 		$result = $this->_object->searchItems( $search );
 
+
 		$this->_object->deleteItem( $product->getId() );
+		$productManager->deleteItem( $product->getId() );
+
 
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrItem->getId() ) );
 		$result2 = $this->_object->searchItems( $search );
 
-		$productManager->deleteItem( $product->getId() );
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
 		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
