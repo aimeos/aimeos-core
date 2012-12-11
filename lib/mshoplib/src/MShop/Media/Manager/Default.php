@@ -506,11 +506,12 @@ class MShop_Media_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/media/manager/default/item/search';
 			$cfgPathCount =  'mshop/media/manager/default/item/count';
 			$required = array( 'media' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{

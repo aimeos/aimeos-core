@@ -285,7 +285,7 @@ class MShop_Order_Manager_Base_Service_Default
 		$items = array();
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/service/default/item/search';
 			$cfgPathCount =  'mshop/order/manager/base/service/default/item/count';
 			$required = array( 'order.base.service' );

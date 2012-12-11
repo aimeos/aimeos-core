@@ -537,11 +537,12 @@ class MShop_Price_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/price/manager/default/item/search';
 			$cfgPathCount =  'mshop/price/manager/default/item/count';
 			$required = array( 'price' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{

@@ -309,7 +309,7 @@ class MShop_Order_Manager_Default
 
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/default/item/search';
 			$cfgPathCount =  'mshop/order/manager/default/item/count';
 			$required = array( 'order' );
