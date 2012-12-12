@@ -165,90 +165,60 @@ class MShop_Catalog_Manager_Index_Default
 	public function rebuildIndex( array $items = array() )
 	{
 		$context = $this->_getContext();
-		$search = $this->_productManager->createSearch( true );
 		$config = $context->getConfig();
-
-		$start = 0;
-		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
-		$search->setSlice( $start, $size );
 
 		$default = array( 'attribute', 'price', 'text', 'product' );
 		$domains = $config->get( 'mshop/catalog/manager/index/default/domains', $default );
 
-		$ids = array();
-		$getIds = true;
+		$startProducts = $start = 0;
+		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
 
-		if( !empty( $items ) )
-		{
-			MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
+		$mode = $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' );
 
-			foreach( $items as $item ) {
-				$ids[] = $item->getId();
-			}
+		$search = $this->_productManager->createSearch( true );
+		$defaultConditions = $search->getConditions();
 
-			$getIds = false;
+		$paramIds = array();
+		foreach( $items as $item ) {
+			$paramIds[] = $item->getId();
 		}
 
-		$position = 0;
+		$ids = array();
 		do
 		{
-			if( $getIds === true )
+			if( count( $items ) === 0 )
 			{
-				if( $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' ) == 'categorized' )
+				if( $mode === 'categorized' )
 				{
-					$ids = array_unique( $this->_getCategorizedProductIds( $position, $size ) );
-					$position += count( $ids );
-				}
-				$idChunk = $ids;
-			} 
-			else
-			{
-				$idChunk = array_slice( $ids, $position, $size );
-				$ids = array_slice( $ids, $size );
-				$position += count( $ids );
-			}
+					$ids = array_unique( $this->_getCategorizedProductIds( $startProducts, $size ) );
 
-			if( count( $idChunk ) > 0 )
-			{
+					$expr = array(
+						$defaultConditions,
+						$search->compare( '==', 'product.id', $ids )
+					);
+					$search->setConditions( $search->combine( '&&', $expr ) );
+					
+					$startProducts += count( $ids );
+				}
+			} else {
 				$expr = array(
 					$search->getConditions(),
-					$search->compare( '==', 'product.id', $idChunk )
+					$search->compare( '==', 'product.id', $paramIds )
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 			}
 
-			if( count( $ids > 0 ) || $getIds === false )
+			do
 			{
-				do
-				{
-					$result = $this->_productManager->searchItems( $search, $domains );
+				$result = $this->_productManager->searchItems( $search, $domains );
 
-					$this->_deleteIndex( array_keys( $result ) );
+				$this->_writeIndex( $result );
 
-					try
-					{
-						$this->_begin();
-
-						foreach ( $this->_submanagers as $submanager ) {
-							$submanager->rebuildIndex( $result );
-						}
-
-						$this->_commit();
-					}
-					catch( Exception $e )
-					{
-						$this->_rollback();
-						throw $e;
-					}
-
-					$this->_saveSubProducts( $result );
-
-					$count = count( $result );
-					$start += $count;
-					$search->setSlice( $start, $size );
-				}
-				while( $count > 0 );
+				$count = count( $result );
+				$start += $count;
+				$search->setSlice( $start, $size );
 			}
+			while( $count > 0 );
 		}
 		while( count( $ids ) > 0 );
 
@@ -341,14 +311,38 @@ class MShop_Catalog_Manager_Index_Default
 	}
 
 
+	protected function _writeIndex( $products )
+	{
+		$this->_deleteIndex( array_keys( $products ) );
+
+		try
+		{
+			$this->_begin();
+
+			foreach ( $this->_submanagers as $submanager ) {
+				$submanager->rebuildIndex( $products );
+			}
+
+			$this->_commit();
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			throw $e;
+		}
+
+		$this->_saveSubProducts( $products );
+	}
+
+
 	/**
 	 *  Deletes the catalog index for a given list of products
 	 *
 	 * @param array $ids list of product ids
 	 */
-	protected function _deleteIndex( $ids )
+	protected function _deleteIndex( array $ids )
 	{
-		if( !is_array( $ids ) || count( $ids ) === 0 ) { return; }
+		if( count( $ids ) === 0 ) { return; }
 
 		$domains = array_keys( $this->_submanagers );
 
@@ -384,7 +378,6 @@ class MShop_Catalog_Manager_Index_Default
 			$dbm->release( $conn );
 			throw $e;
 		}
-
 	}
 
 
