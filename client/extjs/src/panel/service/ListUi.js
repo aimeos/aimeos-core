@@ -138,4 +138,4 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 Ext.reg('MShop.panel.service.listui', MShop.panel.service.ListUi);
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', MShop.panel.service.ListUi, 50);
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.service.listui', MShop.panel.service.ListUi, 50);
