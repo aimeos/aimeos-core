@@ -125,7 +125,6 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 			$submanager->deleteItem( $id );
 		}
 
-
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
@@ -146,6 +145,44 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 			$dbm->release( $conn );
 			throw $e;
 		}
+	}
+
+
+	/**
+	 * Removes multiple items from the index.
+	 *
+	 * @param array $ids list of Product IDs
+	 */
+	public function deleteItems( array $ids )
+	{
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->deleteItems( $ids );
+		}
+
+		$context = $this->_getContext();
+		$siteid = $context->getLocale()->getSiteId();
+
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		try
+		{
+			foreach( $ids as $id )
+			{
+				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/attribute/default/item/delete' );
+				$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->execute()->finish();
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+
 	}
 
 

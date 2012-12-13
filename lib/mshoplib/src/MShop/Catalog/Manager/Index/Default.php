@@ -80,6 +80,19 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
+	 * Removes multiple items from the index.
+	 *
+	 * @param array $ids list of product IDs
+	 */
+	public function deleteItems( array $ids )
+	{
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->deleteItems( $ids );
+		}
+	}
+
+
+	/**
 	 * Returns the product item for the given product ID.
 	 *
 	 * @param integer $id Unique ID to search for
@@ -313,11 +326,11 @@ class MShop_Catalog_Manager_Index_Default
 
 	protected function _writeIndex( $products )
 	{
-		$this->_deleteIndex( array_keys( $products ) );
-
 		try
 		{
 			$this->_begin();
+	
+			$this->_deleteIndex( array_keys( $products ) );
 
 			foreach ( $this->_submanagers as $submanager ) {
 				$submanager->rebuildIndex( $products );
@@ -344,40 +357,7 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		if( count( $ids ) === 0 ) { return; }
 
-		$domains = array_keys( $this->_submanagers );
-
-		$context = $this->_getContext();
-		$siteid = $context->getLocale()->getSiteId();
-
-		$idList = '( ' . implode( $ids, ', ' ) . ' )' ;
-
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		foreach( $domains as $domain )
-		{
-			$stmts[$domain] = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/' . $domain . '/default/list/delete' );
-			$stmts[$domain]->bind( 1, $idList, -1 );
-			$stmts[$domain]->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-		}
-
-		try
-		{
-			$conn->begin();
-
-			foreach( $stmts as $stmt ) {
-				$stmt->execute()->finish();
-			}
-
-			$conn->commit();
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$conn->rollback();
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$this->deleteItems( $ids );
 	}
 
 
