@@ -3,12 +3,13 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: DefaultTest.php 1320 2012-10-19 19:57:38Z nsendetzky $
+ * @version $Id: DefaultTest.php 1352 2012-10-29 16:11:47Z nsendetzky $
  */
 
-class Client_Html_Catalog_Detail_Basic_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Basket_Standard_Main_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_object;
+	protected $_context;
 
 
 	/**
@@ -21,7 +22,7 @@ class Client_Html_Catalog_Detail_Basic_DefaultTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_Detail_Basic_DefaultTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Basket_Standard_Main_DefaultTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -34,8 +35,10 @@ class Client_Html_Catalog_Detail_Basic_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
+		$this->_context = TestHelper::getContext();
+
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_Detail_Basic_Default( TestHelper::getContext(), $paths );
+		$this->_object = new Client_Html_Basket_Standard_Main_Default( $this->_context, $paths );
 		$this->_object->setView( TestHelper::getView() );
 	}
 
@@ -54,9 +57,6 @@ class Client_Html_Catalog_Detail_Basic_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem();
-
 		$output = $this->_object->getHeader();
 		$this->assertEquals( '', $output );
 	}
@@ -64,31 +64,26 @@ class Client_Html_Catalog_Detail_Basic_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBody()
 	{
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+
 		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem();
+		$view->standardBasket = $controller->get();
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="catalog-detail-basic">', $output );
+		$this->assertStringStartsWith( '<div class="basket-standard-main">', $output );
 	}
 
-	public function testGetSubClient()
+
+	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( 'invalid', 'invalid' );
 	}
 
 
-	protected function _getProductItem()
+	public function testGetSubClientInvalidName()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
-		$items = $manager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No product item with code "CNC" found' );
-		}
-
-		return $item;
+		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->_object->getSubClient( '$$$', '$$$' );
 	}
 }

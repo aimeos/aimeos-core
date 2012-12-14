@@ -10,7 +10,7 @@
 /**
  * Test class for MW_View_Helper_Parameter.
  */
-class MW_View_Helper_ParameterTest extends MW_Unittest_Testcase
+class MW_View_Helper_Parameter_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_object;
 
@@ -23,7 +23,7 @@ class MW_View_Helper_ParameterTest extends MW_Unittest_Testcase
 	 */
 	public static function main()
 	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_View_Helper_Parameter');
+		$suite  = new PHPUnit_Framework_TestSuite('MW_View_Helper_Parameter_Default');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -38,7 +38,7 @@ class MW_View_Helper_ParameterTest extends MW_Unittest_Testcase
 	{
 		$view = new MW_View_Default();
 		$param = array( 'page' => 'test' );
-		$this->_object = new MW_View_Helper_Parameter( $view, $param );
+		$this->_object = new MW_View_Helper_Parameter_Default( $view, $param );
 	}
 
 

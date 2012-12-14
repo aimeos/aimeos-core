@@ -69,7 +69,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 		}
 
 
-		$navHelper = new MW_View_Helper_NavTree( $view );
+		$navHelper = new MW_View_Helper_NavTree_Default( $view );
 		$view->addHelper( 'navtree', $navHelper );
 
 		$html = '';

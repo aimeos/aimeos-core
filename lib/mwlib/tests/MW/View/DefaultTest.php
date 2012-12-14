@@ -38,7 +38,7 @@ class MW_View_DefaultTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$this->_object = new MW_View_Default();
-		$this->_translate = new MW_View_Helper_Translate( $this->_object, new MW_Translation_None( 'en_GB' ) );
+		$this->_translate = new MW_View_Helper_Translate_Default( $this->_object, new MW_Translation_None( 'en_GB' ) );
 	}
 
 

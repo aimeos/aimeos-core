@@ -40,23 +40,26 @@ class TestHelper
 		{
 			self::$_view = new MW_View_Default();
 
-			$helper = new MW_View_Helper_Translate( self::$_view, new MW_Translation_None( 'en_GB' ) );
+			$helper = new MW_View_Helper_Translate_Default( self::$_view, new MW_Translation_None( 'en_GB' ) );
 			self::$_view->addHelper( 'translate', $helper );
 
-			$helper = new MW_View_Helper_Url( self::$_view, 'baseurl' );
+			$helper = new MW_View_Helper_Url_Default( self::$_view, 'baseurl' );
 			self::$_view->addHelper( 'url', $helper );
 
-			$helper = new MW_View_Helper_Number( self::$_view, '.', '' );
+			$helper = new MW_View_Helper_Number_Default( self::$_view, '.', '' );
 			self::$_view->addHelper( 'number', $helper );
 
-			$helper = new MW_View_Helper_Date( self::$_view, 'Y-m-d' );
+			$helper = new MW_View_Helper_Date_Default( self::$_view, 'Y-m-d' );
 			self::$_view->addHelper( 'date', $helper );
 
-			$helper = new MW_View_Helper_Config( self::$_view, array() );
+			$helper = new MW_View_Helper_Config_Default( self::$_view, array() );
 			self::$_view->addHelper( 'config', $helper );
 
-			$helper = new MW_View_Helper_Parameter( self::$_view, array() );
+			$helper = new MW_View_Helper_Parameter_Default( self::$_view, array() );
 			self::$_view->addHelper( 'param', $helper );
+
+			$helper = new MW_View_Helper_FormParam_Default( self::$_view );
+			self::$_view->addHelper( 'formparam', $helper );
 		}
 
 		return self::$_view;

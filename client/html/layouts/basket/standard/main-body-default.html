@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$price = $this->standardBasket->getPrice();
+$priceFormat = $this->translate( 'core/client/html', '%1$s€' );
+
+?>
+<div class="basket-standard-main">
+	<form method="POST" action="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index' ); ?>">
+		<input type="hidden" name="<?php echo $this->formparam( 'b-action' ); ?>" value="edit" />
+		<table>
+			<thead>
+				<tr class="main-head">
+					<th class="main-details"></th>
+					<th class="main-quantity"><?php echo $this->translate( 'core/client/html', 'Quantity' ); ?></th>
+					<th class="main-unitprice"><?php echo $this->translate( 'core/client/html', 'Unit price' ); ?></th>
+					<th class="main-price"><?php echo $this->translate( 'core/client/html', 'Price' ); ?></th>
+					<th class="main-action"></th>
+				</tr>
+			</thead>
+			<tbody>
+<?php foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
+				<tr class="main-row">
+					<td class="main-details">
+						<img src="<?php echo $product->getMediaUrl(); ?>" />
+						<span class="product-name"><?php echo $product->getName(); ?></span>
+<?php	foreach( $product->getAttributes() as $attribute ) : ?>
+						<span class="product-attributename"><?php echo $attribute->getName(); ?></span>
+						<span class="product-attributevalue"><?php echo $attribute->getValue(); ?></span>
+<?php	endforeach; ?>
+					</td>
+					<td class="main-quantity">
+<?php	if( $product->getQuantity() > 1 ) : ?>
+						<a href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) ); ?>">-</a>
+<?php	endif; ?>
+						<input type="text" name="<?php echo $this->formparam( array( 'b-prod', $position, 'quantity' ) ); ?>" value="<?php echo $product->getQuantity(); ?>" />
+						<input type="hidden" name="<?php echo $this->formparam( array( 'b-prod', $position, 'position' ) ); ?>" value="<?php echo $position; ?>" />
+						<a href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) ); ?>">+</a>
+					</td>
+					<td class="main-unitprice"><?php printf( $priceFormat, $this->number( $product->getPrice()->getValue() ) ); ?></td>
+					<td class="main-price"><?php printf( $priceFormat, $this->number( $product->getPrice()->getValue() * $product->getQuantity() ) ); ?></td>
+					<td class="main-action">
+						<a class="minibutton" href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'core/client/html', 'X' ); ?></a>
+					</td>
+				</tr>
+<?php endforeach; ?>
+			</tbody>
+			<tfoot>
+				<tr class="main-subtotal">
+					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Sub-total' ); ?></td>
+					<td class="main-price"><?php printf( $priceFormat, $this->number( $price->getValue() ) ); ?></td>
+					<td class="main-action"></td>
+				</tr>
+				<tr class="main-shipping">
+					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Shipping' ); ?></td>
+					<td class="main-price"><?php printf( $priceFormat, $this->number( $price->getShipping() ) ); ?></td>
+					<td class="main-action"></td>
+				</tr>
+				<tr class="main-total">
+					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
+					<td class="main-price"><?php printf( $priceFormat, $this->number( $price->getValue() + $price->getShipping() ) ); ?></td>
+					<td class="main-action"></td>
+				</tr>
+			</tfoot>
+		</table>
+		<div class="main-buttons">
+			<button class="standardbutton" type="submit"><?php echo $this->translate( 'core/client/html', 'Update' ); ?></button>
+			<a class="standardbutton" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'basket', 'checkout' ); ?>"><?php echo $this->translate( 'core/client/html', 'Checkout' ); ?></a>
+		</div>
+	</form>
+</div>
+<?php echo $this->mainBody; ?>

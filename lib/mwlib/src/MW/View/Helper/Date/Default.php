@@ -15,7 +15,7 @@
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Date
+class MW_View_Helper_Date_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {

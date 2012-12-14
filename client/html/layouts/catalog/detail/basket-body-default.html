@@ -21,16 +21,20 @@ $percentFormat = $this->translate( 'core/client/html', '%1$s%%' );
 			<span class="price-rebate"><?php printf( $priceFormat, $this->number( $rebate ) ); ?></span>
 			<span class="price-rebatepercent"><?php printf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ); ?></span>
 <?php	endif; ?>
-			<span class="price-shipping"><?php printf( $priceFormat, $this->number( $priceItem->getShipping() ) ); ?></span>
+<?php	if( ( $shipping = $priceItem->getShipping() ) > 0 ) : ?>
+			<span class="price-shipping"><?php printf( $priceFormat, $this->number( $shipping ) ); ?></span>
+<?php	endif; ?>
 			<span class="price-taxrate"><?php printf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ); ?></span>
 		</div>
 <?php endif; ?>
 	</div>
-	<form method="POST" action="<?php echo $this->url( $this->config( 'basket-target' ) ); ?>">
+	<form method="POST" action="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index' ); ?>">
 <?php echo $this->basketBody; ?>
 		<div class="basket-add">
 			<div class="basket-group">
-				<input name="quantity" type="text" value="1" />
+				<input name="<?php echo $this->formparam( 'b-action' ); ?>" type="hidden" value="add" />
+				<input name="<?php echo $this->formparam( array( 'b-prod', 0, 'prod-id' ) ); ?>" type="hidden" value="<?php echo $this->param( 'l-product-id' ); ?>" />
+				<input name="<?php echo $this->formparam( array( 'b-prod', 0, 'quantity' ) ); ?>" type="text" value="1" />
 				<button class="standardbutton" type="submit" value=""><?php echo $this->translate( 'core/client/html', 'Add to basket' ); ?></button>
 			</div>
 		</div>

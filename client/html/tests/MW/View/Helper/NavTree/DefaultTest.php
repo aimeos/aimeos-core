@@ -6,7 +6,7 @@
  * @version $Id: NavTreeTest.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-class MW_View_Helper_NavTreeTest extends MW_Unittest_Testcase
+class MW_View_Helper_NavTree_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_object;
 
@@ -21,7 +21,7 @@ class MW_View_Helper_NavTreeTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('MW_View_Helper_NavTreeTest');
+		$suite = new PHPUnit_Framework_TestSuite('MW_View_Helper_NavTree_DefaultTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -36,13 +36,13 @@ class MW_View_Helper_NavTreeTest extends MW_Unittest_Testcase
 	{
 		$view = new MW_View_Default();
 
-		$helper = new MW_View_Helper_Url( $view, '' );
+		$helper = new MW_View_Helper_Url_Default( $view, '' );
 		$view->addHelper( 'url', $helper );
 
-		$helper = new MW_View_Helper_Config( $view, array() );
+		$helper = new MW_View_Helper_Config_Default( $view, array() );
 		$view->addHelper( 'config', $helper );
 
-		$this->_object = new MW_View_Helper_NavTree( $view );
+		$this->_object = new MW_View_Helper_NavTree_Default( $view );
 	}
 
 
