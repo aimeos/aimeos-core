@@ -15,7 +15,7 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Zend implements MW_Config_Interface
+class MW_Config_Zend extends MW_Config_Abstract implements MW_Config_Interface
 {
 	private $_config = null;
 	private $_paths = array();
@@ -191,16 +191,4 @@ class MW_Config_Zend implements MW_Config_Interface
 		}
 	}
 
-
-	/**
-	 * Returns the included configuration.
-	 * This methods protects against overwriting local variables also defined in the configuration
-	 *
-	 * @param string $filename Name of the configuration file
-	 * @return array|false Configuration array or false if file is not available
-	 */
-	protected function _include( $filename )
-	{
-		return include $filename;
-	}
 }

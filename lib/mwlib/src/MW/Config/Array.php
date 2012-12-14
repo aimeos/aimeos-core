@@ -15,13 +15,12 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Array implements MW_Config_Interface
+class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 {
 	private $_config = array();
 	private $_paths = array();
 	private $_cache = array();
 	private $_fileCache = array();
-	private $_includeCache = array();
 	private $_negCache = array();
 
 
@@ -67,28 +66,23 @@ class MW_Config_Array implements MW_Config_Interface
 
 		$path = explode( '/', $name );
 
-		$return = $this->_get( $path, $this->_config );
+		$return = $this->_getFromArray( $path, $this->_config );
 
 		if( $return === null )
 		{
 			$filePaths = $this->_findFile( $path );
 
-			$innerPath = $subConfig = array();
+			$subConfig = array();
 			foreach( $filePaths as $filePath )
 			{
-				if( isset( $this->_includeCache[ $filePath['file'] ] ) ) {
-					$add = $this->_includeCache[ $filePath['file'] ];
-				} else {
-					$add = include $filePath['file'];
-					$this->_includeCache[ $filePath['file'] ] = $add;
-				}
+				$add = $this->_include( $filePath['file'] );
 
 				if( is_array( $add ) ) {
 					$this->_merge( $subConfig, $this->_makeMap( $filePath['prefix'], $add ) );
 				}
 			}
 
-			$return = $this->_get( $path, $subConfig );
+			$return = $this->_getFromArray( $path, $subConfig );
 		}
 
 		if( $return === null || $return === array() )
@@ -193,6 +187,7 @@ class MW_Config_Array implements MW_Config_Interface
 		return $return;
 	}
 
+
 	/**
 	 * Finds all .php files in a folder, including sub-folders
 	 *
@@ -214,19 +209,22 @@ class MW_Config_Array implements MW_Config_Interface
 
 		foreach( $content as $entry )
 		{
-			if( substr( $entry, -4, 4 ) == '.php' )
-			{
-				$prefix[] = substr( $entry, 0, -4 );
-				$return[] = array( 'file' => $path . DIRECTORY_SEPARATOR . $entry, 'prefix' => $prefix );
-				continue;
-			}
-
 			if( is_dir( $entry ) )
 			{
 				$this->_getAllFiles( $path . DIRECTORY_SEPARATOR . $entry, $return );
+
+			} else {
+
+				if( substr( $entry, -4, 4 ) == '.php' )
+				{
+					$prefix[] = substr( $entry, 0, -4 );
+					$return[] = array( 'file' => $path . DIRECTORY_SEPARATOR . $entry, 'prefix' => $prefix );
+					continue;
+				}
 			}
 		}
 	}
+
 
 	/**
 	 * Merges a multi-dimensional array into another one
@@ -266,18 +264,14 @@ class MW_Config_Array implements MW_Config_Interface
 	 * @param Array $path Configuration path to look for inside the array
 	 * @param Array $config The array to search in
 	 */
-	protected function _get( $path, $config )
+	protected function _getFromArray( $path, $config )
 	{
-		if( count( $path ) == 0 ) {
-			return $config;
-		}
-
 		$current = array_shift( $path );
 
 		if( isset( $config[ $current ] ) )
 		{
 			if( count( $path ) > 0 ) {
-				return $this->_get( $path, $config[ $current ] );
+				return $this->_getFromArray( $path, $config[ $current ] );
 			}
 			return $config[ $current ];
 		}
