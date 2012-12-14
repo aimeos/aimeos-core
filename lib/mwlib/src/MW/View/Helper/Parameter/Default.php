@@ -15,7 +15,7 @@
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Parameter
+class MW_View_Helper_Parameter_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {

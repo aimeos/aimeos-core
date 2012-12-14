@@ -8,9 +8,9 @@
 
 
 /**
- * Test class for MW_View_Helper_Translate.
+ * Test class for MW_View_Helper_Number.
  */
-class MW_View_Helper_TranslateTest extends MW_Unittest_Testcase
+class MW_View_Helper_Number_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_object;
 
@@ -23,7 +23,7 @@ class MW_View_Helper_TranslateTest extends MW_Unittest_Testcase
 	 */
 	public static function main()
 	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_View_Helper_Translate');
+		$suite  = new PHPUnit_Framework_TestSuite('MW_View_Helper_Number_Default');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -36,15 +36,8 @@ class MW_View_Helper_TranslateTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$ds = DIRECTORY_SEPARATOR;
-
-		$translationSources = array(
-			'test' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'translate',
-		);
-
 		$view = new MW_View_Default();
-		$translate = new MW_Translation_None( 'en_GB' );
-		$this->_object = new MW_View_Helper_Translate( $view, $translate );
+		$this->_object = new MW_View_Helper_Number_Default( $view, '.', ' ' );
 	}
 
 
@@ -62,8 +55,17 @@ class MW_View_Helper_TranslateTest extends MW_Unittest_Testcase
 
 	public function testTransform()
 	{
-		$this->assertEquals( 'File', $this->_object->transform( 'test', 'File', 'Files', 1 ) );
-		$this->assertEquals( 'Files', $this->_object->transform( 'test', 'File', 'Files', 2 ) );
+		$this->assertEquals( '1.00', $this->_object->transform( 1 ) );
+		$this->assertEquals( '1.00', $this->_object->transform( 1.0 ) );
+		$this->assertEquals( '1 000.00', $this->_object->transform( 1000.0 ) );
+	}
+
+
+	public function testTransformNoDecimals()
+	{
+		$this->assertEquals( '1', $this->_object->transform( 1, 0 ) );
+		$this->assertEquals( '1', $this->_object->transform( 1.0, 0 ) );
+		$this->assertEquals( '1 000', $this->_object->transform( 1000.0, 0 ) );
 	}
 
 }

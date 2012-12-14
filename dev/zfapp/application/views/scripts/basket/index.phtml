@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+try
+{
+	echo $this->basket->getBody();
+}
+catch( MW_Exception $e )
+{
+	echo 'An error occured';
+}
+catch( Exception $e )
+{
+	echo 'Error: ' . $e->getMessage();
+}
+?>

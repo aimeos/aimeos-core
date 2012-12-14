@@ -15,7 +15,7 @@
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Translate
+class MW_View_Helper_Translate_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {

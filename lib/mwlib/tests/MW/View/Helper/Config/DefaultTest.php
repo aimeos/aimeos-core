@@ -8,9 +8,9 @@
 
 
 /**
- * Test class for MW_View_Helper_Date.
+ * Test class for MW_View_Helper_Config.
  */
-class MW_View_Helper_DateTest extends MW_Unittest_Testcase
+class MW_View_Helper_Config_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_object;
 
@@ -23,7 +23,7 @@ class MW_View_Helper_DateTest extends MW_Unittest_Testcase
 	 */
 	public static function main()
 	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_View_Helper_Date');
+		$suite  = new PHPUnit_Framework_TestSuite('MW_View_Helper_Config_Default');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -37,7 +37,8 @@ class MW_View_Helper_DateTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$this->_object = new MW_View_Helper_Date( $view, 'd.m.Y' );
+		$config = array( 'page' => 'test' );
+		$this->_object = new MW_View_Helper_Config_Default( $view, $config );
 	}
 
 
@@ -55,8 +56,15 @@ class MW_View_Helper_DateTest extends MW_Unittest_Testcase
 
 	public function testTransform()
 	{
-		$this->assertEquals( '01.01.2000', $this->_object->transform( '2000-01-01 00:00:00' ) );
-		$this->assertEquals( '01.01.0000', $this->_object->transform( '0000-01-01 00:00:00' ) );
+		$this->assertEquals( 'test', $this->_object->transform( 'page', 'none' ) );
+		$this->assertEquals( 'none', $this->_object->transform( 'missing', 'none' ) );
+	}
+
+
+	public function testTransformNoDefault()
+	{
+		$this->assertEquals( 'test', $this->_object->transform( 'page' ) );
+		$this->assertEquals( null, $this->_object->transform( 'missing' ) );
 	}
 
 }

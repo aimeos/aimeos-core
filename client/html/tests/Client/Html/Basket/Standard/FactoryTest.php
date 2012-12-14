@@ -6,7 +6,7 @@
  * @version $Id: FactoryTest.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-class Client_Html_Catalog_Detail_FactoryTest extends MW_Unittest_Testcase
+class Client_Html_Basket_Standard_FactoryTest extends MW_Unittest_Testcase
 {
 	protected $_context;
 	protected $_templatePaths;
@@ -22,7 +22,7 @@ class Client_Html_Catalog_Detail_FactoryTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_CatalogDetail_FactoryTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Basket_Standard_FactoryTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -54,14 +54,14 @@ class Client_Html_Catalog_Detail_FactoryTest extends MW_Unittest_Testcase
 
 	public function testCreateClient()
 	{
-		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_templatePaths );
+		$client = Client_Html_Basket_Standard_Factory::createClient( $this->_context, $this->_templatePaths );
 		$this->assertInstanceOf( 'Client_Html_Interface', $client );
 	}
 
 
 	public function testCreateClientName()
 	{
-		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_templatePaths, 'Default' );
+		$client = Client_Html_Basket_Standard_Factory::createClient( $this->_context, $this->_templatePaths, 'Default' );
 		$this->assertInstanceOf( 'Client_Html_Interface', $client );
 	}
 
@@ -69,14 +69,14 @@ class Client_Html_Catalog_Detail_FactoryTest extends MW_Unittest_Testcase
 	public function testCreateClientNameInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_templatePaths, '$$$' );
+		Client_Html_Basket_Standard_Factory::createClient( $this->_context, $this->_templatePaths, '$$$' );
 	}
 
 
 	public function testCreateClientNameNotFound()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_templatePaths, 'notfound' );
+		Client_Html_Basket_Standard_Factory::createClient( $this->_context, $this->_templatePaths, 'notfound' );
 	}
 
 }

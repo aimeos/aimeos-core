@@ -89,7 +89,7 @@ $sites = $this->sites();
 
 					<div id="content" class="clearfix">
 						<div id="contentLeft">
-							<?php echo $this->filter->getBody(); ?>
+							<?php if( isset( $this->filter ) ) { echo $this->filter->getBody(); } ?>
 						</div>
 						<div id="contentRight">
 							<?php echo $this->layout()->content; ?>

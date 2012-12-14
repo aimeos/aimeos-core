@@ -10,7 +10,7 @@
 /**
  * Test class for MW_View_Helper_Url.
  */
-class MW_View_Helper_UrlTest extends MW_Unittest_Testcase
+class MW_View_Helper_Url_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_object;
 
@@ -23,7 +23,7 @@ class MW_View_Helper_UrlTest extends MW_Unittest_Testcase
 	 */
 	public static function main()
 	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_View_Helper_Url');
+		$suite  = new PHPUnit_Framework_TestSuite('MW_View_Helper_Url_Default');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -37,7 +37,7 @@ class MW_View_Helper_UrlTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$this->_object = new MW_View_Helper_Url( $view, '/baseurl/' );
+		$this->_object = new MW_View_Helper_Url_Default( $view, '/baseurl/' );
 	}
 
 

@@ -10,29 +10,29 @@
 
 
 /**
- * View helper class for building URLs.
+ * View helper class for building URLs using Zend Router.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Url
+class MW_View_Helper_Url_Zend
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_baseUrl;
+	private $_router;
 
 
 	/**
 	 * Initializes the URL view helper.
 	 *
 	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param string $baseUrl URL which acts as base for all constructed URLs
+	 * @param Zend_Controller_Router_Interface $router Zend Router implementation
 	 */
-	public function __construct( $view, $baseUrl )
+	public function __construct( $view, Zend_Controller_Router_Interface $router )
 	{
 		parent::__construct( $view );
 
-		$this->_baseUrl = rtrim( $baseUrl, '/' );
+		$this->_router = $router;
 	}
 
 
@@ -48,16 +48,12 @@ class MW_View_Helper_Url
 	 */
 	public function transform( $target = null, $controller = null, $action = null, array $params = array(), array $trailing = array() )
 	{
-		$path = ( $target !== null ? $target . '/' : '' );
-		$path .= ( $controller !== null ? $controller . '/' : '' );
-		$path .= ( $action !== null ? $action . '/' : '' );
+		$mvc = array( 'controller' => $controller, 'action' => $action );
 
-		$parameter = ( count( $params ) > 0 ? '?' . http_build_query( $params ) : '' );
-		$pretty = ( count( $trailing ) > 0 ? implode( '/', $trailing ) : '' );
+		if( !empty( $trailing ) ) {
+			$mvc['trailing'] = join( '-', $trailing );
+		}
 
-		$badchars = array( ' ', '&', '%', '?', '#', '=', '{', '}', '|', '\\', '^', '~', '[', ']', '`' );
-		$pretty = str_replace( $badchars, '-', $pretty );
-
-		return $this->_baseUrl . '/' . $path . $pretty . $parameter;
+		return $this->_router->assemble( $mvc + $params, $target, true );
 	}
 }
