@@ -58,7 +58,8 @@ class TestHelper
 
 
 		//$conf = new MW_Config_Zend( new Zend_Config( array(), true ), $paths );
-		$conf = new MW_Config_Array( array(), $paths );
+		$innerConf = new MW_Config_Array( array(), $paths );
+		$conf = new MW_Config_Decorator_Cache( $innerConf );
 		$ctx->setConfig( $conf );
 
 
