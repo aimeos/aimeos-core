@@ -31,7 +31,7 @@ class Controller_ExtJS_Locale_Site_Default
 	{
 		parent::__construct( $context, 'Locale_Site' );
 
-		$this->_manager = MShop_Locale_Manager_Factory::createManager( $context )->getSubManager( 'site', 'Enterprise' );
+		$this->_manager = MShop_Locale_Manager_Factory::createManager( $context )->getSubManager( 'site' );
 	}
 
 

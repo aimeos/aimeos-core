@@ -50,7 +50,6 @@ Ext.ux.ItemRegistry.registerItem = function(key, itemkey, item, pos) {
         Ext.ux.ItemRegistry.itemMap[key] = {};
     }
 
-//    Ext.ux.ItemRegistry.itemMap[key] = {};
 	Ext.ux.ItemRegistry.itemMap[key][itemkey] = {
         item: item,
         pos: pos
@@ -81,14 +80,13 @@ Ext.ux.ItemRegistry.prototype = {
         }, this);
 
         var regItems = Ext.ux.ItemRegistry.itemMap[this.key] || [];
-//        console.log(regItems);
         
-        Ext.each(regItems[this.key], function(reg) {
-            var addItem = this.getItem(reg),
-                addPos = null;
-            console.log(Ext.ux.ItemRegistry.itemMap[this.key]);
-            // insert item 
-            this.cmp.items.each(function(item, idx) {
+        
+        Ext.iterate(regItems, function(key, value) {
+        	var addItem = this.getItem(value),
+            addPos = null;
+        
+        	this.cmp.items.each(function(item, idx) {
                 if (addItem.registerdItemPos < item.registerdItemPos) {
                     this.cmp.insert(idx, addItem);
                     addPos = idx;
@@ -101,7 +99,7 @@ Ext.ux.ItemRegistry.prototype = {
                 this.cmp.add(addItem);
             }
         }, this);
-    },
+     },
 
     getItem: function(reg) {
         var def = reg.item,
