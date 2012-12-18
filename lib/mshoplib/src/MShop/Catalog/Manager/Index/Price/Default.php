@@ -120,27 +120,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			$submanager->deleteItem( $id );
 		}
 
-
-		$context = $this->_getContext();
-		$siteid = $context->getLocale()->getSiteId();
-
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/price/default/item/delete' );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$this->deleteItems( array( $id ) );
 	}
 
 
