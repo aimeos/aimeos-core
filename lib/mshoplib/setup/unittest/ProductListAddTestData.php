@@ -85,7 +85,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 
 
 	/**
-	 * Gets required attribute item ids.
+	 * Returns required attribute item ids.
 	 *
 	 * @param array $keys List of keys for search
 	 * @return array $refIds List with referenced Ids
@@ -139,7 +139,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 
 
 	/**
-	 * Gets required media item ids.
+	 * Returns required media item ids.
 	 *
 	 * @param array $keys List of keys for search
 	 * @return array $refIds List with referenced Ids
@@ -172,7 +172,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 
 
 	/**
-	 * Gets required price item ids.
+	 * Returns required price item ids.
 	 *
 	 * @param array $keys List with referenced Ids
 	 * @return array $refIds List with referenced Ids
@@ -228,7 +228,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 
 
 	/**
-	 * Gets required text item ids.
+	 * Returns required text item ids.
 	 *
 	 * @param array $keys List of keys for search
 	 * @throws MW_Setup_Exception If no type ID is found
@@ -260,7 +260,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 
 
 	/**
-	 * Gets the product tag test data.
+	 * Returns the product tag test data.
 	 *
 	 * @param MShop_Product_Manager_Interface $productManager Product Manager
 	 * @param array $testdata Associative list of key/list pairs
