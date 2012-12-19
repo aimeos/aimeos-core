@@ -176,6 +176,29 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				width : 120,
 				format : 'Y-m-d H:i:s',
 				hidden : true
+			},
+			{
+				xtype : 'datecolumn',
+				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'ctime',
+				header : _('Created'),
+				width : 120,
+				format : 'Y-m-d H:i:s',
+				hidden : true
+			},
+			{
+				xtype : 'datecolumn',
+				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'mtime',
+				header : _('Last modified'),
+				width : 120,
+				format : 'Y-m-d H:i:s',
+				hidden : true
+			},
+			{
+				xtype : 'gridcolumn',
+				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'editor',
+				header : _('Editor'),
+				width : 50,
+				hidden : true
 			}
 		].concat(this.getAdditionalColumns() || []);
 	}
