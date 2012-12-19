@@ -300,10 +300,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 						$stmt->bind( 4, $refItem->getLanguageId() );
 						$stmt->bind( 5, $listType );
 						$stmt->bind( 6, $refItem->getType() );
-						$stmt->bind( 7, $refItem->getContent() );
-						$stmt->bind( 8, $date );//mtime
-						$stmt->bind( 9, $editor );
-						$stmt->bind( 10, $date );//ctime
+						$stmt->bind( 7, 'product' );
+						$stmt->bind( 8, $refItem->getContent() );
+						$stmt->bind( 9, $date );//mtime
+						$stmt->bind( 10, $editor );
+						$stmt->bind( 11, $date );//ctime
 						$stmt->execute()->finish();
 					}
 				}
@@ -320,10 +321,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 					$stmt->bind( 4, $locale->getLanguageId() );
 					$stmt->bind( 5, 'default' );
 					$stmt->bind( 6, 'name' );
-					$stmt->bind( 7, $item->getLabel() );
-					$stmt->bind( 8, $date );//mtime
-					$stmt->bind( 9, $editor, MW_DB_Statement_Abstract::PARAM_STR );
-					$stmt->bind( 10, $date );//ctime
+					$stmt->bind( 7, 'product' );
+					$stmt->bind( 8, $item->getLabel() );
+					$stmt->bind( 9, $date );//mtime
+					$stmt->bind( 10, $editor, MW_DB_Statement_Abstract::PARAM_STR );
+					$stmt->bind( 11, $date );//ctime
 					$stmt->execute()->finish();
 				}
 			}
@@ -446,11 +448,12 @@ class MShop_Catalog_Manager_Index_Text_Default
 	{
 		$attrIds = array();
 		$prodIds = array();
-		foreach( $items as $item ) {
-			foreach( $item->getRefItems( 'attribute' ) as $attrItem )
+		foreach( $items as $item )
+		{
+			foreach( $item->getRefItems( 'attribute', 'default' ) as $attrItem )
 			{
 				$attrIds[$attrItem->getId()] = $attrItem->getId();
-				$prodIds[$attrItem->getId()] = $item->getId();
+				$prodIds[$attrItem->getId()][] = $item->getId();
 			}
 		}
 
@@ -480,7 +483,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			foreach ( $attributeItems as $item )
 			{
 				$listTypes = array();
-				foreach( $item->getListItems( 'text' ) as $listItem ) {
+				foreach( $item->getListItems( 'text', 'default' ) as $listItem ) {
 					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
 				}
 
@@ -495,17 +498,21 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 					foreach( $listTypes[ $refItem->getId() ] as $listType )
 					{
-						$stmt->bind( 1, $prodIds[$item->getId()], MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 3, $refItem->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 4, $refItem->getLanguageId() );
-						$stmt->bind( 5, $listType );
-						$stmt->bind( 6, $refItem->getType() );
-						$stmt->bind( 7, $refItem->getContent() );
-						$stmt->bind( 8, $date );//mtime
-						$stmt->bind( 9, $editor );
-						$stmt->bind( 10, $date );//ctime
-						$stmt->execute()->finish();
+						foreach( $prodIds[$item->getId()] as $idx => $productId )
+						{
+							$stmt->bind( 1, $productId, MW_DB_Statement_Abstract::PARAM_INT );
+							$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+							$stmt->bind( 3, $refItem->getId(), MW_DB_Statement_Abstract::PARAM_INT );
+							$stmt->bind( 4, $refItem->getLanguageId() );
+							$stmt->bind( 5, $listType );
+							$stmt->bind( 6, $refItem->getType() );
+							$stmt->bind( 7, 'attribute' );
+							$stmt->bind( 8, $refItem->getContent() );
+							$stmt->bind( 9, $date );//mtime
+							$stmt->bind( 10, $editor );
+							$stmt->bind( 11, $date );//ctime
+							$stmt->execute()->finish();
+						}
 					}
 				}
 
@@ -521,10 +528,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 					$stmt->bind( 4, $locale->getLanguageId() );
 					$stmt->bind( 5, 'default' );
 					$stmt->bind( 6, 'name' );
-					$stmt->bind( 7, $item->getLabel() );
-					$stmt->bind( 8, $date );//mtime
-					$stmt->bind( 9, $editor, MW_DB_Statement_Abstract::PARAM_STR );
-					$stmt->bind( 10, $date );//ctime
+					$stmt->bind( 7, 'attribute' );
+					$stmt->bind( 8, $item->getLabel() );
+					$stmt->bind( 9, $date );//mtime
+					$stmt->bind( 10, $editor, MW_DB_Statement_Abstract::PARAM_STR );
+					$stmt->bind( 11, $date );//ctime
 					$stmt->execute()->finish();
 				}
 			}

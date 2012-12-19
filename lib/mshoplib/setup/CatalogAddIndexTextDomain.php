@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ * @version $Id$
+ */
+
+
+/**
+ * Adds domain column to catalog index text table.
+ */
+class MW_Setup_Task_CatalogAddIndexTextDomain extends MW_Setup_Task_Abstract
+{
+	private $_mysql = array(
+		'mshop_catalog_index_text.domain' => array(
+			'TRUNCATE TABLE "mshop_catalog_index_text"',
+			'ALTER TABLE "mshop_catalog_index_text" ADD "domain" VARCHAR(32) NOT NULL AFTER "type"',
+		),
+	);
+
+	/**
+	 * Returns the list of task names which this task depends on.
+	 *
+	 * @return array List of task names
+	 */
+	public function getPreDependencies()
+	{
+		return array();
+	}
+
+
+	/**
+	 * Returns the list of task names which depends on this task.
+	 *
+	 * @return array List of task names
+	 */
+	public function getPostDependencies()
+	{
+		return array('TablesCreateMShop');
+	}
+
+
+	/**
+	 * Executes the task for MySQL databases.
+	 */
+	protected function _mysql()
+	{
+		$this->_process( $this->_mysql );
+	}
+
+	/**
+	 * Add column to table if it doesn't exist.
+	 *
+	 * @param array $stmts List of SQL statements to execute for adding columns
+	 */
+	protected function _process( $stmts )
+	{
+		$this->_msg( 'Adding domain column to catalog index text table', 0 );
+		$this->_status( '' );
+
+		foreach( $stmts as $id => $sql )
+		{
+			$parts = explode( '.', $id );
+			$this->_msg( sprintf( 'Checking table "%1$s" for column "%2$s"', $parts[0], $parts[1] ), 1 );
+
+			if( $this->_schema->tableExists( $parts[0] ) === true
+				&& $this->_schema->columnExists( $parts[0], $parts[1] ) === false )
+			{
+				$this->_executeList( $sql );
+				$this->_status( 'added' );
+			}
+			else
+			{
+				$this->_status( 'OK' );
+			}
+		}
+	}
+}
