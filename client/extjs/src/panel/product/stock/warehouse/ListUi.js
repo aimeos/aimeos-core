@@ -93,4 +93,4 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
 Ext.reg( 'MShop.panel.stock.warehouse.listui', MShop.panel.stock.warehouse.ListUi );
 
-Ext.ux.ItemRegistry.registerItem( 'MShop.MainTabPanel', MShop.panel.stock.warehouse.ListUi, 90 );
+Ext.ux.ItemRegistry.registerItem( 'MShop.MainTabPanel', 'MShop.panel.stock.warehouse.listui', MShop.panel.stock.warehouse.ListUi, 90 );

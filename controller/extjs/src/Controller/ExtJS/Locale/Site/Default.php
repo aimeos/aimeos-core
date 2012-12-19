@@ -73,7 +73,7 @@ class Controller_ExtJS_Locale_Site_Default
 			if( isset( $entry->{'locale.site.id'} ) ) { $item->setId( $entry->{'locale.site.id'} ); }
 			if( isset( $entry->{'locale.site.code'} ) ) { $item->setCode( $entry->{'locale.site.code'} ); }
 			if( isset( $entry->{'locale.site.label'} ) ) { $item->setLabel( $entry->{'locale.site.label'} ); }
-			if( isset( $entry->{'locale.site.config'} ) ) { $item->setConfig( $entry->{'locale.site.config'} ); }
+			if( isset( $entry->{'locale.site.config'} ) ) { $item->setConfig( (array) $entry->{'locale.site.config'} ); }
 			if( isset( $entry->{'locale.site.status'} ) ) { $item->setStatus( $entry->{'locale.site.status'} ); }
 
 			$this->_manager->saveItem( $item );
@@ -141,7 +141,7 @@ class Controller_ExtJS_Locale_Site_Default
 			if( isset( $entry->{'locale.site.id'} ) ) { $item->setId( $entry->{'locale.site.id'} ); }
 			if( isset( $entry->{'locale.site.code'} ) ) { $item->setCode( $entry->{'locale.site.code'} ); }
 			if( isset( $entry->{'locale.site.label'} ) ) { $item->setLabel( $entry->{'locale.site.label'} ); }
-			if( isset( $entry->{'locale.site.config'} ) ) { $item->setConfig( $entry->{'locale.site.config'} ); }
+			if( isset( $entry->{'locale.site.config'} ) ) { $item->setConfig( (array) $entry->{'locale.site.config'} ); }
 			if( isset( $entry->{'locale.site.status'} ) ) { $item->setStatus( $entry->{'locale.site.status'} ); }
 
 			$manager->insertItem( $item, $parentId, $refId );

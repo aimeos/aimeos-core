@@ -110,4 +110,4 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 Ext.reg('MShop.panel.locale.listui', MShop.panel.locale.ListUi);
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', MShop.panel.locale.ListUi, 80);
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.locale.listui', MShop.panel.locale.ListUi, 80);

@@ -130,4 +130,4 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 Ext.reg('MShop.panel.order.listui', MShop.panel.order.ListUi);
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', MShop.panel.order.ListUi, 40);
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.order.listui', MShop.panel.order.ListUi, 40);

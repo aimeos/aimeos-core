@@ -52,4 +52,4 @@ MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
 Ext.reg('MShop.panel.portal.itemui', MShop.panel.portal.ItemUi);
 
 //hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', MShop.panel.portal.ItemUi, 10);
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.portal.itemui', MShop.panel.portal.ItemUi, 10);
