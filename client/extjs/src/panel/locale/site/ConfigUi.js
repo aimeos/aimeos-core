@@ -10,6 +10,7 @@ Ext.ns('MShop.panel.locale.site');
 MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 
 	stripeRows: true,
+	autoExpandColumn : 'locale-site-config-value',
 
 	initComponent: function() {
 		this.title = _('Configuration');		
@@ -60,7 +61,7 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 			defaults: { width: 250, sortable: true },
 			columns: [
 				{header: _('Name'), dataIndex: 'name', editor: { xtype: 'textfield'}},
-				{header: _('Value'), dataIndex: 'value', editor: { xtype: 'textfield'}}
+				{header: _('Value'), dataIndex: 'value', editor: { xtype: 'textfield'}, id:'locale-site-config-value'}
 			]
 		});
 	},
