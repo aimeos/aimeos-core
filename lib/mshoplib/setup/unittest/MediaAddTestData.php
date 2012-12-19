@@ -82,7 +82,9 @@ class MW_Setup_Task_MediaAddTestData extends MW_Setup_Task_Abstract
 
 		$mtypeIds = array();
 		$mtype = $mediaTypeManager->createItem();
+
 		$this->_conn->begin();
+
 		foreach( $testdata['media/type'] as $key => $dataset )
 		{
 			$mtype->setId( null );

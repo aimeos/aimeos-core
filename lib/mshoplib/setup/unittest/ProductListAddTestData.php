@@ -344,7 +344,9 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 		//LIST-PRODUCT
 		$listItemTypeIds = array();
 		$listItemType = $productListTypeManager->createItem();
+
 		$this->_conn->begin();
+
 		foreach( $testdata['product/list/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );

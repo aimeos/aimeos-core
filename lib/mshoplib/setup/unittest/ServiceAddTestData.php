@@ -82,7 +82,9 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 
 		$typeIds = array();
 		$type = $serviceTypeManager->createItem();
+
 		$this->_conn->begin();
+
 		foreach( $testdata['service/type'] as $key => $dataset )
 		{
 			$type->setId( null );

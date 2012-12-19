@@ -82,7 +82,9 @@ class MW_Setup_Task_PriceAddTestData extends MW_Setup_Task_Abstract
 
 		$ptypeIds = array();
 		$ptype = $priceTypeManager->createItem();
+
 		$this->_conn->begin();
+
 		foreach( $testdata['price/type'] as $key => $dataset )
 		{
 			$ptype->setId( null );

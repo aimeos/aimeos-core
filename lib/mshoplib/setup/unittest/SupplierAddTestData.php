@@ -81,7 +81,9 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 
 		$supIds = array();
 		$supplier = $supplierManager->createItem();
+
 		$this->_conn->begin();
+
 		foreach( $testdata['supplier'] as $key => $dataset )
 		{
 			$supplier->setId( null );

@@ -145,7 +145,9 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 
 		$tListTypeIds = array();
 		$tListType = $textListTypeManager->createItem();
+
 		$this->_conn->begin();
+
 		foreach( $testdata['text/list/type'] as $key => $dataset )
 		{
 			$tListType->setId( null );
