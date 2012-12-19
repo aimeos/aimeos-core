@@ -79,6 +79,9 @@ class MW_Setup_Task_LogAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$log = $adminLogManager->createItem();
+
+		$this->_conn->begin();
+
 		foreach( $testdata['log'] as $dataset )
 		{
 			$log->setId( null );
@@ -89,6 +92,8 @@ class MW_Setup_Task_LogAddTestData extends MW_Setup_Task_Abstract
 
 			$adminLogManager->saveItem( $log, false );
 		}
+
+		$this->_conn->commit();
 	}
 
 }
