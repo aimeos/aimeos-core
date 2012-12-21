@@ -402,21 +402,21 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Customer_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_Address_' . $name;
 		$interface = 'MShop_Common_Manager_Address_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Customer_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 		}
 
 		$config = $this->_context->getConfig()->get( $confpath, $confpath );
 		$manager = new $classname( $this->_context, $config, $addressSearchConfig );
 
 		if( ( $manager instanceof $interface ) === false ) {
-			throw new MShop_Product_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
 		}
 
 		return $manager;
