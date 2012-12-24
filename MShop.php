@@ -23,13 +23,17 @@ class MShop
 	 *
 	 * @param array $extdirs List of directories to look for manifest files (or sub-directories thereof)
 	 * @param boolean $defaultdir If default extension directory should be included automatically
+	 * @param string|null $basedir Arcavias core path (optional, dirname(__FILE__) if null)
 	 */
-	public function __construct( array $extdirs = array(), $defaultdir = true )
+	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$basedir = dirname(__FILE__);
 
-		if( $defaultdir ) {
+		if( $basedir === null ) {
+			$basedir = dirname( __FILE__ );
+		}
+
+		if( $defaultdir === true ) {
 			$extdirs[] = $basedir . DIRECTORY_SEPARATOR . 'ext';
 		}
 
@@ -98,6 +102,32 @@ class MShop
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Returns the list of paths for each domain where the translation files are located.
+	 *
+	 * @return array List of key value pairs where the key is the domain and the value for the path
+	 */
+	public function getI18nPaths()
+	{
+		$paths = array();
+
+		foreach ( $this->_manifests as $basePath => $manifest )
+		{
+			if ( isset( $manifest['i18n'] ) )
+			{
+				foreach( $manifest['i18n'] as $domain => $location )
+				{
+					if ( !isset($paths[ $domain ]) ) {
+						$paths[ $domain ] = $basePath . DIRECTORY_SEPARATOR . $location;
+					}
+				}
+			}
+		}
+
+		return $paths;
 	}
 
 
