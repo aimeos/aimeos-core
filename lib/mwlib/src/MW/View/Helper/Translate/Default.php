@@ -47,6 +47,10 @@ class MW_View_Helper_Translate_Default
 	 */
 	public function transform( $domain, $singular, $plural = '', $number = 1 )
 	{
-		return $this->_translator->dn( $domain, $singular, $plural, $number );
+		if( $plural !== '' ) {
+			return $this->_translator->dn( $domain, $singular, $plural, $number );
+		}
+
+		return $this->_translator->dt( $domain, $singular );
 	}
 }

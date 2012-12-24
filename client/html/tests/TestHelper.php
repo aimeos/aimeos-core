@@ -40,7 +40,8 @@ class TestHelper
 		{
 			self::$_view = new MW_View_Default();
 
-			$helper = new MW_View_Helper_Translate_Default( self::$_view, new MW_Translation_None( 'en_GB' ) );
+			$trans = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'de_DE', array('disableNotices'=>true) );
+			$helper = new MW_View_Helper_Translate_Default( self::$_view, $trans );
 			self::$_view->addHelper( 'translate', $helper );
 
 			$helper = new MW_View_Helper_Url_Default( self::$_view, 'baseurl' );

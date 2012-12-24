@@ -125,9 +125,19 @@
 	</target>
 
 
-	<target name="deploy" description="Executes all deployments" depends="clean">
+	<target name="i18n" description="Creates all translation files">
+		<phing target="i18n" dir="client/html" />
+	</target>
+
+
+	<target name="build" description="Creates all files to be generated" >
 		<taskdef name="jsbpackages" classname="dev.phing.MShopJsbPackageTask" />
 		<jsbpackages />
+		<phing target="build" dir="client/html" />
+    </target>
+
+
+	<target name="deploy" description="Executes all deployments" depends="clean,build">
 		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
 		<reflexive>
 		  <fileset dir="." includes="manifest.php" />
