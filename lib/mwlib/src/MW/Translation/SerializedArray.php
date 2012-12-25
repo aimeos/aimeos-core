@@ -111,6 +111,17 @@ class MW_Translation_SerializedArray
 
 
 	/**
+	 * Returns the current locale string.
+	 *
+	 * @return string ISO locale string
+	 */
+	public function getLocale()
+	{
+		return $this->_locale;
+	}
+
+
+	/**
 	 * Gets, adds and loads necessary translation data if it was not set befor.
 	 *
 	 * @param string $domain Translation domain

@@ -103,6 +103,17 @@ class MW_Translation_Zend
 
 
 	/**
+	 * Returns the current locale string.
+	 *
+	 * @return string ISO locale string
+	 */
+	public function getLocale()
+	{
+		return $this->_locale;
+	}
+
+
+	/**
 	 * Returns the initialized Zend translation object which contains the translations.
 	 *
 	 * @param string $domain Translation domain
