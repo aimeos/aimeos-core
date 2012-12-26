@@ -187,4 +187,4 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
 Ext.reg( 'MShop.panel.product.usedbyproductlistui', MShop.panel.product.UsedByProductListUi );
 
 //hook parent product list into the product ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', MShop.panel.product.UsedByProductListUi, 110);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.UsedByProductListUi', MShop.panel.product.UsedByProductListUi, 110);

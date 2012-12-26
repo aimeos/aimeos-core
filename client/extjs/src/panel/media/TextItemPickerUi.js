@@ -8,7 +8,7 @@
 Ext.ns('MShop.panel.media');
 
 // hook text picker into the media ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.media.ItemUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.media.ItemUi', 'MShop.panel.media.TextItemPickerUi', {
 	xtype : 'MShop.panel.text.itempickerui',
 	itemConfig : {
 		recordName : 'Media_List',
