@@ -5,9 +5,9 @@
  */
 
 
-Ext.ns('MShop.panel.order.base.address.delivery');
+Ext.ns('MShop.panel.order.base.address');
 
-MShop.panel.order.base.address.delivery.ItemUi = Ext.extend(Ext.FormPanel, {
+MShop.panel.order.base.address.DeliveryItemUi = Ext.extend(Ext.FormPanel, {
 
 	title : _('Delivery address'),
 	flex: 1,
@@ -97,10 +97,22 @@ MShop.panel.order.base.address.delivery.ItemUi = Ext.extend(Ext.FormPanel, {
 				xtype: 'displayfield',
 				fieldLabel: 'Website',
 				name: 'order.base.address.website'
+			}, {
+				xtype : 'displayfield',
+				fieldLabel : _('Created'),
+				name : 'order.base.address.ctime'
+			}, {
+				xtype : 'displayfield',
+				fieldLabel : _('Last modified'),
+				name : 'order.base.address.mtime'
+			}, {
+				xtype : 'displayfield',
+				fieldLabel : _('Editor'),
+				name : 'order.base.address.editor'
 			} ]
 		} ];
 
-		MShop.panel.order.base.address.delivery.ItemUi.superclass.initComponent.call(this);
+		MShop.panel.order.base.address.DeliveryItemUi.superclass.initComponent.call(this);
 	},
 
 	initStore : MShop.panel.ListItemListUi.prototype.initStore,
@@ -116,7 +128,7 @@ MShop.panel.order.base.address.delivery.ItemUi = Ext.extend(Ext.FormPanel, {
 		this.store.un('write', this.onStoreWrite, this);
 		this.store.un('exception', this.onStoreException, this);
 
-		MShop.panel.order.base.address.ItemUi.superclass.onDestroy.apply(this, arguments);
+		MShop.panel.order.base.address.DeliveryItemUi.superclass.onDestroy.apply(this, arguments);
 	},
 
 	afterRender : function() {
@@ -127,7 +139,7 @@ MShop.panel.order.base.address.delivery.ItemUi = Ext.extend(Ext.FormPanel, {
 
 		this.store.load({});
 
-		MShop.panel.order.base.address.ItemUi.superclass.afterRender.apply(this, arguments);
+		MShop.panel.order.base.address.DeliveryItemUi.superclass.afterRender.apply(this, arguments);
 	},
 
 	onStoreLoad : function() {
@@ -168,7 +180,7 @@ MShop.panel.order.base.address.delivery.ItemUi = Ext.extend(Ext.FormPanel, {
 	}
 });
 
-Ext.reg('MShop.panel.order.base.address.delivery.itemui', MShop.panel.order.base.address.delivery.ItemUi);
+Ext.reg('MShop.panel.order.base.address.deliveryitemui', MShop.panel.order.base.address.DeliveryItemUi);
 
 //hook order base address into the order ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.order.base.address.ItemUi.AddressPanel', MShop.panel.order.base.address.delivery.ItemUi, 20);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.order.base.address.ItemUi', 'MShop.panel.order.base.address.DeliveryItemUi', MShop.panel.order.base.address.DeliveryItemUi, 20);

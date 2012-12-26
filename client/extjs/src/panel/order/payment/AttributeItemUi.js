@@ -242,4 +242,4 @@ MShop.panel.order.base.service.payment.attribute.ItemUi = Ext.extend(Ext.Panel, 
 Ext.reg('MShop.panel.order.base.service.payment.attribute.itemui', MShop.panel.order.base.service.payment.attribute.ItemUi);
 
 //hook order base address into the order ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.order.base.service.payment.ItemUi.DeliveryPanel', MShop.panel.order.base.service.payment.attribute.ItemUi, 20);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.order.base.service.payment.ItemUi', 'MShop.panel.order.base.service.payment.attribute.ItemUi', MShop.panel.order.base.service.payment.attribute.ItemUi, 20);
