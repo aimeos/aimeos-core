@@ -108,7 +108,7 @@ class MShop
 	/**
 	 * Returns the list of paths for each domain where the translation files are located.
 	 *
-	 * @return array List of key value pairs where the key is the domain and the value for the path
+	 * @return array Associative list of i18n domains and lists of absolute paths to the translation directories
 	 */
 	public function getI18nPaths()
 	{
@@ -118,11 +118,8 @@ class MShop
 		{
 			if ( isset( $manifest['i18n'] ) )
 			{
-				foreach( $manifest['i18n'] as $domain => $location )
-				{
-					if ( !isset($paths[ $domain ]) ) {
-						$paths[ $domain ] = $basePath . DIRECTORY_SEPARATOR . $location;
-					}
+				foreach( $manifest['i18n'] as $domain => $location ) {
+					$paths[$domain][] = $basePath . DIRECTORY_SEPARATOR . $location;
 				}
 			}
 		}

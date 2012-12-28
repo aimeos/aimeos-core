@@ -46,13 +46,21 @@ class MW_View_Helper_Config_Default
 	public function transform( $name = null, $default = null )
 	{
 		if( $name === null ) {
-			return $this->_params;
+			return $this->_config;
 		}
 
-		if( isset( $this->_config[$name] ) ) {
-			return $this->_config[$name];
+		$parts = explode( '/', trim( $name, '/' ) );
+		$config = $this->_config;
+
+		foreach( $parts as $part )
+		{
+			if( isset( $config[$part] ) ) {
+				$config = $config[$part];
+			} else {
+				return $default;
+			}
 		}
 
-		return $default;
+		return $config;
 	}
 }
