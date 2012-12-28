@@ -37,7 +37,14 @@ class MW_View_Helper_Config_DefaultTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$view = new MW_View_Default();
-		$config = array( 'page' => 'test' );
+
+		$config = array(
+			'page' => 'test',
+			'sub' => array(
+				'subpage' => 'test2',
+			),
+		);
+
 		$this->_object = new MW_View_Helper_Config_Default( $view, $config );
 	}
 
@@ -58,6 +65,13 @@ class MW_View_Helper_Config_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->assertEquals( 'test', $this->_object->transform( 'page', 'none' ) );
 		$this->assertEquals( 'none', $this->_object->transform( 'missing', 'none' ) );
+	}
+
+
+	public function testTransformPath()
+	{
+		$this->assertEquals( 'test2', $this->_object->transform( 'sub/subpage', 'none' ) );
+		$this->assertEquals( array( 'subpage' => 'test2' ), $this->_object->transform( 'sub' ) );
 	}
 
 
