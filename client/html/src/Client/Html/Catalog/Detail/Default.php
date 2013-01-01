@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  * @version $Id: Default.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
@@ -13,7 +13,7 @@
  * Default implementation of catalog detail section HTML clients.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 class Client_Html_Catalog_Detail_Default
 	extends Client_Html_Abstract
