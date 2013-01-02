@@ -258,7 +258,6 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$node->left = $refNode->left;
 			$node->right = $refNode->left + 1;
 			$node->level = $refNode->level;
-			$parentId = $refNode->getParentId();
 		}
 		else if( $parentId !== null )
 		{

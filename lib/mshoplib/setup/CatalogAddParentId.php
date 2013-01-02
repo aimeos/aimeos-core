@@ -63,14 +63,13 @@ class MW_Setup_Task_CatalogAddParentId extends MW_Setup_Task_Abstract
 			if( $this->_schema->tableExists( $table ) === true	&& $this->_schema->columnExists( $table, 'parentid' ) === false )
 			{
 				$this->_execute( $stmt );
+				$this->_choseSiteId( $table );
 				$this->_status( 'added' );
 			}
 			else
 			{
 				$this->_status( 'OK' );
 			}
-
-			$this->_choseSiteId( $table );
 		}
 	}
 
