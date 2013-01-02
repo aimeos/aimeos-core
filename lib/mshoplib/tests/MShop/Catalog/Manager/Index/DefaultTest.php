@@ -140,18 +140,18 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		$this->_object->saveItem( $item );
 
-		$cntAttributeA = $this->_getValues( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
-		$cntCatalogA = $this->_getValues( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
-		$cntPriceA = $this->_getValues( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
-		$cntTextA = $this->_getValues( $dbm, $sqlText, 'count', $siteId, $item->getId() );
+		$cntAttributeA = $this->_getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
+		$cntCatalogA = $this->_getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
+		$cntPriceA = $this->_getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
+		$cntTextA = $this->_getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
 
 
 		$this->_object->deleteItem( $item->getId() );
 
-		$cntAttributeB = $this->_getValues( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
-		$cntCatalogB = $this->_getValues( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
-		$cntPriceB = $this->_getValues( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
-		$cntTextB = $this->_getValues( $dbm, $sqlText, 'count', $siteId, $item->getId() );
+		$cntAttributeB = $this->_getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
+		$cntCatalogB = $this->_getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
+		$cntPriceB = $this->_getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
+		$cntTextB = $this->_getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
 
 
 		// recreate index for CNE
@@ -653,7 +653,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Gets array if more than one result.
+	 * Gets values.
 	 *
 	 * @param MW_DB_Manager_Interface $dbm
 	 * @param string $sql DB query
@@ -695,11 +695,51 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 			throw $e;
 		}
 
-		if( count( $values ) == 1 ) {
-			return $values[0];
+		return $values;
+	}
+
+	/**
+	 *
+	 * Gets value of a column.
+	 * @param MW_DB_Manager_Interface $dbm
+	 * @param string $sql DB query
+	 * @param string $column Column where to search
+	 * @param integer $siteId Siteid
+	 * @param integer $productId Product id
+	 * @return string $value result
+	 * @throws Exception
+	 */
+	protected function _getValue( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
+	{
+		$value = null;
+		$conn = $dbm->acquire();
+
+		try
+		{
+			$stmt = $conn->create( $sql );
+			$stmt->bind( 1, $siteId, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $productId, MW_DB_Statement_Abstract::PARAM_INT );
+			$result = $stmt->execute();
+
+			if( ( $row = $result->fetch() ) === false ) {
+				throw new Exception( 'No rows available' );
+			}
+
+			if( !isset( $row[$column] ) ) {
+				throw new Exception( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
+			}
+
+			$value = $row[$column];
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
 		}
 
-		return $values;
+		return $value;
 	}
 
 	/**

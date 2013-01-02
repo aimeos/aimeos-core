@@ -450,9 +450,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$prodIds = array();
 		foreach( $items as $item )
 		{
-			foreach( $item->getRefItems( 'attribute', 'default' ) as $attrItem )
-			{
-				$attrIds[$attrItem->getId()] = $attrItem->getId();
+			foreach( $item->getRefItems( 'attribute', null, 'default' ) as $attrItem ) {
 				$prodIds[$attrItem->getId()][] = $item->getId();
 			}
 		}
@@ -461,7 +459,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$search = $attrManager->createSearch(true);
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'attribute.id', $attrIds)
+			$search->compare( '==', 'attribute.id', array_keys( $prodIds ) )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
