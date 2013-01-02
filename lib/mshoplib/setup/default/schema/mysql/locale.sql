@@ -17,6 +17,8 @@ SET SESSION sql_mode='ANSI';
 CREATE TABLE "mshop_locale_site" (
 	-- unique site id
 	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	--parent id
+	"parentid" INTEGER NOT NULL,
 	-- site code
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- name of the site

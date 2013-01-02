@@ -6,11 +6,14 @@
  */
 
 /**
- * Adds code column to catalog table.
+ * Adds parentid column to catalog and locale site table.
  */
 class MW_Setup_Task_CatalogAddParentId extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array( 'ALTER TABLE "mshop_catalog" ADD "parentid" INTEGER NOT NULL AFTER "id"' );
+	private $_mysql = array(
+		'mshop_catalog' => 'ALTER TABLE "mshop_catalog" ADD "parentid" INTEGER NOT NULL AFTER "id"',
+		'mshop_locale_site' => 'ALTER TABLE "mshop_locale_site" ADD "parentid" INTEGER NOT NULL AFTER "id"'
+	);
 
 
 	/**
@@ -51,25 +54,30 @@ class MW_Setup_Task_CatalogAddParentId extends MW_Setup_Task_Abstract
 	 */
 	protected function _process( $stmts )
 	{
-		$this->_msg( 'Adding parentid column to mshop_catalog', 0 );
-		if( $this->_schema->tableExists( 'mshop_catalog' ) === true
-				&& $this->_schema->columnExists( 'mshop_catalog', 'parentid' ) === false )
-		{
-			$this->_executeList( $stmts );
-			$this->_status( 'added' );
-		}
-		else
-		{
-			$this->_status( 'OK' );
-		}
+		$this->_msg( 'Adding parentid column to catalog and locale_site', 0 );
 
-		$this->_choseSiteId();
+		foreach( $this->_mysql as $table => $stmt )
+		{
+			$msg = sprintf( 'Checking parentid column in "%1$s"', $table );
+			$this->_msg( $msg, 1 );
+			if( $this->_schema->tableExists( $table ) === true	&& $this->_schema->columnExists( $table, 'parentid' ) === false )
+			{
+				$this->_execute( $stmt );
+				$this->_status( 'added' );
+			}
+			else
+			{
+				$this->_status( 'OK' );
+			}
+
+			$this->_choseSiteId( $table );
+		}
 	}
 
 
-	private function _choseSiteId()
+	private function _choseSiteId( $table )
 	{
-		$sql = 'SELECT * from "mshop_catalog"';
+		$sql = 'SELECT * from ' . $table;
 
 		$stmt = $this->_conn->create( $sql );
 		$results = $stmt->execute();
@@ -81,11 +89,11 @@ class MW_Setup_Task_CatalogAddParentId extends MW_Setup_Task_Abstract
 		}
 
 		foreach( $trees as $siteid => $tree ) {
-			$this->_setParentId( $tree, $siteid );
+			$this->_setParentId( $table, $tree, $siteid );
 		}
 	}
 
-	private function _setParentId( $nodes = array(), $siteid = null )
+	private function _setParentId( $table, $nodes = array(), $siteid = null )
 	{
 		$maxLvl = count( $nodes );
 		$ids = array();
@@ -113,17 +121,31 @@ class MW_Setup_Task_CatalogAddParentId extends MW_Setup_Task_Abstract
 			}
 		}
 
-		$updatesql = 'UPDATE "mshop_catalog" SET "parentid" = ? WHERE siteid = ? and id = ?';
+		if( $table === 'mshop_catalog' ) {
+			$updatesql = 'UPDATE mshop_catalog SET "parentid" = ? WHERE siteid = ? and id = ?';
 
-		//write to db
-		foreach( $ids as $id => $parentid )
+			foreach( $ids as $id => $parentid )
+			{
+				$stmt = null;
+				$stmt = $this->_conn->create( $updatesql );
+				$stmt->bind( 1, $parentid );
+				$stmt->bind( 2, $siteid );
+				$stmt->bind( 3, $id );
+				$result = $stmt->execute()->finish();
+			}
+		}
+		else
 		{
-			$stmt = null;
-			$stmt = $this->_conn->create( $updatesql );
-			$stmt->bind( 1, $parentid );
-			$stmt->bind( 2, $siteid );
-			$stmt->bind( 3, $id );
-			$result = $stmt->execute()->finish();
+			$updatesql = 'UPDATE mshop_locale_site SET "parentid" = ? WHERE id = ?';
+
+			foreach( $ids as $id => $parentid )
+			{
+				$stmt = null;
+				$stmt = $this->_conn->create( $updatesql );
+				$stmt->bind( 1, $parentid );
+				$stmt->bind( 2, $id );
+				$result = $stmt->execute()->finish();
+			}
 		}
 	}
 }
