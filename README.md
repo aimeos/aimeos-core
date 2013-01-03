@@ -1,4 +1,4 @@
-# Arcavias - high performance e-commerce
+# Arcavias - high performance e-commerce [![Build Status](https://travis-ci.org/Arcavias/arcavias-core.png?branch=master)](https://travis-ci.org/Arcavias/arcavias-core)
 
 ## What is Arcavias?
 
