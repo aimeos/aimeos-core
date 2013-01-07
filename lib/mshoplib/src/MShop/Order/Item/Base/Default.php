@@ -47,7 +47,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 		}
 
 		$this->_values = $values;
-		
+
 		$this->_locale = $locale;
 		$this->_price = $price;
 		$this->_products = $products;
@@ -378,7 +378,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	/**
 	 * Returns the delivery or payment service depending on the given type.
 	 *
-	 * @param string $domain Service type
+	 * @param string $type Service type code like 'payment', 'delivery', etc.
 	 * @return MShop_Order_Item_Base_Serive_Interface Order service item for the requested type
 	 */
 	public function getService( $type )
