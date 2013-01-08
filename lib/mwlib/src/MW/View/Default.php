@@ -125,6 +125,23 @@ class MW_View_Default implements MW_View_Interface
 
 
 	/**
+	 * Returns the value associated to the given key or the default value if the key is not available.
+	 *
+	 * @param string $key Name of the value that should be returned
+	 * @param mixed $default Default value returned if ths key is not available
+	 * @return mixed Value associated to the given key or the default value
+	 */
+	public function get( $key, $default = null )
+	{
+		if( isset( $this->_values[$key] ) ) {
+			return $this->_values[$key];
+		}
+
+		return $default;
+	}
+
+
+	/**
 	 * Renders the output based on the given template file name and the key/value pairs.
 	 *
 	 * @param string $filename File name of the view template
