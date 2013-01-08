@@ -265,7 +265,7 @@ class Controller_Frontend_Basket_Default
 		if( $value instanceof MShop_Common_Item_Address_Interface ) {
 			$address->copyFrom( $value );
 		} else if( is_array( $value ) ) {
-			$address = $this->_createAddressFromArray( $address, $value );
+			$this->_setAddressFromArray( $address, $value );
 		} else {
 			throw new Controller_Frontend_Basket_Exception( sprintf( 'Invalid value for address type "%1$s"', $type ) );
 		}
@@ -334,7 +334,7 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
-	 * Returns an order address object filled with the values from the array.
+	 * Fills the order address object with the values from the array.
 	 *
 	 * @param MShop_Order_Item_Base_Address_Interface $address Address item to store the values into
 	 * @param array $map Associative array of key/value pairs. The keys must be the same as when calling toArray() from
@@ -343,59 +343,71 @@ class Controller_Frontend_Basket_Default
 	 * 	address
 	 * @throws Controller_Frontend_Basket_Exception
 	 */
-	protected function _createAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map )
+	protected function _setAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map )
 	{
+		$errors = array();
 		$prefix = 'order.base.address.';
 
 		foreach( $map as $key => $value )
 		{
-			$value = strip_tags( $value ); // prevent XSS
-
-			switch( $key )
+			try
 			{
-				case $prefix . 'salutation':
-					$address->setSalutation( $value ); break;
-				case $prefix . 'company':
-					$address->setCompany( $value ); break;
-				case $prefix . 'title':
-					$address->setTitle( $value ); break;
-				case $prefix . 'firstname':
-					$address->setFirstname( $value ); break;
-				case $prefix . 'lastname':
-					$address->setLastName( $value ); break;
-				case $prefix . 'address1':
-					$address->setAddress1( $value ); break;
-				case $prefix . 'address2':
-					$address->setAddress2( $value ); break;
-				case $prefix . 'address3':
-					$address->setAddress3( $value ); break;
-				case $prefix . 'postal':
-					$address->setPostal( $value ); break;
-				case $prefix . 'city':
-					$address->setCity( $value ); break;
-				case $prefix . 'state':
-					$address->setState( $value ); break;
-				case $prefix . 'countryid':
-					$address->setCountryId( $value ); break;
-				case $prefix . 'langid':
-					$address->setLanguageId( $value ); break;
-				case $prefix . 'telephone':
-					$address->setTelephone( $value ); break;
-				case $prefix . 'email':
-					$address->setEmail( $value ); break;
-				case $prefix . 'telefax':
-					$address->setTelefax( $value ); break;
-				case $prefix . 'website':
-					$address->setWebsite( $value ); break;
-				case $prefix . 'flag':
-					$address->setFlag( $value ); break;
-				default:
-					$msg = sprintf( 'Invalid address property "%1$s" with value "%2$s"', $key, $value );
-					throw new Controller_Frontend_Basket_Exception( $msg );
+				$value = strip_tags( $value ); // prevent XSS
+
+				switch( $key )
+				{
+					case $prefix . 'salutation':
+						$address->setSalutation( $value ); break;
+					case $prefix . 'company':
+						$address->setCompany( $value ); break;
+					case $prefix . 'title':
+						$address->setTitle( $value ); break;
+					case $prefix . 'firstname':
+						$address->setFirstname( $value ); break;
+					case $prefix . 'lastname':
+						$address->setLastName( $value ); break;
+					case $prefix . 'address1':
+						$address->setAddress1( $value ); break;
+					case $prefix . 'address2':
+						$address->setAddress2( $value ); break;
+					case $prefix . 'address3':
+						$address->setAddress3( $value ); break;
+					case $prefix . 'postal':
+						$address->setPostal( $value ); break;
+					case $prefix . 'city':
+						$address->setCity( $value ); break;
+					case $prefix . 'state':
+						$address->setState( $value ); break;
+					case $prefix . 'countryid':
+						$address->setCountryId( $value ); break;
+					case $prefix . 'langid':
+						$address->setLanguageId( $value ); break;
+					case $prefix . 'telephone':
+						$address->setTelephone( $value ); break;
+					case $prefix . 'email':
+						$address->setEmail( $value ); break;
+					case $prefix . 'telefax':
+						$address->setTelefax( $value ); break;
+					case $prefix . 'website':
+						$address->setWebsite( $value ); break;
+					case $prefix . 'flag':
+						$address->setFlag( $value ); break;
+					default:
+						$msg = sprintf( 'Invalid address property "%1$s" with value "%2$s"', $key, $value );
+						throw new Controller_Frontend_Basket_Exception( $msg );
+				}
+			}
+			catch( Exception $e )
+			{
+				$errors[ $prefix . $key ] = $e->getMessage();
 			}
 		}
 
-		return $address;
+		if( count( $errors ) > 0 )
+		{
+			$msg = 'Invalid address properties, please check your input';
+			throw new Controller_Frontend_Basket_Exception( $msg, 0, null, $errors );
+		}
 	}
 
 
