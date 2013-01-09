@@ -34,7 +34,7 @@ interface MShop_Catalog_Manager_Interface
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
 	 * @return MShop_Catalog_Item_Interface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE );
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, $criteria = null );
 
 
 	/**

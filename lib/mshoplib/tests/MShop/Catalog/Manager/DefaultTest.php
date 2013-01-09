@@ -199,24 +199,91 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testGetTree2()
+// 	public function testGetTree2()
+// 	{
+// 		$search = $this->_object->createSearch();
+// 		$conditions = array(
+// 			$search->compare( '==', 'catalog.code', 'group' ),
+// 			$search->compare( '==', 'catalog.editor', $this->_editor )
+// 		);
+// 		$search->setConditions( $search->combine( '&&', $conditions ) );
+// 		$items = $this->_object->searchItems( $search );
+
+// 		if( ( $item = reset( $items ) ) === false ) {
+// 			throw new Exception( 'Catalog item not found' );
+// 		}
+
+// 		$tree = $this->_object->getTree( $item->getId() );
+
+// 		$test = $tree->getChild(0);
+// 		$this->assertEquals( 'Neu', $test->getLabel() );
+// 	}
+
+
+	public function testGetTreeWithParentIds()
 	{
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'catalog.code', 'group' ),
+			$search->compare( '==', 'catalog.code', array( 'root', 'categories' ) ),
+			$search->compare( '==', 'catalog.editor', $this->_editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$items = $this->_object->searchItems( $search );
+		$parentIds = array();
+
+		foreach( $items as $item ) {
+			$parentIds[ $item->getCode() ] = $item->getId();
+		}
+
+		if( count( $parentIds ) != 2 ) {
+			throw new Exception( 'Not all categories found!' );
+		}
+
+		$search = $this->_object->createSearch();
+		$conditions = array(
+			$search->compare( '==', 'catalog.parentid', array(0,38,40) ),
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+
+		$tree = $this->_object->getTree( $parentIds['root'], array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search );
+
+		$categorycat = $tree->getChild(0);
+		$groupcat = $tree->getChild(1);
+		$groupcatChildren = $groupcat->getChildren();
+		$categorycatChildren = $categorycat->getChildren();
+
+		$this->assertEquals( 'categories', $categorycat->getCode() );
+		$this->assertEquals( 'group', $groupcat->getCode() );
+		$this->assertEquals( array(), $groupcatChildren );
+		$this->assertEquals( 3, count( $categorycatChildren ) );
+	}
+
+	public function testBuild()
+	{
+		$search = $this->_object->createSearch();
+		$conditions = array(
+			$search->compare( '==', 'catalog.code', 'root' ),
 			$search->compare( '==', 'catalog.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->_object->searchItems( $search );
 
-		if( ( $item = reset( $items ) ) === false ) {
+		if( ( $node = reset( $items ) ) === false ) {
 			throw new Exception( 'Catalog item not found' );
 		}
 
-		$tree = $this->_object->getTree( $item->getId() );
+		$search = $this->_object->createSearch();
+		$expr = array(
+// 			$search->compare( '>=', 'catalog.left', 1 ),
+// 			$search->compare( '<=', 'catalog.right', 16 ),
+			$search->compare( '==', 'catalog.parentid', array(0,38,42) ),
+			$search->compare( '<=', 'catalog.level', 3 )
+		);
+		$search->setConditions( $search->combine('&&', $expr) );
 
-		$test = $tree->getChild(0);
-		$this->assertEquals( 'Neu', $test->getLabel() );
+		$nodes = $this->_object->getTree($node->getId(), array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search);
+
+// 		echo var_dump($nodes);
 	}
 
 

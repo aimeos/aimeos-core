@@ -552,7 +552,7 @@ class MShop_Catalog_Manager_Default
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
 	 * @return MShop_Catalog_Item_Interface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, $criteria = null )
 	{
 		$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
 
@@ -561,16 +561,18 @@ class MShop_Catalog_Manager_Default
 			try
 			{
 				$treeMgr = $this->_createTreeManager( $siteId );
-				$node = $treeMgr->getNode( $id, $level );
+				$node = $treeMgr->getNode( $id, $level, $criteria );
 
 				$listItems = $listItemMap = $refIdMap = array();
-				$parentNodeMap = $this->_getUpperNodeMap( $node, $treeMgr );
 				$nodeMap = $this->_getNodeMap( $node );
-				$nodeMap = $nodeMap + $parentNodeMap;
+// 				$nodeMap = $this->_createTree($id, $criteria);
+// 				$node = reset($nodeMap);
 
 				if( count( $ref ) > 0 ) {
 					$listItems = $this->_getListItems( array_keys( $nodeMap ), $ref, 'catalog' );
 				}
+
+// 				echo var_dump(array_keys( $nodeMap ));
 
 				foreach( $listItems as $listItem )
 				{
@@ -594,11 +596,12 @@ class MShop_Catalog_Manager_Default
 				}
 
 				$item = $this->_createItem( $node, array(), $listItems, $refItems );
-				$this->_createTree( $node, $item, $listItemMap, $refItemMap );
+
+				$this->_createTree2( $node, $item, $listItemMap, $refItemMap );
 
 				return $item;
 			}
-			catch( Exception $e ) { ; }
+			catch( Exception $e ) { throw $e; }
 		}
 
 		throw new MShop_Catalog_Exception( sprintf( 'No catalog node found for ID "%1$s"', $id ) );
@@ -698,7 +701,7 @@ class MShop_Catalog_Manager_Default
 	 * @param array $listItemMap Associative list of parent-item-ID / list items for the catalog item
 	 * @param array $refItemMap Associative list of parent-item-ID/domain/items key/value pairs
 	 */
-	protected function _createTree( MW_Tree_Node_Interface $node, MShop_Catalog_Item_Interface $item,
+	protected function _createTree2( MW_Tree_Node_Interface $node, MShop_Catalog_Item_Interface $item,
 		array $listItemMap, array $refItemMap )
 	{
 		foreach( $node->getChildren() as $child )
@@ -716,8 +719,45 @@ class MShop_Catalog_Manager_Default
 			$newItem = $this->_createItem( $child, array(), $listItems, $refItems );
 			$item->addChild( $newItem );
 
-			$this->_createTree( $child, $newItem, $listItemMap, $refItemMap );
+			if( !empty( $parentIds ) && !in_array( $child->getId(), $parentIds ) ){
+				continue;
+			}
+			$this->_createTree2( $child, $newItem, $listItemMap, $refItemMap );
 		}
+	}
+
+
+	protected function _createTree( $nodeid, $criteria )
+	{
+		$siteid = $this->_getContext()->getLocale()->getSiteId();
+		$treeMgr = $this->_createTreeManager($siteid);
+
+// 		$search = $this->createSearch();
+// 		$expr = array(
+// 			$search->compare( '>=', 'catalog.left', $node->left ),
+// 			$search->compare( '<=', 'catalog.right', $node->right ),
+// 			$criteria->getConditions()
+// 		);
+
+
+// 		$search->setConditions( $search->combine( '&&', $expr ) );
+		if(is_null( $criteria ) ) {
+			$criteria = $this->createSearch();
+		}
+
+		$criteria->setSortations( array( $criteria->sort('+', 'catalog.left')) );
+
+		$nodes = $treeMgr->searchNodes($criteria, $nodeid);
+
+		echo "------->".count($nodes)."<-----\n";
+
+
+		return $treeMgr->createTreeFromNodes( $nodes );
+// 		$leveledNodes = array();
+// 		foreach( $nodes as $node )
+// 		{
+// 			$leveledNodes[ $node->getLevel() ]
+// 		}
 	}
 
 
@@ -792,28 +832,6 @@ class MShop_Catalog_Manager_Default
 			$map += $this->_getNodeMap( $child );
 		}
 
-		return $map;
-	}
-
-	/**
-	 * Creates a flat list node items of upper nodes.
-	 *
-	 * @param MW_Tree_Node_Interface $node
-	 */
-	protected function _getUpperNodeMap( MW_Tree_Node_Interface $node, MW_Tree_Manager_DBNestedSet $treeMgr )
-	{
-		$map = array();
-
-		if( $node->getParentId() != 0 )
-		{
-			$parentNode = $treeMgr->getNode( $node->getParentId(), MW_Tree_Manager_Abstract::LEVEL_LIST );
-			$map[ (string) $node->getParentId() ] = $parentNode;
-
-			foreach( $parentNode->getChildren() as $child ) {
-				$map[$child->getId()] = $child;
-			}
-			$map += $this->_getUpperNodeMap( $parentNode, $treeMgr );
-		}
 		return $map;
 	}
 
