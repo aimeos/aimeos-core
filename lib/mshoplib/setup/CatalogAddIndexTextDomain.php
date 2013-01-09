@@ -14,8 +14,8 @@ class MW_Setup_Task_CatalogAddIndexTextDomain extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
 		'mshop_catalog_index_text.domain' => array(
-			'TRUNCATE TABLE "mshop_catalog_index_text"',
 			'ALTER TABLE "mshop_catalog_index_text" ADD "domain" VARCHAR(32) NOT NULL AFTER "type"',
+			'UPDATE "mshop_catalog_index_text" SET "domain" = "product"',
 		),
 	);
 
@@ -59,21 +59,21 @@ class MW_Setup_Task_CatalogAddIndexTextDomain extends MW_Setup_Task_Abstract
 		$this->_msg( 'Adding domain column to catalog index text table', 0 );
 		$this->_status( '' );
 
-		foreach( $stmts as $id => $sql )
-		{
-			$parts = explode( '.', $id );
-			$this->_msg( sprintf( 'Checking table "%1$s" for column "%2$s"', $parts[0], $parts[1] ), 1 );
+		$table = 'mshop_catalog_index_text';
+		$column = 'domain';
 
-			if( $this->_schema->tableExists( $parts[0] ) === true
-				&& $this->_schema->columnExists( $parts[0], $parts[1] ) === false )
-			{
-				$this->_executeList( $sql );
-				$this->_status( 'added' );
-			}
-			else
-			{
-				$this->_status( 'OK' );
-			}
+		$parts = explode( '.', $id );
+		$this->_msg( sprintf( 'Checking table "%1$s" for column "%2$s"', $table, $column ), 1 );
+
+		if( $this->_schema->tableExists( $table ) === true
+			&& $this->_schema->columnExists( $table, $column ) === false )
+		{
+			$this->_executeList( $sql );
+			$this->_status( 'added' );
+		}
+		else
+		{
+			$this->_status( 'OK' );
 		}
 	}
 }

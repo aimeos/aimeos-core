@@ -187,15 +187,18 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$dbm = $context->getDatabaseManager();
 		$siteId = $context->getLocale()->getSiteId();
 
-		$sqlText = 'SELECT "value" FROM "mshop_catalog_index_text"
-			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\'';
+		$sqlProd = 'SELECT "value" FROM "mshop_catalog_index_text"
+			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'product\'';
+		$sqlAttr ='SELECT "value" FROM "mshop_catalog_index_text"
+			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'attribute\'';
 
 		$this->_object->saveItem( $item );
-		$names = $this->_getValues( $dbm, $sqlText, 'value', $siteId, $item->getId() );
+		$attrText = $this->_getValue( $dbm, $sqlAttr, 'value', $siteId, $item->getId() );
+		$prodText = $this->_getValue( $dbm, $sqlProd, 'value', $siteId, $item->getId() );
 		$this->_object->deleteItem( $item->getId() );
 
-		$this->assertContains( '16 discs', $names );
-		$this->assertContains( 'M', $names );
+		$this->assertEquals( '16 discs', $prodText );
+		$this->assertEquals( 'M', $attrText );
 	}
 
 
@@ -651,53 +654,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 2, count( $afterInsertCat ) );
 	}
 
-
-	/**
-	 * Gets values.
-	 *
-	 * @param MW_DB_Manager_Interface $dbm
-	 * @param string $sql DB query
-	 * @param string $column Column where to search
-	 * @param integer $siteId Siteid
-	 * @param integer $productId Product id
-	 * @return mixed $values result
-	 * @throws Exception
-	 */
-	protected function _getValues( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
-	{
-		$values = array();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $siteId, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $productId, MW_DB_Statement_Abstract::PARAM_INT );
-			$result = $stmt->execute();
-
-			if( $result === false ) {
-				throw new Exception( 'No rows available' );
-			}
-
-
-			while( ( $row = $result->fetch() ) !== false ) {
-				if( !isset( $row[$column] ) ) {
-					throw new Exception( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
-				}
-				$values[] = $row[$column];
-			}
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
-
-		return $values;
-	}
-
 	/**
 	 *
 	 * Gets value of a column.
@@ -741,6 +697,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		return $value;
 	}
+
 
 	/**
 	 * Gets product items of catalog index subdomains specified by the key.

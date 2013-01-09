@@ -292,41 +292,15 @@ class MShop_Catalog_Manager_Index_Text_Default
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
-					foreach( $listTypes[ $refItem->getId() ] as $listType )
-					{
-						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 3, $refItem->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 4, $refItem->getLanguageId() );
-						$stmt->bind( 5, $listType );
-						$stmt->bind( 6, $refItem->getType() );
-						$stmt->bind( 7, 'product' );
-						$stmt->bind( 8, $refItem->getContent() );
-						$stmt->bind( 9, $date );//mtime
-						$stmt->bind( 10, $editor );
-						$stmt->bind( 11, $date );//ctime
-						$stmt->execute()->finish();
+					foreach( $listTypes[ $refItem->getId() ] as $listType )	{
+						$this->_writeToDB( $stmt, $item->getId(), $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'product', $refItem->getContent(), $date, $editor );
 					}
 				}
 
 				$names = $item->getRefItems( 'text', 'name' );
 
-				if( empty( $names ) )
-				{
-					$stmt = $this->_getCachedStatement($conn, 'mshop/catalog/manager/index/text/default/item/insert');
-
-					$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 3, null );
-					$stmt->bind( 4, $locale->getLanguageId() );
-					$stmt->bind( 5, 'default' );
-					$stmt->bind( 6, 'name' );
-					$stmt->bind( 7, 'product' );
-					$stmt->bind( 8, $item->getLabel() );
-					$stmt->bind( 9, $date );//mtime
-					$stmt->bind( 10, $editor, MW_DB_Statement_Abstract::PARAM_STR );
-					$stmt->bind( 11, $date );//ctime
-					$stmt->execute()->finish();
+				if( empty( $names ) ) {
+					$this->_writeToDB( $stmt, $item->getId(), $siteid, null, $locale->getLanguageId(), 'default', 'name', 'product', $item->getLabel(), $date, $editor );
 				}
 			}
 
@@ -496,42 +470,16 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 					foreach( $listTypes[ $refItem->getId() ] as $listType )
 					{
-						foreach( $prodIds[$item->getId()] as $idx => $productId )
-						{
-							$stmt->bind( 1, $productId, MW_DB_Statement_Abstract::PARAM_INT );
-							$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-							$stmt->bind( 3, $refItem->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-							$stmt->bind( 4, $refItem->getLanguageId() );
-							$stmt->bind( 5, $listType );
-							$stmt->bind( 6, $refItem->getType() );
-							$stmt->bind( 7, 'attribute' );
-							$stmt->bind( 8, $refItem->getContent() );
-							$stmt->bind( 9, $date );//mtime
-							$stmt->bind( 10, $editor );
-							$stmt->bind( 11, $date );//ctime
-							$stmt->execute()->finish();
+						foreach( $prodIds[$item->getId()] as $idx => $productId ) {
+							$this->_writeToDB( $stmt, $productId, $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'attribute', $refItem->getContent(), $date, $editor );
 						}
 					}
 				}
 
 				$names = $item->getRefItems( 'text', 'name' );
 
-				if( empty( $names ) )
-				{
-					$stmt = $this->_getCachedStatement($conn, 'mshop/catalog/manager/index/text/default/item/insert');
-
-					$stmt->bind( 1, $prodIds[$item->getId()], MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 3, null );
-					$stmt->bind( 4, $locale->getLanguageId() );
-					$stmt->bind( 5, 'default' );
-					$stmt->bind( 6, 'name' );
-					$stmt->bind( 7, 'attribute' );
-					$stmt->bind( 8, $item->getLabel() );
-					$stmt->bind( 9, $date );//mtime
-					$stmt->bind( 10, $editor, MW_DB_Statement_Abstract::PARAM_STR );
-					$stmt->bind( 11, $date );//ctime
-					$stmt->execute()->finish();
+				if( empty( $names ) ) {
+					$this->_writeToDB( $stmt, $prodIds[$item->getId()], $siteid, null, $locale->getLanguageId(), 'default', 'name', 'attribute', $item->getLabel(), $date, $editor );
 				}
 			}
 
@@ -542,5 +490,22 @@ class MShop_Catalog_Manager_Index_Text_Default
 			$dbm->release( $conn );
 			throw $e;
 		}
+	}
+
+
+	protected function _writeToDB( $stmt, $id, $siteid, $refid, $lang, $listtype, $reftype, $domain, $label, $date, $editor )
+	{
+		$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
+		$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+		$stmt->bind( 3, $refid );
+		$stmt->bind( 4, $lang );
+		$stmt->bind( 5, $listtype );
+		$stmt->bind( 6, $reftype );
+		$stmt->bind( 7, $domain );
+		$stmt->bind( 8, $label );
+		$stmt->bind( 9, $date );//mtime
+		$stmt->bind( 10, $editor, MW_DB_Statement_Abstract::PARAM_STR );
+		$stmt->bind( 11, $date );//ctime
+		$stmt->execute()->finish();
 	}
 }
