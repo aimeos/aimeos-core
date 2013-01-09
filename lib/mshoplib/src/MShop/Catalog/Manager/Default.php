@@ -550,9 +550,10 @@ class MShop_Catalog_Manager_Default
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MShop_Catalog_Item_Interface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, $criteria = null )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
 	{
 		$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
 
@@ -565,14 +566,10 @@ class MShop_Catalog_Manager_Default
 
 				$listItems = $listItemMap = $refIdMap = array();
 				$nodeMap = $this->_getNodeMap( $node );
-// 				$nodeMap = $this->_createTree($id, $criteria);
-// 				$node = reset($nodeMap);
 
 				if( count( $ref ) > 0 ) {
 					$listItems = $this->_getListItems( array_keys( $nodeMap ), $ref, 'catalog' );
 				}
-
-// 				echo var_dump(array_keys( $nodeMap ));
 
 				foreach( $listItems as $listItem )
 				{
@@ -596,8 +593,7 @@ class MShop_Catalog_Manager_Default
 				}
 
 				$item = $this->_createItem( $node, array(), $listItems, $refItems );
-
-				$this->_createTree2( $node, $item, $listItemMap, $refItemMap );
+				$this->_createTree( $node, $item, $listItemMap, $refItemMap );
 
 				return $item;
 			}
@@ -701,7 +697,7 @@ class MShop_Catalog_Manager_Default
 	 * @param array $listItemMap Associative list of parent-item-ID / list items for the catalog item
 	 * @param array $refItemMap Associative list of parent-item-ID/domain/items key/value pairs
 	 */
-	protected function _createTree2( MW_Tree_Node_Interface $node, MShop_Catalog_Item_Interface $item,
+	protected function _createTree( MW_Tree_Node_Interface $node, MShop_Catalog_Item_Interface $item,
 		array $listItemMap, array $refItemMap )
 	{
 		foreach( $node->getChildren() as $child )
@@ -722,42 +718,8 @@ class MShop_Catalog_Manager_Default
 			if( !empty( $parentIds ) && !in_array( $child->getId(), $parentIds ) ){
 				continue;
 			}
-			$this->_createTree2( $child, $newItem, $listItemMap, $refItemMap );
+			$this->_createTree( $child, $newItem, $listItemMap, $refItemMap );
 		}
-	}
-
-
-	protected function _createTree( $nodeid, $criteria )
-	{
-		$siteid = $this->_getContext()->getLocale()->getSiteId();
-		$treeMgr = $this->_createTreeManager($siteid);
-
-// 		$search = $this->createSearch();
-// 		$expr = array(
-// 			$search->compare( '>=', 'catalog.left', $node->left ),
-// 			$search->compare( '<=', 'catalog.right', $node->right ),
-// 			$criteria->getConditions()
-// 		);
-
-
-// 		$search->setConditions( $search->combine( '&&', $expr ) );
-		if(is_null( $criteria ) ) {
-			$criteria = $this->createSearch();
-		}
-
-		$criteria->setSortations( array( $criteria->sort('+', 'catalog.left')) );
-
-		$nodes = $treeMgr->searchNodes($criteria, $nodeid);
-
-		echo "------->".count($nodes)."<-----\n";
-
-
-		return $treeMgr->createTreeFromNodes( $nodes );
-// 		$leveledNodes = array();
-// 		foreach( $nodes as $node )
-// 		{
-// 			$leveledNodes[ $node->getLevel() ]
-// 		}
 	}
 
 

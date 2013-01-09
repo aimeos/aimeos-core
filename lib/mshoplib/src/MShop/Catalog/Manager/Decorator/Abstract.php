@@ -40,7 +40,7 @@ abstract class MShop_Catalog_Manager_Decorator_Abstract
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, $criteria = null )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
 	{
 		return $this->_getManager()->getTree( $id, $ref, $level, $criteria );
 	}

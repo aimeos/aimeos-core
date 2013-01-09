@@ -179,9 +179,10 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
 	 */
-	public function getNode( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, $condition = null )
+	public function getNode( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $condition = null )
 	{
 		if( $id === null )
 		{
@@ -215,6 +216,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			);
 			$search->setConditions( $search->combine('&&', $expr) );
 		}
+
 		$types = $this->_getSearchTypes( $this->_searchConfig );
 		$translations = $this->_getSearchTranslations( $this->_searchConfig );
 		$conditions = $search->getConditionString( $types, $translations );
@@ -595,45 +597,6 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 		return $result;
 	}
-
-
-	public function createTreeFromNodes( array $nodes )
-	{
-		$levels = array();
-		foreach( $nodes as $node ) {
-			$levels[$node->level][$node->getId()] = $node;
-		}
-
-		$firstNode2 = reset( $levels );
-		$firstNode = reset( $firstNode2 );
-
-		$tree = $this->_makeTree($levels, $firstNode->level+1, $firstNode);
-
-		return $tree;
-	}
-
-
-	protected function _makeTree( array $nodes, $level, $parent )
-	{
-		$map = array();
-
-		$map[ $parent->getId() ] = $parent;
-
-		if( $level < count($nodes))
-		{
-			foreach( $nodes[$level] as $id => $node )
-			{
-				if($this->_isChild($node, $parent))
-				{
-					$parent->addChild($node);
-					$map += $this->_makeTree($nodes, $level+1, $node);
-				}
-			}
-		}
-
-		return $map;
-	}
-
 
 
 	/**

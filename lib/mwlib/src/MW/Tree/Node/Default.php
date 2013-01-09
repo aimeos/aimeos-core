@@ -24,7 +24,6 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	private $_values = array();
 	private $_children = array();
 	private $_modified = false;
-	private $_parentId;
 
 
 	/**
@@ -56,12 +55,6 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 		if( isset( $values['status'] ) ) {
 			$this->setStatus( $values['status'] );
 			unset( $values['status'] );
-		}
-
-		if( isset( $values['parentid'] ) )
-		{
-			$this->setParentId( $values['parentid'] );
-			unset( $values['parentid'] );
 		}
 
 		$this->_values = $values;
@@ -153,30 +146,6 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 		}
 
 		$this->_id = $id;
-	}
-
-
-	/**
-	 * Returns the parent ID of the node.
-	 *
-	 */
-	public function getParentId()
-	{
-		return $this->_parentId;
-	}
-
-
-	/**
-	 * Sets the parent id of the node.
-	 *
-	 * @param mixed|null $parentId Parent ID of the node
-	 */
-	public function setParentId( $parentId )
-	{
-		if( $this->_parentId == $parentId ) { return; }
-
-		$this->_parentId = $parentId;
-		$this->_modified = true;
 	}
 
 
