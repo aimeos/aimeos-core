@@ -321,9 +321,9 @@ class MShop_Catalog_Manager_Index_Text_Default
 					$stmt->bind( 5, 'default' );
 					$stmt->bind( 6, 'name' );
 					$stmt->bind( 7, $item->getLabel() );
-					$stmt->bind( 8, date('Y-m-d H:i:s', time()) );//mtime
+					$stmt->bind( 8, $date );//mtime
 					$stmt->bind( 9, $context->getEditor(), MW_DB_Statement_Abstract::PARAM_STR );
-					$stmt->bind( 10, date('Y-m-d H:i:s', time()) );//ctime
+					$stmt->bind( 10, $date );//ctime
 					$stmt->execute()->finish();
 				}
 			}

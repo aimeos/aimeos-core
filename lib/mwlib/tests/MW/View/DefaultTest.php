@@ -70,6 +70,16 @@ class MW_View_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGet()
+	{
+		$this->assertEquals( null, $this->_object->get( 'test' ) );
+		$this->assertEquals( 1, $this->_object->get( 'test', 1 ) );
+
+		$this->_object->test = 10;
+		$this->assertEquals( 10, $this->_object->get( 'test' ) );
+	}
+
+
 	public function testCallException()
 	{
 		$this->setExpectedException( 'MW_View_Exception' );

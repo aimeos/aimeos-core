@@ -347,24 +347,6 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testSetBillingAddressById()
-	{
-		$customer = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext() );
-		$search = $customer->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.label', 'unitCustomer001' ) );
-		$result = $customer->searchItems( $search );
-
-		if( ( $customerItem = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No customer item found for label "%1$s".', 'unitCustomer001' ) );
-		}
-
-		$this->_object->setBillingAddress( $customerItem->getId() );
-
-		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
-	}
-
-
 	public function testSetBillingAddressByItem()
 	{
 		$customer = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext() );
@@ -378,7 +360,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No address item with company "Metaways" found' );
 		}
 
-		$this->_object->setBillingAddress( $item );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, $item );
 
 		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
 		$this->assertEquals( 'Metaways', $address->getCompany() );
@@ -388,27 +370,27 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	public function testSetBillingAddressByArray()
 	{
 		$fixture = array(
-			'customer.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
-			'customer.title' => '<br/>Dr.',
-			'customer.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
-			'customer.firstname' => 'firstunit',
-			'customer.lastname' => 'lastunit',
-			'customer.address1' => 'unit str.',
-			'customer.address2' => ' 166',
-			'customer.address3' => '4.OG',
-			'customer.postal' => '22769',
-			'customer.city' => 'Hamburg',
-			'customer.state' => 'Hamburg',
-			'customer.countryid' => 'de',
-			'customer.langid' => 'de',
-			'customer.telephone' => '05554433221',
-			'customer.email' => 'unit.test@metaways.de',
-			'customer.telefax' => '05554433222',
-			'customer.website' => 'www.metaways.de',
-			'customer.flag' => 0,
+			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
+			'order.base.address.title' => '<br/>Dr.',
+			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+			'order.base.address.firstname' => 'firstunit',
+			'order.base.address.lastname' => 'lastunit',
+			'order.base.address.address1' => 'unit str.',
+			'order.base.address.address2' => ' 166',
+			'order.base.address.address3' => '4.OG',
+			'order.base.address.postal' => '22769',
+			'order.base.address.city' => 'Hamburg',
+			'order.base.address.state' => 'Hamburg',
+			'order.base.address.countryid' => 'de',
+			'order.base.address.langid' => 'de',
+			'order.base.address.telephone' => '05554433221',
+			'order.base.address.email' => 'unit.test@metaways.de',
+			'order.base.address.telefax' => '05554433222',
+			'order.base.address.website' => 'www.metaways.de',
+			'order.base.address.flag' => 0,
 		);
 
-		$this->_object->setBillingAddress( $fixture );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, $fixture );
 
 		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
 		$this->assertEquals( 'Metaways', $address->getCompany() );
@@ -420,41 +402,14 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	public function testSetBillingAddressByArrayError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setBillingAddress( array( 'error' => false ) );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, array( 'error' => false ) );
 	}
 
 
 	public function testSetBillingAddressParameterError()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setBillingAddress( 'error' );
-	}
-
-
-	public function testSetBillingAddressByIdError()
-	{
-		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setBillingAddress( -1 );
-	}
-
-
-	public function testSetDeliveryAddressById()
-	{
-		$customer = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext() );
-		$addressManager = $customer->getSubManager( 'address', 'Default' );
-
-		$search = $addressManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.company', 'Metaways' ) );
-		$items = $addressManager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No address item with company "Metaways" found' );
-		}
-
-		$this->_object->setDeliveryAddress( $item->getId() );
-
-		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
-		$this->assertEquals( 'Metaways', $address->getCompany() );
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, 'error' );
 	}
 
 
@@ -471,7 +426,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No address item with company "Metaways" found' );
 		}
 
-		$this->_object->setDeliveryAddress( $item );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $item );
 
 		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
 		$this->assertEquals( 'Metaways', $address->getCompany() );
@@ -481,26 +436,26 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	public function testSetDeliveryAddressByArray()
 	{
 		$fixture = array(
-			'customer.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
-			'customer.address.title' => '<br/>Dr.',
-			'customer.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
-			'customer.address.firstname' => 'firstunit',
-			'customer.address.lastname' => 'lastunit',
-			'customer.address.address1' => 'unit str.',
-			'customer.address.address2' => ' 166',
-			'customer.address.address3' => '4.OG',
-			'customer.address.postal' => '22769',
-			'customer.address.city' => 'Hamburg',
-			'customer.address.state' => 'Hamburg',
-			'customer.address.countryid' => 'de',
-			'customer.address.langid' => 'de',
-			'customer.address.telephone' => '05554433221',
-			'customer.address.email' => 'unit.test@metaways.de',
-			'customer.address.telefax' => '05554433222',
-			'customer.address.website' => 'www.metaways.de',
-			'customer.address.flag' => 0,
+			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
+			'order.base.address.title' => '<br/>Dr.',
+			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+			'order.base.address.firstname' => 'firstunit',
+			'order.base.address.lastname' => 'lastunit',
+			'order.base.address.address1' => 'unit str.',
+			'order.base.address.address2' => ' 166',
+			'order.base.address.address3' => '4.OG',
+			'order.base.address.postal' => '22769',
+			'order.base.address.city' => 'Hamburg',
+			'order.base.address.state' => 'Hamburg',
+			'order.base.address.countryid' => 'de',
+			'order.base.address.langid' => 'de',
+			'order.base.address.telephone' => '05554433221',
+			'order.base.address.email' => 'unit.test@metaways.de',
+			'order.base.address.telefax' => '05554433222',
+			'order.base.address.website' => 'www.metaways.de',
+			'order.base.address.flag' => 0,
 		);
-		$this->_object->setDeliveryAddress( $fixture );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $fixture );
 
 		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
 		$this->assertEquals( 'Metaways', $address->getCompany() );
@@ -512,25 +467,18 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	public function testSetDeliveryAddressByArrayError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setDeliveryAddress( array( 'error' => false ) );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, array( 'error' => false ) );
 	}
 
 
 	public function testSetDeliveryAddressTypeError()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setDeliveryAddress( 'error' );
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, 'error' );
 	}
 
 
-	public function testSetDeliveryAddressByIdError()
-	{
-		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->setDeliveryAddress( -1 );
-	}
-
-
-	public function testSetPaymentOption()
+	public function testSetServicePayment()
 	{
 		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
 
@@ -542,11 +490,11 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception('No item found');
 		}
 
-		$this->_object->setPaymentOption( $service->getId(), array() );
+		$this->_object->setService( 'payment', $service->getId(), array() );
 		$this->assertEquals( 'unitpaymentcode', $this->_object->get()->getService( 'payment' )->getCode() );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setPaymentOption( $service->getId(), array( 'prepay' => true ) );
+		$this->_object->setService( 'payment', $service->getId(), array( 'prepay' => true ) );
 	}
 
 
@@ -563,10 +511,10 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception('No item found');
 		}
 
-		$this->_object->setDeliveryOption( $service->getId(), array() );
+		$this->_object->setService( 'delivery', $service->getId(), array() );
 		$this->assertEquals( 'unitcode', $this->_object->get()->getService( 'delivery' )->getCode() );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setDeliveryOption( $service->getId(), array( 'fast shipping' => true, 'air shipping' => false ) );
+		$this->_object->setService( 'delivery', $service->getId(), array( 'fast shipping' => true, 'air shipping' => false ) );
 	}
 }
