@@ -1,4 +1,5 @@
 config/resource.php
 ext/*
+!client/html/i18n/*.po
+!client/html/i18n/countries/*.po
 *.log
-/nbproject/

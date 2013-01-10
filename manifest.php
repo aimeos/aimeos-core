@@ -37,6 +37,7 @@ return array(
 	),
 	'i18n' => array(
 		'core/client/html' => 'client/html/i18n',
+		'core/client/html/country' => 'client/html/i18n/countries',
 	),
 	'setup' => array(
 		'lib/mshoplib/setup',
