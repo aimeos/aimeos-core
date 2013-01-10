@@ -9,7 +9,7 @@
 ?>
 <div class="arcavias catalog-filter">
 	<form method="GET" action="<?php echo $this->url( $this->config( 'catalog-list-target' ) ); ?>">
-<?php echo $this->filterBody; ?>
+<?php echo $this->get( 'filterBody' ); ?>
 		<button class="standardbutton" type="submit">
 <?php echo $this->translate( 'core/client/html', 'Show' ); ?></button>
 	</form>

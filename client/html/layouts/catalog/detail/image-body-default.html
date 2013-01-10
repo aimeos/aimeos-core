@@ -6,7 +6,11 @@
  * @version $Id: image-body-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-$mediaItems = $this->detailProductItem->getRefItems( 'media', 'default', 'default' );
+if( isset( $this->detailProductItem ) ) {
+	$mediaItems = $this->detailProductItem->getRefItems( 'media', 'default', 'default' );
+} else {
+	$mediaItems = array();
+}
 
 ?>
 <div class="catalog-detail-image">
@@ -24,13 +28,14 @@ $mediaItems = $this->detailProductItem->getRefItems( 'media', 'default', 'defaul
 		<a id="next-thumbs" class="disabled"></a>
 		<div class="thumbs">
 <?php
-$class = 'item selected';
-foreach( $mediaItems as $id => $mediaItem ) {
-	printf( '<a href="#image-%1$s" class="%2$s" style="background-image: url(\'%3$s\')"></a>', $id, $class, $this->config( 'baseurl-content' ) . $mediaItem->getUrl() );
-	$class = 'item';
-}
+	$class = 'item selected';
+	foreach( $mediaItems as $id => $mediaItem )
+	{
+		printf( '<a href="#image-%1$s" class="%2$s" style="background-image: url(\'%3$s\')"></a>', $id, $class, $this->config( 'baseurl-content' ) . $mediaItem->getUrl() );
+		$class = 'item';
+	}
 ?>
 		</div>
 	</div>
-<?php echo $this->imageBody; ?>
+<?php echo $this->get( 'imageBody' ); ?>
 </div>

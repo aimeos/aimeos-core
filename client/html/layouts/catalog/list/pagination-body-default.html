@@ -6,12 +6,13 @@
  * @version $Id: pagination-body-default.html 1354 2012-10-30 11:17:57Z nsendetzky $
  */
 
+$trailingUrl = ( isset( $this->listCatItem ) ? array( $this->listCatItem->getName() ) : array() );
 $target = $this->config( 'catalog-list-target' );
-$trailingUrl = array( $this->listCatItem->getName() );
+$params = $this->get( 'listParams', array() );
 $sort = $this->param( 'l-sort', 'position' );
-$params = $this->listParams;
 
 ?>
+<?php if( $this->get( 'listProductTotal', 0 ) > 0 ) : ?>
 <div class="catalog-list-pagination">
 	<div class="page-sort">
 		<span><?php echo $this->translate( 'core/client/html', 'Sort by:' ); ?></span>
@@ -24,9 +25,10 @@ $params = $this->listParams;
 	<div class="page-browser">
 		<a class="first" href="<?php echo $this->url( $target, 'catalog', 'list', array( 'l-page' => $this->pagiPageFirst ) + $params, $trailingUrl ); ?>">&lt;&lt;</a>
 		<a class="prev" href="<?php echo $this->url( $target, 'catalog', 'list', array( 'l-page' => $this->pagiPagePrev ) + $params, $trailingUrl ); ?>" rel="prev">&lt;</a>
-		<span><?php printf( $this->translate( 'core/client/html', 'Page %1$d of %2$d' ), $this->listPageCurr, $this->pagiPageLast ); ?></span>
+		<span><?php printf( $this->translate( 'core/client/html', 'Page %1$d of %2$d' ), $this->get( 'listPageCurr', 1 ), $this->get( 'pagiPageLast', 1 ) ); ?></span>
 		<a class="next" href="<?php echo $this->url( $target, 'catalog', 'list', array( 'l-page' => $this->pagiPageNext ) + $params, $trailingUrl ); ?>" rel="next">&gt;</a>
 		<a class="last" href="<?php echo $this->url( $target, 'catalog', 'list', array( 'l-page' => $this->pagiPageLast ) + $params, $trailingUrl ); ?>">&gt;&gt;</a>
 	</div>
-<?php echo $this->pagiBody; ?>
+<?php echo $this->get( 'pagiBody' ); ?>
 </div>
+<?php endif; ?>

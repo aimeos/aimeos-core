@@ -5,7 +5,10 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-$price = $this->standardBasket->getPrice();
+if( isset( $this->standardBasket ) ) {
+	$price = $this->standardBasket->getPrice();
+}
+
 $priceFormat = $this->translate( 'core/client/html', '%1$s€' );
 
 ?>
@@ -23,20 +26,21 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s€' );
 				</tr>
 			</thead>
 			<tbody>
-<?php foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
+<?php if( isset( $this->standardBasket ) ) : ?>
+<?php 	foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
 				<tr class="main-row">
 					<td class="main-details">
 						<img src="<?php echo $product->getMediaUrl(); ?>" />
 						<span class="product-name"><?php echo $product->getName(); ?></span>
-<?php	foreach( $product->getAttributes() as $attribute ) : ?>
+<?php		foreach( $product->getAttributes() as $attribute ) : ?>
 						<span class="product-attributename"><?php echo $attribute->getName(); ?></span>
 						<span class="product-attributevalue"><?php echo $attribute->getValue(); ?></span>
-<?php	endforeach; ?>
+<?php		endforeach; ?>
 					</td>
 					<td class="main-quantity">
-<?php	if( $product->getQuantity() > 1 ) : ?>
+<?php		if( $product->getQuantity() > 1 ) : ?>
 						<a href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) ); ?>">-</a>
-<?php	endif; ?>
+<?php		endif; ?>
 						<input type="text" name="<?php echo $this->formparam( array( 'b-prod', $position, 'quantity' ) ); ?>" value="<?php echo $product->getQuantity(); ?>" />
 						<input type="hidden" name="<?php echo $this->formparam( array( 'b-prod', $position, 'position' ) ); ?>" value="<?php echo $position; ?>" />
 						<a href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) ); ?>">+</a>
@@ -47,22 +51,23 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s€' );
 						<a class="minibutton" href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'core/client/html', 'X' ); ?></a>
 					</td>
 				</tr>
-<?php endforeach; ?>
+<?php 	endforeach; ?>
+<?php endif; ?>
 			</tbody>
 			<tfoot>
 				<tr class="main-subtotal">
 					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Sub-total' ); ?></td>
-					<td class="main-price"><?php printf( $priceFormat, $this->number( $price->getValue() ) ); ?></td>
+					<td class="main-price"><?php printf( $priceFormat, $this->number( ( isset( $price ) ? $price->getValue() : 0 ) ) ); ?></td>
 					<td class="main-action"></td>
 				</tr>
 				<tr class="main-shipping">
 					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Shipping' ); ?></td>
-					<td class="main-price"><?php printf( $priceFormat, $this->number( $price->getShipping() ) ); ?></td>
+					<td class="main-price"><?php printf( $priceFormat, $this->number( ( isset( $price ) ? $price->getShipping() : 0 ) ) ); ?></td>
 					<td class="main-action"></td>
 				</tr>
 				<tr class="main-total">
 					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
-					<td class="main-price"><?php printf( $priceFormat, $this->number( $price->getValue() + $price->getShipping() ) ); ?></td>
+					<td class="main-price"><?php printf( $priceFormat, $this->number( ( isset( $price ) ? $price->getValue() + $price->getShipping() : 0 ) ) ); ?></td>
 					<td class="main-action"></td>
 				</tr>
 			</tfoot>
@@ -73,4 +78,4 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s€' );
 		</div>
 	</form>
 </div>
-<?php echo $this->mainBody; ?>
+<?php echo $this->get( 'mainBody' ); ?>

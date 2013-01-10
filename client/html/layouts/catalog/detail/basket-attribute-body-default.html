@@ -10,7 +10,7 @@
 <div class="basket-attribute">
 	<table>
 		<tbody>
-<?php foreach( $this->attributeItems as $type => $attributes ) : ?> 
+<?php foreach( $this->get( 'attributeItems', array() ) as $type => $attributes ) : ?> 
 			<tr>
 				<td><?php echo $this->translate( 'core/client/html', $type ); ?></td>
 				<td>
@@ -35,5 +35,5 @@
 <?php endforeach; ?>
 		</tbody>
 	</table>
-<?php echo $this->attributeBody; ?>
+<?php echo $this->get( 'attributeBody' ); ?>
 </div>
