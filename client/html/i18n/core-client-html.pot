@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-19 22:50+0100\n"
+"POT-Creation-Date: 2013-01-10 20:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: layouts/catalog/list/pagination-body-default.html:17
+#: layouts/catalog/list/pagination-body-default.html:18
 msgid "Sort by:"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:19
+#: layouts/catalog/list/pagination-body-default.html:20
 msgid "Relevance"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:20
+#: layouts/catalog/list/pagination-body-default.html:21
 msgid "Name"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:21
-#: layouts/basket/standard/main-body-default.html:21
+#: layouts/catalog/list/pagination-body-default.html:22
+#: layouts/basket/standard/main-body-default.html:24
 msgid "Price"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:27
+#: layouts/catalog/list/pagination-body-default.html:28
 #, php-format
 msgid "Page %1$d of %2$d"
 msgstr ""
 
 #: layouts/catalog/list/items-body-default.html:9
 #: layouts/catalog/detail/basket-body-default.html:9
-#: layouts/basket/standard/main-body-default.html:9
+#: layouts/basket/standard/main-body-default.html:12
 #, php-format
 msgid "%1$s€"
 msgstr ""
@@ -52,15 +52,15 @@ msgstr ""
 msgid "%1$s%%"
 msgstr ""
 
-#: layouts/catalog/detail/basket-body-default.html:38
+#: layouts/catalog/detail/basket-body-default.html:40
 msgid "Add to basket"
 msgstr ""
 
-#: layouts/catalog/detail/additional-text-body-default.html:10
+#: layouts/catalog/detail/additional-text-body-default.html:17
 msgid "Description"
 msgstr ""
 
-#: layouts/catalog/detail/basic-body-default.html:14
+#: layouts/catalog/detail/basic-body-default.html:15
 msgid "Article no.:"
 msgstr ""
 
@@ -73,34 +73,191 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: layouts/basket/standard/main-body-default.html:19
+#: layouts/basket/standard/main-body-default.html:22
 msgid "Quantity"
 msgstr ""
 
-#: layouts/basket/standard/main-body-default.html:20
+#: layouts/basket/standard/main-body-default.html:23
 msgid "Unit price"
 msgstr ""
 
-#: layouts/basket/standard/main-body-default.html:47
+#: layouts/basket/standard/main-body-default.html:51
 msgid "X"
 msgstr ""
 
-#: layouts/basket/standard/main-body-default.html:54
+#: layouts/basket/standard/main-body-default.html:59
 msgid "Sub-total"
 msgstr ""
 
-#: layouts/basket/standard/main-body-default.html:59
+#: layouts/basket/standard/main-body-default.html:64
 msgid "Shipping"
 msgstr ""
 
-#: layouts/basket/standard/main-body-default.html:64
+#: layouts/basket/standard/main-body-default.html:69
 msgid "Total"
 msgstr ""
 
-#: layouts/basket/standard/main-body-default.html:71
+#: layouts/basket/standard/main-body-default.html:76
 msgid "Update"
 msgstr ""
 
-#: layouts/basket/standard/main-body-default.html:72
+#: layouts/basket/standard/main-body-default.html:77
 msgid "Checkout"
+msgstr ""
+
+#: layouts/checkout/standard/address-body-default.html:17
+#: src/Client/Html/Checkout/Standard/Default.php:12
+msgid "address"
+msgstr ""
+
+#: layouts/checkout/standard/address-body-default.html:21
+msgid "Back"
+msgstr ""
+
+#: layouts/checkout/standard/address-body-default.html:22
+msgid "Next"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:44
+msgid "Delivery address"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:47
+msgid "like billing address"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:64
+#: layouts/checkout/standard/address-billing-body-default.html:60
+msgid "new address"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:68
+#: layouts/checkout/standard/address-billing-body-default.html:64
+msgid "Salutation"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:70
+#: layouts/checkout/standard/address-billing-body-default.html:66
+msgid "Select salutation"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:71
+#: layouts/checkout/standard/address-delivery-body-default.html:78
+#: layouts/checkout/standard/address-billing-body-default.html:67
+#: layouts/checkout/standard/address-billing-body-default.html:74
+msgid "Company"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:72
+#: layouts/checkout/standard/address-billing-body-default.html:68
+msgid "Mr"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:73
+#: layouts/checkout/standard/address-billing-body-default.html:69
+msgid "Mrs"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:74
+#: layouts/checkout/standard/address-billing-body-default.html:70
+msgid "Miss"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:82
+#: layouts/checkout/standard/address-billing-body-default.html:78
+msgid "First name"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:86
+#: layouts/checkout/standard/address-billing-body-default.html:82
+msgid "Last name"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:90
+#: layouts/checkout/standard/address-billing-body-default.html:86
+msgid "Street"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:94
+#: layouts/checkout/standard/address-billing-body-default.html:90
+msgid "Additional"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:98
+#: layouts/checkout/standard/address-billing-body-default.html:94
+msgid "Additional 2"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:102
+#: layouts/checkout/standard/address-billing-body-default.html:98
+msgid "Postal code"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:106
+#: layouts/checkout/standard/address-billing-body-default.html:102
+msgid "City"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:110
+#: layouts/checkout/standard/address-billing-body-default.html:106
+msgid "State"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:114
+#: layouts/checkout/standard/address-billing-body-default.html:110
+msgid "Country"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:117
+#: layouts/checkout/standard/address-billing-body-default.html:113
+msgid "Select country"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:125
+#: layouts/checkout/standard/address-billing-body-default.html:121
+msgid "Language"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:133
+#: layouts/checkout/standard/address-billing-body-default.html:129
+msgid "E-Mail"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:137
+#: layouts/checkout/standard/address-billing-body-default.html:133
+msgid "Telephone"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:141
+#: layouts/checkout/standard/address-billing-body-default.html:137
+msgid "Fax"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:145
+#: layouts/checkout/standard/address-billing-body-default.html:141
+msgid "Web site"
+msgstr ""
+
+#: layouts/checkout/standard/address-billing-body-default.html:44
+msgid "Billing address"
+msgstr ""
+
+#: layouts/checkout/standard/body-default.html:14
+msgid "Basket"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Default.php:12
+msgid "delivery"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Default.php:12
+msgid "payment"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Default.php:12
+msgid "summary"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Default.php:12
+msgid "status"
 msgstr ""
