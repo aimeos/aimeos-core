@@ -88,7 +88,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		unset( $this->object );
 	}
 
-/*
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( 'MShop_Product_Item_Interface', $this->_object->createItem() );
@@ -595,7 +595,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->optimize();
 	}
 
-*/
+
 	public function testRebuildIndex()
 	{
 		$this->_object->rebuildIndex();
@@ -608,9 +608,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$search = $manager->createSearch();
 
 		//delete whole catalog
-		foreach( $manager->searchItems($search) as $item ) {
-			$this->_object->deleteItem( $item->getId() );
-		}
+		$this->_object->deleteItems( array_keys( $manager->searchItems($search) ) );
 
 		$afterDeleteAttr = $this->_getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
 		$afterDeletePrice = $this->_getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
@@ -660,9 +658,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		//delete whole catalog
 		$search = $manager->createSearch();
-		foreach( $manager->searchItems($search) as $item ) {
-			$this->_object->deleteItem( $item->getId() );
-		}
+		$this->_object->deleteItems( array_keys( $manager->searchItems($search) ) );
 
 		// get number of unique categorized products
 		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
@@ -676,7 +672,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$count = count( array_unique( $productIds ) );
 
 		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
-
 		$this->_object->rebuildIndex();
 
 		$afterInsertAttr = $this->_getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );

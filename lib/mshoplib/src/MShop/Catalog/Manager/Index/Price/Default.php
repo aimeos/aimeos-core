@@ -116,10 +116,6 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function deleteItem( $id )
 	{
-		foreach( $this->_submanagers as $submanager ) {
-			$submanager->deleteItem( $id );
-		}
-
 		$this->deleteItems( array( $id ) );
 	}
 
@@ -138,18 +134,30 @@ class MShop_Catalog_Manager_Index_Price_Default
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
+		$sql = $context->getConfig()->get( 'mshop/catalog/manager/index/price/default/item/delete' );
+		
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
+		
+		$types = array(
+			'prodid' => MW_DB_Statement_Abstract::PARAM_STR,
+		);
+		
+		$translations = array(
+			'prodid' => '"prodid"'
+		);
+		
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
+		
 		try
 		{
-			foreach( $ids as $id )
-			{
-				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/price/default/item/delete' );
-				$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->execute()->finish();
-			}
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
+			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->execute()->finish();
 
 			$dbm->release( $conn );
 		}
@@ -158,7 +166,6 @@ class MShop_Catalog_Manager_Index_Price_Default
 			$dbm->release( $conn );
 			throw $e;
 		}
-
 	}
 
 
