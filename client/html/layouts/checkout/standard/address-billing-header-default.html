@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+<?php if( !isset( $this->addressCustomerItem ) ) : ?>
+<style type="text/css">
+.checkout-standard-address .billing-item-new {
+	display: block;
+}
+</style>
+<?php endif; ?>
+<script type="text/javascript">
+<!--
+$(document).ready( function() {
+	$( '.checkout-standard-address' ).on(
+		'click',
+		'.billing-item > input',
+		{ selector: '.checkout-standard-address .address-billing-list' },
+		function( event ) {
+			if( $(this).val() == '' ) {
+				$( event.data.selector ).slideDown( 400 );
+			} else {
+				$( event.data.selector ).slideUp( 400 );
+			}
+		}
+	);
+} );
+// -->
+</script>
+<?php echo $this->get( 'billingHeader' ); ?>
