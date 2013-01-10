@@ -399,7 +399,7 @@ class Controller_Frontend_Basket_Default
 			}
 			catch( Exception $e )
 			{
-				$errors[ $prefix . $key ] = $e->getMessage();
+				$errors[$key] = $e->getMessage();
 			}
 		}
 
