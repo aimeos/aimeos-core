@@ -10,7 +10,7 @@
 
 
 /**
- * Base class for all config decorators.
+ * Common methods for all configuration classes
  *
  * @package MW
  * @subpackage Config
@@ -18,6 +18,7 @@
 abstract class MW_Config_Abstract implements MW_Config_Interface
 {
 	protected $_includeCache = array();
+	protected $_fileCache = array();
 
 
 	/**
@@ -37,5 +38,4 @@ abstract class MW_Config_Abstract implements MW_Config_Interface
 
 		return $add;
 	}
-
 }

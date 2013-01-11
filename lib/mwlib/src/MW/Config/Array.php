@@ -17,11 +17,10 @@
  */
 class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 {
-	private $_config = array();
-	private $_paths = array();
-	private $_cache = array();
-	private $_fileCache = array();
-	private $_negCache = array();
+	protected $_config = array();
+	protected $_cache = array();
+	protected $_negCache = array();
+	protected $_paths = array();
 
 
 	public function __construct( $config = array(), $paths = array() )
@@ -140,6 +139,59 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 
 
 	/**
+	 * Merges a multi-dimensional array into another one
+	 *
+	 * @param array $left Array to be merged into
+	 * @param array $right Array to merge in
+	 */
+ 	protected function _merge( array &$left, array $right )
+	{
+		$match = false;
+		foreach( $left as $lkey => $lvalue )
+		{
+			foreach( $right as $rkey => $rvalue )
+			{
+				if( $lkey == $rkey )
+				{
+					$match = true;
+					if( is_array( $lvalue ) && is_array( $rvalue ) ) {
+						$this->_merge( $lvalue, $rvalue );
+					} else {
+						$lvalue = $rvalue;
+					}
+				}
+			}
+			$left[ $lkey ] = $lvalue;
+		}
+
+		if( $match === false ) {
+			$left = array_merge( $left, $right );
+		}
+	}
+
+
+	/**
+	 * Gets a configuration value from an array
+	 *
+	 * @param Array $path Configuration path to look for inside the array
+	 * @param Array $config The array to search in
+	 */
+	protected function _getFromArray( $path, $config )
+	{
+		$current = array_shift( $path );
+
+		if( isset( $config[ $current ] ) )
+		{
+			if( count( $path ) > 0 ) {
+				return $this->_getFromArray( $path, $config[ $current ] );
+			}
+			return $config[ $current ];
+		}
+		return null;
+	}
+
+	
+	/**
 	 * Finds files within a configuration path
 	 *
 	 * @param array $path configuration path
@@ -223,58 +275,5 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 				}
 			}
 		}
-	}
-
-
-	/**
-	 * Merges a multi-dimensional array into another one
-	 *
-	 * @param array $left Array to be merged into
-	 * @param array $right Array to merge in
-	 */
- 	protected function _merge( array &$left, array $right )
-	{
-		$match = false;
-		foreach( $left as $lkey => $lvalue )
-		{
-			foreach( $right as $rkey => $rvalue )
-			{
-				if( $lkey == $rkey )
-				{
-					$match = true;
-					if( is_array( $lvalue ) && is_array( $rvalue ) ) {
-						$this->_merge( $lvalue, $rvalue );
-					} else {
-						$lvalue = $rvalue;
-					}
-				}
-			}
-			$left[ $lkey ] = $lvalue;
-		}
-
-		if( $match === false ) {
-			$left = array_merge( $left, $right );
-		}
-	}
-
-
-	/**
-	 * Gets a configuration value from an array
-	 *
-	 * @param Array $path Configuration path to look for inside the array
-	 * @param Array $config The array to search in
-	 */
-	protected function _getFromArray( $path, $config )
-	{
-		$current = array_shift( $path );
-
-		if( isset( $config[ $current ] ) )
-		{
-			if( count( $path ) > 0 ) {
-				return $this->_getFromArray( $path, $config[ $current ] );
-			}
-			return $config[ $current ];
-		}
-		return null;
 	}
 }

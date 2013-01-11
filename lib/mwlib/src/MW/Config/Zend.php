@@ -18,9 +18,9 @@
 class MW_Config_Zend extends MW_Config_Abstract implements MW_Config_Interface
 {
 	private $_config = null;
-	private $_paths = array();
 	private $_cache = array();
 	private $_negcache = array();
+	private $_paths = array();
 
 
 	/**

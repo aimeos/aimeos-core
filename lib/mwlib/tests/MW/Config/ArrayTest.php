@@ -35,10 +35,6 @@ class MW_Config_ArrayTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		if( class_exists( 'MW_Config_Array' ) === false ) {
-			$this->markTestSkipped( 'Class Array_Config not found' );
-		}
-
 		$dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles';
 		$dir2 = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testowrite';
 
