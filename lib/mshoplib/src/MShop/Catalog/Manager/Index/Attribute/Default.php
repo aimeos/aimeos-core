@@ -148,13 +148,8 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
 		
-		$types = array(
-			'prodid' => MW_DB_Statement_Abstract::PARAM_STR,
-		);
-		
-		$translations = array(
-			'prodid' => '"prodid"'
-		);
+		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'prodid' => '"prodid"' );
 		
 		$cond = $search->getConditionString( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $sql );

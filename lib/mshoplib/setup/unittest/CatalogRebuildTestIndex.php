@@ -56,16 +56,10 @@ class MW_Setup_Task_CatalogRebuildTestIndex extends MW_Setup_Task_Abstract
 
 		$this->_msg('Rebuilding catalog index for test data', 0);
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_additional );
+		$catalogIndexManager = MShop_Catalog_Manager_Factory::createManager( $this->_additional )->getSubManager( 'index' );
 
-		$config = $this->_additional->getConfig();
-
-		$indexMode = $config->get( 'mshop/catalog/manager/index/default/index' );
-		$config->set( 'mshop/catalog/manager/index/default/index', 'all' );
-
-		$catalogManager->getSubManager( 'index' )->rebuildIndex();
-
-		$config->set( 'mshop/catalog/manager/index/default/index', $indexMode );
+		$catalogIndexManager->rebuildIndex();
+		$catalogIndexManager->optimize();
 
 		$this->_status( 'done' );
 	}

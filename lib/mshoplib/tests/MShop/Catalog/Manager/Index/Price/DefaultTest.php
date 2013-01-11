@@ -155,7 +155,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 		$search->setConditions( $search->compare( '!=', 'catalog.index.price.id', null ) );
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertGreaterThanOrEqual( 8, count( $result ) );
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 
 
 		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
@@ -166,7 +166,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertGreaterThanOrEqual( 6, count( $result ) );
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
 
 }

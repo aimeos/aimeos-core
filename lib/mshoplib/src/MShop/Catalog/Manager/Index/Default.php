@@ -367,7 +367,6 @@ class MShop_Catalog_Manager_Index_Default
 				foreach ( $this->_submanagers as $submanager ) {
 					$submanager->rebuildIndex( $products );
 				}
-				$this->optimize();
 
 				$this->_commit();
 			}
