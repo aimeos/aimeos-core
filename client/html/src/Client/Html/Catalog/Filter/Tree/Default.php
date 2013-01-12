@@ -95,10 +95,9 @@ class Client_Html_Catalog_Filter_Tree_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
-	 * @param string|null $name Template name
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader( $name = null )
+	public function getHeader()
 	{
 		$view = $this->getView();
 		$catid = $view->param( 'f-catalog-id' );

@@ -26,10 +26,9 @@ class Client_Html_Catalog_Detail_Basic_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
-	 * @param string|null $name Template name
 	 * @return string HTML code
 	 */
-	public function getBody( $name = null )
+	public function getBody()
 	{
 		$view = $this->getView();
 
@@ -49,10 +48,9 @@ class Client_Html_Catalog_Detail_Basic_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
-	 * @param string|null $name Template name
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader( $name = null )
+	public function getHeader()
 	{
 		$view = $this->getView();
 
