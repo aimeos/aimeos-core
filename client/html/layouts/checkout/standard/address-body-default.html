@@ -8,9 +8,18 @@
 
 $activeStep = $this->get( 'standardStepActive' );
 $steps = $this->get( 'standardSteps', array() );
+$step = null;
 
-while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
+do {
+	$lastStep = $step;
+} while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
 $nextStep = ( ( $step = array_shift( $steps ) ) !== null ? $step : null );
+
+if( $lastStep ) {
+	$urlBack = $this->url( 'checkout-target', 'checkout', 'index', array( 'c-step' => $lastStep ) );
+} else {
+	$urlBack = $this->url( 'basket-target', 'basket', 'index' );
+}
 
 ?>
 <div class="checkout-standard-address">
@@ -19,7 +28,7 @@ $nextStep = ( ( $step = array_shift( $steps ) ) !== null ? $step : null );
 	<form method="POST" action="<?php echo $this->url( 'checkout-target', 'checkout', 'index', array( 'c-step' => $nextStep ) ); ?>">
 <?php echo $this->get( 'addressBody' ); ?>
 		<div class="button-group">
-			<a class="standardbutton" href=""><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
+			<a class="standardbutton" href="<?php echo $urlBack; ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
 			<button class="standardbutton"><?php echo $this->translate( 'core/client/html', 'Next' ); ?></button>
 		</div>
 	</form>

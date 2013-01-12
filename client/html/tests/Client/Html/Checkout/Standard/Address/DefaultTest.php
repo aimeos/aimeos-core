@@ -75,6 +75,8 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends MW_Unittest_Test
 	public function testGetBody()
 	{
 		$view = TestHelper::getView();
+		$view->standardStepActive = 'address';
+		$view->standardSteps = array( 'address', 'after' );
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
