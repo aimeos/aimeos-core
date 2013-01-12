@@ -26,6 +26,7 @@ class BasketController extends Application_Controller_Action_Abstract
 
 			$this->view->basket = Client_Html_Basket_Standard_Factory::createClient( $context, $templatePaths );
 			$this->view->basket->setView( $this->_createView() );
+			$this->view->basket->process();
 
 			$this->render( 'index' );
 		}
