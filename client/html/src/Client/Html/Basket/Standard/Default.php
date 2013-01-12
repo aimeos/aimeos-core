@@ -26,12 +26,11 @@ class Client_Html_Basket_Standard_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
-	 * @param string|null $name Template name
 	 * @return string HTML code
 	 */
-	public function getBody( $name = null )
+	public function getBody()
 	{
-		$view = $this->_process( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -49,10 +48,9 @@ class Client_Html_Basket_Standard_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
-	 * @param string|null $name Template name
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader( $name = null )
+	public function getHeader()
 	{
 		$view = $this->getView();
 
@@ -96,12 +94,11 @@ class Client_Html_Basket_Standard_Default
 
 	/**
 	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _process( MW_View_Interface $view )
+	public function process()
 	{
+		$view = $this->getView();
+
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
 
 		switch( $view->param( 'b-action' ) )
@@ -170,7 +167,5 @@ class Client_Html_Basket_Standard_Default
 		}
 
 		$view->standardBasket = $controller->get();
-
-		return $view;
 	}
 }

@@ -70,4 +70,11 @@ interface Client_Html_Interface
 	 * @return boolean True if the output can be cached, false if not
 	 */
 	public function isCachable( $what );
+
+	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 */
+	public function process();
 }

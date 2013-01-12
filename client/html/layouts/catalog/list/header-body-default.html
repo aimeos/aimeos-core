@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+<div class="catalog-list-header">
+<?php if( isset( $this->listCatItem ) ) : ?>
+	<div class="image-default">
+<?php	foreach( $this->listCatItem->getRefItems( 'media', 'header', 'default' ) as $mediaItem ) : ?>
+		<img class="<?php echo $mediaItem->getType(); ?>" src="<?php echo $mediaItem->getUrl(); ?>" />
+<?php	endforeach; ?>
+	</div>
+<?php	foreach( $this->listCatItem->getRefItems( 'text', null, 'default' ) as $textItem ) : ?>
+<?php		if( $textItem->getType() == 'name' ) : ?>
+	<h1><?php echo $textItem->getContent(); ?></h1>
+<?php		else : ?>
+	<div class="text-default <?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></div>
+<?php		endif; ?>
+<?php	endforeach; ?>
+	<div class="text-promotion">
+<?php	foreach( $this->listCatItem->getRefItems( 'text', null, 'promotion' ) as $textItem ) : ?>
+		<div class="<?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></div>
+<?php	endforeach; ?>
+	</div>
+<?php endif; ?>
+<?php echo $this->get( 'headerBody' ); ?>
+</div>

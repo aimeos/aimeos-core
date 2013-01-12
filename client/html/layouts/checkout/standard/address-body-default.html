@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+
+$activeStep = $this->get( 'standardStepActive' );
+$steps = $this->get( 'standardSteps', array() );
+
+while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
+$nextStep = ( ( $step = array_shift( $steps ) ) !== null ? $step : null );
+
+?>
+<div class="checkout-standard-address">
+	<h2><?php echo $this->translate( 'core/client/html', 'address' ); ?></h2>
+	<form method="POST" action="<?php echo $this->url( 'checkout-target', 'checkout', 'index', array( 'c-step' => $nextStep ) ); ?>">
+<?php echo $this->get( 'addressBody' ); ?>
+		<div class="button-group">
+			<a class="standardbutton" href=""><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
+			<button class="standardbutton"><?php echo $this->translate( 'core/client/html', 'Next' ); ?></button>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$link = true;
+$stepActive = $this->get( 'standardStepActive' );
+
+?>
+<div class="arcavias checkout-standard">
+	<ol class="standard-steps">
+		<li class="standard-step basket active"><a href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index' ); ?>"><?php echo $this->translate( 'core/client/html', 'Basket' ); ?></a></li>
+<?php foreach( $this->get( 'standardSteps', array() ) as $name ) :
+
+		$class = '';
+		$string = $this->translate( 'core/client/html', $name );
+
+		if( $stepActive )
+		{
+			if( $name === $stepActive )
+			{
+				$class .= ' current';
+				$link = false;
+			}
+
+			if( $link === true )
+			{
+				$url = $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $name ) );
+				$string = '<a href="' . $url . '">' . $string . '</a>';
+				$class .= ' active';
+			}
+		}
+?>
+		<li class="standard-step <?php echo $name . $class; ?>"><?php echo $string; ?></li>
+<?php endforeach; ?>
+	</ol>
+	<ul class="error-list">
+<?php foreach( $this->get( 'standardErrorList', array() ) as $msg ) : ?>
+		<li><?php echo $msg; ?></li>
+	</ul>
+<?php endforeach; ?>
+<?php echo $this->get( 'standardBody' ); ?>
+</div>

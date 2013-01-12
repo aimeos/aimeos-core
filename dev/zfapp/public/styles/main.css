@@ -73,10 +73,6 @@ input[type="password"] {
 	display:none;
 }
 
-.error {
-	border: 1px solid #FF3300;
-}
-
 .forms {
 	display: inline-block;
 }
@@ -789,6 +785,160 @@ input[type="password"] {
 
 
 
+/*
+ * Checkout
+ */
+
+.checkout-standard .standard-steps {
+	padding: 5px;
+	font-weight: bold;
+}
+
+.checkout-standard .standard-steps a {
+	text-decoration: none;
+}
+
+.checkout-standard .standard-step {
+	display: inline-block;
+	text-align: center;
+	overflow: hidden;
+	width: 19%;
+	color: #d3dbde;
+	border-bottom: solid 8px #d3dbde;
+}
+
+.checkout-standard .standard-steps .active {
+	color: #689DB9;
+	border-bottom: solid 8px #689DB9;
+}
+
+.checkout-standard .standard-steps .current {
+	color: #004266;
+	border-bottom: solid 8px #004266;
+}
+
+
+/*
+ * Checkout address part
+ */
+
+.checkout-standard-address {
+	margin: 5px;
+}
+
+.checkout-standard-address .address-billing,
+.checkout-standard-address .address-delivery {
+	display: inline-block;
+	vertical-align: top;
+	width: 310px;
+}
+
+.checkout-standard-address .form-item {
+	border-bottom: solid 1px #689DB9;
+	vertical-align: bottom;
+	line-height: 2.5em;
+}
+
+.checkout-standard-address .form-item label {
+	vertical-align: bottom;
+	display: inline-block;
+	line-height: 100%;
+	padding-top: 1em;
+	width: 120px;
+}
+
+.checkout-standard-address .form-item input {
+	background-color: #F2F7FA;
+	border: solid 1px #689DB9;
+	vertical-align: bottom;
+	border-bottom: none;
+	height: 1.5em;
+	width: 185px;
+}
+
+.checkout-standard-address .form-item select {
+	vertical-align: bottom;
+	height: 1.5em;
+	width: 185px;
+}
+
+.checkout-standard-address .form-item {
+	display: none;
+}
+
+.checkout-standard-address .forms .mandatory,
+.checkout-standard-address .forms .optional, 
+.checkout-standard-address .forms .error {
+		display: list-item;
+}
+
+.checkout-standard-address .mandatory > label {
+	font-weight: bold;
+}
+
+.checkout-standard-address .mandatory > label:after {
+	content: "*";
+}
+
+.checkout-standard-address .error {
+	border-bottom: solid 1px #FF3300;	
+	color: #FF3300;
+}
+
+.checkout-standard-address .error > input,
+.checkout-standard-address .error > select {
+	background-color: #ffeeee;
+	border: solid 1px #FF3300;
+	border-bottom: none;
+}
+
+.checkout-standard-address .address-billing-list,
+.checkout-standard-address .address-delivery-list {
+	background-color: #ffffff;
+}
+
+.checkout-standard-address .address-billing-list,
+.checkout-standard-address .address-delivery-list {
+	display: none;
+}
+
+.checkout-standard-address .billing-item,
+.checkout-standard-address .delivery-item {
+	background-color: #C3D9E6;
+	margin-bottom: 3px;
+}
+
+.checkout-standard-address .billing-item > input,
+.checkout-standard-address .delivery-item > input,
+.checkout-standard-address .item-values {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0.5em 0;
+}
+
+.checkout-standard-address .billing-item > input,
+.checkout-standard-address .delivery-item > input {
+	margin: 0.5em;
+}
+
+.checkout-standard-address .value-address1 {
+	display: block;
+}
+
+.checkout-standard-address .error-list {
+	background-color: #ffeeee;
+	border: solid 1px #FF3300;
+	padding: 0.5em;
+	margin-top: 1em;
+}
+
+.checkout-standard-address .buttons {
+	text-align: right;
+}
+
+.checkout-standard-address button {
+	text-align: right;
+}
 
 
 
