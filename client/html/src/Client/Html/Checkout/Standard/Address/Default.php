@@ -36,7 +36,7 @@ class Client_Html_Checkout_Standard_Address_Default
 			return '';
 		}
 
-		$view = $this->_process( $view );
+		$view = $this->_setViewParams( $view );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -64,7 +64,7 @@ class Client_Html_Checkout_Standard_Address_Default
 			return '';
 		}
 
-		$view = $this->_process( $view );
+		$view = $this->_setViewParams( $view );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -135,7 +135,7 @@ class Client_Html_Checkout_Standard_Address_Default
 	 * @param MW_View_Interface $view The view object which generates the HTML output
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _process( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view )
 	{
 		if( !isset( $this->_cache ) )
 		{

@@ -81,6 +81,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
+		$this->_object->process();
 		$output = $this->_object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="main-price">18.00€</td>.*</tbody>#smU', $output );
@@ -110,6 +111,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
+		$this->_object->process();
 		$output = $this->_object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="main-price">36.00€</td>.*</tbody>#smU', $output );
@@ -132,6 +134,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
+		$this->_object->process();
 		$output = $this->_object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="main-price">18.00€</td>.*</tbody>#smU', $output );
@@ -161,6 +164,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
+		$this->_object->process();
 		$output = $this->_object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="main-price">36.00€</td>.*</tbody>#smU', $output );
@@ -182,6 +186,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
+		$this->_object->process();
 		$output = $this->_object->getBody();
 
 		$this->assertRegExp( '#<tbody>.*<td class="main-price">36.00€</td>.*</tbody>#smU', $output );
@@ -202,6 +207,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
+		$this->_object->process();
 		$output = $this->_object->getBody();
 
 		$this->assertRegExp( '#<tfoot>.*<tr class="main-subtotal">.*<td class="main-price">0.00€</td>.*</tfoot>#smU', $output );

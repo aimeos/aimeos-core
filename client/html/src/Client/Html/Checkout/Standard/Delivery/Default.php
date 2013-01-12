@@ -8,22 +8,19 @@
  */
 
 
-// Strings for translation
-_('address'); _('delivery'); _('payment'); _('summary'); _('status');
-
-
 /**
- * Default implementation of standard checkout HTML client.
+ * Default implementation of checkout delivery HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Default
+class Client_Html_Checkout_Standard_Delivery_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_subPartPath = 'client/html/checkout/standard/default/subparts';
-	private $_subPartNames = array( 'address'/*, 'delivery', 'payment', 'summary', 'status'*/ );
+	private $_cache;
+	private $_subPartPath = 'client/html/checkout/standard/delivery/default/subparts';
+	private $_subPartNames = array( 'billing', 'delivery' );
 
 
 	/**
@@ -33,16 +30,22 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
+
+		if( $view->get( 'standardStepActive', 'delivery' ) != 'delivery' ) {
+			return '';
+		}
+
+		$view = $this->_setViewParams( $view );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->standardBody = $html;
+		$view->deliveryBody = $html;
 
-		$tplconf = 'client/html/checkout/standard/default/template-body';
-		$default = 'checkout/standard/body-default.html';
+		$tplconf = 'client/html/checkout/standard/delivery/default/template-body';
+		$default = 'checkout/standard/delivery-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -55,16 +58,22 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
+
+		if( $view->get( 'standardStepActive', 'delivery' ) != 'delivery' ) {
+			return '';
+		}
+
+		$view = $this->_setViewParams( $view );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->standardHeader = $html;
+		$view->deliveryHeader = $html;
 
-		$tplconf = 'client/html/checkout/standard/default/template-header';
-		$default = 'checkout/standard/header-default.html';
+		$tplconf = 'client/html/checkout/standard/delivery/default/template-header';
+		$default = 'checkout/standard/delivery-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -79,7 +88,7 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'checkout/standard/' . $type, $name );
+		return $this->_createSubClient( 'checkout/standard/delivery/' . $type, $name );
 	}
 
 
@@ -104,8 +113,18 @@ class Client_Html_Checkout_Standard_Default
 	{
 		$view = $this->getView();
 
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$subclient->process( $view );
+		try
+		{
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$subclient->process( $view );
+			}
+		}
+		catch( Exception $e )
+		{
+			$view->standardStepActive = 'delivery';
+
+			$error = array( 'An error occured while processing your request. Please re-check your input' );
+			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
 		}
 	}
 
@@ -120,9 +139,26 @@ class Client_Html_Checkout_Standard_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$view->standardSteps = $this->_subPartNames;
-			$view->standardStepActive = $view->param( 'c-step', 'address' );
-			$view->standardErrorList = array();
+			$context = $this->_getContext();
+
+			/** @todo Get customer if logged in */
+			$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
+			$view->deliveryCustomerItem = $customerManager->createItem();
+			$view->deliveryCustomerDeliveryItems = array();
+
+
+			$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
+			$locales = $localeManager->searchItems( $localeManager->createSearch( true ) );
+
+			$languages = array();
+			foreach( $locales as $locale ) {
+				$languages[] = $locale->getLanguageId();
+			}
+
+			$view->deliveryLanguages = $languages;
+			$view->deliveryLanguageCurrent = $context->getLocale()->getLanguageId();
+			$view->deliveryCountries = $view->config( 'checkout/delivery/countries', array() );
+
 
 			$this->_cache = $view;
 		}

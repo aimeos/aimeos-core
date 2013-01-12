@@ -30,7 +30,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_process( $this->getView() );
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -52,7 +52,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_process( $this->getView() );
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -165,7 +165,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 	 * @param MW_View_Interface $view The view object which generates the HTML output
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _process( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view )
 	{
 		if( !isset( $this->_cache ) )
 		{

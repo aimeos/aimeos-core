@@ -30,7 +30,7 @@ class Client_Html_Basket_Standard_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_process( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -94,12 +94,11 @@ class Client_Html_Basket_Standard_Default
 
 	/**
 	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _process( MW_View_Interface $view )
+	public function process()
 	{
+		$view = $this->getView();
+
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
 
 		switch( $view->param( 'b-action' ) )
@@ -168,7 +167,5 @@ class Client_Html_Basket_Standard_Default
 		}
 
 		$view->standardBasket = $controller->get();
-
-		return $view;
 	}
 }
