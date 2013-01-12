@@ -14,7 +14,8 @@ $nextStep = ( ( $step = array_shift( $steps ) ) !== null ? $step : null );
 
 ?>
 <div class="checkout-standard-address">
-	<h2><?php echo $this->translate( 'core/client/html', 'address' ); ?></h2>
+	<h1><?php echo $this->translate( 'core/client/html', 'address' ); ?></h1>
+	<p class="address-note"><?php $this->translate( 'core/client/html', 'Please enter your address' ); ?></p>
 	<form method="POST" action="<?php echo $this->url( 'checkout-target', 'checkout', 'index', array( 'c-step' => $nextStep ) ); ?>">
 <?php echo $this->get( 'addressBody' ); ?>
 		<div class="button-group">

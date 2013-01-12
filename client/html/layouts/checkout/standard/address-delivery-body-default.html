@@ -41,7 +41,7 @@ foreach( $this->get( 'deliveryError', array() ) as $name ) {
 			}
 		</style>
 	</noscript>
-	<h3><?php echo $this->translate( 'core/client/html', 'Delivery address' ); ?></h3>
+	<h2><?php echo $this->translate( 'core/client/html', 'Delivery address' ); ?></h2>
 	<div class="delivery-item delivery-item-like">
 		<input type="radio" name="ca-delivery-option" value="-1" <?php echo ( $deliveryOption == -1 ? 'checked="checked"' : '' ); ?> />
 		<div class="item-values"><span class="value value-like"><?php echo $this->translate( 'core/client/html', 'like billing address' ); ?></span></div>
