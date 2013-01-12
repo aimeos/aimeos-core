@@ -20,6 +20,8 @@ implements MShop_Service_Provider_Interface
 {
 	private $_context;
 	private $_serviceItem;
+	private $_communication;
+
 
 	/**
 	 * Initializes the service provider object.
@@ -169,6 +171,32 @@ implements MShop_Service_Provider_Interface
 	public function updateSync( $additional )
 	{
 		return false;
+	}
+
+
+	/**
+	 * Sets the communication object for a service provider.
+	 *
+	 * @param MW_Communication_Interface $communication Object of communication
+	 */
+	public function setCommunication( MW_Communication_Interface $communication )
+	{
+		$this->_communication = $communication;
+	}
+
+
+	/**
+	 * Returns the communication object for the service provider.
+	 *
+	 * @param MW_Communication_Interface $communication Object of communication
+	 */
+	protected function _getCommunication()
+	{
+		if( !isset( $this->_communication ) ) {
+			$this->_communication = new MW_Communication_Curl();
+		}
+
+		return $this->_communication;
 	}
 
 

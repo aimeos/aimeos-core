@@ -101,6 +101,14 @@ interface MShop_Service_Provider_Interface
 
 
 	/**
+	 * Sets the communication object for a service provider.
+	 *
+	 * @param MW_Communication_Interface $communication Object of communication
+	 */
+	public function setCommunication( MW_Communication_Interface $communication );
+
+
+	/**
 	 * Looks for new update files and updates the orders for which status updates were received.
 	 * If batch processing of files isn't supported, this method can be empty.
 	 *
