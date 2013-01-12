@@ -20,7 +20,7 @@ class Client_Html_Checkout_Standard_Delivery_Default
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/checkout/standard/delivery/default/subparts';
-	private $_subPartNames = array( 'billing', 'delivery' );
+	private $_subPartNames = array();
 
 
 	/**
@@ -32,7 +32,7 @@ class Client_Html_Checkout_Standard_Delivery_Default
 	{
 		$view = $this->getView();
 
-		if( $view->get( 'standardStepActive', 'delivery' ) != 'delivery' ) {
+		if( $view->get( 'standardStepActive' ) != 'delivery' ) {
 			return '';
 		}
 
@@ -60,7 +60,7 @@ class Client_Html_Checkout_Standard_Delivery_Default
 	{
 		$view = $this->getView();
 
-		if( $view->get( 'standardStepActive', 'delivery' ) != 'delivery' ) {
+		if( $view->get( 'standardStepActive' ) != 'delivery' ) {
 			return '';
 		}
 
@@ -141,24 +141,18 @@ class Client_Html_Checkout_Standard_Delivery_Default
 		{
 			$context = $this->_getContext();
 
-			/** @todo Get customer if logged in */
-			$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-			$view->deliveryCustomerItem = $customerManager->createItem();
-			$view->deliveryCustomerDeliveryItems = array();
+			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
+			$serviceCntl = Controller_Frontend_Service_Factory::createController( $context );
 
+			$services = $serviceCntl->getServices( 'delivery', $basketCntl->get() );
+			$serviceAttributes = array();
 
-			$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
-			$locales = $localeManager->searchItems( $localeManager->createSearch( true ) );
-
-			$languages = array();
-			foreach( $locales as $locale ) {
-				$languages[] = $locale->getLanguageId();
+			foreach( $services as $id => $service ) {
+				$serviceAttributes[$id] = $serviceCntl->getServiceAttributes( 'delivery', $id );
 			}
 
-			$view->deliveryLanguages = $languages;
-			$view->deliveryLanguageCurrent = $context->getLocale()->getLanguageId();
-			$view->deliveryCountries = $view->config( 'checkout/delivery/countries', array() );
-
+			$view->deliveryServices = $services;
+			$view->deliveryServiceAttributes = $serviceAttributes;
 
 			$this->_cache = $view;
 		}
