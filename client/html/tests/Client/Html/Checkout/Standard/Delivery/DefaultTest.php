@@ -69,7 +69,6 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 		$view->standardSteps = array( 'before', 'delivery', 'after' );
 
 		$output = $this->_object->getBody();
-print_r( $output );
 		$this->assertStringStartsWith( '<div class="checkout-standard-delivery">', $output );
 
 		$this->assertGreaterThan( 0, count( $view->deliveryServices ) );

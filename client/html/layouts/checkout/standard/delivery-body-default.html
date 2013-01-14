@@ -21,7 +21,7 @@ if( $lastStep ) {
 	$urlBack = $this->url( 'basket-target', 'basket', 'index' );
 }
 
-$serviceAttributes = $this->get( 'deliveryAttributes', array() );
+$serviceAttributes = $this->get( 'deliveryServiceAttributes', array() );
 
 $deliveryCss = array();
 foreach( $this->get( 'deliveryError', array() ) as $name ) {
