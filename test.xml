@@ -1,1 +1,6 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<project name "Test" default="hallo">
+<target name="hallo">
+<echo msg="hallo welt"/>
+</target>
+</project>
