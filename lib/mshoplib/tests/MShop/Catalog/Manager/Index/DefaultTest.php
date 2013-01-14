@@ -651,52 +651,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testRebuildIndexCategorizedOnly()
-	{
-		$context = TestHelper::getContext();
-		$manager = MShop_Product_Manager_Factory::createManager( $context );
-
-		//delete whole catalog
-		$search = $manager->createSearch();
-		foreach( $manager->searchItems($search) as $item ) {
-			$this->_object->deleteItem( $item->getId() );
-		}
-
-		// get number of unique categorized products
-		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
-		$categorySearch = $catalogListManager->createSearch();
-		$categorySearch->setConditions( $categorySearch->combine( '&&', array(
-				$categorySearch->compare( '==', 'catalog.list.domain', 'product' ),
-		) ) );
-
-		$productIds = array();
-		foreach( $catalogListManager->searchItems( $categorySearch ) as $item ){
-			$productIds[] = $item->getRefId();
-		}
-		$count = count( array_unique( $productIds ) );
-
-		$config = $context->getConfig();
-		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
-
-		$this->_object->rebuildIndex();
-
-		$afterInsertAttr = $this->_getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
-		$afterInsertPrice = $this->_getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
-		$afterInsertText = $this->_getCatalogSubDomainItems( 'catalog.index.text.id', 'text' );
-		$afterInsertCat = $this->_getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
-
-		// restore catalog with all products:
-		$config->set( 'mshop/catalog/manager/index/default/index', 'all' );
-		$this->_object->rebuildIndex();
-
-		//check inserted items
-		$this->assertEquals( $count, count( $afterInsertAttr ) );
-		$this->assertEquals( $count, count( $afterInsertPrice ) );
-		$this->assertEquals( $count, count( $afterInsertText ) );
-		$this->assertEquals( $count, count( $afterInsertCat ) );
-	}
-
-
 	protected function _getValue( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
 	{
 		$value = null;
