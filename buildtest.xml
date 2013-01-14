@@ -3,8 +3,8 @@
 <project name="Arcavias" default="all">
 
 <target name="setup" description="Sets up database incl. unit test data">
-<exec command="cp config/.resource.php.travis config/resource.php" checkreturn="true" logoutput="true"/>
-<exec command="cp lib/mwlib/tests/config/.resource.php.travis lib/mwlib/tests/config/resource.php" checkreturn="true" logoutput="true"/>
+<exec command="cp /opt/home/cmann/resource.php config/resource.php" checkreturn="true" logoutput="true"/>
+<exec command="cp /opt/home/cmann/resource.php lib/mwlib/tests/config/resource.php" checkreturn="true" logoutput="true"/>
 <echo msg="Setting up database" />
 <exec command="php setup.php unittest" checkreturn="true" logoutput="true"/>
 </target>
