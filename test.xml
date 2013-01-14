@@ -1,13 +1,1 @@
-language: php
-php:
-  - "5.4"
-  - "5.3"
-before_script:
-  - pear channel-discover pear.phing.info
-  - pear install phing/phing
-  - pear install pear/PHP_CodeSniffer
-  - phpenv rehash
-  - mysql -e 'create database arcavias;'
-  - cp config/.resource.php.travis config/resource.php
-  - cp lib/mwlib/tests/config/.resource.php.travis lib/mwlib/tests/config/resource.php
-script: "phing setup && phing"
+
