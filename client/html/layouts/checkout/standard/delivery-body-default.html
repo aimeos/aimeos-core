@@ -23,15 +23,20 @@ if( $lastStep ) {
 
 $serviceAttributes = $this->get( 'deliveryAttributes', array() );
 
+$deliveryCss = array();
+foreach( $this->get( 'deliveryError', array() ) as $name ) {
+	$deliveryCss[$name][] = 'error';
+}
+
 ?>
 <div class="checkout-standard-delivery">
 	<h1><?php echo $this->translate( 'core/client/html', 'delivery' ); ?></h1>
 	<p class="delivery-note"><?php $this->translate( 'core/client/html', 'Please choose your delivery method' ); ?></p>
 	<form method="POST" action="<?php echo $this->url( 'checkout-target', 'checkout', 'index', array( 'c-step' => $nextStep ) ); ?>">
 <?php foreach( $this->get( 'deliveryServices', array() ) as $id => $service ) : ?>
-		<div class="delivery-item">
-			<input type="radio" value="<?php echo $id; ?>" />
-			<div class="item-basic">
+		<div class="item">
+			<label class="item-block" for="c-delivery-option-<?php echo $id; ?>">
+				<input class="item-option" type="radio" id="c-delivery-option-<?php echo $id; ?>" name="c-delivery-option" value="<?php echo $id; ?>" />
 				<div class="item-icons">
 <?php	foreach( $service->getRefItems( 'media', 'icon', 'default' ) as $mediaItem ) : ?>
 					<img href="<?php echo $mediaItem->getUrl(); ?>" />
@@ -41,17 +46,25 @@ $serviceAttributes = $this->get( 'deliveryAttributes', array() );
 <?php	foreach( $service->getRefItems( 'text', null, 'default' ) as $textItem ) : ?>
 				<p class="<?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></p>
 <?php	endforeach; ?>
-			</div>
-			<ul class="item-attributes">
+			</label>
 <?php	if( isset( $serviceAttributes[$id] ) ) : ?>
+			<ul class="item-attributes form-list">
 <?php		foreach( $serviceAttributes[$id] as $key => $attribute ) : ?>
-				<li class="attribute-item <?php echo $key . ( isset( $deliveryCss[$key] ) ? ' ' . join( ' ', $deliveryCss[$key] ) : '' ); ?>">
+				<li class="form-item <?php echo $key . ( isset( $deliveryCss[$key] ) ? ' ' . join( ' ', $deliveryCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
 					<label for="delivery-<?php echo $key; ?>"><?php echo $this->translate( 'core/client/html/service', $key ); ?></label>
-					<input type="text" id="delivery-<?php echo $key; ?>" name="c-delivery[<?php echo $id; ?>][<?php echo $key; ?>]" value="<?php echo $this->param( 'c-delivery/' . $id . '/' . $key, '' ); ?>" />
+<?php			switch( $attribute->getType() ) : case 'string': ?>
+					<input type="text" id="delivery-<?php echo $key; ?>" name="c-delivery[<?php echo $id; ?>][<?php echo $key; ?>]" value="<?php echo $this->param( 'c-delivery/' . $id . '/' . $key, $attribute->getDefault() ); ?>" />
+<?php				break; case 'select': ?>
+					<select id="delivery-<?php echo $key; ?>" name="c-delivery[<?php echo $id; ?>][<?php echo $key; ?>]">
+<?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
+						<option value="<?php echo $option; ?>"><?php echo $this->translate( 'core/client/html/service', $option );; ?></option>
+<?php					endforeach; ?>
+					</select>
+<?php			endswitch; ?>
 				</li>
 <?php		endforeach; ?>
-<?php	endif; ?>
 			</ul>
+<?php	endif; ?>
 		</div>
 <?php endforeach; ?>
 <?php echo $this->get( 'deliveryBody' ); ?>

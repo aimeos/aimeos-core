@@ -113,8 +113,36 @@ class Client_Html_Checkout_Standard_Delivery_Default
 	{
 		$view = $this->getView();
 
+		// only start if there's something to do
+		if( ( $serviceId = $view->param( 'c-delivery-option', null ) ) === null ) {
+			return;
+		}
+
 		try
 		{
+			$context = $this->_getContext();
+
+			$serviceCtrl = Controller_Frontend_Service_Factory::createController( $context );
+
+			$attributes = $view->param( 'c-delivery/' . $serviceId, array() );
+			$errors = $serviceCtrl->checkServiceAttributes( 'delivery', $serviceId, $attributes );
+
+			foreach( $errors as $key => $msg )
+			{
+				if( $msg === null ) {
+					unset( $errors[$key] );
+				}
+			}
+
+			if( count( $errors ) === 0 )
+			{
+				$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
+				$basketCtrl->setService( 'delivery', $serviceId, $attributes );
+			}
+
+			$view->deliveryError = $errors;
+
+
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$subclient->process( $view );
 			}

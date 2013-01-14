@@ -50,6 +50,7 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 	 */
 	protected function tearDown()
 	{
+		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
 		unset( $this->_object );
 	}
 
@@ -68,7 +69,7 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 		$view->standardSteps = array( 'before', 'delivery', 'after' );
 
 		$output = $this->_object->getBody();
-echo $output;
+print_r( $output );
 		$this->assertStringStartsWith( '<div class="checkout-standard-delivery">', $output );
 
 		$this->assertGreaterThan( 0, count( $view->deliveryServices ) );
@@ -110,5 +111,83 @@ echo $output;
 	public function testProcess()
 	{
 		$this->_object->process();
+	}
+
+
+	public function testProcessExistingId()
+	{
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
+		$search = $serviceManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.code', 'unitcode' ) );
+		$result = $serviceManager->searchItems( $search );
+
+		if( ( $service = reset( $result ) ) === false ) {
+			throw new Exception( 'Service item not found' );
+		}
+
+		$view = TestHelper::getView();
+
+		$param = array(
+			'c-delivery-option' => $service->getId(),
+		);
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+
+		$this->_object->process();
+
+		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
+		$this->assertEquals( 'unitcode', $basket->getService( 'delivery' )->getCode() );
+	}
+
+
+	public function testProcessInvalidId()
+	{
+		$view = TestHelper::getView();
+
+		$param = array( 'c-delivery-option' => -1 );
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+
+		$this->_object->process();
+
+		$this->assertEquals( 'delivery', $view->standardStepActive );
+		$this->assertGreaterThan( 0, count( $view->standardErrorList ) );
+	}
+
+
+	public function testProcessNotExistingAttributes()
+	{
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
+		$search = $serviceManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.code', 'unitcode' ) );
+		$result = $serviceManager->searchItems( $search );
+
+		if( ( $service = reset( $result ) ) === false ) {
+			throw new Exception( 'Service item not found' );
+		}
+
+		$view = TestHelper::getView();
+
+		$param = array(
+			'c-delivery-option' => $service->getId(),
+			'c-delivery' => array(
+				$service->getId() => array(
+					'notexisting' => 'invalid value',
+				),
+			),
+		);
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+
+		$this->_object->process();
+
+		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
+		$this->assertEquals( 'unitcode', $basket->getService( 'delivery' )->getCode() );
 	}
 }
