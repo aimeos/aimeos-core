@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name "Test" default="hallo">
-<target name="hallo">
-<echo msg="hallo welt"/>
-</target>
-</project>
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+  <artikel>
+     <titel>Der Titel</titel>
+     <teaser>Der Teaser, eine kurze Beschreibung</teaser>
+     <inhalt>Der Artikelinhalt an sich</inhalt>
+  </artikel>
