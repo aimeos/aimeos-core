@@ -1,2 +1,162 @@
 
+<?xml version="1.0" encoding="UTF-8"?>
 
+<project name="Arcavias" default="all">
+
+<target name="setup" description="Sets up database incl. unit test data">
+<exec command="cp config/.resource.php.travis config/resource.php" checkreturn="true" logoutput="true"/>
+<exec command="cp lib/mwlib/tests/config/.resource.php.travis lib/mwlib/tests/config/resource.php" checkreturn="true" logoutput="true"/>
+<echo msg="Setting up database" />
+<exec command="php setup.php unittest" checkreturn="true" logoutput="true"/>
+</target>
+
+<target name="setupperf" description="Sets up database incl. performance test data">
+<echo msg="Setting up performance data" />
+<exec command="php setup.php unitperf" checkreturn="true" logoutput="true"/>
+</target>
+
+
+<target name="coverage" description="Creates coverage reports">
+<phing target="coverage" haltonfailure="true" dir="lib/mshoplib" />
+<phing target="coverage" haltonfailure="true" dir="controller/frontend" />
+<phing target="coverage" haltonfailure="true" dir="controller/extjs" />
+<phing target="coverage" haltonfailure="true" dir="client/html" />
+<phing target="coverage" haltonfailure="true" dir="lib/mwlib" />
+<phing target="coverage" haltonfailure="true">
+<fileset dir="ext" expandsymboliclinks="true" >
+<include name="**/build.xml" />
+</fileset>
+</phing>
+</target>
+
+<target name="coverageext" description="Creates coverage report for specific extension directory">
+<phing target="coverage" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
+</target>
+
+
+<target name="test" description="Executes unit tests">
+<phing target="test" haltonfailure="true" dir="lib/mshoplib" />
+<phing target="test" haltonfailure="true" dir="controller/frontend" />
+<phing target="test" haltonfailure="true" dir="controller/extjs" />
+<phing target="test" haltonfailure="true" dir="client/extjs" />
+<phing target="test" haltonfailure="true" dir="client/html" />
+<phing target="test" haltonfailure="true" dir="lib/mwlib" />
+<phing target="test" haltonfailure="true">
+<fileset dir="ext" expandsymboliclinks="true" >
+<include name="**/build.xml" />
+</fileset>
+</phing>
+</target>
+
+<target name="testext" description="Executes tests of specific extension directory">
+<phing target="test" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
+</target>
+
+<target name="testperf" description="Executes performance tests">
+<phing target="testperf" dir="lib/mshoplib" />
+<phing target="testperf" dir="client/html" />
+<phing target="testperf">
+<fileset dir="ext" expandsymboliclinks="true" >
+<include name="**/build.xml" />
+</fileset>
+</phing>
+</target>
+
+
+<target name="check" description="Executes all checks">
+<phing target="check" dir="lib/mshoplib" />
+<phing target="check" dir="controller/frontend" />
+<phing target="check" dir="controller/extjs" />
+<phing target="check" dir="client/extjs" />
+<phing target="check" dir="client/html" />
+<phing target="check" dir="lib/mwlib" />
+<phing target="check">
+<fileset dir="ext" expandsymboliclinks="true" >
+<include name="**/build.xml" />
+</fileset>
+</phing>
+</target>
+
+<target name="checkext" description="Executes checks of specific extension directory">
+<phing target="check" dir="${dir}" phingfile="phing.xml" />
+</target>
+
+
+<target name="doc" description="Generates the API documentation">
+<echo msg="Generating API documentation" />
+<delete dir="dev/apidoc" quiet="true" failonerror="false" />
+<phpdocext title="Arcavias API documentation"
+destdir="dev/apidoc"
+output="HTML:frames/Extjs:default,HTML:Smarty:PHP"
+sourcecode="true"
+templatebase="dev/phpdoc"
+undocumentedelements="true">
+<fileset dir=".">
+<include name="MShop.php" />
+</fileset>
+<fileset dir="client/html/src">
+<include name="**/*.php" />
+</fileset>
+<fileset dir="controller/frontend/src">
+<include name="**/*.php" />
+</fileset>
+<fileset dir="controller/extjs/src">
+<include name="**/*.php" />
+</fileset>
+<fileset dir="lib/mshoplib/src">
+<include name="**/*.php" />
+</fileset>
+<fileset dir="lib/mwlib/src">
+<include name="**/*.php" />
+</fileset>
+</phpdocext>
+</target>
+
+
+<target name="clean" description="Cleans up temporary files">
+<phing target="clean" dir="lib/mshoplib" />
+<phing target="clean" dir="controller/frontend" />
+<phing target="clean" dir="controller/extjs" />
+<phing target="clean" dir="client/extjs" />
+<phing target="clean" dir="client/html" />
+<phing target="clean" dir="lib/mwlib" />
+<phing target="clean">
+<fileset dir="ext" expandsymboliclinks="true" >
+<include name="**/build.xml" />
+</fileset>
+</phing>
+</target>
+
+
+<target name="i18n" description="Creates all translation files">
+<phing target="i18n" dir="client/html" />
+</target>
+
+
+<target name="build" description="Creates all files to be generated" >
+<taskdef name="jsbpackages" classname="dev.phing.MShopJsbPackageTask" />
+<jsbpackages />
+<phing target="build" dir="client/html" />
+    </target>
+
+
+<target name="deploy" description="Executes all deployments" depends="clean,build">
+<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
+<reflexive>
+<fileset dir="." includes="manifest.php" />
+<filterchain>
+<replaceregexp>
+<regexp pattern="'version' => '[^']*'" replace="'version' => '${version}'"/>
+</replaceregexp>
+</filterchain>
+</reflexive>
+<exec command="tar -c --bzip2 --exclude-vcs --exclude='./dev' --exclude='./ext/*' --exclude='./config/resource.php' -f ../arcavias-core_${version}.tar.bz2 ."
+checkreturn="true" logoutput="true"/>
+<filehash file="../arcavias-core_${version}.tar.bz2" hashtype="1" />
+<echo msg="SHA1 hash value: ${filehashvalue}" />
+</target>
+
+
+<target name="all" depends="setup,test,check" description="Executes all essential targets for testing" />
+
+</project>
