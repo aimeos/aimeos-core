@@ -50,6 +50,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	 */
 	protected function tearDown()
 	{
+		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
 		unset( $this->_object );
 	}
 
@@ -97,9 +98,6 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 
 	public function testProcess()
 	{
-		$view = TestHelper::getView();
-		$this->_object->setView( $view );
-
 		$this->_object->process();
 	}
 
@@ -198,7 +196,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$this->_object->process();
 
 		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
-		$this->assertEquals( 'Metaways', $basket->getAddress( 'payment' )->getCompany() );
+		$this->assertEquals( 'Metaways', $basket->getAddress( 'delivery' )->getCompany() );
 	}
 
 

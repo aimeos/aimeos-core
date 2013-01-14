@@ -50,6 +50,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 	 */
 	protected function tearDown()
 	{
+		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
 		unset( $this->_object );
 	}
 
@@ -97,9 +98,6 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 	public function testProcess()
 	{
-		$view = TestHelper::getView();
-		$this->_object->setView( $view );
-
 		$this->_object->process();
 	}
 
