@@ -21,6 +21,7 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 	protected $_cache = array();
 	protected $_negCache = array();
 	protected $_paths = array();
+	protected $_fileCache = array();
 
 
 	public function __construct( $config = array(), $paths = array() )
