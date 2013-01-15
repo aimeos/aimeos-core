@@ -22,6 +22,7 @@ if( $lastStep ) {
 }
 
 $serviceAttributes = $this->get( 'paymentServiceAttributes', array() );
+$servicePrices = $this->get( 'paymentServicePrices', array() );
 
 $paymentCss = array();
 foreach( $this->get( 'paymentError', array() ) as $name ) {
@@ -37,6 +38,9 @@ foreach( $this->get( 'paymentError', array() ) as $name ) {
 		<div class="item">
 			<label class="item-block" for="c-payment-option-<?php echo $id; ?>">
 				<input class="item-option" type="radio" id="c-payment-option-<?php echo $id; ?>" name="c-payment-option" value="<?php echo $id; ?>" />
+<?php	if( isset( $servicePrices[$id] ) ) : ?>
+				<span class="item-price"><?php echo $this->number( $servicePrices[$id]->getValue() + $servicePrices[$id]->getShipping() ); ?></span>
+<?php	endif; ?>
 				<div class="item-icons">
 <?php	foreach( $service->getRefItems( 'media', 'icon', 'default' ) as $mediaItem ) : ?>
 					<img href="<?php echo $mediaItem->getUrl(); ?>" />

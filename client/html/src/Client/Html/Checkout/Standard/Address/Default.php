@@ -8,6 +8,10 @@
  */
 
 
+// Strings for translation
+_('address');
+
+
 /**
  * Default implementation of checkout address HTML client.
  *

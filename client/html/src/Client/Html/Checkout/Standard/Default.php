@@ -8,10 +8,6 @@
  */
 
 
-// Strings for translation
-_('address'); _('delivery'); _('payment'); _('summary'); _('status');
-
-
 /**
  * Default implementation of standard checkout HTML client.
  *
@@ -23,7 +19,7 @@ class Client_Html_Checkout_Standard_Default
 	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/checkout/standard/default/subparts';
-	private $_subPartNames = array( 'address'/*, 'delivery', 'payment', 'summary', 'status'*/ );
+	private $_subPartNames = array( 'address', 'delivery', 'payment'/*, 'summary'*/ );
 
 
 	/**

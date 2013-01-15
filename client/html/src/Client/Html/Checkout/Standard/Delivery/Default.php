@@ -8,6 +8,10 @@
  */
 
 
+// Strings for translation
+_('delivery');
+
+
 /**
  * Default implementation of checkout delivery HTML client.
  *
@@ -172,15 +176,20 @@ class Client_Html_Checkout_Standard_Delivery_Default
 			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
 			$serviceCntl = Controller_Frontend_Service_Factory::createController( $context );
 
-			$services = $serviceCntl->getServices( 'delivery', $basketCntl->get() );
-			$serviceAttributes = array();
+			$basket = $basketCntl->get();
 
-			foreach( $services as $id => $service ) {
+			$services = $serviceCntl->getServices( 'delivery', $basket );
+			$serviceAttributes = $servicePrices = array();
+
+			foreach( $services as $id => $service )
+			{
 				$serviceAttributes[$id] = $serviceCntl->getServiceAttributes( 'delivery', $id );
+				$servicePrices[$id] = $serviceCntl->getServicePrice( 'delivery', $id, $basket );
 			}
 
 			$view->deliveryServices = $services;
 			$view->deliveryServiceAttributes = $serviceAttributes;
+			$view->deliveryServicePrices = $servicePrices;
 
 			$this->_cache = $view;
 		}

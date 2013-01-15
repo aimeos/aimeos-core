@@ -8,6 +8,10 @@
  */
 
 
+// Strings for translation
+_('payment');
+
+
 /**
  * Default implementation of checkout payment HTML client.
  *
@@ -172,15 +176,20 @@ class Client_Html_Checkout_Standard_Payment_Default
 			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
 			$serviceCntl = Controller_Frontend_Service_Factory::createController( $context );
 
-			$services = $serviceCntl->getServices( 'payment', $basketCntl->get() );
-			$serviceAttributes = array();
+			$basket = $basketCntl->get();
 
-			foreach( $services as $id => $service ) {
+			$services = $serviceCntl->getServices( 'payment', $basket );
+			$serviceAttributes = $servicePrices = array();
+
+			foreach( $services as $id => $service )
+			{
 				$serviceAttributes[$id] = $serviceCntl->getServiceAttributes( 'payment', $id );
+				$servicePrices[$id] = $serviceCntl->getServicePrice( 'payment', $id, $basket );
 			}
 
 			$view->paymentServices = $services;
 			$view->paymentServiceAttributes = $serviceAttributes;
+			$view->paymentServicePrices = $servicePrices;
 
 			$this->_cache = $view;
 		}
