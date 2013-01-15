@@ -35,8 +35,7 @@ return array (
 		),
 		'service/payment/unitcode' => array (
 			'pos' => 0,
-			'typeid' =>
-			'service/payment',
+			'typeid' => 'service/payment',
 			'code' => 'unitpaymentcode',
 			'label' => 'unitpaymentlabel',
 			'provider' => 'PrePay',
@@ -45,8 +44,17 @@ return array (
 			),
 			'status' => 1
 		),
+		'service/payment/directdebit' => array (
+			'pos' => 1,
+			'typeid' => 'service/payment',
+			'code' => 'directdebit-test',
+			'label' => 'direct debit label',
+			'provider' => 'DirectDebit',
+			'config' => array(),
+			'status' => 1
+		),
 		'service/payment/paypalexpress' => array (
-			'pos' => 0,
+			'pos' => 2,
 			'typeid' => 'service/payment',
 			'code' => 'paypalexpress',
 			'label' => 'PayPalExpress',
@@ -61,6 +69,7 @@ return array (
 				'PaypalUrl' => 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=',
 				'ApiEndpoint' => 'https://api-3t.sandbox.paypal.com/nvp'
 			),
-			'status' => 1 ),
+			'status' => 1
+		),
 	)
 );

@@ -944,67 +944,6 @@ input[type="password"] {
 
 
 
-#basketOverview .description {
-	height: 35px;
-}
-
-#basketOverview .description td {
-	text-align: left;
-	border-top: 1px solid #689DB9;
-	border-bottom: 1px solid #689DB9;
-	padding-left: 10px;
-	height: 35px;;
-}
-
-#basketOverview .edit {
-	height: 25px;
-	line-height: 12px;
-}
-
-#basketOverview select {
-	width: 40px;
-	float: none;
-}
-
-#basketOverview .edit td {
-	border-bottom: 1px solid #689DB9;
-}
-
-#basketTotalOverview {
-	float: right;
-	border: 1px solid #689DB9;
-	border-collapse: collapse;
-	text-align: left;
-}
-
-#basketTotalOverview tr {
-	height: 20px;
-}
-
-#basketTotalOverview td {
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-#basketTotalOverview .sum {
-	text-align: right
-}
-
-tr#basketTotalSum {
-	background-color: #F2F7FA;
-	height: 25px;
-	border-top: 1px solid #689DB9;
-}
-
-#breadcrumb {
-
-}
-
-#breadcrumb a {
-
-}
-
-
 .register {
 	display: inline-block;
 	margin-left: 25%;

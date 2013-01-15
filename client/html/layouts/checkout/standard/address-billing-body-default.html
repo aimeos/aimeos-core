@@ -41,7 +41,7 @@ foreach( $this->get( 'billingError', array() ) as $name ) {
 			}
 		</style>
 	</noscript>
-	<h3><?php echo $this->translate( 'core/client/html', 'Billing address' ); ?></h3>
+	<h2><?php echo $this->translate( 'core/client/html', 'Billing address' ); ?></h2>
 <?php if( isset( $this->addressCustomerItem )  ) : $billingAddr = $this->addressCustomerItem->getBillingAddress(); ?>
 	<div class="billing-item">
 		<input type="radio" name="ca-billing-option" value="<?php echo $this->addressCustomerItem->getId(); ?>" <?php echo ( $billingOption == $this->addressCustomerItem->getId() ? 'checked="checked"' : '' ); ?> />

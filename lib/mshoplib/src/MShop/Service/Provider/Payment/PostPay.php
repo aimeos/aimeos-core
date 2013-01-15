@@ -20,7 +20,6 @@ extends MShop_Service_Provider_Payment_Abstract
 implements MShop_Service_Provider_Payment_Interface
 {
 	private $_config;
-	private $_communication;
 
 	private $_beConfig = array(
 		'url' => array(
@@ -45,7 +44,6 @@ implements MShop_Service_Provider_Payment_Interface
 		parent::__construct( $context, $serviceItem );
 
 		$this->_config = $serviceItem->getConfig();
-		$this->_communication = new MW_Communication_Curl();
 
 		if( !isset( $this->_config['url'] ) ) {
 			throw new MShop_Service_Exception( sprintf( 'Missing parameter "%1$s" in service config', 'url' ) );
@@ -97,16 +95,5 @@ implements MShop_Service_Provider_Payment_Interface
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
 
 		return new MShop_Common_Item_Helper_Form_Default( $this->_config[ 'url' ], 'GET', array() );
-	}
-	
-	
-	/**
-	 * Sets the communication interface for a service provider or a test.
-	 *
-	 * @param MW_Communication_Interface $communication Interface of communication
-	 */
-	public function setCommunication( MW_Communication_Interface $communication )
-	{
-		$this->_communication = $communication;
 	}
 }

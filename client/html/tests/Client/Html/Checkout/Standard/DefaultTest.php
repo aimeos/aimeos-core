@@ -64,7 +64,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-//echo $output;
+
 		$this->assertStringStartsWith( '<div class="arcavias checkout-standard">', $output );
 		$this->assertRegExp( '#<ol class="standard-steps">.*<li class="standard-step.*>.*</li>.*</ol>#smU', $output );
 	}

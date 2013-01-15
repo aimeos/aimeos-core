@@ -9,22 +9,22 @@
 
 
 // Strings for translation
-_('address');
+_('payment');
 
 
 /**
- * Default implementation of checkout address HTML client.
+ * Default implementation of checkout payment HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Address_Default
+class Client_Html_Checkout_Standard_Payment_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
 	private $_cache;
-	private $_subPartPath = 'client/html/checkout/standard/address/default/subparts';
-	private $_subPartNames = array( 'billing', 'delivery' );
+	private $_subPartPath = 'client/html/checkout/standard/payment/default/subparts';
+	private $_subPartNames = array();
 
 
 	/**
@@ -36,7 +36,7 @@ class Client_Html_Checkout_Standard_Address_Default
 	{
 		$view = $this->getView();
 
-		if( $view->get( 'standardStepActive', 'address' ) != 'address' ) {
+		if( $view->get( 'standardStepActive' ) != 'payment' ) {
 			return '';
 		}
 
@@ -46,10 +46,10 @@ class Client_Html_Checkout_Standard_Address_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->addressBody = $html;
+		$view->paymentBody = $html;
 
-		$tplconf = 'client/html/checkout/standard/address/default/template-body';
-		$default = 'checkout/standard/address-body-default.html';
+		$tplconf = 'client/html/checkout/standard/payment/default/template-body';
+		$default = 'checkout/standard/payment-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -64,7 +64,7 @@ class Client_Html_Checkout_Standard_Address_Default
 	{
 		$view = $this->getView();
 
-		if( $view->get( 'standardStepActive', 'address' ) != 'address' ) {
+		if( $view->get( 'standardStepActive' ) != 'payment' ) {
 			return '';
 		}
 
@@ -74,10 +74,10 @@ class Client_Html_Checkout_Standard_Address_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->addressHeader = $html;
+		$view->paymentHeader = $html;
 
-		$tplconf = 'client/html/checkout/standard/address/default/template-header';
-		$default = 'checkout/standard/address-header-default.html';
+		$tplconf = 'client/html/checkout/standard/payment/default/template-header';
+		$default = 'checkout/standard/payment-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -92,7 +92,7 @@ class Client_Html_Checkout_Standard_Address_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'checkout/standard/address/' . $type, $name );
+		return $this->_createSubClient( 'checkout/standard/payment/' . $type, $name );
 	}
 
 
@@ -117,15 +117,43 @@ class Client_Html_Checkout_Standard_Address_Default
 	{
 		$view = $this->getView();
 
+		// only start if there's something to do
+		if( ( $serviceId = $view->param( 'c-payment-option', null ) ) === null ) {
+			return;
+		}
+
 		try
 		{
+			$context = $this->_getContext();
+
+			$serviceCtrl = Controller_Frontend_Service_Factory::createController( $context );
+
+			$attributes = $view->param( 'c-payment/' . $serviceId, array() );
+			$errors = $serviceCtrl->checkServiceAttributes( 'payment', $serviceId, $attributes );
+
+			foreach( $errors as $key => $msg )
+			{
+				if( $msg === null ) {
+					unset( $errors[$key] );
+				}
+			}
+
+			if( count( $errors ) === 0 )
+			{
+				$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
+				$basketCtrl->setService( 'payment', $serviceId, $attributes );
+			}
+
+			$view->paymentError = $errors;
+
+
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$subclient->process( $view );
 			}
 		}
 		catch( Exception $e )
 		{
-			$view->standardStepActive = 'address';
+			$view->standardStepActive = 'payment';
 
 			$error = array( 'An error occured while processing your request. Please re-check your input' );
 			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
@@ -145,24 +173,23 @@ class Client_Html_Checkout_Standard_Address_Default
 		{
 			$context = $this->_getContext();
 
-			/** @todo Get customer if logged in */
-			$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-			$view->addressCustomerItem = $customerManager->createItem();
-			$view->addressCustomerAddressItems = array();
+			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
+			$serviceCntl = Controller_Frontend_Service_Factory::createController( $context );
 
+			$basket = $basketCntl->get();
 
-			$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
-			$locales = $localeManager->searchItems( $localeManager->createSearch( true ) );
+			$services = $serviceCntl->getServices( 'payment', $basket );
+			$serviceAttributes = $servicePrices = array();
 
-			$languages = array();
-			foreach( $locales as $locale ) {
-				$languages[] = $locale->getLanguageId();
+			foreach( $services as $id => $service )
+			{
+				$serviceAttributes[$id] = $serviceCntl->getServiceAttributes( 'payment', $id );
+				$servicePrices[$id] = $serviceCntl->getServicePrice( 'payment', $id, $basket );
 			}
 
-			$view->addressLanguages = $languages;
-			$view->addressLanguageCurrent = $context->getLocale()->getLanguageId();
-			$view->addressCountries = $view->config( 'checkout/address/countries', array() );
-
+			$view->paymentServices = $services;
+			$view->paymentServiceAttributes = $serviceAttributes;
+			$view->paymentServicePrices = $servicePrices;
 
 			$this->_cache = $view;
 		}

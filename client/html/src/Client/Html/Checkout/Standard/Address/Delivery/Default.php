@@ -104,11 +104,12 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			return;
 		}
 
-		$basketCtrl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
-		$basket = $basketCtrl->get();
-
 		try
 		{
+			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$basket = $basketCtrl->get();
+
+
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
 
 			if( ( $option = $view->param( 'ca-delivery-option', '' ) ) == '' ) // new address
@@ -148,6 +149,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				$customerAddressManager = $customerManager->getSubManager( 'address' );
 				$basketCtrl->setAddress( $type, $customerAddressManager->getItem( $option ) );
 			}
+
 
 			$view->deliveryAddress = $basket->getAddress( $type );
 		}

@@ -8,6 +8,10 @@
  */
 
 
+// Strings for translation
+_('delivery');
+
+
 /**
  * Default implementation of checkout delivery HTML client.
  *
@@ -20,7 +24,7 @@ class Client_Html_Checkout_Standard_Delivery_Default
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/checkout/standard/delivery/default/subparts';
-	private $_subPartNames = array( 'billing', 'delivery' );
+	private $_subPartNames = array();
 
 
 	/**
@@ -32,7 +36,7 @@ class Client_Html_Checkout_Standard_Delivery_Default
 	{
 		$view = $this->getView();
 
-		if( $view->get( 'standardStepActive', 'delivery' ) != 'delivery' ) {
+		if( $view->get( 'standardStepActive' ) != 'delivery' ) {
 			return '';
 		}
 
@@ -60,7 +64,7 @@ class Client_Html_Checkout_Standard_Delivery_Default
 	{
 		$view = $this->getView();
 
-		if( $view->get( 'standardStepActive', 'delivery' ) != 'delivery' ) {
+		if( $view->get( 'standardStepActive' ) != 'delivery' ) {
 			return '';
 		}
 
@@ -113,8 +117,36 @@ class Client_Html_Checkout_Standard_Delivery_Default
 	{
 		$view = $this->getView();
 
+		// only start if there's something to do
+		if( ( $serviceId = $view->param( 'c-delivery-option', null ) ) === null ) {
+			return;
+		}
+
 		try
 		{
+			$context = $this->_getContext();
+
+			$serviceCtrl = Controller_Frontend_Service_Factory::createController( $context );
+
+			$attributes = $view->param( 'c-delivery/' . $serviceId, array() );
+			$errors = $serviceCtrl->checkServiceAttributes( 'delivery', $serviceId, $attributes );
+
+			foreach( $errors as $key => $msg )
+			{
+				if( $msg === null ) {
+					unset( $errors[$key] );
+				}
+			}
+
+			if( count( $errors ) === 0 )
+			{
+				$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
+				$basketCtrl->setService( 'delivery', $serviceId, $attributes );
+			}
+
+			$view->deliveryError = $errors;
+
+
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$subclient->process( $view );
 			}
@@ -141,24 +173,23 @@ class Client_Html_Checkout_Standard_Delivery_Default
 		{
 			$context = $this->_getContext();
 
-			/** @todo Get customer if logged in */
-			$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-			$view->deliveryCustomerItem = $customerManager->createItem();
-			$view->deliveryCustomerDeliveryItems = array();
+			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
+			$serviceCntl = Controller_Frontend_Service_Factory::createController( $context );
 
+			$basket = $basketCntl->get();
 
-			$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
-			$locales = $localeManager->searchItems( $localeManager->createSearch( true ) );
+			$services = $serviceCntl->getServices( 'delivery', $basket );
+			$serviceAttributes = $servicePrices = array();
 
-			$languages = array();
-			foreach( $locales as $locale ) {
-				$languages[] = $locale->getLanguageId();
+			foreach( $services as $id => $service )
+			{
+				$serviceAttributes[$id] = $serviceCntl->getServiceAttributes( 'delivery', $id );
+				$servicePrices[$id] = $serviceCntl->getServicePrice( 'delivery', $id, $basket );
 			}
 
-			$view->deliveryLanguages = $languages;
-			$view->deliveryLanguageCurrent = $context->getLocale()->getLanguageId();
-			$view->deliveryCountries = $view->config( 'checkout/delivery/countries', array() );
-
+			$view->deliveryServices = $services;
+			$view->deliveryServiceAttributes = $serviceAttributes;
+			$view->deliveryServicePrices = $servicePrices;
 
 			$this->_cache = $view;
 		}
