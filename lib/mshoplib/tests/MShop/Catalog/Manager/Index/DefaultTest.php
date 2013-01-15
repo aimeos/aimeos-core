@@ -541,7 +541,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 1, $total );
 
 
-		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype13', 'de', 'name' ) );
+		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
 		$conditions = array(
 			$search->compare( '~=', $func, 'Expr' ), // text value
 			$search->compare( '==', 'product.editor', $this->_editor )
@@ -583,7 +583,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$search = $textMgr->createSearch();
 		$expr = array(
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'unittype19', $langid, 'cafe noire cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -655,15 +655,15 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	}
 
 	/**
+	 * Returns value of a catalog_index column.
 	 *
-	 * Gets value of a column.
-	 * @param MW_DB_Manager_Interface $dbm
-	 * @param string $sql DB query
+	 * @param MW_DB_Manager_Interface $dbm Database Manager for connection
+	 * @param string $sql Specified db query to find only one value
 	 * @param string $column Column where to search
-	 * @param integer $siteId Siteid
+	 * @param integer $siteId Siteid of the db entry
 	 * @param integer $productId Product id
-	 * @return string $value result
-	 * @throws Exception
+	 * @return string $value Value returned for specified sql statement
+	 * @throws Exception If column not available or error during a connection to db
 	 */
 	protected function _getValue( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
 	{

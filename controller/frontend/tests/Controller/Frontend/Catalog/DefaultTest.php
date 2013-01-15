@@ -288,7 +288,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetTextListByName()
 	{
-		$filter = $this->_object->createTextFilter( 'cafe noire', 'relevance', '-', 0, 25, 'unittype19', 'name' );
+		$filter = $this->_object->createTextFilter( 'cafe noire', 'relevance', '-', 0, 25, 'unittype19', 'name', 'product' );
 		$results = $this->_object->getTextList( $filter );
 
 		$this->assertEquals( 1, count( $results ) );

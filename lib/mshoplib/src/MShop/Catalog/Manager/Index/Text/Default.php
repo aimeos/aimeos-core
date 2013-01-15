@@ -54,8 +54,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 		),
 		'catalog.index.text.value' => array(
 			'code'=>'catalog.index.text.value()',
-			'internalcode'=>':site AND mcatinte."listtype" = $1 AND mcatinte."langid" = $2 AND mcatinte."type" = $3 AND mcatinte."value"',
-			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>)',
+			'internalcode'=>':site AND mcatinte."listtype" = $1 AND mcatinte."langid" = $2 AND mcatinte."type" = $3 AND mcatinte."domain" = $4 AND mcatinte."value"',
+			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 			'public' => false,
@@ -293,14 +293,14 @@ class MShop_Catalog_Manager_Index_Text_Default
 					}
 
 					foreach( $listTypes[ $refItem->getId() ] as $listType )	{
-						$this->_writeToDB( $stmt, $item->getId(), $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'product', $refItem->getContent(), $date, $editor );
+						$this->_saveText( $stmt, $item->getId(), $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'product', $refItem->getContent(), $date, $editor );
 					}
 				}
 
 				$names = $item->getRefItems( 'text', 'name' );
 
 				if( empty( $names ) ) {
-					$this->_writeToDB( $stmt, $item->getId(), $siteid, null, $locale->getLanguageId(), 'default', 'name', 'product', $item->getLabel(), $date, $editor );
+					$this->_saveText( $stmt, $item->getId(), $siteid, null, $locale->getLanguageId(), 'default', 'name', 'product', $item->getLabel(), $date, $editor );
 				}
 			}
 
@@ -418,6 +418,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 	}
 
 
+	/**
+	 * Saves texts associated with attributes to catalog_index_text.
+	 *
+	 * @param array $items List of product items implementing MShop_Product_Item_Interface
+	 */
 	protected function _saveAttributeTexts( array $items )
 	{
 		$attrIds = array();
@@ -432,10 +437,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
 		$search = $attrManager->createSearch(true);
 		$expr = array(
-			$search->getConditions(),
-			$search->compare( '==', 'attribute.id', array_keys( $prodIds ) )
+			$search->compare( '==', 'attribute.id', array_keys( $prodIds ) ),
+			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
 
 		$attributeItems = $attrManager->searchItems( $search, array('text') );
 
@@ -471,7 +477,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 					foreach( $listTypes[ $refItem->getId() ] as $listType )
 					{
 						foreach( $prodIds[$item->getId()] as $idx => $productId ) {
-							$this->_writeToDB( $stmt, $productId, $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'attribute', $refItem->getContent(), $date, $editor );
+							$this->_saveText( $stmt, $productId, $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'attribute', $refItem->getContent(), $date, $editor );
 						}
 					}
 				}
@@ -479,7 +485,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 				$names = $item->getRefItems( 'text', 'name' );
 
 				if( empty( $names ) ) {
-					$this->_writeToDB( $stmt, $prodIds[$item->getId()], $siteid, null, $locale->getLanguageId(), 'default', 'name', 'attribute', $item->getLabel(), $date, $editor );
+					$this->_saveText( $stmt, $prodIds[$item->getId()], $siteid, null, $locale->getLanguageId(), 'default', 'name', 'attribute', $item->getLabel(), $date, $editor );
 				}
 			}
 
@@ -493,7 +499,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	}
 
 
-	protected function _writeToDB( $stmt, $id, $siteid, $refid, $lang, $listtype, $reftype, $domain, $label, $date, $editor )
+	protected function _saveText( $stmt, $id, $siteid, $refid, $lang, $listtype, $reftype, $domain, $label, $date, $editor )
 	{
 		$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
 		$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
