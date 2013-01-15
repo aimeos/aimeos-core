@@ -90,6 +90,47 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetServicePrice()
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$basket = $orderManager->getSubManager( 'base' )->createItem();
+
+		$service = $this->_getServiceItem();
+		$price = $this->_object->getServicePrice( 'delivery', $service->getId(), $basket );
+
+		$this->assertEquals( '12.95', $price->getValue() );
+		$this->assertEquals( '1.99', $price->getShipping() );
+	}
+
+
+	public function testGetServicePriceCache()
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$basket = $orderManager->getSubManager( 'base' )->createItem();
+
+		$services = $this->_object->getServices( 'delivery', $basket );
+
+		if( ( $service = reset( $services ) ) === false ) {
+			throw new Exception( 'No service item found' );
+		}
+
+		$price = $this->_object->getServicePrice( 'delivery', $service->getId(), $basket );
+
+		$this->assertEquals( '12.95', $price->getValue() );
+		$this->assertEquals( '1.99', $price->getShipping() );
+	}
+
+
+	public function testGetServicePriceNoItems()
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$basket = $orderManager->getSubManager( 'base' )->createItem();
+
+		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
+		$attributes = $this->_object->getServicePrice( 'invalid', -1, $basket );
+	}
+
+
 	public function testCheckServiceAttributes()
 	{
 		$service = $this->_getServiceItem();
