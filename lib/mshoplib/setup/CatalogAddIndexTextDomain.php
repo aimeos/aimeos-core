@@ -13,10 +13,8 @@
 class MW_Setup_Task_CatalogAddIndexTextDomain extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'mshop_catalog_index_text.domain' => array(
-			'ALTER TABLE "mshop_catalog_index_text" ADD "domain" VARCHAR(32) NOT NULL AFTER "type"',
-			'UPDATE "mshop_catalog_index_text" SET "domain" = "product"',
-		),
+		'ALTER TABLE "mshop_catalog_index_text" ADD "domain" VARCHAR(32) NOT NULL AFTER "type"',
+		'UPDATE "mshop_catalog_index_text" SET "domain" = "product"',
 	);
 
 	/**
@@ -62,13 +60,12 @@ class MW_Setup_Task_CatalogAddIndexTextDomain extends MW_Setup_Task_Abstract
 		$table = 'mshop_catalog_index_text';
 		$column = 'domain';
 
-		$parts = explode( '.', $id );
 		$this->_msg( sprintf( 'Checking table "%1$s" for column "%2$s"', $table, $column ), 1 );
 
 		if( $this->_schema->tableExists( $table ) === true
 			&& $this->_schema->columnExists( $table, $column ) === false )
 		{
-			$this->_executeList( $sql );
+			$this->_executeList( $stmts );
 			$this->_status( 'added' );
 		}
 		else
