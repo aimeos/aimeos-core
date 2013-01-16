@@ -48,12 +48,6 @@ class MShop_Locale_Item_Site_Default
 	}
 
 
-	public function getParentId()
-	{
-		return ( isset( $this->_values['parentid'] ) ? (int) $this->_values['parentid'] : 0 );
-	}
-
-
 	/**
 	 * Returns the code of the site.
 	 *
