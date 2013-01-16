@@ -209,7 +209,8 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		$numlevel = $this->_getLevelFromConstant( $level );
 		$search = $this->createSearch();
 
-		if(!is_null($condition)) {
+		if( $condition !== null )
+		{
 			$expr = array(
 				$search->getConditions(),
 				$condition->getConditions()
@@ -260,6 +261,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	public function insertNode( MW_Tree_Node_Interface $node, $parentId = null, $refId = null )
 	{
 		$base = null;
+		$node->parentid = $parentId;
 
 		if( $refId !== null )
 		{
@@ -280,7 +282,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$node->left = 1;
 			$node->right = 2;
 			$node->level = 0;
-			$parentId = 0;
+			$node->parentid = 0;
 
 			if( ( $root = $this->_getRootNode( '-' ) ) !== null )
 			{
@@ -311,7 +313,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$stmt->bind( 1, $node->getLabel(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 2, $node->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 3, $node->getStatus(), MW_DB_Statement_Abstract::PARAM_BOOL );
-			$stmt->bind( 4, $parentId, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, (int) $node->parentid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 5, $node->level, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 6, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 7, $node->right, MW_DB_Statement_Abstract::PARAM_INT );

@@ -211,30 +211,40 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 		$parentIds = array();
 
 		foreach( $items as $item ) {
-			$parentIds[ $item->getCode() ] = $item->getId();
+			$parentIds[] = $item->getId();
 		}
 
 		if( count( $parentIds ) != 2 ) {
 			throw new Exception( 'Not all categories found!' );
 		}
 
-		array_push($parentIds, 0);
+		$parentIds[] = 0;
 
 		$search = $this->_object->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'catalog.parentid', $parentIds ),
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->compare( '==', 'catalog.parentid', $parentIds ) );
 
-		$tree = $this->_object->getTree( $parentIds['root'], array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search );
+		$tree = $this->_object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search );
 
 		$categorycat = $tree->getChild(0);
 		$groupcat = $tree->getChild(1);
 		$groupcatChildren = $groupcat->getChildren();
 		$categorycatChildren = $categorycat->getChildren();
+		$cafecat = $categorycat->getChild(0);
 
+		$caffein = $this->_object->createItem();
+		$caffein->setCode('caffein');
+		$caffein->setLabel('Caffein');
+
+		$this->_object->insertItem( $caffein, $cafecat->getId() );
+		$this->_object->deleteItem($caffein->getId());
+
+		$this->assertEquals( 0, $tree->getNode()->parentid );
 		$this->assertEquals( 'categories', $categorycat->getCode() );
 		$this->assertEquals( 'group', $groupcat->getCode() );
+		$this->assertEquals( $tree->getId(), $categorycat->getNode()->parentid );
+		$this->assertEquals( $tree->getId(), $groupcat->getNode()->parentid );
+		$this->assertEquals( $categorycat->getId(), $cafecat->getNode()->parentid );
+		$this->assertEquals( $cafecat->getId(), $caffein->getNode()->parentid );
 		$this->assertEquals( array(), $groupcatChildren );
 		$this->assertEquals( 3, count( $categorycatChildren ) );
 	}
@@ -252,14 +262,14 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 		$parentIds = array();
 
 		foreach( $items as $item ) {
-			$parentIds[ $item->getCode() ] = $item->getId();
+			$parentIds[] = $item->getId();
 		}
 
 		if( count( $parentIds ) != 2 ) {
 			throw new Exception( 'Not all categories found!' );
 		}
 
-		array_push($parentIds, 0);
+		$parentIds[] = 0;
 
 		$search = $this->_object->createSearch();
 		$conditions = array(
@@ -268,7 +278,7 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$tree = $this->_object->getTree( $parentIds['root'], array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search );
+		$tree = $this->_object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search );
 
 		$categorycat = $tree->getChild(0);
 		$groupcat = $tree->getChild(1);

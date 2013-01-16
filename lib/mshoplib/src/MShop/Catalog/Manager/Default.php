@@ -597,7 +597,7 @@ class MShop_Catalog_Manager_Default
 
 				return $item;
 			}
-			catch( Exception $e ) { throw $e; }
+			catch( Exception $e ) { ; }
 		}
 
 		throw new MShop_Catalog_Exception( sprintf( 'No catalog node found for ID "%1$s"', $id ) );
@@ -715,9 +715,6 @@ class MShop_Catalog_Manager_Default
 			$newItem = $this->_createItem( $child, array(), $listItems, $refItems );
 			$item->addChild( $newItem );
 
-			if( !empty( $parentIds ) && !in_array( $child->getId(), $parentIds ) ){
-				continue;
-			}
 			$this->_createTree( $child, $newItem, $listItemMap, $refItemMap );
 		}
 	}

@@ -8,7 +8,7 @@
 /**
  * Adds parentid column to catalog and locale site table.
  */
-class MW_Setup_Task_CatalogAddParentId extends MW_Setup_Task_Abstract
+class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
 		'mshop_catalog' => 'ALTER TABLE "mshop_catalog" ADD "parentid" INTEGER NOT NULL AFTER "id"',
