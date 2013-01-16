@@ -347,63 +347,6 @@ class MShop_Product_Manager_Default
 	);
 
 
-	private $_siteSearchConfig = array(
-		'product.site.id' => array(
-			'code'=>'product.site.id',
-			'internalcode'=>'mprosi."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_product_site" AS mprosi ON ( mpro."id" = mprosi."parentid" )' ),
-			'label'=>'Product site ID',
-			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'product.site.parentid' => array(
-			'code'=>'product.site.parentid',
-			'internalcode'=>'mprosi."parentid"',
-			'label'=>'Product site parent ID',
-			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'product.site.siteid' => array(
-			'code'=>'product.site.siteid',
-			'internalcode'=>'mprosi."siteid"',
-			'label'=>'Product site site ID',
-			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'product.site.value' => array(
-			'code'=>'product.site.value',
-			'internalcode'=>'mprosi."value"',
-			'label'=>'Product site value',
-			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
-		),
-		'product.site.ctime'=> array(
-			'code'=>'product.site.ctime',
-			'internalcode'=>'mprosi."ctime"',
-			'label'=>'Product site create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.site.mtime'=> array(
-			'code'=>'product.site.mtime',
-			'internalcode'=>'mprosi."mtime"',
-			'label'=>'Product site modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.site.editor'=> array(
-			'code'=>'product.site.editor',
-			'internalcode'=>'mprosi."editor"',
-			'label'=>'Product site editor',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-	);
-
-
 	/**
 	 * Creates the product manager that will use the given context object.
 	 *
@@ -645,8 +588,6 @@ class MShop_Product_Manager_Default
 				return $this->_getListManager( 'product', $manager, $name, $this->_listSearchConfig, $typeManager );
 			case 'type':
 				return $this->_getTypeManager( 'product', $manager, $name, $this->_typeSearchConfig );
-			case 'site':
-				return $this->_getSiteManager( 'product', $manager, $name, $this->_siteSearchConfig );
 			default:
 				return $this->_getSubManager( 'product', $manager, $name );
 		}
