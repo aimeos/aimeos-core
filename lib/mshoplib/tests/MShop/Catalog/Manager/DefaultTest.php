@@ -199,7 +199,7 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testGetTreeWithParentIds()
+	public function testGetTreeWithConditions()
 	{
 		$search = $this->_object->createSearch();
 		$conditions = array(
@@ -247,48 +247,6 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $cafecat->getId(), $caffein->getNode()->parentid );
 		$this->assertEquals( array(), $groupcatChildren );
 		$this->assertEquals( 3, count( $categorycatChildren ) );
-	}
-
-
-	public function testGetTreeWithLevel()
-	{
-		$search = $this->_object->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'catalog.code', array( 'root', 'group' ) ),
-			$search->compare( '==', 'catalog.editor', $this->_editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->_object->searchItems( $search );
-		$parentIds = array();
-
-		foreach( $items as $item ) {
-			$parentIds[] = $item->getId();
-		}
-
-		if( count( $parentIds ) != 2 ) {
-			throw new Exception( 'Not all categories found!' );
-		}
-
-		$parentIds[] = 0;
-
-		$search = $this->_object->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'catalog.parentid', $parentIds ),
-			$search->compare( '<=', 'catalog.level', 1 ),
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-
-		$tree = $this->_object->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE, $search );
-
-		$categorycat = $tree->getChild(0);
-		$groupcat = $tree->getChild(1);
-		$groupcatChildren = $groupcat->getChildren();
-		$categorycatChildren = $categorycat->getChildren();
-
-		$this->assertEquals( 'categories', $categorycat->getCode() );
-		$this->assertEquals( 'group', $groupcat->getCode() );
-		$this->assertEquals( array(), $groupcatChildren );
-		$this->assertEquals( array(), $categorycatChildren );
 	}
 
 
