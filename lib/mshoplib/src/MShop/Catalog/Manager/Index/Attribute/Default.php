@@ -121,10 +121,6 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	 */
 	public function deleteItem( $id )
 	{
-		foreach( $this->_submanagers as $submanager ) {
-			$submanager->deleteItem( $id );
-		}
-
 		$this->deleteItems( array( $id ) );
 	}
 
@@ -336,7 +332,6 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
 		$this->rebuildIndex( array( $item ) );
-		$this->optimize();
 	}
 
 

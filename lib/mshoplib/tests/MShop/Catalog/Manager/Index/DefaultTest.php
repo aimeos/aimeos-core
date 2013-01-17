@@ -611,7 +611,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		//build catalog with all products
 		$config->set( 'mshop/catalog/manager/index/default/index', 'all' );
 		$this->_object->rebuildIndex();
-		$this->_object->optimize();
 
 		$afterInsertAttr = $this->_getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
 		$afterInsertPrice = $this->_getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
@@ -621,7 +620,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		//restore index with categorized products only
 		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
 		$this->_object->rebuildIndex();
-		$this->_object->optimize();
 
 		$this->assertEquals( 7, count( $afterInsertAttr ) );
 		$this->assertEquals( 8, count( $afterInsertPrice ) );
@@ -650,7 +648,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$items = $manager->searchItems( $search );
 
 		$this->_object->rebuildIndex( $items );
-		$this->_object->optimize();
 
 		$afterInsertAttr = $this->_getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
 		$afterInsertPrice = $this->_getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
@@ -664,7 +661,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		//restores catalog
 		$this->_object->rebuildIndex();
-		$this->_object->optimize();
 
 		//check delete
 		$this->assertEquals( array(), $afterDeleteAttr );
@@ -689,12 +685,14 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		//delete whole catalog
 		$search = $manager->createSearch();
+		$search->setSlice( 0, 0x7fffffff );
 		$this->_object->deleteItems( array_keys( $manager->searchItems($search) ) );
 
 		// get number of unique categorized products
 		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
 		$categorySearch = $catalogListManager->createSearch();
 		$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
+		$categorySearch->setSlice( 0, 0x7fffffff );
 
 		$productIds = array();
 		foreach( $catalogListManager->searchItems( $categorySearch ) as $item ){

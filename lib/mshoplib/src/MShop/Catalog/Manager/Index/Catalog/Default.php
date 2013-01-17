@@ -277,24 +277,30 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$listManager = $catalogManager->getSubManager( 'list' );
 
-		foreach ( $items as $key => $item )
-		{
-			$search = $listManager->createSearch( true );
-			$expr = array(
-				$search->getConditions(),
-				$search->compare( '==', 'catalog.list.domain', 'product' ),
-				$search->compare( '==', 'catalog.list.refid', $item->getId() ),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSlice( 0, 0x7FFFFFFF );
-			$listItems[ $key ] = $listManager->searchItems( $search );
+		$ids = array();
+		foreach( $items as $key => $item ) {
+			$ids[] = $item->getId();
 		}
 
+		$search = $listManager->createSearch( true );
+		$expr = array(
+			$search->getConditions(),
+			$search->compare( '==', 'catalog.list.domain', 'product' ),
+			$search->compare( '==', 'catalog.list.refid', $ids ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7FFFFFFF );
+
+		$result = $listManager->searchItems( $search );
+
+		$listItems = array();
+		foreach( $result as $key => $listItem ) {
+			$listItems[ $listItem->getRefId() ][] = $listItem;
+		}
 
 		$date = date('Y-m-d H:i:s' );
 		$editor = $context->getEditor();
 		$siteid = $context->getLocale()->getSiteId();
-
 
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
@@ -305,7 +311,9 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			{
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/catalog/default/item/insert' );
 
-				foreach ( $listItems[ $key ] as $listItem )
+				if( !array_key_exists( $item->getId(), $listItems ) ) { continue; }
+				
+				foreach ( $listItems[ $item->getId() ] as $listItem )
 				{
 					$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
 					$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );

@@ -73,9 +73,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function deleteItem( $id )
 	{
-		foreach( $this->_submanagers as $submanager ) {
-			$submanager->deleteItem( $id );
-		}
+		$this->deleteItems( array( $id ) );
 	}
 
 
