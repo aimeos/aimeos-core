@@ -21,6 +21,17 @@ if( $lastStep ) {
 	$urlBack = $this->url( 'basket-target', 'basket', 'index' );
 }
 
+try
+{
+	$orderService = $this->standardBasket->getService( 'payment' );
+	$orderServiceId = $orderService->serviceId;
+}
+catch( Exception $e )
+{
+	$orderService = null;
+	$orderServiceId = null;
+}
+
 $serviceAttributes = $this->get( 'paymentServiceAttributes', array() );
 $servicePrices = $this->get( 'paymentServicePrices', array() );
 
@@ -37,13 +48,13 @@ foreach( $this->get( 'paymentError', array() ) as $name ) {
 <?php foreach( $this->get( 'paymentServices', array() ) as $id => $service ) : ?>
 		<div class="item">
 			<label class="item-block" for="c-payment-option-<?php echo $id; ?>">
-				<input class="item-option" type="radio" id="c-payment-option-<?php echo $id; ?>" name="c-payment-option" value="<?php echo $id; ?>" />
+				<input class="item-option" type="radio" id="c-payment-option-<?php echo $id; ?>" name="c-payment-option" value="<?php echo $id; ?>" <?php echo ( $id === $orderServiceId ? 'checked="checked"' : '' ); ?> />
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
 				<span class="item-price"><?php echo $this->number( $servicePrices[$id]->getValue() + $servicePrices[$id]->getShipping() ); ?></span>
 <?php	endif; ?>
 				<div class="item-icons">
 <?php	foreach( $service->getRefItems( 'media', 'icon', 'default' ) as $mediaItem ) : ?>
-					<img href="<?php echo $mediaItem->getUrl(); ?>" />
+					<img src="<?php echo $mediaItem->getUrl(); ?>" />
 <?php	endforeach; ?>
 				</div>
 				<h2><?php echo $service->getName(); ?></h2>
@@ -54,10 +65,11 @@ foreach( $this->get( 'paymentError', array() ) as $name ) {
 <?php	if( isset( $serviceAttributes[$id] ) ) : ?>
 			<ul class="item-attributes form-list">
 <?php		foreach( $serviceAttributes[$id] as $key => $attribute ) : ?>
+<?php			$value = ( isset( $orderService ) && ( $value = $orderService->getAttribute( $key ) ) !== null ? $value : $attribute->getDefault() ); ?>
 				<li class="form-item <?php echo $key . ( isset( $paymentCss[$key] ) ? ' ' . join( ' ', $paymentCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
 					<label for="payment-<?php echo $key; ?>"><?php echo $this->translate( 'core/client/html/service', $key ); ?></label>
 <?php			switch( $attribute->getType() ) : case 'string': ?>
-					<input type="text" id="payment-<?php echo $key; ?>" name="c-payment[<?php echo $id; ?>][<?php echo $key; ?>]" value="<?php echo $this->param( 'c-payment/' . $id . '/' . $key, $attribute->getDefault() ); ?>" />
+					<input type="text" id="payment-<?php echo $key; ?>" name="c-payment[<?php echo $id; ?>][<?php echo $key; ?>]" value="<?php echo $this->param( 'c-payment/' . $id . '/' . $key, $value ); ?>" />
 <?php				break; case 'select': ?>
 					<select id="payment-<?php echo $key; ?>" name="c-payment[<?php echo $id; ?>][<?php echo $key; ?>]">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>

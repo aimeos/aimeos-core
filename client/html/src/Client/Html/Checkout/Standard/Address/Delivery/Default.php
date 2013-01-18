@@ -149,9 +149,6 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				$customerAddressManager = $customerManager->getSubManager( 'address' );
 				$basketCtrl->setAddress( $type, $customerAddressManager->getItem( $option ) );
 			}
-
-
-			$view->deliveryAddress = $basket->getAddress( $type );
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
@@ -171,6 +168,15 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
+			$context = $this->_getContext();
+			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
+
+			try {
+				$view->deliveryLanguage = $basketCntl->get()->getAddress( 'delivery' )->getLanguageId();
+			} catch( Exception $e ) {
+				$view->deliveryLanguage = $context->getLocale()->getLanguageId();
+			}
+
 			$default = array(
 				'order.base.address.salutation',
 				'order.base.address.firstname',

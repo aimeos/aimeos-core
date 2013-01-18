@@ -160,7 +160,6 @@ class Client_Html_Checkout_Standard_Address_Default
 			}
 
 			$view->addressLanguages = $languages;
-			$view->addressLanguageCurrent = $context->getLocale()->getLanguageId();
 			$view->addressCountries = $view->config( 'checkout/address/countries', array() );
 
 

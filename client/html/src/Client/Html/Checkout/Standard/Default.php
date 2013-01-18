@@ -19,7 +19,7 @@ class Client_Html_Checkout_Standard_Default
 	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/checkout/standard/default/subparts';
-	private $_subPartNames = array( 'address', 'delivery', 'payment'/*, 'summary'*/ );
+	private $_subPartNames = array( 'address', 'delivery', 'payment', 'summary' );
 
 
 	/**
@@ -116,9 +116,13 @@ class Client_Html_Checkout_Standard_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
+			$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+
+			$view->standardBasket = $basketCntl->get();
 			$view->standardSteps = $this->_subPartNames;
 			$view->standardStepActive = $view->param( 'c-step', 'address' );
 			$view->standardErrorList = array();
+
 
 			$this->_cache = $view;
 		}

@@ -149,8 +149,6 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_getContext() );
 				$basketCtrl->setAddress( $type, $customerManager->getItem( $option )->getBillingAddress() );
 			}
-
-			$view->billingAddress = $basket->getAddress( $type );
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
@@ -170,6 +168,15 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
+			$context = $this->_getContext();
+			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
+
+			try {
+				$view->billingLanguage = $basketCntl->get()->getAddress( 'payment' )->getLanguageId();
+			} catch( Exception $e ) {
+				$view->billingLanguage = $context->getLocale()->getLanguageId();
+			}
+
 			$default = array(
 				'order.base.address.salutation',
 				'order.base.address.firstname',
@@ -191,7 +198,6 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			);
 
 			$view->billingOptional = $view->config( 'checkout/address/billing/optional', $default );
-
 
 			$this->_cache = $view;
 		}
