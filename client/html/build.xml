@@ -60,7 +60,17 @@
             </fileset>
         </foreach>
 		<foreach param="mo-fname" absparam="mo-filename" target="build-mo">
-            <fileset dir="./i18n/countries">
+            <fileset dir="./i18n/country">
+                <include name="*.po" />
+            </fileset>
+        </foreach>
+		<foreach param="mo-fname" absparam="mo-filename" target="build-mo">
+            <fileset dir="./i18n/language">
+                <include name="*.po" />
+            </fileset>
+        </foreach>
+		<foreach param="mo-fname" absparam="mo-filename" target="build-mo">
+            <fileset dir="./i18n/service">
                 <include name="*.po" />
             </fileset>
         </foreach>
