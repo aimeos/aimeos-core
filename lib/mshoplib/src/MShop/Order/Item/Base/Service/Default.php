@@ -288,6 +288,8 @@ class MShop_Order_Item_Base_Service_Default
 		$this->setCode( $service->getCode() );
 		$this->setName( $service->getName() );
 		$this->setType( $service->getType() );
+		/** @todo Replace with private property and public setter */
+		$this->serviceId = $service->getId();
 
 		$items = $service->getRefItems( 'media', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
