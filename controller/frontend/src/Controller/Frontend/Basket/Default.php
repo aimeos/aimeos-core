@@ -301,10 +301,8 @@ class Controller_Frontend_Basket_Default
 
 		foreach( $result as $key => $value )
 		{
-			if( $value !== null )
-			{
-				$msg = sprintf( 'Invalid value "%1$s" entered for attribute "$2%s"', $value, $key );
-				throw new Controller_Frontend_Basket_Exception( $msg );
+			if( $value !== null ) {
+				throw new Controller_Frontend_Basket_Exception( $value );
 			}
 		}
 
