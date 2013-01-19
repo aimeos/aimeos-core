@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+
+$activeStep = $this->get( 'standardStepActive' );
+$steps = $this->get( 'standardSteps', array() );
+$step = null;
+
+do {
+	$lastStep = $step;
+} while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
+
+if( $lastStep ) {
+	$urlBack = $this->url( 'checkout-target', 'checkout', 'index', array( 'c-step' => $lastStep ) );
+} else {
+	$urlBack = $this->url( 'basket-target', 'basket', 'index' );
+}
+
+?>
+<div class="checkout-standard-summary">
+	<h1><?php echo $this->translate( 'core/client/html', 'summary' ); ?></h1>
+	<p class="summary-note"><?php $this->translate( 'core/client/html', 'Please enter your address' ); ?></p>
+	<form method="POST" action="<?php echo $this->url( 'order-target', 'order', 'index' ); ?>">
+<?php echo $this->get( 'summaryBody' ); ?>
+		<div class="button-group">
+			<a class="standardbutton" href="<?php echo $urlBack; ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
+			<button class="standardbutton"><?php echo $this->translate( 'core/client/html', 'Buy now' ); ?></button>
+		</div>
+	</form>
+</div>
