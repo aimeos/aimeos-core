@@ -9,6 +9,12 @@ if( isset( $this->standardBasket ) ) {
 	$price = $this->standardBasket->getPrice();
 }
 
+try {
+	$paymentPrice = $this->standardBasket->getService( 'payment' )->getPrice()->getValue();
+} catch( Exception $e ) {
+	$paymentPrice = '0.00';
+}
+
 $priceFormat = $this->translate( 'core/client/html', '%1$s€' );
 
 ?>
@@ -20,8 +26,8 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s€' );
 				<tr class="main-head">
 					<th class="main-details"></th>
 					<th class="main-quantity"><?php echo $this->translate( 'core/client/html', 'Quantity' ); ?></th>
-					<th class="main-unitprice"><?php echo $this->translate( 'core/client/html', 'Unit price' ); ?></th>
-					<th class="main-price"><?php echo $this->translate( 'core/client/html', 'Price' ); ?></th>
+					<th class="main-unitprice"><?php echo $this->translate( 'core/client/html', 'Price' ); ?></th>
+					<th class="main-price"><?php echo $this->translate( 'core/client/html', 'Sum' ); ?></th>
 					<th class="main-action"></th>
 				</tr>
 			</thead>
@@ -60,11 +66,18 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s€' );
 					<td class="main-price"><?php printf( $priceFormat, $this->number( ( isset( $price ) ? $price->getValue() : 0 ) ) ); ?></td>
 					<td class="main-action"></td>
 				</tr>
-				<tr class="main-shipping">
+				<tr class="main-delivery">
 					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Shipping' ); ?></td>
 					<td class="main-price"><?php printf( $priceFormat, $this->number( ( isset( $price ) ? $price->getShipping() : 0 ) ) ); ?></td>
 					<td class="main-action"></td>
 				</tr>
+<?php if( $paymentPrice > 0 ) : ?>
+				<tr class="main-payment">
+					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Payment costs' ); ?></td>
+					<td class="main-price"><?php printf( $priceFormat, $this->number( $paymentPrice ) ); ?></td>
+					<td class="main-action"></td>
+				</tr>
+<?php endif; ?>
 				<tr class="main-total">
 					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
 					<td class="main-price"><?php printf( $priceFormat, $this->number( ( isset( $price ) ? $price->getValue() + $price->getShipping() : 0 ) ) ); ?></td>
