@@ -57,7 +57,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
+		$this->assertStringStartsWith( '<style type="text/css">', $output );
 	}
 
 

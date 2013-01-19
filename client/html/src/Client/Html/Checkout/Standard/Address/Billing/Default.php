@@ -106,7 +106,8 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 
 		try
 		{
-			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$context = $this->_getContext();
+			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
 			$basket = $basketCtrl->get();
 
 
@@ -145,9 +146,22 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			}
 			else // existing address
 			{
-				/** @todo check that only addresses for the logged in customer can be added */
-				$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_getContext() );
-				$basketCtrl->setAddress( $type, $customerManager->getItem( $option )->getBillingAddress() );
+				$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
+
+				$search = $customerManager->createSearch( true );
+				$expr = array(
+					$search->compare( '==', 'customer.id', $option ),
+					$search->compare( '==', 'customer.code', $context->getEditor() ),
+					$search->getConditions(),
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
+
+				$items = $customerManager->searchItems( $search );
+				if( ( $item = reset( $items ) ) === false ) {
+					throw new Client_Html_Exception( sprintf( 'No customer found for ID "%1$s"', $option ) );
+				}
+
+				$basketCtrl->setAddress( $type, $item->getBillingAddress() );
 			}
 		}
 		catch( Controller_Frontend_Exception $e )

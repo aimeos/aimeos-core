@@ -145,10 +145,29 @@ class Client_Html_Checkout_Standard_Address_Default
 		{
 			$context = $this->_getContext();
 
-			/** @todo Get customer if logged in */
+
 			$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-			$view->addressCustomerItem = $customerManager->createItem();
-			$view->addressCustomerAddressItems = array();
+
+			$search = $customerManager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', 'customer.code', $context->getEditor() ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$items = $customerManager->searchItems( $search );
+
+			if( ( $item = reset( $items ) ) !== false )
+			{
+				$view->addressCustomerItem = $item;
+
+				$customerAddressManager = $customerManager->getSubManager( 'address' );
+
+				$search = $customerAddressManager->createSearch();
+				$search->setConditions( $search->compare( '==', 'customer.address.refid', $item->getId() ) );
+
+				$view->addressCustomerAddressItems = $customerAddressManager->searchItems( $search );
+			}
 
 
 			$localeManager = MShop_Locale_Manager_Factory::createManager( $context );

@@ -106,7 +106,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 		try
 		{
-			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$context = $this->_getContext();
+			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
 			$basket = $basketCtrl->get();
 
 
@@ -144,10 +145,23 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			}
 			else // existing address
 			{
-				/** @todo check that only addresses for the logged in customer can be added */
-				$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_getContext() );
-				$customerAddressManager = $customerManager->getSubManager( 'address' );
-				$basketCtrl->setAddress( $type, $customerAddressManager->getItem( $option ) );
+				$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
+				$address = $customerManager->getSubManager( 'address' )->getItem( $option );
+
+				$search = $customerManager->createSearch( true );
+				$expr = array(
+					$search->compare( '==', 'customer.id', $address->getRefId() ),
+					$search->compare( '==', 'customer.code', $context->getEditor() ),
+					$search->getConditions(),
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
+
+				$items = $customerManager->searchItems( $search );
+				if( ( $item = reset( $items ) ) === false ) {
+					throw new Client_Html_Exception( sprintf( 'No address found for ID "%1$s"', $option ) );
+				}
+
+				$basketCtrl->setAddress( $type, $address );
 			}
 		}
 		catch( Controller_Frontend_Exception $e )

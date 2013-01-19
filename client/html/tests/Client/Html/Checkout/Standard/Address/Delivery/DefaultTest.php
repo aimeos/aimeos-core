@@ -167,6 +167,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 
 	public function testProcessExistingAddress()
 	{
+		$this->_context->setEditor( 'UTC001' );
+
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
@@ -195,6 +197,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 
 		$this->_object->process();
 
+		$this->_context->setEditor( null );
 		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
 		$this->assertEquals( 'Metaways', $basket->getAddress( 'delivery' )->getCompany() );
 	}
