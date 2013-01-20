@@ -126,5 +126,6 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends MW_
 
 		$this->_object->process();
 		$this->assertEquals( 'summary', $view->get( 'standardStepActive' ) );
+		$this->assertEquals( true, $view->get( 'termsError' ) );
 	}
 }

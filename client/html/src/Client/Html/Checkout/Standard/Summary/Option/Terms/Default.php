@@ -109,6 +109,7 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_Default
 		if( ( $option = $view->param( 'cs-option-terms-value', 0 ) ) != 1 )
 		{
 			$view->standardStepActive = 'summary';
+			$view->termsError = true;
 
 			$error = array( 'Please accept the terms and conditions' );
 			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
