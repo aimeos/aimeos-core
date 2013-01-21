@@ -66,20 +66,13 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 
 	public function testGetConfigBE()
 	{
-		$this->assertArrayHasKey( 'url', $this->_object->getConfigBE() );
+		$this->assertEquals( array(), $this->_object->getConfigBE() );
 	}
 
 
 	public function testCheckConfigBE()
 	{
-		$this->assertEquals( array( 'url' => null ), $this->_object->checkConfigBE( array('url' => 'testurl' ) ) );
-	}
-
-
-	public function testCheckConfigBEwrongType()
-	{
-		$result = $this->_object->checkConfigBE( array('url' => 123 ) );
-		$this->assertInternalType( 'string', $result['url'] );
+		$this->assertEquals( array(), $this->_object->checkConfigBE( array('url' => 'testurl' ) ) );
 	}
 
 
