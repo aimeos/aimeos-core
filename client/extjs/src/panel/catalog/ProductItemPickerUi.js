@@ -8,7 +8,7 @@
 Ext.ns('MShop.panel.catalog');
 
 // hook product picker into the catalog ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.ProductItemPickerUi', {
 	xtype : 'MShop.panel.product.itempickerui',
 	itemConfig : {
 		recordName : 'Catalog_List',

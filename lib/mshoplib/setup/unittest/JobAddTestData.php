@@ -80,6 +80,9 @@ class MW_Setup_Task_JobAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$job = $adminJobManager->createItem();
+
+		$this->_conn->begin();
+
 		foreach( $testdata['job'] as $dataset )
 		{
 			$job->setId( null );
@@ -91,5 +94,7 @@ class MW_Setup_Task_JobAddTestData extends MW_Setup_Task_Abstract
 
 			$adminJobManager->saveItem( $job, false );
 		}
+
+		$this->_conn->commit();
 	}
 }

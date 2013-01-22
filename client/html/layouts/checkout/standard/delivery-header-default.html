@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+<script type="text/javascript">
+<!--
+$(document).ready( function() {
+	$( '.checkout-standard-delivery .item-attributes' ).css( 'display', 'none' );
+	$( '.checkout-standard-delivery' ).on(
+		'click',
+		'.item-option',
+		function( event ) {
+			$( '.checkout-standard-delivery .item-attributes' ).slideUp( 400 );
+			$(this).parents( '.item' ).find( '.item-attributes' ).slideDown( 400 );
+		}
+	);
+} );
+// -->
+</script>
+<?php echo $this->get( 'deliveryHeader' ); ?>

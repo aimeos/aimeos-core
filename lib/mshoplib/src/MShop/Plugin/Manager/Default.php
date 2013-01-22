@@ -393,11 +393,12 @@ class MShop_Plugin_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
 			$cfgPathSearch = 'mshop/plugin/manager/default/item/search';
 			$cfgPathCount =  'mshop/plugin/manager/default/item/count';
 			$required = array( 'plugin' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{

@@ -18,6 +18,8 @@ SET SESSION sql_mode='ANSI';
 CREATE TABLE "mshop_catalog" (
 	-- Unique id of the tree node
 	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	-- parent id
+	"parentid" INTEGER NOT NULL,
 	-- site id, references mshop_locale_site.id
 	"siteid" INTEGER NOT NULL,
 	-- Level of depth of the node

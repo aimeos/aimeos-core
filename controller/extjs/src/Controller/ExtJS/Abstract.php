@@ -169,7 +169,7 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	public function getItemSchema()
 	{
-		$attributes = $this->_getManager()->getSearchAttributes( false );		
+		$attributes = $this->_getManager()->getSearchAttributes( false );
 		return array(
 			'name' => $this->_name,
 			'properties' => $this->_getAttributeSchema( $attributes ),
@@ -258,7 +258,14 @@ abstract class Controller_ExtJS_Abstract
 	protected function _initCriteria( MW_Common_Criteria_Interface $criteria, stdClass $params )
 	{
 		if( isset( $params->condition ) && is_object( $params->condition ) ) {
+			$existing = $criteria->getConditions();
 			$criteria->setConditions( $criteria->toConditions( (array) $params->condition ) );
+			$expr = array (
+				$criteria->getConditions(),
+				$existing
+			);
+
+			$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 		}
 
 

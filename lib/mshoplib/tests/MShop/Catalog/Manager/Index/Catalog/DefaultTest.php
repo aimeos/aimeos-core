@@ -100,12 +100,6 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 			throw new Exception( 'No product item with code CNE found!' );
 		}
 
-		//new product item
-		$product->setId( null );
-		$product->setCode( 'ModifiedCNC' );
-		$productManager->saveItem( $product );
-
-		//new catalog list item
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
 		$listManager = $catalogManager->getSubManager( 'list' );
 		$search = $listManager->createSearch( true );
@@ -116,37 +110,37 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 			throw new Exception( 'No catalog list item found!' );
 		}
 
+
+		//new product item
+		$product->setId( null );
+		$product->setCode( 'ModifiedCNC' );
+		$productManager->saveItem( $product );
+
+		//new catalog list item
 		$catListItem->setId( null );
 		$catListItem->setRefId( $product->getId() );
 		$listManager->saveItem( $catListItem );
 
 		$this->_object->saveItem( $product );
 
+
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.catalog.id', $catListItem->getParentId() ) );
 		$result = $this->_object->searchItems( $search );
 
-		$productIds = array();
-		foreach( $result as $item ) {
-			$productIds[] = $item->getId();
-		}
-
-		$this->assertContains( $product->getId(), $productIds );
 
 		$this->_object->deleteItem( $product->getId() );
+		$listManager->deleteItem( $catListItem->getId() );
+		$productManager->deleteItem( $product->getId() );
+
 
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.catalog.id', $catListItem->getParentId() ) );
-		$result = $this->_object->searchItems( $search );
+		$result2 = $this->_object->searchItems( $search );
 
-		$productIds = array();
-		foreach( $result as $item ) {
-			$productIds[] = $item->getId();
-		}
 
-		$this->assertNotContains( $product->getId(), $productIds );
-		$listManager->deleteItem( $catListItem->getId() );
-		$productManager->deleteItem( $product->getId() );
+		$this->assertContains( $product->getId(), array_keys( $result ) );
+		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
 	}
 
 

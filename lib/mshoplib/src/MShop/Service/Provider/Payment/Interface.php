@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
@@ -47,11 +47,4 @@ interface MShop_Service_Provider_Payment_Interface extends MShop_Service_Provide
 	 * @param MShop_Order_Item_Interface $order Order invoice object
 	 */
 	public function refund( MShop_Order_Item_Interface $order );
-	
-	/**
-	 * Sets the communication interface for a service provider or a test.
-	 *
-	 * @param MW_Communication_Interface $communication Interface of communication
-	 */
-	public function setCommunication( MW_Communication_Interface $communication );
 }

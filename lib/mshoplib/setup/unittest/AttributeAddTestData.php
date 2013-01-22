@@ -82,6 +82,9 @@ class MW_Setup_Task_AttributeAddTestData extends MW_Setup_Task_Abstract
 
 		$atypeIds = array();
 		$atype = $attributeTypeManager->createItem();
+
+		$this->_conn->begin();
+
 		foreach( $testdata['attribute/type'] as $key => $dataset )
 		{
 			$atype->setId( null );
@@ -111,5 +114,7 @@ class MW_Setup_Task_AttributeAddTestData extends MW_Setup_Task_Abstract
 
 			$attributeManager->saveItem($attribute, false);
 		}
+
+		$this->_conn->commit();
 	}
 }

@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  * @version $Id: Default.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
@@ -13,7 +13,7 @@
  * Default implementation of catalog list item section for HTML clients.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 class Client_Html_Catalog_List_Items_Default
 	extends Client_Html_Abstract
@@ -26,10 +26,9 @@ class Client_Html_Catalog_List_Items_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
-	 * @param string|null $name Template name
 	 * @return string HTML code
 	 */
-	public function getBody( $name = null )
+	public function getBody()
 	{
 		$view = $this->getView();
 
@@ -49,10 +48,9 @@ class Client_Html_Catalog_List_Items_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
-	 * @param string|null $name Template name
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader( $name = null )
+	public function getHeader()
 	{
 		$view = $this->getView();
 

@@ -504,11 +504,12 @@ class MShop_Service_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
 			$cfgPathSearch = 'mshop/service/manager/default/item/search';
 			$cfgPathCount =  'mshop/service/manager/default/item/count';
 			$required = array( 'service' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{

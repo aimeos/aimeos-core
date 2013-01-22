@@ -19,7 +19,7 @@ MShop.panel.order.base.service.delivery.ItemUi = Ext.extend(Ext.Panel, {
 	layoutConfig : {
 		align : 'stretch'
 	},
-	itemId : 'MShop.panel.order.base.service.delivery.ItemUi.DeliveryPanel',
+	itemId : 'MShop.panel.order.base.service.delivery.ItemUi',
 	plugins : [ 'ux.itemregistry' ],
 
 	initComponent : function() {
@@ -155,4 +155,4 @@ MShop.panel.order.base.service.delivery.ItemUi = Ext.extend(Ext.Panel, {
 Ext.reg('MShop.panel.order.base.service.delivery.itemui', MShop.panel.order.base.service.delivery.ItemUi);
 
 //hook order base address into the order ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.order.ItemUi', MShop.panel.order.base.service.delivery.ItemUi, 30);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.order.ItemUi', 'MShop.panel.order.base.service.delivery.ItemUi', MShop.panel.order.base.service.delivery.ItemUi, 30);

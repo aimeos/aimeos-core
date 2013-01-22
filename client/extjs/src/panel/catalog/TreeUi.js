@@ -345,4 +345,4 @@ MShop.panel.catalog.TreeUi = Ext.extend(Ext.tree.TreePanel, {
 });
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', MShop.panel.catalog.TreeUi, 30);
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.catalog.treeui', MShop.panel.catalog.TreeUi, 30);

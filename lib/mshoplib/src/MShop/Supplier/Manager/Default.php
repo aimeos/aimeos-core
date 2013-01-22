@@ -416,11 +416,12 @@ class MShop_Supplier_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/supplier/manager/default/item/search';
 			$cfgPathCount =  'mshop/supplier/manager/default/item/count';
 			$required = array( 'supplier' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[$row['id']] = $this->_createItem( $row );
 			}

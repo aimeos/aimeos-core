@@ -252,13 +252,12 @@ class MAdmin_Log_Manager_Default
 
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_ONE;
+			$level = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'madmin/log/manager/default/search';
 			$cfgPathCount =  'madmin/log/manager/default/count';
 			$required = array( 'log' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
-				$required, $total, $sitelevel );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[ $row['id'] ] = $this->_createItem( $row );

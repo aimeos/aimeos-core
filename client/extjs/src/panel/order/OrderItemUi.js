@@ -128,4 +128,4 @@ MShop.panel.order.OrderUi = Ext.extend(Ext.FormPanel, {
 });
 
 // hook this into the product ItemUi Basic Panel
-Ext.ux.ItemRegistry.registerItem('MShop.panel.order.ItemUi.BasicPanel', MShop.panel.order.OrderUi, 20);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.order.ItemUi.BasicPanel', 'MShop.panel.order.OrderUi', MShop.panel.order.OrderUi, 20);

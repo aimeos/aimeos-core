@@ -18,8 +18,8 @@
 class MW_Communication_TestPayPalExpress implements MW_Communication_Interface
 {
 	private $_rules = array();
-	
-	
+
+
 	/**
 	 * Adds rules to the communication object.
 	 *
@@ -33,19 +33,19 @@ class MW_Communication_TestPayPalExpress implements MW_Communication_Interface
 		$this->_rules['error'] = $error;
 		$this->_rules['success'] = $success;
 	}
-	
-	
+
+
 	/**
 	 * Get rules of the communication object.
-	 * 
+	 *
 	 * @return array rules for internal check
 	 */
 	public function getRules()
 	{
 		return $this->_rules;
 	}
-	
-	
+
+
 	/**
 	 * Sends request parameters to the providers interface.
 	 *
@@ -59,25 +59,25 @@ class MW_Communication_TestPayPalExpress implements MW_Communication_Interface
 		if( !isset( $this->_rules['set'] ) ) {
 			throw new MW_Communication_Exception( sprintf( 'No rules for unit tests was set' ) );
 		}
-		
+
 		if( !isset( $this->_rules['error'] ) ) {
 			throw new MW_Communication_Exception( sprintf( 'No error message for unit tests was set' ) );
 		}
-		
+
 		if( !isset( $this->_rules['success'] ) ) {
 			throw new MW_Communication_Exception( sprintf( 'No success message for unit tests was set' ) );
 		}
-		
+
 		$params = array();
 		parse_str( $payload, $params );
-		
+
 		foreach( $this->_rules['set'] as $key => $value )
 		{
 			if( $params[$key] != $value ) {
-				return $this->_rules['error'];				
+				return $this->_rules['error'];
 			}
 		}
-		
+
 		return $this->_rules['success'];
 	}
 }

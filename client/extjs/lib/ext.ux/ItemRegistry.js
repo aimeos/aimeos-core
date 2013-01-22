@@ -45,15 +45,15 @@ Ext.ux.ItemRegistry.itemMap = {};
  * @param {String/Constructor/Object} item
  * @param {Number} pos (optional)
  */
-Ext.ux.ItemRegistry.registerItem = function(key, item, pos) {
+Ext.ux.ItemRegistry.registerItem = function(key, itemkey, item, pos) {
     if (! Ext.ux.ItemRegistry.itemMap.hasOwnProperty(key)) {
-        Ext.ux.ItemRegistry.itemMap[key] = [];
+        Ext.ux.ItemRegistry.itemMap[key] = {};
     }
 
-    Ext.ux.ItemRegistry.itemMap[key].push({
+    Ext.ux.ItemRegistry.itemMap[key][itemkey] = {
         item: item,
         pos: pos
-    });
+    };	
 };
 
 Ext.ux.ItemRegistry.prototype = {
@@ -80,12 +80,12 @@ Ext.ux.ItemRegistry.prototype = {
 
         var regItems = Ext.ux.ItemRegistry.itemMap[this.key] || [];
         
-        Ext.each(regItems, function(reg) {
-            var addItem = this.getItem(reg),
-                addPos = null;
-
-            // insert item 
-            this.cmp.items.each(function(item, idx) {
+        
+        Ext.iterate(regItems, function(key, value) {
+        	var addItem = this.getItem(value),
+            addPos = null;
+        
+        	this.cmp.items.each(function(item, idx) {
                 if (addItem.registerdItemPos < item.registerdItemPos) {
                     this.cmp.insert(idx, addItem);
                     addPos = idx;
@@ -98,7 +98,7 @@ Ext.ux.ItemRegistry.prototype = {
                 this.cmp.add(addItem);
             }
         }, this);
-    },
+     },
 
     getItem: function(reg) {
         var def = reg.item,
@@ -118,6 +118,7 @@ Ext.ux.ItemRegistry.prototype = {
         
         return item;
     }
+    
 };
 Ext.ComponentMgr.registerPlugin('ux.itemregistry', Ext.ux.ItemRegistry);
 

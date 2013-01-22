@@ -50,9 +50,10 @@ interface MW_Tree_Manager_Interface
 	 *
 	 * @param mixed $id Retrieve nodes starting from the given ID
 	 * @param int $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
 	 */
-	public function getNode( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE );
+	public function getNode( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null );
 
 	/**
 	 * Inserts a new node before the given reference node to the parent in the storage.
@@ -97,10 +98,10 @@ interface MW_Tree_Manager_Interface
 	 * @return boolean True if tree is read-only, false if not
 	 */
 	public function isReadOnly();
-	
+
 	/**
 	 * Returns a list if node ids, that are in the path of given node id
-	 * 
+	 *
 	 * @param mixed $id Id of node to get path
 	 * @return array List of MW_Tree_Node_Interface in Path with node id as key
 	 */

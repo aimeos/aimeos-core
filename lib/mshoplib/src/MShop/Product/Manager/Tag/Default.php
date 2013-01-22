@@ -304,11 +304,12 @@ class MShop_Product_Manager_Tag_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/product/manager/tag/default/item/search';
 			$cfgPathCount =  'mshop/product/manager/tag/default/item/count';
 			$required = array( 'product.tag', 'product.tag.type' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[ $row['id'] ] = $this->_createItem( $row );
 			}

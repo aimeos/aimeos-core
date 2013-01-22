@@ -10,11 +10,11 @@
 <div class="basket-attribute">
 	<table>
 		<tbody>
-<?php foreach( $this->attributeItems as $type => $attributes ) : ?> 
+<?php foreach( $this->get( 'attributeItems', array() ) as $type => $attributes ) : ?> 
 			<tr>
 				<td><?php echo $this->translate( 'core/client/html', $type ); ?></td>
 				<td>
-					<select name="d-attr-id">
+					<select name="b-attrv-id">
 						<option value=""></option>
 <?php	foreach( $attributes as $id => $attribute ) : ?>
 						<option value="<?php echo $id; ?>">
@@ -35,5 +35,5 @@
 <?php endforeach; ?>
 		</tbody>
 	</table>
-<?php echo $this->attributeBody; ?>
+<?php echo $this->get( 'attributeBody' ); ?>
 </div>

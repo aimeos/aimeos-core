@@ -13,8 +13,8 @@ return array(
 			WHERE "id" = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_locale_site" ( "code", "label", "config", "status", "editor", "mtime", "ctime", "level", "nleft", "nright" )
-			SELECT ?, ?, ?, ?, ?, ?, ?, 0, COALESCE( MAX("nright"), 0 ) + 1, COALESCE( MAX("nright"), 0 ) + 2
+			INSERT INTO "mshop_locale_site" ( "code", "label", "config", "status", "parentid", "editor", "mtime", "ctime", "level", "nleft", "nright" )
+			SELECT ?, ?, ?, ?, ?, ?, ?, ?, 0, COALESCE( MAX("nright"), 0 ) + 1, COALESCE( MAX("nright"), 0 ) + 2
 			FROM "mshop_locale_site"
 		',
 		'update' => '
@@ -23,7 +23,7 @@ return array(
 			WHERE id = ?
 		',
 		'search' => '
-			SELECT mlocsi."id", mlocsi."code", mlocsi."label", mlocsi."config", mlocsi."status",
+			SELECT mlocsi."id", mlocsi."parentid", mlocsi."code", mlocsi."label", mlocsi."config", mlocsi."status",
 				mlocsi."editor", mlocsi."mtime", mlocsi."ctime"
 			FROM "mshop_locale_site" AS mlocsi
 			WHERE :cond
@@ -31,9 +31,13 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mlocsi."id" ) AS "count"
-			FROM "mshop_locale_site" AS mlocsi
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mlocsi."id"
+				FROM "mshop_locale_site" AS mlocsi
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

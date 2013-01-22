@@ -38,9 +38,9 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 		$ds = DIRECTORY_SEPARATOR;
 
 		$this->_translationSources = array(
-			'testDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1',
-			'otherTestDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2', // no file!
-			'thirdTestDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3',
+			'testDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' ),
+			'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ), // no file!
+			'thirdTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3' ),
 		);
 
 		$this->_object = new MW_Translation_Zend( $this->_translationSources, 'csv', 'ru_ZD' );
@@ -88,6 +88,7 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'tests', $this->_object->dn( 'invalidTestDomain', 'test', 'tests', 2 ) );
 	}
 
+
 	// test using the testfiles/case1/ka_GE file; lang: german
 	public function testAdapterGettext()
 	{
@@ -99,4 +100,20 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'Datei', $object->dn( 'testDomain', 'File', 'Files', 1 ) );
 	}
 
+
+	public function testDnOverwrite()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+
+		$translationSources = array(
+			'testDomain' => array(
+				dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2',
+				dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3',
+			),
+		);
+
+		$object = new MW_Translation_Zend( $translationSources, 'csv', 'ru_ZD' );
+
+		$this->assertEquals( 'plural 2 translation', $object->dn( 'testDomain', 'File', 'Files', 25 ) );
+	}
 }

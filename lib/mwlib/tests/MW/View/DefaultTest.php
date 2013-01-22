@@ -38,7 +38,7 @@ class MW_View_DefaultTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$this->_object = new MW_View_Default();
-		$this->_translate = new MW_View_Helper_Translate( $this->_object, new MW_Translation_None( 'en_GB' ) );
+		$this->_translate = new MW_View_Helper_Translate_Default( $this->_object, new MW_Translation_None( 'en_GB' ) );
 	}
 
 
@@ -67,6 +67,16 @@ class MW_View_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'MW_View_Exception' );
 		$this->_object->test;
+	}
+
+
+	public function testGet()
+	{
+		$this->assertEquals( null, $this->_object->get( 'test' ) );
+		$this->assertEquals( 1, $this->_object->get( 'test', 1 ) );
+
+		$this->_object->test = 10;
+		$this->assertEquals( 10, $this->_object->get( 'test' ) );
 	}
 
 
