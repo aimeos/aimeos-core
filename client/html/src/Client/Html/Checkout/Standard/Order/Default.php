@@ -8,18 +8,23 @@
  */
 
 
+// Strings for translation
+_('order');
+
+
 /**
- * Default implementation of standard checkout HTML client.
+ * Default implementation of checkout order HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Default
+class Client_Html_Checkout_Standard_Order_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_subPartPath = 'client/html/checkout/standard/default/subparts';
-	private $_subPartNames = array( 'address', 'delivery', 'payment', 'summary', 'order' );
+	private $_cache;
+	private $_subPartPath = 'client/html/checkout/standard/order/default/subparts';
+	private $_subPartNames = array( /*'payment'*/ );
 
 
 	/**
@@ -29,16 +34,22 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
+
+		if( $view->get( 'standardStepActive' ) != 'order' ) {
+			return '';
+		}
+
+		$view = $this->_setViewParams( $view );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->standardBody = $html;
+		$view->orderBody = $html;
 
-		$tplconf = 'client/html/checkout/standard/default/template-body';
-		$default = 'checkout/standard/body-default.html';
+		$tplconf = 'client/html/checkout/standard/order/default/template-body';
+		$default = 'checkout/standard/order-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -51,16 +62,22 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
+
+		if( $view->get( 'standardStepActive' ) != 'order' ) {
+			return '';
+		}
+
+		$view = $this->_setViewParams( $view );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->standardHeader = $html;
+		$view->orderHeader = $html;
 
-		$tplconf = 'client/html/checkout/standard/default/template-header';
-		$default = 'checkout/standard/header-default.html';
+		$tplconf = 'client/html/checkout/standard/order/default/template-header';
+		$default = 'checkout/standard/order-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -75,7 +92,7 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'checkout/standard/' . $type, $name );
+		return $this->_createSubClient( 'checkout/standard/order/' . $type, $name );
 	}
 
 
@@ -92,7 +109,7 @@ class Client_Html_Checkout_Standard_Default
 
 
 	/**
-	 * Processes the input, e.g. store given values.
+	 * Processes the input, e.g. store given order.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
 	 */
@@ -100,8 +117,33 @@ class Client_Html_Checkout_Standard_Default
 	{
 		$view = $this->getView();
 
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$subclient->process( $view );
+		// only start if there's something to do
+		if( ( $option = $view->param( 'cs-order', null ) ) === null ) {
+			return;
+		}
+
+		try
+		{
+			$context = $this->_getContext();
+
+			$controller = Controller_Frontend_Basket_Factory::createController( $context );
+			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+			$orderBaseManager = $orderManager->getSubManager( 'base' );
+
+			$basket = $controller->get();
+			$orderBaseManager->store( $basket );
+
+			$orderItem = $orderManager->createItem();
+			$orderItem->setBaseId( $basket->getId() );
+			$orderItem->setType( MShop_Order_Item_Abstract::TYPE_WEB );
+			$orderManager->saveItem( $orderItem );
+
+			$view->orderItem = $orderItem;
+		}
+		catch( Exception $e )
+		{
+			$error = array( 'An error occured while placing your order' );
+			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
 		}
 	}
 
@@ -116,14 +158,6 @@ class Client_Html_Checkout_Standard_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
-
-			$view->standardBasket = $basketCntl->get();
-			$view->standardSteps = $this->_subPartNames;
-			$view->standardStepActive = $view->param( 'c-step', 'address' );
-			$view->standardErrorList = array();
-
-
 			$this->_cache = $view;
 		}
 

@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+<div class="checkout-standard-order-payment">
+<?php if( isset( $this->paymentForm ) ) : ?>
+	<noscript>
+		<h2><?php echo $this->translate( 'core/client/html', 'Payment' ); ?></h2>
+		<p class="order-notice"><?php echo $this->translate( 'core/client/html', 'You will now be redirected to our payment service partner' ); ?></p>
+	</noscript>
+	<form method="<?php echo $this->paymentForm->getMethod(); ?>" action="<?php echo $this->paymentForm->getUrl(); ?>">
+<?php	foreach( $this->paymentForm->getValues() as $key => $value ) : ?>
+		<input type="hidden" name="<?php echo $key; ?>" value="<?php echo $value; ?>" />
+<?php	endforeach; ?>
+<?php echo $this->get( 'paymentBody' ); ?>
+		<noscript>
+			<button class="standardbutton"><?php echo $this->translate( 'core/client/html', 'Proceed to payment' ); ?></button>
+		</noscript>
+	</form>
+<?php elseif( isset( $this->paymentUrl ) ) : ?>
+	<noscript>
+		<h2><?php echo $this->translate( 'core/client/html', 'Order successful' ); ?></h2>
+		<a class="standardbutton" href="<?php echo $this->paymentUrl; ?>"><?php echo $this->translate( 'core/client/html', 'Proceed to confirmation page' ); ?></a>
+	</noscript>
+<?php endif; ?>
+</div>

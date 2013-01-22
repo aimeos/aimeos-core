@@ -9,17 +9,18 @@
 
 
 /**
- * Default implementation of standard checkout HTML client.
+ * Default implementation of checkout payment order HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Default
+class Client_Html_Checkout_Standard_Order_Payment_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_subPartPath = 'client/html/checkout/standard/default/subparts';
-	private $_subPartNames = array( 'address', 'delivery', 'payment', 'summary', 'order' );
+	private $_cache;
+	private $_subPartPath = 'client/html/checkout/standard/order/payment/default/subparts';
+	private $_subPartNames = array();
 
 
 	/**
@@ -35,10 +36,10 @@ class Client_Html_Checkout_Standard_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->standardBody = $html;
+		$view->paymentBody = $html;
 
-		$tplconf = 'client/html/checkout/standard/default/template-body';
-		$default = 'checkout/standard/body-default.html';
+		$tplconf = 'client/html/checkout/standard/order/payment/default/template-body';
+		$default = 'checkout/standard/order-payment-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -57,10 +58,10 @@ class Client_Html_Checkout_Standard_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->standardHeader = $html;
+		$view->paymentHeader = $html;
 
-		$tplconf = 'client/html/checkout/standard/default/template-header';
-		$default = 'checkout/standard/header-default.html';
+		$tplconf = 'client/html/checkout/standard/order/payment/default/template-header';
+		$default = 'checkout/standard/order-payment-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -75,7 +76,7 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'checkout/standard/' . $type, $name );
+		return $this->_createSubClient( 'checkout/standard/order/payment/' . $type, $name );
 	}
 
 
@@ -92,16 +93,41 @@ class Client_Html_Checkout_Standard_Default
 
 
 	/**
-	 * Processes the input, e.g. store given values.
+	 * Processes the input, e.g. provides the payment form.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
 	 */
 	public function process()
 	{
-		$view = $this->getView();
+		try
+		{
+			$view = $this->getView();
+			$context = $this->_getContext();
 
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$subclient->process( $view );
+			$controller = Controller_Frontend_Basket_Factory::createController( $context );
+			$service = $controller->get()->getService( 'payment' );
+
+			$manager = MShop_Service_Manager_Factory::createManager( $context );
+			$provider = $manager->getProvider( $manager->getItem( $service->serviceId ) );
+
+
+			$url = $view->url( $view->config( 'confirm-target' ), 'basket', 'confirm' );
+
+			if( strpos( $url, '?' ) === false ) {
+				$url .= '?';
+			} else {
+				$url .= '&';
+			}
+
+			$url .= '&arcavias=' . $view->orderItem->getId();
+
+			$view->paymentForm = $provider->process( $view->orderItem );
+			$view->paymentUrl = $url;
+		}
+		catch( Exception $e )
+		{
+			$error = array( 'An error occured while processing the payment' );
+			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
 		}
 	}
 
@@ -116,14 +142,6 @@ class Client_Html_Checkout_Standard_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
-
-			$view->standardBasket = $basketCntl->get();
-			$view->standardSteps = $this->_subPartNames;
-			$view->standardStepActive = $view->param( 'c-step', 'address' );
-			$view->standardErrorList = array();
-
-
 			$this->_cache = $view;
 		}
 

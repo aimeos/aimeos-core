@@ -25,6 +25,7 @@ if( $lastStep ) {
 	<h1><?php echo $this->translate( 'core/client/html', 'summary' ); ?></h1>
 	<p class="summary-note"><?php $this->translate( 'core/client/html', 'Please enter your address' ); ?></p>
 	<form method="POST" action="<?php echo $this->url( 'order-target', 'order', 'index' ); ?>">
+		<input type="hidden" name="cs-order" value="1" />
 <?php echo $this->get( 'summaryBody' ); ?>
 		<div class="button-group">
 			<a class="standardbutton" href="<?php echo $urlBack; ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
