@@ -5,8 +5,18 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-if( isset( $this->standardBasket ) ) {
+if( isset( $this->standardBasket ) )
+{
 	$price = $this->standardBasket->getPrice();
+	$priceValue = $price->getValue();
+	$priceShipping = $price->getShipping();
+	$priceCurrency = $this->translate( 'core/client/html/currency', $price->getCurrencyId() );
+}
+else
+{
+	$priceValue = '0.00';
+	$priceShipping = '0.00';
+	$priceCurrency = '';
 }
 
 try {
@@ -15,7 +25,7 @@ try {
 	$paymentPrice = '0.00';
 }
 
-$priceFormat = $this->translate( 'core/client/html', '%1$s€' );
+$priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 
 ?>
 <div class="summary-basket">
@@ -42,9 +52,10 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s€' );
 					<span class="product-attributevalue"><?php echo $attribute->getValue(); ?></span>
 <?php		endforeach; ?>
 				</td>
+<?php		$prodPrice = $product->getPrice()->getValue(); ?>
 				<td class="main-quantity"><?php echo $product->getQuantity(); ?></td>
-				<td class="main-unitprice"><?php printf( $priceFormat, $this->number( $product->getPrice()->getValue() ) ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( $product->getPrice()->getValue() * $product->getQuantity() ) ); ?></td>
+				<td class="main-unitprice"><?php printf( $priceFormat, $this->number( $prodPrice ), $priceCurrency ); ?></td>
+				<td class="main-price"><?php printf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ); ?></td>
 			</tr>
 <?php 	endforeach; ?>
 <?php endif; ?>
@@ -52,21 +63,21 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s€' );
 		<tfoot>
 			<tr class="main-subtotal">
 				<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Sub-total' ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( ( isset( $price ) ? $price->getValue() : 0 ) ) ); ?></td>
+				<td class="main-price"><?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?></td>
 			</tr>
 			<tr class="main-delivery">
 				<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Shipping' ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( ( isset( $price ) ? $price->getShipping() : 0 ) ) ); ?></td>
+				<td class="main-price"><?php printf( $priceFormat, $this->number( $priceShipping ), $priceCurrency ); ?></td>
 			</tr>
 <?php if( $paymentPrice > 0 ) : ?>
 			<tr class="main-payment">
 				<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Payment costs' ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( $paymentPrice ) ); ?></td>
+				<td class="main-price"><?php printf( $priceFormat, $this->number( $paymentPrice ), $priceCurrency ); ?></td>
 			</tr>
 <?php endif; ?>
 			<tr class="main-total">
 				<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( ( isset( $price ) ? $price->getValue() + $price->getShipping() : 0 ) ) ); ?></td>
+				<td class="main-price"><?php printf( $priceFormat, $this->number( $priceValue + $priceShipping ), $priceCurrency ); ?></td>
 			</tr>
 		</tfoot>
 	</table>

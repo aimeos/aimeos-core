@@ -65,6 +65,11 @@
             </fileset>
         </foreach>
 		<foreach param="mo-fname" absparam="mo-filename" target="build-mo">
+            <fileset dir="./i18n/currency">
+                <include name="*.po" />
+            </fileset>
+        </foreach>
+		<foreach param="mo-fname" absparam="mo-filename" target="build-mo">
             <fileset dir="./i18n/language">
                 <include name="*.po" />
             </fileset>
