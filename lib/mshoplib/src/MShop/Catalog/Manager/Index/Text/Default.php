@@ -455,6 +455,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
+		$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
 
 		try
 		{
@@ -465,7 +466,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
 				}
 
-				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
+
 
 				foreach( $item->getRefItems( 'text' ) as $refItem )
 				{
