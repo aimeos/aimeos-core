@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: CatalogAddCode.php 14251 2011-12-09 13:36:27Z nsendetzky $
+ * @version $Id$
  */
 
 /**
