@@ -11,8 +11,34 @@
 class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'mshop_catalog' => 'ALTER TABLE "mshop_catalog" ADD "parentid" INTEGER NOT NULL AFTER "id"',
-		'mshop_locale_site' => 'ALTER TABLE "mshop_locale_site" ADD "parentid" INTEGER NOT NULL AFTER "id"'
+		'mshop_catalog' => array(
+			'ALTER TABLE "mshop_catalog" ADD "parentid" INTEGER NOT NULL AFTER "id"',
+			'UPDATE mshop_catalog mc1 SET parentid = (
+				SELECT id FROM
+					( SELECT * FROM mshop_catalog )
+				AS mc2
+				WHERE
+					mc2.siteid = mc1.siteid AND
+					mc2.nleft < mc1.nleft AND
+					mc2.nright > mc1.nright AND
+					mc2.level = mc1.level - 1
+				LIMIT 1
+			) WHERE parentid = 0'
+		),
+
+		'mshop_locale_site' => array(
+			'ALTER TABLE "mshop_locale_site" ADD "parentid" INTEGER NOT NULL AFTER "id"',
+			'UPDATE mshop_locale_site ml1 SET parentid = (
+				SELECT id FROM
+					( SELECT * FROM mshop_locale_site )
+				AS ml2
+				WHERE
+					ml2.nleft < ml1.nleft AND
+					ml2.nright > ml1.nright AND
+					ml2.level = ml1.level - 1
+				LIMIT 1
+			) WHERE parentid = 0'
+		)
 	);
 
 
@@ -62,88 +88,12 @@ class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
 			$this->_msg( $msg, 1 );
 			if( $this->_schema->tableExists( $table ) === true	&& $this->_schema->columnExists( $table, 'parentid' ) === false )
 			{
-				$this->_execute( $stmt );
-				$this->_choseSiteId( $table );
+				$this->_executeList( $stmt );
 				$this->_status( 'added' );
 			}
 			else
 			{
 				$this->_status( 'OK' );
-			}
-		}
-	}
-
-
-	private function _choseSiteId( $table )
-	{
-		$sql = 'SELECT * from ' . $table;
-
-		$stmt = $this->_conn->create( $sql );
-		$results = $stmt->execute();
-
-		$trees = array();
-
-		while( ( $row = $results->fetch() ) !== false )	{
-			$trees[ $row[ 'siteid' ] ][ $row[ 'level' ] ][ $row[ 'id' ] ] = $row;
-		}
-
-		foreach( $trees as $siteid => $tree ) {
-			$this->_setParentId( $table, $tree, $siteid );
-		}
-	}
-
-	private function _setParentId( $table, $nodes = array(), $siteid = null )
-	{
-		$maxLvl = count( $nodes );
-		$ids = array();
-
-		for( $lvl = 0; $lvl < $maxLvl; $lvl++ )
-		{
-			foreach( $nodes[ $lvl ] as $nid => $values )
-			{
-				if( $values[ 'level' ] === '0' ) {
-					$ids[ $values[ 'id' ] ] = '0';
-				}
-
-				if( isset( $nodes[ $lvl + 1 ] ) )
-				{
-					foreach( $nodes[ $lvl + 1 ] as $id => $value )
-					{
-						foreach( $nodes[ $lvl ] as $parentid => $parentvalue )
-						{
-							if( $value[ 'nleft' ] > $parentvalue[ 'nleft' ] && $value[ 'nright' ] < $parentvalue[ 'nright' ] ) {
-								$ids[ $id ] = $parentvalue[ 'id' ];
-							}
-						}
-					}
-				}
-			}
-		}
-
-		if( $table === 'mshop_catalog' ) {
-			$updatesql = 'UPDATE mshop_catalog SET "parentid" = ? WHERE siteid = ? and id = ?';
-
-			foreach( $ids as $id => $parentid )
-			{
-				$stmt = null;
-				$stmt = $this->_conn->create( $updatesql );
-				$stmt->bind( 1, $parentid );
-				$stmt->bind( 2, $siteid );
-				$stmt->bind( 3, $id );
-				$result = $stmt->execute()->finish();
-			}
-		}
-		else
-		{
-			$updatesql = 'UPDATE mshop_locale_site SET "parentid" = ? WHERE id = ?';
-
-			foreach( $ids as $id => $parentid )
-			{
-				$stmt = null;
-				$stmt = $this->_conn->create( $updatesql );
-				$stmt->bind( 1, $parentid );
-				$stmt->bind( 2, $id );
-				$result = $stmt->execute()->finish();
 			}
 		}
 	}
