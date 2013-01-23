@@ -141,6 +141,12 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			disabled: true,
 			handler: this.onOpenEditWindow.createDelegate(this, ['edit'])
 		});
+		
+		this.actionCopy = new Ext.Action({
+			text: _('Copy'),
+			disabled: true,
+			handler: this.onOpenEditWindow.createDelegate(this, ['copy'])
+		});
 
 		this.actionDelete = new Ext.Action({
 			text: _('Delete'),
@@ -166,6 +172,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.tbar = [
 			this.actionAdd,
 			this.actionEdit,
+			this.actionCopy,
 			this.actionDelete,
 			this.actionExport,
 			this.importButton
@@ -215,6 +222,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 				items: [
 					this.actionAdd,
 					this.actionEdit,
+					this.actionCopy,
 					this.actionDelete,
 					this.actionExport
 				]
@@ -312,6 +320,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	onGridSelectionChange: function(sm) {
 		var numSelected = sm.getCount();
 		this.actionEdit.setDisabled(numSelected !== 1);
+		this.actionCopy.setDisabled(numSelected === 0);
 		this.actionDelete.setDisabled(numSelected === 0);
 		this.actionExport.setDisabled(this.exportMethod === null);
 	},
