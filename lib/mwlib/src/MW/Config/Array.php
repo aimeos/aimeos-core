@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Config
@@ -18,30 +18,27 @@
 class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 {
 	protected $_config = array();
-	protected $_cache = array();
-	protected $_negCache = array();
+	protected $_setValues = array();
 	protected $_paths = array();
 	protected $_fileCache = array();
 
 
+
+	/**
+	 * Initialize config object
+	 *
+	 * @param Array $config Configuration array
+	 * @param mixed $path Filesystem path or list of paths to the configuration files
+	 */
 	public function __construct( $config = array(), $paths = array() )
 	{
-		if( $config instanceof Zend_Config ){
-			$config = $config->toArray();
-		}
-
 		if( !is_array( $config ) ) {
 			throw new Exception( 'First argument must be an array.' );
 		}
 
 		$this->_config = $config;
 
-		foreach( (array)$paths as $path )
-		{
-			if( file_exists( $path ) ) {
-				$this->_paths[] = $path;
-			}
-		}
+		$this->_paths = (array)$paths;
 	}
 
 
@@ -56,12 +53,8 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 	{
 		$name = trim( $name, '/' );
 
-		if( isset( $this->_negCache[ $name ] ) && ( $this->_negCache[ $name ] === true ) ) {
-			return $default;
-		}
-
-		if( isset( $this->_cache[ $name ] ) ) {
-			return $this->_cache[ $name ];
+		if( array_key_exists( $name, $this->_setValues ) ) {
+			return $this->_setValues[ $name ];
 		}
 
 		$path = explode( '/', $name );
@@ -85,13 +78,11 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 			$return = $this->_getFromArray( $path, $subConfig );
 		}
 
-		if( $return === null || $return === array() )
-		{
-			$this->_negCache[ $name ] = true;
+		if( $return === null || $return === array() ) {
 			return $default;
 		}
 
-		$this->_cache[ $name ] = $return;
+		$this->_setValues[ $name ] = $return;
 		return $return;
 	}
 
@@ -104,16 +95,8 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 	 */
 	public function set( $name, $value )
 	{
-		if( $value === null ) {
-			$this->_negCache[ $name ] = true;
-		} else {
-			$name = trim( $name, '/' );
-			$this->_cache[ $name ] = $value;
-
-			if( isset( $this->_negCache[ $name ] ) ) {
-				unset( $this->_negCache[ $name ] );
-			}
-		}
+		$name = trim( $name, '/' );
+		$this->_setValues[ $name ] = $value;
 	}
 
 

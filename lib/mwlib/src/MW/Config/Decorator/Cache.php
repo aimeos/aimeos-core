@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Config
@@ -17,7 +17,6 @@
  */
 class MW_Config_Decorator_Cache implements MW_Config_Decorator_Interface
 {
-	
 	protected $_object = null;
 	protected $_cache = array();
 	protected $_negCache = array();
@@ -29,10 +28,23 @@ class MW_Config_Decorator_Cache implements MW_Config_Decorator_Interface
 	 *
 	 * @param MW_Config_Interface $object Config object or decorator
 	 */
-	public function __construct( MW_Config_Interface $object )
+	public function __construct( MW_Config_Interface $object, $prefix = null )
 	{
 		$this->_object = $object;
-		$this->_prefix = $object->get( 'resource/config/decorator/prefix', 'config:' );
+
+		if( $prefix === null ) {
+			$prefix = $object->get( 'resource/config/decorator/prefix', 'config:' );
+		}
+		$this->_prefix = $prefix;
+	}
+
+
+	/**
+	 * Clones the objects inside.
+	 */
+	public function __clone()
+	{
+		$this->_object = clone $this->_object;
 	}
 
 
@@ -47,17 +59,17 @@ class MW_Config_Decorator_Cache implements MW_Config_Decorator_Interface
 	{
 		$name = trim( $name, '/' );
 
-		if( isset( $this->_negCache[ $name ] ) && ( $this->_negCache[ $name ] === true ) ) {
+		if( isset( $this->_negCache[ $name ] ) ) {
 			return $default;
 		}
 
-		if( isset( $this->_cache[ $name ] ) ) {
+		if( array_key_exists( $name, $this->_cache ) ) {
 			return $this->_cache[ $name ];
 		}
 
-		$return = $this->_object->get( $name, $default );
+		$return = $this->_object->get( $name, null );
 
-		if( $return === null || $return === array() )
+		if( $return === null )
 		{
 			$this->_negCache[ $name ] = true;
 			return $default;
@@ -76,11 +88,12 @@ class MW_Config_Decorator_Cache implements MW_Config_Decorator_Interface
 	 */
 	public function set( $name, $value )
 	{
+		$name = trim( $name, '/' );
+
 		if( $value === null ) {
 			$this->_negCache[ $name ] = true;
 		} else {
-			$name = trim( $name, '/' );
-			$this->_cache[ $name ] = $value;
+ 			$this->_cache[ $name ] = $value;
 
 			if( isset( $this->_negCache[ $name ] ) ) {
 				unset( $this->_negCache[ $name ] );

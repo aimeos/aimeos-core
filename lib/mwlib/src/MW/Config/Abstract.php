@@ -28,13 +28,10 @@ abstract class MW_Config_Abstract implements MW_Config_Interface
 	**/
 	protected function _include( $file )
 	{
-		if( isset( $this->_includeCache[ $file ] ) ) {
-			$add = $this->_includeCache[ $file ];
-		} else {
-			$add = include $file;
-			$this->_includeCache[ $file ] = $add;
+		if( !isset( $this->_includeCache[$file] ) ) {
+			$this->_includeCache[$file] = include $file;
 		}
 
-		return $add;
+		return $this->_includeCache[$file];
 	}
 }

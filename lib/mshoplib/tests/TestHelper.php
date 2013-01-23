@@ -56,10 +56,8 @@ class TestHelper
 		$paths = $mshop->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
-
-		//$conf = new MW_Config_Zend( new Zend_Config( array(), true ), $paths );
-		$innerConf = new MW_Config_Array( array(), $paths );
-		$conf = new MW_Config_Decorator_Cache( $innerConf );
+		$conf = new MW_Config_Array( array(), $paths );
+		$conf = new MW_Config_Decorator_Cache( $conf );
 		$ctx->setConfig( $conf );
 
 

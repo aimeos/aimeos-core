@@ -18,8 +18,6 @@
 class MW_Config_Zend extends MW_Config_Abstract implements MW_Config_Interface
 {
 	private $_config = null;
-	private $_cache = array();
-	private $_negcache = array();
 	private $_paths = array();
 
 
@@ -56,14 +54,6 @@ class MW_Config_Zend extends MW_Config_Abstract implements MW_Config_Interface
 	{
 		$path = trim( $path, '/' );
 
-		if( array_key_exists( $path, $this->_negcache ) ) {
-			return $default;
-		}
-
-		if ( array_key_exists($path, $this->_cache) ) {
-			return $this->_cache[$path];
-		}
-
 		$result = $default;
 		$parts = explode( '/', $path );
 
@@ -75,17 +65,13 @@ class MW_Config_Zend extends MW_Config_Abstract implements MW_Config_Interface
 
 			$result = $this->_get( $this->_config, '', $parts );
 		}
-		catch( MW_Config_Exception $e )
-		{
-			$this->_negcache[$path] = true;
+		catch( MW_Config_Exception $e ) {
 			return $default;
 		}
 
 		if ($result instanceof Zend_Config) {
 			$result = $result->toArray();
 		}
-
-		$this->_cache[$path] = $result;
 
 		return $result;
 	}
@@ -119,12 +105,6 @@ class MW_Config_Zend extends MW_Config_Abstract implements MW_Config_Interface
 		}
 
 		$config->{$parts[$max]} = $value;
-
-		if ( array_key_exists( $path, $this->_negcache ) ) {
-			unset( $this->_negcache[$path] );
-		}
-
-		$this->_cache[$path] = $value;
 	}
 
 
