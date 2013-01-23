@@ -126,7 +126,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		}
 		catch( Exception $e )
 		{
-			$error = array( 'An error occured while processing the payment' );
+			$error = array( 'An error occured while processing the payment: ' . $e->getMessage() );
 			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
 		}
 	}
