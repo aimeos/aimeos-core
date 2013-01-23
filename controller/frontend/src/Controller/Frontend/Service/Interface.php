@@ -35,9 +35,10 @@ interface Controller_Frontend_Service_Interface
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @return array List of attribute definitions implementing MW_Common_Criteria_Attribute_Interface
 	 */
-	public function getServiceAttributes( $type, $serviceId );
+	public function getServiceAttributes( $type, $serviceId, MShop_Order_Item_Base_Interface $basket );
 
 	/**
 	 * Returns the price of the service.

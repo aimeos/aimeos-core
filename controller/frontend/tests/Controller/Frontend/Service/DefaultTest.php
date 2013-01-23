@@ -9,6 +9,7 @@
 class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private static $_basket;
 
 
 	public static function main()
@@ -23,6 +24,14 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$this->_object = new Controller_Frontend_Service_Default( TestHelper::getContext() );
+	}
+
+
+	public static function setUpBeforeClass()
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderBaseMgr = $orderManager->getSubManager( 'base' );
+		self::$_basket = $orderBaseMgr->createItem();
 	}
 
 
@@ -60,7 +69,7 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 	public function testGetServiceAttributes()
 	{
 		$service = $this->_getServiceItem();
-		$attributes = $this->_object->getServiceAttributes( 'delivery', $service->getId() );
+		$attributes = $this->_object->getServiceAttributes( 'delivery', $service->getId(), self::$_basket );
 
 		$this->assertEquals( 0, count( $attributes ) );
 	}
@@ -77,7 +86,7 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No service item found' );
 		}
 
-		$attributes = $this->_object->getServiceAttributes( 'delivery', $service->getId() );
+		$attributes = $this->_object->getServiceAttributes( 'delivery', $service->getId(), self::$_basket );
 
 		$this->assertEquals( 0, count( $attributes ) );
 	}
@@ -86,7 +95,7 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 	public function testGetServiceAttributesNoItems()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
-		$attributes = $this->_object->getServiceAttributes( 'invalid', -1 );
+		$attributes = $this->_object->getServiceAttributes( 'invalid', -1, self::$_basket );
 	}
 
 

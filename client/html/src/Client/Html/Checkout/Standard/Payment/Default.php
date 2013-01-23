@@ -183,7 +183,7 @@ class Client_Html_Checkout_Standard_Payment_Default
 
 			foreach( $services as $id => $service )
 			{
-				$serviceAttributes[$id] = $serviceCntl->getServiceAttributes( 'payment', $id );
+				$serviceAttributes[$id] = $serviceCntl->getServiceAttributes( 'payment', $id, $basket );
 				$servicePrices[$id] = $serviceCntl->getServicePrice( 'payment', $id, $basket );
 			}
 

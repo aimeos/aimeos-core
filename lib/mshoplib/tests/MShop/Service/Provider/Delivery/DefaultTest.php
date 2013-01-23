@@ -77,12 +77,6 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testGetConfigFE()
-	{
-		$this->assertEquals(array(), $this->_object->getConfigFE());
-	}
-
-
 	public function testCheckConfigBE()
 	{
 		$attributes = array( 'project' => 'Unit', 'url' => 'http://unittest.com' );
