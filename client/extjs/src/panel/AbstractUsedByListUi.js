@@ -143,13 +143,19 @@ MShop.panel.AbstractUsedByListUi = Ext.extend( Ext.Panel, {
 		refIdFilter[this.parentRefIdProperty] = this.ParentItemUi.record.data['product.id'];
 
 		options.params = options.params || {};
-		options.params.condition = {
-			'&&' : [ {
-				 	'==' : domainFilter
-				}, {
-					'==' : refIdFilter
-			} ]
-		};
+		if( this.ParentItemUi.record.data['product.id'] ) {
+			options.params.condition = {
+				'&&' : [ {
+					 	'==' : domainFilter
+					}, {
+						'==' : refIdFilter
+				} ]
+			};
+		}
+		else {
+			options.params.condition = { '==' : domainFilter };
+		}
+		
 	},
 
 	onBeforeWrite: function( store, action, records, options )
