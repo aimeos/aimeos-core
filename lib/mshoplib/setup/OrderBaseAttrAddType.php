@@ -3,7 +3,6 @@
 /**
 * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
 * @license LGPLv3, http://www.arcavias.com/en/license
-* @version $Id:$
 */
 
 
@@ -13,8 +12,8 @@
 class MW_Setup_Task_OrderBaseAttrAddType extends MW_Setup_Task_Abstract
 {  
 	private $_mysql = array(
-			'ALTER TABLE "mshop_order_base_product_attr" ADD "type" VARCHAR(32) AFTER "name"',
-			'ALTER TABLE "mshop_order_base_service_attr" ADD "type" VARCHAR(32) AFTER "name"',
+			'mshop_order_base_product_attr' => 'ALTER TABLE "mshop_order_base_product_attr" ADD "type" VARCHAR(32) NOT NULL AFTER "name"',
+			'mshop_order_base_service_attr' => 'ALTER TABLE "mshop_order_base_service_attr" ADD "type" VARCHAR(32) NOT NULL AFTER "name"',
 	);
 	
 	
@@ -25,7 +24,7 @@ class MW_Setup_Task_OrderBaseAttrAddType extends MW_Setup_Task_Abstract
 	*/
 	public function getPreDependencies()
 	{
-		return array('TablesCreateMShop');
+		return array();
 	}
 	
 	
@@ -36,7 +35,7 @@ class MW_Setup_Task_OrderBaseAttrAddType extends MW_Setup_Task_Abstract
 	*/
 	public function getPostDependencies()
 	{
-		return array();
+		return array('TablesCreateMShop');
 	}
 	
 	
@@ -54,24 +53,25 @@ class MW_Setup_Task_OrderBaseAttrAddType extends MW_Setup_Task_Abstract
 	*
 	* @param array $sql List of SQL statements to execute for adding columns
 	*/
-	protected function _process(array $sql)
+	protected function _process(array $stmts)
 	{
-		$this->_msg ('Add column type to attribute table');
-		if ($this->_schema->tableExists('mshop_order_base_product_attr') === true 
-		    && $this->_schema->columnExists('mshop_order_base_product_attr', 'type') === false) 
+		$this->_msg ('Add column type to attribute table', 0);
+		$this->_status('');
+		
+		foreach( $stmts AS $table => $stmt )
 		{
-			$this->_executeList($sql);
-			$this->_status('added');
-		}
-		else if ($this->_schema->tableExists('mshop_order_base_service_attr') === true 
-		    && $this->_schema->columnExists('mshop_order_base_service_attr', 'type') === false) 
-		{
-			$this->_executeList($sql);
-			$this->_status('added');
-		}
-		else 
-		{
-			$this->_status('OK');
+			$this->_msg( sprintf( 'Checking "%1$s" table', $table ), 1 );
+			
+			if( $this->_schema->tableExists( $table ) === true
+			&& $this->_schema->columnExists( $table, 'type' ) === false )
+			{
+				$this->_execute($stmt);
+				$this->_status('added');
+			} 
+			else 
+			{
+				$this->_status('OK');
+			}					
 		}
 	}
 }
