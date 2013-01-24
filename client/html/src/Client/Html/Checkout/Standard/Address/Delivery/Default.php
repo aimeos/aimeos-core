@@ -163,6 +163,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 				$basketCtrl->setAddress( $type, $address );
 			}
+
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
 		catch( Controller_Frontend_Exception $e )
 		{

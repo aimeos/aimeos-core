@@ -147,6 +147,17 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 
 	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 */
+	public function process()
+	{
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
 	 * Returns a list of catalog items that are in the path from the given ID to the catalog root.
 	 *
 	 * @param string $catid Unique category ID

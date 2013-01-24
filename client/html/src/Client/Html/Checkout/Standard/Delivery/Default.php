@@ -146,10 +146,7 @@ class Client_Html_Checkout_Standard_Delivery_Default
 
 			$view->deliveryError = $errors;
 
-
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$subclient->process( $view );
-			}
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
 		catch( Exception $e )
 		{

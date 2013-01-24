@@ -98,11 +98,7 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function process()
 	{
-		$view = $this->getView();
-
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$subclient->process( $view );
-		}
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
 
 

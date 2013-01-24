@@ -90,4 +90,15 @@ class Client_Html_Catalog_List_Header_Default
 	{
 		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
 	}
+
+
+	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 */
+	public function process()
+	{
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
 }

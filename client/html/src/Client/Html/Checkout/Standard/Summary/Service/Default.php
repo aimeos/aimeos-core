@@ -30,7 +30,7 @@ class Client_Html_Checkout_Standard_Summary_Service_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -52,7 +52,7 @@ class Client_Html_Checkout_Standard_Summary_Service_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -93,18 +93,12 @@ class Client_Html_Checkout_Standard_Summary_Service_Default
 
 
 	/**
-	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	public function process()
 	{
-		if( !isset( $this->_cache ) )
-		{
-			$this->_cache = $view;
-		}
-
-		return $this->_cache;
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
 }

@@ -72,9 +72,19 @@ abstract class Client_Html_Abstract
 	 * Processes the input, e.g. store given values.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
+	 *
+	 * @param string $confpath Path to the configuration that contains the configured sub-clients
+	 * @param array $default List of sub-client names that should be used if no other configuration is available
 	 */
-	public function process()
+	protected function _process( $confpath, array $default )
 	{
+		$view = $this->getView();
+
+		foreach( $this->_getSubClients( $confpath, $default ) as $subclient )
+		{
+			$subclient->setView( $view );
+			$subclient->process();
+		}
 	}
 
 

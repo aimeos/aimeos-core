@@ -94,6 +94,17 @@ class Client_Html_Catalog_List_Default
 
 
 	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 */
+	public function process()
+	{
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
