@@ -836,13 +836,27 @@ input[type="password"] {
  * Checkout
  */
 
-.checkout-standard .standard-steps {
+.checkout-standard .steps {
 	font-weight: bold;
 	text-align: center;
 	counter-reset: step;
 }
 
-.checkout-standard .standard-step {
+.checkout-standard .steps a {
+	text-decoration: none;
+}
+
+.checkout-standard .steps .active {
+	color: #689DB9;
+	border-bottom: solid 8px #689DB9;
+}
+
+.checkout-standard .steps .current {
+	color: #004266;
+	border-bottom: solid 8px #004266;
+}
+
+.checkout-standard .step {
 	display: inline-block;
 	vertical-align: top;
 	overflow: hidden;
@@ -852,23 +866,9 @@ input[type="password"] {
 	border-bottom: solid 8px #d3dbde;
 }
 
-.checkout-standard .standard-step:before {
+.checkout-standard .step:before {
 	content: counter(step) ". ";
 	counter-increment: step;
-}
-
-.checkout-standard .standard-steps a {
-	text-decoration: none;
-}
-
-.checkout-standard .standard-steps .active {
-	color: #689DB9;
-	border-bottom: solid 8px #689DB9;
-}
-
-.checkout-standard .standard-steps .current {
-	color: #004266;
-	border-bottom: solid 8px #004266;
 }
 
 
