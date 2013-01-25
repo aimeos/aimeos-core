@@ -9,7 +9,7 @@
 /**
 * Adds column type to table mshop_order_base_product_attr and mshop_order_base_service_attr.
 */ 
-class MW_Setup_Task_OrderBaseAttrAddType extends MW_Setup_Task_Abstract
+class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 {  
 	private $_mysql = array(
 			'mshop_order_base_product_attr' => 'ALTER TABLE "mshop_order_base_product_attr" ADD "type" VARCHAR(32) NOT NULL AFTER "ordprodid"',
