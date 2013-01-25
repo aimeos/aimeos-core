@@ -380,7 +380,7 @@ CREATE INDEX "idx_msordbaseat_sid_oid_cd_val" ON "mshop_order_base_service_attr"
 
 
 --
--- Status of the order
+-- Status of the the order
 --
 
 CREATE TABLE "mshop_order_status" (
