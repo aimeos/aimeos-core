@@ -302,6 +302,8 @@ CREATE TABLE "mshop_order_base_service" (
 	"baseid" BIGINT NOT NULL,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original service ID
+	"servid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Service domain (delivery, payment)
 	"type" VARCHAR(8) NOT NULL,
 	-- Service code
