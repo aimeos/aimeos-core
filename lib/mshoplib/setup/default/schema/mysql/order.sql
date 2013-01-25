@@ -265,14 +265,14 @@ CREATE TABLE "mshop_order_base_product_attr" (
 	"siteid" INTEGER NULL,
 	-- Order product id
 	"ordprodid" BIGINT NOT NULL,
+	-- Attribute type
+	"type" VARCHAR(32) NOT NULL,
 	-- Attribute code
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Attribute value
 	"value" VARCHAR(255) NOT NULL,
 	-- Localized attribute name
 	"name" VARCHAR(255) NOT NULL,
-	-- Attribute type
-	"type" VARCHAR(32) NOT NULL,
 	-- Timestamp of the last update
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry
@@ -351,14 +351,14 @@ CREATE TABLE "mshop_order_base_service_attr" (
 	"siteid" INTEGER NULL,
 	-- Order service id
 	"ordservid" BIGINT NOT NULL,
+	-- Attribute type
+	"type" VARCHAR(32) NOT NULL,
 	-- Attribute code
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Attribute value
 	"value" VARCHAR(255) NOT NULL,
 	-- Attribute name
 	"name" VARCHAR(255) NOT NULL,
-	-- Attribute type
-	"type" VARCHAR(32) NOT NULL,
 	-- Date of last modification of this database entry
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry
