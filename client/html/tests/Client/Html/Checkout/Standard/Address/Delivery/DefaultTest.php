@@ -58,17 +58,31 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
+		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
+	}
+
+
+	public function testGetHeaderNewAddress()
+	{
+		$view = TestHelper::getView();
+
+		$param = array( 'ca-delivery-option' => '' );
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+
+		$output = $this->_object->getHeader();
 		$this->assertStringStartsWith( '<style type="text/css">', $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$view = TestHelper::getView();
-		$this->_object->setView( $view );
+		$view = $this->_object->getView();
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="address-delivery">', $output );
+		$this->assertStringStartsWith( '<div class="checkout-standard-address-delivery">', $output );
 
 		$this->assertGreaterThan( 0, count( $view->deliveryMandatory ) );
 		$this->assertGreaterThan( 0, count( $view->deliveryOptional ) );
@@ -115,7 +129,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 				'order.base.address.address1' => 'mystreet 1',
 				'order.base.address.postal' => '20000',
 				'order.base.address.city' => 'hamburg',
-				'order.base.address.langid' => 'en',
+				'order.base.address.languageid' => 'en',
 			),
 		);
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -156,8 +170,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		catch( Client_Html_Exception $e )
 		{
 			$this->assertEquals( 2, count( $view->deliveryError ) );
-			$this->assertArrayHasKey( 'order.base.address.salutation', $view->deliveryError );
-			$this->assertArrayHasKey( 'order.base.address.langid', $view->deliveryError );
+			$this->assertArrayHasKey( 'salutation', $view->deliveryError );
+			$this->assertArrayHasKey( 'languageid', $view->deliveryError );
 			return;
 		}
 

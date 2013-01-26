@@ -125,14 +125,16 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					'order.base.address.address1',
 					'order.base.address.postal',
 					'order.base.address.city',
-					'order.base.address.langid',
+					'order.base.address.languageid',
 					'order.base.address.email'
 				);
 
 				foreach( $view->config( 'checkout/address/billing/mandatory', $default ) as $mandatory )
 				{
-					if( !isset( $param[$mandatory] ) ) {
-						$missing[$mandatory] = sprintf( 'Billing address part "%1$s" is missing', $mandatory );
+					if( !isset( $param[$mandatory] ) || $param[$mandatory] == '' )
+					{
+						$name = substr( $mandatory, 19 );
+						$missing[$name] = sprintf( 'Billing address part "%1$s" is missing', $name );
 					}
 				}
 
@@ -142,6 +144,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( 'At least one billing address part is missing' );
 				}
 
+				$basketCtrl->get()->setCustomerId( '' );
 				$basketCtrl->setAddress( $type, $param );
 			}
 			else // existing address
@@ -161,6 +164,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( sprintf( 'No customer found for ID "%1$s"', $option ) );
 				}
 
+				$basketCtrl->get()->setCustomerId( $item->getId() );
 				$basketCtrl->setAddress( $type, $item->getBillingAddress() );
 			}
 
@@ -168,6 +172,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
+			$view->standardStepActive = 'address';
 			$view->billingError = $e->getErrorList();
 			throw $e;
 		}
@@ -193,26 +198,11 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				$view->billingLanguage = $context->getLocale()->getLanguageId();
 			}
 
-			$default = array(
-				'order.base.address.salutation',
-				'order.base.address.firstname',
-				'order.base.address.lastname',
-				'order.base.address.address1',
-				'order.base.address.postal',
-				'order.base.address.city',
-				'order.base.address.langid',
-				'order.base.address.email'
-			);
-
+			$default = array( 'salutation', 'firstname', 'lastname', 'address1', 'postal', 'city', 'languageid', 'email' );
 			$view->billingMandatory = $view->config( 'checkout/address/billing/mandatory', $default );
 
 
-			$default = array(
-				'order.base.address.company',
-				'order.base.address.address2',
-				'order.base.address.countryid',
-			);
-
+			$default = array( 'company', 'address2', 'countryid' );
 			$view->billingOptional = $view->config( 'checkout/address/billing/optional', $default );
 
 			$this->_cache = $view;

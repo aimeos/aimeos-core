@@ -5,10 +5,17 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$addressOption = '';
+
+try {
+	$this->standardBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+} catch( Exception $e ) {
+	$addressOption = -1;
+}
 ?>
-<?php if( !isset( $this->addressCustomerItem ) ) : ?>
+<?php if( $this->param( 'ca-delivery-option', $addressOption ) === '' ) : ?>
 <style type="text/css">
-.checkout-standard-address .billing-item-new {
+.checkout-standard-address-delivery .item-new .form-list {
 	display: block;
 }
 </style>
@@ -16,10 +23,10 @@
 <script type="text/javascript">
 <!--
 $(document).ready( function() {
-	$( '.checkout-standard-address' ).on(
+	$( '.checkout-standard-address-delivery' ).on(
 		'click',
-		'.delivery-item > input',
-		{ selector: '.checkout-standard-address .address-delivery-list' },
+		'.header > input',
+		{ selector: '.checkout-standard-address-delivery .item-new .form-list' },
 		function( event ) {
 			if( $(this).val() == '' ) {
 				$( event.data.selector ).slideDown( 400 );
