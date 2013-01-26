@@ -26,7 +26,7 @@ class MW_View_Helper_Parameter_Default
 	 * Initializes the parameter view helper.
 	 *
 	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param array $config Associative list of key/value pairs
+	 * @param array $params Associative list of key/value pairs
 	 */
 	public function __construct( $view, array $params )
 	{
@@ -49,10 +49,18 @@ class MW_View_Helper_Parameter_Default
 			return $this->_params;
 		}
 
-		if( isset( $this->_params[$name] ) ) {
-			return $this->_params[$name];
+		$parts = explode( '/', trim( $name, '/' ) );
+		$param = $this->_params;
+
+		foreach( $parts as $part )
+		{
+			if( isset( $param[$part] ) ) {
+				$param = $param[$part];
+			} else {
+				return $default;
+			}
 		}
 
-		return $default;
+		return $param;
 	}
 }
