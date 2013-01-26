@@ -116,9 +116,14 @@ class Client_Html_Checkout_Standard_Default
 
 			$view->standardBasket = $basketCntl->get();
 			$view->standardSteps = $this->_subPartNames;
-			$view->standardStepActive = $view->param( 'c-step', 'address' );
-			$view->standardErrorList = array();
 
+			if( !isset( $view->standardStepActive ) ) {
+				$view->standardStepActive = $view->param( 'c-step', 'address' );
+			}
+
+			if( !isset( $view->standardErrorList ) ) {
+				$view->standardErrorList = array();
+			}
 
 			$this->_cache = $view;
 		}
