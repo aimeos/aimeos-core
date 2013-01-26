@@ -30,6 +30,8 @@ $sites = $this->sites();
 <?php echo ( isset( $this->filter ) ? $this->filter->getHeader() : '' ); ?>
 <?php echo ( isset( $this->list ) ? $this->list->getHeader() : '' ); ?>
 <?php echo ( isset( $this->detail ) ? $this->detail->getHeader() : '' ); ?>
+<?php echo ( isset( $this->basket ) ? $this->basket->getHeader() : '' ); ?>
+<?php echo ( isset( $this->checkout ) ? $this->checkout->getHeader() : '' ); ?>
 </head>
 
 <body>
@@ -85,12 +87,20 @@ $sites = $this->sites();
 							</span>
 						</div>
 					</div>
-						<a href="#" id="headerImgLink">&nbsp;</a>
+					<a href="#" id="headerImgLink">&nbsp;</a>
 
 					<div id="content" class="clearfix">
+						<?php if( isset( $this->filter ) ) : ?>
 						<div id="contentLeft">
-							<?php if( isset( $this->filter ) ) { echo $this->filter->getBody(); } ?>
+							<?php echo $this->filter->getBody(); ?>
 						</div>
+						<?php else : ?>
+						<style type="text/css">
+							#contentRight {
+								margin-left: 0;
+							}
+						</style>
+						<?php endif; ?>
 						<div id="contentRight">
 							<?php echo $this->layout()->content; ?>
 						</div>
