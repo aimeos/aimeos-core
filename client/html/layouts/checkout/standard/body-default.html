@@ -36,10 +36,12 @@ $stepActive = $this->get( 'standardStepActive' );
 		<li class="step <?php echo $name . $class; ?>"><?php echo $string; ?></li>
 <?php endforeach; ?>
 	</ol>
+<?php if( ( $errors = $this->get( 'standardErrorList', array() ) ) !== array() ) : ?>
 	<ul class="error-list">
-<?php foreach( $this->get( 'standardErrorList', array() ) as $msg ) : ?>
-		<li><?php echo $msg; ?></li>
-	</ul>
+<?php foreach( $errors as $error ) : ?>
+		<li><?php echo $error; ?></li>
 <?php endforeach; ?>
+	</ul>
+<?php endif; ?>
 <?php echo $this->get( 'standardBody' ); ?>
 </div>
