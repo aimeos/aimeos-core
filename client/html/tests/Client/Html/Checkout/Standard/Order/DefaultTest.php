@@ -122,7 +122,7 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 		$baseManager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' );
 
 		$controller->get()->setCustomerId( '-1' );
-		$controller->setAddress( 'payment', array( 'order.base.address.langid' => 'en' ) );
+		$controller->setAddress( 'payment', array( 'order.base.address.languageid' => 'en' ) );
 
 		$view = TestHelper::getView();
 
