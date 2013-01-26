@@ -37,7 +37,7 @@ return array (
 	),
 
 	'text' => array (
-	
+
 		'text/customer/information' => array( 'langid' => null, 'typeid' => 'customer/information', 'domain' => 'customer', 'label' => 'customer/information', 'content' => 'Customer information', 'status' => 1),
 		'text/customer/notify' => array( 'langid' => null, 'typeid' => 'customer/notify', 'domain' => 'customer', 'label' => 'customer/notify', 'content' => 'Customer notify', 'status' => 1),
 		'text/customer/newsletter' => array( 'langid' => null, 'typeid' => 'customer/newsletter', 'domain' => 'customer', 'label' => 'customer/newsletter', 'content' => 'Customer newsletter', 'status' => 1),
@@ -141,5 +141,8 @@ return array (
 		'text/service_text1' => array( 'langid' => 'de', 'typeid' => 'product/serviceinformation', 'domain' => 'service', 'label' => 'service_text1', 'content' => 'Unittest: Service text 1 de', 'status' => 1 ),
 		'text/service_text2' => array( 'langid' => 'de', 'typeid' => 'product/serviceinformation', 'domain' => 'service', 'label' => 'service_text2', 'content' => 'Unittest: Service text 2 de', 'status' => 1 ),
 		'text/service_text3' => array( 'langid' => 'de', 'typeid' => 'product/serviceinformation', 'domain' => 'service', 'label' => 'service_text3', 'content' => 'Unittest: Service text 3 de', 'status' => 0 ),
+		'text/service_text4' => array( 'langid' => 'en', 'typeid' => 'service/name', 'domain' => 'service', 'label' => 'service_text4', 'content' => 'Unittest service name', 'status' => 1 ),
+		'text/service_text5' => array( 'langid' => 'en', 'typeid' => 'service/short', 'domain' => 'service', 'label' => 'service_text5', 'content' => 'Short service description', 'status' => 1 ),
+		'text/service_text6' => array( 'langid' => 'en', 'typeid' => 'service/long', 'domain' => 'service', 'label' => 'service_text6', 'content' => 'A long description for the service item', 'status' => 1 ),
 	),
 );
