@@ -81,7 +81,7 @@ class Client_Html_Checkout_Standard_Summary_Address_DefaultTest extends MW_Unitt
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="summary-address">', $output );
+		$this->assertStringStartsWith( '<div class="checkout-standard-summary-address">', $output );
 	}
 
 

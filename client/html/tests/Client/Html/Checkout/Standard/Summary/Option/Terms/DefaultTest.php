@@ -64,7 +64,7 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends MW_
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="summary-option-terms">', $output );
+		$this->assertStringStartsWith( '<div class="checkout-standard-summary-option-terms">', $output );
 	}
 
 

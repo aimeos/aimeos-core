@@ -20,66 +20,88 @@ else
 }
 
 try {
-	$paymentPrice = $this->standardBasket->getService( 'payment' )->getPrice()->getValue();
+	$deliveryPriceItem = $this->standardBasket->getService( 'delivery' )->getPrice();
+	$deliveryPriceService = $deliveryPriceItem->getShipping();
+	$deliveryPriceValue = $deliveryPriceItem->getValue();
 } catch( Exception $e ) {
-	$paymentPrice = '0.00';
+	$deliveryPriceValue = '0.00';
+	$deliveryPriceService = '0.00';
+}
+
+try {
+	$paymentPriceItem = $this->standardBasket->getService( 'payment' )->getPrice();
+	$paymentPriceService = $paymentPriceItem->getShipping();
+	$paymentPriceValue = $paymentPriceItem->getValue();
+} catch( Exception $e ) {
+	$paymentPriceValue = '0.00';
+	$paymentPriceService = '0.00';
 }
 
 $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 
 ?>
 <div class="checkout-standard-summary-basket">
-	<a class="modify" href="basket"><?php echo $this->translate( 'core/client/html', 'Change basket' ); ?></a>
+	<a class="modify" href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index' ); ?>"><?php echo $this->translate( 'core/client/html', 'Change basket' ); ?></a>
 	<h2><?php echo $this->translate( 'core/client/html', 'Basket' ); ?></h2>
-	<table>
-		<thead>
-			<tr class="main-head">
-				<th class="main-details"></th>
-				<th class="main-quantity"><?php echo $this->translate( 'core/client/html', 'Quantity' ); ?></th>
-				<th class="main-unitprice"><?php echo $this->translate( 'core/client/html', 'Unit price' ); ?></th>
-				<th class="main-price"><?php echo $this->translate( 'core/client/html', 'Price' ); ?></th>
-			</tr>
-		</thead>
-		<tbody>
+	<div class="basket">
+		<table>
+			<thead>
+				<tr>
+					<th class="details"></th>
+					<th class="quantity"><?php echo $this->translate( 'core/client/html', 'Quantity' ); ?></th>
+					<th class="unitprice"><?php echo $this->translate( 'core/client/html', 'Unit price' ); ?></th>
+					<th class="price"><?php echo $this->translate( 'core/client/html', 'Price' ); ?></th>
+				</tr>
+			</thead>
+			<tbody>
 <?php if( isset( $this->standardBasket ) ) : ?>
 <?php 	foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
-			<tr class="main-row">
-				<td class="main-details">
-					<img src="<?php echo $product->getMediaUrl(); ?>" />
-					<span class="product-name"><?php echo $product->getName(); ?></span>
+				<tr>
+					<td class="details">
+						<img src="<?php echo $product->getMediaUrl(); ?>" />
+						<span class="product-name"><?php echo $product->getName(); ?></span>
 <?php		foreach( $product->getAttributes() as $attribute ) : ?>
-					<span class="product-attributename"><?php echo $attribute->getName(); ?></span>
-					<span class="product-attributevalue"><?php echo $attribute->getValue(); ?></span>
+						<span class="product-attributename"><?php echo $attribute->getName(); ?></span>
+						<span class="product-attributevalue"><?php echo $attribute->getValue(); ?></span>
 <?php		endforeach; ?>
-				</td>
+					</td>
 <?php		$prodPrice = $product->getPrice()->getValue(); ?>
-				<td class="main-quantity"><?php echo $product->getQuantity(); ?></td>
-				<td class="main-unitprice"><?php printf( $priceFormat, $this->number( $prodPrice ), $priceCurrency ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ); ?></td>
-			</tr>
+					<td class="quantity"><?php echo $product->getQuantity(); ?></td>
+					<td class="unitprice"><?php printf( $priceFormat, $this->number( $prodPrice ), $priceCurrency ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ); ?></td>
+				</tr>
 <?php 	endforeach; ?>
+<?php if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
+				<tr>
+					<td class="details"><?php echo $this->translate( 'core/client/html', 'Service fees' ); ?></td>
+					<td class="quantity">1</td>
+					<td class="unitprice"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
+				</tr>
 <?php endif; ?>
-		</tbody>
-		<tfoot>
-			<tr class="main-subtotal">
-				<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Sub-total' ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?></td>
-			</tr>
-			<tr class="main-delivery">
-				<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Shipping' ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( $priceShipping ), $priceCurrency ); ?></td>
-			</tr>
-<?php if( $paymentPrice > 0 ) : ?>
-			<tr class="main-payment">
-				<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Payment costs' ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( $paymentPrice ), $priceCurrency ); ?></td>
-			</tr>
 <?php endif; ?>
-			<tr class="main-total">
-				<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
-				<td class="main-price"><?php printf( $priceFormat, $this->number( $priceValue + $priceShipping ), $priceCurrency ); ?></td>
-			</tr>
-		</tfoot>
-	</table>
+			</tbody>
+			<tfoot>
+				<tr class="subtotal">
+					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Sub-total' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?></td>
+				</tr>
+				<tr class="delivery">
+					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Shipping' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $deliveryPriceService + $priceShipping ), $priceCurrency ); ?></td>
+				</tr>
+<?php if( $paymentPriceService > 0 ) : ?>
+				<tr class="payment">
+					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Payment costs' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ); ?></td>
+				</tr>
+<?php endif; ?>
+				<tr class="total">
+					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $paymentPriceService + $deliveryPriceService + $priceShipping ), $priceCurrency ); ?></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 <?php echo $this->get( 'basketBody' ); ?>
 </div>

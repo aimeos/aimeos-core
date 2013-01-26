@@ -71,7 +71,7 @@ class Client_Html_Checkout_Standard_Summary_Basket_DefaultTest extends MW_Unitte
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="summary-basket">', $output );
+		$this->assertStringStartsWith( '<div class="checkout-standard-summary-basket">', $output );
 	}
 
 

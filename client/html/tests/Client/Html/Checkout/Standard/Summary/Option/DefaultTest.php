@@ -70,7 +70,7 @@ class Client_Html_Checkout_Standard_Summary_Option_DefaultTest extends MW_Unitte
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="summary-option">', $output );
+		$this->assertStringStartsWith( '<div class="checkout-standard-summary-option">', $output );
 	}
 
 

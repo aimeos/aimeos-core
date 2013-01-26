@@ -13,18 +13,19 @@ $step = null;
 do {
 	$lastStep = $step;
 } while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
+$nextStep = ( ( $step = array_shift( $steps ) ) !== null ? $step : null );
 
 if( $lastStep ) {
-	$urlBack = $this->url( 'checkout-target', 'checkout', 'index', array( 'c-step' => $lastStep ) );
+	$urlBack = $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $lastStep ) );
 } else {
-	$urlBack = $this->url( 'basket-target', 'basket', 'index' );
+	$urlBack = $this->url( $this->config( 'basket-target' ), 'basket', 'index' );
 }
 
 ?>
 <div class="checkout-standard-summary">
 	<h1><?php echo $this->translate( 'core/client/html', 'summary' ); ?></h1>
-	<p class="summary-note"><?php $this->translate( 'core/client/html', 'Please enter your address' ); ?></p>
-	<form method="POST" action="<?php echo $this->url( 'order-target', 'order', 'index' ); ?>">
+	<p class="note"><?php echo $this->translate( 'core/client/html', 'Please check your order' ); ?></p>
+	<form method="POST" action="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $nextStep ) ); ?>">
 		<input type="hidden" name="cs-order" value="1" />
 <?php echo $this->get( 'summaryBody' ); ?>
 		<div class="button-group">

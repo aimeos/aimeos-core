@@ -42,13 +42,13 @@ foreach( $this->get( 'addressDeliveryOptional', array() ) as $name ) {
 ?>
 <div class="checkout-standard-summary-address">
 	<h2><?php echo $this->translate( 'core/client/html', 'Addresses' ); ?></h2>
-	<div class="address-item payment">
+	<div class="item-address payment">
 		<div class="header">
 			<h3><?php echo $this->translate( 'core/client/html', 'Billing address' ); ?></h3>
-			<a class="modify" href="<?php echo $this->url( 'checkout-target', 'checkout', 'index', array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'core/client/html', 'Change' ); ?></a>
+			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'core/client/html', 'Change' ); ?></a>
 		</div>
 <?php if( $paymentAddr !== array() ) : ?>
-		<ul>
+		<ul class="attr-list">
 <?php	if( isset( $paymentAddr['order.base.address.company'] ) && $paymentAddr['order.base.address.company'] != '' ) : ?>
 			<li class="item-company <?php echo ( isset( $paymentCss['order.base.address.company'] ) ? join( ' ', $paymentCss['order.base.address.company'] ) : '' ); ?>">
 				<span class="name"><?php echo $this->translate( 'core/client/html', 'Company' ); ?></span>
@@ -147,14 +147,13 @@ foreach( $this->get( 'addressDeliveryOptional', array() ) as $name ) {
 <?php	endif; ?>
 		</ul>
 <?php endif; ?>		
-	</div>
-	<div class="address-item delivery">
+	</div><div class="item-address delivery">
 		<div class="header">
 			<h3><?php echo $this->translate( 'core/client/html', 'Delivery address' ); ?></h3>
-			<span class="modify"><?php echo $this->translate( 'core/client/html', 'Change' ); ?></span>
+			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'core/client/html', 'Change' ); ?></a>
 		</div>
 <?php if( $deliveryAddr !== array() ) : ?>
-		<ul>
+		<ul class="attr-list">
 <?php	if( isset( $deliveryAddr['order.base.address.company'] ) && $deliveryAddr['order.base.address.company'] != '' ) : ?>
 			<li class="item-company <?php echo ( isset( $deliveryCss['order.base.address.company'] ) ? join( ' ', $deliveryCss['order.base.address.company'] ) : '' ); ?>">
 				<span class="name"><?php echo $this->translate( 'core/client/html', 'Company' ); ?></span>
