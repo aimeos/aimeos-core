@@ -143,6 +143,10 @@ class Client_Html_Checkout_Standard_Payment_Default
 				$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
 				$basketCtrl->setService( 'payment', $serviceId, $attributes );
 			}
+			else
+			{
+				$view->standardStepActive = 'payment';
+			}
 
 			$view->paymentError = $errors;
 
@@ -152,7 +156,10 @@ class Client_Html_Checkout_Standard_Payment_Default
 		{
 			$view->standardStepActive = 'payment';
 
-			$error = array( 'An error occured while processing your request. Please re-check your input' );
+			$error = array(
+				'An error occured while processing your request. Please re-check your input',
+				$e->getMessage()
+			);
 			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
 		}
 	}

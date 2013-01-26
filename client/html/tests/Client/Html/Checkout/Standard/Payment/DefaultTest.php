@@ -190,7 +190,7 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 
 		$this->_object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
-		$this->assertEquals( 'unitpaymentcode', $basket->getService( 'payment' )->getCode() );
+		$this->assertEquals( 'payment', $view->standardStepActive );
+		$this->assertEquals( 2, count( $view->standardErrorList ) );
 	}
 }
