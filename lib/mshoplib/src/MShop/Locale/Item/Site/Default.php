@@ -46,8 +46,8 @@ class MShop_Locale_Item_Site_Default
 	{
 		return parent::getId();
 	}
-
-
+	
+	
 	/**
 	 * Returns the code of the site.
 	 *
@@ -154,7 +154,7 @@ class MShop_Locale_Item_Site_Default
 	public function toArray()
 	{
 		$list = parent::toArray();
-
+		
 		$list['locale.site.siteid'] = $this->getSiteId();
 		$list['locale.site.code'] = $this->getCode();
 		$list['locale.site.label'] = $this->getLabel();

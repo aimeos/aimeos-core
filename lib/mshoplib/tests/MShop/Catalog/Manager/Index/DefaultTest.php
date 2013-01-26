@@ -161,7 +161,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 6, $cntAttributeA );
 		$this->assertEquals( 15, $cntCatalogA );
 		$this->assertEquals( 6, $cntPriceA );
-		$this->assertEquals( 16, $cntTextA );
+		$this->assertEquals( 8, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
@@ -187,18 +187,14 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$dbm = $context->getDatabaseManager();
 		$siteId = $context->getLocale()->getSiteId();
 
-		$sqlProd = 'SELECT "value" FROM "mshop_catalog_index_text"
-			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'product\'';
-		$sqlAttr ='SELECT "value" FROM "mshop_catalog_index_text"
-			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'attribute\'';
+		$sqlText = 'SELECT "value" FROM "mshop_catalog_index_text"
+			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\'';
 
 		$this->_object->saveItem( $item );
-		$attrText = $this->_getValue( $dbm, $sqlAttr, 'value', $siteId, $item->getId() );
-		$prodText = $this->_getValue( $dbm, $sqlProd, 'value', $siteId, $item->getId() );
+		$name = $this->_getValue( $dbm, $sqlText, 'value', $siteId, $item->getId() );
 		$this->_object->deleteItem( $item->getId() );
 
-		$this->assertEquals( '16 discs', $prodText );
-		$this->assertEquals( 'M', $attrText );
+		$this->assertEquals( '16 discs', $name );
 	}
 
 
@@ -541,7 +537,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 1, $total );
 
 
-		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
+		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype13', 'de', 'name' ) );
 		$conditions = array(
 			$search->compare( '~=', $func, 'Expr' ), // text value
 			$search->compare( '==', 'product.editor', $this->_editor )
@@ -583,7 +579,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$search = $textMgr->createSearch();
 		$expr = array(
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'unittype19', $langid, 'cafe noire cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -654,17 +650,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 2, count( $afterInsertCat ) );
 	}
 
-	/**
-	 * Returns value of a catalog_index column.
-	 *
-	 * @param MW_DB_Manager_Interface $dbm Database Manager for connection
-	 * @param string $sql Specified db query to find only one value
-	 * @param string $column Column where to search
-	 * @param integer $siteId Siteid of the db entry
-	 * @param integer $productId Product id
-	 * @return string $value Value returned for specified sql statement
-	 * @throws Exception If column not available or error during a connection to db
-	 */
+
 	protected function _getValue( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
 	{
 		$value = null;
@@ -697,7 +683,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		return $value;
 	}
-
 
 	/**
 	 * Gets product items of catalog index subdomains specified by the key.

@@ -92,6 +92,7 @@ class Controller_ExtJS_Catalog_Default
 			if( isset( $entry->{'catalog.code'} ) ) { $item->setCode( $entry->{'catalog.code'} ); }
 			if( isset( $entry->{'catalog.label'} ) ) { $item->setLabel( $entry->{'catalog.label'} ); }
 			if( isset( $entry->{'catalog.status'} ) ) { $item->setStatus( $entry->{'catalog.status'} ); }
+
 			$manager->insertItem( $item, $parentId, $refId );
 
 			$ids[] = $item->getId();

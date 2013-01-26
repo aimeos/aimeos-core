@@ -174,7 +174,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertGreaterThanOrEqual( 7, count( $result ) ); //adds while testing cne and cnc, actually its 2
+		$this->assertEquals( 4, count( $result ) ); //adds while testing cne and cnc, actually its 2
 
 
 		$func = $search->createFunction( 'catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
@@ -187,7 +187,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 1, count( $result ) );
 
-		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
+		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype13', 'de', 'name' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'Expr' ) ); // text value
 
 		$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'de', 'name' ) );
@@ -222,7 +222,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 		$search = $this->_object->createSearch();
 		$expr = array(
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'unittype19', $langid, 'cafe noire cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

@@ -125,7 +125,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 				$result = $localeSiteManager->searchItems( $search );
 
 				if( ( $item = reset( $result ) ) === false ) {
-					throw new Exception( sprintf( 'No site for code "%1$s" available', $dataset['code'] ) );
+					throw new Exception( sprintf( 'No site for code "%1$S" available', $dataset['code'] ) );
 				}
 
 				$siteIds[$key] = $item->getId();
