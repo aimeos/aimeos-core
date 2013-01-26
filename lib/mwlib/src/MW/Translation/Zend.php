@@ -131,15 +131,12 @@ class MW_Translation_Zend
 			$locations = array_reverse( $this->_getTranslationFileLocations( $this->_translationSources[$domain], $this->_locale ) );
 			$options = $this->_options;
 
+			$this->_translations[$domain] = new Zend_Translate( $options );
+
 			foreach( $locations as $location )
 			{
 				$options['content'] = $location;
-
-				if( !isset( $this->_translations[$domain] ) ) {
-					$this->_translations[$domain] = new Zend_Translate( $options );
-				} else {
-					$this->_translations[$domain]->addTranslation( $options );
-				}
+				$this->_translations[$domain]->addTranslation( $options );
 			}
 		}
 
