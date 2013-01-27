@@ -24,7 +24,7 @@ class Client_Html_Checkout_Standard_Order_Default
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/checkout/standard/order/default/subparts';
-	private $_subPartNames = array( /*'payment'*/ );
+	private $_subPartNames = array( 'payment' );
 
 
 	/**
@@ -118,7 +118,9 @@ class Client_Html_Checkout_Standard_Order_Default
 		$view = $this->getView();
 
 		// only start if there's something to do
-		if( ( $option = $view->param( 'cs-order', null ) ) === null ) {
+		if( ( $option = $view->param( 'cs-order', null ) ) === null
+			|| $view->get( 'standardStepActive' ) !== null
+		) {
 			return;
 		}
 

@@ -6,7 +6,7 @@
  */
 
 if( !isset( $this->paymentForm ) ) {
-	@header( 'Location: ' . $this->get( 'paymentUrl' ), true, 307 );
+	@header( 'Location: ' . $this->get( 'paymentUrl' ), true, 302 );
 }
 ?>
 <script type="text/javascript">

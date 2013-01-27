@@ -119,7 +119,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 				$url .= '&';
 			}
 
-			$url .= '&arcavias=' . $view->orderItem->getId();
+			$url .= 'arcavias=' . $view->orderItem->getId();
 
 			$view->paymentForm = $provider->process( $view->orderItem );
 			$view->paymentUrl = $url;
