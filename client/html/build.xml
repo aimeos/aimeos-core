@@ -75,7 +75,7 @@
             </fileset>
         </foreach>
 		<foreach param="mo-fname" absparam="mo-filename" target="build-mo">
-            <fileset dir="./i18n/service">
+            <fileset dir="./i18n/code">
                 <include name="*.po" />
             </fileset>
         </foreach>

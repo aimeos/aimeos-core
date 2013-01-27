@@ -15,6 +15,68 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+# Zahlungsstatus
+
+msgid "paystatus:-1"
+msgstr "Offen"
+
+msgid "paystatus:0"
+msgstr "Gelöscht"
+
+msgid "paystatus:1"
+msgstr "Abgebrochen"
+
+msgid "paystatus:2"
+msgstr "Abgelehnt"
+
+msgid "paystatus:3"
+msgstr "Erstattet"
+
+msgid "paystatus:4"
+msgstr "Wartend"
+
+msgid "paystatus:5"
+msgstr "Authorisiert"
+
+msgid "paystatus:6"
+msgstr "Erhalten"
+
+
+
+# Versandstatus
+
+msgid "stat:-1"
+msgstr "Offen"
+
+msgid "stat:0"
+msgstr "Gelöscht"
+
+msgid "stat:1"
+msgstr "Wartend"
+
+msgid "stat:2"
+msgstr "In Bearbeitung"
+
+msgid "stat:3"
+msgstr "Versandt"
+
+msgid "stat:4"
+msgstr "Ausgeliefert"
+
+msgid "stat:5"
+msgstr "Verloren"
+
+msgid "stat:6"
+msgstr "Annahme verweigert"
+
+msgid "stat:7"
+msgstr "Zurück gesendet"
+
+
+
+# Lastschrift
+
 msgid "payment.directdebit.accountowner"
 msgstr "Kontoinhaber"
 

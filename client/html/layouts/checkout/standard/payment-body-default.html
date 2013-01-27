@@ -76,13 +76,13 @@ foreach( $this->get( 'paymentError', array() ) as $name => $msg ) {
 <?php		foreach( $serviceAttributes[$id] as $key => $attribute ) : ?>
 <?php			$value = ( isset( $orderService ) && ( $value = $orderService->getAttribute( $key ) ) !== null ? $value : $attribute->getDefault() ); ?>
 				<li class="form-item <?php echo $key . ( isset( $paymentCss[$key] ) ? ' ' . join( ' ', $paymentCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
-					<label for="payment-<?php echo $key; ?>"><?php echo $this->translate( 'core/client/html/service', $key ); ?></label><?php
+					<label for="payment-<?php echo $key; ?>"><?php echo $this->translate( 'core/client/html/code', $key ); ?></label><?php
 				switch( $attribute->getType() ) : case 'string':
 					?><input type="text" id="payment-<?php echo $key; ?>" name="c-payment[<?php echo $id; ?>][<?php echo $key; ?>]" value="<?php echo $this->param( 'c-payment/' . $id . '/' . $key, $value ); ?>" /><?php
 					break; case 'select':
 					?><select id="payment-<?php echo $key; ?>" name="c-payment[<?php echo $id; ?>][<?php echo $key; ?>]">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
-						<option value="<?php echo $option; ?>"><?php echo $this->translate( 'core/client/html/service', $option );; ?></option>
+						<option value="<?php echo $option; ?>"><?php echo $this->translate( 'core/client/html/code', $key . ':' . $option ); ?></option>
 <?php					endforeach; ?>
 					</select>
 <?php			endswitch; ?>

@@ -15,6 +15,68 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+# Payment status values
+
+msgid "pay:-1"
+msgstr "unfinished"
+
+msgid "pay:0"
+msgstr "deleted"
+
+msgid "pay:1"
+msgstr "canceled"
+
+msgid "pay:2"
+msgstr "refused"
+
+msgid "pay:3"
+msgstr "refunded"
+
+msgid "pay:4"
+msgstr "pending"
+
+msgid "pay:5"
+msgstr "authorized"
+
+msgid "pay:6"
+msgstr "received"
+
+
+
+# Delivery status values
+
+msgid "stat:-1"
+msgstr "unfinished"
+
+msgid "stat:0"
+msgstr "deleted"
+
+msgid "stat:1"
+msgstr "pending"
+
+msgid "statu:2"
+msgstr "in progress"
+
+msgid "stat:3"
+msgstr "dispatched"
+
+msgid "stat:4"
+msgstr "delivered"
+
+msgid "stat:5"
+msgstr "lost"
+
+msgid "stat:6"
+msgstr "refused"
+
+msgid "stat:7"
+msgstr "returned"
+
+
+
+# Direct debit service provider
+
 msgid "payment.directdebit.accountowner"
 msgstr "Account owner"
 
