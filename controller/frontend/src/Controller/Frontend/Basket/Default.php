@@ -134,6 +134,9 @@ class Controller_Frontend_Basket_Default
 			$orderAttributes[] = $orderAttributeItem;
 		}
 
+		// remove product rebate of original price
+		$price->setRebate( '0.00' );
+
 		$orderBaseProductItem->setAttributes( $orderAttributes );
 		$orderBaseProductItem->setPrice( $price );
 
@@ -321,6 +324,10 @@ class Controller_Frontend_Basket_Default
 		$orderServiceItem->copyFrom( $serviceItem );
 
 		$price = $provider->calcPrice( $this->_basket );
+
+		// remove service rebate of original price
+		$price->setRebate( '0.00' );
+
 		$orderServiceItem->setPrice( $price );
 
 		$orderBaseServiceAttributeManager = $orderBaseServiceManager->getSubManager('attribute');
