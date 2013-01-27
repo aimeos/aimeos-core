@@ -913,12 +913,16 @@ input[type="password"] {
 .checkout-standard-summary-basket tr.delivery,
 .checkout-standard-summary-basket tr.payment,
 .checkout-standard-summary-basket tr.total,
+.checkout-standard-summary-basket tr.rebate,
+.checkout-standard-summary-basket tr.tax,
 .checkout-standard-summary-basket td.unitprice,
 .checkout-standard-summary-basket td.price,
 .basket-standard-main tr.subtotal,
 .basket-standard-main tr.delivery,
 .basket-standard-main tr.payment,
 .basket-standard-main tr.total,
+.basket-standard-main tr.rebate,
+.basket-standard-main tr.tax,
 .basket-standard-main td.unitprice,
 .basket-standard-main td.price {
 	text-align: right;
@@ -954,6 +958,14 @@ input[type="password"] {
 	vertical-align: bottom;
 	font-weight: bold;
 }
+
+.checkout-standard-summary-basket tr.rebate,
+.checkout-standard-summary-basket tr.tax,
+.basket-standard-main tr.rebate,
+.basket-standard-main tr.tax {
+	font-weight: normal;
+}
+
 
 
 

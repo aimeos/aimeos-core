@@ -9,13 +9,17 @@ try
 {
 	$price = $this->standardBasket->getPrice();
 	$priceValue = $price->getValue();
-	$priceShipping = $price->getShipping();
+	$priceService = $price->getShipping();
+	$priceRebate = $price->getRebate();
+	$priceTaxrate = $price->getTaxrate();
 	$priceCurrency = $this->translate( 'core/client/html/currency', $price->getCurrencyId() );
 }
 catch( Exception $e )
 {
 	$priceValue = '0.00';
-	$priceShipping = '0.00';
+	$priceService = '0.00';
+	$priceRebate = '0.00';
+	$priceTaxrate = '0.00';
 	$priceCurrency = '';
 }
 
@@ -99,7 +103,7 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 				</tr>
 				<tr class="delivery">
 					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Shipping' ); ?></td>
-					<td class="price"><?php printf( $priceFormat, $this->number( $deliveryPriceService + $priceShipping ), $priceCurrency ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
 <?php if( $paymentPriceService > 0 ) : ?>
@@ -111,8 +115,12 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 <?php endif; ?>
 				<tr class="total">
 					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
-					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $paymentPriceService + $deliveryPriceService + $priceShipping ), $priceCurrency ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?></td>
 					<td class="action"></td>
+				</tr>
+				<tr class="rebate">
+					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Included rebates' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?></td>
 				</tr>
 			</tfoot>
 		</table>
