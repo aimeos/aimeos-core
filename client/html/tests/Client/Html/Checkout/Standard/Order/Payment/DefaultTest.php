@@ -151,7 +151,7 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 		$this->_object->process();
 
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
-		$this->assertEquals( 'baseurl/basket/confirm/?&arcavias=-1', $view->get( 'paymentUrl' ) );
+		$this->assertEquals( 'baseurl/basket/confirm/?arcavias=-1', $view->get( 'paymentUrl' ) );
 		$this->assertEquals( null, $view->get( 'paymentForm' ) );
 	}
 
