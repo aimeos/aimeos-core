@@ -111,7 +111,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 			$provider = $manager->getProvider( $manager->getItem( $service->serviceId ) );
 
 
-			$url = $view->url( $view->config( 'confirm-target' ), 'basket', 'confirm' );
+			$url = $view->url( $view->config( 'checkout-confirm-target' ), 'checkout', 'confirm' );
 
 			if( strpos( $url, '?' ) === false ) {
 				$url .= '?';
