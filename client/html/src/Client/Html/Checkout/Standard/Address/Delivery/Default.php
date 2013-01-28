@@ -106,13 +106,14 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 		try
 		{
-			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$context = $this->_getContext();
+			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
 			$basket = $basketCtrl->get();
 
 
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
 
-			if( ( $option = $view->param( 'ca-delivery-option', '' ) ) == '' ) // new address
+			if( ( $option = $view->param( 'ca-delivery-option', '' ) ) === '' ) // new address
 			{
 				$param = $view->param( 'ca-delivery', array() );
 
@@ -124,13 +125,15 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 					'order.base.address.address1',
 					'order.base.address.postal',
 					'order.base.address.city',
-					'order.base.address.langid'
+					'order.base.address.languageid'
 				);
 
 				foreach( $view->config( 'checkout/address/delivery/mandatory', $default ) as $mandatory )
 				{
-					if( !isset( $param[$mandatory] ) ) {
-						$missing[$mandatory] = sprintf( 'Delivery adddress part "%1$s" is missing', $mandatory );
+					if( !isset( $param[$mandatory] ) || $param[$mandatory] == '' )
+					{
+						$name = substr( $mandatory, 19 );
+						$missing[$name] = sprintf( 'Delivery adddress part "%1$s" is missing', $name );
 					}
 				}
 
@@ -142,16 +145,32 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 				$basketCtrl->setAddress( $type, $param );
 			}
-			else // existing address
+			else if( ( $option = $view->param( 'ca-delivery-option', '' ) ) !== '-1' ) // existing address
 			{
-				/** @todo check that only addresses for the logged in customer can be added */
-				$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_getContext() );
-				$customerAddressManager = $customerManager->getSubManager( 'address' );
-				$basketCtrl->setAddress( $type, $customerAddressManager->getItem( $option ) );
+				$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
+				$address = $customerManager->getSubManager( 'address' )->getItem( $option );
+
+				$search = $customerManager->createSearch( true );
+				$expr = array(
+					$search->compare( '==', 'customer.id', $address->getRefId() ),
+					$search->compare( '==', 'customer.code', $context->getEditor() ),
+					$search->getConditions(),
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
+
+				$items = $customerManager->searchItems( $search );
+				if( ( $item = reset( $items ) ) === false ) {
+					throw new Client_Html_Exception( sprintf( 'No address found for ID "%1$s"', $option ) );
+				}
+
+				$basketCtrl->setAddress( $type, $address );
+			}
+			else
+			{
+				$basketCtrl->setAddress( $type, null );
 			}
 
-
-			$view->deliveryAddress = $basket->getAddress( $type );
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
@@ -171,24 +190,19 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$default = array(
-				'order.base.address.salutation',
-				'order.base.address.firstname',
-				'order.base.address.lastname',
-				'order.base.address.address1',
-				'order.base.address.postal',
-				'order.base.address.city',
-				'order.base.address.langid',
-			);
+			$context = $this->_getContext();
+			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
 
+			try {
+				$view->deliveryLanguage = $basketCntl->get()->getAddress( 'delivery' )->getLanguageId();
+			} catch( Exception $e ) {
+				$view->deliveryLanguage = $context->getLocale()->getLanguageId();
+			}
+
+			$default = array( 'salutation', 'firstname', 'lastname', 'address1', 'postal', 'city', 'languageid' );
 			$view->deliveryMandatory = $view->config( 'checkout/address/delivery/mandatory', $default );
 
-			$default = array(
-				'order.base.address.company',
-				'order.base.address.address2',
-				'order.base.address.countryid',
-			);
-
+			$default = array( 'company', 'address2', 'countryid' );
 			$view->deliveryOptional = $view->config( 'checkout/address/delivery/optional', $default );
 
 

@@ -179,10 +179,9 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
-	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
 	 */
-	public function getNode( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $condition = null )
+	public function getNode( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE )
 	{
 		if( $id === null )
 		{
@@ -208,15 +207,6 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 		$numlevel = $this->_getLevelFromConstant( $level );
 		$search = $this->createSearch();
-
-		if( $condition !== null )
-		{
-			$expr = array(
-				$search->getConditions(),
-				$condition->getConditions()
-			);
-			$search->setConditions( $search->combine('&&', $expr) );
-		}
 
 		$types = $this->_getSearchTypes( $this->_searchConfig );
 		$translations = $this->_getSearchTranslations( $this->_searchConfig );
@@ -256,12 +246,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 *
 	 * @param MW_Tree_Node_Interface $node New node that should be inserted
 	 * @param mixed $parentId ID of the parent node where the new node should be inserted below (null for root node)
-	 * @param mixed $refId ID of the node where the node should be inserted before (null to append)
+	 * @param mixed $refId ID of the node where the node node should be inserted before (null to append)
 	 */
 	public function insertNode( MW_Tree_Node_Interface $node, $parentId = null, $refId = null )
 	{
 		$base = null;
-		$node->parentid = $parentId;
 
 		if( $refId !== null )
 		{
@@ -282,7 +271,6 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$node->left = 1;
 			$node->right = 2;
 			$node->level = 0;
-			$node->parentid = 0;
 
 			if( ( $root = $this->_getRootNode( '-' ) ) !== null )
 			{
@@ -313,10 +301,9 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$stmt->bind( 1, $node->getLabel(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 2, $node->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 3, $node->getStatus(), MW_DB_Statement_Abstract::PARAM_BOOL );
-			$stmt->bind( 4, (int) $node->parentid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 5, $node->level, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 6, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 7, $node->right, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $node->level, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 5, $node->left, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 6, $node->right, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
 

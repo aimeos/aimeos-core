@@ -37,7 +37,10 @@ return array(
 	),
 	'i18n' => array(
 		'core/client/html' => 'client/html/i18n',
-		'core/client/html/country' => 'client/html/i18n/countries',
+		'core/client/html/code' => 'client/html/i18n/code',
+		'core/client/html/country' => 'client/html/i18n/country',
+		'core/client/html/currency' => 'client/html/i18n/currency',
+		'core/client/html/language' => 'client/html/i18n/language',
 	),
 	'setup' => array(
 		'lib/mshoplib/setup',

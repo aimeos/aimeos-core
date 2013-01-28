@@ -44,7 +44,7 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 			'get' => '
 				SELECT
 					node."id", node."label", node."code", node."status", node."level",
-					node."parentid", node."nleft" AS "left", node."nright" AS "right"
+					node."nleft" AS "left", node."nright" AS "right"
 				FROM "mw_tree_test" AS parent, "mw_tree_test" AS node
 				WHERE
 					node.nleft >= parent.nleft AND node.nleft <= parent.nright
@@ -53,7 +53,7 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 				ORDER BY node.nleft
 			',
 			'insert' => '
-				INSERT INTO "mw_tree_test" ( label, code, status, parentid, level, nleft, nright ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+				INSERT INTO "mw_tree_test" ( label, code, status, level, nleft, nright ) VALUES ( ?, ?, ?, ?, ?, ? )
 			',
 			'move-left' => '
 				UPDATE "mw_tree_test"
@@ -91,7 +91,6 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 		$sql = '
 			CREATE TABLE IF NOT EXISTS "mw_tree_test" (
 				"id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-				"parentid" INTEGER NOT NULL,
 				"label" VARCHAR(16) NOT NULL,
 				"code" VARCHAR(32) NOT NULL,
 				"level" INTEGER NOT NULL,
@@ -102,7 +101,7 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 		';
 		$conn->create( $sql )->execute()->finish();
 
-		$sql = 'INSERT INTO "mw_tree_test" (parentid, status, label, code, level, nleft, nright) VALUES (0, 1, \'root\', \'root\', 0, 1, 18)';
+		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (1, \'root\', \'root\', 0, 1, 18)';
 		$conn->create( $sql )->execute()->finish();
 
 		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (1, \'l1n1\', \'l1n1\', 1, 2, 7)';

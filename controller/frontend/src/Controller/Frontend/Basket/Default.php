@@ -134,6 +134,9 @@ class Controller_Frontend_Basket_Default
 			$orderAttributes[] = $orderAttributeItem;
 		}
 
+		// remove product rebate of original price
+		$price->setRebate( '0.00' );
+
 		$orderBaseProductItem->setAttributes( $orderAttributes );
 		$orderBaseProductItem->setPrice( $price );
 
@@ -250,7 +253,7 @@ class Controller_Frontend_Basket_Default
 	 * Sets the address of the customer in the basket.
 	 *
 	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract
-	 * @param MShop_Common_Item_Address_Interface|array $billing Address object or array with key/value pairs.
+	 * @param MShop_Common_Item_Address_Interface|array|null $billing Address object or array with key/value pairs.
 	 * 	In case of an array, the keys must be the same as the keys returned when calling toArray()
 	 *  on the order base address object like "order.base.address.salutation"
 	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
@@ -262,15 +265,25 @@ class Controller_Frontend_Basket_Default
 		$address = $orderAddressManager->createItem();
 		$address->setType( $type );
 
-		if( $value instanceof MShop_Common_Item_Address_Interface ) {
+		if( $value instanceof MShop_Common_Item_Address_Interface )
+		{
 			$address->copyFrom( $value );
-		} else if( is_array( $value ) ) {
+			$this->_basket->setAddress( $address, $type );
+		}
+		else if( is_array( $value ) )
+		{
 			$this->_setAddressFromArray( $address, $value );
-		} else {
+			$this->_basket->setAddress( $address, $type );
+		}
+		else if( $value === null )
+		{
+			$this->_basket->deleteAddress( $type );
+		}
+		else
+		{
 			throw new Controller_Frontend_Basket_Exception( sprintf( 'Invalid value for address type "%1$s"', $type ) );
 		}
 
-		$this->_basket->setAddress( $address, $type );
 		$this->_domainManager->setSession( $this->_basket );
 	}
 
@@ -301,10 +314,8 @@ class Controller_Frontend_Basket_Default
 
 		foreach( $result as $key => $value )
 		{
-			if( $value !== null )
-			{
-				$msg = sprintf( 'Invalid value "%1$s" entered for attribute "$2%s"', $value, $key );
-				throw new Controller_Frontend_Basket_Exception( $msg );
+			if( $value !== null ) {
+				throw new Controller_Frontend_Basket_Exception( $value );
 			}
 		}
 
@@ -313,6 +324,10 @@ class Controller_Frontend_Basket_Default
 		$orderServiceItem->copyFrom( $serviceItem );
 
 		$price = $provider->calcPrice( $this->_basket );
+
+		// remove service rebate of original price
+		$price->setRebate( '0.00' );
+
 		$orderServiceItem->setPrice( $price );
 
 		$orderBaseServiceAttributeManager = $orderBaseServiceManager->getSubManager('attribute');
@@ -346,7 +361,6 @@ class Controller_Frontend_Basket_Default
 	protected function _setAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map )
 	{
 		$errors = array();
-		$prefix = 'order.base.address.';
 
 		foreach( $map as $key => $value )
 		{
@@ -356,41 +370,41 @@ class Controller_Frontend_Basket_Default
 
 				switch( $key )
 				{
-					case $prefix . 'salutation':
+					case 'order.base.address.salutation':
 						$address->setSalutation( $value ); break;
-					case $prefix . 'company':
+					case 'order.base.address.company':
 						$address->setCompany( $value ); break;
-					case $prefix . 'title':
+					case 'order.base.address.title':
 						$address->setTitle( $value ); break;
-					case $prefix . 'firstname':
+					case 'order.base.address.firstname':
 						$address->setFirstname( $value ); break;
-					case $prefix . 'lastname':
+					case 'order.base.address.lastname':
 						$address->setLastName( $value ); break;
-					case $prefix . 'address1':
+					case 'order.base.address.address1':
 						$address->setAddress1( $value ); break;
-					case $prefix . 'address2':
+					case 'order.base.address.address2':
 						$address->setAddress2( $value ); break;
-					case $prefix . 'address3':
+					case 'order.base.address.address3':
 						$address->setAddress3( $value ); break;
-					case $prefix . 'postal':
+					case 'order.base.address.postal':
 						$address->setPostal( $value ); break;
-					case $prefix . 'city':
+					case 'order.base.address.city':
 						$address->setCity( $value ); break;
-					case $prefix . 'state':
+					case 'order.base.address.state':
 						$address->setState( $value ); break;
-					case $prefix . 'countryid':
+					case 'order.base.address.countryid':
 						$address->setCountryId( $value ); break;
-					case $prefix . 'langid':
+					case 'order.base.address.languageid':
 						$address->setLanguageId( $value ); break;
-					case $prefix . 'telephone':
+					case 'order.base.address.telephone':
 						$address->setTelephone( $value ); break;
-					case $prefix . 'email':
+					case 'order.base.address.email':
 						$address->setEmail( $value ); break;
-					case $prefix . 'telefax':
+					case 'order.base.address.telefax':
 						$address->setTelefax( $value ); break;
-					case $prefix . 'website':
+					case 'order.base.address.website':
 						$address->setWebsite( $value ); break;
-					case $prefix . 'flag':
+					case 'order.base.address.flag':
 						$address->setFlag( $value ); break;
 					default:
 						$msg = sprintf( 'Invalid address property "%1$s" with value "%2$s"', $key, $value );
@@ -399,7 +413,8 @@ class Controller_Frontend_Basket_Default
 			}
 			catch( Exception $e )
 			{
-				$errors[$key] = $e->getMessage();
+				$name = substr( $key, 19 );
+				$errors[$name] = $e->getMessage();
 			}
 		}
 

@@ -284,6 +284,60 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		return $this->_addManagerDecorators( $typeManager, $manager, $domain );
 	}
 
+	/**
+	 * Returns a new site manager object.
+	 *
+	 * @param string $domain Name of the domain (product, text, media, etc.)
+	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
+	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
+	 * @param array Associative list of search configuration entries
+	 * @return MShop_Common_Manager_Site_Interface Site manager object
+	 */
+	protected function _getSiteManager( $domain, $manager, $name, array $searchConfig )
+	{
+		$domain = strtolower( $domain );
+		$manager = strtolower( $manager );
+		$config = $this->_context->getConfig();
+
+
+		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
+			throw new MShop_Exception( sprintf( 'Invalid domain name "%1$s"', $domain ) );
+		}
+
+		if( $name === null ) {
+			$name = $config->get( 'classes/' . $domain . '/manager/' . $manager . '/name', 'Default' );
+		}
+
+		if( empty( $name ) || ctype_alnum( $name ) === false ) {
+			throw new MShop_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
+		}
+
+		$classname = 'MShop_Common_Manager_Site_' . $name;
+		$interface = 'MShop_Common_Manager_Site_Interface';
+
+		if( class_exists( $classname ) === false ) {
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+		}
+
+		$confpath = 'mshop/' . $domain . '/manager/' . $manager . '/' . strtolower( $name ) . '/item/';
+		$conf = array(
+			'insert' => $config->get( $confpath . 'insert' ),
+			'update' => $config->get( $confpath . 'update' ),
+			'delete' => $config->get( $confpath . 'delete' ),
+			'search' => $config->get( $confpath . 'search' ),
+			'count' => $config->get( $confpath . 'count' ),
+			'newid' => $config->get( $confpath . 'newid' ),
+		);
+
+		$siteManager = new $classname( $this->_context, $conf, $searchConfig );
+
+		if( ( $siteManager instanceof $interface ) === false ) {
+			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
+		}
+
+		return $this->_addManagerDecorators( $siteManager, $manager, $domain );
+	}
+
 
 	/**
 	 * Returns a new manager the given extension name.

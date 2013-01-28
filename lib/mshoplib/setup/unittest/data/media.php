@@ -38,6 +38,7 @@ return array (
 		'media/path/to/folder/example4.jpg' => array( 'langid' => 'de', 'typeid' => 'catalog/prod_123x103', 'domain' => 'catalog', 'label' => 'example image 4', 'link' => 'path/to/folder/example4.jpg', 'status' => 0, 'mimetype' => 'image/jpg' ),
 		'media/path/to/folder/example5.jpg' => array( 'langid' => 'de', 'typeid' => 'product/download', 'domain' => 'product', 'label' => 'example image 1', 'link' => 'path/to/folder/example5.jpg', 'status' => 1, 'mimetype' => 'image/jpg' ),
 		'media/path/to/folder/example6.jpg' => array( 'langid' => 'de', 'typeid' => 'product/download', 'domain' => 'product', 'label' => 'example image 2', 'link' => 'path/to/folder/example6.jpg', 'status' => 1, 'mimetype' => 'image/jpg' ),
+		'media/service_image1' => array( 'langid' => null, 'typeid' => 'service/default', 'domain' => 'service', 'label' => 'service_image1', 'link' => 'path/to/service.png', 'status' => 1, 'mimetype' => 'image/png' ),
 	),
 
 

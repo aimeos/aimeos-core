@@ -186,7 +186,7 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 
 		$this->_object->process();
 
-		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
-		$this->assertEquals( 'unitcode', $basket->getService( 'delivery' )->getCode() );
+		$this->assertEquals( 'delivery', $view->standardStepActive );
+		$this->assertEquals( 2, count( $view->standardErrorList ) );
 	}
 }

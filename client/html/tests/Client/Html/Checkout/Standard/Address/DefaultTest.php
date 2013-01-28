@@ -57,7 +57,7 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends MW_Unittest_Test
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
+		$this->assertStringStartsWith( '<style type="text/css">', $output );
 	}
 
 
@@ -82,7 +82,6 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends MW_Unittest_Test
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-standard-address">', $output );
 
-		$this->assertEquals( 'de', $view->addressLanguageCurrent );
 		$this->assertGreaterThanOrEqual( 0, count( $view->addressLanguages ) );
 		$this->assertGreaterThanOrEqual( 0, count( $view->addressCountries ) );
 	}

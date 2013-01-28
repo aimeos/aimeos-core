@@ -71,8 +71,10 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$ctx->setLogger( $logger );
 
 		$localeManager = MShop_Locale_Manager_Factory::createManager($ctx);
-		$localeItem = $localeManager->bootstrap( $site, '', '', false );
+		$localeItem = $localeManager->bootstrap( $site, 'en', '', false );
 		$ctx->setLocale($localeItem);
+
+		$ctx->setEditor( 'UTC001' );
 
 		Zend_Registry::set('ctx', $ctx);
 
@@ -106,6 +108,8 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 			'catalog-list-target' => 'routeDefault',
 			'catalog-detail-target' => 'routeDefault',
 			'basket-target' => 'routeDefault',
+			'checkout-target' => 'routeDefault',
+			'checkout-confirm-target' => 'routeDefault',
 		);
 
 		$view = new MW_View_Default();
@@ -113,7 +117,8 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$helper = new MW_View_Helper_Url_Zend( $view, $router );
 		$view->addHelper( 'url', $helper );
 
-		$helper = new MW_View_Helper_Translate_Default( $view, new MW_Translation_None( 'en_GB' ) );
+		$trans = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'en_GB', array('disableNotices'=>true) );
+		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
 		$view->addHelper( 'translate', $helper );
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $this->_getAllParams() );

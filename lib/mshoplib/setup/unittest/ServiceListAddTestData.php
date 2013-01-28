@@ -69,6 +69,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$refIds = array();
+		$refIds['media'] = $this->_getMediaData( $refKeys['media'] );
 		$refIds['price'] = $this->_getPriceData( $refKeys['price'] );
 		$refIds['text'] = $this->_getTextData( $refKeys['text'] );
 		$this->_addServiceListData( $testdata, $refIds );
@@ -164,6 +165,39 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 		$refIds = array();
 		foreach( $textManager->searchItems( $search ) as $item )	{
 			$refIds[ 'text/'.$item->getLabel() ] = $item->getId();
+		}
+
+		return $refIds;
+	}
+
+
+	/**
+	 * Gets required media item ids.
+	 *
+	 * @param array $keys List of keys for search
+	 * @return array $refIds List with referenced Ids
+	 * @throws MW_Setup_Exception If a required ID is not available
+	 */
+	protected function _getMediaData( array $keys )
+	{
+		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->_additional, 'Default' );
+
+		$labels = array();
+		foreach( $keys as $dataset )
+		{
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) == false ) {
+				throw new MW_Setup_Exception( sprintf( 'Some keys for ref media are set wrong "%1$s"', $dataset ) );
+			}
+
+			$labels[] = $str;
+		}
+
+		$search = $mediaManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'media.label', $labels ) );
+
+		$refIds = array();
+		foreach( $mediaManager->searchItems( $search ) as $item )	{
+			$refIds[ 'media/' . $item->getLabel() ] = $item->getId();
 		}
 
 		return $refIds;

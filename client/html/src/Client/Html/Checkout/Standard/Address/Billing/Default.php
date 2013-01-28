@@ -106,7 +106,8 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 
 		try
 		{
-			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$context = $this->_getContext();
+			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
 			$basket = $basketCtrl->get();
 
 
@@ -124,14 +125,16 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					'order.base.address.address1',
 					'order.base.address.postal',
 					'order.base.address.city',
-					'order.base.address.langid',
+					'order.base.address.languageid',
 					'order.base.address.email'
 				);
 
 				foreach( $view->config( 'checkout/address/billing/mandatory', $default ) as $mandatory )
 				{
-					if( !isset( $param[$mandatory] ) ) {
-						$missing[$mandatory] = sprintf( 'Billing address part "%1$s" is missing', $mandatory );
+					if( !isset( $param[$mandatory] ) || $param[$mandatory] == '' )
+					{
+						$name = substr( $mandatory, 19 );
+						$missing[$name] = sprintf( 'Billing address part "%1$s" is missing', $name );
 					}
 				}
 
@@ -141,19 +144,35 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( 'At least one billing address part is missing' );
 				}
 
+				$basketCtrl->get()->setCustomerId( '' );
 				$basketCtrl->setAddress( $type, $param );
 			}
 			else // existing address
 			{
-				/** @todo check that only addresses for the logged in customer can be added */
-				$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_getContext() );
-				$basketCtrl->setAddress( $type, $customerManager->getItem( $option )->getBillingAddress() );
+				$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
+
+				$search = $customerManager->createSearch( true );
+				$expr = array(
+					$search->compare( '==', 'customer.id', $option ),
+					$search->compare( '==', 'customer.code', $context->getEditor() ),
+					$search->getConditions(),
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
+
+				$items = $customerManager->searchItems( $search );
+				if( ( $item = reset( $items ) ) === false ) {
+					throw new Client_Html_Exception( sprintf( 'No customer found for ID "%1$s"', $option ) );
+				}
+
+				$basketCtrl->get()->setCustomerId( $item->getId() );
+				$basketCtrl->setAddress( $type, $item->getBillingAddress() );
 			}
 
-			$view->billingAddress = $basket->getAddress( $type );
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
+			$view->standardStepActive = 'address';
 			$view->billingError = $e->getErrorList();
 			throw $e;
 		}
@@ -170,28 +189,21 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$default = array(
-				'order.base.address.salutation',
-				'order.base.address.firstname',
-				'order.base.address.lastname',
-				'order.base.address.address1',
-				'order.base.address.postal',
-				'order.base.address.city',
-				'order.base.address.langid',
-				'order.base.address.email'
-			);
+			$context = $this->_getContext();
+			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
 
+			try {
+				$view->billingLanguage = $basketCntl->get()->getAddress( 'payment' )->getLanguageId();
+			} catch( Exception $e ) {
+				$view->billingLanguage = $context->getLocale()->getLanguageId();
+			}
+
+			$default = array( 'salutation', 'firstname', 'lastname', 'address1', 'postal', 'city', 'languageid', 'email' );
 			$view->billingMandatory = $view->config( 'checkout/address/billing/mandatory', $default );
 
 
-			$default = array(
-				'order.base.address.company',
-				'order.base.address.address2',
-				'order.base.address.countryid',
-			);
-
+			$default = array( 'company', 'address2', 'countryid' );
 			$view->billingOptional = $view->config( 'checkout/address/billing/optional', $default );
-
 
 			$this->_cache = $view;
 		}

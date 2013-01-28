@@ -143,19 +143,23 @@ class Client_Html_Checkout_Standard_Delivery_Default
 				$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
 				$basketCtrl->setService( 'delivery', $serviceId, $attributes );
 			}
+			else
+			{
+				$view->standardStepActive = 'delivery';
+			}
 
 			$view->deliveryError = $errors;
 
-
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$subclient->process( $view );
-			}
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
 		catch( Exception $e )
 		{
 			$view->standardStepActive = 'delivery';
 
-			$error = array( 'An error occured while processing your request. Please re-check your input' );
+			$error = array(
+				'An error occured while processing your request. Please re-check your input',
+				$e->getMessage()
+			);
 			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
 		}
 	}

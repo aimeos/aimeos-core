@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+if( !isset( $this->paymentForm ) ) {
+	@header( 'Location: ' . $this->get( 'paymentUrl' ), true, 302 );
+}
+?>
+<script type="text/javascript">
+<!--
+<?php if( isset( $this->paymentForm ) ) : ?>
+	$(document).ready( function() {
+		$( '.checkout-standard-order-payment > form' ).submit();
+	} );
+<?php elseif( isset( $this->paymentUrl ) ) : ?>
+	window.location = '<?php echo $this->paymentUrl; ?>';
+<?php endif; ?>
+//-->
+</script>
+<?php echo $this->get( 'paymentHeader' ); ?>

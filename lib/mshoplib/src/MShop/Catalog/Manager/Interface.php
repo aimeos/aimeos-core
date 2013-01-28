@@ -32,10 +32,9 @@ interface MShop_Catalog_Manager_Interface
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
-	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MShop_Catalog_Item_Interface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null );
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE );
 
 
 	/**

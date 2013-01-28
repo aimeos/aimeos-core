@@ -68,7 +68,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="address-billing">', $output );
+		$this->assertStringStartsWith( '<div class="checkout-standard-address-billing">', $output );
 
 		$this->assertGreaterThan( 0, count( $view->billingMandatory ) );
 		$this->assertGreaterThan( 0, count( $view->billingOptional ) );
@@ -116,7 +116,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 				'order.base.address.postal' => '20000',
 				'order.base.address.city' => 'hamburg',
 				'order.base.address.email' => 'me@localhost',
-				'order.base.address.langid' => 'en',
+				'order.base.address.languageid' => 'en',
 			),
 		);
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -157,9 +157,9 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		catch( Client_Html_Exception $e )
 		{
 			$this->assertEquals( 3, count( $view->billingError ) );
-			$this->assertArrayHasKey( 'order.base.address.salutation', $view->billingError );
-			$this->assertArrayHasKey( 'order.base.address.email', $view->billingError );
-			$this->assertArrayHasKey( 'order.base.address.langid', $view->billingError );
+			$this->assertArrayHasKey( 'salutation', $view->billingError );
+			$this->assertArrayHasKey( 'email', $view->billingError );
+			$this->assertArrayHasKey( 'languageid', $view->billingError );
 			return;
 		}
 
@@ -169,6 +169,8 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 	public function testProcessExistingAddress()
 	{
+		$this->_context->setEditor( 'UTC001' );
+
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
@@ -188,6 +190,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 		$this->_object->process();
 
+		$this->_context->setEditor( null );
 		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
 		$this->assertEquals( 'Metaways', $basket->getAddress( 'payment' )->getCompany() );
 	}
@@ -203,7 +206,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 		$this->_object->setView( $view );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->process();
 	}
 }

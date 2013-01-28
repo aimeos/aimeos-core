@@ -167,5 +167,7 @@ class Client_Html_Basket_Standard_Default
 		}
 
 		$view->standardBasket = $controller->get();
+
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
 }

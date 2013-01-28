@@ -15,7 +15,7 @@ return array(
 		'get' => '
 			SELECT
 				mcat."id", mcat."label", mcat."code", mcat."status", mcat."level",
-				mcat."parentid", mcat."siteid", mcat."nleft" AS "left", mcat."nright" AS "right",
+				mcat."siteid", mcat."nleft" AS "left", mcat."nright" AS "right",
 				mcat."mtime", mcat."editor", mcat."ctime"
 			FROM "mshop_catalog" AS mcat, "mshop_catalog" AS parent
 			WHERE
@@ -25,8 +25,8 @@ return array(
 			ORDER BY mcat."nleft"
 		',
 		'insert' => '
-			INSERT INTO "mshop_catalog" ( "siteid", "label", "code", "status", "parentid", "level", "nleft", "nright" )
-			VALUES ( :siteid, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_catalog" ( "siteid", "label", "code", "status", "level", "nleft", "nright" )
+			VALUES ( :siteid, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_catalog"
@@ -54,7 +54,7 @@ return array(
 		',
 		'search-item' => '
 			SELECT DISTINCT
-				mcat."id", mcat."label", mcat."code", mcat."status", mcat."level", mcat."parentid",
+				mcat."id", mcat."label", mcat."code", mcat."status", mcat."level",
 				mcat."siteid", mcat."nleft" AS "left", mcat."nright" AS "right",
 				mcat."mtime", mcat."editor", mcat."ctime"
 			FROM "mshop_catalog" AS mcat
