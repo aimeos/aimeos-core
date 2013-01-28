@@ -290,7 +290,7 @@ CONSTRAINT "fk_msordbaprat_ordprodid"
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_msordbaprat_sid_oid_cd_val" ON "mshop_order_base_product_attr" ("siteid", "ordprodid", "code", "value");
+CREATE INDEX "idx_msordbaprat_sid_oid_cd_val" ON "mshop_order_base_product_attr" ("siteid", "ordprodid", "type", "code", "value");
 
 
 --
@@ -376,11 +376,11 @@ CONSTRAINT "fk_msordbaseat_ordservid"
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_msordbaseat_sid_oid_cd_val" ON "mshop_order_base_service_attr" ("siteid", "ordservid", "code", "value");
+CREATE INDEX "idx_msordbaseat_sid_oid_cd_val" ON "mshop_order_base_service_attr" ("siteid", "ordservid", "type", "code", "value");
 
 
 --
--- Status of the the order
+-- Status of the order
 --
 
 CREATE TABLE "mshop_order_status" (

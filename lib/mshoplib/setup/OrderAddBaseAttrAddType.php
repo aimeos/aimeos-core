@@ -24,7 +24,7 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	*/
 	public function getPreDependencies()
 	{
-		return array('OrderRenameTable', 'OrderAddProductAttributeName', 'OrderServiceAttributeAddAttributeName');
+		return array('OrderRenameTable');
 	}
 	
 	
