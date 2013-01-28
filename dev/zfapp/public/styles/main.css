@@ -761,6 +761,7 @@ input[type="password"] {
 
 
 .basket-standard .error-list,
+.checkout-confirm .error-list,
 .checkout-standard .error-list {
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
@@ -831,14 +832,16 @@ input[type="password"] {
  */
 
 .basket-standard,
-.checkout-standard {
+.checkout-standard,
+.checkout-confirm {
 	min-width: 240px;
 	max-width: 920px;
 	margin: 0 auto;
 }
 
 .basket-standard .error-list,
-.checkout-standard .error-list {
+.checkout-standard .error-list,
+.checkout-confirm .error-list {
 	padding: 0.5em;
 	margin-top: 1em;
 	list-style: none;
@@ -846,10 +849,13 @@ input[type="password"] {
 
 
 .basket-standard .note,
-.checkout-standard .note {
+.checkout-standard .note,
+.checkout-confirm .note {
+	font-weight: bold;
 }
 
 .basket-standard-main,
+.checkout-confirm-basic,
 .checkout-standard-delivery .item,
 .checkout-standard-payment .item,
 .checkout-standard-summary-address,
@@ -1059,7 +1065,7 @@ input[type="password"] {
 	line-height: 2.5em;
 }
 
-.checkout-standard .form-item label {
+.checkout-standard .form-list label {
 	vertical-align: bottom;
 	display: inline-block;
 	line-height: 100%;
@@ -1067,7 +1073,7 @@ input[type="password"] {
 	width: 218px;
 }
 
-.checkout-standard .form-item input {
+.checkout-standard .form-list input {
 	background-color: #F2F7FA;
 	border: solid 1px #689DB9;
 	border-bottom: none;
@@ -1077,7 +1083,7 @@ input[type="password"] {
 	width: 216px;
 }
 
-.checkout-standard .form-item select {
+.checkout-standard .form-list select {
 	vertical-align: bottom;
 	height: 1.5em;
 	width: 216px;
@@ -1331,6 +1337,27 @@ input[type="password"] {
 
 .checkout-standard-order-payment p {
 	margin: 10px 0;
+}
+
+
+/*
+ * Checkout confirm basic part
+ */
+
+.checkout-confirm-basic h2,
+.checkout-confirm-basic p,
+.checkout-confirm-basic .attr-list {
+	margin: 10px;
+}
+
+.checkout-confirm-basic .attr-list .name,
+.checkout-confirm-basic .attr-list .value {
+	display: inline-block;
+	width: 218px;
+}
+
+.checkout-confirm-basic .attr-list .name:after {
+	content: ": ";
 }
 
 
