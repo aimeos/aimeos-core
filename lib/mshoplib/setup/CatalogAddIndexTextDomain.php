@@ -14,7 +14,7 @@ class MW_Setup_Task_CatalogAddIndexTextDomain extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
 		'ALTER TABLE "mshop_catalog_index_text" ADD "domain" VARCHAR(32) NOT NULL AFTER "type"',
-		'UPDATE "mshop_catalog_index_text" SET "domain" = "product"',
+		'UPDATE "mshop_catalog_index_text" SET "domain" = \'product\'',
 	);
 
 	/**
