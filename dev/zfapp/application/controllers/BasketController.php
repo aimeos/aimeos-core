@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: CatalogController.php 1357 2012-10-30 11:20:09Z nsendetzky $
  */
 
 /**
@@ -12,7 +11,7 @@
 class BasketController extends Application_Controller_Action_Abstract
 {
 	/**
-	 * Shows the catalog with or without given search, pagination criteria
+	 * Integrates the basket.
 	 */
 	public function indexAction()
 	{
@@ -32,7 +31,7 @@ class BasketController extends Application_Controller_Action_Abstract
 		}
 		catch( MW_Exception $e )
 		{
-			echo 'An error occured';
+			echo 'A database error occured';
 		}
 		catch( Exception $e )
 		{
@@ -40,7 +39,7 @@ class BasketController extends Application_Controller_Action_Abstract
 		}
 
 
-		$msg = 'Product::catalog total time: ' . ( ( microtime( true ) - $startaction ) * 1000 ) . 'ms';
+		$msg = 'Basket total time: ' . ( ( microtime( true ) - $startaction ) * 1000 ) . 'ms';
 		$context->getLogger()->log( $msg, MW_Logger_Abstract::INFO, 'performance' );
 	}
 
