@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -13,7 +13,7 @@ class MW_Setup_Task_OrderAddBaseServiceServiceid extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
 		'ALTER TABLE "mshop_order_base_service" ADD "servid" VARCHAR(32) NOT NULL COLLATE utf8_bin AFTER "siteid"',
-		'UPDATE "mshop_order_base_service" q SET "servid" = ( SELECT p."id" FROM "mshop_service" p WHERE p."siteid" = q."siteid" AND p."code" = q."code" LIMIT 1 ) WHERE "servid" = \'\'',
+		'UPDATE "mshop_order_base_service" o SET "servid" = ( SELECT s."id" FROM "mshop_service" s WHERE s."siteid" = o."siteid" AND s."code" = o."code" LIMIT 1 ) WHERE "servid" = \'\'',
 	);
 
 
