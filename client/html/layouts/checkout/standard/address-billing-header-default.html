@@ -16,9 +16,7 @@
 <script type="text/javascript">
 <!--
 $(document).ready( function() {
-	$( '.checkout-standard-address-billing' ).on(
-		'click',
-		'.header > input',
+	$( '.checkout-standard-address-billing .header > input' ).bind( 'click',
 		{ selector: '.checkout-standard-address-billing .item-new .form-list' },
 		function( event ) {
 			if( $(this).val() == '' ) {

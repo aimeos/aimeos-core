@@ -23,9 +23,7 @@ try {
 <script type="text/javascript">
 <!--
 $(document).ready( function() {
-	$( '.checkout-standard-address-delivery' ).on(
-		'click',
-		'.header > input',
+	$( '.checkout-standard-address-delivery .header > input' ).bind( 'click',
 		{ selector: '.checkout-standard-address-delivery .item-new .form-list' },
 		function( event ) {
 			if( $(this).val() == '' ) {
