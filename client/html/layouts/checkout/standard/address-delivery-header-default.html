@@ -13,7 +13,7 @@ try {
 	$addressOption = -1;
 }
 ?>
-<?php if( $this->param( 'ca-delivery-option', $addressOption ) === '' ) : ?>
+<?php if( $this->param( 'ca-delivery-option', $addressOption ) === 'null' ) : ?>
 <style type="text/css">
 .checkout-standard-address-delivery .item-new .form-list {
 	display: block;
@@ -23,12 +23,10 @@ try {
 <script type="text/javascript">
 <!--
 $(document).ready( function() {
-	$( '.checkout-standard-address-delivery' ).on(
-		'click',
-		'.header > input',
+	$( '.checkout-standard-address-delivery .header > input' ).bind( 'click',
 		{ selector: '.checkout-standard-address-delivery .item-new .form-list' },
 		function( event ) {
-			if( $(this).val() == '' ) {
+			if( $(this).val() == 'null' ) {
 				$( event.data.selector ).slideDown( 400 );
 			} else {
 				$( event.data.selector ).slideUp( 400 );

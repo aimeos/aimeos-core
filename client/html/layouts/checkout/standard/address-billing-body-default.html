@@ -150,7 +150,7 @@ foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 <?php endif; ?>
 	<div class="item-address item-new">
 		<div class="header">
-			<input type="radio" name="ca-billing-option" value="" <?php echo ( $billingOption == '' ? 'checked="checked"' : '' ); ?> />
+			<input type="radio" name="ca-billing-option" value="null" <?php echo ( $billingOption == 'null' ? 'checked="checked"' : '' ); ?> />
 			<div class="values"><span class="value value-new"><?php echo $this->translate( 'core/client/html', 'new address' ); ?></span></div>
 		</div>
 		<ul class="form-list">

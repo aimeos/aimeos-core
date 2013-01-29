@@ -66,7 +66,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	{
 		$view = TestHelper::getView();
 
-		$param = array( 'ca-delivery-option' => '' );
+		$param = array( 'ca-delivery-option' => 'null' );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -121,7 +121,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-delivery-option' => '',
+			'ca-delivery-option' => 'null',
 			'ca-delivery' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
@@ -149,7 +149,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-delivery-option' => '',
+			'ca-delivery-option' => 'null',
 			'ca-delivery' => array(
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
