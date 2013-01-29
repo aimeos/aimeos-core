@@ -107,7 +107,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-billing-option' => '',
+			'ca-billing-option' => 'null',
 			'ca-billing' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
@@ -136,7 +136,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-billing-option' => '',
+			'ca-billing-option' => 'null',
 			'ca-billing' => array(
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
