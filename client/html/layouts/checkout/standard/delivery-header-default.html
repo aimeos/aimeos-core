@@ -31,9 +31,7 @@ $serviceOption = $this->param( 'c-delivery-option', $orderServiceId );
 $(document).ready( function() {
 	$( '.checkout-standard-delivery .form-list' ).css( 'display', 'none' );
 	$( '#c-delivery-<?php echo $serviceOption; ?> .form-list' ).slideDown( 0 );
-	$( '.checkout-standard-delivery' ).on(
-		'click',
-		'.option',
+	$( '.checkout-standard-delivery .option' ).bind( 'click',
 		function( event ) {
 			$( '.checkout-standard-delivery .form-list' ).slideUp( 400 );
 			$(this).parents( '.item' ).find( '.form-list' ).slideDown( 400 );
