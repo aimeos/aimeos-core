@@ -101,15 +101,15 @@ implements MShop_Service_Provider_Payment_Interface
 	{
 		$list = array();
 
-// 		$address = $basket->getAddress();
-// 		$this->_feConfig[0]['payment.directdebit.accountowner']['default'] = $address->getFirstname() . ' ' . $address->getLastname();
+		try{
+			$address = $basket->getAddress();
+
+			if( ( $fn = $address->getFirstname() ) !== '' && ( $ln = $address->getLastname() ) !== '' ) {
+				$this->_feConfig['payment.directdebit.accountowner']['default'] = $fn . ' ' . $ln;
+			}
+		} catch( MShop_Order_Exception $ex ) {}
 
 		foreach( $this->_feConfig as $key => $config ) {
-			if( $key === 'payment.directdebit.accountowner' && isset( $basket->getAddress() ) )
-			{
-				$address = $basket->getAddress();
-				$config[ 'default' ] = $address->getFirstname() . ' ' . $address->getLastname();
-			}
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
