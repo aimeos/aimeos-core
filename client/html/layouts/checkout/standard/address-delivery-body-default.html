@@ -156,7 +156,7 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 <?php endforeach; ?>
 	<div class="item-address item-new">
 		<div class="header">
-			<input type="radio" name="ca-delivery-option" value="" <?php echo ( $deliveryOption == '' ? 'checked="checked"' : '' ); ?> />
+			<input type="radio" name="ca-delivery-option" value="null" <?php echo ( $deliveryOption == 'null' ? 'checked="checked"' : '' ); ?> />
 			<div class="values"><span class="value value-new"><?php echo $this->translate( 'core/client/html', 'new address' ); ?></span></div>
 		</div>
 		<ul class="form-list" >

@@ -6,7 +6,7 @@
  */
 
 ?>
-<?php if( !isset( $this->addressCustomerItem ) || $this->param( 'ca-billing-option', ( isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : '' ) ) == '' ) : ?>
+<?php if( !isset( $this->addressCustomerItem ) || $this->param( 'ca-billing-option', ( isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' ) ) == 'null' ) : ?>
 <style type="text/css">
 .checkout-standard-address-billing .item-new .form-list {
 	display: block;
@@ -19,7 +19,7 @@ $(document).ready( function() {
 	$( '.checkout-standard-address-billing .header > input' ).bind( 'click',
 		{ selector: '.checkout-standard-address-billing .item-new .form-list' },
 		function( event ) {
-			if( $(this).val() == '' ) {
+			if( $(this).val() == 'null' ) {
 				$( event.data.selector ).slideDown( 400 );
 			} else {
 				$( event.data.selector ).slideUp( 400 );
