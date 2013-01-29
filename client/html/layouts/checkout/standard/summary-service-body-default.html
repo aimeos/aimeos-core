@@ -26,7 +26,7 @@
 		<ul class="attr-list">
 <?php		foreach( $service->getAttributes() as $attribute ) : ?>
 				<li class="<?php echo $attribute->getCode(); ?>">
-					<span class="name"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'core/client/html/service', $attribute->getCode() ) ); ?></span>
+					<span class="name"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'core/client/html/code', $attribute->getCode() ) ); ?></span>
 <?php			switch( $attribute->getValue() ) : case 'array': case 'object': ?>
 					<span class="value"><?php echo join( ', ', (array) $attribute->getValue() ); ?></span>
 <?php				break; default: ?>

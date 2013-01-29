@@ -55,7 +55,7 @@ foreach( $this->get( 'paymentError', array() ) as $name => $msg ) {
 <?php foreach( $services as $id => $service ) : ?>
 		<div id="c-payment-<?php echo $id; ?>" class="item item-service">
 			<label class="description" for="c-payment-option-<?php echo $id; ?>">
-				<input class="option" type="radio" id="c-payment-option-<?php echo $id; ?>" name="c-payment-option" value="<?php echo $id; ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
+				<input class="option" type="radio" id="c-payment-option-<?php echo $id; ?>" name="<?php echo $this->formparam( array( 'c-payment-option' ) ); ?>" value="<?php echo $id; ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
 				<span class="price-value"><?php echo $this->number( $servicePrices[$id]->getValue() + $servicePrices[$id]->getShipping() ); ?></span>
 <?php	endif; ?>
@@ -78,7 +78,7 @@ foreach( $this->get( 'paymentError', array() ) as $name => $msg ) {
 				<li class="form-item <?php echo $key . ( isset( $paymentCss[$key] ) ? ' ' . join( ' ', $paymentCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
 					<label for="payment-<?php echo $key; ?>"><?php echo $this->translate( 'core/client/html/code', $key ); ?></label><?php
 				switch( $attribute->getType() ) : case 'string':
-					?><input type="text" id="payment-<?php echo $key; ?>" name="c-payment[<?php echo $id; ?>][<?php echo $key; ?>]" value="<?php echo $this->param( 'c-payment/' . $id . '/' . $key, $value ); ?>" /><?php
+					?><input type="text" id="payment-<?php echo $key; ?>" name="<?php echo $this->formparam( array( 'c-payment', $id, $key ) ); ?>" value="<?php echo $this->param( 'c-payment/' . $id . '/' . $key, $value ); ?>" /><?php
 					break; case 'select':
 					?><select id="payment-<?php echo $key; ?>" name="c-payment[<?php echo $id; ?>][<?php echo $key; ?>]">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
