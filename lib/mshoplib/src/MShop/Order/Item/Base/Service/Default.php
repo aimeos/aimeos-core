@@ -1,11 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Default.php 14852 2012-01-13 12:24:15Z doleiynyk $
  */
 
 
@@ -76,6 +75,28 @@ class MShop_Order_Item_Base_Service_Default
 		$this->setModified();
 	}
 
+	/**
+	 * Returns the original ID of the service item used for the order.
+	 *
+	 * @return string Original service ID
+	 */
+	public function getServiceID()
+	{
+		return( isset( $this->values['servid'] ) ? (string) $this->_values['servid'] : '' );
+	}
+
+	/**
+	 * Sets a new ID of the service item used for the order.
+	 *
+	 * @param string $servid ID of the service item used for the order
+	 */
+	public function setServiceID( $servid )
+	{
+		if( $servid == $this->getServiceID() ) { return; }
+
+		$this->_values['servid'] = (string) $servid;
+		$this->setModified();
+	}
 
 	/**
 	 * Returns the code of the service item.

@@ -1,11 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Interface.php 14246 2011-12-09 12:25:12Z nsendetzky $
  */
 
 
@@ -30,6 +29,16 @@ interface MShop_Order_Item_Base_Service_Interface extends MShop_Common_Item_Inte
 	 * @param integer|null Order service base ID
 	 */
 	public function setBaseId( $id );
+
+	/**
+	 * Returns the original service ID
+	 */
+	public function getServiceID();
+
+	/**
+	 * Sets the original service ID
+	 */
+	public function setServiceID( $servid );
 
 	/**
 	 * Returns the code of the service item.
@@ -115,7 +124,7 @@ interface MShop_Order_Item_Base_Service_Interface extends MShop_Common_Item_Inte
 	 * @param MShop_Service_Item_Interface $service New service item
 	 */
 	public function copyFrom( MShop_Service_Item_Interface $service );
-	
+
 	/**
 	 * Sets the media url of the service item.
 	 *
