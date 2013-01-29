@@ -107,7 +107,6 @@ class Controller_ExtJS_Catalog_List_Default
 
 		$totalList = 0;
 		$search = $this->_initCriteria( $this->_getManager()->createSearch(), $params );
-		$search->setSlice( 0, 0x7fffffff );
 		$result = $this->_getManager()->searchItems( $search, array(), $totalList );
 
 		$idLists = array();

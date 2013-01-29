@@ -155,6 +155,8 @@ MShop.panel.AbstractUsedByListUi = Ext.extend( Ext.Panel, {
 			} ]
 		};
 		
+		options.params.start = 0;
+		options.params.limit = 0x7fffffff;
 	},
 
 	onBeforeWrite: function( store, action, records, options )
