@@ -55,7 +55,7 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 <?php foreach( $services as $id => $service ) : ?>
 		<div id="c-delivery-<?php echo $id; ?>" class="item item-service">
 			<label class="description" for="c-delivery-option-<?php echo $id; ?>">
-				<input class="option" type="radio" id="c-delivery-option-<?php echo $id; ?>" name="c-delivery-option" value="<?php echo $id; ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
+				<input class="option" type="radio" id="c-delivery-option-<?php echo $id; ?>" name="<?php echo $this->formparam( array( 'c-delivery-option' ) ); ?>" value="<?php echo $id; ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
 				<span class="price-value"><?php echo $this->number( $servicePrices[$id]->getValue() + $servicePrices[$id]->getShipping() ); ?></span>
 <?php	endif; ?>
@@ -78,9 +78,9 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 				<li class="form-item <?php echo $key . ( isset( $deliveryCss[$key] ) ? ' ' . join( ' ', $deliveryCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
 					<label for="delivery-<?php echo $key; ?>"><?php echo $this->translate( 'core/client/html/code', $key ); ?></label>
 <?php			switch( $attribute->getType() ) : case 'string':
-					?><input type="text" id="delivery-<?php echo $key; ?>" name="c-delivery[<?php echo $id; ?>][<?php echo $key; ?>]" value="<?php echo $this->param( 'c-delivery/' . $id . '/' . $key, $value ); ?>" />
+					?><input type="text" id="delivery-<?php echo $key; ?>" name="<?php echo $this->formparam( array( 'c-delivery', $id, $key ) ); ?>" value="<?php echo $this->param( 'c-delivery/' . $id . '/' . $key, $value ); ?>" />
 <?php				break; case 'select':
-					?><select id="delivery-<?php echo $key; ?>" name="c-delivery[<?php echo $id; ?>][<?php echo $key; ?>]">
+					?><select id="delivery-<?php echo $key; ?>" name="<?php echo $this->formparam( array( 'c-delivery', $id, $key ) ); ?>">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
 						<option value="<?php echo $option; ?>"><?php echo $this->translate( 'core/client/html/code', $key . ':' . $option ); ?></option>
 <?php					endforeach; ?>
