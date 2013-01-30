@@ -18,6 +18,10 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	
 		this.title = _('Text item details');
 
+		if(this.copyActive){
+			this.record.data['text.id'] = null;
+		}
+		
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {

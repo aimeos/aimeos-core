@@ -16,6 +16,10 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	
 	initComponent : function() {
 
+		if(this.copyActive){
+			this.record.data['plugin.id'] = null;
+		}
+		
 		this.title = _('Plugin item details');
 		var that = this;
 		this.items = [ {
@@ -144,7 +148,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( key.trim() !== '' ) {
-						config[key] = value.trim();
+						config[key] = String(value).trim();
 					}
 				}, this);
 			});

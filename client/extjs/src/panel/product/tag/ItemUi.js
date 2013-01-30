@@ -17,6 +17,10 @@ MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	initComponent : function() {
 
 		this.title = _('Product tag details');
+		
+		if(this.copyActive){
+			this.record.data['product.tag.id'] = null;
+		}
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 

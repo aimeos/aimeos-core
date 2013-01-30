@@ -44,6 +44,8 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	maximized : true,
 	layout: 'fit',
 	modal: true,
+	
+	copyActive: false,
 
 	initComponent: function() {
 		this.addEvents(
@@ -130,6 +132,12 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			this.record = new this.recordType();
 			this.isNewRecord = true;
 		}
+		
+		if(this.copyActive){
+			var data = this.record.data;
+			this.record = new this.recordType();
+			this.record.data = data;
+		}
 
 		this.mainForm.getForm().loadRecord(this.record);
 
@@ -184,10 +192,10 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			this.isSaveing = false;
 			this.saveMask.hide();
 		}
-
+		
 		this.mainForm.getForm().updateRecord(this.record);
 
-		if (this.isNewRecord) {
+		if (this.isNewRecord || this.copyActive) {
 			this.store.add(this.record);
 		}
 
@@ -211,7 +219,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		if (records.indexOf(this.record) !== -1 && this.isSaveing) {
 			var ticketFn = this.onAfterSave.deferByTickets(this),
 				wrapTicket = ticketFn();
-
+			
 			this.fireEvent('save', this, this.record, ticketFn);
 			wrapTicket();
 		}

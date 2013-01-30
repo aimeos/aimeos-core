@@ -20,6 +20,10 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 		
+		if(this.copyActive){
+			this.record.data['attribute.id'] = null;
+		}
+		
 		var storeConfig = {
 			baseParams: {
 				site: MShop.config.site["locale.site.code"],

@@ -18,6 +18,10 @@ MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		this.title = _('Price item details');
 
+		if(this.copyActive){
+			this.record.data['price.id'] = null;
+		}
+		
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
