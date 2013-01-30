@@ -26,7 +26,7 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 	initComponent : function()
 	{
 		this.title = _( 'Locale Site' );
-
+		
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
 
@@ -110,7 +110,17 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 			}
 		];
 	},
-
+	
+	initToolbar: function() {
+		this.tbar = [
+			this.actionAdd,
+			this.actionEdit,
+			this.actionDelete,
+			this.actionExport,
+			this.importButton
+		];
+	},
+	
 	initStore: function() {
 		this.store = new Ext.data.DirectStore(Ext.apply({
 			autoLoad: false,
