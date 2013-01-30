@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: DefaultTest.php 14682 2012-01-04 11:30:14Z nsendetzky $
  */
 
 
@@ -77,6 +76,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'order.base.service.id', null );
 		$expr[] = $search->compare( '==', 'order.base.service.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );
+		$expr[] = $search->compare( '!=', 'order.base.service.servid', null );
 		$expr[] = $search->compare( '==', 'order.base.service.type', 'payment' );
 		$expr[] = $search->compare( '==', 'order.base.service.code', 'OGONE' );
 		$expr[] = $search->compare( '==', 'order.base.service.name', 'ogone' );
@@ -206,6 +206,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
+		$this->assertEquals( $item->getServiceId(), $itemSaved->getServiceId() );
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
@@ -220,6 +221,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getBaseId(), $itemUpd->getBaseId() );
+		$this->assertEquals( $itemExp->getServiceId(), $itemUpd->getServiceID() );
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );

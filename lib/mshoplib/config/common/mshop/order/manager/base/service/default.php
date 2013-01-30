@@ -1,21 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: default.php 14818 2012-01-12 09:53:56Z spopp $
  */
 
 return array(
 	'item' => array(
 		'insert' => '
-			INSERT INTO "mshop_order_base_service" ("baseid", "siteid", "type", "code",
+			INSERT INTO "mshop_order_base_service" ("baseid", "siteid", "servid", "type", "code",
 				"name", "mediaurl", "price", "shipping", "rebate", "taxrate", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_order_base_service"
-			SET "baseid" = ?, "siteid" = ?, "type" = ?, "code" = ?, "name" = ?, "mediaurl" = ?, "price" = ?,
+			SET "baseid" = ?, "siteid" = ?, "servid" = ?, "type" = ?, "code" = ?, "name" = ?, "mediaurl" = ?, "price" = ?,
 				"shipping" = ?, "rebate" = ?, "taxrate" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
@@ -24,7 +23,7 @@ return array(
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT DISTINCT mordbase."id", mordbase."baseid", mordbase."siteid",
+			SELECT DISTINCT mordbase."id", mordbase."baseid", mordbase."siteid", mordbase."servid",
 				mordbase."type", mordbase."code", mordbase."name", mordbase."mediaurl", mordbase."price",
 				mordbase."shipping", mordbase."rebate", mordbase."taxrate",
 				mordbase."mtime", mordbase."editor", mordbase."ctime"
