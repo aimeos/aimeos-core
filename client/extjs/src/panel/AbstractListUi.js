@@ -320,7 +320,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	onGridSelectionChange: function(sm) {
 		var numSelected = sm.getCount();
 		this.actionEdit.setDisabled(numSelected !== 1);
-		this.actionCopy.setDisabled(numSelected === 0);
+		this.actionCopy.setDisabled(numSelected !== 1);
 		this.actionDelete.setDisabled(numSelected === 0);
 		this.actionExport.setDisabled(this.exportMethod === null);
 	},
@@ -331,7 +331,8 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			domain: this.domain,
 			record: action === 'add' ? null : this.grid.getSelectionModel().getSelected(),
 			store: this.store,
-			listUI: this
+			listUI: this,
+			copyActive: action === 'copy' ? true : false
 		});
 
 		itemUi.show();

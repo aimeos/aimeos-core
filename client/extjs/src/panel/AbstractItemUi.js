@@ -130,6 +130,12 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			this.record = new this.recordType();
 			this.isNewRecord = true;
 		}
+		
+		if(this.copyActive){
+			var data = this.record.data;
+			this.record = new this.recordType();
+			this.record.data = data;
+		}
 
 		this.mainForm.getForm().loadRecord(this.record);
 
@@ -187,7 +193,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		
 		this.mainForm.getForm().updateRecord(this.record);
 
-		if (this.isNewRecord) {
+		if (this.isNewRecord || this.copyActive) {
 			this.store.add(this.record);
 		}
 
