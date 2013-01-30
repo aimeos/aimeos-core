@@ -99,13 +99,13 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetServiceId()
 	{
-		$this->assertEquals( $this->_values['servid'], $this->_object->getServiceID() );
+		$this->assertEquals( $this->_values['servid'], $this->_object->getServiceId() );
 	}
 
 	public function testSetServiceId()
 	{
-		$this->_object->setServiceID( 'testServiceID' );
-		$this->assertEquals( 'testServiceID', $this->_object->getServiceID() );
+		$this->_object->setServiceId( 'testServiceID' );
+		$this->assertEquals( 'testServiceID', $this->_object->getServiceId() );
 	}
 
 	public function testGetCode()

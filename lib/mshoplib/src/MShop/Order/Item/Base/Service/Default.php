@@ -80,9 +80,9 @@ class MShop_Order_Item_Base_Service_Default
 	 *
 	 * @return string Original service ID
 	 */
-	public function getServiceID()
+	public function getServiceId()
 	{
-		return( isset( $this->values['servid'] ) ? (string) $this->_values['servid'] : '' );
+		return( isset( $this->_values['servid'] ) ? (string) $this->_values['servid'] : '' );
 	}
 
 	/**
@@ -92,7 +92,7 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setServiceID( $servid )
 	{
-		if( $servid == $this->getServiceID() ) { return; }
+		if( $servid == $this->getServiceId() ) { return; }
 
 		$this->_values['servid'] = (string) $servid;
 		$this->setModified();
@@ -287,6 +287,7 @@ class MShop_Order_Item_Base_Service_Default
 
 		$list['order.base.service.baseid'] = $this->getBaseId();
 		$list['order.base.service.code'] = $this->getCode();
+		$list['order.base.service.servid'] = $this->getServiceId();
 		$list['order.base.service.name'] = $this->getName();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.service.type'] = $this->getType();
