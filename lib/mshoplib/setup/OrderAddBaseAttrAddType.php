@@ -12,8 +12,14 @@
 class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 {  
 	private $_mysql = array(
-			'mshop_order_base_product_attr' => 'ALTER TABLE "mshop_order_base_product_attr" ADD "type" VARCHAR(32) NOT NULL AFTER "ordprodid"',
-			'mshop_order_base_service_attr' => 'ALTER TABLE "mshop_order_base_service_attr" ADD "type" VARCHAR(32) NOT NULL AFTER "ordservid"',
+		'mshop_order_base_product_attr' => array(
+			'ALTER TABLE "mshop_order_base_product_attr" ADD "type" VARCHAR(32) NOT NULL AFTER "ordprodid"',
+			'ALTER TABLE "mshop_order_base_product_attr" DROP INDEX "idx_msordbaprat_sid_oid_cd_val"',
+		),
+		'mshop_order_base_service_attr' => array(
+			'ALTER TABLE "mshop_order_base_service_attr" ADD "type" VARCHAR(32) NOT NULL AFTER "ordservid"',
+			'ALTER TABLE "mshop_order_base_service_attr" DROP INDEX "idx_msordbaseat_sid_oid_cd_val"',
+		),
 	);
 	
 	
@@ -57,18 +63,18 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	{
 		$this->_msg ('Add column type to attribute tables', 0);
 		$this->_status('');
-		
+
 		foreach( $stmts AS $table => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking "%1$s" table', $table ), 1 );
-			
+
 			if( $this->_schema->tableExists( $table ) === true
 			&& $this->_schema->columnExists( $table, 'type' ) === false )
 			{
-				$this->_execute($stmt);
+				$this->_executeList($stmt);
 				$this->_status('added');
-			} 
-			else 
+			}
+			else
 			{
 				$this->_status('OK');
 			}
