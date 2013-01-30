@@ -17,7 +17,6 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 	 * @access protected
 	 */
 	protected $_object;
-	protected static $_basket;
 
 
 	/**
@@ -53,24 +52,6 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 	}
 
 
-	public static function setUpBeforeClass()
-	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$search = $orderManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_WEB ),
-			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$orderItems = $orderManager->searchItems( $search );
-
-		if( ( $order = reset( $orderItems ) ) === false ) {
-			throw new Exception( sprintf('No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
-		}
-
-		self::$_basket = $orderBaseManager->load( $order->getBaseId() );
-	}
 
 
 	/**
@@ -106,7 +87,23 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 
 	public function testGetConfigFE()
 	{
-		$config = $this->_object->getConfigFE( self::$_basket );
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$search = $orderManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_WEB ),
+			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED )
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$orderItems = $orderManager->searchItems( $search );
+
+		if( ( $order = reset( $orderItems ) ) === false ) {
+			throw new Exception( sprintf('No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
+		}
+
+		$basket = $orderBaseManager->load( $order->getBaseId() );
+
+		$config = $this->_object->getConfigFE( $basket );
 
 		$this->assertArrayHasKey( 'payment.directdebit.accountowner', $config );
 		$this->assertArrayHasKey( 'payment.directdebit.accountnumber', $config );

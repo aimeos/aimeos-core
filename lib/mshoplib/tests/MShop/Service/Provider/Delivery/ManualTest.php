@@ -71,6 +71,15 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 	}
 
 
+	public function testGetConfigFE()
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$basket = $orderManager->getSubManager( 'base' )->createItem();
+
+		$this->assertEquals( array(), $this->_object->getConfigFE( $basket ) );
+	}
+
+
 	public function testProcess()
 	{
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );

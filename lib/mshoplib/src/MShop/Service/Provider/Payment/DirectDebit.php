@@ -100,16 +100,17 @@ implements MShop_Service_Provider_Payment_Interface
 	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
 	{
 		$list = array();
+		$feconfig = $this->_feConfig;
 
 		try{
 			$address = $basket->getAddress();
 
 			if( ( $fn = $address->getFirstname() ) !== '' && ( $ln = $address->getLastname() ) !== '' ) {
-				$this->_feConfig['payment.directdebit.accountowner']['default'] = $fn . ' ' . $ln;
+				$feconfig['payment.directdebit.accountowner']['default'] = $fn . ' ' . $ln;
 			}
 		} catch( MShop_Order_Exception $ex ) {}
 
-		foreach( $this->_feConfig as $key => $config ) {
+		foreach( $feconfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 
