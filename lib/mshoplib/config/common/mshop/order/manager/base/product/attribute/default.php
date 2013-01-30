@@ -13,17 +13,17 @@ return array(
 			WHERE "id" = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_order_base_product_attr" ( "siteid", "ordprodid", "code", "value", "name",
+			INSERT INTO "mshop_order_base_product_attr" ( "siteid", "ordprodid", "type", "code", "value", "name",
 				"mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_order_base_product_attr"
-			SET "siteid" = ?, "ordprodid" = ?, "code" = ?, "value" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "ordprodid" = ?, "type" = ?, "code" = ?, "value" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT mordbaprat."id", mordbaprat."siteid", mordbaprat."ordprodid", mordbaprat."code",
+			SELECT mordbaprat."id", mordbaprat."siteid", mordbaprat."ordprodid", mordbaprat."type", mordbaprat."code",
 				mordbaprat."value", mordbaprat."name", mordbaprat."mtime", mordbaprat."editor", mordbaprat."ctime"
 			FROM "mshop_order_base_product_attr" AS mordbaprat
 			:joins
