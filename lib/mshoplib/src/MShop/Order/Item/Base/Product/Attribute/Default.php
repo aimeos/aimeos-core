@@ -185,6 +185,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 		$list = parent::toArray();
 
 		$list['order.base.product.attribute.productid'] = $this->getProductId();
+		$list['order.base.product.attribute.type'] = $this->getType();
 		$list['order.base.product.attribute.code'] = $this->getCode();
 		$list['order.base.product.attribute.value'] = $this->getValue();
 		$list['order.base.product.attribute.name'] = $this->getName();

@@ -183,6 +183,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 		$list = parent::toArray();
 
 		$list['order.base.service.attribute.ordservid'] = $this->getServiceId();
+		$list['order.base.service.attribute.type'] = $this->getType();
 		$list['order.base.service.attribute.name'] = $this->getName();
 		$list['order.base.service.attribute.code'] = $this->getCode();
 		$list['order.base.service.attribute.value'] = $this->getValue();
