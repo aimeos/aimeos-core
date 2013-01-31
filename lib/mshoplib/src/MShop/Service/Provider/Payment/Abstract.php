@@ -38,7 +38,8 @@ implements MShop_Service_Provider_Payment_Interface
 	 * Feature constant if refunding payments is supported.
 	 */
 	const FEAT_REFUND = 4;
-	
+
+
 	private $_communication;
 
 
@@ -73,19 +74,8 @@ implements MShop_Service_Provider_Payment_Interface
 	{
 		throw new MShop_Service_Exception( sprintf( 'Method is not available: "%1$s"', 'refund' ) );
 	}
-	
-	
-	/**
-	 * Sets the communication interface for a service provider or a test.
-	 *
-	 * @param MW_Communication_Interface $communication Interface of communication
-	 */
-	public function setCommunication( MW_Communication_Interface $communication )
-	{
-		$this->_communication = $communication;
-	}
-	
-	
+
+
 	/**
 	 * Send http request to the given url.
 	 *
@@ -97,13 +87,10 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	protected function _sendRequest( $url, $param, $method = 'POST' )
 	{
-		if( !isset( $this->_communication ) ) {
-			$this->_communication = new MW_Communication_Curl();
-		}
-		return $this->_communication->transmit( $url, $method, $param );
+		return $this->_getCommunication()->transmit( $url, $method, $param );
 	}
-	
-	
+
+
 	/**
 	 * Sets or adds a attribute value to the list of service payment items.
 	 *
@@ -119,16 +106,16 @@ implements MShop_Service_Provider_Payment_Interface
 			$attributes[ $code ]->setValue( utf8_encode( $value ) );
 			return;
 		}
-	
+
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
 		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
 		$attributeManager = $orderServiceManager->getSubManager( 'attribute' );
-	
+
 		$item = $attributeManager->createItem();
 		$item->setCode( $code );
 		$item->setValue( utf8_encode( $value ) );
 		$item->setServiceId( $serviceId );
-	
+
 		$attributes[ $code ] = $item;
 	}
 }

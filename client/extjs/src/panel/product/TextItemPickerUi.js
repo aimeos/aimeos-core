@@ -8,7 +8,7 @@
 Ext.ns('MShop.panel.product');
 
 // hook text picker into the product ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.TextItemPickerUi', {
 	xtype : 'MShop.panel.text.itempickerui',
 	itemConfig : {
 		recordName : 'Product_List',

@@ -8,7 +8,7 @@
 Ext.ns('MShop.panel.catalog');
 
 // hook media picker into the catalog ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.MediaItemPickerUi', {
 	xtype : 'MShop.panel.media.itempickerui',
 	itemConfig : {
 		recordName : 'Catalog_List',

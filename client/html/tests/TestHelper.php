@@ -9,7 +9,6 @@
 
 class TestHelper
 {
-	private static $_view;
 	private static $_mshop;
 	private static $_context = array();
 
@@ -36,30 +35,31 @@ class TestHelper
 
 	public static function getView()
 	{
-		if( !isset( self::$_view ) )
-		{
-			self::$_view = new MW_View_Default();
+		$view = new MW_View_Default();
 
-			$helper = new MW_View_Helper_Translate( self::$_view, new MW_Translation_None( 'en_GB' ) );
-			self::$_view->addHelper( 'translate', $helper );
+		$trans = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'de_DE', array('disableNotices'=>true) );
+		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
+		$view->addHelper( 'translate', $helper );
 
-			$helper = new MW_View_Helper_Url( self::$_view, 'baseurl' );
-			self::$_view->addHelper( 'url', $helper );
+		$helper = new MW_View_Helper_Url_Default( $view, 'baseurl' );
+		$view->addHelper( 'url', $helper );
 
-			$helper = new MW_View_Helper_Number( self::$_view, '.', '' );
-			self::$_view->addHelper( 'number', $helper );
+		$helper = new MW_View_Helper_Number_Default( $view, '.', '' );
+		$view->addHelper( 'number', $helper );
 
-			$helper = new MW_View_Helper_Date( self::$_view, 'Y-m-d' );
-			self::$_view->addHelper( 'date', $helper );
+		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
+		$view->addHelper( 'date', $helper );
 
-			$helper = new MW_View_Helper_Config( self::$_view, array() );
-			self::$_view->addHelper( 'config', $helper );
+		$helper = new MW_View_Helper_Config_Default( $view, array() );
+		$view->addHelper( 'config', $helper );
 
-			$helper = new MW_View_Helper_Parameter( self::$_view, array() );
-			self::$_view->addHelper( 'param', $helper );
-		}
+		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
+		$view->addHelper( 'param', $helper );
 
-		return self::$_view;
+		$helper = new MW_View_Helper_FormParam_Default( $view );
+		$view->addHelper( 'formparam', $helper );
+
+		return $view;
 	}
 
 

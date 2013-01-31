@@ -38,4 +38,11 @@ interface MW_Translation_Interface
 	 */
 	public function dn( $domain, $singular, $plural, $number );
 
+
+	/**
+	 * Returns the current locale string.
+	 *
+	 * @return string ISO locale string
+	 */
+	public function getLocale();
 }

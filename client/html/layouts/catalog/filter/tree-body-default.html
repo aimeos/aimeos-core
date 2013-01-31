@@ -8,6 +8,8 @@
 
 ?>
 <div class="catalog-filter-tree">
-<ul class="tree-level-<?php echo $this->treeCatalogTree->getNode()->level; ?>"><?php echo $this->navtree( $this->treeCatalogTree ); ?></ul>
-<?php echo $this->treeBody; ?>
+<?php if( $this->treeCatalogTree ) : ?>
+	<ul class="tree-level-<?php echo $this->treeCatalogTree->getNode()->level; ?>"><?php echo $this->navtree( $this->treeCatalogTree ); ?></ul>
+<?php endif; ?>
+<?php echo $this->get( 'treeBody' ); ?>
 </div>

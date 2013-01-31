@@ -19,19 +19,18 @@ class MW_Translation_Zend
 	extends MW_Translation_Abstract
 	implements MW_Translation_Interface
 {
-	private $_translate;
-	private $_adapter;
 	private $_locale;
 	private $_options;
+	private $_translationSources;
 	private $_translations = array();
-	private $_translationSources = array();
 
 
 	/**
 	 * Initializes the translation object using Zend_Translate.
 	 * This implementation only accepts files as source for the Zend_Translate_Adapter.
 	 *
-	 * @param array $translationSources List of key/value pairs with the translation domain
+	 * @param array $translationSources Associative list of translation domains and lists of translation directories.
+	 * 	Translations from the first file aren't overwritten by the later ones
 	 * as key and the directory where the translation files are located as value.
 	 * @param string $adapter Name of the Zend translation adapter
 	 * @param string $locale ISO language name, like "en" or "en_US"
@@ -42,9 +41,11 @@ class MW_Translation_Zend
 	public function __construct( array $translationSources, $adapter, $locale, array $options = array() )
 	{
 		$this->_translationSources = $translationSources;
-		$this->_adapter = (string) $adapter;
-		$this->_locale = (string) $locale;
+
+		$this->_locale = $locale;
 		$this->_options = $options;
+		$this->_options['adapter'] = (string) $adapter;
+		$this->_options['locale'] = (string) $locale;
 	}
 
 
@@ -64,10 +65,8 @@ class MW_Translation_Zend
 		}
 		catch( Exception $e )
 		{
-			; // do nothing at the moment
+			return (string) $string;
 		}
-
-		return (string) $string;
 	}
 
 
@@ -91,14 +90,23 @@ class MW_Translation_Zend
 		}
 		catch( Exception $e )
 		{
-			; // do nothing at the moment
-		}
+			if( $number > 0 ) {
+				return (string) $plural;
+			}
 
-		if( $number > 0 ) {
-			return (string) $plural;
+			return (string) $singular;
 		}
+	}
 
-		return (string) $singular;
+
+	/**
+	 * Returns the current locale string.
+	 *
+	 * @return string ISO locale string
+	 */
+	public function getLocale()
+	{
+		return $this->_locale;
 	}
 
 
@@ -111,36 +119,38 @@ class MW_Translation_Zend
 	 */
 	protected function _getTranslation( $domain )
 	{
-		if ( isset( $this->_translations[ $domain ] ) ) {
-			return $this->_translations[ $domain ];
-		}
-
-		if ( !isset( $this->_translationSources[ $domain ] ) )
+		if( !isset( $this->_translations[$domain] ) )
 		{
-			$msg = sprintf( 'No translation directory for domain "%1$s" available', $domain );
-			throw new MW_Translation_Exception( $msg );
-		}
-
-		$location = $this->_getTranslationFileLocation( $this->_translationSources[$domain], $this->_locale );
-
-		try
-		{
-			if ( $this->_translate === null ) {
-				$this->_translate = new Zend_Translate( $this->_adapter, $location, $this->_locale, $this->_options );
+			if ( !isset( $this->_translationSources[$domain] ) )
+			{
+				$msg = sprintf( 'No translation directory for domain "%1$s" available', $domain );
+				throw new MW_Translation_Exception( $msg );
 			}
 
-			/* @todo Set twice with all parameters because of a bug
-			 * in ZF >= 1.11.11 (to be checked in future releases of ZF) */
-			$options = array( 'adapter' => $this->_adapter, 'content' => $location, 'locale' => $this->_locale );
-			$this->_translate->addTranslation( $options + $this->_options );
-			$this->_translations[ $domain ] = $this->_translate;
+			// Reverse locations so the former gets not overwritten by the later
+			$locations = array_reverse( $this->_getTranslationFileLocations( $this->_translationSources[$domain], $this->_locale ) );
+			$options = $this->_options;
 
-			return $this->_translate;
+			if( count( $locations ) > 0 )
+			{
+				foreach( $locations as $location )
+				{
+					$options['content'] = $location;
+
+					if( !isset( $this->_translations[$domain] ) ) {
+						$this->_translations[$domain] = new Zend_Translate( $options );
+					} else {
+						$this->_translations[$domain]->addTranslation( $options );
+					}
+				}
+			}
+			else
+			{
+				$this->_translations[$domain] = new Zend_Translate( $options );
+			}
 		}
-		catch( Exception $e )
-		{
-			throw new MW_Translation_Exception( $e->getMessage() );
-		}
+
+		return $this->_translations[$domain];
 	}
 
 }

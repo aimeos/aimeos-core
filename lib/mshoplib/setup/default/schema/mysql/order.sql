@@ -204,12 +204,12 @@ CREATE TABLE "mshop_order_base_product" (
 	"baseid" BIGINT NOT NULL,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original product ID
+	"prodid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Order Product ID
 	"ordprodid" BIGINT DEFAULT NULL,
 	-- Type of Order Product ID
 	"type" VARCHAR(32) NOT NULL,
-	-- Original product ID
-	"prodid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Shop product code
 	"prodcode" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Supplier id
@@ -302,6 +302,8 @@ CREATE TABLE "mshop_order_base_service" (
 	"baseid" BIGINT NOT NULL,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original service ID
+	"servid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Service domain (delivery, payment)
 	"type" VARCHAR(8) NOT NULL,
 	-- Service code

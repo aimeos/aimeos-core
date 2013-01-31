@@ -116,22 +116,42 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function deleteItem( $id )
 	{
-		foreach( $this->_submanagers as $submanager ) {
-			$submanager->deleteItem( $id );
-		}
+		$this->deleteItems( array( $id ) );
+	}
 
+
+	/**
+	 * Removes multiple items from the index.
+	 *
+	 * @param array $ids list of Product IDs
+	 */
+	public function deleteItems( array $ids )
+	{
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->deleteItems( $ids );
+		}
 
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
+		$sql = $context->getConfig()->get( 'mshop/catalog/manager/index/price/default/item/delete' );
+		
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
+		
+		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'prodid' => '"prodid"' );
+		
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
+		
 		try
 		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/price/default/item/delete' );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
+			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn );
@@ -246,8 +266,6 @@ class MShop_Catalog_Manager_Index_Price_Default
 		$date = date( 'Y-m-d H:i:s' );
 
 
-		$this->_begin();
-
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
@@ -299,8 +317,6 @@ class MShop_Catalog_Manager_Index_Price_Default
 			throw $e;
 		}
 
-		$this->_commit();
-
 
 		foreach( $this->_submanagers as $submanager ) {
 			$submanager->rebuildIndex( $items );
@@ -336,11 +352,12 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/catalog/manager/index/price/default/item/search';
 			$cfgPathCount =  'mshop/catalog/manager/index/price/default/item/count';
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )	{
 				$ids[] = $row['id'];

@@ -10,7 +10,7 @@ $time = microtime( true );
 
 define( 'ZFAPP_ROOT', dirname( dirname( __FILE__ ) ) );
 define( 'APPLICATION_PATH', ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'application' );
-define( 'APPLICATION_ENV', 'production' ); // development | production
+define( 'APPLICATION_ENV', 'development' ); // development | production
 
 if ( APPLICATION_ENV == 'development' ) {
 	error_reporting( -1 );

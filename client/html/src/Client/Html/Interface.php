@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  * @version $Id: Interface.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
@@ -13,7 +13,7 @@
  * Common interface for all HTML client classes.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 interface Client_Html_Interface
 {
@@ -70,4 +70,11 @@ interface Client_Html_Interface
 	 * @return boolean True if the output can be cached, false if not
 	 */
 	public function isCachable( $what );
+
+	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 */
+	public function process();
 }

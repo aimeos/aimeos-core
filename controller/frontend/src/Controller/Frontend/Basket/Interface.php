@@ -67,48 +67,26 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 
 
 	/**
-	 * Sets the billing address of the customer in the basket.
+	 * Sets the address of the customer in the basket.
 	 *
-	 * @param MShop_Common_Item_Address_Interface|array|string $billing Address object, array with key/value pairs or
-	 *  ID of the customer. In case of an array, the keys must be the same as the keys returned when calling toArray()
-	 *  on the billing address object like "customer.salutation"
+	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract
+	 * @param MShop_Common_Item_Address_Interface|array $billing Address object or array with key/value pairs.
+	 * 	In case of an array, the keys must be the same as the keys returned when calling toArray()
+	 *  on the order base address object like "order.base.address.salutation"
 	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
 	 * 	if one of the keys is invalid when using an array with key/value pairs
 	 */
-	public function setBillingAddress( $billing );
+	public function setAddress( $type, $value );
 
 
 	/**
-	 * Sets the delivery address of the customer in the basket (only required if the delivery address is different
-	 * 	from the billing address).
+	 * Sets the delivery/payment service item based on the service ID.
 	 *
-	 * @param MShop_Common_Item_Address_Interface|array|string|null $delivery Address object, array with key/value
-	 * 	pairs or ID of the customer address. In case of an array, the keys must be the same as the keys returned when
-	 * 	calling toArray() on the delivery address object like "customer.address.salutation".
-	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
-	 * 	if one of the keys is invalid when using an array with key/value pairs
+	 * @param string $type Service type code like 'payment' or 'delivery'
+	 * @param string $id Unique ID of the service item
+	 * @param array $attributes Associative list of key/value pairs containing the attributes selected or
+	 * 	entered by the customer when choosing one of the delivery or payment options
+	 * @throws Controller_Frontend_Basket_Exception If there is no price to the service item attached
 	 */
-	public function setDeliveryAddress( $delivery );
-
-
-	/**
-	 * Sets the delivery service item given by its ID to the basket.
-	 *
-	 * @param string $id Unique ID of the delivery service item
-	 * @param array $attributes Associative list of key/value pairs containing the delivery attributes selected or
-	 * 	entered by the customer when choosing one of the delivery options
-	 * @throws Controller_Frontend_Basket_Exception If there is no price to the delivery service item attached
-	 */
-	public function setDeliveryOption( $id, array $attributes = array() );
-
-
-	/**
-	 * Sets the payment service item given by its ID to the basket.
-	 *
-	 * @param string $id Unique ID of the payment service item
-	 * @param array $attributes Associative list of key/value pairs containing the payment attributes selected or
-	 * 	entered by the customer when choosing one of the delivery options
-	 * @throws Controller_Frontend_Basket_Exception If there is no price to the delivery service item attached
-	 */
-	public function setPaymentOption( $id, array $attributes = array() );
+	public function setService( $type, $id, array $attributes = array() );
 }

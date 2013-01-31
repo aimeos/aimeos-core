@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
@@ -36,8 +36,8 @@ interface MShop_Service_Provider_Payment_Interface extends MShop_Service_Provide
 	 * separately isn't supported or not configured by the shop owner.
 	 *
 	 * @param MShop_Order_Item_Interface $order Order invoice object
-	 * @return MW_Common_Form_Interface Form object with URL, action and parameters to redirect to
-	 * 	(e.g. to an external server of the payment provider)
+	 * @return MW_Common_Form_Interface|null Form object with URL, action and parameters to redirect to
+	 * 	(e.g. to an external server of the payment provider) or null to redirect directly to the confirmation page
 	 */
 	public function process( MShop_Order_Item_Interface $order );
 
@@ -47,11 +47,4 @@ interface MShop_Service_Provider_Payment_Interface extends MShop_Service_Provide
 	 * @param MShop_Order_Item_Interface $order Order invoice object
 	 */
 	public function refund( MShop_Order_Item_Interface $order );
-	
-	/**
-	 * Sets the communication interface for a service provider or a test.
-	 *
-	 * @param MW_Communication_Interface $communication Interface of communication
-	 */
-	public function setCommunication( MW_Communication_Interface $communication );
 }

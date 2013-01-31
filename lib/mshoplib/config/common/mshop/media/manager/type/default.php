@@ -32,10 +32,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mmedty."id" ) AS "count"
-			FROM "mshop_media_type" mmedty
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM(
+				SELECT DISTINCT mmedty."id" 
+				FROM "mshop_media_type" mmedty
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

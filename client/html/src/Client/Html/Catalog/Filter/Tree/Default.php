@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  * @version $Id: Default.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
@@ -13,7 +13,7 @@
  * Default implementation of catalog tree filter section in HTML client.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 class Client_Html_Catalog_Filter_Tree_Default
 	extends Client_Html_Abstract
@@ -69,7 +69,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 		}
 
 
-		$navHelper = new MW_View_Helper_NavTree( $view );
+		$navHelper = new MW_View_Helper_NavTree_Default( $view );
 		$view->addHelper( 'navtree', $navHelper );
 
 		$html = '';
@@ -95,10 +95,9 @@ class Client_Html_Catalog_Filter_Tree_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
-	 * @param string|null $name Template name
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader( $name = null )
+	public function getHeader()
 	{
 		$view = $this->getView();
 		$catid = $view->param( 'f-catalog-id' );
@@ -144,6 +143,17 @@ class Client_Html_Catalog_Filter_Tree_Default
 		}
 
 		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 */
+	public function process()
+	{
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
 
 

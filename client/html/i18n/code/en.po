@@ -1,0 +1,90 @@
+# German translations for services.
+# Copyright (C) 2013
+# This file is distributed under the same license as the arcavias-core package.
+# Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: arcavias-core 2013-01\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-18 15:38+0100\n"
+"PO-Revision-Date: 2013-01-18 16:33+0100\n"
+"Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+# Payment status values
+
+msgid "pay:-1"
+msgstr "unfinished"
+
+msgid "pay:0"
+msgstr "deleted"
+
+msgid "pay:1"
+msgstr "canceled"
+
+msgid "pay:2"
+msgstr "refused"
+
+msgid "pay:3"
+msgstr "refunded"
+
+msgid "pay:4"
+msgstr "pending"
+
+msgid "pay:5"
+msgstr "authorized"
+
+msgid "pay:6"
+msgstr "received"
+
+
+
+# Delivery status values
+
+msgid "stat:-1"
+msgstr "unfinished"
+
+msgid "stat:0"
+msgstr "deleted"
+
+msgid "stat:1"
+msgstr "pending"
+
+msgid "statu:2"
+msgstr "in progress"
+
+msgid "stat:3"
+msgstr "dispatched"
+
+msgid "stat:4"
+msgstr "delivered"
+
+msgid "stat:5"
+msgstr "lost"
+
+msgid "stat:6"
+msgstr "refused"
+
+msgid "stat:7"
+msgstr "returned"
+
+
+
+# Direct debit service provider
+
+msgid "payment.directdebit.accountowner"
+msgstr "Account owner"
+
+msgid "payment.directdebit.accountnumber"
+msgstr "Account number"
+
+msgid "payment.directdebit.bankcode"
+msgstr "Bank code"
+
+msgid "payment.directdebit.bankname"
+msgstr "Bank name"

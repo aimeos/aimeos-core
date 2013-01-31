@@ -40,6 +40,19 @@ interface Controller_Frontend_Service_Interface
 	public function getServiceAttributes( $type, $serviceId );
 
 	/**
+	 * Returns the price of the service.
+	 *
+	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
+	 * @param string $serviceId Identifier of one of the service option returned by getService()
+	 * @param MShop_Order_Item_Base_Interface $basket Basket with products
+	 * @return MShop_Price_Item_Interface Price item
+	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
+	 * @throws MShop_Exception If service provider isn't available
+	 * @throws Exception If an error occurs
+	 */
+	public function getServicePrice( $type, $serviceId, MShop_Order_Item_Base_Interface $basket );
+
+	/**
 	 * Returns a list of attributes that are invalid.
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)

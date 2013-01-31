@@ -17,31 +17,6 @@
  */
 abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 {
-	/**
-	 * Only current site.
-	 * Use only the current site ID, not inherited ones or IDs of sub-sites.
-	 */
-	const SITE_ONE = 0;
-
-	/**
-	 * Current site up to root site.
-	 * Use all site IDs from the current site up to the root site.
-	 */
-	const SITE_PATH = 1;
-
-	/**
-	 * Current site and sub-sites.
-	 * Use all site IDs from the current site and its sub-sites.
-	 */
-	const SITE_SUBTREE = 2;
-
-	/**
-	 * Current site and sub-sites.
-	 * Use all site IDs from the current site and its sub-sites.
-	 */
-	const SITE_PATHSUBTREE = 3;
-
-
 	private $_context;
 	private $_stmts = array();
 	protected $_keySeparator = '.';
@@ -427,21 +402,21 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Customer_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_Address_' . $name;
 		$interface = 'MShop_Common_Manager_Address_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Customer_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 		}
 
 		$config = $this->_context->getConfig()->get( $confpath, $confpath );
 		$manager = new $classname( $this->_context, $config, $addressSearchConfig );
 
 		if( ( $manager instanceof $interface ) === false ) {
-			throw new MShop_Product_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
 		}
 
 		return $manager;
@@ -816,37 +791,33 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
 	 * @param array $required Additional search keys to add conditions for even if no conditions are available
 	 * @param integer|null $total Contains the number of all records matching the criteria if not null
-	 * @param integer $sitelevel Constant from MShop_Common_Manager_Abstract for defining which site IDs should be used for searching
+	 * @param integer $sitelevel Constant from MShop_Locale_Manager_Abstract for defining which site IDs should be used for searching
 	 * @return MW_DB_Result_Interface SQL result object for accessing the found records
 	 * @throws MShop_Exception if no number of all matching records is available
 	 */
 	protected function _searchItems( MW_DB_Connection_Interface $conn, MW_Common_Criteria_Interface $search,
-		$cfgPathSearch, $cfgPathCount, array $required, &$total = null, $sitelevel = self::SITE_PATH,
-		array $plugins = array() )
+		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
+		$sitelevel = MShop_Locale_Manager_Abstract::SITE_ONE, array $plugins = array() )
 	{
 		$joins = array();
 		$conditions = $search->getConditions();
 		$attributes = $this->getSearchAttributes();
 		$iface = 'MW_Common_Criteria_Attribute_Interface';
 
-		switch( $sitelevel )
-		{
-			case self::SITE_PATHSUBTREE:
-				$siteIds = $this->_context->getLocale()->getSiteSubTree() + $this->_context->getLocale()->getSitePath();
-				break;
 
-			case self::SITE_SUBTREE:
-				$siteIds = $this->_context->getLocale()->getSiteSubTree();
-				break;
+		$locale = $this->_context->getLocale();
+		$siteIds = array( $locale->getSiteId() );
 
-			case self::SITE_PATH:
-				$siteIds = $this->_context->getLocale()->getSitePath();
-				break;
-
-			case self::SITE_ONE:
-			default:
-				$siteIds = $this->_context->getLocale()->getSiteId();
+		if( $sitelevel & MShop_Locale_Manager_Abstract::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
 		}
+
+		if( $sitelevel & MShop_Locale_Manager_Abstract::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$siteIds = array_unique( $siteIds );
+
 
 		$keys = array_merge( $required, $this->_getCriteriaKeys( $required, $conditions ) );
 

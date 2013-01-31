@@ -134,6 +134,9 @@ class Controller_Frontend_Basket_Default
 			$orderAttributes[] = $orderAttributeItem;
 		}
 
+		// remove product rebate of original price
+		$price->setRebate( '0.00' );
+
 		$orderBaseProductItem->setAttributes( $orderAttributes );
 		$orderBaseProductItem->setPrice( $price );
 
@@ -247,108 +250,106 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
-	 * Sets the billing address of the customer in the basket.
+	 * Sets the address of the customer in the basket.
 	 *
-	 * @param MShop_Common_Item_Address_Interface|array|string $billing Address object, array with key/value pairs or
-	 *  ID of the customer. In case of an array, the keys must be the same as the keys returned when calling toArray()
-	 *  on the billing address object like "customer.salutation"
+	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract
+	 * @param MShop_Common_Item_Address_Interface|array|null $billing Address object or array with key/value pairs.
+	 * 	In case of an array, the keys must be the same as the keys returned when calling toArray()
+	 *  on the order base address object like "order.base.address.salutation"
 	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
 	 * 	if one of the keys is invalid when using an array with key/value pairs
 	 */
-	public function setBillingAddress( $billing )
+	public function setAddress( $type, $value )
 	{
 		$orderAddressManager = $this->_getDomainManager( 'order/base/address' );
-
 		$address = $orderAddressManager->createItem();
+		$address->setType( $type );
 
-		if( $billing instanceof MShop_Common_Item_Address_Interface )
+		if( $value instanceof MShop_Common_Item_Address_Interface )
 		{
-			$address->copyFrom( $billing );
+			$address->copyFrom( $value );
+			$this->_basket->setAddress( $address, $type );
 		}
-		else if( is_array( $billing ) )
+		else if( is_array( $value ) )
 		{
-			$address = $this->_createAddressFromArray( $address, $billing, 'customer.' );
+			$this->_setAddressFromArray( $address, $value );
+			$this->_basket->setAddress( $address, $type );
+		}
+		else if( $value === null )
+		{
+			$this->_basket->deleteAddress( $type );
 		}
 		else
 		{
-			$customerManager = $this->_getDomainManager( 'customer' );
-			$customerItem = $customerManager->getItem( $billing );
-
-			$address->copyFrom( $customerItem->getBillingAddress() );
+			throw new Controller_Frontend_Basket_Exception( sprintf( 'Invalid value for address type "%1$s"', $type ) );
 		}
 
-		$this->_basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
 		$this->_domainManager->setSession( $this->_basket );
 	}
 
 
 	/**
-	 * Sets the delivery address of the customer in the basket (only required if the delivery address is different
-	 * 	from the billing address).
+	 * Sets the delivery/payment service item based on the service ID.
 	 *
-	 * @param MShop_Common_Item_Address_Interface|array|string|null $delivery Address object, array with key/value
-	 * 	pairs or ID of the customer address. In case of an array, the keys must be the same as the keys returned when
-	 * 	calling toArray() on the delivery address object like "customer.address.salutation".
-	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
-	 * 	if one of the keys is invalid when using an array with key/value pairs
+	 * @param string $type Service type code like 'payment' or 'delivery'
+	 * @param string $id Unique ID of the service item
+	 * @param array $attributes Associative list of key/value pairs containing the attributes selected or
+	 * 	entered by the customer when choosing one of the delivery or payment options
+	 * @throws Controller_Frontend_Basket_Exception If there is no price to the service item attached
 	 */
-	public function setDeliveryAddress( $delivery )
+	public function setService( $type, $id, array $attributes = array() )
 	{
-		$orderAddressManager = $this->_getDomainManager( 'order/base/address' );
+		$serviceManager = $this->_getDomainManager( 'service' );
+		$serviceItem = $serviceManager->getItem( $id, array( 'media', 'price', 'text' ) );
 
-		$address = $orderAddressManager->createItem();
+		$provider = $serviceManager->getProvider( $serviceItem );
+		$result = $provider->checkConfigFE( $attributes );
+		$unknown = array_diff_key( $attributes, $result );
 
-		if( $delivery instanceof MShop_Common_Item_Address_Interface )
+		if( count( $unknown ) > 0 )
 		{
-			$address->copyFrom( $delivery );
-		}
-		else if( is_array( $delivery ) )
-		{
-			$address = $this->_createAddressFromArray( $address, $delivery, 'customer.address.' );
-		}
-		else
-		{
-			$customerAddressManager = $this->_getDomainManager( 'customer/address' );
-			$addressItem = $customerAddressManager->getItem( $delivery );
-
-			$address->copyFrom( $addressItem );
+			$msg = sprintf( 'Unknown attributes "%1$s"', implode( '","', array_keys( $unknown ) ) );
+			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
-		$this->_basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		foreach( $result as $key => $value )
+		{
+			if( $value !== null ) {
+				throw new Controller_Frontend_Basket_Exception( $value );
+			}
+		}
+
+		$orderBaseServiceManager = $this->_getDomainManager( 'order/base/service' );
+		$orderServiceItem = $orderBaseServiceManager->createItem();
+		$orderServiceItem->copyFrom( $serviceItem );
+
+		$price = $provider->calcPrice( $this->_basket );
+
+		// remove service rebate of original price
+		$price->setRebate( '0.00' );
+
+		$orderServiceItem->setPrice( $price );
+
+		$orderBaseServiceAttributeManager = $orderBaseServiceManager->getSubManager('attribute');
+
+		$attributeItems = array();
+		foreach( $attributes as $key => $value )
+		{
+			$ordBaseAtrrItem = $orderBaseServiceAttributeManager->createItem();
+			$ordBaseAtrrItem->setCode( $key );
+			$ordBaseAtrrItem->setValue( strip_tags( $value ) ); // prevent XSS
+			$attributeItems[] = $ordBaseAtrrItem;
+		}
+
+		$orderServiceItem->setAttributes( $attributeItems );
+
+		$this->_basket->setService( $orderServiceItem, $type );
 		$this->_domainManager->setSession( $this->_basket );
 	}
 
 
 	/**
-	 * Sets the delivery service item given by its ID to the basket.
-	 *
-	 * @param string $id Unique ID of the delivery service item
-	 * @param array $attributes Associative list of key/value pairs containing the delivery attributes selected or
-	 * 	entered by the customer when choosing one of the delivery options
-	 * @throws Controller_Frontend_Basket_Exception If there is no price to the delivery service item attached
-	 */
-	public function setDeliveryOption( $id, array $attributes = array() )
-	{
-		$this->_setService( 'delivery', $id, $attributes );
-	}
-
-
-	/**
-	 * Sets the payment service item given by its ID to the basket.
-	 *
-	 * @param string $id Unique ID of the payment service item
-	 * @param array $attributes Associative list of key/value pairs containing the payment attributes selected or
-	 * 	entered by the customer when choosing one of the delivery options
-	 * @throws Controller_Frontend_Basket_Exception If there is no price to the delivery service item attached
-	 */
-	public function setPaymentOption( $id, array $attributes = array() )
-	{
-		$this->_setService( 'payment', $id, $attributes );
-	}
-
-
-	/**
-	 * Returns an order address object filled with the values from the array.
+	 * Fills the order address object with the values from the array.
 	 *
 	 * @param MShop_Order_Item_Base_Address_Interface $address Address item to store the values into
 	 * @param array $map Associative array of key/value pairs. The keys must be the same as when calling toArray() from
@@ -357,57 +358,71 @@ class Controller_Frontend_Basket_Default
 	 * 	address
 	 * @throws Controller_Frontend_Basket_Exception
 	 */
-	protected function _createAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map, $prefix )
+	protected function _setAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map )
 	{
+		$errors = array();
+
 		foreach( $map as $key => $value )
 		{
-			$value = strip_tags( $value ); // prevent XSS
-
-			switch( $key )
+			try
 			{
-				case $prefix . 'salutation':
-					$address->setSalutation( $value ); break;
-				case $prefix . 'company':
-					$address->setCompany( $value ); break;
-				case $prefix . 'title':
-					$address->setTitle( $value ); break;
-				case $prefix . 'firstname':
-					$address->setFirstname( $value ); break;
-				case $prefix . 'lastname':
-					$address->setLastName( $value ); break;
-				case $prefix . 'address1':
-					$address->setAddress1( $value ); break;
-				case $prefix . 'address2':
-					$address->setAddress2( $value ); break;
-				case $prefix . 'address3':
-					$address->setAddress3( $value ); break;
-				case $prefix . 'postal':
-					$address->setPostal( $value ); break;
-				case $prefix . 'city':
-					$address->setCity( $value ); break;
-				case $prefix . 'state':
-					$address->setState( $value ); break;
-				case $prefix . 'countryid':
-					$address->setCountryId( $value ); break;
-				case $prefix . 'langid':
-					$address->setLanguageId( $value ); break;
-				case $prefix . 'telephone':
-					$address->setTelephone( $value ); break;
-				case $prefix . 'email':
-					$address->setEmail( $value ); break;
-				case $prefix . 'telefax':
-					$address->setTelefax( $value ); break;
-				case $prefix . 'website':
-					$address->setWebsite( $value ); break;
-				case $prefix . 'flag':
-					$address->setFlag( $value ); break;
-				default:
-					$msg = sprintf( 'Invalid address property "%1$s" with value "%2$s"', $key, $value );
-					throw new Controller_Frontend_Basket_Exception( $msg );
+				$value = strip_tags( $value ); // prevent XSS
+
+				switch( $key )
+				{
+					case 'order.base.address.salutation':
+						$address->setSalutation( $value ); break;
+					case 'order.base.address.company':
+						$address->setCompany( $value ); break;
+					case 'order.base.address.title':
+						$address->setTitle( $value ); break;
+					case 'order.base.address.firstname':
+						$address->setFirstname( $value ); break;
+					case 'order.base.address.lastname':
+						$address->setLastName( $value ); break;
+					case 'order.base.address.address1':
+						$address->setAddress1( $value ); break;
+					case 'order.base.address.address2':
+						$address->setAddress2( $value ); break;
+					case 'order.base.address.address3':
+						$address->setAddress3( $value ); break;
+					case 'order.base.address.postal':
+						$address->setPostal( $value ); break;
+					case 'order.base.address.city':
+						$address->setCity( $value ); break;
+					case 'order.base.address.state':
+						$address->setState( $value ); break;
+					case 'order.base.address.countryid':
+						$address->setCountryId( $value ); break;
+					case 'order.base.address.languageid':
+						$address->setLanguageId( $value ); break;
+					case 'order.base.address.telephone':
+						$address->setTelephone( $value ); break;
+					case 'order.base.address.email':
+						$address->setEmail( $value ); break;
+					case 'order.base.address.telefax':
+						$address->setTelefax( $value ); break;
+					case 'order.base.address.website':
+						$address->setWebsite( $value ); break;
+					case 'order.base.address.flag':
+						$address->setFlag( $value ); break;
+					default:
+						$msg = sprintf( 'Invalid address property "%1$s" with value "%2$s"', $key, $value );
+						throw new Controller_Frontend_Basket_Exception( $msg );
+				}
+			}
+			catch( Exception $e )
+			{
+				$name = substr( $key, 19 );
+				$errors[$name] = $e->getMessage();
 			}
 		}
 
-		return $address;
+		if( count( $errors ) > 0 )
+		{
+			$msg = 'Invalid address properties, please check your input';
+			throw new Controller_Frontend_Basket_Exception( $msg, 0, null, $errors );
+		}
 	}
 
 
@@ -526,63 +541,5 @@ class Controller_Frontend_Basket_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $productManager->searchItems( $search, $domains );
-	}
-
-
-	/**
-	 * Sets the delivery/payment service item based on the service ID.
-	 *
-	 * @param string $type Service type, either "delivery" or "payment"
-	 * @param string $id Unique ID of the service item
-	 * @param array $attributes Associative list of key/value pairs containing the attributes selected or
-	 * 	entered by the customer when choosing one of the delivery or payment options
-	 * @throws Controller_Frontend_Basket_Exception If there is no price to the service item attached
-	 */
-	protected function _setService( $type, $id, array $attributes = array() )
-	{
-		$serviceManager = $this->_getDomainManager( 'service' );
-		$serviceItem = $serviceManager->getItem( $id, array( 'media', 'price', 'text' ) );
-
-		$provider = $serviceManager->getProvider( $serviceItem );
-		$result = $provider->checkConfigFE( $attributes );
-		$unknown = array_diff_key( $attributes, $result );
-
-		if( count( $unknown ) > 0 )
-		{
-			$msg = sprintf( 'Unknown attributes "%1$s"', implode( '","', array_keys( $unknown ) ) );
-			throw new Controller_Frontend_Basket_Exception( $msg );
-		}
-
-		foreach( $result as $key => $value )
-		{
-			if( $value !== null )
-			{
-				$msg = sprintf( 'Invalid value "%1$s" entered for attribute "$2%s"', $value, $key );
-				throw new Controller_Frontend_Basket_Exception( $msg );
-			}
-		}
-
-		$orderBaseServiceManager = $this->_getDomainManager( 'order/base/service' );
-		$orderServiceItem = $orderBaseServiceManager->createItem();
-		$orderServiceItem->copyFrom( $serviceItem );
-
-		$price = $provider->calcPrice( $this->_basket );
-		$orderServiceItem->setPrice( $price );
-
-		$orderBaseServiceAttributeManager = $orderBaseServiceManager->getSubManager('attribute');
-
-		$attributeItems = array();
-		foreach( $attributes as $key => $value )
-		{
-			$ordBaseAtrrItem = $orderBaseServiceAttributeManager->createItem();
-			$ordBaseAtrrItem->setCode( $key );
-			$ordBaseAtrrItem->setValue( strip_tags( $value ) ); // prevent XSS
-			$attributeItems[] = $ordBaseAtrrItem;
-		}
-
-		$orderServiceItem->setAttributes( $attributeItems );
-
-		$this->_basket->setService( $orderServiceItem, $type );
-		$this->_domainManager->setSession( $this->_basket );
 	}
 }

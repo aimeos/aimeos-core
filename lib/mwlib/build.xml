@@ -20,7 +20,11 @@
 		<exec command="phpcs -n --standard=`pwd`/coding/Metaways src/MW tests/MW"
 			  checkreturn="true" logoutput="true"/>
 	</target>
-	
+
+	<target name="clean" description="Cleans up temporary files">
+		<delete dir="tests/tmp" quiet="true" failonerror="false" />
+	</target>
+
 	<target name="doc" description="Generates API documentation">
 		<echo msg="Generating API documentation" />
 		<delete dir="deploy/apidoc" quiet="true" failonerror="false" />

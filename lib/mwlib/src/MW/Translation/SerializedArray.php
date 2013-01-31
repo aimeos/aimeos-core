@@ -37,7 +37,8 @@ class MW_Translation_SerializedArray
 	 * Example for russia:
 	 * a:1:{s:4:"file";a:4:{i:0;s:8:"Файл";i:1;s:8:"Файл";i:2;s:10:"Файла";i:3;s:12:"Файлов";}}
 	 *
-	 * @param array $translationSources List of key/value pairs with the translation
+	 * @param array $translationSources Associative list of translation domains and lists of translation directories.
+	 * 	Translations from the first file aren't overwritten by the later ones
 	 * domain as key and the directory where the translation files are located as value.
 	 * @param string $locale Locale string, e.g. en or en_GB
 	 */
@@ -68,7 +69,7 @@ class MW_Translation_SerializedArray
 		}
 		catch( Exception $e )
 		{
-			; // do nothing at the moment
+			;
 		}
 
 		return (string) $string;
@@ -99,7 +100,7 @@ class MW_Translation_SerializedArray
 		}
 		catch( Exception $e )
 		{
-			; // do nothing at the moment
+			;
 		}
 
 		if( $index > 0 ) {
@@ -107,6 +108,17 @@ class MW_Translation_SerializedArray
 		}
 
 		return (string) $singular;
+	}
+
+
+	/**
+	 * Returns the current locale string.
+	 *
+	 * @return string ISO locale string
+	 */
+	public function getLocale()
+	{
+		return $this->_locale;
 	}
 
 
@@ -119,28 +131,34 @@ class MW_Translation_SerializedArray
 	 */
 	private function _getTranslation( $domain )
 	{
-		if( !isset( $this->_translations[ $domain ] ) )
+		if( !isset( $this->_translations[$domain] ) )
 		{
-			if( !isset( $this->_translationSources[ $domain ] ) )
+			if( !isset( $this->_translationSources[$domain] ) )
 			{
 				$msg = sprintf( 'No translation directory for domain "%1$s" available', $domain );
 				throw new MW_Translation_Exception( $msg );
 			}
 
-			$location = $this->_getTranslationFileLocation( $this->_translationSources[$domain], $this->_locale );
+			$locations = $this->_getTranslationFileLocations( $this->_translationSources[$domain], $this->_locale );
+			$translations = array();
 
-			if( ( $content = file_get_contents( $location ) ) === false ) {
-				throw new MW_Translation_Exception( 'No translation file "%1$s" available', $location );
+			foreach( $locations as $location )
+			{
+				if( ( $content = file_get_contents( $location ) ) === false ) {
+					throw new MW_Translation_Exception( 'No translation file "%1$s" available', $location );
+				}
+
+				if( ( $content = unserialize( $content ) ) === false ) {
+					throw new MW_Translation_Exception( 'Invalid content in translation file "%1$s"', $location );
+				}
+
+				$translations = $translations + $content;
 			}
 
-			if( ( $content = unserialize( $content ) ) === false ) {
-				throw new MW_Translation_Exception( 'Invalid content in translation file "%1$s"', $location );
-			}
-
-			$this->_translations[ $domain ] = $content;
+			$this->_translations[$domain] = $translations;
 		}
 
-		return $this->_translations[ $domain ];
+		return $this->_translations[$domain];
 	}
 
 }

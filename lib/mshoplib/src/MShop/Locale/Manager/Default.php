@@ -124,7 +124,11 @@ class MShop_Locale_Manager_Default
 	 */
 	public function createItem()
 	{
-		return $this->_createItem();
+		try {
+			return $this->_createItem( array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() ) );
+		} catch ( Exception $e ) {
+			return $this->_createItem();
+		}
 	}
 
 
@@ -166,12 +170,14 @@ class MShop_Locale_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		$locale = $this->_getContext()->getLocale();
+		$siteIds = $locale->getSitePath();
+		$siteIds[] = $locale->getSiteId();
 		$items = array();
-		$sitepath = $this->_getContext()->getLocale()->getSitePath();
 
 		$search = clone $search;
 		$expr = array(
-			$search->compare( '==', 'locale.siteid', $sitepath ),
+			$search->compare( '==', 'locale.siteid', $siteIds ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );

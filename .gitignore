@@ -1,3 +1,13 @@
+client/html/i18n/country/[a-z][a-z]
+client/html/i18n/country/[a-z][a-z]_[A-Z][A-Z]
+client/html/i18n/currency/[a-z][a-z]
+client/html/i18n/currency/[a-z][a-z]_[A-Z][A-Z]
+client/html/i18n/language/[a-z][a-z]
+client/html/i18n/language/[a-z][a-z]_[A-Z][A-Z]
+client/html/i18n/code/[a-z][a-z]
+client/html/i18n/code/[a-z][a-z]_[A-Z][A-Z]
+client/html/i18n/[a-z][a-z]
+client/html/i18n/[a-z][a-z]_[A-Z][A-Z]
 config/resource.php
 ext/*
 *.log

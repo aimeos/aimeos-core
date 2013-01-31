@@ -118,42 +118,34 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$product = self::$_products[ 'CNC' ];
 
-		$product->setId( null );
-		$product->setCode( 'ModifiedCNC' );
-		$productManager->saveItem( $product );
-
-		$this->_object->saveItem( $product );
-
 		$texts = $product->getRefItems( 'text' );
 		if( ( $textItem = reset( $texts ) ) === false ) {
 			throw new Exception( 'Product doesnt have any price item' );
 		}
 
+
+		$product->setId( null );
+		$product->setCode( 'ModifiedCNC' );
+		$productManager->saveItem( $product );
+		$this->_object->saveItem( $product );
+
+
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.text.id', $textItem->getId() ) );
 		$result = $this->_object->searchItems( $search );
 
-		$productIds = array();
-		foreach( $result as $item ) {
-			$productIds[] = $item->getId();
-		}
-
-		$this->assertContains( $product->getId(), $productIds );
 
 		$this->_object->deleteItem( $product->getId() );
+		$productManager->deleteItem( $product->getId() );
+
 
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.text.id', $textItem->getId() ) );
-		$result = $this->_object->searchItems( $search );
+		$result2 = $this->_object->searchItems( $search );
 
-		$productIds = array();
-		foreach( $result as $item ) {
-			$productIds[] = $item->getId();
-		}
 
-		$this->assertNotContains( $product->getId(), $productIds );
-
-		$productManager->deleteItem( $product->getId() );
+		$this->assertContains( $product->getId(), array_keys( $result ) );
+		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
 	}
 
 
@@ -182,7 +174,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertEquals( 4, count( $result ) ); //adds while testing cne and cnc, actually its 2
+		$this->assertEquals( 2, count( $result ) ); //adds while testing cne and cnc, actually its 2
 
 
 		$func = $search->createFunction( 'catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );

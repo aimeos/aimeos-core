@@ -35,11 +35,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mprost."id" ) AS "count"
-			FROM "mshop_product_stock" AS mprost
-			:joins
-			WHERE
-				:cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mprost."id"
+				FROM "mshop_product_stock" AS mprost
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 		'stocklevel' => '
 			UPDATE "mshop_product_stock"

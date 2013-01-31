@@ -8,7 +8,7 @@
 
 return array(
 	'item' => array(
-		'delete' => 'DELETE FROM "mshop_catalog_index_price" WHERE "prodid" = ? AND "siteid" = ?',
+		'delete' => 'DELETE FROM "mshop_catalog_index_price" WHERE :cond AND "siteid" = ?',
 		'insert' => '
 			INSERT INTO "mshop_catalog_index_price" ("prodid", "siteid", "priceid", "currencyid", "listtype", "type", "value",
 				"shipping", "rebate", "taxrate", "quantity", "mtime", "editor", "ctime" )
@@ -25,10 +25,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( DISTINCT mpro."id" ) AS "count"
-			FROM "mshop_product" AS mpro
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mpro."id"
+				FROM "mshop_product" AS mpro
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	)
 );

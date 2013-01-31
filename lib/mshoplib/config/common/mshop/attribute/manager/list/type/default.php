@@ -32,10 +32,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mattlity."id" ) AS "count"
-			FROM "mshop_attribute_list_type" AS mattlity
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mattlity."id"
+				FROM "mshop_attribute_list_type" AS mattlity
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

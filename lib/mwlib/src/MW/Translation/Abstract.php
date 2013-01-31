@@ -22,33 +22,36 @@ abstract class MW_Translation_Abstract
 	 * If the requested file does exists (eg: de_DE) the implementation
 	 * will check for "de" and will return that location as fallback.
 	 *
-	 * @param string $path Path of the translation files.
+	 * @param array $paths Paths of the translation files.
 	 * @param string $locale Locale to be used
-	 * @return string Location of the translation file to be used
+	 * @return array List of locations to the translation files
 	 * @throws MW_Translation_Exception If translation file doesn't exist
 	 */
-	protected function _getTranslationFileLocation( $path, $locale )
+	protected function _getTranslationFileLocations( array $paths, $locale )
 	{
-		$location = $path . DIRECTORY_SEPARATOR . $locale;
+		$locations = array();
 
-		if( file_exists( $location ) ) {
-			return $location;
-		}
-
-		if( strlen( $locale ) > 3 )
+		foreach( $paths as $path )
 		{
-			$location2 = $path . DIRECTORY_SEPARATOR . substr( $locale, 0, -strlen( strrchr( $locale, '_' ) ) );
+			$location = $path . DIRECTORY_SEPARATOR . $locale;
 
-			if( !file_exists( $location2 ) )
+			if( file_exists( $location ) )
 			{
-				$msg = sprintf( 'No translation file found in "%1$s" or "%2$s"', $location, $location2 );
-				throw new MW_Translation_Exception( $msg );
+				$locations[] = $location;
+				continue;
 			}
 
-			return $location2;
+			if( strlen( $locale ) > 3 )
+			{
+				$location = $path . DIRECTORY_SEPARATOR . substr( $locale, 0, -strlen( strrchr( $locale, '_' ) ) );
+
+				if( file_exists( $location ) ) {
+					$locations[] = $location;
+				}
+			}
 		}
 
-		throw new MW_Translation_Exception( sprintf( 'No translation file found in "%1$s"', $location ) );
+		return $locations;
 	}
 
 
