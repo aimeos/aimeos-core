@@ -26,7 +26,7 @@ if( $lastStep ) {
 	<h1><?php echo $this->translate( 'core/client/html', 'summary' ); ?></h1>
 	<p class="note"><?php echo $this->translate( 'core/client/html', 'Please check your order' ); ?></p>
 	<form method="POST" action="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $nextStep ) ); ?>">
-		<input type="hidden" name="cs-order" value="1" />
+		<input type="hidden" name="<?php echo $this->formparam( array( 'cs-order' ) ); ?>" value="1" />
 <?php echo $this->get( 'summaryBody' ); ?>
 		<div class="button-group">
 			<a class="standardbutton" href="<?php echo $urlBack; ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 

@@ -47,6 +47,8 @@ foreach( $this->get( 'paymentError', array() ) as $name => $msg ) {
 	$paymentCss[$name][] = 'error';
 }
 
+$priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
+
 ?>
 <div class="checkout-standard-payment">
 	<h1><?php echo $this->translate( 'core/client/html', 'payment' ); ?></h1>
@@ -57,7 +59,12 @@ foreach( $this->get( 'paymentError', array() ) as $name => $msg ) {
 			<label class="description" for="c-payment-option-<?php echo $id; ?>">
 				<input class="option" type="radio" id="c-payment-option-<?php echo $id; ?>" name="<?php echo $this->formparam( array( 'c-payment-option' ) ); ?>" value="<?php echo $id; ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
-				<span class="price-value"><?php echo $this->number( $servicePrices[$id]->getValue() + $servicePrices[$id]->getShipping() ); ?></span>
+<?php		$currency = $this->translate( 'core/client/html/currency', $servicePrices[$id]->getCurrencyId() ); ?>
+<?php		if( $servicePrices[$id]->getValue() > 0 ) : ?>
+				<span class="price-value"><?php printf( $this->translate( 'core/client/html', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getShipping() ), $currency ); ?></span>
+<?php		else : ?>
+				<span class="price-value"><?php printf( $priceFormat, $this->number( $servicePrices[$id]->getValue() ), $currency ); ?></span>
+	<?php	endif; ?>
 <?php	endif; ?>
 				<div class="icons">
 <?php	foreach( $service->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
