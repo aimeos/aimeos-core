@@ -198,28 +198,26 @@ class Client_Html_Checkout_Confirm_Default
 
 				$customerItems = $customerManager->searchItems( $search );
 
-				if( ( $customerItem = reset( $customerItems ) ) === false ) {
-					throw new Client_Html_Exception( sprintf( 'Invalid customer "%1$s"', $context->getEditor() ) );
+
+				if( ( $customerItem = reset( $customerItems ) ) !== false )
+				{
+					$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+
+					$search = $orderManager->createSearch();
+					$expr = array(
+						$search->compare( '==', 'order.id', $orderid ),
+						$search->compare( '==', 'order.base.customerid', $customerItem->getId() )
+					);
+					$search->setConditions( $search->combine( '&&', $expr ) );
+
+					$orderItems = $orderManager->searchItems( $search );
+
+					if( ( $orderItem = reset( $orderItems ) ) === false ) {
+						throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
+					}
+
+					$view->confirmOrderItem = $orderItem;
 				}
-
-
-				$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-
-				$search = $orderManager->createSearch();
-				$expr = array(
-					$search->compare( '==', 'order.id', $orderid ),
-					$search->compare( '==', 'order.base.customerid', $customerItem->getId() )
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-
-				$orderItems = $orderManager->searchItems( $search );
-
-				if( ( $orderItem = reset( $orderItems ) ) === false ) {
-					throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
-				}
-
-
-				$view->confirmOrderItem = $orderItem;
 			}
 
 			$this->_cache = $view;

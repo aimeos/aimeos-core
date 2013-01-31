@@ -1172,8 +1172,15 @@ input[type="password"] {
 	vertical-align: top;
 	min-width: 218px;
 	max-width: 438px;
-	padding: 10px;
+	padding: 10px 0;
+}
+
+.checkout-standard .item-service .description {
 	width: 100%;
+}
+
+.checkout-standard .item-service .form-list {
+	padding: 0 10px 10px 10px;
 }
 
 .checkout-standard .item-service .description h2,

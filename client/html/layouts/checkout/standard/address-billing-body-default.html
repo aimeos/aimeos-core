@@ -11,7 +11,7 @@ try {
 	$addrArray = array();
 }
 
-$billingOption = $this->param( 'ca-billing-option', ( isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : '' ) );
+$billingOption = $this->param( 'ca-billing-option', ( isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' ) );
 $billingSalutation = $this->param( 'ca-billing/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $billingCountry = $this->param( 'ca-billing/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
 
@@ -214,8 +214,8 @@ foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 			<li class="form-item languageid <?php echo ( isset( $paymentCss['languageid'] ) ? join( ' ', $paymentCss['languageid'] ) : '' ); ?>">
 				<label for="address-billing-languageid"><?php echo $this->translate( 'core/client/html', 'Language' ); ?>
 				</label><select id="address-billing-languageid" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.languageid' ) ); ?>">
-<?php foreach( $this->get( 'addressLanguages', array() ) as $langId ) : ?>
-					<option value="<?php echo $langId; ?>" <?php echo ( $langId === $billingLanguage ? 'selected="selected"' : '' ); ?>><?php echo $langId; // Zend problem with context dependend translation: $this->translate( 'core/client/html/language', $langId ); ?></option>
+<?php foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
+					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $billingLanguage ? 'selected="selected"' : '' ); ?>><?php echo $languageId; // Zend problem with context dependend translation: $this->translate( 'core/client/html/language', $languageId ); ?></option>
 <?php endforeach; ?>
 				</select>
 			</li>

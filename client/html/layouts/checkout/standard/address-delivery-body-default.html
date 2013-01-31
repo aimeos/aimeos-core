@@ -11,7 +11,7 @@ try {
 	$addrArray = array();
 }
 
-$deliveryOption = $this->param( 'ca-delivery-option', ( $addrArray === array() ? -1 : '' ) );
+$deliveryOption = $this->param( 'ca-delivery-option', ( $addrArray === array() ? -1 : 'null' ) );
 $deliverySalutation = $this->param( 'ca-delivery/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $deliveryCountry = $this->param( 'ca-delivery/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
 
@@ -221,7 +221,7 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 				<label for="address-delivery-languageid"><?php echo $this->translate( 'core/client/html', 'Language' ); ?>
 				</label><select id="address-delivery-languageid" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.languageid' ) ); ?>">
 <?php foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
-					<option value="<?php echo $langId; ?>" <?php echo ( $languageId === $deliveryLanguage ? 'selected="selected"' : '' ); ?>><?php echo $languageId; // Zend problem with context dependend translation: $this->translate( 'core/client/html/language', $languageId ); ?></option>
+					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $deliveryLanguage ? 'selected="selected"' : '' ); ?>><?php echo $languageId; // Zend problem with context dependend translation: $this->translate( 'core/client/html/language', $languageId ); ?></option>
 <?php endforeach; ?>
 				</select>
 			</li>

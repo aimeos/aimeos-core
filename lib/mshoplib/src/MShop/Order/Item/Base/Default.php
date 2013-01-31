@@ -173,7 +173,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function setCustomerId($customerid)
 	{
-		if ( $customerid == $this->getCustomerId() ) { return; }
+		if ( $customerid === $this->getCustomerId() ) { return; }
 
 		$this->_notifyListeners( 'setUserId.before', $customerid );
 

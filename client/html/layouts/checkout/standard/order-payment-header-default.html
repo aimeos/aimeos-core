@@ -5,8 +5,8 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-if( !isset( $this->paymentForm ) ) {
-	@header( 'Location: ' . $this->get( 'paymentUrl' ), true, 302 );
+if( !isset( $this->paymentForm ) && isset( $this->paymentUrl ) ) {
+	@header( 'Location: ' . $this->paymentUrl, true, 302 );
 }
 ?>
 <script type="text/javascript">

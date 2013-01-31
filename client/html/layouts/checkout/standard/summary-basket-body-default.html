@@ -102,7 +102,7 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 <?php endif; ?>
 				<tr class="total">
 					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
-					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $paymentPriceService ), $priceCurrency ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?></td>
 				</tr>
 				<tr class="rebate">
 					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Included rebates' ); ?></td>
