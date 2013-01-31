@@ -5,17 +5,16 @@
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Config
- * @version $Id$
  */
 
 
 /**
- * Caching decorator for config classes.
+ * Memory caching decorator for config classes.
  *
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Decorator_Cache implements MW_Config_Decorator_Interface
+class MW_Config_Decorator_MemoryCache implements MW_Config_Decorator_Interface
 {
 	protected $_object = null;
 	protected $_cache = array();

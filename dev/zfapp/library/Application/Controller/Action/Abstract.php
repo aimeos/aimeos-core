@@ -52,7 +52,8 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$configPaths = $mshop->getConfigPaths( 'mysql' );
 		$configPaths[] = ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new MW_Config_Zend( new Zend_Config( array(), true ), $configPaths );
+		$conf = new MW_Config_Array( array(), $configPaths );
+		$conf = new MW_Config_Decorator_MemoryCache( $conf );
 		if( function_exists( 'apc_store' ) === true ) {
 			$conf = new MW_Config_Decorator_APC( $conf );
 		}
