@@ -48,6 +48,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$this->_values = array(
 			'id' => 1,
 			'siteid'=>99,
+			'servid' => 'ServiceID',
 			'baseid' => 99,
 			'code' => 'UnitCode',
 			'name' => 'UnitName',
@@ -94,6 +95,17 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->_object->getSiteId() );
+	}
+
+	public function testGetServiceId()
+	{
+		$this->assertEquals( $this->_values['servid'], $this->_object->getServiceId() );
+	}
+
+	public function testSetServiceId()
+	{
+		$this->_object->setServiceId( 'testServiceID' );
+		$this->assertEquals( 'testServiceID', $this->_object->getServiceId() );
 	}
 
 	public function testGetCode()
@@ -231,6 +243,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( $this->_object->getId(), $arrayObject['order.base.service.id'] );
 		$this->assertEquals( $this->_object->getBaseId(), $arrayObject['order.base.service.baseid'] );
+		$this->assertEquals( $this->_object->getServiceId(), $arrayObject['order.base.service.serviceid'] );
 		$this->assertEquals( $this->_object->getCode(), $arrayObject['order.base.service.code'] );
 		$this->assertEquals( $this->_object->getName(), $arrayObject['order.base.service.name'] );
 		$this->assertEquals( $this->_object->getType(), $arrayObject['order.base.service.type'] );
