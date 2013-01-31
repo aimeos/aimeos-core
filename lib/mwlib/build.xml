@@ -22,6 +22,8 @@
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
+		<delete dir="deploy/apidoc" quiet="true" failonerror="false" />
+		<delete dir="deploy/coverage" quiet="true" failonerror="false" />
 		<delete dir="tests/tmp" quiet="true" failonerror="false" />
 	</target>
 
