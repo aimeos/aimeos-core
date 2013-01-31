@@ -62,13 +62,23 @@ implements MShop_Service_Provider_Payment_Interface
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
 	 */
-	public function getConfigFE()
+	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
 	{
 		$list = array();
+		$feconfig = $this->_feConfig;
 
-		foreach( $this->_feConfig as $key => $config ) {
+		try{
+			$address = $basket->getAddress();
+
+			if( ( $fn = $address->getFirstname() ) !== '' && ( $ln = $address->getLastname() ) !== '' ) {
+				$feconfig['payment.directdebit.accountowner']['default'] = $fn . ' ' . $ln;
+			}
+		} catch( MShop_Order_Exception $ex ) {}
+
+		foreach( $feconfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
 		}
 

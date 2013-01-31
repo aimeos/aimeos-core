@@ -187,7 +187,7 @@ class Client_Html_Checkout_Standard_Delivery_Default
 
 			foreach( $services as $id => $service )
 			{
-				$serviceAttributes[$id] = $serviceCntl->getServiceAttributes( 'delivery', $id );
+				$serviceAttributes[$id] = $serviceCntl->getServiceAttributes( 'delivery', $id, $basket );
 				$servicePrices[$id] = $serviceCntl->getServicePrice( 'delivery', $id, $basket );
 			}
 
