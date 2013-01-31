@@ -76,7 +76,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'order.base.service.id', null );
 		$expr[] = $search->compare( '==', 'order.base.service.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );
-		$expr[] = $search->compare( '!=', 'order.base.service.servid', null );
+		$expr[] = $search->compare( '==', 'order.base.service.serviceid', 'OGONE1' );
 		$expr[] = $search->compare( '==', 'order.base.service.type', 'payment' );
 		$expr[] = $search->compare( '==', 'order.base.service.code', 'OGONE' );
 		$expr[] = $search->compare( '==', 'order.base.service.name', 'ogone' );

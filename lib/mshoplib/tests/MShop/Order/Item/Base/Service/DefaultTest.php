@@ -243,7 +243,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( $this->_object->getId(), $arrayObject['order.base.service.id'] );
 		$this->assertEquals( $this->_object->getBaseId(), $arrayObject['order.base.service.baseid'] );
-		$this->assertEquals( $this->_object->getServiceId(), $arrayObject['order.base.service.servid'] );
+		$this->assertEquals( $this->_object->getServiceId(), $arrayObject['order.base.service.serviceid'] );
 		$this->assertEquals( $this->_object->getCode(), $arrayObject['order.base.service.code'] );
 		$this->assertEquals( $this->_object->getName(), $arrayObject['order.base.service.name'] );
 		$this->assertEquals( $this->_object->getType(), $arrayObject['order.base.service.type'] );

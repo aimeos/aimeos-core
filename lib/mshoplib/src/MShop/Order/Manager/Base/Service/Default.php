@@ -46,8 +46,8 @@ class MShop_Order_Manager_Base_Service_Default
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
-		'order.base.service.servid' => array(
-			'code' => 'order.base.service.servid',
+		'order.base.service.serviceid' => array(
+			'code' => 'order.base.service.serviceid',
 			'internalcode' => 'mordbase."servid"',
 			'label' => 'Order base service original service ID',
 			'type' => 'string',

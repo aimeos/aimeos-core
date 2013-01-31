@@ -287,7 +287,7 @@ class MShop_Order_Item_Base_Service_Default
 
 		$list['order.base.service.baseid'] = $this->getBaseId();
 		$list['order.base.service.code'] = $this->getCode();
-		$list['order.base.service.servid'] = $this->getServiceId();
+		$list['order.base.service.serviceid'] = $this->getServiceId();
 		$list['order.base.service.name'] = $this->getName();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.service.type'] = $this->getType();

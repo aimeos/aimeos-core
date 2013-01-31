@@ -207,6 +207,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$priceItem = $priceManager->createItem();
 			$ordServ->setId(null);
 			$ordServ->setBaseId( $bases['ids'][ $dataset['baseid'] ] );
+			$ordServ->setServiceId( $dataset['servid'] );
 			$ordServ->setType($dataset['type']);
 			$ordServ->setCode($dataset['code']);
 			$ordServ->setName($dataset['name']);
