@@ -28,5 +28,5 @@ return array(
 				LIMIT 10000 OFFSET 0
 			) AS list
 		',
-	)
+	),
 );
