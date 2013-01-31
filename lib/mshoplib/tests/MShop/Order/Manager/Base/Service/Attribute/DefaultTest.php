@@ -155,6 +155,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getServiceId(), $itemSaved->getServiceId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
@@ -166,6 +167,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getServiceId(), $itemUpd->getServiceId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
