@@ -174,7 +174,7 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertEquals( 4, count( $result ) ); //adds while testing cne and cnc, actually its 2
+		$this->assertEquals( 2, count( $result ) ); //adds while testing cne and cnc, actually its 2
 
 
 		$func = $search->createFunction( 'catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );

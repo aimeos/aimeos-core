@@ -8,7 +8,7 @@
 
 return array(
 	'item' => array(
-		'delete' => 'DELETE FROM "mshop_catalog_index_text" WHERE "prodid" = ? AND "siteid" = ?',
+		'delete' => 'DELETE FROM "mshop_catalog_index_text" WHERE :cond AND "siteid" = ?',
 		'insert' => '
 			INSERT INTO "mshop_catalog_index_text" ("prodid", "siteid", "textid", "langid", "listtype", "type", "value",
 				"mtime", "editor", "ctime" )

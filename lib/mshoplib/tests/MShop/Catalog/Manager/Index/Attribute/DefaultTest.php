@@ -151,7 +151,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 		}
 
 		$expr = array(
-			$search->compare( '==', 'attribute.label', 'blue' ),
+			$search->compare( '==', 'attribute.label', 'white' ),
 			$search->compare( '==', 'attribute.type.domain', 'product' ),
 			$search->compare( '==', 'attribute.type.code', 'color' ),
 		);
@@ -167,19 +167,19 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrColorItem->getId() ) );
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 
 
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrSizeItem->getId() ) );
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 1, count( $result ) );
 
 		$search->setConditions( $search->compare( '!=', 'catalog.index.attribute.id', null ) );
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertGreaterThanOrEqual( 7, count( $result ) );
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 
 
 		$attrIds = array( (int) $attrSizeItem->getId(), (int) $attrColorItem->getId() );
@@ -187,14 +187,14 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 		$search->setConditions( $search->compare( '==', $func, 1 ) ); // count attributes
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertGreaterThanOrEqual( 4, count( $result ) );
+		$this->assertEquals( 0, count( $result ) );
 
 
 		$func = $search->createFunction( 'catalog.index.attribute.code', array( 'default', 'size' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'x' ) );
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 	}
 
 }
