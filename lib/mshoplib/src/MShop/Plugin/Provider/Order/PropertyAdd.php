@@ -32,6 +32,9 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	{
 		$this->_item = $item;
 		$this->_context = $context;
+
+		$config = $context->getConfig();
+		$this->_type = $config->get( 'plugin/provider/order/propertyadd/type', 'property' );
 	}
 
 
@@ -78,7 +81,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 		foreach( $config as $key => $properties )
 		{
 			$keyElements = explode( '.', $key );
-	
+
 			if( $keyElements[0] !== 'product' ) {
 				throw new MShop_Plugin_Exception( 'Error in configuration.' );
 			}
@@ -144,6 +147,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 
 		$new = $attributeManager->createItem();
 		$new->setCode( $code );
+		$new->setType( $this->_type );
 		$new->setName( $name );
 		$new->setValue( $value );
 
@@ -155,11 +159,8 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	{
 		foreach( $list as $element )
 		{
-			if( $item->getCode() === $element->getCode()
-				&& $item->getValue() === $element->getValue()
-//				&& $item->getType() === $element->getType()
-			) {
-				return true; 
+			if( $item->getType() === $element->getType() && $item->getCode() === $element->getCode() ) {
+				return true;
 			}
 		}
 

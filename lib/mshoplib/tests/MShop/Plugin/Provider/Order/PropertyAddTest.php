@@ -107,7 +107,7 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 		$this->assertEquals( 4, count( $this->_products['CNC']->getAttributes() ) );
 
 		$this->_products['CNE']->setAttributes( array() );
-		$this->_plugin->setConfig( array( 
+		$this->_plugin->setConfig( array(
 			'product.list.parentid' => array(
 				'product.list.domain',
 			),
@@ -115,8 +115,10 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 				'product.stock.stocklevel'
 			)
 		) );
+
 		$this->_object->update( $this->_order, 'addProduct.after', $this->_products['CNE'] );
-		$this->assertEquals( 7, count( $this->_products['CNE']->getAttributes() ) );
+
+		$this->assertEquals( 2, count( $this->_products['CNE']->getAttributes() ) );
 	}
 
 
@@ -129,12 +131,12 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 		$attribute->setCode( 'stocklevel' );
 		$attribute->setName( 'stocklevel' );
 		$attribute->setValue( '1200' );
+		$attribute->setType( 'property' );
 
 		$this->_products['CNC']->setAttributes( array( $attribute ) );
 		$this->assertEquals( 1, count( $this->_products['CNC']->getAttributes() ) );
 
 		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.after', $this->_products['CNC'] ) );
-
 		$this->assertEquals( 4, count( $this->_products['CNC']->getAttributes() ) );
 	}
 
@@ -142,7 +144,7 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 	public function testUpdateConfigError()
 	{
 		// Non-existent property:
-		
+
 		$this->_plugin->setConfig( array( 'product.stock.productid' => array(
 			'product.stock.quatsch',
 			'product.stock.editor',
