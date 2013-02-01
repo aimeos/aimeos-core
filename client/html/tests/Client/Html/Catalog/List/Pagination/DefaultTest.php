@@ -54,7 +54,7 @@ class Client_Html_Catalog_List_Pagination_DefaultTest extends MW_Unittest_Testca
 		$view->listPageSize = 100;
 		$view->listPageCurr = 1;
 		$view->listParams = array();
-		$view->listCatItem = $catItem;
+		$view->listCatPath = array( $catalogManager->createItem(), $catItem );
 
 		$this->_object->setView( $view );
 	}
