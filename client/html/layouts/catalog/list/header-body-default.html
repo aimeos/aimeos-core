@@ -5,15 +5,19 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+if( isset( $this->listCatPath ) ) {
+	$catPath = $this->listCatPath;
+}
+
 ?>
 <div class="catalog-list-header">
-<?php if( isset( $this->listCatItem ) ) : ?>
+<?php if( isset( $catPath ) && ( $catItem = end( $catPath ) ) !== false ) : ?>
 	<div class="image-default">
-<?php	foreach( $this->listCatItem->getRefItems( 'media', 'header', 'default' ) as $mediaItem ) : ?>
+<?php	foreach( $catItem->getRefItems( 'media', 'header', 'default' ) as $mediaItem ) : ?>
 		<img class="<?php echo $mediaItem->getType(); ?>" src="<?php echo $mediaItem->getUrl(); ?>" />
 <?php	endforeach; ?>
 	</div>
-<?php	foreach( $this->listCatItem->getRefItems( 'text', null, 'default' ) as $textItem ) : ?>
+<?php	foreach( $catItem->getRefItems( 'text', null, 'default' ) as $textItem ) : ?>
 <?php		if( $textItem->getType() == 'name' ) : ?>
 	<h1><?php echo $textItem->getContent(); ?></h1>
 <?php		else : ?>
@@ -21,7 +25,7 @@
 <?php		endif; ?>
 <?php	endforeach; ?>
 	<div class="text-promotion">
-<?php	foreach( $this->listCatItem->getRefItems( 'text', null, 'promotion' ) as $textItem ) : ?>
+<?php	foreach( $catItem->getRefItems( 'text', null, 'promotion' ) as $textItem ) : ?>
 		<div class="<?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></div>
 <?php	endforeach; ?>
 	</div>

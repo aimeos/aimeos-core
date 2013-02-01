@@ -6,7 +6,15 @@
  * @version $Id: pagination-body-default.html 1354 2012-10-30 11:17:57Z nsendetzky $
  */
 
-$trailingUrl = ( isset( $this->listCatItem ) ? array( $this->listCatItem->getName() ) : array() );
+$trailingUrl = array();
+if( isset( $this->listCatPath ) )
+{
+	$catPath = $this->listCatPath;
+	if( ( $catItem = end( $catPath ) ) !== false ) {
+		$trailingUrl = array( $catItem->getName() );
+	}
+}
+
 $target = $this->config( 'catalog-list-target' );
 $params = $this->get( 'listParams', array() );
 $sort = $this->param( 'l-sort', 'position' );

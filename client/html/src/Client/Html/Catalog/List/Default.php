@@ -150,15 +150,14 @@ class Client_Html_Catalog_List_Default
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 
-			if( !empty( $text ) ) {
-				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
-				$node = $catalogManager->createItem();
-			} else if( !empty( $catid ) ) {
+			if( !empty( $catid ) )
+			{
 				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
-				$node = $catalogManager->getItem( $catid, array( 'text', 'media' ) );
-			} else {
+				$view->listCatPath = $catalogManager->getPath( $catid, array( 'text', 'media', 'attribute' ) );
+			}
+			else
+			{
 				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
-				$node = $catalogManager->createItem();
 			}
 
 			$items = $controller->getProductList( $filter, $total, $domains );
@@ -170,7 +169,6 @@ class Client_Html_Catalog_List_Default
 			$view->listPageCurr = $page;
 			$view->listPageSize = $size;
 			$view->listParams = $params;
-			$view->listCatItem = $node;
 
 			$this->_cache = $view;
 		}
