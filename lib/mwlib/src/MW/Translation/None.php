@@ -66,4 +66,15 @@ class MW_Translation_None
 		return (string) $singular;
 	}
 
+
+	/**
+	 * Returns the current locale string.
+	 *
+	 * @return string ISO locale string
+	 */
+	public function getLocale()
+	{
+		return $this->_locale;
+	}
+
 }

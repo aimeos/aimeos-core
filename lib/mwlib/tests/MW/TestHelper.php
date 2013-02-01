@@ -53,7 +53,7 @@ class MW_TestHelper
 	private static function _createConfig()
 	{
 		$path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'config';
-		return new MW_Config_Zend( new Zend_Config( array(), true ), $path );
+		return new MW_Config_Array( array(), $path );
 	}
 
 

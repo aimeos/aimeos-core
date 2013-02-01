@@ -351,11 +351,12 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/catalog/manager/index/attribute/default/item/search';
 			$cfgPathCount =  'mshop/catalog/manager/index/attribute/default/item/count';
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )	{
 				$ids[] = $row['id'];

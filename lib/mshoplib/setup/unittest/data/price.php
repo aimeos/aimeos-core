@@ -37,7 +37,7 @@ return array (
 		'price/product/default/11.00/0.00' => array( 'typeid' => 'product/default', 'currencyid' => 'EUR', 'domain' => 'product', 'label'=>'for 4 product', 'quantity' => 4, 'value' => '11.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '19.00', 'status' => 1 ),
 		//service prices
 		'price/service/default/12.95/1.99' => array( 'typeid' => 'service/default', 'currencyid' => 'EUR', 'domain' => 'service', 'label'=>'for 1 product', 'quantity' => 1, 'value' => '12.95', 'shipping' => '1.99', 'rebate' => '1.05', 'taxrate' => '19.00', 'status' => 1 ),
-		'price/service/default/2.95/0.00' => array( 'typeid' => 'service/default', 'currencyid' => 'EUR', 'domain' => 'service', 'label'=>'for 1 product', 'quantity' => 1, 'value' => '2.95', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '19.00', 'status' => 1 ),
+		'price/service/default/2.95/0.00' => array( 'typeid' => 'service/default', 'currencyid' => 'EUR', 'domain' => 'service', 'label'=>'for 1 product', 'quantity' => 2, 'value' => '2.95', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '19.00', 'status' => 1 ),
 		'price/attribute/default/12.95/1.99' => array( 'typeid' => 'attribute/default', 'currencyid' => 'EUR', 'domain' => 'attribute', 'label'=>'Default', 'quantity' => 1, 'value' => '12.95', 'shipping' => '1.99', 'rebate' => '1.05', 'taxrate' => '19.00', 'status' => 1 ),
 	),
 );

@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Default.php 14852 2012-01-13 12:24:15Z doleiynyk $
  */
 
 
@@ -76,6 +75,28 @@ class MShop_Order_Item_Base_Service_Default
 		$this->setModified();
 	}
 
+	/**
+	 * Returns the original ID of the service item used for the order.
+	 *
+	 * @return string Original service ID
+	 */
+	public function getServiceId()
+	{
+		return( isset( $this->_values['servid'] ) ? (string) $this->_values['servid'] : '' );
+	}
+
+	/**
+	 * Sets a new ID of the service item used for the order.
+	 *
+	 * @param string $servid ID of the service item used for the order
+	 */
+	public function setServiceID( $servid )
+	{
+		if( $servid == $this->getServiceId() ) { return; }
+
+		$this->_values['servid'] = (string) $servid;
+		$this->setModified();
+	}
 
 	/**
 	 * Returns the code of the service item.
@@ -266,6 +287,7 @@ class MShop_Order_Item_Base_Service_Default
 
 		$list['order.base.service.baseid'] = $this->getBaseId();
 		$list['order.base.service.code'] = $this->getCode();
+		$list['order.base.service.serviceid'] = $this->getServiceId();
 		$list['order.base.service.name'] = $this->getName();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.service.type'] = $this->getType();
@@ -288,6 +310,8 @@ class MShop_Order_Item_Base_Service_Default
 		$this->setCode( $service->getCode() );
 		$this->setName( $service->getName() );
 		$this->setType( $service->getType() );
+		/** @todo Replace with private property and public setter */
+		$this->serviceId = $service->getId();
 
 		$items = $service->getRefItems( 'media', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {

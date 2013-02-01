@@ -37,9 +37,9 @@ class MW_Translation_SerializedArrayTest extends MW_Unittest_Testcase
 		$ds = DIRECTORY_SEPARATOR;
 
 		$translationSources = array(
-			'testDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1',
-			'otherTestDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2', // no file for ru_XX!
-			'thirdtestDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3',
+			'testDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' ),
+			'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ), // no file for ru_XX!
+			'thirdtestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3' ),
 		);
 
 		$this->_object = new MW_Translation_SerializedArray( $translationSources, 'ru_XX' );
@@ -98,7 +98,7 @@ class MW_Translation_SerializedArrayTest extends MW_Unittest_Testcase
 	public function testAbstractGetTranslationFileFallback()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$srcs = array( 'testDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' );
+		$srcs = array( 'testDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' ) );
 		$object = new MW_Translation_SerializedArray( $srcs, 'de_DE' );
 
 		$this->assertEquals( 'plural 1 translation', $object->dn( 'testDomain', 'File', 'Files', 5 ) );
@@ -110,7 +110,7 @@ class MW_Translation_SerializedArrayTest extends MW_Unittest_Testcase
 	public function testAbstractGetTranslationFileFallbackNoFile()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$srcs = array( 'otherTestDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' );
+		$srcs = array( 'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ) );
 		$object = new MW_Translation_SerializedArray( $srcs, 'de' );
 
 		$this->assertEquals( 'Test default return', $object->dt( 'otherTestDomain', 'Test default return' ) );
@@ -120,7 +120,7 @@ class MW_Translation_SerializedArrayTest extends MW_Unittest_Testcase
 	public function testAbstractGetTranslationFileFallbackInvalidLocale()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$srcs = array( 'otherTestDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' );
+		$srcs = array( 'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ) );
 		$object = new MW_Translation_SerializedArray( $srcs, 'xx_XX' );
 
 		$this->assertEquals( 'Test default return', $object->dt( 'otherTestDomain', 'Test default return' ) );
@@ -148,7 +148,7 @@ class MW_Translation_SerializedArrayTest extends MW_Unittest_Testcase
 		);
 
 		$ds = DIRECTORY_SEPARATOR;
-		$srcs = array( 'testDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' );
+		$srcs = array( 'testDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' ) );
 
 		foreach( $lcList as $index => $lcs )
 		{

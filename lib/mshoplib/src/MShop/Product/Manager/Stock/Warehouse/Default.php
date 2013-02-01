@@ -256,11 +256,12 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/product/manager/stock/warehouse/default/item/search';
 			$cfgPathCount =  'mshop/product/manager/stock/warehouse/default/item/count';
 			$required = array( 'product.stock.warehouse' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[ $row['id'] ] = $this->_createItem( $row );
 			}

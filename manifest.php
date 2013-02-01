@@ -17,6 +17,15 @@ return array(
 	),
 	'conflicts' => array(
 	),
+	'config' => array(
+		'mysql' => array(
+			'lib/mshoplib/config/common',
+			'lib/mshoplib/config/mysql',
+			'controller/frontend/config/controller',
+			'controller/extjs/config/controller',
+			'config',
+		),
+	),
 	'include' => array(
 		'lib/mshoplib/src',
 		'controller/frontend/src',
@@ -26,14 +35,12 @@ return array(
 		'lib/zendlib',
 		'lib/phpexcel',
 	),
-	'config' => array(
-		'mysql' => array(
-			'lib/mshoplib/config/common',
-			'lib/mshoplib/config/mysql',
-			'controller/frontend/config/controller',
-			'controller/extjs/config/controller',
-			'config',
-		),
+	'i18n' => array(
+		'core/client/html' => 'client/html/i18n',
+		'core/client/html/code' => 'client/html/i18n/code',
+		'core/client/html/country' => 'client/html/i18n/country',
+		'core/client/html/currency' => 'client/html/i18n/currency',
+		'core/client/html/language' => 'client/html/i18n/language',
 	),
 	'setup' => array(
 		'lib/mshoplib/setup',

@@ -32,6 +32,20 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface extends MShop_Common
 	public function setProductId( $id );
 
 	/**
+	 * Returns the type of the product attibute.
+	 *
+	 * @return string Type of the attribute
+	 */
+	public function getType();
+
+	/**
+	 * Sets the type of the product attribute.
+	 *
+	 * @param string $type Type of the attribute
+	 */
+	public function setType( $type );
+	
+	/**
 	 * Returns the code of the product attibute.
 	 *
 	 * @return string Code of the attribute

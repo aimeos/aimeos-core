@@ -60,9 +60,10 @@ interface MShop_Service_Provider_Interface
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
 	 */
-	public function getConfigFE();
+	public function getConfigFE( MShop_Order_Item_Base_Interface $basket );
 
 
 	/**
@@ -98,6 +99,14 @@ interface MShop_Service_Provider_Interface
 	 * @param MShop_Order_Item_Interface $order Order invoice object
 	 */
 	public function query( MShop_Order_Item_Interface $order );
+
+
+	/**
+	 * Sets the communication object for a service provider.
+	 *
+	 * @param MW_Communication_Interface $communication Object of communication
+	 */
+	public function setCommunication( MW_Communication_Interface $communication );
 
 
 	/**

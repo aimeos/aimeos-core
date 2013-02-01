@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$addressOption = 'null';
+
+try {
+	$this->standardBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+} catch( Exception $e ) {
+	$addressOption = -1;
+}
+?>
+<?php if( $this->param( 'ca-delivery-option', $addressOption ) === 'null' ) : ?>
+<style type="text/css">
+.checkout-standard-address-delivery .item-new .form-list {
+	display: block;
+}
+</style>
+<?php endif; ?>
+<script type="text/javascript">
+<!--
+$(document).ready( function() {
+	$( '.checkout-standard-address-delivery .header > input' ).bind( 'click',
+		{ selector: '.checkout-standard-address-delivery .item-new .form-list' },
+		function( event ) {
+			if( $(this).val() == 'null' ) {
+				$( event.data.selector ).slideDown( 400 );
+			} else {
+				$( event.data.selector ).slideUp( 400 );
+			}
+		}
+	);
+} );
+// -->
+</script>
+<?php echo $this->get( 'deliveryHeader' ); ?>

@@ -7,6 +7,7 @@
  */
 
 ?>
+<?php if( isset( $this->detailProductItem ) ) : ?>
 <div class="catalog-detail-basic">
 	<p class="basic-supplier"><?php echo $this->detailProductItem->getSupplierCode(); ?></p>
 	<h1 class="basic-name"><?php echo $this->detailProductItem->getName(); ?></h1>
@@ -21,3 +22,4 @@
 	</p>
 <?php echo $this->basicBody; ?>
 </div>
+<?php endif; ?>

@@ -63,6 +63,31 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	/**
 	 * Returns the name of the service attribute item.
 	 *
+	 * @return string Type of the service attribute item
+	 */
+	public function getType()
+	{
+		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : '' );
+	}
+
+
+	/**
+	 * Sets a new name for the service attribute item.
+	 *
+	 * @param string $name Type as defined by the service provider
+	 */
+	public function setType($type)
+	{
+		if ( $type == $this->getType() ) { return; }
+		
+		$this->_values['type'] = (string) $type;
+		$this->setModified();
+	}
+	
+	
+	/**
+	 * Returns the name of the service attribute item.
+	 *
 	 * @return string Name of the service attribute item
 	 */
 	public function getName()
@@ -158,11 +183,11 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 		$list = parent::toArray();
 
 		$list['order.base.service.attribute.ordservid'] = $this->getServiceId();
+		$list['order.base.service.attribute.type'] = $this->getType();
 		$list['order.base.service.attribute.name'] = $this->getName();
 		$list['order.base.service.attribute.code'] = $this->getCode();
 		$list['order.base.service.attribute.value'] = $this->getValue();
 
 		return $list;
 	}
-
 }

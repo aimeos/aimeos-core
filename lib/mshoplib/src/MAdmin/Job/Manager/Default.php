@@ -259,13 +259,12 @@ class MAdmin_Job_Manager_Default
 
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_ONE;
+			$level = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'madmin/job/manager/default/search';
 			$cfgPathCount =  'madmin/job/manager/default/count';
 			$required = array( 'job' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
-				$required, $total, $sitelevel );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{

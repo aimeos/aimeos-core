@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  * @version $Id: Abstract.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
@@ -13,7 +13,7 @@
  * Common abstract class for all HTML client classes.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 abstract class Client_Html_Abstract
 {
@@ -65,6 +65,26 @@ abstract class Client_Html_Abstract
 	{
 		$this->_view = $view;
 		return $this;
+	}
+
+
+	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 *
+	 * @param string $confpath Path to the configuration that contains the configured sub-clients
+	 * @param array $default List of sub-client names that should be used if no other configuration is available
+	 */
+	protected function _process( $confpath, array $default )
+	{
+		$view = $this->getView();
+
+		foreach( $this->_getSubClients( $confpath, $default ) as $subclient )
+		{
+			$subclient->setView( $view );
+			$subclient->process();
+		}
 	}
 
 

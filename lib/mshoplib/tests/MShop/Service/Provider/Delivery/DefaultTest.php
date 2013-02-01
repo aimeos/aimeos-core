@@ -79,7 +79,10 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetConfigFE()
 	{
-		$this->assertEquals(array(), $this->_object->getConfigFE());
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$basket = $orderManager->getSubManager( 'base' )->createItem();
+
+		$this->assertEquals( array(), $this->_object->getConfigFE( $basket ) );
 	}
 
 

@@ -267,7 +267,7 @@ class MShop_Order_Manager_Status_Default
 
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/status/default/item/search';
 			$cfgPathCount =  'mshop/order/manager/status/default/item/count';
 			$required = array( 'order.status' );

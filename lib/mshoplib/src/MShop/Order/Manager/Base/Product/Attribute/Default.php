@@ -47,6 +47,13 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
+		'order.base.product.attribute.type' => array(
+			'code'=>'order.base.product.attribute.type',
+			'internalcode'=>'mordbaprat."type"',
+			'label'=>'Order base product attribute type',
+			'type'=> 'string',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'order.base.product.attribute.code' => array(
 			'code'=>'order.base.product.attribute.code',
 			'internalcode'=>'mordbaprat."code"',
@@ -162,16 +169,17 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			$stmt = $this->_getCachedStatement($conn, $path);
 			$stmt->bind(1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT);
 			$stmt->bind(2, $item->getProductId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind(3, $item->getCode() );
-			$stmt->bind(4, $item->getValue() );
-			$stmt->bind(5, $item->getName() );
-			$stmt->bind(6, date('Y-m-d H:i:s', time()) );// mtime
-			$stmt->bind(7, $context->getEditor() );
+			$stmt->bind(3, $item->getType() );
+			$stmt->bind(4, $item->getCode() );
+			$stmt->bind(5, $item->getValue() );
+			$stmt->bind(6, $item->getName() );
+			$stmt->bind(7, date('Y-m-d H:i:s', time()) );// mtime
+			$stmt->bind(8, $context->getEditor() );
 
 			if ( $id !== null ) {
-				$stmt->bind(8, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind(9, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$stmt->bind(8, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
+				$stmt->bind(9, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
 			}
 
 			$stmt->execute()->finish();
@@ -280,7 +288,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/product/attribute/default/item/search';
 			$cfgPathCount =  'mshop/order/manager/base/product/attribute/default/item/count';
 			$required = array( 'order.base.product.attribute' );

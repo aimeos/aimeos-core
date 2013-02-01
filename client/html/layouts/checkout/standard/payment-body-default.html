@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+
+$activeStep = $this->get( 'standardStepActive' );
+$steps = $this->get( 'standardSteps', array() );
+$step = null;
+
+do {
+	$lastStep = $step;
+} while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
+$nextStep = ( ( $step = array_shift( $steps ) ) !== null ? $step : null );
+
+if( $lastStep ) {
+	$urlBack = $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $lastStep ) );
+} else {
+	$urlBack = $this->url( $this->config( 'basket-target' ), 'basket', 'index' );
+}
+
+$services = $this->get( 'paymentServices', array() );
+$servicePrices = $this->get( 'paymentServicePrices', array() );
+$serviceAttributes = $this->get( 'paymentServiceAttributes', array() );
+
+try
+{
+	$orderService = $this->standardBasket->getService( 'payment' );
+	$orderServiceId = $orderService->serviceId;
+}
+catch( Exception $e )
+{
+	$orderService = null;
+	$orderServiceId = null;
+
+	if( ( $service = reset( $services ) ) !== false ) {
+		$orderServiceId = $service->getId();
+	}
+}
+
+$serviceOption = $this->param( 'c-payment-option', $orderServiceId );
+
+$paymentCss = array();
+foreach( $this->get( 'paymentError', array() ) as $name => $msg ) {
+	$paymentCss[$name][] = 'error';
+}
+
+$priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
+
+?>
+<div class="checkout-standard-payment">
+	<h1><?php echo $this->translate( 'core/client/html', 'payment' ); ?></h1>
+	<p class="note"><?php echo $this->translate( 'core/client/html', 'Please choose your payment method' ); ?></p>
+	<form method="POST" action="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $nextStep ) ); ?>">
+<?php foreach( $services as $id => $service ) : ?>
+		<div id="c-payment-<?php echo $id; ?>" class="item item-service">
+			<label class="description" for="c-payment-option-<?php echo $id; ?>">
+				<input class="option" type="radio" id="c-payment-option-<?php echo $id; ?>" name="<?php echo $this->formparam( array( 'c-payment-option' ) ); ?>" value="<?php echo $id; ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
+<?php	if( isset( $servicePrices[$id] ) ) : ?>
+<?php		$currency = $this->translate( 'core/client/html/currency', $servicePrices[$id]->getCurrencyId() ); ?>
+<?php		if( $servicePrices[$id]->getValue() > 0 ) : ?>
+				<span class="price-value"><?php printf( $this->translate( 'core/client/html', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getShipping() ), $currency ); ?></span>
+<?php		else : ?>
+				<span class="price-value"><?php printf( $priceFormat, $this->number( $servicePrices[$id]->getValue() ), $currency ); ?></span>
+	<?php	endif; ?>
+<?php	endif; ?>
+				<div class="icons">
+<?php	foreach( $service->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
+					<img src="<?php echo $mediaItem->getUrl(); ?>" />
+<?php	endforeach; ?>
+				</div>
+				<h2><?php echo $service->getName(); ?></h2>
+<?php	foreach( $service->getRefItems( 'text', null, 'default' ) as $textItem ) : ?>
+<?php		if( ( $type = $textItem->getType() ) !== 'name' ) : ?>
+				<p class="<?php echo $type; ?>"><?php echo $textItem->getContent(); ?></p>
+<?php		endif; ?>
+<?php	endforeach; ?>
+			</label><?php
+		if( isset( $serviceAttributes[$id] ) ) :
+			?><ul class="form-list">
+<?php		foreach( $serviceAttributes[$id] as $key => $attribute ) : ?>
+<?php			$value = ( isset( $orderService ) && ( $value = $orderService->getAttribute( $key ) ) !== null ? $value : $attribute->getDefault() ); ?>
+				<li class="form-item <?php echo $key . ( isset( $paymentCss[$key] ) ? ' ' . join( ' ', $paymentCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
+					<label for="payment-<?php echo $key; ?>"><?php echo $this->translate( 'core/client/html/code', $key ); ?></label><?php
+				switch( $attribute->getType() ) : case 'string':
+					?><input type="text" id="payment-<?php echo $key; ?>" name="<?php echo $this->formparam( array( 'c-payment', $id, $key ) ); ?>" value="<?php echo $this->param( 'c-payment/' . $id . '/' . $key, $value ); ?>" /><?php
+					break; case 'select':
+					?><select id="payment-<?php echo $key; ?>" name="c-payment[<?php echo $id; ?>][<?php echo $key; ?>]">
+<?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
+						<option value="<?php echo $option; ?>"><?php echo $this->translate( 'core/client/html/code', $key . ':' . $option ); ?></option>
+<?php					endforeach; ?>
+					</select>
+<?php			endswitch; ?>
+				</li>
+<?php		endforeach; ?>
+			</ul>
+<?php	endif; ?>
+		</div>
+<?php endforeach; ?>
+<?php echo $this->get( 'paymentBody' ); ?>
+		<div class="button-group">
+			<a class="standardbutton" href="<?php echo $urlBack; ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
+			<button class="standardbutton"><?php echo $this->translate( 'core/client/html', 'Next' ); ?></button>
+		</div>
+	</form>
+</div>

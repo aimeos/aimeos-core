@@ -8,7 +8,7 @@
 Ext.ns('MShop.panel.catalog');
 
 // hook text picker into the catalog ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.TextItemPickerUi', {
 	xtype : 'MShop.panel.text.itempickerui',
 	itemConfig : {
 		recordName : 'Catalog_List',

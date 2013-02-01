@@ -47,10 +47,10 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
-		'order.base.service.attribute.name' => array(
-			'code' => 'order.base.service.attribute.name',
-			'internalcode' => 'mordbaseat."name"',
-			'label' => 'Order base service attribute name',
+		'order.base.service.attribute.type' => array(
+			'code' => 'order.base.service.attribute.type',
+			'internalcode' => 'mordbaseat."type"',
+			'label' => 'Order base service attribute type',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
@@ -65,6 +65,13 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			'code' => 'order.base.service.attribute.value',
 			'internalcode' => 'mordbaseat."value"',
 			'label' => 'Order base service attribute value',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'order.base.service.attribute.name' => array(
+			'code' => 'order.base.service.attribute.name',
+			'internalcode' => 'mordbaseat."name"',
+			'label' => 'Order base service attribute name',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
@@ -159,18 +166,19 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $item->getServiceId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getName(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 4, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 5, json_encode( $item->getValue() ), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 6, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 7, $context->getEditor() );
+			$stmt->bind(1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind(2, $item->getServiceId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind(3, $item->getType() );
+			$stmt->bind(4, $item->getCode() );
+			$stmt->bind(5, json_encode( $item->getValue() ) );
+			$stmt->bind(6, $item->getName() );
+			$stmt->bind(7, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind(8, $context->getEditor() );
 
 			if ( $id !== null ) {
-				$stmt->bind(8, $id, MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind(9, $id, MW_DB_Statement_Abstract::PARAM_INT);
 			} else {
-				$stmt->bind(8, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
+				$stmt->bind(9, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
 			}
 
 			$stmt->execute()->finish();
@@ -266,7 +274,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/service/attribute/default/item/search';
 			$cfgPathCount =  'mshop/order/manager/base/service/attribute/default/item/count';
 			$required = array( 'order.base.service.attribute' );

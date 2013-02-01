@@ -52,7 +52,8 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$configPaths = $mshop->getConfigPaths( 'mysql' );
 		$configPaths[] = ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new MW_Config_Zend( new Zend_Config( array(), true ), $configPaths );
+		$conf = new MW_Config_Array( array(), $configPaths );
+		$conf = new MW_Config_Decorator_MemoryCache( $conf );
 		if( function_exists( 'apc_store' ) === true ) {
 			$conf = new MW_Config_Decorator_APC( $conf );
 		}
@@ -61,7 +62,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$dbm = new MW_DB_Manager_PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
-		$session = new MW_Session_None();
+		$session = new MW_Session_PHP();
 		$ctx->setSession( $session );
 
 		$cache = new MW_Cache_None();
@@ -71,8 +72,10 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$ctx->setLogger( $logger );
 
 		$localeManager = MShop_Locale_Manager_Factory::createManager($ctx);
-		$localeItem = $localeManager->bootstrap( $site, '', '', false );
+		$localeItem = $localeManager->bootstrap( $site, 'en', '', false );
 		$ctx->setLocale($localeItem);
+
+		$ctx->setEditor( 'UTC001' );
 
 		Zend_Registry::set('ctx', $ctx);
 
@@ -105,27 +108,34 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 			'baseurl-template' => dirname( dirname( $baseurl ) ) . '/client/html/lib/',
 			'catalog-list-target' => 'routeDefault',
 			'catalog-detail-target' => 'routeDefault',
+			'basket-target' => 'routeDefault',
+			'checkout-target' => 'routeDefault',
+			'checkout-confirm-target' => 'routeDefault',
 		);
 
 		$view = new MW_View_Default();
 
-		$helper = new MW_View_Helper_UrlZend( $view, $router );
+		$helper = new MW_View_Helper_Url_Zend( $view, $router );
 		$view->addHelper( 'url', $helper );
 
-		$helper = new MW_View_Helper_Translate( $view, new MW_Translation_None( 'en_GB' ) );
+		$trans = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'en_GB', array('disableNotices'=>true) );
+		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
 		$view->addHelper( 'translate', $helper );
 
-		$helper = new MW_View_Helper_Parameter( $view, $this->_getAllParams() );
+		$helper = new MW_View_Helper_Parameter_Default( $view, $this->_getAllParams() );
 		$view->addHelper( 'param', $helper );
 
-		$helper = new MW_View_Helper_Config( $view, $config );
+		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$helper = new MW_View_Helper_Number( $view, '.', '' );
+		$helper = new MW_View_Helper_Number_Default( $view, '.', '' );
 		$view->addHelper( 'number', $helper );
 
-		$helper = new MW_View_Helper_Date( $view, 'Y-m-d' );
+		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
+
+		$helper = new MW_View_Helper_FormParam_Default( $view );
+		$view->addHelper( 'formparam', $helper );
 
 		return $view;
 	}

@@ -1,4 +1,4 @@
-# Arcavias - high performance e-commerce
+# Arcavias - high performance e-commerce [![Build Status](https://travis-ci.org/Arcavias/arcavias-core.png?branch=master)](https://travis-ci.org/Arcavias/arcavias-core)
 
 ## What is Arcavias?
 
@@ -22,3 +22,4 @@ It's is suited for medium to large size businesses which needs a seamless integr
 ## License
 
 Arcavias is licensed under the terms of the LGPLv3 Open Source license and is available for free.
+

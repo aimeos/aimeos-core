@@ -74,9 +74,10 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 		$expr[] = $search->compare( '!=', 'order.base.service.attribute.id', null );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.service.attribute.serviceid', null );
+		$expr[] = $search->compare( '==', 'order.base.service.attribute.type', '' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.code', 'NAME' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.value', '"CreditCard"' );
-		$expr[] = $search->compare( '~=', 'order.base.service.attribute.name', 'payment method' );
+		$expr[] = $search->compare( '==', 'order.base.service.attribute.name', 'payment method' );
 		$expr[] = $search->compare( '>=', 'order.base.service.attribute.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.service.attribute.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->_editor );
@@ -154,9 +155,10 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getServiceId(), $itemSaved->getServiceId() );
-		$this->assertEquals( $item->getName(), $itemSaved->getName() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );
+		$this->assertEquals( $item->getName(), $itemSaved->getName() );
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -165,9 +167,10 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getServiceId(), $itemUpd->getServiceId() );
-		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );
+		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
 
 		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -183,5 +186,4 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getSubManager( 'unknown' );
 	}
-
 }
