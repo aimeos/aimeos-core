@@ -57,16 +57,21 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 
 	public function testGetHeader()
 	{
+		$view = TestHelper::getView();
+		$view->standardStepActive = 'payment';
+		$this->_object->setView( $view );
+
 		$output = $this->_object->getHeader();
+		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
 	}
 
 
 	public function testGetBody()
 	{
 		$view = TestHelper::getView();
-		$this->_object->setView( $view );
 		$view->standardStepActive = 'payment';
 		$view->standardSteps = array( 'before', 'payment', 'after' );
+		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-standard-payment">', $output );
