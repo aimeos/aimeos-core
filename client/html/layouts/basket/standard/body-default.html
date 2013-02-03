@@ -7,10 +7,10 @@
 
 ?>
 <div class="arcavias basket-standard">
-<?php if( ( $errors = $this->get( 'standardErrorList', array() ) ) !== array() ) : ?>
+<?php if( isset( $this->standardErrorList ) ) : ?>
 	<ul class="error-list">
-<?php foreach( $errors as $error ) : ?>
-		<li><?php echo $error; ?></li>
+<?php foreach( (array) $this->standardErrorList as $errmsg ) : ?>
+		<li><?php echo $errmsg; ?></li>
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
