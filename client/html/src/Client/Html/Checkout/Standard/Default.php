@@ -112,18 +112,40 @@ class Client_Html_Checkout_Standard_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$context = $this->_getContext();
 
+			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
 			$view->standardBasket = $basketCntl->get();
-			$view->standardSteps = $this->_subPartNames;
+
+
+			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+			$view->standardSteps = $steps;
 
 			if( !isset( $view->standardStepActive ) ) {
-				$view->standardStepActive = $view->param( 'c-step', 'address' );
+				$view->standardStepActive = $view->param( 'c-step', reset( $steps ) );
+			}
+			$activeStep = $view->standardStepActive;
+
+
+			$step = null;
+			do {
+			       $lastStep = $step;
+			}
+			while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
+
+
+			if( $lastStep !== null ) {
+				$view->standardUrlBack = $view->url( $view->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $lastStep ) );
+			} else {
+				$view->standardUrlBack = $view->url( $view->config( 'basket-target' ), 'basket', 'index' );
 			}
 
-			if( !isset( $view->standardErrorList ) ) {
-				$view->standardErrorList = array();
+			if( ( $nextStep = array_shift( $steps ) ) !== null ) {
+				$view->standardUrlNext = $view->url( $view->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $nextStep ) );
+			} else {
+				$view->standardUrlNext = '';
 			}
+
 
 			$this->_cache = $view;
 		}

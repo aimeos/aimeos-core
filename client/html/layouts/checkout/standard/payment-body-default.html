@@ -5,22 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-
-$activeStep = $this->get( 'standardStepActive' );
-$steps = $this->get( 'standardSteps', array() );
-$step = null;
-
-do {
-	$lastStep = $step;
-} while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
-$nextStep = ( ( $step = array_shift( $steps ) ) !== null ? $step : null );
-
-if( $lastStep ) {
-	$urlBack = $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $lastStep ) );
-} else {
-	$urlBack = $this->url( $this->config( 'basket-target' ), 'basket', 'index' );
-}
-
 $services = $this->get( 'paymentServices', array() );
 $servicePrices = $this->get( 'paymentServicePrices', array() );
 $serviceAttributes = $this->get( 'paymentServiceAttributes', array() );
@@ -53,7 +37,7 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 <div class="checkout-standard-payment">
 	<h1><?php echo $this->translate( 'core/client/html', 'payment' ); ?></h1>
 	<p class="note"><?php echo $this->translate( 'core/client/html', 'Please choose your payment method' ); ?></p>
-	<form method="POST" action="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $nextStep ) ); ?>">
+	<form method="POST" action="<?php echo $this->get( 'standardUrlNext' ); ?>">
 <?php foreach( $services as $id => $service ) : ?>
 		<div id="c-payment-<?php echo $id; ?>" class="item item-service">
 			<label class="description" for="c-payment-option-<?php echo $id; ?>">
@@ -101,7 +85,7 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 <?php endforeach; ?>
 <?php echo $this->get( 'paymentBody' ); ?>
 		<div class="button-group">
-			<a class="standardbutton" href="<?php echo $urlBack; ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
+			<a class="standardbutton" href="<?php echo $this->get( 'standardUrlBack' ); ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
 			<button class="standardbutton"><?php echo $this->translate( 'core/client/html', 'Next' ); ?></button>
 		</div>
 	</form>
