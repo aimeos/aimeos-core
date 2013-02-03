@@ -8,6 +8,13 @@
 
 ?>
 <div class="arcavias catalog-filter">
+<?php if( isset( $this->filterErrorList ) ) : ?>
+	<ul class="error-list">
+<?php foreach( (array) $this->filterErrorList as $errmsg ) : ?>
+		<li><?php echo $errmsg; ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
 	<form method="GET" action="<?php echo $this->url( $this->config( 'catalog-list-target' ) ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
 		<button class="standardbutton" type="submit">
