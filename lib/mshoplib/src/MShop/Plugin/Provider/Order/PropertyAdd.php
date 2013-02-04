@@ -55,8 +55,8 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @throws MShop_Plugin_Provider_Exception if checks fail
-	 * @return bool true if checks succeed
+	 * @throws MShop_Plugin_Exception in case of faulty configuration or parameters
+	 * @return bool true if attributes have been added successfully
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
@@ -110,7 +110,15 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	}
 
 
-	protected function _addAttributes( MShop_Common_Item_Interface $item, array $attributeList, $properties )
+	/**
+	* Adds attribute items to an array.
+	*
+	* @param MShop_Common_Item_Interface $item Item containing the properties to be added as attributes
+	* @param Array $attributeList List of existing attributes
+	* @param Array $properties List of item properties to be converted
+	* @return Array List of attributes
+	*/
+	protected function _addAttributes( MShop_Common_Item_Interface $item, array $attributeList, array $properties )
 	{
 		$config = $this->_item->getConfig();
 
@@ -137,9 +145,17 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	}
 
 
+	/**
+	* Creates an attribute with given values for code, type, name and value
+	*
+	* @param String $code Value for attribute code
+	* @param String $value Value for attribute value
+	* @param String $name Optional value for attribute name
+	* @return MShop_Order_Item_Base_Product_Attribute_Interface Newly created attribte item
+	*/
 	protected function _createAttribute( $code, $value, $name = null )
 	{
-		$attributeManager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager('base')->getSubManager('product')->getSubManager('attribute');
+		$attributeManager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		if( $name === null ) {
 			$name = $code;
@@ -155,6 +171,13 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	}
 
 
+	/**
+	* Checks if a given attribute exists in a given list of attributes
+	*
+	* @param MShop_Order_Item_Base_Product_Attribute_Interface $item Attribute to be checked
+	* @param Array $list List of attributes
+	* @return Bool true if attribute exists in the list, otherwise false
+	*/
 	protected function _similarAttribute( MShop_Order_Item_Base_Product_Attribute_Interface $item, array $list )
 	{
 		foreach( $list as $element )
