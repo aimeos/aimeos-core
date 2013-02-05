@@ -29,12 +29,6 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 		$config = $this->_object->getConfig();
 	}
 
-	public function testGetSession()
-	{
-		$this->setExpectedException('MShop_Exception');
-		$config = $this->_object->getSession();
-	}
-
 	public function testGetDatabaseManager()
 	{
 		$this->setExpectedException('MShop_Exception');
@@ -47,52 +41,72 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 		$locale = $this->_object->getLocale();
 	}
 
+	public function testGetI18n()
+	{
+		$this->setExpectedException('MShop_Exception');
+		$locale = $this->_object->getI18n();
+	}
+
 	public function testGetLogger()
 	{
 		$this->setExpectedException('MShop_Exception');
 		$logger = $this->_object->getLogger();
 	}
 
-	public function testSetEditor()
+	public function testGetSession()
 	{
-		$this->_object->setEditor( 'testuser' );
-		$this->assertEquals( 'testuser', $this->_object->getEditor() );
-		$this->_object->setEditor( '' );
-		$this->assertEquals( '', $this->_object->getEditor() );
-	}
-
-	public function testSetLocale()
-	{
-		$locale = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext())->createItem();
-		$this->_object->setLocale($locale);
-		$this->assertSame($locale, $this->_object->getLocale());
-	}
-
-	public function testSetSession()
-	{
-		$context = TestHelper::getContext();
-		$this->_object->setSession($context->getSession());
-		$this->assertEquals($this->_object->getSession(), $context->getSession());
-	}
-
-	public function testSetDatabaseManager()
-	{
-		$context = TestHelper::getContext();
-		$this->_object->setDatabaseManager($context->getDatabaseManager());
-		$this->assertEquals($this->_object->getDatabaseManager(), $context->getDatabaseManager());
+		$this->setExpectedException('MShop_Exception');
+		$config = $this->_object->getSession();
 	}
 
 	public function testSetConfig()
 	{
 		$context = TestHelper::getContext();
-		$this->_object->setConfig($context->getConfig());
-		$this->assertEquals($this->_object->getConfig(), $context->getConfig());
+		$this->_object->setConfig( $context->getConfig() );
+		$this->assertSame( $context->getConfig(), $this->_object->getConfig() );
+	}
+
+	public function testSetDatabaseManager()
+	{
+		$context = TestHelper::getContext();
+		$this->_object->setDatabaseManager( $context->getDatabaseManager() );
+		$this->assertSame( $context->getDatabaseManager(), $this->_object->getDatabaseManager() );
+	}
+
+	public function testSetI18n()
+	{
+		$context = TestHelper::getContext();
+		$this->_object->setI18n( $context->getI18n() );
+		$this->assertSame( $context->getI18n(), $this->_object->getI18n() );
+	}
+
+	public function testSetLocale()
+	{
+		$locale = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext())->createItem();
+		$this->_object->setLocale( $locale );
+		$this->assertSame( $locale, $this->_object->getLocale() );
 	}
 
 	public function testSetLogger()
 	{
 		$context = TestHelper::getContext();
-		$this->_object->setLogger($context->getLogger());
-		$this->assertEquals($this->_object->getLogger(), $context->getLogger());
+		$this->_object->setLogger( $context->getLogger() );
+		$this->assertSame( $context->getLogger(), $this->_object->getLogger() );
+	}
+
+	public function testSetSession()
+	{
+		$context = TestHelper::getContext();
+		$this->_object->setSession( $context->getSession() );
+		$this->assertSame( $context->getSession(), $this->_object->getSession() );
+	}
+
+	public function testSetEditor()
+	{
+		$this->_object->setEditor( 'testuser' );
+		$this->assertEquals( 'testuser', $this->_object->getEditor() );
+
+		$this->_object->setEditor( '' );
+		$this->assertEquals( '', $this->_object->getEditor() );
 	}
 }
