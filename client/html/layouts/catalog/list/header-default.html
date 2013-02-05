@@ -6,6 +6,17 @@
  * @version $Id: header-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-echo $this->get( 'listHeader' );
+$catItems = $this->get( 'listCatPath', array() );
 
 ?>
+<?php if( ( $catItem = end( $catItems ) ) !== false ) : ?>
+<title><?php echo $catItem->getName(); ?></title>
+<?php foreach( $catItem->getRefItems( 'text', 'meta-keyword', 'default' ) as $textItem ) : ?>
+<meta name="keywords" content="<?php echo str_replace( '"', '', strip_tags( $textItem->getContent() ) ); ?>" />
+<?php endforeach; ?>
+<?php foreach( $catItem->getRefItems( 'text', 'meta-description', 'default' ) as $textItem ) : ?>
+<meta name="description" content="<?php echo str_replace( '"', '', strip_tags( $textItem->getContent() ) ); ?>" />
+<?php endforeach; ?>
+<?php endif; ?>
+<meta name="application-name" content="Arcavias" />
+<?php echo $this->get( 'listHeader' ); ?>
