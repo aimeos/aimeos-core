@@ -9,7 +9,7 @@
 
 
 /**
- * Default implementation of catalog list pagination section for HTML clients.
+ * Default implementation of catalog list stage section for HTML clients.
  *
  * @package Client
  * @subpackage Html
@@ -19,7 +19,7 @@ class Client_Html_Catalog_List_Stage_Default
 	implements Client_Html_Interface
 {
 	private $_subPartNames = array();
-	private $_subPartPath = 'client/html/catalog/list/pagination/default/subparts';
+	private $_subPartPath = 'client/html/catalog/list/stage/default/subparts';
 
 
 	/**
@@ -29,7 +29,7 @@ class Client_Html_Catalog_List_Stage_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -51,7 +51,7 @@ class Client_Html_Catalog_List_Stage_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
