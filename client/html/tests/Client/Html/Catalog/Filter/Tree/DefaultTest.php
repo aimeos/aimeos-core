@@ -86,7 +86,45 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertContains( 'Groups', $output );
 		$this->assertContains( 'Neu', $output );
-		$this->assertContains( 'level-2', $output );
+		$this->assertContains( 'tree-level-2', $output );
+	}
+
+
+	public function testGetBodyLevelsAlways()
+	{
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
+		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+
+		$view = $this->_object->getView();
+
+		$helper = new MW_View_Helper_Config_Default( $view, array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-always' => 2 ) ) ) ) );
+		$view->addHelper( 'config', $helper );
+
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getId() ) );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->_object->getBody();
+
+		$this->assertContains( 'tree-level-2', $output );
+	}
+
+
+	public function testGetBodyLevelsOnly()
+	{
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
+		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE );
+
+		$view = $this->_object->getView();
+
+		$helper = new MW_View_Helper_Config_Default( $view, array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-only' => 1 ) ) ) ) );
+		$view->addHelper( 'config', $helper );
+
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getChild( 0 )->getId() ) );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->_object->getBody();
+
+		$this->assertNotContains( 'tree-level-2', $output );
 	}
 
 
