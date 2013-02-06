@@ -105,70 +105,96 @@ class Client_Html_Checkout_Confirm_Default
 		}
 
 
-		$context = $this->_getContext();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
-
-
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-
-		$search = $customerManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'customer.code', $context->getEditor() ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$customerItems = $customerManager->searchItems( $search );
-
-		if( ( $customerItem = reset( $customerItems ) ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid customer "%1$s"', $context->getEditor() ) );
-		}
-
-
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-
-		$search = $orderManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'order.id', $orderid ),
-			$search->compare( '==', 'order.base.customerid', $customerItem->getId() )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$orderItems = $orderManager->searchItems( $search );
-
-		if( ( $orderItem = reset( $orderItems ) ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
-		}
-
-
-		$orderBaseServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
-
-		$search = $orderBaseServiceManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'order.base.service.baseid', $orderItem->getBaseId() ),
-			$search->compare( '==', 'order.base.service.type', 'payment' )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		foreach( $orderBaseServiceManager->searchItems( $search ) as $orderServiceItem )
+		try
 		{
-			/** @todo Use getServiceId() as soon as the method is available */
-			$search = $serviceManager->createSearch();
+			$context = $this->_getContext();
+			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
+
+
+			$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
+
+			$search = $customerManager->createSearch( true );
 			$expr = array(
-				$search->compare( '==', 'service.code', $orderServiceItem->getCode() ),
-				$search->compare( '==', 'service.type.code', 'payment' )
+				$search->compare( '==', 'customer.code', $context->getEditor() ),
+				$search->getConditions()
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$serviceItems = $serviceManager->searchItems( $search );
+			$customerItems = $customerManager->searchItems( $search );
 
-			if( ( $serviceItem = reset( $serviceItems ) ) !== false ) {
-				$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
+			if( ( $customerItem = reset( $customerItems ) ) === false ) {
+				throw new Client_Html_Exception( sprintf( 'Invalid customer "%1$s"', $context->getEditor() ) );
 			}
+
+
+			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+
+			$search = $orderManager->createSearch();
+			$expr = array(
+				$search->compare( '==', 'order.id', $orderid ),
+				$search->compare( '==', 'order.base.customerid', $customerItem->getId() )
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$orderItems = $orderManager->searchItems( $search );
+
+			if( ( $orderItem = reset( $orderItems ) ) === false ) {
+				throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
+			}
+
+
+			$orderBaseServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
+
+			$search = $orderBaseServiceManager->createSearch();
+			$expr = array(
+				$search->compare( '==', 'order.base.service.baseid', $orderItem->getBaseId() ),
+				$search->compare( '==', 'order.base.service.type', 'payment' )
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			foreach( $orderBaseServiceManager->searchItems( $search ) as $orderServiceItem )
+			{
+				/** @todo Use getServiceId() as soon as the method is available */
+				$search = $serviceManager->createSearch();
+				$expr = array(
+					$search->compare( '==', 'service.code', $orderServiceItem->getCode() ),
+					$search->compare( '==', 'service.type.code', 'payment' )
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
+
+				$serviceItems = $serviceManager->searchItems( $search );
+
+				if( ( $serviceItem = reset( $serviceItems ) ) !== false ) {
+					$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
+				}
+			}
+
+
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
+		catch( MW_Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage . PHP_EOL . $e->getTraceAsString() );
 
-
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->standardErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Client_Html_Exception $e )
+		{
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
 	}
 
 
