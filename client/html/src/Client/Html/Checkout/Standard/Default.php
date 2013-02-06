@@ -155,7 +155,7 @@ class Client_Html_Checkout_Standard_Default
 
 			$step = null;
 			do {
-			       $lastStep = $step;
+				$lastStep = $step;
 			}
 			while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
 

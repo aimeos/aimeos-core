@@ -89,14 +89,17 @@ class MW_Config_Decorator_MemoryCache implements MW_Config_Decorator_Interface
 	{
 		$name = trim( $name, '/' );
 
-		if( $value === null ) {
-			$this->_negCache[ $name ] = true;
-		} else {
- 			$this->_cache[ $name ] = $value;
+		if( $value !== null )
+		{
+			$this->_cache[ $name ] = $value;
 
 			if( isset( $this->_negCache[ $name ] ) ) {
 				unset( $this->_negCache[ $name ] );
 			}
+		}
+		else
+		{
+			$this->_negCache[ $name ] = true;
 		}
 	}
 
