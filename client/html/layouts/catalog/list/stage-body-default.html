@@ -11,7 +11,7 @@ if( isset( $this->listCatPath ) )
 {
 	$catPath = $this->listCatPath;
 	if( ( $catItem = end( $catPath ) ) !== false ) {
-		$mediaItems = $catItem->getRefItems( 'media' );
+		$mediaItems = $catItem->getRefItems( 'media', 'catalog' );
 	}
 
 	if( ( $mediaItem = reset($mediaItems) ) !== false) {
