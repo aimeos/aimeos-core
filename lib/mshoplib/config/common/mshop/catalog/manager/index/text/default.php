@@ -10,9 +10,9 @@ return array(
 	'item' => array(
 		'delete' => 'DELETE FROM "mshop_catalog_index_text" WHERE "prodid" = ? AND "siteid" = ?',
 		'insert' => '
-			INSERT INTO "mshop_catalog_index_text" ("prodid", "siteid", "textid", "langid", "listtype", "type", "value",
+			INSERT INTO "mshop_catalog_index_text" ("prodid", "siteid", "textid", "langid", "listtype", "type", "domain", "value",
 				"mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'search' => '
 			SELECT DISTINCT mpro."id", mpro."siteid", mpro."typeid", mpro."label", mpro."status",
