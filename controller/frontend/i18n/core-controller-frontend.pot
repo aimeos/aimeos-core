@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-06 20:31+0100\n"
+"POT-Creation-Date: 2013-02-06 21:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,6 +90,7 @@ msgid ""
 msgstr ""
 
 #: src/Controller/Frontend/Basket/Default.php:492
+#, php-format
 msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
 msgstr ""
 

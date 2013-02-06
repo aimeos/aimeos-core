@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core 2013-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-06 20:31+0100\n"
+"POT-Creation-Date: 2013-02-06 21:06+0100\n"
 "PO-Revision-Date: 2013-02-06 20:27+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language: Deutsch\n"
@@ -39,7 +39,9 @@ msgstr "Es konnte kein Service \"%1$s\" mit der ID \"%2$s\" erstellt werden"
 
 #: src/Controller/Frontend/Service/Default.php:179
 msgid "No service item for type \"%1$s\" and ID \"%2$\" available"
-msgstr "Es wurde kein Eintrag für den Service mit der ID \"%2$\" und dem Typ \"%1$s\" gefunden"
+msgstr ""
+"Es wurde kein Eintrag für den Service mit der ID \"%2$\" und dem Typ \"%1$s"
+"\" gefunden"
 
 #: src/Controller/Frontend/Service/Factory.php:30
 #: src/Controller/Frontend/Basket/Factory.php:31
@@ -52,13 +54,16 @@ msgstr "Der Klassenname \"%1$s\" is ungültig"
 #: src/Controller/Frontend/Basket/Default.php:110
 #, php-format
 msgid "No product found for ID \"%1$s\" and variant attribute IDs \"%2$s\""
-msgstr "Es wurde kein Produkt mit der ID \"%1$s\" und den ausgewählten Varianten mit den IDs \"%2$s\" gefunden"
+msgstr ""
+"Es wurde kein Produkt mit der ID \"%1$s\" und den ausgewählten Varianten mit "
+"den IDs \"%2$s\" gefunden"
 
 #: src/Controller/Frontend/Basket/Default.php:159
 #: src/Controller/Frontend/Basket/Default.php:181
 #, php-format
 msgid "Basket item with position \"%1$d\" is immutable"
-msgstr "Das Produkt im Warenkorb an Position \"%1$d\" darf nicht verändert werden"
+msgstr ""
+"Das Produkt im Warenkorb an Position \"%1$d\" darf nicht verändert werden"
 
 #: src/Controller/Frontend/Basket/Default.php:284
 #, php-format
@@ -78,18 +83,24 @@ msgstr "Der Adressteil \"%1$s\" mit dem Wert \"%2$s\" ist ungültig"
 #: src/Controller/Frontend/Basket/Default.php:423
 #, php-format
 msgid "Invalid address properties, please check your input"
-msgstr "Ein oder mehrere Adressteile sind ungültig. Bitte überprüfen Sie Ihre Eingaben"
+msgstr ""
+"Ein oder mehrere Adressteile sind ungültig. Bitte überprüfen Sie Ihre "
+"Eingaben"
 
 #: src/Controller/Frontend/Basket/Default.php:458
 #, php-format
 msgid ""
 "Available attribute IDs \"%1$s\" does not match the given attribute IDs "
 "\"%2$s\""
-msgstr "Die vorhandenden Attribute mit den IDs \"%1$s\" stimmen nicht im den übergebenen (\"%1$s\") überein"
+msgstr ""
+"Die vorhandenden Attribute mit den IDs \"%1$s\" stimmen nicht im den "
+"übergebenen (\"%1$s\") überein"
 
 #: src/Controller/Frontend/Basket/Default.php:492
+#, php-format
 msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
-msgstr "Für die Domäne \"%1$s\" und den Code \"%2$s\" wurde kein Listentyp gefunden"
+msgstr ""
+"Für die Domäne \"%1$s\" und den Code \"%2$s\" wurde kein Listentyp gefunden"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:44
 #: src/Controller/Frontend/Common/Factory/Abstract.php:117
