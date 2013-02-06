@@ -216,6 +216,23 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetBodyDeleteInvalid()
+	{
+		$view = $this->_object->getView();
+		$param = array(
+			'b-action' => 'delete',
+			'b-position' => -1,
+		);
+
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->process();
+
+		$this->assertEquals( 1, count( $view->get( 'standardErrorList', array() ) ) );
+	}
+
+
 	public function testGetSubClient()
 	{
 		$client = $this->_object->getSubClient( 'main', 'Default' );

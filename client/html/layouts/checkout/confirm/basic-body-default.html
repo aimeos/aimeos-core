@@ -7,17 +7,17 @@
 
 ?>
 <div class="checkout-confirm-basic">
-	<h2><?php echo $this->translate( 'core/client/html', 'Order' ); ?></h2>
-	<p class="note"><?php echo $this->translate( 'core/client/html', 'Thank you for your order' ); ?></p>
+	<h2><?php echo $this->translate( 'client/html', 'Order' ); ?></h2>
+	<p class="note"><?php echo $this->translate( 'client/html', 'Thank you for your order' ); ?></p>
 <?php if( isset( $this->confirmOrderItem ) ) : ?>
 	<ul class="attr-list">
 		<li class="form-item">
-			<span class="name"><?php echo $this->translate( 'core/client/html', 'Order ID' ); ?></span>
+			<span class="name"><?php echo $this->translate( 'client/html', 'Order ID' ); ?></span>
 			<span class="value"><?php echo  $this->confirmOrderItem->getId(); ?></span>
 		</li>
 		<li class="form-item">
-			<span class="name"><?php echo $this->translate( 'core/client/html', 'Payment status' ); ?></span>
-			<span class="value"><?php echo $this->translate( 'core/client/html/code', 'pay:' . $this->confirmOrderItem->getPaymentStatus() ); ?></span>
+			<span class="name"><?php echo $this->translate( 'client/html', 'Payment status' ); ?></span>
+			<span class="value"><?php echo $this->translate( 'client/html/code', 'pay:' . $this->confirmOrderItem->getPaymentStatus() ); ?></span>
 		</li>
 	</ul>
 <?php endif; ?>

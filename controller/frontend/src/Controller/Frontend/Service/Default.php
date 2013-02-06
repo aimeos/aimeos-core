@@ -78,8 +78,7 @@ class Controller_Frontend_Service_Default
 			}
 			catch( MShop_Service_Exception $e )
 			{
-				$str = 'Unable to create provider "%1$s" for service with ID "%2$s"';
-				$msg = sprintf( $str, $service->getCode(), $id );
+				$msg = sprintf( 'Unable to create provider "%1$s" for service with ID "%2$s"', $service->getCode(), $id );
 				$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 			}
 		}

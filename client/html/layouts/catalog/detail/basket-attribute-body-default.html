@@ -12,7 +12,7 @@
 		<tbody>
 <?php foreach( $this->get( 'attributeItems', array() ) as $type => $attributes ) : ?> 
 			<tr>
-				<td><?php echo $this->translate( 'core/client/html', $type ); ?></td>
+				<td><?php echo $this->translate( 'client/html', $type ); ?></td>
 				<td>
 					<select name="b-attrv-id">
 						<option value=""></option>
@@ -22,7 +22,7 @@
 			$priceItems = $attribute->getRefItems( 'price', 'default', 'default' );
 
 			if( ( $priceItem = reset( $priceItems ) ) !== false ) {
-				printf( $this->translate( 'core/client/html', '%1$s ( +%2$s€ )' ), $attribute->getName(), $this->number( $priceItem->getValue() + $priceItem->getShipping() ) );
+				printf( $this->translate( 'client/html', '%1$s ( +%2$s€ )' ), $attribute->getName(), $this->number( $priceItem->getValue() + $priceItem->getShipping() ) );
 			} else {
 				echo $attribute->getName();
 			}

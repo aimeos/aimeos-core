@@ -7,13 +7,13 @@
 
 ?>
 <div class="checkout-standard-address">
-	<h1><?php echo $this->translate( 'core/client/html', 'address' ); ?></h1>
-	<p class="note"><?php echo $this->translate( 'core/client/html', 'Fields with an * are mandatory' ); ?></p>
+	<h1><?php echo $this->translate( 'client/html', 'address' ); ?></h1>
+	<p class="note"><?php echo $this->translate( 'client/html', 'Fields with an * are mandatory' ); ?></p>
 	<form method="POST" action="<?php echo $this->get( 'standardUrlNext' ); ?>">
 <?php echo $this->get( 'addressBody' ); ?>
 		<div class="button-group">
-			<a class="standardbutton" href="<?php echo $this->get( 'standardUrlBack' ); ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
-			<button class="standardbutton"><?php echo $this->translate( 'core/client/html', 'Next' ); ?></button>
+			<a class="standardbutton" href="<?php echo $this->get( 'standardUrlBack' ); ?>"><?php echo $this->translate( 'client/html', 'Back' ); ?></a> 
+			<button class="standardbutton"><?php echo $this->translate( 'client/html', 'Next' ); ?></button>
 		</div>
 	</form>
 </div>

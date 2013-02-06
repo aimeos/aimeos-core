@@ -12,7 +12,7 @@ try
 	$priceService = $price->getShipping();
 	$priceRebate = $price->getRebate();
 	$priceTaxrate = $price->getTaxrate();
-	$priceCurrency = $this->translate( 'core/client/html/currency', $price->getCurrencyId() );
+	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
 }
 catch( Exception $e )
 {
@@ -41,7 +41,7 @@ try {
 	$paymentPriceService = '0.00';
 }
 
-$priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
+$priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 
 ?>
 <div class="basket-standard-main">
@@ -51,9 +51,9 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 			<thead>
 				<tr>
 					<th class="details"></th>
-					<th class="quantity"><?php echo $this->translate( 'core/client/html', 'Quantity' ); ?></th>
-					<th class="unitprice"><?php echo $this->translate( 'core/client/html', 'Price' ); ?></th>
-					<th class="price"><?php echo $this->translate( 'core/client/html', 'Sum' ); ?></th>
+					<th class="quantity"><?php echo $this->translate( 'client/html', 'Quantity' ); ?></th>
+					<th class="unitprice"><?php echo $this->translate( 'client/html', 'Price' ); ?></th>
+					<th class="price"><?php echo $this->translate( 'client/html', 'Sum' ); ?></th>
 					<th class="action"></th>
 				</tr>
 			</thead>
@@ -81,13 +81,13 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 					<td class="unitprice"><?php printf( $priceFormat, $this->number( $prodPrice ), $priceCurrency ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ); ?></td>
 					<td class="action">
-						<a class="minibutton" href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'core/client/html', 'X' ); ?></a>
+						<a class="minibutton" href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
 					</td>
 				</tr>
 <?php 	endforeach; ?>
 <?php if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
 				<tr>
-					<td class="details"><?php echo $this->translate( 'core/client/html', 'Service fees' ); ?></td>
+					<td class="details"><?php echo $this->translate( 'client/html', 'Service fees' ); ?></td>
 					<td class="quantity">1</td>
 					<td class="unitprice"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
@@ -97,36 +97,36 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 			</tbody>
 			<tfoot>
 				<tr class="subtotal">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Sub-total' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Sub-total' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
 				<tr class="delivery">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Shipping' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Shipping' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
 <?php if( $paymentPriceService > 0 ) : ?>
 				<tr class="payment">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Payment costs' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Payment costs' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
 <?php endif; ?>
 				<tr class="total">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Total' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
 				<tr class="rebate">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Included rebates' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Included rebates' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?></td>
 				</tr>
 			</tfoot>
 		</table>
 		<div class="button-group">
-			<button class="standardbutton" type="submit"><?php echo $this->translate( 'core/client/html', 'Update' ); ?></button>
-			<a class="standardbutton" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index' ); ?>"><?php echo $this->translate( 'core/client/html', 'Checkout' ); ?></a>
+			<button class="standardbutton" type="submit"><?php echo $this->translate( 'client/html', 'Update' ); ?></button>
+			<a class="standardbutton" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index' ); ?>"><?php echo $this->translate( 'client/html', 'Checkout' ); ?></a>
 		</div>
 	</form>
 </div>

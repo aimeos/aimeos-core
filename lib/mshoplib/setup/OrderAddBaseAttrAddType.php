@@ -1,4 +1,4 @@
-<?php   
+<?php
 
 /**
 * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
@@ -8,9 +8,9 @@
 
 /**
 * Adds column type to tables mshop_order_base_product_attr and mshop_order_base_service_attr
-*/ 
+*/
 class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
-{  
+{
 	private $_mysql = array(
 		'mshop_order_base_product_attr' => array(
 			'ALTER TABLE "mshop_order_base_product_attr" ADD "type" VARCHAR(32) NOT NULL AFTER "ordprodid"',
@@ -21,8 +21,8 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 			'ALTER TABLE "mshop_order_base_service_attr" DROP INDEX "idx_msordbaseat_sid_oid_cd_val"',
 		),
 	);
-	
-	
+
+
 	/**
 	* Returns the list of task names which this task depends on.
 	*
@@ -32,8 +32,8 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	{
 		return array('OrderRenameTable');
 	}
-	
-	
+
+
 	/**
 	* Returns the list of task names which depends on this task.
 	*
@@ -43,17 +43,17 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	{
 		return array('TablesCreateMShop');
 	}
-	
-	
+
+
 	/**
 	* Executes the task for MySQL databases.
 	*/
 	protected function _mysql()
 	{
-		$this->_process($this->_mysql);	
+		$this->_process($this->_mysql);
 	}
-	
-	
+
+
 	/**
 	* Add column to table if the column doesn't exist.
 	*
@@ -81,4 +81,3 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 		}
 	}
 }
-?>

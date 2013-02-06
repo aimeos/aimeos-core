@@ -127,6 +127,8 @@
 
 	<target name="i18n" description="Creates all translation files">
 		<phing target="i18n" dir="client/html" />
+		<phing target="i18n" dir="controller/frontend" />
+		<phing target="i18n" dir="lib/mshoplib" />
 	</target>
 
 
@@ -134,6 +136,8 @@
 		<taskdef name="jsbpackages" classname="dev.phing.MShopJsbPackageTask" />
 		<jsbpackages />
 		<phing target="build" dir="client/html" />
+		<phing target="build" dir="controller/frontend" />
+		<phing target="build" dir="lib/mshoplib" />
     </target>
 
 

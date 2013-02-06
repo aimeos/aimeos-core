@@ -98,7 +98,33 @@ class Client_Html_Checkout_Standard_Default
 	 */
 	public function process()
 	{
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		try
+		{
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
+		}
+		catch( MW_Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage . PHP_EOL . $e->getTraceAsString() );
+
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+		catch( Client_Html_Exception $e )
+		{
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
 	}
 
 
@@ -129,7 +155,7 @@ class Client_Html_Checkout_Standard_Default
 
 			$step = null;
 			do {
-			       $lastStep = $step;
+				$lastStep = $step;
 			}
 			while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
 

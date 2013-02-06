@@ -7,14 +7,14 @@
 
 ?>
 <div class="checkout-standard-summary">
-	<h1><?php echo $this->translate( 'core/client/html', 'summary' ); ?></h1>
-	<p class="note"><?php echo $this->translate( 'core/client/html', 'Please check your order' ); ?></p>
+	<h1><?php echo $this->translate( 'client/html', 'summary' ); ?></h1>
+	<p class="note"><?php echo $this->translate( 'client/html', 'Please check your order' ); ?></p>
 	<form method="POST" action="<?php echo $this->get( 'standardUrlNext' ); ?>">
 		<input type="hidden" name="<?php echo $this->formparam( array( 'cs-order' ) ); ?>" value="1" />
 <?php echo $this->get( 'summaryBody' ); ?>
 		<div class="button-group">
-			<a class="standardbutton" href="<?php echo $this->get( 'standardUrlBack' ); ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
-			<button class="standardbutton"><?php echo $this->translate( 'core/client/html', 'Buy now' ); ?></button>
+			<a class="standardbutton" href="<?php echo $this->get( 'standardUrlBack' ); ?>"><?php echo $this->translate( 'client/html', 'Back' ); ?></a> 
+			<button class="standardbutton"><?php echo $this->translate( 'client/html', 'Buy now' ); ?></button>
 		</div>
 	</form>
 </div>
