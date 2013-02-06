@@ -73,8 +73,19 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function deleteItem( $id )
 	{
+		$this->deleteItems( array( $id ) );
+	}
+
+
+	/**
+	 * Removes multiple items from the index.
+	 *
+	 * @param array $ids list of product IDs
+	 */
+	public function deleteItems( array $ids )
+	{
 		foreach( $this->_submanagers as $submanager ) {
-			$submanager->deleteItem( $id );
+			$submanager->deleteItems( $ids );
 		}
 	}
 
@@ -165,53 +176,75 @@ class MShop_Catalog_Manager_Index_Default
 	public function rebuildIndex( array $items = array() )
 	{
 		$context = $this->_getContext();
+		$config = $context->getConfig();
+
+		$start = 0;
+		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
+
+		$mode = $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' );
+
+		$default = array( 'attribute', 'price', 'text', 'product' );
+		$domains = $config->get( 'mshop/catalog/manager/index/default/domains', $default );
+
 		$search = $this->_productManager->createSearch( true );
-		$size = $context->getConfig()->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
-		$search->setSlice( 0, $size );
+		$defaultConditions = $search->getConditions();
 
-
-		if( !empty( $items ) )
+		if( count( $items ) > 0 )
 		{
-			MW_Common_Abstract::checkClassList( 'MShop_Product_Item_Interface', $items );
-
-			$ids = array();
+			$paramIds = array();
 			foreach( $items as $item ) {
-				$ids[] = $item->getId();
+				$paramIds[] = $item->getId();
 			}
 
 			$expr = array(
-				$search->getConditions(),
-				$search->compare( '==', 'product.id', $ids )
+				$defaultConditions,
+				$search->compare( '==', 'product.id', $paramIds )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$this->_writeIndex( $search, $domains, $size );
+			
+			return;
 		}
 
+		if( $mode === 'all' )
+		{
+			$this->_writeIndex( $search, $domains, $size );
 
-		$default = array( 'attribute', 'price', 'text', 'product' );
-		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/default/domains', $default );
-		$start = 0;
+			return;
+		}
+
+		$ids = array();
+		
+		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
+		$categorySearch = $catalogListManager->createSearch( true );
 
 		do
 		{
-			$result = $this->_productManager->searchItems( $search, $domains );
+			$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
+			$categorySearch->setSlice( $start, $size );
 
-			foreach( $result as $id => $product ) {
-				$this->deleteItem( $id );
+		 	$result = $catalogListManager->searchItems( $categorySearch );
+
+			$ids = array();
+			foreach( $result as $catalogListItem ) {
+				$ids[] = $catalogListItem->getRefId();
 			}
 
-			foreach ( $this->_submanagers as $submanager ) {
-				$submanager->rebuildIndex( $result );
-			}
-
-			$this->_saveSubProducts( $result );
-
-			$count = count( $result );
+			$count = count( $ids );
+			if( $count === 0 ) { continue; }
+			
 			$start += $count;
-			$search->setSlice( $start, $size );
+
+			$expr = array(
+				$defaultConditions,
+				$search->compare( '==', 'product.id', $ids )
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$this->_writeIndex( $search, $domains, $size );
 		}
 		while( $count > 0 );
-
-		$this->optimize();
 	}
 
 
@@ -302,6 +335,53 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
+	* Re-writes the index entries for all products that are search result of given criteria
+	*
+	* @param MW_Common_Criteria_Interface $search Search criteria
+	* @param array $domains List of domains to be 
+	* @param integer $size Size of a chunk of products to handle at a time
+	*/
+	protected function _writeIndex( MW_Common_Criteria_Interface $search, array $domains, $size )
+	{
+		$config = $this->_getContext()->getConfig();
+
+		$start = 0;
+		$search->setSlice( $start, $size );
+
+		do
+		{
+			$products = $this->_productManager->searchItems( $search, $domains );
+			$count = count( $products );
+			if( $count === 0 ) { continue; }
+
+			$start += $count;
+			$search->setSlice( $start, $size );
+
+			try
+			{
+				$this->_begin();
+		
+				$this->deleteItems( array_keys( $products ) );
+
+				foreach ( $this->_submanagers as $submanager ) {
+					$submanager->rebuildIndex( $products );
+				}
+
+				$this->_commit();
+			}
+			catch( Exception $e )
+			{
+				$this->_rollback();
+				throw $e;
+			}
+
+			$this->_saveSubProducts( $products );
+		}
+		while( $count > 0 );
+	}
+
+
+	/**
 	 * Saves catalog, price, text and attribute of subproduct.
 	 *
 	 * @param MShop_Product_Item_Interface $items Product items
@@ -339,8 +419,22 @@ class MShop_Catalog_Manager_Index_Default
 					$itemList[] = $refItem;
 				}
 
-				foreach( $this->_submanagers as $submanager ) {
-					$submanager->rebuildIndex( $itemList );
+				try
+				{
+					$this->_begin();
+
+					foreach( $this->_submanagers as $submanager ) {
+						$submanager->rebuildIndex( $itemList );
+					}
+
+					$this->optimize();
+
+					$this->_commit();
+				}
+				catch( Exception $e )
+				{
+					$this->_rollback();
+					throw $e;
 				}
 
 				$count = count( $result );
@@ -348,6 +442,7 @@ class MShop_Catalog_Manager_Index_Default
 				$search->setSlice( $start, $size );
 			}
 			while( $count > 0 );
+
 		}
 	}
 }

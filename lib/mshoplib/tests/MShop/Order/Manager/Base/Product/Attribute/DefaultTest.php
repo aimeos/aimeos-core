@@ -76,6 +76,7 @@ class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends MW_Unittest
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.id', null );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.productid', null );
+		$expr[] = $search->compare( '==', 'order.base.product.attribute.type', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.code', 'width' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.value', '33' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.name', '33' );
@@ -157,6 +158,7 @@ class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends MW_Unittest
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );
@@ -168,6 +170,7 @@ class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends MW_Unittest
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );

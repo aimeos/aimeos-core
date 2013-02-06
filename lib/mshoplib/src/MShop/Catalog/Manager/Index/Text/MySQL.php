@@ -31,7 +31,7 @@ class MShop_Catalog_Manager_Index_Text_MySQL
 		),
 		'catalog.index.text.relevance' => array(
 			'code' => 'catalog.index.text.relevance()',
-			'internalcode' => ':site AND mcatinte."listtype" = $1 AND mcatinte."langid" = $2 AND MATCH( mcatinte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
+			'internalcode' => ':site AND mcatinte."listtype" = $1 AND ( mcatinte."langid" = $2 OR mcatinte."langid" IS NULL ) AND MATCH( mcatinte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_FLOAT,

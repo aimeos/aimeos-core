@@ -600,9 +600,35 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testRebuildIndex()
+	public function testRebuildIndexAll()
 	{
+		$context = TestHelper::getContext();
+		$config = $context->getConfig();
+
+		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$search = $manager->createSearch( true );
+		$search->setSlice( 0, 0x7fffffff );
+
+		//delete whole catalog
+		$this->_object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+
+		//build catalog with all products
+		$config->set( 'mshop/catalog/manager/index/default/index', 'all' );
 		$this->_object->rebuildIndex();
+
+		$afterInsertAttr = $this->_getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
+		$afterInsertPrice = $this->_getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
+		$afterInsertText = $this->_getCatalogSubDomainItems( 'catalog.index.text.id', 'text' );
+		$afterInsertCat = $this->_getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
+
+		//restore index with categorized products only
+		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
+		$this->_object->rebuildIndex();
+
+		$this->assertEquals( 7, count( $afterInsertAttr ) );
+		$this->assertEquals( 8, count( $afterInsertPrice ) );
+		$this->assertEquals( 7, count( $afterInsertText ) );
+		$this->assertEquals( 2, count( $afterInsertCat ) );
 	}
 
 
@@ -610,11 +636,10 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $manager->createSearch();
+		$search->setSlice( 0, 0x7fffffff );
 
 		//delete whole catalog
-		foreach( $manager->searchItems($search) as $item ) {
-			$this->_object->deleteItem( $item->getId() );
-		}
+		$this->_object->deleteItems( array_keys( $manager->searchItems($search) ) );
 
 		$afterDeleteAttr = $this->_getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
 		$afterDeletePrice = $this->_getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
@@ -653,6 +678,35 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 2, count( $afterInsertText ) );
 		$this->assertEquals( 2, count( $afterInsertCat ) );
 	}
+
+
+	public function testRebuildIndexCategorizedOnly()
+	{
+		$context = TestHelper::getContext();
+		$config = $context->getConfig();
+
+		$manager = MShop_Product_Manager_Factory::createManager( $context );
+
+		//delete whole catalog
+		$search = $manager->createSearch();
+		$search->setSlice( 0, 0x7fffffff );
+		$this->_object->deleteItems( array_keys( $manager->searchItems($search) ) );
+
+		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
+		$this->_object->rebuildIndex();
+
+		$afterInsertAttr = $this->_getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
+		$afterInsertPrice = $this->_getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
+		$afterInsertText = $this->_getCatalogSubDomainItems( 'catalog.index.text.id', 'text' );
+		$afterInsertCat = $this->_getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
+
+		//check inserted items
+		$this->assertEquals( 2, count( $afterInsertAttr ) );
+		$this->assertEquals( 2, count( $afterInsertPrice ) );
+		$this->assertEquals( 2, count( $afterInsertText ) );
+		$this->assertEquals( 2, count( $afterInsertCat ) );
+	}
+
 
 	/**
 	 * Returns value of a catalog_index column.

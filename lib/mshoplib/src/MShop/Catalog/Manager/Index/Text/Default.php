@@ -35,7 +35,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinte2."prodid")
 				FROM "mshop_catalog_index_text" AS mcatinte2
 				WHERE mpro."id" = mcatinte2."prodid" AND :site AND mcatinte2."listtype" = $1
-				AND mcatinte2."langid" = $2 AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
+				AND ( mcatinte2."langid" = $2 OR mcatinte2."langid" IS NULL ) AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_FLOAT,
@@ -46,7 +46,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinte2."prodid")
 				FROM "mshop_catalog_index_text" AS mcatinte2
 				WHERE mpro."id" = mcatinte2."prodid" AND :site AND mcatinte2."listtype" = $1
-				AND mcatinte2."langid" = $2 AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
+				AND ( mcatinte2."langid" = $2 OR mcatinte2."langid" IS NULL ) AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_FLOAT,
@@ -54,7 +54,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		),
 		'catalog.index.text.value' => array(
 			'code'=>'catalog.index.text.value()',
-			'internalcode'=>':site AND mcatinte."listtype" = $1 AND mcatinte."langid" = $2 AND mcatinte."type" = $3 AND mcatinte."domain" = $4 AND mcatinte."value"',
+			'internalcode'=>':site AND mcatinte."listtype" = $1 AND ( mcatinte."langid" = $2 OR mcatinte."langid" IS NULL ) AND mcatinte."type" = $3 AND mcatinte."domain" = $4 AND mcatinte."value"',
 			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
@@ -140,22 +140,42 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function deleteItem( $id )
 	{
-		foreach( $this->_submanagers as $submanager ) {
-			$submanager->deleteItem( $id );
-		}
+		$this->deleteItems( array( $id ) );
+	}
 
+
+	/**
+	 * Removes multiple items from the index.
+	 *
+	 * @param array $ids list of Product IDs
+	 */
+	public function deleteItems( array $ids )
+	{
+		foreach( $this->_submanagers as $submanager ) {
+			$submanager->deleteItems( $ids );
+		}
 
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$sql = $context->getConfig()->get( 'mshop/catalog/manager/index/text/default/item/delete' );
+
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
+
+		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'prodid' => '"prodid"' );
+
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
 
 		try
 		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/delete' );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
+			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn );

@@ -204,12 +204,12 @@ CREATE TABLE "mshop_order_base_product" (
 	"baseid" BIGINT NOT NULL,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original product ID
+	"prodid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Order Product ID
 	"ordprodid" BIGINT DEFAULT NULL,
 	-- Type of Order Product ID
 	"type" VARCHAR(32) NOT NULL,
-	-- Original product ID
-	"prodid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Shop product code
 	"prodcode" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Supplier id
@@ -265,6 +265,8 @@ CREATE TABLE "mshop_order_base_product_attr" (
 	"siteid" INTEGER NULL,
 	-- Order product id
 	"ordprodid" BIGINT NOT NULL,
+	-- Attribute type
+	"type" VARCHAR(32) NOT NULL,
 	-- Attribute code
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Attribute value
@@ -288,8 +290,7 @@ CONSTRAINT "fk_msordbaprat_ordprodid"
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_msordbaprat_sid_oid_cd_val" ON "mshop_order_base_product_attr" ("siteid", "ordprodid", "code", "value");
-
+CREATE INDEX "idx_msordbaprat_si_oi_ty_cd_va" ON "mshop_order_base_product_attr" ("siteid", "ordprodid", "type", "code", "value");
 
 --
 -- Payment details entered by the customers
@@ -302,6 +303,8 @@ CREATE TABLE "mshop_order_base_service" (
 	"baseid" BIGINT NOT NULL,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original service ID
+	"servid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Service domain (delivery, payment)
 	"type" VARCHAR(8) NOT NULL,
 	-- Service code
@@ -349,6 +352,8 @@ CREATE TABLE "mshop_order_base_service_attr" (
 	"siteid" INTEGER NULL,
 	-- Order service id
 	"ordservid" BIGINT NOT NULL,
+	-- Attribute type
+	"type" VARCHAR(32) NOT NULL,
 	-- Attribute code
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Attribute value
@@ -372,8 +377,7 @@ CONSTRAINT "fk_msordbaseat_ordservid"
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_msordbaseat_sid_oid_cd_val" ON "mshop_order_base_service_attr" ("siteid", "ordservid", "code", "value");
-
+CREATE INDEX "idx_msordbaseat_si_oi_ty_cd_va" ON "mshop_order_base_service_attr" ("siteid", "ordservid", "type", "code", "value");
 
 --
 -- Status of the order

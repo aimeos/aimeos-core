@@ -45,6 +45,7 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 			'id' => 4,
 			'siteid' => 99,
 			'ordprodid' => 11,
+			'type' => 'UnitType',
 			'code' => 'size',
 			'value' => '30',
 			'name' => 'small',
@@ -102,6 +103,21 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->assertEquals( 33, $this->_object->getProductId() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
+
+
+	public function testGetType()
+	{
+		$this->assertEquals( $this->values['type'], $this->_object->getType());
+	}
+
+
+	public function testSetType()
+	{
+		$this->_object->setType( 'testType' );
+		$this->assertEquals( 'testType', $this->_object->getType() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
 
 	public function testGetCode()
 	{
@@ -180,6 +196,7 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->assertEquals( $this->_object->getId(), $list['order.base.product.attribute.id'] );
 		$this->assertEquals( $this->_object->getSiteId(), $list['order.base.product.attribute.siteid'] );
 		$this->assertEquals( $this->_object->getProductId(), $list['order.base.product.attribute.productid'] );
+		$this->assertEquals( $this->_object->getType(), $list['order.base.product.attribute.type'] );
 		$this->assertEquals( $this->_object->getCode(), $list['order.base.product.attribute.code'] );
 		$this->assertEquals( $this->_object->getValue(), $list['order.base.product.attribute.value'] );
 		$this->assertEquals( $this->_object->getName(), $list['order.base.product.attribute.name'] );
