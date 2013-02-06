@@ -42,6 +42,7 @@ return array(
 		'core/client/html/currency' => 'client/html/i18n/currency',
 		'core/client/html/language' => 'client/html/i18n/language',
 		'controller/frontend' => 'controller/frontend/i18n',
+		'mshop' => 'lib/mshoplib/i18n',
 	),
 	'setup' => array(
 		'lib/mshoplib/setup',
