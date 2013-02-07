@@ -160,10 +160,8 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 
 		$this->_object->setView( $view );
 
+		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
 		$this->_object->process();
-
-		$this->assertEquals( 'payment', $view->standardStepActive );
-		$this->assertGreaterThan( 0, count( $view->standardErrorList ) );
 	}
 
 
@@ -193,9 +191,7 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 
 		$this->_object->setView( $view );
 
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->_object->process();
-
-		$this->assertEquals( 'payment', $view->standardStepActive );
-		$this->assertEquals( 2, count( $view->standardErrorList ) );
 	}
 }

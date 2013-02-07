@@ -111,6 +111,14 @@ class Client_Html_Checkout_Standard_Summary_Default
 	 */
 	public function process()
 	{
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		try
+		{
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
+		}
+		catch( Exception $e )
+		{
+			$view->standardStepActive = 'summary';
+			throw $e;
+		}
 	}
 }
