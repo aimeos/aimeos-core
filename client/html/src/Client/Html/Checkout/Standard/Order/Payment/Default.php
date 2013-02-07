@@ -108,7 +108,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 			$service = $controller->get()->getService( 'payment' );
 
 			$manager = MShop_Service_Manager_Factory::createManager( $context );
-			$provider = $manager->getProvider( $manager->getItem( $service->serviceId ) );
+			$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
 
 
 			$url = $view->url( $view->config( 'checkout-confirm-target' ), 'checkout', 'confirm' );
@@ -123,6 +123,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 
 			$view->paymentForm = $provider->process( $view->orderItem );
 			$view->paymentUrl = $url;
+
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}

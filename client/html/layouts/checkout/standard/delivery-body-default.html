@@ -12,7 +12,7 @@ $serviceAttributes = $this->get( 'deliveryServiceAttributes', array() );
 try
 {
 	$orderService = $this->standardBasket->getService( 'delivery' );
-	$orderServiceId = $orderService->serviceId;
+	$orderServiceId = $orderService->getServiceId();
 }
 catch( Exception $e )
 {
