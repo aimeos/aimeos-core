@@ -174,7 +174,6 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$view->standardStepActive = 'address';
 			$view->deliveryError = $e->getErrorList();
 			throw $e;
 		}

@@ -95,7 +95,8 @@ class Client_Html_Catalog_List_Default
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage . PHP_EOL . $e->getTraceAsString() );
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return;
 		}
 
 		$tplconf = 'client/html/catalog/list/default/template-header';
