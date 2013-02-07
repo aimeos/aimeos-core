@@ -64,10 +64,16 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 					<td class="details">
 						<img src="<?php echo $product->getMediaUrl(); ?>" />
 						<span class="product-name"><?php echo $product->getName(); ?></span>
-<?php		foreach( $product->getAttributes() as $attribute ) : ?>
-						<span class="product-attributename"><?php echo $attribute->getName(); ?></span>
-						<span class="product-attributevalue"><?php echo $attribute->getValue(); ?></span>
-<?php		endforeach; ?>
+<?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
+						<ul class="attr-list">
+<?php			foreach( $product->getAttributes() as $attribute ) : ?>
+							<li class="attr-item">
+								<span class="product-attributename"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
+								<span class="product-attributevalue"><?php echo $attribute->getName(); ?></span>
+							</li>
+<?php			endforeach; ?>
+						</ul>
+<?php		endif; ?>
 					</td>
 <?php		$prodPrice = $product->getPrice()->getValue(); ?>
 					<td class="quantity">
@@ -85,14 +91,14 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 					</td>
 				</tr>
 <?php 	endforeach; ?>
-<?php if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
+<?php	if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
 				<tr>
 					<td class="details"><?php echo $this->translate( 'client/html', 'Service fees' ); ?></td>
 					<td class="quantity">1</td>
 					<td class="unitprice"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
 				</tr>
-<?php endif; ?>
+<?php	endif; ?>
 <?php endif; ?>
 			</tbody>
 			<tfoot>
