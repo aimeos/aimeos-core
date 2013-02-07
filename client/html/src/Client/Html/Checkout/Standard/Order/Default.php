@@ -117,15 +117,15 @@ class Client_Html_Checkout_Standard_Order_Default
 	{
 		$view = $this->getView();
 
-		// only start if there's something to do
-		if( ( $option = $view->param( 'cs-order', null ) ) === null
-			|| $view->get( 'standardStepActive' ) !== null
-		) {
-			return;
-		}
-
 		try
 		{
+			// only start if there's something to do
+			if( ( $option = $view->param( 'cs-order', null ) ) === null
+				|| $view->get( 'standardStepActive' ) !== null
+			) {
+				return;
+			}
+
 			$context = $this->_getContext();
 
 			$controller = Controller_Frontend_Basket_Factory::createController( $context );
@@ -146,8 +146,8 @@ class Client_Html_Checkout_Standard_Order_Default
 		}
 		catch( Exception $e )
 		{
-			$error = array( 'An error occured while placing your order' );
-			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
+			$view->standardStepActive = 'order';
+			throw $e;
 		}
 	}
 }

@@ -99,13 +99,13 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	{
 		$view = $this->getView();
 
-		// only start if there's something to do
-		if( $view->param( 'ca-billing-option', null ) === null ) {
-			return;
-		}
-
 		try
 		{
+			// only start if there's something to do
+			if( $view->param( 'ca-billing-option', null ) === null ) {
+				return;
+			}
+
 			$context = $this->_getContext();
 			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
 			$basket = $basketCtrl->get();

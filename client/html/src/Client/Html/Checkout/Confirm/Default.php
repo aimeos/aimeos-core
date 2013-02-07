@@ -29,13 +29,43 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
 
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody();
+			}
+			$view->confirmBody = $html;
 		}
-		$view->confirmBody = $html;
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage . PHP_EOL . $e->getTraceAsString() );
+
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
 
 		$tplconf = 'client/html/checkout/confirm/default/template-body';
 		$default = 'checkout/confirm/body-default.html';
@@ -51,13 +81,20 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
 
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader();
+			}
+			$view->confirmHeader = $html;
 		}
-		$view->confirmHeader = $html;
+		catch( Exception $e )
+		{
+			$this->_getContext()->getLogger()->log( $e->getMessage . PHP_EOL . $e->getTraceAsString() );
+		}
 
 		$tplconf = 'client/html/checkout/confirm/default/template-header';
 		$default = 'checkout/confirm/header-default.html';
@@ -172,28 +209,32 @@ class Client_Html_Checkout_Confirm_Default
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
-		catch( MW_Exception $e )
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
 		{
 			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage . PHP_EOL . $e->getTraceAsString() );
 
+			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->standardErrorList = $view->get( 'confirmErrorList', array() ) + $error;
-		}
-		catch( MShop_Exception $e )
-		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->standardErrorList = $view->get( 'confirmErrorList', array() ) + $error;
-		}
-		catch( Controller_Frontend_Exception $e )
-		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->standardErrorList = $view->get( 'confirmErrorList', array() ) + $error;
-		}
-		catch( Client_Html_Exception $e )
-		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 	}
 
