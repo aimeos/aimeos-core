@@ -69,16 +69,6 @@ class Client_Html_Basket_Mini_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testGetBodyAddSingle()
-	{
-		$this->_object->process();
-		$output = $this->_object->getBody();
-
-		$this->assertRegExp( '#0 article#smU', $output );
-		$this->assertRegExp( '#0.00€#smU', $output );
-	}
-
-
 	public function testGetSubClient()
 	{
 		$client = $this->_object->getSubClient( 'main', 'Default' );
