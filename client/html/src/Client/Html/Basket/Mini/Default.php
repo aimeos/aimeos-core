@@ -18,10 +18,10 @@ class Client_Html_Basket_Mini_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-
 	private $_subPartPath = 'client/html/basket/mini/default/subparts';
 	private $_subPartNames = array( 'main' );
 
+	
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
@@ -29,7 +29,7 @@ class Client_Html_Basket_Mini_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -52,7 +52,7 @@ class Client_Html_Basket_Mini_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -104,5 +104,36 @@ class Client_Html_Basket_Mini_Default
 		$view->miniBasket = $controller->get();
 
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+	
+	
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		try
+		{
+			$price = $view->miniBasket->getPrice();
+			$count = 0;
+			foreach( $view->miniBasket->getProducts() as $product ) {
+				$count = $count + $product->getQuantity();
+			}
+			$view->quantity = $count;
+			$view->priceValue = $price->getValue();
+			$view->priceCurrency = $view->translate( 'core/client/html/currency', $price->getCurrencyId() );
+		}
+		catch( Exception $e )
+		{
+			$view->quantity = 0;
+			$view->priceValue = '0.00';
+			$view->priceCurrency = '';
+		}
+		
+		$view->priceFormat = $view->translate( 'core/client/html', '%1$s%2$s' );
+		
+		return $view;
 	}
 }

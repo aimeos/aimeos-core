@@ -5,29 +5,10 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-try
-{
-	$price = $this->miniBasket->getPrice();
-	$count = 0;
-	foreach( $this->miniBasket->getProducts() as $product ) {
-		$count = $count + $product->getQuantity();
-	}
-	$priceValue = $price->getValue();
-	$priceCurrency = $this->translate( 'core/client/html/currency', $price->getCurrencyId() );
-}
-catch( Exception $e )
-{
-	$count = 0;
-	$priceValue = '0.00';
-	$priceCurrency = '';
-}
-
-$priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
-
 ?>
 <div class="basket-mini-main">
-	<?php echo $count . ' ' .  $this->translate( 'core/client/html', 'article' ) . ' - '; ?>
-	<?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?>  
+	<?php $format = '%3$d' . ' ' . $this->translate( 'core/client/html', 'article' ) . ' - ' . $this->priceFormat; ?>
+	<?php printf( $format, $this->number( $this->priceValue ), $this->priceCurrency, $this->quantity); ?>  
 </div>
 
 <?php echo $this->get( 'mainBody' ); ?>
