@@ -62,11 +62,14 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$dbm = new MW_DB_Manager_PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
-		$session = new MW_Session_PHP();
-		$ctx->setSession( $session );
-
 		$cache = new MW_Cache_None();
 		$ctx->setCache( $cache );
+
+		$i18n = new MW_Translation_None( 'en' );
+		$ctx->setI18n( $i18n );
+
+		$session = new MW_Session_PHP();
+		$ctx->setSession( $session );
 
 		$logger = MAdmin_Log_Manager_Factory::createManager( $ctx );
 		$ctx->setLogger( $logger );

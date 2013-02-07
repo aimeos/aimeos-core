@@ -161,7 +161,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 6, $cntAttributeA );
 		$this->assertEquals( 15, $cntCatalogA );
 		$this->assertEquals( 6, $cntPriceA );
-		$this->assertEquals( 16, $cntTextA );
+		$this->assertEquals( 13, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
@@ -260,13 +260,15 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $context );
 		$search = $attributeManager->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'attribute.label', 'xs' ),
+			$search->compare( '==', 'attribute.label', '29' ),
 			$search->compare( '==', 'attribute.editor', $this->_editor ),
+			$search->compare( '==', 'attribute.type.domain', 'product' ),
+			$search->compare( '==', 'attribute.type.code', 'width' ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $attributeManager->searchItems( $search );
 
-		if( ( $attrSizeItem = reset( $result ) ) === false ) {
+		if( ( $attrWidthItem = reset( $result ) ) === false ) {
 			throw new Exception( 'No attribute item found' );
 		}
 
@@ -290,14 +292,14 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 
 		$conditions = array(
-			$search->compare( '==', 'catalog.index.attribute.id', $attrSizeItem->getId() ),
+			$search->compare( '==', 'catalog.index.attribute.id', $attrWidthItem->getId() ),
 			$search->compare( '==', 'product.editor', $this->_editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 1, $total );
 
 
 		$expr = array(
@@ -313,8 +315,8 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 2, $total );
 
 
-		$attrIds = array( (int) $attrSizeItem->getId(), (int) $attrLenItem->getId() );
-		$func = $search->createFunction( 'catalog.index.attributecount', array( 'default', $attrIds ) );
+		$attrIds = array( (int) $attrWidthItem->getId(), (int) $attrLenItem->getId() );
+		$func = $search->createFunction( 'catalog.index.attributecount', array( 'variant', $attrIds ) );
 		$conditions = array(
 			$search->compare( '==', $func, 2 ), // count attributes
 			$search->compare( '==', 'product.editor', $this->_editor )
