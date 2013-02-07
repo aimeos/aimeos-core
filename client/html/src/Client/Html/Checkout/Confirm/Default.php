@@ -145,31 +145,16 @@ class Client_Html_Checkout_Confirm_Default
 		try
 		{
 			$context = $this->_getContext();
-			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
-
-
-			$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-
-			$search = $customerManager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'customer.code', $context->getEditor() ),
-				$search->getConditions()
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$customerItems = $customerManager->searchItems( $search );
-
-			if( ( $customerItem = reset( $customerItems ) ) === false ) {
-				throw new Client_Html_Exception( sprintf( 'Invalid customer "%1$s"', $context->getEditor() ) );
-			}
-
-
 			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+			$orderBaseManager = $orderManager->getSubManager( 'base' );
+
+			$basket = $orderBaseManager->getSession();
+
 
 			$search = $orderManager->createSearch();
 			$expr = array(
 				$search->compare( '==', 'order.id', $orderid ),
-				$search->compare( '==', 'order.base.customerid', $customerItem->getId() )
+				$search->compare( '==', 'order.baseid', $basket->getId() )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -180,31 +165,9 @@ class Client_Html_Checkout_Confirm_Default
 			}
 
 
-			$orderBaseServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
-
-			$search = $orderBaseServiceManager->createSearch();
-			$expr = array(
-				$search->compare( '==', 'order.base.service.baseid', $orderItem->getBaseId() ),
-				$search->compare( '==', 'order.base.service.type', 'payment' )
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			foreach( $orderBaseServiceManager->searchItems( $search ) as $orderServiceItem )
-			{
-				/** @todo Use getServiceId() as soon as the method is available */
-				$search = $serviceManager->createSearch();
-				$expr = array(
-					$search->compare( '==', 'service.code', $orderServiceItem->getCode() ),
-					$search->compare( '==', 'service.type.code', 'payment' )
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-
-				$serviceItems = $serviceManager->searchItems( $search );
-
-				if( ( $serviceItem = reset( $serviceItems ) ) !== false ) {
-					$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
-				}
-			}
+			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
+			$serviceItem = $serviceManager->getItem( $basket->getService( 'payment' )->getServiceId() );
+			$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
 
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );

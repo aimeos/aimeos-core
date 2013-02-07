@@ -128,11 +128,10 @@ class Client_Html_Checkout_Standard_Order_Default
 
 			$context = $this->_getContext();
 
-			$controller = Controller_Frontend_Basket_Factory::createController( $context );
 			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 			$orderBaseManager = $orderManager->getSubManager( 'base' );
 
-			$basket = $controller->get();
+			$basket = $orderBaseManager->getSession();
 			$orderBaseManager->store( $basket );
 
 			$orderItem = $orderManager->createItem();
@@ -143,6 +142,10 @@ class Client_Html_Checkout_Standard_Order_Default
 			$view->orderItem = $orderItem;
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
+
+			// save all after they have been modified by the sub-clients
+			$orderBaseManager->setSession( $basket );
+			$orderManager->saveItem( $view->orderItem );
 		}
 		catch( Exception $e )
 		{
