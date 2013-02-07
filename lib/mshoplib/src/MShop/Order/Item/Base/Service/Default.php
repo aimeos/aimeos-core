@@ -90,7 +90,7 @@ class MShop_Order_Item_Base_Service_Default
 	 *
 	 * @param string $servid ID of the service item used for the order
 	 */
-	public function setServiceID( $servid )
+	public function setServiceId( $servid )
 	{
 		if( $servid == $this->getServiceId() ) { return; }
 
@@ -310,8 +310,7 @@ class MShop_Order_Item_Base_Service_Default
 		$this->setCode( $service->getCode() );
 		$this->setName( $service->getName() );
 		$this->setType( $service->getType() );
-		/** @todo Replace with private property and public setter */
-		$this->serviceId = $service->getId();
+		$this->setServiceId( $service->getId() );
 
 		$items = $service->getRefItems( 'media', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
