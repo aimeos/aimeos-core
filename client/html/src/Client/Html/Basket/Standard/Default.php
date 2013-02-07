@@ -166,8 +166,8 @@ class Client_Html_Basket_Standard_Default
 						$products[] = array(
 							'prod-id' => $prodid,
 							'quantity' => $view->param( 'b-quantity', 1 ),
-							'attrconf-id' => (array) $view->param( 'b-attrconf-id', array() ),
-							'attrvar-id' => (array) $view->param( 'b-attrvar-id', array() )
+							'attrconf-id' => array_filter( (array) $view->param( 'b-attrconf-id', array() ) ),
+							'attrvar-id' => array_filter( (array) $view->param( 'b-attrvar-id', array() ) )
 						);
 					}
 
@@ -176,8 +176,8 @@ class Client_Html_Basket_Standard_Default
 						$this->_controller->addProduct(
 							( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
 							( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
-							( isset( $values['attrconf-id'] ) ? (array) $values['attrconf-id'] : array() ),
-							( isset( $values['attrvar-id'] ) ? (array) $values['attrvar-id'] : array() ),
+							( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
+							( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
 							$reqvariant
 						);
 					}
@@ -193,7 +193,7 @@ class Client_Html_Basket_Standard_Default
 						$products[] = array(
 							'position' => $positon,
 							'quantity' => $view->param( 'b-quantity', 1 ),
-							'attrconf-code' => (array) $view->param( 'b-attrconf-code', array() )
+							'attrconf-code' => array_filter( (array) $view->param( 'b-attrconf-code', array() ) )
 						);
 					}
 
@@ -202,7 +202,7 @@ class Client_Html_Basket_Standard_Default
 						$this->_controller->editProduct(
 							( isset( $values['position'] ) ? $values['position'] : null ),
 							( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
-							( isset( $values['attrconf-code'] ) ? $values['attrconf-code'] : array() )
+							( isset( $values['attrconf-code'] ) ? array_filter( (array) $values['attrconf-code'] ) : array() )
 						);
 					}
 

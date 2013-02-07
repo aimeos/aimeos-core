@@ -68,8 +68,10 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 						<ul class="attr-list">
 <?php			foreach( $product->getAttributes() as $attribute ) : ?>
 							<li class="attr-item">
-								<span class="product-attributename"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
-								<span class="product-attributevalue"><?php echo $attribute->getName(); ?></span>
+								<a href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ) ); ?>">
+									<span class="name"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
+									<span class="value"><?php echo $attribute->getName(); ?></span>
+								</a>
 							</li>
 <?php			endforeach; ?>
 						</ul>
