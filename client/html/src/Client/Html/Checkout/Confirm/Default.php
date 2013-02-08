@@ -93,7 +93,8 @@ class Client_Html_Checkout_Confirm_Default
 		}
 		catch( Exception $e )
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage . PHP_EOL . $e->getTraceAsString() );
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return;
 		}
 
 		$tplconf = 'client/html/checkout/confirm/default/template-header';
@@ -215,39 +216,26 @@ class Client_Html_Checkout_Confirm_Default
 			if( ( $orderid = $view->param( 'arcavias', null ) ) !== null )
 			{
 				$context = $this->_getContext();
+				$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+				$orderBaseManager = $orderManager->getSubManager( 'base' );
+
+				$basket = $orderBaseManager->getSession();
 
 
-				$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-
-				$search = $customerManager->createSearch( true );
+				$search = $orderManager->createSearch();
 				$expr = array(
-					$search->compare( '==', 'customer.code', $context->getEditor() ),
-					$search->getConditions()
+					$search->compare( '==', 'order.id', $orderid ),
+					$search->compare( '==', 'order.baseid', $basket->getId() )
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
-				$customerItems = $customerManager->searchItems( $search );
+				$orderItems = $orderManager->searchItems( $search );
 
-
-				if( ( $customerItem = reset( $customerItems ) ) !== false )
-				{
-					$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-
-					$search = $orderManager->createSearch();
-					$expr = array(
-						$search->compare( '==', 'order.id', $orderid ),
-						$search->compare( '==', 'order.base.customerid', $customerItem->getId() )
-					);
-					$search->setConditions( $search->combine( '&&', $expr ) );
-
-					$orderItems = $orderManager->searchItems( $search );
-
-					if( ( $orderItem = reset( $orderItems ) ) === false ) {
-						throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
-					}
-
-					$view->confirmOrderItem = $orderItem;
+				if( ( $orderItem = reset( $orderItems ) ) === false ) {
+					throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
 				}
+
+				$view->confirmOrderItem = $orderItem;
 			}
 
 			$this->_cache = $view;

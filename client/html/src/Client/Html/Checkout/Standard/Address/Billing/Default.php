@@ -172,7 +172,6 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$view->standardStepActive = 'address';
 			$view->billingError = $e->getErrorList();
 			throw $e;
 		}
