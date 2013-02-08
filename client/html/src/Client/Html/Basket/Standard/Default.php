@@ -77,7 +77,7 @@ class Client_Html_Basket_Standard_Default
 		catch( Exception $e )
 		{
 			$context = $this->_getContext();
-			$context->getLogger()->log( $e->getMessage . PHP_EOL . $e->getTraceAsString() );
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
@@ -243,7 +243,7 @@ class Client_Html_Basket_Standard_Default
 		catch( Exception $e )
 		{
 			$context = $this->_getContext();
-			$context->getLogger()->log( $e->getMessage . PHP_EOL . $e->getTraceAsString() );
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
