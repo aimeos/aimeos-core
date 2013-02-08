@@ -111,8 +111,17 @@ class Client_Html_Checkout_Standard_Summary_Default
 	 */
 	public function process()
 	{
+		$view = $this->getView();
+
+		if( $view->param( 'cs-order', null ) === null ) {
+			return;
+		}
+
 		try
 		{
+			$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_ALL );
+
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
 		catch( Exception $e )

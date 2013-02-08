@@ -146,16 +146,17 @@ class Client_Html_Checkout_Confirm_Default
 		try
 		{
 			$context = $this->_getContext();
-			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-			$orderBaseManager = $orderManager->getSubManager( 'base' );
+			$sorderid = $context->getSession()->get( 'arcavias/orderid' );
 
-			$basket = $orderBaseManager->getSession();
+			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+			$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
+			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
 
 
 			$search = $orderManager->createSearch();
 			$expr = array(
 				$search->compare( '==', 'order.id', $orderid ),
-				$search->compare( '==', 'order.baseid', $basket->getId() )
+				$search->compare( '==', 'order.id', $sorderid )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -166,9 +167,18 @@ class Client_Html_Checkout_Confirm_Default
 			}
 
 
-			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
-			$serviceItem = $serviceManager->getItem( $basket->getService( 'payment' )->getServiceId() );
-			$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
+			$search = $orderServiceManager->createSearch();
+			$expr = array(
+				$search->compare( '==', 'order.base.service.baseid', $orderItem->getBaseId() ),
+				$search->compare( '==', 'order.base.service.type', 'payment' )
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			foreach( $orderServiceManager->searchItems( $search ) as $service )
+			{
+				$serviceItem = $serviceManager->getItem( $service->getServiceId() );
+				$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
+			}
 
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
@@ -216,16 +226,15 @@ class Client_Html_Checkout_Confirm_Default
 			if( ( $orderid = $view->param( 'arcavias', null ) ) !== null )
 			{
 				$context = $this->_getContext();
-				$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-				$orderBaseManager = $orderManager->getSubManager( 'base' );
+				$sorderid = $context->getSession()->get( 'arcavias/orderid' );
 
-				$basket = $orderBaseManager->getSession();
+				$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 
 
 				$search = $orderManager->createSearch();
 				$expr = array(
 					$search->compare( '==', 'order.id', $orderid ),
-					$search->compare( '==', 'order.baseid', $basket->getId() )
+					$search->compare( '==', 'order.id', $sorderid )
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 

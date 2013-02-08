@@ -41,6 +41,16 @@ try {
 	$paymentPriceService = '0.00';
 }
 
+try
+{
+	$this->standardBasket->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+	$checkout = true;
+}
+catch( Exception $e )
+{
+	$checkout = false;
+}
+
 $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 
 ?>
@@ -134,7 +144,9 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 		</table>
 		<div class="button-group">
 			<button class="standardbutton" type="submit"><?php echo $this->translate( 'client/html', 'Update' ); ?></button>
+<?php if( $checkout === true ) : ?>
 			<a class="standardbutton" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index' ); ?>"><?php echo $this->translate( 'client/html', 'Checkout' ); ?></a>
+<?php endif; ?>
 		</div>
 	</form>
 </div>

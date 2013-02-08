@@ -221,6 +221,8 @@ class Client_Html_Basket_Standard_Default
 			}
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
+
+			$this->_controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 		}
 		catch( Client_Html_Exception $e )
 		{

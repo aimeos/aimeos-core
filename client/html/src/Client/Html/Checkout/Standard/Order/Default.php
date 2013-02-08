@@ -140,12 +140,12 @@ class Client_Html_Checkout_Standard_Order_Default
 			$orderManager->saveItem( $orderItem );
 
 			$view->orderItem = $orderItem;
+			$context->getSession()->set( 'arcavias/orderid', $orderItem->getId() );
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 
-			// save all after they have been modified by the sub-clients
-			$orderBaseManager->setSession( $basket );
-			$orderManager->saveItem( $view->orderItem );
+			// save again after sub-clients modified it's state
+			$orderManager->saveItem( $orderItem );
 		}
 		catch( Exception $e )
 		{
