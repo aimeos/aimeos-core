@@ -6,6 +6,10 @@
  * @version $Id: items-body-default.html 1351 2012-10-28 11:29:07Z nsendetzky $
  */
 
+$detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
+$detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+$detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
+
 $priceFormat = $this->translate( 'client/html', '%1$s€' );
 $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
@@ -15,14 +19,14 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php foreach( $this->listProductItems as $id => $productItem ) : ?>
 <?php	$name = $productItem->getName(); $firstImage = true; ?>
 	<div class="single">
-		<a href="<?php echo $this->url( $this->config( 'catalog-detail-target' ), 'catalog', 'detail', array( 'l-product-id' => $id ) + $this->listParams, array( $name ) ); ?>">
+		<a href="<?php echo $this->url( $detailTarget, $detailController, $detailAction, array( 'l-product-id' => $id ) + $this->listParams, array( $name ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
 <?php		if( $firstImage === true ) : $firstImage = false; ?>
-				<noscript><div class="media-item" style="background-image: url('<?php echo $this->config( 'baseurl-content' ) . $mediaItem->getUrl(); ?>')"></div></noscript>
-				<div class="media-item lazy-image" data-src="<?php echo $this->config( 'baseurl-content' ) . $mediaItem->getUrl(); ?>"></div>
+				<noscript><div class="media-item" style="background-image: url('<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl(); ?>')"></div></noscript>
+				<div class="media-item lazy-image" data-src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl(); ?>"></div>
 <?php		else : ?>
-				<div class="media-item" data-src="<?php echo $this->config( 'baseurl-content' ) . $mediaItem->getUrl(); ?>"></div>
+				<div class="media-item" data-src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl(); ?>"></div>
 <?php		endif; ?>
 <?php	endforeach; ?>
 			</div>

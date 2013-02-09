@@ -108,8 +108,12 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		$manager = MShop_Service_Manager_Factory::createManager( $context );
 		$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
 
+		$confirmTarget = $this->config( 'client/html/checkout/confirm/url/target' );
+		$confirmController = $this->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+		$confirmAction = $this->config( 'client/html/checkout/confirm/url/action', 'confirm' );
 
-		$url = $view->url( $view->config( 'checkout-confirm-target' ), 'checkout', 'confirm' );
+
+		$url = $view->url( $confirmTarget, $confirmController, $confirmAction );
 
 		if( strpos( $url, '?' ) === false ) {
 			$url .= '?';

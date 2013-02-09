@@ -5,6 +5,10 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$checkoutTarget = $this->config( 'client/html/checkout/url/target' );
+$checkoutController = $this->config( 'client/html/checkout/url/controller', 'checkout' );
+$checkoutAction = $this->config( 'client/html/checkout/url/action', 'index' );
+
 try {
 	$paymentAddr = $this->standardBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING )->toArray();
 } catch( Exception $e ) {
@@ -45,7 +49,7 @@ foreach( $this->get( 'addressDeliveryOptional', array() ) as $name ) {
 	<div class="item-address payment">
 		<div class="header">
 			<h3><?php echo $this->translate( 'client/html', 'Billing address' ); ?></h3>
-			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
+			<a class="modify" href="<?php echo $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
 		</div>
 <?php if( $paymentAddr !== array() ) : ?>
 		<ul class="attr-list">
@@ -150,7 +154,7 @@ foreach( $this->get( 'addressDeliveryOptional', array() ) as $name ) {
 	</div><div class="item-address delivery">
 		<div class="header">
 			<h3><?php echo $this->translate( 'client/html', 'Delivery address' ); ?></h3>
-			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
+			<a class="modify" href="<?php echo $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
 		</div>
 <?php if( $deliveryAddr !== array() ) : ?>
 		<ul class="attr-list">

@@ -5,13 +5,17 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$checkoutTarget = $this->config( 'client/html/checkout/url/target' );
+$checkoutController = $this->config( 'client/html/checkout/url/controller', 'checkout' );
+$checkoutAction = $this->config( 'client/html/checkout/url/action', 'index' );
+
 ?>
 <div class="checkout-standard-summary-service">
 	<h2><?php echo $this->translate( 'client/html', 'Services' ); ?></h2>
 	<div class="item-service payment">
 		<div class="header">
 			<h3><?php echo $this->translate( 'client/html', 'payment' ); ?></h3>
-			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'payment' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
+			<a class="modify" href="<?php echo $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c-step' => 'payment' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
 		</div>
 <?php try { $service = $this->standardBasket->getService( 'payment' ); ?>
 		<div class="item">
@@ -40,7 +44,7 @@
 	</div><div class="item-service delivery">
 		<div class="header">
 			<h3><?php echo $this->translate( 'client/html', 'delivery' ); ?></h3>
-			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'delivery' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
+			<a class="modify" href="<?php echo $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c-step' => 'delivery' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
 		</div>
 <?php try { $service = $this->standardBasket->getService( 'delivery' ); ?>
 		<div class="item">
