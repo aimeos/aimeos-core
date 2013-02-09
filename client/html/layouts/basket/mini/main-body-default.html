@@ -7,8 +7,7 @@
 
 ?>
 <div class="basket-mini-main">
-	<?php $format = '%3$d' . ' ' . $this->translate( 'core/client/html', 'article' ) . ' - ' . $this->priceFormat; ?>
-	<?php printf( $format, $this->number( $this->priceValue ), $this->priceCurrency, $this->quantity); ?>  
+	<?php printf( $this->translate( 'client/html', '%1$d article - %2$s%3$s', '%1$d articles - %2$s%3$s', $this->get( 'miniQuantity', 0 ) ), $this->get( 'miniQuantity', 0 ), $this->number( $this->get( 'miniPriceValue', '0.00' ), $this->get( 'miniPriceCurrency', '' ) ); ?>
 </div>
 
 <?php echo $this->get( 'mainBody' ); ?>
