@@ -5,22 +5,10 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-$imageUrl = '';
-$imageName = '';
-if( isset( $this->listCatPath ) )
-{
-	$catPath = $this->listCatPath;
-	if( ( $catItem = end( $catPath ) ) !== false ) {
-		$mediaItems = $catItem->getRefItems( 'media', 'catalog' );
-	}
-
-	if( ( $mediaItem = reset($mediaItems) ) !== false) {
-		$imageName = $mediaItem->getName();
-		$imageUrl = $mediaItem->getUrl();
-	}
-}
 ?>
 <div class="catalog-list-stage">
-	<img src=<?php echo $imageUrl; ?> alt=<?php echo $imageName; ?> >
-	<?php echo $this->get( 'stageBody' ); ?>
+<?php foreach( $this->mediaItems as $media ) : ?>
+	<img src="<?php echo $media->getUrl(); ?>" alt="<?php echo $this->categoryName; ?>" >
+<?php endforeach; ?>
+<?php echo $this->get( 'stageBody' ); ?>
 </div>

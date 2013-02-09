@@ -46,18 +46,8 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No catalog item found' );
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
-		$total = 0;
-
 		$view = TestHelper::getView();
-
-		$view->listProductItems = $productManager->searchItems( $search, array( 'media', 'price', 'text' ), $total );
-		$view->listProductTotal = $total;
-		$view->listPageSize = 100;
-		$view->listPageCurr = 1;
-		$view->listParams = array();
+		
 		$view->listCatPath = array( $catalogManager->createItem(), $catItem );
 
 		$this->_object->setView( $view );
@@ -86,6 +76,7 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
+		print_r($output);
 		$this->assertStringStartsWith( '<div class="catalog-list-stage">', $output );
 	}
 

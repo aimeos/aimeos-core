@@ -29,13 +29,43 @@ class Client_Html_Catalog_List_Stage_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->getView();
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
 
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody();
+			}
+			$view->stageBody = $html;
 		}
-		$view->stageBody = $html;
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
+		}
 
 		$tplconf = 'client/html/catalog/list/stage/default/template-body';
 		$default = 'catalog/list/stage-body-default.html';
@@ -51,13 +81,21 @@ class Client_Html_Catalog_List_Stage_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->getView();
-
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
+	
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader();
+			}
+			$view->stageHeader = $html;
 		}
-		$view->stageHeader = $html;
+		catch( Exception $e )
+		{
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return;
+		}
 
 		$tplconf = 'client/html/catalog/list/stage/default/template-header';
 		$default = 'catalog/list/stage-header-default.html';
@@ -99,5 +137,40 @@ class Client_Html_Catalog_List_Stage_Default
 	public function process()
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+	
+	
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		if( !isset( $this->_cache ) )
+		{
+			$mediaItems = array();
+			
+			if( isset( $view->listCatPath ) )
+			{
+				$catPath = $view->listCatPath;
+				
+				if( ( $catItem = end( $catPath ) ) !== false ) {
+					$view->mediaItems = $catItem->getRefItems( 'media', 'stage', 'default' );
+				}
+			}
+			
+			if( empty( $view->mediaItems ) ) {
+				$media = MShop_Media_Manager_Factory::createManager( $this->_getContext() )->createItem();
+				$view->categoryName = 'Default';
+				$media->setUrl( 'default/path/img.jpg' );
+				$view->mediaItems = array( $media );
+			}
+			
+			$this->_cache = $view;
+		}
+	
+		return $this->_cache;
 	}
 }
