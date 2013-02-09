@@ -448,9 +448,10 @@ class MShop_Locale_Manager_Site_Default
 			$stmt->bind(2, $item->getLabel(), MW_DB_Statement_Abstract::PARAM_STR);
 			$stmt->bind(3, json_encode($item->getConfig()), MW_DB_Statement_Abstract::PARAM_STR);
 			$stmt->bind(4, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(5, $context->getEditor() );
-			$stmt->bind(6, $curdate ); // mtime
-			$stmt->bind(7, $curdate ); // ctime
+			$stmt->bind(5, 0, MW_DB_Statement_Abstract::PARAM_INT);
+			$stmt->bind(6, $context->getEditor() );
+			$stmt->bind(7, $curdate ); // mtime
+			$stmt->bind(8, $curdate ); // ctime
 
 			$stmt->execute()->finish();
 

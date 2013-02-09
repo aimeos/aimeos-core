@@ -40,6 +40,33 @@
 		</delete>
 	</target>
 
+	<target name="i18n" description="Creates translation message files">
+		<exec command="find ./src/ -type f | xgettext --language=PHP --from-code=UTF-8 --keyword=sprintf:1 -o i18n/core-mshop.pot -f -" /> 
+        <foreach param="po-fname" absparam="po-filename" target="i18n-update">
+            <fileset dir="./i18n">
+                <include name="*.po" />
+            </fileset>
+        </foreach>
+	</target>
+
+	<target name="i18n-update" description="Updates translation message files">
+		<fail unless="po-filename" message="Missing file name" />
+		<exec command="msgmerge -U --backup=none ${po-filename} i18n/core-mshop.pot" /> 
+    </target>
+
+	<target name="build" description="Builds package for deployment">
+		<foreach param="mo-fname" absparam="mo-filename" target="build-mo">
+            <fileset dir="./i18n">
+                <include name="*.po" />
+            </fileset>
+        </foreach>
+	</target>
+
+	<target name="build-mo" description="Generates binary translation files">
+		<fail unless="mo-filename" message="Missing file name" />
+		<exec command="msgfmt -o `echo ${mo-filename} | sed s/\.po//` ${mo-filename}" /> 
+    </target>
+
 	<target name="all" depends="coverage,testperf,check" description="Builds all parts of the package">
 	</target>
 

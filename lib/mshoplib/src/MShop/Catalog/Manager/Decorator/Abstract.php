@@ -38,11 +38,12 @@ abstract class MShop_Catalog_Manager_Decorator_Abstract
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
 	{
-		return $this->_getManager()->getTree( $id, $ref, $level );
+		return $this->_getManager()->getTree( $id, $ref, $level, $criteria );
 	}
 
 

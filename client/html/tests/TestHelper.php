@@ -50,7 +50,7 @@ class TestHelper
 		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new MW_View_Helper_Config_Default( $view, array() );
+		$helper = new MW_View_Helper_Config_Default( $view, self::getContext()->getConfig() );
 		$view->addHelper( 'config', $helper );
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
@@ -111,6 +111,10 @@ class TestHelper
 
 		$cache = new MW_Cache_None();
 		$ctx->setCache( $cache );
+
+
+		$i18n = new MW_Translation_None( 'en' );
+		$ctx->setI18n( $i18n );
 
 
 		$session = new MW_Session_None();

@@ -19,7 +19,7 @@ if( isset( $this->detailProductItem ) ) {
 		<a id="next-image" class="disabled"></a>
 		<div class="carousel">
 <?php foreach( $mediaItems as $id => $mediaItem ) : ?>
-			<div id="image-<?php echo $id; ?>" class="item" style="background-image: url('<?php echo $this->config( 'baseurl-content' ) . $mediaItem->getUrl(); ?>')"></div>
+			<div id="image-<?php echo $id; ?>" class="item" style="background-image: url('<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl(); ?>')"></div>
 <?php endforeach; ?>
 		</div>
 	</div>
@@ -31,7 +31,7 @@ if( isset( $this->detailProductItem ) ) {
 	$class = 'item selected';
 	foreach( $mediaItems as $id => $mediaItem )
 	{
-		printf( '<a href="#image-%1$s" class="%2$s" style="background-image: url(\'%3$s\')"></a>', $id, $class, $this->config( 'baseurl-content' ) . $mediaItem->getUrl() );
+		printf( '<a href="#image-%1$s" class="%2$s" style="background-image: url(\'%3$s\')"></a>', $id, $class, $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() );
 		$class = 'item';
 	}
 ?>

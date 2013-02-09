@@ -74,6 +74,14 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
+		$cache = new MW_Cache_None();
+		$ctx->setCache( $cache );
+
+
+		$i18n = new MW_Translation_None( 'en' );
+		$ctx->setI18n( $i18n );
+
+
 		$session = new MW_Session_None();
 		$ctx->setSession( $session );
 
