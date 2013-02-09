@@ -18,6 +18,7 @@ class Client_Html_Basket_Mini_Main_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
+	private $_cache;
 	private $_subPartPath = 'client/html/basket/mini/main/default/subparts';
 	private $_subPartNames = array();
 
@@ -29,13 +30,43 @@ class Client_Html_Basket_Mini_Main_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_setViewParams( $this->getView() );
-
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
+	
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody();
+			}
+			$view->mainBody = $html;
 		}
-		$view->mainBody = $html;
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->mainErrorList = $view->get( 'mainErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->mainErrorList = $view->get( 'mainErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->mainErrorList = $view->get( 'mainErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->mainErrorList = $view->get( 'mainErrorList', array() ) + $error;
+		}
 
 		$tplconf = 'client/html/basket/mini/main/default/template-body';
 		$default = 'basket/mini/main-body-default.html';
@@ -51,14 +82,22 @@ class Client_Html_Basket_Mini_Main_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
-
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
+	
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader();
+			}
+			$view->mainHeader = $html;
 		}
-		$view->mainHeader = $html;
-
+		catch( Exception $e )
+		{
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return;
+		}
+		
 		$tplconf = 'client/html/basket/mini/main/default/template-header';
 		$default = 'basket/mini/main-header-default.html';
 
@@ -109,26 +148,22 @@ class Client_Html_Basket_Mini_Main_Default
 	 */
 	protected function _setViewParams( MW_View_Interface $view )
 	{
-		try
+		if( !isset( $this->_cache ) )
 		{
-			$price = $view->miniBasket->getPrice();
-			$count = 0;
-			foreach( $view->miniBasket->getProducts() as $product ) {
-				$count = $count + $product->getQuantity();
+			try
+			{
+				$view->priceItem = $view->miniBasket->getPrice();
+				$count = 0;
+				foreach( $view->miniBasket->getProducts() as $product ) {
+					$count = $count + $product->getQuantity();
+				}
+				$view->miniQuantity = $count;
 			}
-			$view->quantity = $count;
-			$view->priceValue = $price->getValue();
-			$view->priceCurrency = $view->translate( 'core/client/html/currency', $price->getCurrencyId() );
+			catch( Exception $e ) { ; }
+			
+			$this->_cache = $view;
 		}
-		catch( Exception $e )
-		{
-			$view->quantity = 0;
-			$view->priceValue = '0.00';
-			$view->priceCurrency = '';
-		}
-	
-		$view->priceFormat = $view->translate( 'core/client/html', '%1$s%2$s' );
 		
-		return $view;
+		return $this->_cache;
 	}
 }

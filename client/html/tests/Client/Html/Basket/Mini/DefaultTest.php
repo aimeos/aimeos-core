@@ -65,6 +65,8 @@ class Client_Html_Basket_Mini_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
+		$miniBasket = $this->_object->getView()->miniBasket;
+		$this->assertTrue( $miniBasket instanceof Controller_Frontend_Basket_Interface );
 		$this->assertStringStartsWith( '<div class="arcavias basket-mini">', $output );
 	}
 
