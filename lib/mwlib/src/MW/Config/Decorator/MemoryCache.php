@@ -14,37 +14,12 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Decorator_MemoryCache implements MW_Config_Decorator_Interface
+class MW_Config_Decorator_MemoryCache
+	extends MW_Config_Decorator_Abstract
+	implements MW_Config_Decorator_Interface
 {
-	protected $_object = null;
 	protected $_cache = array();
 	protected $_negCache = array();
-	protected $_prefix;
-
-
-	/**
-	 * Initializes the decorator.
-	 *
-	 * @param MW_Config_Interface $object Config object or decorator
-	 */
-	public function __construct( MW_Config_Interface $object, $prefix = null )
-	{
-		$this->_object = $object;
-
-		if( $prefix === null ) {
-			$prefix = $object->get( 'resource/config/decorator/prefix', 'config:' );
-		}
-		$this->_prefix = $prefix;
-	}
-
-
-	/**
-	 * Clones the objects inside.
-	 */
-	public function __clone()
-	{
-		$this->_object = clone $this->_object;
-	}
 
 
 	/**
@@ -66,7 +41,7 @@ class MW_Config_Decorator_MemoryCache implements MW_Config_Decorator_Interface
 			return $this->_cache[ $name ];
 		}
 
-		$return = $this->_object->get( $name, null );
+		$return = $this->_getObject()->get( $name, null );
 
 		if( $return === null )
 		{
@@ -101,6 +76,8 @@ class MW_Config_Decorator_MemoryCache implements MW_Config_Decorator_Interface
 		{
 			$this->_negCache[ $name ] = true;
 		}
+
+		$this->_getObject()->set( $name, $value );
 	}
 
 }

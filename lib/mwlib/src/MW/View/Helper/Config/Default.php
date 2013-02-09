@@ -26,9 +26,9 @@ class MW_View_Helper_Config_Default
 	 * Initializes the config view helper.
 	 *
 	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param array $config Associative list of key/value pairs
+	 * @param MW_Config_Interface $config Configuration object
 	 */
-	public function __construct( $view, array $config )
+	public function __construct( $view, MW_Config_Interface $config )
 	{
 		parent::__construct( $view );
 
@@ -45,22 +45,6 @@ class MW_View_Helper_Config_Default
 	 */
 	public function transform( $name = null, $default = null )
 	{
-		if( $name === null ) {
-			return $this->_config;
-		}
-
-		$parts = explode( '/', trim( $name, '/' ) );
-		$config = $this->_config;
-
-		foreach( $parts as $part )
-		{
-			if( isset( $config[$part] ) ) {
-				$config = $config[$part];
-			} else {
-				return $default;
-			}
-		}
-
-		return $config;
+		return $this->_config->get( $name, $default );
 	}
 }

@@ -45,7 +45,8 @@ class MW_View_Helper_Config_DefaultTest extends MW_Unittest_Testcase
 			),
 		);
 
-		$this->_object = new MW_View_Helper_Config_Default( $view, $config );
+		$conf = new MW_Config_Array( $config );
+		$this->_object = new MW_View_Helper_Config_Default( $view, $conf );
 	}
 
 

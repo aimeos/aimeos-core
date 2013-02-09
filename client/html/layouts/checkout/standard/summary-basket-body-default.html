@@ -5,6 +5,10 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
+$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
+$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+
 if( isset( $this->standardBasket ) )
 {
 	$price = $this->standardBasket->getPrice();
@@ -45,7 +49,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 
 ?>
 <div class="checkout-standard-summary-basket">
-	<a class="modify" href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index' ); ?>"><?php echo $this->translate( 'client/html', 'Change basket' ); ?></a>
+	<a class="modify" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>"><?php echo $this->translate( 'client/html', 'Change basket' ); ?></a>
 	<h2><?php echo $this->translate( 'client/html', 'Basket' ); ?></h2>
 	<div class="basket">
 		<table>

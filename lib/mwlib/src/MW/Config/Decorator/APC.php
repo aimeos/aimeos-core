@@ -15,9 +15,10 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Decorator_APC implements MW_Config_Decorator_Interface
+class MW_Config_Decorator_APC
+	extends MW_Config_Decorator_Abstract
+	implements MW_Config_Decorator_Interface
 {
-	private $_object;
 	private $_prefix;
 
 
@@ -25,15 +26,16 @@ class MW_Config_Decorator_APC implements MW_Config_Decorator_Interface
 	 * Initializes the decorator.
 	 *
 	 * @param MW_Config_Interface $object Config object or decorator
+	 * @param string $prefix Prefix for keys to distinguish several instances
 	 */
-	public function __construct( MW_Config_Interface $object )
+	public function __construct( MW_Config_Interface $object, $prefix = '' )
 	{
 		if( function_exists( 'apc_store' ) === false ) {
 			throw new MW_Config_Exception( 'APC not available' );
 		}
 
-		$this->_object = $object;
-		$this->_prefix = $object->get( 'resource/config/decorator/prefix', 'config:' );
+		parent::__construct( $object );
+		$this->_prefix = $prefix;
 	}
 
 
@@ -65,7 +67,7 @@ class MW_Config_Decorator_APC implements MW_Config_Decorator_Interface
 		}
 
 		// not cached
-		if( ( $value = $this->_object->get( $path, null ) ) === null )
+		if( ( $value = $this->_getObject()->get( $path, null ) ) === null )
 		{
 			apc_store( '-' . $this->_prefix . $path, null );
 			return $default;
@@ -87,7 +89,7 @@ class MW_Config_Decorator_APC implements MW_Config_Decorator_Interface
 	{
 		$path = trim( $path, '/' );
 
-		$this->_object->set( $path, $value );
+		$this->_getObject()->set( $path, $value );
 
 		apc_store( $this->_prefix . $path, $value );
 	}
