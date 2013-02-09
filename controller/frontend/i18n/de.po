@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core 2013-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-06 21:06+0100\n"
+"POT-Creation-Date: 2013-02-07 12:30+0100\n"
 "PO-Revision-Date: 2013-02-06 20:27+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language: Deutsch\n"
@@ -38,9 +38,10 @@ msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr "Es konnte kein Service \"%1$s\" mit der ID \"%2$s\" erstellt werden"
 
 #: src/Controller/Frontend/Service/Default.php:179
-msgid "No service item for type \"%1$s\" and ID \"%2$\" available"
+#, php-format
+msgid "No service item for type \"%1$s\" and ID \"%2$s\" available"
 msgstr ""
-"Es wurde kein Eintrag für den Service mit der ID \"%2$\" und dem Typ \"%1$s"
+"Es wurde kein Eintrag für den Service mit der ID \"%2$s\" und dem Typ \"%1$s"
 "\" gefunden"
 
 #: src/Controller/Frontend/Service/Factory.php:30
