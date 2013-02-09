@@ -14,7 +14,7 @@ if( isset( $this->detailProductItem ) ) {
 
 ?>
 <?php if( count( $textItems ) > 0 ) : ?>
-<h2 class="tabheader"><?php echo $this->translate( 'core/client/html', 'Description' ); ?></h2>
+<h2 class="tabheader"><?php echo $this->translate( 'client/html', 'Description' ); ?></h2>
 <div class="tabcontent">
 <?php foreach( $textItems as $textItem ) : ?> 
 	<p><?php echo $textItem->getContent(); ?></p>

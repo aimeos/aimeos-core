@@ -15,17 +15,19 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Zend extends MW_Config_Abstract implements MW_Config_Interface
+class MW_Config_Zend
+	extends MW_Config_Abstract
+	implements MW_Config_Interface
 {
-	private $_config = null;
-	private $_paths = array();
+	private $_config;
+	private $_paths;
 
 
 	/**
 	 * Initialize config object with Zend_Config instance
 	 *
 	 * @param Zend_Config $config Configuration object
-	 * @param string $path Filesystem path to the configuration files
+	 * @param array|string $path Filesystem path or list of paths to the configuration files
 	 */
 	public function __construct( Zend_Config $config, $path = array() )
 	{

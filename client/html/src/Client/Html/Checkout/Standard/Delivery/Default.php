@@ -117,15 +117,14 @@ class Client_Html_Checkout_Standard_Delivery_Default
 	{
 		$view = $this->getView();
 
-		// only start if there's something to do
-		if( ( $serviceId = $view->param( 'c-delivery-option', null ) ) === null ) {
-			return;
-		}
-
 		try
 		{
-			$context = $this->_getContext();
+			// only start if there's something to do
+			if( ( $serviceId = $view->param( 'c-delivery-option', null ) ) === null ) {
+				return;
+			}
 
+			$context = $this->_getContext();
 			$serviceCtrl = Controller_Frontend_Service_Factory::createController( $context );
 
 			$attributes = $view->param( 'c-delivery/' . $serviceId, array() );
@@ -155,12 +154,7 @@ class Client_Html_Checkout_Standard_Delivery_Default
 		catch( Exception $e )
 		{
 			$view->standardStepActive = 'delivery';
-
-			$error = array(
-				'An error occured while processing your request. Please re-check your input',
-				$e->getMessage()
-			);
-			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
+			throw $e;
 		}
 	}
 

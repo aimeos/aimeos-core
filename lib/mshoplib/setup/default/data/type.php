@@ -82,6 +82,8 @@ return array (
 	'product/list/type' => array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		array( 'domain' => 'attribute', 'code' => 'config', 'label' => 'Configurable', 'status' => 1 ),
+		array( 'domain' => 'attribute', 'code' => 'variant', 'label' => 'Variant', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'price', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),

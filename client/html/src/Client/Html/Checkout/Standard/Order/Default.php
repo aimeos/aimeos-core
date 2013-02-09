@@ -117,22 +117,21 @@ class Client_Html_Checkout_Standard_Order_Default
 	{
 		$view = $this->getView();
 
-		// only start if there's something to do
-		if( ( $option = $view->param( 'cs-order', null ) ) === null
-			|| $view->get( 'standardStepActive' ) !== null
-		) {
-			return;
-		}
-
 		try
 		{
+			// only start if there's something to do
+			if( ( $option = $view->param( 'cs-order', null ) ) === null
+				|| $view->get( 'standardStepActive' ) !== null
+			) {
+				return;
+			}
+
 			$context = $this->_getContext();
 
-			$controller = Controller_Frontend_Basket_Factory::createController( $context );
 			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 			$orderBaseManager = $orderManager->getSubManager( 'base' );
 
-			$basket = $controller->get();
+			$basket = $orderBaseManager->getSession();
 			$orderBaseManager->store( $basket );
 
 			$orderItem = $orderManager->createItem();
@@ -141,13 +140,17 @@ class Client_Html_Checkout_Standard_Order_Default
 			$orderManager->saveItem( $orderItem );
 
 			$view->orderItem = $orderItem;
+			$context->getSession()->set( 'arcavias/orderid', $orderItem->getId() );
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
+
+			// save again after sub-clients modified it's state
+			$orderManager->saveItem( $orderItem );
 		}
 		catch( Exception $e )
 		{
-			$error = array( 'An error occured while placing your order' );
-			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
+			$view->standardStepActive = 'order';
+			throw $e;
 		}
 	}
 }

@@ -113,24 +113,24 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$configurables = $view->detailProductItem->getRefItems( 'attribute' );
+			$attributes = $view->detailProductItem->getRefItems( 'attribute', null, 'config' );
 
 			$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
 			$search = $attributeManager->createSearch( true );
 			$expr = array(
-				$search->compare( '==', 'attribute.id', array_keys( $configurables ) ),
+				$search->compare( '==', 'attribute.id', array_keys( $attributes ) ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$attributeTypes = array();
-			$attrDomains = array( 'text', 'price' );
+			$attrDomains = array( 'text', 'price', 'media' );
 
 			foreach( $attributeManager->searchItems( $search, $attrDomains ) as $id => $attribute ) {
 				$attributeTypes[ $attribute->getType() ][$id] = $attribute;
 			}
 
-			$view->attributeItems = $attributeTypes;
+			$view->attributeConfigItems = $attributeTypes;
 
 			$this->_cache = $view;
 		}

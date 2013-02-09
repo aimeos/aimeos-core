@@ -7,13 +7,13 @@
 
 ?>
 <div class="arcavias checkout-confirm">
-<?php if( ( $errors = $this->get( 'confirmErrorList', array() ) ) !== array() ) : ?>
+<?php if( isset( $this->confirmErrorList ) ) : ?>
 	<ul class="error-list">
-<?php foreach( $errors as $error ) : ?>
-		<li><?php echo $error; ?></li>
+<?php foreach( (array) $this->confirmErrorList as $errmsg ) : ?>
+		<li><?php echo $errmsg; ?></li>
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-	<h1><?php echo $this->translate( 'core/client/html', 'Confirmation' ); ?></h1>
+	<h1><?php echo $this->translate( 'client/html', 'Confirmation' ); ?></h1>
 <?php echo $this->get( 'confirmBody' ); ?>
 </div>
