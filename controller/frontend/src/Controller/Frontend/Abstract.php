@@ -54,7 +54,7 @@ abstract class Controller_Frontend_Abstract
 		$domain = strtolower( trim( $domain, "/ \n\t\r\0\x0B" ) );
 
 		if( strlen( $domain ) === 0 ) {
-			throw new Controller_Frontend_Exception( 'An empty domain is invalid' );
+			throw new Controller_Frontend_Exception( sprintf( 'An empty domain is invalid' ) );
 		}
 
 		if( !isset( $this->_domainManagers[$domain] ) )
@@ -69,7 +69,7 @@ abstract class Controller_Frontend_Abstract
 			}
 
 			if( ( $domainname = array_shift( $parts ) ) === null ) {
-				throw new Controller_Frontend_Exception( 'An empty domain is invalid' );
+				throw new Controller_Frontend_Exception( sprintf( 'An empty domain is invalid' ) );
 			}
 
 

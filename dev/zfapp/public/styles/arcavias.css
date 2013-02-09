@@ -87,7 +87,7 @@
 
 .catalog-filter button {
 	width: 100%;
-	display: none;
+	display: none !important;
 }
 
 

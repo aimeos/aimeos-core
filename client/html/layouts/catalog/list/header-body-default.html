@@ -5,13 +5,11 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-if( isset( $this->listCatPath ) ) {
-	$catPath = $this->listCatPath;
-}
+$catPath = $this->get( 'listCatPath', array() );
 
 ?>
 <div class="catalog-list-header">
-<?php if( isset( $catPath ) && ( $catItem = end( $catPath ) ) !== false ) : ?>
+<?php if( ( $catItem = end( $catPath ) ) !== false ) : ?>
 	<div class="image-default">
 <?php	foreach( $catItem->getRefItems( 'media', 'header', 'default' ) as $mediaItem ) : ?>
 		<img class="<?php echo $mediaItem->getType(); ?>" src="<?php echo $mediaItem->getUrl(); ?>" />

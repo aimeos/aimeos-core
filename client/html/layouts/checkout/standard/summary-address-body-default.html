@@ -41,107 +41,107 @@ foreach( $this->get( 'addressDeliveryOptional', array() ) as $name ) {
 
 ?>
 <div class="checkout-standard-summary-address">
-	<h2><?php echo $this->translate( 'core/client/html', 'Addresses' ); ?></h2>
+	<h2><?php echo $this->translate( 'client/html', 'Addresses' ); ?></h2>
 	<div class="item-address payment">
 		<div class="header">
-			<h3><?php echo $this->translate( 'core/client/html', 'Billing address' ); ?></h3>
-			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'core/client/html', 'Change' ); ?></a>
+			<h3><?php echo $this->translate( 'client/html', 'Billing address' ); ?></h3>
+			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
 		</div>
 <?php if( $paymentAddr !== array() ) : ?>
 		<ul class="attr-list">
 <?php	if( isset( $paymentAddr['order.base.address.company'] ) && $paymentAddr['order.base.address.company'] != '' ) : ?>
 			<li class="item-company <?php echo ( isset( $paymentCss['order.base.address.company'] ) ? join( ' ', $paymentCss['order.base.address.company'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Company' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Company' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.company']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.salutation'] ) && $paymentAddr['order.base.address.salutation'] != '' ) : ?>
 			<li class="item-salutation <?php echo ( isset( $paymentCss['order.base.address.salutation'] ) ? join( ' ', $paymentCss['order.base.address.salutation'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Salutation' ); ?></span>
-				<span class="value"><?php echo $this->translate( 'core/client/html', $paymentAddr['order.base.address.salutation'] ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Salutation' ); ?></span>
+				<span class="value"><?php echo $this->translate( 'client/html', $paymentAddr['order.base.address.salutation'] ); ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.firstname'] ) && $paymentAddr['order.base.address.firstname'] != '' ) : ?>
 			<li class="item-firstname <?php echo ( isset( $paymentCss['order.base.address.firstname'] ) ? join( ' ', $paymentCss['order.base.address.firstname'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'First name' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'First name' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.firstname']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.lastname'] ) && $paymentAddr['order.base.address.lastname'] != '' ) : ?>
 			<li class="item-lastname <?php echo ( isset( $paymentCss['order.base.address.lastname'] ) ? join( ' ', $paymentCss['order.base.address.lastname'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Last name' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Last name' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.lastname']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.address1'] ) && $paymentAddr['order.base.address.address1'] != '' ) : ?>
 			<li class="item-address1 <?php echo ( isset( $paymentCss['order.base.address.address1'] ) ? join( ' ', $paymentCss['order.base.address.address1'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Street' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Street' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.address1']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.address2'] ) && $paymentAddr['order.base.address.address2'] != '' ) : ?>
 			<li class="item-address2 <?php echo ( isset( $paymentCss['order.base.address.address2'] ) ? join( ' ', $paymentCss['order.base.address.address2'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Additional' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Additional' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.address2']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.address3'] ) && $paymentAddr['order.base.address.address3'] != '' ) : ?>
 			<li class="item-address3 <?php echo ( isset( $paymentCss['order.base.address.address3'] ) ? join( ' ', $paymentCss['order.base.address.address3'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Additional 2' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Additional 2' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.address3']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.postal'] ) && $paymentAddr['order.base.address.postal'] != '' ) : ?>
 			<li class="item-postal <?php echo ( isset( $paymentCss['order.base.address.postal'] ) ? join( ' ', $paymentCss['order.base.address.postal'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Postal code' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Postal code' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.postal']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.city'] ) && $paymentAddr['order.base.address.city'] != '' ) : ?>
 			<li class="item-city <?php echo ( isset( $paymentCss['order.base.address.city'] ) ? join( ' ', $paymentCss['order.base.address.city'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'City' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'City' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.city']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.state'] ) && $paymentAddr['order.base.address.state'] != '' ) : ?>
 			<li class="item-state <?php echo ( isset( $paymentCss['order.base.address.state'] ) ? join( ' ', $paymentCss['order.base.address.state'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'State' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'State' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.state']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.countryid'] ) && $paymentAddr['order.base.address.countryid'] != '' ) : ?>
 			<li class="item-countryid <?php echo ( isset( $paymentCss['order.base.address.countryid'] ) ? join( ' ', $paymentCss['order.base.address.countryid'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Country' ); ?></span>
-				<span class="value"><?php echo $this->translate( 'core/client/html/country', $paymentAddr['order.base.address.countryid'] ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Country' ); ?></span>
+				<span class="value"><?php echo $this->translate( 'client/html/country', $paymentAddr['order.base.address.countryid'] ); ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.languageid'] ) && $paymentAddr['order.base.address.languageid'] != '' ) : ?>
 			<li class="item-languageid <?php echo ( isset( $paymentCss['order.base.address.languageid'] ) ? join( ' ', $paymentCss['order.base.address.languageid'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Language' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Language' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.languageid']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.email'] ) && $paymentAddr['order.base.address.email'] != '' ) : ?>
 			<li class="item-email <?php echo ( isset( $paymentCss['order.base.address.email'] ) ? join( ' ', $paymentCss['order.base.address.email'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'E-Mail' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'E-Mail' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.email']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.telephone'] ) && $paymentAddr['order.base.address.telephone'] != '' ) : ?>
 			<li class="item-telephone <?php echo ( isset( $paymentCss['order.base.address.telephone'] ) ? join( ' ', $paymentCss['order.base.address.telephone'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Telephone' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Telephone' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.telephone']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.telefax'] ) && $paymentAddr['order.base.address.telefax'] != '' ) : ?>
 			<li class="item-telefax <?php echo ( isset( $paymentCss['order.base.address.telefax'] ) ? join( ' ', $paymentCss['order.base.address.telefax'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Fax' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Fax' ); ?></span>
 				<span class="item-telefax"><?php echo $paymentAddr['order.base.address.telefax']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['order.base.address.website'] ) && $paymentAddr['order.base.address.website'] != '' ) : ?>
 			<li class="item-website <?php echo ( isset( $paymentCss['order.base.address.website'] ) ? join( ' ', $paymentCss['order.base.address.website'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Website' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Website' ); ?></span>
 				<span class="value"><?php echo $paymentAddr['order.base.address.website']; ?></span>
 			</li>
 <?php	endif; ?>
@@ -149,104 +149,104 @@ foreach( $this->get( 'addressDeliveryOptional', array() ) as $name ) {
 <?php endif; ?>		
 	</div><div class="item-address delivery">
 		<div class="header">
-			<h3><?php echo $this->translate( 'core/client/html', 'Delivery address' ); ?></h3>
-			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'core/client/html', 'Change' ); ?></a>
+			<h3><?php echo $this->translate( 'client/html', 'Delivery address' ); ?></h3>
+			<a class="modify" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => 'address' ) ); ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
 		</div>
 <?php if( $deliveryAddr !== array() ) : ?>
 		<ul class="attr-list">
 <?php	if( isset( $deliveryAddr['order.base.address.company'] ) && $deliveryAddr['order.base.address.company'] != '' ) : ?>
 			<li class="item-company <?php echo ( isset( $deliveryCss['order.base.address.company'] ) ? join( ' ', $deliveryCss['order.base.address.company'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Company' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Company' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.company']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.salutation'] ) && $deliveryAddr['order.base.address.salutation'] != '' ) : ?>
 			<li class="item-salutation <?php echo ( isset( $deliveryCss['order.base.address.salutation'] ) ? join( ' ', $deliveryCss['order.base.address.salutation'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Salutation' ); ?></span>
-				<span class="value"><?php echo $this->translate( 'core/client/html', $deliveryAddr['order.base.address.salutation'] ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Salutation' ); ?></span>
+				<span class="value"><?php echo $this->translate( 'client/html', $deliveryAddr['order.base.address.salutation'] ); ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.firstname'] ) && $deliveryAddr['order.base.address.firstname'] != '' ) : ?>
 			<li class="item-firstname <?php echo ( isset( $deliveryCss['order.base.address.firstname'] ) ? join( ' ', $deliveryCss['order.base.address.firstname'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'First name' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'First name' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.firstname']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.lastname'] ) && $deliveryAddr['order.base.address.lastname'] != '' ) : ?>
 			<li class="item-lastname <?php echo ( isset( $deliveryCss['order.base.address.lastname'] ) ? join( ' ', $deliveryCss['order.base.address.lastname'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Last name' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Last name' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.lastname']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.address1'] ) && $deliveryAddr['order.base.address.address1'] != '' ) : ?>
 			<li class="item-address1 <?php echo ( isset( $deliveryCss['order.base.address.address1'] ) ? join( ' ', $deliveryCss['order.base.address.address1'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Street' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Street' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.address1']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.address2'] ) && $deliveryAddr['order.base.address.address2'] != '' ) : ?>
 			<li class="item-address2 <?php echo ( isset( $deliveryCss['order.base.address.address2'] ) ? join( ' ', $deliveryCss['order.base.address.address2'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Additional' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Additional' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.address2']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.address3'] ) && $deliveryAddr['order.base.address.address3'] != '' ) : ?>
 			<li class="item-address3 <?php echo ( isset( $deliveryCss['order.base.address.address3'] ) ? join( ' ', $deliveryCss['order.base.address.address3'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Additional 2' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Additional 2' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.address3']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.postal'] ) && $deliveryAddr['order.base.address.postal'] != '' ) : ?>
 			<li class="item-postal <?php echo ( isset( $deliveryCss['order.base.address.postal'] ) ? join( ' ', $deliveryCss['order.base.address.postal'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Postal code' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Postal code' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.postal']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.city'] ) && $deliveryAddr['order.base.address.city'] != '' ) : ?>
 			<li class="item-city <?php echo ( isset( $deliveryCss['order.base.address.city'] ) ? join( ' ', $deliveryCss['order.base.address.city'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'City' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'City' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.city']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.state'] ) && $deliveryAddr['order.base.address.state'] != '' ) : ?>
 			<li class="item-state <?php echo ( isset( $deliveryCss['order.base.address.company'] ) ? join( ' ', $deliveryCss['order.base.address.company'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'State' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'State' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.state']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.countryid'] ) && $deliveryAddr['order.base.address.countryid'] != '' ) : ?>
 			<li class="item-countryid <?php echo ( isset( $deliveryCss['order.base.address.countryid'] ) ? join( ' ', $deliveryCss['order.base.address.countryid'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Country' ); ?></span>
-				<span class="value"><?php echo $this->translate( 'core/client/html/country', $deliveryAddr['order.base.address.countryid'] ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Country' ); ?></span>
+				<span class="value"><?php echo $this->translate( 'client/html/country', $deliveryAddr['order.base.address.countryid'] ); ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.languageid'] ) && $deliveryAddr['order.base.address.languageid'] != '' ) : ?>
 			<li class="item-languageid <?php echo ( isset( $deliveryCss['order.base.address.languageid'] ) ? join( ' ', $deliveryCss['order.base.address.languageid'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Language' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Language' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.languageid']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.email'] ) && $deliveryAddr['order.base.address.email'] != '' ) : ?>
 			<li class="item-email <?php echo ( isset( $deliveryCss['order.base.address.email'] ) ? join( ' ', $deliveryCss['order.base.address.email'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'E-Mail' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'E-Mail' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.email']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.telephone'] ) && $deliveryAddr['order.base.address.telephone'] != '' ) : ?>
 			<li class="item-telephone <?php echo ( isset( $deliveryCss['order.base.address.telephone'] ) ? join( ' ', $deliveryCss['order.base.address.telephone'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Telephone' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Telephone' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.telephone']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.telefax'] ) && $deliveryAddr['order.base.address.telefax'] != '' ) : ?>
 			<li class="item-telefax <?php echo ( isset( $deliveryCss['order.base.address.telefax'] ) ? join( ' ', $deliveryCss['order.base.address.telefax'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Fax' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Fax' ); ?></span>
 				<span class="item-telefax"><?php echo $deliveryAddr['order.base.address.telefax']; ?></span>
 			</li>
 <?php	endif; ?>
 <?php	if( isset( $deliveryAddr['order.base.address.website'] ) && $deliveryAddr['order.base.address.website'] != '' ) : ?>
 			<li class="item-website <?php echo ( isset( $deliveryCss['order.base.address.website'] ) ? join( ' ', $deliveryCss['order.base.address.website'] ) : '' ); ?>">
-				<span class="name"><?php echo $this->translate( 'core/client/html', 'Website' ); ?></span>
+				<span class="name"><?php echo $this->translate( 'client/html', 'Website' ); ?></span>
 				<span class="value"><?php echo $deliveryAddr['order.base.address.website']; ?></span>
 			</li>
 <?php	endif; ?>

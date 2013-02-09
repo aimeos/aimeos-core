@@ -106,8 +106,8 @@ class Controller_Frontend_Basket_Default
 			}
 			else if( $requireVariant === true )
 			{
-				$string = 'No product found for ID "%1$s" and variant attribute IDs "%2$s"';
-				$msg = sprintf( $string, $prodid, join( ',', $variantAttributeIds ) );
+				$ids = join( ',', $variantAttributeIds );
+				$msg = sprintf( 'No product found for ID "%1$s" and variant attribute IDs "%2$s"', $prodid, $ids );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 		}
@@ -420,7 +420,7 @@ class Controller_Frontend_Basket_Default
 
 		if( count( $errors ) > 0 )
 		{
-			$msg = 'Invalid address properties, please check your input';
+			$msg = sprintf( 'Invalid address properties, please check your input' );
 			throw new Controller_Frontend_Basket_Exception( $msg, 0, null, $errors );
 		}
 	}
@@ -453,11 +453,11 @@ class Controller_Frontend_Basket_Default
 
 		if( count( $attrItems ) !== count( $attributeIds ) )
 		{
-			$str = 'Available attribute IDs "%1$s" does not match the given attribute IDs "%2$s"';
-			$actual = join( ',', array_keys( $attrItems ) );
 			$expected = join( ',', $attributeIds );
+			$actual = join( ',', array_keys( $attrItems ) );
+			$msg = sprintf( 'Available attribute IDs "%1$s" does not match the given attribute IDs "%2$s"', $actual, $expected );
 
-			throw new Controller_Frontend_Basket_Exception( sprintf( $str, $actual, $expected ) );
+			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
 		return $attrItems;
@@ -489,7 +489,7 @@ class Controller_Frontend_Basket_Default
 
 			if( ( $listTypeItem = reset( $listTypeItems ) ) === false )
 			{
-				$msg = sprintf( 'No list type for domain "%1$S" and code "%2$s" found', 'attribute', 'default' );
+				$msg = sprintf( 'No list type for domain "%1$s" and code "%2$s" found', 'attribute', 'default' );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 

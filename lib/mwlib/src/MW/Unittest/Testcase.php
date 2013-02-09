@@ -111,4 +111,12 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 			parent::assertThat($actual, parent::isEmpty(), $message);
 		}
 	}
+	
+	
+	/**
+	 * Empty test for compatibility with phpunit 3.4.
+	 */
+	public function testEmpty()
+	{
+	}
 }

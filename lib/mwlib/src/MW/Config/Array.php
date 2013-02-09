@@ -38,7 +38,7 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 
 		$this->_config = $config;
 
-		$this->_paths = (array)$paths;
+		$this->_paths = (array) $paths;
 	}
 
 
@@ -128,7 +128,7 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 	 * @param array $left Array to be merged into
 	 * @param array $right Array to merge in
 	 */
- 	protected function _merge( array &$left, array $right )
+	protected function _merge( array &$left, array $right )
 	{
 		$match = false;
 		foreach( $left as $lkey => $lvalue )
@@ -174,7 +174,7 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 		return null;
 	}
 
-	
+
 	/**
 	 * Finds files within a configuration path
 	 *

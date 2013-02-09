@@ -121,11 +121,8 @@ class Client_Html_Checkout_Standard_Address_Default
 		}
 		catch( Exception $e )
 		{
-			$view = $this->getView();
-			$view->standardStepActive = 'address';
-
-			$error = array( 'An error occured while processing your request. Please re-check your input' );
-			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
+			$this->getView()->standardStepActive = 'address';
+			throw $e;
 		}
 
 	}

@@ -50,6 +50,14 @@ class MShop_Catalog_Manager_Default
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'parentid' => array(
+			'code'=>'catalog.parentid',
+			'internalcode'=>'mcat."parentid"',
+			'label'=>'Catalog node parentid',
+			'type'=> 'integer',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
 		'level' => array(
 			'code'=>'catalog.level',
 			'internalcode'=>'mcat."level"',
@@ -100,63 +108,6 @@ class MShop_Catalog_Manager_Default
 			'code'=>'catalog.editor',
 			'internalcode'=>'mcat."editor"',
 			'label'=>'Catalog editor',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-	);
-
-	private $_siteSearchConfig = array(
-		'catalog.site.id'=> array(
-			'code'=>'catalog.site.id',
-			'internalcode'=>'mcatsi."id"',
-			'internaldeps'=> array( 'LEFT JOIN "mshop_catalog_site" AS mcatsi ON ( mcat."id" = mcatsi."parentid" )' ),
-			'label'=>'Catalog site ID',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.site.parentid'=> array(
-			'code'=>'catalog.site.parentid',
-			'internalcode'=>'mcatsi."parentid"',
-			'label'=>'Catalog site parent ID',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.site.siteid'=> array(
-			'code'=>'catalog.site.siteid',
-			'internalcode'=>'mcatsi."siteid"',
-			'label'=>'Catalog site site ID',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.site.value'=> array(
-			'code'=>'catalog.site.value',
-			'internalcode'=>'mcatsi."value"',
-			'label'=>'Catalog site value',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.site.ctime'=> array(
-			'label' => 'Catalog site creation time',
-			'code' => 'catalog.site.ctime',
-			'internalcode' => 'mcatsi."ctime"',
-			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'catalog.site.mtime'=> array(
-			'label' => 'Catalog site modification time',
-			'code' => 'catalog.site.mtime',
-			'internalcode' => 'mcatsi."mtime"',
-			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'catalog.site.editor'=> array(
-			'code'=>'catalog.site.editor',
-			'internalcode'=>'mcatsi."editor"',
-			'label'=>'Catalog site editor',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
@@ -420,7 +371,7 @@ class MShop_Catalog_Manager_Default
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
 
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->insertNode($node, $parentId, $refId );
+		$this->_createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
 		$this->_updateUsage( $node->getId(), true );
 		$this->_commit();
 	}
@@ -543,9 +494,10 @@ class MShop_Catalog_Manager_Default
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MShop_Catalog_Item_Interface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
 	{
 		$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
 
@@ -553,7 +505,8 @@ class MShop_Catalog_Manager_Default
 		{
 			try
 			{
-				$node = $this->_createTreeManager( $siteId )->getNode( $id, $level );
+				$treeMgr = $this->_createTreeManager( $siteId );
+				$node = $treeMgr->getNode( $id, $level, $criteria );
 
 				$listItems = $listItemMap = $refIdMap = array();
 				$nodeMap = $this->_getNodeMap( $node );
@@ -609,8 +562,6 @@ class MShop_Catalog_Manager_Default
 			case 'list':
 				$typeManager = $this->_getTypeManager( 'catalog', 'list/type', null, $this->_getListTypeSearchConfig() );
 				return $this->_getListManager( 'catalog', $manager, $name, $this->_getListSearchConfig(), $typeManager );
-			case 'site':
-				return $this->_getSiteManager( 'catalog', $manager, $name, $this->_siteSearchConfig );
 			default:
 				return $this->_getSubManager( 'catalog', $manager, $name );
 		}

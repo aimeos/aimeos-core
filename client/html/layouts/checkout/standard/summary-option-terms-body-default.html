@@ -7,11 +7,11 @@
 
 ?>
 <div class="checkout-standard-summary-option-terms">
-	<h3><?php echo $this->translate( 'core/client/html', 'Terms and conditions' ); ?></h3>
+	<h3><?php echo $this->translate( 'client/html', 'Terms and conditions' ); ?></h3>
 	<div class="single <?php echo ( $this->get( 'termsError', false ) === true ? 'error' : '' ); ?>">
 		<input type="hidden" name="<?php echo $this->formparam( array( 'cs-option-terms' ) ); ?>" value="1" />
 		<input type="checkbox" name="<?php echo $this->formparam( array( 'cs-option-terms-value' ) ); ?>" value="1" <?php echo ( $this->param( 'cs-option-terms-value', null ) == 1 ? 'checked="checked"' : '' ); ?> />
-		<p><?php echo $this->translate( 'core/client/html', 'I accept the <a href="">terms and conditions</a> and <a href="">privacy policy</a>' ); ?></p>
+		<p><?php echo $this->translate( 'client/html', 'I accept the <a href="">terms and conditions</a> and <a href="">privacy policy</a>' ); ?></p>
 	</div>
 <?php echo $this->get( 'termsBody' ); ?>
 </div>
