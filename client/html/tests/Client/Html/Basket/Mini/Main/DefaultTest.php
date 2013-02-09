@@ -71,6 +71,23 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<div class="basket-mini-main">', $output );
 	}
+	
+	
+	public function testGetBodyAddedOneProduct()
+	{
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		
+		$cneOrderItem = $this->_getOrderProductItem( 'CNE', 9 );
+		$view = $this->_object->getView();
+		$view->miniBasket = $controller->get();
+		
+		$view->miniBasket->addProduct( $cneOrderItem );
+		
+		$output = $this->_object->getBody();
+		$this->assertStringStartsWith( '<div class="basket-mini-main">', $output );
+		$this->assertRegExp( '#9 articles#smU', $output );
+		$this->assertRegExp( '#40.50EUR#smU', $output );
+	}
 
 
 	public function testGetSubClientInvalid()
@@ -84,5 +101,26 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( '$$$', '$$$' );
+	}
+	
+	
+	protected function _getOrderProductItem( $code, $quantity )
+	{
+		$manager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' )->getSubManager( 'product' );
+		$search = $manager->createSearch();
+		
+		$expr = array(
+			$search->compare( '==', 'order.base.product.prodcode', $code ),
+			$search->compare( '==', 'order.base.product.quantity', $quantity )
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		
+		$items = $manager->searchItems( $search );
+	
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( sprintf( 'No order product item with code "%1$s" and quantity "%2$s" found', $code, $quantity ) );
+		}
+	
+		return $item;
 	}
 }

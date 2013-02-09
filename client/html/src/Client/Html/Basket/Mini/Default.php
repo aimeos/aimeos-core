@@ -66,6 +66,7 @@ class Client_Html_Basket_Mini_Default
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
+			echo "WTFEWFFFFF\n".$e."\n";
 		}
 		
 		$tplconf = 'client/html/basket/mini/default/template-body';
@@ -135,12 +136,6 @@ class Client_Html_Basket_Mini_Default
 	 */
 	public function process()
 	{
-		$view = $this->getView();
-
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
-
-		$view->miniBasket = $controller->get();
-
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
 	
@@ -155,7 +150,7 @@ class Client_Html_Basket_Mini_Default
 		if( !isset( $this->_cache ) )
 		{
 			$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
-			$view->miniBasket = $this->_controller->get();
+			$view->miniBasket = $controller->get();
 			
 			$this->_cache = $view;
 		}

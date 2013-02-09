@@ -66,7 +66,7 @@ class Client_Html_Basket_Mini_DefaultTest extends MW_Unittest_Testcase
 	{
 		$output = $this->_object->getBody();
 		$miniBasket = $this->_object->getView()->miniBasket;
-		$this->assertTrue( $miniBasket instanceof Controller_Frontend_Basket_Interface );
+		$this->assertTrue( $miniBasket instanceof MShop_Order_Item_Base_Interface );
 		$this->assertStringStartsWith( '<div class="arcavias basket-mini">', $output );
 	}
 
@@ -89,20 +89,5 @@ class Client_Html_Basket_Mini_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( '$$$', '$$$' );
-	}
-
-
-	protected function _getProductItem( $code )
-	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
-		$items = $manager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
-		}
-
-		return $item;
 	}
 }

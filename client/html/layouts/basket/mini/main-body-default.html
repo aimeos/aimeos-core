@@ -6,13 +6,13 @@
  */
 
 try{
-	$view->priceValue = $price->getValue();
-	$view->miniPriceCurrency = $view->translate( 'core/client/html/currency', $price->getCurrencyId() );
+	$this->miniPriceValue = $this->priceItem->getValue();
+	$this->miniPriceCurrency = $this->translate( 'core/client/html/currency', $this->priceItem->getCurrencyId() );
 }
 catch( Exception $e ){ ; }
 ?>
 <div class="basket-mini-main">
-	<?php printf( $this->translate( 'client/html', '%1$d article - %2$s%3$s', '%1$d articles - %2$s%3$s', $this->get( 'miniQuantity', 0 ) ), $this->get( 'miniQuantity', 0 ), $this->number( $this->get( 'miniPriceValue', '0.00' ), $this->get( 'miniPriceCurrency', '' ) ) ); ?>
+	<?php printf( $this->translate( 'client/html', '%1$d article - %2$s%3$s', '%1$d articles - %2$s%3$s', $this->get( 'miniQuantity', 0 ) ), $this->get( 'miniQuantity', 0 ), $this->number( $this->get( 'miniPriceValue', '0.00' ) ), $this->get( 'miniPriceCurrency', '' ) ); ?>
 </div>
 
 <?php echo $this->get( 'mainBody' ); ?>
