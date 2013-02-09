@@ -1,0 +1,524 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-09 17:59+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/MAdmin/Job/Manager/Default.php:134
+#: src/MAdmin/Log/Manager/Default.php:126
+#: src/MShop/Order/Manager/Base/Default.php:251
+#: src/MShop/Order/Manager/Base/Service/Default.php:176
+#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:151
+#: src/MShop/Order/Manager/Base/Product/Default.php:242
+#: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:152
+#: src/MShop/Order/Manager/Base/Address/Default.php:244
+#: src/MShop/Order/Manager/Status/Default.php:122
+#: src/MShop/Order/Manager/Default.php:165
+#: src/MShop/Supplier/Manager/Default.php:349
+#: src/MShop/Locale/Manager/Site/Default.php:157
+#: src/MShop/Locale/Manager/Default.php:229
+#: src/MShop/Locale/Manager/Language/Default.php:112
+#: src/MShop/Locale/Manager/Currency/Default.php:116
+#: src/MShop/Service/Manager/Default.php:429
+#: src/MShop/Customer/Manager/Default.php:666
+#: src/MShop/Attribute/Manager/Default.php:398
+#: src/MShop/Common/Manager/Type/Default.php:107
+#: src/MShop/Common/Manager/List/Default.php:94
+#: src/MShop/Common/Manager/Address/Default.php:146
+#: src/MShop/Text/Manager/Default.php:360
+#: src/MShop/Catalog/Manager/Index/Default.php:261
+#: src/MShop/Catalog/Manager/Default.php:409
+#: src/MShop/Product/Manager/Stock/Warehouse/Default.php:120
+#: src/MShop/Product/Manager/Stock/Default.php:116
+#: src/MShop/Product/Manager/Tag/Default.php:175
+#: src/MShop/Product/Manager/Default.php:395
+#: src/MShop/Media/Manager/Default.php:437
+#: src/MShop/Plugin/Manager/Default.php:293
+#: src/MShop/Price/Manager/Default.php:458
+#, php-format
+msgid "Object does not implement \"%1$s\""
+msgstr ""
+
+#: src/MAdmin/Job/Manager/Default.php:237
+#, php-format
+msgid "No job with ID \"%1$s\" found"
+msgstr ""
+
+#: src/MAdmin/Job/Manager/Default.php:274
+#: src/MAdmin/Job/Manager/Default.php:281
+#: src/MShop/Locale/Manager/Site/Default.php:313
+#: src/MShop/Service/Manager/Default.php:520
+#, php-format
+msgid "Invalid JSON in \"%1$s\" for ID \"%2$s\": \"%3$s\""
+msgstr ""
+
+#: src/MAdmin/Job/Manager/Factory.php:36 src/MAdmin/Log/Manager/Factory.php:36
+#: src/MShop/Order/Manager/Factory.php:40
+#: src/MShop/Supplier/Manager/Factory.php:40
+#: src/MShop/Locale/Manager/Factory.php:39
+#: src/MShop/Service/Manager/Abstract.php:30
+#: src/MShop/Service/Manager/Factory.php:40
+#: src/MShop/Customer/Manager/Factory.php:40
+#: src/MShop/Attribute/Manager/Factory.php:40
+#: src/MShop/Common/Factory/Abstract.php:36
+#: src/MShop/Common/Manager/Abstract.php:461
+#: src/MShop/Text/Manager/Factory.php:40
+#: src/MShop/Catalog/Manager/Factory.php:39
+#: src/MShop/Product/Manager/Factory.php:40
+#: src/MShop/Media/Manager/Factory.php:40
+#: src/MShop/Plugin/Manager/Abstract.php:30
+#: src/MShop/Plugin/Manager/Factory.php:40
+#: src/MShop/Price/Manager/Factory.php:40
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr ""
+
+#: src/MAdmin/Common/Manager/Abstract.php:36
+#: src/MShop/Common/Manager/Abstract.php:192
+#: src/MShop/Common/Manager/Abstract.php:250
+#: src/MShop/Common/Manager/Abstract.php:303
+#, php-format
+msgid "Invalid domain name \"%1$s\""
+msgstr ""
+
+#: src/MAdmin/Common/Manager/Abstract.php:44
+#: src/MShop/Common/Manager/Abstract.php:200
+#: src/MShop/Common/Manager/Abstract.php:258
+#: src/MShop/Common/Manager/Abstract.php:312
+#: src/MShop/Common/Manager/Abstract.php:351
+#: src/MShop/Product/Manager/Tag/Default.php:377
+#, php-format
+msgid "Invalid manager implementation name \"%1$s\""
+msgstr ""
+
+#: src/MAdmin/Common/Manager/Abstract.php:54
+#: src/MShop/Service/Manager/Abstract.php:36
+#: src/MShop/Service/Manager/Default.php:585
+#: src/MShop/Common/Factory/Abstract.php:42
+#: src/MShop/Common/Factory/Abstract.php:105
+#: src/MShop/Common/Manager/Abstract.php:123
+#: src/MShop/Common/Manager/Abstract.php:207
+#: src/MShop/Common/Manager/Abstract.php:265
+#: src/MShop/Common/Manager/Abstract.php:322
+#: src/MShop/Common/Manager/Abstract.php:358
+#: src/MShop/Common/Manager/Abstract.php:467
+#: src/MShop/Product/Manager/Tag/Default.php:384
+#: src/MShop/Plugin/Manager/Abstract.php:36
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr ""
+
+#: src/MAdmin/Common/Manager/Abstract.php:60
+#: src/MShop/Service/Manager/Default.php:592
+#: src/MShop/Common/Manager/Abstract.php:226
+#: src/MShop/Common/Manager/Abstract.php:328
+#: src/MShop/Common/Manager/Abstract.php:365
+#: src/MShop/Product/Manager/Tag/Default.php:394
+#: src/MShop/Plugin/Manager/Default.php:252
+#, php-format
+msgid "Class \"%1$s\" doesn't implement \"%2$s\""
+msgstr ""
+
+#: src/MAdmin/Log/Manager/Default.php:231
+#, php-format
+msgid "No log entry with ID \"%1$s\" found"
+msgstr ""
+
+#: src/MShop/Order/Item/Abstract.php:254
+#: src/MShop/Customer/Item/Default.php:316
+#: src/MShop/Common/Item/Abstract.php:98
+#, php-format
+msgid "Invalid date format \"%1$s\""
+msgstr ""
+
+#: src/MShop/Order/Item/Abstract.php:270
+#, php-format
+msgid "Invalid order delivery status \"%1$s\""
+msgstr ""
+
+#: src/MShop/Order/Item/Abstract.php:286
+#, php-format
+msgid "Invalid order payment status \"%1$s\""
+msgstr ""
+
+#: src/MShop/Order/Item/Abstract.php:306
+#, php-format
+msgid "Invalid order type \"%1$s\""
+msgstr ""
+
+#: src/MShop/Order/Item/Abstract.php:322
+#, php-format
+msgid "Invalid email flags \"%1$s\""
+msgstr ""
+
+#: src/MShop/Order/Item/Abstract.php:338
+#: src/MShop/Order/Item/Base/Abstract.php:65
+#, php-format
+msgid "Invalid flags \"%1$s\" given"
+msgstr ""
+
+#: src/MShop/Order/Item/Base/Default.php:236
+#, php-format
+msgid "No product for key \"%1$d\" found"
+msgstr ""
+
+#: src/MShop/Order/Item/Base/Default.php:285
+#, php-format
+msgid "Found no order product item on position \"%1$d\""
+msgstr ""
+
+#: src/MShop/Order/Item/Base/Default.php:318
+#, php-format
+msgid "No address for domain \"%1$s\" available"
+msgstr ""
+
+#: src/MShop/Order/Item/Base/Default.php:387
+#, php-format
+msgid "No service for type \"%1$s\" available"
+msgstr ""
+
+#: src/MShop/Order/Item/Base/Product/Abstract.php:40
+#, php-format
+msgid "Invalid flags \"%1$d\" given"
+msgstr ""
+
+#: src/MShop/Order/Item/Base/Address/Abstract.php:45
+#, php-format
+msgid "Invalid address type \"%1$s\""
+msgstr ""
+
+#: src/MShop/Order/Manager/Base/Abstract.php:55
+#, php-format
+msgid "Invalid lock value \"%1$d\""
+msgstr ""
+
+#: src/MShop/Order/Manager/Base/Default.php:396
+#, php-format
+msgid "%1$s :: Invalid serialized order: \"%2$s\""
+msgstr ""
+
+#: src/MShop/Order/Manager/Base/Default.php:491
+#, php-format
+msgid "No order base with ID \"%1$s\" found"
+msgstr ""
+
+#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:291
+#, php-format
+msgid "Invalid JSON value for order service attribute \"%1$d\""
+msgstr ""
+
+#: src/MShop/Locale/Item/Default.php:138
+#: src/MShop/Product/Item/Tag/Default.php:57
+#, php-format
+msgid "Invalid language ID \"%1$s\""
+msgstr ""
+
+#: src/MShop/Locale/Item/Default.php:167
+#: src/MShop/Locale/Item/Currency/Default.php:95
+#, php-format
+msgid "Invalid three letter currency code \"%1$s\""
+msgstr ""
+
+#: src/MShop/Locale/Item/Language/Default.php:98
+#, php-format
+msgid "Invalid ISO language code \"%1$s\""
+msgstr ""
+
+#: src/MShop/Locale/Manager/Site/Default.php:161
+#, php-format
+msgid "Unable to save newly created nodes, use insert method instead"
+msgstr ""
+
+#: src/MShop/Locale/Manager/Default.php:111
+#, php-format
+msgid "No site for code \"%1$s\" found"
+msgstr ""
+
+#: src/MShop/Locale/Manager/Default.php:429
+#, php-format
+msgid "No locale item found for site \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Manager/Abstract.php:42
+#: src/MShop/Common/Factory/Abstract.php:48
+#: src/MShop/Common/Factory/Abstract.php:111
+#: src/MShop/Common/Manager/Abstract.php:281
+#: src/MShop/Common/Manager/Abstract.php:473
+#: src/MShop/Plugin/Manager/Abstract.php:42
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr ""
+
+#: src/MShop/Service/Manager/Default.php:568
+#: src/MShop/Common/Manager/Abstract.php:110
+#: src/MShop/Common/Manager/Abstract.php:116
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Manager/Default.php:573
+#, php-format
+msgid "No service provider available in \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Manager/Default.php:578
+#, php-format
+msgid "Invalid provider name \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:154
+#: src/MShop/Service/Provider/Payment/Abstract.php:53
+#: src/MShop/Service/Provider/Payment/Abstract.php:64
+#: src/MShop/Service/Provider/Payment/Abstract.php:75
+#, php-format
+msgid "Method is not available: \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:226
+#, php-format
+msgid "Required attribute \"%1$s\" is missing"
+msgstr ""
+
+#: src/MShop/Service/Provider/Abstract.php:262
+#, php-format
+msgid "Invalid type \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:121
+#: src/MShop/Service/Provider/Delivery/Default.php:151
+#: src/MShop/Service/Provider/Delivery/Default.php:357
+#, php-format
+msgid "Missing parameter \"%1$s\" in service config"
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:203
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:236
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:283
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:321
+#, php-format
+msgid "No payment transaction ID available for order ID \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:658
+#, php-format
+msgid "No service payment provider for order base ID \"%1$s\" found"
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:201
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:207
+#, php-format
+msgid "Sending order failed with HTTP status \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:238
+#, php-format
+msgid "Loading XML response failed \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:243
+#, php-format
+msgid "Schema validation with \"%1$s\" failed"
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:250
+#, php-format
+msgid "XML was rejected with code \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:262
+#, php-format
+msgid "Unknown order ID \"%1$s\" in response for order \"%2$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:269
+#, php-format
+msgid "Order \"%1$s\" was rejected with code \"%2$s\": %3$s"
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:292
+#, php-format
+msgid "No order base item for order ID \"%1$d\" available"
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:323
+#, php-format
+msgid "Schema validation with \"%1$s\" failed. domXML: \"%2$s\"."
+msgstr ""
+
+#: src/MShop/Service/Provider/Delivery/Default.php:350
+#, php-format
+msgid "Invalid date format for purchase date: \"%1$s\""
+msgstr ""
+
+#: src/MShop/Common/Item/Abstract.php:81
+#, php-format
+msgid "Given ID \"%1$s\" isn't the same as \"%2$s\""
+msgstr ""
+
+#: src/MShop/Common/Item/Address/Abstract.php:434
+#, php-format
+msgid "Invalid email address: \"%1$s\""
+msgstr ""
+
+#: src/MShop/Common/Item/Address/Abstract.php:488
+#, php-format
+msgid "Invalid web site URL: \"%1$s\""
+msgstr ""
+
+#: src/MShop/Common/Item/Address/Abstract.php:570
+#, php-format
+msgid "Invalid address salutation \"%1$s\""
+msgstr ""
+
+#: src/MShop/Common/Manager/Abstract.php:68
+#, php-format
+msgid "No new record ID available"
+msgstr ""
+
+#: src/MShop/Common/Manager/Abstract.php:127
+#, php-format
+msgid "Unable to create manager by using \"%1$s\""
+msgstr ""
+
+#: src/MShop/Common/Manager/Abstract.php:534
+#, php-format
+msgid "Invalid manager name \"%1$s\""
+msgstr ""
+
+#: src/MShop/Common/Manager/Abstract.php:679
+#, php-format
+msgid "Unable to retrieve items for domain \"%1$s\": "
+msgstr ""
+
+#: src/MShop/Common/Manager/Abstract.php:703
+#, php-format
+msgid "No item for key \"%1$s\" and ID \"%2$s\" found"
+msgstr ""
+
+#: src/MShop/Common/Manager/Type/Default.php:45
+#, php-format
+msgid "Configuration for \"%1$s\" is missing"
+msgstr ""
+
+#: src/MShop/Common/Manager/Type/Default.php:60
+#: src/MShop/Common/Manager/Type/Default.php:64
+#: src/MShop/Common/Manager/List/Default.php:56
+#: src/MShop/Common/Manager/List/Default.php:60
+#: src/MShop/Common/Manager/Address/Default.php:56
+#: src/MShop/Common/Manager/Address/Default.php:60
+#, php-format
+msgid "Search configuration for \"%1$s\" is invalid"
+msgstr ""
+
+#: src/MShop/Common/Manager/Type/Default.php:203
+#, php-format
+msgid "No type item found for id \"%1$s\""
+msgstr ""
+
+#: src/MShop/Common/Manager/Decorator/Sitecheck.php:54
+#, php-format
+msgid "Unable to delete item from different site"
+msgstr ""
+
+#: src/MShop/Common/Manager/List/Default.php:202
+#, php-format
+msgid "No list item found for key \"%1$s\" and ID \"%1$s\""
+msgstr ""
+
+#: src/MShop/Catalog/Manager/Index/Attribute/Default.php:292
+#, php-format
+msgid "No list type for attribute item with ID \"%1$s\""
+msgstr ""
+
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:311
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:497
+#, php-format
+msgid "No list type for text item with ID \"%1$s\""
+msgstr ""
+
+#: src/MShop/Catalog/Manager/Index/Price/Default.php:287
+#, php-format
+msgid "No list type for price item with ID \"%1$s\""
+msgstr ""
+
+#: src/MShop/Catalog/Manager/Default.php:547
+#, php-format
+msgid "No catalog node found for ID \"%1$s\""
+msgstr ""
+
+#: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:34
+#, php-format
+msgid "Unable to insert item in different site"
+msgstr ""
+
+#: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:62
+#, php-format
+msgid "Unable to move item to different site"
+msgstr ""
+
+#: src/MShop/Plugin/Manager/Default.php:217
+#, php-format
+msgid "No plugin provider available in \"%1$s\""
+msgstr ""
+
+#: src/MShop/Plugin/Manager/Default.php:224
+#, php-format
+msgid "Invalid plugin domain \"%1$s\""
+msgstr ""
+
+#: src/MShop/Plugin/Manager/Default.php:232
+#, php-format
+msgid "Invalid plugin provider \"%1$s\""
+msgstr ""
+
+#: src/MShop/Plugin/Manager/Default.php:244
+#, php-format
+msgid "Plugin implementation \"%1$s\" not found"
+msgstr ""
+
+#: src/MShop/Plugin/Manager/Default.php:406
+#, php-format
+msgid "Incorrect json decoding for \"%1$s\""
+msgstr ""
+
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:67
+#, php-format
+msgid "Given object isn't of type \"%1$s\""
+msgstr ""
+
+#: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:144
+#, php-format
+msgid "No product found with code \"%1$s\""
+msgstr ""
+
+#: src/MShop/Price/Item/Default.php:362
+#, php-format
+msgid "Price \"%1$s\" isn't a numeric value"
+msgstr ""
+
+#: src/MShop/Price/Manager/Abstract.php:36
+#, php-format
+msgid "Item doesn't implement \"%1$s\""
+msgstr ""
+
+#: src/MShop/Price/Manager/Abstract.php:50
+#, php-format
+msgid "No price for the given quantity available"
+msgstr ""

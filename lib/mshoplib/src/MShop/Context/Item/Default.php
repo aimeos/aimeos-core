@@ -20,6 +20,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	private $_cache;
 	private $_config;
 	private $_dbm;
+	private $_i18n;
 	private $_locale;
 	private $_logger;
 	private $_session;
@@ -27,13 +28,14 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 
 
 	/**
-	 * Cleanup the stored resources
+	 * Cleans up the stored resources
 	 */
 	public function __destruct()
 	{
 		$this->_cache = null;
 		$this->_config = null;
 		$this->_dbm = null;
+		$this->_i18n = null;
 		$this->_locale = null;
 		$this->_logger = null;
 		$this->_session = null;
@@ -48,6 +50,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		$this->_cache = ( isset( $this->_cache ) ? clone $this->_cache : null );
 		$this->_config = ( isset( $this->_config ) ? clone $this->_config : null );
 		$this->_dbm = ( isset( $this->_dbm ) ? clone $this->_dbm : null );
+		$this->_i18n = ( isset( $this->_i18n ) ? clone $this->_i18n : null );
 		$this->_locale = ( isset( $this->_locale ) ? clone $this->_locale : null );
 		$this->_logger = ( isset( $this->_logger ) ? clone $this->_logger : null );
 		$this->_session = ( isset( $this->_session ) ? clone $this->_session : null );
@@ -55,9 +58,9 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 
 
 	/**
-	 *	Sets the cache object.
+	 * Sets the cache object.
 	 *
-	 * @param MW_Cache_Interface $cache Cahce object
+	 * @param MW_Cache_Interface $cache Cache object
 	 */
 	public function setCache( MW_Cache_Interface $cache )
 	{
@@ -66,13 +69,13 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 
 
 	/**
-	 *	Returns the cache object.
+	 * Returns the cache object.
 	 *
 	 * @return MW_Cache_Interface Cache object
 	 */
 	public function getCache()
 	{
-		if( is_null( $this->_cache ) ) {
+		if( !isset( $this->_cache ) ) {
 			throw new MShop_Exception( 'No cache object available' );
 		}
 
@@ -94,11 +97,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the configuration object.
 	 *
-	 * @return MShop_Config_Interface
+	 * @return MShop_Config_Interface Configuration object
 	 */
 	public function getConfig()
 	{
-		if( is_null( $this->_config ) ) {
+		if( !isset( $this->_config ) ) {
 			throw new MShop_Exception( 'No configuration object available' );
 		}
 
@@ -120,22 +123,47 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the database manager object.
 	 *
-	 * @return MW_DB_Manager_Interface
+	 * @return MW_DB_Manager_Interface Database manager object
 	 */
 	public function getDatabaseManager()
 	{
-		if( is_null( $this->_dbm ) ) {
+		if( !isset( $this->_dbm ) ) {
 			throw new MShop_Exception( 'No database manager object available' );
 		}
 
 		return $this->_dbm;
 	}
 
+	/**
+	 * Sets the internationalization object.
+	 *
+	 * @param MW_Translation_Interface $translate Internationalization object
+	 */
+	public function setI18n( MW_Translation_Interface $translate )
+	{
+		$this->_i18n = $translate;
+	}
+
+
+	/**
+	 * Returns the internationalization object.
+	 *
+	 * @return MW_Translation_Interface Internationalization object
+	 */
+	public function getI18n()
+	{
+		if( !isset( $this->_i18n ) ) {
+			throw new MShop_Exception( 'No internationalization object available' );
+		}
+
+		return $this->_i18n;
+	}
+
 
 	/**
 	 * Sets the localization object.
 	 *
-	 * @param MShop_Locale_Item_Interface $locale Locallization object
+	 * @param MShop_Locale_Item_Interface $locale Localization object
 	 */
 	public function setLocale( MShop_Locale_Item_Interface $locale )
 	{
@@ -146,11 +174,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the localization object.
 	 *
-	 * @return MShop_Locale_Item_Interface
+	 * @return MShop_Locale_Item_Interface Localization object
 	 */
 	public function getLocale()
 	{
-		if( is_null( $this->_locale ) ) {
+		if( !isset( $this->_locale ) ) {
 			throw new MShop_Exception( 'No locale object available' );
 		}
 
@@ -172,11 +200,11 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Returns the logger object.
 	 *
-	 * @return MW_Logger_Interface
+	 * @return MW_Logger_Interface Logger object
 	 */
 	public function getLogger()
 	{
-		if( is_null( $this->_logger ) ) {
+		if( !isset( $this->_logger ) ) {
 			throw new MShop_Exception( 'No log manager object available' );
 		}
 
@@ -196,13 +224,13 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 
 
 	/**
-	 * Returns the session object
+	 * Returns the session object.
 	 *
-	 * @return MW_Session_Interface
+	 * @return MW_Session_Interface Session object
 	 */
 	public function getSession()
 	{
-		if( is_null( $this->_session ) ) {
+		if( !isset( $this->_session ) ) {
 			throw new MShop_Exception( 'No session object available' );
 		}
 

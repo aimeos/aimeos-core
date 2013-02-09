@@ -5,17 +5,25 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
+$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
+$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+
+$checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
+$checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
+$checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
+
 $link = true;
 $stepActive = $this->get( 'standardStepActive' );
 
 ?>
 <div class="arcavias checkout-standard">
 	<ol class="steps">
-		<li class="step basket active"><a href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index' ); ?>"><?php echo $this->translate( 'core/client/html', 'Basket' ); ?></a></li>
+		<li class="step basket active"><a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>"><?php echo $this->translate( 'client/html', 'Basket' ); ?></a></li>
 <?php foreach( $this->get( 'standardSteps', array() ) as $name ) :
 
 		$class = '';
-		$string = $this->translate( 'core/client/html', $name );
+		$string = $this->translate( 'client/html', $name );
 
 		if( $stepActive )
 		{
@@ -27,7 +35,7 @@ $stepActive = $this->get( 'standardStepActive' );
 
 			if( $link === true )
 			{
-				$url = $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $name ) );
+				$url = $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c-step' => $name ) );
 				$string = '<a href="' . $url . '">' . $string . '</a>';
 				$class .= ' active';
 			}
@@ -36,10 +44,10 @@ $stepActive = $this->get( 'standardStepActive' );
 		<li class="step <?php echo $name . $class; ?>"><?php echo $string; ?></li>
 <?php endforeach; ?>
 	</ol>
-<?php if( ( $errors = $this->get( 'standardErrorList', array() ) ) !== array() ) : ?>
+<?php if( isset( $this->standardErrorList ) ) : ?>
 	<ul class="error-list">
-<?php foreach( $errors as $error ) : ?>
-		<li><?php echo $error; ?></li>
+<?php foreach( (array) $this->standardErrorList as $errmsg ) : ?>
+		<li><?php echo $errmsg; ?></li>
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>

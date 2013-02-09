@@ -15,11 +15,13 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
+class MW_Config_Array
+	extends MW_Config_Abstract
+	implements MW_Config_Interface
 {
-	protected $_config = array();
+	protected $_config;
+	protected $_paths;
 	protected $_setValues = array();
-	protected $_paths = array();
 	protected $_fileCache = array();
 
 
@@ -28,17 +30,12 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 	 * Initialize config object
 	 *
 	 * @param Array $config Configuration array
-	 * @param mixed $path Filesystem path or list of paths to the configuration files
+	 * @param array|string $path Filesystem path or list of paths to the configuration files
 	 */
 	public function __construct( $config = array(), $paths = array() )
 	{
-		if( !is_array( $config ) ) {
-			throw new Exception( 'First argument must be an array.' );
-		}
-
 		$this->_config = $config;
-
-		$this->_paths = (array)$paths;
+		$this->_paths = (array) $paths;
 	}
 
 
@@ -128,7 +125,7 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 	 * @param array $left Array to be merged into
 	 * @param array $right Array to merge in
 	 */
- 	protected function _merge( array &$left, array $right )
+	protected function _merge( array &$left, array $right )
 	{
 		$match = false;
 		foreach( $left as $lkey => $lvalue )
@@ -174,7 +171,7 @@ class MW_Config_Array extends MW_Config_Abstract implements MW_Config_Interface
 		return null;
 	}
 
-	
+
 	/**
 	 * Finds files within a configuration path
 	 *

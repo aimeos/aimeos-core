@@ -63,7 +63,7 @@ try
 	$itemSchema = $jsonrpc->getJsonItemSchemas();
 	$searchSchema = $jsonrpc->getJsonSearchSchemas();
 	$smd = $jsonrpc->getJsonSmd( 'jsonrpc.php' );
-	$site = $init->getJsonSite( ( isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : 'unitperf' ) );
+	$site = $init->getJsonSite( ( isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : 'unittest' ) );
 }
 catch( Exception $e )
 {

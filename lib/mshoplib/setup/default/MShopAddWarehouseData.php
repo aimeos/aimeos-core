@@ -66,9 +66,13 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_additional );
 		$warehouseManager = $manager->getSubManager( 'stock' )->getSubManager( 'warehouse' );
 
+		$num = $total = 0;
 		$item = $warehouseManager->createItem();
+
 		foreach( $data['warehouse'] as $key => $dataset )
 		{
+			$total++;
+
 			$item->setId( null );
 			$item->setCode( $dataset['code'] );
 			$item->setLabel( $dataset['label'] );
@@ -76,9 +80,10 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 
 			try {
 				$warehouseManager->saveItem( $item );
+				$num++;
 			} catch( MW_DB_Exception $e ) { ; }
 		}
 
-		$this->_status( 'done' );
+		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
 	}
 }
