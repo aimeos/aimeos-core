@@ -9,9 +9,9 @@
 <?php $target = $this->config( 'catalog-list-target' ); ?>
 <?php if( isset( $this->listCatPath ) ) : ?>
 	<ol>
-<?php foreach( $this->listCatPath as $cat ) : ?>
-		<li><a href="<?php echo $this->url( $target, 'catalog', 'list', array() + array( 'f-catalog-id' => $cat->getId() ), array( $cat->getName() ) ); ?>"><?php echo $cat->getName(); ?></a></li>
-<?php endforeach; ?>
+<?php	foreach( (array) $this->listCatPath as $cat ) : ?>
+		<li><a href="<?php echo $this->url( $target, 'catalog', 'list', array( 'f-catalog-id' => $cat->getId() ), array( $cat->getName() ) ); ?>"><?php echo $cat->getName(); ?></a></li>
+<?php	endforeach; ?>
 	</ol>
 <?php endif; ?>
 <?php echo $this->get( 'breadcrumbBody' ); ?>

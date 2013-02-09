@@ -29,13 +29,43 @@ class Client_Html_Catalog_List_Breadcrumb_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->getView();
-
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+		try
+		{
+			$view = $this->getView();
+	
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody();
+			}
+			$view->breadcrumbBody = $html;
 		}
-		$view->breadcrumbBody = $html;
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->breadcrumbErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->breadcrumbErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->breadcrumbErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+		
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->breadcrumbErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
+		}
 
 		$tplconf = 'client/html/catalog/list/breadcrumb/default/template-body';
 		$default = 'catalog/list/breadcrumb-body-default.html';
@@ -51,13 +81,21 @@ class Client_Html_Catalog_List_Breadcrumb_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->getView();
-
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		try
+		{
+			$view = $this->getView();
+	
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader();
+			}
+			$view->breadcrumbHeader = $html;
 		}
-		$view->breadcrumbHeader = $html;
+		catch( Exception $e )
+		{
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return;
+		}
 
 		$tplconf = 'client/html/catalog/list/breadcrumb/default/template-header';
 		$default = 'catalog/list/breadcrumb-header-default.html';
