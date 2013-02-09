@@ -95,9 +95,8 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 		$view = TestHelper::getView();
 		$this->_object->setView( $view );
 
+		$this->setExpectedException( 'MShop_Order_Exception' );
 		$this->_object->process();
-
-		$this->assertGreaterThan( 0, count( $view->standardErrorList ) );
 	}
 
 
@@ -119,9 +118,8 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 		$view = TestHelper::getView();
 		$this->_object->setView( $view );
 
+		$this->setExpectedException( 'MW_View_Exception' );
 		$this->_object->process();
-
-		$this->assertGreaterThan( 0, count( $view->standardErrorList ) );
 	}
 
 

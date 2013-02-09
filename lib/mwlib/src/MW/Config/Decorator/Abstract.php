@@ -32,6 +32,15 @@ abstract class MW_Config_Decorator_Abstract implements MW_Config_Decorator_Inter
 
 
 	/**
+	 * Clones the objects inside.
+	 */
+	public function __clone()
+	{
+		$this->_object = clone $this->_object;
+	}
+
+
+	/**
 	 * Returns the value of the requested config key.
 	 *
 	 * @param string $path Path to the requested value like tree/node/classname

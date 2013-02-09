@@ -35,7 +35,7 @@ class MW_Config_Decorator_APCTest extends MW_Unittest_Testcase
 		}
 
 		$conf = new MW_Config_Array( array() );
-		$this->_object = new MW_Config_Decorator_APC( $conf );
+		$this->_object = new MW_Config_Decorator_APC( $conf, 'test:' );
 	}
 
 	/**

@@ -21,6 +21,22 @@ class Client_Html_Basket_Standard_Default
 {
 	private $_subPartPath = 'client/html/basket/standard/default/subparts';
 	private $_subPartNames = array( 'main' );
+	private $_controller;
+
+
+	/**
+	 * Initializes the client.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param array $templatePaths Associative list of the file system paths to the co
+	 *      and a list of relative paths inside the core or the extension as values
+	 */
+	public function __construct( MShop_Context_Item_Interface $context, array $templatePaths )
+	{
+		parent::__construct( $context, $templatePaths );
+
+		$this->_controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+	}
 
 
 	/**
@@ -30,13 +46,43 @@ class Client_Html_Basket_Standard_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->getView();
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
 
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody();
+			}
+			$view->standardBody = $html;
 		}
-		$view->standardBody = $html;
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
 
 		$tplconf = 'client/html/basket/standard/default/template-body';
 		$default = 'basket/standard/body-default.html';
@@ -52,13 +98,21 @@ class Client_Html_Basket_Standard_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->getView();
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
 
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader();
+			}
+			$view->standardHeader = $html;
 		}
-		$view->standardHeader = $html;
+		catch( Exception $e )
+		{
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return;
+		}
 
 		$tplconf = 'client/html/basket/standard/default/template-header';
 		$default = 'basket/standard/header-default.html';
@@ -99,75 +153,122 @@ class Client_Html_Basket_Standard_Default
 	{
 		$view = $this->getView();
 
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
-
-		switch( $view->param( 'b-action' ) )
+		try
 		{
-			case 'add':
+			switch( $view->param( 'b-action' ) )
+			{
+				case 'add':
 
-				$products = $view->param( 'b-prod', array() );
-				$reqvariant = $view->config( 'basket/require-variant', true );
+					$products = (array) $view->param( 'b-prod', array() );
+					$reqvariant = $view->config( 'basket/require-variant', true );
 
-				if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
-				{
-					$products[] = array(
-						'prod-id' => $prodid,
-						'quantity' => $view->param( 'b-quantity', 1 ),
-						'attrconf-id' => $view->param( 'b-attrconf-id', array() ),
-						'attrvar-id' => $view->param( 'b-attrvar-id', array() )
-					);
-				}
+					if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
+					{
+						$products[] = array(
+							'prod-id' => $prodid,
+							'quantity' => $view->param( 'b-quantity', 1 ),
+							'attrconf-id' => array_filter( (array) $view->param( 'b-attrconf-id', array() ) ),
+							'attrvar-id' => array_filter( (array) $view->param( 'b-attrvar-id', array() ) )
+						);
+					}
 
-				foreach( $products as $values )
-				{
-					$controller->addProduct(
-						( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
-						( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
-						( isset( $values['attrconf-id'] ) ? $values['attrconf-id'] : array() ),
-						( isset( $values['attrvar-id'] ) ? $values['attrvar-id'] : array() ),
-						$reqvariant
-					);
-				}
+					foreach( $products as $values )
+					{
+						$this->_controller->addProduct(
+							( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
+							( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
+							( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
+							( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
+							$reqvariant
+						);
+					}
 
-				break;
+					break;
 
-			case 'edit':
+				case 'edit':
 
-				$products = $view->param( 'b-prod', array() );
+					$products = (array) $view->param( 'b-prod', array() );
 
-				if( ( $positon = $view->param( 'b-position', null ) ) !== null )
-				{
-					$products[] = array(
-						'position' => $positon,
-						'quantity' => $view->param( 'b-quantity', 1 ),
-						'attrconf-code' => $view->param( 'b-attrconf-code', array() )
-					);
-				}
+					if( ( $positon = $view->param( 'b-position', null ) ) !== null )
+					{
+						$products[] = array(
+							'position' => $positon,
+							'quantity' => $view->param( 'b-quantity', 1 ),
+							'attrconf-code' => array_filter( (array) $view->param( 'b-attrconf-code', array() ) )
+						);
+					}
 
-				foreach( $products as $values )
-				{
-					$controller->editProduct(
-						( isset( $values['position'] ) ? $values['position'] : null ),
-						( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
-						( isset( $values['attrconf-code'] ) ? $values['attrconf-code'] : array() )
-					);
-				}
+					foreach( $products as $values )
+					{
+						$this->_controller->editProduct(
+							( isset( $values['position'] ) ? $values['position'] : null ),
+							( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
+							( isset( $values['attrconf-code'] ) ? array_filter( (array) $values['attrconf-code'] ) : array() )
+						);
+					}
 
-				break;
+					break;
 
-			case 'delete':
+				case 'delete':
 
-				$products = (array) $view->param( 'b-position', array() );
+					$products = (array) $view->param( 'b-position', array() );
 
-				foreach( $products as $position ) {
-					$controller->deleteProduct( $position );
-				}
+					foreach( $products as $position ) {
+						$this->_controller->deleteProduct( $position );
+					}
 
-				break;
+					break;
+			}
+
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
+
+			$this->_controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		}
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
+		}
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		if( !isset( $this->_cache ) )
+		{
+			$view->standardBasket = $this->_controller->get();
+
+			$this->_cache = $view;
 		}
 
-		$view->standardBasket = $controller->get();
-
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		return $this->_cache;
 	}
 }

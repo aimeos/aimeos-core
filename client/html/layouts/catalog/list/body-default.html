@@ -8,5 +8,12 @@
 
 ?>
 <div class="arcavias catalog-list">
+<?php if( isset( $this->listErrorList ) ) : ?>
+	<ul class="error-list">
+<?php foreach( (array) $this->listErrorList as $errmsg ) : ?>
+		<li><?php echo $errmsg; ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
 <?php echo $this->get( 'listBody' ); ?>
 </div>

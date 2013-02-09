@@ -5,13 +5,23 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$termsTarget = $this->config( 'client/html/checkout/standard/summary/option/terms/url/target' );
+$termsController = $this->config( 'client/html/checkout/standard/summary/option/terms/url/controller' );
+$termsAction = $this->config( 'client/html/checkout/standard/summary/option/terms/url/action' );
+$termsUrl = $this->url( $termsTarget, $termsController, $termsAction );
+
+$privacyTarget = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/target' );
+$privacyController = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/controller' );
+$privacyAction = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/action' );
+$privacyUrl = $this->url( $privacyTarget, $privacyController, $privacyAction );
+
 ?>
 <div class="checkout-standard-summary-option-terms">
-	<h3><?php echo $this->translate( 'core/client/html', 'Terms and conditions' ); ?></h3>
+	<h3><?php echo $this->translate( 'client/html', 'Terms and conditions' ); ?></h3>
 	<div class="single <?php echo ( $this->get( 'termsError', false ) === true ? 'error' : '' ); ?>">
 		<input type="hidden" name="<?php echo $this->formparam( array( 'cs-option-terms' ) ); ?>" value="1" />
 		<input type="checkbox" name="<?php echo $this->formparam( array( 'cs-option-terms-value' ) ); ?>" value="1" <?php echo ( $this->param( 'cs-option-terms-value', null ) == 1 ? 'checked="checked"' : '' ); ?> />
-		<p><?php echo $this->translate( 'core/client/html', 'I accept the <a href="">terms and conditions</a> and <a href="">privacy policy</a>' ); ?></p>
+		<p><?php echo sprintf( $this->translate( 'client/html', 'I accept the <a href="%1$s" target="_blank" title="terms and conditions" alt="terms and conditions">terms and conditions</a> and <a href="%2$s" target="_blank" title="privacy policy" alt="privacy policy">privacy policy</a>' ), $termsUrl, $privacyUrl ); ?></p>
 	</div>
 <?php echo $this->get( 'termsBody' ); ?>
 </div>

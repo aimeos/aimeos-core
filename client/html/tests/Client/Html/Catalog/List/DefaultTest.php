@@ -62,7 +62,7 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript"', $output );
+		$this->assertStringStartsWith( '<title>Kaffee</title>', $output );
 	}
 
 

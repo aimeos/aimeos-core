@@ -203,7 +203,7 @@ class MShop_Catalog_Manager_Index_Default
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$this->_writeIndex( $search, $domains, $size );
-			
+
 			return;
 		}
 
@@ -215,7 +215,7 @@ class MShop_Catalog_Manager_Index_Default
 		}
 
 		$ids = array();
-		
+
 		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
 		$categorySearch = $catalogListManager->createSearch( true );
 
@@ -224,7 +224,7 @@ class MShop_Catalog_Manager_Index_Default
 			$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
 			$categorySearch->setSlice( $start, $size );
 
-		 	$result = $catalogListManager->searchItems( $categorySearch );
+			$result = $catalogListManager->searchItems( $categorySearch );
 
 			$ids = array();
 			foreach( $result as $catalogListItem ) {
@@ -233,7 +233,7 @@ class MShop_Catalog_Manager_Index_Default
 
 			$count = count( $ids );
 			if( $count === 0 ) { continue; }
-			
+
 			$start += $count;
 
 			$expr = array(
@@ -338,7 +338,7 @@ class MShop_Catalog_Manager_Index_Default
 	* Re-writes the index entries for all products that are search result of given criteria
 	*
 	* @param MW_Common_Criteria_Interface $search Search criteria
-	* @param array $domains List of domains to be 
+	* @param array $domains List of domains to be
 	* @param integer $size Size of a chunk of products to handle at a time
 	*/
 	protected function _writeIndex( MW_Common_Criteria_Interface $search, array $domains, $size )
@@ -360,7 +360,7 @@ class MShop_Catalog_Manager_Index_Default
 			try
 			{
 				$this->_begin();
-		
+
 				$this->deleteItems( array_keys( $products ) );
 
 				foreach ( $this->_submanagers as $submanager ) {
