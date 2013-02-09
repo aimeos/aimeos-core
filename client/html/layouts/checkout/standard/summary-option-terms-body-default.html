@@ -5,13 +5,16 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$termsUrl = $this->url( $this->config( 'client/html/checkout/standard/summary/option/terms/url/target' ) );
+$privacyUrl = $this->url( $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/target' ) );
+
 ?>
 <div class="checkout-standard-summary-option-terms">
 	<h3><?php echo $this->translate( 'client/html', 'Terms and conditions' ); ?></h3>
 	<div class="single <?php echo ( $this->get( 'termsError', false ) === true ? 'error' : '' ); ?>">
 		<input type="hidden" name="<?php echo $this->formparam( array( 'cs-option-terms' ) ); ?>" value="1" />
 		<input type="checkbox" name="<?php echo $this->formparam( array( 'cs-option-terms-value' ) ); ?>" value="1" <?php echo ( $this->param( 'cs-option-terms-value', null ) == 1 ? 'checked="checked"' : '' ); ?> />
-		<p><?php echo $this->translate( 'client/html', 'I accept the <a href="">terms and conditions</a> and <a href="">privacy policy</a>' ); ?></p>
+		<p><?php echo sprintf( $this->translate( 'client/html', 'I accept the <a href="%1$s" title="terms and conditions" alt="terms and conditions">terms and conditions</a> and <a href="%2$s" title="privacy policy" alt="privacy policy">privacy policy</a>' ), $termsUrl, $privacyUrl ); ?></p>
 	</div>
 <?php echo $this->get( 'termsBody' ); ?>
 </div>
