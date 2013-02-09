@@ -61,8 +61,22 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 				'detail' => array( 'url' => array( 'target' => 'routeDefault' ) ),
 			),
 			'checkout' => array(
-				'standard' => array( 'url' => array( 'target' => 'routeDefault' ) ),
 				'confirm' => array( 'url' => array( 'target' => 'routeDefault' ) ),
+				'standard' => array(
+					'url' => array( 'target' => 'routeDefault' ),
+					'summary' => array( 'option' => array( 'terms' => array(
+						'url' => array(
+							'target' => 'routeDefault',
+							'controller' => 'index',
+							'action' => 'terms'
+						),
+						'privacy' => array( 'url' => array(
+							'target' => 'routeDefault',
+							'controller' => 'index',
+							'action' => 'terms'
+						) )
+					) ) )
+				),
 			),
 		) ) );
 

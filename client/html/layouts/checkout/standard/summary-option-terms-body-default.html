@@ -5,8 +5,15 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-$termsUrl = $this->url( $this->config( 'client/html/checkout/standard/summary/option/terms/url/target' ) );
-$privacyUrl = $this->url( $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/target' ) );
+$termsTarget = $this->config( 'client/html/checkout/standard/summary/option/terms/url/target' );
+$termsController = $this->config( 'client/html/checkout/standard/summary/option/terms/url/controller' );
+$termsAction = $this->config( 'client/html/checkout/standard/summary/option/terms/url/action' );
+$termsUrl = $this->url( $termsTarget, $termsController, $termsAction );
+
+$privacyTarget = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/target' );
+$privacyController = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/controller' );
+$privacyAction = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/action' );
+$privacyUrl = $this->url( $privacyTarget, $privacyController, $privacyAction );
 
 ?>
 <div class="checkout-standard-summary-option-terms">
@@ -14,7 +21,7 @@ $privacyUrl = $this->url( $this->config( 'client/html/checkout/standard/summary/
 	<div class="single <?php echo ( $this->get( 'termsError', false ) === true ? 'error' : '' ); ?>">
 		<input type="hidden" name="<?php echo $this->formparam( array( 'cs-option-terms' ) ); ?>" value="1" />
 		<input type="checkbox" name="<?php echo $this->formparam( array( 'cs-option-terms-value' ) ); ?>" value="1" <?php echo ( $this->param( 'cs-option-terms-value', null ) == 1 ? 'checked="checked"' : '' ); ?> />
-		<p><?php echo sprintf( $this->translate( 'client/html', 'I accept the <a href="%1$s" title="terms and conditions" alt="terms and conditions">terms and conditions</a> and <a href="%2$s" title="privacy policy" alt="privacy policy">privacy policy</a>' ), $termsUrl, $privacyUrl ); ?></p>
+		<p><?php echo sprintf( $this->translate( 'client/html', 'I accept the <a href="%1$s" target="_blank" title="terms and conditions" alt="terms and conditions">terms and conditions</a> and <a href="%2$s" target="_blank" title="privacy policy" alt="privacy policy">privacy policy</a>' ), $termsUrl, $privacyUrl ); ?></p>
 	</div>
 <?php echo $this->get( 'termsBody' ); ?>
 </div>
