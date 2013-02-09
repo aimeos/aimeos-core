@@ -185,13 +185,13 @@ class Client_Html_Checkout_Standard_Default
 			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
 			$view->standardBasket = $basketCntl->get();
 
-			$basketTarget = $this->config( 'client/html/basket/url/target' );
-			$basketController = $this->config( 'client/html/basket/url/controller', 'basket' );
-			$basketAction = $this->config( 'client/html/basket/url/action', 'index' );
+			$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
+			$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
+			$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
 
-			$checkoutTarget = $this->config( 'client/html/checkout/url/target' );
-			$checkoutController = $this->config( 'client/html/checkout/url/controller', 'checkout' );
-			$checkoutAction = $this->config( 'client/html/checkout/url/action', 'index' );
+			$checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
+			$checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
+			$checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
 
 
 			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
