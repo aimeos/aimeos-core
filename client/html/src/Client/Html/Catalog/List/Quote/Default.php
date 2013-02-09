@@ -18,6 +18,7 @@ class Client_Html_Catalog_List_Quote_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
+	private $_cache;
 	private $_subPartNames = array();
 	private $_subPartPath = 'client/html/catalog/list/header/default/subparts';
 
@@ -29,13 +30,43 @@ class Client_Html_Catalog_List_Quote_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->getView();
-
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
+	
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody();
+			}
+			$view->quoteBody = $html;
 		}
-		$view->quoteBody = $html;
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->quoteErrorList = $view->get( 'quoteErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->quoteErrorList = $view->get( 'quoteErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->quoteErrorList = $view->get( 'quoteErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+		
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->quoteErrorList = $view->get( 'quoteErrorList', array() ) + $error;
+		}
 
 		$tplconf = 'client/html/catalog/list/quote/default/template-body';
 		$default = 'catalog/list/quote-body-default.html';
@@ -51,13 +82,21 @@ class Client_Html_Catalog_List_Quote_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->getView();
-
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
+	
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader();
+			}
+			$view->quoteHeader = $html;
 		}
-		$view->quoteHeader = $html;
+		catch( Exception $e )
+		{
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return;
+		}
 
 		$tplconf = 'client/html/catalog/list/quote/default/template-header';
 		$default = 'catalog/list/quote-header-default.html';
@@ -99,5 +138,31 @@ class Client_Html_Catalog_List_Quote_Default
 	public function process()
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+	
+	
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		if( !isset( $this->_cache ) )
+		{
+			$view->texts = array();
+			if( isset( $view->listCatPath ) )
+			{
+				$catPath = $this->listCatPath;
+				if( ( $catItem = end( $catPath ) ) !== false ) {
+					$view->texts = $catItem->getRefItems( 'text', 'quote', 'default' );
+				}
+			}
+	
+			$this->_cache = $view;
+		}
+	
+		return $this->_cache;
 	}
 }
