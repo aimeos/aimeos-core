@@ -79,7 +79,7 @@ class Client_Html_Checkout_Confirm_Basic_DefaultTest extends MW_Unittest_Testcas
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-confirm-basic">', $output );
-		$this->assertRegExp( '#<span class="name">Bestellnummer</span>.*<span class="value">' . $item->getId() . '</span>#smU', $output );
+		$this->assertRegExp( '#<span class="value">' . $item->getId() . '</span>#smU', $output );
 	}
 
 
