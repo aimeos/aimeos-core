@@ -61,7 +61,7 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
-	 * Adds a product to the basket of the user stored in the session.
+	 * Adds a categorized product to the basket of the user stored in the session.
 	 *
 	 * @param string $prodid ID of the base product to add
 	 * @param integer $quantity Amount of products that should by added
@@ -76,6 +76,23 @@ class Controller_Frontend_Basket_Default
 	 */
 	public function addProduct( $prodid, $quantity = 1, $configAttributeIds = array(), $variantAttributeIds = array(), $requireVariant = true )
 	{
+		$catalogListManager = $this->_getDomainManager( 'catalog/list' );
+
+		$search = $catalogListManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'catalog.list.refid', $prodid ),
+			$search->getConditions()
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
+
+		$result = $catalogListManager->searchItems( $search );
+
+		if( reset( $result ) === false ) {
+			throw new Controller_Frontend_Basket_Exception( sprintf( 'Adding product with ID "%1$s" is not allowed', $prodid ) );
+		}
+
+
 		$productManager = $this->_getDomainManager( 'product' );
 		$productItem = $productManager->getItem( $prodid, array( 'media', 'price', 'product', 'text' ) );
 
@@ -112,6 +129,7 @@ class Controller_Frontend_Basket_Default
 			}
 		}
 
+
 		$orderAttributes = array();
 		$orderProductAttributeManager = $this->_getDomainManager( 'order/base/product/attribute' );
 
@@ -134,11 +152,12 @@ class Controller_Frontend_Basket_Default
 			$orderAttributes[] = $orderAttributeItem;
 		}
 
-		// remove product rebate of original price
+
+		// remove product rebate of original price in favor to rebates granted for the order
 		$price->setRebate( '0.00' );
 
-		$orderBaseProductItem->setAttributes( $orderAttributes );
 		$orderBaseProductItem->setPrice( $price );
+		$orderBaseProductItem->setAttributes( $orderAttributes );
 
 		$this->_basket->addProduct( $orderBaseProductItem );
 		$this->_domainManager->setSession( $this->_basket );
