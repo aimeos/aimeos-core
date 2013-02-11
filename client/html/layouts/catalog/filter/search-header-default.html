@@ -5,6 +5,17 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-echo $this->get( 'searchHeader' );
-
 ?>
+<script type="text/javascript">
+$(document).ready( function () {
+	$( "#search-field" ).keyup( function( val ) {
+		var chars = $(this).val();
+		if ( chars.length > 2 ) {
+			$.post( "<?php echo $this->get( 'ajaxtarget', '' ); ?>", chars );
+		}
+	} );
+} );
+</script>
+
+
+<?php echo $this->get( 'searchHeader' ); ?>

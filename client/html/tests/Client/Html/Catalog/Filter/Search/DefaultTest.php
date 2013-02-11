@@ -54,15 +54,13 @@ class Client_Html_Catalog_Filter_Search_DefaultTest extends MW_Unittest_Testcase
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
-
-		$this->assertEquals( '', $output );
+		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
 	}
 
 
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-
 		$this->assertStringStartsWith( '<div class="catalog-filter-search">', $output );
 	}
 
