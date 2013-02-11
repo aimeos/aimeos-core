@@ -40,7 +40,7 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
-		$catItems = $catalogManager->searchItems( $search );
+		$catItems = $catalogManager->searchItems( $search, array('media') );
 
 		if( ( $catItem = reset( $catItems ) ) === false ) {
 			throw new Exception( 'No catalog item found' );
@@ -76,6 +76,13 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
+		$mediaItems = $this->_object->getView()->get( 'mediaItems', array() );
+
+		if( ( $mediaItem = reset( $mediaItems ) ) === false ) {
+			throw new Exception( 'No item found' );
+		}
+
+		$this->assertEquals( 'Cafe Stage image', $mediaItem->getLabel() );
 		$this->assertStringStartsWith( '<div class="catalog-list-stage">', $output );
 	}
 
