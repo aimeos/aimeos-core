@@ -15,10 +15,14 @@
 
 		echo str_replace( "\n\n", "\n", sprintf( $this->translate( 'client/html',
 'Billing address:
-%1$s %2$s %3$s
-%4$s %5$s
-%6$s
-%7$s %8$s
+Salutation: %1$s
+First name: %2$s
+Last name: %3$s
+Street: %4$s
+Additional 1: %5$s
+Additional 2: %6$s
+Postal: %7$s
+City: %8$s
 Country: %9$s
 Language: %10$s
 E-Mail: %11$s
@@ -27,10 +31,14 @@ Fax: %13$s
 Website: %14$s
 '
 			),
-			$this->translate( 'client/html', $addr->getSalutation() ), $addr->getFirstName(), $addr->getLastName(),
-			$addr->getAddress1(), $addr->getAddress2(),
+			$this->translate( 'client/html', $addr->getSalutation() ),
+			$addr->getFirstName(),
+			$addr->getLastName(),
+			$addr->getAddress1(),
+			$addr->getAddress2(),
 			$addr->getAddress3(),
-			$addr->getPostal(), $addr->getCity(),
+			$addr->getPostal(),
+			$addr->getCity(),
 			$this->translate( 'client/html/country', $addr->getCountryId() ),
 			$this->translate( 'client/html/language', $addr->getLanguageId() ),
 			$addr->getEmail(),
@@ -50,10 +58,14 @@ Website: %14$s
 
 		echo str_replace( "\n\n", "\n", sprintf( $this->translate( 'client/html',
 'Delivery address:
-%1$s %2$s %3$s
-%4$s %5$s
-%6$s
-%7$s %8$s
+Salutation: %1$s
+First name: %2$s
+Last name: %3$s
+Street: %4$s
+Additional 1: %5$s
+Additional 2: %6$s
+Postal: %7$s
+City: %8$s
 Country: %9$s
 Language: %10$s
 E-Mail: %11$s
@@ -62,10 +74,14 @@ Fax: %13$s
 Website: %14$s
 '
 			),
-			$this->translate( 'client/html', $addr->getSalutation() ), $addr->getFirstName(), $addr->getLastName(),
-			$addr->getAddress1(), $addr->getAddress2(),
+			$this->translate( 'client/html', $addr->getSalutation() ),
+			$addr->getFirstName(),
+			$addr->getLastName(),
+			$addr->getAddress1(),
+			$addr->getAddress2(),
 			$addr->getAddress3(),
-			$addr->getPostal(), $addr->getCity(),
+			$addr->getPostal(),
+			$addr->getCity(),
 			$this->translate( 'client/html/country', $addr->getCountryId() ),
 			$this->translate( 'client/html/language', $addr->getLanguageId() ),
 			$addr->getEmail(),

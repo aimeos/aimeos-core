@@ -708,44 +708,8 @@
 	counter-increment: step;
 }
 
-.checkout-standard .item-address li {
-	display: none;
-}
-
-.checkout-standard .item-address .name {
-	display: none;
-}
-
 .checkout-standard li {
 	list-style: none;
-}
-
-.checkout-standard li.item-salutation,
-.checkout-standard li.item-address1,
-.checkout-standard li.item-postal {
-	float: left;
-}
-
-.checkout-standard li.item-lastname,
-.checkout-standard li.item-firstname,
-.checkout-standard li.item-address2,
-.checkout-standard li.item-city {
-	margin-left: 0.25em;
-	float: left;
-}
-
-.checkout-standard li.item-salutation,
-.checkout-standard li.item-address1,
-.checkout-standard li.item-address3,
-.checkout-standard li.item-postal,
-.checkout-standard li.item-state,
-.checkout-standard li.item-countryid,
-.checkout-standard li.item-languageid,
-.checkout-standard li.item-email,
-.checkout-standard li.item-telephone,
-.checkout-standard li.item-telefax,
-.checkout-standard li.item-website {
-	clear: both;
 }
 
 .checkout-standard .form-list .mandatory,
@@ -811,6 +775,18 @@
 	border-bottom: none;
 }
 
+.checkout-standard .item-address .header,
+.checkout-standard .item-service .header {
+	margin: 0 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: #F2F7FA;
+}
+
+.checkout-standard .item-address .content {
+	display: inline-block;
+}
+
 
 /*
  * Checkout address
@@ -833,14 +809,7 @@
 	margin: 0 10px;
 }
 
-.checkout-standard-address .header {
-	margin: 10px 0;
-	margin-bottom: 10px;
-	padding: 10px;
-	background-color: #F2F7FA;
-}
-
-.checkout-standard-address .header > input {
+.checkout-standard-address .item-address .header > input {
 	display: inline;
 	vertical-align: top;
 	margin-right: 10px;
@@ -849,10 +818,6 @@
 .checkout-standard-address .item-address .values {
 	display: inline-block;
 	vertical-align: middle;
-}
-
-.checkout-standard-address .item-address .attr-list {
-	display: inline-block;
 }
 
 .checkout-standard-address .item-new .form-list {
@@ -932,18 +897,15 @@
 	width: 50%;
 }
 
+.checkout-standard-summary .item-address .content {
+	margin: 0 20px;
+	margin-bottom: 10px;
+}
+
 .checkout-standard-summary-address h2,
 .checkout-standard-summary-service h2,
 .checkout-standard-summary-option h2 {
 	display: none;
-}
-
-.checkout-standard-summary .item-address .header,
-.checkout-standard-summary .item-service .header {
-	margin: 0 10px;
-	margin-bottom: 10px;
-	padding: 0 10px;
-	background-color: #F2F7FA;
 }
 
 .checkout-standard-summary h3 {
@@ -970,7 +932,6 @@
 	margin: 10px 20px;
 }
 
-.checkout-standard-summary .item-address .attr-list,
 .checkout-standard-summary .item-service .attr-list {
 	list-style: none;
 	margin: 0 10px;
