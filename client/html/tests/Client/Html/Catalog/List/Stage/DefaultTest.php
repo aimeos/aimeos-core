@@ -47,7 +47,7 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 		}
 
 		$view = TestHelper::getView();
-		
+
 		$view->listCatPath = array( $catalogManager->createItem(), $catItem );
 
 		$this->_object->setView( $view );
@@ -76,13 +76,19 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		print_r($output);
 		$this->assertStringStartsWith( '<div class="catalog-list-stage">', $output );
 	}
+
 
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( 'invalid', 'invalid' );
+	}
+
+
+	public function testProcess()
+	{
+		$this->_object->process();
 	}
 }
