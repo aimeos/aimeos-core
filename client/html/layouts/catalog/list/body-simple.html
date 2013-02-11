@@ -8,5 +8,13 @@
 ?>
 <div class="arcavias catalog-list-simple">
 
+<script type="text/javascript">
+	var jsondata = JSON.parse(<?php echo $this->get( 'listTextItems', array() ); ?>);
+
+	for (i in jsondata)	{
+		document.write(jsondata[i].name + "<br />");
+	}
+</script>
+
 <?php echo $this->get( 'simpleListBody' ); ?>
 </div>

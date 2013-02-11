@@ -33,7 +33,7 @@ class Client_Html_Catalog_List_Simple
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody();
@@ -62,7 +62,7 @@ class Client_Html_Catalog_List_Simple
 		{
 			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-		
+
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->simpleErrorList = $view->get( 'simpleErrorList', array() ) + $error;
@@ -85,7 +85,7 @@ class Client_Html_Catalog_List_Simple
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader();
@@ -97,7 +97,7 @@ class Client_Html_Catalog_List_Simple
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			return;
 		}
-		
+
 		$tplconf = 'client/html/catalog/list/simple/template-header';
 		$default = 'catalog/list/header-simple.html';
 
@@ -154,46 +154,20 @@ class Client_Html_Catalog_List_Simple
 			$context = $this->_getContext();
 			$config = $context->getConfig();
 
-
-			$params = array();
-			foreach( $view->param() as $key => $value )
-			{
-				if( strncmp( 'f-', $key, 2 ) === 0 || strncmp( 'l-', $key, 2 ) === 0 ) {
-					$params[$key] = $value;
-				}
-			}
-
-
-			$defaultPageSize = $config->get( 'client/html/catalog/list/simple/size', 48 );
-
-			$page = (int) $view->param( 'l-page', 1 );
-			$size = (int) $view->param( 'l-size', $defaultPageSize );
-			$sortation = (string) $view->param( 'l-sort', 'position' );
 			$input = $view->param( 'f-search-text' );
-
-			
-			$page = ( $page < 1 ? 1 : $page );
-			$size = ( $size < 1 || $size > 100 ? $defaultPageSize : $size );
-			$sortation = ( strlen( $sortation ) === 0 ? $sortation = 'position' : $sortation );
-
-
-			$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
-			$sort = ltrim( $sortation, '-' );
-			$total = 0;
-
 
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 
-			$filter = $controller->createTextFilter( $input, $sort, $sortdir, ($page-1) * $size, $size );
+			$filter = $controller->createTextFilter( $input, 'relevance' );
+			$items = array();
 			$items = $controller->getTextList( $filter );
 
+			$json = array();
+			foreach( $items as $id => $name ) {
+				$json[] = array( 'id' => $id, 'name' => $name );
+			}
 
-			$view->listTextItems = $items;
-			$view->listTextTotal = $total;
-			$view->listTextSort = $sortation;
-			$view->listPageCurr = $page;
-			$view->listPageSize = $size;
-			$view->listParams = $params;
+			$view->listTextItems = json_encode( $json );
 
 			$this->_cache = $view;
 		}

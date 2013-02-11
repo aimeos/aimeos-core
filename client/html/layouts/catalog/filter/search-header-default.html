@@ -6,16 +6,22 @@
  */
 
 ?>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery-ui-i18n.min.js"></script>
 <script type="text/javascript">
 $(document).ready( function () {
 	$( "#search-field" ).keyup( function( val ) {
 		var chars = $(this).val();
 		if ( chars.length > 2 ) {
-			$.post( "<?php echo $this->get( 'ajaxtarget', '' ); ?>", chars );
+			$.post( "<?php echo $this->get( 'ajaxtarget', '' ); ?>",
+			chars,
+			function( data, status ){
+				$( "#search-field" ).autocomplete( {
+					source: data
+				} );
+			} );
 		}
 	} );
 } );
 </script>
-
 
 <?php echo $this->get( 'searchHeader' ); ?>
