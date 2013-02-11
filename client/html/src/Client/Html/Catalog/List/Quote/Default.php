@@ -33,7 +33,7 @@ class Client_Html_Catalog_List_Quote_Default
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody();
@@ -44,28 +44,28 @@ class Client_Html_Catalog_List_Quote_Default
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->quoteErrorList = $view->get( 'quoteErrorList', array() ) + $error;
+			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->quoteErrorList = $view->get( 'quoteErrorList', array() ) + $error;
+			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->quoteErrorList = $view->get( 'quoteErrorList', array() ) + $error;
+			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
 			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-		
+
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->quoteErrorList = $view->get( 'quoteErrorList', array() ) + $error;
+			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 
 		$tplconf = 'client/html/catalog/list/quote/default/template-body';
@@ -85,7 +85,7 @@ class Client_Html_Catalog_List_Quote_Default
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader();
@@ -139,8 +139,8 @@ class Client_Html_Catalog_List_Quote_Default
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
-	
-	
+
+
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
@@ -151,18 +151,18 @@ class Client_Html_Catalog_List_Quote_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$view->texts = array();
+			$view->quoteItems = array();
 			if( isset( $view->listCatPath ) )
 			{
-				$catPath = $this->listCatPath;
+				$catPath = $view->listCatPath;
 				if( ( $catItem = end( $catPath ) ) !== false ) {
-					$view->texts = $catItem->getRefItems( 'text', 'quote', 'default' );
+					$view->quoteItems = $catItem->getRefItems( 'text', 'quote', 'default' );
 				}
 			}
-	
+
 			$this->_cache = $view;
 		}
-	
+
 		return $this->_cache;
 	}
 }

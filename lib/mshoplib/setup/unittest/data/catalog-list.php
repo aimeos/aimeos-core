@@ -17,7 +17,7 @@ return array (
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'product/promotion' => array( 'domain' => 'product', 'code' => 'promotion', 'label' => 'Promotion', 'status' => 1 ),
 // 		'product/favorite' => array( 'domain' => 'product', 'code' => 'favorite', 'label' => 'Favorite', 'status' => 1 ),
-		
+
 		'text/unittype1' => array( 'domain' => 'text', 'code' => 'unittype1', 'label' => 'Unit type 1', 'status' => 1 ),
 		'text/unittype2' => array( 'domain' => 'text', 'code' => 'unittype2', 'label' => 'Unit type 2', 'status' => 1 ),
 		'text/unittype3' => array( 'domain' => 'text', 'code' => 'unittype3', 'label' => 'Unit type 3', 'status' => 1 ),
@@ -61,6 +61,7 @@ return array (
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/unittype1', 'domain' => 'text', 'refid' => 'text/cafe_long_desc', 'start' => '2008-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'pos' => 2 ),
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/unittype2', 'domain' => 'text', 'refid' => 'text/cafe_delivery_desc', 'start' => '2008-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'pos' => 3 ),
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/unittype2', 'domain' => 'text', 'refid' => 'text/cafe_payment_desc', 'start' => '2008-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'pos' => 4 ),
+		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/cafe_quote', 'start' => '2008-01-01 00:00:00', 'end' => '2019-01-01 00:00:00', 'pos' => 5 ),
 
 		array( 'parentid' => 'catalog/tea', 'typeid' => 'text/unittype6', 'domain' => 'text', 'refid' => 'text/tea', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'pos' => 0 ),
 		array( 'parentid' => 'catalog/tea', 'typeid' => 'text/unittype7', 'domain' => 'text', 'refid' => 'text/tea_short_desc', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'pos' => 1 ),
@@ -80,7 +81,7 @@ return array (
 		array( 'parentid' => 'catalog/new', 'typeid' => 'media/default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'pos' => 1 ),
 		array( 'parentid' => 'catalog/internet', 'typeid' => 'media/default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'pos' => 2 ),
 		array( 'parentid' => 'catalog/group', 'typeid' => 'media/default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'pos' => 3 ),
-		
+
 		array( 'parentid' => 'catalog/new', 'typeid' => 'text/unittype18', 'domain' => 'text', 'refid' => 'text/new', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'pos' => 0 ),
 		array( 'parentid' => 'catalog/new', 'typeid' => 'text/unittype19', 'domain' => 'text', 'refid' => 'text/new_long_desc', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'pos' => 1 ),
 		array( 'parentid' => 'catalog/new', 'typeid' => 'text/unittype20', 'domain' => 'text', 'refid' => 'text/new_metatitle', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'pos' => 2 ),

@@ -7,8 +7,8 @@
 
 ?>
 <div class="catalog-list-quote">
-<?php foreach( $this->texts as $txtItem ) : ?>
-	<article><?php echo $txtItem->getContent(); ?></article>
+<?php foreach( $this->get( 'quoteItems', array() ) as $quoteItem ) : ?>
+	<article><?php echo $quoteItem->getContent(); ?></article>
 <?php endforeach; ?>
 <?php echo $this->get( 'quoteBody' ); ?>
 </div>

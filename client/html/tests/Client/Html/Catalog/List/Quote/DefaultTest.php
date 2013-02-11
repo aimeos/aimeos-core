@@ -40,7 +40,7 @@ class Client_Html_Catalog_List_Quote_DefaultTest extends MW_Unittest_Testcase
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
-		$catItems = $catalogManager->searchItems( $search );
+		$catItems = $catalogManager->searchItems( $search, array('text') );
 
 		if( ( $catItem = reset( $catItems ) ) === false ) {
 			throw new Exception( 'No catalog item found' );
@@ -76,12 +76,26 @@ class Client_Html_Catalog_List_Quote_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
+		$quoteItems = $this->_object->getView()->get( 'quoteItems', array() );
+
+		if( ( $quoteItem = reset( $quoteItems ) ) === false ) {
+			throw new Exception( 'No quote item found' );
+		}
+
+		$this->assertEquals( 'Kaffee Bewertungen', $quoteItem->getContent() );
 		$this->assertStringStartsWith( '<div class="catalog-list-quote">', $output );
 	}
+
 
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( 'invalid', 'invalid' );
+	}
+
+
+	public function testProcess()
+	{
+		$this->_object->process();
 	}
 }

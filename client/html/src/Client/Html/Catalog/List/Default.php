@@ -21,7 +21,7 @@ class Client_Html_Catalog_List_Default
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/catalog/list/default/subparts';
-	private $_subPartNames = array( 'header', 'pagination', 'items', 'pagination', 'quote' );
+	private $_subPartNames = array( 'quote', 'header', 'pagination', 'items', 'pagination' );
 
 
 	/**
