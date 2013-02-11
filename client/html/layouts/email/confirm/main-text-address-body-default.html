@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+
+
+<?php
+	try
+	{
+		$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+
+		echo str_replace( "\n\n", "\n", sprintf( $this->translate( 'client/html',
+'Billing address:
+%1$s %2$s %3$s
+%4$s %5$s
+%6$s
+%7$s %8$s
+Country: %9$s
+Language: %10$s
+E-Mail: %11$s
+Phone: %12$s
+Fax: %13$s
+Website: %14$s
+'
+			),
+			$this->translate( 'client/html', $addr->getSalutation() ), $addr->getFirstName(), $addr->getLastName(),
+			$addr->getAddress1(), $addr->getAddress2(),
+			$addr->getAddress3(),
+			$addr->getPostal(), $addr->getCity(),
+			$this->translate( 'client/html/country', $addr->getCountryId() ),
+			$this->translate( 'client/html/language', $addr->getLanguageId() ),
+			$addr->getEmail(),
+			$addr->getTelephone(),
+			$addr->getTelefax(),
+			$addr->getWebsite()
+		) );
+	}
+	catch( Exception $e ) { ; }
+?>
+
+
+<?php
+	try
+	{
+		$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+
+		echo str_replace( "\n\n", "\n", sprintf( $this->translate( 'client/html',
+'Delivery address:
+%1$s %2$s %3$s
+%4$s %5$s
+%6$s
+%7$s %8$s
+Country: %9$s
+Language: %10$s
+E-Mail: %11$s
+Phone: %12$s
+Fax: %13$s
+Website: %14$s
+'
+			),
+			$this->translate( 'client/html', $addr->getSalutation() ), $addr->getFirstName(), $addr->getLastName(),
+			$addr->getAddress1(), $addr->getAddress2(),
+			$addr->getAddress3(),
+			$addr->getPostal(), $addr->getCity(),
+			$this->translate( 'client/html/country', $addr->getCountryId() ),
+			$this->translate( 'client/html/language', $addr->getLanguageId() ),
+			$addr->getEmail(),
+			$addr->getTelephone(),
+			$addr->getTelefax(),
+			$addr->getWebsite()
+		) );
+	}
+	catch( Exception $e ) { ; }
+?>
+
+
+<?php echo $this->get( 'addressBody' ); ?>
