@@ -50,13 +50,13 @@ class Client_Html_Basket_Mini_Main_Default
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->mainErrorList = $view->get( 'mainErrorList', array() ) + $error;
+			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->mainErrorList = $view->get( 'mainErrorList', array() ) + $error;
+			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
@@ -65,7 +65,7 @@ class Client_Html_Basket_Mini_Main_Default
 
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->mainErrorList = $view->get( 'mainErrorList', array() ) + $error;
+			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 		}
 
 		$tplconf = 'client/html/basket/mini/main/default/template-body';
