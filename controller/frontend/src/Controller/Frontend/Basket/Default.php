@@ -88,8 +88,10 @@ class Controller_Frontend_Basket_Default
 
 		$result = $catalogListManager->searchItems( $search );
 
-		if( reset( $result ) === false ) {
-			throw new Controller_Frontend_Basket_Exception( sprintf( 'Adding product with ID "%1$s" is not allowed', $prodid ) );
+		if( reset( $result ) === false )
+		{
+			$msg = sprintf( 'Adding product with ID "%1$s" is not allowed', $prodid );
+			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
 
@@ -99,7 +101,6 @@ class Controller_Frontend_Basket_Default
 		$orderBaseProductItem = $this->_getDomainManager( 'order/base/product' )->createItem();
 		$orderBaseProductItem->copyFrom( $productItem );
 		$orderBaseProductItem->setQuantity( $quantity );
-		$orderBaseProductItem->productId = $productItem->getId();
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
@@ -111,9 +112,8 @@ class Controller_Frontend_Basket_Default
 			{
 				$orderBaseProductItem->setProductCode( $productItem->getCode() );
 				$orderBaseProductItem->setSupplierCode( $productItem->getSupplierCode() );
-
-				$orderBaseProductItem->parentId = $orderBaseProductItem->productId;
-				$orderBaseProductItem->productId = $productItem->getId();
+				$orderBaseProductItem->parentId = $orderBaseProductItem->getProductId();
+				$orderBaseProductItem->setProductId( $productItem->getId() );
 
 				$subprices = $productItem->getRefItems( 'price', 'default' );
 
@@ -148,6 +148,7 @@ class Controller_Frontend_Basket_Default
 
 			$orderAttributeItem = $orderProductAttributeManager->createItem();
 			$orderAttributeItem->copyFrom( $attrItem );
+			$orderAttributeItem->setType( 'config' );
 
 			$orderAttributes[] = $orderAttributeItem;
 		}
@@ -175,7 +176,7 @@ class Controller_Frontend_Basket_Default
 
 		if( $product->getFlags() === MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 		{
-			$msg = sprintf( 'Basket item with position "%1$d" is immutable', $position );
+			$msg = sprintf( 'Basket item at position "%1$d" cannot be deleted manually', $position );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
@@ -197,13 +198,13 @@ class Controller_Frontend_Basket_Default
 
 		if( $product->getFlags() === MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 		{
-			$msg = sprintf( 'Basket item with position "%1$d" is immutable', $position );
+			$msg = sprintf( 'Basket item at position "%1$d" cannot be changed', $position );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
 
 		$productManager = $this->_getDomainManager( 'product' );
-		$productItem = $productManager->getItem( $product->productId, array( 'price' ) );
+		$productItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
@@ -343,10 +344,8 @@ class Controller_Frontend_Basket_Default
 		$orderServiceItem->copyFrom( $serviceItem );
 
 		$price = $provider->calcPrice( $this->_basket );
-
 		// remove service rebate of original price
 		$price->setRebate( '0.00' );
-
 		$orderServiceItem->setPrice( $price );
 
 		$orderBaseServiceAttributeManager = $orderBaseServiceManager->getSubManager('attribute');
@@ -357,6 +356,8 @@ class Controller_Frontend_Basket_Default
 			$ordBaseAtrrItem = $orderBaseServiceAttributeManager->createItem();
 			$ordBaseAtrrItem->setCode( $key );
 			$ordBaseAtrrItem->setValue( strip_tags( $value ) ); // prevent XSS
+			$ordBaseAtrrItem->setType( 'config' );
+
 			$attributeItems[] = $ordBaseAtrrItem;
 		}
 
