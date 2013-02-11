@@ -49,13 +49,13 @@ class Client_Html_Catalog_List_Breadcrumb_Default
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->breadcrumbErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
+			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->breadcrumbErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
+			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
@@ -64,7 +64,7 @@ class Client_Html_Catalog_List_Breadcrumb_Default
 
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->breadcrumbErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
+			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 
 		$tplconf = 'client/html/catalog/list/breadcrumb/default/template-body';
