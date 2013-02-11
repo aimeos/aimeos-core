@@ -90,4 +90,10 @@ class Client_Html_Basket_Mini_DefaultTest extends MW_Unittest_Testcase
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( '$$$', '$$$' );
 	}
+
+
+	public function testProcess()
+	{
+		$this->_object->process();
+	}
 }

@@ -44,7 +44,7 @@ class Client_Html_Basket_Mini_Main_Default
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->miniErrorList = $view->get( 'mainErrorList', array() ) + $error;
+			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
@@ -150,16 +150,13 @@ class Client_Html_Basket_Mini_Main_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			try
-			{
-				$view->priceItem = $view->miniBasket->getPrice();
-				$count = 0;
-				foreach( $view->miniBasket->getProducts() as $product ) {
-					$count = $count + $product->getQuantity();
-				}
-				$view->miniQuantity = $count;
+			$view->mainPriceItem = $view->miniBasket->getPrice();
+			$count = 0;
+			foreach( $view->miniBasket->getProducts() as $product ) {
+				$count = $count + $product->getQuantity();
 			}
-			catch( Exception $e ) { ; }
+
+			$view->mainQuantity = $count;
 
 			$this->_cache = $view;
 		}

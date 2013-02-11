@@ -5,16 +5,18 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-$miniPriceValue = '0.00';
-$miniPriceCurrency = '';
+
 try{
-	$miniPriceValue = $this->priceItem->getValue();
-	$miniPriceCurrency = $this->translate( 'core/client/html/currency', $this->priceItem->getCurrencyId() );
+	$miniPriceValue = $this->mainPriceItem->getValue();
+	$miniPriceCurrency = $this->translate( 'core/client/html/currency', $this->mainPriceItem->getCurrencyId() );
 }
-catch( Exception $e ){ ; }
+catch( Exception $e ){
+	$miniPriceValue = '0.00';
+	$miniPriceCurrency = '';
+}
 ?>
 <div class="basket-mini-main">
-	<?php printf( $this->translate( 'client/html', '%1$d article - %2$s%3$s', '%1$d articles - %2$s%3$s', $this->get( 'miniQuantity', 0 ) ), $this->get( 'miniQuantity', 0 ), $this->number( $miniPriceValue ), $miniPriceCurrency ); ?>
+	<?php printf( $this->translate( 'client/html', '%1$d article - %2$s%3$s', '%1$d articles - %2$s%3$s', $this->get( 'mainQuantity', 0 ) ), $this->get( 'mainQuantity', 0 ), $this->number( $miniPriceValue ), $miniPriceCurrency ); ?>
 </div>
 
 <?php echo $this->get( 'mainBody' ); ?>
