@@ -4,13 +4,18 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
+
+$listTarget = $this->config( 'client/html/catalog/list/url/target' );
+$listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
+
 ?>
 <div class="catalog-list-breadcrumb">
 <?php $target = $this->config( 'catalog-list-target' ); ?>
 <?php if( isset( $this->listCatPath ) ) : ?>
 	<ol>
 <?php	foreach( (array) $this->listCatPath as $cat ) : ?>
-		<li><a href="<?php echo $this->url( $target, 'catalog', 'list', array( 'f-catalog-id' => $cat->getId() ), array( $cat->getName() ) ); ?>"><?php echo $cat->getName(); ?></a></li>
+		<li><a href="<?php echo $this->url( $listTarget, $listController, $listAction, array( 'f-catalog-id' => $cat->getId() ), array( $cat->getName() ) ); ?>"><?php echo $cat->getName(); ?></a></li>
 <?php	endforeach; ?>
 	</ol>
 <?php endif; ?>

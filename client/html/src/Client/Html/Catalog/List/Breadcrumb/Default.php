@@ -32,7 +32,7 @@ class Client_Html_Catalog_List_Breadcrumb_Default
 		try
 		{
 			$view = $this->getView();
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody();
@@ -43,7 +43,7 @@ class Client_Html_Catalog_List_Breadcrumb_Default
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->breadcrumbErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
+			$view->listErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
@@ -61,7 +61,7 @@ class Client_Html_Catalog_List_Breadcrumb_Default
 		{
 			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-		
+
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->breadcrumbErrorList = $view->get( 'breadcrumbErrorList', array() ) + $error;
@@ -84,7 +84,7 @@ class Client_Html_Catalog_List_Breadcrumb_Default
 		try
 		{
 			$view = $this->getView();
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader();

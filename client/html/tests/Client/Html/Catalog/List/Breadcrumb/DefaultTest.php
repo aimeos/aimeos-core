@@ -48,7 +48,7 @@ class Client_Html_Catalog_List_Breadcrumb_DefaultTest extends MW_Unittest_Testca
 
 		$view = TestHelper::getView();
 
-		$view->listCatPath = array( $catalogManager->createItem(), $catItem );
+		$view->listCatPath = $catalogManager->getPath( $catItem->getId() );
 
 		$this->_object->setView( $view );
 	}
@@ -79,9 +79,16 @@ class Client_Html_Catalog_List_Breadcrumb_DefaultTest extends MW_Unittest_Testca
 		$this->assertStringStartsWith( '<div class="catalog-list-breadcrumb">', $output );
 	}
 
+
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( 'invalid', 'invalid' );
+	}
+
+
+	public function testProcess()
+	{
+		$this->_object->process();
 	}
 }
