@@ -43,7 +43,7 @@ class Client_Html_Catalog_List_Stage_Default
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'stageErrorList', array() ) + $error;
+			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
