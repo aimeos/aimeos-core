@@ -71,22 +71,29 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<div class="basket-mini-main">', $output );
 	}
-	
-	
+
+
 	public function testGetBodyAddedOneProduct()
 	{
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		
-		$cneOrderItem = $this->_getOrderProductItem( 'CNE', 9 );
+
+		$productItem = $this->_getProductItem( 'CNE' );
+
 		$view = $this->_object->getView();
+
+		$controller->addProduct(
+			$productItem->getId(),
+			9
+		);
 		$view->miniBasket = $controller->get();
-		
-		$view->miniBasket->addProduct( $cneOrderItem );
-		
+
 		$output = $this->_object->getBody();
+
+		$controller->deleteProduct(0);
+
 		$this->assertStringStartsWith( '<div class="basket-mini-main">', $output );
 		$this->assertRegExp( '#9 articles#smU', $output );
-		$this->assertRegExp( '#40.50EUR#smU', $output );
+		$this->assertRegExp( '#162.00EUR#smU', $output );
 	}
 
 
@@ -102,25 +109,19 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( '$$$', '$$$' );
 	}
-	
-	
-	protected function _getOrderProductItem( $code, $quantity )
+
+
+	protected function _getProductItem( $code )
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' )->getSubManager( 'product' );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$search = $manager->createSearch();
-		
-		$expr = array(
-			$search->compare( '==', 'order.base.product.prodcode', $code ),
-			$search->compare( '==', 'order.base.product.quantity', $quantity )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		
-		$items = $manager->searchItems( $search );
-	
+		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
+		$items = $manager->searchItems( $search, array('price') );
+
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( sprintf( 'No order product item with code "%1$s" and quantity "%2$s" found', $code, $quantity ) );
+			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
 		}
-	
+
 		return $item;
 	}
 }

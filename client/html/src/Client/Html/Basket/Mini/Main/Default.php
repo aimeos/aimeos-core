@@ -33,7 +33,7 @@ class Client_Html_Basket_Mini_Main_Default
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody();
@@ -44,7 +44,7 @@ class Client_Html_Basket_Mini_Main_Default
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->mainErrorList = $view->get( 'mainErrorList', array() ) + $error;
+			$view->miniErrorList = $view->get( 'mainErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
@@ -85,7 +85,7 @@ class Client_Html_Basket_Mini_Main_Default
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader();
@@ -97,7 +97,7 @@ class Client_Html_Basket_Mini_Main_Default
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			return;
 		}
-		
+
 		$tplconf = 'client/html/basket/mini/main/default/template-header';
 		$default = 'basket/mini/main-header-default.html';
 
@@ -139,8 +139,8 @@ class Client_Html_Basket_Mini_Main_Default
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
-	
-	
+
+
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
@@ -160,10 +160,10 @@ class Client_Html_Basket_Mini_Main_Default
 				$view->miniQuantity = $count;
 			}
 			catch( Exception $e ) { ; }
-			
+
 			$this->_cache = $view;
 		}
-		
+
 		return $this->_cache;
 	}
 }

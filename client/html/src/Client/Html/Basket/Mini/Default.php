@@ -22,7 +22,7 @@ class Client_Html_Basket_Mini_Default
 	private $_subPartPath = 'client/html/basket/mini/default/subparts';
 	private $_subPartNames = array( 'main' );
 
-	
+
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
@@ -33,7 +33,7 @@ class Client_Html_Basket_Mini_Default
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody();
@@ -66,9 +66,8 @@ class Client_Html_Basket_Mini_Default
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
-			echo "WTFEWFFFFF\n".$e."\n";
 		}
-		
+
 		$tplconf = 'client/html/basket/mini/default/template-body';
 		$default = 'basket/mini/body-default.html';
 
@@ -86,7 +85,7 @@ class Client_Html_Basket_Mini_Default
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader();
@@ -98,7 +97,7 @@ class Client_Html_Basket_Mini_Default
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			return;
 		}
-		
+
 		$tplconf = 'client/html/basket/mini/default/template-header';
 		$default = 'basket/mini/header-default.html';
 
@@ -138,8 +137,8 @@ class Client_Html_Basket_Mini_Default
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
-	
-	
+
+
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
@@ -151,10 +150,10 @@ class Client_Html_Basket_Mini_Default
 		{
 			$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
 			$view->miniBasket = $controller->get();
-			
+
 			$this->_cache = $view;
 		}
-		
+
 		return $this->_cache;
 	}
 }

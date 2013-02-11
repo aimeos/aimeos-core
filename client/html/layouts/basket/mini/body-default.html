@@ -16,4 +16,5 @@
 <?php endif; ?>
 	<h1><?php echo $this->translate( 'core/client/html', 'Minibasket' ); ?></h1>
 <?php echo $this->get( 'miniBody' ); ?>
+<button type="button" onclick="location='<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index'); ?>">Basket</button>
 </div>
