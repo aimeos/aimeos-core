@@ -18,28 +18,28 @@ msgstr ""
 
 # Zahlungsstatus
 
-msgid "paystatus:-1"
+msgid "pay:-1"
 msgstr "Offen"
 
-msgid "paystatus:0"
+msgid "pay:0"
 msgstr "Gelöscht"
 
-msgid "paystatus:1"
+msgid "pay:1"
 msgstr "Abgebrochen"
 
-msgid "paystatus:2"
+msgid "pay:2"
 msgstr "Abgelehnt"
 
-msgid "paystatus:3"
+msgid "pay:3"
 msgstr "Erstattet"
 
-msgid "paystatus:4"
+msgid "pay:4"
 msgstr "Wartend"
 
-msgid "paystatus:5"
+msgid "pay:5"
 msgstr "Authorisiert"
 
-msgid "paystatus:6"
+msgid "pay:6"
 msgstr "Erhalten"
 
 
