@@ -117,7 +117,7 @@ foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 <?php	if( isset( $paymentAddr['customer.address.languageid'] ) && $paymentAddr['customer.address.languageid'] != '' ) : ?>
 				<li class="item-languageid <?php echo ( isset( $paymentCss['languageid'] ) ? join( ' ', $paymentCss['languageid'] ) : '' ); ?>">
 					<span class="name"><?php echo $this->translate( 'client/html', 'Language' ); ?></span>
-					<span class="value"><?php echo $paymentAddr['customer.address.languageid']; ?></span>
+					<span class="value"><?php echo $this->translate( 'client/html/language', $paymentAddr['customer.address.languageid'] ); ?></span>
 				</li>
 <?php	endif; ?>
 <?php	if( isset( $paymentAddr['customer.address.email'] ) && $paymentAddr['customer.address.email'] != '' ) : ?>
@@ -215,7 +215,7 @@ foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 				<label for="address-billing-languageid"><?php echo $this->translate( 'client/html', 'Language' ); ?>
 				</label><select id="address-billing-languageid" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.languageid' ) ); ?>">
 <?php foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
-					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $billingLanguage ? 'selected="selected"' : '' ); ?>><?php echo $languageId; // Zend problem with context dependend translation: $this->translate( 'client/html/language', $languageId ); ?></option>
+					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $billingLanguage ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/language', $languageId ); ?></option>
 <?php endforeach; ?>
 				</select>
 			</li>
