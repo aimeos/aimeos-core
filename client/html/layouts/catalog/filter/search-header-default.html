@@ -5,19 +5,20 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-$listTarget = $this->config( 'client/html/catalog/list/search/url/target' );
-$listController = $this->config( 'client/html/catalog/list/search/url/controller', 'catalog' );
-$listAction = $this->config( 'client/html/catalog/list/search/url/action', 'list' );
+$listTarget = $this->config( 'client/html/catalog/listsimple/url/target' );
+$listController = $this->config( 'client/html/catalog/listsimple/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/listsimple/url/action', 'listsimple' );
 
 ?>
 <script type="text/javascript" language="javascript" defer="defer" src="<?php echo $this->config( 'client/html/common/template/baseurl' ); ?>js/jquery-ui-1.10.0.custom.min.js"></script>
+<script type="text/javascript" src=" http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready( function () {
 	$( ".catalog-filter-search #search-field" ).keyup( function( val ) {
 		var chars = $(this).val();
 		if ( chars.length > 2 ) {
 			$.post( "<?php echo $this->url( $listTarget, $listController, $listAction ); ?>",
-			chars,
+			{'f-search-text' : chars },
 			function( data, status ){
 				$( ".catalog-filter-search #search-field" ).autocomplete( {
 					source: data

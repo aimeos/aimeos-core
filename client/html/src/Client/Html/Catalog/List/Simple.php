@@ -31,7 +31,7 @@ class Client_Html_Catalog_List_Simple
 	public function getBody()
 	{
 		$context = $this->_getContext();
-		
+
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
@@ -136,6 +136,8 @@ class Client_Html_Catalog_List_Simple
 			$config = $context->getConfig();
 
 			$input = $view->param( 'f-search-text' );
+
+			echo var_dump($view->param('f-search-text'));
 
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 

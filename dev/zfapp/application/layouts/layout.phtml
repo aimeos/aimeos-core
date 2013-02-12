@@ -29,6 +29,7 @@ $sites = $this->sites();
 	<![endif]-->
 	<script type="text/javascript" src="<?php echo $this->pathstart;?>/js/jquery.js"></script>
 <?php echo ( isset( $this->filter ) ? $this->filter->getHeader() : '' ); ?>
+<?php echo ( isset( $this->searchfilter ) ? $this->searchfilter->getHeader() : '' ); ?>
 <?php echo ( isset( $this->list ) ? $this->list->getHeader() : '' ); ?>
 <?php echo ( isset( $this->detail ) ? $this->detail->getHeader() : '' ); ?>
 <?php echo ( isset( $this->basket ) ? $this->basket->getHeader() : '' ); ?>
@@ -68,11 +69,9 @@ $sites = $this->sites();
 								<br />
 
 								<div id="headerSearch">
-									<?php
-									if( isset( $this->filter ) ) {
-										echo $this->filter->getSubClient( 'search' )->getBody();
-									}
-									?>
+								<?php if( isset( $this->searchfilter ) ) : ?>
+								<?php	echo $this->searchfilter->getBody(); ?>
+								<?php endif; ?>
 								</div>
 							</div>
 						</div>
