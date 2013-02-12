@@ -15,6 +15,7 @@ return array (
 		'attribute/prod_242x416' => array( 'domain' => 'attribute', 'code' => 'prod_242x416', 'label' => 'Product 242x416', 'status' => 1 ),
 		'attribute/prod_97x93' => array( 'domain' => 'attribute', 'code' => 'prod_97x93', 'label' => 'Product 97x93', 'status' => 1 ),
 		'product/download' => array( 'domain' => 'product', 'code' => 'download', 'label' => '', 'status' => null ),
+		'catalog/stage' => array( 'domain' => 'catalog', 'code' => 'stage', 'label' => 'Stage', 'status' => 1 ),
 
 		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
@@ -39,6 +40,7 @@ return array (
 		'media/path/to/folder/example5.jpg' => array( 'langid' => 'de', 'typeid' => 'product/download', 'domain' => 'product', 'label' => 'example image 1', 'link' => 'path/to/folder/example5.jpg', 'status' => 1, 'mimetype' => 'image/jpg' ),
 		'media/path/to/folder/example6.jpg' => array( 'langid' => 'de', 'typeid' => 'product/download', 'domain' => 'product', 'label' => 'example image 2', 'link' => 'path/to/folder/example6.jpg', 'status' => 1, 'mimetype' => 'image/jpg' ),
 		'media/service_image1' => array( 'langid' => null, 'typeid' => 'service/default', 'domain' => 'service', 'label' => 'service_image1', 'link' => 'path/to/service.png', 'status' => 1, 'mimetype' => 'image/png' ),
+		'media/path/to/folder/cafe/stage.jpg' => array( 'langid' => 'de', 'typeid' => 'catalog/stage', 'domain' => 'catalog', 'label' => 'Cafe Stage image', 'link' => 'path/to/folder/cafe/stage.jpg', 'status' => 1, 'mimetype' => 'image/jpg' ),
 	),
 
 
