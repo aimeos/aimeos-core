@@ -80,10 +80,7 @@ return array (
 		array( 'parentid' => 'catalog/new', 'typeid' => 'media/default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'pos' => 1 ),
 		array( 'parentid' => 'catalog/internet', 'typeid' => 'media/default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'pos' => 2 ),
 		array( 'parentid' => 'catalog/group', 'typeid' => 'media/default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'pos' => 3 ),
-<<<<<<< HEAD
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'media/default', 'domain' => 'media', 'refid' => 'media/path/to/folder/cafe/stage.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'pos' => 4 ),
-=======
->>>>>>> 47d1d785c5d2ad9a4495f5c2b56a2a13b23e80a3
 
 		array( 'parentid' => 'catalog/new', 'typeid' => 'text/unittype18', 'domain' => 'text', 'refid' => 'text/new', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'pos' => 0 ),
 		array( 'parentid' => 'catalog/new', 'typeid' => 'text/unittype19', 'domain' => 'text', 'refid' => 'text/new_long_desc', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'pos' => 1 ),
