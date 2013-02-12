@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$iconvPrefs = array(
+	'scheme' => 'Q',
+	'input-charset' => 'UTF-8',
+	'output-charset' => 'UTF-8',
+	'line-length' => 76,
+	'line-break-chars' => "\r\n",
+);
+
+$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+
+?>
+<?php echo iconv_mime_encode( 'Subject', sprintf( $this->translate( 'client/html', 'Confirmation for order %1$s' ), $this->confirmOrderItem->getId() ), $iconvPrefs ) . "\r\n"; ?>
+<?php echo iconv_mime_encode( 'From', $this->config( 'client/html/email/confirm/email-from' ), $iconvPrefs ) . "\r\n"; ?>
+<?php echo iconv_mime_encode( 'To', sprintf( $this->translate( 'client/html', '"%1$s %2$s" <%3$s>' ), $addr->getFirstName(), $addr->getLastName(), $addr->getEmail() ), $iconvPrefs ) . "\r\n"; ?>
+Message-Id: <<?php echo microtime( true ) . $addr->getEmail(); ?>><?php echo "\r\n"; ?>
+X-MailGenerator: Arcavias<?php echo "\r\n"; ?>
+Date: <?php echo date( 'r' ) . "\r\n"; ?>
+Content-Type: multipart/mixed; charset=UTF-8;<?php echo "\r\n"; ?>
+ boundary="<?php echo $this->get( 'confirmBoundary' ); ?>"<?php echo "\r\n"; ?>
+MIME-Version: 1.0<?php echo "\r\n"; ?>
+<?php echo $this->get( 'confirmHeader' ) . "\r\n"; ?>
