@@ -11,7 +11,6 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 
 ?>
 <div class="catalog-list-breadcrumb">
-<?php $target = $this->config( 'catalog-list-target' ); ?>
 <?php if( isset( $this->listCatPath ) ) : ?>
 	<ol>
 <?php	foreach( (array) $this->listCatPath as $cat ) : ?>

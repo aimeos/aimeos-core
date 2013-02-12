@@ -76,6 +76,7 @@ class Client_Html_Catalog_List_Breadcrumb_DefaultTest extends MW_Unittest_Testca
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
+		$this->assertRegExp( '#Root.*.Categories.*.Kaffee.*#smU', $output );
 		$this->assertStringStartsWith( '<div class="catalog-list-breadcrumb">', $output );
 	}
 
