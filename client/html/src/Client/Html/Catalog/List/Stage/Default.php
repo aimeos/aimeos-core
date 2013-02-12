@@ -70,8 +70,6 @@ class Client_Html_Catalog_List_Stage_Default
 		$tplconf = 'client/html/catalog/list/stage/default/template-body';
 		$default = 'catalog/list/stage-body-default.html';
 
-// 		print_r($view->mediaItems);
-
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
 
@@ -156,20 +154,22 @@ class Client_Html_Catalog_List_Stage_Default
 
 			if( isset( $view->listCatPath ) )
 			{
-				$catPath = $view->listCatPath;
+				$catPath = $view->get( 'listCatPath', array() );
 
-				foreach( array_reverse( $catPath ) as $catItem ) {
+				foreach( array_reverse( $catPath ) as $catItem )
+				{
 					$mediaItems = $catItem->getRefItems( 'media', 'stage', 'default' );
 					if( !empty( $mediaItems ) ) {
 						break;
 					}
 				}
 
-				$view->categoryName = end( $catPath )->getName();
+				if( ( $view->categoryName = end( $catPath )->getName() ) === false ) {
+					$view->categoryName = 'Default';
+				}
 			}
 
 			$view->mediaItems = $mediaItems;
-// 			print_r($view->mediaItems);
 			$this->_cache = $view;
 		}
 
