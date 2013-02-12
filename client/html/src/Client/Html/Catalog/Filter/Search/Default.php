@@ -31,7 +31,7 @@ class Client_Html_Catalog_Filter_Search_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->getView();
 	
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -43,19 +43,19 @@ class Client_Html_Catalog_Filter_Search_Default
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->searchErrorList = $view->get( 'searchErrorList', array() ) + $error;
+			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->searchErrorList = $view->get( 'searchErrorList', array() ) + $error;
+			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->searchErrorList = $view->get( 'searchErrorList', array() ) + $error;
+			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
@@ -64,7 +64,7 @@ class Client_Html_Catalog_Filter_Search_Default
 		
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->searchErrorList = $view->get( 'searchErrorList', array() ) + $error;
+			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
 		
 		$tplconf = 'client/html/catalog/filter/search/default/template-body';
@@ -83,7 +83,7 @@ class Client_Html_Catalog_Filter_Search_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->getView();
 	
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -137,25 +137,5 @@ class Client_Html_Catalog_Filter_Search_Default
 	public function process()
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
-	}
-	
-	
-	/**
-	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
-	 */
-	protected function _setViewParams( MW_View_Interface $view )
-	{
-		if( !isset( $this->_cache ) )
-		{
-			$view->ajaxtarget = '';
-			$view->submittarget = '';
-	
-			$this->_cache = $view;
-		}
-	
-		return $this->_cache;
 	}
 }

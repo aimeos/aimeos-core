@@ -57,7 +57,7 @@ class MW_View_Helper_Url_Default
 
 		$badchars = array( ' ', '&', '%', '?', '#', '=', '{', '}', '|', '\\', '^', '~', '[', ']', '`' );
 		$pretty = str_replace( $badchars, '-', $pretty );
-
+		
 		return $this->_baseUrl . '/' . $path . $pretty . $parameter;
 	}
 }

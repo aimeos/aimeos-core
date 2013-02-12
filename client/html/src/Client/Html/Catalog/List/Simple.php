@@ -20,7 +20,7 @@ class Client_Html_Catalog_List_Simple
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/catalog/list/simple/subparts';
-	private $_subPartNames = array( 'header', 'pagination', 'items', 'pagination' );
+	private $_subPartNames = array();
 
 
 	/**
@@ -164,7 +164,8 @@ class Client_Html_Catalog_List_Simple
 
 			$json = array();
 			foreach( $items as $id => $name ) {
-				$json[] = array( 'id' => $id, 'name' => $name );
+				$json[ $id ] = $name;
+// 				$json[] = array( 'id' => $id, 'name' => $name );
 			}
 
 			$view->listTextItems = json_encode( $json );

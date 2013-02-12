@@ -5,13 +5,15 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$listTarget = $this->config( 'client/html/catalog/list/url/target' );
+$listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
+
 ?>
 <div class="catalog-filter-search">
-	<form name="input" action="<?php echo $this->get( 'submittarget', '' ); ?>" method="post">
-		<div class="catalog-filter-search">
-			<input type="text" id="search-field"></input>
-			<input type="submit" value="Search">
-		</div>
+	<form action="<?php echo $this->url( $listTarget, $listController, $listAction ); ?>" method="POST">
+		<input type="text" id="search-field"></input>
+		<input type="submit">
 	</form>
 <?php echo $this->get( 'searchBody' ); ?>
 </div>
