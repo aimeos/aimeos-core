@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 20123
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
  * @subpackage Html
@@ -32,7 +32,7 @@ class Client_Html_Catalog_Filter_Search_Default
 		try
 		{
 			$view = $this->getView();
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody();
@@ -61,12 +61,12 @@ class Client_Html_Catalog_Filter_Search_Default
 		{
 			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-		
+
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
-		
+
 		$tplconf = 'client/html/catalog/filter/search/default/template-body';
 		$default = 'catalog/filter/search-body-default.html';
 
@@ -84,7 +84,7 @@ class Client_Html_Catalog_Filter_Search_Default
 		try
 		{
 			$view = $this->getView();
-	
+
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader();

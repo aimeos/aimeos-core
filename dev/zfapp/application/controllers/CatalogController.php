@@ -32,6 +32,8 @@ class CatalogController extends Application_Controller_Action_Abstract
 		$this->view->filter = Client_Html_Catalog_Filter_Factory::createClient( $context, $templatePaths );
 		$this->view->filter->setView( $this->_createView() );
 
+		$this->view->filter->getSubClient( 'search' )->setView( $this->_createView() );
+
 		$this->view->list = Client_Html_Catalog_List_Factory::createClient( $context, $templatePaths );
 		$this->view->list->setView( $this->_createView() );
 
@@ -54,6 +56,8 @@ class CatalogController extends Application_Controller_Action_Abstract
 
 		$this->view->filter = Client_Html_Catalog_Filter_Factory::createClient( $context, $templatePaths );
 		$this->view->filter->setView( $this->_createView() );
+
+		$this->view->filter->getSubClient( 'search' )->setView( $this->_createView() );
 
 		$this->view->detail = Client_Html_Catalog_Detail_Factory::createClient( $context, $templatePaths );
 		$this->view->detail->setView( $this->_createView() );

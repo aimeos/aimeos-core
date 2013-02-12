@@ -68,13 +68,11 @@ $sites = $this->sites();
 								<br />
 
 								<div id="headerSearch">
-									<form action="<?php echo $this->url( array( 'site' => $this->params['site'] ), 'routeMin', true ) ?>" method="post">
-									<span>Search:</span><input class="input12b" type="text" name="f-search-text" value="<?php echo $searchString;?>">
-									<button class="searchbutton12" value="" type="submit">
-										<img width="14" height="18" alt="Search" src="<?php echo $this->pathstart;?>/images/loupe.jpg" />
-									</button>
-
-									</form>
+									<?php
+									if( isset( $this->filter ) ) {
+										echo $this->filter->getSubClient( 'search' )->getBody();
+									}
+									?>
 								</div>
 							</div>
 						</div>
