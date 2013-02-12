@@ -151,9 +151,10 @@ class Client_Html_Basket_Mini_Main_Default
 		if( !isset( $this->_cache ) )
 		{
 			$view->mainPriceItem = $view->miniBasket->getPrice();
+
 			$count = 0;
 			foreach( $view->miniBasket->getProducts() as $product ) {
-				$count = $count + $product->getQuantity();
+				$count += $product->getQuantity();
 			}
 
 			$view->mainQuantity = $count;
