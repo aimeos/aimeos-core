@@ -11,7 +11,8 @@ try
 	$miniPriceValue = $this->mainPriceItem->getValue();
 	$miniPriceCurrency = $this->translate( 'core/client/html/currency', $this->mainPriceItem->getCurrencyId() );
 }
-catch( Exception $e ){
+catch( Exception $e )
+{
 	$miniPriceValue = '0.00';
 	$miniPriceCurrency = '';
 }
