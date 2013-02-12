@@ -47,6 +47,7 @@ return array (
 		array( 'domain' => 'price', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'service', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		array( 'domain' => 'catalog', 'code' => 'stage', 'label' => 'Stage', 'status' => 1 ),
 	),
 
 	'media/list/type' => array (

@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+
+
+<?php
+	try
+	{
+		$service = $this->confirmOrderBaseItem->getService( 'payment' );
+
+		printf( $this->translate( 'client/html', "Payment: %1\$s\n" ), $service->getName() );
+		
+		foreach( $service->getAttributes() as $attribute )
+		{
+			if( $attribute->getType() !== '' )
+			{
+				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) );
+
+				switch( $attribute->getValue() )
+				{
+					case 'array':
+					case 'object':
+						$value = join( ', ', (array) $attribute->getValue() );
+						break;
+					default:
+						$value = $attribute->getValue();
+				}
+
+				printf( "- %1\$s: %2\$s\n", $name, $value );
+			}
+		}
+	}
+	catch( Exception $e ) { ; }
+?>
+
+
+<?php
+	try
+	{
+		$service = $this->confirmOrderBaseItem->getService( 'delivery' );
+
+		printf( $this->translate( 'client/html', "Delivery: %1\$s\n" ), $service->getName() );
+		
+		foreach( $service->getAttributes() as $attribute )
+		{
+			if( $attribute->getType() !== '' )
+			{
+				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) );
+
+				switch( $attribute->getValue() )
+				{
+					case 'array':
+					case 'object':
+						$value = join( ', ', (array) $attribute->getValue() );
+						break;
+					default:
+						$value = $attribute->getValue();
+				}
+
+				printf( "- %1\$s: %2\$s\n", $name, $value );
+			}
+		}
+	}
+	catch( Exception $e ) { ; }
+?>
+
+
+<?php echo $this->get( 'serviceBody' ); ?>
