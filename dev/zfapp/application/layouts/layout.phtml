@@ -58,7 +58,14 @@ $sites = $this->sites();
 							<div id="headerRightBg">
 								<a href="<?php echo $this->url( array( 'site' => $this->params['site'] ), 'routeMin', true ); ?>"><img src="<?php echo $this->pathstart;?>/images/arcavias.gif" id="headerLogo" alt="" /></a>
 								<div id="headerRightBox">
-									<div id="headerArticleBox"><?php if( isset( $this->minibasket ) ) echo $this->minibasket->getBody(); ?></div>
+									<div id="headerArticleBox">
+										<?php
+											if( isset( $this->minibasket ) ) {
+												echo $this->minibasket->getBody();
+											}
+										?>
+									</div>
+
 								</div>
 								<?php
 								foreach($sites as $code => $label) {
