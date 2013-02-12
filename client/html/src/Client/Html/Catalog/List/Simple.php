@@ -30,6 +30,8 @@ class Client_Html_Catalog_List_Simple
 	 */
 	public function getBody()
 	{
+		$context = $this->_getContext();
+		
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
@@ -44,28 +46,25 @@ class Client_Html_Catalog_List_Simple
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->simpleErrorList = $view->get( 'simpleErrorList', array() ) + $error;
+			$context->getLogger()->log( $error . PHP_EOL . $e->getTraceAsString() );
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->simpleErrorList = $view->get( 'simpleErrorList', array() ) + $error;
+			$context->getLogger()->log( $error . PHP_EOL . $e->getTraceAsString() );
 		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->simpleErrorList = $view->get( 'simpleErrorList', array() ) + $error;
+			$context->getLogger()->log( $error . PHP_EOL . $e->getTraceAsString() );
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
-			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->simpleErrorList = $view->get( 'simpleErrorList', array() ) + $error;
+			$context->getLogger()->log( $error . PHP_EOL . $e->getTraceAsString() );
 		}
 
 		$tplconf = 'client/html/catalog/list/simple/template-body';
