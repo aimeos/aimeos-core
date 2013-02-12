@@ -129,6 +129,7 @@ return array (
 		array( 'domain' => 'service', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		array( 'domain' => 'service', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		array( 'domain' => 'service', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
+		array( 'domain' => 'catalog', 'code' => 'quote', 'label' => 'Quote', 'status' => 1 ),
 	),
 
 	'text/list/type' => array (

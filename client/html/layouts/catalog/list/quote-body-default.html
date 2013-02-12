@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+<div class="catalog-list-quote">
+<?php foreach( $this->get( 'quoteItems', array() ) as $quoteItem ) : ?>
+	<article><?php echo $quoteItem->getContent(); ?></article>
+<?php endforeach; ?>
+<?php echo $this->get( 'quoteBody' ); ?>
+</div>
