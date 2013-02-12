@@ -42,24 +42,6 @@ class Client_Html_Catalog_List_Simple
 			}
 			$view->simpleListBody = $html;
 		}
-		catch( Client_Html_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$context->getLogger()->log( $error . PHP_EOL . $e->getTraceAsString() );
-		}
-		catch( Controller_Frontend_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$context->getLogger()->log( $error . PHP_EOL . $e->getTraceAsString() );
-		}
-		catch( MShop_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$context->getLogger()->log( $error . PHP_EOL . $e->getTraceAsString() );
-		}
 		catch( Exception $e )
 		{
 			$view = $this->getView();
@@ -158,13 +140,11 @@ class Client_Html_Catalog_List_Simple
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 
 			$filter = $controller->createTextFilter( $input, 'relevance' );
-			$items = array();
 			$items = $controller->getTextList( $filter );
 
 			$json = array();
 			foreach( $items as $id => $name ) {
 				$json[ $id ] = $name;
-// 				$json[] = array( 'id' => $id, 'name' => $name );
 			}
 
 			$view->listTextItems = json_encode( $json );
