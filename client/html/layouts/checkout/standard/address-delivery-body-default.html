@@ -49,108 +49,47 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 			<div class="values"><span class="value value-like"><?php echo $this->translate( 'client/html', 'like billing address' ); ?></span></div>
 		</div>
 	</div>
-<?php foreach( $this->get( 'addressCustomerAddressItems', array() ) as $address ) : $deliveryAddr = $address->toArray(); ?>
+<?php foreach( $this->get( 'addressCustomerAddressItems', array() ) as $addr ) : ?>
 	<div class="item-address">
 		<div class="header">
-			<input type="radio" name="<?php echo $this->formparam( array( 'ca-delivery-option' ) ); ?>" value="<?php echo $address->getId(); ?>" <?php echo ( $deliveryOption == $address->getId() ? 'checked="checked"' : '' ); ?> />
-			<ul class="attr-list">
-<?php	if( isset( $deliveryAddr['customer.address.company'] ) && $deliveryAddr['customer.address.company'] != '' ) : ?>
-				<li class="item-company <?php echo ( isset( $deliveryCss['company'] ) ? join( ' ', $deliveryCss['company'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Company' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.company']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.salutation'] ) && $deliveryAddr['customer.address.salutation'] != '' ) : ?>
-				<li class="item-salutation <?php echo ( isset( $deliveryCss['salutation'] ) ? join( ' ', $deliveryCss['salutation'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Salutation' ); ?></span>
-					<span class="value"><?php echo $this->translate( 'client/html', $deliveryAddr['customer.address.salutation'] ); ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.firstname'] ) && $deliveryAddr['customer.address.firstname'] != '' ) : ?>
-				<li class="item-firstname <?php echo ( isset( $deliveryCss['firstname'] ) ? join( ' ', $deliveryCss['firstname'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'First name' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.firstname']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.lastname'] ) && $deliveryAddr['customer.address.lastname'] != '' ) : ?>
-				<li class="item-lastname <?php echo ( isset( $deliveryCss['lastname'] ) ? join( ' ', $deliveryCss['lastname'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Last name' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.lastname']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.address1'] ) && $deliveryAddr['customer.address.address1'] != '' ) : ?>
-				<li class="item-address1 <?php echo ( isset( $deliveryCss['address1'] ) ? join( ' ', $deliveryCss['address1'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Street' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.address1']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.address2'] ) && $deliveryAddr['customer.address.address2'] != '' ) : ?>
-				<li class="item-address2 <?php echo ( isset( $deliveryCss['address2'] ) ? join( ' ', $deliveryCss['address2'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Additional' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.address2']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.address3'] ) && $deliveryAddr['customer.address.address3'] != '' ) : ?>
-				<li class="item-address3 <?php echo ( isset( $deliveryCss['address3'] ) ? join( ' ', $deliveryCss['address3'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Additional 2' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.address3']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.postal'] ) && $deliveryAddr['customer.address.postal'] != '' ) : ?>
-				<li class="item-postal <?php echo ( isset( $deliveryCss['postal'] ) ? join( ' ', $deliveryCss['postal'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Postal code' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.postal']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.city'] ) && $deliveryAddr['customer.address.city'] != '' ) : ?>
-				<li class="item-city <?php echo ( isset( $deliveryCss['city'] ) ? join( ' ', $deliveryCss['city'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'City' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.city']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.state'] ) && $deliveryAddr['customer.address.state'] != '' ) : ?>
-				<li class="item-state <?php echo ( isset( $deliveryCss['state'] ) ? join( ' ', $deliveryCss['state'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'State' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.state']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.countryid'] ) && $deliveryAddr['customer.address.countryid'] != '' ) : ?>
-				<li class="item-countryid <?php echo ( isset( $deliveryCss['countryid'] ) ? join( ' ', $deliveryCss['countryid'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Country' ); ?></span>
-					<span class="value"><?php echo $this->translate( 'client/html/country', $deliveryAddr['customer.address.countryid'] ); ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.languageid'] ) && $deliveryAddr['customer.address.languageid'] != '' ) : ?>
-				<li class="item-languageid <?php echo ( isset( $deliveryCss['languageid'] ) ? join( ' ', $deliveryCss['languageid'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Language' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.languageid']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.email'] ) && $deliveryAddr['customer.address.email'] != '' ) : ?>
-				<li class="item-email <?php echo ( isset( $deliveryCss['email'] ) ? join( ' ', $deliveryCss['email'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'E-Mail' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.email']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.telephone'] ) && $deliveryAddr['customer.address.telephone'] != '' ) : ?>
-				<li class="item-telephone <?php echo ( isset( $deliveryCss['telephone'] ) ? join( ' ', $deliveryCss['telephone'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Telephone' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.telephone']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.telefax'] ) && $deliveryAddr['customer.address.telefax'] != '' ) : ?>
-				<li class="item-telefax <?php echo ( isset( $deliveryCss['telefax'] ) ? join( ' ', $deliveryCss['telefax'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Fax' ); ?></span>
-					<span class="item-telefax"><?php echo $deliveryAddr['customer.address.telefax']; ?></span>
-				</li>
-<?php	endif; ?>
-<?php	if( isset( $deliveryAddr['customer.address.website'] ) && $deliveryAddr['customer.address.website'] != '' ) : ?>
-				<li class="item-website <?php echo ( isset( $deliveryCss['website'] ) ? join( ' ', $deliveryCss['website'] ) : '' ); ?>">
-					<span class="name"><?php echo $this->translate( 'client/html', 'Website' ); ?></span>
-					<span class="value"><?php echo $deliveryAddr['customer.address.website']; ?></span>
-				</li>
-<?php	endif; ?>
-			</ul>
+			<input type="radio" name="<?php echo $this->formparam( array( 'ca-delivery-option' ) ); ?>" value="<?php echo $addr->getId(); ?>" <?php echo ( $deliveryOption == $addr->getId() ? 'checked="checked"' : '' ); ?> />
+			<div class="content">
+<?php
+		echo nl2br( str_replace( "\n\n", "\n", sprintf( $this->translate( 'client/html',
+'Deliver to:
+Salutation: %1$s
+First name: %2$s
+Last name: %3$s
+Street: %4$s
+Additional 1: %5$s
+Additional 2: %6$s
+Postal: %7$s
+City: %8$s
+Country: %9$s
+Language: %10$s
+E-Mail: %11$s
+Phone: %12$s
+Fax: %13$s
+Website: %14$s
+'
+			),
+			$this->translate( 'client/html', $addr->getSalutation() ),
+			$addr->getFirstName(),
+			$addr->getLastName(),
+			$addr->getAddress1(),
+			$addr->getAddress2(),
+			$addr->getAddress3(),
+			$addr->getPostal(),
+			$addr->getCity(),
+			$this->translate( 'client/html/country', $addr->getCountryId() ),
+			$this->translate( 'client/html/language', $addr->getLanguageId() ),
+			$addr->getEmail(),
+			$addr->getTelephone(),
+			$addr->getTelefax(),
+			$addr->getWebsite()
+		) ) );
+?>
+			</div>
 		</div>
 	</div>
 <?php endforeach; ?>
@@ -221,7 +160,7 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 				<label for="address-delivery-languageid"><?php echo $this->translate( 'client/html', 'Language' ); ?>
 				</label><select id="address-delivery-languageid" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.languageid' ) ); ?>">
 <?php foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
-					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $deliveryLanguage ? 'selected="selected"' : '' ); ?>><?php echo $languageId; // Zend problem with context dependend translation: $this->translate( 'client/html/language', $languageId ); ?></option>
+					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $deliveryLanguage ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/language', $languageId ); ?></option>
 <?php endforeach; ?>
 				</select>
 			</li>

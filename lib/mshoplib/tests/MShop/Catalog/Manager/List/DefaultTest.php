@@ -297,7 +297,11 @@ class MShop_Catalog_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems($search);
+<<<<<<< HEAD
 		$this->assertEquals( 37, count( $results ) );
+=======
+		$this->assertEquals( 42, count( $results ) );
+>>>>>>> 47d1d785c5d2ad9a4495f5c2b56a2a13b23e80a3
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

@@ -150,13 +150,6 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testAddProductNoItemException()
-	{
-		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->addProduct( 0 );
-	}
-
-
 	public function testAddProductNegativeQuantityException()
 	{
 		$this->setExpectedException( 'MShop_Order_Exception' );
