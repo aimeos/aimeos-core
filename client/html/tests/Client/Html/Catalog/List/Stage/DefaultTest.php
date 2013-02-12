@@ -48,7 +48,7 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 
 		$view = TestHelper::getView();
 
-		$view->listCatPath = array( $catalogManager->createItem(), $catItem );
+		$view->listCatPath = array( $catItem );
 
 		$this->_object->setView( $view );
 	}
