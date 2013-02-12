@@ -1,26 +1,26 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
  * @subpackage Html
- * @version $Id: Default.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
 
 /**
- * Default implementation of catalog detail section HTML clients.
+ * Default implementation of mini basket HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Detail_Default
+class Client_Html_Basket_Mini_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_subPartPath = 'client/html/catalog/detail/default/subparts';
-	private $_subPartNames = array( 'image', 'basic', 'basket', 'additional' );
+	private $_cache;
+	private $_subPartPath = 'client/html/basket/mini/default/subparts';
+	private $_subPartNames = array( 'main' );
 
 
 	/**
@@ -38,25 +38,25 @@ class Client_Html_Catalog_Detail_Default
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody();
 			}
-			$view->detailBody = $html;
+			$view->miniBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
+			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
+			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
+			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
@@ -65,11 +65,11 @@ class Client_Html_Catalog_Detail_Default
 
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
+			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 		}
 
-		$tplconf = 'client/html/catalog/detail/default/template-body';
-		$default = 'catalog/detail/body-default.html';
+		$tplconf = 'client/html/basket/mini/default/template-body';
+		$default = 'basket/mini/body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -90,7 +90,7 @@ class Client_Html_Catalog_Detail_Default
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader();
 			}
-			$view->detailHeader = $html;
+			$view->miniHeader = $html;
 		}
 		catch( Exception $e )
 		{
@@ -98,8 +98,8 @@ class Client_Html_Catalog_Detail_Default
 			return;
 		}
 
-		$tplconf = 'client/html/catalog/detail/default/template-header';
-		$default = 'catalog/detail/header-default.html';
+		$tplconf = 'client/html/basket/mini/default/template-header';
+		$default = 'basket/mini/header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -114,7 +114,7 @@ class Client_Html_Catalog_Detail_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'catalog/detail/' . $type, $name );
+		return $this->_createSubClient( 'basket/mini/' . $type, $name );
 	}
 
 
@@ -131,43 +131,11 @@ class Client_Html_Catalog_Detail_Default
 
 
 	/**
-	 * Processes the input, e.g. store given values.
-	 * A view must be available and this method doesn't generate any output
-	 * besides setting view variables.
+	 * Sets the necessary parameter values in the view.
 	 */
 	public function process()
 	{
-		try
-		{
-			$this->_process( $this->_subPartPath, $this->_subPartNames );
-		}
-		catch( Client_Html_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
-		}
-		catch( Controller_Frontend_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
-		}
-		catch( MShop_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
-		}
-		catch( Exception $e )
-		{
-			$context = $this->_getContext();
-			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-
-			$view = $this->getView();
-			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
-		}
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
 
 
@@ -175,21 +143,13 @@ class Client_Html_Catalog_Detail_Default
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
 	 */
 	protected function _setViewParams( MW_View_Interface $view )
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$context = $this->_getContext();
-			$config = $context->getConfig();
-
-			$domains = $config->get( 'client/html/catalog/detail/default/domains', array( 'media', 'price', 'text', 'attribute' ) );
-			$prodid = (int) $view->param( 'l-product-id' );
-
-			$manager = MShop_Product_Manager_Factory::createManager( $context );
-
-			$view->detailProductItem = $manager->getItem( $prodid, $domains );
+			$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$view->miniBasket = $controller->get();
 
 			$this->_cache = $view;
 		}
