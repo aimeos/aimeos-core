@@ -164,8 +164,8 @@ class Client_Html_Catalog_List_Stage_Default
 					}
 				}
 
-				if( ( $view->categoryName = end( $catPath )->getName() ) === false ) {
-					$view->categoryName = 'Default';
+				if( ( $lastCat = end( $catPath ) ) !== false ) {
+					$view->categoryName = $lastCat->getName();
 				}
 			}
 
