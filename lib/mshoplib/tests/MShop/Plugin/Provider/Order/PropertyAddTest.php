@@ -42,7 +42,6 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 	{
 		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
 		$this->_plugin = $pluginManager->createItem();
-		$this->_plugin->setTypeId( 2 );
 		$this->_plugin->setProvider( 'PropertyAdd' );
 		$this->_plugin->setStatus( '1' );
 

@@ -2,10 +2,9 @@
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://www.arcavias.com/license
+ * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Plugin
- * @version $Id: PropertyMatch.php 1391 2013-01-24 11:11:56Z jevers $
  */
 
 
@@ -17,7 +16,6 @@
  */
 class MShop_Plugin_Provider_Order_PropertyMatch implements MShop_Plugin_Provider_Interface
 {
-
 	protected $_item;
 	protected $_context;
 
@@ -82,13 +80,13 @@ class MShop_Plugin_Provider_Order_PropertyMatch implements MShop_Plugin_Provider
 		$criteria = $productManager->createSearch( true );
 
 		$expr = array();
-		$expr[] = $criteria->getConditions();
 		$expr[] = $criteria->compare( '==', 'product.id', $value->getProductId() );
+		$expr[] = $criteria->getConditions();
 
 		foreach ( $config as $property => $value) {
 			$expr[] = $criteria->compare( '==', $property, $value );
 		}
-		
+
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 		$result = $productManager->searchItems( $criteria );

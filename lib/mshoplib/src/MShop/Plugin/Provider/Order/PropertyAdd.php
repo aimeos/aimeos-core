@@ -2,10 +2,9 @@
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://www.arcavias.com/license
+ * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Plugin
- * @version $Id: PropertyAdd.php 1390 2013-01-23 13:36:13Z jevers $
  */
 
 
@@ -17,7 +16,6 @@
  */
 class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_Interface
 {
-
 	protected $_item;
 	protected $_context;
 
@@ -82,7 +80,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 		{
 			$keyElements = explode( '.', $key );
 
-			if( $keyElements[0] !== 'product' ) {
+			if( $keyElements[0] !== 'product' || count( $keyElements ) < 3 ) {
 				throw new MShop_Plugin_Exception( 'Error in configuration.' );
 			}
 
@@ -91,8 +89,8 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 			$search = $productSubManager->createSearch( true );
 
 			$cond = array();
-			$cond[] = $search->getConditions();
 			$cond[] = $search->compare( '==', $key, $value->getProductId() );
+			$cond[] = $search->getConditions();
 
 			$search->setConditions( $search->combine( '&&', $cond ) );
 
@@ -100,8 +98,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 
 			foreach( $result as $item )
 			{
-				$attributes = $value->getAttributes();
-				$attributes = $this->_addAttributes( $item, $attributes, $properties );
+				$attributes = $this->_addAttributes( $item, $value, $properties );
 				$value->setAttributes( $attributes );
 			}
 		}
@@ -114,12 +111,13 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	* Adds attribute items to an array.
 	*
 	* @param MShop_Common_Item_Interface $item Item containing the properties to be added as attributes
-	* @param Array $attributeList List of existing attributes
+	* @param MShop_Order_Item_Base_Product_Interface $product Product containing attributes
 	* @param Array $properties List of item properties to be converted
 	* @return Array List of attributes
 	*/
-	protected function _addAttributes( MShop_Common_Item_Interface $item, array $attributeList, array $properties )
+	protected function _addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product , array $properties )
 	{
+		$attributeList = $product->getAttributes();
 		$config = $this->_item->getConfig();
 
 		$itemProperties = $item->toArray();
@@ -130,14 +128,11 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 			if( array_key_exists( $current, $itemProperties ) )
 			{
 				$parts = explode( '.', $current );
-				$attributes[] = $this->_createAttribute( $parts[2], $itemProperties[ $current ] );
-			}
-		}
+				$new = $this->_createAttribute( $product, $parts[2], $itemProperties[ $current ] );
 
-		foreach( $attributes as $attr )
-		{
-			if( $this->_similarAttribute( $attr, $attributeList ) === false ) {
-				$attributeList[] = $attr;
+				if( $new !== null ) {
+					$attributeList[] = $new;
+				}
 			}
 		}
 
@@ -153,8 +148,12 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	* @param String $name Optional value for attribute name
 	* @return MShop_Order_Item_Base_Product_Attribute_Interface Newly created attribte item
 	*/
-	protected function _createAttribute( $code, $value, $name = null )
+	protected function _createAttribute( MShop_Order_Item_Base_Product_Interface $product, $code, $value, $name = null )
 	{
+		if( $product->getAttribute( $code ) !== null ) {
+			return null;
+		}
+
 		$attributeManager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		if( $name === null ) {
@@ -170,23 +169,4 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 		return $new;
 	}
 
-
-	/**
-	* Checks if a given attribute exists in a given list of attributes
-	*
-	* @param MShop_Order_Item_Base_Product_Attribute_Interface $item Attribute to be checked
-	* @param Array $list List of attributes
-	* @return Bool true if attribute exists in the list, otherwise false
-	*/
-	protected function _similarAttribute( MShop_Order_Item_Base_Product_Attribute_Interface $item, array $list )
-	{
-		foreach( $list as $element )
-		{
-			if( $item->getType() === $element->getType() && $item->getCode() === $element->getCode() ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
 }
