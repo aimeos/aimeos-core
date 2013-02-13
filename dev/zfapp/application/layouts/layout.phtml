@@ -32,6 +32,7 @@ $sites = $this->sites();
 <?php echo ( isset( $this->list ) ? $this->list->getHeader() : '' ); ?>
 <?php echo ( isset( $this->detail ) ? $this->detail->getHeader() : '' ); ?>
 <?php echo ( isset( $this->basket ) ? $this->basket->getHeader() : '' ); ?>
+<?php echo ( isset( $this->minibasket ) ? $this->minibasket->getHeader() : '' ); ?>
 <?php echo ( isset( $this->checkout ) ? $this->checkout->getHeader() : '' ); ?>
 <?php echo ( isset( $this->confirm ) ? $this->confirm->getHeader() : '' ); ?>
 </head>
@@ -57,8 +58,14 @@ $sites = $this->sites();
 							<div id="headerRightBg">
 								<a href="<?php echo $this->url( array( 'site' => $this->params['site'] ), 'routeMin', true ); ?>"><img src="<?php echo $this->pathstart;?>/images/arcavias.gif" id="headerLogo" alt="" /></a>
 								<div id="headerRightBox">
-									<div id="headerArticleBox">1 article - <strong>69,90 €</strong></div>
-									<button class="minibutton" value="" type="submit" onClick="alert('Not available at the moment.');">Basket</button>
+									<div id="headerArticleBox">
+										<?php
+											if( isset( $this->minibasket ) ) {
+												echo $this->minibasket->getBody();
+											}
+										?>
+									</div>
+
 								</div>
 								<?php
 								foreach($sites as $code => $label) {

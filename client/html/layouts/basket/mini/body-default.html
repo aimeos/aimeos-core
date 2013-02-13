@@ -18,7 +18,6 @@ $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index'
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-	<h1><?php echo $this->translate( 'core/client/html', 'Mini basket' ); ?></h1>
 <?php echo $this->get( 'miniBody' ); ?>
-<a href='<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>">Basket</a>
+<a class="minibasketbutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>">Basket</a>
 </div>
