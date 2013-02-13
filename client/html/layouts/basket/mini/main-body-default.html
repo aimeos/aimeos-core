@@ -21,9 +21,7 @@ catch( Exception $e ){
 <?php printf( $this->translate( 'client/html', '%1$d article - ', '%1$d articles - ', $this->get( 'mainQuantity', 0 ) ), $this->get( 'mainQuantity', 0 ) ); ?>
 	</span>
 	<span class="value">
-	<strong>
 <?php printf( $this->translate( 'client/html', '%1$s%2$s' ), $this->number( $miniPriceValue ), $this->translate( 'client/hmtl/currency', $miniPriceCurrency ) ); ?>
-	</strong>
 	</span>
 </div>
 
