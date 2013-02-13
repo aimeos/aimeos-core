@@ -12,7 +12,7 @@ $listAction = $this->config( 'client/html/catalog/listsimple/url/action', 'lists
 ?>
 <script type="text/javascript">
 $(document).ready( function () {
-	$( ".catalog-filter-search #search-field" ).keyup( function( val ) {
+	$( ".catalog-filter-search .value" ).keyup( function( val ) {
 		var chars = $(this).val();
 		if ( chars.length > 1 ) {
 			$.post( "<?php echo $this->url( $listTarget, $listController, $listAction ); ?>",
@@ -26,10 +26,10 @@ $(document).ready( function () {
 					names[i] = result[i].name;
 				}
 
-				$( ".catalog-filter-search #search-field" ).autocomplete( {
+				$( ".catalog-filter-search .value" ).autocomplete( {
 					source: names,
 					select: function() {
-			            $(".catalog-filter-search #search-form").submit(); }
+			            $(".catalog-filter-search form").submit(); }
 				} );
 			} );
 		}
