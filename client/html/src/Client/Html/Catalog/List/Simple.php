@@ -137,13 +137,13 @@ class Client_Html_Catalog_List_Simple
 
 			$input = $view->param( 'f-search-text' );
 
-			echo var_dump($view->param('f-search-text'));
-
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 
 			$filter = $controller->createTextFilter( $input, 'relevance' );
 			$items = $controller->getTextList( $filter );
-
+			
+			$view->arrayTexts = $items;
+			
 			$json = array();
 			foreach( $items as $id => $name ) {
 				$json[ $id ] = $name;

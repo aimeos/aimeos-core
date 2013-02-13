@@ -5,8 +5,20 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+echo "found-texts: ";
+foreach( $this->get( 'arrayTexts', array() ) as $text ) {
+	echo $text.", ";
+}
+echo "end-items";
+
 ?>
 <div class="arcavias catalog-list-simple">
+
+<div class="autocomplete-search">
+<?php foreach( $this->get( 'arrayTexts', array() ) as $text ) : ?>
+ 	<?php echo $text.", "; ?>
+<?php endforeach; ?>
+</div>
 
 <script type="text/javascript">
 	var jsondata = JSON.parse(<?php echo $this->get( 'listTextItems', array() ); ?>);

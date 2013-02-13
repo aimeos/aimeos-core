@@ -12,16 +12,24 @@ $listAction = $this->config( 'client/html/catalog/listsimple/url/action', 'lists
 ?>
 <script type="text/javascript" language="javascript" defer="defer" src="<?php echo $this->config( 'client/html/common/template/baseurl' ); ?>js/jquery-ui-1.10.0.custom.min.js"></script>
 <script type="text/javascript" src=" http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 <script type="text/javascript">
 $(document).ready( function () {
 	$( ".catalog-filter-search #search-field" ).keyup( function( val ) {
 		var chars = $(this).val();
-		if ( chars.length > 2 ) {
+		if ( chars.length > 1 ) {
 			$.post( "<?php echo $this->url( $listTarget, $listController, $listAction ); ?>",
 			{'f-search-text' : chars },
 			function( data, status ){
+
+				var htmlObject = $(data);
+				var items = htmlObject.find(".autocomplete-search").text();
+				var result = items.split(', ');
+
 				$( ".catalog-filter-search #search-field" ).autocomplete( {
-					source: data
+					source: result,
+					select: function() {
+			            $(".catalog-filter-search #search-form").submit(); }
 				} );
 			} );
 		}
