@@ -9,7 +9,6 @@ $listTarget = $this->config( 'client/html/catalog/list/url/target' );
 $listController = $this->config( 'client/html/catalog/list/search/url/controller', 'catalog' );
 $listAction = $this->config( 'client/html/catalog/list/search/url/action', 'list' );
 ?>
-
 <div class="catalog-filter-search">
 	<form id="search-form" action="<?php echo $this->url( $listTarget, $listController, $listAction ); ?>" method="POST">
 		<span>Search:</span><input class="input12b" type="text" name="f-search-text" id="search-field" value=""></input>
