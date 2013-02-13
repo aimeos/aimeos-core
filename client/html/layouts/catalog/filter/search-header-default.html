@@ -14,7 +14,7 @@ $listAction = $this->config( 'client/html/catalog/listsimple/url/action', 'lists
 $(document).ready( function () {
 	$( ".catalog-filter-search .value" ).keyup( function( val ) {
 		var chars = $(this).val();
-		if ( chars.length > 1 ) {
+		if ( chars.length >= 3 ) {
 			$.post( "<?php echo $this->url( $listTarget, $listController, $listAction ); ?>",
 			{ 'f-search-text' : chars },
 			function( data, status ){

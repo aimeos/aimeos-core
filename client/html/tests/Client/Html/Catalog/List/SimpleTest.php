@@ -93,19 +93,4 @@ class Client_Html_Catalog_List_SimpleTest extends MW_Unittest_Testcase
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( '$$$', '$$$' );
 	}
-
-
-	protected function _getCatalogItem()
-	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
-		$search = $catalogManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
-		$items = $catalogManager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No catalog item with code "cafe" found' );
-		}
-
-		return $item;
-	}
 }

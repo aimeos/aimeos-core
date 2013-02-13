@@ -5,6 +5,7 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-echo $this->get( 'listTextItems', '' );
+$result = json_encode( $this->get( 'listTextItems', '' ) );
+echo $result;
 
 ?>
