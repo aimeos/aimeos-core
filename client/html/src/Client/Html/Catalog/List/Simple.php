@@ -141,15 +141,13 @@ class Client_Html_Catalog_List_Simple
 
 			$filter = $controller->createTextFilter( $input, 'relevance' );
 			$items = $controller->getTextList( $filter );
-			
-			$view->arrayTexts = $items;
-			
-			$json = array();
+
+			$result = array();
 			foreach( $items as $id => $name ) {
-				$json[ $id ] = $name;
+				$result[] = array( "id" => $id, "name" => $name );
 			}
 
-			$view->listTextItems = json_encode( $json );
+			$view->listTextItems = json_encode( $result );
 
 			$this->_cache = $view;
 		}

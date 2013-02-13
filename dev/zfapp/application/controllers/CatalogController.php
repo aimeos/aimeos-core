@@ -25,10 +25,11 @@ class CatalogController extends Application_Controller_Action_Abstract
 		$context = Zend_Registry::get( 'ctx' );
 		$templatePaths = $mshop->getCustomPaths( 'client/html' );
 
-		$this->view->simplelist = Client_Html_Catalog_List_Factory::createClient( $context, $templatePaths, 'Simple' );
-		$this->view->simplelist->setView( $this->_createView() );
+		$this->view->listsimple = Client_Html_Catalog_List_Factory::createClient( $context, $templatePaths, 'Simple' );
+		$this->view->listsimple->setView( $this->_createView() );
+		$this->_helper->layout()->disableLayout();
 
-		$this->view->simplelist->getBody();
+		$this->view->listsimple->getBody();
 
 		$msg = 'Simple list total time: ' . ( ( microtime( true ) - $startaction ) * 1000 ) . 'ms';
 		$context->getLogger()->log( $msg, MW_Logger_Abstract::INFO, 'performance' );

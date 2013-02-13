@@ -27,6 +27,10 @@ class BasketController extends Application_Controller_Action_Abstract
 			$this->view->basket->setView( $this->_createView() );
 			$this->view->basket->process();
 
+			$filter = Client_Html_Catalog_Filter_Factory::createClient( $context, $templatePaths );
+			$this->view->searchfilter = $filter->getSubClient( 'search' );
+			$this->view->searchfilter->setView( $this->_createView() );
+
 			$this->render( 'index' );
 		}
 		catch( MW_Exception $e )

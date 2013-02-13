@@ -43,7 +43,3 @@ try
 } catch ( Exception $e ) {
 	include 'errors/500.phtml';
 }
-
-echo '<!-- Exec time: ' . ( ( microtime(true) - $time ) * 1000 ) . ' ms -->' . PHP_EOL;
-echo '<!-- Peak mem: ' . ( memory_get_peak_usage( true ) / 1024 / 1024 ) . ' MiB -->' . PHP_EOL;
-echo '<!-- Path cache: ' . ( realpath_cache_size() / 1024 ) . ' KiB -->' . PHP_EOL;
