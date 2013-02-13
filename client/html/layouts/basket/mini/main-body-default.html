@@ -17,10 +17,14 @@ catch( Exception $e ){
 }
 ?>
 <div class="basket-mini-main">
+	<span class="quantity">
 <?php printf( $this->translate( 'client/html', '%1$d article - ', '%1$d articles - ', $this->get( 'mainQuantity', 0 ) ), $this->get( 'mainQuantity', 0 ) ); ?>
-<strong>
+	</span>
+	<span class="value">
+	<strong>
 <?php printf( $this->translate( 'client/html', '%1$s%2$s' ), $this->number( $miniPriceValue ), $this->translate( 'client/hmtl/currency', $miniPriceCurrency ) ); ?>
-</strong>
+	</strong>
+	</span>
 </div>
 
 <?php echo $this->get( 'mainBody' ); ?>
