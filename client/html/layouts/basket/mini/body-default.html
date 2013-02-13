@@ -19,5 +19,5 @@ $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index'
 	</ul>
 <?php endif; ?>
 <?php echo $this->get( 'miniBody' ); ?>
-<a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>" class="minibasketbutton">Basket</a>
+<a class="minibasketbutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>">Basket</a>
 </div>
