@@ -70,7 +70,7 @@ class Client_Html_Catalog_List_SimpleTest extends MW_Unittest_Testcase
 		$output = $this->_object->getBody();
 
 		$this->assertNotEquals( array(), $this->_object->getView()->listTextItems );
-		$this->assertContains( '"name":"Unterproduct"', $output );
+		$this->assertContains( '"name":"Unterproduct 1"', $output );
 	}
 
 
