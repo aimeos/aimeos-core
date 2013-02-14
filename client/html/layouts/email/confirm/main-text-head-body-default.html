@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$salutations = array(
+	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
+);
+
+try
+{
+	$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+
+	printf(
+		$this->translate( 'client/html', 'Dear %1$s %2$s %3$s' ),
+		( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
+		$addr->getFirstName(),
+		$addr->getLastName()
+	);
+}
+catch( Exception $e )
+{
+	echo $this->translate( 'client/html', 'Dear Sir or Madam' );
+}
+
+?>
+
+
+<?php
+
+printf(
+	$this->translate( 'client/html', 'Thank you for your order on %2$s. The ID of your order is %1$s and contains the following details:' ),
+	$this->confirmOrderItem->getId(),
+	date_create( $this->confirmOrderItem->getTimeCreated() )->format( $this->translate( 'client/html', 'Y-m-d' ) )
+);
+
+?>
+
+
+<?php echo $this->get( 'headBody' ); ?>

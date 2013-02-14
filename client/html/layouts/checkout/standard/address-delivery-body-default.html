@@ -11,6 +11,12 @@ try {
 	$addrArray = array();
 }
 
+$salutations = array(
+	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
+);
+
 $deliveryOption = $this->param( 'ca-delivery-option', ( $addrArray === array() ? -1 : 'null' ) );
 $deliverySalutation = $this->param( 'ca-delivery/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $deliveryCountry = $this->param( 'ca-delivery/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
@@ -73,7 +79,7 @@ Fax: %13$s
 Website: %14$s
 '
 			),
-			$this->translate( 'client/html', $addr->getSalutation() ),
+			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
 			$addr->getFirstName(),
 			$addr->getLastName(),
 			$addr->getAddress1(),

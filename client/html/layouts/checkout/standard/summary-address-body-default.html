@@ -9,6 +9,12 @@ $checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
 $checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
 $checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
 
+$salutations = array(
+	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
+);
+
 ?>
 <div class="checkout-standard-summary-address">
 	<h2><?php echo $this->translate( 'client/html', 'Addresses' ); ?></h2>
@@ -41,7 +47,7 @@ Fax: %13$s
 Website: %14$s
 '
 			),
-			$this->translate( 'client/html', $addr->getSalutation() ),
+			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
 			$addr->getFirstName(),
 			$addr->getLastName(),
 			$addr->getAddress1(),
@@ -89,7 +95,7 @@ Fax: %13$s
 Website: %14$s
 '
 			),
-			$this->translate( 'client/html', $addr->getSalutation() ),
+			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
 			$addr->getFirstName(),
 			$addr->getLastName(),
 			$addr->getAddress1(),

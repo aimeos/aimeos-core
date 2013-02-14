@@ -5,13 +5,9 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
-$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
-$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
-
-if( isset( $this->standardBasket ) )
+if( isset( $this->confirmOrderBaseItem ) )
 {
-	$price = $this->standardBasket->getPrice();
+	$price = $this->confirmOrderBaseItem->getPrice();
 	$priceValue = $price->getValue();
 	$priceService = $price->getShipping();
 	$priceRebate = $price->getRebate();
@@ -29,7 +25,7 @@ else
 
 try
 {
-	$deliveryPriceItem = $this->standardBasket->getService( 'delivery' )->getPrice();
+	$deliveryPriceItem = $this->confirmOrderBaseItem->getService( 'delivery' )->getPrice();
 	$deliveryPriceService = $deliveryPriceItem->getShipping();
 	$deliveryPriceValue = $deliveryPriceItem->getValue();
 }
@@ -41,7 +37,7 @@ catch( Exception $e )
 
 try
 {
-	$paymentPriceItem = $this->standardBasket->getService( 'payment' )->getPrice();
+	$paymentPriceItem = $this->confirmOrderBaseItem->getService( 'payment' )->getPrice();
 	$paymentPriceService = $paymentPriceItem->getShipping();
 	$paymentPriceValue = $paymentPriceItem->getValue();
 }
@@ -54,9 +50,8 @@ catch( Exception $e )
 $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 
 ?>
-<div class="checkout-standard-summary-basket">
-	<a class="modify" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>"><?php echo $this->translate( 'client/html', 'Change basket' ); ?></a>
-	<h2><?php echo $this->translate( 'client/html', 'Basket' ); ?></h2>
+<div class="email-confirm-main-detail">
+	<h2><?php echo $this->translate( 'client/html', 'Order details' ); ?></h2>
 	<div class="basket">
 		<table>
 			<thead>
@@ -68,8 +63,8 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 				</tr>
 			</thead>
 			<tbody>
-<?php if( isset( $this->standardBasket ) ) : ?>
-<?php 	foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
+<?php if( isset( $this->confirmOrderBaseItem ) ) : ?>
+<?php 	foreach( $this->confirmOrderBaseItem->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
 						<img src="<?php echo $product->getMediaUrl(); ?>" />
@@ -121,5 +116,5 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 			</tfoot>
 		</table>
 	</div>
-<?php echo $this->get( 'basketBody' ); ?>
+<?php echo $this->get( 'detailBody' ); ?>
 </div>

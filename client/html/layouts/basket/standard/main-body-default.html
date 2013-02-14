@@ -31,20 +31,26 @@ catch( Exception $e )
 	$priceCurrency = '';
 }
 
-try {
+try
+{
 	$deliveryPriceItem = $this->standardBasket->getService( 'delivery' )->getPrice();
 	$deliveryPriceService = $deliveryPriceItem->getShipping();
 	$deliveryPriceValue = $deliveryPriceItem->getValue();
-} catch( Exception $e ) {
+}
+catch( Exception $e )
+{
 	$deliveryPriceValue = '0.00';
 	$deliveryPriceService = '0.00';
 }
 
-try {
+try
+{
 	$paymentPriceItem = $this->standardBasket->getService( 'payment' )->getPrice();
 	$paymentPriceService = $paymentPriceItem->getShipping();
 	$paymentPriceValue = $paymentPriceItem->getValue();
-} catch( Exception $e ) {
+}
+catch( Exception $e )
+{
 	$paymentPriceValue = '0.00';
 	$paymentPriceService = '0.00';
 }

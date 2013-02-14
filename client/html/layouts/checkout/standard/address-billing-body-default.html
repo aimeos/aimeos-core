@@ -11,6 +11,12 @@ try {
 	$addrArray = array();
 }
 
+$salutations = array(
+	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
+);
+
 $billingOption = $this->param( 'ca-billing-option', ( isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' ) );
 $billingSalutation = $this->param( 'ca-billing/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $billingCountry = $this->param( 'ca-billing/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
@@ -69,7 +75,7 @@ Fax: %13$s
 Website: %14$s
 '
 			),
-			$this->translate( 'client/html', $addr->getSalutation() ),
+			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
 			$addr->getFirstName(),
 			$addr->getLastName(),
 			$addr->getAddress1(),

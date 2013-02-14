@@ -20,7 +20,7 @@ class Client_Html_Email_Confirm_Main_Html_Default
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/email/confirm/main/html/default/subparts';
-	private $_subPartNames = array( 'address', 'service' );
+	private $_subPartNames = array( 'head', 'address', 'service', 'detail', 'footer' );
 
 
 	/**
