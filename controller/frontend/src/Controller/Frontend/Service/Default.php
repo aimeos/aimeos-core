@@ -62,6 +62,7 @@ class Controller_Frontend_Service_Default
 			$search->compare( '==', 'service.type.code', $type ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
 		$this->_items[$type] = $this->_serviceManager->searchItems( $search, $ref );
 
