@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$listTarget = $this->config( 'client/html/catalog/listsimple/url/target' );
+$listController = $this->config( 'client/html/catalog/listsimple/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/listsimple/url/action', 'listsimple' );
+
+?>
+<script type="text/javascript">
+$(document).ready( function () {
+	$( ".catalog-filter-search .value" ).keyup( function( val ) {
+		var chars = $(this).val();
+		if ( chars.length >= 3 ) {
+			$.post( "<?php echo $this->url( $listTarget, $listController, $listAction ); ?>",
+			{ 'f-search-text' : chars },
+			function( data, status ){
+				var names = new Array();
+
+				var result = JSON.parse( data );
+
+				for( var i=0; i<result.length; i++ ){
+					names[i] = result[i].name;
+				}
+
+				$( ".catalog-filter-search .value" ).autocomplete( {
+					source: names,
+					select: function() {
+			            $(".catalog-filter-search form").submit(); }
+				} );
+			} );
+		}
+	} );
+} );
+</script>
+
+<?php echo $this->get( 'searchHeader' ); ?>
