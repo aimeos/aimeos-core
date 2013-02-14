@@ -9,18 +9,18 @@
 
 
 /**
- * Default implementation of email text HTML client.
+ * Default implementation of email text detail HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Email_Confirm_Main_Text_Default
+class Client_Html_Email_Confirm_Main_Text_Detail_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
 	private $_cache;
-	private $_subPartPath = 'client/html/email/confirm/main/text/default/subparts';
-	private $_subPartNames = array( 'head', 'address', 'service', 'detail', 'footer' );
+	private $_subPartPath = 'client/html/email/confirm/main/text/detail/default/subparts';
+	private $_subPartNames = array();
 
 
 	/**
@@ -36,10 +36,10 @@ class Client_Html_Email_Confirm_Main_Text_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$text .= $subclient->setView( $view )->getBody();
 		}
-		$view->textBody = $text;
+		$view->detailBody = $text;
 
-		$tplconf = 'client/html/email/confirm/main/text/default/template-body';
-		$default = 'email/confirm/main-text-body-default.html';
+		$tplconf = 'client/html/email/confirm/main/text/detail/default/template-body';
+		$default = 'email/confirm/main-text-detail-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -58,10 +58,10 @@ class Client_Html_Email_Confirm_Main_Text_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$text .= $subclient->setView( $view )->getHeader();
 		}
-		$view->textHeader = $text;
+		$view->detailHeader = $text;
 
-		$tplconf = 'client/html/email/confirm/main/text/default/template-header';
-		$default = 'email/confirm/main-text-header-default.html';
+		$tplconf = 'client/html/email/confirm/main/text/detail/default/template-header';
+		$default = 'email/confirm/main-text-detail-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -76,7 +76,7 @@ class Client_Html_Email_Confirm_Main_Text_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'email/confirm/main/text/' . $type, $name );
+		return $this->_createSubClient( 'email/confirm/main/text/detail/' . $type, $name );
 	}
 
 
