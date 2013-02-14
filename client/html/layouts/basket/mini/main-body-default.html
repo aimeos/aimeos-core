@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+
+try
+{
+	$miniPriceValue = $this->mainPriceItem->getValue();
+	$miniPriceCurrency = $this->translate( 'core/client/html/currency', $this->mainPriceItem->getCurrencyId() );
+}
+catch( Exception $e )
+{
+	$miniPriceValue = '0.00';
+	$miniPriceCurrency = '';
+}
+?>
+<div class="basket-mini-main">
+	<span class="quantity">
+<?php printf( $this->translate( 'client/html', '%1$d article - ', '%1$d articles - ', $this->get( 'mainQuantity', 0 ) ), $this->get( 'mainQuantity', 0 ) ); ?>
+	</span>
+	<span class="value">
+<?php printf( $this->translate( 'client/html', '%1$s%2$s' ), $this->number( $miniPriceValue ), $this->translate( 'client/hmtl/currency', $miniPriceCurrency ) ); ?>
+	</span>
+</div>
+
+<?php echo $this->get( 'mainBody' ); ?>

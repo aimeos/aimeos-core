@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-09 17:59+0100\n"
+"POT-Creation-Date: 2013-02-14 10:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,45 +52,54 @@ msgstr ""
 msgid "Invalid class name \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:110
+#: src/Controller/Frontend/Basket/Default.php:93
+#, php-format
+msgid "Adding product with ID \"%1$s\" is not allowed"
+msgstr ""
+
+#: src/Controller/Frontend/Basket/Default.php:127
 #, php-format
 msgid "No product found for ID \"%1$s\" and variant attribute IDs \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:159
-#: src/Controller/Frontend/Basket/Default.php:181
+#: src/Controller/Frontend/Basket/Default.php:179
 #, php-format
-msgid "Basket item with position \"%1$d\" is immutable"
+msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:284
+#: src/Controller/Frontend/Basket/Default.php:201
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be changed"
+msgstr ""
+
+#: src/Controller/Frontend/Basket/Default.php:304
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:311
+#: src/Controller/Frontend/Basket/Default.php:331
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:410
+#: src/Controller/Frontend/Basket/Default.php:430
 #, php-format
 msgid "Invalid address property \"%1$s\" with value \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:423
+#: src/Controller/Frontend/Basket/Default.php:443
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:458
+#: src/Controller/Frontend/Basket/Default.php:478
 #, php-format
 msgid ""
 "Available attribute IDs \"%1$s\" does not match the given attribute IDs "
 "\"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:492
+#: src/Controller/Frontend/Basket/Default.php:512
 #, php-format
 msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
 msgstr ""

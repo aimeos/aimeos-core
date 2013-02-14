@@ -56,6 +56,9 @@ class CatalogController extends Application_Controller_Action_Abstract
 		$this->view->list = Client_Html_Catalog_List_Factory::createClient( $context, $templatePaths );
 		$this->view->list->setView( $this->_createView() );
 
+		$this->view->minibasket = Client_Html_Basket_Mini_Factory::createClient( $context, $templatePaths );
+		$this->view->minibasket->setView( $this->_createView() );
+
 		$this->render( 'list' );
 
 
@@ -81,6 +84,9 @@ class CatalogController extends Application_Controller_Action_Abstract
 
 		$this->view->detail = Client_Html_Catalog_Detail_Factory::createClient( $context, $templatePaths );
 		$this->view->detail->setView( $this->_createView() );
+
+		$this->view->minibasket = Client_Html_Basket_Mini_Factory::createClient( $context, $templatePaths );
+		$this->view->minibasket->setView( $this->_createView() );
 
 		$this->render( 'detail' );
 

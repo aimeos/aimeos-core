@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
+$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
+$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+
+?>
+<div class="arcavias basket-mini">
+<?php if( ( $errors = $this->get( 'miniErrorList', array() ) ) !== array() ) : ?>
+	<ul class="error-list">
+<?php foreach( $errors as $error ) : ?>
+		<li><?php echo $error; ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+<?php echo $this->get( 'miniBody' ); ?>
+<a class="minibasketbutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>">Basket</a>
+</div>

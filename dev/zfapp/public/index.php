@@ -6,8 +6,6 @@
  * @version $Id: index.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-$time = microtime( true );
-
 define( 'ZFAPP_ROOT', dirname( dirname( __FILE__ ) ) );
 define( 'APPLICATION_PATH', ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'application' );
 define( 'APPLICATION_ENV', 'development' ); // development | production

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core 2013-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-07 12:30+0100\n"
+"POT-Creation-Date: 2013-02-11 18:14+0100\n"
 "PO-Revision-Date: 2013-02-06 20:27+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language: Deutsch\n"
@@ -52,43 +52,53 @@ msgstr ""
 msgid "Invalid class name \"%1$s\""
 msgstr "Der Klassenname \"%1$s\" is ungültig"
 
-#: src/Controller/Frontend/Basket/Default.php:110
+#: src/Controller/Frontend/Basket/Default.php:93
+#, php-format
+msgid "Adding product with ID \"%1$s\" is not allowed"
+msgstr ""
+
+#: src/Controller/Frontend/Basket/Default.php:127
 #, php-format
 msgid "No product found for ID \"%1$s\" and variant attribute IDs \"%2$s\""
 msgstr ""
 "Es wurde kein Produkt mit der ID \"%1$s\" und den ausgewählten Varianten mit "
 "den IDs \"%2$s\" gefunden"
 
-#: src/Controller/Frontend/Basket/Default.php:159
-#: src/Controller/Frontend/Basket/Default.php:181
+#: src/Controller/Frontend/Basket/Default.php:179
 #, php-format
-msgid "Basket item with position \"%1$d\" is immutable"
+msgid "Basket item at position \"%1$d\" cannot be deleted manually"
+msgstr ""
+"Das Produkt im Warenkorb an Position \"%1$d\" kann nicht gelöscht werden"
+
+#: src/Controller/Frontend/Basket/Default.php:201
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be changed"
 msgstr ""
 "Das Produkt im Warenkorb an Position \"%1$d\" darf nicht verändert werden"
 
-#: src/Controller/Frontend/Basket/Default.php:284
+#: src/Controller/Frontend/Basket/Default.php:304
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr "Es wurde kein gültiger Wert für den Adresstyp \"%1$s\" übergeben"
 
-#: src/Controller/Frontend/Basket/Default.php:311
+#: src/Controller/Frontend/Basket/Default.php:331
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr "Die übergebenen Attribute \"%1$s\" konnten nicht zugeordnet werden"
 
-#: src/Controller/Frontend/Basket/Default.php:410
+#: src/Controller/Frontend/Basket/Default.php:430
 #, php-format
 msgid "Invalid address property \"%1$s\" with value \"%2$s\""
 msgstr "Der Adressteil \"%1$s\" mit dem Wert \"%2$s\" ist ungültig"
 
-#: src/Controller/Frontend/Basket/Default.php:423
+#: src/Controller/Frontend/Basket/Default.php:443
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr ""
 "Ein oder mehrere Adressteile sind ungültig. Bitte überprüfen Sie Ihre "
 "Eingaben"
 
-#: src/Controller/Frontend/Basket/Default.php:458
+#: src/Controller/Frontend/Basket/Default.php:478
 #, php-format
 msgid ""
 "Available attribute IDs \"%1$s\" does not match the given attribute IDs "
@@ -97,7 +107,7 @@ msgstr ""
 "Die vorhandenden Attribute mit den IDs \"%1$s\" stimmen nicht im den "
 "übergebenen (\"%1$s\") überein"
 
-#: src/Controller/Frontend/Basket/Default.php:492
+#: src/Controller/Frontend/Basket/Default.php:512
 #, php-format
 msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
 msgstr ""
