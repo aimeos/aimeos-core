@@ -16,6 +16,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 
+# Attribute
+
+msgid "size"
+msgstr "Grösse"
+
+msgid "length"
+msgstr "Länge"
+
+msgid "width"
+msgstr "Weite"
+
+msgid "color"
+msgstr "Farbe"
+
+
+
 # Zahlungsstatus
 
 msgid "pay:-1"
