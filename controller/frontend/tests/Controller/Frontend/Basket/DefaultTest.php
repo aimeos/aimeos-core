@@ -162,7 +162,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTSUB01') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTSUB02') );
 
 		$items = $productManager->searchItems( $search );
 

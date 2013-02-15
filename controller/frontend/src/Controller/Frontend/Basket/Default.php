@@ -188,6 +188,8 @@ class Controller_Frontend_Basket_Default
 		}
 
 
+		$this->_checkStockLevel( $product->getProductId(), $quantity );
+
 		$productManager = $this->_getDomainManager( 'product' );
 		$productItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
 
