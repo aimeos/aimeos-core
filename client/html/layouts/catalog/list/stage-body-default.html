@@ -8,7 +8,7 @@
 ?>
 <div class="catalog-list-stage">
 <?php foreach( $this->get( 'mediaItems', array() ) as $media ) : ?>
-	<img src="<?php echo $media->getUrl(); ?>" alt="<?php echo $this->get( 'categoryName', 'Default'); ?>" >
+	<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $media->getUrl(); ?>" alt="<?php echo $this->get( 'categoryName', 'Default'); ?>" >
 <?php endforeach; ?>
 <?php echo $this->get( 'stageBody' ); ?>
 </div>
