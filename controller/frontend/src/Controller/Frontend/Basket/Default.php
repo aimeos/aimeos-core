@@ -76,23 +76,8 @@ class Controller_Frontend_Basket_Default
 	 */
 	public function addProduct( $prodid, $quantity = 1, $configAttributeIds = array(), $variantAttributeIds = array(), $requireVariant = true )
 	{
-		$catalogListManager = $this->_getDomainManager( 'catalog/list' );
-
-		$search = $catalogListManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'catalog.list.refid', $prodid ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 1 );
-
-		$result = $catalogListManager->searchItems( $search );
-
-		if( reset( $result ) === false )
-		{
-			$msg = sprintf( 'Adding product with ID "%1$s" is not allowed', $prodid );
-			throw new Controller_Frontend_Basket_Exception( $msg );
-		}
+		$this->_checkCategory( $prodid );
+		$this->_checkStockLevel( $prodid, $quantity );
 
 
 		$productManager = $this->_getDomainManager( 'product' );
@@ -365,6 +350,64 @@ class Controller_Frontend_Basket_Default
 
 		$this->_basket->setService( $orderServiceItem, $type );
 		$this->_domainManager->setSession( $this->_basket );
+	}
+
+
+	/**
+	 * Checks if the product is part of at least one category in the product catalog.
+	 *
+	 * @param string $prodid Unique ID of the product
+	 * @throws Controller_Frontend_Basket_Exception If product is not associated to at least one category
+	 */
+	protected function _checkCategory( $prodid )
+	{
+		$catalogListManager = $this->_getDomainManager( 'catalog/list' );
+
+		$search = $catalogListManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'catalog.list.refid', $prodid ),
+			$search->getConditions()
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
+
+		$result = $catalogListManager->searchItems( $search );
+
+		if( reset( $result ) === false )
+		{
+			$msg = sprintf( 'Adding product with ID "%1$s" is not allowed', $prodid );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+	}
+
+
+	/**
+	 * Checks if there are enough products in stock.
+	 *
+	 * @param string $prodid Unique ID of the product
+	 * @param integer $quantity Number of products the customer would like to buy
+	 * @throws Controller_Frontend_Basket_Exception If there are not enough products in stock
+	 */
+	protected function _checkStockLevel( $prodid, $quantity )
+	{
+		$manager = $this->_getDomainManager( 'product/stock' );
+
+		$search = $manager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.stock.productid', $prodid ),
+			$search->compare( '>=', 'product.stock.stocklevel', $quantity ),
+			$search->getConditions()
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
+
+		$result = $manager->searchItems( $search );
+
+		if( reset( $result ) === false )
+		{
+			$msg = sprintf( 'There are not enough products (ID "%1$s") in stock', $prodid );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
 	}
 
 

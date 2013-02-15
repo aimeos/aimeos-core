@@ -21,11 +21,15 @@ return array (
 		array ( 'prodid' => 'product/U:MD', 'warehouseid' => 'unit_warehouse3', 'stocklevel' => 200, 'backdate' => '2006-06-01 00:00:00' ),
 		array ( 'prodid' => 'product/U:SD', 'warehouseid' => 'unit_warehouse4', 'stocklevel' => 100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:PD', 'warehouseid' => 'unit_warehouse5', 'stocklevel' => 2000, 'backdate' => null ),
-
 		array ( 'prodid' => 'product/ABCD', 'warehouseid' => 'unit_warehouse1', 'stocklevel' => 1100, 'backdate' => '2010-04-01 00:00:00' ),
 		array ( 'prodid' => 'product/EFGH', 'warehouseid' => 'unit_warehouse2', 'stocklevel' => 1300, 'backdate' => '2015-05-01 00:00:00' ),
 		array ( 'prodid' => 'product/IJKL', 'warehouseid' => 'unit_warehouse3', 'stocklevel' => 300, 'backdate' => '2006-06-01 00:00:00' ),
 		array ( 'prodid' => 'product/MNOP', 'warehouseid' => 'unit_warehouse4', 'stocklevel' => 200, 'backdate' => null ),
 		array ( 'prodid' => 'product/QRST', 'warehouseid' => 'unit_warehouse5', 'stocklevel' => 2100, 'backdate' => null ),
+		array ( 'prodid' => 'product/U:TESTP', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
+		array ( 'prodid' => 'product/U:TESTSUB02', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
+		array ( 'prodid' => 'product/U:TESTSUB03', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
+		array ( 'prodid' => 'product/U:TESTSUB04', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
+		array ( 'prodid' => 'product/U:TESTSUB05', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
 	)
 );
