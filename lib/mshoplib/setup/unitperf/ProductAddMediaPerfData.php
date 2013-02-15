@@ -101,8 +101,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 			{
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '1. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( '../images/unitperf/' . ( ($pos + 0) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( '../images/unitperf/' . ( ($pos + 0) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setPreview( 'unitperf/' . ( ($pos + 0) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( 'unitperf/' . ( ($pos + 0) % 4 + 1 ) . '.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
@@ -114,8 +114,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '2. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( '../images/unitperf/' . ( ($pos + 1) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( '../images/unitperf/' . ( ($pos + 1) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setPreview( 'unitperf/' . ( ($pos + 1) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( 'unitperf/' . ( ($pos + 1) % 4 + 1 ) . '.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
@@ -127,8 +127,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '3. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( '../images/unitperf/' . ( ($pos + 2) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( '../images/unitperf/' . ( ($pos + 2) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setPreview( 'unitperf/' . ( ($pos + 2) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( 'unitperf/' . ( ($pos + 2) % 4 + 1 ) . '.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
@@ -140,8 +140,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '4. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( '../images/unitperf/' . ( ($pos + 3) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( '../images/unitperf/' . ( ($pos + 3) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setPreview( 'unitperf/' . ( ($pos + 3) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( 'unitperf/' . ( ($pos + 3) % 4 + 1 ) . '.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
