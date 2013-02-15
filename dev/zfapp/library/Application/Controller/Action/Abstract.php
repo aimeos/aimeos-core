@@ -128,7 +128,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 			$this->_setParam( 'catid-root', $catIdRoot );
 			$params['catid-root'] = $catIdRoot;
 
-			if ( !isset( $params['f-catalog-id'] ) ) {
+			if ( !isset( $params['f-search-text'] ) && !isset( $params['f-catalog-id'] ) ) {
 				$this->_setParam( 'f-catalog-id', $catIdRoot );
 				$params['f-catalog-id'] = $catIdRoot;
 			}
