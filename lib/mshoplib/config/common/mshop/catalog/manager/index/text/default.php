@@ -38,7 +38,6 @@ return array(
 		'search' => '
 			SELECT DISTINCT mcatinte."prodid", mcatinte."value"
 			FROM "mshop_catalog_index_text" AS mcatinte
-			JOIN "mshop_catalog_index_catalog" AS mcatinca ON mcatinte."prodid" = mcatinte."prodid"
 			JOIN "mshop_product" AS mpro ON mpro."id" = mcatinte."prodid"
 			WHERE :cond
 			/*-orderby*/ ORDER BY :order /*orderby-*/
