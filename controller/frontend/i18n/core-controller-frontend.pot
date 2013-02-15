@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-15 13:33+0100\n"
+"POT-Creation-Date: 2013-02-15 17:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,44 +67,44 @@ msgstr ""
 msgid "Basket item at position \"%1$d\" cannot be changed"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:289
+#: src/Controller/Frontend/Basket/Default.php:294
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:316
+#: src/Controller/Frontend/Basket/Default.php:321
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:378
+#: src/Controller/Frontend/Basket/Default.php:383
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:408
+#: src/Controller/Frontend/Basket/Default.php:413
 #, php-format
 msgid "There are not enough products (ID \"%1$s\") in stock"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:473
+#: src/Controller/Frontend/Basket/Default.php:478
 #, php-format
 msgid "Invalid address property \"%1$s\" with value \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:486
+#: src/Controller/Frontend/Basket/Default.php:491
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:521
+#: src/Controller/Frontend/Basket/Default.php:526
 #, php-format
 msgid ""
 "Available attribute IDs \"%1$s\" does not match the given attribute IDs "
 "\"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:555
+#: src/Controller/Frontend/Basket/Default.php:560
 #, php-format
 msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
 msgstr ""
