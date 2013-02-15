@@ -119,16 +119,23 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		Zend_Registry::set('ctx', $ctx);
 
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $ctx );
-		Zend_Registry::set('MShop_Catalog_Manager', $catalogManager);
+		try
+		{
+			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $ctx );
+			Zend_Registry::set('MShop_Catalog_Manager', $catalogManager);
 
-		$catIdRoot = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE )->getId();
-		$this->_setParam( 'catid-root', $catIdRoot );
-		$params['catid-root'] = $catIdRoot;
+			$catIdRoot = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE )->getId();
+			$this->_setParam( 'catid-root', $catIdRoot );
+			$params['catid-root'] = $catIdRoot;
 
-		if ( !isset( $params['f-catalog-id'] ) ) {
-			$this->_setParam( 'f-catalog-id', $catIdRoot );
-			$params['f-catalog-id'] = $catIdRoot;
+			if ( !isset( $params['f-catalog-id'] ) ) {
+				$this->_setParam( 'f-catalog-id', $catIdRoot );
+				$params['f-catalog-id'] = $catIdRoot;
+			}
+		}
+		catch( Exception $e )
+		{
+			$ctx->getLogger()->log( 'Unable to retrieve root catalog node: ' . $e->getMessage() );
 		}
 
 		$this->view->params = $params;

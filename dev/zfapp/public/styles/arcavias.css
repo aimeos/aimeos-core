@@ -74,6 +74,14 @@
 	margin: 0;
 }
 
+.arcavias .error-list {
+	background-color: #ffeeee;
+	border: solid 1px #FF3300;
+	padding: 0.5em;
+	margin-top: 1em;
+	list-style: none;
+}
+
 
 
 /*
@@ -539,14 +547,6 @@
 	min-width: 240px;
 	max-width: 920px;
 	margin: 0 auto;
-}
-
-.basket-standard .error-list,
-.checkout-standard .error-list,
-.checkout-confirm .error-list {
-	padding: 0.5em;
-	margin-top: 1em;
-	list-style: none;
 }
 
 
@@ -1144,13 +1144,6 @@
 	background-color: #679CB8;
 }
 
-
-.basket-standard .error-list,
-.checkout-confirm .error-list,
-.checkout-standard .error-list {
-	background-color: #ffeeee;
-	border: solid 1px #FF3300;
-}
 
 .checkout-standard-summary-basket thead,
 .basket-standard-main thead {
