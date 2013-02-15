@@ -1,0 +1,120 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+if( isset( $this->confirmOrderBaseItem ) )
+{
+	$price = $this->confirmOrderBaseItem->getPrice();
+	$priceValue = $price->getValue();
+	$priceService = $price->getShipping();
+	$priceRebate = $price->getRebate();
+	$priceTaxrate = $price->getTaxrate();
+	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
+}
+else
+{
+	$priceValue = '0.00';
+	$priceService = '0.00';
+	$priceRebate = '0.00';
+	$priceTaxrate = '0.00';
+	$priceCurrency = '';
+}
+
+try
+{
+	$deliveryPriceItem = $this->confirmOrderBaseItem->getService( 'delivery' )->getPrice();
+	$deliveryPriceService = $deliveryPriceItem->getShipping();
+	$deliveryPriceValue = $deliveryPriceItem->getValue();
+}
+catch( Exception $e )
+{
+	$deliveryPriceValue = '0.00';
+	$deliveryPriceService = '0.00';
+}
+
+try
+{
+	$paymentPriceItem = $this->confirmOrderBaseItem->getService( 'payment' )->getPrice();
+	$paymentPriceService = $paymentPriceItem->getShipping();
+	$paymentPriceValue = $paymentPriceItem->getValue();
+}
+catch( Exception $e )
+{
+	$paymentPriceValue = '0.00';
+	$paymentPriceService = '0.00';
+}
+
+$priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
+
+?>
+<div class="email-confirm-main-detail">
+	<h2><?php echo $this->translate( 'client/html', 'Order details' ); ?></h2>
+	<div class="basket">
+		<table>
+			<thead>
+				<tr>
+					<th class="details"></th>
+					<th class="quantity"><?php echo $this->translate( 'client/html', 'Quantity' ); ?></th>
+					<th class="unitprice"><?php echo $this->translate( 'client/html', 'Unit price' ); ?></th>
+					<th class="price"><?php echo $this->translate( 'client/html', 'Price' ); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+<?php if( isset( $this->confirmOrderBaseItem ) ) : ?>
+<?php 	foreach( $this->confirmOrderBaseItem->getProducts() as $position => $product ) : ?>
+				<tr>
+					<td class="details">
+						<img src="<?php echo $product->getMediaUrl(); ?>" />
+						<span class="product-name"><?php echo $product->getName(); ?></span>
+<?php		foreach( $product->getAttributes() as $attribute ) : ?>
+						<span class="product-attributename"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
+						<span class="product-attributevalue"><?php echo ( ( $name = $attribute->getName() ) !== '' ? $name : $attribute->getValue() ); ?></span>
+<?php		endforeach; ?>
+					</td>
+<?php		$prodPrice = $product->getPrice()->getValue(); ?>
+					<td class="quantity"><?php echo $product->getQuantity(); ?></td>
+					<td class="unitprice"><?php printf( $priceFormat, $this->number( $prodPrice ), $priceCurrency ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ); ?></td>
+				</tr>
+<?php 	endforeach; ?>
+<?php	if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
+				<tr>
+					<td class="details"><?php echo $this->translate( 'client/html', 'Service fees' ); ?></td>
+					<td class="quantity">1</td>
+					<td class="unitprice"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
+				</tr>
+<?php	endif; ?>
+<?php endif; ?>
+			</tbody>
+			<tfoot>
+				<tr class="subtotal">
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Sub-total' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?></td>
+				</tr>
+				<tr class="delivery">
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Shipping' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ); ?></td>
+				</tr>
+<?php if( $paymentPriceService > 0 ) : ?>
+				<tr class="payment">
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Payment costs' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ); ?></td>
+				</tr>
+<?php endif; ?>
+				<tr class="total">
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Total' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?></td>
+				</tr>
+				<tr class="rebate">
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Included rebates' ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+<?php echo $this->get( 'detailBody' ); ?>
+</div>

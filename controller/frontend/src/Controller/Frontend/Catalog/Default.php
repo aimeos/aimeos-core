@@ -224,7 +224,7 @@ class Controller_Frontend_Catalog_Default
 	 * @param string $domain Text associated to the domain e.g. product, attribute
 	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
 	 */
-	public function createTextFilter( $input, $sort = null, $direction = 'desc', $start = 0, $size = 25, $listtype = 'default', $type = 'name' )
+	public function createTextFilter( $input, $sort = null, $direction = '+', $start = 0, $size = 25, $listtype = 'default', $type = 'name' )
 	{
 		$locale = $this->_getContext()->getLocale();
 		$langid = $locale->getLanguageId();
