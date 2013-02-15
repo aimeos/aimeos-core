@@ -246,9 +246,12 @@ class Controller_Frontend_Basket_Default
 			}
 		}
 
-		$product->setAttributes( $attributes );
-		$product->setQuantity( $quantity );
+		// remove product rebate of original price in favor to rebates granted for the order
+		$price->setRebate( '0.00' );
+
 		$product->setPrice( $price );
+		$product->setQuantity( $quantity );
+		$product->setAttributes( $attributes );
 
 		$this->_basket->deleteProduct( $position );
 		$this->_basket->addProduct( $product, $position );
