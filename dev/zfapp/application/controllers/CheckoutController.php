@@ -23,6 +23,9 @@ class CheckoutController extends Application_Controller_Action_Abstract
 			$mshop = $this->_getMShop();
 			$templatePaths = $mshop->getCustomPaths( 'client/html' );
 
+			$this->view->minibasket = Client_Html_Basket_Mini_Factory::createClient( $context, $templatePaths );
+			$this->view->minibasket->setView( $this->_createView() );
+
 			$client = Client_Html_Checkout_Standard_Factory::createClient( $context, $templatePaths );
 			$client->setView( $this->_createView() );
 			$client->process();
