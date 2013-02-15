@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-14 10:24+0100\n"
+"POT-Creation-Date: 2013-02-15 17:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,6 +76,7 @@ msgid "Show"
 msgstr ""
 
 #: layouts/basket/standard/main-body-default.html:68
+#: layouts/basket/mini/main-body-default.html:28
 #: layouts/email/confirm/main-text-detail-body-default.html:56
 #: layouts/email/confirm/main-html-detail-body-default.html:50
 #: layouts/checkout/standard/payment-body-default.html:34
@@ -140,25 +141,23 @@ msgid "Update"
 msgstr ""
 
 #: layouts/basket/standard/main-body-default.html:162
+#: layouts/basket/mini/body-default.html:23
 msgid "Checkout"
 msgstr ""
 
 #: layouts/basket/standard/body-default.html:17
+#: layouts/basket/mini/body-default.html:21
 #: layouts/checkout/standard/summary-basket-body-default.html:59
 #: layouts/checkout/standard/body-default.html:22
 msgid "Basket"
 msgstr ""
 
-#: layouts/basket/mini/main-body-default.html:21
+#: layouts/basket/mini/main-body-default.html:25
 #, php-format
-msgid "%1$d article - %2$s%3$s"
-msgid_plural "%1$d articles - %2$s%3$s"
+msgid "%1$d article"
+msgid_plural "%1$d articles"
 msgstr[0] ""
 msgstr[1] ""
-
-#: layouts/basket/mini/body-default.html:21
-msgid "Mini basket"
-msgstr ""
 
 #: layouts/email/confirm/main-html-address-body-default.html:16
 #: layouts/checkout/standard/summary-address-body-default.html:20

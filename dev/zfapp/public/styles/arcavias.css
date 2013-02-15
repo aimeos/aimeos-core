@@ -74,6 +74,14 @@
 	margin: 0;
 }
 
+.arcavias .error-list {
+	background-color: #ffeeee;
+	border: solid 1px #FF3300;
+	padding: 0.5em;
+	margin-top: 1em;
+	list-style: none;
+}
+
 
 
 /*
@@ -541,14 +549,6 @@
 	margin: 0 auto;
 }
 
-.basket-standard .error-list,
-.checkout-standard .error-list,
-.checkout-confirm .error-list {
-	padding: 0.5em;
-	margin-top: 1em;
-	list-style: none;
-}
-
 
 .basket-standard .note,
 .checkout-standard .note,
@@ -576,6 +576,12 @@
 /*
  * Basket
  */
+
+.basket-mini h1 {
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+}
 
 .basket-standard-main form,
 .checkout-standard-summary-basket .basket {
@@ -1144,13 +1150,6 @@
 	background-color: #679CB8;
 }
 
-
-.basket-standard .error-list,
-.checkout-confirm .error-list,
-.checkout-standard .error-list {
-	background-color: #ffeeee;
-	border: solid 1px #FF3300;
-}
 
 .checkout-standard-summary-basket thead,
 .basket-standard-main thead {
