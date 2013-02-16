@@ -315,10 +315,18 @@ class MShop_Catalog_Manager_Default
 	public function deleteItem( $id )
 	{
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
-
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->deleteNode( $id );
-		$this->_commit();
+
+		try
+		{
+			$this->_createTreeManager( $siteid )->deleteNode( $id );
+			$this->_commit();
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			throw $e;
+		}
 	}
 
 
@@ -367,13 +375,21 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function insertItem( MShop_Catalog_Item_Interface $item, $parentId = null, $refId = null )
 	{
-		$node = $item->getNode();
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
-
+		$node = $item->getNode();
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
-		$this->_updateUsage( $node->getId(), true );
-		$this->_commit();
+
+		try
+		{
+			$this->_createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
+			$this->_updateUsage( $node->getId(), true );
+			$this->_commit();
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			throw $e;
+		}
 	}
 
 
@@ -388,11 +404,19 @@ class MShop_Catalog_Manager_Default
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
-
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
-		$this->_updateUsage( $id );
-		$this->_commit();
+
+		try
+		{
+			$this->_createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
+			$this->_updateUsage( $id );
+			$this->_commit();
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			throw $e;
+		}
 	}
 
 
@@ -409,13 +433,21 @@ class MShop_Catalog_Manager_Default
 			throw new MShop_Catalog_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
 		}
 
-		$node = $item->getNode();
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
-
+		$node = $item->getNode();
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->saveNode( $node );
-		$this->_updateUsage( $node->getId() );
-		$this->_commit();
+
+		try
+		{
+			$this->_createTreeManager( $siteid )->saveNode( $node );
+			$this->_updateUsage( $node->getId() );
+			$this->_commit();
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			throw $e;
+		}
 	}
 
 
