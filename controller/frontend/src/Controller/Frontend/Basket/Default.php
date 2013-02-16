@@ -400,19 +400,19 @@ class Controller_Frontend_Basket_Default
 		$search = $manager->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'product.stock.productid', $prodid ),
-			$search->compare( '>=', 'product.stock.stocklevel', $quantity ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 1 );
 
-		$result = $manager->searchItems( $search );
-
-		if( reset( $result ) === false )
+		foreach( $manager->searchItems( $search ) as $item )
 		{
-			$msg = sprintf( 'There are not enough products (ID "%1$s") in stock', $prodid );
-			throw new Controller_Frontend_Basket_Exception( $msg );
+			if( $item->getStockLevel() >= $quantity ) {
+				return;
+			}
 		}
+
+		$msg = sprintf( 'There are not enough products (ID "%1$s") in stock', $prodid );
+		throw new Controller_Frontend_Basket_Exception( $msg );
 	}
 
 
