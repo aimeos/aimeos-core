@@ -76,6 +76,9 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 		$editor = $this->_additional->getEditor();
 		$this->_additional->setEditor( $this->_editor );
 
+
+		$this->_txBegin();
+
 		foreach( $testdata as $domain => $datasets )
 		{
 			$this->_msg( sprintf( 'Checking "%1$s" type data', $domain ), 1 );
@@ -102,6 +105,8 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 
 			$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
 		}
+
+		$this->_txCommit();
 
 		$this->_additional->setEditor( $editor );
 	}
@@ -164,5 +169,25 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 		}
 
 		return $this->_domainManagers[$domain];
+	}
+
+
+	protected function _txBegin()
+	{
+		$dbm = $this->_additional->getDatabaseManager();
+
+		$conn = $dbm->acquire();
+		$conn->begin();
+		$dbm->release( $conn );
+	}
+
+
+	protected function _txCommit()
+	{
+		$dbm = $this->_additional->getDatabaseManager();
+
+		$conn = $dbm->acquire();
+		$conn->commit();
+		$dbm->release( $conn );
 	}
 }
