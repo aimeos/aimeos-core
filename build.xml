@@ -151,7 +151,7 @@
 		    </replaceregexp>
 		  </filterchain>
 		</reflexive>
-		<exec command="tar -c --bzip2 --exclude-vcs --exclude='./dev' --exclude='./ext/*' --exclude='./config/resource.php' -f ../arcavias-core_${version}.tar.bz2 ."
+		<exec command="tar -c --bzip2 --exclude-vcs --exclude='./dev' --exclude='./ext/*' --exclude='./config/resource.php' --exclude='./config/.resource.php.ci' --exclude='./.travis.yml' -f ../arcavias-core_${version}.tar.bz2 ."
 			checkreturn="true" logoutput="true"/>
 		<filehash file="../arcavias-core_${version}.tar.bz2" hashtype="1" />
 		<echo msg="SHA1 hash value: ${filehashvalue}" />
