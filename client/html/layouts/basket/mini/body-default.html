@@ -10,7 +10,7 @@ $basketController = $this->config( 'client/html/basket/standard/url/controller',
 $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
 
 ?>
-<div class="arcavias basket-mini">
+<section class="arcavias basket-mini">
 <?php if( ( $errors = $this->get( 'miniErrorList', array() ) ) !== array() ) : ?>
 	<ul class="error-list">
 <?php foreach( $errors as $error ) : ?>
@@ -21,4 +21,4 @@ $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index'
 	<h1><?php echo $this->translate( 'client/html', 'Basket' ); ?></h1>
 <?php echo $this->get( 'miniBody' ); ?>
 	<a class="minibutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>"><?php echo $this->translate( 'client/html', 'Checkout' ); ?></a>
-</div>
+</section>

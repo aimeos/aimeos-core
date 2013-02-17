@@ -6,7 +6,7 @@
  */
 
 ?>
-<div class="checkout-standard-address">
+<section class="checkout-standard-address">
 	<h1><?php echo $this->translate( 'client/html', 'address' ); ?></h1>
 	<p class="note"><?php echo $this->translate( 'client/html', 'Fields with an * are mandatory' ); ?></p>
 	<form method="POST" action="<?php echo $this->get( 'standardUrlNext' ); ?>">
@@ -16,4 +16,4 @@
 			<button class="standardbutton"><?php echo $this->translate( 'client/html', 'Next' ); ?></button>
 		</div>
 	</form>
-</div>
+</section>

@@ -9,7 +9,7 @@
 try
 {
 	$miniPriceValue = $this->mainPriceItem->getValue();
-	$miniPriceCurrency = $this->translate( 'core/client/html/currency', $this->mainPriceItem->getCurrencyId() );
+	$miniPriceCurrency = $this->translate( 'client/html/currency', $this->mainPriceItem->getCurrencyId() );
 }
 catch( Exception $e )
 {
@@ -25,7 +25,7 @@ $quantity = $this->get( 'mainQuantity', 0 );
 <?php printf( $this->translate( 'client/html', '%1$d article', '%1$d articles', $quantity ), $quantity ); ?>
 	</span>
 	<span class="value">
-<?php printf( $this->translate( 'client/html', '%1$s%2$s' ), $this->number( $miniPriceValue ), $this->translate( 'client/hmtl/currency', $miniPriceCurrency ) ); ?>
+<?php printf( $this->translate( 'client/html', '%1$s%2$s' ), $this->number( $miniPriceValue ), $miniPriceCurrency ); ?>
 	</span>
 </div>
 

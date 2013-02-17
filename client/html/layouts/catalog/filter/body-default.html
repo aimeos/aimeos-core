@@ -11,7 +11,7 @@ $listController = $this->config( 'client/html/catalog/list/url/controller', 'cat
 $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 
 ?>
-<div class="arcavias catalog-filter">
+<section class="arcavias catalog-filter">
 <?php if( isset( $this->filterErrorList ) ) : ?>
 	<ul class="error-list">
 <?php foreach( (array) $this->filterErrorList as $errmsg ) : ?>
@@ -19,9 +19,11 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-	<form method="GET" action="<?php echo $this->url( $listTarget, $listController, $listAction ); ?>">
+	<nav>
+		<form method="GET" action="<?php echo $this->url( $listTarget, $listController, $listAction ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
-		<button class="standardbutton" type="submit">
+			<button class="standardbutton" type="submit">
 <?php echo $this->translate( 'client/html', 'Show' ); ?></button>
-	</form>
-</div>
+		</form>
+	</nav>
+</section>

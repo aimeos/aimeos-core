@@ -10,23 +10,18 @@ $catPath = $this->get( 'listCatPath', array() );
 ?>
 <div class="catalog-list-header">
 <?php if( ( $catItem = end( $catPath ) ) !== false ) : ?>
-	<div class="image-default">
+	<div class="imagelist-default">
 <?php	foreach( $catItem->getRefItems( 'media', 'header', 'default' ) as $mediaItem ) : ?>
 		<img class="<?php echo $mediaItem->getType(); ?>" src="<?php echo $mediaItem->getUrl(); ?>" />
 <?php	endforeach; ?>
 	</div>
-<?php	foreach( $catItem->getRefItems( 'text', null, 'default' ) as $textItem ) : ?>
+<?php	foreach( $catItem->getRefItems( 'text' ) as $textItem ) : ?>
 <?php		if( $textItem->getType() == 'name' ) : ?>
 	<h1><?php echo $textItem->getContent(); ?></h1>
 <?php		else : ?>
-	<div class="text-default <?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></div>
+	<section class="<?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></section>
 <?php		endif; ?>
 <?php	endforeach; ?>
-	<div class="text-promotion">
-<?php	foreach( $catItem->getRefItems( 'text', null, 'promotion' ) as $textItem ) : ?>
-		<div class="<?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></div>
-<?php	endforeach; ?>
-	</div>
 <?php endif; ?>
 <?php echo $this->get( 'headerBody' ); ?>
 </div>

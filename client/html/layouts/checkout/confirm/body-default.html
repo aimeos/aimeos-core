@@ -6,7 +6,7 @@
  */
 
 ?>
-<div class="arcavias checkout-confirm">
+<section class="arcavias checkout-confirm">
 <?php if( isset( $this->confirmErrorList ) ) : ?>
 	<ul class="error-list">
 <?php foreach( (array) $this->confirmErrorList as $errmsg ) : ?>
@@ -16,4 +16,4 @@
 <?php endif; ?>
 	<h1><?php echo $this->translate( 'client/html', 'Confirmation' ); ?></h1>
 <?php echo $this->get( 'confirmBody' ); ?>
-</div>
+</section>

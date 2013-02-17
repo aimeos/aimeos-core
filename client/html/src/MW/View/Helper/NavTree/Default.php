@@ -53,14 +53,14 @@ class MW_View_Helper_NavTree_Default
 
 		$id = $item->getId();
 		$trailing = array( $item->getname() );
-		$class = ( $item->hasChildren() ? ' catWithChild' : ' catNoChild' );
+		$class = ( $item->hasChildren() ? ' withchild' : ' nochild' );
 		$url = $this->url( $this->_target, $this->_controller, $this->_action, array( 'f-catalog-id' => $id ), $trailing );
 
-		$output = '<li class="tree-catid-' . $id . $class . '"><a href="' . $url . '">' . $item->getName() . '</a>';
+		$output = '<li class="catid-' . $id . $class . '"><a href="' . $url . '">' . $item->getName() . '</a>';
 
 		if( $item->hasChildren() )
 		{
-			$output .= '<ul class="tree-level-' . ( $item->getNode()->level + 1 ) . '">';
+			$output .= '<ul class="level-' . ( $item->getNode()->level + 1 ) . '">';
 
 			foreach( $item->getChildren() as $child ) {
 				$output .= $this->transform( $child );

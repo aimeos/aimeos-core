@@ -33,9 +33,16 @@ class MW_Common_Criteria_MySQL extends MW_Common_Criteria_SQL
 				if( isset( $params[2] ) )
 				{
 					$str = '';
-					foreach( explode( ' ', $params[2] ) as $part ) {
-						$str .= ' +' . $part . '*';
+
+					foreach( explode( ' ', $params[2] ) as $part )
+					{
+						if( ctype_alpha( $part ) ) {
+							$str .= ' +' . $part . '*';
+						} else {
+							$str .= ' ' . $part . '*';
+						}
 					}
+
 					$params[2] = $str;
 				}
 				break;

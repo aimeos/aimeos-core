@@ -6,7 +6,7 @@
  */
 
 ?>
-<div class="checkout-standard-summary">
+<section class="checkout-standard-summary">
 	<h1><?php echo $this->translate( 'client/html', 'summary' ); ?></h1>
 	<p class="note"><?php echo $this->translate( 'client/html', 'Please check your order' ); ?></p>
 	<form method="POST" action="<?php echo $this->get( 'standardUrlNext' ); ?>">
@@ -17,4 +17,4 @@
 			<button class="standardbutton"><?php echo $this->translate( 'client/html', 'Buy now' ); ?></button>
 		</div>
 	</form>
-</div>
+</section>

@@ -73,7 +73,7 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="arcavias catalog-list">', $output );
+		$this->assertStringStartsWith( '<section class="arcavias catalog-list">', $output );
 	}
 
 
