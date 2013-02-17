@@ -17,7 +17,7 @@ if( isset( $this->detailProductItem ) ) {
 <h2 class="header description"><?php echo $this->translate( 'client/html', 'Description' ); ?></h2>
 <div class="content description">
 <?php foreach( $textItems as $textItem ) : ?> 
-	<section class="long"><?php echo $textItem->getContent(); ?></section>
+	<div class="long"><?php echo $textItem->getContent(); ?></div>
 <?php endforeach; ?>
 <?php echo $this->get( 'textBody' ); ?>
 </div>

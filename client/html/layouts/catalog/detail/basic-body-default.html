@@ -15,7 +15,7 @@
 		<span class="name"><?php echo $this->translate( 'client/html', 'Article no.:' ); ?></span>
 		<span class="value"><?php echo $this->detailProductItem->getCode(); ?></span>
 	</p>
-<?php foreach( $this->detailProductItem->getRefItems( 'text', 'short' ) as $textItem ) : ?> 
+<?php foreach( $this->detailProductItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?> 
 	<p class="short"><?php echo $textItem->getContent(); ?></p>
 <?php endforeach; ?>
 <?php echo $this->basicBody; ?>
