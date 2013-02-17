@@ -254,4 +254,15 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 
 		return $this;
 	}
+
+
+	/**
+	 * Returns the connection object.
+	 *
+	 * return MW_DB_Connection_Interface Connection object
+	 */
+	public function _getConnection()
+	{
+		return $this->_conn;
+	}
 }
