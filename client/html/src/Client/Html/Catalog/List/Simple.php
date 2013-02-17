@@ -139,7 +139,7 @@ class Client_Html_Catalog_List_Simple
 
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 
-			$filter = $controller->createTextFilter( $input, 'relevance' );
+			$filter = $controller->createTextFilter( $input );
 			$items = $controller->getTextList( $filter );
 
 			$listTextItems = array();
