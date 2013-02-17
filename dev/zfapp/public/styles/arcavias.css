@@ -122,44 +122,44 @@
  * Hide all list blocks of the sub-levels.
  * The active ones will be enabled by the interal style sheet
  */
-.catalog-filter-tree .tree-level-1 ul {
+.catalog-filter-tree .level-1 ul {
 	display: none;
 }
 
-.catalog-filter-tree .tree-level-0 > li a {
+.catalog-filter-tree .level-0 > li a {
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 120%;
 }
 
-.catalog-filter-tree .tree-level-1 {
+.catalog-filter-tree .level-1 {
 	margin: 10px 0;
 }
 
-.catalog-filter-tree .tree-level-1 > li a {
+.catalog-filter-tree .level-1 > li a {
 	text-transform: none;
 }
 
-.catalog-filter-tree .tree-level-2 {
+.catalog-filter-tree .level-2 {
 	margin: 0;
 }
 
-.catalog-filter-tree .tree-level-2 > li {
+.catalog-filter-tree .level-2 > li {
 	padding-left: 15px;
 }
 
-.catalog-filter-tree .tree-level-3 > li {
+.catalog-filter-tree .level-3 > li {
 	padding-left: 15px;
 	margin-bottom: 0;
 }
 
-.catalog-filter-tree .tree-level-3 > li a {
+.catalog-filter-tree .level-3 > li a {
 	font-weight: normal;
 	font-size: 100%;
 	margin-top: 1px;
 }
 
-.catalog-filter-tree .tree-level-3 > .active a {
+.catalog-filter-tree .level-3 > .active a {
 	font-weight: bold;
 }
 
@@ -221,29 +221,29 @@
 	text-align: right;
 }
 
-.catalog-list-pagination .page-sort {
+.catalog-list-pagination .sort {
 	float: left;
 }
 
-.catalog-list-pagination .page-sort > ul {
+.catalog-list-pagination .sort > ul {
 	list-style: none outside none;
 	display: inline-block;
 }
 
-.catalog-list-pagination .page-sort > ul > li {
+.catalog-list-pagination .sort > ul > li {
 	display: inline-block;
 }
 
-.catalog-list-pagination .page-sort a.active {
+.catalog-list-pagination .sort a.active {
 	text-decoration: none;
 	font-weight: bold;
 }
 
-.catalog-list-pagination .page-browser {
+.catalog-list-pagination .browser {
 	display: inline-block;
 }
 
-.catalog-list-pagination .page-browser a {
+.catalog-list-pagination .browser a {
 	font-weight: bold;
 	padding: 0 0.25em;
 }
@@ -323,11 +323,11 @@
 	display: block;
 }
 
-.catalog-list-items .price-item:first-child .price-quantity,
-.catalog-list-items .price-item:first-child .price-rebatepercent,
-.catalog-list-items .price-item:first-child .price-rebate,
-.catalog-list-items .price-item:first-child .price-shipping,
-.catalog-list-items .price-item:first-child .price-taxrate {
+.catalog-list-items .price-item:first-child .quantity,
+.catalog-list-items .price-item:first-child .rebatepercent,
+.catalog-list-items .price-item:first-child .rebate,
+.catalog-list-items .price-item:first-child .shipping,
+.catalog-list-items .price-item:first-child .taxrate {
 	display: none;
 }
 
@@ -436,12 +436,14 @@
 	margin-left: 252px;
 }
 
-.catalog-detail-basic h1.basic-name {
+.catalog-detail-basic h1.name {
 	font-size: 175%;
 	line-height: 175%;
+	padding: 0;
+	margin: 0;
 }
 
-.catalog-detail-basic p.basic-shortdesc {
+.catalog-detail-basic .short {
 	margin-top: 1em;
 }
 
@@ -460,28 +462,28 @@
 	margin-top: 1.5em;
 }
 
-.catalog-detail-basket .price-quantity,
-.catalog-detail-basket .price-rebatepercent,
-.catalog-detail-basket .price-rebate,
-.catalog-detail-basket .price-shipping,
-.catalog-detail-basket .price-taxrate {
+.catalog-detail-basket .price-item .quantity,
+.catalog-detail-basket .price-item .rebatepercent,
+.catalog-detail-basket .price-item .rebate,
+.catalog-detail-basket .price-item .shipping,
+.catalog-detail-basket .price-item .taxrate {
 	display: none;
 }
 
-.catalog-detail-basket span.price-value  {
+.catalog-detail-basket .price-item .value  {
 	font-weight: bold;
 	font-size: 220%;
 }
 
 /* add to basket */
 
-.catalog-detail-basket .basket-add {
+.catalog-detail-basket .addbasket {
 	padding: 0.5em;
 	margin-top: 1em;
 	text-align: right;
 }
 
-.catalog-detail-basket .basket-group input {
+.catalog-detail-basket .group input {
 	margin-right: 1.5em;
 	text-align: center;
 	font-size: 100%;
@@ -489,24 +491,21 @@
 	width: 3em;
 }
 
-.catalog-detail-basket .basket-attribute {
-	margin-top: 1.5em;
-}
-
 /* product attributes */
 
-.catalog-detail-basket .basket-attribute {
+.catalog-detail-basket-attribute {
+	margin-top: 1.5em;
 	font-weight: bold;
 	text-transform: uppercase;
 }
 
-.catalog-detail-basket .basket-attribute select {
+.catalog-detail-basket-attribute select {
 	font-weight: normal;
 	text-transform: none;
 	margin-bottom: 3px;
 }
 
-.catalog-detail-basket .basket-attribute td {
+.catalog-detail-basket-attribute td {
 	padding-right: 5px;
 }
 
@@ -522,7 +521,7 @@
 	width: 100%;
 }
 
-.catalog-detail-additional h2.tabheader {
+.catalog-detail-additional .header {
 	border: 0 none;
     font-size: 1em;
     font-weight: bold;
@@ -531,7 +530,7 @@
     padding: 0 0.5em;
 }
 
-.catalog-detail-additional .tabcontent {
+.catalog-detail-additional .content {
     margin: 1em;
 }
 
@@ -1056,21 +1055,21 @@
 	border: 1px solid #C3D9E5;
 }
 
-.catalog-filter-tree .tree-level-0 > li a {
+.catalog-filter-tree .level-0 > li a {
 	color: #004266;
 }
 
-.catalog-filter-tree .tree-level-2 > .catWithChild {
+.catalog-filter-tree .level-2 > .catWithChild {
 	background: url(../images/listIconClose.png) no-repeat;
 	background-position: 0.1em 0.5em;
 }
 
-.catalog-filter-tree .tree-level-2 > .active {
+.catalog-filter-tree .level-2 > .active {
 	background: url(../images/listIconOpen.png) no-repeat;
 	background-position: 0.1em 0.5em;
 }
 
-.catalog-filter-tree .tree-level-2 > li a {
+.catalog-filter-tree .level-2 > li a {
 	color: #679CB8;
 }
 
@@ -1086,11 +1085,11 @@
 	color: #004266;
 }
 
-.catalog-list-pagination .page-sort a {
+.catalog-list-pagination .sort a {
 	color: #004266;
 }
 
-.catalog-list-pagination .page-browser a {
+.catalog-list-pagination .browser a {
 	color: #004266;
 }
 
@@ -1125,27 +1124,27 @@
 	background-color: #FFFFFF;
 }
 
-.catalog-detail-basic h1.basic-name {
+.catalog-detail-basic h1.name {
 	color: #88B3CB;
 }
 
-.catalog-detail-basic p.basic-supplier {
+.catalog-detail-basic .supplier {
 	color: #004266;
 }
 
-.catalog-detail-basket .basket-price span.price-value  {
+.catalog-detail-basket .price .price-item .value  {
 	color: #004266;
 }
 
-.catalog-detail-basket .basket-add {
+.catalog-detail-basket .addbasket {
 	background-color: #679CB8;
 }
 
-.catalog-detail-basket .basket-attribute {
+.catalog-detail-basket-attribute {
 	color: #004266;
 }
 
-.catalog-detail-additional h2.tabheader {
+.catalog-detail-additional .header {
 	color: #ffffff;
 	background-color: #679CB8;
 }

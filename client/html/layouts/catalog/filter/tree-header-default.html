@@ -14,7 +14,7 @@
 		foreach( $this->treeCatalogPath as $item )
 		{
 			$id = $item->getId();
-			$selectors[] = '.catalog-filter-tree .tree-catid-' . $id . ' > ul, .catalog-filter-tree .tree-catid-' . $id;
+			$selectors[] = '.catalog-filter-tree .catid-' . $id . ' > ul, .catalog-filter-tree .catid-' . $id;
 		}
 ?>
 	<?php echo implode( ",\n	", $selectors ); ?> {
@@ -25,7 +25,7 @@
 <?php
 		$path = array();
 		foreach( $this->treeCatalogPath as $item ) {
-			$path[] = '".catalog-filter-tree .tree-catid-' . $item->getId() . '"';
+			$path[] = '".catalog-filter-tree .catid-' . $item->getId() . '"';
 		}
 ?>
 <!--
