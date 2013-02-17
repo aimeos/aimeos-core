@@ -15,12 +15,12 @@
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_List_Header_Default
+class Client_Html_Catalog_List_Head_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
 	private $_subPartNames = array();
-	private $_subPartPath = 'client/html/catalog/list/header/default/subparts';
+	private $_subPartPath = 'client/html/catalog/list/head/default/subparts';
 
 
 	/**
@@ -36,10 +36,10 @@ class Client_Html_Catalog_List_Header_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->headerBody = $html;
+		$view->headBody = $html;
 
-		$tplconf = 'client/html/catalog/list/header/default/template-body';
-		$default = 'catalog/list/header-body-default.html';
+		$tplconf = 'client/html/catalog/list/head/default/template-body';
+		$default = 'catalog/list/head-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -58,10 +58,10 @@ class Client_Html_Catalog_List_Header_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->headerHeader = $html;
+		$view->headHeader = $html;
 
-		$tplconf = 'client/html/catalog/list/header/default/template-header';
-		$default = 'catalog/list/header-header-default.html';
+		$tplconf = 'client/html/catalog/list/head/default/template-header';
+		$default = 'catalog/list/head-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -76,7 +76,7 @@ class Client_Html_Catalog_List_Header_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'catalog/list/header/' . $type, $name );
+		return $this->_createSubClient( 'catalog/list/head/' . $type, $name );
 	}
 
 

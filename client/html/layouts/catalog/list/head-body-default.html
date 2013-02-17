@@ -8,10 +8,10 @@
 $catPath = $this->get( 'listCatPath', array() );
 
 ?>
-<div class="catalog-list-header">
+<div class="catalog-list-head">
 <?php if( ( $catItem = end( $catPath ) ) !== false ) : ?>
 	<div class="imagelist-default">
-<?php	foreach( $catItem->getRefItems( 'media', 'header', 'default' ) as $mediaItem ) : ?>
+<?php	foreach( $catItem->getRefItems( 'media', 'head', 'default' ) as $mediaItem ) : ?>
 		<img class="<?php echo $mediaItem->getType(); ?>" src="<?php echo $mediaItem->getUrl(); ?>" />
 <?php	endforeach; ?>
 	</div>
@@ -23,5 +23,5 @@ $catPath = $this->get( 'listCatPath', array() );
 <?php		endif; ?>
 <?php	endforeach; ?>
 <?php endif; ?>
-<?php echo $this->get( 'headerBody' ); ?>
+<?php echo $this->get( 'headBody' ); ?>
 </div>

@@ -6,7 +6,7 @@
  * @version $Id: DefaultTest.php 1352 2012-10-29 16:11:47Z nsendetzky $
  */
 
-class Client_Html_Catalog_List_Header_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_List_Head_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_object;
 
@@ -21,7 +21,7 @@ class Client_Html_Catalog_List_Header_DefaultTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_List_Header_DefaultTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_List_Head_DefaultTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -36,7 +36,7 @@ class Client_Html_Catalog_List_Header_DefaultTest extends MW_Unittest_Testcase
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Header_Default( $context, $paths );
+		$this->_object = new Client_Html_Catalog_List_Head_Default( $context, $paths );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
@@ -75,7 +75,7 @@ class Client_Html_Catalog_List_Header_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="catalog-list-header">', $output );
+		$this->assertStringStartsWith( '<div class="catalog-list-head">', $output );
 	}
 
 	public function testGetSubClient()
