@@ -15,11 +15,11 @@ $catPath = $this->get( 'listCatPath', array() );
 		<img class="<?php echo $mediaItem->getType(); ?>" src="<?php echo $mediaItem->getUrl(); ?>" />
 <?php	endforeach; ?>
 	</div>
-<?php	foreach( $catItem->getRefItems( 'text' ) as $textItem ) : ?>
+<?php	foreach( $catItem->getRefItems( 'text', null, 'default' ) as $textItem ) : ?>
 <?php		if( $textItem->getType() == 'name' ) : ?>
 	<h1><?php echo $textItem->getContent(); ?></h1>
 <?php		else : ?>
-	<section class="<?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></section>
+	<div class="<?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></div>
 <?php		endif; ?>
 <?php	endforeach; ?>
 <?php endif; ?>
