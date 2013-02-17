@@ -78,7 +78,7 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="checkout-standard-order">', $output );
+		$this->assertStringStartsWith( '<section class="checkout-standard-order">', $output );
 	}
 
 

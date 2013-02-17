@@ -86,7 +86,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertContains( 'Groups', $output );
 		$this->assertContains( 'Neu', $output );
-		$this->assertContains( 'tree-level-2', $output );
+		$this->assertContains( 'evel-2', $output );
 	}
 
 
@@ -106,7 +106,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 		$output = $this->_object->getBody();
 
-		$this->assertContains( 'tree-level-2', $output );
+		$this->assertContains( 'level-2', $output );
 	}
 
 
@@ -126,7 +126,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 		$output = $this->_object->getBody();
 
-		$this->assertNotContains( 'tree-level-2', $output );
+		$this->assertNotContains( 'level-2', $output );
 	}
 
 

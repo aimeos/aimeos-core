@@ -64,7 +64,7 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="arcavias checkout-confirm">', $output );
+		$this->assertStringStartsWith( '<section class="arcavias checkout-confirm">', $output );
 	}
 
 

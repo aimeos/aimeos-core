@@ -7,7 +7,7 @@
  */
 
 ?>
-<div class="arcavias catalog-list">
+<section class="arcavias catalog-list">
 <?php if( isset( $this->listErrorList ) ) : ?>
 	<ul class="error-list">
 <?php foreach( (array) $this->listErrorList as $errmsg ) : ?>
@@ -16,4 +16,4 @@
 	</ul>
 <?php endif; ?>
 <?php echo $this->get( 'listBody' ); ?>
-</div>
+</section>

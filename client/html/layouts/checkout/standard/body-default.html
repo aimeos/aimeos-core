@@ -17,9 +17,10 @@ $link = true;
 $stepActive = $this->get( 'standardStepActive' );
 
 ?>
-<div class="arcavias checkout-standard">
-	<ol class="steps">
-		<li class="step basket active"><a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>"><?php echo $this->translate( 'client/html', 'Basket' ); ?></a></li>
+<section class="arcavias checkout-standard">
+	<nav>
+		<ol class="steps">
+			<li class="step basket active"><a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>"><?php echo $this->translate( 'client/html', 'Basket' ); ?></a></li>
 <?php foreach( $this->get( 'standardSteps', array() ) as $name ) :
 
 		$class = '';
@@ -41,9 +42,10 @@ $stepActive = $this->get( 'standardStepActive' );
 			}
 		}
 ?>
-		<li class="step <?php echo $name . $class; ?>"><?php echo $string; ?></li>
+			<li class="step <?php echo $name . $class; ?>"><?php echo $string; ?></li>
 <?php endforeach; ?>
-	</ol>
+		</ol>
+	</nav>
 <?php if( isset( $this->standardErrorList ) ) : ?>
 	<ul class="error-list">
 <?php foreach( (array) $this->standardErrorList as $errmsg ) : ?>
@@ -52,4 +54,4 @@ $stepActive = $this->get( 'standardStepActive' );
 	</ul>
 <?php endif; ?>
 <?php echo $this->get( 'standardBody' ); ?>
-</div>
+</section>
