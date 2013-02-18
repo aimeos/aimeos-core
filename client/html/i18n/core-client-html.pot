@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-18 15:54+0100\n"
+"POT-Creation-Date: 2013-02-18 17:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,7 +145,6 @@ msgid "Update"
 msgstr ""
 
 #: layouts/basket/standard/main-body-default.html:162
-#: layouts/basket/mini/body-default.html:23
 msgid "Checkout"
 msgstr ""
 
@@ -162,6 +161,10 @@ msgid "%1$d article"
 msgid_plural "%1$d articles"
 msgstr[0] ""
 msgstr[1] ""
+
+#: layouts/basket/mini/body-default.html:23
+msgid "Your basket"
+msgstr ""
 
 #: layouts/email/confirm/main-html-address-body-default.html:16
 #: layouts/checkout/standard/summary-address-body-default.html:20

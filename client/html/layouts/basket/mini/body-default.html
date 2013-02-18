@@ -20,5 +20,5 @@ $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index'
 <?php endif; ?>
 	<h1><?php echo $this->translate( 'client/html', 'Basket' ); ?></h1>
 <?php echo $this->get( 'miniBody' ); ?>
-	<a class="minibutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>"><?php echo $this->translate( 'client/html', 'Checkout' ); ?></a>
+	<a class="minibutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>"><?php echo $this->translate( 'client/html', 'Your basket' ); ?></a>
 </section>
