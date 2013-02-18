@@ -15,7 +15,8 @@
  * @package MShop
  * @subpackage Product
  */
-interface MShop_Product_Item_Tag_Interface extends MShop_Common_Item_Interface
+interface MShop_Product_Item_Tag_Interface
+	extends MShop_Common_Item_Interface, MShop_Common_Item_Typeid_Interface
 {
 	/**
 	 * Returns the language id of the tag item
@@ -32,20 +33,6 @@ interface MShop_Product_Item_Tag_Interface extends MShop_Common_Item_Interface
 	public function setLanguageId( $id );
 
 	/**
-	 * Returns the type id of the tag item
-	 *
-	 * @return string Type ID of the tag item
-	 */
-	public function getTypeId();
-
-	/**
-	 * Sets the Type Id of the tag item
-	 *
-	 * @param string $id New Type ID of the tag item
-	 */
-	public function setTypeId( $id );
-
-	/**
 	 * Returns the label of the tag item.
 	 *
 	 * @return string Label of the tag item
@@ -59,10 +46,4 @@ interface MShop_Product_Item_Tag_Interface extends MShop_Common_Item_Interface
 	 */
 	public function setLabel( $label );
 
-	/**
-	 * Returns the type code of the tag item.
-	 *
-	 * @return string Type code of the tag item
-	 */
-	public function getType();
 }
