@@ -223,7 +223,18 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			if( ( $orderid = $view->param( 'arcavias', null ) ) !== null )
+			$orderid = null;
+
+			foreach( array( 'arcavias', 'plain' ) as $key )
+			{
+				if( isset( $_GET[$key] ) )
+				{
+					$orderid = $_GET[$key];
+					break;
+				}
+			}
+
+			if( $orderid !== null )
 			{
 				$context = $this->_getContext();
 				$sorderid = $context->getSession()->get( 'arcavias/orderid' );
