@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-15 17:48+0100\n"
+"POT-Creation-Date: 2013-02-18 17:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: layouts/catalog/list/breadcrumb-body-default.html:16
+msgid "You are here:"
+msgstr ""
 
 #: layouts/catalog/list/pagination-body-default.html:29
 msgid "Sort by:"
@@ -71,7 +75,7 @@ msgstr ""
 msgid "%1$s ( +%2$s€ )"
 msgstr ""
 
-#: layouts/catalog/filter/body-default.html:25
+#: layouts/catalog/filter/body-default.html:26
 msgid "Show"
 msgstr ""
 
@@ -141,14 +145,13 @@ msgid "Update"
 msgstr ""
 
 #: layouts/basket/standard/main-body-default.html:162
-#: layouts/basket/mini/body-default.html:23
 msgid "Checkout"
 msgstr ""
 
 #: layouts/basket/standard/body-default.html:17
 #: layouts/basket/mini/body-default.html:21
 #: layouts/checkout/standard/summary-basket-body-default.html:59
-#: layouts/checkout/standard/body-default.html:22
+#: layouts/checkout/standard/body-default.html:23
 msgid "Basket"
 msgstr ""
 
@@ -158,6 +161,10 @@ msgid "%1$d article"
 msgid_plural "%1$d articles"
 msgstr[0] ""
 msgstr[1] ""
+
+#: layouts/basket/mini/body-default.html:23
+msgid "Your basket"
+msgstr ""
 
 #: layouts/email/confirm/main-html-address-body-default.html:16
 #: layouts/checkout/standard/summary-address-body-default.html:20

@@ -12,11 +12,14 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 ?>
 <div class="catalog-list-breadcrumb">
 <?php if( isset( $this->listCatPath ) ) : ?>
-	<ol>
+	<nav>
+		<h2><?php echo $this->translate( 'client/html', 'You are here:' ); ?></h2>
+		<ol>
 <?php	foreach( (array) $this->listCatPath as $cat ) : ?>
-		<li><a href="<?php echo $this->url( $listTarget, $listController, $listAction, array( 'f-catalog-id' => $cat->getId() ), array( $cat->getName() ) ); ?>"><?php echo $cat->getName(); ?></a></li>
+			<li><a href="<?php echo $this->url( $listTarget, $listController, $listAction, array( 'f-catalog-id' => $cat->getId() ), array( $cat->getName() ) ); ?>"><?php echo $cat->getName(); ?></a></li>
 <?php	endforeach; ?>
-	</ol>
+		</ol>
+	</nav>
 <?php endif; ?>
 <?php echo $this->get( 'breadcrumbBody' ); ?>
 </div>

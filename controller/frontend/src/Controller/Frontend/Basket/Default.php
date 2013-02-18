@@ -404,7 +404,13 @@ class Controller_Frontend_Basket_Default
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		foreach( $manager->searchItems( $search ) as $item )
+		$result = $manager->searchItems( $search );
+
+		if( empty( $result ) ) {
+			return;
+		}
+
+		foreach( $result as $item )
 		{
 			if( $item->getStockLevel() >= $quantity ) {
 				return;

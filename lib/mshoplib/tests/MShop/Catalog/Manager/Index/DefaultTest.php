@@ -471,7 +471,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 5, $total );
+		$this->assertEquals( 6, $total );
 
 
 		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
@@ -488,7 +488,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 4, $total );
+		$this->assertEquals( 5, $total );
 	}
 
 
@@ -628,7 +628,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->rebuildIndex();
 
 		$this->assertEquals( 7, count( $afterInsertAttr ) );
-		$this->assertEquals( 8, count( $afterInsertPrice ) );
+		$this->assertEquals( 9, count( $afterInsertPrice ) );
 		$this->assertEquals( 7, count( $afterInsertText ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
 	}
@@ -704,7 +704,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		//check inserted items
 		$this->assertEquals( 3, count( $afterInsertAttr ) );
-		$this->assertEquals( 5, count( $afterInsertPrice ) );
+		$this->assertEquals( 6, count( $afterInsertPrice ) );
 		$this->assertEquals( 3, count( $afterInsertText ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
 	}

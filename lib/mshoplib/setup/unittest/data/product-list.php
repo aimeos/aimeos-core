@@ -100,6 +100,7 @@ return array (
 		array( 'parentid' => 'product/QRST', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/50.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'product/U:CF', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/0.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),
 		//new
+		array( 'parentid' => 'product/U:TESTSUB04', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/28.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'product/U:TESTSUB05', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/28.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'product/U:TESTSUB05', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/purchase/12.00/0.00', 'start' => null, 'end' => null, 'pos' => 1 ),
 		array( 'parentid' => 'product/U:noSel', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/12.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),
