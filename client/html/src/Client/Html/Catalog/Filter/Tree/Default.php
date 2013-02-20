@@ -121,7 +121,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 			$catItems = $manager->getPath( $view->param( 'f-catalog-id' ) );
 
-			$startid = $view->config( 'catalog/filter/tree/startid' );
+			$startid = $view->config( 'client/html/catalog/filter/tree/startid' );
 			$ref = array( 'text', 'media', 'attribute' );
 			$level = MW_Tree_Manager_Abstract::LEVEL_TREE;
 
@@ -131,11 +131,11 @@ class Client_Html_Catalog_Filter_Tree_Default
 			$search = $manager->createSearch();
 			$expr = $search->compare( '==', 'catalog.parentid', $parentIds );
 
-			if( ( $levels = $view->config( 'catalog/filter/tree/levels-always' ) ) !== null ) {
+			if( ( $levels = $view->config( 'client/html/catalog/filter/tree/levels-always' ) ) !== null ) {
 				$expr = $search->combine( '||', array( $expr, $search->compare( '<=', 'catalog.level', $levels ) ) );
 			}
 
-			if( ( $levels = $view->config( 'catalog/filter/tree/levels-only' ) ) !== null ) {
+			if( ( $levels = $view->config( 'client/html/catalog/filter/tree/levels-only' ) ) !== null ) {
 				$expr = $search->combine( '&&', array( $expr, $search->compare( '<=', 'catalog.level', $levels ) ) );
 			}
 
