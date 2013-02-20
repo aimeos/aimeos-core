@@ -223,7 +223,8 @@ class Client_Html_Catalog_List_Default
 				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
 				$view->listCatPath = $catalogManager->getPath( $catid, array( 'text', 'media', 'attribute' ) );
 
-				if( ( $categoryItem = end( $view->get( 'listCatPath', array() ) ) ) !== false ) {
+				$listCatPath = $view->get( 'listCatPath', array() );
+				if( ( $categoryItem = end( $listCatPath ) ) !== false ) {
 					$view->listCurrentCatItem = $categoryItem;
 				}
 			}
