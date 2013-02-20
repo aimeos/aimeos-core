@@ -112,11 +112,6 @@ class Client_Html_Email_Confirm_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-			$orderBaseManager = $orderManager->getSubManager( 'base' );
-
-			$view->confirmOrderItem = $orderManager->getItem( $view->param( 'orderid' ) );
-			$view->confirmOrderBaseItem = $orderBaseManager->load( $view->confirmOrderItem->getBaseId() );
 			$view->confirmBoundary = md5( 'Arcavias-' . microtime( true ) );
 
 			$this->_cache = $view;
