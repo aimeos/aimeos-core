@@ -101,7 +101,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$cache = new MW_Cache_None();
 		$ctx->setCache( $cache );
 
-		$i18n = new MW_Translation_None( 'en' );
+		$i18n = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'en_GB', array('disableNotices'=>true) );
 		$ctx->setI18n( $i18n );
 
 		$session = new MW_Session_PHP();
