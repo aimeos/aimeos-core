@@ -97,6 +97,7 @@ class Client_Html_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 		$view = TestHelper::getView();
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$search = $orderManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
@@ -107,6 +108,7 @@ class Client_Html_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 		}
 
 		$view->confirmOrderItem = $orderItem;
+		$view->confirmOrderBaseItem = $orderBaseManager->load( $orderItem->getBaseId() );
 
 		return $view;
 	}
