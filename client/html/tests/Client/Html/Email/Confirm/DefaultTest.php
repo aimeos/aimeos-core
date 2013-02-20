@@ -106,8 +106,7 @@ class Client_Html_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No order found' );
 		}
 
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'orderid' => $orderItem->getId() ) );
-		$view->addHelper( 'param', $helper );
+		$view->confirmOrderItem = $orderItem;
 
 		return $view;
 	}
