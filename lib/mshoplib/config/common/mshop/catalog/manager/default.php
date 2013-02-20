@@ -14,7 +14,7 @@ return array(
 		',
 		'get' => '
 			SELECT
-				mcat."id", mcat."label", mcat."code", mcat."status", mcat."level",
+				mcat."id", mcat."label", mcat."config", mcat."code", mcat."status", mcat."level",
 				mcat."parentid", mcat."siteid", mcat."nleft" AS "left", mcat."nright" AS "right",
 				mcat."mtime", mcat."editor", mcat."ctime"
 			FROM "mshop_catalog" AS mcat, "mshop_catalog" AS parent
@@ -45,7 +45,7 @@ return array(
 		',
 		'search' => '
 			SELECT
-				mcat."id", mcat."label", mcat."code", mcat."status", mcat."level",
+				mcat."id", mcat."label", mcat."config", mcat."code", mcat."status", mcat."level",
 				mcat."siteid", mcat."nleft" AS "left", mcat."nright" AS "right",
 				mcat."mtime", mcat."editor", mcat."ctime"
 			FROM "mshop_catalog" AS mcat
@@ -54,7 +54,7 @@ return array(
 		',
 		'search-item' => '
 			SELECT DISTINCT
-				mcat."id", mcat."label", mcat."code", mcat."status", mcat."level", mcat."parentid",
+				mcat."id", mcat."label", mcat."config", mcat."code", mcat."status", mcat."level", mcat."parentid",
 				mcat."siteid", mcat."nleft" AS "left", mcat."nright" AS "right",
 				mcat."mtime", mcat."editor", mcat."ctime"
 			FROM "mshop_catalog" AS mcat
@@ -76,12 +76,12 @@ return array(
 		'usage' => array(
 			'update' => '
 				UPDATE "mshop_catalog"
-				SET "mtime" = ?, "editor" = ?
+				SET "mtime" = ?, "editor" = ?, "config" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			',
 			'add' => '
 				UPDATE "mshop_catalog"
-				SET "mtime" = ?, "editor" = ?, "ctime" = ?
+				SET "mtime" = ?, "editor" = ?, "config" = ?, "ctime" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			',
 		),

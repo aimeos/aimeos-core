@@ -104,6 +104,7 @@ MShop.panel.catalog.TreeUi = Ext.extend(Ext.tree.TreePanel, {
 				status : status,
 				code : attr['catalog.code'],
 				label : attr['catalog.label'],
+				'catalog.config' : attr['catalog.config'],
 				'catalog.siteid' :attr['catalog.siteid'],
 				'catalog.ctime' : attr['catalog.ctime'],
 				'catalog.mtime' : attr['catalog.mtime'],
