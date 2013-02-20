@@ -76,12 +76,12 @@ return array(
 		'usage' => array(
 			'update' => '
 				UPDATE "mshop_catalog"
-				SET "mtime" = ?, "editor" = ?, "config" = ?
+				SET "config" = ?, "mtime" = ?, "editor" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			',
 			'add' => '
 				UPDATE "mshop_catalog"
-				SET "mtime" = ?, "editor" = ?, "config" = ?, "ctime" = ?
+				SET "config" = ?, "mtime" = ?, "editor" = ?, "ctime" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			',
 		),

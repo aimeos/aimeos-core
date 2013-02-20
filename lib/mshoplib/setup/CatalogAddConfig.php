@@ -12,7 +12,7 @@
 class MW_Setup_Task_CatalogAddConfig extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'ALTER TABLE "mshop_catalog" ADD "config" TEXT NOT NULL AFTER "label"',
+		'ALTER TABLE "mshop_catalog" ADD "config" TEXT AFTER "label"',
 		'UPDATE "mshop_catalog" SET "config" = \'{}\'',
 	);
 

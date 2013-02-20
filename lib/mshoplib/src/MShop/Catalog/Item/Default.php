@@ -117,7 +117,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function getConfig()
 	{
-		return $this->_node->__isset( 'config' ) ? $this->_node->__get( 'config' ) : array();
+		return $this->_node->__isset( 'config' ) && is_array( $this->_node->config ) ? $this->_node->__get( 'config' ) : array();
 	}
 
 
@@ -221,7 +221,7 @@ class MShop_Catalog_Item_Default
 			'catalog.code' => $this->_node->getCode(),
 			'catalog.label' => $this->_node->getLabel(),
 			'catalog.status' => $this->_node->getStatus(),
-			'catalog.config' => $this->_node->__get('config'),
+			'catalog.config' => $this->getConfig(),
 			'catalog.siteid' => $this->_node->__get('siteid'),
 			'catalog.ctime' => $this->_node->__get('ctime'),
 			'catalog.mtime' => $this->_node->__get('mtime'),
