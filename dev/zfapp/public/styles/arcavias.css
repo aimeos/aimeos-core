@@ -118,14 +118,6 @@
 	padding-bottom: 2px;
 }
 
-/*
- * Hide all list blocks of the sub-levels.
- * The active ones will be enabled by the interal style sheet
- */
-.catalog-filter-tree .level-1 ul {
-	display: none;
-}
-
 .catalog-filter-tree .level-0 > li a {
 	text-transform: uppercase;
 	font-weight: bold;
