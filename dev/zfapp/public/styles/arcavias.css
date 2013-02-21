@@ -543,8 +543,6 @@
 }
 
 .checkout-confirm-basic,
-.checkout-standard-delivery .item,
-.checkout-standard-payment .item,
 .checkout-standard-summary-service,
 .checkout-standard-summary-option,
 .checkout-standard-summary-basket {
@@ -826,7 +824,7 @@
 	float: right;
 	margin: 5px 10px;
 	font-weight: bold;
-	font-size: 220%;
+	font-size: 1em;
 	color: #004266;
 }
 
@@ -879,21 +877,44 @@
 	display: none;
 }
 
-/* Checkout delivery */
-.checkout-standard-delivery {
+/* Checkout delivery/payment */
+.checkout-standard-delivery ,
+.checkout-standard-payment {
 	padding: 0px 0px 0px 10px;
 }
 
-.checkout-standard-delivery .button-group a.standardbutton{
-	margin: 0px 10px 0px 0px;
+.checkout-standard-delivery .note,
+.checkout-standard-payment .note {
+	padding: 0px 0px 10px 0px;
 }
 
-/* Checkout payment */
-.checkout-standard-payment{
-	padding: 0px 0px 0px 10px;
+.checkout-standard-delivery h2,
+.checkout-standard-payment h2 {
+	font-size: 1em;
+	padding: 2px 0px 0px 0px;
 }
 
-.checkout-standard-payment .button-group a.standardbutton{
+.checkout-standard-delivery .item,
+.checkout-standard-payment .item {
+	padding: 0px 10px 0px 10px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: solid 1px #689DB9;
+	margin: 0px 0px 8px 0px;
+}
+.checkout-standard-delivery .item-service  input,
+.checkout-standard-payment .item-service  input {
+	margin: 2px 0px 0px 0px;
+}
+
+.checkout-standard-delivery .item-service .price-value,
+.checkout-standard-payment .item-service .price-value {
+    margin: 2px 10px 0px 10px;
+}
+
+.checkout-standard-delivery .button-group a.standardbutton,
+.checkout-standard-payment .button-group a.standardbutton {
 	margin: 0px 10px 0px 0px;
 }
 
@@ -1017,6 +1038,16 @@
 	display: none;
 }
 
+.checkout-standard-summary-service .payment h4 {
+	padding: 10px;
+	margin: 0px;
+}
+
+.checkout-standard-summary-service .delivery h4 {
+	padding: 10px;
+	margin: 0px;
+}
+
 .checkout-standard-summary-service .payment .header {
 	background-color: #F2F7FA;
 	border-bottom: 1px solid #689DB9;
@@ -1079,8 +1110,6 @@
 	margin: 5px 10px;
 }
 
-
-
 /* Checkout order */
 .checkout-standard-order {
 	padding: 0px 0px 0px 10px;
@@ -1094,10 +1123,12 @@
 }
 
 /* Checkout confirm basic part */
-.checkout-confirm-basic h2,
-.checkout-confirm-basic p,
-.checkout-confirm-basic .attr-list {
-	margin: 10px;
+.checkout-confirm {
+	padding: 0px 0px 0px 10px;
+}
+
+.checkout-confirm-basic h2 {
+	font-size: 1em;
 }
 
 .checkout-confirm-basic .attr-list .name,
