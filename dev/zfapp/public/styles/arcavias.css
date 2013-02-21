@@ -128,23 +128,18 @@
 	font-weight: bold;
 }
 
-/* stage image section */
-.catalog-list-stage {
-	display: none;
-}
-
 /* Product list, breadcrumb section */
 .catalog-list-breadcrumb {
 	padding: 0px 0px 10px 0px;
 }
 
-.catalog-list-breadcrumb h2{
+.catalog-list-breadcrumb .title {
 	padding: 0px 0px 5px 0px;
 	font-size: 1em;
-	text-transform: uppercase;
 }
 
 .catalog-list-breadcrumb ol{
+	display: inline-block;
 	list-style: none;
 }
 
@@ -167,10 +162,6 @@
 }
 
 /* Product list */
-.catalog-list-head h1{
-	display: none;
-}
- 
 .catalog-list a:focus {
 	outline: none;
 }
