@@ -28,6 +28,8 @@ CREATE TABLE "mshop_catalog" (
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Displayed name in backend
 	"label" VARCHAR(255) NOT NULL,
+	-- catalog config values stored in JSON format
+	"config" TEXT NOT NULL,
 	-- Left value of the node
 	"nleft" INTEGER NOT NULL,
 	-- Right value of the node

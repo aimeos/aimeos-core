@@ -89,6 +89,7 @@ class MW_Setup_Task_CatalogAddTestData extends MW_Setup_Task_Abstract
 			$catalog->setId( null );
 			$catalog->setCode( $dataset['code'] );
 			$catalog->setLabel( $dataset['label'] );
+			$catalog->setConfig( $dataset['config'] );
 			$catalog->setStatus( $dataset['status'] );
 
 			$catalogManager->insertItem( $catalog, $parentIds[ $dataset['parent'] ] );
