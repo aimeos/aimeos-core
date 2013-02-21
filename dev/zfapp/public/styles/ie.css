@@ -1,3 +1,7 @@
+#navigationMenue {
+	display: inline;
+}
+
 .filter-tree a {
 	padding-top: 2px;
 }
@@ -8,4 +12,66 @@
 
 #productsearch button {
 	width: 150px;
+}
+
+#headerCart button {
+	border: none;
+}
+
+.searchbutton12 {
+	border: none;
+}
+
+.arcavias .minibutton {
+	border: none;
+}
+
+.arcavias .standardbutton {
+	border: none;
+}
+
+.checkout-standard-address-billing,
+.checkout-standard-address-delivery {
+	float: left;
+	width: 384px;
+}
+
+.arcavias .button-group {
+	clear:left;
+}
+
+.checkout-standard .step {
+	display: inline;
+	margin: 0px 2px 0px 2px;
+}
+
+.checkout-standard .form-list select {
+	border: 1px solid #689DB9;
+}
+
+@media only screen and (min-device-width: 509px) and (max-width: 768px) {
+	#headerLogo img {
+		width: 100%;
+	}
+}
+
+/* ----- IE6 ----- */
+* #frame {
+	width: 984px; 
+}
+
+* #content {
+	width: 960px; 
+
+}
+* #contentLeft {
+    width: 173px;
+	margin: 0px;
+	padding:0px 0px 0px 10px;;
+}
+
+* #contentRight {
+	width: 767px; 
+	padding: 0px 0px;
+	margin: 0px;
 }

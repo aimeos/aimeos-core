@@ -11,8 +11,8 @@ $listAction = $this->config( 'client/html/catalog/list/search/url/action', 'list
 ?>
 <div class="catalog-filter-search">
 	<form action="<?php echo $this->url( $listTarget, $listController, $listAction ); ?>" method="POST">
-		<span>Search:</span><input class="input12b value" type="search" name="f-search-text" value=""></input>
-		<button class="searchbutton12" type="submit" />
+		<span>Search:</span><input class="input12b value" type="text" name="f-search-text" value="" />
+		<button type="submit" class="searchbutton12"> </button>
 	</form>
 <?php echo $this->get( 'searchBody' ); ?>
 </div>

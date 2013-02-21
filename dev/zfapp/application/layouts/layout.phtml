@@ -1,129 +1,111 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: layout.phtml 1375 2012-11-01 15:36:56Z nsendetzky $
- */
+* @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+* @license LGPLv3, http://www.arcavias.com/en/license
+*/
 
 $time = microtime( true );
 $searchString = (isset( $this->params['f-search-text'] ) ) ? htmlspecialchars( $this->params['f-search-text'] ) : '';
-
 $sites = $this->sites();
-
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <!--
-     * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
-     * @license LGPLv3, http://www.arcavias.com/en/license
-     * @version $Id: layout.phtml 1375 2012-11-01 15:36:56Z nsendetzky $
-    -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Arcavias</title>
-	<link href="<?php echo $this->pathstart;?>/styles/main.css" type="text/css" rel="stylesheet" media="screen" />
-	<link href="<?php echo $this->pathstart;?>/styles/arcavias.css" type="text/css" rel="stylesheet" media="screen" />
-	<!--[if lt IE 8]>
-	<link href="<?php echo $this->pathstart;?>/styles/ie.css" type="text/css" rel="stylesheet" />
-	<![endif]-->
-	<script type="text/javascript" src="<?php echo $this->pathstart;?>/js/jquery.js"></script>
-<?php echo ( isset( $this->filter ) ? $this->filter->getHeader() : '' ); ?>
-<?php echo ( isset( $this->searchfilter ) ? $this->searchfilter->getHeader() : '' ); ?>
-<?php echo ( isset( $this->list ) ? $this->list->getHeader() : '' ); ?>
-<?php echo ( isset( $this->detail ) ? $this->detail->getHeader() : '' ); ?>
-<?php echo ( isset( $this->basket ) ? $this->basket->getHeader() : '' ); ?>
-<?php echo ( isset( $this->minibasket ) ? $this->minibasket->getHeader() : '' ); ?>
-<?php echo ( isset( $this->checkout ) ? $this->checkout->getHeader() : '' ); ?>
-<?php echo ( isset( $this->confirm ) ? $this->confirm->getHeader() : '' ); ?>
-</head>
 
-<body>
-	<div id="frame">
-	<div id="middle">
-		<div id="middleLeftBg">
-			<div id="middleRightBg" class="clearfix">
-				<?php
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5" />
+		<link href="<?php echo $this->pathstart;?>/styles/main.css" type="text/css" rel="stylesheet" media="screen" />
+		<link href="<?php echo $this->pathstart;?>/styles/arcavias.css" type="text/css" rel="stylesheet" media="screen" />
+		<script type="text/javascript" src="<?php echo $this->pathstart;?>/js/jquery.js"></script>
+		<!--[if lt IE 8]>
+			<link href="<?php echo $this->pathstart;?>/styles/ie.css" type="text/css" rel="stylesheet" />
+		<![endif]-->
 
-				$extraHeaderImgAttrs = '';
-				$headerImage = 'images/sites/' . $this->params['site'] . '/header.jpg';
-				if ( file_exists( $headerImage ) ) {
-					$extraHeaderImgAttrs = 'style="background-image:url(' . $this->pathstart . '/' . $headerImage .')" class="display"';
-				}
-
-				?>
-				<div id="headerImg" <?php echo $extraHeaderImgAttrs; ?> >
-
-					<div id="header">
-						<div id="headerLeftBg">
-							<div id="headerRightBg">
-								<a href="<?php echo $this->url( array( 'site' => $this->params['site'] ), 'routeMin', true ); ?>"><img src="<?php echo $this->pathstart;?>/images/arcavias.gif" id="headerLogo" alt="" /></a>
-								<div id="headerRightBox">
-									<div id="headerArticleBox">
-										<?php
-											if( isset( $this->minibasket ) ) {
-												echo $this->minibasket->getBody();
-											}
-										?>
-									</div>
-
+		<?php echo ( isset( $this->filter ) ? $this->filter->getHeader() : '' ); ?>
+		<?php echo ( isset( $this->searchfilter ) ? $this->searchfilter->getHeader() : '' ); ?>
+		<?php echo ( isset( $this->list ) ? $this->list->getHeader() : '' ); ?>
+		<?php echo ( isset( $this->detail ) ? $this->detail->getHeader() : '' ); ?>
+		<?php echo ( isset( $this->basket ) ? $this->basket->getHeader() : '' ); ?>
+		<?php echo ( isset( $this->minibasket ) ? $this->minibasket->getHeader() : '' ); ?>
+		<?php echo ( isset( $this->checkout ) ? $this->checkout->getHeader() : '' ); ?>
+		<?php echo ( isset( $this->confirm ) ? $this->confirm->getHeader() : '' ); ?>
+	</head>
+	<body>
+		<div id="frame">
+			<div id="main">
+				<div id="mainBg" class="clearfix">
+					<?php
+					$extraHeaderImgAttrs = '';
+					$headerImage = 'images/sites/' . $this->params['site'] . '/header.jpg';
+					if ( file_exists( $headerImage ) ) {
+						$extraHeaderImgAttrs = 'style="background-image:url(' . $this->pathstart . '/' . $headerImage .')" class="display"';
+					}
+					?>
+					<div id="headerImg">
+						<div id="header">
+							<div id="headerLogo">
+								<a href="<?php echo $this->url( array( 'site' => $this->params['site'] ), 'routeMin', true ); ?>">
+									<img src="<?php echo $this->pathstart;?>/images/arcavias.gif" alt="Arcavias" />
+								</a>
+							</div>
+							<div id="headerMiddle">
+								<div id="headerNavigation">
+									<?php
+									foreach($sites as $code => $label) {
+										echo '<a href="' . $this->url( array( 'site' => $code ), 'routeMin', true ) . '">' . $label . '</a>';
+									}
+									?>
 								</div>
-								<?php
-								foreach($sites as $code => $label) {
-									echo '<a href="' . $this->url( array( 'site' => $code ), 'routeMin', true ) . '" class="menu">' . $label . '</a>';
-								}
-								?>
-								<br />
-
 								<div id="headerSearch">
-								<?php if( isset( $this->searchfilter ) ) : ?>
-								<?php	echo $this->searchfilter->getBody(); ?>
-								<?php endif; ?>
+									<?php if( isset( $this->searchfilter ) ) : ?>
+									<?php echo $this->searchfilter->getBody(); ?>
+									<?php endif; ?>
 								</div>
 							</div>
+							<div id="headerBasket">
+								<?php
+								if( isset( $this->minibasket ) ) {
+									echo $this->minibasket->getBody();
+								}
+								?>
+							</div>
 						</div>
-
-						<div id="headerBottom">
-							<span id="headerBottomMiddle">
+						<div id="navigation" class="clearfix">
+							<div id="navigationMenue">
 								<?php
 								foreach($this->category() AS $item) {
 									echo '<a href="' . $item['uri'] . '" class="' . $item['class'] . '">' . htmlspecialchars( $item['label'] ) . '</a>' . PHP_EOL;
 								};
 								?>
-							</span>
+							</div>
 						</div>
-					</div>
-					<a href="#" id="headerImgLink">&nbsp;</a>
-
-					<div id="content" class="clearfix">
-						<?php if( isset( $this->filter ) ) : ?>
-						<div id="contentLeft">
-							<?php echo $this->filter->getBody(); ?>
+						<div id="spacer">&nbsp;</div>
+						<div id="content" class="clearfix">
+							<?php if( isset( $this->filter ) ) : ?>
+							<div id="contentLeft">
+								<?php echo $this->filter->getBody(); ?>
+							</div>
+							<?php else : ?>
+							<?php endif; ?>
+							<div id="contentRight">
+								<?php echo $this->layout()->content; ?>
+							</div>
 						</div>
-						<?php else : ?>
-						<style type="text/css">
-							#contentRight {
-								margin-left: 0;
-							}
-						</style>
-						<?php endif; ?>
-						<div id="contentRight">
-							<?php echo $this->layout()->content; ?>
-						</div>
-						<br class="clearer" />
 					</div>
 				</div>
 			</div>
+			<div id="footer">
+				<div id="footerTop" class="clearfix">
+					<div id="footerTopLeft"></div>
+					<div id="footerTopRight"></div>
+				</div>
+				<div id="footerBottom">
+					Layout courtesy to <a href="http://www.kauscheundpartner.de/">Kausche&amp;Partner</a>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div id="middleBottom" class="clearfix"><div id="middleLeftBottom"></div><div id="middleRightBottom"></div></div>
-	<div id="footer">
-		Layout courtesy to <a href="http://www.kauscheundpartner.de/">Kausche&amp;Partner</a>
-	</div>
-</div>
-
-</body>
+	</body>
 </html>
 <?php
 echo '<!-- Exec time: ' . ( ( microtime(true) - $time ) * 1000 ) . ' ms -->' . PHP_EOL;

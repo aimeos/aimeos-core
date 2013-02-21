@@ -32,7 +32,7 @@ $(function() {
 		prev: '#prev-image',
 		next: '#next-image',
 		items: {
-			visible: 1,
+			visible: 1
 		},
 		scroll: {
 			fx: 'none'
