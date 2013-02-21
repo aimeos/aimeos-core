@@ -11,10 +11,8 @@
  */
 class MW_Setup_Task_CatalogAddConfig extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
-		'ALTER TABLE "mshop_catalog" ADD "config" TEXT AFTER "label"',
-		'UPDATE "mshop_catalog" SET "config" = \'{}\'',
-	);
+	private $_mysql = 'ALTER TABLE "mshop_catalog" ADD "config" TEXT NOT NULL AFTER "label"';
+
 
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -49,16 +47,16 @@ class MW_Setup_Task_CatalogAddConfig extends MW_Setup_Task_Abstract
 	/**
 	 * Add column to table if it doesn't exist.
 	 *
-	 * @param array $stmts List of SQL statements to execute for adding columns
+	 * @param string $stmt SQL statement to execute for adding columns
 	 */
-	protected function _process( $stmts )
+	protected function _process( $stmt )
 	{
 		$this->_msg( 'Adding config column to mshop_catalog', 0 );
 
 		if( $this->_schema->tableExists( 'mshop_catalog' ) === true
 			&& $this->_schema->columnExists( 'mshop_catalog', 'config' ) === false )
 		{
-			$this->_executeList( $stmts );
+			$this->_execute( $stmt );
 			$this->_status( 'added' );
 		}
 		else
