@@ -411,12 +411,14 @@ class MShop_Catalog_Manager_Default
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
+		$item = $this->getItem( $id );
+
 		$this->_begin();
 
 		try
 		{
 			$this->_createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
-			$this->_updateUsage( $id );
+			$this->_updateUsage( $id, $item );
 			$this->_commit();
 		}
 		catch( Exception $e )
@@ -666,9 +668,10 @@ class MShop_Catalog_Manager_Default
 	protected function _createItem( MW_Tree_Node_Interface $node = null, array $children = array(),
 		array $listItems = array(), array $refItems = array() )
 	{
-		if( $node->__isset('config') ) {
-			$node->__set('config', json_decode( $node->__get('config'), true ) );
+		if( isset( $node->config ) && ( $result = json_decode( $node->config, true ) ) !== null ) {
+			$node->config = $result;
 		}
+
 		return new MShop_Catalog_Item_Default( $node, $children, $listItems, $refItems );
 	}
 
@@ -787,16 +790,9 @@ class MShop_Catalog_Manager_Default
 	 * @param boolean $case True if the record shoud be added or false for an update
 	 *
 	 */
-	private function _updateUsage( $id, MShop_Common_Item_Interface $item = null, $case = false )
+	private function _updateUsage( $id, MShop_Common_Item_Interface $item, $case = false )
 	{
-		if( $item === null )
-		{
-			$item = $this->getItem( $id );
-			$config = $item->getConfig();
-		}
-
-		$config = $item->getConfig();
-
+		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
@@ -812,8 +808,8 @@ class MShop_Catalog_Manager_Default
 			}
 
 			$stmt = $conn->create( $context->getConfig()->get( $path, $path ) );
-			$stmt->bind( 1, json_encode( $config ), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 2, date( 'Y-m-d H:i:s', time() ) ); // mtime
+			$stmt->bind( 1, json_encode( $item->getConfig() ) );
+			$stmt->bind( 2, $date ); // mtime
 			$stmt->bind( 3, $context->getEditor() );
 
 			if( $case !== true )
@@ -823,7 +819,7 @@ class MShop_Catalog_Manager_Default
 			}
 			else
 			{
-				$stmt->bind( 4, date( 'Y-m-d H:i:s', time() ) ); // ctime
+				$stmt->bind( 4, $date ); // ctime
 				$stmt->bind( 5, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 				$stmt->bind( 6, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			}
