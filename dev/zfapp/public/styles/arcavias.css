@@ -1,13 +1,20 @@
 ﻿/* Arcavias standard CSS */
-.arcavias button {
+/*.arcavias button {
 	border: medium none;
 	text-align: center;
 	cursor: pointer;
 	margin: 0;
 	padding: 0;
+}*/
+
+.button-group {
+	text-align: center;
+	padding: 10px 0px 10px 0px;
 }
 
-.arcavias .standardbutton {
+.button-group a.standardbutton {
+	height: 25px;
+	margin: 0px 0px 0px 10px;
 	padding: 4px 4px 4px 4px;
 	background: url(../images/buttonfond.gif) repeat-x;
 	border: 1px solid #689DB9;
@@ -15,14 +22,30 @@
 	color: #FFFFFF;
 	border-radius: 4px 4px 4px 4px;
 	text-decoration: none;
-	display: inline;
 	font-weight: bold;
+	font-family: Arial, Verdana, Helvetica, sans-serif; 
+	font-size: 1em;
 }
+
+.button-group  button.standardbutton {
+	height: 25px;
+	margin: 0px;
+	padding: 3px 4px 4px 4px;
+	background: url(../images/buttonfond.gif) repeat-x;
+	border: 1px solid #689DB9;
+	box-shadow: 2px 2px 4px #5C88A1;
+	color: #FFFFFF;
+	border-radius: 4px 4px 4px 4px;
+	text-decoration: none;
+	font-weight: bold;
+	font-family: Arial, Verdana, Helvetica, sans-serif; 
+	font-size: 1em;
+}
+
 
 .arcavias .minibutton {
 	background: url(../images/buttonfond.gif) repeat-x #6C9BB4;
-	border-bottom: 1px solid #303639;
-	border-right: 1px solid #303639;
+	border: 1px solid #689DB9;
 	box-shadow: 2px 2px 4px #5C88A1;
 	color: #FFFFFF;
 	border-radius: 4px 4px 4px 4px;
@@ -30,19 +53,6 @@
 	display: inline-block;
 	font-weight: bold;
 	padding: 4px 8px;
-}
-
-.arcavias .button-group {
-	text-align: center;
-	padding: 10px 0px 10px 0px;
-}
-
-.button-group a.standardbutton {
-	margin: 0px 0px 0px 10px;
-}
-
-.button-group button {
-	margin: 0px 0px 0px 10px;
 }
 
 .arcavias .attr-list,
@@ -450,6 +460,19 @@
 	width: 3em;
 }
 
+.group .standardbutton {
+	padding: 4px 4px 4px 4px;
+	background: url(../images/buttonfond.gif) repeat-x;
+	border: 1px solid #689DB9;
+	box-shadow: 2px 2px 4px #5C88A1;
+	color: #FFFFFF;
+	border-radius: 4px 4px 4px 4px;
+	text-decoration: none;
+	display: inline;
+	font-weight: bold;
+	cursor: pointer;
+}
+
 /* product attributes */
 .catalog-detail-basket-attribute {
 	margin-top: 1.5em;
@@ -522,11 +545,10 @@
 .checkout-confirm-basic,
 .checkout-standard-delivery .item,
 .checkout-standard-payment .item,
-.checkout-standard-summary-address,
 .checkout-standard-summary-service,
 .checkout-standard-summary-option,
 .checkout-standard-summary-basket {
-	padding: 10px;
+	padding: 0px 10px 10px 10px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -577,6 +599,7 @@
 .checkout-standard-summary-basket thead tr,
 .basket-standard-main thead tr {
 	border-bottom: 1px solid #689DB9;
+	color: #004266;
 }
 
 .checkout-standard-summary-basket tr.total,
@@ -761,9 +784,63 @@
 	border: solid 1px #FF3300;
 }
 
+.checkout-standard .item-service .form-list {
+	display: inline-block;
+	vertical-align: top;
+	min-width: 218px;
+	max-width: 438px;
+	padding: 0 10px 10px 10px;
+}
+
+.checkout-standard .item-service .description {
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+	min-width: 218px;
+	max-width: 438px;
+	padding: 10px 0;
+}
+
+.checkout-standard .item-service .description .short {
+	padding-top: 5px;
+	font-weight: bold;
+}
+
+.checkout-standard .item-service .description .long {
+	padding-top: 5px;
+}
+
+.checkout-standard .item-service .description h2,
+.checkout-standard .item-service .description p,
+.checkout-standard .item-service .icons {
+	margin-left: 40px;
+	margin-right: 10px;
+}
+
+.checkout-standard .item-service .option {
+	float: left;
+	margin-left: 10px;
+}
+
+.checkout-standard .item-service .price-value {
+	float: right;
+	margin: 5px 10px;
+	font-weight: bold;
+	font-size: 220%;
+	color: #004266;
+}
+
 /* Checkout address */
  .checkout-standard-address {
 	padding: 0px 0px 0px 10px;
+}
+
+.checkout-standard-address h2 {
+	padding: 20px 0px 10px 0px;
+}
+
+.checkout-standard-address .button-group a.standardbutton{
+	margin: 0px 10px 0px 0px;
 }
 
 .checkout-standard-address-billing,
@@ -775,11 +852,7 @@
 	width: 50%;
 }
 
-.checkout-standard-address h2 {
-	padding: 20px 0px 10px 0px;
-}
-
- .checkout-standard-address .item-address {
+.checkout-standard-address .item-address {
 	padding: 0px 20px 0px 0px;
 }
 
@@ -806,58 +879,22 @@
 	display: none;
 }
 
-/* Checkout delivery/payment */
+/* Checkout delivery */
 .checkout-standard-delivery {
 	padding: 0px 0px 0px 10px;
 }
+
+.checkout-standard-delivery .button-group a.standardbutton{
+	margin: 0px 10px 0px 0px;
+}
+
+/* Checkout payment */
 .checkout-standard-payment{
 	padding: 0px 0px 0px 10px;
 }
 
-.checkout-standard .item-service .description,
-.checkout-standard .item-service .form-list {
-	display: inline-block;
-	vertical-align: top;
-	min-width: 218px;
-	max-width: 438px;
-	padding: 10px 0;
-}
-
-.checkout-standard .item-service .description {
-	width: 100%;
-}
-
-.checkout-standard .item-service .form-list {
-	padding: 0 10px 10px 10px;
-}
-
-.checkout-standard .item-service .description h2,
-.checkout-standard .item-service .description p,
-.checkout-standard .item-service .icons {
-	margin-left: 40px;
-	margin-right: 10px;
-}
-
-.checkout-standard .item-service .option {
-	float: left;
-	margin-left: 10px;
-}
-
-.checkout-standard .item-service .price-value {
-	float: right;
-	margin: 5px 10px;
-	font-weight: bold;
-	font-size: 220%;
-	color: #004266;
-}
-
-.checkout-standard .item-service .description .short {
-	padding-top: 5px;
-	font-weight: bold;
-}
-
-.checkout-standard .item-service .description .long {
-	padding-top: 5px;
+.checkout-standard-payment .button-group a.standardbutton{
+	margin: 0px 10px 0px 0px;
 }
 
 /* Checkout summary */
@@ -865,45 +902,33 @@
 	padding: 0px 0px 0px 10px;
 }
 
-.checkout-standard-summary .note {
-	padding: 0px 0px 10px 0px;
+.checkout-standard-summary  h3{
+	font-size: 1em;
 }
 
-.checkout-standard-summary-address h2,
-.checkout-standard-summary-service h2,
-.checkout-standard-summary-option h2 {
-	display: none;
+.checkout-standard-summary a:hover {
+	text-decoration: underline;
+}
+
+.checkout-standard-summary .note {
+	padding: 0px 0px 10px 0px;
 }
 
 .checkout-standard-summary h3 {
 	display: inline-block;
 }
 
+.checkout-standard-summary .button-group a.standardbutton{
+	margin: 0px 10px 0px 0px;
+}
+
 .checkout-standard-summary .item-address,
 .checkout-standard-summary .item-service {
 	display: inline-block;
 	vertical-align: top;
-}
-
-.checkout-standard-summary .item-address,
-.checkout-standard-summary .item-service {
 	max-width: 458px;
 	min-width: 238px;
 	width: 50%;
-}
-
-.checkout-standard-summary-address .item-address .header {
-	border-bottom: 1px solid #689DB9;
-	padding: 0px 10px 0px 0px;;
-}
-
-.checkout-standard-summary-service .item-service .header {
-	padding: 0px 10px 0px 0px;
-	border-bottom: 1px solid #689DB9;
-}
-
-.checkout-standard-summary .item-address .content {
-	margin: 10px 10px 10px 0px;
 }
 
 .checkout-standard-summary .item-service h4 {
@@ -917,8 +942,8 @@
 	padding-top: 5px;
 }
 
-.checkout-standard-summary .item-service li:first-child {
-	padding-top: 0;
+.checkout-standard-summary .item-address .content {
+	margin: 10px 10px 0px 10px;
 }
 
 .checkout-standard-summary .item-service .name {
@@ -943,14 +968,106 @@
 	margin: 0 20px 10px 20px;
 }
 
+.checkout-standard-summary .item-service .attr-list {
+	list-style: none;
+	margin: 0 10px;
+	padding: 10px;
+	padding-top: 0;
+}
 
 .checkout-standard-summary .modify {
 	float: right;
 	margin: 5px 0;
 }
 
+/* Checkout summary address */
+.checkout-standard-summary-address {
+	padding: 0px 10px 10px 10px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: solid 1px #689DB9;
+	margin: 0px 0px 8px 0px;
+}
+
+.checkout-standard-summary-address h2 {
+	display: none;
+}
+
+.checkout-standard-summary-address .payment .header {
+	background-color: #F2F7FA;
+	border-bottom: 1px solid #689DB9;
+	margin: 0px 10px 0px 0px;
+	padding: 5px 10px 5px 10px;
+}
+
+.checkout-standard-summary-address .delivery .header {
+	background-color: #F2F7FA;
+	border-bottom: 1px solid #689DB9;
+	padding: 5px 10px 5px 10px;
+}
+
+
+/* Checkout summary service payment */
+.checkout-standard-summary-service .item-service .header {
+	padding: 0px 10px 0px 0px;
+	border-bottom: 1px solid #689DB9;
+}
+.checkout-standard-summary-service h2 {
+	display: none;
+}
+
+.checkout-standard-summary-service .payment .header {
+	background-color: #F2F7FA;
+	border-bottom: 1px solid #689DB9;
+	margin: 0px 10px 0px 0px;
+	padding: 5px 10px 5px 10px;
+}
+
+.checkout-standard-summary-service .delivery .header {
+	background-color: #F2F7FA;
+	border-bottom: 1px solid #689DB9;
+	padding: 5px 10px 5px 10px;
+}
+
+/* Checkout summary option terms */
+.checkout-standard-summary-option {
+	padding: 10px;
+	padding-top: 0;
+}
+
+.checkout-standard-summary-option h2 {
+	display: none;
+}
+
+.checkout-standard-summary-option h3 {
+	display: block;
+}
+
+.checkout-standard-summary-option p {
+	display: inline;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.checkout-standard-summary-option .single {
+	padding: 5px 0;
+}
+
+.checkout-standard-summary-option input {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.checkout-standard-summary-option .error {
+	background-color: #ffeeee;
+	border: solid 1px #FF3300;
+}
+
+/* Checkout summary basket */
 .checkout-standard-summary-basket h2 {
 	margin: 5px 0px 5px 0px;
+	font-size: 1em;
 }
 
 .checkout-standard-summary-basket.basket {
@@ -962,41 +1079,7 @@
 	margin: 5px 10px;
 }
 
-.checkout-standard-summary .item-service .attr-list {
-	list-style: none;
-	margin: 0 10px;
-	padding: 10px;
-	padding-top: 0;
-}
 
-.checkout-standard-summary-option {
-	padding: 10px;
-	padding-top: 0;
-}
-
-.checkout-standard-summary-option .single {
-	padding: 5px 0;
-}
-
-.checkout-standard-summary-option h3 {
-	display: block;
-}
-
-.checkout-standard-summary-option input {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.checkout-standard-summary-option p {
-	display: inline;
-	vertical-align: middle;
-	margin-left: 10px;
-}
-
-.checkout-standard-summary-option .error {
-	background-color: #ffeeee;
-	border: solid 1px #FF3300;
-}
 
 /* Checkout order */
 .checkout-standard-order {
