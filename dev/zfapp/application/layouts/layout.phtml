@@ -42,7 +42,7 @@ $sites = $this->sites();
 						$extraHeaderImgAttrs = 'style="background-image:url(' . $this->pathstart . '/' . $headerImage .')" class="display"';
 					}
 					?>
-					<div id="headerImg">
+					<div id="headerImg" <?php echo $extraHeaderImgAttrs; ?>>
 						<div id="header">
 							<div id="headerLogo">
 								<a href="<?php echo $this->url( array( 'site' => $this->params['site'] ), 'routeMin', true ); ?>">

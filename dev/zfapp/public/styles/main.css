@@ -6,13 +6,13 @@
  pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, 
  s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, 
  legend, table, caption, tbody, tfoot, thead, tr, th, td , img{
-    border: 0px none;
-    margin: 0px;
-    outline: 0px none;
-    padding: 0px;
+	border: 0px none;
+	margin: 0px;
+	outline: 0px none;
+	padding: 0px;
 }
 
-/* ----- Default HTML tags ----- */
+/* ----- Default HTML tags -----*/
 body{
 	background: url(../images/bodyBackground.gif) repeat #FFFFFF; 
 	font-family: Arial, Verdana, Helvetica, sans-serif; 
@@ -36,33 +36,29 @@ a:link {
 	color: #679CB8;
 	text-decoration: none;
 }
-a:visited  {
+a:visited {
 	color: #679CB8;
 	text-decoration: none;
 }
 a:focus {
 	outline: none;
 }
-a:visited  {
+a:visited {
 	color: #679CB8;
 }
 
 select {
 	height: 23px; 
 	padding: 1px; 
-}
-
-input[type="password"] {
-	background-color: #F2F7FA; 
 	color: #000000; 
-	font-family: Arial,sans-serif; 
+	font-family: Arial,sans-serif;
 }
 
 /* ----- Layout ----- */
 #frame {
 	max-width: 1000px; 
 	min-width: 300px;
-	background: url(../images/middleBackground.jpg) repeat;  
+	background: url(../images/middleBackground.jpg) repeat;
 	margin: auto; 
 }
 
@@ -78,7 +74,7 @@ input[type="password"] {
 #headerImg {
 	margin: 0px 8px;
 	position: relative;
-	background: url(../images/header.jpg) no-repeat; 
+	background: url("../images/sites/default/header.jpg") no-repeat; 
 }
 
 #headerImg #spacer {
@@ -106,7 +102,7 @@ input[type="password"] {
 	text-align: right; 
 }
 
-#headerNavigation  {
+#headerNavigation {
 	padding:7px 0px 0px 0px;
 }
 
@@ -157,7 +153,7 @@ input[type="password"] {
 	background: url(../images/minibuttonfond.gif) repeat scroll 0px 0px transparent; 
 	border: 1px solid #689DB9;
 	border-radius: 0px 4px 4px 0px; 
-    box-shadow: 2px 2px 4px #5C88A1; 
+	box-shadow: 2px 2px 4px #5C88A1; 
 	float: left; 
 	height: 24px; 
 	margin: 0px 1px 0px -3px; 
@@ -179,16 +175,6 @@ input[type="password"] {
 }
 #headerBasket .basket-mini-main{
 	padding: 0px 0px 5px 0px;
-}
-
-#headerBasket button {
-	height: 22px;
-    background: url(../images/buttonfond.gif) repeat scroll 0 0 transparent;
-    border: 1px solid #689DB9;
-    box-shadow: 2px 2px 4px #5C88A1;
-    color: #FFFFFF;
-	border-radius: 4px 4px 4px 4px;
-	font-weight: bold;
 }
 
 /* ----- Navigation ----- */
@@ -283,203 +269,6 @@ input[type="password"] {
 	float: right;
 }
 
-/* ----- Product -----*/
-#productOrdering {
-	height: 570px;
-}
-
-#productsearch {
-	border: 1px solid #C3D9E6; border-radius: 1px; 
-	background-color: #F2F7FA; 
-	font-size: 14px;
-}
-
-#productsearch h3 {
-	padding: 8px 12px 9px 12px; 
-	color: #002D46; 
-	font-size: 14px; 
-	font-weight: bold; 
-	text-transform:uppercase;
-}
-
-#productsearch input[type=text] {
-	width: 89px;
-	margin: 0px 4px 0px 0px; 
-	border: 1px solid #BDD5E2; 
-	background-color: #FFFFFF; 
-}
-
-#productsearch table {
-	margin: 0px 12px 4px 12px;
-	border-spacing: 0px; 
-	color: #88B3CB; 
-	empty-cells: show; 
-	font-weight: bold; 
-}
-
-#productsearch table.priceTab {
-	color: #004266;
-}
-
-#productsearch td {
-	padding-bottom: 5px;
-}
-
-#productsearch .spacer {
-	background-color:#A5C6D8;
-	height: 1px;
-}
-
-#productsearch .td_0 {
-	width: 17px;
-}
-
-#productsearch .td_1 {
-	vertical-align:top; width: 38px;
-}
-
-#productsearch .td_2 {
-	padding-right: 6px;
-}
-
-#productsearch #selectionInherit {
-	background-color: #88B4CB; 
-	padding: 10px  0px 8px 0px; 
-	text-align: center;
-}
-
-/*----- Form elements ----- */
-/*input[type="text"] {
-    background-color: #F2F7FA; 
-	color: #000000; 
-	font-family: Arial,sans-serif;
-}*/
-
-select {
-    color: #000000; 
-	font-family: Arial,sans-serif;
-}
-
-.formliste {
-	padding:3px 0px 3px 0px; clear:both;
-}
-
-.input11 {
-	border: 1px solid #689DB9; 
-	border-radius: 4px 4px 4px 0px;
-	font-size: 11px; 
-	margin: 2px 0px 0px; 
-	padding: 3px 3px 2px; 
-	width: 140px;
-}
-
-.input12 {
-	border: 1px solid #689DB9; 
-	border-radius: 4px 4px 4px 0px; 
-	font-size: 12px; 
-	margin: 2px 0px 0px; 
-	padding: 3px 3px 2px; 
-	width: 200px;
-}
-
-.input11b {
-	border: 1px solid #689DB9; 
-	border-radius: 4px 0px 0px 4px; 
-	font-size: 11px; 
-	margin: 2px 0px 0px; 
-	padding: 3px 3px 2px; 
-	width: 140px;
-}
-
-
-.formselect {
-	background-color: #F2F7FA; 
-	border: 1px solid #689DB9; 
-	border-radius: 4px 4px 4px 0px; 
-	float: left; 
-	font-size: 12px; 
-	margin: 0px; 
-	padding: 0px 3px; 
-	width: 200px;
-}
-
-.formselect select {
-	margin: 2px 0px;
-}
-
-.formlabel {
-	border-bottom: 1px solid #689DB9; 
-	color: #000000; 
-	float: left; 
-	font-size: 12px; 
-	margin: 2px 0px 0px; 
-	padding: 4px 3px 2px 0px; 
-	width: 140px;
-}
-
-.inputbutton11 {
-	background: url(../images/minibuttonfond.gif) repeat scroll 0px 0px transparent; 
-	border-bottom: 1px solid #303639; 
-	border-radius: 0px 4px 4px 0px; 
-	border-right: 1px solid #303639; 
-	border-top: 1px solid #FFFFFF;
-	box-shadow: 2px 2px 4px #5C88A1; 
-	float: left; 
-	font-family: Arial,sans-serif; 
-	font-size: 11px; 
-	margin: 1px 0px 0px -2px; 
-	padding: 3px 2px 1px; 
-	text-transform: uppercase;
-}
-
-.searchbutton11 {
-	background: url(../images/minibuttonfond.gif) repeat scroll 0px 0px transparent; 
-	border-bottom: 1px solid #303639; 
-	border-radius: 0px 4px 4px 0px; 
-	border-right: 1px solid #303639; 
-	border-top: 1px solid #FFFFFF;
-	box-shadow: 2px 2px 4px #5C88A1; 
-	float: left; 
-	height: 21px; 
-	margin: 1px 0px 0px -2px; 
-	padding: 0px 3px 0px 2px; 
-	width: 21px;
-}
-
-.inputbutton12 {
-	background: url(../images/minibuttonfond.gif) repeat scroll 0px 0px transparent; 
-	border-bottom: 1px solid #303639; 
-	border-radius: 0px 4px 4px 0px; 
-	border-right: 1px solid #303639; 
-	border-top: 1px solid #FFFFFF;
-	box-shadow: 2px 2px 4px #5C88A1; 
-	float: left; 
-	font-family: Arial,sans-serif; 
-	font-size: 12px;
-	margin: 1px 0px 0px -2px; 
-	padding: 3px 2px 1px; 
-	text-transform: uppercase;
-}
-
-.inputbutton11:hover, .searchbutton11:hover, .inputbutton12:hover {
-	border-bottom: 1px solid #FFFFFF; 
-	border-right: 1px solid #FFFFFF; 
-	border-top: 1px solid #303639; 
-	box-shadow: none; 
-	margin: 2px 0px 0px -1px;
-}
-
-.diabutton3 {
-	background-image: url(../images/arrowRight.png); 
-	background-repeat: no-repeat; 
-	height: 25px; 
-	width: 22px;
-}
-
-.diabutton3:hover {
-	background-image: url(../images/arrowRightActive.png);
-}
-
 /*----- Default classes -----*/
 .clearer {
 	clear: both;
@@ -491,64 +280,6 @@ select {
 	height: 0px; 
 	clear: both; 
 	visibility: hidden;
-}
-
-.displayNone {
-	display:none;
-}
-
-.forms {
-	display: inline-block;
-}
-
-.formlabel {
-	padding-bottom: 7px;
-}
-
-.formselect {
-	height: 26px; 
-	margin-bottom: -1px;
-}
-
-.input12{
-	height: 19px;
-	margin-bottom: -1px;
-}
-
-.lightblue {
-	color: #679CB8;
-}
-
-.darkblue {
-	color: #004266;
-}
-
-.orange {
-	color: #FF6B00 !important;
-}
-
-.left {
-	float: right;
-}
-
-.register {
-	display: inline-block;
-	margin-left: 25%; 
-	padding-bottom: 75px; 
-	width: 360px;
-}
-
-.register p {
-	margin: 7px 0px;
-}
-
-.register ul {
-	text-align: left;
-}
-
-.register .standardbutton {
-	width: 120px; float: right; 
-	margin-right: 60px;
 }
 
 /*----- Media Queries -----*/
@@ -600,7 +331,7 @@ select {
 	}
 }
 
-@media only screen and (max-width: 500px) and (orientation: portrait)  {
+@media only screen and (max-width: 500px) and (orientation: portrait) {
 	#headerImg #spacer {
 		display:none;
 	}

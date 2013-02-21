@@ -1,7 +1,4 @@
-﻿/*
- * Arcavias standard CSS
- */
-
+﻿/* Arcavias standard CSS */
 .arcavias button {
 	border: medium none;
 	text-align: center;
@@ -55,16 +52,12 @@
 	margin: 0;
 }
 
-/*
- * Catalog filter
- */
+/* Catalog filter */
 .catalog-filter button {
 	display: none !important;
 }
 
-/*
- * Catalog filter, tree section
- */
+/* Catalog filter, tree section */
 .catalog-filter-tree {
 	line-height: 125%;
 }
@@ -81,18 +74,11 @@
 }
 
 .catalog-filter-tree a:hover {
-	background-color:  #F2F7FA;
+	background-color: #F2F7FA;
 	border: 1px solid #C3D9E5;
 }
 
-/*
- * Hide all list blocks of the sub-levels.
- * The active ones will be enabled by the interal style sheet
- */
-.catalog-filter-tree .level-1 ul {
-	display: none;
-}
-
+/* Hide all list blocks of the sub-levels. The active ones will be enabled by the interal style sheet */
 .catalog-filter-tree .level-0 li a {
 	text-transform: uppercase;
 	font-weight: bold;
@@ -117,7 +103,7 @@
 }
 
 .catalog-filter-tree .level-2 li a {
-    color: #679CB8;
+	color: #679CB8;
 }
 
 .catalog-filter-tree .level-3 li {
@@ -172,9 +158,7 @@
 	text-decoration: none;
 }
 
-/*
- * Product list
- */
+/* Product list */
 .catalog-list-head h1{
 	display: none;
 }
@@ -183,9 +167,7 @@
 	outline: none;
 }
 
-/*
- * Product list, pagination section
- */
+/* Product list, pagination section */
 .catalog-list-pagination {
 	clear: left;
 	background-color: #F2F7FA;
@@ -235,9 +217,7 @@
 	text-decoration: none;
 }
 
-/*
- * Product list, items section
- */
+/* Product list, items section */
 .catalog-list-items {
 	margin: 10px 0px;
 }
@@ -252,7 +232,7 @@
 	margin: 0 1px;
 }
 
-.catalog-list-items .single > a {
+.catalog-list-items .single a {
 	text-decoration: none;
 	display: inline-block; 
 }
@@ -315,9 +295,7 @@
 	display: none;
 }
 
-/*
- * Product detail, image section
- */
+/* Product detail, image section */
 .catalog-detail-image {
 	float: left;
 	padding: 0px 10px 0px 0px;
@@ -410,9 +388,7 @@
 	display: none !important;
 }
 
-/*
- * Product detail, basic section
- */
+/* Product detail, basic section */
 .catalog-detail-basic {
 	margin: 0px 0px 0px 252px;
 }
@@ -427,9 +403,7 @@
 	margin-top: 1em;
 }
 
-/*
- * Product detail, basket section
- */
+/* Product detail, basket section */
 .catalog-detail-basket {
 	margin: 0px 0px 0px 252px;
 }
@@ -447,14 +421,13 @@
 	display: none;
 }
 
-.catalog-detail-basket .price-item .value  {
+.catalog-detail-basket .price-item .value {
 	color: #004266;
 	font-weight: bold;
 	font-size: 1.5em;
 }
 
 /* add to basket */
-
 .catalog-detail-basket .addbasket {
 	padding: 0.5em;
 	margin-top: 1em;
@@ -486,9 +459,7 @@
 	padding-right: 5px;
 }
 
-/*
- * Product detail, additional section
- */
+/* Product detail, additional section */
 .catalog-detail-additional {
 	padding-top: 1em;
 	float: left;
@@ -510,9 +481,7 @@
 	padding: 1% 0 1% 0.5%;
 }
 
-/**
- * Basket
- */
+/* Basket */
  .basket-standard,
 .checkout-standard,
 .checkout-confirm {
@@ -557,9 +526,6 @@
 	margin: 0px 0px 8px 0px;
 }
 
-/*
- * Basket
- */
 .basket-mini h1 {
 	display: none;
 }
@@ -686,9 +652,7 @@
 	font-weight: normal;
 }
 
-/*
- * Checkout
- */
+/* Checkout */
 .checkout-standard .steps {
 	font-weight: bold;
 	text-align: center;
@@ -740,11 +704,11 @@
 	display: list-item;
 }
 
-.checkout-standard .form-list .mandatory > label  {
+.checkout-standard .form-list .mandatory label {
 	font-weight: bold;
 }
 
-.checkout-standard .form-list .mandatory > label:after {
+.checkout-standard .form-list .mandatory label:after {
 	content: "*";
 }
 
@@ -781,15 +745,13 @@
 	color: #FF3300;
 }
 
-.checkout-standard .form-list .error  input,
-.checkout-standard .form-list .error  select {
+.checkout-standard .form-list .error input,
+.checkout-standard .form-list .error select {
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
 }
 
-/*
- * Checkout address
- */
+/* Checkout address */
  .checkout-standard-address {
 	padding: 0px 0px 0px 10px;
 }
@@ -834,9 +796,7 @@
 	display: none;
 }
 
-/*
- * Checkout delivery/payment
- */
+/* Checkout delivery/payment */
 .checkout-standard-delivery {
 	padding: 0px 0px 0px 10px;
 }
@@ -890,10 +850,8 @@
 	padding-top: 5px;
 }
 
-/*
- * Checkout summary
- */
-.checkout-standard-summary  {
+/* Checkout summary */
+.checkout-standard-summary {
 	padding: 0px 0px 0px 10px;
 }
 
@@ -1030,9 +988,7 @@
 	border: solid 1px #FF3300;
 }
 
-/*
- * Checkout order
- */
+/* Checkout order */
 .checkout-standard-order {
 	padding: 0px 0px 0px 10px;
 }
@@ -1044,9 +1000,7 @@
 	margin: 10px 0;
 }
 
-/*
- * Checkout confirm basic part
- */
+/* Checkout confirm basic part */
 .checkout-confirm-basic h2,
 .checkout-confirm-basic p,
 .checkout-confirm-basic .attr-list {
