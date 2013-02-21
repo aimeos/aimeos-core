@@ -280,6 +280,9 @@
 			"text": "ItemUi.js",
 			"path": "src/panel/catalog/"
 		}, {
+			"text": "ConfigUi.js",
+			"path": "src/panel/catalog/"
+		}, {
 			"text": "TextItemPickerUi.js",
 			"path": "src/panel/catalog/"
 		}, {

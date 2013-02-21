@@ -96,6 +96,7 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'catalog.right', 4 );
 		$expr[] = $search->compare( '==', 'catalog.status', 1 ) ;
 		$expr[] = $search->compare( '==', 'catalog.label', 'Kaffee' );
+		$expr[] = $search->compare( '~=', 'catalog.config', '{' );
 		$expr[] = $search->compare( '>=', 'catalog.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.editor', $this->_editor );

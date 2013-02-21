@@ -74,6 +74,7 @@ class Controller_ExtJS_Catalog_DefaultTest extends MW_Unittest_Testcase
 			'items' => (object) array(
 				'catalog.code' => 'test node',
 				'catalog.label' => 'controller test node',
+				'catalog.config' => array( 'unittest' => '1234' ),
 				'catalog.status' => 0,
 			),
 			'parentid' => $this->_rootnode->{'catalog.id'},
@@ -87,6 +88,7 @@ class Controller_ExtJS_Catalog_DefaultTest extends MW_Unittest_Testcase
 				'catalog.id' => $inserted['items']->{'catalog.id'},
 				'catalog.code' => 'test node 2',
 				'catalog.label' => 'controller test',
+				'catalog.config' => array( 'testunit' => '4321' ),
 				'catalog.status' => 0,
 			),
 		);
