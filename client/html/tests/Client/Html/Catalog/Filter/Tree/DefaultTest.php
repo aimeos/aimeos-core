@@ -56,7 +56,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 	{
 		$output = $this->_object->getHeader();
 
-		$this->assertContains( '<style type="text/css">', $output );
+		$this->assertContains( '<script type="text/javascript">', $output );
 	}
 
 
@@ -69,7 +69,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$this->assertContains( '<style type="text/css">', $this->_object->getHeader() );
+		$this->assertContains( '<script type="text/javascript">', $this->_object->getHeader() );
 	}
 
 
