@@ -56,7 +56,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 	{
 		$output = $this->_object->getHeader();
 
-		$this->assertContains( '<style type="text/css">', $output );
+		$this->assertContains( '<script type="text/javascript">', $output );
 	}
 
 
@@ -69,7 +69,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$this->assertContains( '<style type="text/css">', $this->_object->getHeader() );
+		$this->assertContains( '<script type="text/javascript">', $this->_object->getHeader() );
 	}
 
 
@@ -97,7 +97,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 
-		$conf = new MW_Config_Array( array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-always' => 2 ) ) ) ) );
+		$conf = new MW_Config_Array( array( 'client' => array( 'html' => array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-always' => 2 ) ) ) ) ) ) );
 		$helper = new MW_View_Helper_Config_Default( $view, $conf );
 		$view->addHelper( 'config', $helper );
 
@@ -117,7 +117,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 
-		$conf = new MW_Config_Array( array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-only' => 1 ) ) ) ) );
+		$conf = new MW_Config_Array( array( 'client' => array( 'html' => array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-only' => 1 ) ) ) ) ) ) );
 		$helper = new MW_View_Helper_Config_Default( $view, $conf );
 		$view->addHelper( 'config', $helper );
 

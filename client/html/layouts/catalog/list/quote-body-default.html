@@ -5,10 +5,15 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$items = $this->get( 'quoteItems', array() );
+
 ?>
 <div class="catalog-list-quote">
-<?php foreach( $this->get( 'quoteItems', array() ) as $quoteItem ) : ?>
+<?php if( count( $items ) > 0 ) : ?>
+<?php 	foreach( $items as $quoteItem ) : ?>
 	<article><?php echo $quoteItem->getContent(); ?></article>
-<?php endforeach; ?>
+<?php 	endforeach; ?>
+	<a href="#"><?php echo $this->translate( 'client/html', 'Show all quotes' ); ?></a>
+<?php endif; ?>
 <?php echo $this->get( 'quoteBody' ); ?>
 </div>
