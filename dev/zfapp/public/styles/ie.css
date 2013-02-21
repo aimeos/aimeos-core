@@ -1,11 +1,42 @@
-.filter-tree a {
-	padding-top: 2px;
+#navigationMenue {
+	display: inline;
 }
 
-#productInformations div {
-	margin-top: 0;
+.searchbutton12 {
+	border: none;
 }
 
-#productsearch button {
-	width: 150px;
+.arcavias .minibutton {
+	border: none;
+}
+
+.arcavias .standardbutton {
+	border: none;
+}
+
+@media only screen and (min-device-width: 509px) and (max-width: 768px) {
+	#headerLogo img {
+		width: 100%;
+	}
+}
+
+/* ----- IE6 ----- */
+* #frame {
+	width: 984px; 
+}
+
+* #content {
+	width: 960px; 
+
+}
+* #contentLeft {
+    width: 173px;
+	margin: 0px;
+	padding:0px 0px 0px 10px;;
+}
+
+* #contentRight {
+	width: 767px; 
+	padding: 0px 0px;
+	margin: 0px;
 }
