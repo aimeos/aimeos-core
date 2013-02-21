@@ -95,7 +95,7 @@ class Client_Html_Basket_Mini_Default
 		catch( Exception $e )
 		{
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return;
+			return '';
 		}
 
 		$tplconf = 'client/html/basket/mini/default/template-header';
