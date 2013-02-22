@@ -151,16 +151,19 @@ select {
 }
 
 .searchbutton12 {
+	width: 26px;
+	height: 24px; 
 	background: url(../images/minibuttonfond.gif) repeat scroll 0px 0px transparent; 
 	border: 1px solid #689DB9;
 	border-radius: 0px 4px 4px 0px; 
 	box-shadow: 2px 2px 4px #5C88A1; 
 	float: left; 
-	height: 24px; 
+
 	margin: 0px 1px 0px -3px; 
 	padding: 0px 3px 0px 2px; 
-	width: 21px;
+
 	cursor: pointer;
+	color: #FFFFFF;
 }
 
 #headerBasket .basket-mini {

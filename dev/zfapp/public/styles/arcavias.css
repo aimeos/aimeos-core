@@ -1,12 +1,4 @@
 ﻿/* Arcavias standard CSS */
-/*.arcavias button {
-	border: medium none;
-	text-align: center;
-	cursor: pointer;
-	margin: 0;
-	padding: 0;
-}*/
-
 .button-group {
 	text-align: center;
 	padding: 10px 0px 10px 0px;
@@ -42,7 +34,6 @@
 	font-size: 1em;
 }
 
-
 .arcavias .minibutton {
 	background: url(../images/buttonfond.gif) repeat-x #6C9BB4;
 	border: 1px solid #689DB9;
@@ -52,7 +43,7 @@
 	text-decoration: none;
 	display: inline-block;
 	font-weight: bold;
-	padding: 4px 8px;
+	padding: 3px 6px;
 }
 
 .arcavias .attr-list,
@@ -144,18 +135,20 @@
 }
 
 .catalog-list-breadcrumb .title {
-	padding: 0px 0px 5px 0px;
+	color: #004266;
 	font-size: 1em;
+	font-weight: bold;
 }
 
 .catalog-list-breadcrumb ol{
-	display: inline-block;
+	display: inline;
 	list-style: none;
 }
 
 .catalog-list-breadcrumb li{
 	display: inline;
-}
+	font-size: 1em;
+}	
 
 .catalog-list-breadcrumb li:after {
 	content: ' : ';
@@ -174,6 +167,10 @@
 /* Product list */
 .catalog-list a:focus {
 	outline: none;
+}
+
+.catalog-list-head h1 {
+	display: none;
 }
 
 /* Product list, pagination section */
@@ -231,10 +228,6 @@
 	margin: 10px 0px;
 }
 
-.catalog-list-items h1 {
-	color: #004266;
-}
-
 .catalog-list-items .single {
 	display: inline-block;
 	width: 180px;
@@ -248,14 +241,15 @@
 
 /* media list */
 .catalog-list-items .media-list {
+	height: 240px;
+	width: 180px;
+	background-color: #FFFFFF;
 	background-image: url(../images/arcavias.gif);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
 	text-align: center;
 	overflow: hidden;
-	height: 240px;
-	width: 180px;
 }
 
 .catalog-list-items .media-item {
@@ -269,14 +263,19 @@
 
 /* text list */
 .catalog-list-items .text-list {
+	height: 5em;
 	padding-top: 3px;
 	padding-bottom: 3px;
 	padding-left: 10px;
 	text-align: left;
-
 	overflow: hidden;
 	border-top: 1px solid #C3D9E5;
 	border-bottom: 1px solid #C3D9E5;
+}
+
+.catalog-list-items .text-list h1 {
+	color: #004266;
+	padding: 0px;
 }
 
 /* price list */
@@ -648,6 +647,7 @@
 .basket-standard-main td.quantity,
 .basket-standard-main td.action {
 	text-align: center;
+	white-space: nowrap;
 }
 
 .basket-standard-main td.quantity a,
@@ -716,7 +716,7 @@
 .checkout-standard li {
 	list-style: none;
 }
-
+/*
 .checkout-standard .form-list .mandatory,
 .checkout-standard .form-list .optional, 
 .checkout-standard .form-list .error,
@@ -779,7 +779,7 @@
 	min-width: 218px;
 	max-width: 438px;
 	padding: 0 10px 10px 10px;
-}
+}*/
 
 .checkout-standard .item-service .description {
 	width: 100%;
@@ -858,6 +858,70 @@
 .checkout-standard-address .item-address .values {
 	display: inline;
 	vertical-align: middle;
+}
+
+.checkout-standard .form-list .mandatory,
+.checkout-standard .form-list .optional, 
+.checkout-standard .form-list .error,
+.checkout-standard .attr-list .mandatory,
+.checkout-standard .attr-list .optional, 
+.checkout-standard .attr-list .error {
+	display: list-item;
+}
+
+.checkout-standard .form-list .mandatory label {
+	font-weight: bold;
+}
+
+.checkout-standard .form-list .mandatory label:after {
+	content: "*";
+}
+
+.checkout-standard .form-item {
+	vertical-align: bottom;
+}
+
+.checkout-standard .form-list label {
+	display: block;
+	padding-top: 1em;
+	width: 218px;
+}
+
+.checkout-standard .form-list input {
+	background-color: #F2F7FA;
+	border: solid 1px #689DB9;
+	vertical-align: bottom;
+	display: inline-block;
+	height: 1.5em;
+	width: 216px;
+}
+
+.checkout-standard .form-list select {
+	vertical-align: bottom;
+	border: 1px solid #689DB9;
+	width: 216px;
+}
+
+.checkout-standard .form-list .error {
+	color: #FF3300;
+}
+
+.checkout-standard .form-list .error a {
+	color: #FF3300;
+}
+
+.checkout-standard .form-list .error input,
+.checkout-standard .form-list .error select {
+	background-color: #ffeeee;
+	border: solid 1px #FF3300;
+}
+
+.checkout-standard .item-service .form-list {
+	display: inline-block;
+	vertical-align: top;
+	min-width: 218px;
+	max-width: 438px;
+	padding: 0 10px 10px 10px;
 }
 
 .checkout-standard-address .item-new .form-list {
@@ -1083,7 +1147,7 @@
 
 .checkout-standard-summary-option .error {
 	background-color: #ffeeee;
-	border: solid 1px #FF3300;
+	border-bottom: 1px solid #FF3300;
 }
 
 /* Checkout summary basket */
