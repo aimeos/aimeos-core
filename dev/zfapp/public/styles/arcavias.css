@@ -273,11 +273,6 @@
 	border-bottom: 1px solid #C3D9E5;
 }
 
-.catalog-list-items .text-list h1 {
-	color: #004266;
-	padding: 0px;
-}
-
 /* price list */
 .catalog-list-items .price-list {
 	padding-top: 5px;
@@ -468,6 +463,7 @@
 	margin-top: 1.5em;
 	font-weight: bold;
 	text-transform: uppercase;
+	color: #004266;
 }
 
 .catalog-detail-basket-attribute select {
@@ -727,7 +723,7 @@
 .checkout-standard .attr-list .error {
 	display: list-item;
 }
-
+*/
 .checkout-standard .form-list .mandatory label {
 	font-weight: bold;
 }
@@ -740,20 +736,22 @@
 	vertical-align: bottom;
 }
 
-.checkout-standard .form-list label {
-	display: block;
-	padding-top: 1em;
-	width: 218px;
-}
-
 .checkout-standard .form-list input {
 	background-color: #F2F7FA;
 	border: solid 1px #689DB9;
 	vertical-align: bottom;
-	display: inline-block;
 	height: 1.5em;
-	width: 216px;
+	width: 200px;
 }
+
+.checkout-standard .form-list label {
+	display: inline-block;
+	padding-top: 0.9em;
+	width: 220px;
+	vertical-align: top;
+}
+/*
+
 
 .checkout-standard .form-list select {
 	vertical-align: bottom;
@@ -895,7 +893,7 @@
 	width: 213px;
 	display: block;
 	float: left;
-	padding-top: 1em;
+	padding-top: 0.5em;
 }
 
 .checkout-standard-address .form-list input {
@@ -906,6 +904,7 @@
 	border: solid 1px #689DB9;
 	vertical-align: bottom;
 	height: 1.5em;
+	margin: 0 0 8px;
 }
 
 .checkout-standard-address .form-list select {
@@ -914,6 +913,7 @@
 	float: left;
 	border: 1px solid #689DB9;
 	vertical-align: bottom;
+	margin: 0 0 8px;
 }
 
 .checkout-standard .form-list .error {
@@ -935,7 +935,7 @@
 	vertical-align: top;
 	min-width: 218px;
 	max-width: 438px;
-	padding: 0 10px 10px 10px;
+	padding: 5px 10px 10px 10px;
 }
 
 .checkout-standard-address .item-new .form-list {
