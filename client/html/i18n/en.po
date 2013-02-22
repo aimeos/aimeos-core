@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core 2013-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-20 11:40+0100\n"
+"POT-Creation-Date: 2013-02-22 01:03+0100\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language: English\n"
@@ -19,26 +19,26 @@ msgstr ""
 msgid "You are here:"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:29
+#: layouts/catalog/list/pagination-body-default.html:30
 msgid "Sort by:"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:31
+#: layouts/catalog/list/pagination-body-default.html:32
 msgid "Relevance"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:32
+#: layouts/catalog/list/pagination-body-default.html:33
 msgid "Name"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:33
+#: layouts/catalog/list/pagination-body-default.html:34
 #: layouts/basket/standard/main-body-default.html:79
 #: layouts/email/confirm/main-html-detail-body-default.html:62
 #: layouts/checkout/standard/summary-basket-body-default.html:67
 msgid "Price"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:39
+#: layouts/catalog/list/pagination-body-default.html:40
 #, php-format
 msgid "Page %1$d of %2$d"
 msgstr ""
@@ -76,7 +76,15 @@ msgstr ""
 msgid "%1$s ( +%2$s€ )"
 msgstr ""
 
-#: layouts/catalog/filter/body-default.html:26
+#: layouts/catalog/filter/search-body-default.html:14
+msgid "Search:"
+msgstr ""
+
+#: layouts/catalog/filter/search-body-default.html:15
+msgid "Go"
+msgstr ""
+
+#: layouts/catalog/filter/body-default.html:25
 msgid "Show"
 msgstr ""
 
