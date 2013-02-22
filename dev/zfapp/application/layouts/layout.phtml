@@ -86,11 +86,14 @@ $sites = $this->sites();
 							<div id="contentLeft">
 								<?php echo $this->filter->getBody(); ?>
 							</div>
-							<?php else : ?>
-							<?php endif; ?>
 							<div id="contentRight">
 								<?php echo $this->layout()->content; ?>
 							</div>
+							<?php else : ?>
+							<div id="contentFull">
+								<?php echo $this->layout()->content; ?>
+							</div>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
@@ -101,7 +104,7 @@ $sites = $this->sites();
 					<div id="footerTopRight"></div>
 				</div>
 				<div id="footerBottom">
-					Layout courtesy to <a href="http://www.kauscheundpartner.de/">Kausche&amp;Partner</a>
+					Layout courtesy to <a href="http://www.kauscheundpartner.de/" target="_blank">Kausche&amp;Partner</a>
 				</div>
 			</div>
 		</div>
