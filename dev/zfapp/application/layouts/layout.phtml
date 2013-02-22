@@ -86,11 +86,14 @@ $sites = $this->sites();
 							<div id="contentLeft">
 								<?php echo $this->filter->getBody(); ?>
 							</div>
-							<?php else : ?>
-							<?php endif; ?>
 							<div id="contentRight">
 								<?php echo $this->layout()->content; ?>
 							</div>
+							<?php else : ?>
+							<div id="contentFull">
+								<?php echo $this->layout()->content; ?>
+							</div>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>

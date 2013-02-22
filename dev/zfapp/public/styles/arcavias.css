@@ -511,17 +511,19 @@
 	margin: 0 auto;
 }
 
+
  .basket-standard h1 {
-	padding: 0px 0px 20px 10px;
+	padding: 0px 0px 20px 0px;
  }
+ /*
 .basket-standard-main {
 	margin: 0px 0px 0px 10px;
-} 
+} */
 .basket-standard .error-list,
 .checkout-standard .error-list,
 .checkout-confirm .error-list {
 	padding: 5px;
-	margin: 0px 0px 20px 10px;
+	margin: 0px 0px 20px 15px;
 	list-style: none;
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
@@ -554,7 +556,7 @@
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border: solid 1px #689DB9;
-	margin: 0px 0px 8px 10px;
+	margin: 0px 0px 0px 0px;
 }
 
 .basket-standard-main .details img {
@@ -821,11 +823,11 @@
 
 /* Checkout address */
  .checkout-standard-address {
-	padding: 0px 0px 0px 10px;
+	padding: 0px 0px 0px 17px;
 }
 
 .checkout-standard-address h2 {
-	padding: 20px 0px 10px 0px;
+	padding: 20px 20px 10px 0px;
 }
 
 .checkout-standard-address .button-group a.standardbutton{
@@ -848,11 +850,13 @@
 .checkout-standard-address .item-address .header {
 	background-color: #F2F7FA;
 	padding: 10px;
+	margin: 0px 0px 10px 0px;
 }
 .checkout-standard-address .item-address .header input {
 	display: inline;
 	vertical-align: top;
 	margin-right: 10px;
+	border: none;
 }
 
 .checkout-standard-address .item-address .values {
@@ -866,40 +870,50 @@
 .checkout-standard .attr-list .mandatory,
 .checkout-standard .attr-list .optional, 
 .checkout-standard .attr-list .error {
+	clear: both;
+}
+
+.checkout-standard-address .form-list .form-item { 
+	display: none; 
+}
+
+.checkout-standard-address .form-list .mandatory {
+	font-weight: bold;
+	display: list-item;
+	padding: 0px;
+}
+
+.checkout-standard-address .form-list .optional {
 	display: list-item;
 }
 
-.checkout-standard .form-list .mandatory label {
-	font-weight: bold;
-}
-
-.checkout-standard .form-list .mandatory label:after {
+.checkout-standard-address .form-list .mandatory label:after {
 	content: "*";
 }
 
-.checkout-standard .form-item {
-	vertical-align: bottom;
-}
-
-.checkout-standard .form-list label {
+.checkout-standard-address .form-list label {
+	width: 213px;
 	display: block;
+	float: left;
 	padding-top: 1em;
-	width: 218px;
 }
 
-.checkout-standard .form-list input {
+.checkout-standard-address .form-list input {
+	width: 216px;
+	display: block;
+    float: left;
 	background-color: #F2F7FA;
 	border: solid 1px #689DB9;
 	vertical-align: bottom;
-	display: inline-block;
 	height: 1.5em;
-	width: 216px;
 }
 
-.checkout-standard .form-list select {
-	vertical-align: bottom;
+.checkout-standard-address .form-list select {
+	width: 218px;
+	display: block;
+	float: left;
 	border: 1px solid #689DB9;
-	width: 216px;
+	vertical-align: bottom;
 }
 
 .checkout-standard .form-list .error {
@@ -928,14 +942,10 @@
 	display: none;
 }
 
-.checkout-standard-address .form-item {
-	display: none;
-}
-
 /* Checkout delivery/payment */
 .checkout-standard-delivery ,
 .checkout-standard-payment {
-	padding: 0px 0px 0px 10px;
+	padding: 0px 0px 0px 17px;
 }
 
 .checkout-standard-delivery .note,
@@ -975,7 +985,7 @@
 
 /* Checkout summary */
 .checkout-standard-summary {
-	padding: 0px 0px 0px 10px;
+	padding: 0px 0px 0px 17px;
 }
 
 .checkout-standard-summary  h3{
@@ -1179,7 +1189,7 @@
 
 /* Checkout confirm basic part */
 .checkout-confirm {
-	padding: 0px 0px 0px 10px;
+	padding: 0px 0px 0px 17px;
 }
 
 .checkout-confirm-basic h2 {

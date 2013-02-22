@@ -23,7 +23,6 @@ body{
 h1 {
 	margin: 0px;
 	color: #004266;
-	font-size: 2em;
 	padding: 0px 0px 20px 0px;
 }
 
@@ -243,6 +242,11 @@ select {
 	float: left; 
 	padding: 0 1.6% 0 0;
 	background: #FFFFFF;
+}
+
+#contentFull {
+	width: 96%; 
+	margin: 0 2%;
 }
 
 /* ----- Footer -----*/
