@@ -94,7 +94,7 @@ class Client_Html_Checkout_Confirm_Default
 		catch( Exception $e )
 		{
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return;
+			return '';
 		}
 
 		$tplconf = 'client/html/checkout/confirm/default/template-header';

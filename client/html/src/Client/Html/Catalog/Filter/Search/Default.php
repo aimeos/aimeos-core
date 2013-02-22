@@ -94,7 +94,7 @@ class Client_Html_Catalog_Filter_Search_Default
 		catch( Exception $e )
 		{
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return;
+			return '';
 		}
 
 		$tplconf = 'client/html/catalog/filter/search/default/template-header';
