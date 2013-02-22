@@ -8,6 +8,7 @@
 $listTarget = $this->config( 'client/html/catalog/listsimple/url/target' );
 $listController = $this->config( 'client/html/catalog/listsimple/url/controller', 'catalog' );
 $listAction = $this->config( 'client/html/catalog/listsimple/url/action', 'listsimple' );
+$listConfig = $this->config( 'client/html/catalog/listsimple/url/config', array() );
 
 ?>
 <link href="<?php echo $this->config( 'client/html/common/template/baseurl' ); ?>css/search.css" type="text/css" rel="stylesheet" media="screen" />
@@ -19,7 +20,7 @@ $(document).ready( function () {
 		delay: 200,
 		source: function( req, add ) {
 			$.getJSON(
-				"<?php echo $this->url( $listTarget, $listController, $listAction ); ?>",
+				"<?php echo $this->url( $listTarget, $listController, $listAction, array(), $listConfig ); ?>",
 				{ 'f-search-text': req.term },
 				function( data ) {
 					var suggestions = [];
