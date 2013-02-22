@@ -20,8 +20,8 @@ $(document).ready( function () {
 		delay: 200,
 		source: function( req, add ) {
 			$.getJSON(
-				"<?php echo $this->url( $listTarget, $listController, $listAction, array(), $listConfig ); ?>",
-				{ 'f-search-text': req.term },
+				"<?php echo $this->url( $listTarget, $listController, $listAction, array(), array(), $listConfig ); ?>",
+				{ "<?php echo $this->formparam( 'f-search-text' ); ?>": req.term },
 				function( data ) {
 					var suggestions = [];
 
