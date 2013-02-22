@@ -22,8 +22,7 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 	<nav>
 		<form method="GET" action="<?php echo $this->url( $listTarget, $listController, $listAction ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
-			<button class="standardbutton" type="submit">
-<?php echo $this->translate( 'client/html', 'Show' ); ?></button>
+			<button class="standardbutton" type="submit"><?php echo $this->translate( 'client/html', 'Show' ); ?></button>
 		</form>
 	</nav>
 </section>

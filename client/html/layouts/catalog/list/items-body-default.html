@@ -31,7 +31,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php	endforeach; ?>
 			</div>
 			<div class="text-list">
-				<h1><?php echo $name; ?></h1>
+				<h2><?php echo $name; ?></h2>
 <?php	foreach( $productItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>
 				<div class="text-item">
 <?php		echo $textItem->getContent(); ?><br/>
