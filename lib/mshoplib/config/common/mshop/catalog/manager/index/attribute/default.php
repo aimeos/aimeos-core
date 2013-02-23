@@ -30,7 +30,7 @@ return array(
 				FROM "mshop_product" AS mpro
 				:joins
 				WHERE :cond
-				LIMIT 10000 OFFSET 0
+				LIMIT 1000 OFFSET 0
 			) AS list
 		',
 	)
