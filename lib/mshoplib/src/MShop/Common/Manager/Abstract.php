@@ -828,11 +828,12 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			$sql = new MW_Template_SQL( $this->_context->getConfig()->get( $cfgPathCount, $cfgPathCount ) );
 			$sql->replace( $find, $replace )->enable( $keys );
 
+			$time = microtime( true );
 			$stmt = $conn->create( $sql->str() );
-			$this->_context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 			$results = $stmt->execute();
 			$row = $results->fetch();
 			$results->finish();
+			$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
 			if ( $row === false ) {
 				throw new MShop_Exception( 'No total results value found' );
@@ -845,9 +846,12 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$sql = new MW_Template_SQL( $this->_context->getConfig()->get( $cfgPathSearch, $cfgPathSearch ) );
 		$sql->replace( $find, $replace )->enable( $keys );
 
+		$time = microtime( true );
 		$stmt = $conn->create( $sql->str() );
-		$this->_context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
-		return $stmt->execute();
+		$results = $stmt->execute();
+		$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
+
+		return $results;
 	}
 
 
