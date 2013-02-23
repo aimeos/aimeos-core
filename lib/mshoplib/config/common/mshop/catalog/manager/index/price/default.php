@@ -15,9 +15,7 @@ return array(
 			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'search' => '
-			SELECT DISTINCT mpro."id", mpro."siteid", mpro."typeid", mpro."label", mpro."status",
-				mpro."start", mpro."end", mpro."code", mpro."suppliercode",
-				mpro."ctime", mpro."mtime", mpro."editor"
+			SELECT DISTINCT mpro."id"
 			FROM "mshop_product" AS mpro
 			:joins
 			WHERE :cond
