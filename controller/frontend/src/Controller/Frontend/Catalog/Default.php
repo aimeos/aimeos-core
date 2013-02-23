@@ -83,6 +83,8 @@ class Controller_Frontend_Catalog_Default
 		$expr = $sortations = array();
 		$search = $this->_indexManager->createSearch( true );
 
+		$expr[] = $search->compare( '==', 'catalog.index.catalog.id', $catid );
+
 		switch( $sort )
 		{
 			case 'code':
@@ -118,7 +120,6 @@ class Controller_Frontend_Catalog_Default
 				break;
 		}
 
-		$expr[] = $search->compare( '==', 'catalog.index.catalog.id', $catid );
 		$expr[] = $search->getConditions();
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -182,7 +183,6 @@ class Controller_Frontend_Catalog_Default
 				break;
 		}
 
-		$expr[] = $search->compare( '!=', 'catalog.index.catalog.id', null );
 		$expr[] = $search->getConditions();
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
