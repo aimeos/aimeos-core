@@ -111,9 +111,10 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		$confirmTarget = $view->config( 'client/html/checkout/confirm/url/target' );
 		$confirmController = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
 		$confirmAction = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+		$confirmConfig = $view->config( 'client/html/checkout/confirm/url/config', array() );
 
 
-		$url = $view->url( $confirmTarget, $confirmController, $confirmAction );
+		$url = $view->url( $confirmTarget, $confirmController, $confirmAction, array(), array(), $confirmConfig );
 
 		if( strpos( $url, '?' ) === false ) {
 			$url .= '?';
