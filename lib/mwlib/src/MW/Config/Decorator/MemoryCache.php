@@ -18,8 +18,23 @@ class MW_Config_Decorator_MemoryCache
 	extends MW_Config_Decorator_Abstract
 	implements MW_Config_Decorator_Interface
 {
-	protected $_cache = array();
-	protected $_negCache = array();
+	private $_negCache = array();
+	private $_cache = array();
+	private $_config;
+
+
+	/**
+	 * Initializes the decorator.
+	 *
+	 * @param MW_Config_Interface $object Config object or decorator
+	 * @param array $config Pre-cached non-shared configuration
+	 */
+	public function __construct( MW_Config_Interface $object, $config = array() )
+	{
+		parent::__construct( $object );
+
+		$this->_config = $config;
+	}
 
 
 	/**
@@ -39,6 +54,10 @@ class MW_Config_Decorator_MemoryCache
 
 		if( array_key_exists( $name, $this->_cache ) ) {
 			return $this->_cache[ $name ];
+		}
+
+		if( ( $return = $this->_getValueFromArray( $this->_config, explode( '/', $name ) ) ) !== null ) {
+			return $return;
 		}
 
 		$return = $this->_getObject()->get( $name, null );
@@ -80,4 +99,25 @@ class MW_Config_Decorator_MemoryCache
 		$this->_getObject()->set( $name, $value );
 	}
 
+
+	/**
+	 * Returns the requested configuration value from the given array
+	 *
+	 * @param array $config The array to search in
+	 * @param array $parts Configuration path parts to look for inside the array
+	 * @return mixed Found configuration value or null if not available
+	 */
+	protected function _getValueFromArray( $config, $parts )
+	{
+		if( ( $key = array_shift( $parts ) ) !== null && isset( $config[$key] ) )
+		{
+			if( count( $parts ) > 0 ) {
+				return $this->_getValueFromArray( $config[$key], $parts );
+			}
+
+			return $config[$key];
+		}
+
+		return null;
+	}
 }

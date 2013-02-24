@@ -49,6 +49,15 @@ class MW_Config_Decorator_MemoryCacheTest extends MW_Unittest_Testcase
 		$this->assertEquals( '127.0.0.1', $this->_object->get( 'resource/db/host', '127.0.0.2' ) );
 	}
 
+	public function testGetCached()
+	{
+		$conf = new MW_Config_Array( array() );
+		$cached = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
+		$this->_object = new MW_Config_Decorator_MemoryCache( $conf, $cached );
+
+		$this->assertEquals( '127.0.0.1', $this->_object->get( 'resource/db/host', '127.0.0.2' ) );
+	}
+
 	public function testGetDefault()
 	{
 		$this->assertEquals( 3306, $this->_object->get( 'resource/db/port', 3306 ) );
