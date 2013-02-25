@@ -134,11 +134,11 @@ select {
 
 #headerSearch input {
 	width: 150px; 
+	height: 15px;
 	background-color: #FFFFFF; 
 	border-left: 0px none; 
 	border: 1px solid #689DB9; 
 	float: left;
-
 	padding: 4px 3px 3px;
 	font-size: 1em;
 }
@@ -187,6 +187,7 @@ select {
 }
 #headerBasket .basket-mini-main{
 	padding: 0px 0px 5px 0px;
+	margin: 0px 3px 0px 3px;
 }
 
 /* ----- Navigation ----- */

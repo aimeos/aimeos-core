@@ -2,6 +2,11 @@
 	display: inline;
 }
 
+.catalog-filter .standardbutton {
+	width:0px; height:0px;
+  visibility:hidden;  
+}
+
 .searchbutton12 {
 	border: none;
 }

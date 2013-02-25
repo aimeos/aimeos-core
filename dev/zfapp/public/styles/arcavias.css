@@ -35,6 +35,8 @@
 }
 
 .arcavias .minibutton {
+	padding: 3px 6px;
+	margin: 0px 3px 0px 3px;
 	background: url(../images/buttonfond.gif) repeat-x #6C9BB4;
 	border: 1px solid #689DB9;
 	box-shadow: 2px 2px 4px #5C88A1;
@@ -43,7 +45,6 @@
 	text-decoration: none;
 	display: inline-block;
 	font-weight: bold;
-	padding: 3px 6px;
 }
 
 .arcavias .attr-list,
@@ -63,7 +64,7 @@
 
 /* Catalog filter */
 .catalog-filter button {
-	display: none !important;
+	display: none;
 }
 
 /* Catalog filter, tree section */
@@ -508,23 +509,18 @@
 	margin: 0 auto;
 }
 
-
  .basket-standard h1 {
 	padding: 0px 0px 20px 0px;
  }
- /*
-.basket-standard-main {
-	margin: 0px 0px 0px 10px;
-} */
-.basket-standard .error-list,
-.checkout-standard .error-list,
-.checkout-confirm .error-list {
+
+.basket-standard .error-list {
 	padding: 5px;
-	margin: 0px 0px 20px 15px;
+	margin: 0px 0px 20px 0px;
 	list-style: none;
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
 }
+ 
 .basket-standard .note,
 .checkout-standard .note,
 .checkout-confirm .note {
@@ -674,6 +670,15 @@
 }
 
 /* Checkout */
+.checkout-standard .error-list,
+.checkout-confirm .error-list {
+	padding: 5px;
+	margin: 0px 0px 20px 15px;
+	list-style: none;
+	background-color: #ffeeee;
+	border: solid 1px #FF3300;
+}
+
 .checkout-standard .steps {
 	font-weight: bold;
 	text-align: center;
@@ -891,15 +896,13 @@
 }
 
 .checkout-standard-address .form-list label {
-	width: 213px;
-	display: block;
+	width: 210px;
 	float: left;
 	padding-top: 0.5em;
 }
 
 .checkout-standard-address .form-list input {
-	width: 216px;
-	display: block;
+	width: 215px;
     float: left;
 	background-color: #F2F7FA;
 	border: solid 1px #689DB9;
@@ -909,8 +912,7 @@
 }
 
 .checkout-standard-address .form-list select {
-	width: 218px;
-	display: block;
+	width: 219px;
 	float: left;
 	border: 1px solid #689DB9;
 	vertical-align: bottom;
