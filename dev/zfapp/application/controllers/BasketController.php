@@ -30,9 +30,11 @@ class BasketController extends Application_Controller_Action_Abstract
 			$filter = Client_Html_Catalog_Filter_Factory::createClient( $context, $templatePaths );
 			$this->view->searchfilter = $filter->getSubClient( 'search' );
 			$this->view->searchfilter->setView( $this->_createView() );
+			$this->view->searchfilter->process();
 
 			$this->view->minibasket = Client_Html_Basket_Mini_Factory::createClient( $context, $templatePaths );
 			$this->view->minibasket->setView( $this->_createView() );
+			$this->view->minibasket->process();
 
 			$this->render( 'index' );
 		}
