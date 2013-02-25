@@ -184,12 +184,21 @@ class Client_Html_Catalog_Detail_Default
 			$context = $this->_getContext();
 			$config = $context->getConfig();
 
+			$params = array();
+			foreach( $view->param() as $key => $value )
+			{
+				if( strncmp( 'f-', $key, 2 ) === 0 || strncmp( 'l-', $key, 2 ) === 0 ) {
+					$params[$key] = $value;
+				}
+			}
+
 			$domains = $config->get( 'client/html/catalog/detail/default/domains', array( 'media', 'price', 'text', 'attribute' ) );
 			$prodid = (int) $view->param( 'l-product-id' );
 
 			$manager = MShop_Product_Manager_Factory::createManager( $context );
 
 			$view->detailProductItem = $manager->getItem( $prodid, $domains );
+			$view->detailParams = $params;
 
 			$this->_cache = $view;
 		}
