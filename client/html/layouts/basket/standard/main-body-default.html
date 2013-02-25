@@ -86,7 +86,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 <?php 	foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
-						<img src="<?php echo $product->getMediaUrl(); ?>" />
+						<img src="<?php echo $product->getMediaUrl(); ?>" alt="" />
 						<span class="product-name"><?php echo $product->getName(); ?></span>
 <?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
 						<ul class="attr-list">
@@ -153,6 +153,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 				<tr class="rebate">
 					<td colspan="3"><?php echo $this->translate( 'client/html', 'Included rebates' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?></td>
+					<td></td>
 				</tr>
 			</tfoot>
 		</table>
