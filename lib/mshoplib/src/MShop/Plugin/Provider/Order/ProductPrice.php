@@ -70,10 +70,6 @@ class MShop_Plugin_Provider_Order_ProductPrice implements MShop_Plugin_Provider_
 			return true;
 		}
 
-		$config = $this->_item->getConfig();
-
-		$this->_context->getLogger()->log(__METHOD__ . ':: config: ' . print_r( $config, true ), MW_Logger_Abstract::DEBUG);
-
 		$orderProducts = $order->getProducts();
 
 		$positions = array();
@@ -95,19 +91,15 @@ class MShop_Plugin_Provider_Order_ProductPrice implements MShop_Plugin_Provider_
 			$referencePrices = $product->getRefItems('price');
 			$price = $priceManager->getLowestPrice( $referencePrices, $orderProducts[$positions[$id]]->getQuantity() );
 
-			if ( ( ( $orderProducts[$positions[$id]]->getPrice()->getValue() !== $price->getValue() )
-				|| ( $orderProducts[$positions[$id]]->getPrice()->getShipping() !== $price->getShipping() )
-				|| ( $orderProducts[$positions[$id]]->getPrice()->getRebate() !== $price->getRebate() )
-				|| ( $orderProducts[$positions[$id]]->getPrice()->getTaxrate() !== $price->getTaxrate() ) )
-				&& ( $orderProducts[$positions[$id]]->getFlags() !== Mshop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) )
+			if( ( $orderProducts[$positions[$id]]->getPrice()->getValue() !== $price->getValue()
+				|| $orderProducts[$positions[$id]]->getPrice()->getShipping() !== $price->getShipping()
+				|| $orderProducts[$positions[$id]]->getPrice()->getTaxrate() !== $price->getTaxrate() )
+				&& $orderProducts[$positions[$id]]->getFlags() !== Mshop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 			{
-				if ( isset( $config['update']) && ( $config['update'] == true ) )
-				{
-					$orderProducts[$positions[$id]]->setPrice( $price );
+				$orderProducts[$positions[$id]]->setPrice( $price );
 
-					$order->deleteProduct( $positions[$id] );
-					$order->addProduct( $orderProducts[ $positions[$id] ], $positions[$id] );
-				}
+				$order->deleteProduct( $positions[$id] );
+				$order->addProduct( $orderProducts[ $positions[$id] ], $positions[$id] );
 
 				$changedProducts[$positions[$id]] = 'product.price';
 			}
@@ -116,7 +108,7 @@ class MShop_Plugin_Provider_Order_ProductPrice implements MShop_Plugin_Provider_
 		if ( count( $changedProducts ) > 0 )
 		{
 			$code = array( 'product' => $changedProducts );
-			throw new MShop_Plugin_Provider_Exception( 'Prices in the basket had to be updated', -1, null, $code );
+			throw new MShop_Plugin_Provider_Exception( 'The price of at least one product in the basket has changed in the meantime and was updated', -1, null, $code );
 		}
 
 		return true;
