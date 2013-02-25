@@ -253,6 +253,7 @@
 }
 
 .catalog-list-items .media-item {
+	background-color: #FFFFFF;
 	background-image: url(../images/progress.gif);
 	background-repeat: no-repeat;
 	background-position: center;

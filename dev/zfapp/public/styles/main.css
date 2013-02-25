@@ -74,11 +74,6 @@ select {
 #headerImg {
 	margin: 0px 8px;
 	position: relative;
-	background: url("../images/sites/default/header.jpg") no-repeat; 
-}
-
-#headerImg #spacer {
-	height: 220px;
 }
 
 #header {
@@ -157,10 +152,10 @@ select {
 	border-radius: 0px 4px 4px 0px; 
 	box-shadow: 2px 2px 4px #5C88A1; 
 	float: left; 
-
+	font-weight: bold;
 	margin: 0px 1px 0px -3px; 
-	padding: 0px 3px 0px 2px; 
-
+	padding: 0px 3px 3px 2px; 
+	font-size: 1em;
 	cursor: pointer;
 	color: #FFFFFF;
 }
@@ -320,9 +315,6 @@ select {
 		height: 33px; 
 		font-size: 1em; 
 		line-height: 34px; 
-	}
-	#headerImg #spacer {
-		display:none;
 	}
 }
 
