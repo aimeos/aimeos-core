@@ -41,7 +41,7 @@ $sites = $this->sites();
 						$extraHeaderImgAttrs = 'style="background-image:url(' . $this->pathstart . '/' . $headerImage .')" class="display"';
 					}
 					?>
-					<div id="headerImg" <?php echo $extraHeaderImgAttrs; ?>>
+					<div id="headerImg" <?php echo $extraHeaderImgAttrs; ?> >
 						<div id="header">
 							<div id="headerLogo">
 								<a href="<?php echo $this->url( array( 'site' => $this->params['site'] ), 'routeMin', true ); ?>">
@@ -79,6 +79,7 @@ $sites = $this->sites();
 								?>
 							</div>
 						</div>
+						<div id="headerImgLink">&nbsp;</div>
 						<div id="content" class="clearfix">
 							<?php if( isset( $this->filter ) ) : ?>
 							<div id="contentLeft">

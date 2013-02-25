@@ -72,8 +72,21 @@ select {
 
 /* ----- Header ----- */
 #headerImg {
-	margin: 0px 8px;
-	position: relative;
+	background-repeat: no-repeat;
+}
+
+#headerImg.display {
+	margin: 0 8px;
+}
+
+#headerImg #headerImgLink {
+    display: none;
+    height: 230px;
+    width: 100%;
+}
+
+#headerImg.display #headerImgLink {
+    display: block;
 }
 
 #header {
