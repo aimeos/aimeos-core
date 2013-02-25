@@ -8,7 +8,7 @@
 	height: 25px;
 	margin: 0px 0px 0px 10px;
 	padding: 4px 4px 4px 4px;
-	background: url(../images/buttonfond.gif) repeat-x;
+	background: url(images/buttonfond.gif) repeat-x;
 	border: 1px solid #689DB9;
 	box-shadow: 2px 2px 4px #5C88A1;
 	color: #FFFFFF;
@@ -23,7 +23,7 @@
 	height: 25px;
 	margin: 0px;
 	padding: 3px 4px 4px 4px;
-	background: url(../images/buttonfond.gif) repeat-x;
+	background: url(images/buttonfond.gif) repeat-x;
 	border: 1px solid #689DB9;
 	box-shadow: 2px 2px 4px #5C88A1;
 	color: #FFFFFF;
@@ -37,7 +37,7 @@
 .arcavias .minibutton {
 	padding: 3px 6px;
 	margin: 0px 3px 0px 3px;
-	background: url(../images/buttonfond.gif) repeat-x #6C9BB4;
+	background: url(images/buttonfond.gif) repeat-x #6C9BB4;
 	border: 1px solid #689DB9;
 	box-shadow: 2px 2px 4px #5C88A1;
 	color: #FFFFFF;
@@ -64,7 +64,7 @@
 
 /* Catalog filter */
 .catalog-filter button {
-	display: none;
+	display: none !important;
 }
 
 /* Catalog filter, tree section */
@@ -245,7 +245,7 @@
 	height: 240px;
 	width: 180px;
 	background-color: #FFFFFF;
-	background-image: url(../images/arcavias.gif);
+	background-image: url(images/arcavias.gif);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -255,7 +255,7 @@
 
 .catalog-list-items .media-item {
 	background-color: #FFFFFF;
-	background-image: url(../images/progress.gif);
+	background-image: url(images/progress.gif);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -309,7 +309,7 @@
 }
 
 .catalog-detail-image .image-single {
-	background-image: url(../images/arcavias.gif);
+	background-image: url(images/arcavias.gif);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -359,31 +359,42 @@
 	opacity: 1;
 }
 
-.catalog-detail-image #prev-image,
-.catalog-detail-image #next-image {
-	width: 40px;
-	height: 320px;
+.catalog-detail-image #prev-image {
+	width: 30px;
+	height: 175px;
+	margin: 145px 0px 0px 10px;
 	position: absolute;
+	background: url(images/arrow_big_left.png) no-repeat;
 	z-index: 2;
 }
 
 .catalog-detail-image #next-image {
+	width: 30px;
+	height: 175px;
+	margin: 145px 0px 0px 10px;
 	left: 200px;
-}
-
-.catalog-detail-image #prev-thumbs,
-.catalog-detail-image #next-thumbs {
-	width: 20px;
-	height: 80px;
+	position: absolute;
+	background: url(images/arrow_big_right.png) no-repeat;
 	z-index: 2;
 }
 
 .catalog-detail-image #prev-thumbs {
+	width: 10px;
+	height: 45px;
 	float: left;
+	margin: 35px 5px 0px 5px;
+	margin: 35px 5px 0px 5px;
+	background: url(images/arrow_small_left.png) no-repeat; 
+	z-index: 2;
 }
 
 .catalog-detail-image #next-thumbs {
+	width: 10px;
+	height: 45px;
 	float: right;
+	margin: 35px 5px 0px 5px;
+	background: url(images/arrow_small_right.png) no-repeat; 
+	z-index: 2;
 }
 
 .catalog-detail-image #prev-image.disabled,
@@ -449,7 +460,7 @@
 
 .group .standardbutton {
 	padding: 4px 4px 4px 4px;
-	background: url(../images/buttonfond.gif) repeat-x;
+	background: url(images/buttonfond.gif) repeat-x;
 	border: 1px solid #689DB9;
 	box-shadow: 2px 2px 4px #5C88A1;
 	color: #FFFFFF;
