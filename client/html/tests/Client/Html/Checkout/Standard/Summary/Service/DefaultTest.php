@@ -74,7 +74,7 @@ class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends MW_Unitt
 
 		$attributes = array(
 			'payment.directdebit.accountowner' => 'test user',
-			'payment.directdebit.accountnumber' => '1234567890',
+			'payment.directdebit.accountno' => '1234567890',
 			'payment.directdebit.bankcode' => '10305070',
 			'payment.directdebit.bankname' => 'test credit institute',
 		);

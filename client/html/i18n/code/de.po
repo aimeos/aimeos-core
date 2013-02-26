@@ -96,7 +96,7 @@ msgstr "Zurück gesendet"
 msgid "payment.directdebit.accountowner"
 msgstr "Kontoinhaber"
 
-msgid "payment.directdebit.accountnumber"
+msgid "payment.directdebit.accountno"
 msgstr "Kontonummer"
 
 msgid "payment.directdebit.bankcode"
