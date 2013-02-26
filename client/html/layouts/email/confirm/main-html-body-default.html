@@ -17,11 +17,23 @@ else
 }
 
 ?>
-<?php echo "\r\n"; ?>
+<?php if( $this->config( 'client/html/email/confirm/main/html/encoded', true ) == true ) : ?>
+<?php	echo "\r\n"; ?>
 --<?php echo $this->get( 'mainBoundary' ) . "\r\n"; ?>
 Content-Type: text/html; charset=UTF-8<?php echo "\r\n"; ?>
 Content-Transfer-Encoding: <?php echo $encoding . "\r\n"; ?>
-<?php echo "\r\n"; ?>
-<?php echo $encode( '<html><body>' ) . "\r\n"; ?>
-<?php echo wordwrap( $encode( $this->get( 'htmlBody' ) ), 76, "\r\n" ) . "\r\n"; ?>
-<?php echo $encode( '</body></html>' ) . "\r\n"; ?>
+<?php	echo "\r\n"; ?>
+<?php	echo $encode( '<html><body>' ) . "\r\n"; ?>
+<?php	echo wordwrap( $encode( $this->get( 'htmlBody' ) ), 76, "\r\n" ) . "\r\n"; ?>
+<?php	echo $encode( '</body></html>' ) . "\r\n"; ?>
+<?php else : ?>
+<?php	echo '<html>
+	<head>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+' . $this->get( 'htmlBody' ) . '
+	</body>
+</html>'; ?>
+<?php endif; ?>

@@ -71,6 +71,22 @@ class Client_Html_Email_Confirm_Main_Html_DefaultTest extends MW_Unittest_Testca
 	}
 
 
+	public function testGetBodyPlain()
+	{
+		$settings = array( 'client' => array( 'html' => array(
+			'email' => array( 'confirm' => array( 'main' => array( 'html' => array( 'encoded' => false ) ) ) )
+		) ) );
+
+		$view = $this->_getView();
+		$helper = new MW_View_Helper_Config_Default( $view, new MW_Config_Array( $settings, array() ) );
+		$view->addHelper( 'config', $helper );
+		$this->_object->setView( $view );
+
+		$output = $this->_object->getBody();
+		$this->assertStringStartsWith( "<html>\n	<head>\n		<style type=\"text/css\">", $output );
+	}
+
+
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
