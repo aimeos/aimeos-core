@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core 2013-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-22 01:03+0100\n"
+"POT-Creation-Date: 2013-02-26 15:44+0100\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language: English\n"
@@ -41,6 +41,11 @@ msgstr ""
 #: layouts/catalog/list/pagination-body-default.html:40
 #, php-format
 msgid "Page %1$d of %2$d"
+msgstr ""
+
+#: layouts/catalog/list/header-default.html:21
+#, php-format
+msgid "Result for \"%1$s\""
 msgstr ""
 
 #: layouts/catalog/list/items-body-default.html:13
