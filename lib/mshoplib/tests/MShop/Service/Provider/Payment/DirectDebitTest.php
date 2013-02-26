@@ -99,7 +99,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 		$config = $this->_object->getConfigFE( $basket );
 
 		$this->assertArrayHasKey( 'payment.directdebit.accountowner', $config );
-		$this->assertArrayHasKey( 'payment.directdebit.accountnumber', $config );
+		$this->assertArrayHasKey( 'payment.directdebit.accountno', $config );
 		$this->assertArrayHasKey( 'payment.directdebit.bankcode', $config );
 		$this->assertArrayHasKey( 'payment.directdebit.bankname', $config );
 		$this->assertEquals( 'Our Unittest', $config['payment.directdebit.accountowner']->getDefault() );
@@ -110,7 +110,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 	{
 		$config = array(
 			'payment.directdebit.accountowner' => 'test user',
-			'payment.directdebit.accountnumber' => '123456789',
+			'payment.directdebit.accountno' => '123456789',
 			'payment.directdebit.bankcode' => '1000000',
 			'payment.directdebit.bankname' => 'Federal reserve',
 		);
@@ -119,7 +119,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 
 		$expected = array(
 			'payment.directdebit.accountowner' => null,
-			'payment.directdebit.accountnumber' => null,
+			'payment.directdebit.accountno' => null,
 			'payment.directdebit.bankcode' => null,
 			'payment.directdebit.bankname' => null,
 		);
@@ -132,7 +132,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 	{
 		$config = array(
 			'payment.directdebit.accountowner' => 123,
-			'payment.directdebit.accountnumber' => 0.1,
+			'payment.directdebit.accountno' => 0.1,
 			'payment.directdebit.bankcode' => '1000000',
 			'payment.directdebit.bankname' => 'Federal reserve',
 		);
@@ -140,10 +140,10 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 		$result = $this->_object->checkConfigFE( $config );
 
 		$this->assertArrayHasKey( 'payment.directdebit.accountowner', $result );
-		$this->assertArrayHasKey( 'payment.directdebit.accountnumber', $result );
+		$this->assertArrayHasKey( 'payment.directdebit.accountno', $result );
 
 		$this->assertFalse( $result['payment.directdebit.accountowner'] === null );
-		$this->assertFalse( $result['payment.directdebit.accountnumber'] === null );
+		$this->assertFalse( $result['payment.directdebit.accountno'] === null );
 		$this->assertTrue( $result['payment.directdebit.bankcode'] === null );
 		$this->assertTrue( $result['payment.directdebit.bankname'] === null );
 	}

@@ -76,7 +76,7 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<section class="checkout-standard-payment">', $output );
 		$this->assertRegExp( '#<li class="form-item payment.directdebit.accountowner mandatory">#smU', $output );
-		$this->assertRegExp( '#<li class="form-item payment.directdebit.accountnumber mandatory">#smU', $output );
+		$this->assertRegExp( '#<li class="form-item payment.directdebit.accountno mandatory">#smU', $output );
 		$this->assertRegExp( '#<li class="form-item payment.directdebit.bankcode mandatory">#smU', $output );
 		$this->assertRegExp( '#<li class="form-item payment.directdebit.bankname mandatory">#smU', $output );
 

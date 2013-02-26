@@ -28,9 +28,9 @@ implements MShop_Service_Provider_Payment_Interface
 			'default'=> '',
 			'required'=> true
 		),
-		'payment.directdebit.accountnumber' => array(
-			'code' => 'payment.directdebit.accountnumber',
-			'internalcode'=> 'accountnumber',
+		'payment.directdebit.accountno' => array(
+			'code' => 'payment.directdebit.accountno',
+			'internalcode'=> 'accountno',
 			'label'=> 'Account number',
 			'type'=> 'string',
 			'internaltype'=> 'string',

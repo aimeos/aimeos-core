@@ -95,7 +95,7 @@ msgstr "returned"
 msgid "payment.directdebit.accountowner"
 msgstr "Account owner"
 
-msgid "payment.directdebit.accountnumber"
+msgid "payment.directdebit.accountno"
 msgstr "Account number"
 
 msgid "payment.directdebit.bankcode"

@@ -67,7 +67,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 <?php 	foreach( $this->confirmOrderBaseItem->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
-						<img src="<?php echo $product->getMediaUrl(); ?>" />
+						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $product->getMediaUrl(); ?>" />
 						<span class="product-name"><?php echo $product->getName(); ?></span>
 <?php		foreach( $product->getAttributes() as $attribute ) : ?>
 						<span class="product-attributename"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>

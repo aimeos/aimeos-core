@@ -16,7 +16,7 @@
 		<div class="item">
 			<div class="item-icons">
 <?php	if( $service->getMediaUrl() != '' ) : ?>
-				<img src="<?php echo $service->getMediaUrl(); ?>" />
+				<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $service->getMediaUrl(); ?>" />
 <?php	endif; ?>
 			</div>
 			<h4><?php echo $service->getName(); ?></h4>
