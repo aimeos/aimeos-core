@@ -333,10 +333,17 @@ select {
 		font-size: 1em; 
 		line-height: 34px; 
 	}
-	#headerImg.display #headerImgLink {
-		display: none;
+	#headerImg.display #content {
+		margin-top: 0px;
 	}
 }
+
+@media only screen and (max-height: 480px) and (orientation: landscape) {
+	#headerImg.display #content {
+		margin-top: 0px;
+	}
+}
+
 
 @media only screen and (max-width: 425px) and (orientation: portrait) {
 	#headerSearch span {
@@ -353,5 +360,8 @@ select {
 	}
 	#navigationMenue a:last-child {
 		border-radius: 0px;
+	}
+	#headerSearch input {
+		width: 130px;
 	}
 }

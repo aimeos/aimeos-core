@@ -230,7 +230,6 @@
 
 .catalog-list-items .single {
 	display: inline-block;
-	height: 355px;
 	width: 180px;
 	position: relative;
 	overflow: hidden;
@@ -267,7 +266,7 @@
 
 /* text list */
 .catalog-list-items .text-list {
-	height: 85px;
+	height: 5.3125em;
 	padding: 3px 5px 3px 5px;
 	text-align: left;
 	overflow: hidden;
@@ -280,6 +279,7 @@
 	padding: 5px 5px 5px 5px;
 	font-weight: bold;
 	color: #004266;
+	height: 0.9375em;
 }
 
 .catalog-list-items .price-item {
