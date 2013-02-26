@@ -12,6 +12,12 @@ if( isset( $this->detailProductItem ) ) {
 	$mediaItems = array();
 }
 
+$detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
+$detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+$detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
+
+$url = $this->url( $detailTarget, $detailController, $detailAction, $this->get( 'detailParams', array() ) );
+
 ?>
 <div class="catalog-detail-image">
 	<div class="image-single">
@@ -31,7 +37,7 @@ if( isset( $this->detailProductItem ) ) {
 	$class = 'item selected';
 	foreach( $mediaItems as $id => $mediaItem )
 	{
-		printf( '<a href="#image-%1$s" class="%2$s" style="background-image: url(\'%3$s\')"></a>', $id, $class, $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() );
+		printf( '<a href="%1$s#image-%2$s" class="%3$s" style="background-image: url(\'%4$s\')"></a>', $url, $id, $class, $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() );
 		$class = 'item';
 	}
 ?>
