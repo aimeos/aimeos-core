@@ -15,7 +15,7 @@ $sites = $this->sites();
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5" />
 		<link href="<?php echo $this->pathstart;?>/styles/main.css" type="text/css" rel="stylesheet" media="screen" />
-		<link href="<?php echo $this->pathstart;?>/styles/arcavias.css" type="text/css" rel="stylesheet" media="screen" />
+		<link href="<?php echo $this->pathstart;?>/../../../client/html/lib/css/arcavias.css" type="text/css" rel="stylesheet" media="screen" />
 		<script type="text/javascript" src="<?php echo $this->pathstart;?>/js/jquery.js"></script>
 		<!--[if lt IE 8]>
 			<link href="<?php echo $this->pathstart;?>/styles/ie.css" type="text/css" rel="stylesheet" />
@@ -41,7 +41,7 @@ $sites = $this->sites();
 						$extraHeaderImgAttrs = 'style="background-image:url(' . $this->pathstart . '/' . $headerImage .')" class="display"';
 					}
 					?>
-					<div id="headerImg" <?php echo $extraHeaderImgAttrs; ?>>
+					<div id="headerImg" <?php echo $extraHeaderImgAttrs; ?> >
 						<div id="header">
 							<div id="headerLogo">
 								<a href="<?php echo $this->url( array( 'site' => $this->params['site'] ), 'routeMin', true ); ?>">
@@ -79,7 +79,6 @@ $sites = $this->sites();
 								?>
 							</div>
 						</div>
-						<div id="spacer">&nbsp;</div>
 						<div id="content" class="clearfix">
 							<?php if( isset( $this->filter ) ) : ?>
 							<div id="contentLeft">

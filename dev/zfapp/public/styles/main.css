@@ -72,13 +72,8 @@ select {
 
 /* ----- Header ----- */
 #headerImg {
-	margin: 0px 8px;
-	position: relative;
-	background: url("../images/sites/default/header.jpg") no-repeat; 
-}
-
-#headerImg #spacer {
-	height: 220px;
+	background-repeat: no-repeat;
+	margin: 0 8px;
 }
 
 #header {
@@ -126,11 +121,11 @@ select {
 
 #headerSearch input {
 	width: 150px; 
+	height: 15px;
 	background-color: #FFFFFF; 
 	border-left: 0px none; 
 	border: 1px solid #689DB9; 
 	float: left;
-
 	padding: 4px 3px 3px;
 	font-size: 1em;
 }
@@ -157,10 +152,10 @@ select {
 	border-radius: 0px 4px 4px 0px; 
 	box-shadow: 2px 2px 4px #5C88A1; 
 	float: left; 
-
+	font-weight: bold;
 	margin: 0px 1px 0px -3px; 
-	padding: 0px 3px 0px 2px; 
-
+	padding: 0px 3px 3px 2px; 
+	font-size: 1em;
 	cursor: pointer;
 	color: #FFFFFF;
 }
@@ -178,7 +173,7 @@ select {
 	text-align: center;
 }
 #headerBasket .basket-mini-main{
-	padding: 0px 0px 5px 0px;
+	margin: 0px 3px 6px 3px;
 }
 
 /* ----- Navigation ----- */
@@ -192,10 +187,24 @@ select {
 	padding: 0px 0px 10px 0px;
 }
 
+#navigationMenue .catalog-filter-tree {
+	margin: 0px 15px 0px 8px;
+}
+
+#navigationMenue .catalog-filter-tree ul{
+	display: inline;
+}
+
+#navigationMenue .catalog-filter-tree ul li {
+	display: inline;
+	margin: 0px -3px 0px 0px;
+}
+
 #navigationMenue a {
 	height: 43px; 
 	padding: 0px 14px 0px 15px; 
 	margin: 0px -3px 0px 0px;
+	border: medium none;
 	background:url(../images/mainnavigationBackground.jpg) repeat-x; 
 	color: #FFFFFF; 
 	display: inline-block; 
@@ -203,7 +212,6 @@ select {
 	font-size: 1.5em; 
 	line-height: 44px; 
 	text-transform: uppercase; 
-	text-decoration: none;
 }
 
 #navigationMenue a:first-child {
@@ -230,6 +238,10 @@ select {
 	border-radius: 15px 15px 0 0;
 }
 
+#headerImg.display #content {
+	margin-top: 230px;
+}
+
 #contentLeft {
 	min-width: 17%; 
 	float: left; 
@@ -238,9 +250,9 @@ select {
 }
 
 #contentRight {
-	width: 79%; 
+	width: 77%; 
 	float: left; 
-	padding: 0 1.6% 0 0;
+	padding: 0 1.6% 0 1.2%;
 	background: #FFFFFF;
 }
 
@@ -292,14 +304,14 @@ select {
 }
 
 /*----- Media Queries -----*/
-@media only screen and (min-device-width: 620px) and (max-width: 768px) {
+@media only screen and (min-device-width: 600px) and (max-width: 680px) {
 	#headerLogo img {
 		max-width: 100%;
 		height: auto;
 	}
 }
 
-@media only screen and (max-width: 620px) and (orientation: portrait) {
+@media only screen and (max-width: 600px) and (orientation: portrait) {
 	#headerLogo {
 		display: none;
 	}
@@ -321,62 +333,19 @@ select {
 		font-size: 1em; 
 		line-height: 34px; 
 	}
-	#headerImg #spacer {
-		display:none;
+	#headerImg.display #content {
+		margin-top: 0px;
 	}
 }
 
-/*----- Media Queries -----*/
-/*
-
-@media only screen and (max-width: 525px) and (orientation: portrait) {
-	#headerSearch input {
-		width: 130px;
-	}
-	#navigationMenue a {
-		height: 33px; 
-		font-size: 1em; 
-		line-height: 34px; 
+@media only screen and (max-height: 480px) and (orientation: landscape) {
+	#headerImg.display #content {
+		margin-top: 0px;
 	}
 }
 
-@media only screen and (max-width: 500px) and (orientation: portrait) {
-	#headerImg #spacer {
-		display:none;
-	}
-}
 
-@media only screen and (max-height: 500px) and (orientation: landscape) {
-	#headerImg #spacer {
-		display:none;
-	}
-	#headerLogo {
-		display: none;
-	}
-	#navigationMenue a {
-		height: 30px; 
-		font-size: 1em; 
-		line-height: 31px; 
-	}
-	#navigationMenue a:first-child {
-		border-radius: 0px;
-	}
-	#navigationMenue a:last-child {
-		border-radius: 0px;
-	}
-		#headerMiddle {
-		width: 65%;
-}
-	#headerBasket .basket-mini{
-		width: 28%;
-		margin: 0 3%;
-	}
-	#headerSearch {
-		padding: 5px 0 0;
-	}
-}
-
-@media only screen and (max-width: 400px) and (orientation: portrait) {
+@media only screen and (max-width: 425px) and (orientation: portrait) {
 	#headerSearch span {
 		display: none;
 	}
@@ -385,37 +354,14 @@ select {
 	}
 }
 
-@media only screen and (max-width: 360px) and (orientation: portrait) {
-	#headerImg {
-		background: none;
-		margin: 0px;
-	}
-	#main {
-		background: none;
-	}
-	#mainBg {
-		background: none;
-	}
-	#header {
-		border-radius: 0px;
-		box-shadow: 0 2px 4px -1px #679CB8;
-		margin: 0px;
-	}
-	#navigationMenue a {
-		height: 30px; 
-		font-size: 1em; 
-		line-height: 31px; 
-	}
+@media only screen and (max-width: 345px) and (orientation: portrait) {
 	#navigationMenue a:first-child {
 		border-radius: 0px;
 	}
 	#navigationMenue a:last-child {
 		border-radius: 0px;
 	}
-	#footerTop {
-		display: none;
+	#headerSearch input {
+		width: 130px;
 	}
-	#frame {
-		min-width: 310px;
-	}
-}*/
+}
