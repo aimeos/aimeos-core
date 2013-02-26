@@ -111,7 +111,7 @@ class MShop_Catalog_Manager_Index_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$list = $this->_productManager->getSearchAttributes( false );
+		$list = $this->_productManager->getSearchAttributes( $withsub );
 
 		foreach( $this->_submanagers as $submanager ) {
 			$list = array_merge( $list, $submanager->getSearchAttributes( $withsub ) );
