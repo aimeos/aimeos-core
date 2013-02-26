@@ -36,13 +36,12 @@
 
 .arcavias .minibutton {
 	padding: 3px 6px;
-	margin: 0px 3px 0px 3px;
+	margin: 0px 3px 3px 3px;
 	background: url(images/buttonfond.gif) repeat-x #6C9BB4;
 	border: 1px solid #689DB9;
 	box-shadow: 2px 2px 4px #5C88A1;
 	color: #FFFFFF;
 	border-radius: 4px 4px 4px 4px;
-	text-decoration: none;
 	display: inline-block;
 	font-weight: bold;
 }
@@ -91,7 +90,6 @@
 /* Hide all list blocks of the sub-levels. The active ones will be enabled by the interal style sheet */
 .catalog-filter-tree .level-0 li a {
 	text-transform: uppercase;
-	font-weight: bold;
 	font-size: 1em;
 	color: #004266;
 }
@@ -130,6 +128,11 @@
 	font-weight: bold;
 }
 
+/* Product list, stage image section */
+.catalog-list-stage {
+	display: none;
+}
+
 /* Product list, breadcrumb section */
 .catalog-list-breadcrumb {
 	padding: 0px 0px 10px 0px;
@@ -159,10 +162,6 @@
 
 .catalog-list-breadcrumb li:last-child:after {
 	content: '';
-}
-
-.catalog-list-breadcrumb a {
-	text-decoration: none;
 }
 
 /* Product list */
@@ -519,10 +518,6 @@
 	max-width: 920px;
 	margin: 0 auto;
 }
-
- .basket-standard h1 {
-	padding: 0px 0px 20px 0px;
- }
 
 .basket-standard .error-list {
 	margin: 0px 0px 20px 0px;

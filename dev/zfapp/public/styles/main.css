@@ -73,20 +73,7 @@ select {
 /* ----- Header ----- */
 #headerImg {
 	background-repeat: no-repeat;
-}
-
-#headerImg.display {
 	margin: 0 8px;
-}
-
-#headerImg #headerImgLink {
-    display: none;
-    height: 230px;
-    width: 100%;
-}
-
-#headerImg.display #headerImgLink {
-    display: block;
 }
 
 #header {
@@ -186,8 +173,7 @@ select {
 	text-align: center;
 }
 #headerBasket .basket-mini-main{
-	padding: 0px 0px 5px 0px;
-	margin: 0px 3px 0px 3px;
+	margin: 0px 3px 6px 3px;
 }
 
 /* ----- Navigation ----- */
@@ -216,7 +202,7 @@ select {
 
 #navigationMenue a {
 	height: 43px; 
-	padding: 0px 14px 0px 15px; 	
+	padding: 0px 14px 0px 15px; 
 	margin: 0px -3px 0px 0px;
 	border: medium none;
 	background:url(../images/mainnavigationBackground.jpg) repeat-x; 
@@ -226,7 +212,6 @@ select {
 	font-size: 1.5em; 
 	line-height: 44px; 
 	text-transform: uppercase; 
-	text-decoration: none;
 }
 
 #navigationMenue a:first-child {
@@ -251,6 +236,10 @@ select {
 	margin: 0px 8px 0px 8px;
 	background-color: #FFFFFF;
 	border-radius: 15px 15px 0 0;
+}
+
+#headerImg.display #content {
+	margin-top: 230px;
 }
 
 #contentLeft {
@@ -343,6 +332,9 @@ select {
 		height: 33px; 
 		font-size: 1em; 
 		line-height: 34px; 
+	}
+	#headerImg.display #headerImgLink {
+		display: none;
 	}
 }
 
