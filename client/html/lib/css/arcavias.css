@@ -681,9 +681,6 @@
 .checkout-confirm .error-list {
 	padding: 5px;
 	margin: 0px 0px 20px 15px;
-	list-style: none;
-	background-color: #ffeeee;
-	border: solid 1px #FF3300;
 }
 
 .checkout-standard .steps {
@@ -722,10 +719,6 @@
 .checkout-standard .step:before {
 	content: counter(step) ". ";
 	counter-increment: step;
-}
-
-.checkout-standard li {
-	list-style: none;
 }
 
 .checkout-standard .form-list .mandatory label {
