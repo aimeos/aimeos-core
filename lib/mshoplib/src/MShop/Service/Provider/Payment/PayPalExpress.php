@@ -181,7 +181,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$params = array ( 'TOKEN' => $rvals['TOKEN'] );
 		$this->_saveAttributes( $params, $orderBaseItem->getService('payment') );
 
-		return new MShop_Common_Item_Helper_Form_Default( $this->_config['PaypalUrl'], 'GET', $params );
+		return new MShop_Common_Item_Helper_Form_Default( $this->_config['PaypalUrl'] . $rvals['TOKEN'], 'GET', array() );
 	}
 
 
@@ -551,13 +551,23 @@ implements MShop_Service_Provider_Payment_Interface
 		}
 		catch( Exception $e ) { ; }
 
-
+		$lastPos = 0;
 		foreach( $orderBase->getProducts() as $product )
 		{
 			$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $product->getPosition() ] = $product->getId();
 			$values[ 'L_PAYMENTREQUEST_0_NAME' . $product->getPosition() ] = $product->getName();
 			$values[ 'L_PAYMENTREQUEST_0_QTY' . $product->getPosition() ] = $product->getQuantity();
 			$values[ 'L_PAYMENTREQUEST_0_AMT' . $product->getPosition() ] = $product->getPrice()->getValue();
+			$lastPos = $product->getPosition();
+		}
+
+		foreach( $orderBase->getServices() as $service )
+		{
+			$lastPos++;
+			$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $lastPos ] = $service->getId();
+			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $service->getName();
+			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
+			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $service->getPrice()->getValue();
 		}
 
 

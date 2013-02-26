@@ -148,9 +148,9 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		}
 
 		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $helperForm );
-		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=', $helperForm->getUrl() );
+		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=UT-99999999', $helperForm->getUrl() );
 		$this->assertEquals( 'GET', $helperForm->getMethod() );
-		$this->assertEquals( $values, $helperForm->getValues() );
+		$this->assertEquals( array(), $helperForm->getValues() );
 
 		foreach( $testData AS $key => $value ) {
 			$this->assertEquals( $attributeList[ $key ]->getValue(), $testData[ $key ] );
