@@ -8,9 +8,9 @@
 
 define( 'ZFAPP_ROOT', dirname( dirname( __FILE__ ) ) );
 define( 'APPLICATION_PATH', ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'application' );
-define( 'APPLICATION_ENV', 'development' ); // development | production
+define( 'APPLICATION_ENV', 'production' ); // development | production
 
-if ( APPLICATION_ENV == 'development' ) {
+if ( APPLICATION_ENV == 'production' ) {
 	error_reporting( -1 );
 	ini_set( 'display_errors', true );
 }
