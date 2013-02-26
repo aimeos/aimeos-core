@@ -63,7 +63,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         
         // the image container
         // NOTE: this will atm. always be the default image for the first few miliseconds
-        this.imageCt = Ext.DomHelper.insertFirst(this.buttonCt, '<img class="' + this.cls + '" src="' + this.imageSrc + '"/>' , true);
+        this.imageCt = Ext.DomHelper.insertFirst(this.buttonCt, '<img class="' + this.cls + '" src="' + MShop.config.baseurl.content + '/' + this.imageSrc + '"/>' , true);
         this.imageCt.setOpacity(0.2);
         this.imageCt.setStyle({
             position: 'absolute',
@@ -159,7 +159,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         // only update when new image differs from current
         if(this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
             var ct = this.imageCt.up('div');
-            var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + this.imageSrc + '"/>' , true);
+            var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.config.baseurl.content + this.imageSrc + '"/>' , true);
             // replace image after load
             img.on('load', function(){
                 this.imageCt.remove();
