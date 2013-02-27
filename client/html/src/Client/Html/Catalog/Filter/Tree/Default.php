@@ -121,9 +121,9 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 			$startid = $view->config( 'client/html/catalog/filter/tree/startid' );
 			if( ( $current = $view->param( 'f-catalog-id' ) ) != '' && ctype_digit( $current ) ) {
-				$startid = $current;
+				$current = $startid;
 			}
-			$catItems = $manager->getPath( $startid );
+			$catItems = $manager->getPath( $current );
 
 			$ref = array( 'text', 'media', 'attribute' );
 			$level = MW_Tree_Manager_Abstract::LEVEL_TREE;
