@@ -203,7 +203,9 @@ class Client_Html_Catalog_List_Default
 			$size = (int) $view->param( 'l-size', $defaultPageSize );
 			$sortation = (string) $view->param( 'l-sort', 'position' );
 			$text = (string) $view->param( 'f-search-text' );
-			$catid = $view->param( 'f-catalog-id' );
+			if( $view->param( 'f-catalog-id' ) != '' && ctype_digit( $view->param( 'f-catalog-id' ) ) ) {
+				$catid = $view->param( 'f-catalog-id' );
+			}
 
 			$page = ( $page < 1 ? 1 : $page );
 			$size = ( $size < 1 || $size > 100 ? $defaultPageSize : $size );
