@@ -220,7 +220,7 @@ class Client_Html_Catalog_List_Default
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 
-			if( !empty( $catid ) )
+			if( $catid !== null )
 			{
 				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
 				$view->listCatPath = $catalogManager->getPath( $catid, array( 'text', 'media', 'attribute' ) );
