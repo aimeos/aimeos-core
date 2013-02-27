@@ -327,6 +327,23 @@ select {
 	}
 }
 
+@media only screen and (max-width: 600px) and (orientation: landscape) {
+	#headerLogo {
+		display: none;
+	}
+	#headerMiddle {
+		width: 65%;
+}
+	#headerBasket .basket-mini{
+		width: 28%;
+		margin: 0 3%;
+	}
+	#headerSearch {
+		padding: 5px 0 0;
+	}
+}
+
+
 @media only screen and (max-width: 480px) and (orientation: portrait) {
 	#navigationMenue a {
 		height: 33px; 
@@ -344,8 +361,16 @@ select {
 	}
 }
 
-
 @media only screen and (max-width: 425px) and (orientation: portrait) {
+	#headerSearch span {
+		display: none;
+	}
+	#headerSearch input {
+		border-left: 1px solid #689DB9;
+	}
+}
+
+@media only screen and (max-width: 425px) and (orientation: landscape) {
 	#headerSearch span {
 		display: none;
 	}
