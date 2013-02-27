@@ -66,7 +66,7 @@ class MW_Setup_Task_OrderDropBaseAttrIndex extends MW_Setup_Task_Abstract
 		{
 			foreach( $stmts as $index => $stmt )
 			{
-				$this->_msg( sprintf( 'Checking index "%1$s" in table "%2$s"', $index, $table ), 1 );
+				$this->_msg( sprintf( 'Checking index "%1$s"', $index ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
 					&& $this->_schema->indexExists( $table, $index ) === true )
