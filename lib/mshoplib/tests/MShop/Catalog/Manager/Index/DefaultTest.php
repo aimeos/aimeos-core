@@ -766,7 +766,12 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$subIndex = $this->_object->getSubManager( $domain );
 		$search = $subIndex->createSearch();
 
-		$search->setConditions( $search->compare( '!=', $key, null ) );
+		$expr = array(
+			$search->compare( '!=', $key, null ),
+			$search->compare( '==', 'product.editor', $this->_editor )
+		);
+
+		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $subIndex->searchItems( $search );
 	}
