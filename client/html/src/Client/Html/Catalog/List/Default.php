@@ -204,6 +204,9 @@ class Client_Html_Catalog_List_Default
 			$sortation = (string) $view->param( 'l-sort', 'position' );
 			$text = (string) $view->param( 'f-search-text' );
 			$catid = $view->param( 'f-catalog-id' );
+			if( $catid == '' || !ctype_digit( $catid ) ) {
+				$catid = null;
+			}
 
 			$page = ( $page < 1 ? 1 : $page );
 			$size = ( $size < 1 || $size > 100 ? $defaultPageSize : $size );
@@ -218,7 +221,7 @@ class Client_Html_Catalog_List_Default
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 
-			if( !empty( $catid ) )
+			if( $catid !== null )
 			{
 				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
 				$view->listCatPath = $catalogManager->getPath( $catid, array( 'text', 'media', 'attribute' ) );
