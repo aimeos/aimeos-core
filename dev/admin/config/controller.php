@@ -18,7 +18,7 @@ return array(
 				 * Base directory to the document root of the website
 				 * Must be absolute by beginning with /
 				 */
-				'basedir' => dirname( dirname( __FILE__ ) ),
+				'basedir' => dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'images',
 
 				/*
 				 * Upload related settings
@@ -29,7 +29,7 @@ return array(
 					 * Media directory where the uploaded files will be stored
 					 * Must be relative to the path in "basedir"
 					 */
-					'directory' => '../images',
+					'directory' => '',
 
 					/*
 					 * Directory permissions (in octal notation)
@@ -52,7 +52,7 @@ return array(
 					 * Directory where icons for the mime types stored
 					 * Must be relative to the path in "basedir"
 					 */
-					'directory' => '../images/mimeicons',
+					'directory' => 'mimeicons',
 
 					/*
 					 * File extension of mime type icons
