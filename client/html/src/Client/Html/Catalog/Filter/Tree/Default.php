@@ -120,7 +120,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 			$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
 
 			$startid = $view->config( 'client/html/catalog/filter/tree/startid' );
-			if( ( $current = $view->param( 'f-catalog-id' ) ) != '' && ctype_digit( $current ) ) {
+			if( ( $current = $view->param( 'f-catalog-id' ) ) == '' || !ctype_digit( $current ) ) {
 				$current = $startid;
 			}
 			$catItems = $manager->getPath( $current );
