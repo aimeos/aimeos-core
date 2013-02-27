@@ -92,6 +92,9 @@ catch( Exception $e )
 
 		MShop.config.smd = <?php echo $smd ?>;
 
+		Ext.ns('MShop.config.baseurl');
+		MShop.config.baseurl.content = '../images';
+
 	</script>
 </head>
 <body>

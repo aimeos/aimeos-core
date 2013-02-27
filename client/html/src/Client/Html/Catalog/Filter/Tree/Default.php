@@ -120,10 +120,12 @@ class Client_Html_Catalog_Filter_Tree_Default
 			$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
 
 			$startid = $view->config( 'client/html/catalog/filter/tree/startid' );
-			if( ( $current = $view->param( 'f-catalog-id' ) ) == '' || !ctype_digit( $current ) ) {
-				$current = $startid;
+			$currentid = $view->param( 'f-catalog-id' );
+
+			if( $currentid == '' || !ctype_digit( $currentid ) ) {
+				$currentid = $startid;
 			}
-			$catItems = $manager->getPath( $current );
+			$catItems = $manager->getPath( $currentid );
 
 			$ref = array( 'text', 'media', 'attribute' );
 			$level = MW_Tree_Manager_Abstract::LEVEL_TREE;

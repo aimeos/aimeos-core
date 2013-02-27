@@ -93,7 +93,7 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertStringStartsWith( '<div class="basket-mini-main">', $output );
 		$this->assertRegExp( '#9#smU', $output );
-		$this->assertRegExp( '#162.00#smU', $output );
+		$this->assertRegExp( '#171.00#smU', $output );
 	}
 
 

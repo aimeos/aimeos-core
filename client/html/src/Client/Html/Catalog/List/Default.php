@@ -204,7 +204,7 @@ class Client_Html_Catalog_List_Default
 			$sortation = (string) $view->param( 'l-sort', 'position' );
 			$text = (string) $view->param( 'f-search-text' );
 			$catid = $view->param( 'f-catalog-id' );
-			if( $view->param( 'f-catalog-id' ) == '' || !ctype_digit( $view->param( 'f-catalog-id' ) ) ) {
+			if( $catid == '' || !ctype_digit( $catid ) ) {
 				$catid = null;
 			}
 
