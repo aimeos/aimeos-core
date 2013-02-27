@@ -13,10 +13,8 @@
 	box-shadow: 2px 2px 4px #5C88A1;
 	color: #FFFFFF;
 	border-radius: 4px 4px 4px 4px;
-	text-decoration: none;
 	font-weight: bold;
 	font-family: Arial, Verdana, Helvetica, sans-serif; 
-	font-size: 1em;
 }
 
 .button-group  button.standardbutton {
@@ -1165,7 +1163,7 @@
 	content: ": ";
 }
 
-@media only screen and (max-width: 600px) and (orientation: portrait) {
+@media only screen and (max-width: 630px) and (orientation: portrait) {
 	.catalog-detail-image {
 		float: none;
 	}
@@ -1177,7 +1175,19 @@
 	}
 }
 
-@media only screen and (max-width: 480px) and (orientation: portrait) {
+@media only screen and (max-width: 630px) and (orientation: landscape) {
+	.catalog-detail-image {
+		float: none;
+	}
+	.catalog-detail-basic {
+		margin: 0px;
+	}
+	.catalog-detail-basket {
+		margin: 0px;
+	}
+}
+
+@media only screen and (max-width: 490px) and (orientation: portrait) {
 	.catalog-list-pagination {
 		text-align: center;
 	}
@@ -1186,3 +1196,30 @@
 	}
 }
 
+@media only screen and (max-width: 490px) and (orientation: landscape) {
+	.catalog-list-pagination {
+		text-align: center;
+	}
+	.catalog-list-pagination .sort {
+		float: none;
+	}
+	.button-group a.standardbutton {
+		font-size: 0.95em;
+		 padding: 5px 4px 4px;
+	}
+}
+
+@media only screen and (max-width: 345px) and (orientation: portrait) {
+	.catalog-detail-image .image-single {
+		width: 200px;
+	}
+	.catalog-detail-image {
+		width: 200px;
+	}
+	.catalog-detail-image #prev-image {
+		display: none !important;
+	}
+		.catalog-detail-image #next-image {
+		display: none !important;
+	}
+}
