@@ -59,7 +59,7 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 	<div class="item-address">
 		<div class="header">
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-delivery-option' ) ); ?>" value="<?php echo $addr->getId(); ?>" <?php echo ( $deliveryOption == $addr->getId() ? 'checked="checked"' : '' ); ?> />
-			<div class="content">
+			<div class="values">
 <?php
 		echo nl2br( str_replace( "\n\n", "\n", sprintf( $this->translate( 'client/html',
 'Deliver to:
@@ -172,19 +172,19 @@ Website: %14$s
 			</li>
 			<li class="form-item email <?php echo ( isset( $deliveryCss['email'] ) ? join( ' ', $deliveryCss['email'] ) : '' ); ?>">
 				<label for="address-delivery-email"><?php echo $this->translate( 'client/html', 'E-Mail' ); ?>
-				</label><input type="email" id="address-delivery-email" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.email' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.email', ( isset( $addrArray['order.base.address.email'] ) ? $addrArray['order.base.address.email'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-email" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.email' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.email', ( isset( $addrArray['order.base.address.email'] ) ? $addrArray['order.base.address.email'] : '' ) ); ?>" />
 			</li>
 			<li class="form-item telephone <?php echo ( isset( $deliveryCss['telephone'] ) ? join( ' ', $deliveryCss['telephone'] ) : '' ); ?>">
 				<label for="address-delivery-telephone"><?php echo $this->translate( 'client/html', 'Telephone' ); ?>
-				</label><input type="tel" id="address-delivery-telephone" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.telephone' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.telephone', ( isset( $addrArray['order.base.address.telephone'] ) ? $addrArray['order.base.address.telephone'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-telephone" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.telephone' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.telephone', ( isset( $addrArray['order.base.address.telephone'] ) ? $addrArray['order.base.address.telephone'] : '' ) ); ?>" />
 			</li>
 			<li class="form-item telefax <?php echo ( isset( $deliveryCss['telefax'] ) ? join( ' ', $deliveryCss['telefax'] ) : '' ); ?>">
 				<label for="address-delivery-telefax"><?php echo $this->translate( 'client/html', 'Fax' ); ?>
-				</label><input type="tel" id="address-delivery-telefax" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.telefax' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.telefax', ( isset( $addrArray['order.base.address.telefax'] ) ? $addrArray['order.base.address.telefax'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-telefax" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.telefax' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.telefax', ( isset( $addrArray['order.base.address.telefax'] ) ? $addrArray['order.base.address.telefax'] : '' ) ); ?>" />
 			</li>
 			<li class="form-item website <?php echo ( isset( $deliveryCss['website'] ) ? join( ' ', $deliveryCss['website'] ) : '' ); ?>">
 				<label for="address-delivery-website"><?php echo $this->translate( 'client/html', 'Web site' ); ?>
-				</label><input type="url" id="address-delivery-website" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.website' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.website', ( isset( $addrArray['order.base.address.website'] ) ? $addrArray['order.base.address.website'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-website" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.website' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.website', ( isset( $addrArray['order.base.address.website'] ) ? $addrArray['order.base.address.website'] : '' ) ); ?>" />
 			</li>
 		</ul>
 	</div>
