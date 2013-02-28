@@ -59,7 +59,7 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 	<div class="item-address">
 		<div class="header">
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-delivery-option' ) ); ?>" value="<?php echo $addr->getId(); ?>" <?php echo ( $deliveryOption == $addr->getId() ? 'checked="checked"' : '' ); ?> />
-			<div class="content">
+			<div class="values">
 <?php
 		echo nl2br( str_replace( "\n\n", "\n", sprintf( $this->translate( 'client/html',
 'Deliver to:
