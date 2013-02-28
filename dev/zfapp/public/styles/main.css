@@ -24,6 +24,7 @@ h1 {
 	margin: 0px;
 	color: #004266;
 	padding: 0px 0px 20px 0px;
+	font-size: 1.5em;
 }
 
 h2, h3, h4 {
@@ -261,6 +262,73 @@ select {
 	margin: 0 2%;
 }
 
+#contentFull ul {
+	padding: 10px 0px 10px 20px;
+}
+
+
+#contentStart {
+	margin: 0 8px;
+	padding: 2px 0px 20px 0px; 
+	background-color: #FFFFFF;
+	border-radius: 15px 15px 0 0;
+}
+
+#headerImg.display #contentStart {
+	margin-top: 230px;
+}
+
+#contentStart h1 {
+	font-style: italic;
+	color: #679CB8;
+	border-bottom: 1px solid #bebebe;
+	padding: 0px 0px 5px 5px;
+}
+
+#contentStart #teaserLeft {
+	width: 538px;
+	float: left;
+	padding: 0px 12px 0px 0px;
+}
+
+#contentStart #teaserLeft img{
+	border-bottom: 1px solid #bebebe;
+}
+
+#contentStart #teaserRight {
+	width: 418px;
+	float: left;
+}
+
+#contentStart #teaserRight img{
+	border-bottom: 1px solid #bebebe;
+}
+
+#contentStart #teaserBottom img{
+	width: 484px;
+	float: left;
+}
+
+#contentStart #teaserBottom img{
+	border-bottom: 1px solid #bebebe;
+}
+
+#contentStart #teaserService h1 {
+	margin: 0px 0px 10px 0px;
+}
+
+#contentStart #teaserService .textTop{
+	width: 200px;
+	padding: 0px 0px 0px 5px;
+	float: left;
+}
+
+#contentStart #teaserService .textBottom{
+	width: 200px;
+	padding: 0px 0px 0px 5px;
+	float: left;
+}
+
 /* ----- Footer -----*/
 #footer {
 	clear: both;
@@ -304,6 +372,17 @@ select {
 }
 
 /*----- Media Queries -----*/
+@media only screen and (min-device-width: 600px) and (max-width: 1020px){
+	#contentStart #teaserLeft img{
+		max-width: 100%;
+		height: auto;
+	}
+	#contentStart #teaserRight img{
+		max-width: 100%;
+		height: auto;
+	}
+}
+
 @media only screen and (min-device-width: 600px) and (max-width: 680px) {
 	#headerLogo img {
 		max-width: 100%;

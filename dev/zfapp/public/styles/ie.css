@@ -10,6 +10,13 @@
     list-style: none !important;
 }
 
+.catalog-list-items .media-list {
+
+}
+
+.catalog-list-items .media-item {
+
+}
 
 /* ----- IE7 ----- */
 *+ html  .checkout-standard-address-billing {
@@ -41,7 +48,7 @@
 
 }
 * #contentLeft {
-    width: 173px;
+	width: 173px;
 	margin: 0px;
 	padding:0px 0px 0px 10px;;
 }
