@@ -53,7 +53,7 @@ foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 	<div class="item-address">
 		<div class="header">
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-billing-option' ) ); ?>" value="<?php echo $this->addressCustomerItem->getId(); ?>" <?php echo ( $billingOption == $this->addressCustomerItem->getId() ? 'checked="checked"' : '' ); ?> />
-			<div class="content">
+			<div class="values">
 <?php
 		$addr = $this->addressCustomerItem->getBillingAddress();
 

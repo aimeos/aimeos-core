@@ -818,7 +818,7 @@
 }
 
 .checkout-standard-address .item-address .values {
-	display: inline;
+	display: inline-block;
 	vertical-align: middle;
 }
 
