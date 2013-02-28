@@ -48,6 +48,10 @@ a:visited {
 	color: #679CB8;
 }
 
+p {
+	padding: 0px 0px 10px 0px;
+}
+
 select {
 	height: 23px; 
 	padding: 1px; 
@@ -266,10 +270,9 @@ select {
 	padding: 10px 0px 10px 20px;
 }
 
-
 #contentStart {
 	margin: 0 8px;
-	padding: 2px 0px 20px 0px; 
+	padding: 0px 0px 20px 0px; 
 	background-color: #FFFFFF;
 	border-radius: 15px 15px 0 0;
 }
@@ -286,26 +289,33 @@ select {
 }
 
 #contentStart #teaserLeft {
-	width: 538px;
+	width: 55.62%;
 	float: left;
-	padding: 0px 12px 0px 0px;
+	padding: 0 1.2% 0 0;
+	margin: 0;
 }
 
-#contentStart #teaserLeft img{
+#contentStart #teaserLeft img {
 	border-bottom: 1px solid #bebebe;
 }
 
 #contentStart #teaserRight {
-	width: 418px;
+	width: 43.18%;
 	float: left;
+	margin: 0;
 }
 
-#contentStart #teaserRight img{
+#contentStart #teaserRight img {
 	border-bottom: 1px solid #bebebe;
 }
 
-#contentStart #teaserBottom img{
-	width: 484px;
+#contentStart #teaserBottomLeft {
+	width: 50%;
+	float: left;
+}
+
+#contentStart #teaserBottomRight {
+	width: 50%;
 	float: left;
 }
 
@@ -315,6 +325,7 @@ select {
 
 #contentStart #teaserService h1 {
 	margin: 0px 0px 10px 0px;
+	padding: 5px 0px 5px 5px;
 }
 
 #contentStart #teaserService .textTop{
@@ -372,12 +383,20 @@ select {
 }
 
 /*----- Media Queries -----*/
-@media only screen and (min-device-width: 600px) and (max-width: 1020px){
+@media only screen and (min-device-width: 270px) and (max-width: 1020px){
 	#contentStart #teaserLeft img{
 		max-width: 100%;
 		height: auto;
 	}
 	#contentStart #teaserRight img{
+		max-width: 100%;
+		height: auto;
+	}
+	#contentStart #teaserBottomLeft img{
+		max-width: 100%;
+		height: auto;
+	}
+	#contentStart #teaserBottomRight img{
 		max-width: 100%;
 		height: auto;
 	}

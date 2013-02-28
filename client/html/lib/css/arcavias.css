@@ -167,6 +167,10 @@
 	outline: none;
 }
 
+.catalog-list-head {
+	padding: 0px 0px 20px 0px;
+}
+
 .catalog-list-head h1 {
 	font-size: 1.5em;
 }
