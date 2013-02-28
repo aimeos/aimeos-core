@@ -177,9 +177,10 @@ class Controller_Frontend_Catalog_Default
 				$sortations[] = $search->sort( $direction, $sortfunc );
 				break;
 
+			case 'position':
 			case 'relevance':
 				$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( $listtype, $langid, $input ) );
-				$sortations[] = $search->sort( $direction, $sortfunc );
+				$sortations[] = $search->sort( ( $direction === '+' ? '-' : '+' ), $sortfunc );
 				break;
 		}
 

@@ -185,7 +185,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 		}
 
 		$this->assertEquals( 'sort:catalog.index.text.relevance("test","de","Espresso")', $item->getName() );
-		$this->assertEquals( '-', $item->getOperator() );
+		$this->assertEquals( '+', $item->getOperator() );
 
 		$this->assertEquals( 1, $filter->getSliceStart() );
 		$this->assertEquals( 2, $filter->getSliceSize() );
