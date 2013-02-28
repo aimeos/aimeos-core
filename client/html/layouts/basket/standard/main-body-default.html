@@ -86,7 +86,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 <?php 	foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
-						<img src="<?php echo $product->getMediaUrl(); ?>" alt="" />
+						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $product->getMediaUrl(); ?>" alt="" />
 						<span class="product-name"><?php echo $product->getName(); ?></span>
 <?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
 						<ul class="attr-list">

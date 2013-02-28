@@ -17,7 +17,7 @@
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="phpcs -n --standard=`pwd`/coding/Metaways src/MW tests/MW"
+		<exec command="phpcs -n --standard=${application.startdir}/coding/Metaways src/MW tests/MW"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 
