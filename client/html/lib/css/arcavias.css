@@ -171,8 +171,13 @@
 	padding: 0px 0px 20px 0px;
 }
 
+.catalog-list-head .short {
+	color: #004266;
+}
+
 .catalog-list-head h1 {
 	font-size: 1.5em;
+	padding: 10px 0px 10px 0px;
 }
 
 /* Product list, pagination section */
