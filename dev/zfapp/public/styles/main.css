@@ -235,7 +235,7 @@ select {
 	background:url(../images/mainnavigationBackgroundActive.jpg) repeat-x;
 }
 
-#navigationMenue a.active {
+#navigationMenue li .active a {
 	background:url(../images/mainnavigationBackgroundActive.jpg) repeat-x;
 }
 
