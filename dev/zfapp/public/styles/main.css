@@ -274,11 +274,11 @@ select {
 	padding: 10px 0px 10px 0px;
 }
 
-#contentFull .csc-default ul {
+#contentFull #textLeft ul {
 	padding: 10px 0px 10px 20px;
 }
 
-#contentFull .csc-default ul li ul {
+#contentFull #textLeft ul li ul {
 	padding: 10px 0px 10px 20px;
 }
 
