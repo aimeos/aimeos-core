@@ -181,6 +181,10 @@ select {
 	margin: 0px 3px 6px 3px;
 }
 
+#headerBasket .basket-mini-main .value{
+	white-space: nowrap;
+}
+
 /* ----- Navigation ----- */
 #navigation {
 	text-align: center;
@@ -270,8 +274,23 @@ select {
 	padding: 10px 0px 10px 0px;
 }
 
-#contentFull .csc-textpic-text ul {
-		padding: 10px 0px 10px 20px;
+#contentFull .csc-default ul {
+	padding: 10px 0px 10px 20px;
+}
+
+#contentFull .csc-default ul li ul {
+	padding: 10px 0px 10px 20px;
+}
+
+#contentFull #textLeft {
+	width: 47%;
+	float:left;
+	margin: 0 1% 5% 0;
+}
+
+#contentFull #imageRight {
+	width: 48%;
+	float:left;
 }
 
 #contentStart {
@@ -406,10 +425,28 @@ select {
 	}
 }
 
+@media only screen and (min-device-width: 480px) and (max-width: 1020px) {
+	#contentFull #imageRight img {
+		max-width: 100%;
+		height: auto;
+	}
+}
+
 @media only screen and (min-device-width: 600px) and (max-width: 680px) {
 	#headerLogo img {
 		max-width: 100%;
 		height: auto;
+	}
+}
+
+@media only screen and (max-width: 800px) and (orientation: portrait) {
+	#contentFull #textLeft{
+		float:none;
+		width: 96%;
+	}
+	#contentFull #imageRight{
+		float:none;
+		width:96%;
 	}
 }
 
