@@ -7,16 +7,27 @@
 }
 
 .arcavias .attr-list, .arcavias .form-list {
-    list-style: none !important;
+	list-style: none !important;
 }
 
+#contentStart #teaserLeft {
+	width: 55.0%;
+}
+
+#contentStart #teaserBottomLeft {
+	width: 49%;
+}
+
+#contentStart #teaserBottomRight {
+	width: 49%;
+}
 
 /* ----- IE7 ----- */
 *+ html  .checkout-standard-address-billing {
-    float: left;
+	float: left;
 }
 *+ html  .checkout-standard-address-delivery {
-    float: left;
+	float: left;
 }
 
 *+ html .button-group {
@@ -31,6 +42,14 @@
 	display: inline;
 }
 
+*+ html #contentStart #teaserRight {
+	width: auto;
+}
+
+*+ html #contentStart #teaserBottomRight {
+	width: auto;
+}
+
 /* ----- IE6 ----- */
 * #frame {
 	width: 984px; 
@@ -41,7 +60,7 @@
 
 }
 * #contentLeft {
-    width: 173px;
+	width: 173px;
 	margin: 0px;
 	padding:0px 0px 0px 10px;;
 }
