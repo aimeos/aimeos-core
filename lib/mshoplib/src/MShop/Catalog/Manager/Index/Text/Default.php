@@ -63,7 +63,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		'sort:catalog.index.text.value' => array(
 			'code'=>'sort:catalog.index.text.value()',
 			'internalcode'=>'mcatinte."value"',
-			'label'=>'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>)',
+			'label'=>'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 			'public' => false,
