@@ -17,7 +17,7 @@ $salutations = array(
 	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
 );
 
-$billingOption = $this->param( 'ca-billing-option', ( isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' ) );
+$billingOption = $this->param( 'ca-billing-option', ( $addrArray === array() && isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' ) );
 $billingSalutation = $this->param( 'ca-billing/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $billingCountry = $this->param( 'ca-billing/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
 
@@ -41,13 +41,6 @@ foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 
 ?>
 <div class="checkout-standard-address-billing">
-	<noscript>
-		<style type="text/css">
-			.checkout-standard-address-billing .item-new .form-list {
-				display: block;
-			}
-		</style>
-	</noscript>
 	<h2><?php echo $this->translate( 'client/html', 'Billing address' ); ?></h2>
 <?php if( isset( $this->addressCustomerItem )  ) : ?>
 	<div class="item-address">

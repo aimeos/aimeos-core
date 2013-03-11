@@ -904,10 +904,6 @@
 	padding: 5px 10px 10px 10px;
 }
 
-.checkout-standard-address .item-new .form-list {
-	display: none;
-}
-
 /* Checkout delivery/payment */
 .checkout-standard-delivery ,
 .checkout-standard-payment {

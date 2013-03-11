@@ -1,0 +1,10 @@
+./.exclude
+./.git
+./.gitignore
+./.travis.yml
+./dev
+./ext/*
+./config/resource.php
+./config/.resource.php.ci
+./lib/mwlib/tests/config/resource.php
+./lib/mwlib/tests/config/.resource.php.ci

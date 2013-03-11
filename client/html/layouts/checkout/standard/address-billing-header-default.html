@@ -5,11 +5,19 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$addressOption = 'null';
+
+try {
+	$this->standardBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+} catch( Exception $e ) {
+	$addressOption = ( isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' );
+}
+
 ?>
-<?php if( !isset( $this->addressCustomerItem ) || $this->param( 'ca-billing-option', ( isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' ) ) == 'null' ) : ?>
+<?php if( $this->param( 'ca-billing-option', $addressOption ) !== 'null' ) : ?>
 <style type="text/css">
 .checkout-standard-address-billing .item-new .form-list {
-	display: block;
+	display: none;
 }
 </style>
 <?php endif; ?>
