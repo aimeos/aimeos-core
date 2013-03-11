@@ -7,6 +7,6 @@
 		</whitelist>
 	</filter>
 	<logging>
-		<log type="coverage-html" target="../deploy/coverage" charset="UTF-8"/>
+		<log type="coverage-html" target="coverage" charset="UTF-8"/>
 	</logging>
 </phpunit>
