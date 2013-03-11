@@ -10,7 +10,7 @@
 	
 	<target name="coverage" description="Generates code coverage report">
 		<echo msg="Generating code coverage report" />
-		<delete dir="deploy/coverage" quiet="true" failonerror="false" />
+		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit-coverage.xml ."
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
@@ -22,24 +22,11 @@
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
-		<delete dir="deploy/apidoc" quiet="true" failonerror="false" />
-		<delete dir="deploy/coverage" quiet="true" failonerror="false" />
+		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete dir="tests/tmp" quiet="true" failonerror="false" />
 	</target>
-
-	<target name="doc" description="Generates API documentation">
-		<echo msg="Generating API documentation" />
-		<delete dir="deploy/apidoc" quiet="true" failonerror="false" />
-		<phpdocext title="MWLib API Documentation"
-			destdir="deploy/apidoc"
-			output="HTML:frames:DOM/earthli">
-			<fileset dir="src/MW">
-				<include name="**/*.php" />
-			</fileset>
-		</phpdocext>
-	</target>
 	
-	<target name="all" depends="coverage,check,doc" description="Builds all parts of the package">
+	<target name="all" depends="coverage,check" description="Builds all parts of the package">
 	</target>
 
 </project>
