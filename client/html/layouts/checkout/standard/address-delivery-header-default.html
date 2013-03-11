@@ -12,11 +12,12 @@ try {
 } catch( Exception $e ) {
 	$addressOption = -1;
 }
+
 ?>
-<?php if( $this->param( 'ca-delivery-option', $addressOption ) === 'null' ) : ?>
+<?php if( $this->param( 'ca-delivery-option', $addressOption ) !== 'null' ) : ?>
 <style type="text/css">
 .checkout-standard-address-delivery .item-new .form-list {
-	display: block;
+	display: none;
 }
 </style>
 <?php endif; ?>
