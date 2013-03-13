@@ -30,43 +30,13 @@ class Client_Html_Catalog_List_Quote_Default
 	 */
 	public function getBody()
 	{
-		try
-		{
-			$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView() );
 
-			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getBody();
-			}
-			$view->quoteBody = $html;
+		$html = '';
+		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody();
 		}
-		catch( Client_Html_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
-		}
-		catch( Controller_Frontend_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
-		}
-		catch( MShop_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
-		}
-		catch( Exception $e )
-		{
-			$context = $this->_getContext();
-			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-
-			$view = $this->getView();
-			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
-		}
+		$view->quoteBody = $html;
 
 		$tplconf = 'client/html/catalog/list/quote/default/template-body';
 		$default = 'catalog/list/quote-body-default.html';
@@ -82,21 +52,13 @@ class Client_Html_Catalog_List_Quote_Default
 	 */
 	public function getHeader()
 	{
-		try
-		{
-			$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView() );
 
-			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader();
-			}
-			$view->quoteHeader = $html;
+		$html = '';
+		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+			$html .= $subclient->setView( $view )->getHeader();
 		}
-		catch( Exception $e )
-		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return;
-		}
+		$view->quoteHeader = $html;
 
 		$tplconf = 'client/html/catalog/list/quote/default/template-header';
 		$default = 'catalog/list/quote-header-default.html';
