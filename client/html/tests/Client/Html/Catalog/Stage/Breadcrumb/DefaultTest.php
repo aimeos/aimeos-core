@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-class Client_Html_Catalog_List_Breadcrumb_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_object;
 
@@ -20,7 +20,7 @@ class Client_Html_Catalog_List_Breadcrumb_DefaultTest extends MW_Unittest_Testca
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_List_Breadcrumb_DefaultTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_Stage_Breadcrumb_DefaultTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -35,7 +35,7 @@ class Client_Html_Catalog_List_Breadcrumb_DefaultTest extends MW_Unittest_Testca
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Breadcrumb_Default( $context, $paths );
+		$this->_object = new Client_Html_Catalog_Stage_Breadcrumb_Default( $context, $paths );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
@@ -48,7 +48,7 @@ class Client_Html_Catalog_List_Breadcrumb_DefaultTest extends MW_Unittest_Testca
 
 		$view = TestHelper::getView();
 
-		$view->listCatPath = $catalogManager->getPath( $catItem->getId() );
+		$view->stageCatPath = $catalogManager->getPath( $catItem->getId() );
 
 		$this->_object->setView( $view );
 	}
@@ -77,7 +77,7 @@ class Client_Html_Catalog_List_Breadcrumb_DefaultTest extends MW_Unittest_Testca
 	{
 		$output = $this->_object->getBody();
 		$this->assertRegExp( '#Root.*.Categories.*.Kaffee.*#smU', $output );
-		$this->assertStringStartsWith( '<div class="catalog-list-breadcrumb">', $output );
+		$this->assertStringStartsWith( '<div class="catalog-stage-breadcrumb">', $output );
 	}
 
 

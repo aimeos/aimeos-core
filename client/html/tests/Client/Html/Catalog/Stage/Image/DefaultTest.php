@@ -5,7 +5,7 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Stage_Image_DefaultTest extends MW_Unittest_Testcase
 {
 	protected $_object;
 
@@ -20,7 +20,7 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_List_Stage_DefaultTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_Stage_Image_DefaultTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -35,7 +35,7 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 	{
 		$context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Stage_Default( $context, $paths );
+		$this->_object = new Client_Html_Catalog_Stage_Image_Default( $context, $paths );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
@@ -48,7 +48,7 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 
 		$view = TestHelper::getView();
 
-		$view->listCatPath = array( $catItem );
+		$view->stageCatPath = array( $catItem );
 
 		$this->_object->setView( $view );
 	}
@@ -76,14 +76,14 @@ class Client_Html_Catalog_List_Stage_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$mediaItems = $this->_object->getView()->get( 'mediaItems', array() );
+		$mediaItems = $this->_object->getView()->get( 'imageItems', array() );
 
 		if( ( $mediaItem = reset( $mediaItems ) ) === false ) {
 			throw new Exception( 'No item found' );
 		}
 
-		$this->assertEquals( 'Cafe Stage image', $mediaItem->getLabel() );
-		$this->assertStringStartsWith( '<div class="catalog-list-stage">', $output );
+		$this->assertEquals( 'Cafe Stage image', $mediaItem->getName() );
+		$this->assertStringStartsWith( '<div class="catalog-stage-image">', $output );
 	}
 
 
