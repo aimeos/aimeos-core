@@ -9,18 +9,17 @@
 
 
 /**
- * Default implementation of catalog list item section for HTML clients.
+ * Default implementation of catalog stage image section for HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_List_Quote_Default
+class Client_Html_Catalog_Stage_Image_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_cache;
 	private $_subPartNames = array();
-	private $_subPartPath = 'client/html/catalog/list/header/default/subparts';
+	private $_subPartPath = 'client/html/catalog/stage/image/default/subparts';
 
 
 	/**
@@ -36,10 +35,10 @@ class Client_Html_Catalog_List_Quote_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->quoteBody = $html;
+		$view->imageBody = $html;
 
-		$tplconf = 'client/html/catalog/list/quote/default/template-body';
-		$default = 'catalog/list/quote-body-default.html';
+		$tplconf = 'client/html/catalog/stage/image/default/template-body';
+		$default = 'catalog/stage/image-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -58,10 +57,10 @@ class Client_Html_Catalog_List_Quote_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->quoteHeader = $html;
+		$view->imageHeader = $html;
 
-		$tplconf = 'client/html/catalog/list/quote/default/template-header';
-		$default = 'catalog/list/quote-header-default.html';
+		$tplconf = 'client/html/catalog/stage/image/default/template-header';
+		$default = 'catalog/stage/image-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -76,7 +75,7 @@ class Client_Html_Catalog_List_Quote_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'catalog/list/quote/' . $type, $name );
+		return $this->_createSubClient( 'catalog/stage/image/' . $type, $name );
 	}
 
 
@@ -113,14 +112,19 @@ class Client_Html_Catalog_List_Quote_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$view->quoteItems = array();
-			if( isset( $view->listCatPath ) )
+			$mediaItems = array();
+			$catPath = $view->get( 'stageCatPath', array() );
+
+			foreach( array_reverse( $catPath ) as $catItem )
 			{
-				$catPath = $view->listCatPath;
-				if( ( $catItem = end( $catPath ) ) !== false ) {
-					$view->quoteItems = $catItem->getRefItems( 'text', 'quote', 'default' );
+				$mediaItems = $catItem->getRefItems( 'media', 'stage', 'default' );
+
+				if( !empty( $mediaItems ) ) {
+					break;
 				}
 			}
+
+			$view->imageItems = $mediaItems;
 
 			$this->_cache = $view;
 		}

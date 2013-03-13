@@ -9,18 +9,17 @@
 
 
 /**
- * Default implementation of catalog list item section for HTML clients.
+ * Default implementation of catalog stage breadcrumb section for HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_List_Quote_Default
+class Client_Html_Catalog_Stage_Breadcrumb_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_cache;
 	private $_subPartNames = array();
-	private $_subPartPath = 'client/html/catalog/list/header/default/subparts';
+	private $_subPartPath = 'client/html/catalog/stage/breadcrumb/default/subparts';
 
 
 	/**
@@ -30,16 +29,16 @@ class Client_Html_Catalog_List_Quote_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->quoteBody = $html;
+		$view->breadcrumbBody = $html;
 
-		$tplconf = 'client/html/catalog/list/quote/default/template-body';
-		$default = 'catalog/list/quote-body-default.html';
+		$tplconf = 'client/html/catalog/stage/breadcrumb/default/template-body';
+		$default = 'catalog/stage/breadcrumb-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -52,16 +51,16 @@ class Client_Html_Catalog_List_Quote_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->quoteHeader = $html;
+		$view->breadcrumbHeader = $html;
 
-		$tplconf = 'client/html/catalog/list/quote/default/template-header';
-		$default = 'catalog/list/quote-header-default.html';
+		$tplconf = 'client/html/catalog/stage/breadcrumb/default/template-header';
+		$default = 'catalog/stage/breadcrumb-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -76,7 +75,7 @@ class Client_Html_Catalog_List_Quote_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'catalog/list/quote/' . $type, $name );
+		return $this->_createSubClient( 'catalog/stage/breadcrumb/' . $type, $name );
 	}
 
 
@@ -100,31 +99,5 @@ class Client_Html_Catalog_List_Quote_Default
 	public function process()
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
-	}
-
-
-	/**
-	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
-	 */
-	protected function _setViewParams( MW_View_Interface $view )
-	{
-		if( !isset( $this->_cache ) )
-		{
-			$view->quoteItems = array();
-			if( isset( $view->listCatPath ) )
-			{
-				$catPath = $view->listCatPath;
-				if( ( $catItem = end( $catPath ) ) !== false ) {
-					$view->quoteItems = $catItem->getRefItems( 'text', 'quote', 'default' );
-				}
-			}
-
-			$this->_cache = $view;
-		}
-
-		return $this->_cache;
 	}
 }

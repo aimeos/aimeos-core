@@ -9,17 +9,18 @@
 
 
 /**
- * Default implementation of catalog list stage section for HTML clients.
+ * Default implementation of catalog stage section HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_List_Stage_Default
+class Client_Html_Catalog_Stage_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_subPartNames = array();
-	private $_subPartPath = 'client/html/catalog/list/stage/default/subparts';
+	private $_cache;
+	private $_subPartPath = 'client/html/catalog/stage/default/subparts';
+	private $_subPartNames = array( 'image', 'breadcrumb' );
 
 
 	/**
@@ -43,19 +44,19 @@ class Client_Html_Catalog_List_Stage_Default
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
@@ -64,11 +65,11 @@ class Client_Html_Catalog_List_Stage_Default
 
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
 		}
 
-		$tplconf = 'client/html/catalog/list/stage/default/template-body';
-		$default = 'catalog/list/stage-body-default.html';
+		$tplconf = 'client/html/catalog/stage/default/template-body';
+		$default = 'catalog/stage/body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -94,11 +95,11 @@ class Client_Html_Catalog_List_Stage_Default
 		catch( Exception $e )
 		{
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return;
+			return '';
 		}
 
-		$tplconf = 'client/html/catalog/list/stage/default/template-header';
-		$default = 'catalog/list/stage-header-default.html';
+		$tplconf = 'client/html/catalog/stage/default/template-header';
+		$default = 'catalog/stage/header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -113,7 +114,7 @@ class Client_Html_Catalog_List_Stage_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'catalog/list/stage/' . $type, $name );
+		return $this->_createSubClient( 'catalog/stage/' . $type, $name );
 	}
 
 
@@ -125,7 +126,7 @@ class Client_Html_Catalog_List_Stage_Default
 	 */
 	public function isCachable( $what )
 	{
-		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
+		return false;
 	}
 
 
@@ -136,7 +137,37 @@ class Client_Html_Catalog_List_Stage_Default
 	 */
 	public function process()
 	{
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		try
+		{
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
+		}
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->stageErrorList = $view->get( 'stageErrorList', array() ) + $error;
+		}
 	}
 
 
@@ -150,26 +181,24 @@ class Client_Html_Catalog_List_Stage_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$mediaItems = array();
+			$context = $this->_getContext();
+			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 
-			if( isset( $view->listCatPath ) )
+			$catid = $view->param( 'f-catalog-id' );
+
+			if( $catid != '' && ctype_digit( $catid ) )
 			{
-				$catPath = $view->get( 'listCatPath', array() );
+				$default = array( 'attribute', 'media', 'text' );
+				$domains = $context->getConfig()->get( 'client/html/catalog/stage/default/domains', $default );
+				$view->stageCatPath = $catalogManager->getPath( $catid, $domains );
 
-				foreach( array_reverse( $catPath ) as $catItem )
-				{
-					$mediaItems = $catItem->getRefItems( 'media', 'stage', 'default' );
-					if( !empty( $mediaItems ) ) {
-						break;
-					}
-				}
-
-				if( ( $lastCat = end( $catPath ) ) !== false ) {
-					$view->categoryName = $lastCat->getName();
+				$stageCatPath = $view->get( 'stageCatPath', array() );
+				if( ( $categoryItem = end( $stageCatPath ) ) !== false ) {
+					$view->stageCurrentCatItem = $categoryItem;
 				}
 			}
 
-			$view->mediaItems = $mediaItems;
+
 			$this->_cache = $view;
 		}
 

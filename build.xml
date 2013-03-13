@@ -21,7 +21,7 @@
 		<phing target="coverage" haltonfailure="true" dir="lib/mwlib" />
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -40,7 +40,7 @@
 		<phing target="test" haltonfailure="true" dir="lib/mwlib" />
 		<phing target="test" haltonfailure="true">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -54,7 +54,7 @@
 		<phing target="testperf" dir="client/html" />
 		<phing target="testperf">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -69,7 +69,7 @@
 		<phing target="check" dir="lib/mwlib" />
 		<phing target="check">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -119,7 +119,7 @@
 		<phing target="clean" dir="lib/mwlib" />
 		<phing target="clean">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -129,6 +129,11 @@
 		<phing target="i18n" dir="client/html" />
 		<phing target="i18n" dir="controller/frontend" />
 		<phing target="i18n" dir="lib/mshoplib" />
+		<phing target="i18n">
+			<fileset dir="ext" expandsymboliclinks="true" >
+				<include name="**/phing.xml" />
+			</fileset>
+		</phing>
 	</target>
 
 
@@ -138,6 +143,11 @@
 		<phing target="build" dir="client/html" />
 		<phing target="build" dir="controller/frontend" />
 		<phing target="build" dir="lib/mshoplib" />
+		<phing target="build">
+			<fileset dir="ext" expandsymboliclinks="true" >
+				<include name="**/phing.xml" />
+			</fileset>
+		</phing>
     </target>
 
 
