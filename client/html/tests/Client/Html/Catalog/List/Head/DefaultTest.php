@@ -41,7 +41,7 @@ class Client_Html_Catalog_List_Head_DefaultTest extends MW_Unittest_Testcase
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
-		$catItems = $catalogManager->searchItems( $search );
+		$catItems = $catalogManager->searchItems( $search, array( 'text' ) );
 
 		if( ( $catItem = reset( $catItems ) ) === false ) {
 			throw new Exception( 'No catalog item found' );
@@ -75,7 +75,9 @@ class Client_Html_Catalog_List_Head_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
+
 		$this->assertStringStartsWith( '<div class="catalog-list-head">', $output );
+		$this->assertRegExp( '#<h1>Kaffee</h1>#', $output );
 	}
 
 	public function testGetSubClient()
