@@ -61,12 +61,16 @@ class MW_Translation_Zend
 	{
 		try
 		{
-			return $this->_getTranslation( $domain )->translate( $string, $this->_locale );
+			foreach( $this->_getTranslations( $domain ) as $object )
+			{
+				if( $object->isTranslated( $string ) === true ) {
+					return $object->translate( $string, $this->_locale );
+				}
+			}
 		}
-		catch( Exception $e )
-		{
-			return (string) $string;
-		}
+		catch( Exception $e ) { ; }
+
+		return (string) $string;
 	}
 
 
@@ -86,16 +90,20 @@ class MW_Translation_Zend
 	{
 		try
 		{
-			return $this->_getTranslation( $domain )->plural( $singular, $plural, $number, $this->_locale );
-		}
-		catch( Exception $e )
-		{
-			if( $number > 0 ) {
-				return (string) $plural;
+			foreach( $this->_getTranslations( $domain ) as $object )
+			{
+				if( $object->isTranslated( $singular ) === true ) {
+					return $object->plural( $singular, $plural, $number, $this->_locale );
+				}
 			}
-
-			return (string) $singular;
 		}
+		catch( Exception $e ) { ; }
+
+		if( $this->_getPluralIndex( $number, $this->_locale ) > 0 ) {
+			return (string) $plural;
+		}
+
+		return (string) $singular;
 	}
 
 
@@ -114,10 +122,10 @@ class MW_Translation_Zend
 	 * Returns the initialized Zend translation object which contains the translations.
 	 *
 	 * @param string $domain Translation domain
-	 * @return Zend_Translate Translation object
+	 * @return array List of translation objects implementing Zend_Translate
 	 * @throws MW_Translation_Exception If initialization fails
 	 */
-	protected function _getTranslation( $domain )
+	protected function _getTranslations( $domain )
 	{
 		if( !isset( $this->_translations[$domain] ) )
 		{
@@ -131,22 +139,10 @@ class MW_Translation_Zend
 			$locations = array_reverse( $this->_getTranslationFileLocations( $this->_translationSources[$domain], $this->_locale ) );
 			$options = $this->_options;
 
-			if( count( $locations ) > 0 )
+			foreach( $locations as $location )
 			{
-				foreach( $locations as $location )
-				{
-					$options['content'] = $location;
-
-					if( !isset( $this->_translations[$domain] ) ) {
-						$this->_translations[$domain] = new Zend_Translate( $options );
-					} else {
-						$this->_translations[$domain]->addTranslation( $options );
-					}
-				}
-			}
-			else
-			{
-				$this->_translations[$domain] = new Zend_Translate( $options );
+				$options['content'] = $location;
+				$this->_translations[$domain][] = new Zend_Translate( $options );
 			}
 		}
 
