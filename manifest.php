@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: manifest.php 14572 2011-12-23 14:26:31Z nsendetzky $
  */
 
 
@@ -28,10 +27,10 @@ return array(
 	),
 	'include' => array(
 		'lib/mshoplib/src',
-		'controller/frontend/src',
-		'client/html/src',
-		'controller/extjs/src',
 		'lib/mwlib/src',
+		'client/html/src',
+		'controller/frontend/src',
+		'controller/extjs/src',
 		'lib/zendlib',
 		'lib/phpexcel',
 	),
