@@ -10,10 +10,12 @@ $items = $this->get( 'quoteItems', array() );
 ?>
 <div class="catalog-list-quote">
 <?php if( count( $items ) > 0 ) : ?>
+	<div class="content">
 <?php 	foreach( $items as $quoteItem ) : ?>
-	<article><?php echo $quoteItem->getContent(); ?></article>
+		<article><?php echo $quoteItem->getContent(); ?></article>
 <?php 	endforeach; ?>
-	<a href="#"><?php echo $this->translate( 'client/html', 'Show all quotes' ); ?></a>
+		<a href="#"><?php echo $this->translate( 'client/html', 'Show all quotes' ); ?></a>
+	</div>
 <?php endif; ?>
 <?php echo $this->get( 'quoteBody' ); ?>
 </div>
