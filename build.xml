@@ -3,7 +3,7 @@
 <project name="Arcavias" default="all">
 
 	<target name="setup" description="Sets up database incl. unit test data">
-		<echo msg="Setting up database" />
+		<echo msg="Setting up test database" />
 		<exec command="php setup.php unittest" checkreturn="true" logoutput="true"/>
 	</target>
 
