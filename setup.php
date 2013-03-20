@@ -48,9 +48,31 @@ try
 	$mshop = new MShop();
 
 
+	$params = $_SERVER['argv'];
+	array_shift( $params );
+	$options = array();
+
+	foreach( $params as $key => $option )
+	{
+		if( strncmp( $option, '--', 2 ) === 0 && ( $pos = strpos( $option, '=', 2 ) ) !== false )
+		{
+			if( ( $name = substr( $option, 2, $pos-2 ) ) !== false )
+			{
+				$options[$name] = substr( $option, $pos+1 );
+				unset( $params[$key] );
+			}
+			else
+			{
+				printf( "Invalid option \"%1\$s\"\n", $option );
+				exit ( 1 );
+			}
+		}
+	}
+
 	$site = 'default';
-	if( $_SERVER['argc'] > 1 ) {
-		$site = $_SERVER['argv'][1];
+	if( count( $params ) > 0 && ( $site = end( $params ) ) === false ) {
+			printf( "Usage: php setup.php [--config=<path>] [sitecode]\n" );
+			exit( 1 );
 	}
 
 	$taskPaths = $mshop->getSetupPaths( $site );
@@ -65,7 +87,12 @@ try
 
 	$ctx = new MShop_Context_Item_Default();
 
-	$conf = new MW_Config_Array( array(), $mshop->getConfigPaths( 'mysql' ) );
+	$confPaths = $mshop->getConfigPaths( 'mysql' );
+	if( isset( $options['config'] ) ) {
+		$confPaths[] = $options['config'];
+	}
+
+	$conf = new MW_Config_Array( array(), $confPaths );
 	$ctx->setConfig( $conf );
 
 	if( ( $dbconfig = $conf->get( 'resource/db' ) ) === null ) {
