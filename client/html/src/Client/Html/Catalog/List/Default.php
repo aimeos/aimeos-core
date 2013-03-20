@@ -63,7 +63,6 @@ class Client_Html_Catalog_List_Default
 		{
 			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-print_r( $e->getTraceAsString() );
 
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
