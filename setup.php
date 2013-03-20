@@ -36,6 +36,13 @@ function setup_autoload( $classname )
 }
 
 
+function usage()
+{
+	printf( "Usage: php setup.php [--config=<path>] [--extdir=<path>]* [sitecode]\n" );
+	exit ( 1 );
+}
+
+
 $exectimeStart = microtime( true );
 
 try
@@ -46,6 +53,10 @@ try
 
 	foreach( $params as $key => $option )
 	{
+		if( $option === '--help' ) {
+			usage();
+		}
+
 		if( strncmp( $option, '--', 2 ) === 0 && ( $pos = strpos( $option, '=', 2 ) ) !== false )
 		{
 			if( ( $name = substr( $option, 2, $pos-2 ) ) !== false )
@@ -65,16 +76,14 @@ try
 			else
 			{
 				printf( "Invalid option \"%1\$s\"\n", $option );
-				printf( "Usage: php setup.php [--config=<path>] [--extdir=<path>]* [sitecode]\n" );
-				exit ( 1 );
+				usage();
 			}
 		}
 	}
 
 	$site = 'default';
 	if( count( $params ) > 0 && ( $site = end( $params ) ) === false ) {
-			printf( "Usage: php setup.php [--config=<path>] [--extdir=<path>]* [sitecode]\n" );
-			exit( 1 );
+		usage();
 	}
 
 
