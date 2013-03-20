@@ -32,15 +32,6 @@ class MW_Session_Typo3 implements MW_Session_Interface
 
 
 	/**
-	 * Stores the date into the Typo3 session.
-	 */
-	public function __destruct()
-	{
-		$this->_feuser->storeSessionData();
-	}
-
-
-	/**
 	 * Returns the value of the requested session key.
 	 *
 	 * @param string $name Key of the requested value in the session
