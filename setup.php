@@ -40,14 +40,6 @@ $exectimeStart = microtime( true );
 
 try
 {
-	require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'MShop.php';
-
-	spl_autoload_register( 'setup_autoload' );
-	spl_autoload_register( 'MShop::autoload' );
-
-	$mshop = new MShop();
-
-
 	$params = $_SERVER['argv'];
 	array_shift( $params );
 	$options = array();
@@ -58,12 +50,22 @@ try
 		{
 			if( ( $name = substr( $option, 2, $pos-2 ) ) !== false )
 			{
-				$options[$name] = substr( $option, $pos+1 );
+				if( isset( $options[$name] ) )
+				{
+					$options[$name] = (array) $options[$name];
+					$options[$name][] = substr( $option, $pos+1 );
+				}
+				else
+				{
+					$options[$name] = substr( $option, $pos+1 );
+				}
+
 				unset( $params[$key] );
 			}
 			else
 			{
 				printf( "Invalid option \"%1\$s\"\n", $option );
+				printf( "Usage: php setup.php [--config=<path>] [--extdir=<path>]* [sitecode]\n" );
 				exit ( 1 );
 			}
 		}
@@ -71,9 +73,18 @@ try
 
 	$site = 'default';
 	if( count( $params ) > 0 && ( $site = end( $params ) ) === false ) {
-			printf( "Usage: php setup.php [--config=<path>] [sitecode]\n" );
+			printf( "Usage: php setup.php [--config=<path>] [--extdir=<path>]* [sitecode]\n" );
 			exit( 1 );
 	}
+
+
+	require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'MShop.php';
+
+	spl_autoload_register( 'setup_autoload' );
+	spl_autoload_register( 'MShop::autoload' );
+
+	$mshop = new MShop( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
+
 
 	$taskPaths = $mshop->getSetupPaths( $site );
 
