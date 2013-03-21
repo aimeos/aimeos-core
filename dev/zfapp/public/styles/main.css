@@ -270,29 +270,6 @@ select {
 	margin: 0 2%;
 }
 
-#contentFull ul {
-	padding: 10px 0px 10px 0px;
-}
-
-#contentFull #textLeft ul {
-	padding: 10px 0px 10px 20px;
-}
-
-#contentFull #textLeft ul li ul {
-	padding: 10px 0px 10px 20px;
-}
-
-#contentFull #textLeft {
-	width: 47%;
-	float:left;
-	margin: 0 1% 5% 0;
-}
-
-#contentFull #imageRight {
-	width: 48%;
-	float:left;
-}
-
 #contentStart {
 	margin: 0 8px;
 	padding: 0px 0px 20px 0px; 
@@ -309,6 +286,35 @@ select {
 	color: #679CB8;
 	border-bottom: 1px solid #bebebe;
 	padding: 0px 0px 5px 5px;
+}
+
+#contentStart ul {
+	padding: 10px 0px 10px 0px;
+}
+
+#contentStart #textLeft {
+	width: 46%;
+	float:left;
+	margin: 0 1% 5% 0;
+}
+
+#contentStart #textLeft h1{
+	color: #004266;
+	border:none;
+	padding: 0px 0px 5px 0px;
+	font-style: normal;
+}
+#contentStart #textLeft ul {
+	padding: 10px 0px 10px 20px;
+}
+
+#contentFull #textLeft ul li ul {
+	padding: 10px 0px 10px 20px;
+}
+
+#contentStart #imageRight {
+	width: 52%;
+	float:left;
 }
 
 #contentStart #teaserLeft {
