@@ -34,7 +34,7 @@ class MShop
 			$basedir = dirname( __FILE__ );
 		}
 
-		if( $defaultdir === true ) {
+		if( $defaultdir === true && is_dir( $basedir . DIRECTORY_SEPARATOR . 'ext' ) === true ) {
 			$extdirs[] = $basedir . DIRECTORY_SEPARATOR . 'ext';
 		}
 
