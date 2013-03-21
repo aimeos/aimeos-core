@@ -195,17 +195,18 @@ class Client_Html_Catalog_List_Default
 			}
 
 
-			$defaultPageSize = $config->get( 'client/html/catalog/list/default/size', 48 );
-			$domains = $config->get( 'client/html/catalog/list/default/domains', array( 'media', 'price', 'text' ) );
+			$defaultPageSize = $config->get( 'client/html/catalog/list/size', 48 );
+			$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
 
 
 			$page = (int) $view->param( 'l-page', 1 );
 			$size = (int) $view->param( 'l-size', $defaultPageSize );
 			$sortation = (string) $view->param( 'l-sort', 'position' );
 			$text = (string) $view->param( 'f-search-text' );
-			$catid = $view->param( 'f-catalog-id' );
-			if( $catid == '' || !ctype_digit( $catid ) ) {
-				$catid = null;
+			$catid = (string) $view->param( 'f-catalog-id' );
+
+			if( $catid == '' ) {
+				$catid = $config->get( 'client/html/catalog/list/catid-default', null );
 			}
 
 			$page = ( $page < 1 ? 1 : $page );
@@ -230,17 +231,24 @@ class Client_Html_Catalog_List_Default
 				if( ( $categoryItem = end( $listCatPath ) ) !== false ) {
 					$view->listCurrentCatItem = $categoryItem;
 				}
+
+				$view->listProductItems = $controller->getProductList( $filter, $total, $domains );
+				$view->listProductTotal = $total;
+			}
+			else if( $text !== '' )
+			{
+				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
+
+				$view->listProductItems = $controller->getProductList( $filter, $total, $domains );
+				$view->listProductTotal = $total;
 			}
 			else
 			{
-				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
+				$view->listProductItems = array();
+				$view->listProductTotal = 0;
 			}
 
-			$items = $controller->getProductList( $filter, $total, $domains );
 
-
-			$view->listProductItems = $items;
-			$view->listProductTotal = $total;
 			$view->listProductSort = $sortation;
 			$view->listPageCurr = $page;
 			$view->listPageSize = $size;
