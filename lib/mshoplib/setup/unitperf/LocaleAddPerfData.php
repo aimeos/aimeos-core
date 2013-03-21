@@ -30,7 +30,7 @@ class MW_Setup_Task_LocaleAddPerfData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'MShopAddTypeData' );
+		return array( 'MShopSetLocale' );
 	}
 
 
@@ -57,6 +57,10 @@ class MW_Setup_Task_LocaleAddPerfData extends MW_Setup_Task_MShopAddLocaleData
 
 		$this->_msg( 'Adding performance data for MShop locale domain', 0 );
 		$this->_status( '' );
+
+
+		// Set editor for further tasks
+		$this->_additional->setEditor( 'unitperf:core' );
 
 
 		$ds = DIRECTORY_SEPARATOR;
@@ -107,9 +111,5 @@ class MW_Setup_Task_LocaleAddPerfData extends MW_Setup_Task_MShopAddLocaleData
 		if( isset( $testdata['locale'] ) ) {
 			$this->_addLocaleData( $localeManager, $testdata['locale'], $siteIds );
 		}
-
-		// Set locale for further tasks
-		$this->_additional->setLocale( $localeManager->bootstrap( 'unitperf', '', '', false ) );
-		$this->_additional->setEditor( 'unitperf:core' );
 	}
 }

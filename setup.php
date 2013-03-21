@@ -119,6 +119,7 @@ try
 		throw new Exception( 'Configuration for database adapter missing' );
 	}
 	$conf->set( 'resource/db/limit', 2 );
+	$conf->set( 'setup/site', $site );
 
 	$dbm = new MW_DB_Manager_PDO( $conf );
 	$ctx->setDatabaseManager( $dbm );
