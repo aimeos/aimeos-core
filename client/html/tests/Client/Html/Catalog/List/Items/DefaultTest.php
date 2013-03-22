@@ -80,7 +80,6 @@ class Client_Html_Catalog_List_Items_DefaultTest extends MW_Unittest_Testcase
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript"', $output );
 	}
 
 
