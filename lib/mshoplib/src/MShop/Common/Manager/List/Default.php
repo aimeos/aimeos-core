@@ -199,7 +199,7 @@ class MShop_Common_Manager_List_Default
 
 		if( ( $item = reset( $items ) ) === false )
 		{
-			$msg = sprintf( 'No list item found for key "%1$s" and ID "%1$s"', $conf['code'], $id );
+			$msg = sprintf( 'No list item found for key "%1$s" and ID "%2$s"', $conf['code'], $id );
 			throw new MShop_Exception( $msg );
 		}
 
