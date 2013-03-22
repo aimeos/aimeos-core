@@ -417,7 +417,7 @@ class MShop_Locale_Manager_Site_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Locale_Exception( 'No tree root found' );
+			throw new MShop_Locale_Exception( sprintf ( 'No tree root found' ) );
 		}
 
 		return $item;
@@ -478,7 +478,7 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
-		throw new MShop_Locale_Exception( 'Operation not available' );
+		throw new MShop_Locale_Exception( sprintf( 'Operation not available' ) );
 	}
 
 

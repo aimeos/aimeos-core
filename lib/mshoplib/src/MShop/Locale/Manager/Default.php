@@ -519,7 +519,7 @@ class MShop_Locale_Manager_Default
 				$results->finish();
 
 				if ( $row === false ) {
-					throw new MShop_Locale_Exception( 'No total results value found' );
+					throw new MShop_Locale_Exception( sprintf ( 'No total results value found' ) );
 				}
 
 				$total = $row['count'];

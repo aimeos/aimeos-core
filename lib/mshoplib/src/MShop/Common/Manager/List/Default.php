@@ -44,12 +44,12 @@ class MShop_Common_Manager_List_Default
 		foreach($whitelistItem as $str)
 		{
 			if ( !in_array($str, $isList ) ) {
-				throw new MShop_Exception( 'No configuration available or missing parts' );
+				throw new MShop_Exception( sprintf( 'No configuration available or missing parts' ) );
 			}
 		}
 
 		if( ( $entry = reset( $searchConfig ) ) === false ) {
-			throw new MShop_Exception( 'Search configuration is invalid' );
+			throw new MShop_Exception( sprintf( 'Search configuration is invalid' ) );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) == false ) {
@@ -190,7 +190,7 @@ class MShop_Common_Manager_List_Default
 	public function getItem( $id, array $ref = array() )
 	{
 		if( ( $conf = reset( $this->_searchConfig ) ) === false || !isset( $conf['code'] ) ) {
-			throw new MShop_Exception( 'Search configuration is invalid' );
+			throw new MShop_Exception( sprintf( 'Search configuration is invalid' ) );
 		}
 
 		$criteria = $this->createSearch();
@@ -355,7 +355,7 @@ class MShop_Common_Manager_List_Default
 			$domain = explode( '.', $this->_prefix);
 
 			if ( ( $topdomain = array_shift( $domain ) ) === null ) {
-				throw new MShop_Exception( 'No configuration available' );
+				throw new MShop_Exception( sprintf( 'No configuration available' ) );
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;

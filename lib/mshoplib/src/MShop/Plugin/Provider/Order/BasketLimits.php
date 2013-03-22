@@ -97,7 +97,7 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 		if( count( $failures ) > 0 )
 		{
 			$code = array( 'basket' => $failures );
-			throw new MShop_Plugin_Provider_Exception( 'Basket limits not reached', -1, null, $code );
+			throw new MShop_Plugin_Provider_Exception( sprintf( 'Basket limits not reached' ), -1, null, $code );
 		}
 
 		return true;

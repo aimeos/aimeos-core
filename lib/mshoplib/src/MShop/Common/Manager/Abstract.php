@@ -836,7 +836,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
 			if ( $row === false ) {
-				throw new MShop_Exception( 'No total results value found' );
+				throw new MShop_Exception( sprintf( 'No total results value found' ) );
 			}
 
 			$total = (int) $row['count'];

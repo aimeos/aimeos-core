@@ -360,7 +360,7 @@ implements MShop_Service_Provider_Payment_Interface
 
 
 		if( !isset( $fullResponse['PAYERID'] ) ) {
-			throw new MShop_Service_Exception( 'Payer was not authorized' );
+			throw new MShop_Service_Exception( sprintf( 'Payer was not authorized' ) );
 		}
 
 

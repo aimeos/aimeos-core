@@ -37,7 +37,7 @@ class MShop_Common_Manager_Address_Default
 		$isList = array_keys( $config );
 		foreach ( $whitelist as $str ) {
 			if ( !in_array($str, $isList) ) {
-				throw new MShop_Exception( 'No configuration available or missing parts: ' . $str);
+				throw new MShop_Exception( sprintf( 'No configuration available or missing parts: \"%1$s\"', $str ) );
 			}
 		}
 
@@ -49,7 +49,7 @@ class MShop_Common_Manager_Address_Default
 		$this->_searchConfig = $searchConfig;
 
 		if ( ( $entry = reset( $searchConfig ) ) === false ) {
-			throw new MShop_Exception( 'Search configuration is invalid' );
+			throw new MShop_Exception( sprintf( 'Search configuration is invalid' ) );
 		}
 
 		if ( ( $pos = strrpos( $entry['code'], '.' ) ) == false ) {
@@ -126,7 +126,7 @@ class MShop_Common_Manager_Address_Default
 	public function getItem( $id, array $ref = array() )
 	{
 		if( ( $conf = reset( $this->_searchConfig ) ) === false ) {
-			throw new MShop_Exception( 'No address search configuration available' );
+			throw new MShop_Exception( sprintf( 'No address search configuration available' ) );
 		}
 
 		return $this->_getItem( $conf['code'], $id, $ref );

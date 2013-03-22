@@ -108,7 +108,8 @@ class MShop_Plugin_Provider_Order_ProductPrice implements MShop_Plugin_Provider_
 		if ( count( $changedProducts ) > 0 )
 		{
 			$code = array( 'product' => $changedProducts );
-			throw new MShop_Plugin_Provider_Exception( 'The price of at least one product in the basket has changed in the meantime and was updated', -1, null, $code );
+			$msg = 'The price of at least one product in the basket has changed in the meantime and was updated';
+			throw new MShop_Plugin_Provider_Exception( sprintf( $msg, -1, null, $code ) );
 		}
 
 		return true;

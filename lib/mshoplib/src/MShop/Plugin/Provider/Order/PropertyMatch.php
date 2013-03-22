@@ -94,7 +94,7 @@ class MShop_Plugin_Provider_Order_PropertyMatch implements MShop_Plugin_Provider
 		if( reset( $result ) === false )
 		{
 			$code = array( 'product' => array_keys( $config ) );
-			throw new MShop_Plugin_Provider_Exception( 'Product property does not match criteria.', -1, null, $code );
+			throw new MShop_Plugin_Provider_Exception( sprintf( 'Product property does not match criteria.' ), -1, null, $code );
 		}
 
 		return true;

@@ -81,7 +81,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 			$keyElements = explode( '.', $key );
 
 			if( $keyElements[0] !== 'product' || count( $keyElements ) < 3 ) {
-				throw new MShop_Plugin_Exception( 'Error in configuration.' );
+				throw new MShop_Plugin_Exception( sprintf( 'Error in configuration.' ) );
 			}
 
 			$productSubManager = $productManager->getSubManager( $keyElements[1] );

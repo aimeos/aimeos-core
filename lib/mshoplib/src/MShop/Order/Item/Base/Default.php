@@ -507,7 +507,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count($this->_products) < 1 ) )
 		{
-			throw new MShop_Order_Exception( 'No products in basket' );
+			throw new MShop_Order_Exception( sprintf( 'No products in basket' ) );
 		}
 
 		$this->_notifyListeners( 'isComplete.after', $what );
@@ -742,6 +742,6 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			return $product;
 		}
 
-		throw new MShop_Order_Exception( 'No product with the same signatur available' );
+		throw new MShop_Order_Exception( sprintf( 'No product with the same signatur available' ) );
 	}
 }

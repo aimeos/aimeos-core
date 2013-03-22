@@ -201,7 +201,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	public function __call( $name, array $param )
 	{
 		if ( ( $result = call_user_func_array( array( $this->_object, $name ), $param) ) === false ) {
-			throw new MShop_Service_Exception( 'Unable to call method "%1$s"', $name );
+			throw new MShop_Service_Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 		}
 
 		return $result;
