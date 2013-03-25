@@ -92,7 +92,7 @@ class MShop_Plugin_Provider_Order_Shipping implements MShop_Plugin_Provider_Inte
 			$sum->addItem( $product->getPrice(), $product->getQuantity() );
 		}
 
-		if( $sum->getValue() + $sum->getRebate() > $config['threshold'][$currency] && $price->getShipping() > '0.00' )
+		if( $sum->getValue() + $sum->getRebate() >= $config['threshold'][$currency] && $price->getShipping() > '0.00' )
 		{
 			$price->setRebate( $price->getShipping() );
 			$price->setShipping( '0.00' );
