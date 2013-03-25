@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$listTarget = $this->config( 'client/html/catalog/list/url/target' );
+$listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
+
+?>
+<div class="catalog-stage-breadcrumb">
+<?php if( isset( $this->stageCatPath ) ) : ?>
+	<nav>
+		<span class="title"><?php echo $this->translate( 'client/html', 'You are here:' ); ?></span>
+		<ol>
+<?php	foreach( (array) $this->stageCatPath as $cat ) : ?>
+			<li><a href="<?php echo $this->url( $listTarget, $listController, $listAction, array( 'f-catalog-id' => $cat->getId() ), array( $cat->getName() ) ); ?>"><?php echo $cat->getName(); ?></a></li>
+<?php	endforeach; ?>
+		</ol>
+	</nav>
+<?php endif; ?>
+<?php echo $this->get( 'breadcrumbBody' ); ?>
+</div>
+
+

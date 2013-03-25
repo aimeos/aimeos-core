@@ -181,7 +181,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$params = array ( 'TOKEN' => $rvals['TOKEN'] );
 		$this->_saveAttributes( $params, $orderBaseItem->getService('payment') );
 
-		return new MShop_Common_Item_Helper_Form_Default( $this->_config['PaypalUrl'], 'GET', $params );
+		return new MShop_Common_Item_Helper_Form_Default( $this->_config['PaypalUrl'] . $rvals['TOKEN'], 'GET', array() );
 	}
 
 
@@ -536,30 +536,43 @@ implements MShop_Service_Provider_Payment_Interface
 		$values = $this->_getAuthParameter();
 
 
-		$orderAddressDelivery = $orderBase->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		try
+		{
+			$orderAddressDelivery = $orderBase->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
 
-		/* setting up the shipping address details (ReviewOrder) */
-		$values['ADDROVERRIDE'] = 1;
-		$values['PAYMENTREQUEST_0_SHIPTONAME'] = $orderAddressDelivery->getFirstName() . ' ' . $orderAddressDelivery->getLastName();
-		$values['PAYMENTREQUEST_0_SHIPTOSTREET'] = $orderAddressDelivery->getAddress1() . ' ' . $orderAddressDelivery->getAddress2() . ' ' . $orderAddressDelivery->getAddress3();
-		$values['PAYMENTREQUEST_0_SHIPTOCITY'] = $orderAddressDelivery->getCity();
-		$values['PAYMENTREQUEST_0_SHIPTOSTATE'] = $orderAddressDelivery->getState();
-		$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $orderAddressDelivery->getCountryId();
-		$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $orderAddressDelivery->getPostal();
+			/* setting up the shipping address details (ReviewOrder) */
+			$values['ADDROVERRIDE'] = 1;
+			$values['PAYMENTREQUEST_0_SHIPTONAME'] = $orderAddressDelivery->getFirstName() . ' ' . $orderAddressDelivery->getLastName();
+			$values['PAYMENTREQUEST_0_SHIPTOSTREET'] = $orderAddressDelivery->getAddress1() . ' ' . $orderAddressDelivery->getAddress2() . ' ' . $orderAddressDelivery->getAddress3();
+			$values['PAYMENTREQUEST_0_SHIPTOCITY'] = $orderAddressDelivery->getCity();
+			$values['PAYMENTREQUEST_0_SHIPTOSTATE'] = $orderAddressDelivery->getState();
+			$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $orderAddressDelivery->getCountryId();
+			$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $orderAddressDelivery->getPostal();
+		}
+		catch( Exception $e ) { ; }
 
-
+		$lastPos = 0;
 		foreach( $orderBase->getProducts() as $product )
 		{
 			$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $product->getPosition() ] = $product->getId();
 			$values[ 'L_PAYMENTREQUEST_0_NAME' . $product->getPosition() ] = $product->getName();
 			$values[ 'L_PAYMENTREQUEST_0_QTY' . $product->getPosition() ] = $product->getQuantity();
 			$values[ 'L_PAYMENTREQUEST_0_AMT' . $product->getPosition() ] = $product->getPrice()->getValue();
+			$lastPos = $product->getPosition();
+		}
+
+		foreach( $orderBase->getServices() as $service )
+		{
+			$lastPos++;
+			$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $lastPos ] = $service->getId();
+			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $service->getName();
+			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
+			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $service->getPrice()->getValue();
 		}
 
 
 		$price = $orderBase->getPrice();
 		$amount = $price->getValue() + $price->getShipping();
-		$orderServiceDeliveryItem = $orderBase->getService('delivery');
 
 		$values['MAXAMT'] = $amount + 0.01; // @todo rounding error?
 		$values['PAYMENTREQUEST_0_AMT'] = number_format( $amount, 2, '.', '' );
@@ -571,12 +584,21 @@ implements MShop_Service_Provider_Payment_Interface
 		$values['PAYMENTREQUEST_0_TAXAMT'] = $price->getTaxRate();
 		$values['PAYMENTREQUEST_0_CURRENCYCODE'] = $orderBase->getPrice()->getCurrencyId();
 		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->_config['PaymentAction'];
-		$values['L_SHIPPINGOPTIONAMOUNT0'] = $price->getShipping();
-		$values['L_SHIPPINGOPTIONlABEL0'] = $orderServiceDeliveryItem->getName();
-		$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
-		$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
 		$values['RETURNURL'] = $this->_config['ReturnUrl'];
 		$values['CANCELURL'] = $this->_config['CancelUrl'];
+
+
+		try
+		{
+			$orderServiceDeliveryItem = $orderBase->getService('delivery');
+
+			$values['L_SHIPPINGOPTIONAMOUNT0'] = $price->getShipping();
+			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getName();
+			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
+			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
+		}
+		catch( Exception $e ) { ; }
+
 
 		return $values;
 	}

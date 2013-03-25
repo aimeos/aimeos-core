@@ -9,6 +9,8 @@ return array (
 	'product/list/type' => array(
 		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		'attribute/config' => array( 'domain' => 'attribute', 'code' => 'config', 'label' => 'Configurable', 'status' => 1 ),
+		'attribute/variant' => array( 'domain' => 'attribute', 'code' => 'variant', 'label' => 'Variant', 'status' => 1 ),
 		'catalog/default' => array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'media/default' => array( 'domain' => 'media', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'price/default' => array( 'domain' => 'price', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
@@ -67,9 +69,9 @@ return array (
 		array( 'parentid' => 'product/U:TESTP', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/U:TESTPSUB01', 'start' => null, 'end' => null, 'pos' => 0 ),
 
 		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/size/xs', 'start' => null, 'end' => null, 'pos' => 0 ),
-		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/length/30', 'start' => null, 'end' => null, 'pos' => 1 ),
-		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/width/29', 'start' => null, 'end' => null, 'pos' => 2 ),
-		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/color/white', 'start' => null, 'end' => null, 'pos' => 3 ),
+		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/variant', 'domain' => 'attribute', 'refid' => 'attribute/product/length/30', 'start' => null, 'end' => null, 'pos' => 1 ),
+		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/variant', 'domain' => 'attribute', 'refid' => 'attribute/product/width/29', 'start' => null, 'end' => null, 'pos' => 2 ),
+		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/config', 'domain' => 'attribute', 'refid' => 'attribute/product/color/white', 'start' => null, 'end' => null, 'pos' => 3 ),
 		array( 'parentid' => 'product/CNC', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/size/xs', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'product/ABCD', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/size/xl', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'product/EFGH', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/size/xxl', 'start' => null, 'end' => null, 'pos' => 0 ),
@@ -98,6 +100,7 @@ return array (
 		array( 'parentid' => 'product/QRST', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/50.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'product/U:CF', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/0.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),
 		//new
+		array( 'parentid' => 'product/U:TESTSUB04', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/28.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'product/U:TESTSUB05', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/28.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'product/U:TESTSUB05', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/purchase/12.00/0.00', 'start' => null, 'end' => null, 'pos' => 1 ),
 		array( 'parentid' => 'product/U:noSel', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/12.00/0.00', 'start' => null, 'end' => null, 'pos' => 0 ),

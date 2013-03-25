@@ -1,0 +1,140 @@
+# German translations for frontend controllers.
+# Copyright (C) 2013
+# This file is distributed under the same license as the arcavias-core package.
+# Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: arcavias-core 2013-01\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-15 17:28+0100\n"
+"PO-Revision-Date: 2013-02-06 20:27+0100\n"
+"Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
+"Language: Deutsch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/Controller/Frontend/Abstract.php:57
+#: src/Controller/Frontend/Abstract.php:72
+#, php-format
+msgid "An empty domain is invalid"
+msgstr "Für die Erzeugung eines Managers ist eine Domäne zwingend erforderlich"
+
+#: src/Controller/Frontend/Abstract.php:67
+#: src/Controller/Frontend/Common/Factory/Abstract.php:70
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr "Unbekannte Domäne \"%1$s\""
+
+#: src/Controller/Frontend/Abstract.php:83
+#, php-format
+msgid "No factory \"%1$s\" found"
+msgstr "Es konnte kein Objekt \"%1$s\" erzeugt werden"
+
+#: src/Controller/Frontend/Service/Default.php:82
+#, php-format
+msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
+msgstr "Es konnte kein Service \"%1$s\" mit der ID \"%2$s\" erstellt werden"
+
+#: src/Controller/Frontend/Service/Default.php:180
+#, php-format
+msgid "No service item for type \"%1$s\" and ID \"%2$s\" available"
+msgstr ""
+"Es wurde kein Eintrag für den Service mit der ID \"%2$s\" und dem Typ \"%1$s"
+"\" gefunden"
+
+#: src/Controller/Frontend/Service/Factory.php:30
+#: src/Controller/Frontend/Basket/Factory.php:31
+#: src/Controller/Frontend/Common/Factory/Abstract.php:38
+#: src/Controller/Frontend/Catalog/Factory.php:31
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr "Der Klassenname \"%1$s\" is ungültig"
+
+#: src/Controller/Frontend/Basket/Default.php:112
+#, php-format
+msgid "No product found for ID \"%1$s\" and variant attribute IDs \"%2$s\""
+msgstr ""
+"Es wurde kein Produkt mit der ID \"%1$s\" und den ausgewählten Varianten mit "
+"den IDs \"%2$s\" gefunden"
+
+#: src/Controller/Frontend/Basket/Default.php:164
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be deleted manually"
+msgstr ""
+"Das Produkt im Warenkorb an Position \"%1$d\" kann nicht gelöscht werden"
+
+#: src/Controller/Frontend/Basket/Default.php:186
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be changed"
+msgstr ""
+"Das Produkt im Warenkorb an Position \"%1$d\" darf nicht verändert werden"
+
+#: src/Controller/Frontend/Basket/Default.php:294
+#, php-format
+msgid "Invalid value for address type \"%1$s\""
+msgstr "Es wurde kein gültiger Wert für den Adresstyp \"%1$s\" übergeben"
+
+#: src/Controller/Frontend/Basket/Default.php:321
+#, php-format
+msgid "Unknown attributes \"%1$s\""
+msgstr "Die übergebenen Attribute \"%1$s\" konnten nicht zugeordnet werden"
+
+#: src/Controller/Frontend/Basket/Default.php:383
+#, php-format
+msgid "Adding product with ID \"%1$s\" is not allowed"
+msgstr ""
+"Das Produkt mit der ID \"%1$s\" darf nicht direkt zum Warenkorb hinzu gefügt "
+"werden"
+
+#: src/Controller/Frontend/Basket/Default.php:413
+#, php-format
+msgid "There are not enough products (ID \"%1$s\") in stock"
+msgstr ""
+"Es sind leider nicht genügend von Ihnen gewünschte Produkte (ID \"%1$s\") "
+"vorhanden"
+
+#: src/Controller/Frontend/Basket/Default.php:478
+#, php-format
+msgid "Invalid address property \"%1$s\" with value \"%2$s\""
+msgstr "Der Adressteil \"%1$s\" mit dem Wert \"%2$s\" ist ungültig"
+
+#: src/Controller/Frontend/Basket/Default.php:491
+#, php-format
+msgid "Invalid address properties, please check your input"
+msgstr ""
+"Ein oder mehrere Adressteile sind ungültig. Bitte überprüfen Sie Ihre "
+"Eingaben"
+
+#: src/Controller/Frontend/Basket/Default.php:526
+#, php-format
+msgid ""
+"Available attribute IDs \"%1$s\" does not match the given attribute IDs "
+"\"%2$s\""
+msgstr ""
+"Die vorhandenden Attribute mit den IDs \"%1$s\" stimmen nicht im den "
+"übergebenen (\"%1$s\") überein"
+
+#: src/Controller/Frontend/Basket/Default.php:560
+#, php-format
+msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
+msgstr ""
+"Für die Domäne \"%1$s\" und den Code \"%2$s\" wurde kein Listentyp gefunden"
+
+#: src/Controller/Frontend/Common/Factory/Abstract.php:44
+#: src/Controller/Frontend/Common/Factory/Abstract.php:117
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "Die Klasse \"%1$s\" ist unbekannt"
+
+#: src/Controller/Frontend/Common/Factory/Abstract.php:50
+#: src/Controller/Frontend/Common/Factory/Abstract.php:123
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr "Die Klasse \"%1$s\" implementiert nicht \"%2$s\""
+
+#: src/Controller/Frontend/Common/Decorator/Abstract.php:51
+#, php-format
+msgid "Unable to call method \"%1$s::%2$s\""
+msgstr "Die Methode \"%1$s::%2$s\" konnte nicht aufgerufen werden"

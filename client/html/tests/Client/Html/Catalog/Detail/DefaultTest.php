@@ -62,7 +62,7 @@ class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript"', $output );
+		$this->assertStringStartsWith( '<title>Cafe Noire Cappuccino</title>', $output );
 	}
 
 
@@ -73,7 +73,7 @@ class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="arcavias catalog-detail">', $output );
+		$this->assertStringStartsWith( '<section class="arcavias catalog-detail">', $output );
 	}
 
 

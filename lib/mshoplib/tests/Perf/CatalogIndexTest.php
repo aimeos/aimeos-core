@@ -96,12 +96,12 @@ class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'catalog.index.catalog.id', $catId ),
-			$search->compare( '>=', $search->createFunction( 'catalog.index.text.value', array( 'default', 'en', 'name' ) ), '' ),
+			$search->compare( '>=', $search->createFunction( 'catalog.index.text.value', array( 'default', 'en', 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'en', 'name' ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'en', 'name', 'product' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -199,7 +199,6 @@ class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
 			$search->compare( '>=', $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
 			$search->compare( '<=', $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) ), 1000 ),
 		);
@@ -229,7 +228,6 @@ class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'default', 'en', 'pink' ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -244,6 +242,34 @@ class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 
 		$stop = microtime( true );
 		printf( "\n    catalog index search by text, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+	}
+
+
+	public function testSearchByTextByName()
+	{
+		$start = microtime( true );
+
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$indexManager = $catalogManager->getSubManager( 'index' );
+		$search = $indexManager->createSearch( true );
+		$search->setSlice( 0, $this->_slizeSize );
+
+		$expr = array(
+			$search->getConditions(),
+			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'default', 'en', 'blue' ) ), 0 ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$sort = array(
+			$search->sort( '-', $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'en', 'name', 'product' ) ) ),
+		);
+		$search->setSortations( $sort );
+
+		$total = 0;
+		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+
+		$stop = microtime( true );
+		printf( "\n    catalog index search by text, sort by name (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 
@@ -269,7 +295,7 @@ class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:catalog.index.text.relevance', array( 'default', 'en', 'shirt' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:catalog.index.text.relevance', array( 'default', 'en', 'plain' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -314,7 +340,7 @@ class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:catalog.index.text.relevance', array( 'default', 'en', 'pink' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:catalog.index.text.relevance', array( 'default', 'en', 'plain' ) ) ),
 		);
 		$search->setSortations( $sort );
 

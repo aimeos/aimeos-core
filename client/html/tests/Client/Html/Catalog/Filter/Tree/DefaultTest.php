@@ -56,7 +56,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 	{
 		$output = $this->_object->getHeader();
 
-		$this->assertContains( '<style type="text/css">', $output );
+		$this->assertContains( '<script type="text/javascript">', $output );
 	}
 
 
@@ -69,7 +69,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$this->assertContains( '<style type="text/css">', $this->_object->getHeader() );
+		$this->assertContains( '<script type="text/javascript">', $this->_object->getHeader() );
 	}
 
 
@@ -86,7 +86,47 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertContains( 'Groups', $output );
 		$this->assertContains( 'Neu', $output );
+		$this->assertContains( 'evel-2', $output );
+	}
+
+
+	public function testGetBodyLevelsAlways()
+	{
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
+		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+
+		$view = $this->_object->getView();
+
+		$conf = new MW_Config_Array( array( 'client' => array( 'html' => array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-always' => 2 ) ) ) ) ) ) );
+		$helper = new MW_View_Helper_Config_Default( $view, $conf );
+		$view->addHelper( 'config', $helper );
+
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getId() ) );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->_object->getBody();
+
 		$this->assertContains( 'level-2', $output );
+	}
+
+
+	public function testGetBodyLevelsOnly()
+	{
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
+		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_TREE );
+
+		$view = $this->_object->getView();
+
+		$conf = new MW_Config_Array( array( 'client' => array( 'html' => array( 'catalog' => array( 'filter' => array( 'tree' => array( 'levels-only' => 1 ) ) ) ) ) ) );
+		$helper = new MW_View_Helper_Config_Default( $view, $conf );
+		$view->addHelper( 'config', $helper );
+
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getChild( 0 )->getId() ) );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->_object->getBody();
+
+		$this->assertNotContains( 'level-2', $output );
 	}
 
 

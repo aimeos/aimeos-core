@@ -96,7 +96,7 @@ class MW_Setup_Task_ProductAddAttributePerfData extends MW_Setup_Task_ProductAdd
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
 		$expr[] = $search->compare('==', 'product.list.type.domain', 'attribute');
-		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
+		$expr[] = $search->compare('==', 'product.list.type.code', 'config');
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems($search);
 

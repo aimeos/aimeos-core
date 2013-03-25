@@ -18,6 +18,8 @@ SET SESSION sql_mode='ANSI';
 CREATE TABLE "mshop_catalog" (
 	-- Unique id of the tree node
 	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	-- parent id
+	"parentid" INTEGER NOT NULL,
 	-- site id, references mshop_locale_site.id
 	"siteid" INTEGER NOT NULL,
 	-- Level of depth of the node
@@ -26,6 +28,8 @@ CREATE TABLE "mshop_catalog" (
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Displayed name in backend
 	"label" VARCHAR(255) NOT NULL,
+	-- catalog config values stored in JSON format
+	"config" TEXT NOT NULL,
 	-- Left value of the node
 	"nleft" INTEGER NOT NULL,
 	-- Right value of the node
@@ -270,6 +274,8 @@ CREATE TABLE "mshop_catalog_index_text" (
 	"listtype" VARCHAR(32) NOT NULL,
 	-- text type
 	"type" VARCHAR(32) NOT NULL,
+	-- domain of text
+	"domain" VARCHAR(32) NOT NULL,
 	-- text value
 	"value" TEXT NOT NULL,
 	-- Date of last modification of this database entry

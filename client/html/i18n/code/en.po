@@ -16,6 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 
+# Attribute
+
+msgid "size"
+msgstr "Size"
+
+msgid "length"
+msgstr "Length"
+
+msgid "width"
+msgstr "Width"
+
+msgid "color"
+msgstr "Color"
+
+
 # Payment status values
 
 msgid "pay:-1"
@@ -80,7 +95,7 @@ msgstr "returned"
 msgid "payment.directdebit.accountowner"
 msgstr "Account owner"
 
-msgid "payment.directdebit.accountnumber"
+msgid "payment.directdebit.accountno"
 msgstr "Account number"
 
 msgid "payment.directdebit.bankcode"

@@ -16,30 +16,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 
+# Attribute
+
+msgid "size"
+msgstr "Grösse"
+
+msgid "length"
+msgstr "Länge"
+
+msgid "width"
+msgstr "Weite"
+
+msgid "color"
+msgstr "Farbe"
+
+
+
 # Zahlungsstatus
 
-msgid "paystatus:-1"
+msgid "pay:-1"
 msgstr "Offen"
 
-msgid "paystatus:0"
+msgid "pay:0"
 msgstr "Gelöscht"
 
-msgid "paystatus:1"
+msgid "pay:1"
 msgstr "Abgebrochen"
 
-msgid "paystatus:2"
+msgid "pay:2"
 msgstr "Abgelehnt"
 
-msgid "paystatus:3"
+msgid "pay:3"
 msgstr "Erstattet"
 
-msgid "paystatus:4"
+msgid "pay:4"
 msgstr "Wartend"
 
-msgid "paystatus:5"
+msgid "pay:5"
 msgstr "Authorisiert"
 
-msgid "paystatus:6"
+msgid "pay:6"
 msgstr "Erhalten"
 
 
@@ -80,7 +96,7 @@ msgstr "Zurück gesendet"
 msgid "payment.directdebit.accountowner"
 msgstr "Kontoinhaber"
 
-msgid "payment.directdebit.accountnumber"
+msgid "payment.directdebit.accountno"
 msgstr "Kontonummer"
 
 msgid "payment.directdebit.bankcode"

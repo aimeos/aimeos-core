@@ -99,37 +99,35 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 	 */
 	public function process()
 	{
-		try
-		{
-			$view = $this->getView();
-			$context = $this->_getContext();
+		$view = $this->getView();
+		$context = $this->_getContext();
 
-			$controller = Controller_Frontend_Basket_Factory::createController( $context );
-			$service = $controller->get()->getService( 'payment' );
+		$controller = Controller_Frontend_Basket_Factory::createController( $context );
+		$service = $controller->get()->getService( 'payment' );
 
-			$manager = MShop_Service_Manager_Factory::createManager( $context );
-			$provider = $manager->getProvider( $manager->getItem( $service->serviceId ) );
+		$manager = MShop_Service_Manager_Factory::createManager( $context );
+		$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
+
+		$confirmTarget = $view->config( 'client/html/checkout/confirm/url/target' );
+		$confirmController = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+		$confirmAction = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+		$confirmConfig = $view->config( 'client/html/checkout/confirm/url/config', array() );
 
 
-			$url = $view->url( $view->config( 'checkout-confirm-target' ), 'checkout', 'confirm' );
+		$url = $view->url( $confirmTarget, $confirmController, $confirmAction, array(), array(), $confirmConfig );
 
-			if( strpos( $url, '?' ) === false ) {
-				$url .= '?';
-			} else {
-				$url .= '&';
-			}
-
-			$url .= 'arcavias=' . $view->orderItem->getId();
-
-			$view->paymentForm = $provider->process( $view->orderItem );
-			$view->paymentUrl = $url;
-
-			$this->_process( $this->_subPartPath, $this->_subPartNames );
+		if( strpos( $url, '?' ) === false ) {
+			$url .= '?';
+		} else {
+			$url .= '&';
 		}
-		catch( Exception $e )
-		{
-			$error = array( 'An error occured while processing the payment: ' . $e->getMessage() );
-			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
-		}
+
+		$url .= 'arcavias=' . $view->orderItem->getId();
+
+		$view->paymentForm = $provider->process( $view->orderItem );
+		$view->paymentUrl = $url;
+
+
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
 }

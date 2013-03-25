@@ -19,6 +19,26 @@ class MW_View_Helper_NavTree_Default
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
+	private $_target;
+	private $_controller;
+	private $_action;
+
+
+	/**
+	 * Initializes the view helper classes.
+	 *
+	 * @param MW_View_Interface $view View instance with registered view helpers
+	 */
+	public function __construct( MW_View_Interface $view )
+	{
+		parent::__construct( $view );
+
+		$this->_target = $view->config( 'client/html/catalog/list/url/target' );
+		$this->_controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
+		$this->_action = $view->config( 'client/html/catalog/list/url/action', 'list' );
+	}
+
+
 	/**
 	 * Returns the HTML for the navigation tree.
 	 *
@@ -32,12 +52,17 @@ class MW_View_Helper_NavTree_Default
 		}
 
 		$id = $item->getId();
+		$config = $item->getConfig();
 		$trailing = array( $item->getname() );
-		$output = '<li class="tree-catid-' . $id . ( $item->hasChildren() ? ' catWithChild' : ' catNoChild' ) . '"><a href="' . $this->url( $this->config( 'catalog-list-target' ), 'catalog', 'list', array( 'f-catalog-id' => $id ), $trailing ) . '">' . $item->getName() . '</a>';
+		$class = ( $item->hasChildren() ? ' withchild' : ' nochild' );
+		$class .= ( isset( $config['css-class'] ) ? ' ' . $config['css-class'] : '' );
+		$url = $this->url( $this->_target, $this->_controller, $this->_action, array( 'f-catalog-id' => $id ), $trailing );
+
+		$output = '<li class="catid-' . $id . $class . '"><a href="' . $url . '">' . $item->getName() . '</a>';
 
 		if( $item->hasChildren() )
 		{
-			$output .= '<ul class="tree-level-' . ( $item->getNode()->level + 1 ) . '">';
+			$output .= '<ul class="level-' . ( $item->getNode()->level + 1 ) . '">';
 
 			foreach( $item->getChildren() as $child ) {
 				$output .= $this->transform( $child );

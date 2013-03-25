@@ -1,0 +1,172 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ * @package MShop
+ * @subpackage Plugin
+ */
+
+
+/**
+ * Adds attributes to a product in an order
+ *
+ * @package MShop
+ * @subpackage Plugin
+ */
+class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_Interface
+{
+	protected $_item;
+	protected $_context;
+
+
+	/**
+	 * Initializes the plugin instance
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Plugin_Item_Interface $item Plugin item object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
+	{
+		$this->_item = $item;
+		$this->_context = $context;
+
+		$config = $context->getConfig();
+		$this->_type = $config->get( 'plugin/provider/order/propertyadd/type', 'property' );
+	}
+
+
+	/**
+	 * Subscribes itself to a publisher
+	 *
+	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 */
+	public function register( MW_Observer_Publisher_Interface $p )
+	{
+		$p->addListener( $this, 'addProduct.after' );
+	}
+
+
+	/**
+	 * Receives a notification from a publisher object
+	 *
+	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param string $action Name of the action to listen for
+	 * @param mixed $value Object or value changed in publisher
+	 * @throws MShop_Plugin_Exception in case of faulty configuration or parameters
+	 * @return bool true if attributes have been added successfully
+	 */
+	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	{
+		$this->_context->getLogger()->log( __METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG );
+
+		$class = 'MShop_Order_Item_Base_Interface';
+		if( !( $order instanceof $class ) )
+		{
+			$str = 'Received notification from "%1$s" which doesn\'t implement "%2$s"';
+			throw new MShop_Plugin_Exception( sprintf( $str, get_class( $order ), $class ) );
+		}
+
+		$class = 'MShop_Order_Item_Base_Product_Interface';
+		if( !( $value instanceof $class ) ) {
+			throw new MShop_Plugin_Exception( sprintf( 'Given object isn\'t of type "%1$s"', $class ) );
+		}
+
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+
+		$config = $this->_item->getConfig();
+
+		foreach( $config as $key => $properties )
+		{
+			$keyElements = explode( '.', $key );
+
+			if( $keyElements[0] !== 'product' || count( $keyElements ) < 3 ) {
+				throw new MShop_Plugin_Exception( 'Error in configuration.' );
+			}
+
+			$productSubManager = $productManager->getSubManager( $keyElements[1] );
+
+			$search = $productSubManager->createSearch( true );
+
+			$cond = array();
+			$cond[] = $search->compare( '==', $key, $value->getProductId() );
+			$cond[] = $search->getConditions();
+
+			$search->setConditions( $search->combine( '&&', $cond ) );
+
+			$result = $productSubManager->searchItems( $search );
+
+			foreach( $result as $item )
+			{
+				$attributes = $this->_addAttributes( $item, $value, $properties );
+				$value->setAttributes( $attributes );
+			}
+		}
+
+		return true;
+	}
+
+
+	/**
+	* Adds attribute items to an array.
+	*
+	* @param MShop_Common_Item_Interface $item Item containing the properties to be added as attributes
+	* @param MShop_Order_Item_Base_Product_Interface $product Product containing attributes
+	* @param Array $properties List of item properties to be converted
+	* @return Array List of attributes
+	*/
+	protected function _addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product , array $properties )
+	{
+		$attributeList = $product->getAttributes();
+		$config = $this->_item->getConfig();
+
+		$itemProperties = $item->toArray();
+
+		$attributes = array();
+		foreach( $properties as $current )
+		{
+			if( array_key_exists( $current, $itemProperties ) )
+			{
+				$parts = explode( '.', $current );
+				$new = $this->_createAttribute( $product, $parts[2], $itemProperties[ $current ] );
+
+				if( $new !== null ) {
+					$attributeList[] = $new;
+				}
+			}
+		}
+
+		return $attributeList;
+	}
+
+
+	/**
+	* Creates an attribute with given values for code, type, name and value
+	*
+	* @param String $code Value for attribute code
+	* @param String $value Value for attribute value
+	* @param String $name Optional value for attribute name
+	* @return MShop_Order_Item_Base_Product_Attribute_Interface Newly created attribte item
+	*/
+	protected function _createAttribute( MShop_Order_Item_Base_Product_Interface $product, $code, $value, $name = null )
+	{
+		if( $product->getAttribute( $code ) !== null ) {
+			return null;
+		}
+
+		$attributeManager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
+
+		if( $name === null ) {
+			$name = $code;
+		}
+
+		$new = $attributeManager->createItem();
+		$new->setCode( $code );
+		$new->setType( $this->_type );
+		$new->setName( $name );
+		$new->setValue( $value );
+
+		return $new;
+	}
+
+}

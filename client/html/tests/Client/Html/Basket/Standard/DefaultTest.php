@@ -65,7 +65,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="arcavias basket-standard">', $output );
+		$this->assertStringStartsWith( '<section class="arcavias basket-standard">', $output );
 	}
 
 
@@ -213,6 +213,23 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">0.00€</td>.*</tfoot>#smU', $output );
 		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">0.00€</td>.*</tfoot>#smU', $output );
 		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">0.00€</td>.*</tfoot>#smU', $output );
+	}
+
+
+	public function testGetBodyDeleteInvalid()
+	{
+		$view = $this->_object->getView();
+		$param = array(
+			'b-action' => 'delete',
+			'b-position' => -1,
+		);
+
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->process();
+
+		$this->assertEquals( 1, count( $view->get( 'standardErrorList', array() ) ) );
 	}
 
 

@@ -3,7 +3,7 @@
 <project name="Arcavias" default="all">
 
 	<target name="setup" description="Sets up database incl. unit test data">
-		<echo msg="Setting up database" />
+		<echo msg="Setting up test database" />
 		<exec command="php setup.php unittest" checkreturn="true" logoutput="true"/>
 	</target>
 
@@ -21,7 +21,7 @@
 		<phing target="coverage" haltonfailure="true" dir="lib/mwlib" />
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -40,7 +40,7 @@
 		<phing target="test" haltonfailure="true" dir="lib/mwlib" />
 		<phing target="test" haltonfailure="true">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -54,7 +54,7 @@
 		<phing target="testperf" dir="client/html" />
 		<phing target="testperf">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -69,7 +69,7 @@
 		<phing target="check" dir="lib/mwlib" />
 		<phing target="check">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -119,7 +119,7 @@
 		<phing target="clean" dir="lib/mwlib" />
 		<phing target="clean">
 			<fileset dir="ext" expandsymboliclinks="true" >
-				<include name="**/build.xml" />
+				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
 	</target>
@@ -127,6 +127,13 @@
 
 	<target name="i18n" description="Creates all translation files">
 		<phing target="i18n" dir="client/html" />
+		<phing target="i18n" dir="controller/frontend" />
+		<phing target="i18n" dir="lib/mshoplib" />
+		<phing target="i18n">
+			<fileset dir="ext" expandsymboliclinks="true" >
+				<include name="**/phing.xml" />
+			</fileset>
+		</phing>
 	</target>
 
 
@@ -134,6 +141,13 @@
 		<taskdef name="jsbpackages" classname="dev.phing.MShopJsbPackageTask" />
 		<jsbpackages />
 		<phing target="build" dir="client/html" />
+		<phing target="build" dir="controller/frontend" />
+		<phing target="build" dir="lib/mshoplib" />
+		<phing target="build">
+			<fileset dir="ext" expandsymboliclinks="true" >
+				<include name="**/phing.xml" />
+			</fileset>
+		</phing>
     </target>
 
 
@@ -147,7 +161,7 @@
 		    </replaceregexp>
 		  </filterchain>
 		</reflexive>
-		<exec command="tar -c --bzip2 --exclude-vcs --exclude='./dev' --exclude='./ext/*' --exclude='./config/resource.php' -f ../arcavias-core_${version}.tar.bz2 ."
+		<exec command="tar -c --bzip2 --exclude-from=.exclude -f ../arcavias-core_${version}.tar.bz2 ."
 			checkreturn="true" logoutput="true"/>
 		<filehash file="../arcavias-core_${version}.tar.bz2" hashtype="1" />
 		<echo msg="SHA1 hash value: ${filehashvalue}" />

@@ -57,7 +57,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<style type="text/css">', $output );
+		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
 	}
 
 
@@ -65,7 +65,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<div class="arcavias checkout-standard">', $output );
+		$this->assertStringStartsWith( '<section class="arcavias checkout-standard">', $output );
 		$this->assertRegExp( '#<ol class="steps">.*<li class="step.*>.*</li>.*</ol>#smU', $output );
 	}
 

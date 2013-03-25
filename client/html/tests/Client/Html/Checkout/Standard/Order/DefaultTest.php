@@ -78,7 +78,7 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="checkout-standard-order">', $output );
+		$this->assertStringStartsWith( '<section class="checkout-standard-order">', $output );
 	}
 
 
@@ -120,9 +120,21 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 	{
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
 		$baseManager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' );
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
+
+
+		$search = $serviceManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.code', 'unitpaymentcode' ) );
+		$result = $serviceManager->searchItems( $search );
+
+		if( ( $serviceItem = reset( $result ) ) === false ) {
+			throw new Exception( 'No service item found' );
+		}
 
 		$controller->get()->setCustomerId( '-1' );
 		$controller->setAddress( 'payment', array( 'order.base.address.languageid' => 'en' ) );
+		$controller->setService( 'payment', $serviceItem->getId() );
+
 
 		$view = TestHelper::getView();
 
@@ -133,6 +145,7 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 		$this->_object->setView( $view );
 
 		$this->_object->process();
+
 
 		$search = $baseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.customerid', '-1' ) );

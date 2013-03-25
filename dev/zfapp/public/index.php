@@ -6,8 +6,6 @@
  * @version $Id: index.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-$time = microtime( true );
-
 define( 'ZFAPP_ROOT', dirname( dirname( __FILE__ ) ) );
 define( 'APPLICATION_PATH', ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'application' );
 define( 'APPLICATION_ENV', 'development' ); // development | production
@@ -43,7 +41,3 @@ try
 } catch ( Exception $e ) {
 	include 'errors/500.phtml';
 }
-
-echo '<!-- Exec time: ' . ( ( microtime(true) - $time ) * 1000 ) . ' ms -->' . PHP_EOL;
-echo '<!-- Peak mem: ' . ( memory_get_peak_usage( true ) / 1024 / 1024 ) . ' MiB -->' . PHP_EOL;
-echo '<!-- Path cache: ' . ( realpath_cache_size() / 1024 ) . ' KiB -->' . PHP_EOL;

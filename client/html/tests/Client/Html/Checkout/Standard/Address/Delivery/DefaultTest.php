@@ -58,7 +58,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
+		$this->assertStringStartsWith( '<style type="text/css">', $output );
 	}
 
 
@@ -73,7 +73,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<style type="text/css">', $output );
+		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
 	}
 
 

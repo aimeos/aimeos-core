@@ -5,22 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-
-$activeStep = $this->get( 'standardStepActive' );
-$steps = $this->get( 'standardSteps', array() );
-$step = null;
-
-do {
-	$lastStep = $step;
-} while( ( $step = array_shift( $steps ) ) !== null && $step !== $activeStep );
-$nextStep = ( ( $step = array_shift( $steps ) ) !== null ? $step : null );
-
-if( $lastStep ) {
-	$urlBack = $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $lastStep ) );
-} else {
-	$urlBack = $this->url( $this->config( 'basket-target' ), 'basket', 'index' );
-}
-
 $services = $this->get( 'deliveryServices', array() );
 $servicePrices = $this->get( 'deliveryServicePrices', array() );
 $serviceAttributes = $this->get( 'deliveryServiceAttributes', array() );
@@ -28,7 +12,7 @@ $serviceAttributes = $this->get( 'deliveryServiceAttributes', array() );
 try
 {
 	$orderService = $this->standardBasket->getService( 'delivery' );
-	$orderServiceId = $orderService->serviceId;
+	$orderServiceId = $orderService->getServiceId();
 }
 catch( Exception $e )
 {
@@ -47,28 +31,28 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 	$deliveryCss[$name][] = 'error';
 }
 
-$priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
+$priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 
 ?>
-<div class="checkout-standard-delivery">
-	<h1><?php echo $this->translate( 'core/client/html', 'delivery' ); ?></h1>
-	<p class="note"><?php echo $this->translate( 'core/client/html', 'Please choose your delivery method' ); ?></p>
-	<form method="POST" action="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index', array( 'c-step' => $nextStep ) ); ?>">
+<section class="checkout-standard-delivery">
+	<h1><?php echo $this->translate( 'client/html', 'delivery' ); ?></h1>
+	<p class="note"><?php echo $this->translate( 'client/html', 'Please choose your delivery method' ); ?></p>
+	<form method="POST" action="<?php echo $this->get( 'standardUrlNext' ); ?>">
 <?php foreach( $services as $id => $service ) : ?>
 		<div id="c-delivery-<?php echo $id; ?>" class="item item-service">
 			<label class="description" for="c-delivery-option-<?php echo $id; ?>">
 				<input class="option" type="radio" id="c-delivery-option-<?php echo $id; ?>" name="<?php echo $this->formparam( array( 'c-delivery-option' ) ); ?>" value="<?php echo $id; ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
-<?php		$currency = $this->translate( 'core/client/html/currency', $servicePrices[$id]->getCurrencyId() ); ?>
+<?php		$currency = $this->translate( 'client/html/currency', $servicePrices[$id]->getCurrencyId() ); ?>
 <?php		if( $servicePrices[$id]->getValue() > 0 ) : ?>
-				<span class="price-value"><?php printf( $this->translate( 'core/client/html', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getShipping() ), $currency ); ?></span>
+				<span class="price-value"><?php printf( $this->translate( 'client/html', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getShipping() ), $currency ); ?></span>
 <?php		else : ?>
-				<span class="price-value"><?php printf( $priceFormat, $this->number( $servicePrices[$id]->getValue() ), $currency ); ?></span>
+				<span class="price-value"><?php printf( $priceFormat, $this->number( $servicePrices[$id]->getShipping() ), $currency ); ?></span>
 	<?php	endif; ?>
 <?php	endif; ?>
 				<div class="icons">
 <?php	foreach( $service->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
-					<img src="<?php echo $mediaItem->getUrl(); ?>" />
+					<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl(); ?>" />
 <?php	endforeach; ?>
 				</div>
 				<h2><?php echo $service->getName(); ?></h2>
@@ -83,13 +67,13 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 <?php		foreach( $serviceAttributes[$id] as $key => $attribute ) : ?>
 <?php			$value = ( isset( $orderService ) && ( $value = $orderService->getAttribute( $key ) ) !== null ? $value : $attribute->getDefault() ); ?>
 				<li class="form-item <?php echo $key . ( isset( $deliveryCss[$key] ) ? ' ' . join( ' ', $deliveryCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
-					<label for="delivery-<?php echo $key; ?>"><?php echo $this->translate( 'core/client/html/code', $key ); ?></label>
+					<label for="delivery-<?php echo $key; ?>"><?php echo $this->translate( 'client/html/code', $key ); ?></label>
 <?php			switch( $attribute->getType() ) : case 'string':
 					?><input type="text" id="delivery-<?php echo $key; ?>" name="<?php echo $this->formparam( array( 'c-delivery', $id, $key ) ); ?>" value="<?php echo $this->param( 'c-delivery/' . $id . '/' . $key, $value ); ?>" />
 <?php				break; case 'select':
 					?><select id="delivery-<?php echo $key; ?>" name="<?php echo $this->formparam( array( 'c-delivery', $id, $key ) ); ?>">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
-						<option value="<?php echo $option; ?>"><?php echo $this->translate( 'core/client/html/code', $key . ':' . $option ); ?></option>
+						<option value="<?php echo $option; ?>"><?php echo $this->translate( 'client/html/code', $key . ':' . $option ); ?></option>
 <?php					endforeach; ?>
 					</select>
 <?php			endswitch; ?>
@@ -101,8 +85,8 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 <?php endforeach; ?>
 <?php echo $this->get( 'deliveryBody' ); ?>
 		<div class="button-group">
-			<a class="standardbutton" href="<?php echo $urlBack; ?>"><?php echo $this->translate( 'core/client/html', 'Back' ); ?></a> 
-			<button class="standardbutton"><?php echo $this->translate( 'core/client/html', 'Next' ); ?></button>
+			<a class="standardbutton" href="<?php echo $this->get( 'standardUrlBack' ); ?>"><?php echo $this->translate( 'client/html', 'Back' ); ?></a> 
+			<button class="standardbutton"><?php echo $this->translate( 'client/html', 'Next' ); ?></button>
 		</div>
 	</form>
-</div>
+</section>

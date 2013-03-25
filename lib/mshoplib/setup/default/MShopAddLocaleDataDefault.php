@@ -30,7 +30,7 @@ class MW_Setup_Task_MShopAddLocaleDataDefault extends MW_Setup_Task_MShopAddLoca
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'MShopAddTypeData' );
+		return array( 'MShopSetLocale' );
 	}
 
 
@@ -75,8 +75,5 @@ class MW_Setup_Task_MShopAddLocaleDataDefault extends MW_Setup_Task_MShopAddLoca
 		if( isset( $data['locale'] ) ) {
 			$this->_addLocaleData( $localeManager, $data['locale'], $siteIds );
 		}
-
-		// Set locale for further tasks
-		$this->_additional->setLocale( $localeManager->bootstrap( 'default', '', '', false ) );
 	}
 }

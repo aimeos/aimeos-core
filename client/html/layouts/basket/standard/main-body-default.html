@@ -5,6 +5,14 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
+$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
+$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+
+$checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
+$checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
+$checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
+
 try
 {
 	$price = $this->standardBasket->getPrice();
@@ -12,7 +20,7 @@ try
 	$priceService = $price->getShipping();
 	$priceRebate = $price->getRebate();
 	$priceTaxrate = $price->getTaxrate();
-	$priceCurrency = $this->translate( 'core/client/html/currency', $price->getCurrencyId() );
+	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
 }
 catch( Exception $e )
 {
@@ -23,37 +31,53 @@ catch( Exception $e )
 	$priceCurrency = '';
 }
 
-try {
+try
+{
 	$deliveryPriceItem = $this->standardBasket->getService( 'delivery' )->getPrice();
 	$deliveryPriceService = $deliveryPriceItem->getShipping();
 	$deliveryPriceValue = $deliveryPriceItem->getValue();
-} catch( Exception $e ) {
+}
+catch( Exception $e )
+{
 	$deliveryPriceValue = '0.00';
 	$deliveryPriceService = '0.00';
 }
 
-try {
+try
+{
 	$paymentPriceItem = $this->standardBasket->getService( 'payment' )->getPrice();
 	$paymentPriceService = $paymentPriceItem->getShipping();
 	$paymentPriceValue = $paymentPriceItem->getValue();
-} catch( Exception $e ) {
+}
+catch( Exception $e )
+{
 	$paymentPriceValue = '0.00';
 	$paymentPriceService = '0.00';
 }
 
-$priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
+try
+{
+	$this->standardBasket->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+	$checkout = true;
+}
+catch( Exception $e )
+{
+	$checkout = false;
+}
+
+$priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 
 ?>
 <div class="basket-standard-main">
-	<form method="POST" action="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index' ); ?>">
+	<form method="POST" action="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>">
 		<input type="hidden" name="<?php echo $this->formparam( 'b-action' ); ?>" value="edit" />
 		<table>
 			<thead>
 				<tr>
 					<th class="details"></th>
-					<th class="quantity"><?php echo $this->translate( 'core/client/html', 'Quantity' ); ?></th>
-					<th class="unitprice"><?php echo $this->translate( 'core/client/html', 'Price' ); ?></th>
-					<th class="price"><?php echo $this->translate( 'core/client/html', 'Sum' ); ?></th>
+					<th class="quantity"><?php echo $this->translate( 'client/html', 'Quantity' ); ?></th>
+					<th class="unitprice"><?php echo $this->translate( 'client/html', 'Price' ); ?></th>
+					<th class="price"><?php echo $this->translate( 'client/html', 'Sum' ); ?></th>
 					<th class="action"></th>
 				</tr>
 			</thead>
@@ -62,71 +86,82 @@ $priceFormat = $this->translate( 'core/client/html', '%1$s%2$s' );
 <?php 	foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
-						<img src="<?php echo $product->getMediaUrl(); ?>" />
+						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $product->getMediaUrl(); ?>" alt="" />
 						<span class="product-name"><?php echo $product->getName(); ?></span>
-<?php		foreach( $product->getAttributes() as $attribute ) : ?>
-						<span class="product-attributename"><?php echo $attribute->getName(); ?></span>
-						<span class="product-attributevalue"><?php echo $attribute->getValue(); ?></span>
-<?php		endforeach; ?>
+<?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
+						<ul class="attr-list">
+<?php			foreach( $product->getAttributes() as $attribute ) : ?>
+							<li class="attr-item">
+								<a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ) ); ?>">
+									<span class="name"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
+									<span class="value"><?php echo $attribute->getName(); ?></span>
+								</a>
+							</li>
+<?php			endforeach; ?>
+						</ul>
+<?php		endif; ?>
 					</td>
 <?php		$prodPrice = $product->getPrice()->getValue(); ?>
 					<td class="quantity">
 <?php		if( $product->getQuantity() > 1 ) : ?>
-						<a href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) ); ?>">-</a>
+						<a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) ); ?>">-</a>
 <?php		endif; ?>
 						<input type="text" name="<?php echo $this->formparam( array( 'b-prod', $position, 'quantity' ) ); ?>" value="<?php echo $product->getQuantity(); ?>" />
 						<input type="hidden" name="<?php echo $this->formparam( array( 'b-prod', $position, 'position' ) ); ?>" value="<?php echo $position; ?>" />
-						<a href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) ); ?>">+</a>
+						<a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) ); ?>">+</a>
 					</td>
 					<td class="unitprice"><?php printf( $priceFormat, $this->number( $prodPrice ), $priceCurrency ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ); ?></td>
 					<td class="action">
-						<a class="minibutton" href="<?php echo $this->url( $this->config( 'basket-target' ), 'basket', 'index', array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'core/client/html', 'X' ); ?></a>
+						<a class="minibutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
 					</td>
 				</tr>
 <?php 	endforeach; ?>
-<?php if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
+<?php	if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
 				<tr>
-					<td class="details"><?php echo $this->translate( 'core/client/html', 'Service fees' ); ?></td>
+					<td class="details"><?php echo $this->translate( 'client/html', 'Service fees' ); ?></td>
 					<td class="quantity">1</td>
 					<td class="unitprice"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
 				</tr>
-<?php endif; ?>
+<?php	endif; ?>
 <?php endif; ?>
 			</tbody>
 			<tfoot>
 				<tr class="subtotal">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Sub-total' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Sub-total' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
 				<tr class="delivery">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Shipping' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Shipping' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
 <?php if( $paymentPriceService > 0 ) : ?>
 				<tr class="payment">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Payment costs' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Payment costs' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
 <?php endif; ?>
 				<tr class="total">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Total' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Total' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
 				<tr class="rebate">
-					<td colspan="3"><?php echo $this->translate( 'core/client/html', 'Included rebates' ); ?></td>
+					<td colspan="3"><?php echo $this->translate( 'client/html', 'Included rebates' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?></td>
+					<td></td>
 				</tr>
 			</tfoot>
 		</table>
 		<div class="button-group">
-			<button class="standardbutton" type="submit"><?php echo $this->translate( 'core/client/html', 'Update' ); ?></button>
-			<a class="standardbutton" href="<?php echo $this->url( $this->config( 'checkout-target' ), 'checkout', 'index' ); ?>"><?php echo $this->translate( 'core/client/html', 'Checkout' ); ?></a>
+			<button class="standardbutton" type="submit"><?php echo $this->translate( 'client/html', 'Update' ); ?></button>
+<?php if( $checkout === true ) : ?>
+			<a class="standardbutton" href="<?php echo $this->url( $checkoutTarget, $checkoutController, $checkoutAction ); ?>"><?php echo $this->translate( 'client/html', 'Checkout' ); ?></a>
+<?php endif; ?>
 		</div>
 	</form>
 </div>

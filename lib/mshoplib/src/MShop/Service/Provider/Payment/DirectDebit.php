@@ -28,9 +28,9 @@ implements MShop_Service_Provider_Payment_Interface
 			'default'=> '',
 			'required'=> true
 		),
-		'payment.directdebit.accountnumber' => array(
-			'code' => 'payment.directdebit.accountnumber',
-			'internalcode'=> 'accountnumber',
+		'payment.directdebit.accountno' => array(
+			'code' => 'payment.directdebit.accountno',
+			'internalcode'=> 'accountno',
 			'label'=> 'Account number',
 			'type'=> 'string',
 			'internaltype'=> 'string',
@@ -70,13 +70,15 @@ implements MShop_Service_Provider_Payment_Interface
 		$list = array();
 		$feconfig = $this->_feConfig;
 
-		try{
+		try
+		{
 			$address = $basket->getAddress();
 
 			if( ( $fn = $address->getFirstname() ) !== '' && ( $ln = $address->getLastname() ) !== '' ) {
 				$feconfig['payment.directdebit.accountowner']['default'] = $fn . ' ' . $ln;
 			}
-		} catch( MShop_Order_Exception $ex ) {}
+		}
+		catch( MShop_Order_Exception $e ) { ; }
 
 		foreach( $feconfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );

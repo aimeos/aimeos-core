@@ -6,11 +6,23 @@
  * @version $Id: body-default.html 1348 2012-10-27 12:49:19Z nsendetzky $
  */
 
+$listTarget = $this->config( 'client/html/catalog/list/url/target' );
+$listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
+
 ?>
-<div class="arcavias catalog-filter">
-	<form method="GET" action="<?php echo $this->url( $this->config( 'catalog-list-target' ) ); ?>">
+<section class="arcavias catalog-filter">
+<?php if( isset( $this->filterErrorList ) ) : ?>
+	<ul class="error-list">
+<?php foreach( (array) $this->filterErrorList as $errmsg ) : ?>
+		<li><?php echo $errmsg; ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+	<nav>
+		<form method="GET" action="<?php echo $this->url( $listTarget, $listController, $listAction ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
-		<button class="standardbutton" type="submit">
-<?php echo $this->translate( 'core/client/html', 'Show' ); ?></button>
-	</form>
-</div>
+			<button class="standardbutton" type="submit"><?php echo $this->translate( 'client/html', 'Show' ); ?></button>
+		</form>
+	</nav>
+</section>

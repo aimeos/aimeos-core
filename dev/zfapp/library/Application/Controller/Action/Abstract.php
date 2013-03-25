@@ -46,27 +46,66 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		}
 
 
+		$baseurl = dirname( dirname( $basescript ) );
+
+		$config = array( 'client' => array( 'html' => array(
+			'common' => array(
+				'content' => array( 'baseurl' => dirname( $baseurl ) . '/images/' ),
+				'template' => array( 'baseurl' => dirname( dirname( $baseurl ) ) . '/client/html/lib/' ),
+			),
+			'basket' => array(
+				'standard' => array( 'url' => array( 'target' => 'routeDefault' ) ),
+			),
+			'catalog' => array(
+				'list' => array( 'url' => array( 'target' => 'routeDefault' ) ),
+				'listsimple' => array( 'url' => array( 'target' => 'routeDefault' ) ),
+				'detail' => array( 'url' => array( 'target' => 'routeDefault' ) ),
+			),
+			'checkout' => array(
+				'confirm' => array( 'url' => array( 'target' => 'routeDefault' ) ),
+				'standard' => array(
+					'url' => array( 'target' => 'routeDefault' ),
+					'summary' => array( 'option' => array( 'terms' => array(
+						'url' => array(
+							'target' => 'routeDefault',
+							'controller' => 'index',
+							'action' => 'terms'
+						),
+						'privacy' => array( 'url' => array(
+							'target' => 'routeDefault',
+							'controller' => 'index',
+							'action' => 'terms'
+						) )
+					) ) )
+				),
+			),
+		) ) );
+
+
 		$mshop = $this->_getMShop();
 		$ctx = new MShop_Context_Item_Default();
 
 		$configPaths = $mshop->getConfigPaths( 'mysql' );
 		$configPaths[] = ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new MW_Config_Array( array(), $configPaths );
-		$conf = new MW_Config_Decorator_MemoryCache( $conf );
+		$conf = new MW_Config_Array( $config, $configPaths );
 		if( function_exists( 'apc_store' ) === true ) {
 			$conf = new MW_Config_Decorator_APC( $conf );
 		}
+		$conf = new MW_Config_Decorator_MemoryCache( $conf );
 		$ctx->setConfig( $conf );
 
 		$dbm = new MW_DB_Manager_PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
-		$session = new MW_Session_PHP();
-		$ctx->setSession( $session );
-
 		$cache = new MW_Cache_None();
 		$ctx->setCache( $cache );
+
+		$i18n = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'en_GB', array('disableNotices'=>true) );
+		$ctx->setI18n( $i18n );
+
+		$session = new MW_Session_PHP();
+		$ctx->setSession( $session );
 
 		$logger = MAdmin_Log_Manager_Factory::createManager( $ctx );
 		$ctx->setLogger( $logger );
@@ -80,16 +119,23 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		Zend_Registry::set('ctx', $ctx);
 
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $ctx );
-		Zend_Registry::set('MShop_Catalog_Manager', $catalogManager);
+		try
+		{
+			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $ctx );
+			Zend_Registry::set('MShop_Catalog_Manager', $catalogManager);
 
-		$catIdRoot = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE )->getId();
-		$this->_setParam( 'catid-root', $catIdRoot );
-		$params['catid-root'] = $catIdRoot;
+			$catIdRoot = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE )->getId();
+			$this->_setParam( 'catid-root', $catIdRoot );
+			$params['catid-root'] = $catIdRoot;
 
-		if ( !isset( $params['f-catalog-id'] ) ) {
-			$this->_setParam( 'f-catalog-id', $catIdRoot );
-			$params['f-catalog-id'] = $catIdRoot;
+			if ( !isset( $params['f-search-text'] ) && !isset( $params['f-catalog-id'] ) ) {
+				$this->_setParam( 'f-catalog-id', $catIdRoot );
+				$params['f-catalog-id'] = $catIdRoot;
+			}
+		}
+		catch( Exception $e )
+		{
+			$ctx->getLogger()->log( 'Unable to retrieve root catalog node: ' . $e->getMessage() );
 		}
 
 		$this->view->params = $params;
@@ -100,18 +146,6 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 	{
 		$router = Zend_Controller_Front::getInstance()->getRouter();
 		$router->setGlobalParam( 'site', $this->_getParam( 'site' ) );
-
-		$baseurl = dirname( dirname( $this->getFrontController()->getBaseUrl() ) );
-
-		$config = array(
-			'baseurl-content' => dirname( $baseurl ) . '/images/',
-			'baseurl-template' => dirname( dirname( $baseurl ) ) . '/client/html/lib/',
-			'catalog-list-target' => 'routeDefault',
-			'catalog-detail-target' => 'routeDefault',
-			'basket-target' => 'routeDefault',
-			'checkout-target' => 'routeDefault',
-			'checkout-confirm-target' => 'routeDefault',
-		);
 
 		$view = new MW_View_Default();
 
@@ -125,14 +159,11 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$helper = new MW_View_Helper_Parameter_Default( $view, $this->_getAllParams() );
 		$view->addHelper( 'param', $helper );
 
-		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$helper = new MW_View_Helper_Config_Default( $view, Zend_Registry::get( 'ctx' )->getConfig() );
 		$view->addHelper( 'config', $helper );
 
 		$helper = new MW_View_Helper_Number_Default( $view, '.', '' );
 		$view->addHelper( 'number', $helper );
-
-		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
-		$view->addHelper( 'date', $helper );
 
 		$helper = new MW_View_Helper_FormParam_Default( $view );
 		$view->addHelper( 'formparam', $helper );

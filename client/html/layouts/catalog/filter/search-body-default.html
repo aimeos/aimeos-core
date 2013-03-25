@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$listTarget = $this->config( 'client/html/catalog/list/url/target' );
+$listController = $this->config( 'client/html/catalog/list/search/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/list/search/url/action', 'list' );
+?>
+<div class="catalog-filter-search">
+	<form action="<?php echo $this->url( $listTarget, $listController, $listAction ); ?>" method="POST">
+		<span><?php echo $this->translate( 'client/html', 'Search:' ); ?></span><input class="input12b value" type="text" name="<?php echo $this->formparam( 'f-search-text' ); ?>" value="" />
+		<button type="submit" class="searchbutton12"><?php echo $this->translate( 'client/html', 'Go' ); ?></button>
+	</form>
+<?php echo $this->get( 'searchBody' ); ?>
+</div>

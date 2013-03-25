@@ -8,6 +8,6 @@ before_script:
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
   - mysql -e 'create database arcavias;'
-  - cp config/.resource.php.travis config/resource.php
-  - cp lib/mwlib/tests/config/.resource.php.travis lib/mwlib/tests/config/resource.php
+  - cp config/.resource.php.ci config/resource.php
+  - cp lib/mwlib/tests/config/.resource.php.ci lib/mwlib/tests/config/resource.php
 script: "phing setup && phing"

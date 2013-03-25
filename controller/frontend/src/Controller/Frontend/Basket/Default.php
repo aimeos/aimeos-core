@@ -61,7 +61,7 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
-	 * Adds a product to the basket of the user stored in the session.
+	 * Adds a categorized product to the basket of the user stored in the session.
 	 *
 	 * @param string $prodid ID of the base product to add
 	 * @param integer $quantity Amount of products that should by added
@@ -76,13 +76,16 @@ class Controller_Frontend_Basket_Default
 	 */
 	public function addProduct( $prodid, $quantity = 1, $configAttributeIds = array(), $variantAttributeIds = array(), $requireVariant = true )
 	{
+		$this->_checkCategory( $prodid );
+		$this->_checkStockLevel( $prodid, $quantity );
+
+
 		$productManager = $this->_getDomainManager( 'product' );
 		$productItem = $productManager->getItem( $prodid, array( 'media', 'price', 'product', 'text' ) );
 
 		$orderBaseProductItem = $this->_getDomainManager( 'order/base/product' )->createItem();
 		$orderBaseProductItem->copyFrom( $productItem );
 		$orderBaseProductItem->setQuantity( $quantity );
-		$orderBaseProductItem->productId = $productItem->getId();
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
@@ -94,9 +97,8 @@ class Controller_Frontend_Basket_Default
 			{
 				$orderBaseProductItem->setProductCode( $productItem->getCode() );
 				$orderBaseProductItem->setSupplierCode( $productItem->getSupplierCode() );
-
-				$orderBaseProductItem->parentId = $orderBaseProductItem->productId;
-				$orderBaseProductItem->productId = $productItem->getId();
+				$orderBaseProductItem->parentId = $orderBaseProductItem->getProductId();
+				$orderBaseProductItem->setProductId( $productItem->getId() );
 
 				$subprices = $productItem->getRefItems( 'price', 'default' );
 
@@ -106,11 +108,12 @@ class Controller_Frontend_Basket_Default
 			}
 			else if( $requireVariant === true )
 			{
-				$string = 'No product found for ID "%1$s" and variant attribute IDs "%2$s"';
-				$msg = sprintf( $string, $prodid, join( ',', $variantAttributeIds ) );
+				$ids = join( ',', $variantAttributeIds );
+				$msg = sprintf( 'No product found for ID "%1$s" and variant attribute IDs "%2$s"', $prodid, $ids );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 		}
+
 
 		$orderAttributes = array();
 		$orderProductAttributeManager = $this->_getDomainManager( 'order/base/product/attribute' );
@@ -130,15 +133,17 @@ class Controller_Frontend_Basket_Default
 
 			$orderAttributeItem = $orderProductAttributeManager->createItem();
 			$orderAttributeItem->copyFrom( $attrItem );
+			$orderAttributeItem->setType( 'config' );
 
 			$orderAttributes[] = $orderAttributeItem;
 		}
 
-		// remove product rebate of original price
+
+		// remove product rebate of original price in favor to rebates granted for the order
 		$price->setRebate( '0.00' );
 
-		$orderBaseProductItem->setAttributes( $orderAttributes );
 		$orderBaseProductItem->setPrice( $price );
+		$orderBaseProductItem->setAttributes( $orderAttributes );
 
 		$this->_basket->addProduct( $orderBaseProductItem );
 		$this->_domainManager->setSession( $this->_basket );
@@ -156,7 +161,7 @@ class Controller_Frontend_Basket_Default
 
 		if( $product->getFlags() === MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 		{
-			$msg = sprintf( 'Basket item with position "%1$d" is immutable', $position );
+			$msg = sprintf( 'Basket item at position "%1$d" cannot be deleted manually', $position );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
@@ -178,13 +183,15 @@ class Controller_Frontend_Basket_Default
 
 		if( $product->getFlags() === MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 		{
-			$msg = sprintf( 'Basket item with position "%1$d" is immutable', $position );
+			$msg = sprintf( 'Basket item at position "%1$d" cannot be changed', $position );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
 
+		$this->_checkStockLevel( $product->getProductId(), $quantity );
+
 		$productManager = $this->_getDomainManager( 'product' );
-		$productItem = $productManager->getItem( $product->productId, array( 'price' ) );
+		$productItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
@@ -239,9 +246,12 @@ class Controller_Frontend_Basket_Default
 			}
 		}
 
-		$product->setAttributes( $attributes );
-		$product->setQuantity( $quantity );
+		// remove product rebate of original price in favor to rebates granted for the order
+		$price->setRebate( '0.00' );
+
 		$product->setPrice( $price );
+		$product->setQuantity( $quantity );
+		$product->setAttributes( $attributes );
 
 		$this->_basket->deleteProduct( $position );
 		$this->_basket->addProduct( $product, $position );
@@ -324,10 +334,8 @@ class Controller_Frontend_Basket_Default
 		$orderServiceItem->copyFrom( $serviceItem );
 
 		$price = $provider->calcPrice( $this->_basket );
-
 		// remove service rebate of original price
 		$price->setRebate( '0.00' );
-
 		$orderServiceItem->setPrice( $price );
 
 		$orderBaseServiceAttributeManager = $orderBaseServiceManager->getSubManager('attribute');
@@ -338,6 +346,8 @@ class Controller_Frontend_Basket_Default
 			$ordBaseAtrrItem = $orderBaseServiceAttributeManager->createItem();
 			$ordBaseAtrrItem->setCode( $key );
 			$ordBaseAtrrItem->setValue( strip_tags( $value ) ); // prevent XSS
+			$ordBaseAtrrItem->setType( 'config' );
+
 			$attributeItems[] = $ordBaseAtrrItem;
 		}
 
@@ -345,6 +355,70 @@ class Controller_Frontend_Basket_Default
 
 		$this->_basket->setService( $orderServiceItem, $type );
 		$this->_domainManager->setSession( $this->_basket );
+	}
+
+
+	/**
+	 * Checks if the product is part of at least one category in the product catalog.
+	 *
+	 * @param string $prodid Unique ID of the product
+	 * @throws Controller_Frontend_Basket_Exception If product is not associated to at least one category
+	 */
+	protected function _checkCategory( $prodid )
+	{
+		$catalogListManager = $this->_getDomainManager( 'catalog/list' );
+
+		$search = $catalogListManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'catalog.list.refid', $prodid ),
+			$search->getConditions()
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
+
+		$result = $catalogListManager->searchItems( $search );
+
+		if( reset( $result ) === false )
+		{
+			$msg = sprintf( 'Adding product with ID "%1$s" is not allowed', $prodid );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+	}
+
+
+	/**
+	 * Checks if there are enough products in stock.
+	 *
+	 * @param string $prodid Unique ID of the product
+	 * @param integer $quantity Number of products the customer would like to buy
+	 * @throws Controller_Frontend_Basket_Exception If there are not enough products in stock
+	 */
+	protected function _checkStockLevel( $prodid, $quantity )
+	{
+		$manager = $this->_getDomainManager( 'product/stock' );
+
+		$search = $manager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.stock.productid', $prodid ),
+			$search->getConditions()
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$result = $manager->searchItems( $search );
+
+		if( empty( $result ) ) {
+			return;
+		}
+
+		foreach( $result as $item )
+		{
+			if( $item->getStockLevel() >= $quantity ) {
+				return;
+			}
+		}
+
+		$msg = sprintf( 'There are not enough products (ID "%1$s") in stock', $prodid );
+		throw new Controller_Frontend_Basket_Exception( $msg );
 	}
 
 
@@ -420,7 +494,7 @@ class Controller_Frontend_Basket_Default
 
 		if( count( $errors ) > 0 )
 		{
-			$msg = 'Invalid address properties, please check your input';
+			$msg = sprintf( 'Invalid address properties, please check your input' );
 			throw new Controller_Frontend_Basket_Exception( $msg, 0, null, $errors );
 		}
 	}
@@ -453,11 +527,11 @@ class Controller_Frontend_Basket_Default
 
 		if( count( $attrItems ) !== count( $attributeIds ) )
 		{
-			$str = 'Available attribute IDs "%1$s" does not match the given attribute IDs "%2$s"';
-			$actual = join( ',', array_keys( $attrItems ) );
 			$expected = join( ',', $attributeIds );
+			$actual = join( ',', array_keys( $attrItems ) );
+			$msg = sprintf( 'Available attribute IDs "%1$s" does not match the given attribute IDs "%2$s"', $actual, $expected );
 
-			throw new Controller_Frontend_Basket_Exception( sprintf( $str, $actual, $expected ) );
+			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
 		return $attrItems;
@@ -489,7 +563,7 @@ class Controller_Frontend_Basket_Default
 
 			if( ( $listTypeItem = reset( $listTypeItems ) ) === false )
 			{
-				$msg = sprintf( 'No list type for domain "%1$S" and code "%2$s" found', 'attribute', 'default' );
+				$msg = sprintf( 'No list type for domain "%1$s" and code "%2$s" found', 'attribute', 'default' );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 

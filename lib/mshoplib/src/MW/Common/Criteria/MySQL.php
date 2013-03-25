@@ -33,9 +33,20 @@ class MW_Common_Criteria_MySQL extends MW_Common_Criteria_SQL
 				if( isset( $params[2] ) )
 				{
 					$str = '';
-					foreach( explode( ' ', $params[2] ) as $part ) {
-						$str .= ' +' . $part . '*';
+					$list = array( '-', '+', '>', '<', '(', ')', '~', '*', ':', '"', '&', '|', '!', '/', '§', '$', '%', '{', '}', '[', ']', '=', '?', '\\', '\'', '#', ';', '.', ',', '@' );
+					$search = str_replace( $list, ' ', $params[2] );
+
+					foreach( explode( ' ', $search ) as $part )
+					{
+						$len = strlen( $part );
+
+						if( $len > 3 ) {
+							$str .= ' +' . $part . '*';
+						} else if( $len > 0 ) {
+							$str .= ' ' . $part . '*';
+						}
 					}
+
 					$params[2] = $str;
 				}
 				break;

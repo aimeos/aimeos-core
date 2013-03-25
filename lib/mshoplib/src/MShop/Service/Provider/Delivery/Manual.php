@@ -19,23 +19,6 @@ class MShop_Service_Provider_Delivery_Manual
 	extends MShop_Service_Provider_Delivery_Abstract
 	implements MShop_Service_Provider_Delivery_Interface
 {
-	private $_context;
-	private $_serviceItem;
-
-
-	/**
-	 * Initializes a new service provider object using the given context object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration for the provider
-	 */
-	public function __construct(MShop_Context_Item_Interface $context, MShop_Service_Item_Interface $serviceItem)
-	{
-		$this->_context = $context;
-		$this->_serviceItem = $serviceItem;
-	}
-
-
 	/**
 	 * Updates the delivery status.
 	 *
@@ -45,5 +28,5 @@ class MShop_Service_Provider_Delivery_Manual
 	{
 		$order->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_PROGRESS );
 	}
-	
+
 }

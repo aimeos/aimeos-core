@@ -1,11 +1,106 @@
-.filter-tree a {
-	padding-top: 2px;
+#navigationMenue {
+	display: inline;
 }
 
-#productInformations div {
-	margin-top: 0;
+.catalog-list-items .single {
+	display: inline;
 }
 
-#productsearch button {
-	width: 150px;
+.arcavias .attr-list, .arcavias .form-list {
+	list-style: none !important;
+}
+
+#contentStart #teaserLeft {
+	width: 55.0%;
+}
+
+#contentStart #teaserBottomLeft {
+	width: 49%;
+}
+
+#contentStart #teaserBottomRight {
+	width: 49%;
+}
+
+/* ----- IE7 ----- */
+*+ html  .checkout-standard-address-billing {
+	float: left;
+}
+*+ html  .checkout-standard-address-delivery {
+	float: left;
+}
+
+*+ html .button-group {
+	clear: both;
+}
+
+*+ html h1 {
+	font-size: 1em;
+}
+
+*+ html .checkout-standard .step {
+	display: inline;
+}
+
+*+ html #contentStart #teaserRight {
+	width: auto;
+}
+
+*+ html #contentStart #teaserBottomRight {
+	width: auto;
+}
+
+/* ----- IE6 ----- */
+* #frame {
+	width: 984px; 
+}
+
+* #content {
+	width: 960px; 
+
+}
+* #contentLeft {
+	width: 173px;
+	margin: 0px;
+	padding:0px 0px 0px 10px;;
+}
+
+* #contentRight {
+	width: 767px; 
+	padding: 0px 0px;
+	margin: 0px;
+}
+
+* h1 {
+	font-size: 1em;
+}
+
+* .checkout-standard-address-billing {
+    float: left;
+}
+*  .checkout-standard-address-delivery {
+    float: left;
+}
+* .button-group {
+	clear: both;
+}
+
+* .checkout-standard .step {
+	display: inline;
+}
+
+*.catalog-detail-image #prev-image {
+	display: none !important;
+}
+
+*.catalog-detail-image #next-image {
+	display: none !important;
+}
+
+*.catalog-detail-image #next-thumbs {
+	display: none !important;
+}
+
+*.catalog-detail-image #prev-thumbs {
+	display: none !important;
 }

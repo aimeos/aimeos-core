@@ -29,13 +29,43 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
 
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody();
+			}
+			$view->confirmBody = $html;
 		}
-		$view->confirmBody = $html;
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
 
 		$tplconf = 'client/html/checkout/confirm/default/template-body';
 		$default = 'checkout/confirm/body-default.html';
@@ -51,13 +81,21 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		try
+		{
+			$view = $this->_setViewParams( $this->getView() );
 
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+			$html = '';
+			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader();
+			}
+			$view->confirmHeader = $html;
 		}
-		$view->confirmHeader = $html;
+		catch( Exception $e )
+		{
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return '';
+		}
 
 		$tplconf = 'client/html/checkout/confirm/default/template-header';
 		$default = 'checkout/confirm/header-default.html';
@@ -105,70 +143,73 @@ class Client_Html_Checkout_Confirm_Default
 		}
 
 
-		$context = $this->_getContext();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
-
-
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-
-		$search = $customerManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'customer.code', $context->getEditor() ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$customerItems = $customerManager->searchItems( $search );
-
-		if( ( $customerItem = reset( $customerItems ) ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid customer "%1$s"', $context->getEditor() ) );
-		}
-
-
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-
-		$search = $orderManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'order.id', $orderid ),
-			$search->compare( '==', 'order.base.customerid', $customerItem->getId() )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$orderItems = $orderManager->searchItems( $search );
-
-		if( ( $orderItem = reset( $orderItems ) ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
-		}
-
-
-		$orderBaseServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
-
-		$search = $orderBaseServiceManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'order.base.service.baseid', $orderItem->getBaseId() ),
-			$search->compare( '==', 'order.base.service.type', 'payment' )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		foreach( $orderBaseServiceManager->searchItems( $search ) as $orderServiceItem )
+		try
 		{
-			/** @todo Use getServiceId() as soon as the method is available */
-			$search = $serviceManager->createSearch();
+			$context = $this->_getContext();
+			$sorderid = $context->getSession()->get( 'arcavias/orderid' );
+
+			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+			$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
+			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
+
+
+			$search = $orderManager->createSearch();
 			$expr = array(
-				$search->compare( '==', 'service.code', $orderServiceItem->getCode() ),
-				$search->compare( '==', 'service.type.code', 'payment' )
+				$search->compare( '==', 'order.id', $orderid ),
+				$search->compare( '==', 'order.id', $sorderid )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$serviceItems = $serviceManager->searchItems( $search );
+			$orderItems = $orderManager->searchItems( $search );
 
-			if( ( $serviceItem = reset( $serviceItems ) ) !== false ) {
+			if( ( $orderItem = reset( $orderItems ) ) === false ) {
+				throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
+			}
+
+
+			$search = $orderServiceManager->createSearch();
+			$expr = array(
+				$search->compare( '==', 'order.base.service.baseid', $orderItem->getBaseId() ),
+				$search->compare( '==', 'order.base.service.type', 'payment' )
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			foreach( $orderServiceManager->searchItems( $search ) as $service )
+			{
+				$serviceItem = $serviceManager->getItem( $service->getServiceId() );
 				$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
 			}
+
+
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
+		catch( Client_Html_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Controller_Frontend_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( MShop_Exception $e )
+		{
+			$view = $this->getView();
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
+		catch( Exception $e )
+		{
+			$context = $this->_getContext();
+			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+			$view = $this->getView();
+			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
+		}
 	}
 
 
@@ -182,42 +223,39 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			if( ( $orderid = $view->param( 'arcavias', null ) ) !== null )
+			$orderid = null;
+
+			foreach( array( 'arcavias', 'plain' ) as $key )
+			{
+				if( isset( $_GET[$key] ) )
+				{
+					$orderid = $_GET[$key];
+					break;
+				}
+			}
+
+			if( $orderid !== null )
 			{
 				$context = $this->_getContext();
+				$sorderid = $context->getSession()->get( 'arcavias/orderid' );
+
+				$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 
 
-				$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-
-				$search = $customerManager->createSearch( true );
+				$search = $orderManager->createSearch();
 				$expr = array(
-					$search->compare( '==', 'customer.code', $context->getEditor() ),
-					$search->getConditions()
+					$search->compare( '==', 'order.id', $orderid ),
+					$search->compare( '==', 'order.id', $sorderid )
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
-				$customerItems = $customerManager->searchItems( $search );
+				$orderItems = $orderManager->searchItems( $search );
 
-
-				if( ( $customerItem = reset( $customerItems ) ) !== false )
-				{
-					$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-
-					$search = $orderManager->createSearch();
-					$expr = array(
-						$search->compare( '==', 'order.id', $orderid ),
-						$search->compare( '==', 'order.base.customerid', $customerItem->getId() )
-					);
-					$search->setConditions( $search->combine( '&&', $expr ) );
-
-					$orderItems = $orderManager->searchItems( $search );
-
-					if( ( $orderItem = reset( $orderItems ) ) === false ) {
-						throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
-					}
-
-					$view->confirmOrderItem = $orderItem;
+				if( ( $orderItem = reset( $orderItems ) ) === false ) {
+					throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
 				}
+
+				$view->confirmOrderItem = $orderItem;
 			}
 
 			$this->_cache = $view;

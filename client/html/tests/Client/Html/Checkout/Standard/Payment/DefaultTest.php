@@ -57,21 +57,26 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 
 	public function testGetHeader()
 	{
+		$view = TestHelper::getView();
+		$view->standardStepActive = 'payment';
+		$this->_object->setView( $view );
+
 		$output = $this->_object->getHeader();
+		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
 	}
 
 
 	public function testGetBody()
 	{
 		$view = TestHelper::getView();
-		$this->_object->setView( $view );
 		$view->standardStepActive = 'payment';
 		$view->standardSteps = array( 'before', 'payment', 'after' );
+		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="checkout-standard-payment">', $output );
+		$this->assertStringStartsWith( '<section class="checkout-standard-payment">', $output );
 		$this->assertRegExp( '#<li class="form-item payment.directdebit.accountowner mandatory">#smU', $output );
-		$this->assertRegExp( '#<li class="form-item payment.directdebit.accountnumber mandatory">#smU', $output );
+		$this->assertRegExp( '#<li class="form-item payment.directdebit.accountno mandatory">#smU', $output );
 		$this->assertRegExp( '#<li class="form-item payment.directdebit.bankcode mandatory">#smU', $output );
 		$this->assertRegExp( '#<li class="form-item payment.directdebit.bankname mandatory">#smU', $output );
 
@@ -155,10 +160,8 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 
 		$this->_object->setView( $view );
 
+		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
 		$this->_object->process();
-
-		$this->assertEquals( 'payment', $view->standardStepActive );
-		$this->assertGreaterThan( 0, count( $view->standardErrorList ) );
 	}
 
 
@@ -188,9 +191,7 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 
 		$this->_object->setView( $view );
 
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->_object->process();
-
-		$this->assertEquals( 'payment', $view->standardStepActive );
-		$this->assertEquals( 2, count( $view->standardErrorList ) );
 	}
 }

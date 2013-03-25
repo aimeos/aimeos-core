@@ -69,7 +69,7 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 		$view->standardSteps = array( 'before', 'delivery', 'after' );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="checkout-standard-delivery">', $output );
+		$this->assertStringStartsWith( '<section class="checkout-standard-delivery">', $output );
 
 		$this->assertGreaterThan( 0, count( $view->deliveryServices ) );
 		$this->assertGreaterThanOrEqual( 0, count( $view->deliveryServiceAttributes ) );
@@ -151,10 +151,8 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 
 		$this->_object->setView( $view );
 
+		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
 		$this->_object->process();
-
-		$this->assertEquals( 'delivery', $view->standardStepActive );
-		$this->assertGreaterThan( 0, count( $view->standardErrorList ) );
 	}
 
 
@@ -184,9 +182,7 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 
 		$this->_object->setView( $view );
 
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->_object->process();
-
-		$this->assertEquals( 'delivery', $view->standardStepActive );
-		$this->assertEquals( 2, count( $view->standardErrorList ) );
 	}
 }

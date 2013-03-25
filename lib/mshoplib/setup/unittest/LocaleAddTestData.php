@@ -19,7 +19,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddTypeData' );
+		return array( 'MShopAddLocaleData' );
 	}
 
 
@@ -30,7 +30,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return array( 'MShopSetLocale' );
 	}
 
 
@@ -54,9 +54,11 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 		}
 
 		$this->_msg( 'Adding test data for MShop locale domain', 0 );
-		$this->_additional->setEditor( 'core:unittest' );
 		$this->_status( '' );
 
+
+		// Set editor for further tasks
+		$this->_additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$filename = dirname( __FILE__ ) . $ds . 'data' . $ds . 'locale.php';
@@ -85,10 +87,6 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 		if( isset( $testdata['locale'] ) ) {
 			$this->_addLocaleData( $localeManager, $testdata['locale'], $siteIds );
 		}
-
-		// Set locale for further tasks
-		$this->_additional->setLocale( $localeManager->bootstrap( 'unittest', '', '', false ) );
-		$this->_additional->setEditor( 'core:unittest' );
 	}
 
 

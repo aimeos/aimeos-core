@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$catPath = $this->get( 'listCatPath', array() );
+
+?>
+<div class="catalog-list-head">
+<?php if( ( $catItem = end( $catPath ) ) !== false ) : ?>
+	<div class="imagelist-default">
+<?php	foreach( $catItem->getRefItems( 'media', 'head', 'default' ) as $mediaItem ) : ?>
+		<img class="<?php echo $mediaItem->getType(); ?>" src="<?php echo $mediaItem->getUrl(); ?>" />
+<?php	endforeach; ?>
+	</div>
+	<h1><?php echo $catItem->getName(); ?></h1>
+<?php	foreach( $this->config( 'client/html/catalog/list/head/text-types', array( 'short', 'long' ) ) as $textType ) : ?>
+<?php		foreach( $catItem->getRefItems( 'text', $textType, 'default' ) as $textItem ) : ?>
+	<div class="<?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></div>
+<?php		endforeach; ?>
+<?php	endforeach; ?>
+<?php endif; ?>
+<?php echo $this->get( 'headBody' ); ?>
+</div>

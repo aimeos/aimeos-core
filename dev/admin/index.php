@@ -63,7 +63,7 @@ try
 	$itemSchema = $jsonrpc->getJsonItemSchemas();
 	$searchSchema = $jsonrpc->getJsonSearchSchemas();
 	$smd = $jsonrpc->getJsonSmd( 'jsonrpc.php' );
-	$site = $init->getJsonSite( ( isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : 'unitperf' ) );
+	$site = $init->getJsonSite( ( isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : 'unittest' ) );
 }
 catch( Exception $e )
 {
@@ -91,6 +91,9 @@ catch( Exception $e )
 		MShop.config.searchschema = <?php echo $searchSchema ?>;
 
 		MShop.config.smd = <?php echo $smd ?>;
+
+		Ext.ns('MShop.config.baseurl');
+		MShop.config.baseurl.content = '../images';
 
 	</script>
 </head>

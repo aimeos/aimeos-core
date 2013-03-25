@@ -47,6 +47,7 @@ return array (
 		array( 'domain' => 'price', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'service', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		array( 'domain' => 'catalog', 'code' => 'stage', 'label' => 'Stage', 'status' => 1 ),
 	),
 
 	'media/list/type' => array (
@@ -82,6 +83,8 @@ return array (
 	'product/list/type' => array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		array( 'domain' => 'attribute', 'code' => 'config', 'label' => 'Configurable', 'status' => 1 ),
+		array( 'domain' => 'attribute', 'code' => 'variant', 'label' => 'Variant', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'price', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
@@ -126,6 +129,7 @@ return array (
 		array( 'domain' => 'service', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		array( 'domain' => 'service', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		array( 'domain' => 'service', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
+		array( 'domain' => 'catalog', 'code' => 'quote', 'label' => 'Quote', 'status' => 1 ),
 	),
 
 	'text/list/type' => array (

@@ -111,6 +111,28 @@ class MShop_Catalog_Item_Default
 
 
 	/**
+	 * Returns the config property of the catalog.
+	 *
+	 * @return array Returns the config of the Site
+	 */
+	public function getConfig()
+	{
+		return $this->_node->__isset( 'config' ) && is_array( $this->_node->config ) ? $this->_node->__get( 'config' ) : array();
+	}
+
+
+	/**
+	 * Sets the config property of the catalog item.
+	 *
+	 * @param array $options Options to be set for the Site
+	 */
+	public function setConfig( array $options )
+	{
+		$this->_node->__set( 'config', $options );
+	}
+
+
+	/**
 	 * Returns the code of the item.
 	 *
 	 * @return string Code of the item
@@ -199,6 +221,7 @@ class MShop_Catalog_Item_Default
 			'catalog.code' => $this->_node->getCode(),
 			'catalog.label' => $this->_node->getLabel(),
 			'catalog.status' => $this->_node->getStatus(),
+			'catalog.config' => $this->getConfig(),
 			'catalog.siteid' => $this->_node->__get('siteid'),
 			'catalog.ctime' => $this->_node->__get('ctime'),
 			'catalog.mtime' => $this->_node->__get('mtime'),

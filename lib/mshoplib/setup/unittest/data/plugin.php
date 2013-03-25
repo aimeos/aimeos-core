@@ -6,7 +6,7 @@
  * @version $Id: plugin.php 1197 2012-09-13 14:23:18Z gbang $
  */
 
-return $pluginTestData = array (
+return array (
 	'plugin/type' => array (
 		'plugin/order' => array ( 'domain' => 'plugin', 'code' => 'order', 'label' => 'Order', 'status' => 1 )
 	),
@@ -16,8 +16,7 @@ return $pluginTestData = array (
 		'plugin/order/ProductLimit-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'ProductLimit-Plugin', 'provider' => 'ProductLimit,Example', 'config' => array("single-number-max" => "10"), 'status' => 1 ),
 		'plugin/order/BasketLimits-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'BasketLimits-Plugin', 'provider' => 'BasketLimits,Example', 'config' => array("minorder" => "31.00"), 'status' => 1 ),
 		'plugin/order/ServicesAvailable-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'ServicesAvailable-Plugin', 'provider' => 'ServicesAvailable,Example', 'config' => array("payment" => true, "delivery" => true ), 'status' => 1 ),
-		'plugin/order/AddressesAvailable-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'AddressesAvailable-Plugin', 'provider' => 'AddressesAvailable,Example', 'config' => array("payment" => true, "delivery" => true ), 'status' => 1 ),
-		'plugin/order/AddressesAvailable-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'AddressesAvailable-Plugin', 'provider' => 'AddressesAvailable,Example', 'config' => array("payment" => true, "delivery" => true ), 'status' => 1 ),
+		'plugin/order/AddressesAvailable-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'AddressesAvailable-Plugin', 'provider' => 'AddressesAvailable,Example', 'config' => array("payment" => true, "delivery" => null ), 'status' => 1 ),
 		'plugin/order/ProductPrice-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'ProductPrice-Plugin', 'provider' => 'ProductPrice,Example', 'config' => array( "update" => false ), 'status' => 1 ),
 		'plugin/order/ProductStock-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'ProductStock-Plugin', 'provider' => 'ProductStock,Example', 'config' => array() , 'status' => 1 ),
 		'plugin/order/ProductGone-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'ProductGone-Plugin', 'provider' => 'ProductGone,Example', 'config' => array() , 'status' => 1 ),

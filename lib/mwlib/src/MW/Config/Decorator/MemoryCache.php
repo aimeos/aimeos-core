@@ -14,36 +14,26 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Decorator_MemoryCache implements MW_Config_Decorator_Interface
+class MW_Config_Decorator_MemoryCache
+	extends MW_Config_Decorator_Abstract
+	implements MW_Config_Decorator_Interface
 {
-	protected $_object = null;
-	protected $_cache = array();
-	protected $_negCache = array();
-	protected $_prefix;
+	private $_negCache = array();
+	private $_cache = array();
+	private $_config;
 
 
 	/**
 	 * Initializes the decorator.
 	 *
 	 * @param MW_Config_Interface $object Config object or decorator
+	 * @param array $config Pre-cached non-shared configuration
 	 */
-	public function __construct( MW_Config_Interface $object, $prefix = null )
+	public function __construct( MW_Config_Interface $object, $config = array() )
 	{
-		$this->_object = $object;
+		parent::__construct( $object );
 
-		if( $prefix === null ) {
-			$prefix = $object->get( 'resource/config/decorator/prefix', 'config:' );
-		}
-		$this->_prefix = $prefix;
-	}
-
-
-	/**
-	 * Clones the objects inside.
-	 */
-	public function __clone()
-	{
-		$this->_object = clone $this->_object;
+		$this->_config = $config;
 	}
 
 
@@ -66,7 +56,11 @@ class MW_Config_Decorator_MemoryCache implements MW_Config_Decorator_Interface
 			return $this->_cache[ $name ];
 		}
 
-		$return = $this->_object->get( $name, null );
+		if( ( $return = $this->_getValueFromArray( $this->_config, explode( '/', $name ) ) ) !== null ) {
+			return $return;
+		}
+
+		$return = $this->_getObject()->get( $name, null );
 
 		if( $return === null )
 		{
@@ -89,15 +83,41 @@ class MW_Config_Decorator_MemoryCache implements MW_Config_Decorator_Interface
 	{
 		$name = trim( $name, '/' );
 
-		if( $value === null ) {
-			$this->_negCache[ $name ] = true;
-		} else {
- 			$this->_cache[ $name ] = $value;
+		if( $value !== null )
+		{
+			$this->_cache[ $name ] = $value;
 
 			if( isset( $this->_negCache[ $name ] ) ) {
 				unset( $this->_negCache[ $name ] );
 			}
 		}
+		else
+		{
+			$this->_negCache[ $name ] = true;
+		}
+
+		$this->_getObject()->set( $name, $value );
 	}
 
+
+	/**
+	 * Returns the requested configuration value from the given array
+	 *
+	 * @param array $config The array to search in
+	 * @param array $parts Configuration path parts to look for inside the array
+	 * @return mixed Found configuration value or null if not available
+	 */
+	protected function _getValueFromArray( $config, $parts )
+	{
+		if( ( $key = array_shift( $parts ) ) !== null && isset( $config[$key] ) )
+		{
+			if( count( $parts ) > 0 ) {
+				return $this->_getValueFromArray( $config[$key], $parts );
+			}
+
+			return $config[$key];
+		}
+
+		return null;
+	}
 }

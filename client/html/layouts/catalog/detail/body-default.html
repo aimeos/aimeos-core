@@ -7,6 +7,15 @@
  */
 
 ?>
-<div class="arcavias catalog-detail">
+<section class="arcavias catalog-detail">
+<?php if( isset( $this->detailErrorList ) ) : ?>
+	<ul class="error-list">
+<?php foreach( (array) $this->detailErrorList as $errmsg ) : ?>
+		<li><?php echo $errmsg; ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+	<article class="product">
 <?php echo $this->get( 'detailBody' ); ?>
-</div>
+	</article>
+</section>

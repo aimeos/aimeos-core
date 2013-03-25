@@ -58,7 +58,7 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<style type="text/css">', $output );
+		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
 	}
 
 

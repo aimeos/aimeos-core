@@ -62,6 +62,7 @@ class Controller_Frontend_Service_Default
 			$search->compare( '==', 'service.type.code', $type ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
 		$this->_items[$type] = $this->_serviceManager->searchItems( $search, $ref );
 
@@ -78,8 +79,7 @@ class Controller_Frontend_Service_Default
 			}
 			catch( MShop_Service_Exception $e )
 			{
-				$str = 'Unable to create provider "%1$s" for service with ID "%2$s"';
-				$msg = sprintf( $str, $service->getCode(), $id );
+				$msg = sprintf( 'Unable to create provider "%1$s" for service with ID "%2$s"', $service->getCode(), $id );
 				$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 			}
 		}
@@ -177,7 +177,7 @@ class Controller_Frontend_Service_Default
 
 		if( ( $item = reset( $items ) ) === false )
 		{
-			$msg = sprintf( 'No service item for type "%1$s" and ID "%2$" available', $type, $serviceId );
+			$msg = sprintf( 'No service item for type "%1$s" and ID "%2$s" available', $type, $serviceId );
 			throw new Controller_Frontend_Service_Exception( $msg );
 		}
 

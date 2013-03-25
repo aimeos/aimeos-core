@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: manifest.php 14572 2011-12-23 14:26:31Z nsendetzky $
  */
 
 
@@ -12,7 +11,7 @@ return array(
 	'description' => 'Arcavias core system with admin interface',
 	'author' => 'Metaways Infosystems GmbH',
 	'email' => 'application@metaways.de',
-	'version' => '2012-11',
+	'version' => '2013-03',
 	'depends' => array(
 	),
 	'conflicts' => array(
@@ -28,19 +27,21 @@ return array(
 	),
 	'include' => array(
 		'lib/mshoplib/src',
-		'controller/frontend/src',
-		'client/html/src',
-		'controller/extjs/src',
 		'lib/mwlib/src',
+		'client/html/src',
+		'controller/frontend/src',
+		'controller/extjs/src',
 		'lib/zendlib',
 		'lib/phpexcel',
 	),
 	'i18n' => array(
-		'core/client/html' => 'client/html/i18n',
-		'core/client/html/code' => 'client/html/i18n/code',
-		'core/client/html/country' => 'client/html/i18n/country',
-		'core/client/html/currency' => 'client/html/i18n/currency',
-		'core/client/html/language' => 'client/html/i18n/language',
+		'client/html' => 'client/html/i18n',
+		'client/html/code' => 'client/html/i18n/code',
+		'client/html/country' => 'client/html/i18n/country',
+		'client/html/currency' => 'client/html/i18n/currency',
+		'client/html/language' => 'client/html/i18n/language',
+		'controller/frontend' => 'controller/frontend/i18n',
+		'mshop' => 'lib/mshoplib/i18n',
 	),
 	'setup' => array(
 		'lib/mshoplib/setup',

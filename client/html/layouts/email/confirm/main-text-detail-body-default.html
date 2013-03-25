@@ -1,0 +1,143 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+try {
+	$products = $this->confirmOrderBaseItem->getProducts();
+} catch( Exception $e ) {
+	$products = array();
+}
+
+try
+{
+	$price = $this->confirmOrderBaseItem->getPrice();
+	$priceValue = $price->getValue();
+	$priceService = $price->getShipping();
+	$priceRebate = $price->getRebate();
+	$priceTaxrate = $price->getTaxrate();
+	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
+}
+catch( Exception $e )
+{
+	$priceValue = '0.00';
+	$priceService = '0.00';
+	$priceRebate = '0.00';
+	$priceTaxrate = '0.00';
+	$priceCurrency = '';
+}
+
+try
+{
+	$deliveryPriceItem = $this->confirmOrderBaseItem->getService( 'delivery' )->getPrice();
+	$deliveryPriceService = $deliveryPriceItem->getShipping();
+	$deliveryPriceValue = $deliveryPriceItem->getValue();
+}
+catch( Exception $e )
+{
+	$deliveryPriceValue = '0.00';
+	$deliveryPriceService = '0.00';
+}
+
+try
+{
+	$paymentPriceItem = $this->confirmOrderBaseItem->getService( 'payment' )->getPrice();
+	$paymentPriceService = $paymentPriceItem->getShipping();
+	$paymentPriceValue = $paymentPriceItem->getValue();
+}
+catch( Exception $e )
+{
+	$paymentPriceValue = '0.00';
+	$paymentPriceService = '0.00';
+}
+
+$priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
+$attrFormat = $this->translate( 'client/html', "	- %1\$s: %2\$s\n" );
+
+
+// order details output
+
+echo $this->translate( 'client/html', "\n\nOrder details:\n" );
+
+
+// order products
+
+foreach( $products as $product )
+{
+	$price = $product->getPrice();
+
+	$attrText = '';
+	foreach( $product->getAttributes() as $attribute ) {
+		$attrText .= sprintf( $attrFormat, $this->translate( 'client/html/code', $attribute->getCode() ), $attribute->getName() );
+	} 
+
+	echo str_replace( "\n\n", "\n", sprintf(
+		$this->translate( 'client/html', '
+Article:
+%1$s
+%2$s
+Quantity: %3$d
+Price: %4$s
+Sum: %5$s
+'
+		),
+		$product->getName(),
+		$attrText,
+		$product->getQuantity(),
+		sprintf( $priceFormat, $this->number( $price->getValue() ), $priceCurrency ),
+		sprintf( $priceFormat, $this->number( $price->getValue() * $product->getQuantity() ), $priceCurrency )
+	) );
+}
+
+if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) {
+	printf(
+		$this->translate( 'client/html', '
+Service fees: %1\$s
+'
+		),
+		sprintf( $priceFormat, $this->number( $serviceValue ), $priceCurrency )
+	);
+}
+
+
+// order details summary
+
+if( $paymentPriceService > 0 )
+{
+	printf(
+		$this->translate( 'client/html', '
+Sub-total: %1$s
++ Shipping: %2$s
++ Payment costs: %3$s
+Total: %4$s
+Included rebates: %5$s
+'
+		),
+		sprintf( $priceFormat, $this->number( $priceValue ), $priceCurrency ),
+		sprintf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ),
+		sprintf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ),
+		sprintf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ),
+		sprintf( $priceFormat, $this->number( $priceRebate ), $priceCurrency )
+	);
+}
+else
+{
+	printf(
+		$this->translate( 'client/html', '
+Sub-total: %1$s
++ Shipping: %2$s
+Total: %3$s
+Included rebates: %4$s
+'
+		),
+		sprintf( $priceFormat, $this->number( $priceValue ), $priceCurrency ),
+		sprintf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ),
+		sprintf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ),
+		sprintf( $priceFormat, $this->number( $priceRebate ), $priceCurrency )
+	);
+}
+
+echo $this->get( 'detailBody' );
+?>
