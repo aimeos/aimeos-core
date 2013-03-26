@@ -148,7 +148,7 @@ class MShop_Service_Provider_Delivery_Default
 
 		if( !isset( $config['url'] ) ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Missing parameter "%1$s" in service config', "url" ), parent::ERR_TEMP );
+				sprintf( 'An error occured in a service. Parameter "%1$s" for configuration not available.', "url" ), parent::ERR_TEMP );
 		}
 
 		if( ( $curl = curl_init() )=== false ) {
@@ -198,13 +198,13 @@ class MShop_Service_Provider_Delivery_Default
 
 			if ( ( $response = curl_exec( $curl ) ) === false ) {
 				throw new MShop_Service_Exception(
-					sprintf( 'Sending order failed: "%1$s"', curl_error( $curl ) ), parent::ERR_TEMP );
+					sprintf( 'An error occured in a service. Sending order to delivery provider failed: "%1$s"', curl_error( $curl ) ), parent::ERR_TEMP );
 			}
 
 			$curlinfo = curl_getinfo( $curl );
 			if( $curlinfo['http_code'] != '200' ) {
 				throw new MShop_Service_Exception(
-					sprintf( 'Sending order failed with HTTP status "%1$s"', $curlinfo['http_code'] ), parent::ERR_TEMP );
+					sprintf( 'An error occured in a service. Sending order to delivery provider failed with HTTP status "%1$s".', $curlinfo['http_code'] ), parent::ERR_TEMP );
 			}
 
 			curl_close( $curl );
@@ -235,19 +235,19 @@ class MShop_Service_Provider_Delivery_Default
 
 		if ( $dom->loadXML( $response ) !== true ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Loading XML response failed "%1$s"', $response ), parent::ERR_XML );
+				sprintf( 'An error occured in a service. Loading of XML response "%1$s" from delivery provider failed.', $response ), parent::ERR_XML );
 		}
 
 		if( $dom->schemaValidate( $responseXSD ) !== true ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Schema validation with "%1$s" failed', $responseXSD ), parent::ERR_SCHEMA );
+				sprintf( 'An error occured in a service. Validation of XML response from delivery provider against schema "%1$s" failed.', $responseXSD ), parent::ERR_SCHEMA );
 		}
 
 		$xpath = new DOMXPath( $dom );
 
 		$globalStatus = $xpath->query( '/response/error' )->item(0)->nodeValue;
 		if( $globalStatus != 0 ) {
-			throw new MShop_Service_Exception( sprintf( 'XML was rejected with code "%1$s"', $globalStatus ) );
+			throw new MShop_Service_Exception( sprintf( 'An error occured in a service. Order data sent to delivery provider was rejected with code "%1$s" according to XML response.', $globalStatus ) );
 		}
 
 		$orderitemlist = $xpath->query( '/response/orderlist/orderitem' );
@@ -259,14 +259,14 @@ class MShop_Service_Provider_Delivery_Default
 
 			if( $id != $invoiceid ) {
 				throw new MShop_Service_Exception(
-					sprintf( 'Unknown order ID "%1$s" in response for order "%2$s"', $id, $invoiceid ) );
+					sprintf( 'An error occured in a service. Order ID "%1$s" in XML response of delivery provider differs from stored invoice ID "%2$s" of the order.', $id, $invoiceid ) );
 			}
 
 			if( $status != 0 )
 			{
 				$msg = $xpath->query( 'message', $orderitem )->item(0)->nodeValue;
 				throw new MShop_Service_Exception(
-					sprintf( 'Order "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $msg ), $status );
+					sprintf( 'An error occured in a service. Order with ID "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $msg ), $status );
 			}
 		}
 	}
@@ -289,7 +289,7 @@ class MShop_Service_Provider_Delivery_Default
 		if( ( $base = reset( $result ) ) === false )
 		{
 			throw new MShop_Order_Exception( sprintf(
-				'No order base item for order ID "%1$d" available', $invoice->getId()
+				'An error occured in a search. Order base item with order ID "%1$s" not found.', $invoice->getId()
 			) );
 		}
 
@@ -320,7 +320,7 @@ class MShop_Service_Provider_Delivery_Default
 
 		if( $dom->schemaValidate( $requestXSD ) !== true ) {
 			throw new MShop_Service_Exception(
-				sprintf('Schema validation with "%1$s" failed. domXML: "%2$s".', $requestXSD, $dom->saveXML()), parent::ERR_SCHEMA);
+				sprintf('An error occured in a service. Validation of XML response from delivery provider against schema "%1$s" failed: %2$s', $requestXSD, $dom->saveXML()), parent::ERR_SCHEMA);
 		}
 
 		if ( ( $xml = $dom->saveXML() ) === false ) {
@@ -347,14 +347,14 @@ class MShop_Service_Provider_Delivery_Default
 		$date = $invoice->getDatePayment();
 
 		if ( ( $pdate = preg_replace( $regex, '$1-$2-$3T$4:$5:$6Z', $date ) ) === null ) {
-				throw new MShop_Service_Exception( sprintf( 'Invalid date format for purchase date: "%1$s"', $date ) );
+				throw new MShop_Service_Exception( sprintf( 'An error occured in a service. Invalid characters in purchase date "%1$s".', $date ) );
 		}
 
 		$config = $this->getServiceItem()->getConfig();
 
 		if( !isset( $config['project'] ) ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Missing parameter "%1$s" in service config', "project" ), parent::ERR_TEMP );
+				sprintf( 'An error occured in a service. Parameter "%1$s" for configuration not available.', "project" ), parent::ERR_TEMP );
 		}
 
 		$this->_appendChildCDATA( 'id', $invoice->getId(), $dom, $orderitem );

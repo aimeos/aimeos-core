@@ -33,7 +33,7 @@ abstract class MShop_Price_Manager_Abstract
 		{
 			$iface = 'MShop_Price_Item_Interface';
 			if( ( $priceItem instanceof $iface ) === false ) {
-				throw new MShop_Price_Exception( sprintf( 'Item doesn\'t implement "%1$s"', $iface ) );
+				throw new MShop_Price_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 			}
 
 			$priceList[ $priceItem->getQuantity() ] = $priceItem;
@@ -47,7 +47,7 @@ abstract class MShop_Price_Manager_Abstract
 
 		if( $price->getQuantity() > $quantity )
 		{
-			$msg = sprintf( 'No price for the given quantity available', $quantity );
+			$msg = sprintf( 'An error occured in the price. Price for the given quantity "%1$d" not available.', $quantity );
 			throw new MShop_Price_Exception( $msg );
 		}
 

@@ -251,7 +251,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 	protected function _checkDateFormat( $date )
 	{
 		if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/', $date ) !== 1 ) {
-			throw new MShop_Order_Exception( sprintf( 'Invalid date format "%1$s"', $date ) );
+			throw new MShop_Order_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "yyyy-mm-dd hh:mm:ss" or "yyyy-mm-dd" expected.', $date ) );
 		}
 	}
 
@@ -267,7 +267,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 		$temp = (int) $value;
 
 		if( $temp < MShop_Order_Item_Abstract::STAT_UNFINISHED || $temp > MShop_Order_Item_Abstract::STAT_RETURNED ) {
-			throw new MShop_Order_Exception( sprintf( 'Invalid order delivery status "%1$s"', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'An error occured in the order. Order delivery status "%1$s" not within allowed range.', $value ) );
 		}
 	}
 
@@ -283,7 +283,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 		$temp = (int) $value;
 
 		if( $temp < MShop_Order_Item_Abstract::PAY_UNFINISHED || $temp > MShop_Order_Item_Abstract::PAY_RECEIVED ) {
-			throw new MShop_Order_Exception( sprintf( 'Invalid order payment status "%1$s"', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'An error occured in the order. Order payment status "%1$s" not within allowed range.', $value ) );
 		}
 	}
 
@@ -303,7 +303,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 			case MShop_Order_Item_Abstract::TYPE_PHONE:
 				break;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Invalid order type "%1$s"', $value ) );
+				throw new MShop_Order_Exception( sprintf( 'An error occured in the order. Order type "%1$s" not within allowed range.', $value ) );
 		}
 	}
 
@@ -319,7 +319,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 		$temp = (int) $value;
 
 		if( $temp < MShop_Order_Item_Abstract::EMAIL_NONE || $temp > MShop_Order_Item_Abstract::EMAIL_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Invalid email flags "%1$s"', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'An error occured in the order. Email flags "%1$s" not within allowed range.', $value ) );
 		}
 	}
 
@@ -335,7 +335,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 		$temp = (int) $value;
 
 		if( $temp < MShop_Order_Item_Abstract::FLAG_NONE || $temp > MShop_Order_Item_Abstract::FLAG_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Invalid flags "%1$s" given', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'An error occured in the order. Flags "%1$s" not within allowed range.', $value ) );
 		}
 	}
 }

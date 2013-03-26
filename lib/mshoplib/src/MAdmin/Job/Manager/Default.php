@@ -131,7 +131,7 @@ class MAdmin_Job_Manager_Default
 	{
 		$iface = 'MAdmin_Job_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MAdmin_Job_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MAdmin_Job_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) {
@@ -234,7 +234,7 @@ class MAdmin_Job_Manager_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MAdmin_Job_Exception( sprintf( 'No job with ID "%1$s" found', $id ) );
+			throw new MAdmin_Job_Exception( sprintf( 'An error occured in a search. Job with ID "%1$s" not found.', $id ) );
 		}
 
 		return $item;
@@ -271,14 +271,14 @@ class MAdmin_Job_Manager_Default
 				$config = $row['parameter'];
 				if( ( $row['parameter'] = json_decode( $row['parameter'], true ) ) === null )
 				{
-					$msg = sprintf( 'Invalid JSON in "%1$s" for ID "%2$s": "%3$s"', 'madmin_job.parameter', $row['id'], $config );
+					$msg = sprintf( 'An error occured in a search. Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.parameter', $row['id'], $config );
 					$logger->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
 				$config = $row['result'];
 				if( ( $row['result'] = json_decode( $row['result'], true ) ) === null )
 				{
-					$msg = sprintf( 'Invalid JSON in "%1$s" for ID "%2$s": "%3$s"', 'madmin_job.result', $row['id'], $config );
+					$msg = sprintf( 'An error occured in a search. Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.result', $row['id'], $config );
 					$logger->log( $msg, MW_Logger_Abstract::WARN );
 				}
 

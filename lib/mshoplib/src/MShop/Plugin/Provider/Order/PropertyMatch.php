@@ -66,7 +66,7 @@ class MShop_Plugin_Provider_Order_PropertyMatch implements MShop_Plugin_Provider
 
 		$class = 'MShop_Order_Item_Base_Product_Interface';
 		if( !( $value instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Given object isn\'t of type "%1$s"', $class ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$config = $this->_item->getConfig();

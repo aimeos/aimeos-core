@@ -258,7 +258,7 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		$iface = 'MShop_Product_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Catalog_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Catalog_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 

@@ -148,7 +148,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 	{
 		$iface = 'MShop_Order_Item_Base_Service_Attribute_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -288,7 +288,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 				{
 					$row['value'] = json_decode( $row['value'], true );
 					if( is_null( $row['value'] ) ) {
-						throw new MShop_Order_Exception( sprintf( 'Invalid JSON value for order service attribute "%1$d"', $row['id'] ) );
+						throw new MShop_Order_Exception( sprintf( 'An error occured in a search. Invalid JSON as result of search for order service attribute with ID "%1$d".', $row['id'] ) );
 					}
 					$items[ $row['id'] ] = $this->_createItem( $row );
 				}

@@ -37,7 +37,7 @@ class MShop_Attribute_Manager_Factory
 		if ( ctype_alnum($name) === false )
 		{
 			$classname = is_string($name) ? 'MShop_Attribute_Manager_' . $name : '<not a string>';
-			throw new MShop_Attribute_Exception(sprintf('Invalid class name "%1$s"', $classname));
+			throw new MShop_Attribute_Exception(sprintf('Invalid characters in class name "%1$s"', $classname));
 		}
 
 		$iface = 'MShop_Attribute_Manager_Interface';

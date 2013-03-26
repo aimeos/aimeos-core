@@ -164,7 +164,7 @@ class MShop_Locale_Item_Default
 		if ( $currencyid == $this->getCurrencyId() ) { return; }
 
 		if( ! empty( $currencyid ) && ( strlen( $currencyid ) !== 3 || ctype_alpha( $currencyid ) === false ) ) {
-			throw new MShop_Locale_Exception( sprintf( 'Invalid three letter currency code "%1$s"', $currencyid ) );
+			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $currencyid ) );
 		}
 
 		$this->_values['currencyid'] = (string) $currencyid;

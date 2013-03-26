@@ -37,7 +37,7 @@ class MShop_Text_Manager_Factory
 		if ( ctype_alnum($name) === false )
 		{
 			$classname = is_string($name) ? 'MShop_Text_Manager_' . $name : '<not a string>';
-			throw new MShop_Text_Exception(sprintf('Invalid class name "%1$s"', $classname));
+			throw new MShop_Text_Exception(sprintf('Invalid characters in class name "%1$s"', $classname));
 		}
 
 		$iface = 'MShop_Text_Manager_Interface';

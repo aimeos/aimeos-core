@@ -141,7 +141,7 @@ class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Pr
 
 		if( ( $product = reset( $products ) ) === false )
 		{
-			$msg = sprintf( 'No product found with code "%1$s"', $sampleCode );
+			$msg = sprintf( 'An error occured in a search. Product with code "%1$s" not found.', $sampleCode );
 			$this->_context->getLogger()->log($msg, MW_Logger_Abstract::NOTICE);
 			return false;
 		}

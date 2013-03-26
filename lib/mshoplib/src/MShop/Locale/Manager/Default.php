@@ -108,7 +108,7 @@ class MShop_Locale_Manager_Default
 		$siteItems = $siteManager->searchItems( $siteSearch );
 
 		if( ( $siteItem = reset( $siteItems ) ) === false ) {
-			throw new MShop_Locale_Exception( sprintf( 'No site for code "%1$s" found', $site ) );
+			throw new MShop_Locale_Exception( sprintf( 'An error occured in a search. Site for code "%1$s" not found.', $site ) );
 		}
 
 		$siteIds = array( $siteItem->getId() );
@@ -226,7 +226,7 @@ class MShop_Locale_Manager_Default
 	{
 		$iface = 'MShop_Locale_Item_Interface';
 		if ( !( $item instanceof $iface ) ) {
-			throw new MShop_Locale_Exception(sprintf('Object does not implement "%1$s"', $iface));
+			throw new MShop_Locale_Exception(sprintf('Object is not of required type "%1$s"', $iface));
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -426,7 +426,7 @@ class MShop_Locale_Manager_Default
 			return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
 		}
 
-		throw new MShop_Locale_Exception( sprintf( 'No locale item found for site "%1$s"', $site ) );
+		throw new MShop_Locale_Exception( sprintf( 'An error occured in a search. Locale item for site "%1$s" not found.', $site ) );
 	}
 
 

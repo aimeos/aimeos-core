@@ -42,7 +42,7 @@ class MShop_Common_Manager_Type_Default
 		foreach( $required as $key )
 		{
 			if( !in_array( $key, $isList ) ) {
-				throw new MShop_Exception( sprintf( 'Configuration for "%1$s" is missing', $key ) );
+				throw new MShop_Exception( sprintf( 'An error occured in a manager. Configuration of necessary SQL statement for "%1$s" not available.', $key ) );
 			}
 		}
 
@@ -57,11 +57,11 @@ class MShop_Common_Manager_Type_Default
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" is invalid', $entry['code']) );
+			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" is not available.', $entry['code']) );
 		}
 
 		if( ( $this->_prefix = substr( $entry['code'], 0, $pos+1 ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" is invalid', $entry['code'] ) );
+			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" is not available.', $entry['code'] ) );
 		}
 	}
 
@@ -104,7 +104,7 @@ class MShop_Common_Manager_Type_Default
 	{
 		$iface = 'MShop_Common_Item_Type_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( $item->isModified() === false ) { return; }
@@ -200,7 +200,7 @@ class MShop_Common_Manager_Type_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'No type item found for id "%1$s"', $id ) );
+			throw new MShop_Exception( sprintf( 'An error occured in a search. Type item with ID "%1$s" in "%2$s" not found.', $id, $conf['code'] ) );
 		}
 
 		return $item;
