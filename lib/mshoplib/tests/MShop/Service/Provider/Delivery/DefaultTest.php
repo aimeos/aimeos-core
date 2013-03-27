@@ -73,7 +73,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetConfigBE()
 	{
-		$this->assertArrayHasKey( 'project', $this->_object->getConfigBE());
+		$this->assertArrayHasKey( 'project', $this->_object->getConfigBE() );
 	}
 
 

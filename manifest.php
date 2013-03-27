@@ -33,7 +33,7 @@ return array(
 		'controller/extjs/src',
 		'lib/zendlib',
 		'lib/phpexcel',
-		'lib/phpseclib0.3.1',
+		'lib/mwlib/lib'
 	),
 	'i18n' => array(
 		'client/html' => 'client/html/i18n',
