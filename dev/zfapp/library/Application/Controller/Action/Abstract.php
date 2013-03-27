@@ -102,6 +102,9 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$ctx->setCache( $cache );
 
 		$i18n = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'en_GB', array('disableNotices'=>true) );
+		if( function_exists( 'apc_store' ) === true ) {
+			$i18n = new MW_Translation_Decorator_APC( $i18n, $conf );
+		}
 		$ctx->setI18n( $i18n );
 
 		$session = new MW_Session_PHP();
@@ -144,6 +147,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 
 	protected function _createView()
 	{
+		$context = Zend_Registry::get( 'ctx' );
 		$router = Zend_Controller_Front::getInstance()->getRouter();
 		$router->setGlobalParam( 'site', $this->_getParam( 'site' ) );
 
@@ -152,14 +156,13 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$helper = new MW_View_Helper_Url_Zend( $view, $router );
 		$view->addHelper( 'url', $helper );
 
-		$trans = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'en_GB', array('disableNotices'=>true) );
-		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
+		$helper = new MW_View_Helper_Translate_Default( $view, $context->getI18n() );
 		$view->addHelper( 'translate', $helper );
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $this->_getAllParams() );
 		$view->addHelper( 'param', $helper );
 
-		$helper = new MW_View_Helper_Config_Default( $view, Zend_Registry::get( 'ctx' )->getConfig() );
+		$helper = new MW_View_Helper_Config_Default( $view, $context->getConfig() );
 		$view->addHelper( 'config', $helper );
 
 		$helper = new MW_View_Helper_Number_Default( $view, '.', '' );

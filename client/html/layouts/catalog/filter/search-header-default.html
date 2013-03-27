@@ -14,27 +14,32 @@ $listConfig = $this->config( 'client/html/catalog/listsimple/url/config', array(
 <link href="<?php echo $this->config( 'client/html/common/template/baseurl' ); ?>css/search.css" type="text/css" rel="stylesheet" media="screen" />
 <script type="text/javascript" defer="defer" src="<?php echo $this->config( 'client/html/common/template/baseurl' ); ?>js/jquery-ui-1.10.0.custom.min.js"></script>
 <script type="text/javascript">
-$(document).ready( function () {
-	$( ".catalog-filter-search .value" ).autocomplete( {
-		minLength: 3,
-		delay: 200,
-		source: function( req, add ) {
-			$.getJSON(
-				"<?php echo $this->url( $listTarget, $listController, $listAction, array(), array(), $listConfig ); ?>",
-				{ "<?php echo $this->formparam( 'f-search-text' ); ?>": req.term },
-				function( data ) {
-					var suggestions = [];
-
-					$.each( data, function( i, val ) {
-						suggestions.push( val.name );
-					} );
-			
-					add( suggestions );
-				}
-			);
-		}
+<!--
+	$(document).ready( function () {
+		$( ".catalog-filter-search .value" ).autocomplete( {
+			minLength: 3,
+			delay: 200,
+			source: function( req, add ) {
+				$.getJSON(
+					"<?php echo $this->url( $listTarget, $listController, $listAction, array(), array(), $listConfig ); ?>",
+					{ "<?php echo $this->formparam( 'f-search-text' ); ?>": req.term },
+					function( data ) {
+						var suggestions = [];
+	
+						$.each( data, function( i, val ) {
+							suggestions.push( val.name );
+						} );
+				
+						add( suggestions );
+					}
+				);
+			},
+			select: function( event, ui ) { 
+				$( ".catalog-filter-search .value" ).val( ui.item.value );
+				$( ".catalog-filter-search > form" ).submit();
+			}
+		} );
 	} );
-} );
+// -->
 </script>
-
 <?php echo $this->get( 'searchHeader' ); ?>
