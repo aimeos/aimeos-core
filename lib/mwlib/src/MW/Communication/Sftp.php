@@ -9,7 +9,7 @@
 
 
 /**
- * Common class for communication with delivery and payment providers.
+ * Common class for general SFTP transfer.
  *
  * @package MW
  * @subpackage Communication
