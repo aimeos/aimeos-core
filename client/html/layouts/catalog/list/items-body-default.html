@@ -10,7 +10,7 @@ $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
 
-$priceFormat = $this->translate( 'client/html', '%1$s€' );
+$priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 ?>
@@ -40,14 +40,15 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 			</div>
 			<div class="price-list">
 <?php	foreach( $productItem->getRefItems( 'price', 'default', 'default' ) as $priceItem ) : ?>
+<?php		$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() ); ?>
 				<div class="price-item">
 					<span class="quantity"><?php echo $priceItem->getQuantity(); ?></span>
-					<span class="value"><?php printf( $priceFormat, $this->number( $priceItem->getValue() ) ); ?></span>
+					<span class="value"><?php printf( $priceFormat, $this->number( $priceItem->getValue() ), $currency ); ?></span>
 <?php		if( ( $rebate = $priceItem->getRebate() ) > 0 ) : ?>
 					<span class="rebate"><?php printf( $priceFormat, $this->number( $rebate ) ); ?></span>
 					<span class="rebatepercent"><?php printf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ); ?></span>
 <?php		endif; ?>
-					<span class="shipping"><?php printf( $priceFormat, $this->number( $priceItem->getShipping() ) ); ?></span>
+					<span class="shipping"><?php printf( $priceFormat, $this->number( $priceItem->getShipping() ), $currency ); ?></span>
 					<span class="taxrate"><?php printf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ); ?></span>
 				</div>
 <?php	endforeach; ?>
