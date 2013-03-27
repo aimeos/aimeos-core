@@ -18,9 +18,9 @@ class MW_Communication_Sftp implements MW_Communication_Interface
 {
 	private $_config;
 
-	public function __construct( MShop_Service_Item_Interface $serviceItem )
+	public function __construct( array $config )
 	{
-		$this->_config = $serviceItem->getConfig();
+		$this->_config = $config;
 	}
 
 	/**
@@ -33,28 +33,28 @@ class MW_Communication_Sftp implements MW_Communication_Interface
 	 */
 	public function transmit( $target, $method, $payload )
 	{
-		if( !file_exists( $payload[ 'SFTP_SRCFILE' ] ) )
+		if( !file_exists( $payload ) )
 		{
-			$msg = sprintf( 'File "%1$s" does not exist.', $sourceFile );
-			throw new MShop_Service_Exception( $msg );
+			$msg = sprintf( 'File "%1$s" does not exist.', $payload );
+			throw new MW_Communication_Exception( $msg );
 		}
 
 
-		$destFile = trim( $this->_config['SFTP_DIR'], DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . basename( $payload[ 'SFTP_SRCFILE' ] );
+		$destFile = trim( $this->_config['targetdir'], DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . basename( $payload );
 
 		$sftp = new Net_SFTP( $target );
 
-		$loginResult = $sftp->login( $this->_config['SFTP_USER'], $this->_config['SFTP_PASSWD'] );
+		$loginResult = $sftp->login( $this->_config['user'], $this->_config['password'] );
 		if ( !$loginResult ) {
-			throw new MShop_Service_Exception( 'Login failed!' );
+			throw new MW_Communication_Exception( 'Login failed!' );
 		}
 
-		$upload = $sftp->put( $destFile, $payload[ 'SFTP_SRCFILE' ], $method );
+		$upload = $sftp->put( $destFile, $payload, $method );
 
 		if ( $upload === false )
 		{
-			$msg = sprintf( 'Could not upload file: "%1$s"', $payload[ 'SFTP_SRCFILE' ] );
-			throw new MShop_Service_Exception( $msg );
+			$msg = sprintf( 'Could not upload file: "%1$s"', $payload );
+			throw new MW_Communication_Exception( $msg );
 		}
 
 		$sftp->disconnect();
