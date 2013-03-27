@@ -445,9 +445,9 @@ implements MShop_Service_Provider_Payment_Interface
 		{
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
-				$str = 'Error "%1$s" occured for order ID "%2$s" (correlation ID: "%3$s"): %4$s';
-				$msg = sprintf( $str, $rvals['L_ERRORCODE0'], $orderid, $cid, $rvals['L_SHORTMESSAGE0'] );
-				throw new MShop_Service_Exception( $msg );
+				throw new MShop_Service_Exception( sprintf(
+						'Error "%1$s" occured for order ID "%2$s" (correlation ID: "%3$s"): %4$s',
+						$rvals['L_ERRORCODE0'], $orderid, $cid, $rvals['L_SHORTMESSAGE0'] ) );
 			}
 
 			$str = $method . ' : orderID/token=' . $orderid . ', response=' . print_r( $rvals, true );

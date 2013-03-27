@@ -135,7 +135,7 @@ class MShop_Locale_Item_Default
 		if ( $langid == $this->getLanguageId() ) { return; }
 
 		if( ! empty( $langid ) && ( strlen( $langid ) !== 2 || ctype_alpha( $langid ) === false ) ) {
-			throw new MShop_Locale_Exception( sprintf( 'Invalid language ID "%1$s"', $langid ) );
+			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $langid ) );
 		}
 
 		$this->_values['langid'] = (string) $langid;

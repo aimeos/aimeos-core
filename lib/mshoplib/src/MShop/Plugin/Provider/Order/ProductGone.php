@@ -62,8 +62,7 @@ class MShop_Plugin_Provider_Order_ProductGone implements MShop_Plugin_Provider_I
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			$msg = 'Received notification from "%1$s" which doesn\'t implement "%2$s"';
-			throw new MShop_Plugin_Order_Exception(sprintf($msg, get_class($order), $class));
+			throw new MShop_Plugin_Order_Exception(sprintf('Received notification from "%1$s" which doesn\'t implement "%2$s"', get_class($order), $class));
 		}
 
 		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) {
