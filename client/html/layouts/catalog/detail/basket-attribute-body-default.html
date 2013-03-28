@@ -21,9 +21,14 @@
 <?php
 			$priceItems = $attribute->getRefItems( 'price', 'default', 'default' );
 
-			if( ( $priceItem = reset( $priceItems ) ) !== false ) {
-				printf( $this->translate( 'client/html', '%1$s ( +%2$s€ )' ), $attribute->getName(), $this->number( $priceItem->getValue() + $priceItem->getShipping() ) );
-			} else {
+			if( ( $priceItem = reset( $priceItems ) ) !== false )
+			{
+				$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
+				$value = $this->number( $priceItem->getValue() + $priceItem->getShipping() );
+				printf( $this->translate( 'client/html', '%1$s ( +%2$s%3$s )' ), $attribute->getName(), $value, $currency );
+			}
+			else
+			{
 				echo $attribute->getName();
 			}
 ?>
