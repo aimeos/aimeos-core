@@ -48,15 +48,20 @@ class MW_Communication_Sftp implements MW_Communication_Interface
 	/**
 	 * Sends request parameters to the providers interface.
 	 *
-	 * @param string $target Target directory of the remote host
-	 * @param string $method Initial method:<br>
-	 *		NET_SFTP_LOCAL_FILE reads data from local file,<br>
-	 *		NET_SFTP_STRING reads data from string,<br>
-	 *		NET_SFTP_RESUME resumes an upload
+	 * @param string $target Target directory on the remote host
+	 * @param string $method Transfer method like "file" or "string"
 	 * @param mixed $payload Filename or string to transmit to remote host
 	 */
 	public function transmit( $target, $method, $payload )
 	{
+		switch( $method )
+		{
+			case 'file':
+				$method = NET_SFTP_LOCAL_FILE; break;
+			default:
+				$method = NET_SFTP_STRING; break;
+		}
+
 		if ( $this->_sftp->put( $target, $payload, $method ) === false )
 		{
 			$msg = sprintf( 'Could not upload payload to "%2$s:%3$s"', $this->_config['host'], $target );
