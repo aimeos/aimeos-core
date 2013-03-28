@@ -26,11 +26,11 @@ class MW_Communication_Sftp implements MW_Communication_Interface
 	 */
 	public function __construct( array $config )
 	{
-		$this->_sftp = new Net_SFTP( $config['remotehost'] );
-		$loginResult = $this->_sftp->login( $config['user'], $config['password'] );
-		
+		$this->_sftp = new Net_SFTP( $config['host'] );
+		$loginResult = $this->_sftp->login( $config['username'], $config['password'] );
+
 		if( !$loginResult ) {
-			throw new MW_Communication_Exception( sprintf( 'Login to "%1$s" with user "%2$s" failed', $config['remotehost'], $config['user'] ) );
+			throw new MW_Communication_Exception( sprintf( 'Login to "%1$s" with user "%2$s" failed', $config['host'], $config['username'] ) );
 		}
 	}
 
