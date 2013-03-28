@@ -146,7 +146,7 @@ class MW_Translation_Zend
 			}
 		}
 
-		return $this->_translations[$domain];
+		return ( isset( $this->_translations[$domain] ) ? $this->_translations[$domain] : array() );
 	}
 
 }
