@@ -42,7 +42,7 @@ abstract class MShop_Price_Manager_Abstract
 		ksort( $priceList );
 
 		if( ( $price = reset( $priceList ) ) === false ) {
-			throw new MShop_Price_Exception( sprintf( 'No price item available' ) );
+			throw new MShop_Price_Exception( sprintf( 'An error occured in the price. Price item not available.' ) );
 		}
 
 		if( $price->getQuantity() > $quantity )

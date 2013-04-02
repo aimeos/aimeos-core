@@ -60,7 +60,7 @@ class MShop_Plugin_Provider_Order_PropertyMatch implements MShop_Plugin_Provider
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			throw new MShop_Plugin_Exception( sprintf( 'Received notification from "%1$s" which doesn\'t implement "%2$s"', get_class( $order ), $class ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$class = 'MShop_Order_Item_Base_Product_Interface';
@@ -93,7 +93,7 @@ class MShop_Plugin_Provider_Order_PropertyMatch implements MShop_Plugin_Provider
 		if( reset( $result ) === false )
 		{
 			$code = array( 'product' => array_keys( $config ) );
-			throw new MShop_Plugin_Provider_Exception( sprintf( 'Product property does not match criteria.' ), -1, null, $code );
+			throw new MShop_Plugin_Provider_Exception( sprintf( 'An error occured in a search. Product matching given properties not found.' ), -1, null, $code );
 		}
 
 		return true;

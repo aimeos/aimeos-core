@@ -63,7 +63,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			throw new MShop_Plugin_Exception( sprintf( 'Received notification from "%1$s" which doesn\'t implement "%2$s"', get_class( $order ), $class ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$class = 'MShop_Order_Item_Base_Product_Interface';
@@ -80,7 +80,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 			$keyElements = explode( '.', $key );
 
 			if( $keyElements[0] !== 'product' || count( $keyElements ) < 3 ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Error in configuration.' ) );
+				throw new MShop_Plugin_Exception( sprintf( 'An error occured in a plugin. Configuration invalid.' ) );
 			}
 
 			$productSubManager = $productManager->getSubManager( $keyElements[1] );

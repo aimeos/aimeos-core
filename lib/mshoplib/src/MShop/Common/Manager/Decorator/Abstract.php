@@ -49,7 +49,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	public function __call( $name, array $param )
 	{
 		if ( ( $result = call_user_func_array( array( $this->_manager, $name ), $param ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
+			throw new MShop_Exception( sprintf( 'An error occured in a service. Method "%1$s" for provider not available.', $name ) );
 		}
 
 		return $result;

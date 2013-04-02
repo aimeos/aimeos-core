@@ -152,7 +152,7 @@ class MShop_Service_Provider_Delivery_Default
 		}
 
 		if( ( $curl = curl_init() )=== false ) {
-			throw new MShop_Service_Exception( sprintf( 'Could not initialize curl' ), parent::ERR_TEMP );
+			throw new MShop_Service_Exception( sprintf( 'An error occured in a service. Curl could not be initialized.' ), parent::ERR_TEMP );
 		}
 
 		try
@@ -313,7 +313,8 @@ class MShop_Service_Provider_Delivery_Default
 		}
 		catch( DOMException $e )
 		{
-			throw new MShop_Service_Exception( sprintf( 'Creating XML failed: %1$s', $e->getMessage() ), 0, $e );
+			throw new MShop_Service_Exception(
+					sprintf( 'An error occured in a service. Creating XML file with order data for delivery provider failed: %1$s', $e->getMessage() ), 0, $e );
 		}
 
 		$requestXSD = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-request_v1.xsd';
@@ -324,7 +325,7 @@ class MShop_Service_Provider_Delivery_Default
 		}
 
 		if ( ( $xml = $dom->saveXML() ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'XML DOM tree could not be converted to XML string' ), parent::ERR_XML );
+			throw new MShop_Service_Exception( sprintf( 'An error occured in a service. DOM tree of XML response from delivery provider could not be converted to XML string.' ), parent::ERR_XML );
 		}
 
 		return $xml;

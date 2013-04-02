@@ -61,7 +61,7 @@ class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Pr
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			throw new MShop_Plugin_Exception(sprintf('Received notification from "%1$s" which doesn\'t implement "%2$s"', get_class($order), $class));
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$config = $this->_item->getConfig();

@@ -62,7 +62,7 @@ class MShop_Plugin_Provider_Order_Shipping implements MShop_Plugin_Provider_Inte
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			throw new MShop_Plugin_Exception( sprintf( 'Received notification from "%1$s" which doesn\'t implement "%2$s"', get_class( $order ), $class ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$config = $this->_item->getConfig();
@@ -80,7 +80,7 @@ class MShop_Plugin_Provider_Order_Shipping implements MShop_Plugin_Provider_Inte
 
 		if( !isset( $config['threshold'][$currency] ) )
 		{
-			$this->_context->getLogger()->log( sprintf( 'Threshold for currency ID: "%1$s" is not set"', $currency ), MW_Logger_Abstract::WARN );
+			$this->_context->getLogger()->log( sprintf( 'An error occured in a plugin. Threshold for free shipping for currency ID "%1$s" not available.', $currency ), MW_Logger_Abstract::WARN );
 			return true;
 		}
 

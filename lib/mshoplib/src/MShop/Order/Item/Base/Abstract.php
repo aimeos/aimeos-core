@@ -76,7 +76,7 @@ abstract class MShop_Order_Item_Base_Abstract
 	protected function _checkProduct( MShop_Order_Item_Base_Product_Interface $item )
 	{
 		if( $item->getProductCode() === '' ) {
-			throw new MShop_Order_Exception( sprintf( 'Item needs a product code' ) );
+			throw new MShop_Order_Exception( sprintf( 'An error occured in the order. Product does not contain all required values. Product code for item not available.' ) );
 		}
 	}
 }

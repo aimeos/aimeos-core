@@ -58,7 +58,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			throw new MShop_Plugin_Exception( sprintf( 'Received notification from "%1$s" which doesn\'t implement "%2$s"', get_class( $order ), $class ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$class = 'MShop_Order_Item_Base_Product_Interface';
@@ -70,7 +70,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 
 
 		if( isset( $config['single-number-max'] ) && $value->getQuantity() > (int) $config['single-number-max'] ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Number of single product exceeds given limit' ) );
+			throw new MShop_Plugin_Exception( sprintf( 'An error occured in a plugin. Number of single product exceeds given limit.' ) );
 		}
 
 
@@ -83,7 +83,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 			}
 
 			if( $total > (int) $config['total-number-max'] ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Total number of product exceeds given limit' ) );
+				throw new MShop_Plugin_Exception( sprintf( 'An error occured in a plugin. Total number of product exceeds given limit' ) );
 			}
 		}
 
@@ -93,7 +93,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 
 		if( isset( $config['single-value-max'][$currencyId] )
 			&& $value->getPrice()->getValue() * $value->getQuantity() > (float) $config['single-value-max'][$currencyId] ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Value of single product exceeds given limit' ) );
+			throw new MShop_Plugin_Exception( sprintf( 'An error occured in a plugin. Value of single product exceeds given limit' ) );
 		}
 
 
@@ -107,7 +107,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 			}
 
 			if( (float) $price->getValue() > (float) $config['total-value-max'][$currencyId] ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Total value of product exceeds given limit' ) );
+				throw new MShop_Plugin_Exception( sprintf( 'An error occured in a plugin. Total value of product exceeds given limit' ) );
 			}
 		}
 

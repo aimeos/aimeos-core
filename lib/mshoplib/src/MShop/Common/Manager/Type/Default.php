@@ -53,15 +53,15 @@ class MShop_Common_Manager_Type_Default
 		$this->_searchConfig = $searchConfig;
 
 		if( ( $entry = reset( $searchConfig ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration is invalid' ) );
+			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration not available.' ) );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" is not available.', $entry['code']) );
+			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" not available.', $entry['code']) );
 		}
 
 		if( ( $this->_prefix = substr( $entry['code'], 0, $pos+1 ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" is not available.', $entry['code'] ) );
+			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" not available.', $entry['code'] ) );
 		}
 	}
 

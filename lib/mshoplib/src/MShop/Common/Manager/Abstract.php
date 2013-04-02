@@ -124,7 +124,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( ( $manager = call_user_func_array( $classname . '::createManager', array( $this->_context ) ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Manager for class "%1$s" can not be created, invocation of "%1$s::createManager()" failed.', $classname ) );
+			throw new MShop_Exception( sprintf( 'An error occured in a manager. Domain manager for class "%1$s" not available.', $classname ) );
 		}
 
 		foreach( $parts as $part ) {
@@ -836,7 +836,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
 			if ( $row === false ) {
-				throw new MShop_Exception( sprintf( 'No total results value found' ) );
+				throw new MShop_Exception( sprintf( 'An error occured in a search. Total results value not found.' ) );
 			}
 
 			$total = (int) $row['count'];
