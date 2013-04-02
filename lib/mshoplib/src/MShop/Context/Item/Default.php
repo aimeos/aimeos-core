@@ -179,7 +179,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getLocale()
 	{
 		if( !isset( $this->_locale ) ) {
-			throw new MShop_Exception( sprintf( 'Locale object not available' ) );
+			throw new MShop_Exception( sprintf( 'An error occured in the context domain. Locale object not available.' ) );
 		}
 
 		return $this->_locale;
@@ -205,7 +205,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getLogger()
 	{
 		if( !isset( $this->_logger ) ) {
-			throw new MShop_Exception( sprintf( 'Log manager object not available' ) );
+			throw new MShop_Exception( sprintf( 'An error occured in the context domain. Log manager object not available.' ) );
 		}
 
 		return $this->_logger;
@@ -231,7 +231,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getSession()
 	{
 		if( !isset( $this->_session ) ) {
-			throw new MShop_Exception( sprintf( 'Session object not available' ) );
+			throw new MShop_Exception( sprintf( 'An error occured in the context domain. Session object not available.' ) );
 		}
 
 		return $this->_session;
