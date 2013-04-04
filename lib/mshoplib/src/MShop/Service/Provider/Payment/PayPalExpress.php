@@ -118,7 +118,7 @@ implements MShop_Service_Provider_Payment_Interface
 		foreach( $configParameters as $param )
 		{
 			if( !isset( $this->_config[ $param ] ) ) {
-				throw new MShop_Service_Exception( sprintf( 'Missing parameter "%1$s" in service config', $param ) );
+				throw new MShop_Service_Exception( sprintf( 'Parameter "%1$s" for configuration not available', $param ) );
 			}
 		}
 	}
@@ -200,7 +200,7 @@ implements MShop_Service_Provider_Payment_Interface
 
 		if( ( $tid = $this->_getOrderServiceItem( $baseid )->getAttribute('TRANSACTIONID') ) === null )
 		{
-			$msg = sprintf( 'No payment transaction ID available for order ID "%1$s"', $order->getId() );
+			$msg = sprintf( 'Paypal express payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -233,7 +233,7 @@ implements MShop_Service_Provider_Payment_Interface
 
 		if( ( $tid = $serviceItem->getAttribute('TRANSACTIONID') ) === null )
 		{
-			$msg = sprintf( 'No payment transaction ID available for order ID "%1$s"', $order->getId() );
+			$msg = sprintf( 'Paypal express payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -280,7 +280,7 @@ implements MShop_Service_Provider_Payment_Interface
 
 		if( ( $tid = $serviceItem->getAttribute('TRANSACTIONID') ) === null )
 		{
-			$msg = sprintf( 'No payment transaction ID available for order ID "%1$s"', $order->getId() );
+			$msg = sprintf( 'Paypal express payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -318,7 +318,7 @@ implements MShop_Service_Provider_Payment_Interface
 
 		if( ( $tid = $this->_getOrderServiceItem( $baseid )->getAttribute('TRANSACTIONID') ) === null )
 		{
-			$msg = sprintf( 'No payment transaction ID available for order ID "%1$s"', $order->getId() );
+			$msg = sprintf( 'Paypal express payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -360,7 +360,7 @@ implements MShop_Service_Provider_Payment_Interface
 
 
 		if( !isset( $fullResponse['PAYERID'] ) ) {
-			throw new MShop_Service_Exception( 'Payer was not authorized' );
+			throw new MShop_Service_Exception( sprintf( 'Paypal express user was not authorized' ) );
 		}
 
 
@@ -445,9 +445,9 @@ implements MShop_Service_Provider_Payment_Interface
 		{
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
-				$str = 'Error "%1$s" occured for order ID "%2$s" (correlation ID: "%3$s"): %4$s';
-				$msg = sprintf( $str, $rvals['L_ERRORCODE0'], $orderid, $cid, $rvals['L_SHORTMESSAGE0'] );
-				throw new MShop_Service_Exception( $msg );
+				throw new MShop_Service_Exception( sprintf(
+						'Checking response from Paypal express payment server failed. Error "%1$s" occured for order ID "%2$s" (correlation ID: "%3$s"): %4$s',
+						$rvals['L_ERRORCODE0'], $orderid, $cid, $rvals['L_SHORTMESSAGE0'] ) );
 			}
 
 			$str = $method . ' : orderID/token=' . $orderid . ', response=' . print_r( $rvals, true );
@@ -677,7 +677,7 @@ implements MShop_Service_Provider_Payment_Interface
 
 		if ( ( $serviceItem = reset( $results ) ) === false )
 		{
-			$msg = sprintf( 'No service payment provider for order base ID "%1$s" found', $baseid );
+			$msg = sprintf( 'Service payment provider for order base ID "%1$s" not found', $baseid );
 			throw new MShop_Service_Exception( $msg );
 		}
 

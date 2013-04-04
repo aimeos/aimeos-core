@@ -69,8 +69,7 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			$msg = 'Received notification from "%1$s" which doesn\'t implement "%2$s"';
-			throw new MShop_Plugin_Exception(sprintf($msg, get_class($order), $class));
+			throw new MShop_Plugin_Exception(sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) { return true; }
@@ -97,7 +96,8 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 		if( count( $failures ) > 0 )
 		{
 			$code = array( 'basket' => $failures );
-			throw new MShop_Plugin_Provider_Exception( 'Basket limits not reached', -1, null, $code );
+			throw new MShop_Plugin_Provider_Exception(
+					sprintf( 'Free shipping not possible, minimum value or minimum amount of product(s) in basket not reached' ), -1, null, $code );
 		}
 
 		return true;

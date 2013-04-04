@@ -316,8 +316,7 @@ class MShop_Price_Item_Default
 	{
 		if( $item->getCurrencyId() != $this->getCurrencyId() )
 		{
-			$msg = 'Price item uses currency ID "%1$s" instead of "%2$s"';
-			throw new MShop_Price_Exception( sprintf( $msg, $item->getCurrencyId(), $this->getCurrencyId() ) );
+			throw new MShop_Price_Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currenty ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
 		}
 
 		$this->_values['value'] = $this->_formatNumber( $this->getValue() + $item->getValue() * $quantity );
@@ -359,7 +358,7 @@ class MShop_Price_Item_Default
 	protected function _checkPrice( $value )
 	{
 		if( !is_numeric( $value ) ) {
-			throw new MShop_Price_Exception( sprintf( 'Price "%1$s" isn\'t a numeric value', $value ) );
+			throw new MShop_Price_Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
 		}
 	}
 
@@ -373,8 +372,7 @@ class MShop_Price_Item_Default
 	{
 		if( strlen( $value ) !== 3 || ctype_alpha( $value ) === false )
 		{
-			$msg = 'Currency ID "%1$s" isn\'t an ISO three letter currency code';
-			throw new MShop_Price_Exception( sprintf( $msg, $value ) );
+			throw new MShop_Price_Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $value ) );
 		}
 	}
 

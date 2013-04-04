@@ -27,19 +27,19 @@ abstract class MShop_Plugin_Manager_Abstract
 		foreach( $names as $name )
 		{
 			if ( ctype_alnum( $name ) === false ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
+				throw new MShop_Plugin_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if ( class_exists( $classname ) === false ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+				throw new MShop_Plugin_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$provider = new $classname( $this->_getContext(), $serviceItem, $provider );
 
 			if ( ( $provider instanceof $iface ) === false ) {
-				$msg = sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface );
+				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface );
 				throw new MShop_Plugin_Exception( $msg );
 			}
 		}

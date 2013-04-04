@@ -313,7 +313,7 @@ class MShop_Customer_Item_Default
 	protected function _checkDateOnlyFormat( $date )
 	{
 		if( $date !== null && preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', $date ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid date format "%1$s"', $date ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "yyyy-mm-dd hh:mm:ss" or "yyyy-mm-dd" expected.', $date ) );
 		}
 	}
 }

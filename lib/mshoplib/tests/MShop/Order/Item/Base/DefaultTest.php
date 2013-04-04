@@ -456,14 +456,14 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_ALL );
 		}
 		catch( MShop_Order_Exception $e ) {
-			$this->assertEquals( 'No products in basket', $e->getMessage() );
+			$this->assertEquals( 'Basket empty', $e->getMessage() );
 		}
 
 		try {
 			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 		}
 		catch( MShop_Order_Exception $e ) {
-			$this->assertEquals( 'No products in basket', $e->getMessage() );
+			$this->assertEquals( 'Basket empty', $e->getMessage() );
 		}
 
 		foreach( $this->_products as $product ) {
@@ -490,7 +490,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		foreach( $this->_products as $product ) {
 			$this->_object->addProduct( $product );
 		}
-		
+
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
 
 		$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );

@@ -357,7 +357,7 @@ class MShop_Text_Manager_Default
 	{
 		$iface = 'MShop_Text_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Text_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Text_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }

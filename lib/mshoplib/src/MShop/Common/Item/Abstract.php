@@ -78,7 +78,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	public static function checkId( $old, $new )
 	{
 		if( $new != null && $old != null && $old != $new ) {
-			throw new MShop_Exception( sprintf( 'Given ID "%1$s" isn\'t the same as "%2$s"', $new, $old ) );
+			throw new MShop_Exception( sprintf( 'New ID "%1$s" for item differs from old ID "%2$s"', $new, $old ) );
 		}
 
 		return $new;
@@ -95,7 +95,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 
 		if( $date !== null && preg_match( $regex, $date ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid date format "%1$s"', $date ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "yyyy-mm-dd hh:mm:ss" or "yyyy-mm-dd" expected.', $date ) );
 		}
 	}
 

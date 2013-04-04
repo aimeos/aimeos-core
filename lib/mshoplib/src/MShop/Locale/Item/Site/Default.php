@@ -177,7 +177,7 @@ class MShop_Locale_Item_Site_Default
 			return $this->_children[$index];
 		}
 
-		throw new MShop_Locale_Exception( 'Invalid index for child' );
+		throw new MShop_Locale_Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
 	}
 
 
