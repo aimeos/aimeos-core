@@ -19,7 +19,7 @@ foreach( (array) $this->get( 'stageCatPath', array() ) as $cat )
 <?php if( isset( $this->stageErrorList ) ) : ?>
 	<ul class="error-list">
 <?php foreach( (array) $this->stageErrorList as $errmsg ) : ?>
-		<li><?php echo $errmsg; ?></li>
+		<li class="error-item"><?php echo $errmsg; ?></li>
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>

@@ -140,7 +140,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				if( count( $missing ) > 0 )
 				{
 					$view->deliveryError = $missing;
-					throw new Client_Html_Exception( 'At least one delivery address part is missing' );
+					throw new Client_Html_Exception( sprintf( 'At least one delivery address part is missing' ) );
 				}
 
 				$basketCtrl->setAddress( $type, $param );

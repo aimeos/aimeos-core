@@ -141,7 +141,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				if( count( $missing ) > 0 )
 				{
 					$view->billingError = $missing;
-					throw new Client_Html_Exception( 'At least one billing address part is missing' );
+					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing' ) );
 				}
 
 				$basketCtrl->get()->setCustomerId( '' );

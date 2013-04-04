@@ -46,9 +46,14 @@
 
 .arcavias .attr-list,
 .arcavias .form-list {
-	list-style: none;
 	padding: 0;
 	margin: 0;
+}
+
+.arcavias li.attr-item,
+.arcavias li.form-item,
+.arcavias li.error-item {
+	list-style: none;
 }
 
 .arcavias .error-list {
