@@ -228,7 +228,7 @@ class MAdmin_Log_Manager_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MAdmin_Log_Exception( sprintf( 'Log entry with ID "%1$s" not found.', $id ) );
+			throw new MAdmin_Log_Exception( sprintf( 'Log entry with ID "%1$s" not found', $id ) );
 		}
 
 		return $item;

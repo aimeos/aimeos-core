@@ -42,7 +42,7 @@ class MShop_Common_Manager_Type_Default
 		foreach( $required as $key )
 		{
 			if( !in_array( $key, $isList ) ) {
-				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available.', $key ) );
+				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $key ) );
 			}
 		}
 
@@ -53,15 +53,15 @@ class MShop_Common_Manager_Type_Default
 		$this->_searchConfig = $searchConfig;
 
 		if( ( $entry = reset( $searchConfig ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration not available.' ) );
+			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available.', $entry['code']) );
+			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code']) );
 		}
 
 		if( ( $this->_prefix = substr( $entry['code'], 0, $pos+1 ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available.', $entry['code'] ) );
+			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 	}
 
@@ -200,7 +200,7 @@ class MShop_Common_Manager_Type_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Type item with ID "%1$s" in "%2$s" not found.', $id, $conf['code'] ) );
+			throw new MShop_Exception( sprintf( 'Type item with ID "%1$s" in "%2$s" not found', $id, $conf['code'] ) );
 		}
 
 		return $item;

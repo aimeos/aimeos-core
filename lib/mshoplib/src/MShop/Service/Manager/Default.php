@@ -570,12 +570,12 @@ class MShop_Service_Manager_Default
 
 		if( ( $provider = array_shift( $names ) ) === null )
 		{
-			$msg = sprintf( 'Provider in "%1$s" not available.', $item->getProvider() );
+			$msg = sprintf( 'Provider in "%1$s" not available', $item->getProvider() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
 		if ( ctype_alnum( $provider ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'Invalid characters in provider name "%1$s".', $provider ) );
+			throw new MShop_Service_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
 		$interface = 'MShop_Service_Provider_Factory_Interface';

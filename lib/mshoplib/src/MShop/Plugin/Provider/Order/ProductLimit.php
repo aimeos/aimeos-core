@@ -70,7 +70,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 
 
 		if( isset( $config['single-number-max'] ) && $value->getQuantity() > (int) $config['single-number-max'] ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Number of single product exceeds given limit.' ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Number of single product exceeds given limit' ) );
 		}
 
 

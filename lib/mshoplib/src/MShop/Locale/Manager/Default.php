@@ -108,7 +108,7 @@ class MShop_Locale_Manager_Default
 		$siteItems = $siteManager->searchItems( $siteSearch );
 
 		if( ( $siteItem = reset( $siteItems ) ) === false ) {
-			throw new MShop_Locale_Exception( sprintf( 'Site for code "%1$s" not found.', $site ) );
+			throw new MShop_Locale_Exception( sprintf( 'Site for code "%1$s" not found', $site ) );
 		}
 
 		$siteIds = array( $siteItem->getId() );
@@ -426,7 +426,7 @@ class MShop_Locale_Manager_Default
 			return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
 		}
 
-		throw new MShop_Locale_Exception( sprintf( 'Locale item for site "%1$s" not found.', $site ) );
+		throw new MShop_Locale_Exception( sprintf( 'Locale item for site "%1$s" not found', $site ) );
 	}
 
 

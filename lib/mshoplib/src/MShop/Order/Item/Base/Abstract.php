@@ -62,7 +62,7 @@ abstract class MShop_Order_Item_Base_Abstract
 		$value = (int) $value;
 
 		if( $value < MShop_Order_Item_Base_Abstract::PARTS_NONE || $value > MShop_Order_Item_Base_Abstract::PARTS_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Flags "%1$s" not within allowed range.', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
 		}
 	}
 

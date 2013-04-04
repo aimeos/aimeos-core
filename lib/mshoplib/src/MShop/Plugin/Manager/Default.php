@@ -214,14 +214,14 @@ class MShop_Plugin_Manager_Default
 
 			if( ( $providername = array_shift( $providernames ) ) === null )
 			{
-				$msg = sprintf( 'Provider in "%1$s" not available.', $providernames );
+				$msg = sprintf( 'Provider in "%1$s" not available', $providernames );
 				throw new MShop_Service_Exception( $msg );
 			}
 
 			if ( ctype_alnum( $domain ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'Invalid characters in domain name "%1$s".', $domain ), MW_Logger_Abstract::WARN
+					sprintf( 'Invalid characters in domain name "%1$s"', $domain ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}
@@ -229,7 +229,7 @@ class MShop_Plugin_Manager_Default
 			if ( ctype_alnum( $providername ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'Invalid characters in provider name "%1$s".', $providername ), MW_Logger_Abstract::WARN
+					sprintf( 'Invalid characters in provider name "%1$s"', $providername ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}

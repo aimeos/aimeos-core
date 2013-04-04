@@ -358,7 +358,7 @@ class MShop_Price_Item_Default
 	protected function _checkPrice( $value )
 	{
 		if( !is_numeric( $value ) ) {
-			throw new MShop_Price_Exception( sprintf( 'Invalid characters in price "%1$s".', $value ) );
+			throw new MShop_Price_Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
 		}
 	}
 

@@ -80,7 +80,7 @@ class MShop_Plugin_Provider_Order_Shipping implements MShop_Plugin_Provider_Inte
 
 		if( !isset( $config['threshold'][$currency] ) )
 		{
-			$this->_context->getLogger()->log( sprintf( 'Threshold for free shipping for currency ID "%1$s" not available.', $currency ), MW_Logger_Abstract::WARN );
+			$this->_context->getLogger()->log( sprintf( 'Threshold for free shipping for currency ID "%1$s" not available', $currency ), MW_Logger_Abstract::WARN );
 			return true;
 		}
 

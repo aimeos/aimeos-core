@@ -289,7 +289,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 				{
 					if( !isset( $listTypes[ $refItem->getId() ] ) )
 					{
-						$msg = sprintf( 'List type for attribute item with ID "%1$s" not available.', $refItem->getId() );
+						$msg = sprintf( 'List type for attribute item with ID "%1$s" not available', $refItem->getId() );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 

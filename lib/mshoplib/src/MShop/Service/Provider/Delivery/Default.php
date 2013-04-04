@@ -148,11 +148,11 @@ class MShop_Service_Provider_Delivery_Default
 
 		if( !isset( $config['url'] ) ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Parameter "%1$s" for configuration not available.', "url" ), parent::ERR_TEMP );
+				sprintf( 'Parameter "%1$s" for configuration not available', "url" ), parent::ERR_TEMP );
 		}
 
 		if( ( $curl = curl_init() )=== false ) {
-			throw new MShop_Service_Exception( sprintf( 'Curl could not be initialized.' ), parent::ERR_TEMP );
+			throw new MShop_Service_Exception( sprintf( 'Curl could not be initialized' ), parent::ERR_TEMP );
 		}
 
 		try
@@ -204,7 +204,7 @@ class MShop_Service_Provider_Delivery_Default
 			$curlinfo = curl_getinfo( $curl );
 			if( $curlinfo['http_code'] != '200' ) {
 				throw new MShop_Service_Exception(
-					sprintf( 'Sending order to delivery provider failed with HTTP status "%1$s".', $curlinfo['http_code'] ), parent::ERR_TEMP );
+					sprintf( 'Sending order to delivery provider failed with HTTP status "%1$s"', $curlinfo['http_code'] ), parent::ERR_TEMP );
 			}
 
 			curl_close( $curl );
@@ -235,19 +235,19 @@ class MShop_Service_Provider_Delivery_Default
 
 		if ( $dom->loadXML( $response ) !== true ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Loading of XML response "%1$s" from delivery provider failed.', $response ), parent::ERR_XML );
+				sprintf( 'Loading of XML response "%1$s" from delivery provider failed', $response ), parent::ERR_XML );
 		}
 
 		if( $dom->schemaValidate( $responseXSD ) !== true ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Validation of XML response from delivery provider against schema "%1$s" failed.', $responseXSD ), parent::ERR_SCHEMA );
+				sprintf( 'Validation of XML response from delivery provider against schema "%1$s" failed', $responseXSD ), parent::ERR_SCHEMA );
 		}
 
 		$xpath = new DOMXPath( $dom );
 
 		$globalStatus = $xpath->query( '/response/error' )->item(0)->nodeValue;
 		if( $globalStatus != 0 ) {
-			throw new MShop_Service_Exception( sprintf( 'Order data sent to delivery provider was rejected with code "%1$s" according to XML response.', $globalStatus ) );
+			throw new MShop_Service_Exception( sprintf( 'Order data sent to delivery provider was rejected with code "%1$s" according to XML response', $globalStatus ) );
 		}
 
 		$orderitemlist = $xpath->query( '/response/orderlist/orderitem' );
@@ -259,7 +259,7 @@ class MShop_Service_Provider_Delivery_Default
 
 			if( $id != $invoiceid ) {
 				throw new MShop_Service_Exception(
-					sprintf( 'Order ID "%1$s" in XML response of delivery provider differs from stored invoice ID "%2$s" of the order.', $id, $invoiceid ) );
+					sprintf( 'Order ID "%1$s" in XML response of delivery provider differs from stored invoice ID "%2$s" of the order', $id, $invoiceid ) );
 			}
 
 			if( $status != 0 )
@@ -325,7 +325,7 @@ class MShop_Service_Provider_Delivery_Default
 		}
 
 		if ( ( $xml = $dom->saveXML() ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'DOM tree of XML response from delivery provider could not be converted to XML string.' ), parent::ERR_XML );
+			throw new MShop_Service_Exception( sprintf( 'DOM tree of XML response from delivery provider could not be converted to XML string' ), parent::ERR_XML );
 		}
 
 		return $xml;
@@ -348,14 +348,14 @@ class MShop_Service_Provider_Delivery_Default
 		$date = $invoice->getDatePayment();
 
 		if ( ( $pdate = preg_replace( $regex, '$1-$2-$3T$4:$5:$6Z', $date ) ) === null ) {
-				throw new MShop_Service_Exception( sprintf( 'Invalid characters in purchase date "%1$s".', $date ) );
+				throw new MShop_Service_Exception( sprintf( 'Invalid characters in purchase date "%1$s"', $date ) );
 		}
 
 		$config = $this->getServiceItem()->getConfig();
 
 		if( !isset( $config['project'] ) ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Parameter "%1$s" for configuration not available.', "project" ), parent::ERR_TEMP );
+				sprintf( 'Parameter "%1$s" for configuration not available', "project" ), parent::ERR_TEMP );
 		}
 
 		$this->_appendChildCDATA( 'id', $invoice->getId(), $dom, $orderitem );

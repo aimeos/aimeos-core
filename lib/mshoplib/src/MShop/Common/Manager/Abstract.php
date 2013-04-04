@@ -65,7 +65,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$result = $conn->create( $sql )->execute();
 
 		if( ( $row = $result->fetch( MW_DB_Result_Abstract::FETCH_NUM ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'ID of last inserted database record not available.' ) );
+			throw new MShop_Exception( sprintf( 'ID of last inserted database record not available' ) );
 		}
 		$result->finish();
 
@@ -124,7 +124,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( ( $manager = call_user_func_array( $classname . '::createManager', array( $this->_context ) ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Domain manager for class "%1$s" not available.', $classname ) );
+			throw new MShop_Exception( sprintf( 'Domain manager for class "%1$s" not available', $classname ) );
 		}
 
 		foreach( $parts as $part ) {
@@ -197,7 +197,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s".', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_List_' . $name;
@@ -255,7 +255,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s".', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_Type_' . $name;
@@ -309,7 +309,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s".', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$domainname = ucfirst( $domain );
@@ -348,7 +348,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s".', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_Address_' . $name;
@@ -370,7 +370,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
-	 * Returns a list of unique criteria names shortend by the last element after the '.'
+	 * Returns a list of unique criteria names shortend by the last element after the ''
 	 *
 	 * @param array $prefix Required base prefixes of the search keys
 	 * @param MW_Common_Criteria_Expression_Interface|null Criteria object
@@ -531,7 +531,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		foreach( $names as $key => $subname )
 		{
 			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
-				throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s".', $manager ) );
+				throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
 			}
 
 			$names[$key] = ucfirst( $subname );
@@ -700,7 +700,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Item with ID "%2$s" in "%1$s" not found.', $key, $id ) );
+			throw new MShop_Exception( sprintf( 'Item with ID "%2$s" in "%1$s" not found', $key, $id ) );
 		}
 
 		return $item;
@@ -836,7 +836,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
 			if ( $row === false ) {
-				throw new MShop_Exception( sprintf( 'Total results value not found.' ) );
+				throw new MShop_Exception( sprintf( 'Total results value not found' ) );
 			}
 
 			$total = (int) $row['count'];

@@ -308,7 +308,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 				foreach( $item->getRefItems( 'text' ) as $refItem )
 				{
 					if( !isset( $listTypes[ $refItem->getId() ] ) ) {
-						$msg = sprintf( 'List type for text item with ID "%1$s" not available.', $refItem->getId() );
+						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refItem->getId() );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
@@ -494,7 +494,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 				foreach( $item->getRefItems( 'text' ) as $refItem )
 				{
 					if( !isset( $listTypes[ $refItem->getId() ] ) ) {
-						$msg = sprintf( 'List type for text item with ID "%1$s" not available.', $refItem->getId() );
+						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refItem->getId() );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 

@@ -234,7 +234,7 @@ class MAdmin_Job_Manager_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MAdmin_Job_Exception( sprintf( 'Job with ID "%1$s" not found.', $id ) );
+			throw new MAdmin_Job_Exception( sprintf( 'Job with ID "%1$s" not found', $id ) );
 		}
 
 		return $item;

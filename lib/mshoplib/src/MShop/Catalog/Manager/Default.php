@@ -585,7 +585,7 @@ class MShop_Catalog_Manager_Default
 			catch( Exception $e ) { ; }
 		}
 
-		throw new MShop_Catalog_Exception( sprintf( 'Catalog node for ID "%1$s" not available.', $id ) );
+		throw new MShop_Catalog_Exception( sprintf( 'Catalog node for ID "%1$s" not available', $id ) );
 	}
 
 

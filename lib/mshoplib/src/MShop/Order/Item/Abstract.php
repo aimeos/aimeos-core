@@ -267,7 +267,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 		$temp = (int) $value;
 
 		if( $temp < MShop_Order_Item_Abstract::STAT_UNFINISHED || $temp > MShop_Order_Item_Abstract::STAT_RETURNED ) {
-			throw new MShop_Order_Exception( sprintf( 'Order delivery status "%1$s" not within allowed range.', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'Order delivery status "%1$s" not within allowed range', $value ) );
 		}
 	}
 
@@ -283,7 +283,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 		$temp = (int) $value;
 
 		if( $temp < MShop_Order_Item_Abstract::PAY_UNFINISHED || $temp > MShop_Order_Item_Abstract::PAY_RECEIVED ) {
-			throw new MShop_Order_Exception( sprintf( 'Order payment status "%1$s" not within allowed range.', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'Order payment status "%1$s" not within allowed range', $value ) );
 		}
 	}
 
@@ -303,7 +303,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 			case MShop_Order_Item_Abstract::TYPE_PHONE:
 				break;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Order type "%1$s" not within allowed range.', $value ) );
+				throw new MShop_Order_Exception( sprintf( 'Order type "%1$s" not within allowed range', $value ) );
 		}
 	}
 
@@ -319,7 +319,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 		$temp = (int) $value;
 
 		if( $temp < MShop_Order_Item_Abstract::EMAIL_NONE || $temp > MShop_Order_Item_Abstract::EMAIL_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Email flags "%1$s" not within allowed range.', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'Email flags "%1$s" not within allowed range', $value ) );
 		}
 	}
 
@@ -335,7 +335,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 		$temp = (int) $value;
 
 		if( $temp < MShop_Order_Item_Abstract::FLAG_NONE || $temp > MShop_Order_Item_Abstract::FLAG_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Flags "%1$s" not within allowed range.', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
 		}
 	}
 }

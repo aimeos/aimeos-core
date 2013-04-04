@@ -488,7 +488,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required );
 
 			if( ( $row = $results->fetch() ) === false ) {
-				throw new MShop_Order_Exception( sprintf( 'Order base item with order ID "%1$s" not found.', $id ) );
+				throw new MShop_Order_Exception( sprintf( 'Order base item with order ID "%1$s" not found', $id ) );
 			}
 			$results->finish();
 
