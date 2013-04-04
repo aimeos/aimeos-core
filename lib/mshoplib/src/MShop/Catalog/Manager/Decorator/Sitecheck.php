@@ -59,7 +59,7 @@ class MShop_Catalog_Manager_Decorator_Sitecheck
 		foreach ( $manager->searchItems( $search ) as $item )
 		{
 			if ( $item->getSiteId() != $siteId  ) {
-				throw new MShop_Exception( sprintf( 'Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site "$oldParentId" or site id of new parent site "$newParentId".' ) );
+				throw new MShop_Exception( sprintf( 'Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site.' ) );
 			}
 		}
 
