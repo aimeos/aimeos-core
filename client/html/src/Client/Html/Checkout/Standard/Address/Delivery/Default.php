@@ -133,7 +133,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 					if( !isset( $param[$mandatory] ) || $param[$mandatory] == '' )
 					{
 						$name = substr( $mandatory, 19 );
-						$missing[$name] = sprintf( 'Delivery adddress part "%1$s" is missing', $name );
+						$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is missing' );
+						$missing[$name] = sprintf( $msg, $name );
 					}
 				}
 
