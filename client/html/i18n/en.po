@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core 2013-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-28 14:43+0100\n"
+"POT-Creation-Date: 2013-04-04 11:45+0200\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language: English\n"
@@ -703,6 +703,87 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
+#: src/Client/Html/Checkout/Confirm/Default.php:167
+#: src/Client/Html/Checkout/Confirm/Default.php:261
+#, php-format
+msgid "Invalid order ID \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Checkout/Confirm/Factory.php:39
+#: src/Client/Html/Checkout/Standard/Factory.php:40
+#: src/Client/Html/Email/Confirm/Factory.php:39
+#: src/Client/Html/Basket/Standard/Factory.php:40
+#: src/Client/Html/Basket/Mini/Factory.php:39
+#: src/Client/Html/Catalog/Filter/Factory.php:40
+#: src/Client/Html/Catalog/Stage/Factory.php:40
+#: src/Client/Html/Catalog/Detail/Factory.php:40
+#: src/Client/Html/Catalog/List/Factory.php:40
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr ""
+
 #: src/Client/Html/Checkout/Confirm/Basic/Default.php:12
 msgid "basic"
 msgstr "Basic"
+
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:114
+#, php-format
+msgid "Please accept the terms and conditions"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:137
+#, php-format
+msgid "Billing address part \"%1$s\" is missing"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:144
+#, php-format
+msgid "At least one billing address part is missing"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:164
+#, php-format
+msgid "No customer found for ID \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:136
+#, php-format
+msgid "Delivery adddress part \"%1$s\" is missing"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:143
+#, php-format
+msgid "At least one delivery address part is missing"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:163
+#, php-format
+msgid "No address found for ID \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Abstract.php:51
+#, php-format
+msgid "No view available"
+msgstr ""
+
+#: src/Client/Html/Abstract.php:104 src/Client/Html/Abstract.php:143
+#, php-format
+msgid "Invalid client name \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Abstract.php:152
+#: src/Client/Html/Common/Factory/Abstract.php:33
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr ""
+
+#: src/Client/Html/Abstract.php:158
+#: src/Client/Html/Common/Factory/Abstract.php:39
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr ""
+
+#: src/Client/Html/Abstract.php:217
+#, php-format
+msgid "No template found for \"%1$s\""
+msgstr ""
