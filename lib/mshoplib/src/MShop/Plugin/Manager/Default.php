@@ -214,14 +214,14 @@ class MShop_Plugin_Manager_Default
 
 			if( ( $providername = array_shift( $providernames ) ) === null )
 			{
-				$msg = sprintf( 'An error occured in a plugin. Provider in "%1$s" not available.', $providernames );
+				$msg = sprintf( 'Provider in "%1$s" not available.', $providernames );
 				throw new MShop_Service_Exception( $msg );
 			}
 
 			if ( ctype_alnum( $domain ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'An error occured in a plugin. Invalid characters in domain name "%1$s".', $domain ), MW_Logger_Abstract::WARN
+					sprintf( 'Invalid characters in domain name "%1$s".', $domain ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}
@@ -229,7 +229,7 @@ class MShop_Plugin_Manager_Default
 			if ( ctype_alnum( $providername ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'An error occured in a plugin. Invalid characters in provider name "%1$s".', $providername ), MW_Logger_Abstract::WARN
+					sprintf( 'Invalid characters in provider name "%1$s".', $providername ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}
@@ -403,7 +403,7 @@ class MShop_Plugin_Manager_Default
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				if ( ( $row['config'] = json_decode($row['config'], true) ) === null ) {
-					$msg = sprintf('An error occured in a search. Invalid JSON as search result: %1$s', $row['config']);
+					$msg = sprintf('Invalid JSON as search result: %1$s', $row['config']);
 					throw new MShop_Service_Exception($msg);
 				}
 

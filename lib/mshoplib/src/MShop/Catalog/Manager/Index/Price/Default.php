@@ -284,7 +284,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 				{
 					if( !isset( $listTypes[ $priceItem->getId() ] ) )
 					{
-						$msg = sprintf( 'An error occured in the catalog. List type for price item with ID "%1$s" not available.', $priceItem->getId() );
+						$msg = sprintf( 'List type for price item with ID "%1$s" not available.', $priceItem->getId() );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 

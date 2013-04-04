@@ -105,7 +105,7 @@ class MShop_Plugin_Provider_Order_ProductStock implements MShop_Plugin_Provider_
 		if ( count( $outOfStock ) > 0 )
 		{
 			$code = array( 'product' => $outOfStock );
-			throw new MShop_Plugin_Provider_Exception( sprintf( 'An error occured in a plugin. Product(s) out of stock.' ), -1, null, $code );
+			throw new MShop_Plugin_Provider_Exception( sprintf( 'Product(s) out of stock.' ), -1, null, $code );
 		}
 		return true;
 	}

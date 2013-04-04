@@ -97,7 +97,7 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 		{
 			$code = array( 'basket' => $failures );
 			throw new MShop_Plugin_Provider_Exception(
-					sprintf( 'An error occured in a plugin. Free shipping not possible, minimum value or minimum amount of product(s) in basket not reached.' ), -1, null, $code );
+					sprintf( 'Free shipping not possible, minimum value or minimum amount of product(s) in basket not reached.' ), -1, null, $code );
 		}
 
 		return true;

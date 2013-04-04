@@ -265,7 +265,7 @@ class MShop_Catalog_Manager_Index_Default
 		$itemId = $item->getId();
 
 		if( $itemId === null ) {
-			throw new MShop_Catalog_Exception( sprintf( 'An error occured in the catalog. Item could not be saved using method saveItem(). Item ID not available.' ) );
+			throw new MShop_Catalog_Exception( sprintf( 'Item could not be saved using method saveItem(). Item ID not available.' ) );
 		}
 
 

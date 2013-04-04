@@ -393,7 +393,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		if( ( $order = unserialize( $serorder ) ) === false || !( $order instanceof $iface ) )
 		{
-			$msg = sprintf( 'An error occured in the order. Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
+			$msg = sprintf( 'Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
 			$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 
 			return $this->createItem();
@@ -488,7 +488,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required );
 
 			if( ( $row = $results->fetch() ) === false ) {
-				throw new MShop_Order_Exception( sprintf( 'An error occured in a search. Order base item with order ID "%1$s" not found.', $id ) );
+				throw new MShop_Order_Exception( sprintf( 'Order base item with order ID "%1$s" not found.', $id ) );
 			}
 			$results->finish();
 

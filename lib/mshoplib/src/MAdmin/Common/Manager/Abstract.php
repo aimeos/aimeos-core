@@ -41,7 +41,7 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MAdmin_Exception( sprintf( 'An error occured in a manager. Invalid characters in manager name "%1$s".', $name ) );
+			throw new MAdmin_Exception( sprintf( 'Invalid characters in manager name "%1$s".', $name ) );
 		}
 
 		$domainname = ucfirst( $domain );

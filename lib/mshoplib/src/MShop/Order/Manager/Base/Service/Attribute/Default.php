@@ -288,7 +288,7 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 				{
 					$row['value'] = json_decode( $row['value'], true );
 					if( is_null( $row['value'] ) ) {
-						throw new MShop_Order_Exception( sprintf( 'An error occured in a search. Invalid JSON as result of search for order service attribute with ID "%1$d".', $row['id'] ) );
+						throw new MShop_Order_Exception( sprintf( 'Invalid JSON as result of search for order service attribute with ID "%1$d".', $row['id'] ) );
 					}
 					$items[ $row['id'] ] = $this->_createItem( $row );
 				}

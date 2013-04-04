@@ -51,7 +51,7 @@ class MShop_Common_Manager_Decorator_Sitecheck
 		$siteId = $this->_getContext()->getLocale()->getSiteId();
 
 		if( $actual->getSiteId() != $siteId ) {
-			throw new MShop_Exception( sprintf( 'An error occured in the site. Item can not be deleted. Site ID of item differs from present site ID.' ) );
+			throw new MShop_Exception( sprintf( 'Item can not be deleted. Site ID of item differs from present site ID.' ) );
 		}
 
 		parent::deleteItem( $id );

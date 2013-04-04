@@ -44,20 +44,20 @@ class MShop_Common_Manager_List_Default
 		foreach($whitelistItem as $str)
 		{
 			if ( !in_array($str, $isList ) ) {
-				throw new MShop_Exception( sprintf( 'An error occured in a manager. Configuration of necessary SQL statement for "%1$s" not available.', $str ) );
+				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available.', $str ) );
 			}
 		}
 
 		if( ( $entry = reset( $searchConfig ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration not available.' ) );
+			throw new MShop_Exception( sprintf( 'Search configuration not available.' ) );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" not available.', $entry['code'] ) );
+			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available.', $entry['code'] ) );
 		}
 
 		if( ( $this->_prefix = substr( $entry['code'], 0, $pos+1 ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" not available.', $entry['code'] ) );
+			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available.', $entry['code'] ) );
 		}
 
 		parent::__construct( $context );
@@ -190,7 +190,7 @@ class MShop_Common_Manager_List_Default
 	public function getItem( $id, array $ref = array() )
 	{
 		if( ( $conf = reset( $this->_searchConfig ) ) === false || !isset( $conf['code'] ) ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration not available.' ) );
+			throw new MShop_Exception( sprintf( 'Search configuration not available.' ) );
 		}
 
 		$criteria = $this->createSearch();
@@ -199,7 +199,7 @@ class MShop_Common_Manager_List_Default
 
 		if( ( $item = reset( $items ) ) === false )
 		{
-			$msg = sprintf( 'An error occured in a search. List item with ID "%2$s" in "%1$s" not found.', $conf['code'], $id );
+			$msg = sprintf( 'List item with ID "%2$s" in "%1$s" not found.', $conf['code'], $id );
 			throw new MShop_Exception( $msg );
 		}
 
@@ -355,7 +355,7 @@ class MShop_Common_Manager_List_Default
 			$domain = explode( '.', $this->_prefix);
 
 			if ( ( $topdomain = array_shift( $domain ) ) === null ) {
-				throw new MShop_Exception( sprintf( 'An error occured in a manager. Configuration not available.' ) );
+				throw new MShop_Exception( sprintf( 'Configuration not available.' ) );
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;

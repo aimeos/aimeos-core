@@ -112,7 +112,7 @@ class MShop_Plugin_Provider_Order_ProductGone implements MShop_Plugin_Provider_I
 		if ( count( $notAvailable ) > 0 )
 		{
 			$code = array( 'product' => $notAvailable );
-			throw new MShop_Plugin_Provider_Exception( sprintf( 'An error occured in the order. Product(s) in basket not available.' ), -1, null, $code );
+			throw new MShop_Plugin_Provider_Exception( sprintf( 'Product(s) in basket not available.' ), -1, null, $code );
 		}
 
 		return true;

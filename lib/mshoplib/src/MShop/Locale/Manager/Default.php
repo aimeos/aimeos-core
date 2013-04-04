@@ -108,7 +108,7 @@ class MShop_Locale_Manager_Default
 		$siteItems = $siteManager->searchItems( $siteSearch );
 
 		if( ( $siteItem = reset( $siteItems ) ) === false ) {
-			throw new MShop_Locale_Exception( sprintf( 'An error occured in a search. Site for code "%1$s" not found.', $site ) );
+			throw new MShop_Locale_Exception( sprintf( 'Site for code "%1$s" not found.', $site ) );
 		}
 
 		$siteIds = array( $siteItem->getId() );
@@ -426,7 +426,7 @@ class MShop_Locale_Manager_Default
 			return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
 		}
 
-		throw new MShop_Locale_Exception( sprintf( 'An error occured in a search. Locale item for site "%1$s" not found.', $site ) );
+		throw new MShop_Locale_Exception( sprintf( 'Locale item for site "%1$s" not found.', $site ) );
 	}
 
 
@@ -519,7 +519,7 @@ class MShop_Locale_Manager_Default
 				$results->finish();
 
 				if ( $row === false ) {
-					throw new MShop_Locale_Exception( sprintf ( 'An error occured in a search. Total results value not found.' ) );
+					throw new MShop_Locale_Exception( sprintf ( 'Total results value not found.' ) );
 				}
 
 				$total = $row['count'];

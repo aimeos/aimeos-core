@@ -374,7 +374,7 @@ class MShop_Product_Manager_Tag_Default
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Product_Exception( sprintf( 'An error occured in a manager. Invalid characters in manager name "%1$s".', $name ) );
+			throw new MShop_Product_Exception( sprintf( 'Invalid characters in manager name "%1$s".', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_Type_' . $name;

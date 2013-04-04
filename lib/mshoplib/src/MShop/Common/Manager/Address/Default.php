@@ -37,7 +37,7 @@ class MShop_Common_Manager_Address_Default
 		$isList = array_keys( $config );
 		foreach ( $whitelist as $str ) {
 			if ( !in_array($str, $isList) ) {
-				throw new MShop_Exception( sprintf( 'An error occured in a manager. Configuration of necessary SQL statement for "%1$s" not available.', $str ) );
+				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available.', $str ) );
 			}
 		}
 
@@ -49,15 +49,15 @@ class MShop_Common_Manager_Address_Default
 		$this->_searchConfig = $searchConfig;
 
 		if ( ( $entry = reset( $searchConfig ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration not available.' ) );
+			throw new MShop_Exception( sprintf( 'Search configuration not available.' ) );
 		}
 
 		if ( ( $pos = strrpos( $entry['code'], '.' ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" not available.', $entry['code'] ) );
+			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available.', $entry['code'] ) );
 		}
 
 		if ( ( $this->_prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Search configuration for "%1$s" not available.', $entry['code'] ) );
+			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available.', $entry['code'] ) );
 		}
 	}
 
@@ -126,7 +126,7 @@ class MShop_Common_Manager_Address_Default
 	public function getItem( $id, array $ref = array() )
 	{
 		if( ( $conf = reset( $this->_searchConfig ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'An error occured in a manager. Address search configuration not available.' ) );
+			throw new MShop_Exception( sprintf( 'Address search configuration not available.' ) );
 		}
 
 		return $this->_getItem( $conf['code'], $id, $ref );
