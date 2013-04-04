@@ -663,7 +663,7 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	{
 		$iface = 'MShop_Customer_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Customer_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Customer_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }

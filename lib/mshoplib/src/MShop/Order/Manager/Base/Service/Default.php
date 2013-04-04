@@ -173,7 +173,7 @@ class MShop_Order_Manager_Base_Service_Default
 	{
 		$iface = 'MShop_Order_Item_Base_Service_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }

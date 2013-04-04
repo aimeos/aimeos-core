@@ -61,8 +61,7 @@ class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Pr
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			$msg = 'Received notification from "%1$s" which doesn\'t implement "%2$s"';
-			throw new MShop_Plugin_Exception(sprintf($msg, get_class($order), $class));
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$config = $this->_item->getConfig();
@@ -141,7 +140,7 @@ class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Pr
 
 		if( ( $product = reset( $products ) ) === false )
 		{
-			$msg = sprintf( 'No product found with code "%1$s"', $sampleCode );
+			$msg = sprintf( 'Product with code "%1$s" not found', $sampleCode );
 			$this->_context->getLogger()->log($msg, MW_Logger_Abstract::NOTICE);
 			return false;
 		}

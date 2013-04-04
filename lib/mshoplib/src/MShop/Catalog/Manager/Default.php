@@ -439,7 +439,7 @@ class MShop_Catalog_Manager_Default
 	{
 		$iface = 'MShop_Catalog_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Catalog_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Catalog_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
@@ -585,7 +585,7 @@ class MShop_Catalog_Manager_Default
 			catch( Exception $e ) { ; }
 		}
 
-		throw new MShop_Catalog_Exception( sprintf( 'No catalog node found for ID "%1$s"', $id ) );
+		throw new MShop_Catalog_Exception( sprintf( 'Catalog node for ID "%1$s" not available', $id ) );
 	}
 
 

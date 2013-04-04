@@ -140,16 +140,16 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		$siteid = $context->getLocale()->getSiteId();
 
 		$sql = $context->getConfig()->get( 'mshop/catalog/manager/index/attribute/default/item/delete' );
-		
+
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
-		
+
 		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
 		$translations = array( 'prodid' => '"prodid"' );
-		
+
 		$cond = $search->getConditionString( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $sql );
-		
+
 		try
 		{
 			$dbm = $context->getDatabaseManager();
@@ -289,7 +289,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 				{
 					if( !isset( $listTypes[ $refItem->getId() ] ) )
 					{
-						$msg = sprintf( 'No list type for attribute item with ID "%1$s"', $refItem->getId() );
+						$msg = sprintf( 'List type for attribute item with ID "%1$s" not available', $refItem->getId() );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 

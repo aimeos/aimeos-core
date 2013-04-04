@@ -214,14 +214,14 @@ class MShop_Plugin_Manager_Default
 
 			if( ( $providername = array_shift( $providernames ) ) === null )
 			{
-				$msg = sprintf( 'No plugin provider available in "%1$s"', $providernames );
+				$msg = sprintf( 'Provider in "%1$s" not available', $providernames );
 				throw new MShop_Service_Exception( $msg );
 			}
 
 			if ( ctype_alnum( $domain ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'Invalid plugin domain "%1$s"', $domain ), MW_Logger_Abstract::WARN
+					sprintf( 'Invalid characters in domain name "%1$s"', $domain ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}
@@ -229,7 +229,7 @@ class MShop_Plugin_Manager_Default
 			if ( ctype_alnum( $providername ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'Invalid plugin provider "%1$s"', $providername ), MW_Logger_Abstract::WARN
+					sprintf( 'Invalid characters in provider name "%1$s"', $providername ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}
@@ -241,7 +241,7 @@ class MShop_Plugin_Manager_Default
 			if ( class_exists( $classname ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'Plugin implementation "%1$s" not found', $classname ), MW_Logger_Abstract::WARN
+					sprintf( 'Class "%1$s" not available', $classname ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}
@@ -249,7 +249,7 @@ class MShop_Plugin_Manager_Default
 			$provider = new $classname( $context, $pluginItem );
 
 			if ( ( $provider instanceof $interface ) === false ) {
-				$msg = sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface );
+				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
 				throw new MShop_Service_Exception( $msg );
 			}
 
@@ -290,7 +290,7 @@ class MShop_Plugin_Manager_Default
 	{
 		$iface = 'MShop_Plugin_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -403,7 +403,7 @@ class MShop_Plugin_Manager_Default
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				if ( ( $row['config'] = json_decode($row['config'], true) ) === null ) {
-					$msg = sprintf('Incorrect json decoding for "%1$s"', $row['config']);
+					$msg = sprintf('Invalid JSON as search result: %1$s', $row['config']);
 					throw new MShop_Service_Exception($msg);
 				}
 

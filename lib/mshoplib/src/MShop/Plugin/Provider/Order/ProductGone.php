@@ -62,8 +62,7 @@ class MShop_Plugin_Provider_Order_ProductGone implements MShop_Plugin_Provider_I
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			$msg = 'Received notification from "%1$s" which doesn\'t implement "%2$s"';
-			throw new MShop_Plugin_Order_Exception(sprintf($msg, get_class($order), $class));
+			throw new MShop_Plugin_Order_Exception(sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) {
@@ -113,7 +112,7 @@ class MShop_Plugin_Provider_Order_ProductGone implements MShop_Plugin_Provider_I
 		if ( count( $notAvailable ) > 0 )
 		{
 			$code = array( 'product' => $notAvailable );
-			throw new MShop_Plugin_Provider_Exception( 'Product(s) not available', -1, null, $code );
+			throw new MShop_Plugin_Provider_Exception( sprintf( 'Products in basket not available' ), -1, null, $code );
 		}
 
 		return true;

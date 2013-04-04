@@ -123,7 +123,7 @@ class MAdmin_Log_Manager_Default
 	{
 		$iface = 'MAdmin_Log_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MAdmin_Log_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MAdmin_Log_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( ! $item->isModified() ) {
@@ -228,7 +228,7 @@ class MAdmin_Log_Manager_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MAdmin_Log_Exception( sprintf( 'No log entry with ID "%1$s" found', $id ) );
+			throw new MAdmin_Log_Exception( sprintf( 'Log entry with ID "%1$s" not found', $id ) );
 		}
 
 		return $item;

@@ -65,7 +65,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$result = $conn->create( $sql )->execute();
 
 		if( ( $row = $result->fetch( MW_DB_Result_Abstract::FETCH_NUM ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'No new record ID available' ) );
+			throw new MShop_Exception( sprintf( 'ID of last inserted database record not available' ) );
 		}
 		$result->finish();
 
@@ -107,24 +107,24 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$parts = explode( '/', $domain );
 
 		if( count( $parts ) < 1 ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
+			throw new Controller_ExtJS_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 		}
 
 		foreach( $parts as $part )
 		{
 			if( ctype_alnum( $part ) === false ) {
-				throw new Controller_ExtJS_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
+				throw new Controller_ExtJS_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 			}
 		}
 
 		$classname = 'MShop_' . ucfirst( array_shift( $parts ) ) . '_Manager_Factory';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		if( ( $manager = call_user_func_array( $classname . '::createManager', array( $this->_context ) ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Unable to create manager by using "%1$s"', $classname ) );
+			throw new MShop_Exception( sprintf( 'Domain manager for class "%1$s" not available', $classname ) );
 		}
 
 		foreach( $parts as $part ) {
@@ -189,7 +189,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid domain name "%1$s"', $domain ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 		}
 
 		if( $name === null ) {
@@ -197,14 +197,14 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_List_' . $name;
 		$interface = 'MShop_Common_Manager_List_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$confpath = 'mshop/' . $domain . '/manager/' . $manager . '/' . strtolower( $name ) . '/item/';
@@ -223,7 +223,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$listManager = new $classname( $this->_context, $conf, $searchConfig, $typeManager );
 
 		if( ( $listManager instanceof $interface ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $this->_addManagerDecorators( $listManager, $manager, $domain );
@@ -247,7 +247,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid domain name "%1$s"', $domain ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 		}
 
 		if( $name === null ) {
@@ -255,14 +255,14 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_Type_' . $name;
 		$interface = 'MShop_Common_Manager_Type_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$confpath = 'mshop/' . $domain . '/manager/' . $manager . '/' . strtolower( $name ) . '/item/';
@@ -278,7 +278,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$typeManager = new $classname( $this->_context, $conf, $searchConfig );
 
 		if( ( $typeManager instanceof $interface ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $this->_addManagerDecorators( $typeManager, $manager, $domain );
@@ -300,7 +300,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid domain name "%1$s"', $domain ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 		}
 
 		if( $name === null ) {
@@ -309,7 +309,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$domainname = ucfirst( $domain );
@@ -319,13 +319,13 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$interface = 'MShop_'. $domainname . '_Manager_' . $subnames . '_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$subManager = new $classname( $this->_context );
 
 		if( ( $subManager instanceof $interface ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $this->_addManagerDecorators( $subManager, $manager, $domain );
@@ -348,21 +348,21 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_Address_' . $name;
 		$interface = 'MShop_Common_Manager_Address_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$config = $this->_context->getConfig()->get( $confpath, $confpath );
 		$manager = new $classname( $this->_context, $config, $addressSearchConfig );
 
 		if( ( $manager instanceof $interface ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $manager;
@@ -370,7 +370,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
-	 * Returns a list of unique criteria names shortend by the last element after the '.'
+	 * Returns a list of unique criteria names shortend by the last element after the ''
 	 *
 	 * @param array $prefix Required base prefixes of the search keys
 	 * @param MW_Common_Criteria_Expression_Interface|null Criteria object
@@ -458,19 +458,19 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		foreach( $decorators as $name )
 		{
 			if( ctype_alnum( $name ) === false ) {
-				throw new MShop_Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
+				throw new MShop_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$manager =  new $classname( $context, $manager );
 
 			if( !( $manager instanceof $iface ) ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
+				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 		}
 
@@ -531,7 +531,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		foreach( $names as $key => $subname )
 		{
 			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
-				throw new MShop_Exception( sprintf( 'Invalid manager name "%1$s"', $manager ) );
+				throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
 			}
 
 			$names[$key] = ucfirst( $subname );
@@ -676,7 +676,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			catch( MShop_Exception $e )
 			{
 				$logger = $this->_context->getLogger();
-				$logger->log( sprintf( 'Unable to retrieve items for domain "%1$s": ', $domain ) . $e->getMessage() );
+				$logger->log( sprintf( 'Item referenced in domain "%1$s" not found: %2$s', $domain, $e->getMessage() ) );
 				$logger->log( $e->getTraceAsString() );
 			}
 		}
@@ -700,7 +700,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'No item for key "%1$s" and ID "%2$s" found', $key, $id ) );
+			throw new MShop_Exception( sprintf( 'Item with ID "%2$s" in "%1$s" not found', $key, $id ) );
 		}
 
 		return $item;
@@ -836,7 +836,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
 			if ( $row === false ) {
-				throw new MShop_Exception( 'No total results value found' );
+				throw new MShop_Exception( sprintf( 'Total results value not found' ) );
 			}
 
 			$total = (int) $row['count'];
