@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-15 17:48+0100\n"
+"POT-Creation-Date: 2013-04-04 16:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,29 +82,29 @@ msgstr ""
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:413
+#: src/Controller/Frontend/Basket/Default.php:420
 #, php-format
 msgid "There are not enough products (ID \"%1$s\") in stock"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:478
+#: src/Controller/Frontend/Basket/Default.php:484
 #, php-format
 msgid "Invalid address property \"%1$s\" with value \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:491
+#: src/Controller/Frontend/Basket/Default.php:497
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:526
+#: src/Controller/Frontend/Basket/Default.php:532
 #, php-format
 msgid ""
 "Available attribute IDs \"%1$s\" does not match the given attribute IDs "
 "\"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:560
+#: src/Controller/Frontend/Basket/Default.php:566
 #, php-format
 msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
 msgstr ""

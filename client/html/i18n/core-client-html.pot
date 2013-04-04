@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-04 11:47+0200\n"
+"POT-Creation-Date: 2013-04-04 16:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -665,7 +665,7 @@ msgid "Change"
 msgstr ""
 
 #: src/Client/Html/Checkout/Confirm/Default.php:167
-#: src/Client/Html/Checkout/Confirm/Default.php:261
+#: src/Client/Html/Checkout/Confirm/Default.php:250
 #, php-format
 msgid "Invalid order ID \"%1$s\""
 msgstr ""
@@ -697,27 +697,27 @@ msgstr ""
 msgid "Billing address part \"%1$s\" is missing"
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:144
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:145
 #, php-format
 msgid "At least one billing address part is missing"
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:164
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:165
 #, php-format
 msgid "No customer found for ID \"%1$s\""
 msgstr ""
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:136
 #, php-format
-msgid "Delivery adddress part \"%1$s\" is missing"
+msgid "Delivery address part \"%1$s\" is missing"
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:143
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:144
 #, php-format
 msgid "At least one delivery address part is missing"
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:163
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:164
 #, php-format
 msgid "No address found for ID \"%1$s\""
 msgstr ""
