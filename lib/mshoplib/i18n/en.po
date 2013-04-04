@@ -1,28 +1,31 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# English translations for arcavias-core.
+# Copyright (C) 2013
+# This file is distributed under the same license as the arcavias-core package.
+# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013.
 #
-#, fuzzy
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: arcavias-core Git 7f0a9aa11151b1e7b9a48d64b3b2ca423ce5738d\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-04 15:46+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2013-04-04 15:46+0200\n"
+"Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+# error domain: misc.
+# error type: value, parameter, object etc. not available
 #: src/MShop/Plugin/Manager/Default.php:217
 #: src/MShop/Service/Manager/Default.php:573
 #, php-format
 msgid "Provider in \"%1$s\" not available"
 msgstr ""
 
+# error domain: misc.
+# error type: invalid characters in name or value
 #: src/MShop/Plugin/Manager/Default.php:224
 #: src/MShop/Service/Manager/Default.php:568
 #: src/MShop/Common/Manager/Abstract.php:110
@@ -35,12 +38,16 @@ msgstr ""
 msgid "Invalid characters in domain name \"%1$s\""
 msgstr ""
 
+# error domain: misc.
+# error type: invalid characters in name or value
 #: src/MShop/Plugin/Manager/Default.php:232
 #: src/MShop/Service/Manager/Default.php:578
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
 msgstr ""
 
+# error domain: misc.
+# error type: value, parameter, object etc. not available
 #: src/MShop/Plugin/Manager/Default.php:244
 #: src/MShop/Plugin/Manager/Abstract.php:36
 #: src/MShop/Product/Manager/Tag/Default.php:384
@@ -59,6 +66,8 @@ msgstr ""
 msgid "Class \"%1$s\" not available"
 msgstr ""
 
+# error domain: misc.
+# error type: object does not implement interface
 #: src/MShop/Plugin/Manager/Default.php:252
 #: src/MShop/Plugin/Manager/Abstract.php:42
 #: src/MShop/Product/Manager/Tag/Default.php:394
@@ -76,6 +85,8 @@ msgstr ""
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
+# error domain: misc.
+# error type: object does not implement interface
 #: src/MShop/Plugin/Manager/Default.php:293
 #: src/MShop/Plugin/Provider/Order/Complete.php:72
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:65
@@ -125,11 +136,15 @@ msgstr ""
 msgid "Object is not of required type \"%1$s\""
 msgstr ""
 
+# error domain: search
+# error type: invalid JSON as search result
 #: src/MShop/Plugin/Manager/Default.php:406
 #, php-format
 msgid "Invalid JSON as search result: %1$s"
 msgstr ""
 
+# error domain: misc.
+# error type: invalid characters in name or value
 #: src/MShop/Plugin/Manager/Abstract.php:30
 #: src/MShop/Plugin/Manager/Factory.php:40
 #: src/MShop/Locale/Manager/Factory.php:39
@@ -151,87 +166,113 @@ msgstr ""
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
+# error domain: plugin
+# error type: action failed
 #: src/MShop/Plugin/Provider/Order/ServicesAvailable.php:81
 #, php-format
 msgid "Checks for available service items in basket failed"
 msgstr ""
 
+# error domain: order
+# error type: value, parameter, object etc. not available
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:115
 #, php-format
 msgid "Products in basket not available"
 msgstr ""
 
+# error domain: plugin
+# error type: misc.
 #: src/MShop/Plugin/Provider/Order/PropertyAdd.php:83
 #, php-format
 msgid "Configuration invalid"
 msgstr ""
 
+# error domain: plugin
+# error type: value not within allowed range
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:100
 #, php-format
-msgid ""
-"Free shipping not possible, minimum value or minimum amount of product(s) in "
-"basket not reached"
+msgid "Free shipping not possible, minimum value or minimum amount of product(s) in basket not reached"
 msgstr ""
 
+# error domain: plugin
+# error type: value, parameter, object etc. not available
 #: src/MShop/Plugin/Provider/Order/Shipping.php:83
 #, php-format
 msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr ""
 
+# error domain: search
+# empty search result
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:96
 #, php-format
 msgid "Product matching given properties not found"
 msgstr ""
 
+# error domain: plugin
+# error type: value not within allowed range
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:73
 #, php-format
 msgid "Number of single product exceeds given limit"
 msgstr ""
 
+# error domain: plugin
+# error type: value not within allowed range
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:86
 #, php-format
 msgid "Total number of product exceeds given limit"
 msgstr ""
 
+# error domain: plugin
+# error type: value not within allowed range
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:96
 #, php-format
 msgid "Value of single product exceeds given limit"
 msgstr ""
 
+# error domain: plugin
+# error type: value not within allowed range
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:110
 #, php-format
 msgid "Total value of product exceeds given limit"
 msgstr ""
 
+# error domain: plugin
+# error type: action failed
 #: src/MShop/Plugin/Provider/Order/AddressesAvailable.php:81
 #, php-format
 msgid "Checks for available addresses in basket failed"
 msgstr ""
 
+# error domain: plugin
+# error type: value, parameter, object etc. not available
 #: src/MShop/Plugin/Provider/Order/ProductStock.php:108
 #, php-format
 msgid "Product(s) out of stock"
 msgstr ""
 
+# error domain: plugin
+# error type: misc.
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:110
 #, php-format
-msgid ""
-"The price of at least one product in the basket has changed in the meantime "
-"and was updated"
+msgid "The price of at least one product in the basket has changed in the meantime and was updated"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:143
 #, php-format
 msgid "Product with code \"%1$s\" not found"
 msgstr ""
 
+# error domain: site
+# error type: action failed
 #: src/MShop/Locale/Manager/Site/Default.php:161
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"saveItem()\". Try using "
-"method \"insertItem()\" instead."
+msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
 msgstr ""
 
+# error domain: search
+# error type: invalid JSON as search result
 #: src/MShop/Locale/Manager/Site/Default.php:313
 #: src/MShop/Service/Manager/Default.php:520
 #: src/MAdmin/Job/Manager/Default.php:274
@@ -240,38 +281,52 @@ msgstr ""
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Locale/Manager/Site/Default.php:420
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
 msgstr ""
 
+# error domain: manager
+# error type: value, parameter, object etc. not available
 #: src/MShop/Locale/Manager/Site/Default.php:481
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Locale/Manager/Default.php:111
 #, php-format
 msgid "Site for code \"%1$s\" not found"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Locale/Manager/Default.php:429
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Locale/Manager/Default.php:522
 #: src/MShop/Common/Manager/Abstract.php:839
 #, php-format
 msgid "Total results value not found"
 msgstr ""
 
+# error domain: misc.
+# error type: value, parameter, object etc. not available
 #: src/MShop/Locale/Item/Site/Default.php:180
 #: src/MShop/Catalog/Item/Default.php:255
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
 msgstr ""
 
+# error domain: misc.
+# error type: invalid characters in name or value
 #: src/MShop/Locale/Item/Language/Default.php:98
 #: src/MShop/Locale/Item/Default.php:138 src/MShop/Text/Item/Default.php:60
 #: src/MShop/Product/Item/Tag/Default.php:57
@@ -279,6 +334,8 @@ msgstr ""
 msgid "Invalid characters in ISO language code \"%1$s\""
 msgstr ""
 
+# error domain: misc.
+# error type: invalid characters in name or value
 #: src/MShop/Locale/Item/Default.php:167
 #: src/MShop/Locale/Item/Currency/Default.php:95
 #: src/MShop/Price/Item/Default.php:375
@@ -286,81 +343,107 @@ msgstr ""
 msgid "Invalid characters in ISO currency code \"%1$s\""
 msgstr ""
 
+# error domain: context
+# error type: value, parameter, object etc. not available
 #: src/MShop/Context/Item/Default.php:79
 #, php-format
 msgid "Cache object not available"
 msgstr ""
 
+# error domain: context
+# error type: value, parameter, object etc. not available
 #: src/MShop/Context/Item/Default.php:105
 #, php-format
 msgid "Configuration object not available"
 msgstr ""
 
+# error domain: context
+# error type: value, parameter, object etc. not available
 #: src/MShop/Context/Item/Default.php:131
 #, php-format
 msgid "Database manager object not available"
 msgstr ""
 
+# error domain: context
+# error type: value, parameter, object etc. not available
 #: src/MShop/Context/Item/Default.php:156
 #, php-format
 msgid "Internationalization object not available"
 msgstr ""
 
+# error domain: context
+# error type: value, parameter, object etc. not available
 #: src/MShop/Context/Item/Default.php:182
 #, php-format
 msgid "Locale object not available"
 msgstr ""
 
+# error domain: context
+# error type: value, parameter, object etc. not available
 #: src/MShop/Context/Item/Default.php:208
 #, php-format
 msgid "Log manager object not available"
 msgstr ""
 
+# error domain: context
+# error type: value, parameter, object etc. not available
 #: src/MShop/Context/Item/Default.php:234
 #, php-format
 msgid "Session object not available"
 msgstr ""
 
+# error domain: catalog
+# error type: value, parameter, object etc. not available
 #: src/MShop/Catalog/Manager/Default.php:588
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
 msgstr ""
 
+# error domain: catalog
+# error type: value, parameter, object etc. not available
 #: src/MShop/Catalog/Manager/Index/Attribute/Default.php:292
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
 msgstr ""
 
+# error domain: catalog
+# error type: value, parameter, object etc. not available
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:311
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:497
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
 msgstr ""
 
+# error domain: catalog
+# error type: value, parameter, object etc. not available
 #: src/MShop/Catalog/Manager/Index/Default.php:268
 #, php-format
 msgid "Item could not be saved using method saveItem(). Item ID not available."
 msgstr ""
 
+# error domain: catalog
+# error type: value, parameter, object etc. not available
 #: src/MShop/Catalog/Manager/Index/Price/Default.php:287
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
 msgstr ""
 
+# error domain: catalog
+# error type: action failed
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:34
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
 msgstr ""
 
+# error domain: catalog
+# error type: action failed
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:62
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID "
-"of existing parent site or site id of new parent site."
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
 msgstr ""
 
+# error domain: manager
+# error type: invalid characters in name or value
 #: src/MShop/Product/Manager/Tag/Default.php:377
 #: src/MShop/Common/Manager/Abstract.php:200
 #: src/MShop/Common/Manager/Abstract.php:258
@@ -372,6 +455,8 @@ msgstr ""
 msgid "Invalid characters in manager name \"%1$s\""
 msgstr ""
 
+# error domain: service
+# error type: value, parameter, object etc. not available
 #: src/MShop/Service/Provider/Decorator/Abstract.php:204
 #: src/MShop/Service/Provider/Payment/Abstract.php:53
 #: src/MShop/Service/Provider/Payment/Abstract.php:64
@@ -382,6 +467,8 @@ msgstr ""
 msgid "Method \"%1$s\" for provider not available"
 msgstr ""
 
+# error domain: service
+# error type: value, parameter, object etc. not available
 #: src/MShop/Service/Provider/Delivery/Default.php:151
 #: src/MShop/Service/Provider/Delivery/Default.php:358
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:121
@@ -389,158 +476,194 @@ msgstr ""
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:155
 #, php-format
 msgid "Curl could not be initialized"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:201
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:207
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:238
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:243
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:250
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:262
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:269
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Service/Provider/Delivery/Default.php:292
 #: src/MShop/Order/Manager/Base/Default.php:491
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:317
 #, php-format
 msgid "Creating XML file with order data for delivery provider failed: %1$s"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:324
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed: %2$s"
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed: %2$s"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with delivery provider
 #: src/MShop/Service/Provider/Delivery/Default.php:328
 #, php-format
-msgid ""
-"DOM tree of XML response from delivery provider could not be converted to "
-"XML string"
+msgid "DOM tree of XML response from delivery provider could not be converted to XML string"
 msgstr ""
 
+# error domain: service
+# error type: invalid characters in name or value
 #: src/MShop/Service/Provider/Delivery/Default.php:351
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with paypal-express provider
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:203
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:236
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:283
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:321
 #, php-format
-msgid ""
-"Paypal express payment transaction ID for order ID \"%1$s\" not available"
+msgid "Paypal express payment transaction ID for order ID \"%1$s\" not available"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with paypal-express provider
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:363
 #, php-format
 msgid "Paypal express user was not authorized"
 msgstr ""
 
+# error domain: service
+# error type: failure in communication with paypal-express provider
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:449
 #, php-format
-msgid ""
-"Checking response from Paypal express payment server failed. Error \"%1$s\" "
-"occured for order ID \"%2$s\" (correlation ID: \"%3$s\"): %4$s"
+msgid "Checking response from Paypal express payment server failed. Error \"%1$s\" occured for order ID \"%2$s\" (correlation ID: \"%3$s\"): %4$s"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:680
 #, php-format
 msgid "Service payment provider for order base ID \"%1$s\" not found"
 msgstr ""
 
+# error domain: service
+# error type: value, parameter, object etc. not available
 #: src/MShop/Service/Provider/Abstract.php:226
 #, php-format
 msgid "Required attribute \"%1$s\" in provider configuration not available"
 msgstr ""
 
+# error domain: service
+# error type: invalid characters in name or value
 #: src/MShop/Service/Provider/Abstract.php:262
 #, php-format
-msgid ""
-"Invalid characters in attribute for provider configuration. Attribute is not "
-"of type \"%1$s\"."
+msgid "Invalid characters in attribute for provider configuration. Attribute is not of type \"%1$s\"."
 msgstr ""
 
+# error domain: price
+# error type: value, parameter, object etc. not available
 #: src/MShop/Price/Manager/Abstract.php:45
 #, php-format
 msgid "Price item not available"
 msgstr ""
 
+# error domain: price
+# error type: value, parameter, object etc. not available
 #: src/MShop/Price/Manager/Abstract.php:50
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
 msgstr ""
 
+# error domain: price
+# error type: action failed
 #: src/MShop/Price/Item/Default.php:319
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currenty ID \"%2$s\" does not match."
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currenty ID \"%2$s\" does not match."
 msgstr ""
 
+# error domain: price
+# error type: invalid characters in name or value
 #: src/MShop/Price/Item/Default.php:361
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
 msgstr ""
 
+# error domain: search
+# error type: invalid JSON as search result
 #: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:291
 #, php-format
-msgid ""
-"Invalid JSON as result of search for order service attribute with ID \"%1$d\""
+msgid "Invalid JSON as result of search for order service attribute with ID \"%1$d\""
 msgstr ""
 
+# error domain: order
+# error type: value not within allowed range
 #: src/MShop/Order/Manager/Base/Abstract.php:55
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
 msgstr ""
 
+# error domain: order
+# error type: misc.
 #: src/MShop/Order/Manager/Base/Default.php:396
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr ""
 
+# error domain: order
+# error type: value not within allowed range
 #: src/MShop/Order/Item/Base/Product/Abstract.php:40
 #: src/MShop/Order/Item/Base/Abstract.php:65
 #: src/MShop/Order/Item/Abstract.php:338
@@ -548,72 +671,94 @@ msgstr ""
 msgid "Flags \"%1$s\" not within allowed range"
 msgstr ""
 
+# error type: value, parameter, object etc. not available
+# error domain: order
 #: src/MShop/Order/Item/Base/Abstract.php:79
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
+msgid "Product does not contain all required values. Product code for item not available."
 msgstr ""
 
+# error domain: order
+# error type: value, parameter, object etc. not available
 #: src/MShop/Order/Item/Base/Default.php:236
 #: src/MShop/Order/Item/Base/Default.php:285
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
 msgstr ""
 
+# error domain: order
+# error type: value, parameter, object etc. not available
 #: src/MShop/Order/Item/Base/Default.php:318
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
 msgstr ""
 
+# error domain: order
+# error type: value, parameter, object etc. not available
 #: src/MShop/Order/Item/Base/Default.php:387
 #, php-format
 msgid "Service of type \"%1$s\" not available"
 msgstr ""
 
+# error domain: order
+# error type: misc.
 #: src/MShop/Order/Item/Base/Default.php:510
 #, php-format
 msgid "Basket empty"
 msgstr ""
 
+# error domain: order
+# error type: value, parameter, object etc. not available
 #: src/MShop/Order/Item/Base/Default.php:745
 #, php-format
 msgid "Product with the same signatur not available"
 msgstr ""
 
+# error domain: order
+# error type: value not within allowed range
 #: src/MShop/Order/Item/Base/Address/Abstract.php:45
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr ""
 
+# error domain: misc.
+# error type: invalid characters in name or value
 #: src/MShop/Order/Item/Abstract.php:254 src/MShop/Common/Item/Abstract.php:98
 #: src/MShop/Customer/Item/Default.php:316
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"yyyy-mm-dd hh:mm:ss\" or "
-"\"yyyy-mm-dd\" expected."
+msgid "Invalid characters in date \"%1$s\". ISO format \"yyyy-mm-dd hh:mm:ss\" or \"yyyy-mm-dd\" expected."
 msgstr ""
 
+# error domain: order
+# error type: value not within allowed range
 #: src/MShop/Order/Item/Abstract.php:270
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
 msgstr ""
 
+# error domain: order
+# error type: value not within allowed range
 #: src/MShop/Order/Item/Abstract.php:286
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
 msgstr ""
 
+# error domain: order
+# error type: value not within allowed range
 #: src/MShop/Order/Item/Abstract.php:306
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
 msgstr ""
 
+# error domain: order
+# error type: value not within allowed range
 #: src/MShop/Order/Item/Abstract.php:322
 #, php-format
 msgid "Email flags \"%1$s\" not within allowed range"
 msgstr ""
 
+# error domain: manager
+# error type: value, parameter, object etc. not available
 #: src/MShop/Common/Manager/Type/Default.php:45
 #: src/MShop/Common/Manager/List/Default.php:47
 #: src/MShop/Common/Manager/Address/Default.php:40
@@ -621,6 +766,8 @@ msgstr ""
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
 msgstr ""
 
+# error domain: manager
+# error type: value, parameter, object etc. not available
 #: src/MShop/Common/Manager/Type/Default.php:56
 #: src/MShop/Common/Manager/List/Default.php:52
 #: src/MShop/Common/Manager/List/Default.php:193
@@ -629,6 +776,8 @@ msgstr ""
 msgid "Search configuration not available"
 msgstr ""
 
+# error domain: manager
+# error type: value, parameter, object etc. not available
 #: src/MShop/Common/Manager/Type/Default.php:60
 #: src/MShop/Common/Manager/Type/Default.php:64
 #: src/MShop/Common/Manager/List/Default.php:56
@@ -639,76 +788,106 @@ msgstr ""
 msgid "Search configuration for \"%1$s\" not available"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Common/Manager/Type/Default.php:203
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
 msgstr ""
 
+# error domain: site
+# error type: action failed
 #: src/MShop/Common/Manager/Decorator/Sitecheck.php:54
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr ""
 
+# error domain: manager
+# error type: value, parameter, object etc. not available
 #: src/MShop/Common/Manager/Abstract.php:68
 #, php-format
 msgid "ID of last inserted database record not available"
 msgstr ""
 
+# error domain: manager
+# error type: value, parameter, object etc. not available
 #: src/MShop/Common/Manager/Abstract.php:127
 #, php-format
 msgid "Domain manager for class \"%1$s\" not available"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Common/Manager/Abstract.php:679
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Common/Manager/Abstract.php:703
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MShop/Common/Manager/List/Default.php:202
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr ""
 
+# error domain: manager
+# error type: value, parameter, object etc. not available
 #: src/MShop/Common/Manager/List/Default.php:358
 #, php-format
 msgid "Configuration not available"
 msgstr ""
 
+# error domain: manager
+# error type: value, parameter, object etc. not available
 #: src/MShop/Common/Manager/Address/Default.php:129
 #, php-format
 msgid "Address search configuration not available"
 msgstr ""
 
+# error domain: misc.
+# error type: invalid characters in name or value
 #: src/MShop/Common/Item/Address/Abstract.php:434
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
 msgstr ""
 
+# error domain: misc.
+# error type: invalid characters in name or value
 #: src/MShop/Common/Item/Address/Abstract.php:488
 #, php-format
 msgid "Invalid characters in web site URL \"%1$s\""
 msgstr ""
 
+# error domain: misc.
+# error type: value not within allowed range
 #: src/MShop/Common/Item/Address/Abstract.php:570
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
 msgstr ""
 
+# error domain: misc.
+# error type: misc.
 #: src/MShop/Common/Item/Abstract.php:81
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MAdmin/Log/Manager/Default.php:231
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
 msgstr ""
 
+# error domain: search
+# error type: empty search result
 #: src/MAdmin/Job/Manager/Default.php:237
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
