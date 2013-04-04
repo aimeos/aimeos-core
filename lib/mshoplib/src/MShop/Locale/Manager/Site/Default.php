@@ -417,7 +417,7 @@ class MShop_Locale_Manager_Site_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Locale_Exception( sprintf ( 'Tree root with code "%1$s" in "%2$s" not found.', 'default', 'locale.site.code' ) );
+			throw new MShop_Locale_Exception( sprintf( 'Tree root with code "%1$s" in "%2$s" not found', 'default', 'locale.site.code' ) );
 		}
 
 		return $item;

@@ -289,7 +289,7 @@ class MShop_Service_Provider_Delivery_Default
 		if( ( $base = reset( $result ) ) === false )
 		{
 			throw new MShop_Order_Exception( sprintf(
-				'Order base item with order ID "%1$s" not found.', $invoice->getId()
+				'Order base item with order ID "%1$s" not found', $invoice->getId()
 			) );
 		}
 
