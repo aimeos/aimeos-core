@@ -51,7 +51,8 @@
 }
 
 .arcavias li.attr-item,
-.arcavias li.form-item {
+.arcavias li.form-item,
+.arcavias li.error-item {
 	list-style: none;
 }
 
