@@ -64,7 +64,7 @@ class MW_Communication_Sftp implements MW_Communication_Interface
 
 		if ( $this->_sftp->put( $target, $payload, $method ) === false )
 		{
-			$msg = sprintf( 'Could not upload payload to "%2$s:%3$s"', $this->_config['host'], $target );
+			$msg = sprintf( 'Could not upload payload to "%1$s:%2$s"', $this->_config['host'], $target );
 			throw new MW_Communication_Exception( $msg );
 		}
 	}
