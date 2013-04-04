@@ -111,7 +111,7 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_Default
 			$view->standardStepActive = 'summary';
 			$view->termsError = true;
 
-			$error = array( sprintf( 'Please accept the terms and conditions' ) );
+			$error = array( $view->translate( 'client/html', 'Please accept the terms and conditions' ) );
 			$view->standardErrorList = $error + $view->get( 'standardErrorList', array() );
 		}
 
