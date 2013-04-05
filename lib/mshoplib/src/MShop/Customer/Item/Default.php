@@ -34,75 +34,75 @@ class MShop_Customer_Item_Default
 		parent::__construct('customer.', $values, $listItems, $refItems);
 
 		$this->_values = $values;
-		
+
 		if( isset( $values['salutation'] ) ) {
 			$address->setSalutation( (string) $values['salutation'] );
 		}
-		
+
 		if( isset( $values['company'] ) ) {
 			$address->setCompany( (string) $values['company'] );
 		}
-		
+
 		if( isset( $values['title'] ) ) {
 			$address->setTitle( (string) $values['title'] );
 		}
-		
+
 		if( isset( $values['firstname'] ) ) {
 			$address->setFirstname( (string) $values['firstname'] );
 		}
-		
+
 		if( isset( $values['lastname'] ) ) {
 			$address->setLastname( (string) $values['lastname'] );
 		}
-		
+
 		if( isset( $values['address1'] ) ) {
 			$address->setAddress1( (string) $values['address1'] );
 		}
-		
+
 		if( isset( $values['address2'] ) ) {
 			$address->setAddress2( (string) $values['address2'] );
 		}
-		
+
 		if( isset( $values['address3'] ) ) {
 			$address->setAddress3( (string) $values['address3'] );
 		}
-		
+
 		if( isset( $values['postal'] ) ) {
 			$address->setPostal( (string) $values['postal'] );
 		}
-		
+
 		if( isset( $values['city'] ) ) {
 			$address->setCity( (string) $values['city'] );
 		}
-		
+
 		if( isset( $values['state'] ) ) {
 			$address->setState( (string) $values['state'] );
 		}
-		
+
 		if( isset( $values['langid'] ) ) {
 			$address->setLanguageId( (string) $values['langid'] );
 		}
-		
+
 		if( isset( $values['countryid'] ) ) {
 			$address->setCountryId( (string) $values['countryid'] );
 		}
-		
+
 		if( isset( $values['telephone'] ) ) {
 			$address->setTelephone( (string) $values['telephone'] );
 		}
-		
+
 		if( isset( $values['email'] ) ) {
 			$address->setEmail( (string) $values['email'] );
 		}
-		
+
 		if( isset( $values['telefax'] ) ) {
 			$address->setTelefax( (string) $values['telefax'] );
 		}
-		
+
 		if( isset( $values['website'] ) ) {
 			$address->setWebsite( (string) $values['website'] );
 		}
-		
+
 		$this->_billingaddress = $address;
 		$this->_salt = $salt;
 	}
@@ -313,7 +313,7 @@ class MShop_Customer_Item_Default
 	protected function _checkDateOnlyFormat( $date )
 	{
 		if( $date !== null && preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', $date ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "yyyy-mm-dd hh:mm:ss" or "yyyy-mm-dd" expected.', $date ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );
 		}
 	}
 }
