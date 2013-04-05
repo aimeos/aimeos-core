@@ -22,6 +22,23 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	private $_subPartPath = 'client/html/checkout/standard/address/billing/default/subparts';
 	private $_subPartNames = array();
 
+	private $_mandatory = array(
+		'order.base.address.salutation',
+		'order.base.address.firstname',
+		'order.base.address.lastname',
+		'order.base.address.address1',
+		'order.base.address.postal',
+		'order.base.address.city',
+		'order.base.address.languageid',
+		'order.base.address.email'
+	);
+
+	private $_optional = array(
+		'order.base.address.company',
+		'order.base.address.address2',
+		'order.base.address.countryid'
+	);
+
 
 	/**
 	 * Returns the HTML code for insertion into the body.
@@ -116,26 +133,15 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) == 'null' ) // new address
 			{
 				$param = $view->param( 'ca-billing', array() );
-
+				$list = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->_mandatory );
 				$missing = array();
-				$default = array(
-					'order.base.address.salutation',
-					'order.base.address.firstname',
-					'order.base.address.lastname',
-					'order.base.address.address1',
-					'order.base.address.postal',
-					'order.base.address.city',
-					'order.base.address.languageid',
-					'order.base.address.email'
-				);
 
-				foreach( $view->config( 'checkout/address/billing/mandatory', $default ) as $mandatory )
+				foreach( $list as $mandatory )
 				{
 					if( !isset( $param[$mandatory] ) || $param[$mandatory] == '' )
 					{
-						$name = substr( $mandatory, 19 );
 						$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is missing' );
-						$missing[$name] = sprintf( $msg, $name );
+						$missing[$mandatory] = sprintf( $msg, substr( $mandatory, 19 ) );
 					}
 				}
 
@@ -198,12 +204,8 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				$view->billingLanguage = $context->getLocale()->getLanguageId();
 			}
 
-			$default = array( 'salutation', 'firstname', 'lastname', 'address1', 'postal', 'city', 'languageid', 'email' );
-			$view->billingMandatory = $view->config( 'checkout/address/billing/mandatory', $default );
-
-
-			$default = array( 'company', 'address2', 'countryid' );
-			$view->billingOptional = $view->config( 'checkout/address/billing/optional', $default );
+			$view->billingMandatory = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->_mandatory );
+			$view->billingOptional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->_optional );
 
 			$this->_cache = $view;
 		}

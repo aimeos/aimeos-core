@@ -157,9 +157,9 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		catch( Client_Html_Exception $e )
 		{
 			$this->assertEquals( 3, count( $view->billingError ) );
-			$this->assertArrayHasKey( 'salutation', $view->billingError );
-			$this->assertArrayHasKey( 'email', $view->billingError );
-			$this->assertArrayHasKey( 'languageid', $view->billingError );
+			$this->assertArrayHasKey( 'order.base.address.salutation', $view->billingError );
+			$this->assertArrayHasKey( 'order.base.address.email', $view->billingError );
+			$this->assertArrayHasKey( 'order.base.address.languageid', $view->billingError );
 			return;
 		}
 
