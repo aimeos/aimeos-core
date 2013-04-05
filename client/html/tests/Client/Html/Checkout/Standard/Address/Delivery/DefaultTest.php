@@ -170,8 +170,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		catch( Client_Html_Exception $e )
 		{
 			$this->assertEquals( 2, count( $view->deliveryError ) );
-			$this->assertArrayHasKey( 'salutation', $view->deliveryError );
-			$this->assertArrayHasKey( 'languageid', $view->deliveryError );
+			$this->assertArrayHasKey( 'order.base.address.salutation', $view->deliveryError );
+			$this->assertArrayHasKey( 'order.base.address.languageid', $view->deliveryError );
 			return;
 		}
 
