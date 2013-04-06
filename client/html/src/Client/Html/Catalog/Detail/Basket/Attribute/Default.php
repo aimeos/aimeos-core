@@ -113,12 +113,13 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$attributes = $view->detailProductItem->getRefItems( 'attribute', null, 'config' );
-
 			$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
+
+			$configAttributes = $view->detailProductItem->getRefItems( 'attribute', null, 'config' );
+
 			$search = $attributeManager->createSearch( true );
 			$expr = array(
-				$search->compare( '==', 'attribute.id', array_keys( $attributes ) ),
+				$search->compare( '==', 'attribute.id', array_keys( $configAttributes ) ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
@@ -131,6 +132,24 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 			}
 
 			$view->attributeConfigItems = $attributeTypes;
+
+
+			$hiddenAttributes = $view->detailProductItem->getRefItems( 'attribute', null, 'hidden' );
+
+			$search = $attributeManager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', 'attribute.id', array_keys( $hiddenAttributes ) ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$attributeTypes = array();
+
+			foreach( $attributeManager->searchItems( $search, array() ) as $id => $attribute ) {
+				$attributeTypes[ $attribute->getType() ][$id] = $attribute;
+			}
+
+			$view->attributeHiddenItems = $attributeTypes;
 
 			$this->_cache = $view;
 		}

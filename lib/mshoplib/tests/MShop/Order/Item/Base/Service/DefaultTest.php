@@ -270,16 +270,18 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$serviceCopy = new MShop_Order_Item_Base_Service_Default( $this->_price );
 
 		$manager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'default') );
 		$services = $manager->searchItems( $search );
+
 		if( ( $service = reset( $services ) ) !== false ) {
 			$serviceCopy->copyFrom( $service );
 		}
 
-		$this->assertEquals($serviceCopy->getCode(), 'unitcode');
-		$this->assertEquals($serviceCopy->getName(), 'unitlabel');
-		$this->assertEquals($serviceCopy->getType(), 'delivery');
+		$this->assertEquals( 'unitcode', $serviceCopy->getCode() );
+		$this->assertEquals( 'unitlabel', $serviceCopy->getName() );
+		$this->assertEquals( 'delivery', $serviceCopy->getType() );
 		$this->assertEquals( '', $serviceCopy->getMediaUrl() );
 
 		$this->assertTrue( $serviceCopy->isModified() );

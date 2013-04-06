@@ -109,6 +109,7 @@ return array (
 		array( 'parentid' => 'catalog/new', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'pos' => 1 ),
 		array( 'parentid' => 'catalog/internet', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'pos' => 0 ),
 
+		array( 'parentid' => 'catalog/misc', 'typeid' => 'product/promotion', 'domain' => 'product', 'refid' => 'product/U:TEST', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'catalog/misc', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/U:TESTP', 'start' => null, 'end' => null, 'pos' => 0 ),
 		array( 'parentid' => 'catalog/misc', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/U:TESTPSUB01', 'start' => null, 'end' => null, 'pos' => 1 ),
 		array( 'parentid' => 'catalog/misc', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/U:TESTSUB03', 'start' => null, 'end' => null, 'pos' => 2 ),

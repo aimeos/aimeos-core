@@ -160,15 +160,16 @@ class Client_Html_Basket_Standard_Default
 				case 'add':
 
 					$products = (array) $view->param( 'b-prod', array() );
-					$reqvariant = $view->config( 'basket/require-variant', true );
+					$reqvariant = $view->config( 'client/html/basket/standard/require-variant', true );
 
 					if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
 					{
 						$products[] = array(
 							'prod-id' => $prodid,
 							'quantity' => $view->param( 'b-quantity', 1 ),
+							'attrvar-id' => array_filter( (array) $view->param( 'b-attrvar-id', array() ) ),
 							'attrconf-id' => array_filter( (array) $view->param( 'b-attrconf-id', array() ) ),
-							'attrvar-id' => array_filter( (array) $view->param( 'b-attrvar-id', array() ) )
+							'attrhide-id' => array_filter( (array) $view->param( 'b-attrhide-id', array() ) )
 						);
 					}
 
@@ -177,9 +178,10 @@ class Client_Html_Basket_Standard_Default
 						$this->_controller->addProduct(
 							( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
 							( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
-							( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
+							$reqvariant,
 							( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
-							$reqvariant
+							( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
+							( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() )
 						);
 					}
 

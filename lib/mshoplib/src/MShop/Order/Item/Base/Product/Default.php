@@ -501,6 +501,7 @@ class MShop_Order_Item_Base_Product_Default
 	public function copyFrom( MShop_Product_Item_Interface $product )
 	{
 		$this->setName( $product->getName() );
+		$this->setType( $product->getType() );
 		$this->setSupplierCode( $product->getSupplierCode() );
 		$this->setProductCode( $product->getCode() );
 		$this->setProductId( $product->getId() );

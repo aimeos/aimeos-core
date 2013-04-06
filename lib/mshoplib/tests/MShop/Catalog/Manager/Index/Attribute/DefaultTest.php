@@ -181,7 +181,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrLengthItem->getId() ) );
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 
 		$search->setConditions( $search->compare( '!=', 'catalog.index.attribute.id', null ) );
 

@@ -10,9 +10,9 @@
 <div class="catalog-detail-basket-attribute">
 	<table>
 		<tbody>
-<?php foreach( $this->get( 'attributeConfigItems', array() ) as $type => $attributes ) : ?> 
+<?php foreach( $this->get( 'attributeConfigItems', array() ) as $code => $attributes ) : ?> 
 			<tr>
-				<td><?php echo $this->translate( 'client/html/code', $type ); ?></td>
+				<td><?php echo $this->translate( 'client/html/code', $code ); ?></td>
 				<td>
 					<select name="<?php echo $this->formparam( array( 'b-prod', 0, 'attrconf-id' ) ); ?>">
 						<option value=""></option>
@@ -40,5 +40,10 @@
 <?php endforeach; ?>
 		</tbody>
 	</table>
+<?php foreach( $this->get( 'attributeHiddenItems', array() ) as $code => $attributes ) : ?> 
+<?php	foreach( $attributes as $id => $attribute ) : ?>
+	<input type="hidden" name="<?php echo $this->formparam( array( 'b-prod', 0, 'attrhide-id' ) ); ?>" value="<?php echo $id; ?>">
+<?php	endforeach; ?>
+<?php endforeach; ?>
 <?php echo $this->get( 'attributeBody' ); ?>
 </div>
