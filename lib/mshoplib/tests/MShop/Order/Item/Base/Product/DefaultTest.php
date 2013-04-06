@@ -424,6 +424,7 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 'Cafe Noire Expresso', $productCopy->getName() );
 		$this->assertEquals( 'unitSupplier', $productCopy->getSupplierCode() );
+		$this->assertEquals( 'default', $productCopy->getType() );
 		$this->assertEquals( 'CNE', $productCopy->getProductCode() );
 		$this->assertEquals( $product->getId(), $productCopy->getProductId() );
 		$this->assertEquals( MShop_Order_Item_Abstract::STAT_UNFINISHED, $productCopy->getStatus() );
