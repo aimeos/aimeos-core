@@ -16,8 +16,9 @@
  */
 class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_Interface
 {
-	protected $_item;
-	protected $_context;
+	private $_item;
+	private $_context;
+	private $_orderAttrManager;
 
 
 	/**
@@ -30,6 +31,9 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	{
 		$this->_item = $item;
 		$this->_context = $context;
+
+		$this->_orderAttrManager = MShop_Order_Manager_Factory::createManager( $this->_context )
+			->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$config = $context->getConfig();
 		$this->_type = $config->get( 'plugin/provider/order/propertyadd/type', 'property' );
@@ -153,13 +157,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 			return null;
 		}
 
-		$attributeManager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
-
-		if( $name === null ) {
-			$name = $code;
-		}
-
-		$new = $attributeManager->createItem();
+		$new = $this->_orderAttrManager->createItem();
 		$new->setCode( $code );
 		$new->setType( $this->_type );
 		$new->setName( $name );
