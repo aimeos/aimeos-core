@@ -340,6 +340,8 @@ CONSTRAINT "fk_msordbase_baseid"
 
 CREATE INDEX "idx_msordbase_sid_bid_cd_typ" ON "mshop_order_base_service" ("siteid", "baseid", "code", "type");
 
+CREATE INDEX "idx_msordbase_sid_code_type" ON "mshop_order_base_service" ("siteid", "code", "type");
+
 
 --
 -- Payment details entered by the customers
