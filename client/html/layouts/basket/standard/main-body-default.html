@@ -86,7 +86,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 <?php 	foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
-<?php		if( ( $mediaUrl = $product->getMediaUrl() ) !== '' ) : ?>
+<?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
 						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaUrl; ?>" alt="<?php echo $product->getName(); ?>" />
 <?php		endif; ?>
 						<span class="product-name"><?php echo $product->getName(); ?></span>
