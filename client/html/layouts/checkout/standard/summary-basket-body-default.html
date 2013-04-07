@@ -72,12 +72,24 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 <?php 	foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
-						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $product->getMediaUrl(); ?>" />
+<?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
+						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaUrl; ?>" />
+<?php		endif; ?>
 						<span class="product-name"><?php echo $product->getName(); ?></span>
-<?php		foreach( $product->getAttributes() as $attribute ) : ?>
-						<span class="product-attributename"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
-						<span class="product-attributevalue"><?php echo ( ( $name = $attribute->getName() ) !== '' ? $name : $attribute->getValue() ); ?></span>
-<?php		endforeach; ?>
+<?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
+						<ul class="attr-list">
+<?php			foreach( $product->getAttributes() as $attribute ) : ?>
+							<li class="attr-item">
+<?php				switch( $attribute->getType() ) : case 'hidden': ?>
+								<!-- hidden -->
+<?php					break; default: ?>
+								<span class="name"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
+								<span class="value"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ); ?></span>
+<?php				endswitch; ?>
+							</li>
+<?php			endforeach; ?>
+						</ul>
+<?php		endif; ?>
 					</td>
 <?php		$prodPrice = $product->getPrice()->getValue(); ?>
 					<td class="quantity"><?php echo $product->getQuantity(); ?></td>

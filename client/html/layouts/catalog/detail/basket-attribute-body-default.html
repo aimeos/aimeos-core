@@ -40,10 +40,8 @@
 <?php endforeach; ?>
 		</tbody>
 	</table>
-<?php foreach( $this->get( 'attributeHiddenItems', array() ) as $code => $attributes ) : ?> 
-<?php	foreach( $attributes as $id => $attribute ) : ?>
-	<input type="hidden" name="<?php echo $this->formparam( array( 'b-prod', 0, 'attrhide-id' ) ); ?>" value="<?php echo $id; ?>">
-<?php	endforeach; ?>
+<?php foreach( $this->get( 'attributeHiddenItems', array() ) as $id => $attribute ) : ?> 
+	<input type="hidden" name="<?php echo $this->formparam( array( 'b-prod', 0, 'attrhide-id', $id ) ); ?>" value="<?php echo $id; ?>" />
 <?php endforeach; ?>
 <?php echo $this->get( 'attributeBody' ); ?>
 </div>
