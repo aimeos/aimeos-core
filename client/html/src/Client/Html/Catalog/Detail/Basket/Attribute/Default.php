@@ -132,24 +132,7 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 			}
 
 			$view->attributeConfigItems = $attributeTypes;
-
-
-			$hiddenAttributes = $view->detailProductItem->getRefItems( 'attribute', null, 'hidden' );
-
-			$search = $attributeManager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'attribute.id', array_keys( $hiddenAttributes ) ),
-				$search->getConditions(),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$attributeTypes = array();
-
-			foreach( $attributeManager->searchItems( $search, array() ) as $id => $attribute ) {
-				$attributeTypes[ $attribute->getType() ][$id] = $attribute;
-			}
-
-			$view->attributeHiddenItems = $attributeTypes;
+			$view->attributeHiddenItems = $view->detailProductItem->getRefItems( 'attribute', null, 'hidden' );
 
 			$this->_cache = $view;
 		}
