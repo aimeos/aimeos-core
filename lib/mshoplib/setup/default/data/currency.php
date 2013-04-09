@@ -161,7 +161,7 @@ return array(
 		'UYU' => array( 'id' => 'UYU', 'label' => 'Uruguayan peso', 'status' => 0 ),
 		'UZS' => array( 'id' => 'UZS', 'label' => 'Uzbekistani som', 'status' => 0 ),
 		'VEB' => array( 'id' => 'VEB', 'label' => 'Bolivar', 'status' => 0 ),
-		'VND' => array( 'id' => 'VND', 'label' => 'Vietnamese ??ng', 'status' => 0 ),
+		'VND' => array( 'id' => 'VND', 'label' => 'Vietnamese dong', 'status' => 0 ),
 		'VUV' => array( 'id' => 'VUV', 'label' => 'Vatu', 'status' => 0 ),
 		'WST' => array( 'id' => 'WST', 'label' => 'Samoan tala', 'status' => 0 ),
 		'XAF' => array( 'id' => 'XAF', 'label' => 'CFA Franc BEAC', 'status' => 0 ),
