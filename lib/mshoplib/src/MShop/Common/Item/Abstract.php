@@ -95,7 +95,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 
 		if( $date !== null && preg_match( $regex, $date ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "yyyy-mm-dd hh:mm:ss" or "yyyy-mm-dd" expected.', $date ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
 		}
 	}
 
