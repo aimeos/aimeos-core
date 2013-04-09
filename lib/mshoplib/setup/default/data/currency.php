@@ -124,7 +124,7 @@ return array(
 		'PGK' => array( 'id' => 'PGK', 'label' => 'Papua New Guinean kina', 'status' => 0 ),
 		'PHP' => array( 'id' => 'PHP', 'label' => 'Philippine peso', 'status' => 0 ),
 		'PKR' => array( 'id' => 'PKR', 'label' => 'Pakistani rupee', 'status' => 0 ),
-		'PLN' => array( 'id' => 'PLN', 'label' => 'Polish z?oty', 'status' => 0 ),
+		'PLN' => array( 'id' => 'PLN', 'label' => 'Polish złoty', 'status' => 0 ),
 		'PYG' => array( 'id' => 'PYG', 'label' => 'Paraguayan guaraní', 'status' => 0 ),
 		'QAR' => array( 'id' => 'QAR', 'label' => 'Qatari riyal', 'status' => 0 ),
 		'RON' => array( 'id' => 'RON', 'label' => 'Romanian leu', 'status' => 0 ),
