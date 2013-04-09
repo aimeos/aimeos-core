@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-08 14:01+0200\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,11 +109,6 @@ msgstr ""
 #: layouts/checkout/standard/delivery-body-default.html:48
 #, php-format
 msgid "%1$s%3$s + %2$s%3$s"
-msgstr ""
-
-#: layouts/checkout/standard/payment-body-default.html:76
-#: layouts/checkout/standard/delivery-body-default.html:76
-msgid ":"
 msgstr ""
 
 #: layouts/catalog/detail/basket-body-default.html:45
@@ -721,10 +716,6 @@ msgstr ""
 #: layouts/checkout/standard/order-body-default.html:10
 #: src/Client/Html/Checkout/Standard/Order/Default.php:12
 msgid "order"
-msgstr ""
-
-#: layouts/checkout/confirm/basic-body-default.html:20
-msgid "pay:"
 msgstr ""
 
 #: layouts/email/confirm/main-html-service-body-default.html:13
