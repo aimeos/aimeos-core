@@ -443,7 +443,7 @@ msgid "TND"
 msgstr "Tunisian dinar"
 
 msgid "TOP"
-msgstr "Tongan pa\'anga"
+msgstr "Tongan pa anga"
 
 msgid "TRY"
 msgstr "Turkish new lira"
