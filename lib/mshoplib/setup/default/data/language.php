@@ -111,7 +111,7 @@ return array(
 		'lv' => array( 'id' => 'lv', 'label' => 'Latvian', 'status' => 0 ),
 		'mg' => array( 'id' => 'mg', 'label' => 'Malagasy', 'status' => 0 ),
 		'mh' => array( 'id' => 'mh', 'label' => 'Marshallese', 'status' => 0 ),
-		'mi' => array( 'id' => 'mi', 'label' => 'M?ori', 'status' => 0 ),
+		'mi' => array( 'id' => 'mi', 'label' => 'Māori', 'status' => 0 ),
 		'mk' => array( 'id' => 'mk', 'label' => 'Macedonian', 'status' => 0 ),
 		'ml' => array( 'id' => 'ml', 'label' => 'Malayalam', 'status' => 0 ),
 		'mn' => array( 'id' => 'mn', 'label' => 'Mongolian', 'status' => 0 ),

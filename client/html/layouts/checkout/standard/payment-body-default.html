@@ -73,7 +73,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 					break; case 'select':
 					?><select id="payment-<?php echo $key; ?>" name="c-payment[<?php echo $id; ?>][<?php echo $key; ?>]">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
-						<option value="<?php echo $option; ?>"><?php echo $this->translate( 'client/html/code', $key . ':' . $option ); ?></option>
+						<option value="<?php echo $option; ?>"><?php $code = $key . ':' . $option; echo $this->translate( 'client/html/code', $code ); ?></option>
 <?php					endforeach; ?>
 					</select>
 <?php			endswitch; ?>

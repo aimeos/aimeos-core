@@ -40,19 +40,9 @@
 	</target>
 
 	<target name="i18n" description="Creates translation message files">
-		<exec command="find ./layouts/ ./src/ -type f | xgettext --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/core-client-html.pot -f -"
-			checkreturn="true" logoutput="true" /> 
-        <foreach param="po-fname" absparam="po-filename" target="i18n-update">
-            <fileset dir="./i18n">
-                <include name="*.po" />
-            </fileset>
-        </foreach>
+		<exec command="find ./layouts/ ./src/ -type f | xgettext -s --no-wrap --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/core-client-html.pot -f -"
+			checkreturn="true" logoutput="true" />
 	</target>
-
-	<target name="i18n-update" description="Updates translation message files">
-		<fail unless="po-filename" message="Missing file name" />
-		<exec command="msgmerge -U --backup=none ${po-filename} i18n/core-client-html.pot" checkreturn="true" logoutput="true" /> 
-    </target>
 
 	<target name="build" description="Builds package for deployment">
 		<foreach param="po-fname" absparam="po-filename" target="build-mo">
@@ -61,30 +51,15 @@
             </fileset>
         </foreach>
 		<foreach param="po-fname" absparam="po-filename" target="build-mo">
-            <fileset dir="./i18n/country">
-                <include name="*.po" />
-            </fileset>
-        </foreach>
-		<foreach param="po-fname" absparam="po-filename" target="build-mo">
-            <fileset dir="./i18n/currency">
-                <include name="*.po" />
-            </fileset>
-        </foreach>
-		<foreach param="po-fname" absparam="po-filename" target="build-mo">
-            <fileset dir="./i18n/language">
-                <include name="*.po" />
-            </fileset>
-        </foreach>
-		<foreach param="po-fname" absparam="po-filename" target="build-mo">
-            <fileset dir="./i18n/code">
-                <include name="*.po" />
+            <fileset dir="./i18n">
+                <include name="*/*.po" />
             </fileset>
         </foreach>
 	</target>
 
 	<target name="build-mo" description="Generates binary translation files">
 		<fail unless="po-filename" message="Missing file name" />
-		<exec command="msgfmt -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" /> 
+		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" /> 
     </target>
 
 	<target name="all" depends="coverage,testperf,check" description="Builds all parts of the package">
