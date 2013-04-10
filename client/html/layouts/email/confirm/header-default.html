@@ -18,10 +18,13 @@ $addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_A
 $replace = array( "\r" => '', "\n" => '', "\t" => '', '"'  => '', ','  => '', '<'  => '', '>'  => '' );
 $recipient = strtr( $addr->getEmail(), $replace );
 
+/// E-mail subject with order ID (%1$s)
+echo iconv_mime_encode( 'Subject', sprintf( $this->translate( 'client/html', 'Confirmation for order %1$s' ), $this->confirmOrderItem->getId() ), $iconvPrefs ) . "\r\n";
+echo iconv_mime_encode( 'From', $this->config( 'client/html/email/confirm/from-name' ), $iconvPrefs ) . ' <' . $this->config( 'client/html/email/confirm/from-email' ) . ">\r\n";
+/// E-mail recipient with first name (%1$s) and last name (%2$s)
+echo iconv_mime_encode( 'To', sprintf( $this->translate( 'client/html', '"%1$s %2$s"' ), $addr->getFirstName(), $addr->getLastName() ), $iconvPrefs ) . ' <' . $recipient . ">\r\n";
+
 ?>
-<?php echo iconv_mime_encode( 'Subject', sprintf( $this->translate( 'client/html', 'Confirmation for order %1$s' ), $this->confirmOrderItem->getId() ), $iconvPrefs ) . "\r\n"; ?>
-<?php echo iconv_mime_encode( 'From', $this->config( 'client/html/email/confirm/from-name' ), $iconvPrefs ) . ' <' . $this->config( 'client/html/email/confirm/from-email' ) . ">\r\n"; ?>
-<?php echo iconv_mime_encode( 'To', sprintf( $this->translate( 'client/html', '"%1$s %2$s"' ), $addr->getFirstName(), $addr->getLastName() ), $iconvPrefs ) . ' <' . $recipient . ">\r\n"; ?>
 Message-Id: <<?php echo microtime( true ) . $addr->getEmail(); ?>><?php echo "\r\n"; ?>
 X-MailGenerator: Arcavias<?php echo "\r\n"; ?>
 Date: <?php echo date( 'r' ) . "\r\n"; ?>

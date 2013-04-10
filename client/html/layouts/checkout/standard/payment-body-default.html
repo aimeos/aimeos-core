@@ -44,7 +44,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 				<input class="option" type="radio" id="c-payment-option-<?php echo $id; ?>" name="<?php echo $this->formparam( array( 'c-payment-option' ) ); ?>" value="<?php echo $id; ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
 <?php		$currency = $this->translate( 'client/html/currency', $servicePrices[$id]->getCurrencyId() ); ?>
-<?php		if( $servicePrices[$id]->getValue() > 0 ) : ?>
+<?php		if( $servicePrices[$id]->getValue() > 0 ) : /// Service fee value (%1$s) and payment cost value (%2$s) with currency (%3$s) ?>
 				<span class="price-value"><?php printf( $this->translate( 'client/html', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getShipping() ), $currency ); ?></span>
 <?php		elseif( $servicePrices[$id]->getShipping() > 0 ) : ?>
 				<span class="price-value"><?php printf( $priceFormat, $this->number( $servicePrices[$id]->getShipping() ), $currency ); ?></span>
