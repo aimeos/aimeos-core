@@ -134,6 +134,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			{
 				$param = $view->param( 'ca-billing', array() );
 				$list = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->_mandatory );
+				$optional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->_optional );
 				$missing = array();
 
 				foreach( $list as $mandatory )
@@ -143,6 +144,16 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 						$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is missing' );
 						$missing[$mandatory] = sprintf( $msg, substr( $mandatory, 19 ) );
 					}
+				}
+
+				if( !isset( $missing['order.base.address.company'] )
+					&& isset( $param['order.base.address.salutation'] )
+					&& $param['order.base.address.salutation'] === MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY
+					&& in_array( 'order.base.address.company', $optional )
+					&& $param['order.base.address.company'] == ''
+				) {
+					$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is missing' );
+					$missing['order.base.address.company'] = sprintf( $msg, 'salutation' );
 				}
 
 				if( count( $missing ) > 0 )
