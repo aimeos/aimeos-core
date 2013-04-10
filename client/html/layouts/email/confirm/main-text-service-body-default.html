@@ -13,9 +13,9 @@
 <?php	echo $this->translate( 'client/html', 'Payment' ); ?>: <?php echo $service->getName(); ?>
 
 <?php	foreach( $service->getAttributes() as $attribute ) : ?>
-<?php		if( $attribute->getType() !== 'hidden' ) : ?>
+<?php		if( !in_array( $attribute->getType(), array( '', 'hidden' ) ) ) : ?>
 <?php
-				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) ); ?>
+				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) );
 
 				switch( $attribute->getValue() )
 				{
@@ -32,16 +32,15 @@
 <?php		endif; ?>
 <?php	endforeach; ?>
 <?php } catch( Exception $e ) { ; } ?>
-
 
 <?php try { ?>
 <?php	$service = $this->confirmOrderBaseItem->getService( 'delivery' ); ?>
 <?php	echo $this->translate( 'client/html', 'Delivery' ); ?>: <?php echo $service->getName(); ?>
 
 <?php	foreach( $service->getAttributes() as $attribute ) : ?>
-<?php		if( $attribute->getType() !== 'hidden' ) : ?>
+<?php		if( !in_array( $attribute->getType(), array( '', 'hidden' ) ) ) : ?>
 <?php
-				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) ); ?>
+				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) );
 
 				switch( $attribute->getValue() )
 				{
@@ -58,6 +57,5 @@
 <?php		endif; ?>
 <?php	endforeach; ?>
 <?php } catch( Exception $e ) { ; } ?>
-
 
 <?php echo $this->get( 'serviceBody' ); ?>

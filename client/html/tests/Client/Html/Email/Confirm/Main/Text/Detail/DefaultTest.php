@@ -67,7 +67,7 @@ class Client_Html_Email_Confirm_Main_Text_Detail_DefaultTest extends MW_Unittest
 		$this->_object->setView( $this->_getView() );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( "\n\n", $output );
+		$this->assertStringStartsWith( "\n", $output );
 	}
 
 

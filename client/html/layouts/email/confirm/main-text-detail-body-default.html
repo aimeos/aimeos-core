@@ -58,33 +58,30 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 
 ?>
 
-
-<?php echo echo $this->translate( 'client/html', 'Order details:' ); ?>
-
-
+<?php echo $this->translate( 'client/html', 'Order details' ); ?>:
 <?php foreach( $products as $product ) : ?>
 <?php	$price = $product->getPrice(); ?>
-<?php echo $this->translate( 'client/html', 'Article' ); ?>:
 
-	<?php echo $product->getName(); ?>
+<?php echo $product->getName(); ?>
 
 <?php	foreach( $product->getAttributes() as $attribute ) : ?>
-		<?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?>: <?php echo $attribute->getName(); ?>
+	<?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?>: <?php echo $attribute->getName(); ?>
 
 <?php	endforeach; ?>
-	<?php echo $this->translate( 'client/html', 'Quantity' ); ?>: <?php echo $product->getQuantity(); ?>
+<?php echo $this->translate( 'client/html', 'Quantity' ); ?>: <?php echo $product->getQuantity(); ?>
 
-	<?php echo $this->translate( 'client/html', 'Price' ); ?>: <?php printf( $priceFormat, $this->number( $price->getValue() ), $priceCurrency ); ?>
+<?php echo $this->translate( 'client/html', 'Price' ); ?>: <?php printf( $priceFormat, $this->number( $price->getValue() ), $priceCurrency ); ?>
 
-	<?php echo $this->translate( 'client/html', 'Sum' ); ?>: <?php printf( $priceFormat, $this->number( $price->getValue() * $product->getQuantity() ), $priceCurrency ); ?>
+<?php echo $this->translate( 'client/html', 'Sum' ); ?>: <?php printf( $priceFormat, $this->number( $price->getValue() * $product->getQuantity() ), $priceCurrency ); ?>
+
 <?php endforeach; ?>
 
 <?php if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
 
 <?php	echo $this->translate( 'client/html', 'Service fees' ); ?>: <?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?>
 
-<?php endif; ?>
 
+<?php endif; ?>
 <?php if( $paymentPriceService > 0 ) : ?>
 <?php echo $this->translate( 'client/html', 'Sub-total' ); ?>: <?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?>
 

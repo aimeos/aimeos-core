@@ -13,13 +13,14 @@ $salutations = array(
 
 ?>
 
+
 <?php echo $this->translate( 'client/html', 'Billing address' ); ?>:
 <?php
 	try
 	{
 		$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
 
-		echo str_replace( "\n\n", "\n", sprintf(
+		echo preg_replace( "/\n+/m", "\n", trim( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
 			/// address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
 			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language, country (%13$s),
@@ -55,10 +56,11 @@ $salutations = array(
 			$addr->getTelephone(),
 			$addr->getTelefax(),
 			$addr->getWebsite()
-		) );
+		) ) );
 	}
 	catch( Exception $e ) { ; }
 ?>
+
 
 <?php echo $this->translate( 'client/html', 'Delivery address' ); ?>:
 <?php
@@ -66,7 +68,7 @@ $salutations = array(
 	{
 		$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
 
-		echo str_replace( "\n\n", "\n", sprintf(
+		echo preg_replace( "/\n+/m", "\n", trim( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
 			/// address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
 			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language, country (%13$s),
@@ -102,7 +104,7 @@ $salutations = array(
 			$addr->getTelephone(),
 			$addr->getTelefax(),
 			$addr->getWebsite()
-		) );
+		) ) );
 	}
 	catch( Exception $e ) { ; }
 ?>
