@@ -25,6 +25,8 @@
 			{
 				$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
 				$value = $this->number( $priceItem->getValue() + $priceItem->getShipping() );
+				
+				/// Configurable product attribute name (%1$s) with price value (%2$s) and currency (%3$s)
 				printf( $this->translate( 'client/html', '%1$s ( +%2$s%3$s )' ), $attribute->getName(), $value, $currency );
 			}
 			else

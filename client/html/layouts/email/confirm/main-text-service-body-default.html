@@ -8,18 +8,14 @@
 ?>
 
 
-<?php
-	try
-	{
-		$service = $this->confirmOrderBaseItem->getService( 'payment' );
+<?php try { ?>
+<?php	$service = $this->confirmOrderBaseItem->getService( 'payment' ); ?>
+<?php	echo $this->translate( 'client/html', 'Payment' ); ?>: <?php echo $service->getName(); ?>
 
-		printf( $this->translate( 'client/html', "Payment: %1\$s\n" ), $service->getName() );
-		
-		foreach( $service->getAttributes() as $attribute )
-		{
-			if( $attribute->getType() !== '' )
-			{
-				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) );
+<?php	foreach( $service->getAttributes() as $attribute ) : ?>
+<?php		if( $attribute->getType() !== 'hidden' ) : ?>
+<?php
+				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) ); ?>
 
 				switch( $attribute->getValue() )
 				{
@@ -30,27 +26,22 @@
 					default:
 						$value = $attribute->getValue();
 				}
-
-				printf( "- %1\$s: %2\$s\n", $name, $value );
-			}
-		}
-	}
-	catch( Exception $e ) { ; }
 ?>
+- <?php echo $name; ?>: <?php echo $value; ?>
+ 
+<?php		endif; ?>
+<?php	endforeach; ?>
+<?php } catch( Exception $e ) { ; } ?>
 
 
+<?php try { ?>
+<?php	$service = $this->confirmOrderBaseItem->getService( 'delivery' ); ?>
+<?php	echo $this->translate( 'client/html', 'Delivery' ); ?>: <?php echo $service->getName(); ?>
+
+<?php	foreach( $service->getAttributes() as $attribute ) : ?>
+<?php		if( $attribute->getType() !== 'hidden' ) : ?>
 <?php
-	try
-	{
-		$service = $this->confirmOrderBaseItem->getService( 'delivery' );
-
-		printf( $this->translate( 'client/html', "Delivery: %1\$s\n" ), $service->getName() );
-		
-		foreach( $service->getAttributes() as $attribute )
-		{
-			if( $attribute->getType() !== '' )
-			{
-				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) );
+				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) ); ?>
 
 				switch( $attribute->getValue() )
 				{
@@ -61,13 +52,12 @@
 					default:
 						$value = $attribute->getValue();
 				}
-
-				printf( "- %1\$s: %2\$s\n", $name, $value );
-			}
-		}
-	}
-	catch( Exception $e ) { ; }
 ?>
+- <?php echo $name; ?>: <?php echo $value; ?>
+ 
+<?php		endif; ?>
+<?php	endforeach; ?>
+<?php } catch( Exception $e ) { ; } ?>
 
 
 <?php echo $this->get( 'serviceBody' ); ?>

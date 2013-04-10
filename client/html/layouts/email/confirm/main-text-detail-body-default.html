@@ -53,91 +53,56 @@ catch( Exception $e )
 	$paymentPriceService = '0.00';
 }
 
+/// Price format with price value (%1$s) and currency (%2$s)
 $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
-$attrFormat = $this->translate( 'client/html', "	- %1\$s: %2\$s\n" );
 
-
-// order details output
-
-echo $this->translate( 'client/html', "\n\nOrder details:\n" );
-
-
-// order products
-
-foreach( $products as $product )
-{
-	$price = $product->getPrice();
-
-	$attrText = '';
-	foreach( $product->getAttributes() as $attribute ) {
-		$attrText .= sprintf( $attrFormat, $this->translate( 'client/html/code', $attribute->getCode() ), $attribute->getName() );
-	} 
-
-	echo str_replace( "\n\n", "\n", sprintf(
-		$this->translate( 'client/html', '
-Article:
-%1$s
-%2$s
-Quantity: %3$d
-Price: %4$s
-Sum: %5$s
-'
-		),
-		$product->getName(),
-		$attrText,
-		$product->getQuantity(),
-		sprintf( $priceFormat, $this->number( $price->getValue() ), $priceCurrency ),
-		sprintf( $priceFormat, $this->number( $price->getValue() * $product->getQuantity() ), $priceCurrency )
-	) );
-}
-
-if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) {
-	printf(
-		$this->translate( 'client/html', '
-Service fees: %1\$s
-'
-		),
-		sprintf( $priceFormat, $this->number( $serviceValue ), $priceCurrency )
-	);
-}
-
-
-// order details summary
-
-if( $paymentPriceService > 0 )
-{
-	printf(
-		$this->translate( 'client/html', '
-Sub-total: %1$s
-+ Shipping: %2$s
-+ Payment costs: %3$s
-Total: %4$s
-Included rebates: %5$s
-'
-		),
-		sprintf( $priceFormat, $this->number( $priceValue ), $priceCurrency ),
-		sprintf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ),
-		sprintf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ),
-		sprintf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ),
-		sprintf( $priceFormat, $this->number( $priceRebate ), $priceCurrency )
-	);
-}
-else
-{
-	printf(
-		$this->translate( 'client/html', '
-Sub-total: %1$s
-+ Shipping: %2$s
-Total: %3$s
-Included rebates: %4$s
-'
-		),
-		sprintf( $priceFormat, $this->number( $priceValue ), $priceCurrency ),
-		sprintf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ),
-		sprintf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ),
-		sprintf( $priceFormat, $this->number( $priceRebate ), $priceCurrency )
-	);
-}
-
-echo $this->get( 'detailBody' );
 ?>
+
+
+<?php echo echo $this->translate( 'client/html', 'Order details:' ); ?>
+
+
+<?php foreach( $products as $product ) : ?>
+<?php	$price = $product->getPrice(); ?>
+<?php echo $this->translate( 'client/html', 'Article' ); ?>:
+
+	<?php echo $product->getName(); ?>
+
+<?php	foreach( $product->getAttributes() as $attribute ) : ?>
+		<?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?>: <?php echo $attribute->getName(); ?>
+
+<?php	endforeach; ?>
+	<?php echo $this->translate( 'client/html', 'Quantity' ); ?>: <?php echo $product->getQuantity(); ?>
+
+	<?php echo $this->translate( 'client/html', 'Price' ); ?>: <?php printf( $priceFormat, $this->number( $price->getValue() ), $priceCurrency ); ?>
+
+	<?php echo $this->translate( 'client/html', 'Sum' ); ?>: <?php printf( $priceFormat, $this->number( $price->getValue() * $product->getQuantity() ), $priceCurrency ); ?>
+<?php endforeach; ?>
+
+<?php if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
+
+<?php	echo $this->translate( 'client/html', 'Service fees' ); ?>: <?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?>
+
+<?php endif; ?>
+
+<?php if( $paymentPriceService > 0 ) : ?>
+<?php echo $this->translate( 'client/html', 'Sub-total' ); ?>: <?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?>
+
+<?php echo $this->translate( 'client/html', '+ Shipping' ); ?>: <?php printf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ); ?>
+
+<?php echo $this->translate( 'client/html', '+ Payment costs' ); ?>: <?php printf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ); ?>
+
+<?php echo $this->translate( 'client/html', 'Total' ); ?>: <?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?>
+
+<?php echo $this->translate( 'client/html', 'Included rebates' ); ?>: <?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?>
+<?php else : ?>
+<?php echo $this->translate( 'client/html', 'Sub-total' ); ?>: <?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?>
+
+<?php echo $this->translate( 'client/html', '+ Shipping' ); ?>: <?php printf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ); ?>
+
+<?php echo $this->translate( 'client/html', 'Total' ); ?>: <?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?>
+
+<?php echo $this->translate( 'client/html', 'Included rebates' ); ?>: <?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?>
+<?php endif; ?>
+
+<?php echo $this->get( 'detailBody' ); ?>
