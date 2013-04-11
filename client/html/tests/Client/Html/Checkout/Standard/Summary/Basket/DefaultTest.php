@@ -57,6 +57,12 @@ class Client_Html_Checkout_Standard_Summary_Basket_DefaultTest extends MW_Unitte
 
 	public function testGetHeader()
 	{
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+
+		$view = TestHelper::getView();
+		$view->standardBasket = $controller->get();
+		$this->_object->setView( $view );
+
 		$this->_object->getHeader();
 	}
 
