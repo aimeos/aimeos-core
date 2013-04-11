@@ -11,7 +11,6 @@ if( isset( $this->confirmOrderBaseItem ) )
 	$priceValue = $price->getValue();
 	$priceService = $price->getShipping();
 	$priceRebate = $price->getRebate();
-	$priceTaxrate = $price->getTaxrate();
 	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
 }
 else
@@ -19,7 +18,6 @@ else
 	$priceValue = '0.00';
 	$priceService = '0.00';
 	$priceRebate = '0.00';
-	$priceTaxrate = '0.00';
 	$priceCurrency = '';
 }
 
@@ -109,6 +107,13 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 					<td colspan="3"><?php echo $this->translate( 'client/html', 'Total' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?></td>
 				</tr>
+<?php foreach( $this->get( 'mainTaxRates', array() ) as $taxRate => $priceValue ) : ?>
+				<tr class="tax">
+					<td colspan="3"><?php printf( $this->translate( 'client/html', 'Includes %1$s%% VAT' ), $this->number( $taxRate ) ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ); ?></td>
+					<td></td>
+				</tr>
+<?php endforeach; ?>
 				<tr class="rebate">
 					<td colspan="3"><?php echo $this->translate( 'client/html', 'Included rebates' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?></td>

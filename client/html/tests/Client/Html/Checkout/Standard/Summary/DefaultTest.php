@@ -56,8 +56,11 @@ class Client_Html_Checkout_Standard_Summary_DefaultTest extends MW_Unittest_Test
 
 	public function testGetHeader()
 	{
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'summary';
+		$view->standardBasket = $controller->get();
 		$this->_object->setView( $view );
 
 		$this->_object->getHeader();
@@ -73,8 +76,11 @@ class Client_Html_Checkout_Standard_Summary_DefaultTest extends MW_Unittest_Test
 
 	public function testGetBody()
 	{
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'summary';
+		$view->standardBasket = $controller->get();
 		$view->standardSteps = array( 'before', 'summary' );
 		$this->_object->setView( $view );
 

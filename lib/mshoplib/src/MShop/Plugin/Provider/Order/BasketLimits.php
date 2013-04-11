@@ -95,9 +95,8 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 
 		if( count( $failures ) > 0 )
 		{
-			$code = array( 'basket' => $failures );
-			throw new MShop_Plugin_Provider_Exception(
-					sprintf( 'Free shipping not possible, minimum value or minimum amount of products in basket not reached' ), -1, null, $code );
+			$msg = sprintf( 'Minimum value or minimum amount of products in basket is not reached' );
+			throw new MShop_Plugin_Provider_Exception( $msg, -1, null, array( 'basket' => $failures ) );
 		}
 
 		return true;
