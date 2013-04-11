@@ -56,6 +56,10 @@ class Client_Html_Email_Confirm_Main_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
+		$view = $this->_getView();
+		$view->confirmBoundary = 'confirmboundary';
+		$this->_object->setView( $view );
+
 		$output = $this->_object->getHeader();
 	}
 
@@ -68,6 +72,7 @@ class Client_Html_Email_Confirm_Main_DefaultTest extends MW_Unittest_Testcase
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( "\r\n--confirmboundary", $output );
+echo $output;
 	}
 
 

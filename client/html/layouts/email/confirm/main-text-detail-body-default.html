@@ -17,7 +17,6 @@ try
 	$priceValue = $price->getValue();
 	$priceService = $price->getShipping();
 	$priceRebate = $price->getRebate();
-	$priceTaxrate = $price->getTaxrate();
 	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
 }
 catch( Exception $e )
@@ -25,7 +24,6 @@ catch( Exception $e )
 	$priceValue = '0.00';
 	$priceService = '0.00';
 	$priceRebate = '0.00';
-	$priceTaxrate = '0.00';
 	$priceCurrency = '';
 }
 
@@ -98,6 +96,10 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 <?php echo $this->translate( 'client/html', '+ Shipping' ); ?>: <?php printf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ); ?>
 
 <?php echo $this->translate( 'client/html', 'Total' ); ?>: <?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?>
+<?php foreach( $this->get( 'mainTaxRates', array() ) as $taxRate => $priceValue ) : ?>
+
+<?php printf( $this->translate( 'client/html', 'Includes %1$s%% VAT' ), $this->number( $taxRate ) ); ?>: <?php printf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ); ?>
+<?php endforeach; ?>
 
 <?php echo $this->translate( 'client/html', 'Included rebates' ); ?>: <?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?>
 <?php endif; ?>
