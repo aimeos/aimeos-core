@@ -8,6 +8,8 @@
 /.travis.yml
 /dev
 ./dev
+/.tx
+./.tx
 /ext/*
 ./ext/*
 /ext/.gitignore

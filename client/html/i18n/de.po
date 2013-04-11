@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-11 14:05+0200\n"
-"PO-Revision-Date: 2013-04-11 12:22+0000\n"
+"PO-Revision-Date: 2013-04-11 16:08+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgid ""
 "%15$s\n"
 "%16$s\n"
 "%17$s\n"
-msgstr "%1$s⏎\n%2$s %3$s %4$s %5$s⏎\n%6$s %7$s⏎\n%8$s⏎\n%9$s %10$s⏎\n%11$s⏎\n%12$s⏎\n%13$s⏎\n%14$s⏎\n%15$s⏎\n%16$s⏎\n%17$s⏎\n"
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
 
 #. / Configurable product attribute name (%1$s) with price value (%2$s) and
 #. currency (%3$s)
