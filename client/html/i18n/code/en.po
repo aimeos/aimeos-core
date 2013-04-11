@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core 2013-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 15:38+0100\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2013-01-18 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language: English\n"
@@ -15,24 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-
-# Attribute
-
-msgid "size"
-msgstr "Size"
+msgid "color"
+msgstr "Color"
 
 msgid "length"
 msgstr "Length"
 
-msgid "width"
-msgstr "Width"
-
-msgid "color"
-msgstr "Color"
-
-
 # Payment status values
-
 msgid "pay:-1"
 msgstr "unfinished"
 
@@ -57,10 +46,24 @@ msgstr "authorized"
 msgid "pay:6"
 msgstr "received"
 
+msgid "payment.directdebit.accountno"
+msgstr "Account number"
 
+# Direct debit service provider
+msgid "payment.directdebit.accountowner"
+msgstr "Account owner"
+
+msgid "payment.directdebit.bankcode"
+msgstr "Bank code"
+
+msgid "payment.directdebit.bankname"
+msgstr "Bank name"
+
+# Attribute
+msgid "size"
+msgstr "Size"
 
 # Delivery status values
-
 msgid "stat:-1"
 msgstr "unfinished"
 
@@ -88,18 +91,5 @@ msgstr "refused"
 msgid "stat:7"
 msgstr "returned"
 
-
-
-# Direct debit service provider
-
-msgid "payment.directdebit.accountowner"
-msgstr "Account owner"
-
-msgid "payment.directdebit.accountno"
-msgstr "Account number"
-
-msgid "payment.directdebit.bankcode"
-msgstr "Bank code"
-
-msgid "payment.directdebit.bankname"
-msgstr "Bank name"
+msgid "width"
+msgstr "Width"
