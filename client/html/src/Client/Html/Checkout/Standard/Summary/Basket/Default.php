@@ -30,7 +30,7 @@ class Client_Html_Checkout_Standard_Summary_Basket_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -52,7 +52,7 @@ class Client_Html_Checkout_Standard_Summary_Basket_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -100,5 +100,65 @@ class Client_Html_Checkout_Standard_Summary_Basket_Default
 	public function process()
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		if( !isset( $this->_cache ) )
+		{
+			$prices = array();
+			$taxrates = array();
+			$basket = $view->standardBasket;
+
+
+			foreach( $basket->getProducts() as $product )
+			{
+				$price = $product->getPrice();
+
+				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+					$taxrates[ $price->getTaxrate() ] += ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+				} else {
+					$taxrates[ $price->getTaxrate() ] = ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+				}
+			}
+
+			try
+			{
+				$price = $basket->getService( 'delivery' )->getPrice();
+
+				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+					$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+				} else {
+					$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+				}
+			}
+			catch( Exception $e ) { ; }
+
+			try
+			{
+				$price = $basket->getService( 'payment' )->getPrice();
+
+				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+					$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+				} else {
+					$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+				}
+			}
+			catch( Exception $e ) { ; }
+
+
+			$view->basketTaxRates = $taxrates;
+
+			$this->_cache = $view;
+		}
+
+		return $this->_cache;
 	}
 }

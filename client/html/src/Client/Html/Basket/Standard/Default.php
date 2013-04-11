@@ -266,7 +266,49 @@ class Client_Html_Basket_Standard_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$view->standardBasket = $this->_controller->get();
+			$prices = array();
+			$taxrates = array();
+			$basket = $this->_controller->get();
+
+
+			foreach( $basket->getProducts() as $product )
+			{
+				$price = $product->getPrice();
+
+				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+					$taxrates[ $price->getTaxrate() ] += ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+				} else {
+					$taxrates[ $price->getTaxrate() ] = ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+				}
+			}
+
+			try
+			{
+				$price = $basket->getService( 'delivery' )->getPrice();
+
+				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+					$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+				} else {
+					$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+				}
+			}
+			catch( Exception $e ) { ; }
+
+			try
+			{
+				$price = $basket->getService( 'payment' )->getPrice();
+
+				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+					$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+				} else {
+					$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+				}
+			}
+			catch( Exception $e ) { ; }
+
+
+			$view->standardBasket = $basket;
+			$view->standardTaxRates = $taxrates;
 
 			$this->_cache = $view;
 		}
