@@ -27,7 +27,7 @@ msgstr ""
 msgid "AED"
 msgstr "د.إ"
 
-# Afs
+# Afghan afghani
 # reference: https://en.wikipedia.org/wiki/Afghan_afghani
 # code: AFN
 # sign: فغانۍ
@@ -53,7 +53,7 @@ msgstr "L"
 # sequence: n/a
 # name: dram? unclear, code was chosen for currency sign
 msgid "AMD"
-msgstr "AMD"
+msgstr ""
 
 # Netherlands Antillean gulden
 # reference: https://en.wikipedia.org/wiki/Netherlands_Antillean_guilder
@@ -267,9 +267,9 @@ msgstr "FC"
 # code: CHF
 # sign: Fr, SFr
 # symbol: CHF
-# sequence: n/a
+# sequence: <amount><sign>
 msgid "CHF"
-msgstr "CHF"
+msgstr "Fr"
 
 # Chilean Peso
 # reference: https://en.wikipedia.org/wiki/Chilean_peso
@@ -611,7 +611,7 @@ msgstr "$"
 # symbol: n/a
 # sequence: n/a
 msgid "JOD"
-msgstr "JOD"
+msgstr ""
 
 # Japanese yen
 # reference: https://en.wikipedia.org/wiki/Japanese_yen
@@ -702,7 +702,7 @@ msgstr "$"
 # symbol: ₸ (U+20B8)
 # sequence: n/a
 msgid "KZT"
-msgstr "KZT"
+msgstr "₸"
 
 # Lao kip
 # reference: https://en.wikipedia.org/wiki/Lao_kip
@@ -1109,7 +1109,7 @@ msgstr "SR"
 # symbol: n/a
 # sequence: n/a
 msgid "SDG"
-msgstr "SDG"
+msgstr ""
 
 # Swedish krona
 # reference: https://en.wikipedia.org/wiki/Swedish_krona
@@ -1228,7 +1228,7 @@ msgstr "m"
 msgid "TND"
 msgstr "د.ت"
 
-# Tongan pa\'anga
+# Tongan pa'anga
 # reference: https://en.wikipedia.org/wiki/Tongan_pa%CA%BBanga
 # code: TOP
 # sign: n/a
@@ -1272,7 +1272,7 @@ msgstr "$"
 # symbol: x/y (x = above one shilingi, y = senti, =/- represents zero for x or y)
 # sequence: n/a
 msgid "TZS"
-msgstr "TZS"
+msgstr ""
 
 # Ukrainian hryvnia
 # reference: https://en.wikipedia.org/wiki/Ukrainian_hryvnia
@@ -1324,10 +1324,10 @@ msgstr "som"
 # reference: https://en.wikipedia.org/wiki/Venezuelan_bol%C3%ADvar
 # code: VEF
 # sign: n/a
-# symbol: Bs.F., Bs.
+# symbol: Bs., Bs.F.
 # sequence: <sign><amount>
 msgid "VEF"
-msgstr "Bs.F."
+msgstr "Bs."
 
 # Vietnamese dong
 # reference: https://en.wikipedia.org/wiki/Vietnamese_dong
@@ -1399,7 +1399,7 @@ msgstr "F"
 # symbol: n/a
 # sequence: n/a
 msgid "YER"
-msgstr "YER"
+msgstr ""
 
 # South African rand
 # reference: https://en.wikipedia.org/wiki/South_African_rand
@@ -1427,4 +1427,3 @@ msgstr "ZK"
 # sequence: <sign><amount>
 msgid "ZWL"
 msgstr "$"
-
