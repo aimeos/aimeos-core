@@ -11,7 +11,6 @@ return array(
 	'locale/language' => array(
 		'aa' => array( 'id' => 'aa', 'label' => 'Afar', 'status' => 0 ),
 		'ab' => array( 'id' => 'ab', 'label' => 'Abkhazian', 'status' => 0 ),
-		'ae' => array( 'id' => 'ae', 'label' => 'Avestan', 'status' => 0 ),
 		'af' => array( 'id' => 'af', 'label' => 'Afrikaans', 'status' => 0 ),
 		'ak' => array( 'id' => 'ak', 'label' => 'Akan', 'status' => 0 ),
 		'am' => array( 'id' => 'am', 'label' => 'Amharic', 'status' => 0 ),
@@ -100,7 +99,6 @@ return array(
 		'kv' => array( 'id' => 'kv', 'label' => 'Komi', 'status' => 0 ),
 		'kw' => array( 'id' => 'kw', 'label' => 'Cornish', 'status' => 0 ),
 		'ky' => array( 'id' => 'ky', 'label' => 'Kirghiz', 'status' => 0 ),
-		'la' => array( 'id' => 'la', 'label' => 'Latin', 'status' => 0 ),
 		'lb' => array( 'id' => 'lb', 'label' => 'Luxembourgish', 'status' => 0 ),
 		'lg' => array( 'id' => 'lg', 'label' => 'Luganda', 'status' => 0 ),
 		'li' => array( 'id' => 'li', 'label' => 'Limburgish', 'status' => 0 ),
