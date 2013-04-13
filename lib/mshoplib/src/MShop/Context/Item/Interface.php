@@ -128,4 +128,18 @@ interface MShop_Context_Item_Interface
 	 * @return string Account name of the user/editor
 	 */
 	public function getEditor();
+
+	/**
+	 * Sets the user ID of the logged in user.
+	 *
+	 * @param string $userid User ID of the logged in user
+	 */
+	public function setUserId( $userid );
+
+	/**
+	 * Returns the user ID of the logged in user.
+	 *
+	 * @return string User ID of the logged in user
+	 */
+	public function getUserId();
 }
