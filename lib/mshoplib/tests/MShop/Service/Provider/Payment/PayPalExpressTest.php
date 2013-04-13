@@ -88,9 +88,14 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	 */
 	protected function tearDown()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
-		$orderManager->saveItem($this->_order);
+		$iface = 'MShop_Order_Item_Interface';
+
+		if( $this->_order instanceof $iface )
+		{
+			$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+			$this->_order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
+			$orderManager->saveItem($this->_order);
+		}
 
 		unset( $this->_object );
 		unset( $this->_serviceItem );
