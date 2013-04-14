@@ -525,26 +525,31 @@
 /* Basket */
  .basket-standard,
 .checkout-standard,
-.checkout-confirm {
+.checkout-confirm,
+.account-history {
 	min-width: 240px;
 	max-width: 920px;
 	margin: 0 auto;
 }
 
-.basket-standard .error-list {
+.basket-standard .error-list,
+.account-history .error-list {
 	margin: 0px 0px 20px 0px;
 }
  
 .basket-standard .note,
 .checkout-standard .note,
-.checkout-confirm .note {
+.checkout-confirm .note,
+.account-history .note {
 	font-weight: bold;
 }
 
 .checkout-confirm-basic,
 .checkout-standard-summary-service,
 .checkout-standard-summary-option,
-.checkout-standard-summary-basket {
+.checkout-standard-summary-basket,
+.account-history-detail-service,
+.account-history-detail-basket {
 	padding: 0px 10px 10px 10px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -566,41 +571,40 @@
 	margin: 0px 0px 0px 0px;
 }
 
-.basket-standard-main .details img {
-	display: none;
-}
-
-.checkout-standard-summary-basket .basket .details img {
-	display: none;
-}
-
-.checkout-standard-summary-basket .basket {
+.checkout-standard-summary-basket .basket,
+.account-history-detail-basket .basket {
 	margin-top: 0;
 }
 .checkout-standard-summary-basket table,
-.basket-standard-main table {
+.basket-standard-main table,
+.account-history-detail-basket table {
 	border-collapse: collapse;
 	width: 100%;
 }
 
 .checkout-standard-summary-basket tbody tr,
-.basket-standard-main tbody tr {
+.basket-standard-main tbody tr,
+.account-history-detail-basket tbody tr {
 	border-bottom: 1px solid #689DB9;
 }
+
 .checkout-standard-summary-basket thead,
-.basket-standard-main thead {
+.basket-standard-main thead,
+.account-history-detail-basket thead {
 	font-weight: bold;
 	background-color: #F2F7FA;
 }
 
 .checkout-standard-summary-basket thead tr,
-.basket-standard-main thead tr {
+.basket-standard-main thead tr,
+.account-history-detail-basket thead tr {
 	border-bottom: 1px solid #689DB9;
 	color: #004266;
 }
 
 .checkout-standard-summary-basket tr.total,
-.basket-standard-main tr.total {
+.basket-standard-main tr.total,
+.account-history-detail-basket tr.total {
 	border-top: 1px solid #689DB9;
 	color: #004266;
 	background-color: #F2F7FA
@@ -608,7 +612,9 @@
 .checkout-standard-summary-basket th,
 .checkout-standard-summary-basket td,
 .basket-standard-main th,
-.basket-standard-main td {
+.basket-standard-main td,
+.account-history-detail-basket th,
+.account-history-detail-basket td {
 	padding: 5px;
 	vertical-align: top;
 }
@@ -616,12 +622,15 @@
 .checkout-standard-summary-basket th.quantity,
 .checkout-standard-summary-basket th.action,
 .basket-standard-main th.quantity,
-.basket-standard-main th.action {
+.basket-standard-main th.action,
+.account-history-detail-basket th.quantity,
+.account-history-detail-basket th.action {
 	width: 10%;
 }
 
 .checkout-standard-summary-basket th.price,
-.basket-standard-main th.price {
+.basket-standard-main th.price,
+.account-history-detail-basket th.price {
 	width: 20%;
 }
 
@@ -640,7 +649,15 @@
 .basket-standard-main tr.rebate,
 .basket-standard-main tr.tax,
 .basket-standard-main td.unitprice,
-.basket-standard-main td.price {
+.basket-standard-main td.price,
+.account-history-detail-basket tr.subtotal,
+.account-history-detail-basket tr.delivery,
+.account-history-detail-basket tr.payment,
+.account-history-detail-basket tr.total,
+.account-history-detail-basket tr.rebate,
+.account-history-detail-basket tr.tax,
+.account-history-detail-basket td.unitprice,
+.account-history-detail-basket td.price {
 	text-align: right;
 	white-space: nowrap;
 }
@@ -648,13 +665,16 @@
 .checkout-standard-summary-basket tr.delivery td:first-child:after,
 .checkout-standard-summary-basket tr.payment td:first-child:after,
 .basket-standard-main tr.delivery td:first-child:after,
-.basket-standard-main tr.payment td:first-child:after {
+.basket-standard-main tr.payment td:first-child:after,
+.account-history-detail-basket tr.delivery td:first-child:after,
+.account-history-detail-basket tr.payment td:first-child:after {
 	content: " +";
 }
 
 .checkout-standard-summary-basket td.quantity,
 .basket-standard-main td.quantity,
-.basket-standard-main td.action {
+.basket-standard-main td.action,
+.account-history-detail-basket td.quantity {
 	text-align: center;
 	white-space: nowrap;
 }
@@ -671,7 +691,8 @@
 }
 
 .checkout-standard-summary-basket tfoot,
-.basket-standard-main tfoot {
+.basket-standard-main tfoot,
+.account-history-detail-basket tfoot {
 	vertical-align: bottom;
 	font-weight: bold;
 }
@@ -679,7 +700,9 @@
 .checkout-standard-summary-basket tr.rebate,
 .checkout-standard-summary-basket tr.tax,
 .basket-standard-main tr.rebate,
-.basket-standard-main tr.tax {
+.basket-standard-main tr.tax,
+.account-history-detail-basket tr.rebate,
+.account-history-detail-basket tr.tax {
 	font-weight: normal;
 }
 
@@ -951,15 +974,19 @@
 }
 
 /* Checkout summary */
-.checkout-standard-summary {
+.checkout-standard-summary,
+.account-history-detail {
 	padding: 0px 0px 0px 17px;
 }
 
-.checkout-standard-summary  h3{
+.checkout-standard-summary h3,
+.account-history-detail h3 {
+	display: inline-block;
 	font-size: 1em;
 }
 
-.checkout-standard-summary a:hover {
+.checkout-standard-summary a:hover,
+.account-history-detail a:hover {
 	text-decoration: underline;
 }
 
@@ -967,16 +994,14 @@
 	padding: 0px 0px 10px 0px;
 }
 
-.checkout-standard-summary h3 {
-	display: inline-block;
-}
-
 .checkout-standard-summary .button-group a.standardbutton{
 	margin: 0px 10px 0px 0px;
 }
 
 .checkout-standard-summary .item-address,
-.checkout-standard-summary .item-service {
+.checkout-standard-summary .item-service,
+.account-history-detail .item-address,
+.account-history-detail .item-service {
 	display: inline-block;
 	vertical-align: top;
 	max-width: 458px;
@@ -984,44 +1009,52 @@
 	width: 50%;
 }
 
-.checkout-standard-summary .item-service h4 {
+.checkout-standard-summary .item-service h4,
+.account-history-detail .item-service h4 {
 	margin: 0 10px;
 	margin-bottom: 10px;
 	padding: 0 10px;
 }
 
-.checkout-standard-summary .item-service li {
+.checkout-standard-summary .item-service li,
+.account-history-detail .item-service h4 {
 	vertical-align: top;
 	padding-top: 5px;
 }
 
-.checkout-standard-summary .item-address .content {
+.checkout-standard-summary .item-address .content,
+.account-history-detail .item-address .content {
 	margin: 10px 10px 0px 10px;
 }
 
-.checkout-standard-summary .item-service .name {
+.checkout-standard-summary .item-service .name,
+.account-history-detail .item-service .name {
 	display: inline-block;
 	vertical-align: top;
 	color: #004266;
 	width: 198px;
 }
 
-.checkout-standard-summary .item-service .name:after {
+.checkout-standard-summary .item-service .name:after,
+.account-history-detail .item-service .name:after {
 	content: ":";
 }
 
-.checkout-standard-summary .item-service .value {
+.checkout-standard-summary .item-service .value,
+.account-history-detail .item-service .value {
 	display: inline-block;
 	vertical-align: top;
 	width: 198px;
 }
 
-.checkout-standard-summary .item-service .item-icons {
+.checkout-standard-summary .item-service .item-icons,
+.account-history-detail .item-service .item-icons {
 	float: right;
 	margin: 0 20px 10px 20px;
 }
 
-.checkout-standard-summary .item-service .attr-list {
+.checkout-standard-summary .item-service .attr-list,
+.account-history-detail .item-service .attr-list {
 	list-style: none;
 	margin: 0 10px;
 	padding: 10px;
@@ -1034,7 +1067,8 @@
 }
 
 /* Checkout summary address */
-.checkout-standard-summary-address {
+.checkout-standard-summary-address,
+.account-history-detail-address {
 	padding: 0px 10px 10px 10px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -1043,18 +1077,21 @@
 	margin: 0px 0px 8px 0px;
 }
 
-.checkout-standard-summary-address h2 {
+.checkout-standard-summary-address h2,
+.account-history-detail-address h2 {
 	display: none;
 }
 
-.checkout-standard-summary-address .payment .header {
+.checkout-standard-summary-address .payment .header,
+.account-history-detail-address .payment .header {
 	background-color: #F2F7FA;
 	border-bottom: 1px solid #689DB9;
 	margin: 0px 10px 0px 0px;
 	padding: 5px 10px 5px 10px;
 }
 
-.checkout-standard-summary-address .delivery .header {
+.checkout-standard-summary-address .delivery .header,
+.account-history-detail-address .delivery .header {
 	background-color: #F2F7FA;
 	border-bottom: 1px solid #689DB9;
 	padding: 5px 10px 5px 10px;
@@ -1062,32 +1099,38 @@
 
 
 /* Checkout summary service payment */
-.checkout-standard-summary-service .item-service .header {
+.checkout-standard-summary-service .item-service .header,
+.account-history-detail-service .item-service .header {
 	padding: 0px 10px 0px 0px;
 	border-bottom: 1px solid #689DB9;
 }
-.checkout-standard-summary-service h2 {
+.checkout-standard-summary-service h2,
+.account-history-detail-service h2 {
 	display: none;
 }
 
-.checkout-standard-summary-service .payment h4 {
+.checkout-standard-summary-service .payment h4,
+.account-history-detail-service .payment h4 {
 	padding: 10px;
 	margin: 0px;
 }
 
-.checkout-standard-summary-service .delivery h4 {
+.checkout-standard-summary-service .delivery h4,
+.account-history-detail-service .delivery h4 {
 	padding: 10px;
 	margin: 0px;
 }
 
-.checkout-standard-summary-service .payment .header {
+.checkout-standard-summary-service .payment .header,
+.account-history-detail-service .payment .header {
 	background-color: #F2F7FA;
 	border-bottom: 1px solid #689DB9;
 	margin: 0px 10px 0px 0px;
 	padding: 5px 10px 5px 10px;
 }
 
-.checkout-standard-summary-service .delivery .header {
+.checkout-standard-summary-service .delivery .header,
+.account-history-detail-service .delivery .header {
 	background-color: #F2F7FA;
 	border-bottom: 1px solid #689DB9;
 	padding: 5px 10px 5px 10px;
@@ -1128,12 +1171,14 @@
 }
 
 /* Checkout summary basket */
-.checkout-standard-summary-basket h2 {
+.checkout-standard-summary-basket h2,
+.account-history-detail-basket h2 {
 	margin: 5px 0px 5px 0px;
 	font-size: 1em;
 }
 
-.checkout-standard-summary-basket.basket {
+.checkout-standard-summary-basket .basket,
+.account-history-detail-basket .basket {
 	margin: 0px;
 }
 
@@ -1172,6 +1217,39 @@
 .checkout-confirm-basic .attr-list .name:after {
 	content: ": ";
 }
+
+/* Order history */
+.account-history-list .history-item {
+	display: inline-block;
+	padding: 5px;
+	margin: 5px;
+	border: solid 1px #689DB9;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.account-history-list .attr-item {
+	display: inline-block;
+	margin: 5px;
+}
+
+.account-history-list .attr-item .name,
+.account-history-list .attr-item .value {
+	display: inline-block;
+	vertical-align: top;
+	width: 218px;
+}
+
+.account-history-list .attr-item .name {
+	font-weight: bold;
+}
+
+.account-history-list .attr-item .name:after {
+	content: ": ";
+}
+
+
 
 @media only screen and (max-width: 630px) and (orientation: portrait) {
 	.catalog-detail-image {
@@ -1215,7 +1293,7 @@
 	}
 	.button-group a.standardbutton {
 		font-size: 0.95em;
-		 padding: 5px 4px 4px;
+		padding: 5px 4px 4px;
 	}
 }
 
@@ -1229,7 +1307,7 @@
 	.catalog-detail-image #prev-image {
 		display: none !important;
 	}
-		.catalog-detail-image #next-image {
+	.catalog-detail-image #next-image {
 		display: none !important;
 	}
 }

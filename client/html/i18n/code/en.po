@@ -15,81 +15,114 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. Product attribute
 msgid "color"
 msgstr "Color"
 
+#. Product attribute
 msgid "length"
 msgstr "Length"
 
-# Payment status values
+#. Order type value
+msgid "order:phone"
+msgstr "telephone"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "repeated"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Payment status value
 msgid "pay:-1"
 msgstr "unfinished"
 
+#. Payment status value
 msgid "pay:0"
 msgstr "deleted"
 
+#. Payment status value
 msgid "pay:1"
 msgstr "canceled"
 
+#. Payment status value
 msgid "pay:2"
 msgstr "refused"
 
+#. Payment status value
 msgid "pay:3"
 msgstr "refunded"
 
+#. Payment status value
 msgid "pay:4"
 msgstr "pending"
 
+#. Payment status value
 msgid "pay:5"
 msgstr "authorized"
 
+#. Payment status value
 msgid "pay:6"
 msgstr "received"
 
+#. Direct debit service provider
 msgid "payment.directdebit.accountno"
 msgstr "Account number"
 
-# Direct debit service provider
+#. Direct debit service provider
 msgid "payment.directdebit.accountowner"
 msgstr "Account owner"
 
+#. Direct debit service provider
 msgid "payment.directdebit.bankcode"
 msgstr "Bank code"
 
+#. Direct debit service provider
 msgid "payment.directdebit.bankname"
 msgstr "Bank name"
 
-# Attribute
+#. Product attribute
 msgid "size"
 msgstr "Size"
 
-# Delivery status values
+#. Delivery status value
 msgid "stat:-1"
 msgstr "unfinished"
 
+#. Delivery status value
 msgid "stat:0"
 msgstr "deleted"
 
+#. Delivery status value
 msgid "stat:1"
 msgstr "pending"
 
+#. Delivery status value
 msgid "stat:2"
 msgstr "in progress"
 
+#. Delivery status value
 msgid "stat:3"
 msgstr "dispatched"
 
+#. Delivery status value
 msgid "stat:4"
 msgstr "delivered"
 
+#. Delivery status value
 msgid "stat:5"
 msgstr "lost"
 
+#. Delivery status value
 msgid "stat:6"
 msgstr "refused"
 
+#. Delivery status value
 msgid "stat:7"
 msgstr "returned"
 
+#. Product attribute
 msgid "width"
 msgstr "Width"

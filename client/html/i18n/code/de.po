@@ -2,6 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # 
+# 
 # Translators:
 # Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
 #  <n.sendetzky@metaways.de>, 2013.
@@ -10,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-04-09 09:37+0000\n"
+"PO-Revision-Date: 2013-04-13 21:00+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,81 +20,114 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-# Attribute
+#. Product attribute
 msgid "size"
 msgstr "Grösse"
 
+#. Product attribute
 msgid "length"
 msgstr "Länge"
 
+#. Product attribute
 msgid "width"
 msgstr "Weite"
 
+#. Product attribute
 msgid "color"
 msgstr "Farbe"
 
-# Payment status values
+#. Order type value
+msgid "order:repeat"
+msgstr "wiederholt"
+
+#. Order type value
+msgid "order:web"
+msgstr "Internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "Telefon"
+
+#. Payment status value
 msgid "pay:-1"
 msgstr "Offen"
 
+#. Payment status value
 msgid "pay:0"
 msgstr "Gelöscht"
 
+#. Payment status value
 msgid "pay:1"
 msgstr "Abgebrochen"
 
+#. Payment status value
 msgid "pay:2"
 msgstr "Abgelehnt"
 
+#. Payment status value
 msgid "pay:3"
 msgstr "Erstattet"
 
+#. Payment status value
 msgid "pay:4"
 msgstr "Wartend"
 
+#. Payment status value
 msgid "pay:5"
 msgstr "Authorisiert"
 
+#. Payment status value
 msgid "pay:6"
 msgstr "Erhalten"
 
-# Delivery status values
+#. Delivery status value
 msgid "stat:-1"
 msgstr "Offen"
 
+#. Delivery status value
 msgid "stat:0"
 msgstr "Gelöscht"
 
+#. Delivery status value
 msgid "stat:1"
 msgstr "Wartend"
 
+#. Delivery status value
 msgid "stat:2"
 msgstr "In Bearbeitung"
 
+#. Delivery status value
 msgid "stat:3"
 msgstr "Versandt"
 
+#. Delivery status value
 msgid "stat:4"
 msgstr "Ausgeliefert"
 
+#. Delivery status value
 msgid "stat:5"
 msgstr "Verloren"
 
+#. Delivery status value
 msgid "stat:6"
 msgstr "Annahme verweigert"
 
+#. Delivery status value
 msgid "stat:7"
 msgstr "Zurück gesendet"
 
-# Direct debit service provider
+#. Direct debit service provider
 msgid "payment.directdebit.accountowner"
 msgstr "Kontoinhaber"
 
+#. Direct debit service provider
 msgid "payment.directdebit.accountno"
 msgstr "Kontonummer"
 
+#. Direct debit service provider
 msgid "payment.directdebit.bankcode"
 msgstr "Bankleitzahl"
 
+#. Direct debit service provider
 msgid "payment.directdebit.bankname"
 msgstr "Name der Bank"

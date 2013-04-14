@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$accountTarget = $this->config( 'client/html/account/history/url/target' );
+$accountController = $this->config( 'client/html/account/history/url/controller', 'account' );
+$accountAction = $this->config( 'client/html/account/history/url/action', 'history' );
+
+?>
+<div class="account-history-detail">
+	<h1><?php echo $this->translate( 'client/html', 'Order details' ); ?></h1>
+<?php echo $this->get( 'detailBody' ); ?>
+</div>
