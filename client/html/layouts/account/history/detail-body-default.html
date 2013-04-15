@@ -11,6 +11,10 @@ $accountAction = $this->config( 'client/html/account/history/url/action', 'histo
 
 ?>
 <div class="account-history-detail">
-	<h1><?php echo $this->translate( 'client/html', 'Order details' ); ?></h1>
+	<a class="modify" href="<?php echo $this->url( $accountTarget, $accountController, $accountAction ); ?>"><?php echo $this->translate( 'client/html', 'Close' ); ?></a>
+	<h2><?php echo $this->translate( 'client/html', 'Order details' ); ?></h2>
 <?php echo $this->get( 'detailBody' ); ?>
+	<div class="button-group">
+		<a class="standardbutton" href="<?php echo $this->url( $accountTarget, $accountController, $accountAction ); ?>"><?php echo $this->translate( 'client/html', 'Close' ); ?></a>
+	</div>
 </div>

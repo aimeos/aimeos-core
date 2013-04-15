@@ -697,6 +697,12 @@
 	font-weight: bold;
 }
 
+.checkout-standard-summary-basket tfoot .delivery,
+.basket-standard-main tfoot .delivery,
+.account-history-detail-basket tfoot .delivery {
+	font-weight: normal;
+}
+
 .checkout-standard-summary-basket tr.rebate,
 .checkout-standard-summary-basket tr.tax,
 .basket-standard-main tr.rebate,
@@ -1173,7 +1179,7 @@
 /* Checkout summary basket */
 .checkout-standard-summary-basket h2,
 .account-history-detail-basket h2 {
-	margin: 5px 0px 5px 0px;
+	margin: 5px 10px;
 	font-size: 1em;
 }
 
@@ -1222,7 +1228,7 @@
 .account-history-list .history-item {
 	display: inline-block;
 	padding: 5px;
-	margin: 5px;
+	margin: 5px 0;
 	border: solid 1px #689DB9;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -1245,8 +1251,17 @@
 	font-weight: bold;
 }
 
-.account-history-list .attr-item .name:after {
+.account-history .attr-item .name:after {
 	content: ": ";
+}
+
+.account-history-detail h2 {
+	margin: 5px 10px;
+}
+
+.account-history-detail .modify {
+	float: right;
+	margin: 5px 10px;
 }
 
 

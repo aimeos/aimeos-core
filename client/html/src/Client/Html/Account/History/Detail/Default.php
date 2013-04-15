@@ -127,7 +127,7 @@ class Client_Html_Account_History_Detail_Default
 			$context = $this->_getContext();
 			$manager = MShop_Order_Manager_Factory::createManager( $context );
 
-			$orderId = $view->param( 'h-orderid', null );
+			$orderId = $view->param( 'h-order-id', null );
 
 			if( $orderId !== null )
 			{
