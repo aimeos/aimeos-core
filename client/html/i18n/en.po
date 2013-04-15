@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core 2013-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 16:24+0200\n"
+"POT-Creation-Date: 2013-04-14 19:15+0200\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language: English\n"
@@ -32,6 +32,8 @@ msgstr[1] ""
 #. / address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
 #. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language, country (%13$s),
 #. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s)
+#: layouts/account/history/detail-address-body-default.html:32
+#: layouts/account/history/detail-address-body-default.html:83
 #: layouts/email/confirm/main-html-address-body-default.html:32
 #: layouts/email/confirm/main-html-address-body-default.html:83
 #: layouts/email/confirm/main-text-address-body-default.html:28
@@ -62,6 +64,12 @@ msgstr ""
 msgid "%1$s ( +%2$s%3$s )"
 msgstr ""
 
+#: layouts/account/history/list-body-default.html:15
+#: layouts/account/history/list-body-default.html:28
+#, php-format
+msgid "%1$s at %2$s"
+msgstr ""
+
 #. / Percent format with value (%1$s) and % sign
 #: layouts/catalog/list/items-body-default.html:16
 #: layouts/catalog/detail/basket-body-default.html:16
@@ -70,6 +78,7 @@ msgid "%1$s%%"
 msgstr ""
 
 #. / Price format with price value (%1$s) and currency (%2$s)
+#: layouts/account/history/detail-basket-body-default.html:48
 #: layouts/catalog/list/items-body-default.html:14
 #: layouts/catalog/detail/basket-body-default.html:14
 #: layouts/basket/standard/main-body-default.html:67
@@ -114,6 +123,7 @@ msgstr ""
 msgid "Additional 2"
 msgstr ""
 
+#: layouts/account/history/detail-address-body-default.html:16
 #: layouts/email/confirm/main-html-address-body-default.html:16
 #: layouts/checkout/standard/summary-address-body-default.html:20
 msgid "Addresses"
@@ -148,6 +158,7 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:52
 #: layouts/basket/standard/body-default.html:17
 #: layouts/basket/mini/body-default.html:21
 #: layouts/checkout/standard/summary-basket-body-default.html:57
@@ -155,6 +166,7 @@ msgstr ""
 msgid "Basket"
 msgstr ""
 
+#: layouts/account/history/detail-address-body-default.html:19
 #: layouts/email/confirm/main-html-address-body-default.html:19
 #: layouts/email/confirm/main-text-address-body-default.html:17
 #: layouts/checkout/standard/summary-address-body-default.html:23
@@ -237,10 +249,12 @@ msgid "Dear Sir or Madam"
 msgstr ""
 
 #
+#: layouts/account/history/list-body-default.html:41
 #: layouts/email/confirm/main-text-service-body-default.html:38
 msgid "Delivery"
 msgstr "Delivery"
 
+#: layouts/account/history/detail-address-body-default.html:70
 #: layouts/email/confirm/main-html-address-body-default.html:70
 #: layouts/email/confirm/main-text-address-body-default.html:65
 #: layouts/checkout/standard/address-delivery-body-default.html:46
@@ -286,6 +300,7 @@ msgstr ""
 msgid "I accept the <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">privacy policy</a>"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:118
 #: layouts/basket/standard/main-body-default.html:169
 #: layouts/email/confirm/main-text-detail-body-default.html:92
 #: layouts/email/confirm/main-text-detail-body-default.html:104
@@ -294,6 +309,7 @@ msgstr ""
 msgid "Included rebates"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:112
 #: layouts/basket/standard/main-body-default.html:163
 #: layouts/email/confirm/main-text-detail-body-default.html:101
 #: layouts/email/confirm/main-html-detail-body-default.html:112
@@ -307,6 +323,7 @@ msgstr ""
 #: src/Client/Html/Email/Confirm/Factory.php:39
 #: src/Client/Html/Basket/Standard/Factory.php:40
 #: src/Client/Html/Basket/Mini/Factory.php:39
+#: src/Client/Html/Account/History/Factory.php:39
 #: src/Client/Html/Catalog/Filter/Factory.php:40
 #: src/Client/Html/Catalog/Stage/Factory.php:40
 #: src/Client/Html/Catalog/Detail/Factory.php:40
@@ -374,17 +391,32 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
+#: layouts/account/history/list-body-default.html:27
 #: layouts/checkout/confirm/basic-body-default.html:15
 msgid "Order ID"
 msgstr ""
 
+#: layouts/account/history/list-body-default.html:31
+msgid "Order channel"
+msgstr ""
+
+#: layouts/account/history/detail-body-default.html:14
 #: layouts/email/confirm/main-text-detail-body-default.html:59
 #: layouts/email/confirm/main-html-detail-body-default.html:52
 msgid "Order details"
 msgstr ""
 
+#: layouts/account/history/list-body-default.html:19
+msgid "Order history"
+msgstr ""
+
 #: layouts/checkout/standard/order-payment-body-default.html:26
 msgid "Order successful"
+msgstr ""
+
+#: src/Client/Html/Account/History/Detail/Default.php:146
+#, php-format
+msgid "Order with ID \"%1$s\" not found"
 msgstr ""
 
 #: layouts/catalog/list/pagination-body-default.html:40
@@ -392,11 +424,13 @@ msgstr ""
 msgid "Page %1$d of %2$d"
 msgstr ""
 
+#: layouts/account/history/list-body-default.html:36
 #: layouts/email/confirm/main-text-service-body-default.html:13
 #: layouts/checkout/standard/order-payment-body-default.html:12
 msgid "Payment"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:102
 #: layouts/basket/standard/main-body-default.html:151
 #: layouts/email/confirm/main-html-detail-body-default.html:102
 #: layouts/checkout/standard/summary-basket-body-default.html:119
@@ -428,6 +462,7 @@ msgstr ""
 msgid "Postal code"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:60
 #: layouts/catalog/list/pagination-body-default.html:34
 #: layouts/basket/standard/main-body-default.html:78
 #: layouts/email/confirm/main-text-detail-body-default.html:71
@@ -444,6 +479,7 @@ msgstr ""
 msgid "Proceed to payment"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:58
 #: layouts/basket/standard/main-body-default.html:77
 #: layouts/email/confirm/main-text-detail-body-default.html:69
 #: layouts/email/confirm/main-html-detail-body-default.html:58
@@ -480,6 +516,7 @@ msgstr ""
 msgid "Select salutation"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:83
 #: layouts/basket/standard/main-body-default.html:130
 #: layouts/email/confirm/main-text-detail-body-default.html:79
 #: layouts/email/confirm/main-html-detail-body-default.html:83
@@ -487,11 +524,13 @@ msgstr ""
 msgid "Service fees"
 msgstr ""
 
+#: layouts/account/history/detail-service-body-default.html:10
 #: layouts/email/confirm/main-html-service-body-default.html:10
 #: layouts/checkout/standard/summary-service-body-default.html:14
 msgid "Services"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:97
 #: layouts/basket/standard/main-body-default.html:145
 #: layouts/email/confirm/main-html-detail-body-default.html:97
 #: layouts/checkout/standard/summary-basket-body-default.html:114
@@ -520,6 +559,7 @@ msgstr ""
 msgid "Street"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:93
 #: layouts/basket/standard/main-body-default.html:140
 #: layouts/email/confirm/main-text-detail-body-default.html:84
 #: layouts/email/confirm/main-text-detail-body-default.html:94
@@ -553,6 +593,7 @@ msgstr ""
 msgid "Thank you for your order on %2$s. The ID of your order is %1$s and contains the following details:"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:107
 #: layouts/basket/standard/main-body-default.html:157
 #: layouts/email/confirm/main-text-detail-body-default.html:90
 #: layouts/email/confirm/main-text-detail-body-default.html:98
@@ -561,6 +602,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
+#: layouts/account/history/detail-basket-body-default.html:59
 #: layouts/email/confirm/main-html-detail-body-default.html:59
 #: layouts/checkout/standard/summary-basket-body-default.html:64
 msgid "Unit price"
@@ -580,10 +622,11 @@ msgid "X"
 msgstr ""
 
 #. / Date format (Y=year, m=month, d=day, see http://www.php.net/manual/en/function.date.php for more options)
+#: layouts/account/history/list-body-default.html:14
 #: layouts/email/confirm/main-html-head-body-default.html:40
 #: layouts/email/confirm/main-text-head-body-default.html:41
 msgid "Y-m-d"
-msgstr ""
+msgstr "m/d/Y"
 
 #: layouts/catalog/stage/breadcrumb-body-default.html:16
 msgid "You are here:"
@@ -611,6 +654,7 @@ msgstr "Basic"
 msgid "company"
 msgstr "Company"
 
+#: layouts/account/history/detail-service-body-default.html:43
 #: layouts/email/confirm/main-html-service-body-default.html:43
 #: layouts/checkout/standard/delivery-body-default.html:38
 #: layouts/checkout/standard/summary-service-body-default.html:46
@@ -647,6 +691,7 @@ msgstr ""
 msgid "order"
 msgstr "Order"
 
+#: layouts/account/history/detail-service-body-default.html:13
 #: layouts/email/confirm/main-html-service-body-default.html:13
 #: layouts/checkout/standard/payment-body-default.html:38
 #: layouts/checkout/standard/summary-service-body-default.html:17

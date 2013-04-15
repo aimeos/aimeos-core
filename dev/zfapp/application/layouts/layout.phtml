@@ -28,6 +28,7 @@ $sites = $this->sites();
 		<?php echo ( isset( $this->minibasket ) ? $this->minibasket->getHeader() : '' ); ?>
 		<?php echo ( isset( $this->checkout ) ? $this->checkout->getHeader() : '' ); ?>
 		<?php echo ( isset( $this->confirm ) ? $this->confirm->getHeader() : '' ); ?>
+		<?php echo ( isset( $this->account ) ? $this->account->getHeader() : '' ); ?>
 	</head>
 	<body>
 		<div id="frame">
@@ -48,6 +49,7 @@ $sites = $this->sites();
 								</a>
 							</div>
 							<div id="headerMiddle">
+								<a href="<?php echo $this->url( array( 'site' => $this->params['site'], 'controller' => 'account', 'action' => 'history' ), 'routeDefault', true ); ?>">My account</a>
 								<div id="headerNavigation">
 									<?php
 									foreach($sites as $code => $label) {

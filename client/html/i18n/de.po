@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 14:05+0200\n"
-"PO-Revision-Date: 2013-04-11 16:08+0000\n"
+"POT-Creation-Date: 2013-04-14 00:46+0200\n"
+"PO-Revision-Date: 2013-04-13 22:48+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -71,6 +71,12 @@ msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%1
 msgid "%1$s ( +%2$s%3$s )"
 msgstr "%1$s ( +%2$s%3$s )"
 
+#: layouts/account/history/list-body-default.html:9
+#: layouts/account/history/list-body-default.html:20
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s am %2$s"
+
 #. / Percent format with value (%1$s) and % sign
 #: layouts/catalog/list/items-body-default.html:16
 #: layouts/catalog/detail/basket-body-default.html:16
@@ -83,10 +89,10 @@ msgstr "%1$s%%"
 #: layouts/catalog/detail/basket-body-default.html:14
 #: layouts/basket/standard/main-body-default.html:67
 #: layouts/basket/mini/main-body-default.html:28
-#: layouts/email/confirm/main-text-detail-body-default.html:57
-#: layouts/email/confirm/main-html-detail-body-default.html:50
+#: layouts/email/confirm/main-text-detail-body-default.html:55
+#: layouts/email/confirm/main-html-detail-body-default.html:48
 #: layouts/checkout/standard/payment-body-default.html:34
-#: layouts/checkout/standard/summary-basket-body-default.html:54
+#: layouts/checkout/standard/summary-basket-body-default.html:52
 #: layouts/checkout/standard/delivery-body-default.html:34
 #, php-format
 msgid "%1$s%2$s"
@@ -102,12 +108,12 @@ msgstr "%1$s%2$s"
 msgid "%1$s%3$s + %2$s%3$s"
 msgstr "%1$s%3$s + %2$s%3$s"
 
-#: layouts/email/confirm/main-text-detail-body-default.html:90
+#: layouts/email/confirm/main-text-detail-body-default.html:88
 msgid "+ Payment costs"
 msgstr "+ Zahlungsgebühren"
 
-#: layouts/email/confirm/main-text-detail-body-default.html:88
-#: layouts/email/confirm/main-text-detail-body-default.html:98
+#: layouts/email/confirm/main-text-detail-body-default.html:86
+#: layouts/email/confirm/main-text-detail-body-default.html:96
 msgid "+ Shipping"
 msgstr "+ Versandkosten"
 
@@ -161,7 +167,7 @@ msgstr "Zurück"
 
 #: layouts/basket/standard/body-default.html:17
 #: layouts/basket/mini/body-default.html:21
-#: layouts/checkout/standard/summary-basket-body-default.html:59
+#: layouts/checkout/standard/summary-basket-body-default.html:57
 #: layouts/checkout/standard/body-default.html:23
 msgid "Basket"
 msgstr "Warenkorb"
@@ -190,7 +196,7 @@ msgstr "Jetzt kaufen"
 msgid "Change"
 msgstr "Ändern"
 
-#: layouts/checkout/standard/summary-basket-body-default.html:58
+#: layouts/checkout/standard/summary-basket-body-default.html:56
 msgid "Change basket"
 msgstr "Ändern"
 
@@ -247,6 +253,7 @@ msgstr "Hallo %1$s %2$s %3$s"
 msgid "Dear Sir or Madam"
 msgstr "Sehr geehrte Damen und Herren"
 
+#: layouts/account/history/list-body-default.html:33
 #: layouts/email/confirm/main-text-service-body-default.html:38
 msgid "Delivery"
 msgstr "Versand"
@@ -301,14 +308,17 @@ msgid ""
 msgstr "Ich akzeptiere die <a href=\"%1$s\" target=\"_blank\" title=\"AGBs\" alt=\"AGBs\">AGBs</a> und die <a href=\"%2$s\" target=\"_blank\" title=\"Datenschutzrichtlinien\" alt=\"Datenschutzrichtlinien\">Datenschutzrichtlinien</a>"
 
 #: layouts/basket/standard/main-body-default.html:169
-#: layouts/email/confirm/main-text-detail-body-default.html:94
-#: layouts/email/confirm/main-text-detail-body-default.html:102
-#: layouts/email/confirm/main-html-detail-body-default.html:113
-#: layouts/checkout/standard/summary-basket-body-default.html:130
+#: layouts/email/confirm/main-text-detail-body-default.html:92
+#: layouts/email/confirm/main-text-detail-body-default.html:104
+#: layouts/email/confirm/main-html-detail-body-default.html:118
+#: layouts/checkout/standard/summary-basket-body-default.html:135
 msgid "Included rebates"
 msgstr "Enthaltene Rabatte"
 
 #: layouts/basket/standard/main-body-default.html:163
+#: layouts/email/confirm/main-text-detail-body-default.html:101
+#: layouts/email/confirm/main-html-detail-body-default.html:112
+#: layouts/checkout/standard/summary-basket-body-default.html:129
 #, php-format
 msgid "Includes %1$s%% VAT"
 msgstr "Enthält %1$s%% USt."
@@ -318,6 +328,7 @@ msgstr "Enthält %1$s%% USt."
 #: src/Client/Html/Email/Confirm/Factory.php:39
 #: src/Client/Html/Basket/Standard/Factory.php:40
 #: src/Client/Html/Basket/Mini/Factory.php:39
+#: src/Client/Html/Account/History/Factory.php:39
 #: src/Client/Html/Catalog/Filter/Factory.php:40
 #: src/Client/Html/Catalog/Stage/Factory.php:40
 #: src/Client/Html/Catalog/Detail/Factory.php:40
@@ -385,12 +396,17 @@ msgstr "Optionen"
 msgid "Order"
 msgstr "Bestellung"
 
+#: layouts/account/history/list-body-default.html:19
 #: layouts/checkout/confirm/basic-body-default.html:15
 msgid "Order ID"
 msgstr "Bestellnummer"
 
-#: layouts/email/confirm/main-text-detail-body-default.html:61
-#: layouts/email/confirm/main-html-detail-body-default.html:54
+#: layouts/account/history/list-body-default.html:23
+msgid "Order channel"
+msgstr "Bestellweg"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:59
+#: layouts/email/confirm/main-html-detail-body-default.html:52
 msgid "Order details"
 msgstr "Bestelldetails"
 
@@ -403,14 +419,15 @@ msgstr "Die Bestellung war erfolgreich"
 msgid "Page %1$d of %2$d"
 msgstr "Seite %1$d von %2$d"
 
+#: layouts/account/history/list-body-default.html:28
 #: layouts/email/confirm/main-text-service-body-default.html:13
 #: layouts/checkout/standard/order-payment-body-default.html:12
 msgid "Payment"
 msgstr "Zahlung"
 
 #: layouts/basket/standard/main-body-default.html:151
-#: layouts/email/confirm/main-html-detail-body-default.html:104
-#: layouts/checkout/standard/summary-basket-body-default.html:121
+#: layouts/email/confirm/main-html-detail-body-default.html:102
+#: layouts/checkout/standard/summary-basket-body-default.html:119
 msgid "Payment costs"
 msgstr "Zahlungskosten"
 
@@ -441,9 +458,9 @@ msgstr "PLZ"
 
 #: layouts/catalog/list/pagination-body-default.html:34
 #: layouts/basket/standard/main-body-default.html:78
-#: layouts/email/confirm/main-text-detail-body-default.html:73
-#: layouts/email/confirm/main-html-detail-body-default.html:62
-#: layouts/checkout/standard/summary-basket-body-default.html:67
+#: layouts/email/confirm/main-text-detail-body-default.html:71
+#: layouts/email/confirm/main-html-detail-body-default.html:60
+#: layouts/checkout/standard/summary-basket-body-default.html:65
 msgid "Price"
 msgstr "Preis"
 
@@ -456,9 +473,9 @@ msgid "Proceed to payment"
 msgstr "Weiter zur Zahlung"
 
 #: layouts/basket/standard/main-body-default.html:77
-#: layouts/email/confirm/main-text-detail-body-default.html:71
-#: layouts/email/confirm/main-html-detail-body-default.html:60
-#: layouts/checkout/standard/summary-basket-body-default.html:65
+#: layouts/email/confirm/main-text-detail-body-default.html:69
+#: layouts/email/confirm/main-html-detail-body-default.html:58
+#: layouts/checkout/standard/summary-basket-body-default.html:63
 msgid "Quantity"
 msgstr "Anzahl"
 
@@ -492,9 +509,9 @@ msgid "Select salutation"
 msgstr "Bitte wählen"
 
 #: layouts/basket/standard/main-body-default.html:130
-#: layouts/email/confirm/main-text-detail-body-default.html:81
-#: layouts/email/confirm/main-html-detail-body-default.html:85
-#: layouts/checkout/standard/summary-basket-body-default.html:102
+#: layouts/email/confirm/main-text-detail-body-default.html:79
+#: layouts/email/confirm/main-html-detail-body-default.html:83
+#: layouts/checkout/standard/summary-basket-body-default.html:100
 msgid "Service fees"
 msgstr "Gebühren für Versand und/oder Zahlung"
 
@@ -504,8 +521,8 @@ msgid "Services"
 msgstr "Zahlung und Lieferung"
 
 #: layouts/basket/standard/main-body-default.html:145
-#: layouts/email/confirm/main-html-detail-body-default.html:99
-#: layouts/checkout/standard/summary-basket-body-default.html:116
+#: layouts/email/confirm/main-html-detail-body-default.html:97
+#: layouts/checkout/standard/summary-basket-body-default.html:114
 msgid "Shipping"
 msgstr "Versandkosten"
 
@@ -532,15 +549,15 @@ msgid "Street"
 msgstr "Strasse"
 
 #: layouts/basket/standard/main-body-default.html:140
-#: layouts/email/confirm/main-text-detail-body-default.html:86
-#: layouts/email/confirm/main-text-detail-body-default.html:96
-#: layouts/email/confirm/main-html-detail-body-default.html:95
-#: layouts/checkout/standard/summary-basket-body-default.html:112
+#: layouts/email/confirm/main-text-detail-body-default.html:84
+#: layouts/email/confirm/main-text-detail-body-default.html:94
+#: layouts/email/confirm/main-html-detail-body-default.html:93
+#: layouts/checkout/standard/summary-basket-body-default.html:110
 msgid "Sub-total"
 msgstr "Zwischensumme"
 
 #: layouts/basket/standard/main-body-default.html:79
-#: layouts/email/confirm/main-text-detail-body-default.html:75
+#: layouts/email/confirm/main-text-detail-body-default.html:73
 msgid "Sum"
 msgstr "Summe"
 
@@ -567,15 +584,15 @@ msgid ""
 msgstr "Vielen Dank für Ihre Bestellung am %2$s. Ihre Bestellnummer ist %1$s and beinhaltet folgende Positionen:"
 
 #: layouts/basket/standard/main-body-default.html:157
-#: layouts/email/confirm/main-text-detail-body-default.html:92
-#: layouts/email/confirm/main-text-detail-body-default.html:100
-#: layouts/email/confirm/main-html-detail-body-default.html:109
-#: layouts/checkout/standard/summary-basket-body-default.html:126
+#: layouts/email/confirm/main-text-detail-body-default.html:90
+#: layouts/email/confirm/main-text-detail-body-default.html:98
+#: layouts/email/confirm/main-html-detail-body-default.html:107
+#: layouts/checkout/standard/summary-basket-body-default.html:124
 msgid "Total"
 msgstr "Gesamtsumme"
 
-#: layouts/email/confirm/main-html-detail-body-default.html:61
-#: layouts/checkout/standard/summary-basket-body-default.html:66
+#: layouts/email/confirm/main-html-detail-body-default.html:59
+#: layouts/checkout/standard/summary-basket-body-default.html:64
 msgid "Unit price"
 msgstr "Einzelpreis"
 
@@ -594,6 +611,7 @@ msgstr "X"
 
 #. / Date format (Y=year, m=month, d=day, see
 #. http://www.php.net/manual/en/function.date.php for more options)
+#: layouts/account/history/list-body-default.html:8
 #: layouts/email/confirm/main-html-head-body-default.html:40
 #: layouts/email/confirm/main-text-head-body-default.html:41
 msgid "Y-m-d"

@@ -153,6 +153,31 @@ class MShop_Order_Manager_Default
 
 
 	/**
+	 * Creates a search object.
+	 *
+	 * @param boolean $default Add default criteria; Optional
+	 * @return MW_Common_Criteria_Interface
+	 */
+	public function createSearch( $default = false )
+	{
+		$search = parent::createSearch( $default );
+
+		if( $default === true )
+		{
+			$expr = array(
+				$search->getConditions(),
+				$search->compare( '!=', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_UNFINISHED ),
+				$search->compare( '!=', 'order.statusdelivery', MShop_Order_Item_Abstract::STAT_UNFINISHED ),
+			);
+
+			$search->setConditions( $search->combine( '&&', $expr ) );
+		}
+
+		return $search;
+	}
+
+
+	/**
 	 * Creates a one-time order in the storage from the given invoice object.
 	 *
 	 * @param MShop_Order_Item_Interface $item Invoice with necessary values

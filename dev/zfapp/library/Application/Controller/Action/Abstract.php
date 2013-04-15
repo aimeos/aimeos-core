@@ -119,6 +119,15 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 
 		$ctx->setEditor( 'UTC001' );
 
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $ctx );
+		$search = $customerManager->createSearch( true );
+		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
+		$result = $customerManager->searchItems( $search );
+
+		if( ( $customerItem = reset( $result ) ) !== false ) {
+			$ctx->setUserId( $customerItem->getId() );
+		}
+
 		Zend_Registry::set('ctx', $ctx);
 
 

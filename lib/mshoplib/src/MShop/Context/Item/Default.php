@@ -24,7 +24,8 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	private $_locale;
 	private $_logger;
 	private $_session;
-	private $_user = '';
+	private $_userid;
+	private $_editor = '';
 
 
 	/**
@@ -245,7 +246,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setEditor( $name )
 	{
-		$this->_user = (string) $name;
+		$this->_editor = (string) $name;
 	}
 
 
@@ -256,6 +257,28 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getEditor()
 	{
-		return $this->_user;
+		return $this->_editor;
+	}
+
+
+	/**
+	 * Sets the user ID of the logged in user.
+	 *
+	 * @param string $userid User ID of the logged in user
+	 */
+	public function setUserId( $userid )
+	{
+		$this->_userid = (string) $userid;
+	}
+
+
+	/**
+	 * Returns the user ID of the logged in user.
+	 *
+	 * @return string User ID of the logged in user
+	 */
+	public function getUserId()
+	{
+		return $this->_userid;
 	}
 }

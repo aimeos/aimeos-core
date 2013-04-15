@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+<div class="account-history-detail-service">
+	<h2><?php echo $this->translate( 'client/html', 'Services' ); ?></h2>
+	<div class="item-service payment">
+		<div class="header">
+			<h3><?php echo $this->translate( 'client/html', 'payment' ); ?></h3>
+		</div>
+<?php try { $service = $this->orderBaseItem->getService( 'payment' ); ?>
+		<div class="item">
+			<div class="item-icons">
+<?php	if( $service->getMediaUrl() != '' ) : ?>
+				<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $service->getMediaUrl(); ?>" />
+<?php	endif; ?>
+			</div>
+			<h4><?php echo $service->getName(); ?></h4>
+		</div>
+<?php	if( count( $service->getAttributes() ) > 0 ) : ?>
+		<ul class="attr-list">
+<?php		foreach( $service->getAttributes() as $attribute ) : ?>
+<?php			if( $attribute->getType() !== '' ) : ?>
+				<li class="<?php echo $attribute->getCode(); ?>">
+					<span class="name"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
+<?php				switch( $attribute->getValue() ) : case 'array': case 'object': ?>
+					<span class="value"><?php echo join( ', ', (array) $attribute->getValue() ); ?></span>
+<?php					break; default: ?>
+					<span class="value"><?php echo $attribute->getValue(); ?></span>
+<?php				endswitch; ?>
+				</li>
+<?php			endif; ?>
+<?php		endforeach; ?>
+		</ul>
+<?php	endif; ?>
+<?php } catch( Exception $e ) { ; } ?>
+	</div><div class="item-service delivery">
+		<div class="header">
+			<h3><?php echo $this->translate( 'client/html', 'delivery' ); ?></h3>
+		</div>
+<?php try { $service = $this->orderBaseItem->getService( 'delivery' ); ?>
+		<div class="item">
+			<div class="item-icons">
+<?php	if( $service->getMediaUrl() != '' ) : ?>
+				<img src="<?php echo $service->getMediaUrl(); ?>" />
+<?php	endif; ?>
+			</div>
+			<h4><?php echo $service->getName(); ?></h4>
+		</div>
+<?php	if( count( $service->getAttributes() ) > 0 ) : ?>
+		<ul class="attr-list">
+<?php		foreach( $service->getAttributes() as $attribute ) : ?>
+<?php			if( $attribute->getType() !== '' ) : ?>
+			<li class="<?php echo $attribute->getCode(); ?>">
+				<span class="name"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/service', $attribute->getCode() ) ); ?></span>
+<?php				switch( $attribute->getValue() ) : case 'array': case 'object': ?>
+				<span class="value"><?php echo join( ', ', (array) $attribute->getValue() ); ?></span>
+<?php					break; default: ?>
+				<span class="value"><?php echo $attribute->getValue(); ?></span>
+<?php				endswitch; ?>
+			</li>
+<?php			endif; ?>
+<?php		endforeach; ?>
+		</ul>
+<?php	endif; ?>
+<?php } catch( Exception $e ) { ; } ?>
+	</div>
+<?php echo $this->get( 'serviceBody' ); ?>
+</div>
