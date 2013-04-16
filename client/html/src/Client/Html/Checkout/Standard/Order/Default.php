@@ -132,7 +132,7 @@ class Client_Html_Checkout_Standard_Order_Default
 			$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 			$basket = $orderBaseManager->getSession();
-			$basket->setCustomerId( $context->getUserId() );
+			$basket->setCustomerId( (string) $context->getUserId() );
 
 			$orderBaseManager->store( $basket );
 
