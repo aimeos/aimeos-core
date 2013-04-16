@@ -19,13 +19,16 @@ catch( Exception $e )
 
 $quantity = $this->get( 'mainQuantity', 0 );
 
+/// Price format with price value (%1$s) and currency (%2$s)
+$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+
 ?>
 <div class="basket-mini-main">
 	<span class="quantity">
 <?php printf( $this->translate( 'client/html', '%1$d article', '%1$d articles', $quantity ), $quantity ); ?>
 	</span>
 	<span class="value">
-<?php printf( $this->translate( 'client/html', '%1$s%2$s' ), $this->number( $miniPriceValue ), $miniPriceCurrency ); ?>
+<?php printf( $priceFormat, $this->number( $miniPriceValue ), $miniPriceCurrency ); ?>
 	</span>
 </div>
 
