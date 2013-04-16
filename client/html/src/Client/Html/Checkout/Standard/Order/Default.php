@@ -132,6 +132,8 @@ class Client_Html_Checkout_Standard_Order_Default
 			$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 			$basket = $orderBaseManager->getSession();
+			$basket->setCustomerId( $context->getUserId() );
+
 			$orderBaseManager->store( $basket );
 
 			$orderItem = $orderManager->createItem();

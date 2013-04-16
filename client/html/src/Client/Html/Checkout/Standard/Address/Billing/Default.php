@@ -162,7 +162,6 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing' ) );
 				}
 
-				$basketCtrl->get()->setCustomerId( '' );
 				$basketCtrl->setAddress( $type, $param );
 			}
 			else // existing address
@@ -182,7 +181,6 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( sprintf( 'No customer found for ID "%1$s"', $option ) );
 				}
 
-				$basketCtrl->get()->setCustomerId( $item->getId() );
 				$basketCtrl->setAddress( $type, $item->getBillingAddress() );
 			}
 
