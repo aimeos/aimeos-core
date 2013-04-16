@@ -113,49 +113,6 @@ class Client_Html_Account_History_Detail_Address_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$default = array(
-				'order.base.address.salutation',
-				'order.base.address.firstname',
-				'order.base.address.lastname',
-				'order.base.address.address1',
-				'order.base.address.postal',
-				'order.base.address.city',
-				'order.base.address.langid',
-				'order.base.address.email'
-			);
-
-			$view->addressBillingMandatory = $view->config( 'account/address/billing/mandatory', $default );
-
-			$default = array(
-				'order.base.address.company',
-				'order.base.address.address2',
-				'order.base.address.countryid',
-			);
-
-			$view->addressBillingOptional = $view->config( 'account/address/billing/optional', $default );
-
-
-			$default = array(
-				'order.base.address.salutation',
-				'order.base.address.firstname',
-				'order.base.address.lastname',
-				'order.base.address.address1',
-				'order.base.address.postal',
-				'order.base.address.city',
-				'order.base.address.langid',
-			);
-
-			$view->addressDeliveryMandatory = $view->config( 'account/address/delivery/mandatory', $default );
-
-			$default = array(
-				'order.base.address.company',
-				'order.base.address.address2',
-				'order.base.address.countryid',
-			);
-
-			$view->addressDeliveryOptional = $view->config( 'account/address/delivery/optional', $default );
-
-
 			$this->_cache = $view;
 		}
 

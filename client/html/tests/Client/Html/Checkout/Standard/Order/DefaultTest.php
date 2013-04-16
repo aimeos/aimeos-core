@@ -131,7 +131,7 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 			throw new Exception( 'No service item found' );
 		}
 
-		$controller->get()->setCustomerId( '-1' );
+		$this->_context->setUserId( '-1' );
 		$controller->setAddress( 'payment', array( 'order.base.address.languageid' => 'en' ) );
 		$controller->setService( 'payment', $serviceItem->getId() );
 

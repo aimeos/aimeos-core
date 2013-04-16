@@ -36,7 +36,6 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 	private $_optional = array(
 		'order.base.address.company',
 		'order.base.address.address2',
-		'order.base.address.countryid'
 	);
 
 
@@ -133,8 +132,8 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) == 'null' ) // new address
 			{
 				$param = $view->param( 'ca-billing', array() );
-				$list = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->_mandatory );
-				$optional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->_optional );
+				$list = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );
+				$optional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
 				$missing = array();
 
 				foreach( $list as $mandatory )
@@ -162,7 +161,6 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing' ) );
 				}
 
-				$basketCtrl->get()->setCustomerId( '' );
 				$basketCtrl->setAddress( $type, $param );
 			}
 			else // existing address
@@ -182,7 +180,6 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( sprintf( 'No customer found for ID "%1$s"', $option ) );
 				}
 
-				$basketCtrl->get()->setCustomerId( $item->getId() );
 				$basketCtrl->setAddress( $type, $item->getBillingAddress() );
 			}
 
@@ -215,8 +212,8 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				$view->billingLanguage = $context->getLocale()->getLanguageId();
 			}
 
-			$view->billingMandatory = $view->config( 'client/html/checkout/standard/address/billing/mandatory', $this->_mandatory );
-			$view->billingOptional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->_optional );
+			$view->billingMandatory = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );
+			$view->billingOptional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
 
 			$this->_cache = $view;
 		}

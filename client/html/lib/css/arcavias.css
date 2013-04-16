@@ -572,6 +572,7 @@
 }
 
 .checkout-standard-summary-basket .basket,
+.basket-standard-main .basket,
 .account-history-detail-basket .basket {
 	margin-top: 0;
 }
@@ -616,7 +617,17 @@
 .account-history-detail-basket th,
 .account-history-detail-basket td {
 	padding: 5px;
-	vertical-align: top;
+	vertical-align: middle;
+}
+
+.checkout-standard-summary-basket .details img,
+.basket-standard-main .details img,
+.account-history-detail-basket .details img {
+	display: none;
+	float: left;
+	max-width: 60px;
+	max-height: 80px;
+	overflow: hidden;
 }
 
 .checkout-standard-summary-basket th.quantity,
@@ -1237,7 +1248,6 @@
 
 .account-history-list .attr-item {
 	display: inline-block;
-	margin: 5px;
 }
 
 .account-history-list .attr-item .name,

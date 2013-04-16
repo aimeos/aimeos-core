@@ -26,17 +26,17 @@ $attrformat = $this->translate( 'client/html', '%1$s at %2$s' );
 					<li class="attr-item order-basic">
 						<span class="name"><?php echo $this->translate( 'client/html', 'Order ID' ); ?></span>
 						<span class="value"><?php printf( $this->translate( 'client/html', '%1$s at %2$s' ), $id, date_create( $orderItem->getTimeCreated() )->format( $dateformat ) ); ?></span>
-					</li>
-					<li class="attr-item order-channel">
+					</li><!--
+					--><li class="attr-item order-channel">
 						<span class="name"><?php echo $this->translate( 'client/html', 'Order channel' ); ?></span>
 						<span class="value"><?php $code = 'order:' . $orderItem->getType(); echo $this->translate( 'client/html/code', $code ); ?></span>
-					</li>
-					<li class="attr-item order-payment">
+					</li><!--
+					--><li class="attr-item order-payment">
 <?php		$code = 'pay:' . $orderItem->getPaymentStatus(); $paystatus = $this->translate( 'client/html/code', $code ); ?>
 						<span class="name"><?php echo $this->translate( 'client/html', 'Payment' ); ?></span>
 						<span class="value"><?php ( $date = $orderItem->getDatePayment() ) !== null ? printf( $attrformat, $paystatus, date_create( $date )->format( $dateformat ) ) : ''; ?></span>
-					</li>
-					<li class="attr-item order-delivery">
+					</li><!--
+					--><li class="attr-item order-delivery">
 <?php		$code = 'stat:' . $orderItem->getDeliveryStatus(); $status = $this->translate( 'client/html/code', $code ); ?>
 						<span class="name"><?php echo $this->translate( 'client/html', 'Delivery' ); ?></span>
 						<span class="value"><?php ( $date = $orderItem->getDateDelivery() ) !== null ? printf( $attrformat, $status, date_create( $date )->format( $dateformat ) ) : ''; ?></span>

@@ -45,7 +45,8 @@ catch( Exception $e )
 	$paymentPriceService = '0.00';
 }
 
-$priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
+/// Price format with price value (%1$s) and currency (%2$s)
+$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
 ?>
 <div class="email-confirm-main-detail">

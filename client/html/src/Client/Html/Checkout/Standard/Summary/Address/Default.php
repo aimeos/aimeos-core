@@ -113,49 +113,6 @@ class Client_Html_Checkout_Standard_Summary_Address_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$default = array(
-				'order.base.address.salutation',
-				'order.base.address.firstname',
-				'order.base.address.lastname',
-				'order.base.address.address1',
-				'order.base.address.postal',
-				'order.base.address.city',
-				'order.base.address.langid',
-				'order.base.address.email'
-			);
-
-			$view->addressBillingMandatory = $view->config( 'checkout/address/billing/mandatory', $default );
-
-			$default = array(
-				'order.base.address.company',
-				'order.base.address.address2',
-				'order.base.address.countryid',
-			);
-
-			$view->addressBillingOptional = $view->config( 'checkout/address/billing/optional', $default );
-
-
-			$default = array(
-				'order.base.address.salutation',
-				'order.base.address.firstname',
-				'order.base.address.lastname',
-				'order.base.address.address1',
-				'order.base.address.postal',
-				'order.base.address.city',
-				'order.base.address.langid',
-			);
-
-			$view->addressDeliveryMandatory = $view->config( 'checkout/address/delivery/mandatory', $default );
-
-			$default = array(
-				'order.base.address.company',
-				'order.base.address.address2',
-				'order.base.address.countryid',
-			);
-
-			$view->addressDeliveryOptional = $view->config( 'checkout/address/delivery/optional', $default );
-
-
 			$this->_cache = $view;
 		}
 
