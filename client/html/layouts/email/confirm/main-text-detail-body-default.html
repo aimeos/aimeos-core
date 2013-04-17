@@ -61,12 +61,13 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php	$price = $product->getPrice(); ?>
 
 <?php echo $product->getName(); ?>
+
 <?php	foreach( $product->getAttributes() as $attribute ) : ?>
 <?php		switch( $attribute->getType() ) : case 'hidden': ?>
 <?php			break; default: ?>
 	<?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?>: <?php echo ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ); ?>
-<?php		endswitch; ?>
 
+<?php		endswitch; ?>
 <?php	endforeach; ?>
 <?php echo $this->translate( 'client/html', 'Quantity' ); ?>: <?php echo $product->getQuantity(); ?>
 

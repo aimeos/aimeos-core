@@ -167,7 +167,6 @@ class MShop_Order_Manager_Default
 			$expr = array(
 				$search->getConditions(),
 				$search->compare( '!=', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_UNFINISHED ),
-				$search->compare( '!=', 'order.statusdelivery', MShop_Order_Item_Abstract::STAT_UNFINISHED ),
 			);
 
 			$search->setConditions( $search->combine( '&&', $expr ) );
