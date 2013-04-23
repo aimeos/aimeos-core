@@ -671,11 +671,6 @@ msgstr "Adresse"
 msgid "basic"
 msgstr "Basisdaten"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:111
-#: layouts/checkout/standard/address-billing-body-default.html:107
-msgid "company"
-msgstr "Firma"
-
 #: layouts/account/history/detail-service-body-default.html:43
 #: layouts/email/confirm/main-html-service-body-default.html:43
 #: layouts/checkout/standard/delivery-body-default.html:39
@@ -687,21 +682,6 @@ msgstr "Versand"
 #: layouts/checkout/standard/address-delivery-body-default.html:50
 msgid "like billing address"
 msgstr "wie Rechnungsadresse"
-
-#: layouts/checkout/standard/address-delivery-body-default.html:114
-#: layouts/checkout/standard/address-billing-body-default.html:110
-msgid "miss"
-msgstr "Fräulein"
-
-#: layouts/checkout/standard/address-delivery-body-default.html:112
-#: layouts/checkout/standard/address-billing-body-default.html:108
-msgid "mr"
-msgstr "Herr"
-
-#: layouts/checkout/standard/address-delivery-body-default.html:113
-#: layouts/checkout/standard/address-billing-body-default.html:109
-msgid "mrs"
-msgstr "Frau"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:104
 #: layouts/checkout/standard/address-billing-body-default.html:100

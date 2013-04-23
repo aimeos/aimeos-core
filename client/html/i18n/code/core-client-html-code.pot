@@ -18,6 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#. Address salutation
+msgid "company"
+msgstr "Company"
+
+#. Address salutation
+msgid "mr"
+msgstr "Mr"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Mrs"
+
+#. Address salutation
+msgid "miss"
+msgstr "Miss"
 
 #. Product attribute
 msgid "size"
