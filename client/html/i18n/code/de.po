@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-04-13 21:00+0000\n"
+"PO-Revision-Date: 2013-04-16 15:57+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Firma"
+
+#. Address salutation
+msgid "mr"
+msgstr "Herr"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Frau"
+
+#. Address salutation
+msgid "miss"
+msgstr "Fräulein"
 
 #. Product attribute
 msgid "size"

@@ -212,6 +212,9 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				$view->billingLanguage = $context->getLocale()->getLanguageId();
 			}
 
+			$salutations = array( 'company', 'mr', 'mrs' );
+			$view->billingSalutations = $view->config( 'client/html/common/address/billing/salutations', $salutations );
+
 			$view->billingMandatory = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );
 			$view->billingOptional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
 

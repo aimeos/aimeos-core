@@ -11,16 +11,11 @@ try {
 	$addrArray = array();
 }
 
-$salutations = array(
-	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
-);
-
 $billingOption = $this->param( 'ca-billing-option', ( $addrArray === array() && isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' ) );
 $billingSalutation = $this->param( 'ca-billing/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $billingCountry = $this->param( 'ca-billing/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
 
+$billingSalutations = $this->get( 'billingSalutations', array() );
 $billingCountries = $this->get( 'addressCountries', array() );
 $billingLanguage = $this->get( 'billingLanguage', '' );
 
@@ -39,7 +34,7 @@ foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 	$paymentCss[$name][] = 'error';
 }
 
-$allFields = array_merge( $this->get( 'billingMandatory', array() ), $this->get( 'billingOptional', array() ), $this->get( 'billingError', array() ) );
+$allFields = array_keys( $paymentCss );
 
 ?>
 <div class="checkout-standard-address-billing">
@@ -72,7 +67,7 @@ $allFields = array_merge( $this->get( 'billingMandatory', array() ), $this->get(
 '
 			),
 			$addr->getCompany(),
-			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
+			( !in_array( $addr->getSalutation(), array( 'company' ) ) ? $this->translate( 'client/html/code', $addr->getSalutation() ) : '' ),
 			$addr->getTitle(),
 			$addr->getFirstName(),
 			$addr->getLastName(),
@@ -104,10 +99,9 @@ $allFields = array_merge( $this->get( 'billingMandatory', array() ), $this->get(
 				<label for="address-billing-salutation"><?php echo $this->translate( 'client/html', 'Salutation' ); ?>
 				</label><select id="address-billing-salutation" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.salutation' ) ); ?>" <?php echo ( in_array( 'order.base.address.salutation', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 					<option value=""><?php echo $this->translate( 'client/html', 'Select salutation' ); ?></option>
-					<option value="company" <?php echo ( $billingSalutation == 'company' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'company' ); ?></option>
-					<option value="mr" <?php echo ( $billingSalutation == 'mr' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'mr' ); ?></option>
-					<option value="mrs" <?php echo ( $billingSalutation == 'mrs' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'mrs' ); ?></option>
-					<option value="miss" <?php echo ( $billingSalutation == 'miss' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'miss' ); ?></option>
+<?php foreach( $billingSalutations as $salutation ) : ?>
+					<option value="<?php echo $salutation; ?>" <?php echo ( $billingSalutation == $salutation ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/code', $salutation ); ?></option>
+<?php endforeach; ?>
 				</select>
 			</li>
 			<li class="form-item company <?php echo ( isset( $paymentCss['order.base.address.company'] ) ? join( ' ', $paymentCss['order.base.address.company'] ) : '' ); ?>">

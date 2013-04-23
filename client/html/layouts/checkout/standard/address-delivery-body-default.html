@@ -11,16 +11,12 @@ try {
 	$addrArray = array();
 }
 
-$salutations = array(
-	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
-);
 
 $deliveryOption = $this->param( 'ca-delivery-option', ( $addrArray === array() ? -1 : 'null' ) );
 $deliverySalutation = $this->param( 'ca-delivery/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $deliveryCountry = $this->param( 'ca-delivery/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
 
+$deliverySalutations = $this->get( 'deliverySalutations', array() );
 $deliveryCountries = $this->get( 'addressCountries', array() );
 $deliveryLanguage = $this->get( 'deliveryLanguage', '' );
 
@@ -39,7 +35,7 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 	$deliveryCss[$name][] = 'error';
 }
 
-$allFields = array_merge( $this->get( 'deliveryMandatory', array() ), $this->get( 'deliveryOptional', array() ), $this->get( 'deliveryError', array() ) );
+$allFields = array_keys( $deliveryCss );
 
 ?>
 <div class="checkout-standard-address-delivery">
@@ -76,7 +72,7 @@ $allFields = array_merge( $this->get( 'deliveryMandatory', array() ), $this->get
 '
 			),
 			$addr->getCompany(),
-			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
+			( !in_array( $addr->getSalutation(), array( 'company' ) ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
 			$addr->getTitle(),
 			$addr->getFirstName(),
 			$addr->getLastName(),
@@ -108,10 +104,9 @@ $allFields = array_merge( $this->get( 'deliveryMandatory', array() ), $this->get
 				<label for="address-delivery-salutation"><?php echo $this->translate( 'client/html', 'Salutation' ); ?>
 				</label><select id="address-delivery-salutation" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.salutation' ) ); ?>" <?php echo ( in_array( 'order.base.address.salutation', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 					<option value=""><?php echo $this->translate( 'client/html', 'Select salutation' ); ?></option>
-					<option value="company" <?php echo ( $deliverySalutation == 'company' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'company' ); ?></option>
-					<option value="mr" <?php echo ( $deliverySalutation == 'mr' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'mr' ); ?></option>
-					<option value="mrs" <?php echo ( $deliverySalutation == 'mrs' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'mrs' ); ?></option>
-					<option value="miss" <?php echo ( $deliverySalutation == 'miss' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'miss' ); ?></option>
+<?php foreach( $deliverySalutations as $salutation ) : ?>
+					<option value="<?php echo $salutation; ?>" <?php echo ( $deliverySalutation == $salutation ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/code', $salutation ); ?></option>
+<?php endforeach; ?>
 				</select>
 			</li>
 			<li class="form-item company <?php echo ( isset( $deliveryCss['order.base.address.company'] ) ? join( ' ', $deliveryCss['order.base.address.company'] ) : '' ); ?>">
