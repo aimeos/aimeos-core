@@ -59,7 +59,7 @@ class MShop_Common_Item_Type_Default
 		if ( $code == $this->getCode() ) { return; }
 
 		if( strlen( $code ) > 32 ) {
-			throw new MShop_Exception( sprintf( 'Code should not be longer than 32 characters.' ) );
+			throw new MShop_Exception( sprintf( 'Code must not be longer than 32 characters' ) );
 		}
 
 		$this->_values['code'] = (string) $code;
