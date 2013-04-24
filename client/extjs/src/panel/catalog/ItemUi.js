@@ -65,6 +65,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							fieldLabel : _('Code'),
 							name : 'code',
 							allowBlank : false,
+							maxLength : 32,
 							emptyText : _('Category code (required)')
 						}, {
 							xtype : 'textfield',

@@ -178,6 +178,10 @@ class MShop_Customer_Item_Default
 	{
 		if ( $value == $this->getCode() ) { return; }
 
+		if( strlen( $value ) > 32 ) {
+			throw new MShop_Exception( sprintf( 'Code should not be longer than 32 characters.' ) );
+		}
+
 		$this->_values['code'] = (string) $value;
 		$this->setModified();
 	}

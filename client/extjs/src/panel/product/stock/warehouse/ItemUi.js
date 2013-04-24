@@ -65,6 +65,7 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 							fieldLabel : 'Warehouse code',
 							name : 'product.stock.warehouse.code',
 							allowBlank : false,
+							maxLength : 32,
 							emptyText : _( 'Warehouse code (required)' )
 						}, {
 							xtype : 'textfield',

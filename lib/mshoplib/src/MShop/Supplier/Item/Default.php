@@ -29,7 +29,7 @@ class MShop_Supplier_Item_Default
 	public function __construct( array $values = array() )
 	{
 		parent::__construct('supplier.', $values);
-		
+
 		$this->_values = $values;
 	}
 
@@ -77,6 +77,10 @@ class MShop_Supplier_Item_Default
 	 */
 	public function setCode( $value )
 	{
+		if( strlen( $value ) > 32 ) {
+			throw new MShop_Exception( sprintf( 'Code should not be longer than 32 characters.' ) );
+		}
+
 		$this->_values['code'] = (string) $value;
 		$this->setModified();
 	}

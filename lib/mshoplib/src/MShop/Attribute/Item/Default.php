@@ -21,7 +21,7 @@ class MShop_Attribute_Item_Default
 {
 	private $_values;
 
-	
+
 	/**
 	 * Initializes the attribute item.
 	 *
@@ -117,6 +117,10 @@ class MShop_Attribute_Item_Default
 	public function setCode( $code )
 	{
 		if ( $code == $this->getCode() ) { return; }
+
+		if( strlen( $code ) > 32 ) {
+			throw new MShop_Exception( sprintf( 'Code should not be longer than 32 characters.' ) );
+		}
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();
