@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-23 13:34+0200\n"
+"POT-Creation-Date: 2013-04-25 10:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -375,6 +375,11 @@ msgstr ""
 msgid "No address found for ID \"%1$s\""
 msgstr ""
 
+#: layouts/catalog/list/head-body-default.html:32
+#, php-format
+msgid "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please try again with a different keyword."
+msgstr ""
+
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:180
 #, php-format
 msgid "No customer found for ID \"%1$s\""
@@ -508,6 +513,13 @@ msgstr ""
 #: layouts/checkout/standard/address-billing-body-default.html:99
 msgid "Salutation"
 msgstr ""
+
+#: layouts/catalog/list/head-body-default.html:29
+#, php-format
+msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d article)"
+msgid_plural "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d articles)"
+msgstr[0] ""
+msgstr[1] ""
 
 #: layouts/catalog/filter/search-body-default.html:14
 msgid "Search:"

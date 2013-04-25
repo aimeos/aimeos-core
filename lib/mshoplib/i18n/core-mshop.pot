@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 16:31+0200\n"
+"POT-Creation-Date: 2013-04-25 10:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Basket empty"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:79
+#: src/MShop/Context/Item/Default.php:80
 #, php-format
 msgid "Cache object not available"
 msgstr ""
@@ -118,7 +118,7 @@ msgstr ""
 msgid "Configuration not available"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:105
+#: src/MShop/Context/Item/Default.php:106
 #, php-format
 msgid "Configuration object not available"
 msgstr ""
@@ -145,7 +145,7 @@ msgstr ""
 msgid "DOM tree of XML response from delivery provider could not be converted to XML string"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:131
+#: src/MShop/Context/Item/Default.php:132
 #, php-format
 msgid "Database manager object not available"
 msgstr ""
@@ -172,7 +172,7 @@ msgstr ""
 msgid "ID of last inserted database record not available"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:156
+#: src/MShop/Context/Item/Default.php:157
 #, php-format
 msgid "Internationalization object not available"
 msgstr ""
@@ -356,7 +356,7 @@ msgstr ""
 msgid "Locale item for site \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:182
+#: src/MShop/Context/Item/Default.php:183
 #, php-format
 msgid "Locale object not available"
 msgstr ""
@@ -371,7 +371,7 @@ msgstr ""
 msgid "Log entry with ID \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:208
+#: src/MShop/Context/Item/Default.php:209
 #, php-format
 msgid "Log manager object not available"
 msgstr ""
@@ -420,7 +420,7 @@ msgstr ""
 #: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:152
 #: src/MShop/Order/Manager/Base/Address/Default.php:244
 #: src/MShop/Order/Manager/Status/Default.php:122
-#: src/MShop/Order/Manager/Default.php:165
+#: src/MShop/Order/Manager/Default.php:189
 #: src/MShop/Supplier/Manager/Default.php:349
 #: src/MShop/Locale/Manager/Site/Default.php:157
 #: src/MShop/Locale/Manager/Default.php:229
@@ -616,7 +616,7 @@ msgstr ""
 msgid "Service payment provider for order base ID \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Context/Item/Default.php:234
+#: src/MShop/Context/Item/Default.php:235
 #, php-format
 msgid "Session object not available"
 msgstr ""

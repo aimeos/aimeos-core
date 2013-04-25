@@ -185,6 +185,15 @@
 	padding: 10px 0px 10px 0px;
 }
 
+.catalog-list-head .head-search {
+	font-weight: bold;
+}
+
+.catalog-list-head .searchstring {
+	font-size: 133%;
+	color: #004266;
+}
+
 /* Product list, pagination section */
 .catalog-list-pagination {
 	clear: left;
