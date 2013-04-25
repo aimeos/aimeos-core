@@ -15,9 +15,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. Product attribute
+msgid "color"
+msgstr "Color"
+
 #. Address salutation
 msgid "company"
 msgstr "Company"
+
+#. Product attribute
+msgid "length"
+msgstr "Length"
+
+#. Address salutation
+msgid "miss"
+msgstr "Miss"
 
 #. Address salutation
 msgid "mr"
@@ -26,18 +38,6 @@ msgstr "Mr"
 #. Address salutation
 msgid "mrs"
 msgstr "Mrs"
-
-#. Address salutation
-msgid "miss"
-msgstr "Miss"
-
-#. Product attribute
-msgid "color"
-msgstr "Color"
-
-#. Product attribute
-msgid "length"
-msgstr "Length"
 
 #. Order type value
 msgid "order:phone"

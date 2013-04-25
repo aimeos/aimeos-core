@@ -4,14 +4,14 @@
 # 
 # 
 # Translators:
-# Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
-#  <n.sendetzky@metaways.de>, 2013.
+# nsendetzky <n.sendetzky@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-04-16 15:57+0000\n"
+"PO-Revision-Date: 2013-04-23 11:56+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
