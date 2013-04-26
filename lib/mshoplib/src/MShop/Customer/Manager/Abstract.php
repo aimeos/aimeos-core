@@ -26,9 +26,7 @@ abstract class MShop_Customer_Manager_Abstract
 	 */
 	public function createItem()
 	{
-		$addressManager = $this->getSubManager( 'address' );
-		$address = $addressManager->createItem();
-		return $this->_createItem( $address );
+		return $this->_createItem( $this->getSubManager( 'address' )->createItem() );
 	}
 
 
