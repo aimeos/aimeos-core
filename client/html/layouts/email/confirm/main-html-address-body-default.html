@@ -44,7 +44,7 @@ $salutations = array(
 '
 			),
 			$addr->getCompany(),
-			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
+			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html/code', $addr->getSalutation() ) : '' ),
 			$addr->getTitle(),
 			$addr->getFirstName(),
 			$addr->getLastName(),
@@ -95,7 +95,7 @@ $salutations = array(
 '
 			),
 			$addr->getCompany(),
-			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
+			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html/code', $addr->getSalutation() ) : '' ),
 			$addr->getTitle(),
 			$addr->getFirstName(),
 			$addr->getLastName(),
