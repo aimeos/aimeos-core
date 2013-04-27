@@ -181,8 +181,6 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 
 	public function testProcessExistingAddress()
 	{
-		$this->_context->setEditor( 'UTC001' );
-
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
@@ -200,6 +198,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		if( ( $address = reset( $result ) ) === false ) {
 			throw new Exception( 'Customer address item not found' );
 		}
+
+		$this->_context->setUserId( $customer->getId() );
 
 		$view = TestHelper::getView();
 
