@@ -129,7 +129,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING;
 
-			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) == 'null' ) // new address
+			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) === 'null' ) // new address
 			{
 				$param = $view->param( 'ca-billing', array() );
 				$list = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );
@@ -170,13 +170,13 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				$search = $customerManager->createSearch( true );
 				$expr = array(
 					$search->compare( '==', 'customer.id', $option ),
-					$search->compare( '==', 'customer.code', $context->getEditor() ),
 					$search->getConditions(),
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
 				$items = $customerManager->searchItems( $search );
-				if( ( $item = reset( $items ) ) === false ) {
+
+				if( ( $item = reset( $items ) ) === false || $option != $context->getUserId() ) {
 					throw new Client_Html_Exception( sprintf( 'No customer found for ID "%1$s"', $option ) );
 				}
 
