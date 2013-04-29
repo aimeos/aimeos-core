@@ -181,23 +181,21 @@ class Client_Html_Catalog_Stage_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$context = $this->_getContext();
-			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
-
-			$catid = $view->param( 'f-catalog-id' );
-
-			if( $catid != '' && ctype_digit( $catid ) )
+			if( ( $catid = $view->param( 'f-catalog-id' ) ) != '' )
 			{
+				$context = $this->_getContext();
+				$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+
 				$default = array( 'attribute', 'media', 'text' );
 				$domains = $context->getConfig()->get( 'client/html/catalog/stage/default/domains', $default );
-				$view->stageCatPath = $catalogManager->getPath( $catid, $domains );
+				$stageCatPath = $catalogManager->getPath( $catid, $domains );
 
-				$stageCatPath = $view->get( 'stageCatPath', array() );
 				if( ( $categoryItem = end( $stageCatPath ) ) !== false ) {
 					$view->stageCurrentCatItem = $categoryItem;
 				}
-			}
 
+				$view->stageCatPath = $stageCatPath;
+			}
 
 			$this->_cache = $view;
 		}
