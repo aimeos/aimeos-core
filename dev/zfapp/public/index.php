@@ -15,6 +15,8 @@ if ( APPLICATION_ENV == 'development' ) {
 	ini_set( 'display_errors', true );
 }
 
+setlocale( LC_CTYPE, 'en_US.UTF8' );
+
 try
 {
 	require_once ZFAPP_ROOT . '/../../MShop.php';
