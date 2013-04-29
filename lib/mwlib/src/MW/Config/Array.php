@@ -68,7 +68,7 @@ class MW_Config_Array
 				$add = $this->_include( $filePath['file'] );
 
 				if( is_array( $add ) ) {
-					$this->_merge( $subConfig, $this->_makeMap( $filePath['prefix'], $add ) );
+					$subConfig = $this->_merge( $subConfig, $this->_makeMap( $filePath['prefix'], $add ) );
 				}
 			}
 
@@ -125,29 +125,18 @@ class MW_Config_Array
 	 * @param array $left Array to be merged into
 	 * @param array $right Array to merge in
 	 */
-	protected function _merge( array &$left, array $right )
+	protected function _merge( array $left, array $right )
 	{
-		$match = false;
-		foreach( $left as $lkey => $lvalue )
+		foreach( $right as $key => $value )
 		{
-			foreach( $right as $rkey => $rvalue )
-			{
-				if( $lkey == $rkey )
-				{
-					$match = true;
-					if( is_array( $lvalue ) && is_array( $rvalue ) ) {
-						$this->_merge( $lvalue, $rvalue );
-					} else {
-						$lvalue = $rvalue;
-					}
-				}
+			if( isset( $left[$key] ) && is_array( $left[$key] ) && is_array( $value ) ) {
+				$left[$key] = $this->_merge( $left[$key], $value );
+			} else {
+				$left[$key] = $value;
 			}
-			$left[ $lkey ] = $lvalue;
 		}
 
-		if( $match === false ) {
-			$left = array_merge( $left, $right );
-		}
+		return $left;
 	}
 
 
