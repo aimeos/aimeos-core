@@ -335,10 +335,14 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$orderProductSame = clone $product;
 		$orderProductSame->setProductCode('prodid5');
 		$orderProductSame->setQuantity( 5 );
-		$orderProduct->setQuantity( 6 );
+		$orderProduct->setQuantity( 4 );
 
 		$this->_object->addProduct($orderProductSame );
 		$this->assertEquals( $products, $this->_object->getProducts() );
+
+		// Exceed limit for single product
+		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->_object->addProduct($orderProductSame );
 	}
 
 

@@ -247,7 +247,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
 	 */
-	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position=null )
+	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position = null )
 	{
 		$this->_checkProduct( $item );
 		$this->_checkPrice( $item->getPrice() );
@@ -256,15 +256,16 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		try
 		{
-			$product = $this->_getSameProduct( $item );
-			$product->setQuantity( $product->getQuantity() + $item->getQuantity() );
+			$quantity = $item->getQuantity();
+			$item = $this->_getSameProduct( $item );
+			$item->setQuantity( $item->getQuantity() + $quantity );
 		}
 		catch( MShop_Order_Exception $e )
 		{
-			if( is_null( $position ) ) {
-				$this->_products[] = $item;
+			if( $position !== null ) {
+				array_splice( $this->_products, $position, 0, array( $item ) );
 			} else {
-				array_splice($this->_products, $position, 0, array( $item ));
+				$this->_products[] = $item;
 			}
 		}
 

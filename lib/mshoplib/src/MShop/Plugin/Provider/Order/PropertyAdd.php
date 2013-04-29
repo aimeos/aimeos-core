@@ -47,7 +47,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$p->addListener( $this, 'addProduct.after' );
+		$p->addListener( $this, 'addProduct.before' );
 	}
 
 
