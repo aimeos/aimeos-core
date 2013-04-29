@@ -40,7 +40,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$p->addListener( $this, 'addProduct.before' );
+		$p->addListener( $this, 'addProduct.after' );
 	}
 
 
