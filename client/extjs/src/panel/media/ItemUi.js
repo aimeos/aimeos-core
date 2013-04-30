@@ -19,10 +19,6 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
-		if(this.copyActive){
-			this.record.data['media.id'] = null;
-		}
-		
 		this.items = [ {
 			xtype : 'tabpanel',
 			activeTab : 0,

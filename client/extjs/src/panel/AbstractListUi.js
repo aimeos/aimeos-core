@@ -234,7 +234,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
 	onBeforeLoad: function(store, options) {
 		this.setSiteParam(store);
-
+		
 		if (this.domain) {
 			this.setDomainFilter(store, options);
 		}
@@ -329,13 +329,27 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		var itemUi = Ext.ComponentMgr.create({
 			xtype: this.itemUiXType,
 			domain: this.domain,
-			record: action === 'add' ? null : this.grid.getSelectionModel().getSelected(),
+			record: this.getRecord(action),
 			store: this.store,
 			listUI: this,
 			copyActive: action === 'copy' ? true : false
 		});
 
 		itemUi.show();
+	},
+	
+	getRecord: function( action ) {
+		if( action === 'add' ) {
+			return null;
+		} else if( action === 'edit' ) {
+			return this.grid.getSelectionModel().getSelected();
+		} 
+		else if( action === 'copy' )
+		{
+			record = this.grid.getSelectionModel().getSelected();
+			record.data[ this.idProperty ] = null;
+			return record;
+		}
 	},
 
 	onStoreException: function(proxy, type, action, options, response) {
