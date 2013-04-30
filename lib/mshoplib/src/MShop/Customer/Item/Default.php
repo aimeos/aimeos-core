@@ -176,6 +176,8 @@ class MShop_Customer_Item_Default
 	 */
 	public function setCode( $value )
 	{
+		$this->_checkCode( $value );
+
 		if ( $value == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $value;

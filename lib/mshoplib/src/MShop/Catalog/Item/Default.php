@@ -150,6 +150,8 @@ class MShop_Catalog_Item_Default
 	 */
 	public function setCode( $name )
 	{
+		$this->_checkCode( $name );
+
 		$this->_node->setCode( $name );
 	}
 

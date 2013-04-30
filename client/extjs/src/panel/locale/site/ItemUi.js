@@ -64,6 +64,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 							fieldLabel : _('Code'),
 							name : 'locale.site.code',
 							allowBlank : false,
+							maxLength : 32,
 							emptyText : _('Unique site code (required)')
 						}, {
 							xtype : 'textfield',

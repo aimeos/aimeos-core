@@ -76,6 +76,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							fieldLabel : _('Code'),
 							name : 'service.code',
 							allowBlank : false,
+							maxLength : 32,
 							emptyText : _('Unique service code (required)')
 						}, {
 							xtype : 'textfield',
