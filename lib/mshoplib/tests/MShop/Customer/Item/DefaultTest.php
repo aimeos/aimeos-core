@@ -165,7 +165,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
-	
+
 	public function testGetBirthday()
 	{
 		$this->assertEquals( '2010-01-01', $this->_object->getBirthday() );
@@ -193,7 +193,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $address->getPostal(), '22769' );
 		$this->assertEquals( $address->getCity(), 'Hamburg' );
 		$this->assertEquals( $address->getState(), 'Hamburg' );
-		$this->assertEquals( $address->getCountryId(), 'de' );
+		$this->assertEquals( $address->getCountryId(), 'DE' );
 		$this->assertEquals( $address->getLanguageId(), 'de' );
 		$this->assertEquals( $address->getTelephone(), '05554433221' );
 		$this->assertEquals( $address->getEmail(), 'unit.test@metaways.de' );
