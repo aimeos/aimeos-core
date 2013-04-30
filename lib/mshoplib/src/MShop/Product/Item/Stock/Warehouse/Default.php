@@ -49,9 +49,7 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	 */
 	public function setCode( $code )
 	{
-		if( strlen( $code ) > 32 ) {
-			throw new MShop_Exception( sprintf( 'Code must not be longer than 32 characters' ) );
-		}
+		$this->_checkCode( $code );
 
 		$this->_values['code'] = (string) $code;
 		$this->setModified();

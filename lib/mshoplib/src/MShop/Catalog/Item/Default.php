@@ -150,9 +150,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function setCode( $name )
 	{
-		if( strlen( $name ) > 32 ) {
-			throw new MShop_Exception( sprintf( 'Code must not be longer than 32 characters' ) );
-		}
+		$this->_checkCode( $name );
 
 		$this->_node->setCode( $name );
 	}

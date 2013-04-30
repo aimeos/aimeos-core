@@ -170,6 +170,8 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setSupplierCode( $suppliercode )
 	{
+		$this->_checkCode( $suppliercode );
+
 		if ( $suppliercode == $this->getSupplierCode() ) { return; }
 
 		$this->_values['suppliercode'] = (string) $suppliercode;
@@ -220,6 +222,8 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setProductCode( $code )
 	{
+		$this->_checkCode( $code );
+
 		if ( $code == $this->getProductCode() ) { return; }
 
 		$this->_values['prodcode'] = (string) $code;

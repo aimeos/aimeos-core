@@ -176,11 +176,9 @@ class MShop_Customer_Item_Default
 	 */
 	public function setCode( $value )
 	{
-		if ( $value == $this->getCode() ) { return; }
+		$this->_checkCode( $value );
 
-		if( strlen( $value ) > 32 ) {
-			throw new MShop_Exception( sprintf( 'Code must not be longer than 32 characters' ) );
-		}
+		if ( $value == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $value;
 		$this->setModified();
