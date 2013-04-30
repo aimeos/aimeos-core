@@ -17,10 +17,6 @@ MShop.panel.locale.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	{
 		this.title = _('Locale item details');
 		
-		if(this.copyActive){
-			this.record.data['locale.id'] = null;
-		}
-
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
