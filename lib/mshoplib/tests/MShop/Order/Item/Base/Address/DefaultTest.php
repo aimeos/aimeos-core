@@ -54,7 +54,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 			'postal' => '22769',
 			'city' => 'Hamburg',
 			'state' => 'Hamburg',
-			'countryid' => 'de',
+			'countryid' => 'DE',
 			'telephone' => '05554433221',
 			'email' => 'unit.test@metaways.de',
 			'telefax' => '05554433222',
@@ -255,14 +255,14 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetCountryId()
 	{
-		$this->assertEquals( 'de', $this->_object->getCountryId());
+		$this->assertEquals( 'DE', $this->_object->getCountryId());
 	}
 
 	public function testSetCountryId()
 	{
 		$this->_object->setCountryId('uk');
 		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 'uk', $this->_object->getCountryId());
+		$this->assertEquals( 'UK', $this->_object->getCountryId());
 	}
 
 	public function testGetTelephone()
@@ -357,7 +357,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
-	
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
@@ -413,7 +413,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( '22769', $addressCopy->getPostal() );
 		$this->assertEquals( 'Hamburg', $addressCopy->getCity() );
 		$this->assertEquals( 'Hamburg', $addressCopy->getState() );
-		$this->assertEquals( 'de', $addressCopy->getCountryId() );
+		$this->assertEquals( 'DE', $addressCopy->getCountryId() );
 		$this->assertEquals( '05554433221', $addressCopy->getTelephone() );
 		$this->assertEquals( 'unit.test@metaways.de', $addressCopy->getEmail() );
 		$this->assertEquals( '05554433222', $addressCopy->getTelefax() );
