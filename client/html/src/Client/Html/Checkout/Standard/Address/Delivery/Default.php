@@ -131,8 +131,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) === 'null' ) // new address
 			{
 				$param = $view->param( 'ca-delivery', array() );
-				$list = $view->config( 'client/html/checkout/standard/address/delivery/mandatory', $this->_mandatory );
-				$optional = $view->config( 'client/html/checkout/standard/address/billing/optional', $this->_optional );
+				$list = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
+				$optional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
 				$missing = array();
 
 				foreach( $list as $mandatory )
@@ -219,8 +219,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			$salutations = array( 'company', 'mr', 'mrs' );
 			$view->deliverySalutations = $view->config( 'client/html/common/address/delivery/salutations', $salutations );
 
-			$view->deliveryMandatory = $view->config( 'client/html/checkout/standard/address/delivery/mandatory', $this->_mandatory );
-			$view->deliveryOptional = $view->config( 'client/html/checkout/standard/address/delivery/optional', $this->_optional );
+			$view->deliveryMandatory = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
+			$view->deliveryOptional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
 
 
 			$this->_cache = $view;
