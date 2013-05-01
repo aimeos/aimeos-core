@@ -19,10 +19,10 @@ class MW_Config_Array
 	extends MW_Config_Abstract
 	implements MW_Config_Interface
 {
-	protected $_config;
-	protected $_paths;
-	protected $_setValues = array();
-	protected $_fileCache = array();
+	private $_config;
+	private $_paths;
+	private $_setValues = array();
+	private $_fileCache = array();
 
 
 

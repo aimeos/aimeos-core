@@ -19,7 +19,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 {
 	private $_context;
 	private $_stmts = array();
-	protected $_keySeparator = '.';
+	private $_keySeparator = '.';
 
 
 	/**
@@ -411,6 +411,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$result = array();
 		$noprefix = true;
 		$strlen = strlen( $string );
+		$sep = $this->_getKeySeparator();
 
 		foreach( $prefix as $key )
 		{
@@ -418,7 +419,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 			if( strncmp( $string, $key, $len ) === 0 )
 			{
-				if( $strlen > $len && ( $pos = strrpos( $string, $this->_keySeparator ) ) !== false )
+				if( $strlen > $len && ( $pos = strrpos( $string, $sep ) ) !== false )
 				{
 					$result[] = $string = substr( $string, 0, $pos );
 					$result = array_merge( $result, $this->_cutNameTail( $prefix, $string ) );
@@ -431,7 +432,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 		if( $noprefix )
 		{
-			if( ( $pos = strrpos( $string, $this->_keySeparator ) ) !== false ) {
+			if( ( $pos = strrpos( $string, $sep ) ) !== false ) {
 				$result[] = $string = substr( $string, 0, $pos );
 			} else {
 				$result[] = $string;
@@ -708,6 +709,17 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 * Returns the used separator inside the search keys.
+	 *
+	 * @return string Separator string (default: ".")
+	 */
+	protected function _getKeySeparator()
+	{
+		return $this->_keySeparator;
+	}
+
+
+	/**
 	 * Replaces ":site" marker in a search config item array.
 	 *
 	 * @param array &$searchAttr Single search config definition including the "internalcode" key
@@ -771,6 +783,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			$keys = array_merge( $keys, $this->_getCriteriaKeys( $required, $sortation ) );
 		}
 
+		$sep = $this->_getKeySeparator();
 		$basekey = array_shift( $required );
 		$keys = array_unique( array_merge( $required, $keys ) );
 		sort( $keys );
@@ -779,7 +792,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		{
 			if( $key !== $basekey )
 			{
-				$name = $key . $this->_keySeparator . 'id';
+				$name = $key . $sep . 'id';
 
 				if( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
 					$joins = array_merge( $joins, $attributes[$name]->getInternalDeps() );
@@ -789,7 +802,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 				}
 			}
 
-			$name = $key . $this->_keySeparator . 'siteid';
+			$name = $key . $sep . 'siteid';
 
 			if( isset( $attributes[$name] ) ) {
 				$cond[] = $search->compare( '==', $name, $siteIds );
