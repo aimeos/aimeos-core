@@ -8,9 +8,9 @@
 
 class Perf_CatalogIndexTest extends MW_Unittest_Testcase
 {
-	protected $_context;
-	protected $_catItem;
-	protected $_slizeSize = 100;
+	private $_context;
+	private $_catItem;
+	private $_slizeSize = 100;
 
 
 	public static function main()

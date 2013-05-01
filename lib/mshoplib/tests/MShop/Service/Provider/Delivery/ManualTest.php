@@ -17,7 +17,7 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 	 * @var    MShop_Service_Provider_Delivery_Manual
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**

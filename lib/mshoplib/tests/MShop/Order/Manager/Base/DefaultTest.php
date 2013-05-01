@@ -16,13 +16,13 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Order_Manager_Base_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.

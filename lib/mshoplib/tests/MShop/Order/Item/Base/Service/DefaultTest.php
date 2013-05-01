@@ -13,10 +13,10 @@
  */
 class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
-	protected $_price;
-	protected $_attribute = array();
+	private $_object;
+	private $_values;
+	private $_price;
+	private $_attribute = array();
 
 
 	public static function main()

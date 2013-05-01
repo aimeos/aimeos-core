@@ -9,7 +9,7 @@
 
 class Controller_ExtJS_Plugin_Decorator_ExampleTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

@@ -12,7 +12,7 @@ class MW_Template_SQLTest extends MW_Unittest_Testcase
 	 * @var    MW_Template_CMSLite
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

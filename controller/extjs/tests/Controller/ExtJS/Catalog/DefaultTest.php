@@ -9,9 +9,9 @@
 
 class Controller_ExtJS_Catalog_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
-	protected $_rootnode;
+	private $_rootnode;
 
 
 	/**

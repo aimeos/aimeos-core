@@ -16,7 +16,7 @@ class MShop_Supplier_Item_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Supplier_Item_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Runs the test methods of this class.

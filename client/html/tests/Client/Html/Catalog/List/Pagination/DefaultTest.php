@@ -8,7 +8,7 @@
 
 class Client_Html_Catalog_List_Pagination_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

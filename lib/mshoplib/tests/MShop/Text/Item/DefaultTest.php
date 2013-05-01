@@ -12,9 +12,9 @@
  */
 class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
-	protected $_values;
+	private $_values;
 	/**
 	 * Runs the test methods of this class.
 	 *

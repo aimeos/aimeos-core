@@ -12,14 +12,14 @@
  */
 class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_context;
-	protected $_object;
+	private $_context;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	public static function main()
 	{

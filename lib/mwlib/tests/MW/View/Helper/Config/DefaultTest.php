@@ -12,7 +12,7 @@
  */
 class MW_View_Helper_Config_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

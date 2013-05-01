@@ -8,7 +8,7 @@
 
 class MW_View_Helper_NavTree_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

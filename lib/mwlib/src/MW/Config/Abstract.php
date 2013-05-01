@@ -17,7 +17,7 @@
  */
 abstract class MW_Config_Abstract implements MW_Config_Interface
 {
-	protected $_includeCache = array();
+	private $_includeCache = array();
 
 
 	/**

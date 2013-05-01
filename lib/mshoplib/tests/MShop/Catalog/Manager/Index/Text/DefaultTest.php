@@ -12,14 +12,14 @@
  */
 class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 	protected static $_products;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 
 	/**

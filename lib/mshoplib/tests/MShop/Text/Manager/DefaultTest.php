@@ -14,13 +14,13 @@ class MShop_Text_Manager_DefaultTest extends MW_Unittest_Testcase
 	/**
 	 * @var MShop_Text_Manager_Default
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

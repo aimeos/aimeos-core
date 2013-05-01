@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Confirm_FactoryTest extends MW_Unittest_Testcase
 {
-	protected $_context;
-	protected $_templatePaths;
+	private $_context;
+	private $_templatePaths;
 
 
 	/**

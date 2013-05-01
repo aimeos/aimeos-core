@@ -11,7 +11,7 @@
  */
 class MW_Common_Criteria_MySQLTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

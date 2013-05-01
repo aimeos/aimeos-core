@@ -8,8 +8,8 @@
  */
 class MW_Setup_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_config;
-	protected $_dbm;
+	private $_config;
+	private $_dbm;
 
 
 	/**

@@ -12,8 +12,8 @@
  */
 class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_editor;
+	private $_object;
+	private $_editor;
 
 
 	/**

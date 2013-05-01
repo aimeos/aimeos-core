@@ -9,7 +9,7 @@
 
 class Controller_ExtJS_Order_Base_Service_Attribute_FactoryTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

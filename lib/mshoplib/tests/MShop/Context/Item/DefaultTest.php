@@ -8,7 +8,7 @@
 
 class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 	public static function main()
 	{

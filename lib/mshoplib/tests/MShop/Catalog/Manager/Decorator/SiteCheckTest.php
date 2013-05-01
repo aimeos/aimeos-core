@@ -12,7 +12,7 @@
  */
 class MShop_Catalog_Manager_Decorator_SiteCheckTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

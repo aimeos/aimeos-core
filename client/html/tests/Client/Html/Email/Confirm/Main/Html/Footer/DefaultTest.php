@@ -7,8 +7,8 @@
 
 class Client_Html_Email_Confirm_Main_Html_Footer_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_context;
+	private $_object;
+	private $_context;
 
 
 	/**

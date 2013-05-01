@@ -7,9 +7,9 @@
 
 class Client_Html_Basket_Mini_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_standard;
-	protected $_context;
+	private $_object;
+	private $_standard;
+	private $_context;
 
 
 	/**

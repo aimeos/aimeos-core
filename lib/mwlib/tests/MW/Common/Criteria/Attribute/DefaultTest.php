@@ -12,7 +12,7 @@ class MW_Common_Criteria_Attribute_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MW_Common_Criteria_Attribute_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

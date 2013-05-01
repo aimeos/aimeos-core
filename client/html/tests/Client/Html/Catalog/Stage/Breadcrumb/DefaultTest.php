@@ -7,7 +7,7 @@
 
 class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**
