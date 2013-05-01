@@ -18,8 +18,8 @@
 class MShop_Plugin_Provider_Order_AddressesAvailable implements MShop_Plugin_Provider_Interface
 {
 
-	protected $_item;
-	protected $_context;
+	private $_item;
+	private $_context;
 
 
 	/**
