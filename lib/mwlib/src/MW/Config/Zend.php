@@ -50,32 +50,25 @@ class MW_Config_Zend
 	 *
 	 * @param string $path Path to the requested value like tree/node/classname
 	 * @param mixed $default Value returned if requested key isn't found
-	 * @return mixed Value associated to the requested key
+	 * @return mixed Value associated to the requested key or default value if no value in configuration was found
 	 */
 	public function get( $path, $default = null )
 	{
-		$path = trim( $path, '/' );
+		$parts = explode( '/', trim( $path, '/' ) );
 
-		$result = $default;
-		$parts = explode( '/', $path );
-
-		try
-		{
-			foreach( $this->_paths as $fspath ) {
-				$this->_load( $this->_config, $fspath, $parts );
-			}
-
-			$result = $this->_get( $this->_config, '', $parts );
-		}
-		catch( MW_Config_Exception $e ) {
-			return $default;
+		if( ( $value = $this->_get( $this->_config, $parts ) ) !== null ) {
+			return $value;
 		}
 
-		if ($result instanceof Zend_Config) {
-			$result = $result->toArray();
+		foreach( $this->_paths as $fspath ) {
+			$this->_load( $this->_config, $fspath, $parts );
 		}
 
-		return $result;
+		if( ( $value = $this->_get( $this->_config, $parts ) ) !== null ) {
+			return $value;
+		}
+
+		return $default;
 	}
 
 
@@ -87,22 +80,19 @@ class MW_Config_Zend
 	 */
 	public function set( $path, $value )
 	{
-		$path = trim($path, '/');
-
-		$parts = explode('/', $path);
+		$parts = explode( '/', trim( $path, '/' ) );
 
 		$config = $this->_config;
-		$max = count($parts) - 1;
+		$max = count( $parts ) - 1;
 
-		for ($i = 0; $i < $max; $i++)
+		for( $i = 0; $i < $max; $i++ )
 		{
-			$val = $config->get($parts[$i]);
+			$val = $config->get( $parts[$i] );
 
-			if ($val instanceof Zend_Config) {
+			if( $val instanceof Zend_Config ) {
 				$config = $val;
 			} else {
-				$config->{$parts[$i]} = new Zend_Config( array(), true );
-				$config = $config->{$parts[$i]};
+				$config = $config->{$parts[$i]} = new Zend_Config( array(), true );
 			}
 		}
 
@@ -114,29 +104,26 @@ class MW_Config_Zend
 	 * Descents into the configuration specified by the given path and returns the value if found.
 	 *
 	 * @param Zend_Config $config Configuration object which should contain the loaded configuration
-	 * @param string $path Path to the configuration directory
 	 * @param array $parts List of config name parts to look for
-	 * @throws MW_Config_Exception if no value is found
+	 * @return mixed Found value or null if no value is available
 	 */
-	protected function _get( Zend_Config $config, $path, array $parts )
+	protected function _get( Zend_Config $config, array $parts )
 	{
-		if( ( $key = array_shift( $parts ) ) !== null )
+		if( ( $key = array_shift( $parts ) ) !== null && isset( $config->$key ) )
 		{
-			if( isset( $config->$key ) )
+			if( $config->$key instanceof Zend_Config )
 			{
-				if( $config->$key instanceof Zend_Config ) {
-					return $this->_get( $config->$key, $path . DIRECTORY_SEPARATOR . $key, $parts );
-				} else if( empty( $parts ) ) {
-					return $config->$key;
+				if( count( $parts  ) > 0 ) {
+					return $this->_get( $config->$key, $parts );
 				}
+
+				return $config->$key->toArray();
 			}
 
-			throw new MW_Config_Exception( 'Key not found' );
+			return $config->$key;
 		}
-		else
-		{
-			return $config;
-		}
+
+		return null;
 	}
 
 
