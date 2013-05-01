@@ -16,8 +16,8 @@ class MShop_Attribute_Item_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Attribute_Item_Default
 	 * @access protected
 	 */
-	protected $_object;
-	protected $_values;
+	private $_object;
+	private $_values;
 
 
 	/**

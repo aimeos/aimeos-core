@@ -8,8 +8,8 @@
 
 class Client_Html_Basket_Mini_FactoryTest extends MW_Unittest_Testcase
 {
-	protected $_context;
-	protected $_templatePaths;
+	private $_context;
+	private $_templatePaths;
 
 
 	/**

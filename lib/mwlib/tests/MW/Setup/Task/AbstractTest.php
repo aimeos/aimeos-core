@@ -37,7 +37,7 @@ class MW_Setup_Task_AbstractImpl extends MW_Setup_Task_Abstract
  */
 class MW_Setup_Task_AbstractTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

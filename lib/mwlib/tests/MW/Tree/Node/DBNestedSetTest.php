@@ -12,7 +12,7 @@ class MW_Tree_Node_DBNestedSetTest extends MW_Unittest_Testcase
 	 * @var    MW_Tree_Node_DBNestedSet
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

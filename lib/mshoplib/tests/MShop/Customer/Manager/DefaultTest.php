@@ -11,14 +11,14 @@
  */
 class MShop_Customer_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_fixture = null;
-	protected $_object = null;
+	private $_fixture = null;
+	private $_object = null;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.

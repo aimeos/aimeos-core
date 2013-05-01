@@ -17,7 +17,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Service_Provider_Delivery_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**

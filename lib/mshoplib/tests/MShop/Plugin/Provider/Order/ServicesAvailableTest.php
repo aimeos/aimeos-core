@@ -8,9 +8,9 @@
 
 class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framework_TestCase
 {
-	protected $_order;
-	protected $_plugin;
-	protected $_service;
+	private $_order;
+	private $_plugin;
+	private $_service;
 
 	/**
 	 * Runs the test methods of this class.

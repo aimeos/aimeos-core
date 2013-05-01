@@ -11,10 +11,10 @@
  */
 class MShop_Plugin_Provider_Order_ProductLimitTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_plugin;
-	protected $_order;
-	protected $_products;
+	private $_object;
+	private $_plugin;
+	private $_order;
+	private $_products;
 
 
 	/**

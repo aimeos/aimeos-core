@@ -36,7 +36,7 @@ class Criteria_Plugin_LuceneTest implements MW_Common_Criteria_Plugin_Interface
  */
 class MW_Common_Criteria_LuceneTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

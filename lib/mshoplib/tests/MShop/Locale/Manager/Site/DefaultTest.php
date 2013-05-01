@@ -12,8 +12,8 @@
  */
 class MShop_Locale_Manager_Site_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_context;
-	protected $_object;
+	private $_context;
+	private $_object;
 
 
 	protected function setUp()

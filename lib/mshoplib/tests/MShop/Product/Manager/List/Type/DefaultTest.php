@@ -15,13 +15,13 @@ class MShop_Product_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Common_Manager_List_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.

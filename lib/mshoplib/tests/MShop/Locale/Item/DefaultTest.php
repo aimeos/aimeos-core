@@ -13,9 +13,9 @@
 class MShop_Locale_Item_DefaultTest extends MW_Unittest_Testcase
 {
 
-	protected $_object;
-	protected $_siteItem;
-	protected $_values;
+	private $_object;
+	private $_siteItem;
+	private $_values;
 
 
 	public static function main()

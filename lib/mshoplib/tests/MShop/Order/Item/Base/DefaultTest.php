@@ -12,13 +12,13 @@
  */
 class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
-	protected $_locale;
-	protected $_products;
-	protected $_addresses;
-	protected $_services;
-	protected $_coupons;
+	private $_object;
+	private $_values;
+	private $_locale;
+	private $_products;
+	private $_addresses;
+	private $_services;
+	private $_coupons;
 
 
 	/**

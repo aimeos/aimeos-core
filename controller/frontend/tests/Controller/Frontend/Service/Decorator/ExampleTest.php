@@ -9,7 +9,7 @@
 
 class Controller_Frontend_Plugin_Decorator_ExampleTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

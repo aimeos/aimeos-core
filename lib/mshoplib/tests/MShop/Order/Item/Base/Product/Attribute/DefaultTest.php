@@ -16,7 +16,7 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 	 * @var    MShop_Order_Item_Base_Product_Attribute_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**

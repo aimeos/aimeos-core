@@ -17,15 +17,15 @@ class MShop_Plugin_Manager_DefaultTest_Publisher extends MW_Observer_Publisher_A
  */
 class MShop_Plugin_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_examplePlugin;
-	protected $_examplePlugin2;
+	private $_object;
+	private $_examplePlugin;
+	private $_examplePlugin2;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.

@@ -16,11 +16,11 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Order_Item_Base_Product_Default
 	 * @access protected
 	 */
-	protected $_object;
-	protected $_values;
-	protected $_price;
-	protected $_attribute = array();
-	protected $_subProducts;
+	private $_object;
+	private $_values;
+	private $_price;
+	private $_attribute = array();
+	private $_subProducts;
 
 
 	/**

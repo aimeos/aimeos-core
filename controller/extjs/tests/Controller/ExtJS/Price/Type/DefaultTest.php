@@ -9,7 +9,7 @@
 
 class Controller_ExtJS_Price_Type_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

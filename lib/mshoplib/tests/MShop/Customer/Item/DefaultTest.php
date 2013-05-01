@@ -12,8 +12,8 @@
  */
 class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
+	private $_object;
+	private $_values;
 
 	/**
 	 * Runs the test methods of this class.

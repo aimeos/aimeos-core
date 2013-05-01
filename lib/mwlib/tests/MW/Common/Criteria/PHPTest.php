@@ -37,7 +37,7 @@ class Criteria_Plugin_PHPTest implements MW_Common_Criteria_Plugin_Interface
  */
 class MW_Common_Criteria_PHPTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

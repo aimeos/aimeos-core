@@ -12,7 +12,7 @@
  */
 class MShop_Product_Item_Stock_Warehouse_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Runs the test methods of this class.

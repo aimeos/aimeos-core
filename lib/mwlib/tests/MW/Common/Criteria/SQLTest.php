@@ -36,7 +36,7 @@ class Criteria_Plugin_SQLTest implements MW_Common_Criteria_Plugin_Interface
  */
 class MW_Common_Criteria_SQLTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

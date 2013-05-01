@@ -8,8 +8,8 @@
  */
 class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 {
-	protected $_dbm;
-	protected $_config;
+	private $_dbm;
+	private $_config;
 
 
 	/**

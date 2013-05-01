@@ -12,7 +12,7 @@
  */
 class MShop_Plugin_Item_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

@@ -16,7 +16,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends MW_Unittest_Testcase
 	 * @var    MShop_Service_Provider_Decorator_Example
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Runs the test methods of this class.

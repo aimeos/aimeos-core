@@ -12,7 +12,7 @@ class MW_Logger_ZendTest extends MW_Unittest_Testcase
 	 * @var    MW_Logger_Zend
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Runs the test methods of this class.

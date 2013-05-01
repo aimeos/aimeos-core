@@ -8,8 +8,8 @@
  */
 class MW_Setup_DBSchema_MysqlTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_dbm;
+	private $_object;
+	private $_dbm;
 
 
 	/**

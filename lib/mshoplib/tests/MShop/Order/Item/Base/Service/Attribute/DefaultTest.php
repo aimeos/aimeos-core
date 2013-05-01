@@ -12,8 +12,8 @@
  */
 class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
+	private $_object;
+	private $_values;
 
 
 	/**

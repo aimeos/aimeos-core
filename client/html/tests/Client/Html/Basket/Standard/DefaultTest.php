@@ -8,8 +8,8 @@
 
 class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_context;
+	private $_object;
+	private $_context;
 
 
 	/**

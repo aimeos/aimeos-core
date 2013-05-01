@@ -13,13 +13,13 @@
 class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 {
 	protected static $_products;
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.

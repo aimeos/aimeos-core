@@ -16,11 +16,11 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	 * @var    MShop_Service_Provider_Payment_PayPal
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
-	protected $_serviceItem;
+	private $_serviceItem;
 
-	protected $_order;
+	private $_order;
 
 
 	/**

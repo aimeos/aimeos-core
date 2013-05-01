@@ -9,8 +9,8 @@
 
 class Controller_ExtJS_Media_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_directory;
+	private $_object;
+	private $_directory;
 
 
 	/**
