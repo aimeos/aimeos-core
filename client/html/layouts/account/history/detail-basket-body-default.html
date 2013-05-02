@@ -5,6 +5,10 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
+$detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+$detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
+
 if( isset( $this->orderBaseItem ) )
 {
 	$price = $this->orderBaseItem->getPrice();
@@ -66,8 +70,10 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php 	foreach( $this->orderBaseItem->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
-						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $product->getMediaUrl(); ?>" />
-						<span class="product-name"><?php echo $product->getName(); ?></span>
+<?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
+						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaUrl; ?>" alt="<?php echo $product->getName(); ?>" />
+<?php		endif; ?>
+						<a class="product-name" href="<?php echo $this->url( $detailTarget, $detailController, $detailAction, array( 'l-product-id' => $product->getProductId() ), array( $product->getName() ) ); ?>"><?php echo $product->getName(); ?></a>
 <?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
 						<ul class="attr-list">
 <?php			foreach( $product->getAttributes() as $attribute ) : ?>

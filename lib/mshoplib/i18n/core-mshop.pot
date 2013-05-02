@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-25 10:01+0200\n"
+"POT-Creation-Date: 2013-05-02 13:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/MShop/Order/Item/Base/Default.php:318
+#: src/MShop/Order/Item/Base/Default.php:319
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
 msgstr ""
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:510
+#: src/MShop/Order/Item/Base/Default.php:511
 #, php-format
 msgid "Basket empty"
 msgstr ""
@@ -82,10 +82,10 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:281
 #: src/MShop/Common/Manager/Abstract.php:328
 #: src/MShop/Common/Manager/Abstract.php:365
-#: src/MShop/Common/Manager/Abstract.php:473
+#: src/MShop/Common/Manager/Abstract.php:474
 #: src/MShop/Product/Manager/Tag/Default.php:394
 #: src/MShop/Plugin/Manager/Abstract.php:42
-#: src/MShop/Plugin/Manager/Default.php:252
+#: src/MShop/Plugin/Manager/Default.php:261
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
@@ -100,10 +100,10 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:265
 #: src/MShop/Common/Manager/Abstract.php:322
 #: src/MShop/Common/Manager/Abstract.php:358
-#: src/MShop/Common/Manager/Abstract.php:467
+#: src/MShop/Common/Manager/Abstract.php:468
 #: src/MShop/Product/Manager/Tag/Default.php:384
 #: src/MShop/Plugin/Manager/Abstract.php:36
-#: src/MShop/Plugin/Manager/Default.php:244
+#: src/MShop/Plugin/Manager/Default.php:253
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
@@ -190,7 +190,7 @@ msgstr ""
 msgid "Invalid JSON as result of search for order service attribute with ID \"%1$d\""
 msgstr ""
 
-#: src/MShop/Plugin/Manager/Default.php:406
+#: src/MShop/Plugin/Manager/Default.php:417
 #, php-format
 msgid "Invalid JSON as search result: %1$s"
 msgstr ""
@@ -224,7 +224,7 @@ msgstr ""
 #: src/MShop/Customer/Manager/Factory.php:40
 #: src/MShop/Attribute/Manager/Factory.php:40
 #: src/MShop/Common/Factory/Abstract.php:36
-#: src/MShop/Common/Manager/Abstract.php:461
+#: src/MShop/Common/Manager/Abstract.php:462
 #: src/MShop/Text/Manager/Factory.php:40
 #: src/MShop/Catalog/Manager/Factory.php:39
 #: src/MShop/Product/Manager/Factory.php:40
@@ -253,7 +253,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:192
 #: src/MShop/Common/Manager/Abstract.php:250
 #: src/MShop/Common/Manager/Abstract.php:303
-#: src/MShop/Plugin/Manager/Default.php:224
+#: src/MShop/Plugin/Manager/Default.php:233
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
 msgstr ""
@@ -268,7 +268,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:258
 #: src/MShop/Common/Manager/Abstract.php:312
 #: src/MShop/Common/Manager/Abstract.php:351
-#: src/MShop/Common/Manager/Abstract.php:534
+#: src/MShop/Common/Manager/Abstract.php:535
 #: src/MShop/Product/Manager/Tag/Default.php:377
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
@@ -280,7 +280,7 @@ msgid "Invalid characters in price \"%1$s\""
 msgstr ""
 
 #: src/MShop/Service/Manager/Default.php:578
-#: src/MShop/Plugin/Manager/Default.php:232
+#: src/MShop/Plugin/Manager/Default.php:241
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
 msgstr ""
@@ -310,12 +310,12 @@ msgstr ""
 msgid "Item could not be saved using method saveItem(). Item ID not available."
 msgstr ""
 
-#: src/MShop/Common/Manager/Abstract.php:679
+#: src/MShop/Common/Manager/Abstract.php:680
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
 msgstr ""
 
-#: src/MShop/Common/Manager/Abstract.php:703
+#: src/MShop/Common/Manager/Abstract.php:704
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr ""
@@ -440,7 +440,7 @@ msgstr ""
 #: src/MShop/Product/Manager/Tag/Default.php:175
 #: src/MShop/Product/Manager/Default.php:395
 #: src/MShop/Media/Manager/Default.php:437
-#: src/MShop/Plugin/Manager/Default.php:293
+#: src/MShop/Plugin/Manager/Default.php:302
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:61
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:66
 #: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:64
@@ -542,7 +542,7 @@ msgid "Product matching given properties not found"
 msgstr ""
 
 #: src/MShop/Order/Item/Base/Default.php:236
-#: src/MShop/Order/Item/Base/Default.php:285
+#: src/MShop/Order/Item/Base/Default.php:286
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
 msgstr ""
@@ -552,7 +552,7 @@ msgstr ""
 msgid "Product with code \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:745
+#: src/MShop/Order/Item/Base/Default.php:746
 #, php-format
 msgid "Product with the same signatur not available"
 msgstr ""
@@ -568,7 +568,7 @@ msgid "Products out of stock"
 msgstr ""
 
 #: src/MShop/Service/Manager/Default.php:573
-#: src/MShop/Plugin/Manager/Default.php:217
+#: src/MShop/Plugin/Manager/Default.php:226
 #, php-format
 msgid "Provider in \"%1$s\" not available"
 msgstr ""
@@ -606,7 +606,7 @@ msgstr ""
 msgid "Sending order to delivery provider failed: \"%1$s\""
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:387
+#: src/MShop/Order/Item/Base/Default.php:388
 #, php-format
 msgid "Service of type \"%1$s\" not available"
 msgstr ""
@@ -652,7 +652,7 @@ msgid "Total number of product exceeds given limit"
 msgstr ""
 
 #: src/MShop/Locale/Manager/Default.php:522
-#: src/MShop/Common/Manager/Abstract.php:839
+#: src/MShop/Common/Manager/Abstract.php:852
 #, php-format
 msgid "Total results value not found"
 msgstr ""

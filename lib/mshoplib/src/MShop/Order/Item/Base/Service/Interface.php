@@ -105,6 +105,14 @@ interface MShop_Order_Item_Base_Service_Interface extends MShop_Common_Item_Inte
 	public function getAttribute( $code );
 
 	/**
+	 * Returns the attribute item for the service with the given code.
+	 *
+	 * @param string $code code of the service attribute item.
+	 * @return MShop_Order_Item_Base_Service_Attribute_Interface|null Attribute item for the service and the given code
+	 */
+	public function getAttributeItem( $code );
+
+	/**
 	 * Returns the list of attribute items for the service.
 	 *
 	 * @return array List of attribute items implementing MShop_Order_Item_Base_Service_Attribute_Interface

@@ -235,15 +235,27 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getAttribute( $code )
 	{
-		if( !isset( $this->_attributesMap ) )
-		{
-			foreach( $this->_attributes as $attribute ) {
-				$this->_attributesMap[ $attribute->getCode() ] = $attribute->getValue();
-			}
+		$map = $this->_getAttributeMap();
+
+		if( isset( $map[ $code ] ) ) {
+			return $map[ $code ]->getValue();
 		}
 
-		if( isset( $this->_attributesMap[ $code ] ) ) {
-			return $this->_attributesMap[ $code ];
+		return null;
+	}
+
+	/**
+	 * Returns the attribute item for the service with the given code.
+	 *
+	 * @param string $code code of the service attribute item.
+	 * @return MShop_Order_Item_Base_Service_Attribute_Interface|null Attribute item for the service and the given code
+	 */
+	public function getAttributeItem( $code )
+	{
+		$map = $this->_getAttributeMap();
+
+		if( isset( $map[ $code ] ) ) {
+			return $map[ $code ];
 		}
 
 		return null;
@@ -320,6 +332,26 @@ class MShop_Order_Item_Base_Service_Default
 		}
 
 		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the attribute map for the service.
+	 *
+	 * @return array Associative list of code as key and an MShop_Order_Item_Base_Service_Attribute_Interface as value
+	 */
+	protected function _getAttributeMap()
+	{
+		if( !isset( $this->_attributesMap ) )
+		{
+			$this->_attributesMap = array();
+
+			foreach( $this->_attributes as $attribute ) {
+				$this->_attributesMap[ $attribute->getCode() ] = $attribute;
+			}
+		}
+
+		return $this->_attributesMap;
 	}
 
 }
