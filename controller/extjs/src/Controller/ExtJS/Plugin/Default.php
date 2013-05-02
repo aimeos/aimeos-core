@@ -60,6 +60,7 @@ class Controller_ExtJS_Plugin_Default
 			if( isset( $entry->{'plugin.label'} ) ) {$item->setLabel( $entry->{'plugin.label'} );}
 			if( isset( $entry->{'plugin.provider'} ) ) { $item->setProvider( $entry->{'plugin.provider'} ); }
 			if( isset( $entry->{'plugin.config'} ) ) { $item->setConfig( (array) $entry->{'plugin.config'} ); }
+			if( isset( $entry->{'plugin.position'} ) ) { $item->setPosition( $entry->{'plugin.position'} ); }
 			if( isset( $entry->{'plugin.status'} ) ) { $item->setStatus( $entry->{'plugin.status'} ); }
 
 			$this->_manager->saveItem( $item );

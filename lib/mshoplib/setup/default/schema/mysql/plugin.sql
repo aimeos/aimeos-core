@@ -66,6 +66,8 @@ CREATE TABLE "mshop_plugin" (
 	"provider" VARCHAR(255) NOT NULL,
 	-- Plugin configuration
 	"config" TEXT NOT NULL DEFAULT '',
+	-- Position for sorting
+	"pos" INTEGER NOT NULL,
 	-- status code (0=hidden, 1=display)
 	"status" SMALLINT NOT NULL DEFAULT 0,
 	-- Date of last modification of this database entry
@@ -95,6 +97,8 @@ CREATE INDEX "idx_msplu_sid_status" ON "mshop_plugin" ("siteid", "status");
 CREATE INDEX "idx_msplu_sid_label" ON "mshop_plugin" ("siteid", "label");
 
 CREATE INDEX "idx_msplu_sid_provider" ON "mshop_plugin" ("siteid", "provider");
+
+CREATE INDEX "idx_msplu_sid_provider" ON "mshop_plugin" ("siteid", "pos");
 
 CREATE INDEX "idx_msplu_sid_mtime" ON "mshop_plugin" ("siteid", "mtime");
 

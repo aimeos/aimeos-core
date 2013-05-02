@@ -66,6 +66,13 @@ class MShop_Plugin_Manager_Default
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'plugin.position' => array(
+			'label' => 'Plugin position',
+			'code' => 'plugin.position',
+			'internalcode' => 'mplu."pos"',
+			'type' => 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'plugin.status' => array(
 			'label' => 'Plugin status',
 			'code' => 'plugin.status',
@@ -201,6 +208,8 @@ class MShop_Plugin_Manager_Default
 		$expr[] = $search->getConditions();
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
+
 		$pluginItems = $this->searchItems( $search );
 
 		$interface = 'MShop_Plugin_Provider_Interface';
@@ -303,24 +312,26 @@ class MShop_Plugin_Manager_Default
 		try
 		{
 			$id = $item->getId();
+			$date = date( 'Y-m-d H:i:s' );
 
 			$path = 'mshop/plugin/manager/default/item/';
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
-			$stmt->bind(1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(2, $item->getTypeId() );
-			$stmt->bind(3, $item->getLabel() );
-			$stmt->bind(4, $item->getProvider() );
-			$stmt->bind(5, json_encode( $item->getConfig() ) );
-			$stmt->bind(6, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(7, date('Y-m-d H:i:s', time()));//mtime
-			$stmt->bind(8, $context->getEditor());
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $item->getTypeId() );
+			$stmt->bind( 3, $item->getLabel() );
+			$stmt->bind( 4, $item->getProvider() );
+			$stmt->bind( 5, json_encode( $item->getConfig() ) );
+			$stmt->bind( 6, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 8, $date );//mtime
+			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind(9, $id, MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$stmt->bind(9, date('Y-m-d H:i:s', time()));//ctime
+				$stmt->bind( 10, $date );//ctime
 			}
 
 			$result = $stmt->execute()->finish();

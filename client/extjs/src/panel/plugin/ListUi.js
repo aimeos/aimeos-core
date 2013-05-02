@@ -81,6 +81,13 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				id : 'plugin-list-label'
 			}, {
 				xtype : 'gridcolumn',
+				dataIndex : 'plugin.position',
+				header : _('Position'),
+				sortable : true,
+				width : 100,
+				editable : false
+			}, {
+				xtype : 'gridcolumn',
 				dataIndex : 'plugin.config',
 				header : _('Configuration'),
 				width : 200,

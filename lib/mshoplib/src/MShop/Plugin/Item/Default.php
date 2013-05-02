@@ -146,6 +146,31 @@ class MShop_Plugin_Item_Default
 
 
 	/**
+	 * Returns the position of the plugin item.
+	 *
+	 * @return integer Position of the item
+	 */
+	public function getPosition()
+	{
+		return ( isset( $this->_values['pos'] ) ? (int) $this->_values['pos'] : 0 );
+	}
+
+
+	/**
+	 * Sets the new position of the plugin item.
+	 *
+	 * @param integer $position Position of the item
+	 */
+	public function setPosition($position)
+	{
+		if ( $position == $this->getPosition() ) { return; }
+
+		$this->_values['pos'] = (int) $position;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Returns the status of the plugin item.
 	 *
 	 * @return integer Status of the item
@@ -185,6 +210,7 @@ class MShop_Plugin_Item_Default
 		$list['plugin.provider'] = $this->getProvider();
 		$list['plugin.config'] = $this->getConfig();
 		$list['plugin.status'] = $this->getStatus();
+		$list['plugin.position'] = $this->getPosition();
 
 		return $list;
 	}
