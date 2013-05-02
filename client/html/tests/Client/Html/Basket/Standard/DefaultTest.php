@@ -85,10 +85,10 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<tbody>.*<td class="price">18.00 [A-Z]{3}</td>.*</tbody>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">18.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">1.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">19.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tbody>.*<td class="price">18.00 .+</td>.*</tbody>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">18.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">1.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">19.00 .+</td>.*</tfoot>#smU', $output );
 	}
 
 
@@ -115,11 +115,11 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<tbody>.*<td class="price">18.00 [A-Z]{3}</td>.*</tbody>#smU', $output );
-		$this->assertRegExp( '#<tbody>.*<td class="price">600.00 [A-Z]{3}</td>.*</tbody>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">618.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">31.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">649.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tbody>.*<td class="price">18.00 .+</td>.*</tbody>#smU', $output );
+		$this->assertRegExp( '#<tbody>.*<td class="price">600.00 .+</td>.*</tbody>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">618.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">31.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">649.00 .+</td>.*</tfoot>#smU', $output );
 	}
 
 
@@ -250,10 +250,10 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<tbody>.*<td class="price">18.00 [A-Z]{3}</td>.*</tbody>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">18.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">1.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">19.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tbody>.*<td class="price">18.00 .+</td>.*</tbody>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">18.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">1.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">19.00 .+</td>.*</tfoot>#smU', $output );
 	}
 
 
@@ -283,11 +283,11 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<tbody>.*<td class="price">36.00 [A-Z]{3}</td>.*</tbody>#smU', $output );
-		$this->assertRegExp( '#<tbody>.*<td class="price">600.00 [A-Z]{3}</td>.*</tbody>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">636.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">32.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">668.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tbody>.*<td class="price">36.00 .+</td>.*</tbody>#smU', $output );
+		$this->assertRegExp( '#<tbody>.*<td class="price">600.00 .+</td>.*</tbody>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">636.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">32.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">668.00 .+</td>.*</tfoot>#smU', $output );
 	}
 
 
@@ -308,10 +308,10 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<tbody>.*<td class="price">36.00 [A-Z]{3}</td>.*</tbody>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">36.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">2.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">38.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tbody>.*<td class="price">36.00 .+</td>.*</tbody>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">36.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">2.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">38.00 .+</td>.*</tfoot>#smU', $output );
 	}
 
 
@@ -332,9 +332,9 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">0.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">0.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">0.00 [A-Z]{3}</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">0.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">0.00 .+</td>.*</tfoot>#smU', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">0.00 .+</td>.*</tfoot>#smU', $output );
 	}
 
 
