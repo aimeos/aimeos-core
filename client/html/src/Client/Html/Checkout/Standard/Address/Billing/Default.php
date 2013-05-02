@@ -128,8 +128,9 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 
 
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING;
+			$disable = $view->config( 'client/html/common/address/billing/disable-new', false );
 
-			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) === 'null' ) // new address
+			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
 				$param = $view->param( 'ca-billing', array() );
 				$list = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );

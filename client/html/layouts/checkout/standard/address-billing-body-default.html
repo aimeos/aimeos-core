@@ -89,6 +89,7 @@ $allFields = array_keys( $paymentCss );
 		</div>
 	</div>
 <?php endif; ?>
+<?php if( $this->config( 'client/html/common/address/billing/disable-new', false ) === false ) : ?>
 	<div class="item-address item-new">
 		<div class="header">
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-billing-option' ) ); ?>" value="null" <?php echo ( $billingOption == 'null' ? 'checked="checked"' : '' ); ?> />
@@ -99,9 +100,9 @@ $allFields = array_keys( $paymentCss );
 				<label for="address-billing-salutation"><?php echo $this->translate( 'client/html', 'Salutation' ); ?>
 				</label><select id="address-billing-salutation" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.salutation' ) ); ?>" <?php echo ( in_array( 'order.base.address.salutation', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 					<option value=""><?php echo $this->translate( 'client/html', 'Select salutation' ); ?></option>
-<?php foreach( $billingSalutations as $salutation ) : ?>
+<?php	foreach( $billingSalutations as $salutation ) : ?>
 					<option value="<?php echo $salutation; ?>" <?php echo ( $billingSalutation == $salutation ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/code', $salutation ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
 			<li class="form-item company <?php echo ( isset( $paymentCss['order.base.address.company'] ) ? join( ' ', $paymentCss['order.base.address.company'] ) : '' ); ?>">
@@ -143,20 +144,20 @@ $allFields = array_keys( $paymentCss );
 			<li class="form-item countryid <?php echo ( isset( $paymentCss['order.base.address.countryid'] ) ? join( ' ', $paymentCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-billing-countryid"><?php echo $this->translate( 'client/html', 'Country' ); ?>
 				</label><select id="address-billing-countryid" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.countryid' ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-<?php if( count( $billingCountries ) > 1 ) : ?>
+<?php	if( count( $billingCountries ) > 1 ) : ?>
 					<option value=""><?php echo $this->translate( 'client/html', 'Select country' ); ?></option>
-<?php endif; ?>
-<?php foreach( $billingCountries as $countryId ) : ?>
+<?php	endif; ?>
+<?php	foreach( $billingCountries as $countryId ) : ?>
 					<option value="<?php echo $countryId ?>" <?php echo ( $country === $billingCountry ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/country', $countryId ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
 			<li class="form-item languageid <?php echo ( isset( $paymentCss['order.base.address.languageid'] ) ? join( ' ', $paymentCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 				<label for="address-billing-languageid"><?php echo $this->translate( 'client/html', 'Language' ); ?>
 				</label><select id="address-billing-languageid" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.languageid' ) ); ?>">
-<?php foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
+<?php	foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
 					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $billingLanguage ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/language', $languageId ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
 			<li class="form-item email <?php echo ( isset( $paymentCss['order.base.address.email'] ) ? join( ' ', $paymentCss['order.base.address.email'] ) : '' ); ?>">
@@ -177,5 +178,6 @@ $allFields = array_keys( $paymentCss );
 			</li>
 		</ul>
 	</div>
+<?php endif; ?>
 <?php echo $this->get( 'billingBody' ); ?>
 </div>

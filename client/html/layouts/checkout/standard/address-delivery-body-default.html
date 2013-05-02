@@ -94,6 +94,7 @@ $allFields = array_keys( $deliveryCss );
 		</div>
 	</div>
 <?php endforeach; ?>
+<?php if( $this->config( 'client/html/common/address/delivery/disable-new', false ) === false ) : ?>
 	<div class="item-address item-new">
 		<div class="header">
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-delivery-option' ) ); ?>" value="null" <?php echo ( $deliveryOption == 'null' ? 'checked="checked"' : '' ); ?> />
@@ -104,9 +105,9 @@ $allFields = array_keys( $deliveryCss );
 				<label for="address-delivery-salutation"><?php echo $this->translate( 'client/html', 'Salutation' ); ?>
 				</label><select id="address-delivery-salutation" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.salutation' ) ); ?>" <?php echo ( in_array( 'order.base.address.salutation', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 					<option value=""><?php echo $this->translate( 'client/html', 'Select salutation' ); ?></option>
-<?php foreach( $deliverySalutations as $salutation ) : ?>
+<?php	foreach( $deliverySalutations as $salutation ) : ?>
 					<option value="<?php echo $salutation; ?>" <?php echo ( $deliverySalutation == $salutation ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/code', $salutation ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
 			<li class="form-item company <?php echo ( isset( $deliveryCss['order.base.address.company'] ) ? join( ' ', $deliveryCss['order.base.address.company'] ) : '' ); ?>">
@@ -148,20 +149,20 @@ $allFields = array_keys( $deliveryCss );
 			<li class="form-item countryid <?php echo ( isset( $deliveryCss['order.base.address.countryid'] ) ? join( ' ', $deliveryCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-delivery-countryid"><?php echo $this->translate( 'client/html', 'Country' ); ?>
 				</label><select id="address-delivery-countryid" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.countryid' ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-<?php if( count( $deliveryCountries ) > 1 ) : ?>
+<?php	if( count( $deliveryCountries ) > 1 ) : ?>
 					<option value=""><?php echo $this->translate( 'client/html', 'Select country' ); ?></option>
-<?php endif; ?>
-<?php foreach( $deliveryCountries as $countryId ) : ?>
+<?php	endif; ?>
+<?php	foreach( $deliveryCountries as $countryId ) : ?>
 					<option value="<?php echo $countryId ?>" <?php echo ( $country === $deliveryCountry ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/country', $countryId ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
 			<li class="form-item langid <?php echo ( isset( $deliveryCss['order.base.address.languageid'] ) ? join( ' ', $deliveryCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 				<label for="address-delivery-languageid"><?php echo $this->translate( 'client/html', 'Language' ); ?>
 				</label><select id="address-delivery-languageid" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.languageid' ) ); ?>">
-<?php foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
+<?php	foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
 					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $deliveryLanguage ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/language', $languageId ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
 			<li class="form-item email <?php echo ( isset( $deliveryCss['order.base.address.email'] ) ? join( ' ', $deliveryCss['order.base.address.email'] ) : '' ); ?>">
@@ -182,5 +183,6 @@ $allFields = array_keys( $deliveryCss );
 			</li>
 		</ul>
 	</div>
+<?php endif; ?>
 <?php echo $this->get( 'deliveryBody' ); ?>
 </div>

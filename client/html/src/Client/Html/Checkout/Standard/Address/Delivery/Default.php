@@ -127,8 +127,9 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
+			$disable = $view->config( 'client/html/common/address/delivery/disable-new', false );
 
-			if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) === 'null' ) // new address
+			if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
 				$param = $view->param( 'ca-delivery', array() );
 				$list = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
