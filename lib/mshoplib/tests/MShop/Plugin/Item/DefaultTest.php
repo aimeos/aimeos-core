@@ -40,6 +40,7 @@ class MShop_Plugin_Item_DefaultTest extends MW_Unittest_Testcase
 			'type' => 'order',
 			'provider' => 'provider',
 			'config' => array( 'limit'=>'40' ),
+			'pos' => 0,
 			'status' => 1,
 			'mtime' => '2011-01-01 00:00:02',
 			'ctime' => '2011-01-01 00:00:01',
@@ -92,26 +93,26 @@ class MShop_Plugin_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
-	
+
 	public function testGetLabel()
 	{
 		$this->assertEquals( 'unitTestPlugin', $this->_object->getLabel() );
 	}
-	
-	
+
+
 	public function testSetLabel()
 	{
 		$this->_object->setLabel( 'anotherLabel' );
 		$this->assertEquals( 'anotherLabel', $this->_object->getLabel() );
 		$this->assertEquals( true, $this->_object->isModified() );
 	}
-	
+
 
 	public function testGetProvider()
 	{
 		$this->assertEquals( 'provider', $this->_object->getProvider() );
 	}
-	
+
 
 	public function testSetProvider()
 	{
@@ -135,6 +136,20 @@ class MShop_Plugin_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetPosition()
+	{
+		$this->assertEquals( 0, $this->_object->getPosition() );
+	}
+
+
+	public function testSetPosition()
+	{
+		$this->_object->setPosition( 1 );
+		$this->assertEquals( 1, $this->_object->getPosition() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( 1, $this->_object->getStatus() );
@@ -147,6 +162,7 @@ class MShop_Plugin_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 0, $this->_object->getStatus() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
+
 
 	public function testGetTimeModified()
 	{
