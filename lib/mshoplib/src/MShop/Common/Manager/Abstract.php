@@ -911,22 +911,4 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$conn->rollback();
 		$dbm->release( $conn, $name );
 	}
-
-
-	/**
-	 * Returns a list of site IDs from a tree of site items.
-	 *
-	 * @param MShop_Locale_Item_Site_Interface $siteItem Site item, maybe with children
-	 * @return array List of site IDs
-	 */
-	private function _getSiteIds( MShop_Locale_Item_Site_Interface $siteItem )
-	{
-		$siteIds = array( $siteItem->getId() );
-
-		foreach( $siteItem->getChildren() as $child ) {
-			$siteIds = array_merge( $siteIds, $this->_getSiteIds( $child ) );
-		}
-
-		return $siteIds;
-	}
 }
