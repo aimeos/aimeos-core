@@ -46,9 +46,9 @@ CREATE TABLE "mshop_customer" (
 	-- state of the customer
 	"state" varchar(255) NOT NULL,
 	-- langid of the customer
-	"langid" char(2) NULL,
+	"langid" varchar(5) NULL,
 	-- countryid of the customer
-	"countryid" char(2) NOT NULL,
+	"countryid" char(2) NULL,
 	-- telephone of the customer
 	"telephone" varchar(32) NOT NULL,
 	-- email of the customer
@@ -135,9 +135,9 @@ CREATE TABLE "mshop_customer_address" (
 	-- state name of customer/supplier
 	"state" VARCHAR(255) NOT NULL,
 	-- language id
-	"langid" VARCHAR(5) NOT NULL,
+	"langid" VARCHAR(5) NULL,
 	-- Country id the customer/supplier is living in
-	"countryid" CHAR(2) NOT NULL,
+	"countryid" CHAR(2) NULL,
 	-- Telephone number of the customer/supplier
 	"telephone" VARCHAR(32) NOT NULL,
 	-- Email of the customer/supplier

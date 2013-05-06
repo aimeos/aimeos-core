@@ -76,9 +76,9 @@ CREATE TABLE "mshop_supplier_address" (
 	-- state name of customer/supplier
 	"state" VARCHAR(255) NOT NULL,
 	-- language id
-	"langid" VARCHAR(5) NOT NULL,
+	"langid" VARCHAR(5) NULL,
 	-- Country id the customer/supplier is living in
-	"countryid" CHAR(2) NOT NULL,
+	"countryid" CHAR(2) NULL,
 	-- Telephone number of the customer/supplier
 	"telephone" VARCHAR(32) NOT NULL,
 	-- Email of the customer/supplier
