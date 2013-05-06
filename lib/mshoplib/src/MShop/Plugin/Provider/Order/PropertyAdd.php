@@ -122,20 +122,14 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	{
 		$attributeList = $product->getAttributes();
 		$config = $this->_item->getConfig();
-
 		$itemProperties = $item->toArray();
 
-		$attributes = array();
 		foreach( $properties as $current )
 		{
-			if( array_key_exists( $current, $itemProperties ) )
-			{
-				$parts = explode( '.', $current );
-				$new = $this->_createAttribute( $product, $parts[2], $itemProperties[ $current ] );
-
-				if( $new !== null ) {
-					$attributeList[] = $new;
-				}
+			if( array_key_exists( $current, $itemProperties )
+				&& ( $new = $this->_createAttribute( $product, $current, $itemProperties[$current] ) ) !== null
+			) {
+				$attributeList[] = $new;
 			}
 		}
 
