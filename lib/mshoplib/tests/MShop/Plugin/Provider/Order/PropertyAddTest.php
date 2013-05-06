@@ -127,8 +127,8 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 
 		$attribute = $attributeManager->createItem();
 
-		$attribute->setCode( 'stocklevel' );
-		$attribute->setName( 'stocklevel' );
+		$attribute->setCode( 'product.stock.stocklevel' );
+		$attribute->setName( 'product.stock.stocklevel' );
 		$attribute->setValue( '1200' );
 		$attribute->setType( 'property' );
 

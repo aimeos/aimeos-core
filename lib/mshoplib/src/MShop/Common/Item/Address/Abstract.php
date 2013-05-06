@@ -356,7 +356,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getCountryId()
 	{
-		return ( isset( $this->_values['countryid'] ) ? (string) $this->_values['countryid'] : '' );
+		return ( isset( $this->_values['countryid'] ) ? (string) $this->_values['countryid'] : null );
 	}
 
 
