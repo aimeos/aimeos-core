@@ -15,7 +15,7 @@
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Factory_Abstract
+abstract class MShop_Common_Factory_Abstract
 {
 	/**
 	 * Adds the decorators to the manager object.
