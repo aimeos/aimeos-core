@@ -16,10 +16,6 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	initComponent : function() {
 
 		this.title = _( 'Stock & warehouse' );
-		
-		if(this.copyActive){
-			this.record.data['product.stock.id'] = null;
-		}
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
