@@ -97,19 +97,20 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
 						<ul class="attr-list">
 <?php			foreach( $product->getAttributes() as $attribute ) : ?>
+<?php				switch( $attribute->getType() ) : case 'hidden': ?>
+<?php					break; case 'config': ?>
 							<li class="attr-item">
-<?php				switch( $attribute->getType() ) : case 'config': ?>
 								<a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ) ); ?>">
 									<span class="name"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
 									<span class="value"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ); ?></span>
 								</a>
-<?php					break; case 'hidden': ?>
-								<!-- hidden -->
+							</li>
 <?php					break; default: ?>
+							<li class="attr-item">
 								<span class="name"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
 								<span class="value"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ); ?></span>
-<?php				endswitch; ?>
 							</li>
+<?php				endswitch; ?>
 <?php			endforeach; ?>
 						</ul>
 <?php		endif; ?>

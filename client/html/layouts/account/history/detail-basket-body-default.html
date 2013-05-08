@@ -77,14 +77,12 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
 						<ul class="attr-list">
 <?php			foreach( $product->getAttributes() as $attribute ) : ?>
+<?php				if( $attribute->getType() !== 'hidden' ) : ?>
 							<li class="attr-item">
-<?php				switch( $attribute->getType() ) : case 'hidden': ?>
-								<!-- hidden -->
-<?php					break; default: ?>
 								<span class="name"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
 								<span class="value"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ); ?></span>
-<?php				endswitch; ?>
 							</li>
+<?php				endif; ?>
 <?php			endforeach; ?>
 						</ul>
 <?php		endif; ?>

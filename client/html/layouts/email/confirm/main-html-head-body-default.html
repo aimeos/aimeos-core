@@ -21,7 +21,7 @@ try
 
 	printf(
 		$this->translate( 'client/html', 'Dear %1$s %2$s %3$s' ),
-		( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
+		( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html/code', $addr->getSalutation() ) : '' ),
 		$addr->getFirstName(),
 		$addr->getLastName()
 	);
