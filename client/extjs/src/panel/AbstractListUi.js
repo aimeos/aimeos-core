@@ -333,7 +333,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			record: this.getRecord(action),
 			store: this.store,
 			listUI: this,
-			copyActive: action === 'copy' ? true : false
+			isNewRecord: action === 'copy' ? true : false
 		});
 
 		itemUi.show();
