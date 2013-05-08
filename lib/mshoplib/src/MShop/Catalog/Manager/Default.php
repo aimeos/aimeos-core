@@ -338,6 +338,18 @@ class MShop_Catalog_Manager_Default
 
 
 	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		foreach( $ids as $id ) {
+			$this->deleteItem( $id );
+		}
+	}
+
+
+	/**
 	 * Returns the item specified by its ID.
 	 *
 	 * @param integer $id Id of item

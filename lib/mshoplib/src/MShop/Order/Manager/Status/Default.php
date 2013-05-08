@@ -188,25 +188,18 @@ class MShop_Order_Manager_Status_Default
 	 */
 	public function deleteItem( $id )
 	{
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/order/manager/status/default/item/delete');
-			$stmt->bind(1, $id, MW_DB_Statement_Abstract::PARAM_INT);
-			$result = $stmt->execute()->finish();
-
-			$dbm->release( $conn, $this->_dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $this->_dbname );
-			throw $e;
-		}
+		$this->deleteItems( array( $id ) );
 	}
 
+
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/order/manager/status/default/item/delete' ) );
+	}
 
 
 	/**

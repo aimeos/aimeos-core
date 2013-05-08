@@ -164,22 +164,17 @@ class MShop_Locale_Manager_Language_Default
 	 */
 	public function deleteItem( $languageId )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$this->deleteItems( array( $languageId ) );
+	}
 
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/locale/manager/language/default/item/delete');
-			$stmt->bind(1, $languageId, MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->execute()->finish();
 
-			$dbm->release($conn);
-		}
-		catch ( Exception $e )
-		{
-			$dbm->release($conn);
-			throw $e;
-		}
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/locale/manager/language/default/item/delete' ) );
 	}
 
 

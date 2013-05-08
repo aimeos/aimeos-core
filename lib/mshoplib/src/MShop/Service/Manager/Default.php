@@ -385,22 +385,17 @@ class MShop_Service_Manager_Default
 	 */
 	public function deleteItem( $serviceId )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$this->deleteItems( array( $serviceId ) );
+	}
 
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/service/manager/default/item/delete');
-			$stmt->bind(1, $serviceId, MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->execute()->finish();
 
-			$dbm->release($conn);
-		}
-		catch ( Exception $e )
-		{
-			$dbm->release($conn);
-			throw $e;
-		}
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/service/manager/default/item/delete' ) );
 	}
 
 

@@ -313,22 +313,17 @@ class MShop_Order_Manager_Base_Product_Default
 	 */
 	public function deleteItem($id)
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$this->deleteItems( array( $id ) );
+	}
 
-		try
-		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/order/manager/base/product/default/item/delete' );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->execute()->finish();
 
-			$dbm->release( $conn, $this->_dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $this->_dbname );
-			throw $e;
-		}
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/order/manager/base/product/default/item/delete' ) );
 	}
 
 

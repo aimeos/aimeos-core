@@ -365,26 +365,17 @@ class MShop_Plugin_Manager_Default
 	 */
 	public function deleteItem( $id )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$this->deleteItems( array( $id ) );
+	}
 
-		try
-		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/plugin/manager/default/item/delete' );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$result = $stmt->execute()->finish();
 
-			if( isset( $this->_plugins[$id] ) ) {
-				unset( $this->_plugins[$id] );
-			}
-
-			$dbm->release($conn);
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/plugin/manager/default/item/delete' ) );
 	}
 
 

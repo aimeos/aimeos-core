@@ -197,27 +197,17 @@ class MAdmin_Job_Manager_Default
 	 */
 	public function deleteItem( $itemId )
 	{
-		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$this->deleteItems( array( $itemId ) );
+	}
 
-		try
-		{
-			$path = 'madmin/job/manager/default/delete';
-			$sql = $config->get( $path, $path );
 
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $itemId );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'madmin/job/manager/default/delete' ) );
 	}
 
 

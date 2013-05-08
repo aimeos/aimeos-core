@@ -869,6 +869,44 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 *
+	 * Enter description here ...
+	 * @param string $path
+	 */
+	protected function _deleteItems( array $ids, $sql )
+	{
+		$context = $this->_getContext();
+
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'id', $ids ) );
+
+		$types = array( 'id' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'id' => '"id"' );
+
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
+
+
+		try
+		{
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->execute()->finish();
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+	}
+
+
+	/**
 	 * Starts a database transaction on the connection identified by the given name.
 	 *
 	 * @param string $name Connection name as named in the resource file

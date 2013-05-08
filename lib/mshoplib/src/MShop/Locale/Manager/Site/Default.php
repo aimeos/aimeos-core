@@ -203,19 +203,41 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function deleteItem( $siteId )
 	{
-		$conn = $this->_dbm->acquire();
+		$this->deleteItems( array( $siteId ) );
+	}
+
+
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$context = $this->_getContext();
+		$sql = $context->getConfig()->get( 'mshop/locale/manager/site/default/item/delete' );
+
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'id', $ids ) );
+
+		$types = array( 'id' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'id' => '"id"' );
+
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
 
 		try
 		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/locale/manager/site/default/item/delete');
-			$stmt->bind(1, $siteId, MW_DB_Statement_Abstract::PARAM_INT);
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
 			$stmt->execute()->finish();
 
-			$this->_dbm->release($conn);
+			$dbm->release( $conn );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
-			$this->_dbm->release($conn);
+			$dbm->release( $conn );
 			throw $e;
 		}
 	}

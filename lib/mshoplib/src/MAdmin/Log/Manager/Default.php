@@ -191,27 +191,17 @@ class MAdmin_Log_Manager_Default
 	 */
 	public function deleteItem( $itemId )
 	{
-		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$this->deleteItems( array( $itemId ) );
+	}
 
-		try
-		{
-			$path = 'madmin/log/manager/default/delete';
-			$sql = $config->get( $path, $path );
 
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $itemId );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn, $this->_dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $this->_dbname );
-			throw $e;
-		}
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'madmin/log/manager/default/delete' ) );
 	}
 
 

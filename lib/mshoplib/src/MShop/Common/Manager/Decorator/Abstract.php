@@ -91,6 +91,16 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 
 
 	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_manager->deleteItems( $ids );
+	}
+
+
+	/**
 	 * Returns the item specified by its ID
 	 *
 	 * @param integer $id Id of item

@@ -167,21 +167,17 @@ class MShop_Common_Manager_Type_Default
 	 */
 	public function deleteItem( $id )
 	{
-		$dbm = $this->_context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$this->deleteItems( array( $id ) );
+	}
 
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, $this->_prefix . 'delete', $this->_config['delete']);
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$result = $stmt->execute()->finish();
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_config['delete'] );
 	}
 
 

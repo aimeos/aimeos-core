@@ -458,22 +458,17 @@ class MShop_Attribute_Manager_Default
 	 */
 	public function deleteItem( $attributeId )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$this->deleteItems( array( $attributeId ) );
+	}
 
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/attribute/manager/default/item/delete');
-			$stmt->bind( 1, $attributeId, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->execute()->finish();
 
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/attribute/manager/default/item/delete' ) );
 	}
 
 

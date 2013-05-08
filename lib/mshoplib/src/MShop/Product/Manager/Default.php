@@ -456,23 +456,17 @@ class MShop_Product_Manager_Default
 	 */
 	public function deleteItem($productId)
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$this->deleteItems( array( $productId ) );
+	}
 
-		try
-		{
-			$path = 'mshop/product/manager/default/item/delete';
-			$stmt = $this->_getCachedStatement($conn, $path);
-			$stmt->bind( 1, $productId );
-			$stmt->execute()->finish();
 
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids ){
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/product/manager/default/item/delete' ) );
 	}
 
 
