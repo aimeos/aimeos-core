@@ -45,8 +45,6 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	layout: 'fit',
 	modal: true,
 	
-	isNewRecord: false,
-
 	initComponent: function() {
 		this.addEvents(
 			/**
@@ -127,12 +125,6 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		if (! this.mainForm) {
 			// wait till ref if here
 			return this.initRecord.defer(50, this, arguments);
-		}
-		
-		if(this.isNewRecord){
-			var data = this.record.data;
-			this.record = new this.recordType();
-			this.record.data = data;
 		}
 		
 		if (! this.record) {
