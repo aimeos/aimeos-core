@@ -44,6 +44,8 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	layout: 'fit',
 	modal: true,
 	
+	isNewRecord: false,
+
 	initComponent: function() {
 		this.addEvents(
 			/**
@@ -126,15 +128,15 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			return this.initRecord.defer(50, this, arguments);
 		}
 		
-		if (! this.record) {
-			this.record = new this.recordType();
-			this.isNewRecord = true;
-		}
-		
-		if(this.copyActive){
+		if(this.isNewRecord){
 			var data = this.record.data;
 			this.record = new this.recordType();
 			this.record.data = data;
+		}
+		
+		if (! this.record) {
+			this.record = new this.recordType();
+			this.isNewRecord = true;
 		}
 
 		this.mainForm.getForm().loadRecord(this.record);
@@ -193,7 +195,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		
 		this.mainForm.getForm().updateRecord(this.record);
 
-		if (this.isNewRecord || this.copyActive) {
+		if (this.isNewRecord) {
 			this.store.add(this.record);
 		}
 
