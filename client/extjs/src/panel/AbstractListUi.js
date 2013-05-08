@@ -344,7 +344,8 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		} 
 		else if( action === 'copy' )
 		{
-			record = this.grid.getSelectionModel().getSelected();
+			record = new this.store.recordType();
+			record.data = this.grid.getSelectionModel().getSelected().data;
 			record.data[ this.idProperty ] = null;
 			return record;
 		}
