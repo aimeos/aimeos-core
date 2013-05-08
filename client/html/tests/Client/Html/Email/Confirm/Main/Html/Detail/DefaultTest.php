@@ -67,6 +67,7 @@ class Client_Html_Email_Confirm_Main_Html_Detail_DefaultTest extends MW_Unittest
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<div class="email-confirm-main-detail">', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="tax">.*<td class="price">0.00 .+</td>.*.*</tfoot>#smU', $output );
 	}
 
 

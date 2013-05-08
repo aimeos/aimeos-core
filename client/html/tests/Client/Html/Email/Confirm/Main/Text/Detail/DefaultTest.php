@@ -38,7 +38,6 @@ class Client_Html_Email_Confirm_Main_Text_Detail_DefaultTest extends MW_Unittest
 
 		$paths = TestHelper::getHtmlTemplatePaths();
 		$this->_object = new Client_Html_Email_Confirm_Main_Text_Detail_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
 	}
 
 
@@ -68,6 +67,7 @@ class Client_Html_Email_Confirm_Main_Text_Detail_DefaultTest extends MW_Unittest
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( "\n", $output );
+		$this->assertRegExp( '#55.00 .+0.00 .+14.50 .+#smU', $output );
 	}
 
 

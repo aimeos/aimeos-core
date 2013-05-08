@@ -237,4 +237,53 @@ abstract class Client_Html_Abstract
 
 		return true;
 	}
+
+
+	/**
+	 * Returns a list of tax rates and values for the given basket.
+	 *
+	 * @param MShop_Order_Item_Base_Interface $basket Basket containing the products, services, etc.
+	 * @return array Associative list of tax rates as key and corresponding amounts as value
+	 */
+	protected function _getTaxRates( MShop_Order_Item_Base_Interface $basket )
+	{
+		$taxrates = array();
+
+		foreach( $basket->getProducts() as $product )
+		{
+			$price = $product->getPrice();
+
+			if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+				$taxrates[ $price->getTaxrate() ] += ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+			} else {
+				$taxrates[ $price->getTaxrate() ] = ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+			}
+		}
+
+		try
+		{
+			$price = $basket->getService( 'delivery' )->getPrice();
+
+			if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+				$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+			} else {
+				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+			}
+		}
+		catch( Exception $e ) { ; }
+
+		try
+		{
+			$price = $basket->getService( 'payment' )->getPrice();
+
+			if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+				$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+			} else {
+				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+			}
+		}
+		catch( Exception $e ) { ; }
+
+		return $taxrates;
+	}
 }

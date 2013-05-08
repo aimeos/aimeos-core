@@ -113,48 +113,6 @@ class Client_Html_Email_Confirm_Main_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$prices = array();
-			$taxrates = array();
-			$basket = $view->confirmOrderBaseItem;
-
-
-			foreach( $basket->getProducts() as $product )
-			{
-				$price = $product->getPrice();
-
-				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
-					$taxrates[ $price->getTaxrate() ] += ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
-				} else {
-					$taxrates[ $price->getTaxrate() ] = ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
-				}
-			}
-
-			try
-			{
-				$price = $basket->getService( 'delivery' )->getPrice();
-
-				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
-					$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
-				} else {
-					$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
-				}
-			}
-			catch( Exception $e ) { ; }
-
-			try
-			{
-				$price = $basket->getService( 'payment' )->getPrice();
-
-				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
-					$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
-				} else {
-					$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
-				}
-			}
-			catch( Exception $e ) { ; }
-
-
-			$view->mainTaxRates = $taxrates;
 			$view->mainBoundary = md5( 'Arcavias-main-' . microtime( true ) );
 
 			$this->_cache = $view;
