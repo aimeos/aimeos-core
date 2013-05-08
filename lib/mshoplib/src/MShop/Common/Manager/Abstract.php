@@ -869,9 +869,10 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 * Deletes items specified by ids in array.
 	 *
-	 * Enter description here ...
-	 * @param string $path
+	 * @param array $ids List of IDs
+	 * @param string $sql Sql statement
 	 */
 	protected function _deleteItems( array $ids, $sql )
 	{
