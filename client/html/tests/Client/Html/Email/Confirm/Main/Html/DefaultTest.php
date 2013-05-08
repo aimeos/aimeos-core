@@ -38,7 +38,6 @@ class Client_Html_Email_Confirm_Main_Html_DefaultTest extends MW_Unittest_Testca
 
 		$paths = TestHelper::getHtmlTemplatePaths();
 		$this->_object = new Client_Html_Email_Confirm_Main_Html_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
 	}
 
 
@@ -56,6 +55,8 @@ class Client_Html_Email_Confirm_Main_Html_DefaultTest extends MW_Unittest_Testca
 
 	public function testGetHeader()
 	{
+		$this->_object->setView( $this->_getView() );
+
 		$output = $this->_object->getHeader();
 	}
 
@@ -103,6 +104,8 @@ class Client_Html_Email_Confirm_Main_Html_DefaultTest extends MW_Unittest_Testca
 
 	public function testProcess()
 	{
+		$this->_object->setView( $this->_getView() );
+
 		$this->_object->process();
 	}
 

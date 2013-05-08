@@ -99,7 +99,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php echo $this->translate( 'client/html', '+ Shipping' ); ?>: <?php printf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ); ?>
 
 <?php echo $this->translate( 'client/html', 'Total' ); ?>: <?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?>
-<?php foreach( $this->get( 'mainTaxRates', array() ) as $taxRate => $priceValue ) : ?>
+<?php foreach( $this->get( 'commonTaxRates', array() ) as $taxRate => $priceValue ) : ?>
 
 <?php printf( $this->translate( 'client/html', 'Includes %1$s%% VAT' ), $this->number( $taxRate ) ); ?>: <?php printf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ); ?>
 <?php endforeach; ?>

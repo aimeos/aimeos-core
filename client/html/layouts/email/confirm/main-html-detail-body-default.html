@@ -118,7 +118,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 					<td colspan="3"><?php echo $this->translate( 'client/html', 'Total' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?></td>
 				</tr>
-<?php foreach( $this->get( 'mainTaxRates', array() ) as $taxRate => $priceValue ) : ?>
+<?php foreach( $this->get( 'commonTaxRates', array() ) as $taxRate => $priceValue ) : ?>
 				<tr class="tax">
 					<td colspan="3"><?php printf( $this->translate( 'client/html', 'Includes %1$s%% VAT' ), $this->number( $taxRate ) ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ); ?></td>

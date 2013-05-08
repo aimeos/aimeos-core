@@ -113,48 +113,7 @@ class Client_Html_Account_History_Detail_Basket_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$prices = array();
-			$taxrates = array();
-			$basket = $view->orderBaseItem;
-
-
-			foreach( $basket->getProducts() as $product )
-			{
-				$price = $product->getPrice();
-
-				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
-					$taxrates[ $price->getTaxrate() ] += ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
-				} else {
-					$taxrates[ $price->getTaxrate() ] = ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
-				}
-			}
-
-			try
-			{
-				$price = $basket->getService( 'delivery' )->getPrice();
-
-				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
-					$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
-				} else {
-					$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
-				}
-			}
-			catch( Exception $e ) { ; }
-
-			try
-			{
-				$price = $basket->getService( 'payment' )->getPrice();
-
-				if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
-					$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
-				} else {
-					$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
-				}
-			}
-			catch( Exception $e ) { ; }
-
-
-			$view->basketTaxRates = $taxrates;
+			$view->commonTaxRates = $this->_getTaxRates( $view->orderBaseItem );
 
 			$this->_cache = $view;
 		}
