@@ -21,6 +21,10 @@
 	cursor: pointer;
 }
 
+.arcavias .standardbutton:hover {
+	background-image: url("images/buttonfond-active.png");
+}
+
 .arcavias .minibutton {
 	min-width: auto;
 }
@@ -123,14 +127,50 @@
 	font-weight: bold;
 }
 
-.catalog-filter-search button {
-	border-radius: 0px 4px 4px 0px !important; 
-	margin: 0px 1px 0px -3px !important;
-	padding: 0px 3px 3px 2px !important;
-	min-width: auto !important;
-	float: left; 
-	width: 26px;
-	height: 24px; 
+.catalog-filter-search {
+	background-image: url("images/buttonfond.png");
+	background-position: top right; 
+	background-repeat: no-repeat;
+	background-size: 50% 100%;
+	background-color: #689DB9;
+	border: 1px solid #689DB9;
+	border-radius: 2px 4px 4px 2px; 
+}
+
+.catalog-filter-search:hover {
+	background-image: url("images/buttonfond-active.png");
+}
+
+.catalog-filter-search .name {
+	font-weight: bold;
+	color: #FFFFFF;
+	margin: 0 5px;
+}
+
+.catalog-filter-search .value {
+	background-color: #FFFFFF;
+	border: none;
+	width: 150px;
+	height: 1.5em;
+}
+
+.catalog-filter-search .standardbutton {
+	border-radius: 0;
+	background: none; 
+	min-width: 2em;
+	border: 0 none;
+	box-shadow: none;
+	margin: 0;
+	padding: 0 4px;
+	vertical-align: baseline;
+}
+
+.catalog-filter-search .standardbutton:hover {
+	background: none;
+}
+
+.catalog-filter-search .ui-helper-hidden-accessible {
+	display: none;
 }
 
 /* Product list, stage image section */

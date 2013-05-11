@@ -159,32 +159,6 @@ select {
 	padding: 7px 0px 0px 0px;
 }
 
-#headerSearch input {
-	width: 150px; 
-	height: 15px;
-	background-color: #FFFFFF; 
-	border-left: 0px none; 
-	border: 1px solid #689DB9; 
-	float: left;
-	padding: 4px 3px 3px;
-	font-size: 1em;
-}
-
-#headerSearch span {
-	height: 17px; 
-	line-height: 17px;
-	padding: 4px 9px 3px 9px;
-	background-color: #689DB9; 
-	border-radius: 2px 0px 0px 2px; 
-	color: #FFFFFF; 
-	display: inline-block; 
-	float: left; 
-	font-weight: bold;
-}
-#headerSearch span.ui-helper-hidden-accessible{
-	display: none;
-}
-
 #headerBasket .basket-mini {
 	width: 13%;
 	float: left; 
