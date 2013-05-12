@@ -133,7 +133,7 @@ select {
 
 #headerMiddle {
 	width: 50%;
-	float:left;
+	float: right;
 	text-align: right; 
 }
 
@@ -159,24 +159,8 @@ select {
 	padding: 7px 0px 0px 0px;
 }
 
-#headerBasket .basket-mini {
-	width: 13%;
-	float: left; 
-	margin: 0% 1% 0% 1%;
-	padding: 0.8% 0% 0.8% 0%; 
-	background-color: #F2F7FA; 
-	border-left: 1px solid #C3D9E5; 
-	border-bottom: 1px solid #C3D9E5; 
-	border-right: 1px solid #C3D9E5; 
-	color: #004266; 
-	text-align: center;
-}
-#headerBasket .basket-mini-main{
-	margin: 0px 3px 6px 3px;
-}
-
-#headerBasket .basket-mini-main .value{
-	white-space: nowrap;
+#headerBasket {
+	float: right; 
 }
 
 /* ----- Navigation ----- */

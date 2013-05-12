@@ -601,8 +601,36 @@
 	margin: 0px 0px 8px 0px;
 }
 
+.basket-mini {
+	background-image: url("images/basket.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	margin: 5px;
+	margin-top: 0;
+	padding: 5px;
+	padding-top: 10px;
+	height: 60px;
+	width: 80px;
+	background-color: #F2F7FA;
+	border-left: 1px solid #C3D9E5;
+	border-bottom: 1px solid #C3D9E5;
+	border-right: 1px solid #C3D9E5;
+	text-align: center;
+	line-height: 125%;
+}
+
 .basket-mini h1 {
 	display: none;
+}
+
+.basket-mini-main .quantity {
+	display: block;
+	color: #004266;
+}
+
+.basket-mini-main .value {
+	font-weight: bold;
+	color: #004266;
 }
 
 .basket-standard-main {
