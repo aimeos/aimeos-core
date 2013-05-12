@@ -69,29 +69,26 @@ h2, h3, h4 {
 }
 
 a:link {
-	color: #679CB8;
+	color: #689DB9;
 	text-decoration: none;
 }
 a:visited {
-	color: #679CB8;
+	color: #689DB9;
 	text-decoration: none;
 }
 a:focus {
 	outline: none;
 }
 a:visited {
-	color: #679CB8;
+	color: #689DB9;
 }
 
 p {
-	padding: 0px 0px 10px 0px;
+	padding: 5px 0px;
 }
 
 select {
-	height: 23px; 
-	padding: 1px; 
-	color: #000000; 
-	font-family: Arial,sans-serif;
+	color: #000000;
 }
 
 /* ----- Layout ----- */
