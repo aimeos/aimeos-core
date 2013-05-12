@@ -48,6 +48,13 @@ $sites = $this->sites();
 									<img src="<?php echo $this->pathstart;?>/images/arcavias.png" alt="Arcavias" />
 								</a>
 							</div>
+							<div id="headerBasket">
+								<?php
+								if( isset( $this->minibasket ) ) {
+									echo $this->minibasket->getBody();
+								}
+								?>
+							</div>
 							<div id="headerMiddle">
 								<a href="<?php echo $this->url( array( 'site' => $this->params['site'], 'controller' => 'account', 'action' => 'history' ), 'routeDefault', true ); ?>">My account</a>
 								<div id="headerNavigation">
@@ -63,19 +70,12 @@ $sites = $this->sites();
 									<?php endif; ?>
 								</div>
 							</div>
-							<div id="headerBasket">
-								<?php
-								if( isset( $this->minibasket ) ) {
-									echo $this->minibasket->getBody();
-								}
-								?>
-							</div>
 						</div>
 						<div id="navigation" class="clearfix">
 							<div id="navigationMenue">
 								<?php
 								foreach($this->category() AS $item) {
-									echo '<a href="' . $item['uri'] . '" class="' . $item['class'] . '">' . htmlspecialchars( $item['label'] ) . '</a>' . PHP_EOL;
+									echo '<a href="' . $item['uri'] . '" class="' . $item['class'] . '">' . htmlspecialchars( $item['label'] ) . '</a>';
 								};
 								?>
 							</div>

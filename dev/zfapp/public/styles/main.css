@@ -69,29 +69,26 @@ h2, h3, h4 {
 }
 
 a:link {
-	color: #679CB8;
+	color: #689DB9;
 	text-decoration: none;
 }
 a:visited {
-	color: #679CB8;
+	color: #689DB9;
 	text-decoration: none;
 }
 a:focus {
 	outline: none;
 }
 a:visited {
-	color: #679CB8;
+	color: #689DB9;
 }
 
 p {
-	padding: 0px 0px 10px 0px;
+	padding: 5px 0px;
 }
 
 select {
-	height: 23px; 
-	padding: 1px; 
-	color: #000000; 
-	font-family: Arial,sans-serif;
+	color: #000000;
 }
 
 /* ----- Layout ----- */
@@ -133,7 +130,7 @@ select {
 
 #headerMiddle {
 	width: 50%;
-	float:left;
+	float: right;
 	text-align: right; 
 }
 
@@ -159,50 +156,8 @@ select {
 	padding: 7px 0px 0px 0px;
 }
 
-#headerSearch input {
-	width: 150px; 
-	height: 15px;
-	background-color: #FFFFFF; 
-	border-left: 0px none; 
-	border: 1px solid #689DB9; 
-	float: left;
-	padding: 4px 3px 3px;
-	font-size: 1em;
-}
-
-#headerSearch span {
-	height: 17px; 
-	line-height: 17px;
-	padding: 4px 9px 3px 9px;
-	background-color: #689DB9; 
-	border-radius: 2px 0px 0px 2px; 
-	color: #FFFFFF; 
-	display: inline-block; 
-	float: left; 
-	font-weight: bold;
-}
-#headerSearch span.ui-helper-hidden-accessible{
-	display: none;
-}
-
-#headerBasket .basket-mini {
-	width: 13%;
-	float: left; 
-	margin: 0% 1% 0% 1%;
-	padding: 0.8% 0% 0.8% 0%; 
-	background-color: #F2F7FA; 
-	border-left: 1px solid #C3D9E5; 
-	border-bottom: 1px solid #C3D9E5; 
-	border-right: 1px solid #C3D9E5; 
-	color: #004266; 
-	text-align: center;
-}
-#headerBasket .basket-mini-main{
-	margin: 0px 3px 6px 3px;
-}
-
-#headerBasket .basket-mini-main .value{
-	white-space: nowrap;
+#headerBasket {
+	float: right; 
 }
 
 /* ----- Navigation ----- */
