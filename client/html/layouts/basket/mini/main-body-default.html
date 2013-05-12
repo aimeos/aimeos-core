@@ -24,12 +24,8 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
 ?>
 <div class="basket-mini-main">
-	<span class="quantity">
-<?php printf( $this->translate( 'client/html', '%1$d article', '%1$d articles', $quantity ), $quantity ); ?>
-	</span>
-	<span class="value">
-<?php printf( $priceFormat, $this->number( $miniPriceValue ), $miniPriceCurrency ); ?>
-	</span>
+	<span class="quantity"><?php printf( $this->translate( 'client/html', '%1$d article', '%1$d articles', $quantity ), $quantity ); ?></span>
+	<span class="value"><?php printf( $priceFormat, $this->number( $miniPriceValue ), $miniPriceCurrency ); ?></span>
 </div>
 
 <?php echo $this->get( 'mainBody' ); ?>
