@@ -110,7 +110,7 @@
 }
 
 .catalog-filter-tree .level-2 li a {
-	color: #679CB8;
+	color: #689DB9;
 }
 
 .catalog-filter-tree .level-3 li {
@@ -608,9 +608,8 @@
 	margin: 5px;
 	margin-top: 0;
 	padding: 5px;
-	padding-top: 10px;
 	height: 60px;
-	width: 80px;
+	width: 70px;
 	background-color: #F2F7FA;
 	border-left: 1px solid #C3D9E5;
 	border-bottom: 1px solid #C3D9E5;
