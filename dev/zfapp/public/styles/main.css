@@ -146,10 +146,10 @@ ul.menu > li {
 	float: left;
 }
 
-ul.menu > li:hover,
-ul.menu > li.hover {
+ul.menu > li.dropdown:hover,
+ul.menu > li.active {
 	border: solid 1px #689DB9;
-	background-color: #F2F7FA;
+	border-radius: 2px;
 }
 
 ul.menu a {
@@ -165,10 +165,11 @@ ul.menu a:hover {
 	text-decoration: underline;
 }
 
-ul.menu li:hover > ul,
-ul.menu ul.hover {
-	background-color: #F2F7FA;
+ul.menu li.dropdown:hover > ul,
+ul.menu ul.active {
+	border-radius: 0 0 2px 2px;
 	border: solid 1px #689DB9;
+	border-top: none 0;
 	visibility: visible;
 	opacity: 1;
 }
