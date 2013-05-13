@@ -129,12 +129,11 @@
 
 .catalog-filter-search {
 	background-image: url("images/buttonfond.png");
-	background-position: top right; 
-	background-repeat: no-repeat;
-	background-size: 50% 100%;
+	background-repeat: repeat-x;
+	background-size: 100% 100%;
 	background-color: #689DB9;
 	border: 1px solid #689DB9;
-	border-radius: 2px 4px 4px 2px;
+	border-radius: 4px;
 	white-space: nowrap;
 }
 
@@ -142,16 +141,12 @@
 	background-image: url("images/buttonfond-active.png");
 }
 
-.catalog-filter-search .name {
-	font-weight: bold;
-	color: #FFFFFF;
-	padding: 0 5px;
-}
-
 .catalog-filter-search .value {
 	background-color: #FFFFFF;
+	border-radius: 4px 0 0 4px;
 	border: none;
-	width: 150px;
+	min-width: 5em;
+	max-width: 25em;
 	height: 1.55em;
 }
 
@@ -610,15 +605,9 @@
 	height: 60px;
 	width: 70px;
 	background-color: #F2F7FA;
-	border-left: 1px solid #C3D9E5;
-	border-bottom: 1px solid #C3D9E5;
-	border-right: 1px solid #C3D9E5;
+	border: 1px solid #C3D9E5;
 	text-align: center;
 	line-height: 125%;
-}
-
-.basket-mini {
-	text-align: center;
 	color: #004266;
 }
 
