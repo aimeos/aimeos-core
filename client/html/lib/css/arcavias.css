@@ -134,7 +134,8 @@
 	background-size: 50% 100%;
 	background-color: #689DB9;
 	border: 1px solid #689DB9;
-	border-radius: 2px 4px 4px 2px; 
+	border-radius: 2px 4px 4px 2px;
+	white-space: nowrap;
 }
 
 .catalog-filter-search:hover {
@@ -144,25 +145,23 @@
 .catalog-filter-search .name {
 	font-weight: bold;
 	color: #FFFFFF;
-	margin: 0 5px;
+	padding: 0 5px;
 }
 
 .catalog-filter-search .value {
 	background-color: #FFFFFF;
 	border: none;
 	width: 150px;
-	height: 1.5em;
+	height: 1.55em;
 }
 
 .catalog-filter-search .standardbutton {
-	border-radius: 0;
-	background: none; 
-	min-width: 2em;
-	border: 0 none;
+	background: none;
 	box-shadow: none;
-	margin: 0;
-	padding: 0 4px;
-	vertical-align: baseline;
+	border-radius: 0;
+	border: 0 none;
+	min-width: 2em;
+	padding: 0 5px;
 }
 
 .catalog-filter-search .standardbutton:hover {
@@ -618,18 +617,21 @@
 	line-height: 125%;
 }
 
+.basket-mini {
+	text-align: center;
+	color: #004266;
+}
+
 .basket-mini h1 {
 	display: none;
 }
 
 .basket-mini-main .quantity {
 	display: block;
-	color: #004266;
 }
 
 .basket-mini-main .value {
 	font-weight: bold;
-	color: #004266;
 }
 
 .basket-standard-main {
