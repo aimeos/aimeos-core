@@ -342,7 +342,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function setCountryId($countryid)
 	{
-		if ( $countryid == $this->getCountryId() ) { return; }
+		if ( $countryid === $this->getCountryId() ) { return; }
 
 		$this->_values['countryid'] = strtoupper( (string) $countryid );
 		$this->setModified();
@@ -367,7 +367,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function setLanguageId($langid)
 	{
-		if ( $langid == $this->getLanguageId() ) { return; }
+		if ( $langid === $this->getLanguageId() ) { return; }
 
 		$this->_values['langid'] = strtolower( (string) $langid );
 		$this->setModified();
