@@ -31,9 +31,9 @@ $sites = $this->sites();
 		<?php echo ( isset( $this->account ) ? $this->account->getHeader() : '' ); ?>
 		<script type="text/javascript">
 		$(function() {
-			$( '.menu .sites' ).click( function() {
-				$( 'ul', this ).toggleClass( 'hover' );
-				$( this ).toggleClass( 'hover' );
+			$( '.menu .dropdown' ).click( function() {
+				$( 'ul', this ).toggleClass( 'active' );
+				$( this ).toggleClass( 'active' );
 			});
 		});
 		</script>
@@ -66,8 +66,8 @@ $sites = $this->sites();
 							<div id="headerMiddle">
 								<nav class="topnav">
 									<ul class="menu">
-										<li class="account"><a href="<?php echo $this->url( array( 'site' => $this->params['site'], 'controller' => 'account', 'action' => 'history' ), 'routeDefault', true ); ?>">My account</a></li>
-										<li class="sites"><a href="#">&raquo; <?php echo $sites[ $this->params['site'] ]; ?></a>
+										<li><a href="<?php echo $this->url( array( 'site' => $this->params['site'], 'controller' => 'account', 'action' => 'history' ), 'routeDefault', true ); ?>">My account</a></li>
+										<li class="dropdown"><a href="#">&raquo; <?php echo $sites[ $this->params['site'] ]; ?></a>
 											<ul>
 											<?php
 											foreach($sites as $code => $label) {
