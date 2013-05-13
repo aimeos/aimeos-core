@@ -133,7 +133,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			{
 				$param = $view->param( 'ca-delivery', array() );
 				$list = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
-				$optional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
+				$optional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
 				$missing = array();
 
 				foreach( $list as $mandatory )
