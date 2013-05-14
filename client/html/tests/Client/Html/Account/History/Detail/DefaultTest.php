@@ -117,7 +117,12 @@ class Client_Html_Account_History_Detail_DefaultTest extends MW_Unittest_Testcas
 	{
 		$manager = MShop_Order_Manager_Factory::createManager( $this->_context );
 		$search = $manager->createSearch( true );
-		$search->setConditions( $search->compare( '==', 'order.base.customerid', $customerid ) );
+		$expr = array(
+			$search->getConditions(),
+			$search->compare( '==', 'order.base.customerid', $customerid )
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
