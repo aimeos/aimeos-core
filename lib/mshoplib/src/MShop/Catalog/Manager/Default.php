@@ -342,7 +342,8 @@ class MShop_Catalog_Manager_Default
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
+	public function deleteItems( array $ids )
+	{
 		foreach( $ids as $id ) {
 			$this->deleteItem( $id );
 		}

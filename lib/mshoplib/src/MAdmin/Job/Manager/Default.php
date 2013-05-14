@@ -191,23 +191,13 @@ class MAdmin_Job_Manager_Default
 
 
 	/**
-	 * Deletes an existing job from the storage.
-	 *
-	 * @param integer $itemId Job id of an existing job in the storage that should be deleted
-	 */
-	public function deleteItem( $itemId )
-	{
-		$this->deleteItems( array( $itemId ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'madmin/job/manager/default/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'madmin/job/manager/default/delete', 'madmin/job/manager/default/delete' ) );
 	}
 
 

@@ -156,25 +156,13 @@ class MShop_Locale_Manager_Language_Default
 
 
 	/**
-	 * Deletes the language item specified by its ID
-	 *
-	 * @param string $languageId Language id/key of an existing Language in the storage to be deleted
-	 * @throws MW_DB_Exception If language object couldn't be deleted
-	 * @throws MShop_Locale_Exception On failures with the language item object
-	 */
-	public function deleteItem( $languageId )
-	{
-		$this->deleteItems( array( $languageId ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/locale/manager/language/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/locale/manager/language/default/item/delete', 'mshop/locale/manager/language/default/item/delete' ) );
 	}
 
 

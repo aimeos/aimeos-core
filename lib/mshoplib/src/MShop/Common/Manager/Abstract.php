@@ -53,6 +53,17 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 * Deletes an item from storage.
+	 *
+	 * @param integer $itemId Unique ID of the item in the storage
+	 */
+	public function deleteItem( $itemId )
+	{
+		$this->deleteItems( array( $itemId ) );
+	}
+
+
+	/**
 	 * Returns the newly created ID for the last record which was inserted.
 	 *
 	 * @param MW_DB_Connection_Interface $conn Database connection used to insert the new record

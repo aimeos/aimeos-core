@@ -410,23 +410,13 @@ class MShop_Text_Manager_Default
 
 
 	/**
-	 * Deletes the text item specified by the given text ID.
-	 *
-	 * @param Integer $id Id of the text item
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/text/manager/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/text/manager/default/item/delete', 'mshop/text/manager/default/item/delete' ) );
 	}
 
 

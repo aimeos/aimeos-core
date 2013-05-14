@@ -452,23 +452,13 @@ class MShop_Attribute_Manager_Default
 
 
 	/**
-	 * Deletes an attribute for the storage.
-	 *
-	 * @param integer $attributeId Unique ID of the attribute in the storage
-	 */
-	public function deleteItem( $attributeId )
-	{
-		$this->deleteItems( array( $attributeId ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/attribute/manager/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/attribute/manager/default/item/delete', 'mshop/attribute/manager/default/item/delete' ) );
 	}
 
 

@@ -174,23 +174,13 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 
 
 	/**
-	 * Delete a warehouse item by given Id
-	 *
-	 * @param Integer $id Id of the warehouse item to delete
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/product/manager/stock/warehouse/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/product/manager/stock/warehouse/default/item/delete', 'mshop/product/manager/stock/warehouse/default/item/delete' ) );
 	}
 
 

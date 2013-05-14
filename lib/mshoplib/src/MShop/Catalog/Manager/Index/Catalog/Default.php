@@ -122,17 +122,6 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 
 	/**
-	 * Removes an item from the index.
-	 *
-	 * @param integer $id Product ID
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items from the index.
 	 *
 	 * @param array $ids list of Product IDs
@@ -146,17 +135,17 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$sql = $context->getConfig()->get( 'mshop/catalog/manager/index/catalog/default/item/delete' );
-		
+		$sql = $context->getConfig()->get( 'mshop/catalog/manager/index/catalog/default/item/delete', 'mshop/catalog/manager/index/catalog/default/item/delete' );
+
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
-		
+
 		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
 		$translations = array( 'prodid' => '"prodid"' );
-		
+
 		$cond = $search->getConditionString( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $sql );
-		
+
 		try
 		{
 			$dbm = $context->getDatabaseManager();
@@ -312,7 +301,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/catalog/default/item/insert' );
 
 				if( !array_key_exists( $item->getId(), $listItems ) ) { continue; }
-				
+
 				foreach ( $listItems[ $item->getId() ] as $listItem )
 				{
 					$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );

@@ -379,23 +379,13 @@ class MShop_Service_Manager_Default
 
 
 	/**
-	 * Deletes an existing service from the storage.
-	 *
-	 * @param integer $serviceId Service id of an existing service that should be deleted
-	 */
-	public function deleteItem( $serviceId )
-	{
-		$this->deleteItems( array( $serviceId ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/service/manager/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/service/manager/default/item/delete', 'mshop/service/manager/default/item/delete' ) );
 	}
 
 

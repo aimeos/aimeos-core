@@ -306,24 +306,13 @@ class MShop_Order_Manager_Base_Product_Default
 
 
 	/**
-	 * Deletes an existing order base product from the storage.
-	 *
-	 * @param integer $id Order item base product id of an existing item in the
-	 * storage that should be deleted
-	 */
-	public function deleteItem($id)
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/order/manager/base/product/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/order/manager/base/product/default/item/delete', 'mshop/order/manager/base/product/default/item/delete' ) );
 	}
 
 

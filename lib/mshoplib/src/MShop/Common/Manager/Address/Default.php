@@ -93,22 +93,12 @@ class MShop_Common_Manager_Address_Default
 
 
 	/**
-	 * Deletes a common address item object.
-	 *
-	 * @param integer $id Unique common address ID referencing an existing address
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
+	public function deleteItems( array $ids )
+	{
 		$this->_deleteItems( $ids, $this->_config['delete'] );
 	}
 

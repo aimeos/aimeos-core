@@ -161,24 +161,13 @@ class MShop_Locale_Manager_Currency_Default
 
 
 	/**
-	 * Deletes a currency.
-	 *
-	 * @param string $currencyId Currency ID of an existing currency in the storage which should be deleted
-	 * @throws MShop_Locale_Exception
-	 */
-	public function deleteItem( $currencyId )
-	{
-		$this->deleteItems( array( $currencyId ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/locale/manager/currency/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/locale/manager/currency/default/item/delete', 'mshop/locale/manager/currency/default/item/delete' ) );
 	}
 
 

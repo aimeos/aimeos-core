@@ -387,24 +387,13 @@ class MShop_Media_Manager_Default
 
 
 	/**
-	 * Deletes a media item from the storage.
-	 *
-	 * @param integer $id ID of an existing item in the storage that should be deleted
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/media/manager/default/item/delete' ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/media/manager/default/item/delete', 'mshop/media/manager/default/item/delete' ) );
 	}
 
 

@@ -450,23 +450,13 @@ class MShop_Product_Manager_Default
 
 
 	/**
-	 * Deletes an existing product from the storage.
-	 *
-	 * @param integer $productId Product id of an existing product in the storage that should be deleted
-	 */
-	public function deleteItem($productId)
-	{
-		$this->deleteItems( array( $productId ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/product/manager/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/product/manager/default/item/delete', 'mshop/product/manager/default/item/delete' ) );
 	}
 
 

@@ -314,23 +314,13 @@ class MShop_Order_Manager_Base_Address_Default
 
 
 	/**
-	 * Delete a order base address item by given Id
-	 *
-	 * @param Integer $id Id of the order base address item to delete
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/order/manager/base/address/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/order/manager/base/address/default/item/delete', 'mshop/order/manager/base/address/default/item/delete' ) );
 	}
 
 

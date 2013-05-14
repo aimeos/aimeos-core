@@ -204,23 +204,13 @@ class MShop_Order_Manager_Base_Service_Attribute_Default
 
 
 	/**
-	 * Deletes an existing order service attribute item from the storage.
-	 *
-	 * @param integer $id Order service attribute ID
-	 */
-	public function deleteItem($id)
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/order/manager/base/service/attribute/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/order/manager/base/service/attribute/default/item/delete', 'mshop/order/manager/base/service/attribute/default/item/delete' ) );
 	}
 
 

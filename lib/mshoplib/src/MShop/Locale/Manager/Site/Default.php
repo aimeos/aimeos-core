@@ -196,25 +196,14 @@ class MShop_Locale_Manager_Site_Default
 
 
 	/**
-	 * Deletes a site item specified by its ID.
-	 *
-	 * @param string $siteId Site id of an existing Site in the storage to be deleted
-	 * @throws MShop_Locale_Exception
-	 */
-	public function deleteItem( $siteId )
-	{
-		$this->deleteItems( array( $siteId ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
+	public function deleteItems( array $ids )
+	{
 		$context = $this->_getContext();
-		$sql = $context->getConfig()->get( 'mshop/locale/manager/site/default/item/delete' );
+		$sql = $context->getConfig()->get( 'mshop/locale/manager/site/default/item/delete', 'mshop/locale/manager/site/default/item/delete' );
 
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'id', $ids ) );

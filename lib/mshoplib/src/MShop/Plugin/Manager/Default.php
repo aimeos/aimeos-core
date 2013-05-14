@@ -359,23 +359,13 @@ class MShop_Plugin_Manager_Default
 
 
 	/**
-	 * Deletes a plugin from the storage.
-	 *
-	 * @param integer $id Unique ID of the plugin in the storage
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/plugin/manager/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/plugin/manager/default/item/delete', 'mshop/plugin/manager/default/item/delete' ) );
 	}
 
 

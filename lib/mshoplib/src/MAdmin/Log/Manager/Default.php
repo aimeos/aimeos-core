@@ -185,23 +185,13 @@ class MAdmin_Log_Manager_Default
 
 
 	/**
-	 * Deletes an existing log from the storage.
-	 *
-	 * @param integer $itemId Log id of an existing Log in the storage that should be deleted
-	 */
-	public function deleteItem( $itemId )
-	{
-		$this->deleteItems( array( $itemId ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'madmin/log/manager/default/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'madmin/log/manager/default/delete', 'madmin/log/manager/default/delete' ) );
 	}
 
 

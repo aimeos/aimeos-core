@@ -300,23 +300,13 @@ class MShop_Supplier_Manager_Default
 
 
 	/**
-	 * Deletes a supplier item object from the permanent storage.
-	 *
-	 * @param integer $id Unique supplier ID referencing an existing supplier
-	 */
-	public function deleteItem($id)
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/supplier/manager/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/supplier/manager/default/item/delete', 'mshop/supplier/manager/default/item/delete' ) );
 	}
 
 

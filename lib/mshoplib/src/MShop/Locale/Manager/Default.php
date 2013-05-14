@@ -191,23 +191,13 @@ class MShop_Locale_Manager_Default
 
 
 	/**
-	 * Deletes the item specified by its ID.
-	 *
-	 * @param mixed $id ID of the item object
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/locale/manager/default/item/delete' ) );
+	public function deleteItems( array $ids )
+	{
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/locale/manager/default/item/delete', 'mshop/locale/manager/default/item/delete' ) );
 	}
 
 

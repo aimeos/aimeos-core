@@ -95,7 +95,8 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
+	public function deleteItems( array $ids )
+	{
 		$this->_manager->deleteItems( $ids );
 	}
 

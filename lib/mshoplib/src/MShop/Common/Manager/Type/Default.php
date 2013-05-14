@@ -161,22 +161,12 @@ class MShop_Common_Manager_Type_Default
 
 
 	/**
-	 * Deletes the type item object specified by its ID.
-	 *
-	 * @param integer $id Id of the type item object
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
 	 */
-	public function deleteItems( array $ids ){
+	public function deleteItems( array $ids )
+	{
 		$this->_deleteItems( $ids, $this->_config['delete'] );
 	}
 
