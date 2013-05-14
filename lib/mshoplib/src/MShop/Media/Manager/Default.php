@@ -529,9 +529,12 @@ class MShop_Media_Manager_Default
 
 		if( count( $typeIds ) > 0 )
 		{
+			$start = $search->getSliceStart();
+			$size = $search->getSliceSize();
 			$typeManager = $this->getSubManager( 'type' );
 			$search = $typeManager->createSearch();
 			$search->setConditions( $search->compare( '==', 'media.type.id', array_unique( $typeIds ) ) );
+			$search->setSlice( $start, $size );
 			$typeItems = $typeManager->searchItems( $search );
 
 			foreach( $map as $id => $row )

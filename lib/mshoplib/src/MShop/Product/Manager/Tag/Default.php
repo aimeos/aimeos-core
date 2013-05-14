@@ -158,7 +158,7 @@ class MShop_Product_Manager_Tag_Default
 	public function createItem()
 	{
 		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		return new MShop_Product_Item_Tag_Default( $values );
 	}
 
 
@@ -297,21 +297,23 @@ class MShop_Product_Manager_Tag_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		$map = $typeIds = array();
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
-		$items = array();
 
 		try
 		{
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/product/manager/tag/default/item/search';
 			$cfgPathCount =  'mshop/product/manager/tag/default/item/count';
-			$required = array( 'product.tag', 'product.tag.type' );
+			$required = array( 'product.tag' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
-				$items[ $row['id'] ] = $this->_createItem( $row );
+			while( ( $row = $results->fetch() ) !== false )
+			{
+				$map[ $row['id'] ] = $row;
+				$typeIds[] = $row['typeid'];
 			}
 
 			$dbm->release( $conn );
@@ -322,7 +324,25 @@ class MShop_Product_Manager_Tag_Default
 			throw $e;
 		}
 
-		return $items;
+		if( count( $typeIds ) > 0 )
+		{
+			$start = $search->getSliceStart();
+			$size = $search->getSliceSize();
+			$typeManager = $this->getSubManager( 'type' );
+			$search = $typeManager->createSearch();
+			$search->setConditions( $search->compare( '==', 'product.tag.type.id', array_unique( $typeIds ) ) );
+			$search->setSlice( $start, $size );
+			$typeItems = $typeManager->searchItems( $search );
+
+			foreach( $map as $id => $row )
+			{
+				if( isset( $typeItems[ $row['typeid'] ] ) ) {
+					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				}
+			}
+		}
+
+		return $this->_buildItems( $map, $ref, 'product.tag' );
 	}
 
 
