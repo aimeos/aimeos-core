@@ -884,8 +884,9 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 *
 	 * @param array $ids List of IDs
 	 * @param string $sql Sql statement
+	 * @param boolean $siteidcheck If siteid is used in the statement
 	 */
-	protected function _deleteItems( array $ids, $sql )
+	protected function _deleteItems( array $ids, $sql, $siteidcheck = true )
 	{
 		$context = $this->_getContext();
 
@@ -905,7 +906,11 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			$conn = $dbm->acquire();
 
 			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+
+			if( $siteidcheck ) {
+				$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			}
+
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn );
