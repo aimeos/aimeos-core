@@ -379,28 +379,14 @@ class MShop_Service_Manager_Default
 
 
 	/**
-	 * Deletes an existing service from the storage.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $serviceId Service id of an existing service that should be deleted
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $serviceId )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/service/manager/default/item/delete');
-			$stmt->bind(1, $serviceId, MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->execute()->finish();
-
-			$dbm->release($conn);
-		}
-		catch ( Exception $e )
-		{
-			$dbm->release($conn);
-			throw $e;
-		}
+		$path = 'mshop/service/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

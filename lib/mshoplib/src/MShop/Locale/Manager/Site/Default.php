@@ -196,26 +196,38 @@ class MShop_Locale_Manager_Site_Default
 
 
 	/**
-	 * Deletes a site item specified by its ID.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param string $siteId Site id of an existing Site in the storage to be deleted
-	 * @throws MShop_Locale_Exception
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $siteId )
+	public function deleteItems( array $ids )
 	{
-		$conn = $this->_dbm->acquire();
+		$context = $this->_getContext();
+		$path = 'mshop/locale/manager/site/default/item/delete';
+		$sql = $context->getConfig()->get( $path, $path );
+
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'id', $ids ) );
+
+		$types = array( 'id' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'id' => '"id"' );
+
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
 
 		try
 		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/locale/manager/site/default/item/delete');
-			$stmt->bind(1, $siteId, MW_DB_Statement_Abstract::PARAM_INT);
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
 			$stmt->execute()->finish();
 
-			$this->_dbm->release($conn);
+			$dbm->release( $conn );
 		}
-		catch ( Exception $e )
+		catch( Exception $e )
 		{
-			$this->_dbm->release($conn);
+			$dbm->release( $conn );
 			throw $e;
 		}
 	}

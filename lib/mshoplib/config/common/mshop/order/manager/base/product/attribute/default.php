@@ -10,7 +10,8 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_order_base_product_attr"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'insert' => '
 			INSERT INTO "mshop_order_base_product_attr" ( "siteid", "ordprodid", "type", "code", "value", "name",

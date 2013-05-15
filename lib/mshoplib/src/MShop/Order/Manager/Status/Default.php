@@ -182,31 +182,15 @@ class MShop_Order_Manager_Status_Default
 
 
 	/**
-	 * Deletes the order status item specified by its ID.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param mixed $id ID of the order status object
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/order/manager/status/default/item/delete');
-			$stmt->bind(1, $id, MW_DB_Statement_Abstract::PARAM_INT);
-			$result = $stmt->execute()->finish();
-
-			$dbm->release( $conn, $this->_dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $this->_dbname );
-			throw $e;
-		}
+		$path = 'mshop/order/manager/status/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
-
 
 
 	/**
