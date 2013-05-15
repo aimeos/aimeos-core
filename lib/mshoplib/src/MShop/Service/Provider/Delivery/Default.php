@@ -475,7 +475,19 @@ class MShop_Service_Provider_Delivery_Default
 		$criteria = $orderProductManager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $base->getId() ) );
 		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.product.position' ) ) );
-		$products = $orderProductManager->searchItems( $criteria );
+		$allproducts = $orderProductManager->searchItems( $criteria );
+
+		$products = $childproducts = array();
+		foreach( $allproducts as $product )
+		{
+			if( $product->getOrderProductId() === null )
+			{
+				$products[] = $product;
+				continue;
+			}
+
+			$childproducts[ $product->getOrderProductId() ][] = $product;
+		}
 
 		$productlist = $dom->createElement( 'productlist' );
 
@@ -498,10 +510,52 @@ class MShop_Service_Provider_Delivery_Default
 			$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
 			$productitem->appendChild( $priceitem );
 
+			if( $product->getType() === 'bundle' ) {
+				$this->_buildXMLChildList( $product, $childproducts[ $product->getId() ], $dom, $productitem );
+			}
+
 			$productlist->appendChild( $productitem );
 		}
 
 		$orderitem->appendChild( $productlist );
+	}
+
+
+	/**
+	 * Adds the list of child products to the bundle products in the XML object
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $parent The bundle product
+	 * @param array $products List of child products attached to $parent
+	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param DOMElement $productelement DOM element to which the child products are added
+	 */
+	protected function _buildXMLChildList( MShop_Order_Item_Base_Product_Interface $parent, array $products, DOMDocument $dom, DOMElement $productelement )
+	{
+		$childlist = $dom->createElement( 'childlist' );
+
+		foreach( $products as $product )
+		{
+			$price = $product->getPrice();
+			$total = $price->getValue() + $price->getShipping();
+
+			$childproductitem = $dom->createElement( 'productitem' );
+
+			$this->_appendChildCDATA( 'position', $product->getPosition(), $dom, $childproductitem );
+			$this->_appendChildCDATA( 'code', $product->getProductCode(), $dom, $childproductitem );
+			$this->_appendChildCDATA( 'name', $product->getName(), $dom, $childproductitem );
+			$this->_appendChildCDATA( 'quantity', $product->getQuantity(), $dom, $childproductitem );
+
+			$priceitem = $dom->createElement( 'priceitem' );
+			$this->_appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
+			$this->_appendChildCDATA( 'shipping', number_format( $price->getShipping(), 2, '.', '' ), $dom, $priceitem );
+			$this->_appendChildCDATA( 'discount', number_format( $price->getRebate(), 2, '.', '' ), $dom, $priceitem );
+			$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
+			$childproductitem->appendChild( $priceitem );
+
+			$childlist->appendChild( $childproductitem );
+		}
+
+		$productelement->appendChild( $childlist );
 	}
 
 
