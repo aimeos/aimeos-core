@@ -24,7 +24,8 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	private $_locale;
 	private $_logger;
 	private $_session;
-	private $_user = '';
+	private $_userid;
+	private $_editor = '';
 
 
 	/**
@@ -76,7 +77,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getCache()
 	{
 		if( !isset( $this->_cache ) ) {
-			throw new MShop_Exception( 'No cache object available' );
+			throw new MShop_Exception( sprintf( 'Cache object not available' ) );
 		}
 
 		return $this->_cache;
@@ -102,7 +103,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getConfig()
 	{
 		if( !isset( $this->_config ) ) {
-			throw new MShop_Exception( 'No configuration object available' );
+			throw new MShop_Exception( sprintf( 'Configuration object not available' ) );
 		}
 
 		return $this->_config;
@@ -128,7 +129,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getDatabaseManager()
 	{
 		if( !isset( $this->_dbm ) ) {
-			throw new MShop_Exception( 'No database manager object available' );
+			throw new MShop_Exception( sprintf( 'Database manager object not available' ) );
 		}
 
 		return $this->_dbm;
@@ -153,7 +154,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getI18n()
 	{
 		if( !isset( $this->_i18n ) ) {
-			throw new MShop_Exception( 'No internationalization object available' );
+			throw new MShop_Exception( sprintf( 'Internationalization object not available' ) );
 		}
 
 		return $this->_i18n;
@@ -179,7 +180,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getLocale()
 	{
 		if( !isset( $this->_locale ) ) {
-			throw new MShop_Exception( 'No locale object available' );
+			throw new MShop_Exception( sprintf( 'Locale object not available' ) );
 		}
 
 		return $this->_locale;
@@ -205,7 +206,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getLogger()
 	{
 		if( !isset( $this->_logger ) ) {
-			throw new MShop_Exception( 'No log manager object available' );
+			throw new MShop_Exception( sprintf( 'Log manager object not available' ) );
 		}
 
 		return $this->_logger;
@@ -231,7 +232,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	public function getSession()
 	{
 		if( !isset( $this->_session ) ) {
-			throw new MShop_Exception( 'No session object available' );
+			throw new MShop_Exception( sprintf( 'Session object not available' ) );
 		}
 
 		return $this->_session;
@@ -245,7 +246,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function setEditor( $name )
 	{
-		$this->_user = (string) $name;
+		$this->_editor = (string) $name;
 	}
 
 
@@ -256,6 +257,28 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function getEditor()
 	{
-		return $this->_user;
+		return $this->_editor;
+	}
+
+
+	/**
+	 * Sets the user ID of the logged in user.
+	 *
+	 * @param string $userid User ID of the logged in user
+	 */
+	public function setUserId( $userid )
+	{
+		$this->_userid = (string) $userid;
+	}
+
+
+	/**
+	 * Returns the user ID of the logged in user.
+	 *
+	 * @return string User ID of the logged in user
+	 */
+	public function getUserId()
+	{
+		return $this->_userid;
 	}
 }

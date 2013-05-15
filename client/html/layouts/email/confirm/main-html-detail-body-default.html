@@ -11,7 +11,6 @@ if( isset( $this->confirmOrderBaseItem ) )
 	$priceValue = $price->getValue();
 	$priceService = $price->getShipping();
 	$priceRebate = $price->getRebate();
-	$priceTaxrate = $price->getTaxrate();
 	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
 }
 else
@@ -19,7 +18,6 @@ else
 	$priceValue = '0.00';
 	$priceService = '0.00';
 	$priceRebate = '0.00';
-	$priceTaxrate = '0.00';
 	$priceCurrency = '';
 }
 
@@ -47,7 +45,8 @@ catch( Exception $e )
 	$paymentPriceService = '0.00';
 }
 
-$priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
+/// Price format with price value (%1$s) and currency (%2$s)
+$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
 ?>
 <div class="email-confirm-main-detail">
@@ -67,12 +66,22 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 <?php 	foreach( $this->confirmOrderBaseItem->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
-						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $product->getMediaUrl(); ?>" />
+<?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
+						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaUrl; ?>" alt="<?php echo $product->getName(); ?>" />
+<?php		endif; ?>
 						<span class="product-name"><?php echo $product->getName(); ?></span>
-<?php		foreach( $product->getAttributes() as $attribute ) : ?>
-						<span class="product-attributename"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
-						<span class="product-attributevalue"><?php echo ( ( $name = $attribute->getName() ) !== '' ? $name : $attribute->getValue() ); ?></span>
-<?php		endforeach; ?>
+<?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
+						<ul class="attr-list">
+<?php			foreach( $product->getAttributes() as $attribute ) : ?>
+<?php				if( $attribute->getType() !== 'hidden' ) : ?>
+							<li class="attr-item">
+								<span class="name"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
+								<span class="value"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ); ?></span>
+							</li>
+<?php				endif; ?>
+<?php			endforeach; ?>
+						</ul>
+<?php		endif; ?>
 					</td>
 <?php		$prodPrice = $product->getPrice()->getValue(); ?>
 					<td class="quantity"><?php echo $product->getQuantity(); ?></td>
@@ -109,6 +118,13 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 					<td colspan="3"><?php echo $this->translate( 'client/html', 'Total' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?></td>
 				</tr>
+<?php foreach( $this->get( 'commonTaxRates', array() ) as $taxRate => $priceValue ) : ?>
+				<tr class="tax">
+					<td colspan="3"><?php printf( $this->translate( 'client/html', 'Includes %1$s%% VAT' ), $this->number( $taxRate ) ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ); ?></td>
+					<td></td>
+				</tr>
+<?php endforeach; ?>
 				<tr class="rebate">
 					<td colspan="3"><?php echo $this->translate( 'client/html', 'Included rebates' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?></td>

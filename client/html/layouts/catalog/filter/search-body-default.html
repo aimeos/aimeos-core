@@ -8,11 +8,12 @@
 $listTarget = $this->config( 'client/html/catalog/list/url/target' );
 $listController = $this->config( 'client/html/catalog/list/search/url/controller', 'catalog' );
 $listAction = $this->config( 'client/html/catalog/list/search/url/action', 'list' );
+
 ?>
-<div class="catalog-filter-search">
+<div class="arcavias catalog-filter-search">
 	<form action="<?php echo $this->url( $listTarget, $listController, $listAction ); ?>" method="POST">
-		<span><?php echo $this->translate( 'client/html', 'Search:' ); ?></span><input class="input12b value" type="text" name="<?php echo $this->formparam( 'f-search-text' ); ?>" value="" />
-		<button type="submit" class="searchbutton12"><?php echo $this->translate( 'client/html', 'Go' ); ?></button>
+		<input class="value" type="text" name="<?php echo $this->formparam( 'f-search-text' ); ?>" value="" /><!--
+		--><button class="standardbutton" type="submit"><?php echo $this->translate( 'client/html', 'Go' ); ?></button>
 	</form>
 <?php echo $this->get( 'searchBody' ); ?>
 </div>

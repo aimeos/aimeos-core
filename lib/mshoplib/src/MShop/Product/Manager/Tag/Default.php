@@ -172,7 +172,7 @@ class MShop_Product_Manager_Tag_Default
 	{
 		$iface = 'MShop_Product_Item_Tag_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Product_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Product_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -374,14 +374,14 @@ class MShop_Product_Manager_Tag_Default
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Product_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
+			throw new MShop_Product_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$classname = 'MShop_Common_Manager_Type_' . $name;
 		$interface = 'MShop_Common_Manager_Type_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Product_Exception( sprintf('Class "%1$s" not found', $classname ) );
+			throw new MShop_Product_Exception( sprintf('Class "%1$s" not available', $classname ) );
 		}
 
 		$confpath = 'mshop/product/manager/tag/type/' . strtolower( $name ) . '/item';
@@ -391,7 +391,7 @@ class MShop_Product_Manager_Tag_Default
 
 		if( ( $manager instanceof $interface ) === false ) {
 			throw new MShop_Product_Exception(
-				sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface )
+				sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface )
 			);
 		}
 

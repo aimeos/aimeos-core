@@ -65,16 +65,18 @@ class Controller_Frontend_Basket_Default
 	 *
 	 * @param string $prodid ID of the base product to add
 	 * @param integer $quantity Amount of products that should by added
-	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
-	 * 	selection of products but are stored together with the product (e.g. for configurable products)
-	 * @param array $variantAttributeIds List of variant-building attribute IDs that identify a specific product
-	 * 	in a selection products
 	 * @param boolean $requireVariant True if a specific product must be matched by the variant-building attribute IDs
 	 *  or false if the parent product can be added to the basket when the variant-building attributes don't match or
 	 *  are missing
-	 * @throws Controller_Frontend_Basket_Exception If the product isn't found
+	 * @param array $variantAttributeIds List of variant-building attribute IDs that identify a specific product
+	 * 	in a selection products
+	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
+	 * 	selection of products but are stored together with the product (e.g. for configurable products)
+	 * @param array $hiddenAttributeIds List of attribute IDs that should be stored along with the product in the order
+	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
 	 */
-	public function addProduct( $prodid, $quantity = 1, $configAttributeIds = array(), $variantAttributeIds = array(), $requireVariant = true )
+	public function addProduct( $prodid, $quantity = 1, $requireVariant = true, $variantAttributeIds = array(),
+		$configAttributeIds = array(), $hiddenAttributeIds = array() )
 	{
 		$this->_checkCategory( $prodid );
 		$this->_checkStockLevel( $prodid, $quantity );
@@ -86,6 +88,9 @@ class Controller_Frontend_Basket_Default
 		$orderBaseProductItem = $this->_getDomainManager( 'order/base/product' )->createItem();
 		$orderBaseProductItem->copyFrom( $productItem );
 		$orderBaseProductItem->setQuantity( $quantity );
+
+		$orderAttributes = array();
+		$orderProductAttributeManager = $this->_getDomainManager( 'order/base/product/attribute' );
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
@@ -105,6 +110,15 @@ class Controller_Frontend_Basket_Default
 				if( count( $subprices ) > 0 ) {
 					$prices = $subprices;
 				}
+
+				foreach( $this->_getAttributes( $variantAttributeIds, array( 'text' ) ) as $attrItem )
+				{
+					$orderAttributeItem = $orderProductAttributeManager->createItem();
+					$orderAttributeItem->copyFrom( $attrItem );
+					$orderAttributeItem->setType( 'variant' );
+
+					$orderAttributes[] = $orderAttributeItem;
+				}
 			}
 			else if( $requireVariant === true )
 			{
@@ -115,11 +129,12 @@ class Controller_Frontend_Basket_Default
 		}
 
 
-		$orderAttributes = array();
-		$orderProductAttributeManager = $this->_getDomainManager( 'order/base/product/attribute' );
-
 		$priceManager = $this->_getDomainManager( 'price' );
 		$price = $priceManager->getLowestPrice( $prices, $quantity );
+
+
+		$attrTypeId = $this->_getProductListTypeItem( 'attribute', 'config' )->getId();
+		$this->_checkReferences( $prodid, 'attribute', $attrTypeId, $configAttributeIds );
 
 		foreach( $this->_getAttributes( $configAttributeIds ) as $attrItem )
 		{
@@ -134,6 +149,19 @@ class Controller_Frontend_Basket_Default
 			$orderAttributeItem = $orderProductAttributeManager->createItem();
 			$orderAttributeItem->copyFrom( $attrItem );
 			$orderAttributeItem->setType( 'config' );
+
+			$orderAttributes[] = $orderAttributeItem;
+		}
+
+
+		$attrTypeId = $this->_getProductListTypeItem( 'attribute', 'hidden' )->getId();
+		$this->_checkReferences( $prodid, 'attribute', $attrTypeId, $hiddenAttributeIds );
+
+		foreach( $this->_getAttributes( $hiddenAttributeIds, array() ) as $attrItem )
+		{
+			$orderAttributeItem = $orderProductAttributeManager->createItem();
+			$orderAttributeItem->copyFrom( $attrItem );
+			$orderAttributeItem->setType( 'hidden' );
 
 			$orderAttributes[] = $orderAttributeItem;
 		}
@@ -387,6 +415,43 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
+	 * Checks if the IDs of the given items are really associated to the product.
+	 *
+	 * @param string $prodId Unique ID of the product
+	 * @param string $domain Domain the references must be of
+	 * @param integer $listTypeId ID of the list type the referenced items must be
+	 * @param array $refIds List of IDs that must be associated to the product
+	 * @throws Controller_Frontend_Basket_Exception If one or more of the IDs are not associated
+	 */
+	protected function _checkReferences( $prodId, $domain, $listTypeId, array $refIds )
+	{
+		$productManager = $this->_getDomainManager( 'product' );
+		$search = $productManager->createSearch( true );
+
+		$expr = array(
+			$search->compare( '==', 'product.id', $prodId ),
+			$search->getConditions(),
+		);
+
+		if( count( $refIds ) > 0 )
+		{
+			$param = array( $domain, $listTypeId, $refIds );
+			$cmpfunc = $search->createFunction( 'product.contains', $param );
+
+			$expr[] = $search->compare( '==', $cmpfunc, count( $refIds ) );
+		}
+
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		if( count( $productManager->searchItems( $search, array() ) ) === 0 )
+		{
+			$msg = sprintf( 'Invalid "%1$s" references for product with ID "%2$s"', $domain, $prodId );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+	}
+
+
+	/**
 	 * Checks if there are enough products in stock.
 	 *
 	 * @param string $prodid Unique ID of the product
@@ -518,17 +583,18 @@ class Controller_Frontend_Basket_Default
 
 		$search = $attributeManager->createSearch( true );
 		$expr = array(
-			$search->getConditions(),
 			$search->compare( '==', 'attribute.id', $attributeIds ),
+			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
 
 		$attrItems = $attributeManager->searchItems( $search, $domains );
 
 		if( count( $attrItems ) !== count( $attributeIds ) )
 		{
-			$expected = join( ',', $attributeIds );
-			$actual = join( ',', array_keys( $attrItems ) );
+			$expected = implode( ',', $attributeIds );
+			$actual = implode( ',', array_keys( $attrItems ) );
 			$msg = sprintf( 'Available attribute IDs "%1$s" does not match the given attribute IDs "%2$s"', $actual, $expected );
 
 			throw new Controller_Frontend_Basket_Exception( $msg );
@@ -553,8 +619,8 @@ class Controller_Frontend_Basket_Default
 
 			$listTypeSearch = $listTypeManager->createSearch( true );
 			$expr = array (
-				$listTypeSearch->compare( '==', 'product.list.type.domain', 'attribute' ),
-				$listTypeSearch->compare( '==', 'product.list.type.code', 'default' ),
+				$listTypeSearch->compare( '==', 'product.list.type.domain', $domain ),
+				$listTypeSearch->compare( '==', 'product.list.type.code', $code ),
 				$listTypeSearch->getConditions(),
 			);
 			$listTypeSearch->setConditions( $listTypeSearch->combine( '&&', $expr ) );
@@ -563,7 +629,7 @@ class Controller_Frontend_Basket_Default
 
 			if( ( $listTypeItem = reset( $listTypeItems ) ) === false )
 			{
-				$msg = sprintf( 'No list type for domain "%1$s" and code "%2$s" found', 'attribute', 'default' );
+				$msg = sprintf( 'No list type for domain "%1$s" and code "%2$s" found', $domain, $code );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 
@@ -604,7 +670,7 @@ class Controller_Frontend_Basket_Default
 
 		if( count( $variantAttributeIds ) > 0 )
 		{
-			$listTypeItem = $this->_getProductListTypeItem( 'attribute', 'default' );
+			$listTypeItem = $this->_getProductListTypeItem( 'attribute', 'variant' );
 
 			$param = array( 'attribute', $listTypeItem->getId(), $variantAttributeIds );
 			$cmpfunc = $search->createFunction( 'product.contains', $param );

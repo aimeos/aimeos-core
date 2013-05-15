@@ -11,10 +11,10 @@
  */
 class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_plugin;
-	protected $_order;
-	protected $_products;
+	private $_object;
+	private $_plugin;
+	private $_order;
+	private $_products;
 
 
 	/**
@@ -102,7 +102,7 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 
 	public function testUpdateOk()
 	{
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.after', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
 		$this->assertEquals( 4, count( $this->_products['CNC']->getAttributes() ) );
 
 		$this->_products['CNE']->setAttributes( array() );
@@ -115,7 +115,7 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 			)
 		) );
 
-		$this->_object->update( $this->_order, 'addProduct.after', $this->_products['CNE'] );
+		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNE'] );
 
 		$this->assertEquals( 2, count( $this->_products['CNE']->getAttributes() ) );
 	}
@@ -127,15 +127,15 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 
 		$attribute = $attributeManager->createItem();
 
-		$attribute->setCode( 'stocklevel' );
-		$attribute->setName( 'stocklevel' );
+		$attribute->setCode( 'product.stock.stocklevel' );
+		$attribute->setName( 'product.stock.stocklevel' );
 		$attribute->setValue( '1200' );
 		$attribute->setType( 'property' );
 
 		$this->_products['CNC']->setAttributes( array( $attribute ) );
 		$this->assertEquals( 1, count( $this->_products['CNC']->getAttributes() ) );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.after', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
 		$this->assertEquals( 4, count( $this->_products['CNC']->getAttributes() ) );
 	}
 
@@ -151,7 +151,7 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 			'product.stock.dateback'
 		) ) );
 
-		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.after', $this->_products['CNC'] ) );
+		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
 		$this->assertEquals( 3, count( $this->_products['CNC']->getAttributes() ) );
 
 
@@ -162,6 +162,6 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 		) ) );
 
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->update( $this->_order, 'addProduct.after', $this->_products['CNC'] );
+		$this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] );
 	}
 }

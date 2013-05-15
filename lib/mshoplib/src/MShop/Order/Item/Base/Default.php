@@ -233,7 +233,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	public function getProduct($key)
 	{
 		if( !isset( $this->_products[$key] ) ) {
-			throw new MShop_Order_Exception( sprintf( 'No product for key "%1$d" found', $key ) );
+			throw new MShop_Order_Exception( sprintf( 'Product with array key "%1$d" not available', $key ) );
 		}
 
 		return $this->_products[$key];
@@ -247,7 +247,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
 	 */
-	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position=null )
+	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position = null )
 	{
 		$this->_checkProduct( $item );
 		$this->_checkPrice( $item->getPrice() );
@@ -256,15 +256,16 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		try
 		{
-			$product = $this->_getSameProduct( $item );
-			$product->setQuantity( $product->getQuantity() + $item->getQuantity() );
+			$quantity = $item->getQuantity();
+			$item = $this->_getSameProduct( $item );
+			$item->setQuantity( $item->getQuantity() + $quantity );
 		}
 		catch( MShop_Order_Exception $e )
 		{
-			if( is_null( $position ) ) {
-				$this->_products[] = $item;
+			if( $position !== null ) {
+				array_splice( $this->_products, $position, 0, array( $item ) );
 			} else {
-				array_splice($this->_products, $position, 0, array( $item ));
+				$this->_products[] = $item;
 			}
 		}
 
@@ -282,7 +283,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	public function deleteProduct($position)
 	{
 		if( !array_key_exists( $position, $this->_products ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Found no order product item on position "%1$d"', $position ) );
+			throw new MShop_Order_Exception( sprintf( 'Product with array key "%1$d" not available', $position ) );
 		}
 
 		$this->_notifyListeners( 'deleteProduct.before', $position );
@@ -315,7 +316,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	public function getAddress($domain = MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING)
 	{
 		if(!isset($this->_addresses[$domain])) {
-			throw new MShop_Order_Exception( sprintf( 'No address for domain "%1$s" available', $domain ) );
+			throw new MShop_Order_Exception( sprintf( 'Address for domain "%1$s" not available', $domain ) );
 		}
 
 		return $this->_addresses[$domain];
@@ -384,7 +385,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	public function getService( $type )
 	{
 		if(!isset($this->_services[$type])) {
-			throw new MShop_Order_Exception( sprintf( 'No service for type "%1$s" available', $type ) );
+			throw new MShop_Order_Exception( sprintf( 'Service of type "%1$s" not available', $type ) );
 		}
 
 		return $this->_services[$type];
@@ -507,7 +508,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count($this->_products) < 1 ) )
 		{
-			throw new MShop_Order_Exception( 'No products in basket' );
+			throw new MShop_Order_Exception( sprintf( 'Basket empty' ) );
 		}
 
 		$this->_notifyListeners( 'isComplete.after', $what );
@@ -742,6 +743,6 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			return $product;
 		}
 
-		throw new MShop_Order_Exception( 'No product with the same signatur available' );
+		throw new MShop_Order_Exception( sprintf( 'Product with the same signatur not available' ) );
 	}
 }

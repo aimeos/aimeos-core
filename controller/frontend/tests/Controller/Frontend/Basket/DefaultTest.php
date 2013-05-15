@@ -101,7 +101,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
+		$this->_object->addProduct( $item->getId(), 1, true, array_keys( $attributes ) );
 
 		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
 		$this->assertEquals( 'CNC', $this->_object->get()->getProduct( 0 )->getProductCode() );
@@ -122,7 +122,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		}
 
 
-		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array_keys( $attributes ), false );
+		$this->_object->addProduct( $this->_testItem->getId(), 1, false, array_keys( $attributes ) );
 
 		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
 		$this->assertEquals( 'U:TESTP', $this->_object->get()->getProduct( 0 )->getProductCode() );
@@ -138,15 +138,53 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 		$attributes = $attributeManager->searchItems( $search );
 
-		if( count( $attributes ) === 0) {
+		if( empty( $attributes ) ) {
 			throw new Exception( 'Attribute not found' );
 		}
 
+		$this->_object->addProduct( $this->_testItem->getId(), 1, true, array(), array_keys( $attributes ) );
+		$basket = $this->_object->get();
 
-		$this->_object->addProduct( $this->_testItem->getId(), 1, array_keys( $attributes ) );
+		$this->assertEquals( 1, count( $basket->getProducts() ) );
+		$this->assertEquals( 'U:TESTPSUB01', $basket->getProduct( 0 )->getProductCode() );
+		$this->assertEquals( 'xs', $basket->getProduct( 0 )->getAttribute( 'size' ) );
+	}
 
-		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
-		$this->assertEquals( 'U:TESTPSUB01', $this->_object->get()->getProduct( 0 )->getProductCode() );
+
+	public function testAddProductHiddenAttribute()
+	{
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $attributeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'attribute.code', '29' ),
+			$search->compare( '==', 'attribute.type.code', 'width' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$attributes = $attributeManager->searchItems( $search );
+
+		if( empty( $attributes ) ) {
+			throw new Exception( 'Attribute not found' );
+		}
+
+		$this->_object->addProduct( $this->_testItem->getId(), 1, true, array(), array(), array_keys( $attributes ) );
+
+		$basket = $this->_object->get();
+		$this->assertEquals( 1, count( $basket->getProducts() ) );
+
+		$product = $basket->getProduct( 0 );
+		$this->assertEquals( 'U:TESTPSUB01', $product->getProductCode() );
+
+		$attributes = $product->getAttributes();
+		$this->assertEquals( 1, count( $attributes ) );
+
+		if( ( $attribute = reset( $attributes ) ) === false ) {
+			throw new Exception( 'No attribute' );
+		}
+
+		$this->assertEquals( 'hidden', $attribute->getType() );
+		$this->assertEquals( '29', $product->getAttribute( 'width' ) );
 	}
 
 
@@ -226,10 +264,10 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testAddProductAttributeException()
+	public function testAddProductConfigAttributeException()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $this->_testItem->getId(), 1, array( -1 ) );
+		$this->_object->addProduct( $this->_testItem->getId(), 1, true, array(), array( -1 ) );
 	}
 
 
@@ -316,7 +354,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTSUB05') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTP') );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -326,8 +364,17 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $attributeManager->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'attribute.code', array( 'm', 'white' ) ),
-			$search->compare( '==', 'attribute.domain', 'product' )
+			$search->compare( '==', 'attribute.domain', 'product' ),
+			$search->combine( '||', array(
+				$search->combine( '&&', array(
+					$search->compare( '==', 'attribute.code', 'xs' ),
+					$search->compare( '==', 'attribute.type.code', 'size' ),
+				)),
+				$search->combine( '&&', array(
+					$search->compare( '==', 'attribute.code', 'white' ),
+					$search->compare( '==', 'attribute.type.code', 'color' ),
+				)),
+			) )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$attributes = $attributeManager->searchItems( $search );
@@ -336,8 +383,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No attributes available' );
 		}
 
-
-		$this->_object->addProduct( $item->getId(), 1, array_keys( $attributes ) );
+		$this->_object->addProduct( $item->getId(), 1, true, array(), array_keys( $attributes ) );
 		$this->_object->editProduct( 0, 4 );
 
 		$item = $this->_object->get()->getProduct( 0 );
@@ -350,7 +396,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$item = $this->_object->get()->getProduct( 0 );
 		$this->assertEquals( 3, $item->getQuantity() );
 		$this->assertEquals( 1, count( $item->getAttributes() ) );
-		$this->assertEquals( 'U:TESTSUB05', $item->getProductCode() );
+		$this->assertEquals( 'U:TESTPSUB01', $item->getProductCode() );
 	}
 
 

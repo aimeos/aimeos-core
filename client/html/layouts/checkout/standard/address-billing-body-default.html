@@ -11,16 +11,11 @@ try {
 	$addrArray = array();
 }
 
-$salutations = array(
-	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
-);
-
 $billingOption = $this->param( 'ca-billing-option', ( $addrArray === array() && isset( $this->addressCustomerItem ) ? $this->addressCustomerItem->getId() : 'null' ) );
 $billingSalutation = $this->param( 'ca-billing/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $billingCountry = $this->param( 'ca-billing/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
 
+$billingSalutations = $this->get( 'billingSalutations', array() );
 $billingCountries = $this->get( 'addressCountries', array() );
 $billingLanguage = $this->get( 'billingLanguage', '' );
 
@@ -39,6 +34,8 @@ foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 	$paymentCss[$name][] = 'error';
 }
 
+$allFields = array_keys( $paymentCss );
+
 ?>
 <div class="checkout-standard-address-billing">
 	<h2><?php echo $this->translate( 'client/html', 'Billing address' ); ?></h2>
@@ -50,25 +47,28 @@ foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 <?php
 		$addr = $this->addressCustomerItem->getBillingAddress();
 
-		echo nl2br( str_replace( "\n\n", "\n", sprintf( $this->translate( 'client/html',
-'Bill to:
-Salutation: %1$s
-First name: %2$s
-Last name: %3$s
-Street: %4$s
-Additional 1: %5$s
-Additional 2: %6$s
-Postal: %7$s
-City: %8$s
-Country: %9$s
-Language: %10$s
-E-Mail: %11$s
-Phone: %12$s
-Fax: %13$s
-Website: %14$s
+		echo preg_replace( "/\n+/m", "<br/>", trim( sprintf(
+			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
+			/// address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
+			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language, country (%13$s),
+			/// e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s)
+			$this->translate( 'client/html', '%1$s
+%2$s %3$s %4$s %5$s
+%6$s %7$s
+%8$s
+%9$s %10$s
+%11$s
+%12$s
+%13$s
+%14$s
+%15$s
+%16$s
+%17$s
 '
 			),
-			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
+			$addr->getCompany(),
+			( !in_array( $addr->getSalutation(), array( 'company' ) ) ? $this->translate( 'client/html/code', $addr->getSalutation() ) : '' ),
+			$addr->getTitle(),
 			$addr->getFirstName(),
 			$addr->getLastName(),
 			$addr->getAddress1(),
@@ -76,6 +76,7 @@ Website: %14$s
 			$addr->getAddress3(),
 			$addr->getPostal(),
 			$addr->getCity(),
+			$addr->getState(),
 			$this->translate( 'client/html/country', $addr->getCountryId() ),
 			$this->translate( 'client/html/language', $addr->getLanguageId() ),
 			$addr->getEmail(),
@@ -88,94 +89,95 @@ Website: %14$s
 		</div>
 	</div>
 <?php endif; ?>
+<?php if( $this->config( 'client/html/common/address/billing/disable-new', false ) === false ) : ?>
 	<div class="item-address item-new">
 		<div class="header">
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-billing-option' ) ); ?>" value="null" <?php echo ( $billingOption == 'null' ? 'checked="checked"' : '' ); ?> />
 			<div class="values"><span class="value value-new"><?php echo $this->translate( 'client/html', 'new address' ); ?></span></div>
 		</div>
 		<ul class="form-list">
-			<li class="form-item salutation <?php echo ( isset( $paymentCss['salutation'] ) ? join( ' ', $paymentCss['salutation'] ) : '' ); ?>">
+			<li class="form-item salutation <?php echo ( isset( $paymentCss['order.base.address.salutation'] ) ? join( ' ', $paymentCss['order.base.address.salutation'] ) : '' ); ?>">
 				<label for="address-billing-salutation"><?php echo $this->translate( 'client/html', 'Salutation' ); ?>
-				</label><select id="address-billing-salutation" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.salutation' ) ); ?>">
+				</label><select id="address-billing-salutation" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.salutation' ) ); ?>" <?php echo ( in_array( 'order.base.address.salutation', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 					<option value=""><?php echo $this->translate( 'client/html', 'Select salutation' ); ?></option>
-					<option value="company" <?php echo ( $billingSalutation == 'company' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'company' ); ?></option>
-					<option value="mr" <?php echo ( $billingSalutation == 'mr' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'mr' ); ?></option>
-					<option value="mrs" <?php echo ( $billingSalutation == 'mrs' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'mrs' ); ?></option>
-					<option value="miss" <?php echo ( $billingSalutation == 'miss' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'miss' ); ?></option>
+<?php	foreach( $billingSalutations as $salutation ) : ?>
+					<option value="<?php echo $salutation; ?>" <?php echo ( $billingSalutation == $salutation ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/code', $salutation ); ?></option>
+<?php	endforeach; ?>
 				</select>
 			</li>
-			<li class="form-item company <?php echo ( isset( $paymentCss['company'] ) ? join( ' ', $paymentCss['company'] ) : '' ); ?>">
+			<li class="form-item company <?php echo ( isset( $paymentCss['order.base.address.company'] ) ? join( ' ', $paymentCss['order.base.address.company'] ) : '' ); ?>">
 				<label for="address-billing-company"><?php echo $this->translate( 'client/html', 'Company' ); ?>
-				</label><input type="text" id="address-billing-company" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.company' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.company', ( isset( $addrArray['order.base.address.company'] ) ? $addrArray['order.base.address.company'] : '' ) ); ?>" />
+				</label><input type="text" id="address-billing-company" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.company' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.company', ( isset( $addrArray['order.base.address.company'] ) ? $addrArray['order.base.address.company'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.company', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item firstname <?php echo ( isset( $paymentCss['firstname'] ) ? join( ' ', $paymentCss['firstname'] ) : '' ); ?>">
+			<li class="form-item firstname <?php echo ( isset( $paymentCss['order.base.address.firstname'] ) ? join( ' ', $paymentCss['order.base.address.firstname'] ) : '' ); ?>">
 				<label for="address-billing-firstname"><?php echo $this->translate( 'client/html', 'First name' ); ?>
-				</label><input type="text" id="address-billing-firstname" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.firstname' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.firstname', ( isset( $addrArray['order.base.address.firstname'] ) ? $addrArray['order.base.address.firstname'] : '' ) ); ?>" />
+				</label><input type="text" id="address-billing-firstname" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.firstname' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.firstname', ( isset( $addrArray['order.base.address.firstname'] ) ? $addrArray['order.base.address.firstname'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.firstname', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item lastname <?php echo ( isset( $paymentCss['lastname'] ) ? join( ' ', $paymentCss['lastname'] ) : '' ); ?>">
+			<li class="form-item lastname <?php echo ( isset( $paymentCss['order.base.address.lastname'] ) ? join( ' ', $paymentCss['order.base.address.lastname'] ) : '' ); ?>">
 				<label for="address-billing-lastname"><?php echo $this->translate( 'client/html', 'Last name' ); ?>
-				</label><input type="text" id="address-billing-lastname" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.lastname' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.lastname', ( isset( $addrArray['order.base.address.lastname'] ) ? $addrArray['order.base.address.lastname'] : '' ) ); ?>" />
+				</label><input type="text" id="address-billing-lastname" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.lastname' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.lastname', ( isset( $addrArray['order.base.address.lastname'] ) ? $addrArray['order.base.address.lastname'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.lastname', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item address1 <?php echo ( isset( $paymentCss['address1'] ) ? join( ' ', $paymentCss['address1'] ) : '' ); ?>">
+			<li class="form-item address1 <?php echo ( isset( $paymentCss['order.base.address.address1'] ) ? join( ' ', $paymentCss['order.base.address.address1'] ) : '' ); ?>">
 				<label for="address-billing-address1"><?php echo $this->translate( 'client/html', 'Street' ); ?>
-				</label><input type="text" id="address-billing-address1" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.address1' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.address1', ( isset( $addrArray['order.base.address.address1'] ) ? $addrArray['order.base.address.address1'] : '' ) ); ?>" />
+				</label><input type="text" id="address-billing-address1" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.address1' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.address1', ( isset( $addrArray['order.base.address.address1'] ) ? $addrArray['order.base.address.address1'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.address1', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item address2 <?php echo ( isset( $paymentCss['address2'] ) ? join( ' ', $paymentCss['address2'] ) : '' ); ?>">
+			<li class="form-item address2 <?php echo ( isset( $paymentCss['order.base.address.address2'] ) ? join( ' ', $paymentCss['order.base.address.address2'] ) : '' ); ?>">
 				<label for="address-billing-address2"><?php echo $this->translate( 'client/html', 'Additional' ); ?>
-				</label><input type="text" id="address-billing-address2" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.address2' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.address2', ( isset( $addrArray['order.base.address.address2'] ) ? $addrArray['order.base.address.address2'] : '' ) ); ?>" />
+				</label><input type="text" id="address-billing-address2" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.address2' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.address2', ( isset( $addrArray['order.base.address.address2'] ) ? $addrArray['order.base.address.address2'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.address2', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item address3 <?php echo ( isset( $paymentCss['address3'] ) ? join( ' ', $paymentCss['address3'] ) : '' ); ?>">
+			<li class="form-item address3 <?php echo ( isset( $paymentCss['order.base.address.address3'] ) ? join( ' ', $paymentCss['order.base.address.address3'] ) : '' ); ?>">
 				<label for="address-billing-address3"><?php echo $this->translate( 'client/html', 'Additional 2' ); ?>
-				</label><input type="text" id="address-billing-address3" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.address3' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.address3', ( isset( $addrArray['order.base.address.address3'] ) ? $addrArray['order.base.address.address3'] : '' ) ); ?>" />
+				</label><input type="text" id="address-billing-address3" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.address3' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.address3', ( isset( $addrArray['order.base.address.address3'] ) ? $addrArray['order.base.address.address3'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.address3', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item postal <?php echo ( isset( $paymentCss['postal'] ) ? join( ' ', $paymentCss['postal'] ) : '' ); ?>">
+			<li class="form-item postal <?php echo ( isset( $paymentCss['order.base.address.postal'] ) ? join( ' ', $paymentCss['order.base.address.postal'] ) : '' ); ?>">
 				<label for="address-billing-postal"><?php echo $this->translate( 'client/html', 'Postal code' ); ?>
-				</label><input type="text" id="address-billing-postal" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.postal' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.postal', ( isset( $addrArray['order.base.address.postal'] ) ? $addrArray['order.base.address.postal'] : '' ) ); ?>" />
+				</label><input type="text" id="address-billing-postal" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.postal' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.postal', ( isset( $addrArray['order.base.address.postal'] ) ? $addrArray['order.base.address.postal'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.postal', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item city <?php echo ( isset( $paymentCss['city'] ) ? join( ' ', $paymentCss['city'] ) : '' ); ?>">
+			<li class="form-item city <?php echo ( isset( $paymentCss['order.base.address.city'] ) ? join( ' ', $paymentCss['order.base.address.city'] ) : '' ); ?>">
 				<label for="address-billing-city"><?php echo $this->translate( 'client/html', 'City' ); ?>
-				</label><input type="text" id="address-billing-city" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.city' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.city', ( isset( $addrArray['order.base.address.city'] ) ? $addrArray['order.base.address.city'] : '' ) ); ?>" />
+				</label><input type="text" id="address-billing-city" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.city' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.city', ( isset( $addrArray['order.base.address.city'] ) ? $addrArray['order.base.address.city'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.city', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item state <?php echo ( isset( $paymentCss['state'] ) ? join( ' ', $paymentCss['state'] ) : '' ); ?>">
+			<li class="form-item state <?php echo ( isset( $paymentCss['order.base.address.state'] ) ? join( ' ', $paymentCss['order.base.address.state'] ) : '' ); ?>">
 				<label for="address-billing-state"><?php echo $this->translate( 'client/html', 'State' ); ?>
-				</label><input type="text" id="address-billing-state" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.state' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) ); ?>" />
+				</label><input type="text" id="address-billing-state" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.state' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item countryid <?php echo ( isset( $paymentCss['countryid'] ) ? join( ' ', $paymentCss['countryid'] ) : '' ); ?>">
+			<li class="form-item countryid <?php echo ( isset( $paymentCss['order.base.address.countryid'] ) ? join( ' ', $paymentCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-billing-countryid"><?php echo $this->translate( 'client/html', 'Country' ); ?>
-				</label><select id="address-billing-countryid" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.countryid' ) ); ?>">
-<?php if( count( $billingCountries ) > 1 ) : ?>
+				</label><select id="address-billing-countryid" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.countryid' ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
+<?php	if( count( $billingCountries ) > 1 ) : ?>
 					<option value=""><?php echo $this->translate( 'client/html', 'Select country' ); ?></option>
-<?php endif; ?>
-<?php foreach( $billingCountries as $countryId ) : ?>
+<?php	endif; ?>
+<?php	foreach( $billingCountries as $countryId ) : ?>
 					<option value="<?php echo $countryId ?>" <?php echo ( $country === $billingCountry ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/country', $countryId ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
-			<li class="form-item languageid <?php echo ( isset( $paymentCss['languageid'] ) ? join( ' ', $paymentCss['languageid'] ) : '' ); ?>">
+			<li class="form-item languageid <?php echo ( isset( $paymentCss['order.base.address.languageid'] ) ? join( ' ', $paymentCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 				<label for="address-billing-languageid"><?php echo $this->translate( 'client/html', 'Language' ); ?>
 				</label><select id="address-billing-languageid" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.languageid' ) ); ?>">
-<?php foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
+<?php	foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
 					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $billingLanguage ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/language', $languageId ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
-			<li class="form-item email <?php echo ( isset( $paymentCss['email'] ) ? join( ' ', $paymentCss['email'] ) : '' ); ?>">
+			<li class="form-item email <?php echo ( isset( $paymentCss['order.base.address.email'] ) ? join( ' ', $paymentCss['order.base.address.email'] ) : '' ); ?>">
 				<label for="address-billing-email"><?php echo $this->translate( 'client/html', 'E-Mail' ); ?>
-				</label><input type="text" id="address-billing-email" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.email' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.email', ( isset( $addrArray['order.base.address.email'] ) ? $addrArray['order.base.address.email'] : '' ) ); ?>" />
+				</label><input type="email" id="address-billing-email" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.email' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.email', ( isset( $addrArray['order.base.address.email'] ) ? $addrArray['order.base.address.email'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.email', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item telephone <?php echo ( isset( $paymentCss['telephone'] ) ? join( ' ', $paymentCss['telephone'] ) : '' ); ?>">
+			<li class="form-item telephone <?php echo ( isset( $paymentCss['order.base.address.telephone'] ) ? join( ' ', $paymentCss['order.base.address.telephone'] ) : '' ); ?>">
 				<label for="address-billing-telephone"><?php echo $this->translate( 'client/html', 'Telephone' ); ?>
-				</label><input type="text" id="address-billing-telephone" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.telephone' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.telephone', ( isset( $addrArray['order.base.address.telephone'] ) ? $addrArray['order.base.address.telephone'] : '' ) ); ?>" />
+				</label><input type="tel" id="address-billing-telephone" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.telephone' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.telephone', ( isset( $addrArray['order.base.address.telephone'] ) ? $addrArray['order.base.address.telephone'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.telephone', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item telefax <?php echo ( isset( $paymentCss['telefax'] ) ? join( ' ', $paymentCss['telefax'] ) : '' ); ?>">
+			<li class="form-item telefax <?php echo ( isset( $paymentCss['order.base.address.telefax'] ) ? join( ' ', $paymentCss['order.base.address.telefax'] ) : '' ); ?>">
 				<label for="address-billing-telefax"><?php echo $this->translate( 'client/html', 'Fax' ); ?>
-				</label><input type="text" id="address-billing-telefax" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.telefax' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.telefax', ( isset( $addrArray['order.base.address.telefax'] ) ? $addrArray['order.base.address.telefax'] : '' ) ); ?>" />
+				</label><input type="tel" id="address-billing-telefax" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.telefax' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.telefax', ( isset( $addrArray['order.base.address.telefax'] ) ? $addrArray['order.base.address.telefax'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.telefax', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item website <?php echo ( isset( $paymentCss['website'] ) ? join( ' ', $paymentCss['website'] ) : '' ); ?>">
+			<li class="form-item website <?php echo ( isset( $paymentCss['order.base.address.website'] ) ? join( ' ', $paymentCss['order.base.address.website'] ) : '' ); ?>">
 				<label for="address-billing-website"><?php echo $this->translate( 'client/html', 'Web site' ); ?>
-				</label><input type="text" id="address-billing-website" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.website' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.website', ( isset( $addrArray['order.base.address.website'] ) ? $addrArray['order.base.address.website'] : '' ) ); ?>" />
+				</label><input type="url" id="address-billing-website" name="<?php echo $this->formparam( array( 'ca-billing', 'order.base.address.website' ) ); ?>" value="<?php echo $this->param( 'ca-billing/order.base.address.website', ( isset( $addrArray['order.base.address.website'] ) ? $addrArray['order.base.address.website'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.website', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
 		</ul>
 	</div>
+<?php endif; ?>
 <?php echo $this->get( 'billingBody' ); ?>
 </div>

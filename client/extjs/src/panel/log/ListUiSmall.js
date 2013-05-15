@@ -87,9 +87,9 @@ MShop.panel.log.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
 						for( var name in object ) {
 							result += name + ': ' + object[name] + '<br/>'; 
 						}
-						return result;
+						return '<div style="white-space:normal !important;">' + result + '</div>';
 					} catch( e ) {
-						return data;
+						return '<div style="white-space:normal !important;">' + data + '</div>';
 					}
 				}
 			}, {

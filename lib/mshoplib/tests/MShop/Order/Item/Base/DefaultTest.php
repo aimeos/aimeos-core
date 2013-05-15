@@ -12,13 +12,13 @@
  */
 class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
-	protected $_locale;
-	protected $_products;
-	protected $_addresses;
-	protected $_services;
-	protected $_coupons;
+	private $_object;
+	private $_values;
+	private $_locale;
+	private $_products;
+	private $_addresses;
+	private $_services;
+	private $_coupons;
 
 
 	/**
@@ -335,10 +335,14 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$orderProductSame = clone $product;
 		$orderProductSame->setProductCode('prodid5');
 		$orderProductSame->setQuantity( 5 );
-		$orderProduct->setQuantity( 6 );
+		$orderProduct->setQuantity( 4 );
 
 		$this->_object->addProduct($orderProductSame );
 		$this->assertEquals( $products, $this->_object->getProducts() );
+
+		// Exceed limit for single product
+		$this->setExpectedException( 'MShop_Plugin_Exception' );
+		$this->_object->addProduct($orderProductSame );
 	}
 
 
@@ -456,14 +460,14 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_ALL );
 		}
 		catch( MShop_Order_Exception $e ) {
-			$this->assertEquals( 'No products in basket', $e->getMessage() );
+			$this->assertEquals( 'Basket empty', $e->getMessage() );
 		}
 
 		try {
 			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 		}
 		catch( MShop_Order_Exception $e ) {
-			$this->assertEquals( 'No products in basket', $e->getMessage() );
+			$this->assertEquals( 'Basket empty', $e->getMessage() );
 		}
 
 		foreach( $this->_products as $product ) {
@@ -490,7 +494,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		foreach( $this->_products as $product ) {
 			$this->_object->addProduct( $product );
 		}
-		
+
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
 
 		$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );

@@ -12,7 +12,7 @@
  */
 class MW_View_Helper_Url_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -55,7 +55,7 @@ class MW_View_Helper_Url_DefaultTest extends MW_Unittest_Testcase
 
 	public function testTransform()
 	{
-		$expected = '/baseurl/module/test/index/some/nice/text?plain=1&multi%5Bsub%5D=1';
+		$expected = '/baseurl/module/test/index/some-nice-text?plain=1&multi%5Bsub%5D=1';
 		$params = array( 'plain' => 1, 'multi' => array( 'sub' => true ) );
 		$trailing = array( 'some', 'nice', 'text' );
 

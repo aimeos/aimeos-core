@@ -8,9 +8,9 @@
  */
 class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_manifestPath;
-	protected $_deployPath;
+	private $_object;
+	private $_manifestPath;
+	private $_deployPath;
 
 	protected function _delTree( $dir )
 	{

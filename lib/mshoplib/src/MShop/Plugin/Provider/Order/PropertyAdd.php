@@ -16,8 +16,9 @@
  */
 class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_Interface
 {
-	protected $_item;
-	protected $_context;
+	private $_item;
+	private $_context;
+	private $_orderAttrManager;
 
 
 	/**
@@ -31,6 +32,9 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 		$this->_item = $item;
 		$this->_context = $context;
 
+		$this->_orderAttrManager = MShop_Order_Manager_Factory::createManager( $this->_context )
+			->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
+
 		$config = $context->getConfig();
 		$this->_type = $config->get( 'plugin/provider/order/propertyadd/type', 'property' );
 	}
@@ -43,7 +47,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$p->addListener( $this, 'addProduct.after' );
+		$p->addListener( $this, 'addProduct.before' );
 	}
 
 
@@ -63,13 +67,12 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
-			$str = 'Received notification from "%1$s" which doesn\'t implement "%2$s"';
-			throw new MShop_Plugin_Exception( sprintf( $str, get_class( $order ), $class ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$class = 'MShop_Order_Item_Base_Product_Interface';
 		if( !( $value instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Given object isn\'t of type "%1$s"', $class ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
@@ -81,7 +84,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 			$keyElements = explode( '.', $key );
 
 			if( $keyElements[0] !== 'product' || count( $keyElements ) < 3 ) {
-				throw new MShop_Plugin_Exception( 'Error in configuration.' );
+				throw new MShop_Plugin_Exception( sprintf( 'Configuration invalid' ) );
 			}
 
 			$productSubManager = $productManager->getSubManager( $keyElements[1] );
@@ -119,20 +122,14 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	{
 		$attributeList = $product->getAttributes();
 		$config = $this->_item->getConfig();
-
 		$itemProperties = $item->toArray();
 
-		$attributes = array();
 		foreach( $properties as $current )
 		{
-			if( array_key_exists( $current, $itemProperties ) )
-			{
-				$parts = explode( '.', $current );
-				$new = $this->_createAttribute( $product, $parts[2], $itemProperties[ $current ] );
-
-				if( $new !== null ) {
-					$attributeList[] = $new;
-				}
+			if( array_key_exists( $current, $itemProperties )
+				&& ( $new = $this->_createAttribute( $product, $current, $itemProperties[$current] ) ) !== null
+			) {
+				$attributeList[] = $new;
 			}
 		}
 
@@ -154,13 +151,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 			return null;
 		}
 
-		$attributeManager = MShop_Order_Manager_Factory::createManager( $this->_context )->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
-
-		if( $name === null ) {
-			$name = $code;
-		}
-
-		$new = $attributeManager->createItem();
+		$new = $this->_orderAttrManager->createItem();
 		$new->setCode( $code );
 		$new->setType( $this->_type );
 		$new->setName( $name );

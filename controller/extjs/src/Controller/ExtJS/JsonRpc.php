@@ -17,7 +17,7 @@
  */
 class Controller_ExtJS_JsonRpc
 {
-	protected $_classprefix = 'Controller_ExtJS';
+	private $_classprefix = 'Controller_ExtJS';
 	private $_controllers = array();
 	private $_context;
 
@@ -272,7 +272,7 @@ class Controller_ExtJS_JsonRpc
 		$class = $parts[0];
 		$method = $parts[1];
 
-		$name = $this->_classprefix . '_' . $class . '_Factory';
+		$name = $this->_getClassPrefix() . '_' . $class . '_Factory';
 
 		if( preg_match( '/^[a-zA-Z0-9\_]+$/', $name ) !== 1 ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Invalid controller factory name "%1$s"', $name ), -32602 );
@@ -295,6 +295,17 @@ class Controller_ExtJS_JsonRpc
 
 
 	/**
+	 * Returns the used prefix for all classes.
+	 *
+	 * @return string Class prefix (default: "Controller_ExtJS")
+	 */
+	protected function _getClassPrefix()
+	{
+		return $this->_classprefix;
+	}
+
+
+	/**
 	 * Returns all available controller instances.
 	 *
 	 * @return array Associative list of base controller name (Controller_ExtJS_Admin_Log_Default becomes Admin_Log)
@@ -304,7 +315,7 @@ class Controller_ExtJS_JsonRpc
 	{
 		if( $this->_controllers === array() )
 		{
-			$subFolder = str_replace( '_', DIRECTORY_SEPARATOR, $this->_classprefix );
+			$subFolder = str_replace( '_', DIRECTORY_SEPARATOR, $this->_getClassPrefix() );
 
 			foreach( explode( PATH_SEPARATOR, get_include_path() ) as $incdir )
 			{
@@ -329,6 +340,8 @@ class Controller_ExtJS_JsonRpc
 	 */
 	protected function _addControllers( DirectoryIterator $dir, $prefix = '' )
 	{
+		$classprefix = $this->_getClassPrefix();
+
 		foreach( $dir as $entry )
 		{
 			if( $entry->getType() === 'dir' && $entry->isDot() === false )
@@ -338,7 +351,7 @@ class Controller_ExtJS_JsonRpc
 			}
 			else if( $entry->getType() === 'file' && ( $name = $entry->getBaseName( '.php' ) ) === 'Factory' )
 			{
-				$name = $this->_classprefix . '_' . $prefix . '_Factory';
+				$name = $classprefix . '_' . $prefix . '_Factory';
 
 				if( preg_match( '/^[a-zA-Z0-9\_]+$/', $name ) !== 1 ) {
 					throw new Controller_ExtJS_Exception( sprintf( 'Invalid controller factory name "%1$s"', $name ) );

@@ -1,106 +1,149 @@
-# German translations for services.
-# Copyright (C) 2013
-# This file is distributed under the same license as the arcavias-core package.
-# Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# nsendetzky <n.sendetzky@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: arcavias-core 2013-01\n"
+"Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 15:38+0100\n"
-"PO-Revision-Date: 2013-01-18 16:33+0100\n"
-"Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
-"Language: Deutsch\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2013-04-23 11:56+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#. Address salutation
+msgid "company"
+msgstr "Firma"
 
-# Attribute
+#. Address salutation
+msgid "mr"
+msgstr "Herr"
 
+#. Address salutation
+msgid "mrs"
+msgstr "Frau"
+
+#. Address salutation
+msgid "miss"
+msgstr "Fräulein"
+
+#. Product attribute
 msgid "size"
 msgstr "Grösse"
 
+#. Product attribute
 msgid "length"
 msgstr "Länge"
 
+#. Product attribute
 msgid "width"
 msgstr "Weite"
 
+#. Product attribute
 msgid "color"
 msgstr "Farbe"
 
+#. Order type value
+msgid "order:repeat"
+msgstr "wiederholt"
 
+#. Order type value
+msgid "order:web"
+msgstr "Internet"
 
-# Zahlungsstatus
+#. Order type value
+msgid "order:phone"
+msgstr "Telefon"
 
+#. Payment status value
 msgid "pay:-1"
 msgstr "Offen"
 
+#. Payment status value
 msgid "pay:0"
 msgstr "Gelöscht"
 
+#. Payment status value
 msgid "pay:1"
 msgstr "Abgebrochen"
 
+#. Payment status value
 msgid "pay:2"
 msgstr "Abgelehnt"
 
+#. Payment status value
 msgid "pay:3"
 msgstr "Erstattet"
 
+#. Payment status value
 msgid "pay:4"
 msgstr "Wartend"
 
+#. Payment status value
 msgid "pay:5"
 msgstr "Authorisiert"
 
+#. Payment status value
 msgid "pay:6"
 msgstr "Erhalten"
 
-
-
-# Versandstatus
-
+#. Delivery status value
 msgid "stat:-1"
 msgstr "Offen"
 
+#. Delivery status value
 msgid "stat:0"
 msgstr "Gelöscht"
 
+#. Delivery status value
 msgid "stat:1"
 msgstr "Wartend"
 
+#. Delivery status value
 msgid "stat:2"
 msgstr "In Bearbeitung"
 
+#. Delivery status value
 msgid "stat:3"
 msgstr "Versandt"
 
+#. Delivery status value
 msgid "stat:4"
 msgstr "Ausgeliefert"
 
+#. Delivery status value
 msgid "stat:5"
 msgstr "Verloren"
 
+#. Delivery status value
 msgid "stat:6"
 msgstr "Annahme verweigert"
 
+#. Delivery status value
 msgid "stat:7"
 msgstr "Zurück gesendet"
 
-
-
-# Lastschrift
-
+#. Direct debit service provider
 msgid "payment.directdebit.accountowner"
 msgstr "Kontoinhaber"
 
+#. Direct debit service provider
 msgid "payment.directdebit.accountno"
 msgstr "Kontonummer"
 
+#. Direct debit service provider
 msgid "payment.directdebit.bankcode"
 msgstr "Bankleitzahl"
 
+#. Direct debit service provider
 msgid "payment.directdebit.bankname"
 msgstr "Name der Bank"

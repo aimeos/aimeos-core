@@ -12,8 +12,8 @@
  */
 class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
+	private $_object;
+	private $_values;
 
 
 	/**
@@ -53,7 +53,7 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 			'postal' => '22769',
 			'city' => 'Hamburg',
 			'state' => 'Hamburg',
-			'countryid' => 'de',
+			'countryid' => 'DE',
 			'langid' => 'de',
 			'telephone' => '05554433221',
 			'email' => 'unit.test@metaways.de',
@@ -159,9 +159,9 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetLastname()
 	{
-		$this->_object->setLastname( 'im Gl�ck' );
+		$this->_object->setLastname( 'im Glueck' );
 		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 'im Gl�ck', $this->_object->getLastname() );
+		$this->assertEquals( 'im Glueck', $this->_object->getLastname() );
 	}
 
 	public function testGetAddress1()
@@ -238,14 +238,14 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetCountryId()
 	{
-		$this->assertEquals( 'de', $this->_object->getCountryId());
+		$this->assertEquals( 'DE', $this->_object->getCountryId());
 	}
 
 	public function testSetCountryId()
 	{
 		$this->_object->setCountryId('uk');
 		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 'uk', $this->_object->getCountryId());
+		$this->assertEquals( 'UK', $this->_object->getCountryId());
 	}
 
 	public function testGetLanguageId()
@@ -255,9 +255,9 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetLanguageId()
 	{
-		$this->_object->setLanguageId('uk');
+		$this->_object->setLanguageId('en');
 		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 'uk', $this->_object->getLanguageId());
+		$this->assertEquals( 'en', $this->_object->getLanguageId());
 	}
 
 	public function testGetTelephone()

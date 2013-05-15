@@ -116,13 +116,14 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 			}
 
 			uasort( $this->_refItems[$domain], array( $this, '_compareRefPosition' ) );
-			$this->_sortedRefs[$domain] = true;
+
+			/** @todo: This doesn't work with PHP 5.3 on Solaris -> _listtype gets screwed up if not set again the second time */
+			// $this->_sortedRefs[$domain] = true;
 		}
 
 		if( $type !== null || $listtype !== null )
 		{
 			$list = array();
-			$refList = $this->_sortedRefs[$domain];
 			$iface = 'MShop_Common_Item_Typeid_Interface';
 
 			foreach( $this->_refItems[$domain] as $id => $item )

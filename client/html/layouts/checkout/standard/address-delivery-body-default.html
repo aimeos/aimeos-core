@@ -11,16 +11,12 @@ try {
 	$addrArray = array();
 }
 
-$salutations = array(
-	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
-	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
-);
 
 $deliveryOption = $this->param( 'ca-delivery-option', ( $addrArray === array() ? -1 : 'null' ) );
 $deliverySalutation = $this->param( 'ca-delivery/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $deliveryCountry = $this->param( 'ca-delivery/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
 
+$deliverySalutations = $this->get( 'deliverySalutations', array() );
 $deliveryCountries = $this->get( 'addressCountries', array() );
 $deliveryLanguage = $this->get( 'deliveryLanguage', '' );
 
@@ -39,6 +35,8 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 	$deliveryCss[$name][] = 'error';
 }
 
+$allFields = array_keys( $deliveryCss );
+
 ?>
 <div class="checkout-standard-address-delivery">
 	<h2><?php echo $this->translate( 'client/html', 'Delivery address' ); ?></h2>
@@ -54,25 +52,28 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-delivery-option' ) ); ?>" value="<?php echo $addr->getId(); ?>" <?php echo ( $deliveryOption == $addr->getId() ? 'checked="checked"' : '' ); ?> />
 			<div class="values">
 <?php
-		echo nl2br( str_replace( "\n\n", "\n", sprintf( $this->translate( 'client/html',
-'Deliver to:
-Salutation: %1$s
-First name: %2$s
-Last name: %3$s
-Street: %4$s
-Additional 1: %5$s
-Additional 2: %6$s
-Postal: %7$s
-City: %8$s
-Country: %9$s
-Language: %10$s
-E-Mail: %11$s
-Phone: %12$s
-Fax: %13$s
-Website: %14$s
+		echo preg_replace( "/\n+/m", "<br/>", trim( sprintf(
+			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
+			/// address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
+			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language, country (%13$s),
+			/// e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s)
+			$this->translate( 'client/html', '%1$s
+%2$s %3$s %4$s %5$s
+%6$s %7$s
+%8$s
+%9$s %10$s
+%11$s
+%12$s
+%13$s
+%14$s
+%15$s
+%16$s
+%17$s
 '
 			),
-			( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html', $addr->getSalutation() ) : '' ),
+			$addr->getCompany(),
+			( !in_array( $addr->getSalutation(), array( 'company' ) ) ? $this->translate( 'client/html/code', $addr->getSalutation() ) : '' ),
+			$addr->getTitle(),
 			$addr->getFirstName(),
 			$addr->getLastName(),
 			$addr->getAddress1(),
@@ -80,6 +81,7 @@ Website: %14$s
 			$addr->getAddress3(),
 			$addr->getPostal(),
 			$addr->getCity(),
+			$addr->getState(),
 			$this->translate( 'client/html/country', $addr->getCountryId() ),
 			$this->translate( 'client/html/language', $addr->getLanguageId() ),
 			$addr->getEmail(),
@@ -92,94 +94,95 @@ Website: %14$s
 		</div>
 	</div>
 <?php endforeach; ?>
+<?php if( $this->config( 'client/html/common/address/delivery/disable-new', false ) === false ) : ?>
 	<div class="item-address item-new">
 		<div class="header">
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-delivery-option' ) ); ?>" value="null" <?php echo ( $deliveryOption == 'null' ? 'checked="checked"' : '' ); ?> />
 			<div class="values"><span class="value value-new"><?php echo $this->translate( 'client/html', 'new address' ); ?></span></div>
 		</div>
 		<ul class="form-list" >
-			<li class="form-item salutation <?php echo ( isset( $deliveryCss['salutation'] ) ? join( ' ', $deliveryCss['salutation'] ) : '' ); ?>">
+			<li class="form-item salutation <?php echo ( isset( $deliveryCss['order.base.address.salutation'] ) ? join( ' ', $deliveryCss['order.base.address.salutation'] ) : '' ); ?>">
 				<label for="address-delivery-salutation"><?php echo $this->translate( 'client/html', 'Salutation' ); ?>
-				</label><select id="address-delivery-salutation" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.salutation' ) ); ?>">
+				</label><select id="address-delivery-salutation" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.salutation' ) ); ?>" <?php echo ( in_array( 'order.base.address.salutation', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 					<option value=""><?php echo $this->translate( 'client/html', 'Select salutation' ); ?></option>
-					<option value="company" <?php echo ( $deliverySalutation == 'company' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'company' ); ?></option>
-					<option value="mr" <?php echo ( $deliverySalutation == 'mr' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'mr' ); ?></option>
-					<option value="mrs" <?php echo ( $deliverySalutation == 'mrs' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'mrs' ); ?></option>
-					<option value="miss" <?php echo ( $deliverySalutation == 'miss' ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html', 'miss' ); ?></option>
+<?php	foreach( $deliverySalutations as $salutation ) : ?>
+					<option value="<?php echo $salutation; ?>" <?php echo ( $deliverySalutation == $salutation ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/code', $salutation ); ?></option>
+<?php	endforeach; ?>
 				</select>
 			</li>
-			<li class="form-item company <?php echo ( isset( $deliveryCss['company'] ) ? join( ' ', $deliveryCss['company'] ) : '' ); ?>">
+			<li class="form-item company <?php echo ( isset( $deliveryCss['order.base.address.company'] ) ? join( ' ', $deliveryCss['order.base.address.company'] ) : '' ); ?>">
 				<label for="address-delivery-company"><?php echo $this->translate( 'client/html', 'Company' ); ?>
-				</label><input type="text" id="address-delivery-company" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.company' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.company', ( isset( $addrArray['order.base.address.company'] ) ? $addrArray['order.base.address.company'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-company" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.company' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.company', ( isset( $addrArray['order.base.address.company'] ) ? $addrArray['order.base.address.company'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.company', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item firstname <?php echo ( isset( $deliveryCss['firstname'] ) ? join( ' ', $deliveryCss['firstname'] ) : '' ); ?>">
+			<li class="form-item firstname <?php echo ( isset( $deliveryCss['order.base.address.firstname'] ) ? join( ' ', $deliveryCss['order.base.address.firstname'] ) : '' ); ?>">
 				<label for="address-delivery-firstname"><?php echo $this->translate( 'client/html', 'First name' ); ?>
-				</label><input type="text" id="address-delivery-firstname" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.firstname' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.firstname', ( isset( $addrArray['order.base.address.firstname'] ) ? $addrArray['order.base.address.firstname'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-firstname" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.firstname' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.firstname', ( isset( $addrArray['order.base.address.firstname'] ) ? $addrArray['order.base.address.firstname'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.firstname', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item lastname <?php echo ( isset( $deliveryCss['lastname'] ) ? join( ' ', $deliveryCss['lastname'] ) : '' ); ?>">
+			<li class="form-item lastname <?php echo ( isset( $deliveryCss['order.base.address.lastname'] ) ? join( ' ', $deliveryCss['order.base.address.lastname'] ) : '' ); ?>">
 				<label for="address-delivery-lastname"><?php echo $this->translate( 'client/html', 'Last name' ); ?>
-				</label><input type="text" id="address-delivery-lastname" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.lastname' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.lastname', ( isset( $addrArray['order.base.address.lastname'] ) ? $addrArray['order.base.address.lastname'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-lastname" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.lastname' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.lastname', ( isset( $addrArray['order.base.address.lastname'] ) ? $addrArray['order.base.address.lastname'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.lastname', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item address1 <?php echo ( isset( $deliveryCss['address1'] ) ? join( ' ', $deliveryCss['address1'] ) : '' ); ?>">
+			<li class="form-item address1 <?php echo ( isset( $deliveryCss['order.base.address.address1'] ) ? join( ' ', $deliveryCss['order.base.address.address1'] ) : '' ); ?>">
 				<label for="address-delivery-address1"><?php echo $this->translate( 'client/html', 'Street' ); ?>
-				</label><input type="text" id="address-delivery-address1" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.address1' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.address1', ( isset( $addrArray['order.base.address.address1'] ) ? $addrArray['order.base.address.address1'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-address1" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.address1' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.address1', ( isset( $addrArray['order.base.address.address1'] ) ? $addrArray['order.base.address.address1'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.address1', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item address2 <?php echo ( isset( $deliveryCss['address2'] ) ? join( ' ', $deliveryCss['address2'] ) : '' ); ?>">
+			<li class="form-item address2 <?php echo ( isset( $deliveryCss['order.base.address.address2'] ) ? join( ' ', $deliveryCss['order.base.address.address2'] ) : '' ); ?>">
 				<label for="address-delivery-address2"><?php echo $this->translate( 'client/html', 'Additional' ); ?>
-				</label><input type="text" id="address-delivery-address2" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.address2' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.address2', ( isset( $addrArray['order.base.address.address2'] ) ? $addrArray['order.base.address.address2'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-address2" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.address2' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.address2', ( isset( $addrArray['order.base.address.address2'] ) ? $addrArray['order.base.address.address2'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.address2', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item address3 <?php echo ( isset( $deliveryCss['address3'] ) ? join( ' ', $deliveryCss['address3'] ) : '' ); ?>">
+			<li class="form-item address3 <?php echo ( isset( $deliveryCss['order.base.address.address3'] ) ? join( ' ', $deliveryCss['order.base.address.address3'] ) : '' ); ?>">
 				<label for="address-delivery-address3"><?php echo $this->translate( 'client/html', 'Additional 2' ); ?>
-				</label><input type="text" id="address-delivery-address3" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.address3' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.address3', ( isset( $addrArray['order.base.address.address3'] ) ? $addrArray['order.base.address.address3'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-address3" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.address3' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.address3', ( isset( $addrArray['order.base.address.address3'] ) ? $addrArray['order.base.address.address3'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.address3', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item postal <?php echo ( isset( $deliveryCss['postal'] ) ? join( ' ', $deliveryCss['postal'] ) : '' ); ?>">
+			<li class="form-item postal <?php echo ( isset( $deliveryCss['order.base.address.postal'] ) ? join( ' ', $deliveryCss['order.base.address.postal'] ) : '' ); ?>">
 				<label for="address-delivery-postal"><?php echo $this->translate( 'client/html', 'Postal code' ); ?>
-				</label><input type="text" id="address-delivery-postal" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.postal' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.postal', ( isset( $addrArray['order.base.address.postal'] ) ? $addrArray['order.base.address.postal'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-postal" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.postal' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.postal', ( isset( $addrArray['order.base.address.postal'] ) ? $addrArray['order.base.address.postal'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.postal', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item city <?php echo ( isset( $deliveryCss['city'] ) ? join( ' ', $deliveryCss['city'] ) : '' ); ?>">
+			<li class="form-item city <?php echo ( isset( $deliveryCss['order.base.address.city'] ) ? join( ' ', $deliveryCss['order.base.address.city'] ) : '' ); ?>">
 				<label for="address-delivery-city"><?php echo $this->translate( 'client/html', 'City' ); ?>
-				</label><input type="text" id="address-delivery-city" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.city' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.city', ( isset( $addrArray['order.base.address.city'] ) ? $addrArray['order.base.address.city'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-city" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.city' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.city', ( isset( $addrArray['order.base.address.city'] ) ? $addrArray['order.base.address.city'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.city', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item state <?php echo ( isset( $deliveryCss['state'] ) ? join( ' ', $deliveryCss['state'] ) : '' ); ?>">
+			<li class="form-item state <?php echo ( isset( $deliveryCss['order.base.address.state'] ) ? join( ' ', $deliveryCss['order.base.address.state'] ) : '' ); ?>">
 				<label for="address-delivery-state"><?php echo $this->translate( 'client/html', 'State' ); ?>
-				</label><input type="text" id="address-delivery-state" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.state' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) ); ?>" />
+				</label><input type="text" id="address-delivery-state" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.state' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item countryid <?php echo ( isset( $deliveryCss['countryid'] ) ? join( ' ', $deliveryCss['countryid'] ) : '' ); ?>">
+			<li class="form-item countryid <?php echo ( isset( $deliveryCss['order.base.address.countryid'] ) ? join( ' ', $deliveryCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-delivery-countryid"><?php echo $this->translate( 'client/html', 'Country' ); ?>
-				</label><select id="address-delivery-countryid" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.countryid' ) ); ?>">
-<?php if( count( $deliveryCountries ) > 1 ) : ?>
+				</label><select id="address-delivery-countryid" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.countryid' ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
+<?php	if( count( $deliveryCountries ) > 1 ) : ?>
 					<option value=""><?php echo $this->translate( 'client/html', 'Select country' ); ?></option>
-<?php endif; ?>
-<?php foreach( $deliveryCountries as $countryId ) : ?>
+<?php	endif; ?>
+<?php	foreach( $deliveryCountries as $countryId ) : ?>
 					<option value="<?php echo $countryId ?>" <?php echo ( $country === $deliveryCountry ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/country', $countryId ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
-			<li class="form-item langid <?php echo ( isset( $deliveryCss['languageid'] ) ? join( ' ', $deliveryCss['languageid'] ) : '' ); ?>">
+			<li class="form-item langid <?php echo ( isset( $deliveryCss['order.base.address.languageid'] ) ? join( ' ', $deliveryCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 				<label for="address-delivery-languageid"><?php echo $this->translate( 'client/html', 'Language' ); ?>
 				</label><select id="address-delivery-languageid" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.languageid' ) ); ?>">
-<?php foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
+<?php	foreach( $this->get( 'addressLanguages', array() ) as $languageId ) : ?>
 					<option value="<?php echo $languageId; ?>" <?php echo ( $languageId === $deliveryLanguage ? 'selected="selected"' : '' ); ?>><?php echo $this->translate( 'client/html/language', $languageId ); ?></option>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 				</select>
 			</li>
-			<li class="form-item email <?php echo ( isset( $deliveryCss['email'] ) ? join( ' ', $deliveryCss['email'] ) : '' ); ?>">
+			<li class="form-item email <?php echo ( isset( $deliveryCss['order.base.address.email'] ) ? join( ' ', $deliveryCss['order.base.address.email'] ) : '' ); ?>">
 				<label for="address-delivery-email"><?php echo $this->translate( 'client/html', 'E-Mail' ); ?>
-				</label><input type="text" id="address-delivery-email" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.email' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.email', ( isset( $addrArray['order.base.address.email'] ) ? $addrArray['order.base.address.email'] : '' ) ); ?>" />
+				</label><input type="email" id="address-delivery-email" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.email' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.email', ( isset( $addrArray['order.base.address.email'] ) ? $addrArray['order.base.address.email'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.email', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item telephone <?php echo ( isset( $deliveryCss['telephone'] ) ? join( ' ', $deliveryCss['telephone'] ) : '' ); ?>">
+			<li class="form-item telephone <?php echo ( isset( $deliveryCss['order.base.address.telephone'] ) ? join( ' ', $deliveryCss['order.base.address.telephone'] ) : '' ); ?>">
 				<label for="address-delivery-telephone"><?php echo $this->translate( 'client/html', 'Telephone' ); ?>
-				</label><input type="text" id="address-delivery-telephone" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.telephone' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.telephone', ( isset( $addrArray['order.base.address.telephone'] ) ? $addrArray['order.base.address.telephone'] : '' ) ); ?>" />
+				</label><input type="tel" id="address-delivery-telephone" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.telephone' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.telephone', ( isset( $addrArray['order.base.address.telephone'] ) ? $addrArray['order.base.address.telephone'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.telephone', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item telefax <?php echo ( isset( $deliveryCss['telefax'] ) ? join( ' ', $deliveryCss['telefax'] ) : '' ); ?>">
+			<li class="form-item telefax <?php echo ( isset( $deliveryCss['order.base.address.telefax'] ) ? join( ' ', $deliveryCss['order.base.address.telefax'] ) : '' ); ?>">
 				<label for="address-delivery-telefax"><?php echo $this->translate( 'client/html', 'Fax' ); ?>
-				</label><input type="text" id="address-delivery-telefax" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.telefax' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.telefax', ( isset( $addrArray['order.base.address.telefax'] ) ? $addrArray['order.base.address.telefax'] : '' ) ); ?>" />
+				</label><input type="tel" id="address-delivery-telefax" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.telefax' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.telefax', ( isset( $addrArray['order.base.address.telefax'] ) ? $addrArray['order.base.address.telefax'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.telefax', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item website <?php echo ( isset( $deliveryCss['website'] ) ? join( ' ', $deliveryCss['website'] ) : '' ); ?>">
+			<li class="form-item website <?php echo ( isset( $deliveryCss['order.base.address.website'] ) ? join( ' ', $deliveryCss['order.base.address.website'] ) : '' ); ?>">
 				<label for="address-delivery-website"><?php echo $this->translate( 'client/html', 'Web site' ); ?>
-				</label><input type="text" id="address-delivery-website" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.website' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.website', ( isset( $addrArray['order.base.address.website'] ) ? $addrArray['order.base.address.website'] : '' ) ); ?>" />
+				</label><input type="url" id="address-delivery-website" name="<?php echo $this->formparam( array( 'ca-delivery', 'order.base.address.website' ) ); ?>" value="<?php echo $this->param( 'ca-delivery/order.base.address.website', ( isset( $addrArray['order.base.address.website'] ) ? $addrArray['order.base.address.website'] : '' ) ); ?>" <?php echo ( in_array( 'order.base.address.website', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
 		</ul>
 	</div>
+<?php endif; ?>
 <?php echo $this->get( 'deliveryBody' ); ?>
 </div>

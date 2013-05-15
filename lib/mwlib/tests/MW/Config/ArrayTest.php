@@ -13,7 +13,7 @@ class MW_Config_ArrayTest extends MW_Unittest_Testcase
 	 * @var    MW_Config_Array
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Runs the test methods of this class.

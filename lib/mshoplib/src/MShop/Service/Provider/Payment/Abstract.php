@@ -50,7 +50,7 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function cancel( MShop_Order_Item_Interface $order )
 	{
-		throw new MShop_Service_Exception( sprintf( 'Method is not available: "%1$s"', 'cancel' ) );
+		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'cancel' ) );
 	}
 
 
@@ -61,7 +61,7 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function capture( MShop_Order_Item_Interface $order )
 	{
-		throw new MShop_Service_Exception( sprintf( 'Method is not available: "%1$s"', 'capture' ) );
+		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'capture' ) );
 	}
 
 
@@ -72,7 +72,7 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function refund( MShop_Order_Item_Interface $order )
 	{
-		throw new MShop_Service_Exception( sprintf( 'Method is not available: "%1$s"', 'refund' ) );
+		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'refund' ) );
 	}
 
 

@@ -135,16 +135,16 @@ class MShop_Catalog_Manager_Index_Price_Default
 		$siteid = $context->getLocale()->getSiteId();
 
 		$sql = $context->getConfig()->get( 'mshop/catalog/manager/index/price/default/item/delete' );
-		
+
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
-		
+
 		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
 		$translations = array( 'prodid' => '"prodid"' );
-		
+
 		$cond = $search->getConditionString( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $sql );
-		
+
 		try
 		{
 			$dbm = $context->getDatabaseManager();
@@ -284,7 +284,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 				{
 					if( !isset( $listTypes[ $priceItem->getId() ] ) )
 					{
-						$msg = sprintf( 'No list type for price item with ID "%1$s"', $priceItem->getId() );
+						$msg = sprintf( 'List type for price item with ID "%1$s" not available', $priceItem->getId() );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 

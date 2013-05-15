@@ -15,10 +15,10 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	 * @var    MShop_Plugin_Provider_Order_Complete
 	 * @access protected
 	 */
-	protected $_object;
-	protected $_products;
-	protected $_order;
-	protected $_expensiveAddProduct;
+	private $_object;
+	private $_products;
+	private $_order;
+	private $_expensiveAddProduct;
 
 
 	/**

@@ -150,9 +150,9 @@ CREATE TABLE "mshop_order_base_address" (
 	-- state name of customer
 	"state" VARCHAR(255) NOT NULL,
 	-- Country id the customer is living in
-	"countryid" CHAR(2) NOT NULL,
+	"countryid" CHAR(2) NULL,
 	-- language id
-	"langid" VARCHAR(5) NOT NULL,
+	"langid" VARCHAR(5) NULL,
 	-- Telephone number of the customer
 	"telephone" VARCHAR(32) NOT NULL,
 	-- Email of the customer
@@ -339,6 +339,8 @@ CONSTRAINT "fk_msordbase_baseid"
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_msordbase_sid_bid_cd_typ" ON "mshop_order_base_service" ("siteid", "baseid", "code", "type");
+
+CREATE INDEX "idx_msordbase_sid_code_type" ON "mshop_order_base_service" ("siteid", "code", "type");
 
 
 --

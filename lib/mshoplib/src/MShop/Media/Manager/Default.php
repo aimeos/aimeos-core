@@ -434,7 +434,7 @@ class MShop_Media_Manager_Default
 	{
 		$iface = 'MShop_Media_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Media_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Media_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }

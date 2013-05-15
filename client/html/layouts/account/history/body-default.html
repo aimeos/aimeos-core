@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+<section class="arcavias account-history">
+<?php if( ( $errors = $this->get( 'historyErrorList', array() ) ) !== array() ) : ?>
+	<ul class="error-list">
+<?php foreach( $errors as $error ) : ?>
+		<li class="error-item"><?php echo $error; ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+<?php echo $this->get( 'historyBody' ); ?>
+</section>

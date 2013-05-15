@@ -4,14 +4,21 @@
 	
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
-		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit.xml ."
+		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	
+	<target name="testperf" description="Executes performance tests">
+		<echo msg="Executing performance tests" />
+		<delete file="tests/unitperf.log" quiet="true" failonerror="false" />
+		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit-perf.xml"
+			  dir="tests" checkreturn="true" logoutput="true"/>
+	</target>
+
 	<target name="coverage" description="Generates code coverage report">
 		<echo msg="Generating code coverage report" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
-		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit-coverage.xml ."
+		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit-coverage.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	

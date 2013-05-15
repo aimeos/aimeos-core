@@ -48,12 +48,17 @@ class MW_View_Helper_Url_Zend
 	 */
 	public function transform( $target = null, $controller = null, $action = null, array $params = array(), array $trailing = array() )
 	{
-		$mvc = array( 'controller' => $controller, 'action' => $action );
+		$paramList = array( 'controller' => $controller, 'action' => $action );
 
-		if( !empty( $trailing ) ) {
-			$mvc['trailing'] = join( '-', $trailing );
+		// Slashes in URL parameters confuses the router
+		foreach( $params as $key => $value ) {
+			$paramList[$key] = str_replace( '/', '', $value );
 		}
 
-		return $this->_router->assemble( $mvc + $params, $target, true );
+		if( !empty( $trailing ) ) {
+			$paramList['trailing'] = str_replace( '/', '-', join( '-', $trailing ) );
+		}
+
+		return $this->_router->assemble( $paramList, $target, true );
 	}
 }

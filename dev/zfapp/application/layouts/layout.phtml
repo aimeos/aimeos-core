@@ -28,6 +28,15 @@ $sites = $this->sites();
 		<?php echo ( isset( $this->minibasket ) ? $this->minibasket->getHeader() : '' ); ?>
 		<?php echo ( isset( $this->checkout ) ? $this->checkout->getHeader() : '' ); ?>
 		<?php echo ( isset( $this->confirm ) ? $this->confirm->getHeader() : '' ); ?>
+		<?php echo ( isset( $this->account ) ? $this->account->getHeader() : '' ); ?>
+		<script type="text/javascript">
+		$(function() {
+			$( '.menu .dropdown' ).click( function() {
+				$( 'ul', this ).toggleClass( 'active' );
+				$( this ).toggleClass( 'active' );
+			});
+		});
+		</script>
 	</head>
 	<body>
 		<div id="frame">
@@ -47,20 +56,6 @@ $sites = $this->sites();
 									<img src="<?php echo $this->pathstart;?>/images/arcavias.png" alt="Arcavias" />
 								</a>
 							</div>
-							<div id="headerMiddle">
-								<div id="headerNavigation">
-									<?php
-									foreach($sites as $code => $label) {
-										echo '<a href="' . $this->url( array( 'site' => $code ), 'routeMin', true ) . '">' . $label . '</a>';
-									}
-									?>
-								</div>
-								<div id="headerSearch">
-									<?php if( isset( $this->searchfilter ) ) : ?>
-									<?php echo $this->searchfilter->getBody(); ?>
-									<?php endif; ?>
-								</div>
-							</div>
 							<div id="headerBasket">
 								<?php
 								if( isset( $this->minibasket ) ) {
@@ -68,12 +63,33 @@ $sites = $this->sites();
 								}
 								?>
 							</div>
+							<div id="headerMiddle">
+								<nav class="topnav">
+									<ul class="menu">
+										<li><a href="<?php echo $this->url( array( 'site' => $this->params['site'], 'controller' => 'account', 'action' => 'history' ), 'routeDefault', true ); ?>">My account</a></li>
+										<li class="dropdown"><a href="#">&raquo; <?php echo $sites[ $this->params['site'] ]; ?></a>
+											<ul>
+											<?php
+											foreach($sites as $code => $label) {
+												echo '<li><a href="' . $this->url( array( 'site' => $code ), 'routeMin', true ) . '">' . $label . '</a></li>';
+											}
+											?>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+								<div id="headerSearch">
+									<?php if( isset( $this->searchfilter ) ) : ?>
+									<?php echo $this->searchfilter->getBody(); ?>
+									<?php endif; ?>
+								</div>
+							</div>
 						</div>
 						<div id="navigation" class="clearfix">
 							<div id="navigationMenue">
 								<?php
 								foreach($this->category() AS $item) {
-									echo '<a href="' . $item['uri'] . '" class="' . $item['class'] . '">' . htmlspecialchars( $item['label'] ) . '</a>' . PHP_EOL;
+									echo '<a href="' . $item['uri'] . '" class="' . $item['class'] . '">' . htmlspecialchars( $item['label'] ) . '</a>';
 								};
 								?>
 							</div>

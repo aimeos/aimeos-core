@@ -8,7 +8,7 @@
  */
 class MW_Common_Criteria_Expression_Sort_SQLTest extends MW_Unittest_Testcase
 {
-	protected $_conn = null;
+	private $_conn = null;
 
 
 	/**

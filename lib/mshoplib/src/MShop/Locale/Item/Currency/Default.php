@@ -92,7 +92,7 @@ class MShop_Locale_Item_Currency_Default
 		if ( $key == $this->getCode() ) { return; }
 
 		if ( strlen($key) != 3 || ctype_alpha( $key ) === false ) {
-			throw new MShop_Locale_Exception( sprintf( 'Invalid three letter currency code "%1$s"', $key ) );
+			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $key ) );
 		}
 
 		$this->_values['code'] = strtoupper( $key );

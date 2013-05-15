@@ -11,9 +11,9 @@
  */
 class MShop_Catalog_Item_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
-	protected $_listItems;
+	private $_object;
+	private $_values;
+	private $_listItems;
 
 
 	/**

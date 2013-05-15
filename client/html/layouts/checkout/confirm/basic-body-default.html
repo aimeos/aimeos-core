@@ -17,7 +17,7 @@
 		</li>
 		<li class="form-item">
 			<span class="name"><?php echo $this->translate( 'client/html', 'Payment status' ); ?></span>
-			<span class="value"><?php echo $this->translate( 'client/html/code', 'pay:' . $this->confirmOrderItem->getPaymentStatus() ); ?></span>
+			<span class="value"><?php $code = 'pay:' . $this->confirmOrderItem->getPaymentStatus(); echo $this->translate( 'client/html/code', $code ); ?></span>
 		</li>
 	</ul>
 <?php endif; ?>

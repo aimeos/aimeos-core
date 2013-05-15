@@ -52,6 +52,7 @@
 	<target name="testperf" description="Executes performance tests">
 		<phing target="testperf" dir="lib/mshoplib" />
 		<phing target="testperf" dir="client/html" />
+		<phing target="testperf" dir="lib/mwlib" />
 		<phing target="testperf">
 			<fileset dir="ext" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />

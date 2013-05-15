@@ -138,7 +138,7 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		$view = $this->getView();
 
-		if( ( $orderid = $view->param( 'arcavias', null ) ) === null ) {
+		if( ( $orderid = $this->_getOrderId() ) === null ) {
 			return;
 		}
 
@@ -149,7 +149,8 @@ class Client_Html_Checkout_Confirm_Default
 			$sorderid = $context->getSession()->get( 'arcavias/orderid' );
 
 			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-			$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
+			$orderBaseManager = $orderManager->getSubManager( 'base' );
+			$orderServiceManager = $orderBaseManager->getSubManager( 'service' );
 			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
 
 
@@ -182,6 +183,11 @@ class Client_Html_Checkout_Confirm_Default
 
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
+
+			// Clear basket
+			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED ) {
+				$orderBaseManager->setSession( $orderBaseManager->createItem() );
+			}
 		}
 		catch( Client_Html_Exception $e )
 		{
@@ -223,18 +229,7 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$orderid = null;
-
-			foreach( array( 'arcavias', 'plain' ) as $key )
-			{
-				if( isset( $_GET[$key] ) )
-				{
-					$orderid = $_GET[$key];
-					break;
-				}
-			}
-
-			if( $orderid !== null )
+			if( ( $orderid = $this->_getOrderId() ) !== null )
 			{
 				$context = $this->_getContext();
 				$sorderid = $context->getSession()->get( 'arcavias/orderid' );
@@ -262,5 +257,23 @@ class Client_Html_Checkout_Confirm_Default
 		}
 
 		return $this->_cache;
+	}
+
+
+	/**
+	 * Returns the order ID from the parameters or null.
+	 *
+	 * @return string|null Order ID or null if no order ID is available
+	 */
+	protected function _getOrderId()
+	{
+		foreach( array( 'arcavias', 'plain' ) as $key )
+		{
+			if( isset( $_GET[$key] ) ) {
+				return $_GET[$key];
+			}
+		}
+
+		return null;
 	}
 }

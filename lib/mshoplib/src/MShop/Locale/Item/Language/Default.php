@@ -95,7 +95,7 @@ class MShop_Locale_Item_Language_Default
 
 		$len = strlen( $key );
 		if ( $len < 2 || $len > 5 || preg_match( '/^[a-z]{2,3}((-|_)[a-zA-Z]{2})?$/', $key ) !== 1 ) {
-			throw new MShop_Locale_Exception(sprintf( 'Invalid ISO language code "%1$s"', $key ) );
+			throw new MShop_Locale_Exception(sprintf( 'Invalid characters in ISO language code "%1$s"', $key ) );
 		}
 
 		$this->_values['code'] = (string) $key;

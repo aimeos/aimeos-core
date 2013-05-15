@@ -48,7 +48,7 @@ abstract class Client_Html_Abstract
 	public function getView()
 	{
 		if( !isset( $this->_view ) ) {
-			throw new Client_Html_Exception( 'No view available' );
+			throw new Client_Html_Exception( sprintf( 'No view available' ) );
 		}
 
 		return $this->_view;
@@ -140,7 +140,7 @@ abstract class Client_Html_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid client implementation name "%1$s"', $name ) );
+			throw new Client_Html_Exception( sprintf( 'Invalid client name "%1$s"', $name ) );
 		}
 
 		$subnames = $this->_createSubNames( $client );
@@ -155,7 +155,7 @@ abstract class Client_Html_Abstract
 		$subClient = new $classname( $this->_context, $this->_templatePaths );
 
 		if( ( $subClient instanceof $interface ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
+			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
 		}
 
 		return $subClient;
@@ -236,5 +236,54 @@ abstract class Client_Html_Abstract
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Returns a list of tax rates and values for the given basket.
+	 *
+	 * @param MShop_Order_Item_Base_Interface $basket Basket containing the products, services, etc.
+	 * @return array Associative list of tax rates as key and corresponding amounts as value
+	 */
+	protected function _getTaxRates( MShop_Order_Item_Base_Interface $basket )
+	{
+		$taxrates = array();
+
+		foreach( $basket->getProducts() as $product )
+		{
+			$price = $product->getPrice();
+
+			if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+				$taxrates[ $price->getTaxrate() ] += ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+			} else {
+				$taxrates[ $price->getTaxrate() ] = ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+			}
+		}
+
+		try
+		{
+			$price = $basket->getService( 'delivery' )->getPrice();
+
+			if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+				$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+			} else {
+				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+			}
+		}
+		catch( Exception $e ) { ; }
+
+		try
+		{
+			$price = $basket->getService( 'payment' )->getPrice();
+
+			if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
+				$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+			} else {
+				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+			}
+		}
+		catch( Exception $e ) { ; }
+
+		return $taxrates;
 	}
 }

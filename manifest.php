@@ -11,7 +11,7 @@ return array(
 	'description' => 'Arcavias core system with admin interface',
 	'author' => 'Metaways Infosystems GmbH',
 	'email' => 'application@metaways.de',
-	'version' => '2013-03',
+	'version' => '2013-05',
 	'depends' => array(
 	),
 	'conflicts' => array(
@@ -33,6 +33,7 @@ return array(
 		'controller/extjs/src',
 		'lib/zendlib',
 		'lib/phpexcel',
+		'lib/mwlib/lib'
 	),
 	'i18n' => array(
 		'client/html' => 'client/html/i18n',

@@ -7,8 +7,8 @@
 
 class Client_Html_Email_Confirm_Main_Text_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_context;
+	private $_object;
+	private $_context;
 
 
 	/**
@@ -55,7 +55,7 @@ class Client_Html_Email_Confirm_Main_Text_DefaultTest extends MW_Unittest_Testca
 
 	public function testGetHeader()
 	{
-		$this->_object->setView( TestHelper::getView() );
+		$this->_object->setView( $this->_getView() );
 
 		$output = $this->_object->getHeader();
 	}

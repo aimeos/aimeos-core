@@ -30,43 +30,13 @@ class Client_Html_Basket_Mini_Main_Default
 	 */
 	public function getBody()
 	{
-		try
-		{
-			$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView() );
 
-			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getBody();
-			}
-			$view->mainBody = $html;
+		$html = '';
+		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody();
 		}
-		catch( Client_Html_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
-		}
-		catch( Controller_Frontend_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
-		}
-		catch( MShop_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
-		}
-		catch( Exception $e )
-		{
-			$context = $this->_getContext();
-			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-
-			$view = $this->getView();
-			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
-		}
+		$view->mainBody = $html;
 
 		$tplconf = 'client/html/basket/mini/main/default/template-body';
 		$default = 'basket/mini/main-body-default.html';
@@ -82,21 +52,13 @@ class Client_Html_Basket_Mini_Main_Default
 	 */
 	public function getHeader()
 	{
-		try
-		{
-			$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView() );
 
-			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader();
-			}
-			$view->mainHeader = $html;
+		$html = '';
+		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+			$html .= $subclient->setView( $view )->getHeader();
 		}
-		catch( Exception $e )
-		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return;
-		}
+		$view->mainHeader = $html;
 
 		$tplconf = 'client/html/basket/mini/main/default/template-header';
 		$default = 'basket/mini/main-header-default.html';

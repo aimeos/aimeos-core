@@ -22,6 +22,21 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 	private $_subPartPath = 'client/html/checkout/standard/address/delivery/default/subparts';
 	private $_subPartNames = array();
 
+	private $_mandatory = array(
+		'order.base.address.salutation',
+		'order.base.address.firstname',
+		'order.base.address.lastname',
+		'order.base.address.address1',
+		'order.base.address.postal',
+		'order.base.address.city',
+		'order.base.address.languageid',
+	);
+
+	private $_optional = array(
+		'order.base.address.company',
+		'order.base.address.address2',
+	);
+
 
 	/**
 	 * Returns the HTML code for insertion into the body.
@@ -112,35 +127,38 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
+			$disable = $view->config( 'client/html/common/address/delivery/disable-new', false );
 
-			if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) === 'null' ) // new address
+			if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
 				$param = $view->param( 'ca-delivery', array() );
-
+				$list = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
+				$optional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
 				$missing = array();
-				$default = array(
-					'order.base.address.salutation',
-					'order.base.address.firstname',
-					'order.base.address.lastname',
-					'order.base.address.address1',
-					'order.base.address.postal',
-					'order.base.address.city',
-					'order.base.address.languageid'
-				);
 
-				foreach( $view->config( 'checkout/address/delivery/mandatory', $default ) as $mandatory )
+				foreach( $list as $mandatory )
 				{
 					if( !isset( $param[$mandatory] ) || $param[$mandatory] == '' )
 					{
-						$name = substr( $mandatory, 19 );
-						$missing[$name] = sprintf( 'Delivery adddress part "%1$s" is missing', $name );
+						$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is missing' );
+						$missing[$mandatory] = sprintf( $msg, substr( $mandatory, 19 ) );
 					}
+				}
+
+				if( !isset( $missing['order.base.address.company'] )
+					&& isset( $param['order.base.address.salutation'] )
+					&& $param['order.base.address.salutation'] === MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY
+					&& in_array( 'order.base.address.company', $optional )
+					&& $param['order.base.address.company'] == ''
+				) {
+					$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is missing' );
+					$missing['order.base.address.company'] = sprintf( $msg, 'salutation' );
 				}
 
 				if( count( $missing ) > 0 )
 				{
 					$view->deliveryError = $missing;
-					throw new Client_Html_Exception( 'At least one delivery address part is missing' );
+					throw new Client_Html_Exception( sprintf( 'At least one delivery address part is missing' ) );
 				}
 
 				$basketCtrl->setAddress( $type, $param );
@@ -153,13 +171,13 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				$search = $customerManager->createSearch( true );
 				$expr = array(
 					$search->compare( '==', 'customer.id', $address->getRefId() ),
-					$search->compare( '==', 'customer.code', $context->getEditor() ),
 					$search->getConditions(),
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
 				$items = $customerManager->searchItems( $search );
-				if( ( $item = reset( $items ) ) === false ) {
+
+				if( ( $item = reset( $items ) ) === false || $address->getRefId() != $context->getUserId() ) {
 					throw new Client_Html_Exception( sprintf( 'No address found for ID "%1$s"', $option ) );
 				}
 
@@ -199,11 +217,11 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				$view->deliveryLanguage = $context->getLocale()->getLanguageId();
 			}
 
-			$default = array( 'salutation', 'firstname', 'lastname', 'address1', 'postal', 'city', 'languageid' );
-			$view->deliveryMandatory = $view->config( 'checkout/address/delivery/mandatory', $default );
+			$salutations = array( 'company', 'mr', 'mrs' );
+			$view->deliverySalutations = $view->config( 'client/html/common/address/delivery/salutations', $salutations );
 
-			$default = array( 'company', 'address2', 'countryid' );
-			$view->deliveryOptional = $view->config( 'checkout/address/delivery/optional', $default );
+			$view->deliveryMandatory = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
+			$view->deliveryOptional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
 
 
 			$this->_cache = $view;

@@ -10,9 +10,9 @@
 <div class="catalog-detail-basket-attribute">
 	<table>
 		<tbody>
-<?php foreach( $this->get( 'attributeConfigItems', array() ) as $type => $attributes ) : ?> 
+<?php foreach( $this->get( 'attributeConfigItems', array() ) as $code => $attributes ) : ?> 
 			<tr>
-				<td><?php echo $this->translate( 'client/html/code', $type ); ?></td>
+				<td><?php echo $this->translate( 'client/html/code', $code ); ?></td>
 				<td>
 					<select name="<?php echo $this->formparam( array( 'b-prod', 0, 'attrconf-id' ) ); ?>">
 						<option value=""></option>
@@ -21,9 +21,16 @@
 <?php
 			$priceItems = $attribute->getRefItems( 'price', 'default', 'default' );
 
-			if( ( $priceItem = reset( $priceItems ) ) !== false ) {
-				printf( $this->translate( 'client/html', '%1$s ( +%2$s€ )' ), $attribute->getName(), $this->number( $priceItem->getValue() + $priceItem->getShipping() ) );
-			} else {
+			if( ( $priceItem = reset( $priceItems ) ) !== false )
+			{
+				$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
+				$value = $this->number( $priceItem->getValue() + $priceItem->getShipping() );
+				
+				/// Configurable product attribute name (%1$s) with price value (%2$s) and currency (%3$s)
+				printf( $this->translate( 'client/html', '%1$s ( +%2$s%3$s )' ), $attribute->getName(), $value, $currency );
+			}
+			else
+			{
 				echo $attribute->getName();
 			}
 ?>
@@ -35,5 +42,8 @@
 <?php endforeach; ?>
 		</tbody>
 	</table>
+<?php foreach( $this->get( 'attributeHiddenItems', array() ) as $id => $attribute ) : ?> 
+	<input type="hidden" name="<?php echo $this->formparam( array( 'b-prod', 0, 'attrhide-id', $id ) ); ?>" value="<?php echo $id; ?>" />
+<?php endforeach; ?>
 <?php echo $this->get( 'attributeBody' ); ?>
 </div>

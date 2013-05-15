@@ -79,12 +79,12 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	public function setType($type)
 	{
 		if ( $type == $this->getType() ) { return; }
-		
+
 		$this->_values['type'] = (string) $type;
 		$this->setModified();
 	}
-	
-	
+
+
 	/**
 	 * Returns the name of the service attribute item.
 	 *
@@ -126,6 +126,8 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	 */
 	public function setCode( $code )
 	{
+		$this->_checkCode( $code );
+
 		if ( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;

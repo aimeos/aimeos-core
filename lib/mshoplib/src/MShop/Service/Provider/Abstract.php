@@ -151,7 +151,7 @@ implements MShop_Service_Provider_Interface
 	 */
 	public function query( MShop_Order_Item_Interface $order )
 	{
-		throw new MShop_Service_Exception( sprintf( 'Method is not available: "%1$s"', 'query' ) );
+		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'query' ) );
 	}
 
 
@@ -223,7 +223,7 @@ implements MShop_Service_Provider_Interface
 		{
 			if( $def['required'] === true && ( !isset( $attributes[$key] ) || $attributes[$key] === '' ) )
 			{
-				$errors[$key] = sprintf( 'Required attribute "%1$s" is missing', $key );
+				$errors[$key] = sprintf( 'Required attribute "%1$s" in provider configuration not available', $key );
 				continue;
 			}
 
@@ -259,7 +259,7 @@ implements MShop_Service_Provider_Interface
 						}
 						break;
 					default:
-						throw new MShop_Service_Exception( sprintf( 'Invalid type "%1$s"', $def['type'] ) );
+						throw new MShop_Service_Exception( sprintf( 'Invalid characters in attribute for provider configuration. Attribute is not of type "%1$s".', $def['type'] ) );
 				}
 			}
 

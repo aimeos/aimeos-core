@@ -16,13 +16,13 @@ class MShop_Attribute_Manager_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Attribute_Manager_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 
 	/**

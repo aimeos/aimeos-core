@@ -18,8 +18,8 @@
 class MShop_Plugin_Provider_Order_AddressesAvailable implements MShop_Plugin_Provider_Interface
 {
 
-	protected $_item;
-	protected $_context;
+	private $_item;
+	private $_context;
 
 
 	/**
@@ -78,7 +78,7 @@ class MShop_Plugin_Provider_Order_AddressesAvailable implements MShop_Plugin_Pro
 			if( count( $problems ) > 0 )
 			{
 				$code = array( 'address' => $problems );
-				throw new MShop_Plugin_Provider_Exception( 'Address checks failed', -1, null, $code );
+				throw new MShop_Plugin_Provider_Exception( sprintf( 'Checks for available addresses in basket failed' ), -1, null, $code );
 			}
 		}
 		return true;

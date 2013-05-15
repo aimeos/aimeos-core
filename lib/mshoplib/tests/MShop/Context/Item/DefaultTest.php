@@ -8,7 +8,7 @@
 
 class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 	public static function main()
 	{
@@ -101,12 +101,19 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertSame( $context->getSession(), $this->_object->getSession() );
 	}
 
-	public function testSetEditor()
+	public function testGetSetEditor()
 	{
+		$this->assertEquals( '', $this->_object->getEditor() );
+
 		$this->_object->setEditor( 'testuser' );
 		$this->assertEquals( 'testuser', $this->_object->getEditor() );
+	}
 
-		$this->_object->setEditor( '' );
-		$this->assertEquals( '', $this->_object->getEditor() );
+	public function testGetSetUserId()
+	{
+		$this->assertEquals( null, $this->_object->getUserId() );
+
+		$this->_object->setUserId( 123 );
+		$this->assertEquals( '123', $this->_object->getUserId() );
 	}
 }

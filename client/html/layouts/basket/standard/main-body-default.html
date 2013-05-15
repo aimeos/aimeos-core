@@ -5,6 +5,10 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
+$detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+$detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
+
 $basketTarget = $this->config( 'client/html/basket/standard/url/target' );
 $basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
 $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
@@ -13,13 +17,13 @@ $checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
 $checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
 $checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
 
+
 try
 {
 	$price = $this->standardBasket->getPrice();
 	$priceValue = $price->getValue();
 	$priceService = $price->getShipping();
 	$priceRebate = $price->getRebate();
-	$priceTaxrate = $price->getTaxrate();
 	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
 }
 catch( Exception $e )
@@ -27,7 +31,6 @@ catch( Exception $e )
 	$priceValue = '0.00';
 	$priceService = '0.00';
 	$priceRebate = '0.00';
-	$priceTaxrate = '0.00';
 	$priceCurrency = '';
 }
 
@@ -65,7 +68,8 @@ catch( Exception $e )
 	$checkout = false;
 }
 
-$priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
+/// Price format with price value (%1$s) and currency (%2$s)
+$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
 ?>
 <div class="basket-standard-main">
@@ -86,17 +90,27 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 <?php 	foreach( $this->standardBasket->getProducts() as $position => $product ) : ?>
 				<tr>
 					<td class="details">
-						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $product->getMediaUrl(); ?>" alt="" />
-						<span class="product-name"><?php echo $product->getName(); ?></span>
+<?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
+						<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaUrl; ?>" alt="<?php echo $product->getName(); ?>" />
+<?php		endif; ?>
+						<a class="product-name" href="<?php echo $this->url( $detailTarget, $detailController, $detailAction, array( 'l-product-id' => $product->getProductId() ), array( $product->getName() ) ); ?>"><?php echo $product->getName(); ?></a>
 <?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
 						<ul class="attr-list">
 <?php			foreach( $product->getAttributes() as $attribute ) : ?>
+<?php				switch( $attribute->getType() ) : case 'hidden': ?>
+<?php					break; case 'config': ?>
 							<li class="attr-item">
 								<a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ) ); ?>">
 									<span class="name"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
-									<span class="value"><?php echo $attribute->getName(); ?></span>
+									<span class="value"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ); ?></span>
 								</a>
 							</li>
+<?php					break; default: ?>
+							<li class="attr-item">
+								<span class="name"><?php echo $this->translate( 'client/html/code', $attribute->getCode() ); ?></span>
+								<span class="value"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ); ?></span>
+							</li>
+<?php				endswitch; ?>
 <?php			endforeach; ?>
 						</ul>
 <?php		endif; ?>
@@ -113,7 +127,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 					<td class="unitprice"><?php printf( $priceFormat, $this->number( $prodPrice ), $priceCurrency ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ); ?></td>
 					<td class="action">
-						<a class="minibutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
+						<a class="standardbutton minibutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
 					</td>
 				</tr>
 <?php 	endforeach; ?>
@@ -150,6 +164,13 @@ $priceFormat = $this->translate( 'client/html', '%1$s%2$s' );
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?></td>
 					<td class="action"></td>
 				</tr>
+<?php foreach( $this->get( 'commonTaxRates', array() ) as $taxRate => $priceValue ) : ?>
+				<tr class="tax">
+					<td colspan="3"><?php printf( $this->translate( 'client/html', 'Includes %1$s%% VAT' ), $this->number( $taxRate ) ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ); ?></td>
+					<td></td>
+				</tr>
+<?php endforeach; ?>
 				<tr class="rebate">
 					<td colspan="3"><?php echo $this->translate( 'client/html', 'Included rebates' ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?></td>

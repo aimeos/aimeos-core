@@ -13,10 +13,10 @@
  */
 class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
-	protected $_price;
-	protected $_attribute = array();
+	private $_object;
+	private $_values;
+	private $_price;
+	private $_attribute = array();
 
 
 	public static function main()
@@ -181,15 +181,37 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$attrItem002->setCode( 'code_002');
 		$attrItem002->setValue( 'value_002');
 
-		$list = array(
-			$attrItem001,
-			$attrItem002,
-		);
-
-		$this->_object->setAttributes( $list );
+		$this->_object->setAttributes( array( $attrItem001, $attrItem002 ) );
 
 		$result = $this->_object->getAttribute( 'code_001' );
 		$this->assertEquals( 'value_001', $result );
+
+		$result = $this->_object->getAttribute( 'code_003' );
+		$this->assertEquals( null, $result );
+
+		$this->_object->setAttributes( array() );
+
+		$result = $this->_object->getAttribute( 'code_001' );
+		$this->assertEquals( null, $result );
+	}
+
+	public function testGetAttributeItem()
+	{
+		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
+
+		$attrItem001 = $attManager->createItem();
+		$attrItem001->setCode( 'code_001');
+		$attrItem001->setValue( 'value_001');
+
+		$attrItem002 = $attManager->createItem();
+		$attrItem002->setCode( 'code_002');
+		$attrItem002->setValue( 'value_002');
+
+		$this->_object->setAttributes( array( $attrItem001, $attrItem002 ) );
+
+		$result = $this->_object->getAttributeItem( 'code_001' );
+		$this->assertEquals( 'value_001', $result->getValue() );
 
 		$result = $this->_object->getAttribute( 'code_003' );
 		$this->assertEquals( null, $result );
@@ -270,16 +292,18 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$serviceCopy = new MShop_Order_Item_Base_Service_Default( $this->_price );
 
 		$manager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'default') );
 		$services = $manager->searchItems( $search );
+
 		if( ( $service = reset( $services ) ) !== false ) {
 			$serviceCopy->copyFrom( $service );
 		}
 
-		$this->assertEquals($serviceCopy->getCode(), 'unitcode');
-		$this->assertEquals($serviceCopy->getName(), 'unitlabel');
-		$this->assertEquals($serviceCopy->getType(), 'delivery');
+		$this->assertEquals( 'unitcode', $serviceCopy->getCode() );
+		$this->assertEquals( 'unitlabel', $serviceCopy->getName() );
+		$this->assertEquals( 'delivery', $serviceCopy->getType() );
 		$this->assertEquals( '', $serviceCopy->getMediaUrl() );
 
 		$this->assertTrue( $serviceCopy->isModified() );

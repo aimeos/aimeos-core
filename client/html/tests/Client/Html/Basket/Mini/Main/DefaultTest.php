@@ -7,8 +7,8 @@
 
 class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_context;
+	private $_object;
+	private $_context;
 
 
 	/**
@@ -56,6 +56,11 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+
+		$view = $this->_object->getView();
+		$view->miniBasket = $controller->get();
+
 		$output = $this->_object->getHeader();
 		$this->assertEquals( '', $output );
 	}

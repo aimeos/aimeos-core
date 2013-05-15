@@ -18,8 +18,8 @@
 class MShop_Plugin_Provider_Order_ServicesAvailable implements MShop_Plugin_Provider_Interface
 {
 
-	protected $_item;
-	protected $_context;
+	private $_item;
+	private $_context;
 
 
 	/**
@@ -78,7 +78,7 @@ class MShop_Plugin_Provider_Order_ServicesAvailable implements MShop_Plugin_Prov
 			if( count( $problems ) > 0 )
 			{
 				$code = array( 'service' => $problems );
-				throw new MShop_Plugin_Provider_Exception( 'Service checks failed', -1, null, $code );
+				throw new MShop_Plugin_Provider_Exception( sprintf( 'Checks for available service items in basket failed' ), -1, null, $code );
 			}
 		}
 		return true;

@@ -14,11 +14,12 @@ $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index'
 <?php if( ( $errors = $this->get( 'miniErrorList', array() ) ) !== array() ) : ?>
 	<ul class="error-list">
 <?php foreach( $errors as $error ) : ?>
-		<li><?php echo $error; ?></li>
+		<li class="error-item"><?php echo $error; ?></li>
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
 	<h1><?php echo $this->translate( 'client/html', 'Basket' ); ?></h1>
+	<a href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>">
 <?php echo $this->get( 'miniBody' ); ?>
-	<a class="minibutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>"><?php echo $this->translate( 'client/html', 'Your basket' ); ?></a>
+	</a>
 </section>

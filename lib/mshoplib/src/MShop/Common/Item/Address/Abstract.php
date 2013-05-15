@@ -342,9 +342,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function setCountryId($countryid)
 	{
-		if ( $countryid == $this->getCountryId() ) { return; }
+		if ( $countryid === $this->getCountryId() ) { return; }
 
-		$this->_values['countryid'] = (string) $countryid;
+		$this->_values['countryid'] = strtoupper( (string) $countryid );
 		$this->setModified();
 	}
 
@@ -356,7 +356,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function getCountryId()
 	{
-		return ( isset( $this->_values['countryid'] ) ? (string) $this->_values['countryid'] : '' );
+		return ( isset( $this->_values['countryid'] ) ? (string) $this->_values['countryid'] : null );
 	}
 
 
@@ -367,9 +367,9 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	 */
 	public function setLanguageId($langid)
 	{
-		if ( $langid == $this->getLanguageId() ) { return; }
+		if ( $langid === $this->getLanguageId() ) { return; }
 
-		$this->_values['langid'] = (string) $langid;
+		$this->_values['langid'] = strtolower( (string) $langid );
 		$this->setModified();
 	}
 
@@ -431,7 +431,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 		if ( $email == $this->getEmail() ) { return; }
 
 		if( $email !== '' && preg_match('/^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$/', $email) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid email address: "%1$s"', $email ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in email address: "%1$s"', $email ) );
 		}
 
 		$this->_values['email'] = (string) $email;
@@ -485,7 +485,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 		if ( $website == $this->getWebsite() ) { return; }
 
 		if( $website !== '' && preg_match('#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#', $website) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid web site URL: "%1$s"', $website ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in web site URL "%1$s"', $website ) );
 		}
 
 		$this->_values['website'] = (string) $website;
@@ -567,7 +567,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 			case MShop_Common_Item_Address_Abstract::SALUTATION_MR:
 				return;
 			default:
-				throw new MShop_Common_Exception( sprintf( 'Invalid address salutation "%1$s"', $value ) );
+				throw new MShop_Common_Exception( sprintf( 'Address salutation "%1$s" not within allowed range', $value ) );
 		}
 	}
 }

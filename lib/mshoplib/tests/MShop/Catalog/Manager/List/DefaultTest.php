@@ -12,13 +12,13 @@
  */
 class MShop_Catalog_Manager_List_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.
@@ -297,7 +297,7 @@ class MShop_Catalog_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems($search);
-		$this->assertEquals( 44, count( $results ) );
+		$this->assertEquals( 45, count( $results ) );
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

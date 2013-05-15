@@ -154,11 +154,11 @@ class MShop_Locale_Manager_Site_Default
 	{
 		$iface = 'MShop_Locale_Item_Site_Interface';
 		if ( !( $item instanceof $iface ) ) {
-			throw new MShop_Locale_Exception(sprintf('Object does not implement "%1$s"', $iface));
+			throw new MShop_Locale_Exception(sprintf('Object is not of required type "%1$s"', $iface));
 		}
 
 		if( $item->getId() === null ) {
-			throw new MShop_Locale_Exception( sprintf( 'Unable to save newly created nodes, use insert method instead' ) );
+			throw new MShop_Locale_Exception( sprintf( 'Newly created site can not be saved using method "saveItem()". Try using method "insertItem()" instead.' ) );
 		}
 
 		if( !$item->isModified() ) { return	; }
@@ -310,7 +310,7 @@ class MShop_Locale_Manager_Site_Default
 				{
 					$config = $row['config'];
 					if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null ) {
-						$msg = sprintf( 'Invalid JSON in "%1$s" for ID "%2$s": "%3$s"', 'mshop_locale.config', $row['id'], $config );
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
 						$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 					}
 
@@ -417,7 +417,7 @@ class MShop_Locale_Manager_Site_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MShop_Locale_Exception( 'No tree root found' );
+			throw new MShop_Locale_Exception( sprintf( 'Tree root with code "%1$s" in "%2$s" not found', 'default', 'locale.site.code' ) );
 		}
 
 		return $item;
@@ -478,7 +478,7 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
-		throw new MShop_Locale_Exception( 'Operation not available' );
+		throw new MShop_Locale_Exception( sprintf( 'Method "%1$s" for locale site manager not available', 'moveItem()' ) );
 	}
 
 

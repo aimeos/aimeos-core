@@ -9,7 +9,7 @@
 
 class Controller_ExtJS_Locale_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

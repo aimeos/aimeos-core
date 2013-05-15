@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Summary_Basket_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_context;
+	private $_object;
+	private $_context;
 
 
 	/**
@@ -57,6 +57,12 @@ class Client_Html_Checkout_Standard_Summary_Basket_DefaultTest extends MW_Unitte
 
 	public function testGetHeader()
 	{
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+
+		$view = TestHelper::getView();
+		$view->standardBasket = $controller->get();
+		$this->_object->setView( $view );
+
 		$this->_object->getHeader();
 	}
 
@@ -72,6 +78,7 @@ class Client_Html_Checkout_Standard_Summary_Basket_DefaultTest extends MW_Unitte
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-standard-summary-basket">', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="tax">.*<td class="price">3.03 .+</td>.*.*</tfoot>#smU', $output );
 	}
 
 

@@ -7,8 +7,8 @@
 
 class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_context;
+	private $_object;
+	private $_context;
 
 
 	/**
@@ -157,9 +157,9 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		catch( Client_Html_Exception $e )
 		{
 			$this->assertEquals( 3, count( $view->billingError ) );
-			$this->assertArrayHasKey( 'salutation', $view->billingError );
-			$this->assertArrayHasKey( 'email', $view->billingError );
-			$this->assertArrayHasKey( 'languageid', $view->billingError );
+			$this->assertArrayHasKey( 'order.base.address.salutation', $view->billingError );
+			$this->assertArrayHasKey( 'order.base.address.email', $view->billingError );
+			$this->assertArrayHasKey( 'order.base.address.languageid', $view->billingError );
 			return;
 		}
 
@@ -169,8 +169,6 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 
 	public function testProcessExistingAddress()
 	{
-		$this->_context->setEditor( 'UTC001' );
-
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
@@ -179,6 +177,8 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 		if( ( $customer = reset( $result ) ) === false ) {
 			throw new Exception( 'Customer item not found' );
 		}
+
+		$this->_context->setUserId( $customer->getId() );
 
 		$view = TestHelper::getView();
 

@@ -17,7 +17,7 @@ class MShop_Service_Provider_Payment_PrePayTest extends MW_Unittest_Testcase
 	 * @var    MShop_Service_Provider_Payment_PrePay
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**

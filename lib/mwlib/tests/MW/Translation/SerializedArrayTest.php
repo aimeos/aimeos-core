@@ -11,7 +11,7 @@ class MW_Translation_SerializedArrayTest extends MW_Unittest_Testcase
 	/**
 	 * @var MW_Translation_SerialisedArray
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Runs the test methods of this class.

@@ -81,6 +81,20 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	public function setConfig( array $config );
 
 	/**
+	 * Returns the position of the plugin item.
+	 *
+	 * @return integer Position of the item
+	 */
+	public function getPosition();
+
+	/**
+	 * Sets the new position of the plugin item.
+	 *
+	 * @param integer $position Position of the item
+	 */
+	public function setPosition($position);
+
+	/**
 	 * Returns the status of the plugin item.
 	 *
 	 * @return integer Status of the item

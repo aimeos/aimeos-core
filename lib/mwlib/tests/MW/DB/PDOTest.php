@@ -8,8 +8,8 @@
  */
 class MW_DB_PDOTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_config;
+	private $_object;
+	private $_config;
 
 
 	/**

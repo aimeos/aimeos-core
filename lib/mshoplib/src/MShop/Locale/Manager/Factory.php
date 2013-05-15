@@ -36,7 +36,7 @@ class MShop_Locale_Manager_Factory
 		if ( ctype_alnum($name) === false )
 		{
 			$classname = is_string($name) ? 'MShop_Locale_Manager_' . $name : '<not a string>';
-			throw new MShop_Locale_Exception(sprintf('Invalid class name "%1$s"', $classname));
+			throw new MShop_Locale_Exception(sprintf('Invalid characters in class name "%1$s"', $classname));
 		}
 
 		$iface = 'MShop_Locale_Manager_Interface';

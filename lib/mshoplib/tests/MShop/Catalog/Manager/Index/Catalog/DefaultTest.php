@@ -12,7 +12,7 @@
  */
 class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -182,7 +182,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 		$search->setConditions( $search->compare( '!=', 'catalog.index.catalog.id', null ) ); // catalog ID
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertEquals( 8, count( $result ) );
+		$this->assertEquals( 9, count( $result ) );
 
 		$func = $search->createFunction( 'catalog.index.catalog.position', array( 'promotion', $catItem->getId() ) );
 		$search->setConditions( $search->compare( '>=', $func, 0 ) ); // position

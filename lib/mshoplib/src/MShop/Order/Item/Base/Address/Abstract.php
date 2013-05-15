@@ -42,7 +42,7 @@ abstract class MShop_Order_Item_Base_Address_Abstract extends MShop_Common_Item_
 			case MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING:
 				return;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Invalid address type "%1$s"', $value ) );
+				throw new MShop_Order_Exception( sprintf( 'Address type "%1$s" not within allowed range', $value ) );
 		}
 	}
 }

@@ -11,7 +11,7 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 	/**
 	 * @var MW_Translation_Zend
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**

@@ -78,7 +78,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	public static function checkId( $old, $new )
 	{
 		if( $new != null && $old != null && $old != $new ) {
-			throw new MShop_Exception( sprintf( 'Given ID "%1$s" isn\'t the same as "%2$s"', $new, $old ) );
+			throw new MShop_Exception( sprintf( 'New ID "%1$s" for item differs from old ID "%2$s"', $new, $old ) );
 		}
 
 		return $new;
@@ -86,7 +86,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 
 
 	/**
-	 * Tests if the date param represents an ISO format
+	 * Tests if the date param represents an ISO format.
 	 *
 	 * @param string ISO date in yyyy-mm-dd HH:ii:ss format
 	 */
@@ -95,7 +95,21 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 
 		if( $date !== null && preg_match( $regex, $date ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid date format "%1$s"', $date ) );
+			throw new MShop_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
+		}
+	}
+
+
+	/**
+	 * Tests if the length of code is not longer than 32.
+	 *
+	 * @param string $code New code for an item
+	 * @throws MShop_Exception
+	 */
+	protected function _checkCode( $code )
+	{
+		if( strlen( $code ) > 32 ) {
+			throw new MShop_Exception( sprintf( 'Code must not be longer than 32 characters' ) );
 		}
 	}
 

@@ -16,7 +16,7 @@ class MShop_Service_Provider_Payment_PostPayTest extends MW_Unittest_Testcase
 	 * @var    MShop_Service_Provider_Payment_PostPay
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**

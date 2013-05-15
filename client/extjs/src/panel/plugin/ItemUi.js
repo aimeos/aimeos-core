@@ -96,6 +96,13 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							maxLength : 255,
 							emptyText : _('Internal plugin name (required)')
 						}, {
+							xtype : 'numberfield',
+							fieldLabel : _('Position'),
+							name : 'plugin.position',
+							allowDecimals : false,
+							allowBlank : false,
+							value : 0
+						}, {
 							xtype : 'displayfield',
 							fieldLabel : _('Created'),
 							name : 'plugin.ctime'
@@ -144,7 +151,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( key.trim() !== '' ) {
-						config[key] = value.trim();
+						config[key] = String(value).trim();
 					}
 				}, this);
 			});

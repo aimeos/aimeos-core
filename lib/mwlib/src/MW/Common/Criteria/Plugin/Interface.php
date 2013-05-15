@@ -24,4 +24,12 @@ interface MW_Common_Criteria_Plugin_Interface
 	 * @return mixed Translated value
 	 */
 	public function translate( $value );
+
+	/**
+	 * Reverses the translation of the value.
+	 *
+	 * @param mixed $value Value to reverse
+	 * @return mixed Reversed translation
+	 */
+	public function reverse( $value );
 }

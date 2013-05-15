@@ -33,7 +33,7 @@ class MAdmin_Log_Manager_Factory
 		}
 
 		if( ctype_alnum( $name ) === false ) {
-			throw new MAdmin_Log_Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
+			throw new MAdmin_Log_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 		}
 
 		$iface = 'MAdmin_Log_Manager_Interface';

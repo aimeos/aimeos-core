@@ -8,9 +8,9 @@
 
 class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framework_TestCase
 {
-	protected $_order;
-	protected $_plugin;
-	protected $_address;
+	private $_order;
+	private $_plugin;
+	private $_address;
 
 	/**
 	 * Runs the test methods of this class.

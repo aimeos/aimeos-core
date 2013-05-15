@@ -62,7 +62,7 @@ abstract class MShop_Order_Item_Base_Abstract
 		$value = (int) $value;
 
 		if( $value < MShop_Order_Item_Base_Abstract::PARTS_NONE || $value > MShop_Order_Item_Base_Abstract::PARTS_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Invalid flags "%1$s" given', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
 		}
 	}
 
@@ -76,7 +76,7 @@ abstract class MShop_Order_Item_Base_Abstract
 	protected function _checkProduct( MShop_Order_Item_Base_Product_Interface $item )
 	{
 		if( $item->getProductCode() === '' ) {
-			throw new MShop_Order_Exception( 'Item needs a product code' );
+			throw new MShop_Order_Exception( sprintf( 'Product does not contain all required values. Product code for item not available.' ) );
 		}
 	}
 }

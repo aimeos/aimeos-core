@@ -150,6 +150,8 @@ class MShop_Catalog_Item_Default
 	 */
 	public function setCode( $name )
 	{
+		$this->_checkCode( $name );
+
 		$this->_node->setCode( $name );
 	}
 
@@ -252,7 +254,7 @@ class MShop_Catalog_Item_Default
 			return $this->_children[$index];
 		}
 
-		throw new MShop_Catalog_Exception( 'Invalid index for child' );
+		throw new MShop_Catalog_Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
 	}
 
 	/**

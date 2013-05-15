@@ -16,7 +16,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 	 * @var    MShop_Plugin_Provider_Order_Shipping
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Runs the test methods of this class.

@@ -37,7 +37,7 @@ $url = $this->url( $detailTarget, $detailController, $detailAction, $this->get( 
 	$class = 'item selected';
 	foreach( $mediaItems as $id => $mediaItem )
 	{
-		printf( '<a href="%1$s#image-%2$s" class="%3$s" style="background-image: url(\'%4$s\')"></a>', $url, $id, $class, $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() );
+		echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() . '\')"></a>';
 		$class = 'item';
 	}
 ?>
