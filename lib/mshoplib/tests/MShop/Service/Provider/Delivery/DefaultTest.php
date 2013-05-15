@@ -168,12 +168,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$criteria = $orderManager->createSearch();
-		$expr = array (
-			$criteria->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_WEB ),
-			$criteria->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::STAT_REFUSED )
-		);
-
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
 		$criteria->setSlice( 0, 1 );
 		$items = $orderManager->searchItems( $criteria );
 
