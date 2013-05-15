@@ -370,7 +370,7 @@ class MShop_Common_Manager_List_Default
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				$map[ $row['id'] ] = $row;
-				$typeIds[] = $row['typeid'];
+				$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn );
@@ -384,7 +384,7 @@ class MShop_Common_Manager_List_Default
 		if( count( $typeIds ) > 0 )
 		{
 			$search = $this->_typeManager->createSearch();
-			$search->setConditions( $search->compare( '==', $name . '.type.id', array_unique( $typeIds ) ) );
+			$search->setConditions( $search->compare( '==', $name . '.type.id', array_keys( $typeIds ) ) );
 			$search->setSlice( 0, count( $map ) );
 			$typeItems = $this->_typeManager->searchItems( $search );
 

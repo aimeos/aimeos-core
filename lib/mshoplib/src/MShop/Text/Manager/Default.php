@@ -501,7 +501,7 @@ class MShop_Text_Manager_Default
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				$map[ $row['id'] ] = $row;
-				$typeIds[] = $row['typeid'];
+				$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn );
@@ -516,7 +516,7 @@ class MShop_Text_Manager_Default
 		{
 			$typeManager = $this->getSubManager( 'type' );
 			$search = $typeManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'text.type.id', array_unique( $typeIds ) ) );
+			$search->setConditions( $search->compare( '==', 'text.type.id', array_keys( $typeIds ) ) );
 			$search->setSlice( 0, count( $map ) );
 			$typeItems = $typeManager->searchItems( $search );
 
