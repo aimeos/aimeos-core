@@ -383,11 +383,9 @@ class MShop_Common_Manager_List_Default
 
 		if( count( $typeIds ) > 0 )
 		{
-			$start = $search->getSliceStart();
-			$size = $search->getSliceSize();
 			$search = $this->_typeManager->createSearch();
 			$search->setConditions( $search->compare( '==', $name . '.type.id', array_unique( $typeIds ) ) );
-			$search->setSlice( $start, $size );
+			$search->setSlice( 0, count( $map ) );
 			$typeItems = $this->_typeManager->searchItems( $search );
 
 			foreach( $map as $id => $row )

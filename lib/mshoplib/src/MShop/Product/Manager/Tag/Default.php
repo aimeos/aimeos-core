@@ -158,7 +158,7 @@ class MShop_Product_Manager_Tag_Default
 	public function createItem()
 	{
 		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return new MShop_Product_Item_Tag_Default( $values );
+		return $this->_createItem( $values );
 	}
 
 
@@ -326,12 +326,10 @@ class MShop_Product_Manager_Tag_Default
 
 		if( count( $typeIds ) > 0 )
 		{
-			$start = $search->getSliceStart();
-			$size = $search->getSliceSize();
 			$typeManager = $this->getSubManager( 'type' );
 			$search = $typeManager->createSearch();
 			$search->setConditions( $search->compare( '==', 'product.tag.type.id', array_unique( $typeIds ) ) );
-			$search->setSlice( $start, $size );
+			$search->setSlice( 0, count( $map ) );
 			$typeItems = $typeManager->searchItems( $search );
 
 			foreach( $map as $id => $row )
