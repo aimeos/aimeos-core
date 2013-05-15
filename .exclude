@@ -16,9 +16,7 @@
 ./ext/.gitignore
 /config/resource.php
 ./config/resource.php
-/config/.resource.php.ci
 ./config/.resource.php.ci
 /lib/mwlib/tests/config/resource.php
 ./lib/mwlib/tests/config/resource.php
-/lib/mwlib/tests/config/.resource.php.ci
 ./lib/mwlib/tests/config/.resource.php.ci
