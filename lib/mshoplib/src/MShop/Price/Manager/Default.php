@@ -561,10 +561,10 @@ class MShop_Price_Manager_Default
 		if( count( $typeIds ) > 0 )
 		{
 			$typeManager = $this->getSubManager( 'type' );
-			$search = $typeManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'price.type.id', array_keys( $typeIds ) ) );
-			$search->setSlice( 0, count( $map ) );
-			$typeItems = $typeManager->searchItems( $search );
+			$condition = $typeManager->createSearch();
+			$condition->setConditions( $condition->compare( '==', 'price.type.id', array_keys( $typeIds ) ) );
+			$condition->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $condition );
 
 			foreach( $map as $id => $row )
 			{
