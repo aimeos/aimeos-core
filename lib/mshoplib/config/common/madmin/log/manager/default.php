@@ -9,7 +9,8 @@
 return array(
 	'delete' => '
 		DELETE FROM "madmin_log"
-		WHERE "id" = ?
+		WHERE :cond
+		AND siteid = ?
 	',
 	'insert' => '
 		INSERT INTO "madmin_log" ("siteid", "facility", "timestamp", "priority", "message", "request")

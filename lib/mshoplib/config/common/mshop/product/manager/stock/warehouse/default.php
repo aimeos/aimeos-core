@@ -20,7 +20,8 @@ return array(
 		'delete' => '
 			DELETE
 			FROM "mshop_product_stock_warehouse"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mprostwa."id", mprostwa."siteid", mprostwa."code", mprostwa."label", mprostwa."status",

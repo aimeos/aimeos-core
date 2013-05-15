@@ -134,17 +134,6 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 
 	/**
-	 * Removes an item from the index.
-	 *
-	 * @param integer $id Product ID
-	 */
-	public function deleteItem( $id )
-	{
-		$this->deleteItems( array( $id ) );
-	}
-
-
-	/**
 	 * Removes multiple items from the index.
 	 *
 	 * @param array $ids list of Product IDs
@@ -158,7 +147,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$sql = $context->getConfig()->get( 'mshop/catalog/manager/index/text/default/item/delete' );
+		$path = 'mshop/catalog/manager/index/text/default/item/delete';
+		$sql = $context->getConfig()->get( $path, $path );
 
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );

@@ -235,28 +235,14 @@ class MShop_Order_Manager_Base_Service_Default
 
 
 	/**
-	 * Deletes an existing order service item from the storage.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $serviceId Unique order service ID
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $serviceId )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/order/manager/base/service/default/item/delete');
-			$stmt->bind(1, $serviceId);
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn, $this->_dbname );
-		}
-		catch ( Exception $e )
-		{
-			$dbm->release( $conn, $this->_dbname );
-			throw $e;
-		}
+		$path = 'mshop/order/manager/base/service/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

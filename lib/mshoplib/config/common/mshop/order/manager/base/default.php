@@ -22,7 +22,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_order_base"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT DISTINCT mordba."id", mordba."siteid", mordba."sitecode", mordba."customerid", mordba."langid",

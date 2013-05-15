@@ -34,7 +34,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_product_list"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'move' => '
 			UPDATE "mshop_product_list"

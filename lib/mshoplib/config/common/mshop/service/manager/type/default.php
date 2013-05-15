@@ -20,7 +20,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_service_type"
-			WHERE "id"=?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mserty."id", mserty."siteid", mserty."domain", mserty."code", mserty."label",
