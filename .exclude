@@ -10,9 +10,9 @@
 ./.tx
 /dev
 ./dev
-/ext/*
 ./ext/*
 ./ext/.gitignore
+!/ext/.gitignore
 /config/resource.php
 ./config/resource.php
 ./config/.resource.php.ci
