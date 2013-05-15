@@ -135,7 +135,8 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$sql = $context->getConfig()->get( 'mshop/catalog/manager/index/catalog/default/item/delete', 'mshop/catalog/manager/index/catalog/default/item/delete' );
+		$path = 'mshop/catalog/manager/index/catalog/default/item/delete';
+		$sql = $context->getConfig()->get( $path, $path );
 
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );

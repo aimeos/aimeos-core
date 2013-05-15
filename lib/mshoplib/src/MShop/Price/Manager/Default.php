@@ -411,7 +411,8 @@ class MShop_Price_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/price/manager/default/item/delete', 'mshop/price/manager/default/item/delete' ) );
+		$path = 'mshop/price/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

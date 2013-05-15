@@ -162,7 +162,8 @@ class MShop_Locale_Manager_Language_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/locale/manager/language/default/item/delete', 'mshop/locale/manager/language/default/item/delete' ) );
+		$path = 'mshop/locale/manager/language/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

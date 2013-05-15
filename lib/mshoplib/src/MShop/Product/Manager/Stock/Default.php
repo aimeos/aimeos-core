@@ -175,7 +175,8 @@ class MShop_Product_Manager_Stock_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/product/manager/stock/default/item/delete', 'mshop/product/manager/stock/default/item/delete' ) );
+		$path = 'mshop/product/manager/stock/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

@@ -634,7 +634,8 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/customer/manager/default/item/delete', 'mshop/customer/manager/default/item/delete' ) );
+		$path = 'mshop/customer/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

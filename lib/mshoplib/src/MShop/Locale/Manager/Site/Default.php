@@ -203,7 +203,8 @@ class MShop_Locale_Manager_Site_Default
 	public function deleteItems( array $ids )
 	{
 		$context = $this->_getContext();
-		$sql = $context->getConfig()->get( 'mshop/locale/manager/site/default/item/delete', 'mshop/locale/manager/site/default/item/delete' );
+		$path = 'mshop/locale/manager/site/default/item/delete';
+		$sql = $context->getConfig()->get( $path, $path );
 
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', 'id', $ids ) );

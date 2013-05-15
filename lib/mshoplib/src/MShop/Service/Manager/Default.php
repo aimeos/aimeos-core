@@ -385,7 +385,8 @@ class MShop_Service_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/service/manager/default/item/delete', 'mshop/service/manager/default/item/delete' ) );
+		$path = 'mshop/service/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

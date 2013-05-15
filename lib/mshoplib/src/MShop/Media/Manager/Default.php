@@ -393,7 +393,8 @@ class MShop_Media_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'mshop/media/manager/default/item/delete', 'mshop/media/manager/default/item/delete' ) );
+		$path = 'mshop/media/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
