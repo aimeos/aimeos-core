@@ -16,7 +16,7 @@ MShop.panel.locale.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	initComponent : function()
 	{
 		this.title = _('Locale item details');
-
+		
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {

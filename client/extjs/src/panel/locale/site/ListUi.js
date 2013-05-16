@@ -30,7 +30,7 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
-		
+
 		this.initStore();
 
 		MShop.panel.locale.site.ListUi.superclass.initComponent.call( this );
@@ -75,7 +75,7 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 				header : _('Configuration'),
 				width : 200,
 				editable : false,
-				renderer: function (value) {	
+				renderer: function (value) {
 					var s = "";
 					Ext.iterate(value, function (key, value, object) {
 						s = s + String.format('<div>{0}: {1}</div>', key, value);
@@ -111,7 +111,7 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 			}
 		];
 	},
-	
+
 	initStore: function() {
 		this.store = new Ext.data.DirectStore(Ext.apply({
 			autoLoad: false,

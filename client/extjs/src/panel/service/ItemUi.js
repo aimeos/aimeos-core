@@ -16,6 +16,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 	initComponent : function() {
 		this.title = _('Service item details');
+		
 		var that = this;
 		this.items = [ {
 			xtype : 'tabpanel',
