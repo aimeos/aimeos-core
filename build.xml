@@ -39,7 +39,6 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/extjs" />
-		<phing target="test" haltonfailure="true" dir="${coredir}/client/extjs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="test" haltonfailure="true">

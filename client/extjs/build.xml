@@ -2,9 +2,6 @@
 
 <project name="Arcavias ExtJS client" default="all">
 
-	<target name="test" description="Executes tests">
-	</target>
-
 	<target name="check" description="Checks javascript files for common mistakes">
 		<jsllint executable="jsl">
 			<fileset dir=".">
@@ -22,7 +19,7 @@
 		</delete>
 	</target>
 
-	<target name="all" depends="test,check" description="Builds all parts of the package">
+	<target name="all" depends="check" description="Builds all parts of the package">
 	</target>
 
 </project>
