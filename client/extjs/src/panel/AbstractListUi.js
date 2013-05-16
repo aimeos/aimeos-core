@@ -142,12 +142,6 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			disabled: true,
 			handler: this.onOpenEditWindow.createDelegate(this, ['edit'])
 		});
-		
-		this.actionCopy = new Ext.Action({
-			text: _('Copy'),
-			disabled: true,
-			handler: this.onOpenEditWindow.createDelegate(this, ['copy'])
-		});
 
 		this.actionDelete = new Ext.Action({
 			text: _('Delete'),
@@ -173,7 +167,6 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.tbar = [
 			this.actionAdd,
 			this.actionEdit,
-			this.actionCopy,
 			this.actionDelete,
 			this.actionExport,
 			this.importButton
@@ -223,7 +216,6 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 				items: [
 					this.actionAdd,
 					this.actionEdit,
-					this.actionCopy,
 					this.actionDelete,
 					this.actionExport
 				]
@@ -235,7 +227,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
 	onBeforeLoad: function(store, options) {
 		this.setSiteParam(store);
-		
+
 		if (this.domain) {
 			this.setDomainFilter(store, options);
 		}
@@ -321,7 +313,6 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	onGridSelectionChange: function(sm) {
 		var numSelected = sm.getCount();
 		this.actionEdit.setDisabled(numSelected !== 1);
-		this.actionCopy.setDisabled(numSelected !== 1);
 		this.actionDelete.setDisabled(numSelected === 0);
 		this.actionExport.setDisabled(this.exportMethod === null);
 	},
@@ -330,27 +321,12 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		var itemUi = Ext.ComponentMgr.create({
 			xtype: this.itemUiXType,
 			domain: this.domain,
-			record: this.getRecord(action),
+			record: action === 'add' ? null : this.grid.getSelectionModel().getSelected(),
 			store: this.store,
-			listUI: this,
-			isNewRecord: action === 'copy' ? true : false
+			listUI: this
 		});
 
 		itemUi.show();
-	},
-	
-	getRecord: function( action ) {
-		if( action === 'add' ) {
-			return null;
-		} 
-		else if( action === 'copy' )
-		{
-			record = new this.store.recordType();
-			record.data = this.grid.getSelectionModel().getSelected().data;
-			record.data[ this.idProperty ] = null;
-			return record;
-		}
-		return this.grid.getSelectionModel().getSelected();
 	},
 
 	onStoreException: function(proxy, type, action, options, response) {

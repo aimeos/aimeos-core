@@ -12,8 +12,8 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	maximized : true,
 	layout : 'fit',
 	modal : true,
-	
-	
+
+
 	initComponent : function() {
 
 		this.title = _('Plugin item details');
@@ -130,7 +130,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		MShop.panel.plugin.ItemUi.superclass.initComponent.call(this);
 	},
 
-	
+
 	afterRender : function()
 	{
 		var label = this.record ? this.record.data['plugin.label'] : 'new';
@@ -146,12 +146,12 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		var config = {};
 		var editorGrid = this.findByType( 'MShop.panel.plugin.configui' );
 		var first = editorGrid.shift();
-		
+
 		if( first ) {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( key.trim() !== '' ) {
-						config[key] = String(value).trim();
+						config[key] = value.trim();
 					}
 				}, this);
 			});
