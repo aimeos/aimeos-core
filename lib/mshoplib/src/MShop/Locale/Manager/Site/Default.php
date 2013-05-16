@@ -202,34 +202,8 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$context = $this->_getContext();
 		$path = 'mshop/locale/manager/site/default/item/delete';
-		$sql = $context->getConfig()->get( $path, $path );
-
-		$search = $this->createSearch();
-		$search->setConditions( $search->compare( '==', 'id', $ids ) );
-
-		$types = array( 'id' => MW_DB_Statement_Abstract::PARAM_STR );
-		$translations = array( 'id' => '"id"' );
-
-		$cond = $search->getConditionString( $types, $translations );
-		$sql = str_replace( ':cond', $cond, $sql );
-
-		try
-		{
-			$dbm = $context->getDatabaseManager();
-			$conn = $dbm->acquire();
-
-			$stmt = $conn->create( $sql );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$this->_deleteItems($ids, $this->_getContext()->getConfig()->get( $path, $path ), false );
 	}
 
 
