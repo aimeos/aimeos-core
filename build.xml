@@ -2,25 +2,29 @@
 
 <project name="Arcavias" default="all">
 
+	<property name="coredir" value="${project.basedir}" />
+	<property name="extdir" value="${project.basedir}/ext" />
+
+
 	<target name="setup" description="Sets up database incl. unit test data">
 		<echo msg="Setting up test database" />
-		<exec command="php setup.php unittest" checkreturn="true" logoutput="true"/>
+		<exec command="php ${coredir}/setup.php unittest" checkreturn="true" logoutput="true"/>
 	</target>
 
 	<target name="setupperf" description="Sets up database incl. performance test data">
 		<echo msg="Setting up performance data" />
-		<exec command="php setup.php unitperf" checkreturn="true" logoutput="true"/>
+		<exec command="php ${coredir}/setup.php unitperf" checkreturn="true" logoutput="true"/>
 	</target>
 
 
 	<target name="coverage" description="Creates coverage reports">
-		<phing target="coverage" haltonfailure="true" dir="lib/mshoplib" />
-		<phing target="coverage" haltonfailure="true" dir="controller/frontend" />
-		<phing target="coverage" haltonfailure="true" dir="controller/extjs" />
-		<phing target="coverage" haltonfailure="true" dir="client/html" />
-		<phing target="coverage" haltonfailure="true" dir="lib/mwlib" />
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/extjs" />
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="coverage" haltonfailure="true">
-			<fileset dir="ext" expandsymboliclinks="true" >
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
@@ -32,14 +36,14 @@
 
 
 	<target name="test" description="Executes unit tests">
-		<phing target="test" haltonfailure="true" dir="lib/mshoplib" />
-		<phing target="test" haltonfailure="true" dir="controller/frontend" />
-		<phing target="test" haltonfailure="true" dir="controller/extjs" />
-		<phing target="test" haltonfailure="true" dir="client/extjs" />
-		<phing target="test" haltonfailure="true" dir="client/html" />
-		<phing target="test" haltonfailure="true" dir="lib/mwlib" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/controller/extjs" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/client/extjs" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="test" haltonfailure="true">
-			<fileset dir="ext" expandsymboliclinks="true" >
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
@@ -50,11 +54,11 @@
 	</target>
 
 	<target name="testperf" description="Executes performance tests">
-		<phing target="testperf" dir="lib/mshoplib" />
-		<phing target="testperf" dir="client/html" />
-		<phing target="testperf" dir="lib/mwlib" />
+		<phing target="testperf" dir="${coredir}/lib/mshoplib" />
+		<phing target="testperf" dir="${coredir}/client/html" />
+		<phing target="testperf" dir="${coredir}/lib/mwlib" />
 		<phing target="testperf">
-			<fileset dir="ext" expandsymboliclinks="true" >
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
@@ -62,14 +66,14 @@
 
 
 	<target name="check" description="Executes all checks">
-		<phing target="check" dir="lib/mshoplib" />
-		<phing target="check" dir="controller/frontend" />
-		<phing target="check" dir="controller/extjs" />
-		<phing target="check" dir="client/extjs" />
-		<phing target="check" dir="client/html" />
-		<phing target="check" dir="lib/mwlib" />
+		<phing target="check" dir="${coredir}/lib/mshoplib" />
+		<phing target="check" dir="${coredir}/controller/frontend" />
+		<phing target="check" dir="${coredir}/controller/extjs" />
+		<phing target="check" dir="${coredir}/client/extjs" />
+		<phing target="check" dir="${coredir}/client/html" />
+		<phing target="check" dir="${coredir}/lib/mwlib" />
 		<phing target="check">
-			<fileset dir="ext" expandsymboliclinks="true" >
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
@@ -82,14 +86,14 @@
 
 	<target name="doc" description="Generates the API documentation">
 		<echo msg="Generating API documentation" />
-		<delete dir="dev/apidoc" quiet="true" failonerror="false" />
+		<delete dir="${coredir}/dev/apidoc" quiet="true" failonerror="false" />
 		<phpdocext title="Arcavias API documentation"
-			destdir="dev/apidoc"
+			destdir="${coredir}/dev/apidoc"
 			output="HTML:frames/Extjs:default,HTML:Smarty:PHP"
 			sourcecode="true"
 			templatebase="dev/phpdoc"
 			undocumentedelements="true">
-			<fileset dir=".">
+			<fileset dir="${coredir}">
 				<include name="MShop.php" />
 			</fileset>
 			<fileset dir="client/html/src">
@@ -112,14 +116,14 @@
 
 
 	<target name="clean" description="Cleans up temporary files">
-		<phing target="clean" dir="lib/mshoplib" />
-		<phing target="clean" dir="controller/frontend" />
-		<phing target="clean" dir="controller/extjs" />
-		<phing target="clean" dir="client/extjs" />
-		<phing target="clean" dir="client/html" />
-		<phing target="clean" dir="lib/mwlib" />
+		<phing target="clean" dir="${coredir}/lib/mshoplib" />
+		<phing target="clean" dir="${coredir}/controller/frontend" />
+		<phing target="clean" dir="${coredir}/controller/extjs" />
+		<phing target="clean" dir="${coredir}/client/extjs" />
+		<phing target="clean" dir="${coredir}/client/html" />
+		<phing target="clean" dir="${coredir}/lib/mwlib" />
 		<phing target="clean">
-			<fileset dir="ext" expandsymboliclinks="true" >
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
@@ -127,11 +131,11 @@
 
 
 	<target name="i18n" description="Creates all translation files">
-		<phing target="i18n" dir="client/html" />
-		<phing target="i18n" dir="controller/frontend" />
-		<phing target="i18n" dir="lib/mshoplib" />
+		<phing target="i18n" dir="${coredir}/client/html" />
+		<phing target="i18n" dir="${coredir}/controller/frontend" />
+		<phing target="i18n" dir="${coredir}/lib/mshoplib" />
 		<phing target="i18n">
-			<fileset dir="ext" expandsymboliclinks="true" >
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
@@ -141,11 +145,11 @@
 	<target name="build" description="Creates all files to be generated" >
 		<taskdef name="jsbpackages" classname="dev.phing.MShopJsbPackageTask" />
 		<jsbpackages />
-		<phing target="build" dir="client/html" />
-		<phing target="build" dir="controller/frontend" />
-		<phing target="build" dir="lib/mshoplib" />
+		<phing target="build" dir="${coredir}/client/html" />
+		<phing target="build" dir="${coredir}/controller/frontend" />
+		<phing target="build" dir="${coredir}/lib/mshoplib" />
 		<phing target="build">
-			<fileset dir="ext" expandsymboliclinks="true" >
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
 		</phing>
@@ -155,7 +159,7 @@
 	<target name="deploy" description="Executes all deployments" depends="clean,build">
 		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
 		<reflexive>
-		  <fileset dir="." includes="manifest.php" />
+		  <fileset dir="${coredir}" includes="manifest.php" />
 		  <filterchain>
 		    <replaceregexp>
 		      <regexp pattern="'version' => '[^']*'" replace="'version' => '${version}'"/>
