@@ -2,8 +2,8 @@
 
 <project name="Arcavias" default="all">
 
-	<property name="coredir" value="${project.basedir}" overwrite="true" />
-	<property name="extdir" value="${project.basedir}/ext" overwrite="true" />
+	<property name="coredir" value="${project.basedir}" override="true" />
+	<property name="extdir" value="${project.basedir}/ext" override="true" />
 
 
 	<target name="setup" description="Sets up database incl. unit test data">
