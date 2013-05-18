@@ -2,8 +2,8 @@
 
 <project name="Arcavias" default="all">
 
-	<property name="coredir" value="${project.basedir}" />
-	<property name="extdir" value="${project.basedir}/ext" />
+	<property name="coredir" value="${project.basedir}" override="true" />
+	<property name="extdir" value="${project.basedir}/ext" override="true" />
 
 
 	<target name="setup" description="Sets up database incl. unit test data">
@@ -142,7 +142,7 @@
 
 
 	<target name="build" description="Creates all files to be generated" >
-		<taskdef name="jsbpackages" classname="dev.phing.MShopJsbPackageTask" />
+		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/dev/phing" />
 		<jsbpackages />
 		<phing target="build" dir="${coredir}/client/html" />
 		<phing target="build" dir="${coredir}/controller/frontend" />
