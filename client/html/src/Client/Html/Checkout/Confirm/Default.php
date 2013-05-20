@@ -136,56 +136,44 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	public function process()
 	{
-		$view = $this->getView();
-
-		if( ( $orderid = $this->_getOrderId() ) === null ) {
-			return;
-		}
-
-
 		try
 		{
 			$context = $this->_getContext();
-			$sorderid = $context->getSession()->get( 'arcavias/orderid' );
+			$params = $this->getView()->param();
+			$pstatus = MShop_Order_Item_Abstract::PAY_UNFINISHED;
 
-			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-			$orderBaseManager = $orderManager->getSubManager( 'base' );
-			$orderServiceManager = $orderBaseManager->getSubManager( 'service' );
 			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
 
+			$search = $serviceManager->createSearch();
+			$search->setConditions( $search->compare( '==', 'service.type.code', 'payment' ) );
+			$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
-			$search = $orderManager->createSearch();
-			$expr = array(
-				$search->compare( '==', 'order.id', $orderid ),
-				$search->compare( '==', 'order.id', $sorderid )
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$orderItems = $orderManager->searchItems( $search );
-
-			if( ( $orderItem = reset( $orderItems ) ) === false ) {
-				throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
-			}
-
-
-			$search = $orderServiceManager->createSearch();
-			$expr = array(
-				$search->compare( '==', 'order.base.service.baseid', $orderItem->getBaseId() ),
-				$search->compare( '==', 'order.base.service.type', 'payment' )
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			foreach( $orderServiceManager->searchItems( $search ) as $service )
+			foreach( $serviceManager->searchItems( $search ) as $serviceItem )
 			{
-				$serviceItem = $serviceManager->getItem( $service->getServiceId() );
-				$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
+				try
+				{
+					$provider = $serviceManager->getProvider( $serviceItem );
+
+					if( ( $orderItem = $provider->updateSync( $params ) ) != null
+						&& ( $pstatus = $orderItem->getPaymentStatus() ) === MShop_Order_Item_Abstract::PAY_UNFINISHED
+					) {
+						$provider->query( $orderItem );
+					}
+				}
+				catch( Exception $e )
+				{
+					$msg = 'Updating order ID "%1$s" failed: %2$s';
+					$context->getLogger()->log( sprintf( $msg, $sorderid, $e->getMessage() ) );
+				}
 			}
 
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 
 			// Clear basket
-			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED ) {
+			if( $pstatus > MShop_Order_Item_Abstract::PAY_REFUSED )
+			{
+				$orderBaseManager = MShop_Order_Manager_Factory::createManager( $context )->getSubmanager( 'base' );
 				$orderBaseManager->setSession( $orderBaseManager->createItem() );
 			}
 		}
@@ -229,51 +217,15 @@ class Client_Html_Checkout_Confirm_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			if( ( $orderid = $this->_getOrderId() ) !== null )
-			{
-				$context = $this->_getContext();
-				$sorderid = $context->getSession()->get( 'arcavias/orderid' );
+			$context = $this->_getContext();
+			$orderid = $context->getSession()->get( 'arcavias/orderid' );
+			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 
-				$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-
-
-				$search = $orderManager->createSearch();
-				$expr = array(
-					$search->compare( '==', 'order.id', $orderid ),
-					$search->compare( '==', 'order.id', $sorderid )
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-
-				$orderItems = $orderManager->searchItems( $search );
-
-				if( ( $orderItem = reset( $orderItems ) ) === false ) {
-					throw new Client_Html_Exception( sprintf( 'Invalid order ID "%1$s"', $orderid ) );
-				}
-
-				$view->confirmOrderItem = $orderItem;
-			}
+			$view->confirmOrderItem = $orderManager->getItem( $orderid );
 
 			$this->_cache = $view;
 		}
 
 		return $this->_cache;
-	}
-
-
-	/**
-	 * Returns the order ID from the parameters or null.
-	 *
-	 * @return string|null Order ID or null if no order ID is available
-	 */
-	protected function _getOrderId()
-	{
-		foreach( array( 'arcavias', 'plain' ) as $key )
-		{
-			if( isset( $_GET[$key] ) ) {
-				return $_GET[$key];
-			}
-		}
-
-		return null;
 	}
 }
