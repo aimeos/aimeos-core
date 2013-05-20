@@ -185,7 +185,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
-		$this->assertTrue( $this->_object->updateSync( $response ) );
+		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $this->_object->updateSync( $response ) );
 
 		$refOrderBase = $orderBaseManager->load( $this->_order->getBaseId() );
 
