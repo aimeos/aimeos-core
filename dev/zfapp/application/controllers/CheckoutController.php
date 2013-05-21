@@ -96,4 +96,39 @@ class CheckoutController extends Application_Controller_Action_Abstract
 		$msg = 'Checkout::confirm total time: ' . ( ( microtime( true ) - $startaction ) * 1000 ) . 'ms';
 		$context->getLogger()->log( $msg, MW_Logger_Abstract::INFO, 'performance' );
 	}
+
+
+	/**
+	 * Integrates the order update
+	 */
+	public function updateAction()
+	{
+		$startaction = microtime( true );
+		$context = Zend_Registry::get( 'ctx' );
+
+		$this->_helper->layout()->disableLayout();
+
+		try
+		{
+			$mshop = $this->_getMShop();
+			$templatePaths = $mshop->getCustomPaths( 'client/html' );
+
+			$client = Client_Html_Checkout_Update_Factory::createClient( $context, $templatePaths );
+			$client->setView( $this->_createView() );
+			$client->process();
+
+			$this->view->client = $client;
+		}
+		catch( MW_Exception $e )
+		{
+			header( 'HTTP/1.1 500 Database error' );
+		}
+		catch( Exception $e )
+		{
+			header( 'HTTP/1.1 500 ' . $e->getMessage() );
+		}
+
+		$msg = 'Checkout::update total time: ' . ( ( microtime( true ) - $startaction ) * 1000 ) . 'ms';
+		$context->getLogger()->log( $msg, MW_Logger_Abstract::INFO, 'performance' );
+	}
 }

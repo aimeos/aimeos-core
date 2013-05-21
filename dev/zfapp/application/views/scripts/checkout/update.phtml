@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+try
+{
+	echo $this->client->getHeader();
+	echo $this->client->getBody();
+}
+catch( MW_Exception $e )
+{
+	header( 'HTTP/1.1 500 Database error' );
+}
+catch( Exception $e )
+{
+	header( 'HTTP/1.1 500 ' . $e->getMessage() );
+}
+?>
