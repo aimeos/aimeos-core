@@ -17,23 +17,28 @@
 class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 {
 	/**
-	 * @var array of priorities where the keys are the
-	 * priority numbers and the values are the priority names
+	 * @var priorities mapping from number to name
 	 */
-	protected $_priorities = array();
+	private $_priorities = array(
+		0 => 'EMERG',
+		1 => 'ALERT',
+		2 => 'CRIT',
+		3 => 'ERR',
+		4 => 'WARN',
+		5 => 'NOTICE',
+		6 => 'INFO',
+		7 => 'DEBUG'
+	);
 
 	/**
-	 * @var array of Zend_Log_Writer_Abstract
+	 * @var filters
 	 */
-	protected $_writers = array();
+	private $_loglevel = MW_Logger_Abstract::ERR;
 
 	/**
-	 * @var array of Zend_Log_Filter_Interface
+	 * @var stream handle
 	 */
-	protected $_filters = array();
-
-
-	private $_logger = null;
+	private $_stream;
 
 
 	/**
@@ -42,9 +47,13 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 	 * @param string $prefix Prefix specified by site code
 	 * @param integer $priority Default priority
 	 */
-	public function __construct( $prefix, $priority )
+	public function __construct( $prefix, $filterPriority )
 	{
-		$this->_logger = $logger;
+		if ( !$this->_stream = @fopen( $prefix, 'a', false ) ) {
+			throw new MW_Logger_Exception( sprintf( '"%1$s" cannot be opened with mode "a"' ), $prefix );
+		}
+
+		$this->_loglevel = $filterPriority;
 	}
 
 
@@ -59,67 +68,45 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
 	{
-		try
+		if( $priority <= $this->_loglevel )
 		{
+
+			$this->_checkLogLevel( $priority );
+
 			if( !is_scalar( $message ) ) {
 				$message = json_encode( $message );
 			}
 
-			$this->_log( '<' . $facility . '> ' . $message, $priority );
+			$formatedMsg = $this->_format( '<' . $facility . '> ' . $message, $priority );
+
+			if ( false === @fwrite( $this->_stream, $formatedMsg ) ) {
+				throw new MW_Logger_Exception( 'Unable to write to stream' );
+			}
 		}
-		catch(Zend_Log_Exception $ze) {
-			throw new MW_Logger_Exception($ze->getMessage());
-		}
+
 	}
 
 
-	protected function _log()
+	/**
+	 * Formatting message.
+	 *
+	 * @param string $message Message to log
+	 * @param integer $priority Priority of the message
+	 * @param string $format Format for the message
+	 */
+	protected function _format( $message, $priority, $format = MW_Logger_Abstract::DEFAULT_FORMAT )
 	{
-		// sanity checks
-		if (empty($this->_writers)) {
-			/** @see Zend_Log_Exception */
-			require_once 'Zend/Log/Exception.php';
-			throw new Zend_Log_Exception('No writers were added');
+		$msg = array(
+			'timestamp' => date( 'c' ),
+			'message' => $message,
+			'priority' => $priority,
+			'priorityName' => $this->_priorities[ $priority ]
+		);
+
+		foreach ( $msg as $name => $value ) {
+			$output = str_replace( '%$name%', $value, $format );
 		}
 
-		if (! isset($this->_priorities[$priority])) {
-			/** @see Zend_Log_Exception */
-			require_once 'Zend/Log/Exception.php';
-			throw new Zend_Log_Exception('Bad log priority');
-		}
-
-		// pack into event required by filters and writers
-		$event = $this->_packEvent($message, $priority);
-
-		// Check to see if any extra information was passed
-		if (!empty($extras)) {
-			$info = array();
-			if (is_array($extras)) {
-				foreach ($extras as $key => $value) {
-					if (is_string($key)) {
-						$event[$key] = $value;
-					} else {
-						$info[] = $value;
-					}
-				}
-			} else {
-				$info = $extras;
-			}
-			if (!empty($info)) {
-				$event['info'] = $info;
-			}
-		}
-
-		// abort if rejected by the global filters
-		foreach ($this->_filters as $filter) {
-			if (! $filter->accept($event)) {
-				return;
-			}
-		}
-
-		// send to each writer
-		foreach ($this->_writers as $writer) {
-			$writer->write($event);
-		}
+		return $output;
 	}
 }

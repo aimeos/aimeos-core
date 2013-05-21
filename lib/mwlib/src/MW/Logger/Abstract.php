@@ -57,6 +57,11 @@ abstract class MW_Logger_Abstract
 	 */
 	const DEBUG = 7;
 
+	/**
+	 * DEFAULT_FORMAT default logger format
+	 */
+	const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message%';
+
 
 	protected function _checkLogLevel( $level )
 	{
