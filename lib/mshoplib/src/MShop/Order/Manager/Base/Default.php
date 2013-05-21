@@ -160,28 +160,14 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 
 	/**
-	 * Deletes an order including its subelements (addresses, delivery, payment, products, coupons) completely.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $id Id of the order base
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/order/manager/base/default/item/delete');
-			$stmt->bind(1, $id, MW_DB_Statement_Abstract::PARAM_INT);
-			$result = $stmt->execute()->finish();
-
-			$dbm->release( $conn, $this->_dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $this->_dbname );
-			throw $e;
-		}
+		$path = 'mshop/order/manager/base/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

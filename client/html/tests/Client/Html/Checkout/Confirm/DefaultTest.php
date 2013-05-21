@@ -84,26 +84,6 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 
 	public function testProcess()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( $this->_context );
-
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.service.code', 'paypal' ) );
-
-		$items = $manager->searchItems( $search );
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
-		}
-
-		$view = TestHelper::getView();
-
-		$param = array(
-			'arcavias' => $item->getId(),
-		);
-		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
-		$view->addHelper( 'param', $helper );
-
-		$this->_object->setView( $view );
-
 		$this->_object->process();
 	}
 }

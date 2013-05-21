@@ -10,7 +10,7 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_locale_site"
-			WHERE "id" = ?
+			WHERE :cond
 		',
 		'insert' => '
 			INSERT INTO "mshop_locale_site" ( "code", "label", "config", "status", "parentid", "editor", "mtime", "ctime", "level", "nleft", "nright" )

@@ -339,13 +339,13 @@ implements MShop_Service_Provider_Payment_Interface
 	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
 	 * @param mixed $additional Update information whose format depends on the payment provider
-	 * @return boolean True if the update was successful, false if the given parameters are not valid for this provider
+	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
 	public function updateSync( $additional )
 	{
 		if( !isset( $additional['TOKEN'] ) ) {
-			return false;
+			return null;
 		}
 
 
@@ -398,7 +398,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$this->_setPaymentStatus( $order, $rvals );
 		$orderManager->saveItem( $order );
 
-		return true;
+		return $order;
 	}
 
 
@@ -410,8 +410,8 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function isImplemented( $what )
 	{
-		switch( $what ) {
-
+		switch( $what )
+		{
 			case MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE:
 			case MShop_Service_Provider_Payment_Abstract::FEAT_QUERY:
 			case MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL:

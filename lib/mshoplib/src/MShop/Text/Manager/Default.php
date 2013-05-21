@@ -410,28 +410,14 @@ class MShop_Text_Manager_Default
 
 
 	/**
-	 * Deletes the text item specified by the given text ID.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param Integer $id Id of the text item
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/text/manager/default/item/delete');
-			$stmt->bind(1, $id, MW_DB_Statement_Abstract::PARAM_INT);
-			$result = $stmt->execute()->finish();
-
-			$dbm->release($conn);
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$path = 'mshop/text/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

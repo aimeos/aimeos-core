@@ -19,7 +19,7 @@
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="phpcs -n --standard=${application.startdir}/coding/Metaways src tests/Controller"
+		<exec command="phpcs -n --standard=${coredir}/coding/Metaways src tests/Controller"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 

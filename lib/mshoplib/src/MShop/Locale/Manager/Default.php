@@ -191,28 +191,14 @@ class MShop_Locale_Manager_Default
 
 
 	/**
-	 * Deletes the item specified by its ID.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param mixed $id ID of the item object
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/locale/manager/default/item/delete');
-			$stmt->bind(1, $id);
-			$stmt->execute()->finish();
-
-			$dbm->release($conn);
-		}
-		catch ( Exception $e )
-		{
-			$dbm->release($conn);
-			throw $e;
-		}
+		$path = 'mshop/locale/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 

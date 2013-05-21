@@ -122,6 +122,7 @@ class Client_Html_Account_History_Detail_DefaultTest extends MW_Unittest_Testcas
 			$search->compare( '==', 'order.base.customerid', $customerid )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {

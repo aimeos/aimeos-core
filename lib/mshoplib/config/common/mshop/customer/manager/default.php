@@ -10,7 +10,8 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_customer"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'insert' => '
 			INSERT INTO "mshop_customer" ("siteid", "label", "code", "company", "salutation", "title",

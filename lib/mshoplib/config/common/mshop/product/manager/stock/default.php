@@ -22,7 +22,8 @@ return array(
 		'delete' => '
 			DELETE
 			FROM "mshop_product_stock"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mprost."id", mprost."prodid", mprost."siteid", mprost."warehouseid",

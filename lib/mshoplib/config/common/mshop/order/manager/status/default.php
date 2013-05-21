@@ -21,7 +21,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_order_status"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mordst."id", mordst."siteid", mordst."parentid", mordst."type", mordst."value",

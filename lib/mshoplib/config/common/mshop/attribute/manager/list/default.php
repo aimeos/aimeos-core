@@ -34,7 +34,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_attribute_list"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'move' => '
 			UPDATE "mshop_attribute_list"

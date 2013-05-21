@@ -20,7 +20,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_attribute_list_type"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mattlity."id", mattlity."siteid", mattlity."code", mattlity."domain", mattlity."label",

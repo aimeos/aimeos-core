@@ -115,7 +115,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$results = $this->_object->searchItems($search, array(), $total);
 
 		$this->assertEquals(1, count( $results ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 3, $total );
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

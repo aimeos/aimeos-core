@@ -50,42 +50,42 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager('base');
 		$orderBaseProductManager = $orderBaseManager->getSubManager('product');
-		
+
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $manager->createSearch();
-		
+
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC', 'IJKL' ) ) );
-		
+
 		$pResults = $manager->searchItems( $search, array( 'price' ) );
-		
+
 		if ( count($pResults) !== 3 ) {
 			throw new Exception('Wrong number of products');
 		}
-		
+
 		$products = array();
 		foreach( $pResults as $prod ) {
 			$products[ $prod->getCode() ] = $prod;
 		}
-		
+
 		if( ( $price = current( $products['IJKL']->getRefItems('price') ) ) === false ) {
-			throw Exception('No price item found');
+			throw new Exception('No price item found');
 		}
 		$price->setValue(10.00);
-		
+
 		$this->product1 = $orderBaseProductManager->createItem();
 		$this->product1->copyFrom( $products['CNE'] );
 		$this->product1->setPrice( $price );
-		
+
 		$this->product2 = $orderBaseProductManager->createItem();
 		$this->product2->copyFrom( $products['CNC'] );
 		$this->product2->setPrice( $price );
-		
+
 		$this->product3 = $orderBaseProductManager->createItem();
 		$this->product3->copyFrom( $products['IJKL'] );
 		$this->product3->setPrice( $price );
-		
+
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service' );
-		
+
 		$serviceSearch = $orderBaseServiceManager->createSearch();
 		$exp = array(
 			$serviceSearch->compare( '==', 'order.base.service.type', 'delivery' ),
@@ -97,14 +97,14 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 		if ( ($delivery = reset($results)) === false ) {
 			throw new Exception('No order base item found');
 		}
-		
+
 		$this->order = $orderBaseManager->createItem();
-		
+
 		$this->order->setService( $delivery, 'delivery' );
 		$this->order->addProduct( $this->product1 );
 		$this->order->addProduct( $this->product2 );
 		$this->order->addProduct( $this->product3 );
-		
+
 		$this->_object = new MShop_Plugin_Provider_Order_Shipping(TestHelper::getContext(), $plugin);
 	}
 
