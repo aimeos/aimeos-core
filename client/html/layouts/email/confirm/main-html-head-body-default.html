@@ -35,7 +35,7 @@ catch( Exception $e )
 	<p class="intro">
 <?php
 printf(
-	$this->translate( 'client/html', 'Thank you for your order on %2$s. The ID of your order is %1$s and contains the following details:' ),
+	nl2br( $this->translate( 'client/html', 'Thank you for your order on %2$s. The ID of your order is %1$s and contains the following details:' ) ),
 	$this->confirmOrderItem->getId(),
 	date_create( $this->confirmOrderItem->getTimeCreated() )->format( $this->translate( 'client/html', 'Y-m-d' ) )
 );

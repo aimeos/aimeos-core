@@ -228,7 +228,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
 		$search = $manager->createSearch();
 
-		if( count( $ids ) > 0 ) {
+		if( !empty( $ids ) ) {
 			$search->setConditions( $search->compare( '==', 'attribute.id', $ids ) );
 		}
 
@@ -273,7 +273,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		{
 			$textItems = $item->getRefItems( 'text', $textTypeItem->getCode() );
 
-			if( count( $textItems ) > 0 )
+			if( !empty( $textItems ) )
 			{
 				foreach( $textItems as $textItem )
 				{

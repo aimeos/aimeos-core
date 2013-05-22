@@ -21,7 +21,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_service_list_type"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mserlity."id", mserlity."siteid", mserlity."code", mserlity."domain", mserlity."label",

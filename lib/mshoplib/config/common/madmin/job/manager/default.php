@@ -9,7 +9,8 @@
 return array(
 	'delete' => '
 		DELETE FROM "madmin_job"
-		WHERE "id" = ?
+		WHERE :cond
+		AND siteid = ?
 	',
 	'insert' => '
 		INSERT INTO "madmin_job" ("siteid", "label", "method", "parameter", "result", "status", "editor", "mtime", "ctime")

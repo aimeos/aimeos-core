@@ -19,7 +19,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_plugin"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT DISTINCT mplu."id", mplu."siteid", mplu."typeid", mplu."label", mplu."provider",

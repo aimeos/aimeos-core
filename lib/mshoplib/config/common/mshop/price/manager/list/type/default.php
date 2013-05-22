@@ -19,7 +19,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_price_list_type"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mprility."id", mprility."siteid", mprility."code", mprility."domain", mprility."label",

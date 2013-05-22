@@ -20,7 +20,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_order_base_service"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT DISTINCT mordbase."id", mordbase."baseid", mordbase."siteid", mordbase."servid",

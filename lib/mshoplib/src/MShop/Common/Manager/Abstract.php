@@ -53,6 +53,17 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 * Deletes an item from storage.
+	 *
+	 * @param integer $itemId Unique ID of the item in the storage
+	 */
+	public function deleteItem( $itemId )
+	{
+		$this->deleteItems( array( $itemId ) );
+	}
+
+
+	/**
 	 * Returns the newly created ID for the last record which was inserted.
 	 *
 	 * @param MW_DB_Connection_Interface $conn Database connection used to insert the new record
@@ -865,6 +876,50 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$this->_context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, MW_Logger_Abstract::DEBUG );
 
 		return $results;
+	}
+
+
+	/**
+	 * Deletes items specified by ids in array.
+	 *
+	 * @param array $ids List of IDs
+	 * @param string $sql Sql statement
+	 * @param boolean $siteidcheck If siteid is used in the statement
+	 */
+	protected function _deleteItems( array $ids, $sql, $siteidcheck = true )
+	{
+		$context = $this->_getContext();
+
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'id', $ids ) );
+
+		$types = array( 'id' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'id' => '"id"' );
+
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
+
+
+		try
+		{
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
+
+			if( $siteidcheck ) {
+				$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			}
+
+			$stmt->execute()->finish();
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
 	}
 
 

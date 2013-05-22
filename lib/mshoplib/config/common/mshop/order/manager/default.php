@@ -21,7 +21,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_order"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT DISTINCT mord."id", mord."baseid", mord."siteid", mord."type", mord."datepayment", mord."datedelivery",

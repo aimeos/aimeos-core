@@ -71,7 +71,7 @@ class Controller_ExtJS_Order_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
-		$this->assertEquals( 1, $result['total'] );
+		$this->assertEquals( 2, $result['total'] );
 		$this->assertEquals( 'web', $result['items'][0]->{'order.type'} );
 	}
 
