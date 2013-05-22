@@ -61,6 +61,10 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 
 	public function testDt()
 	{
+		if( !class_exists( 'Zend_Translate' ) ) {
+			$this->markTestIncomplete( 'Zend_Translate is not available' );
+		}
+
 		$this->assertEquals( 'singular translation', $this->_object->dt( 'testDomain', 'File' ) );
 		$this->assertEquals( 'Test default return', $this->_object->dt( 'otherTestDomain', 'Test default return' ) );
 
@@ -76,6 +80,10 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 		 * 1, if $n == 2..4, 22..24, 32..34, ...
 		 * 2, if $n == 5..20, 25..30, 35..40, .
 		 */
+		if( !class_exists( 'Zend_Translate' ) ) {
+			$this->markTestIncomplete( 'Zend_Translate is not available' );
+		}
+
 		$this->assertEquals( 'plural 2 translation', $this->_object->dn( 'otherTestDomain', 'File', 'Files', 0 ) );
 		$this->assertEquals( 'singular translation', $this->_object->dn( 'otherTestDomain', 'File', 'Files', 1 ) );
 		$this->assertEquals( 'plural 1 translation', $this->_object->dn( 'otherTestDomain', 'File', 'Files', 2 ) );
@@ -92,6 +100,10 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 	// test using the testfiles/case1/ka_GE file; lang: german
 	public function testAdapterGettext()
 	{
+		if( !class_exists( 'Zend_Translate' ) ) {
+			$this->markTestIncomplete( 'Zend_Translate is not available' );
+		}
+
 		$object = new MW_Translation_Zend( $this->_translationSources, 'gettext', 'ka_GE', array('disableNotices'=>true) );
 
 		$this->assertEquals( 'Aktualisierung', $object->dt( 'testDomain', 'Update' ) );
@@ -103,6 +115,10 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 
 	public function testDnOverwriteCsv()
 	{
+		if( !class_exists( 'Zend_Translate' ) ) {
+			$this->markTestIncomplete( 'Zend_Translate is not available' );
+		}
+
 		$ds = DIRECTORY_SEPARATOR;
 
 		$translationSources = array(
@@ -120,6 +136,10 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 
 	public function testDnOverwriteGettextSingular()
 	{
+		if( !class_exists( 'Zend_Translate' ) ) {
+			$this->markTestIncomplete( 'Zend_Translate is not available' );
+		}
+
 		$ds = DIRECTORY_SEPARATOR;
 
 		$translationSources = array(
@@ -136,6 +156,10 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 
 	public function testDnOverwriteGettextPlural()
 	{
+		if( !class_exists( 'Zend_Translate' ) ) {
+			$this->markTestIncomplete( 'Zend_Translate is not available' );
+		}
+
 		$ds = DIRECTORY_SEPARATOR;
 
 		$translationSources = array(

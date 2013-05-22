@@ -89,6 +89,10 @@ class MW_Common_Criteria_LuceneTest extends MW_Unittest_Testcase
 
 	public function testGetConditionString()
 	{
+		if( !class_exists( 'Zend_Search_Lucene_Search_Query_Insignificant' ) ) {
+			$this->markTestIncomplete( 'Zend_Search_Lucene_Search_Query_Insignificant is not available' );
+		}
+
 		$types = array( 'int_column' => SORT_NUMERIC, 'str_column' => SORT_STRING );
 		$translations = array( 'int_column' => 'int_col', 'str_column' => 'str_col' );
 		$plugins = array( 'int_column' => new Criteria_Plugin_SQLTest() );
