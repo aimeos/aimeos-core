@@ -104,9 +104,9 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 		);
 
 		foreach ( $msg as $name => $value ) {
-			$output = str_replace( '%$name%', $value, $format );
+			$format = str_replace( '%'.$name.'%', $value, $format );
 		}
 
-		return $output;
+		return $format;
 	}
 }

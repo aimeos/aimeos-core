@@ -31,7 +31,7 @@ return array(
 		'client/html/src',
 		'controller/frontend/src',
 		'controller/extjs/src',
-		'lib/zendlib',
+// 		'lib/zendlib',
 		'lib/phpexcel',
 		'lib/mwlib/lib'
 	),

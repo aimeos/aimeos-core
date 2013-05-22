@@ -65,12 +65,6 @@ class TestHelper
 		$ctx->setDatabaseManager( $dbm );
 
 
-		//--$writer = new Zend_Log_Writer_Stream( $site . '.log');
-		//--$zlog = new Zend_Log($writer);
-		//--$filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
-		//--$zlog->addFilter($filter);
-
-		//with 2 params:
 		$logger = new MW_Logger_File( $site . '.log', MW_Logger_Abstract::DEBUG );
 		$ctx->setLogger( $logger );
 
