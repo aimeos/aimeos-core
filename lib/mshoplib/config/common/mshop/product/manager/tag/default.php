@@ -25,7 +25,7 @@ return array(
 		',
 		'search' => '
 			SELECT mprota."id", mprota."siteid", mprota."typeid", mprota."langid", mprota."label",
-				mprota."mtime", mprota."editor", mprota."ctime", mprotaty."code" AS "type"
+				mprota."mtime", mprota."editor", mprota."ctime"
 			FROM "mshop_product_tag" AS mprota
 			:joins
 			WHERE

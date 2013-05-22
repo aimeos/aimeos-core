@@ -158,7 +158,7 @@ class MShop_Product_Manager_Tag_Default
 	public function createItem()
 	{
 		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		return $this->_createItem( $values );
 	}
 
 
@@ -283,21 +283,23 @@ class MShop_Product_Manager_Tag_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		$map = $typeIds = array();
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
-		$items = array();
 
 		try
 		{
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/product/manager/tag/default/item/search';
 			$cfgPathCount =  'mshop/product/manager/tag/default/item/count';
-			$required = array( 'product.tag', 'product.tag.type' );
+			$required = array( 'product.tag' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
-				$items[ $row['id'] ] = $this->_createItem( $row );
+			while( ( $row = $results->fetch() ) !== false )
+			{
+				$map[ $row['id'] ] = $row;
+				$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn );
@@ -308,7 +310,23 @@ class MShop_Product_Manager_Tag_Default
 			throw $e;
 		}
 
-		return $items;
+		if( !empty( $typeIds ) )
+		{
+			$typeManager = $this->getSubManager( 'type' );
+			$typeSearch = $typeManager->createSearch();
+			$typeSearch->setConditions( $typeSearch->compare( '==', 'product.tag.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $typeSearch );
+
+			foreach( $map as $id => $row )
+			{
+				if( isset( $typeItems[ $row['typeid'] ] ) ) {
+					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				}
+			}
+		}
+
+		return $this->_buildItems( $map, $ref, 'product.tag' );
 	}
 
 
