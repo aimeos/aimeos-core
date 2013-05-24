@@ -33,7 +33,7 @@ class MShop_Service_Provider_Delivery_Default
 		'url' => array(
 			'code' => 'url',
 			'internalcode'=> 'url',
-			'label'=> 'URL to success page',
+			'label'=> 'URL to webservice the HTTP request is sent to',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
