@@ -40,7 +40,7 @@ implements MShop_Service_Provider_Payment_Interface
 	const FEAT_REFUND = 4;
 
 
-	private $_communication;
+	//private $_communication;
 
 
 	/**
