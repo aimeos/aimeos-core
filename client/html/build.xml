@@ -4,7 +4,7 @@
 	
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
-		<delete file="tests/unit.log" quiet="true" failonerror="false" />
+		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
@@ -18,7 +18,7 @@
 	
 	<target name="coverage" description="Generates code coverage report">
 		<echo msg="Generating code coverage report" />
-		<delete file="tests/unittests.log" quiet="true" failonerror="false" />
+		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit-coverage.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
