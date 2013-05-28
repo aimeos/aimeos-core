@@ -17,20 +17,6 @@
 class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 {
 	/**
-	 * @var priorities mapping from number to name
-	 */
-	private $_priorities = array(
-		0 => 'EMERG',
-		1 => 'ALERT',
-		2 => 'CRIT',
-		3 => 'ERR',
-		4 => 'WARN',
-		5 => 'NOTICE',
-		6 => 'INFO',
-		7 => 'DEBUG'
-	);
-
-	/**
 	 * @var filters
 	 */
 	private $_loglevel = MW_Logger_Abstract::ERR;
@@ -47,7 +33,7 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 	 * @param string $prefix Prefix specified by site code
 	 * @param integer $priority Default priority
 	 */
-	public function __construct( $prefix, $filterPriority )
+	public function __construct( $prefix, $filterPriority = MW_Logger_Abstract::ERR )
 	{
 		if ( !$this->_stream = @fopen( $prefix, 'a', false ) ) {
 			throw new MW_Logger_Exception( sprintf( '"%1$s" cannot be opened with mode "a"' ), $prefix );
@@ -77,36 +63,11 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 				$message = json_encode( $message );
 			}
 
-			$formatedMsg = $this->_format( '<' . $facility . '> ' . $message, $priority );
+			$message = '<' . $facility . '> ' . date( 'Y-m-d H:i:s' ) . ' ' . $priority . ' ' . $message;
 
-			if ( false === @fwrite( $this->_stream, $formatedMsg ) ) {
+			if ( false === @fwrite( $this->_stream, $message ) ) {
 				throw new MW_Logger_Exception( 'Unable to write to stream' );
 			}
 		}
-
-	}
-
-
-	/**
-	 * Formatting message.
-	 *
-	 * @param string $message Message to log
-	 * @param integer $priority Priority of the message
-	 * @param string $format Format for the message
-	 */
-	protected function _format( $message, $priority, $format = MW_Logger_Abstract::DEFAULT_FORMAT )
-	{
-		$msg = array(
-			'timestamp' => date( 'c' ),
-			'message' => $message,
-			'priority' => $priority,
-			'priorityName' => $this->_priorities[ $priority ]
-		);
-
-		foreach ( $msg as $name => $value ) {
-			$format = str_replace( '%'.$name.'%', $value, $format );
-		}
-
-		return $format;
 	}
 }

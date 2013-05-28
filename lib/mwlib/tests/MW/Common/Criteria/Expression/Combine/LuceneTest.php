@@ -50,7 +50,7 @@ class MW_Common_Criteria_Expression_Combine_LuceneTest extends MW_Unittest_Testc
 	public function testToString()
 	{
 		if( !class_exists( 'Zend_Search_Lucene_Search_Query_Boolean' ) ) {
-			$this->markTestIncomplete( 'Zend_Search_Lucene_Search_Query_Boolean is not available' );
+			$this->markTestSkipped( 'Zend_Search_Lucene_Search_Query_Boolean is not available' );
 		}
 
 		$types = array(
