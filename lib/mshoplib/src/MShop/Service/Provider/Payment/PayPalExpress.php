@@ -344,19 +344,19 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function updateSync( $additional )
 	{
-		if( !isset( $additional['TOKEN'] ) ) {
+		if( !isset( $additional['token'] ) ) {
 			return null;
 		}
 
 
 		$values = $this->_getAuthParameter();
 		$values['METHOD'] = 'GetExpressCheckoutDetails';
-		$values['TOKEN'] = $additional['TOKEN'];
+		$values['TOKEN'] = $additional['token'];
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
 		$response = $this->_sendRequest( $this->_config['ApiEndpoint'], $urlQuery );
 
-		$fullResponse = $this->_checkResponse( $additional['TOKEN'], $response, __METHOD__ );
+		$fullResponse = $this->_checkResponse( $additional['token'], $response, __METHOD__ );
 
 
 		if( !isset( $fullResponse['PAYERID'] ) ) {
