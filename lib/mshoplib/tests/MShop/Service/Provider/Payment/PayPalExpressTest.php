@@ -121,6 +121,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
 		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
 		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
+		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_REFUND ) );
 	}
 
 
@@ -173,7 +174,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$com->addRule( $what, $error, $success );
 		$this->_object->setCommunication( $com );
 
-		$response = array ( 'TOKEN' => 'UT-99999999' );
+		$response = array ( 'token' => 'UT-99999999' );
 
 		$testData = array(
 			'TOKEN' => 'UT-99999999',
