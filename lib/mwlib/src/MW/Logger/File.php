@@ -35,7 +35,7 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 	 */
 	public function __construct( $prefix, $filterPriority = MW_Logger_Abstract::ERR )
 	{
-		if ( !$this->_stream = @fopen( $prefix, 'a', false ) ) {
+		if ( !$this->_stream = fopen( $prefix, 'a', false ) ) {
 			throw new MW_Logger_Exception( sprintf( '"%1$s" cannot be opened with mode "a"' ), $prefix );
 		}
 
@@ -65,7 +65,7 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 
 			$message = '<' . $facility . '> ' . date( 'Y-m-d H:i:s' ) . ' ' . $priority . ' ' . $message;
 
-			if ( false === @fwrite( $this->_stream, $message ) ) {
+			if ( false === fwrite( $this->_stream, $message ) ) {
 				throw new MW_Logger_Exception( 'Unable to write to stream' );
 			}
 		}
