@@ -30,13 +30,13 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 	/**
 	 * Initializes the logger object.
 	 *
-	 * @param string $prefix Prefix specified by site code
+	 * @param string $filename Log file name
 	 * @param integer $priority Default priority
 	 */
-	public function __construct( $prefix, $filterPriority = MW_Logger_Abstract::ERR )
+	public function __construct( $filename, $filterPriority = MW_Logger_Abstract::ERR )
 	{
-		if ( !$this->_stream = fopen( $prefix, 'a', false ) ) {
-			throw new MW_Logger_Exception( sprintf( '"%1$s" cannot be opened with mode "a"' ), $prefix );
+		if ( !$this->_stream = fopen( $filename, 'a', false ) ) {
+			throw new MW_Logger_Exception( sprintf( 'Unable to open file "%1$s" for appending' ), $filename );
 		}
 
 		$this->_loglevel = $filterPriority;
