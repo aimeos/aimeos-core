@@ -415,6 +415,7 @@ implements MShop_Service_Provider_Payment_Interface
 			case MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE:
 			case MShop_Service_Provider_Payment_Abstract::FEAT_QUERY:
 			case MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL:
+			case MShop_Service_Provider_Payment_Abstract::FEAT_REFUND:
 				return true;
 		}
 
