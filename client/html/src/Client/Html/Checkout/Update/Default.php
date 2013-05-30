@@ -140,10 +140,7 @@ class Client_Html_Checkout_Update_Default
 
 		try
 		{
-			$params = $view->param();
-			$context = $this->_getContext();
-
-			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
+			$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_getContext() );
 
 			$search = $serviceManager->createSearch();
 			$search->setConditions( $search->compare( '==', 'service.type.code', 'payment' ) );
@@ -153,7 +150,7 @@ class Client_Html_Checkout_Update_Default
 			{
 				try
 				{
-					$serviceManager->getProvider( $serviceItem )->updateSync( $params );
+					$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
 				}
 				catch( Exception $e )
 				{
@@ -162,7 +159,7 @@ class Client_Html_Checkout_Update_Default
 					$view->updateError = $e->getMessage();
 
 					$msg = 'Updating order ID "%1$s" failed: %2$s';
-					$context->getLogger()->log( sprintf( $msg, $sorderid, $e->getMessage() ) );
+					$this->_getContext()->getLogger()->log( sprintf( $msg, $sorderid, $e->getMessage() ) );
 				}
 			}
 
