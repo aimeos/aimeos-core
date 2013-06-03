@@ -206,7 +206,7 @@ class Client_Html_Catalog_List_Default
 			$catid = (string) $view->param( 'f-catalog-id' );
 
 			if( $catid == '' ) {
-				$catid = $config->get( 'client/html/catalog/list/catid-default', null );
+				$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
 			}
 
 			$page = ( $page < 1 ? 1 : $page );
@@ -222,7 +222,14 @@ class Client_Html_Catalog_List_Default
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 
-			if( $catid !== null )
+			if( $text !== '' )
+			{
+				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
+
+				$view->listProductItems = $controller->getProductList( $filter, $total, $domains );
+				$view->listProductTotal = $total;
+			}
+			else if( $catid !== '' )
 			{
 				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
 				$view->listCatPath = $catalogManager->getPath( $catid, array( 'text', 'media', 'attribute' ) );
@@ -231,13 +238,6 @@ class Client_Html_Catalog_List_Default
 				if( ( $categoryItem = end( $listCatPath ) ) !== false ) {
 					$view->listCurrentCatItem = $categoryItem;
 				}
-
-				$view->listProductItems = $controller->getProductList( $filter, $total, $domains );
-				$view->listProductTotal = $total;
-			}
-			else if( $text !== '' )
-			{
-				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
 
 				$view->listProductItems = $controller->getProductList( $filter, $total, $domains );
 				$view->listProductTotal = $total;
