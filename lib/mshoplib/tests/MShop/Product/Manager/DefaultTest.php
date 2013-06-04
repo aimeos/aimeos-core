@@ -324,6 +324,33 @@ class MShop_Product_Manager_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testSearchItemsLimit()
+	{
+		$start = 0;
+		$numproducts = 0;
+
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.editor', 'core:unittest' ) );
+		$search->setSlice( $start, 5 );
+
+		do
+		{
+			$result = $this->_object->searchItems( $search );
+
+			foreach ( $result as $item ) {
+				$numproducts++;
+			}
+
+			$count = count( $result );
+			$start += $count;
+			$search->setSlice( $start, 5 );
+		}
+		while( $count > 0 );
+
+		$this->assertEquals( 21, $numproducts );
+	}
+
+
 	public function testGetSubManager()
 	{
 		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('stock') );
