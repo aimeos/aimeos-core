@@ -169,13 +169,16 @@ implements MShop_Service_Provider_Payment_Interface
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$orderBaseItem = $orderBaseManager->load( $order->getBaseId() );
+		$orderid = $order->getId();
 
 		$values = $this->_getOrderDetails( $orderBaseItem );
-		$values['METHOD'] = 'SetExpressCheckout';
-		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $order->getId();
+		$values[ 'METHOD' ] = 'SetExpressCheckout';
+		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
+		$values[ 'RETURNURL' ] = $this->_config['ReturnUrl'] . '?orderid=' . $orderid;
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_sendRequest( $this->_config['ApiEndpoint'], $urlQuery );
+
+		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$params = array ( 'TOKEN' => $rvals['TOKEN'] );
@@ -209,7 +212,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$values['TRANSACTIONID'] = $tid;
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_sendRequest( $this->_config['ApiEndpoint'], $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -246,7 +249,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$values['AMT'] = $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getShipping();
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_sendRequest( $this->_config['ApiEndpoint'], $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -292,7 +295,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$values['INVOICEID'] = $order->getId();
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_sendRequest( $this->_config['ApiEndpoint'], $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'REFUNDTRANSACTIONID' => $rvals['REFUNDTRANSACTIONID'] );
@@ -327,7 +330,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$values['AUTHORIZATIONID'] = $tid;
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_sendRequest( $this->_config['ApiEndpoint'], $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
@@ -344,51 +347,31 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function updateSync( $additional )
 	{
-		if( !isset( $additional['TOKEN'] ) ) {
+		if( !isset( $additional['token'] ) || !isset( $additional['PayerID'] ) || !isset( $additional['orderid'] ) ) {
 			return null;
 		}
-
-
-		$values = $this->_getAuthParameter();
-		$values['METHOD'] = 'GetExpressCheckoutDetails';
-		$values['TOKEN'] = $additional['TOKEN'];
-
-		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_sendRequest( $this->_config['ApiEndpoint'], $urlQuery );
-
-		$fullResponse = $this->_checkResponse( $additional['TOKEN'], $response, __METHOD__ );
-
-
-		if( !isset( $fullResponse['PAYERID'] ) ) {
-			throw new MShop_Service_Exception( sprintf( 'Paypal express user was not authorized' ) );
-		}
-
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
 		$orderBaseManager = $orderManager->getSubManager('base');
 
-		$order = $orderManager->getItem( $fullResponse['INVNUM'] );
+		$order = $orderManager->getItem( $additional['orderid'] );
 		$baseid = $order->getBaseId();
 		$baseItem = $orderBaseManager->getItem( $baseid );
 		$serviceItem = $this->_getOrderServiceItem( $baseid );
 
 		$values = $this->_getAuthParameter();
 		$values['METHOD'] = 'DoExpressCheckoutPayment';
-		$values['TOKEN'] = $fullResponse['TOKEN'];
-		$values['PAYERID'] = $fullResponse['PAYERID'];
+		$values['TOKEN'] = $additional['token'];
+		$values['PAYERID'] = $additional['PayerID'];
 		$values['PAYMENTACTION'] = $this->_config['PaymentAction'];
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getShipping() );
 
 		$urlQuery = urldecode( '&' . http_build_query( $values, '', '&' ) );
-		$response = $this->_sendRequest( $this->_config['ApiEndpoint'], $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
-
-		$attributes = array(
-			'PAYERID' => $fullResponse['PAYERID'],
-			'EMAIL' => $fullResponse['EMAIL']
-		);
+		$attributes = array( 'PAYERID' => $additional['PayerID'] );
 
 		if( isset( $rvals['TRANSACTIONID'] ) ) {
 			$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
@@ -555,10 +538,10 @@ implements MShop_Service_Provider_Payment_Interface
 		$lastPos = 0;
 		foreach( $orderBase->getProducts() as $product )
 		{
-			$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $product->getPosition() ] = $product->getId();
-			$values[ 'L_PAYMENTREQUEST_0_NAME' . $product->getPosition() ] = $product->getName();
-			$values[ 'L_PAYMENTREQUEST_0_QTY' . $product->getPosition() ] = $product->getQuantity();
-			$values[ 'L_PAYMENTREQUEST_0_AMT' . $product->getPosition() ] = $product->getPrice()->getValue();
+			$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $lastPos ] = $product->getId();
+			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $product->getName();
+			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = $product->getQuantity();
+			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $product->getPrice()->getValue();
 			$lastPos = $product->getPosition();
 		}
 
@@ -571,6 +554,7 @@ implements MShop_Service_Provider_Payment_Interface
 			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $service->getPrice()->getValue();
 		}
 
+		$values['HANDLINGAMT'] = $service->getPrice()->getValue();
 
 		$price = $orderBase->getPrice();
 		$amount = $price->getValue() + $price->getShipping();
@@ -585,7 +569,6 @@ implements MShop_Service_Provider_Payment_Interface
 		$values['PAYMENTREQUEST_0_TAXAMT'] = $price->getTaxRate();
 		$values['PAYMENTREQUEST_0_CURRENCYCODE'] = $orderBase->getPrice()->getCurrencyId();
 		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->_config['PaymentAction'];
-		$values['RETURNURL'] = $this->_config['ReturnUrl'];
 		$values['CANCELURL'] = $this->_config['CancelUrl'];
 
 

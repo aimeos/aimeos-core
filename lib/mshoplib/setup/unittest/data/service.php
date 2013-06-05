@@ -60,11 +60,11 @@ return array (
 			'label' => 'PayPalExpress',
 			'provider' => 'PayPalExpress',
 			'config' => array(
-				'ApiUsername' => 'unit_1340199666_biz_api1.yahoo.de',
-				'ApiPassword' => '1340199685',
-				'ApiSignature' => 'A34BfbVoMVoHt7Sf8BlufLXS8tKcAVxmJoDiDUgBjWi455pJoZXGoJ87',
+				'ApiUsername' => 'sellerde_api1.metaways.de',
+				'ApiPassword' => '1370351234',
+				'ApiSignature' => 'AAZZBfWatx5wyxGsFzOqsM--jPYmApZPsklH4pTAnza8AaIJIyhUd3t.',
 				'CancelUrl' => 'http://cancelurl.com',
-				'ReturnUrl' => 'http://returnurl.com',
+				'ReturnUrl' => 'http://returnurl.com/updatesync.php',
 				'PaymentAction' => 'authorization',
 				'PaypalUrl' => 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=',
 				'ApiEndpoint' => 'https://api-3t.sandbox.paypal.com/nvp'

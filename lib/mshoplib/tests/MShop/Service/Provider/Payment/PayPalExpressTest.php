@@ -167,19 +167,18 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	{
 		$what = array( 'TOKEN' => 'UT-99999999' );
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=updatesync method error';
-		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&EMAIL=user_paypal_email@metaways.de&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111111&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM='.$this->_order->getId();
+		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111111&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM='.$this->_order->getId();
 
 		$com = new MW_Communication_TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->_object->setCommunication( $com );
 
-		$response = array ( 'TOKEN' => 'UT-99999999' );
+		$response = array ( 'token' => 'UT-99999999', 'PayerID' => 'PaypalUnitTestBuyer', 'orderid' => $this->_order->getId() );
 
 		$testData = array(
 			'TOKEN' => 'UT-99999999',
 			'PAYERID' => 'PaypalUnitTestBuyer',
 			'TRANSACTIONID' => '111111111',
-			'EMAIL' => 'user_paypal_email@metaways.de'
 		);
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
@@ -224,7 +223,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 			'TOKEN' => 'UT-99999999',
 			'PAYERID' => 'PaypalUnitTestBuyer',
 			'TRANSACTIONID' => '111111111',
-			'EMAIL' => 'user_paypal_email@metaways.de',
 			'REFUNDTRANSACTIONID' => '88888888'
 		);
 
