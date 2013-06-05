@@ -35,6 +35,10 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
+		if( !class_exists( 'Zend_Translate' ) ) {
+			$this->markTestSkipped( 'Zend_Translate is not available' );
+		}
+
 		$ds = DIRECTORY_SEPARATOR;
 
 		$this->_translationSources = array(

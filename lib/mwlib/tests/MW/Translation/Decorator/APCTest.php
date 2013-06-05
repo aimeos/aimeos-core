@@ -35,7 +35,7 @@ class MW_Translation_Decorator_APCTest extends MW_Unittest_Testcase
 		}
 
 		$trans = new MW_Translation_None( 'en_GB' );
-		$config = new MW_Config_Zend( new Zend_Config( array() ) );
+		$config = new MW_Config_Array();
 		$this->_object = new MW_Translation_Decorator_APC( $trans, $config );
 	}
 
