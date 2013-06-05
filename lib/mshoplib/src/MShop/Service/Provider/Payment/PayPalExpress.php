@@ -547,11 +547,14 @@ implements MShop_Service_Provider_Payment_Interface
 
 		foreach( $orderBase->getServices() as $service )
 		{
-			$lastPos++;
-			$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $lastPos ] = $service->getId();
-			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $service->getName();
-			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
-			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $service->getPrice()->getValue();
+			if( ( $val = $service->getPrice()->getValue() ) > '0.00' )
+			{
+				$lastPos++;
+				$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $lastPos ] = $service->getId();
+				$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $service->getName();
+				$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
+				$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $val;
+			}
 		}
 
 		$price = $orderBase->getPrice();
