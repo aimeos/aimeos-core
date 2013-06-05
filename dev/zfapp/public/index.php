@@ -25,6 +25,7 @@ try
 
 	$includePaths = $mshop->getIncludePaths();
 	$includePaths[] = ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'library';
+	$includePaths[] = dirname( ZFAPP_ROOT ) . DIRECTORY_SEPARATOR . 'zendlib';
 	$includePaths[] = get_include_path();
 	set_include_path( implode( PATH_SEPARATOR, $includePaths ) );
 
