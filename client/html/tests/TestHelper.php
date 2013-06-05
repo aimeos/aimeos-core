@@ -37,7 +37,7 @@ class TestHelper
 	{
 		$view = new MW_View_Default();
 
-		$trans = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'de_DE', array('disableNotices'=>true) );
+		$trans = new MW_Translation_None( 'de_DE' );
 		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
 		$view->addHelper( 'translate', $helper );
 
