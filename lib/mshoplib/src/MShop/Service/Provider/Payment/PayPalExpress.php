@@ -184,7 +184,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$params = array ( 'TOKEN' => $rvals['TOKEN'] );
 		$this->_saveAttributes( $params, $orderBaseItem->getService('payment') );
 
-		return new MShop_Common_Item_Helper_Form_Default( $this->_config['PaypalUrl'] . $rvals['TOKEN'], 'GET', array() );
+		return new MShop_Common_Item_Helper_Form_Default( $this->_config['PaypalUrl'] . $rvals['TOKEN'], 'POST', array() );
 	}
 
 
@@ -557,13 +557,23 @@ implements MShop_Service_Provider_Payment_Interface
 			}
 		}
 
+		$paymentCosts = '0.00';
+		$paymentItem = $orderBase->getService('payment');
+		if( ( $paymentCosts = $paymentItem->getPrice()->getShipping() ) > '0.00' )
+		{
+			$lastPos++;
+			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = 'Payment costs';
+			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
+			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $paymentCosts;
+		}
+
 		$price = $orderBase->getPrice();
 		$amount = $price->getValue() + $price->getShipping();
 
 		$values['MAXAMT'] = $amount + 0.01; // @todo rounding error?
 		$values['PAYMENTREQUEST_0_AMT'] = number_format( $amount, 2, '.', '' );
-		$values['PAYMENTREQUEST_0_ITEMAMT'] = $price->getValue();
-		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = $price->getShipping();
+		$values['PAYMENTREQUEST_0_ITEMAMT'] = ( string ) ( $price->getValue() + $paymentCosts );
+		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = (string) ( $price->getShipping() - $paymentCosts );
 		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
 		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
@@ -572,12 +582,11 @@ implements MShop_Service_Provider_Payment_Interface
 		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->_config['PaymentAction'];
 		$values['CANCELURL'] = $this->_config['CancelUrl'];
 
-
 		try
 		{
 			$orderServiceDeliveryItem = $orderBase->getService('delivery');
 
-			$values['L_SHIPPINGOPTIONAMOUNT0'] = $price->getShipping();
+			$values['L_SHIPPINGOPTIONAMOUNT0'] = (string) ( $price->getShipping() - $paymentCosts );
 			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getName();
 			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
