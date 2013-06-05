@@ -149,7 +149,7 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 		$this->_object->process();
 
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
-		$this->assertEquals( 'baseurl/checkout/confirm/?arcavias=-1', $view->get( 'paymentUrl' ) );
+		$this->assertEquals( 'baseurl/checkout/confirm/', $view->get( 'paymentUrl' ) );
 		$this->assertEquals( null, $view->get( 'paymentForm' ) );
 	}
 
@@ -188,7 +188,7 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 		$this->_object->process();
 
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
-		$this->assertEquals( 'baseurl/checkout/confirm/?arcavias=' . $item->getId(), $view->get( 'paymentUrl' ) );
+		$this->assertEquals( 'baseurl/checkout/confirm/', $view->get( 'paymentUrl' ) );
 		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $view->get( 'paymentForm' ) );
 	}
 }

@@ -113,20 +113,10 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		$confirmAction = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
 		$confirmConfig = $view->config( 'client/html/checkout/confirm/url/config', array() );
 
-
 		$url = $view->url( $confirmTarget, $confirmController, $confirmAction, array(), array(), $confirmConfig );
-
-		if( strpos( $url, '?' ) === false ) {
-			$url .= '?';
-		} else {
-			$url .= '&';
-		}
-
-		$url .= 'arcavias=' . $view->orderItem->getId();
 
 		$view->paymentForm = $provider->process( $view->orderItem );
 		$view->paymentUrl = $url;
-
 
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
