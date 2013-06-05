@@ -119,22 +119,44 @@ class Client_Html_Catalog_Filter_Tree_Default
 		{
 			$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
 
-			$startid = $view->config( 'client/html/catalog/filter/tree/startid' );
-			$currentid = $view->param( 'f-catalog-id' );
-
-			if( $currentid == '' || !ctype_digit( $currentid ) ) {
-				$currentid = $startid;
-			}
-			$catItems = $manager->getPath( $currentid );
-
 			$ref = array( 'text', 'media', 'attribute' );
-			$level = MW_Tree_Manager_Abstract::LEVEL_TREE;
+			$startid = $view->config( 'client/html/catalog/filter/tree/startid', '' );
+			$currentid = $view->param( 'f-catalog-id', '' );
+			$catItems = array();
 
-			$parentIds = array_keys( $catItems );
-			$parentIds[] = 0; // root node
+			if( $currentid != '' )
+			{
+				$catItems = $manager->getPath( $currentid );
+
+				if( $startid != '' )
+				{
+					foreach( $catItems as $key => $item )
+					{
+						if( $key == $startid ) {
+							break;
+						}
+						unset( $catItems[$key] );
+					}
+				}
+
+				if( ( $node = reset( $catItems ) ) === false ) {
+					throw new Client_Html_Exception( sprintf( 'No category with ID "%1$s" available', $currentid ) );
+				}
+			}
+			else if( $startid != '' )
+			{
+				$node = $manager->getItem( $startid );
+				$catItems = array( $node->getId() => $node );
+			}
+			else
+			{
+				$node = $manager->getTree( null, $ref, MW_Tree_Manager_Abstract::LEVEL_ONE );
+				$catItems = array( $node->getId() => $node );
+			}
 
 			$search = $manager->createSearch();
-			$expr = $search->compare( '==', 'catalog.parentid', $parentIds );
+			$expr = $search->compare( '==', 'catalog.parentid', array_keys( $catItems ) );
+			$expr = $search->combine( '||', array( $expr, $search->compare( '==', 'catalog.id', $node->getId() ) ) );
 
 			if( ( $levels = $view->config( 'client/html/catalog/filter/tree/levels-always' ) ) != null ) {
 				$expr = $search->combine( '||', array( $expr, $search->compare( '<=', 'catalog.level', $levels ) ) );
@@ -146,7 +168,10 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 			$search->setConditions( $expr );
 
-			$view->treeCatalogTree = $manager->getTree( $startid, $ref, $level, $search );
+			$id = ( $startid != '' ? $startid : null );
+			$level = MW_Tree_Manager_Abstract::LEVEL_TREE;
+
+			$view->treeCatalogTree = $manager->getTree( $id, $ref, $level, $search );
 			$view->treeCatalogPath = $catItems;
 
 			$this->_cache = $view;

@@ -140,8 +140,9 @@ class Client_Html_Checkout_Confirm_Default
 		{
 			$context = $this->_getContext();
 			$params = $this->getView()->param();
-			$pstatus = MShop_Order_Item_Abstract::PAY_UNFINISHED;
+			$orderid = $context->getSession()->get( 'arcavias/orderid' );
 
+			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
 
 			$search = $serviceManager->createSearch();
@@ -155,7 +156,7 @@ class Client_Html_Checkout_Confirm_Default
 					$provider = $serviceManager->getProvider( $serviceItem );
 
 					if( ( $orderItem = $provider->updateSync( $params ) ) != null
-						&& ( $pstatus = $orderItem->getPaymentStatus() ) === MShop_Order_Item_Abstract::PAY_UNFINISHED
+						&& $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
 					) {
 						$provider->query( $orderItem );
 					}
@@ -166,12 +167,12 @@ class Client_Html_Checkout_Confirm_Default
 					$context->getLogger()->log( sprintf( $msg, $sorderid, $e->getMessage() ) );
 				}
 			}
-
-
+			
+			
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 
 			// Clear basket
-			if( $pstatus > MShop_Order_Item_Abstract::PAY_REFUSED )
+			if( $orderManager->getItem( $orderid )->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
 			{
 				$orderBaseManager = MShop_Order_Manager_Factory::createManager( $context )->getSubmanager( 'base' );
 				$orderBaseManager->setSession( $orderBaseManager->createItem() );
