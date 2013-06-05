@@ -538,11 +538,11 @@ implements MShop_Service_Provider_Payment_Interface
 		$lastPos = 0;
 		foreach( $orderBase->getProducts() as $product )
 		{
+			$lastPos = $product->getPosition() - 1;
 			$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $lastPos ] = $product->getId();
 			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $product->getName();
 			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = $product->getQuantity();
 			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $product->getPrice()->getValue();
-			$lastPos = $product->getPosition();
 		}
 
 		foreach( $orderBase->getServices() as $service )
@@ -553,8 +553,6 @@ implements MShop_Service_Provider_Payment_Interface
 			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
 			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $service->getPrice()->getValue();
 		}
-
-		$values['HANDLINGAMT'] = $service->getPrice()->getValue();
 
 		$price = $orderBase->getPrice();
 		$amount = $price->getValue() + $price->getShipping();
