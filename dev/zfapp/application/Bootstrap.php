@@ -15,13 +15,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 
 		$route = new Zend_Controller_Router_Route(
-			':site/:controller/:action/:trailing/*',
+			':site/:controller/:action/:a-name/*',
 			array(
 				'module' => 'default',
 				'controller' => 'catalog',
 				'action' => 'list',
 				'site' => 'unittest',
-				'trailing' => '',
+				'a-name' => '',
 			)
 		);
 		$router->addRoute( 'routeDefault', $route );
