@@ -55,7 +55,7 @@ class MW_View_Helper_NavTree_Default
 		$config = $item->getConfig();
 		$class = ( $item->hasChildren() ? ' withchild' : ' nochild' );
 		$class .= ( isset( $config['css-class'] ) ? ' ' . $config['css-class'] : '' );
-		$params = array( 'name' => str_replace( ' ', '-', $item->getName() ), 'f-catalog-id' => $id );
+		$params = array( 'a-name' => str_replace( ' ', '-', $item->getName() ), 'f-catalog-id' => $id );
 		$url = $this->url( $this->_target, $this->_controller, $this->_action, $params );
 
 		$output = '<li class="catid-' . $id . $class . '"><a href="' . $url . '">' . $item->getName() . '</a>';
