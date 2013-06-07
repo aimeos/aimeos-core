@@ -189,7 +189,7 @@ class Client_Html_Catalog_List_Default
 			$params = array();
 			foreach( $view->param() as $key => $value )
 			{
-				if( strncmp( 'f-', $key, 2 ) === 0 || strncmp( 'l-', $key, 2 ) === 0 ) {
+				if( ( $key[0] === 'f' || $key[0] === 'l' || $key[0] === 'd' || $key[0] === 'a' ) && $key[1] === '-' ) {
 					$params[$key] = $value;
 				}
 			}
