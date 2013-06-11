@@ -57,6 +57,10 @@ class Client_Html_Checkout_Standard_Summary_Address_DefaultTest extends MW_Unitt
 
 	public function testGetHeader()
 	{
+		$view = TestHelper::getView();
+		$view->standardBasket = $this->_getBasket();
+		$this->_object->setView( $view );
+
 		$this->_object->getHeader();
 	}
 
@@ -77,11 +81,11 @@ class Client_Html_Checkout_Standard_Summary_Address_DefaultTest extends MW_Unitt
 		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $customer->getBillingAddress() );
 
 		$view = TestHelper::getView();
-		$view->standardBasket = $controller->get();
+		$view->standardBasket = $this->_getBasket();
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="checkout-standard-summary-address">', $output );
+		$this->assertStringStartsWith( '<div class="common-summary-address container">', $output );
 	}
 
 
@@ -103,5 +107,24 @@ class Client_Html_Checkout_Standard_Summary_Address_DefaultTest extends MW_Unitt
 	{
 		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
 		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
+	}
+
+
+	protected function _getBasket()
+	{
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$search = $customerManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
+		$result = $customerManager->searchItems( $search );
+
+		if( ( $customer = reset( $result ) ) === false ) {
+			throw new Exception( 'Customer item not found' );
+		}
+
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, $customer->getBillingAddress() );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $customer->getBillingAddress() );
+
+		return $controller->get();
 	}
 }

@@ -9,13 +9,13 @@
 
 
 /**
- * Default implementation of checkout service summary HTML client.
+ * Default implementation of checkout detail summary HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Summary_Service_Default
-	extends Client_Html_Common_Summary_Service_Default
+class Client_Html_Checkout_Standard_Summary_Detail_Default
+	extends Client_Html_Common_Summary_Detail_Default
 	implements Client_Html_Interface
 {
 	private $_cache;
@@ -33,12 +33,14 @@ class Client_Html_Checkout_Standard_Summary_Service_Default
 
 		if( !isset( $this->_cache ) )
 		{
-			$target = $view->config( 'client/html/checkout/standard/url/target' );
-			$cntl = $view->config( 'client/html/checkout/standard/url/controller', 'checkout' );
-			$action = $view->config( 'client/html/checkout/standard/url/action', 'index' );
+			$basket = $view->standardBasket;
 
-			$view->summaryUrlServicePayment = $view->url( $target, $cntl, $action, array( 'c-step' => 'payment' ) );
-			$view->summaryUrlServiceDelivery = $view->url( $target, $cntl, $action, array( 'c-step' => 'delivery' ) );
+			$target = $view->config( 'client/html/basket/standard/url/target' );
+			$cntl = $view->config( 'client/html/basket/standard/url/controller', 'basket' );
+			$action = $view->config( 'client/html/basket/standard/url/action', 'index' );
+
+			$view->summaryUrlDetailBasket = $view->url( $target, $cntl, $action );
+			$view->summaryTaxRates = $this->_getTaxRates( $basket );
 			$view->summaryBasket = $view->standardBasket;
 
 			$this->_cache = $view;

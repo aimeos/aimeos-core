@@ -10,7 +10,7 @@ $accountController = $this->config( 'client/html/account/history/url/controller'
 $accountAction = $this->config( 'client/html/account/history/url/action', 'history' );
 
 ?>
-<div class="account-history-detail">
+<div class="account-history-detail common-summary">
 	<a class="modify" href="<?php echo $this->url( $accountTarget, $accountController, $accountAction ); ?>"><?php echo $this->translate( 'client/html', 'Close' ); ?></a>
 	<h2><?php echo $this->translate( 'client/html', 'Order details' ); ?></h2>
 <?php echo $this->get( 'detailBody' ); ?>

@@ -12,17 +12,20 @@ $salutations = array(
 );
 
 ?>
-<div class="account-history-detail-address">
+<div class="common-summary-address container">
 	<h2><?php echo $this->translate( 'client/html', 'Addresses' ); ?></h2>
-	<div class="item-address payment">
+	<div class="item payment">
 		<div class="header">
 			<h3><?php echo $this->translate( 'client/html', 'Billing address' ); ?></h3>
+<?php if( isset( $this->summaryUrlAddressBilling ) ) : ?>
+			<a class="modify" href="<?php echo $this->summaryUrlAddressBilling; ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
+<?php endif; ?>
 		</div>
 		<div class="content">
 <?php
 	try
 	{
-		$addr = $this->orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+		$addr = $this->summaryBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
 
 		echo preg_replace( "/\n+/m", "<br/>", trim( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
@@ -65,15 +68,18 @@ $salutations = array(
 	catch( Exception $e ) { ; }
 ?>
 		</div>
-	</div><div class="item-address delivery">
+	</div><div class="item delivery">
 		<div class="header">
 			<h3><?php echo $this->translate( 'client/html', 'Delivery address' ); ?></h3>
+<?php if( isset( $this->summaryUrlAddressDelivery ) ) : ?>
+			<a class="modify" href="<?php echo $this->summaryUrlAddressDelivery; ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
+<?php endif; ?>
 		</div>
 		<div class="content">
 <?php
 	try
 	{
-		$addr = $this->orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		$addr = $this->summaryBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
 
 		echo preg_replace( "/\n+/m", "<br/>", trim( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),

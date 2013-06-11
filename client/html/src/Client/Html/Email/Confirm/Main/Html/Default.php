@@ -18,7 +18,6 @@ class Client_Html_Email_Confirm_Main_Html_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_cache;
 	private $_subPartPath = 'client/html/email/confirm/main/html/default/subparts';
 	private $_subPartNames = array( 'head', 'address', 'service', 'detail', 'footer' );
 

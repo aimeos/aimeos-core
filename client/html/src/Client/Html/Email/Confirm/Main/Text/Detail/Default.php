@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Email_Confirm_Main_Text_Detail_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Common_Summary_Detail_Default
 	implements Client_Html_Interface
 {
 	private $_cache;

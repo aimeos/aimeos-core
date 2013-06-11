@@ -1,25 +1,24 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
  * @subpackage Html
- * @version $Id: Default.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
 
 /**
- * Default implementation of standard basket HTML client.
+ * Default implementation of checkout service summary HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Basket_Standard_Main_Default
+class Client_Html_Common_Summary_Service_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_subPartPath = 'client/html/basket/standard/main/default/subparts';
+	private $_subPartPath = 'client/html/common/summary/service/default/subparts';
 	private $_subPartNames = array();
 
 
@@ -30,16 +29,16 @@ class Client_Html_Basket_Standard_Main_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->mainBody = $html;
+		$view->serviceBody = $html;
 
-		$tplconf = 'client/html/basket/standard/main/default/template-body';
-		$default = 'basket/standard/main-body-default.html';
+		$tplconf = 'client/html/common/summary/service/default/template-body';
+		$default = 'common/summary/service-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -52,16 +51,16 @@ class Client_Html_Basket_Standard_Main_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->mainHeader = $html;
+		$view->serviceHeader = $html;
 
-		$tplconf = 'client/html/basket/standard/main/default/template-header';
-		$default = 'basket/standard/main-header-default.html';
+		$tplconf = 'client/html/common/summary/service/default/template-header';
+		$default = 'common/summary/service-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -76,7 +75,7 @@ class Client_Html_Basket_Standard_Main_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'basket/standard/main/' . $type, $name );
+		return $this->_createSubClient( 'common/summary/service/' . $type, $name );
 	}
 
 
@@ -88,7 +87,7 @@ class Client_Html_Basket_Standard_Main_Default
 	 */
 	public function isCachable( $what )
 	{
-		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
+		return false;
 	}
 
 
@@ -100,5 +99,17 @@ class Client_Html_Basket_Standard_Main_Default
 	public function process()
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		return $view;
 	}
 }

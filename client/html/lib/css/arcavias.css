@@ -60,6 +60,192 @@
 	list-style: none;
 }
 
+/* Common summary CSS also used in e-mail ===>>> */
+
+.arcavias .container {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: solid 1px #689DB9;
+	padding: 10px;
+	padding-top: 0;
+	margin: 10px 0px;
+}
+
+
+/* Common summary */
+.common-summary .item {
+	display: inline-block;
+	vertical-align: top;
+	max-width: 458px;
+	min-width: 238px;
+	width: 50%;
+}
+
+.common-summary .item h4 {
+	padding: 5px 10px;
+}
+
+.common-summary .item li {
+	vertical-align: top;
+	padding-top: 5px;
+}
+
+.common-summary .item .content {
+	margin: 10px 10px 0px 10px;
+}
+
+.common-summary .item .name {
+	display: inline-block;
+	vertical-align: top;
+	color: #004266;
+	width: 198px;
+}
+
+.common-summary .item .name:after {
+	content: ":";
+}
+
+.common-summary .item .value {
+	display: inline-block;
+	vertical-align: top;
+	width: 198px;
+}
+
+.common-summary .item .item-icons {
+	float: right;
+	margin: 0 20px 10px 20px;
+}
+
+.common-summary .item .attr-list {
+	list-style: none;
+	margin: 0 10px;
+	padding: 10px;
+	padding-top: 0;
+}
+
+.common-summary .header {
+	border-bottom: 1px solid #689DB9;
+	background-color: #F2F7FA;
+	padding: 5px 10px;
+	margin: 5px;
+	margin-top: 0;
+}
+
+.common-summary-address h2,
+.common-summary-service h2 {
+	display: none;
+}
+
+.common-summary-service h4 {
+	padding: 10px;
+	margin: 0px;
+}
+
+.common-summary-detail h2 {
+	margin: 5px 10px;
+	font-size: 1em;
+}
+
+.common-summary-detail .basket {
+	margin: 0px;
+}
+
+.common-summary-detail table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.common-summary-detail tbody tr {
+	border-bottom: 1px solid #689DB9;
+}
+
+.common-summary-detail thead {
+	font-weight: bold;
+	background-color: #F2F7FA;
+}
+
+.common-summary-detail thead tr {
+	border-bottom: 1px solid #689DB9;
+	color: #004266;
+}
+
+.common-summary-detail tr.total {
+	border-top: 1px solid #689DB9;
+	color: #004266;
+	background-color: #F2F7FA
+}
+.common-summary-detail th,
+.common-summary-detail td {
+	padding: 5px;
+	vertical-align: middle;
+}
+
+.common-summary-detail .details img {
+	display: none;
+	float: left;
+	max-width: 60px;
+	max-height: 80px;
+	overflow: hidden;
+}
+
+.common-summary-detail th.quantity,
+.common-summary-detail th.action {
+	width: 10%;
+}
+
+.common-summary-detail th.price {
+	width: 20%;
+}
+
+.common-summary-detail tr.subtotal,
+.common-summary-detail tr.delivery,
+.common-summary-detail tr.payment,
+.common-summary-detail tr.total,
+.common-summary-detail tr.rebate,
+.common-summary-detail tr.tax,
+.common-summary-detail th.unitprice,
+.common-summary-detail th.price,
+.common-summary-detail td.unitprice,
+.common-summary-detail td.price {
+	text-align: right;
+	white-space: nowrap;
+}
+
+.common-summary-detail tr.delivery td:first-child:after,
+.common-summary-detail tr.payment td:first-child:after {
+	content: " +";
+}
+
+.common-summary-detail td.quantity {
+	text-align: center;
+	white-space: nowrap;
+}
+
+.common-summary-detail td.quantity input {
+	text-align: center;
+	display: inline;
+	width: 3em;
+}
+
+.common-summary-detail tfoot {
+	vertical-align: bottom;
+	font-weight: bold;
+}
+
+.common-summary-detail tfoot .delivery {
+	font-weight: normal;
+}
+
+.common-summary-detail tr.rebate,
+.common-summary-detail tr.tax {
+	font-weight: normal;
+}
+
+/* <<<=== Common summary CSS also used in e-mail*/
+
+
+
 /* Catalog filter */
 .catalog-filter button {
 	display: none !important;
@@ -582,9 +768,6 @@
 }
 
 .checkout-confirm-basic,
-.checkout-standard-summary-service,
-.checkout-standard-summary-option,
-.checkout-standard-summary-basket,
 .account-history-detail-service,
 .account-history-detail-basket {
 	padding: 0px 10px 10px 10px;
@@ -632,157 +815,9 @@
 	margin: 0px 0px 0px 0px;
 }
 
-.checkout-standard-summary-basket .basket,
-.basket-standard-main .basket,
-.account-history-detail-basket .basket {
-	margin-top: 0;
-}
-
-.checkout-standard-summary-basket table,
-.basket-standard-main table,
-.account-history-detail-basket table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.checkout-standard-summary-basket tbody tr,
-.basket-standard-main tbody tr,
-.account-history-detail-basket tbody tr {
-	border-bottom: 1px solid #689DB9;
-}
-
-.checkout-standard-summary-basket thead,
-.basket-standard-main thead,
-.account-history-detail-basket thead {
-	font-weight: bold;
-	background-color: #F2F7FA;
-}
-
-.checkout-standard-summary-basket thead tr,
-.basket-standard-main thead tr,
-.account-history-detail-basket thead tr {
-	border-bottom: 1px solid #689DB9;
-	color: #004266;
-}
-
-.checkout-standard-summary-basket tr.total,
-.basket-standard-main tr.total,
-.account-history-detail-basket tr.total {
-	border-top: 1px solid #689DB9;
-	color: #004266;
-	background-color: #F2F7FA
-}
-.checkout-standard-summary-basket th,
-.checkout-standard-summary-basket td,
-.basket-standard-main th,
-.basket-standard-main td,
-.account-history-detail-basket th,
-.account-history-detail-basket td {
-	padding: 5px;
-	vertical-align: middle;
-}
-
-.checkout-standard-summary-basket .details img,
-.basket-standard-main .details img,
-.account-history-detail-basket .details img {
-	display: none;
-	float: left;
-	max-width: 60px;
-	max-height: 80px;
-	overflow: hidden;
-}
-
-.checkout-standard-summary-basket th.quantity,
-.checkout-standard-summary-basket th.action,
-.basket-standard-main th.quantity,
-.basket-standard-main th.action,
-.account-history-detail-basket th.quantity,
-.account-history-detail-basket th.action {
-	width: 10%;
-}
-
-.checkout-standard-summary-basket th.price,
-.basket-standard-main th.price,
-.account-history-detail-basket th.price {
-	width: 20%;
-}
-
-.checkout-standard-summary-basket tr.subtotal,
-.checkout-standard-summary-basket tr.delivery,
-.checkout-standard-summary-basket tr.payment,
-.checkout-standard-summary-basket tr.total,
-.checkout-standard-summary-basket tr.rebate,
-.checkout-standard-summary-basket tr.tax,
-.checkout-standard-summary-basket td.unitprice,
-.checkout-standard-summary-basket td.price,
-.basket-standard-main tr.subtotal,
-.basket-standard-main tr.delivery,
-.basket-standard-main tr.payment,
-.basket-standard-main tr.total,
-.basket-standard-main tr.rebate,
-.basket-standard-main tr.tax,
-.basket-standard-main td.unitprice,
-.basket-standard-main td.price,
-.account-history-detail-basket tr.subtotal,
-.account-history-detail-basket tr.delivery,
-.account-history-detail-basket tr.payment,
-.account-history-detail-basket tr.total,
-.account-history-detail-basket tr.rebate,
-.account-history-detail-basket tr.tax,
-.account-history-detail-basket td.unitprice,
-.account-history-detail-basket td.price {
-	text-align: right;
-	white-space: nowrap;
-}
-
-.checkout-standard-summary-basket tr.delivery td:first-child:after,
-.checkout-standard-summary-basket tr.payment td:first-child:after,
-.basket-standard-main tr.delivery td:first-child:after,
-.basket-standard-main tr.payment td:first-child:after,
-.account-history-detail-basket tr.delivery td:first-child:after,
-.account-history-detail-basket tr.payment td:first-child:after {
-	content: " +";
-}
-
-.checkout-standard-summary-basket td.quantity,
-.basket-standard-main td.quantity,
-.basket-standard-main td.action,
-.account-history-detail-basket td.quantity {
-	text-align: center;
-	white-space: nowrap;
-}
-
 .basket-standard-main td.quantity a,
 .basket-standard-main td.action a {
 	text-decoration: none;
-}
-
-.basket-standard-main td.quantity input {
-	text-align: center;
-	display: inline;
-	width: 3em;
-}
-
-.checkout-standard-summary-basket tfoot,
-.basket-standard-main tfoot,
-.account-history-detail-basket tfoot {
-	vertical-align: bottom;
-	font-weight: bold;
-}
-
-.checkout-standard-summary-basket tfoot .delivery,
-.basket-standard-main tfoot .delivery,
-.account-history-detail-basket tfoot .delivery {
-	font-weight: normal;
-}
-
-.checkout-standard-summary-basket tr.rebate,
-.checkout-standard-summary-basket tr.tax,
-.basket-standard-main tr.rebate,
-.basket-standard-main tr.tax,
-.account-history-detail-basket tr.rebate,
-.account-history-detail-basket tr.tax {
-	font-weight: normal;
 }
 
 /* Checkout */
@@ -1073,142 +1108,9 @@
 	margin: 0px 10px 0px 0px;
 }
 
-.checkout-standard-summary .item-address,
-.checkout-standard-summary .item-service,
-.account-history-detail .item-address,
-.account-history-detail .item-service {
-	display: inline-block;
-	vertical-align: top;
-	max-width: 458px;
-	min-width: 238px;
-	width: 50%;
-}
-
-.checkout-standard-summary .item-service h4,
-.account-history-detail .item-service h4 {
-	margin: 0 10px;
-	margin-bottom: 10px;
-	padding: 0 10px;
-}
-
-.checkout-standard-summary .item-service li,
-.account-history-detail .item-service h4 {
-	vertical-align: top;
-	padding-top: 5px;
-}
-
-.checkout-standard-summary .item-address .content,
-.account-history-detail .item-address .content {
-	margin: 10px 10px 0px 10px;
-}
-
-.checkout-standard-summary .item-service .name,
-.account-history-detail .item-service .name {
-	display: inline-block;
-	vertical-align: top;
-	color: #004266;
-	width: 198px;
-}
-
-.checkout-standard-summary .item-service .name:after,
-.account-history-detail .item-service .name:after {
-	content: ":";
-}
-
-.checkout-standard-summary .item-service .value,
-.account-history-detail .item-service .value {
-	display: inline-block;
-	vertical-align: top;
-	width: 198px;
-}
-
-.checkout-standard-summary .item-service .item-icons,
-.account-history-detail .item-service .item-icons {
-	float: right;
-	margin: 0 20px 10px 20px;
-}
-
-.checkout-standard-summary .item-service .attr-list,
-.account-history-detail .item-service .attr-list {
-	list-style: none;
-	margin: 0 10px;
-	padding: 10px;
-	padding-top: 0;
-}
-
 .checkout-standard-summary .modify {
 	float: right;
-	margin: 5px 0;
-}
-
-/* Checkout summary address */
-.checkout-standard-summary-address,
-.account-history-detail-address {
-	padding: 0px 10px 10px 10px;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border: solid 1px #689DB9;
-	margin: 0px 0px 8px 0px;
-}
-
-.checkout-standard-summary-address h2,
-.account-history-detail-address h2 {
-	display: none;
-}
-
-.checkout-standard-summary-address .payment .header,
-.account-history-detail-address .payment .header {
-	background-color: #F2F7FA;
-	border-bottom: 1px solid #689DB9;
-	margin: 0px 10px 0px 0px;
-	padding: 5px 10px 5px 10px;
-}
-
-.checkout-standard-summary-address .delivery .header,
-.account-history-detail-address .delivery .header {
-	background-color: #F2F7FA;
-	border-bottom: 1px solid #689DB9;
-	padding: 5px 10px 5px 10px;
-}
-
-
-/* Checkout summary service payment */
-.checkout-standard-summary-service .item-service .header,
-.account-history-detail-service .item-service .header {
-	padding: 0px 10px 0px 0px;
-	border-bottom: 1px solid #689DB9;
-}
-.checkout-standard-summary-service h2,
-.account-history-detail-service h2 {
-	display: none;
-}
-
-.checkout-standard-summary-service .payment h4,
-.account-history-detail-service .payment h4 {
-	padding: 10px;
-	margin: 0px;
-}
-
-.checkout-standard-summary-service .delivery h4,
-.account-history-detail-service .delivery h4 {
-	padding: 10px;
-	margin: 0px;
-}
-
-.checkout-standard-summary-service .payment .header,
-.account-history-detail-service .payment .header {
-	background-color: #F2F7FA;
-	border-bottom: 1px solid #689DB9;
-	margin: 0px 10px 0px 0px;
-	padding: 5px 10px 5px 10px;
-}
-
-.checkout-standard-summary-service .delivery .header,
-.account-history-detail-service .delivery .header {
-	background-color: #F2F7FA;
-	border-bottom: 1px solid #689DB9;
-	padding: 5px 10px 5px 10px;
+	margin: 5px 0px;
 }
 
 /* Checkout summary option terms */
@@ -1243,23 +1145,6 @@
 .checkout-standard-summary-option .error {
 	background-color: #ffeeee;
 	border-bottom: 1px solid #FF3300;
-}
-
-/* Checkout summary basket */
-.checkout-standard-summary-basket h2,
-.account-history-detail-basket h2 {
-	margin: 5px 10px;
-	font-size: 1em;
-}
-
-.checkout-standard-summary-basket .basket,
-.account-history-detail-basket .basket {
-	margin: 0px;
-}
-
-.checkout-standard-summary-basket .modify {
-	display: block;
-	margin: 5px 10px;
 }
 
 /* Checkout order */

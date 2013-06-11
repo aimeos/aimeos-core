@@ -85,7 +85,7 @@ class Client_Html_Checkout_Standard_Summary_DefaultTest extends MW_Unittest_Test
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="checkout-standard-summary">', $output );
+		$this->assertStringStartsWith( '<section class="checkout-standard-summary common-summary">', $output );
 	}
 
 
