@@ -20,7 +20,7 @@ class Client_Html_Basket_Standard_Default
 	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/basket/standard/default/subparts';
-	private $_subPartNames = array( 'main' );
+	private $_subPartNames = array( 'detail' );
 	private $_controller;
 
 
@@ -266,10 +266,7 @@ class Client_Html_Basket_Standard_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$basket = $this->_controller->get();
-
-			$view->standardBasket = $basket;
-			$view->commonTaxRates = $this->_getTaxRates( $basket );
+			$view->standardBasket = $this->_controller->get();
 
 			$this->_cache = $view;
 		}

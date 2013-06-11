@@ -16,6 +16,193 @@ else
 	$encode = 'base64_encode';
 }
 
+// Common summary CSS from arcavias.css
+// Don't modify directly, only copy from arcavias.css to keep in sync
+
+$css = '
+	<style type="text/css">
+.arcavias .container {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: solid 1px #689DB9;
+	padding: 10px;
+	padding-top: 0;
+	margin: 10px 0px;
+}
+
+/* Common summary */
+
+.common-summary .item {
+	display: inline-block;
+	vertical-align: top;
+	max-width: 458px;
+	min-width: 238px;
+	width: 50%;
+}
+
+.common-summary .item h4 {
+	padding: 5px 10px;
+}
+
+.common-summary .item li {
+	vertical-align: top;
+	padding-top: 5px;
+}
+
+.common-summary .item .content {
+	margin: 10px 10px 0px 10px;
+}
+
+.common-summary .item .name {
+	display: inline-block;
+	vertical-align: top;
+	color: #004266;
+	width: 198px;
+}
+
+.common-summary .item .name:after {
+	content: ":";
+}
+
+.common-summary .item .value {
+	display: inline-block;
+	vertical-align: top;
+	width: 198px;
+}
+
+.common-summary .item .item-icons {
+	float: right;
+	margin: 0 20px 10px 20px;
+}
+
+.common-summary .item .attr-list {
+	list-style: none;
+	margin: 0 10px;
+	padding: 10px;
+	padding-top: 0;
+}
+
+.common-summary .header {
+	border-bottom: 1px solid #689DB9;
+	background-color: #F2F7FA;
+	padding: 5px 10px;
+	margin: 5px;
+	margin-top: 0;
+}
+
+.common-summary-address h2,
+.common-summary-service h2 {
+	display: none;
+}
+
+.common-summary-service h4 {
+	padding: 10px;
+	margin: 0px;
+}
+
+.common-summary-detail h2 {
+	margin: 5px 10px;
+	font-size: 1em;
+}
+
+.common-summary-detail .basket {
+	margin: 0px;
+}
+
+.common-summary-detail table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.common-summary-detail tbody tr {
+	border-bottom: 1px solid #689DB9;
+}
+
+.common-summary-detail thead {
+	font-weight: bold;
+	background-color: #F2F7FA;
+}
+
+.common-summary-detail thead tr {
+	border-bottom: 1px solid #689DB9;
+	color: #004266;
+}
+
+.common-summary-detail tr.total {
+	border-top: 1px solid #689DB9;
+	color: #004266;
+	background-color: #F2F7FA
+}
+.common-summary-detail th,
+.common-summary-detail td {
+	padding: 5px;
+	vertical-align: middle;
+}
+
+.common-summary-detail .details img {
+	display: none;
+	float: left;
+	max-width: 60px;
+	max-height: 80px;
+	overflow: hidden;
+}
+
+.common-summary-detail th.quantity,
+.common-summary-detail th.action {
+	width: 10%;
+}
+
+.common-summary-detail th.price {
+	width: 20%;
+}
+
+.common-summary-detail tr.subtotal,
+.common-summary-detail tr.delivery,
+.common-summary-detail tr.payment,
+.common-summary-detail tr.total,
+.common-summary-detail tr.rebate,
+.common-summary-detail tr.tax,
+.common-summary-detail th.unitprice,
+.common-summary-detail th.price,
+.common-summary-detail td.unitprice,
+.common-summary-detail td.price {
+	text-align: right;
+	white-space: nowrap;
+}
+
+.common-summary-detail tr.delivery td:first-child:after,
+.common-summary-detail tr.payment td:first-child:after {
+	content: " +";
+}
+
+.common-summary-detail td.quantity {
+	text-align: center;
+	white-space: nowrap;
+}
+
+.common-summary-detail td.quantity input {
+	text-align: center;
+	display: inline;
+	width: 3em;
+}
+
+.common-summary-detail tfoot {
+	vertical-align: bottom;
+	font-weight: bold;
+}
+
+.common-summary-detail tfoot .delivery {
+	font-weight: normal;
+}
+
+.common-summary-detail tr.rebate,
+.common-summary-detail tr.tax {
+	font-weight: normal;
+}
+	</style>
+';
+
 ?>
 <?php if( $this->config( 'client/html/email/confirm/main/html/encoded', true ) == true ) : ?>
 <?php	echo "\r\n"; ?>
@@ -23,17 +210,16 @@ else
 Content-Type: text/html; charset=UTF-8<?php echo "\r\n"; ?>
 Content-Transfer-Encoding: <?php echo $encoding . "\r\n"; ?>
 <?php	echo "\r\n"; ?>
-<?php	echo $encode( '<html><body>' ) . "\r\n"; ?>
+<?php	echo $encode( '<html><body>' . $css . '<div class="common-summary">' ) . "\r\n"; ?>
 <?php	echo wordwrap( $encode( $this->get( 'htmlBody' ) ), 76, "\r\n" ) . "\r\n"; ?>
-<?php	echo $encode( '</body></html>' ) . "\r\n"; ?>
+<?php	echo $encode( '</div></body></html>' ) . "\r\n"; ?>
 <?php else : ?>
 <?php	echo '<html>
-	<head>
-		<style type="text/css">
-		</style>
-	</head>
 	<body>
+' . $css . '
+		<div class="common-summary">
 ' . $this->get( 'htmlBody' ) . '
+		</div>
 	</body>
 </html>'; ?>
 <?php endif; ?>

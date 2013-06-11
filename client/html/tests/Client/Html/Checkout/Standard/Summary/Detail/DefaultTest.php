@@ -5,7 +5,7 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-class Client_Html_Checkout_Standard_Summary_Option_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Checkout_Standard_Summary_Detail_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 	private $_context;
@@ -21,7 +21,7 @@ class Client_Html_Checkout_Standard_Summary_Option_DefaultTest extends MW_Unitte
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Checkout_Standard_Summary_Option_DefaultTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Checkout_Standard_Summary_Detail_DefaultTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -37,7 +37,7 @@ class Client_Html_Checkout_Standard_Summary_Option_DefaultTest extends MW_Unitte
 		$this->_context = TestHelper::getContext();
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Checkout_Standard_Summary_Option_Default( $this->_context, $paths );
+		$this->_object = new Client_Html_Checkout_Standard_Summary_Detail_Default( $this->_context, $paths );
 		$this->_object->setView( TestHelper::getView() );
 	}
 
@@ -57,6 +57,12 @@ class Client_Html_Checkout_Standard_Summary_Option_DefaultTest extends MW_Unitte
 
 	public function testGetHeader()
 	{
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+
+		$view = TestHelper::getView();
+		$view->standardBasket = $controller->get();
+		$this->_object->setView( $view );
+
 		$this->_object->getHeader();
 	}
 
@@ -64,13 +70,15 @@ class Client_Html_Checkout_Standard_Summary_Option_DefaultTest extends MW_Unitte
 	public function testGetBody()
 	{
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$controller->addProduct( $this->_getProductItem( 'CNE' )->getId() );
 
 		$view = TestHelper::getView();
 		$view->standardBasket = $controller->get();
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="checkout-standard-summary-option container">', $output );
+		$this->assertStringStartsWith( '<div class="common-summary-detail container">', $output );
+		$this->assertRegExp( '#<tfoot>.*<tr class="tax">.*<td class="price">3.03 .+</td>.*.*</tfoot>#smU', $output );
 	}
 
 
@@ -92,5 +100,20 @@ class Client_Html_Checkout_Standard_Summary_Option_DefaultTest extends MW_Unitte
 	{
 		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
 		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
+	}
+
+
+	protected function _getProductItem( $code )
+	{
+		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
+		$items = $manager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( sprintf( 'No product item with code "%1$s" found', $code ) );
+		}
+
+		return $item;
 	}
 }

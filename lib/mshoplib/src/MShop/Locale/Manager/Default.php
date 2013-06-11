@@ -361,6 +361,7 @@ class MShop_Locale_Manager_Default
 		}
 
 
+		// Try to find the best matching locale
 		$search = $this->createSearch( $active );
 
 		$expr = array (

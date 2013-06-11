@@ -358,7 +358,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetSubClient()
 	{
-		$client = $this->_object->getSubClient( 'main', 'Default' );
+		$client = $this->_object->getSubClient( 'detail', 'Default' );
 		$this->assertInstanceOf( 'Client_HTML_Interface', $client );
 	}
 

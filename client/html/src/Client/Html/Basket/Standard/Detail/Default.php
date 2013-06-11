@@ -1,21 +1,22 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
  * @subpackage Html
+ * @version $Id: Default.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
 
 /**
- * Default implementation of email html address HTML client.
+ * Default implementation of standard basket HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Email_Confirm_Main_Html_Address_Default
-	extends Client_Html_Common_Summary_Address_Default
+class Client_Html_Basket_Standard_Detail_Default
+	extends Client_Html_Common_Summary_Detail_Default
 	implements Client_Html_Interface
 {
 	private $_cache;
@@ -29,9 +30,15 @@ class Client_Html_Email_Confirm_Main_Html_Address_Default
 	 */
 	protected function _setViewParams( MW_View_Interface $view )
 	{
+		$view = parent::_setViewParams( $view );
+
 		if( !isset( $this->_cache ) )
 		{
-			$view->summaryBasket = $view->confirmOrderBaseItem;
+			$basket = $view->standardBasket;
+
+			$view->summaryEnableModify = true;
+			$view->summaryTaxRates = $this->_getTaxRates( $basket );
+			$view->summaryBasket = $basket;
 
 			$this->_cache = $view;
 		}
