@@ -31,24 +31,30 @@ else
 
 try
 {
-	$deliveryPriceItem = $this->summaryBasket->getService( 'delivery' )->getPrice();
+	$deliveryItem = $this->summaryBasket->getService( 'delivery' );
+	$deliveryName = $deliveryItem->getName();
+	$deliveryPriceItem = $deliveryItem->getPrice();
 	$deliveryPriceService = $deliveryPriceItem->getShipping();
 	$deliveryPriceValue = $deliveryPriceItem->getValue();
 }
 catch( Exception $e )
 {
+	$deliveryName = '';
 	$deliveryPriceValue = '0.00';
 	$deliveryPriceService = '0.00';
 }
 
 try
 {
-	$paymentPriceItem = $this->summaryBasket->getService( 'payment' )->getPrice();
+	$paymentItem = $this->summaryBasket->getService( 'payment' );
+	$paymentName = $paymentItem->getName();
+	$paymentPriceItem = $paymentItem->getPrice();
 	$paymentPriceService = $paymentPriceItem->getShipping();
 	$paymentPriceValue = $paymentPriceItem->getValue();
 }
 catch( Exception $e )
 {
+	$paymentName = '';
 	$paymentPriceValue = '0.00';
 	$paymentPriceService = '0.00';
 }
@@ -119,12 +125,20 @@ $modify = $this->get( 'summaryEnableModify', false );
 					<td class="price"><?php printf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ); ?></td>
 				</tr>
 <?php 	endforeach; ?>
-<?php	if( ( $serviceValue = $deliveryPriceValue + $paymentPriceValue ) > 0 ) : ?>
+<?php	if( $deliveryPriceValue > 0 ) : ?>
 				<tr>
-					<td class="details"><?php echo $this->translate( 'client/html', 'Service fees' ); ?></td>
+					<td class="details"><?php echo $deliveryName; ?></td>
 					<td class="quantity">1</td>
-					<td class="unitprice"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
-					<td class="price"><?php printf( $priceFormat, $this->number( $serviceValue ), $priceCurrency ); ?></td>
+					<td class="unitprice"><?php printf( $priceFormat, $this->number( $deliveryPriceValue ), $priceCurrency ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $deliveryPriceValue ), $priceCurrency ); ?></td>
+				</tr>
+<?php	endif; ?>
+<?php	if( $paymentPriceValue > 0 ) : ?>
+				<tr>
+					<td class="details"><?php echo $paymentName; ?></td>
+					<td class="quantity">1</td>
+					<td class="unitprice"><?php printf( $priceFormat, $this->number( $paymentPriceValue ), $priceCurrency ); ?></td>
+					<td class="price"><?php printf( $priceFormat, $this->number( $paymentPriceValue ), $priceCurrency ); ?></td>
 				</tr>
 <?php	endif; ?>
 <?php endif; ?>

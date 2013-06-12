@@ -233,10 +233,8 @@
 	font-weight: bold;
 }
 
-.common-summary-detail tfoot .delivery {
-	font-weight: normal;
-}
-
+.common-summary-detail tfoot .delivery,
+.common-summary-detail tfoot .payment,
 .common-summary-detail tr.rebate,
 .common-summary-detail tr.tax {
 	font-weight: normal;
