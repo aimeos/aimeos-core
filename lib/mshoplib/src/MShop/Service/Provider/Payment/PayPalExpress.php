@@ -519,7 +519,6 @@ implements MShop_Service_Provider_Payment_Interface
 	{
 		$values = $this->_getAuthParameter();
 
-
 		try
 		{
 			$orderAddressDelivery = $orderBase->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
@@ -562,7 +561,7 @@ implements MShop_Service_Provider_Payment_Interface
 		if( ( $paymentCosts = $paymentItem->getPrice()->getShipping() ) > '0.00' )
 		{
 			$lastPos++;
-			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = 'Payment costs';
+			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $this->_getContext()->getI18n()->dt( 'service', 'Payment costs' );
 			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
 			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $paymentCosts;
 		}
