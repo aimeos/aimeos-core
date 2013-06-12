@@ -19,7 +19,6 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Common_Manager_Decorator_Interface
 {
-	private $_context;
 	private $_manager;
 
 
@@ -32,8 +31,6 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Common_Manager_Interface $manager )
 	{
 		parent::__construct( $context );
-
-		$this->_context = $context;
 		$this->_manager = $manager;
 	}
 
@@ -161,16 +158,6 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 		return $this->_manager->searchItems( $search, $ref, $total );
 	}
 
-
-	/**
-	 * Returns the context object.
-	 *
-	 * @return MShop_Context_Item_Interface Context object
-	 */
-	protected function _getContext()
-	{
-		return $this->_context;
-	}
 
 
 	/**
