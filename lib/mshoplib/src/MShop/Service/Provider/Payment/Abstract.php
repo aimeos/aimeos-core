@@ -74,21 +74,6 @@ implements MShop_Service_Provider_Payment_Interface
 
 
 	/**
-	 * Send http request to the given url.
-	 *
-	 * @param string $url URL of the Ogone server
-	 * @param string $param Parameter string
-	 * @param string $method Initial method (e.g. post or get)
-	 * @return string response body of a http request
-	 * @throws MShop_Service_Exception If the request couldn't be sent
-	 */
-	protected function _sendRequest( $url, $param, $method = 'POST' )
-	{
-		return $this->_getCommunication()->transmit( $url, $method, $param );
-	}
-
-
-	/**
 	 * Sets or adds a attribute value to the list of service payment items.
 	 *
 	 * @param array &$attributes Associative array of existing service attributes code/item pairs
