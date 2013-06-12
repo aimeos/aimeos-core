@@ -66,8 +66,8 @@ $modify = $this->get( 'summaryEnableModify', false );
 
 ?>
 <div class="common-summary-detail container">
-<?php if( isset( $this->summaryUrlDetailBasket ) ) : ?>
-	<a class="modify" href="<?php echo $this->summaryUrlDetailBasket; ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
+<?php if( isset( $this->summaryUrlBasket ) ) : ?>
+	<a class="modify" href="<?php echo $this->summaryUrlBasket; ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
 <?php endif; ?>
 	<h2><?php echo $this->translate( 'client/html', 'Details' ); ?></h2>
 	<div class="basket">
@@ -127,7 +127,15 @@ $modify = $this->get( 'summaryEnableModify', false );
 <?php 	endforeach; ?>
 <?php	if( $deliveryPriceValue > 0 ) : ?>
 				<tr>
-					<td class="details"><?php echo $deliveryName; ?></td>
+					<td class="details">
+<?php		if( isset( $this->summaryUrlServiceDelivery ) ) : ?>
+						<a href="<?php echo $this->summaryUrlServiceDelivery; ?>">
+							<?php echo $deliveryName; ?>
+						</a>
+<?php		else : ?>
+						<?php echo $deliveryName; ?>
+<?php		endif; ?>
+					</td>
 					<td class="quantity">1</td>
 					<td class="unitprice"><?php printf( $priceFormat, $this->number( $deliveryPriceValue ), $priceCurrency ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $deliveryPriceValue ), $priceCurrency ); ?></td>
@@ -135,7 +143,15 @@ $modify = $this->get( 'summaryEnableModify', false );
 <?php	endif; ?>
 <?php	if( $paymentPriceValue > 0 ) : ?>
 				<tr>
-					<td class="details"><?php echo $paymentName; ?></td>
+					<td class="details">
+<?php		if( isset( $this->summaryUrlServicePayment ) ) : ?>
+						<a href="<?php echo $this->summaryUrlServicePayment; ?>">
+							<?php echo $paymentName; ?>
+						</a>
+<?php		else : ?>
+						<?php echo $paymentName; ?>
+<?php		endif; ?>
+					</td>
 					<td class="quantity">1</td>
 					<td class="unitprice"><?php printf( $priceFormat, $this->number( $paymentPriceValue ), $priceCurrency ); ?></td>
 					<td class="price"><?php printf( $priceFormat, $this->number( $paymentPriceValue ), $priceCurrency ); ?></td>
