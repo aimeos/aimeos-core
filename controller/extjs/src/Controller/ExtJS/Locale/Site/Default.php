@@ -258,6 +258,7 @@ class Controller_ExtJS_Locale_Site_Default
 			),
 			'Locale_Site.getTree' => array(
 				"parameters" => array(
+					array( "type" => "string","name" => "site","optional" => false ),
 					array( "type" => "array","name" => "items","optional" => false ),
 				),
 				"returns" => "array",

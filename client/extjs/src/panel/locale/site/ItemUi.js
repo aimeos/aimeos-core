@@ -103,7 +103,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	{
 		this.setTitle( this.title + ' (' + MShop.config.site["locale.site.label"] + ')' );
 
-		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
+		MShop.panel.locale.site.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
 	
 	onBeforeSave: function( store, data ) {
@@ -127,7 +127,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 		} else if( data.update && data.update[0] ) {
 			data.update[0].data['locale.site.config'] = config;
 		}
-	}
+	},
 } );
 
 Ext.reg( 'MShop.panel.locale.site.itemui', MShop.panel.locale.site.ItemUi );
