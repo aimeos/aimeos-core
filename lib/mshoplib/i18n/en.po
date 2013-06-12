@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core Git de2b73333bfb2289a6f5206bb8383d0f87701e4a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-12 13:04+0200\n"
+"POT-Creation-Date: 2013-06-12 15:58+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language: en\n"
@@ -463,7 +463,7 @@ msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Locale/Manager/Default.php:415
+#: src/MShop/Locale/Manager/Default.php:416
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
 msgstr ""
@@ -498,14 +498,14 @@ msgstr ""
 
 # error domain: manager
 # error type: value, parameter, object etc. not available
-#: src/MShop/Locale/Manager/Site/Default.php:467
+#: src/MShop/Locale/Manager/Site/Default.php:469
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
 msgstr ""
 
 # error domain: service
 # error type: value, parameter, object etc. not available
-#: src/MShop/Common/Manager/Decorator/Abstract.php:52
+#: src/MShop/Common/Manager/Decorator/Abstract.php:49
 #: src/MShop/Service/Provider/Payment/Abstract.php:50
 #: src/MShop/Service/Provider/Payment/Abstract.php:61
 #: src/MShop/Service/Provider/Payment/Abstract.php:72
@@ -649,6 +649,10 @@ msgstr ""
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:121
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:564
+msgid "Payment costs"
 msgstr ""
 
 # error domain: service
@@ -849,7 +853,7 @@ msgstr ""
 # error domain: search
 # error type: empty search result
 #: src/MShop/Common/Manager/Abstract.php:863
-#: src/MShop/Locale/Manager/Default.php:508
+#: src/MShop/Locale/Manager/Default.php:509
 #, php-format
 msgid "Total results value not found"
 msgstr ""

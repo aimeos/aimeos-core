@@ -549,7 +549,6 @@ implements MShop_Service_Provider_Payment_Interface
 			if( ( $val = $service->getPrice()->getValue() ) > '0.00' )
 			{
 				$lastPos++;
-				$values[ 'L_PAYMENTREQUEST_0_NUMBER' . $lastPos ] = $service->getId();
 				$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $service->getName();
 				$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
 				$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $val;
@@ -561,7 +560,7 @@ implements MShop_Service_Provider_Payment_Interface
 		if( ( $paymentCosts = $paymentItem->getPrice()->getShipping() ) > '0.00' )
 		{
 			$lastPos++;
-			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $this->_getContext()->getI18n()->dt( 'service', 'Payment costs' );
+			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $this->_getContext()->getI18n()->dt( 'mshop', 'Payment costs' );
 			$values[ 'L_PAYMENTREQUEST_0_QTY' . $lastPos ] = '1';
 			$values[ 'L_PAYMENTREQUEST_0_AMT' . $lastPos ] = $paymentCosts;
 		}

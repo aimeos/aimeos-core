@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-12 13:04+0200\n"
+"POT-Creation-Date: 2013-06-12 15:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -356,7 +356,7 @@ msgstr ""
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
 msgstr ""
 
-#: src/MShop/Locale/Manager/Default.php:415
+#: src/MShop/Locale/Manager/Default.php:416
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
 msgstr ""
@@ -381,12 +381,12 @@ msgstr ""
 msgid "Log manager object not available"
 msgstr ""
 
-#: src/MShop/Locale/Manager/Site/Default.php:467
+#: src/MShop/Locale/Manager/Site/Default.php:469
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
 msgstr ""
 
-#: src/MShop/Common/Manager/Decorator/Abstract.php:52
+#: src/MShop/Common/Manager/Decorator/Abstract.php:49
 #: src/MShop/Service/Provider/Payment/Abstract.php:50
 #: src/MShop/Service/Provider/Payment/Abstract.php:61
 #: src/MShop/Service/Provider/Payment/Abstract.php:72
@@ -506,6 +506,10 @@ msgstr ""
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:121
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:564
+msgid "Payment costs"
 msgstr ""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:206
@@ -652,7 +656,7 @@ msgid "Total number of product exceeds given limit"
 msgstr ""
 
 #: src/MShop/Common/Manager/Abstract.php:863
-#: src/MShop/Locale/Manager/Default.php:508
+#: src/MShop/Locale/Manager/Default.php:509
 #, php-format
 msgid "Total results value not found"
 msgstr ""
