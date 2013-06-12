@@ -66,7 +66,7 @@ class Client_Html_Email_Confirm_Main_Html_Detail_DefaultTest extends MW_Unittest
 		$this->_object->setView( $this->_getView() );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="email-confirm-main-detail">', $output );
+		$this->assertStringStartsWith( '<div class="common-summary-detail container">', $output );
 		$this->assertRegExp( '#<tfoot>.*<tr class="tax">.*<td class="price">0.00 .+</td>.*.*</tfoot>#smU', $output );
 	}
 
@@ -105,8 +105,7 @@ class Client_Html_Email_Confirm_Main_Html_Detail_DefaultTest extends MW_Unittest
 			throw new Exception( 'No order found' );
 		}
 
-		$view->confirmOrderItem = $orderItem;
-		$view->confirmOrderBaseItem = $orderManager->getSubManager( 'base' )->load( $orderItem->getBaseId() );
+		$view->summaryBasket = $orderManager->getSubManager( 'base' )->load( $orderItem->getBaseId() );
 
 		return $view;
 	}

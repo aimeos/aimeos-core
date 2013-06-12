@@ -57,38 +57,22 @@ class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends MW_Unitt
 
 	public function testGetHeader()
 	{
+		$view = TestHelper::getView();
+		$view->standardBasket = $this->_getBasket();
+		$this->_object->setView( $view );
+
 		$this->_object->getHeader();
 	}
 
 
 	public function testGetBody()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
-		$search = $serviceManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.provider', 'DirectDebit' ) );
-		$result = $serviceManager->searchItems( $search );
-
-		if( ( $service = reset( $result ) ) === false ) {
-			throw new Exception( 'Service item not found' );
-		}
-
-		$attributes = array(
-			'payment.directdebit.accountowner' => 'test user',
-			'payment.directdebit.accountno' => '1234567890',
-			'payment.directdebit.bankcode' => '10305070',
-			'payment.directdebit.bankname' => 'test credit institute',
-		);
-
-		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$controller->setService( 'payment', $service->getId(), $attributes );
-		$controller->setService( 'delivery', $service->getId(), $attributes );
-
 		$view = TestHelper::getView();
-		$view->standardBasket = $controller->get();
+		$view->standardBasket = $this->_getBasket();
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="checkout-standard-summary-service">', $output );
+		$this->assertStringStartsWith( '<div class="common-summary-service container">', $output );
 	}
 
 
@@ -110,5 +94,24 @@ class Client_Html_Checkout_Standard_Summary_Service_DefaultTest extends MW_Unitt
 	{
 		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
 		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
+	}
+
+
+	protected function _getBasket()
+	{
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );
+		$search = $customerManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
+		$result = $customerManager->searchItems( $search );
+
+		if( ( $customer = reset( $result ) ) === false ) {
+			throw new Exception( 'Customer item not found' );
+		}
+
+		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, $customer->getBillingAddress() );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $customer->getBillingAddress() );
+
+		return $controller->get();
 	}
 }

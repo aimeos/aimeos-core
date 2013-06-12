@@ -79,7 +79,7 @@ class Client_Html_Account_History_Detail_DefaultTest extends MW_Unittest_Testcas
 
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<div class="account-history-detail">', $output );
+		$this->assertStringStartsWith( '<div class="account-history-detail common-summary">', $output );
 		$this->assertRegExp( '#<tfoot>.*<tr class="tax">.*<td class="price">0.00 .+</td>.*.*</tfoot>#smU', $output );
 	}
 

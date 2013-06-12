@@ -22,9 +22,8 @@ class Client_Html_Checkout_Standard_Summary_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_cache;
 	private $_subPartPath = 'client/html/checkout/standard/summary/default/subparts';
-	private $_subPartNames = array( 'address', 'service', 'option', 'basket' );
+	private $_subPartNames = array( 'address', 'service', 'option', 'detail' );
 
 
 	/**

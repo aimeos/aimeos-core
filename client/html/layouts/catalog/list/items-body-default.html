@@ -21,7 +21,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php foreach( $this->listProductItems as $id => $productItem ) : ?>
 <?php	$name = $productItem->getName(); $firstImage = true; ?>
 	<div class="single">
-		<a href="<?php echo $this->url( $detailTarget, $detailController, $detailAction, array( 'l-product-id' => $id ) + $this->listParams, array( $name ) ); ?>">
+		<a href="<?php echo $this->url( $detailTarget, $detailController, $detailAction, array( 'a-name' => str_replace( ' ', '-', $name ), 'l-product-id' => $id ) + $this->listParams ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
 <?php		if( $firstImage === true ) : $firstImage = false; ?>

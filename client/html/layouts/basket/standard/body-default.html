@@ -5,6 +5,24 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
+$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
+$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+
+$checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
+$checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
+$checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
+
+try
+{
+	$this->standardBasket->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+	$checkout = true;
+}
+catch( Exception $e )
+{
+	$checkout = false;
+}
+
 ?>
 <section class="arcavias basket-standard">
 <?php if( isset( $this->standardErrorList ) ) : ?>
@@ -15,5 +33,14 @@
 	</ul>
 <?php endif; ?>
 	<h1><?php echo $this->translate( 'client/html', 'Basket' ); ?></h1>
+	<form method="POST" action="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>">
+		<input type="hidden" name="<?php echo $this->formparam( 'b-action' ); ?>" value="edit" />
 <?php echo $this->get( 'standardBody' ); ?>
+		<div class="button-group">
+			<button class="standardbutton" type="submit"><?php echo $this->translate( 'client/html', 'Update' ); ?></button>
+<?php if( $checkout === true ) : ?>
+			<a class="standardbutton" href="<?php echo $this->url( $checkoutTarget, $checkoutController, $checkoutAction ); ?>"><?php echo $this->translate( 'client/html', 'Checkout' ); ?></a>
+<?php endif; ?>
+		</div>
+	</form>
 </section>

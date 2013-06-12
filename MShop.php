@@ -39,7 +39,11 @@ class MShop
 		}
 
 		$incpath = get_include_path();
-		set_include_path( $basedir . $ds . 'lib' . $ds . 'mwlib' . $ds .'src' . PATH_SEPARATOR . $incpath );
+		$mwlibpath = $basedir . $ds . 'lib' . $ds . 'mwlib' . $ds .'src';
+
+		if( set_include_path( $mwlibpath . PATH_SEPARATOR . $incpath ) === false ) {
+			throw new Exception( 'Unable to set new include path' );
+		}
 
 		$criteria = new MW_Common_Criteria_PHP();
 		$this->_manifests[$basedir] = $this->_getManifestFile( $basedir );
@@ -68,7 +72,11 @@ class MShop
 		}
 
 		$this->_addManifests( $this->_dependencies );
-		set_include_path( $incpath );
+
+		if( set_include_path( $incpath ) === false ) {
+			throw new Exception( 'Unable to set old include path' );
+		}
+
 		self::$_includePaths = null;
 	}
 

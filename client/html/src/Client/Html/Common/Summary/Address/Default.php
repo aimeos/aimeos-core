@@ -9,17 +9,16 @@
 
 
 /**
- * Default implementation of checkout basket summary HTML client.
+ * Default implementation of checkout address summary HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Summary_Basket_Default
+class Client_Html_Common_Summary_Address_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
-	private $_cache;
-	private $_subPartPath = 'client/html/checkout/standard/summary/basket/default/subparts';
+	private $_subPartPath = 'client/html/common/summary/address/default/subparts';
 	private $_subPartNames = array();
 
 
@@ -36,10 +35,10 @@ class Client_Html_Checkout_Standard_Summary_Basket_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->basketBody = $html;
+		$view->addressBody = $html;
 
-		$tplconf = 'client/html/checkout/standard/summary/basket/default/template-body';
-		$default = 'checkout/standard/summary-basket-body-default.html';
+		$tplconf = 'client/html/common/summary/address/default/template-body';
+		$default = 'common/summary/address-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -58,10 +57,10 @@ class Client_Html_Checkout_Standard_Summary_Basket_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->basketHeader = $html;
+		$view->addressHeader = $html;
 
-		$tplconf = 'client/html/checkout/standard/summary/basket/default/template-header';
-		$default = 'checkout/standard/summary-basket-header-default.html';
+		$tplconf = 'client/html/common/summary/address/default/template-header';
+		$default = 'common/summary/address-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -76,7 +75,7 @@ class Client_Html_Checkout_Standard_Summary_Basket_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'checkout/standard/summary/basket/' . $type, $name );
+		return $this->_createSubClient( 'common/summary/address/' . $type, $name );
 	}
 
 
@@ -111,13 +110,6 @@ class Client_Html_Checkout_Standard_Summary_Basket_Default
 	 */
 	protected function _setViewParams( MW_View_Interface $view )
 	{
-		if( !isset( $this->_cache ) )
-		{
-			$view->commonTaxRates = $this->_getTaxRates( $view->standardBasket );
-
-			$this->_cache = $view;
-		}
-
-		return $this->_cache;
+		return $view;
 	}
 }

@@ -147,7 +147,7 @@ class Client_Html_Account_History_Detail_Default
 					throw new Client_Html_Exception( sprintf( $msg, $orderId ) );
 				}
 
-				$view->orderBaseItem = $manager->getSubManager( 'base' )->load( $orderItem->getBaseId() );
+				$view->summaryBasket = $manager->getSubManager( 'base' )->load( $orderItem->getBaseId() );
 			}
 
 			$this->_cache = $view;
