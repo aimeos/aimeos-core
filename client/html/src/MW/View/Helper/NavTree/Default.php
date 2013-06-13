@@ -43,9 +43,10 @@ class MW_View_Helper_NavTree_Default
 	 * Returns the HTML for the navigation tree.
 	 *
 	 * @param MShop_Catalog_Item_Interface $item Catalog item with child nodes
+	 * @param array Associative list of catalog IDs as keys and catalog nodes as values
 	 * @return string Rendered HTML of the navigation tree
 	 */
-	public function transform( MShop_Catalog_Item_Interface $item )
+	public function transform( MShop_Catalog_Item_Interface $item, array $path )
 	{
 		if( $item->getStatus() <= 0 ) {
 			return '';
@@ -54,6 +55,7 @@ class MW_View_Helper_NavTree_Default
 		$id = $item->getId();
 		$config = $item->getConfig();
 		$class = ( $item->hasChildren() ? ' withchild' : ' nochild' );
+		$class .= ( isset( $path[ $item->getId() ] ) ? ' active' : '' );
 		$class .= ( isset( $config['css-class'] ) ? ' ' . $config['css-class'] : '' );
 		$params = array( 'a-name' => str_replace( ' ', '-', $item->getName() ), 'f-catalog-id' => $id );
 		$url = $this->url( $this->_target, $this->_controller, $this->_action, $params );
@@ -65,7 +67,7 @@ class MW_View_Helper_NavTree_Default
 			$output .= '<ul class="level-' . ( $item->getNode()->level + 1 ) . '">';
 
 			foreach( $item->getChildren() as $child ) {
-				$output .= $this->transform( $child );
+				$output .= $this->transform( $child, $path );
 			}
 
 			$output .= '</ul>';

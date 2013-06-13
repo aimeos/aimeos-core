@@ -57,23 +57,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<style type="text/css">', $output );
-	}
-
-
-	public function testGetHeaderNewAddress()
-	{
-		$view = TestHelper::getView();
-
-		$param = array( 'ca-delivery-option' => 'null' );
-		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
-		$view->addHelper( 'param', $helper );
-
-		$this->_object->setView( $view );
-
-		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
+		$this->_object->getHeader();
 	}
 
 

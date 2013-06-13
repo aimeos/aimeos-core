@@ -5,39 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-
-try
-{
-	$orderService = $this->standardBasket->getService( 'delivery' );
-	$orderServiceId = $orderService->getServiceId();
-}
-catch( Exception $e )
-{
-	$orderService = null;
-	$orderServiceId = null;
-
-	$services = $this->get( 'deliveryServices', array() );
-
-	if( ( $service = reset( $services ) ) !== false ) {
-		$orderServiceId = $service->getId();
-	}
-}
-
-$serviceOption = $this->param( 'c-delivery-option', $orderServiceId );
+echo $this->get( 'deliveryHeader' );
 
 ?>
-<script type="text/javascript">
-<!--
-$(document).ready( function() {
-	$( '.checkout-standard-delivery .form-list' ).css( 'display', 'none' );
-	$( '#c-delivery-<?php echo $serviceOption; ?> .form-list' ).slideDown( 0 );
-	$( '.checkout-standard-delivery .option' ).bind( 'click',
-		function( event ) {
-			$( '.checkout-standard-delivery .form-list' ).slideUp( 400 );
-			$(this).parents( '.item' ).find( '.form-list' ).slideDown( 400 );
-		}
-	);
-} );
-// -->
-</script>
-<?php echo $this->get( 'deliveryHeader' ); ?>

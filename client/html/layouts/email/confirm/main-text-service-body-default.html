@@ -9,8 +9,8 @@
 
 
 <?php try { ?>
-<?php	$service = $this->confirmOrderBaseItem->getService( 'payment' ); ?>
-<?php	echo $this->translate( 'client/html', 'Payment' ); ?>: <?php echo $service->getName(); ?>
+<?php	$service = $this->confirmOrderBaseItem->getService( 'delivery' ); ?>
+<?php	echo $this->translate( 'client/html', 'Delivery' ); ?>: <?php echo $service->getName(); ?>
 
 <?php	foreach( $service->getAttributes() as $attribute ) : ?>
 <?php		if( !in_array( $attribute->getType(), array( '', 'hidden' ) ) ) : ?>
@@ -34,8 +34,8 @@
 <?php } catch( Exception $e ) { ; } ?>
 
 <?php try { ?>
-<?php	$service = $this->confirmOrderBaseItem->getService( 'delivery' ); ?>
-<?php	echo $this->translate( 'client/html', 'Delivery' ); ?>: <?php echo $service->getName(); ?>
+<?php	$service = $this->confirmOrderBaseItem->getService( 'payment' ); ?>
+<?php	echo $this->translate( 'client/html', 'Payment' ); ?>: <?php echo $service->getName(); ?>
 
 <?php	foreach( $service->getAttributes() as $attribute ) : ?>
 <?php		if( !in_array( $attribute->getType(), array( '', 'hidden' ) ) ) : ?>

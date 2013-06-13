@@ -53,8 +53,7 @@ class Client_Html_Catalog_Filter_Search_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<link href="css/search.css"', $output );
+		$this->_object->getHeader();
 	}
 
 

@@ -90,7 +90,7 @@ $allFields = array_keys( $paymentCss );
 	</div>
 <?php endif; ?>
 <?php if( $this->config( 'client/html/common/address/billing/disable-new', false ) === false ) : ?>
-	<div class="item-address item-new">
+	<div class="item-address item-new" data-option="<?php echo $billingOption; ?>">
 		<div class="header">
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-billing-option' ) ); ?>" value="null" <?php echo ( $billingOption == 'null' ? 'checked="checked"' : '' ); ?> />
 			<div class="values"><span class="value value-new"><?php echo $this->translate( 'client/html', 'new address' ); ?></span></div>

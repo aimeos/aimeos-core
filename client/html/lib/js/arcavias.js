@@ -54,35 +54,129 @@
 
 
 /*
- * Catalog related Javascript code
+ * backgroundSize: A jQuery cssHook adding support for "cover" and "contain" to IE6,7,8
+ *
+ * Requirements:
+ * - jQuery 1.7.0+
+ *
+ * Limitations:
+ * - doesn't work with multiple backgrounds (use the :after trick)
+ * - doesn't work with the "4 values syntax" of background-position
+ * - doesn't work with lengths in background-position (only percentages and keywords)
+ * - doesn't work with "background-repeat: repeat;"
+ * - doesn't work with non-default values of background-clip/origin/attachment/scroll
+ * - you should still test your website in IE!
+ *
+ * latest version and complete README available on Github:
+ * https://github.com/louisremi/jquery.backgroundSize.js
+ *
+ * Copyright 2012 @louis_remi
+ * Licensed under the MIT license.
+ *
+ * This saved you an hour of work?
+ * Send me music http://www.amazon.co.uk/wishlist/HNTU0468LQON
+ *
+ */
+
+(function(e,t,n,r,i){var s=e("<div>")[0],o=/url\(["']?(.*?)["']?\)/,u=[],a={top:0,left:0,bottom:1,right:1,center:.5};if("backgroundSize"in s.style&&!e.debugBGS){return}e.cssHooks.backgroundSize={set:function(t,n){var r=!e.data(t,"bgsImg"),i,s,o;e.data(t,"bgsValue",n);if(r){u.push(t);e.refreshBackgroundDimensions(t,true);s=e("<div>").css({position:"absolute",zIndex:-1,top:0,right:0,left:0,bottom:0,overflow:"hidden"});o=e("<img>").css({position:"absolute"}).appendTo(s),s.prependTo(t);e.data(t,"bgsImg",o[0]);i=(e.css(t,"backgroundPosition")||e.css(t,"backgroundPositionX")+" "+e.css(t,"backgroundPositionY")).split(" ");e.data(t,"bgsPos",[a[i[0]]||parseFloat(i[0])/100,a[i[1]]||parseFloat(i[1])/100]);e.css(t,"zIndex")=="auto"&&(t.style.zIndex=0);e.css(t,"position")=="static"&&(t.style.position="relative");e.refreshBackgroundImage(t)}else{e.refreshBackground(t)}},get:function(t){return e.data(t,"bgsValue")||""}};e.cssHooks.backgroundImage={set:function(t,n){return e.data(t,"bgsImg")?e.refreshBackgroundImage(t,n):n}};e.refreshBackgroundDimensions=function(t,n){var r=e(t),i={width:r.innerWidth(),height:r.innerHeight()},s=e.data(t,"bgsDim"),o=!s||i.width!=s.width||i.height!=s.height;e.data(t,"bgsDim",i);if(o&&!n){e.refreshBackground(t)}};e.refreshBackgroundImage=function(t,n){var r=e.data(t,"bgsImg"),i=(o.exec(n||e.css(t,"backgroundImage"))||[])[1],s=r&&r.src,u=i!=s,a,f;if(u){r.style.height=r.style.width="auto";r.onload=function(){var n={width:r.width,height:r.height};if(n.width==1&&n.height==1){return}e.data(t,"bgsImgDim",n);e.data(t,"bgsConstrain",false);e.refreshBackground(t);r.style.visibility="visible";r.onload=null};r.style.visibility="hidden";r.src=i;if(r.readyState||r.complete){r.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";r.src=i}t.style.backgroundImage="none"}};e.refreshBackground=function(t){var n=e.data(t,"bgsValue"),i=e.data(t,"bgsDim"),s=e.data(t,"bgsImgDim"),o=e(e.data(t,"bgsImg")),u=e.data(t,"bgsPos"),a=e.data(t,"bgsConstrain"),f,l=i.width/i.height,c=s.width/s.height,h;if(n=="contain"){if(c>l){e.data(t,"bgsConstrain",f="width");h=r.floor((i.height-i.width/c)*u[1]);o.css({top:h});if(f!=a){o.css({width:"100%",height:"auto",left:0})}}else{e.data(t,"bgsConstrain",f="height");h=r.floor((i.width-i.height*c)*u[0]);o.css({left:h});if(f!=a){o.css({height:"100%",width:"auto",top:0})}}}else if(n=="cover"){if(c>l){e.data(t,"bgsConstrain",f="height");h=r.floor((i.height*c-i.width)*u[0]);o.css({left:-h});if(f!=a){o.css({height:"100%",width:"auto",top:0})}}else{e.data(t,"bgsConstrain",f="width");h=r.floor((i.width/c-i.height)*u[1]);o.css({top:-h});if(f!=a){o.css({width:"100%",height:"auto",left:0})}}}};var f=e.event,l,c={_:0},h=0,p,d;l=f.special.throttledresize={setup:function(){e(this).on("resize",l.handler)},teardown:function(){e(this).off("resize",l.handler)},handler:function(t,n){var r=this,i=arguments;p=true;if(!d){e(c).animate(c,{duration:Infinity,step:function(){h++;if(h>l.threshold&&p||n){t.type="throttledresize";f.dispatch.apply(r,i);p=false;h=0}if(h>9){e(c).stop();d=false;h=0}}});d=true}},threshold:1};e(t).on("throttledresize",function(){e(u).each(function(){e.refreshBackgroundDimensions(this)})})})(jQuery,window,document,Math);
+
+
+
+/*
+ * Arcavias related Javascript code
  * 
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-$(function() {
-	
-	/**
+
+/*
+ * CSS3 support for IE8
+ */
+document.createElement("nav");
+document.createElement("section");
+document.createElement("article");
+
+
+/*
+ * Checkout: Initial state
+ */
+$(".checkout-standard-address .item-new[data-option!='null'] .form-list").hide();
+
+$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".form-list" ).hide();
+$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".item-service" ).has( "input:checked" ).find( ".form-list" ).show();
+
+$( '.checkout-standard-order-payment > form' ).submit();
+$( '.checkout-standard-order-payment' ).each( function( index, element ) {
+	var url = $( element ).data( 'url' );
+	if( url !== '' ) {
+		window.location = url;
+	}
+});
+
+
+$(document).ready( function() {
+
+	/*
+	 * Catalog: CSS3 support for IE8
+	 */
+	$(".catalog-list-items .media-item").css({backgroundSize: "contain"});
+	$(".catalog-detail-image .thumbs a").css({backgroundSize: "contain"});
+
+
+	/*
+	 * Catalog: Autocompleter
+	 */
+	var arcaviasInputComplete = $( ".catalog-filter-search .value" );
+	arcaviasInputComplete.autocomplete( {
+		minLength: 3,
+		delay: 200,
+		source: function( req, add ) {
+			var nameTerm = {};
+			nameTerm[arcaviasInputComplete.attr( "name" )] = req.term;
+
+			$.getJSON(
+				arcaviasInputComplete.data( "url" ),
+				nameTerm,
+				function( data ) {
+					var suggestions = [];
+
+					$.each( data, function( i, val ) {
+						suggestions.push( val.name );
+					} );
+			
+					add( suggestions );
+				}
+			);
+		},
+		select: function( event, ui ) { 
+			arcaviasInputComplete.val( ui.item.value );
+			$( ".catalog-filter-search > form" ).submit();
+		}
+	} );
+
+
+	/*
 	 * Catalog list: lazy image loading
 	 */
-	var loadImages = (function() { 
+	var arcaviasLazyLoader = (function() { 
 		var elements = $(".catalog-list-items .lazy-image");
 		for( var i = 0; i < elements.length; i++ ) {
 			var element = $(elements[i]);
 	        if( $(window).scrollTop() + $(window).height() + 2 * element.height() >= element.offset().top ) {
-	        	element.attr( 'style', 'background-image: url(\'' + element.data( 'src' ) + '\')' );
-	        	element.removeClass( 'lazy-image' );
+	        	element.css( "background-image", "url('" + element.data( "src" ) + "')" );
+	        	element.removeClass( "lazy-image" );
 	        }
 		}
 	});
 	
-	$(window).bind( 'resize', loadImages );
-	$(window).bind( 'scroll', loadImages );
+	$(window).bind("resize", arcaviasLazyLoader);
+	$(window).bind("scroll", arcaviasLazyLoader);
 	$(window).scroll();
 
 	
 
-	/**
+	/*
 	 * Catalog detail: image slider
 	 */
 
@@ -91,25 +185,25 @@ $(function() {
 		circular: false,
 		infinite: false,
 		auto: false,
-		prev: '#prev-image',
-		next: '#next-image',
+		prev: "#prev-image",
+		next: "#next-image",
 		items: {
 			visible: 1
 		},
 		scroll: {
-			fx: 'none'
+			fx: "none"
 		},
 		swipe: true,
 		mousewheel: true
 	});
 
-	$('.catalog-detail-image .thumbs').carouFredSel({
+	$(".catalog-detail-image .thumbs").carouFredSel({
 		responsive: false,
 		circular: false,
 		infinite: false,
 		auto: false,
-		prev: '#prev-thumbs',
-		next: '#next-thumbs',
+		prev: "#prev-thumbs",
+		next: "#next-thumbs",
 		items: {
 			visible: {
 				min: 2,
@@ -120,11 +214,37 @@ $(function() {
 		mousewheel: true
 	});
 
-	$('.catalog-detail-image .thumbs a').mouseenter(function() {
-		$('.catalog-detail-image .carousel').trigger('slideTo', '#' + this.href.split('#').pop() );
-		$('.catalog-detail-image .thumbs a').removeClass('selected');
-		$(this).addClass('selected');
+	$(".catalog-detail-image .thumbs a").mouseenter(function() {
+		$(".catalog-detail-image .carousel").trigger("slideTo", "#" + this.href.split("#").pop() );
+		$(".catalog-detail-image .thumbs a").removeClass("selected");
+		$(this).addClass("selected");
 		return false;
 	});
+
+	
+	/*
+	 * Checkout clients
+	 */
+
+	$(".checkout-standard-address-billing .header input").bind( "click",
+		function( event ) {
+			$( ".checkout-standard-address-billing .form-list" ).slideUp( 400 );
+			$( ".checkout-standard-address-billing .item-address" ).has( this ).find( ".form-list" ).slideDown( 400 );
+		}
+	);
+
+	$(".checkout-standard-address-delivery .header input").bind( "click",
+		function( event ) {
+			$( ".checkout-standard-address-delivery .form-list" ).slideUp( 400 );
+			$( ".checkout-standard-address-delivery .item-address" ).has( this ).find( ".form-list" ).slideDown( 400 );
+		}
+	);
+	
+	$( ".checkout-standard-delivery,.checkout-standard-payment .option" ).bind( "click",
+		function( event ) {
+			$( ".checkout-standard .form-list" ).slideUp( 400 );
+			$( ".checkout-standard .item-service" ).has( this ).find( ".form-list" ).slideDown( 400 );
+		}
+	);
 
 });

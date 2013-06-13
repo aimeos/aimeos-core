@@ -11,7 +11,6 @@ try {
 	$addrArray = array();
 }
 
-
 $deliveryOption = $this->param( 'ca-delivery-option', ( $addrArray === array() ? -1 : 'null' ) );
 $deliverySalutation = $this->param( 'ca-delivery/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $deliveryCountry = $this->param( 'ca-delivery/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
@@ -95,7 +94,7 @@ $allFields = array_keys( $deliveryCss );
 	</div>
 <?php endforeach; ?>
 <?php if( $this->config( 'client/html/common/address/delivery/disable-new', false ) === false ) : ?>
-	<div class="item-address item-new">
+	<div class="item-address item-new" data-option="<?php echo $deliveryOption; ?>">
 		<div class="header">
 			<input type="radio" name="<?php echo $this->formparam( array( 'ca-delivery-option' ) ); ?>" value="null" <?php echo ( $deliveryOption == 'null' ? 'checked="checked"' : '' ); ?> />
 			<div class="values"><span class="value value-new"><?php echo $this->translate( 'client/html', 'new address' ); ?></span></div>

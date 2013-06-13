@@ -35,11 +35,17 @@ class Client_Html_Checkout_Standard_Summary_Detail_Default
 		{
 			$basket = $view->standardBasket;
 
-			$target = $view->config( 'client/html/basket/standard/url/target' );
-			$cntl = $view->config( 'client/html/basket/standard/url/controller', 'basket' );
-			$action = $view->config( 'client/html/basket/standard/url/action', 'index' );
+			$bTarget = $view->config( 'client/html/basket/standard/url/target' );
+			$bCntl = $view->config( 'client/html/basket/standard/url/controller', 'basket' );
+			$bAction = $view->config( 'client/html/basket/standard/url/action', 'index' );
 
-			$view->summaryUrlDetailBasket = $view->url( $target, $cntl, $action );
+			$target = $view->config( 'client/html/checkout/standard/url/target' );
+			$cntl = $view->config( 'client/html/checkout/standard/url/controller', 'checkout' );
+			$action = $view->config( 'client/html/checkout/standard/url/action', 'index' );
+
+			$view->summaryUrlServicePayment = $view->url( $target, $cntl, $action, array( 'c-step' => 'payment' ) );
+			$view->summaryUrlServiceDelivery = $view->url( $target, $cntl, $action, array( 'c-step' => 'delivery' ) );
+			$view->summaryUrlBasket = $view->url( $bTarget, $bCntl, $bAction );
 			$view->summaryTaxRates = $this->_getTaxRates( $basket );
 			$view->summaryBasket = $view->standardBasket;
 

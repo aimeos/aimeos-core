@@ -57,15 +57,14 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript">', $output );
+		$this->_object->getHeader();
 	}
 
 
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="checkout-standard-order-payment">', $output );
+		$this->assertStringStartsWith( '<div class="checkout-standard-order-payment" data-url="">', $output );
 	}
 
 
