@@ -9,7 +9,7 @@
 ?>
 <div class="catalog-filter-tree">
 <?php if( $this->treeCatalogTree ) : ?>
-	<ul class="level-<?php echo $this->treeCatalogTree->getNode()->level; ?>"><?php echo $this->navtree( $this->treeCatalogTree ); ?></ul>
+	<ul class="level-<?php echo $this->treeCatalogTree->getNode()->level; ?>"><?php echo $this->navtree( $this->treeCatalogTree, $this->get( 'treeCatalogPath', array() ) ); ?></ul>
 <?php endif; ?>
 <?php echo $this->get( 'treeBody' ); ?>
 </div>

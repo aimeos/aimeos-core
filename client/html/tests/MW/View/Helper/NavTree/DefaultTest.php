@@ -63,7 +63,7 @@ class MW_View_Helper_NavTree_DefaultTest extends MW_Unittest_Testcase
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
 		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
-		$output = $this->_object->transform( $node );
+		$output = $this->_object->transform( $node, array() );
 		$this->assertContains( 'Root', $output );
 	}
 }

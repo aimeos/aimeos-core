@@ -6,7 +6,7 @@
  */
 
 ?>
-<div class="checkout-standard-order-payment">
+<div class="checkout-standard-order-payment" data-url="<?php echo $this->get( 'paymentUrl', '' ); ?>">
 <?php if( isset( $this->paymentForm ) ) : ?>
 	<h2><?php echo $this->translate( 'client/html', 'Payment' ); ?></h2>
 	<p class="order-notice"><?php echo $this->translate( 'client/html', 'You will now be redirected to our payment service partner' ); ?></p>

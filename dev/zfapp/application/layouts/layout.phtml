@@ -14,12 +14,15 @@ $sites = $this->sites();
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5" />
-		<link href="<?php echo $this->pathstart;?>/styles/main.css" type="text/css" rel="stylesheet" media="screen" />
 		<link href="<?php echo $this->pathstart;?>/../../../client/html/lib/css/arcavias.css" type="text/css" rel="stylesheet" media="screen" />
+		<link href="<?php echo $this->pathstart;?>/styles/main.css" type="text/css" rel="stylesheet" media="screen" />
 		<!--[if lt IE 9]>
 			<link href="<?php echo $this->pathstart;?>/styles/ie.css" type="text/css" rel="stylesheet" />
 		<![endif]-->
-		<script type="text/javascript" src="<?php echo $this->pathstart;?>/../../../client/html/lib/js/jquery.min.js"></script>
+		<script type="text/javascript" defer="defer" src="<?php echo $this->pathstart;?>/../../../client/html/lib/js/jquery.min.js"></script>
+		<script type="text/javascript" defer="defer" src="<?php echo $this->pathstart;?>/../../../client/html/lib/js/jquery-ui.custom.min.js"></script>
+		<script type="text/javascript" defer="defer" src="<?php echo $this->pathstart;?>/../../../client/html/lib/js/arcavias.js"></script>
+		<script type="text/javascript" defer="defer" src="<?php echo $this->pathstart;?>/js/main.js"></script>
 		<?php echo ( isset( $this->filter ) ? $this->filter->getHeader() : '' ); ?>
 		<?php echo ( isset( $this->searchfilter ) ? $this->searchfilter->getHeader() : '' ); ?>
 		<?php echo ( isset( $this->list ) ? $this->list->getHeader() : '' ); ?>
@@ -29,14 +32,6 @@ $sites = $this->sites();
 		<?php echo ( isset( $this->checkout ) ? $this->checkout->getHeader() : '' ); ?>
 		<?php echo ( isset( $this->confirm ) ? $this->confirm->getHeader() : '' ); ?>
 		<?php echo ( isset( $this->account ) ? $this->account->getHeader() : '' ); ?>
-		<script type="text/javascript">
-		$(function() {
-			$( '.menu .dropdown' ).click( function() {
-				$( 'ul', this ).toggleClass( 'active' );
-				$( this ).toggleClass( 'active' );
-			});
-		});
-		</script>
 	</head>
 	<body>
 		<div id="frame">

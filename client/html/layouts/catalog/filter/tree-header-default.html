@@ -5,23 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+echo $this->get( 'treeHeader' );
+
 ?>
-<?php if( isset( $this->treeCatalogPath ) ) : ?>
-<script type="text/javascript">
-<?php
-		$path = array();
-		foreach( $this->treeCatalogPath as $item ) {
-			$path[] = '".catalog-filter-tree .catid-' . $item->getId() . '"';
-		}
-?>
-<!--
-	$(document).ready( function() {
-		var list = [<?php echo implode( ', ', $path ) ?>];
-	 	for( var i = 0; i < list.length; i++ ) {
-			$( list[i] ).addClass( 'active' );
-	 	}
-	} );
-// -->
-</script>
-<?php endif; ?>
-<?php echo $this->get( 'treeHeader' ); ?>

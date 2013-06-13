@@ -6,6 +6,11 @@
  * @version $Id: index.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
+header( "Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'" );
+header( "X-Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'" );
+header( "X-Webkit-CSP: default-src 'self'; style-src 'self' 'unsafe-inline'" );
+
+
 define( 'ZFAPP_ROOT', dirname( dirname( __FILE__ ) ) );
 define( 'APPLICATION_PATH', ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'application' );
 define( 'APPLICATION_ENV', 'development' ); // development | production

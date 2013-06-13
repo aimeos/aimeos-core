@@ -68,7 +68,6 @@ class Client_Html_Email_Confirm_Main_Html_DefaultTest extends MW_Unittest_Testca
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();
-file_put_contents( '/tmp/email', $output );
 		$this->assertStringStartsWith( "\r\n--testboundary", $output );
 	}
 

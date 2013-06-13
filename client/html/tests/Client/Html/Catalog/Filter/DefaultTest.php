@@ -54,9 +54,7 @@ class Client_Html_Catalog_Filter_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
-
-		$this->assertContains( '<script type="text/javascript">', $output );
+		$this->_object->getHeader();
 	}
 
 
