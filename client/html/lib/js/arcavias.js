@@ -98,35 +98,20 @@ document.createElement("section");
 document.createElement("article");
 
 
-/*
- * Checkout: Initial state
- */
-$(".checkout-standard-address .item-new[data-option!='null'] .form-list").hide();
-
-$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".form-list" ).hide();
-$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".item-service" ).has( "input:checked" ).find( ".form-list" ).show();
-
-$( '.checkout-standard-order-payment > form' ).submit();
-$( '.checkout-standard-order-payment' ).each( function( index, element ) {
-	var url = $( element ).data( 'url' );
-	if( url !== '' ) {
-		window.location = url;
-	}
-});
-
-
 $(document).ready( function() {
 
 	/*
 	 * Catalog: CSS3 support for IE8
 	 */
-	$(".catalog-list-items .media-item").css({backgroundSize: "contain"});
-	$(".catalog-detail-image .thumbs a").css({backgroundSize: "contain"});
+
+	$(".catalog-list-items .media-item").css("backgroundSize", "contain");
+	$(".catalog-detail-image .thumbs a").css("backgroundSize", "contain");
 
 
 	/*
 	 * Catalog: Autocompleter
 	 */
+
 	var arcaviasInputComplete = $( ".catalog-filter-search .value" );
 	arcaviasInputComplete.autocomplete( {
 		minLength: 3,
@@ -159,6 +144,7 @@ $(document).ready( function() {
 	/*
 	 * Catalog list: lazy image loading
 	 */
+
 	var arcaviasLazyLoader = (function() { 
 		var elements = $(".catalog-list-items .lazy-image");
 		for( var i = 0; i < elements.length; i++ ) {
@@ -170,10 +156,9 @@ $(document).ready( function() {
 		}
 	});
 	
+	arcaviasLazyLoader();
 	$(window).bind("resize", arcaviasLazyLoader);
 	$(window).bind("scroll", arcaviasLazyLoader);
-	$(window).scroll();
-
 	
 
 	/*
@@ -226,6 +211,11 @@ $(document).ready( function() {
 	 * Checkout clients
 	 */
 
+	$(".checkout-standard-address .item-new[data-option!='null'] .form-list").hide();
+
+	$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".form-list" ).hide();
+	$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".item-service" ).has( "input:checked" ).find( ".form-list" ).show();
+
 	$(".checkout-standard-address-billing .header input").bind( "click",
 		function( event ) {
 			$( ".checkout-standard-address-billing .form-list" ).slideUp( 400 );
@@ -239,12 +229,18 @@ $(document).ready( function() {
 			$( ".checkout-standard-address-delivery .item-address" ).has( this ).find( ".form-list" ).slideDown( 400 );
 		}
 	);
-	
+
 	$( ".checkout-standard-delivery,.checkout-standard-payment .option" ).bind( "click",
 		function( event ) {
 			$( ".checkout-standard .form-list" ).slideUp( 400 );
 			$( ".checkout-standard .item-service" ).has( this ).find( ".form-list" ).slideDown( 400 );
 		}
 	);
+	
+	$( '.checkout-standard-order-payment > form' ).first().submit();
+	$( '.checkout-standard-order-payment' ).first().each( function( index, element ) {
+		var url = $(element).data( 'url' );
+		if( url ) { window.location = url; }
+	});
 
 });

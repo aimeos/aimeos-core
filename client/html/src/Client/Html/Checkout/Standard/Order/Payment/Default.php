@@ -108,15 +108,21 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		$manager = MShop_Service_Manager_Factory::createManager( $context );
 		$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
 
-		$confirmTarget = $view->config( 'client/html/checkout/confirm/url/target' );
-		$confirmController = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
-		$confirmAction = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
-		$confirmConfig = $view->config( 'client/html/checkout/confirm/url/config', array() );
+		if( ( $form = $provider->process( $view->orderItem ) ) === null )
+		{
+			$target = $view->config( 'client/html/checkout/confirm/url/target' );
+			$controller = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+			$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+			$config = $view->config( 'client/html/checkout/confirm/url/config', array() );
 
-		$url = $view->url( $confirmTarget, $confirmController, $confirmAction, array(), array(), $confirmConfig );
+			$url = $view->url( $target, $controller, $action, array(), array(), $config );
 
-		$view->paymentForm = $provider->process( $view->orderItem );
-		$view->paymentUrl = $url;
+			$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( $url, 'REDIRECT' );
+		}
+		else
+		{
+			$view->paymentForm = $form;
+		}
 
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
