@@ -5,24 +5,35 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+if( isset( $this->paymentForm ) )
+{
+	$url = $this->paymentForm->getUrl();
+	$method = $this->paymentForm->getMethod();
+	$params = $this->paymentForm->getValues();
+}
+else
+{
+	$url = $method = '';
+	$params = array();
+}
+
 ?>
-<div class="checkout-standard-order-payment" data-url="<?php echo $this->get( 'paymentUrl', '' ); ?>">
-<?php if( isset( $this->paymentForm ) ) : ?>
+<div class="checkout-standard-order-payment" data-url="<?php echo $url; ?>">
 	<h2><?php echo $this->translate( 'client/html', 'Payment' ); ?></h2>
-	<p class="order-notice"><?php echo $this->translate( 'client/html', 'You will now be redirected to our payment service partner' ); ?></p>
-	<form method="<?php echo $this->paymentForm->getMethod(); ?>" action="<?php echo $this->paymentForm->getUrl(); ?>">
-<?php	foreach( $this->paymentForm->getValues() as $key => $value ) : ?>
+	<p class="order-notice"><?php echo $this->translate( 'client/html', 'You will now be forwarded to the next step' ); ?></p>
+<?php if( $method === 'REDIRECT' ) : ?>
+	<noscript>
+		<a class="standardbutton" href="<?php echo $url; ?>"><?php echo $this->translate( 'client/html', 'Proceed' ); ?></a>
+	</noscript>
+<?php elseif( $method && $url ) : ?>
+	<form method="<?php echo $method; ?>" action="<?php echo $url; ?>">
+<?php	foreach( $params as $key => $value ) : ?>
 		<input type="hidden" name="<?php echo $key; ?>" value="<?php echo $value; ?>" />
 <?php	endforeach; ?>
 <?php echo $this->get( 'paymentBody' ); ?>
 		<noscript>
-			<button class="standardbutton"><?php echo $this->translate( 'client/html', 'Proceed to payment' ); ?></button>
+			<button class="standardbutton"><?php echo $this->translate( 'client/html', 'Proceed' ); ?></button>
 		</noscript>
 	</form>
-<?php elseif( isset( $this->paymentUrl ) ) : ?>
-	<noscript>
-		<h2><?php echo $this->translate( 'client/html', 'Order successful' ); ?></h2>
-		<a class="standardbutton" href="<?php echo $this->paymentUrl; ?>"><?php echo $this->translate( 'client/html', 'Proceed to confirmation page' ); ?></a>
-	</noscript>
 <?php endif; ?>
 </div>
