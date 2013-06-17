@@ -5,6 +5,8 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$enc = $this->encoder();
+
 if( isset( $this->paymentForm ) )
 {
 	$url = $this->paymentForm->getUrl();
@@ -18,21 +20,21 @@ else
 }
 
 ?>
-<div class="checkout-standard-order-payment" data-url="<?php echo $url; ?>">
-	<h2><?php echo $this->translate( 'client/html', 'Payment' ); ?></h2>
-	<p class="order-notice"><?php echo $this->translate( 'client/html', 'You will now be forwarded to the next step' ); ?></p>
+<div class="checkout-standard-order-payment" data-url="<?php echo $enc->attr( $url ); ?>">
+	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></h2>
+	<p class="order-notice"><?php echo $enc->html( $this->translate( 'client/html', 'You will now be forwarded to the next step' ), $enc::TRUST ); ?></p>
 <?php if( $method === 'REDIRECT' ) : ?>
 	<noscript>
-		<a class="standardbutton" href="<?php echo $url; ?>"><?php echo $this->translate( 'client/html', 'Proceed' ); ?></a>
+		<a class="standardbutton" href="<?php echo $enc->attr( $url ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></a>
 	</noscript>
 <?php elseif( $method && $url ) : ?>
-	<form method="<?php echo $method; ?>" action="<?php echo $url; ?>">
+	<form method="<?php echo $enc->attr( $method ); ?>" action="<?php echo $enc->attr( $url ); ?>">
 <?php	foreach( $params as $key => $value ) : ?>
-		<input type="hidden" name="<?php echo $key; ?>" value="<?php echo $value; ?>" />
+		<input type="hidden" name="<?php echo $enc->attr( $key ); ?>" value="<?php echo $enc->attr( $value ); ?>" />
 <?php	endforeach; ?>
 <?php echo $this->get( 'paymentBody' ); ?>
 		<noscript>
-			<button class="standardbutton"><?php echo $this->translate( 'client/html', 'Proceed' ); ?></button>
+			<button class="standardbutton"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
 		</noscript>
 	</form>
 <?php endif; ?>

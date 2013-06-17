@@ -6,6 +6,8 @@
  * @version $Id: image-body-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
+$enc = $this->encoder();
+
 if( isset( $this->detailProductItem ) ) {
 	$mediaItems = $this->detailProductItem->getRefItems( 'media', 'default', 'default' );
 } else {
@@ -16,7 +18,7 @@ $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
 
-$url = $this->url( $detailTarget, $detailController, $detailAction, $this->get( 'detailParams', array() ) );
+$url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $this->get( 'detailParams', array() ) ) );
 
 ?>
 <div class="catalog-detail-image">
@@ -25,7 +27,7 @@ $url = $this->url( $detailTarget, $detailController, $detailAction, $this->get( 
 		<a id="next-image" class="disabled"></a>
 		<div class="carousel">
 <?php foreach( $mediaItems as $id => $mediaItem ) : ?>
-			<div id="image-<?php echo $id; ?>" class="item" style="background-image: url('<?php echo $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl(); ?>')"></div>
+			<div id="image-<?php echo $enc->attr( $id ); ?>" class="item" style="background-image: url('<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>')"></div>
 <?php endforeach; ?>
 		</div>
 	</div>
@@ -37,7 +39,7 @@ $url = $this->url( $detailTarget, $detailController, $detailAction, $this->get( 
 	$class = 'item selected';
 	foreach( $mediaItems as $id => $mediaItem )
 	{
-		echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() . '\')"></a>';
+		echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ) . '\')"></a>';
 		$class = 'item';
 	}
 ?>

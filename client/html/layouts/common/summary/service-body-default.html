@@ -5,34 +5,36 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$enc = $this->encoder();
+
 ?>
 <div class="common-summary-service container">
-	<h2><?php echo $this->translate( 'client/html', 'Services' ); ?></h2>
+	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Services' ), $enc::TRUST ); ?></h2>
 	<div class="item delivery">
 		<div class="header">
-			<h3><?php echo $this->translate( 'client/html', 'delivery' ); ?></h3>
+			<h3><?php echo $enc->html( $this->translate( 'client/html', 'delivery' ), $enc::TRUST ); ?></h3>
 <?php if( isset( $this->summaryUrlServiceDelivery ) ) : ?>
-			<a class="modify" href="<?php echo $this->summaryUrlServiceDelivery; ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
+			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlServiceDelivery ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 <?php try { $service = $this->summaryBasket->getService( 'delivery' ); ?>
 		<div class="item">
 			<div class="item-icons">
 <?php	if( $service->getMediaUrl() != '' ) : ?>
-				<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $service->getMediaUrl(); ?>" />
+				<img src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $service->getMediaUrl() ); ?>" />
 <?php	endif; ?>
 			</div>
-			<h4><?php echo $service->getName(); ?></h4>
+			<h4><?php echo $enc->html( $service->getName() ); ?></h4>
 		</div>
 <?php	if( count( $service->getAttributes() ) > 0 ) : ?>
 		<ul class="attr-list">
 <?php		foreach( $service->getAttributes() as $attribute ) : ?>
-			<li class="<?php echo $attribute->getCode(); ?>">
-				<span class="name"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/service', $attribute->getCode() ) ); ?></span>
+			<li class="<?php echo $enc->attr( $attribute->getCode() ); ?>">
+				<span class="name"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/service', $attribute->getCode() ) ) ); ?></span>
 <?php			switch( $attribute->getValue() ) : case 'array': case 'object': ?>
-				<span class="value"><?php echo join( ', ', (array) $attribute->getValue() ); ?></span>
+				<span class="value"><?php echo $enc->html( join( ', ', (array) $attribute->getValue() ) ); ?></span>
 <?php				break; default: ?>
-				<span class="value"><?php echo $attribute->getValue(); ?></span>
+				<span class="value"><?php echo $enc->html( $attribute->getValue() ); ?></span>
 <?php			endswitch; ?>
 			</li>
 <?php		endforeach; ?>
@@ -42,16 +44,16 @@
 	</div><!--
 	--><div class="item payment">
 		<div class="header">
-			<h3><?php echo $this->translate( 'client/html', 'payment' ); ?></h3>
+			<h3><?php echo $enc->html( $this->translate( 'client/html', 'payment' ), $enc::TRUST ); ?></h3>
 <?php if( isset( $this->summaryUrlServicePayment ) ) : ?>
-			<a class="modify" href="<?php echo $this->summaryUrlServicePayment; ?>"><?php echo $this->translate( 'client/html', 'Change' ); ?></a>
+			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlServicePayment ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 <?php try { $service = $this->summaryBasket->getService( 'payment' ); ?>
 		<div class="item">
 			<div class="item-icons">
 <?php	if( $service->getMediaUrl() != '' ) : ?>
-				<img src="<?php echo $this->config( 'client/html/common/content/baseurl' ) . $service->getMediaUrl(); ?>" />
+				<img src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $service->getMediaUrl() ); ?>" />
 <?php	endif; ?>
 			</div>
 			<h4><?php echo $service->getName(); ?></h4>
@@ -59,12 +61,12 @@
 <?php	if( count( $service->getAttributes() ) > 0 ) : ?>
 		<ul class="attr-list">
 <?php		foreach( $service->getAttributes() as $attribute ) : ?>
-				<li class="<?php echo $attribute->getCode(); ?>">
-					<span class="name"><?php echo ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
+				<li class="<?php echo $enc->attr( $attribute->getCode() ); ?>">
+					<span class="name"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) ) ); ?></span>
 <?php			switch( $attribute->getValue() ) : case 'array': case 'object': ?>
-					<span class="value"><?php echo join( ', ', (array) $attribute->getValue() ); ?></span>
+					<span class="value"><?php echo $enc->html( join( ', ', (array) $attribute->getValue() ) ); ?></span>
 <?php				break; default: ?>
-					<span class="value"><?php echo $attribute->getValue(); ?></span>
+					<span class="value"><?php echo $enc->html( $attribute->getValue() ); ?></span>
 <?php			endswitch; ?>
 				</li>
 <?php		endforeach; ?>

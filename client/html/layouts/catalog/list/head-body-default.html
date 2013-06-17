@@ -5,6 +5,8 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$enc = $this->encoder();
+
 $catPath = $this->get( 'listCatPath', array() );
 $searchText = $this->param( 'f-search-text', null );
 
@@ -13,13 +15,13 @@ $searchText = $this->param( 'f-search-text', null );
 <?php if( ( $catItem = end( $catPath ) ) !== false ) : ?>
 	<div class="imagelist-default">
 <?php	foreach( $catItem->getRefItems( 'media', 'head', 'default' ) as $mediaItem ) : ?>
-		<img class="<?php echo $mediaItem->getType(); ?>" src="<?php echo $mediaItem->getUrl(); ?>" />
+		<img class="<?php echo $enc->attr( $mediaItem->getType() ); ?>" src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>" />
 <?php	endforeach; ?>
 	</div>
-	<h1><?php echo $catItem->getName(); ?></h1>
+	<h1><?php echo $enc->html( $catItem->getName() ); ?></h1>
 <?php	foreach( $this->config( 'client/html/catalog/list/head/text-types', array( 'short', 'long' ) ) as $textType ) : ?>
 <?php		foreach( $catItem->getRefItems( 'text', $textType, 'default' ) as $textItem ) : ?>
-	<div class="<?php echo $textItem->getType(); ?>"><?php echo $textItem->getContent(); ?></div>
+	<div class="<?php echo $enc->attr( $textItem->getType() ); ?>"><?php echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?></div>
 <?php		endforeach; ?>
 <?php	endforeach; ?>
 <?php endif; ?>
@@ -27,9 +29,9 @@ $searchText = $this->param( 'f-search-text', null );
 	<div class="head-search">
 <?php	if( ( $total = $this->get( 'listProductTotal', 0 ) ) > 0 ) : ?>
 <?php		$msg = $this->translate( 'client/html', 'Search result for <span class="searchstring">"%1$s"</span> (%2$d article)', 'Search result for <span class="searchstring">"%1$s"</span> (%2$d articles)', $total ); ?>
-<?php		printf( $msg, htmlspecialchars( $searchText, ENT_QUOTES, 'UTF-8' ), $total ); ?>
+<?php		echo $enc->html( sprintf( $msg, $enc->html( $searchText ), $total ), $enc::TRUST ); ?>
 <?php	else : ?>
-<?php		printf( $this->translate( 'client/html', 'No articles found for <span class="searchstring">"%1$s"</span>. Please try again with a different keyword.' ), htmlspecialchars( $searchText, ENT_QUOTES, 'UTF-8' ) ); ?>
+<?php		echo $enc->html( sprintf( $this->translate( 'client/html', 'No articles found for <span class="searchstring">"%1$s"</span>. Please try again with a different keyword.' ), $enc->html( $searchText ) ), $enc::TRUST ); ?>
 <?php	endif; ?>
 	</div>
 <?php endif; ?>

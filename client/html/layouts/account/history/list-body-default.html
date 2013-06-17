@@ -14,32 +14,34 @@ $orderItems = $this->get( 'listOrderItems', array() );
 $dateformat = $this->translate( 'client/html', 'Y-m-d' );
 $attrformat = $this->translate( 'client/html', '%1$s at %2$s' );
 
+$enc = $this->encoder();
+
 ?>
 <div class="account-history-list">
-	<h1><?php echo $this->translate( 'client/html', 'Order history' ); ?></h1>
+	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Order history' ), $enc::TRUST ); ?></h1>
 <?php if( empty( $orderItems ) === false ) : ?>
 	<ul class="history-list">
 <?php	foreach( $orderItems as $id => $orderItem ) : ?>
 		<li class="history-item">
-			<a href="<?php echo $this->url( $accountTarget, $accountController, $accountAction, array( 'h-action' => 'detail', 'h-order-id' => $id ) ); ?>">
+			<a href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction, array( 'h-action' => 'detail', 'h-order-id' => $id ) ) ); ?>">
 				<ul class="attr-list">
 					<li class="attr-item order-basic">
-						<span class="name"><?php echo $this->translate( 'client/html', 'Order ID' ); ?></span>
-						<span class="value"><?php printf( $this->translate( 'client/html', '%1$s at %2$s' ), $id, date_create( $orderItem->getTimeCreated() )->format( $dateformat ) ); ?></span>
+						<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Order ID' ), $enc::TRUST ); ?></span>
+						<span class="value"><?php echo $enc->html( sprintf( $this->translate( 'client/html', '%1$s at %2$s' ), $id, date_create( $orderItem->getTimeCreated() )->format( $dateformat ) ), $enc::TRUST ); ?></span>
 					</li><!--
 					--><li class="attr-item order-channel">
-						<span class="name"><?php echo $this->translate( 'client/html', 'Order channel' ); ?></span>
-						<span class="value"><?php $code = 'order:' . $orderItem->getType(); echo $this->translate( 'client/html/code', $code ); ?></span>
+						<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Order channel' ), $enc::TRUST ); ?></span>
+						<span class="value"><?php $code = 'order:' . $orderItem->getType(); echo $enc->html( $this->translate( 'client/html/code', $code ), $enc::TRUST ); ?></span>
 					</li><!--
 					--><li class="attr-item order-payment">
 <?php		$code = 'pay:' . $orderItem->getPaymentStatus(); $paystatus = $this->translate( 'client/html/code', $code ); ?>
-						<span class="name"><?php echo $this->translate( 'client/html', 'Payment' ); ?></span>
-						<span class="value"><?php ( $date = $orderItem->getDatePayment() ) !== null ? printf( $attrformat, $paystatus, date_create( $date )->format( $dateformat ) ) : ''; ?></span>
+						<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></span>
+						<span class="value"><?php echo ( ( $date = $orderItem->getDatePayment() ) !== null ? $enc->html( sprintf( $attrformat, $paystatus, date_create( $date )->format( $dateformat ) ), $enc::TRUST ) : '' ); ?></span>
 					</li><!--
 					--><li class="attr-item order-delivery">
 <?php		$code = 'stat:' . $orderItem->getDeliveryStatus(); $status = $this->translate( 'client/html/code', $code ); ?>
-						<span class="name"><?php echo $this->translate( 'client/html', 'Delivery' ); ?></span>
-						<span class="value"><?php ( $date = $orderItem->getDateDelivery() ) !== null ? printf( $attrformat, $status, date_create( $date )->format( $dateformat ) ) : ''; ?></span>
+						<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Delivery' ), $enc::TRUST ); ?></span>
+						<span class="value"><?php echo ( ( $date = $orderItem->getDateDelivery() ) !== null ? $enc->html( sprintf( $attrformat, $status, date_create( $date )->format( $dateformat ) ), $enc::TRUST ) : '' ); ?></span>
 					</li>
 				</ul>
 			</a>

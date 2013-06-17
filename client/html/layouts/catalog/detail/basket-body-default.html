@@ -15,6 +15,8 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 /// Percent format with value (%1$s) and % sign
 $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
+$enc = $this->encoder();
+
 ?>
 <div class="catalog-detail-basket">
 	<div class="price">
@@ -23,28 +25,28 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php	if( ( $priceItem = reset( $pricelist ) ) !== false ) : ?>
 <?php	$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() ); ?>
 		<div class="price-item">
-			<span class="quantity"><?php echo $priceItem->getQuantity(); ?></span>
-			<span class="value"><?php printf( $priceFormat, $this->number( $priceItem->getValue() ), $currency ); ?></span>
+			<span class="quantity"><?php echo $enc->html( $priceItem->getQuantity() ); ?></span>
+			<span class="value"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getValue() ), $currency ) ); ?></span>
 <?php		if( ( $rebate = $priceItem->getRebate() ) > 0 ) : ?>
-			<span class="rebate"><?php printf( $priceFormat, $this->number( $rebate ), $currency ); ?></span>
-			<span class="rebatepercent"><?php printf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ); ?></span>
+			<span class="rebate"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $rebate ), $currency ) ); ?></span>
+			<span class="rebatepercent"><?php echo $enc->html( sprintf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ) ); ?></span>
 <?php		endif; ?>
 <?php		if( ( $shipping = $priceItem->getShipping() ) > 0 ) : ?>
-			<span class="shipping"><?php printf( $priceFormat, $this->number( $shipping ), $currency ); ?></span>
+			<span class="shipping"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $shipping ), $currency ) ); ?></span>
 <?php		endif; ?>
-			<span class="taxrate"><?php printf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ); ?></span>
+			<span class="taxrate"><?php echo $enc->html( sprintf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ) ); ?></span>
 		</div>
 <?php	endif; ?>
 <?php endif; ?>
 	</div>
-	<form method="POST" action="<?php echo $this->url( $basketTarget, $basketController, $basketAction ); ?>">
+	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction ) ); ?>">
 <?php echo $this->get( 'basketBody' ); ?>
 		<div class="addbasket">
 			<div class="group">
-				<input name="<?php echo $this->formparam( 'b-action' ); ?>" type="hidden" value="add" />
-				<input name="<?php echo $this->formparam( array( 'b-prod', 0, 'prod-id' ) ); ?>" type="hidden" value="<?php echo $this->param( 'l-product-id' ); ?>" />
-				<input name="<?php echo $this->formparam( array( 'b-prod', 0, 'quantity' ) ); ?>" type="text" value="1" />
-				<button class="standardbutton" type="submit" value=""><?php echo $this->translate( 'client/html', 'Add to basket' ); ?></button>
+				<input name="<?php echo $enc->attr( $this->formparam( 'b-action' ) ); ?>" type="hidden" value="add" />
+				<input name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'prod-id' ) ) ); ?>" type="hidden" value="<?php echo $enc->attr( $this->param( 'l-product-id' ) ); ?>" />
+				<input name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'quantity' ) ) ); ?>" type="text" value="1" />
+				<button class="standardbutton" type="submit" value=""><?php echo $enc->html( $this->translate( 'client/html', 'Add to basket' ), $enc::TRUST ); ?></button>
 			</div>
 		</div>
 	</form>

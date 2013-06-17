@@ -42,6 +42,9 @@ class MW_View_Helper_NavTree_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Config_Default( $view, TestHelper::getContext()->getConfig() );
 		$view->addHelper( 'config', $helper );
 
+		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$view->addHelper( 'encoder', $helper );
+
 		$this->_object = new MW_View_Helper_NavTree_Default( $view );
 	}
 

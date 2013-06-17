@@ -6,14 +6,16 @@
  * @version $Id: header-default.html 1351 2012-10-28 11:29:07Z nsendetzky $
  */
 
+$enc = $this->encoder();
+
 ?>
 <?php if( isset( $this->detailProductItem ) ) : ?>
-<title><?php echo $this->detailProductItem->getName(); ?></title>
+<title><?php echo $enc->html( $this->detailProductItem->getName() ); ?></title>
 <?php foreach( $this->detailProductItem->getRefItems( 'text', 'meta-keyword', 'default' ) as $textItem ) : ?>
-<meta name="keywords" content="<?php echo str_replace( '"', '', strip_tags( $textItem->getContent() ) ); ?>" />
+<meta name="keywords" content="<?php echo $enc->attr( strip_tags( $textItem->getContent() ) ); ?>" />
 <?php endforeach; ?>
 <?php foreach( $this->detailProductItem->getRefItems( 'text', 'meta-description', 'default' ) as $textItem ) : ?>
-<meta name="description" content="<?php echo str_replace( '"', '', strip_tags( $textItem->getContent() ) ); ?>" />
+<meta name="description" content="<?php echo $enc->attr( strip_tags( $textItem->getContent() ) ); ?>" />
 <?php endforeach; ?>
 <?php endif; ?>
 <meta name="application-name" content="Arcavias" />
