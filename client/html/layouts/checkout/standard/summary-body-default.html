@@ -5,16 +5,18 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$enc = $this->encoder();
+
 ?>
 <section class="checkout-standard-summary common-summary">
-	<h1><?php echo $this->translate( 'client/html', 'summary' ); ?></h1>
-	<p class="note"><?php echo $this->translate( 'client/html', 'Please check your order' ); ?></p>
-	<form method="POST" action="<?php echo $this->get( 'standardUrlNext' ); ?>">
-		<input type="hidden" name="<?php echo $this->formparam( array( 'cs-order' ) ); ?>" value="1" />
+	<h1><?php echo $enc->html( $this->translate( 'client/html', 'summary' ), $enc::TRUST ); ?></h1>
+	<p class="note"><?php echo $enc->html( $this->translate( 'client/html', 'Please check your order' ), $enc::TRUST ); ?></p>
+	<form method="POST" action="<?php echo $enc->attr( $this->get( 'standardUrlNext' ) ); ?>">
+		<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'cs-order' ) ) ); ?>" value="1" />
 <?php echo $this->get( 'summaryBody' ); ?>
 		<div class="button-group">
-			<a class="standardbutton" href="<?php echo $this->get( 'standardUrlBack' ); ?>"><?php echo $this->translate( 'client/html', 'Back' ); ?></a> 
-			<button class="standardbutton"><?php echo $this->translate( 'client/html', 'Buy now' ); ?></button>
+			<a class="standardbutton" href="<?php echo $enc->attr( $this->get( 'standardUrlBack' ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a> 
+			<button class="standardbutton"><?php echo $enc->html( $this->translate( 'client/html', 'Buy now' ), $enc::TRUST ); ?></button>
 		</div>
 	</form>
 </section>

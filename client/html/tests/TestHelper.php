@@ -59,6 +59,9 @@ class TestHelper
 		$helper = new MW_View_Helper_FormParam_Default( $view );
 		$view->addHelper( 'formparam', $helper );
 
+		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$view->addHelper( 'encoder', $helper );
+
 		return $view;
 	}
 

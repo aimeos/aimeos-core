@@ -22,6 +22,7 @@ class MW_View_Helper_NavTree_Default
 	private $_target;
 	private $_controller;
 	private $_action;
+	private $_encoder;
 
 
 	/**
@@ -36,6 +37,8 @@ class MW_View_Helper_NavTree_Default
 		$this->_target = $view->config( 'client/html/catalog/list/url/target' );
 		$this->_controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
 		$this->_action = $view->config( 'client/html/catalog/list/url/action', 'list' );
+
+		$this->_encoder = $view->encoder();
 	}
 
 
@@ -53,18 +56,21 @@ class MW_View_Helper_NavTree_Default
 		}
 
 		$id = $item->getId();
+		$enc = $this->_encoder;
 		$config = $item->getConfig();
+
 		$class = ( $item->hasChildren() ? ' withchild' : ' nochild' );
 		$class .= ( isset( $path[ $item->getId() ] ) ? ' active' : '' );
 		$class .= ( isset( $config['css-class'] ) ? ' ' . $config['css-class'] : '' );
-		$params = array( 'a-name' => str_replace( ' ', '-', $item->getName() ), 'f-catalog-id' => $id );
-		$url = $this->url( $this->_target, $this->_controller, $this->_action, $params );
 
-		$output = '<li class="catid-' . $id . $class . '"><a href="' . $url . '">' . $item->getName() . '</a>';
+		$params = array( 'a-name' => str_replace( ' ', '-', $item->getName() ), 'f-catalog-id' => $id );
+		$url = $enc->attr( $this->url( $this->_target, $this->_controller, $this->_action, $params ) );
+
+		$output = '<li class="catid-' . $enc->attr( $id . $class ) . '"><a href="' . $url . '">' . $enc->html( $item->getName() ) . '</a>';
 
 		if( $item->hasChildren() )
 		{
-			$output .= '<ul class="level-' . ( $item->getNode()->level + 1 ) . '">';
+			$output .= '<ul class="level-' . $enc->attr( $item->getNode()->level + 1 ) . '">';
 
 			foreach( $item->getChildren() as $child ) {
 				$output .= $this->transform( $child, $path );

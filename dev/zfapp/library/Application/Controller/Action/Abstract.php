@@ -180,6 +180,9 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$helper = new MW_View_Helper_FormParam_Default( $view );
 		$view->addHelper( 'formparam', $helper );
 
+		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$view->addHelper( 'encoder', $helper );
+
 		return $view;
 	}
 

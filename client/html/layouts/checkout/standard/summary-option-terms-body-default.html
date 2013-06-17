@@ -5,6 +5,8 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$enc = $this->encoder();
+
 $termsTarget = $this->config( 'client/html/checkout/standard/summary/option/terms/url/target' );
 $termsController = $this->config( 'client/html/checkout/standard/summary/option/terms/url/controller' );
 $termsAction = $this->config( 'client/html/checkout/standard/summary/option/terms/url/action' );
@@ -17,11 +19,11 @@ $privacyUrl = $this->url( $privacyTarget, $privacyController, $privacyAction );
 
 ?>
 <div class="checkout-standard-summary-option-terms">
-	<h3><?php echo $this->translate( 'client/html', 'Terms and conditions' ); ?></h3>
+	<h3><?php echo $enc->html( $this->translate( 'client/html', 'Terms and conditions' ), $enc::TRUST ); ?></h3>
 	<div class="single <?php echo ( $this->get( 'termsError', false ) === true ? 'error' : '' ); ?>">
-		<input type="hidden" name="<?php echo $this->formparam( array( 'cs-option-terms' ) ); ?>" value="1" />
-		<input type="checkbox" name="<?php echo $this->formparam( array( 'cs-option-terms-value' ) ); ?>" value="1" <?php echo ( $this->param( 'cs-option-terms-value', null ) == 1 ? 'checked="checked"' : '' ); ?> />
-		<p><?php echo sprintf( $this->translate( 'client/html', 'I accept the <a href="%1$s" target="_blank" title="terms and conditions" alt="terms and conditions">terms and conditions</a> and <a href="%2$s" target="_blank" title="privacy policy" alt="privacy policy">privacy policy</a>' ), $termsUrl, $privacyUrl ); ?></p>
+		<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'cs-option-terms' ) ) ); ?>" value="1" />
+		<input type="checkbox" name="<?php echo $enc->attr( $this->formparam( array( 'cs-option-terms-value' ) ) ); ?>" value="1" <?php echo ( $this->param( 'cs-option-terms-value', null ) == 1 ? 'checked="checked"' : '' ); ?> />
+		<p><?php echo $enc->html( sprintf( $this->translate( 'client/html', 'I accept the <a href="%1$s" target="_blank" title="terms and conditions" alt="terms and conditions">terms and conditions</a> and <a href="%2$s" target="_blank" title="privacy policy" alt="privacy policy">privacy policy</a>' ), $enc->attr( $termsUrl ), $enc->attr( $privacyUrl ) ), $enc::TRUST ); ?></p>
 	</div>
 <?php echo $this->get( 'termsBody' ); ?>
 </div>

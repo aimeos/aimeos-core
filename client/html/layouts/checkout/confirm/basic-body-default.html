@@ -5,19 +5,21 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$enc = $this->encoder();
+
 ?>
 <div class="checkout-confirm-basic">
-	<h2><?php echo $this->translate( 'client/html', 'Order' ); ?></h2>
-	<p class="note"><?php echo $this->translate( 'client/html', 'Thank you for your order' ); ?></p>
+	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Order' ), $enc::TRUST ); ?></h2>
+	<p class="note"><?php echo $enc->html( $this->translate( 'client/html', 'Thank you for your order' ), $enc::TRUST ); ?></p>
 <?php if( isset( $this->confirmOrderItem ) ) : ?>
 	<ul class="attr-list">
 		<li class="form-item">
-			<span class="name"><?php echo $this->translate( 'client/html', 'Order ID' ); ?></span>
-			<span class="value"><?php echo  $this->confirmOrderItem->getId(); ?></span>
+			<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Order ID' ), $enc::TRUST ); ?></span>
+			<span class="value"><?php echo $enc->html( $this->confirmOrderItem->getId() ); ?></span>
 		</li>
 		<li class="form-item">
-			<span class="name"><?php echo $this->translate( 'client/html', 'Payment status' ); ?></span>
-			<span class="value"><?php $code = 'pay:' . $this->confirmOrderItem->getPaymentStatus(); echo $this->translate( 'client/html/code', $code ); ?></span>
+			<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Payment status' ), $enc::TRUST ); ?></span>
+			<span class="value"><?php $code = 'pay:' . $this->confirmOrderItem->getPaymentStatus(); echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></span>
 		</li>
 	</ul>
 <?php	if( $this->confirmOrderItem->getPaymentStatus() < MShop_Order_Item_Abstract::PAY_REFUND ) : ?>
@@ -30,8 +32,8 @@
 			$retryUrl = $this->url( $target, $controller, $action, array( 'c-step' => 'summary' ) );
 ?>
 	<div class="button-group">
-		<a class="standardbutton" href="<?php echo $changeUrl; ?>"><?php echo $this->translate( 'client/html', 'Change payment' ); ?></a> 
-		<a class="standardbutton" href="<?php echo $retryUrl; ?>"><?php echo $this->translate( 'client/html', 'Try again' ); ?></a> 
+		<a class="standardbutton" href="<?php echo $enc->attr( $changeUrl ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change payment' ), $enc::TRUST ); ?></a> 
+		<a class="standardbutton" href="<?php echo $enc->attr( $retryUrl ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Try again' ), $enc::TRUST ); ?></a> 
 	</div>
 <?php	endif; ?>
 <?php endif; ?>

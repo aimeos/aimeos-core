@@ -5,6 +5,8 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$enc = $this->encoder();
+
 $classes = '';
 foreach( (array) $this->get( 'listCatPath', array() ) as $cat )
 {
@@ -15,11 +17,11 @@ foreach( (array) $this->get( 'listCatPath', array() ) as $cat )
 }
 
 ?>
-<section class="arcavias catalog-list<?php echo $classes; ?>">
+<section class="arcavias catalog-list<?php echo $enc->attr( $classes ); ?>">
 <?php if( isset( $this->listErrorList ) ) : ?>
 	<ul class="error-list">
 <?php foreach( (array) $this->listErrorList as $errmsg ) : ?>
-		<li class="error-item"><?php echo $errmsg; ?></li>
+		<li class="error-item"><?php echo $enc->html( $errmsg ); ?></li>
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
