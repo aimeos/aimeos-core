@@ -257,6 +257,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordServAttr->setCode( $dataset['code'] );
 			$ordServAttr->setValue( $dataset['value'] );
 			$ordServAttr->setName( $dataset['name'] );
+			$ordServAttr->setType( $dataset['type'] );
 
 			$orderBaseServiceAttrManager->saveItem( $ordServAttr, false );
 		}
@@ -294,8 +295,11 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 		$productsResult = $productManager->searchItems( $search );
 
 		$prodIds = array();
-		foreach( $productsResult as $id => $product ) {
+		$prodTypes = array();
+		foreach( $productsResult as $id => $product )
+		{
 			$prodIds[$product->getCode()] = $id;
+			$prodTypes[$product->getCode()] = $product->getType();
 		}
 
 		$ordProds = $prices = array();
@@ -360,6 +364,10 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordProdAttr->setCode( $dataset['code'] );
 			$ordProdAttr->setValue( $dataset['value'] );
 			$ordProdAttr->setName( $dataset['name'] );
+
+			if( isset( $dataset['type'] ) ) {
+				$ordProdAttr->setType( $prodTypes[$dataset['type']] );
+			}
 
 			$orderBaseProductAttrManager->saveItem( $ordProdAttr, false );
 		}

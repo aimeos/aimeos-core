@@ -634,6 +634,7 @@ implements MShop_Service_Provider_Payment_Interface
 				$attributeItem = $attributeManager->createItem();
 				$attributeItem->setServiceId( $serviceItem->getId() );
 				$attributeItem->setCode( $code );
+				$attributeItem->setType( 'payment' );
 			}
 			else
 			{

@@ -77,6 +77,11 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend( MShop.panel.A
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
+				dataIndex : 'order.base.product.attribute.type',
+				header : _('Type'),
+				width : 150
+			}, {
+				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.attribute.name',
 				header : _('Name'),
 				id : 'order-base-product-attribute-name'
