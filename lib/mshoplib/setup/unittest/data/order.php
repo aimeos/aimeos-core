@@ -56,14 +56,14 @@ return array (
 	),
 
 	'order/base/service' => array (
-		'OGONE/19.95' => array ( 'baseid' => '19.95', 'servid' => 'OGONE1', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'solucia/19.95' => array ( 'baseid' => '19.95', 'servid' => '73test', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'OGONE/636.00' => array ( 'baseid' => '636.00', 'servid' => 'OGONE1', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'solucia/636.00' => array ( 'baseid' => '636.00', 'servid' => '73test', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'paypal/10.00' => array ( 'baseid' => '10.00', 'servid' => 'paypal1', 'type' => 'payment', 'code' => 'paypal', 'name' => 'paypal', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'solucia/10.00' => array ( 'baseid' => '10.00', 'servid' => '73test', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'OGONE/18.00' => array ( 'baseid' => '18.00', 'servid' => 'OGONE1', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'solucia/18.00' => array ( 'baseid' => '18.00', 'servid' => '73test', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'OGONE/19.95' => array ( 'baseid' => '19.95', 'servid' => 'unitpaymentcode', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'solucia/19.95' => array ( 'baseid' => '19.95', 'servid' => 'unitcode', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'OGONE/636.00' => array ( 'baseid' => '636.00', 'servid' => 'unitpaymentcode', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'solucia/636.00' => array ( 'baseid' => '636.00', 'servid' => 'unitcode', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'paypal/10.00' => array ( 'baseid' => '10.00', 'servid' => 'paypalexpress', 'type' => 'payment', 'code' => 'paypal', 'name' => 'paypal', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'solucia/10.00' => array ( 'baseid' => '10.00', 'servid' => 'unitcode', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'OGONE/18.00' => array ( 'baseid' => '18.00', 'servid' => 'unitpaymentcode', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'solucia/18.00' => array ( 'baseid' => '18.00', 'servid' => 'unitcode', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
 	),
 
 	'order/base/service/attr' => array (

@@ -188,6 +188,23 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Default' );
 		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_additional, 'Default' );
 
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$services = array();
+		foreach( $testdata['order/base/service'] as $key => $dataset ) {
+			if( isset( $dataset['servid'] ) ) {
+				$services[$key] = $dataset['servid'];
+			}
+		}
+
+		$search = $serviceManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.code', $services ) );
+		$servicesResult = $serviceManager->searchItems( $search );
+
+		$servIds = array();
+		foreach( $servicesResult as $id => $service ) {
+			$servIds[$service->getCode()] = $id;
+		}
+
 		$ordServices = array ();
 		$ordServ = $orderBaseServiceManager->createItem();
 
@@ -206,7 +223,11 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$priceItem = $priceManager->createItem();
 			$ordServ->setId(null);
 			$ordServ->setBaseId( $bases['ids'][ $dataset['baseid'] ] );
-			$ordServ->setServiceId( $dataset['servid'] );
+
+			if( isset( $dataset['servid'] ) ) {
+				$ordServ->setServiceId( $servIds[$dataset['servid']] );
+			}
+
 			$ordServ->setType($dataset['type']);
 			$ordServ->setCode($dataset['code']);
 			$ordServ->setName($dataset['name']);
