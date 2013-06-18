@@ -466,7 +466,7 @@ class MShop_Product_Manager_Default
 	 * @param integer $id Unique ID of the product item
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Product_Item_Interface Returns the product item of the given id
-	 * @throws MShop_Product_Exception If item couldn't be found
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

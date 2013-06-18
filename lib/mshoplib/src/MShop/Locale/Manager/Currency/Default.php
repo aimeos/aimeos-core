@@ -177,7 +177,7 @@ class MShop_Locale_Manager_Currency_Default
 	 * @param string $id Currency ID indentifying the currency object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Locale_Item_Currency_Interface Returns the currency item of the given id
-	 * @throws MShop_Locale_Exception If item couldn't be found
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

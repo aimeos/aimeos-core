@@ -185,7 +185,7 @@ class MShop_Product_Manager_Stock_Default
 	 * @param integer $id Id of the stock item
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Product_Item_Stock_Interface Returns the product stock item of the given id
-	 * @throws MShop_Attribute_Exception If item couldn't be found
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

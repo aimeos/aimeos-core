@@ -153,7 +153,7 @@ class MShop_Locale_Manager_Default
 	 * @param integer $id Unique ID of the locale item
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Locale_Item_Interface Returns the locale item of the given id
-	 * @throws MShop_Locale_Exception If item couldn't be found
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

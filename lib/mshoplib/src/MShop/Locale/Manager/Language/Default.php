@@ -172,7 +172,7 @@ class MShop_Locale_Manager_Language_Default
 	 * @param string $id Language id to create the Language object
 	 * @return MShop_Locale_Item_Language_Interface Returns the language item of the given id
 	 * @throws MW_DB_Exception If language object couldn't be fetched
-	 * @throws MShop_Locale_Exception If item couldn't be found
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

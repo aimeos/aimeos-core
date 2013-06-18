@@ -316,7 +316,7 @@ class MShop_Supplier_Manager_Default
 	 * @param integer $id Unique supplier ID referencing an existing supplier
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Supplier_Item_Interface Returns the supplier item of the given id
-	 * @throws MShop_Supplier_Exception If item couldn't be found
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

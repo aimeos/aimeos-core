@@ -355,7 +355,7 @@ class MShop_Catalog_Manager_Default
 	 * @param integer $id Unique ID of the catalog item
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Catalog_Item_Interface Returns the catalog item of the given id
-	 * @throws MShop_Catalog_Exception If item couldn't be found
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

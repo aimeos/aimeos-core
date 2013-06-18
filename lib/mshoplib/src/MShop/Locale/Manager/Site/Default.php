@@ -212,7 +212,7 @@ class MShop_Locale_Manager_Site_Default
 	 * @param string $siteId Site id to create the Site object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Locale_Item_Site_Interface Returns the site item of the given id
-	 * @throws MShop_Locale_Exception If item couldn't be found
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

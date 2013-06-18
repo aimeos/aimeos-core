@@ -176,6 +176,7 @@ class MShop_Common_Manager_Type_Default
 	 * @param integer $id Id of type item object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Common_Item_Type_Interface Returns the type item of the given id
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

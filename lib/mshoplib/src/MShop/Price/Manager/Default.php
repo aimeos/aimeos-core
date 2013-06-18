@@ -421,7 +421,7 @@ class MShop_Price_Manager_Default
 	 * @param integer $id Unique price ID referencing an existing price
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Price_Item_Interface $item Returns the price item of the given id
-	 * @throws MShop_Price_Exception If item couldn't be found
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
