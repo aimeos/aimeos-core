@@ -200,6 +200,11 @@ MShop.panel.order.base.service.delivery.attribute.ItemUi = Ext.extend(Ext.Panel,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
+				dataIndex : 'order.base.service.attribute.type',
+				header : _('Type'),
+				width : 150
+			}, {
+				xtype : 'gridcolumn',
 				dataIndex : 'order.base.service.attribute.name',
 				header : _('Name'),
 				id : 'order-base-service-attribute-delivery-name-id'

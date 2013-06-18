@@ -74,7 +74,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 		$expr[] = $search->compare( '!=', 'order.base.service.attribute.id', null );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.service.attribute.serviceid', null );
-		$expr[] = $search->compare( '==', 'order.base.service.attribute.type', '' );
+		$expr[] = $search->compare( '!=', 'order.base.service.attribute.type', '' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.code', 'NAME' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.value', '"CreditCard"' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.name', 'payment method' );
