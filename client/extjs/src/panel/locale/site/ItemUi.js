@@ -103,11 +103,10 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	{
 		this.setTitle( this.title + ' (' + MShop.config.site["locale.site.label"] + ')' );
 
-		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
+		MShop.panel.locale.site.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
 	
 	onBeforeSave: function( store, data ) {
-
 		var config = {};
 		var editorGrid = this.findByType( 'MShop.panel.locale.site.configui' );
 		var first = editorGrid.shift();
@@ -116,7 +115,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( key.trim() !== '' ) {
-						config[key] = value.trim();
+						config[key] = value;
 					}
 				}, this);
 			});
@@ -127,7 +126,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 		} else if( data.update && data.update[0] ) {
 			data.update[0].data['locale.site.config'] = config;
 		}
-	}
+	},
 } );
 
 Ext.reg( 'MShop.panel.locale.site.itemui', MShop.panel.locale.site.ItemUi );
