@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MAdmin
  * @subpackage Job
- * @version $Id: Default.php 14711 2012-01-05 12:52:13Z nsendetzky $
  */
 
 
@@ -205,7 +204,9 @@ class MAdmin_Job_Manager_Default
 	 * Creates the job object for the given job id.
 	 *
 	 * @param integer $id Job ID to fetch job object for
-	 * @return MAdmin_Job_Item_Interface
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MAdmin_Job_Item_Interface Returns the job item of the given id
+	 * @throws MAdmin_Job_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
