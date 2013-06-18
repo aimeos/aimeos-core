@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/license
  * @package MShop
  * @subpackage Plugin
- * @version $Id$
  */
 
 

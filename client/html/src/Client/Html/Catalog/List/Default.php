@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
  * @subpackage Html
- * @version $Id: Default.php 1354 2012-10-30 11:17:57Z nsendetzky $
  */
 
 

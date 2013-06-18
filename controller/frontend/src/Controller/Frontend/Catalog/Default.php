@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage Frontend
- * @version $Id: Default.php 1364 2012-10-31 13:19:53Z doleiynyk $
  */
 
 

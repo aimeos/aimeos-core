@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Default.php 14854 2012-01-13 12:54:14Z doleiynyk $
  */
 
 
@@ -328,8 +327,10 @@ class MShop_Order_Manager_Base_Address_Default
 	/**
 	 * Creates a order base address item object for the given item id.
 	 *
-	 * @param Integer $id Id of order base address item
-	 * @return MShop_Order_Item_Base_Address_Interface Order base address item
+	 * @param integer $id Id of the order base address item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Order_Item_Base_Address_Interface Returns order base address item of the given id
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

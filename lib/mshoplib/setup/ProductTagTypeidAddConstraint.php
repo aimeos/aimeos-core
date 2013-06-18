@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: ProductTagTypeidAddConstraint.php 14336 2011-12-14 14:38:50Z nsendetzky $
  */
 
 

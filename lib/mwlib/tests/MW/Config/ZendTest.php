@@ -5,7 +5,6 @@
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
- * @version $Id: ZendTest.php 16606 2012-10-19 12:50:23Z nsendetzky $
  */
 class MW_Config_ZendTest extends MW_Unittest_Testcase
 {

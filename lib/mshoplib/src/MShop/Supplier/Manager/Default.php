@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Supplier
- * @version $Id: Default.php 14854 2012-01-13 12:54:14Z doleiynyk $
  */
 
 
@@ -315,6 +314,9 @@ class MShop_Supplier_Manager_Default
 	 * Returns the supplier item object specificed by its ID.
 	 *
 	 * @param integer $id Unique supplier ID referencing an existing supplier
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Supplier_Item_Interface Returns the supplier item of the given id
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

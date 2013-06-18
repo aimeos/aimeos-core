@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: ProductTest.php 950 2012-07-13 11:58:34Z nsendetzky $
  */
 
 class Perf_ProductTest extends MW_Unittest_Testcase

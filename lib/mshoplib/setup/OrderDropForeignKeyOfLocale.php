@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: OrderDropForeignKeyOfLocale.php 1174 2012-08-29 14:26:34Z nsendetzky $
  */
 
 

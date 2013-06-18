@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Price
- * @version $Id: Default.php 14754 2012-01-09 13:26:10Z nsendetzky $
  */
 
 
@@ -420,8 +419,9 @@ class MShop_Price_Manager_Default
 	 * Returns the price item object specificed by its ID.
 	 *
 	 * @param integer $id Unique price ID referencing an existing price
-	 * @return MShop_Price_Item_Interface $item Price item object
-	 * @throws MShop_Price_Exception If price couldn't be found
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Price_Item_Interface $item Returns the price item of the given id
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: LocaleChangeLabelSize.php 14679 2012-01-03 18:16:41Z spopp $
  */
 
 

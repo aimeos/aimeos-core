@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MW
  * @subpackage Unittest
- * @version $Id: Testcase.php 423 2012-03-21 11:34:14Z spopp $
  */
 
 

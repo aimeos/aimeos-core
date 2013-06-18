@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: DefaultTest.php 1325 2012-10-21 15:41:26Z nsendetzky $
  */
 
 class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase

@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Catalog
- * @version $Id: Default.php 14754 2012-01-09 13:26:10Z nsendetzky $
  */
 
 
@@ -84,7 +83,8 @@ class MShop_Catalog_Manager_Index_Default
 	 *
 	 * @param integer $id Unique ID to search for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Product_Item_Interface Product item
+	 * @return MShop_Product_Item_Interface Returns the product item of the given id
+	 * @throws MShop_Exception If product couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

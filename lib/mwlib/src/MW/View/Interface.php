@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MW
  * @subpackage View
- * @version $Id$
  */
 
 

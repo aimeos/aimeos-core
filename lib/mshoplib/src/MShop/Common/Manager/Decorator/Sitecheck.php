@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Common
- * @version $Id: Sitecheck.php 14689 2012-01-04 15:04:29Z nsendetzky $
  */
 
 

@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
- * @version $Id: Interface.php 589 2012-04-25 15:24:23Z nsendetzky $
  */
 
 

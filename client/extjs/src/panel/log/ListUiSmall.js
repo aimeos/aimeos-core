@@ -1,7 +1,6 @@
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
- * $Id: ListUiSmall.js 14713 2012-01-05 13:03:50Z nsendetzky $
  */
 
 

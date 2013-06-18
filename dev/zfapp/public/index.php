@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: index.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
 header( "Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'" );

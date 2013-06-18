@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: PriceDropIndexes.php 1100 2012-08-07 09:33:15Z doleiynyk $
  */
 
 

@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: SupplierRenameConstraints.php 14277 2011-12-12 11:28:56Z spopp $
  */
 
 require_once 'MW/Setup/Task/Abstract.php';

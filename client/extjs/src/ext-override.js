@@ -1,7 +1,6 @@
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
- * $Id: ext-override.js 14263 2011-12-11 16:36:17Z nsendetzky $
  */
 
 

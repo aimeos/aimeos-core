@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/license
- * @version $Id$
  */
 
 class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_TestCase

@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: default.php 1088 2012-08-04 20:41:58Z nsendetzky $
  */
 
 return array(

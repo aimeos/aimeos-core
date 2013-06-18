@@ -4,7 +4,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Default.php 14710 2012-01-05 12:51:21Z nsendetzky $
  */
 
 /**
@@ -99,22 +98,23 @@ class MShop_Order_Manager_Status_Default
 
 
 	/**
-	* Creates a new order status object.
-	*
-	* @return MShop_Order_Item_Status_Interface New item object
-	*/
+	 * Creates a new order status object.
+	 *
+	 * @return MShop_Order_Item_Status_Interface New item object
+	 */
 	public function createItem()
 	{
 		$values = array('siteid'=> $this->_getContext()->getLocale()->getSiteId());
 		return $this->_createItem($values);
 	}
 
+
 	/**
-	* Adds or updates an order status object.
-	*
-	* @param MShop_Order_Item_Status_Interface $item Order status object whose data should be saved
-	* @param boolean $fetch True if the new ID should be returned in the item
-	*/
+	 * Adds or updates an order status object.
+	 *
+	 * @param MShop_Order_Item_Status_Interface $item Order status object whose data should be saved
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
 		$iface = 'MShop_Order_Item_Status_Interface';
@@ -145,16 +145,19 @@ class MShop_Order_Manager_Status_Default
 			$stmt->bind(5, date('Y-m-d H:i:s', time()));//mtime
 			$stmt->bind(6, $context->getEditor());
 
-			if( $id !== null ) {
+			if( $id !== null )
+			{
 				$stmt->bind(7, $id, MW_DB_Statement_Abstract::PARAM_INT);
 				$item->setId($id); //is not modified anymore
-			} else {
+			}
+			else {
 				$stmt->bind(7, date('Y-m-d H:i:s', time()));//ctime
 			}
 
 			$result = $stmt->execute()->finish();
 
-			if( $id === null && $fetch === true ) {
+			if( $id === null && $fetch === true )
+			{
 				$path = 'mshop/order/manager/status/default/item/newid';
 				$item->setId( $this->_newId( $conn, $config->get($path, $path) ) );
 			}
@@ -169,12 +172,15 @@ class MShop_Order_Manager_Status_Default
 
 	}
 
+
 	/**
-	* Returns the order status item specified by its ID.
-	*
-	* @param integer $id Id of item
-	* @return MShop_Order_Item_Status_Interface Item object
-	*/
+	 * Returns the order status item specified by its ID.
+	 *
+	 * @param integer $id Unique ID of the order status item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Order_Item_Status_Interface Returns order status item of the given id
+	 * @throws MShop_Order_Exception If item couldn't be found
+	 */
 	public function getItem( $id, array $ref = array() )
 	{
 		return $this->_getItem( 'order.status.id', $id, $ref );
@@ -218,6 +224,7 @@ class MShop_Order_Manager_Status_Default
 		return $list;
 	}
 
+
 	/**
 	 * Returns a new manager for order status extensions.
 	 *
@@ -229,7 +236,6 @@ class MShop_Order_Manager_Status_Default
 	{
 		return $this->_getSubManager( 'order', 'status/' . $manager, $name );
 	}
-
 
 
 	/**
@@ -275,12 +281,13 @@ class MShop_Order_Manager_Status_Default
 		return $items;
 	}
 
+
 	/**
-	* Creates a new order status object.
-	*
-	* @param array $values List of attributes for the order status object
-	* @return MShop_Order_Item_Status_Interface New order status object
-	*/
+	 * Creates a new order status object.
+	 *
+	 * @param array $values List of attributes for the order status object
+	 * @return MShop_Order_Item_Status_Interface New order status object
+	 */
 	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Order_Item_Status_Default( $values );
