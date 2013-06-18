@@ -12,7 +12,6 @@
  */
 class MShop
 {
-	private static $_includePaths;
 	private $_manifests = array();
 	private $_extensions = array();
 	private $_extensionsDone = array();
@@ -28,6 +27,8 @@ class MShop
 	 */
 	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
+		require 'vendor/autoload.php';
+
 		$ds = DIRECTORY_SEPARATOR;
 
 		if( $basedir === null ) {
@@ -36,13 +37,6 @@ class MShop
 
 		if( $defaultdir === true && is_dir( $basedir . DIRECTORY_SEPARATOR . 'ext' ) === true ) {
 			$extdirs[] = $basedir . DIRECTORY_SEPARATOR . 'ext';
-		}
-
-		$incpath = get_include_path();
-		$mwlibpath = $basedir . $ds . 'lib' . $ds . 'mwlib' . $ds .'src';
-
-		if( set_include_path( $mwlibpath . PATH_SEPARATOR . $incpath ) === false ) {
-			throw new Exception( 'Unable to set new include path' );
 		}
 
 		$criteria = new MW_Common_Criteria_PHP();
@@ -72,38 +66,18 @@ class MShop
 		}
 
 		$this->_addManifests( $this->_dependencies );
-
-		if( set_include_path( $incpath ) === false ) {
-			throw new Exception( 'Unable to set old include path' );
-		}
-
-		self::$_includePaths = null;
 	}
 
 
 	/**
 	 * Loads the class files for a given class name.
+	 * Deprecated, composer autoloader is automatically used when creating the MShop object
 	 *
 	 * @param string $className Name of the class
 	 * @return boolean True if file was found, false if not
 	 */
 	public static function autoload( $className )
 	{
-	    $fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
-
-		if( !isset( self::$_includePaths ) ) {
-			self::$_includePaths = explode( PATH_SEPARATOR, get_include_path() );
-		}
-
-		foreach( self::$_includePaths as $path )
-		{
-			$file = $path . DIRECTORY_SEPARATOR . $fileName;
-
-			if( file_exists( $file ) === true && ( include_once $file ) !== false ) {
-				return true;
-			}
-		}
-
 		return false;
 	}
 

@@ -25,15 +25,6 @@ return array(
 			'config',
 		),
 	),
-	'include' => array(
-		'lib/mshoplib/src',
-		'lib/mwlib/src',
-		'client/html/src',
-		'controller/frontend/src',
-		'controller/extjs/src',
-		'lib/phpexcel',
-		'lib/mwlib/lib'
-	),
 	'i18n' => array(
 		'client/html' => 'client/html/i18n',
 		'client/html/code' => 'client/html/i18n/code',
