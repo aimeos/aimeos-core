@@ -14,6 +14,5 @@ lib/mshoplib/i18n/[a-z][a-z]
 lib/mshoplib/i18n/[a-z][a-z]_[A-Z][A-Z]
 lib/mwlib/tests/config/resource.php
 config/resource.php
-ext/*
 .tx/
 *.log
