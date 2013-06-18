@@ -1,7 +1,6 @@
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
- * $Id: ItemPickerUi.js 14341 2011-12-14 16:00:50Z nsendetzky $
  */
 
 

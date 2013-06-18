@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: OrderAlterForeignKeyContraintsOnDelete.php 14841 2012-01-12 21:51:09Z nsendetzky $
  */
 
 

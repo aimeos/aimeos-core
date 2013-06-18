@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Communication
- * @version $Id: TestPayPalExpress.php 1163 2012-08-28 09:25:31Z doleiynyk $
  */
 
 

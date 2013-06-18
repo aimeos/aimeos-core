@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: ProductModifyIndexes.php 1316 2012-10-19 19:49:23Z nsendetzky $
  */
 
 

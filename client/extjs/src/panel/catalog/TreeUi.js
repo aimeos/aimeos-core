@@ -1,7 +1,6 @@
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
- * $Id: TreeUi.js 14834 2012-01-12 17:13:15Z nsendetzky $
  */
 
 

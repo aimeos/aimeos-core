@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
- * @version $Id: Example.php 867 2012-06-28 16:14:46Z fblasel $
  */
 
 

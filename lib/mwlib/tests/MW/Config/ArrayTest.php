@@ -5,7 +5,6 @@
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
- * @version $Id$
  */
 class MW_Config_ArrayTest extends MW_Unittest_Testcase
 {

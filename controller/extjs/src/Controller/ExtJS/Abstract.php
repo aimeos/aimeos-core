@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
- * @version $Id: Abstract.php 14428 2011-12-19 09:26:03Z nsendetzky $
  */
 
 

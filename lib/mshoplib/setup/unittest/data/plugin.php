@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: plugin.php 1197 2012-09-13 14:23:18Z gbang $
  */
 
 return array (

@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Communication
- * @version $Id: Exception.php 1317 2012-10-19 19:50:05Z nsendetzky $
  */
 
 

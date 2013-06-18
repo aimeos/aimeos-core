@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: LocaleAlterForeignKeyContraintsOnDelete.php 14809 2012-01-11 18:08:49Z fblasel $
  */
 
 

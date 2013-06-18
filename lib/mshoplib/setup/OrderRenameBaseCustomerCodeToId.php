@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: OrderRenameBaseCustomerCodeToId.php 935 2012-07-12 10:21:18Z gbang $
  */
 
 

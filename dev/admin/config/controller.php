@@ -5,7 +5,6 @@
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: controller.php 14264 2011-12-11 16:55:25Z nsendetzky $
  */
 
 

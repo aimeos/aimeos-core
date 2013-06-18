@@ -2,7 +2,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: service.php 1163 2012-08-28 09:25:31Z doleiynyk $
  */
 
 return array (

@@ -2,7 +2,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: price-list.php 865 2012-06-28 14:42:53Z nsendetzky $
  */
 
 return array (

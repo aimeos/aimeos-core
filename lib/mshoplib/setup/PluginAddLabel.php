@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: PluginAddLabel.php 14854 2012-01-13 12:54:14Z doleiynyk $
  */
 
 /**
