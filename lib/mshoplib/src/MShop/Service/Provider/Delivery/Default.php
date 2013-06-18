@@ -33,7 +33,7 @@ class MShop_Service_Provider_Delivery_Default
 		'url' => array(
 			'code' => 'url',
 			'internalcode'=> 'url',
-			'label'=> 'URL to success page',
+			'label'=> 'URL to webservice the HTTP request is sent to',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
@@ -148,11 +148,11 @@ class MShop_Service_Provider_Delivery_Default
 
 		if( !isset( $config['url'] ) ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Missing parameter "%1$s" in service config', "url" ), parent::ERR_TEMP );
+				sprintf( 'Parameter "%1$s" for configuration not available', "url" ), parent::ERR_TEMP );
 		}
 
 		if( ( $curl = curl_init() )=== false ) {
-			throw new MShop_Service_Exception( 'Could not initialize curl', parent::ERR_TEMP );
+			throw new MShop_Service_Exception( sprintf( 'Curl could not be initialized' ), parent::ERR_TEMP );
 		}
 
 		try
@@ -198,13 +198,13 @@ class MShop_Service_Provider_Delivery_Default
 
 			if ( ( $response = curl_exec( $curl ) ) === false ) {
 				throw new MShop_Service_Exception(
-					sprintf( 'Sending order failed: "%1$s"', curl_error( $curl ) ), parent::ERR_TEMP );
+					sprintf( 'Sending order to delivery provider failed: "%1$s"', curl_error( $curl ) ), parent::ERR_TEMP );
 			}
 
 			$curlinfo = curl_getinfo( $curl );
 			if( $curlinfo['http_code'] != '200' ) {
 				throw new MShop_Service_Exception(
-					sprintf( 'Sending order failed with HTTP status "%1$s"', $curlinfo['http_code'] ), parent::ERR_TEMP );
+					sprintf( 'Sending order to delivery provider failed with HTTP status "%1$s"', $curlinfo['http_code'] ), parent::ERR_TEMP );
 			}
 
 			curl_close( $curl );
@@ -235,19 +235,19 @@ class MShop_Service_Provider_Delivery_Default
 
 		if ( $dom->loadXML( $response ) !== true ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Loading XML response failed "%1$s"', $response ), parent::ERR_XML );
+				sprintf( 'Loading of XML response "%1$s" from delivery provider failed', $response ), parent::ERR_XML );
 		}
 
 		if( $dom->schemaValidate( $responseXSD ) !== true ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Schema validation with "%1$s" failed', $responseXSD ), parent::ERR_SCHEMA );
+				sprintf( 'Validation of XML response from delivery provider against schema "%1$s" failed', $responseXSD ), parent::ERR_SCHEMA );
 		}
 
 		$xpath = new DOMXPath( $dom );
 
 		$globalStatus = $xpath->query( '/response/error' )->item(0)->nodeValue;
 		if( $globalStatus != 0 ) {
-			throw new MShop_Service_Exception( sprintf( 'XML was rejected with code "%1$s"', $globalStatus ) );
+			throw new MShop_Service_Exception( sprintf( 'Order data sent to delivery provider was rejected with code "%1$s" according to XML response', $globalStatus ) );
 		}
 
 		$orderitemlist = $xpath->query( '/response/orderlist/orderitem' );
@@ -259,14 +259,14 @@ class MShop_Service_Provider_Delivery_Default
 
 			if( $id != $invoiceid ) {
 				throw new MShop_Service_Exception(
-					sprintf( 'Unknown order ID "%1$s" in response for order "%2$s"', $id, $invoiceid ) );
+					sprintf( 'Order ID "%1$s" in XML response of delivery provider differs from stored invoice ID "%2$s" of the order', $id, $invoiceid ) );
 			}
 
 			if( $status != 0 )
 			{
 				$msg = $xpath->query( 'message', $orderitem )->item(0)->nodeValue;
 				throw new MShop_Service_Exception(
-					sprintf( 'Order "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $msg ), $status );
+					sprintf( 'Order with ID "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $msg ), $status );
 			}
 		}
 	}
@@ -289,7 +289,7 @@ class MShop_Service_Provider_Delivery_Default
 		if( ( $base = reset( $result ) ) === false )
 		{
 			throw new MShop_Order_Exception( sprintf(
-				'No order base item for order ID "%1$d" available', $invoice->getId()
+				'Order base item with order ID "%1$s" not found', $invoice->getId()
 			) );
 		}
 
@@ -313,18 +313,19 @@ class MShop_Service_Provider_Delivery_Default
 		}
 		catch( DOMException $e )
 		{
-			throw new MShop_Service_Exception( 'Creating XML failed: ' . $e->getMessage(), 0, $e );
+			throw new MShop_Service_Exception(
+					sprintf( 'Creating XML file with order data for delivery provider failed: %1$s', $e->getMessage() ), 0, $e );
 		}
 
 		$requestXSD = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-request_v1.xsd';
 
 		if( $dom->schemaValidate( $requestXSD ) !== true ) {
 			throw new MShop_Service_Exception(
-				sprintf('Schema validation with "%1$s" failed. domXML: "%2$s".', $requestXSD, $dom->saveXML()), parent::ERR_SCHEMA);
+				sprintf('Validation of XML response from delivery provider against schema "%1$s" failed: %2$s', $requestXSD, $dom->saveXML()), parent::ERR_SCHEMA);
 		}
 
 		if ( ( $xml = $dom->saveXML() ) === false ) {
-			throw new MShop_Service_Exception( 'XML DOM tree could not be converted to XML string', parent::ERR_XML );
+			throw new MShop_Service_Exception( sprintf( 'DOM tree of XML response from delivery provider could not be converted to XML string' ), parent::ERR_XML );
 		}
 
 		return $xml;
@@ -347,14 +348,14 @@ class MShop_Service_Provider_Delivery_Default
 		$date = $invoice->getDatePayment();
 
 		if ( ( $pdate = preg_replace( $regex, '$1-$2-$3T$4:$5:$6Z', $date ) ) === null ) {
-				throw new MShop_Service_Exception( sprintf( 'Invalid date format for purchase date: "%1$s"', $date ) );
+				throw new MShop_Service_Exception( sprintf( 'Invalid characters in purchase date "%1$s"', $date ) );
 		}
 
 		$config = $this->getServiceItem()->getConfig();
 
 		if( !isset( $config['project'] ) ) {
 			throw new MShop_Service_Exception(
-				sprintf( 'Missing parameter "%1$s" in service config', "project" ), parent::ERR_TEMP );
+				sprintf( 'Parameter "%1$s" for configuration not available', "project" ), parent::ERR_TEMP );
 		}
 
 		$this->_appendChildCDATA( 'id', $invoice->getId(), $dom, $orderitem );
@@ -475,7 +476,19 @@ class MShop_Service_Provider_Delivery_Default
 		$criteria = $orderProductManager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $base->getId() ) );
 		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.product.position' ) ) );
-		$products = $orderProductManager->searchItems( $criteria );
+		$allproducts = $orderProductManager->searchItems( $criteria );
+
+		$products = $childproducts = array();
+		foreach( $allproducts as $product )
+		{
+			if( $product->getOrderProductId() === null )
+			{
+				$products[] = $product;
+				continue;
+			}
+
+			$childproducts[ $product->getOrderProductId() ][] = $product;
+		}
 
 		$productlist = $dom->createElement( 'productlist' );
 
@@ -498,10 +511,52 @@ class MShop_Service_Provider_Delivery_Default
 			$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
 			$productitem->appendChild( $priceitem );
 
+			if( $product->getType() === 'bundle' ) {
+				$this->_buildXMLChildList( $product, $childproducts[ $product->getId() ], $dom, $productitem );
+			}
+
 			$productlist->appendChild( $productitem );
 		}
 
 		$orderitem->appendChild( $productlist );
+	}
+
+
+	/**
+	 * Adds the list of child products to the bundle products in the XML object
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $parent The bundle product
+	 * @param array $products List of child products attached to $parent
+	 * @param DOMDocument $dom DOM document object with contains the XML structure
+	 * @param DOMElement $productelement DOM element to which the child products are added
+	 */
+	protected function _buildXMLChildList( MShop_Order_Item_Base_Product_Interface $parent, array $products, DOMDocument $dom, DOMElement $productelement )
+	{
+		$childlist = $dom->createElement( 'childlist' );
+
+		foreach( $products as $product )
+		{
+			$price = $product->getPrice();
+			$total = $price->getValue() + $price->getShipping();
+
+			$childproductitem = $dom->createElement( 'productitem' );
+
+			$this->_appendChildCDATA( 'position', $product->getPosition(), $dom, $childproductitem );
+			$this->_appendChildCDATA( 'code', $product->getProductCode(), $dom, $childproductitem );
+			$this->_appendChildCDATA( 'name', $product->getName(), $dom, $childproductitem );
+			$this->_appendChildCDATA( 'quantity', $product->getQuantity(), $dom, $childproductitem );
+
+			$priceitem = $dom->createElement( 'priceitem' );
+			$this->_appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
+			$this->_appendChildCDATA( 'shipping', number_format( $price->getShipping(), 2, '.', '' ), $dom, $priceitem );
+			$this->_appendChildCDATA( 'discount', number_format( $price->getRebate(), 2, '.', '' ), $dom, $priceitem );
+			$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
+			$childproductitem->appendChild( $priceitem );
+
+			$childlist->appendChild( $childproductitem );
+		}
+
+		$productelement->appendChild( $childlist );
 	}
 
 

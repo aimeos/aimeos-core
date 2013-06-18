@@ -75,18 +75,15 @@ class Controller_Frontend_Catalog_Default
 	 * @param integer $start Position in the list of found products where to begin retrieving the items
 	 * @param integer $size Number of products that should be returned
 	 * @param string $listtype Type of the product list, e.g. default, promotion, etc.
+	 * @param string $domain Text associated to the domain e.g. product, attribute
 	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
 	 */
 	public function createProductFilterByCategory( $catid, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
 	{
+		$expr = $sortations = array();
 		$search = $this->_indexManager->createSearch( true );
 
-		$expr = array(
-			$search->compare( '==', 'catalog.index.catalog.id', $catid ),
-			$search->getConditions(),
-		);
-
-		$sortations = array();
+		$expr[] = $search->compare( '==', 'catalog.index.catalog.id', $catid );
 
 		switch( $sort )
 		{
@@ -97,7 +94,7 @@ class Controller_Frontend_Catalog_Default
 			case 'name':
 				$langid = $this->_getContext()->getLocale()->getLanguageId();
 
-				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name' ) );
+				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name', 'product' ) );
 				$expr[] = $search->compare( '>=', $cmpfunc, '' );
 
 				$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( $listtype, $langid, 'name' ) );
@@ -123,6 +120,8 @@ class Controller_Frontend_Catalog_Default
 				break;
 		}
 
+		$expr[] = $search->getConditions();
+
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( $sortations );
 		$search->setSlice( $start, $size );
@@ -140,6 +139,7 @@ class Controller_Frontend_Catalog_Default
 	 * @param integer $start Position in the list of found products where to begin retrieving the items
 	 * @param integer $size Number of products that should be returned
 	 * @param string $listtype List type of the text associated to the product, usually "default"
+	 * @param string $domain Text associated to the domain e.g. product, attribute
 	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
 	 */
 	public function createProductFilterByText( $input, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
@@ -149,11 +149,7 @@ class Controller_Frontend_Catalog_Default
 
 		$search = $this->_indexManager->createSearch( true );
 
-		$expr = array(
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ),
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
-			$search->getConditions(),
-		);
+		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
 
 		$sortations = array();
 
@@ -164,7 +160,7 @@ class Controller_Frontend_Catalog_Default
 				break;
 
 			case 'name':
-				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name' ) );
+				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name', 'product' ) );
 				$expr[] = $search->compare( '>=', $cmpfunc, '' );
 
 				$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( $listtype, $langid, 'name' ) );
@@ -181,11 +177,14 @@ class Controller_Frontend_Catalog_Default
 				$sortations[] = $search->sort( $direction, $sortfunc );
 				break;
 
+			case 'position':
 			case 'relevance':
 				$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( $listtype, $langid, $input ) );
-				$sortations[] = $search->sort( $direction, $sortfunc );
+				$sortations[] = $search->sort( ( $direction === '+' ? '-' : '+' ), $sortfunc );
 				break;
 		}
+
+		$expr[] = $search->getConditions();
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( $sortations );
@@ -219,9 +218,10 @@ class Controller_Frontend_Catalog_Default
 	 * @param integer $size Number of products that should be returned
 	 * @param string $listtype List type of the text associated to the product, usually "default"
 	 * @param string $type Type of the text like "name", "short", "long", etc.
+	 * @param string $domain Text associated to the domain e.g. product, attribute
 	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
 	 */
-	public function createTextFilter( $input, $sort = null, $direction = 'desc', $start = 0, $size = 25, $listtype = 'default', $type = 'name' )
+	public function createTextFilter( $input, $sort = null, $direction = '+', $start = 0, $size = 25, $listtype = 'default', $type = 'name' )
 	{
 		$locale = $this->_getContext()->getLocale();
 		$langid = $locale->getLanguageId();
@@ -230,7 +230,7 @@ class Controller_Frontend_Catalog_Default
 
 		$expr = array(
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, $type ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, $type, 'product' ) ), '' ),
 		);
 
 		$sortations = array();
@@ -238,7 +238,7 @@ class Controller_Frontend_Catalog_Default
 		switch( $sort )
 		{
 			case 'name':
-				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name' ) );
+				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name', 'product' ) );
 				$expr[] = $search->compare( '>=', $cmpfunc, '' );
 
 				$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( $listtype, $langid, 'name' ) );

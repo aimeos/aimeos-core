@@ -12,8 +12,8 @@
  */
 class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_editor;
+	private $_object;
+	private $_editor;
 
 
 	/**
@@ -129,7 +129,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 		$this->assertEquals( 1, $total );
 
 
-		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype19', 'de', 'name' ) );
+		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype19', 'de', 'name', 'product' ) );
 		$conditions = array(
 			$search->compare( '~=', $func, 'Noir' ), // text value
 			$search->compare( '==', 'product.editor', $this->_editor )
@@ -174,7 +174,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 		$search = $textMgr->createSearch();
 		$expr = array(
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'unittype19', $langid, 'noir cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

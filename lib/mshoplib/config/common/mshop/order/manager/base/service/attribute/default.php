@@ -8,23 +8,24 @@
 
 return array(
 	'item' => array(
-		'insert' => '
-			INSERT INTO "mshop_order_base_service_attr" ( "siteid", "ordservid", "name", "code", "value",
-				"mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
-		',
-		'update' => '
-				UPDATE "mshop_order_base_service_attr"
-				SET "siteid" = ?, "ordservid" = ?, "name" = ?, "code" = ?, "value" = ?, "mtime" = ?, "editor" = ?
-				WHERE "id" = ?
-			',
 		'delete' => '
 			DELETE FROM "mshop_order_base_service_attr"
+			WHERE :cond
+			AND siteid = ?
+		',
+		'insert' => '
+			INSERT INTO "mshop_order_base_service_attr" ( "siteid", "ordservid", "type", "code", "value", "name",
+				"mtime", "editor", "ctime" )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+		',
+		'update' => '
+			UPDATE "mshop_order_base_service_attr"
+			SET "siteid" = ?, "ordservid" = ?, "type" = ?, "code" = ?, "value" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT mordbaseat."id", mordbaseat."siteid", mordbaseat."ordservid", mordbaseat."name",
-				mordbaseat."code", mordbaseat."value", mordbaseat."mtime", mordbaseat."editor", mordbaseat."ctime"
+			SELECT mordbaseat."id", mordbaseat."siteid", mordbaseat."ordservid", mordbaseat."type", mordbaseat."code",
+			mordbaseat."value", mordbaseat."name", mordbaseat."mtime", mordbaseat."ctime", mordbaseat."editor"
 			FROM "mshop_order_base_service_attr" AS mordbaseat
 			:joins
 			WHERE :cond
@@ -32,10 +33,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mordbaseat."id" ) AS "count"
-			FROM "mshop_order_base_service_attr" AS mordbaseat
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM(
+				SELECT DISTINCT mordbaseat."id"
+				FROM "mshop_order_base_service_attr" AS mordbaseat
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

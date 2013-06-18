@@ -25,7 +25,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_order_base_product"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid", mordbapr."type", mordbapr."prodid", mordbapr."prodcode",
@@ -43,10 +44,14 @@ return array(
 			LIMIT :start, :size
 		',
 		'count' => '
-			SELECT COUNT(DISTINCT mordbapr."id") AS "count"
-			FROM "mshop_order_base_product" AS mordbapr
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM(
+				SELECT DISTINCT mordbapr."id"
+				FROM "mshop_order_base_product" AS mordbapr
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

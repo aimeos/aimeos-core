@@ -21,7 +21,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_service_list"
-			WHERE "id"=?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'move' => '
 			UPDATE "mshop_service_list"
@@ -56,10 +57,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mserli."id" ) AS "count"
-			FROM "mshop_service_list" AS mserli
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mserli."id"
+				FROM "mshop_service_list" AS mserli
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

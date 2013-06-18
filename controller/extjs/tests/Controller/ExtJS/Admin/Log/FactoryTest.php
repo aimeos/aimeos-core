@@ -9,7 +9,7 @@
 
 class Controller_ExtJS_Admin_Log_FactoryTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

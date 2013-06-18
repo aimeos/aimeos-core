@@ -19,7 +19,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array();
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -89,17 +89,13 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	 *
 	 * @param MShop_Common_Manager_Interface $localeManager Locale manager
 	 * @param array $data Associative list of locale site data
-	 * @param string|null $manager Managers name if null then Default
+	 * @param string $manager Manager implementation name
 	 * @param integer|null $parentId Parent id of the locale item
 	 * @return array Associative list of keys from the data and generated site ID
 	 */
-	protected function _addLocaleSiteData( MShop_Common_Manager_Interface $localeManager, array $data, $manager = null, $parentId = null )
+	protected function _addLocaleSiteData( MShop_Common_Manager_Interface $localeManager, array $data, $manager = 'Default', $parentId = null )
 	{
 		$this->_msg( 'Adding data for MShop locale sites', 1 );
-
-		if( $manager === null ) {
-			$manager = 'Default';
-		}
 
 		$localeSiteManager = $localeManager->getSubManager( 'site', $manager );
 		$siteItem = $localeSiteManager->createItem();
@@ -125,7 +121,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 				$result = $localeSiteManager->searchItems( $search );
 
 				if( ( $item = reset( $result ) ) === false ) {
-					throw new Exception( sprintf( 'No site for code "%1$S" available', $dataset['code'] ) );
+					throw new Exception( sprintf( 'No site for code "%1$s" available', $dataset['code'] ) );
 				}
 
 				$siteIds[$key] = $item->getId();

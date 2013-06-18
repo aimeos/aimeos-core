@@ -40,6 +40,13 @@ interface MShop_Common_Manager_Interface
 	public function deleteItem( $id );
 
 	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids );
+
+	/**
 	 * Returns the item specified by its ID
 	 *
 	 * @param integer $id Id of item

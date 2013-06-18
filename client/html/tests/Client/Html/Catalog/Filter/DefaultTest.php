@@ -6,9 +6,9 @@
  * @version $Id: DefaultTest.php 1352 2012-10-29 16:11:47Z nsendetzky $
  */
 
-class Client_Html_Filter_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Filter_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -21,7 +21,7 @@ class Client_Html_Filter_DefaultTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Filter_DefaultTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_Filter_DefaultTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -54,9 +54,7 @@ class Client_Html_Filter_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
-
-		$this->assertContains( '<style type="text/css">', $output );
+		$this->_object->getHeader();
 	}
 
 
@@ -64,7 +62,7 @@ class Client_Html_Filter_DefaultTest extends MW_Unittest_Testcase
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<div class="arcavias catalog-filter">', $output );
+		$this->assertStringStartsWith( '<section class="arcavias catalog-filter">', $output );
 	}
 
 

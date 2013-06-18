@@ -57,8 +57,7 @@ class MShop_Text_Item_Default
 
 		if( $langid !== null && ( strlen( $langid ) !== 2 || ctype_alpha( $langid ) === false ) )
 		{
-			$msg = 'Language ID "%1$s" isn\'t an ISO two letter language code';
-			throw new MShop_Text_Exception( sprintf( $msg, $langid ) );
+			throw new MShop_Text_Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $langid ) );
 		}
 
 		$this->_values['langid'] = ( $langid !== null ? (string) $langid : null );

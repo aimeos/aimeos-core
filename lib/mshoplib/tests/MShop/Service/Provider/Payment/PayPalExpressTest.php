@@ -16,11 +16,11 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	 * @var    MShop_Service_Provider_Payment_PayPal
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
-	protected $_serviceItem;
+	private $_serviceItem;
 
-	protected $_order;
+	private $_order;
 
 
 	/**
@@ -88,9 +88,14 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	 */
 	protected function tearDown()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
-		$orderManager->saveItem($this->_order);
+		$iface = 'MShop_Order_Item_Interface';
+
+		if( $this->_order instanceof $iface )
+		{
+			$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+			$this->_order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
+			$orderManager->saveItem($this->_order);
+		}
 
 		unset( $this->_object );
 		unset( $this->_serviceItem );
@@ -116,6 +121,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
 		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
 		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
+		$this->assertTrue( $this->_object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_REFUND ) );
 	}
 
 
@@ -148,9 +154,9 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		}
 
 		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $helperForm );
-		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=', $helperForm->getUrl() );
-		$this->assertEquals( 'GET', $helperForm->getMethod() );
-		$this->assertEquals( $values, $helperForm->getValues() );
+		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=UT-99999999', $helperForm->getUrl() );
+		$this->assertEquals( 'POST', $helperForm->getMethod() );
+		$this->assertEquals( array(), $helperForm->getValues() );
 
 		foreach( $testData AS $key => $value ) {
 			$this->assertEquals( $attributeList[ $key ]->getValue(), $testData[ $key ] );
@@ -162,25 +168,24 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	{
 		$what = array( 'TOKEN' => 'UT-99999999' );
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=updatesync method error';
-		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&EMAIL=user_paypal_email@metaways.de&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111111&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM='.$this->_order->getId();
+		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111111&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM='.$this->_order->getId();
 
 		$com = new MW_Communication_TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->_object->setCommunication( $com );
 
-		$response = array ( 'TOKEN' => 'UT-99999999' );
+		$response = array ( 'token' => 'UT-99999999', 'PayerID' => 'PaypalUnitTestBuyer', 'orderid' => $this->_order->getId() );
 
 		$testData = array(
 			'TOKEN' => 'UT-99999999',
 			'PAYERID' => 'PaypalUnitTestBuyer',
 			'TRANSACTIONID' => '111111111',
-			'EMAIL' => 'user_paypal_email@metaways.de'
 		);
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
-		$this->assertTrue( $this->_object->updateSync( $response ) );
+		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $this->_object->updateSync( $response ) );
 
 		$refOrderBase = $orderBaseManager->load( $this->_order->getBaseId() );
 
@@ -219,7 +224,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 			'TOKEN' => 'UT-99999999',
 			'PAYERID' => 'PaypalUnitTestBuyer',
 			'TRANSACTIONID' => '111111111',
-			'EMAIL' => 'user_paypal_email@metaways.de',
 			'REFUNDTRANSACTIONID' => '88888888'
 		);
 

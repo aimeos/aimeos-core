@@ -10,7 +10,8 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_locale_currency"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'insert' => '
 			INSERT INTO "mshop_locale_currency" ("label", "status", "siteid", "mtime", "editor", "id", "ctime")
@@ -30,9 +31,13 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mloccu."id" ) AS "count"
-			FROM "mshop_locale_currency" AS mloccu
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mloccu."id"
+				FROM "mshop_locale_currency" AS mloccu
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

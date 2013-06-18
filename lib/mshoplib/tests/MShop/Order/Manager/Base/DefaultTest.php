@@ -16,13 +16,13 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Order_Manager_Base_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.
@@ -382,7 +382,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
-		$expr[] = $search->compare( '==', 'order.base.price', 5400.00 );
+		$expr[] = $search->compare( '==', 'order.base.price', 4800.00 );
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search );
 

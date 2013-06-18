@@ -12,7 +12,7 @@
  */
 class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -100,28 +100,30 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 			throw new Exception( 'No product item with code CNE found!' );
 		}
 
-		$product->setId( null );
-		$product->setCode( 'ModifiedCNC' );
-		$productManager->saveItem( $product );
-
-		$this->_object->saveItem( $product );
-
 		$attributes = $product->getRefItems( 'attribute' );
 		if( ( $attrItem = reset( $attributes ) ) === false ) {
 			throw new Exception( 'Product doesnt have any attribute item' );
 		}
 
+		$product->setId( null );
+		$product->setCode( 'ModifiedCNC' );
+		$productManager->saveItem( $product );
+		$this->_object->saveItem( $product );
+
+
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrItem->getId() ) );
 		$result = $this->_object->searchItems( $search );
 
+
 		$this->_object->deleteItem( $product->getId() );
+		$productManager->deleteItem( $product->getId() );
+
 
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrItem->getId() ) );
 		$result2 = $this->_object->searchItems( $search );
 
-		$productManager->deleteItem( $product->getId() );
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
 		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
@@ -138,38 +140,45 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 	public function testSearchItems()
 	{
 		$context = TestHelper::getContext();
-
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $context );
 		$search = $attributeManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'attribute.label', 'xl' ) );
-		$result = $attributeManager->searchItems( $search );
-
-		if( ( $attrSizeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute item found' );
-		}
 
 		$expr = array(
-			$search->compare( '==', 'attribute.label', 'blue' ),
+			$search->compare( '==', 'attribute.code', '30' ),
+			$search->compare( '==', 'attribute.editor', $context->getEditor() ),
 			$search->compare( '==', 'attribute.type.domain', 'product' ),
-			$search->compare( '==', 'attribute.type.code', 'color' ),
+			$search->compare( '==', 'attribute.type.code', 'length' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $attributeManager->searchItems( $search );
 
-		if( ( $attrColorItem = reset( $result ) ) === false ) {
+		if( ( $attrLengthItem = reset( $result ) ) === false ) {
+			throw new Exception( 'No attribute item found' );
+		}
+
+		$expr = array(
+			$search->compare( '==', 'attribute.code', '29' ),
+			$search->compare( '==', 'attribute.editor', $context->getEditor() ),
+			$search->compare( '==', 'attribute.type.domain', 'product' ),
+			$search->compare( '==', 'attribute.type.code', 'width' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$result = $attributeManager->searchItems( $search );
+
+		if( ( $attrWidthItem = reset( $result ) ) === false ) {
 			throw new Exception( 'No attribute item found' );
 		}
 
 
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrColorItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrWidthItem->getId() ) );
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 
 
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrSizeItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrLengthItem->getId() ) );
 
 		$result = $this->_object->searchItems( $search, array() );
 		$this->assertEquals( 2, count( $result ) );
@@ -177,22 +186,22 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 		$search->setConditions( $search->compare( '!=', 'catalog.index.attribute.id', null ) );
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertGreaterThanOrEqual( 7, count( $result ) );
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 
 
-		$attrIds = array( (int) $attrSizeItem->getId(), (int) $attrColorItem->getId() );
-		$func = $search->createFunction( 'catalog.index.attributecount', array( 'default', $attrIds ) );
+		$attrIds = array( (int) $attrLengthItem->getId(), (int) $attrWidthItem->getId() );
+		$func = $search->createFunction( 'catalog.index.attributecount', array( 'variant', $attrIds ) );
 		$search->setConditions( $search->compare( '==', $func, 1 ) ); // count attributes
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertGreaterThanOrEqual( 4, count( $result ) );
+		$this->assertEquals( 0, count( $result ) );
 
 
 		$func = $search->createFunction( 'catalog.index.attribute.code', array( 'default', 'size' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'x' ) );
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 	}
 
 }

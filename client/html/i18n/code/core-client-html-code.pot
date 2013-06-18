@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Company"
+
+#. Address salutation
+msgid "mr"
+msgstr "Mr"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Mrs"
+
+#. Address salutation
+msgid "miss"
+msgstr "Miss"
+
+#. Product attribute
+msgid "size"
+msgstr "Size"
+
+#. Product attribute
+msgid "length"
+msgstr "Length"
+
+#. Product attribute
+msgid "width"
+msgstr "Width"
+
+#. Product attribute
+msgid "color"
+msgstr "Color"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "repeated"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telephone"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "unfinished"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "deleted"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "canceled"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "refused"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "refunded"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "pending"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "authorized"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "received"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "unfinished"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "deleted"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "pending"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "in progress"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "dispatched"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "delivered"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "lost"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "refused"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "returned"
+
+#. Direct debit service provider
+msgid "payment.directdebit.accountowner"
+msgstr "Account owner"
+
+#. Direct debit service provider
+msgid "payment.directdebit.accountno"
+msgstr "Account number"
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankcode"
+msgstr "Bank code"
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankname"
+msgstr "Bank name"

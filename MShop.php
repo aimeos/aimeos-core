@@ -12,6 +12,7 @@
  */
 class MShop
 {
+	private static $_includePaths;
 	private $_manifests = array();
 	private $_extensions = array();
 	private $_extensionsDone = array();
@@ -23,18 +24,26 @@ class MShop
 	 *
 	 * @param array $extdirs List of directories to look for manifest files (or sub-directories thereof)
 	 * @param boolean $defaultdir If default extension directory should be included automatically
+	 * @param string|null $basedir Arcavias core path (optional, dirname(__FILE__) if null)
 	 */
-	public function __construct( array $extdirs = array(), $defaultdir = true )
+	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$basedir = dirname(__FILE__);
 
-		if( $defaultdir ) {
+		if( $basedir === null ) {
+			$basedir = dirname( __FILE__ );
+		}
+
+		if( $defaultdir === true && is_dir( $basedir . DIRECTORY_SEPARATOR . 'ext' ) === true ) {
 			$extdirs[] = $basedir . DIRECTORY_SEPARATOR . 'ext';
 		}
 
 		$incpath = get_include_path();
-		set_include_path( $basedir . $ds . 'lib' . $ds . 'mwlib' . $ds .'src' . PATH_SEPARATOR . $incpath );
+		$mwlibpath = $basedir . $ds . 'lib' . $ds . 'mwlib' . $ds .'src';
+
+		if( set_include_path( $mwlibpath . PATH_SEPARATOR . $incpath ) === false ) {
+			throw new Exception( 'Unable to set new include path' );
+		}
 
 		$criteria = new MW_Common_Criteria_PHP();
 		$this->_manifests[$basedir] = $this->_getManifestFile( $basedir );
@@ -63,7 +72,12 @@ class MShop
 		}
 
 		$this->_addManifests( $this->_dependencies );
-		set_include_path( $incpath );
+
+		if( set_include_path( $incpath ) === false ) {
+			throw new Exception( 'Unable to set old include path' );
+		}
+
+		self::$_includePaths = null;
 	}
 
 
@@ -75,20 +89,13 @@ class MShop
 	 */
 	public static function autoload( $className )
 	{
-		$namespace = '';
-		$fileName  = '';
-		$className = ltrim( $className, '\\' );
+	    $fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
 
-		if( $lastNsPos = strripos( $className, '\\' ) )
-		{
-			$namespace = substr( $className, 0, $lastNsPos );
-			$className = substr( $className, $lastNsPos + 1 );
-			$fileName  = str_replace( '\\', DIRECTORY_SEPARATOR, $namespace ) . DIRECTORY_SEPARATOR;
-	    }
-	    $fileName .= str_replace( '_', DIRECTORY_SEPARATOR, $className ) . '.php';
-	    $paths = explode( PATH_SEPARATOR, get_include_path() );
+		if( !isset( self::$_includePaths ) ) {
+			self::$_includePaths = explode( PATH_SEPARATOR, get_include_path() );
+		}
 
-		foreach( $paths as $path )
+		foreach( self::$_includePaths as $path )
 		{
 			$file = $path . DIRECTORY_SEPARATOR . $fileName;
 
@@ -98,6 +105,29 @@ class MShop
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Returns the list of paths for each domain where the translation files are located.
+	 *
+	 * @return array Associative list of i18n domains and lists of absolute paths to the translation directories
+	 */
+	public function getI18nPaths()
+	{
+		$paths = array();
+
+		foreach ( $this->_manifests as $basePath => $manifest )
+		{
+			if ( isset( $manifest['i18n'] ) )
+			{
+				foreach( $manifest['i18n'] as $domain => $location ) {
+					$paths[$domain][] = $basePath . DIRECTORY_SEPARATOR . $location;
+				}
+			}
+		}
+
+		return $paths;
 	}
 
 

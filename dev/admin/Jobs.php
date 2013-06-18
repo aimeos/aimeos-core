@@ -138,7 +138,8 @@ class Jobs
 
 		$conf[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'local';
 
-		$config = new MW_Config_Zend( new Zend_Config( array(), true ), $conf );
+		$config = new MW_Config_Array( array(), $conf );
+		$config = new MW_Config_Decorator_MemoryCache( $config );
 		$context->setConfig( $config );
 
 		$dbm = new MW_DB_Manager_PDO( $config );

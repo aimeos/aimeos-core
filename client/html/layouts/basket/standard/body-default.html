@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
+$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
+$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+
+$checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
+$checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
+$checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
+
+try
+{
+	$this->standardBasket->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+	$checkout = true;
+}
+catch( Exception $e )
+{
+	$checkout = false;
+}
+
+$enc = $this->encoder();
+
+?>
+<section class="arcavias basket-standard">
+<?php if( isset( $this->standardErrorList ) ) : ?>
+	<ul class="error-list">
+<?php foreach( (array) $this->standardErrorList as $errmsg ) : ?>
+		<li class="error-item"><?php echo $enc->html( $errmsg ); ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Basket' ), $enc::TRUST ); ?></h1>
+	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction ) ); ?>">
+		<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'b-action' ) ); ?>" value="edit" />
+<?php echo $this->get( 'standardBody' ); ?>
+		<div class="button-group">
+			<button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Update' ), $enc::TRUST ); ?></button>
+<?php if( $checkout === true ) : ?>
+			<a class="standardbutton" href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Checkout' ), $enc::TRUST ); ?></a>
+<?php endif; ?>
+		</div>
+	</form>
+</section>

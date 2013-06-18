@@ -3,37 +3,8 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: tree-header-default.html 1348 2012-10-27 12:49:19Z nsendetzky $
  */
 
+echo $this->get( 'treeHeader' );
+
 ?>
-<style type="text/css">
-<?php
-	$selectors = array();
-	foreach( $this->treeCatalogPath as $item )
-	{
-		$id = $item->getId();
-		$selectors[] = '.catalog-filter-tree .tree-catid-' . $id . ' > ul, .catalog-filter-tree .tree-catid-' . $id;
-	}
-?>
-	<?php echo implode( ",\n	", $selectors ); ?> {
-		display: block;
-	}
-</style>
-<script type="text/javascript">
-<?php
-	$path = array();
-	foreach( $this->treeCatalogPath as $item ) {
-		$path[] = '".catalog-filter-tree .tree-catid-' . $item->getId() . '"';
-	}
-?>
-<!--
-	$(document).ready( function() {
-		var list = [<?php echo implode( ', ', $path ) ?>];
-	 	for( var i = 0; i < list.length; i++ ) {
-			$( list[i] ).addClass( 'active' );
-	 	}
-	} );
-// -->
-</script>
-<?php echo $this->treeHeader; ?>

@@ -44,20 +44,20 @@ class MShop_Common_Manager_List_Default
 		foreach($whitelistItem as $str)
 		{
 			if ( !in_array($str, $isList ) ) {
-				throw new MShop_Exception( 'No configuration available or missing parts' );
+				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $str ) );
 			}
 		}
 
 		if( ( $entry = reset( $searchConfig ) ) === false ) {
-			throw new MShop_Exception( 'Search configuration is invalid' );
+			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" is invalid', $entry['code'] ) );
+			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
 		if( ( $this->_prefix = substr( $entry['code'], 0, $pos+1 ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" is invalid', $entry['code'] ) );
+			throw new MShop_Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
 
 		parent::__construct( $context );
@@ -91,7 +91,7 @@ class MShop_Common_Manager_List_Default
 	{
 		$iface = 'MShop_Common_Item_List_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		$config = $this->_getContext()->getConfig();
@@ -155,29 +155,13 @@ class MShop_Common_Manager_List_Default
 
 
 	/**
-	 * Deletes the common list item object regarding to the given common list Id.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param Integer $id Id of the common list item object
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$sql = $this->_config['delete'];
-
-			$stmt = $this->_getCachedStatement( $conn, $this->_prefix . 'delete', $sql );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$result = $stmt->execute()->finish();
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$this->_deleteItems( $ids, $this->_config['delete'] );
 	}
 
 
@@ -190,7 +174,7 @@ class MShop_Common_Manager_List_Default
 	public function getItem( $id, array $ref = array() )
 	{
 		if( ( $conf = reset( $this->_searchConfig ) ) === false || !isset( $conf['code'] ) ) {
-			throw new MShop_Exception( 'Search configuration is invalid' );
+			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
 		$criteria = $this->createSearch();
@@ -199,7 +183,7 @@ class MShop_Common_Manager_List_Default
 
 		if( ( $item = reset( $items ) ) === false )
 		{
-			$msg = sprintf( 'No list item found for key "%1$s" and ID "%1$s"', $conf['code'], $id );
+			$msg = sprintf( 'List item with ID "%2$s" in "%1$s" not found', $conf['code'], $id );
 			throw new MShop_Exception( $msg );
 		}
 
@@ -355,21 +339,22 @@ class MShop_Common_Manager_List_Default
 			$domain = explode( '.', $this->_prefix);
 
 			if ( ( $topdomain = array_shift( $domain ) ) === null ) {
-				throw new MShop_Exception( 'No configuration available' );
+				throw new MShop_Exception( sprintf( 'Configuration not available' ) );
 			}
 
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/' . $topdomain . '/manager/' . implode( '/', $domain ) . '/default/item/search';
 			$cfgPathCount =  'mshop/' . $topdomain . '/manager/' . implode( '/', $domain ) . '/default/item/count';
 
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				$map[ $row['id'] ] = $row;
-				$typeIds[] = $row['typeid'];
+				$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn );
@@ -380,11 +365,12 @@ class MShop_Common_Manager_List_Default
 			throw $e;
 		}
 
-		if( count( $typeIds ) > 0 )
+		if( !empty( $typeIds ) )
 		{
-			$search = $this->_typeManager->createSearch();
-			$search->setConditions( $search->compare( '==', $name . '.type.id', array_unique( $typeIds ) ) );
-			$typeItems = $this->_typeManager->searchItems( $search );
+			$typeSearch = $this->_typeManager->createSearch();
+			$typeSearch->setConditions( $typeSearch->compare( '==', $name . '.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $this->_typeManager->searchItems( $typeSearch );
 
 			foreach( $map as $id => $row )
 			{
@@ -394,7 +380,7 @@ class MShop_Common_Manager_List_Default
 				$items[ $row['id'] ] = $this->_createItem( $row );
 			}
 		}
-		
+
 		return $items;
 	}
 

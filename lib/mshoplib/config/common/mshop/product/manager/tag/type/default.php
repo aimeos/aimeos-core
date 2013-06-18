@@ -20,7 +20,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_product_tag_type"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mprotaty."id", mprotaty."siteid", mprotaty."code", mprotaty."domain", mprotaty."label", mprotaty."status",
@@ -32,10 +33,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mprotaty."id" ) AS "count"
-			FROM "mshop_product_tag_type" mprotaty
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mprotaty."id"
+				FROM "mshop_product_tag_type" mprotaty
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

@@ -628,28 +628,14 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 
 
 	/**
-	 * Deletes a customer item object from the permanent storage.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $id Unique customer ID referencing an existing customer
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/customer/manager/default/item/delete');
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$result = $stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$path = 'mshop/customer/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -663,7 +649,7 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	{
 		$iface = 'MShop_Customer_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Customer_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Customer_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -755,11 +741,12 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/customer/manager/default/item/search';
 			$cfgPathCount = 'mshop/customer/manager/default/item/count';
 			$required = array( 'customer' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[ $row['id'] ] = $row;
 			}

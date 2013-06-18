@@ -12,8 +12,8 @@
  */
 class MShop_Common_Item_Helper_Form_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
+	private $_object;
+	private $_values;
 
 
 	/**

@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+
+$accountTarget = $this->config( 'client/html/account/history/url/target' );
+$accountController = $this->config( 'client/html/account/history/url/controller', 'account' );
+$accountAction = $this->config( 'client/html/account/history/url/action', 'history' );
+
+?>
+<div class="account-history-detail common-summary">
+	<a class="modify" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Close' ), $enc::TRUST ); ?></a>
+	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Order details' ), $enc::TRUST ); ?></h2>
+<?php echo $this->get( 'detailBody' ); ?>
+	<div class="button-group">
+		<a class="standardbutton" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Close' ), $enc::TRUST ); ?></a>
+	</div>
+</div>

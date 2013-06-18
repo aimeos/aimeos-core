@@ -15,19 +15,19 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Zend implements MW_Config_Interface
+class MW_Config_Zend
+	extends MW_Config_Abstract
+	implements MW_Config_Interface
 {
-	private $_config = null;
-	private $_paths = array();
-	private $_cache = array();
-	private $_negcache = array();
+	private $_config;
+	private $_paths;
 
 
 	/**
 	 * Initialize config object with Zend_Config instance
 	 *
 	 * @param Zend_Config $config Configuration object
-	 * @param string $path Filesystem path to the configuration files
+	 * @param array|string $path Filesystem path or list of paths to the configuration files
 	 */
 	public function __construct( Zend_Config $config, $path = array() )
 	{
@@ -50,44 +50,25 @@ class MW_Config_Zend implements MW_Config_Interface
 	 *
 	 * @param string $path Path to the requested value like tree/node/classname
 	 * @param mixed $default Value returned if requested key isn't found
-	 * @return mixed Value associated to the requested key
+	 * @return mixed Value associated to the requested key or default value if no value in configuration was found
 	 */
 	public function get( $path, $default = null )
 	{
-		$path = trim( $path, '/' );
+		$parts = explode( '/', trim( $path, '/' ) );
 
-		if( array_key_exists( $path, $this->_negcache ) ) {
-			return $default;
+		if( ( $value = $this->_get( $this->_config, $parts ) ) !== null ) {
+			return $value;
 		}
 
-		if ( array_key_exists($path, $this->_cache) ) {
-			return $this->_cache[$path];
+		foreach( $this->_paths as $fspath ) {
+			$this->_load( $this->_config, $fspath, $parts );
 		}
 
-		$result = $default;
-		$parts = explode( '/', $path );
-
-		try
-		{
-			foreach( $this->_paths as $fspath ) {
-				$this->_load( $this->_config, $fspath, $parts );
-			}
-
-			$result = $this->_get( $this->_config, '', $parts );
-		}
-		catch( MW_Config_Exception $e )
-		{
-			$this->_negcache[$path] = true;
-			return $default;
+		if( ( $value = $this->_get( $this->_config, $parts ) ) !== null ) {
+			return $value;
 		}
 
-		if ($result instanceof Zend_Config) {
-			$result = $result->toArray();
-		}
-
-		$this->_cache[$path] = $result;
-
-		return $result;
+		return $default;
 	}
 
 
@@ -99,31 +80,23 @@ class MW_Config_Zend implements MW_Config_Interface
 	 */
 	public function set( $path, $value )
 	{
-		$path = trim($path, '/');
-		$parts = explode('/', $path);
+		$parts = explode( '/', trim( $path, '/' ) );
 
 		$config = $this->_config;
-		$max = count($parts) - 1;
+		$max = count( $parts ) - 1;
 
-		for ($i = 0; $i < $max; $i++)
+		for( $i = 0; $i < $max; $i++ )
 		{
-			$val = $config->get($parts[$i]);
+			$val = $config->get( $parts[$i] );
 
-			if ($val instanceof Zend_Config) {
+			if( $val instanceof Zend_Config ) {
 				$config = $val;
 			} else {
-				$config->{$parts[$i]} = new Zend_Config( array(), true );
-				$config = $config->{$parts[$i]};
+				$config = $config->{$parts[$i]} = new Zend_Config( array(), true );
 			}
 		}
 
 		$config->{$parts[$max]} = $value;
-
-		if ( array_key_exists( $path, $this->_negcache ) ) {
-			unset( $this->_negcache[$path] );
-		}
-
-		$this->_cache[$path] = $value;
 	}
 
 
@@ -131,29 +104,26 @@ class MW_Config_Zend implements MW_Config_Interface
 	 * Descents into the configuration specified by the given path and returns the value if found.
 	 *
 	 * @param Zend_Config $config Configuration object which should contain the loaded configuration
-	 * @param string $path Path to the configuration directory
 	 * @param array $parts List of config name parts to look for
-	 * @throws MW_Config_Exception if no value is found
+	 * @return mixed Found value or null if no value is available
 	 */
-	protected function _get( Zend_Config $config, $path, array $parts )
+	protected function _get( Zend_Config $config, array $parts )
 	{
-		if( ( $key = array_shift( $parts ) ) !== null )
+		if( ( $key = array_shift( $parts ) ) !== null && isset( $config->$key ) )
 		{
-			if( isset( $config->$key ) )
+			if( $config->$key instanceof Zend_Config )
 			{
-				if( $config->$key instanceof Zend_Config ) {
-					return $this->_get( $config->$key, $path . DIRECTORY_SEPARATOR . $key, $parts );
-				} else if( empty( $parts ) ) {
-					return $config->$key;
+				if( count( $parts  ) > 0 ) {
+					return $this->_get( $config->$key, $parts );
 				}
+
+				return $config->$key->toArray();
 			}
 
-			throw new MW_Config_Exception( 'Key not found' );
+			return $config->$key;
 		}
-		else
-		{
-			return $config;
-		}
+
+		return null;
 	}
 
 
@@ -190,16 +160,4 @@ class MW_Config_Zend implements MW_Config_Interface
 		}
 	}
 
-
-	/**
-	 * Returns the included configuration.
-	 * This methods protects against overwriting local variables also defined in the configuration
-	 *
-	 * @param string $filename Name of the configuration file
-	 * @return array|false Configuration array or false if file is not available
-	 */
-	protected function _include( $filename )
-	{
-		return include $filename;
-	}
 }

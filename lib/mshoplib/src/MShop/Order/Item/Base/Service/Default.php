@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Default.php 14852 2012-01-13 12:24:15Z doleiynyk $
  */
 
 
@@ -76,6 +75,28 @@ class MShop_Order_Item_Base_Service_Default
 		$this->setModified();
 	}
 
+	/**
+	 * Returns the original ID of the service item used for the order.
+	 *
+	 * @return string Original service ID
+	 */
+	public function getServiceId()
+	{
+		return( isset( $this->_values['servid'] ) ? (string) $this->_values['servid'] : '' );
+	}
+
+	/**
+	 * Sets a new ID of the service item used for the order.
+	 *
+	 * @param string $servid ID of the service item used for the order
+	 */
+	public function setServiceId( $servid )
+	{
+		if( $servid == $this->getServiceId() ) { return; }
+
+		$this->_values['servid'] = (string) $servid;
+		$this->setModified();
+	}
 
 	/**
 	 * Returns the code of the service item.
@@ -95,6 +116,8 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function setCode( $code )
 	{
+		$this->_checkCode( $code );
+
 		if ( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
@@ -212,15 +235,27 @@ class MShop_Order_Item_Base_Service_Default
 	 */
 	public function getAttribute( $code )
 	{
-		if( !isset( $this->_attributesMap ) )
-		{
-			foreach( $this->_attributes as $attribute ) {
-				$this->_attributesMap[ $attribute->getCode() ] = $attribute->getValue();
-			}
+		$map = $this->_getAttributeMap();
+
+		if( isset( $map[ $code ] ) ) {
+			return $map[ $code ]->getValue();
 		}
 
-		if( isset( $this->_attributesMap[ $code ] ) ) {
-			return $this->_attributesMap[ $code ];
+		return null;
+	}
+
+	/**
+	 * Returns the attribute item for the service with the given code.
+	 *
+	 * @param string $code code of the service attribute item.
+	 * @return MShop_Order_Item_Base_Service_Attribute_Interface|null Attribute item for the service and the given code
+	 */
+	public function getAttributeItem( $code )
+	{
+		$map = $this->_getAttributeMap();
+
+		if( isset( $map[ $code ] ) ) {
+			return $map[ $code ];
 		}
 
 		return null;
@@ -266,6 +301,7 @@ class MShop_Order_Item_Base_Service_Default
 
 		$list['order.base.service.baseid'] = $this->getBaseId();
 		$list['order.base.service.code'] = $this->getCode();
+		$list['order.base.service.serviceid'] = $this->getServiceId();
 		$list['order.base.service.name'] = $this->getName();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.service.type'] = $this->getType();
@@ -288,6 +324,7 @@ class MShop_Order_Item_Base_Service_Default
 		$this->setCode( $service->getCode() );
 		$this->setName( $service->getName() );
 		$this->setType( $service->getType() );
+		$this->setServiceId( $service->getId() );
 
 		$items = $service->getRefItems( 'media', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
@@ -295,6 +332,26 @@ class MShop_Order_Item_Base_Service_Default
 		}
 
 		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the attribute map for the service.
+	 *
+	 * @return array Associative list of code as key and an MShop_Order_Item_Base_Service_Attribute_Interface as value
+	 */
+	protected function _getAttributeMap()
+	{
+		if( !isset( $this->_attributesMap ) )
+		{
+			$this->_attributesMap = array();
+
+			foreach( $this->_attributes as $attribute ) {
+				$this->_attributesMap[ $attribute->getCode() ] = $attribute;
+			}
+		}
+
+		return $this->_attributesMap;
 	}
 
 }

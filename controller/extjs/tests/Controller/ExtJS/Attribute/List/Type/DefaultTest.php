@@ -9,7 +9,7 @@
 
 class Controller_ExtJS_Attribute_List_Type_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

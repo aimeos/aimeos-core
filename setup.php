@@ -36,22 +36,64 @@ function setup_autoload( $classname )
 }
 
 
+function usage()
+{
+	printf( "Usage: php setup.php [--config=<path>] [--extdir=<path>]* [sitecode]\n" );
+	exit ( 1 );
+}
+
+
 $exectimeStart = microtime( true );
 
 try
 {
+	$params = $_SERVER['argv'];
+	array_shift( $params );
+	$options = array();
+
+	foreach( $params as $key => $option )
+	{
+		if( $option === '--help' ) {
+			usage();
+		}
+
+		if( strncmp( $option, '--', 2 ) === 0 && ( $pos = strpos( $option, '=', 2 ) ) !== false )
+		{
+			if( ( $name = substr( $option, 2, $pos-2 ) ) !== false )
+			{
+				if( isset( $options[$name] ) )
+				{
+					$options[$name] = (array) $options[$name];
+					$options[$name][] = substr( $option, $pos+1 );
+				}
+				else
+				{
+					$options[$name] = substr( $option, $pos+1 );
+				}
+
+				unset( $params[$key] );
+			}
+			else
+			{
+				printf( "Invalid option \"%1\$s\"\n", $option );
+				usage();
+			}
+		}
+	}
+
+	$site = 'default';
+	if( count( $params ) > 0 && ( $site = end( $params ) ) === false ) {
+		usage();
+	}
+
+
 	require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'MShop.php';
 
 	spl_autoload_register( 'setup_autoload' );
 	spl_autoload_register( 'MShop::autoload' );
 
-	$mshop = new MShop();
+	$mshop = new MShop( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
 
-
-	$site = 'default';
-	if( $_SERVER['argc'] > 1 ) {
-		$site = $_SERVER['argv'][1];
-	}
 
 	$taskPaths = $mshop->getSetupPaths( $site );
 
@@ -65,13 +107,19 @@ try
 
 	$ctx = new MShop_Context_Item_Default();
 
-	$conf = new MW_Config_Zend( new Zend_Config( array(), true ), $mshop->getConfigPaths( 'mysql' ) );
+	$confPaths = $mshop->getConfigPaths( 'mysql' );
+	if( isset( $options['config'] ) ) {
+		$confPaths[] = $options['config'];
+	}
+
+	$conf = new MW_Config_Array( array(), $confPaths );
 	$ctx->setConfig( $conf );
 
 	if( ( $dbconfig = $conf->get( 'resource/db' ) ) === null ) {
 		throw new Exception( 'Configuration for database adapter missing' );
 	}
 	$conf->set( 'resource/db/limit', 2 );
+	$conf->set( 'setup/site', $site );
 
 	$dbm = new MW_DB_Manager_PDO( $conf );
 	$ctx->setDatabaseManager( $dbm );

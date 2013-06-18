@@ -10,7 +10,8 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_locale_language"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'insert' => '
 			INSERT INTO "mshop_locale_language" ("label", "status", "siteid", "mtime", "editor", "id", "ctime")
@@ -30,9 +31,13 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mlocla."id" ) AS "count"
-			FROM "mshop_locale_language" AS mlocla
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mlocla."id"
+				FROM "mshop_locale_language" AS mlocla
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

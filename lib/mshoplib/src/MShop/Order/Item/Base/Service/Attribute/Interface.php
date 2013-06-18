@@ -32,6 +32,20 @@ interface MShop_Order_Item_Base_Service_Attribute_Interface extends MShop_Common
 	public function setServiceId( $id );
 
 	/**
+	 * Returns the type of the service attribute item.
+	 *
+	 * @return string Type of the service attribute item
+	 */
+	public function getType();
+
+	/**
+	 * Sets the type for the service attribute item.
+	 *
+	 * @param string $type Type as defined by the service provider
+	 */
+	public function setType( $type );
+
+	/**
 	 * Returns the name of the service attribute item.
 	 *
 	 * @return string Name of the service attribute item

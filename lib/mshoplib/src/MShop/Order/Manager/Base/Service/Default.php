@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Default.php 14854 2012-01-13 12:54:14Z doleiynyk $
  */
 
 
@@ -46,6 +45,13 @@ class MShop_Order_Manager_Base_Service_Default
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
+		),
+		'order.base.service.serviceid' => array(
+			'code' => 'order.base.service.serviceid',
+			'internalcode' => 'mordbase."servid"',
+			'label' => 'Order base service original service ID',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
 		'order.base.service.type' => array(
 			'code' => 'order.base.service.type',
@@ -167,7 +173,7 @@ class MShop_Order_Manager_Base_Service_Default
 	{
 		$iface = 'MShop_Order_Item_Base_Service_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -188,21 +194,22 @@ class MShop_Order_Manager_Base_Service_Default
 			$stmt = $this->_getCachedStatement( $conn, $path );
 			$stmt->bind(1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT);
 			$stmt->bind(2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(3, $item->getType(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(4, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(5, $item->getName(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(6, $item->getMediaUrl(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(7, $price->getValue(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(8, $price->getShipping(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(9, $price->getRebate(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(10, $price->getTaxRate(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(11, date('Y-m-d H:i:s', time()), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(12, $context->getEditor() );
+			$stmt->bind(3, $item->getServiceId(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(4, $item->getType(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(5, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(6, $item->getName(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(7, $item->getMediaUrl(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(8, $price->getValue(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(9, $price->getShipping(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(10, $price->getRebate(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(11, $price->getTaxRate(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(12, date('Y-m-d H:i:s', time()), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(13, $context->getEditor() );
 
 			if ( $id !== null ) {
-				$stmt->bind(13, $id, MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind(14, $id, MW_DB_Statement_Abstract::PARAM_INT);
 			} else {
-				$stmt->bind(13, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
+				$stmt->bind(14, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
 			}
 
 			$stmt->execute()->finish();
@@ -228,28 +235,14 @@ class MShop_Order_Manager_Base_Service_Default
 
 
 	/**
-	 * Deletes an existing order service item from the storage.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $serviceId Unique order service ID
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $serviceId )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/order/manager/base/service/default/item/delete');
-			$stmt->bind(1, $serviceId);
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn, $this->_dbname );
-		}
-		catch ( Exception $e )
-		{
-			$dbm->release( $conn, $this->_dbname );
-			throw $e;
-		}
+		$path = 'mshop/order/manager/base/service/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -285,7 +278,7 @@ class MShop_Order_Manager_Base_Service_Default
 		$items = array();
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/base/service/default/item/search';
 			$cfgPathCount =  'mshop/order/manager/base/service/default/item/count';
 			$required = array( 'order.base.service' );

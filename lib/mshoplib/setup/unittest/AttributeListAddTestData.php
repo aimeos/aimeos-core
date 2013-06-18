@@ -252,6 +252,9 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 
 		$listItemTypeIds = array();
 		$listItemType = $attributeListTypeManager->createItem();
+
+		$this->_conn->begin();
+
 		foreach( $testdata['attribute/list/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
@@ -290,5 +293,7 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 
 			$attributeListManager->saveItem( $listItem, false );
 		}
+
+		$this->_conn->commit();
 	}
 }

@@ -49,7 +49,8 @@ class Init
 	{
 		$context = new MShop_Context_Item_Default();
 
-		$config = new MW_Config_Zend( new Zend_Config( array(), true ), $conf );
+		$config = new MW_Config_Array( array(), $conf );
+		$config = new MW_Config_Decorator_MemoryCache( $config );
                 if( function_exists( 'apc_store' ) === true ) {
                         $config = new MW_Config_Decorator_APC( $config );
                 }

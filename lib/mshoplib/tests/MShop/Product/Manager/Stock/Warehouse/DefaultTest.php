@@ -12,13 +12,13 @@
  */
 class MShop_Product_Manager_Stock_Warehouse_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

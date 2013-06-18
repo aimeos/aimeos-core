@@ -1,0 +1,39 @@
+[main]
+host = https://www.transifex.net
+type = PO
+
+[arcavias.client-html]
+file_filter = client/html/i18n/<lang>.po
+source_file = client/html/i18n/core-client-html.pot
+source_lang = en
+
+[arcavias.controller-frontend]
+file_filter = controller/frontend/i18n/<lang>.po
+source_file = controller/frontend/i18n/core-controller-frontend.pot
+source_lang = en
+
+[arcavias.lib-mshoplib]
+file_filter = lib/mshoplib/i18n/<lang>.po
+source_file = lib/mshoplib/i18n/core-mshop.pot
+source_lang = en
+
+[arcavias.client-html-code]
+file_filter = client/html/i18n/code/<lang>.po
+source_file = client/html/i18n/code/core-client-html-code.pot
+source_lang = en
+
+[arcavias.client-html-country]
+file_filter = client/html/i18n/country/<lang>.po
+source_file = client/html/i18n/country/core-client-html-country.pot
+source_lang = en
+
+[arcavias.client-html-language]
+file_filter = client/html/i18n/language/<lang>.po
+source_file = client/html/i18n/language/core-client-html-language.pot
+source_lang = en
+
+[arcavias.client-html-currency]
+file_filter = client/html/i18n/currency/<lang>.po
+source_file = client/html/i18n/currency/core-client-html-currency.pot
+source_lang = en
+

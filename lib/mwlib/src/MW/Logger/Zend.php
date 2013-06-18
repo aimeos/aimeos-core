@@ -5,13 +5,12 @@
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Logger
- * @version $Id: Zend.php 16606 2012-10-19 12:50:23Z nsendetzky $
  */
 
 
 /**
  * Log messages using Zend_Log.
-  *
+ *
  * @package MW
  * @subpackage Logger
  */
@@ -25,7 +24,7 @@ class MW_Logger_Zend extends MW_Logger_Abstract implements MW_Logger_Interface
 	 *
 	 * @param Zend_Log $logger Zend_Log object
 	 */
-	public function __construct( Zend_Log $logger )
+	public function __construct(Zend_Log $logger)
 	{
 		$this->_logger = $logger;
 	}
@@ -40,7 +39,7 @@ class MW_Logger_Zend extends MW_Logger_Abstract implements MW_Logger_Interface
 	 * @throws MW_Logger_Exception If an error occurs in Zend_Log
 	 * @see MW_Logger_Abstract for available log level constants
 	 */
-	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
+	public function log($message, $priority = MW_Logger_Abstract::ERR, $facility = 'message')
 	{
 		try
 		{
@@ -50,8 +49,8 @@ class MW_Logger_Zend extends MW_Logger_Abstract implements MW_Logger_Interface
 
 			$this->_logger->log( '<' . $facility . '> ' . $message, $priority );
 		}
-		catch(Zend_Log_Exception $ze) {
-			throw new MW_Logger_Exception($ze->getMessage());
+		catch( Zend_Log_Exception $ze )	{
+			throw new MW_Logger_Exception( $ze->getMessage() );
 		}
 	}
 }

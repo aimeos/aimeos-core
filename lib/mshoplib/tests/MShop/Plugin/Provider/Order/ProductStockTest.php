@@ -8,9 +8,9 @@
 
 class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_TestCase
 {
-	protected $_order;
-	protected $_plugin;
-	protected $_product;
+	private $_order;
+	private $_plugin;
+	private $_product;
 
 
 	/**

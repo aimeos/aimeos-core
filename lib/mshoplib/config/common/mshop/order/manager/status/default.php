@@ -21,7 +21,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_order_status"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mordst."id", mordst."siteid", mordst."parentid", mordst."type", mordst."value",
@@ -33,10 +34,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mordst."id" ) AS "count"
-			FROM "mshop_order_status" AS mordst
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mordst."id"
+				FROM "mshop_order_status" AS mordst
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

@@ -6,11 +6,21 @@
  * @version $Id: additional-text-body-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
+if( isset( $this->detailProductItem ) ) {
+	$textItems = $this->detailProductItem->getRefItems( 'text', 'long' );
+} else {
+	$textItems = array();
+}
+
+$enc = $this->encoder();
+
 ?>
-<h2 class="tabheader"><?php echo $this->translate( 'core/client/html', 'Description' ); ?></h2>
-<div class="tabcontent">
-<?php foreach( $this->detailProductItem->getRefItems( 'text', 'long', 'default' ) as $textItem ) : ?> 
-	<p><?php echo $textItem->getContent(); ?></p>
+<?php if( count( $textItems ) > 0 ) : ?>
+<h2 class="header description"><?php echo $enc->html( $this->translate( 'client/html', 'Description' ), $enc::TRUST ); ?></h2>
+<div class="content description">
+<?php foreach( $textItems as $textItem ) : ?> 
+	<div class="long"><?php echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?></div>
 <?php endforeach; ?>
-<?php echo $this->textBody; ?>
+<?php echo $this->get( 'textBody' ); ?>
 </div>
+<?php endif; ?>

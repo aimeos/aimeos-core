@@ -153,6 +153,30 @@ class MShop_Order_Manager_Default
 
 
 	/**
+	 * Creates a search object.
+	 *
+	 * @param boolean $default Add default criteria; Optional
+	 * @return MW_Common_Criteria_Interface
+	 */
+	public function createSearch( $default = false )
+	{
+		$search = parent::createSearch( $default );
+
+		if( $default === true )
+		{
+			$expr = array(
+				$search->getConditions(),
+				$search->compare( '!=', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_UNFINISHED ),
+			);
+
+			$search->setConditions( $search->combine( '&&', $expr ) );
+		}
+
+		return $search;
+	}
+
+
+	/**
 	 * Creates a one-time order in the storage from the given invoice object.
 	 *
 	 * @param MShop_Order_Item_Interface $item Invoice with necessary values
@@ -162,7 +186,7 @@ class MShop_Order_Manager_Default
 	{
 		$iface = 'MShop_Order_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if($item->getBaseId() === null) {
@@ -235,29 +259,14 @@ class MShop_Order_Manager_Default
 
 
 	/**
-	 * Deletes an item with given ID.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $id Unique ID of the invoice
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/order/manager/default/item/delete');
-			$stmt->bind(1, $id, MW_DB_Statement_Abstract::PARAM_INT);
-			$result = $stmt->execute()->finish();
-
-			$dbm->release( $conn, $this->_dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $this->_dbname );
-			throw $e;
-		}
+		$path = 'mshop/order/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -309,7 +318,7 @@ class MShop_Order_Manager_Default
 
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/default/item/search';
 			$cfgPathCount =  'mshop/order/manager/default/item/count';
 			$required = array( 'order' );

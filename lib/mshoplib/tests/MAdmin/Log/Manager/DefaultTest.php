@@ -8,7 +8,7 @@
 
 class MAdmin_Log_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

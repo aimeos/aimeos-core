@@ -6,6 +6,21 @@
  * @version $Id: header-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-echo $this->listHeader;
+$enc = $this->encoder();
+
+$catItems = $this->get( 'listCatPath', array() );
 
 ?>
+<?php if( ( $catItem = end( $catItems ) ) !== false ) : ?>
+<title><?php echo $enc->html( $catItem->getName() ); ?></title>
+<?php foreach( $catItem->getRefItems( 'text', 'meta-keyword', 'default' ) as $textItem ) : ?>
+<meta name="keywords" content="<?php echo $enc->attr( strip_tags( $textItem->getContent() ) ); ?>" />
+<?php endforeach; ?>
+<?php foreach( $catItem->getRefItems( 'text', 'meta-description', 'default' ) as $textItem ) : ?>
+<meta name="description" content="<?php echo $enc->attr( strip_tags( $textItem->getContent() ) ); ?>" />
+<?php endforeach; ?>
+<?php elseif( ( $search = $this->param( 'f-search-text', null ) ) != null ) : /// Product search hint with user provided search string (%1$s) ?>
+<title><?php echo $this->html( sprintf( $this->translate( 'client/html', 'Result for "%1$s"' ), strip_tags( $search ) ) ); ?></title>
+<?php endif; ?>
+<meta name="application-name" content="Arcavias" />
+<?php echo $this->get( 'listHeader' ); ?>

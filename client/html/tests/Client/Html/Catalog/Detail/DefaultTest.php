@@ -6,10 +6,10 @@
  * @version $Id: DefaultTest.php 1352 2012-10-29 16:11:47Z nsendetzky $
  */
 
-class Client_Html_Detail_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_context;
+	private $_object;
+	private $_context;
 
 
 	/**
@@ -22,7 +22,7 @@ class Client_Html_Detail_DefaultTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Detail_DefaultTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_Detail_DefaultTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -58,22 +58,22 @@ class Client_Html_Detail_DefaultTest extends MW_Unittest_Testcase
 	public function testGetHeader()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter( $view, array( 'l-product-id' => $this->_getProductItem()->getId() ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l-product-id' => $this->_getProductItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript"', $output );
+		$this->assertStringStartsWith( '<title>Cafe Noire Cappuccino</title>', $output );
 	}
 
 
 	public function testGetBody()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter( $view, array( 'l-product-id' => $this->_getProductItem()->getId() ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'l-product-id' => $this->_getProductItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="arcavias catalog-detail">', $output );
+		$this->assertStringStartsWith( '<section class="arcavias catalog-detail">', $output );
 	}
 
 

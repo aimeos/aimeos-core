@@ -46,8 +46,8 @@ class MShop_Locale_Item_Site_Default
 	{
 		return parent::getId();
 	}
-	
-	
+
+
 	/**
 	 * Returns the code of the site.
 	 *
@@ -66,6 +66,8 @@ class MShop_Locale_Item_Site_Default
 	 */
 	public function setCode( $code )
 	{
+		$this->_checkCode( $code );
+
 		if ( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
@@ -154,7 +156,7 @@ class MShop_Locale_Item_Site_Default
 	public function toArray()
 	{
 		$list = parent::toArray();
-		
+
 		$list['locale.site.siteid'] = $this->getSiteId();
 		$list['locale.site.code'] = $this->getCode();
 		$list['locale.site.label'] = $this->getLabel();
@@ -177,7 +179,7 @@ class MShop_Locale_Item_Site_Default
 			return $this->_children[$index];
 		}
 
-		throw new MShop_Locale_Exception( 'Invalid index for child' );
+		throw new MShop_Locale_Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
 	}
 
 

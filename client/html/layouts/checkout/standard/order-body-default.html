@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+
+?>
+<section class="checkout-standard-order">
+	<h1><?php echo $enc->html( $this->translate( 'client/html', 'order' ), $enc::TRUST ); ?></h1>
+<?php echo $this->get( 'orderBody' ); ?>
+</section>

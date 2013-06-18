@@ -56,7 +56,8 @@ class TestHelper
 		$paths = $mshop->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new MW_Config_Zend( new Zend_Config( array(), true ), $paths );
+		$conf = new MW_Config_Array( array(), $paths );
+		$conf = new MW_Config_Decorator_MemoryCache( $conf );
 		$ctx->setConfig( $conf );
 
 
@@ -64,13 +65,16 @@ class TestHelper
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$writer = new Zend_Log_Writer_Stream( $site . '.log');
-		$zlog = new Zend_Log($writer);
-		$filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
-		$zlog->addFilter($filter);
-
-		$logger = new MW_Logger_Zend( $zlog );
+		$logger = new MW_Logger_File( $site . '.log', MW_Logger_Abstract::DEBUG );
 		$ctx->setLogger( $logger );
+
+
+		$cache = new MW_Cache_None();
+		$ctx->setCache( $cache );
+
+
+		$i18n = new MW_Translation_None( 'en' );
+		$ctx->setI18n( $i18n );
 
 
 		$session = new MW_Session_None();

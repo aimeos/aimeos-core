@@ -19,7 +19,8 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_media_list_type"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mmedlity."id", mmedlity."siteid", mmedlity."code", mmedlity."domain", mmedlity."label",
@@ -31,10 +32,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mmedlity."id" ) AS "count"
-			FROM "mshop_media_list_type" AS mmedlity
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM(
+				SELECT DISTINCT mmedlity."id"
+				FROM "mshop_media_list_type" AS mmedlity
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

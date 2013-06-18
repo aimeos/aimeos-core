@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  * @version $Id: Abstract.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
@@ -13,7 +13,7 @@
  * Common abstract class for all HTML client classes.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 abstract class Client_Html_Abstract
 {
@@ -48,7 +48,7 @@ abstract class Client_Html_Abstract
 	public function getView()
 	{
 		if( !isset( $this->_view ) ) {
-			throw new Client_Html_Exception( 'No view available' );
+			throw new Client_Html_Exception( sprintf( 'No view available' ) );
 		}
 
 		return $this->_view;
@@ -65,6 +65,26 @@ abstract class Client_Html_Abstract
 	{
 		$this->_view = $view;
 		return $this;
+	}
+
+
+	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 *
+	 * @param string $confpath Path to the configuration that contains the configured sub-clients
+	 * @param array $default List of sub-client names that should be used if no other configuration is available
+	 */
+	protected function _process( $confpath, array $default )
+	{
+		$view = $this->getView();
+
+		foreach( $this->_getSubClients( $confpath, $default ) as $subclient )
+		{
+			$subclient->setView( $view );
+			$subclient->process();
+		}
 	}
 
 
@@ -120,7 +140,7 @@ abstract class Client_Html_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid client implementation name "%1$s"', $name ) );
+			throw new Client_Html_Exception( sprintf( 'Invalid client name "%1$s"', $name ) );
 		}
 
 		$subnames = $this->_createSubNames( $client );
@@ -135,7 +155,7 @@ abstract class Client_Html_Abstract
 		$subClient = new $classname( $this->_context, $this->_templatePaths );
 
 		if( ( $subClient instanceof $interface ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
+			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
 		}
 
 		return $subClient;

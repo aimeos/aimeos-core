@@ -113,7 +113,7 @@ class MShop_Product_Manager_Stock_Default
 	{
 		$iface = 'MShop_Product_Item_Stock_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Product_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Product_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -169,28 +169,14 @@ class MShop_Product_Manager_Stock_Default
 
 
 	/**
-	 * Delete a stock item by given Id
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param Integer $id Id of the stock item to delete
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/product/manager/stock/default/item/delete');
-			$stmt->bind(1, $id, MW_DB_Statement_Abstract::PARAM_INT);
-			$result = $stmt->execute()->finish();
-
-			$dbm->release($conn);
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$path = 'mshop/product/manager/stock/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -252,11 +238,12 @@ class MShop_Product_Manager_Stock_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/product/manager/stock/default/item/search';
 			$cfgPathCount =  'mshop/product/manager/stock/default/item/count';
 			$required = array( 'product.stock' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[ $row['id'] ] = $this->_createItem( $row );
 			}
@@ -353,14 +340,7 @@ class MShop_Product_Manager_Stock_Default
 			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
 			$stmt->bind( 3, $context->getEditor() );
 
-			$result = $stmt->execute();
-
-			if ($result->affectedRows() !== 1 ) {
-				$msg = 'Possible problem while changing stock level for product "%1$s" and warehouse "%2$s" by "%3$s": Affected stocks are "%4$s"';
-				$context->getLogger()->log( sprintf( $msg, $productCode, $warehouseCode, $amount, $affectedRows ), MW_Logger_Abstract::WARN );
-			}
-
-			$result->finish();
+			$result = $stmt->execute()->finish();
 
 			$dbm->release( $conn );
 		}

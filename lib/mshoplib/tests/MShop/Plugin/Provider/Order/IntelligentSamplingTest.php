@@ -8,8 +8,8 @@
 
 class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Testcase
 {
-	protected $_order;
-	protected $_plugin;
+	private $_order;
+	private $_plugin;
 
 
 	/**

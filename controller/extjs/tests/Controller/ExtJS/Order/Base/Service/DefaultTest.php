@@ -9,7 +9,7 @@
 
 class Controller_ExtJS_Order_Base_Service_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -70,7 +70,7 @@ class Controller_ExtJS_Order_Base_Service_DefaultTest extends MW_Unittest_Testca
 		$result = $this->_object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
-		$this->assertEquals( 3, $result['total'] );
+		$this->assertEquals( 4, $result['total'] );
 		$this->assertEquals( 'solucia', $result['items'][0]->{'order.base.service.name'} );
 	}
 

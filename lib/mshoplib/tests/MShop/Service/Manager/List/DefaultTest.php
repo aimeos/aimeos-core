@@ -12,13 +12,13 @@
  */
 class MShop_Service_Manager_List_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.
@@ -299,7 +299,7 @@ class MShop_Service_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$search->setSlice(0, 3);
 		$results = $this->_object->searchItems($search, array(), $total);
 		$this->assertEquals( 3, count( $results ) );
-		$this->assertEquals( 8, $total );
+		$this->assertEquals( 12, $total );
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

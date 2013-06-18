@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  * @version $Id: Default.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
@@ -13,7 +13,7 @@
  * Default implementation of catalog detail basket section for HTML clients.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 class Client_Html_Catalog_Detail_Basket_Attribute_Default
 	extends Client_Html_Abstract
@@ -27,10 +27,9 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
-	 * @param string|null $name Template name
 	 * @return string HTML code
 	 */
-	public function getBody( $name = null )
+	public function getBody()
 	{
 		$view = $this->_setViewParams( $this->getView() );
 
@@ -50,10 +49,9 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
-	 * @param string|null $name Template name
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader( $name = null )
+	public function getHeader()
 	{
 		$view = $this->_setViewParams( $this->getView() );
 
@@ -96,6 +94,17 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 
 
 	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 */
+	public function process()
+	{
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
@@ -104,24 +113,26 @@ class Client_Html_Catalog_Detail_Basket_Attribute_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$configurables = $view->detailProductItem->getRefItems( 'attribute' );
-
 			$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
+
+			$configAttributes = $view->detailProductItem->getRefItems( 'attribute', null, 'config' );
+
 			$search = $attributeManager->createSearch( true );
 			$expr = array(
-				$search->compare( '==', 'attribute.id', array_keys( $configurables ) ),
+				$search->compare( '==', 'attribute.id', array_keys( $configAttributes ) ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$attributeTypes = array();
-			$attrDomains = array( 'text', 'price' );
+			$attrDomains = array( 'text', 'price', 'media' );
 
 			foreach( $attributeManager->searchItems( $search, $attrDomains ) as $id => $attribute ) {
 				$attributeTypes[ $attribute->getType() ][$id] = $attribute;
 			}
 
-			$view->attributeItems = $attributeTypes;
+			$view->attributeConfigItems = $attributeTypes;
+			$view->attributeHiddenItems = $view->detailProductItem->getRefItems( 'attribute', null, 'hidden' );
 
 			$this->_cache = $view;
 		}

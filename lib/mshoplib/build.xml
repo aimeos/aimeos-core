@@ -4,7 +4,7 @@
 	
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
-		<delete file="tests/unit.log" quiet="true" failonerror="false" />
+		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
@@ -18,7 +18,7 @@
 	
 	<target name="coverage" description="Generates code coverage report">
 		<echo msg="Generating code coverage report" />
-		<delete file="tests/unittests.log" quiet="true" failonerror="false" />
+		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit-coverage.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
@@ -26,7 +26,7 @@
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="phpcs -n --standard=`pwd`/../../coding/Metaways config setup src tests/MAdmin tests/MShop tests/MW tests/Perf tests/bootstrap.php tests/TestHelper.php"
+		<exec command="phpcs -n --standard=${coredir}/coding/Metaways config setup src tests/MAdmin tests/MShop tests/MW tests/Perf tests/bootstrap.php tests/TestHelper.php"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 
@@ -39,6 +39,25 @@
 			</fileset>
 		</delete>
 	</target>
+
+	<target name="i18n" description="Creates translation message files">
+		<exec command="find ./src/ -type f | xgettext -s --no-wrap --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/core-mshop.pot -f -"
+			checkreturn="true" logoutput="true" />
+		<exec command="msgmerge -s --no-wrap -U --backup=none i18n/en.po i18n/core-mshop.pot" checkreturn="true" logoutput="true" />
+	</target>
+
+	<target name="build" description="Builds package for deployment">
+		<foreach param="po-fname" absparam="po-filename" target="build-mo">
+            <fileset dir="./i18n">
+                <include name="*.po" />
+            </fileset>
+        </foreach>
+	</target>
+
+	<target name="build-mo" description="Generates binary translation files">
+		<fail unless="po-filename" message="Missing file name" />
+		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" /> 
+    </target>
 
 	<target name="all" depends="coverage,testperf,check" description="Builds all parts of the package">
 	</target>

@@ -8,7 +8,7 @@
 Ext.ns('MShop.panel.service');
 
 // hook media picker into the product ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.service.AttributeItemPickerUi', {
 	xtype : 'MShop.panel.attribute.itempickerui',
 	itemConfig : {
 		recordName : 'Service_List',

@@ -17,7 +17,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Service_Provider_Delivery_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -73,13 +73,16 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetConfigBE()
 	{
-		$this->assertArrayHasKey( 'project', $this->_object->getConfigBE());
+		$this->assertArrayHasKey( 'project', $this->_object->getConfigBE() );
 	}
 
 
 	public function testGetConfigFE()
 	{
-		$this->assertEquals(array(), $this->_object->getConfigFE());
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$basket = $orderManager->getSubManager( 'base' )->createItem();
+
+		$this->assertEquals( array(), $this->_object->getConfigFE( $basket ) );
 	}
 
 
@@ -165,12 +168,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$criteria = $orderManager->createSearch();
-		$expr = array (
-			$criteria->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_WEB ),
-			$criteria->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::STAT_REFUSED )
-		);
-
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
 		$criteria->setSlice( 0, 1 );
 		$items = $orderManager->searchItems( $criteria );
 
@@ -335,6 +333,160 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 					</additional>
 				</orderitem>
 			</orderlist>';
+
+		$dom = new DOMDocument('1.0', 'UTF-8');
+		$dom->preserveWhiteSpace = false;
+
+		if ( $dom->loadXML( $expected ) !== true ) {
+			throw new Exception( 'Loading XML failed' );
+		}
+
+		$this->assertEquals( $dom->saveXML(), $this->_object->buildXML( $order ) );
+	}
+
+	public function testBuildXMLWithBundle()
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$criteria = $orderManager->createSearch();
+		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', '2009-03-18 16:14:32' ) );
+		$criteria->setSlice( 0, 1 );
+		$items = $orderManager->searchItems( $criteria );
+
+		if( ( $order = reset( $items ) ) === false ) {
+			throw new Exception( 'No order item available' );
+		}
+
+		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderBase = $orderBaseManager->getItem( $order->getBaseId() );
+
+		$expected = '<?xml version="1.0" encoding="UTF-8"?>
+<orderlist>
+	<orderitem>
+		<id><![CDATA['. $order->getId() .']]></id>
+		<type><![CDATA[web]]></type>
+		<datetime><![CDATA[2009-03-18T16:14:32Z]]></datetime>
+		<customerid><![CDATA[' . $orderBase->getCustomerId() . ']]></customerid>
+		<projectcode><![CDATA[8502_TEST]]></projectcode>
+		<languagecode><![CDATA[DE]]></languagecode>
+		<currencycode><![CDATA[EUR]]></currencycode>
+		<deliveryitem>
+			<code><![CDATA[73]]></code>
+			<name><![CDATA[solucia]]></name>
+		</deliveryitem>
+		<paymentitem>
+			<code><![CDATA[OGONE]]></code>
+			<name><![CDATA[ogone]]></name>
+			<fieldlist />
+		</paymentitem>
+		<priceitem>
+			<price><![CDATA[4800.00]]></price>
+			<shipping><![CDATA[180.00]]></shipping>
+			<discount><![CDATA[0.00]]></discount>
+			<total><![CDATA[4980.00]]></total>
+		</priceitem>
+		<productlist>
+			<productitem>
+				<position><![CDATA[1]]></position>
+				<code><![CDATA[bdl:zyx]]></code>
+				<name><![CDATA[Bundle Unittest1]]></name>
+				<quantity><![CDATA[1]]></quantity>
+				<priceitem>
+					<price><![CDATA[1200.00]]></price>
+					<shipping><![CDATA[30.00]]></shipping>
+					<discount><![CDATA[0.00]]></discount>
+					<total><![CDATA[1230.00]]></total>
+				</priceitem>
+				<childlist>
+					<productitem>
+						<position><![CDATA[2]]></position>
+						<code><![CDATA[bdl:EFG]]></code>
+						<name><![CDATA[Bundle Unittest1]]></name>
+						<quantity><![CDATA[1]]></quantity>
+						<priceitem>
+							<price><![CDATA[600.00]]></price>
+							<shipping><![CDATA[30.00]]></shipping>
+							<discount><![CDATA[0.00]]></discount>
+							<total><![CDATA[630.00]]></total>
+						</priceitem>
+					</productitem>
+					<productitem>
+						<position><![CDATA[3]]></position>
+						<code><![CDATA[bdl:HIJ]]></code>
+						<name><![CDATA[Bundle Unittest 1]]></name>
+						<quantity><![CDATA[1]]></quantity>
+						<priceitem>
+							<price><![CDATA[600.00]]></price>
+							<shipping><![CDATA[30.00]]></shipping>
+							<discount><![CDATA[0.00]]></discount>
+							<total><![CDATA[630.00]]></total>
+						</priceitem>
+					</productitem>
+				</childlist>
+			</productitem>
+			<productitem>
+				<position><![CDATA[4]]></position>
+				<code><![CDATA[bdl:hal]]></code>
+				<name><![CDATA[Bundle Unittest2]]></name>
+				<quantity><![CDATA[1]]></quantity>
+				<priceitem>
+					<price><![CDATA[1200.00]]></price>
+					<shipping><![CDATA[30.00]]></shipping>
+					<discount><![CDATA[0.00]]></discount>
+					<total><![CDATA[1230.00]]></total>
+				</priceitem>
+				<childlist>
+					<productitem>
+						<position><![CDATA[5]]></position>
+						<code><![CDATA[bdl:EFX]]></code>
+						<name><![CDATA[Bundle Unittest 2]]></name>
+						<quantity><![CDATA[1]]></quantity>
+						<priceitem>
+							<price><![CDATA[600.00]]></price>
+							<shipping><![CDATA[30.00]]></shipping>
+							<discount><![CDATA[0.00]]></discount>
+							<total><![CDATA[630.00]]></total>
+						</priceitem>
+					</productitem>
+					<productitem>
+						<position><![CDATA[6]]></position>
+						<code><![CDATA[bdl:HKL]]></code>
+						<name><![CDATA[Bundle Unittest 2]]></name>
+						<quantity><![CDATA[1]]></quantity>
+						<priceitem>
+							<price><![CDATA[600.00]]></price>
+							<shipping><![CDATA[30.00]]></shipping>
+							<discount><![CDATA[0.00]]></discount>
+							<total><![CDATA[630.00]]></total>
+						</priceitem>
+					</productitem>
+				</childlist>
+			</productitem>
+		</productlist>
+		<addresslist>
+			<addressitem>
+				<type><![CDATA[payment]]></type>
+				<salutation><![CDATA[mrs]]></salutation>
+				<title><![CDATA[]]></title>
+				<firstname><![CDATA[Adelheid]]></firstname>
+				<lastname><![CDATA[Mustertest]]></lastname>
+				<company><![CDATA[]]></company>
+				<address1><![CDATA[Königallee]]></address1>
+				<address2><![CDATA[1]]></address2>
+				<address3><![CDATA[]]></address3>
+				<postalcode><![CDATA[20146]]></postalcode>
+				<city><![CDATA[Hamburg]]></city>
+				<state><![CDATA[Hamburg]]></state>
+				<countrycode><![CDATA[DE]]></countrycode>
+				<email><![CDATA[eshop@metaways.de]]></email>
+				<phone><![CDATA[055544332211]]></phone>
+			</addressitem>
+		</addresslist>
+		<additional>
+			<comment><![CDATA[]]></comment>
+			<discount />
+		</additional>
+	</orderitem>
+</orderlist>';
 
 		$dom = new DOMDocument('1.0', 'UTF-8');
 		$dom->preserveWhiteSpace = false;

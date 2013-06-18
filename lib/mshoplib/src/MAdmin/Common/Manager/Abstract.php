@@ -33,7 +33,7 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 
 
 		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
-			throw new MAdmin_Exception( sprintf('Invalid domain name "%1$s"', $domain ) );
+			throw new MAdmin_Exception( sprintf('Invalid characters in domain name "%1$s"', $domain ) );
 		}
 
 		if( $name === null ) {
@@ -41,7 +41,7 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MAdmin_Exception( sprintf( 'Invalid manager implementation name "%1$s"', $name ) );
+			throw new MAdmin_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
 		}
 
 		$domainname = ucfirst( $domain );
@@ -51,13 +51,13 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 		$interface = 'MAdmin_'. $domainname . '_Manager_' . $subnames . '_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MAdmin_Exception( sprintf('Class "%1$s" not found', $classname ) );
+			throw new MAdmin_Exception( sprintf('Class "%1$s" not available', $classname ) );
 		}
 
 		$subManager = new $classname( $this->_getContext() );
 
 		if( ( $subManager instanceof $interface ) === false ) {
-			throw new MAdmin_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface ) );
+			throw new MAdmin_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $subManager;

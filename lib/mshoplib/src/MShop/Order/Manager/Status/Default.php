@@ -119,7 +119,7 @@ class MShop_Order_Manager_Status_Default
 	{
 		$iface = 'MShop_Order_Item_Status_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Order_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -182,31 +182,15 @@ class MShop_Order_Manager_Status_Default
 
 
 	/**
-	 * Deletes the order status item specified by its ID.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param mixed $id ID of the order status object
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/order/manager/status/default/item/delete');
-			$stmt->bind(1, $id, MW_DB_Statement_Abstract::PARAM_INT);
-			$result = $stmt->execute()->finish();
-
-			$dbm->release( $conn, $this->_dbname );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn, $this->_dbname );
-			throw $e;
-		}
+		$path = 'mshop/order/manager/status/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
-
 
 
 	/**
@@ -267,7 +251,7 @@ class MShop_Order_Manager_Status_Default
 
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_SUBTREE;
+			$sitelevel = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'mshop/order/manager/status/default/item/search';
 			$cfgPathCount =  'mshop/order/manager/status/default/item/count';
 			$required = array( 'order.status' );

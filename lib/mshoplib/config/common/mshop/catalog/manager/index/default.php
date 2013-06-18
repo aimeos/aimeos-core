@@ -9,9 +9,7 @@
 return array(
 	'item' => array(
 		'search' => '
-			SELECT DISTINCT mpro."id", mpro."siteid", mpro."typeid", mpro."label", mpro."status",
-				mpro."start", mpro."end", mpro."code", mpro."suppliercode",
-				mpro."ctime", mpro."mtime", mpro."editor"
+			SELECT DISTINCT mpro."id"
 			FROM "mshop_product" AS mpro
 			:joins
 			WHERE :cond
@@ -25,7 +23,7 @@ return array(
 				FROM "mshop_product" AS mpro
 				:joins
 				WHERE :cond
-				LIMIT 10000 OFFSET 0
+				LIMIT 1000 OFFSET 0
 			) AS list
 		',
 	),

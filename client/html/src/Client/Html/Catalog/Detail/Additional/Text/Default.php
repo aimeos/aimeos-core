@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  * @version $Id: Default.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
@@ -13,7 +13,7 @@
  * Default implementation of catalog detail item section for HTML clients.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 class Client_Html_Catalog_Detail_Additional_Text_Default
 	extends Client_Html_Abstract
@@ -91,5 +91,16 @@ class Client_Html_Catalog_Detail_Additional_Text_Default
 	public function isCachable( $what )
 	{
 		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 */
+	public function process()
+	{
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
 }

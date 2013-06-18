@@ -14,20 +14,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$router = $front->getRouter();
 
 
-		$routeDefault = new Zend_Controller_Router_Route(
-			':site/:controller/:action/:trailing/*',
+		$route = new Zend_Controller_Router_Route(
+			':site/:controller/:action/:a-name/*',
 			array(
 				'module' => 'default',
 				'controller' => 'catalog',
 				'action' => 'list',
 				'site' => 'unittest',
-				'trailing' => '',
+				'a-name' => '',
 			)
 		);
-		$router->addRoute( 'routeDefault', $routeDefault );
+		$router->addRoute( 'routeDefault', $route );
 
 
-		$routeMin = new Zend_Controller_Router_Route(
+		$route = new Zend_Controller_Router_Route(
 			':site',
 			array(
 				'module' => 'default',
@@ -36,7 +36,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 				'site' => 'unittest',
 			)
 		);
-		$router->addRoute( 'routeMin', $routeMin );
+		$router->addRoute( 'routeMin', $route );
 	}
 
 }

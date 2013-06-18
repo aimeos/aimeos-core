@@ -11,7 +11,7 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 	/**
 	 * @var MW_Translation_Zend
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -35,12 +35,16 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
+		if( !class_exists( 'Zend_Translate' ) ) {
+			$this->markTestSkipped( 'Zend_Translate is not available' );
+		}
+
 		$ds = DIRECTORY_SEPARATOR;
 
 		$this->_translationSources = array(
-			'testDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1',
-			'otherTestDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2', // no file!
-			'thirdTestDomain' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3',
+			'testDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' ),
+			'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ), // no file!
+			'thirdTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3' ),
 		);
 
 		$this->_object = new MW_Translation_Zend( $this->_translationSources, 'csv', 'ru_ZD' );
@@ -88,6 +92,7 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'tests', $this->_object->dn( 'invalidTestDomain', 'test', 'tests', 2 ) );
 	}
 
+
 	// test using the testfiles/case1/ka_GE file; lang: german
 	public function testAdapterGettext()
 	{
@@ -99,4 +104,52 @@ class MW_Translation_ZendTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'Datei', $object->dn( 'testDomain', 'File', 'Files', 1 ) );
 	}
 
+
+	public function testDnOverwriteCsv()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+
+		$translationSources = array(
+			'testDomain' => array(
+				dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2',
+				dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3',
+			),
+		);
+
+		$object = new MW_Translation_Zend( $translationSources, 'csv', 'ru_ZD' );
+
+		$this->assertEquals( 'plural 11 translation', $object->dn( 'testDomain', 'File', 'Files', 25 ) );
+	}
+
+
+	public function testDnOverwriteGettextSingular()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+
+		$translationSources = array(
+			'testDomain' => array(
+				dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1',
+				dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2',
+			),
+		);
+
+		$object = new MW_Translation_Zend( $translationSources, 'gettext', 'ka_GE' );
+		$this->assertEquals( 'Neue Version', $object->dt( 'testDomain', 'Update' ) );
+	}
+
+
+	public function testDnOverwriteGettextPlural()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+
+		$translationSources = array(
+			'testDomain' => array(
+				dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1',
+				dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2',
+			),
+		);
+
+		$object = new MW_Translation_Zend( $translationSources, 'gettext', 'ka_GE' );
+		$this->assertEquals( 'KFZ', $object->dn( 'testDomain', 'Car', 'Cars', 25 ) );
+	}
 }

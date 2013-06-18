@@ -66,6 +66,13 @@ class MShop_Plugin_Manager_Default
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'plugin.position' => array(
+			'label' => 'Plugin position',
+			'code' => 'plugin.position',
+			'internalcode' => 'mplu."pos"',
+			'type' => 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'plugin.status' => array(
 			'label' => 'Plugin status',
 			'code' => 'plugin.status',
@@ -201,6 +208,8 @@ class MShop_Plugin_Manager_Default
 		$expr[] = $search->getConditions();
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
+
 		$pluginItems = $this->searchItems( $search );
 
 		$interface = 'MShop_Plugin_Provider_Interface';
@@ -214,14 +223,14 @@ class MShop_Plugin_Manager_Default
 
 			if( ( $providername = array_shift( $providernames ) ) === null )
 			{
-				$msg = sprintf( 'No plugin provider available in "%1$s"', $providernames );
+				$msg = sprintf( 'Provider in "%1$s" not available', $providernames );
 				throw new MShop_Service_Exception( $msg );
 			}
 
 			if ( ctype_alnum( $domain ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'Invalid plugin domain "%1$s"', $domain ), MW_Logger_Abstract::WARN
+					sprintf( 'Invalid characters in domain name "%1$s"', $domain ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}
@@ -229,7 +238,7 @@ class MShop_Plugin_Manager_Default
 			if ( ctype_alnum( $providername ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'Invalid plugin provider "%1$s"', $providername ), MW_Logger_Abstract::WARN
+					sprintf( 'Invalid characters in provider name "%1$s"', $providername ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}
@@ -241,7 +250,7 @@ class MShop_Plugin_Manager_Default
 			if ( class_exists( $classname ) === false )
 			{
 				$context->getLogger()->log(
-					sprintf( 'Plugin implementation "%1$s" not found', $classname ), MW_Logger_Abstract::WARN
+					sprintf( 'Class "%1$s" not available', $classname ), MW_Logger_Abstract::WARN
 				);
 				continue;
 			}
@@ -249,7 +258,7 @@ class MShop_Plugin_Manager_Default
 			$provider = new $classname( $context, $pluginItem );
 
 			if ( ( $provider instanceof $interface ) === false ) {
-				$msg = sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface );
+				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
 				throw new MShop_Service_Exception( $msg );
 			}
 
@@ -290,7 +299,7 @@ class MShop_Plugin_Manager_Default
 	{
 		$iface = 'MShop_Plugin_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -303,24 +312,26 @@ class MShop_Plugin_Manager_Default
 		try
 		{
 			$id = $item->getId();
+			$date = date( 'Y-m-d H:i:s' );
 
 			$path = 'mshop/plugin/manager/default/item/';
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
-			$stmt->bind(1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(2, $item->getTypeId() );
-			$stmt->bind(3, $item->getLabel() );
-			$stmt->bind(4, $item->getProvider() );
-			$stmt->bind(5, json_encode( $item->getConfig() ) );
-			$stmt->bind(6, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(7, date('Y-m-d H:i:s', time()));//mtime
-			$stmt->bind(8, $context->getEditor());
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $item->getTypeId() );
+			$stmt->bind( 3, $item->getLabel() );
+			$stmt->bind( 4, $item->getProvider() );
+			$stmt->bind( 5, json_encode( $item->getConfig() ) );
+			$stmt->bind( 6, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 8, $date );//mtime
+			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind(9, $id, MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$stmt->bind(9, date('Y-m-d H:i:s', time()));//ctime
+				$stmt->bind( 10, $date );//ctime
 			}
 
 			$result = $stmt->execute()->finish();
@@ -348,32 +359,14 @@ class MShop_Plugin_Manager_Default
 
 
 	/**
-	 * Deletes a plugin from the storage.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $id Unique ID of the plugin in the storage
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/plugin/manager/default/item/delete' );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$result = $stmt->execute()->finish();
-
-			if( isset( $this->_plugins[$id] ) ) {
-				unset( $this->_plugins[$id] );
-			}
-
-			$dbm->release($conn);
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$path = 'mshop/plugin/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -393,21 +386,22 @@ class MShop_Plugin_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
 			$cfgPathSearch = 'mshop/plugin/manager/default/item/search';
 			$cfgPathCount =  'mshop/plugin/manager/default/item/count';
 			$required = array( 'plugin' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				if ( ( $row['config'] = json_decode($row['config'], true) ) === null ) {
-					$msg = sprintf('Incorrect json decoding for "%1$s"', $row['config']);
+					$msg = sprintf('Invalid JSON as search result: %1$s', $row['config']);
 					throw new MShop_Service_Exception($msg);
 				}
 
 				$map[ $row['id'] ] = $row;
-				$typeIds[] = $row['typeid'];
+				$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn );
@@ -418,12 +412,13 @@ class MShop_Plugin_Manager_Default
 			throw $e;
 		}
 
-		if( count( $typeIds ) > 0 )
+		if( !empty( $typeIds ) )
 		{
 			$typeManager = $this->getSubManager( 'type' );
-			$search = $typeManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'plugin.type.id', array_unique( $typeIds ) ) );
-			$typeItems = $typeManager->searchItems( $search );
+			$typeSearch = $typeManager->createSearch();
+			$typeSearch->setConditions( $typeSearch->compare( '==', 'plugin.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $typeSearch );
 
 			foreach( $map as $id => $row )
 			{

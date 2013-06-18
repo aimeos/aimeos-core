@@ -9,7 +9,7 @@
 
 class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -108,9 +108,9 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$this->assertEquals( 'de', $sheet->getCell( 'A21' )->getValue() );
 		$this->assertEquals( 'Tee', $sheet->getCell( 'B21' )->getValue() );
 		$this->assertEquals( $ids['Tee'], $sheet->getCell( 'C21' )->getValue() );
-		$this->assertEquals( 'unittype7', $sheet->getCell( 'D21' )->getValue() );
-		$this->assertEquals( 'short', $sheet->getCell( 'E21' )->getValue() );
-		$this->assertEquals( 'Kurze Beschreibung der Teekategorie', $sheet->getCell( 'G21' )->getValue() );
+		$this->assertEquals( 'unittype8', $sheet->getCell( 'D21' )->getValue() );
+		$this->assertEquals( 'long', $sheet->getCell( 'E21' )->getValue() );
+		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $sheet->getCell( 'G21' )->getValue() );
 	}
 
 	public function testExportFile()
@@ -165,9 +165,9 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$this->assertEquals( 'de', $sheet->getCell( 'A21' )->getValue() );
 		$this->assertEquals( 'Tee', $sheet->getCell( 'B21' )->getValue() );
 		$this->assertEquals( $ids['Tee'], $sheet->getCell( 'C21' )->getValue() );
-		$this->assertEquals( 'unittype7', $sheet->getCell( 'D21' )->getValue() );
-		$this->assertEquals( 'short', $sheet->getCell( 'E21' )->getValue() );
-		$this->assertEquals( 'Kurze Beschreibung der Teekategorie', $sheet->getCell( 'G21' )->getValue() );
+		$this->assertEquals( 'unittype8', $sheet->getCell( 'D21' )->getValue() );
+		$this->assertEquals( 'long', $sheet->getCell( 'E21' )->getValue() );
+		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $sheet->getCell( 'G21' )->getValue() );
 	}
 
 

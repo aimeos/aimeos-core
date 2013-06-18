@@ -38,8 +38,6 @@ implements MShop_Service_Provider_Payment_Interface
 	 * Feature constant if refunding payments is supported.
 	 */
 	const FEAT_REFUND = 4;
-	
-	private $_communication;
 
 
 	/**
@@ -49,7 +47,7 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function cancel( MShop_Order_Item_Interface $order )
 	{
-		throw new MShop_Service_Exception( sprintf( 'Method is not available: "%1$s"', 'cancel' ) );
+		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'cancel' ) );
 	}
 
 
@@ -60,7 +58,7 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function capture( MShop_Order_Item_Interface $order )
 	{
-		throw new MShop_Service_Exception( sprintf( 'Method is not available: "%1$s"', 'capture' ) );
+		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'capture' ) );
 	}
 
 
@@ -71,39 +69,10 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function refund( MShop_Order_Item_Interface $order )
 	{
-		throw new MShop_Service_Exception( sprintf( 'Method is not available: "%1$s"', 'refund' ) );
+		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'refund' ) );
 	}
-	
-	
-	/**
-	 * Sets the communication interface for a service provider or a test.
-	 *
-	 * @param MW_Communication_Interface $communication Interface of communication
-	 */
-	public function setCommunication( MW_Communication_Interface $communication )
-	{
-		$this->_communication = $communication;
-	}
-	
-	
-	/**
-	 * Send http request to the given url.
-	 *
-	 * @param string $url URL of the Ogone server
-	 * @param string $param Parameter string
-	 * @param string $method Initial method (e.g. post or get)
-	 * @return string response body of a http request
-	 * @throws MShop_Service_Exception If the request couldn't be sent
-	 */
-	protected function _sendRequest( $url, $param, $method = 'POST' )
-	{
-		if( !isset( $this->_communication ) ) {
-			$this->_communication = new MW_Communication_Curl();
-		}
-		return $this->_communication->transmit( $url, $method, $param );
-	}
-	
-	
+
+
 	/**
 	 * Sets or adds a attribute value to the list of service payment items.
 	 *
@@ -119,16 +88,16 @@ implements MShop_Service_Provider_Payment_Interface
 			$attributes[ $code ]->setValue( utf8_encode( $value ) );
 			return;
 		}
-	
+
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
 		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
 		$attributeManager = $orderServiceManager->getSubManager( 'attribute' );
-	
+
 		$item = $attributeManager->createItem();
 		$item->setCode( $code );
 		$item->setValue( utf8_encode( $value ) );
 		$item->setServiceId( $serviceId );
-	
+
 		$attributes[ $code ] = $item;
 	}
 }

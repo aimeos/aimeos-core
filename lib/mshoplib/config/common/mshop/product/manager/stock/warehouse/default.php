@@ -20,7 +20,8 @@ return array(
 		'delete' => '
 			DELETE
 			FROM "mshop_product_stock_warehouse"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mprostwa."id", mprostwa."siteid", mprostwa."code", mprostwa."label", mprostwa."status",
@@ -33,11 +34,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mprostwa."id" ) AS "count"
-			FROM "mshop_product_stock_warehouse" AS mprostwa
-			:joins
-			WHERE
-				:cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mprostwa."id"
+				FROM "mshop_product_stock_warehouse" AS mprostwa
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

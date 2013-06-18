@@ -50,11 +50,10 @@ Ext.ux.ItemRegistry.registerItem = function(key, itemkey, item, pos) {
         Ext.ux.ItemRegistry.itemMap[key] = {};
     }
 
-	Ext.ux.ItemRegistry.itemMap[key][itemkey] = {
+    Ext.ux.ItemRegistry.itemMap[key][itemkey] = {
         item: item,
         pos: pos
-    };
-	
+    };	
 };
 
 Ext.ux.ItemRegistry.prototype = {

@@ -61,28 +61,36 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
-	 * Adds a product to the basket of the user stored in the session.
+	 * Adds a categorized product to the basket of the user stored in the session.
 	 *
 	 * @param string $prodid ID of the base product to add
 	 * @param integer $quantity Amount of products that should by added
-	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
-	 * 	selection of products but are stored together with the product (e.g. for configurable products)
-	 * @param array $variantAttributeIds List of variant-building attribute IDs that identify a specific product
-	 * 	in a selection products
 	 * @param boolean $requireVariant True if a specific product must be matched by the variant-building attribute IDs
 	 *  or false if the parent product can be added to the basket when the variant-building attributes don't match or
 	 *  are missing
-	 * @throws Controller_Frontend_Basket_Exception If the product isn't found
+	 * @param array $variantAttributeIds List of variant-building attribute IDs that identify a specific product
+	 * 	in a selection products
+	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
+	 * 	selection of products but are stored together with the product (e.g. for configurable products)
+	 * @param array $hiddenAttributeIds List of attribute IDs that should be stored along with the product in the order
+	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
 	 */
-	public function addProduct( $prodid, $quantity = 1, $configAttributeIds = array(), $variantAttributeIds = array(), $requireVariant = true )
+	public function addProduct( $prodid, $quantity = 1, $requireVariant = true, $variantAttributeIds = array(),
+		$configAttributeIds = array(), $hiddenAttributeIds = array() )
 	{
+		$this->_checkCategory( $prodid );
+		$this->_checkStockLevel( $prodid, $quantity );
+
+
 		$productManager = $this->_getDomainManager( 'product' );
 		$productItem = $productManager->getItem( $prodid, array( 'media', 'price', 'product', 'text' ) );
 
 		$orderBaseProductItem = $this->_getDomainManager( 'order/base/product' )->createItem();
 		$orderBaseProductItem->copyFrom( $productItem );
 		$orderBaseProductItem->setQuantity( $quantity );
-		$orderBaseProductItem->productId = $productItem->getId();
+
+		$orderAttributes = array();
+		$orderProductAttributeManager = $this->_getDomainManager( 'order/base/product/attribute' );
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
@@ -94,29 +102,39 @@ class Controller_Frontend_Basket_Default
 			{
 				$orderBaseProductItem->setProductCode( $productItem->getCode() );
 				$orderBaseProductItem->setSupplierCode( $productItem->getSupplierCode() );
-
-				$orderBaseProductItem->parentId = $orderBaseProductItem->productId;
-				$orderBaseProductItem->productId = $productItem->getId();
+				$orderBaseProductItem->parentId = $orderBaseProductItem->getProductId();
+				$orderBaseProductItem->setProductId( $productItem->getId() );
 
 				$subprices = $productItem->getRefItems( 'price', 'default' );
 
 				if( count( $subprices ) > 0 ) {
 					$prices = $subprices;
 				}
+
+				foreach( $this->_getAttributes( $variantAttributeIds, array( 'text' ) ) as $attrItem )
+				{
+					$orderAttributeItem = $orderProductAttributeManager->createItem();
+					$orderAttributeItem->copyFrom( $attrItem );
+					$orderAttributeItem->setType( 'variant' );
+
+					$orderAttributes[] = $orderAttributeItem;
+				}
 			}
 			else if( $requireVariant === true )
 			{
-				$string = 'No product found for ID "%1$s" and variant attribute IDs "%2$s"';
-				$msg = sprintf( $string, $prodid, join( ',', $variantAttributeIds ) );
+				$ids = join( ',', $variantAttributeIds );
+				$msg = sprintf( 'No product found for ID "%1$s" and variant attribute IDs "%2$s"', $prodid, $ids );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 		}
 
-		$orderAttributes = array();
-		$orderProductAttributeManager = $this->_getDomainManager( 'order/base/product/attribute' );
 
 		$priceManager = $this->_getDomainManager( 'price' );
 		$price = $priceManager->getLowestPrice( $prices, $quantity );
+
+
+		$attrTypeId = $this->_getProductListTypeItem( 'attribute', 'config' )->getId();
+		$this->_checkReferences( $prodid, 'attribute', $attrTypeId, $configAttributeIds );
 
 		foreach( $this->_getAttributes( $configAttributeIds ) as $attrItem )
 		{
@@ -130,12 +148,30 @@ class Controller_Frontend_Basket_Default
 
 			$orderAttributeItem = $orderProductAttributeManager->createItem();
 			$orderAttributeItem->copyFrom( $attrItem );
+			$orderAttributeItem->setType( 'config' );
 
 			$orderAttributes[] = $orderAttributeItem;
 		}
 
-		$orderBaseProductItem->setAttributes( $orderAttributes );
+
+		$attrTypeId = $this->_getProductListTypeItem( 'attribute', 'hidden' )->getId();
+		$this->_checkReferences( $prodid, 'attribute', $attrTypeId, $hiddenAttributeIds );
+
+		foreach( $this->_getAttributes( $hiddenAttributeIds, array() ) as $attrItem )
+		{
+			$orderAttributeItem = $orderProductAttributeManager->createItem();
+			$orderAttributeItem->copyFrom( $attrItem );
+			$orderAttributeItem->setType( 'hidden' );
+
+			$orderAttributes[] = $orderAttributeItem;
+		}
+
+
+		// remove product rebate of original price in favor to rebates granted for the order
+		$price->setRebate( '0.00' );
+
 		$orderBaseProductItem->setPrice( $price );
+		$orderBaseProductItem->setAttributes( $orderAttributes );
 
 		$this->_basket->addProduct( $orderBaseProductItem );
 		$this->_domainManager->setSession( $this->_basket );
@@ -153,7 +189,7 @@ class Controller_Frontend_Basket_Default
 
 		if( $product->getFlags() === MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 		{
-			$msg = sprintf( 'Basket item with position "%1$d" is immutable', $position );
+			$msg = sprintf( 'Basket item at position "%1$d" cannot be deleted manually', $position );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
@@ -175,13 +211,15 @@ class Controller_Frontend_Basket_Default
 
 		if( $product->getFlags() === MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 		{
-			$msg = sprintf( 'Basket item with position "%1$d" is immutable', $position );
+			$msg = sprintf( 'Basket item at position "%1$d" cannot be changed', $position );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
 
+		$this->_checkStockLevel( $product->getProductId(), $quantity );
+
 		$productManager = $this->_getDomainManager( 'product' );
-		$productItem = $productManager->getItem( $product->productId, array( 'price' ) );
+		$productItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
@@ -236,9 +274,12 @@ class Controller_Frontend_Basket_Default
 			}
 		}
 
-		$product->setAttributes( $attributes );
-		$product->setQuantity( $quantity );
+		// remove product rebate of original price in favor to rebates granted for the order
+		$price->setRebate( '0.00' );
+
 		$product->setPrice( $price );
+		$product->setQuantity( $quantity );
+		$product->setAttributes( $attributes );
 
 		$this->_basket->deleteProduct( $position );
 		$this->_basket->addProduct( $product, $position );
@@ -247,108 +288,207 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
-	 * Sets the billing address of the customer in the basket.
+	 * Sets the address of the customer in the basket.
 	 *
-	 * @param MShop_Common_Item_Address_Interface|array|string $billing Address object, array with key/value pairs or
-	 *  ID of the customer. In case of an array, the keys must be the same as the keys returned when calling toArray()
-	 *  on the billing address object like "customer.salutation"
+	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract
+	 * @param MShop_Common_Item_Address_Interface|array|null $billing Address object or array with key/value pairs.
+	 * 	In case of an array, the keys must be the same as the keys returned when calling toArray()
+	 *  on the order base address object like "order.base.address.salutation"
 	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
 	 * 	if one of the keys is invalid when using an array with key/value pairs
 	 */
-	public function setBillingAddress( $billing )
+	public function setAddress( $type, $value )
 	{
 		$orderAddressManager = $this->_getDomainManager( 'order/base/address' );
-
 		$address = $orderAddressManager->createItem();
+		$address->setType( $type );
 
-		if( $billing instanceof MShop_Common_Item_Address_Interface )
+		if( $value instanceof MShop_Common_Item_Address_Interface )
 		{
-			$address->copyFrom( $billing );
+			$address->copyFrom( $value );
+			$this->_basket->setAddress( $address, $type );
 		}
-		else if( is_array( $billing ) )
+		else if( is_array( $value ) )
 		{
-			$address = $this->_createAddressFromArray( $address, $billing, 'customer.' );
+			$this->_setAddressFromArray( $address, $value );
+			$this->_basket->setAddress( $address, $type );
+		}
+		else if( $value === null )
+		{
+			$this->_basket->deleteAddress( $type );
 		}
 		else
 		{
-			$customerManager = $this->_getDomainManager( 'customer' );
-			$customerItem = $customerManager->getItem( $billing );
-
-			$address->copyFrom( $customerItem->getBillingAddress() );
+			throw new Controller_Frontend_Basket_Exception( sprintf( 'Invalid value for address type "%1$s"', $type ) );
 		}
 
-		$this->_basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
 		$this->_domainManager->setSession( $this->_basket );
 	}
 
 
 	/**
-	 * Sets the delivery address of the customer in the basket (only required if the delivery address is different
-	 * 	from the billing address).
+	 * Sets the delivery/payment service item based on the service ID.
 	 *
-	 * @param MShop_Common_Item_Address_Interface|array|string|null $delivery Address object, array with key/value
-	 * 	pairs or ID of the customer address. In case of an array, the keys must be the same as the keys returned when
-	 * 	calling toArray() on the delivery address object like "customer.address.salutation".
-	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
-	 * 	if one of the keys is invalid when using an array with key/value pairs
+	 * @param string $type Service type code like 'payment' or 'delivery'
+	 * @param string $id Unique ID of the service item
+	 * @param array $attributes Associative list of key/value pairs containing the attributes selected or
+	 * 	entered by the customer when choosing one of the delivery or payment options
+	 * @throws Controller_Frontend_Basket_Exception If there is no price to the service item attached
 	 */
-	public function setDeliveryAddress( $delivery )
+	public function setService( $type, $id, array $attributes = array() )
 	{
-		$orderAddressManager = $this->_getDomainManager( 'order/base/address' );
+		$serviceManager = $this->_getDomainManager( 'service' );
+		$serviceItem = $serviceManager->getItem( $id, array( 'media', 'price', 'text' ) );
 
-		$address = $orderAddressManager->createItem();
+		$provider = $serviceManager->getProvider( $serviceItem );
+		$result = $provider->checkConfigFE( $attributes );
+		$unknown = array_diff_key( $attributes, $result );
 
-		if( $delivery instanceof MShop_Common_Item_Address_Interface )
+		if( count( $unknown ) > 0 )
 		{
-			$address->copyFrom( $delivery );
-		}
-		else if( is_array( $delivery ) )
-		{
-			$address = $this->_createAddressFromArray( $address, $delivery, 'customer.address.' );
-		}
-		else
-		{
-			$customerAddressManager = $this->_getDomainManager( 'customer/address' );
-			$addressItem = $customerAddressManager->getItem( $delivery );
-
-			$address->copyFrom( $addressItem );
+			$msg = sprintf( 'Unknown attributes "%1$s"', implode( '","', array_keys( $unknown ) ) );
+			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
-		$this->_basket->setAddress( $address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		foreach( $result as $key => $value )
+		{
+			if( $value !== null ) {
+				throw new Controller_Frontend_Basket_Exception( $value );
+			}
+		}
+
+		$orderBaseServiceManager = $this->_getDomainManager( 'order/base/service' );
+		$orderServiceItem = $orderBaseServiceManager->createItem();
+		$orderServiceItem->copyFrom( $serviceItem );
+
+		$price = $provider->calcPrice( $this->_basket );
+		// remove service rebate of original price
+		$price->setRebate( '0.00' );
+		$orderServiceItem->setPrice( $price );
+
+		$orderBaseServiceAttributeManager = $orderBaseServiceManager->getSubManager('attribute');
+
+		$attributeItems = array();
+		foreach( $attributes as $key => $value )
+		{
+			$ordBaseAtrrItem = $orderBaseServiceAttributeManager->createItem();
+			$ordBaseAtrrItem->setCode( $key );
+			$ordBaseAtrrItem->setValue( strip_tags( $value ) ); // prevent XSS
+			$ordBaseAtrrItem->setType( 'config' );
+
+			$attributeItems[] = $ordBaseAtrrItem;
+		}
+
+		$orderServiceItem->setAttributes( $attributeItems );
+
+		$this->_basket->setService( $orderServiceItem, $type );
 		$this->_domainManager->setSession( $this->_basket );
 	}
 
 
 	/**
-	 * Sets the delivery service item given by its ID to the basket.
+	 * Checks if the product is part of at least one category in the product catalog.
 	 *
-	 * @param string $id Unique ID of the delivery service item
-	 * @param array $attributes Associative list of key/value pairs containing the delivery attributes selected or
-	 * 	entered by the customer when choosing one of the delivery options
-	 * @throws Controller_Frontend_Basket_Exception If there is no price to the delivery service item attached
+	 * @param string $prodid Unique ID of the product
+	 * @throws Controller_Frontend_Basket_Exception If product is not associated to at least one category
 	 */
-	public function setDeliveryOption( $id, array $attributes = array() )
+	protected function _checkCategory( $prodid )
 	{
-		$this->_setService( 'delivery', $id, $attributes );
+		$catalogListManager = $this->_getDomainManager( 'catalog/list' );
+
+		$search = $catalogListManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'catalog.list.refid', $prodid ),
+			$search->getConditions()
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
+
+		$result = $catalogListManager->searchItems( $search );
+
+		if( reset( $result ) === false )
+		{
+			$msg = sprintf( 'Adding product with ID "%1$s" is not allowed', $prodid );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
 	}
 
 
 	/**
-	 * Sets the payment service item given by its ID to the basket.
+	 * Checks if the IDs of the given items are really associated to the product.
 	 *
-	 * @param string $id Unique ID of the payment service item
-	 * @param array $attributes Associative list of key/value pairs containing the payment attributes selected or
-	 * 	entered by the customer when choosing one of the delivery options
-	 * @throws Controller_Frontend_Basket_Exception If there is no price to the delivery service item attached
+	 * @param string $prodId Unique ID of the product
+	 * @param string $domain Domain the references must be of
+	 * @param integer $listTypeId ID of the list type the referenced items must be
+	 * @param array $refIds List of IDs that must be associated to the product
+	 * @throws Controller_Frontend_Basket_Exception If one or more of the IDs are not associated
 	 */
-	public function setPaymentOption( $id, array $attributes = array() )
+	protected function _checkReferences( $prodId, $domain, $listTypeId, array $refIds )
 	{
-		$this->_setService( 'payment', $id, $attributes );
+		$productManager = $this->_getDomainManager( 'product' );
+		$search = $productManager->createSearch( true );
+
+		$expr = array(
+			$search->compare( '==', 'product.id', $prodId ),
+			$search->getConditions(),
+		);
+
+		if( count( $refIds ) > 0 )
+		{
+			$param = array( $domain, $listTypeId, $refIds );
+			$cmpfunc = $search->createFunction( 'product.contains', $param );
+
+			$expr[] = $search->compare( '==', $cmpfunc, count( $refIds ) );
+		}
+
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		if( count( $productManager->searchItems( $search, array() ) ) === 0 )
+		{
+			$msg = sprintf( 'Invalid "%1$s" references for product with ID "%2$s"', $domain, $prodId );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
 	}
 
 
 	/**
-	 * Returns an order address object filled with the values from the array.
+	 * Checks if there are enough products in stock.
+	 *
+	 * @param string $prodid Unique ID of the product
+	 * @param integer $quantity Number of products the customer would like to buy
+	 * @throws Controller_Frontend_Basket_Exception If there are not enough products in stock
+	 */
+	protected function _checkStockLevel( $prodid, $quantity )
+	{
+		$manager = $this->_getDomainManager( 'product/stock' );
+
+		$search = $manager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.stock.productid', $prodid ),
+			$search->getConditions()
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$result = $manager->searchItems( $search );
+
+		if( empty( $result ) ) {
+			return;
+		}
+
+		foreach( $result as $item )
+		{
+			if( $item->getStockLevel() >= $quantity ) {
+				return;
+			}
+		}
+
+		$msg = sprintf( 'There are not enough products (ID "%1$s") in stock', $prodid );
+		throw new Controller_Frontend_Basket_Exception( $msg );
+	}
+
+
+	/**
+	 * Fills the order address object with the values from the array.
 	 *
 	 * @param MShop_Order_Item_Base_Address_Interface $address Address item to store the values into
 	 * @param array $map Associative array of key/value pairs. The keys must be the same as when calling toArray() from
@@ -357,57 +497,71 @@ class Controller_Frontend_Basket_Default
 	 * 	address
 	 * @throws Controller_Frontend_Basket_Exception
 	 */
-	protected function _createAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map, $prefix )
+	protected function _setAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map )
 	{
+		$errors = array();
+
 		foreach( $map as $key => $value )
 		{
-			$value = strip_tags( $value ); // prevent XSS
-
-			switch( $key )
+			try
 			{
-				case $prefix . 'salutation':
-					$address->setSalutation( $value ); break;
-				case $prefix . 'company':
-					$address->setCompany( $value ); break;
-				case $prefix . 'title':
-					$address->setTitle( $value ); break;
-				case $prefix . 'firstname':
-					$address->setFirstname( $value ); break;
-				case $prefix . 'lastname':
-					$address->setLastName( $value ); break;
-				case $prefix . 'address1':
-					$address->setAddress1( $value ); break;
-				case $prefix . 'address2':
-					$address->setAddress2( $value ); break;
-				case $prefix . 'address3':
-					$address->setAddress3( $value ); break;
-				case $prefix . 'postal':
-					$address->setPostal( $value ); break;
-				case $prefix . 'city':
-					$address->setCity( $value ); break;
-				case $prefix . 'state':
-					$address->setState( $value ); break;
-				case $prefix . 'countryid':
-					$address->setCountryId( $value ); break;
-				case $prefix . 'langid':
-					$address->setLanguageId( $value ); break;
-				case $prefix . 'telephone':
-					$address->setTelephone( $value ); break;
-				case $prefix . 'email':
-					$address->setEmail( $value ); break;
-				case $prefix . 'telefax':
-					$address->setTelefax( $value ); break;
-				case $prefix . 'website':
-					$address->setWebsite( $value ); break;
-				case $prefix . 'flag':
-					$address->setFlag( $value ); break;
-				default:
-					$msg = sprintf( 'Invalid address property "%1$s" with value "%2$s"', $key, $value );
-					throw new Controller_Frontend_Basket_Exception( $msg );
+				$value = strip_tags( $value ); // prevent XSS
+
+				switch( $key )
+				{
+					case 'order.base.address.salutation':
+						$address->setSalutation( $value ); break;
+					case 'order.base.address.company':
+						$address->setCompany( $value ); break;
+					case 'order.base.address.title':
+						$address->setTitle( $value ); break;
+					case 'order.base.address.firstname':
+						$address->setFirstname( $value ); break;
+					case 'order.base.address.lastname':
+						$address->setLastName( $value ); break;
+					case 'order.base.address.address1':
+						$address->setAddress1( $value ); break;
+					case 'order.base.address.address2':
+						$address->setAddress2( $value ); break;
+					case 'order.base.address.address3':
+						$address->setAddress3( $value ); break;
+					case 'order.base.address.postal':
+						$address->setPostal( $value ); break;
+					case 'order.base.address.city':
+						$address->setCity( $value ); break;
+					case 'order.base.address.state':
+						$address->setState( $value ); break;
+					case 'order.base.address.countryid':
+						$address->setCountryId( $value ); break;
+					case 'order.base.address.languageid':
+						$address->setLanguageId( $value ); break;
+					case 'order.base.address.telephone':
+						$address->setTelephone( $value ); break;
+					case 'order.base.address.email':
+						$address->setEmail( $value ); break;
+					case 'order.base.address.telefax':
+						$address->setTelefax( $value ); break;
+					case 'order.base.address.website':
+						$address->setWebsite( $value ); break;
+					case 'order.base.address.flag':
+						$address->setFlag( $value ); break;
+					default:
+						$msg = sprintf( 'Invalid address property "%1$s" with value "%2$s"', $key, $value );
+						throw new Controller_Frontend_Basket_Exception( $msg );
+				}
+			}
+			catch( Exception $e )
+			{
+				$name = substr( $key, 19 );
+				$errors[$name] = $e->getMessage();
 			}
 		}
 
-		return $address;
+		if( count( $errors ) > 0 )
+		{
+			$msg = sprintf( 'Invalid address properties, please check your input' );
+			throw new Controller_Frontend_Basket_Exception( $msg, 0, null, $errors );
+		}
 	}
 
 
@@ -429,20 +583,21 @@ class Controller_Frontend_Basket_Default
 
 		$search = $attributeManager->createSearch( true );
 		$expr = array(
-			$search->getConditions(),
 			$search->compare( '==', 'attribute.id', $attributeIds ),
+			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
 
 		$attrItems = $attributeManager->searchItems( $search, $domains );
 
 		if( count( $attrItems ) !== count( $attributeIds ) )
 		{
-			$str = 'Available attribute IDs "%1$s" does not match the given attribute IDs "%2$s"';
-			$actual = join( ',', array_keys( $attrItems ) );
-			$expected = join( ',', $attributeIds );
+			$expected = implode( ',', $attributeIds );
+			$actual = implode( ',', array_keys( $attrItems ) );
+			$msg = sprintf( 'Available attribute IDs "%1$s" does not match the given attribute IDs "%2$s"', $actual, $expected );
 
-			throw new Controller_Frontend_Basket_Exception( sprintf( $str, $actual, $expected ) );
+			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
 		return $attrItems;
@@ -464,8 +619,8 @@ class Controller_Frontend_Basket_Default
 
 			$listTypeSearch = $listTypeManager->createSearch( true );
 			$expr = array (
-				$listTypeSearch->compare( '==', 'product.list.type.domain', 'attribute' ),
-				$listTypeSearch->compare( '==', 'product.list.type.code', 'default' ),
+				$listTypeSearch->compare( '==', 'product.list.type.domain', $domain ),
+				$listTypeSearch->compare( '==', 'product.list.type.code', $code ),
 				$listTypeSearch->getConditions(),
 			);
 			$listTypeSearch->setConditions( $listTypeSearch->combine( '&&', $expr ) );
@@ -474,7 +629,7 @@ class Controller_Frontend_Basket_Default
 
 			if( ( $listTypeItem = reset( $listTypeItems ) ) === false )
 			{
-				$msg = sprintf( 'No list type for domain "%1$S" and code "%2$s" found', 'attribute', 'default' );
+				$msg = sprintf( 'No list type for domain "%1$s" and code "%2$s" found', $domain, $code );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 
@@ -515,7 +670,7 @@ class Controller_Frontend_Basket_Default
 
 		if( count( $variantAttributeIds ) > 0 )
 		{
-			$listTypeItem = $this->_getProductListTypeItem( 'attribute', 'default' );
+			$listTypeItem = $this->_getProductListTypeItem( 'attribute', 'variant' );
 
 			$param = array( 'attribute', $listTypeItem->getId(), $variantAttributeIds );
 			$cmpfunc = $search->createFunction( 'product.contains', $param );
@@ -526,63 +681,5 @@ class Controller_Frontend_Basket_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $productManager->searchItems( $search, $domains );
-	}
-
-
-	/**
-	 * Sets the delivery/payment service item based on the service ID.
-	 *
-	 * @param string $type Service type, either "delivery" or "payment"
-	 * @param string $id Unique ID of the service item
-	 * @param array $attributes Associative list of key/value pairs containing the attributes selected or
-	 * 	entered by the customer when choosing one of the delivery or payment options
-	 * @throws Controller_Frontend_Basket_Exception If there is no price to the service item attached
-	 */
-	protected function _setService( $type, $id, array $attributes = array() )
-	{
-		$serviceManager = $this->_getDomainManager( 'service' );
-		$serviceItem = $serviceManager->getItem( $id, array( 'media', 'price', 'text' ) );
-
-		$provider = $serviceManager->getProvider( $serviceItem );
-		$result = $provider->checkConfigFE( $attributes );
-		$unknown = array_diff_key( $attributes, $result );
-
-		if( count( $unknown ) > 0 )
-		{
-			$msg = sprintf( 'Unknown attributes "%1$s"', implode( '","', array_keys( $unknown ) ) );
-			throw new Controller_Frontend_Basket_Exception( $msg );
-		}
-
-		foreach( $result as $key => $value )
-		{
-			if( $value !== null )
-			{
-				$msg = sprintf( 'Invalid value "%1$s" entered for attribute "$2%s"', $value, $key );
-				throw new Controller_Frontend_Basket_Exception( $msg );
-			}
-		}
-
-		$orderBaseServiceManager = $this->_getDomainManager( 'order/base/service' );
-		$orderServiceItem = $orderBaseServiceManager->createItem();
-		$orderServiceItem->copyFrom( $serviceItem );
-
-		$price = $provider->calcPrice( $this->_basket );
-		$orderServiceItem->setPrice( $price );
-
-		$orderBaseServiceAttributeManager = $orderBaseServiceManager->getSubManager('attribute');
-
-		$attributeItems = array();
-		foreach( $attributes as $key => $value )
-		{
-			$ordBaseAtrrItem = $orderBaseServiceAttributeManager->createItem();
-			$ordBaseAtrrItem->setCode( $key );
-			$ordBaseAtrrItem->setValue( strip_tags( $value ) ); // prevent XSS
-			$attributeItems[] = $ordBaseAtrrItem;
-		}
-
-		$orderServiceItem->setAttributes( $attributeItems );
-
-		$this->_basket->setService( $orderServiceItem, $type );
-		$this->_domainManager->setSession( $this->_basket );
 	}
 }

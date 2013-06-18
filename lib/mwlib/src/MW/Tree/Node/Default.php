@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Tree
- * @version $Id: Default.php 16606 2012-10-19 12:50:23Z nsendetzky $
  */
 
 
@@ -17,11 +16,7 @@
  */
 class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_Node_Interface, Countable
 {
-	private $_id = null;
-	private $_label = '';
-	private $_code = '';
-	private $_status = 0;
-	private $_values = array();
+	private $_values;
 	private $_children = array();
 	private $_modified = false;
 
@@ -36,26 +31,6 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	public function __construct( array $values = array(), $children = array() )
 	{
 		MW_Common_Abstract::checkClassList( 'MW_Tree_Node_Interface', $children );
-
-		if( isset( $values['id'] ) ) {
-			$this->setId( $values['id'] );
-			unset( $values['id'] );
-		}
-
-		if( isset( $values['label'] ) ) {
-			$this->setLabel( $values['label'] );
-			unset( $values['label'] );
-		}
-
-		if( isset( $values['code'] ) ) {
-			$this->setCode( $values['code'] );
-			unset( $values['code'] );
-		}
-
-		if( isset( $values['status'] ) ) {
-			$this->setStatus( $values['status'] );
-			unset( $values['status'] );
-		}
 
 		$this->_values = $values;
 		$this->_children = $children;
@@ -128,7 +103,7 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	 */
 	public function getId()
 	{
-		return $this->_id;
+		return ( isset( $this->_values['id'] ) ? (string) $this->_values['id'] : null );
 	}
 
 
@@ -139,13 +114,13 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	 */
 	public function setId( $id )
 	{
-		if( $id === null ) {
+		if ( $id === null ) {
 			$this->_modified = true;
 		} else {
 			$this->_modified = false;
 		}
 
-		$this->_id = $id;
+		$this->_values['id'] = $id;
 	}
 
 
@@ -156,7 +131,7 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	 */
 	public function getLabel()
 	{
-		return $this->_label;
+		return ( isset( $this->_values['label'] ) ? (string) $this->_values['label'] : '' );
 	}
 
 
@@ -167,7 +142,9 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	 */
 	public function setLabel( $name )
 	{
-		$this->_label = (string) $name;
+		if ( $name == $this->getLabel() ) { return; }
+
+		$this->_values['label'] = (string) $name;
 		$this->_modified = true;
 	}
 
@@ -179,7 +156,7 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	 */
 	public function getCode()
 	{
-		return $this->_code;
+		return ( isset( $this->_values['code'] ) ? (string) $this->_values['code'] : '' );
 	}
 
 
@@ -190,7 +167,9 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	 */
 	public function setCode( $name )
 	{
-		$this->_code = (string) $name;
+		if ( $name == $this->getCode() ) { return; }
+
+		$this->_values['code'] = (string) $name;
 		$this->_modified = true;
 	}
 
@@ -201,7 +180,7 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	 */
 	public function getStatus()
 	{
-		return $this->_status;
+		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
 	}
 
 
@@ -212,7 +191,9 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	 */
 	public function setStatus( $status )
 	{
-		$this->_status = (int) $status;
+		if ( $status == $this->getStatus() ) { return; }
+
+		$this->_values['status'] = (int) $status;
 		$this->_modified = true;
 	}
 
@@ -275,9 +256,9 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	public function toArray()
 	{
 		return array(
-			'id' => $this->_id,
-			'label' => $this->_label,
-			'status' => $this->_status,
+			'id' => $this->getId(),
+			'label' => $this->getLabel(),
+			'status' => $this->getStatus(),
 		);
 	}
 

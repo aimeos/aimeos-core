@@ -52,7 +52,7 @@ abstract class MShop_Order_Manager_Base_Abstract
 			case MShop_Order_Manager_Base_Abstract::LOCK_ENABLE:
 				break;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Invalid lock value "%1$d"', $value ) );
+				throw new MShop_Order_Exception( sprintf( 'Lock flag "%1$d" not within allowed range', $value ) );
 		}
 	}
 }

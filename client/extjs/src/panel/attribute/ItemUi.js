@@ -87,9 +87,10 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							fieldLabel : _('Code'),
 							name : 'attribute.code',
 							allowBlank : false,
+							maxLength : 32,
 							emptyText : _('Attribute code (required)')
 						}, {
-							xtype : 'textarea',
+							xtype : 'textfield',
 							fieldLabel : _('Label'),
 							name : 'attribute.label',
 							allowBlank : false,

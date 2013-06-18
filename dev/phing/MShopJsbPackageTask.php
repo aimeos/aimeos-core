@@ -14,8 +14,8 @@ require_once 'phing/Task.php';
  */
 class MShopJsbPackageTask extends Task
 {
-	protected $_mshop;
-	protected $_projectPath = '';
+	private $_mshop;
+	private $_projectPath = '';
 
 	/**
 	 * Initializes the object.

@@ -1,0 +1,144 @@
+# German translations for services.
+# Copyright (C) 2013
+# This file is distributed under the same license as the arcavias-core package.
+# Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: arcavias-core 2013-01\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2013-01-18 16:33+0100\n"
+"Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Product attribute
+msgid "color"
+msgstr "Color"
+
+#. Address salutation
+msgid "company"
+msgstr "Company"
+
+#. Product attribute
+msgid "length"
+msgstr "Length"
+
+#. Address salutation
+msgid "miss"
+msgstr "Miss"
+
+#. Address salutation
+msgid "mr"
+msgstr "Mr"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Mrs"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telephone"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "repeated"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "unfinished"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "deleted"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "canceled"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "refused"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "refunded"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "pending"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "authorized"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "received"
+
+#. Direct debit service provider
+msgid "payment.directdebit.accountno"
+msgstr "Account number"
+
+#. Direct debit service provider
+msgid "payment.directdebit.accountowner"
+msgstr "Account owner"
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankcode"
+msgstr "Bank code"
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankname"
+msgstr "Bank name"
+
+#. Product attribute
+msgid "size"
+msgstr "Size"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "unfinished"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "deleted"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "pending"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "in progress"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "dispatched"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "delivered"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "lost"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "refused"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "returned"
+
+#. Product attribute
+msgid "width"
+msgstr "Width"

@@ -16,7 +16,7 @@ class MShop_Product_Item_Stock_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MShop_Product_Item_Stock_Default
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**

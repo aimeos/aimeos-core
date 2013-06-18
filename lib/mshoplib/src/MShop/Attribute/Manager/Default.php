@@ -395,7 +395,7 @@ class MShop_Attribute_Manager_Default
 	{
 		$iface = 'MShop_Attribute_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Attribute_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Attribute_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( $item->isModified() === false ) { return; }
@@ -452,28 +452,14 @@ class MShop_Attribute_Manager_Default
 
 
 	/**
-	 * Deletes an attribute for the storage.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $attributeId Unique ID of the attribute in the storage
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $attributeId )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/attribute/manager/default/item/delete');
-			$stmt->bind( 1, $attributeId, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$path = 'mshop/attribute/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -497,16 +483,17 @@ class MShop_Attribute_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/attribute/manager/default/item/search';
 			$cfgPathCount =  'mshop/attribute/manager/default/item/count';
 			$required = array( 'attribute' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				$map[ $row['id'] ] = $row;
-				$typeIds[] = $row['typeid'];
+				$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn );
@@ -517,12 +504,13 @@ class MShop_Attribute_Manager_Default
 			throw $e;
 		}
 
-		if( count( $typeIds ) > 0 )
+		if( !empty( $typeIds ) )
 		{
 			$typeManager = $this->getSubManager( 'type' );
-			$search = $typeManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'attribute.type.id', array_unique( $typeIds ) ) );
-			$typeItems = $typeManager->searchItems( $search );
+			$typeSearch = $typeManager->createSearch();
+			$typeSearch->setConditions( $typeSearch->compare( '==', 'attribute.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $typeSearch );
 
 			foreach( $map as $id => $row )
 			{

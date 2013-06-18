@@ -122,28 +122,38 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 
 	/**
-	 * Removes an item from the index.
+	 * Removes multiple items from the index.
 	 *
-	 * @param integer $id Product ID
+	 * @param array $ids list of Product IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
 		foreach( $this->_submanagers as $submanager ) {
-			$submanager->deleteItem( $id );
+			$submanager->deleteItems( $ids );
 		}
-
 
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$path = 'mshop/catalog/manager/index/catalog/default/item/delete';
+		$sql = $context->getConfig()->get( $path, $path );
+
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
+
+		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'prodid' => '"prodid"' );
+
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
 
 		try
 		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/catalog/default/item/delete' );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
+			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn );
@@ -257,26 +267,30 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$listManager = $catalogManager->getSubManager( 'list' );
 
-		foreach ( $items as $key => $item )
-		{
-			$search = $listManager->createSearch( true );
-			$expr = array(
-				$search->getConditions(),
-				$search->compare( '==', 'catalog.list.domain', 'product' ),
-				$search->compare( '==', 'catalog.list.refid', $item->getId() ),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSlice( 0, 0x7FFFFFFF );
-			$listItems[ $key ] = $listManager->searchItems( $search );
+		$ids = array();
+		foreach( $items as $key => $item ) {
+			$ids[] = $item->getId();
 		}
 
+		$search = $listManager->createSearch( true );
+		$expr = array(
+			$search->getConditions(),
+			$search->compare( '==', 'catalog.list.domain', 'product' ),
+			$search->compare( '==', 'catalog.list.refid', $ids ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7FFFFFFF );
+
+		$result = $listManager->searchItems( $search );
+
+		$listItems = array();
+		foreach( $result as $key => $listItem ) {
+			$listItems[ $listItem->getRefId() ][] = $listItem;
+		}
 
 		$date = date('Y-m-d H:i:s' );
 		$editor = $context->getEditor();
 		$siteid = $context->getLocale()->getSiteId();
-
-
-		$this->_begin();
 
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
@@ -287,7 +301,9 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			{
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/catalog/default/item/insert' );
 
-				foreach ( $listItems[ $key ] as $listItem )
+				if( !array_key_exists( $item->getId(), $listItems ) ) { continue; }
+
+				foreach ( $listItems[ $item->getId() ] as $listItem )
 				{
 					$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
 					$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
@@ -308,8 +324,6 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			$dbm->release( $conn );
 			throw $e;
 		}
-
-		$this->_commit();
 
 
 		foreach( $this->_submanagers as $submanager ) {
@@ -346,11 +360,12 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/catalog/manager/index/catalog/default/item/search';
 			$cfgPathCount =  'mshop/catalog/manager/index/catalog/default/item/count';
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )	{
 				$ids[] = $row['id'];

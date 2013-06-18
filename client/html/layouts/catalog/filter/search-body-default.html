@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+
+$listTarget = $this->config( 'client/html/catalog/list/url/target' );
+$listController = $this->config( 'client/html/catalog/list/search/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/list/search/url/action', 'list' );
+
+$listSimpleTarget = $this->config( 'client/html/catalog/listsimple/url/target' );
+$listSimpleController = $this->config( 'client/html/catalog/listsimple/url/controller', 'catalog' );
+$listSimpleAction = $this->config( 'client/html/catalog/listsimple/url/action', 'listsimple' );
+$listSimpleConfig = $this->config( 'client/html/catalog/listsimple/url/config', array() );
+
+$listSimpleUrl = $this->url( $listSimpleTarget, $listSimpleController, $listSimpleAction, array(), array(), $listSimpleConfig );
+
+?>
+<div class="arcavias catalog-filter-search">
+	<form action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction ) ); ?>" method="POST">
+		<input class="value" type="text" name="<?php echo $enc->attr( $this->formparam( 'f-search-text' ) ); ?>" value="" data-url="<?php echo $enc->attr( $listSimpleUrl ); ?>" /><!--
+		--><button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Go' ), $enc::TRUST ); ?></button>
+	</form>
+<?php echo $this->get( 'searchBody' ); ?>
+</div>

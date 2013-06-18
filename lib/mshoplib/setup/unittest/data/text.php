@@ -16,6 +16,7 @@ return array (
 		'catalog/deliveryinformation' => array( 'domain' => 'catalog', 'code' => 'deliveryinformation', 'label' => 'Delivery information', 'status' => 1 ),
 		'catalog/paymentinformation' => array( 'domain' => 'catalog', 'code' => 'paymentinformation', 'label' => 'Payment information', 'status' => 1 ),
 		'catalog/name' => array( 'domain' => 'catalog', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
+		'catalog/quote' => array( 'domain' => 'catalog', 'code' => 'quote', 'label' => 'Quote', 'status' => 1 ),
 		'attribute/img-description' => array( 'domain' => 'attribute', 'code' => 'img-description', 'label' => 'Image description', 'status' => 0 ),
 		'text/name' => array( 'domain' => 'text', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		'media/name' => array( 'domain' => 'media', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
@@ -37,7 +38,7 @@ return array (
 	),
 
 	'text' => array (
-	
+
 		'text/customer/information' => array( 'langid' => null, 'typeid' => 'customer/information', 'domain' => 'customer', 'label' => 'customer/information', 'content' => 'Customer information', 'status' => 1),
 		'text/customer/notify' => array( 'langid' => null, 'typeid' => 'customer/notify', 'domain' => 'customer', 'label' => 'customer/notify', 'content' => 'Customer notify', 'status' => 1),
 		'text/customer/newsletter' => array( 'langid' => null, 'typeid' => 'customer/newsletter', 'domain' => 'customer', 'label' => 'customer/newsletter', 'content' => 'Customer newsletter', 'status' => 1),
@@ -79,6 +80,7 @@ return array (
 		'text/cafe_long_desc' => array( 'langid' => 'de', 'typeid' => 'catalog/long', 'domain' => 'catalog', 'label' => 'cafe_long_desc', 'content' => 'Eine ausführliche Beschreibung der Kategorie. Hier machen auch angehängte Bilder zum Text einen Sinn.', 'status' => 1 ),
 		'text/cafe_delivery_desc' => array( 'langid' => 'de', 'typeid' => 'catalog/deliveryinformation', 'domain' => 'catalog', 'label' => 'cafe_delivery_desc', 'content' => 'Artikel dieser Kategorie können leider nicht in alle Länder verkauft werden, da sie den Einfuhrbedingungen nicht entsprechen. Um einige Kaffeebohnen ist noch die Katze herum! :D', 'status' => 1 ),
 		'text/cafe_payment_desc' => array( 'langid' => 'de', 'typeid' => 'catalog/paymentinformation', 'domain' => 'catalog', 'label' => 'cafe_payment_desc', 'content' => 'Artikel dieser Kategorie können nur per Vorkasse bestellt werden.', 'status' => 1 ),
+		'text/cafe_quote' => array( 'langid' => 'de', 'typeid' => 'catalog/quote', 'domain' => 'catalog', 'label' => 'cafe_quote', 'content' => 'Kaffee Bewertungen', 'status' => 1 ),
 //Tee
 		'text/tea' => array( 'langid' => 'de', 'typeid' => 'catalog/name', 'domain' => 'catalog', 'label' => 'tea', 'content' => 'Tee', 'status' => 1 ),
 		'text/tea_short_desc' => array( 'langid' => 'de', 'typeid' => 'catalog/short', 'domain' => 'catalog', 'label' => 'tea_short_desc', 'content' => 'Kurze Beschreibung der Teekategorie', 'status' => 1 ),
@@ -141,5 +143,8 @@ return array (
 		'text/service_text1' => array( 'langid' => 'de', 'typeid' => 'product/serviceinformation', 'domain' => 'service', 'label' => 'service_text1', 'content' => 'Unittest: Service text 1 de', 'status' => 1 ),
 		'text/service_text2' => array( 'langid' => 'de', 'typeid' => 'product/serviceinformation', 'domain' => 'service', 'label' => 'service_text2', 'content' => 'Unittest: Service text 2 de', 'status' => 1 ),
 		'text/service_text3' => array( 'langid' => 'de', 'typeid' => 'product/serviceinformation', 'domain' => 'service', 'label' => 'service_text3', 'content' => 'Unittest: Service text 3 de', 'status' => 0 ),
+		'text/service_text4' => array( 'langid' => 'en', 'typeid' => 'service/name', 'domain' => 'service', 'label' => 'service_text4', 'content' => 'Unittest service name', 'status' => 1 ),
+		'text/service_text5' => array( 'langid' => 'en', 'typeid' => 'service/short', 'domain' => 'service', 'label' => 'service_text5', 'content' => 'Short service description', 'status' => 1 ),
+		'text/service_text6' => array( 'langid' => 'en', 'typeid' => 'service/long', 'domain' => 'service', 'label' => 'service_text6', 'content' => 'A long description for the service item', 'status' => 1 ),
 	),
 );

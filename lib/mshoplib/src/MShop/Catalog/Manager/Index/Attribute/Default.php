@@ -115,28 +115,38 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 
 	/**
-	 * Removes an item from the index.
+	 * Removes multiple items from the index.
 	 *
-	 * @param integer $id Product ID
+	 * @param array $ids list of Product IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
 		foreach( $this->_submanagers as $submanager ) {
-			$submanager->deleteItem( $id );
+			$submanager->deleteItems( $ids );
 		}
-
 
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$path = 'mshop/catalog/manager/index/attribute/default/item/delete';
+		$sql = $context->getConfig()->get( $path, $path );
+
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
+
+		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'prodid' => '"prodid"' );
+
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
 
 		try
 		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/attribute/default/item/delete' );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
+			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn );
@@ -251,14 +261,11 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		$date = date( 'Y-m-d H:i:s' );
 
 
-		$this->_begin();
-
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
 		try
 		{
-
 			foreach ( $items as $item )
 			{
 				$listTypes = array();
@@ -272,7 +279,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 				{
 					if( !isset( $listTypes[ $refItem->getId() ] ) )
 					{
-						$msg = sprintf( 'No list type for attribute item with ID "%1$s"', $refItem->getId() );
+						$msg = sprintf( 'List type for attribute item with ID "%1$s" not available', $refItem->getId() );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
@@ -299,9 +306,6 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 			$dbm->release( $conn );
 			throw $e;
 		}
-
-		$this->_commit();
-
 
 		foreach( $this->_submanagers as $submanager ) {
 			$submanager->rebuildIndex( $items );
@@ -337,11 +341,12 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/catalog/manager/index/attribute/default/item/search';
 			$cfgPathCount =  'mshop/catalog/manager/index/attribute/default/item/count';
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )	{
 				$ids[] = $row['id'];

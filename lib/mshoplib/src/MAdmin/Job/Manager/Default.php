@@ -131,7 +131,7 @@ class MAdmin_Job_Manager_Default
 	{
 		$iface = 'MAdmin_Job_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MAdmin_Job_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MAdmin_Job_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) {
@@ -191,33 +191,13 @@ class MAdmin_Job_Manager_Default
 
 
 	/**
-	 * Deletes an existing job from the storage.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $itemId Job id of an existing job in the storage that should be deleted
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $itemId )
+	public function deleteItems( array $ids )
 	{
-		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$path = 'madmin/job/manager/default/delete';
-			$sql = $config->get( $path, $path );
-
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $itemId );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'madmin/job/manager/default/delete', 'madmin/job/manager/default/delete' ) );
 	}
 
 
@@ -234,7 +214,7 @@ class MAdmin_Job_Manager_Default
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new MAdmin_Job_Exception( sprintf( 'No job with ID "%1$s" found', $id ) );
+			throw new MAdmin_Job_Exception( sprintf( 'Job with ID "%1$s" not found', $id ) );
 		}
 
 		return $item;
@@ -259,27 +239,26 @@ class MAdmin_Job_Manager_Default
 
 		try
 		{
-			$sitelevel = MShop_Common_Manager_Abstract::SITE_ONE;
+			$level = MShop_Locale_Manager_Abstract::SITE_SUBTREE;
 			$cfgPathSearch = 'madmin/job/manager/default/search';
 			$cfgPathCount =  'madmin/job/manager/default/count';
 			$required = array( 'job' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount,
-				$required, $total, $sitelevel );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				$config = $row['parameter'];
 				if( ( $row['parameter'] = json_decode( $row['parameter'], true ) ) === null )
 				{
-					$msg = sprintf( 'Invalid JSON in "%1$s" for ID "%2$s": "%3$s"', 'madmin_job.parameter', $row['id'], $config );
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.parameter', $row['id'], $config );
 					$logger->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
 				$config = $row['result'];
 				if( ( $row['result'] = json_decode( $row['result'], true ) ) === null )
 				{
-					$msg = sprintf( 'Invalid JSON in "%1$s" for ID "%2$s": "%3$s"', 'madmin_job.result', $row['id'], $config );
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.result', $row['id'], $config );
 					$logger->log( $msg, MW_Logger_Abstract::WARN );
 				}
 

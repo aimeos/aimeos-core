@@ -9,7 +9,7 @@
 class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 {
 
-	protected $_codes;
+	private $_codes;
 
 	/**
 	 * Runs the test methods of this class.

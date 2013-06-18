@@ -9,9 +9,9 @@
 
 class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_testdir;
-	protected $_testfile;
+	private $_object;
+	private $_testdir;
+	private $_testfile;
 
 
 	/**

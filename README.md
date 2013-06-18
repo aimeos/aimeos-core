@@ -1,6 +1,6 @@
-# Arcavias - high performance e-commerce
+# Arcavias core - high performance e-commerce [![Build Status](https://travis-ci.org/Arcavias/arcavias-core.png?branch=master)](https://travis-ci.org/Arcavias/arcavias-core)
 
-## What is Arcavias?
+## What is Arcavias core?
 
 Arcavias is an open source e-commerce framework for web shops consisting of the e-commerce library, the administration interface and different front-ends. It's a modular stack that offers an unmatched combination of flexibility and speed.
 
@@ -22,3 +22,4 @@ It's is suited for medium to large size businesses which needs a seamless integr
 ## License
 
 Arcavias is licensed under the terms of the LGPLv3 Open Source license and is available for free.
+

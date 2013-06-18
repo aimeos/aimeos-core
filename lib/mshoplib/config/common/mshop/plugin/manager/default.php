@@ -9,21 +9,22 @@
 return array(
 	'item' => array(
 		'insert' => '
-			INSERT INTO "mshop_plugin"( "siteid", "typeid", "label", "provider", "config", "status", "mtime", "editor", "ctime")
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_plugin"( "siteid", "typeid", "label", "provider", "config", "pos", "status", "mtime", "editor", "ctime")
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_plugin"
-			SET "siteid" = ?, "typeid" = ?, "label" = ?, "provider" = ?, "config" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "typeid" = ?, "label" = ?, "provider" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'delete' => '
 			DELETE FROM "mshop_plugin"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT DISTINCT mplu."id", mplu."siteid", mplu."typeid", mplu."label", mplu."provider",
-				mplu."config", mplu."status", mplu."mtime", mplu."editor", mplu."ctime"
+				mplu."config", mplu."pos", mplu."status", mplu."mtime", mplu."editor", mplu."ctime"
 			FROM "mshop_plugin" mplu
 			:joins
 			WHERE
@@ -32,11 +33,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT(DISTINCT mplu."id" ) AS "count"
-			FROM "mshop_plugin" mplu
-			:joins
-			WHERE
-				:cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mplu."id"
+				FROM "mshop_plugin" mplu
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	)
 );

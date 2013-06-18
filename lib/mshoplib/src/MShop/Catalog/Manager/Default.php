@@ -36,6 +36,13 @@ class MShop_Catalog_Manager_Default
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'config' => array(
+			'code' => 'catalog.config',
+			'internalcode' => 'mcat."config"',
+			'label' => 'Catalog site config',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'code' => array(
 			'code'=>'catalog.code',
 			'internalcode'=>'mcat."code"',
@@ -49,6 +56,14 @@ class MShop_Catalog_Manager_Default
 			'label'=>'Catalog node status',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+		),
+		'parentid' => array(
+			'code'=>'catalog.parentid',
+			'internalcode'=>'mcat."parentid"',
+			'label'=>'Catalog node parentid',
+			'type'=> 'integer',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
 		),
 		'level' => array(
 			'code'=>'catalog.level',
@@ -100,63 +115,6 @@ class MShop_Catalog_Manager_Default
 			'code'=>'catalog.editor',
 			'internalcode'=>'mcat."editor"',
 			'label'=>'Catalog editor',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-	);
-
-	private $_siteSearchConfig = array(
-		'catalog.site.id'=> array(
-			'code'=>'catalog.site.id',
-			'internalcode'=>'mcatsi."id"',
-			'internaldeps'=> array( 'LEFT JOIN "mshop_catalog_site" AS mcatsi ON ( mcat."id" = mcatsi."parentid" )' ),
-			'label'=>'Catalog site ID',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.site.parentid'=> array(
-			'code'=>'catalog.site.parentid',
-			'internalcode'=>'mcatsi."parentid"',
-			'label'=>'Catalog site parent ID',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.site.siteid'=> array(
-			'code'=>'catalog.site.siteid',
-			'internalcode'=>'mcatsi."siteid"',
-			'label'=>'Catalog site site ID',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.site.value'=> array(
-			'code'=>'catalog.site.value',
-			'internalcode'=>'mcatsi."value"',
-			'label'=>'Catalog site value',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.site.ctime'=> array(
-			'label' => 'Catalog site creation time',
-			'code' => 'catalog.site.ctime',
-			'internalcode' => 'mcatsi."ctime"',
-			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'catalog.site.mtime'=> array(
-			'label' => 'Catalog site modification time',
-			'code' => 'catalog.site.mtime',
-			'internalcode' => 'mcatsi."mtime"',
-			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'catalog.site.editor'=> array(
-			'code'=>'catalog.site.editor',
-			'internalcode'=>'mcatsi."editor"',
-			'label'=>'Catalog site editor',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
@@ -364,10 +322,31 @@ class MShop_Catalog_Manager_Default
 	public function deleteItem( $id )
 	{
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
-
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->deleteNode( $id );
-		$this->_commit();
+
+		try
+		{
+			$this->_createTreeManager( $siteid )->deleteNode( $id );
+			$this->_commit();
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			throw $e;
+		}
+	}
+
+
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids )
+	{
+		foreach( $ids as $id ) {
+			$this->deleteItem( $id );
+		}
 	}
 
 
@@ -416,13 +395,21 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function insertItem( MShop_Catalog_Item_Interface $item, $parentId = null, $refId = null )
 	{
-		$node = $item->getNode();
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
-
+		$node = $item->getNode();
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->insertNode($node, $parentId, $refId );
-		$this->_updateUsage( $node->getId(), true );
-		$this->_commit();
+
+		try
+		{
+			$this->_createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
+			$this->_updateUsage( $node->getId(), $item, true );
+			$this->_commit();
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			throw $e;
+		}
 	}
 
 
@@ -437,11 +424,21 @@ class MShop_Catalog_Manager_Default
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
+		$item = $this->getItem( $id );
 
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
-		$this->_updateUsage( $id );
-		$this->_commit();
+
+		try
+		{
+			$this->_createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
+			$this->_updateUsage( $id, $item );
+			$this->_commit();
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			throw $e;
+		}
 	}
 
 
@@ -455,16 +452,24 @@ class MShop_Catalog_Manager_Default
 	{
 		$iface = 'MShop_Catalog_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Catalog_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Catalog_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		$node = $item->getNode();
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
-
+		$node = $item->getNode();
 		$this->_begin();
-		$this->_createTreeManager( $siteid )->saveNode( $node );
-		$this->_updateUsage( $node->getId() );
-		$this->_commit();
+
+		try
+		{
+			$this->_createTreeManager( $siteid )->saveNode( $node );
+			$this->_updateUsage( $node->getId(), $item );
+			$this->_commit();
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			throw $e;
+		}
 	}
 
 
@@ -484,11 +489,12 @@ class MShop_Catalog_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ONE;
 			$cfgPathSearch = 'mshop/catalog/manager/default/item/search-item';
 			$cfgPathCount = 'mshop/catalog/manager/default/item/count';
 			$required = array( 'catalog' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[ $row['id'] ] = new MW_Tree_Node_Default( $row );
@@ -542,9 +548,10 @@ class MShop_Catalog_Manager_Default
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
+	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MShop_Catalog_Item_Interface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE )
+	public function getTree( $id = null, array $ref = array(), $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $criteria = null )
 	{
 		$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
 
@@ -552,7 +559,8 @@ class MShop_Catalog_Manager_Default
 		{
 			try
 			{
-				$node = $this->_createTreeManager( $siteId )->getNode( $id, $level );
+				$treeMgr = $this->_createTreeManager( $siteId );
+				$node = $treeMgr->getNode( $id, $level, $criteria );
 
 				$listItems = $listItemMap = $refIdMap = array();
 				$nodeMap = $this->_getNodeMap( $node );
@@ -590,7 +598,7 @@ class MShop_Catalog_Manager_Default
 			catch( Exception $e ) { ; }
 		}
 
-		throw new MShop_Catalog_Exception( sprintf( 'No catalog node found for ID "%1$s"', $id ) );
+		throw new MShop_Catalog_Exception( sprintf( 'Catalog node for ID "%1$s" not available', $id ) );
 	}
 
 
@@ -608,8 +616,6 @@ class MShop_Catalog_Manager_Default
 			case 'list':
 				$typeManager = $this->_getTypeManager( 'catalog', 'list/type', null, $this->_getListTypeSearchConfig() );
 				return $this->_getListManager( 'catalog', $manager, $name, $this->_getListSearchConfig(), $typeManager );
-			case 'site':
-				return $this->_getSiteManager( 'catalog', $manager, $name, $this->_siteSearchConfig );
 			default:
 				return $this->_getSubManager( 'catalog', $manager, $name );
 		}
@@ -675,6 +681,10 @@ class MShop_Catalog_Manager_Default
 	protected function _createItem( MW_Tree_Node_Interface $node = null, array $children = array(),
 		array $listItems = array(), array $refItems = array() )
 	{
+		if( isset( $node->config ) && ( $result = json_decode( $node->config, true ) ) !== null ) {
+			$node->config = $result;
+		}
+
 		return new MShop_Catalog_Item_Default( $node, $children, $listItems, $refItems );
 	}
 
@@ -788,17 +798,14 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Updates the usage information of a node.
 	 *
-	 * @param MW_Tree_Manager_Interface $node Node item.
 	 * @param integer $id Id of the record
+	 * @param MShop_Common_Item_Interface $item Catalog item
 	 * @param boolean $case True if the record shoud be added or false for an update
-	 */
-	/**
 	 *
-	 * @param type $id
-	 * @param type $case
 	 */
-	private function _updateUsage( $id, $case = false )
+	private function _updateUsage( $id, MShop_Common_Item_Interface $item, $case = false )
 	{
+		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
@@ -814,19 +821,20 @@ class MShop_Catalog_Manager_Default
 			}
 
 			$stmt = $conn->create( $context->getConfig()->get( $path, $path ) );
-			$stmt->bind( 1, date( 'Y-m-d H:i:s', time() ) ); // mtime
-			$stmt->bind( 2, $context->getEditor() );
+			$stmt->bind( 1, json_encode( $item->getConfig() ) );
+			$stmt->bind( 2, $date ); // mtime
+			$stmt->bind( 3, $context->getEditor() );
 
 			if( $case !== true )
 			{
-				$stmt->bind(3, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->bind(4, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 4, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 5, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			}
 			else
 			{
-				$stmt->bind(3, date( 'Y-m-d H:i:s', time() ) ); // ctime
-				$stmt->bind(4, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->bind(5, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 4, $date ); // ctime
+				$stmt->bind( 5, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 6, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			}
 
 			$result = $stmt->execute()->finish();

@@ -4,7 +4,7 @@
 	
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
-		<delete file="tests/unittests.log" quiet="true" failonerror="false" />
+		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<exec command="phpunit --configuration=phpunit.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
@@ -19,7 +19,7 @@
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="phpcs -n --standard=`pwd`/../../coding/Metaways src tests/Controller"
+		<exec command="phpcs -n --standard=${coredir}/coding/Metaways src tests/Controller"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 
@@ -32,6 +32,25 @@
 			</fileset>
 		</delete>
 	</target>
+
+	<target name="i18n" description="Creates translation message files">
+		<exec command="find ./src/ -type f | xgettext -s --no-wrap --language=PHP --from-code=UTF-8 --keyword=sprintf:1 -o i18n/core-controller-frontend.pot -f -"
+			checkreturn="true" logoutput="true" />
+		<exec command="msgmerge -s --no-wrap -U --backup=none i18n/en.po i18n/core-controller-frontend.pot" checkreturn="true" logoutput="true" />
+	</target>
+
+	<target name="build" description="Builds package for deployment">
+		<foreach param="po-fname" absparam="po-filename" target="build-mo">
+            <fileset dir="./i18n">
+                <include name="*.po" />
+            </fileset>
+        </foreach>
+	</target>
+
+	<target name="build-mo" description="Generates binary translation files">
+		<fail unless="po-filename" message="Missing file name" />
+		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" /> 
+    </target>
 
 	<target name="all" depends="coverage,check" description="Builds all parts of the package">
 	</target>

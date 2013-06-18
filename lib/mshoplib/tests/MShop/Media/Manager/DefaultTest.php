@@ -12,14 +12,14 @@
  */
 class MShop_Media_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_fixtures = array( );
-	protected $_object = null;
+	private $_fixtures = array( );
+	private $_object = null;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.
@@ -135,7 +135,7 @@ class MShop_Media_Manager_DefaultTest extends MW_Unittest_Testcase
 		$search->setSlice(0, 4);
 		$results = $this->_object->searchItems($search, array(), $total);
 		$this->assertEquals(4, count( $results ) );
-		$this->assertEquals(8, $total);
+		$this->assertEquals(10, $total);
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

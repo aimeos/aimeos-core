@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+
+$items = $this->get( 'quoteItems', array() );
+
+?>
+<div class="catalog-list-quote">
+<?php if( count( $items ) > 0 ) : ?>
+	<div class="content">
+<?php 	foreach( $items as $quoteItem ) : ?>
+		<article><?php echo $enc->html( $quoteItem->getContent() ); ?></article>
+<?php 	endforeach; ?>
+		<a href="#"><?php echo $enc->html( $this->translate( 'client/html', 'Show all quotes' ), $enc::TRUST ); ?></a>
+	</div>
+<?php endif; ?>
+<?php echo $this->get( 'quoteBody' ); ?>
+</div>

@@ -62,6 +62,7 @@ class Controller_Frontend_Service_Default
 			$search->compare( '==', 'service.type.code', $type ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
 		$this->_items[$type] = $this->_serviceManager->searchItems( $search, $ref );
 
@@ -78,8 +79,7 @@ class Controller_Frontend_Service_Default
 			}
 			catch( MShop_Service_Exception $e )
 			{
-				$str = 'Unable to create provider "%1$s" for service with ID "%2$s"';
-				$msg = sprintf( $str, $service->getCode(), $id );
+				$msg = sprintf( 'Unable to create provider "%1$s" for service with ID "%2$s"', $service->getCode(), $id );
 				$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 			}
 		}
@@ -94,19 +94,42 @@ class Controller_Frontend_Service_Default
 	 *
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @return array List of attribute definitions implementing MW_Common_Criteria_Attribute_Interface
 	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
 	 * @throws MShop_Exception If service provider isn't available
 	 * @throws Exception If an error occurs
 	 */
-	public function getServiceAttributes( $type, $serviceId )
+	public function getServiceAttributes( $type, $serviceId, MShop_Order_Item_Base_Interface $basket )
 	{
 		if( isset( $this->_providers[$type][$serviceId] ) ) {
-			return $this->_providers[$type][$serviceId]->getConfigFE();
+			return $this->_providers[$type][$serviceId]->getConfigFE( $basket );
 		}
 
 		$item = $this->_getServiceItem( $type, $serviceId );
-		return $this->_serviceManager->getProvider( $item )->getConfigFE();
+		return $this->_serviceManager->getProvider( $item )->getConfigFE( $basket );
+	}
+
+
+	/**
+	 * Returns the price of the service.
+	 *
+	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
+	 * @param string $serviceId Identifier of one of the service option returned by getService()
+	 * @param MShop_Order_Item_Base_Interface $basket Basket with products
+	 * @return MShop_Price_Item_Interface Price item
+	 * @throws Controller_Frontend_Service_Exception If no active service provider for this ID is available
+	 * @throws MShop_Exception If service provider isn't available
+	 * @throws Exception If an error occurs
+	 */
+	public function getServicePrice( $type, $serviceId, MShop_Order_Item_Base_Interface $basket )
+	{
+		if( isset( $this->_providers[$type][$serviceId] ) ) {
+			return $this->_providers[$type][$serviceId]->calcPrice( $basket );
+		}
+
+		$item = $this->_getServiceItem( $type, $serviceId );
+		return $this->_serviceManager->getProvider( $item )->calcPrice( $basket );
 	}
 
 
@@ -150,11 +173,11 @@ class Controller_Frontend_Service_Default
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$items = $this->_serviceManager->searchItems( $search );
+		$items = $this->_serviceManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $items ) ) === false )
 		{
-			$msg = sprintf( 'No service item for type "%1$s" and ID "%2$" available', $type, $serviceId );
+			$msg = sprintf( 'No service item for type "%1$s" and ID "%2$s" available', $type, $serviceId );
 			throw new Controller_Frontend_Service_Exception( $msg );
 		}
 

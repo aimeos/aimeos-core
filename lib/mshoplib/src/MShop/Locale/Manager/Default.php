@@ -108,7 +108,7 @@ class MShop_Locale_Manager_Default
 		$siteItems = $siteManager->searchItems( $siteSearch );
 
 		if( ( $siteItem = reset( $siteItems ) ) === false ) {
-			throw new MShop_Locale_Exception( sprintf( 'No site for code "%1$s" found', $site ) );
+			throw new MShop_Locale_Exception( sprintf( 'Site for code "%1$s" not found', $site ) );
 		}
 
 		$siteIds = array( $siteItem->getId() );
@@ -170,12 +170,14 @@ class MShop_Locale_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		$locale = $this->_getContext()->getLocale();
+		$siteIds = $locale->getSitePath();
+		$siteIds[] = $locale->getSiteId();
 		$items = array();
-		$sitepath = $this->_getContext()->getLocale()->getSitePath();
 
 		$search = clone $search;
 		$expr = array(
-			$search->compare( '==', 'locale.siteid', $sitepath ),
+			$search->compare( '==', 'locale.siteid', $siteIds ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -189,28 +191,14 @@ class MShop_Locale_Manager_Default
 
 
 	/**
-	 * Deletes the item specified by its ID.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param mixed $id ID of the item object
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/locale/manager/default/item/delete');
-			$stmt->bind(1, $id);
-			$stmt->execute()->finish();
-
-			$dbm->release($conn);
-		}
-		catch ( Exception $e )
-		{
-			$dbm->release($conn);
-			throw $e;
-		}
+		$path = 'mshop/locale/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -224,7 +212,7 @@ class MShop_Locale_Manager_Default
 	{
 		$iface = 'MShop_Locale_Item_Interface';
 		if ( !( $item instanceof $iface ) ) {
-			throw new MShop_Locale_Exception(sprintf('Object does not implement "%1$s"', $iface));
+			throw new MShop_Locale_Exception(sprintf('Object is not of required type "%1$s"', $iface));
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -373,6 +361,7 @@ class MShop_Locale_Manager_Default
 		}
 
 
+		// Try to find the best matching locale
 		$search = $this->createSearch( $active );
 
 		$expr = array (
@@ -424,7 +413,7 @@ class MShop_Locale_Manager_Default
 			return $this->_createItem( $row, $siteItem, $sitePath, $siteSubTree );
 		}
 
-		throw new MShop_Locale_Exception( sprintf( 'No locale item found for site "%1$s"', $site ) );
+		throw new MShop_Locale_Exception( sprintf( 'Locale item for site "%1$s" not found', $site ) );
 	}
 
 
@@ -517,7 +506,7 @@ class MShop_Locale_Manager_Default
 				$results->finish();
 
 				if ( $row === false ) {
-					throw new MShop_Locale_Exception( 'No total results value found' );
+					throw new MShop_Locale_Exception( sprintf( 'Total results value not found' ) );
 				}
 
 				$total = $row['count'];

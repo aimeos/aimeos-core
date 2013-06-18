@@ -287,4 +287,4 @@ MShop.panel.order.base.product.ListUi = Ext.extend(Ext.Panel, {
 Ext.reg('MShop.panel.order.base.product.listui', MShop.panel.order.base.product.ListUi);
 
 //hook order base product into the order ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.order.ItemUi', MShop.panel.order.base.product.ListUi, 10);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.order.ItemUi', 'MShop.panel.order.base.product.ListUi', MShop.panel.order.base.product.ListUi, 10);

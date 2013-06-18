@@ -8,7 +8,7 @@
 Ext.ns('MShop.panel.service');
 
 // hook price picker into the product ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.service.PriceItemPickerUi', {
 	xtype : 'MShop.panel.price.itempickerui',
 	itemConfig : {
 		recordName : 'Service_List',

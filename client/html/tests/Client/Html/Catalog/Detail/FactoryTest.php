@@ -6,10 +6,10 @@
  * @version $Id: FactoryTest.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-class Client_Html_Detail_FactoryTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Detail_FactoryTest extends MW_Unittest_Testcase
 {
-	protected $_context;
-	protected $_templatePaths;
+	private $_context;
+	private $_templatePaths;
 
 
 	/**
@@ -22,7 +22,7 @@ class Client_Html_Detail_FactoryTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Detail_FactoryTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_CatalogDetail_FactoryTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 

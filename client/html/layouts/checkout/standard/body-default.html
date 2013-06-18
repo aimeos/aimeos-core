@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+
+$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
+$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
+$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+
+$checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
+$checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
+$checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
+
+$link = true;
+$stepActive = $this->get( 'standardStepActive', false );
+
+?>
+<section class="arcavias checkout-standard">
+	<nav>
+		<ol class="steps">
+			<li class="step basket active"><a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Basket' ), $enc::TRUST ); ?></a></li>
+<?php foreach( $this->get( 'standardSteps', array() ) as $name ) :
+
+		$class = '';
+
+		if( $stepActive )
+		{
+			if( $name === $stepActive )
+			{
+				$class .= ' current';
+				$link = false;
+			}
+
+			if( $link === true ) {
+				$class .= ' active';
+			}
+		}
+?>
+			<li class="step <?php echo $name . $class; ?>">
+<?php	if( $stepActive && $link ) : ?>
+				<a href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c-step' => $name ) ) ); ?>">
+<?php	endif; ?>
+					<?php echo $enc->html( $this->translate( 'client/html', $name ) ); ?>
+<?php	if( $stepActive && $link ) : ?>
+				</a>
+<?php	endif; ?>
+			</li>
+<?php endforeach; ?>
+		</ol>
+	</nav>
+<?php if( isset( $this->standardErrorList ) ) : ?>
+	<ul class="error-list">
+<?php foreach( (array) $this->standardErrorList as $errmsg ) : ?>
+		<li class="error-item"><?php echo $enc->html( $errmsg ); ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+<?php echo $this->get( 'standardBody' ); ?>
+</section>

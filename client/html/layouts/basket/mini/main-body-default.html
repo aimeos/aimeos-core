@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+
+try
+{
+	$miniPriceValue = $this->mainPriceItem->getValue() + $this->mainPriceItem->getShipping();
+	$miniPriceCurrency = $this->translate( 'client/html/currency', $this->mainPriceItem->getCurrencyId() );
+}
+catch( Exception $e )
+{
+	$miniPriceValue = '0.00';
+	$miniPriceCurrency = '';
+}
+
+$quantity = $this->get( 'mainQuantity', 0 );
+
+/// Price format with price value (%1$s) and currency (%2$s)
+$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+
+$enc = $this->encoder();
+
+?>
+<div class="basket-mini-main">
+	<span class="quantity"><?php echo $enc->html( sprintf( $this->translate( 'client/html', '%1$d article', '%1$d articles', $quantity ), $quantity ) ); ?></span>
+	<span class="value"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $miniPriceValue ), $miniPriceCurrency ) ); ?></span>
+</div>
+
+<?php echo $this->get( 'mainBody' ); ?>

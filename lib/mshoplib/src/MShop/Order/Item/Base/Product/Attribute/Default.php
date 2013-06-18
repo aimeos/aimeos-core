@@ -61,6 +61,31 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 
 
 	/**
+	 * Returns the value of the product attribute.
+	 *
+	 * @return string Value of the product attribute
+	 */
+	public function getType()
+	{
+		return ( isset( $this->_values['type'] ) ? (string) $this->_values['type'] : '' );
+	}
+
+
+	/**
+	 * Sets the value of the product attribute.
+	 *
+	 * @param string $value Value of the product attribute
+	 */
+	public function setType($type)
+	{
+		if ( $type == $this->getType() ) { return; }
+
+		$this->_values['type'] = (string) $type;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Returns the code of the product attibute.
 	 *
 	 * @return string Code of the attribute
@@ -78,6 +103,8 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function setCode( $code )
 	{
+		$this->_checkCode( $code );
+
 		if ( $code == $this->getCode() ) { return; }
 
 		$this->_values['code'] = (string) $code;
@@ -160,6 +187,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 		$list = parent::toArray();
 
 		$list['order.base.product.attribute.productid'] = $this->getProductId();
+		$list['order.base.product.attribute.type'] = $this->getType();
 		$list['order.base.product.attribute.code'] = $this->getCode();
 		$list['order.base.product.attribute.value'] = $this->getValue();
 		$list['order.base.product.attribute.name'] = $this->getName();

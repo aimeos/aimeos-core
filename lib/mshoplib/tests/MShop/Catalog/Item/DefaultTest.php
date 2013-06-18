@@ -11,9 +11,9 @@
  */
 class MShop_Catalog_Item_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
-	protected $_listItems;
+	private $_object;
+	private $_values;
+	private $_listItems;
 
 
 	/**
@@ -46,6 +46,7 @@ class MShop_Catalog_Item_DefaultTest extends MW_Unittest_Testcase
 			'id' => 2,
 			'code' => 'unit-test',
 			'label' => 'unittest',
+			'config' => array('testcategory' => '10'),
 			'status' => 1,
 			'siteid' => '99',
 			'mtime' => '2011-01-01 00:00:02',
@@ -118,6 +119,20 @@ class MShop_Catalog_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetConfig()
+	{
+		$this->assertEquals( array('testcategory' => '10'), $this->_object->getConfig() );
+	}
+
+
+	public function testSetConfig()
+	{
+		$this->_object->setConfig( array('unitcategory' => '12') );
+		$this->assertEquals( array('unitcategory' => '12'), $this->_object->getConfig() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( 1, $this->_object->getStatus() );
@@ -170,6 +185,7 @@ class MShop_Catalog_Item_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( $this->_values['id'], $values['catalog.id'] );
 		$this->assertEquals( $this->_values['label'], $values['catalog.label'] );
+		$this->assertEquals( $this->_values['config'], $values['catalog.config'] );
 		$this->assertEquals( $this->_values['status'], $values['catalog.status'] );
 		$this->assertEquals( $this->_values['siteid'], $values['catalog.siteid'] );
 		$this->assertEquals( $this->_values['code'], $values['catalog.code'] );

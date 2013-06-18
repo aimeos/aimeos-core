@@ -8,7 +8,7 @@
 Ext.ns('MShop.panel.attribute');
 
 // hook text picker into the attribute ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.attribute.TextItemPickerUi', {
 	xtype : 'MShop.panel.text.itempickerui',
 	itemConfig : {
 		recordName : 'Attribute_List',

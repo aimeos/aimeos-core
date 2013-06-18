@@ -20,24 +20,27 @@ return array(
 		',
 		'delete' => '
 			DELETE FROM "mshop_catalog_list_type"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'search' => '
 			SELECT mcatlity."id", mcatlity."siteid", mcatlity."code", mcatlity."domain", mcatlity."label",
 				mcatlity."mtime", mcatlity."editor", mcatlity."ctime", mcatlity."status"
 			FROM "mshop_catalog_list_type" AS mcatlity
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT COUNT( mcatlity."id" ) AS "count"
-			FROM "mshop_catalog_list_type" AS mcatlity
-			:joins
-			WHERE
-				:cond
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mcatlity."id"
+				FROM "mshop_catalog_list_type" AS mcatlity
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

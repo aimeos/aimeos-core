@@ -3,10 +3,27 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: body-default.html 1348 2012-10-27 12:49:19Z nsendetzky $
  */
 
+$enc = $this->encoder();
+
+$classes = '';
+foreach( (array) $this->get( 'listCatPath', array() ) as $cat )
+{
+	$config = $cat->getConfig();
+	if( isset( $config['css-class'] ) ) {
+		$classes .= ' ' . $config['css-class'];
+	}
+}
+
 ?>
-<div class="arcavias catalog-list">
-<?php echo $this->listBody; ?>
-</div>
+<section class="arcavias catalog-list<?php echo $enc->attr( $classes ); ?>">
+<?php if( isset( $this->listErrorList ) ) : ?>
+	<ul class="error-list">
+<?php foreach( (array) $this->listErrorList as $errmsg ) : ?>
+		<li class="error-item"><?php echo $enc->html( $errmsg ); ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+<?php echo $this->get( 'listBody' ); ?>
+</section>

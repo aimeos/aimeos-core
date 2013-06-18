@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: DefaultTest.php 14843 2012-01-13 08:11:39Z nsendetzky $ 
+ * @version $Id: DefaultTest.php 14843 2012-01-13 08:11:39Z nsendetzky $
  */
 
 
@@ -12,14 +12,14 @@
  */
 class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_context;
-	protected $_object;
+	private $_context;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.
@@ -302,7 +302,7 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$items = $this->_object->searchItems( $search, array(), $total);
 
 		$this->assertEquals( 1, count( $items ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 3, $total );
 
 		foreach($items as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

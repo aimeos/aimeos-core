@@ -82,6 +82,9 @@ class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Abstract
 
 		$ttypeIds = array();
 		$ttype = $textTypeManager->createItem();
+
+		$this->_conn->begin();
+
 		foreach( $testdata['text/type'] as $key => $dataset )
 		{
 			$ttype->setId( null );
@@ -111,5 +114,7 @@ class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Abstract
 
 			$textManager->saveItem( $text, false );
 		}
+
+		$this->_conn->commit();
 	}
 }

@@ -15,7 +15,7 @@
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Factory_Abstract
+abstract class MShop_Common_Factory_Abstract
 {
 	/**
 	 * Adds the decorators to the manager object.
@@ -33,19 +33,19 @@ class MShop_Common_Factory_Abstract
 		foreach( $decorators as $name )
 		{
 			if( ctype_alnum( $name ) === false ) {
-				throw new MShop_Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
+				throw new MShop_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if( class_exists( $classname ) === false ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$manager =  new $classname( $context, $manager );
 
 			if( !( $manager instanceof $iface ) ) {
-				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
+				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 		}
 
@@ -102,13 +102,13 @@ class MShop_Common_Factory_Abstract
 	protected static function _createManager( MShop_Context_Item_Interface $context, $classname, $interface )
 	{
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$manager =  new $classname( $context );
 
 		if( !( $manager instanceof $interface ) ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
+			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $manager;

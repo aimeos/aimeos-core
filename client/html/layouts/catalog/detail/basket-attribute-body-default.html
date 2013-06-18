@@ -6,25 +6,34 @@
  * @version $Id: basket-attribute-body-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
+$enc = $this->encoder();
+
 ?>
-<div class="basket-attribute">
+<div class="catalog-detail-basket-attribute">
 	<table>
 		<tbody>
-<?php foreach( $this->attributeItems as $type => $attributes ) : ?> 
+<?php foreach( $this->get( 'attributeConfigItems', array() ) as $code => $attributes ) : ?> 
 			<tr>
-				<td><?php echo $this->translate( 'core/client/html', $type ); ?></td>
+				<td><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></td>
 				<td>
-					<select name="d-attr-id">
+					<select name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrconf-id' ) ) ); ?>">
 						<option value=""></option>
 <?php	foreach( $attributes as $id => $attribute ) : ?>
-						<option value="<?php echo $id; ?>">
+						<option value="<?php echo $enc->attr( $id ); ?>">
 <?php
 			$priceItems = $attribute->getRefItems( 'price', 'default', 'default' );
 
-			if( ( $priceItem = reset( $priceItems ) ) !== false ) {
-				printf( $this->translate( 'core/client/html', '%1$s ( +%2$s€ )' ), $attribute->getName(), $this->number( $priceItem->getValue() + $priceItem->getShipping() ) );
-			} else {
-				echo $attribute->getName();
+			if( ( $priceItem = reset( $priceItems ) ) !== false )
+			{
+				$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
+				$value = $this->number( $priceItem->getValue() + $priceItem->getShipping() );
+				
+				/// Configurable product attribute name (%1$s) with price value (%2$s) and currency (%3$s)
+				echo $enc->html( sprintf( $this->translate( 'client/html', '%1$s ( +%2$s%3$s )' ), $attribute->getName(), $value, $currency ), $enc::TRUST );
+			}
+			else
+			{
+				echo $enc->html( $attribute->getName(), $enc::TRUST );
 			}
 ?>
 						</option>
@@ -35,5 +44,8 @@
 <?php endforeach; ?>
 		</tbody>
 	</table>
-<?php echo $this->attributeBody; ?>
+<?php foreach( $this->get( 'attributeHiddenItems', array() ) as $id => $attribute ) : ?> 
+	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrhide-id', $id ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
+<?php endforeach; ?>
+<?php echo $this->get( 'attributeBody' ); ?>
 </div>

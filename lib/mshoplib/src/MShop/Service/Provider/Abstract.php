@@ -20,6 +20,8 @@ implements MShop_Service_Provider_Interface
 {
 	private $_context;
 	private $_serviceItem;
+	private $_communication;
+
 
 	/**
 	 * Initializes the service provider object.
@@ -45,7 +47,13 @@ implements MShop_Service_Provider_Interface
 	public function calcPrice( MShop_Order_Item_Base_Interface $basket )
 	{
 		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_context );
-		return $priceManager->getLowestPrice( $this->_serviceItem->getRefItems( 'price', 'default' ), 1 );
+		$prices = $this->_serviceItem->getRefItems( 'price', 'default', 'default' );
+
+		if( count( $prices ) > 0 ) {
+			return $priceManager->getLowestPrice( $prices, 1 );
+		}
+
+		return $priceManager->createItem();
 	}
 
 
@@ -91,9 +99,10 @@ implements MShop_Service_Provider_Interface
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
 	 */
-	public function getConfigFE()
+	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
 	{
 		return array();
 	}
@@ -142,7 +151,7 @@ implements MShop_Service_Provider_Interface
 	 */
 	public function query( MShop_Order_Item_Interface $order )
 	{
-		throw new MShop_Service_Exception( sprintf( 'Method is not available: "%1$s"', 'query' ) );
+		throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', 'query' ) );
 	}
 
 
@@ -163,12 +172,38 @@ implements MShop_Service_Provider_Interface
 	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
 	 * @param mixed $additional Update information whose format depends on the payment provider
-	 * @return boolean True if the update was successful, false if the given parameters are not valid for this provider
+	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
 	public function updateSync( $additional )
 	{
-		return false;
+		return null;
+	}
+
+
+	/**
+	 * Sets the communication object for a service provider.
+	 *
+	 * @param MW_Communication_Interface $communication Object of communication
+	 */
+	public function setCommunication( MW_Communication_Interface $communication )
+	{
+		$this->_communication = $communication;
+	}
+
+
+	/**
+	 * Returns the communication object for the service provider.
+	 *
+	 * @param MW_Communication_Interface $communication Object of communication
+	 */
+	protected function _getCommunication()
+	{
+		if( !isset( $this->_communication ) ) {
+			$this->_communication = new MW_Communication_Curl();
+		}
+
+		return $this->_communication;
 	}
 
 
@@ -188,7 +223,7 @@ implements MShop_Service_Provider_Interface
 		{
 			if( $def['required'] === true && ( !isset( $attributes[$key] ) || $attributes[$key] === '' ) )
 			{
-				$errors[$key] = sprintf( 'Required attribute "%1$s" is missing', $key );
+				$errors[$key] = sprintf( 'Required attribute "%1$s" in provider configuration not available', $key );
 				continue;
 			}
 
@@ -224,7 +259,7 @@ implements MShop_Service_Provider_Interface
 						}
 						break;
 					default:
-						throw new MShop_Service_Exception( sprintf( 'Invalid type "%1$s"', $def['type'] ) );
+						throw new MShop_Service_Exception( sprintf( 'Invalid characters in attribute for provider configuration. Attribute is not of type "%1$s".', $def['type'] ) );
 				}
 			}
 

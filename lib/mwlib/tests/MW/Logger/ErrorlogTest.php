@@ -8,7 +8,7 @@
  */
 class MW_Logger_ErrorlogTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

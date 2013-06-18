@@ -19,6 +19,15 @@ class Criteria_Plugin_LuceneTest implements MW_Common_Criteria_Plugin_Interface
 			default: return $value;
 		}
 	}
+
+	public function reverse( $value )
+	{
+		switch( $value )
+		{
+			case 10: return 'a';
+			default: return $value;
+		}
+	}
 }
 
 
@@ -27,7 +36,7 @@ class Criteria_Plugin_LuceneTest implements MW_Common_Criteria_Plugin_Interface
  */
 class MW_Common_Criteria_LuceneTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -80,6 +89,10 @@ class MW_Common_Criteria_LuceneTest extends MW_Unittest_Testcase
 
 	public function testGetConditionString()
 	{
+		if( !class_exists( 'Zend_Search_Lucene_Search_Query_Insignificant' ) ) {
+			$this->markTestSkipped( 'Zend_Search_Lucene_Search_Query_Insignificant is not available' );
+		}
+
 		$types = array( 'int_column' => SORT_NUMERIC, 'str_column' => SORT_STRING );
 		$translations = array( 'int_column' => 'int_col', 'str_column' => 'str_col' );
 		$plugins = array( 'int_column' => new Criteria_Plugin_SQLTest() );

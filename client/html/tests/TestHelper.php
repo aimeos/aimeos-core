@@ -9,7 +9,6 @@
 
 class TestHelper
 {
-	private static $_view;
 	private static $_mshop;
 	private static $_context = array();
 
@@ -36,30 +35,34 @@ class TestHelper
 
 	public static function getView()
 	{
-		if( !isset( self::$_view ) )
-		{
-			self::$_view = new MW_View_Default();
+		$view = new MW_View_Default();
 
-			$helper = new MW_View_Helper_Translate( self::$_view, new MW_Translation_None( 'en_GB' ) );
-			self::$_view->addHelper( 'translate', $helper );
+		$trans = new MW_Translation_None( 'de_DE' );
+		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
+		$view->addHelper( 'translate', $helper );
 
-			$helper = new MW_View_Helper_Url( self::$_view, 'baseurl' );
-			self::$_view->addHelper( 'url', $helper );
+		$helper = new MW_View_Helper_Url_Default( $view, 'baseurl' );
+		$view->addHelper( 'url', $helper );
 
-			$helper = new MW_View_Helper_Number( self::$_view, '.', '' );
-			self::$_view->addHelper( 'number', $helper );
+		$helper = new MW_View_Helper_Number_Default( $view, '.', '' );
+		$view->addHelper( 'number', $helper );
 
-			$helper = new MW_View_Helper_Date( self::$_view, 'Y-m-d' );
-			self::$_view->addHelper( 'date', $helper );
+		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
+		$view->addHelper( 'date', $helper );
 
-			$helper = new MW_View_Helper_Config( self::$_view, array() );
-			self::$_view->addHelper( 'config', $helper );
+		$helper = new MW_View_Helper_Config_Default( $view, self::getContext()->getConfig() );
+		$view->addHelper( 'config', $helper );
 
-			$helper = new MW_View_Helper_Parameter( self::$_view, array() );
-			self::$_view->addHelper( 'param', $helper );
-		}
+		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
+		$view->addHelper( 'param', $helper );
 
-		return self::$_view;
+		$helper = new MW_View_Helper_FormParam_Default( $view );
+		$view->addHelper( 'formparam', $helper );
+
+		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$view->addHelper( 'encoder', $helper );
+
+		return $view;
 	}
 
 
@@ -92,7 +95,7 @@ class TestHelper
 		$paths = $mshop->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new MW_Config_Zend( new Zend_Config( array(), true ), $paths );
+		$conf = new MW_Config_Array( array(), $paths );
 		$ctx->setConfig( $conf );
 
 
@@ -100,17 +103,16 @@ class TestHelper
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$writer = new Zend_Log_Writer_Stream( $site . '.log');
-		$zlog = new Zend_Log($writer);
-		$filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
-		$zlog->addFilter($filter);
-
-		$logger = new MW_Logger_Zend( $zlog );
+		$logger = new MW_Logger_File( $site . '.log', MW_Logger_Abstract::DEBUG );
 		$ctx->setLogger( $logger );
 
 
 		$cache = new MW_Cache_None();
 		$ctx->setCache( $cache );
+
+
+		$i18n = new MW_Translation_None( 'en' );
+		$ctx->setI18n( $i18n );
 
 
 		$session = new MW_Session_None();

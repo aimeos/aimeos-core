@@ -49,6 +49,8 @@ class MShop_Product_Item_Stock_Warehouse_Default
 	 */
 	public function setCode( $code )
 	{
+		$this->_checkCode( $code );
+
 		$this->_values['code'] = (string) $code;
 		$this->setModified();
 	}

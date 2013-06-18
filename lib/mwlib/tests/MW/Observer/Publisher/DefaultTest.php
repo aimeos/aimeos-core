@@ -12,7 +12,7 @@ class MW_Observer_Publisher_DefaultTest extends MW_Unittest_Testcase
 	 * @var    MW_Observer_Publisher
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

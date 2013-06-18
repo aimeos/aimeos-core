@@ -167,13 +167,6 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 0, $list[0]->getValue() );
 
 
-		if( !isset( $list[1] ) || !( $list[1] instanceof MW_Common_Criteria_Expression_Compare_Interface ) ) {
-			throw new Exception( 'Wrong expression' );
-		}
-		$this->assertEquals( 'catalog.index.catalog.id', $list[1]->getName() );
-		$this->assertEquals( null, $list[1]->getValue() );
-
-
 		$this->assertEquals( array(), $filter->getSortations() );
 		$this->assertEquals( 0, $filter->getSliceStart() );
 		$this->assertEquals( 100, $filter->getSliceSize() );
@@ -192,7 +185,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 		}
 
 		$this->assertEquals( 'sort:catalog.index.text.relevance("test","de","Espresso")', $item->getName() );
-		$this->assertEquals( '-', $item->getOperator() );
+		$this->assertEquals( '+', $item->getOperator() );
 
 		$this->assertEquals( 1, $filter->getSliceStart() );
 		$this->assertEquals( 2, $filter->getSliceSize() );

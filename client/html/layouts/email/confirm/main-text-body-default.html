@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+if( function_exists( 'quoted_printable_encode' ) )
+{
+	$encoding = 'quoted-printable';
+	$encode = 'quoted_printable_encode';
+}
+else
+{
+	$encoding = 'base64';
+	$encode = 'base64_encode';
+}
+
+?>
+<?php if( $this->config( 'client/html/email/confirm/main/text/encoded', true ) == true ) : ?>
+<?php	echo "\r\n"; ?>
+--<?php echo $this->get( 'mainBoundary' ) . "\r\n"; ?>
+Content-Type: text/plain; charset=UTF-8<?php echo "\r\n"; ?>
+Content-Transfer-Encoding: <?php echo $encoding . "\r\n"; ?>
+<?php	echo "\r\n"; ?>
+<?php	echo wordwrap( $encode( $this->get( 'textBody' ) ), 76, "\r\n" ) . "\r\n"; ?>
+<?php else : ?>
+<?php	echo $this->get( 'textBody' ); ?>
+<?php endif; ?>

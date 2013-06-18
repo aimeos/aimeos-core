@@ -92,11 +92,12 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
 	 */
-	public function getConfigFE()
+	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
 	{
-		return $this->_object->getConfigFE();
+		return $this->_object->getConfigFE( $basket );
 	}
 
 	/**
@@ -158,7 +159,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
 	 * @param mixed $additional Update information whose format depends on the payment provider
-	 * @return boolean True if the update was successful, false if the given parameters are not valid for this provider
+	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws MShop_Service_Exception If updating one of the orders failed
 	 */
 	public function updateSync( $additional )
@@ -200,7 +201,7 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	public function __call( $name, array $param )
 	{
 		if ( ( $result = call_user_func_array( array( $this->_object, $name ), $param) ) === false ) {
-			throw new MShop_Service_Exception( 'Unable to call method "%1$s"', $name );
+			throw new MShop_Service_Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
 		}
 
 		return $result;

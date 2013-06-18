@@ -35,7 +35,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinte2."prodid")
 				FROM "mshop_catalog_index_text" AS mcatinte2
 				WHERE mpro."id" = mcatinte2."prodid" AND :site AND mcatinte2."listtype" = $1
-				AND mcatinte2."langid" = $2 AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
+				AND ( mcatinte2."langid" = $2 OR mcatinte2."langid" IS NULL ) AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_FLOAT,
@@ -46,7 +46,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinte2."prodid")
 				FROM "mshop_catalog_index_text" AS mcatinte2
 				WHERE mpro."id" = mcatinte2."prodid" AND :site AND mcatinte2."listtype" = $1
-				AND mcatinte2."langid" = $2 AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
+				AND ( mcatinte2."langid" = $2 OR mcatinte2."langid" IS NULL ) AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_FLOAT,
@@ -54,8 +54,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 		),
 		'catalog.index.text.value' => array(
 			'code'=>'catalog.index.text.value()',
-			'internalcode'=>':site AND mcatinte."listtype" = $1 AND mcatinte."langid" = $2 AND mcatinte."type" = $3 AND mcatinte."value"',
-			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>)',
+			'internalcode'=>':site AND mcatinte."listtype" = $1 AND ( mcatinte."langid" = $2 OR mcatinte."langid" IS NULL ) AND mcatinte."type" = $3 AND mcatinte."domain" = $4 AND mcatinte."value"',
+			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 			'public' => false,
@@ -63,7 +63,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		'sort:catalog.index.text.value' => array(
 			'code'=>'sort:catalog.index.text.value()',
 			'internalcode'=>'mcatinte."value"',
-			'label'=>'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>)',
+			'label'=>'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 			'public' => false,
@@ -134,28 +134,38 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 
 	/**
-	 * Removes an item from the index.
+	 * Removes multiple items from the index.
 	 *
-	 * @param integer $id Product ID
+	 * @param array $ids list of Product IDs
 	 */
-	public function deleteItem( $id )
+	public function deleteItems( array $ids )
 	{
 		foreach( $this->_submanagers as $submanager ) {
-			$submanager->deleteItem( $id );
+			$submanager->deleteItems( $ids );
 		}
-
 
 		$context = $this->_getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$path = 'mshop/catalog/manager/index/text/default/item/delete';
+		$sql = $context->getConfig()->get( $path, $path );
+
+		$search = $this->createSearch();
+		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
+
+		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( 'prodid' => '"prodid"' );
+
+		$cond = $search->getConditionString( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $sql );
 
 		try
 		{
-			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/delete' );
-			$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$dbm = $context->getDatabaseManager();
+			$conn = $dbm->acquire();
+
+			$stmt = $conn->create( $sql );
+			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn );
@@ -288,43 +298,19 @@ class MShop_Catalog_Manager_Index_Text_Default
 				foreach( $item->getRefItems( 'text' ) as $refItem )
 				{
 					if( !isset( $listTypes[ $refItem->getId() ] ) ) {
-						$msg = sprintf( 'No list type for text item with ID "%1$s"', $refItem->getId() );
+						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refItem->getId() );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
-					foreach( $listTypes[ $refItem->getId() ] as $listType )
-					{
-						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 3, $refItem->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 4, $refItem->getLanguageId() );
-						$stmt->bind( 5, $listType );
-						$stmt->bind( 6, $refItem->getType() );
-						$stmt->bind( 7, $refItem->getContent() );
-						$stmt->bind( 8, $date );//mtime
-						$stmt->bind( 9, $editor );
-						$stmt->bind( 10, $date );//ctime
-						$stmt->execute()->finish();
+					foreach( $listTypes[ $refItem->getId() ] as $listType )	{
+						$this->_saveText( $stmt, $item->getId(), $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'product', $refItem->getContent(), $date, $editor );
 					}
 				}
 
 				$names = $item->getRefItems( 'text', 'name' );
 
-				if( empty( $names ) )
-				{
-					$stmt = $this->_getCachedStatement($conn, 'mshop/catalog/manager/index/text/default/item/insert');
-
-					$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 2, $locale->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-					$stmt->bind( 3, null );
-					$stmt->bind( 4, $locale->getLanguageId() );
-					$stmt->bind( 5, 'default' );
-					$stmt->bind( 6, 'name' );
-					$stmt->bind( 7, $item->getLabel() );
-					$stmt->bind( 8, date('Y-m-d H:i:s', time()) );//mtime
-					$stmt->bind( 9, $context->getEditor(), MW_DB_Statement_Abstract::PARAM_STR );
-					$stmt->bind( 10, date('Y-m-d H:i:s', time()) );//ctime
-					$stmt->execute()->finish();
+				if( empty( $names ) ) {
+					$this->_saveText( $stmt, $item->getId(), $siteid, null, $locale->getLanguageId(), 'default', 'name', 'product', $item->getLabel(), $date, $editor );
 				}
 			}
 
@@ -337,6 +323,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 			throw $e;
 		}
 
+		$this->_saveAttributeTexts( $items );
 
 		foreach( $this->_submanagers as $submanager ) {
 			$submanager->rebuildIndex( $items );
@@ -372,11 +359,12 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/catalog/manager/index/text/default/item/search';
 			$cfgPathCount = 'mshop/catalog/manager/index/text/default/item/count';
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			$ids = array();
 			while( ( $row = $results->fetch() ) !== false )	{
@@ -420,10 +408,12 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/catalog/manager/index/text/default/text/search';
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, '', $required );
+			$total = null;
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$list[ $row['prodid'] ] = $row['value'];
@@ -438,5 +428,104 @@ class MShop_Catalog_Manager_Index_Text_Default
 		}
 
 		return $list;
+	}
+
+
+	/**
+	 * Saves texts associated with attributes to catalog_index_text.
+	 *
+	 * @param array $items List of product items implementing MShop_Product_Item_Interface
+	 */
+	protected function _saveAttributeTexts( array $items )
+	{
+		$attrIds = array();
+		$prodIds = array();
+		foreach( $items as $item )
+		{
+			foreach( $item->getRefItems( 'attribute', null, 'default' ) as $attrItem ) {
+				$prodIds[$attrItem->getId()][] = $item->getId();
+			}
+		}
+
+		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
+		$search = $attrManager->createSearch(true);
+		$expr = array(
+			$search->compare( '==', 'attribute.id', array_keys( $prodIds ) ),
+			$search->getConditions()
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		$attributeItems = $attrManager->searchItems( $search, array('text') );
+
+
+		$context = $this->_getContext();
+		$locale = $context->getLocale();
+		$siteid = $context->getLocale()->getSiteId();
+		$editor = $context->getEditor();
+		$date = date( 'Y-m-d H:i:s' );
+
+
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire();
+		$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
+
+		try
+		{
+			foreach ( $attributeItems as $item )
+			{
+				$listTypes = array();
+				foreach( $item->getListItems( 'text', 'default' ) as $listItem ) {
+					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
+				}
+
+
+
+				foreach( $item->getRefItems( 'text' ) as $refItem )
+				{
+					if( !isset( $listTypes[ $refItem->getId() ] ) ) {
+						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refItem->getId() );
+						throw new MShop_Catalog_Exception( $msg );
+					}
+
+					foreach( $listTypes[ $refItem->getId() ] as $listType )
+					{
+						foreach( $prodIds[$item->getId()] as $idx => $productId ) {
+							$this->_saveText( $stmt, $productId, $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'attribute', $refItem->getContent(), $date, $editor );
+						}
+					}
+				}
+
+				$names = $item->getRefItems( 'text', 'name' );
+
+				if( empty( $names ) ) {
+					$this->_saveText( $stmt, $prodIds[$item->getId()], $siteid, null, $locale->getLanguageId(), 'default', 'name', 'attribute', $item->getLabel(), $date, $editor );
+				}
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+	}
+
+
+	protected function _saveText( $stmt, $id, $siteid, $refid, $lang, $listtype, $reftype, $domain, $label, $date, $editor )
+	{
+		$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
+		$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+		$stmt->bind( 3, $refid );
+		$stmt->bind( 4, $lang );
+		$stmt->bind( 5, $listtype );
+		$stmt->bind( 6, $reftype );
+		$stmt->bind( 7, $domain );
+		$stmt->bind( 8, $label );
+		$stmt->bind( 9, $date );//mtime
+		$stmt->bind( 10, $editor, MW_DB_Statement_Abstract::PARAM_STR );
+		$stmt->bind( 11, $date );//ctime
+		$stmt->execute()->finish();
 	}
 }

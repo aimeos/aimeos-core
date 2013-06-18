@@ -6,16 +6,21 @@
  * @version $Id: index.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-$time = microtime( true );
+header( "Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'" );
+header( "X-Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'" );
+header( "X-Webkit-CSP: default-src 'self'; style-src 'self' 'unsafe-inline'" );
+
 
 define( 'ZFAPP_ROOT', dirname( dirname( __FILE__ ) ) );
 define( 'APPLICATION_PATH', ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'application' );
-define( 'APPLICATION_ENV', 'production' ); // development | production
+define( 'APPLICATION_ENV', 'development' ); // development | production
 
 if ( APPLICATION_ENV == 'development' ) {
 	error_reporting( -1 );
 	ini_set( 'display_errors', true );
 }
+
+setlocale( LC_CTYPE, 'en_US.UTF8' );
 
 try
 {
@@ -25,6 +30,7 @@ try
 
 	$includePaths = $mshop->getIncludePaths();
 	$includePaths[] = ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'library';
+	$includePaths[] = dirname( ZFAPP_ROOT ) . DIRECTORY_SEPARATOR . 'zendlib';
 	$includePaths[] = get_include_path();
 	set_include_path( implode( PATH_SEPARATOR, $includePaths ) );
 
@@ -43,7 +49,3 @@ try
 } catch ( Exception $e ) {
 	include 'errors/500.phtml';
 }
-
-echo '<!-- Exec time: ' . ( ( microtime(true) - $time ) * 1000 ) . ' ms -->' . PHP_EOL;
-echo '<!-- Peak mem: ' . ( memory_get_peak_usage( true ) / 1024 / 1024 ) . ' MiB -->' . PHP_EOL;
-echo '<!-- Path cache: ' . ( realpath_cache_size() / 1024 ) . ' KiB -->' . PHP_EOL;

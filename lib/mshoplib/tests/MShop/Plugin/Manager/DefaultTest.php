@@ -17,15 +17,15 @@ class MShop_Plugin_Manager_DefaultTest_Publisher extends MW_Observer_Publisher_A
  */
 class MShop_Plugin_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_examplePlugin;
-	protected $_examplePlugin2;
+	private $_object;
+	private $_examplePlugin;
+	private $_examplePlugin2;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	/**
 	 * Runs the test methods of this class.
@@ -141,6 +141,8 @@ class MShop_Plugin_Manager_DefaultTest extends MW_Unittest_Testcase
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setProvider( 'Example' );
+		$itemExp->setPosition( 5 );
+		$itemExp->setStatus( -1 );
 		$this->_object->saveItem( $itemExp );
 		$itemUpd = $this->_object->getItem( $itemExp->getId() );
 
@@ -155,6 +157,7 @@ class MShop_Plugin_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getProvider(), $itemSaved->getProvider() );
 		$this->assertEquals( $item->getConfig(), $itemSaved->getConfig() );
+		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
@@ -168,6 +171,7 @@ class MShop_Plugin_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getProvider(), $itemUpd->getProvider() );
 		$this->assertEquals( $itemExp->getConfig(), $itemUpd->getConfig() );
+		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
 		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
@@ -191,6 +195,7 @@ class MShop_Plugin_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'plugin.label', null );
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'ProductLimit' );
 		$expr[] = $search->compare( '~=', 'plugin.config', 'single-number-max' );
+		$expr[] = $search->compare( '==', 'plugin.position', 0 );
 		$expr[] = $search->compare( '==', 'plugin.status', 1 );
 		$expr[] = $search->compare( '>=', 'plugin.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'plugin.ctime', '1970-01-01 00:00:00' );

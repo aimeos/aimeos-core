@@ -56,7 +56,7 @@ class TestHelper
 		$paths = $mshop->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new MW_Config_Zend( new Zend_Config( array(), true ), $paths );
+		$conf = new MW_Config_Array( array(), $paths );
 		$ctx->setConfig( $conf );
 
 
@@ -64,12 +64,7 @@ class TestHelper
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$writer = new Zend_Log_Writer_Stream('unittests.log');
-		$zlog = new Zend_Log($writer);
-		$filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
-		$zlog->addFilter($filter);
-
-		$logger = new MW_Logger_Zend( $zlog );
+		$logger = new MW_Logger_File( 'unittest.log', MW_Logger_Abstract::DEBUG );
 		$ctx->setLogger( $logger );
 
 

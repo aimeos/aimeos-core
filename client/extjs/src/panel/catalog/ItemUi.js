@@ -19,7 +19,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		this.title = _( 'Catalog item details' );
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
-
+		
 		this.items = [ {
 			xtype : 'tabpanel',
 			activeTab : 0,
@@ -65,6 +65,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							fieldLabel : _('Code'),
 							name : 'code',
 							allowBlank : false,
+							maxLength : 32,
 							emptyText : _('Category code (required)')
 						}, {
 							xtype : 'textfield',
@@ -86,10 +87,17 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							name : 'catalog.editor'
 						} ]
 					} ]
+				}, {
+					xtype: 'MShop.panel.catalog.configui',
+					layout: 'fit',
+					flex: 1,
+					data: ( this.record ? this.record.get('catalog.config') : {} )
 				} ]
 			} ]
 		} ];
-
+		
+		this.store.on('beforesave', this.onBeforeSave, this);
+		
 		MShop.panel.catalog.ItemUi.superclass.initComponent.call( this );
 	},
 
@@ -100,6 +108,29 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		this.setTitle( 'Catalog: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
 
 		MShop.panel.catalog.ItemUi.superclass.afterRender.apply( this, arguments );
+	},
+	
+	
+	onBeforeSave: function( store, data ) {
+		var config = {};
+		var editorGrid = this.findByType( 'MShop.panel.catalog.configui' );
+		var first = editorGrid.shift();
+		
+		if( first ) {
+			Ext.each( first.data, function( item, index ) {
+				Ext.iterate( item, function( key, value, object ) {
+					if( key.trim() !== '' ) {
+						config[key] = value.trim();
+					}
+				}, this);
+			});
+		}
+
+		if( data.create && data.create[0] ) {
+			data.create[0].data['catalog.config'] = config;
+		} else if( data.update && data.update[0] ) {
+			data.update[0].data['catalog.config'] = config;
+		}
 	},
 
 	

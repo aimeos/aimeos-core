@@ -6,9 +6,9 @@
  * @version $Id: DefaultTest.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-class Client_Html_Detail_Image_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Catalog_Detail_Image_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -21,7 +21,7 @@ class Client_Html_Detail_Image_DefaultTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Detail_Image_DefaultTest');
+		$suite = new PHPUnit_Framework_TestSuite('Client_Html_Catalog_Detail_Image_DefaultTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -58,7 +58,6 @@ class Client_Html_Detail_Image_DefaultTest extends MW_Unittest_Testcase
 		$view->detailProductItem = $this->_getProductItem();
 
 		$output = $this->_object->getHeader();
-		$this->assertStringStartsWith( '<script type="text/javascript"', $output );
 	}
 
 

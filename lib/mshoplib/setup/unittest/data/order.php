@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: order.php 1332 2012-10-23 11:28:24Z doleiynyk $
  */
 
 return array (
@@ -21,6 +20,7 @@ return array (
 		array ( 'baseid' => '636.00', 'type' => 'payment', 'company' => null, 'salutation' => 'mrs', 'title' => '', 'firstname' => 'Adelheid', 'lastname' => 'Mustertest', 'address1' => 'Königallee', 'address2' => '1', 'address3' => '', 'postal' => '20146', 'city' => 'Hamburg', 'state' => 'Hamburg', 'countryid' => 'de', 'langid' => 'de', 'telephone' => '055544332211', 'email' => 'eshop@metaways.de', 'telefax' => '055544332213', 'website' => 'www.metaways.net', 'flag' => null ),
 		array ( 'baseid' => '10.00', 'type' => 'delivery', 'company' => 'Metaways', 'salutation' => 'mrs', 'title' => 'Dr.', 'firstname' => 'Our', 'lastname' => 'Unittest', 'address1' => 'Pickhuben', 'address2' => '2-4', 'address3' => '', 'postal' => '20457', 'city' => 'Hamburg', 'state' => 'Hamburg', 'countryid' => 'de', 'langid' => 'de', 'telephone' => '055544332212', 'email' => 'eshop@metaways.de', 'telefax' => '055544332212', 'website' => 'www.metaways.de', 'flag' => null ),
 		array ( 'baseid' => '10.00', 'type' => 'payment', 'company' => null, 'salutation' => 'mr', 'title' => '', 'firstname' => 'Our', 'lastname' => 'Unittest', 'address1' => 'Durchschnitt', 'address2' => '2', 'address3' => '', 'postal' => '20146', 'city' => 'Hamburg', 'state' => 'Hamburg', 'countryid' => 'de', 'langid' => 'de', 'telephone' => '055544332212', 'email' => 'eshop@metaways.de', 'telefax' => '055544332213', 'website' => 'www.metaways.net', 'flag' => null ),
+		array ( 'baseid' => '18.00', 'type' => 'payment', 'company' => null, 'salutation' => 'mrs', 'title' => '', 'firstname' => 'Adelheid', 'lastname' => 'Mustertest', 'address1' => 'Königallee', 'address2' => '1', 'address3' => '', 'postal' => '20146', 'city' => 'Hamburg', 'state' => 'Hamburg', 'countryid' => 'de', 'langid' => 'de', 'telephone' => '055544332211', 'email' => 'eshop@metaways.de', 'telefax' => '055544332213', 'website' => 'www.metaways.net', 'flag' => null ),
 	),
 
 	'order/base/product' => array (
@@ -31,12 +31,12 @@ return array (
 		'CNE/636.00' => array ( 'baseid' => '636.00', 'prodid' => 'CNE', 'prodcode' => 'CNE', 'suppliercode' => 'unitsupplier', 'name' => 'Cafe Noire Expresso', 'mediaurl' => 'somewhere/thump5.jpg', 'amount' => 2, 'price' => '36.00', 'shipping' => '1.00', 'rebate' => '0.00', 'taxrate' => '19.00', 'flags' => '0', 'pos' => 1, 'status' => 1 ),
 		'CNC/636.00' => array ( 'baseid' => '636.00', 'prodid' => 'CNC', 'prodcode' => 'CNC', 'suppliercode' => 'unitsupplier', 'name' => 'Cafe Noire Cappuccino', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '600.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '19.00', 'flags' => '0', 'pos' => 2, 'status' => 1 ),
 			// product bundle test data
-		'bld:zyx/18.00' => array ( 'baseid' => '18.00', 'type'=> 'bundle', 'prodcode' => 'bld:zyx', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest1', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '1200.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '17.00', 'flags' => '0', 'pos' => 1, 'status' => 1 ),
-		'bld:EFG/18.00' => array ( 'baseid' => '18.00', 'ordprodid' => 'bld:zyx/18.00', 'type'=> 'product', 'prodcode' => 'bld:EFG', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest1', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '600.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '16.00', 'flags' => '0', 'pos' => 2, 'status' => 1 ),
-		'bld:HIJ/18.00' => array ( 'baseid' => '18.00', 'ordprodid' => 'bld:zyx/18.00', 'type'=> 'product', 'prodcode' => 'bdl:HIJ', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest1', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '1200.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '17.00', 'flags' => '0', 'pos' => 3, 'status' => 1 ),
-		'bld:hal/18.00' => array ( 'baseid' => '18.00', 'type'=> 'bundle', 'prodcode' => 'bld:hal', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest2', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '1200.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '17.00', 'flags' => '0', 'pos' => 4, 'status' => 1 ),
-		'bld:EFX/18.00' => array ( 'baseid' => '18.00', 'ordprodid' => 'bld:hal/18.00', 'type'=> 'product', 'prodcode' => 'bld:EFX', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest2', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '600.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '16.00', 'flags' => '0', 'pos' => 5, 'status' => 1 ),
-		'bld:HKL/18.00' => array ( 'baseid' => '18.00', 'ordprodid' => 'bld:hal/18.00', 'type'=> 'product', 'prodcode' => 'bdl:HKL', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest2', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '600.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '18.00', 'flags' => '0', 'pos' => 6, 'status' => 1 ),
+		'bdl:zyx/18.00' => array ( 'baseid' => '18.00', 'type'=> 'bundle', 'prodcode' => 'bdl:zyx', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest1', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '1200.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '17.00', 'flags' => '0', 'pos' => 1, 'status' => 1 ),
+		'bdl:EFG/18.00' => array ( 'baseid' => '18.00', 'ordprodid' => 'bdl:zyx/18.00', 'type'=> 'product', 'prodcode' => 'bdl:EFG', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest1', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '600.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '16.00', 'flags' => '0', 'pos' => 2, 'status' => 1 ),
+		'bdl:HIJ/18.00' => array ( 'baseid' => '18.00', 'ordprodid' => 'bdl:zyx/18.00', 'type'=> 'product', 'prodcode' => 'bdl:HIJ', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest 1', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '600.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '17.00', 'flags' => '0', 'pos' => 3, 'status' => 1 ),
+		'bdl:hal/18.00' => array ( 'baseid' => '18.00', 'type'=> 'bundle', 'prodcode' => 'bdl:hal', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest2', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '1200.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '17.00', 'flags' => '0', 'pos' => 4, 'status' => 1 ),
+		'bdl:EFX/18.00' => array ( 'baseid' => '18.00', 'ordprodid' => 'bdl:hal/18.00', 'type'=> 'product', 'prodcode' => 'bdl:EFX', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest 2', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '600.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '16.00', 'flags' => '0', 'pos' => 5, 'status' => 1 ),
+		'bdl:HKL/18.00' => array ( 'baseid' => '18.00', 'ordprodid' => 'bdl:hal/18.00', 'type'=> 'product', 'prodcode' => 'bdl:HKL', 'suppliercode' => 'unitsupplier', 'name' => 'Bundle Unittest 2', 'mediaurl' => 'somewhere/thump6.jpg', 'amount' => 1, 'price' => '600.00', 'shipping' => '30.00', 'rebate' => '0.00', 'taxrate' => '18.00', 'flags' => '0', 'pos' => 6, 'status' => 1 ),
 		'CNE/10.00' => array ( 'baseid' => '10.00', 'prodcode' => 'CNE', 'suppliercode' => 'unitsupplier', 'name' => 'Cafe Noire Expresso', 'mediaurl' => 'somewhere/thump1.jpg', 'amount' => 3, 'price' => '4.50', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'flags' => '0', 'pos' => 3, 'status' => 1 ),
 		'ABCD/10.00' => array ( 'baseid' => '10.00', 'prodcode' => 'ABCD', 'suppliercode' => 'unitsupplier', 'name' => '16 discs', 'mediaurl' => 'somewhere/thump4.jpg', 'amount' => 1, 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '4.50', 'taxrate' => '0.00', 'flags' => '0', 'pos' => 4, 'status' => 1 ),
 	),
@@ -56,12 +56,14 @@ return array (
 	),
 
 	'order/base/service' => array (
-		'OGONE/19.95' => array ( 'baseid' => '19.95', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'solucia/19.95' => array ( 'baseid' => '19.95', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'OGONE/636.00' => array ( 'baseid' => '636.00', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'solucia/636.00' => array ( 'baseid' => '636.00', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'paypal/10.00' => array ( 'baseid' => '10.00', 'type' => 'payment', 'code' => 'paypal', 'name' => 'paypal', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
-		'solucia/10.00' => array ( 'baseid' => '10.00', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'OGONE/19.95' => array ( 'baseid' => '19.95', 'servid' => 'OGONE1', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'solucia/19.95' => array ( 'baseid' => '19.95', 'servid' => '73test', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'OGONE/636.00' => array ( 'baseid' => '636.00', 'servid' => 'OGONE1', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'solucia/636.00' => array ( 'baseid' => '636.00', 'servid' => '73test', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'paypal/10.00' => array ( 'baseid' => '10.00', 'servid' => 'paypal1', 'type' => 'payment', 'code' => 'paypal', 'name' => 'paypal', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'solucia/10.00' => array ( 'baseid' => '10.00', 'servid' => '73test', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'OGONE/18.00' => array ( 'baseid' => '18.00', 'servid' => 'OGONE1', 'type' => 'payment', 'code' => 'OGONE', 'name' => 'ogone', 'price' => '0.00', 'shipping' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
+		'solucia/18.00' => array ( 'baseid' => '18.00', 'servid' => '73test', 'type' => 'delivery', 'code' => 73, 'name' => 'solucia', 'price' => '0.00', 'shipping' => '5.00', 'rebate' => '0.00', 'taxrate' => '0.00', 'mediaurl' => 'somewhere/thump1.jpg' ),
 	),
 
 	'order/base/service/attr' => array (
@@ -80,7 +82,7 @@ return array (
 		'2008-02-15 12:34:56' => array ( 'baseid' => '19.95', 'type' => 'web', 'datepayment' => '2008-02-15 12:34:56', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'flag' => 1, 'emailflag' => 1, 'relatedid' => null ),
 		'2009-09-17 16:14:32' => array ( 'baseid' => '636.00', 'type' => 'phone', 'datepayment' => '2009-09-17 16:14:32', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'flag' => 0, 'emailflag' => 0, 'relatedid' => null ),
 		'2011-03-27 11:11:14' => array ( 'baseid' => '10.00', 'type' => 'web', 'datepayment' => '2011-09-17 16:14:32', 'datedelivery' => null, 'statuspayment' => 5, 'statusdelivery' => 3, 'flag' => 0, 'emailflag' => 0, 'relatedid' => null ),
-
+		'2009-03-18 16:14:32' => array ( 'baseid' => '18.00', 'type' => 'web', 'datepayment' => '2009-03-18 16:14:32', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'flag' => 0, 'emailflag' => 0, 'relatedid' => null ),
 	),
 
 	'order/status' => array (

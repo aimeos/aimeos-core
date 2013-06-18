@@ -17,4 +17,9 @@ class IndexController extends Application_Controller_Action_Abstract
 		$this->_redirect( 'catalog/index' );
 	}
 
+
+	public function termsAction()
+	{
+		$this->render( 'terms' );
+	}
 }

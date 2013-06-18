@@ -12,13 +12,13 @@
 class MShop_Locale_Manager_DefaultTest extends MW_Unittest_Testcase
 {
 
-	protected $_object;
+	private $_object;
 
 	/**
 	 * @var string
 	 * @access protected
 	 */
-	protected $_editor = '';
+	private $_editor = '';
 
 	public static function main()
 	{

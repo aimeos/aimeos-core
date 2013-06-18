@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  * @version $Id: Default.php 1324 2012-10-21 13:17:19Z nsendetzky $
  */
 
@@ -13,7 +13,7 @@
  * Default implementation of catalog tree filter section in HTML client.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 class Client_Html_Catalog_Filter_Tree_Default
 	extends Client_Html_Abstract
@@ -21,23 +21,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 {
 	private $_subPartPath = 'client/html/catalog/filter/tree/default/subparts';
 	private $_subPartNames = array();
-	private $_controller;
-	private $_pathcache;
-
-
-	/**
-	 * Initializes the class instance.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object
-	 * @param array $templatePaths Associative list of the file system paths to the core or the extensions as key
-	 * 	and a list of relative paths inside the core or the extension as values
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, array $templatePaths )
-	{
-		parent::__construct( $context, $templatePaths );
-
-		$this->_controller = Controller_Frontend_Catalog_Factory::createController( $context );
-	}
+	private $_cache;
 
 
 	/**
@@ -47,29 +31,9 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 */
 	public function getBody()
 	{
-		$context = $this->_getContext();
-		$cache = $context->getCache();
-		$cachable = $cache->isAvailable();
+		$view = $this->_setViewParams( $this->getView() );
 
-		$view = $this->getView();
-		$startid = $view->config( 'catalog/filter/tree/startid' );
-
-		if( $cachable && ( $result = $cache->get( 'catalog-filter-tree:' . $startid ) ) !== null ) {
-			return $result;
-		}
-
-
-		$catpath = $this->_getCatalogPath( $view->param( 'f-catalog-id' ) );
-		$view->treeCatalogPath = $catpath;
-
-		if( $cachable ) {
-			$view->treeCatalogTree = $this->_getCatalogTree( $startid );
-		} else {
-			$view->treeCatalogTree = $this->_getCatalogTree( $startid, $catpath );
-		}
-
-
-		$navHelper = new MW_View_Helper_NavTree( $view );
+		$navHelper = new MW_View_Helper_NavTree_Default( $view );
 		$view->addHelper( 'navtree', $navHelper );
 
 		$html = '';
@@ -78,32 +42,21 @@ class Client_Html_Catalog_Filter_Tree_Default
 		}
 		$view->treeBody = $html;
 
-
 		$tplconf = 'client/html/catalog/filter/tree/default/template-body';
 		$default = 'catalog/filter/tree-body-default.html';
 
-		$output = $view->render( $this->_getTemplate( $tplconf, $default ) );
-
-		if( $this->isCachable( Client_HTML_Abstract::CACHE_BODY ) ) {
-			$cache->set( 'catalog-filter-tree:' . $startid, $output );
-		}
-
-		return $output;
+		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
 
 
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
-	 * @param string|null $name Template name
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader( $name = null )
+	public function getHeader()
 	{
-		$view = $this->getView();
-		$catid = $view->param( 'f-catalog-id' );
-
-		$view->treeCatalogPath = $this->_getCatalogPath( $catid );
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -139,69 +92,91 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 */
 	public function isCachable( $what )
 	{
-		if( $what === Client_Html_Abstract::CACHE_HEADER ) {
-			return false;
-		}
-
 		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
 	}
 
 
 	/**
-	 * Returns a list of catalog items that are in the path from the given ID to the catalog root.
-	 *
-	 * @param string $catid Unique category ID
-	 * @return array List of catalog items along the path to the catalog root
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
 	 */
-	protected function _getCatalogPath( $catid )
+	public function process()
 	{
-		if( !isset( $this->_pathcache ) ) {
-			$this->_pathcache = $this->_controller->getCatalogPath( $catid );
-		}
-
-		return $this->_pathcache;
+		$this->_process( $this->_subPartPath, $this->_subPartNames );
 	}
 
 
-	protected function _getCatalogTree( $startid, array $catpath = array() )
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
 	{
-		if( count( $catpath ) === 0 ) {
-			return $this->_controller->getCatalogTree( $startid );
-		}
-
-		foreach( $catpath as $id => $item )
+		if( !isset( $this->_cache ) )
 		{
-			if( $id === $startid || $startid === null )
+			$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
+
+			$ref = array( 'text', 'media', 'attribute' );
+			$startid = $view->config( 'client/html/catalog/filter/tree/startid', '' );
+			$currentid = $view->param( 'f-catalog-id', '' );
+			$catItems = array();
+
+			if( $currentid != '' )
 			{
-				unset( $catpath[$id] );
-				$startid = $id;
-				break;
-			}
-			unset( $catpath[$id] );
-		}
+				$catItems = $manager->getPath( $currentid );
 
-		$root = $node = $this->_controller->getCatalogTree( $startid, array( 'text', 'media' ), MW_Tree_Manager_Abstract::LEVEL_LIST );
-
-		foreach( $catpath as $id => $item )
-		{
-			$subnode = $this->_controller->getCatalogTree( $id, array( 'text', 'media' ), MW_Tree_Manager_Abstract::LEVEL_LIST );
-			$childid = $subnode->getId();
-
-			foreach( $node->getChildren() as $child )
-			{
-				if( $child->getId() == $childid )
+				if( $startid != '' )
 				{
-					foreach( $subnode->getChildren() as $subchild ) {
-						$child->addChild( $subchild );
+					foreach( $catItems as $key => $item )
+					{
+						if( $key == $startid ) {
+							break;
+						}
+						unset( $catItems[$key] );
 					}
+				}
 
-					break;
+				if( ( $node = reset( $catItems ) ) === false ) {
+					throw new Client_Html_Exception( sprintf( 'No category with ID "%1$s" available', $currentid ) );
 				}
 			}
+			else if( $startid != '' )
+			{
+				$node = $manager->getItem( $startid );
+				$catItems = array( $node->getId() => $node );
+			}
+			else
+			{
+				$node = $manager->getTree( null, $ref, MW_Tree_Manager_Abstract::LEVEL_ONE );
+				$catItems = array( $node->getId() => $node );
+			}
 
-			$node = $subnode;
+			$search = $manager->createSearch();
+			$expr = $search->compare( '==', 'catalog.parentid', array_keys( $catItems ) );
+			$expr = $search->combine( '||', array( $expr, $search->compare( '==', 'catalog.id', $node->getId() ) ) );
+
+			if( ( $levels = $view->config( 'client/html/catalog/filter/tree/levels-always' ) ) != null ) {
+				$expr = $search->combine( '||', array( $expr, $search->compare( '<=', 'catalog.level', $levels ) ) );
+			}
+
+			if( ( $levels = $view->config( 'client/html/catalog/filter/tree/levels-only' ) ) != null ) {
+				$expr = $search->combine( '&&', array( $expr, $search->compare( '<=', 'catalog.level', $levels ) ) );
+			}
+
+			$search->setConditions( $expr );
+
+			$id = ( $startid != '' ? $startid : null );
+			$level = MW_Tree_Manager_Abstract::LEVEL_TREE;
+
+			$view->treeCatalogTree = $manager->getTree( $id, $ref, $level, $search );
+			$view->treeCatalogPath = $catItems;
+
+			$this->_cache = $view;
 		}
 
-		return $root;
+		return $this->_cache;
 	}
 }

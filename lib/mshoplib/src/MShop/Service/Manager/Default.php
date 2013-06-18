@@ -379,28 +379,14 @@ class MShop_Service_Manager_Default
 
 
 	/**
-	 * Deletes an existing service from the storage.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $serviceId Service id of an existing service that should be deleted
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem( $serviceId )
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$stmt = $this->_getCachedStatement($conn, 'mshop/service/manager/default/item/delete');
-			$stmt->bind(1, $serviceId, MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->execute()->finish();
-
-			$dbm->release($conn);
-		}
-		catch ( Exception $e )
-		{
-			$dbm->release($conn);
-			throw $e;
-		}
+		$path = 'mshop/service/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -426,7 +412,7 @@ class MShop_Service_Manager_Default
 	{
 		$iface = 'MShop_Service_Item_Interface';
 		if ( !( $item instanceof $iface ) ) {
-			throw new MShop_Service_Exception(sprintf('Object does not implement "%1$s"', $iface));
+			throw new MShop_Service_Exception(sprintf('Object is not of required type "%1$s"', $iface));
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -504,11 +490,12 @@ class MShop_Service_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
 			$cfgPathSearch = 'mshop/service/manager/default/item/search';
 			$cfgPathCount =  'mshop/service/manager/default/item/count';
 			$required = array( 'service' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
@@ -516,12 +503,12 @@ class MShop_Service_Manager_Default
 
 				if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 				{
-					$msg = sprintf( 'Invalid JSON in "%1$s" for ID "%2$s": "%3$s"', 'mshop_service.config', $row['id'], $config );
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.config', $row['id'], $config );
 					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
 				$map[ $row['id'] ] = $row;
-				$typeIds[] = $row['typeid'];
+				$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn );
@@ -532,12 +519,13 @@ class MShop_Service_Manager_Default
 			throw $e;
 		}
 
-		if( count( $typeIds ) > 0 )
+		if( !empty( $typeIds ) )
 		{
 			$typeManager = $this->getSubManager( 'type' );
-			$search = $typeManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'service.type.id', array_unique( $typeIds ) ) );
-			$typeItems = $typeManager->searchItems( $search );
+			$typeSearch = $typeManager->createSearch();
+			$typeSearch->setConditions( $typeSearch->compare( '==', 'service.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $typeSearch );
 
 			foreach( $map as $id => $row )
 			{
@@ -564,31 +552,31 @@ class MShop_Service_Manager_Default
 		$names = explode( ',', $item->getProvider() );
 
 		if ( ctype_alnum( $domain ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
+			throw new MShop_Service_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 		}
 
 		if( ( $provider = array_shift( $names ) ) === null )
 		{
-			$msg = sprintf( 'No service provider available in "%1$s"', $item->getProvider() );
+			$msg = sprintf( 'Provider in "%1$s" not available', $item->getProvider() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
 		if ( ctype_alnum( $provider ) === false ) {
-			throw new MShop_Service_Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
+			throw new MShop_Service_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
 		$interface = 'MShop_Service_Provider_Factory_Interface';
 		$classname = 'MShop_Service_Provider_' . $domain . '_' . $provider;
 
 		if ( class_exists( $classname ) === false ) {
-			throw new MShop_Service_Exception(sprintf('Class "%1$s" not found', $classname));
+			throw new MShop_Service_Exception(sprintf('Class "%1$s" not available', $classname));
 		}
 
 		$context = $this->_getContext();
 		$provider = new $classname($context, $item);
 
 		if ( ( $provider instanceof $interface ) === false ) {
-			$msg = sprintf('Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface);
+			$msg = sprintf('Class "%1$s" does not implement interface "%2$s"', $classname, $interface);
 			throw new MShop_Service_Exception($msg);
 		}
 

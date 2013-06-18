@@ -12,7 +12,7 @@
  */
 class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 	protected static $_products;
 
 
@@ -103,28 +103,31 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$product = clone self::$_products[ 'CNC' ];
 
-		$product->setId( null );
-		$product->setCode( 'ModifiedCNC' );
-		$productManager->saveItem( $product );
-
-		$this->_object->saveItem( $product );
-
 		$prices = $product->getRefItems( 'price' );
 		if( ( $priceItem = reset( $prices ) ) === false ) {
 			throw new Exception( 'Product doesnt have any price item' );
 		}
 
+
+		$product->setId( null );
+		$product->setCode( 'ModifiedCNC' );
+		$productManager->saveItem( $product );
+		$this->_object->saveItem( $product );
+
+
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );
 		$result = $this->_object->searchItems( $search );
 
+
 		$this->_object->deleteItem( $product->getId() );
+		$productManager->deleteItem( $product->getId() );
+
 
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );
 		$result2 = $this->_object->searchItems( $search );
 
-		$productManager->deleteItem( $product->getId() );
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
 		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
@@ -155,7 +158,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 		$search->setConditions( $search->compare( '!=', 'catalog.index.price.id', null ) );
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertGreaterThanOrEqual( 8, count( $result ) );
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 
 
 		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
@@ -166,7 +169,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertGreaterThanOrEqual( 6, count( $result ) );
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
 
 }

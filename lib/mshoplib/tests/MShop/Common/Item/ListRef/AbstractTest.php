@@ -21,11 +21,11 @@ class MShop_Common_Item_ListRef_Test extends MShop_Common_Item_ListRef_Abstract
  */
 class MShop_Common_Item_ListRef_AbstractTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_textItem1;
-	protected $_textItem2;
-	protected $_listItem1;
-	protected $_listItem2;
+	private $_object;
+	private $_textItem1;
+	private $_textItem2;
+	private $_listItem1;
+	private $_listItem2;
 
 
 	/**

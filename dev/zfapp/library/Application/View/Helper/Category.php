@@ -79,7 +79,7 @@ class Application_View_Helper_Category extends Zend_View_Helper_Abstract
 
 			$label = $value->getLabel();
 			$catId = $value->getId();
-			$active = ( $catId === $activkey );
+			$active = ( $catId === $current );
 
 			$item = array(
 				'uri' => $this->view->url( array( 'site' => $this->view->params['site'], 'trailing' => $label, 'f-catalog-id' => $catId ), 'routeDefault', true ),

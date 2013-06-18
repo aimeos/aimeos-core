@@ -16,7 +16,7 @@ class MShop_Service_Provider_Payment_PostPayTest extends MW_Unittest_Testcase
 	 * @var    MShop_Service_Provider_Payment_PostPay
 	 * @access protected
 	 */
-	protected $_object;
+	private $_object;
 
 
 	/**
@@ -46,7 +46,6 @@ class MShop_Service_Provider_Payment_PostPayTest extends MW_Unittest_Testcase
 		$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
 
 		$serviceItem = $serviceManager->createItem();
-		$serviceItem->setConfig( array( 'url' => 'http://localhost/' ) );
 		$serviceItem->setCode( 'test' );
 
 		$this->_object = new MShop_Service_Provider_Payment_PostPay( $context, $serviceItem );
@@ -67,20 +66,13 @@ class MShop_Service_Provider_Payment_PostPayTest extends MW_Unittest_Testcase
 
 	public function testGetConfigBE()
 	{
-		$this->assertArrayHasKey( 'url', $this->_object->getConfigBE() );
+		$this->assertEquals( array(), $this->_object->getConfigBE() );
 	}
 
 
 	public function testCheckConfigBE()
 	{
-		$this->assertEquals( array( 'url' => null ), $this->_object->checkConfigBE( array('url' => 'testurl' ) ) );
-	}
-
-
-	public function testCheckConfigBEwrongType()
-	{
-		$result = $this->_object->checkConfigBE( array('url' => 123 ) );
-		$this->assertInternalType( 'string', $result['url'] );
+		$this->assertEquals( array(), $this->_object->checkConfigBE( array('url' => 'testurl' ) ) );
 	}
 
 

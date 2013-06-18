@@ -10,7 +10,8 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_attribute"
-			WHERE "id" = ?
+			WHERE :cond
+			AND siteid = ?
 		',
 		'insert' => '
 			INSERT INTO "mshop_attribute" ("siteid", "typeid", "domain", "code", "status", "pos", "label",
@@ -33,10 +34,14 @@ return array(
 			LIMIT :size OFFSET :start
 		',
 		'count' => '
-			SELECT count(DISTINCT matt."id") AS "count"
-			FROM "mshop_attribute" AS matt
-			:joins
-			WHERE :cond
+			SELECT COUNT(*) AS "count"
+			FROM(
+				SELECT DISTINCT matt."id"
+				FROM "mshop_attribute" AS matt
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
 		',
 	),
 );

@@ -8,7 +8,7 @@
  */
 class MW_Session_NoneTest extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
 
 
 	/**

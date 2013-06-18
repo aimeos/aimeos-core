@@ -29,7 +29,7 @@ class MShop_Supplier_Item_Default
 	public function __construct( array $values = array() )
 	{
 		parent::__construct('supplier.', $values);
-		
+
 		$this->_values = $values;
 	}
 
@@ -77,6 +77,8 @@ class MShop_Supplier_Item_Default
 	 */
 	public function setCode( $value )
 	{
+		$this->_checkCode( $value );
+
 		$this->_values['code'] = (string) $value;
 		$this->setModified();
 	}

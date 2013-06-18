@@ -12,8 +12,8 @@
  */
 class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-	protected $_values;
+	private $_object;
+	private $_values;
 
 
 	/**
@@ -44,6 +44,7 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 			'id' => 3,
 			'siteid'=>99,
 			'ordservid' => 42,
+			'type' => 'UnitType',
 			'name' => 'UnitName',
 			'code' => 'UnitCode',
 			'value' => 'UnitValue',
@@ -109,16 +110,16 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 	}
 
 
-	public function testGetValue()
+	public function testGetType()
 	{
-		$this->assertEquals($this->_values['value'], $this->_object->getValue());
+		$this->assertEquals( $this->_values['type'], $this->_object->getType());
 	}
 
 
-	public function testSetValue()
+	public function testSetType()
 	{
-		$this->_object->setValue( 'custom' );
-		$this->assertEquals( 'custom', $this->_object->getValue() );
+		$this->_object->setType( 'testType' );
+		$this->assertEquals( 'testType', $this->_object->getType() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
@@ -133,6 +134,20 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 	{
 		$this->_object->setCode( 'testCode' );
 		$this->assertEquals( 'testCode', $this->_object->getCode() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+	
+	
+	public function testGetValue()
+	{
+		$this->assertEquals($this->_values['value'], $this->_object->getValue());
+	}
+
+
+	public function testSetValue()
+	{
+		$this->_object->setValue( 'custom' );
+		$this->assertEquals( 'custom', $this->_object->getValue() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
@@ -190,9 +205,10 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->assertEquals( $this->_object->getId(), $arrayObject['order.base.service.attribute.id'] );
 		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['order.base.service.attribute.siteid'] );
 		$this->assertEquals( $this->_object->getServiceId(), $arrayObject['order.base.service.attribute.ordservid'] );
-		$this->assertEquals( $this->_object->getName(), $arrayObject['order.base.service.attribute.name'] );
+		$this->assertEquals( $this->_object->getType(), $arrayObject['order.base.service.attribute.type'] );
 		$this->assertEquals( $this->_object->getCode(), $arrayObject['order.base.service.attribute.code']) ;
 		$this->assertEquals( $this->_object->getValue(), $arrayObject['order.base.service.attribute.value'] );
+		$this->assertEquals( $this->_object->getName(), $arrayObject['order.base.service.attribute.name'] );
 		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['order.base.service.attribute.mtime'] );
 		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['order.base.service.attribute.ctime'] );
 		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['order.base.service.attribute.mtime'] );

@@ -347,63 +347,6 @@ class MShop_Product_Manager_Default
 	);
 
 
-	private $_siteSearchConfig = array(
-		'product.site.id' => array(
-			'code'=>'product.site.id',
-			'internalcode'=>'mprosi."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_product_site" AS mprosi ON ( mpro."id" = mprosi."parentid" )' ),
-			'label'=>'Product site ID',
-			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'product.site.parentid' => array(
-			'code'=>'product.site.parentid',
-			'internalcode'=>'mprosi."parentid"',
-			'label'=>'Product site parent ID',
-			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'product.site.siteid' => array(
-			'code'=>'product.site.siteid',
-			'internalcode'=>'mprosi."siteid"',
-			'label'=>'Product site site ID',
-			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'product.site.value' => array(
-			'code'=>'product.site.value',
-			'internalcode'=>'mprosi."value"',
-			'label'=>'Product site value',
-			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
-		),
-		'product.site.ctime'=> array(
-			'code'=>'product.site.ctime',
-			'internalcode'=>'mprosi."ctime"',
-			'label'=>'Product site create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.site.mtime'=> array(
-			'code'=>'product.site.mtime',
-			'internalcode'=>'mprosi."mtime"',
-			'label'=>'Product site modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.site.editor'=> array(
-			'code'=>'product.site.editor',
-			'internalcode'=>'mprosi."editor"',
-			'label'=>'Product site editor',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-	);
-
-
 	/**
 	 * Creates the product manager that will use the given context object.
 	 *
@@ -449,7 +392,7 @@ class MShop_Product_Manager_Default
 	{
 		$iface = 'MShop_Product_Item_Interface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Product_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Product_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -507,29 +450,14 @@ class MShop_Product_Manager_Default
 
 
 	/**
-	 * Deletes an existing product from the storage.
+	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param integer $productId Product id of an existing product in the storage that should be deleted
+	 * @param array $ids List of IDs
 	 */
-	public function deleteItem($productId)
+	public function deleteItems( array $ids )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$path = 'mshop/product/manager/default/item/delete';
-			$stmt = $this->_getCachedStatement($conn, $path);
-			$stmt->bind( 1, $productId );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$path = 'mshop/product/manager/default/item/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -562,16 +490,17 @@ class MShop_Product_Manager_Default
 
 		try
 		{
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 			$cfgPathSearch = 'mshop/product/manager/default/item/search';
 			$cfgPathCount =  'mshop/product/manager/default/item/count';
 			$required = array( 'product' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total );
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				$map[ $row['id'] ] = $row;
-				$typeIds[] = $row['typeid'];
+				$typeIds[ $row['typeid'] ] = null;
 			}
 
 			$dbm->release( $conn );
@@ -582,12 +511,13 @@ class MShop_Product_Manager_Default
 			throw $e;
 		}
 
-		if( count( $typeIds ) > 0 )
+		if( !empty( $typeIds ) )
 		{
 			$typeManager = $this->getSubManager( 'type' );
-			$search = $typeManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'product.type.id', array_unique( $typeIds ) ) );
-			$typeItems = $typeManager->searchItems( $search );
+			$typeSearch = $typeManager->createSearch();
+			$typeSearch->setConditions( $typeSearch->compare( '==', 'product.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $typeSearch );
 
 			foreach( $map as $id => $row )
 			{
@@ -645,8 +575,6 @@ class MShop_Product_Manager_Default
 				return $this->_getListManager( 'product', $manager, $name, $this->_listSearchConfig, $typeManager );
 			case 'type':
 				return $this->_getTypeManager( 'product', $manager, $name, $this->_typeSearchConfig );
-			case 'site':
-				return $this->_getSiteManager( 'product', $manager, $name, $this->_siteSearchConfig );
 			default:
 				return $this->_getSubManager( 'product', $manager, $name );
 		}
