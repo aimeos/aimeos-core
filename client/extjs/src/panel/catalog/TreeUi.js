@@ -35,58 +35,14 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 
 		this.recordClass = MShop.Schema.getRecord(this.recordName);
 
-		this.initLoader(false);
+		this.initLoader();
 
 		// fake a root -> needed by extjs
 		this.root = new Ext.tree.AsyncTreeNode( { id : 'root' } );
 		
 		MShop.panel.catalog.TreeUi.superclass.initComponent.call(this);
 	},
-	
-	initLoader : function()
-	{
-		this.loader = new Ext.tree.TreeLoader( {
-	
-			nodeParameter : 'items',
-			paramOrder : [ 'site', 'items' ],
-			baseParams : {
-				site : MShop.config.site["locale.site.code"]
-			},
-			directFn : MShop.API.Catalog.getTree,
 		
-			processResponse : function(response, node, callback, scope)
-			{
-				// reset root
-				if (node.id === 'root') {
-					// we create the node to have it in the store
-					var newNode = this.createNode(response.responseText.items);
-				
-					node.setId(response.responseText.items['catalog.id']);
-					node.setText(response.responseText.items['catalog.label']);
-					node.getUI().addClass(newNode.attributes.cls);
-					node.getOwnerTree().enable();
-					node.getOwnerTree().actionAdd.setDisabled(node.id !== 'root');
-				}
-			
-				// cut off item itself
-				response.responseData = response.responseText.items.children;
-				return Ext.tree.TreeLoader.prototype.processResponse.apply(this, arguments);
-			},
-		
-			createNode : Ext.tree.TreeLoader.prototype.createNode.createInterceptor( this.inspectCreateNode, this )
-		});
-	
-		this.loader.on('loadexception', function(loader, node, response) {
-	
-			if (node.id === 'root') {
-				// no root node yet
-				node.getUI().hide();
-				node.getOwnerTree().enable();
-				return;
-			}
-		}, this);
-	},
-	
 	inspectCreateNode : function(attr)
 	{
 		// adding label to object as text is necessary

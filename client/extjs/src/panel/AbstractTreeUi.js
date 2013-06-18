@@ -104,21 +104,13 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 					// reset root
 					if (node.id === 'root') {
 						// we create the node to have it in the store
-						if(noroot)
-						{
-							node.setText(response.responseText.items[this.domain+'.label']);
-							node.getOwnerTree().enable();
-						}
-						else
-						{
-							var newNode = this.createNode(response.responseText.items);
+						var newNode = this.createNode(response.responseText.items);
 
-							node.setId(response.responseText.items[this.doman + '.id']);
-							node.setText(response.responseText.items[this.domain + '.label']);
-							node.getUI().addClass(newNode.attributes.cls);
-							node.getOwnerTree().enable();
-							node.getOwnerTree().actionAdd.setDisabled(node.id !== 'root');
-						}
+						node.setId(response.responseText.items[this.doman + '.id']);
+						node.setText(response.responseText.items[this.domain + '.label']);
+						node.getUI().addClass(newNode.attributes.cls);
+						node.getOwnerTree().enable();
+						node.getOwnerTree().actionAdd.setDisabled(node.id !== 'root');
 					}
 
 					// cut off item itself
@@ -128,7 +120,7 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 				
 				createNode : Ext.tree.TreeLoader.prototype.createNode.createInterceptor( this.inspectCreateNode, this )
 		});
-		console.log(this.domain+'.label');
+		
 		this.loader.on('loadexception', function(loader, node, response) {
 
 			if (node.id === 'root') {

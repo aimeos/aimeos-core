@@ -107,7 +107,6 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	},
 	
 	onBeforeSave: function( store, data ) {
-
 		var config = {};
 		var editorGrid = this.findByType( 'MShop.panel.locale.site.configui' );
 		var first = editorGrid.shift();
@@ -116,7 +115,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( key.trim() !== '' ) {
-						config[key] = value.trim();
+						config[key] = value;
 					}
 				}, this);
 			});
