@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Customer
- * @version $Id: Abstract.php 14418 2011-12-17 17:54:41Z nsendetzky $
  */
 
 
@@ -50,6 +49,9 @@ abstract class MShop_Customer_Manager_Abstract
 	 * Returns the customer item object specificed by its ID.
 	 *
 	 * @param integer $id Unique customer ID referencing an existing customer
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Customer_Item_Interface Returns the customer item of the given id
+	 * @throws MShop_Customer_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Service
- * @version $Id: Default.php 14854 2012-01-13 12:54:14Z doleiynyk $
  */
 
 
@@ -393,8 +392,10 @@ class MShop_Service_Manager_Default
 	/**
 	 * Returns the service item specified by the given id.
 	 *
-	 * @param int $id Unique identifier of the service item
-	 * @return MShop_Service_Item_Interface
+	 * @param int $id Unique ID of the service item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Service_Item_Interface Returns the service item of the given id
+	 * @throws MShop_Service_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

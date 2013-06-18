@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Catalog
- * @version $Id: MySQL.php 1360 2012-10-30 18:23:28Z doleiynyk $
  */
 
 

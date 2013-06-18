@@ -4,7 +4,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Interface.php 14499 2011-12-20 14:14:25Z doleiynyk $
  */
 
 /**

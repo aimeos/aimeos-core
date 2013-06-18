@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Common
- * @version $Id: Abstract.php 1355 2012-10-30 11:18:18Z nsendetzky $
  */
 
 
@@ -586,7 +585,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 * Creates the items with address item, list items and referenced items.
 	 *
 	 * @param array $map Associative list of IDs as keys and the associative array of values
-	 * @param array $domains List of domain names whose referenced items should be attached
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param string $prefix Domain prefix
 	 * @return array List of items implementing MShop_Common_Item_Interface
 	 */

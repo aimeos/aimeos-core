@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Text
- * @version $Id: Default.php 14750 2012-01-09 12:09:16Z nsendetzky $
  */
 
 
@@ -424,8 +423,10 @@ class MShop_Text_Manager_Default
 	/**
 	 * Returns the text item object specified by the given ID.
 	 *
-	 * @param integer $id Id of text item
-	 * @return MShop_Text_Item_Interface Text item
+	 * @param integer $id Id of the text item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Text_Item_Interface Returns the text item of the given id
+	 * @throws MShop_Text_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

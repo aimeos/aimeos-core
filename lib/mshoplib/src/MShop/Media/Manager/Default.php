@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Media
- * @version $Id: Default.php 14682 2012-01-04 11:30:14Z nsendetzky $
  */
 
 
@@ -402,7 +401,9 @@ class MShop_Media_Manager_Default
 	 * Returns an item for the given ID.
 	 *
 	 * @param integer $id ID of the item that should be retrieved
-	 * @return MShop_Media_Item_Interface Item object
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Media_Item_Interface Returns the media item of the given id
+	 * @throws MShop_Media_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
