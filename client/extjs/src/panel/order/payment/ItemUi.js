@@ -45,6 +45,10 @@ MShop.panel.order.base.service.payment.ItemUi = Ext.extend(Ext.Panel, {
 					name : 'order.base.service.id'
 				}, {
 					xtype: 'displayfield',
+					fieldLabel: 'Service ID',
+					name: 'order.base.service.serviceid'
+				}, {
+					xtype: 'displayfield',
 					fieldLabel: 'Code',
 					maxLength : 32,
 					name: 'order.base.service.code'

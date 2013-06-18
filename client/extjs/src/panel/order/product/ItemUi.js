@@ -60,6 +60,10 @@ MShop.panel.order.product.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 							name : 'order.base.product.id'
 						}, {
 							xtype : 'displayfield',
+							fieldLabel : _( 'Product ID' ),
+							name : 'order.base.product.productid'
+						}, {
+							xtype : 'displayfield',
 							fieldLabel : _( 'Order Product ID' ),
 							name : 'order.base.product.orderproductid'
 						}, {

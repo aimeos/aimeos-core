@@ -212,6 +212,12 @@ MShop.panel.order.base.product.ListUi = Ext.extend(Ext.Panel, {
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
+				dataIndex : 'order.base.product.productid',
+				header : _('Product ID'),
+				width : 50,
+				hidden: true
+			}, {
+				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.orderproductid',
 				header : _('Order Product ID'),
 				width : 50,
