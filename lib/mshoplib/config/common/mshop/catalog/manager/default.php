@@ -32,6 +32,11 @@ return array(
 			SET "label" = ?, "code" = ?, "status" = ?
 			WHERE "siteid" = :siteid AND "id" = ?
 		',
+		'update-parentid' => '
+			UPDATE "mshop_catalog"
+			SET "parentid" = ?
+			WHERE "siteid" = :siteid AND "id" = ?
+		',
 		'move-left' => '
 			UPDATE "mshop_catalog"
 			SET "nleft" = "nleft" + ?, "level" = "level" + ?
