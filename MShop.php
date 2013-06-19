@@ -11,6 +11,7 @@
  */
 class MShop
 {
+	private static $_includePaths;
 	private $_manifests = array();
 	private $_extensions = array();
 	private $_extensionsDone = array();
@@ -77,6 +78,21 @@ class MShop
 	 */
 	public static function autoload( $className )
 	{
+		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
+
+		if( !isset( self::$_includePaths ) ) {
+			self::$_includePaths = explode( PATH_SEPARATOR, get_include_path() );
+		}
+
+		foreach( self::$_includePaths as $path )
+		{
+			$file = $path . DIRECTORY_SEPARATOR . $fileName;
+
+			if( file_exists( $file ) === true && ( include_once $file ) !== false ) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
