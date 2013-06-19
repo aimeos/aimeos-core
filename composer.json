@@ -12,16 +12,5 @@
 	},
 	"require": {
 		"codeplex/phpexcel": "~1.7.6"
-	},
-	"autoload": {
-		"psr-0": {
-			"": [
-				"lib/mshoplib/src/",
-				"lib/mwlib/src/",
-				"client/html/src/",
-				"controller/frontend/src/",
-				"controller/extjs/src/"
-			]
-		}
 	}
 }

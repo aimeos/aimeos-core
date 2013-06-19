@@ -16,6 +16,14 @@ return array(
 	),
 	'conflicts' => array(
 	),
+	'include' => array(
+		'lib/mshoplib/src',
+		'lib/mwlib/src',
+		'client/html/src',
+		'controller/frontend/src',
+		'controller/extjs/src',
+		'vendor/codeplex/phpexcel',
+	),
 	'config' => array(
 		'mysql' => array(
 			'lib/mshoplib/config/common',
