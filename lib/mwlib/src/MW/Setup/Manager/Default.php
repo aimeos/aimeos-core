@@ -76,15 +76,26 @@ class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
 			throw new MW_Setup_Exception( sprintf( 'Invalid database adapter "%1$s"', $adapter ) );
 		}
 
-		$adapter = ucwords( strtolower( $adapter ) );
-		$filename = 'MW/Setup/DBSchema/' . $adapter . '.php';
-		$classname = 'MW_Setup_DBSchema_' . $adapter;
+		$classname = 'MW_Setup_DBSchema_' . ucwords( strtolower( $adapter ) );
 
 		if( class_exists( $classname ) === false ) {
 			throw new MW_Setup_Exception( sprintf( 'Database schema class "%1$s" not found', $classname ) );
 		}
 
 		return new $classname( $this->_conn, $dbname );
+	}
+
+
+	/**
+	 * Includes a PHP file.
+	 *
+	 * @param string $pathname Path to the file including the file name
+	 */
+	protected function _includeFile( $pathname )
+	{
+		if( ( include_once $pathname ) === false ) {
+			throw new MW_Setup_Exception( sprintf( 'Unable to include file "%1$s"', $pathname ) );
+		}
 	}
 
 
@@ -133,6 +144,8 @@ class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
 			foreach( new DirectoryIterator( $path ) as $item )
 			{
 				if( $item->isDir() === true || substr( $item->getFilename(), -4 ) != '.php' ) { continue; }
+
+				$this->_includeFile( $item->getPathName() );
 
 				$taskname = substr( $item->getFilename(), 0, -4 );
 				$classname = 'MW_Setup_Task_' . $taskname;
