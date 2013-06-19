@@ -1,7 +1,6 @@
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
- * $Id: site.js 14430 2011-12-19 09:27:26Z nsendetzky $
  */
 
 

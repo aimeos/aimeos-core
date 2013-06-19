@@ -10,7 +10,6 @@
  * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006 Squiz Pty Ltd (ABN 77 084 670 600)
  * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   CVS: $Id: ScopeIndentSniff.php 14410 2011-12-17 13:57:38Z nsendetzky $
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 

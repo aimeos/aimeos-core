@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Config
- * @version $Id$
  */
 
 

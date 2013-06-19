@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Locale
- * @version $Id: Default.php 14854 2012-01-13 12:54:14Z doleiynyk $
  */
 
 
@@ -171,9 +170,9 @@ class MShop_Locale_Manager_Language_Default
 	 * Create a Language object from a given Language ID/Key.
 	 *
 	 * @param string $id Language id to create the Language object
-	 * @return MShop_Locale_Item_Language_Interface Language object
+	 * @return MShop_Locale_Item_Language_Interface Returns the language item of the given id
 	 * @throws MW_DB_Exception If language object couldn't be fetched
-	 * @throws MShop_Locale_Exception On failures with the language item object
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: FactoryTest.php 896 2012-07-04 12:25:26Z nsendetzky $
  */
 
 class Controller_Frontend_Basket_FactoryTest extends MW_Unittest_Testcase

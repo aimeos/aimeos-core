@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Service
- * @version $Id: PayPalExpress.php 1170 2012-08-29 12:22:00Z doleiynyk $
  */
 
 
@@ -635,6 +634,7 @@ implements MShop_Service_Provider_Payment_Interface
 				$attributeItem = $attributeManager->createItem();
 				$attributeItem->setServiceId( $serviceItem->getId() );
 				$attributeItem->setCode( $code );
+				$attributeItem->setType( 'payment' );
 			}
 			else
 			{

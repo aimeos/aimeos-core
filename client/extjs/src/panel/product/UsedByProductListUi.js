@@ -1,7 +1,6 @@
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
- * $Id: UsedByProductListUi.js 14413 2011-12-17 14:26:46Z nsendetzky $
  */
 
 

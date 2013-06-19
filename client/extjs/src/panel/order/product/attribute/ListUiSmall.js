@@ -1,7 +1,6 @@
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
- * $Id: ListUiSmall.js 14263 2011-12-11 16:36:17Z nsendetzky $
  */
 
 
@@ -76,6 +75,11 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend( MShop.panel.A
 				header : _( 'ID' ),
 				width : 50,
 				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'order.base.product.attribute.type',
+				header : _('Type'),
+				width : 150
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.attribute.name',

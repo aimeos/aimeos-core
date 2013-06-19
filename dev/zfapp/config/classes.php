@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @version $Id$
  */
 
 

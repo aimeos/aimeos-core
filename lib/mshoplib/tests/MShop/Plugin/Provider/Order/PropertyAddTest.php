@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: PropertyAddTest.php 1390 2013-01-23 13:36:13Z jevers $
  */
 
 /**

@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Default.php 14854 2012-01-13 12:54:14Z doleiynyk $
  */
 
 
@@ -250,7 +249,9 @@ class MShop_Order_Manager_Default
 	 * Returns an order invoice item built from database values.
 	 *
 	 * @param integer $id Unique id of the order invoice
-	 * @return MShop_Order_Item_Interface order Invoice item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Order_Item_Interface Returns order invoice item of the given id
+	 * @throws MShop_Order_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array())
 	{

@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Common
- * @version $Id: Abstract.php 14852 2012-01-13 12:24:15Z doleiynyk $
  */
 
 

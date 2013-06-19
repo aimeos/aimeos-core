@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Order
- * @version $Id: Default.php 14852 2012-01-13 12:24:15Z doleiynyk $
  */
 
 
@@ -61,7 +60,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 
 
 	/**
-	 * Returns the name of the service attribute item.
+	 * Returns the type of the service attribute item.
 	 *
 	 * @return string Type of the service attribute item
 	 */
@@ -72,7 +71,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 
 
 	/**
-	 * Sets a new name for the service attribute item.
+	 * Sets a new type for the service attribute item.
 	 *
 	 * @param string $name Type as defined by the service provider
 	 */

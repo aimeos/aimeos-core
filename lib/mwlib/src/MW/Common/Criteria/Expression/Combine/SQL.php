@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Common
- * @version $Id: SQL.php 16606 2012-10-19 12:50:23Z nsendetzky $
  */
 
 

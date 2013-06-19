@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Product
- * @version $Id: Default.php 14682 2012-01-04 11:30:14Z nsendetzky $
  */
 
 
@@ -188,8 +187,10 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	/**
 	 * Creates a warehouse item object for the given item id.
 	 *
-	 * @param Integer $id Id of warehouse item
-	 * @return MShop_Product_Item_Warehouse_Interface Product warehouse item
+	 * @param integer $id Id of the warehouse item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Product_Item_Warehouse_Interface Returns product warehouse item of the given id
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
- * @version $Id: Default.php 14685 2012-01-04 12:45:18Z nsendetzky $
  */
 
 

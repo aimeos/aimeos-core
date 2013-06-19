@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: PayPalExpressTest.php 1332 2012-10-23 11:28:24Z doleiynyk $
  */
 
 

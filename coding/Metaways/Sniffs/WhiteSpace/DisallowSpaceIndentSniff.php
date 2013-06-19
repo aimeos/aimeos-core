@@ -9,7 +9,6 @@
  * @author    Norbert Sendetzky <n.sendetzky@metaways.de>
  * @copyright 2011 Metaways Infosystems GmbH
  * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
- * @version   $Id: DisallowSpaceIndentSniff.php 11206 2011-04-16 13:16:28Z nsendetzky $
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 

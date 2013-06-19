@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
  * @subpackage Html
- * @version $Id: Interface.php 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
 

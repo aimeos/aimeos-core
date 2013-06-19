@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage Frontend
- * @version $Id: Interface.php 896 2012-07-04 12:25:26Z nsendetzky $
  */
 
 

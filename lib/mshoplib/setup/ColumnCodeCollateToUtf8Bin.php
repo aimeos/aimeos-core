@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: ColumnCodeCollateToUtf8Bin.php 14769 2012-01-09 16:29:37Z spopp $
  */
 
 

@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
- * @version $Id: Exception.php 14602 2011-12-27 15:27:08Z gwussow $
  */
 
 

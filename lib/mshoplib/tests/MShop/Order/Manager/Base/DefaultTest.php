@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: DefaultTest.php 14843 2012-01-13 08:11:39Z nsendetzky $
  */
 
 
@@ -251,6 +250,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.service.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );
 		$expr[] = $search->compare( '==', 'order.base.service.type', 'payment' );
+		$expr[] = $search->compare( '!=', 'order.base.service.serviceid', null );
 		$expr[] = $search->compare( '==', 'order.base.service.code', 'OGONE' );
 		$expr[] = $search->compare( '==', 'order.base.service.name', 'ogone' );
 		$expr[] = $search->compare( '==', 'order.base.service.price', '0.00' );

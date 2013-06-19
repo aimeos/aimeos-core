@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Locale
- * @version $Id: Default.php 14854 2012-01-13 12:54:14Z doleiynyk $
  */
 
 
@@ -211,7 +210,9 @@ class MShop_Locale_Manager_Site_Default
 	 * Returns the site item specified by its ID.
 	 *
 	 * @param string $siteId Site id to create the Site object
-	 * @return MShop_Locale_Item_Site_Interface Site object
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Locale_Item_Site_Interface Returns the site item of the given id
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

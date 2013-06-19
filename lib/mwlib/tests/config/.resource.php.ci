@@ -3,7 +3,6 @@
 /**
  * Test database connection for unit tests.
  *
- * @version $Id: resource.php-dist 16606 2012-10-19 12:50:23Z nsendetzky $
  */
 
 

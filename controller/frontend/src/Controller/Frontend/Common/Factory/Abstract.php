@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage Frontend
- * @version $Id: Abstract.php 866 2012-06-28 16:14:02Z fblasel $
  */
 
 

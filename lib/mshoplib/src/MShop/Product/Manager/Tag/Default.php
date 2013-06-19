@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Product
- * @version $Id: Default.php 14682 2012-01-04 11:30:14Z nsendetzky $
  */
 
 
@@ -236,8 +235,10 @@ class MShop_Product_Manager_Tag_Default
 	/**
 	 * Returns product tag item with given Id.
 	 *
-	 * @param Integer $id Id of product tag item
-	 * @return MShop_Product_Item_Tag_Interface Product tag item
+	 * @param integer $id Id of the product tag item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Product_Item_Tag_Interface Returns the product tag item of the given id
+	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{

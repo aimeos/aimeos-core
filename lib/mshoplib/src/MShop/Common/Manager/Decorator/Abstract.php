@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Common
- * @version $Id: Abstract.php 14246 2011-12-09 12:25:12Z nsendetzky $
  */
 
 
@@ -101,7 +100,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	/**
 	 * Returns the item specified by its ID
 	 *
-	 * @param integer $id Id of item
+	 * @param integer $id Unique ID of the item
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Common_Item_Interface Item object
 	 */

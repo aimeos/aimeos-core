@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: DefaultTest.php 14682 2012-01-04 11:30:14Z nsendetzky $
  */
 
 
@@ -76,7 +75,7 @@ class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends MW_Unittest
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.id', null );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.productid', null );
-		$expr[] = $search->compare( '==', 'order.base.product.attribute.type', '' );
+		$expr[] = $search->compare( '!=', 'order.base.product.attribute.type', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.code', 'width' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.value', '33' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.name', '33' );

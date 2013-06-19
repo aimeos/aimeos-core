@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Text
- * @version $Id: Factory.php 14790 2012-01-10 17:48:19Z spopp $
  */
 
 

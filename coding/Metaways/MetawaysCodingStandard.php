@@ -7,7 +7,6 @@
  * @category  PHP
  * @package   PHP_CodeSniffer
  * @author    Norbert Sendetzky <n.sendetzky@metaways.de>
- * @version   $Id: MetawaysCodingStandard.php 12798 2011-08-07 11:27:46Z nsendetzky $
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
