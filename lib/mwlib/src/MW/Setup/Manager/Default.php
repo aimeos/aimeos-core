@@ -80,24 +80,11 @@ class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
 		$filename = 'MW/Setup/DBSchema/' . $adapter . '.php';
 		$classname = 'MW_Setup_DBSchema_' . $adapter;
 
-		if( ( include_once $filename ) === false || class_exists( $classname ) === false ) {
+		if( class_exists( $classname ) === false ) {
 			throw new MW_Setup_Exception( sprintf( 'Database schema class "%1$s" not found', $classname ) );
 		}
 
 		return new $classname( $this->_conn, $dbname );
-	}
-
-
-	/**
-	 * Includes a PHP file.
-	 *
-	 * @param string $pathname Path to the file including the file name
-	 */
-	protected function _includeFile( $pathname )
-	{
-		if( ( include_once $pathname ) === false ) {
-			throw new MW_Setup_Exception( sprintf( 'Unable to include file "%1$s"', $pathname ) );
-		}
 	}
 
 
@@ -147,12 +134,10 @@ class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
 			{
 				if( $item->isDir() === true || substr( $item->getFilename(), -4 ) != '.php' ) { continue; }
 
-				$this->_includeFile( $item->getPathName() );
-
 				$taskname = substr( $item->getFilename(), 0, -4 );
 				$classname = 'MW_Setup_Task_' . $taskname;
 
-				if( class_exists( $classname, false ) === false ) {
+				if( class_exists( $classname ) === false ) {
 					throw new MW_Setup_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 				}
 
