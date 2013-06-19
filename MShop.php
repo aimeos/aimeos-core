@@ -88,7 +88,7 @@ class MShop
 	 */
 	public static function autoload( $className )
 	{
-	    $fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
+		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
 
 		if( !isset( self::$_includePaths ) ) {
 			self::$_includePaths = explode( PATH_SEPARATOR, get_include_path() );

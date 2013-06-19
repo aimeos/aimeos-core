@@ -19,27 +19,33 @@ class MW_Tree_Factory
 	/**
 	 * Creates and returns a tree manager.
 	 *
-	 * @param string $type Manager type name
+	 * @param string $name Manager type name
 	 * @param array $config Associative list of configuration strings for managing the tree
 	 * @param mixed $resource Reference to the resource which should be used for managing the tree
 	 * @return MW_Tree_Manager_Interface Tree manager object of the requested type
 	 * @throws MW_Tree_Exception if class isn't found
 	 */
-	static public function createManager( $type, array $config, $resource )
+	static public function createManager( $name, array $config, $resource )
 	{
-		$classname = 'MW_Tree_Manager_' . $type;
-		$filename = str_replace( '_', '/', $classname ) . '.php';
-
-		$paths = explode( PATH_SEPARATOR, get_include_path() );
-
-		foreach( $paths as $path )
+		if( ctype_alnum( $name ) === false )
 		{
-			$file = $path . DIRECTORY_SEPARATOR . $filename;
-			if( file_exists( $file ) === true  && ( include_once $file ) !== false && class_exists($classname) ) {
-				return new $classname( $config, $resource );
-			}
+			$classname = is_string( $name ) ? 'MW_Tree_Manager_' . $name : '<not a string>';
+			throw new MW_Tree_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		throw new MW_Tree_Exception( sprintf( 'Tree manager "%1$s" not found', $type ) );
+		$iface = 'MW_Tree_Manager_Interface';
+		$classname = 'MW_Tree_Manager_' . $name;
+
+		if( class_exists( $classname ) === false ) {
+			throw new MW_Tree_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+		}
+
+		$manager =  new $classname( $config, $resource );
+
+		if( !( $manager instanceof $iface ) ) {
+			throw new MW_Tree_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+		}
+
+		return $manager;
 	}
 }
