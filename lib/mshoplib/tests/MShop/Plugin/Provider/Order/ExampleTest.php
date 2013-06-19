@@ -5,7 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-require_once 'MShop/Plugin/Provider/Order/Example.php';
 
 /**
  * Test class for MShop_Plugin_Provider_Order_Example and MShop_Plugin_Provider_Abstract because abstract classes can not be tested directly
