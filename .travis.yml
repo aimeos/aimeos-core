@@ -3,6 +3,8 @@ php:
   - "5.4"
   - "5.3"
 before_script:
+  - wget http://getcomposer.org/composer.phar
+  - php composer.phar install
   - pear channel-discover pear.phing.info
   - pear install phing/phing
   - pear install pear/PHP_CodeSniffer
