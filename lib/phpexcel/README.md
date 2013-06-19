@@ -1,4 +1,0 @@
-PHPExcel
-========
-
-PHPExcel library
