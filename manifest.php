@@ -52,5 +52,8 @@ return array(
 		'client/html' => array(
 			'client/html/layouts',
 		),
+		'controller/extjs' => array(
+			'controller/extjs/src',
+		),
 	),
 );
