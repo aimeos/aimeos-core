@@ -46,6 +46,12 @@ class TestHelper
 	}
 
 
+	public static function getControllerPaths()
+	{
+		return self::_getMShop()->getCustomPaths( 'controller/extjs' );
+	}
+
+
 	private static function _createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
