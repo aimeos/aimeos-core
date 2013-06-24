@@ -247,7 +247,7 @@ ul.menu ul li {
 	background:url(../images/mainnavigationBackgroundActive.jpg) repeat-x;
 }
 
-#navigationMenue li .active a {
+#navigationMenue a.active {
 	background:url(../images/mainnavigationBackgroundActive.jpg) repeat-x;
 }
 

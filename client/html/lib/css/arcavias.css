@@ -289,12 +289,18 @@
 	margin: 0;
 }
 
+
 .catalog-filter-tree .level-2 li {
 	padding-left: 10px;
 }
 
+
 .catalog-filter-tree .level-2 li a {
 	color: #689DB9;
+}
+
+.catalog-filter-tree .level-2 li.active {
+	background: url("images/listIconClose.png") no-repeat scroll 0px 4px transparent;
 }
 
 .catalog-filter-tree .level-3 li {
