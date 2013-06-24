@@ -300,6 +300,10 @@
 	background: url("images/listIconClose.png") no-repeat scroll 0px 4px transparent;
 }
 
+.catalog-filter-tree .level-2 li.withchild.active {
+	background: url("images/listIconOpen.png") no-repeat scroll 0px 4px transparent;
+}
+
 .catalog-filter-tree .level-2 li a {
 	color: #689DB9;
 }
