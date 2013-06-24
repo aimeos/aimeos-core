@@ -12,5 +12,15 @@
 	},
 	"require": {
 		"codeplex/phpexcel": "~1.7.6"
+	},
+	"autoload": {
+		"classmap": [
+			"lib/mshoplib/src/",
+			"lib/mwlib/src/",
+			"client/html/src",
+			"controller/frontend/src",
+			"controller/extjs/src",
+			"vendor/codeplex/phpexcel"
+		]
 	}
 }

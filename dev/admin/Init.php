@@ -8,18 +8,25 @@
 
 class Init
 {
+	private $_mshop;
 	private $_context;
 
 
-	public function __construct( array $conf )
+	public function __construct( MShop $mshop, $confPath )
 	{
-		$this->_context = $this->_createContext( $conf );
+		$configPaths = $mshop->getConfigPaths( 'mysql' );
+		$configPaths[] = $confPath;
+
+		$this->_context = $this->_createContext( $configPaths );
+		$this->_mshop = $mshop;
 	}
 
 
 	public function getJsonRpcController()
 	{
-		return Controller_ExtJS_JsonRpc::getInstance( $this->_context );
+		$cntlPaths = $this->_mshop->getCustomPaths( 'controller/extjs' );
+
+		return new Controller_ExtJS_JsonRpc( $this->_context, $cntlPaths );
 	}
 
 
@@ -41,6 +48,41 @@ class Init
 		}
 
 		return json_encode( $item->toArray() );
+	}
+
+
+	public function getHtml( $absdir, $relpath )
+	{
+		while ( basename( $absdir ) === basename( $relpath ) ) {
+			$absdir = dirname( $absdir );
+			$relpath = dirname( $relpath );
+		}
+
+		$relpath = rtrim( $relpath, '/' );
+		$abslen = strlen( $absdir );
+		$ds = DIRECTORY_SEPARATOR;
+		$html = '';
+
+		foreach( $this->_mshop->getCustomPaths( 'client/extjs' ) as $base => $paths )
+		{
+			$relJsbPath = substr( $base, $abslen );
+
+			foreach( $paths as $path )
+			{
+				$jsbPath = $relpath . $relJsbPath . $ds . $path;
+				$jsbAbsPath = $base . $ds . $path;
+
+				if( !is_file( $jsbAbsPath ) ) {
+					throw new Exception( sprintf( 'JSB2 file "%1$s" not found', $jsbAbsPath ) );
+				}
+
+				$jsb2 = new MW_Jsb2_Default( $jsbAbsPath, dirname( $jsbPath ) );
+				$html .= $jsb2->getHTML( 'css' );
+				$html .= $jsb2->getHTML( 'js' );
+			}
+		}
+
+		return $html;
 	}
 
 
