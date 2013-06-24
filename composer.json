@@ -11,6 +11,14 @@
 		"wiki": "https://docs.arcavias.com"
 	},
 	"require": {
+		"php": ">=5.2.0",
+		"ext-curl": "*",
+		"ext-dom": "*",
+		"ext-json": "*",
+		"ext-pcre": "*",
+		"ext-PDO": "*",
+		"ext-pdo_mysql": "*",
+		"ext-zip": "*",
 		"codeplex/phpexcel": "~1.7.6"
 	},
 	"autoload": {
@@ -19,8 +27,7 @@
 			"lib/mwlib/src/",
 			"client/html/src",
 			"controller/frontend/src",
-			"controller/extjs/src",
-			"vendor/codeplex/phpexcel"
+			"controller/extjs/src"
 		]
 	}
 }
