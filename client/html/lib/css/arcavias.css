@@ -66,8 +66,6 @@
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border: solid 1px #689DB9;
-	padding: 10px;
-	padding-top: 0;
 	margin: 10px 0px;
 }
 
@@ -76,13 +74,9 @@
 .common-summary .item {
 	display: inline-block;
 	vertical-align: top;
-	max-width: 458px;
-	min-width: 238px;
-	width: 50%;
-}
-
-.common-summary .item h4 {
-	padding: 5px 10px;
+	min-width: 232px;
+	width: 48%;
+	margin: 0% 1%;
 }
 
 .common-summary .item li {
@@ -91,7 +85,7 @@
 }
 
 .common-summary .item .content {
-	margin: 10px 10px 0px 10px;
+	margin: 10px 10px 10px 10px;
 }
 
 .common-summary .item .name {
@@ -136,9 +130,18 @@
 	display: none;
 }
 
-.common-summary-service h4 {
-	padding: 10px;
+.common-summary-service .item .item {
 	margin: 0px;
+}
+
+.common-summary-service .item h4 {
+	margin: 10px;
+	padding: 0px;
+	color: #000000;
+}
+
+.common-summary-detail a.modify {
+	margin: 10px 24px 0 0;	
 }
 
 .common-summary-detail h2 {
@@ -147,7 +150,7 @@
 }
 
 .common-summary-detail .basket {
-	margin: 0px;
+	margin: 0% 1.5%;
 }
 
 .common-summary-detail table {
@@ -764,7 +767,6 @@
 }
 
 /* Basket */
- .basket-standard,
 .checkout-standard,
 .checkout-confirm,
 .account-history {
@@ -822,6 +824,7 @@
 
 .basket-mini-main .value {
 	font-weight: bold;
+	white-space: nowrap;
 }
 
 .basket-standard-main {
@@ -1132,9 +1135,8 @@
 }
 
 /* Checkout summary option terms */
-.checkout-standard-summary-option {
-	padding: 10px;
-	padding-top: 0;
+.checkout-standard-summary-option-terms {
+	margin: 0px 10px;
 }
 
 .checkout-standard-summary-option h2 {

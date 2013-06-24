@@ -273,7 +273,7 @@ class MShop_Catalog_Item_Default
 	 */
 	public function hasChildren()
 	{
-		return ( count( $this->_children ) > 0 ? true : false );
+		return $this->_node->hasChildren();
 	}
 
 	/**
