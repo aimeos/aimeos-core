@@ -293,11 +293,11 @@
 }
 
 .catalog-filter-tree .level-2 li.nochild {
-	background: url("images/listIconClose.png") no-repeat scroll 0px 4px transparent;
+	
 }
 
 .catalog-filter-tree .level-2 li.withchild {
-	background: url("images/listIconOpen.png") no-repeat scroll 0px 4px transparent;
+	background: url("images/listIconClose.png") no-repeat scroll 0px 4px transparent;
 }
 
 .catalog-filter-tree .level-2 li a {

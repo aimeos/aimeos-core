@@ -23,7 +23,7 @@ class MW_Tree_Node_DBNestedSet extends MW_Tree_Node_Default
 	 */
 	public function hasChildren()
 	{
-		if( $this->right > $this->left + 1 ) {
+		if( $this->_values['right'] > $this->_values['left'] + 1 ) {
 			return true;
 		}
 
