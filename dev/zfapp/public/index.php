@@ -23,18 +23,15 @@ setlocale( LC_CTYPE, 'en_US.UTF8' );
 
 try
 {
-	require_once ZFAPP_ROOT . '/../../MShop.php';
-	spl_autoload_register( 'MShop::autoload' );
-	$mshop = new MShop();
-
-	$includePaths = $mshop->getIncludePaths();
-	$includePaths[] = ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'library';
-	$includePaths[] = dirname( ZFAPP_ROOT ) . DIRECTORY_SEPARATOR . 'zendlib';
-	$includePaths[] = get_include_path();
+	$includePaths = array(
+		ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'library',
+		dirname( ZFAPP_ROOT ) . DIRECTORY_SEPARATOR . 'zendlib',
+		get_include_path(),
+	);
 	set_include_path( implode( PATH_SEPARATOR, $includePaths ) );
 
-	$classFileIncCache = ZFAPP_ROOT . '/data/cache/pluginLoaderCache.php';
-	include_once $classFileIncCache;
+	require_once ZFAPP_ROOT . '/../../MShop.php';
+	include_once ZFAPP_ROOT . '/data/cache/pluginLoaderCache.php';
 
 	$application = new Application_Application(
 		APPLICATION_ENV,

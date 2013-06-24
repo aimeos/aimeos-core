@@ -11,58 +11,18 @@ try
 	date_default_timezone_set('UTC');
 
 	require_once dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'MShop.php';
-
-	spl_autoload_register( 'MShop::autoload' );
-
 	$mshop = new MShop();
 
-	$includePaths = $mshop->getIncludePaths();
-	$includePaths[] = get_include_path();
-	set_include_path( implode( PATH_SEPARATOR, $includePaths ) );
-
-	$absdir = realpath($_SERVER['SCRIPT_FILENAME']);
-	$relpath = $_SERVER['SCRIPT_NAME'];
-
-	while ( basename( $absdir ) === basename( $relpath ) ) {
-		$absdir = dirname( $absdir );
-		$relpath = dirname( $relpath );
-	}
-
-	$relpath = rtrim( $relpath, '/' );
-	$abslen = strlen( $absdir );
-	$ds = DIRECTORY_SEPARATOR;
-	$html = '';
-
-	foreach( $mshop->getCustomPaths( 'client/extjs' ) as $base => $paths )
-	{
-		$relJsbPath = substr( $base, $abslen );
-
-		foreach( $paths as $path )
-		{
-			$jsbPath = $relpath . $relJsbPath . $ds . $path;
-			$jsbAbsPath = $base . $ds . $path;
-
-			if( !is_file( $jsbAbsPath ) ) {
-				throw new Exception( sprintf( 'JSB2 file "%1$s" not found', $jsbAbsPath ) );
-			}
-
-			$jsb2 = new MW_Jsb2_Default( $jsbAbsPath, dirname( $jsbPath ) );
-			$html .= $jsb2->getHTML( 'css' );
-			$html .= $jsb2->getHTML( 'js' );
-		}
-	}
-
-	$configPaths = $mshop->getConfigPaths( 'mysql' );
-	$configPaths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
-
 	require_once 'Init.php';
-	$init = new Init( $configPaths );
+	$init = new Init( $mshop, dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config' );
+
+	$html = $init->getHtml( realpath($_SERVER['SCRIPT_FILENAME']), $_SERVER['SCRIPT_NAME'] );
+	$site = $init->getJsonSite( ( isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : 'unittest' ) );
 	$jsonrpc = $init->getJsonRpcController();
 
 	$itemSchema = $jsonrpc->getJsonItemSchemas();
 	$searchSchema = $jsonrpc->getJsonSearchSchemas();
 	$smd = $jsonrpc->getJsonSmd( 'jsonrpc.php' );
-	$site = $init->getJsonSite( ( isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : 'unittest' ) );
 }
 catch( Exception $e )
 {
