@@ -29,7 +29,7 @@
 			"Client_Html": "client/html/src",
 			"Controller_Frontend": "controller/frontend/src",
 			"Controller_ExtJS": "controller/extjs/src",
-			"": "lib/mwlib/lib"
+			"": ["lib/mwlib/lib", "."]
 		},
 		"classmap": [
 			"lib/mshoplib/src",
