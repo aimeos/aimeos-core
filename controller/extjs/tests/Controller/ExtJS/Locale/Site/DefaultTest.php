@@ -178,6 +178,7 @@ class Controller_ExtJS_Locale_Site_DefaultTest extends MW_Unittest_Testcase
 			'items' => null,
 			'oldparentid' => null,
 			'newparentid' => null,
+			'refid' => null
 		);
 
 		$this->setExpectedException( 'MShop_Locale_Exception' );
