@@ -5,8 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-require_once 'MW/Setup/Task/Abstract.php';
-
 
 /**
  * Changes type of supplier_address_id from BIGINT to INT.

@@ -76,11 +76,9 @@ class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
 			throw new MW_Setup_Exception( sprintf( 'Invalid database adapter "%1$s"', $adapter ) );
 		}
 
-		$adapter = ucwords( strtolower( $adapter ) );
-		$filename = 'MW/Setup/DBSchema/' . $adapter . '.php';
-		$classname = 'MW_Setup_DBSchema_' . $adapter;
+		$classname = 'MW_Setup_DBSchema_' . ucwords( strtolower( $adapter ) );
 
-		if( ( include_once $filename ) === false || class_exists( $classname ) === false ) {
+		if( class_exists( $classname ) === false ) {
 			throw new MW_Setup_Exception( sprintf( 'Database schema class "%1$s" not found', $classname ) );
 		}
 
@@ -152,7 +150,7 @@ class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
 				$taskname = substr( $item->getFilename(), 0, -4 );
 				$classname = 'MW_Setup_Task_' . $taskname;
 
-				if( class_exists( $classname, false ) === false ) {
+				if( class_exists( $classname ) === false ) {
 					throw new MW_Setup_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 				}
 

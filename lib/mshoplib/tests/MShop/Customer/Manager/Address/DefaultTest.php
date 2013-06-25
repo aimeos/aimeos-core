@@ -5,8 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-require_once 'MShop/Common/Manager/Address/Default.php';
-
 
 /**
  * Test class for MShop_Common_Manager_Address_Default

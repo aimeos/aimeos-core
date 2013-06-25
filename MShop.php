@@ -11,11 +11,13 @@
  */
 class MShop
 {
-	private static $_includePaths;
 	private $_manifests = array();
 	private $_extensions = array();
 	private $_extensionsDone = array();
 	private $_dependencies = array();
+	private static $_includeClassMap = array();
+	private static $_includePaths = array();
+	private static $_autoloader = false;
 
 
 	/**
@@ -37,15 +39,13 @@ class MShop
 			$extdirs[] = $basedir . DIRECTORY_SEPARATOR . 'ext';
 		}
 
-		$incpath = get_include_path();
-		$mwlibpath = $basedir . $ds . 'lib' . $ds . 'mwlib' . $ds .'src';
+		$this->_manifests[$basedir] = $this->_getManifestFile( $basedir );
 
-		if( set_include_path( $mwlibpath . PATH_SEPARATOR . $incpath ) === false ) {
-			throw new Exception( 'Unable to set new include path' );
-		}
+		self::$_includeClassMap = $this->_getIncludeClassMap();
+		self::$_includePaths = $this->getIncludePaths();
+		$this->_registerAutoloader();
 
 		$criteria = new MW_Common_Criteria_PHP();
-		$this->_manifests[$basedir] = $this->_getManifestFile( $basedir );
 
 		foreach ( $this->_getManifests( $extdirs ) as $location => $manifest )
 		{
@@ -71,12 +71,7 @@ class MShop
 		}
 
 		$this->_addManifests( $this->_dependencies );
-
-		if( set_include_path( $incpath ) === false ) {
-			throw new Exception( 'Unable to set old include path' );
-		}
-
-		self::$_includePaths = null;
+		self::$_includePaths = $this->getIncludePaths();
 	}
 
 
@@ -88,13 +83,24 @@ class MShop
 	 */
 	public static function autoload( $className )
 	{
-	    $fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
+		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
 
-		if( !isset( self::$_includePaths ) ) {
-			self::$_includePaths = explode( PATH_SEPARATOR, get_include_path() );
+		if( isset( self::$_includeClassMap[$className] )
+			&& ( include_once self::$_includeClassMap[$className] ) !== false
+		) {
+			return true;
 		}
 
 		foreach( self::$_includePaths as $path )
+		{
+			$file = $path . DIRECTORY_SEPARATOR . $fileName;
+
+			if( file_exists( $file ) === true && ( include_once $file ) !== false ) {
+				return true;
+			}
+		}
+
+		foreach( explode( PATH_SEPARATOR, get_include_path() ) as $path )
 		{
 			$file = $path . DIRECTORY_SEPARATOR . $fileName;
 
@@ -137,19 +143,19 @@ class MShop
 	 */
 	public function getIncludePaths()
 	{
-		$incpaths = array();
+		$includes = array();
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
 			if ( isset( $manifest['include'] ) )
 			{
 				foreach ( $manifest['include'] as $paths ) {
-					$incpaths[] = $path . DIRECTORY_SEPARATOR . $paths;
+					$includes[] = $path . DIRECTORY_SEPARATOR . $paths;
 				}
 			}
 		}
 
-		return $incpaths;
+		return $includes;
 	}
 
 
@@ -230,6 +236,24 @@ class MShop
 
 
 	/**
+	 * Returns the content of the class map file if it exists.
+	 *
+	 * @return array Associative list of class names as keys and file names as values
+	 */
+	protected function _getIncludeClassMap()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$file = dirname( __FILE__ ) . $ds . 'vendor' . $ds . 'composer' . $ds . 'autoload_classmap.php';
+
+		if( file_exists( $file ) && ( $classmap = ( include $file ) ) !== false && is_array( $classmap ) ) {
+			return $classmap;
+		}
+
+		return array();
+	}
+
+
+	/**
 	 * Returns the configurations of the manifest files in the given directories.
 	 *
 	 * @param array $directories List of directories where the manifest files are stored
@@ -279,6 +303,19 @@ class MShop
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Registers the MShop autoloader.
+	 */
+	protected function _registerAutoloader()
+	{
+		if( self::$_autoloader === false )
+		{
+			spl_autoload_register( array( $this, 'autoload' ), true, true );
+			self::$_autoloader = true;
+		}
 	}
 
 

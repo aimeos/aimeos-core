@@ -16,6 +16,14 @@ return array(
 	),
 	'conflicts' => array(
 	),
+	'include' => array(
+		'lib/mshoplib/src',
+		'lib/mwlib/src',
+		'client/html/src',
+		'controller/frontend/src',
+		'controller/extjs/src',
+		'vendor/codeplex/phpexcel',
+	),
 	'config' => array(
 		'mysql' => array(
 			'lib/mshoplib/config/common',
@@ -24,15 +32,6 @@ return array(
 			'controller/extjs/config/controller',
 			'config',
 		),
-	),
-	'include' => array(
-		'lib/mshoplib/src',
-		'lib/mwlib/src',
-		'client/html/src',
-		'controller/frontend/src',
-		'controller/extjs/src',
-		'lib/phpexcel',
-		'lib/mwlib/lib'
 	),
 	'i18n' => array(
 		'client/html' => 'client/html/i18n',
@@ -52,6 +51,9 @@ return array(
 		),
 		'client/html' => array(
 			'client/html/layouts',
+		),
+		'controller/extjs' => array(
+			'controller/extjs/src',
 		),
 	),
 );

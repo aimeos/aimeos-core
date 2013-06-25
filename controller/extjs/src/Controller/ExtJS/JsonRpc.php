@@ -18,6 +18,7 @@ class Controller_ExtJS_JsonRpc
 {
 	private $_classprefix = 'Controller_ExtJS';
 	private $_controllers = array();
+	private $_cntlPaths;
 	private $_context;
 
 
@@ -27,36 +28,10 @@ class Controller_ExtJS_JsonRpc
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Interface $context, array $cntlPaths )
 	{
+		$this->_cntlPaths = $cntlPaths;
 		$this->_context = $context;
-	}
-
-
-	/**
-	 * Returns a new instance of the frontend controller.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object
-	 * @param string|null $name Name of the frontend controller (null for default name)
-	 * @throws Controller_ExtJS_Exception If classname is invalid
-	 */
-	public static function getInstance( MShop_Context_Item_Interface $context, $name = null )
-	{
-		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/frontend', 'JsonRpc' );
-		}
-
-		$classname = is_string( $name ) ? 'Controller_ExtJS_' . $name : '<not a string>';
-
-		if( ctype_alnum( $name ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
-		}
-
-		if( class_exists( $classname ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
-		}
-
-		return new $classname( $context );
 	}
 
 
@@ -316,12 +291,15 @@ class Controller_ExtJS_JsonRpc
 		{
 			$subFolder = str_replace( '_', DIRECTORY_SEPARATOR, $this->_getClassPrefix() );
 
-			foreach( explode( PATH_SEPARATOR, get_include_path() ) as $incdir )
+			foreach( $this->_cntlPaths as $path => $list )
 			{
-				$incdir .= DIRECTORY_SEPARATOR . $subFolder;
+				foreach( $list as $relpath )
+				{
+					$path .= DIRECTORY_SEPARATOR . $relpath . DIRECTORY_SEPARATOR . $subFolder;
 
-				if( is_dir( $incdir ) ) {
-					$this->_addControllers( new DirectoryIterator( $incdir ) );
+					if( is_dir( $path ) ) {
+						$this->_addControllers( new DirectoryIterator( $path ) );
+					}
 				}
 			}
 		}
