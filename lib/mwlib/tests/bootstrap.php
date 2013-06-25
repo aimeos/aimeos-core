@@ -28,8 +28,9 @@ setlocale(LC_TIME, 'POSIX');
  */
 $testdir =  dirname( __FILE__ );
 $srcdir =  dirname( $testdir ) . DIRECTORY_SEPARATOR . 'src';
+$libdir =  dirname( $testdir ) . DIRECTORY_SEPARATOR . 'lib';
 
-$path = array( $testdir, $srcdir, get_include_path() );
+$path = array( $testdir, $srcdir, $libdir, get_include_path() );
 set_include_path( implode( PATH_SEPARATOR, $path ) );
 
 
