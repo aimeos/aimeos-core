@@ -39,7 +39,6 @@
 			"controller/frontend/src",
 			"controller/extjs/src",
 			"MShop.php"
-		],
-		"files": ["MShop.php"]
+		]
 	}
 }
