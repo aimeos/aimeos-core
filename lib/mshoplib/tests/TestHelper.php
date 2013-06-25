@@ -14,11 +14,7 @@ class TestHelper
 
 	public static function bootstrap()
 	{
-		$mshop = self::_getMShop();
-
-		$includepaths = $mshop->getIncludePaths();
-		$includepaths[] = get_include_path();
-		set_include_path( implode( PATH_SEPARATOR, $includepaths ) );
+		self::_getMShop();
 	}
 
 
@@ -37,7 +33,6 @@ class TestHelper
 		if( !isset( self::$_mshop ) )
 		{
 			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'MShop.php';
-			spl_autoload_register( 'MShop::autoload' );
 
 			self::$_mshop = new MShop( array(), false );
 		}
