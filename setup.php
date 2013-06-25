@@ -89,15 +89,13 @@ try
 	require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'MShop.php';
 
 	spl_autoload_register( 'setup_autoload' );
-	spl_autoload_register( 'MShop::autoload' );
 
 	$mshop = new MShop( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
 
 
 	$taskPaths = $mshop->getSetupPaths( $site );
 
-	$includePaths = $mshop->getIncludePaths();
-	$includePaths = array_merge( $includePaths, $taskPaths );
+	$includePaths = $taskPaths;
 	$includePaths[] = get_include_path();
 
 	if( set_include_path( implode( PATH_SEPARATOR, $includePaths ) ) === false ) {
