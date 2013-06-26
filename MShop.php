@@ -15,7 +15,6 @@ class MShop
 	private $_extensions = array();
 	private $_extensionsDone = array();
 	private $_dependencies = array();
-	private static $_includeClassMap = array();
 	private static $_includePaths = array();
 	private static $_autoloader = false;
 
@@ -29,6 +28,8 @@ class MShop
 	 */
 	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
+		require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+
 		$ds = DIRECTORY_SEPARATOR;
 
 		if( $basedir === null ) {
@@ -41,11 +42,8 @@ class MShop
 
 		$this->_manifests[$basedir] = $this->_getManifestFile( $basedir );
 
-		self::$_includeClassMap = $this->_getIncludeClassMap();
 		self::$_includePaths = $this->getIncludePaths();
 		$this->_registerAutoloader();
-
-		$criteria = new MW_Common_Criteria_PHP();
 
 		foreach ( $this->_getManifests( $extdirs ) as $location => $manifest )
 		{
@@ -63,10 +61,8 @@ class MShop
 			$manifest['location'] = $location;
 			$this->_extensions[$manifest['name']] = $manifest;
 
-			foreach ( $manifest['depends'] as $rule )
-			{
-				$expression = $criteria->toConditions( $rule );
-				$this->_dependencies[$manifest['name']][$expression->getName()] = $expression;
+			foreach ( $manifest['depends'] as $name ) {
+				$this->_dependencies[$manifest['name']][$name] = $name;
 			}
 		}
 
@@ -84,12 +80,6 @@ class MShop
 	public static function autoload( $className )
 	{
 		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
-
-		if( isset( self::$_includeClassMap[$className] )
-			&& ( include_once self::$_includeClassMap[$className] ) !== false
-		) {
-			return true;
-		}
 
 		foreach( self::$_includePaths as $path )
 		{
@@ -236,24 +226,6 @@ class MShop
 
 
 	/**
-	 * Returns the content of the class map file if it exists.
-	 *
-	 * @return array Associative list of class names as keys and file names as values
-	 */
-	protected function _getIncludeClassMap()
-	{
-		$ds = DIRECTORY_SEPARATOR;
-		$file = dirname( __FILE__ ) . $ds . 'vendor' . $ds . 'composer' . $ds . 'autoload_classmap.php';
-
-		if( file_exists( $file ) && ( $classmap = ( include $file ) ) !== false && is_array( $classmap ) ) {
-			return $classmap;
-		}
-
-		return array();
-	}
-
-
-	/**
 	 * Returns the configurations of the manifest files in the given directories.
 	 *
 	 * @param array $directories List of directories where the manifest files are stored
@@ -313,7 +285,7 @@ class MShop
 	{
 		if( self::$_autoloader === false )
 		{
-			spl_autoload_register( array( $this, 'autoload' ), true, true );
+			spl_autoload_register( array( $this, 'autoload' ), true, false );
 			self::$_autoloader = true;
 		}
 	}
@@ -328,7 +300,7 @@ class MShop
 	 */
 	private function _addManifests( array $deps, array $stack=array( ) )
 	{
-		foreach ( $deps as $extName => $expressions )
+		foreach ( $deps as $extName => $name )
 		{
 			if ( in_array( $extName, $this->_extensionsDone ) ) {
 				continue;

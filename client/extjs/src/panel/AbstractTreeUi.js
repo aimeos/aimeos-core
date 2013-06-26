@@ -87,8 +87,9 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 		}).start();
 	},
 
-	initLoader : function(noroot)
+	initLoader : function()
 	{
+		var domain = this.domain;
 		this.loader = new Ext.tree.TreeLoader( {
 
 				nodeParameter : 'items',
@@ -105,9 +106,9 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 					if (node.id === 'root') {
 						// we create the node to have it in the store
 						var newNode = this.createNode(response.responseText.items);
-
-						node.setId(response.responseText.items[this.doman + '.id']);
-						node.setText(response.responseText.items[this.domain + '.label']);
+		
+						node.setId(response.responseText.items[domain + '.id']);
+						node.setText(response.responseText.items[domain + '.label']);
 						node.getUI().addClass(newNode.attributes.cls);
 						node.getOwnerTree().enable();
 						node.getOwnerTree().actionAdd.setDisabled(node.id !== 'root');

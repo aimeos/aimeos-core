@@ -744,6 +744,7 @@ class MShop_Catalog_Manager_Default
 				'move-right' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/move-right' ) ),
 				'search' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/search' ) ),
 				'update' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/update' ) ),
+				'update-parentid' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/update-parentid' ) ),
 				'newid' => $config->get( 'mshop/catalog/manager/default/item/newid' ),
 			);
 
