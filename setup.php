@@ -88,7 +88,7 @@ try
 
 	spl_autoload_register( 'setup_autoload' );
 
-	require dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+	require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 	$mshop = new MShop( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
 
