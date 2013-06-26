@@ -5,8 +5,6 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-require_once 'MW/Setup/Task/Abstract.php';
-
 
 /**
  * Renames the foreign key constraints for supplier tables to match style guidlines.

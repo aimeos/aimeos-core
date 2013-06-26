@@ -101,17 +101,15 @@ document.createElement("article");
 $(document).ready( function() {
 
 	/*
-	 * Catalog: CSS3 support for IE8
+	 * Catalog clients
 	 */
 
+	/* CSS3 "background-size: contain" support for IE8 */
 	$(".catalog-list-items .media-item").css("backgroundSize", "contain");
 	$(".catalog-detail-image .thumbs a").css("backgroundSize", "contain");
 
 
-	/*
-	 * Catalog: Autocompleter
-	 */
-
+	/* Autocompleter for quick search */
 	var arcaviasInputComplete = $( ".catalog-filter-search .value" );
 	arcaviasInputComplete.autocomplete( {
 		minLength: 3,
@@ -141,10 +139,7 @@ $(document).ready( function() {
 	} );
 
 
-	/*
-	 * Catalog list: lazy image loading
-	 */
-
+	/* Lazy product image loading in list view */
 	var arcaviasLazyLoader = (function() { 
 		var elements = $(".catalog-list-items .lazy-image");
 		for( var i = 0; i < elements.length; i++ ) {
@@ -161,10 +156,7 @@ $(document).ready( function() {
 	$(window).bind("scroll", arcaviasLazyLoader);
 	
 
-	/*
-	 * Catalog detail: image slider
-	 */
-
+	/* Slider for main product images (big ones) */
 	$(".catalog-detail-image .carousel").carouFredSel({
 		responsive: false,
 		circular: false,
@@ -182,6 +174,7 @@ $(document).ready( function() {
 		mousewheel: true
 	});
 
+	/* Slider for thumbnail gallery (small ones) */
 	$(".catalog-detail-image .thumbs").carouFredSel({
 		responsive: false,
 		circular: false,
@@ -199,6 +192,7 @@ $(document).ready( function() {
 		mousewheel: true
 	});
 
+	/* Update big image if small one in thumbnail gallery was selected */
 	$(".catalog-detail-image .thumbs a").mouseenter(function() {
 		$(".catalog-detail-image .carousel").trigger("slideTo", "#" + this.href.split("#").pop() );
 		$(".catalog-detail-image .thumbs a").removeClass("selected");
@@ -211,25 +205,30 @@ $(document).ready( function() {
 	 * Checkout clients
 	 */
 
+	/* Initial state: Hide form for new address if not selected */
 	$(".checkout-standard-address .item-new[data-option!='null'] .form-list").hide();
 
+	/* Initial state: Hide form fields if not delivery/payment option is not selected */
 	$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".form-list" ).hide();
 	$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".item-service" ).has( "input:checked" ).find( ".form-list" ).show();
 
-	$(".checkout-standard-address-billing .header input").bind( "click",
+	/* Address form slide up/down when selected */
+	$( ".checkout-standard-address-billing .header input" ).bind( "click",
 		function( event ) {
 			$( ".checkout-standard-address-billing .form-list" ).slideUp( 400 );
 			$( ".checkout-standard-address-billing .item-address" ).has( this ).find( ".form-list" ).slideDown( 400 );
 		}
 	);
 
-	$(".checkout-standard-address-delivery .header input").bind( "click",
+	/* Address form slide up/down when selected */
+	$( ".checkout-standard-address-delivery .header input" ).bind( "click",
 		function( event ) {
 			$( ".checkout-standard-address-delivery .form-list" ).slideUp( 400 );
 			$( ".checkout-standard-address-delivery .item-address" ).has( this ).find( ".form-list" ).slideDown( 400 );
 		}
 	);
 
+	/* Delivery/payment form slide up/down when selected */
 	$( ".checkout-standard-delivery,.checkout-standard-payment .option" ).bind( "click",
 		function( event ) {
 			$( ".checkout-standard .form-list" ).slideUp( 400 );
@@ -237,9 +236,29 @@ $(document).ready( function() {
 		}
 	);
 	
-	$( '.checkout-standard-order-payment > form' ).first().submit();
-	$( '.checkout-standard-order-payment' ).first().each( function( index, element ) {
-		var url = $(element).data( 'url' );
+	/* Check for mandatory fields in all forms */
+	$( ".checkout-standard form" ).on( "submit", function( event ) {
+			var retval = true;
+			$( ".checkout-standard .item-new,.item-service" )
+				.has( ".header,label" ).has( "input:checked" ) // combining in one has() doesn't work
+				.find( ".form-list .mandatory" )
+				.each( function() {
+					var value = $(this).find( "input,select" ).val();
+					if( value == null || value.trim() === "" ) {
+						$(this).addClass( "error" );
+						retval = false;
+					} else {
+						$(this).removeClass( "error" );
+					}
+				} );
+			return retval;
+		}
+	);
+	
+	/* Redirect to payment provider / confirm page when order has been created successfully */
+	$( ".checkout-standard-order-payment > form" ).first().submit();
+	$( ".checkout-standard-order-payment" ).first().each( function( index, element ) {
+		var url = $(element).data( "url" );
 		if( url ) { window.location = url; }
 	});
 

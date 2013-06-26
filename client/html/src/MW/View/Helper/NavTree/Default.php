@@ -67,11 +67,13 @@ class MW_View_Helper_NavTree_Default
 
 		$output = '<li class="catid-' . $enc->attr( $id . $class ) . '"><a href="' . $url . '">' . $enc->html( $item->getName() ) . '</a>';
 
-		if( $item->hasChildren() )
+		$children = $item->getChildren();
+
+		if( !empty( $children ) )
 		{
 			$output .= '<ul class="level-' . $enc->attr( $item->getNode()->level + 1 ) . '">';
 
-			foreach( $item->getChildren() as $child ) {
+			foreach( $children as $child ) {
 				$output .= $this->transform( $child, $path );
 			}
 

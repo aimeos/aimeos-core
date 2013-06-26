@@ -163,7 +163,7 @@ class Controller_ExtJS_Locale_Site_Default
 	 */
 	public function moveItems( stdClass $params )
 	{
-		$this->_checkParams( $params, array( 'items', 'oldparentid', 'newparentid' ) );
+		$this->_checkParams( $params, array( 'items', 'oldparentid', 'newparentid', 'refid' ) );
 
 		$manager = $this->_getManager();
 

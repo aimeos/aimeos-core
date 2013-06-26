@@ -28,7 +28,8 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 
 	public static function setUpBeforeClass()
 	{
-		self::$_object = Controller_ExtJS_JsonRpc::getInstance( TestHelper::getContext() );
+		$cntlPaths = TestHelper::getControllerPaths();
+		self::$_object = new Controller_ExtJS_JsonRpc( TestHelper::getContext(), $cntlPaths );
 	}
 
 
@@ -59,27 +60,6 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-	}
-
-
-	public function testGetInstance()
-	{
-		$object = Controller_ExtJS_JsonRpc::getInstance( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_JsonRpc', $object );
-	}
-
-
-	public function testGetInstanceInvalidName()
-	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_JsonRpc::getInstance( TestHelper::getContext(), '$$$' );
-	}
-
-
-	public function testGetInstanceUnknown()
-	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_JsonRpc::getInstance( TestHelper::getContext(), 'Test' );
 	}
 
 
@@ -237,7 +217,7 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 		$ds = DIRECTORY_SEPARATOR;
 		$result = self::$_object->process( array(), $this->_testdir . 'object.txt' );
 		$object = json_decode( $result );
-		
+
 		$this->assertObjectHasAttribute( 'jsonrpc', $object );
 		$this->assertEquals( '2.0', $object->{'jsonrpc'} );
 

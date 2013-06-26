@@ -14,11 +14,7 @@ class TestHelper
 
 	public static function bootstrap()
 	{
-		$arcavias = self::_getArcavias();
-
-		$includepaths = $arcavias->getIncludePaths();
-		$includepaths[] = get_include_path();
-		set_include_path( implode( PATH_SEPARATOR, $includepaths ) );
+		self::_getArcavias();
 	}
 
 
@@ -37,12 +33,17 @@ class TestHelper
 		if( !isset( self::$_arcavias ) )
 		{
 			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
-			spl_autoload_register( 'MShop::autoload' );
 
 			self::$_arcavias = new MShop( array(), false );
 		}
 
 		return self::$_arcavias;
+	}
+
+
+	public static function getControllerPaths()
+	{
+		return self::_getArcavias()->getCustomPaths( 'controller/extjs' );
 	}
 
 

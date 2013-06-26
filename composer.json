@@ -1,0 +1,44 @@
+{
+	"name": "arcavias/arcavias-core",
+	"description": "e-commerce framework for web shops, portals and market places",
+	"homepage": "http://www.arcavias.com/en",
+	"license": "LGPL-3.0",
+	"keywords": ["e-commerce", "shop", "portal", "market place"],
+	"support": {
+		"source": "https://github.com/Arcavias/arcavias-core",
+		"issues": "https://bugs.arcavias.com",
+		"forum": "https://forum.arcavias.com",
+		"wiki": "https://docs.arcavias.com"
+	},
+	"require": {
+		"php": ">=5.3.0",
+		"ext-curl": "*",
+		"ext-dom": "*",
+		"ext-json": "*",
+		"ext-pcre": "*",
+		"ext-PDO": "*",
+		"ext-pdo_mysql": "*",
+		"ext-zip": "*",
+		"codeplex/phpexcel": "~1.7.6"
+	},
+	"autoload": {
+		"psr-0": {
+			"MShop": "lib/mshoplib/src",
+			"MAdmin": "lib/mshoplib/src",
+			"MW": "lib/mwlib/src",
+			"Client_Html": "client/html/src",
+			"Controller_Frontend": "controller/frontend/src",
+			"Controller_ExtJS": "controller/extjs/src",
+			"": ["lib/mwlib/lib", "."]
+		},
+		"classmap": [
+			"lib/mshoplib/src",
+			"lib/mwlib/lib",
+			"lib/mwlib/src",
+			"client/html/src",
+			"controller/frontend/src",
+			"controller/extjs/src",
+			"Arcavias.php"
+		]
+	}
+}

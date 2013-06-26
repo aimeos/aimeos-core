@@ -6,16 +6,22 @@
  */
 
 
+if( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php' ) ) {
+	require dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+}
+
+
 /**
  * Global starting point for applicatons.
  */
 class MShop
 {
-	private static $_includePaths;
 	private $_manifests = array();
 	private $_extensions = array();
 	private $_extensionsDone = array();
 	private $_dependencies = array();
+	private static $_includePaths = array();
+	private static $_autoloader = false;
 
 
 	/**
@@ -37,15 +43,10 @@ class MShop
 			$extdirs[] = $basedir . DIRECTORY_SEPARATOR . 'ext';
 		}
 
-		$incpath = get_include_path();
-		$mwlibpath = $basedir . $ds . 'lib' . $ds . 'mwlib' . $ds .'src';
-
-		if( set_include_path( $mwlibpath . PATH_SEPARATOR . $incpath ) === false ) {
-			throw new Exception( 'Unable to set new include path' );
-		}
-
-		$criteria = new MW_Common_Criteria_PHP();
 		$this->_manifests[$basedir] = $this->_getManifestFile( $basedir );
+
+		self::$_includePaths = $this->getIncludePaths();
+		$this->_registerAutoloader();
 
 		foreach ( $this->_getManifests( $extdirs ) as $location => $manifest )
 		{
@@ -63,20 +64,13 @@ class MShop
 			$manifest['location'] = $location;
 			$this->_extensions[$manifest['name']] = $manifest;
 
-			foreach ( $manifest['depends'] as $rule )
-			{
-				$expression = $criteria->toConditions( $rule );
-				$this->_dependencies[$manifest['name']][$expression->getName()] = $expression;
+			foreach ( $manifest['depends'] as $name ) {
+				$this->_dependencies[$manifest['name']][$name] = $name;
 			}
 		}
 
 		$this->_addManifests( $this->_dependencies );
-
-		if( set_include_path( $incpath ) === false ) {
-			throw new Exception( 'Unable to set old include path' );
-		}
-
-		self::$_includePaths = null;
+		self::$_includePaths = $this->getIncludePaths();
 	}
 
 
@@ -88,13 +82,18 @@ class MShop
 	 */
 	public static function autoload( $className )
 	{
-	    $fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
-
-		if( !isset( self::$_includePaths ) ) {
-			self::$_includePaths = explode( PATH_SEPARATOR, get_include_path() );
-		}
+		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
 
 		foreach( self::$_includePaths as $path )
+		{
+			$file = $path . DIRECTORY_SEPARATOR . $fileName;
+
+			if( file_exists( $file ) === true && ( include_once $file ) !== false ) {
+				return true;
+			}
+		}
+
+		foreach( explode( PATH_SEPARATOR, get_include_path() ) as $path )
 		{
 			$file = $path . DIRECTORY_SEPARATOR . $fileName;
 
@@ -137,19 +136,19 @@ class MShop
 	 */
 	public function getIncludePaths()
 	{
-		$incpaths = array();
+		$includes = array();
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
 			if ( isset( $manifest['include'] ) )
 			{
 				foreach ( $manifest['include'] as $paths ) {
-					$incpaths[] = $path . DIRECTORY_SEPARATOR . $paths;
+					$includes[] = $path . DIRECTORY_SEPARATOR . $paths;
 				}
 			}
 		}
 
-		return $incpaths;
+		return $includes;
 	}
 
 
@@ -283,6 +282,19 @@ class MShop
 
 
 	/**
+	 * Registers the MShop autoloader.
+	 */
+	protected function _registerAutoloader()
+	{
+		if( self::$_autoloader === false )
+		{
+			spl_autoload_register( array( $this, 'autoload' ), true, false );
+			self::$_autoloader = true;
+		}
+	}
+
+
+	/**
 	 * Re-order the given dependencies of each manifest configuration.
 	 *
 	 * @param array $deps List of dependencies
@@ -291,7 +303,7 @@ class MShop
 	 */
 	private function _addManifests( array $deps, array $stack=array( ) )
 	{
-		foreach ( $deps as $extName => $expressions )
+		foreach ( $deps as $extName => $name )
 		{
 			if ( in_array( $extName, $this->_extensionsDone ) ) {
 				continue;
