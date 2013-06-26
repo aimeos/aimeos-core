@@ -54,7 +54,7 @@ class Client_Html_Checkout_Confirm_Default
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->_getContext()->getI18n()->dt( 'arcavias', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -167,8 +167,8 @@ class Client_Html_Checkout_Confirm_Default
 					$context->getLogger()->log( sprintf( $msg, $sorderid, $e->getMessage() ) );
 				}
 			}
-			
-			
+
+
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 
 			// Clear basket
@@ -193,7 +193,7 @@ class Client_Html_Checkout_Confirm_Default
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->_getContext()->getI18n()->dt( 'arcavias', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( Exception $e )

@@ -20,8 +20,8 @@ class CheckoutController extends Application_Controller_Action_Abstract
 
 		try
 		{
-			$mshop = $this->_getMShop();
-			$templatePaths = $mshop->getCustomPaths( 'client/html' );
+			$arcavias = $this->_getArcavias();
+			$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
 			$this->view->minibasket = Client_Html_Basket_Mini_Factory::createClient( $context, $templatePaths );
 			$this->view->minibasket->setView( $this->_createView() );
@@ -64,8 +64,8 @@ class CheckoutController extends Application_Controller_Action_Abstract
 
 		try
 		{
-			$mshop = $this->_getMShop();
-			$templatePaths = $mshop->getCustomPaths( 'client/html' );
+			$arcavias = $this->_getArcavias();
+			$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
 			$this->view->minibasket = Client_Html_Basket_Mini_Factory::createClient( $context, $templatePaths );
 			$this->view->minibasket->setView( $this->_createView() );
@@ -110,8 +110,8 @@ class CheckoutController extends Application_Controller_Action_Abstract
 
 		try
 		{
-			$mshop = $this->_getMShop();
-			$templatePaths = $mshop->getCustomPaths( 'client/html' );
+			$arcavias = $this->_getArcavias();
+			$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
 			$client = Client_Html_Checkout_Update_Factory::createClient( $context, $templatePaths );
 			$client->setView( $this->_createView() );

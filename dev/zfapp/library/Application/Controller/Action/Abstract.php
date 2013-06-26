@@ -7,7 +7,7 @@
 
 abstract class Application_Controller_Action_Abstract extends Zend_Controller_Action
 {
-	private $_mshop;
+	private $_arcavias;
 
 
 	public function init()
@@ -81,10 +81,10 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		) ) );
 
 
-		$mshop = $this->_getMShop();
+		$arcavias = $this->_getArcavias();
 		$ctx = new MShop_Context_Item_Default();
 
-		$configPaths = $mshop->getConfigPaths( 'mysql' );
+		$configPaths = $arcavias->getConfigPaths( 'mysql' );
 		$configPaths[] = ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new MW_Config_Array( $config, $configPaths );
@@ -100,7 +100,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		$cache = new MW_Cache_None();
 		$ctx->setCache( $cache );
 
-		$i18n = new MW_Translation_Zend( self::_getMShop()->getI18nPaths(), 'gettext', 'en_GB', array('disableNotices'=>true) );
+		$i18n = new MW_Translation_Zend( self::_getArcavias()->getI18nPaths(), 'gettext', 'en_GB', array('disableNotices'=>true) );
 		if( function_exists( 'apc_store' ) === true ) {
 			$i18n = new MW_Translation_Decorator_APC( $i18n, $conf );
 		}
@@ -186,12 +186,12 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 	}
 
 
-	protected function _getMShop()
+	protected function _getArcavias()
 	{
-		if( !isset( $this->_mshop ) ) {
-			$this->_mshop = new MShop();
+		if( !isset( $this->_arcavias ) ) {
+			$this->_arcavias = new MShop();
 		}
 
-		return $this->_mshop;
+		return $this->_arcavias;
 	}
 }

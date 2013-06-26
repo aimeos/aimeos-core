@@ -54,7 +54,7 @@ class Client_Html_Catalog_Filter_Search_Default
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->_getContext()->getI18n()->dt( 'arcavias', $e->getMessage() ) );
 			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
 		catch( Exception $e )

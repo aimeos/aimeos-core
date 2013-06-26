@@ -23,7 +23,7 @@ setlocale( LC_CTYPE, 'en_US.UTF8' );
 
 try
 {
-	require_once ZFAPP_ROOT . '/../../MShop.php';
+	require_once ZFAPP_ROOT . '/../../Arcavias.php';
 	spl_autoload_register( 'MShop::autoload' );
 	$mshop = new MShop();
 

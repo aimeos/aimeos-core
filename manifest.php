@@ -41,7 +41,7 @@ return array(
 		'client/html/currency' => 'client/html/i18n/currency',
 		'client/html/language' => 'client/html/i18n/language',
 		'controller/frontend' => 'controller/frontend/i18n',
-		'mshop' => 'lib/mshoplib/i18n',
+		'arcavias' => 'lib/mshoplib/i18n',
 	),
 	'setup' => array(
 		'lib/mshoplib/setup',

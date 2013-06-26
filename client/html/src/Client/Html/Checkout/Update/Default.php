@@ -54,7 +54,7 @@ class Client_Html_Checkout_Update_Default
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->_getContext()->getI18n()->dt( 'arcavias', $e->getMessage() ) );
 			$view->updateErrorList = $view->get( 'updateErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -181,7 +181,7 @@ class Client_Html_Checkout_Update_Default
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $this->_getContext()->getI18n()->dt( 'arcavias', $e->getMessage() ) );
 			$view->updateErrorList = $view->get( 'updateErrorList', array() ) + $error;
 		}
 		catch( Exception $e )

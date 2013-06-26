@@ -111,7 +111,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	},
 
 	previewRenderer : function(preview) {
-		return "<img class='mshop-admin-media-list-preview' src=\"" + preview + "\" />";
+		return "<img class='arcavias-admin-media-list-preview' src=\"" + preview + "\" />";
 	}
 });
 

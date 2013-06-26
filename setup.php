@@ -86,7 +86,7 @@ try
 	}
 
 
-	require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'MShop.php';
+	require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
 
 	spl_autoload_register( 'setup_autoload' );
 	spl_autoload_register( 'MShop::autoload' );

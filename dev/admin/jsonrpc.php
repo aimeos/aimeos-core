@@ -6,7 +6,7 @@
  */
 
 
-require_once dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'MShop.php';
+require_once dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
 
 spl_autoload_register( 'MShop::autoload' );
 

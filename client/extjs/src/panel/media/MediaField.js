@@ -16,7 +16,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
      */
     defaultImage: '',
     
-    cls: 'mshop-admin-media-item-preview',
+    cls: 'arcavias-admin-media-item-preview',
     
     defaultAutoCreate : {tag:'input', type:'hidden'},
     handleMouseEvents: true,
