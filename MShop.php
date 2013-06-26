@@ -6,6 +6,11 @@
  */
 
 
+if( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php' ) ) {
+	require dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+}
+
+
 /**
  * Global starting point for applicatons.
  */
@@ -28,8 +33,6 @@ class MShop
 	 */
 	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
-		require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-
 		$ds = DIRECTORY_SEPARATOR;
 
 		if( $basedir === null ) {
