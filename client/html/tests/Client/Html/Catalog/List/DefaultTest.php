@@ -65,6 +65,17 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetHeaderSearch()
+	{
+		$view = $this->_object->getView();
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-search-text' => '<b>Search result</b>' ) );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->_object->getHeader();
+		$this->assertRegexp( '#<title>[^>]*Search result[^<]*</title>#', $output );
+	}
+
+
 	public function testGetBody()
 	{
 		$view = $this->_object->getView();
