@@ -7,22 +7,16 @@
 
 
 return array(
-	'name' => 'Arcavias',
-	'description' => 'Arcavias core system with admin interface',
-	'author' => 'Metaways Infosystems GmbH',
-	'email' => 'application@metaways.de',
-	'version' => '2013-05',
-	'depends' => array(
-	),
-	'conflicts' => array(
-	),
+	'name' => 'arcavias-core',
+	'depends' => array(),
 	'include' => array(
 		'lib/mshoplib/src',
 		'lib/mwlib/src',
 		'client/html/src',
 		'controller/frontend/src',
 		'controller/extjs/src',
-		'vendor/codeplex/phpexcel',
+		'lib/mwlib/lib',
+		'lib/phpexcel',
 	),
 	'config' => array(
 		'mysql' => array(

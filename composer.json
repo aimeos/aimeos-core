@@ -11,15 +11,14 @@
 		"wiki": "https://docs.arcavias.com"
 	},
 	"require": {
-		"php": ">=5.3.0",
+		"php": ">=5.2.0",
 		"ext-curl": "*",
 		"ext-dom": "*",
 		"ext-json": "*",
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
-		"ext-zip": "*",
-		"codeplex/phpexcel": "~1.7.6"
+		"ext-zip": "*"
 	},
 	"autoload": {
 		"psr-0": {
@@ -29,7 +28,7 @@
 			"Client_Html": "client/html/src",
 			"Controller_Frontend": "controller/frontend/src",
 			"Controller_ExtJS": "controller/extjs/src",
-			"": "lib/mwlib/lib"
+			"": ["lib/mwlib/lib", "."]
 		},
 		"classmap": [
 			"lib/mshoplib/src",

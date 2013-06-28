@@ -28,8 +28,6 @@ class MShop
 	 */
 	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
-		require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-
 		$ds = DIRECTORY_SEPARATOR;
 
 		if( $basedir === null ) {
