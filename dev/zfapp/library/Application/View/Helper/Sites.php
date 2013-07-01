@@ -20,20 +20,22 @@ class Application_View_Helper_Sites extends Zend_View_Helper_Abstract
 	public function sites()
 	{
 		$data = array();
+		$context = Zend_Registry::get( 'ctx' );
+		$codes = $context->getConfig()->get( 'zfapp/sites', array( 'default', 'unittest', 'unitperf' ) );
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( Zend_Registry::get( 'ctx' ) );
+		$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
 		$siteManager = $localeManager->getSubManager('site');
 
 		$search = $siteManager->createSearch( (APPLICATION_ENV=='development'?false:true) );
-
-		$expr[] = $search->compare( '>', 'locale.site.code', '' );
-		$expr[] = $search->compare( '==', 'locale.site.level', 0 );
-		$expr[] = $search->getConditions();
+		$expr = array(
+			$search->compare( '==', 'locale.site.code', $codes ),
+			$search->getConditions(),
+		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $siteManager->searchItems( $search );
 
 		$data = array();
-		foreach ($results AS $item) {
+		foreach( $siteManager->searchItems( $search ) AS $item )
+		{
 			if ( $item->getStatus() > 0 || APPLICATION_ENV == 'development' ) {
 				$data[ $item->getCode() ] = $item->getLabel();
 			}
