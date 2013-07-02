@@ -9,6 +9,15 @@
 return array(
 	'name' => 'arcavias-core',
 	'depends' => array(),
+	'include' => array(
+		'lib/mshoplib/src',
+		'lib/mwlib/src',
+		'client/html/src',
+		'controller/frontend/src',
+		'controller/extjs/src',
+		'lib/mwlib/lib',
+		'lib/phpexcel',
+	),
 	'config' => array(
 		'mysql' => array(
 			'lib/mshoplib/config/common',
