@@ -55,7 +55,7 @@ class Client_Html_Catalog_List_Default
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'arcavias', $e->getMessage() ) );
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
@@ -156,7 +156,7 @@ class Client_Html_Catalog_List_Default
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'arcavias', $e->getMessage() ) );
+			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
