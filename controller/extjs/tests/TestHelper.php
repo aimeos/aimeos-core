@@ -8,17 +8,13 @@
 
 class TestHelper
 {
-	private static $_mshop;
+	private static $_arcavias;
 	private static $_context;
 
 
 	public static function bootstrap()
 	{
-		$mshop = self::_getMShop();
-
-		$includepaths = $mshop->getIncludePaths();
-		$includepaths[] = get_include_path();
-		set_include_path( implode( PATH_SEPARATOR, $includepaths ) );
+		self::_getArcavias();
 	}
 
 
@@ -32,33 +28,32 @@ class TestHelper
 	}
 
 
-	private static function _getMShop()
+	private static function _getArcavias()
 	{
-		if( !isset( self::$_mshop ) )
+		if( !isset( self::$_arcavias ) )
 		{
-			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'MShop.php';
-			spl_autoload_register( 'MShop::autoload' );
+			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
 
-			self::$_mshop = new MShop( array(), false );
+			self::$_arcavias = new MShop( array(), false );
 		}
 
-		return self::$_mshop;
+		return self::$_arcavias;
 	}
 
 
 	public static function getControllerPaths()
 	{
-		return self::_getMShop()->getCustomPaths( 'controller/extjs' );
+		return self::_getArcavias()->getCustomPaths( 'controller/extjs' );
 	}
 
 
 	private static function _createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$mshop = self::_getMShop();
+		$arcavias = self::_getArcavias();
 
 
-		$paths = $mshop->getConfigPaths( 'mysql' );
+		$paths = $arcavias->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new MW_Config_Array( array(), $paths );

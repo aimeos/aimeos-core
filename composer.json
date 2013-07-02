@@ -18,16 +18,26 @@
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
-		"ext-zip": "*",
-		"codeplex/phpexcel": "~1.7.6"
+		"ext-zip": "*"
 	},
 	"autoload": {
+		"psr-0": {
+			"MShop": "lib/mshoplib/src",
+			"MAdmin": "lib/mshoplib/src",
+			"MW": "lib/mwlib/src",
+			"Client_Html": "client/html/src",
+			"Controller_Frontend": "controller/frontend/src",
+			"Controller_ExtJS": "controller/extjs/src",
+			"": ["lib/mwlib/lib", "."]
+		},
 		"classmap": [
-			"lib/mshoplib/src/",
-			"lib/mwlib/src/",
+			"lib/mshoplib/src",
+			"lib/mwlib/lib",
+			"lib/mwlib/src",
 			"client/html/src",
 			"controller/frontend/src",
-			"controller/extjs/src"
+			"controller/extjs/src",
+			"Arcavias.php"
 		]
 	}
 }

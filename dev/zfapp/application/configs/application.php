@@ -35,7 +35,7 @@ $appConfig = array(
 		'class' => 'Bootstrap'
 	),
 	'appnamespace' => 'Application',
-	'autoloaderNamespaces' => array( 'Application', 'MShop', 'MW' ),
+	'autoloaderNamespaces' => array( 'Application', 'Arcavias', 'MW' ),
 	'resources' => array(
 		'frontcontroller' => array(
 			'baseurl' => '',

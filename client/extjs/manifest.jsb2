@@ -14,8 +14,8 @@
 			"path": "lib/extjs/resources/css/"
 		}]
 	}, {
-		"name": "MShop Admin Core CSS",
-		"file": "resources/css/mshop-core.css",
+		"name": "Arcavias Admin Core CSS",
+		"file": "resources/css/arcavias-core.css",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "main.css",
@@ -40,7 +40,7 @@
 		}]
 	}, {
 		"name": "Arcavias Core",
-		"file": "js/mshop-core.js",
+		"file": "js/arcavias-core.js",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "Filter.js",

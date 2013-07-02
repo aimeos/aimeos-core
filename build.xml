@@ -93,7 +93,7 @@
 			templatebase="dev/phpdoc"
 			undocumentedelements="true">
 			<fileset dir="${coredir}">
-				<include name="MShop.php" />
+				<include name="Arcavias.php" />
 			</fileset>
 			<fileset dir="client/html/src">
 				<include name="**/*.php" />
@@ -157,14 +157,6 @@
 
 	<target name="deploy" description="Executes all deployments" depends="clean,build">
 		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
-		<reflexive>
-		  <fileset dir="${coredir}" includes="manifest.php" />
-		  <filterchain>
-		    <replaceregexp>
-		      <regexp pattern="'version' => '[^']*'" replace="'version' => '${version}'"/>
-		    </replaceregexp>
-		  </filterchain>
-		</reflexive>
 		<exec command="tar -c --bzip2 --exclude-from=.exclude -f ../arcavias-core_${version}.tar.bz2 ."
 			checkreturn="true" logoutput="true"/>
 		<filehash file="../arcavias-core_${version}.tar.bz2" hashtype="1" />

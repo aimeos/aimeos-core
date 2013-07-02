@@ -484,13 +484,13 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		$nodeMap = $siteMap = array();
 		$dbm = $this->_getContext()->getDatabaseManager();
 		$conn = $dbm->acquire();
-		$map = array();
 
 		try
 		{
-			$level = MShop_Locale_Manager_Abstract::SITE_ONE;
+			$level = MShop_Locale_Manager_Abstract::SITE_PATH;
 			$cfgPathSearch = 'mshop/catalog/manager/default/item/search-item';
 			$cfgPathCount = 'mshop/catalog/manager/default/item/count';
 			$required = array( 'catalog' );
@@ -498,7 +498,18 @@ class MShop_Catalog_Manager_Default
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[ $row['id'] ] = new MW_Tree_Node_Default( $row );
+				$siteMap[ $row['siteid'] ][ $row['id'] ] = new MW_Tree_Node_Default( $row );
+			}
+
+			$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
+
+			foreach( $sitePath as $siteId )
+			{
+				if( isset( $siteMap[$siteId] ) && !empty( $siteMap[$siteId] ) )
+				{
+					$nodeMap = $siteMap[$siteId];
+					break;
+				}
 			}
 
 			$dbm->release( $conn );
@@ -509,7 +520,7 @@ class MShop_Catalog_Manager_Default
 			throw $e;
 		}
 
-		return $this->_buildItems( $map, $ref, 'catalog' );
+		return $this->_buildItems( $nodeMap, $ref, 'catalog' );
 	}
 
 
@@ -522,24 +533,33 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function getPath( $id, array $ref = array() )
 	{
-		$itemMap = array();
 		$sitePath = array_reverse( $this->_getContext()->getLocale()->getSitePath() );
 
 		foreach( $sitePath as $siteId )
 		{
-			$path = $this->_createTreeManager( $siteId )->getPath( $id );
-
-			if( !empty( $path ) )
+			try
 			{
-				foreach ( $path as $node ) {
-					$itemMap[ $node->getId() ] = $node;
-				}
+				$path = $this->_createTreeManager( $siteId )->getPath( $id );
 
-				return $this->_buildItems( $itemMap, $ref, 'catalog' );
+				if( !empty( $path ) )
+				{
+					$itemMap = array();
+
+					foreach ( $path as $node ) {
+						$itemMap[ $node->getId() ] = $node;
+					}
+
+					return $this->_buildItems( $itemMap, $ref, 'catalog' );
+				}
+			}
+			catch( Exception $e )
+			{
+				$msg = sprintf( 'Node with ID "%1$s" not found in site "%2$s"', $id, $siteId );
+				$this->_getContext()->getLogger()->log( $msg );
 			}
 		}
 
-		return array();
+		throw new MShop_Catalog_Exception( sprintf( 'Catalog path for ID "%1$s" not found', $id ) );
 	}
 
 
@@ -596,7 +616,11 @@ class MShop_Catalog_Manager_Default
 
 				return $item;
 			}
-			catch( Exception $e ) { ; }
+			catch( Exception $e )
+			{
+				$msg = sprintf( 'Node with ID "%1$s" not found in site "%2$s"', $id, $siteId );
+				$this->_getContext()->getLogger()->log( $msg );
+			}
 		}
 
 		throw new MShop_Catalog_Exception( sprintf( 'Catalog node for ID "%1$s" not available', $id ) );

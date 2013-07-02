@@ -20,8 +20,8 @@ class BasketController extends Application_Controller_Action_Abstract
 
 		try
 		{
-			$mshop = $this->_getMShop();
-			$templatePaths = $mshop->getCustomPaths( 'client/html' );
+			$arcavias = $this->_getArcavias();
+			$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
 			$this->view->basket = Client_Html_Basket_Standard_Factory::createClient( $context, $templatePaths );
 			$this->view->basket->setView( $this->_createView() );

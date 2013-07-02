@@ -23,6 +23,11 @@ setlocale( LC_CTYPE, 'en_US.UTF8' );
 
 try
 {
+	require_once ZFAPP_ROOT . '/../../vendor/autoload.php';
+	require_once ZFAPP_ROOT . '/../../Arcavias.php';
+
+	spl_autoload_register( 'MShop::autoload' );
+
 	$includePaths = array(
 		ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'library',
 		dirname( ZFAPP_ROOT ) . DIRECTORY_SEPARATOR . 'zendlib',
@@ -30,7 +35,6 @@ try
 	);
 	set_include_path( implode( PATH_SEPARATOR, $includePaths ) );
 
-	require_once ZFAPP_ROOT . '/../../MShop.php';
 	include_once ZFAPP_ROOT . '/data/cache/pluginLoaderCache.php';
 
 	$application = new Application_Application(

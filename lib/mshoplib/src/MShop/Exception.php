@@ -8,7 +8,7 @@
 
 
 /**
- * Generic exception thrown by MShop objects if no specialized exception is available.
+ * Generic exception thrown by Arcavias objects if no specialized exception is available.
  *
  * @package MShop
  */

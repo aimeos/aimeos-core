@@ -24,7 +24,7 @@ class MShopJsbPackageTask extends Task
 		$ds = DIRECTORY_SEPARATOR;
 		$this->_projectPath = realpath( dirname( __FILE__ ) . $ds . '..' . $ds . '..' );
 
-		require_once $this->_projectPath . $ds . 'MShop.php';
+		require_once $this->_projectPath . $ds . 'Arcavias.php';
 		spl_autoload_register( 'MShop::autoload' );
 
 		$this->_mshop = new MShop();

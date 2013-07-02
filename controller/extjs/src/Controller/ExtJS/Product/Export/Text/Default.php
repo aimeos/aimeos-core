@@ -49,7 +49,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 		$this->_getContext()->getLogger()->log( sprintf( 'Create export for product IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
 		@header('Content-Type: application/vnd.ms-excel');
-		@header('Content-Disposition: attachment; filename=mshop-product-texts.xls');
+		@header('Content-Disposition: attachment; filename=arcavias-product-texts.xls');
 		@header('Cache-Control: max-age=0');
 
 		$phpExcel = $this->_createDocument( $items, $lang );
@@ -173,10 +173,10 @@ class Controller_ExtJS_Product_Export_Text_Default
 		$phpExcel->removeSheetByIndex( 0 );
 
 		$phpExcel->getProperties()
-			->setCreator( 'MShop' )
-			->setLastModifiedBy( 'MShop export' )
-			->setTitle( 'MShop product text export' )
-			->setSubject( 'MShop product text export' )
+			->setCreator( 'Arcavias' )
+			->setLastModifiedBy( 'Arcavias export' )
+			->setTitle( 'Arcavias product text export' )
+			->setSubject( 'Arcavias product text export' )
 			->setDescription( 'Export file for all product texts' )
 			->setKeywords( 'export product text translation' );
 
