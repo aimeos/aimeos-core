@@ -27,7 +27,7 @@ $salutations = array(
 <?php
 	try
 	{
-		$addr = $this->summaryBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+		$addr = $this->summaryBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),

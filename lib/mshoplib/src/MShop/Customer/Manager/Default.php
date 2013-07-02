@@ -668,7 +668,7 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 			$sql = $config->get( $path, $path );
 
 			$stmt = $conn->create( $sql );
-			$billingAddress = $item->getBillingAddress();
+			$billingAddress = $item->getPaymentAddress();
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getLabel() );

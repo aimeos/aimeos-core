@@ -77,14 +77,14 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 *
 	 * @return MShop_Common_Item_Address_Interface
 	 */
-	public function getBillingAddress();
+	public function getPaymentAddress();
 
 	/**
 	 * Sets the billing address of the customer item.
 	 *
 	 * @param MShop_Common_Item_Address_Interface $address Billing address of the customer item
 	 */
-	public function setBillingAddress( MShop_Common_Item_Address_Interface $address );
+	public function setPaymentAddress( MShop_Common_Item_Address_Interface $address );
 
 	/**
 	 * Returns the password of the customer item.

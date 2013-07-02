@@ -13,7 +13,7 @@ $salutations = array(
 
 try
 {
-	$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+	$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
 	printf(
 		/// Greeting with salutation (%1$s), first name (%2$s) and last name (%3$s)

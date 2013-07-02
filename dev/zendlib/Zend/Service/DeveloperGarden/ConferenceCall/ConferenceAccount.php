@@ -55,7 +55,7 @@ class Zend_Service_DeveloperGarden_ConferenceCall_ConferenceAccount
     /**
      * @return string
      */
-    public function getBillingType()
+    public function getPaymentType()
     {
         return $this->billingtype;
     }

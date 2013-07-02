@@ -8,7 +8,7 @@
 $enc = $this->encoder();
 
 try {
-	$addrArray = $this->standardBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING )->toArray();
+	$addrArray = $this->standardBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )->toArray();
 } catch( Exception $e ) {
 	$addrArray = array();
 }
@@ -47,7 +47,7 @@ $allFields = array_keys( $paymentCss );
 			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing-option' ) ) ); ?>" value="<?php echo $enc->attr( $this->addressCustomerItem->getId() ); ?>" <?php echo ( $billingOption == $this->addressCustomerItem->getId() ? 'checked="checked"' : '' ); ?> />
 			<div class="values">
 <?php
-		$addr = $this->addressCustomerItem->getBillingAddress();
+		$addr = $this->addressCustomerItem->getPaymentAddress();
 
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),

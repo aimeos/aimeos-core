@@ -110,7 +110,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			$customer->setLabel( $dataset['label'] );
 			$customer->setCode( $dataset['code'] );
 			$customer->setStatus( $dataset['status'] );
-			$customer->setBillingAddress( $address );
+			$customer->setPaymentAddress( $address );
 
 			$customerManager->saveItem( $customer );
 			$parentIds[ $key ] = $customer->getId();

@@ -433,9 +433,9 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No address item with company "Metaways" found' );
 		}
 
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, $item );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item );
 
-		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 		$this->assertEquals( 'Metaways', $address->getCompany() );
 	}
 
@@ -463,9 +463,9 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			'order.base.address.flag' => 0,
 		);
 
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, $fixture );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $fixture );
 
-		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+		$address = $this->_object->get()->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 		$this->assertEquals( 'Metaways', $address->getCompany() );
 		$this->assertEquals( 'Dr.', $address->getTitle() );
 		$this->assertEquals( 'firstunit', $address->getFirstname() );
@@ -475,14 +475,14 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	public function testSetBillingAddressByArrayError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, array( 'error' => false ) );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, array( 'error' => false ) );
 	}
 
 
 	public function testSetBillingAddressParameterError()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, 'error' );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, 'error' );
 	}
 
 

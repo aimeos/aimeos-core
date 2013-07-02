@@ -13,7 +13,7 @@ $iconvPrefs = array(
 	'line-break-chars' => "\r\n",
 );
 
-$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
 $replace = array( "\r" => '', "\n" => '', "\t" => '', '"'  => '', ','  => '', '<'  => '', '>'  => '' );
 $recipient = strtr( $addr->getEmail(), $replace );

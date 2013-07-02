@@ -189,7 +189,7 @@ class MShop_Customer_Item_Default
 	 *
 	 * @return MShop_Common_Item_Address_Interface
 	 */
-	public function getBillingAddress()
+	public function getPaymentAddress()
 	{
 		return $this->_billingaddress;
 	}
@@ -200,7 +200,7 @@ class MShop_Customer_Item_Default
 	 *
 	 * @param MShop_Common_Item_Address_Interface $address Billingaddress of the customer item
 	 */
-	public function setBillingAddress( MShop_Common_Item_Address_Interface $address )
+	public function setPaymentAddress( MShop_Common_Item_Address_Interface $address )
 	{
 		if ( $address === $this->_billingaddress ) { return; }
 
@@ -276,23 +276,23 @@ class MShop_Customer_Item_Default
 		$list['customer.birthday'] = $this->getBirthday();
 		$list['customer.status'] = $this->getStatus();
 		$list['customer.password'] = $this->getPassword();
-		$list['customer.salutation'] = $this->getBillingAddress()->getSalutation();
-		$list['customer.company'] = $this->getBillingAddress()->getCompany();
-		$list['customer.title'] = $this->getBillingAddress()->getTitle();
-		$list['customer.firstname'] = $this->getBillingAddress()->getFirstname();
-		$list['customer.lastname'] = $this->getBillingAddress()->getLastname();
-		$list['customer.address1'] = $this->getBillingAddress()->getAddress1();
-		$list['customer.address2'] = $this->getBillingAddress()->getAddress2();
-		$list['customer.address3'] = $this->getBillingAddress()->getAddress3();
-		$list['customer.postal'] = $this->getBillingAddress()->getPostal();
-		$list['customer.city'] = $this->getBillingAddress()->getCity();
-		$list['customer.state'] = $this->getBillingAddress()->getState();
-		$list['customer.languageid'] = $this->getBillingAddress()->getLanguageId();
-		$list['customer.countryid'] = $this->getBillingAddress()->getCountryId();
-		$list['customer.telephone'] = $this->getBillingAddress()->getTelephone();
-		$list['customer.email'] = $this->getBillingAddress()->getEmail();
-		$list['customer.telefax'] = $this->getBillingAddress()->getTelefax();
-		$list['customer.website'] = $this->getBillingAddress()->getWebsite();
+		$list['customer.salutation'] = $this->getPaymentAddress()->getSalutation();
+		$list['customer.company'] = $this->getPaymentAddress()->getCompany();
+		$list['customer.title'] = $this->getPaymentAddress()->getTitle();
+		$list['customer.firstname'] = $this->getPaymentAddress()->getFirstname();
+		$list['customer.lastname'] = $this->getPaymentAddress()->getLastname();
+		$list['customer.address1'] = $this->getPaymentAddress()->getAddress1();
+		$list['customer.address2'] = $this->getPaymentAddress()->getAddress2();
+		$list['customer.address3'] = $this->getPaymentAddress()->getAddress3();
+		$list['customer.postal'] = $this->getPaymentAddress()->getPostal();
+		$list['customer.city'] = $this->getPaymentAddress()->getCity();
+		$list['customer.state'] = $this->getPaymentAddress()->getState();
+		$list['customer.languageid'] = $this->getPaymentAddress()->getLanguageId();
+		$list['customer.countryid'] = $this->getPaymentAddress()->getCountryId();
+		$list['customer.telephone'] = $this->getPaymentAddress()->getTelephone();
+		$list['customer.email'] = $this->getPaymentAddress()->getEmail();
+		$list['customer.telefax'] = $this->getPaymentAddress()->getTelefax();
+		$list['customer.website'] = $this->getPaymentAddress()->getWebsite();
 		return $list;
 	}
 

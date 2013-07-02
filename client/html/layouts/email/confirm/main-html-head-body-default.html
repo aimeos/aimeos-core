@@ -19,7 +19,7 @@ $salutations = array(
 <?php
 try
 {
-	$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+	$addr = $this->confirmOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
 	echo $enc->html( sprintf(
 		$this->translate( 'client/html', 'Dear %1$s %2$s %3$s' ),

@@ -108,7 +108,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 * @param string $domain Address domain defined in MShop_Order_Item_Base_Address_Abstract
 	 * @return MShop_Order_Item_Base_Address_Interface Order address item for the requested domain
 	 */
-	public function getAddress( $domain = MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+	public function getAddress( $domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
 	/**
 	 * Sets a customer address as billing or delivery address for an order.
