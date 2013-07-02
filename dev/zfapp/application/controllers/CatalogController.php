@@ -20,9 +20,9 @@ class CatalogController extends Application_Controller_Action_Abstract
 	{
 		$startaction = microtime( true );
 
-		$mshop = $this->_getMShop();
+		$arcavias = $this->_getArcavias();
 		$context = Zend_Registry::get( 'ctx' );
-		$templatePaths = $mshop->getCustomPaths( 'client/html' );
+		$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
 		$this->view->listsimple = Client_Html_Catalog_List_Factory::createClient( $context, $templatePaths, 'Simple' );
 		$this->view->listsimple->setView( $this->_createView() );
@@ -42,9 +42,9 @@ class CatalogController extends Application_Controller_Action_Abstract
 	{
 		$startaction = microtime( true );
 
-		$mshop = $this->_getMShop();
+		$arcavias = $this->_getArcavias();
 		$context = Zend_Registry::get( 'ctx' );
-		$templatePaths = $mshop->getCustomPaths( 'client/html' );
+		$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
 		$this->view->filter = Client_Html_Catalog_Filter_Factory::createClient( $context, $templatePaths );
 		$this->view->filter->setView( $this->_createView() );
@@ -75,9 +75,9 @@ class CatalogController extends Application_Controller_Action_Abstract
 		$startaction = microtime( true );
 
 
-		$mshop = $this->_getMShop();
+		$arcavias = $this->_getArcavias();
 		$context = Zend_Registry::get( 'ctx' );
-		$templatePaths = $mshop->getCustomPaths( 'client/html' );
+		$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
 		$this->view->filter = Client_Html_Catalog_Filter_Factory::createClient( $context, $templatePaths );
 		$this->view->filter->setView( $this->_createView() );

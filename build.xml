@@ -93,7 +93,7 @@
 			templatebase="dev/phpdoc"
 			undocumentedelements="true">
 			<fileset dir="${coredir}">
-				<include name="MShop.php" />
+				<include name="Arcavias.php" />
 			</fileset>
 			<fileset dir="client/html/src">
 				<include name="**/*.php" />

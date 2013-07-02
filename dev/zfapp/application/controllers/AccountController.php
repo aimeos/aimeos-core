@@ -20,8 +20,8 @@ class AccountController extends Application_Controller_Action_Abstract
 
 		try
 		{
-			$mshop = $this->_getMShop();
-			$templatePaths = $mshop->getCustomPaths( 'client/html' );
+			$arcavias = $this->_getArcavias();
+			$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
 			$this->view->account = Client_Html_Account_History_Factory::createClient( $context, $templatePaths );
 			$this->view->account->setView( $this->_createView() );
