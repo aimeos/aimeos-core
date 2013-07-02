@@ -235,7 +235,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$result = $stmt->execute();
 
 			if( ( $row = $result->fetch() ) === false ) {
-				throw new MW_Tree_Exception( sprintf( 'No node with ID "%1$d" found for base "%2$s"', $id, $base ) );
+				throw new MW_Tree_Exception( sprintf( 'No node with ID "%1$d" found', $id ) );
 			}
 
 			$node = $this->_createNode( $row );
@@ -262,7 +262,6 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 */
 	public function insertNode( MW_Tree_Node_Interface $node, $parentId = null, $refId = null )
 	{
-		$base = null;
 		$node->parentid = $parentId;
 
 		if( $refId !== null )
@@ -387,8 +386,18 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		{
 			$refNode = $this->getNode( $newParentId, MW_Tree_Manager_Abstract::LEVEL_ONE );
 
-			$leveldiff = $refNode->level - $node->level + 1;
+			if( $newParentId === null )
+			{
+				//make virtual root
+				if( ( $root = $this->_getRootNode( '-' ) ) !== null )
+				{
+					$refNode->left = $root->right;
+					$refNode->right = $root->right + 1;
+					$refNode->level = -1;
+				}
+			}
 
+			$leveldiff = $refNode->level - $node->level + 1;
 			$openNodeLeftBegin = $refNode->right + 1;
 			$openNodeRightBegin = $refNode->right;
 
@@ -459,6 +468,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$stmtRight->bind( 2, $closeNodeRightBegin, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmtRight->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmtRight->execute()->finish();
+
 
 			$updateParentId->bind( 1, $newParentId, MW_DB_Statement_Abstract::PARAM_INT );
 			$updateParentId->bind( 2, $id, MW_DB_Statement_Abstract::PARAM_INT );
