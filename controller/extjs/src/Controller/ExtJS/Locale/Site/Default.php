@@ -130,7 +130,7 @@ class Controller_ExtJS_Locale_Site_Default
 		$manager = $this->_getManager();
 
 		$refId = ( isset( $params->refid ) ? $params->refid : null );
-		$parentId = ( isset( $params->parentid ) ? $params->parentid : null );
+		$parentId = ( ( isset( $params->parentid ) && $params->parentid !== 'root' ) ? $params->parentid : null );
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
@@ -166,6 +166,10 @@ class Controller_ExtJS_Locale_Site_Default
 		$this->_checkParams( $params, array( 'items', 'oldparentid', 'newparentid', 'refid' ) );
 
 		$manager = $this->_getManager();
+
+		if( $params->newparentid === 'root' ) {
+			$params->newparentid = null;
+		}
 
 		$refId = ( isset( $params->refid ) ? $params->refid : null );
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );

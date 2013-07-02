@@ -384,20 +384,17 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		}
 		else
 		{
-			if( $newParentId === 'root' )
+			$refNode = $this->getNode( $newParentId, MW_Tree_Manager_Abstract::LEVEL_ONE );
+
+			if( $newParentId === null )
 			{
 				//make virtual root
-				$refNode = $this->getNode( null, MW_Tree_Manager_Abstract::LEVEL_ONE );
-
 				if( ( $root = $this->_getRootNode( '-' ) ) !== null )
 				{
 					$refNode->left = $root->right;
 					$refNode->right = $root->right + 1;
-				}
 					$refNode->level = -1;
-			}
-			else {
-				$refNode = $this->getNode( $newParentId, MW_Tree_Manager_Abstract::LEVEL_ONE );
+				}
 			}
 
 			$leveldiff = $refNode->level - $node->level + 1;
