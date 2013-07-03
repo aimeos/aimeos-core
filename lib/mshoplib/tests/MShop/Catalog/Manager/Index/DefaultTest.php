@@ -57,8 +57,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		foreach( $result as $item )
 		{
 			self::$_products[ $item->getCode() ] = $item;
-
-			$manager->deleteItem( $item->getId() );
 			$manager->saveItem( $item );
 		}
 	}

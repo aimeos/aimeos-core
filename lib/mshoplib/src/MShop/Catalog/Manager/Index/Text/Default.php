@@ -139,6 +139,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		if( empty( $ids ) ) { return; }
+
 		foreach( $this->_submanagers as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}
@@ -440,12 +442,16 @@ class MShop_Catalog_Manager_Index_Text_Default
 	{
 		$attrIds = array();
 		$prodIds = array();
+
 		foreach( $items as $item )
 		{
 			foreach( $item->getRefItems( 'attribute', null, 'default' ) as $attrItem ) {
 				$prodIds[$attrItem->getId()][] = $item->getId();
 			}
 		}
+
+		if( empty( $prodIds ) ) { return; }
+
 
 		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
 		$search = $attrManager->createSearch(true);
