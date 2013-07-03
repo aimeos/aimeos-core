@@ -67,6 +67,7 @@
 	-webkit-border-radius: 5px;
 	border: solid 1px #689DB9;
 	margin: 10px 0px;
+	padding: 0px 5px;
 }
 
 
@@ -75,8 +76,7 @@
 	display: inline-block;
 	vertical-align: top;
 	min-width: 232px;
-	width: 48%;
-	margin: 0% 1%;
+	width: 50%;
 }
 
 .common-summary .item li {
@@ -150,7 +150,7 @@
 }
 
 .common-summary-detail .basket {
-	margin: 0% 1.5%;
+	margin: 0px 5px;
 }
 
 .common-summary-detail table {
@@ -1262,6 +1262,13 @@
 		margin: 0px;
 	}
 }
+
+@media only screen and (max-width: 562px) and (orientation: portrait) {
+	.common-summary .item {
+    	display: block;
+	    width: 100%;
+}
+
 
 @media only screen and (max-width: 490px) and (orientation: portrait) {
 	.catalog-list-pagination {
