@@ -34,7 +34,7 @@ class TestHelper
 		{
 			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
 
-			self::$_arcavias = new MShop( array(), false );
+			self::$_arcavias = new Arcavias( array(), false );
 		}
 
 		return self::$_arcavias;
