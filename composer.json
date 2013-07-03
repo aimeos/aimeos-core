@@ -37,7 +37,7 @@
 			"client/html/src",
 			"controller/frontend/src",
 			"controller/extjs/src",
-			"MShop.php"
+			"Arcavias.php"
 		]
 	}
 }

@@ -77,8 +77,8 @@ class Client_Html_Checkout_Standard_Summary_Address_DefaultTest extends MW_Unitt
 		}
 
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, $customer->getBillingAddress() );
-		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $customer->getBillingAddress() );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $customer->getPaymentAddress() );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $customer->getPaymentAddress() );
 
 		$view = TestHelper::getView();
 		$view->standardBasket = $this->_getBasket();
@@ -122,8 +122,8 @@ class Client_Html_Checkout_Standard_Summary_Address_DefaultTest extends MW_Unitt
 		}
 
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, $customer->getBillingAddress() );
-		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $customer->getBillingAddress() );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $customer->getPaymentAddress() );
+		$controller->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $customer->getPaymentAddress() );
 
 		return $controller->get();
 	}

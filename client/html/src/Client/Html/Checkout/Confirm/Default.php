@@ -167,8 +167,8 @@ class Client_Html_Checkout_Confirm_Default
 					$context->getLogger()->log( sprintf( $msg, $sorderid, $e->getMessage() ) );
 				}
 			}
-			
-			
+
+
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 
 			// Clear basket

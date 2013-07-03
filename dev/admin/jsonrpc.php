@@ -7,7 +7,7 @@
 
 
 require_once 'Init.php';
-require_once dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'MShop.php';
+require_once dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
 
 $mshop = new MShop();
 $init = new Init( $mshop, dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config' );

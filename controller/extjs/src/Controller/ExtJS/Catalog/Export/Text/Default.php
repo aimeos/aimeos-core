@@ -50,7 +50,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 
 		@header('Content-Type: application/vnd.ms-excel');
-		@header('Content-Disposition: attachment; filename=mshop-catalog-texts.xls');
+		@header('Content-Disposition: attachment; filename=arcavias-catalog-texts.xls');
 		@header('Cache-Control: max-age=0');
 
 		$phpExcel = $this->_createDocument( $items, $lang );
@@ -174,10 +174,10 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		$phpExcel->removeSheetByIndex( 0 );
 
 		$phpExcel->getProperties()
-			->setCreator( 'MShop' )
-			->setLastModifiedBy( 'MShop export' )
-			->setTitle( 'MShop catalog text export' )
-			->setSubject( 'MShop catalog text export' )
+			->setCreator( 'Arcavias' )
+			->setLastModifiedBy( 'Arcavias export' )
+			->setTitle( 'Arcavias catalog text export' )
+			->setSubject( 'Arcavias catalog text export' )
 			->setDescription( 'Export file for all catalog texts' )
 			->setKeywords( 'export catalog text translation' );
 

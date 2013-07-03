@@ -50,7 +50,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 
 		@header('Content-Type: application/vnd.ms-excel');
-		@header('Content-Disposition: attachment; filename=mshop-attribute-texts.xls');
+		@header('Content-Disposition: attachment; filename=arcavias-attribute-texts.xls');
 		@header('Cache-Control: max-age=0');
 
 		$phpExcel = $this->_createDocument( $items, $lang );
@@ -174,10 +174,10 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		$phpExcel->removeSheetByIndex( 0 );
 
 		$phpExcel->getProperties()
-			->setCreator( 'MShop' )
-			->setLastModifiedBy( 'MShop export' )
-			->setTitle( 'MShop attribute text export' )
-			->setSubject( 'MShop attribute text export' )
+			->setCreator( 'Arcavias' )
+			->setLastModifiedBy( 'Arcavias export' )
+			->setTitle( 'Arcavias attribute text export' )
+			->setSubject( 'Arcavias attribute text export' )
 			->setDescription( 'Export file for all attribute texts' )
 			->setKeywords( 'export attribute text translation' );
 
