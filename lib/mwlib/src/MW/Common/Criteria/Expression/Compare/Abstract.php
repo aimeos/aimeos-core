@@ -86,7 +86,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 		$name = $this->_name;
 
 		if( ( $transname = $this->_translateName( $name, $translations ) ) === '' ) {
-			return '';
+			$transname = $name;
 		}
 
 		if( !isset( $types[$name] ) ) {
@@ -97,13 +97,8 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 			return $this->_createNullTerm( $transname );
 		}
 
-		if( is_array( $this->_value ) )
-		{
-			if( !empty( $this->_value ) ) {
-				return $this->_createListTerm( $transname, $types[$name] );
-			} else {
-				return '';
-			}
+		if( is_array( $this->_value ) ) {
+			return $this->_createListTerm( $transname, $types[$name] );
 		}
 
 		return $this->_createTerm( $transname, $types[$name], $this->_value );
