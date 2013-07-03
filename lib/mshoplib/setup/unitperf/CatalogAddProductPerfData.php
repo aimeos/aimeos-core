@@ -77,6 +77,7 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 		$search = $productManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 		$start = $pos = 0;
 

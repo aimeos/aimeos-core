@@ -105,6 +105,7 @@ class Controller_ExtJS_Attribute_Default
 				$search->compare( '==', $manager.'.list.domain', 'attribute' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( array( $search->sort( '+', $manager.'.list.id' ) ) );
 
 			$start = 0;
 

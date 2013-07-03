@@ -75,6 +75,7 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 
 		$search = $productManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $productListTypeItem->getId() );

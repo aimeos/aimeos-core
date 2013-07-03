@@ -110,6 +110,7 @@ class Controller_ExtJS_Text_Default
 				$search->compare( '==', $manager.'.list.domain', 'text' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( array( $search->sort( '+', $manager.'.list.id' ) ) );
 
 			$start = 0;
 

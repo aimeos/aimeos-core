@@ -132,6 +132,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	{
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', $domain . '.code', array_keys( $itemTextMap ) ) );
+		$search->setSortations( array( $search->sort( '+', $domain.'.id' ) ) );
 
 		$start = 0;
 		$itemIdMap = $itemCodeMap = array();
@@ -161,6 +162,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			$search->compare( '==', $domain . '.list.domain', 'text' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
 
 		$start = 0;
 

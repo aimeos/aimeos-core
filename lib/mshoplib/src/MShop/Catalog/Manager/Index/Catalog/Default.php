@@ -127,6 +127,8 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		if( empty( $ids ) ) { return; }
+
 		foreach( $this->_submanagers as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}

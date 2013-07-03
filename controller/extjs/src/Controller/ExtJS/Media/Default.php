@@ -77,6 +77,7 @@ class Controller_ExtJS_Media_Default
 				$search->compare( '==', $manager.'.list.domain', 'media' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( array( $search->sort( '+', $manager.'.list.id' ) ) );
 
 			$start = 0;
 

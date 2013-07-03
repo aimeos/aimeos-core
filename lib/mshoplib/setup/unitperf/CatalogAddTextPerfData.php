@@ -93,6 +93,7 @@ class MW_Setup_Task_CatalogAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 		$start = $pos = 0;
 		$search = $catalogManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'catalog.id' ) ) );
 
 		do
 		{

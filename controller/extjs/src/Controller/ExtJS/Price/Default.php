@@ -197,6 +197,7 @@ class Controller_ExtJS_Price_Default
 				$search->compare( '==', $manager.'.list.domain', 'price' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( array( $search->sort( '+', $manager.'.list.id' ) ) );
 
 			$start = 0;
 

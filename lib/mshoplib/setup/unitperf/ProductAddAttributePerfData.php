@@ -105,6 +105,7 @@ class MW_Setup_Task_ProductAddAttributePerfData extends MW_Setup_Task_ProductAdd
 
 
 		$search = $productManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $productListTypeItem->getId() );

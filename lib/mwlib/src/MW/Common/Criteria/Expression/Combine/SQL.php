@@ -86,16 +86,21 @@ class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Ex
 			return '';
 		}
 
-		if( $this->_operator == '!' ) {
-			return ' ' . self::$_operators[$this->_operator] . ' ' . $item->toString( $types, $translations, $plugins );
-		}
-
 		$string = $item->toString( $types, $translations, $plugins );
+
+		if( $this->_operator == '!' && $string !== '' ) {
+			return ' ' . self::$_operators[$this->_operator] . ' ' . $string;
+		}
 
 		while( ( $item = next( $this->_expressions ) ) !== false )
 		{
-			if( ( $itemstr = $item->toString( $types, $translations, $plugins ) ) !== '' ) {
-				$string .= ' ' . self::$_operators[$this->_operator] . ' ' . $itemstr;
+			if( ( $itemstr = $item->toString( $types, $translations, $plugins ) ) !== '' )
+			{
+				if( $string !== '' ) {
+					$string .= ' ' . self::$_operators[$this->_operator] . ' ' . $itemstr;
+				} else {
+					$string = $itemstr;
+				}
 			}
 		}
 
