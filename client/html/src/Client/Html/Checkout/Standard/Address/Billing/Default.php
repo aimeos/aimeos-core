@@ -127,7 +127,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			$basket = $basketCtrl->get();
 
 
-			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING;
+			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT;
 			$disable = $view->config( 'client/html/common/address/billing/disable-new', false );
 
 			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) === 'null' && $disable === false ) // new address
@@ -181,7 +181,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( sprintf( 'No customer found for ID "%1$s"', $option ) );
 				}
 
-				$basketCtrl->setAddress( $type, $item->getBillingAddress() );
+				$basketCtrl->setAddress( $type, $item->getPaymentAddress() );
 			}
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );

@@ -177,9 +177,9 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
-	public function testGetBillingAddress()
+	public function testGetPaymentAddress()
 	{
-		$address = $this->_object->getBillingAddress();
+		$address = $this->_object->getPaymentAddress();
 		$this->assertEquals( $address->getRefId(), 'referenceid' );
 		$this->assertEquals( $address->getCompany(), 'unitCompany' );
 		$this->assertEquals( $address->getSalutation(), MShop_Common_Item_Address_Abstract::SALUTATION_MR );
@@ -200,11 +200,11 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $address->getWebsite(), 'www.metaways.de' );
 	}
 
-	public function testSetBillingAddress()
+	public function testSetPaymentAddress()
 	{
 		$this->_address->setCompany('unitCompany0815');
-		$this->_object->setBillingAddress( $this->_address );
-		$this->assertEquals( $this->_address, $this->_object->getBillingAddress() );
+		$this->_object->setPaymentAddress( $this->_address );
+		$this->assertEquals( $this->_address, $this->_object->getPaymentAddress() );
 	}
 
 	public function testToArray()
@@ -221,7 +221,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['customer.mtime'] );
 		$this->assertEquals( $this->_object->getBirthday(), $arrayObject['customer.birthday'] );
 		$this->assertEquals( $this->_object->getEditor(), $arrayObject['customer.editor'] );
-		$address = $this->_object->getBillingAddress();
+		$address = $this->_object->getPaymentAddress();
 		$this->assertEquals( $address->getCompany(), $arrayObject['customer.company'] );
 		$this->assertEquals( $address->getSalutation(), $arrayObject['customer.salutation'] );
 		$this->assertEquals( $address->getTitle(), $arrayObject['customer.title'] );

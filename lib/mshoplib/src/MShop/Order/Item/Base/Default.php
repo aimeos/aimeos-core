@@ -312,7 +312,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param string $domain Address domain, usually "billing" or "delivery"
 	 * @return MShop_Order_Item_Base_Address_Interface Order address item for the requested domain
 	 */
-	public function getAddress($domain = MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING)
+	public function getAddress($domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT)
 	{
 		if(!isset($this->_addresses[$domain])) {
 			throw new MShop_Order_Exception( sprintf( 'Address for domain "%1$s" not available', $domain ) );
@@ -329,7 +329,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param string $domain Address domain, usually "billing" or "delivery"
 	 */
 	public function setAddress(MShop_Order_Item_Base_Address_Interface $address,
-		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING)
+		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT)
 	{
 		if ( isset( $this->_addresses[ $domain ] ) && $this->_addresses[ $domain ] === $address ) { return; }
 

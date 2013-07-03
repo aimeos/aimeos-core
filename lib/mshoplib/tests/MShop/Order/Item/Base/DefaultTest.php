@@ -96,7 +96,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->_coupons = array( 'OPQR' => array( $prod1 ) );
 
 		$this->_addresses = array(
-			MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING => $orderAddressManager->createItem(),
+			MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => $orderAddressManager->createItem(),
 			MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => $orderAddressManager->createItem(),
 		);
 
@@ -369,8 +369,8 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals($this->_addresses, $this->_object->getAddresses());
 
-		$address = $this->_object->getAddress(MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING);
-		$this->assertEquals($this->_addresses[MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING], $address);
+		$address = $this->_object->getAddress(MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT);
+		$this->assertEquals($this->_addresses[MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT], $address);
 	}
 
 
@@ -384,8 +384,8 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$orderAddressManager = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 		$address = $orderAddressManager->createItem();
 
-		$this->_object->setAddress($address, MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING);
-		$this->assertEquals($address, $this->_object->getAddress(MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING));
+		$this->_object->setAddress($address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT);
+		$this->assertEquals($address, $this->_object->getAddress(MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT));
 
 		$this->assertTrue($this->_object->isModified());
 	}

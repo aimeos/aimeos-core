@@ -115,9 +115,9 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetType()
 	{
-		$this->_object->setType( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING );
+		$this->_object->setType( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_BILLING, $this->_object->getType() );
+		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->_object->getType() );
 	}
 
 	public function testGetCompany()
