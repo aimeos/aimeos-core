@@ -7,9 +7,9 @@
 
 
 /**
- * Drops the old indexes in the catalog tables.
+ * Drops the old idx_mscat_sid_nleft_nright index in the catalog tables.
  */
-class MW_Setup_Task_CatalogDropIndexes extends MW_Setup_Task_Abstract
+class MW_Setup_Task_CatalogDropSidNleftNrightIndex extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
 		'idx_mscat_sid_nleft_nright' => 'ALTER TABLE "mshop_catalog" DROP INDEX "idx_mscat_sid_nleft_nright"',
@@ -48,13 +48,13 @@ class MW_Setup_Task_CatalogDropIndexes extends MW_Setup_Task_Abstract
 
 
 	/**
-	 * Adds and modifies indexes in the mshop_catalog table.
+	 * Drops idx_mscat_sid_nleft_nright index in the mshop_catalog table.
 	 *
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg( 'Drop old indexes in mshop_catalog table', 0 );
+		$this->_msg( 'Drop old index in mshop_catalog table', 0 );
 		$this->_status( '' );
 
 		foreach ( $stmts AS $index => $stmt )
