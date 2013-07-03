@@ -167,15 +167,14 @@ class MShop_Catalog_Manager_Index_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 
-		$start = 0;
 		$size = $config->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
-
 		$mode = $config->get( 'mshop/catalog/manager/index/default/index', 'categorized' );
 
 		$default = array( 'attribute', 'price', 'text', 'product' );
 		$domains = $config->get( 'mshop/catalog/manager/index/default/domains', $default );
 
 		$search = $this->_productManager->createSearch( true );
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
 		if( count( $items ) > 0 )
@@ -186,33 +185,32 @@ class MShop_Catalog_Manager_Index_Default
 			}
 
 			$expr = array(
+				$search->compare( '==', 'product.id', $paramIds ),
 				$defaultConditions,
-				$search->compare( '==', 'product.id', $paramIds )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$this->_writeIndex( $search, $domains, $size );
-
 			return;
 		}
 
 		if( $mode === 'all' )
 		{
 			$this->_writeIndex( $search, $domains, $size );
-
 			return;
 		}
 
+		$start = 0;
 		$ids = array();
 
 		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
 		$categorySearch = $catalogListManager->createSearch( true );
+		$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
+		$categorySearch->setSortations( array( $search->sort( '+', 'catalog.list.id' ) ) );
 
 		do
 		{
-			$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
 			$categorySearch->setSlice( $start, $size );
-
 			$result = $catalogListManager->searchItems( $categorySearch );
 
 			$ids = array();
@@ -220,18 +218,16 @@ class MShop_Catalog_Manager_Index_Default
 				$ids[] = $catalogListItem->getRefId();
 			}
 
-			$count = count( $ids );
-			if( $count === 0 ) { continue; }
-
-			$start += $count;
-
 			$expr = array(
+				$search->compare( '==', 'product.id', $ids ),
 				$defaultConditions,
-				$search->compare( '==', 'product.id', $ids )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$this->_writeIndex( $search, $domains, $size );
+
+			$count = count( $ids );
+			$start += $count;
 		}
 		while( $count > 0 );
 	}
@@ -332,19 +328,13 @@ class MShop_Catalog_Manager_Index_Default
 	*/
 	protected function _writeIndex( MW_Common_Criteria_Interface $search, array $domains, $size )
 	{
-		$config = $this->_getContext()->getConfig();
-
 		$start = 0;
-		$search->setSlice( $start, $size );
+		$config = $this->_getContext()->getConfig();
 
 		do
 		{
-			$products = $this->_productManager->searchItems( $search, $domains );
-			$count = count( $products );
-			if( $count === 0 ) { continue; }
-
-			$start += $count;
 			$search->setSlice( $start, $size );
+			$products = $this->_productManager->searchItems( $search, $domains );
 
 			try
 			{
@@ -356,6 +346,8 @@ class MShop_Catalog_Manager_Index_Default
 					$submanager->rebuildIndex( $products );
 				}
 
+				$this->_saveSubProducts( $products );
+
 				$this->_commit();
 			}
 			catch( Exception $e )
@@ -364,7 +356,8 @@ class MShop_Catalog_Manager_Index_Default
 				throw $e;
 			}
 
-			$this->_saveSubProducts( $products );
+			$count = count( $products );
+			$start += $count;
 		}
 		while( $count > 0 );
 	}
@@ -382,10 +375,12 @@ class MShop_Catalog_Manager_Index_Default
 		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/default/domains', $default );
 		$size = $context->getConfig()->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
 
+		$search = $this->_productManager->createSearch( true );
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$defaultConditions = $search->getConditions();
+
 		foreach( $items as $id => $product )
 		{
-			$search = $this->_productManager->createSearch( true );
-			$search->setSlice( 0, $size );
 			$start = 0;
 
 			do
@@ -394,9 +389,10 @@ class MShop_Catalog_Manager_Index_Default
 
 				$expr = array(
 					$search->compare( '==', 'product.id', $ids ),
-					$search->getConditions(),
+					$defaultConditions,
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
+				$search->setSlice( $start, $size );
 
 				$result = $this->_productManager->searchItems( $search, $domains );
 
@@ -408,27 +404,12 @@ class MShop_Catalog_Manager_Index_Default
 					$itemList[] = $refItem;
 				}
 
-				try
-				{
-					$this->_begin();
-
-					foreach( $this->_submanagers as $submanager ) {
-						$submanager->rebuildIndex( $itemList );
-					}
-
-					$this->optimize();
-
-					$this->_commit();
-				}
-				catch( Exception $e )
-				{
-					$this->_rollback();
-					throw $e;
+				foreach( $this->_submanagers as $submanager ) {
+					$submanager->rebuildIndex( $itemList );
 				}
 
 				$count = count( $result );
 				$start += $count;
-				$search->setSlice( $start, $size );
 			}
 			while( $count > 0 );
 
