@@ -26,7 +26,7 @@ try
 	require_once ZFAPP_ROOT . '/../../vendor/autoload.php';
 	require_once ZFAPP_ROOT . '/../../Arcavias.php';
 
-	spl_autoload_register( 'MShop::autoload' );
+	spl_autoload_register( 'Arcavias::autoload' );
 
 	$includePaths = array(
 		ZFAPP_ROOT . DIRECTORY_SEPARATOR . 'library',

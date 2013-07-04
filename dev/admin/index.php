@@ -12,10 +12,10 @@ try
 
 	require_once dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
 
-	$mshop = new MShop();
+	$arcavias = new Arcavias();
 
 	require_once 'Init.php';
-	$init = new Init( $mshop, dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config' );
+	$init = new Init( $arcavias, dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config' );
 
 	$html = $init->getHtml( realpath($_SERVER['SCRIPT_FILENAME']), $_SERVER['SCRIPT_NAME'] );
 	$site = $init->getJsonSite( ( isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : 'unittest' ) );

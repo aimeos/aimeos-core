@@ -12,17 +12,17 @@ try
 
 	require_once dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
 
-	spl_autoload_register( 'MShop::autoload' );
+	spl_autoload_register( 'Arcavias::autoload' );
 
-	$mshop = new MShop();
+	$arcavias = new Arcavias();
 
 
-	$includePaths = $mshop->getIncludePaths();
+	$includePaths = $arcavias->getIncludePaths();
 	$includePaths[] = get_include_path();
 	set_include_path( implode( PATH_SEPARATOR, $includePaths ) );
 
 
-	$configPaths = $mshop->getConfigPaths( 'mysql' );
+	$configPaths = $arcavias->getConfigPaths( 'mysql' );
 	$configPaths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
 

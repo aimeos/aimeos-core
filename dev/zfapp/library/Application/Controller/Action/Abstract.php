@@ -189,7 +189,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 	protected function _getArcavias()
 	{
 		if( !isset( $this->_arcavias ) ) {
-			$this->_arcavias = new MShop();
+			$this->_arcavias = new Arcavias();
 		}
 
 		return $this->_arcavias;
