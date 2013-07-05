@@ -1,7 +1,8 @@
 ﻿/* Arcavias standard CSS */
 
 
-.arcavias .standardbutton {
+.arcavias .standardbutton,
+.arcavias .minibutton {
 	background-image: url("images/buttonfond.png");
 	background-repeat: repeat-x;
 	background-size: contain;
@@ -26,7 +27,7 @@
 }
 
 .arcavias .minibutton {
-	min-width: auto;
+	min-width: 0;
 }
 
 /** Enforce equal width/height for buttons */
@@ -177,6 +178,7 @@
 	color: #004266;
 	background-color: #F2F7FA
 }
+
 .common-summary-detail th,
 .common-summary-detail td {
 	padding: 5px;
@@ -189,15 +191,6 @@
 	max-width: 60px;
 	max-height: 80px;
 	overflow: hidden;
-}
-
-.common-summary-detail th.quantity,
-.common-summary-detail th.action {
-	width: 10%;
-}
-
-.common-summary-detail th.price {
-	width: 20%;
 }
 
 .common-summary-detail tr.subtotal,
@@ -214,20 +207,30 @@
 	white-space: nowrap;
 }
 
-.common-summary-detail tr.delivery td:first-child:after,
-.common-summary-detail tr.payment td:first-child:after {
-	content: " +";
+.common-summary-detail th.price {
+	width: 20%;
 }
 
+.common-summary-detail th.quantity,
 .common-summary-detail td.quantity {
-	text-align: center;
 	white-space: nowrap;
+	text-align: center;
 }
 
 .common-summary-detail td.quantity input {
 	text-align: center;
 	display: inline;
 	width: 3em;
+}
+
+.common-summary-detail th.action,
+.common-summary-detail td.action {
+	text-align: center;
+}
+
+.common-summary-detail tr.delivery td:first-child:after,
+.common-summary-detail tr.payment td:first-child:after {
+	content: " +";
 }
 
 .common-summary-detail tfoot {
