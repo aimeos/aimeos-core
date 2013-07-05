@@ -26,23 +26,17 @@ $css = '
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border: solid 1px #689DB9;
-	padding: 10px;
-	padding-top: 0;
 	margin: 10px 0px;
+	padding: 0px 5px;
 }
 
-/* Common summary */
 
+/* Common summary */
 .common-summary .item {
 	display: inline-block;
 	vertical-align: top;
-	max-width: 458px;
-	min-width: 238px;
+	min-width: 232px;
 	width: 50%;
-}
-
-.common-summary .item h4 {
-	padding: 5px 10px;
 }
 
 .common-summary .item li {
@@ -51,7 +45,7 @@ $css = '
 }
 
 .common-summary .item .content {
-	margin: 10px 10px 0px 10px;
+	margin: 10px 10px 10px 10px;
 }
 
 .common-summary .item .name {
@@ -96,9 +90,18 @@ $css = '
 	display: none;
 }
 
-.common-summary-service h4 {
-	padding: 10px;
+.common-summary-service .item .item {
 	margin: 0px;
+}
+
+.common-summary-service .item h4 {
+	margin: 10px;
+	padding: 0px;
+	color: #000000;
+}
+
+.common-summary-detail a.modify {
+	margin: 10px 24px 0 0;	
 }
 
 .common-summary-detail h2 {
@@ -107,7 +110,7 @@ $css = '
 }
 
 .common-summary-detail .basket {
-	margin: 0px;
+	margin: 0px 5px;
 }
 
 .common-summary-detail table {
@@ -134,6 +137,7 @@ $css = '
 	color: #004266;
 	background-color: #F2F7FA
 }
+
 .common-summary-detail th,
 .common-summary-detail td {
 	padding: 5px;
@@ -146,15 +150,6 @@ $css = '
 	max-width: 60px;
 	max-height: 80px;
 	overflow: hidden;
-}
-
-.common-summary-detail th.quantity,
-.common-summary-detail th.action {
-	width: 10%;
-}
-
-.common-summary-detail th.price {
-	width: 20%;
 }
 
 .common-summary-detail tr.subtotal,
@@ -171,14 +166,14 @@ $css = '
 	white-space: nowrap;
 }
 
-.common-summary-detail tr.delivery td:first-child:after,
-.common-summary-detail tr.payment td:first-child:after {
-	content: " +";
+.common-summary-detail th.price {
+	width: 20%;
 }
 
+.common-summary-detail th.quantity,
 .common-summary-detail td.quantity {
-	text-align: center;
 	white-space: nowrap;
+	text-align: center;
 }
 
 .common-summary-detail td.quantity input {
@@ -187,15 +182,23 @@ $css = '
 	width: 3em;
 }
 
+.common-summary-detail th.action,
+.common-summary-detail td.action {
+	text-align: center;
+}
+
+.common-summary-detail tr.delivery td:first-child:after,
+.common-summary-detail tr.payment td:first-child:after {
+	content: " +";
+}
+
 .common-summary-detail tfoot {
 	vertical-align: bottom;
 	font-weight: bold;
 }
 
-.common-summary-detail tfoot .delivery {
-	font-weight: normal;
-}
-
+.common-summary-detail tfoot .delivery,
+.common-summary-detail tfoot .payment,
 .common-summary-detail tr.rebate,
 .common-summary-detail tr.tax {
 	font-weight: normal;
