@@ -887,6 +887,8 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 */
 	protected function _deleteItems( array $ids, $sql, $siteidcheck = true )
 	{
+		if( empty( $ids ) ) { return; }
+
 		$context = $this->_getContext();
 
 		$search = $this->createSearch();
