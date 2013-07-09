@@ -1,0 +1,63 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "994e04c843030896258b9ae43019b9c3",
+    "packages": [
+        {
+            "name": "arcavias/extension-installer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Arcavias/extension-installer.git",
+                "reference": "d9585ed9256de66b5aff2e65649955f10193b631"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Arcavias/extension-installer/zipball/d9585ed9256de66b5aff2e65649955f10193b631",
+                "reference": "d9585ed9256de66b5aff2e65649955f10193b631",
+                "shasum": ""
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "Arcavias\\Composer\\ExtensionInstaller"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Arcavias\\Composer": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "description": "custom composer installer for Arcavias extensions",
+            "homepage": "http://www.arcavias.com/en",
+            "time": "2013-07-08 12:47:55"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "arcavias/extension-installer": 20
+    },
+    "platform": {
+        "php": ">=5.2.0",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-json": "*",
+        "ext-pcre": "*",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-zip": "*"
+    },
+    "platform-dev": [
+
+    ]
+}
