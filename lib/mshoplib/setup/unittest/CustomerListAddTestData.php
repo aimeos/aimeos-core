@@ -69,7 +69,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 
 		$refIds = array();
 		$refIds['text'] = $this->_getTextData( $refKeys['text'] );
-		$this->_addCustomerData( $testdata, $refIds );
+		$this->_addCustomerListData( $testdata, $refIds );
 
 		$this->_status( 'done' );
 	}
@@ -81,7 +81,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $keys List of keys for search
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
-	private function _getTextData( array $keys )
+	protected function _getTextData( array $keys )
 	{
 		$textManager = MShop_Text_Manager_Factory::createManager( $this->_additional, 'Default' );
 
@@ -112,13 +112,14 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $testdata Associative list of key/list pairs
 	 * @param array $refIds Associative list of domains and the keys/IDs of the inserted items
+	 * @param string $type Manager type string
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
-	private function _addCustomerData( array $testdata, array $refIds )
+	protected function _addCustomerListData( array $testdata, array $refIds, $type = 'Default' )
 	{
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_additional, 'Default' );
-		$customerListManager = $customerManager->getSubManager( 'list', 'Default' );
-		$customerListTypeManager = $customerListManager->getSubmanager( 'type', 'Default' );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_additional, $type );
+		$customerListManager = $customerManager->getSubManager( 'list', $type );
+		$customerListTypeManager = $customerListManager->getSubmanager( 'type', $type );
 
 		$itemCode = array();
 		foreach( $testdata['customer/list'] as $dataset )
