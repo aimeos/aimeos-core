@@ -129,7 +129,7 @@ class MShop_Text_Manager_DefaultTest extends MW_Unittest_Testcase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.editor', $this->_editor ) );
-		$this->assertEquals( 86, count( $this->_object->searchItems( $search ) ) );
+		$this->assertEquals( 92, count( $this->_object->searchItems( $search ) ) );
 
 		//search with base criteria
 		$search = $this->_object->createSearch(true);

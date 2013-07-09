@@ -264,6 +264,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 		MShop_Product_Item_Interface $item )
 	{
 		$listTypes = array();
+
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
 			$listTypes[ $listItem->getRefId() ] = $listItem->getType();
 		}

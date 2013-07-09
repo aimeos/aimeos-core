@@ -142,11 +142,13 @@ class Controller_ExtJS_Product_Export_Text_CSVTest extends MW_Unittest_Testcase
 		$params = new stdClass();
 		$params->site = $context->getLocale()->getSite()->getCode();
 		$params->items = $productItem->getId();
-		$params->lang = 'de';
+		$params->lang = 'en';
 
 		$result = $this->_object->exportFile( $params );
 
-		$this->assertEquals( $result['success'], true );
+		echo var_dump( $result );
+
+		$this->assertTrue( $result['success'] );
 //-----
 
 		$this->assertTrue( array_key_exists('file', $result) );

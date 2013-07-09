@@ -142,7 +142,7 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$params = new stdClass();
 		$params->site = $context->getLocale()->getSite()->getCode();
 		$params->items = $productItem->getId();
-		$params->lang = 'de';
+		$params->lang = 'en';
 
 		$result = $this->_object->exportFile( $params );
 
@@ -157,9 +157,9 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$objReader->setLoadSheetsOnly( $params->lang );
 		$objPHPExcel = $objReader->load( $file );
 
-		if( unlink( $file ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
-		}
+// 		if( unlink( $file ) === false ) {
+// 			throw new Exception( 'Unable to remove export file' );
+// 		}
 
 		$objWorksheet = $objPHPExcel->getActiveSheet();
 
