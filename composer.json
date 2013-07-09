@@ -18,7 +18,8 @@
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
-		"ext-zip": "*"
+		"ext-zip": "*",
+		"arcavias/extension-installer": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
