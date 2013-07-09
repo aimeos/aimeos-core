@@ -558,7 +558,7 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	/**
 	 * Initializes a new customer manager object using the given context object.
 	 *
-	 * @param MShop_Context_Interface $_context Context object with required objects
+	 * @param MShop_Context_Interface $context Context object with required objects
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
