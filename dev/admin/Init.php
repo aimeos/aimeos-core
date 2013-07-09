@@ -8,23 +8,23 @@
 
 class Init
 {
-	private $_mshop;
+	private $_arcavias;
 	private $_context;
 
 
-	public function __construct( MShop $mshop, $confPath )
+	public function __construct( Arcavias $arcavias, $confPath )
 	{
-		$configPaths = $mshop->getConfigPaths( 'mysql' );
+		$configPaths = $arcavias->getConfigPaths( 'mysql' );
 		$configPaths[] = $confPath;
 
 		$this->_context = $this->_createContext( $configPaths );
-		$this->_mshop = $mshop;
+		$this->_arcavias = $arcavias;
 	}
 
 
 	public function getJsonRpcController()
 	{
-		$cntlPaths = $this->_mshop->getCustomPaths( 'controller/extjs' );
+		$cntlPaths = $this->_arcavias->getCustomPaths( 'controller/extjs' );
 
 		return new Controller_ExtJS_JsonRpc( $this->_context, $cntlPaths );
 	}
@@ -63,7 +63,7 @@ class Init
 		$ds = DIRECTORY_SEPARATOR;
 		$html = '';
 
-		foreach( $this->_mshop->getCustomPaths( 'client/extjs' ) as $base => $paths )
+		foreach( $this->_arcavias->getCustomPaths( 'client/extjs' ) as $base => $paths )
 		{
 			$relJsbPath = substr( $base, $abslen );
 

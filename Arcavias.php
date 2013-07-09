@@ -9,7 +9,7 @@
 /**
  * Global starting point for applicatons.
  */
-class MShop
+class Arcavias
 {
 	private $_manifests = array();
 	private $_extensions = array();
@@ -277,7 +277,7 @@ class MShop
 
 
 	/**
-	 * Registers the MShop autoloader.
+	 * Registers the Arcavias autoloader.
 	 */
 	protected function _registerAutoloader()
 	{

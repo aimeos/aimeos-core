@@ -13,7 +13,7 @@ require_once 'phing/Task.php';
  */
 class MShopJsbPackageTask extends Task
 {
-	private $_mshop;
+	private $_arcavias;
 	private $_projectPath = '';
 
 	/**
@@ -25,11 +25,11 @@ class MShopJsbPackageTask extends Task
 		$this->_projectPath = realpath( dirname( __FILE__ ) . $ds . '..' . $ds . '..' );
 
 		require_once $this->_projectPath . $ds . 'Arcavias.php';
-		spl_autoload_register( 'MShop::autoload' );
+		spl_autoload_register( 'Arcavias::autoload' );
 
-		$this->_mshop = new MShop();
+		$this->_arcavias = new Arcavias();
 
-		$incPath = $this->_mshop->getIncludePaths( 'lib' );
+		$incPath = $this->_arcavias->getIncludePaths( 'lib' );
 		$incPath[] = get_include_path();
 		set_include_path( implode( PATH_SEPARATOR, $incPath ) );
 
@@ -47,7 +47,7 @@ class MShopJsbPackageTask extends Task
 
 		$abslen = strlen( $this->_projectPath );
 
-		foreach( $this->_mshop->getCustomPaths( 'client/extjs' ) as $base => $paths )
+		foreach( $this->_arcavias->getCustomPaths( 'client/extjs' ) as $base => $paths )
 		{
 			foreach( $paths as $path )
 			{
