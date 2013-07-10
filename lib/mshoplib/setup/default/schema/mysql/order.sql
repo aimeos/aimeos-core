@@ -125,6 +125,8 @@ CREATE TABLE "mshop_order_base_address" (
 	"baseid" BIGINT NOT NULL,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original address ID
+	"addrid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Type of the address
 	"type" VARCHAR(8) NOT NULL,
 	-- company name

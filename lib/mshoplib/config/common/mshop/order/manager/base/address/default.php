@@ -13,22 +13,22 @@ return array(
 			AND siteid = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_order_base_address" ( "baseid", "siteid", "type", "company", "salutation", "title",
+			INSERT INTO "mshop_order_base_address" ( "baseid", "siteid", "addrid", "type", "company", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3", "postal", "city", "state",
 				"countryid", "langid", "telephone", "email", "telefax", "website", "flag", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_order_base_address"
-			SET "baseid" = ?, "siteid" = ?, "type" = ?, "company" = ?, "salutation" = ?, "title" = ?,
+			SET "baseid" = ?, "siteid" = ?, "addrid" = ?, "type" = ?, "company" = ?, "salutation" = ?, "title" = ?,
 				"firstname" = ?, "lastname" = ?, "address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 				"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?, "email" = ?,
 				"telefax" = ?, "website" = ?, "flag" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT mordbaad."id", mordbaad."baseid", mordbaad."siteid", mordbaad."type", mordbaad."company", mordbaad."salutation", mordbaad."title",
-				mordbaad."firstname", mordbaad."lastname", mordbaad."address1", mordbaad."address2", mordbaad."address3",
+			SELECT mordbaad."id", mordbaad."baseid", mordbaad."siteid", mordbaad."addrid", mordbaad."type", mordbaad."company", mordbaad."salutation",
+				mordbaad."title", mordbaad."firstname", mordbaad."lastname", mordbaad."address1", mordbaad."address2", mordbaad."address3",
 				mordbaad."postal", mordbaad."city", mordbaad."state", mordbaad."countryid", mordbaad."langid", mordbaad."telephone",
 				mordbaad."email", mordbaad."telefax", mordbaad."website", mordbaad."flag", mordbaad."mtime", mordbaad."editor", mordbaad."ctime"
 			FROM "mshop_order_base_address" AS mordbaad
