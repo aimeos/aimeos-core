@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
@@ -179,7 +179,8 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 				$langid = $item->getId();
 				$files[$langid] = $tmpfolder . DIRECTORY_SEPARATOR . $langid . '.csv';
 				$fh = fopen( $files[$langid], 'a' );
-				fputcsv( $fh, array( 'Language ID', 'Product type', 'Product code', 'List type', 'Text type', 'Text ID', 'Text' ) );
+				fputcsv( $fh, array( 'Language ID', 'Catalog label', 'Catalog ID', 'List type', 'Text type', 'Text ID', 'Text' ) );
+				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $langid, $ids, $fh );
 				fclose( $fh );
 			}

@@ -6,7 +6,7 @@
  */
 
 
-class Controller_ExtJS_Product_Import_Text_CSVTest extends MW_Unittest_Testcase
+class Controller_ExtJS_Catalog_Import_Text_CSVTest extends MW_Unittest_Testcase
 {
 	private $_object;
 	private $_testdir;
@@ -23,7 +23,7 @@ class Controller_ExtJS_Product_Import_Text_CSVTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_ExtJS_Product_Import_Text_CSVTest' );
+		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_ExtJS_Catalog_Import_Text_CSVTest' );
 		$result = PHPUnit_TextUI_TestRunner::run( $suite );
 	}
 
@@ -38,14 +38,14 @@ class Controller_ExtJS_Product_Import_Text_CSVTest extends MW_Unittest_Testcase
 	{
 		$context = TestHelper::getContext();
 
-		$this->_testdir = $context->getConfig()->get( 'controller/extjs/product/import/text/default/uploaddir', './tmp' );
+		$this->_testdir = $context->getConfig()->get( 'controller/extjs/catalog/import/text/default/uploaddir', './tmp' );
 		$this->_testfile = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
 		if( !is_dir( $this->_testdir ) && mkdir( $this->_testdir, 0775, true ) === false ) {
 			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->_testdir ) );
 		}
 
-		$this->_object = new Controller_ExtJS_Product_Import_Text_CSV( $context );
+		$this->_object = new Controller_ExtJS_Catalog_Import_Text_CSV( $context );
 	}
 
 
@@ -60,50 +60,87 @@ class Controller_ExtJS_Product_Import_Text_CSVTest extends MW_Unittest_Testcase
 		$this->_object = null;
 	}
 
-
 	public function testGetServiceDescription()
 	{
 		$desc = $this->_object->getServiceDescription();
 		$this->assertInternalType( 'array', $desc );
-		$this->assertEquals( 2, count( $desc['Product_Import_Text.uploadFile'] ) );
-		$this->assertEquals( 2, count( $desc['Product_Import_Text.importFile'] ) );
+		$this->assertEquals( 2, count( $desc['Catalog_Import_Text.uploadFile'] ) );
+		$this->assertEquals( 2, count( $desc['Catalog_Import_Text.importFile'] ) );
 	}
-
 
 	public function testImportFile()
 	{
 		$context = TestHelper::getContext();
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 
-		$data[] = array( 'en','product','ABCD','default','long','','ABCD: long' );
-		$data[] = array( 'en','product','ABCD','default','metadescription','','ABCD: meta desc');
-		$data[] = array( 'en','product','ABCD','default','metakeywords','','ABCD: meta keywords' );
-		$data[] = array( 'en','product','ABCD','default','metatitle','','ABCD: meta title');
-		$data[] = array( 'en','product','ABCD','default','name','','ABCD: name');
-		$data[] = array( 'en','product','ABCD','default','short','','ABCD: short');
+		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
-		$filename = 'product-import-test.csv';
-		$fh = fopen( $filename, 'w' );
+		$params = new stdClass();
+		$params->lang = array( 'en' );
+		$params->items = $node->getId();
+		$params->site = $context->getLocale()->getSite()->getCode();
 
-		foreach( $data as $id => $row ) {
-			fputcsv( $fh, $row );
+		if( ob_start() === false ) {
+			throw new Exception( 'Unable to start output buffering' );
 		}
 
+		$exporter = new Controller_ExtJS_Catalog_Export_Text_CSV( $context );
+		$result = $exporter->exportFile( $params );
+
+		$file = substr( $result['file'], 9, -14);
+		$this->assertTrue( file_exists( $file ) );
+
+		$zip = new ZipArchive();
+		$zip->open($file);
+
+		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport';
+		if( mkdir( $testdir ) === false ) {
+			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
+		}
+
+		$zip->extractTo( $testdir );
+		$zip->close();
+
+		if( unlink( $file ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
+		}
+
+		$enCSV = $testdir . DIRECTORY_SEPARATOR . 'en.csv';
+
+		$this->assertTrue( file_exists( $enCSV ) );
+		$fh = fopen( $enCSV, 'r' );
+		while( ( $data = fgetcsv( $fh ) ) != false ) {
+			$lines[] = $data;
+		}
+		fclose( $fh );
+
+		$lines[1][6] = 'Root: delivery info';
+		$lines[2][6] = 'Root: long';
+		$lines[3][6] = 'Root: name';
+		$lines[4][6] = 'Root: payment info';
+		$lines[5][6] = 'Root: short';
+
+		$fh = fopen( $enCSV, 'w' );
+		for( $i = 1; $i<6; $i++) {
+			fputcsv( $fh, $lines[$i] );
+		}
 		fclose( $fh );
 
 		$params = new stdClass();
 		$params->site = $context->getLocale()->getSite()->getCode();
-		$params->items = $filename;
+		$params->items = $enCSV;
 
 		$this->_object->importFile( $params );
+
 
 		$textManager = MShop_Text_Manager_Factory::createManager( $context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
-		$expr[] = $criteria->compare( '==', 'text.domain', 'product' );
+		$expr[] = $criteria->compare( '==', 'text.domain', 'catalog' );
 		$expr[] = $criteria->compare( '==', 'text.languageid', 'en' );
 		$expr[] = $criteria->compare( '==', 'text.status', 1 );
-		$expr[] = $criteria->compare( '~=', 'text.content', 'ABCD:' );
+		$expr[] = $criteria->compare( '~=', 'text.content', 'Root:' );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 		$textItems = $textManager->searchItems( $criteria );
@@ -116,13 +153,12 @@ class Controller_ExtJS_Product_Import_Text_CSVTest extends MW_Unittest_Testcase
 		}
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$listManager = $productManager->getSubManager( 'list' );
+		$listManager = $catalogManager->getSubManager( 'list' );
 		$criteria = $listManager->createSearch();
 
 		$expr = array();
-		$expr[] = $criteria->compare( '==', 'product.list.domain', 'text' );
-		$expr[] = $criteria->compare( '==', 'product.list.refid', $textIds );
+		$expr[] = $criteria->compare( '==', 'catalog.list.domain', 'text' );
+		$expr[] = $criteria->compare( '==', 'catalog.list.refid', $textIds );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 		$listItems = $listManager->searchItems( $criteria );
@@ -132,18 +168,17 @@ class Controller_ExtJS_Product_Import_Text_CSVTest extends MW_Unittest_Testcase
 		}
 
 
+		$this->assertEquals( 5, count( $textItems ) );
+		$this->assertEquals( 5, count( $listItems ) );
+
 		foreach( $textItems as $item ) {
-			$this->assertEquals( 'ABCD:', substr( $item->getContent(), 0, 5 ) );
+			$this->assertEquals( 'Root:', substr( $item->getContent(), 0, 5 ) );
 		}
 
-		$this->assertEquals( 6, count( $textItems ) );
-		$this->assertEquals( 6, count( $listItems ) );
-
-		if( file_exists( $filename ) !== false ) {
-			throw new Exception( 'Import file was not removed' );
+		if( rmdir( 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport' ) !== true ) {
+			throw new Exception( sprintf( 'Deleting dir failed' ) );
 		}
 	}
-
 
 	public function testUploadFile()
 	{
@@ -151,6 +186,7 @@ class Controller_ExtJS_Product_Import_Text_CSVTest extends MW_Unittest_Testcase
 		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
+		$directory = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testdir';
 
 		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->_testdir ) ) );
 
@@ -190,18 +226,16 @@ class Controller_ExtJS_Product_Import_Text_CSVTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testUploadFileExceptionNoUploadFile()
+	public function testUploadFileExeptionNoFiles()
 	{
-		$context = TestHelper::getContext();
+		$params = new stdClass();
+		$params->items = 'test.txt';
+		$params->site = 'unittest';
 
 		$_FILES = array();
 
-		$params = new stdClass();
-		$params->items = 'file.txt';
-		$params->site = $context->getLocale()->getSite()->getCode();
-
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->uploadFile( $params );
+		$result = $this->_object->uploadFile( $params );
 	}
 
 }

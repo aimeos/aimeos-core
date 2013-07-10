@@ -172,6 +172,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	{
 		$phpExcel = new PHPExcel();
 		$phpExcel->removeSheetByIndex( 0 );
+		$actualLangid = $this->_getContext()->getLocale()->getLanguageId();
 
 		$phpExcel->getProperties()
 			->setCreator( 'Arcavias' )
@@ -200,7 +201,9 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 			$result = $globalLanguageManager->searchItems( $search, array(), $temp );
 			if( $temp ) { $total = $temp; $temp = null; }
 
-			foreach ( $result as $item ) {
+			foreach ( $result as $item )
+			{
+				$this->_getContext()->getLocale()->setLanguageId( $item->getId() );
 				$this->_addLanguage( $phpExcel, $item, $ids );
 			}
 
@@ -208,6 +211,8 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 			$search->setSlice( $start );
 		}
 		while( $start < $total );
+
+		$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
 		return $phpExcel;
 	}

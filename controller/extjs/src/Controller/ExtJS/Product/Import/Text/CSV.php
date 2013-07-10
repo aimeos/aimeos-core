@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
@@ -143,7 +143,7 @@ class Controller_ExtJS_Product_Import_Text_CSV
 
 
 	/**
-	 * Imports a file that can be understood by PHPExcel.
+	 * Imports a CSV file.
 	 *
 	 * @param string $path Path to file for importing
 	 */

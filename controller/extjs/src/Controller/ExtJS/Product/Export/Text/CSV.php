@@ -182,7 +182,7 @@ class Controller_ExtJS_Product_Export_Text_CSV
 				$fh = fopen( $files[ $langid ], 'a' );
 				fputcsv( $fh, array( 'Language ID', 'Product type', 'Product code', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
-				$data[ $langid ] = $this->_addLanguage( $langid, $ids, $fh );
+				$this->_addLanguage( $langid, $ids, $fh );
 				fclose( $fh );
 			}
 
