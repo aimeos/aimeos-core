@@ -31,32 +31,6 @@ class Controller_ExtJS_Product_Export_Text_CSV
 
 
 	/**
-	 * Creates a XLS file with all attribute texts and outputs it directly.
-	 *
-	 * @param stdClass $params Object containing the properties, e.g. the list of product IDs
-	 */
-	public function createHttpOutput( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-
-		$this->_setLocale( $params->site );
-
-		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
-		$lang = ( property_exists( $params, 'lang' ) && is_array( $params->lang ) ? $params->lang : array() );
-
-		$this->_getContext()->getLogger()->log( sprintf( 'Create export for product IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
-
-		@header('Content-Type: application/vnd.ms-excel');
-		@header('Content-Disposition: attachment; filename=arcavias-product-texts.xls');
-		@header('Cache-Control: max-age=0');
-
-		$phpExcel = $this->_createDocument( $items, $lang );
-		$objWriter = PHPExcel_IOFactory::createWriter($phpExcel, 'Excel5');
-		$objWriter->save('php://output');
-	}
-
-
-	/**
 	 * Creates a new job to export an excel file.
 	 *
 	 * @param stdClass $params Object containing the properties, e.g. the list of product IDs
@@ -100,6 +74,11 @@ class Controller_ExtJS_Product_Export_Text_CSV
 	}
 
 
+	/**
+	 * Create an csv file in the filesystem.
+	 *
+	 * @param stdClass $params Object containing the properties, e.g. the list of product IDs
+	 */
 	public function exportFile( stdClass $params )
 	{
 		$this->_checkParams( $params, array( 'site', 'items' ) );
@@ -114,7 +93,7 @@ class Controller_ExtJS_Product_Export_Text_CSV
 		$perms = $config->get( 'controller/extjs/product/export/text/default/dirperms', 0775 );
 
 		$foldername = 'product-text-export_' . date('Y-m-d') . '_' . md5( time() . getmypid() );
-		$tmpfolder = 'tmp' . DIRECTORY_SEPARATOR . $foldername;
+		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
 
 		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false || mkdir( $tmpfolder, $perms, true ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
@@ -137,14 +116,11 @@ class Controller_ExtJS_Product_Export_Text_CSV
 			fclose( $fp );
 		}
 
-		//set actual language back
-		$this->_setLocaleLanguage( $actualLangid );
+		$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
-		//create zip from temp folder
-		$filename = $this->_createZip( $tmpfolder, $dir, $files );
+		$filename = $this->_createZip( $foldername, $dir, $files );
 
 		return array(
-			'success' => true,
 			'filename' => $filename,
 		);
 	}
@@ -181,27 +157,27 @@ class Controller_ExtJS_Product_Export_Text_CSV
 	protected function _addData( array $ids, array $lang )
 	{
 		$data = array();
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
-		$search = $localeManager->createSearch();
+		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
+		$globalLanguageManager = $manager->getSubManager( 'language' );
 
-		$search->setSortations( array( $search->sort( '+', 'locale.languageid') ) );
+		$search = $globalLanguageManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'locale.language.id') ) );
 
 		if( !empty( $lang ) ) {
-			$search->setConditions( $search->compare( '==', 'locale.languageid', $lang ) );
+			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
 		$start = $temp = $total = 0;
-		$lang = '';
 
 		do
 		{
-			$result = $localeManager->searchItems( $search, array(), $temp );
+			$result = $globalLanguageManager->searchItems( $search, array(), $temp );
 			if( $temp ) { $total = $temp; $temp = null; }
 
 			foreach ( $result as $item )
 			{
-				$langid = $item->getLanguageId();
-				$this->_setLocaleLanguage( $langid );
+				$langid = $item->getId();
+				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$data[ $langid ] = $this->_addLanguage( $langid, $ids );
 			}
 
@@ -233,7 +209,6 @@ class Controller_ExtJS_Product_Export_Text_CSV
 		$search->setSortations( $sort );
 
 		$start = $temp = $total = 0;
-		$items = array();
 
 		do
 		{
@@ -258,7 +233,6 @@ class Controller_ExtJS_Product_Export_Text_CSV
 	 *
 	 * @param string $langid Language id
 	 * @param MShop_Product_Item_Interface $item product item object
-	 * @param array $textMap Associative list of text type codes as key and list of text items
 	 */
 	protected function _addItem( $langid, MShop_Product_Item_Interface $item )
 	{
@@ -303,33 +277,37 @@ class Controller_ExtJS_Product_Export_Text_CSV
 	}
 
 
-	protected function _setLocaleLanguage( $langid )
-	{
-		//TODO check langid
-		$locale = $this->_getContext()->getLocale();
-		$locale->setLanguageId( $langid );
-	}
-
-
+	/**
+	 *
+	 * @param string $srcdir Temporary source directory name
+	 * @param string $destdir Destination directory for export files
+	 * @param array $files List of file names
+	 * @throws Exception if a file couldn't be created or removed
+	 */
 	protected function _createZip( $srcdir, $destdir, $files )
 	{
-		echo $destdir. "!!!!";
 		$zip = new ZipArchive();
 		$filename = $destdir . DIRECTORY_SEPARATOR . $srcdir . '.zip';
-		$zip->open( $filename );
+
+		$zip->open( $filename, ZipArchive::OVERWRITE );
+
 		foreach( $files as $id => $file ) {
-			$zip->addFile( $file );
+			$zip->addFile( $file, substr( $file, -6 ) );
 		}
 
 		$zip->close();
+
+		if( !file_exists($filename) ) {
+			throw new Exception( 'Unable to create zip file');
+		}
 
 		foreach( $files as $id => $file ) {
 			if( unlink( $file ) === false ) {
 				throw new Exception( 'Unable to remove export file' );
 			}
 		}
-		if( rmdir( $srcdir ) === false ) {
-			throw new Exception( 'Unable to remove export dir' );
+		if( rmdir( $destdir . DIRECTORY_SEPARATOR . $srcdir ) === false ) {
+			throw new Exception( 'Unable to remove export directory' );
 		}
 
 		return $filename;

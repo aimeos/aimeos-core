@@ -271,6 +271,63 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 
 	/**
+	 * Imports data of texts using the given text types.
+	 *
+	 * @param string $data Path to CSV file with text data
+	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
+	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
+	 * @return array Two dimensional associated list of codes and text IDs as key
+	 */
+	protected function _importTextsFromCSV( $path, array $textTypeMap, $domain )
+	{
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->_getContext() );
+
+		$fh = fopen( $path, 'r' );
+		while ( ( $data = fgetcsv( $fh ) ) !== false )
+		{
+			try
+			{
+				$value = $data[6];
+				$textId = $data[5];
+				$textType = $data[4];
+
+				if( !isset( $textTypeMap[ $textType ] ) ) {
+					throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
+				}
+
+				if( $textId == '' && $value == '' ) {
+					continue;
+				}
+
+				$langId = $data[0];
+
+				$item = $textManager->createItem();
+				$item->setLanguageId( ( $langId != '' ? $langId : null ) );
+				$item->setTypeId( $textTypeMap[ $textType ] );
+				$item->setDomain( $domain );
+				$item->setContent( $value );
+				$item->setStatus( 1 );
+
+				if( $textId != '' ) {
+					$item->setId( $textId );
+				}
+
+				$textManager->saveItem( $item );
+				$codeIdMap[ $data[2] ][ $item->getId() ] = $data[3];
+			}
+			catch( Exception $e )
+			{
+				$this->_getContext()->getLogger()->log( sprintf( '%1$s text insert: %2$s', $domain, $e->getMessage() ), MW_Logger_Abstract::ERR, 'import' );
+			}
+		}
+
+		fclose( $fh );
+
+		return $codeIdMap;
+	}
+
+
+	/**
 	 * Returns a list of list type items.
 	 *
 	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.)
