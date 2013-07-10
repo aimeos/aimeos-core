@@ -41,6 +41,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 			'id' => 23,
 			'siteid' => 123,
 			'baseid' => 99,
+			'addrid' => 11,
 			'type' => MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY,
 			'company' => 'unitCompany',
 			'salutation' => MShop_Order_Item_Base_Address_Abstract::SALUTATION_MR,
@@ -106,6 +107,24 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setBaseId(66);
 		$this->assertTrue($this->_object->isModified());
 		$this->assertEquals( 66, $this->_object->getBaseId());
+	}
+
+	public function testGetAddressId()
+	{
+		$this->assertEquals( 11, $this->_object->getAddressId() );
+	}
+
+	public function testSetAddressId()
+	{
+		$this->_object->setAddressId( 22 );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 22, $this->_object->getAddressId() );
+	}
+
+	public function testSetAddressIdNull()
+	{
+		$this->_object->setAddressId( null );
+		$this->assertEquals( '', $this->_object->getAddressId() );
 	}
 
 	public function testGetType()
@@ -364,6 +383,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( $this->_object->getId(), $arrayObject['order.base.address.id'] );
 		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['order.base.address.siteid'] );
+		$this->assertEquals( $this->_object->getAddressId(), $arrayObject['order.base.address.addressid'] );
 		$this->assertEquals( $this->_object->getType(), $arrayObject['order.base.address.type'] );
 		$this->assertEquals( $this->_object->getCompany(), $arrayObject['order.base.address.company'] );
 		$this->assertEquals( $this->_object->getSalutation(), $arrayObject['order.base.address.salutation'] );
@@ -400,8 +420,9 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$addressCopy = new MShop_Order_Item_Base_Address_Default();
 		$addressCopy->copyFrom( $address );
 
+		$this->assertEquals( 23, $addressCopy->getAddressId() );
 		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $addressCopy->getType() );
-		$this->assertEquals( 'unitCompany', $this->_object->getCompany() );
+		$this->assertEquals( 'unitCompany', $addressCopy->getCompany() );
 		$this->assertEquals( MShop_Order_item_Base_Address_Abstract::SALUTATION_MR, $addressCopy->getSalutation() );
 		$this->assertEquals( 'Herr', $addressCopy->getTitle() );
 		$this->assertEquals( 'firstunit', $addressCopy->getFirstname() );

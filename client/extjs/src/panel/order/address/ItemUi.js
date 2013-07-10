@@ -44,6 +44,10 @@ MShop.panel.order.base.address.ItemUi = Ext.extend(Ext.Panel, {
 					fieldLabel : _( 'ID' ),
 					name : 'order.base.address.id'
 				}, {
+					xtype : 'displayfield',
+					fieldLabel : _( 'Address ID' ),
+					name : 'order.base.address.addressid'
+				}, {
 					xtype: 'displayfield',
 					fieldLabel: 'Company',
 					name: 'order.base.address.company'
