@@ -38,7 +38,7 @@ msgstr "Fräulein"
 
 #. Product attribute
 msgid "size"
-msgstr "Grösse"
+msgstr "Größe"
 
 #. Product attribute
 msgid "length"

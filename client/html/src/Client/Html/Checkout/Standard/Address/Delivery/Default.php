@@ -178,7 +178,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				$items = $customerManager->searchItems( $search );
 
 				if( ( $item = reset( $items ) ) === false || $address->getRefId() != $context->getUserId() ) {
-					throw new Client_Html_Exception( sprintf( 'No address found for ID "%1$s"', $option ) );
+					throw new Client_Html_Exception( sprintf( 'Address with ID "%1$s" not found', $option ) );
 				}
 
 				$basketCtrl->setAddress( $type, $address );

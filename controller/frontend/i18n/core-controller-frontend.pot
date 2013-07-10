@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-12 16:48+0200\n"
+"POT-Creation-Date: 2013-07-09 18:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,114 +17,114 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/Controller/Frontend/Basket/Default.php:411
+#: src/Controller/Frontend/Basket/Default.php:410
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr ""
 
-#: src/Controller/Frontend/Abstract.php:57
-#: src/Controller/Frontend/Abstract.php:72
+#: src/Controller/Frontend/Abstract.php:56
+#: src/Controller/Frontend/Abstract.php:71
 #, php-format
 msgid "An empty domain is invalid"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:598
+#: src/Controller/Frontend/Basket/Default.php:597
 #, php-format
-msgid "Available attribute IDs \"%1$s\" does not match the given attribute IDs \"%2$s\""
+msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:214
+#: src/Controller/Frontend/Basket/Default.php:213
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be changed"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:192
+#: src/Controller/Frontend/Basket/Default.php:191
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr ""
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:50
-#: src/Controller/Frontend/Common/Factory/Abstract.php:123
+#: src/Controller/Frontend/Common/Factory/Abstract.php:49
+#: src/Controller/Frontend/Common/Factory/Abstract.php:122
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:44
-#: src/Controller/Frontend/Common/Factory/Abstract.php:117
+#: src/Controller/Frontend/Common/Factory/Abstract.php:43
+#: src/Controller/Frontend/Common/Factory/Abstract.php:116
 #, php-format
-msgid "Class \"%1$s\" not found"
+msgid "Class \"%1$s\" not available"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:448
+#: src/Controller/Frontend/Basket/Default.php:447
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:562
+#: src/Controller/Frontend/Basket/Default.php:561
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:549
+#: src/Controller/Frontend/Basket/Default.php:548
 #, php-format
 msgid "Invalid address property \"%1$s\" with value \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Service/Factory.php:30
-#: src/Controller/Frontend/Basket/Factory.php:31
-#: src/Controller/Frontend/Common/Factory/Abstract.php:38
-#: src/Controller/Frontend/Catalog/Factory.php:31
+#: src/Controller/Frontend/Basket/Factory.php:30
+#: src/Controller/Frontend/Common/Factory/Abstract.php:37
+#: src/Controller/Frontend/Catalog/Factory.php:30
+#: src/Controller/Frontend/Service/Factory.php:29
 #, php-format
-msgid "Invalid class name \"%1$s\""
+msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Abstract.php:67
-#: src/Controller/Frontend/Common/Factory/Abstract.php:70
+#: src/Controller/Frontend/Common/Factory/Abstract.php:69
+#: src/Controller/Frontend/Abstract.php:66
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:322
+#: src/Controller/Frontend/Basket/Default.php:321
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Abstract.php:83
+#: src/Controller/Frontend/Abstract.php:82
 #, php-format
-msgid "No factory \"%1$s\" found"
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:632
+#: src/Controller/Frontend/Basket/Default.php:631
 #, php-format
 msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:126
+#: src/Controller/Frontend/Basket/Default.php:125
 #, php-format
 msgid "No product found for ID \"%1$s\" and variant attribute IDs \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Service/Default.php:180
+#: src/Controller/Frontend/Service/Default.php:179
 #, php-format
-msgid "No service item for type \"%1$s\" and ID \"%2$s\" available"
+msgid "No service item for type \"%1$s\" and ID \"%2$s\" found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:485
+#: src/Controller/Frontend/Basket/Default.php:484
 #, php-format
 msgid "There are not enough products (ID \"%1$s\") in stock"
 msgstr ""
 
-#: src/Controller/Frontend/Common/Decorator/Abstract.php:51
+#: src/Controller/Frontend/Common/Decorator/Abstract.php:50
 #, php-format
 msgid "Unable to call method \"%1$s::%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Service/Default.php:82
+#: src/Controller/Frontend/Service/Default.php:81
 #, php-format
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:349
+#: src/Controller/Frontend/Basket/Default.php:348
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr ""

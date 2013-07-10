@@ -139,8 +139,8 @@ msgstr "Adressen"
 msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
-"This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the email and attachments afterwards.\n"
-msgstr "Alle Lieferungen erfolgen gemäß unseren AGBs, die Sie auf unserer Website einsehen können und die Sie bei der Auftragserteilung akzeptiert haben.\n\nDiese E-Mail enthält vertrauliche Information und darf ausschliesslich von der angesprochenen Person verwendet werden. Sollten Sie nicht diese Person sein, antworten Sie bitte auf diese E-Mail und löschen Sie diese anschliessend.\n"
+"This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards.\n"
+msgstr "Alle Lieferungen erfolgen gemäß unseren AGBs, die Sie auf unserer Website einsehen können und die Sie bei der Auftragserteilung akzeptiert haben.\n\nDiese E-Mail enthält vertrauliche Information und darf ausschließlich von der angesprochenen Person verwendet werden. Sollten Sie nicht diese Person sein, antworten Sie bitte auf diese E-Mail und löschen Sie diese anschließend.\n"
 
 #: layouts/catalog/detail/basic-body-default.html:15
 msgid "Article no.:"
@@ -209,19 +209,19 @@ msgstr "Ort"
 #: src/Client/Html/Abstract.php:158
 #: src/Client/Html/Common/Factory/Abstract.php:39
 #, php-format
-msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr "Die Klasse \"%1$s\" ist nicht vom geforderten Typ \"%2$s\""
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
 #: src/Client/Html/Abstract.php:152
 #: src/Client/Html/Common/Factory/Abstract.php:33
 #, php-format
-msgid "Class \"%1$s\" not found"
+msgid "Class \"%1$s\" not available"
 msgstr "Die Klasse \"%1$s\" wurde nicht gefunden"
 
 #: layouts/account/history/detail-body-default.html:14
 #: layouts/account/history/detail-body-default.html:18
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Schließen"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:114
 #: layouts/checkout/standard/address-billing-body-default.html:109
@@ -292,7 +292,7 @@ msgstr "Fax"
 
 #: layouts/checkout/standard/address-body-default.html:11
 msgid "Fields with an * are mandatory"
-msgstr "In Felder mit einem * sind Eingaben erforderlich"
+msgstr "Felder mit einem * müssen ausgefüllt werden"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:118
 #: layouts/checkout/standard/address-billing-body-default.html:113
@@ -336,13 +336,13 @@ msgstr "Enthält %1$s%% USt."
 #: src/Client/Html/Catalog/Detail/Factory.php:40
 #: src/Client/Html/Catalog/List/Factory.php:40
 #, php-format
-msgid "Invalid class name \"%1$s\""
-msgstr "Ungültiger Klassenname \"%1$s\""
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
 #: src/Client/Html/Abstract.php:104 src/Client/Html/Abstract.php:143
 #, php-format
-msgid "Invalid client name \"%1$s\""
-msgstr "Ungültiger Name \"%1$s\""
+msgid "Invalid characters in client name \"%1$s\""
+msgstr "Client-Name \"%1$s\" enthält unerlaubte Zeichen"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:161
 #: layouts/checkout/standard/address-billing-body-default.html:156
@@ -366,7 +366,7 @@ msgstr "Weiter"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:181
 #, php-format
-msgid "No address found for ID \"%1$s\""
+msgid "Address with ID \"%1$s\" not found"
 msgstr "Es ist keine Adresse mit der ID \"%1$s\" vorhanden"
 
 #: layouts/catalog/list/head-body-default.html:32
@@ -378,17 +378,17 @@ msgstr "Ihre Suche nach <span class=\"searchstring\">\"%1$s\"</span> ergab leide
 
 #: src/Client/Html/Catalog/Filter/Tree/Default.php:143
 #, php-format
-msgid "No category with ID \"%1$s\" available"
+msgid "Category with ID \"%1$s\" not available"
 msgstr "Es wurde keine Kategorie mit der ID \"%1$s\" gefunden"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:181
 #, php-format
-msgid "No customer found for ID \"%1$s\""
+msgid "Customer with ID \"%1$s\" not found"
 msgstr "Die Kundennummer \"%1$s\" ist unbekannt"
 
 #: src/Client/Html/Abstract.php:217
 #, php-format
-msgid "No template found for \"%1$s\""
+msgid "Template \"%1$s\" not available"
 msgstr "Es wurde keine Vorlage für \"%1$s\" gefunden"
 
 #: src/Client/Html/Abstract.php:51
@@ -546,7 +546,7 @@ msgstr "Alle Bewertungen zeigen"
 
 #: layouts/catalog/list/pagination-body-default.html:21
 msgid "Sort by:"
-msgstr "Sortierung"
+msgstr "Sortierung:"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:146
 #: layouts/checkout/standard/address-billing-body-default.html:141
@@ -556,7 +556,7 @@ msgstr "Bundesland"
 #: layouts/checkout/standard/address-delivery-body-default.html:126
 #: layouts/checkout/standard/address-billing-body-default.html:121
 msgid "Street"
-msgstr "Strasse"
+msgstr "Straße"
 
 #: layouts/common/summary/detail-body-default.html:148
 #: layouts/email/confirm/main-text-detail-body-default.html:87

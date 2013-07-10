@@ -122,7 +122,7 @@ class Controller_Frontend_Basket_Default
 			else if( $requireVariant === true )
 			{
 				$ids = join( ',', $variantAttributeIds );
-				$msg = sprintf( 'No product found for ID "%1$s" and variant attribute IDs "%2$s"', $prodid, $ids );
+				$msg = sprintf( 'Product with ID "%1$s" and variant attribute IDs "%2$s" not available', $prodid, $ids );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 		}
@@ -594,7 +594,7 @@ class Controller_Frontend_Basket_Default
 		{
 			$expected = implode( ',', $attributeIds );
 			$actual = implode( ',', array_keys( $attrItems ) );
-			$msg = sprintf( 'Available attribute IDs "%1$s" does not match the given attribute IDs "%2$s"', $actual, $expected );
+			$msg = sprintf( 'Available attribute IDs "%1$s" do not match the given attribute IDs "%2$s"', $actual, $expected );
 
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
@@ -628,7 +628,7 @@ class Controller_Frontend_Basket_Default
 
 			if( ( $listTypeItem = reset( $listTypeItems ) ) === false )
 			{
-				$msg = sprintf( 'No list type for domain "%1$s" and code "%2$s" found', $domain, $code );
+				$msg = sprintf( 'List type for domain "%1$s" and code "%2$s" not found', $domain, $code );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 

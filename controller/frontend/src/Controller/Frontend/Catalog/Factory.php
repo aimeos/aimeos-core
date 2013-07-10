@@ -27,7 +27,7 @@ class Controller_Frontend_Catalog_Factory
 		if ( ctype_alnum($name) === false )
 		{
 			$classname = is_string($name) ? 'Controller_Frontend_Catalog_' . $name : '<not a string>';
-			throw new Controller_Frontend_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+			throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'Controller_Frontend_Catalog_Interface';

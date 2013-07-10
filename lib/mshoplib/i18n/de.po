@@ -154,7 +154,7 @@ msgstr "Curl konnte nicht aufgerufen werden"
 msgid ""
 "DOM tree of XML response from delivery provider could not be converted to "
 "XML string"
-msgstr "DOM-Struktur der vom Logistikdienstleister erhaltenen XML-Datei konnte nicht einen XML-String konvertiert werden"
+msgstr "DOM-Struktur der vom Logistikdienstleister erhaltenen XML-Datei konnte nicht in einen XML-String konvertiert werden"
 
 #: src/MShop/Context/Item/Default.php:132
 #, php-format
@@ -164,11 +164,11 @@ msgstr "Datenbankmanager-Objekt nicht verfügbar"
 #: src/MShop/Common/Manager/Abstract.php:138
 #, php-format
 msgid "Domain manager for class \"%1$s\" not available"
-msgstr "Domain-Manager für Klasse \"%1$s\" nicht verfügbar"
+msgstr "Domänenmanager für Klasse \"%1$s\" nicht verfügbar"
 
 #: src/MShop/Order/Item/Abstract.php:322
 #, php-format
-msgid "Email flags \"%1$s\" not within allowed range"
+msgid "E-mail flags \"%1$s\" not within allowed range"
 msgstr "Flags \"%1$s\" für E-Mail liegen nicht innerhalb des vorgegebenen Wertebereichs"
 
 #: src/MShop/Order/Item/Abstract.php:338
@@ -331,7 +331,7 @@ msgstr "Item konnte nicht mit Methode saveItem() gespeichert werden. Item-ID nic
 #: src/MShop/Common/Manager/Abstract.php:691
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr "In Domain \"%1$s\" referenzierte Items nicht gefunden: %2$s"
+msgstr "In Domäne \"%1$s\" referenzierte Items nicht gefunden: %2$s"
 
 #: src/MShop/Common/Manager/Abstract.php:715
 #, php-format
@@ -346,23 +346,23 @@ msgstr "Job mit ID \"%1$s\" nicht gefunden"
 #: src/MShop/Common/Manager/List/Default.php:186
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr "\"list item\" mit ID \"%2$s\" in \"%1$s\" nicht gefunden"
+msgstr "List-Item mit ID \"%2$s\" in \"%1$s\" nicht gefunden"
 
 #: src/MShop/Catalog/Manager/Index/Attribute/Default.php:282
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr "\"List type\" für \"attribute item\" mit ID \"%1$s\" nicht verfügbar"
+msgstr "Listentyp für Attribut-Item mit ID \"%1$s\" nicht verfügbar"
 
 #: src/MShop/Catalog/Manager/Index/Price/Default.php:277
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr "\"List type\" für \"price item\" mit ID \"%1$s\" nicht verfügbar"
+msgstr "Listentyp für Preis-Item mit ID \"%1$s\" nicht verfügbar"
 
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:301
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:487
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr "\"List type\" für \"text item\" mit ID \"%1$s\" nicht verfügbar"
+msgstr "Listentyp für Text-Item mit ID \"%1$s\" nicht verfügbar"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:238
 #, php-format
@@ -372,12 +372,12 @@ msgstr "Verarbeitung der vom Logistikdienstleister erhaltenen XML-Datei \"%1$s\"
 #: src/MShop/Locale/Manager/Default.php:416
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr "Gebietsschema (\"locale item\") für Seite \"%1$s\" nicht gefunden"
+msgstr "Gebietsschema (Locale-Item) für Seite \"%1$s\" nicht gefunden"
 
 #: src/MShop/Context/Item/Default.php:183
 #, php-format
 msgid "Locale object not available"
-msgstr "Gebietsschema-Objekt nicht verfügbar"
+msgstr "Gebietsschema-Objekt (Locale-Item) nicht verfügbar"
 
 #: src/MShop/Order/Manager/Base/Abstract.php:55
 #, php-format
@@ -491,14 +491,14 @@ msgstr "ID \"%1$s\" der Bestelldaten in XML-Antwort des Logistikdienstleisters s
 #: src/MShop/Service/Provider/Delivery/Default.php:292
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr "Bestellung (\"order base\") mit ID \"%1$s\" nicht gefunden"
+msgstr "Bestellung (Order-Base-Item) mit ID \"%1$s\" nicht gefunden"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:250
 #, php-format
 msgid ""
 "Order data sent to delivery provider was rejected with code \"%1$s\" "
 "according to XML response"
-msgstr "Zum Logistikdienstleister übertragene Bestelldaten (\"order\") wurden laut XML-Antwort mit Code \"%1$s\" abgelehnt"
+msgstr "Zum Logistikdienstleister übertragene Bestelldaten wurden laut XML-Antwort mit Code \"%1$s\" abgelehnt"
 
 #: src/MShop/Order/Item/Abstract.php:270
 #, php-format
@@ -543,8 +543,8 @@ msgstr "Transaktions-ID für Paypal-Express-Bezahlvorgang für Bestellung mit ID
 #, php-format
 msgid ""
 "Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currenty ID \"%2$s\" does not match."
-msgstr "Der Preis kann nicht hinzugezählt werden. Währungs-ID \"%1$s\" des \"price items\" und aktuell verwendete Währungs-ID \"%2$s\" stimmen nicht überein."
+"used currency ID \"%2$s\" does not match."
+msgstr "Der Preis kann nicht hinzugezählt werden. Währungs-ID \"%1$s\" des Preis-Items und aktuell verwendete Währungs-ID \"%2$s\" stimmen nicht überein."
 
 #: src/MShop/Price/Manager/Abstract.php:50
 #, php-format
@@ -626,12 +626,12 @@ msgstr "Suchkonfiguration nicht verfügbar"
 #: src/MShop/Service/Provider/Delivery/Default.php:207
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr "Übertragung der Bestelldaten (\"order\") zum Logistikdienstleister mit HTTP-Status \"%1$s\" fehlgeschlagen"
+msgstr "Übertragung der Bestelldaten zum Logistikdienstleister mit HTTP-Status \"%1$s\" fehlgeschlagen"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:201
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr "Übertragung der Bestelldaten (\"order\") zum Logistikdienstleister fehlgeschlagen: \"%1$s\""
+msgstr "Übertragung der Bestelldaten zum Logistikdienstleister fehlgeschlagen: \"%1$s\""
 
 #: src/MShop/Order/Item/Base/Default.php:388
 #, php-format
@@ -641,7 +641,7 @@ msgstr "Service vom Typ \"%1$s\" nicht verfügbar"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:672
 #, php-format
 msgid "Service payment provider for order base ID \"%1$s\" not found"
-msgstr "Bezahldienst (\"service payment provider\") mit \"order base ID\" \"%1$s\" nicht gefunden"
+msgstr "Bezahldienst (Payment-Provider) mit Order-Base-ID \"%1$s\" nicht gefunden"
 
 #: src/MShop/Context/Item/Default.php:235
 #, php-format
@@ -653,14 +653,14 @@ msgstr "Session-Objekt nicht verfügbar"
 msgid ""
 "Site can not be inserted. Site ID of site differs from site ID of parent "
 "site."
-msgstr "Seite (\"site\") kann nicht eingefügt werden. Site-ID der Seite stimmt nicht mit Site-ID der Eltern-Seite überein."
+msgstr "Seite kann nicht eingefügt werden. Site-ID der Seite stimmt nicht mit Site-ID der Eltern-Seite überein."
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:62
 #, php-format
 msgid ""
 "Site can not be moved. Site ID of site differs from present site id, site ID"
 " of existing parent site or site id of new parent site."
-msgstr "Katalog: Seite (\"site\") kann nicht verschoben werden. Site-ID der Seite stimmt nicht mit der aktuellen Site-ID, der Site-ID der bestehenden Eltern-Seite oder mit der Site-ID der neuen Eltern-Seite überein."
+msgstr "Seite kann nicht verschoben werden. Site-ID der Seite stimmt nicht mit der aktuellen Site-ID, der Site-ID der bestehenden Eltern-Seite oder mit der Site-ID der neuen Eltern-Seite überein."
 
 #: src/MShop/Locale/Manager/Default.php:111
 #, php-format
@@ -681,8 +681,8 @@ msgstr "Grenzwert für kostenlosen Versand für Währung mit ID \"%1$s\" nicht v
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:86
 #, php-format
-msgid "Total number of product exceeds given limit"
-msgstr "Die Gesamtanzahl eines Produktes überschreitet das vorgegebene Limit"
+msgid "Total number of products exceeds given limit"
+msgstr "Die Gesamtanzahl der Produkte überschreitet das vorgegebene Limit"
 
 #: src/MShop/Locale/Manager/Default.php:509
 #: src/MShop/Common/Manager/Abstract.php:863
@@ -692,7 +692,7 @@ msgstr "Wert für Anzahl der Ergebnisse nicht gefunden"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:110
 #, php-format
-msgid "Total value of product exceeds given limit"
+msgid "Total value of products exceeds given limit"
 msgstr "Der Gesamtwert eines Produktes überschreitet das vorgegebene Limit"
 
 #: src/MShop/Locale/Manager/Site/Default.php:406

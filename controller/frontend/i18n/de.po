@@ -22,7 +22,7 @@ msgstr ""
 #: src/Controller/Frontend/Basket/Default.php:411
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
-msgstr "Das Produkt mit der ID \"%1$s\" darf nicht direkt zum Warenkorb hinzu gefügt werden"
+msgstr "Das Produkt mit der ID \"%1$s\" darf nicht direkt zum Warenkorb hinzugefügt werden"
 
 #: src/Controller/Frontend/Abstract.php:57
 #: src/Controller/Frontend/Abstract.php:72
@@ -33,31 +33,25 @@ msgstr "Für die Erzeugung eines Managers ist eine Domäne zwingend erforderlich
 #: src/Controller/Frontend/Basket/Default.php:598
 #, php-format
 msgid ""
-"Available attribute IDs \"%1$s\" does not match the given attribute IDs "
+"Available attribute IDs \"%1$s\" do not match the given attribute IDs "
 "\"%2$s\""
 msgstr "Die vorhandenden Attribute mit den IDs \"%1$s\" stimmen nicht im den übergebenen (\"%2$s\") überein"
 
 #: src/Controller/Frontend/Basket/Default.php:214
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be changed"
-msgstr "Das Produkt im Warenkorb an Position \"%1$d\" darf nicht verändert werden"
+msgstr "Das Produkt an Position \"%1$d\" im Warenkorb darf nicht verändert werden"
 
 #: src/Controller/Frontend/Basket/Default.php:192
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
-msgstr "Das Produkt im Warenkorb an Position \"%1$d\" kann nicht gelöscht werden"
-
-#: src/Controller/Frontend/Common/Factory/Abstract.php:50
-#: src/Controller/Frontend/Common/Factory/Abstract.php:123
-#, php-format
-msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr "Die Klasse \"%1$s\" implementiert nicht \"%2$s\""
+msgstr "Das Produkt an Position \"%1$d\" im Warenkorb kann nicht gelöscht werden"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:44
 #: src/Controller/Frontend/Common/Factory/Abstract.php:117
 #, php-format
-msgid "Class \"%1$s\" not found"
-msgstr "Die Klasse \"%1$s\" ist unbekannt"
+msgid "Class \"%1$s\" not available"
+msgstr "Klasse \"%1$s\" nicht verfügbar"
 
 #: src/Controller/Frontend/Basket/Default.php:448
 #, php-format
@@ -79,8 +73,8 @@ msgstr "Der Adressteil \"%1$s\" mit dem Wert \"%2$s\" ist ungültig"
 #: src/Controller/Frontend/Common/Factory/Abstract.php:38
 #: src/Controller/Frontend/Catalog/Factory.php:31
 #, php-format
-msgid "Invalid class name \"%1$s\""
-msgstr "Der Klassenname \"%1$s\" is ungültig"
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
 #: src/Controller/Frontend/Abstract.php:67
 #: src/Controller/Frontend/Common/Factory/Abstract.php:70
@@ -95,22 +89,22 @@ msgstr "Es wurde kein gültiger Wert für den Adresstyp \"%1$s\" übergeben"
 
 #: src/Controller/Frontend/Abstract.php:83
 #, php-format
-msgid "No factory \"%1$s\" found"
-msgstr "Es konnte kein Objekt \"%1$s\" erzeugt werden"
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
 #: src/Controller/Frontend/Basket/Default.php:632
 #, php-format
-msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
+msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Für die Domäne \"%1$s\" und den Code \"%2$s\" wurde kein Listentyp gefunden"
 
 #: src/Controller/Frontend/Basket/Default.php:126
 #, php-format
-msgid "No product found for ID \"%1$s\" and variant attribute IDs \"%2$s\""
-msgstr "Es wurde kein Produkt mit der ID \"%1$s\" und den ausgewählten Varianten mit den IDs \"%2$s\" gefunden"
+msgid "Product with ID \"%1$s\" and variant attribute IDs \"%2$s\" not available"
+msgstr "Es ist kein Produkt mit der ID \"%1$s\" und den ausgewählten Varianten mit den IDs \"%2$s\" verfügbar"
 
 #: src/Controller/Frontend/Service/Default.php:180
 #, php-format
-msgid "No service item for type \"%1$s\" and ID \"%2$s\" available"
+msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
 msgstr "Es wurde kein Eintrag für den Service mit der ID \"%2$s\" und dem Typ \"%1$s\" gefunden"
 
 #: src/Controller/Frontend/Basket/Default.php:485

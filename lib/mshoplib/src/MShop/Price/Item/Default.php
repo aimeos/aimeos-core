@@ -315,7 +315,7 @@ class MShop_Price_Item_Default
 	{
 		if( $item->getCurrencyId() != $this->getCurrencyId() )
 		{
-			throw new MShop_Price_Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currenty ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
+			throw new MShop_Price_Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currency ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
 		}
 
 		$this->_values['value'] = $this->_formatNumber( $this->getValue() + $item->getValue() * $quantity );

@@ -34,19 +34,19 @@ class Controller_Frontend_Common_Factory_Abstract
 			if( ctype_alnum( $name ) === false )
 			{
 				$classname = is_string($name) ? $classprefix . ucfirst( strtolower( $name ) ) : '<not a string>';
-				throw new Controller_Frontend_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+				throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 
 			$classname = $classprefix . ucfirst( strtolower( $name ) );
 
 			if( class_exists( $classname ) === false ) {
-				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$controller =  new $classname( $context, $controller );
 
 			if( !( $controller instanceof $iface ) ) {
-				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
+				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 		}
 
@@ -113,13 +113,13 @@ class Controller_Frontend_Common_Factory_Abstract
 	protected static function _createController( MShop_Context_Item_Interface $context, $classname, $interface )
 	{
 		if( class_exists( $classname ) === false ) {
-			throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$controller =  new $classname( $context );
 
 		if( !( $controller instanceof $interface ) ) {
-			throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
+			throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $controller;

@@ -106,7 +106,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 			}
 
 			if( (float) $price->getValue() > (float) $config['total-value-max'][$currencyId] ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Total value of product exceeds given limit' ) );
+				throw new MShop_Plugin_Exception( sprintf( 'Total value of products exceeds given limit' ) );
 			}
 		}
 
