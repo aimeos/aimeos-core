@@ -273,16 +273,15 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	/**
 	 * Imports data of texts using the given text types.
 	 *
-	 * @param string $data Path to CSV file with text data
+	 * @param resource $data File handle
 	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @return array Two dimensional associated list of codes and text IDs as key
 	 */
-	protected function _importTextsFromCSV( $path, array $textTypeMap, $domain )
+	protected function _importTextsFromCSV( $fh, array $textTypeMap, $domain )
 	{
 		$textManager = MShop_Text_Manager_Factory::createManager( $this->_getContext() );
 
-		$fh = fopen( $path, 'r' );
 		while ( ( $data = fgetcsv( $fh ) ) !== false )
 		{
 			try
@@ -440,5 +439,34 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		}
 
 		$context->setLocale( $localeItem );
+	}
+
+
+	/**
+	 * Removes temporary directory and files.
+	 *
+	 * @param string $path Path to the directory
+	 */
+	protected function _removeTempFiles( $path )
+	{
+		if( is_dir( $path ) )
+		{
+			$handle = opendir( $path );
+
+			while ( $file = readdir( $handle ) )
+			{
+				if( $file !== '.' && $file !== '..' ) {
+					if( unlink( $path . DIRECTORY_SEPARATOR . $file ) === false ) {
+						throw new Exception( 'Unable to remove temp file' );
+					}
+				}
+			}
+
+			closedir( $handle );
+
+			if( rmdir( $path ) === false ) {
+				throw new Exception( 'Unable to remove export directory' );
+			}
+		}
 	}
 }

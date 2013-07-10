@@ -142,7 +142,7 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$params = new stdClass();
 		$params->site = $context->getLocale()->getSite()->getCode();
 		$params->items = $productItem->getId();
-		$params->lang = 'en';
+		$params->lang = 'de';
 
 		$result = $this->_object->exportFile( $params );
 

@@ -124,13 +124,6 @@ return array (
 		'text/cne_metakey' => array( 'langid' => 'de', 'typeid' => 'product/metakeywords', 'domain' => 'catalog', 'label' => 'cne_metakey', 'content' => 'Kaffee', 'status' => 1 ),
 		'text/cne_metadesc' => array( 'langid' => 'de', 'typeid' => 'product/metadescription', 'domain' => 'catalog', 'label' => 'cne_metadesc', 'content' => 'Expresso', 'status' => 1 ),
 
-		'text/en_cne' => array( 'langid' => 'en', 'typeid' => 'product/name', 'domain' => 'product', 'label' => 'en_cne', 'content' => 'Cafe Noire Expresso', 'status' => 1 ),
-		'text/en_cne_short_desc' => array( 'langid' => 'en', 'typeid' => 'product/short', 'domain' => 'product', 'label' => 'en_cne_short_desc', 'content' => 'An aromatic espresso with a delicious smooth foam', 'status' => 1 ),
-		'text/en_cne_long_desc' => array( 'langid' => 'en', 'typeid' => 'product/long', 'domain' => 'catalog', 'label' => 'en_cne_long_desc', 'content' => 'This short cafe with its rich taste, delicate aroma and smooth foam is the ultimative drink for each time of day.<br> It is available in packages with 16 T-DISCs (hypermarket) or 8 T-DISCs (supermarket).', 'status' => 1 ),
-		'text/en_cne_metatitle' => array( 'langid' => 'en', 'typeid' => 'product/metatitle', 'domain' => 'catalog', 'label' => 'en_cne_metatitle', 'content' => 'Cafe Noire Expresso', 'status' => 1 ),
-		'text/en_cne_metakey' => array( 'langid' => 'en', 'typeid' => 'product/metakeywords', 'domain' => 'catalog', 'label' => 'en_cne_metakey', 'content' => 'Cafe', 'status' => 1 ),
-		'text/en_cne_metadesc' => array( 'langid' => 'en', 'typeid' => 'product/metadescription', 'domain' => 'catalog', 'label' => 'en_cne_metadesc', 'content' => 'Expresso', 'status' => 1 ),
-
 		'text/cnc' => array( 'langid' => 'de', 'typeid' => 'product/name', 'domain' => 'product', 'label' => 'cnc', 'content' => 'Cafe Noire Cappuccino', 'status' => 1 ),
 		'text/cnc_short_desc' => array( 'langid' => 'de', 'typeid' => 'product/short', 'domain' => 'product', 'label' => 'cnc_short_desc', 'content' => 'Der köstliche Cappuccino mit Espresso und feinem Milchschaum.', 'status' => 1 ),
 		'text/cnc_long_desc' => array( 'langid' => 'de', 'typeid' => 'product/long', 'domain' => 'catalog', 'label' => 'cnc_long_desc', 'content' => 'Cafe Noire gehört zu den beliebtesten Kaffeemarken in Frankreich.', 'status' => 1 ),

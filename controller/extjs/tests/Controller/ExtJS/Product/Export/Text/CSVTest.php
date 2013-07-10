@@ -70,21 +70,21 @@ class Controller_ExtJS_Product_Export_Text_CSVTest extends MW_Unittest_Testcase
 		$params = new stdClass();
 		$params->site = $context->getLocale()->getSite()->getCode();
 		$params->items = $productItem->getId();
-		$params->lang = array( 'de', 'en' );
+		$params->lang = 'de';
 
 		$result = $this->_object->exportFile( $params );
-		$file = $result['filename'];
+		$file = substr( $result['file'], 9, -14 );
 
 		$this->assertTrue( file_exists( $file ) );
 
 		$zip = new ZipArchive();
 		$zip->open($file);
 
-		if( mkdir( 'tmp' . DIRECTORY_SEPARATOR . 'csvexport' ) === false ) {
+		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
+		if( mkdir( $testdir ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
 		}
 
-		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
 		$zip->extractTo( $testdir );
 		$zip->close();
 
@@ -92,19 +92,15 @@ class Controller_ExtJS_Product_Export_Text_CSVTest extends MW_Unittest_Testcase
 			throw new Exception( 'Unable to remove export file' );
 		}
 
-		$langs['en'] = $testdir . DIRECTORY_SEPARATOR . 'en.csv';
-		$langs['de'] = $testdir . DIRECTORY_SEPARATOR . 'de.csv';
+		$deCSV = $testdir . DIRECTORY_SEPARATOR . 'de.csv';
 
-		foreach( $langs as $lang )
-		{
-			$this->assertTrue( file_exists( $lang ) );
-			$fh = fopen( $lang, 'r' );
+			$this->assertTrue( file_exists( $deCSV ) );
+			$fh = fopen( $deCSV, 'r' );
 			$lines[ $lang ] = fgetcsv( $fh );
 			fclose( $fh );
-			if( unlink( $lang ) === false ) {
+			if( unlink( $deCSV ) === false ) {
 				throw new Exception( 'Unable to remove export file' );
 			}
-		}
 
 		if( rmdir( $testdir ) === false ) {
 			throw new Exception( 'Unable to remove test export directory' );
