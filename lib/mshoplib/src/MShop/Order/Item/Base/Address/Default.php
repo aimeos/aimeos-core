@@ -61,7 +61,7 @@ class MShop_Order_Item_Base_Address_Default
 	/**
 	 * Returns the original customer address ID.
 	 *
-	 * @return integer Customer address ID
+	 * @return string Customer address ID
 	 */
 	public function getAddressId()
 	{
@@ -72,7 +72,7 @@ class MShop_Order_Item_Base_Address_Default
 	/**
 	 * Sets the original customer address ID.
 	 *
-	 * @param integer $addrid New customer address ID
+	 * @param string $addrid New customer address ID
 	 */
 	public function setAddressId( $addrid )
 	{

@@ -9,17 +9,17 @@
 
 
 /**
- * Default implementation of checkout payment order HTML client.
+ * Default implementation of checkout address order HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Checkout_Standard_Order_Payment_Default
+class Client_Html_Checkout_Standard_Order_Address_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
 	private $_cache;
-	private $_subPartPath = 'client/html/checkout/standard/order/payment/default/subparts';
+	private $_subPartPath = 'client/html/checkout/standard/order/address/default/subparts';
 	private $_subPartNames = array();
 
 
@@ -36,10 +36,10 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->paymentBody = $html;
+		$view->addressBody = $html;
 
-		$tplconf = 'client/html/checkout/standard/order/payment/default/template-body';
-		$default = 'checkout/standard/order-payment-body-default.html';
+		$tplconf = 'client/html/checkout/standard/order/address/default/template-body';
+		$default = 'checkout/standard/order-address-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -58,10 +58,10 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->paymentHeader = $html;
+		$view->addressHeader = $html;
 
-		$tplconf = 'client/html/checkout/standard/order/payment/default/template-header';
-		$default = 'checkout/standard/order-payment-header-default.html';
+		$tplconf = 'client/html/checkout/standard/order/address/default/template-header';
+		$default = 'checkout/standard/order-address-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -76,7 +76,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'checkout/standard/order/payment/' . $type, $name );
+		return $this->_createSubClient( 'checkout/standard/order/address/' . $type, $name );
 	}
 
 
@@ -93,7 +93,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 
 
 	/**
-	 * Processes the input, e.g. provides the payment form.
+	 * Processes the input, e.g. provides the address form.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
 	 */
@@ -101,30 +101,30 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 	{
 		$view = $this->getView();
 		$basket = $view->orderBasket;
-		$orderItem = $view->orderItem;
-		$context = $this->_getContext();
+		$customerId = $basket->getCustomerId();
 
 		try
 		{
-			$service = $basket->getService( 'payment' );
+			$addr = $basket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
 
-			$manager = MShop_Service_Manager_Factory::createManager( $context );
-			$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
+			if( $customerId != '' && $addr->getAddressId() == '' )
+			{
+				$manager = MShop_Customer_Manager_Factory::createManager( $this->_getContext() );
+				$addrManager = $manager->getSubManager( 'address' );
 
-			if( ( $view->paymentForm = $provider->process( $orderItem ) ) === null ) {
-				throw new Client_Html_Exception();
+				$item = $addrManager->createItem();
+				$item->setRefId( $customerId );
+				$item->copyFrom( $addr );
+
+				$addrManager->saveItem( $item );
+
+				$addr->setAddressId( $item->getId() );
 			}
 		}
 		catch( Exception $e )
 		{
-			$target = $view->config( 'client/html/checkout/confirm/url/target' );
-			$controller = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
-			$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
-			$config = $view->config( 'client/html/checkout/confirm/url/config', array() );
-
-			$url = $view->url( $target, $controller, $action, array(), array(), $config );
-
-			$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( $url, 'REDIRECT' );
+			$msg = sprintf( 'Unable to save address for customer "%1$s": %2$s', $customerId, $e->getMessage() );
+			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::DEBUG );
 		}
 
 		$this->_process( $this->_subPartPath, $this->_subPartNames );

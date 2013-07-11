@@ -86,6 +86,37 @@ class MShop_Common_Item_Address_Default
 
 
 	/**
+	 * Copies the values of the order address item into the address item.
+	 *
+	 * @param MShop_Order_Item_Base_Address_Interface $item Order address item
+	 * @return MShop_Common_Item_Address_Interface The address item for method chaining
+	 */
+	public function copyFrom( MShop_Order_Item_Base_Address_Interface $item )
+	{
+		$this->setCompany( $item->getCompany() );
+		$this->setSalutation( $item->getSalutation() );
+		$this->setTitle( $item->getTitle() );
+		$this->setFirstname( $item->getFirstname() );
+		$this->setLastname( $item->getLastname() );
+		$this->setAddress1( $item->getAddress1() );
+		$this->setAddress2( $item->getAddress2() );
+		$this->setAddress3( $item->getAddress3() );
+		$this->setPostal( $item->getPostal() );
+		$this->setCity( $item->getCity() );
+		$this->setState( $item->getState() );
+		$this->setCountryId( $item->getCountryId() );
+		$this->setLanguageId( $item->getLanguageId() );
+		$this->setTelephone( $item->getTelephone() );
+		$this->setTelefax( $item->getTelefax() );
+		$this->setEmail( $item->getEmail() );
+		$this->setWebsite( $item->getWebsite() );
+		$this->setFlag( $item->getFlag() );
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
