@@ -480,7 +480,7 @@ msgstr "Preis"
 #: layouts/checkout/standard/order-payment-body-default.html:28
 #: layouts/checkout/standard/order-payment-body-default.html:37
 msgid "Proceed"
-msgstr ""
+msgstr "Weiter"
 
 #: layouts/email/confirm/main-text-detail-body-default.html:72
 #: layouts/common/summary/detail-body-default.html:80
@@ -610,7 +610,7 @@ msgstr "Webseite"
 
 #: layouts/common/summary/detail-body-default.html:135
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #. / Date format (Y=year, m=month, d=day, see http://www.php.net/manual/en/function.date.php for more options)
 #: layouts/email/confirm/main-html-head-body-default.html:42
