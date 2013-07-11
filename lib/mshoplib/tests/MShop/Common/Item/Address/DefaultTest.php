@@ -360,6 +360,33 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+	public function testCopyFrom()
+	{
+		$object = new MShop_Common_Item_Address_Default( 'common.address.' );
+		$address = new MShop_Order_Item_Base_Address_Default( $this->_values );
+		$object->copyFrom( $address );
+
+		$this->assertNull( $object->getId() );
+		$this->assertEquals( $this->_values['company'], $object->getCompany() );
+		$this->assertEquals( $this->_values['salutation'], $object->getSalutation() );
+		$this->assertEquals( $this->_values['title'], $object->getTitle() );
+		$this->assertEquals( $this->_values['firstname'], $object->getFirstname() );
+		$this->assertEquals( $this->_values['lastname'], $object->getLastname() );
+		$this->assertEquals( $this->_values['address1'], $object->getAddress1() );
+		$this->assertEquals( $this->_values['address2'], $object->getAddress2() );
+		$this->assertEquals( $this->_values['address3'], $object->getAddress3() );
+		$this->assertEquals( $this->_values['postal'], $object->getPostal() );
+		$this->assertEquals( $this->_values['city'], $object->getCity() );
+		$this->assertEquals( $this->_values['state'], $object->getState() );
+		$this->assertEquals( $this->_values['countryid'], $object->getCountryId() );
+		$this->assertEquals( $this->_values['langid'], $object->getLanguageId() );
+		$this->assertEquals( $this->_values['telephone'], $object->getTelephone() );
+		$this->assertEquals( $this->_values['telefax'], $object->getTelefax() );
+		$this->assertEquals( $this->_values['email'], $object->getEmail() );
+		$this->assertEquals( $this->_values['website'], $object->getWebsite() );
+		$this->assertEquals( $this->_values['flag'], $object->getFlag() );
+	}
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
