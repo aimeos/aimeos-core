@@ -376,6 +376,55 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+	public function testCopyFrom()
+	{
+		$address = new MShop_Common_Item_Address_Default( 'common.address.', $this->_values );
+
+		$addressCopy = new MShop_Order_Item_Base_Address_Default();
+		$addressCopy->copyFrom( $address );
+
+		$this->assertEquals( 23, $addressCopy->getAddressId() );
+		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $addressCopy->getType() );
+		$this->assertEquals( 'unitCompany', $addressCopy->getCompany() );
+		$this->assertEquals( MShop_Order_item_Base_Address_Abstract::SALUTATION_MR, $addressCopy->getSalutation() );
+		$this->assertEquals( 'Herr', $addressCopy->getTitle() );
+		$this->assertEquals( 'firstunit', $addressCopy->getFirstname() );
+		$this->assertEquals( 'lastunit', $addressCopy->getLastname() );
+		$this->assertEquals( 'unit str.', $addressCopy->getAddress1() );
+		$this->assertEquals( '166', $addressCopy->getAddress2() );
+		$this->assertEquals( '4.OG', $addressCopy->getAddress3() );
+		$this->assertEquals( '22769', $addressCopy->getPostal() );
+		$this->assertEquals( 'Hamburg', $addressCopy->getCity() );
+		$this->assertEquals( 'Hamburg', $addressCopy->getState() );
+		$this->assertEquals( 'DE', $addressCopy->getCountryId() );
+		$this->assertEquals( '05554433221', $addressCopy->getTelephone() );
+		$this->assertEquals( 'unit.test@metaways.de', $addressCopy->getEmail() );
+		$this->assertEquals( '05554433222', $addressCopy->getTelefax() );
+		$this->assertEquals( 'www.metaways.de', $addressCopy->getWebsite() );
+		$this->assertEquals( 'de', $addressCopy->getLanguageId() );
+		$this->assertEquals( 2, $addressCopy->getFlag() );
+
+		$this->assertTrue( $addressCopy->isModified() );
+	}
+
+	public function testFromArray()
+	{
+		$list = array(
+			'order.base.address.id' => 1,
+			'order.base.address.baseid' => 2,
+			'order.base.address.addressid' => 3,
+			'order.base.address.type' => 'payment',
+		);
+
+		$object = new MShop_Order_Item_Base_Address_Default();
+		$object->fromArray( $list );
+
+		$this->assertEquals( $list['order.base.address.id'], $object->getId() );
+		$this->assertEquals( $list['order.base.address.baseid'], $object->getBaseId() );
+		$this->assertEquals( $list['order.base.address.addressid'], $object->getAddressId() );
+		$this->assertEquals( $list['order.base.address.type'], $object->getType() );
+	}
+
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
@@ -411,36 +460,5 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 	public function testIsModified()
 	{
 		$this->assertFalse($this->_object->isModified());
-	}
-
-	public function testCopyFrom()
-	{
-		$address = new MShop_Common_Item_Address_Default( 'common.address.', $this->_values );
-
-		$addressCopy = new MShop_Order_Item_Base_Address_Default();
-		$addressCopy->copyFrom( $address );
-
-		$this->assertEquals( 23, $addressCopy->getAddressId() );
-		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $addressCopy->getType() );
-		$this->assertEquals( 'unitCompany', $addressCopy->getCompany() );
-		$this->assertEquals( MShop_Order_item_Base_Address_Abstract::SALUTATION_MR, $addressCopy->getSalutation() );
-		$this->assertEquals( 'Herr', $addressCopy->getTitle() );
-		$this->assertEquals( 'firstunit', $addressCopy->getFirstname() );
-		$this->assertEquals( 'lastunit', $addressCopy->getLastname() );
-		$this->assertEquals( 'unit str.', $addressCopy->getAddress1() );
-		$this->assertEquals( '166', $addressCopy->getAddress2() );
-		$this->assertEquals( '4.OG', $addressCopy->getAddress3() );
-		$this->assertEquals( '22769', $addressCopy->getPostal() );
-		$this->assertEquals( 'Hamburg', $addressCopy->getCity() );
-		$this->assertEquals( 'Hamburg', $addressCopy->getState() );
-		$this->assertEquals( 'DE', $addressCopy->getCountryId() );
-		$this->assertEquals( '05554433221', $addressCopy->getTelephone() );
-		$this->assertEquals( 'unit.test@metaways.de', $addressCopy->getEmail() );
-		$this->assertEquals( '05554433222', $addressCopy->getTelefax() );
-		$this->assertEquals( 'www.metaways.de', $addressCopy->getWebsite() );
-		$this->assertEquals( 'de', $addressCopy->getLanguageId() );
-		$this->assertEquals( 2, $addressCopy->getFlag() );
-
-		$this->assertTrue( $addressCopy->isModified() );
 	}
 }

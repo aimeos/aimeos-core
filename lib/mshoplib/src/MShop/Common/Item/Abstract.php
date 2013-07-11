@@ -151,6 +151,24 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		if( array_key_exists( $this->_prefix . 'id', $list ) )
+		{
+			$this->setId( $list[$this->_prefix . 'id'] );
+			unset( $list[$this->_prefix . 'id'] );
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

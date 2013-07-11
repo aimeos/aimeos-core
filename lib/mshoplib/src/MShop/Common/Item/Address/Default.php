@@ -89,7 +89,6 @@ class MShop_Common_Item_Address_Default
 	 * Copies the values of the order address item into the address item.
 	 *
 	 * @param MShop_Order_Item_Base_Address_Interface $item Order address item
-	 * @return MShop_Common_Item_Address_Interface The address item for method chaining
 	 */
 	public function copyFrom( MShop_Order_Item_Base_Address_Interface $item )
 	{
@@ -111,8 +110,31 @@ class MShop_Common_Item_Address_Default
 		$this->setEmail( $item->getEmail() );
 		$this->setWebsite( $item->getWebsite() );
 		$this->setFlag( $item->getFlag() );
+	}
 
-		return $this;
+
+	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case $this->_prefix . 'refid': $this->setRefId( $value ); break;
+				case $this->_prefix . 'position': $this->setPosition( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
 	}
 
 
