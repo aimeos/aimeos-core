@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-09 18:19+0200\n"
+"POT-Creation-Date: 2013-07-10 18:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,8 +45,9 @@ msgstr ""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:49
 #: src/Controller/Frontend/Common/Factory/Abstract.php:122
+#: src/Controller/Frontend/Abstract.php:82
 #, php-format
-msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:43
@@ -89,24 +90,19 @@ msgstr ""
 msgid "Invalid value for address type \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Abstract.php:82
-#, php-format
-msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
-
 #: src/Controller/Frontend/Basket/Default.php:631
 #, php-format
-msgid "No list type for domain \"%1$s\" and code \"%2$s\" found"
+msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr ""
 
 #: src/Controller/Frontend/Basket/Default.php:125
 #, php-format
-msgid "No product found for ID \"%1$s\" and variant attribute IDs \"%2$s\""
+msgid "Product with ID \"%1$s\" and variant attribute IDs \"%2$s\" not available"
 msgstr ""
 
 #: src/Controller/Frontend/Service/Default.php:179
 #, php-format
-msgid "No service item for type \"%1$s\" and ID \"%2$s\" found"
+msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
 msgstr ""
 
 #: src/Controller/Frontend/Basket/Default.php:484

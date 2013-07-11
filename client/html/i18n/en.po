@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core 2013-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-09 18:19+0200\n"
+"POT-Creation-Date: 2013-07-10 18:43+0200\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language: English\n"
@@ -28,6 +28,14 @@ msgid_plural "%1$d articles"
 msgstr[0] ""
 msgstr[1] ""
 
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language, country (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s)
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
 #. / address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
 #. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language, country (%13$s),
@@ -86,7 +94,6 @@ msgid "%1$s%%"
 msgstr ""
 
 #. / Service fee value (%1$s) and shipping cost value (%2$s) with currency (%3$s)
-#. / Service fee value (%1$s) and payment cost value (%2$s) with currency (%3$s)
 #: layouts/checkout/standard/delivery-body-default.html:51
 #: layouts/checkout/standard/payment-body-default.html:51
 #, php-format
@@ -116,6 +123,11 @@ msgstr ""
 msgid "Additional 2"
 msgstr ""
 
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:181
+#, php-format
+msgid "Address with ID \"%1$s\" not found"
+msgstr ""
+
 #: layouts/common/summary/address-body-default.html:18
 msgid "Addresses"
 msgstr ""
@@ -125,7 +137,7 @@ msgstr ""
 msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
-"This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the email and attachments afterwards.\n"
+"This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards.\n"
 msgstr ""
 
 #: layouts/catalog/detail/basic-body-default.html:17
@@ -171,6 +183,11 @@ msgstr ""
 msgid "Buy now"
 msgstr ""
 
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:142
+#, php-format
+msgid "Category with ID \"%1$s\" not available"
+msgstr ""
+
 #: layouts/common/summary/detail-body-default.html:72
 #: layouts/common/summary/address-body-default.html:23
 #: layouts/common/summary/address-body-default.html:77
@@ -180,7 +197,6 @@ msgid "Change"
 msgstr ""
 
 #: layouts/checkout/confirm/basic-body-default.html:35
-#, fuzzy
 msgid "Change payment"
 msgstr "Payment"
 
@@ -196,7 +212,7 @@ msgstr ""
 #: src/Client/Html/Abstract.php:157
 #: src/Client/Html/Common/Factory/Abstract.php:38
 #, php-format
-msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
 #: src/Client/Html/Abstract.php:151
@@ -230,6 +246,11 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:181
+#, php-format
+msgid "Customer with ID \"%1$s\" not found"
+msgstr ""
+
 #. / Greeting with salutation (%1$s), first name (%2$s) and last name (%3$s)
 #: layouts/email/confirm/main-html-head-body-default.html:25
 #: layouts/email/confirm/main-text-head-body-default.html:20
@@ -242,7 +263,6 @@ msgstr ""
 msgid "Dear Sir or Madam"
 msgstr ""
 
-#
 #: layouts/email/confirm/main-text-service-body-default.html:13
 #: layouts/account/history/list-body-default.html:43
 msgid "Delivery"
@@ -320,12 +340,12 @@ msgstr ""
 #: src/Client/Html/Checkout/Update/Factory.php:39
 #: src/Client/Html/Checkout/Confirm/Factory.php:39
 #, php-format
-msgid "Invalid class name \"%1$s\""
+msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
 #: src/Client/Html/Abstract.php:103 src/Client/Html/Abstract.php:142
 #, php-format
-msgid "Invalid client name \"%1$s\""
+msgid "Invalid characters in client name \"%1$s\""
 msgstr ""
 
 #: layouts/checkout/standard/address-billing-body-default.html:158
@@ -348,29 +368,9 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:181
-#, php-format
-msgid "No address found for ID \"%1$s\""
-msgstr ""
-
 #: layouts/catalog/list/head-body-default.html:34
 #, php-format
 msgid "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please try again with a different keyword."
-msgstr ""
-
-#: src/Client/Html/Catalog/Filter/Tree/Default.php:142
-#, php-format
-msgid "No category with ID \"%1$s\" available"
-msgstr ""
-
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:181
-#, php-format
-msgid "No customer found for ID \"%1$s\""
-msgstr ""
-
-#: src/Client/Html/Abstract.php:216
-#, php-format
-msgid "No template found for \"%1$s\""
 msgstr ""
 
 #: src/Client/Html/Abstract.php:50
@@ -545,6 +545,11 @@ msgstr ""
 #: layouts/checkout/standard/address-billing-body-default.html:170
 #: layouts/checkout/standard/address-delivery-body-default.html:174
 msgid "Telephone"
+msgstr ""
+
+#: src/Client/Html/Abstract.php:216
+#, php-format
+msgid "Template \"%1$s\" not available"
 msgstr ""
 
 #: layouts/checkout/standard/summary-option-terms-body-default.html:22

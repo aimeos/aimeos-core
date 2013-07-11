@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-09 18:19+0200\n"
+"POT-Creation-Date: 2013-07-10 18:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,7 +167,7 @@ msgstr ""
 
 #: src/MShop/Order/Item/Abstract.php:321
 #, php-format
-msgid "Email flags \"%1$s\" not within allowed range"
+msgid "E-mail flags \"%1$s\" not within allowed range"
 msgstr ""
 
 #: src/MShop/Order/Item/Base/Product/Abstract.php:39
@@ -526,7 +526,7 @@ msgstr ""
 
 #: src/MShop/Price/Item/Default.php:318
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currenty ID \"%2$s\" does not match."
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
 msgstr ""
 
 #: src/MShop/Price/Manager/Abstract.php:49
@@ -656,7 +656,7 @@ msgstr ""
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:85
 #, php-format
-msgid "Total number of products exceeds given limit"
+msgid "Total number of product exceeds given limit"
 msgstr ""
 
 #: src/MShop/Locale/Manager/Default.php:510

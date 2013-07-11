@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core Git de2b73333bfb2289a6f5206bb8383d0f87701e4a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-09 18:19+0200\n"
+"POT-Creation-Date: 2013-07-10 18:43+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language: en\n"
@@ -669,11 +669,9 @@ msgstr ""
 msgid "Paypal express payment transaction ID for order ID \"%1$s\" not available"
 msgstr ""
 
-# error domain: price
-# error type: action failed
 #: src/MShop/Price/Item/Default.php:318
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currenty ID \"%2$s\" does not match."
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
 msgstr ""
 
 # error domain: price
@@ -847,11 +845,9 @@ msgstr ""
 msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr ""
 
-# error domain: plugin
-# error type: value not within allowed range
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:85
 #, php-format
-msgid "Total number of products exceeds given limit"
+msgid "Total number of product exceeds given limit"
 msgstr ""
 
 # error domain: search
