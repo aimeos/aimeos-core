@@ -847,7 +847,7 @@ msgstr ""
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:85
 #, php-format
-msgid "Total number of product exceeds given limit"
+msgid "Total number of products exceeds given limit"
 msgstr ""
 
 # error domain: search
