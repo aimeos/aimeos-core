@@ -132,7 +132,7 @@ class Client_Html_Checkout_Standard_Order_Default
 			$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 			$basket = $orderBaseManager->getSession();
-			$basket->setCustomerId( (string) $context->getUserId() );
+			$basket->setCustomerId( $context->getUserId() );
 			$basket->finish();
 
 			$orderBaseManager->store( $basket );
@@ -142,8 +142,10 @@ class Client_Html_Checkout_Standard_Order_Default
 			$orderItem->setType( MShop_Order_Item_Abstract::TYPE_WEB );
 			$orderManager->saveItem( $orderItem );
 
-			$view->orderItem = $orderItem;
 			$context->getSession()->set( 'arcavias/orderid', $orderItem->getId() );
+
+			$view->orderItem = $orderItem;
+			$view->orderBasket = $basket;
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 
