@@ -140,8 +140,6 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 	public function testProcessPayPal()
 	{
-		// $this->markTestSkipped( 'Connection to PayPal fails on Github' );
-
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
 		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
 
@@ -177,7 +175,7 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
 		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $view->get( 'paymentForm' ) );
-		$this->assertEquals( 'POST', $view->paymentForm->getMethod() );
+		$this->assertEquals( 'REDIRECT', $view->paymentForm->getMethod() );
 		$this->assertEquals( 'baseurl/checkout/confirm/', $view->paymentForm->getUrl() );
 	}
 }
