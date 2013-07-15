@@ -29,7 +29,7 @@ class MW_Setup_Task_PriceAddTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return array( 'CatalogRebuildTestIndex' );
 	}
 
 
