@@ -327,6 +327,35 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 
 	/**
+	 * Creates zip from csv files in a temp folder.
+	 *
+	 * @param string $srcdir Temporary source directory name
+	 * @param string $destdir Destination directory for export files
+	 * @param array $files List of file names
+	 * @throws Exception if a file couldn't be created or removed
+	 */
+	protected function _createZip( $srcdir, $destdir, $files )
+	{
+		$zip = new ZipArchive();
+		$filename = $destdir . DIRECTORY_SEPARATOR . $srcdir . '.zip';
+
+		$zip->open( $filename, ZipArchive::OVERWRITE );
+
+		foreach( $files as $id => $file ) {
+			$zip->addFile( $file, substr( $file, -6 ) );
+		}
+
+		$zip->close();
+
+		if( !file_exists($filename) ) {
+			throw new Exception( 'Unable to create zip file');
+		}
+
+		return $filename;
+	}
+
+
+	/**
 	 * Returns a list of list type items.
 	 *
 	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.)

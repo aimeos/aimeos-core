@@ -37,7 +37,6 @@ class Controller_ExtJS_Catalog_Import_Text_CSVTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-
 		$this->_testdir = $context->getConfig()->get( 'controller/extjs/catalog/import/text/default/uploaddir', './tmp' );
 		$this->_testfile = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
@@ -113,7 +112,7 @@ class Controller_ExtJS_Catalog_Import_Text_CSVTest extends MW_Unittest_Testcase
 			$lines[] = $data;
 		}
 		fclose( $fh );
-
+		echo var_dump( $lines );
 		$lines[1][6] = 'Root: delivery info';
 		$lines[2][6] = 'Root: long';
 		$lines[3][6] = 'Root: name';
@@ -224,7 +223,6 @@ class Controller_ExtJS_Catalog_Import_Text_CSVTest extends MW_Unittest_Testcase
 		$result = $jobController->searchItems( $params );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}
-
 
 	public function testUploadFileExeptionNoFiles()
 	{

@@ -94,27 +94,33 @@ class Controller_ExtJS_Product_Export_Text_CSVTest extends MW_Unittest_Testcase
 
 		$deCSV = $testdir . DIRECTORY_SEPARATOR . 'de.csv';
 
-			$this->assertTrue( file_exists( $deCSV ) );
-			$fh = fopen( $deCSV, 'r' );
-			$lines[ $lang ] = fgetcsv( $fh );
-			fclose( $fh );
-			if( unlink( $deCSV ) === false ) {
-				throw new Exception( 'Unable to remove export file' );
-			}
+		$this->assertTrue( file_exists( $deCSV ) );
+		$fh = fopen( $deCSV, 'r' );
+		while( ( $data = fgetcsv( $fh ) ) != false ) {
+			$lines[] = $data;
+		}
+		fclose( $fh );
+		if( unlink( $deCSV ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
+		}
 
 		if( rmdir( $testdir ) === false ) {
 			throw new Exception( 'Unable to remove test export directory' );
 		}
 
-		foreach( $lines as $lang => $line )
-		{
-			$this->assertEquals( $line[0], 'Language ID' );
-			$this->assertEquals( $line[1], 'Product type' );
-			$this->assertEquals( $line[2], 'Product code' );
-			$this->assertEquals( $line[3], 'List type' );
-			$this->assertEquals( $line[4], 'Text type' );
-			$this->assertEquals( $line[5], 'Text ID' );
-			$this->assertEquals( $line[6], 'Text' );
-		}
+		$this->assertEquals( $lines[0][0], 'Language ID' );
+		$this->assertEquals( $lines[0][1], 'Product type' );
+		$this->assertEquals( $lines[0][2], 'Product code' );
+		$this->assertEquals( $lines[0][3], 'List type' );
+		$this->assertEquals( $lines[0][4], 'Text type' );
+		$this->assertEquals( $lines[0][5], 'Text ID' );
+		$this->assertEquals( $lines[0][6], 'Text' );
+
+		$this->assertEquals( 'de', $lines[2][0] );
+		$this->assertEquals( 'default', $lines[2][1] );
+		$this->assertEquals( 'CNE', $lines[2][2] );
+		$this->assertEquals( 'unittype13', $lines[2][3] );
+		$this->assertEquals( 'metadescription', $lines[2][4] );
+		$this->assertEquals( 'Expresso', $lines[2][6] );
 	}
 }

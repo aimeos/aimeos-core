@@ -10,15 +10,17 @@
 
 
 /**
- * ExtJS catalog text export controller for admin interfaces.
+ * ExtJS attribute text export controller for admin interfaces.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Catalog_Export_Text_CSV
+class Controller_ExtJS_Attribute_Export_Text_CSV
 	extends Controller_ExtJS_Common_Load_Text_Abstract
 	implements Controller_ExtJS_Common_Load_Text_Interface
 {
+
+
 	/**
 	 * Initializes the controller.
 	 *
@@ -26,14 +28,14 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		parent::__construct( $context, 'Catalog_Export_Text' );
+		parent::__construct( $context, 'Attribute_Export_Text' );
 	}
 
 
 	/**
 	 * Creates a new job to export an csv file.
 	 *
-	 * @param stdClass $params Object containing the properties, e.g. the list of catalog IDs
+	 * @param stdClass $params Object containing the properties, e.g. the list of attribute IDs
 	 */
 	public function createJob( stdClass $params )
 	{
@@ -41,19 +43,19 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 		$this->_setLocale( $params->site );
 
 		$config = $this->_getContext()->getConfig();
-		$dir = $config->get( 'controller/extjs/catalog/export/text/default/exportdir', 'uploads' );
+		$dir = $config->get( 'controller/extjs/attribute/export/text/default/exportdir', 'uploads' );
 
 		$items = (array) $params->items;
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();
 
-		$languages = ( !empty( $lang ) ) ? implode( $lang, '-' ) : 'all';
+		$languages = ( count( $lang ) > 0 ) ? implode( $lang, '-' ) : 'all';
 
 		$result = (object) array(
 			'site' => $params->site,
 			'items' => array(
 				(object) array(
-					'job.label' => 'Catalog text export: '. $languages,
-					'job.method' => 'Catalog_Export_Text.exportFile',
+					'job.label' => 'Attribute text export: '. $languages,
+					'job.method' => 'Attribute_Export_Text.exportFile',
 					'job.parameter' => array(
 						'site' => $params->site,
 						'items' => $items,
@@ -77,7 +79,7 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 	/**
 	 * Create an csv file in the filesystem.
 	 *
-	 * @param stdClass $params Object containing the properties, e.g. the list of catalog IDs
+	 * @param stdClass $params Object containing the properties, e.g. the list of attribute IDs
 	 */
 	public function exportFile( stdClass $params )
 	{
@@ -89,10 +91,10 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();
 
 		$config = $this->_getContext()->getConfig();
-		$dir = $config->get( 'controller/extjs/catalog/export/text/default/exportdir', 'uploads' );
-		$perms = $config->get( 'controller/extjs/catalog/export/text/default/dirperms', 0775 );
+		$dir = $config->get( 'controller/extjs/attribute/export/text/default/exportdir', 'uploads' );
+		$perms = $config->get( 'controller/extjs/attribute/export/text/default/dirperms', 0775 );
 
-		$foldername = 'catalog-text-export_' . date('Y-m-d') . '_' . md5( time() . getmypid() );
+		$foldername = 'attribute-text-export_' . date('Y-m-d') . '_' . md5( time() . getmypid() );
 		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
 
 		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false ) {
@@ -103,11 +105,11 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $tmpfolder, $perms ) );
 		}
 
-		$this->_getContext()->getLogger()->log( sprintf( 'Create export directory for catalog IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
+		$this->_getContext()->getLogger()->log( sprintf( 'Create export file for attribute IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
 		try
 		{
-			$files = $this->_exportCatalogData( $items, $lang, $tmpfolder );
+			$files = $this->_exportAttributeData( $items, $lang, $tmpfolder );
 
 			$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
@@ -136,7 +138,7 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 	public function getServiceDescription()
 	{
 		return array(
-			'Catalog_Export_Text.createHttpOutput' => array(
+			'Attribute_Export_Text.createHttpOutput' => array(
 				"parameters" => array(
 					array( "type" => "string","name" => "site","optional" => false ),
 					array( "type" => "array","name" => "items","optional" => false ),
@@ -149,14 +151,14 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 
 
 	/**
-	 * Exports catalog data to csv files.
+	 * Creates a new csv object.
 	 *
 	 * @param array $ids List of item IDs that should be part of the document
 	 * @param array $lang List of languages to export (empty array for all)
 	 * @param string $tmpfolder Temporary folder name where to write export files
-	 * @return array List of exported files
+	 * @return PHPExcel Document object
 	 */
-	protected function _exportCatalogData( array $ids, array $lang, $tmpfolder )
+	protected function _exportAttributeData( array $ids, array $lang, $tmpfolder )
 	{
 		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
 		$globalLanguageManager = $manager->getSubManager( 'language' );
@@ -177,9 +179,9 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 			foreach ( $result as $item )
 			{
 				$langid = $item->getId();
-				$files[$langid] = $tmpfolder . DIRECTORY_SEPARATOR . $langid . '.csv';
-				$fh = fopen( $files[$langid], 'a' );
-				fputcsv( $fh, array( 'Language ID', 'Catalog label', 'Catalog ID', 'List type', 'Text type', 'Text ID', 'Text' ) );
+				$files[ $langid ] = $tmpfolder . DIRECTORY_SEPARATOR . $langid . '.csv';
+				$fh = fopen( $files[ $langid ], 'a' );
+				fputcsv( $fh, array( 'Language ID', 'Attribute type', 'Attribute code', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $langid, $ids, $fh );
 				fclose( $fh );
@@ -204,32 +206,49 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 	 */
 	protected function _addLanguage( $langid, array $ids, $fh )
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
+		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
+		$search = $manager->createSearch();
 
-		foreach( $ids as $id )
+		if( !empty( $ids ) ) {
+			$search->setConditions( $search->compare( '==', 'attribute.id', $ids ) );
+		}
+
+		$sort = array( $search->sort( '+', 'attribute.type.code' ), $search->sort( '+', 'attribute.position' ) );
+		$search->setSortations( $sort );
+
+		$start = 0;
+
+		do
 		{
-			foreach( $this->_getNodeList( $manager->getTree( $id, array('text') ) ) as $item ) {
+			$result = $manager->searchItems( $search, array('text'), $temp );
+
+			foreach( $result as $item ) {
 				$this->_addItem( $langid, $item, $fh );
 			}
+
+			$count = count( $result );
+			$start += $count;
+			$search->setSlice( $start );
 		}
+		while( $count == $search->getSliceSize() );
 	}
 
 
 	/**
-	 * Adds all texts belonging to an catalog item to the csv file.
+	 * Adds all texts belonging to an attribute item to the given sheet.
 	 *
 	 * @param string $langid Language id
-	 * @param MShop_Catalog_Item_Interface $item Catalog node object
+	 * @param MShop_Attribute_Item_Interface $item attribute item object
 	 * @param resource $fh File handler
 	 */
-	protected function _addItem( $langid, MShop_Catalog_Item_Interface $item, $fh )
+	protected function _addItem( $langid, MShop_Attribute_Item_Interface $item, $fh )
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
 			$listTypes[ $listItem->getRefId() ] = $listItem->getType();
 		}
 
-		foreach( $this->_getTextTypes( 'catalog' ) as $textTypeItem )
+		foreach( $this->_getTextTypes( 'attribute' ) as $textTypeItem )
 		{
 			$textItems = $item->getRefItems( 'text', $textTypeItem->getCode() );
 
@@ -239,7 +258,7 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 				{
 					$listType = ( isset( $listTypes[ $textItem->getId() ] ) ? $listTypes[ $textItem->getId() ] : '' );
 
-					$items = array( $langid, $item->getLabel(), $item->getId(), $listType, $textTypeItem->getCode(), '', '' );
+					$items = array( $langid, $item->getType(), $item->getCode(), $listType, $textTypeItem->getCode(), '', '' );
 
 					// use language of the text item because it may be null
 					if( ( $textItem->getLanguageId() == $langid || is_null( $textItem->getLanguageId() ) )
@@ -253,28 +272,10 @@ class Controller_ExtJS_Catalog_Export_Text_CSV
 			}
 			else
 			{
-				$items = array( $langid, $item->getLabel(), $item->getId(), 'default', $textTypeItem->getCode(), '', '' );
+				$items = array( $langid, $item->getType(), $item->getCode(), 'default', $textTypeItem->getCode(), '', '' );
 			}
 
 			fputcsv( $fh, $items );
 		}
-	}
-
-
-	/**
-	 * Get all child nodes.
-	 *
-	 * @param MShop_Catalog_Item_Interface $node
-	 * @return array $nodes List of nodes
-	 */
-	protected function _getNodeList( MShop_Catalog_Item_Interface $node )
-	{
-		$nodes = array( $node );
-
-		foreach( $node->getChildren() as $child ) {
-			$nodes = array_merge( $nodes, $this->_getNodeList( $child ) );
-		}
-
-		return $nodes;
 	}
 }

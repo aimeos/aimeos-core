@@ -107,7 +107,7 @@ class Controller_ExtJS_Product_Export_Text_CSV
 
 		try
 		{
-			$files = $this->_exportData( $items, $lang, $tmpfolder );
+			$files = $this->_exportProductData( $items, $lang, $tmpfolder );
 
 			$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
@@ -156,7 +156,7 @@ class Controller_ExtJS_Product_Export_Text_CSV
 	 * @param string $tmpfolder Temporary folder name where to write export files
 	 * @return array List of data to export
 	 */
-	protected function _exportData( array $ids, array $lang, $tmpfolder )
+	protected function _exportProductData( array $ids, array $lang, $tmpfolder )
 	{
 		$data = array();
 		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
@@ -242,8 +242,6 @@ class Controller_ExtJS_Product_Export_Text_CSV
 	 */
 	protected function _addItem( $langid, MShop_Product_Item_Interface $item, $fh )
 	{
-		$data[] = array( 'Language ID', 'Product type', 'Product code', 'List type', 'Text type', 'Text ID', 'Text' );
-
 		$listTypes = $items = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
 			$listTypes[ $listItem->getRefId() ] = $listItem->getType();
