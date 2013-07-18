@@ -599,7 +599,7 @@ class Controller_Frontend_Basket_Default
 		array $domains = array( 'media', 'price', 'text' ) )
 	{
 		$subProductIds = array();
-		foreach( $productItem->getRefItems( 'product', 'default' ) as $item ) {
+		foreach( $productItem->getRefItems( 'product', 'default', 'default' ) as $item ) {
 			$subProductIds[] = $item->getId();
 		}
 

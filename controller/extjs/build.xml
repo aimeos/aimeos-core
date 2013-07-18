@@ -33,7 +33,7 @@
 		</delete>
 	</target>
 
-	<target name="all" depends="coverage,check" description="Builds all parts of the package">
+	<target name="all" depends="coverage" description="Builds all parts of the package">
 	</target>
 
 </project>

@@ -105,47 +105,6 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
-	 * Returns a new manager depending on given domain.
-	 *
-	 * @param string $domain Name of the domain, e.g. text, media, etc.
-	 * @return mixed Manager of the given Domain
-	 * @throws MShop_Common_Exception if manager couldn't be instanciated
-	 */
-	protected function _createDomainManager( $domain )
-	{
-		$domain = strtolower( $domain );
-		$parts = explode( '/', $domain );
-
-		if( count( $parts ) < 1 ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
-		}
-
-		foreach( $parts as $part )
-		{
-			if( ctype_alnum( $part ) === false ) {
-				throw new Controller_ExtJS_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
-			}
-		}
-
-		$classname = 'MShop_' . ucfirst( array_shift( $parts ) ) . '_Manager_Factory';
-
-		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
-		}
-
-		if( ( $manager = call_user_func_array( $classname . '::createManager', array( $this->_context ) ) ) === false ) {
-			throw new MShop_Exception( sprintf( 'Domain manager for class "%1$s" not available', $classname ) );
-		}
-
-		foreach( $parts as $part ) {
-			$manager = $manager->getSubManager( $part );
-		}
-
-		return $manager;
-	}
-
-
-	/**
 	 * Returns the cached statement for the given key or creates a new prepared statement.
 	 * If no SQL string is given, the key is used to retrieve the SQL string from the configuration.
 	 *
@@ -386,7 +345,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 * @param MW_Common_Criteria_Expression_Interface|null Criteria object
 	 * @return array List of shortend criteria names
 	 */
-	protected function _getCriteriaKeys( array $prefix, MW_Common_Criteria_Expression_Interface $expr = null )
+	private function _getCriteriaKeys( array $prefix, MW_Common_Criteria_Expression_Interface $expr = null )
 	{
 		if( $expr === null ) { return array(); }
 
@@ -667,7 +626,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		{
 			try
 			{
-				$manager = $this->_createDomainManager( $domain );
+				$manager = MShop_Factory::createManager( $this->_context, $domain );
 
 				$search = $manager->createSearch( true );
 				$expr = array(
@@ -885,17 +844,17 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 * @param string $sql Sql statement
 	 * @param boolean $siteidcheck If siteid is used in the statement
 	 */
-	protected function _deleteItems( array $ids, $sql, $siteidcheck = true )
+	protected function _deleteItems( array $ids, $sql, $siteidcheck = true, $name = 'id' )
 	{
 		if( empty( $ids ) ) { return; }
 
 		$context = $this->_getContext();
 
 		$search = $this->createSearch();
-		$search->setConditions( $search->compare( '==', 'id', $ids ) );
+		$search->setConditions( $search->compare( '==', $name, $ids ) );
 
-		$types = array( 'id' => MW_DB_Statement_Abstract::PARAM_STR );
-		$translations = array( 'id' => '"id"' );
+		$types = array( $name => MW_DB_Statement_Abstract::PARAM_STR );
+		$translations = array( $name => '"' . $name . '"' );
 
 		$cond = $search->getConditionString( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $sql );

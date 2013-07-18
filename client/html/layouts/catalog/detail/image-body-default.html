@@ -36,11 +36,14 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 		<a id="next-thumbs" class="disabled"></a>
 		<div class="thumbs">
 <?php
-	$class = 'item selected';
-	foreach( $mediaItems as $id => $mediaItem )
+	if( count( $mediaItems ) > 1 )
 	{
-		echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ) . '\')"></a>';
-		$class = 'item';
+		$class = 'item selected';
+		foreach( $mediaItems as $id => $mediaItem )
+		{
+			echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ) . '\')"></a>';
+			$class = 'item';
+		}
 	}
 ?>
 		</div>
