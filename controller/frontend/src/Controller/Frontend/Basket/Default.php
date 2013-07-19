@@ -105,9 +105,6 @@ class Controller_Frontend_Basket_Default
 			else if( ( $productItem = reset( $productItems ) ) !== false )
 			{
 				$orderBaseProductItem->setProductCode( $productItem->getCode() );
-				$orderBaseProductItem->setSupplierCode( $productItem->getSupplierCode() );
-				$orderBaseProductItem->parentId = $orderBaseProductItem->getProductId();
-				$orderBaseProductItem->setProductId( $productItem->getId() );
 
 				$subprices = $productItem->getRefItems( 'price', 'default' );
 
@@ -221,16 +218,32 @@ class Controller_Frontend_Basket_Default
 		}
 
 
-		$this->_checkStockLevel( $product->getProductId(), $quantity );
-
 		$productManager = $this->_getDomainManager( 'product' );
-		$productItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
+
+		$search = $productManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.code', $product->getProductCode() ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$result = $productManager->searchItems( $search, array( 'price' ) );
+
+		if( ( $productItem = reset( $result ) ) === false )
+		{
+			$msg = sprintf( 'No product with code "%1$s" found', $product->getProductCode() );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+
+
+		$this->_checkStockLevel( $productItem->getId(), $quantity );
+
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
-		if( empty( $prices ) && isset( $product->parentId ) )
+		if( empty( $prices ) )
 		{
-			$productItem = $productManager->getItem( $product->parentId, array( 'price' ) );
+			$productItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
 			$prices = $productItem->getRefItems( 'price', 'default' );
 		}
 
