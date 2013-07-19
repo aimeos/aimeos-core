@@ -107,6 +107,79 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAddProductVariantIncomplete()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST') );
+
+		$items = $productManager->searchItems( $search, array() );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Product not found' );
+		}
+
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $attributeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'attribute.domain', 'product' ),
+			$search->compare( '==', 'attribute.code', '30' ),
+			$search->compare( '==', 'attribute.type.code', 'length' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$attributes = $attributeManager->searchItems( $search );
+
+		if( count( $attributes ) === 0) {
+			throw new Exception( 'Attributes not found' );
+		}
+
+
+		$this->_object->addProduct( $item->getId(), 1, true, array_keys( $attributes ) );
+
+		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
+		$this->assertEquals( 'U:TESTSUB02', $this->_object->get()->getProduct( 0 )->getProductCode() );
+		$this->assertEquals( 2, count( $this->_object->get()->getProduct( 0 )->getAttributes() ) );
+	}
+
+
+	public function testAddProductVariantNonUnique()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST') );
+
+		$items = $productManager->searchItems( $search, array() );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Product not found' );
+		}
+
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $attributeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'attribute.domain', 'product' ),
+			$search->compare( '==', 'attribute.code', '30' ),
+			$search->compare( '==', 'attribute.type.code', 'width' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$attributes = $attributeManager->searchItems( $search );
+
+		if( count( $attributes ) === 0) {
+			throw new Exception( 'Attributes not found' );
+		}
+
+
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->_object->addProduct( $item->getId(), 1, true, array_keys( $attributes ) );
+	}
+
+
 	public function testAddProductVariantNotRequired()
 	{
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
