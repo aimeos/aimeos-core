@@ -19,7 +19,7 @@ class Client_Html_Catalog_Detail_Basket_Default
 	implements Client_Html_Interface
 {
 	private $_cache;
-	private $_subPartNames = array( 'attribute' );
+	private $_subPartNames = array( 'selection', 'attribute' );
 	private $_subPartPath = 'client/html/catalog/detail/basket/default/subparts';
 
 

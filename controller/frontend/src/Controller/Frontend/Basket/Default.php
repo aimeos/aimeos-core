@@ -97,7 +97,12 @@ class Controller_Frontend_Basket_Default
 		{
 			$productItems = $this->_getProductVariants( $productItem, $variantAttributeIds );
 
-			if( ( $productItem = reset( $productItems ) ) !== false )
+			if( count( $productItems ) > 1 )
+			{
+				$msg = sprintf( 'No unique article found for selected attributes and product ID "%1$s"', $prodid );
+				throw new Controller_Frontend_Basket_Exception( $msg );
+			}
+			else if( ( $productItem = reset( $productItems ) ) !== false )
 			{
 				$orderBaseProductItem->setProductCode( $productItem->getCode() );
 
@@ -107,7 +112,9 @@ class Controller_Frontend_Basket_Default
 					$prices = $subprices;
 				}
 
-				foreach( $this->_getAttributes( $variantAttributeIds, array( 'text' ) ) as $attrItem )
+				$variantAttributes = $productItem->getRefItems( 'attribute', null, 'variant' );
+
+				foreach( $this->_getAttributes( array_keys( $variantAttributes ), array( 'text' ) ) as $attrItem )
 				{
 					$orderAttributeItem = $orderProductAttributeManager->createItem();
 					$orderAttributeItem->copyFrom( $attrItem );
@@ -118,8 +125,7 @@ class Controller_Frontend_Basket_Default
 			}
 			else if( $requireVariant === true )
 			{
-				$ids = join( ',', $variantAttributeIds );
-				$msg = sprintf( 'Product with ID "%1$s" and variant attribute IDs "%2$s" not available', $prodid, $ids );
+				$msg = sprintf( 'No article found for selected attributes and product ID "%1$s"', $prodid );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 		}
@@ -609,7 +615,7 @@ class Controller_Frontend_Basket_Default
 	 * @return array List of products matching the given attributes
 	 */
 	protected function _getProductVariants( MShop_Product_Item_Interface $productItem, array $variantAttributeIds,
-		array $domains = array( 'media', 'price', 'text' ) )
+		array $domains = array( 'attribute', 'media', 'price', 'text' ) )
 	{
 		$subProductIds = array();
 		foreach( $productItem->getRefItems( 'product', 'default', 'default' ) as $item ) {
