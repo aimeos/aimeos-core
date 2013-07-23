@@ -91,34 +91,17 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 	public function testProcessNoService()
 	{
-		$view = TestHelper::getView();
-		$this->_object->setView( $view );
-
-		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->_object->process();
-	}
-
-
-	public function testProcessNoOrder()
-	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
-
-		$search = $serviceManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.code', 'unitpaymentcode' ) );
-		$result = $serviceManager->searchItems( $search );
-
-		if( ( $serviceItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No service item found' );
-		}
-
 		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$basketCntl->setService( 'payment', $serviceItem->getId() );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
 
 		$view = TestHelper::getView();
+		$view->orderBasket = $basketCntl->get();
+		$view->orderItem = $orderManager->createItem();
 		$this->_object->setView( $view );
 
-		$this->setExpectedException( 'MW_View_Exception' );
 		$this->_object->process();
+
+		$this->assertEquals( 'REDIRECT', $view->paymentForm->getMethod() );
 	}
 
 
@@ -143,6 +126,7 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 		$view = TestHelper::getView();
 		$view->orderItem = $orderItem;
+		$view->orderBasket = $basketCntl->get();
 		$this->_object->setView( $view );
 
 		$this->_object->process();
@@ -156,8 +140,6 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 	public function testProcessPayPal()
 	{
-		$this->markTestSkipped( 'Connection to PayPal fails on Github' );
-
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
 		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
 
@@ -181,15 +163,19 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 			throw new Exception( 'No order item found' );
 		}
 
+		$orderItem = $orderManager->createItem();
+		$orderItem->setId( -1 );
+
 		$view = TestHelper::getView();
-		$view->orderItem = $item;
+		$view->orderItem = $orderItem;
+		$view->orderBasket = $basketCntl->get();
 		$this->_object->setView( $view );
 
 		$this->_object->process();
 
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
 		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $view->get( 'paymentForm' ) );
-		$this->assertEquals( 'POST', $view->paymentForm->getMethod() );
+		$this->assertEquals( 'REDIRECT', $view->paymentForm->getMethod() );
 		$this->assertEquals( 'baseurl/checkout/confirm/', $view->paymentForm->getUrl() );
 	}
 }

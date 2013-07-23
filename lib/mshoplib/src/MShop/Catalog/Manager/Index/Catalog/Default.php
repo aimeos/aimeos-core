@@ -133,37 +133,8 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 			$submanager->deleteItems( $ids );
 		}
 
-		$context = $this->_getContext();
-		$siteid = $context->getLocale()->getSiteId();
-
 		$path = 'mshop/catalog/manager/index/catalog/default/item/delete';
-		$sql = $context->getConfig()->get( $path, $path );
-
-		$search = $this->createSearch();
-		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
-
-		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
-		$translations = array( 'prodid' => '"prodid"' );
-
-		$cond = $search->getConditionString( $types, $translations );
-		$sql = str_replace( ':cond', $cond, $sql );
-
-		try
-		{
-			$dbm = $context->getDatabaseManager();
-			$conn = $dbm->acquire();
-
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'prodid' );
 	}
 
 

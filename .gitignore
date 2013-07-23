@@ -1,3 +1,6 @@
 resource.php
 vendor/
 *.log
+.buildpath
+.project
+.settings/

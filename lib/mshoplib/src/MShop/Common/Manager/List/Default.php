@@ -344,8 +344,8 @@ class MShop_Common_Manager_List_Default
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = 'mshop/' . $topdomain . '/manager/' . implode( '/', $domain ) . '/default/item/search';
-			$cfgPathCount =  'mshop/' . $topdomain . '/manager/' . implode( '/', $domain ) . '/default/item/count';
+			$cfgPathSearch = $this->_config['search'];
+			$cfgPathCount =  $this->_config['count'];
 
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
@@ -368,10 +368,11 @@ class MShop_Common_Manager_List_Default
 
 		if( !empty( $typeIds ) )
 		{
-			$typeSearch = $this->_typeManager->createSearch();
+			$typeManager = $this->getSubManager( 'type' );
+			$typeSearch = $typeManager->createSearch();
 			$typeSearch->setConditions( $typeSearch->compare( '==', $name . '.type.id', array_keys( $typeIds ) ) );
 			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $this->_typeManager->searchItems( $typeSearch );
+			$typeItems = $typeManager->searchItems( $typeSearch );
 
 			foreach( $map as $id => $row )
 			{
@@ -440,7 +441,9 @@ class MShop_Common_Manager_List_Default
 		switch( $manager )
 		{
 			case 'type':
-				return $this->_typeManager;
+				if( isset( $this->_typeManager ) ) {
+					return $this->_typeManager;
+				}
 			default:
 				return $this->_getSubManager( 'common', 'list/' . $manager, $name );
 		}

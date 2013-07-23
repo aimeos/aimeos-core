@@ -483,8 +483,10 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		if ( $website == $this->getWebsite() ) { return; }
 
-		if( $website !== '' && preg_match('#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#', $website) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in web site URL "%1$s"', $website ) );
+		$pattern = '#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#';
+
+		if( $website !== '' && preg_match( $pattern, $website ) !== 1 ) {
+			throw new MShop_Exception( sprintf( 'Invalid web site URL "%1$s"', $website ) );
 		}
 
 		$this->_values['website'] = (string) $website;
@@ -518,6 +520,47 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case $this->_prefix . 'salutation': $this->setSalutation( $value ); break;
+				case $this->_prefix . 'company': $this->setCompany( $value ); break;
+				case $this->_prefix . 'title': $this->setTitle( $value ); break;
+				case $this->_prefix . 'firstname': $this->setFirstname( $value ); break;
+				case $this->_prefix . 'lastname': $this->setLastname( $value ); break;
+				case $this->_prefix . 'address1': $this->setAddress1( $value ); break;
+				case $this->_prefix . 'address2': $this->setAddress2( $value ); break;
+				case $this->_prefix . 'address3': $this->setAddress3( $value ); break;
+				case $this->_prefix . 'postal': $this->setPostal( $value ); break;
+				case $this->_prefix . 'city': $this->setCity( $value ); break;
+				case $this->_prefix . 'state': $this->setState( $value ); break;
+				case $this->_prefix . 'countryid': $this->setCountryId( $value ); break;
+				case $this->_prefix . 'languageid': $this->setLanguageId( $value ); break;
+				case $this->_prefix . 'telephone': $this->setTelephone( $value ); break;
+				case $this->_prefix . 'telefax': $this->setTelefax( $value ); break;
+				case $this->_prefix . 'email': $this->setEmail( $value ); break;
+				case $this->_prefix . 'website': $this->setWebsite( $value ); break;
+				case $this->_prefix . 'flag': $this->setFlag( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
@@ -526,9 +569,8 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	{
 		$list = parent::toArray();
 
-		$list[$this->_prefix . 'countryid'] = $this->getCountryId();
-		$list[$this->_prefix . 'company'] = $this->getCompany();
 		$list[$this->_prefix . 'salutation'] = $this->getSalutation();
+		$list[$this->_prefix . 'company'] = $this->getCompany();
 		$list[$this->_prefix . 'title'] = $this->getTitle();
 		$list[$this->_prefix . 'firstname'] = $this->getFirstname();
 		$list[$this->_prefix . 'lastname'] = $this->getLastname();
@@ -538,11 +580,12 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 		$list[$this->_prefix . 'postal'] = $this->getPostal();
 		$list[$this->_prefix . 'city'] = $this->getCity();
 		$list[$this->_prefix . 'state'] = $this->getState();
-		$list[$this->_prefix . 'email'] = $this->getEmail();
+		$list[$this->_prefix . 'countryid'] = $this->getCountryId();
+		$list[$this->_prefix . 'languageid'] = $this->getLanguageId();
 		$list[$this->_prefix . 'telephone'] = $this->getTelephone();
 		$list[$this->_prefix . 'telefax'] = $this->getTelefax();
+		$list[$this->_prefix . 'email'] = $this->getEmail();
 		$list[$this->_prefix . 'website'] = $this->getWebsite();
-		$list[$this->_prefix . 'languageid'] = $this->getLanguageId();
 		$list[$this->_prefix . 'flag'] = $this->getFlag();
 
 		return $list;

@@ -68,7 +68,7 @@
 		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" /> 
     </target>
 
-	<target name="all" depends="coverage,testperf,check" description="Builds all parts of the package">
+	<target name="all" depends="coverage,testperf" description="Builds all parts of the package">
 	</target>
 
 </project>

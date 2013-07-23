@@ -498,63 +498,11 @@ class Controller_Frontend_Basket_Default
 	 */
 	protected function _setAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map )
 	{
-		$errors = array();
-
-		foreach( $map as $key => $value )
-		{
-			try
-			{
-				$value = strip_tags( $value ); // prevent XSS
-
-				switch( $key )
-				{
-					case 'order.base.address.salutation':
-						$address->setSalutation( $value ); break;
-					case 'order.base.address.company':
-						$address->setCompany( $value ); break;
-					case 'order.base.address.title':
-						$address->setTitle( $value ); break;
-					case 'order.base.address.firstname':
-						$address->setFirstname( $value ); break;
-					case 'order.base.address.lastname':
-						$address->setLastName( $value ); break;
-					case 'order.base.address.address1':
-						$address->setAddress1( $value ); break;
-					case 'order.base.address.address2':
-						$address->setAddress2( $value ); break;
-					case 'order.base.address.address3':
-						$address->setAddress3( $value ); break;
-					case 'order.base.address.postal':
-						$address->setPostal( $value ); break;
-					case 'order.base.address.city':
-						$address->setCity( $value ); break;
-					case 'order.base.address.state':
-						$address->setState( $value ); break;
-					case 'order.base.address.countryid':
-						$address->setCountryId( $value ); break;
-					case 'order.base.address.languageid':
-						$address->setLanguageId( $value ); break;
-					case 'order.base.address.telephone':
-						$address->setTelephone( $value ); break;
-					case 'order.base.address.email':
-						$address->setEmail( $value ); break;
-					case 'order.base.address.telefax':
-						$address->setTelefax( $value ); break;
-					case 'order.base.address.website':
-						$address->setWebsite( $value ); break;
-					case 'order.base.address.flag':
-						$address->setFlag( $value ); break;
-					default:
-						$msg = sprintf( 'Invalid address property "%1$s" with value "%2$s"', $key, $value );
-						throw new Controller_Frontend_Basket_Exception( $msg );
-				}
-			}
-			catch( Exception $e )
-			{
-				$name = substr( $key, 19 );
-				$errors[$name] = $e->getMessage();
-			}
+		foreach( $map as $key => $value ) {
+			$map[$key] = strip_tags( $value ); // prevent XSS
 		}
+
+		$errors = $address->fromArray( $map );
 
 		if( count( $errors ) > 0 )
 		{
@@ -651,7 +599,7 @@ class Controller_Frontend_Basket_Default
 		array $domains = array( 'media', 'price', 'text' ) )
 	{
 		$subProductIds = array();
-		foreach( $productItem->getRefItems( 'product', 'default' ) as $item ) {
+		foreach( $productItem->getRefItems( 'product', 'default', 'default' ) as $item ) {
 			$subProductIds[] = $item->getId();
 		}
 

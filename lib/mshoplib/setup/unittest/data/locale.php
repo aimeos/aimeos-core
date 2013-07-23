@@ -12,9 +12,9 @@ return array (
 
 	'locale' => array (
 		array( 'siteid' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'pos' => 0, 'status' => 0 ),
-		array( 'siteid' => 'unittest', 'langid' => 'en', 'currencyid' => 'EUR', 'pos' => 1, 'status' => 0 ),
+		array( 'siteid' => 'unittest', 'langid' => 'en', 'currencyid' => 'EUR', 'pos' => 1, 'status' => 1 ),
 	),
-	
+
 	'locale/currency' => array(
 		'EUR' => array( 'id' => 'EUR', 'label' => 'Euro', 'status' => 1 ),
 		'CHF' => array( 'id' => 'CHF', 'label' => 'Swiss franc', 'status' => 0 ),

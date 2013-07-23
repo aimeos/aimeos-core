@@ -96,8 +96,7 @@ class Controller_ExtJS_Price_Default
 
 		if( isset( $params->domain ) && isset( $params->parentid ) )
 		{
-			$manager = $this->_getDomainManager( $params->domain );
-			$listManager = $manager->getSubManager( 'list' );
+			$listManager = MShop_Factory::createManager( $this->_getContext(), $params->domain . '/list' );
 			$criteria = $listManager->createSearch();
 
 			$expr = array();
@@ -190,7 +189,8 @@ class Controller_ExtJS_Price_Default
 
 		foreach( $idList as $manager => $ids )
 		{
-			$refDomainListManager = $this->_getDomainManager( $manager )->getSubManager('list');
+			$refDomainListManager = MShop_Factory::createManager( $this->_getContext(), $manager . '/list' );
+
 			$search = $refDomainListManager->createSearch();
 			$expr = array(
 				$search->compare( '==', $manager.'.list.refid', $ids ),

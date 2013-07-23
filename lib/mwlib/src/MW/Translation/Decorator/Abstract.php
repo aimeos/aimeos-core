@@ -19,19 +19,16 @@ abstract class MW_Translation_Decorator_Abstract
 	implements MW_Translation_Decorator_Interface
 {
 	private $_object;
-	private $_config;
 
 
 	/**
 	 * Initializes the decorator.
 	 *
 	 * @param MW_Translation_Interface $object Translation object or decorator
-	 * @param MW_Config_Interface $config Configuration object
 	 */
-	public function __construct( MW_Translation_Interface $object, MW_Config_Interface $config )
+	public function __construct( MW_Translation_Interface $object )
 	{
 		$this->_object = $object;
-		$this->_config = $config;
 	}
 
 
@@ -71,17 +68,6 @@ abstract class MW_Translation_Decorator_Abstract
 	public function getLocale()
 	{
 		return $this->_object->getLocale();
-	}
-
-
-	/**
-	 * Returns the config object.
-	 *
-	 * @return MW_Config_Interface Config object
-	 */
-	protected function _getConfig()
-	{
-		return $this->_config;
 	}
 
 

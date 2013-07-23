@@ -326,7 +326,8 @@ class Controller_ExtJS_JsonRpc
 				$subdir = new DirectoryIterator( $entry->getPathName() );
 				$this->_addControllers( $subdir, ( $prefix !== '' ? $prefix . '_' : '' ) . $entry->getBaseName() );
 			}
-			else if( $entry->getType() === 'file' && ( $name = $entry->getBaseName( '.php' ) ) === 'Factory' )
+			else if( $prefix !== '' && $entry->getType() === 'file'
+				&& ( $name = $entry->getBaseName( '.php' ) ) === 'Factory' )
 			{
 				$name = $classprefix . '_' . $prefix . '_Factory';
 
@@ -338,10 +339,10 @@ class Controller_ExtJS_JsonRpc
 					throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" not found', $name ) );
 				}
 
-				$name .= '::createController';
+				$controller = call_user_func_array( array( $name, 'createController' ), array( $this->_context ) );
 
-				if( ( $controller = call_user_func_array( $name, array( $this->_context ) ) ) === false ) {
-					throw new Controller_ExtJS_Exception( sprintf( 'Factory "%1$s" not found', $name ) );
+				if( $controller === false ) {
+					throw new Controller_ExtJS_Exception( sprintf( 'Invalid factory "%1$s"', $name ) );
 				}
 
 				$this->_controllers[$prefix] = $controller;

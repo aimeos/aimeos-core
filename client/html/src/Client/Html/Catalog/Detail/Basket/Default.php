@@ -30,7 +30,7 @@ class Client_Html_Catalog_Detail_Basket_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -52,7 +52,7 @@ class Client_Html_Catalog_Detail_Basket_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -77,41 +77,6 @@ class Client_Html_Catalog_Detail_Basket_Default
 	public function getSubClient( $type, $name = null )
 	{
 		return $this->_createSubClient( 'catalog/detail/basket/' . $type, $name );
-	}
-
-
-	/**
-	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 */
-	protected function _setViewParams( MW_View_Interface $view )
-	{
-		if( !isset( $this->_cache ) )
-		{
-			$configurables = $view->detailProductItem->getRefItems( 'attribute' );
-
-			$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
-			$search = $attributeManager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'attribute.id', array_keys( $configurables ) ),
-				$search->getConditions(),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$attributeTypes = array();
-			$attrDomains = array( 'text', 'price' );
-
-			foreach( $attributeManager->searchItems( $search, $attrDomains ) as $id => $attribute ) {
-				$attributeTypes[ $attribute->getType() ][$id] = $attribute;
-			}
-
-			$view->detailBasketAttributes = $attributeTypes;
-
-			$this->_cache = $view;
-		}
-
-		return $this->_cache;
 	}
 
 

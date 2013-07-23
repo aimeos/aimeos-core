@@ -161,7 +161,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getCustomerId()
 	{
-		return ( isset( $this->_values['customerid'] ) ? (string) $this->_values['customerid'] : null );
+		return ( isset( $this->_values['customerid'] ) ? (string) $this->_values['customerid'] : '' );
 	}
 
 

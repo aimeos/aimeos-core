@@ -145,6 +145,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$orderAddr->setId( null );
 			$orderAddr->setBaseId( $bases['ids'][ $dataset['baseid'] ] );
+			$orderAddr->setAddressId( ( isset( $dataset['addrid'] ) ? $dataset['addrid'] : '' ) );
 			$orderAddr->setType( $dataset['type'] );
 			$orderAddr->setCompany( $dataset['company'] );
 			$orderAddr->setSalutation( $dataset['salutation'] );

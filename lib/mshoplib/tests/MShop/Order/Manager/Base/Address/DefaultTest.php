@@ -130,6 +130,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
+		$this->assertEquals( $item->getAddressId(), $itemSaved->getAddressId() );
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCompany(), $itemSaved->getCompany() );
 		$this->assertEquals( $item->getSalutation(), $itemSaved->getSalutation() );
@@ -157,6 +158,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getBaseId(), $itemUpd->getBaseId() );
+		$this->assertEquals( $itemExp->getAddressId(), $itemUpd->getAddressId() );
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCompany(), $itemUpd->getCompany() );
 		$this->assertEquals( $itemExp->getSalutation(), $itemUpd->getSalutation() );
@@ -196,6 +198,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'order.base.address.id', null );
 		$expr[] = $search->compare( '==', 'order.base.address.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.address.baseid', null );
+		$expr[] = $search->compare( '==', 'order.base.address.addressid', '103' );
 		$expr[] = $search->compare( '==', 'order.base.address.type', 'payment' );
 		$expr[] = $search->compare( '==', 'order.base.address.company', '' );
 		$expr[] = $search->compare( '==', 'order.base.address.salutation', 'mr' );
@@ -208,7 +211,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.address.postal', '20146' );
 		$expr[] = $search->compare( '==', 'order.base.address.city', 'Hamburg' );
 		$expr[] = $search->compare( '==', 'order.base.address.state', 'Hamburg' );
-		$expr[] = $search->compare( '==', 'order.base.address.countryid', 'de' );
+		$expr[] = $search->compare( '==', 'order.base.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'order.base.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.address.telephone', '055544332211' );
 		$expr[] = $search->compare( '==', 'order.base.address.email', 'eshop@metaways.de' );
