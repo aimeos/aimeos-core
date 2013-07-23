@@ -64,13 +64,13 @@ msgstr ""
 #: layouts/catalog/detail/basket-body-default.html:14
 #, php-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%2$s %1$s"
 
 #. / Configurable product attribute name (%1$s) with price value (%2$s) and currency (%3$s)
 #: layouts/catalog/detail/basket-attribute-body-default.html:32
 #, php-format
 msgid "%1$s ( +%2$s%3$s )"
-msgstr ""
+msgstr "%1$s ( +%3$s%2$s )"
 
 #: layouts/account/history/list-body-default.html:15
 #: layouts/account/history/list-body-default.html:30
@@ -90,7 +90,7 @@ msgstr ""
 #: layouts/checkout/standard/payment-body-default.html:50
 #, php-format
 msgid "%1$s%3$s + %2$s%3$s"
-msgstr ""
+msgstr "%3$s%1$s + %3$s%2$s"
 
 #: layouts/email/confirm/main-text-detail-body-default.html:91
 msgid "+ Payment costs"
@@ -190,7 +190,7 @@ msgstr ""
 
 #: layouts/checkout/confirm/basic-body-default.html:35
 msgid "Change payment"
-msgstr "Payment"
+msgstr ""
 
 #: layouts/basket/standard/body-default.html:44
 msgid "Checkout"
