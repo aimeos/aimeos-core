@@ -42,12 +42,47 @@
 	<target name="i18n" description="Creates translation message files">
 		<exec command="find ./layouts/ ./src/ -type f | xgettext -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=printf:1 --keyword=sprintf:1 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/core-client-html.pot -f -"
 			checkreturn="true" logoutput="true" />
-		<exec command="msgmerge -s --no-wrap -U --backup=none i18n/en.po i18n/core-client-html.pot" checkreturn="true" logoutput="true" />
-		<exec command="msgmerge -s --no-wrap -U --backup=none i18n/code/en.po i18n/code/core-client-html-code.pot" checkreturn="true" logoutput="true" />
-		<exec command="msgmerge -s --no-wrap -U --backup=none i18n/country/en.po i18n/country/core-client-html-country.pot" checkreturn="true" logoutput="true" />
-		<exec command="msgmerge -s --no-wrap -U --backup=none i18n/currency/en.po i18n/currency/core-client-html-currency.pot" checkreturn="true" logoutput="true" />
-		<exec command="msgmerge -s --no-wrap -U --backup=none i18n/language/en.po i18n/language/core-client-html-language.pot" checkreturn="true" logoutput="true" />
+		<property name="pot-dir" value="./i18n" override="true" />
+		<property name="pot-filename" value="i18n/core-client-html.pot" override="true" />
+    <foreach param="po-fname" absparam="po-filename" target="i18n-update">
+        <fileset dir="${pot-dir}">
+            <include name="*.po" />
+        </fileset>
+    </foreach>
+		<property name="pot-dir" value="./i18n/code" override="true" />
+		<property name="pot-filename" value="i18n/code/core-client-html-code.pot" override="true" />
+    <foreach param="po-fname" absparam="po-filename" target="i18n-update">
+        <fileset dir="${pot-dir}">
+            <include name="*.po" />
+        </fileset>
+    </foreach>
+		<property name="pot-dir" value="./i18n/country" override="true" />
+		<property name="pot-filename" value="i18n/country/core-client-html-country.pot" override="true" />
+    <foreach param="po-fname" absparam="po-filename" target="i18n-update">
+        <fileset dir="${pot-dir}">
+            <include name="*.po" />
+        </fileset>
+    </foreach>
+		<property name="pot-dir" value="./i18n/currency" override="true" />
+		<property name="pot-filename" value="i18n/currency/core-client-html-currency.pot" override="true" />
+    <foreach param="po-fname" absparam="po-filename" target="i18n-update">
+        <fileset dir="${pot-dir}">
+            <include name="*.po" />
+        </fileset>
+    </foreach>
+		<property name="pot-dir" value="./i18n/language" override="true" />
+		<property name="pot-filename" value="i18n/language/core-client-html-language.pot" override="true" />
+    <foreach param="po-fname" absparam="po-filename" target="i18n-update">
+        <fileset dir="${pot-dir}">
+            <include name="*.po" />
+        </fileset>
+    </foreach>
 	</target>
+	
+	<target name="i18n-update" description="Updates translation message files">
+		<fail unless="po-filename" message="Missing file name" />
+		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} ${pot-filename}" checkreturn="true" logoutput="true" /> 
+  </target>
 
 	<target name="build" description="Builds package for deployment">
 		<foreach param="po-fname" absparam="po-filename" target="build-mo">
