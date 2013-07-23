@@ -97,12 +97,7 @@ class Controller_Frontend_Basket_Default
 		{
 			$productItems = $this->_getProductVariants( $productItem, $variantAttributeIds );
 
-			if( count( $productItems ) > 1 )
-			{
-				$msg = sprintf( 'No unique article found for selected attributes and product ID "%1$s"', $prodid );
-				throw new Controller_Frontend_Basket_Exception( $msg );
-			}
-			else if( ( $productItem = reset( $productItems ) ) !== false )
+			if( ( $productItem = reset( $productItems ) ) !== false )
 			{
 				$orderBaseProductItem->setProductCode( $productItem->getCode() );
 				$orderBaseProductItem->setSupplierCode( $productItem->getSupplierCode() );
@@ -115,9 +110,7 @@ class Controller_Frontend_Basket_Default
 					$prices = $subprices;
 				}
 
-				$variantAttributes = $productItem->getRefItems( 'attribute', null, 'variant' );
-
-				foreach( $this->_getAttributes( array_keys( $variantAttributes ), array( 'text' ) ) as $attrItem )
+				foreach( $this->_getAttributes( $variantAttributeIds, array( 'text' ) ) as $attrItem )
 				{
 					$orderAttributeItem = $orderProductAttributeManager->createItem();
 					$orderAttributeItem->copyFrom( $attrItem );
@@ -128,7 +121,8 @@ class Controller_Frontend_Basket_Default
 			}
 			else if( $requireVariant === true )
 			{
-				$msg = sprintf( 'No article found for selected attributes and product ID "%1$s"', $prodid );
+				$ids = join( ',', $variantAttributeIds );
+				$msg = sprintf( 'No product found for ID "%1$s" and variant attribute IDs "%2$s"', $prodid, $ids );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 		}
@@ -602,7 +596,7 @@ class Controller_Frontend_Basket_Default
 	 * @return array List of products matching the given attributes
 	 */
 	protected function _getProductVariants( MShop_Product_Item_Interface $productItem, array $variantAttributeIds,
-		array $domains = array( 'attribute', 'media', 'price', 'text' ) )
+		array $domains = array( 'media', 'price', 'text' ) )
 	{
 		$subProductIds = array();
 		foreach( $productItem->getRefItems( 'product', 'default', 'default' ) as $item ) {

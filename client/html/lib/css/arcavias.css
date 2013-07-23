@@ -193,10 +193,6 @@
 	overflow: hidden;
 }
 
-.common-summary-detail .attr-item .name:after {
-	content: ':';
-}
-
 .common-summary-detail tr.subtotal,
 .common-summary-detail tr.delivery,
 .common-summary-detail tr.payment,
@@ -734,7 +730,6 @@
 }
 
 /* product attributes */
-.catalog-detail-basket-selection,
 .catalog-detail-basket-attribute {
 	margin-top: 1.5em;
 	font-weight: bold;
@@ -742,14 +737,12 @@
 	color: #004266;
 }
 
-.catalog-detail-basket-selection select,
 .catalog-detail-basket-attribute select {
 	font-weight: normal;
 	text-transform: none;
 	margin-bottom: 3px;
 }
 
-.catalog-detail-basket-selection td,
 .catalog-detail-basket-attribute td {
 	padding-right: 5px;
 }

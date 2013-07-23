@@ -132,11 +132,11 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			$search->compare( '==', 'attribute.domain', 'product' ),
 			$search->combine( '||', array(
 				$search->combine( '&&', array(
-					$search->compare( '==', 'attribute.code', '32' ),
+					$search->compare( '==', 'attribute.code', '30' ),
 					$search->compare( '==', 'attribute.type.code', 'length' ),
 				) ),
 				$search->combine( '&&', array(
-					$search->compare( '==', 'attribute.code', '30' ),
+					$search->compare( '==', 'attribute.code', '29' ),
 					$search->compare( '==', 'attribute.type.code', 'width' ),
 				) ),
 			) ),
@@ -158,8 +158,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<li class="attr-item">.*<span class="value">32</span>.*</li>#smU', $output );
 		$this->assertRegExp( '#<li class="attr-item">.*<span class="value">30</span>.*</li>#smU', $output );
+		$this->assertRegExp( '#<li class="attr-item">.*<span class="value">29</span>.*</li>#smU', $output );
 	}
 
 

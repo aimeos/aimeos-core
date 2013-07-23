@@ -190,15 +190,10 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 
 		$attrIds = array( (int) $attrLengthItem->getId(), (int) $attrWidthItem->getId() );
 		$func = $search->createFunction( 'catalog.index.attributecount', array( 'variant', $attrIds ) );
-		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count attributes
+		$search->setConditions( $search->compare( '==', $func, 1 ) ); // count attributes
+
 		$result = $this->_object->searchItems( $search, array() );
-
-		if( ( $product = reset( $result ) ) === false ) {
-			throw new Exception( 'No product found' );
-		}
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 'CNE', $product->getCode() );
+		$this->assertEquals( 0, count( $result ) );
 
 
 		$func = $search->createFunction( 'catalog.index.attribute.code', array( 'default', 'size' ) );
