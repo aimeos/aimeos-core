@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: arcavias-core Git de2b73333bfb2289a6f5206bb8383d0f87701e4a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-10 18:43+0200\n"
+"POT-Creation-Date: 2013-07-23 18:48+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language: en\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 # error domain: misc.
 # error type: value not within allowed range
-#: src/MShop/Common/Item/Address/Abstract.php:569
+#: src/MShop/Common/Item/Address/Abstract.php:612
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
 msgstr ""
@@ -106,11 +106,11 @@ msgstr ""
 #: src/MShop/Product/Manager/Tag/Default.php:399
 #: src/MShop/Service/Manager/Default.php:580
 #: src/MShop/Service/Manager/Abstract.php:41
-#: src/MShop/Common/Manager/Abstract.php:236
-#: src/MShop/Common/Manager/Abstract.php:291
-#: src/MShop/Common/Manager/Abstract.php:338
-#: src/MShop/Common/Manager/Abstract.php:375
-#: src/MShop/Common/Manager/Abstract.php:484
+#: src/MShop/Common/Manager/Abstract.php:195
+#: src/MShop/Common/Manager/Abstract.php:250
+#: src/MShop/Common/Manager/Abstract.php:297
+#: src/MShop/Common/Manager/Abstract.php:334
+#: src/MShop/Common/Manager/Abstract.php:443
 #: src/MShop/Common/Factory/Abstract.php:47
 #: src/MShop/Common/Factory/Abstract.php:110
 #: src/MAdmin/Common/Manager/Abstract.php:59
@@ -124,16 +124,15 @@ msgstr ""
 #: src/MShop/Plugin/Manager/Abstract.php:35
 #: src/MShop/Product/Manager/Tag/Default.php:389
 #: src/MShop/Service/Manager/Default.php:573
-#: src/MShop/Service/Manager/Abstract.php:35
-#: src/MShop/Common/Manager/Abstract.php:133
-#: src/MShop/Common/Manager/Abstract.php:217
-#: src/MShop/Common/Manager/Abstract.php:275
-#: src/MShop/Common/Manager/Abstract.php:332
-#: src/MShop/Common/Manager/Abstract.php:368
-#: src/MShop/Common/Manager/Abstract.php:478
+#: src/MShop/Service/Manager/Abstract.php:35 src/MShop/Factory.php:67
+#: src/MShop/Common/Manager/Abstract.php:176
+#: src/MShop/Common/Manager/Abstract.php:234
+#: src/MShop/Common/Manager/Abstract.php:291
+#: src/MShop/Common/Manager/Abstract.php:327
+#: src/MShop/Common/Manager/Abstract.php:437
 #: src/MShop/Common/Factory/Abstract.php:41
 #: src/MShop/Common/Factory/Abstract.php:104
-#: src/MAdmin/Common/Manager/Abstract.php:53
+#: src/MAdmin/Common/Manager/Abstract.php:53 src/MAdmin/Factory.php:66
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
@@ -199,13 +198,6 @@ msgstr ""
 #: src/MShop/Context/Item/Default.php:131
 #, php-format
 msgid "Database manager object not available"
-msgstr ""
-
-# error domain: manager
-# error type: value, parameter, object etc. not available
-#: src/MShop/Common/Manager/Abstract.php:137
-#, php-format
-msgid "Domain manager for class \"%1$s\" not available"
 msgstr ""
 
 # error domain: order
@@ -301,7 +293,7 @@ msgstr ""
 #: src/MShop/Service/Manager/Abstract.php:29
 #: src/MShop/Price/Manager/Factory.php:39
 #: src/MShop/Order/Manager/Factory.php:39
-#: src/MShop/Common/Manager/Abstract.php:472
+#: src/MShop/Common/Manager/Abstract.php:431
 #: src/MShop/Common/Factory/Abstract.php:35
 #: src/MShop/Supplier/Manager/Factory.php:39
 #: src/MShop/Customer/Manager/Factory.php:39
@@ -328,11 +320,9 @@ msgstr ""
 # error type: invalid characters in name or value
 #: src/MShop/Plugin/Manager/Default.php:232
 #: src/MShop/Service/Manager/Default.php:556
-#: src/MShop/Common/Manager/Abstract.php:120
-#: src/MShop/Common/Manager/Abstract.php:126
-#: src/MShop/Common/Manager/Abstract.php:202
-#: src/MShop/Common/Manager/Abstract.php:260
-#: src/MShop/Common/Manager/Abstract.php:313
+#: src/MShop/Common/Manager/Abstract.php:161
+#: src/MShop/Common/Manager/Abstract.php:219
+#: src/MShop/Common/Manager/Abstract.php:272
 #: src/MAdmin/Common/Manager/Abstract.php:35
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
@@ -348,14 +338,19 @@ msgstr ""
 # error domain: manager
 # error type: invalid characters in name or value
 #: src/MShop/Product/Manager/Tag/Default.php:382
-#: src/MShop/Common/Manager/Abstract.php:210
-#: src/MShop/Common/Manager/Abstract.php:268
-#: src/MShop/Common/Manager/Abstract.php:322
-#: src/MShop/Common/Manager/Abstract.php:361
-#: src/MShop/Common/Manager/Abstract.php:545
+#: src/MShop/Common/Manager/Abstract.php:169
+#: src/MShop/Common/Manager/Abstract.php:227
+#: src/MShop/Common/Manager/Abstract.php:281
+#: src/MShop/Common/Manager/Abstract.php:320
+#: src/MShop/Common/Manager/Abstract.php:504
 #: src/MAdmin/Common/Manager/Abstract.php:43
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
+msgstr ""
+
+#: src/MShop/Factory.php:53 src/MAdmin/Factory.php:52
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
 msgstr ""
 
 # error domain: price
@@ -380,11 +375,9 @@ msgstr ""
 msgid "Invalid characters in purchase date \"%1$s\""
 msgstr ""
 
-# error domain: misc.
-# error type: invalid characters in name or value
-#: src/MShop/Common/Item/Address/Abstract.php:487
+#: src/MShop/Factory.php:73 src/MAdmin/Factory.php:72
 #, php-format
-msgid "Invalid characters in web site URL \"%1$s\""
+msgid "Invalid factory \"%1$s\""
 msgstr ""
 
 # error domain: order
@@ -392,6 +385,11 @@ msgstr ""
 #: src/MShop/Order/Manager/Base/Default.php:383
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
+msgstr ""
+
+#: src/MShop/Common/Item/Address/Abstract.php:489
+#, php-format
+msgid "Invalid web site URL \"%1$s\""
 msgstr ""
 
 # error domain: site
@@ -410,14 +408,14 @@ msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Common/Manager/Abstract.php:690
+#: src/MShop/Common/Manager/Abstract.php:649
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
 msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Common/Manager/Abstract.php:714
+#: src/MShop/Common/Manager/Abstract.php:673
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr ""
@@ -438,22 +436,22 @@ msgstr ""
 
 # error domain: catalog
 # error type: value, parameter, object etc. not available
-#: src/MShop/Catalog/Manager/Index/Attribute/Default.php:284
+#: src/MShop/Catalog/Manager/Index/Attribute/Default.php:255
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
 msgstr ""
 
 # error domain: catalog
 # error type: value, parameter, object etc. not available
-#: src/MShop/Catalog/Manager/Index/Price/Default.php:279
+#: src/MShop/Catalog/Manager/Index/Price/Default.php:250
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
 msgstr ""
 
 # error domain: catalog
 # error type: value, parameter, object etc. not available
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:303
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:493
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:274
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:464
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
 msgstr ""
@@ -498,6 +496,16 @@ msgstr ""
 #: src/MShop/Context/Item/Default.php:208
 #, php-format
 msgid "Log manager object not available"
+msgstr ""
+
+#: src/MShop/Factory.php:58 src/MAdmin/Factory.php:57
+#, php-format
+msgid "Manager path \"%1$s\" is invalid"
+msgstr ""
+
+#: src/MShop/Factory.php:41 src/MAdmin/Factory.php:40
+#, php-format
+msgid "Manager path is empty"
 msgstr ""
 
 # error domain: manager
@@ -582,7 +590,7 @@ msgstr ""
 #: src/MShop/Order/Manager/Base/Product/Default.php:243
 #: src/MShop/Order/Manager/Base/Service/Default.php:176
 #: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:152
-#: src/MShop/Order/Manager/Base/Address/Default.php:243
+#: src/MShop/Order/Manager/Base/Address/Default.php:250
 #: src/MShop/Order/Manager/Base/Default.php:238
 #: src/MShop/Order/Manager/Status/Default.php:122
 #: src/MShop/Common/Manager/Type/Default.php:106
@@ -853,7 +861,7 @@ msgstr ""
 # error domain: search
 # error type: empty search result
 #: src/MShop/Locale/Manager/Default.php:510
-#: src/MShop/Common/Manager/Abstract.php:862
+#: src/MShop/Common/Manager/Abstract.php:821
 #, php-format
 msgid "Total results value not found"
 msgstr ""
