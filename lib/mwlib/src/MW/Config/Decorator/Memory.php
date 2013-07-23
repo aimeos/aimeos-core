@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Decorator_MemoryCache
+class MW_Config_Decorator_Memory
 	extends MW_Config_Decorator_Abstract
 	implements MW_Config_Decorator_Interface
 {
