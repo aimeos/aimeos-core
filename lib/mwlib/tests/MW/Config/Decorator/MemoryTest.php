@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Test class for MW_Config_Decorator_Cache.
+ * Test class for MW_Config_Decorator_Memory.
  *
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Config_Decorator_MemoryCacheTest extends MW_Unittest_Testcase
+class MW_Config_Decorator_MemoryTest extends MW_Unittest_Testcase
 {
 	private $_object;
 
@@ -18,7 +18,7 @@ class MW_Config_Decorator_MemoryCacheTest extends MW_Unittest_Testcase
 	 */
 	public static function main()
 	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_Config_Decorator_MemoryCacheTest');
+		$suite  = new PHPUnit_Framework_TestSuite('MW_Config_Decorator_MemoryTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -30,7 +30,7 @@ class MW_Config_Decorator_MemoryCacheTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$conf = new MW_Config_Array( array() );
-		$this->_object = new MW_Config_Decorator_MemoryCache( $conf );
+		$this->_object = new MW_Config_Decorator_Memory( $conf );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class MW_Config_Decorator_MemoryCacheTest extends MW_Unittest_Testcase
 	{
 		$conf = new MW_Config_Array( array() );
 		$cached = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
-		$this->_object = new MW_Config_Decorator_MemoryCache( $conf, $cached );
+		$this->_object = new MW_Config_Decorator_Memory( $conf, $cached );
 
 		$this->assertEquals( '127.0.0.1', $this->_object->get( 'resource/db/host', '127.0.0.2' ) );
 	}

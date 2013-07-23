@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage Translation
@@ -9,26 +9,30 @@
 
 
 /**
- * Base class for all translator decorators.
+ * Memory caching decorator for translation classes.
  *
  * @package MW
  * @subpackage Translation
  */
-abstract class MW_Translation_Decorator_Abstract
-	extends MW_Translation_Abstract
+class MW_Translation_Decorator_Memory
+	extends MW_Translation_Decorator_Abstract
 	implements MW_Translation_Decorator_Interface
 {
-	private $_object;
+	private $_translations;
 
 
 	/**
 	 * Initializes the decorator.
 	 *
 	 * @param MW_Translation_Interface $object Translation object or decorator
+	 * @param array $translations Associative list of domains and singular
+	 * 	strings as key and list of translation number and translations as value:
+	 * 	array( <domain> => array( <singular> => array( <index> => <translations> ) ) )
 	 */
-	public function __construct( MW_Translation_Interface $object )
+	public function __construct( MW_Translation_Interface $object, array $translations = array() )
 	{
-		$this->_object = $object;
+		parent::__construct( $object );
+		$this->_translations = $translations;
 	}
 
 
@@ -41,7 +45,11 @@ abstract class MW_Translation_Decorator_Abstract
 	 */
 	public function dt( $domain, $string )
 	{
-		return $this->_object->dt( $domain, $string );
+		if( isset( $this->_translations[$domain][$string][0] ) ) {
+			return $this->_translations[$domain][$string][0];
+		}
+
+		return parent::dt( $domain, $string );
 	}
 
 
@@ -56,28 +64,12 @@ abstract class MW_Translation_Decorator_Abstract
 	 */
 	public function dn( $domain, $singular, $plural, $number )
 	{
-		return $this->_object->dn( $domain, $singular, $plural, $number );
-	}
+		$index = $this->_getPluralIndex( $number, $this->getLocale() );
 
+		if( isset( $this->_translations[$domain][$singular][$index] ) ) {
+			return $this->_translations[$domain][$singular][$index];
+		}
 
-	/**
-	 * Returns the current locale string.
-	 *
-	 * @return string ISO locale string
-	 */
-	public function getLocale()
-	{
-		return $this->_object->getLocale();
-	}
-
-
-	/**
-	 * Returns the wrapped translation object.
-	 *
-	 * @return MW_Translation_Interface Translation object
-	 */
-	protected function _getObject()
-	{
-		return $this->_object;
+		return parent::dn( $domain, $singular, $plural, $number );
 	}
 }
