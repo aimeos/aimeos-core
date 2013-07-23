@@ -57,7 +57,7 @@ class TestHelper
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new MW_Config_Array( array(), $paths );
-		$conf = new MW_Config_Decorator_MemoryCache( $conf );
+		$conf = new MW_Config_Decorator_Memory( $conf );
 		$ctx->setConfig( $conf );
 
 
