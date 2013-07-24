@@ -178,7 +178,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 				$items = $customerManager->searchItems( $search );
 
 				if( ( $item = reset( $items ) ) === false || $option != $context->getUserId() ) {
-					throw new Client_Html_Exception( sprintf( 'No customer found for ID "%1$s"', $option ) );
+					throw new Client_Html_Exception( sprintf( 'Customer with ID "%1$s" not found', $option ) );
 				}
 
 				$basketCtrl->setAddress( $type, $item->getPaymentAddress() );

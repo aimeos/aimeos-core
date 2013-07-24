@@ -79,7 +79,7 @@ abstract class Controller_Frontend_Abstract
 				$manager = call_user_func_array( $factory . '::createManager', array( $this->_getContext() ) );
 
 				if( !( $manager instanceof $iface ) ) {
-					throw new Controller_Frontend_Exception( sprintf( 'No factory "%1$s" found', $factory ) );
+					throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $factory, $iface ) );
 				}
 
 				$this->_domainManagers[$domainname] = $manager;

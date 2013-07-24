@@ -318,7 +318,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 		$temp = (int) $value;
 
 		if( $temp < MShop_Order_Item_Abstract::EMAIL_NONE || $temp > MShop_Order_Item_Abstract::EMAIL_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Email flags "%1$s" not within allowed range', $value ) );
+			throw new MShop_Order_Exception( sprintf( 'E-mail flags "%1$s" not within allowed range', $value ) );
 		}
 	}
 

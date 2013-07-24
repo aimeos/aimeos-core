@@ -100,7 +100,7 @@ abstract class Client_Html_Abstract
 		foreach( $names as $key => $subname )
 		{
 			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
-				throw new Client_Html_Exception( sprintf( 'Invalid client name "%1$s"', $client ) );
+				throw new Client_Html_Exception( sprintf( 'Invalid characters in client name "%1$s"', $client ) );
 			}
 
 			$names[$key] = ucfirst( $subname );
@@ -139,7 +139,7 @@ abstract class Client_Html_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid client name "%1$s"', $name ) );
+			throw new Client_Html_Exception( sprintf( 'Invalid characters in client name "%1$s"', $name ) );
 		}
 
 		$subnames = $this->_createSubNames( $client );
@@ -148,13 +148,13 @@ abstract class Client_Html_Abstract
 		$interface = 'Client_Html_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$subClient = new $classname( $this->_context, $this->_templatePaths );
 
 		if( ( $subClient instanceof $interface ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
+			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $subClient;
@@ -213,7 +213,7 @@ abstract class Client_Html_Abstract
 			}
 		}
 
-		throw new Client_Html_Exception( sprintf( 'No template found for "%1$s"', $file ) );
+		throw new Client_Html_Exception( sprintf( 'Template "%1$s" not available', $file ) );
 	}
 
 

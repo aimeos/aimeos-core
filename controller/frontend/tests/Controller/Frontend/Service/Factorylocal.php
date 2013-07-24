@@ -24,7 +24,7 @@ class Controller_Frontend_Service_Factorylocal
 		}
 
 		if ( ctype_alnum($name) === false ) {
-			throw new Controller_Frontend_Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
+			throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 		}
 
 		$iface = 'Controller_Frontend_Service_Interface';

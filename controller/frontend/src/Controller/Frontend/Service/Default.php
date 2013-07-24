@@ -176,7 +176,7 @@ class Controller_Frontend_Service_Default
 
 		if( ( $item = reset( $items ) ) === false )
 		{
-			$msg = sprintf( 'No service item for type "%1$s" and ID "%2$s" available', $type, $serviceId );
+			$msg = sprintf( 'Service item for type "%1$s" and ID "%2$s" not found', $type, $serviceId );
 			throw new Controller_Frontend_Service_Exception( $msg );
 		}
 

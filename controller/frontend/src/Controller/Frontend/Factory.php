@@ -48,7 +48,7 @@ class Controller_Frontend_Factory
 			foreach( $parts as $key => $part )
 			{
 				if( ctype_alnum( $part ) === false ) {
-					throw new Controller_Frontend_Exception( sprintf( 'Invalid controller "%1$s" in "%2$s"', $part, $path ) );
+					throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in controller name "%1$s" in "%2$s"', $part, $path ) );
 				}
 
 				$parts[$key] = ucwords( $part );
@@ -57,7 +57,7 @@ class Controller_Frontend_Factory
 			$factory = 'Controller_Frontend_' . join( '_', $parts ) . '_Factory';
 
 			if( class_exists( $factory ) === false ) {
-				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not found', $factory ) );
+				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not available', $factory ) );
 			}
 
 			$manager = @call_user_func_array( array( $factory, 'createController' ), array( $context ) );

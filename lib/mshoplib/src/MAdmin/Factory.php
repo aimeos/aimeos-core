@@ -49,7 +49,7 @@ class MAdmin_Factory
 			foreach( $parts as $part )
 			{
 				if( ctype_alnum( $part ) === false ) {
-					throw new MAdmin_Exception( sprintf( 'Invalid manager "%1$s" in "%2$s"', $part, $path ) );
+					throw new MAdmin_Exception( sprintf( 'Invalid characters in manager name "%1$s" in "%2$s"', $part, $path ) );
 				}
 			}
 
@@ -63,7 +63,7 @@ class MAdmin_Factory
 				$factory = 'MAdmin_' . ucwords( $name ) . '_Manager_Factory';
 
 				if( class_exists( $factory ) === false ) {
-					throw new MAdmin_Exception( sprintf( 'Class "%1$s" not found', $factory ) );
+					throw new MAdmin_Exception( sprintf( 'Class "%1$s" not available', $factory ) );
 				}
 
 				$manager = @call_user_func_array( array( $factory, 'createManager' ), array( $context ) );
