@@ -46,7 +46,6 @@
   </target>
 
   <target name="i18n-files" description="Updates translation message files in passed directory">
-    <property name="pot-filename" value="${i18n-dir}/*.pot" override="true" /> 
     <foreach param="po-fname" absparam="po-filename" target="i18n-update">
       <fileset dir="${i18n-dir}">
         <include name="*.po" />
@@ -56,18 +55,13 @@
 
 	<target name="i18n-update" description="Updates translation message files">
 		<fail unless="po-filename" message="Missing file name" />
-		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} ${pot-filename}" checkreturn="true" logoutput="true" /> 
+		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} ${i18n-dir}/*.pot" checkreturn="true" logoutput="true" /> 
   </target>
 
 	<target name="build" description="Builds package for deployment">
 		<foreach param="po-fname" absparam="po-filename" target="build-mo">
             <fileset dir="./i18n">
-                <include name="*.po" />
-            </fileset>
-        </foreach>
-		<foreach param="po-fname" absparam="po-filename" target="build-mo">
-            <fileset dir="./i18n">
-                <include name="*/*.po" />
+                <include name="**.po" />
             </fileset>
         </foreach>
 	</target>
