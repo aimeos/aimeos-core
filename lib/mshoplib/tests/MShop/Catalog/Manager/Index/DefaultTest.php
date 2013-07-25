@@ -296,7 +296,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 3, $total );
+		$this->assertEquals( 2, $total );
 
 
 		$expr = array(
@@ -309,7 +309,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 5, $total );
+		$this->assertEquals( 6, $total );
 
 
 		$attrIds = array( (int) $attrWidthItem->getId(), (int) $attrLenItem->getId() );
@@ -323,7 +323,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 1, $total );
 
 
 		$func = $search->createFunction( 'catalog.index.attribute.code', array( 'default', 'size' ) );
@@ -628,7 +628,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
 		$this->_object->rebuildIndex();
 
-		$this->assertEquals( 9, count( $afterInsertAttr ) );
+		$this->assertEquals( 10, count( $afterInsertAttr ) );
 		$this->assertEquals( 9, count( $afterInsertPrice ) );
 		$this->assertEquals( 7, count( $afterInsertText ) );
 		$this->assertEquals( 9, count( $afterInsertCat ) );
@@ -704,7 +704,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$afterInsertCat = $this->_getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
 
 		//check inserted items
-		$this->assertEquals( 5, count( $afterInsertAttr ) );
+		$this->assertEquals( 6, count( $afterInsertAttr ) );
 		$this->assertEquals( 7, count( $afterInsertPrice ) );
 		$this->assertEquals( 4, count( $afterInsertText ) );
 		$this->assertEquals( 9, count( $afterInsertCat ) );

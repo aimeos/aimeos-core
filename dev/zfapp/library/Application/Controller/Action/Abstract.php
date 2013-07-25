@@ -91,7 +91,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		if( function_exists( 'apc_store' ) === true ) {
 			$conf = new MW_Config_Decorator_APC( $conf );
 		}
-		$conf = new MW_Config_Decorator_MemoryCache( $conf );
+		$conf = new MW_Config_Decorator_Memory( $conf );
 		$ctx->setConfig( $conf );
 
 		$dbm = new MW_DB_Manager_PDO( $conf );
@@ -102,7 +102,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 
 		$i18n = new MW_Translation_Zend( self::_getArcavias()->getI18nPaths(), 'gettext', 'en_GB', array('disableNotices'=>true) );
 		if( function_exists( 'apc_store' ) === true ) {
-			$i18n = new MW_Translation_Decorator_APC( $i18n, $conf );
+			$i18n = new MW_Translation_Decorator_APC( $i18n );
 		}
 		$ctx->setI18n( $i18n );
 

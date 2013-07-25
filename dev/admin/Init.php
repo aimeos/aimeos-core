@@ -91,10 +91,10 @@ class Init
 		$context = new MShop_Context_Item_Default();
 
 		$config = new MW_Config_Array( array(), $conf );
-		$config = new MW_Config_Decorator_MemoryCache( $config );
-                if( function_exists( 'apc_store' ) === true ) {
-                        $config = new MW_Config_Decorator_APC( $config );
-                }
+		if( function_exists( 'apc_store' ) === true ) {
+			$config = new MW_Config_Decorator_APC( $config );
+		}
+		$config = new MW_Config_Decorator_Memory( $config );
 		$context->setConfig( $config );
 
 		$dbm = new MW_DB_Manager_PDO( $config );
