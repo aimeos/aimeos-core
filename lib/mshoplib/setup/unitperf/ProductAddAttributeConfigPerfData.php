@@ -9,7 +9,7 @@
 /**
  * Adds media performance records.
  */
-class MW_Setup_Task_ProductAddAttributePerfData extends MW_Setup_Task_ProductAddBasePerfData
+class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,7 +47,7 @@ class MW_Setup_Task_ProductAddAttributePerfData extends MW_Setup_Task_ProductAdd
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product attribute performance data', 0);
+		$this->_msg('Adding product config attribute performance data', 0);
 
 
 		$this->_txBegin();
@@ -73,7 +73,7 @@ class MW_Setup_Task_ProductAddAttributePerfData extends MW_Setup_Task_ProductAdd
 		$pos = 0;
 		$attrList = array();
 
-		foreach( array( 'xs', 's', 'm', 'l', 'xl' ) as $size )
+		foreach( array( 's', 'm', 'l' ) as $size )
 		{
 			$attrItem->setId( null );
 			$attrItem->setCode( $size );

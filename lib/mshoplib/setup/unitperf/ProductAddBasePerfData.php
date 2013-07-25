@@ -84,7 +84,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 		$productItem->setSupplierCode( 'My brand' );
 		$productItem->setDateStart( '1970-01-01 00:00:00' );
 
-		for( $i = 0; $i < 10000; $i++ )
+		for( $i = 0; $i < 9000; $i++ )
 		{
 			$code = 'perf-' . str_pad( $i, 5, '0', STR_PAD_LEFT );
 
