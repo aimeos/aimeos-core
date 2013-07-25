@@ -91,7 +91,7 @@ class Controller_Frontend_Basket_Default
 		$orderAttributes = array();
 		$orderProductAttributeManager = $this->_getDomainManager( 'order/base/product/attribute' );
 
-		$prices = $productItem->getRefItems( 'price', 'default' );
+		$prices = $productItem->getRefItems( 'price', 'default', 'default' );
 
 		if( $productItem->getType() === 'select' )
 		{
@@ -106,7 +106,7 @@ class Controller_Frontend_Basket_Default
 			{
 				$orderBaseProductItem->setProductCode( $productItem->getCode() );
 
-				$subprices = $productItem->getRefItems( 'price', 'default' );
+				$subprices = $productItem->getRefItems( 'price', 'default', 'default' );
 
 				if( count( $subprices ) > 0 ) {
 					$prices = $subprices;
@@ -140,12 +140,10 @@ class Controller_Frontend_Basket_Default
 
 		foreach( $this->_getAttributes( $configAttributeIds ) as $attrItem )
 		{
-			$prices = $attrItem->getRefItems( 'price', 'default' );
+			$prices = $attrItem->getRefItems( 'price', 'default', 'default' );
 
-			if( count( $prices ) > 0 )
-			{
-				$attrPrice = $priceManager->getLowestPrice( $prices, $quantity );
-				$price->addItem( $attrPrice );
+			if( !empty( $prices ) ) {
+				$price->addItem( $priceManager->getLowestPrice( $prices, $quantity ) );
 			}
 
 			$orderAttributeItem = $orderProductAttributeManager->createItem();
