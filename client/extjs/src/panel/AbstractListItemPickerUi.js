@@ -102,31 +102,20 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 		
 		return null;
 	},
+
 	
 	insertListItems: function(records, rowIndex) {
+		// remove duplicates and highlight them in grid
 		var refStore = this.getRefStore();
+		var duplicats = [];
 		var clones = [];
 
-		Ext.each([].concat(records), function(record, id) {
-			var refIdProperty = this.itemConfig.listNamePrefix + "refid";
-			var typeIdPropery = this.itemConfig.listNamePrefix + "typeid";
-			var recordTypeIdProperty = this.itemConfig.domain + ".typeid";
-			
+		Ext.each([].concat(records), function(record) {
 			if (refStore.getById(record.id)) {
 				records.remove(record);
 
-				// Get index of duplicated entry.
-				var index = this.itemListUi.store.findBy(function (item) {
-					return (record.id == item.get(refIdProperty))
-						&& (record.get(recordTypeIdProperty) == item.get(typeIdPropery));
-				}, this);
-
-				if (index != -1) {
-					// If entry is duplicated highlight it.
-					Ext.fly(this.itemListUi.grid.getView().getRow(index)).highlight();
-				} else {
-					clones.push(record.copy());
-				}
+				var idx = this.itemListUi.store.find(this.itemConfig.listNamePrefix + 'refid', record.id);
+				Ext.fly(this.itemListUi.grid.getView().getRow(idx)).highlight();
 			} else {
 				clones.push(record.copy());
 			}
