@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 18:48+0200\n"
+"POT-Creation-Date: 2013-07-26 13:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,36 +78,36 @@ msgstr ""
 msgid "Child node with index \"%1$d\" not available"
 msgstr ""
 
-#: src/MShop/Plugin/Manager/Default.php:260
-#: src/MShop/Plugin/Manager/Abstract.php:41
-#: src/MShop/Product/Manager/Tag/Default.php:399
-#: src/MShop/Service/Manager/Default.php:580
+#: src/MAdmin/Common/Manager/Abstract.php:59
 #: src/MShop/Service/Manager/Abstract.php:41
+#: src/MShop/Service/Manager/Default.php:580
+#: src/MShop/Common/Factory/Abstract.php:47
+#: src/MShop/Common/Factory/Abstract.php:110
 #: src/MShop/Common/Manager/Abstract.php:195
 #: src/MShop/Common/Manager/Abstract.php:250
 #: src/MShop/Common/Manager/Abstract.php:297
 #: src/MShop/Common/Manager/Abstract.php:334
 #: src/MShop/Common/Manager/Abstract.php:443
-#: src/MShop/Common/Factory/Abstract.php:47
-#: src/MShop/Common/Factory/Abstract.php:110
-#: src/MAdmin/Common/Manager/Abstract.php:59
+#: src/MShop/Product/Manager/Tag/Default.php:399
+#: src/MShop/Plugin/Manager/Abstract.php:41
+#: src/MShop/Plugin/Manager/Default.php:260
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-#: src/MShop/Plugin/Manager/Default.php:252
-#: src/MShop/Plugin/Manager/Abstract.php:35
-#: src/MShop/Product/Manager/Tag/Default.php:389
+#: src/MAdmin/Common/Manager/Abstract.php:53 src/MAdmin/Factory.php:66
+#: src/MShop/Service/Manager/Abstract.php:35
 #: src/MShop/Service/Manager/Default.php:573
-#: src/MShop/Service/Manager/Abstract.php:35 src/MShop/Factory.php:67
+#: src/MShop/Common/Factory/Abstract.php:41
+#: src/MShop/Common/Factory/Abstract.php:104
 #: src/MShop/Common/Manager/Abstract.php:176
 #: src/MShop/Common/Manager/Abstract.php:234
 #: src/MShop/Common/Manager/Abstract.php:291
 #: src/MShop/Common/Manager/Abstract.php:327
 #: src/MShop/Common/Manager/Abstract.php:437
-#: src/MShop/Common/Factory/Abstract.php:41
-#: src/MShop/Common/Factory/Abstract.php:104
-#: src/MAdmin/Common/Manager/Abstract.php:53 src/MAdmin/Factory.php:66
+#: src/MShop/Product/Manager/Tag/Default.php:389 src/MShop/Factory.php:67
+#: src/MShop/Plugin/Manager/Abstract.php:35
+#: src/MShop/Plugin/Manager/Default.php:252
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
@@ -164,9 +164,9 @@ msgstr ""
 msgid "E-mail flags \"%1$s\" not within allowed range"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Product/Abstract.php:39
-#: src/MShop/Order/Item/Base/Abstract.php:64
 #: src/MShop/Order/Item/Abstract.php:337
+#: src/MShop/Order/Item/Base/Abstract.php:64
+#: src/MShop/Order/Item/Base/Product/Abstract.php:39
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
 msgstr ""
@@ -181,10 +181,10 @@ msgstr ""
 msgid "Internationalization object not available"
 msgstr ""
 
-#: src/MShop/Locale/Manager/Site/Default.php:300
-#: src/MShop/Service/Manager/Default.php:507
 #: src/MAdmin/Job/Manager/Default.php:255
 #: src/MAdmin/Job/Manager/Default.php:262
+#: src/MShop/Locale/Manager/Site/Default.php:300
+#: src/MShop/Service/Manager/Default.php:507
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
 msgstr ""
@@ -206,8 +206,9 @@ msgstr ""
 msgid "Invalid characters in ISO currency code \"%1$s\""
 msgstr ""
 
+#: src/MShop/Locale/Item/Default.php:137
 #: src/MShop/Locale/Item/Language/Default.php:97
-#: src/MShop/Locale/Item/Default.php:137 src/MShop/Text/Item/Default.php:59
+#: src/MShop/Text/Item/Default.php:59
 #: src/MShop/Product/Item/Tag/Default.php:56
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
@@ -218,23 +219,23 @@ msgstr ""
 msgid "Invalid characters in attribute for provider configuration. Attribute is not of type \"%1$s\"."
 msgstr ""
 
-#: src/MShop/Plugin/Manager/Abstract.php:29
-#: src/MShop/Plugin/Manager/Factory.php:39
+#: src/MAdmin/Job/Manager/Factory.php:35 src/MAdmin/Log/Manager/Factory.php:35
+#: src/MShop/Order/Manager/Factory.php:39
+#: src/MShop/Supplier/Manager/Factory.php:39
 #: src/MShop/Locale/Manager/Factory.php:38
+#: src/MShop/Service/Manager/Abstract.php:29
+#: src/MShop/Service/Manager/Factory.php:39
+#: src/MShop/Customer/Manager/Factory.php:39
 #: src/MShop/Attribute/Manager/Factory.php:39
+#: src/MShop/Common/Factory/Abstract.php:35
+#: src/MShop/Common/Manager/Abstract.php:431
 #: src/MShop/Text/Manager/Factory.php:39
 #: src/MShop/Catalog/Manager/Factory.php:38
-#: src/MShop/Media/Manager/Factory.php:39
 #: src/MShop/Product/Manager/Factory.php:39
-#: src/MShop/Service/Manager/Factory.php:39
-#: src/MShop/Service/Manager/Abstract.php:29
+#: src/MShop/Media/Manager/Factory.php:39
+#: src/MShop/Plugin/Manager/Abstract.php:29
+#: src/MShop/Plugin/Manager/Factory.php:39
 #: src/MShop/Price/Manager/Factory.php:39
-#: src/MShop/Order/Manager/Factory.php:39
-#: src/MShop/Common/Manager/Abstract.php:431
-#: src/MShop/Common/Factory/Abstract.php:35
-#: src/MShop/Supplier/Manager/Factory.php:39
-#: src/MShop/Customer/Manager/Factory.php:39
-#: src/MAdmin/Log/Manager/Factory.php:35 src/MAdmin/Job/Manager/Factory.php:35
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
@@ -249,12 +250,12 @@ msgstr ""
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr ""
 
-#: src/MShop/Plugin/Manager/Default.php:232
+#: src/MAdmin/Common/Manager/Abstract.php:35
 #: src/MShop/Service/Manager/Default.php:556
 #: src/MShop/Common/Manager/Abstract.php:161
 #: src/MShop/Common/Manager/Abstract.php:219
 #: src/MShop/Common/Manager/Abstract.php:272
-#: src/MAdmin/Common/Manager/Abstract.php:35
+#: src/MShop/Plugin/Manager/Default.php:232
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
 msgstr ""
@@ -264,18 +265,18 @@ msgstr ""
 msgid "Invalid characters in email address: \"%1$s\""
 msgstr ""
 
-#: src/MShop/Product/Manager/Tag/Default.php:382
+#: src/MAdmin/Common/Manager/Abstract.php:43
 #: src/MShop/Common/Manager/Abstract.php:169
 #: src/MShop/Common/Manager/Abstract.php:227
 #: src/MShop/Common/Manager/Abstract.php:281
 #: src/MShop/Common/Manager/Abstract.php:320
 #: src/MShop/Common/Manager/Abstract.php:504
-#: src/MAdmin/Common/Manager/Abstract.php:43
+#: src/MShop/Product/Manager/Tag/Default.php:382
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
 msgstr ""
 
-#: src/MShop/Factory.php:53 src/MAdmin/Factory.php:52
+#: src/MAdmin/Factory.php:52 src/MShop/Factory.php:53
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
 msgstr ""
@@ -285,8 +286,8 @@ msgstr ""
 msgid "Invalid characters in price \"%1$s\""
 msgstr ""
 
-#: src/MShop/Plugin/Manager/Default.php:240
 #: src/MShop/Service/Manager/Default.php:566
+#: src/MShop/Plugin/Manager/Default.php:240
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
 msgstr ""
@@ -296,7 +297,7 @@ msgstr ""
 msgid "Invalid characters in purchase date \"%1$s\""
 msgstr ""
 
-#: src/MShop/Factory.php:73 src/MAdmin/Factory.php:72
+#: src/MAdmin/Factory.php:72 src/MShop/Factory.php:73
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr ""
@@ -387,12 +388,12 @@ msgstr ""
 msgid "Log manager object not available"
 msgstr ""
 
-#: src/MShop/Factory.php:58 src/MAdmin/Factory.php:57
+#: src/MAdmin/Factory.php:57 src/MShop/Factory.php:58
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
 msgstr ""
 
-#: src/MShop/Factory.php:41 src/MAdmin/Factory.php:40
+#: src/MAdmin/Factory.php:40 src/MShop/Factory.php:41
 #, php-format
 msgid "Manager path is empty"
 msgstr ""
@@ -402,11 +403,11 @@ msgstr ""
 msgid "Method \"%1$s\" for locale site manager not available"
 msgstr ""
 
+#: src/MShop/Service/Provider/Abstract.php:153
 #: src/MShop/Service/Provider/Decorator/Abstract.php:203
 #: src/MShop/Service/Provider/Payment/Abstract.php:49
 #: src/MShop/Service/Provider/Payment/Abstract.php:60
 #: src/MShop/Service/Provider/Payment/Abstract.php:71
-#: src/MShop/Service/Provider/Abstract.php:153
 #: src/MShop/Common/Manager/Decorator/Abstract.php:48
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
@@ -432,51 +433,51 @@ msgstr ""
 msgid "Number of single product exceeds given limit"
 msgstr ""
 
-#: src/MShop/Plugin/Manager/Default.php:303
-#: src/MShop/Plugin/Provider/Order/Complete.php:71
-#: src/MShop/Plugin/Provider/Order/ProductGone.php:64
-#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:70
-#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:75
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:71
-#: src/MShop/Plugin/Provider/Order/Shipping.php:64
-#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:63
-#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:68
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:60
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:65
-#: src/MShop/Plugin/Provider/Order/ProductStock.php:64
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:64
-#: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:63
-#: src/MShop/Locale/Manager/Language/Default.php:111
-#: src/MShop/Locale/Manager/Site/Default.php:156
-#: src/MShop/Locale/Manager/Currency/Default.php:115
-#: src/MShop/Locale/Manager/Default.php:216
-#: src/MShop/Attribute/Manager/Default.php:398
-#: src/MShop/Text/Manager/Default.php:359
-#: src/MShop/Catalog/Manager/Default.php:456
-#: src/MShop/Catalog/Manager/Index/Default.php:248
-#: src/MShop/Media/Manager/Default.php:424
-#: src/MShop/Product/Manager/Default.php:394
-#: src/MShop/Product/Manager/Tag/Default.php:174
-#: src/MShop/Product/Manager/Stock/Default.php:115
-#: src/MShop/Product/Manager/Stock/Warehouse/Default.php:119
-#: src/MShop/Service/Manager/Default.php:416
-#: src/MShop/Price/Manager/Default.php:444
-#: src/MShop/Price/Manager/Abstract.php:35
-#: src/MShop/Order/Manager/Default.php:188
-#: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:153
-#: src/MShop/Order/Manager/Base/Product/Default.php:243
+#: src/MAdmin/Job/Manager/Default.php:133
+#: src/MAdmin/Log/Manager/Default.php:125
+#: src/MShop/Order/Manager/Base/Default.php:238
 #: src/MShop/Order/Manager/Base/Service/Default.php:176
 #: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:152
+#: src/MShop/Order/Manager/Base/Product/Default.php:243
+#: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:153
 #: src/MShop/Order/Manager/Base/Address/Default.php:250
-#: src/MShop/Order/Manager/Base/Default.php:238
 #: src/MShop/Order/Manager/Status/Default.php:122
+#: src/MShop/Order/Manager/Default.php:188
+#: src/MShop/Supplier/Manager/Default.php:337
+#: src/MShop/Locale/Manager/Site/Default.php:156
+#: src/MShop/Locale/Manager/Default.php:216
+#: src/MShop/Locale/Manager/Language/Default.php:111
+#: src/MShop/Locale/Manager/Currency/Default.php:115
+#: src/MShop/Service/Manager/Default.php:416
+#: src/MShop/Customer/Manager/Default.php:651
+#: src/MShop/Attribute/Manager/Default.php:398
 #: src/MShop/Common/Manager/Type/Default.php:106
 #: src/MShop/Common/Manager/List/Default.php:93
 #: src/MShop/Common/Manager/Address/Default.php:133
-#: src/MShop/Supplier/Manager/Default.php:337
-#: src/MShop/Customer/Manager/Default.php:651
-#: src/MAdmin/Log/Manager/Default.php:125
-#: src/MAdmin/Job/Manager/Default.php:133
+#: src/MShop/Text/Manager/Default.php:359
+#: src/MShop/Catalog/Manager/Index/Default.php:248
+#: src/MShop/Catalog/Manager/Default.php:456
+#: src/MShop/Product/Manager/Stock/Warehouse/Default.php:119
+#: src/MShop/Product/Manager/Stock/Default.php:115
+#: src/MShop/Product/Manager/Tag/Default.php:174
+#: src/MShop/Product/Manager/Default.php:394
+#: src/MShop/Media/Manager/Default.php:424
+#: src/MShop/Plugin/Manager/Default.php:303
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:60
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:65
+#: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:63
+#: src/MShop/Plugin/Provider/Order/Complete.php:71
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:71
+#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:63
+#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:68
+#: src/MShop/Plugin/Provider/Order/ProductStock.php:64
+#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:70
+#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:75
+#: src/MShop/Plugin/Provider/Order/ProductGone.php:64
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:63
+#: src/MShop/Plugin/Provider/Order/Shipping.php:64
+#: src/MShop/Price/Manager/Abstract.php:35
+#: src/MShop/Price/Manager/Default.php:444
 #, php-format
 msgid "Object is not of required type \"%1$s\""
 msgstr ""
@@ -486,8 +487,8 @@ msgstr ""
 msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
 msgstr ""
 
-#: src/MShop/Service/Provider/Delivery/Default.php:291
 #: src/MShop/Order/Manager/Base/Default.php:478
+#: src/MShop/Service/Provider/Delivery/Default.php:291
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
 msgstr ""
@@ -517,9 +518,9 @@ msgstr ""
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
 msgstr ""
 
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:120
 #: src/MShop/Service/Provider/Delivery/Default.php:150
 #: src/MShop/Service/Provider/Delivery/Default.php:357
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:120
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr ""
@@ -587,8 +588,8 @@ msgstr ""
 msgid "Products out of stock"
 msgstr ""
 
-#: src/MShop/Plugin/Manager/Default.php:225
 #: src/MShop/Service/Manager/Default.php:561
+#: src/MShop/Plugin/Manager/Default.php:225
 #, php-format
 msgid "Provider in \"%1$s\" not available"
 msgstr ""
@@ -656,7 +657,7 @@ msgstr ""
 msgid "Site for code \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:109
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:137
 #, php-format
 msgid "The price of at least one product in the basket has changed in the meantime and was updated"
 msgstr ""

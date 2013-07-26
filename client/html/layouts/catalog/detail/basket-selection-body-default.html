@@ -18,7 +18,7 @@ $attributes = $this->get( 'selectionAttributeItems', array() );
 				<td><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></td>
 				<td>
 					<select name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrvar-id', $code ) ) ); ?>">
-						<option value=""><?php echo $enc->attr( $this->translate( 'client/html', 'Select' ) ); ?></option>
+						<option value=""><?php echo $enc->attr( $this->translate( 'client/html', 'Please select' ) ); ?></option>
 <?php	foreach( $list as $id => $value ) : ?>
 <?php		if( isset( $attributes[$id] ) ) : ?>
 						<option value="<?php echo $enc->attr( $id ); ?>"><?php echo $enc->html( $attributes[$id]->getName() ); ?></option>

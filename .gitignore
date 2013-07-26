@@ -1,6 +1,12 @@
 resource.php
+client/extjs/deploy/*
 vendor/
+
+dev/images/*
+dev/apidoc/
+coverage/
 *.log
+
 .buildpath
 .project
 .settings/
