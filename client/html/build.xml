@@ -12,8 +12,8 @@
 	<target name="testperf" description="Executes performance tests">
 		<echo msg="Executing performance tests" />
 		<delete file="tests/unitperf.log" quiet="true" failonerror="false" />
-		<delete file="tests/junit.xml" quiet="true" failonerror="false" />
-		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit-perf.xml --log-junit junit.xml"
+		<delete file="tests/unitperf-junit.xml" quiet="true" failonerror="false" />
+		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit-perf.xml --log-junit unitperf-junit.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	
