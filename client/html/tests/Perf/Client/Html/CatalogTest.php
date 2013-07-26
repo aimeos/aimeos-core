@@ -44,7 +44,7 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 			throw new Exception( 'No product item with code "perf-00000" found' );
 		}
 
-		$this->_view = TestHelper::getView();
+		$this->_view = TestHelper::getView( 'unitperf' );
 
 		$param = array(
 			'f-catalog-id' => $catalogItem->getId(),

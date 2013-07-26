@@ -28,7 +28,7 @@ class TestHelper
 	}
 
 
-	public static function getView()
+	public static function getView( $site = 'unittest' )
 	{
 		$view = new MW_View_Default();
 
@@ -45,7 +45,7 @@ class TestHelper
 		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new MW_View_Helper_Config_Default( $view, self::getContext()->getConfig() );
+		$helper = new MW_View_Helper_Config_Default( $view, self::getContext( $site )->getConfig() );
 		$view->addHelper( 'config', $helper );
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
