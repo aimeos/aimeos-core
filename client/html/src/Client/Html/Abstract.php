@@ -236,4 +236,28 @@ abstract class Client_Html_Abstract
 
 		return true;
 	}
+
+
+	/**
+	 * Translates the plugin error codes to human readable error strings.
+	 *
+	 * @param array $codes Associative list of scope and object as key and error code as value
+	 * @return array List of translated error messages
+	 */
+	protected function _translatePluginErrorCodes( array $codes )
+	{
+		$errors = array();
+		$i18n = $this->_context->getI18n();
+
+		foreach( $codes as $scope => $list )
+		{
+			foreach( $list as $object => $errcode )
+			{
+				$key = $scope . ( $scope !== 'product' ? '.' . $object : '' ) . '.' . $errcode;
+				$errors[] = $i18n->dt( 'mshop/code', $key );
+			}
+		}
+
+		return $errors;
+	}
 }

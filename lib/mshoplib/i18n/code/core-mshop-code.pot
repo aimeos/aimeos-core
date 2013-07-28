@@ -51,21 +51,21 @@ msgid "service.delivery.available.notallowed"
 msgstr "A delivery option is not allowed"
 
 #. ProductGone plugin error: Product doesn't exists
-msgid "produdct.gone.notexist"
+msgid "product.gone.notexist"
 msgstr "At least one product doesn't exist any more"
 
 #. ProductGone plugin error: Product status disabled
-msgid "produdct.gone.status"
+msgid "product.gone.status"
 msgstr "At least one product was disabled"
 
 #. ProductGone plugin error: Product out of timeframe
-msgid "produdct.gone.timeframe"
+msgid "product.gone.timeframe"
 msgstr "At least one product is not available any more"
 
 #. ProductPrice plugin error: Product price changed
-msgid "produdct.price.changed"
+msgid "product.price.changed"
 msgstr "The price of at least one product has changed"
 
 #. ProductStock plugin error: Product out of stock
-msgid "produdct.stock.notenough"
+msgid "product.stock.notenough"
 msgstr "At least one product is out of stock"

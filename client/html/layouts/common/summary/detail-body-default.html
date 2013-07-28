@@ -65,11 +65,12 @@ catch( Exception $e )
 $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
 $modify = $this->get( 'summaryEnableModify', false );
+$errors = $this->get( 'summaryErrorCodes', array() );
 
 ?>
 <div class="common-summary-detail container">
-<?php if( isset( $this->summaryUrlBasket ) ) : ?>
 	<div class="header">
+<?php if( isset( $this->summaryUrlBasket ) ) : ?>
 		<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlBasket ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		<h2><?php echo $enc->html( $this->translate( 'client/html', 'Details' ), $enc::TRUST ); ?></h2>
@@ -90,7 +91,7 @@ $modify = $this->get( 'summaryEnableModify', false );
 			<tbody>
 <?php if( isset( $this->summaryBasket ) ) : ?>
 <?php 	foreach( $this->summaryBasket->getProducts() as $position => $product ) : ?>
-				<tr>
+				<tr class="<?php echo ( isset( $errors['product'][$position] ) ? 'error' : '' ); ?>">
 					<td class="details">
 <?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
 						<img src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaUrl ); ?>" />

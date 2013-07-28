@@ -48,16 +48,20 @@
 }
 
 .arcavias li.attr-item,
-.arcavias li.form-item,
-.arcavias li.error-item {
+.arcavias li.form-item {
 	list-style: none;
 }
 
 .arcavias .error-list {
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
-	padding: 0.5em;
-	list-style: none;
+	list-style: disc;
+	padding: 1em;
+}
+
+.arcavias .error-item {
+	padding: 0.25em 0;
+	margin-left: 1.25em;
 }
 
 /* Common summary CSS also used in e-mail ===>>> */
@@ -73,6 +77,12 @@
 
 
 /* Common summary */
+.common-summary .error,
+.common-summary-detail .error {
+	background-color: #ffeeee;
+	border-bottom: 1px solid #FF3300;
+}
+
 .common-summary .item {
 	display: inline-block;
 	vertical-align: top;
@@ -118,7 +128,8 @@
 	padding-top: 0;
 }
 
-.common-summary .header {
+.common-summary .header,
+.common-summary-detail .header {
 	border-bottom: 1px solid #689DB9;
 	background-color: #F2F7FA;
 	padding: 5px 10px;
@@ -1172,11 +1183,6 @@
 .checkout-standard-summary-option input {
 	display: inline-block;
 	vertical-align: middle;
-}
-
-.checkout-standard-summary-option .error {
-	background-color: #ffeeee;
-	border-bottom: 1px solid #FF3300;
 }
 
 /* Checkout order */

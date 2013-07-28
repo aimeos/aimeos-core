@@ -1,4 +1,4 @@
-# German translations for services.
+# English translations for codes.
 # Copyright (C) 2013
 # This file is distributed under the same license as the arcavias-core package.
 # Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.

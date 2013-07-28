@@ -237,6 +237,15 @@ class Client_Html_Basket_Standard_Default
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
+		catch( MShop_Plugin_Provider_Exception $e )
+		{
+			$errors = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$errors = array_merge( $errors, $this->_translatePluginErrorCodes( $e->getErrorCodes() ) );
+
+			$view = $this->getView();
+			$view->summaryErrorCodes = $e->getErrorCodes();
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $errors;
+		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
