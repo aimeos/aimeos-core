@@ -55,13 +55,11 @@
 .arcavias .error-list {
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
-	list-style: disc;
-	padding: 1em;
+	padding: 0.5em;
 }
 
 .arcavias .error-item {
-	padding: 0.25em 0;
-	margin-left: 1.25em;
+	padding: 0.25em 0.5em;
 }
 
 /* Common summary CSS also used in e-mail ===>>> */
