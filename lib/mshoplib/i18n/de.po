@@ -1,22 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # dhoffmann <d.hoffmann@metaways.de>, 2013
+# dhoffmann <d.hoffmann@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2013
 # nsendetzky <n.sendetzky@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-28 17:37+0200\n"
-"PO-Revision-Date: 2013-06-12 14:50+0000\n"
+"POT-Creation-Date: 2013-07-28 17:57+0200\n"
+"PO-Revision-Date: 2013-07-28 16:00+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/MShop/Order/Item/Base/Default.php:318
@@ -61,7 +63,9 @@ msgstr "Katalog-Pfad mit ID \"%1$s\" nicht gefunden"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:432
 #, php-format
-msgid "Checking response from Paypal express payment server failed. Error \"%1$s\" occured for order ID \"%2$s\" (correlation ID: \"%3$s\"): %4$s"
+msgid ""
+"Checking response from Paypal express payment server failed. Error \"%1$s\" "
+"occured for order ID \"%2$s\" (correlation ID: \"%3$s\"): %4$s"
 msgstr "Überprüfung der Antwort des Paypal-Express-Bezahl-Servers fehlgeschlagen. Fehler \"%1$s\" für Bestell-ID \"%2$s\"(correlation ID: \"%3$s\"): %4$s"
 
 #: src/MShop/Plugin/Provider/Order/AddressesAvailable.php:80
@@ -153,7 +157,9 @@ msgstr "Curl konnte nicht aufgerufen werden"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:327
 #, php-format
-msgid "DOM tree of XML response from delivery provider could not be converted to XML string"
+msgid ""
+"DOM tree of XML response from delivery provider could not be converted to "
+"XML string"
 msgstr "DOM-Struktur der vom Logistikdienstleister erhaltenen XML-Datei konnte nicht in einen XML-String konvertiert werden"
 
 #: src/MShop/Context/Item/Default.php:131
@@ -193,7 +199,9 @@ msgstr "Ungültiges JSON als Suchergebnis in \"%1$s\" mit ID \"%2$s\": \"%3$s\""
 
 #: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:278
 #, php-format
-msgid "Invalid JSON as result of search for order service attribute with ID \"%1$d\""
+msgid ""
+"Invalid JSON as result of search for order service attribute with ID "
+"\"%1$d\""
 msgstr "Ungültiges JSON als Ergebnis für Suche nach \"order service attribute\" mit ID \"%1$d\""
 
 #: src/MShop/Plugin/Manager/Default.php:400
@@ -218,7 +226,9 @@ msgstr "ISO-Sprachcode \"%1$s\" enthält unerlaubte Zeichen"
 
 #: src/MShop/Service/Provider/Abstract.php:261
 #, php-format
-msgid "Invalid characters in attribute for provider configuration. Attribute is not of type \"%1$s\"."
+msgid ""
+"Invalid characters in attribute for provider configuration. Attribute is not"
+" of type \"%1$s\"."
 msgstr "Ein Attribut für die Providerkonfiguration enthält unerlaubte Zeichen. Das Attribut entspricht nicht dem angegebenen Datentyp \"%1$s\"."
 
 #: src/MAdmin/Job/Manager/Factory.php:35 src/MAdmin/Log/Manager/Factory.php:35
@@ -244,7 +254,9 @@ msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
 #: src/MShop/Order/Item/Abstract.php:253 src/MShop/Common/Item/Abstract.php:97
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr "Datum  \"%1$s\" enthält unerlaubte Zeichen. ISO Format \"YYYY-MM-DD hh:mm:ss\" erwartet."
 
 #: src/MShop/Customer/Item/Default.php:317
@@ -321,7 +333,8 @@ msgstr "Item kann nicht gelöscht werden. Aktuelle Site-ID stimmt nicht mit Site
 
 #: src/MShop/Catalog/Manager/Index/Default.php:255
 #, php-format
-msgid "Item could not be saved using method saveItem(). Item ID not available."
+msgid ""
+"Item could not be saved using method saveItem(). Item ID not available."
 msgstr "Item konnte nicht mit Methode saveItem() gespeichert werden. Item-ID nicht verfügbar."
 
 #: src/MShop/Common/Manager/Abstract.php:649
@@ -422,7 +435,9 @@ msgstr "Neue ID \"%1$s\" für das Item stimmt nicht mit der alten ID \"%2$s\" ü
 
 #: src/MShop/Locale/Manager/Site/Default.php:160
 #, php-format
-msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"saveItem()\". Try using "
+"method \"insertItem()\" instead."
 msgstr "Neu erstellte Seite kann nicht mit Methode \"saveItem()\" gespeichert werden. Versuchen Sie Methode \"insertItem()\"."
 
 #: src/MAdmin/Job/Manager/Default.php:133
@@ -475,7 +490,9 @@ msgstr "Objekt ist nicht vom geforderten Typ \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:261
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr "ID \"%1$s\" der Bestelldaten in XML-Antwort des Logistikdienstleisters stimmt nicht mit hinterlegter Rechnungs-ID \"%2$s\" der Bestellung überein"
 
 #: src/MShop/Order/Manager/Base/Default.php:478
@@ -486,7 +503,9 @@ msgstr "Bestellung (Order-Base-Item) mit ID \"%1$s\" nicht gefunden"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:249
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr "Zum Logistikdienstleister übertragene Bestelldaten wurden laut XML-Antwort mit Code \"%1$s\" abgelehnt"
 
 #: src/MShop/Order/Item/Abstract.php:269
@@ -530,7 +549,9 @@ msgstr "Transaktions-ID für Paypal-Express-Bezahlvorgang für Bestellung mit ID
 
 #: src/MShop/Price/Item/Default.php:318
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr "Der Preis kann nicht hinzugezählt werden. Währungs-ID \"%1$s\" des Preis-Items und aktuell verwendete Währungs-ID \"%2$s\" stimmen nicht überein."
 
 #: src/MShop/Price/Manager/Abstract.php:49
@@ -545,7 +566,9 @@ msgstr "Preis-Item nicht verfügbar"
 
 #: src/MShop/Order/Item/Base/Abstract.php:78
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr "Das Produkt enthält nicht alle geforderten Parameter. Produkt-Code für Item nicht verfügbar."
 
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:96
@@ -635,12 +658,16 @@ msgstr "Session-Objekt nicht verfügbar"
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:33
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr "Seite kann nicht eingefügt werden. Site-ID der Seite stimmt nicht mit Site-ID der Eltern-Seite überein."
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:61
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
 msgstr "Seite kann nicht verschoben werden. Site-ID der Seite stimmt nicht mit der aktuellen Site-ID, der Site-ID der bestehenden Eltern-Seite oder mit der Site-ID der neuen Eltern-Seite überein."
 
 #: src/MShop/Locale/Manager/Default.php:110
@@ -690,7 +717,9 @@ msgstr ""
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:137
 #, php-format
-msgid "The price of at least one product in the basket has changed in the meantime and was updated"
+msgid ""
+"The price of at least one product in the basket has changed in the meantime "
+"and was updated"
 msgstr "Der Preis von mindestens einem Produkt im Warenkorb hat sich in der Zwischenzeit geändert und wurde aktualisiert"
 
 #: src/MShop/Plugin/Provider/Order/Shipping.php:82
@@ -716,25 +745,14 @@ msgstr "\"type item\" mit ID \"%1$s\" in \"%2$s\" nicht gefunden"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:242
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr "Validierung der vom Logistikdienstleister erhaltenen XML-Datei gegen das Schema \"%1$s\" fehlgeschlagen"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:323
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed: %2$s"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed: %2$s"
 msgstr "Validierung der vom Logistikdienstleister erhaltenen XML-Datei gegen das Schema \"%1$s\" fehlgeschlagen: %2$s"
-
-#~ msgid "Minimum value or minimum amount of products in basket is not reached"
-#~ msgstr "Der Mindestbestellwert oder die Mindestproduktmenge ist noch nicht erreicht"
-
-#~ msgid "Number of single product exceeds given limit"
-#~ msgstr "Die Anzahl eines Einzelproduktes überschreitet das vorgegebene Limit"
-
-#~ msgid "Total number of products exceeds given limit"
-#~ msgstr "Die Gesamtanzahl der Produkte überschreitet das vorgegebene Limit"
-
-#~ msgid "Total value of products exceeds given limit"
-#~ msgstr "Der Gesamtwert eines Produktes überschreitet das vorgegebene Limit"
-
-#~ msgid "Value of single product exceeds given limit"
-#~ msgstr "Der Wert eines Einzelproduktes überschreitet das vorgegebene Limit"
