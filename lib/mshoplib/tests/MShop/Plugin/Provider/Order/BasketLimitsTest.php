@@ -72,7 +72,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$plugin = $pluginManager->createItem();
 		$plugin->setTypeId( 2 );
 		$plugin->setProvider( 'BasketLimits' );
-		$plugin->setConfig( array('minorder'=>'75.00', 'minproducts' => '2' ) );
+		$plugin->setConfig( array('min-value'=>'75.00', 'min-products' => '2' ) );
 		$plugin->setStatus( '1' );
 
 		$this->_object = new MShop_Plugin_Provider_Order_BasketLimits(TestHelper::getContext(), $plugin);

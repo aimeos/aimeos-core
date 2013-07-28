@@ -55,28 +55,26 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$failures = array();
-
 		$this->_context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
 
-		if( defined( 'DISABLE_MShop_Order_Plugin_Complete' ) )
+		if( $this->_context->getConfig()->get( 'mshop/plugin/provider/order/complete/disable', false ) )
 		{
 			$this->_context->getLogger()->log(__METHOD__ . ': Is disabled', MW_Logger_Abstract::DEBUG);
 			return true;
 		}
 
 		$class = 'MShop_Order_Item_Base_Interface';
-		if( !( $order instanceof $class ) )
-		{
+		if( !( $order instanceof $class ) ) {
 			throw new MShop_Plugin_Exception(sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) { return true; }
 
-		$config = $this->_item->getConfig();
 
-		$sum = MShop_Price_Manager_Factory::createManager( $this->_context )->createItem();
 		$count = 0;
+		$failures = array();
+		$config = $this->_item->getConfig();
+		$sum = MShop_Price_Manager_Factory::createManager( $this->_context )->createItem();
 
 		foreach( $order->getProducts() as $product )
 		{
@@ -84,11 +82,11 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 			$count += $product->getQuantity();
 		}
 
-		if( ( isset( $config['minorder'] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['minorder'] ) ) {
+		if( ( isset( $config['min-value'] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['min-value'] ) ) {
 			$failures[] = 'limit.min-value';
 		}
 
-		if( ( isset( $config['minproducts'] ) ) && ( $count < $config['minproducts'] ) ) {
+		if( ( isset( $config['min-products'] ) ) && ( $count < $config['min-products'] ) ) {
 			$failures[] = 'limit.min-products';
 		}
 
