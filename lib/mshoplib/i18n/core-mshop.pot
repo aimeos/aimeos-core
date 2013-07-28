@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-26 13:36+0200\n"
+"POT-Creation-Date: 2013-07-28 17:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -413,11 +413,6 @@ msgstr ""
 msgid "Method \"%1$s\" for provider not available"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:97
-#, php-format
-msgid "Minimum value or minimum amount of products in basket is not reached"
-msgstr ""
-
 #: src/MShop/Common/Item/Abstract.php:80
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
@@ -426,11 +421,6 @@ msgstr ""
 #: src/MShop/Locale/Manager/Site/Default.php:160
 #, php-format
 msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
-msgstr ""
-
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:72
-#, php-format
-msgid "Number of single product exceeds given limit"
 msgstr ""
 
 #: src/MAdmin/Job/Manager/Default.php:133
@@ -463,11 +453,10 @@ msgstr ""
 #: src/MShop/Product/Manager/Default.php:394
 #: src/MShop/Media/Manager/Default.php:424
 #: src/MShop/Plugin/Manager/Default.php:303
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:60
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:65
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:59
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:64
 #: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:63
-#: src/MShop/Plugin/Provider/Order/Complete.php:71
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:71
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:68
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:63
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:68
 #: src/MShop/Plugin/Provider/Order/ProductStock.php:64
@@ -657,6 +646,46 @@ msgstr ""
 msgid "Site for code \"%1$s\" not found"
 msgstr ""
 
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:95
+#, php-format
+msgid "The maximum basket value of %1$s is exceeded"
+msgstr ""
+
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:72
+#, php-format
+msgid "The maximum product quantity is %1$d"
+msgstr ""
+
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:107
+#, php-format
+msgid "The maximum product quantity of %1$d is exceeded"
+msgstr ""
+
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:99
+#, php-format
+msgid "The maximum product value is %1$s"
+msgstr ""
+
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:87
+#, php-format
+msgid "The maximum quantity of all products is %1$d"
+msgstr ""
+
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:115
+#, php-format
+msgid "The maximum value of all products is %1$s"
+msgstr ""
+
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:89
+#, php-format
+msgid "The minimum basket value of %1$s isn't reached"
+msgstr ""
+
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:101
+#, php-format
+msgid "The minimum product quantity of %1$d isn't reached"
+msgstr ""
+
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:137
 #, php-format
 msgid "The price of at least one product in the basket has changed in the meantime and was updated"
@@ -667,20 +696,10 @@ msgstr ""
 msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:85
-#, php-format
-msgid "Total number of products exceeds given limit"
-msgstr ""
-
 #: src/MShop/Locale/Manager/Default.php:510
 #: src/MShop/Common/Manager/Abstract.php:821
 #, php-format
 msgid "Total results value not found"
-msgstr ""
-
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:109
-#, php-format
-msgid "Total value of products exceeds given limit"
 msgstr ""
 
 #: src/MShop/Locale/Manager/Site/Default.php:407
@@ -701,9 +720,4 @@ msgstr ""
 #: src/MShop/Service/Provider/Delivery/Default.php:323
 #, php-format
 msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed: %2$s"
-msgstr ""
-
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:95
-#, php-format
-msgid "Value of single product exceeds given limit"
 msgstr ""
