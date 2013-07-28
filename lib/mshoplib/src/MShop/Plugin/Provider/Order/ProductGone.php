@@ -88,7 +88,7 @@ class MShop_Plugin_Provider_Order_ProductGone implements MShop_Plugin_Provider_I
 		{
 			if ( !array_key_exists( $orderProduct->getProductId(), $checkItems ) )
 			{
-				$notAvailable[$position] = 'product.status';
+				$notAvailable[$position] = 'gone.notexist';
 				continue;
 			}
 
@@ -96,7 +96,7 @@ class MShop_Plugin_Provider_Order_ProductGone implements MShop_Plugin_Provider_I
 
 			if ( $product->getStatus() <= 0 )
 			{
-				$notAvailable[$position] = 'product.status';
+				$notAvailable[$position] = 'gone.status';
 				continue;
 			}
 
@@ -104,7 +104,7 @@ class MShop_Plugin_Provider_Order_ProductGone implements MShop_Plugin_Provider_I
 			$end = $product->getDateEnd();
 
 			if ( ( ( $start !== null ) && ( $start >= $now) ) || ( ( $end !== null ) && ( $now > $end ) ) ) {
-				$notAvailable[$position] = 'product.status';
+				$notAvailable[$position] = 'gone.timeframe';
 			}
 		}
 
