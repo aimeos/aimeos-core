@@ -127,7 +127,7 @@ class MShop_Plugin_Provider_Order_ProductPrice implements MShop_Plugin_Provider_
 				$order->deleteProduct( $pos );
 				$order->addProduct( $orderProducts[$pos], $pos );
 
-				$changedProducts[$pos] = 'product.price';
+				$changedProducts[$pos] = 'price.changed';
 			}
 		}
 

@@ -48,8 +48,7 @@
 }
 
 .arcavias li.attr-item,
-.arcavias li.form-item,
-.arcavias li.error-item {
+.arcavias li.form-item {
 	list-style: none;
 }
 
@@ -57,7 +56,10 @@
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
 	padding: 0.5em;
-	list-style: none;
+}
+
+.arcavias .error-item {
+	padding: 0.25em 0.5em;
 }
 
 /* Common summary CSS also used in e-mail ===>>> */
@@ -73,6 +75,12 @@
 
 
 /* Common summary */
+.common-summary .error,
+.common-summary-detail .error {
+	background-color: #ffeeee;
+	border-bottom: 1px solid #FF3300;
+}
+
 .common-summary .item {
 	display: inline-block;
 	vertical-align: top;
@@ -118,7 +126,8 @@
 	padding-top: 0;
 }
 
-.common-summary .header {
+.common-summary .header,
+.common-summary-detail .header {
 	border-bottom: 1px solid #689DB9;
 	background-color: #F2F7FA;
 	padding: 5px 10px;
@@ -141,12 +150,12 @@
 	color: #000000;
 }
 
-.common-summary-detail a.modify {
-	margin: 10px 24px 0 0;	
+.common-summary-detail .header {
+	border-bottom: none;
+	background-color: #FFFFFF;
 }
 
 .common-summary-detail h2 {
-	margin: 5px 10px;
 	font-size: 1em;
 }
 
@@ -1155,6 +1164,8 @@
 
 .checkout-standard-summary-option h3 {
 	display: block;
+	padding: 5px;
+	padding-top: 10px;
 }
 
 .checkout-standard-summary-option p {
@@ -1170,11 +1181,6 @@
 .checkout-standard-summary-option input {
 	display: inline-block;
 	vertical-align: middle;
-}
-
-.checkout-standard-summary-option .error {
-	background-color: #ffeeee;
-	border-bottom: 1px solid #FF3300;
 }
 
 /* Checkout order */

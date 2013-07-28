@@ -478,7 +478,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		}
 		catch ( MShop_Plugin_Provider_Exception $mppe )
 		{
-			$refErrorCodes = array( 'product' => array( 'product.status', 'product.status' ) );
+			$refErrorCodes = array( 'product' => array( 'gone.notexist', 'gone.notexist' ) );
 			$this->assertEquals( $refErrorCodes, $mppe->getErrorCodes() );
 		}
 		catch ( Exception $e ) {

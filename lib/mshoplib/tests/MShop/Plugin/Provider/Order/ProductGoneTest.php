@@ -200,7 +200,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 			$object->update( $this->_order, 'isComplete.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 		}
 		catch( MShop_Plugin_Provider_Exception $e ) {
-			$ref = array('product' => array( $badItemPosition => 'product.status' ) );
+			$ref = array('product' => array( $badItemPosition => 'gone.status' ) );
 			$this->assertEquals( $ref, $e->getErrorCodes() );
 			return;
 		}

@@ -10,10 +10,6 @@
  */
 class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var    MShop_Plugin_Provider_Order_Complete
-	 * @access protected
-	 */
 	private $_object;
 	private $_products;
 	private $_order;
@@ -33,6 +29,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$suite  = new PHPUnit_Framework_TestSuite('MShop_Plugin_Provider_Order_BasketLimitsTest');
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
+
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -68,15 +65,23 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->_products['CNE']->setQuantity( 2 );
 		$this->_products['CNC']->setQuantity( 1 );
 
+		$config = array(
+			'min-value'=> array( 'EUR' => '75.00' ),
+			'max-value'=> array( 'EUR' => '625.00' ),
+			'min-products' => '2',
+			'max-products' => 5
+		);
+
 		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
 		$plugin = $pluginManager->createItem();
 		$plugin->setTypeId( 2 );
 		$plugin->setProvider( 'BasketLimits' );
-		$plugin->setConfig( array('minorder'=>'75.00', 'minproducts' => '2' ) );
+		$plugin->setConfig( $config );
 		$plugin->setStatus( '1' );
 
 		$this->_object = new MShop_Plugin_Provider_Order_BasketLimits(TestHelper::getContext(), $plugin);
 	}
+
 
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
@@ -90,62 +95,72 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		unset($this->_order);
 	}
 
+
 	public function testRegister()
 	{
 		$this->_object->register( $this->_order );
 	}
 
-	public function testUpdateBothFail()
-	{
-		try {
-			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
-		}
-		catch ( MShop_Plugin_Provider_Exception $e )
-		{
-			$errorCodes = array( 'basket' => array( 'limit.min-value', 'limit.min-products' ) );
-			$this->assertEquals( $errorCodes, $e->getErrorCodes() );
-			return;
-		}
-		$this->fail( 'Min-products and min-value should have failed.' );
-	}
 
-	public function testUpdateMinProductsFails()
-	{
-		$this->_order->addProduct( $this->_products['CNC'] );
-
-		try {
-			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
-		}
-		catch ( MShop_Plugin_Provider_Exception $e )
-		{
-			$errorCodes = array( 'basket' => array( 'limit.min-products' ) );
-			$this->assertEquals( $errorCodes, $e->getErrorCodes() );
-			return;
-		}
-		$this->fail( 'Min-products should have failed.' );
-	}
-
-	public function testUpdateMinValueFails()
-	{
-		$this->_order->addProduct( $this->_products['CNE'] );
-
-		try {
-			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
-		}
-		catch ( MShop_Plugin_Provider_Exception $e )
-		{
-			$errorCodes = array( 'basket' => array( 'limit.min-value' ) );
-			$this->assertEquals( $errorCodes, $e->getErrorCodes() );
-			return;
-		}
-		$this->fail( 'Min-value should have failed. ' );
-	}
-
-	public function testUpdateOk()
+	public function testUpdate()
 	{
 		$this->_products['CNE']->setQuantity( 4 );
 		$this->_order->addProduct( $this->_products['CNE'] );
 
 		$this->assertTrue($this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT));
+	}
+
+
+	public function testUpdateMinProductsFails()
+	{
+		$this->_order->addProduct( $this->_products['CNC'] );
+
+		try
+		{
+			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+			$this->fail( 'Min-products should have failed' );
+		}
+		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
+	}
+
+
+	public function testUpdateMaxProductsFails()
+	{
+		$this->_products['CNE']->setQuantity( 6 );
+		$this->_order->addProduct( $this->_products['CNE'] );
+
+		try
+		{
+			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+			$this->fail( 'Max-products should have failed' );
+		}
+		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
+	}
+
+
+	public function testUpdateMinValueFails()
+	{
+		$this->_order->addProduct( $this->_products['CNE'] );
+
+		try
+		{
+			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+			$this->fail( 'Min-value should have failed' );
+		}
+		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
+	}
+
+
+	public function testUpdateMaxValueFails()
+	{
+		$this->_products['CNC']->setQuantity( 2 );
+		$this->_order->addProduct( $this->_products['CNC'] );
+
+		try
+		{
+			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+			$this->fail( 'Max-value should have failed' );
+		}
+		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
 	}
 }

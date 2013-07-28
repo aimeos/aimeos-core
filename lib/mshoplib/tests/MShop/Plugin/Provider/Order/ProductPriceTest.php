@@ -194,7 +194,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		catch ( MShop_Plugin_Provider_Exception $mppe )
 		{
 			$this->assertEquals( '600.00', $this->_order->getProduct( 0 )->getPrice()->getValue() );
-			$this->assertEquals( array('product' => array( '0' => 'product.price' ) ), $mppe->getErrorCodes() );
+			$this->assertEquals( array('product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
 		}
 	}
 
@@ -235,7 +235,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		catch ( MShop_Plugin_Provider_Exception $mppe )
 		{
 			$this->assertEquals( '18.00', $this->_order->getProduct( 0 )->getPrice()->getValue() );
-			$this->assertEquals( array('product' => array( '0' => 'product.price' ) ), $mppe->getErrorCodes() );
+			$this->assertEquals( array('product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
 		}
 	}
 
@@ -269,7 +269,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 			};
 
 			$this->assertEquals( $refPrice, $product->getPrice()->getValue() );
-			$this->assertEquals( array('product' => array( '0' => 'product.price' ) ), $mppe->getErrorCodes() );
+			$this->assertEquals( array('product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
 		}
 	}
 

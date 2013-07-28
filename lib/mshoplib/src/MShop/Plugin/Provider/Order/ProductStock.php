@@ -97,7 +97,7 @@ class MShop_Plugin_Provider_Order_ProductStock implements MShop_Plugin_Provider_
 		foreach ( $checkItems as $checkItem )
 		{
 			if ( $checkItem->getStocklevel() < $productQuantities[$checkItem->getProductId()] ) {
-				$outOfStock[$positions[$checkItem->getProductId()]] = 'product.stock';
+				$outOfStock[$positions[$checkItem->getProductId()]] = 'stock.notenough';
 			}
 		}
 

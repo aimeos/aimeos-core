@@ -125,7 +125,7 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 			$stockItem->setStocklevel( $oldStocklevel );
 			$stockManager->saveItem( $stockItem );
 
-			$ref = array( 'product' => array( '0' => 'product.stock' ) );
+			$ref = array( 'product' => array( '0' => 'stock.notenough' ) );
 			$this->assertEquals( $ref, $mppe->getErrorCodes() );
 
 			return;

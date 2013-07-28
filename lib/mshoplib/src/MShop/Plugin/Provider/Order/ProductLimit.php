@@ -55,21 +55,22 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 		$this->_context->getLogger()->log( __METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG );
 
 		$class = 'MShop_Order_Item_Base_Interface';
-		if( !( $order instanceof $class ) )
-		{
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof $class ) ) {
+			throw new MShop_Plugin_Provider_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$class = 'MShop_Order_Item_Base_Product_Interface';
 		if( !( $value instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new MShop_Plugin_Provider_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$config = $this->_item->getConfig();
 
 
-		if( isset( $config['single-number-max'] ) && $value->getQuantity() > (int) $config['single-number-max'] ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Number of single product exceeds given limit' ) );
+		if( isset( $config['single-number-max'] ) && $value->getQuantity() > (int) $config['single-number-max'] )
+		{
+			$msg = sprintf( 'The maximum product quantity is %1$d', (int) $config['single-number-max'] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
 		}
 
 
@@ -81,8 +82,10 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 				$total += $product->getQuantity();
 			}
 
-			if( $total > (int) $config['total-number-max'] ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Total number of products exceeds given limit' ) );
+			if( $total > (int) $config['total-number-max'] )
+			{
+				$msg = sprintf( 'The maximum quantity of all products is %1$d', (int) $config['total-number-max'] );
+				throw new MShop_Plugin_Provider_Exception( $msg );
 			}
 		}
 
@@ -91,8 +94,10 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 
 
 		if( isset( $config['single-value-max'][$currencyId] )
-			&& $value->getPrice()->getValue() * $value->getQuantity() > (float) $config['single-value-max'][$currencyId] ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Value of single product exceeds given limit' ) );
+			&& $value->getPrice()->getValue() * $value->getQuantity() > (float) $config['single-value-max'][$currencyId]
+		) {
+			$msg = sprintf( 'The maximum product value is %1$s', $config['single-value-max'][$currencyId] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
 		}
 
 
@@ -105,8 +110,10 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 				$price->addItem( $product->getPrice(), $product->getQuantity() );
 			}
 
-			if( (float) $price->getValue() > (float) $config['total-value-max'][$currencyId] ) {
-				throw new MShop_Plugin_Exception( sprintf( 'Total value of products exceeds given limit' ) );
+			if( (float) $price->getValue() > (float) $config['total-value-max'][$currencyId] )
+			{
+				$msg = sprintf( 'The maximum value of all products is %1$s', $config['total-value-max'][$currencyId] );
+				throw new MShop_Plugin_Provider_Exception( $msg );
 			}
 		}
 

@@ -6,11 +6,12 @@
  */
 
 $enc = $this->encoder();
+$errors = $this->get( 'summaryErrorCodes', array() );
 
 ?>
 <div class="common-summary-service container">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Services' ), $enc::TRUST ); ?></h2>
-	<div class="item delivery">
+	<div class="item delivery <?php echo ( isset( $errors['service']['delivery'] ) ? 'error' : '' ); ?>">
 		<div class="header">
 			<h3><?php echo $enc->html( $this->translate( 'client/html', 'delivery' ), $enc::TRUST ); ?></h3>
 <?php if( isset( $this->summaryUrlServiceDelivery ) ) : ?>
@@ -42,7 +43,7 @@ $enc = $this->encoder();
 <?php	endif; ?>
 <?php } catch( Exception $e ) { ; } ?>
 	</div><!--
-	--><div class="item payment">
+	--><div class="item payment <?php echo ( isset( $errors['service']['payment'] ) ? 'error' : '' ); ?>">
 		<div class="header">
 			<h3><?php echo $enc->html( $this->translate( 'client/html', 'payment' ), $enc::TRUST ); ?></h3>
 <?php if( isset( $this->summaryUrlServicePayment ) ) : ?>
