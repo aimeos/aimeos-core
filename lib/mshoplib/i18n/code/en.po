@@ -1,0 +1,68 @@
+# English translations for codes.
+# Copyright (C) 2013
+# This file is distributed under the same license as the arcavias-core package.
+# Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: arcavias-core 2013-07\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2013-07-28 13:03+0100\n"
+"Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "The delivery address is missing"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "A delivery address is not allowed"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "The billing address is missing"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "A billing address is not allowed"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "produdct.gone.notexist"
+msgstr "At least one product doesn't exist any more"
+
+#. ProductGone plugin error: Product status disabled
+msgid "produdct.gone.status"
+msgstr "At least one product was disabled"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "produdct.gone.timeframe"
+msgstr "At least one product is not available any more"
+
+#. ProductPrice plugin error: Product price changed
+msgid "produdct.price.changed"
+msgstr "The price of at least one product has changed"
+
+#. ProductStock plugin error: Product out of stock
+msgid "produdct.stock.notenough"
+msgstr "At least one product is out of stock"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "The delivery address is missing"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "A delivery address is not allowed"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "The billing address is missing"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "A billing address is not allowed"
