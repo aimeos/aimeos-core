@@ -65,7 +65,7 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) ) {
-			throw new MShop_Plugin_Exception(sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new MShop_Plugin_Provider_Exception(sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) { return true; }
@@ -82,18 +82,30 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 			$count += $product->getQuantity();
 		}
 
-		if( ( isset( $config['min-value'] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['min-value'] ) ) {
-			$failures[] = 'limit.min-value';
-		}
+		$currencyId = $sum->getCurrencyId();
 
-		if( ( isset( $config['min-products'] ) ) && ( $count < $config['min-products'] ) ) {
-			$failures[] = 'limit.min-products';
-		}
-
-		if( count( $failures ) > 0 )
+		if( ( isset( $config['min-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] ) )
 		{
-			$msg = sprintf( 'Minimum value or minimum amount of products in basket is not reached' );
-			throw new MShop_Plugin_Provider_Exception( $msg, -1, null, array( 'basket' => $failures ) );
+			$msg = sprintf( 'The minimum basket value of %1$s isn\'t reached', $config['min-value'][$currencyId] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
+		}
+
+		if( ( isset( $config['max-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() > $config['max-value'][$currencyId] ) )
+		{
+			$msg = sprintf( 'The maximum basket value of %1$s is exceeded', $config['max-value'][$currencyId] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
+		}
+
+		if( ( isset( $config['min-products'] ) ) && ( $count < $config['min-products'] ) )
+		{
+			$msg = sprintf( 'The minimum product quantity of %1$d isn\'t reached', $config['min-products'] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
+		}
+
+		if( ( isset( $config['max-products'] ) ) && ( $count > $config['max-products'] ) )
+		{
+			$msg = sprintf( 'The maximum product quantity of %1$d is exceeded', $config['max-products'] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
 		}
 
 		return true;
