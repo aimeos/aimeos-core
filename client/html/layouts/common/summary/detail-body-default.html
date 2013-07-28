@@ -69,9 +69,11 @@ $modify = $this->get( 'summaryEnableModify', false );
 ?>
 <div class="common-summary-detail container">
 <?php if( isset( $this->summaryUrlBasket ) ) : ?>
-	<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlBasket ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
+	<div class="header">
+		<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlBasket ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
-	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Details' ), $enc::TRUST ); ?></h2>
+		<h2><?php echo $enc->html( $this->translate( 'client/html', 'Details' ), $enc::TRUST ); ?></h2>
+	</div>
 	<div class="basket">
 		<table>
 			<thead>

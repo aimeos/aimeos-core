@@ -141,12 +141,12 @@
 	color: #000000;
 }
 
-.common-summary-detail a.modify {
-	margin: 10px 24px 0 0;	
+.common-summary-detail .header {
+	border-bottom: none;
+	background-color: #FFFFFF;
 }
 
 .common-summary-detail h2 {
-	margin: 5px 10px;
 	font-size: 1em;
 }
 
@@ -1155,6 +1155,8 @@
 
 .checkout-standard-summary-option h3 {
 	display: block;
+	padding: 5px;
+	padding-top: 10px;
 }
 
 .checkout-standard-summary-option p {
