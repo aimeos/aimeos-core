@@ -33,23 +33,23 @@ msgstr "A billing address is not allowed"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr "At least one product doesn't exist any more"
+msgstr "Sorry, at least one product doesn't exist any more. Please remove it from your basket to continue"
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr "At least one product was disabled"
+msgstr "Sorry, at least one product was disabled. Please remove it from your basket to continue"
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr "At least one product is not available any more"
+msgstr "Sorry, at least one product is not available any more. Please remove it from your basket to continue"
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr "The price of at least one product has changed"
+msgstr "The price of at least one product has changed and it was updated automatically"
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr "At least one product is out of stock"
+msgstr "Sorry, at least one product is out of stock. Please remove it from your basket to continue"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"

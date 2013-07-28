@@ -1,71 +1,71 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#
+# 
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2013-07-28 16:07+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr "The billing address is missing"
+msgstr ""
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr "The delivery address is missing"
+msgstr ""
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr "A billing address is not allowed"
+msgstr ""
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr "A delivery address is not allowed"
+msgstr ""
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr "The payment option is missing"
+msgstr ""
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr "The delivery option is missing"
+msgstr ""
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr "A payment option is not allowed"
+msgstr ""
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr "A delivery option is not allowed"
+msgstr ""
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr "Sorry, at least one product doesn't exist any more. Please remove it from your basket to continue"
+msgstr ""
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr "Sorry, at least one product was disabled. Please remove it from your basket to continue"
+msgstr ""
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr "Sorry, at least one product is not available any more. Please remove it from your basket to continue"
+msgstr ""
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr "The price of at least one product has changed and it was updated automatically"
+msgstr ""
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr "Sorry, at least one product is out of stock. Please remove it from your basket to continue"
+msgstr ""

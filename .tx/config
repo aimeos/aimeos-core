@@ -17,6 +17,11 @@ file_filter = lib/mshoplib/i18n/<lang>.po
 source_file = lib/mshoplib/i18n/core-mshop.pot
 source_lang = en
 
+[arcavias.lib-mshoplib-code]
+file_filter = lib/mshoplib/i18n/code/<lang>.po
+source_file = lib/mshoplib/i18n/code/core-mshop-code.pot
+source_lang = en
+
 [arcavias.client-html-code]
 file_filter = client/html/i18n/code/<lang>.po
 source_file = client/html/i18n/code/core-client-html-code.pot
