@@ -4,6 +4,8 @@
 #
 #
 # Translators:
+# Translators:
+# nsendetzky <n.sendetzky@metaways.de>, 2013
 # nsendetzky <n.sendetzky@metaways.de>, 2013
 # nsendetzky <n.sendetzky@metaways.de>, 2013
 msgid ""

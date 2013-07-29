@@ -4,13 +4,15 @@
 #
 #
 # Translators:
+# Translators:
+# dhoffmann <d.hoffmann@metaways.de>, 2013
 # dhoffmann <d.hoffmann@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-07-29 10:51+0000\n"
+"PO-Revision-Date: 2013-07-29 13:04+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
 "Language: de\n"
@@ -37,15 +39,15 @@ msgstr "Eine Rechnungsadresse ist nicht erlaubt"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr "Entschuldigung, mindestens ein Produkt existiert nicht mehr. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
+msgstr "Es tut uns sehr leid, mindestens ein Produkt existiert nicht mehr. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr "Entschuldigung, mindestens ein Produkt wurde deaktiviert. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
+msgstr "Es tut uns sehr leid, mindestens ein Produkt wurde deaktiviert. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr "Entschuldigung, mindestens ein Produkt ist nicht mehr verfügbar. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
+msgstr "Es tut uns sehr leid, mindestens ein Produkt ist nicht mehr verfügbar. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
@@ -53,20 +55,20 @@ msgstr "Der Preis von mindestens einem Produkt im Warenkorb hat sich in der Zwis
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr "Entschuldigung, mindestens ein Produkt ist nicht mehr auf Lager. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
+msgstr "Es tut uns sehr leid, mindestens ein Produkt ist nicht mehr auf Lager. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr "Die Lieferweise fehlt"
+msgstr "Die Lieferoption fehlt"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr "Eine Lieferweise ist nicht erlaubt"
+msgstr "Eine Lieferoption ist nicht erlaubt"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr "Die Bezahlweise fehlt"
+msgstr "Die Bezahloption fehlt"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr "Eine Bezahlweise ist nicht erlaubt"
+msgstr "Eine Bezahloption ist nicht erlaubt"
