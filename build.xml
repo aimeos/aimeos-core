@@ -144,7 +144,7 @@
 	<target name="build" description="Creates all files to be generated" >
 		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/dev/phing" />
 		<jsbpackages />
-		<exec command="tx pull -a" checkreturn="true" logoutput="true"/>
+		<exec command="tx pull -a --mode reviewed" checkreturn="true" logoutput="true"/>
 		<phing target="build" dir="${coredir}/client/html" />
 		<phing target="build" dir="${coredir}/controller/frontend" />
 		<phing target="build" dir="${coredir}/lib/mshoplib" />
