@@ -102,20 +102,45 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 		
 		return null;
 	},
-
 	
 	insertListItems: function(records, rowIndex) {
-		// remove duplicates and highlight them in grid
 		var refStore = this.getRefStore();
-		var duplicats = [];
 		var clones = [];
+		
+		this.listTypeStore.filter([
+			{
+				property: this.itemConfig.listNamePrefix + 'type.domain',
+				value   : this.itemListUi.domain
+			}, {
+				property: this.itemConfig.listNamePrefix + 'type.code',
+				value   : 'default'
+			}
+		]);
 
-		Ext.each([].concat(records), function(record) {
+		var typeId = this.listTypeStore.getCount() ? this.listTypeStore.getAt( 0 ).id : null;
+
+		this.listTypeStore.clearFilter();
+
+		Ext.each([].concat(records), function(record, id) {
+			var refIdProperty = this.itemConfig.listNamePrefix + "refid";
+			var typeIdPropery = this.itemConfig.listNamePrefix + "typeid";
+			var recordTypeIdProperty = this.itemConfig.domain + ".typeid";
+			
 			if (refStore.getById(record.id)) {
 				records.remove(record);
 
-				var idx = this.itemListUi.store.find(this.itemConfig.listNamePrefix + 'refid', record.id);
-				Ext.fly(this.itemListUi.grid.getView().getRow(idx)).highlight();
+				// Get index of duplicated entry.
+				var index = this.itemListUi.store.findBy(function (item) {
+					return (record.id == item.get(refIdProperty))
+						&& (typeId == item.get(typeIdPropery));
+				}, this);
+
+				if (index != -1) {
+					// If entry is duplicated highlight it.
+					Ext.fly(this.itemListUi.grid.getView().getRow(index)).highlight();
+				} else {
+					clones.push(record.copy());
+				}
 			} else {
 				clones.push(record.copy());
 			}
@@ -130,23 +155,8 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 		refStore.add(records);
 
 		// insert new list item records at the right position
-		var rs = [], recordType = MShop.Schema.getRecord(this.itemListUi.recordName), typeId = null;
+		var rs = [], recordType = MShop.Schema.getRecord(this.itemListUi.recordName);
 
-		this.listTypeStore.filter([
-			{
-				property: this.itemConfig.listNamePrefix + 'type.domain',
-				value   : this.itemListUi.domain
-			}, {
-				property: this.itemConfig.listNamePrefix + 'type.code',
-				value   : 'default'
-			}
-		]);
-
-		if( this.listTypeStore.getCount() ) {
-			typeId = this.listTypeStore.getAt( 0 ).id;
-		}
-
-		this.listTypeStore.clearFilter();
 
 		Ext.each(
 			records,
