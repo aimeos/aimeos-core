@@ -5,6 +5,7 @@ vendor/
 dev/images/*
 dev/apidoc/
 coverage/
+*-jperf.xml
 *.log
 
 .buildpath

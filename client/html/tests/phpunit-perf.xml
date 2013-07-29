@@ -6,4 +6,7 @@
 			<directory>Perf/</directory>
 		</testsuite>
 	</testsuites>
+	<logging>
+		<log type="junit" target="client-html-jperf.xml" />
+	</logging>
 </phpunit>
