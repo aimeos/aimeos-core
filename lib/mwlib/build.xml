@@ -12,7 +12,7 @@
 		<echo msg="Executing performance tests" />
 		<delete file="tests/unitperf.log" quiet="true" failonerror="false" />
 		<delete file="tests/lib-mwlib-jperf.xml" quiet="true" failonerror="false" />
-		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit-perf.xml --log-junit lib-mwlib-jperf.xml"
+		<exec command="phpunit --include-path=../../zendlib/ --configuration=phpunit-perf.xml --repeat 5"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 
