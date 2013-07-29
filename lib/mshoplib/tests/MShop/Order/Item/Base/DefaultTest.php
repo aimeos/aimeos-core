@@ -452,28 +452,35 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCheckInvalid()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->check( -1 );
+	}
+
+
+	public function testCheckAllFailure()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_ALL );
+	}
+
+
+	public function testCheckProductsFailure()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+	}
+
+
 	public function testCheckProducts()
 	{
-
-		try {
-			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_ALL );
-		}
-		catch( MShop_Order_Exception $e ) {
-			$this->assertEquals( 'Basket empty', $e->getMessage() );
-		}
-
-		try {
-			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
-		}
-		catch( MShop_Order_Exception $e ) {
-			$this->assertEquals( 'Basket empty', $e->getMessage() );
-		}
-
 		foreach( $this->_products as $product ) {
 			$this->_object->addProduct( $product );
 		}
 
-		try {
+		try
+		{
 			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 		}
 		catch ( MShop_Plugin_Provider_Exception $mppe )
@@ -481,10 +488,6 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 			$refErrorCodes = array( 'product' => array( 'gone.notexist', 'gone.notexist' ) );
 			$this->assertEquals( $refErrorCodes, $mppe->getErrorCodes() );
 		}
-		catch ( Exception $e ) {
-			$this->fail( 'Unexpected Exception caught: (' . $e->getCode() . ') ' . $e->getMessage() . $e->getTraceAsString() );
-		}
-		$this->assertTrue( true );
 	}
 
 
@@ -494,21 +497,40 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 			$this->_object->addProduct( $product );
 		}
 
-		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
+		foreach( $this->_addresses as $type => $address ) {
+			$this->_object->setAddress( $address, $type );
+		}
 
 		$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
+	}
+
+
+	public function testCheckNoAddresses()
+	{
+		foreach( $this->_products as $product ) {
+			$this->_object->addProduct( $product );
+		}
+
+		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
+		$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
+	}
+
+
+	public function testCheckServices()
+	{
+		foreach( $this->_products as $product ) {
+			$this->_object->addProduct( $product );
+		}
 
 		foreach( $this->_addresses as $type => $address ) {
 			$this->_object->setAddress( $address, $type );
 		}
 
-		try {
-			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
+		foreach( $this->_services as $type => $service ) {
+			$this->_object->setService( $service, $type );
 		}
-		catch( Exception $e ) {
-			$this->fail( 'Unexpected Exception caught: (' . $e->getCode() . ') ' . $e->getMessage() );
-		}
-		$this->assertTrue( true );
+
+		$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
 	}
 
 
@@ -525,33 +547,5 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
 		$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
-	}
-
-
-	public function testCheckWithServices()
-	{
-
-		foreach( $this->_products as $product ) {
-			$this->_object->addProduct( $product );
-		}
-
-		foreach( $this->_addresses as $type => $address ) {
-			$this->_object->setAddress( $address, $type );
-		}
-
-		foreach( $this->_services as $type => $service ) {
-			$this->_object->setService( $service, $type );
-		}
-
-		try {
-			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
-		}
-		catch (Exception $e) {
-			$this->fail( 'Unexpected Exception caught: (' . $e->getCode() . ') ' . $e->getMessage() );
-		}
-		$this->assertTrue( true );
-
-		$this->setExpectedException( 'MShop_Order_Exception' );
-		$this->_object->check( -1 );
 	}
 }
