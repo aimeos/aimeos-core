@@ -131,8 +131,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 
 				// Get index of duplicated entry.
 				var index = this.itemListUi.store.findBy(function (item) {
-					return (record.id == item.get(refIdProperty))
-						&& (typeId == item.get(typeIdPropery));
+					return ( record.id == item.get(refIdProperty) && typeId == item.get(typeIdPropery) );
 				}, this);
 
 				if (index != -1) {

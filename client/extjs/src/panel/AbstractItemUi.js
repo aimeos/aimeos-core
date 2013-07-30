@@ -200,9 +200,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			if (! recordRefId || ! recordTypeId || ! itemRefId || ! itemTypeId)
 				return false;
 			
-			return (recordRefId == itemRefId)
-				&& (recordTypeId == itemTypeId)
-				&& (recordId != itemId);
+			return ( recordRefId == itemRefId && recordTypeId == itemTypeId && recordId != itemId );
 		}, this);
 		
 		if (index != -1) {
