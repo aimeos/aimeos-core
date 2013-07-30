@@ -53,9 +53,9 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		@header('Content-Disposition: attachment; filename=arcavias-attribute-texts.xls');
 		@header('Cache-Control: max-age=0');
 
+		$this->_container = new Controller_ExtJS_Common_Load_Container_PHPExcel( 'php://output', 'attribute' );//$this->_getContext()->getConfig()->get( 'controller/extjs/export/manager', new Controller_ExtJS_Common_Load_Container_PHPExcel( 'php://output', 'attribute' ) );
 		$phpExcel = $this->_createDocument( $items, $lang );
-		$objWriter = PHPExcel_IOFactory::createWriter($phpExcel, 'Excel5');
-		$objWriter->save('php://output');
+		$this->_container->finish();
 	}
 
 
@@ -97,8 +97,8 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		$jobController->saveItems( $result );
 
 		return array(
-				'items' => $items,
-				'success' => true,
+			'items' => $items,
+			'success' => true,
 		);
 	}
 
@@ -124,13 +124,14 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
 		}
 
-		$filename = 'attribute-text-export_' .date('Y-m-d') . '_' . md5( time() . getmypid() ) .'.xls';
+		$filename = 'attribute-text-export_' .date('Y-m-d') . '_' . md5( time() . getmypid() );
+		$this->_filepath = $dir . DIRECTORY_SEPARATOR . $filename;
 
 		$this->_getContext()->getLogger()->log( sprintf( 'Create export file for attribute IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
-		$phpExcel = $this->_createDocument( $items, $lang );
-		$objWriter = PHPExcel_IOFactory::createWriter($phpExcel, 'Excel5');
-		$objWriter->save( $dir . DIRECTORY_SEPARATOR .$filename );
+		$this->_container = $config->get( 'controller/extjs/export/manager', new Controller_ExtJS_Common_Load_Container_PHPExcel( $this->_filepath ) );
+		$this->_createDocument( $items, $lang );
+		$filename = $this->_container->finish();
 
 		$downloadFile = $config->get( 'controller/extjs/attribute/export/text/default/downloaddir', 'uploads' ) . DIRECTORY_SEPARATOR . $filename;
 
@@ -170,18 +171,6 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	 */
 	protected function _createDocument( array $ids, array $lang )
 	{
-		$phpExcel = new PHPExcel();
-		$phpExcel->removeSheetByIndex( 0 );
-
-		$phpExcel->getProperties()
-			->setCreator( 'Arcavias' )
-			->setLastModifiedBy( 'Arcavias export' )
-			->setTitle( 'Arcavias attribute text export' )
-			->setSubject( 'Arcavias attribute text export' )
-			->setDescription( 'Export file for all attribute texts' )
-			->setKeywords( 'export attribute text translation' );
-
-
 		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
 		$globalLanguageManager = $manager->getSubManager( 'language' );
 
@@ -201,28 +190,28 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			if( $temp ) { $total = $temp; $temp = null; }
 
 			foreach ( $result as $item ) {
-				$this->_addLanguage( $phpExcel, $item, $ids );
+				$this->_addLanguage( $item->getId(), $ids );
 			}
 
 			$start += count( $result );
 			$search->setSlice( $start );
 		}
 		while( $start < $total );
-
-		return $phpExcel;
 	}
 
 
 	/**
 	 * Adds a new sheet for the given language to the document.
 	 *
-	 * @param PHPExel $phpExcel PHPExcel object
-	 * @param MShop_Locale_Item_Language_Interface $langItem Language item object
+	 * @param string $langid Language item object
 	 * @param array $items List of of item ids whose texts should be added
 	 */
-	protected function _addLanguage( PHPExcel $phpExcel, MShop_Locale_Item_Language_Interface $langItem, array $ids )
+	protected function _addLanguage( $langid, array $ids )
 	{
-		$sheet = $this->_createSheet( $phpExcel, $langItem->getId() );
+		$data = array( 'Language ID', 'Attribute type', 'Attribute code', 'List type', 'Text type', 'Text ID', 'Text' );
+
+		$contentManager = Controller_ExtJS_Common_Load_Content_Default( $this->_filepath, $langid, 'attribute' );
+		$contentManager->addEntry( $data );
 
 		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
 		$search = $manager->createSearch();
@@ -243,13 +232,15 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			if( $temp ) { $total = $temp; $temp = null; }
 
 			foreach( $result as $item ) {
-				$this->_addItem( $sheet, $langItem, $item );
+				$this->_addItem( $langid, $item, $contentManager );
 			}
 
 			$start += count( $result );
 			$search->setSlice( $start );
 		}
 		while( $start < $total );
+
+		$this->_container->addData( $contentManager->getFilePath() );
 	}
 
 
@@ -260,8 +251,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	 * @param MShop_Locale_Item_Language_Interface $langItem Language item object
 	 * @param MShop_Attribute_Item_Interface $item Attribute item object
 	 */
-	protected function _addItem( PHPExcel_Worksheet $sheet, MShop_Locale_Item_Language_Interface $langItem,
-		MShop_Attribute_Item_Interface $item )
+	protected function _addItem( $langid, MShop_Attribute_Item_Interface $item, $contentManager )
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
@@ -278,74 +268,24 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 				{
 					$listType = ( isset( $listTypes[ $textItem->getId() ] ) ? $listTypes[ $textItem->getId() ] : '' );
 
-					$sheet->setCellValueByColumnAndRow( 0, $this->_sheetLine, $langItem->getId() );
-					$sheet->setCellValueByColumnAndRow( 1, $this->_sheetLine, $item->getType() );
-					$sheet->setCellValueByColumnAndRow( 2, $this->_sheetLine, $item->getCode() );
-					$sheet->setCellValueByColumnAndRow( 3, $this->_sheetLine, $listType );
-					$sheet->setCellValueByColumnAndRow( 4, $this->_sheetLine, $textTypeItem->getCode() );
+					$items = array( $langid, $item->getType(), $item->getCode(), $listType, $textTypeItem->getCode(), '', '' );
 
 					// use language of the text item because it may be null
-					if( ( $textItem->getLanguageId() == $langItem->getId() || is_null( $textItem->getLanguageId() ) )
+					if( ( $textItem->getLanguageId() == $langid || is_null( $textItem->getLanguageId() ) )
 						&& $textItem->getTypeId() == $textTypeItem->getId() )
 					{
-						$sheet->setCellValueByColumnAndRow( 0, $this->_sheetLine, $textItem->getLanguageId() );
-						$sheet->setCellValueByColumnAndRow( 5, $this->_sheetLine, $textItem->getId() );
-						$sheet->setCellValueByColumnAndRow( 6, $this->_sheetLine, $textItem->getContent() );
+						$items[0] = $textItem->getLanguageId();
+						$items[5] = $textItem->getId();
+						$items[6] = $textItem->getContent();
 					}
-
-					$this->_sheetLine++;
 				}
 			}
 			else
 			{
-				$sheet->setCellValueByColumnAndRow( 0, $this->_sheetLine, $langItem->getId() );
-				$sheet->setCellValueByColumnAndRow( 1, $this->_sheetLine, $item->getType() );
-				$sheet->setCellValueByColumnAndRow( 2, $this->_sheetLine, $item->getCode() );
-				$sheet->setCellValueByColumnAndRow( 3, $this->_sheetLine, 'default' );
-				$sheet->setCellValueByColumnAndRow( 4, $this->_sheetLine, $textTypeItem->getCode() );
-
-				$this->_sheetLine++;
+				$items = array( $langid, $item->getType(), $item->getCode(), 'default', $textTypeItem->getCode(), '', '' );
 			}
+
+			$contentManager->addEntry( $items );
 		}
-	}
-
-
-	/**
-	 * Creates a new worksheet that will be attached to the given document.
-	 *
-	 * @param PHPExcel $phpExcel Document object
-	 * @param string $title Title of the sheet
-	 * @return PHPExcel_Worksheet New worksheet attached to the document
-	 */
-	protected function _createSheet( PHPExcel $phpExcel, $title )
-	{
-		$sheet = $phpExcel->createSheet();
-		$sheet->setTitle( $title );
-
-		$style = $sheet->getDefaultStyle();
-		$style->getAlignment()->setWrapText(true);
-		$style->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-
-		$sheet->getStyle('A1:G1')->getFont()->setBold(true);
-
-		$sheet->getColumnDimension('A')->setAutoSize(true);
-		$sheet->getColumnDimension('B')->setAutoSize(true);
-		$sheet->getColumnDimension('C')->setAutoSize(true);
-		$sheet->getColumnDimension('D')->setAutoSize(true);
-		$sheet->getColumnDimension('E')->setAutoSize(true);
-		$sheet->getColumnDimension('F')->setAutoSize(true);
-		$sheet->getColumnDimension('G')->setWidth(60);
-
-		$sheet->setCellValueByColumnAndRow( 0, 1, 'Language ID' );
-		$sheet->setCellValueByColumnAndRow( 1, 1, 'Attribute type' );
-		$sheet->setCellValueByColumnAndRow( 2, 1, 'Attribute code');
-		$sheet->setCellValueByColumnAndRow( 3, 1, 'List type');
-		$sheet->setCellValueByColumnAndRow( 4, 1, 'Text type');
-		$sheet->setCellValueByColumnAndRow( 5, 1, 'Text ID');
-		$sheet->setCellValueByColumnAndRow( 6, 1, 'Text');
-
-		$this->_sheetLine = 2;
-
-		return $sheet;
 	}
 }

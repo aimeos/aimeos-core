@@ -112,7 +112,7 @@ class Controller_ExtJS_Catalog_Import_Text_CSVTest extends MW_Unittest_Testcase
 			$lines[] = $data;
 		}
 		fclose( $fh );
-		echo var_dump( $lines );
+
 		$lines[1][6] = 'Root: delivery info';
 		$lines[2][6] = 'Root: long';
 		$lines[3][6] = 'Root: name';
@@ -131,6 +131,9 @@ class Controller_ExtJS_Catalog_Import_Text_CSVTest extends MW_Unittest_Testcase
 
 		$this->_object->importFile( $params );
 
+		if( rmdir( 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport' ) !== true ) {
+			throw new Exception( sprintf( 'Deleting dir failed' ) );
+		}
 
 		$textManager = MShop_Text_Manager_Factory::createManager( $context );
 		$criteria = $textManager->createSearch();
@@ -172,10 +175,6 @@ class Controller_ExtJS_Catalog_Import_Text_CSVTest extends MW_Unittest_Testcase
 
 		foreach( $textItems as $item ) {
 			$this->assertEquals( 'Root:', substr( $item->getContent(), 0, 5 ) );
-		}
-
-		if( rmdir( 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport' ) !== true ) {
-			throw new Exception( sprintf( 'Deleting dir failed' ) );
 		}
 	}
 

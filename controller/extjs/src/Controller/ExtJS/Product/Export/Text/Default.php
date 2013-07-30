@@ -171,6 +171,10 @@ class Controller_ExtJS_Product_Export_Text_Default
 	{
 		$phpExcel = new PHPExcel();
 		$phpExcel->removeSheetByIndex( 0 );
+
+		$sheet = $phpExcel->createSheet();
+
+
 		$actualLangid = $this->_getContext()->getLocale()->getLanguageId();
 
 		$phpExcel->getProperties()
@@ -203,7 +207,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 			foreach ( $result as $item )
 			{
 				$this->_getContext()->getLocale()->setLanguageId( $item->getId() );
-				$this->_addLanguage( $phpExcel, $item, $ids );
+				$this->_addLanguage( $phpExcel, $item, $ids, $sheet );
 			}
 
 			$start += count( $result );
@@ -224,9 +228,9 @@ class Controller_ExtJS_Product_Export_Text_Default
 	 * @param MShop_Locale_Item_Language_Interface $langItem Language item object
 	 * @param array $items List of of item ids whose texts should be added
 	 */
-	protected function _addLanguage( PHPExcel $phpExcel, MShop_Locale_Item_Language_Interface $langItem, array $ids )
+	protected function _addLanguage( PHPExcel $phpExcel, MShop_Locale_Item_Language_Interface $langItem, array $ids, $sheet )
 	{
-		$sheet = $this->_createSheet( $phpExcel, $langItem->getId() );
+		$sheet = $this->_createSheet( $sheet, $phpExcel, $langItem->getId() );
 
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
 		$search = $manager->createSearch();
@@ -323,16 +327,15 @@ class Controller_ExtJS_Product_Export_Text_Default
 	 * @param string $title Title of the sheet
 	 * @return PHPExcel_Worksheet New worksheet attached to the document
 	 */
-	protected function _createSheet( PHPExcel $phpExcel, $title )
+	protected function _createSheet( $sheet, PHPExcel $phpExcel, $title )
 	{
-		$sheet = $phpExcel->createSheet();
 		$sheet->setTitle( $title );
 
 		$style = $sheet->getDefaultStyle();
 		$style->getAlignment()->setWrapText(true);
 		$style->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
-		$sheet->getStyle('A1:G1')->getFont()->setBold(true);
+		$sheet->getStyle('A'.$this->_sheetLine.':'.'G'.$this->_sheetLine)->getFont()->setBold(true);
 
 		$sheet->getColumnDimension('A')->setAutoSize(true);
 		$sheet->getColumnDimension('B')->setAutoSize(true);
@@ -342,15 +345,15 @@ class Controller_ExtJS_Product_Export_Text_Default
 		$sheet->getColumnDimension('F')->setAutoSize(true);
 		$sheet->getColumnDimension('G')->setWidth(60);
 
-		$sheet->setCellValueByColumnAndRow( 0, 1, 'Language ID' );
-		$sheet->setCellValueByColumnAndRow( 1, 1, 'Product type' );
-		$sheet->setCellValueByColumnAndRow( 2, 1, 'Product code');
-		$sheet->setCellValueByColumnAndRow( 3, 1, 'List type');
-		$sheet->setCellValueByColumnAndRow( 4, 1, 'Text type');
-		$sheet->setCellValueByColumnAndRow( 5, 1, 'Text ID');
-		$sheet->setCellValueByColumnAndRow( 6, 1, 'Text');
+		$sheet->setCellValueByColumnAndRow( 0, $this->_sheetLine, 'Language ID' );
+		$sheet->setCellValueByColumnAndRow( 1, $this->_sheetLine, 'Product type' );
+		$sheet->setCellValueByColumnAndRow( 2, $this->_sheetLine, 'Product code');
+		$sheet->setCellValueByColumnAndRow( 3, $this->_sheetLine, 'List type');
+		$sheet->setCellValueByColumnAndRow( 4, $this->_sheetLine, 'Text type');
+		$sheet->setCellValueByColumnAndRow( 5, $this->_sheetLine, 'Text ID');
+		$sheet->setCellValueByColumnAndRow( 6, $this->_sheetLine, 'Text');
 
-		$this->_sheetLine = 2;
+		$this->_sheetLine++;
 
 		return $sheet;
 	}
