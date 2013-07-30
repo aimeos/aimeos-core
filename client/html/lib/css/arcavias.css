@@ -203,7 +203,7 @@
 }
 
 .common-summary-detail .attr-item .name:after {
-	content: ':';
+	content: ":";
 }
 
 .common-summary-detail tr.subtotal,
