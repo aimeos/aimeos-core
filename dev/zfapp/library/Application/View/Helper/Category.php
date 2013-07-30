@@ -27,13 +27,13 @@ class Application_View_Helper_Category extends Zend_View_Helper_Abstract
 			$front = Zend_Controller_Front::getInstance();
 			$current = $front->getRequest()->getParam( 'f-catalog-id' );
 			$catalogManager = Zend_Registry::get('MShop_Catalog_Manager');
-			$node = $catalogManager->getTree(null, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
+			$node = $catalogManager->getTree(null, array('text'), MW_Tree_Manager_Abstract::LEVEL_LIST );
 
 			if( $node->getStatus() <= 0 ) {
 				return $data;
 			}
 
-			$label = $node->getLabel();
+			$label = $node->getName();
 			$catId = $node->getId();
 
 			$item = array(
@@ -76,7 +76,7 @@ class Application_View_Helper_Category extends Zend_View_Helper_Abstract
 				continue;
 			}
 
-			$label = $value->getLabel();
+			$label = $value->getName();
 			$catId = $value->getId();
 			$active = ( $catId === $current );
 

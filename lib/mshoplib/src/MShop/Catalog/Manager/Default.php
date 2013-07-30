@@ -597,15 +597,16 @@ class MShop_Catalog_Manager_Default
 			}
 
 			$refItemMap = $this->_getRefItems( $refIdMap );
+			$nodeid = $node->getId();
 
 			$listItems = array();
-			if ( array_key_exists( $id, $listItemMap ) ) {
-				$listItems = $listItemMap[ $id ];
+			if ( array_key_exists( $nodeid, $listItemMap ) ) {
+				$listItems = $listItemMap[ $nodeid ];
 			}
 
 			$refItems = array();
-			if ( array_key_exists( $id, $refItemMap ) ) {
-				$refItems = $refItemMap[ $id ];
+			if ( array_key_exists( $nodeid, $refItemMap ) ) {
+				$refItems = $refItemMap[ $nodeid ];
 			}
 
 			$item = $this->_createItem( $node, array(), $listItems, $refItems );
