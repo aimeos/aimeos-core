@@ -1282,7 +1282,8 @@
 @media only screen and (max-width: 562px) and (orientation: portrait) {
 	.common-summary .item {
     	display: block;
-	    width: 100%;
+		width: 100%;
+	}
 }
 
 
