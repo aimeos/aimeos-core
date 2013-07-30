@@ -21,16 +21,6 @@ class MW_View_Default implements MW_View_Interface
 
 
 	/**
-	 * Initializes the view instance.
-	 *
-	 * @param array $config
-	 */
-	public function __construct( array $config = array() )
-	{
-	}
-
-
-	/**
 	 * Calls the view helper with the given name and arguments and returns it's output.
 	 *
 	 * @param string $name Name of the view helper
