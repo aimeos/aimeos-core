@@ -124,6 +124,9 @@
 			"text": "status.js",
 			"path": "src/elements/"
 		}, {
+			"text": "domain.js",
+			"path": "src/elements/"
+		}, {
 			"text": "AbstractListUi.js",
 			"path": "src/panel/"
 		}, {
@@ -399,6 +402,18 @@
 		}, {
 			"text": "ConfigUi.js",
 			"path": "src/panel/locale/site/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/type/texttype/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/type/texttype/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/type/mediatype/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/type/mediatype/"
 		}]
 	}],
 	"resources" : []
