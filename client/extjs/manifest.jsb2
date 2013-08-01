@@ -404,16 +404,16 @@
 			"path": "src/panel/locale/site/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/texttype/"
+			"path": "src/panel/type/text/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/texttype/"
+			"path": "src/panel/type/text/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/mediatype/"
+			"path": "src/panel/type/media/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/mediatype/"
+			"path": "src/panel/type/media/"
 		}]
 	}],
 	"resources" : []
