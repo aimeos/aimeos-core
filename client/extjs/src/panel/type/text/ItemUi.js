@@ -52,6 +52,10 @@ MShop.panel.text.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							readOnly : this.fieldsReadOnly
 						},
 						items : [ {
+							xtype : 'displayfield',
+							fieldLabel : _( 'ID' ),
+							name : 'text.type.id'
+						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'text.type.status',
 							allowBlank : false
@@ -65,14 +69,24 @@ MShop.panel.text.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							fieldLabel : _('Code'),
 							emptyText : _('Code (required)'),
 							allowBlank : false
-						
 						}, {
 							xtype : 'textfield',
 							name : 'text.type.label',
 							fieldLabel : _('Label'),
 							emptyText : _('Label (required)'),
 							allowBlank : false
-						
+						}, {
+							xtype : 'displayfield',
+							fieldLabel : _('Created'),
+							name : 'text.type.ctime'
+						}, {
+							xtype : 'displayfield',
+							fieldLabel : _('Last modified'),
+							name : 'text.type.mtime'
+						}, {
+							xtype : 'displayfield',
+							fieldLabel : _('Editor'),
+							name : 'text.type.editor'
 						}]
 					} ]
 				} ]

@@ -3,14 +3,16 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @package MShop
+ * @package Controller
+ * @subpackage ExtJS
  */
 
 
 /**
  * Factory which can create all ExtJS controllers.
  *
- * @package Controller_ExtJS
+ * @package Controller
+ * @subpackage ExtJS
  */
 class Controller_ExtJS_Factory
 {

@@ -14,6 +14,6 @@
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Exception extends Controller_Exception
+class Controller_ExtJS_Exception extends Exception
 {
 }

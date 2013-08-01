@@ -45,16 +45,14 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	autoExpandColumn : 'media-type-label',
 
 	getColumns : function() {
-		return [
-			{
+		return [ {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.id',
 				header : _('ID'),
 				sortable : true,
 				editable : false,
 				hidden : true
-			},
-			{
+			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.status',
 				header : _('Status'),
@@ -62,14 +60,12 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				width : 50,
 				align: 'center',
 				renderer : this.statusColumnRenderer.createDelegate(this)
-			},
-			{
+			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.domain',
 				header : _('Domain'),
 				sortable : true
-			},
-			{
+			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.code',
 				header : _('Code'),
@@ -77,14 +73,39 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				width : 150,
 				align: 'center',
 				editable : false
-			},
-			{
+			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.label',
 				id: 'media-type-label',
 				header : _('Label'),
 				sortable : true,
 				editable : false
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'media.type.ctime',
+				header : _('Created'),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'media.type.mtime',
+				header : _('Last modified'),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'media.type.editor',
+				header : _('Editor'),
+				sortable : true,
+				width : 130,
+				editable : false,
+				hidden : true
 			}
 		];
 	}

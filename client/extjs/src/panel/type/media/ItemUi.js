@@ -52,6 +52,10 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							readOnly : this.fieldsReadOnly
 						},
 						items : [ {
+							xtype : 'displayfield',
+							fieldLabel : _( 'ID' ),
+							name : 'media.type.id'
+						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'media.type.status',
 							allowBlank : false
@@ -65,14 +69,24 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							fieldLabel : _('Code'),
 							emptyText : _('Code (required)'),
 							allowBlank : false
-						
 						}, {
 							xtype : 'textfield',
 							name : 'media.type.label',
 							fieldLabel : _('Label'),
 							emptyText : _('Label (required)'),
 							allowBlank : false
-						
+						}, {
+							xtype : 'displayfield',
+							fieldLabel : _('Created'),
+							name : 'media.type.ctime'
+						}, {
+							xtype : 'displayfield',
+							fieldLabel : _('Last modified'),
+							name : 'media.type.mtime'
+						}, {
+							xtype : 'displayfield',
+							fieldLabel : _('Editor'),
+							name : 'media.type.editor'
 						}]
 					} ]
 				} ]
