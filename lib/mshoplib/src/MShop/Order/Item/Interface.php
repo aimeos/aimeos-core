@@ -101,34 +101,6 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	public function setPaymentStatus( $status );
 
 	/**
-	 * Returns the order flag.
-	 *
-	 * @return integer Binary group of bits for order status
-	 */
-	public function getFlag();
-
-	/**
-	 * Sets the order flag.
-	 *
-	 * @param integer $flag Binary group of bits for order status
-	 */
-	public function setFlag( $flag );
-
-	/**
-	 * Returns the email flag.
-	 *
-	 * @return integer Binary group of bits for order status
-	 */
-	public function getEmailFlag();
-
-	/**
-	 * Sets the flag.
-	 *
-	 * @param integer $flag Binary group of bits for email order status
-	 */
-	public function setEmailFlag( $flag );
-
-	/**
 	 * Returns the related invoice ID.
 	 *
 	 * @param integer|null $id Related invoice ID

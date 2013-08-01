@@ -123,8 +123,6 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getDateDelivery(), $itemSaved->getDateDelivery() );
 		$this->assertEquals( $item->getPaymentStatus(), $itemSaved->getPaymentStatus() );
 		$this->assertEquals( $item->getDeliveryStatus(), $itemSaved->getDeliveryStatus() );
-		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
-		$this->assertEquals( $item->getEmailFlag(), $itemSaved->getEmailFlag() );
 		$this->assertEquals( $item->getRelatedId(), $itemSaved->getRelatedId() );
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
@@ -139,8 +137,6 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getDateDelivery(), $itemUpd->getDateDelivery() );
 		$this->assertEquals( $itemExp->getPaymentStatus(), $itemUpd->getPaymentStatus() );
 		$this->assertEquals( $itemExp->getDeliveryStatus(), $itemUpd->getDeliveryStatus() );
-		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
-		$this->assertEquals( $itemExp->getEmailFlag(), $itemUpd->getEmailFlag() );
 		$this->assertEquals( $itemExp->getRelatedId(), $itemUpd->getRelatedId() );
 
 		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
@@ -271,8 +267,6 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.datedelivery', null );
 		$expr[] = $search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_RECEIVED );
 		$expr[] = $search->compare( '==', 'order.statusdelivery', 4 );
-		$expr[] = $search->compare( '==', 'order.flag', 1 );
-		$expr[] = $search->compare( '==', 'order.emailflag', 1 );
 		$expr[] = $search->compare( '==', 'order.relatedid', null );
 		$expr[] = $search->compare( '>=', 'order.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.ctime', '1970-01-01 00:00:00' );
