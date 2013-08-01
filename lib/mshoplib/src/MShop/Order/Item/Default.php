@@ -19,6 +19,9 @@ class MShop_Order_Item_Default
 	implements MShop_Order_Item_Interface
 {
 	private $_values;
+	private $_oldPaymentStatus = MShop_Order_Item_Abstract::PAY_UNFINISHED;
+	private $_oldDeliveryStatus = MShop_Order_Item_Abstract::STAT_UNFINISHED;
+
 
 	/**
 	 * Initializes the object with the given values.
@@ -33,6 +36,14 @@ class MShop_Order_Item_Default
 
 		if ( !isset($values['datepayment']) ) {
 			$this->_values['datepayment'] = date( 'Y-m-d H:i:s', time() );
+		}
+
+		if( isset( $values['statuspayment'] ) ) {
+			$this->_oldPaymentStatus = (int) $values['statuspayment'];
+		}
+
+		if( isset( $values['statusdelivery'] ) ) {
+			$this->_oldDeliveryStatus = (int) $values['statusdelivery'];
 		}
 	}
 
@@ -298,4 +309,17 @@ class MShop_Order_Item_Default
 		return $list;
 	}
 
+
+	public function __get( $name )
+	{
+		switch( $name )
+		{
+			case 'oldPaymentStatus':
+				return $this->_oldPaymentStatus;
+			case 'oldDeliveryStatus':
+				return $this->_oldDeliveryStatus;
+			default:
+				throw new MShop_Order_Exception( sprintf( 'Invalid property name "%1$s"', $name ) );
+		}
+	}
 }

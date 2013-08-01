@@ -99,7 +99,7 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$results = $this->_object->searchItems( $search );
 
 		if( ( $item = reset($results) ) === false ) {
-			throw new Exception( 'No order base item found.' );
+			throw new Exception( 'No order item found.' );
 		}
 
 		$item->setId(null);
@@ -149,6 +149,104 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
+	}
+
+
+	public function testSaveStatusUpdatePayment()
+	{
+		$statusManager = MShop_Factory::createManager( $this->_context, 'order/status' );
+
+		$search = $this->_object->createSearch();
+		$conditions = array(
+			$search->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_PHONE ),
+			$search->compare( '==', 'order.editor', $this->_editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$results = $this->_object->searchItems( $search );
+
+		if( ( $item = reset($results) ) === false ) {
+			throw new Exception( 'No order item found.' );
+		}
+
+		$item->setId(null);
+		$this->_object->saveItem( $item );
+
+
+		$search = $statusManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
+		$results = $statusManager->searchItems( $search );
+
+		$this->_object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 0, count( $results ) );
+
+
+		$item->setId(null);
+		$item->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
+		$this->_object->saveItem( $item );
+
+		$search = $statusManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
+		$results = $statusManager->searchItems( $search );
+
+		$this->_object->deleteItem( $item->getId() );
+
+		if( ( $statusItem = reset( $results ) ) === false ) {
+			throw new Exception( 'No status item found' );
+		}
+
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( MShop_Order_Item_Status_Abstract::STATUS_PAYMENT, $statusItem->getType() );
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_CANCELED, $statusItem->getValue() );
+	}
+
+
+	public function testSaveStatusUpdateDelivery()
+	{
+		$statusManager = MShop_Factory::createManager( $this->_context, 'order/status' );
+
+		$search = $this->_object->createSearch();
+		$conditions = array(
+			$search->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_PHONE ),
+			$search->compare( '==', 'order.editor', $this->_editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$results = $this->_object->searchItems( $search );
+
+		if( ( $item = reset($results) ) === false ) {
+			throw new Exception( 'No order item found.' );
+		}
+
+		$item->setId(null);
+		$this->_object->saveItem( $item );
+
+
+		$search = $statusManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
+		$results = $statusManager->searchItems( $search );
+
+		$this->_object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 0, count( $results ) );
+
+
+		$item->setId(null);
+		$item->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_LOST );
+		$this->_object->saveItem( $item );
+
+		$search = $statusManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
+		$results = $statusManager->searchItems( $search );
+
+		$this->_object->deleteItem( $item->getId() );
+
+		if( ( $statusItem = reset( $results ) ) === false ) {
+			throw new Exception( 'No status item found' );
+		}
+
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( MShop_Order_Item_Status_Abstract::STATUS_DELIVERY, $statusItem->getType() );
+		$this->assertEquals( MShop_Order_Item_Abstract::STAT_LOST, $statusItem->getValue() );
 	}
 
 

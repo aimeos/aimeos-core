@@ -242,6 +242,31 @@ class MShop_Order_Manager_Default
 			$dbm->release( $conn, $this->_dbname );
 			throw $e;
 		}
+
+
+		if( $item->getPaymentStatus() != $item->oldPaymentStatus )
+		{
+			$statusManager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );
+
+			$statusItem = $statusManager->createItem();
+			$statusItem->setParentId( $item->getId() );
+			$statusItem->setType( MShop_Order_Item_Status_Abstract::STATUS_PAYMENT );
+			$statusItem->setValue( $item->getPaymentStatus() );
+
+			$statusManager->saveItem( $statusItem, false );
+		}
+
+		if( $item->getDeliveryStatus() != $item->oldDeliveryStatus )
+		{
+			$statusManager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );
+
+			$statusItem = $statusManager->createItem();
+			$statusItem->setParentId( $item->getId() );
+			$statusItem->setType( MShop_Order_Item_Status_Abstract::STATUS_DELIVERY );
+			$statusItem->setValue( $item->getDeliveryStatus() );
+
+			$statusManager->saveItem( $statusItem, false );
+		}
 	}
 
 

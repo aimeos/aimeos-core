@@ -264,4 +264,20 @@ class MShop_Order_Item_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->assertFalse($this->_object->isModified());
 	}
+
+	public function testMagicGetOldPaymentStatus()
+	{
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->_object->oldPaymentStatus );
+	}
+
+	public function testMagicGetOldDeliveryStatus()
+	{
+		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PENDING, $this->_object->oldDeliveryStatus );
+	}
+
+	public function testMagicGetException()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->notExisting;
+	}
 }
