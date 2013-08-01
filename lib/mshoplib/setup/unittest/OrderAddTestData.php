@@ -409,8 +409,6 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordItem->setDatePayment( $dataset['datepayment'] );
 			$ordItem->setDeliveryStatus( $dataset['statusdelivery'] );
 			$ordItem->setPaymentStatus( $dataset['statuspayment'] );
-			$ordItem->setFlag( $dataset['flag'] );
-			$ordItem->setEmailFlag( $dataset['emailflag'] );
 			$ordItem->setRelatedId( $dataset['relatedid'] );
 
 			$orderManager->saveItem( $ordItem );

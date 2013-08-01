@@ -79,20 +79,6 @@ class MShop_Order_Manager_Default
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
 		),
-		'order.flag'=> array(
-			'code'=>'order.flag',
-			'internalcode'=>'mord."flag"',
-			'label'=>'Order flag',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-		),
-		'order.emailflag'=> array(
-			'code'=>'order.emailflag',
-			'internalcode'=>'mord."emailflag"',
-			'label'=>'Order email flag',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-		),
 		'order.relatedid'=> array(
 			'code'=>'order.relatedid',
 			'internalcode'=>'mord."relatedid"',
@@ -215,17 +201,15 @@ class MShop_Order_Manager_Default
 			$stmt->bind(5, $item->getDateDelivery() );
 			$stmt->bind(6, $item->getDeliveryStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind(7, $item->getPaymentStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind(8, $item->getFlag(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind(9, $item->getEmailFlag(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind(10, $item->getRelatedId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind(11, date('Y-m-d H:i:s', time()));//mtime
-			$stmt->bind(12, $context->getEditor());
+			$stmt->bind(8, $item->getRelatedId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind(9, date('Y-m-d H:i:s', time()));//mtime
+			$stmt->bind(10, $context->getEditor());
 
 			if( $id !== null ) {
-				$stmt->bind(13, $id, MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind(11, $id, MW_DB_Statement_Abstract::PARAM_INT);
 				$item->setId($id); //is not modified anymore
 			} else {
-				$stmt->bind(13, date('Y-m-d H:i:s', time()));//ctime
+				$stmt->bind(11, date('Y-m-d H:i:s', time()));//ctime
 			}
 
 			$result = $stmt->execute()->finish();

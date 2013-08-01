@@ -79,10 +79,10 @@ return array (
 	),
 
 	'order' => array (
-		'2008-02-15 12:34:56' => array ( 'baseid' => '19.95', 'type' => 'web', 'datepayment' => '2008-02-15 12:34:56', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'flag' => 1, 'emailflag' => 1, 'relatedid' => null ),
-		'2009-09-17 16:14:32' => array ( 'baseid' => '636.00', 'type' => 'phone', 'datepayment' => '2009-09-17 16:14:32', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'flag' => 0, 'emailflag' => 0, 'relatedid' => null ),
-		'2011-03-27 11:11:14' => array ( 'baseid' => '10.00', 'type' => 'web', 'datepayment' => '2011-09-17 16:14:32', 'datedelivery' => null, 'statuspayment' => 5, 'statusdelivery' => 3, 'flag' => 0, 'emailflag' => 0, 'relatedid' => null ),
-		'2009-03-18 16:14:32' => array ( 'baseid' => '18.00', 'type' => 'web', 'datepayment' => '2009-03-18 16:14:32', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'flag' => 0, 'emailflag' => 0, 'relatedid' => null ),
+		'2008-02-15 12:34:56' => array ( 'baseid' => '19.95', 'type' => 'web', 'datepayment' => '2008-02-15 12:34:56', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'relatedid' => null ),
+		'2009-09-17 16:14:32' => array ( 'baseid' => '636.00', 'type' => 'phone', 'datepayment' => '2009-09-17 16:14:32', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'relatedid' => null ),
+		'2011-03-27 11:11:14' => array ( 'baseid' => '10.00', 'type' => 'web', 'datepayment' => '2011-09-17 16:14:32', 'datedelivery' => null, 'statuspayment' => 5, 'statusdelivery' => 3, 'relatedid' => null ),
+		'2009-03-18 16:14:32' => array ( 'baseid' => '18.00', 'type' => 'web', 'datepayment' => '2009-03-18 16:14:32', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'relatedid' => null ),
 	),
 
 	'order/status' => array (
