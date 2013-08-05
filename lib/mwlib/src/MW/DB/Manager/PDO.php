@@ -73,7 +73,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 				$dbase = $this->_config->get( 'resource/' . $name . '/database' );
 
 				$dsn = $adapter . ':dbname=' . $dbase;
-				if( $sock !== null )
+				if( $sock == null )
 				{
 					$dsn .= isset( $host ) ? ';host=' . $host : '';
 					$dsn .= isset( $port ) ? ';port=' . $port : '';
