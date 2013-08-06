@@ -15,7 +15,7 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	initComponent : function() {
 
 		this.title = _( 'Warehouse' );
-				
+
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
