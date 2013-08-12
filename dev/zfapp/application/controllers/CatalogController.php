@@ -28,8 +28,6 @@ class CatalogController extends Application_Controller_Action_Abstract
 		$this->view->listsimple->setView( $this->_createView() );
 		$this->_helper->layout()->disableLayout();
 
-		$this->view->listsimple->getBody();
-
 		$msg = 'Simple list total time: ' . ( ( microtime( true ) - $startaction ) * 1000 ) . 'ms';
 		$context->getLogger()->log( $msg, MW_Logger_Abstract::INFO, 'performance' );
 	}
@@ -100,6 +98,23 @@ class CatalogController extends Application_Controller_Action_Abstract
 
 
 		$msg = 'Product::detail total time: ' . ( ( microtime( true ) - $startaction ) * 1000 ) . 'ms';
+		$context->getLogger()->log( $msg, MW_Logger_Abstract::INFO, 'performance' );
+	}
+
+
+	public function stockAction()
+	{
+		$startaction = microtime( true );
+
+		$arcavias = $this->_getArcavias();
+		$context = Zend_Registry::get( 'ctx' );
+		$templatePaths = $arcavias->getCustomPaths( 'client/html' );
+
+		$this->view->stock = Client_Html_Catalog_Stock_Factory::createClient( $context, $templatePaths );
+		$this->view->stock->setView( $this->_createView() );
+		$this->_helper->layout()->disableLayout();
+
+		$msg = 'Stock total time: ' . ( ( microtime( true ) - $startaction ) * 1000 ) . 'ms';
 		$context->getLogger()->log( $msg, MW_Logger_Abstract::INFO, 'performance' );
 	}
 
