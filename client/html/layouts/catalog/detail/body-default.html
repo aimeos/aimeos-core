@@ -7,6 +7,7 @@
  */
 
 $enc = $this->encoder();
+$id = ( isset( $this->detailProductItem ) ? $this->detailProductItem->getId() : '' );
 
 ?>
 <section class="arcavias catalog-detail">
@@ -17,7 +18,7 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-	<article class="product">
+	<article class="product" data-id="<?php echo $id; ?>">
 <?php echo $this->get( 'detailBody' ); ?>
 	</article>
 </section>

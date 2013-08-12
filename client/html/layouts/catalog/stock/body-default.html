@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$result = array();
+$enc = $this->encoder();
+
+$stockProductIds = $this->get( 'stockProductIds', array() );
+$stockItemsByProducts = $this->get( 'stockItemsByProducts', array() );
+$warehouseItems = $this->get( 'stockWarehouseItems', array() );
+
+$stockLow = $this->config( 'client/html/catalog/stock/level/low', 5 );
+
+/// Stock string composition with warehouse name (%1$s, normally left out) and stock level string (%2$s)
+$textStockIn = $this->translate( 'client/html', 'Stock: %1$s, %2$s' );
+/// Stock string composition with warehouse name (%1$s, normally left out), stock level string (%2$s) and back in stock date (%3$s)
+$textStockOut = $this->translate( 'client/html', 'Stock: %1$s, %2$s, back on %3$s' );
+
+$textStockInf = $this->translate( 'client/html/code', 'stock-unlimited' );
+$dateFormat = $this->translate( 'client/html', 'Y-m-d' );
+
+
+foreach( $stockProductIds as $prodId )
+{
+	$stocks = array( 'stock-high' => '', 'stock-low' => '', 'stock-out' => '' );
+
+	if( !isset( $stockItemsByProducts[$prodId] ) )
+	{
+		$text = nl2br( $enc->html( $textStockInf, $enc::TRUST ) );
+		$result[$prodId] = '<div class="stockitem"><div class="stocklevel stock-unlimited"></div>' . $text . '</div>';
+		continue;
+	}
+
+	foreach( (array) $stockItemsByProducts[$prodId] as $item )
+	{
+		$whId = $item->getWarehouseId();
+		$whCode = ( isset( $warehouseItems[$whId] ) ? 'warehouse:' . $warehouseItems[$whId]->getCode() : '' );
+
+		$stocklevel = $item->getStockLevel();
+
+		if( $stocklevel <= 0 ) {
+			$level = 'stock-out';
+		} elseif( $stocklevel <= $stockLow ) {
+			$level = 'stock-low';
+		} else {
+			$level = 'stock-high';
+		}
+
+		if( $stocklevel <= 0 && ( $date = $item->getDateBack() ) != '' )
+		{
+			$text = sprintf( $textStockOut,
+				$this->translate( 'client/html/code', $whCode ),
+				$this->translate( 'client/html/code', $level ),
+				date_create( $date )->format( $dateFormat )
+			);
+		}
+		else
+		{
+			$text = sprintf( $textStockIn,
+				$this->translate( 'client/html/code', $whCode ),
+				$this->translate( 'client/html/code', $level )
+			);
+		}
+
+		$text = nl2br( $enc->html( $text, $enc::TRUST ) );
+		$stocks[$level] .= '<div class="stockitem"><div class="stocklevel ' . $level . '"></div>' . $text . '</div>';
+	}
+
+	$result[$prodId] = implode( '', $stocks );
+}
+
+?>
+jQuery(document).ready( function($) {
+
+	var stockHtml = <?php echo json_encode( $result, JSON_FORCE_OBJECT ); ?>;
+
+	$( ".arcavias .product" ).each( function( index, product ) {
+		var productId = $(product).data( "id" );
+		
+		if( stockHtml[productId] ) {
+			$( ".stock", product ).html( stockHtml[productId] );
+		}
+	} );
+	
+} );

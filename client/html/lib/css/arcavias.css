@@ -508,7 +508,7 @@
 	margin: 10px 0px;
 }
 
-.catalog-list-items .single {
+.catalog-list-items .product {
 	display: inline-block;
 	width: 180px;
 	position: relative;
@@ -516,7 +516,7 @@
 	margin: 0 1px;
 }
 
-.catalog-list-items .single a {
+.catalog-list-items .product a {
 	text-decoration: none;
 	display: inline-block; 
 }
@@ -784,6 +784,63 @@
 .catalog-detail-additional .content {
 	padding: 1% 0 1% 0.5%;
 }
+
+
+/* Stock level */
+.catalog-list-items .stock {
+	position: absolute;
+}
+
+.catalog-list-items .stockitem {
+	margin-left: 170px;
+	overflow: hidden;
+	height: 32px;
+	width: 10px;
+}
+
+.catalog-list-items .stocklevel {
+	background-image: url(images/stocklevel.png);
+	background-position: 170px 33px;
+	display: inline-block;
+	height: 32px;
+	width: 10px;
+}
+
+.catalog-list-items .stock-unlimited,
+.catalog-list-items .stock-high {
+	background-position: 170px 0;
+}
+
+.catalog-list-items .stock-low {
+	background-position: 170px -33px;
+}
+
+.catalog-list-items .stock-out {
+	background-position: 170px -66px;
+}
+
+.catalog-detail-basic .stocklevel {
+	background-image: url(images/stocklevel2.png);
+	background-position: 33px 0;
+	display: inline-block;
+	margin-right: 5px;
+	height: 10px;
+	width: 32px;
+}
+
+.catalog-detail-basic .stock-unlimited,
+.catalog-detail-basic .stock-high {
+	background-position: 0 0;
+}
+
+.catalog-detail-basic .stock-low {
+	background-position: -33px 0;
+}
+
+.catalog-detail-basic .stock-out {
+	background-position: -66px 0;
+}
+
 
 /* Basket */
 .checkout-standard,
