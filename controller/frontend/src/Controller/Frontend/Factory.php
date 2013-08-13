@@ -60,7 +60,7 @@ class Controller_Frontend_Factory
 				throw new Controller_Frontend_Exception( sprintf( 'Class "%1$s" not available', $factory ) );
 			}
 
-			$manager = @call_user_func_array( array( $factory, 'createController' ), array( $context ) );
+			$manager = call_user_func_array( array( $factory, 'createController' ), array( $context ) );
 
 			if( $manager === false ) {
 				throw new Controller_Frontend_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );

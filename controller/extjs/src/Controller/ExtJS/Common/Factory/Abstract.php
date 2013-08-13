@@ -16,6 +16,23 @@
  */
 class Controller_ExtJS_Common_Factory_Abstract
 {
+	private static $_objects = array();
+
+
+	/**
+	 * Injects a controller object.
+	 * The object is returned via createController() if an instance of the class
+	 * with the name name is requested.
+	 *
+	 * @param string $classname Full name of the class for which the object should be returned
+	 * @param Controller_ExtJS_Interface|null $controller ExtJS controller object
+	 */
+	public static function injectController( $classname, Controller_ExtJS_Interface $controller = null )
+	{
+		self::$_objects[$classname] = $controller;
+	}
+
+
 	/**
 	 * Adds the decorators to the controller object.
 	 *
@@ -112,6 +129,10 @@ class Controller_ExtJS_Common_Factory_Abstract
 	 */
 	protected static function _createController( MShop_Context_Item_Interface $context, $classname, $interface )
 	{
+		if( isset( self::$_objects[$classname] ) ) {
+			return self::$_objects[$classname];
+		}
+
 		if( class_exists( $classname ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 		}
