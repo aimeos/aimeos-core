@@ -26,42 +26,42 @@ class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testCreateManager()
+	public function testCreateController()
 	{
-		$manager = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute' );
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $manager );
+		$controller = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute' );
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $controller );
 	}
 
 
-	public function testCreateSubManager()
+	public function testCreateSubController()
 	{
-		$manager = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute/list/type' );
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $manager );
+		$controller = Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute/list/type' );
+		$this->assertInstanceOf( 'Controller_ExtJS_Common_Interface', $controller );
 	}
 
 
-	public function testCreateManagerEmpty()
+	public function testCreateControllerEmpty()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
 		Controller_ExtJS_Factory::createController( TestHelper::getContext(), "\t\n" );
 	}
 
 
-	public function testCreateManagerInvalidName()
+	public function testCreateControllerInvalidName()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
 		Controller_ExtJS_Factory::createController( TestHelper::getContext(), '%^' );
 	}
 
 
-	public function testCreateManagerNotExisting()
+	public function testCreateControllerNotExisting()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
 		Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'notexist' );
 	}
 
 
-	public function testCreateSubManagerNotExisting()
+	public function testCreateSubControllerNotExisting()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
 		Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute/notexist' );
