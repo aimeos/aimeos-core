@@ -16,6 +16,23 @@
  */
 abstract class MShop_Common_Factory_Abstract
 {
+	private static $_objects = array();
+
+
+	/**
+	 * Injects a manager object.
+	 * The object is returned via createManager() if an instance of the class
+	 * with the name name is requested.
+	 *
+	 * @param string $classname Full name of the class for which the object should be returned
+	 * @param MShop_Common_Manager_Interface|null $manager Manager object or null for removing the manager object
+	 */
+	public static function injectManager( $classname, MShop_Common_Manager_Interface $manager = null )
+	{
+		self::$_objects[$classname] = $manager;
+	}
+
+
 	/**
 	 * Adds the decorators to the manager object.
 	 *
@@ -100,6 +117,10 @@ abstract class MShop_Common_Factory_Abstract
 	 */
 	protected static function _createManager( MShop_Context_Item_Interface $context, $classname, $interface )
 	{
+		if( isset( self::$_objects[$classname] ) ) {
+			return self::$_objects[$classname];
+		}
+
 		if( class_exists( $classname ) === false ) {
 			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
