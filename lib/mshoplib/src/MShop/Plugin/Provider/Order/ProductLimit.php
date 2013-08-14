@@ -14,22 +14,10 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_ProductLimit
+	extends MShop_Plugin_Provider_Order_Abstract
+	implements MShop_Plugin_Provider_Interface
 {
-	private $_item;
-	private $_context;
-
-	/**
-	 * Initializes the plugin instance.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
-	{
-		$this->_item = $item;
-		$this->_context = $context;
-	}
 
 
 	/**
@@ -52,7 +40,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$this->_context->getLogger()->log( __METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG );
+		$this->_getContext()->getLogger()->log( __METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG );
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) ) {
@@ -64,7 +52,7 @@ class MShop_Plugin_Provider_Order_ProductLimit implements MShop_Plugin_Provider_
 			throw new MShop_Plugin_Provider_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$config = $this->_item->getConfig();
+		$config = $this->_getItem()->getConfig();
 
 
 		if( isset( $config['single-number-max'] ) && $value->getQuantity() > (int) $config['single-number-max'] )

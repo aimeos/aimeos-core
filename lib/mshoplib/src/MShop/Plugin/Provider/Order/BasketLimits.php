@@ -14,23 +14,10 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_BasketLimits
+	extends MShop_Plugin_Provider_Order_Abstract
+	implements MShop_Plugin_Provider_Interface
 {
-	private $_item = null;
-	private $_context = null;
-
-
-	/**
-	 * Initializes the plugin instance
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
-	{
-		$this->_item = $item;
-		$this->_context = $context;
-	}
 
 
 	/**
@@ -55,11 +42,14 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$this->_context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
+		$context = $this->_getContext();
+		$logger = $context->getLogger();
 
-		if( $this->_context->getConfig()->get( 'mshop/plugin/provider/order/complete/disable', false ) )
+		$logger->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
+
+		if( $context->getConfig()->get( 'mshop/plugin/provider/order/complete/disable', false ) )
 		{
-			$this->_context->getLogger()->log(__METHOD__ . ': Is disabled', MW_Logger_Abstract::DEBUG);
+			$logger->log(__METHOD__ . ': Is disabled', MW_Logger_Abstract::DEBUG);
 			return true;
 		}
 
@@ -73,8 +63,8 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 
 		$count = 0;
 		$failures = array();
-		$config = $this->_item->getConfig();
-		$sum = MShop_Price_Manager_Factory::createManager( $this->_context )->createItem();
+		$config = $this->_getItem()->getConfig();
+		$sum = MShop_Price_Manager_Factory::createManager( $context )->createItem();
 
 		foreach( $order->getProducts() as $product )
 		{

@@ -14,11 +14,12 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_PropertyAdd
+	extends MShop_Plugin_Provider_Order_Abstract
+	implements MShop_Plugin_Provider_Interface
 {
-	private $_item;
-	private $_context;
 	private $_orderAttrManager;
+	private $_type;
 
 
 	/**
@@ -29,14 +30,12 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
 	{
-		$this->_item = $item;
-		$this->_context = $context;
+		parent::__construct($context, $item);
 
-		$this->_orderAttrManager = MShop_Order_Manager_Factory::createManager( $this->_context )
+		$this->_orderAttrManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() )
 			->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
-		$config = $context->getConfig();
-		$this->_type = $config->get( 'plugin/provider/order/propertyadd/type', 'property' );
+		$this->_type = $context->getConfig()->get( 'plugin/provider/order/propertyadd/type', 'property' );
 	}
 
 
@@ -62,7 +61,9 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$this->_context->getLogger()->log( __METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG );
+		$context = $this->_getContext();
+
+		$context->getLogger()->log( __METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG );
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
@@ -75,9 +76,9 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 
-		$config = $this->_item->getConfig();
+		$config = $this->_getItem()->getConfig();
 
 		foreach( $config as $key => $properties )
 		{
@@ -121,7 +122,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd implements MShop_Plugin_Provider_I
 	protected function _addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product , array $properties )
 	{
 		$attributeList = $product->getAttributes();
-		$config = $this->_item->getConfig();
+		$config = $this->_getItem()->getConfig();
 		$itemProperties = $item->toArray();
 
 		foreach( $properties as $current )
