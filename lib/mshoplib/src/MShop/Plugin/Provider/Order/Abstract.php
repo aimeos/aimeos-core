@@ -38,7 +38,8 @@ abstract class MShop_Plugin_Provider_Order_Abstract
 	 *
 	 * @return MShop_Plugin_Item_Interface Plugin item object
 	 */
-  protected function _getItem() {
+  protected function _getItem()
+  {
   	return $this->_item;
   }
 
@@ -48,7 +49,8 @@ abstract class MShop_Plugin_Provider_Order_Abstract
    *
    * @return MShop_Context_Item_Interface Context item object
    */
-  protected function _getContext() {
+  protected function _getContext()
+  {
   	return $this->_context;
   }
 }

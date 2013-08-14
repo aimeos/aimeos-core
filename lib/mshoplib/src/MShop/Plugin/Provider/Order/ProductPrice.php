@@ -81,7 +81,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			$prodMap[ $item->getCode() ] = $item;
 		}
 
-		var_dump( $orderProducts );
+
 		foreach( $orderProducts as $pos => $orderProduct )
 		{
 			$refPrices = array();
