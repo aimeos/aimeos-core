@@ -43,9 +43,8 @@ class MShop_Plugin_Provider_Order_ProductStock
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
 		$context = $this->_getContext();
-		$logger = $context->getLogger();
 
-		$logger->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
+		$context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
@@ -57,7 +56,6 @@ class MShop_Plugin_Provider_Order_ProductStock
 			return true;
 		}
 
-		$logger->log(__METHOD__ . ':: config: ' . print_r( $this->_getItem()->getConfig(), true ), MW_Logger_Abstract::DEBUG);
 
 		$siteConfig = $context->getLocale()->getSite()->getConfig();
 

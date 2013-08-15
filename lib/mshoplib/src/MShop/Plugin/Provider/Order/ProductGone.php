@@ -57,9 +57,6 @@ class MShop_Plugin_Provider_Order_ProductGone
 			return true;
 		}
 
-		$config = $this->_getItem()->getConfig();
-		$logger->log(__METHOD__ . ':: config: ' . print_r( $config, true ), MW_Logger_Abstract::DEBUG);
-
 		$productIds = array();
 		foreach ( $order->getProducts() as $pr ) {
 			$productIds[] = $pr->getProductId();

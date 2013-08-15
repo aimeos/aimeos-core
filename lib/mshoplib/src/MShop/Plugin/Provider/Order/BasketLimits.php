@@ -9,7 +9,7 @@
 
 
 /**
- * Free shipping implementation if ordered product sum is above a certain value.
+ * Checks if ordered product sum and count of products is above a certain value.
  *
  * @package MShop
  * @subpackage Plugin
