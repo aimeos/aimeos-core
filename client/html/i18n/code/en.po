@@ -149,7 +149,7 @@ msgstr "in stock"
 
 #. Stock level
 msgid "stock-low"
-msgstr "only a few ones"
+msgstr "only a few available"
 
 #. Stock level
 msgid "stock-out"

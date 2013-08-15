@@ -30,7 +30,7 @@ foreach( $stockProductIds as $prodId )
 	if( !isset( $stockItemsByProducts[$prodId] ) )
 	{
 		$text = nl2br( $enc->html( $textStockInf, $enc::TRUST ) );
-		$result[$prodId] = '<div class="stockitem"><div class="stocklevel stock-unlimited"></div>' . $text . '</div>';
+		$result[$prodId] = '<div class="stockitem stock-unlimited"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
 		continue;
 	}
 
@@ -66,7 +66,7 @@ foreach( $stockProductIds as $prodId )
 		}
 
 		$text = nl2br( $enc->html( $text, $enc::TRUST ) );
-		$stocks[$level] .= '<div class="stockitem"><div class="stocklevel ' . $level . '"></div>' . $text . '</div>';
+		$stocks[$level] .= '<div class="stockitem ' . $level . '"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
 	}
 
 	$result[$prodId] = implode( '', $stocks );

@@ -20,7 +20,7 @@ $enc = $this->encoder();
 <?php foreach( $this->detailProductItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?> 
 	<p class="short"><?php echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?></p>
 <?php endforeach; ?>
-	<div class="stock"></div>
 <?php echo $this->basicBody; ?>
+	<div class="stock"></div>
 </div>
 <?php endif; ?>

@@ -547,7 +547,7 @@
 /* text list */
 .catalog-list-items .text-list {
 	height: 5.3125em;
-	padding: 3px 5px 3px 5px;
+	padding: 3px 5px;
 	text-align: left;
 	overflow: hidden;
 	border-top: 1px solid #C3D9E5;
@@ -556,10 +556,11 @@
 
 /* price list */
 .catalog-list-items .price-list {
-	padding: 5px 5px 5px 5px;
+	padding: 5px;
 	font-weight: bold;
 	color: #004266;
-	height: 0.9375em;
+	height: 1em;
+	float: left;
 }
 
 .catalog-list-items .price-item {
@@ -577,6 +578,44 @@
 .catalog-list-items .price-item:first-child .taxrate {
 	display: none;
 }
+
+/* Stock level */
+.catalog-list-items .stock {
+	padding: 5px;
+	float: left;
+}
+
+.catalog-list-items .stockitem {
+	display: none;
+}
+
+.catalog-list-items .stockitem:first-child {
+	display: block;
+}
+
+.catalog-list-items .stocklevel {
+	display: inline-block;
+	height: 0.85em;
+	width: 0.85em;
+}
+
+.catalog-list-items .stocktext {
+	display: none;
+}
+
+.catalog-list-items .stock-unlimited .stocklevel,
+.catalog-list-items .stock-high .stocklevel {
+	background-color: #0BA008;
+}
+
+.catalog-list-items .stock-low .stocklevel {
+	background-color: #F0A008;
+}
+
+.catalog-list-items .stock-out .stocklevel {
+	background-color: #F01800;
+}
+
 
 /* Product detail, image section */
 .catalog-detail-image {
@@ -785,60 +824,26 @@
 	padding: 1% 0 1% 0.5%;
 }
 
-
 /* Stock level */
-.catalog-list-items .stock {
-	position: absolute;
-}
-
-.catalog-list-items .stockitem {
-	margin-left: 170px;
-	overflow: hidden;
-	height: 32px;
-	width: 10px;
-}
-
-.catalog-list-items .stocklevel {
-	background-image: url(images/stocklevel.png);
-	background-position: 170px 33px;
-	display: inline-block;
-	height: 32px;
-	width: 10px;
-}
-
-.catalog-list-items .stock-unlimited,
-.catalog-list-items .stock-high {
-	background-position: 170px 0;
-}
-
-.catalog-list-items .stock-low {
-	background-position: 170px -33px;
-}
-
-.catalog-list-items .stock-out {
-	background-position: 170px -66px;
+.catalog-detail-basic .stock {
+	margin: 0.5em 0;
 }
 
 .catalog-detail-basic .stocklevel {
-	background-image: url(images/stocklevel2.png);
-	background-position: 33px 0;
-	display: inline-block;
-	margin-right: 5px;
-	height: 10px;
-	width: 32px;
+	display: none;
 }
 
 .catalog-detail-basic .stock-unlimited,
 .catalog-detail-basic .stock-high {
-	background-position: 0 0;
+	color: #0BA008;
 }
 
 .catalog-detail-basic .stock-low {
-	background-position: -33px 0;
+	color: #F0A008;
 }
 
 .catalog-detail-basic .stock-out {
-	background-position: -66px 0;
+	color: #F01800;
 }
 
 
