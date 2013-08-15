@@ -508,7 +508,7 @@
 	margin: 10px 0px;
 }
 
-.catalog-list-items .single {
+.catalog-list-items .product {
 	display: inline-block;
 	width: 180px;
 	position: relative;
@@ -516,7 +516,7 @@
 	margin: 0 1px;
 }
 
-.catalog-list-items .single a {
+.catalog-list-items .product a {
 	text-decoration: none;
 	display: inline-block; 
 }
@@ -547,7 +547,7 @@
 /* text list */
 .catalog-list-items .text-list {
 	height: 5.3125em;
-	padding: 3px 5px 3px 5px;
+	padding: 3px 5px;
 	text-align: left;
 	overflow: hidden;
 	border-top: 1px solid #C3D9E5;
@@ -556,10 +556,11 @@
 
 /* price list */
 .catalog-list-items .price-list {
-	padding: 5px 5px 5px 5px;
+	padding: 5px;
 	font-weight: bold;
 	color: #004266;
-	height: 0.9375em;
+	height: 1em;
+	float: left;
 }
 
 .catalog-list-items .price-item {
@@ -577,6 +578,44 @@
 .catalog-list-items .price-item:first-child .taxrate {
 	display: none;
 }
+
+/* Stock level */
+.catalog-list-items .stock {
+	padding: 5px;
+	float: left;
+}
+
+.catalog-list-items .stockitem {
+	display: none;
+}
+
+.catalog-list-items .stockitem:first-child {
+	display: block;
+}
+
+.catalog-list-items .stocklevel {
+	display: inline-block;
+	height: 0.85em;
+	width: 0.85em;
+}
+
+.catalog-list-items .stocktext {
+	display: none;
+}
+
+.catalog-list-items .stock-unlimited .stocklevel,
+.catalog-list-items .stock-high .stocklevel {
+	background-color: #0BA008;
+}
+
+.catalog-list-items .stock-low .stocklevel {
+	background-color: #F0A008;
+}
+
+.catalog-list-items .stock-out .stocklevel {
+	background-color: #F01800;
+}
+
 
 /* Product detail, image section */
 .catalog-detail-image {
@@ -784,6 +823,29 @@
 .catalog-detail-additional .content {
 	padding: 1% 0 1% 0.5%;
 }
+
+/* Stock level */
+.catalog-detail-basic .stock {
+	margin: 0.5em 0;
+}
+
+.catalog-detail-basic .stocklevel {
+	display: none;
+}
+
+.catalog-detail-basic .stock-unlimited,
+.catalog-detail-basic .stock-high {
+	color: #0BA008;
+}
+
+.catalog-detail-basic .stock-low {
+	color: #F0A008;
+}
+
+.catalog-detail-basic .stock-out {
+	color: #F01800;
+}
+
 
 /* Basket */
 .checkout-standard,

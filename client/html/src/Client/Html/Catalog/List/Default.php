@@ -184,16 +184,6 @@ class Client_Html_Catalog_List_Default
 			$context = $this->_getContext();
 			$config = $context->getConfig();
 
-
-			$params = array();
-			foreach( $view->param() as $key => $value )
-			{
-				if( ( $key[0] === 'f' || $key[0] === 'l' || $key[0] === 'd' || $key[0] === 'a' ) && $key[1] === '-' ) {
-					$params[$key] = $value;
-				}
-			}
-
-
 			$defaultPageSize = $config->get( 'client/html/catalog/list/size', 48 );
 			$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
 
@@ -215,6 +205,7 @@ class Client_Html_Catalog_List_Default
 
 			$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
 			$sort = ltrim( $sortation, '-' );
+			$products = array();
 			$total = 0;
 
 
@@ -224,9 +215,7 @@ class Client_Html_Catalog_List_Default
 			if( $text !== '' )
 			{
 				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
-
-				$view->listProductItems = $controller->getProductList( $filter, $total, $domains );
-				$view->listProductTotal = $total;
+				$products = $controller->getProductList( $filter, $total, $domains );
 			}
 			else if( $catid !== '' )
 			{
@@ -238,20 +227,30 @@ class Client_Html_Catalog_List_Default
 					$view->listCurrentCatItem = $categoryItem;
 				}
 
-				$view->listProductItems = $controller->getProductList( $filter, $total, $domains );
-				$view->listProductTotal = $total;
+				$products = $controller->getProductList( $filter, $total, $domains );
 			}
-			else
+
+
+			if( !empty( $products ) && $config->get( 'client/html/catalog/list/stock/enable', true ) === true )
 			{
-				$view->listProductItems = array();
-				$view->listProductTotal = 0;
+				$stockTarget = $config->get( 'client/html/catalog/stock/url/target' );
+				$stockController = $config->get( 'client/html/catalog/stock/url/controller', 'catalog' );
+				$stockAction = $config->get( 'client/html/catalog/stock/url/action', 'stock' );
+
+				$productIds = array_keys( $products );
+				sort( $productIds );
+
+				$params = array( 's-product-id' => implode( ' ', $productIds ) );
+				$view->listStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params );
 			}
 
 
+			$view->listParams = $this->_getClientParams( $view->param() );
+			$view->listProductItems = $products;
+			$view->listProductTotal = $total;
 			$view->listProductSort = $sortation;
 			$view->listPageCurr = $page;
 			$view->listPageSize = $size;
-			$view->listParams = $params;
 
 			$this->_cache = $view;
 		}

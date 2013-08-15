@@ -9,17 +9,17 @@
 
 
 /**
- * Simple implementation of catalog list section HTML clients.
+ * Default implementation of catalog stock HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_List_Simple
+class Client_Html_Catalog_Stock_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
 	private $_cache;
-	private $_subPartPath = 'client/html/catalog/list/simple/subparts';
+	private $_subPartPath = 'client/html/catalog/stock/default/subparts';
 	private $_subPartNames = array();
 
 
@@ -38,7 +38,7 @@ class Client_Html_Catalog_List_Simple
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getBody();
 			}
-			$view->simpleListBody = $html;
+			$view->stockBody = $html;
 		}
 		catch( Exception $e )
 		{
@@ -46,8 +46,8 @@ class Client_Html_Catalog_List_Simple
 			return;
 		}
 
-		$tplconf = 'client/html/catalog/list/simple/template-body';
-		$default = 'catalog/list/body-simple.html';
+		$tplconf = 'client/html/catalog/stock/default/template-body';
+		$default = 'catalog/stock/body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -68,16 +68,16 @@ class Client_Html_Catalog_List_Simple
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 				$html .= $subclient->setView( $view )->getHeader();
 			}
-			$view->simpleListHeader = $html;
+			$view->stockHeader = $html;
 		}
 		catch( Exception $e )
 		{
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return;
+			return '';
 		}
 
-		$tplconf = 'client/html/catalog/list/simple/template-header';
-		$default = 'catalog/list/header-simple.html';
+		$tplconf = 'client/html/catalog/stock/default/template-header';
+		$default = 'catalog/stock/header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -92,7 +92,7 @@ class Client_Html_Catalog_List_Simple
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'catalog/list/' . $type, $name );
+		return $this->_createSubClient( 'catalog/stock/' . $type, $name );
 	}
 
 
@@ -138,21 +138,60 @@ class Client_Html_Catalog_List_Simple
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
-			$config = $context->getConfig();
+			$siteConfig = $context->getLocale()->getSite()->getConfig();
+			$productIds = explode( ' ', $view->param( 's-product-id' ) );
+			$sortkey = $context->getConfig()->get( 'client/html/catalog/stock/sort', 'product.stock.warehouseid' );
 
-			$input = $view->param( 'f-search-text' );
 
-			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
+			$stockManager = MShop_Factory::createManager( $context, 'product/stock' );
 
-			$filter = $controller->createTextFilter( $input );
-			$items = $controller->getTextList( $filter );
+			$search = $stockManager->createSearch( true );
+			$expr = array( $search->compare( '==', 'product.stock.productid', $productIds ) );
 
-			$listTextItems = array();
-			foreach( $items as $id => $name ) {
-				$listTextItems[] = array( "id" => $id, "name" => $name );
+			if( isset( $siteConfig['warehouse'] ) ) {
+				$expr[] = $search->compare( '==', 'product.stock.warehouse.code', $siteConfig['warehouse'] );
 			}
 
-			$view->listTextItems = $listTextItems;
+			$expr[] = $search->getConditions();
+
+			$sortations = array(
+				$search->sort( '+', 'product.stock.productid' ),
+				$search->sort( '+', $sortkey ),
+			);
+
+			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( $sortations );
+			$search->setSlice( 0, 0x7fffffff );
+
+			$stockItems = $stockManager->searchItems( $search );
+
+
+			if( !empty( $stockItems ) )
+			{
+				$warehouseIds = $stockItemsByProducts = array();
+
+				foreach( $stockItems as $item )
+				{
+					$warehouseIds[ $item->getWarehouseId() ] = null;
+					$stockItemsByProducts[ $item->getProductId() ][] = $item;
+				}
+
+				$warehouseIds = array_keys( $warehouseIds );
+
+
+				$warehouseManager = MShop_Factory::createManager( $context, 'product/stock/warehouse' );
+
+				$search = $warehouseManager->createSearch();
+				$search->setConditions( $search->compare( '==', 'product.stock.warehouse.id', $warehouseIds ) );
+				$search->setSlice( 0, count( $warehouseIds ) );
+
+
+				$view->stockWarehouseItems = $warehouseManager->searchItems( $search );
+				$view->stockItemsByProducts = $stockItemsByProducts;
+			}
+
+
+			$view->stockProductIds = $productIds;
 
 			$this->_cache = $view;
 		}

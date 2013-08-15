@@ -146,6 +146,26 @@ msgstr "Annahme verweigert"
 msgid "stat:7"
 msgstr "Zurück gesendet"
 
+#. Stock level
+msgid "stock-unlimited"
+msgstr "verfügbar"
+
+#. Stock level
+msgid "stock-high"
+msgstr "auf Lager"
+
+#. Stock level
+msgid "stock-low"
+msgstr "nur noch wenige vorrätig"
+
+#. Stock level
+msgid "stock-out"
+msgstr "ausverkauft"
+
+#. Warehouse code
+msgid "warehouse:default"
+msgstr ""
+
 #. Product attribute
 msgid "width"
 msgstr "Weite"

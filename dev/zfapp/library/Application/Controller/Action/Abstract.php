@@ -59,6 +59,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 				'list' => array( 'url' => array( 'target' => 'routeDefault' ) ),
 				'listsimple' => array( 'url' => array( 'target' => 'routeDefault' ) ),
 				'detail' => array( 'url' => array( 'target' => 'routeDefault' ) ),
+				'stock' => array( 'url' => array( 'target' => 'routeDefault' ) ),
 			),
 			'checkout' => array(
 				'confirm' => array( 'url' => array( 'target' => 'routeDefault' ) ),
