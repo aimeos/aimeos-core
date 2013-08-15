@@ -15,6 +15,7 @@ return array(
 		'client/html/src',
 		'controller/frontend/src',
 		'controller/extjs/src',
+		'controller/jobs/src',
 		'lib/mwlib/lib',
 		'lib/phpexcel',
 	),
@@ -49,6 +50,9 @@ return array(
 		),
 		'controller/extjs' => array(
 			'controller/extjs/src',
+		),
+		'controller/jobs' => array(
+			'controller/jobs/src',
 		),
 	),
 );
