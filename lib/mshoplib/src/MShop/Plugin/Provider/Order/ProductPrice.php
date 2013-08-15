@@ -14,24 +14,10 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_ProductPrice implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_ProductPrice
+	extends MShop_Plugin_Provider_Order_Abstract
+	implements MShop_Plugin_Provider_Interface
 {
-
-	private $_item;
-	private $_context;
-
-
-	/**
-	 * Initializes the plugin instance
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
-	{
-		$this->_item = $item;
-		$this->_context = $context;
-	}
 
 
 	/**
@@ -56,7 +42,9 @@ class MShop_Plugin_Provider_Order_ProductPrice implements MShop_Plugin_Provider_
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$this->_context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
+		$context = $this->_getContext();
+
+		$context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) ) {
@@ -76,8 +64,8 @@ class MShop_Plugin_Provider_Order_ProductPrice implements MShop_Plugin_Provider_
 		}
 
 
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_context );
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 
 		$search = $productManager->createSearch( true );
 		$expr = array(
@@ -92,6 +80,7 @@ class MShop_Plugin_Provider_Order_ProductPrice implements MShop_Plugin_Provider_
 		foreach( $products as $item ) {
 			$prodMap[ $item->getCode() ] = $item;
 		}
+
 
 		foreach( $orderProducts as $pos => $orderProduct )
 		{

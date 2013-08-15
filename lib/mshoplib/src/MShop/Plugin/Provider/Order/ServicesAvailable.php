@@ -14,24 +14,10 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_ServicesAvailable implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_ServicesAvailable
+	extends MShop_Plugin_Provider_Order_Abstract
+	implements MShop_Plugin_Provider_Interface
 {
-
-	private $_item;
-	private $_context;
-
-
-	/**
-	 * Initializes the plugin instance
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
-	{
-		$this->_item = $item;
-		$this->_context = $context;
-	}
 
 
 	/**
@@ -58,7 +44,7 @@ class MShop_Plugin_Provider_Order_ServicesAvailable implements MShop_Plugin_Prov
 	{
 		if( $value & MShop_Order_Item_Base_Abstract::PARTS_SERVICE )
 		{
-			$config = $this->_item->getConfig();
+			$config = $this->_getItem()->getConfig();
 			$problems = array();
 
 			$availableServices = $order->getServices();

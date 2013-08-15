@@ -15,23 +15,10 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_IntelligentSampling
+	extends MShop_Plugin_Provider_Order_Abstract
+	implements MShop_Plugin_Provider_Interface
 {
-	private $_item;
-	private $_context;
-
-
-	/**
-	 * Initializes the plugin instance
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
-	{
-		$this->_item = $item;
-		$this->_context = $context;
-	}
 
 
 	/**
@@ -55,7 +42,10 @@ class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Pr
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$this->_context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
+		$context = $this->_getContext();
+		$logger = $context->getLogger();
+
+		$logger->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
@@ -63,11 +53,11 @@ class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Pr
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$config = $this->_item->getConfig();
-		$this->_context->getLogger()->log(__METHOD__ . ':: config: ' . print_r( $config, true ), MW_Logger_Abstract::DEBUG);
+		$config = $this->_getItem()->getConfig();
+		$logger->log(__METHOD__ . ':: config: ' . print_r( $config, true ), MW_Logger_Abstract::DEBUG);
 
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 		$orderBaseManager = $orderManager->getSubManager('base');
 		$orderProductManager = $orderBaseManager->getSubManager('product');
 
@@ -81,7 +71,7 @@ class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Pr
 		if ( isset( $config['firsttime'] ) && $config['firsttime'] != 0 && count( $orderItems ) > 0 )
 		{
 			$msg = __METHOD__  . ': firsttime param is activate and there are already orders before';
-			$this->_context->getLogger()->log( $msg, MW_Logger_Abstract::DEBUG);
+			$logger->log( $msg, MW_Logger_Abstract::DEBUG);
 			return false;
 		}
 
@@ -127,12 +117,12 @@ class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Pr
 				$sampleCode = $config['alternative'];
 			} else {
 				$msg = __METHOD__  . ': No more samples and no alternative free accessory product are available';
-				$this->_context->getLogger()->log($msg, MW_Logger_Abstract::DEBUG);
+				$logger->log($msg, MW_Logger_Abstract::DEBUG);
 				return false;
 			}
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 		$search = $productManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'product.code', $sampleCode ) );
 		$products = $productManager->searchItems( $search );
@@ -140,7 +130,7 @@ class MShop_Plugin_Provider_Order_IntelligentSampling implements MShop_Plugin_Pr
 		if( ( $product = reset( $products ) ) === false )
 		{
 			$msg = sprintf( 'Product with code "%1$s" not found', $sampleCode );
-			$this->_context->getLogger()->log($msg, MW_Logger_Abstract::NOTICE);
+			$logger->log($msg, MW_Logger_Abstract::NOTICE);
 			return false;
 		}
 
