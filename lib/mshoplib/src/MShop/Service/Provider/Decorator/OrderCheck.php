@@ -25,7 +25,16 @@ extends MShop_Service_Provider_Decorator_Abstract
 			'type'=> 'integer',
 			'internaltype'=> 'integer',
 			'default'=> 0,
-			'required'=> true,
+			'required'=> false,
+		),
+		'ordercheck.limit-days-pending' => array(
+			'code' => 'ordercheck.limit-days-pending',
+			'internalcode'=> 'ordercheck.limit-days-pending',
+			'label'=> 'OrderCheck: Restrict if unpaid orders within time frame in days',
+			'type'=> 'integer',
+			'internaltype'=> 'integer',
+			'default'=> 0,
+			'required'=> false,
 		),
 	);
 
@@ -80,10 +89,10 @@ extends MShop_Service_Provider_Decorator_Abstract
 			return false;
 		}
 
+		$manager = MShop_Order_Manager_Factory::createManager( $context );
+
 		if( isset( $config['ordercheck.total-number-min'] ) )
 		{
-			$manager = MShop_Order_Manager_Factory::createManager( $context );
-
 			$search = $manager->createSearch( true );
 			$expr = array(
 				$search->compare( '==', 'order.base.customerid', $customerId ),
@@ -96,6 +105,27 @@ extends MShop_Service_Provider_Decorator_Abstract
 			$result = $manager->searchItems( $search );
 
 			if( count( $result ) < (int) $config['ordercheck.total-number-min'] ) {
+				return false;
+			}
+		}
+
+		if( isset( $config['ordercheck.limit-days-pending'] ) )
+		{
+			$time = time() - (int) $config['ordercheck.limit-days-pending'] * 86400;
+
+			$search = $manager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', 'order.base.customerid', $customerId ),
+				$search->compare( '==', 'order.datepayment', date( 'Y-m-d H:i:s', $time ) ),
+				$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_PENDING ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSlice( 0, 1 );
+
+			$result = $manager->searchItems( $search );
+
+			if( count( $result ) > 0 ) {
 				return false;
 			}
 		}
