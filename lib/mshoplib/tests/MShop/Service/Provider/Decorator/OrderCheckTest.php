@@ -32,6 +32,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
+
 	protected function setUp()
 	{
 		$this->_context = TestHelper::getContext();
@@ -46,6 +47,12 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 			->getSubManager( 'base' )->createItem();
 
 		$this->_object = new MShop_Service_Provider_Decorator_OrderCheck( $this->_context, $this->_servItem, $this->_mockProvider );
+	}
+
+
+	protected function tearDown()
+	{
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', null );
 	}
 
 
@@ -135,6 +142,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 	public function testIsAvailableTotal()
 	{
 		$this->_context->setUserId( 1 );
+		$this->_context->getConfig()->set( 'classes/order/manager/name', 'DefaultMock' );
 		$this->_servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
 		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
@@ -146,7 +154,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 			->method( 'searchItems' )
 			->will( $this->returnValue( array( $mock->createItem() ) ) );
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_Default', $mock );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', $mock );
 
 		$this->_mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -159,6 +167,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 	public function testIsAvailableTotalNotEnough()
 	{
 		$this->_context->setUserId( 1 );
+		$this->_context->getConfig()->set( 'classes/order/manager/name', 'DefaultMock' );
 		$this->_servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
 		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
@@ -170,7 +179,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 			->method( 'searchItems' )
 			->will( $this->returnValue( array() ) );
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_Default', $mock );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', $mock );
 
 		$this->assertFalse( $this->_object->isAvailable( $this->_basket ) );
 	}
@@ -179,6 +188,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 	public function testIsAvailableLimit()
 	{
 		$this->_context->setUserId( 1 );
+		$this->_context->getConfig()->set( 'classes/order/manager/name', 'DefaultMock' );
 		$this->_servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
 		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
@@ -190,7 +200,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 			->method( 'searchItems' )
 			->will( $this->returnValue( array() ) );
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_Default', $mock );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', $mock );
 
 		$this->_mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -203,6 +213,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 	public function testIsAvailableLimitTooMuch()
 	{
 		$this->_context->setUserId( 1 );
+		$this->_context->getConfig()->set( 'classes/order/manager/name', 'DefaultMock' );
 		$this->_servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
 		$mock = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
@@ -214,8 +225,9 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 			->method( 'searchItems' )
 			->will( $this->returnValue( array( $mock->createItem() ) ) );
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_Default', $mock );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', $mock );
 
 		$this->assertFalse( $this->_object->isAvailable( $this->_basket ) );
 	}
+
 }
