@@ -473,24 +473,6 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testCheckProducts()
-	{
-		foreach( $this->_products as $product ) {
-			$this->_object->addProduct( $product );
-		}
-
-		try
-		{
-			$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
-		}
-		catch ( MShop_Plugin_Provider_Exception $mppe )
-		{
-			$refErrorCodes = array( 'product' => array( 'gone.notexist', 'gone.notexist' ) );
-			$this->assertEquals( $refErrorCodes, $mppe->getErrorCodes() );
-		}
-	}
-
-
 	public function testCheckAddresses()
 	{
 		foreach( $this->_products as $product ) {

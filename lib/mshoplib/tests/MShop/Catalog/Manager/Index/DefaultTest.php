@@ -11,14 +11,11 @@
  */
 class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 {
-	protected static $_products;
+	private static $_products;
+	private $_context;
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
+
 
 	/**
 	 * Runs the test methods of this class.
@@ -70,8 +67,9 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
-		$this->_object = new MShop_Catalog_Manager_Index_Default( TestHelper::getContext() );
+		$this->_context = TestHelper::getContext();
+		$this->_editor = $this->_context->getEditor();
+		$this->_object = new MShop_Catalog_Manager_Index_Default( $this->_context );
 	}
 
 	/**
@@ -100,7 +98,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetItem()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$search = $productManager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $productManager->searchItems( $search );
@@ -126,7 +124,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	{
 		$item = self::$_products['CNE'];
 
-		$context = TestHelper::getContext();
+		$context = $this->_context;
 		$dbm = $context->getDatabaseManager();
 		$siteId = $context->getLocale()->getSiteId();
 
@@ -169,7 +167,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSaveDeleteItemNoName()
 	{
-		$context = TestHelper::getContext();
+		$context = $this->_context;
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 
 		$search = $productManager->createSearch();
@@ -252,7 +250,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSearchItemsAttribute()
 	{
-		$context = TestHelper::getContext();
+		$context = $this->_context;
 
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $context );
 		$search = $attributeManager->createSearch();
@@ -343,7 +341,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSearchItemsCatalog()
 	{
-		$context = TestHelper::getContext();
+		$context = $this->_context;
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$catSearch = $catalogManager->createSearch();
@@ -491,7 +489,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSearchItemsText()
 	{
-		$context = clone TestHelper::getContext();
+		$context = clone $this->_context;
 		$context->getConfig()->set( 'classes/catalog/manager/index/text/name', 'Default' );
 		$object = new MShop_Catalog_Manager_Index_Default( $context );
 
@@ -563,7 +561,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSearchTexts()
 	{
-		$context = TestHelper::getContext();
+		$context = $this->_context;
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 
 		$search = $productManager->createSearch();
@@ -605,10 +603,9 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testRebuildIndexAll()
 	{
-		$context = TestHelper::getContext();
-		$config = $context->getConfig();
+		$config = $this->_context->getConfig();
 
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$search = $manager->createSearch( true );
 		$search->setSlice( 0, 0x7fffffff );
 
@@ -637,7 +634,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testRebuildIndexWithList()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 0x7fffffff );
 
@@ -685,7 +682,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testRebuildIndexCategorizedOnly()
 	{
-		$context = TestHelper::getContext();
+		$context = $this->_context;
 		$config = $context->getConfig();
 
 		$manager = MShop_Product_Manager_Factory::createManager( $context );
