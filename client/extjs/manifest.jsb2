@@ -414,6 +414,9 @@
 		}, {
 			"text": "ItemUi.js",
 			"path": "src/panel/type/media/"
+		}, {
+			"text": "TabUi.js",
+			"path": "src/panel/type/"
 		}]
 	}],
 	"resources" : []

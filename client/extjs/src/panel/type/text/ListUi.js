@@ -112,4 +112,4 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 Ext.reg('MShop.panel.text.type.listui', MShop.panel.text.type.ListUi);
 
-Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.text.type.listui', MShop.panel.text.type.ListUi, 90);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.text.type.listui', MShop.panel.text.type.ListUi, 10);
