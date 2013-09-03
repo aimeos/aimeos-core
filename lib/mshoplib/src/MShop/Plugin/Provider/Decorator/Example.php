@@ -16,25 +16,6 @@
  */
 class MShop_Plugin_Provider_Decorator_Example extends MShop_Plugin_Provider_Decorator_Abstract
 {
-	private $_provider;
-
-
-	/**
-	 * Initializes the plugin instance
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 * @param MShop_Plugin_Provider_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item,
-		MShop_Plugin_Provider_Interface $provider )
-	{
-		parent::__construct( $context, $item, $provider );
-
-		$this->_provider = $provider;
-	}
-
-
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -42,7 +23,7 @@ class MShop_Plugin_Provider_Decorator_Example extends MShop_Plugin_Provider_Deco
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$this->_provider->register( $p );
+		$this->_getProvider()->register( $p );
 	}
 
 
@@ -55,6 +36,6 @@ class MShop_Plugin_Provider_Decorator_Example extends MShop_Plugin_Provider_Deco
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		return $this->_provider->update( $order, $action, $value );
+		return $this->_getProvider()->update( $order, $action, $value );
 	}
 }
