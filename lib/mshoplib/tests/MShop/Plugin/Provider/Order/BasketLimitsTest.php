@@ -107,7 +107,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->_products['CNE']->setQuantity( 4 );
 		$this->_order->addProduct( $this->_products['CNE'] );
 
-		$this->assertTrue($this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT));
+		$this->assertTrue($this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT));
 	}
 
 
@@ -117,7 +117,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 
 		try
 		{
-			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+			$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
 			$this->fail( 'Min-products should have failed' );
 		}
 		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
@@ -131,7 +131,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 
 		try
 		{
-			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+			$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
 			$this->fail( 'Max-products should have failed' );
 		}
 		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
@@ -144,7 +144,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 
 		try
 		{
-			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+			$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
 			$this->fail( 'Min-value should have failed' );
 		}
 		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
@@ -158,7 +158,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 
 		try
 		{
-			$this->_object->update($this->_order, 'isComplete', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
+			$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
 			$this->fail( 'Max-value should have failed' );
 		}
 		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
