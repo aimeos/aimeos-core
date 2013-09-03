@@ -61,4 +61,15 @@ abstract class MShop_Plugin_Provider_Decorator_Abstract
 	{
 		return $this->_object->update( $order, $action, $value );
 	}
+
+
+	/**
+	 * Returns the next provider or decorator.
+	 *
+	 * @return MShop_Plugin_Provider_Interface Provider or decorator object
+	 */
+	protected function _getProvider()
+	{
+		return $this->_object;
+	}
 }
