@@ -174,12 +174,12 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	{
 		if ( $customerid === $this->getCustomerId() ) { return; }
 
-		$this->_notifyListeners( 'setUserId.before', $customerid );
+		$this->_notifyListeners( 'setCustomerId.before', $customerid );
 
 		$this->_values['customerid'] = (string) $customerid;
 		$this->_modified = true;
 
-		$this->_notifyListeners( 'setUserId.after', $customerid );
+		$this->_notifyListeners( 'setCustomerId.after', $customerid );
 	}
 
 
@@ -503,14 +503,13 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	{
 		$this->_checkParts( $what );
 
-		$this->_notifyListeners( 'isComplete.before', $what );
+		$this->_notifyListeners( 'check.before', $what );
 
-		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count($this->_products) < 1 ) )
-		{
+		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count($this->_products) < 1 ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Basket empty' ) );
 		}
 
-		$this->_notifyListeners( 'isComplete.after', $what );
+		$this->_notifyListeners( 'check.after', $what );
 	}
 
 

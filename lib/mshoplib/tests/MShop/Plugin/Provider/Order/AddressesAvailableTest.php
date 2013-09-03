@@ -79,17 +79,17 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 	{
 		// MShop_Order_Item_Base_Abstract::PARTS_ADDRESS not set, so update shall not be executed
 		$object = new MShop_Plugin_Provider_Order_AddressesAvailable(TestHelper::getContext(), $this->_plugin);
-		$this->assertTrue( $object->update( $this->_order, 'isComplete.after' ) );
+		$this->assertTrue( $object->update( $this->_order, 'check.after' ) );
 	}
 
 	public function testEmptyConfig()
 	{
 		$object = new MShop_Plugin_Provider_Order_AddressesAvailable(TestHelper::getContext(), $this->_plugin );
-		$this->assertTrue( $object->update( $this->_order, 'isComplete.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
 
 		$this->_order->setAddress( $this->_address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 		$this->_order->setAddress( $this->_address, MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
-		$this->assertTrue( $object->update( $this->_order, 'isComplete.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
 	}
 
 	public function testUpdateAddressesNotAvailable()
@@ -101,14 +101,14 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => false
 		) );
 
-		$this->assertTrue( $object->update( $this->_order, 'isComplete.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
 
 		$this->_plugin->setConfig( array(
 				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => null,
 				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => null
 		) );
 
-		$this->assertTrue( $object->update( $this->_order, 'isComplete.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
 
 		$this->_plugin->setConfig( array(
 				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => true,
@@ -116,7 +116,7 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 		) );
 
 		$this->setExpectedException('MShop_Plugin_Provider_Exception');
-		$object->update( $this->_order, 'isComplete.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
+		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
 	}
 
 	public function testUpdateAddressesAvailable()
@@ -131,14 +131,14 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => null
 		) );
 
-		$this->assertTrue( $object->update( $this->_order, 'isComplete.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
 
 		$this->_plugin->setConfig( array(
 				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => true,
 				MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT => true
 		) );
 
-		$this->assertTrue( $object->update( $this->_order, 'isComplete.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
+		$this->assertTrue( $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS ) );
 
 		$this->_plugin->setConfig( array(
 				MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY => false,
@@ -146,6 +146,6 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 		) );
 
 		$this->setExpectedException('MShop_Plugin_Provider_Exception');
-		$object->update( $this->_order, 'isComplete.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
+		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_ADDRESS );
 	}
 }
