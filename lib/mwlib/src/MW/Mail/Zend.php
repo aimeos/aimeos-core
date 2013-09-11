@@ -54,4 +54,14 @@ class MW_Mail_Zend implements MW_Mail_Interface
 	{
 		$message->getObject()->send( $this->_transport );
 	}
+
+
+	/**
+	 * Clones the internal objects.
+	 */
+	public function __clone()
+	{
+		$this->_object = clone $this->_object;
+		$this->_transport = clone $this->_transport;
+	}
 }

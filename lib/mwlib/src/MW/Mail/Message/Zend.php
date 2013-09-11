@@ -181,4 +181,13 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	{
 		return $this->_object;
 	}
+
+
+	/**
+	 * Clones the internal objects.
+	 */
+	public function __clone()
+	{
+		$this->_object = clone $this->_object;
+	}
 }
