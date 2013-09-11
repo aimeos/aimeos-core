@@ -58,6 +58,12 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 		$config = $this->_object->getSession();
 	}
 
+	public function testGetMail()
+	{
+		$this->setExpectedException('MShop_Exception');
+		$config = $this->_object->getMail();
+	}
+
 	public function testSetConfig()
 	{
 		$context = TestHelper::getContext();
@@ -98,6 +104,13 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 		$context = TestHelper::getContext();
 		$this->_object->setSession( $context->getSession() );
 		$this->assertSame( $context->getSession(), $this->_object->getSession() );
+	}
+
+	/**
+	 * @todo Implement test for setMail() as soon as a default implementation is available
+	 */
+	public function testSetMail()
+	{
 	}
 
 	public function testGetSetEditor()

@@ -23,6 +23,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	private $_locale;
 	private $_logger;
 	private $_session;
+	private $_mail;
 	private $_userid;
 	private $_editor = '';
 
@@ -39,6 +40,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		$this->_locale = null;
 		$this->_logger = null;
 		$this->_session = null;
+		$this->_mail = null;
 	}
 
 
@@ -54,6 +56,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		$this->_locale = ( isset( $this->_locale ) ? clone $this->_locale : null );
 		$this->_logger = ( isset( $this->_logger ) ? clone $this->_logger : null );
 		$this->_session = ( isset( $this->_session ) ? clone $this->_session : null );
+		$this->_mail = ( isset( $this->_mail ) ? clone $this->_mail : null );
 	}
 
 
@@ -235,6 +238,32 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		}
 
 		return $this->_session;
+	}
+
+
+	/**
+	 * Sets the mail object.
+	 *
+	 * @param MW_Mail_Interface $mail Mail object
+	 */
+	public function setMail( MW_Mail_Interface $mail )
+	{
+		$this->_mail = $mail;
+	}
+
+
+	/**
+	 * Returns the mail object.
+	 *
+	 * @return MW_Mail_Interface Mail object
+	 */
+	public function getMail()
+	{
+		if( !isset( $this->_mail ) ) {
+			throw new MShop_Exception( sprintf( 'Mail object not available' ) );
+		}
+
+		return $this->_mail;
 	}
 
 

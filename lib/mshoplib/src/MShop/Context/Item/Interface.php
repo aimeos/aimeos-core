@@ -115,6 +115,20 @@ interface MShop_Context_Item_Interface
 	public function getSession();
 
 	/**
+	 * Sets the mail object.
+	 *
+	 * @param MW_Mail_Interface $mail Mail object
+	 */
+	public function setMail( MW_Mail_Interface $mail );
+
+	/**
+	 * Returns the mail object.
+	 *
+	 * @return MW_Mail_Interface Mail object
+	 */
+	public function getMail();
+
+	/**
 	 * Sets the account name of the user/editor.
 	 *
 	 * @param string $name Account name of the user/editor
