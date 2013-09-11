@@ -53,13 +53,13 @@ interface MW_Mail_Message_Interface
 	public function addBcc( $email, $name = null );
 
 	/**
-	 * Sets the return e-mail address for the message.
+	 * Adds the return e-mail address for the message.
 	 *
 	 * @param string $email E-mail address which should receive all replies
 	 * @param string|null $name Name of the user which should receive all replies or null for no name
 	 * @return MW_Mail_Message_Interface Message object
 	 */
-	public function setReplyTo( $email, $name = null );
+	public function addReplyTo( $email, $name = null );
 
 	/**
 	 * Sets the e-mail address and name of the sender of the message (higher precedence than "From").

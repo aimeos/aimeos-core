@@ -79,12 +79,12 @@ class MW_Mail_Message_ZendTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testSetReplyTo()
+	public function testAddReplyTo()
 	{
 		$this->_mock->expects( $this->once() )->method( 'setReplyTo' )
 			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
 
-		$result = $this->_object->setReplyTo( 'a@b', 'test' );
+		$result = $this->_object->addReplyTo( 'a@b', 'test' );
 		$this->assertSame( $this->_object, $result );
 	}
 

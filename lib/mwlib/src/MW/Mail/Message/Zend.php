@@ -87,13 +87,13 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 
 
 	/**
-	 * Sets the return e-mail address for the message.
+	 * Adds the return e-mail address for the message.
 	 *
 	 * @param string $email E-mail address which should receive all replies
 	 * @param string|null $name Name of the user which should receive all replies or null for no name
 	 * @return MW_Mail_Message_Interface Message object
 	 */
-	public function setReplyTo( $email, $name = null )
+	public function addReplyTo( $email, $name = null )
 	{
 		$this->_object->setReplyTo( $email, $name );
 		return $this;
