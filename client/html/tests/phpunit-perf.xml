@@ -7,6 +7,6 @@
 		</testsuite>
 	</testsuites>
 	<logging>
-		<log type="junit" target="client-html-jperf.xml" />
+		<log type="junit" target="core_client-html_perf.junit.xml" />
 	</logging>
 </phpunit>

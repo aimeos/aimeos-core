@@ -24,6 +24,7 @@
 	</target>
 
 	<target name="clean" description="Executes all deployment tasks">
+		<delete file="tests/core_controller-extjs_test.junit.xml" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete dir="tests/tmp" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >

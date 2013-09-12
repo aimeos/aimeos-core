@@ -14,4 +14,7 @@
 			<directory suffix=".php">../src</directory>
 		</whitelist>
 	</filter>
+	<logging>
+		<log type="junit" target="core_client-html_test.junit.xml" />
+	</logging>
 </phpunit>
