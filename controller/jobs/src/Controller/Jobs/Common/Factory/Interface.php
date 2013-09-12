@@ -20,8 +20,9 @@ interface Controller_Jobs_Common_Factory_Interface
 	 * Creates a new controller based on the name.
 	 *
 	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param Arcavias $arcavias Arcavias object
 	 * @param string|null $name Name of the controller implementation (Default if null)
 	 * @return Controller_Jobs_Interface Controller object
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, $name = null );
+	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null );
 }

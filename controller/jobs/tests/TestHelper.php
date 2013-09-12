@@ -14,7 +14,7 @@ class TestHelper
 
 	public static function bootstrap()
 	{
-		self::_getArcavias();
+		self::getArcavias();
 	}
 
 
@@ -28,7 +28,7 @@ class TestHelper
 	}
 
 
-	private static function _getArcavias()
+	public static function getArcavias()
 	{
 		if( !isset( self::$_arcavias ) )
 		{
@@ -43,14 +43,14 @@ class TestHelper
 
 	public static function getControllerPaths()
 	{
-		return self::_getArcavias()->getCustomPaths( 'controller/jobs' );
+		return self::getArcavias()->getCustomPaths( 'controller/jobs' );
 	}
 
 
 	private static function _createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$arcavias = self::_getArcavias();
+		$arcavias = self::getArcavias();
 
 
 		$paths = $arcavias->getConfigPaths( 'mysql' );

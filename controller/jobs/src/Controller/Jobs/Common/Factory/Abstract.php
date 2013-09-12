@@ -37,11 +37,12 @@ class Controller_Jobs_Common_Factory_Abstract
 	 * Adds the decorators to the controller object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
+	 * @param Arcavias $arcavias Arcavias object
 	 * @param Controller_Jobs_Common_Interface $controller Controller object
 	 * @param string $classprefix Decorator class prefix, e.g. "Controller_Jobs_Attribute_Decorator_"
 	 * @return Controller_Jobs_Common_Interface Controller object
 	 */
-	protected static function _addDecorators( MShop_Context_Item_Interface $context,
+	protected static function _addDecorators( MShop_Context_Item_Interface $context, Arcavias $arcavias,
 		Controller_Jobs_Interface $controller, array $decorators, $classprefix )
 	{
 		$iface = 'Controller_Jobs_Common_Decorator_Interface';
@@ -60,7 +61,7 @@ class Controller_Jobs_Common_Factory_Abstract
 				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
-			$controller =  new $classname( $context, $controller );
+			$controller =  new $classname( $context, $arcavias, $controller );
 
 			if( !( $controller instanceof $iface ) ) {
 				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );
@@ -75,11 +76,12 @@ class Controller_Jobs_Common_Factory_Abstract
 	 * Adds the decorators to the controller object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
+	 * @param Arcavias $arcavias Arcavias object
 	 * @param Controller_Jobs_Common_Interface $controller Controller object
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return Controller_Jobs_Common_Interface Controller object
 	 */
-	protected static function _addControllerDecorators( MShop_Context_Item_Interface $context,
+	protected static function _addControllerDecorators( MShop_Context_Item_Interface $context, Arcavias $arcavias,
 		Controller_Jobs_Interface $controller, $domain )
 	{
 		if ( !is_string( $domain ) || $domain === '' ) {
@@ -105,15 +107,15 @@ class Controller_Jobs_Common_Factory_Abstract
 		}
 
 		$classprefix = 'Controller_Jobs_Common_Decorator_';
-		$controller =  self::_addDecorators( $context, $controller, $decorators, $classprefix );
+		$controller =  self::_addDecorators( $context, $arcavias , $controller, $decorators, $classprefix );
 
 		$classprefix = 'Controller_Jobs_Common_Decorator_';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/global', array() );
-		$controller =  self::_addDecorators( $context, $controller, $decorators, $classprefix );
+		$controller =  self::_addDecorators( $context, $arcavias , $controller, $decorators, $classprefix );
 
 		$classprefix = 'Controller_Jobs_'. $localClass . '_Decorator_';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/local', array() );
-		$controller =  self::_addDecorators( $context, $controller, $decorators, $classprefix );
+		$controller =  self::_addDecorators( $context, $arcavias , $controller, $decorators, $classprefix );
 
 		return $controller;
 	}
@@ -123,11 +125,13 @@ class Controller_Jobs_Common_Factory_Abstract
 	 * Creates a controller object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
+	 * @param Arcavias $arcavias Arcavias object
 	 * @param string $classname Name of the controller class
 	 * @param string $interface Name of the controller interface
 	 * @return Controller_Jobs_Common_Interface Controller object
 	 */
-	protected static function _createController( MShop_Context_Item_Interface $context, $classname, $interface )
+	protected static function _createController( MShop_Context_Item_Interface $context, Arcavias $arcavias,
+		$classname, $interface )
 	{
 		if( isset( self::$_objects[$classname] ) ) {
 			return self::$_objects[$classname];
@@ -137,7 +141,7 @@ class Controller_Jobs_Common_Factory_Abstract
 			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 		}
 
-		$controller =  new $classname( $context );
+		$controller =  new $classname( $context, $arcavias );
 
 		if( !( $controller instanceof $interface ) ) {
 			throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
