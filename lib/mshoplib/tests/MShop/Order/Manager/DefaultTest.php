@@ -259,6 +259,9 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$param = array( MShop_Order_Item_Status_Abstract::STATUS_PAYMENT, MShop_Order_Item_Abstract::PAY_RECEIVED );
+		$funcStatPayment = $search->createFunction( 'order.containsStatus', $param );
+
 		$expr[] = $search->compare( '!=', 'order.id', null );
 		$expr[] = $search->compare( '==', 'order.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.baseid', null );
@@ -271,6 +274,7 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>=', 'order.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.editor', $this->_editor );
+		$expr[] = $search->compare( '==', $funcStatPayment, 1 );
 
 		$expr[] = $search->compare( '!=', 'order.status.id', null );
 		$expr[] = $search->compare( '==', 'order.status.siteid', $siteid );
