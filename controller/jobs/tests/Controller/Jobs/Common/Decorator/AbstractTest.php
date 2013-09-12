@@ -36,31 +36,31 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends MW_Unittest_Testcase
 
 	public function testGetName()
 	{
-        $this->_stub->expects( $this->once() )
-             ->method( 'getName' )
-             ->will( $this->returnValue( 'test name' ) );
+		$this->_stub->expects( $this->once() )
+			->method( 'getName' )
+			->will( $this->returnValue( 'test name' ) );
 
-        $this->assertEquals( 'test name', $this->_object->getName() );
+		$this->assertEquals( 'test name', $this->_object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
-        $this->_stub->expects( $this->once() )
-             ->method( 'getDescription' )
-             ->will( $this->returnValue( 'test description' ) );
+		$this->_stub->expects( $this->once() )
+			->method( 'getDescription' )
+			->will( $this->returnValue( 'test description' ) );
 
-        $this->assertEquals( 'test description', $this->_object->getDescription() );
+		$this->assertEquals( 'test description', $this->_object->getDescription() );
 	}
 
 
 	public function testRun()
 	{
-        $this->_stub->expects( $this->once() )
-             ->method( 'run' )
-             ->will( $this->returnValue( true ) );
+		$this->_stub->expects( $this->once() )
+			->method( 'run' )
+			->will( $this->returnValue( true ) );
 
-        $this->assertTrue( $this->_object->run() );
+		$this->assertTrue( $this->_object->run() );
 	}
 
 }

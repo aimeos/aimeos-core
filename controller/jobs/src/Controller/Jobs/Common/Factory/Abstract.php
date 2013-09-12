@@ -107,15 +107,15 @@ class Controller_Jobs_Common_Factory_Abstract
 		}
 
 		$classprefix = 'Controller_Jobs_Common_Decorator_';
-		$controller =  self::_addDecorators( $context, $arcavias , $controller, $decorators, $classprefix );
+		$controller =  self::_addDecorators( $context, $arcavias, $controller, $decorators, $classprefix );
 
 		$classprefix = 'Controller_Jobs_Common_Decorator_';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/global', array() );
-		$controller =  self::_addDecorators( $context, $arcavias , $controller, $decorators, $classprefix );
+		$controller =  self::_addDecorators( $context, $arcavias, $controller, $decorators, $classprefix );
 
 		$classprefix = 'Controller_Jobs_'. $localClass . '_Decorator_';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/local', array() );
-		$controller =  self::_addDecorators( $context, $arcavias , $controller, $decorators, $classprefix );
+		$controller =  self::_addDecorators( $context, $arcavias, $controller, $decorators, $classprefix );
 
 		return $controller;
 	}
