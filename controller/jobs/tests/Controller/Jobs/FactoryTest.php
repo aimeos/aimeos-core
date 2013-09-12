@@ -11,52 +11,52 @@
  */
 class Controller_Jobs_FactoryTest extends MW_Unittest_Testcase
 {
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('Controller_Jobs_FactoryTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
 	public function testCreateController()
 	{
-		$controller = Controller_Jobs_Factory::createController( TestHelper::getContext(), 'admin/job' );
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
+		$controller = Controller_Jobs_Factory::createController( $context, $arcavias, 'admin/job' );
 		$this->assertInstanceOf( 'Controller_Jobs_Interface', $controller );
 	}
 
 
 	public function testCreateControllerEmpty()
 	{
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Factory::createController( TestHelper::getContext(), "\t\n" );
+		Controller_Jobs_Factory::createController( $context, $arcavias, "\t\n" );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Factory::createController( TestHelper::getContext(), '%^' );
+		Controller_Jobs_Factory::createController( $context, $arcavias, '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Factory::createController( TestHelper::getContext(), 'notexist' );
+		Controller_Jobs_Factory::createController( $context, $arcavias, 'notexist' );
 	}
 
 
 	public function testGetControllers()
 	{
-		$list = Controller_Jobs_Factory::getControllers( TestHelper::getContext(), TestHelper::getControllerPaths() );
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
+		$list = Controller_Jobs_Factory::getControllers( $context, $arcavias, TestHelper::getControllerPaths() );
 
 		$this->assertGreaterThan( 0, count( $list ) );
 

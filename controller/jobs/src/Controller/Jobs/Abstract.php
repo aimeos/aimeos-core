@@ -16,17 +16,20 @@
  */
 abstract class Controller_Jobs_Abstract
 {
-	private $_context = null;
+	private $_arcavias;
+	private $_context;
 
 
 	/**
 	 * Initializes the object.
 	 *
 	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @param Arcavias $arcavias Arcavias main object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( MShop_Context_Item_Interface $context, Arcavias $arcavias )
 	{
 		$this->_context = $context;
+		$this->_arcavias = $arcavias;
 	}
 
 
@@ -57,5 +60,16 @@ abstract class Controller_Jobs_Abstract
 	protected function _getContext()
 	{
 		return $this->_context;
+	}
+
+
+	/**
+	 * Returns the Arcavias object.
+	 *
+	 * @return Arcavias Arcavias object
+	 */
+	protected function _getArcavias()
+	{
+		return $this->_arcavias;
 	}
 }

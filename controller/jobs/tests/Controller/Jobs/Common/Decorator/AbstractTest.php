@@ -15,21 +15,6 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('Controller_Jobs_Common_Decorator_AbstractTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
@@ -38,11 +23,13 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
 		$this->_stub = $this->getMockBuilder( 'Controller_Jobs_Admin_Job_Default' )
-			->setConstructorArgs( array( $context ) )
+			->setConstructorArgs( array( $context, $arcavias ) )
 			->getMock();
 
-		$params = array( $context, $this->_stub );
+		$params = array( $context, $arcavias, $this->_stub );
 		$this->_object = $this->getMockForAbstractClass( 'Controller_Jobs_Common_Decorator_Abstract', $params );
 	}
 

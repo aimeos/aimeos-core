@@ -15,21 +15,6 @@ class Controller_Jobs_Common_Factory_AbstractTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('Controller_Jobs_Common_Factory_AbstractTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
@@ -37,6 +22,7 @@ class Controller_Jobs_Common_Factory_AbstractTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
+		$this->_arcavias = TestHelper::getArcavias();
 		$this->_context = TestHelper::getContext();
 		$config = $this->_context->getConfig();
 
@@ -49,24 +35,24 @@ class Controller_Jobs_Common_Factory_AbstractTest extends MW_Unittest_Testcase
 
 	public function testInjectController()
 	{
-		$controller = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, 'Default' );
-		Controller_Jobs_Admin_Job_Factory::injectController( 'Controller_Jobs_Admin_Job_Default', $controller );
+		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
+		Controller_Jobs_Admin_Job_Factory::injectController( 'Controller_Jobs_Admin_Job_Default', $cntl );
 
-		$injectedController = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, 'Default' );
+		$iCntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
 
-		$this->assertSame( $controller, $injectedController );
+		$this->assertSame( $cntl, $iCntl );
 	}
 
 
 	public function testInjectControllerReset()
 	{
-		$controller = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, 'Default' );
-		Controller_Jobs_Admin_Job_Factory::injectController( 'Controller_Jobs_Admin_Job_Default', $controller );
+		$cntl = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
+		Controller_Jobs_Admin_Job_Factory::injectController( 'Controller_Jobs_Admin_Job_Default', $cntl );
 		Controller_Jobs_Admin_Job_Factory::injectController( 'Controller_Jobs_Admin_Job_Default', null );
 
-		$new = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, 'Default' );
+		$new = Controller_Jobs_Admin_Job_Factory::createController( $this->_context, $this->_arcavias, 'Default' );
 
-		$this->assertNotSame( $controller, $new );
+		$this->assertNotSame( $cntl, $new );
 	}
 
 }
