@@ -32,6 +32,8 @@
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
+		<delete file="tests/core_lib-mshoplib_test.junit.xml" quiet="true" failonerror="false" />
+		<delete file="tests/core_lib-mshoplib_perf.junit.xml" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete dir="tests/tmp" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >
