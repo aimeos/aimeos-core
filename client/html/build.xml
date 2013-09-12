@@ -32,6 +32,7 @@
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
+		<delete file="tests/client-html_test.junit.xml" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >
 			<fileset dir="tests">

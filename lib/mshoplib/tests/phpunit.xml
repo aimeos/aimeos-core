@@ -9,4 +9,7 @@
 			<directory>MAdmin/</directory>
 		</testsuite>
 	</testsuites>
+	<logging>
+		<log type="junit" target="lib-mshoplib_test.junit.xml" />
+	</logging>
 </phpunit>

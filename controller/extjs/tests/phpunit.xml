@@ -6,4 +6,7 @@
 			<directory>Controller/</directory>
 		</testsuite>
 	</testsuites>
+	<logging>
+		<log type="junit" target="controller-extjs_test.junit.xml" />
+	</logging>
 </phpunit>

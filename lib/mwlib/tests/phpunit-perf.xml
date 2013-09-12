@@ -7,6 +7,6 @@
 		</testsuite>
 	</testsuites>
 	<logging>
-		<log type="junit" target="lib-mwlib-jperf.xml" />
+		<log type="junit" target="lib-mwlib_perf.junit.xml" />
 	</logging>
 </phpunit>

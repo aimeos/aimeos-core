@@ -30,6 +30,8 @@
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
+		<delete file="tests/lib-mwlib_test.junit.xml" quiet="true" failonerror="false" />
+		<delete file="tests/lib-mwlib_perf.junit.xml" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete dir="tests/tmp" quiet="true" failonerror="false" />
 	</target>
