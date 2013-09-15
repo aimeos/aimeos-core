@@ -64,6 +64,12 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 		$config = $this->_object->getMail();
 	}
 
+	public function testGetView()
+	{
+		$this->setExpectedException('MShop_Exception');
+		$config = $this->_object->getView();
+	}
+
 	public function testSetConfig()
 	{
 		$context = TestHelper::getContext();
@@ -81,7 +87,12 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 	public function testSetI18n()
 	{
 		$context = TestHelper::getContext();
-		$this->_object->setI18n( $context->getI18n() );
+
+		$locale = MShop_Locale_Manager_Factory::createManager(TestHelper::getContext())->createItem();
+		$locale->setLanguageId( 'en' );
+		$this->_object->setLocale( $locale );
+
+		$this->_object->setI18n( array( 'en' => $context->getI18n() ) );
 		$this->assertSame( $context->getI18n(), $this->_object->getI18n() );
 	}
 
@@ -111,6 +122,13 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 	 */
 	public function testSetMail()
 	{
+	}
+
+	public function testSetView()
+	{
+		$view = new MW_View_Default();
+		$this->_object->setView( $view );
+		$this->assertInstanceOf( 'MW_View_Interface', $this->_object->getView() );
 	}
 
 	public function testGetSetEditor()
