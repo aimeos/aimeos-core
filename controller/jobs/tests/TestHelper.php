@@ -73,18 +73,41 @@ class TestHelper
 		$ctx->setSession( $session );
 
 
-		$i18n = new MW_Translation_None( 'en' );
-		$ctx->setI18n( $i18n );
+		$i18n = new MW_Translation_None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
 		$localeManager = MShop_Locale_Manager_Factory::createManager( $ctx );
-		$locale = $localeManager->bootstrap( $site, '', '', false );
+		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
+
+
+		$view = self::_createView( $conf );
+		$ctx->setView( $view );
 
 
 		$ctx->setEditor( 'core:controller/jobs' );
 
 		return $ctx;
+	}
+
+
+	protected static function _createView( MW_Config_Interface $config )
+	{
+		$view = new MW_View_Default();
+
+		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		$sepDec = $config->get( 'client/html/common/format/seperatorDecimal', '.' );
+		$sep1000 = $config->get( 'client/html/common/format/seperator1000', ' ' );
+		$helper = new MW_View_Helper_Number_Default( $view, $sepDec, $sep1000 );
+		$view->addHelper( 'number', $helper );
+
+		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$view->addHelper( 'encoder', $helper );
+
+		return $view;
 	}
 
 

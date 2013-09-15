@@ -19,13 +19,14 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	private $_cache;
 	private $_config;
 	private $_dbm;
-	private $_i18n;
 	private $_locale;
 	private $_logger;
 	private $_session;
 	private $_mail;
+	private $_view;
 	private $_userid;
 	private $_editor = '';
+	private $_i18n = array();
 
 
 	/**
@@ -36,11 +37,12 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		$this->_cache = null;
 		$this->_config = null;
 		$this->_dbm = null;
-		$this->_i18n = null;
 		$this->_locale = null;
 		$this->_logger = null;
 		$this->_session = null;
 		$this->_mail = null;
+		$this->_view = null;
+		$this->_i18n = array();
 	}
 
 
@@ -52,11 +54,15 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		$this->_cache = ( isset( $this->_cache ) ? clone $this->_cache : null );
 		$this->_config = ( isset( $this->_config ) ? clone $this->_config : null );
 		$this->_dbm = ( isset( $this->_dbm ) ? clone $this->_dbm : null );
-		$this->_i18n = ( isset( $this->_i18n ) ? clone $this->_i18n : null );
 		$this->_locale = ( isset( $this->_locale ) ? clone $this->_locale : null );
 		$this->_logger = ( isset( $this->_logger ) ? clone $this->_logger : null );
 		$this->_session = ( isset( $this->_session ) ? clone $this->_session : null );
 		$this->_mail = ( isset( $this->_mail ) ? clone $this->_mail : null );
+		$this->_view = ( isset( $this->_view ) ? clone $this->_view : null );
+
+		foreach( $this->_i18n as $locale => $object ) {
+			$this->_i18n[$locale] = clone $this->_i18n[$locale];
+		}
 	}
 
 
@@ -137,29 +143,34 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		return $this->_dbm;
 	}
 
+
 	/**
-	 * Sets the internationalization object.
+	 * Returns the translation/internationalization object for the given locale (null for default one).
 	 *
-	 * @param MW_Translation_Interface $translate Internationalization object
+	 * @param string $locale Two letter language ISO code for specific language instead of default one
+	 * @return MW_Translation_Interface Internationalization object
 	 */
-	public function setI18n( MW_Translation_Interface $translate )
+	public function getI18n( $locale = null )
 	{
-		$this->_i18n = $translate;
+		$locale = ( $locale !== null ? $locale : $this->getLocale()->getLanguageId() );
+
+		if( !isset( $this->_i18n[$locale] ) ) {
+			throw new MShop_Exception( sprintf( 'Internationalization object not available for "%1$s"', $locale ) );
+		}
+
+		return $this->_i18n[$locale];
 	}
 
 
 	/**
-	 * Returns the internationalization object.
+	 * Sets the translation/internationalization objects.
 	 *
-	 * @return MW_Translation_Interface Internationalization object
+	 * @param array $translations Associative list of internationalization objects implementing
+	 * 	MW_Translation_Interface with locale as key
 	 */
-	public function getI18n()
+	public function setI18n( array $translations )
 	{
-		if( !isset( $this->_i18n ) ) {
-			throw new MShop_Exception( sprintf( 'Internationalization object not available' ) );
-		}
-
-		return $this->_i18n;
+		$this->_i18n = $translations;
 	}
 
 
@@ -264,6 +275,32 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		}
 
 		return $this->_mail;
+	}
+
+
+	/**
+	 * Sets the view object.
+	 *
+	 * @param MW_View_Interface $view View object
+	 */
+	public function setView( MW_View_Interface $view )
+	{
+		$this->_view = $view;
+	}
+
+
+	/**
+	 * Returns the view object.
+	 *
+	 * @return MW_View_Interface View object
+	 */
+	public function getView()
+	{
+		if( !isset( $this->_view ) ) {
+			throw new MShop_Exception( sprintf( 'View object not available' ) );
+		}
+
+		return clone $this->_view;
 	}
 
 
