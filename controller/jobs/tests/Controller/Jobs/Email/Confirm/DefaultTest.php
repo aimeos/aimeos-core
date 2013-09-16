@@ -122,4 +122,40 @@ class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 		$object->run();
 	}
 
+
+	public function testRunException()
+	{
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
+
+		$mailStub = $this->getMockBuilder( 'MW_Mail_Zend' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$context->setMail( $mailStub );
+
+
+		$name = 'ControllerJobsEmailConfirmDefaultRun';
+		$context->getConfig()->set( 'classes/order/manager/name', $name );
+
+		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
+			->setMethods( array( 'searchItems' ) )
+			->setConstructorArgs( array( $context ) )
+			->getMock();
+
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+
+
+		$orderItem = $orderManagerStub->createItem();
+		$orderItem->setId( -1 );
+
+		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
+			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
+
+
+		$object = new Controller_Jobs_Email_Confirm_Default( $context, $arcavias );
+		$object->run();
+	}
+
 }

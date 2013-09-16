@@ -29,8 +29,7 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends MW_Unittest_Testcase
 			->setConstructorArgs( array( $context, $arcavias ) )
 			->getMock();
 
-		$params = array( $context, $arcavias, $this->_stub );
-		$this->_object = $this->getMockForAbstractClass( 'Controller_Jobs_Common_Decorator_Abstract', $params );
+		$this->_object =  new Controller_Jobs_Common_Decorator_AbstractImpl( $context, $arcavias, $this->_stub );
 	}
 
 
@@ -63,4 +62,37 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->run() );
 	}
 
+
+	public function testGetContext()
+	{
+		$this->assertInstanceOf( 'MShop_Context_Item_Interface', $this->_object->getContext() );
+	}
+
+
+	public function testGetArcavias()
+	{
+		$this->assertInstanceOf( 'Arcavias', $this->_object->getArcavias() );
+	}
+
+
+	public function testCall()
+	{
+		$this->markTestInComplete( 'PHP warning is triggered instead of exception' );
+	}
+
+}
+
+
+class Controller_Jobs_Common_Decorator_AbstractImpl
+	extends Controller_Jobs_Common_Decorator_Abstract
+{
+	public function getContext()
+	{
+		return $this->_getContext();
+	}
+
+	public function getArcavias()
+	{
+		return $this->_getArcavias();
+	}
 }
