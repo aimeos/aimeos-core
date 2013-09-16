@@ -9,8 +9,6 @@
 class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-	private $_jobItemStub;
-	private $_jobManagerStub;
 
 
 	/**
