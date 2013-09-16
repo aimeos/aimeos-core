@@ -105,7 +105,7 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 		if( function_exists( 'apc_store' ) === true ) {
 			$i18n = new MW_Translation_Decorator_APC( $i18n );
 		}
-		$ctx->setI18n( $i18n );
+		$ctx->setI18n( array( 'en' => $i18n ) );
 
 		$session = new MW_Session_PHP();
 		$ctx->setSession( $session );
