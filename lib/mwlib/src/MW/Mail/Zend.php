@@ -62,6 +62,6 @@ class MW_Mail_Zend implements MW_Mail_Interface
 	public function __clone()
 	{
 		$this->_object = clone $this->_object;
-		$this->_transport = clone $this->_transport;
+		$this->_transport = ( isset( $this->_transport ) ? clone $this->_transport : null );
 	}
 }
