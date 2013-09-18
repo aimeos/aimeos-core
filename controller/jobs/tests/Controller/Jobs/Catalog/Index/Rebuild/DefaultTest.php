@@ -59,7 +59,6 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends MW_Unittest_Test
 
 		$name = 'ControllerJobsCatalogIndexRebuildDefaultRun';
 		$context->getConfig()->set( 'classes/catalog/manager/name', $name );
-		$context->getConfig()->set( 'classes/locale/manager/name', $name );
 
 
 		$catalogManagerStub = $this->getMockBuilder( 'MShop_Catalog_Manager_Default' )
@@ -79,77 +78,6 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends MW_Unittest_Test
 			->will( $this->returnValue( $catalogIndexManagerStub ) );
 
 		$catalogIndexManagerStub->expects( $this->once() )->method( 'rebuildIndex' );
-
-
-		$localeManagerStub = $this->getMockBuilder( 'MShop_Locale_Manager_Default' )
-			->setMethods( array( 'bootstrap', 'getSubManager' ) )
-			->setConstructorArgs( array( $context ) )
-			->getMock();
-
-		$localeSiteManagerStub = $this->getMockBuilder( 'MShop_Locale_Manager_Site_Default' )
-			->setMethods( array( 'searchItems' ) )
-			->setConstructorArgs( array( $context ) )
-			->getMock();
-
-		MShop_Locale_Manager_Factory::injectManager( 'MShop_Locale_Manager_' . $name, $localeManagerStub );
-
-
-		$localeManagerStub->expects( $this->once() )->method( 'getSubManager' )
-			->will( $this->returnValue( $localeSiteManagerStub ) );
-
-		$localeItem = $localeManagerStub->createItem();
-		$localeItem->setId( -1 );
-
-		$localeManagerStub->expects( $this->once() )->method( 'bootstrap' )
-			->will( $this->returnValue( $localeItem ) );
-
-		$siteItem = $localeSiteManagerStub->createItem();
-		$siteItem->setId( -1 );
-
-		$localeSiteManagerStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->onConsecutiveCalls( array( $siteItem ), array() ) );
-
-
-		$object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $arcavias );
-		$object->run();
-	}
-
-
-	public function testRunException()
-	{
-		$context = TestHelper::getContext();
-		$arcavias = TestHelper::getArcavias();
-
-
-		$name = 'ControllerJobsCatalogIndexRebuildDefaultRun';
-		$context->getConfig()->set( 'classes/locale/manager/name', $name );
-
-
-		$localeManagerStub = $this->getMockBuilder( 'MShop_Locale_Manager_Default' )
-			->setMethods( array( 'bootstrap', 'getSubManager' ) )
-			->setConstructorArgs( array( $context ) )
-			->getMock();
-
-		$localeSiteManagerStub = $this->getMockBuilder( 'MShop_Locale_Manager_Site_Default' )
-			->setMethods( array( 'searchItems' ) )
-			->setConstructorArgs( array( $context ) )
-			->getMock();
-
-		MShop_Locale_Manager_Factory::injectManager( 'MShop_Locale_Manager_' . $name, $localeManagerStub );
-
-
-		$localeManagerStub->expects( $this->once() )->method( 'getSubManager' )
-			->will( $this->returnValue( $localeSiteManagerStub ) );
-
-		$localeManagerStub->expects( $this->once() )->method( 'bootstrap' )
-			->will( $this->throwException( new MShop_Catalog_Exception( 'Test exception' ) ) );
-
-		$siteItem = $localeSiteManagerStub->createItem();
-		$siteItem->setCode( 'catalog-index-test' );
-		$siteItem->setId( -1 );
-
-		$localeSiteManagerStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->onConsecutiveCalls( array( $siteItem ), array() ) );
 
 
 		$object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $arcavias );

@@ -47,51 +47,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 	 */
 	public function run()
 	{
-		$context = clone $this->_getContext();
-		$sitecode = $context->getConfig()->get( 'controller/jobs/catalog/index/rebuild/sites', array( 'default' ) );
-
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
-		$siteManager = $localeManager->getSubManager( 'site' );
-
-		$criteria = $siteManager->createSearch( true );
-		$expr = array(
-			$criteria->getConditions(),
-			$criteria->compare( '==', 'locale.site.code', $sitecode ),
-		);
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-
-		$start = 0;
-
-		do
-		{
-
-			$items = $siteManager->searchItems( $criteria );
-
-			foreach( $items as $item )
-			{
-				try
-				{
-					$locale = $localeManager->bootstrap( $item->getCode() );
-
-					$locale->setLanguageId( null );
-					$locale->setCurrencyId( null );
-					$context->setLocale( $locale );
-
-					$manager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'index' );
-					$manager->rebuildIndex();
-					$manager->optimize();
-				}
-				catch( Exception $e )
-				{
-					$str = 'Error processing site "%1$s" in "%2$s: %3$s';
-					$context->getLogger()->log( sprintf( $str, $item->getCode(), __CLASS__, $e->getMessage() ) );
-				}
-			}
-
-			$count = count( $items );
-			$start += $count;
-			$criteria->setSlice( $start );
-		}
-		while( $count > $criteria->getSliceSize() );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
+		$manager->getSubManager( 'index' )->rebuildIndex();
 	}
 }
