@@ -57,7 +57,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends MW_Unittest_Test
 		$arcavias = TestHelper::getArcavias();
 
 
-		$name = 'ControllerJobsCatalogIndexDefaultRun';
+		$name = 'ControllerJobsCatalogIndexRebuildDefaultRun';
 		$context->getConfig()->set( 'classes/catalog/manager/name', $name );
 		$context->getConfig()->set( 'classes/locale/manager/name', $name );
 
@@ -121,7 +121,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends MW_Unittest_Test
 		$arcavias = TestHelper::getArcavias();
 
 
-		$name = 'ControllerJobsCatalogIndexDefaultRun';
+		$name = 'ControllerJobsCatalogIndexRebuildDefaultRun';
 		$context->getConfig()->set( 'classes/locale/manager/name', $name );
 
 

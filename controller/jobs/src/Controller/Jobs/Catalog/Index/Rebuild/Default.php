@@ -48,7 +48,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 	public function run()
 	{
 		$context = clone $this->_getContext();
-		$sitecode = $context->getConfig()->get( 'mshop/locale/site', 'default' );
+		$sitecode = $context->getConfig()->get( 'controller/jobs/catalog/index/rebuild/sites', array( 'default' ) );
 
 		$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
 		$siteManager = $localeManager->getSubManager( 'site' );
@@ -77,13 +77,14 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 					$locale->setCurrencyId( null );
 					$context->setLocale( $locale );
 
-					$manager = MShop_Catalog_Manager_Factory::createManager( $context );
-					$manager->getSubManager( 'index' )->rebuildIndex();
+					$manager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'index' );
+					$manager->rebuildIndex();
+					$manager->optimize();
 				}
 				catch( Exception $e )
 				{
-					$str = 'Error processing site "%1$s" in catalog scheduler: %2$s';
-					$context->getLogger()->log( sprintf( $str, $item->getCode(), $e->getMessage() ) );
+					$str = 'Error processing site "%1$s" in "%2$s: %3$s';
+					$context->getLogger()->log( sprintf( $str, $item->getCode(), __CLASS__, $e->getMessage() ) );
 				}
 			}
 
