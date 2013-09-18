@@ -58,21 +58,22 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 
 
 		$name = 'ControllerJobsServiceDeliveryProcessDefaultRun';
-		$context->getConfig()->set( 'classes/order/manager/name', $name );
 		$context->getConfig()->set( 'classes/service/manager/name', $name );
+		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
-		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
-			->setMethods( array( 'saveItem', 'searchItems' ) )
-			->setConstructorArgs( array( $context ) )
-			->getMock();
 
 		$serviceManagerStub = $this->getMockBuilder( 'MShop_Service_Manager_Default' )
 			->setMethods( array( 'getProvider', 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
+		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
+			->setMethods( array( 'saveItem', 'searchItems' ) )
+			->setConstructorArgs( array( $context ) )
+			->getMock();
+
 		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_' . $name, $serviceManagerStub );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 
 
 		$serviceItem = $serviceManagerStub->createItem();
@@ -81,6 +82,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
+
 
 		$serviceManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $serviceItem ), array() ) );
@@ -91,8 +93,8 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
 
-
 		$serviceProviderStub->expects( $this->once() )->method( 'process' );
+
 		$orderManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
@@ -108,8 +110,9 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 
 
 		$name = 'ControllerJobsServiceDeliveryProcessDefaultRun';
-		$context->getConfig()->set( 'classes/order/manager/name', $name );
 		$context->getConfig()->set( 'classes/service/manager/name', $name );
+		$context->getConfig()->set( 'classes/order/manager/name', $name );
+
 
 		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
@@ -121,8 +124,8 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_' . $name, $serviceManagerStub );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 
 
 		$serviceItem = $serviceManagerStub->createItem();
@@ -131,6 +134,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
+
 
 		$serviceManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $serviceItem ), array() ) );
@@ -141,9 +145,9 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
 
-
 		$serviceProviderStub->expects( $this->once() )->method( 'process' )
 			->will( $this->throwException( new MShop_Service_Exception( 'test service delivery process: process' ) ) );
+
 		$orderManagerStub->expects( $this->never() )->method( 'saveItem' );
 
 
@@ -159,8 +163,9 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 
 
 		$name = 'ControllerJobsServiceDeliveryProcessDefaultRun';
-		$context->getConfig()->set( 'classes/order/manager/name', $name );
 		$context->getConfig()->set( 'classes/service/manager/name', $name );
+		$context->getConfig()->set( 'classes/order/manager/name', $name );
+
 
 		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )
@@ -172,8 +177,8 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_' . $name, $serviceManagerStub );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 
 
 		$serviceItem = $serviceManagerStub->createItem();
@@ -181,6 +186,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
+
 
 		$serviceManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $serviceItem ), array() ) );

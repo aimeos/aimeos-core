@@ -60,6 +60,7 @@ class Controller_Jobs_Order_Product_Stock_DefaultTest extends MW_Unittest_Testca
 		$name = 'ControllerJobsOrderStockDefaultRun';
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
+
 		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
 			->setMethods( array( 'searchItems', 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
@@ -83,20 +84,18 @@ class Controller_Jobs_Order_Product_Stock_DefaultTest extends MW_Unittest_Testca
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 
 
+		$orderItem = $orderManagerStub->createItem();
+		$orderProductItem = $orderProductManagerStub->createItem();
+
+
 		$orderManagerStub->expects( $this->atLeastOnce() )->method( 'getSubManager' )
 			->will( $this->onConsecutiveCalls( $orderStatusManagerStub, $orderBaseManagerStub ) );
 
 		$orderBaseManagerStub->expects( $this->once() )->method( 'getSubManager' )
 			->will( $this->returnValue( $orderProductManagerStub ) );
 
-		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setId( -1 );
-
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
-
-		$orderProductItem = $orderProductManagerStub->createItem();
-		$orderProductItem->setId( -1 );
 
 		$orderProductManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->returnValue( array( $orderProductItem ) ) );
@@ -118,6 +117,7 @@ class Controller_Jobs_Order_Product_Stock_DefaultTest extends MW_Unittest_Testca
 		$name = 'ControllerJobsOrderStockDefaultRun';
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
+
 		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
 			->setMethods( array( 'searchItems', 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
@@ -141,20 +141,18 @@ class Controller_Jobs_Order_Product_Stock_DefaultTest extends MW_Unittest_Testca
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 
 
+		$orderItem = $orderManagerStub->createItem();
+		$orderProductItem = $orderProductManagerStub->createItem();
+
+
 		$orderManagerStub->expects( $this->atLeastOnce() )->method( 'getSubManager' )
 			->will( $this->onConsecutiveCalls( $orderStatusManagerStub, $orderBaseManagerStub ) );
 
 		$orderBaseManagerStub->expects( $this->once() )->method( 'getSubManager' )
 			->will( $this->returnValue( $orderProductManagerStub ) );
 
-		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setId( -1 );
-
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
-
-		$orderProductItem = $orderProductManagerStub->createItem();
-		$orderProductItem->setId( -1 );
 
 		$orderProductManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->throwException( new MShop_Order_Exception( 'test order stock exception' ) ) );
