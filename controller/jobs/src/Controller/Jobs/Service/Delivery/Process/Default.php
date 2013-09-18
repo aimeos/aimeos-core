@@ -48,6 +48,7 @@ class Controller_Jobs_Service_Delivery_Process_Default
 	public function run()
 	{
 		$context = $this->_getContext();
+
 		$days = $context->getConfig()->get( 'controller/jobs/service/delivery/process/limit-days', 90 );
 		$date = date( 'Y-m-d 00:00:00', time() - 86400 * $days );
 
