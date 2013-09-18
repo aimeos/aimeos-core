@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Catalog_Index_DefaultTest extends MW_Unittest_Testcase
+class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 
@@ -22,7 +22,7 @@ class Controller_Jobs_Catalog_Index_DefaultTest extends MW_Unittest_Testcase
 		$context = TestHelper::getContext();
 		$arcavias = TestHelper::getArcavias();
 
-		$this->_object = new Controller_Jobs_Catalog_Index_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $arcavias );
 	}
 
 
@@ -40,7 +40,7 @@ class Controller_Jobs_Catalog_Index_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Catalog index jobs', $this->_object->getName() );
+		$this->assertEquals( 'Catalog index rebuild', $this->_object->getName() );
 	}
 
 
@@ -110,7 +110,7 @@ class Controller_Jobs_Catalog_Index_DefaultTest extends MW_Unittest_Testcase
 			->will( $this->onConsecutiveCalls( array( $siteItem ), array() ) );
 
 
-		$object = new Controller_Jobs_Catalog_Index_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $arcavias );
 		$object->run();
 	}
 
@@ -152,7 +152,7 @@ class Controller_Jobs_Catalog_Index_DefaultTest extends MW_Unittest_Testcase
 			->will( $this->onConsecutiveCalls( array( $siteItem ), array() ) );
 
 
-		$object = new Controller_Jobs_Catalog_Index_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $arcavias );
 		$object->run();
 	}
 }

@@ -14,7 +14,7 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Order_Stock_Default
+class Controller_Jobs_Order_Product_Stock_Default
 	extends Controller_Jobs_Abstract
 	implements Controller_Jobs_Interface
 {
@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Stock_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Order stock level job' );
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Order product stock levels' );
 	}
 
 
@@ -36,7 +36,7 @@ class Controller_Jobs_Order_Stock_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Decreases the stock levels of completed orders' );
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Decreases the stock levels of products in completed orders' );
 	}
 
 

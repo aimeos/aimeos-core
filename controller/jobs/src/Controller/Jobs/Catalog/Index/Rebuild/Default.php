@@ -14,7 +14,7 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Catalog_Index_Default
+class Controller_Jobs_Catalog_Index_Rebuild_Default
 	extends Controller_Jobs_Abstract
 	implements Controller_Jobs_Interface
 {
@@ -25,7 +25,7 @@ class Controller_Jobs_Catalog_Index_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Catalog index jobs' );
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Catalog index rebuild' );
 	}
 
 

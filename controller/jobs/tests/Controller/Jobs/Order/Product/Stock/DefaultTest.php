@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
+class Controller_Jobs_Order_Product_Stock_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 
@@ -22,7 +22,7 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		$context = TestHelper::getContext();
 		$arcavias = TestHelper::getArcavias();
 
-		$this->_object = new Controller_Jobs_Order_Stock_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Order_Product_Stock_Default( $context, $arcavias );
 	}
 
 
@@ -40,13 +40,13 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Order stock level job', $this->_object->getName() );
+		$this->assertEquals( 'Order product stock levels', $this->_object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
-		$text = 'Decreases the stock levels of completed orders';
+		$text = 'Decreases the stock levels of products in completed orders';
 		$this->assertEquals( $text, $this->_object->getDescription() );
 	}
 
@@ -104,7 +104,7 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		$orderStatusManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Stock_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Product_Stock_Default( $context, $arcavias );
 		$object->run();
 	}
 
@@ -162,7 +162,7 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		$orderStatusManagerStub->expects( $this->never() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Stock_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Product_Stock_Default( $context, $arcavias );
 		$object->run();
 	}
 }
