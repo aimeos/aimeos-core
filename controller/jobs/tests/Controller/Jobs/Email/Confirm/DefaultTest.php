@@ -100,17 +100,16 @@ class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 
 
+		$orderItem = $orderManagerStub->createItem();
+		$orderBaseItem = $orderBaseManagerStub->createItem();
+		$orderBaseItem->setAddress( $orderAddressItem );
+
+
 		$orderManagerStub->expects( $this->atLeastOnce() )->method( 'getSubManager' )
 			->will( $this->onConsecutiveCalls( $orderStatusManagerStub, $orderBaseManagerStub ) );
 
-		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setId( -1 );
-
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
-
-		$orderBaseItem = $orderBaseManagerStub->createItem();
-		$orderBaseItem->setAddress( $orderAddressItem );
 
 		$orderBaseManagerStub->expects( $this->once() )->method( 'load' )
 			->will( $this->returnValue( $orderBaseItem ) );
@@ -139,6 +138,7 @@ class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 		$name = 'ControllerJobsEmailConfirmDefaultRun';
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
+
 		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
 			->setMethods( array( 'searchItems' ) )
 			->setConstructorArgs( array( $context ) )
@@ -148,7 +148,7 @@ class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 
 
 		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setId( -1 );
+
 
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );

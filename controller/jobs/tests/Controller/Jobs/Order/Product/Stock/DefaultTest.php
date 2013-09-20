@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
+class Controller_Jobs_Order_Product_Stock_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 
@@ -22,7 +22,7 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		$context = TestHelper::getContext();
 		$arcavias = TestHelper::getArcavias();
 
-		$this->_object = new Controller_Jobs_Order_Stock_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Order_Product_Stock_Default( $context, $arcavias );
 	}
 
 
@@ -40,13 +40,13 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Order stock level job', $this->_object->getName() );
+		$this->assertEquals( 'Order product stock levels', $this->_object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
-		$text = 'Decreases the stock levels of completed orders';
+		$text = 'Decreases the stock levels of products in completed orders';
 		$this->assertEquals( $text, $this->_object->getDescription() );
 	}
 
@@ -60,6 +60,7 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		$name = 'ControllerJobsOrderStockDefaultRun';
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
+
 		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
 			->setMethods( array( 'searchItems', 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
@@ -83,20 +84,18 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 
 
+		$orderItem = $orderManagerStub->createItem();
+		$orderProductItem = $orderProductManagerStub->createItem();
+
+
 		$orderManagerStub->expects( $this->atLeastOnce() )->method( 'getSubManager' )
 			->will( $this->onConsecutiveCalls( $orderStatusManagerStub, $orderBaseManagerStub ) );
 
 		$orderBaseManagerStub->expects( $this->once() )->method( 'getSubManager' )
 			->will( $this->returnValue( $orderProductManagerStub ) );
 
-		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setId( -1 );
-
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
-
-		$orderProductItem = $orderProductManagerStub->createItem();
-		$orderProductItem->setId( -1 );
 
 		$orderProductManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->returnValue( array( $orderProductItem ) ) );
@@ -104,7 +103,7 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		$orderStatusManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Stock_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Product_Stock_Default( $context, $arcavias );
 		$object->run();
 	}
 
@@ -118,6 +117,7 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		$name = 'ControllerJobsOrderStockDefaultRun';
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
+
 		$orderManagerStub = $this->getMockBuilder( 'MShop_Order_Manager_Default' )
 			->setMethods( array( 'searchItems', 'getSubManager' ) )
 			->setConstructorArgs( array( $context ) )
@@ -141,20 +141,18 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 
 
+		$orderItem = $orderManagerStub->createItem();
+		$orderProductItem = $orderProductManagerStub->createItem();
+
+
 		$orderManagerStub->expects( $this->atLeastOnce() )->method( 'getSubManager' )
 			->will( $this->onConsecutiveCalls( $orderStatusManagerStub, $orderBaseManagerStub ) );
 
 		$orderBaseManagerStub->expects( $this->once() )->method( 'getSubManager' )
 			->will( $this->returnValue( $orderProductManagerStub ) );
 
-		$orderItem = $orderManagerStub->createItem();
-		$orderItem->setId( -1 );
-
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
-
-		$orderProductItem = $orderProductManagerStub->createItem();
-		$orderProductItem->setId( -1 );
 
 		$orderProductManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->throwException( new MShop_Order_Exception( 'test order stock exception' ) ) );
@@ -162,7 +160,7 @@ class Controller_Jobs_Order_Stock_DefaultTest extends MW_Unittest_Testcase
 		$orderStatusManagerStub->expects( $this->never() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Stock_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Product_Stock_Default( $context, $arcavias );
 		$object->run();
 	}
 }

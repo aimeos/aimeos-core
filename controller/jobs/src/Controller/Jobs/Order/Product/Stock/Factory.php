@@ -9,12 +9,12 @@
 
 
 /**
- * Catalog index controller factory.
+ * Order stock controller factory.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Catalog_Index_Factory
+class Controller_Jobs_Order_Product_Stock_Factory
 	extends Controller_Jobs_Common_Factory_Abstract
 	implements Controller_Jobs_Common_Factory_Interface
 {
@@ -29,19 +29,19 @@ class Controller_Jobs_Catalog_Index_Factory
 	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
 	{
 		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/jobs/catalog/index/name', 'Default');
+			$name = $context->getConfig()->get('classes/controller/jobs/order/product/stock/name', 'Default');
 		}
 
 		if ( ctype_alnum($name) === false )
 		{
-			$classname = is_string($name) ? 'Controller_Jobs_Catalog_Index_' . $name : '<not a string>';
+			$classname = is_string($name) ? 'Controller_Jobs_Order_Product_Stock_' . $name : '<not a string>';
 			throw new Controller_Jobs_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'Controller_Jobs_Interface';
-		$classname = 'Controller_Jobs_Catalog_Index_' . $name;
+		$classname = 'Controller_Jobs_Order_Product_Stock_' . $name;
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'catalog/index' );
+		return self::_addControllerDecorators( $context, $arcavias, $controller, 'order/product/stock' );
 	}
 }
