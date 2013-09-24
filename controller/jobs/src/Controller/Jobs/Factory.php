@@ -42,9 +42,7 @@ class Controller_Jobs_Factory
 			throw new Controller_Jobs_Exception( sprintf( 'Controller path is empty' ) );
 		}
 
-		$siteid = $context->getLocale()->getSiteId();
-
-		if( !isset( self::$_controllers[$siteid][$path] ) )
+		if( !isset( self::$_controllers[$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -69,10 +67,10 @@ class Controller_Jobs_Factory
 				throw new Controller_Jobs_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 			}
 
-			self::$_controllers[$siteid][$path] = $controller;
+			self::$_controllers[$path] = $controller;
 		}
 
-		return self::$_controllers[$siteid][$path];
+		return self::$_controllers[$path];
 	}
 
 
@@ -105,6 +103,8 @@ class Controller_Jobs_Factory
 				}
 			}
 		}
+
+		ksort( $cntlList );
 
 		return $cntlList;
 	}
