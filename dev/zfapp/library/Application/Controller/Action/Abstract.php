@@ -44,13 +44,23 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 			$site = $params['site'];
 		}
 
+		if( isset( $this->config['content-baseurl'] ) ) {
+			$contentUrl = $this->config['content-baseurl'];
+		} else {
+			$contentUrl = dirname( dirname( $pathstart ) ) . '/images/';
+		}
 
-		$baseurl = dirname( dirname( $basescript ) );
+		if( isset( $this->config['template-baseurl'] ) ) {
+			$templateUrl = $this->config['template-baseurl'];
+		} else {
+			$templateUrl = dirname( dirname( dirname( $pathstart ) ) ) . '/client/html/lib/';
+		}
+
 
 		$config = array( 'client' => array( 'html' => array(
 			'common' => array(
-				'content' => array( 'baseurl' => $this->config['content-baseurl'] ),
-				'template' => array( 'baseurl' => $this->config['template-baseurl'] ),
+				'content' => array( 'baseurl' => $contentUrl ),
+				'template' => array( 'baseurl' => $templateUrl ),
 			),
 			'basket' => array(
 				'standard' => array( 'url' => array( 'target' => 'routeDefault' ) ),
