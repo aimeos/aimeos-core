@@ -20,14 +20,6 @@ $appConfig = array(
 		 * Paginator, number of items in a list view
 		 */
 		'defaultLimit' => 24,
-		/**
-		 * Content URL (images, downloads, etc.)
-		 */
-		'content-baseurl' => '../../images/',
-		/**
-		 * Template related URL (JS, CSS, etc.)
-		 */
-		'template-baseurl' => '../../../client/html/lib/',
 	),
 	'phpsettings' => array(
 		'display_startup_errors' => 0,
