@@ -1,0 +1,665 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# ppanhh <ppanhh@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-29 15:07+0200\n"
+"PO-Revision-Date: 2013-09-07 09:12+0000\n"
+"Last-Translator: ppanhh <ppanhh@gmail.com>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. / E-mail recipient with first name (%1$s) and last name (%2$s)
+#: layouts/email/confirm/header-default.html:25
+#, php-format
+msgid "\"%1$s %2$s\""
+msgstr "\"%1$s %2$s\""
+
+#: layouts/basket/mini/main-body-default.html:29
+#, php-format
+msgid "%1$d article"
+msgid_plural "%1$d articles"
+msgstr[0] "%1$d bài đăng"
+
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. language (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
+#. (%17$s)
+#: layouts/email/confirm/main-text-address-body-default.html:30
+#: layouts/email/confirm/main-text-address-body-default.html:78
+#: layouts/checkout/standard/address-billing-body-default.html:57
+#: layouts/checkout/standard/address-delivery-body-default.html:61
+#: layouts/common/summary/address-body-default.html:38
+#: layouts/common/summary/address-body-default.html:92
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s %3$s %4$s %5$s\n"
+"%6$s %7$s\n"
+"%8$s\n"
+"%9$s %10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+"%14$s\n"
+"%15$s\n"
+"%16$s\n"
+"%17$s\n"
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
+
+#. / Price format with price value (%1$s) and currency (%2$s)
+#: layouts/email/confirm/main-text-detail-body-default.html:55
+#: layouts/basket/mini/main-body-default.html:23
+#: layouts/checkout/standard/delivery-body-default.html:37
+#: layouts/checkout/standard/payment-body-default.html:37
+#: layouts/common/summary/detail-body-default.html:65
+#: layouts/catalog/list/items-body-default.html:16
+#: layouts/catalog/detail/basket-body-default.html:14
+#, php-format
+msgid "%1$s %2$s"
+msgstr "%1$s %2$s"
+
+#. / Configurable product attribute name (%1$s) with price value (%2$s) and
+#. currency (%3$s)
+#: layouts/catalog/detail/basket-attribute-body-default.html:32
+#, php-format
+msgid "%1$s ( +%2$s%3$s )"
+msgstr "%1$s ( +%2$s%3$s )"
+
+#: layouts/account/history/list-body-default.html:15
+#: layouts/account/history/list-body-default.html:30
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s tại %2$s"
+
+#. / Percent format with value (%1$s) and % sign
+#: layouts/catalog/list/items-body-default.html:18
+#: layouts/catalog/detail/basket-body-default.html:16
+#, php-format
+msgid "%1$s%%"
+msgstr "%1$s%%"
+
+#. / Service fee value (%1$s) and shipping cost value (%2$s) with currency
+#. (%3$s)
+#: layouts/checkout/standard/delivery-body-default.html:51
+#: layouts/checkout/standard/payment-body-default.html:51
+#, php-format
+msgid "%1$s%3$s + %2$s%3$s"
+msgstr "%1$s%3$s + %2$s%3$s"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:91
+msgid "+ Payment costs"
+msgstr "+ Chi phí thanh toán"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:89
+#: layouts/email/confirm/main-text-detail-body-default.html:99
+msgid "+ Shipping"
+msgstr "+ Chi phí vận chuyển"
+
+#: layouts/catalog/detail/basket-body-default.html:49
+msgid "Add to basket"
+msgstr "Thêm vào giỏ"
+
+#: layouts/checkout/standard/address-billing-body-default.html:127
+#: layouts/checkout/standard/address-delivery-body-default.html:131
+msgid "Additional"
+msgstr "Bổ sung"
+
+#: layouts/checkout/standard/address-billing-body-default.html:131
+#: layouts/checkout/standard/address-delivery-body-default.html:135
+msgid "Additional 2"
+msgstr "Bổ sung 2"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:181
+#, php-format
+msgid "Address with ID \"%1$s\" not found"
+msgstr ""
+
+#: layouts/common/summary/address-body-default.html:19
+msgid "Addresses"
+msgstr "Các địa chỉ"
+
+#: layouts/email/confirm/main-text-footer-body-default.html:12
+#: layouts/email/confirm/main-html-footer-body-default.html:14
+msgid ""
+"All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
+"\n"
+"This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards.\n"
+msgstr ""
+
+#: layouts/catalog/detail/basic-body-default.html:17
+msgid "Article no.:"
+msgstr "Chỉ số bài đăng.:"
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:162
+#, php-format
+msgid "At least one billing address part is missing"
+msgstr "Ít nhất có một phần địa chỉ hóa đơn bị thiếu"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:161
+#, php-format
+msgid "At least one delivery address part is missing"
+msgstr "Có ít nhất một phần địa chỉ gửi đi bị thiếu"
+
+#: layouts/checkout/standard/delivery-body-default.html:91
+#: layouts/checkout/standard/summary-body-default.html:18
+#: layouts/checkout/standard/address-body-default.html:17
+#: layouts/checkout/standard/payment-body-default.html:91
+msgid "Back"
+msgstr "Quay lại"
+
+#: layouts/basket/mini/body-default.html:23
+#: layouts/basket/standard/body-default.html:37
+#: layouts/checkout/standard/body-default.html:25
+msgid "Basket"
+msgstr "Giỏ hàng"
+
+#: layouts/email/confirm/main-text-address-body-default.html:19
+#: layouts/checkout/standard/address-billing-body-default.html:43
+#: layouts/common/summary/address-body-default.html:22
+msgid "Billing address"
+msgstr "Địa chỉ hóa đơn"
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:144
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:155
+#, php-format
+msgid "Billing address part \"%1$s\" is missing"
+msgstr "Phần địa chỉ hóa đơn \"%1$s\" bị thiếu"
+
+#: layouts/checkout/standard/summary-body-default.html:19
+msgid "Buy now"
+msgstr "Mua ngay bây giờ"
+
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:142
+#, php-format
+msgid "Category with ID \"%1$s\" not available"
+msgstr ""
+
+#: layouts/common/summary/detail-body-default.html:74
+#: layouts/common/summary/service-body-default.html:18
+#: layouts/common/summary/service-body-default.html:50
+#: layouts/common/summary/address-body-default.html:24
+#: layouts/common/summary/address-body-default.html:78
+msgid "Change"
+msgstr "Thay đổi"
+
+#: layouts/checkout/confirm/basic-body-default.html:35
+msgid "Change payment"
+msgstr ""
+
+#: layouts/basket/standard/body-default.html:44
+msgid "Checkout"
+msgstr "Thanh toán"
+
+#: layouts/checkout/standard/address-billing-body-default.html:139
+#: layouts/checkout/standard/address-delivery-body-default.html:143
+msgid "City"
+msgstr "Thành phố"
+
+#: src/Client/Html/Abstract.php:157
+#: src/Client/Html/Common/Factory/Abstract.php:38
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr ""
+
+#: src/Client/Html/Abstract.php:151
+#: src/Client/Html/Common/Factory/Abstract.php:32
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr ""
+
+#: layouts/account/history/detail-body-default.html:16
+#: layouts/account/history/detail-body-default.html:20
+msgid "Close"
+msgstr "Đóng lại"
+
+#: layouts/checkout/standard/address-billing-body-default.html:111
+#: layouts/checkout/standard/address-delivery-body-default.html:115
+msgid "Company"
+msgstr "Công ty"
+
+#: layouts/checkout/confirm/body-default.html:19
+msgid "Confirmation"
+msgstr "Xác nhận"
+
+#. / E-mail subject with order ID (%1$s)
+#: layouts/email/confirm/header-default.html:22
+#, php-format
+msgid "Confirmation for order %1$s"
+msgstr "Xác nhận với đơn hàng %1$s"
+
+#: layouts/checkout/standard/address-billing-body-default.html:147
+#: layouts/checkout/standard/address-delivery-body-default.html:151
+msgid "Country"
+msgstr "Quốc gia"
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:181
+#, php-format
+msgid "Customer with ID \"%1$s\" not found"
+msgstr ""
+
+#. / Greeting with salutation (%1$s), first name (%2$s) and last name (%3$s)
+#: layouts/email/confirm/main-text-head-body-default.html:20
+#: layouts/email/confirm/main-html-head-body-default.html:25
+#, php-format
+msgid "Dear %1$s %2$s %3$s"
+msgstr "Thân gửi %1$s  %2$s %3$s"
+
+#: layouts/email/confirm/main-text-head-body-default.html:28
+#: layouts/email/confirm/main-html-head-body-default.html:33
+msgid "Dear Sir or Madam"
+msgstr "Thân gửi Anh hoặc Chị"
+
+#: layouts/email/confirm/main-text-service-body-default.html:13
+#: layouts/account/history/list-body-default.html:43
+msgid "Delivery"
+msgstr "Vận chuyển"
+
+#: layouts/email/confirm/main-text-address-body-default.html:67
+#: layouts/checkout/standard/address-delivery-body-default.html:43
+#: layouts/common/summary/address-body-default.html:76
+msgid "Delivery address"
+msgstr "Địa chỉ gửi"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:143
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:154
+#, php-format
+msgid "Delivery address part \"%1$s\" is missing"
+msgstr "Phần địa chỉ gửi \"%1$s\" bị thiếu"
+
+#: layouts/catalog/detail/additional-text-body-default.html:19
+msgid "Description"
+msgstr "Mô tả"
+
+#: layouts/common/summary/detail-body-default.html:76
+msgid "Details"
+msgstr ""
+
+#: layouts/checkout/standard/address-billing-body-default.html:166
+#: layouts/checkout/standard/address-delivery-body-default.html:170
+msgid "E-Mail"
+msgstr "Email"
+
+#: layouts/checkout/standard/address-billing-body-default.html:174
+#: layouts/checkout/standard/address-delivery-body-default.html:178
+msgid "Fax"
+msgstr "Fax"
+
+#: layouts/checkout/standard/address-body-default.html:13
+msgid "Fields with an * are mandatory"
+msgstr "Các mục với phần dấu *"
+
+#: layouts/checkout/standard/address-billing-body-default.html:115
+#: layouts/checkout/standard/address-delivery-body-default.html:119
+msgid "First name"
+msgstr "Tên"
+
+#: layouts/catalog/filter/search-body-default.html:25
+msgid "Go"
+msgstr "Truy cập"
+
+#: layouts/checkout/standard/summary-option-terms-body-default.html:26
+#, php-format
+msgid ""
+"I accept the <a href=\"%1$s\" target=\"_blank\" title=\"terms and "
+"conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a "
+"href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy "
+"policy\">privacy policy</a>"
+msgstr "Tôi đồng ý với <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">điều kiện sử dụng</a> và <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">chính sách về quyền riêng tư cá nhân của khách hàng</a>"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:95
+#: layouts/email/confirm/main-text-detail-body-default.html:107
+#: layouts/common/summary/detail-body-default.html:224
+msgid "Included rebates"
+msgstr "Bao gồm phần giảm giá"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:104
+#: layouts/common/summary/detail-body-default.html:216
+#, php-format
+msgid "Includes %1$s%% VAT"
+msgstr "Bao gồm thuế %1$s%% VAT "
+
+#: src/Client/Html/Catalog/List/Factory.php:39
+#: src/Client/Html/Catalog/Filter/Factory.php:39
+#: src/Client/Html/Catalog/Detail/Factory.php:39
+#: src/Client/Html/Catalog/Stage/Factory.php:39
+#: src/Client/Html/Email/Confirm/Factory.php:39
+#: src/Client/Html/Account/History/Factory.php:39
+#: src/Client/Html/Basket/Mini/Factory.php:39
+#: src/Client/Html/Basket/Standard/Factory.php:39
+#: src/Client/Html/Checkout/Standard/Factory.php:39
+#: src/Client/Html/Checkout/Update/Factory.php:39
+#: src/Client/Html/Checkout/Confirm/Factory.php:39
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Abstract.php:103 src/Client/Html/Abstract.php:142
+#, php-format
+msgid "Invalid characters in client name \"%1$s\""
+msgstr ""
+
+#: layouts/checkout/standard/address-billing-body-default.html:158
+#: layouts/checkout/standard/address-delivery-body-default.html:162
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+#: layouts/checkout/standard/address-billing-body-default.html:119
+#: layouts/checkout/standard/address-delivery-body-default.html:123
+msgid "Last name"
+msgstr "Họ"
+
+#: layouts/catalog/list/pagination-body-default.html:26
+msgid "Name"
+msgstr "Tên"
+
+#: layouts/checkout/standard/delivery-body-default.html:92
+#: layouts/checkout/standard/address-body-default.html:18
+#: layouts/checkout/standard/payment-body-default.html:92
+msgid "Next"
+msgstr "Tiếp theo"
+
+#: layouts/catalog/list/head-body-default.html:34
+#, php-format
+msgid ""
+"No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
+"try again with a different keyword."
+msgstr ""
+
+#: src/Client/Html/Abstract.php:50
+#, php-format
+msgid "No view available"
+msgstr "Hiện không hiển thị được"
+
+#: layouts/checkout/standard/summary-option-body-default.html:12
+msgid "Options"
+msgstr "Tùy chọ"
+
+#: layouts/checkout/confirm/basic-body-default.html:12
+msgid "Order"
+msgstr "Hóa đơn"
+
+#: layouts/checkout/confirm/basic-body-default.html:17
+#: layouts/account/history/list-body-default.html:29
+msgid "Order ID"
+msgstr "Số hiệu hóa đơn"
+
+#: layouts/account/history/list-body-default.html:33
+msgid "Order channel"
+msgstr "Kênh hóa đơn"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:59
+#: layouts/account/history/detail-body-default.html:17
+msgid "Order details"
+msgstr "Chi tiết về hóa đơn"
+
+#: layouts/account/history/list-body-default.html:21
+msgid "Order history"
+msgstr "Lịch sử đã đặt hàng"
+
+#: src/Client/Html/Account/History/Detail/Default.php:146
+#, php-format
+msgid "Order with ID \"%1$s\" not found"
+msgstr "Đặt hàng với chỉ số \"%1$s\" không tìm thấy"
+
+#: layouts/catalog/list/pagination-body-default.html:33
+#, php-format
+msgid "Page %1$d of %2$d"
+msgstr "Trang %1$d của %2$d"
+
+#: layouts/email/confirm/main-text-service-body-default.html:38
+#: layouts/checkout/standard/order-payment-body-default.html:24
+#: layouts/account/history/list-body-default.html:38
+msgid "Payment"
+msgstr "Chi trả"
+
+#: layouts/common/summary/detail-body-default.html:200
+msgid "Payment costs"
+msgstr "Chi phí chi trả"
+
+#: layouts/checkout/confirm/basic-body-default.html:21
+msgid "Payment status"
+msgstr "Trạng thái chi trả"
+
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:114
+msgid "Please accept the terms and conditions"
+msgstr "Vui lòng chấp nhận các điều khoản sau đây"
+
+#: layouts/checkout/standard/summary-body-default.html:13
+msgid "Please check your order"
+msgstr "Xin vui lòng kiểm tra đơn hàng của bạn"
+
+#: layouts/checkout/standard/delivery-body-default.html:42
+msgid "Please choose your delivery method"
+msgstr "Xin vui lòng chọn phương thức vận chuyển"
+
+#: layouts/checkout/standard/payment-body-default.html:42
+msgid "Please choose your payment method"
+msgstr "Xin vui lòng chọn phương thức thanh toán của bạn"
+
+#: layouts/catalog/detail/basket-selection-body-default.html:21
+msgid "Please select"
+msgstr ""
+
+#: layouts/checkout/standard/address-billing-body-default.html:135
+#: layouts/checkout/standard/address-delivery-body-default.html:139
+msgid "Postal code"
+msgstr "Mã vùng"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:74
+#: layouts/common/summary/detail-body-default.html:84
+#: layouts/catalog/list/pagination-body-default.html:27
+msgid "Price"
+msgstr "Giá"
+
+#: layouts/checkout/standard/order-payment-body-default.html:28
+#: layouts/checkout/standard/order-payment-body-default.html:37
+msgid "Proceed"
+msgstr ""
+
+#: layouts/email/confirm/main-text-detail-body-default.html:72
+#: layouts/common/summary/detail-body-default.html:83
+msgid "Quantity"
+msgstr "Số lượng"
+
+#: layouts/catalog/list/pagination-body-default.html:25
+msgid "Relevance"
+msgstr "Xác thực"
+
+#. / Product search hint with user provided search string (%1$s)
+#: layouts/catalog/list/header-default.html:23
+#, php-format
+msgid "Result for \"%1$s\""
+msgstr "Kết quả của \"%1$s\""
+
+#: layouts/checkout/standard/address-billing-body-default.html:102
+#: layouts/checkout/standard/address-delivery-body-default.html:106
+msgid "Salutation"
+msgstr "Lời chào mừng"
+
+#: layouts/catalog/list/head-body-default.html:31
+#, php-format
+msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d article)"
+msgid_plural ""
+"Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
+"articles)"
+msgstr[0] "Kết quả tìm kiếm của <span class=\"searchstring\">\"%1$s\"</span> (%2$d articles)"
+
+#: layouts/checkout/standard/address-billing-body-default.html:150
+#: layouts/checkout/standard/address-delivery-body-default.html:154
+msgid "Select country"
+msgstr "Chọn quốc gia"
+
+#: layouts/checkout/standard/address-billing-body-default.html:104
+#: layouts/checkout/standard/address-delivery-body-default.html:108
+msgid "Select salutation"
+msgstr "Chọn lời chào"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:82
+msgid "Service fees"
+msgstr "Phí dịch vụ"
+
+#: layouts/common/summary/service-body-default.html:13
+msgid "Services"
+msgstr "Dịch vụ"
+
+#: layouts/common/summary/detail-body-default.html:192
+msgid "Shipping"
+msgstr "Chuyển hàng"
+
+#: layouts/catalog/filter/body-default.html:27
+msgid "Show"
+msgstr "Hiển thị"
+
+#: layouts/catalog/list/quote-body-default.html:19
+msgid "Show all quotes"
+msgstr "Hiển thị tất cả các phần trích dẫn"
+
+#: layouts/catalog/list/pagination-body-default.html:23
+msgid "Sort by:"
+msgstr "Sắp xếp theo:"
+
+#: layouts/checkout/standard/address-billing-body-default.html:143
+#: layouts/checkout/standard/address-delivery-body-default.html:147
+msgid "State"
+msgstr "Bang"
+
+#: layouts/checkout/standard/address-billing-body-default.html:123
+#: layouts/checkout/standard/address-delivery-body-default.html:127
+msgid "Street"
+msgstr "Tên đường"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:87
+#: layouts/email/confirm/main-text-detail-body-default.html:97
+#: layouts/common/summary/detail-body-default.html:185
+msgid "Sub-total"
+msgstr "Tiền tổng cộng"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:76
+#: layouts/common/summary/detail-body-default.html:85
+msgid "Sum"
+msgstr "Tổng"
+
+#: layouts/checkout/standard/address-billing-body-default.html:170
+#: layouts/checkout/standard/address-delivery-body-default.html:174
+msgid "Telephone"
+msgstr "Số điện thoại"
+
+#: src/Client/Html/Abstract.php:216
+#, php-format
+msgid "Template \"%1$s\" not available"
+msgstr ""
+
+#: layouts/checkout/standard/summary-option-terms-body-default.html:22
+msgid "Terms and conditions"
+msgstr "Thỏa thuận với người dùng"
+
+#: layouts/checkout/confirm/basic-body-default.html:13
+msgid "Thank you for your order"
+msgstr "Cảm ơn bạn đã đặt hàng"
+
+#. / First paragraph of order email with order ID (%1$s) and order date (%2$s)
+#: layouts/email/confirm/main-text-head-body-default.html:38
+#: layouts/email/confirm/main-html-head-body-default.html:40
+#, php-format
+msgid ""
+"Thank you for your order on %2$s. The ID of your order is %1$s and contains "
+"the following details:"
+msgstr "Cảm ơn bạn đã đặt hàng tại %2$s. Chỉ số đơn hàng của bạn là %1$s và chứa các thông tin chi tiết như sau:"
+
+#: layouts/email/confirm/main-text-detail-body-default.html:93
+#: layouts/email/confirm/main-text-detail-body-default.html:101
+#: layouts/common/summary/detail-body-default.html:208
+msgid "Total"
+msgstr "Tổng cộng"
+
+#: layouts/checkout/confirm/basic-body-default.html:36
+msgid "Try again"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:126
+#, php-format
+msgid "Unable to save address for customer \"%1$s\": %2$s"
+msgstr ""
+
+#: layouts/basket/standard/body-default.html:42
+msgid "Update"
+msgstr "Cập nhật"
+
+#: layouts/checkout/standard/address-billing-body-default.html:178
+#: layouts/checkout/standard/address-delivery-body-default.html:182
+msgid "Web site"
+msgstr "Trang web"
+
+#: layouts/common/summary/detail-body-default.html:138
+msgid "X"
+msgstr ""
+
+#. / Date format (Y=year, m=month, d=day, see
+#. http://www.php.net/manual/en/function.date.php for more options)
+#: layouts/email/confirm/main-text-head-body-default.html:41
+#: layouts/email/confirm/main-html-head-body-default.html:42
+#: layouts/account/history/list-body-default.html:14
+msgid "Y-m-d"
+msgstr "Năm-tháng-ngày"
+
+#: layouts/catalog/stage/breadcrumb-body-default.html:18
+msgid "You are here:"
+msgstr "Bạn đang ở đây"
+
+#: layouts/checkout/standard/order-payment-body-default.html:25
+msgid "You will now be forwarded to the next step"
+msgstr ""
+
+#: layouts/checkout/standard/address-body-default.html:12
+#: src/Client/Html/Checkout/Standard/Address/Default.php:12
+msgid "address"
+msgstr "địa chỉ"
+
+#: src/Client/Html/Checkout/Confirm/Basic/Default.php:12
+msgid "basic"
+msgstr "cơ bản"
+
+#: layouts/checkout/standard/delivery-body-default.html:41
+#: layouts/common/summary/service-body-default.html:16
+#: src/Client/Html/Checkout/Standard/Delivery/Default.php:12
+msgid "delivery"
+msgstr "vận chuyển"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:47
+msgid "like billing address"
+msgstr "giống như địa chỉ trên hóa đơn"
+
+#: layouts/checkout/standard/address-billing-body-default.html:98
+#: layouts/checkout/standard/address-delivery-body-default.html:102
+msgid "new address"
+msgstr "địa chỉ mới"
+
+#: layouts/checkout/standard/order-body-default.html:12
+#: src/Client/Html/Checkout/Standard/Order/Default.php:12
+msgid "order"
+msgstr "đặt hàng"
+
+#: layouts/checkout/standard/payment-body-default.html:41
+#: layouts/common/summary/service-body-default.html:48
+#: src/Client/Html/Checkout/Standard/Payment/Default.php:12
+msgid "payment"
+msgstr "thanh toán"
+
+#: layouts/checkout/standard/summary-body-default.html:12
+#: src/Client/Html/Checkout/Standard/Summary/Default.php:12
+msgid "summary"
+msgstr "tóm tắt"
