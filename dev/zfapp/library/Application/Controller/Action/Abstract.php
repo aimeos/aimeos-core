@@ -49,8 +49,8 @@ abstract class Application_Controller_Action_Abstract extends Zend_Controller_Ac
 
 		$config = array( 'client' => array( 'html' => array(
 			'common' => array(
-				'content' => array( 'baseurl' => dirname( $baseurl ) . '/images/' ),
-				'template' => array( 'baseurl' => dirname( dirname( $baseurl ) ) . '/client/html/lib/' ),
+				'content' => array( 'baseurl' => $this->config['content-baseurl'] ),
+				'template' => array( 'baseurl' => $this->config['template-baseurl'] ),
 			),
 			'basket' => array(
 				'standard' => array( 'url' => array( 'target' => 'routeDefault' ) ),
