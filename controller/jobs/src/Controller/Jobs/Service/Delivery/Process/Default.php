@@ -54,6 +54,7 @@ class Controller_Jobs_Service_Delivery_Process_Default
 
 		$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
 		$serviceSearch = $serviceManager->createSearch();
+		$serviceSearch->setConditions( $serviceSearch->compare( '==', 'service.type.code', 'delivery' ) );
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 		$orderSearch = $orderManager->createSearch();
