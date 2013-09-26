@@ -104,6 +104,9 @@ class Jobs
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
 
+		$helper = new MW_View_Helper_Url_None( $view );
+		$view->addHelper( 'url', $helper );
+
 		$helper = new MW_View_Helper_Encoder_Default( $view );
 		$view->addHelper( 'encoder', $helper );
 
