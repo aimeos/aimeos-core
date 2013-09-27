@@ -14,7 +14,7 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Email_Confirm_Default
+class Controller_Jobs_Order_Email_Confirm_Default
 	extends Controller_Jobs_Abstract
 	implements Controller_Jobs_Interface
 {
@@ -26,7 +26,7 @@ class Controller_Jobs_Email_Confirm_Default
 	public function getName()
 	{
 		return $this->_getContext()->getI18n()
-			->dt( 'controller/jobs', 'Confirmation e-mails' );
+			->dt( 'controller/jobs', 'Order confirmation e-mails' );
 	}
 
 
@@ -114,8 +114,8 @@ class Controller_Jobs_Email_Confirm_Default
 					$name = sprintf( $view->translate( 'client/html', '%1$s %2$s' ), $addr->getFirstname(), $addr->getLastname() );
 					$subject = sprintf( $view->translate( 'client/html', 'Confirmation for order %1$s' ), $item->getId() );
 
-					$senderEmail = $config->get( 'controller/jobs/email/confirm/sender-email', 'noreply@example.com' );
-					$senderName = $config->get( 'controller/jobs/email/confirm/sender-name', '' );
+					$senderEmail = $config->get( 'controller/jobs/order/email/confirm/sender-email', 'noreply@example.com' );
+					$senderName = $config->get( 'controller/jobs/order/email/confirm/sender-name', '' );
 
 					$message = $mailer->createMessage();
 					$message->setSender( $senderEmail, $senderName );

@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
+class Controller_Jobs_Order_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 
@@ -22,7 +22,7 @@ class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 		$context = TestHelper::getContext();
 		$arcavias = TestHelper::getArcavias();
 
-		$this->_object = new Controller_Jobs_Email_Confirm_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Order_Email_Confirm_Default( $context, $arcavias );
 	}
 
 
@@ -40,7 +40,7 @@ class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Confirmation e-mails', $this->_object->getName() );
+		$this->assertEquals( 'Order confirmation e-mails', $this->_object->getName() );
 	}
 
 
@@ -117,7 +117,7 @@ class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 		$orderStatusManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Email_Confirm_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Email_Confirm_Default( $context, $arcavias );
 		$object->run();
 	}
 
@@ -154,7 +154,7 @@ class Controller_Jobs_Email_Confirm_DefaultTest extends MW_Unittest_Testcase
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
 
 
-		$object = new Controller_Jobs_Email_Confirm_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Email_Confirm_Default( $context, $arcavias );
 		$object->run();
 	}
 
