@@ -58,8 +58,13 @@ class Controller_Jobs_Email_Confirm_Default
 		$i18nPaths = $arcavias->getI18nPaths();
 		$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
+
 		$config->set( 'client/html/email/confirm/main/html/encoded', false );
 		$config->set( 'client/html/email/confirm/main/text/encoded', false );
+
+		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$view->addHelper( 'config', $helper );
+
 
 		$client = Client_Html_Email_Confirm_Factory::createClient( $context, $templatePaths );
 		$mainClient = $client->getSubClient( 'main' );

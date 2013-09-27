@@ -69,7 +69,7 @@ class Jobs
 		$logger = new MAdmin_Log_Manager_Default( $context );
 		$context->setLogger( $logger );
 
-		$mail = new MW_Mail_Zend( new Zend_Mail() );
+		$mail = new MW_Mail_Zend( new Zend_Mail( 'UTF-8' ) );
 		$context->setMail( $mail );
 
 		$i18nPaths = $this->_arcavias->getI18nPaths();
