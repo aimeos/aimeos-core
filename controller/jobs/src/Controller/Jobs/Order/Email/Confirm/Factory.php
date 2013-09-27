@@ -14,7 +14,7 @@
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Email_Confirm_Factory
+class Controller_Jobs_Order_Email_Confirm_Factory
 	extends Controller_Jobs_Common_Factory_Abstract
 	implements Controller_Jobs_Common_Factory_Interface
 {
@@ -29,19 +29,19 @@ class Controller_Jobs_Email_Confirm_Factory
 	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
 	{
 		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/jobs/email/confirm/name', 'Default');
+			$name = $context->getConfig()->get('classes/controller/jobs/order/email/confirm/name', 'Default');
 		}
 
 		if ( ctype_alnum($name) === false )
 		{
-			$classname = is_string($name) ? 'Controller_Jobs_Email_Confirm_' . $name : '<not a string>';
+			$classname = is_string($name) ? 'Controller_Jobs_Order_Email_Confirm_' . $name : '<not a string>';
 			throw new Controller_Jobs_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'Controller_Jobs_Interface';
-		$classname = 'Controller_Jobs_Email_Confirm_' . $name;
+		$classname = 'Controller_Jobs_Order_Email_Confirm_' . $name;
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'email/confirm' );
+		return self::_addControllerDecorators( $context, $arcavias, $controller, 'order/email/confirm' );
 	}
 }
