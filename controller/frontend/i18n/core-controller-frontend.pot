@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-29 15:07+0200\n"
+"POT-Creation-Date: 2013-09-27 13:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,15 +37,15 @@ msgstr ""
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr ""
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:49
-#: src/Controller/Frontend/Common/Factory/Abstract.php:122
+#: src/Controller/Frontend/Common/Factory/Abstract.php:66
+#: src/Controller/Frontend/Common/Factory/Abstract.php:143
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
 #: src/Controller/Frontend/Factory.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:43
-#: src/Controller/Frontend/Common/Factory/Abstract.php:116
+#: src/Controller/Frontend/Common/Factory/Abstract.php:60
+#: src/Controller/Frontend/Common/Factory/Abstract.php:137
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
@@ -66,7 +66,7 @@ msgid "Invalid address properties, please check your input"
 msgstr ""
 
 #: src/Controller/Frontend/Basket/Factory.php:30
-#: src/Controller/Frontend/Common/Factory/Abstract.php:37
+#: src/Controller/Frontend/Common/Factory/Abstract.php:54
 #: src/Controller/Frontend/Catalog/Factory.php:30
 #: src/Controller/Frontend/Service/Factory.php:29
 #, php-format
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:69
+#: src/Controller/Frontend/Common/Factory/Abstract.php:86
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr ""

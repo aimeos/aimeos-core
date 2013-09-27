@@ -1,20 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# German translations for arcavias-core (frontend controller).
+# Copyright (C) 2013
+# This file is distributed under the same license as the arcavias-core package.
+# Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
 #
-# Translators:
-# nsendetzky <n.sendetzky@metaways.de>, 2013
-# nsendetzky <n.sendetzky@metaways.de>, 2013
-# nsendetzky <n.sendetzky@metaways.de>, 2013
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-29 15:07+0200\n"
+"POT-Creation-Date: 2013-09-25 13:22+0200\n"
 "PO-Revision-Date: 2013-07-26 11:41+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
-"Language: de\n"
+"Language: German\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,15 +38,15 @@ msgstr "Das Produkt an Position \"%1$d\" im Warenkorb darf nicht verändert werd
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "Das Produkt an Position \"%1$d\" im Warenkorb kann nicht gelöscht werden"
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:49
-#: src/Controller/Frontend/Common/Factory/Abstract.php:122
+#: src/Controller/Frontend/Common/Factory/Abstract.php:66
+#: src/Controller/Frontend/Common/Factory/Abstract.php:143
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
 #: src/Controller/Frontend/Factory.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:43
-#: src/Controller/Frontend/Common/Factory/Abstract.php:116
+#: src/Controller/Frontend/Common/Factory/Abstract.php:60
+#: src/Controller/Frontend/Common/Factory/Abstract.php:137
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Klasse \"%1$s\" nicht verfügbar"
@@ -69,7 +67,7 @@ msgid "Invalid address properties, please check your input"
 msgstr "Ein oder mehrere Adressteile sind ungültig. Bitte überprüfen Sie Ihre Eingaben"
 
 #: src/Controller/Frontend/Basket/Factory.php:30
-#: src/Controller/Frontend/Common/Factory/Abstract.php:37
+#: src/Controller/Frontend/Common/Factory/Abstract.php:54
 #: src/Controller/Frontend/Catalog/Factory.php:30
 #: src/Controller/Frontend/Service/Factory.php:29
 #, php-format
@@ -81,7 +79,7 @@ msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
 msgstr "Controllername \"%1$s\" in \"%2$s\" enthält unerlaubte Zeichen"
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:69
+#: src/Controller/Frontend/Common/Factory/Abstract.php:86
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr "Unbekannte Domäne \"%1$s\""

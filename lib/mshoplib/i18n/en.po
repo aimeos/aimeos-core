@@ -1,4 +1,4 @@
-# English translations for arcavias-core.
+# English translations for arcavias-core (mshoplib).
 # Copyright (C) 2013
 # This file is distributed under the same license as the arcavias-core package.
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013.
@@ -6,12 +6,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: arcavias-core Git de2b73333bfb2289a6f5206bb8383d0f87701e4a\n"
+"Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-29 13:03+0200\n"
+"POT-Creation-Date: 2013-09-27 12:17+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
-"Language: en\n"
+"Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
+"Language: English\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -46,21 +47,21 @@ msgstr ""
 
 # error domain: order
 # error type: misc.
-#: src/MShop/Order/Item/Base/Default.php:510
+#: src/MShop/Order/Item/Base/Default.php:509
 #, php-format
 msgid "Basket empty"
 msgstr ""
 
 # error domain: context
 # error type: value, parameter, object etc. not available
-#: src/MShop/Context/Item/Default.php:79
+#: src/MShop/Context/Item/Default.php:88
 #, php-format
 msgid "Cache object not available"
 msgstr ""
 
 # error domain: catalog
 # error type: value, parameter, object etc. not available
-#: src/MShop/Catalog/Manager/Default.php:617
+#: src/MShop/Catalog/Manager/Default.php:618
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
 msgstr ""
@@ -79,14 +80,14 @@ msgstr ""
 
 # error domain: plugin
 # error type: action failed
-#: src/MShop/Plugin/Provider/Order/AddressesAvailable.php:80
+#: src/MShop/Plugin/Provider/Order/AddressesAvailable.php:65
 #, php-format
 msgid "Checks for available addresses in basket failed"
 msgstr ""
 
 # error domain: plugin
 # error type: action failed
-#: src/MShop/Plugin/Provider/Order/ServicesAvailable.php:80
+#: src/MShop/Plugin/Provider/Order/ServicesAvailable.php:66
 #, php-format
 msgid "Checks for available service items in basket failed"
 msgstr ""
@@ -111,8 +112,8 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:297
 #: src/MShop/Common/Manager/Abstract.php:334
 #: src/MShop/Common/Manager/Abstract.php:443
-#: src/MShop/Common/Factory/Abstract.php:47
-#: src/MShop/Common/Factory/Abstract.php:110
+#: src/MShop/Common/Factory/Abstract.php:64
+#: src/MShop/Common/Factory/Abstract.php:131
 #: src/MAdmin/Common/Manager/Abstract.php:59
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -130,8 +131,8 @@ msgstr ""
 #: src/MShop/Common/Manager/Abstract.php:291
 #: src/MShop/Common/Manager/Abstract.php:327
 #: src/MShop/Common/Manager/Abstract.php:437
-#: src/MShop/Common/Factory/Abstract.php:41
-#: src/MShop/Common/Factory/Abstract.php:104
+#: src/MShop/Common/Factory/Abstract.php:58
+#: src/MShop/Common/Factory/Abstract.php:125
 #: src/MAdmin/Common/Manager/Abstract.php:53 src/MAdmin/Factory.php:66
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -144,7 +145,7 @@ msgstr ""
 
 # error domain: plugin
 # error type: misc.
-#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:87
+#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:88
 #, php-format
 msgid "Configuration invalid"
 msgstr ""
@@ -158,7 +159,7 @@ msgstr ""
 
 # error domain: context
 # error type: value, parameter, object etc. not available
-#: src/MShop/Context/Item/Default.php:105
+#: src/MShop/Context/Item/Default.php:114
 #, php-format
 msgid "Configuration object not available"
 msgstr ""
@@ -195,23 +196,15 @@ msgstr ""
 
 # error domain: context
 # error type: value, parameter, object etc. not available
-#: src/MShop/Context/Item/Default.php:131
+#: src/MShop/Context/Item/Default.php:140
 #, php-format
 msgid "Database manager object not available"
 msgstr ""
 
 # error domain: order
 # error type: value not within allowed range
-#: src/MShop/Order/Item/Abstract.php:321
-#, php-format
-msgid "E-mail flags \"%1$s\" not within allowed range"
-msgstr ""
-
-# error domain: order
-# error type: value not within allowed range
 #: src/MShop/Order/Item/Base/Product/Abstract.php:39
 #: src/MShop/Order/Item/Base/Abstract.php:64
-#: src/MShop/Order/Item/Abstract.php:337
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
 msgstr ""
@@ -225,9 +218,10 @@ msgstr ""
 
 # error domain: context
 # error type: value, parameter, object etc. not available
-#: src/MShop/Context/Item/Default.php:156
+#. / Locale ID %1$s
+#: src/MShop/Context/Item/Default.php:159
 #, php-format
-msgid "Internationalization object not available"
+msgid "Internationalization object not available for \"%1$s\""
 msgstr ""
 
 # error domain: search
@@ -294,7 +288,7 @@ msgstr ""
 #: src/MShop/Price/Manager/Factory.php:39
 #: src/MShop/Order/Manager/Factory.php:39
 #: src/MShop/Common/Manager/Abstract.php:431
-#: src/MShop/Common/Factory/Abstract.php:35
+#: src/MShop/Common/Factory/Abstract.php:52
 #: src/MShop/Supplier/Manager/Factory.php:39
 #: src/MShop/Customer/Manager/Factory.php:39
 #: src/MAdmin/Log/Manager/Factory.php:35 src/MAdmin/Job/Manager/Factory.php:35
@@ -304,14 +298,14 @@ msgstr ""
 
 # error domain: misc.
 # error type: invalid characters in name or value
-#: src/MShop/Order/Item/Abstract.php:253 src/MShop/Common/Item/Abstract.php:97
+#: src/MShop/Order/Item/Abstract.php:162 src/MShop/Common/Item/Abstract.php:97
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
 msgstr ""
 
 # error domain: misc.
 # error type: invalid characters in name or value
-#: src/MShop/Customer/Item/Default.php:317
+#: src/MShop/Customer/Item/Default.php:345
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr ""
@@ -472,7 +466,7 @@ msgstr ""
 
 # error domain: context
 # error type: value, parameter, object etc. not available
-#: src/MShop/Context/Item/Default.php:182
+#: src/MShop/Context/Item/Default.php:197
 #, php-format
 msgid "Locale object not available"
 msgstr ""
@@ -493,9 +487,16 @@ msgstr ""
 
 # error domain: context
 # error type: value, parameter, object etc. not available
-#: src/MShop/Context/Item/Default.php:208
+#: src/MShop/Context/Item/Default.php:223
 #, php-format
 msgid "Log manager object not available"
+msgstr ""
+
+# error domain: context
+# error type: value, parameter, object etc. not available
+#: src/MShop/Context/Item/Default.php:275
+#, php-format
+msgid "Mail object not available"
 msgstr ""
 
 #: src/MShop/Factory.php:58 src/MAdmin/Factory.php:57
@@ -544,18 +545,18 @@ msgstr ""
 # error domain: misc.
 # error type: object does not implement interface
 #: src/MShop/Plugin/Manager/Default.php:303
-#: src/MShop/Plugin/Provider/Order/ProductGone.php:64
-#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:70
-#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:75
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:68
-#: src/MShop/Plugin/Provider/Order/Shipping.php:64
-#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:63
-#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:68
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:59
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:64
-#: src/MShop/Plugin/Provider/Order/ProductStock.php:64
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:63
-#: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:63
+#: src/MShop/Plugin/Provider/Order/ProductGone.php:53
+#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:71
+#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:76
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:58
+#: src/MShop/Plugin/Provider/Order/Shipping.php:55
+#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:51
+#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:56
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:47
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:52
+#: src/MShop/Plugin/Provider/Order/ProductStock.php:52
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:51
+#: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:53
 #: src/MShop/Locale/Manager/Language/Default.php:111
 #: src/MShop/Locale/Manager/Site/Default.php:156
 #: src/MShop/Locale/Manager/Currency/Default.php:115
@@ -615,21 +616,21 @@ msgstr ""
 
 # error domain: order
 # error type: value not within allowed range
-#: src/MShop/Order/Item/Abstract.php:269
+#: src/MShop/Order/Item/Abstract.php:178
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
 msgstr ""
 
 # error domain: order
 # error type: value not within allowed range
-#: src/MShop/Order/Item/Abstract.php:285
+#: src/MShop/Order/Item/Abstract.php:194
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
 msgstr ""
 
 # error domain: order
 # error type: value not within allowed range
-#: src/MShop/Order/Item/Abstract.php:305
+#: src/MShop/Order/Item/Abstract.php:214
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
 msgstr ""
@@ -692,7 +693,7 @@ msgstr ""
 
 # error domain: search
 # empty search result
-#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:96
+#: src/MShop/Plugin/Provider/Order/PropertyMatch.php:84
 #, php-format
 msgid "Product matching given properties not found"
 msgstr ""
@@ -707,30 +708,37 @@ msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:142
+#: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:132
 #, php-format
 msgid "Product with code \"%1$s\" not found"
 msgstr ""
 
 # error domain: order
 # error type: value, parameter, object etc. not available
-#: src/MShop/Order/Item/Base/Default.php:745
+#: src/MShop/Order/Item/Base/Default.php:744
 #, php-format
 msgid "Product with the same signatur not available"
 msgstr ""
 
 # error domain: order
 # error type: value, parameter, object etc. not available
-#: src/MShop/Plugin/Provider/Order/ProductGone.php:114
+#: src/MShop/Plugin/Provider/Order/ProductGone.php:100
 #, php-format
 msgid "Products in basket not available"
 msgstr ""
 
 # error domain: plugin
 # error type: value, parameter, object etc. not available
-#: src/MShop/Plugin/Provider/Order/ProductStock.php:107
+#: src/MShop/Plugin/Provider/Order/ProductStock.php:93
 #, php-format
 msgid "Products out of stock"
+msgstr ""
+
+# error domain: order
+# error type: value not within allowed range
+#: src/MShop/Order/Item/Default.php:267
+#, php-format
+msgid "Property name \"%1$s\" not within allowed range"
 msgstr ""
 
 # error domain: misc.
@@ -800,7 +808,7 @@ msgstr ""
 
 # error domain: context
 # error type: value, parameter, object etc. not available
-#: src/MShop/Context/Item/Default.php:234
+#: src/MShop/Context/Item/Default.php:249
 #, php-format
 msgid "Session object not available"
 msgstr ""
@@ -826,56 +834,56 @@ msgstr ""
 msgid "Site for code \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:95
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:85
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:72
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:60
 #, php-format
 msgid "The maximum product quantity is %1$d"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:107
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:97
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:99
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:87
 #, php-format
 msgid "The maximum product value is %1$s"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:87
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:75
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/ProductLimit.php:115
+#: src/MShop/Plugin/Provider/Order/ProductLimit.php:103
 #, php-format
 msgid "The maximum value of all products is %1$s"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:89
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:79
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/BasketLimits.php:101
+#: src/MShop/Plugin/Provider/Order/BasketLimits.php:91
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
 msgstr ""
 
 # error domain: plugin
 # error type: misc.
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:137
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:126
 #, php-format
 msgid "The price of at least one product in the basket has changed in the meantime and was updated"
 msgstr ""
 
 # error domain: plugin
 # error type: value, parameter, object etc. not available
-#: src/MShop/Plugin/Provider/Order/Shipping.php:82
+#: src/MShop/Plugin/Provider/Order/Shipping.php:73
 #, php-format
 msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr ""
@@ -914,4 +922,11 @@ msgstr ""
 #: src/MShop/Service/Provider/Delivery/Default.php:323
 #, php-format
 msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed: %2$s"
+msgstr ""
+
+# error domain: context
+# error type: value, parameter, object etc. not available
+#: src/MShop/Context/Item/Default.php:301
+#, php-format
+msgid "View object not available"
 msgstr ""

@@ -35,7 +35,7 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		if ( ctype_alnum($name) === false )
 		{
 			$classname = is_string($name) ? 'Controller_Jobs_Service_Delivery_Process_' . $name : '<not a string>';
-			throw new Controller_Jobs_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+			throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'Controller_Jobs_Interface';
