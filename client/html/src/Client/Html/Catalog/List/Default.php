@@ -236,12 +236,13 @@ class Client_Html_Catalog_List_Default
 				$stockTarget = $config->get( 'client/html/catalog/stock/url/target' );
 				$stockController = $config->get( 'client/html/catalog/stock/url/controller', 'catalog' );
 				$stockAction = $config->get( 'client/html/catalog/stock/url/action', 'stock' );
+				$stockConfig = $config->get( 'client/html/catalog/stock/url/config', array() );
 
 				$productIds = array_keys( $products );
 				sort( $productIds );
 
 				$params = array( 's-product-id' => implode( ' ', $productIds ) );
-				$view->listStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params );
+				$view->listStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
 			}
 
 
