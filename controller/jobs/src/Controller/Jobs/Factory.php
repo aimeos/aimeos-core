@@ -49,7 +49,7 @@ class Controller_Jobs_Factory
 			foreach( $parts as $key => $part )
 			{
 				if( ctype_alnum( $part ) === false ) {
-					throw new Controller_Jobs_Exception( sprintf( 'Invalid controller "%1$s" in "%2$s"', $part, $path ) );
+					throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in controller name "%1$s" in "%2$s"', $part, $path ) );
 				}
 
 				$parts[$key] = ucwords( $part );
@@ -58,13 +58,13 @@ class Controller_Jobs_Factory
 			$factory = 'Controller_Jobs_' . join( '_', $parts ) . '_Factory';
 
 			if( class_exists( $factory ) === false ) {
-				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $factory ) );
+				throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not available', $factory ) );
 			}
 
 			$controller = call_user_func_array( array( $factory, 'createController' ), array( $context, $arcavias ) );
 
 			if( $controller === false ) {
-				throw new Controller_Jobs_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
+				throw new Controller_Jobs_Exception( sprintf( 'Unable to call factory method "%1$s"', $factory . '::createController') );
 			}
 
 			self::$_controllers[$path] = $controller;

@@ -1,4 +1,4 @@
-# English translations for html client.
+# English translations for arcavias-core (HTML client countries).
 # Copyright (C) 2013
 # This file is distributed under the same license as the arcavias-core package.
 # Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
