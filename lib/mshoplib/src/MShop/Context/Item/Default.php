@@ -155,6 +155,7 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 		$locale = ( $locale !== null ? $locale : $this->getLocale()->getLanguageId() );
 
 		if( !isset( $this->_i18n[$locale] ) ) {
+			/// Locale ID %1$s
 			throw new MShop_Exception( sprintf( 'Internationalization object not available for "%1$s"', $locale ) );
 		}
 

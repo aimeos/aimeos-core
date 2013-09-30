@@ -1,27 +1,28 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# German translations for arcavias-core (job controller).
+# Copyright (C) 2013
+# This file is distributed under the same license as the arcavias-core package.
+# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013.
 #
-#, fuzzy
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-27 13:26+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2013-09-24 16:22+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
+"Language: German\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
 #: src/Controller/Jobs/Common/Factory/Abstract.php:147
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
@@ -29,17 +30,17 @@ msgstr ""
 #: src/Controller/Jobs/Factory.php:61
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Klasse \"%1$s\" nicht verfügbar"
 
 #: src/Controller/Jobs/Factory.php:42
 #, php-format
 msgid "Controller path is empty"
-msgstr ""
+msgstr "Controllerpfad ist leer"
 
 #: src/Controller/Jobs/Order/Email/Confirm/Default.php:137
 #, php-format
 msgid "Error while trying to send confirmation e-mail for order ID \"%1$s\": %2$s"
-msgstr ""
+msgstr "Fehler beim Versand der Bestätigungs-E-Mail für Bestellung \"%1$s\": %2$s"
 
 #: src/Controller/Jobs/Order/Email/Confirm/Factory.php:38
 #: src/Controller/Jobs/Order/Product/Stock/Factory.php:38
@@ -50,40 +51,40 @@ msgstr ""
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:38
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
 #: src/Controller/Jobs/Factory.php:52
 #, php-format
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Controllername \"%1$s\" in \"%2$s\" enthält unerlaubte Zeichen"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:68
 #, php-format
 msgid "Invalid characters in job name \"%1$s\""
-msgstr ""
+msgstr "Jobname \"%1$s\" enthält unerlaubte Zeichen"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:88
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Ungültige Domäne \"%1$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:74
 #, php-format
 msgid "Invalid job method \"%1$s\""
-msgstr ""
+msgstr "Ungültige Jobmethode \"%1$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:91
 #, php-format
 msgid "Method \"%1$s\" not available"
-msgstr ""
+msgstr "Methode \"%1$s\" nicht verfügbar"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
 #: src/Controller/Jobs/Factory.php:67
 #, php-format
 msgid "Unable to call factory method \"%1$s\""
-msgstr ""
+msgstr "Factorymethode \"%1$s\" kann nicht aufgerufen werden"
 
 #: src/Controller/Jobs/Common/Decorator/Abstract.php:51
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"

@@ -1,11 +1,11 @@
-# English translations for codes.
+# English translations for arcavias-core (HTML client codes).
 # Copyright (C) 2013
 # This file is distributed under the same license as the arcavias-core package.
 # Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: arcavias-core 2013-01\n"
+"Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2013-01-18 16:33+0100\n"
@@ -140,10 +140,6 @@ msgid "stat:7"
 msgstr "returned"
 
 #. Stock level
-msgid "stock-unlimited"
-msgstr "available"
-
-#. Stock level
 msgid "stock-high"
 msgstr "in stock"
 
@@ -155,9 +151,13 @@ msgstr "only a few available"
 msgid "stock-out"
 msgstr "out of stock"
 
+#. Stock level
+msgid "stock-unlimited"
+msgstr "available"
+
 #. Warehouse code
 msgid "warehouse:default"
-msgstr ""
+msgstr " "
 
 #. Product attribute
 msgid "width"

@@ -264,7 +264,7 @@ class MShop_Order_Item_Default
 			case 'oldDeliveryStatus':
 				return $this->_oldDeliveryStatus;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Invalid property name "%1$s"', $name ) );
+				throw new MShop_Order_Exception( sprintf( 'Property name "%1$s" not within allowed range', $name ) );
 		}
 	}
 }

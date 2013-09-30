@@ -65,7 +65,7 @@ class Controller_Jobs_Admin_Job_Default
 					$job = $item->getMethod();
 
 					if( preg_match( '/^[a-zA-Z0-9\_]+\.[a-zA-Z0-9\_]+$/', $job ) !== 1 ) {
-						throw new Controller_Jobs_Exception( sprintf( 'Invalid job name "%1$s"', $job ) );
+						throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in job name "%1$s"', $job ) );
 					}
 
 					$parts = explode( '.', $job );
@@ -78,7 +78,7 @@ class Controller_Jobs_Admin_Job_Default
 					$method = $parts[1];
 
 					if( class_exists( $name ) === false ) {
-						throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not found', $name ) );
+						throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not available', $name ) );
 					}
 
 					$name .= '::createController';
@@ -88,7 +88,7 @@ class Controller_Jobs_Admin_Job_Default
 					}
 
 					if( method_exists( $controller, $method ) === false ) {
-						throw new Controller_Jobs_Exception( sprintf( 'Method "%1$s" not found', $method ) );
+						throw new Controller_Jobs_Exception( sprintf( 'Method "%1$s" not available', $method ) );
 					}
 
 					$result = $controller->$method( (object) $item->getParameter() );
