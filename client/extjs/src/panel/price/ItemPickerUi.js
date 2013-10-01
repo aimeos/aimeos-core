@@ -122,7 +122,8 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 				id : 'reftaxrate',
 				width : 70,
 				align : 'right',
-				hidden : true,
+				hidden : !MShop.Config.get( 'client/extjs/panel/price/itempickerui/taxrate', 
+				MShop.Config.get('client/extjs/panel/price/taxrate', false ) ),
 				renderer : this.refDecimalColumnRenderer.createDelegate(this, [ "price.taxrate" ], true)
 			}
 		];

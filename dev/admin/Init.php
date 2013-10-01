@@ -86,6 +86,12 @@ class Init
 	}
 
 
+	public function getJsonClientConfig()
+	{
+		return json_encode( array( 'client' => $this->_context->getConfig()->get( 'client', array() ) ) );
+	}
+
+
 	protected function _createContext( array $conf )
 	{
 		$context = new MShop_Context_Item_Default();

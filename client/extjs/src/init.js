@@ -20,8 +20,11 @@ Ext.onReady(function() {
         'useNamedParams'    : true
     }));
     
-    // init schemas
-    MShop.Schema.register(MShop.config.itemschema, MShop.config.searchschema);
+	// init schemas
+	MShop.Schema.register(MShop.config.itemschema, MShop.config.searchschema);
+    
+	//init configs
+	MShop.Config.init(MShop.config.configuration);
     
     // no endswith textfilters operators
     Ext.ux.AdvancedSearch.TextFilter.prototype.operators = ['equals', 'contains', 'startswith'];

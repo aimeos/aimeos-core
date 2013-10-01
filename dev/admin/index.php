@@ -24,6 +24,7 @@ try
 	$itemSchema = $jsonrpc->getJsonItemSchemas();
 	$searchSchema = $jsonrpc->getJsonSearchSchemas();
 	$smd = $jsonrpc->getJsonSmd( 'jsonrpc.php' );
+	$config = $init->getJsonClientConfig();
 }
 catch( Exception $e )
 {
@@ -41,6 +42,8 @@ catch( Exception $e )
 	<script type="text/javascript">
 
 		Ext.ns('MShop.config');
+		MShop.config.configuration = '<?php echo $config; ?>';
+
 		MShop.config.activeTab = <?php echo isset( $_REQUEST['tab'] ) ? $_REQUEST['tab'] : 0; ?>;
 		MShop.config.urlTemplate = "index.php?&site={site}&tab={tab}";
 
