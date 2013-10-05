@@ -3,7 +3,6 @@ client/extjs/deploy/*
 vendor/
 
 misc/apidoc/
-dev/images/*
 coverage/
 *.junit.xml
 *.log
