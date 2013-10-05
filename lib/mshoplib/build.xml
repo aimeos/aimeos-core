@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Arcavias library" default="all">
+<project name="Arcavias MShop library" default="all">
 	
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />

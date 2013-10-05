@@ -25,7 +25,7 @@ class Controller_Jobs_Service_Delivery_Process_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Process service delivery job' );
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Process delivery services' );
 	}
 
 

@@ -40,7 +40,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Process service delivery job', $this->_object->getName() );
+		$this->assertEquals( 'Process delivery services', $this->_object->getName() );
 	}
 
 
