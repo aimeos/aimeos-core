@@ -57,11 +57,11 @@ class Controller_Jobs_Order_Email_Confirm_DefaultTest extends MW_Unittest_Testca
 		$arcavias = TestHelper::getArcavias();
 
 
-		$mailStub = $this->getMockBuilder( 'MW_Mail_Zend' )
+		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$mailMsgStub = $this->getMockBuilder( 'MW_Mail_Message_Zend' )
+		$mailMsgStub = $this->getMockBuilder( 'MW_Mail_Message_None' )
 			->disableOriginalConstructor()
 			->disableOriginalClone()
 			->getMock();
@@ -128,7 +128,7 @@ class Controller_Jobs_Order_Email_Confirm_DefaultTest extends MW_Unittest_Testca
 		$arcavias = TestHelper::getArcavias();
 
 
-		$mailStub = $this->getMockBuilder( 'MW_Mail_Zend' )
+		$mailStub = $this->getMockBuilder( 'MW_Mail_None' )
 			->disableOriginalConstructor()
 			->getMock();
 

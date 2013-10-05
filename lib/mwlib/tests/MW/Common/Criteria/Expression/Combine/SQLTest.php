@@ -16,7 +16,7 @@ class MW_Common_Criteria_Expression_Combine_SQLTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		if( MW_TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 	}
@@ -52,7 +52,7 @@ class MW_Common_Criteria_Expression_Combine_SQLTest extends MW_Unittest_Testcase
 
 	public function testToString()
 	{
-		$dbm = MW_TestHelper::getDBManager();
+		$dbm = TestHelper::getDBManager();
 		$conn = $dbm->acquire();
 		$dbm->release( $conn );
 

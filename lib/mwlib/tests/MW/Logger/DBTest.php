@@ -22,12 +22,12 @@ class MW_Logger_DBTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		if( MW_TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$this->_dbm = MW_TestHelper::getDBManager();
+		$this->_dbm = TestHelper::getDBManager();
 
 		$conn = $this->_dbm->acquire();
 

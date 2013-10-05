@@ -37,7 +37,7 @@ set_include_path( implode( PATH_SEPARATOR, $path ) );
 /*
  * Use autoload function for resolving class names
  */
-require_once 'MW/TestHelper.php';
-if( spl_autoload_register( 'MW_TestHelper::autoload' ) === false ) {
+require_once 'TestHelper.php';
+if( spl_autoload_register( 'TestHelper::autoload' ) === false ) {
 	throw new Exception( 'Unable to register autoloader' );
 }

@@ -20,14 +20,14 @@ class MW_Setup_DBSchema_MysqlTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$config = MW_TestHelper::getConfig();
+		$config = TestHelper::getConfig();
 
 		if( $config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$this->_dbm = MW_TestHelper::getDBManager();
+		$this->_dbm = TestHelper::getDBManager();
 		$conn = $this->_dbm->acquire();
 
 		$sql = '
@@ -55,7 +55,7 @@ class MW_Setup_DBSchema_MysqlTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		$this->_dbm = MW_TestHelper::getDBManager();
+		$this->_dbm = TestHelper::getDBManager();
 
 		$conn = $this->_dbm->acquire();
 		$conn->create( 'DROP INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test"' )->execute()->finish();

@@ -9,27 +9,14 @@
 
 
 /**
- * Zend implementation for creating e-mails.
+ * Black hole e-mail message implementation.
  *
  * @package MW
  * @subpackage Mail
  */
-class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
+class MW_Mail_Message_None
+	implements MW_Mail_Message_Interface
 {
-	private $_object;
-
-
-	/**
-	 * Initializes the message instance.
-	 *
-	 * @param Zend_Mail $object Zend mail object
-	 */
-	public function __construct( Zend_Mail $object )
-	{
-		$this->_object = $object;
-	}
-
-
 	/**
 	 * Adds a source e-mail address of the message.
 	 *
@@ -39,7 +26,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function addFrom( $email, $name = null )
 	{
-		$this->_object->setFrom( $email, $name );
 		return $this;
 	}
 
@@ -53,7 +39,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function addTo( $email, $name = null )
 	{
-		$this->_object->addTo( $email, $name );
 		return $this;
 	}
 
@@ -67,7 +52,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function addCc( $email, $name = null )
 	{
-		$this->_object->addCc( $email, $name );
 		return $this;
 	}
 
@@ -81,7 +65,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function addBcc( $email, $name = null )
 	{
-		$this->_object->addBcc( $email, $name );
 		return $this;
 	}
 
@@ -95,7 +78,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function addReplyTo( $email, $name = null )
 	{
-		$this->_object->setReplyTo( $email, $name );
 		return $this;
 	}
 
@@ -109,7 +91,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function setSender( $email, $name = null )
 	{
-		$this->_object->setFrom( $email, $name );
 		return $this;
 	}
 
@@ -122,7 +103,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function setSubject( $subject )
 	{
-		$this->_object->setSubject( $subject );
 		return $this;
 	}
 
@@ -135,7 +115,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function setBody( $message )
 	{
-		$this->_object->setBodyText( $message );
 		return $this;
 	}
 
@@ -148,7 +127,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function setBodyHtml( $message )
 	{
-		$this->_object->setBodyHtml( $message );
 		return $this;
 	}
 
@@ -164,30 +142,6 @@ class MW_Mail_Message_Zend implements MW_Mail_Message_Interface
 	 */
 	public function addAttachment( $data, $mimetype, $filename, $disposition = 'attachment' )
 	{
-		$enc = Zend_Mime::ENCODING_BASE64;
-		$part = $this->_object->createAttachment( $data, $mimetype, $disposition, $enc, $filename );
-
-		$this->_object->addAttachment( $part );
 		return $this;
-	}
-
-
-	/**
-	 * Returns the internal Zend mail object.
-	 *
-	 * @return Zend_Mail Zend mail object
-	 */
-	public function getObject()
-	{
-		return $this->_object;
-	}
-
-
-	/**
-	 * Clones the internal objects.
-	 */
-	public function __clone()
-	{
-		$this->_object = clone $this->_object;
 	}
 }
