@@ -67,6 +67,7 @@
 
 
 	<target name="check" description="Executes all checks">
+		<property name="codestddir" value="${project.basedir}/misc/coding" override="true" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/extjs" />
@@ -82,6 +83,7 @@
 	</target>
 
 	<target name="checkext" description="Executes checks of specific extension directory">
+		<property name="codestddir" value="${project.basedir}/misc/coding" override="true" />
 		<phing target="check" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
 	</target>
 

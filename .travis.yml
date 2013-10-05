@@ -10,6 +10,6 @@ before_script:
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
   - mysql -e 'create database arcavias;'
-  - cp config/.resource.php.ci config/resource.php
-  - cp lib/mwlib/tests/config/.resource.php.ci lib/mwlib/tests/config/resource.php
+  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'arcavias', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ) );" > config/resource.php
+  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'arcavias', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ) );" > lib/mwlib/tests/config/resource.php
 script: "phing setup && phing"
