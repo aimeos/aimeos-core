@@ -2,8 +2,8 @@ resource.php
 client/extjs/deploy/*
 vendor/
 
+misc/apidoc/
 dev/images/*
-dev/apidoc/
 coverage/
 *.junit.xml
 *.log

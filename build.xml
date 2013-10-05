@@ -88,12 +88,12 @@
 
 	<target name="doc" description="Generates the API documentation">
 		<echo msg="Generating API documentation" />
-		<delete dir="${coredir}/dev/apidoc" quiet="true" failonerror="false" />
+		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
 		<phpdocext title="Arcavias API documentation"
-			destdir="${coredir}/dev/apidoc"
+			destdir="${coredir}/misc/apidoc"
 			output="HTML:frames/Extjs:default,HTML:Smarty:PHP"
 			sourcecode="true"
-			templatebase="dev/phpdoc"
+			templatebase="misc/phpdoc"
 			undocumentedelements="true">
 			<fileset dir="${coredir}">
 				<include name="Arcavias.php" />
@@ -150,7 +150,7 @@
 
 
 	<target name="build" description="Creates all files to be generated" >
-		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/dev/phing" />
+		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/misc/phing" />
 		<jsbpackages />
 		<exec command="tx pull -a" checkreturn="true" logoutput="true"/>
 		<phing target="build" haltonfailure="true" dir="${coredir}/client/html" />
