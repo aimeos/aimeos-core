@@ -47,12 +47,12 @@ class MW_Common_Criteria_SQLTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		if( MW_TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$dbm = MW_TestHelper::getDBManager();
+		$dbm = TestHelper::getDBManager();
 
 		$conn = $dbm->acquire();
 		$this->_object = new MW_Common_Criteria_SQL( $conn );

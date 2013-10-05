@@ -48,14 +48,14 @@ class MW_Setup_Task_AbstractTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$config = MW_TestHelper::getConfig();
+		$config = TestHelper::getConfig();
 
 		if( $config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$dbm = MW_TestHelper::getDBManager();
+		$dbm = TestHelper::getDBManager();
 		$conn = $dbm->acquire();
 
 		$schema = new MW_Setup_DBSchema_Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );
