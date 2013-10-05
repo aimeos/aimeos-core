@@ -27,7 +27,7 @@
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="phpcs -n --standard=${coredir}/coding/Metaways config setup src tests/MAdmin tests/MShop tests/MW tests/Perf tests/bootstrap.php tests/TestHelper.php"
+		<exec command="phpcs -n --standard=${codestddir}/Metaways config setup src tests/MAdmin tests/MShop tests/MW tests/Perf tests/bootstrap.php tests/TestHelper.php"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 
