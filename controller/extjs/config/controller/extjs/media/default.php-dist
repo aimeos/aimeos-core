@@ -73,8 +73,9 @@ return array(
 		
 		/*
 		 * ImageMagick "convert" command for converting an image
+		 * The "-delete 1" removes a second image if there is more then one part of the file
 		 */
-		'convert' => 'convert %1$s -resize %3$sx%4$s %2$s',
+		'convert' => 'convert %1$s -resize %3$sx%4$s -delete 1 %2$s',
 	),
 	
 	/*
