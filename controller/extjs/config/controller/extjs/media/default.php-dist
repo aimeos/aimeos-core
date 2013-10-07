@@ -73,8 +73,9 @@ return array(
 		
 		/*
 		 * ImageMagick "convert" command for converting an image
+		 * The "-flatten" creates only one image even if there are multiple layers
 		 */
-		'convert' => 'convert %1$s -resize %3$sx%4$s %2$s',
+		'convert' => 'convert %1$s -resize %3$sx%4$s -flatten %2$s',
 	),
 	
 	/*
