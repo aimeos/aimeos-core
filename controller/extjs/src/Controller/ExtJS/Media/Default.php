@@ -407,7 +407,7 @@ class Controller_ExtJS_Media_Default
 		$maxwidth = ( $maxwidth != null ? (int) $maxwidth : '' );
 		$maxheight = ( $maxheight != null ? (int) $maxheight : '' );
 
-		$cmd = $this->_getContext()->getConfig()->get( 'controller/extjs/media/default/command/convert', 'convert -quiet %1$s -resize %3$sx%4$s %2$s' );
+		$cmd = $this->_getContext()->getConfig()->get( 'controller/extjs/media/default/command/convert', 'convert -quiet %1$s -resize %3$sx%4$s -flatten %2$s' );
 
 		$cmdline = sprintf( $cmd, escapeshellarg( $src ), escapeshellarg( $dest ), (string) $maxwidth, (string) $maxheight );
 		$this->_getContext()->getLogger()->log( 'Executing: ' . $cmdline, MW_Logger_Abstract::DEBUG );
