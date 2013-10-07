@@ -144,4 +144,18 @@ class MW_Mail_Message_None
 	{
 		return $this;
 	}
+
+
+	/**
+	 * Embeds an attachment into the message and returns its reference.
+	 *
+	 * @param string $data Binary or string
+	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
+	 * @param string|null $filename Name of the attached file
+	 * @return string Content ID for referencing the attachment in the HTML body
+	 */
+	public function embedAttachment( $data, $mimetype, $filename )
+	{
+		return '';
+	}
 }
