@@ -104,4 +104,14 @@ interface MW_Mail_Message_Interface
 	 * @return MW_Mail_Message_Interface Message object
 	 */
 	public function addAttachment( $data, $mimetype, $filename, $disposition = 'attachment' );
+
+	/**
+	 * Embeds an attachment into the message and returns its reference.
+	 *
+	 * @param string $data Binary or string
+	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
+	 * @param string|null $filename Name of the attached file
+	 * @return string Content ID for referencing the attachment in the HTML body
+	 */
+	public function embedAttachment( $data, $mimetype, $filename );
 }
