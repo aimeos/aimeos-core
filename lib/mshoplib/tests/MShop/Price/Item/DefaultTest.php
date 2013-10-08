@@ -49,7 +49,7 @@ class MShop_Price_Item_DefaultTest extends MW_Unittest_Testcase
 			'label' => 'Price label',
 			'quantity' => 1500,
 			'value' => 195.50,
-			'costs' => 19.95,
+			'shipping' => 19.95,
 			'rebate' => 10.00,
 			'taxrate' => 19.00,
 			'status' => true,

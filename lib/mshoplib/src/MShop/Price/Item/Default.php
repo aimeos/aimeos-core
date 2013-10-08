@@ -181,7 +181,7 @@ class MShop_Price_Item_Default
 	 */
 	public function getCosts()
 	{
-		return ( isset( $this->_values['costs'] ) ? (string) $this->_values['costs'] : '0.00' );
+		return ( isset( $this->_values['shipping'] ) ? (string) $this->_values['shipping'] : '0.00' );
 	}
 
 
@@ -196,7 +196,7 @@ class MShop_Price_Item_Default
 
 		$this->_checkPrice( $price );
 
-		$this->_values['costs'] = $this->_formatNumber( $price );
+		$this->_values['shipping'] = $this->_formatNumber( $price );
 		$this->setModified();
 	}
 
@@ -319,7 +319,7 @@ class MShop_Price_Item_Default
 		}
 
 		$this->_values['value'] = $this->_formatNumber( $this->getValue() + $item->getValue() * $quantity );
-		$this->_values['costs'] = $this->_formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
+		$this->_values['shipping'] = $this->_formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
 		$this->_values['rebate'] = $this->_formatNumber( $this->getRebate() + $item->getRebate() * $quantity );
 	}
 
@@ -339,7 +339,7 @@ class MShop_Price_Item_Default
 		$list['price.domain'] = $this->getDomain();
 		$list['price.quantity'] = $this->getQuantity();
 		$list['price.value'] = $this->getValue();
-		$list['price.costs'] = $this->getCosts();
+		$list['price.shipping'] = $this->getCosts();
 		$list['price.rebate'] = $this->getRebate();
 		$list['price.taxrate'] = $this->getTaxRate();
 		$list['price.status'] = $this->getStatus();
