@@ -94,7 +94,7 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 	onExpandNode : function (node) {
 		var domain = this.domain;
 		Ext.each(node["childNodes"], function(node) {
-			if(node["attributes"].hasOwnProperty(domain + ".hasChildren") && node["attributes"][domain + ".hasChildren"] == false) {
+			if(node["attributes"].hasOwnProperty(domain + ".hasChildren") && node["attributes"][domain + ".hasChildren"] === false) {
 				node.ui.ecNode.style.visibility = 'hidden'; 
 			}
 		}, this);

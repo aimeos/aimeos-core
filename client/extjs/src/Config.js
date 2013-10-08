@@ -63,4 +63,4 @@ MShop.Config = {
 
 		return value;
 	}
-}
+};
