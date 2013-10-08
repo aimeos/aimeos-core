@@ -227,6 +227,7 @@ class MShop_Catalog_Item_Default
 			'catalog.ctime' => $this->_node->__get('ctime'),
 			'catalog.mtime' => $this->_node->__get('mtime'),
 			'catalog.editor' => $this->_node->__get('editor'),
+			'catalog.hasChildren' => $this->hasChildren()
 		);
 	}
 
