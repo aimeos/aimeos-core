@@ -3,8 +3,44 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "883a74262fb8cab978df2018ee37b5c8",
+    "hash": "8b38d8612dd829fd5f13f4a161e044df",
     "packages": [
+        {
+            "name": "arcavias/ext-phpexcel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Arcavias/ext-phpexcel.git",
+                "reference": "e9b256f635c1f2c0e06dc322d1e221169417ae4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Arcavias/ext-phpexcel/zipball/e9b256f635c1f2c0e06dc322d1e221169417ae4e",
+                "reference": "e9b256f635c1f2c0e06dc322d1e221169417ae4e",
+                "shasum": ""
+            },
+            "require": {
+                "arcavias/extension-installer": "dev-master"
+            },
+            "type": "arcavias-extension",
+            "autoload": {
+                "psr-0": {
+                    "MW": "lib/custom/src",
+                    "PHPExcel": "lib/phpexcel"
+                },
+                "classmap": [
+                    "lib/custom/src",
+                    "lib/phpexcel"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "description": "Arcavias extension for providing PHPExcel containers",
+            "homepage": "http://www.arcavias.com/en",
+            "time": "2013-10-07 17:17:39"
+        },
         {
             "name": "arcavias/extension-installer",
             "version": "dev-master",
@@ -45,7 +81,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "arcavias/extension-installer": 20
+        "arcavias/extension-installer": 20,
+        "arcavias/ext-phpexcel": 20
     },
     "platform": {
         "php": ">=5.2.0",
