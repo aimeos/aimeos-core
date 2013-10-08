@@ -413,7 +413,7 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getMediaUrl(), $arrayObject['order.base.product.mediaurl'] );
 		$this->assertEquals( $this->_object->getPosition(), $arrayObject['order.base.product.position'] );
 		$this->assertEquals( $this->_object->getPrice()->getValue(), $arrayObject['order.base.product.price'] );
-		$this->assertEquals( $this->_object->getPrice()->getCosts(), $arrayObject['order.base.product.shipping'] );
+		$this->assertEquals( $this->_object->getPrice()->getCosts(), $arrayObject['order.base.product.costs'] );
 		$this->assertEquals( $this->_object->getPrice()->getRebate(), $arrayObject['order.base.product.rebate'] );
 		$this->assertEquals( $this->_object->getPrice()->getTaxRate(), $arrayObject['order.base.product.taxrate'] );
 		$this->assertEquals( $this->_object->getQuantity(), $arrayObject['order.base.product.quantity'] );

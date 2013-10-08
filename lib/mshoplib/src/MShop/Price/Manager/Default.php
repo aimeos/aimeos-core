@@ -77,9 +77,9 @@ class MShop_Price_Manager_Default
 			'type' => 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'price.shipping' => array(
-			'code' => 'price.shipping',
-			'internalcode' => 'mpri."shipping"',
+		'price.costs' => array(
+			'code' => 'price.costs',
+			'internalcode' => 'mpri."costs"',
 			'label' => 'Price shipping costs',
 			'type' => 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
@@ -507,7 +507,7 @@ class MShop_Price_Manager_Default
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * Possible search keys: 'price.id', 'price.currencyid', 'price.quantity',
-	 *  'price.value','price.shipping', 'price.rebate', 'price.taxrate', 'price.status'.
+	 *  'price.value','price.costs', 'price.rebate', 'price.taxrate', 'price.status'.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total

@@ -49,7 +49,7 @@ class MShop_Price_Item_DefaultTest extends MW_Unittest_Testcase
 			'label' => 'Price label',
 			'quantity' => 1500,
 			'value' => 195.50,
-			'shipping' => 19.95,
+			'costs' => 19.95,
 			'rebate' => 10.00,
 			'taxrate' => 19.00,
 			'status' => true,
@@ -253,7 +253,7 @@ class MShop_Price_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getCurrencyId(), $arrayObject['price.currencyid'] );
 		$this->assertEquals( $this->_object->getQuantity(), $arrayObject['price.quantity'] );
 		$this->assertEquals( $this->_object->getValue(), $arrayObject['price.value'] );
-		$this->assertEquals( $this->_object->getCosts(), $arrayObject['price.shipping'] );
+		$this->assertEquals( $this->_object->getCosts(), $arrayObject['price.costs'] );
 		$this->assertEquals( $this->_object->getRebate(), $arrayObject['price.rebate'] );
 		$this->assertEquals( $this->_object->getTaxrate(), $arrayObject['price.taxrate'] );
 		$this->assertEquals( $this->_object->getStatus(), $arrayObject['price.status'] );

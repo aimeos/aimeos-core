@@ -71,9 +71,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'order.base.shipping'=> array(
-			'code'=>'order.base.shipping',
-			'internalcode'=>'mordba."shipping"',
+		'order.base.costs'=> array(
+			'code'=>'order.base.costs',
+			'internalcode'=>'mordba."costs"',
 			'label'=>'Order base shipping amount',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
@@ -334,7 +334,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				$price = $priceManager->createItem();
 				$price->setCurrencyId( $row['currencyid'] );
 				$price->setValue( $row['price'] );
-				$price->setCosts( $row['shipping'] );
+				$price->setCosts( $row['costs'] );
 				$price->setRebate( $row['rebate'] );
 
 				// you may need the site object! take care!
@@ -493,7 +493,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$price = $priceManager->createItem();
 		$price->setCurrencyId( $row['currencyid'] );
 		$price->setValue( $row['price'] );
-		$price->setCosts( $row['shipping'] );
+		$price->setCosts( $row['costs'] );
 		$price->setRebate( $row['rebate'] );
 
 		// you may need the site object! take care!

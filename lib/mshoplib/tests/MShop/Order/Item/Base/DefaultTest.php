@@ -262,7 +262,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getEditor(), $list['order.base.editor'] );
 
 		$this->assertEquals( $price->getValue(), $list['order.base.price'] );
-		$this->assertEquals( $price->getCosts(), $list['order.base.shipping'] );
+		$this->assertEquals( $price->getCosts(), $list['order.base.costs'] );
 		$this->assertEquals( $price->getRebate(), $list['order.base.rebate'] );
 		$this->assertEquals( $price->getCurrencyId(), $list['order.base.currencyid'] );
 	}

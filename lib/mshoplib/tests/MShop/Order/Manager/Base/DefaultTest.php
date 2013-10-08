@@ -71,7 +71,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions($search->compare('==', 'order.base.shipping', '1.50'));
+		$search->setConditions($search->compare('==', 'order.base.costs', '1.50'));
 		$results = $this->_object->searchItems($search);
 
 		if ( ($expected = reset($results)) === false ) {
@@ -85,7 +85,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'order.base.shipping', '1.50' ),
+			$search->compare( '==', 'order.base.costs', '1.50' ),
 			$search->compare( '==', 'order.base.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -182,7 +182,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.currencyid', 'EUR' );
 		$expr[] = $search->compare( '==', 'order.base.price', '53.50' );
-		$expr[] = $search->compare( '==', 'order.base.shipping', '1.50' );
+		$expr[] = $search->compare( '==', 'order.base.costs', '1.50' );
 		$expr[] = $search->compare( '==', 'order.base.rebate', '14.50' );
 		$expr[] = $search->compare( '~=', 'order.base.comment', 'This is a comment' );
 		$expr[] = $search->compare( '>=', 'order.base.mtime', '1970-01-01 00:00:00' );
@@ -226,7 +226,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
 		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
 		$expr[] = $search->compare( '==', 'order.base.product.price', '4.50' );
-		$expr[] = $search->compare( '==', 'order.base.product.shipping', '0.00' );
+		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.rebate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.taxrate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );
@@ -254,7 +254,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.service.code', 'OGONE' );
 		$expr[] = $search->compare( '==', 'order.base.service.name', 'ogone' );
 		$expr[] = $search->compare( '==', 'order.base.service.price', '0.00' );
-		$expr[] = $search->compare( '==', 'order.base.service.shipping', '0.00' );
+		$expr[] = $search->compare( '==', 'order.base.service.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.rebate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.taxrate', '0.00' );
 		$expr[] = $search->compare( '>=', 'order.base.service.mtime', '1970-01-01 00:00:00' );

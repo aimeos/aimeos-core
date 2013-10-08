@@ -312,7 +312,7 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Returns the price item for the product.
 	 *
-	 * @return MShop_Price_Item_Interface Price item with price, shipping and rebate
+	 * @return MShop_Price_Item_Interface Price item with price, costs and rebate
 	 */
 	public function getPrice()
 	{
@@ -323,7 +323,7 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Sets the price item for the product.
 	 *
-	 * @param MShop_Price_Item_Interface $price Price item containing price and shipping costs
+	 * @param MShop_Price_Item_Interface $price Price item containing price and additional costs
 	 */
 	public function setPrice( MShop_Price_Item_Interface $price )
 	{
@@ -337,7 +337,7 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Returns the price item for the product whose values are multiplied with the quantity.
 	 *
-	 * @return MShop_Price_Item_Interface Price item with price, shipping and rebate
+	 * @return MShop_Price_Item_Interface Price item with price, additional costs and rebate
 	 */
 	public function getSumPrice()
 	{
@@ -496,7 +496,7 @@ class MShop_Order_Item_Base_Product_Default
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.product.position'] = $this->getPosition();
 		$list['order.base.product.price'] = $this->_price->getValue();
-		$list['order.base.product.shipping'] = $this->_price->getCosts();
+		$list['order.base.product.costs'] = $this->_price->getCosts();
 		$list['order.base.product.rebate'] = $this->_price->getRebate();
 		$list['order.base.product.taxrate'] = $this->_price->getTaxRate();
 		$list['order.base.product.quantity'] = $this->getQuantity();

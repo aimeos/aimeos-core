@@ -88,7 +88,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 		$serviceSearch = $orderBaseServiceManager->createSearch();
 		$exp = array(
 			$serviceSearch->compare( '==', 'order.base.service.type', 'delivery' ),
-			$serviceSearch->compare( '==', 'order.base.service.shipping', '5.00' )
+			$serviceSearch->compare( '==', 'order.base.service.costs', '5.00' )
 		);
 		$serviceSearch->setConditions( $serviceSearch->combine( '&&', $exp ) );
 		$results = $orderBaseServiceManager->searchItems( $serviceSearch );

@@ -88,9 +88,9 @@ class MShop_Order_Manager_Base_Service_Default
 			'type' => 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'order.base.service.shipping' => array(
-			'code' => 'order.base.service.shipping',
-			'internalcode' => 'mordbase."shipping"',
+		'order.base.service.costs' => array(
+			'code' => 'order.base.service.costs',
+			'internalcode' => 'mordbase."costs"',
 			'label' => 'Order base service shipping',
 			'type' => 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
@@ -295,7 +295,7 @@ class MShop_Order_Manager_Base_Service_Default
 					$price = $priceManager->createItem();
 					$price->setValue($row['price']);
 					$price->setRebate($row['rebate']);
-					$price->setCosts($row['shipping']);
+					$price->setCosts($row['costs']);
 					$price->setTaxRate($row['taxrate']);
 					$items[ $row['id'] ] = array( 'price' => $price, 'item' => $row );
 				}

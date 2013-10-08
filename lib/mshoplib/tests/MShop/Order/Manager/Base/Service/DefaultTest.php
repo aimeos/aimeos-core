@@ -82,7 +82,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.service.name', 'ogone' );
 		$expr[] = $search->compare( '==', 'order.base.service.mediaurl', 'somewhere/thump1.jpg' );
 		$expr[] = $search->compare( '==', 'order.base.service.price', '0.00' );
-		$expr[] = $search->compare( '==', 'order.base.service.shipping', '0.00' );
+		$expr[] = $search->compare( '==', 'order.base.service.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.rebate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.taxrate', '0.00' );
 		$expr[] = $search->compare( '>=', 'order.base.service.mtime', '1970-01-01 00:00:00' );

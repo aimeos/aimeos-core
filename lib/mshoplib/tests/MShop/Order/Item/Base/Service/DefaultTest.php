@@ -275,7 +275,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 
 		$price = $this->_object->getPrice();
 		$this->assertEquals( $price->getValue(), $arrayObject['order.base.service.price'] );
-		$this->assertEquals( $price->getCosts(), $arrayObject['order.base.service.shipping'] );
+		$this->assertEquals( $price->getCosts(), $arrayObject['order.base.service.costs'] );
 		$this->assertEquals( $price->getRebate(), $arrayObject['order.base.service.rebate'] );
 		$this->assertEquals( $price->getTaxRate(), $arrayObject['order.base.service.taxrate'] );
 	}

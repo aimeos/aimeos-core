@@ -525,9 +525,9 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 
 	/**
-	 * Returns a price item with amounts calculated for the products, shipping costs, etc.
+	 * Returns a price item with amounts calculated for the products, costs, etc.
 	 *
-	 * @return MShop_Price_Item_Interface Price item with price, shipping and rebate the customer has to pay
+	 * @return MShop_Price_Item_Interface Price item with price, costs and rebate the customer has to pay
 	 */
 	public function getPrice()
 	{
@@ -625,7 +625,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			'order.base.comment' => $this->getComment(),
 			'order.base.customerid' => $this->getCustomerId(),
 			'order.base.price' => $price->getValue(),
-			'order.base.shipping' => $price->getCosts(),
+			'order.base.costs' => $price->getCosts(),
 			'order.base.rebate' => $price->getRebate(),
 			'order.base.currencyid' => $price->getCurrencyId(),
 			'order.base.status' => $this->getStatus(),

@@ -172,7 +172,7 @@ class MShop_Price_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'price.currencyid', 'EUR' );
 		$expr[] = $search->compare( '==', 'price.quantity', 100 );
 		$expr[] = $search->compare( '==', 'price.value', '580.00' );
-		$expr[] = $search->compare( '==', 'price.shipping', '20.00' );
+		$expr[] = $search->compare( '==', 'price.costs', '20.00' );
 		$expr[] = $search->compare( '==', 'price.rebate', '0.00' );
 		$expr[] = $search->compare( '==', 'price.taxrate', '19.00' );
 		$expr[] = $search->compare( '==', 'price.status', 1 );
