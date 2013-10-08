@@ -344,7 +344,7 @@ class MShop_Order_Item_Base_Product_Default
 		$price = clone $this->_price;
 
 		$price->setValue( $price->getValue() * $this->_values['quantity'] );
-		$price->setShipping( $price->getShipping() * $this->_values['quantity'] );
+		$price->setCosts( $price->getCosts() * $this->_values['quantity'] );
 		$price->getRebate( $price->getRebate() * $this->_values['quantity'] );
 
 		return $price;
@@ -496,7 +496,7 @@ class MShop_Order_Item_Base_Product_Default
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.product.position'] = $this->getPosition();
 		$list['order.base.product.price'] = $this->_price->getValue();
-		$list['order.base.product.shipping'] = $this->_price->getShipping();
+		$list['order.base.product.shipping'] = $this->_price->getCosts();
 		$list['order.base.product.rebate'] = $this->_price->getRebate();
 		$list['order.base.product.taxrate'] = $this->_price->getTaxRate();
 		$list['order.base.product.quantity'] = $this->getQuantity();

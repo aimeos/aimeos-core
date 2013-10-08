@@ -68,18 +68,18 @@ interface MShop_Price_Item_Interface
 	public function setValue( $price );
 
 	/**
-	 * Returns the shipping costs.
+	 * Returns the costs.
 	 *
-	 * @return numeric Shipping costs
+	 * @return numeric Costs
 	 */
-	public function getShipping();
+	public function getCosts();
 
 	/**
-	 * Sets the new shipping costs.
+	 * Sets the new costs.
 	 *
 	 * @param numeric $price Amount with two digits precision
 	 */
-	public function setShipping( $price );
+	public function setCosts( $price );
 
 	/**
 	 * Returns the rebate amount.

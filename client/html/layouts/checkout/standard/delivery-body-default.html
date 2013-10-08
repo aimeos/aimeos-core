@@ -48,9 +48,9 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
 <?php		$currency = $this->translate( 'client/html/currency', $servicePrices[$id]->getCurrencyId() ); ?>
 <?php		if( $servicePrices[$id]->getValue() > 0 ) : /// Service fee value (%1$s) and shipping cost value (%2$s) with currency (%3$s) ?>
-				<span class="price-value"><?php echo $enc->html( sprintf( $this->translate( 'client/html', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getShipping() ), $currency ) ); ?></span>
-<?php		elseif( $servicePrices[$id]->getShipping() > 0 ) : ?>
-				<span class="price-value"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $servicePrices[$id]->getShipping() ), $currency ) ); ?></span>
+				<span class="price-value"><?php echo $enc->html( sprintf( $this->translate( 'client/html', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getCosts() ), $currency ) ); ?></span>
+<?php		elseif( $servicePrices[$id]->getCosts() > 0 ) : ?>
+				<span class="price-value"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $servicePrices[$id]->getCosts() ), $currency ) ); ?></span>
 	<?php	endif; ?>
 <?php	endif; ?>
 				<div class="icons">

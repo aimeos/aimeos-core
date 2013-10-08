@@ -263,7 +263,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			$stmt->bind(4, $item->getLocale()->getLanguageId());
 			$stmt->bind(5, $priceItem->getCurrencyId());
 			$stmt->bind(6, $priceItem->getValue());
-			$stmt->bind(7, $priceItem->getShipping());
+			$stmt->bind(7, $priceItem->getCosts());
 			$stmt->bind(8, $priceItem->getRebate());
 			$stmt->bind(9, $item->getComment() );
 			$stmt->bind(10, $item->getStatus() );
@@ -334,7 +334,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				$price = $priceManager->createItem();
 				$price->setCurrencyId( $row['currencyid'] );
 				$price->setValue( $row['price'] );
-				$price->setShipping( $row['shipping'] );
+				$price->setCosts( $row['shipping'] );
 				$price->setRebate( $row['rebate'] );
 
 				// you may need the site object! take care!
@@ -493,7 +493,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$price = $priceManager->createItem();
 		$price->setCurrencyId( $row['currencyid'] );
 		$price->setValue( $row['price'] );
-		$price->setShipping( $row['shipping'] );
+		$price->setCosts( $row['shipping'] );
 		$price->setRebate( $row['rebate'] );
 
 		// you may need the site object! take care!

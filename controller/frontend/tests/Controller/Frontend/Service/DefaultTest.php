@@ -107,7 +107,7 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 		$price = $this->_object->getServicePrice( 'delivery', $service->getId(), $basket );
 
 		$this->assertEquals( '12.95', $price->getValue() );
-		$this->assertEquals( '1.99', $price->getShipping() );
+		$this->assertEquals( '1.99', $price->getCosts() );
 	}
 
 
@@ -125,7 +125,7 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 		$price = $this->_object->getServicePrice( 'delivery', $service->getId(), $basket );
 
 		$this->assertEquals( '12.95', $price->getValue() );
-		$this->assertEquals( '1.99', $price->getShipping() );
+		$this->assertEquals( '1.99', $price->getCosts() );
 	}
 
 

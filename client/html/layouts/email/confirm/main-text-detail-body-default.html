@@ -15,7 +15,7 @@ try
 {
 	$price = $this->confirmOrderBaseItem->getPrice();
 	$priceValue = $price->getValue();
-	$priceService = $price->getShipping();
+	$priceService = $price->getCosts();
 	$priceRebate = $price->getRebate();
 	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
 }
@@ -30,7 +30,7 @@ catch( Exception $e )
 try
 {
 	$deliveryPriceItem = $this->confirmOrderBaseItem->getService( 'delivery' )->getPrice();
-	$deliveryPriceService = $deliveryPriceItem->getShipping();
+	$deliveryPriceService = $deliveryPriceItem->getCosts();
 	$deliveryPriceValue = $deliveryPriceItem->getValue();
 }
 catch( Exception $e )
@@ -42,7 +42,7 @@ catch( Exception $e )
 try
 {
 	$paymentPriceItem = $this->confirmOrderBaseItem->getService( 'payment' )->getPrice();
-	$paymentPriceService = $paymentPriceItem->getShipping();
+	$paymentPriceService = $paymentPriceItem->getCosts();
 	$paymentPriceValue = $paymentPriceItem->getValue();
 }
 catch( Exception $e )

@@ -259,7 +259,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 			'AUTHORIZATIONID' => '111111111',
 			'INVNUM' => $this->_order->getId(),
 			'CURRENCYCODE' => $baseItem->getPrice()->getCurrencyId(),
-			'AMT' => ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getShipping() )
+			'AMT' => ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() )
 		);
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=capture method error';
 		$success = 'AUTHORIZATIONID=112233&TRANSACTIONID=111111111&PARENTTRANSACTIONID=12212AD&TRANSACTIONTYPE=express-checkout&AMT=22.30&FEEAMT=3.33&PAYMENTSTATUS=Completed&PENDINGREASON=None&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';

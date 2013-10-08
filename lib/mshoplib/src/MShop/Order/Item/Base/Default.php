@@ -534,7 +534,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 		if( $this->_modified !== false )
 		{
 			$this->_price->setValue( '0.00' );
-			$this->_price->setShipping( '0.00' );
+			$this->_price->setCosts( '0.00' );
 			$this->_price->setRebate( '0.00' );
 			$this->_price->setTaxRate( '0.00' );
 
@@ -625,7 +625,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			'order.base.comment' => $this->getComment(),
 			'order.base.customerid' => $this->getCustomerId(),
 			'order.base.price' => $price->getValue(),
-			'order.base.shipping' => $price->getShipping(),
+			'order.base.shipping' => $price->getCosts(),
 			'order.base.rebate' => $price->getRebate(),
 			'order.base.currencyid' => $price->getCurrencyId(),
 			'order.base.status' => $this->getStatus(),
@@ -712,7 +712,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 				continue;
 			}
 
-			if( $product->getPrice()->getShipping() !== $item->getPrice()->getShipping() ) {
+			if( $product->getPrice()->getCosts() !== $item->getPrice()->getCosts() ) {
 				continue;
 			}
 

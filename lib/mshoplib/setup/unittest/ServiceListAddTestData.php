@@ -130,7 +130,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 
 		$refIds = array();
 		foreach( $result as $item )	{
-			$refIds[ 'price/'.$item->getDomain().'/'.$item->getType().'/'.$item->getValue().'/'.$item->getShipping() ] = $item->getId();
+			$refIds[ 'price/'.$item->getDomain().'/'.$item->getType().'/'.$item->getValue().'/'.$item->getCosts() ] = $item->getId();
 		}
 
 		return $refIds;

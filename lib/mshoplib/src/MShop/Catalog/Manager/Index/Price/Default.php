@@ -260,7 +260,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 						$stmt->bind( 5, $listType );
 						$stmt->bind( 6, $priceItem->getType() );
 						$stmt->bind( 7, $priceItem->getValue() );
-						$stmt->bind( 8, $priceItem->getShipping() );
+						$stmt->bind( 8, $priceItem->getCosts() );
 						$stmt->bind( 9, $priceItem->getRebate() );
 						$stmt->bind( 10, $priceItem->getTaxRate() );
 						$stmt->bind( 11, $priceItem->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );

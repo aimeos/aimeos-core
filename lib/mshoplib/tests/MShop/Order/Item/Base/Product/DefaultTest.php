@@ -246,7 +246,7 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 	{
 		$qty = $this->_values['quantity'];
 		$this->assertEquals($this->_price->getValue() * $qty, $this->_object->getSumPrice()->getValue());
-		$this->assertEquals($this->_price->getShipping() * $qty, $this->_object->getSumPrice()->getShipping());
+		$this->assertEquals($this->_price->getCosts() * $qty, $this->_object->getSumPrice()->getCosts());
 		$this->assertEquals($this->_price->getRebate() * $qty, $this->_object->getSumPrice()->getRebate());
 		$this->assertEquals($this->_price->getTaxRate(), $this->_object->getSumPrice()->getTaxRate());
 	}
@@ -413,7 +413,7 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getMediaUrl(), $arrayObject['order.base.product.mediaurl'] );
 		$this->assertEquals( $this->_object->getPosition(), $arrayObject['order.base.product.position'] );
 		$this->assertEquals( $this->_object->getPrice()->getValue(), $arrayObject['order.base.product.price'] );
-		$this->assertEquals( $this->_object->getPrice()->getShipping(), $arrayObject['order.base.product.shipping'] );
+		$this->assertEquals( $this->_object->getPrice()->getCosts(), $arrayObject['order.base.product.shipping'] );
 		$this->assertEquals( $this->_object->getPrice()->getRebate(), $arrayObject['order.base.product.rebate'] );
 		$this->assertEquals( $this->_object->getPrice()->getTaxRate(), $arrayObject['order.base.product.taxrate'] );
 		$this->assertEquals( $this->_object->getQuantity(), $arrayObject['order.base.product.quantity'] );

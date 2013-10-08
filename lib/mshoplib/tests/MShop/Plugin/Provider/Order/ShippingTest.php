@@ -134,12 +134,12 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 	 */
 	public function testUpdate()
 	{
-		$this->assertEquals( 5.00, $this->order->getPrice()->getShipping() );
+		$this->assertEquals( 5.00, $this->order->getPrice()->getCosts() );
 		$this->_object->update($this->order, 'addProduct');
 
 		$this->order->addProduct( $this->product1 );
 		$this->_object->update($this->order, 'addProduct');
 
-		$this->assertEquals( 0.00, $this->order->getPrice()->getShipping());
+		$this->assertEquals( 0.00, $this->order->getPrice()->getCosts());
 	}
 }

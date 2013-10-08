@@ -51,7 +51,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 					<span class="rebate"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $rebate ), $currency ) ); ?></span>
 					<span class="rebatepercent"><?php echo $enc->html( sprintf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ) ); ?></span>
 <?php		endif; ?>
-					<span class="shipping"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getShipping() ), $currency ) ); ?></span>
+					<span class="shipping"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getCosts() ), $currency ) ); ?></span>
 					<span class="taxrate"><?php echo $enc->html( sprintf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ) ); ?></span>
 				</div>
 <?php	endforeach; ?>

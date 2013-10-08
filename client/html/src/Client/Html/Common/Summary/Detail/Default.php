@@ -118,9 +118,9 @@ class Client_Html_Common_Summary_Detail_Default
 			$price = $product->getPrice();
 
 			if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
-				$taxrates[ $price->getTaxrate() ] += ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+				$taxrates[ $price->getTaxrate() ] += ( $price->getValue() + $price->getCosts() ) * $product->getQuantity();
 			} else {
-				$taxrates[ $price->getTaxrate() ] = ( $price->getValue() + $price->getShipping() ) * $product->getQuantity();
+				$taxrates[ $price->getTaxrate() ] = ( $price->getValue() + $price->getCosts() ) * $product->getQuantity();
 			}
 		}
 
@@ -129,9 +129,9 @@ class Client_Html_Common_Summary_Detail_Default
 			$price = $basket->getService( 'delivery' )->getPrice();
 
 			if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
-				$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+				$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getCosts();
 			} else {
-				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getCosts();
 			}
 		}
 		catch( Exception $e ) { ; }
@@ -141,9 +141,9 @@ class Client_Html_Common_Summary_Detail_Default
 			$price = $basket->getService( 'payment' )->getPrice();
 
 			if( isset( $taxrates[ $price->getTaxrate() ] ) ) {
-				$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getShipping();
+				$taxrates[ $price->getTaxrate() ] += $price->getValue() + $price->getCosts();
 			} else {
-				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getShipping();
+				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getCosts();
 			}
 		}
 		catch( Exception $e ) { ; }

@@ -121,7 +121,7 @@ class MShop_Price_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getCurrencyId(), $itemSaved->getCurrencyId() );
 		$this->assertEquals( $item->getQuantity(), $itemSaved->getQuantity() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );
-		$this->assertEquals( $item->getShipping(), $itemSaved->getShipping() );
+		$this->assertEquals( $item->getCosts(), $itemSaved->getCosts() );
 		$this->assertEquals( $item->getRebate(), $itemSaved->getRebate() );
 		$this->assertEquals( $item->getTaxRate(), $itemSaved->getTaxRate() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
@@ -139,7 +139,7 @@ class MShop_Price_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getCurrencyId(), $itemUpd->getCurrencyId() );
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );
-		$this->assertEquals( $itemExp->getShipping(), $itemUpd->getShipping() );
+		$this->assertEquals( $itemExp->getCosts(), $itemUpd->getCosts() );
 		$this->assertEquals( $itemExp->getRebate(), $itemUpd->getRebate() );
 		$this->assertEquals( $itemExp->getTaxRate(), $itemUpd->getTaxRate() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );

@@ -71,7 +71,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$price = $priceManager->createItem();
 		$price->setRebate('3.01');
 		$price->setValue('43.12');
-		$price->setShipping('1.11');
+		$price->setCosts('1.11');
 		$price->setTaxRate('0.00');
 		$price->setCurrencyId('EUR');
 
@@ -82,7 +82,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$price = $priceManager->createItem();
 		$price->setRebate('4.00');
 		$price->setValue('20.00');
-		$price->setShipping('2.00');
+		$price->setCosts('2.00');
 		$price->setTaxRate('0.50');
 		$price->setCurrencyId('EUR');
 
@@ -199,7 +199,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals($priceItem->getCurrencyId(), 'EUR');
 		$this->assertEquals($priceItem->getTaxRate(), '0.00');
 		$this->assertEquals($priceItem->getRebate(), '7.01');
-		$this->assertEquals($priceItem->getShipping(), '3.11');
+		$this->assertEquals($priceItem->getCosts(), '3.11');
 		$this->assertEquals($priceItem->getValue(), '63.12');
 	}
 
@@ -262,7 +262,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getEditor(), $list['order.base.editor'] );
 
 		$this->assertEquals( $price->getValue(), $list['order.base.price'] );
-		$this->assertEquals( $price->getShipping(), $list['order.base.shipping'] );
+		$this->assertEquals( $price->getCosts(), $list['order.base.shipping'] );
 		$this->assertEquals( $price->getRebate(), $list['order.base.rebate'] );
 		$this->assertEquals( $price->getCurrencyId(), $list['order.base.currencyid'] );
 	}

@@ -121,7 +121,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getLocale()->getLanguageId(), $itemSaved->getLocale()->getLanguageId() );
 		$this->assertEquals( $item->getSiteCode(), $itemSaved->getSiteCode() );
 		$this->assertEquals( $itemPrice->getValue(), $itemSavedPrice->getValue() );
-		$this->assertEquals( $itemPrice->getShipping(), $itemSavedPrice->getShipping() );
+		$this->assertEquals( $itemPrice->getCosts(), $itemSavedPrice->getCosts() );
 		$this->assertEquals( $itemPrice->getRebate(), $itemSavedPrice->getRebate() );
 		$this->assertEquals( $itemPrice->getCurrencyId(), $itemSavedPrice->getCurrencyId() );
 		$this->assertEquals( $item->getProducts(), $itemSaved->getProducts() );
@@ -142,7 +142,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getLocale()->getLanguageId(), $itemUpd->getLocale()->getLanguageId() );
 		$this->assertEquals( $itemExp->getSiteCode(), $itemUpd->getSiteCode() );
 		$this->assertEquals( $itemExpPrice->getValue(), $itemUpdPrice->getValue() );
-		$this->assertEquals( $itemExpPrice->getShipping(), $itemUpdPrice->getShipping() );
+		$this->assertEquals( $itemExpPrice->getCosts(), $itemUpdPrice->getCosts() );
 		$this->assertEquals( $itemExpPrice->getRebate(), $itemUpdPrice->getRebate() );
 		$this->assertEquals( $itemExpPrice->getCurrencyId(), $itemUpdPrice->getCurrencyId() );
 		$this->assertEquals( $itemExp->getProducts(), $itemUpd->getProducts() );
@@ -349,7 +349,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $basket->getLocale()->getSiteId(), $basket->getSiteId() );
 
 		// because of FreeShipping plugin price is not 6.50
-		$this->assertEquals( 1.50, $basket->getPrice()->getShipping() );
+		$this->assertEquals( 1.50, $basket->getPrice()->getCosts() );
 
 		$pos = 1;
 		$products = $basket->getProducts();

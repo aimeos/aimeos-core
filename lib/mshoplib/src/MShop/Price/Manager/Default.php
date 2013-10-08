@@ -468,7 +468,7 @@ class MShop_Price_Manager_Default
 			$stmt->bind( 5, $item->getLabel() );
 			$stmt->bind( 6, $item->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 7, $item->getValue() );
-			$stmt->bind( 8, $item->getShipping() );
+			$stmt->bind( 8, $item->getCosts() );
 			$stmt->bind( 9, $item->getRebate() );
 			$stmt->bind(10, $item->getTaxRate() );
 			$stmt->bind(11, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
