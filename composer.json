@@ -19,7 +19,8 @@
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
 		"ext-zip": "*",
-		"arcavias/extension-installer": "dev-master"
+		"arcavias/extension-installer": "dev-master",
+		"arcavias/ext-phpexcel": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
