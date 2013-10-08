@@ -130,7 +130,7 @@ class MShop_Order_Manager_Default
 	{
 		parent::__construct( $context );
 
-		$sites = $context->getLocale()->getSitePath();
+		$sites = $context->getLocale()->getSiteSubTree();
 		$this->_replaceSiteMarker( $this->_searchConfig['order.containsStatus'], 'mordst_cs."siteid"', $sites, ':site' );
 
 		if( $context->getConfig()->get( 'resource/db-order/adapter', null ) !== null ) {
