@@ -115,8 +115,8 @@ MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							value : '0.00'
 						}, {
 							xtype : 'ux.decimalfield',
-							fieldLabel : 'Shipping costs per item',
-							name : 'price.shipping',
+							fieldLabel : 'Costs per item',
+							name : 'price.costs',
 							allowBlank : false,
 							value : '0.00'
 						}, {

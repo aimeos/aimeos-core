@@ -106,13 +106,13 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Shipping'),
+				header : _('Costs'),
 				sortable : false,
 				id : 'refshipping',
 				width : 70,
 				align : 'right',
 				hidden : true,
-				renderer : this.refDecimalColumnRenderer.createDelegate(this, [ "price.shipping" ], true)
+				renderer : this.refDecimalColumnRenderer.createDelegate(this, [ "price.costs" ], true)
 			},
 			{
 				xtype : 'gridcolumn',
