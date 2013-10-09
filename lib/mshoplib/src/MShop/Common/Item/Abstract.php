@@ -204,4 +204,57 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 		$this->_modified = true;
 	}
 
+	/**
+	 * ORD function with utf-16 support
+	 * @param String $u
+	 * @return Integer
+	 */
+	protected function _mb_ord($c) {
+		$return = null;
+	
+		if (mb_strlen($c, 'UTF-8') < strlen($c)) {
+			$k = mb_convert_encoding($c, 'UCS-2LE', 'UTF-8');
+			$k1 = ord(substr($k, 0, 1));
+			$k2 = ord(substr($k, 1, 1));
+			$return = $k2 * 256 + $k1;
+		} else {
+			$return = ord($c);
+		}
+	
+		return $return;
+	}
+	
+	/**
+	 * Filter every invalid character to ensure that xml content does not kill something
+	 *
+	 * @param String $text
+	 * @return String
+	 */
+	public function filterInvalidCharacters($text) {
+		$return = "";
+	
+		$current;
+	
+		if (empty($text))
+		{
+			return $return;
+		}
+	
+		$length = strlen($text);
+		for ($i=0; $i < $length; $i++) {
+			$current = $this->_mb_ord($text{$i});
+	
+			// valid xml character ranges
+			if (($current == 0x9) ||
+			($current == 0xA) ||
+			($current == 0xD) ||
+			(($current >= 0x20) && ($current <= 0xD7FF)) ||
+			(($current >= 0xE000) && ($current <= 0xFFFD)) ||
+			(($current >= 0x10000) && ($current <= 0x10FFFF)))
+			{
+				$return .= chr($current);
+			}
+		}
+		return $return;
+	}
 }
