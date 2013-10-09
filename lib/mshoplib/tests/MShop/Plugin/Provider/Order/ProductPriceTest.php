@@ -54,7 +54,7 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		}
 
 		$productItem->getPrice()->setValue( 600.00 );
-		$productItem->getPrice()->setShipping( 30.00 );
+		$productItem->getPrice()->setCosts( 30.00 );
 		$productItem->getPrice()->setRebate( 0.00 );
 		$productItem->getPrice()->setTaxrate( 19.00 );
 

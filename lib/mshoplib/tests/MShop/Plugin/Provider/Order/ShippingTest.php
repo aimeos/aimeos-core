@@ -88,7 +88,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 		$serviceSearch = $orderBaseServiceManager->createSearch();
 		$exp = array(
 			$serviceSearch->compare( '==', 'order.base.service.type', 'delivery' ),
-			$serviceSearch->compare( '==', 'order.base.service.shipping', '5.00' )
+			$serviceSearch->compare( '==', 'order.base.service.costs', '5.00' )
 		);
 		$serviceSearch->setConditions( $serviceSearch->combine( '&&', $exp ) );
 		$results = $orderBaseServiceManager->searchItems( $serviceSearch );
@@ -134,12 +134,12 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 	 */
 	public function testUpdate()
 	{
-		$this->assertEquals( 5.00, $this->order->getPrice()->getShipping() );
+		$this->assertEquals( 5.00, $this->order->getPrice()->getCosts() );
 		$this->_object->update($this->order, 'addProduct');
 
 		$this->order->addProduct( $this->product1 );
 		$this->_object->update($this->order, 'addProduct');
 
-		$this->assertEquals( 0.00, $this->order->getPrice()->getShipping());
+		$this->assertEquals( 0.00, $this->order->getPrice()->getCosts());
 	}
 }

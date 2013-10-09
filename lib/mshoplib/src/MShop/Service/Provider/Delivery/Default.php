@@ -447,11 +447,11 @@ class MShop_Service_Provider_Delivery_Default
 		MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
 		$price = $base->getPrice();
-		$total = $price->getValue() + $price->getShipping();
+		$total = $price->getValue() + $price->getCosts();
 
 		$priceitem = $dom->createElement( 'priceitem' );
 		$this->_appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
-		$this->_appendChildCDATA( 'shipping', number_format( $price->getShipping(), 2, '.', '' ), $dom, $priceitem );
+		$this->_appendChildCDATA( 'shipping', number_format( $price->getCosts(), 2, '.', '' ), $dom, $priceitem );
 		$this->_appendChildCDATA( 'discount', number_format( 0.00, 2, '.', '' ), $dom, $priceitem );
 		$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
 
@@ -494,7 +494,7 @@ class MShop_Service_Provider_Delivery_Default
 		foreach( $products as $product )
 		{
 			$price = $product->getPrice();
-			$total = $price->getValue() + $price->getShipping();
+			$total = $price->getValue() + $price->getCosts();
 
 			$productitem = $dom->createElement( 'productitem' );
 
@@ -505,7 +505,7 @@ class MShop_Service_Provider_Delivery_Default
 
 			$priceitem = $dom->createElement( 'priceitem' );
 			$this->_appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
-			$this->_appendChildCDATA( 'shipping', number_format( $price->getShipping(), 2, '.', '' ), $dom, $priceitem );
+			$this->_appendChildCDATA( 'shipping', number_format( $price->getCosts(), 2, '.', '' ), $dom, $priceitem );
 			$this->_appendChildCDATA( 'discount', number_format( 0.00, 2, '.', '' ), $dom, $priceitem );
 			$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
 			$productitem->appendChild( $priceitem );
@@ -536,7 +536,7 @@ class MShop_Service_Provider_Delivery_Default
 		foreach( $products as $product )
 		{
 			$price = $product->getPrice();
-			$total = $price->getValue() + $price->getShipping();
+			$total = $price->getValue() + $price->getCosts();
 
 			$childproductitem = $dom->createElement( 'productitem' );
 
@@ -547,7 +547,7 @@ class MShop_Service_Provider_Delivery_Default
 
 			$priceitem = $dom->createElement( 'priceitem' );
 			$this->_appendChildCDATA( 'price', number_format( $price->getValue(), 2, '.', '' ), $dom, $priceitem );
-			$this->_appendChildCDATA( 'shipping', number_format( $price->getShipping(), 2, '.', '' ), $dom, $priceitem );
+			$this->_appendChildCDATA( 'shipping', number_format( $price->getCosts(), 2, '.', '' ), $dom, $priceitem );
 			$this->_appendChildCDATA( 'discount', number_format( $price->getRebate(), 2, '.', '' ), $dom, $priceitem );
 			$this->_appendChildCDATA( 'total', number_format( $total, 2, '.', '' ), $dom, $priceitem );
 			$childproductitem->appendChild( $priceitem );

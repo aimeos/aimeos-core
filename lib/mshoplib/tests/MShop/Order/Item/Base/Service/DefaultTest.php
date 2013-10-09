@@ -161,7 +161,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetPrice()
 	{
-		$this->_price->setShipping( '5.00' );
+		$this->_price->setCosts( '5.00' );
 		$this->_object->setPrice( $this->_price );
 		$this->assertFalse( $this->_object->isModified() );
 		$this->assertSame($this->_price, $this->_object->getPrice());
@@ -275,7 +275,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 
 		$price = $this->_object->getPrice();
 		$this->assertEquals( $price->getValue(), $arrayObject['order.base.service.price'] );
-		$this->assertEquals( $price->getShipping(), $arrayObject['order.base.service.shipping'] );
+		$this->assertEquals( $price->getCosts(), $arrayObject['order.base.service.costs'] );
 		$this->assertEquals( $price->getRebate(), $arrayObject['order.base.service.rebate'] );
 		$this->assertEquals( $price->getTaxRate(), $arrayObject['order.base.service.taxrate'] );
 	}

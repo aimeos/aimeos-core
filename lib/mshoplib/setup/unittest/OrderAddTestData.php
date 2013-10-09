@@ -235,7 +235,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordServ->setMediaUrl($dataset['mediaurl']);
 
 			$priceItem->setValue( $dataset['price'] );
-			$priceItem->setShipping( $dataset['shipping'] );
+			$priceItem->setCosts( $dataset['shipping'] );
 			$priceItem->setRebate( $dataset['rebate'] );
 			$priceItem->setTaxRate( $dataset['taxrate'] );
 			$ordServ->setPrice( $priceItem );
@@ -343,7 +343,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 
 			$priceItem = $priceManager->createItem();
 			$priceItem->setValue( $dataset['price'] );
-			$priceItem->setShipping( $dataset['shipping'] );
+			$priceItem->setCosts( $dataset['shipping'] );
 			$priceItem->setRebate( $dataset['rebate'] );
 			$priceItem->setTaxRate( $dataset['taxrate'] );
 			$ordProdItem->setPrice( $priceItem );

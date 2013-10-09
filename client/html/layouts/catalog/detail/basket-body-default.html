@@ -31,7 +31,7 @@ $enc = $this->encoder();
 			<span class="rebate"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $rebate ), $currency ) ); ?></span>
 			<span class="rebatepercent"><?php echo $enc->html( sprintf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ) ); ?></span>
 <?php		endif; ?>
-<?php		if( ( $shipping = $priceItem->getShipping() ) > 0 ) : ?>
+<?php		if( ( $shipping = $priceItem->getCosts() ) > 0 ) : ?>
 			<span class="shipping"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $shipping ), $currency ) ); ?></span>
 <?php		endif; ?>
 			<span class="taxrate"><?php echo $enc->html( sprintf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ) ); ?></span>

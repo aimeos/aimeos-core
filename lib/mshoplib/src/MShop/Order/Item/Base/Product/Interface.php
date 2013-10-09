@@ -147,21 +147,21 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	/**
 	 * Returns the stored price item for the selected product and package.
 	 *
-	 * @return MShop_Price_Item_Interface Price item with price, shipping and rebate
+	 * @return MShop_Price_Item_Interface Price item with price, additional costs and rebate
 	 */
 	public function getPrice();
 
 	/**
 	 * Sets the new price item for the selected product and package.
 	 *
-	 * @param MShop_Price_Item_Interface $price Price item containing price and shipping costs
+	 * @param MShop_Price_Item_Interface $price Price item containing price and additional costs
 	 */
 	public function setPrice( MShop_Price_Item_Interface $price );
 
 	/**
 	 * Returns the price item for the product whose values are multiplied with the quantity.
 	 *
-	 * @return MShop_Price_Item_Interface Price item with price, shipping and rebate
+	 * @return MShop_Price_Item_Interface Price item with price, additional costs and rebate
 	 */
 	public function getSumPrice();
 

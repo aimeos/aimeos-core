@@ -31,7 +31,7 @@ CREATE TABLE "mshop_order_base" (
 	-- total price
 	"price" DECIMAL(12,2) NOT NULL,
 	-- shipping costs
-	"shipping" DECIMAL(12,2) NOT NULL,
+	"costs" DECIMAL(12,2) NOT NULL,
 	-- amount of rebate
 	"rebate" DECIMAL(12,2) NOT NULL,
 	-- Comment string
@@ -217,7 +217,7 @@ CREATE TABLE "mshop_order_base_product" (
 	-- Product price of a single product
 	"price" DECIMAL(12,2) NOT NULL,
 	-- Additional shipping costs
-	"shipping" DECIMAL(12,2) NOT NULL,
+	"costs" DECIMAL(12,2) NOT NULL,
 	-- Granted rebate
 	"rebate" DECIMAL(12,2) NOT NULL,
 	-- tax rate in percent
@@ -310,7 +310,7 @@ CREATE TABLE "mshop_order_base_service" (
 	-- price of the service
 	"price" DECIMAL(12,2) NOT NULL,
 	-- shipping costs
-	"shipping" DECIMAL(12,2) NOT NULL,
+	"costs" DECIMAL(12,2) NOT NULL,
 	-- amount of rebate
 	"rebate" DECIMAL(12,2) NOT NULL,
 	-- tax rate in percent
