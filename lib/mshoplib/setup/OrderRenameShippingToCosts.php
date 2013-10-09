@@ -33,7 +33,7 @@ class MW_Setup_Task_OrderRenameShippingToCosts extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'OrderRenameConstraints' );
+		return array( 'OrderRenameTables' );
 	}
 
 

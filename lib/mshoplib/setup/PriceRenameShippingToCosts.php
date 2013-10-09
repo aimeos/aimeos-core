@@ -13,9 +13,8 @@ class MW_Setup_Task_PriceRenameShippingToCosts extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
 		'mshop_price' => array(
-			'ALTER TABLE "mshop_price" CHANGE "shipping" "costs" DECIMAL(12,2) NOT NULL',
 			'ALTER TABLE "mshop_price" DROP INDEX "idx_mspri_sid_dom_shipping"',
-			'ALTER TABLE "mshop_price" ADD INDEX "idx_mspri_sid_dom_costs" ("siteid", "domain", "costs")',
+			'ALTER TABLE "mshop_price" CHANGE "shipping" "costs" DECIMAL(12,2) NOT NULL',
 		)
 	);
 
