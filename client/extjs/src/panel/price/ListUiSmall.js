@@ -95,8 +95,8 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			align : 'right'
 		}, {
 			xtype : 'numbercolumn',
-			dataIndex : 'price.shipping',
-			header : _('Shipping'),
+			dataIndex : 'price.costs',
+			header : _('Costs'),
 			sortable : true,
 			width : 70,
 			hidden : true,
