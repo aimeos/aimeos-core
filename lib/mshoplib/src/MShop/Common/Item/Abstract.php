@@ -239,9 +239,13 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	public function filterInvalidCharacters($text) {
 		$return = "";
 	
-		if (empty($text))
+		if (empty($text) || ! function_exists('mb_check_encoding'))
 		{
-			return $return;
+			return $text;
+		}
+		
+		if ( ! mb_check_enconding($text, 'UTF-8')) {
+			$text = utf8_encode($text);
 		}
 
 		$strArray = preg_split( '/(?<!^)(?!$)/u', $text );
