@@ -236,7 +236,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 * @param String $text
 	 * @return String
 	 */
-	public function filterInvalidCharacters($text) {
+	public function filterInvalidXMLCharacters($text) {
 		$return = "";
 	
 		if (empty($text) || ! function_exists('mb_check_encoding'))
