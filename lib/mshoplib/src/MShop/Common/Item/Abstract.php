@@ -205,23 +205,29 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	}
 
 	/**
-	 * ORD function with utf-16 support
+	 * ORD function with full utf-8 (1, 2, 3, 4 byte) support
 	 * @param String $c
 	 * @return Integer
 	 */
 	protected function _mb_ord($c) {
-		$return = null;
-	
-		if (mb_strlen($c, 'UTF-8') < strlen($c)) {
-			$k = mb_convert_encoding($c, 'UCS-2LE', 'UTF-8');
-			$k1 = ord(substr($k, 0, 1));
-			$k2 = ord(substr($k, 1, 1));
-			$return = $k2 * 256 + $k1;
-		} else {
-			$return = ord($c);
+		$ord = 0;
+
+		/* 
+		 * utf-8 bases
+		 * 
+		 * 256^0 / 256^1 / 256^2 / 256^3
+		 */
+		$bases = array( 1, 256, 65536, 16777216 );
+
+		// len of utf-8 char in byte sequences
+		$len = strlen( $c );
+
+		$idx = 0;
+		for( $i = $len-1; $i >= 0; $i-- ) {
+			$ord = $bases[$idx++] * ord( $c ) ;
 		}
-	
-		return $return;
+
+		return $ord;
 	}
 	
 	/**
@@ -233,16 +239,16 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	public function filterInvalidCharacters($text) {
 		$return = "";
 	
-		$current;
-	
 		if (empty($text))
 		{
 			return $return;
 		}
-	
-		$length = strlen($text);
-		for ($i=0; $i < $length; $i++) {
-			$current = $this->_mb_ord($text{$i});
+
+		$strArray = preg_split( '/(?<!^)(?!$)/u', $text );
+		
+		
+		foreach ($strArray as $character) {
+			$current = $this->_mb_ord($character);
 	
 			// valid xml character ranges
 			if (($current == 0x9) ||
@@ -252,7 +258,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 			(($current >= 0xE000) && ($current <= 0xFFFD)) ||
 			(($current >= 0x10000) && ($current <= 0x10FFFF)))
 			{
-				$return .= chr($current);
+				$return .= $character;
 			}
 		}
 		return $return;
