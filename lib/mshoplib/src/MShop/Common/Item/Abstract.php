@@ -244,7 +244,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 			return $text;
 		}
 		
-		if ( ! mb_check_enconding($text, 'UTF-8')) {
+		if ( ! mb_check_encoding($text, 'UTF-8')) {
 			$text = utf8_encode($text);
 		}
 
