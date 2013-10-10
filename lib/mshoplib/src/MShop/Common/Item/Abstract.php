@@ -209,7 +209,8 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 * @param String $c
 	 * @return Integer
 	 */
-	protected function _mb_ord($c) {
+	protected function _mb_ord($c)
+	{
 		$ord = 0;
 
 		/* 
@@ -236,7 +237,8 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 * @param String $text
 	 * @return String
 	 */
-	public function filterInvalidXMLCharacters($text) {
+	public function filterInvalidXMLCharacters($text)
+	{
 		$return = "";
 	
 		if (empty($text) || ! function_exists('mb_check_encoding'))
