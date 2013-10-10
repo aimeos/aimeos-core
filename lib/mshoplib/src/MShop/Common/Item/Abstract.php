@@ -206,7 +206,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 
 	/**
 	 * ORD function with utf-16 support
-	 * @param String $u
+	 * @param String $c
 	 * @return Integer
 	 */
 	protected function _mb_ord($c) {
