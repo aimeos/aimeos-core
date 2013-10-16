@@ -207,6 +207,63 @@ implements MShop_Service_Provider_Interface
 
 
 	/**
+	 * Calculates the last date behind the given timestamp depending on the other paramters.
+	 *
+	 * This method is used to calculate the date for comparing the order date to
+	 * if e.g. credit card payments should be captured or direct debit should be
+	 * checked after the given amount of days from external payment providers.
+	 * This method can calculate with business/working days only if requested
+	 * and use the given list of public holidays to take them into account.
+	 *
+	 * @param integer $timestamp Timestamp to use as starting point for the backward calculation
+	 * @param integer $skipdays Number of days to calculate backwards
+	 * @param boolean $businessOnly True if only business days should be used for calculation, false if not
+	 * @param string $publicHolidays Comma separated list of public holidays in YYYY-MM-DD format
+	 * @return string Date in YYY-MM-DD format to be compared to the order date
+	 * @throws MShop_Service_Exception If the given holiday string is in the wrong format and can't be processed
+	 */
+	protected function _calcDateLimit( $timestamp, $skipdays = 0, $businessOnly = false, $publicHolidays = '' )
+	{
+		$holidays = array();
+
+		if( is_string( $publicHolidays ) && $publicHolidays !== '' )
+		{
+			$holidays = explode( ',', str_replace( ' ', '', $publicHolidays ) );
+
+			if( sort( $holidays ) === false ) {
+				throw new MShop_Service_Exception( sprintf( 'Unable to sort public holidays: "%1$s"', $publicHolidays ) );
+			}
+
+			$holidays = array_flip( $holidays );
+
+			for( $i = 0; $i <= $skipdays; $i++ )
+			{
+				$date = date( 'Y-m-d', $timestamp - $i * 86400 );
+
+				if( isset( $holidays[$date] ) ) {
+					$skipdays++;
+				}
+			}
+		}
+
+		if( $businessOnly === true )
+		{
+			// adds days for weekends
+			for( $i = 0; $i <= $skipdays; $i++ )
+			{
+				$ts = $timestamp - $i * 86400;
+
+				if( date( 'N', $ts ) > 5 && !isset( $holidays[ date( 'Y-m-d', $ts ) ] ) ) {
+					$skipdays++;
+				}
+			}
+		}
+
+		return date( 'Y-m-d', $timestamp - $skipdays * 86400 );
+	}
+
+
+	/**
 	 * Checks required fields and the types of the config array.
 	 *
 	 * @param array $config Config parameters
