@@ -7,6 +7,7 @@
  */
 
 $enc = $this->encoder();
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
@@ -25,11 +26,12 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, array( 'a-name' => str_replace( ' ', '-', $name ), 'l-product-id' => $id ) + $this->listParams ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
+<?php		$mediaUrl = $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>
 <?php		if( $firstImage === true ) : $firstImage = false; ?>
-				<noscript><div class="media-item" style="background-image: url('<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>')"></div></noscript>
-				<div class="media-item lazy-image" data-src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>"></div>
+				<noscript><div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')"></div></noscript>
+				<div class="media-item lazy-image" data-src="<?php echo $mediaUrl; ?>"></div>
 <?php		else : ?>
-				<div class="media-item" data-src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>"></div>
+				<div class="media-item" data-src="<?php echo $mediaUrl; ?>"></div>
 <?php		endif; ?>
 <?php	endforeach; ?>
 			</div>

@@ -6,6 +6,7 @@
  */
 
 $enc = $this->encoder();
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
 $services = $this->get( 'deliveryServices', array() );
 $servicePrices = $this->get( 'deliveryServicePrices', array() );
@@ -55,7 +56,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php	endif; ?>
 				<div class="icons">
 <?php	foreach( $service->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
-					<img src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>" />
+					<img src="<?php echo $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>" />
 <?php	endforeach; ?>
 				</div>
 				<h2><?php echo $enc->html( $service->getName() ); ?></h2>
