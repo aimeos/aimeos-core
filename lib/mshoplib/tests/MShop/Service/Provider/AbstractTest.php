@@ -57,6 +57,13 @@ class MShop_Service_Provider_AbstractTest extends MW_Unittest_Testcase
 	{
 		$this->assertEquals( '2013-10-16', $this->_object->calcDateLimit( 1382100000, 0, false, '2013-10-17, 2013-10-18' ) );
 	}
+
+
+	public function testGetConfigValue()
+	{
+		$this->_object->injectGlobalConfigBE( array( 'payment.url-success' => 'https://url.to/ok' ) );
+		$this->assertEquals( 'https://url.to/ok', $this->_object->getConfigValue( array( 'payment.url-success' ) ) );
+	}
 }
 
 
@@ -65,5 +72,10 @@ class Test_MShop_Service_Provider_Abstract extends MShop_Service_Provider_Abstra
 	public function calcDateLimit( $ts, $days = 0, $bd = false, $hd = '' )
 	{
 		return $this->_calcDateLimit( $ts, $days, $bd, $hd );
+	}
+
+	public function getConfigValue( array $keys )
+	{
+		return $this->_getConfigValue( $keys );
 	}
 }

@@ -66,13 +66,20 @@ class MShop_Service_Provider_Payment_PrePayTest extends MW_Unittest_Testcase
 
 	public function testGetConfigBE()
 	{
-		$this->assertEquals( array(), $this->_object->getConfigBE() );
+		$this->assertEquals( 4, count( $this->_object->getConfigBE() ) );
 	}
 
 
 	public function testCheckConfigBE()
 	{
-		$this->assertEquals( array(), $this->_object->checkConfigBE( array('url' => 'testurl' ) ) );
+		$attributes = array(
+			'payment.url-success' => 'http://returnUrl'
+		);
+
+		$result = $this->_object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( null, $result['payment.url-success'] );
 	}
 
 
