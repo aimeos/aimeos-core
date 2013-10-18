@@ -204,4 +204,69 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 		$this->_modified = true;
 	}
 
+	/**
+	 * ORD function with full utf-8 (1, 2, 3, 4 byte) support
+	 * @param String $c
+	 * @return Integer
+	 */
+	protected function _mb_ord($c)
+	{
+		$ord = 0;
+
+		/* 
+		 * utf-8 bases
+		 * 
+		 * 256^0 / 256^1 / 256^2 / 256^3
+		 */
+		$bases = array( 1, 256, 65536, 16777216 );
+
+		// len of utf-8 char in byte sequences
+		$len = strlen( $c );
+
+		$idx = 0;
+		for( $i = $len-1; $i >= 0; $i-- ) {
+			$ord = $bases[$idx++] * ord( $c ) ;
+		}
+
+		return $ord;
+	}
+	
+	/**
+	 * Filter every invalid character to ensure that xml content does not kill something
+	 *
+	 * @param String $text
+	 * @return String
+	 */
+	public function filterInvalidXMLCharacters($text)
+	{
+		$return = "";
+	
+		if (empty($text) || ! function_exists('mb_check_encoding'))
+		{
+			return $text;
+		}
+		
+		if ( ! mb_check_encoding($text, 'UTF-8')) {
+			$text = utf8_encode($text);
+		}
+
+		$strArray = preg_split( '/(?<!^)(?!$)/u', $text );
+		
+		
+		foreach ($strArray as $character) {
+			$current = $this->_mb_ord($character);
+	
+			// valid xml character ranges
+			if (($current == 0x9) ||
+			($current == 0xA) ||
+			($current == 0xD) ||
+			(($current >= 0x20) && ($current <= 0xD7FF)) ||
+			(($current >= 0xE000) && ($current <= 0xFFFD)) ||
+			(($current >= 0x10000) && ($current <= 0x10FFFF)))
+			{
+				$return .= $character;
+			}
+		}
+		return $return;
+	}
 }
