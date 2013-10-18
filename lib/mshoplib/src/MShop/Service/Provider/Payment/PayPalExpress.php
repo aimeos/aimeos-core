@@ -16,8 +16,8 @@
  */
 
 class MShop_Service_Provider_Payment_PayPalExpress
-extends MShop_Service_Provider_Payment_Abstract
-implements MShop_Service_Provider_Payment_Interface
+	extends MShop_Service_Provider_Payment_Abstract
+	implements MShop_Service_Provider_Payment_Interface
 {
 	private $_config;
 
@@ -131,7 +131,7 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function getConfigBE()
 	{
-		$list = array();
+		$list = parent::getConfigBE();
 
 		foreach( $this->_beConfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
@@ -150,7 +150,9 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		return $this->_checkConfig( $this->_beConfig, $attributes );
+		$errors = parent::checkConfigBE( $attributes );
+
+		return array_merge( $errors, $this->_checkConfig( $this->_beConfig, $attributes ) );
 	}
 
 
@@ -159,8 +161,8 @@ implements MShop_Service_Provider_Payment_Interface
 	 * separately isn't supported or not configured by the shop owner.
 	 *
 	 * @param MShop_Order_Item_Interface $order Order invoice object
-	 * @return MShop_Common_Item_Helper_Form_Interface|null Form object with URL, action and parameters to redirect to
-	 * 	(e.g. to an external server of the payment provider) or null to redirect directly to the confirmation page
+	 * @return MW_Common_Form_Interface Form object with URL, action and parameters to redirect to
+	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
 	public function process( MShop_Order_Item_Interface $order )
 	{

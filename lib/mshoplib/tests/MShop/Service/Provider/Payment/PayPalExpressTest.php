@@ -104,15 +104,22 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 	public function testCheckConfigBE()
 	{
-		$attributes = array( 'ApiUsername' => 'user', 'ApiPassword' => 'pw', 'ApiSignature' => '1df23eh67', 'CancelUrl' => 'http://cancelUrl', 'ReturnUrl' => 'http://returnUrl'  );
+		$attributes = array(
+			'ApiUsername' => 'user',
+			'ApiPassword' => 'pw',
+			'ApiSignature' => '1df23eh67',
+			'payment.url-cancel' => 'http://cancelUrl',
+			'payment.url-success' => 'http://returnUrl'
+		);
+
 		$result = $this->_object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 8, count( $result ) );
+		$this->assertEquals( 12, count( $result ) );
 		$this->assertEquals( null, $result['ApiUsername'] );
 		$this->assertEquals( null, $result['ApiPassword'] );
 		$this->assertEquals( null, $result['ApiSignature'] );
-		$this->assertEquals( null, $result['CancelUrl'] );
-		$this->assertEquals( null, $result['ReturnUrl'] );
+		$this->assertEquals( null, $result['payment.url-cancel'] );
+		$this->assertEquals( null, $result['payment.url-success'] );
 	}
 
 	public function testIsImplemented()

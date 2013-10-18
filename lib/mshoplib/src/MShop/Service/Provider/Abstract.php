@@ -20,6 +20,7 @@ implements MShop_Service_Provider_Interface
 	private $_context;
 	private $_serviceItem;
 	private $_communication;
+	private $_beGlobalConfig;
 
 
 	/**
@@ -115,6 +116,20 @@ implements MShop_Service_Provider_Interface
 	public function getServiceItem()
 	{
 		return $this->_serviceItem;
+	}
+
+
+	/**
+	 * Injects additional global configuration for the backend.
+	 *
+	 * It's used for adding additional backend configuration from the application
+	 * like the URLs (success, failure, etc.) to redirect to.
+	 *
+	 * @param array $config Associative list of config keys and their value
+	 */
+	public function injectGlobalConfigBE( array $config )
+	{
+		$this->_beGlobalConfig = $config;
 	}
 
 
@@ -323,6 +338,35 @@ implements MShop_Service_Provider_Interface
 		}
 
 		return $errors;
+	}
+
+
+	/**
+	 * Returns the configuration value that matches one of the given keys.
+	 *
+	 * The config of the service item and (optionally) the global config
+	 * is tested in the order of the keys. The first one that matches will
+	 * be returned.
+	 *
+	 * @param array $keys List of key names that should be tested for in the order to test
+	 * @return mixed Value of the first key that matches or null if none was found
+	 */
+	protected function _getConfigValue( array $keys )
+	{
+		$srvconfig = $this->getServiceItem()->getConfig();
+
+		foreach( $keys as $key )
+		{
+			if( isset( $srvconfig[$key] ) ) {
+				return $srvconfig[$key];
+			}
+
+			if( isset( $this->_beGlobalConfig[$key] ) ) {
+				return $this->_beGlobalConfig[$key];
+			}
+		}
+
+		return null;
 	}
 
 
