@@ -28,7 +28,7 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 		<a id="next-image" class="disabled"></a>
 		<div class="carousel">
 <?php foreach( $mediaItems as $id => $mediaItem ) : ?>
-			<div id="image-<?php echo $enc->attr( $id ); ?>" class="item" style="background-image: url('<?php echo $contentUrl . $mediaItem->getUrl() ); ?>')"></div>
+			<div id="image-<?php echo $enc->attr( $id ); ?>" class="item" style="background-image: url('<?php echo $contentUrl . $mediaItem->getUrl(); ?>')"></div>
 <?php endforeach; ?>
 		</div>
 	</div>
