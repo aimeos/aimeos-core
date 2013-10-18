@@ -213,9 +213,9 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	{
 		$ord = 0;
 
-		/* 
+		/*
 		 * utf-8 bases
-		 * 
+		 *
 		 * 256^0 / 256^1 / 256^2 / 256^3
 		 */
 		$bases = array( 1, 256, 65536, 16777216 );
@@ -230,43 +230,48 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 
 		return $ord;
 	}
-	
+
+
 	/**
-	 * Filter every invalid character to ensure that xml content does not kill something
+	 * Filter invalid characters from text
 	 *
-	 * @param String $text
-	 * @return String
+	 * @param string $text Text to filter
+	 * @return string Filtered text
 	 */
-	public function filterInvalidXMLCharacters($text)
+	protected function _filterText( $text )
 	{
-		$return = "";
-	
-		if (empty($text) || ! function_exists('mb_check_encoding'))
-		{
+		if( empty( $text ) || !function_exists( 'mb_check_encoding' ) ) {
 			return $text;
 		}
-		
-		if ( ! mb_check_encoding($text, 'UTF-8')) {
-			$text = utf8_encode($text);
+
+		if( mb_check_encoding( $text, 'UTF-8' ) === false ) {
+			$text = mb_convert_encoding( $text, 'UTF-8' );
 		}
 
-		$strArray = preg_split( '/(?<!^)(?!$)/u', $text );
-		
-		
-		foreach ($strArray as $character) {
-			$current = $this->_mb_ord($character);
-	
+		$result = '';
+		$bases = array( 1, 256, 65536, 16777216 );
+		$strArray = preg_split( '/(?<!^)(?!$)/u', (string) $text );
+
+		foreach( $strArray as $character )
+		{
+			// len of utf-8 char in byte sequences
+			$len = strlen( $character );
+			$current = $idx = 0;
+
+			for( $i = $len-1; $i >= 0; $i-- ) {
+				$current = $bases[$idx++] * ord( $character ) ;
+			}
+
 			// valid xml character ranges
-			if (($current == 0x9) ||
-			($current == 0xA) ||
-			($current == 0xD) ||
-			(($current >= 0x20) && ($current <= 0xD7FF)) ||
-			(($current >= 0xE000) && ($current <= 0xFFFD)) ||
-			(($current >= 0x10000) && ($current <= 0x10FFFF)))
-			{
-				$return .= $character;
+			if( $current == 0x09 || $current == 0x0A || $current == 0x0D
+				|| ( $current >= 0x20 && $current <= 0xD7FF )
+				|| ( $current >= 0xE000 && $current <= 0xFFFD )
+				|| ( $current >= 0x10000 && $current <= 0x10FFFF )
+			) {
+				$result .= $character;
 			}
 		}
-		return $return;
+
+		return $result;
 	}
 }

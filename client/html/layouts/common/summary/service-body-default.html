@@ -7,6 +7,7 @@
 
 $enc = $this->encoder();
 $errors = $this->get( 'summaryErrorCodes', array() );
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
 ?>
 <div class="common-summary-service container">
@@ -22,7 +23,7 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 		<div class="item">
 			<div class="item-icons">
 <?php	if( $service->getMediaUrl() != '' ) : ?>
-				<img src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $service->getMediaUrl() ); ?>" />
+				<img src="<?php echo $enc->attr( $contentUrl . $service->getMediaUrl() ); ?>" />
 <?php	endif; ?>
 			</div>
 			<h4><?php echo $enc->html( $service->getName() ); ?></h4>
@@ -54,7 +55,7 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 		<div class="item">
 			<div class="item-icons">
 <?php	if( $service->getMediaUrl() != '' ) : ?>
-				<img src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $service->getMediaUrl() ); ?>" />
+				<img src="<?php echo $enc->attr( $contentUrl . $service->getMediaUrl() ); ?>" />
 <?php	endif; ?>
 			</div>
 			<h4><?php echo $service->getName(); ?></h4>

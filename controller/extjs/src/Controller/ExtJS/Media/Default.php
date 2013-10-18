@@ -167,7 +167,7 @@ class Controller_ExtJS_Media_Default
 		}
 
 
-		$filename = md5( $fileinfo['name'] . time() );
+		$filename = md5( $fileinfo['name'] . microtime( true ) );
 		$mimetype = $this->_getMimeType( $fileinfo['tmp_name'] );
 
 		$item = $this->_manager->createItem();
@@ -394,7 +394,7 @@ class Controller_ExtJS_Media_Default
 		$perms = $config->get( 'controller/extjs/media/default/upload/fileperms', 0664 );
 
 		if( chmod( $dest, $perms ) === false ) {
-			$this->_getContext()->getLogger()->log( sprintf( 'Changing file permissions for "%1$s" to "%1$o" failed', $dest, $perms ), MW_Logger_Abstract::WARN );
+			$this->_getContext()->getLogger()->log( sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms ), MW_Logger_Abstract::WARN );
 		}
 
 
