@@ -121,6 +121,9 @@
 			"text": "language.js",
 			"path": "src/elements/"
 		}, {
+			"text": "sitelanguage.js",
+			"path": "src/elements/"
+		}, {
 			"text": "currency.js",
 			"path": "src/elements/"
 		}, {

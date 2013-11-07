@@ -75,7 +75,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							typeAhead : true,
 							emptyText : _('Name, description, etc. (required)')
 						}, {
-							xtype : 'MShop.elements.language.combo',
+							xtype : 'MShop.elements.sitelanguage.combo',
 							name : 'text.languageid'
 						}, {
 							xtype : 'textfield',
