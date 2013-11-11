@@ -111,7 +111,6 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.grid.on('rowcontextmenu', this.onGridContextMenu, this);
 		this.grid.on('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
 		this.grid.getSelectionModel().on('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
-		this.grid.on('exception', this.onTimeOutNotify, this);
 		
 		MShop.panel.AbstractListUi.superclass.initComponent.apply(this, arguments);
 
@@ -167,11 +166,6 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			disabled: (this.importMethod === null)
 		});
 
-	},
-	
-	onTimeOutNotify: function() {
-		this.grid.loadMask.hide();
-		Ext.Msg.alert('Timeout, try again');
 	},
 
 	initToolbar: function() {
