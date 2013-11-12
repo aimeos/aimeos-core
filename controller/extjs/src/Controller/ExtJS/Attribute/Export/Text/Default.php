@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
@@ -19,7 +19,6 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	extends Controller_ExtJS_Common_Load_Text_Abstract
 	implements Controller_ExtJS_Common_Load_Text_Interface
 {
-	private $_sheetLine = 1;
 
 
 	/**
@@ -34,33 +33,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 
 	/**
-	 * Creates a XLS file with all attribute texts and outputs it directly.
-	 *
-	 * @param stdClass $params Object containing the properties, e.g. the list of attribute IDs
-	 */
-	public function createHttpOutput( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
-		$lang = ( property_exists( $params, 'lang' ) && is_array( $params->lang ) ? $params->lang : array() );
-
-		$this->_getContext()->getLogger()->log( sprintf( 'Create export for attribute IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
-
-
-		@header('Content-Type: application/vnd.ms-excel');
-		@header('Content-Disposition: attachment; filename=arcavias-attribute-texts.xls');
-		@header('Cache-Control: max-age=0');
-
-		$this->_container = new Controller_ExtJS_Common_Load_Container_PHPExcel( 'php://output', 'attribute' );//$this->_getContext()->getConfig()->get( 'controller/extjs/export/manager', new Controller_ExtJS_Common_Load_Container_PHPExcel( 'php://output', 'attribute' ) );
-		$phpExcel = $this->_createDocument( $items, $lang );
-		$this->_container->finish();
-	}
-
-
-	/**
-	 * Creates a new job to export an excel file.
+	 * Creates a new job to export a zip file.
 	 *
 	 * @param stdClass $params Object containing the properties, e.g. the list of attribute IDs
 	 */
@@ -104,7 +77,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 
 	/**
-	 * Create an excel file in the filesystem.
+	 * Create csv files in zip in the filesystem.
 	 *
 	 * @param stdClass $params Object containing the properties, e.g. the list of attribute IDs
 	 */
@@ -112,31 +85,44 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	{
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
+		$actualLangid = $this->_getContext()->getLocale()->getLanguageId();
 
 		$items = (array) $params->items;
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();
 
 		$config = $this->_getContext()->getConfig();
-		$dir = $config->get( 'controller/extjs/attribute/export/text/default/exportdir', 'uploads' );
-		$perms = $config->get( 'controller/extjs/attribute/export/text/default/dirperms', 0775 );
+		$dir = $config->get( 'controller/extjs/product/export/text/default/exportdir', 'uploads' );
+		$perms = $config->get( 'controller/extjs/product/export/text/default/dirperms', 0775 );
+
+		$foldername = 'product-text-export_' . date('Y-m-d') . '_' . md5( time() . getmypid() );
+		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
 
 		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
 		}
 
-		$filename = 'attribute-text-export_' .date('Y-m-d') . '_' . md5( time() . getmypid() );
-		$this->_filepath = $dir . DIRECTORY_SEPARATOR . $filename;
+		if( mkdir( $tmpfolder, $perms, true ) === false ) {
+			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $tmpfolder, $perms ) );
+		}
 
-		$this->_getContext()->getLogger()->log( sprintf( 'Create export file for attribute IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
+		$this->_getContext()->getLogger()->log( sprintf( 'Create export directory for attribute IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
-		$this->_container = $config->get( 'controller/extjs/export/manager', new Controller_ExtJS_Common_Load_Container_PHPExcel( $this->_filepath ) );
-		$this->_createDocument( $items, $lang );
-		$filename = $this->_container->finish();
+		try
+		{
+			$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
-		$downloadFile = $config->get( 'controller/extjs/attribute/export/text/default/downloaddir', 'uploads' ) . DIRECTORY_SEPARATOR . $filename;
+			$filename = $this->_exportProductData( $items, $lang, $tmpfolder );
+		}
+		catch ( Exception $e )
+		{
+			$this->_removeTempFiles( $tmpfolder );
+			throw $e;
+		}
+
+		$this->_removeTempFiles( $tmpfolder );
 
 		return array(
-			'file' => '<a href="'.$downloadFile.'">Download</a>',
+			'file' => '<a href="'.$filename.'">Download</a>',
 		);
 	}
 
@@ -163,56 +149,65 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 
 	/**
-	 * Creates a new PHPExcel document object.
+	 * Exports data to csv files.
 	 *
 	 * @param array $ids List of item IDs that should be part of the document
 	 * @param array $lang List of languages to export (empty array for all)
-	 * @return PHPExcel Document object
+	 * @param string $tmpfolder Temporary folder name where to write export files
+	 * @return string Path of export file
 	 */
-	protected function _createDocument( array $ids, array $lang )
+	protected function _exportAttributeData( array $ids, array $lang, $tmpfolder )
 	{
+		$data = array();
 		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
 		$globalLanguageManager = $manager->getSubManager( 'language' );
 
 		$search = $globalLanguageManager->createSearch();
-		$search->setSortations( array( $search->sort( '+', 'locale.language.id' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'locale.language.id') ) );
 
 		if( !empty( $lang ) ) {
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$start = $temp = $total = 0;
-		$items = array();
+		$containerItem = $this->_initContainer( $tmpfolder );
+
+		$start = 0;
 
 		do
 		{
-			$result = $globalLanguageManager->searchItems( $search, array(), $temp );
-			if( $temp ) { $total = $temp; $temp = null; }
+			$result = $globalLanguageManager->searchItems( $search );
 
-			foreach ( $result as $item ) {
-				$this->_addLanguage( $item->getId(), $ids );
+			foreach ( $result as $item )
+			{
+				$langid = $item->getId();
+				$files[ $langid ] = $tmpfolder . DIRECTORY_SEPARATOR . $langid . '.csv';
+				$contentItem = new MW_Container_Content_CSV($files[ $langid ], 'Attribute Export' );
+				$contentItem->add( array( 'Language ID', 'Attribute type', 'Attribute code', 'List type', 'Text type', 'Text ID', 'Text' ) );
+				$this->_getContext()->getLocale()->setLanguageId( $langid );
+				$this->_addLanguage( $langid, $ids, $contentItem );
+				$contentItem->close();
+				$containerItem->add( $contentItem );
 			}
 
-			$start += count( $result );
+			$count = count( $result );
+			$start += $count;
 			$search->setSlice( $start );
 		}
-		while( $start < $total );
+		while( $count == $search->getSliceSize() );
+
+		return $tmpfolder . 'zip';
 	}
 
 
 	/**
-	 * Adds a new sheet for the given language to the document.
+	 * Adds data for the given language.
 	 *
-	 * @param string $langid Language item object
+	 * @param string $langid Language id
 	 * @param array $items List of of item ids whose texts should be added
+	 * @param MW_Container_Content_Interface $contentItem Content item
 	 */
-	protected function _addLanguage( $langid, array $ids )
+	protected function _addLanguage( $langid, array $ids, MW_Container_Content_Interface $contentItem )
 	{
-		$data = array( 'Language ID', 'Attribute type', 'Attribute code', 'List type', 'Text type', 'Text ID', 'Text' );
-
-		$contentManager = Controller_ExtJS_Common_Load_Content_Default( $this->_filepath, $langid, 'attribute' );
-		$contentManager->addEntry( $data );
-
 		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
 		$search = $manager->createSearch();
 
@@ -223,35 +218,44 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		$sort = array( $search->sort( '+', 'attribute.type.code' ), $search->sort( '+', 'attribute.position' ) );
 		$search->setSortations( $sort );
 
-		$start = $temp = $total = 0;
-		$items = array();
+		$start = 0;
 
 		do
 		{
-			$result = $manager->searchItems( $search, array('text'), $temp );
-			if( $temp ) { $total = $temp; $temp = null; }
+			$result = $manager->searchItems( $search, array('text') );
 
 			foreach( $result as $item ) {
-				$this->_addItem( $langid, $item, $contentManager );
+				$this->_addItem( $langid, $item, $contentItem );
 			}
 
-			$start += count( $result );
+			$count = count( $result );
+			$start += $count;
 			$search->setSlice( $start );
 		}
-		while( $start < $total );
-
-		$this->_container->addData( $contentManager->getFilePath() );
+		while( $count == $search->getSliceSize() );
 	}
 
 
 	/**
-	 * Adds all texts belonging to an attribute item to the given sheet.
+	 * Inits container for storing export files.
 	 *
-	 * @param PHPExcel_Worksheet $sheet Worksheet where the texts will be added
-	 * @param MShop_Locale_Item_Language_Interface $langItem Language item object
-	 * @param MShop_Attribute_Item_Interface $item Attribute item object
+	 * @param string $resource Path or resource
+	 * @return MW_Container_Interface Container item
 	 */
-	protected function _addItem( $langid, MShop_Attribute_Item_Interface $item, $contentManager )
+	protected function _initContainer( $resource )
+	{
+		return new MW_Container_Zip( $resource . '.zip', 'CSV' );
+	}
+
+
+	/**
+	 * Adds all texts belonging to an product item.
+	 *
+	 * @param string $langid Language id
+	 * @param MShop_Product_Item_Interface $item product item object
+	 * @param MW_Container_Content_Interface $contentItem Content item
+	 */
+	protected function _addItem( $langid, MShop_Product_Item_Interface $item, MW_Container_Content_Interface $contentItem )
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
@@ -285,7 +289,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 				$items = array( $langid, $item->getType(), $item->getCode(), 'default', $textTypeItem->getCode(), '', '' );
 			}
 
-			$contentManager->addEntry( $items );
+			$contentItem->add( $items );
 		}
 	}
 }

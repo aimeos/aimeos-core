@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
@@ -30,7 +30,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 
 
 	/**
-	 * Uploads a XLS file with all catalog texts.
+	 * Uploads a CSV file with all catalog texts.
 	 *
 	 * @param stdClass $params Object containing the properties
 	 */
@@ -92,7 +92,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 
 
 	/**
-	 * Imports a XLS file with all catalog texts.
+	 * Imports a CSV file with all catalog texts.
 	 *
 	 * @param stdClass $params Object containing the properties
 	 */
@@ -142,27 +142,23 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 
 
 	/**
-	 * Imports a file that can be understood by PHPExcel.
+	 * Imports a CSV file.
 	 *
 	 * @param string $path Path to file for importing
 	 */
 	protected function _importFile( $path )
 	{
-		$type = PHPExcel_IOFactory::identify( $path );
-		$reader = PHPExcel_IOFactory::createReader( $type );
-		$reader->setReadDataOnly( true );
-		$phpExcel = $reader->load( $path );
+		$fp = fopen( $path, 'r' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'catalog' ) as $item ) {
 			$textTypeMap[ $item->getCode() ] = $item->getId();
 		}
 
-		foreach( $phpExcel->getWorksheetIterator() as $sheet )
-		{
-			$catalogTextMap = $this->_importTextsFromXLS( $sheet, $textTypeMap, 'catalog' );
-			$this->_importCatalogReferences( $catalogTextMap );
-		}
+		$manager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
+
+		$catalogTextMap = $this->_importTextsFromCSV( $fp, $textTypeMap, 'catalog' );
+		$this->_importCatalogReferences( $catalogTextMap );
 	}
 
 

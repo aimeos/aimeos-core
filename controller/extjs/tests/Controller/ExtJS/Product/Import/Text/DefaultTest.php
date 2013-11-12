@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -73,64 +73,28 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 	public function testImportFile()
 	{
 		$context = TestHelper::getContext();
-		$filename = 'product-import-test.xlsx';
 
-		$phpExcel = new PHPExcel();
-		$phpExcel->setActiveSheetIndex(0);
-		$sheet = $phpExcel->getActiveSheet();
+		$data[] = array( 'en','product','ABCD','default','long','','ABCD: long' );
+		$data[] = array( 'en','product','ABCD','default','metadescription','','ABCD: meta desc');
+		$data[] = array( 'en','product','ABCD','default','metakeywords','','ABCD: meta keywords' );
+		$data[] = array( 'en','product','ABCD','default','metatitle','','ABCD: meta title');
+		$data[] = array( 'en','product','ABCD','default','name','','ABCD: name');
+		$data[] = array( 'en','product','ABCD','default','short','','ABCD: short');
 
-		$sheet->setCellValueByColumnAndRow( 0, 2, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 3, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 4, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 5, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 6, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 7, 'en' );
+		$filename = 'product-import-test.csv';
+		$fh = fopen( $filename, 'w' );
 
-		$sheet->setCellValueByColumnAndRow( 1, 2, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 3, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 4, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 5, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 6, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 7, 'product' );
+		foreach( $data as $id => $row ) {
+			fputcsv( $fh, $row );
+		}
 
-		$sheet->setCellValueByColumnAndRow( 2, 2, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 3, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 4, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 5, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 6, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 7, 'ABCD' );
-
-		$sheet->setCellValueByColumnAndRow( 3, 2, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 3, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 4, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 5, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 6, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 7, 'default' );
-
-		$sheet->setCellValueByColumnAndRow( 4, 2, 'long' );
-		$sheet->setCellValueByColumnAndRow( 4, 3, 'metadescription' );
-		$sheet->setCellValueByColumnAndRow( 4, 4, 'metakeywords' );
-		$sheet->setCellValueByColumnAndRow( 4, 5, 'metatitle' );
-		$sheet->setCellValueByColumnAndRow( 4, 6, 'name' );
-		$sheet->setCellValueByColumnAndRow( 4, 7, 'short' );
-
-		$sheet->setCellValueByColumnAndRow( 6, 2, 'ABCD: long' );
-		$sheet->setCellValueByColumnAndRow( 6, 3, 'ABCD: meta desc' );
-		$sheet->setCellValueByColumnAndRow( 6, 4, 'ABCD: meta keywords' );
-		$sheet->setCellValueByColumnAndRow( 6, 5, 'ABCD: meta title' );
-		$sheet->setCellValueByColumnAndRow( 6, 6, 'ABCD: name' );
-		$sheet->setCellValueByColumnAndRow( 6, 7, 'ABCD: short' );
-
-		$objWriter = PHPExcel_IOFactory::createWriter($phpExcel, 'Excel2007');
-		$objWriter->save($filename);
-
+		fclose( $fh );
 
 		$params = new stdClass();
 		$params->site = $context->getLocale()->getSite()->getCode();
 		$params->items = $filename;
 
 		$this->_object->importFile( $params );
-
 
 		$textManager = MShop_Text_Manager_Factory::createManager( $context );
 		$criteria = $textManager->createSearch();

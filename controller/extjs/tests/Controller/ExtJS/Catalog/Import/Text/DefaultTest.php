@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -37,7 +37,6 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-
 		$this->_testdir = $context->getConfig()->get( 'controller/extjs/catalog/import/text/default/uploaddir', './tmp' );
 		$this->_testfile = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
@@ -76,7 +75,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
 		$params = new stdClass();
-		$params->lang = array( 'de', 'en' );
+		$params->lang = array( 'en' );
 		$params->items = $node->getId();
 		$params->site = $context->getLocale()->getSite()->getCode();
 
@@ -85,43 +84,56 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		}
 
 		$exporter = new Controller_ExtJS_Catalog_Export_Text_Default( $context );
-		$exporter->createHttpOutput( $params );
+		$result = $exporter->exportFile( $params );
 
-		$content = ob_get_contents();
-		ob_end_clean();
+		$file = substr( $result['file'], 9, -14);
+		$this->assertTrue( file_exists( $file ) );
 
+		$zip = new ZipArchive();
+		$zip->open($file);
 
-		$filename = 'catalog-import.xlsx';
-		$filename2 = 'catalog-import.xls';
-
-		if( file_put_contents( $filename, $content ) === false ) {
-			throw new Exception( 'Unable write import file' );
+		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport';
+		if( mkdir( $testdir ) === false ) {
+			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
 		}
 
-		$phpExcel = PHPExcel_IOFactory::load($filename);
+		$zip->extractTo( $testdir );
+		$zip->close();
 
-		if( unlink( $filename ) !== true ) {
-			throw new Exception( sprintf( 'Deleting file "%1$s" failed', $filename ) );
+		if( unlink( $file ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
 		}
 
-		$sheet = $phpExcel->getSheet( 1 );
+		$enCSV = $testdir . DIRECTORY_SEPARATOR . 'en.csv';
 
-		$sheet->setCellValueByColumnAndRow( 6, 2, 'Root: delivery info' );
-		$sheet->setCellValueByColumnAndRow( 6, 3, 'Root: long' );
-		$sheet->setCellValueByColumnAndRow( 6, 4, 'Root: name' );
-		$sheet->setCellValueByColumnAndRow( 6, 5, 'Root: payment info' );
-		$sheet->setCellValueByColumnAndRow( 6, 6, 'Root: short' );
+		$this->assertTrue( file_exists( $enCSV ) );
+		$fh = fopen( $enCSV, 'r' );
+		while( ( $data = fgetcsv( $fh ) ) != false ) {
+			$lines[] = $data;
+		}
+		fclose( $fh );
 
-		$objWriter = PHPExcel_IOFactory::createWriter( $phpExcel, 'Excel5' );
-		$objWriter->save( $filename2 );
+		$lines[1][6] = 'Root: delivery info';
+		$lines[2][6] = 'Root: long';
+		$lines[3][6] = 'Root: name';
+		$lines[4][6] = 'Root: payment info';
+		$lines[5][6] = 'Root: short';
 
+		$fh = fopen( $enCSV, 'w' );
+		for( $i = 1; $i<6; $i++) {
+			fputcsv( $fh, $lines[$i] );
+		}
+		fclose( $fh );
 
 		$params = new stdClass();
 		$params->site = $context->getLocale()->getSite()->getCode();
-		$params->items = $filename2;
+		$params->items = $enCSV;
 
 		$this->_object->importFile( $params );
 
+		if( rmdir( 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport' ) !== true ) {
+			throw new Exception( sprintf( 'Deleting dir failed' ) );
+		}
 
 		$textManager = MShop_Text_Manager_Factory::createManager( $context );
 		$criteria = $textManager->createSearch();
@@ -163,10 +175,6 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 		foreach( $textItems as $item ) {
 			$this->assertEquals( 'Root:', substr( $item->getContent(), 0, 5 ) );
-		}
-
-		if( file_exists( $filename2 ) !== false ) {
-			throw new Exception( 'Import file was not removed' );
 		}
 	}
 
@@ -214,7 +222,6 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$result = $jobController->searchItems( $params );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}
-
 
 	public function testUploadFileExeptionNoFiles()
 	{
