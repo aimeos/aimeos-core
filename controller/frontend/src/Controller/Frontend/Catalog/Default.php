@@ -81,7 +81,7 @@ class Controller_Frontend_Catalog_Default
 				$sortations[] = $search->sort( $direction, $sortfunc );
 				break;
 
-			case 'position':
+			case 'relevance':
 				$cmpfunc = $search->createFunction( 'catalog.index.catalog.position', array( $listtype, $catid ) );
 				$expr[] = $search->compare( '>=', $cmpfunc, 0 );
 
