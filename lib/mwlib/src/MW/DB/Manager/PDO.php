@@ -67,13 +67,21 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 
 				$host = $this->_config->get( 'resource/' . $name . '/host' );
 				$port = $this->_config->get( 'resource/' . $name . '/port' );
-				$database = $this->_config->get( 'resource/' . $name . '/database' );
 				$user = $this->_config->get( 'resource/' . $name . '/username' );
 				$pass = $this->_config->get( 'resource/' . $name . '/password' );
+				$sock = $this->_config->get( 'resource/' . $name . '/socket' );
+				$dbase = $this->_config->get( 'resource/' . $name . '/database' );
 
-				$dsn = $adapter . ':dbname=' . $database;
-				$dsn .= isset( $host ) ? ';host=' . $host : '';
-				$dsn .= isset( $port ) ? ';port=' . $port : '';
+				$dsn = $adapter . ':dbname=' . $dbase;
+				if( $sock == null )
+				{
+					$dsn .= isset( $host ) ? ';host=' . $host : '';
+					$dsn .= isset( $port ) ? ';port=' . $port : '';
+				}
+				else
+				{
+					$dsn .= ';unix_socket=' . $sock;
+				}
 
 				$attr = array(
 					PDO::ATTR_PERSISTENT => $this->_config->get( 'resource/' . $name . '/opt-persistent', false ),

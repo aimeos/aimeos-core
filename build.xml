@@ -21,6 +21,7 @@
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/extjs" />
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="coverage" haltonfailure="true">
@@ -39,6 +40,7 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/extjs" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="test" haltonfailure="true">
@@ -53,10 +55,10 @@
 	</target>
 
 	<target name="testperf" description="Executes performance tests">
-		<phing target="testperf" dir="${coredir}/lib/mshoplib" />
-		<phing target="testperf" dir="${coredir}/client/html" />
-		<phing target="testperf" dir="${coredir}/lib/mwlib" />
-		<phing target="testperf">
+		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="testperf" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mwlib" />
+		<phing target="testperf" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
@@ -65,13 +67,15 @@
 
 
 	<target name="check" description="Executes all checks">
-		<phing target="check" dir="${coredir}/lib/mshoplib" />
-		<phing target="check" dir="${coredir}/controller/frontend" />
-		<phing target="check" dir="${coredir}/controller/extjs" />
-		<phing target="check" dir="${coredir}/client/extjs" />
-		<phing target="check" dir="${coredir}/client/html" />
-		<phing target="check" dir="${coredir}/lib/mwlib" />
-		<phing target="check">
+		<property name="codestddir" value="${project.basedir}/misc/coding" override="true" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/controller/extjs" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
+		<phing target="check" haltonfailure="false" dir="${coredir}/client/extjs" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mwlib" />
+		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
@@ -79,18 +83,19 @@
 	</target>
 
 	<target name="checkext" description="Executes checks of specific extension directory">
-		<phing target="check" dir="${dir}" phingfile="phing.xml" />
+		<property name="codestddir" value="${project.basedir}/misc/coding" override="true" />
+		<phing target="check" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
 	</target>
 
 
 	<target name="doc" description="Generates the API documentation">
 		<echo msg="Generating API documentation" />
-		<delete dir="${coredir}/dev/apidoc" quiet="true" failonerror="false" />
+		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
 		<phpdocext title="Arcavias API documentation"
-			destdir="${coredir}/dev/apidoc"
+			destdir="${coredir}/misc/apidoc"
 			output="HTML:frames/Extjs:default,HTML:Smarty:PHP"
 			sourcecode="true"
-			templatebase="dev/phpdoc"
+			templatebase="misc/phpdoc"
 			undocumentedelements="true">
 			<fileset dir="${coredir}">
 				<include name="Arcavias.php" />
@@ -104,6 +109,9 @@
 			<fileset dir="controller/extjs/src">
 				<include name="**/*.php" />
 			</fileset>
+			<fileset dir="controller/jobs/src">
+				<include name="**/*.php" />
+			</fileset>
 			<fileset dir="lib/mshoplib/src">
 				<include name="**/*.php" />
 			</fileset>
@@ -115,13 +123,14 @@
 
 
 	<target name="clean" description="Cleans up temporary files">
-		<phing target="clean" dir="${coredir}/lib/mshoplib" />
-		<phing target="clean" dir="${coredir}/controller/frontend" />
-		<phing target="clean" dir="${coredir}/controller/extjs" />
-		<phing target="clean" dir="${coredir}/client/extjs" />
-		<phing target="clean" dir="${coredir}/client/html" />
-		<phing target="clean" dir="${coredir}/lib/mwlib" />
-		<phing target="clean">
+		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/extjs" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/client/extjs" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mwlib" />
+		<phing target="clean" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
@@ -130,10 +139,11 @@
 
 
 	<target name="i18n" description="Creates all translation files">
-		<phing target="i18n" dir="${coredir}/client/html" />
-		<phing target="i18n" dir="${coredir}/controller/frontend" />
-		<phing target="i18n" dir="${coredir}/lib/mshoplib" />
-		<phing target="i18n">
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
@@ -142,12 +152,14 @@
 
 
 	<target name="build" description="Creates all files to be generated" >
-		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/dev/phing" />
+		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/misc/phing" />
 		<jsbpackages />
-		<phing target="build" dir="${coredir}/client/html" />
-		<phing target="build" dir="${coredir}/controller/frontend" />
-		<phing target="build" dir="${coredir}/lib/mshoplib" />
-		<phing target="build">
+		<exec command="tx pull -a" checkreturn="true" logoutput="true"/>
+		<phing target="build" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
 			</fileset>
@@ -161,6 +173,15 @@
 			checkreturn="true" logoutput="true"/>
 		<filehash file="../arcavias-core_${version}.tar.bz2" hashtype="1" />
 		<echo msg="SHA1 hash value: ${filehashvalue}" />
+	</target>
+
+
+	<target name="release" description="Creates new release" depends="deploy">
+		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
+		<exec command="git branch ${version}" checkreturn="true" logoutput="true" />
+		<exec command="git tag -a arcavias-core_${version} -m 'Release ${version}'" checkreturn="true" logoutput="true" />
+		<exec command="git push origin ${version}" checkreturn="true" logoutput="true" />
+		<exec command="git push --tags" checkreturn="true" logoutput="true" />
 	</target>
 
 

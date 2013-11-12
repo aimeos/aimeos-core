@@ -50,6 +50,7 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 		this.on('containercontextmenu', this.onContainerContextMenu, this);
 		this.on('contextmenu', this.onContextMenu, this);
 		this.on('dblclick', this.onOpenEditWindow.createDelegate(this, [ 'edit' ]), this);
+		this.on('expandnode', this.onExpandNode, this);
 		this.getSelectionModel().on('selectionchange', this.onSelectionChange, this, { buffer : 10 });
 		
 		MShop.panel.AbstractTreeUi.superclass.initComponent.call(this);
@@ -87,6 +88,18 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 		}).start();
 	},
 
+	/**
+	 * If there are no children do not display expand / collapse symbols
+	 */
+	onExpandNode : function (node) {
+		var domain = this.domain;
+		Ext.each(node["childNodes"], function(node) {
+			if(node["attributes"].hasOwnProperty(domain + ".hasChildren") && node["attributes"][domain + ".hasChildren"] === false) {
+				node.ui.ecNode.style.visibility = 'hidden'; 
+			}
+		}, this);
+	},
+	
 	initLoader : function()
 	{
 		var domain = this.domain;
@@ -113,7 +126,6 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 						node.getOwnerTree().enable();
 						node.getOwnerTree().actionAdd.setDisabled(node.id !== 'root');
 					}
-
 					// cut off item itself
 					response.responseData = response.responseText.items.children;
 					return Ext.tree.TreeLoader.prototype.processResponse.apply(this, arguments);
@@ -267,11 +279,11 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 			[].concat(rs),
 			function(r) {
 				var newNode = this.getLoader().createNode(r.data);
-
 				switch (action)
 				{
 					case 'create':
 						if (selectedNode) {
+							selectedNode.ui.ecNode.style.visibility = 'visible';
 							selectedNode.appendChild(newNode);
 						} else {
 							this.setRootNode(newNode);
@@ -296,6 +308,7 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 			},
 			this );
 	},
+	
 	
 	onOpenEditWindow : function(action)
 	{

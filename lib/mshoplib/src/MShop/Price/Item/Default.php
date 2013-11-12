@@ -24,7 +24,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Initalizes the object with the given values
 	 *
-	 * @param array $values Associative array of key/value pairs for price, shipping, rebate and currencyid
+	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
 	 */
 	public function __construct( array $values = array( ) )
 	{
@@ -175,28 +175,28 @@ class MShop_Price_Item_Default
 
 
 	/**
-	 * Returns the shipping costs.
+	 * Returns costs.
 	 *
-	 * @return numeric Shipping costs
+	 * @return numeric Costs
 	 */
-	public function getShipping()
+	public function getCosts()
 	{
-		return ( isset( $this->_values['shipping'] ) ? (string) $this->_values['shipping'] : '0.00' );
+		return ( isset( $this->_values['costs'] ) ? (string) $this->_values['costs'] : '0.00' );
 	}
 
 
 	/**
-	 * Sets the new shipping costs.
+	 * Sets the new costs.
 	 *
 	 * @param numeric $price Amount with two digits precision
 	 */
-	public function setShipping( $price )
+	public function setCosts( $price )
 	{
-		if ( $price == $this->getShipping() ) { return; }
+		if ( $price == $this->getCosts() ) { return; }
 
 		$this->_checkPrice( $price );
 
-		$this->_values['shipping'] = $this->_formatNumber( $price );
+		$this->_values['costs'] = $this->_formatNumber( $price );
 		$this->setModified();
 	}
 
@@ -315,11 +315,11 @@ class MShop_Price_Item_Default
 	{
 		if( $item->getCurrencyId() != $this->getCurrencyId() )
 		{
-			throw new MShop_Price_Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currenty ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
+			throw new MShop_Price_Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currency ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
 		}
 
 		$this->_values['value'] = $this->_formatNumber( $this->getValue() + $item->getValue() * $quantity );
-		$this->_values['shipping'] = $this->_formatNumber( $this->getShipping() + $item->getShipping() * $quantity );
+		$this->_values['costs'] = $this->_formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
 		$this->_values['rebate'] = $this->_formatNumber( $this->getRebate() + $item->getRebate() * $quantity );
 	}
 
@@ -339,7 +339,7 @@ class MShop_Price_Item_Default
 		$list['price.domain'] = $this->getDomain();
 		$list['price.quantity'] = $this->getQuantity();
 		$list['price.value'] = $this->getValue();
-		$list['price.shipping'] = $this->getShipping();
+		$list['price.costs'] = $this->getCosts();
 		$list['price.rebate'] = $this->getRebate();
 		$list['price.taxrate'] = $this->getTaxRate();
 		$list['price.status'] = $this->getStatus();

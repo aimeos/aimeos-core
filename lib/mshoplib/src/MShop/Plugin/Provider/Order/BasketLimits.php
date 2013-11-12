@@ -9,28 +9,15 @@
 
 
 /**
- * Free shipping implementation if ordered product sum is above a certain value.
+ * Checks if ordered product sum and count of products is above a certain value.
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_BasketLimits
+	extends MShop_Plugin_Provider_Order_Abstract
+	implements MShop_Plugin_Provider_Interface
 {
-	private $_item = null;
-	private $_context = null;
-
-
-	/**
-	 * Initializes the plugin instance
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
-	{
-		$this->_item = $item;
-		$this->_context = $context;
-	}
 
 
 	/**
@@ -40,7 +27,7 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$p->addListener( $this, 'isComplete.after' );
+		$p->addListener( $this, 'check.after' );
 	}
 
 
@@ -55,28 +42,29 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$failures = array();
+		$context = $this->_getContext();
+		$logger = $context->getLogger();
 
-		$this->_context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
+		$logger->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
 
-		if( defined( 'DISABLE_MShop_Order_Plugin_Complete' ) )
+		if( $context->getConfig()->get( 'mshop/plugin/provider/order/complete/disable', false ) )
 		{
-			$this->_context->getLogger()->log(__METHOD__ . ': Is disabled', MW_Logger_Abstract::DEBUG);
+			$logger->log(__METHOD__ . ': Is disabled', MW_Logger_Abstract::DEBUG);
 			return true;
 		}
 
 		$class = 'MShop_Order_Item_Base_Interface';
-		if( !( $order instanceof $class ) )
-		{
-			throw new MShop_Plugin_Exception(sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof $class ) ) {
+			throw new MShop_Plugin_Provider_Exception(sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) { return true; }
 
-		$config = $this->_item->getConfig();
 
-		$sum = MShop_Price_Manager_Factory::createManager( $this->_context )->createItem();
 		$count = 0;
+		$failures = array();
+		$config = $this->_getItem()->getConfig();
+		$sum = MShop_Price_Manager_Factory::createManager( $context )->createItem();
 
 		foreach( $order->getProducts() as $product )
 		{
@@ -84,18 +72,30 @@ class MShop_Plugin_Provider_Order_BasketLimits implements MShop_Plugin_Provider_
 			$count += $product->getQuantity();
 		}
 
-		if( ( isset( $config['minorder'] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['minorder'] ) ) {
-			$failures[] = 'limit.min-value';
-		}
+		$currencyId = $sum->getCurrencyId();
 
-		if( ( isset( $config['minproducts'] ) ) && ( $count < $config['minproducts'] ) ) {
-			$failures[] = 'limit.min-products';
-		}
-
-		if( count( $failures ) > 0 )
+		if( ( isset( $config['min-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] ) )
 		{
-			$msg = sprintf( 'Minimum value or minimum amount of products in basket is not reached' );
-			throw new MShop_Plugin_Provider_Exception( $msg, -1, null, array( 'basket' => $failures ) );
+			$msg = sprintf( 'The minimum basket value of %1$s isn\'t reached', $config['min-value'][$currencyId] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
+		}
+
+		if( ( isset( $config['max-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() > $config['max-value'][$currencyId] ) )
+		{
+			$msg = sprintf( 'The maximum basket value of %1$s is exceeded', $config['max-value'][$currencyId] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
+		}
+
+		if( ( isset( $config['min-products'] ) ) && ( $count < $config['min-products'] ) )
+		{
+			$msg = sprintf( 'The minimum product quantity of %1$d isn\'t reached', $config['min-products'] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
+		}
+
+		if( ( isset( $config['max-products'] ) ) && ( $count > $config['max-products'] ) )
+		{
+			$msg = sprintf( 'The maximum product quantity of %1$d is exceeded', $config['max-products'] );
+			throw new MShop_Plugin_Provider_Exception( $msg );
 		}
 
 		return true;

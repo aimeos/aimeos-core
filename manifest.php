@@ -15,6 +15,7 @@ return array(
 		'client/html/src',
 		'controller/frontend/src',
 		'controller/extjs/src',
+		'controller/jobs/src',
 		'lib/mwlib/lib',
 		'lib/phpexcel',
 	),
@@ -25,6 +26,7 @@ return array(
 			'controller/frontend/config/controller',
 			'controller/extjs/config/controller',
 			'config',
+			'client/extjs/config',
 		),
 	),
 	'i18n' => array(
@@ -34,6 +36,7 @@ return array(
 		'client/html/currency' => 'client/html/i18n/currency',
 		'client/html/language' => 'client/html/i18n/language',
 		'controller/frontend' => 'controller/frontend/i18n',
+		'mshop/code' => 'lib/mshoplib/i18n/code',
 		'mshop' => 'lib/mshoplib/i18n',
 	),
 	'setup' => array(
@@ -48,6 +51,9 @@ return array(
 		),
 		'controller/extjs' => array(
 			'controller/extjs/src',
+		),
+		'controller/jobs' => array(
+			'controller/jobs/src',
 		),
 	),
 );

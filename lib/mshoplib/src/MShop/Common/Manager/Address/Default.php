@@ -30,7 +30,7 @@ class MShop_Common_Manager_Address_Default
 	 * @param MShop_Context_Interface $_context Context object with required objects
 	 */
 	public function __construct( MShop_Context_Item_Interface $context,
-		array $config = array( ), array $searchConfig = array( ) )
+		array $config = array(), array $searchConfig = array() )
 	{
 		$whitelist = array( 'delete', 'insert', 'update', 'search', 'count', 'newid' );
 		$isList = array_keys( $config );
@@ -221,8 +221,8 @@ class MShop_Common_Manager_Address_Default
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = 'mshop/'. $topdomain . '/manager/' . implode('/', $domain) . '/default/item/search';
-			$cfgPathCount =  'mshop/'. $topdomain . '/manager/' . implode('/', $domain) . '/default/item/count';
+			$cfgPathSearch = $this->_config['search'];
+			$cfgPathCount =  $this->_config['count'];
 			$required = array( trim( $this->_prefix, '.' ) );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );

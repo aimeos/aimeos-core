@@ -121,7 +121,7 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	protected function _createValueList( $type, array $values )
 	{
 		if( empty( $values ) ) {
-			return '';
+			return '(NULL)';
 		}
 
 		$operator = $this->getOperator();

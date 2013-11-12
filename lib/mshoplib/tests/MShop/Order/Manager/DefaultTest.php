@@ -99,7 +99,7 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$results = $this->_object->searchItems( $search );
 
 		if( ( $item = reset($results) ) === false ) {
-			throw new Exception( 'No order base item found.' );
+			throw new Exception( 'No order item found.' );
 		}
 
 		$item->setId(null);
@@ -123,8 +123,6 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getDateDelivery(), $itemSaved->getDateDelivery() );
 		$this->assertEquals( $item->getPaymentStatus(), $itemSaved->getPaymentStatus() );
 		$this->assertEquals( $item->getDeliveryStatus(), $itemSaved->getDeliveryStatus() );
-		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
-		$this->assertEquals( $item->getEmailFlag(), $itemSaved->getEmailFlag() );
 		$this->assertEquals( $item->getRelatedId(), $itemSaved->getRelatedId() );
 
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
@@ -139,8 +137,6 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getDateDelivery(), $itemUpd->getDateDelivery() );
 		$this->assertEquals( $itemExp->getPaymentStatus(), $itemUpd->getPaymentStatus() );
 		$this->assertEquals( $itemExp->getDeliveryStatus(), $itemUpd->getDeliveryStatus() );
-		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
-		$this->assertEquals( $itemExp->getEmailFlag(), $itemUpd->getEmailFlag() );
 		$this->assertEquals( $itemExp->getRelatedId(), $itemUpd->getRelatedId() );
 
 		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
@@ -149,6 +145,104 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $itemSaved->getId() );
+	}
+
+
+	public function testSaveStatusUpdatePayment()
+	{
+		$statusManager = MShop_Factory::createManager( $this->_context, 'order/status' );
+
+		$search = $this->_object->createSearch();
+		$conditions = array(
+			$search->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_PHONE ),
+			$search->compare( '==', 'order.editor', $this->_editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$results = $this->_object->searchItems( $search );
+
+		if( ( $item = reset($results) ) === false ) {
+			throw new Exception( 'No order item found.' );
+		}
+
+		$item->setId(null);
+		$this->_object->saveItem( $item );
+
+
+		$search = $statusManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
+		$results = $statusManager->searchItems( $search );
+
+		$this->_object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 0, count( $results ) );
+
+
+		$item->setId(null);
+		$item->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
+		$this->_object->saveItem( $item );
+
+		$search = $statusManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
+		$results = $statusManager->searchItems( $search );
+
+		$this->_object->deleteItem( $item->getId() );
+
+		if( ( $statusItem = reset( $results ) ) === false ) {
+			throw new Exception( 'No status item found' );
+		}
+
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( MShop_Order_Item_Status_Abstract::STATUS_PAYMENT, $statusItem->getType() );
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_CANCELED, $statusItem->getValue() );
+	}
+
+
+	public function testSaveStatusUpdateDelivery()
+	{
+		$statusManager = MShop_Factory::createManager( $this->_context, 'order/status' );
+
+		$search = $this->_object->createSearch();
+		$conditions = array(
+			$search->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_PHONE ),
+			$search->compare( '==', 'order.editor', $this->_editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$results = $this->_object->searchItems( $search );
+
+		if( ( $item = reset($results) ) === false ) {
+			throw new Exception( 'No order item found.' );
+		}
+
+		$item->setId(null);
+		$this->_object->saveItem( $item );
+
+
+		$search = $statusManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
+		$results = $statusManager->searchItems( $search );
+
+		$this->_object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 0, count( $results ) );
+
+
+		$item->setId(null);
+		$item->setDeliveryStatus( MShop_Order_Item_Abstract::STAT_LOST );
+		$this->_object->saveItem( $item );
+
+		$search = $statusManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
+		$results = $statusManager->searchItems( $search );
+
+		$this->_object->deleteItem( $item->getId() );
+
+		if( ( $statusItem = reset( $results ) ) === false ) {
+			throw new Exception( 'No status item found' );
+		}
+
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( MShop_Order_Item_Status_Abstract::STATUS_DELIVERY, $statusItem->getType() );
+		$this->assertEquals( MShop_Order_Item_Abstract::STAT_LOST, $statusItem->getValue() );
 	}
 
 
@@ -165,6 +259,9 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$param = array( MShop_Order_Item_Status_Abstract::STATUS_PAYMENT, MShop_Order_Item_Abstract::PAY_RECEIVED );
+		$funcStatPayment = $search->createFunction( 'order.containsStatus', $param );
+
 		$expr[] = $search->compare( '!=', 'order.id', null );
 		$expr[] = $search->compare( '==', 'order.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.baseid', null );
@@ -173,12 +270,11 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.datedelivery', null );
 		$expr[] = $search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_RECEIVED );
 		$expr[] = $search->compare( '==', 'order.statusdelivery', 4 );
-		$expr[] = $search->compare( '==', 'order.flag', 1 );
-		$expr[] = $search->compare( '==', 'order.emailflag', 1 );
 		$expr[] = $search->compare( '==', 'order.relatedid', null );
 		$expr[] = $search->compare( '>=', 'order.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.editor', $this->_editor );
+		$expr[] = $search->compare( '==', $funcStatPayment, 1 );
 
 		$expr[] = $search->compare( '!=', 'order.status.id', null );
 		$expr[] = $search->compare( '==', 'order.status.siteid', $siteid );
@@ -196,7 +292,7 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.currencyid', 'EUR' );
 		$expr[] = $search->compare( '==', 'order.base.price', '53.50' );
-		$expr[] = $search->compare( '==', 'order.base.shipping', '1.50' );
+		$expr[] = $search->compare( '==', 'order.base.costs', '1.50' );
 		$expr[] = $search->compare( '==', 'order.base.rebate', '14.50' );
 		$expr[] = $search->compare( '~=', 'order.base.comment', 'This is a comment' );
 		$expr[] = $search->compare( '>=', 'order.base.mtime', '1970-01-01 00:00:00' );
@@ -238,7 +334,7 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
 		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
 		$expr[] = $search->compare( '==', 'order.base.product.price', '4.50' );
-		$expr[] = $search->compare( '==', 'order.base.product.shipping', '0.00' );
+		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.rebate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.taxrate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );
@@ -265,7 +361,7 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.service.code', 'OGONE' );
 		$expr[] = $search->compare( '==', 'order.base.service.name', 'ogone' );
 		$expr[] = $search->compare( '==', 'order.base.service.price', '0.00' );
-		$expr[] = $search->compare( '==', 'order.base.service.shipping', '0.00' );
+		$expr[] = $search->compare( '==', 'order.base.service.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.rebate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.taxrate', '0.00' );
 		$expr[] = $search->compare( '>=', 'order.base.service.mtime', '1970-01-01 00:00:00' );

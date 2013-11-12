@@ -19,6 +19,9 @@ class MShop_Order_Item_Default
 	implements MShop_Order_Item_Interface
 {
 	private $_values;
+	private $_oldPaymentStatus = MShop_Order_Item_Abstract::PAY_UNFINISHED;
+	private $_oldDeliveryStatus = MShop_Order_Item_Abstract::STAT_UNFINISHED;
+
 
 	/**
 	 * Initializes the object with the given values.
@@ -33,6 +36,14 @@ class MShop_Order_Item_Default
 
 		if ( !isset($values['datepayment']) ) {
 			$this->_values['datepayment'] = date( 'Y-m-d H:i:s', time() );
+		}
+
+		if( isset( $values['statuspayment'] ) ) {
+			$this->_oldPaymentStatus = (int) $values['statuspayment'];
+		}
+
+		if( isset( $values['statusdelivery'] ) ) {
+			$this->_oldDeliveryStatus = (int) $values['statusdelivery'];
 		}
 	}
 
@@ -196,59 +207,6 @@ class MShop_Order_Item_Default
 		$this->setModified();
 	}
 
-	/**
-	 * Returns the order flag.
-	 *
-	 * @return integer Binary group of bits for order status
-	 */
-	public function getFlag()
-	{
-		if ( isset( $this->_values['flag'] ) ) {
-			return (int) $this->_values['flag'];
-		}
-
-		return MShop_Order_Item_Abstract::FLAG_NONE;
-	}
-
-	/**
-	 * Sets the order flag.
-	 *
-	 * @param integer $flag Binary group of bits for order status
-	 */
-	public function setFlag( $flag )
-	{
-		if ( $flag == $this->getFlag() ) { return; }
-
-		$this->_checkFlag( $flag );
-
-		$this->_values['flag'] = (int) $flag;
-		$this->setModified();
-	}
-
-	/**
-	 * Returns the email flag.
-	 *
-	 * @return integer Binary group of bits for order status
-	 */
-	public function getEmailFlag()
-	{
-		return ( isset( $this->_values['emailflag'] ) ? (int) $this->_values['emailflag'] : MShop_Order_Item_Abstract::EMAIL_NONE );
-	}
-
-	/**
-	 * Sets the email flag.
-	 *
-	 * @param integer $flag Binary group of bits for email order status
-	 */
-	public function setEmailFlag( $flag )
-	{
-		if ( $flag == $this->getEmailFlag() ) { return; }
-
-		$this->_checkEmailStatus( $flag );
-
-		$this->_values['emailflag'] = (int) $flag;
-		$this->setModified();
-	}
 
 	/**
 	 * Returns the related invoice ID.
@@ -290,12 +248,23 @@ class MShop_Order_Item_Default
 		$list['order.statusdelivery'] = $this->getDeliveryStatus();
 		$list['order.statuspayment'] = $this->getPaymentStatus();
 		$list['order.datepayment'] = $this->getDatePayment();
-		$list['order.flag'] = $this->getFlag();
-		$list['order.emailflag'] = $this->getEmailFlag();
 		$list['order.datedelivery'] = $this->getDateDelivery();
 		$list['order.relatedid'] = $this->getRelatedId();
 
 		return $list;
 	}
 
+
+	public function __get( $name )
+	{
+		switch( $name )
+		{
+			case 'oldPaymentStatus':
+				return $this->_oldPaymentStatus;
+			case 'oldDeliveryStatus':
+				return $this->_oldDeliveryStatus;
+			default:
+				throw new MShop_Order_Exception( sprintf( 'Property name "%1$s" not within allowed range', $name ) );
+		}
+	}
 }

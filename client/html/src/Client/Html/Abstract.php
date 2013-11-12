@@ -100,7 +100,7 @@ abstract class Client_Html_Abstract
 		foreach( $names as $key => $subname )
 		{
 			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
-				throw new Client_Html_Exception( sprintf( 'Invalid client name "%1$s"', $client ) );
+				throw new Client_Html_Exception( sprintf( 'Invalid characters in client name "%1$s"', $client ) );
 			}
 
 			$names[$key] = ucfirst( $subname );
@@ -139,7 +139,7 @@ abstract class Client_Html_Abstract
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Invalid client name "%1$s"', $name ) );
+			throw new Client_Html_Exception( sprintf( 'Invalid characters in client name "%1$s"', $name ) );
 		}
 
 		$subnames = $this->_createSubNames( $client );
@@ -148,16 +148,37 @@ abstract class Client_Html_Abstract
 		$interface = 'Client_Html_Interface';
 
 		if( class_exists( $classname ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$subClient = new $classname( $this->_context, $this->_templatePaths );
 
 		if( ( $subClient instanceof $interface ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
+			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $subClient;
+	}
+
+
+	/**
+	 * Returns the parameters used by the html client.
+	 *
+	 * @param array $params Associative list of all parameters
+	 * @return array Associative list of parameters used by the html client
+	 */
+	protected function _getClientParams( array $params )
+	{
+		$list = array();
+
+		foreach( $params as $key => $value )
+		{
+			if( ( $key[0] === 'f' || $key[0] === 'l' || $key[0] === 'd' || $key[0] === 'a' ) && $key[1] === '-' ) {
+				$list[$key] = $value;
+			}
+		}
+
+		return $list;
 	}
 
 
@@ -213,7 +234,7 @@ abstract class Client_Html_Abstract
 			}
 		}
 
-		throw new Client_Html_Exception( sprintf( 'No template found for "%1$s"', $file ) );
+		throw new Client_Html_Exception( sprintf( 'Template "%1$s" not available', $file ) );
 	}
 
 
@@ -235,5 +256,29 @@ abstract class Client_Html_Abstract
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Translates the plugin error codes to human readable error strings.
+	 *
+	 * @param array $codes Associative list of scope and object as key and error code as value
+	 * @return array List of translated error messages
+	 */
+	protected function _translatePluginErrorCodes( array $codes )
+	{
+		$errors = array();
+		$i18n = $this->_context->getI18n();
+
+		foreach( $codes as $scope => $list )
+		{
+			foreach( $list as $object => $errcode )
+			{
+				$key = $scope . ( $scope !== 'product' ? '.' . $object : '' ) . '.' . $errcode;
+				$errors[] = $i18n->dt( 'mshop/code', $key );
+			}
+		}
+
+		return $errors;
 	}
 }

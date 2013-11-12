@@ -8,6 +8,8 @@
 
 /**
  * Adds flag and emailflag columns in order table.
+ *
+ * 2013-08-01: flag column was removed in favour of entries in mshop_order_status
  */
 class MW_Setup_Task_OrderAddFlags extends MW_Setup_Task_Abstract
 {
@@ -46,7 +48,7 @@ class MW_Setup_Task_OrderAddFlags extends MW_Setup_Task_Abstract
 	{
 		$this->_msg( 'Adding flag and emailflag column to order table', 0 ); $this->_status( '' );
 
-		$this->_process( $this->_mysql );
+		// $this->_process( $this->_mysql );
 	}
 
 

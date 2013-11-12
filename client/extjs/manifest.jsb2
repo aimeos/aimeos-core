@@ -100,6 +100,9 @@
 			"text": "Schema.js",
 			"path": "src/"
 		}, {
+			"text": "Config.js",
+			"path": "src/"
+		}, {
 			"text": "pagingtoolbar.js",
 			"path": "src/elements/"
 		}, {
@@ -122,6 +125,9 @@
 			"path": "src/elements/"
 		}, {
 			"text": "status.js",
+			"path": "src/elements/"
+		}, {
+			"text": "domain.js",
 			"path": "src/elements/"
 		}, {
 			"text": "AbstractListUi.js",
@@ -399,6 +405,21 @@
 		}, {
 			"text": "ConfigUi.js",
 			"path": "src/panel/locale/site/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/type/text/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/type/text/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/type/media/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/type/media/"
+		}, {
+			"text": "TabUi.js",
+			"path": "src/panel/type/"
 		}]
 	}],
 	"resources" : []

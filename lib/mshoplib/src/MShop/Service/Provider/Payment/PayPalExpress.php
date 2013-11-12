@@ -16,8 +16,8 @@
  */
 
 class MShop_Service_Provider_Payment_PayPalExpress
-extends MShop_Service_Provider_Payment_Abstract
-implements MShop_Service_Provider_Payment_Interface
+	extends MShop_Service_Provider_Payment_Abstract
+	implements MShop_Service_Provider_Payment_Interface
 {
 	private $_config;
 
@@ -131,7 +131,7 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function getConfigBE()
 	{
-		$list = array();
+		$list = parent::getConfigBE();
 
 		foreach( $this->_beConfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
@@ -150,7 +150,9 @@ implements MShop_Service_Provider_Payment_Interface
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		return $this->_checkConfig( $this->_beConfig, $attributes );
+		$errors = parent::checkConfigBE( $attributes );
+
+		return array_merge( $errors, $this->_checkConfig( $this->_beConfig, $attributes ) );
 	}
 
 
@@ -159,8 +161,8 @@ implements MShop_Service_Provider_Payment_Interface
 	 * separately isn't supported or not configured by the shop owner.
 	 *
 	 * @param MShop_Order_Item_Interface $order Order invoice object
-	 * @return MShop_Common_Item_Helper_Form_Interface|null Form object with URL, action and parameters to redirect to
-	 * 	(e.g. to an external server of the payment provider) or null to redirect directly to the confirmation page
+	 * @return MW_Common_Form_Interface Form object with URL, action and parameters to redirect to
+	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
 	public function process( MShop_Order_Item_Interface $order )
 	{
@@ -245,7 +247,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$values['AUTHORIZATIONID'] = $tid;
 		$values['INVNUM'] = $order->getId();
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
-		$values['AMT'] = $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getShipping();
+		$values['AMT'] = $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts();
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
 		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
@@ -364,7 +366,7 @@ implements MShop_Service_Provider_Payment_Interface
 		$values['PAYERID'] = $additional['PayerID'];
 		$values['PAYMENTACTION'] = $this->_config['PaymentAction'];
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
-		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getShipping() );
+		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
 
 		$urlQuery = urldecode( '&' . http_build_query( $values, '', '&' ) );
 		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
@@ -556,7 +558,7 @@ implements MShop_Service_Provider_Payment_Interface
 
 		$paymentCosts = '0.00';
 		$paymentItem = $orderBase->getService('payment');
-		if( ( $paymentCosts = $paymentItem->getPrice()->getShipping() ) > '0.00' )
+		if( ( $paymentCosts = $paymentItem->getPrice()->getCosts() ) > '0.00' )
 		{
 			$lastPos++;
 			$values[ 'L_PAYMENTREQUEST_0_NAME' . $lastPos ] = $this->_getContext()->getI18n()->dt( 'mshop', 'Payment costs' );
@@ -565,12 +567,12 @@ implements MShop_Service_Provider_Payment_Interface
 		}
 
 		$price = $orderBase->getPrice();
-		$amount = $price->getValue() + $price->getShipping();
+		$amount = $price->getValue() + $price->getCosts();
 
 		$values['MAXAMT'] = $amount + 0.01; // @todo rounding error?
 		$values['PAYMENTREQUEST_0_AMT'] = number_format( $amount, 2, '.', '' );
 		$values['PAYMENTREQUEST_0_ITEMAMT'] = ( string ) ( $price->getValue() + $paymentCosts );
-		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = (string) ( $price->getShipping() - $paymentCosts );
+		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = (string) ( $price->getCosts() - $paymentCosts );
 		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
 		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
@@ -583,7 +585,7 @@ implements MShop_Service_Provider_Payment_Interface
 		{
 			$orderServiceDeliveryItem = $orderBase->getService('delivery');
 
-			$values['L_SHIPPINGOPTIONAMOUNT0'] = (string) ( $price->getShipping() - $paymentCosts );
+			$values['L_SHIPPINGOPTIONAMOUNT0'] = (string) ( $price->getCosts() - $paymentCosts );
 			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getName();
 			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';

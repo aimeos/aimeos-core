@@ -62,6 +62,7 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 				status : status,
 				code : attr['catalog.code'],
 				label : attr['catalog.label'],
+				'catalog.hasChildren' : attr['catalog.hasChildren'],
 				'catalog.config' : attr['catalog.config'],
 				'catalog.siteid' :attr['catalog.siteid'],
 				'catalog.ctime' : attr['catalog.ctime'],

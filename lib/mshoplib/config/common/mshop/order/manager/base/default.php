@@ -9,13 +9,13 @@ return array(
 	'item' => array(
 		'insert' => '
 			INSERT INTO "mshop_order_base" ("siteid", "customerid", "sitecode", "langid",
-				"currencyid", "price", "shipping", "rebate", "comment", "status", "mtime", "editor", "ctime" )
+				"currencyid", "price", "costs", "rebate", "comment", "status", "mtime", "editor", "ctime" )
 			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_order_base"
 			SET "siteid" = ?, "customerid" = ?, "sitecode" = ?, "langid" = ?,
-				"currencyid" = ?, "price" = ?, "shipping" = ?, "rebate" = ?, "comment" = ?,
+				"currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?, "comment" = ?,
 				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
@@ -26,7 +26,7 @@ return array(
 		',
 		'search' => '
 			SELECT DISTINCT mordba."id", mordba."siteid", mordba."sitecode", mordba."customerid", mordba."langid",
-				mordba."currencyid", mordba."price", mordba."shipping", mordba."rebate", mordba."comment",
+				mordba."currencyid", mordba."price", mordba."costs", mordba."rebate", mordba."comment",
 				mordba."status", mordba."mtime", mordba."editor", mordba."ctime"
 			FROM "mshop_order_base" AS mordba
 			:joins

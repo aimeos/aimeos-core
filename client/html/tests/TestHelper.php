@@ -28,7 +28,7 @@ class TestHelper
 	}
 
 
-	public static function getView()
+	public static function getView( $site = 'unittest' )
 	{
 		$view = new MW_View_Default();
 
@@ -45,7 +45,7 @@ class TestHelper
 		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new MW_View_Helper_Config_Default( $view, self::getContext()->getConfig() );
+		$helper = new MW_View_Helper_Config_Default( $view, self::getContext( $site )->getConfig() );
 		$view->addHelper( 'config', $helper );
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
@@ -73,7 +73,7 @@ class TestHelper
 		{
 			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
 
-			self::$_arcavias = new MShop( array(), false );
+			self::$_arcavias = new Arcavias( array(), false );
 		}
 
 		return self::$_arcavias;
@@ -90,6 +90,7 @@ class TestHelper
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new MW_Config_Array( array(), $paths );
+		$conf = new MW_Config_Decorator_Memory( $conf );
 		$ctx->setConfig( $conf );
 
 
@@ -105,8 +106,8 @@ class TestHelper
 		$ctx->setCache( $cache );
 
 
-		$i18n = new MW_Translation_None( 'en' );
-		$ctx->setI18n( $i18n );
+		$i18n = new MW_Translation_None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
 		$session = new MW_Session_None();

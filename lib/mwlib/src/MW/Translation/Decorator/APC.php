@@ -25,17 +25,16 @@ class MW_Translation_Decorator_APC
 	 * Initializes the decorator.
 	 *
 	 * @param MW_Translation_Interface $object Translation object or decorator
-	 * @param MW_Config_Interface $config Configuration object
+	 * @param string $prefix Prefix for keys to distinguish several instances
 	 */
-	public function __construct( MW_Translation_Interface $object, MW_Config_Interface $config )
+	public function __construct( MW_Translation_Interface $object, $prefix = '' )
 	{
 		if( function_exists( 'apc_store' ) === false ) {
 			throw new MW_Translation_Exception( 'APC not available' );
 		}
 
-		parent::__construct( $object, $config );
-
-		$this->_prefix = $config->get( 'resource/translation/decorator/apc/prefix', 'translate:' );
+		parent::__construct( $object );
+		$this->_prefix = $prefix;
 	}
 
 

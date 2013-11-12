@@ -14,24 +14,10 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_ProductStock implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_ProductStock
+	extends MShop_Plugin_Provider_Order_Abstract
+	implements MShop_Plugin_Provider_Interface
 {
-
-	private $_item;
-	private $_context;
-
-
-	/**
-	 * Initializes the plugin instance
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
-	{
-		$this->_item = $item;
-		$this->_context = $context;
-	}
 
 
 	/**
@@ -41,7 +27,7 @@ class MShop_Plugin_Provider_Order_ProductStock implements MShop_Plugin_Provider_
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$p->addListener( $this, 'isComplete.after' );
+		$p->addListener( $this, 'check.after' );
 	}
 
 
@@ -56,7 +42,9 @@ class MShop_Plugin_Provider_Order_ProductStock implements MShop_Plugin_Provider_
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$this->_context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
+		$context = $this->_getContext();
+
+		$context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
@@ -68,10 +56,8 @@ class MShop_Plugin_Provider_Order_ProductStock implements MShop_Plugin_Provider_
 			return true;
 		}
 
-		$config = $this->_item->getConfig();
-		$this->_context->getLogger()->log(__METHOD__ . ':: config: ' . print_r( $config, true ), MW_Logger_Abstract::DEBUG);
 
-		$siteConfig = $this->_context->getLocale()->getSite()->getConfig();
+		$siteConfig = $context->getLocale()->getSite()->getConfig();
 
 		$outOfStock = $productQuantities = $positions = array();
 
@@ -81,7 +67,7 @@ class MShop_Plugin_Provider_Order_ProductStock implements MShop_Plugin_Provider_
 			$positions[$pr->getProductId()] = $position;
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 		$stockManager = $productManager->getSubManager('stock');
 
 		$search = $stockManager->createSearch();
@@ -97,7 +83,7 @@ class MShop_Plugin_Provider_Order_ProductStock implements MShop_Plugin_Provider_
 		foreach ( $checkItems as $checkItem )
 		{
 			if ( $checkItem->getStocklevel() < $productQuantities[$checkItem->getProductId()] ) {
-				$outOfStock[$positions[$checkItem->getProductId()]] = 'product.stock';
+				$outOfStock[$positions[$checkItem->getProductId()]] = 'stock.notenough';
 			}
 		}
 

@@ -18,7 +18,9 @@
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
-		"ext-zip": "*"
+		"ext-zip": "*",
+		"arcavias/extension-installer": "dev-master",
+		"arcavias/ext-phpexcel": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
@@ -28,6 +30,7 @@
 			"Client_Html": "client/html/src",
 			"Controller_Frontend": "controller/frontend/src",
 			"Controller_ExtJS": "controller/extjs/src",
+			"Controller_Jobs": "controller/jobs/src",
 			"": ["lib/mwlib/lib", "."]
 		},
 		"classmap": [
@@ -37,6 +40,7 @@
 			"client/html/src",
 			"controller/frontend/src",
 			"controller/extjs/src",
+			"controller/jobs/src",
 			"Arcavias.php"
 		]
 	}

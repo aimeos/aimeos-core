@@ -32,7 +32,7 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_config = MW_TestHelper::getConfig();
+		$this->_config = TestHelper::getConfig();
 
 		if( ( $adapter = $this->_config->get( 'resource/db/adapter', false ) ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
@@ -406,7 +406,7 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 	public function testFactoryFail()
 	{
 		$this->setExpectedException('MW_DB_Exception');
-		$this->_object = MW_DB_Factory::createManager( MW_TestHelper::getConfig(), 'notDefined' );
+		$this->_object = MW_DB_Factory::createManager( TestHelper::getConfig(), 'notDefined' );
 	}
 }
 

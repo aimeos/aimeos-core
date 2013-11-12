@@ -8,14 +8,14 @@
 return array(
 	'item' => array(
 		'insert' => '
-			INSERT INTO "mshop_order" ("baseid", "siteid", "type", "datepayment", "datedelivery", "statusdelivery", "statuspayment", "flag",
-				"emailflag", "relatedid", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_order" ("baseid", "siteid", "type", "datepayment", "datedelivery", "statusdelivery", "statuspayment",
+				"relatedid", "mtime", "editor", "ctime" )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_order"
 			SET "baseid" = ?, "siteid" = ?, "type" = ?, "datepayment" = ?, "datedelivery" = ?, "statusdelivery" = ?, "statuspayment" = ?,
-				"flag" = ?, "emailflag" = ?, "relatedid" = ?, "mtime" = ?, "editor" = ?
+				"relatedid" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'delete' => '
@@ -25,8 +25,7 @@ return array(
 		',
 		'search' => '
 			SELECT DISTINCT mord."id", mord."baseid", mord."siteid", mord."type", mord."datepayment", mord."datedelivery",
-				mord."statuspayment", mord."statusdelivery", mord."relatedid", mord."mtime", mord."flag", mord."emailflag",
-				mord."editor", mord."ctime"
+				mord."statuspayment", mord."statusdelivery", mord."relatedid", mord."ctime", mord."mtime", mord."editor"
 			FROM "mshop_order" AS mord
 			:joins
 			WHERE :cond

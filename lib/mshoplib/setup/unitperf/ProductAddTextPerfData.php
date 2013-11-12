@@ -125,6 +125,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		);
 
 		$search = $productManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 
 		$this->_txBegin();

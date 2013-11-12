@@ -120,41 +120,14 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		if( empty( $ids ) ) { return; }
+
 		foreach( $this->_submanagers as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}
 
-		$context = $this->_getContext();
-		$siteid = $context->getLocale()->getSiteId();
-
 		$path = 'mshop/catalog/manager/index/attribute/default/item/delete';
-		$sql = $context->getConfig()->get( $path, $path );
-
-		$search = $this->createSearch();
-		$search->setConditions( $search->compare( '==', 'prodid', $ids ) );
-
-		$types = array( 'prodid' => MW_DB_Statement_Abstract::PARAM_STR );
-		$translations = array( 'prodid' => '"prodid"' );
-
-		$cond = $search->getConditionString( $types, $translations );
-		$sql = str_replace( ':cond', $cond, $sql );
-
-		try
-		{
-			$dbm = $context->getDatabaseManager();
-			$conn = $dbm->acquire();
-
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->execute()->finish();
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'prodid' );
 	}
 
 

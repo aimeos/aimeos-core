@@ -34,9 +34,9 @@ class MShop_Order_Item_Base_Address_Default
 
 
 	/**
-	 * Returns the base Id.
+	 * Returns the order base ID.
 	 *
-	 * @return integer Base Id
+	 * @return integer Order base ID
 	 */
 	public function getBaseId()
 	{
@@ -45,15 +45,40 @@ class MShop_Order_Item_Base_Address_Default
 
 
 	/**
-	 * Sets the Base Id.
+	 * Sets the order base ID.
 	 *
-	 * @param integer $baseid New base Id
+	 * @param integer $baseid New order base ID
 	 */
 	public function setBaseId( $baseid )
 	{
 		if ( $baseid == $this->getBaseId() ) { return; }
 
 		$this->_values['baseid'] = (int) $baseid;
+		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the original customer address ID.
+	 *
+	 * @return string Customer address ID
+	 */
+	public function getAddressId()
+	{
+		return ( isset( $this->_values['addrid'] ) ? (string) $this->_values['addrid'] : '' );
+	}
+
+
+	/**
+	 * Sets the original customer address ID.
+	 *
+	 * @param string $addrid New customer address ID
+	 */
+	public function setAddressId( $addrid )
+	{
+		if ( $addrid == $this->getAddressId() ) { return; }
+
+		$this->_values['addrid'] = (string) $addrid;
 		$this->setModified();
 	}
 
@@ -92,6 +117,7 @@ class MShop_Order_Item_Base_Address_Default
 	 */
 	public function copyFrom( MShop_Common_Item_Address_Interface $address )
 	{
+		$this->setAddressId( $address->getId() );
 		$this->setCompany( $address->getCompany() );
 		$this->setSalutation( $address->getSalutation() );
 		$this->setTitle( $address->getTitle() );
@@ -116,6 +142,32 @@ class MShop_Order_Item_Base_Address_Default
 
 
 	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.base.address.baseid': $this->setBaseId( $value ); break;
+				case 'order.base.address.addressid': $this->setAddressId( $value ); break;
+				case 'order.base.address.type': $this->setType( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
@@ -125,6 +177,7 @@ class MShop_Order_Item_Base_Address_Default
 		$list = parent::toArray();
 
 		$list['order.base.address.baseid'] = $this->getBaseId();
+		$list['order.base.address.addressid'] = $this->getAddressId();
 		$list['order.base.address.type'] = $this->getType();
 
 		return $list;

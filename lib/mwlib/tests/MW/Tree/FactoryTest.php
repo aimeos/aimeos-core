@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Test class for MW_Tree_Node_DBNestedSet.
+ * Test class for MW_Tree_Factory.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html

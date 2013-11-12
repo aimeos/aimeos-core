@@ -48,6 +48,7 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 
 		$item = $productStockManager->createItem();
 		$search = $productManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 		$start = 0;
 		$stocklevel = 1;

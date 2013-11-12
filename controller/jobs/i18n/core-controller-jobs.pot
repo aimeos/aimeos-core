@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-27 13:26+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/Controller/Jobs/Common/Factory/Abstract.php:67
+#: src/Controller/Jobs/Common/Factory/Abstract.php:147
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr ""
+
+#: src/Controller/Jobs/Admin/Job/Default.php:81
+#: src/Controller/Jobs/Common/Factory/Abstract.php:61
+#: src/Controller/Jobs/Common/Factory/Abstract.php:141
+#: src/Controller/Jobs/Factory.php:61
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr ""
+
+#: src/Controller/Jobs/Factory.php:42
+#, php-format
+msgid "Controller path is empty"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Email/Confirm/Default.php:137
+#, php-format
+msgid "Error while trying to send confirmation e-mail for order ID \"%1$s\": %2$s"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Email/Confirm/Factory.php:38
+#: src/Controller/Jobs/Order/Product/Stock/Factory.php:38
+#: src/Controller/Jobs/Admin/Job/Factory.php:38
+#: src/Controller/Jobs/Common/Factory/Abstract.php:55
+#: src/Controller/Jobs/Service/Delivery/Process/Factory.php:38
+#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:38
+#: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:38
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr ""
+
+#: src/Controller/Jobs/Factory.php:52
+#, php-format
+msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
+msgstr ""
+
+#: src/Controller/Jobs/Admin/Job/Default.php:68
+#, php-format
+msgid "Invalid characters in job name \"%1$s\""
+msgstr ""
+
+#: src/Controller/Jobs/Common/Factory/Abstract.php:88
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr ""
+
+#: src/Controller/Jobs/Admin/Job/Default.php:74
+#, php-format
+msgid "Invalid job method \"%1$s\""
+msgstr ""
+
+#: src/Controller/Jobs/Admin/Job/Default.php:91
+#, php-format
+msgid "Method \"%1$s\" not available"
+msgstr ""
+
+#: src/Controller/Jobs/Admin/Job/Default.php:87
+#: src/Controller/Jobs/Factory.php:67
+#, php-format
+msgid "Unable to call factory method \"%1$s\""
+msgstr ""
+
+#: src/Controller/Jobs/Common/Decorator/Abstract.php:51
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr ""

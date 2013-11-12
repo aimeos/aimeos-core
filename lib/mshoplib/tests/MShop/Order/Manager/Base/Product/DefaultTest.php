@@ -93,7 +93,7 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
 		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
 		$expr[] = $search->compare( '==', 'order.base.product.price', '4.50' );
-		$expr[] = $search->compare( '==', 'order.base.product.shipping', '0.00' );
+		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.rebate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.taxrate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );

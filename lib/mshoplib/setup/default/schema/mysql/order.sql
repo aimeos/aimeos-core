@@ -31,7 +31,7 @@ CREATE TABLE "mshop_order_base" (
 	-- total price
 	"price" DECIMAL(12,2) NOT NULL,
 	-- shipping costs
-	"shipping" DECIMAL(12,2) NOT NULL,
+	"costs" DECIMAL(12,2) NOT NULL,
 	-- amount of rebate
 	"rebate" DECIMAL(12,2) NOT NULL,
 	-- Comment string
@@ -74,10 +74,6 @@ CREATE TABLE "mshop_order" (
 	"statuspayment" SMALLINT NOT NULL DEFAULT -1,
 	-- Status of delivery (-1=unfinished, 0=deleted, 1=pending, 2=in progress, 3=dispatched, 4=delivered, 5=lost, 6=refused, 7=returned)
 	"statusdelivery" SMALLINT NOT NULL DEFAULT -1,
-	-- Status update flags
-	"flag" SMALLINT NOT NULL,
-	-- Send email flags
-	"emailflag" SMALLINT NOT NULL,
 	-- Related order id
 	"relatedid" BIGINT DEFAULT NULL,
 	-- Timestamp of the last update
@@ -96,10 +92,6 @@ CONSTRAINT "fk_msord_baseid"
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_msord_sid_pdate_pstat_dstat" ON "mshop_order" ("siteid", "datepayment", "statuspayment", "statusdelivery");
-
-CREATE INDEX "idx_msord_sid_pstat_dstat_email" ON "mshop_order" ("siteid", "statuspayment", "statusdelivery", "emailflag");
-
-CREATE INDEX "idx_msord_sid_pstat_dstat_flag" ON "mshop_order" ("siteid", "statuspayment", "statusdelivery", "flag");
 
 CREATE INDEX "idx_msord_sid_type" ON "mshop_order" ("siteid", "type");
 
@@ -125,6 +117,8 @@ CREATE TABLE "mshop_order_base_address" (
 	"baseid" BIGINT NOT NULL,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original address ID
+	"addrid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Type of the address
 	"type" VARCHAR(8) NOT NULL,
 	-- company name
@@ -223,7 +217,7 @@ CREATE TABLE "mshop_order_base_product" (
 	-- Product price of a single product
 	"price" DECIMAL(12,2) NOT NULL,
 	-- Additional shipping costs
-	"shipping" DECIMAL(12,2) NOT NULL,
+	"costs" DECIMAL(12,2) NOT NULL,
 	-- Granted rebate
 	"rebate" DECIMAL(12,2) NOT NULL,
 	-- tax rate in percent
@@ -316,7 +310,7 @@ CREATE TABLE "mshop_order_base_service" (
 	-- price of the service
 	"price" DECIMAL(12,2) NOT NULL,
 	-- shipping costs
-	"shipping" DECIMAL(12,2) NOT NULL,
+	"costs" DECIMAL(12,2) NOT NULL,
 	-- amount of rebate
 	"rebate" DECIMAL(12,2) NOT NULL,
 	-- tax rate in percent

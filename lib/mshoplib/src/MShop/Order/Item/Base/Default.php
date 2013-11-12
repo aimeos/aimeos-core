@@ -161,7 +161,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function getCustomerId()
 	{
-		return ( isset( $this->_values['customerid'] ) ? (string) $this->_values['customerid'] : null );
+		return ( isset( $this->_values['customerid'] ) ? (string) $this->_values['customerid'] : '' );
 	}
 
 
@@ -174,12 +174,12 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	{
 		if ( $customerid === $this->getCustomerId() ) { return; }
 
-		$this->_notifyListeners( 'setUserId.before', $customerid );
+		$this->_notifyListeners( 'setCustomerId.before', $customerid );
 
 		$this->_values['customerid'] = (string) $customerid;
 		$this->_modified = true;
 
-		$this->_notifyListeners( 'setUserId.after', $customerid );
+		$this->_notifyListeners( 'setCustomerId.after', $customerid );
 	}
 
 
@@ -503,14 +503,13 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	{
 		$this->_checkParts( $what );
 
-		$this->_notifyListeners( 'isComplete.before', $what );
+		$this->_notifyListeners( 'check.before', $what );
 
-		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count($this->_products) < 1 ) )
-		{
+		if( ( $what & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) && ( count($this->_products) < 1 ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Basket empty' ) );
 		}
 
-		$this->_notifyListeners( 'isComplete.after', $what );
+		$this->_notifyListeners( 'check.after', $what );
 	}
 
 
@@ -526,16 +525,16 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 
 	/**
-	 * Returns a price item with amounts calculated for the products, shipping costs, etc.
+	 * Returns a price item with amounts calculated for the products, costs, etc.
 	 *
-	 * @return MShop_Price_Item_Interface Price item with price, shipping and rebate the customer has to pay
+	 * @return MShop_Price_Item_Interface Price item with price, costs and rebate the customer has to pay
 	 */
 	public function getPrice()
 	{
 		if( $this->_modified !== false )
 		{
 			$this->_price->setValue( '0.00' );
-			$this->_price->setShipping( '0.00' );
+			$this->_price->setCosts( '0.00' );
 			$this->_price->setRebate( '0.00' );
 			$this->_price->setTaxRate( '0.00' );
 
@@ -626,7 +625,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			'order.base.comment' => $this->getComment(),
 			'order.base.customerid' => $this->getCustomerId(),
 			'order.base.price' => $price->getValue(),
-			'order.base.shipping' => $price->getShipping(),
+			'order.base.costs' => $price->getCosts(),
 			'order.base.rebate' => $price->getRebate(),
 			'order.base.currencyid' => $price->getCurrencyId(),
 			'order.base.status' => $this->getStatus(),
@@ -713,7 +712,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 				continue;
 			}
 
-			if( $product->getPrice()->getShipping() !== $item->getPrice()->getShipping() ) {
+			if( $product->getPrice()->getCosts() !== $item->getPrice()->getCosts() ) {
 				continue;
 			}
 

@@ -88,9 +88,9 @@ class MShop_Order_Manager_Base_Service_Default
 			'type' => 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'order.base.service.shipping' => array(
-			'code' => 'order.base.service.shipping',
-			'internalcode' => 'mordbase."shipping"',
+		'order.base.service.costs' => array(
+			'code' => 'order.base.service.costs',
+			'internalcode' => 'mordbase."costs"',
 			'label' => 'Order base service shipping',
 			'type' => 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
@@ -200,7 +200,7 @@ class MShop_Order_Manager_Base_Service_Default
 			$stmt->bind(6, $item->getName(), MW_DB_Statement_Abstract::PARAM_STR);
 			$stmt->bind(7, $item->getMediaUrl(), MW_DB_Statement_Abstract::PARAM_STR);
 			$stmt->bind(8, $price->getValue(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(9, $price->getShipping(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(9, $price->getCosts(), MW_DB_Statement_Abstract::PARAM_STR);
 			$stmt->bind(10, $price->getRebate(), MW_DB_Statement_Abstract::PARAM_STR);
 			$stmt->bind(11, $price->getTaxRate(), MW_DB_Statement_Abstract::PARAM_STR);
 			$stmt->bind(12, date('Y-m-d H:i:s', time()), MW_DB_Statement_Abstract::PARAM_STR);
@@ -295,7 +295,7 @@ class MShop_Order_Manager_Base_Service_Default
 					$price = $priceManager->createItem();
 					$price->setValue($row['price']);
 					$price->setRebate($row['rebate']);
-					$price->setShipping($row['shipping']);
+					$price->setCosts($row['costs']);
 					$price->setTaxRate($row['taxrate']);
 					$items[ $row['id'] ] = array( 'price' => $price, 'item' => $row );
 				}

@@ -100,28 +100,47 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 	public function process()
 	{
 		$view = $this->getView();
+		$basket = $view->orderBasket;
+		$orderItem = $view->orderItem;
 		$context = $this->_getContext();
 
-		$controller = Controller_Frontend_Basket_Factory::createController( $context );
-		$service = $controller->get()->getService( 'payment' );
 
-		$manager = MShop_Service_Manager_Factory::createManager( $context );
-		$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
+		$target = $view->config( 'client/html/checkout/confirm/url/target' );
+		$controller = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+		$config = $view->config( 'client/html/checkout/confirm/url/config', array() );
 
-		if( ( $form = $provider->process( $view->orderItem ) ) === null )
+		$confirmUrl = $view->url( $target, $controller, $action, array(), array(), $config );
+
+		$target = $view->config( 'client/html/checkout/update/url/target' );
+		$controller = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/update/url/action', 'update' );
+		$config = $view->config( 'client/html/checkout/update/url/config', array() );
+
+		$notifyUrl = $view->url( $target, $controller, $action, array(), array(), $config );
+
+		$config = array( 'payment.url-success' => $confirmUrl, 'payment.url-update' => $notifyUrl );
+
+
+		try
 		{
-			$target = $view->config( 'client/html/checkout/confirm/url/target' );
-			$controller = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
-			$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
-			$config = $view->config( 'client/html/checkout/confirm/url/config', array() );
+			$service = $basket->getService( 'payment' );
 
-			$url = $view->url( $target, $controller, $action, array(), array(), $config );
+			$manager = MShop_Service_Manager_Factory::createManager( $context );
+			$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
+			$provider->injectGlobalConfigBE( $config );
 
-			$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( $url, 'REDIRECT' );
+			$view->paymentForm = $provider->process( $orderItem );
 		}
-		else
+		catch( Exception $e )
 		{
-			$view->paymentForm = $form;
+			$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( $confirmUrl, 'REDIRECT' );
+		}
+
+		if( !isset( $view->paymentForm ) || $view->paymentForm === null )
+		{
+			$msg = sprintf( 'Invalid process response from service provider with code "%1$s"', $service->getCode() );
+			throw new Client_Html_Exception( $msg );
 		}
 
 		$this->_process( $this->_subPartPath, $this->_subPartNames );

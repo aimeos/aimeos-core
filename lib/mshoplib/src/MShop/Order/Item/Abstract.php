@@ -151,97 +151,6 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 
 
 	/**
-	 * No e-mail yet.
-	 * No e-mail was sent yet. This is the default status after creating the
-	 * order.
-	 */
-	const EMAIL_NONE = 0;
-
-	/**
-	 * Order confirmation e-mail.
-	 * The order confirmation e-mail was sent.
-	 */
-	const EMAIL_ACCEPTED = 1;
-
-	/**
-	 * Order deleted e-mail.
-	 * An e-mail was sent because the delivery of the order was deleted.
-	 */
-	const EMAIL_DELETED = 2;
-
-	/**
-	 * Order pending e-mail.
-	 * An e-mail was sent because the order can't be fulfilled yet, because
-	 * e.g. one of the products is out of stock.
-	 */
-	const EMAIL_PENDING = 4;
-
-	/**
-	 * Delivery in progress e-mail.
-	 * An e-mail was sent because the order is in the filfillment process.
-	 */
-	const EMAIL_PROGRESS = 8;
-
-	/**
-	 * Parcel dispatched e-mail.
-	 * An e-mail was sent because the parcel was handed over to the logistic
-	 * partner.
-	 */
-	const EMAIL_DISPATCHED = 16;
-
-	/**
-	 * Parcel delivered e-mail.
-	 * An e-mail was sent because the parcel was handed over to the customer.
-	 */
-	const EMAIL_DELIVERED = 32;
-
-	/**
-	 * Parcel lost e-mail.
-	 * An e-mail was sent because the parcel was lost on the way to the
-	 * customer.
-	 */
-	const EMAIL_LOST = 64;
-
-	/**
-	 * Parcel refused e-mail.
-	 * An e-mail was sent because the parcel was refused by the customer.
-	 */
-	const EMAIL_REFUSED = 128;
-
-	/**
-	 * Parcel returned e-mail.
-	 * An e-mail was sent because the parcel was returned to the merchant.
-	 */
-	const EMAIL_RETURNED = 256;
-
-	/**
-	 * All e-mails were sent.
-	 * This constant matches all other e-mail constants.
-	 */
-	const EMAIL_ALL = 511;
-
-
-	/**
-	 * No flag is set.
-	 * This is the default value after the order was created.
-	 */
-	const FLAG_NONE = 0;
-
-	/**
-	 * Product stock and coupon code decreased.
-	 * The product stock level was decreased as well as the coupon code count
-	 * if a valid coupon code was entered by the customer.
-	 */
-	const FLAG_STOCK = 1;
-
-	/**
-	 * All flags are set.
-	 * This constant matches all other flag constants.
-	 */
-	const FLAG_ALL = 1;
-
-
-	/**
 	 * Tests if the date parameter represents an ISO date format.
 	 *
 	 * @param string ISO date in yyyy-mm-dd HH:ii:ss format
@@ -303,38 +212,6 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 				break;
 			default:
 				throw new MShop_Order_Exception( sprintf( 'Order type "%1$s" not within allowed range', $value ) );
-		}
-	}
-
-
-	/**
-	 * Checks the constants for the different status of the email flag.
-	 *
-	 * @param integer $value Email flag constant
-	 * @throws MShop_Order_Exception If email status constant is invalid
-	 */
-	protected function _checkEmailStatus( $value )
-	{
-		$temp = (int) $value;
-
-		if( $temp < MShop_Order_Item_Abstract::EMAIL_NONE || $temp > MShop_Order_Item_Abstract::EMAIL_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Email flags "%1$s" not within allowed range', $value ) );
-		}
-	}
-
-
-	/**
-	 * Checks the constants for the different internal flag.
-	 *
-	 * @param integer $value internal flag constant
-	 * @throws MShop_Order_Exception If constant is invalid
-	 */
-	protected function _checkFlag( $value )
-	{
-		$temp = (int) $value;
-
-		if( $temp < MShop_Order_Item_Abstract::FLAG_NONE || $temp > MShop_Order_Item_Abstract::FLAG_ALL ) {
-			throw new MShop_Order_Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
 		}
 	}
 }

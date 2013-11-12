@@ -24,7 +24,7 @@ class TestHelper
 			self::$_context[$site] = self::_createContext( $site );
 		}
 
-		return self::$_context[$site];
+		return clone self::$_context[$site];
 	}
 
 
@@ -34,7 +34,7 @@ class TestHelper
 		{
 			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Arcavias.php';
 
-			self::$_arcavias = new MShop( array(), false );
+			self::$_arcavias = new Arcavias( array(), false );
 		}
 
 		return self::$_arcavias;
@@ -51,7 +51,7 @@ class TestHelper
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new MW_Config_Array( array(), $paths );
-		$conf = new MW_Config_Decorator_MemoryCache( $conf );
+		$conf = new MW_Config_Decorator_Memory( $conf );
 		$ctx->setConfig( $conf );
 
 
@@ -67,8 +67,8 @@ class TestHelper
 		$ctx->setCache( $cache );
 
 
-		$i18n = new MW_Translation_None( 'en' );
-		$ctx->setI18n( $i18n );
+		$i18n = new MW_Translation_None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
 		$session = new MW_Session_None();
@@ -76,7 +76,7 @@ class TestHelper
 
 
 		$localeManager = MShop_Locale_Manager_Factory::createManager( $ctx );
-		$locale = $localeManager->bootstrap( $site, '', '', false );
+		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
 
 

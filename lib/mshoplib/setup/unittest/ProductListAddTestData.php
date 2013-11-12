@@ -212,14 +212,14 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 		$search = $priceManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'price.value', $value ),
-			$search->compare( '==', 'price.shipping', $ship ),
+			$search->compare( '==', 'price.costs', $ship ),
 		$search->compare( '==', 'price.typeid', $typeids ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$refIds = array();
 		foreach( $priceManager->searchItems( $search ) as $item )	{
-			$refIds[ 'price/'.$item->getDomain().'/'.$item->getType().'/'.$item->getValue().'/'.$item->getShipping() ] = $item->getId();
+			$refIds[ 'price/'.$item->getDomain().'/'.$item->getType().'/'.$item->getValue().'/'.$item->getCosts() ] = $item->getId();
 		}
 
 		return $refIds;
@@ -307,19 +307,20 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 		$productListManager = $productManager->getSubManager( 'list', 'Default' );
 		$productListTypeManager = $productListManager->getSubmanager( 'type', 'Default' );
 
-		$parentIds = array();
+		$parentCodes = array();
 		foreach( $testdata['product/list'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) == false ) {
 				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 
-			$parentIds[] = $str;
+			$parentCodes[] = $str;
 		}
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', $parentIds ) );
+		$search->setConditions( $search->compare( '==', 'product.code', array_unique( $parentCodes ) ) );
 
+		$parentIds = array();
 		foreach( $productManager->searchItems( $search ) as $item ) {
 			$parentIds[ 'product/'.$item->getCode() ] = $item->getId();
 		}
@@ -333,6 +334,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 
 			$products[] = $str;
 		}
+
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $products ) );
 

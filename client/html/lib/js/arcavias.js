@@ -98,7 +98,7 @@ document.createElement("section");
 document.createElement("article");
 
 
-$(document).ready( function() {
+jQuery(document).ready( function($) {
 
 	/*
 	 * Catalog clients

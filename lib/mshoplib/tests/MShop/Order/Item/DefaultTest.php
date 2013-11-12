@@ -48,8 +48,6 @@ class MShop_Order_Item_DefaultTest extends MW_Unittest_Testcase
 			'statuspayment' => MShop_Order_Item_Abstract::PAY_RECEIVED,
 			'datepayment' => '2004-12-01 12:34:56',
 			'datedelivery' => '2004-01-03 12:34:56',
-			'flag' => MShop_Order_Item_Abstract::FLAG_NONE,
-			'emailflag' => MShop_Order_Item_Abstract::EMAIL_NONE,
 			'relatedid' => 1,
 			'baseid' => 4,
 			'mtime' => '2011-01-01 00:00:02',
@@ -182,36 +180,6 @@ class MShop_Order_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue($this->_object->isModified());
 	}
 
-	public function testGetFlag()
-	{
-		$this->assertEquals($this->_values['flag'], $this->_object->getFlag() );
-	}
-
-	public function testSetFlag()
-	{
-		$this->_object->setFlag( MShop_Order_Item_Abstract::FLAG_STOCK );
-		$this->assertEquals(MShop_Order_Item_Abstract::FLAG_STOCK, $this->_object->getFlag() );
-		$this->assertTrue($this->_object->isModified());
-
-		$this->setExpectedException('MShop_Order_Exception');
-		$this->_object->setFlag( 6 );
-	}
-
-	public function testGetEmailFlag()
-	{
-		$this->assertEquals($this->_values['emailflag'], $this->_object->getEmailFlag() );
-	}
-
-	public function testSetEmailFlag()
-	{
-		$this->_object->setEmailFlag( MShop_Order_Item_Abstract::EMAIL_DELIVERED );
-		$this->assertEquals( MShop_Order_Item_Abstract::EMAIL_DELIVERED, $this->_object->getEmailFlag() );
-		$this->assertTrue($this->_object->isModified());
-
-		$this->setExpectedException('MShop_Order_Exception');
-		$this->_object->setEmailFlag( 600 );
-	}
-
 	public function testGetRelatedId()
 	{
 		$this->assertEquals($this->_values['relatedid'], $this->_object->getRelatedId() );
@@ -252,8 +220,6 @@ class MShop_Order_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getDatePayment(), $list['order.datepayment'] );
 		$this->assertEquals( $this->_object->getDateDelivery(), $list['order.datedelivery'] );
 		$this->assertEquals( $this->_object->getBaseId(), $list['order.baseid'] );
-		$this->assertEquals( $this->_object->getFlag(), $list['order.flag'] );
-		$this->assertEquals( $this->_object->getEmailFlag(), $list['order.emailflag'] );
 		$this->assertEquals( $this->_object->getRelatedId(), $list['order.relatedid'] );
 		$this->assertEquals( $this->_object->getTimeModified(), $list['order.mtime'] );
 		$this->assertEquals( $this->_object->getTimeCreated(), $list['order.ctime'] );
@@ -263,5 +229,21 @@ class MShop_Order_Item_DefaultTest extends MW_Unittest_Testcase
 	public function testIsModified()
 	{
 		$this->assertFalse($this->_object->isModified());
+	}
+
+	public function testMagicGetOldPaymentStatus()
+	{
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->_object->oldPaymentStatus );
+	}
+
+	public function testMagicGetOldDeliveryStatus()
+	{
+		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PENDING, $this->_object->oldDeliveryStatus );
+	}
+
+	public function testMagicGetException()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->notExisting;
 	}
 }

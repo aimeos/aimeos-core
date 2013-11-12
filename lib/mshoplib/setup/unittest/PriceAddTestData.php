@@ -29,7 +29,7 @@ class MW_Setup_Task_PriceAddTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return array( 'CatalogRebuildTestIndex' );
 	}
 
 
@@ -110,7 +110,7 @@ class MW_Setup_Task_PriceAddTestData extends MW_Setup_Task_Abstract
 			$price->setLabel( $dataset['label'] );
 			$price->setQuantity( $dataset['quantity'] );
 			$price->setValue( $dataset['value'] );
-			$price->setShipping( $dataset['shipping'] );
+			$price->setCosts( $dataset['shipping'] );
 			$price->setRebate( $dataset['rebate'] );
 			$price->setTaxRate( $dataset['taxrate'] );
 			$price->setStatus( $dataset['status'] );

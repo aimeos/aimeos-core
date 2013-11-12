@@ -78,7 +78,7 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$priceItem->setTypeId( $priceTypeItem->getId() );
 		$priceItem->setDomain( 'product' );
 		$priceItem->setCurrencyId( 'EUR' );
-		$priceItem->setShipping( '0.00' );
+		$priceItem->setCosts( '0.00' );
 		$priceItem->setTaxRate( '20.00' );
 		$priceItem->setQuantity( 1 );
 		$priceItem->setStatus( 1 );
@@ -92,6 +92,7 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$this->_txBegin();
 
 		$search = $productManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 		$start = 0;
 		$price = 1000;

@@ -61,8 +61,8 @@ MShop.panel.order.base.service.payment.ItemUi = Ext.extend(Ext.Panel, {
 					name: 'order.base.service.price'
 				}, {
 					xtype: 'displayfield',
-					fieldLabel: 'Shipping',
-					name: 'order.base.service.shipping'
+					fieldLabel: 'Costs',
+					name: 'order.base.service.costs'
 				}, {
 					xtype: 'displayfield',
 					fieldLabel: 'Rebate',

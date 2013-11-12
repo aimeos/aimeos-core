@@ -30,8 +30,6 @@ class Client_Html_Catalog_List_Simple
 	 */
 	public function getBody()
 	{
-		$context = $this->_getContext();
-
 		try
 		{
 			$view = $this->_setViewParams( $this->getView() );
@@ -44,9 +42,8 @@ class Client_Html_Catalog_List_Simple
 		}
 		catch( Exception $e )
 		{
-			$view = $this->getView();
-			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$context->getLogger()->log( $error . PHP_EOL . $e->getTraceAsString() );
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return;
 		}
 
 		$tplconf = 'client/html/catalog/list/simple/template-body';
@@ -65,7 +62,7 @@ class Client_Html_Catalog_List_Simple
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->getView();
 
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -118,7 +115,15 @@ class Client_Html_Catalog_List_Simple
 	 */
 	public function process()
 	{
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		try
+		{
+			$this->_process( $this->_subPartPath, $this->_subPartNames );
+		}
+		catch( Exception $e )
+		{
+			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			return;
+		}
 	}
 
 

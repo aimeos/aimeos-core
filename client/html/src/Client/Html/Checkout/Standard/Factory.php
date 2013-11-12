@@ -36,7 +36,7 @@ class Client_Html_Checkout_Standard_Factory
 		if( ctype_alnum( $name ) === false )
 		{
 			$classname = is_string( $name ) ? 'Client_Html_Checkout_Standard_' . $name : '<not a string>';
-			throw new Client_Html_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+			throw new Client_Html_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'Client_Html_Interface';

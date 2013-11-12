@@ -112,6 +112,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends MW_Unittest_Testca
 			'items' => (object) array(
 				'order.base.address.id' => null,
 				'order.base.address.baseid' => $baseItem->getId(),
+				'order.base.address.addressid' => '-1',
 				'order.base.address.type' => 'payment',
 				'order.base.address.company' => 'MusterMax',
 				'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
@@ -156,6 +157,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends MW_Unittest_Testca
 		$this->assertNotNull( $savedAddress['items']->{'order.base.address.id'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.id'}, $searched['items'][0]->{'order.base.address.id'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.baseid'}, $searched['items'][0]->{'order.base.address.baseid'} );
+		$this->assertEquals( $savedAddress['items']->{'order.base.address.addressid'}, $searched['items'][0]->{'order.base.address.addressid'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.type'}, $searched['items'][0]->{'order.base.address.type'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.company'}, $searched['items'][0]->{'order.base.address.company'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.salutation'}, $searched['items'][0]->{'order.base.address.salutation'} );

@@ -90,6 +90,8 @@ class MW_Setup_Task_ServiceAddBasePerfData extends MW_Setup_Task_Abstract
 			$item->setId( null );
 			$item->setCode( $code );
 			$item->setLabel( 'Payment service ' . $code );
+			$item->setPosition( $i );
+
 			$manager->saveItem( $item, false );
 		}
 
@@ -122,6 +124,8 @@ class MW_Setup_Task_ServiceAddBasePerfData extends MW_Setup_Task_Abstract
 			$item->setId( null );
 			$item->setCode( $code );
 			$item->setLabel( 'Delivery service ' . $code );
+			$item->setPosition( $i );
+
 			$manager->saveItem( $item, false );
 		}
 

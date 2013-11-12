@@ -58,7 +58,7 @@ class Controller_ExtJS_Price_Default
 			if( isset( $entry->{'price.label'} ) ) { $item->setLabel( $entry->{'price.label'} ); }
 			if( isset( $entry->{'price.quantity'} ) ) { $item->setQuantity( $entry->{'price.quantity'} ); }
 			if( isset( $entry->{'price.value'} ) ) { $item->setValue( $entry->{'price.value'} ); }
-			if( isset( $entry->{'price.shipping'} ) ) { $item->setShipping( $entry->{'price.shipping'} ); }
+			if( isset( $entry->{'price.shipping'} ) ) { $item->setCosts( $entry->{'price.shipping'} ); }
 			if( isset( $entry->{'price.rebate'} ) ) { $item->setRebate( $entry->{'price.rebate'} ); }
 			if( isset( $entry->{'price.taxrate'} ) ) { $item->setTaxRate( $entry->{'price.taxrate'} ); }
 			if( isset( $entry->{'price.status'} ) ) { $item->setStatus( $entry->{'price.status'} ); }
@@ -96,8 +96,7 @@ class Controller_ExtJS_Price_Default
 
 		if( isset( $params->domain ) && isset( $params->parentid ) )
 		{
-			$manager = $this->_getDomainManager( $params->domain );
-			$listManager = $manager->getSubManager( 'list' );
+			$listManager = MShop_Factory::createManager( $this->_getContext(), $params->domain . '/list' );
 			$criteria = $listManager->createSearch();
 
 			$expr = array();
@@ -190,13 +189,15 @@ class Controller_ExtJS_Price_Default
 
 		foreach( $idList as $manager => $ids )
 		{
-			$refDomainListManager = $this->_getDomainManager( $manager )->getSubManager('list');
+			$refDomainListManager = MShop_Factory::createManager( $this->_getContext(), $manager . '/list' );
+
 			$search = $refDomainListManager->createSearch();
 			$expr = array(
 				$search->compare( '==', $manager.'.list.refid', $ids ),
 				$search->compare( '==', $manager.'.list.domain', 'price' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( array( $search->sort( '+', $manager.'.list.id' ) ) );
 
 			$start = 0;
 

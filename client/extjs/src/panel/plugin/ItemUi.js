@@ -14,9 +14,8 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 
 	initComponent : function() {
-
 		this.title = _('Plugin item details');
-		var that = this;
+		
 		this.items = [ {
 			xtype : 'tabpanel',
 			activeTab : 0,

@@ -70,13 +70,15 @@ class Controller_ExtJS_Media_Default
 
 		foreach( (array) $idList as $manager => $ids )
 		{
-			$refDomainListManager = $this->_getDomainManager( $manager )->getSubManager('list');
+			$refDomainListManager = MShop_Factory::createManager( $this->_getContext(), $manager . '/list' );
+
 			$search = $refDomainListManager->createSearch();
 			$expr = array(
 				$search->compare( '==', $manager.'.list.refid', $ids ),
 				$search->compare( '==', $manager.'.list.domain', 'media' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( array( $search->sort( '+', $manager.'.list.id' ) ) );
 
 			$start = 0;
 
@@ -165,7 +167,7 @@ class Controller_ExtJS_Media_Default
 		}
 
 
-		$filename = md5( $fileinfo['name'] . time() );
+		$filename = md5( $fileinfo['name'] . microtime( true ) );
 		$mimetype = $this->_getMimeType( $fileinfo['tmp_name'] );
 
 		$item = $this->_manager->createItem();
@@ -392,7 +394,7 @@ class Controller_ExtJS_Media_Default
 		$perms = $config->get( 'controller/extjs/media/default/upload/fileperms', 0664 );
 
 		if( chmod( $dest, $perms ) === false ) {
-			$this->_getContext()->getLogger()->log( sprintf( 'Changing file permissions for "%1$s" to "%1$o" failed', $dest, $perms ), MW_Logger_Abstract::WARN );
+			$this->_getContext()->getLogger()->log( sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms ), MW_Logger_Abstract::WARN );
 		}
 
 
@@ -405,7 +407,7 @@ class Controller_ExtJS_Media_Default
 		$maxwidth = ( $maxwidth != null ? (int) $maxwidth : '' );
 		$maxheight = ( $maxheight != null ? (int) $maxheight : '' );
 
-		$cmd = $this->_getContext()->getConfig()->get( 'controller/extjs/media/default/command/convert', 'convert -quiet %1$s -resize %3$sx%4$s %2$s' );
+		$cmd = $this->_getContext()->getConfig()->get( 'controller/extjs/media/default/command/convert', 'convert -quiet %1$s -resize %3$sx%4$s -flatten %2$s' );
 
 		$cmdline = sprintf( $cmd, escapeshellarg( $src ), escapeshellarg( $dest ), (string) $maxwidth, (string) $maxheight );
 		$this->_getContext()->getLogger()->log( 'Executing: ' . $cmdline, MW_Logger_Abstract::DEBUG );

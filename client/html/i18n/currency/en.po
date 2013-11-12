@@ -1,13 +1,9 @@
-# Replacement of currency codes with currency signs.
+# Englisch translation for arcavias-core (HTML client currencies).
 # Copyright (C) 2013
 # This file is distributed under the same license as the arcavias-core package.
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013.
 #
 #
-#. SOME DESCRIPTIVE TITLE.
-#. Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-#. This file is distributed under the same license as the PACKAGE package.
-#. FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
@@ -15,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2013-04-11 18:00+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
-"Language-Team: \n"
-"Language: \n"
+"Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
+"Language: English\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -113,7 +109,8 @@ msgid "AZN"
 msgstr "man."
 
 #. Bosnia-Herzegovina Conv. Mark
-#. reference: https://en.wikipedia.org/wiki/Bosnia_and_Herzegovina_convertible_mark
+#. reference:
+#. https://en.wikipedia.org/wiki/Bosnia_and_Herzegovina_convertible_mark
 #. code: BAM
 #. sign: KM
 #. symbol: KM
@@ -347,7 +344,7 @@ msgid "DJF"
 msgstr "Fdj"
 
 #. Danish krone
-#. reference: 
+#. reference:
 #. code: DKK
 #. sign: ,- , kr.
 #. symbol: ,- , kr.
@@ -367,7 +364,7 @@ msgstr "$"
 #. Algerian Dinar
 #. reference: https://en.wikipedia.org/wiki/Algerian_dinar
 #. code: DZD
-#. sign: د.ج , DA 
+#. sign: د.ج , DA
 #. symbol: د.ج , DA
 #. sequence: n/a
 msgid "DZD"
@@ -817,7 +814,7 @@ msgid "MKD"
 msgstr "ден"
 
 #. Myanmar kyat, Burmese kyat
-#. reference: 
+#. reference:
 #. code: MMK
 #. sign: n/a
 #. symbol: K, Ks
@@ -1169,7 +1166,8 @@ msgid "SRD"
 msgstr "$"
 
 #. São Tomé and Príncipe dobra
-#. reference: https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe_dobra
+#. reference:
+#. https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe_dobra
 #. code: STD
 #. sign: n/a
 #. symbol: Db
@@ -1272,7 +1270,8 @@ msgstr "$"
 #. reference: https://en.wikipedia.org/wiki/Tanzanian_shilling
 #. code: TZS
 #. sign: n/a
-#. symbol: x/y (x = above one shilingi, y = senti, =/- represents zero for x or y)
+#. symbol: x/y (x = above one shilingi, y = senti, =/- represents zero for x
+#. or y)
 #. sequence: n/a
 msgid "TZS"
 msgstr ""

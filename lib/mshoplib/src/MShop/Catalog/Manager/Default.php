@@ -537,25 +537,21 @@ class MShop_Catalog_Manager_Default
 
 		foreach( $sitePath as $siteId )
 		{
-			try
-			{
+			try {
 				$path = $this->_createTreeManager( $siteId )->getPath( $id );
-
-				if( !empty( $path ) )
-				{
-					$itemMap = array();
-
-					foreach ( $path as $node ) {
-						$itemMap[ $node->getId() ] = $node;
-					}
-
-					return $this->_buildItems( $itemMap, $ref, 'catalog' );
-				}
+			} catch( Exception $e ) {
+				continue;
 			}
-			catch( Exception $e )
+
+			if( !empty( $path ) )
 			{
-				$msg = sprintf( 'Node with ID "%1$s" not found in site "%2$s"', $id, $siteId );
-				$this->_getContext()->getLogger()->log( $msg );
+				$itemMap = array();
+
+				foreach ( $path as $node ) {
+					$itemMap[ $node->getId() ] = $node;
+				}
+
+				return $this->_buildItems( $itemMap, $ref, 'catalog' );
 			}
 		}
 
@@ -578,49 +574,45 @@ class MShop_Catalog_Manager_Default
 
 		foreach( $sitePath as $siteId )
 		{
-			try
-			{
-				$treeMgr = $this->_createTreeManager( $siteId );
-				$node = $treeMgr->getNode( $id, $level, $criteria );
-
-				$listItems = $listItemMap = $refIdMap = array();
-				$nodeMap = $this->_getNodeMap( $node );
-
-				if( count( $ref ) > 0 ) {
-					$listItems = $this->_getListItems( array_keys( $nodeMap ), $ref, 'catalog' );
-				}
-
-				foreach( $listItems as $listItem )
-				{
-					$domain = $listItem->getDomain();
-					$parentid = $listItem->getParentId();
-
-					$listItemMap[ $parentid ][ $domain ][ $listItem->getId() ] = $listItem;
-					$refIdMap[ $domain ][ $listItem->getRefId() ][] = $parentid;
-				}
-
-				$refItemMap = $this->_getRefItems( $refIdMap );
-
-				$listItems = array();
-				if ( array_key_exists( $id, $listItemMap ) ) {
-					$listItems = $listItemMap[ $id ];
-				}
-
-				$refItems = array();
-				if ( array_key_exists( $id, $refItemMap ) ) {
-					$refItems = $refItemMap[ $id ];
-				}
-
-				$item = $this->_createItem( $node, array(), $listItems, $refItems );
-				$this->_createTree( $node, $item, $listItemMap, $refItemMap );
-
-				return $item;
+			try {
+				$node = $this->_createTreeManager( $siteId )->getNode( $id, $level, $criteria );
+			} catch( Exception $e ) {
+				continue;
 			}
-			catch( Exception $e )
-			{
-				$msg = sprintf( 'Node with ID "%1$s" not found in site "%2$s"', $id, $siteId );
-				$this->_getContext()->getLogger()->log( $msg );
+
+			$listItems = $listItemMap = $refIdMap = array();
+			$nodeMap = $this->_getNodeMap( $node );
+
+			if( count( $ref ) > 0 ) {
+				$listItems = $this->_getListItems( array_keys( $nodeMap ), $ref, 'catalog' );
 			}
+
+			foreach( $listItems as $listItem )
+			{
+				$domain = $listItem->getDomain();
+				$parentid = $listItem->getParentId();
+
+				$listItemMap[ $parentid ][ $domain ][ $listItem->getId() ] = $listItem;
+				$refIdMap[ $domain ][ $listItem->getRefId() ][] = $parentid;
+			}
+
+			$refItemMap = $this->_getRefItems( $refIdMap );
+			$nodeid = $node->getId();
+
+			$listItems = array();
+			if ( array_key_exists( $nodeid, $listItemMap ) ) {
+				$listItems = $listItemMap[ $nodeid ];
+			}
+
+			$refItems = array();
+			if ( array_key_exists( $nodeid, $refItemMap ) ) {
+				$refItems = $refItemMap[ $nodeid ];
+			}
+
+			$item = $this->_createItem( $node, array(), $listItems, $refItems );
+			$this->_createTree( $node, $item, $listItemMap, $refItemMap );
+
+			return $item;
 		}
 
 		throw new MShop_Catalog_Exception( sprintf( 'Catalog node for ID "%1$s" not available', $id ) );

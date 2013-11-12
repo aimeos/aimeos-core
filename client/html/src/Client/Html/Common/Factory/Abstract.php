@@ -29,13 +29,13 @@ class Client_Html_Common_Factory_Abstract
 	protected static function _createClient( MShop_Context_Item_Interface $context, $classname, $interface, $templatePaths )
 	{
 		if( class_exists( $classname ) === false ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+			throw new Client_Html_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$client =  new $classname( $context, $templatePaths );
 
 		if( !( $client instanceof $interface ) ) {
-			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ) );
+			throw new Client_Html_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
 		return $client;

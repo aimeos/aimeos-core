@@ -139,7 +139,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 				}
 
 				if( ( $node = reset( $catItems ) ) === false ) {
-					throw new Client_Html_Exception( sprintf( 'No category with ID "%1$s" available', $currentid ) );
+					throw new Client_Html_Exception( sprintf( 'Category with ID "%1$s" not available', $currentid ) );
 				}
 			}
 			else if( $startid != '' )
@@ -149,7 +149,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 			}
 			else
 			{
-				$node = $manager->getTree( null, $ref, MW_Tree_Manager_Abstract::LEVEL_ONE );
+				$node = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 				$catItems = array( $node->getId() => $node );
 			}
 

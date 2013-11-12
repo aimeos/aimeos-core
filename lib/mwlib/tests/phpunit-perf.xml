@@ -6,4 +6,7 @@
 			<directory>Perf/</directory>
 		</testsuite>
 	</testsuites>
+	<logging>
+		<log type="junit" target="core_lib-mwlib_perf.junit.xml" />
+	</logging>
 </phpunit>

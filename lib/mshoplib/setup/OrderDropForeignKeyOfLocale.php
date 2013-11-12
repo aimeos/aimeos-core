@@ -48,7 +48,7 @@ class MW_Setup_Task_OrderDropForeignKeyOfLocale extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'OrderAlterForeignKeyContraintsOnDelete' );
+		return array( 'OrderAlterForeignKeyContraintsOnDelete', 'OrderRenameTables' );
 	}
 
 

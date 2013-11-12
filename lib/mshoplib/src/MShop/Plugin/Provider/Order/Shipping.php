@@ -14,22 +14,10 @@
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_Shipping implements MShop_Plugin_Provider_Interface
+class MShop_Plugin_Provider_Order_Shipping
+	extends MShop_Plugin_Provider_Order_Abstract
+	implements MShop_Plugin_Provider_Interface
 {
-	private $_item;
-	private $_context;
-
-	/**
-	 * Initializes the plugin instance
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param MShop_Plugin_Item_Interface $item Plugin item object
-	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Plugin_Item_Interface $item )
-	{
-		$this->_item = $item;
-		$this->_context = $context;
-	}
 
 
 	/**
@@ -56,7 +44,10 @@ class MShop_Plugin_Provider_Order_Shipping implements MShop_Plugin_Provider_Inte
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$this->_context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
+		$context = $this->_getContext();
+		$logger = $context->getLogger();
+
+		$logger->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
@@ -64,7 +55,7 @@ class MShop_Plugin_Provider_Order_Shipping implements MShop_Plugin_Provider_Inte
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$config = $this->_item->getConfig();
+		$config = $this->_getItem()->getConfig();
 		if( !isset( $config['threshold'] ) ) { return true; }
 
 		try {
@@ -79,24 +70,24 @@ class MShop_Plugin_Provider_Order_Shipping implements MShop_Plugin_Provider_Inte
 
 		if( !isset( $config['threshold'][$currency] ) )
 		{
-			$this->_context->getLogger()->log( sprintf( 'Threshold for free shipping for currency ID "%1$s" not available', $currency ), MW_Logger_Abstract::WARN );
+			$logger->log( sprintf( 'Threshold for free shipping for currency ID "%1$s" not available', $currency ), MW_Logger_Abstract::WARN );
 			return true;
 		}
 
-		$sum = MShop_Price_Manager_Factory::createManager( $this->_context )->createItem();
+		$sum = MShop_Price_Manager_Factory::createManager( $context )->createItem();
 
 		foreach( $order->getProducts() as $product ) {
 			$sum->addItem( $product->getPrice(), $product->getQuantity() );
 		}
 
-		if( $sum->getValue() + $sum->getRebate() >= $config['threshold'][$currency] && $price->getShipping() > '0.00' )
+		if( $sum->getValue() + $sum->getRebate() >= $config['threshold'][$currency] && $price->getCosts() > '0.00' )
 		{
-			$price->setRebate( $price->getShipping() );
-			$price->setShipping( '0.00' );
+			$price->setRebate( $price->getCosts() );
+			$price->setCosts( '0.00' );
 		}
 		else if( $sum->getValue() + $sum->getRebate() < $config['threshold'][$currency] && $price->getRebate() > '0.00' )
 		{
-			$price->setShipping( $price->getRebate() );
+			$price->setCosts( $price->getRebate() );
 			$price->setRebate( '0.00' );
 		}
 

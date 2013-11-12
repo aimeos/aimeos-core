@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Arcavias library" default="all">
+<project name="Arcavias MShop library" default="all">
 	
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
@@ -12,7 +12,8 @@
 	<target name="testperf" description="Executes performance tests">
 		<echo msg="Executing performance tests" />
 		<delete file="tests/unitperf.log" quiet="true" failonerror="false" />
-		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit-perf.xml"
+		<delete file="tests/lib-mshoplib-jperf.xml" quiet="true" failonerror="false" />
+		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit-perf.xml --repeat 5"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	
@@ -26,11 +27,13 @@
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="phpcs -n --standard=${coredir}/coding/Metaways config setup src tests/MAdmin tests/MShop tests/MW tests/Perf tests/bootstrap.php tests/TestHelper.php"
+		<exec command="phpcs -n --standard=${codestddir}/Metaways config setup src tests/MAdmin tests/MShop tests/MW tests/Perf tests/bootstrap.php tests/TestHelper.php"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
+		<delete file="tests/core_lib-mshoplib_test.junit.xml" quiet="true" failonerror="false" />
+		<delete file="tests/core_lib-mshoplib_perf.junit.xml" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete dir="tests/tmp" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >
@@ -41,15 +44,28 @@
 	</target>
 
 	<target name="i18n" description="Creates translation message files">
-		<exec command="find ./src/ -type f | xgettext -s --no-wrap --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/core-mshop.pot -f -"
+		<exec command="find ./src/ -type f | xgettext -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/core-mshop.pot -f -"
 			checkreturn="true" logoutput="true" />
-		<exec command="msgmerge -s --no-wrap -U --backup=none i18n/en.po i18n/core-mshop.pot" checkreturn="true" logoutput="true" />
+		<foreach list="./i18n,./i18n/code" param="i18n-dir" target="i18n-files" />
+	</target>
+
+	<target name="i18n-files" description="Updates translation message files in passed directory">
+		<foreach param="po-fname" absparam="po-filename" target="i18n-update">
+			<fileset dir="${i18n-dir}">
+				<include name="*.po" />
+			</fileset>
+		</foreach>
+	</target>
+	
+	<target name="i18n-update" description="Updates translation message files">
+		<fail unless="po-filename" message="Missing file name" />
+		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} ${i18n-dir}/*.pot" checkreturn="true" logoutput="true" /> 
 	</target>
 
 	<target name="build" description="Builds package for deployment">
 		<foreach param="po-fname" absparam="po-filename" target="build-mo">
             <fileset dir="./i18n">
-                <include name="*.po" />
+                <include name="**/*.po" />
             </fileset>
         </foreach>
 	</target>
@@ -59,7 +75,7 @@
 		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" /> 
     </target>
 
-	<target name="all" depends="coverage,testperf,check" description="Builds all parts of the package">
+	<target name="all" depends="coverage,testperf" description="Builds all parts of the package">
 	</target>
 
 </project>

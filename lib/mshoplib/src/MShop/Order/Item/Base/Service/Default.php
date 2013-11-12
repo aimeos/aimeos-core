@@ -306,7 +306,7 @@ class MShop_Order_Item_Base_Service_Default
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.service.type'] = $this->getType();
 		$list['order.base.service.price'] = $price->getValue();
-		$list['order.base.service.shipping'] = $price->getShipping();
+		$list['order.base.service.costs'] = $price->getCosts();
 		$list['order.base.service.rebate'] = $price->getRebate();
 		$list['order.base.service.taxrate'] = $price->getTaxRate();
 

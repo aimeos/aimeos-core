@@ -8,7 +8,7 @@
 
 try
 {
-	$miniPriceValue = $this->mainPriceItem->getValue() + $this->mainPriceItem->getShipping();
+	$miniPriceValue = $this->mainPriceItem->getValue() + $this->mainPriceItem->getCosts();
 	$miniPriceCurrency = $this->translate( 'client/html/currency', $this->mainPriceItem->getCurrencyId() );
 }
 catch( Exception $e )

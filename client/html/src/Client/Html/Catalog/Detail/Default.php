@@ -183,21 +183,25 @@ class Client_Html_Catalog_Detail_Default
 			$context = $this->_getContext();
 			$config = $context->getConfig();
 
-			$params = array();
-			foreach( $view->param() as $key => $value )
-			{
-				if( ( $key[0] === 'f' || $key[0] === 'l' || $key[0] === 'd' || $key[0] === 'a' ) && $key[1] === '-' ) {
-					$params[$key] = $value;
-				}
-			}
+			$default = array( 'media', 'price', 'text', 'attribute', 'product' );
+			$domains = $config->get( 'client/html/catalog/detail/default/domains', $default );
+			$prodid = $view->param( 'l-product-id' );
 
-			$domains = $config->get( 'client/html/catalog/detail/default/domains', array( 'media', 'price', 'text', 'attribute' ) );
-			$prodid = (int) $view->param( 'l-product-id' );
+			if( $config->get( 'client/html/catalog/detail/stock/enable', true ) === true )
+			{
+				$stockTarget = $config->get( 'client/html/catalog/stock/url/target' );
+				$stockController = $config->get( 'client/html/catalog/stock/url/controller', 'catalog' );
+				$stockAction = $config->get( 'client/html/catalog/stock/url/action', 'stock' );
+				$stockConfig = $config->get( 'client/html/catalog/stock/url/config', array() );
+
+				$params = array( 's-product-id' => $prodid );
+				$view->detailStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
+			}
 
 			$manager = MShop_Product_Manager_Factory::createManager( $context );
 
 			$view->detailProductItem = $manager->getItem( $prodid, $domains );
-			$view->detailParams = $params;
+			$view->detailParams = $this->_getClientParams( $view->param() );
 
 			$this->_cache = $view;
 		}

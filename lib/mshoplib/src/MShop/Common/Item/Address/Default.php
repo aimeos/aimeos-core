@@ -86,6 +86,59 @@ class MShop_Common_Item_Address_Default
 
 
 	/**
+	 * Copies the values of the order address item into the address item.
+	 *
+	 * @param MShop_Order_Item_Base_Address_Interface $item Order address item
+	 */
+	public function copyFrom( MShop_Order_Item_Base_Address_Interface $item )
+	{
+		$this->setCompany( $item->getCompany() );
+		$this->setSalutation( $item->getSalutation() );
+		$this->setTitle( $item->getTitle() );
+		$this->setFirstname( $item->getFirstname() );
+		$this->setLastname( $item->getLastname() );
+		$this->setAddress1( $item->getAddress1() );
+		$this->setAddress2( $item->getAddress2() );
+		$this->setAddress3( $item->getAddress3() );
+		$this->setPostal( $item->getPostal() );
+		$this->setCity( $item->getCity() );
+		$this->setState( $item->getState() );
+		$this->setCountryId( $item->getCountryId() );
+		$this->setLanguageId( $item->getLanguageId() );
+		$this->setTelephone( $item->getTelephone() );
+		$this->setTelefax( $item->getTelefax() );
+		$this->setEmail( $item->getEmail() );
+		$this->setWebsite( $item->getWebsite() );
+		$this->setFlag( $item->getFlag() );
+	}
+
+
+	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array $list Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list )
+	{
+		$unknown = array();
+		$list = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case $this->_prefix . 'refid': $this->setRefId( $value ); break;
+				case $this->_prefix . 'position': $this->setPosition( $value ); break;
+				default: $unknown[$key] = $value;
+			}
+		}
+
+		return $unknown;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values

@@ -53,7 +53,7 @@ CONSTRAINT "unq_mscat_sid_code"
 	UNIQUE ( "siteid", "code" )
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX "idx_mscat_sid_nleft_nright" ON "mshop_catalog" ("siteid", "nleft", "nright");
+CREATE INDEX "idx_mscat_sid_nlt_nrt_lvl_pid" ON "mshop_catalog" ("siteid", "nleft", "nright", "level", "parentid");
 
 CREATE INDEX "idx_mscat_sid_status" ON "mshop_catalog" ("siteid", "status");
 

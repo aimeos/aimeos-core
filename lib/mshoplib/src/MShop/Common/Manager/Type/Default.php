@@ -217,8 +217,8 @@ class MShop_Common_Manager_Type_Default
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = 'mshop/' . $topdomain . '/manager/' . implode( '/', $domain ) . '/default/item/search';
-			$cfgPathCount =  'mshop/' . $topdomain . '/manager/' . implode( '/', $domain ) . '/default/item/count';
+			$cfgPathSearch = $this->_config['search'];
+			$cfgPathCount =  $this->_config['count'];
 			$required = array( trim( $this->_prefix, '.' ) );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );

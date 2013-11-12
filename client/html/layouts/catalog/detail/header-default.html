@@ -11,12 +11,15 @@ $enc = $this->encoder();
 ?>
 <?php if( isset( $this->detailProductItem ) ) : ?>
 <title><?php echo $enc->html( $this->detailProductItem->getName() ); ?></title>
-<?php foreach( $this->detailProductItem->getRefItems( 'text', 'meta-keyword', 'default' ) as $textItem ) : ?>
+<?php	foreach( $this->detailProductItem->getRefItems( 'text', 'meta-keyword', 'default' ) as $textItem ) : ?>
 <meta name="keywords" content="<?php echo $enc->attr( strip_tags( $textItem->getContent() ) ); ?>" />
-<?php endforeach; ?>
-<?php foreach( $this->detailProductItem->getRefItems( 'text', 'meta-description', 'default' ) as $textItem ) : ?>
+<?php	endforeach; ?>
+<?php	foreach( $this->detailProductItem->getRefItems( 'text', 'meta-description', 'default' ) as $textItem ) : ?>
 <meta name="description" content="<?php echo $enc->attr( strip_tags( $textItem->getContent() ) ); ?>" />
-<?php endforeach; ?>
+<?php	endforeach; ?>
 <?php endif; ?>
 <meta name="application-name" content="Arcavias" />
+<?php if( ( $url = $this->get( 'detailStockUrl' ) ) != null ) : ?>
+<script type="text/javascript" defer="defer" src="<?php echo $enc->attr( $url ); ?>"></script>
+<?php endif; ?>
 <?php echo $this->get( 'detailHeader' ); ?>

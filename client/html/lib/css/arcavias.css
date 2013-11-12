@@ -1,7 +1,8 @@
 ﻿/* Arcavias standard CSS */
 
 
-.arcavias .standardbutton {
+.arcavias .standardbutton,
+.arcavias .minibutton {
 	background-image: url("images/buttonfond.png");
 	background-repeat: repeat-x;
 	background-size: contain;
@@ -26,7 +27,7 @@
 }
 
 .arcavias .minibutton {
-	min-width: auto;
+	min-width: 0;
 }
 
 /** Enforce equal width/height for buttons */
@@ -47,8 +48,7 @@
 }
 
 .arcavias li.attr-item,
-.arcavias li.form-item,
-.arcavias li.error-item {
+.arcavias li.form-item {
 	list-style: none;
 }
 
@@ -56,7 +56,10 @@
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
 	padding: 0.5em;
-	list-style: none;
+}
+
+.arcavias .error-item {
+	padding: 0.25em 0.5em;
 }
 
 /* Common summary CSS also used in e-mail ===>>> */
@@ -72,6 +75,12 @@
 
 
 /* Common summary */
+.common-summary .error,
+.common-summary-detail .error {
+	background-color: #ffeeee;
+	border-bottom: 1px solid #FF3300;
+}
+
 .common-summary .item {
 	display: inline-block;
 	vertical-align: top;
@@ -117,7 +126,8 @@
 	padding-top: 0;
 }
 
-.common-summary .header {
+.common-summary .header,
+.common-summary-detail .header {
 	border-bottom: 1px solid #689DB9;
 	background-color: #F2F7FA;
 	padding: 5px 10px;
@@ -140,12 +150,12 @@
 	color: #000000;
 }
 
-.common-summary-detail a.modify {
-	margin: 10px 24px 0 0;	
+.common-summary-detail .header {
+	border-bottom: none;
+	background-color: #FFFFFF;
 }
 
 .common-summary-detail h2 {
-	margin: 5px 10px;
 	font-size: 1em;
 }
 
@@ -177,6 +187,7 @@
 	color: #004266;
 	background-color: #F2F7FA
 }
+
 .common-summary-detail th,
 .common-summary-detail td {
 	padding: 5px;
@@ -191,13 +202,8 @@
 	overflow: hidden;
 }
 
-.common-summary-detail th.quantity,
-.common-summary-detail th.action {
-	width: 10%;
-}
-
-.common-summary-detail th.price {
-	width: 20%;
+.common-summary-detail .attr-item .name:after {
+	content: ":";
 }
 
 .common-summary-detail tr.subtotal,
@@ -214,20 +220,30 @@
 	white-space: nowrap;
 }
 
-.common-summary-detail tr.delivery td:first-child:after,
-.common-summary-detail tr.payment td:first-child:after {
-	content: " +";
+.common-summary-detail th.price {
+	width: 20%;
 }
 
+.common-summary-detail th.quantity,
 .common-summary-detail td.quantity {
-	text-align: center;
 	white-space: nowrap;
+	text-align: center;
 }
 
 .common-summary-detail td.quantity input {
 	text-align: center;
 	display: inline;
 	width: 3em;
+}
+
+.common-summary-detail th.action,
+.common-summary-detail td.action {
+	text-align: center;
+}
+
+.common-summary-detail tr.delivery td:first-child:after,
+.common-summary-detail tr.payment td:first-child:after {
+	content: " +";
 }
 
 .common-summary-detail tfoot {
@@ -492,7 +508,7 @@
 	margin: 10px 0px;
 }
 
-.catalog-list-items .single {
+.catalog-list-items .product {
 	display: inline-block;
 	width: 180px;
 	position: relative;
@@ -500,7 +516,7 @@
 	margin: 0 1px;
 }
 
-.catalog-list-items .single a {
+.catalog-list-items .product a {
 	text-decoration: none;
 	display: inline-block; 
 }
@@ -531,7 +547,7 @@
 /* text list */
 .catalog-list-items .text-list {
 	height: 5.3125em;
-	padding: 3px 5px 3px 5px;
+	padding: 3px 5px;
 	text-align: left;
 	overflow: hidden;
 	border-top: 1px solid #C3D9E5;
@@ -540,10 +556,11 @@
 
 /* price list */
 .catalog-list-items .price-list {
-	padding: 5px 5px 5px 5px;
+	padding: 5px;
 	font-weight: bold;
 	color: #004266;
-	height: 0.9375em;
+	height: 1em;
+	float: left;
 }
 
 .catalog-list-items .price-item {
@@ -561,6 +578,44 @@
 .catalog-list-items .price-item:first-child .taxrate {
 	display: none;
 }
+
+/* Stock level */
+.catalog-list-items .stock {
+	padding: 5px;
+	float: left;
+}
+
+.catalog-list-items .stockitem {
+	display: none;
+}
+
+.catalog-list-items .stockitem:first-child {
+	display: block;
+}
+
+.catalog-list-items .stocklevel {
+	display: inline-block;
+	height: 0.85em;
+	width: 0.85em;
+}
+
+.catalog-list-items .stocktext {
+	display: none;
+}
+
+.catalog-list-items .stock-unlimited .stocklevel,
+.catalog-list-items .stock-high .stocklevel {
+	background-color: #0BA008;
+}
+
+.catalog-list-items .stock-low .stocklevel {
+	background-color: #F0A008;
+}
+
+.catalog-list-items .stock-out .stocklevel {
+	background-color: #F01800;
+}
+
 
 /* Product detail, image section */
 .catalog-detail-image {
@@ -727,6 +782,7 @@
 }
 
 /* product attributes */
+.catalog-detail-basket-selection,
 .catalog-detail-basket-attribute {
 	margin-top: 1.5em;
 	font-weight: bold;
@@ -734,12 +790,14 @@
 	color: #004266;
 }
 
+.catalog-detail-basket-selection select,
 .catalog-detail-basket-attribute select {
 	font-weight: normal;
 	text-transform: none;
 	margin-bottom: 3px;
 }
 
+.catalog-detail-basket-selection td,
 .catalog-detail-basket-attribute td {
 	padding-right: 5px;
 }
@@ -765,6 +823,29 @@
 .catalog-detail-additional .content {
 	padding: 1% 0 1% 0.5%;
 }
+
+/* Stock level */
+.catalog-detail-basic .stock {
+	margin: 0.5em 0;
+}
+
+.catalog-detail-basic .stocklevel {
+	display: none;
+}
+
+.catalog-detail-basic .stock-unlimited,
+.catalog-detail-basic .stock-high {
+	color: #0BA008;
+}
+
+.catalog-detail-basic .stock-low {
+	color: #F0A008;
+}
+
+.catalog-detail-basic .stock-out {
+	color: #F01800;
+}
+
 
 /* Basket */
 .checkout-standard,
@@ -1145,6 +1226,8 @@
 
 .checkout-standard-summary-option h3 {
 	display: block;
+	padding: 5px;
+	padding-top: 10px;
 }
 
 .checkout-standard-summary-option p {
@@ -1160,11 +1243,6 @@
 .checkout-standard-summary-option input {
 	display: inline-block;
 	vertical-align: middle;
-}
-
-.checkout-standard-summary-option .error {
-	background-color: #ffeeee;
-	border-bottom: 1px solid #FF3300;
 }
 
 /* Checkout order */
@@ -1265,8 +1343,9 @@
 
 @media only screen and (max-width: 562px) and (orientation: portrait) {
 	.common-summary .item {
-    	display: block;
-	    width: 100%;
+		display: block;
+		width: 100%;
+	}
 }
 
 

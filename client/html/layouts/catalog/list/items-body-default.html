@@ -7,6 +7,7 @@
  */
 
 $enc = $this->encoder();
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
@@ -19,18 +20,18 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 ?>
 <div class="catalog-list-items">
-<?php if( isset( $this->listProductItems ) ) : ?>
-<?php foreach( $this->listProductItems as $id => $productItem ) : ?>
+<?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : ?>
 <?php	$name = $productItem->getName(); $firstImage = true; ?>
-	<div class="single">
+	<div class="product" data-id="<?php echo $id; ?>">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, array( 'a-name' => str_replace( ' ', '-', $name ), 'l-product-id' => $id ) + $this->listParams ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
+<?php		$mediaUrl = $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>
 <?php		if( $firstImage === true ) : $firstImage = false; ?>
-				<noscript><div class="media-item" style="background-image: url('<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>')"></div></noscript>
-				<div class="media-item lazy-image" data-src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>"></div>
+				<noscript><div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')"></div></noscript>
+				<div class="media-item lazy-image" data-src="<?php echo $mediaUrl; ?>"></div>
 <?php		else : ?>
-				<div class="media-item" data-src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>"></div>
+				<div class="media-item" data-src="<?php echo $mediaUrl; ?>"></div>
 <?php		endif; ?>
 <?php	endforeach; ?>
 			</div>
@@ -52,14 +53,14 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 					<span class="rebate"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $rebate ), $currency ) ); ?></span>
 					<span class="rebatepercent"><?php echo $enc->html( sprintf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ) ); ?></span>
 <?php		endif; ?>
-					<span class="shipping"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getShipping() ), $currency ) ); ?></span>
+					<span class="shipping"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getCosts() ), $currency ) ); ?></span>
 					<span class="taxrate"><?php echo $enc->html( sprintf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ) ); ?></span>
 				</div>
 <?php	endforeach; ?>
 			</div>
-		</a>
+			<div class="stock"></div>
 <?php	echo $this->get( 'itemsBody' ); ?>
+		</a>
 	</div>
 <?php endforeach; ?>
-<?php endif; ?>
 </div>

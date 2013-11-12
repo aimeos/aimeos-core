@@ -18,9 +18,9 @@ class Controller_Frontend_Basket_Default
 	extends Controller_Frontend_Abstract
 	implements Controller_Frontend_Basket_Interface
 {
-	private $_basket = null;
-	private $_listTypeAttributes = array();
+	private $_basket;
 	private $_domainManager;
+	private $_listTypeAttributes = array();
 
 
 	/**
@@ -33,7 +33,7 @@ class Controller_Frontend_Basket_Default
 	{
 		parent::__construct( $context );
 
-		$this->_domainManager = $this->_getDomainManager( 'order/base' );
+		$this->_domainManager = MShop_Factory::createManager( $context, 'order/base' );
 		$this->_basket = $this->_domainManager->getSession();
 	}
 
@@ -81,96 +81,70 @@ class Controller_Frontend_Basket_Default
 		$this->_checkStockLevel( $prodid, $quantity );
 
 
-		$productManager = $this->_getDomainManager( 'product' );
+		$context = $this->_getContext();
+
+		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$productItem = $productManager->getItem( $prodid, array( 'media', 'price', 'product', 'text' ) );
 
-		$orderBaseProductItem = $this->_getDomainManager( 'order/base/product' )->createItem();
+		$orderBaseProductItem = MShop_Factory::createManager( $context, 'order/base/product' )->createItem();
 		$orderBaseProductItem->copyFrom( $productItem );
 		$orderBaseProductItem->setQuantity( $quantity );
 
-		$orderAttributes = array();
-		$orderProductAttributeManager = $this->_getDomainManager( 'order/base/product/attribute' );
+		$attr = array();
+		$prices = $productItem->getRefItems( 'price', 'default', 'default' );
 
-		$prices = $productItem->getRefItems( 'price', 'default' );
 
 		if( $productItem->getType() === 'select' )
 		{
 			$productItems = $this->_getProductVariants( $productItem, $variantAttributeIds );
 
-			if( ( $productItem = reset( $productItems ) ) !== false )
+			if( count( $productItems ) > 1 )
+			{
+				$msg = sprintf( 'No unique article found for selected attributes and product ID "%1$s"', $prodid );
+				throw new Controller_Frontend_Basket_Exception( $msg );
+			}
+			else if( ( $productItem = reset( $productItems ) ) !== false )
 			{
 				$orderBaseProductItem->setProductCode( $productItem->getCode() );
-				$orderBaseProductItem->setSupplierCode( $productItem->getSupplierCode() );
-				$orderBaseProductItem->parentId = $orderBaseProductItem->getProductId();
-				$orderBaseProductItem->setProductId( $productItem->getId() );
 
-				$subprices = $productItem->getRefItems( 'price', 'default' );
+				$subprices = $productItem->getRefItems( 'price', 'default', 'default' );
 
 				if( count( $subprices ) > 0 ) {
 					$prices = $subprices;
 				}
 
-				foreach( $this->_getAttributes( $variantAttributeIds, array( 'text' ) ) as $attrItem )
+				$orderProductAttrManager = MShop_Factory::createManager( $context, 'order/base/product/attribute' );
+				$variantAttributes = $productItem->getRefItems( 'attribute', null, 'variant' );
+
+				foreach( $this->_getAttributes( array_keys( $variantAttributes ), array( 'text' ) ) as $attrItem )
 				{
-					$orderAttributeItem = $orderProductAttributeManager->createItem();
+					$orderAttributeItem = $orderProductAttrManager->createItem();
 					$orderAttributeItem->copyFrom( $attrItem );
 					$orderAttributeItem->setType( 'variant' );
 
-					$orderAttributes[] = $orderAttributeItem;
+					$attr[] = $orderAttributeItem;
 				}
 			}
 			else if( $requireVariant === true )
 			{
-				$ids = join( ',', $variantAttributeIds );
-				$msg = sprintf( 'No product found for ID "%1$s" and variant attribute IDs "%2$s"', $prodid, $ids );
+				$msg = sprintf( 'No article found for selected attributes and product ID "%1$s"', $prodid );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 		}
 
 
-		$priceManager = $this->_getDomainManager( 'price' );
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$price = $priceManager->getLowestPrice( $prices, $quantity );
 
-
-		$attrTypeId = $this->_getProductListTypeItem( 'attribute', 'config' )->getId();
-		$this->_checkReferences( $prodid, 'attribute', $attrTypeId, $configAttributeIds );
-
-		foreach( $this->_getAttributes( $configAttributeIds ) as $attrItem )
-		{
-			$prices = $attrItem->getRefItems( 'price', 'default' );
-
-			if( count( $prices ) > 0 )
-			{
-				$attrPrice = $priceManager->getLowestPrice( $prices, $quantity );
-				$price->addItem( $attrPrice );
-			}
-
-			$orderAttributeItem = $orderProductAttributeManager->createItem();
-			$orderAttributeItem->copyFrom( $attrItem );
-			$orderAttributeItem->setType( 'config' );
-
-			$orderAttributes[] = $orderAttributeItem;
-		}
-
-
-		$attrTypeId = $this->_getProductListTypeItem( 'attribute', 'hidden' )->getId();
-		$this->_checkReferences( $prodid, 'attribute', $attrTypeId, $hiddenAttributeIds );
-
-		foreach( $this->_getAttributes( $hiddenAttributeIds, array() ) as $attrItem )
-		{
-			$orderAttributeItem = $orderProductAttributeManager->createItem();
-			$orderAttributeItem->copyFrom( $attrItem );
-			$orderAttributeItem->setType( 'hidden' );
-
-			$orderAttributes[] = $orderAttributeItem;
-		}
-
+		$attr += $this->_createOrderProductAttributes( $price, $prodid, $quantity, $configAttributeIds, 'config' );
+		$attr += $this->_createOrderProductAttributes( $price, $prodid, $quantity, $hiddenAttributeIds, 'hidden' );
 
 		// remove product rebate of original price in favor to rebates granted for the order
 		$price->setRebate( '0.00' );
 
 		$orderBaseProductItem->setPrice( $price );
-		$orderBaseProductItem->setAttributes( $orderAttributes );
+		$orderBaseProductItem->setAttributes( $attr );
+
 
 		$this->_basket->addProduct( $orderBaseProductItem );
 		$this->_domainManager->setSession( $this->_basket );
@@ -215,27 +189,44 @@ class Controller_Frontend_Basket_Default
 		}
 
 
-		$this->_checkStockLevel( $product->getProductId(), $quantity );
+		$context = $this->_getContext();
+		$productManager = MShop_Factory::createManager( $context, 'product' );
 
-		$productManager = $this->_getDomainManager( 'product' );
-		$productItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
+		$search = $productManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.code', $product->getProductCode() ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$result = $productManager->searchItems( $search, array( 'price' ) );
+
+		if( ( $productItem = reset( $result ) ) === false )
+		{
+			$msg = sprintf( 'No product with code "%1$s" found', $product->getProductCode() );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+
+
+		$this->_checkStockLevel( $productItem->getId(), $quantity );
+
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
 
-		if( empty( $prices ) && isset( $product->parentId ) )
+		if( empty( $prices ) )
 		{
-			$productItem = $productManager->getItem( $product->parentId, array( 'price' ) );
+			$productItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
 			$prices = $productItem->getRefItems( 'price', 'default' );
 		}
 
-		$priceManager = $this->_getDomainManager( 'price' );
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$price = $priceManager->getLowestPrice( $prices, $quantity );
 
 
 		$expr = array();
 		$attributes = array();
 
-		$attributeManager = $this->_getDomainManager( 'attribute' );
+		$attributeManager = MShop_Factory::createManager( $context, 'attribute' );
 		$search = $attributeManager->createSearch( true );
 
 		foreach( $product->getAttributes() as $item )
@@ -298,8 +289,7 @@ class Controller_Frontend_Basket_Default
 	 */
 	public function setAddress( $type, $value )
 	{
-		$orderAddressManager = $this->_getDomainManager( 'order/base/address' );
-		$address = $orderAddressManager->createItem();
+		$address = MShop_Factory::createManager( $this->_getContext(), 'order/base/address' )->createItem();
 		$address->setType( $type );
 
 		if( $value instanceof MShop_Common_Item_Address_Interface )
@@ -336,7 +326,9 @@ class Controller_Frontend_Basket_Default
 	 */
 	public function setService( $type, $id, array $attributes = array() )
 	{
-		$serviceManager = $this->_getDomainManager( 'service' );
+		$context = $this->_getContext();
+
+		$serviceManager = MShop_Factory::createManager( $context, 'service' );
 		$serviceItem = $serviceManager->getItem( $id, array( 'media', 'price', 'text' ) );
 
 		$provider = $serviceManager->getProvider( $serviceItem );
@@ -356,7 +348,7 @@ class Controller_Frontend_Basket_Default
 			}
 		}
 
-		$orderBaseServiceManager = $this->_getDomainManager( 'order/base/service' );
+		$orderBaseServiceManager = MShop_Factory::createManager( $context, 'order/base/service' );
 		$orderServiceItem = $orderBaseServiceManager->createItem();
 		$orderServiceItem->copyFrom( $serviceItem );
 
@@ -365,17 +357,17 @@ class Controller_Frontend_Basket_Default
 		$price->setRebate( '0.00' );
 		$orderServiceItem->setPrice( $price );
 
-		$orderBaseServiceAttributeManager = $orderBaseServiceManager->getSubManager('attribute');
+		$orderBaseServiceAttributeManager = MShop_Factory::createManager( $context, 'order/base/service/attribute');
 
 		$attributeItems = array();
 		foreach( $attributes as $key => $value )
 		{
-			$ordBaseAtrrItem = $orderBaseServiceAttributeManager->createItem();
-			$ordBaseAtrrItem->setCode( $key );
-			$ordBaseAtrrItem->setValue( strip_tags( $value ) ); // prevent XSS
-			$ordBaseAtrrItem->setType( 'config' );
+			$ordBaseAttrItem = $orderBaseServiceAttributeManager->createItem();
+			$ordBaseAttrItem->setCode( $key );
+			$ordBaseAttrItem->setValue( strip_tags( $value ) ); // prevent XSS
+			$ordBaseAttrItem->setType( 'config' );
 
-			$attributeItems[] = $ordBaseAtrrItem;
+			$attributeItems[] = $ordBaseAttrItem;
 		}
 
 		$orderServiceItem->setAttributes( $attributeItems );
@@ -393,7 +385,7 @@ class Controller_Frontend_Basket_Default
 	 */
 	protected function _checkCategory( $prodid )
 	{
-		$catalogListManager = $this->_getDomainManager( 'catalog/list' );
+		$catalogListManager = MShop_Factory::createManager( $this->_getContext(), 'catalog/list' );
 
 		$search = $catalogListManager->createSearch( true );
 		$expr = array(
@@ -424,7 +416,7 @@ class Controller_Frontend_Basket_Default
 	 */
 	protected function _checkReferences( $prodId, $domain, $listTypeId, array $refIds )
 	{
-		$productManager = $this->_getDomainManager( 'product' );
+		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
 		$search = $productManager->createSearch( true );
 
 		$expr = array(
@@ -459,7 +451,7 @@ class Controller_Frontend_Basket_Default
 	 */
 	protected function _checkStockLevel( $prodid, $quantity )
 	{
-		$manager = $this->_getDomainManager( 'product/stock' );
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
 
 		$search = $manager->createSearch( true );
 		$expr = array(
@@ -487,6 +479,51 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
+	 * Creates the order product attribute items from the given attribute IDs and updates the price item if necessary.
+	 *
+	 * @param MShop_Price_Item_Interface $price Price item of the ordered product
+	 * @param string $prodid Unique product ID where the given attributes must be attached to
+	 * @param integer $quantity Number of products that should be added to the basket
+	 * @param array $attributeIds List of attributes IDs of the given type
+	 * @param string $type Attribute type
+	 * @return array List of items implementing MShop_Order_Item_Product_Attribute_Interface
+	 */
+	protected function _createOrderProductAttributes( MShop_Price_Item_Interface $price, $prodid, $quantity,
+		array $attributeIds, $type )
+	{
+		if( empty( $attributeIds ) ) {
+			return array();
+		}
+
+		$attrTypeId = $this->_getProductListTypeItem( 'attribute', $type )->getId();
+		$this->_checkReferences( $prodid, 'attribute', $attrTypeId, $attributeIds );
+
+		$list = array();
+		$context = $this->_getContext();
+
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$orderProductAttributeManager = MShop_Factory::createManager( $context, 'order/base/product/attribute' );
+
+		foreach( $this->_getAttributes( $attributeIds ) as $attrItem )
+		{
+			$prices = $attrItem->getRefItems( 'price', 'default', 'default' );
+
+			if( !empty( $prices ) ) {
+				$price->addItem( $priceManager->getLowestPrice( $prices, $quantity ) );
+			}
+
+			$item = $orderProductAttributeManager->createItem();
+			$item->copyFrom( $attrItem );
+			$item->setType( $type );
+
+			$list[] = $item;
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Fills the order address object with the values from the array.
 	 *
 	 * @param MShop_Order_Item_Base_Address_Interface $address Address item to store the values into
@@ -498,63 +535,11 @@ class Controller_Frontend_Basket_Default
 	 */
 	protected function _setAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map )
 	{
-		$errors = array();
-
-		foreach( $map as $key => $value )
-		{
-			try
-			{
-				$value = strip_tags( $value ); // prevent XSS
-
-				switch( $key )
-				{
-					case 'order.base.address.salutation':
-						$address->setSalutation( $value ); break;
-					case 'order.base.address.company':
-						$address->setCompany( $value ); break;
-					case 'order.base.address.title':
-						$address->setTitle( $value ); break;
-					case 'order.base.address.firstname':
-						$address->setFirstname( $value ); break;
-					case 'order.base.address.lastname':
-						$address->setLastName( $value ); break;
-					case 'order.base.address.address1':
-						$address->setAddress1( $value ); break;
-					case 'order.base.address.address2':
-						$address->setAddress2( $value ); break;
-					case 'order.base.address.address3':
-						$address->setAddress3( $value ); break;
-					case 'order.base.address.postal':
-						$address->setPostal( $value ); break;
-					case 'order.base.address.city':
-						$address->setCity( $value ); break;
-					case 'order.base.address.state':
-						$address->setState( $value ); break;
-					case 'order.base.address.countryid':
-						$address->setCountryId( $value ); break;
-					case 'order.base.address.languageid':
-						$address->setLanguageId( $value ); break;
-					case 'order.base.address.telephone':
-						$address->setTelephone( $value ); break;
-					case 'order.base.address.email':
-						$address->setEmail( $value ); break;
-					case 'order.base.address.telefax':
-						$address->setTelefax( $value ); break;
-					case 'order.base.address.website':
-						$address->setWebsite( $value ); break;
-					case 'order.base.address.flag':
-						$address->setFlag( $value ); break;
-					default:
-						$msg = sprintf( 'Invalid address property "%1$s" with value "%2$s"', $key, $value );
-						throw new Controller_Frontend_Basket_Exception( $msg );
-				}
-			}
-			catch( Exception $e )
-			{
-				$name = substr( $key, 19 );
-				$errors[$name] = $e->getMessage();
-			}
+		foreach( $map as $key => $value ) {
+			$map[$key] = strip_tags( $value ); // prevent XSS
 		}
+
+		$errors = $address->fromArray( $map );
 
 		if( count( $errors ) > 0 )
 		{
@@ -578,7 +563,7 @@ class Controller_Frontend_Basket_Default
 			return array();
 		}
 
-		$attributeManager = $this->_getDomainManager( 'attribute' );
+		$attributeManager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
 
 		$search = $attributeManager->createSearch( true );
 		$expr = array(
@@ -594,7 +579,7 @@ class Controller_Frontend_Basket_Default
 		{
 			$expected = implode( ',', $attributeIds );
 			$actual = implode( ',', array_keys( $attrItems ) );
-			$msg = sprintf( 'Available attribute IDs "%1$s" does not match the given attribute IDs "%2$s"', $actual, $expected );
+			$msg = sprintf( 'Available attribute IDs "%1$s" do not match the given attribute IDs "%2$s"', $actual, $expected );
 
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
@@ -614,7 +599,7 @@ class Controller_Frontend_Basket_Default
 	{
 		if( !isset( $this->_listTypeAttributes[$domain][$code] ) )
 		{
-			$listTypeManager = $this->_getDomainManager( 'product/list/type' );
+			$listTypeManager = MShop_Factory::createManager( $this->_getContext(), 'product/list/type' );
 
 			$listTypeSearch = $listTypeManager->createSearch( true );
 			$expr = array (
@@ -628,7 +613,7 @@ class Controller_Frontend_Basket_Default
 
 			if( ( $listTypeItem = reset( $listTypeItems ) ) === false )
 			{
-				$msg = sprintf( 'No list type for domain "%1$s" and code "%2$s" found', $domain, $code );
+				$msg = sprintf( 'List type for domain "%1$s" and code "%2$s" not found', $domain, $code );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
 
@@ -648,10 +633,10 @@ class Controller_Frontend_Basket_Default
 	 * @return array List of products matching the given attributes
 	 */
 	protected function _getProductVariants( MShop_Product_Item_Interface $productItem, array $variantAttributeIds,
-		array $domains = array( 'media', 'price', 'text' ) )
+		array $domains = array( 'attribute', 'media', 'price', 'text' ) )
 	{
 		$subProductIds = array();
-		foreach( $productItem->getRefItems( 'product', 'default' ) as $item ) {
+		foreach( $productItem->getRefItems( 'product', 'default', 'default' ) as $item ) {
 			$subProductIds[] = $item->getId();
 		}
 
@@ -659,7 +644,7 @@ class Controller_Frontend_Basket_Default
 			return array();
 		}
 
-		$productManager = $this->_getDomainManager( 'product' );
+		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
 		$search = $productManager->createSearch( true );
 
 		$expr = array(

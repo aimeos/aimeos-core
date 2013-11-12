@@ -1,18 +1,15 @@
 <?php
 
 /**
- * Test class for MW_Session_CMSLite.
- *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
+
+
 class MW_Observer_Listener_DefaultTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MW_Observer_Listener
-	 * @access protected
-	 */
 	private $_object;
+
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
