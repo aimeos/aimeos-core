@@ -192,9 +192,10 @@ class Client_Html_Catalog_Detail_Default
 				$stockTarget = $config->get( 'client/html/catalog/stock/url/target' );
 				$stockController = $config->get( 'client/html/catalog/stock/url/controller', 'catalog' );
 				$stockAction = $config->get( 'client/html/catalog/stock/url/action', 'stock' );
+				$stockConfig = $config->get( 'client/html/catalog/stock/url/config', array() );
 
 				$params = array( 's-product-id' => $prodid );
-				$view->detailStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params );
+				$view->detailStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
 			}
 
 			$manager = MShop_Product_Manager_Factory::createManager( $context );

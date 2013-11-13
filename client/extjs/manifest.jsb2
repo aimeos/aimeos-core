@@ -100,6 +100,9 @@
 			"text": "Schema.js",
 			"path": "src/"
 		}, {
+			"text": "Config.js",
+			"path": "src/"
+		}, {
 			"text": "pagingtoolbar.js",
 			"path": "src/elements/"
 		}, {

@@ -65,30 +65,30 @@ class Controller_Jobs_Admin_Job_Default
 					$job = $item->getMethod();
 
 					if( preg_match( '/^[a-zA-Z0-9\_]+\.[a-zA-Z0-9\_]+$/', $job ) !== 1 ) {
-						throw new Exception( sprintf( 'Invalid job name "%1$s"', $job ) );
+						throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in job name "%1$s"', $job ) );
 					}
 
 					$parts = explode( '.', $job );
 
 					if( count( $parts ) !== 2 ) {
-						throw new Exception( sprintf( 'Invalid job method "%1$s"', $job ) );
+						throw new Controller_Jobs_Exception( sprintf( 'Invalid job method "%1$s"', $job ) );
 					}
 
 					$name = "Controller_ExtJS_{$parts[0]}_Factory";
 					$method = $parts[1];
 
 					if( class_exists( $name ) === false ) {
-						throw new Exception( sprintf( 'Class "%1$s" not found', $name ) );
+						throw new Controller_Jobs_Exception( sprintf( 'Class "%1$s" not available', $name ) );
 					}
 
 					$name .= '::createController';
 
 					if( ( $controller = call_user_func_array( $name, array( $context ) ) ) === false ) {
-						throw new Exception( sprintf( 'Unable to call factory method "%1$s"', $name ) );
+						throw new Controller_Jobs_Exception( sprintf( 'Unable to call factory method "%1$s"', $name ) );
 					}
 
 					if( method_exists( $controller, $method ) === false ) {
-						throw new Exception( sprintf( 'Method "%1$s" not found', $method ) );
+						throw new Controller_Jobs_Exception( sprintf( 'Method "%1$s" not available', $method ) );
 					}
 
 					$result = $controller->$method( (object) $item->getParameter() );

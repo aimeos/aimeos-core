@@ -75,6 +75,7 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 	{
 		$view = TestHelper::getView();
 		$view->standardStepActive = 'order';
+		$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( '', 'POST', array() );
 		$this->_object->setView( $view );
 
 		$output = $this->_object->getBody();

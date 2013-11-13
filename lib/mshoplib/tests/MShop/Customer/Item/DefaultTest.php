@@ -52,6 +52,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 			'birthday' => '2010-01-01',
 			'status' => 1,
 			'password' => '',
+			'vdate' => null,
 			'company' => 'unitCompany',
 			'salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
 			'title' => 'Dr.',
@@ -177,6 +178,18 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
+	public function testGetDateVerified()
+	{
+		$this->assertEquals( null, $this->_object->getDateVerified() );
+	}
+
+	public function testSetDateVerified()
+	{
+		$this->_object->setDateVerified( '2010-02-01' );
+		$this->assertEquals( '2010-02-01', $this->_object->getDateVerified() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
 	public function testGetPaymentAddress()
 	{
 		$address = $this->_object->getPaymentAddress();
@@ -217,9 +230,10 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getCode(), $arrayObject['customer.code'] );
 		$this->assertEquals( $this->_object->getStatus(), $arrayObject['customer.status'] );
 		$this->assertEquals( $this->_object->getPassword(), $arrayObject['customer.password'] );
+		$this->assertEquals( $this->_object->getBirthday(), $arrayObject['customer.birthday'] );
+		$this->assertEquals( $this->_object->getDateVerified(), $arrayObject['customer.dateverified'] );
 		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['customer.ctime'] );
 		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['customer.mtime'] );
-		$this->assertEquals( $this->_object->getBirthday(), $arrayObject['customer.birthday'] );
 		$this->assertEquals( $this->_object->getEditor(), $arrayObject['customer.editor'] );
 		$address = $this->_object->getPaymentAddress();
 		$this->assertEquals( $address->getCompany(), $arrayObject['customer.company'] );

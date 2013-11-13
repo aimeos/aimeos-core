@@ -27,7 +27,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$p->addListener( $this, 'isComplete.after' );
+		$p->addListener( $this, 'check.after' );
 	}
 
 
@@ -107,7 +107,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			$price = $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
 
 			if( ( $orderProducts[$pos]->getPrice()->getValue() !== $price->getValue()
-				|| $orderProducts[$pos]->getPrice()->getShipping() !== $price->getShipping()
+				|| $orderProducts[$pos]->getPrice()->getCosts() !== $price->getCosts()
 				|| $orderProducts[$pos]->getPrice()->getTaxrate() !== $price->getTaxrate() )
 				&& $orderProducts[$pos]->getFlags() !== MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 			{

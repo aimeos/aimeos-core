@@ -95,8 +95,8 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			align : 'right'
 		}, {
 			xtype : 'numbercolumn',
-			dataIndex : 'price.shipping',
-			header : _('Shipping'),
+			dataIndex : 'price.costs',
+			header : _('Costs'),
 			sortable : true,
 			width : 70,
 			hidden : true,
@@ -108,7 +108,8 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			sortable : true,
 			width : 70,
 			align : 'right',
-			hidden : true
+			hidden : !MShop.Config.get( 'client/extjs/panel/price/listuismall/taxrate', 
+			MShop.Config.get('client/extjs/panel/price/taxrate', false ) )
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.ctime',

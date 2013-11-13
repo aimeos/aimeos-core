@@ -17,8 +17,9 @@
 abstract class Controller_Jobs_Common_Decorator_Abstract
 	implements Controller_Jobs_Common_Decorator_Interface
 {
-	private $_context = null;
-	private $_controller = null;
+	private $_context;
+	private $_arcavias;
+	private $_controller;
 
 
 	/**
@@ -27,9 +28,11 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	 * @param MShop_Context_Interface $context Context object with required objects
 	 * @param Controller_Jobs_Interface $controller Controller object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, Controller_Jobs_Interface $controller )
+	public function __construct( MShop_Context_Item_Interface $context, Arcavias $arcavias,
+		Controller_Jobs_Interface $controller )
 	{
 		$this->_context = $context;
+		$this->_arcavias = $arcavias;
 		$this->_controller = $controller;
 	}
 
@@ -82,5 +85,27 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	public function run()
 	{
 		return $this->_controller->run();
+	}
+
+
+	/**
+	 * Returns the context object.
+	 *
+	 * @return MShop context object implementing MShop_Context_Item_Interface
+	 */
+	protected function _getContext()
+	{
+		return $this->_context;
+	}
+
+
+	/**
+	 * Returns the Arcavias object.
+	 *
+	 * @return Arcavias Arcavias object
+	 */
+	protected function _getArcavias()
+	{
+		return $this->_arcavias;
 	}
 }

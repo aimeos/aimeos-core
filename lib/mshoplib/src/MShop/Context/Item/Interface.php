@@ -59,18 +59,20 @@ interface MShop_Context_Item_Interface
 	public function getDatabaseManager();
 
 	/**
-	 * Sets the internationalization object.
+	 * Sets the translation/internationalization objects.
 	 *
-	 * @param MW_Translation_Interface $translate Internationalization object
+	 * @param array $translations Associative list of internationalization objects implementing
+	 * 	MW_Translation_Interface with locale as key
 	 */
-	public function setI18n( MW_Translation_Interface $translate );
+	public function setI18n( array $translations );
 
 	/**
-	 * Returns the internationalization object.
+	 * Returns the translation/internationalization object for the given locale (null for default one).
 	 *
+	 * @param string $locale Two letter language ISO code for specific language instead of default one
 	 * @return MW_Translation_Interface Internationalization object
 	 */
-	public function getI18n();
+	public function getI18n( $locale = null );
 
 	/**
 	 * Sets the localization object.
@@ -113,6 +115,34 @@ interface MShop_Context_Item_Interface
 	 * @return MW_Session_Interface Session object
 	 */
 	public function getSession();
+
+	/**
+	 * Sets the mail object.
+	 *
+	 * @param MW_Mail_Interface $mail Mail object
+	 */
+	public function setMail( MW_Mail_Interface $mail );
+
+	/**
+	 * Returns the mail object.
+	 *
+	 * @return MW_Mail_Interface Mail object
+	 */
+	public function getMail();
+
+	/**
+	 * Sets the view object.
+	 *
+	 * @param MW_View_Interface $view View object
+	 */
+	public function setView( MW_View_Interface $view );
+
+	/**
+	 * Returns the view object.
+	 *
+	 * @return MW_View_Interface View object
+	 */
+	public function getView();
 
 	/**
 	 * Sets the account name of the user/editor.

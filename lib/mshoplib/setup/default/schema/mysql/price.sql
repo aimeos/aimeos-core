@@ -114,7 +114,7 @@ CREATE TABLE "mshop_price" (
 	-- Price of the product
 	"value" DECIMAL(12,2) NOT NULL,
 	-- Additional shipping costs
-	"shipping" DECIMAL(12,2) NOT NULL,
+	"costs" DECIMAL(12,2) NOT NULL,
 	-- Granted rebate
 	"rebate" DECIMAL(12,2) NOT NULL,
 	-- tax rate in percent
@@ -154,7 +154,7 @@ CREATE INDEX "idx_mspri_sid_dom_quantity" ON "mshop_price" ("siteid", "domain", 
 
 CREATE INDEX "idx_mspri_sid_dom_value" ON "mshop_price" ("siteid", "domain", "value");
 
-CREATE INDEX "idx_mspri_sid_dom_shipping" ON "mshop_price" ("siteid", "domain", "shipping");
+CREATE INDEX "idx_mspri_sid_dom_costs" ON "mshop_price" ("siteid", "domain", "costs");
 
 CREATE INDEX "idx_mspri_sid_dom_rebate" ON "mshop_price" ("siteid", "domain", "rebate");
 

@@ -6,11 +6,12 @@
  */
 
 $enc = $this->encoder();
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
 ?>
 <div class="catalog-stage-image">
 <?php foreach( $this->get( 'imageItems', array() ) as $media ) : ?>
-	<img src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $media->getUrl() ); ?>" alt="<?php echo $enc->attr( $media->getName() ); ?>" />
+	<img src="<?php echo $enc->attr( $contentUrl . $media->getUrl() ); ?>" alt="<?php echo $enc->attr( $media->getName() ); ?>" />
 <?php endforeach; ?>
 <?php echo $this->get( 'imageBody' ); ?>
 </div>

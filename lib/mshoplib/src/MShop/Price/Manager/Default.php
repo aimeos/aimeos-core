@@ -77,9 +77,9 @@ class MShop_Price_Manager_Default
 			'type' => 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'price.shipping' => array(
-			'code' => 'price.shipping',
-			'internalcode' => 'mpri."shipping"',
+		'price.costs' => array(
+			'code' => 'price.costs',
+			'internalcode' => 'mpri."costs"',
 			'label' => 'Price shipping costs',
 			'type' => 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
@@ -468,7 +468,7 @@ class MShop_Price_Manager_Default
 			$stmt->bind( 5, $item->getLabel() );
 			$stmt->bind( 6, $item->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 7, $item->getValue() );
-			$stmt->bind( 8, $item->getShipping() );
+			$stmt->bind( 8, $item->getCosts() );
 			$stmt->bind( 9, $item->getRebate() );
 			$stmt->bind(10, $item->getTaxRate() );
 			$stmt->bind(11, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -507,7 +507,7 @@ class MShop_Price_Manager_Default
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * Possible search keys: 'price.id', 'price.currencyid', 'price.quantity',
-	 *  'price.value','price.shipping', 'price.rebate', 'price.taxrate', 'price.status'.
+	 *  'price.value','price.costs', 'price.rebate', 'price.taxrate', 'price.status'.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total

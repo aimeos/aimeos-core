@@ -263,6 +263,33 @@ class MShop_Customer_Item_Default
 
 
 	/**
+	 * Returns the last verification date of the customer.
+	 *
+	 * @return string|null Last verification date of the customer (YYYY-MM-DD format) or null if unknown
+	 */
+	public function getDateVerified()
+	{
+		return ( isset( $this->_values['vdate'] ) ? (string) $this->_values['vdate'] : null );
+	}
+
+
+	/**
+	 * Sets the latest verification date of the customer.
+	 *
+	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD format) or null if unknown
+	 */
+	public function setDateVerified( $value )
+	{
+		if( $value === $this->getDateVerified() ) { return; }
+
+		$this->_checkDateOnlyFormat( $value );
+
+		$this->_values['vdate'] = $value;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return array Associative list of item properties and their values
@@ -276,6 +303,7 @@ class MShop_Customer_Item_Default
 		$list['customer.birthday'] = $this->getBirthday();
 		$list['customer.status'] = $this->getStatus();
 		$list['customer.password'] = $this->getPassword();
+		$list['customer.dateverified'] = $this->getDateVerified();
 		$list['customer.salutation'] = $this->getPaymentAddress()->getSalutation();
 		$list['customer.company'] = $this->getPaymentAddress()->getCompany();
 		$list['customer.title'] = $this->getPaymentAddress()->getTitle();

@@ -52,11 +52,9 @@ MShop.elements.domain._store = new Ext.data.ArrayStore({
     data : [
   		['attribute', _('Attribute')],
     	['product', _('Product')],
-    	['locale', _('Locale')],
     	['media', _('Media')],
     	['catalog', _('Catalog')],
     	['service', _('Service')],
-    	['order', _('Order')],
     	['plugin', _('Plugin')],
     	['customer', _('Customer')],
     	['supplier', _('Supplier')],

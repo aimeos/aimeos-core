@@ -20,13 +20,13 @@ class MW_Setup_Manager_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_config = MW_TestHelper::getConfig();
+		$this->_config = TestHelper::getConfig();
 
 		if( $this->_config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
-		$this->_dbm = MW_TestHelper::getDBManager();
+		$this->_dbm = TestHelper::getDBManager();
 	}
 
 	/**

@@ -80,14 +80,14 @@ class MShop_Plugin_Provider_Order_Shipping
 			$sum->addItem( $product->getPrice(), $product->getQuantity() );
 		}
 
-		if( $sum->getValue() + $sum->getRebate() >= $config['threshold'][$currency] && $price->getShipping() > '0.00' )
+		if( $sum->getValue() + $sum->getRebate() >= $config['threshold'][$currency] && $price->getCosts() > '0.00' )
 		{
-			$price->setRebate( $price->getShipping() );
-			$price->setShipping( '0.00' );
+			$price->setRebate( $price->getCosts() );
+			$price->setCosts( '0.00' );
 		}
 		else if( $sum->getValue() + $sum->getRebate() < $config['threshold'][$currency] && $price->getRebate() > '0.00' )
 		{
-			$price->setShipping( $price->getRebate() );
+			$price->setCosts( $price->getRebate() );
 			$price->setRebate( '0.00' );
 		}
 

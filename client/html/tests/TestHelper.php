@@ -106,8 +106,8 @@ class TestHelper
 		$ctx->setCache( $cache );
 
 
-		$i18n = new MW_Translation_None( 'en' );
-		$ctx->setI18n( $i18n );
+		$i18n = new MW_Translation_None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
 		$session = new MW_Session_None();

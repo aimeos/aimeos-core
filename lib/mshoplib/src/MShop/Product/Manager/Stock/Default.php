@@ -306,7 +306,8 @@ class MShop_Product_Manager_Stock_Default
 		$warehouseManager = $this->getSubManager( 'warehouse' );
 		$search = $warehouseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.stock.warehouse.code', $warehouseCode ) );
-		$warehouseIds = array_keys( $warehouseManager->searchItems( $search ) );
+		$warehouseItems = $warehouseManager->searchItems( $search );
+		$warehouseIds = ( !empty( $warehouseItems ) ? array_keys( $warehouseItems ) : null );
 
 		$search = $this->createSearch();
 		$expr = array(

@@ -26,7 +26,7 @@ $enc = $this->encoder();
 			if( ( $priceItem = reset( $priceItems ) ) !== false )
 			{
 				$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
-				$value = $this->number( $priceItem->getValue() + $priceItem->getShipping() );
+				$value = $this->number( $priceItem->getValue() + $priceItem->getCosts() );
 				
 				/// Configurable product attribute name (%1$s) with price value (%2$s) and currency (%3$s)
 				echo $enc->html( sprintf( $this->translate( 'client/html', '%1$s ( +%2$s%3$s )' ), $attribute->getName(), $value, $currency ), $enc::TRUST );

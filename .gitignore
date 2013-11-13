@@ -2,10 +2,9 @@ resource.php
 client/extjs/deploy/*
 vendor/
 
-dev/images/*
-dev/apidoc/
+misc/apidoc/
 coverage/
-*-jperf.xml
+*.junit.xml
 *.log
 
 .buildpath

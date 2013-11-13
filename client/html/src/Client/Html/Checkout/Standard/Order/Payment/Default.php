@@ -104,27 +104,43 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		$orderItem = $view->orderItem;
 		$context = $this->_getContext();
 
+
+		$target = $view->config( 'client/html/checkout/confirm/url/target' );
+		$controller = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
+		$config = $view->config( 'client/html/checkout/confirm/url/config', array() );
+
+		$confirmUrl = $view->url( $target, $controller, $action, array(), array(), $config );
+
+		$target = $view->config( 'client/html/checkout/update/url/target' );
+		$controller = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
+		$action = $view->config( 'client/html/checkout/update/url/action', 'update' );
+		$config = $view->config( 'client/html/checkout/update/url/config', array() );
+
+		$notifyUrl = $view->url( $target, $controller, $action, array(), array(), $config );
+
+		$config = array( 'payment.url-success' => $confirmUrl, 'payment.url-update' => $notifyUrl );
+
+
 		try
 		{
 			$service = $basket->getService( 'payment' );
 
 			$manager = MShop_Service_Manager_Factory::createManager( $context );
 			$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
+			$provider->injectGlobalConfigBE( $config );
 
-			if( ( $view->paymentForm = $provider->process( $orderItem ) ) === null ) {
-				throw new Client_Html_Exception();
-			}
+			$view->paymentForm = $provider->process( $orderItem );
 		}
 		catch( Exception $e )
 		{
-			$target = $view->config( 'client/html/checkout/confirm/url/target' );
-			$controller = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
-			$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
-			$config = $view->config( 'client/html/checkout/confirm/url/config', array() );
+			$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( $confirmUrl, 'REDIRECT' );
+		}
 
-			$url = $view->url( $target, $controller, $action, array(), array(), $config );
-
-			$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( $url, 'REDIRECT' );
+		if( !isset( $view->paymentForm ) || $view->paymentForm === null )
+		{
+			$msg = sprintf( 'Invalid process response from service provider with code "%1$s"', $service->getCode() );
+			throw new Client_Html_Exception( $msg );
 		}
 
 		$this->_process( $this->_subPartPath, $this->_subPartNames );

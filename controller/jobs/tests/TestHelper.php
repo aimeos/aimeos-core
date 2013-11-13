@@ -14,7 +14,7 @@ class TestHelper
 
 	public static function bootstrap()
 	{
-		self::_getArcavias();
+		self::getArcavias();
 	}
 
 
@@ -28,7 +28,7 @@ class TestHelper
 	}
 
 
-	private static function _getArcavias()
+	public static function getArcavias()
 	{
 		if( !isset( self::$_arcavias ) )
 		{
@@ -43,14 +43,14 @@ class TestHelper
 
 	public static function getControllerPaths()
 	{
-		return self::_getArcavias()->getCustomPaths( 'controller/jobs' );
+		return self::getArcavias()->getCustomPaths( 'controller/jobs' );
 	}
 
 
 	private static function _createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$arcavias = self::_getArcavias();
+		$arcavias = self::getArcavias();
 
 
 		$paths = $arcavias->getConfigPaths( 'mysql' );
@@ -73,18 +73,41 @@ class TestHelper
 		$ctx->setSession( $session );
 
 
-		$i18n = new MW_Translation_None( 'en' );
-		$ctx->setI18n( $i18n );
+		$i18n = new MW_Translation_None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
 		$localeManager = MShop_Locale_Manager_Factory::createManager( $ctx );
-		$locale = $localeManager->bootstrap( $site, '', '', false );
+		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
+
+
+		$view = self::_createView( $conf );
+		$ctx->setView( $view );
 
 
 		$ctx->setEditor( 'core:controller/jobs' );
 
 		return $ctx;
+	}
+
+
+	protected static function _createView( MW_Config_Interface $config )
+	{
+		$view = new MW_View_Default();
+
+		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		$sepDec = $config->get( 'client/html/common/format/seperatorDecimal', '.' );
+		$sep1000 = $config->get( 'client/html/common/format/seperator1000', ' ' );
+		$helper = new MW_View_Helper_Number_Default( $view, $sepDec, $sep1000 );
+		$view->addHelper( 'number', $helper );
+
+		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$view->addHelper( 'encoder', $helper );
+
+		return $view;
 	}
 
 

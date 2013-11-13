@@ -7,6 +7,7 @@
  */
 
 $enc = $this->encoder();
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
 if( isset( $this->detailProductItem ) ) {
 	$mediaItems = $this->detailProductItem->getRefItems( 'media', 'default', 'default' );
@@ -27,7 +28,7 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 		<a id="next-image" class="disabled"></a>
 		<div class="carousel">
 <?php foreach( $mediaItems as $id => $mediaItem ) : ?>
-			<div id="image-<?php echo $enc->attr( $id ); ?>" class="item" style="background-image: url('<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ); ?>')"></div>
+			<div id="image-<?php echo $enc->attr( $id ); ?>" class="item" style="background-image: url('<?php echo $contentUrl . $mediaItem->getUrl(); ?>')"></div>
 <?php endforeach; ?>
 		</div>
 	</div>
@@ -41,7 +42,7 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 		$class = 'item selected';
 		foreach( $mediaItems as $id => $mediaItem )
 		{
-			echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaItem->getUrl() ) . '\')"></a>';
+			echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $enc->attr( $contentUrl . $mediaItem->getUrl() ) . '\')"></a>';
 			$class = 'item';
 		}
 	}

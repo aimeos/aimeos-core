@@ -184,14 +184,14 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 		$search = $priceManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'price.value', $value ),
-			$search->compare( '==', 'price.shipping', $ship ),
+			$search->compare( '==', 'price.costs', $ship ),
 			$search->compare( '==', 'price.typeid', $typeids ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$refIds = array();
 		foreach( $priceManager->searchItems( $search ) as $item )	{
-			$refIds[ 'price/'.$item->getDomain().'/'.$item->getType().'/'.$item->getValue().'/'.$item->getShipping() ] = $item->getId();
+			$refIds[ 'price/'.$item->getDomain().'/'.$item->getType().'/'.$item->getValue().'/'.$item->getCosts() ] = $item->getId();
 		}
 
 		return $refIds;

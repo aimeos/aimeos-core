@@ -8,46 +8,43 @@
 
 class Controller_Jobs_Admin_Job_FactoryTest extends MW_Unittest_Testcase
 {
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_Jobs_Admin_Job_FactoryTest' );
-		$result = PHPUnit_TextUI_TestRunner::run( $suite );
-	}
-
-
 	public function testCreateController()
 	{
-		$obj = Controller_Jobs_Admin_Job_Factory::createController( TestHelper::getContext() );
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
+		$obj = Controller_Jobs_Admin_Job_Factory::createController( $context, $arcavias );
 		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj);
 	}
 
 
 	public function testFactoryExceptionWrongName()
 	{
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Admin_Job_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
+		$object = Controller_Jobs_Admin_Job_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Admin_Job_Factory::createController(TestHelper::getContext(), 'WrongClass' );
+		$object = Controller_Jobs_Admin_Job_Factory::createController( $context, $arcavias, 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
+		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Admin_Job_Factory::createController(TestHelper::getContext(), 'Factory' );
+		$object = Controller_Jobs_Admin_Job_Factory::createController( $context, $arcavias, 'Factory' );
 	}
 
 }

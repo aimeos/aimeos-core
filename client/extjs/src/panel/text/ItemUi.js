@@ -82,7 +82,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							fieldLabel : _('Label'),
 							name : 'text.label'
 						}, {
-							xtype : 'htmleditor',
+							xtype : MShop.Config.get('client/extjs/common/editor', 'htmleditor'),
 							fieldLabel : 'Content',
 							name : 'text.content',
 							enableFont : false

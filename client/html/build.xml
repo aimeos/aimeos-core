@@ -27,11 +27,13 @@
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="phpcs -n --standard=${coredir}/coding/Metaways src tests/Client tests/MW tests/Perf"
+		<exec command="phpcs -n --standard=${codestddir}/Metaways src tests/Client tests/MW tests/Perf"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
+		<delete file="tests/core_client-html_test.junit.xml" quiet="true" failonerror="false" />
+		<delete file="tests/core_client-html_perf.junit.xml" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >
 			<fileset dir="tests">

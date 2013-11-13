@@ -6,6 +6,7 @@
  */
 
 $enc = $this->encoder();
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
 $basketTarget = $this->config( 'client/html/basket/standard/url/target' );
 $basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
@@ -19,7 +20,7 @@ if( isset( $this->summaryBasket ) )
 {
 	$price = $this->summaryBasket->getPrice();
 	$priceValue = $price->getValue();
-	$priceService = $price->getShipping();
+	$priceService = $price->getCosts();
 	$priceRebate = $price->getRebate();
 	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
 }
@@ -36,7 +37,7 @@ try
 	$deliveryItem = $this->summaryBasket->getService( 'delivery' );
 	$deliveryName = $deliveryItem->getName();
 	$deliveryPriceItem = $deliveryItem->getPrice();
-	$deliveryPriceService = $deliveryPriceItem->getShipping();
+	$deliveryPriceService = $deliveryPriceItem->getCosts();
 	$deliveryPriceValue = $deliveryPriceItem->getValue();
 }
 catch( Exception $e )
@@ -51,7 +52,7 @@ try
 	$paymentItem = $this->summaryBasket->getService( 'payment' );
 	$paymentName = $paymentItem->getName();
 	$paymentPriceItem = $paymentItem->getPrice();
-	$paymentPriceService = $paymentPriceItem->getShipping();
+	$paymentPriceService = $paymentPriceItem->getCosts();
 	$paymentPriceValue = $paymentPriceItem->getValue();
 }
 catch( Exception $e )
@@ -94,7 +95,7 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 				<tr class="<?php echo ( isset( $errors['product'][$position] ) ? 'error' : '' ); ?>">
 					<td class="details">
 <?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
-						<img src="<?php echo $enc->attr( $this->config( 'client/html/common/content/baseurl' ) . $mediaUrl ); ?>" />
+						<img src="<?php echo $enc->attr( $contentUrl . $mediaUrl ); ?>" />
 <?php		endif; ?>
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, array( 'l-product-id' => $product->getProductId(), 'a-name' => str_replace( ' ', '-', $product->getName() ) ) ) ); ?>"><?php echo $enc->html( $product->getName() ); ?></a>
 <?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>

@@ -107,6 +107,17 @@ class MShop_Order_Manager_Default
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'order.containsStatus' => array(
+			'code'=>'order.containsStatus()',
+			'internalcode'=>'( SELECT COUNT(mordst_cs."parentid")
+				FROM "mshop_order_status" AS mordst_cs
+				WHERE mord."id" = mordst_cs."parentid" AND :site
+				AND mordst_cs."type" = $1 AND mordst_cs."value" IN ( $2 ) )',
+			'label'=>'Number of order status items, parameter(<type>,<value>)',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
 	);
 
 
@@ -118,6 +129,9 @@ class MShop_Order_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
+
+		$sites = $context->getLocale()->getSiteSubTree();
+		$this->_replaceSiteMarker( $this->_searchConfig['order.containsStatus'], 'mordst_cs."siteid"', $sites, ':site' );
 
 		if( $context->getConfig()->get( 'resource/db-order/adapter', null ) !== null ) {
 			$this->_dbname = 'db-order';

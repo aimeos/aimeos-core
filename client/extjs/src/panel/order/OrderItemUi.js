@@ -52,8 +52,8 @@ MShop.panel.order.OrderUi = Ext.extend(Ext.FormPanel, {
 				name : 'order.base.price'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Shipping'),
-				name : 'order.base.shipping'
+				fieldLabel : _('Costs'),
+				name : 'order.base.costs'
 			}, {
 				xtype : 'displayfield',
 				fieldLabel : _('Comment'),

@@ -14,21 +14,6 @@ class Controller_Jobs_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_Jobs_Admin_Job_DefaultTest' );
-		$result = PHPUnit_TextUI_TestRunner::run( $suite );
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
@@ -37,6 +22,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
 
 		$this->_jobItemStub = $this->getMockBuilder( 'MAdmin_Job_Item_Default' )->getMock();
 
@@ -45,7 +31,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		$this->_object = new Controller_Jobs_Admin_Job_Default( $context );
+		$this->_object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
 	}
 
 
@@ -77,6 +63,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 	public function testRun()
 	{
 		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'classes/job/manager/name', $name );
@@ -110,7 +97,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 			->with( $this->equalTo( 0 ) );
 
 
-		$object = new Controller_Jobs_Admin_Job_Default( $context );
+		$object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
 		$object->run();
 	}
 
@@ -121,10 +108,12 @@ class Controller_Jobs_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 	public function testRunInvalidMethod( $method )
 	{
 		$context = TestHelper::getContext();
+		$arcavias = TestHelper::getArcavias();
+
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'classes/job/manager/name', $name );
 
-		$object = new Controller_Jobs_Admin_Job_Default( $context );
+		$object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
 		MAdmin_Job_Manager_Factory::injectManager( 'MAdmin_Job_Manager_' . $name, $this->_jobManagerStub );
 
 

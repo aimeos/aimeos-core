@@ -39,7 +39,7 @@ return array (
 			'label' => 'unitpaymentlabel',
 			'provider' => 'PrePay',
 			'config' => array(
-				'url' => 'paymenturl'
+				'payment.url-success' => 'paymenturl'
 			),
 			'status' => 1
 		),

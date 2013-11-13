@@ -87,8 +87,8 @@ MShop.panel.order.product.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 							name : 'order.base.product.price'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Shipping' ),
-							name : 'order.base.product.shipping'
+							fieldLabel : _( 'Costs' ),
+							name : 'order.base.product.costs'
 						}, {
 							xtype : 'displayfield',
 							fieldLabel : _( 'Rebate' ),

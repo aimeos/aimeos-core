@@ -27,7 +27,7 @@ class MShop_Plugin_Provider_Order_ProductStock
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
-		$p->addListener( $this, 'isComplete.after' );
+		$p->addListener( $this, 'check.after' );
 	}
 
 
