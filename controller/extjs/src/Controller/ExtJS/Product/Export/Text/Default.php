@@ -109,7 +109,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 		{
 			$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
-			$filename = $this->_exportProductData( $items, $lang, $tmpfolder );
+			$filename = $this->_exportProductData( $items, $lang, $tmpfolder . '.zip', '.csv' );
 		}
 		catch ( Exception $e )
 		{
@@ -154,7 +154,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 	 * @param string $tmpfolder Temporary folder name where to write export files
 	 * @return string Path of export file
 	 */
-	protected function _exportProductData( array $ids, array $lang, $tmpfolder )
+	protected function _exportProductData( array $ids, array $lang, $filename, $contentFormat = '' )
 	{
 		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
 		$globalLanguageManager = $manager->getSubManager( 'language' );
@@ -166,7 +166,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$containerItem = $this->_initContainer( $tmpfolder );
+		$containerItem = $this->_initContainer( $filename );
 
 		$start = 0;
 
@@ -177,12 +177,11 @@ class Controller_ExtJS_Product_Export_Text_Default
 			foreach ( $result as $item )
 			{
 				$langid = $item->getId();
-				$files[ $langid ] = $tmpfolder . DIRECTORY_SEPARATOR . $langid . '.csv';
-				$contentItem = new MW_Container_Content_CSV( $files[ $langid ], 'Product CSV Export' );
+
+				$contentItem = $containerItem->create( $langid . $contentFormat );
 				$contentItem->add( array( 'Language ID', 'Product type', 'Product code', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $langid, $ids, $contentItem );
-				$contentItem->close();
 				$containerItem->add( $contentItem );
 			}
 
@@ -192,7 +191,9 @@ class Controller_ExtJS_Product_Export_Text_Default
 		}
 		while( $count == $search->getSliceSize() );
 
-		return $tmpfolder . 'zip';
+		$containerItem->close();
+
+		return $filename;
 	}
 
 
@@ -282,11 +283,11 @@ class Controller_ExtJS_Product_Export_Text_Default
 	/**
 	 * Inits container for storing export files.
 	 *
-	 * @param string $resource Path or resource
+	 * @param string $resource Path to resource
 	 * @return MW_Container_Interface Container item
 	 */
 	protected function _initContainer( $resource )
 	{
-		return new MW_Container_Zip( $resource . '.zip', 'CSV' );
+		return new MW_Container_Zip( $resource, 'CSV' );
 	}
 }

@@ -72,8 +72,6 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 
 		$result = $this->_object->exportFile( $params );
 
-		echo var_dump( $result );
-
 		$this->assertTrue( array_key_exists('file', $result) );
 
 		$file = substr($result['file'], 9, -14);

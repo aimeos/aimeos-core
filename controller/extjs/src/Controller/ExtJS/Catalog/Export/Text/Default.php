@@ -180,11 +180,9 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 				$files[$langid] = $tmpfolder . DIRECTORY_SEPARATOR . $langid . '.csv';
 
 				$contentItem = $containerItem->create( $langid . '.csv'  );
-// 				$contentItem = new MW_Container_Content_CSV( $langid . '.csv', 'Catalog CSV Export' );
 				$contentItem->add( array( 'Language ID', 'Catalog label', 'Catalog ID', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $langid, $ids, $contentItem );
-// 				$contentItem->close();
 				$containerItem->add( $contentItem );
 			}
 
