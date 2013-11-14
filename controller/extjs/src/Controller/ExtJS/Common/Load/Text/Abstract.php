@@ -500,4 +500,66 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			}
 		}
 	}
+
+
+	/**
+	 * Imports a sheet of texts using the given text types.
+	 *
+	 * @param PHPExcel_Worksheet $sheet Sheet containing texts and associated data
+	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
+	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
+	 * @return array Two dimensional associated list of codes and text IDs as key
+	 */
+	protected function _importTextsFromContent( MW_Container_Content_Interface $contentItem, array $textTypeMap, $domain )
+	{
+		$codeIdMap = array();
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->_getContext() );
+
+		$contentItem->rewind();
+		$contentItem->next(); // skip first row
+
+		while( $contentItem->valid() !== false )
+		{
+			$row = $contentItem->current();
+			$contentItem->next();
+			echo var_dump( $row );
+			try
+			{
+				$value = isset( $row[6] ) ? $row[6] : '';
+				$textId = isset( $row[5] ) ? $row[5] : '';
+				$textType =  isset( $row[4] ) ? $row[4] : null;
+
+				if( !isset( $textTypeMap[ $textType ] ) ) {
+					throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
+				}
+
+				if( $textId == '' && $value == '' ) {
+					continue;
+				}
+
+				$langId = $row[0];
+
+				$item = $textManager->createItem();
+				$item->setLanguageId( ( $langId != '' ? $langId : null ) );
+				$item->setTypeId( $textTypeMap[ $textType ] );
+				$item->setDomain( $domain );
+				$item->setContent( $value );
+				$item->setStatus( 1 );
+
+				if( $textId != '' ) {
+					$item->setId( $textId );
+				}
+
+				$textManager->saveItem( $item );
+				$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
+			}
+			catch( Exception $e )
+			{
+// 				echo $e;
+				$this->_getContext()->getLogger()->log( sprintf( '%1$s text insert: %2$s', $domain, $e->getMessage() ), MW_Logger_Abstract::ERR, 'import' );
+			}
+		}
+
+		return $codeIdMap;
+	}
 }
