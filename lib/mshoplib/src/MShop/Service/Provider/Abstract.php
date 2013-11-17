@@ -123,7 +123,13 @@ implements MShop_Service_Provider_Interface
 	 * Injects additional global configuration for the backend.
 	 *
 	 * It's used for adding additional backend configuration from the application
-	 * like the URLs (success, failure, etc.) to redirect to.
+	 * like the URLs to redirect to.
+	 *
+	 * Supported redirect URLs are:
+	 * - payment.url-success
+	 * - payment.url-failure
+	 * - payment.url-cancel
+	 * - payment.url-update
 	 *
 	 * @param array $config Associative list of config keys and their value
 	 */
@@ -349,9 +355,10 @@ implements MShop_Service_Provider_Interface
 	 * be returned.
 	 *
 	 * @param array $keys List of key names that should be tested for in the order to test
+	 * @param mixed $default Returned value if the key wasn't was found
 	 * @return mixed Value of the first key that matches or null if none was found
 	 */
-	protected function _getConfigValue( array $keys )
+	protected function _getConfigValue( array $keys, $default = null )
 	{
 		$srvconfig = $this->getServiceItem()->getConfig();
 
@@ -366,7 +373,7 @@ implements MShop_Service_Provider_Interface
 			}
 		}
 
-		return null;
+		return $default;
 	}
 
 

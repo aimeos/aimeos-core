@@ -44,7 +44,7 @@ class MShop_Service_Provider_Decorator_ExampleTest extends MW_Unittest_Testcase
 			throw new Exception( 'No order base item found' );
 		}
 
-		$item->setConfig( array( 'project' => '8502_TEST' ) );
+		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 
 		$serviceProvider = $servManager->getProvider($item);
 		$this->_object = new MShop_Service_Provider_Decorator_Example( $context, $item, $serviceProvider);
@@ -54,34 +54,34 @@ class MShop_Service_Provider_Decorator_ExampleTest extends MW_Unittest_Testcase
 	public function testGetConfigBE()
 	{
 		$this->assertArrayHasKey( 'country', $this->_object->getConfigBE() );
-		$this->assertArrayHasKey( 'url', $this->_object->getConfigBE() );
+		$this->assertArrayHasKey( 'default.url', $this->_object->getConfigBE() );
 	}
 
 
 	public function testCheckConfigBE()
 	{
-		$attributes = array( 'country' => 'DE', 'project' => 'Unit', 'url' => 'http://unittest.com' );
+		$attributes = array( 'country' => 'DE', 'default.project' => 'Unit', 'default.url' => 'http://unittest.com' );
 		$result = $this->_object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertInternalType( 'null', $result['country'] );
-		$this->assertInternalType( 'null', $result['project'] );
-		$this->assertInternalType( 'null', $result['username'] );
-		$this->assertInternalType( 'null', $result['password'] );
-		$this->assertInternalType( 'null', $result['url'] );
-		$this->assertInternalType( 'null', $result['ssl'] );
+		$this->assertInternalType( 'null', $result['default.project'] );
+		$this->assertInternalType( 'null', $result['default.username'] );
+		$this->assertInternalType( 'null', $result['default.password'] );
+		$this->assertInternalType( 'null', $result['default.url'] );
+		$this->assertInternalType( 'null', $result['default.ssl'] );
 
 
-		$attributes = array( 'country' => '', 'project' => 'Unit', 'url' => 'http://unittest.com' );
+		$attributes = array( 'country' => '', 'default.project' => 'Unit', 'default.url' => 'http://unittest.com' );
 		$result = $this->_object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertInternalType( 'string', $result['country'] );
-		$this->assertInternalType( 'null', $result['project'] );
-		$this->assertInternalType( 'null', $result['username'] );
-		$this->assertInternalType( 'null', $result['password'] );
-		$this->assertInternalType( 'null', $result['url'] );
-		$this->assertInternalType( 'null', $result['ssl'] );
+		$this->assertInternalType( 'null', $result['default.project'] );
+		$this->assertInternalType( 'null', $result['default.username'] );
+		$this->assertInternalType( 'null', $result['default.password'] );
+		$this->assertInternalType( 'null', $result['default.url'] );
+		$this->assertInternalType( 'null', $result['default.ssl'] );
 	}
 
 

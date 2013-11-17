@@ -19,75 +19,73 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	extends MShop_Service_Provider_Payment_Abstract
 	implements MShop_Service_Provider_Payment_Interface
 {
-	private $_config;
-
 	private $_beConfig = array(
-		'ApiUsername' => array(
-			'code' => 'ApiUsername',
-			'internalcode'=> 'username',
+		'paypalexpress.ApiUsername' => array(
+			'code' => 'paypalexpress.ApiUsername',
+			'internalcode'=> 'paypalexpress.ApiUsername',
 			'label'=> 'Username',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
 			'required'=> true,
 		),
-		'ApiPassword' => array(
-			'code' => 'ApiPassword',
-			'internalcode'=> 'password',
+		'paypalexpress.ApiPassword' => array(
+			'code' => 'paypalexpress.ApiPassword',
+			'internalcode'=> 'paypalexpress.ApiPassword',
 			'label'=> 'Password',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
 			'required'=> true,
 		),
-		'ApiSignature' => array(
-			'code' => 'ApiSignature',
-			'internalcode'=> 'signature',
+		'paypalexpress.ApiSignature' => array(
+			'code' => 'paypalexpress.ApiSignature',
+			'internalcode'=> 'paypalexpress.ApiSignature',
 			'label'=> 'Signature',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
 			'required'=> true,
 		),
-		'CancelUrl' => array(
-			'code' => 'CancelUrl',
-			'internalcode'=> 'cancelurl',
+		'paypalexpress.CancelUrl' => array(
+			'code' => 'paypalexpress.CancelUrl',
+			'internalcode'=> 'paypalexpress.CancelUrl',
 			'label'=> 'CancelUrl',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
-			'required'=> true,
+			'required'=> false,
 		),
-		'ReturnUrl' => array(
-			'code' => 'ReturnUrl',
-			'internalcode'=> 'returnurl',
+		'paypalexpress.ReturnUrl' => array(
+			'code' => 'paypalexpress.ReturnUrl',
+			'internalcode'=> 'paypalexpress.ReturnUrl',
 			'label'=> 'ReturnUrl',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
-			'required'=> true,
+			'required'=> false,
 		),
-		'PaymentAction' => array(
-			'code' => 'PaymentAction',
-			'internalcode'=> 'paymentaction',
+		'paypalexpress.PaymentAction' => array(
+			'code' => 'paypalexpress.PaymentAction',
+			'internalcode'=> 'paypalexpress.PaymentAction',
 			'label'=> 'PaymentAction',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> 'sale',
-			'required'=> true,
+			'required'=> false,
 		),
-		'PaypalUrl' => array(
-			'code' => 'PaypalUrl',
-			'internalcode'=> 'paypalurl',
+		'paypalexpress.PaypalUrl' => array(
+			'code' => 'paypalexpress.PaypalUrl',
+			'internalcode'=> 'paypalexpress.PaypalUrl',
 			'label'=> 'PaypalUrl',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
 			'required'=> true,
 		),
-		'ApiEndpoint' => array(
-			'code' => 'ApiEndpoint',
-			'internalcode'=> 'apiendpoint',
+		'paypalexpress.ApiEndpoint' => array(
+			'code' => 'paypalexpress.ApiEndpoint',
+			'internalcode'=> 'paypalexpress.ApiEndpoint',
 			'label'=> 'APIEndpoint',
 			'type'=> 'string',
 			'internaltype'=> 'string',
@@ -102,21 +100,18 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		parent::__construct( $context, $serviceItem );
 
 		$configParameters = array(
-			'ApiUsername',
-			'ApiPassword',
-			'ApiSignature',
-			'ApiEndpoint',
-			'PaypalUrl',
-			'ReturnUrl',
-			'CancelUrl',
-			'PaymentAction'
+			'paypalexpress.ApiUsername',
+			'paypalexpress.ApiPassword',
+			'paypalexpress.ApiSignature',
+			'paypalexpress.ApiEndpoint',
+			'paypalexpress.PaypalUrl',
 		);
 
-		$this->_config = $serviceItem->getConfig();
+		$config = $serviceItem->getConfig();
 
 		foreach( $configParameters as $param )
 		{
-			if( !isset( $this->_config[ $param ] ) ) {
+			if( !isset( $config[ $param ] ) ) {
 				throw new MShop_Service_Exception( sprintf( 'Parameter "%1$s" for configuration not available', $param ) );
 			}
 		}
@@ -175,17 +170,18 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values = $this->_getOrderDetails( $orderBaseItem );
 		$values[ 'METHOD' ] = 'SetExpressCheckout';
 		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
-		$values[ 'RETURNURL' ] = $this->_config['ReturnUrl'] . '?orderid=' . $orderid;
+		$values[ 'RETURNURL' ] = $this->_getConfigValue( array( 'payment.url-success' ), '/' ) . '?orderid=' . $orderid;
 
-		$urlQuery = '&' . http_build_query( $values, '', '&' );
+echo 'apiendpoint: ' . $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ) . PHP_EOL;
+print_r( $values );
 
-		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$params = array ( 'TOKEN' => $rvals['TOKEN'] );
 		$this->_saveAttributes( $params, $orderBaseItem->getService('payment') );
 
-		return new MShop_Common_Item_Helper_Form_Default( $this->_config['PaypalUrl'] . $rvals['TOKEN'], 'POST', array() );
+		return new MShop_Common_Item_Helper_Form_Default( $this->_getConfigValue( array( 'paypalexpress.PaypalUrl' ) ) . $rvals['TOKEN'], 'POST', array() );
 	}
 
 
@@ -213,7 +209,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['TRANSACTIONID'] = $tid;
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -250,7 +246,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['AMT'] = $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts();
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -296,7 +292,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['INVOICEID'] = $order->getId();
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'REFUNDTRANSACTIONID' => $rvals['REFUNDTRANSACTIONID'] );
@@ -331,7 +327,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['AUTHORIZATIONID'] = $tid;
 
 		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
@@ -364,12 +360,12 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['METHOD'] = 'DoExpressCheckoutPayment';
 		$values['TOKEN'] = $additional['token'];
 		$values['PAYERID'] = $additional['PayerID'];
-		$values['PAYMENTACTION'] = $this->_config['PaymentAction'];
+		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'sale' );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
 
 		$urlQuery = urldecode( '&' . http_build_query( $values, '', '&' ) );
-		$response = $this->_getCommunication()->transmit( $this->_config['ApiEndpoint'], 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'PAYERID' => $additional['PayerID'] );
@@ -578,8 +574,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_TAXAMT'] = $price->getTaxRate();
 		$values['PAYMENTREQUEST_0_CURRENCYCODE'] = $orderBase->getPrice()->getCurrencyId();
-		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->_config['PaymentAction'];
-		$values['CANCELURL'] = $this->_config['CancelUrl'];
+		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'sale' );
+		$values['CANCELURL'] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ), '/' );
 
 		try
 		{
@@ -606,9 +602,9 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	{
 		return array(
 			'VERSION' => '87.0',
-			'SIGNATURE' => $this->_config['ApiSignature'],
-			'USER' => $this->_config['ApiUsername'],
-			'PWD' => $this->_config['ApiPassword'],
+			'SIGNATURE' => $this->_getConfigValue( array( 'paypalexpress.ApiSignature' ) ),
+			'USER' => $this->_getConfigValue( array( 'paypalexpress.ApiUsername' ) ),
+			'PWD' => $this->_getConfigValue( array( 'paypalexpress.ApiPassword' ) ),
 		);
 	}
 
