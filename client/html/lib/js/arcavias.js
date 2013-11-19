@@ -108,6 +108,13 @@ jQuery(document).ready( function($) {
 	$(".catalog-list-items .media-item").css("backgroundSize", "contain");
 	$(".catalog-detail-image .thumbs a").css("backgroundSize", "contain");
 
+	
+	/* Catalog filter */
+	$(".catalog-filter-attribute input.attr-item").on("click", function() {
+		$(".catalog-filter form").submit();
+		$(".catalog-filter").fadeTo( 1000, 0.5 );
+		$(".catalog-list").fadeTo( 1000, 0.5 );
+	});
 
 	/* Autocompleter for quick search */
 	var arcaviasInputComplete = $( ".catalog-filter-search .value" );

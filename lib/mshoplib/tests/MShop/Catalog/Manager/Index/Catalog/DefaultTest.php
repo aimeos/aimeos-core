@@ -63,6 +63,29 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 	}
 
 
+	public function testAggregate()
+	{
+		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'catalog' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
+
+		$items = $manager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'No catalog item found' );
+		}
+
+
+		$search = $this->_object->createSearch( true );
+		$result = $this->_object->aggregate( $search, 'catalog.index.catalog.id' );
+
+		$this->assertEquals( 4, count( $result ) );
+		$this->assertArrayHasKey( $item->getId(), $result );
+		$this->assertEquals( $result[ $item->getId() ], 7 );
+	}
+
+
 	public function testGetItem()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );

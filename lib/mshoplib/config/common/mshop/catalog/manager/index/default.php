@@ -6,6 +6,13 @@
  */
 
 return array(
+	'aggregate' => '
+		SELECT :key AS "key", COUNT(*) AS "count"
+		FROM "mshop_product" mpro
+		:joins
+		WHERE :cond
+		GROUP BY :key
+	',
 	'item' => array(
 		'search' => '
 			SELECT DISTINCT mpro."id"
