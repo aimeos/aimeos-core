@@ -9,6 +9,7 @@
 class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_context;
 
 
 	/**
@@ -34,7 +35,8 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Catalog_Export_Text_Default( TestHelper::getContext() );
+		$this->_context = TestHelper::getContext();
+		$this->_object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->_context );
 	}
 
 
@@ -52,9 +54,7 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 
 	public function testExportFile()
 	{
-		$context = TestHelper::getContext();
-
-		$manager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
 		$node = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
 		$search = $manager->createSearch();
@@ -68,7 +68,7 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$params = new stdClass();
 		$params->lang = array( 'de', 'fr' );
 		$params->items = array( $node->getId() );
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		$result = $this->_object->exportFile( $params );
 

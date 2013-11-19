@@ -522,7 +522,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		{
 			$row = $contentItem->current();
 			$contentItem->next();
-			echo var_dump( $row );
+
 			try
 			{
 				$value = isset( $row[6] ) ? $row[6] : '';
@@ -533,7 +533,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 					throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
 				}
 
-				if( $textId == '' && $value == '' ) {
+				if( ($textId == '' && $value == '') || ($textId == '-' && $value == '-') ) {
 					continue;
 				}
 
@@ -544,10 +544,13 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 				$item->setTypeId( $textTypeMap[ $textType ] );
 				$item->setDomain( $domain );
 				$item->setContent( $value );
+
 				$item->setStatus( 1 );
 
-				if( $textId != '' ) {
+				if( $textId != '' && $textId != '-' ) {
 					$item->setId( $textId );
+				} else {
+					$item->setId( null );
 				}
 
 				$textManager->saveItem( $item );
@@ -555,7 +558,6 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			}
 			catch( Exception $e )
 			{
-// 				echo $e;
 				$this->_getContext()->getLogger()->log( sprintf( '%1$s text insert: %2$s', $domain, $e->getMessage() ), MW_Logger_Abstract::ERR, 'import' );
 			}
 		}

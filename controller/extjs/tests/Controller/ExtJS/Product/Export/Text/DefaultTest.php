@@ -9,7 +9,7 @@
 class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
+	private $_context;
 
 	/**
 	 * Runs the test methods of this class.
@@ -34,7 +34,8 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Product_Export_Text_Default( TestHelper::getContext() );
+		$this->_context = TestHelper::getContext();
+		$this->_object = new Controller_ExtJS_Product_Export_Text_Default( $this->_context );
 	}
 
 
@@ -52,9 +53,7 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 
 	public function testExportFile()
 	{
-		$context = TestHelper::getContext();
-
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$criteria = $productManager->createSearch();
 
 		$expr = array();
@@ -68,7 +67,7 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 		}
 
 		$params = new stdClass();
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 		$params->items = $productItem->getId();
 		$params->lang = 'de';
 

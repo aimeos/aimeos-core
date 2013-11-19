@@ -182,6 +182,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 				$contentItem->add( array( 'Language ID', 'Product type', 'Product code', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $langid, $ids, $contentItem );
+
 				$containerItem->add( $contentItem );
 			}
 

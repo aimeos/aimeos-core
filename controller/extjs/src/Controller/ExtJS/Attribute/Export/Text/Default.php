@@ -94,7 +94,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		$dir = $config->get( 'controller/extjs/product/export/text/default/exportdir', 'uploads' );
 		$perms = $config->get( 'controller/extjs/product/export/text/default/dirperms', 0775 );
 
-		$foldername = 'product-text-export_' . date('Y-m-d') . '_' . md5( time() . getmypid() );
+		$foldername = 'attribute-text-export_' . date('Y-m-d') . '_' . md5( time() . getmypid() );
 		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
 
 		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false ) {
@@ -111,7 +111,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		{
 			$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
-			$filename = $this->_exportProductData( $items, $lang, $tmpfolder );
+			$filename = $this->_exportAttributeData( $items, $lang, $tmpfolder . '.zip', '.csv' );
 		}
 		catch ( Exception $e )
 		{
@@ -122,7 +122,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		$this->_removeTempFiles( $tmpfolder );
 
 		return array(
-			'file' => '<a href="'.$filename.'">Download</a>',
+			'file' => '<a href="' . $filename . '">Download</a>',
 		);
 	}
 
@@ -156,7 +156,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	 * @param string $tmpfolder Temporary folder name where to write export files
 	 * @return string Path of export file
 	 */
-	protected function _exportAttributeData( array $ids, array $lang, $tmpfolder )
+	protected function _exportAttributeData( array $ids, array $lang, $filename, $contentFormat = '' )
 	{
 		$data = array();
 		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
@@ -169,7 +169,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$containerItem = $this->_initContainer( $tmpfolder );
+		$containerItem = $this->_initContainer( $filename );
 
 		$start = 0;
 
@@ -180,12 +180,12 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			foreach ( $result as $item )
 			{
 				$langid = $item->getId();
-				$files[ $langid ] = $tmpfolder . DIRECTORY_SEPARATOR . $langid . '.csv';
-				$contentItem = new MW_Container_Content_CSV($files[ $langid ], 'Attribute Export' );
+
+				$contentItem = $containerItem->create( $langid . $contentFormat );
 				$contentItem->add( array( 'Language ID', 'Attribute type', 'Attribute code', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $langid, $ids, $contentItem );
-				$contentItem->close();
+
 				$containerItem->add( $contentItem );
 			}
 
@@ -195,7 +195,9 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		}
 		while( $count == $search->getSliceSize() );
 
-		return $tmpfolder . 'zip';
+		$containerItem->close();
+
+		return $filename;
 	}
 
 
@@ -244,7 +246,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	 */
 	protected function _initContainer( $resource )
 	{
-		return new MW_Container_Zip( $resource . '.zip', 'CSV' );
+		return new MW_Container_Zip( $resource, 'CSV' );
 	}
 
 
@@ -255,7 +257,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	 * @param MShop_Product_Item_Interface $item product item object
 	 * @param MW_Container_Content_Interface $contentItem Content item
 	 */
-	protected function _addItem( $langid, MShop_Product_Item_Interface $item, MW_Container_Content_Interface $contentItem )
+	protected function _addItem( $langid, MShop_Attribute_Item_Interface $item, MW_Container_Content_Interface $contentItem )
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {

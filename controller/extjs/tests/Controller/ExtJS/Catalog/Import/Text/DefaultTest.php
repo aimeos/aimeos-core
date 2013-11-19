@@ -11,6 +11,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 	private $_object;
 	private $_testdir;
 	private $_testfile;
+	private $_context;
 
 
 	/**
@@ -36,15 +37,15 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$this->_testdir = $context->getConfig()->get( 'controller/extjs/catalog/import/text/default/uploaddir', './tmp' );
+		$this->_context = TestHelper::getContext();
+		$this->_testdir = $this->_context->getConfig()->get( 'controller/extjs/catalog/import/text/default/uploaddir', './tmp' );
 		$this->_testfile = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
 		if( !is_dir( $this->_testdir ) && mkdir( $this->_testdir, 0775, true ) === false ) {
 			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->_testdir ) );
 		}
 
-		$this->_object = new Controller_ExtJS_Catalog_Import_Text_Default( $context );
+		$this->_object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->_context );
 	}
 
 
@@ -69,21 +70,20 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 	public function testImportFile()
 	{
-		$context = TestHelper::getContext();
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
 
 		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
 		$params = new stdClass();
 		$params->lang = array( 'en' );
 		$params->items = $node->getId();
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		if( ob_start() === false ) {
 			throw new Exception( 'Unable to start output buffering' );
 		}
 
-		$exporter = new Controller_ExtJS_Catalog_Export_Text_Default( $context );
+		$exporter = new Controller_ExtJS_Catalog_Export_Text_Default( $this->_context );
 		$result = $exporter->exportFile( $params );
 
 		$file = substr( $result['file'], 9, -14);
@@ -126,7 +126,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		fclose( $fh );
 
 		$params = new stdClass();
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 		$params->items = $enCSV;
 
 		$this->_object->importFile( $params );
@@ -135,7 +135,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 			throw new Exception( sprintf( 'Deleting dir failed' ) );
 		}
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $context );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
@@ -180,8 +180,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 	public function testUploadFile()
 	{
-		$context = TestHelper::getContext();
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $context );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 		$directory = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testdir';
@@ -197,7 +196,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 		$params = new stdClass();
 		$params->items = $this->_testfile;
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		$result = $this->_object->uploadFile( $params );
 
