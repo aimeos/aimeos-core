@@ -56,16 +56,16 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
 		$attrTypeManager = $attrManager->getSubManager( 'type' );
 
+		$search = $attrTypeManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'width' ) );
+		$result = $attrTypeManager->searchItems( $search );
+
+		if( ( $attrTypeItem = reset( $result ) ) === false ) {
+			throw new Exception( 'No attribute type "size" found' );
+		}
+
 
 		$this->_txBegin();
-
-		$attrTypeItem = $attrTypeManager->createItem();
-		$attrTypeItem->setDomain( 'product' );
-		$attrTypeItem->setCode( 'unitperf-width' );
-		$attrTypeItem->setLabel( 'Width' );
-		$attrTypeItem->setStatus( 1 );
-
-		$attrTypeManager->saveItem( $attrTypeItem );
 
 		$attrItem = $attrManager->createItem();
 		$attrItem->setTypeId( $attrTypeItem->getId() );
@@ -75,7 +75,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		$pos = 0;
 		$attrListWidth = array();
 
-		foreach( array( 'small', 'normal', 'wide' ) as $size )
+		foreach( array( 'tight', 'normal', 'wide' ) as $size )
 		{
 			$attrItem->setId( null );
 			$attrItem->setCode( $size );
@@ -88,13 +88,14 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		}
 
 
-		$attrTypeItem = $attrTypeManager->createItem();
-		$attrTypeItem->setDomain( 'product' );
-		$attrTypeItem->setCode( 'unitperf-length' );
-		$attrTypeItem->setLabel( 'Length' );
-		$attrTypeItem->setStatus( 1 );
 
-		$attrTypeManager->saveItem( $attrTypeItem );
+		$search = $attrTypeManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'length' ) );
+		$result = $attrTypeManager->searchItems( $search );
+
+		if( ( $attrTypeItem = reset( $result ) ) === false ) {
+			throw new Exception( 'No attribute type "size" found' );
+		}
 
 		$attrItem = $attrManager->createItem();
 		$attrItem->setTypeId( $attrTypeItem->getId() );
