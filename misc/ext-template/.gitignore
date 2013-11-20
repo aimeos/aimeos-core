@@ -1,0 +1,9 @@
+client/extjs/deploy/*
+
+coverage/
+*.junit.xml
+*.log
+
+.buildpath
+.project
+.settings/

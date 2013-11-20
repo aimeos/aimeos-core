@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="bootstrap.php">
+	<testsuites>
+		<testsuite name="Controller suite">
+			<directory>Controller/</directory>
+		</testsuite>
+	</testsuites>
+	<logging>
+		<log type="junit" target="core_controller-frontend_test.junit.xml" />
+	</logging>
+</phpunit>

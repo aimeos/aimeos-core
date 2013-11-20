@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Arcavias jobs controller" default="all">
+<project name="<extname> extension - frontend controller" default="all">
 	
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
-		<exec command="phpunit --configuration=phpunit.xml"
+		<exec command="phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	
@@ -13,7 +13,7 @@
 		<echo msg="Generating code coverage report" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
-		<exec command="phpunit --configuration=phpunit-coverage.xml"
+		<exec command="phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit-coverage.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	
@@ -24,7 +24,7 @@
 	</target>
 
 	<target name="clean" description="Executes all deployment tasks">
-		<delete file="tests/core_controller-jobs_test.junit.xml" quiet="true" failonerror="false" />
+		<delete file="tests/<extname>_controller-frontend_test.junit.xml" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >
 			<fileset dir="tests">
@@ -34,18 +34,18 @@
 	</target>
 
 	<target name="i18n" description="Creates translation message files">
-		<exec command="find ./src/ -type f | xgettext -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=sprintf:1 -o i18n/core-controller-jobs.pot -f -"
+		<exec command="find ./src/ -type f | xgettext -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=sprintf:1 -o i18n/<extname>-controller-frontend.pot -f -"
 			checkreturn="true" logoutput="true" />
-		<foreach param="po-fname" absparam="po-filename" target="i18n-update">
-			<fileset dir="./i18n">
-				<include name="*.po" />
-			</fileset>
-		</foreach>
+	    <foreach param="po-fname" absparam="po-filename" target="i18n-update">
+	        <fileset dir="./i18n">
+	            <include name="*.po" />
+	        </fileset>
+	    </foreach>
 	</target>
 	
 	<target name="i18n-update" description="Updates translation message files">
 		<fail unless="po-filename" message="Missing file name" />
-		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} i18n/core-controller-jobs.pot" checkreturn="true" logoutput="true" /> 
+		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} i18n/<extname>-controller-frontend.pot" checkreturn="true" logoutput="true" /> 
   </target>
 
 	<target name="build" description="Builds package for deployment">
