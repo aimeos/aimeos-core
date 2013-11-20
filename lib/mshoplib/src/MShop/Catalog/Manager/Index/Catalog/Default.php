@@ -22,9 +22,20 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	private $_searchConfig = array(
 		'catalog.index.catalog.id' => array(
 			'code'=>'catalog.index.catalog.id',
-			'internalcode'=>':site AND mcatinca."catid"',
+			'internalcode'=>'mcatinca."catid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_catalog" AS mcatinca ON mcatinca."prodid" = mpro."id"' ),
 			'label'=>'Product index category ID',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
+		'catalog.index.catalogaggregate' => array(
+			'code'=>'catalog.index.catalogaggregate()',
+			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinca2."catid")
+				FROM "mshop_catalog_index_catalog" AS mcatinca2
+				WHERE mpro."id" = mcatinca2."prodid" AND :site
+				AND mcatinca2."catid" IN ( $1 ) )',
+			'label'=>'Number of product categories, parameter(<category IDs>)',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
@@ -82,10 +93,9 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$search->setConditions( $search->combine( '||', $expr ) );
 
 		$string = $search->getConditionString( $types, array( 'siteid' => 'mcatinca."siteid"' ) );
-		$this->_searchConfig['catalog.index.catalog.id']['internalcode'] =
-			str_replace( ':site', $string, $this->_searchConfig['catalog.index.catalog.id']['internalcode'] );
 
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.catalog.position'], 'mcatinca."siteid"', $site );
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.catalogaggregate'], 'mcatinca2."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.catalogcount'], 'mcatinca2."siteid"', $site );
 
 
@@ -94,6 +104,19 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		foreach( $context->getConfig()->get( $confpath, array() ) as $domain ) {
 			$this->_submanagers[ $domain ] = $this->getSubManager( $domain );
 		}
+	}
+
+
+	/**
+	 * Counts the number products that are available for the values of the given key.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param string $key Search key (usually the ID) to aggregate products for
+	 * @return array List of ID values as key and the number of counted products as value
+	 */
+	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	{
+		return $this->_aggregate( $search, $key, 'mshop/catalog/manager/index/default/aggregate' );
 	}
 
 
@@ -158,13 +181,13 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array List of items implementing MW_Common_Criteria_Attribute_Interface
 	 */
-	public function getSearchAttributes($withsub = true)
+	public function getSearchAttributes( $withsub = true )
 	{
 		foreach( $this->_searchConfig as $key => $fields ) {
 			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
-		$list = array_merge( $list, $this->_productManager->getSearchAttributes( false ) );
+		$list = array_merge( $list, $this->_productManager->getSearchAttributes( $withsub ) );
 
 		if( $withsub === true )
 		{

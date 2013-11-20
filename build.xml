@@ -184,6 +184,15 @@
 		<exec command="git push --tags" checkreturn="true" logoutput="true" />
 	</target>
 
+	<target name="releaseext" description="Creates new releases of the extensions">
+		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
+		<phing target="release">
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<include name="**/phing.xml" />
+			</fileset>
+		</phing>
+	</target>
+
 
 	<target name="all" depends="setup,test,check" description="Executes all essential targets for testing" />
 

@@ -21,7 +21,7 @@ class MShop_Catalog_Manager_Index_Attribute_MySQL
 	private $_searchConfig = array(
 		'catalog.index.attribute.id' => array(
 			'code'=>'catalog.index.attribute.id',
-			'internalcode'=>':site AND mcatinat."attrid"',
+			'internalcode'=>'mcatinat."attrid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_attribute" AS mcatinat USE INDEX ("idx_mscatinat_s_at_lt", "idx_mscatinat_p_s_at_lt") ON mcatinat."prodid" = mpro."id"' ),
 			'label'=>'Product index attribute ID',
 			'type'=> 'integer',
