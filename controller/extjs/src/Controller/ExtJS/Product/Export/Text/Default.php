@@ -167,7 +167,12 @@ class Controller_ExtJS_Product_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$containerItem = $this->_initContainer( $filename );
+		$config = $this->_getContext()->getConfig();
+		$fileExt = $config->get( 'controller/extjs/product/export/text/default/container', '.zip' );
+		$reader = $config->get( 'controller/extjs/product/export/text/default/contentReader', 'CSV' );
+		$contExt = $config->get( 'controller/extjs/product/export/text/default/contentExtension', '.csv' );
+
+		$containerItem = $this->_initContainer( $filename . $fileExt, $fileExt, $reader );
 
 		$start = 0;
 
@@ -179,7 +184,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 			{
 				$langid = $item->getId();
 
-				$contentItem = $containerItem->create( $langid . $contentFormat );
+				$contentItem = $containerItem->create( $langid . $contExt );
 				$contentItem->add( array( 'Language ID', 'Product type', 'Product code', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $langid, $ids, $contentItem );
@@ -195,7 +200,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 
 		$containerItem->close();
 
-		return $filename;
+		return $filename . $fileExt;
 	}
 
 
@@ -279,17 +284,5 @@ class Controller_ExtJS_Product_Export_Text_Default
 
 			$contentItem->add( $items );
 		}
-	}
-
-
-	/**
-	 * Inits container for storing export files.
-	 *
-	 * @param string $resource Path to the file
-	 * @return MW_Container_Interface Container item
-	 */
-	protected function _initContainer( $resource )
-	{
-		return new MW_Container_Zip( $resource, 'CSV' );
 	}
 }

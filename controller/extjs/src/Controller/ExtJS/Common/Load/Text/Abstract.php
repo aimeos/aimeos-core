@@ -412,4 +412,20 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 		return $codeIdMap;
 	}
+
+
+	/**
+	 * Inits container for storing export files.
+	 *
+	 * @param string $resource Path to the file
+	 * @return MW_Container_Interface Container item
+	 */
+	protected function _initContainer( $resource, $container, $content )
+	{
+		if( $container === '.xls' ) {
+			return new MW_Container_PHPExcel( $resource, 'Excel5' );
+		}
+
+		return new MW_Container_Zip( $resource, $content );
+	}
 }

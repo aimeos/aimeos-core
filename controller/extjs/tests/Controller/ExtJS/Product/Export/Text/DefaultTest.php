@@ -51,7 +51,7 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 	}
 
 
-	public function testExportFile()
+	public function testExportCSVFile()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$criteria = $productManager->createSearch();
@@ -121,5 +121,85 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$this->assertEquals( 'unittype13', $lines[2][3] );
 		$this->assertEquals( 'metadescription', $lines[2][4] );
 		$this->assertEquals( 'Expresso', $lines[2][6] );
+	}
+
+
+	public function testExportXLSFile()
+	{
+		$this->_context = TestHelper::getContext();
+		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/container', '.xls' );
+		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/contentReader', 'Excel5' );
+		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/contentExtension', '' );
+		$this->_object = new Controller_ExtJS_Product_Export_Text_Default( $this->_context );
+
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$criteria = $productManager->createSearch();
+
+		$expr = array();
+		$expr[] = $criteria->compare( '==', 'product.code', 'CNE' );
+		$criteria->setConditions( $criteria->compare( '==', 'product.code', 'CNE' ) );
+
+		$searchResult = $productManager->searchItems( $criteria );
+
+		if ( ( $productItem = reset( $searchResult ) ) === false ) {
+			throw new Exception( 'No item with product code CNE found' );
+		}
+
+		$params = new stdClass();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->items = $productItem->getId();
+		$params->lang = 'de';
+
+		$result = $this->_object->exportFile( $params );
+
+		$this->assertTrue( array_key_exists('file', $result) );
+
+		$file = substr($result['file'], 9, -14);
+		$this->assertTrue( file_exists( $file ) );
+
+
+		$inputFileType = PHPExcel_IOFactory::identify( $file );
+		$objReader = PHPExcel_IOFactory::createReader( $inputFileType );
+		$objReader->setLoadSheetsOnly( $params->lang );
+		$objPHPExcel = $objReader->load( $file );
+
+		if( unlink( $file ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
+		}
+
+		$objWorksheet = $objPHPExcel->getActiveSheet();
+
+		$product = $productItem->toArray();
+
+		for ( $i = 2; $i < 8; $i++ )
+		{
+			$this->assertEquals( $params->lang, $objWorksheet->getCellByColumnAndRow( 0, $i )->getValue() );
+			$this->assertEquals( $product['product.type'], $objWorksheet->getCellByColumnAndRow( 1, $i )->getValue() );
+			$this->assertEquals( $product['product.code'], $objWorksheet->getCellByColumnAndRow( 2, $i )->getValue() );
+		}
+
+		$this->assertEquals( 'List type', $objWorksheet->getCellByColumnAndRow( 3, 1 )->getValue() );
+		$this->assertEquals( 'Text type', $objWorksheet->getCellByColumnAndRow( 4, 1 )->getValue() );
+		$this->assertEquals( 'Text ID', $objWorksheet->getCellByColumnAndRow( 5, 1 )->getValue() );
+		$this->assertEquals( 'Text', $objWorksheet->getCellByColumnAndRow( 6, 1 )->getValue() );
+	}
+
+
+	public function testGetServiceDescription()
+	{
+		$expected = array(
+			'Product_Export_Text.createHttpOutput' => array(
+				"parameters" => array(
+					array( "type" => "string","name" => "site","optional" => false ),
+					array( "type" => "array","name" => "items","optional" => false ),
+					array( "type" => "array","name" => "lang","optional" => true ),
+				),
+				"returns" => "",
+			),
+		);
+
+		$actual = $this->_object->getServiceDescription();
+
+		$this->assertEquals( $expected, $actual );
 	}
 }

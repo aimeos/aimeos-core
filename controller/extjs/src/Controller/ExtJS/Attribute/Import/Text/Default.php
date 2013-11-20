@@ -148,7 +148,11 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 	 */
 	protected function _importFile( $path )
 	{
-		$container = new MW_Container_ZIP( $path, 'CSV' );
+		$config = $this->_getContext()->getConfig();
+		$fileExt = $config->get( 'controller/extjs/product/export/text/default/container', '.zip' );
+		$reader = $config->get( 'controller/extjs/product/export/text/default/contentReader', 'CSV' );
+
+		$container = $this->_initContainer( $path, $fileExt, $reader );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'attribute' ) as $item ) {

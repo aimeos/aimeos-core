@@ -107,11 +107,12 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 		$this->_getContext()->getLogger()->log( sprintf( 'Create export directory for attribute IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
+
 		try
 		{
 			$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
-			$filename = $this->_exportAttributeData( $items, $lang, $tmpfolder . '.zip', '.csv' );
+			$filename = $this->_exportAttributeData( $items, $lang, $tmpfolder );
 		}
 		catch ( Exception $e )
 		{
@@ -157,7 +158,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	 * @param string $contentFormat Content format in the container e.g. ".csv"
 	 * @return string Path to the exported file
 	 */
-	protected function _exportAttributeData( array $ids, array $lang, $filename, $contentFormat = '' )
+	protected function _exportAttributeData( array $ids, array $lang, $filename )
 	{
 		$data = array();
 		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
@@ -170,7 +171,12 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$containerItem = $this->_initContainer( $filename );
+		$config = $this->_getContext()->getConfig();
+		$fileExt = $config->get( 'controller/extjs/product/export/text/default/container', '.zip' );
+		$reader = $config->get( 'controller/extjs/product/export/text/default/contentReader', 'CSV' );
+		$contExt = $config->get( 'controller/extjs/product/export/text/default/contentExtension', '.csv' );
+
+		$containerItem = $this->_initContainer( $filename . $fileExt, $fileExt, $reader );
 
 		$start = 0;
 
@@ -182,7 +188,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			{
 				$langid = $item->getId();
 
-				$contentItem = $containerItem->create( $langid . $contentFormat );
+				$contentItem = $containerItem->create( $langid . $contExt );
 				$contentItem->add( array( 'Language ID', 'Attribute type', 'Attribute code', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $langid, $ids, $contentItem );
@@ -198,7 +204,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 		$containerItem->close();
 
-		return $filename;
+		return $filename . $fileExt;
 	}
 
 
@@ -236,18 +242,6 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			$search->setSlice( $start );
 		}
 		while( $count == $search->getSliceSize() );
-	}
-
-
-	/**
-	 * Inits container for storing export files.
-	 *
-	 * @param string $resource Path to the file
-	 * @return MW_Container_Interface Container item
-	 */
-	protected function _initContainer( $resource )
-	{
-		return new MW_Container_Zip( $resource, 'CSV' );
 	}
 
 
