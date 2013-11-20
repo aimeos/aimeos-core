@@ -84,9 +84,9 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends MW_Unittest_Tes
 		$zip->extractTo( $testdir );
 		$zip->close();
 
-// 		if( unlink( $file ) === false ) {
-// 			throw new Exception( 'Unable to remove export file' );
-// 		}
+		if( unlink( $file ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
+		}
 
 		$deCSV = $testdir . DIRECTORY_SEPARATOR . 'de.csv';
 

@@ -217,7 +217,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'attribute.id', $ids ) );
 		}
 
-		$sort = array( $search->sort( '+', 'attribute.type.code' ), $search->sort( '+', 'attribute.position' ) );
+		$sort = array( $search->sort( '+', 'attribute.type.code' ), $search->sort( '+', 'attribute.position' ), $search->sort( '-', 'attribute.id' ) );
 		$search->setSortations( $sort );
 
 		$start = 0;

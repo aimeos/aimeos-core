@@ -106,7 +106,7 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 		foreach( $items as $entry )
 		{
 			$this->_importFile( $entry );
-			unlink( $entry );
+// 			unlink( $entry );
 		}
 
 		return array(
@@ -148,10 +148,7 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 	 */
 	protected function _importFile( $path )
 	{
-		$type = PHPExcel_IOFactory::identify( $path );
-		$reader = PHPExcel_IOFactory::createReader( $type );
-		$reader->setReadDataOnly( true );
-		$phpExcel = $reader->load( $path );
+		$container = new MW_Container_ZIP( $path, 'CSV' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'attribute' ) as $item ) {
@@ -160,9 +157,9 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 
 		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
 
-		foreach( $phpExcel->getWorksheetIterator() as $sheet )
+		foreach( $container as $language )
 		{
-			$itemTextMap = $this->_importTextsFromXLS( $sheet, $textTypeMap, 'attribute' );
+			$itemTextMap = $this->_importTextsFromContent( $language, $textTypeMap, 'attribute' );
 			$this->_importReferences( $manager, $itemTextMap, 'attribute' );
 		}
 	}

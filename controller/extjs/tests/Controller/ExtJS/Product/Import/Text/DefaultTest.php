@@ -80,14 +80,25 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$data[] = array( 'en','product','ABCD','default','name','','ABCD: name');
 		$data[] = array( 'en','product','ABCD','default','short','','ABCD: short');
 
-		$filename = 'product-import-test.csv';
-		$fh = fopen( $filename, 'w' );
+		$csv = 'en-product-test.csv';
+		$filename = 'product-import.zip';
+		$fh = fopen( $csv, 'w' );
 
 		foreach( $data as $id => $row ) {
 			fputcsv( $fh, $row );
 		}
 
 		fclose( $fh );
+
+		$zip = new ZipArchive();
+		$zip->open($filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+		$zip->addFile($csv, $csv);
+		$zip->close();
+
+		if( unlink( $csv ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
+		}
+
 
 		$params = new stdClass();
 		$params->site = $this->_context->getLocale()->getSite()->getCode();

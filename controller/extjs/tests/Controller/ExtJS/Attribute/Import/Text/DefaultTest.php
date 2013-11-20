@@ -75,161 +75,129 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 
 	public function testImportFile()
 	{
-// 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$data[] = array( 'Titles' );
+		$data[] = array( 'en','color','white','default','name','','unittest: white' );
+		$data[] = array( 'en','color','blue','default','name','','unittest: blue');
+		$data[] = array( 'en','color','red','default','name','','unittest: red' );
+		$data[] = array( 'en','size','l','default','name','','unittest: l');
+		$data[] = array( 'en','size','xl','default','name','','unittest: xl');
+		$data[] = array( 'en','size','xxl','default','name','','unittest: xxl');
 
-// 		$ids = array();
-// 		foreach( $attributeManager->searchItems( $attributeManager->createSearch() ) as $item ) {
-// 			$ids[] = $item->getId();
-// 		}
+		$csv = 'en-attribute-test.csv';
+		$filename = 'attribute-import.zip';
 
-// 		$params = new stdClass();
-// 		$params->lang = array( 'en' );
-// 		$params->items = $ids;
-// 		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$fh = fopen( $csv, 'w' );
 
-// 		if( ob_start() === false ) {
-// 			throw new Exception( 'Unable to start output buffering' );
-// 		}
+		foreach( $data as $id => $row ) {
+			fputcsv( $fh, $row );
+		}
 
-// 		$exporter = new Controller_ExtJS_Attribute_Export_Text_Default( $this->_context );
-// 		$exporter->exportFile( $params );
-
-// 		$filename = 'attribute-import.xlsx';
-
-// 		$result = $this->_object->exportFile( $params );
-
-// 		$this->assertTrue( array_key_exists('file', $result) );
-
-// 		$file = substr($result['file'], 9, -14);
-// 		$this->assertTrue( file_exists( $file ) );
-
-// 		$container = Controller_ExtJS_Common_Load_Container();
-// 		$container->open( $file );
-// 		$exportedFile = $container->exportData();
-
-// 		if( ( $content = reset( $exportedFile ) ) === false ) {
-// 			throw new Exception( 'Unable to open exported file' );
-// 		}
-
-// 		if( unlink( $file ) === false ) {
-// 			throw new Exception( 'Unable to remove export file' );
-// 		}
-
-// 		$values = $content->exportContent();
-
-// 		$values[1][6] = 'white: img-desc';
-// 		$values[2][6] = 'white: long';
-// 		$values[3][6] = 'white: name';
-// 		$values[4][6] = 'white: short';
-// 		$values[5][6] = 'white: img-desc';
-
-// 		// test exceptions for text types
-// 		$values[1][4] = 'bad-text-type-exception1';
-// 		$values[1][5] = 'bad-text-type-id-exception2';
-// 		// test exceptions for list types
-// 		$values[2][3] = 'bad-list-type-exception3';
+		fclose( $fh );
 
 
-// 		$container2 = new Controller_ExtJS_Common_Load_Container( $filename );
-// 		$content = new Controller_ExtJS_Common_Load_Content( 'tmp', 'en', 'attribute' );
-// 		$container2->addData( $content->importContent( $values ) );
-// 		$container2->finish();
+		$zip = new ZipArchive();
+		$zip->open($filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+		$zip->addFile($csv, $csv);
+		$zip->close();
 
-// 		$params = new stdClass();
-// 		$params->site = $this->_context->getLocale()->getSite()->getCode();
-// 		$params->items = $filename;
+		if( unlink( $csv ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
+		}
 
-// 		$this->_object->importFile( $params );
+		$params = new stdClass();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->items = $filename;
 
+		$this->_object->importFile( $params );
 
-// 		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
-// 		$criteria = $textManager->createSearch();
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
+		$criteria = $textManager->createSearch();
 
-// 		$expr = array();
-// 		$expr[] = $criteria->compare( '==', 'text.domain', 'attribute' );
-// 		$expr[] = $criteria->compare( '==', 'text.languageid', 'en' );
-// 		$expr[] = $criteria->compare( '==', 'text.status', 1 );
-// 		$expr[] = $criteria->compare( '~=', 'text.content', 'white:' );
-// 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$expr = array();
+		$expr[] = $criteria->compare( '==', 'text.domain', 'attribute' );
+		$expr[] = $criteria->compare( '==', 'text.languageid', 'en' );
+		$expr[] = $criteria->compare( '==', 'text.status', 1 );
+		$expr[] = $criteria->compare( '~=', 'text.content', 'unittest:' );
+		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
-// 		$textItems = $textManager->searchItems( $criteria );
+		$textItems = $textManager->searchItems( $criteria );
 
-// 		$textIds = array();
-// 		foreach( $textItems as $item )
-// 		{
-// 			$textManager->deleteItem( $item->getId() );
-// 			$textIds[] = $item->getId();
-// 		}
-
-
-// 		$listManager = $attributeManager->getSubManager( 'list' );
-// 		$criteria = $listManager->createSearch();
-
-// 		$expr = array();
-// 		$expr[] = $criteria->compare( '==', 'attribute.list.domain', 'text' );
-// 		$expr[] = $criteria->compare( '==', 'attribute.list.refid', $textIds );
-// 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-
-// 		$listItems = $listManager->searchItems( $criteria );
-
-// 		foreach( $listItems as $item ) {
-// 			$listManager->deleteItem( $item->getId() );
-// 		}
+		$textIds = array();
+		foreach( $textItems as $item )
+		{
+			$textManager->deleteItem( $item->getId() );
+			$textIds[] = $item->getId();
+		}
 
 
-// 		$this->assertEquals( 3, count( $textItems ) ); // 4 without exception testing
-// 		$this->assertEquals( 2, count( $listItems ) ); // 4 without exception testing
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$listManager = $attributeManager->getSubManager( 'list' );
+		$criteria = $listManager->createSearch();
 
-// 		foreach( $textItems as $item ) {
-// 			$this->assertEquals( 'white:', substr( $item->getContent(), 0, 6 ) );
-// 		}
+		$expr = array();
+		$expr[] = $criteria->compare( '==', 'attribute.list.domain', 'text' );
+		$expr[] = $criteria->compare( '==', 'attribute.list.refid', $textIds );
+		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
-// 		if( file_exists( $filename ) !== false ) {
-// 			throw new Exception( 'Import file was not removed' );
-// 		}
+		$listItems = $listManager->searchItems( $criteria );
+
+		foreach( $listItems as $item ) {
+			$listManager->deleteItem( $item->getId() );
+		}
+
+		foreach( $textItems as $item ) {
+			$this->assertEquals( 'unittest:', substr( $item->getContent(), 0, 9 ) );
+		}
+
+		$this->assertEquals( 6, count( $textItems ) );
+		$this->assertEquals( 6, count( $listItems ) );
+
+		if( file_exists( $filename ) !== false ) {
+			throw new Exception( 'Import file was not removed' );
+		}
 	}
 
 
 	public function testUploadFile()
 	{
-// 		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context );
 
-// 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
+		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 
-// 		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->_testdir ) ) );
+		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->_testdir ) ) );
 
-// 		$_FILES['unittest'] = array(
-// 			'name' => 'file.txt',
-// 			'tmp_name' => $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt',
-// 			'error' => UPLOAD_ERR_OK,
-// 		);
+		$_FILES['unittest'] = array(
+			'name' => 'file.txt',
+			'tmp_name' => $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt',
+			'error' => UPLOAD_ERR_OK,
+		);
 
-// 		$params = new stdClass();
-// 		$params->items = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
-// 		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params = new stdClass();
+		$params->items = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
-// 		$result = $this->_object->uploadFile( $params );
+		$result = $this->_object->uploadFile( $params );
 
-// 		$this->assertTrue( file_exists( $result['items'] ) );
-// 		unlink( $result['items'] );
+		$this->assertTrue( file_exists( $result['items'] ) );
+		unlink( $result['items'] );
 
-// 		$params = (object) array(
-// 			'site' => 'unittest',
-// 			'condition' => (object) array( '&&' => array( 0 => (object) array( '~=' => (object) array( 'job.label' => 'file.txt' ) ) ) ),
-// 		);
+		$params = (object) array(
+			'site' => 'unittest',
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '~=' => (object) array( 'job.label' => 'file.txt' ) ) ) ),
+		);
 
-// 		$result = $jobController->searchItems( $params );
-// 		$this->assertEquals( 1, count( $result['items'] ) );
+		$result = $jobController->searchItems( $params );
+		$this->assertEquals( 1, count( $result['items'] ) );
 
-// 		$deleteParams = (object) array(
-// 			'site' => 'unittest',
-// 			'items' => $result['items'][0]->{'job.id'},
-// 		);
+		$deleteParams = (object) array(
+			'site' => 'unittest',
+			'items' => $result['items'][0]->{'job.id'},
+		);
 
-// 		$jobController->deleteItems( $deleteParams );
+		$jobController->deleteItems( $deleteParams );
 
-// 		$result = $jobController->searchItems( $params );
-// 		$this->assertEquals( 0, count( $result['items'] ) );
+		$result = $jobController->searchItems( $params );
+		$this->assertEquals( 0, count( $result['items'] ) );
 	}
 
 

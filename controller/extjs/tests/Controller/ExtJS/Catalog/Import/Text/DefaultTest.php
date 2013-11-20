@@ -92,19 +92,20 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$zip = new ZipArchive();
 		$zip->open($file);
 
-		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport';
-		if( mkdir( $testdir ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
-		}
+// 		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport';
+// 		if( mkdir( $testdir ) === false ) {
+// 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
+// 		}
 
-		$zip->extractTo( $testdir );
+		$zip->extractTo( '.' );
 		$zip->close();
 
 		if( unlink( $file ) === false ) {
 			throw new Exception( 'Unable to remove export file' );
 		}
 
-		$enCSV = $testdir . DIRECTORY_SEPARATOR . 'en.csv';
+		$enCSV = 'en-catalog-test.csv';
+		$filename = 'catalog-import.zip';
 
 		$this->assertTrue( file_exists( $enCSV ) );
 		$fh = fopen( $enCSV, 'r' );
@@ -125,9 +126,18 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		}
 		fclose( $fh );
 
+		$zip = new ZipArchive();
+		$zip->open($filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+		$zip->addFile($enCSV, 'en.csv');
+		$zip->close();
+
+		if( unlink( $enCSV ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
+		}
+
 		$params = new stdClass();
 		$params->site = $this->_context->getLocale()->getSite()->getCode();
-		$params->items = $enCSV;
+		$params->items = $filename;
 
 		$this->_object->importFile( $params );
 

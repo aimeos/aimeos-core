@@ -142,23 +142,24 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 
 
 	/**
-	 * Imports a CSV file.
+	 * Imports a file that can be understood by PHPExcel.
 	 *
 	 * @param string $path Path to file for importing
 	 */
 	protected function _importFile( $path )
 	{
-		$fp = fopen( $path, 'r' );
+		$container = new MW_Container_PHPExcel( $path, 'Excel5' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'catalog' ) as $item ) {
 			$textTypeMap[ $item->getCode() ] = $item->getId();
 		}
 
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
-
-		$catalogTextMap = $this->_importTextsFromCSV( $fp, $textTypeMap, 'catalog' );
-		$this->_importCatalogReferences( $catalogTextMap );
+		foreach( $container as $langContent )
+		{
+			$catalogTextMap = $this->_importTextsFromContent( $langContent, $textTypeMap, 'catalog' );
+			$this->_importCatalogReferences( $catalogTextMap );
+		}
 	}
 
 

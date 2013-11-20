@@ -149,7 +149,7 @@ class Controller_ExtJS_Product_Import_Text_Default
 	 */
 	protected function _importFile( $path )
 	{
-		$fp = fopen( $path, 'r' );
+		$container = new MW_Container_ZIP( $path, 'CSV' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'product' ) as $item ) {
@@ -158,7 +158,10 @@ class Controller_ExtJS_Product_Import_Text_Default
 
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
 
-		$itemTextMap = $this->_importTextsFromCSV( $fp, $textTypeMap, 'product' );
-		$this->_importReferences( $manager, $itemTextMap, 'product' );
+		foreach( $container as $language )
+		{
+			$itemTextMap = $this->_importTextsFromContent( $language, $textTypeMap, 'product' );
+			$this->_importReferences( $manager, $itemTextMap, 'product' );
+		}
 	}
 }
