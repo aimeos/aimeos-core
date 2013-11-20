@@ -23,6 +23,7 @@ class MW_Container_Zip
 	private $_position = 0;
 	private $_content = array();
 	private $_options;
+	private $_resourcepath;
 
 
 	/**
@@ -46,6 +47,7 @@ class MW_Container_Zip
 		}
 
 		$this->_options = $options;
+		$this->_resourcepath = $resourcepath;
 
 		$this->_container = new ZipArchive();
 		$this->_container->open( $resourcepath, ZipArchive::CREATE );
@@ -121,13 +123,8 @@ class MW_Container_Zip
 			throw new MW_Container_Exception( sprintf( $msg, $this->_position, $this->_container->filename ) );
 		}
 
-		if( ( $resource = $this->_container->getStream( $name ) ) === false )
-		{
-			$msg = 'Unable to get stream for "%1$s" in "%2$s"';
-			throw new MW_Container_Exception( $msg, $name, $this->_container->filename );
-		}
-
-		return new $this->_classname( $resource, $name );
+		// $this->_container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
+		return new $this->_classname( 'zip://' . $this->_resourcepath . '#' . $name, $name );
 	}
 
 

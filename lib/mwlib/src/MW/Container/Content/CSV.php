@@ -44,7 +44,9 @@ class MW_Container_Content_CSV
 
 		if( !is_resource( $resource ) )
 		{
-			if( ( $this->_fh = fopen( $resource, 'a+' ) ) === false ) {
+			if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
+				&& ( $this->_fh = fopen( $resource, 'r' ) ) === false
+			) {
 				throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 			}
 		}
@@ -133,8 +135,13 @@ class MW_Container_Content_CSV
 	 */
 	function rewind()
 	{
-		if( rewind( $this->_fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to rewind file "%1$s"', $this->_resource ) );
+		if( @rewind( $this->_fh ) === false )
+		{
+			fclose( $this->_fh );
+
+			if( ( $this->_fh = fopen( $this->getResource(), 'r' ) ) === false ) {
+				throw new MW_Container_Exception( sprintf( 'Unable to rewind %1$s', $this->_fh ) );
+			}
 		}
 
 		$this->_position = 0;

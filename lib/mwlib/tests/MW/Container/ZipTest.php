@@ -76,13 +76,25 @@ class MW_Container_ZipTest extends MW_Unittest_Testcase
 		$zip = new MW_Container_Zip( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.zip', 'CSV' );
 
 		$expected = array(
-			'tempfile.csv',
-			'testfile.csv',
+			'tempfile.csv' => 2,
+			'testfile.csv' => 2,
 		);
 
 		$actual = array();
-		foreach( $zip as $entry ) {
-			$actual[] = $entry->getName();
+		foreach( $zip as $entry )
+		{
+			$rows = array();
+			foreach( $entry as $row ) {
+				$rows[] = $row;
+			}
+
+			// test if rewind or reopen works
+			$rows = array();
+			foreach( $entry as $row ) {
+				$rows[] = $row;
+			}
+
+			$actual[ $entry->getName() ] = count( $rows );
 		}
 
 		$this->assertEquals( $expected, $actual );
