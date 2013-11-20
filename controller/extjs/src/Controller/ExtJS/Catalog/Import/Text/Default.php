@@ -148,7 +148,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 	 */
 	protected function _importFile( $path )
 	{
-		$container = new MW_Container_PHPExcel( $path, 'Excel5' );
+		$container = new MW_Container_Zip( $path, 'CSV' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'catalog' ) as $item ) {

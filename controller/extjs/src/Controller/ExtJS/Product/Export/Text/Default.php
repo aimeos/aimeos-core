@@ -147,12 +147,13 @@ class Controller_ExtJS_Product_Export_Text_Default
 
 
 	/**
-	 * Exports data to csv files.
+	 * Gets all data and exports it to the content files.
 	 *
 	 * @param array $ids List of item IDs that should be part of the document
 	 * @param array $lang List of languages to export (empty array for all)
-	 * @param string $tmpfolder Temporary folder name where to write export files
-	 * @return string Path of export file
+	 * @param string $filename Temporary folder name where to write export files
+	 * @param string $contentFormat Content format in the container e.g. ".csv"
+	 * @return string Path to the exported file
 	 */
 	protected function _exportProductData( array $ids, array $lang, $filename, $contentFormat = '' )
 	{
@@ -284,7 +285,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 	/**
 	 * Inits container for storing export files.
 	 *
-	 * @param string $resource Path to resource
+	 * @param string $resource Path to the file
 	 * @return MW_Container_Interface Container item
 	 */
 	protected function _initContainer( $resource )

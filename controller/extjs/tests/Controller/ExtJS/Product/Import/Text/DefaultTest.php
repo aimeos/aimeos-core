@@ -73,19 +73,20 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 	public function testImportFile()
 	{
-		$data[] = array( 'en','product','ABCD','default','long','','ABCD: long' );
-		$data[] = array( 'en','product','ABCD','default','metadescription','','ABCD: meta desc');
-		$data[] = array( 'en','product','ABCD','default','metakeywords','','ABCD: meta keywords' );
-		$data[] = array( 'en','product','ABCD','default','metatitle','','ABCD: meta title');
-		$data[] = array( 'en','product','ABCD','default','name','','ABCD: name');
-		$data[] = array( 'en','product','ABCD','default','short','','ABCD: short');
+		$data[] = '"en","product","ABCD","default","long","","ABCD: long"'."\n";
+		$data[] = '"en","product","ABCD","default","metadescription","","ABCD: meta desc"' ."\n";
+		$data[] = '"en","product","ABCD","default","metakeywords","","ABCD: meta keywords"'."\n";
+		$data[] = '"en","product","ABCD","default","metatitle","","ABCD: meta title"'."\n";
+		$data[] = '"en","product","ABCD","default","name","","ABCD: name"'."\n";
+		$data[] = '"en","product","ABCD","default","short","","ABCD: short"'."\n";
+		$data[] = ' ';
 
 		$csv = 'en-product-test.csv';
 		$filename = 'product-import.zip';
 		$fh = fopen( $csv, 'w' );
 
 		foreach( $data as $id => $row ) {
-			fputcsv( $fh, $row );
+			fwrite( $fh, $row );
 		}
 
 		fclose( $fh );

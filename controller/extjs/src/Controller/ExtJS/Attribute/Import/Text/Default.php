@@ -106,7 +106,7 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 		foreach( $items as $entry )
 		{
 			$this->_importFile( $entry );
-// 			unlink( $entry );
+			unlink( $entry );
 		}
 
 		return array(

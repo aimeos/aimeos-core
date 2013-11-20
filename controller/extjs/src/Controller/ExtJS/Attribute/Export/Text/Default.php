@@ -77,7 +77,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 
 	/**
-	 * Create csv files in zip in the filesystem.
+	 * Exports content files in container.
 	 *
 	 * @param stdClass $params Object containing the properties, e.g. the list of attribute IDs
 	 */
@@ -149,12 +149,13 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 
 	/**
-	 * Exports data to csv files.
+	 * Gets all data and exports it to the content files.
 	 *
 	 * @param array $ids List of item IDs that should be part of the document
 	 * @param array $lang List of languages to export (empty array for all)
-	 * @param string $tmpfolder Temporary folder name where to write export files
-	 * @return string Path of export file
+	 * @param string $filename Temporary folder name where to write export files
+	 * @param string $contentFormat Content format in the container e.g. ".csv"
+	 * @return string Path to the exported file
 	 */
 	protected function _exportAttributeData( array $ids, array $lang, $filename, $contentFormat = '' )
 	{
@@ -205,7 +206,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	 * Adds data for the given language.
 	 *
 	 * @param string $langid Language id
-	 * @param array $items List of of item ids whose texts should be added
+	 * @param array $ids List of of item ids whose texts should be added
 	 * @param MW_Container_Content_Interface $contentItem Content item
 	 */
 	protected function _addLanguage( $langid, array $ids, MW_Container_Content_Interface $contentItem )
@@ -241,7 +242,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	/**
 	 * Inits container for storing export files.
 	 *
-	 * @param string $resource Path or resource
+	 * @param string $resource Path to the file
 	 * @return MW_Container_Interface Container item
 	 */
 	protected function _initContainer( $resource )
@@ -251,7 +252,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 
 	/**
-	 * Adds all texts belonging to an product item.
+	 * Adds all texts belonging to an attribute item.
 	 *
 	 * @param string $langid Language id
 	 * @param MShop_Product_Item_Interface $item product item object

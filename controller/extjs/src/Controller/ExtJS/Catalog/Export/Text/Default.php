@@ -109,7 +109,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		{
 			$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
-			$filename = $this->_exportCatalogData( $items, $lang, $tmpfolder );
+			$filename = $this->_exportCatalogData( $items, $lang, $tmpfolder . '.zip', '.csv');
 		}
 		catch ( Exception $e )
 		{
@@ -147,14 +147,15 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 
 	/**
-	 * Exports catalog data to csv files.
+	 * Gets all data and exports it to the content files.
 	 *
 	 * @param array $ids List of item IDs that should be part of the document
 	 * @param array $lang List of languages to export (empty array for all)
-	 * @param string $tmpfolder Temporary folder name where to write export files
-	 * @return array List of exported files
+	 * @param string $filename Temporary folder name where to write export files
+	 * @param string $contentFormat Content format in the container e.g. ".csv"
+	 * @return string Path to the exported file
 	 */
-	protected function _exportCatalogData( array $ids, array $lang, $tmpfolder )
+	protected function _exportCatalogData( array $ids, array $lang, $filename, $contentFormat = '' )
 	{
 		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
 		$globalLanguageManager = $manager->getSubManager( 'language' );
@@ -166,7 +167,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$containerItem = $this->_initContainer( $tmpfolder );
+		$containerItem = $this->_initContainer( $filename );
 
 		$start = 0;
 
@@ -177,12 +178,12 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 			foreach ( $result as $item )
 			{
 				$langid = $item->getId();
-				$files[$langid] = $tmpfolder . DIRECTORY_SEPARATOR . $langid . '.csv';
 
-				$contentItem = $containerItem->create( $langid . '.csv'  );
+				$contentItem = $containerItem->create( $langid . $contentFormat  );
 				$contentItem->add( array( 'Language ID', 'Catalog label', 'Catalog ID', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $langid, $ids, $contentItem );
+
 				$containerItem->add( $contentItem );
 			}
 
@@ -194,7 +195,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 		$containerItem->close();
 
-		return $tmpfolder . '.zip';
+		return $filename;
 	}
 
 
@@ -202,7 +203,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * Adds data for the given language.
 	 *
 	 * @param string $langid Language id
-	 * @param array $items List of of item ids whose texts should be added
+	 * @param array $ids List of of item ids whose texts should be added
 	 * @param MW_Container_Content_Interface $contentItem Content item
 	 */
 	protected function _addLanguage( $langid, array $ids, MW_Container_Content_Interface $contentItem )
@@ -219,7 +220,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 
 	/**
-	 * Adds all texts belonging to an product item.
+	 * Adds all texts belonging to an catalog item.
 	 *
 	 * @param string $langid Language id
 	 * @param MShop_Product_Item_Interface $item product item object
@@ -267,12 +268,12 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	/**
 	 * Inits container for storing export files.
 	 *
-	 * @param string $resource Path or resource
+	 * @param string $resource Path to the file
 	 * @return MW_Container_Interface Container item
 	 */
 	protected function _initContainer( $resource )
 	{
-		return new MW_Container_Zip( $resource . '.zip', 'CSV' );
+		return new MW_Container_Zip( $resource, 'CSV' );
 	}
 
 

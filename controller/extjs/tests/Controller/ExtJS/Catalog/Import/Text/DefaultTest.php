@@ -68,82 +68,55 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$this->assertEquals( 2, count( $desc['Catalog_Import_Text.importFile'] ) );
 	}
 
+
 	public function testImportFile()
 	{
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
 
-		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$search = $catalogManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'catalog.code', 'root') );
+		$items = $catalogManager->searchItems( $search );
 
-		$params = new stdClass();
-		$params->lang = array( 'en' );
-		$params->items = $node->getId();
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
-
-		if( ob_start() === false ) {
-			throw new Exception( 'Unable to start output buffering' );
+		if( ( $root = reset( $items ) ) === false ) {
+			throw new Controller_ExtJS_Exception( 'No item found for catalog code "root"' );
 		}
+		$id = $root->getId();
 
-		$exporter = new Controller_ExtJS_Catalog_Export_Text_Default( $this->_context );
-		$result = $exporter->exportFile( $params );
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: long"'."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta desc"' ."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta keywords"' ."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta title"' ."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: name"' ."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: short"' ."\n";
+		$data[] = ' ';
 
-		$file = substr( $result['file'], 9, -14);
-		$this->assertTrue( file_exists( $file ) );
-
-		$zip = new ZipArchive();
-		$zip->open($file);
-
-// 		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport';
-// 		if( mkdir( $testdir ) === false ) {
-// 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
-// 		}
-
-		$zip->extractTo( '.' );
-		$zip->close();
-
-		if( unlink( $file ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
-		}
-
-		$enCSV = 'en-catalog-test.csv';
+		$csv = 'en-catalog-test.csv';
 		$filename = 'catalog-import.zip';
 
-		$this->assertTrue( file_exists( $enCSV ) );
-		$fh = fopen( $enCSV, 'r' );
-		while( ( $data = fgetcsv( $fh ) ) != false ) {
-			$lines[] = $data;
-		}
-		fclose( $fh );
 
-		$lines[1][6] = 'Root: delivery info';
-		$lines[2][6] = 'Root: long';
-		$lines[3][6] = 'Root: name';
-		$lines[4][6] = 'Root: payment info';
-		$lines[5][6] = 'Root: short';
+		$fh = fopen( $csv, 'w' );
 
-		$fh = fopen( $enCSV, 'w' );
-		for( $i = 1; $i<6; $i++) {
-			fputcsv( $fh, $lines[$i] );
+		foreach( $data as $id => $row ) {
+			fwrite( $fh, $row );
 		}
+
 		fclose( $fh );
 
 		$zip = new ZipArchive();
 		$zip->open($filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
-		$zip->addFile($enCSV, 'en.csv');
+		$zip->addFile($csv, $csv);
 		$zip->close();
 
-		if( unlink( $enCSV ) === false ) {
+		if( unlink( $csv ) === false ) {
 			throw new Exception( 'Unable to remove export file' );
 		}
+
 
 		$params = new stdClass();
 		$params->site = $this->_context->getLocale()->getSite()->getCode();
 		$params->items = $filename;
 
 		$this->_object->importFile( $params );
-
-		if( rmdir( 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport' ) !== true ) {
-			throw new Exception( sprintf( 'Deleting dir failed' ) );
-		}
 
 		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
 		$criteria = $textManager->createSearch();
@@ -180,11 +153,15 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		}
 
 
-		$this->assertEquals( 5, count( $textItems ) );
-		$this->assertEquals( 5, count( $listItems ) );
-
 		foreach( $textItems as $item ) {
 			$this->assertEquals( 'Root:', substr( $item->getContent(), 0, 5 ) );
+		}
+
+		$this->assertEquals( 6, count( $textItems ) );
+		$this->assertEquals( 6, count( $listItems ) );
+
+		if( file_exists( $filename ) !== false ) {
+			throw new Exception( 'Import file was not removed' );
 		}
 	}
 

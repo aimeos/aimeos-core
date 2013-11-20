@@ -75,13 +75,13 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 
 	public function testImportFile()
 	{
-		$data[] = array( 'Titles' );
-		$data[] = array( 'en','color','white','default','name','','unittest: white' );
-		$data[] = array( 'en','color','blue','default','name','','unittest: blue');
-		$data[] = array( 'en','color','red','default','name','','unittest: red' );
-		$data[] = array( 'en','size','l','default','name','','unittest: l');
-		$data[] = array( 'en','size','xl','default','name','','unittest: xl');
-		$data[] = array( 'en','size','xxl','default','name','','unittest: xxl');
+		$data[] = '"en","color","white","default","name","","unittest: white"'."\n";
+		$data[] = '"en","color","blue","default","name","","unittest: blue"' ."\n";
+		$data[] = '"en","color","red","default","name","","unittest: red"'."\n";
+		$data[] = '"en","size","l","default","name","","unittest: l"'."\n";
+		$data[] = '"en","size","xl","default","name","","unittest: xl"'."\n";
+		$data[] = '"en","size","xxl","default","name","","unittest: xxl"'."\n";
+		$data[] = ' ';
 
 		$csv = 'en-attribute-test.csv';
 		$filename = 'attribute-import.zip';
@@ -89,7 +89,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 		$fh = fopen( $csv, 'w' );
 
 		foreach( $data as $id => $row ) {
-			fputcsv( $fh, $row );
+			fwrite( $fh, $row );
 		}
 
 		fclose( $fh );
