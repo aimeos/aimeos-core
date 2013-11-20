@@ -1,0 +1,26 @@
+{
+	"name": "arcavias/ext-<extname>",
+	"description": "Arcavias <extname> extension",
+	"type": "arcavias-extension",
+	"require": {
+		"arcavias/extension-installer": "dev-master",
+	},
+	"autoload": {
+		"psr-0": {
+			"MShop": "lib/custom/src",
+			"MAdmin": "lib/custom/src",
+			"MW": "lib/custom/src",
+			"Client_Html": "client/html/src",
+			"Controller_Frontend": "controller/frontend/src",
+			"Controller_ExtJS": "controller/extjs/src",
+			"Controller_Jobs": "controller/jobs/src",
+		},
+		"classmap": [
+			"lib/custom/src",
+			"client/html/src",
+			"controller/extjs/src",
+			"controller/frontend/src",
+			"controller/jobs/src"
+		]
+	}
+}
