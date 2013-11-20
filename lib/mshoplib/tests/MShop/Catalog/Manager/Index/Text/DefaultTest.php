@@ -88,6 +88,34 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'text' );
+
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'text.domain', 'attribute' ),
+			$search->compare( '==', 'text.content', 'XS' ),
+			$search->compare( '==', 'text.type.code', 'name' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$items = $manager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'No text item found' );
+		}
+
+
+		$search = $this->_object->createSearch( true );
+		$result = $this->_object->aggregate( $search, 'catalog.index.text.id' );
+
+		$this->assertEquals( 23, count( $result ) );
+		$this->assertArrayHasKey( $item->getId(), $result );
+		$this->assertEquals( $result[ $item->getId() ], 2 );
+	}
+
+
 	public function testGetItem()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );

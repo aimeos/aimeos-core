@@ -43,6 +43,19 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
+	 * Counts the number products that are available for the values of the given key.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param string $key Search key (usually the ID) to aggregate products for
+	 * @return array List of ID values as key and the number of counted products as value
+	 */
+	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	{
+		return $this->_aggregate( $search, $key, 'mshop/catalog/manager/index/default/aggregate', array( 'product' ) );
+	}
+
+
+	/**
 	 * Create new product item object.
 	 *
 	 * @return MShop_Product_Item_Interface

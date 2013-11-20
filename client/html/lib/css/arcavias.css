@@ -264,13 +264,15 @@
 
 /* Catalog filter */
 .catalog-filter button {
-	display: none !important;
+	width: 100%;
+	margin: 0 !important;
 }
 
 /* Catalog filter, tree section */
 .catalog-filter-tree {
 	line-height: 125%;
 }
+
 .catalog-filter-tree ul {
 	list-style: none;
 	padding: 0px;
@@ -389,6 +391,41 @@
 .catalog-filter-search .ui-helper-hidden-accessible {
 	display: none;
 }
+
+/* Catalog filter, attribute section */
+.catalog-filter-attribute {
+	padding: 5px 0;
+}
+
+.catalog-filter-attribute fieldset {
+        border: 1px solid #C3D9E5;
+        color: #679CB8;
+        font-weight: bold;
+        padding: 5px;
+        margin: 10px 0px;
+}
+
+.catalog-filter-attribute legend {
+        color: #004266;
+        font-size: 120%;
+}
+
+.catalog-filter-attribute li.disabled {
+        font-weight: normal;
+}
+
+.catalog-filter-attribute input.attr-item {
+        border: 1px solid #C3D9E5;
+}
+
+.catalog-filter-attribute .attr-count:before {
+        content: "(";
+}
+
+.catalog-filter-attribute .attr-count:after {
+        content: ")";
+}
+
 
 /* Product list, stage section */
 .catalog-stage-breadcrumb {
