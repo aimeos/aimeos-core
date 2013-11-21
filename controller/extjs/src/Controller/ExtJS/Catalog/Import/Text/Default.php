@@ -149,19 +149,19 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 	protected function _importFile( $path )
 	{
 		$config = $this->_getContext()->getConfig();
-		$fileExt = $config->get( 'controller/extjs/product/export/text/default/container', '.zip' );
-		$reader = $config->get( 'controller/extjs/product/export/text/default/contentReader', 'CSV' );
+		$fileExt = $config->get( 'controller/extjs/catalog/export/text/default/container', 'zip' );
+		$options = $config->get( 'controller/extjs/catalog/export/text/default/containerOptions', array() );
 
-		$container = $this->_initContainer( $path, $fileExt, $reader );
+		$container = $this->_createContainer( $path, $fileExt, $options );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'catalog' ) as $item ) {
 			$textTypeMap[ $item->getCode() ] = $item->getId();
 		}
 
-		foreach( $container as $langContent )
+		foreach( $container as $content )
 		{
-			$catalogTextMap = $this->_importTextsFromContent( $langContent, $textTypeMap, 'catalog' );
+			$catalogTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'catalog' );
 			$this->_importCatalogReferences( $catalogTextMap );
 		}
 	}

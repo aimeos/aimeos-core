@@ -151,9 +151,9 @@ class Controller_ExtJS_Product_Import_Text_Default
 	{
 		$config = $this->_getContext()->getConfig();
 		$fileExt = $config->get( 'controller/extjs/product/export/text/default/container', '.zip' );
-		$reader = $config->get( 'controller/extjs/product/export/text/default/contentReader', 'CSV' );
+		$options = $config->get( 'controller/extjs/product/export/text/default/containerOptions', array() );
 
-		$container = $this->_initContainer( $path, $fileExt, $reader );
+		$container = $this->_createContainer( $path, $fileExt, $options );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'product' ) as $item ) {
@@ -162,9 +162,9 @@ class Controller_ExtJS_Product_Import_Text_Default
 
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
 
-		foreach( $container as $language )
+		foreach( $container as $content )
 		{
-			$itemTextMap = $this->_importTextsFromContent( $language, $textTypeMap, 'product' );
+			$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'product' );
 			$this->_importReferences( $manager, $itemTextMap, 'product' );
 		}
 	}

@@ -31,7 +31,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 
 	/**
-	 * Creates a new job to export an csv file.
+	 * Creates a new job to export a file.
 	 *
 	 * @param stdClass $params Object containing the properties, e.g. the list of catalog IDs
 	 */
@@ -75,7 +75,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 
 	/**
-	 * Create an csv file in the filesystem.
+	 * Exports content files in container.
 	 *
 	 * @param stdClass $params Object containing the properties, e.g. the list of catalog IDs
 	 */
@@ -92,7 +92,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		$dir = $config->get( 'controller/extjs/catalog/export/text/default/exportdir', 'uploads' );
 		$perms = $config->get( 'controller/extjs/catalog/export/text/default/dirperms', 0775 );
 
-		$foldername = 'catalog-text-export_' . date('Y-m-d') . '_' . md5( time() . getmypid() );
+		$foldername = 'catalog-text-export_' . date('Y-m-d_H:i:s') . '_' . md5( time() . getmypid() );
 		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
 
 		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false ) {
@@ -113,11 +113,11 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		}
 		catch ( Exception $e )
 		{
-			$this->_removeTempFiles( $tmpfolder );
+			$this->_removeDirectory( $tmpfolder );
 			throw $e;
 		}
 
-		$this->_removeTempFiles( $tmpfolder );
+		$this->_removeDirectory( $tmpfolder );
 
 		return array(
 			'file' => '<a href="'.$filename.'">Download</a>',
@@ -152,10 +152,9 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * @param array $ids List of item IDs that should be part of the document
 	 * @param array $lang List of languages to export (empty array for all)
 	 * @param string $filename Temporary folder name where to write export files
-	 * @param string $contentFormat Content format in the container e.g. ".csv"
 	 * @return string Path to the exported file
 	 */
-	protected function _exportCatalogData( array $ids, array $lang, $filename, $contentFormat = '' )
+	protected function _exportCatalogData( array $ids, array $lang, $filename )
 	{
 		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
 		$globalLanguageManager = $manager->getSubManager( 'language' );
@@ -168,11 +167,15 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		}
 
 		$config = $this->_getContext()->getConfig();
-		$fileExt = $config->get( 'controller/extjs/product/export/text/default/container', '.zip' );
-		$reader = $config->get( 'controller/extjs/product/export/text/default/contentReader', 'CSV' );
-		$contExt = $config->get( 'controller/extjs/product/export/text/default/contentExtension', '.csv' );
+		$fileExt = $config->get( 'controller/extjs/catalog/export/text/default/container', 'zip' );
+		$contExt = $config->get( 'controller/extjs/catalog/export/text/default/contentExtension', 'csv' );
+		$contExt = $contExt === '' ? '' : '.' . $contExt;
+		$options = $config->get( 'controller/extjs/catalog/export/text/default/containerOptions', array() );
 
-		$containerItem = $this->_initContainer( $filename . $fileExt, $fileExt, $reader );
+		$filename .= '.' . $fileExt;
+		$downloadFile = $config->get( 'controller/extjs/catalog/export/text/default/downloaddir', 'uploads' ) . DIRECTORY_SEPARATOR . basename( $filename );
+
+		$containerItem = $this->_createContainer( $filename, $fileExt, $options );
 
 		$start = 0;
 
@@ -187,7 +190,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 				$contentItem = $containerItem->create( $langid . $contExt  );
 				$contentItem->add( array( 'Language ID', 'Catalog label', 'Catalog ID', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
-				$this->_addLanguage( $langid, $ids, $contentItem );
+				$this->_addLanguage( $contentItem, $langid, $ids );
 
 				$containerItem->add( $contentItem );
 			}
@@ -200,7 +203,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 		$containerItem->close();
 
-		return $filename . $fileExt;
+		return $downloadFile;
 	}
 
 
@@ -211,14 +214,14 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * @param array $ids List of of item ids whose texts should be added
 	 * @param MW_Container_Content_Interface $contentItem Content item
 	 */
-	protected function _addLanguage( $langid, array $ids, MW_Container_Content_Interface $contentItem )
+	protected function _addLanguage( MW_Container_Content_Interface $contentItem, $langid, array $ids )
 	{
 		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
 
 		foreach( $ids as $id )
 		{
 			foreach( $this->_getNodeList( $manager->getTree( $id, array('text') ) ) as $item ) {
-				$this->_addItem( $langid, $item, $contentItem );
+				$this->_addItem( $contentItem, $item, $langid );
 			}
 		}
 	}
@@ -227,11 +230,11 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	/**
 	 * Adds all texts belonging to an catalog item.
 	 *
-	 * @param string $langid Language id
-	 * @param MShop_Product_Item_Interface $item product item object
 	 * @param MW_Container_Content_Interface $contentItem Content item
+	 * @param MShop_Product_Item_Interface $item product item object
+	 * @param string $langid Language id
 	 */
-	protected function _addItem( $langid, MShop_Catalog_Item_Interface $item, MW_Container_Content_Interface $contentItem )
+	protected function _addItem( MW_Container_Content_Interface $contentItem, MShop_Catalog_Item_Interface $item, $langid )
 	{
 		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {

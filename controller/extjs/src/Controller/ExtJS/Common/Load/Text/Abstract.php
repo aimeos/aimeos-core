@@ -327,11 +327,11 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 
 	/**
-	 * Removes temporary directory and files.
+	 * Removes directory and its files.
 	 *
 	 * @param string $path Path to the directory
 	 */
-	protected function _removeTempFiles( $path )
+	protected function _removeDirectory( $path )
 	{
 		if( is_dir( $path ) )
 		{
@@ -388,18 +388,16 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 				$langId = $row[0];
 
 				$item = $textManager->createItem();
+
+				if( $textId != '' ) {
+					$item->setId( $textId );
+				}
+
 				$item->setLanguageId( ( $langId != '' ? $langId : null ) );
 				$item->setTypeId( $textTypeMap[ $textType ] );
 				$item->setDomain( $domain );
 				$item->setContent( $value );
-
 				$item->setStatus( 1 );
-
-				if( $textId != '' ) {
-					$item->setId( $textId );
-				} else {
-					$item->setId( null );
-				}
 
 				$textManager->saveItem( $item );
 				$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
@@ -415,17 +413,19 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 
 	/**
-	 * Inits container for storing export files.
+	 * Creates container for storing export files.
 	 *
 	 * @param string $resource Path to the file
+	 * @param string $container Extension of the container file
+	 * @param array $containerOptions Options for the container
 	 * @return MW_Container_Interface Container item
 	 */
-	protected function _initContainer( $resource, $container, $content )
+	protected function _createContainer( $resource, $container, $containerOptions )
 	{
-		if( $container === '.xls' ) {
-			return new MW_Container_PHPExcel( $resource, 'Excel5' );
+		if( $container === 'xls' ) {
+			return new MW_Container_PHPExcel( $resource, 'Excel5', $containerOptions );
 		}
 
-		return new MW_Container_Zip( $resource, $content );
+		return new MW_Container_Zip( $resource, 'CSV', $containerOptions );
 	}
 }

@@ -149,10 +149,10 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 	protected function _importFile( $path )
 	{
 		$config = $this->_getContext()->getConfig();
-		$fileExt = $config->get( 'controller/extjs/product/export/text/default/container', '.zip' );
-		$reader = $config->get( 'controller/extjs/product/export/text/default/contentReader', 'CSV' );
+		$fileExt = $config->get( 'controller/extjs/attribute/export/text/default/container', 'zip' );
+		$options = $config->get( 'controller/extjs/attribute/export/text/default/containerOptions', array() );
 
-		$container = $this->_initContainer( $path, $fileExt, $reader );
+		$container = $this->_createContainer( $path, $fileExt, $options );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'attribute' ) as $item ) {
@@ -161,9 +161,9 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 
 		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
 
-		foreach( $container as $language )
+		foreach( $container as $content )
 		{
-			$itemTextMap = $this->_importTextsFromContent( $language, $textTypeMap, 'attribute' );
+			$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'attribute' );
 			$this->_importReferences( $manager, $itemTextMap, 'attribute' );
 		}
 	}

@@ -129,9 +129,8 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends MW_Unittest_Tes
 	public function testExportXLSFile()
 	{
 		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/container', '.xls' );
-		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/contentReader', 'Excel5' );
-		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/contentExtension', '' );
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container', 'xls' );
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/contentExtension', '' );
 		$this->_object = new Controller_ExtJS_Attribute_Export_Text_Default( $this->_context );
 
 		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_context );

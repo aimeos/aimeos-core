@@ -127,8 +127,7 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 	public function testExportXLSFile()
 	{
 		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/container', '.xls' );
-		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/contentReader', 'Excel5' );
+		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/container', 'xls' );
 		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/contentExtension', '' );
 		$this->_object = new Controller_ExtJS_Product_Export_Text_Default( $this->_context );
 
@@ -155,8 +154,8 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$this->assertTrue( array_key_exists('file', $result) );
 
 		$file = substr($result['file'], 9, -14);
-		$this->assertTrue( file_exists( $file ) );
 
+		$this->assertTrue( file_exists( $file ) );
 
 		$inputFileType = PHPExcel_IOFactory::identify( $file );
 		$objReader = PHPExcel_IOFactory::createReader( $inputFileType );

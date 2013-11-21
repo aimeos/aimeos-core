@@ -69,7 +69,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 	}
 
 
-	public function testImportFile()
+	public function testImportFromCSVFile()
 	{
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
 
@@ -168,9 +168,8 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 	public function testImportFromXLSFile()
 	{
 		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/container', '.xls' );
-		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/contentReader', 'Excel5' );
-		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/contentExtension', '' );
+		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container', 'xls' );
+		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/contentExtension', '' );
 		$this->_object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->_context );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
