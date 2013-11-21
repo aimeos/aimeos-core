@@ -141,11 +141,11 @@ msgstr "Kontoinhaber"
 
 #. Direct debit service provider
 msgid "payment.directdebit.accountno"
-msgstr "Kontonummer"
+msgstr "IBAN (Kontonummer)"
 
 #. Direct debit service provider
 msgid "payment.directdebit.bankcode"
-msgstr "Bankleitzahl"
+msgstr "BIC (Bankleitzahl)"
 
 #. Direct debit service provider
 msgid "payment.directdebit.bankname"
