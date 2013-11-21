@@ -172,10 +172,14 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
 		$values[ 'RETURNURL' ] = $this->_getConfigValue( array( 'payment.url-success' ), '/' ) . '?orderid=' . $orderid;
 
+$values[ 'RETURNURL' ] = 'http://returnurl.com?orderid=1';
 echo 'apiendpoint: ' . $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ) . PHP_EOL;
 print_r( $values );
 
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
+		$urlQuery = '&' . http_build_query( $values, '', '&' );
+echo $urlQuery . PHP_EOL;
+
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'GET', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$params = array ( 'TOKEN' => $rvals['TOKEN'] );
@@ -208,8 +212,7 @@ print_r( $values );
 		$values['METHOD'] = 'GetTransactionDetails';
 		$values['TRANSACTIONID'] = $tid;
 
-		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -245,8 +248,7 @@ print_r( $values );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['AMT'] = $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts();
 
-		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -291,8 +293,7 @@ print_r( $values );
 		$values['TRANSACTIONID'] = $tid;
 		$values['INVOICEID'] = $order->getId();
 
-		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'REFUNDTRANSACTIONID' => $rvals['REFUNDTRANSACTIONID'] );
@@ -326,8 +327,7 @@ print_r( $values );
 		$values['METHOD'] = 'DoVoid';
 		$values['AUTHORIZATIONID'] = $tid;
 
-		$urlQuery = '&' . http_build_query( $values, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
@@ -364,8 +364,7 @@ print_r( $values );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
 
-		$urlQuery = urldecode( '&' . http_build_query( $values, '', '&' ) );
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'PAYERID' => $additional['PayerID'] );
@@ -420,19 +419,20 @@ print_r( $values );
 		$cid = ( isset( $rvals['CORRELATIONID'] ) ? $rvals['CORRELATIONID'] : '<none>' );
 
 		$logger = $this->_getContext()->getLogger();
-		$logger->log( $method . ' : orderID=' . $orderid . ', CORRELATIONID=' . $cid, MW_Logger_Abstract::INFO );
+		$logger->log( $method . ' : orderID=' . $orderid . ', CORRELATIONID=' . $cid, MW_Logger_Abstract::DEBUG );
 
 		if( $rvals['ACK'] !== 'Success' )
 		{
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
 				throw new MShop_Service_Exception( sprintf(
-						'Checking response from Paypal express payment server failed. Error "%1$s" occured for order ID "%2$s" (correlation ID: "%3$s"): %4$s',
-						$rvals['L_ERRORCODE0'], $orderid, $cid, $rvals['L_SHORTMESSAGE0'] ) );
+					'Error in Paypal express response (order ID: "%1$s", error: "%2$s", correlation ID: "%3$s"): %4$s',
+					$orderid, $rvals['L_ERRORCODE0'], $cid, $rvals['L_SHORTMESSAGE0']
+				) );
 			}
 
 			$str = $method . ' : orderID/token=' . $orderid . ', response=' . print_r( $rvals, true );
-			$logger->log( $str, MW_Logger_Abstract::NOTICE );
+			$logger->log( $str, MW_Logger_Abstract::DEBUG );
 		}
 
 		return $rvals;

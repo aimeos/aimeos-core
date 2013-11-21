@@ -134,6 +134,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		}
 		catch( Exception $e )
 		{
+echo 'exception: ' . $e->getMessage();
 			$view->paymentForm = new MShop_Common_Item_Helper_Form_Default( $confirmUrl, 'REDIRECT' );
 		}
 

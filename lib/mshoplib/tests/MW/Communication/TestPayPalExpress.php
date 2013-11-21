@@ -67,12 +67,9 @@ class MW_Communication_TestPayPalExpress implements MW_Communication_Interface
 			throw new MW_Communication_Exception( sprintf( 'No success message for unit tests was set' ) );
 		}
 
-		$params = array();
-		parse_str( $payload, $params );
-
 		foreach( $this->_rules['set'] as $key => $value )
 		{
-			if( $params[$key] != $value ) {
+			if( $payload[$key] != $value ) {
 				return $this->_rules['error'];
 			}
 		}
