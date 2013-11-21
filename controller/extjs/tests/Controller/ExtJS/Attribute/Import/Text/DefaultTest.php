@@ -161,8 +161,8 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 	public function testImportFromXLSFile()
 	{
 		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container', 'xls' );
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/contentExtension', '' );
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/format', 'xls' );
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/content/format', '' );
 		$this->_object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
 
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );

@@ -106,9 +106,10 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
 		$filename = $this->_exportAttributeData( $items, $lang, $tmpfolder );
+		$downloadFile = $config->get( 'controller/extjs/attribute/export/text/default/downloaddir', 'uploads' ) . DIRECTORY_SEPARATOR . basename( $filename );
 
 		return array(
-			'file' => '<a href="' . $filename . '">Download</a>',
+			'file' => '<a href="' . $downloadFile . '">Download</a>',
 		);
 	}
 
@@ -157,15 +158,12 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		}
 
 		$config = $this->_getContext()->getConfig();
-		$fileExt = $config->get( 'controller/extjs/attribute/export/text/default/container', 'zip' );
-		$contExt = $config->get( 'controller/extjs/attribute/export/text/default/contentExtension', 'csv' );
+		$fileExt = $config->get( 'controller/extjs/attribute/export/text/default/container/format', 'zip' );
+		$contExt = $config->get( 'controller/extjs/attribute/export/text/default/content/format', 'csv' );
 		$contExt = $contExt === '' ? '' : '.' . $contExt;
-		$options = $config->get( 'controller/extjs/attribute/export/text/default/containerOptions', array() );
-
 		$filename .= '.' . $fileExt;
-		$downloadFile = $config->get( 'controller/extjs/attribute/export/text/default/downloaddir', 'uploads' ) . DIRECTORY_SEPARATOR . basename( $filename );
 
-		$containerItem = $this->_createContainer( $filename, $fileExt, $options );
+		$containerItem = $this->_createContainer( $filename, 'attribute' );
 
 		$start = 0;
 
@@ -193,7 +191,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 
 		$containerItem->close();
 
-		return $downloadFile;
+		return $filename;
 	}
 
 

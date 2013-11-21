@@ -148,11 +148,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 	 */
 	protected function _importFile( $path )
 	{
-		$config = $this->_getContext()->getConfig();
-		$fileExt = $config->get( 'controller/extjs/catalog/export/text/default/container', 'zip' );
-		$options = $config->get( 'controller/extjs/catalog/export/text/default/containerOptions', array() );
-
-		$container = $this->_createContainer( $path, $fileExt, $options );
+		$container = $this->_createContainer( $path, 'catalog' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'catalog' ) as $item ) {
@@ -162,5 +158,29 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 		foreach( $container as $content ) {
 			$catalogTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'catalog' );
 		}
+	}
+
+
+	/**
+	 * Gets the id of the item.
+	 *
+	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.) for associating the list items
+	 * @param string $code Code or id of the item
+	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
+	 * @throws Controller_ExtJS_Exception If no item found
+	 */
+	protected function _getItemId( $manager, $code, $domain )
+	{
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', $domain . '.id', $code ) );
+		$search->setSortations( array( $search->sort( '+', $domain.'.id' ) ) );
+
+		$result = $manager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Controller_ExtJS_Exception('No catalog item found');
+		}
+
+		return $item->getId();
 	}
 }

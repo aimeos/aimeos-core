@@ -149,11 +149,7 @@ class Controller_ExtJS_Product_Import_Text_Default
 	 */
 	protected function _importFile( $path )
 	{
-		$config = $this->_getContext()->getConfig();
-		$fileExt = $config->get( 'controller/extjs/product/export/text/default/container', '.zip' );
-		$options = $config->get( 'controller/extjs/product/export/text/default/containerOptions', array() );
-
-		$container = $this->_createContainer( $path, $fileExt, $options );
+		$container = $this->_createContainer( $path, 'product' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'product' ) as $item ) {
