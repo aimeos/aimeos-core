@@ -159,12 +159,8 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 			$textTypeMap[ $item->getCode() ] = $item->getId();
 		}
 
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
-
-		foreach( $container as $content )
-		{
+		foreach( $container as $content ) {
 			$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'attribute' );
-			$this->_importReferences( $manager, $itemTextMap, 'attribute' );
 		}
 	}
 }

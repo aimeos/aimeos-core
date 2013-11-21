@@ -101,26 +101,11 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
 		}
 
-		if( mkdir( $tmpfolder, $perms, true ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $tmpfolder, $perms ) );
-		}
-
 		$this->_getContext()->getLogger()->log( sprintf( 'Create export directory for attribute IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
+		$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
-		try
-		{
-			$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
-
-			$filename = $this->_exportAttributeData( $items, $lang, $tmpfolder );
-		}
-		catch ( Exception $e )
-		{
-			$this->_removeDirectory( $tmpfolder );
-			throw $e;
-		}
-
-		$this->_removeDirectory( $tmpfolder );
+		$filename = $this->_exportAttributeData( $items, $lang, $tmpfolder );
 
 		return array(
 			'file' => '<a href="' . $filename . '">Download</a>',

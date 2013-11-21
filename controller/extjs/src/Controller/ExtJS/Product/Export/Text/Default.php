@@ -99,25 +99,11 @@ class Controller_ExtJS_Product_Export_Text_Default
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
 		}
 
-		if( mkdir( $tmpfolder, $perms, true ) === false ) {
-			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $tmpfolder, $perms ) );
-		}
-
 		$this->_getContext()->getLogger()->log( sprintf( 'Create export directory for product IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
-		try
-		{
-			$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
+		$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
 
-			$filename = $this->_exportProductData( $items, $lang, $tmpfolder );
-		}
-		catch ( Exception $e )
-		{
-			$this->_removeDirectory( $tmpfolder );
-			throw $e;
-		}
-
-		$this->_removeDirectory( $tmpfolder );
+		$filename = $this->_exportProductData( $items, $lang, $tmpfolder );
 
 		return array(
 			'file' => '<a href="'.$filename.'">Download</a>',

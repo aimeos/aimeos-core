@@ -122,90 +122,68 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 
 	/**
-	 * Associates the texts with the products.
+	 * Associates the texts with the items.
 	 *
 	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.) for associating the list items
-	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
+	 * @param string $code Code or id of the item
+	 * @param string $textId Id of the text item
+	 * @param string $listType List type of the item
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 */
-	protected function _importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
+	protected function _importReferences( MShop_Common_Manager_Interface $manager, MShop_Common_Manager_Interface $listManager, $code, $textId, $listType, $domain )
 	{
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', $domain . '.code', array_keys( $itemTextMap ) ) );
+
+		if( $domain === 'catalog' ) {
+			$search->setConditions( $search->compare( '==', $domain . '.id', $code ) );
+		} else {
+			$search->setConditions( $search->compare( '==', $domain . '.code', $code ) );
+		}
+
 		$search->setSortations( array( $search->sort( '+', $domain.'.id' ) ) );
 
-		$start = 0;
-		$itemIdMap = $itemCodeMap = array();
+		$result = $manager->searchItems( $search );
 
-		do
-		{
-			$result = $manager->searchItems( $search );
-
-			foreach( $result as $item )
-			{
-				$itemIdMap[ $item->getId() ] = $item->getCode();
-				$itemCodeMap[ $item->getCode() ] = $item->getId();
-			}
-
-			$count = count( $result );
-			$start += $count;
-			$search->setSlice( $start );
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Controller_ExtJS_Exception('No item found');
 		}
-		while( $count > 0 );
 
-
-		$listManager = $manager->getSubManager( 'list' );
+		$itemId = $item->getId();
 
 		$search = $listManager->createSearch();
 		$expr = array(
-			$search->compare( '==', $domain . '.list.parentid', array_keys( $itemIdMap ) ),
+			$search->compare( '==', $domain . '.list.parentid', $itemId ),
+			$search->compare( '==', $domain . '.list.refid', $textId ),
 			$search->compare( '==', $domain . '.list.domain', 'text' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
 
-		$start = 0;
+		$result = $listManager->searchItems( $search );
 
-		do
-		{
-			$result = $listManager->searchItems( $search );
-
-			foreach( $result as $item ) {
-				unset( $itemTextMap[ $itemIdMap[ $item->getParentId() ] ][ $item->getRefId() ] );
-			}
-
-			$count = count( $result );
-			$start += $count;
-			$search->setSlice( $start );
+		if( reset( $result ) !== false ) {
+			return;
 		}
-		while( $count > 0 );
-
 
 		$listTypes = $this->_getTextListTypes( $manager, $domain );
 
-		foreach( $itemTextMap as $itemCode => $textIds )
+		try
 		{
-			foreach( $textIds as $textId => $listType )
-			{
-				try
-				{
-					$iface = 'MShop_Common_Item_Type_Interface';
-					if( !isset( $listTypes[$listType] ) || ( $listTypes[$listType] instanceof $iface ) === false ) {
-						throw new Controller_ExtJS_Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
-					}
-
-					$item = $listManager->createItem();
-					$item->setParentId( $itemCodeMap[ $itemCode ] );
-					$item->setTypeId( $listTypes[$listType]->getId() );
-					$item->setDomain( 'text' );
-					$item->setRefId( $textId );
-
-					$listManager->saveItem( $item );
-				}
-				catch( Exception $e ) {
-					$this->_getContext()->getLogger()->log( 'text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
-				}
+			$iface = 'MShop_Common_Item_Type_Interface';
+			if( !isset( $listTypes[$listType] ) || ( $listTypes[$listType] instanceof $iface ) === false ) {
+				throw new Controller_ExtJS_Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
 			}
+
+			$item = $listManager->createItem();
+			$item->setParentId( $itemId );
+			$item->setTypeId( $listTypes[$listType]->getId() );
+			$item->setDomain( 'text' );
+			$item->setRefId( $textId );
+
+			$listManager->saveItem( $item );
+		}
+		catch( Exception $e ) {
+			$this->_getContext()->getLogger()->log( 'text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
 		}
 	}
 
@@ -327,35 +305,6 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 
 	/**
-	 * Removes directory and its files.
-	 *
-	 * @param string $path Path to the directory
-	 */
-	protected function _removeDirectory( $path )
-	{
-		if( is_dir( $path ) )
-		{
-			$handle = opendir( $path );
-
-			while ( $file = readdir( $handle ) )
-			{
-				if( $file !== '.' && $file !== '..' ) {
-					if( unlink( $path . DIRECTORY_SEPARATOR . $file ) === false ) {
-						throw new Exception( 'Unable to remove temp file' );
-					}
-				}
-			}
-
-			closedir( $handle );
-
-			if( rmdir( $path ) === false ) {
-				throw new Exception( 'Unable to remove export directory' );
-			}
-		}
-	}
-
-
-	/**
 	 * Imports a sheet of texts using the given text types.
 	 *
 	 * @param PHPExcel_Worksheet $sheet Sheet containing texts and associated data
@@ -366,7 +315,10 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	protected function _importTextsFromContent( MW_Container_Content_Interface $contentItem, array $textTypeMap, $domain )
 	{
 		$codeIdMap = array();
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_getContext() );
+		$context = $this->_getContext();
+		$textManager = MShop_Text_Manager_Factory::createManager( $context );
+		$manager = MShop_Factory::createManager( $context, $domain );
+		$listManager = $manager->getSubManager( 'list' );
 
 		foreach( $contentItem as $row )
 		{
@@ -400,7 +352,8 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 				$item->setStatus( 1 );
 
 				$textManager->saveItem( $item );
-				$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
+
+				$this->_importReferences( $manager, $listManager, $row[2], $item->getId(), $row[3], $domain );
 			}
 			catch( Exception $e )
 			{

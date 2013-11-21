@@ -160,12 +160,8 @@ class Controller_ExtJS_Product_Import_Text_Default
 			$textTypeMap[ $item->getCode() ] = $item->getId();
 		}
 
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
-
-		foreach( $container as $content )
-		{
+		foreach( $container as $content ) {
 			$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'product' );
-			$this->_importReferences( $manager, $itemTextMap, 'product' );
 		}
 	}
 }
