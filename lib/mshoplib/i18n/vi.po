@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 16:53+0100\n"
+"POT-Creation-Date: 2013-11-21 17:16+0100\n"
 "PO-Revision-Date: 2013-07-29 09:33+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias/language/vi/)\n"
@@ -698,7 +698,7 @@ msgstr ""
 
 #: src/MShop/Service/Provider/Payment/Abstract.php:96
 #, php-format
-msgid "The type of attribute with key \"%1$s\" must be \"%2$s\""
+msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
 msgstr ""
 
 #: src/MShop/Plugin/Provider/Order/Shipping.php:73

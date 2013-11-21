@@ -1,21 +1,25 @@
-# German translations for arcavias-core (HTML client).
-# Copyright (C) 2013
-# This file is distributed under the same license as the arcavias-core package.
-# Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
-#
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# cmann <c.mann@metaways.de>, 2013
+# cmann <c.mann@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2012-2013
+# nsendetzky <n.sendetzky@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 16:53+0100\n"
-"PO-Revision-Date: 2013-07-26 11:38+0000\n"
+"POT-Creation-Date: 2013-11-21 17:16+0100\n"
+"PO-Revision-Date: 2013-11-21 16:21+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
-"Language: German\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. / E-mail recipient with first name (%1$s) and last name (%2$s)
@@ -31,10 +35,14 @@ msgid_plural "%1$d articles"
 msgstr[0] "%1$d Artikel"
 msgstr[1] "%1$d Artikel"
 
-#. / Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
-#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
-#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language (%13$s),
-#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. language (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
+#. (%17$s)
 #: layouts/common/summary/address-body-default.html:38
 #: layouts/common/summary/address-body-default.html:92
 #: layouts/email/confirm/main-text-address-body-default.html:30
@@ -55,19 +63,7 @@ msgid ""
 "%15$s\n"
 "%16$s\n"
 "%17$s\n"
-msgstr ""
-"%1$s\n"
-"%2$s %3$s %4$s %5$s\n"
-"%6$s %7$s\n"
-"%8$s\n"
-"%9$s %10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s\n"
-"%14$s\n"
-"%15$s\n"
-"%16$s\n"
-"%17$s\n"
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: layouts/catalog/list/items-body-default.html:17
@@ -81,7 +77,8 @@ msgstr ""
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#. / Configurable product attribute name (%1$s) with price value (%2$s) and currency (%3$s)
+#. / Configurable product attribute name (%1$s) with price value (%2$s) and
+#. currency (%3$s)
 #: layouts/catalog/detail/basket-attribute-body-default.html:32
 #, php-format
 msgid "%1$s ( +%2$s%3$s )"
@@ -100,7 +97,8 @@ msgstr "%1$s am %2$s"
 msgid "%1$s%%"
 msgstr "%1$s%%"
 
-#. / Service fee value (%1$s) and shipping cost value (%2$s) with currency (%3$s)
+#. / Service fee value (%1$s) and shipping cost value (%2$s) with currency
+#. (%3$s)
 #: layouts/checkout/standard/payment-body-default.html:52
 #: layouts/checkout/standard/delivery-body-default.html:52
 #, php-format
@@ -145,10 +143,7 @@ msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards.\n"
-msgstr ""
-"Alle Lieferungen erfolgen gemäß unseren AGBs, die Sie auf unserer Website einsehen können und die Sie bei der Auftragserteilung akzeptiert haben.\n"
-"\n"
-"Diese E-Mail enthält vertrauliche Information und darf ausschließlich von der angesprochenen Person verwendet werden. Sollten Sie nicht diese Person sein, antworten Sie bitte auf diese E-Mail und löschen Sie diese anschließend.\n"
+msgstr "Alle Lieferungen erfolgen gemäß unseren AGBs, die Sie auf unserer Website einsehen können und die Sie bei der Auftragserteilung akzeptiert haben.\n\nDiese E-Mail enthält vertrauliche Information und darf ausschließlich von der angesprochenen Person verwendet werden. Sollten Sie nicht diese Person sein, antworten Sie bitte auf diese E-Mail und löschen Sie diese anschließend.\n"
 
 #: layouts/catalog/detail/basic-body-default.html:17
 msgid "Article no.:"
@@ -323,7 +318,11 @@ msgstr "Los"
 
 #: layouts/checkout/standard/summary-option-terms-body-default.html:26
 #, php-format
-msgid "I accept the <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">privacy policy</a>"
+msgid ""
+"I accept the <a href=\"%1$s\" target=\"_blank\" title=\"terms and "
+"conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a "
+"href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy "
+"policy\">privacy policy</a>"
 msgstr "Ich akzeptiere die <a href=\"%1$s\" target=\"_blank\" title=\"AGBs\" alt=\"AGBs\">AGBs</a> und die <a href=\"%2$s\" target=\"_blank\" title=\"Datenschutzrichtlinien\" alt=\"Datenschutzrichtlinien\">Datenschutzrichtlinien</a>"
 
 #: layouts/common/summary/detail-body-default.html:225
@@ -362,7 +361,7 @@ msgstr "Client-Name \"%1$s\" enthält unerlaubte Zeichen"
 #: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:142
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
-msgstr ""
+msgstr "Ungültige Antwort auf die Prozessanfrage vom Serviceanbieter mit dem Code \"%1$s\""
 
 #: layouts/checkout/standard/address-delivery-body-default.html:162
 #: layouts/checkout/standard/address-billing-body-default.html:158
@@ -386,7 +385,9 @@ msgstr "Weiter"
 
 #: layouts/catalog/list/head-body-default.html:35
 #, php-format
-msgid "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please try again with a different keyword."
+msgid ""
+"No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
+"try again with a different keyword."
 msgstr "Ihre Suche nach <span class=\"searchstring\">\"%1$s\"</span> ergab leider keine Treffer. Bitte versuchen sie es erneut mit einem anderen Suchbegriff."
 
 #: src/Client/Html/Abstract.php:50
@@ -503,7 +504,9 @@ msgstr "Anrede"
 #: layouts/catalog/list/head-body-default.html:32
 #, php-format
 msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d article)"
-msgid_plural "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d articles)"
+msgid_plural ""
+"Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
+"articles)"
 msgstr[0] "Ihr Suchergebnis für <span class=\"searchstring\">\"%1$s\"</span> (%2$d Artikel)"
 msgstr[1] "Ihr Suchergebnis für <span class=\"searchstring\">\"%1$s\"</span> (%2$d Artikel)"
 
@@ -546,13 +549,15 @@ msgstr "Sortierung:"
 msgid "State"
 msgstr "Bundesland"
 
-#. / Stock string composition with warehouse name (%1$s, normally left out) and stock level string (%2$s)
+#. / Stock string composition with warehouse name (%1$s, normally left out)
+#. and stock level string (%2$s)
 #: layouts/catalog/stock/body-default.html:18
 #, php-format
 msgid "Stock: %1$s, %2$s"
 msgstr "%2$s %1$s"
 
-#. / Stock string composition with warehouse name (%1$s, normally left out), stock level string (%2$s) and back in stock date (%3$s)
+#. / Stock string composition with warehouse name (%1$s, normally left out),
+#. stock level string (%2$s) and back in stock date (%3$s)
 #: layouts/catalog/stock/body-default.html:20
 #, php-format
 msgid "Stock: %1$s, %2$s, back on %3$s"
@@ -596,7 +601,9 @@ msgstr "Vielen Dank für Ihre Bestellung"
 #: layouts/email/confirm/main-html-head-body-default.html:40
 #: layouts/email/confirm/main-text-head-body-default.html:38
 #, php-format
-msgid "Thank you for your order on %2$s. The ID of your order is %1$s and contains the following details:"
+msgid ""
+"Thank you for your order on %2$s. The ID of your order is %1$s and contains "
+"the following details:"
 msgstr "Vielen Dank für Ihre Bestellung am %2$s. Ihre Bestellnummer ist %1$s und beinhaltet folgende Positionen:"
 
 #: layouts/common/summary/detail-body-default.html:209
@@ -627,7 +634,8 @@ msgstr "Webseite"
 msgid "X"
 msgstr "X"
 
-#. / Date format (Y=year, m=month, d=day, see http://www.php.net/manual/en/function.date.php for more options)
+#. / Date format (Y=year, m=month, d=day, see
+#. http://www.php.net/manual/en/function.date.php for more options)
 #: layouts/account/history/list-body-default.html:14
 #: layouts/catalog/stock/body-default.html:23
 #: layouts/email/confirm/main-html-head-body-default.html:42

@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # doleiynyk <doleiynyk@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-27 13:26+0200\n"
+"POT-Creation-Date: 2013-11-21 17:16+0100\n"
 "PO-Revision-Date: 2013-11-20 12:31+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias/language/ru/)\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/Controller/Frontend/Basket/Default.php:402
@@ -44,9 +44,9 @@ msgstr "Деталь корзины на позиции \"%1$d\" не может
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Класс \"%1$s\" не имплементирует интрефейс \"%2$s\""
 
-#: src/Controller/Frontend/Factory.php:60
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
 #: src/Controller/Frontend/Common/Factory/Abstract.php:137
+#: src/Controller/Frontend/Factory.php:60
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Класс \"%1$s\" не доступен"
@@ -66,10 +66,10 @@ msgstr "Неправельные \"%1$s\" ссылки для продукта �
 msgid "Invalid address properties, please check your input"
 msgstr "Неверные свойства адреса, пожалуйста проверьте ваш ввод"
 
+#: src/Controller/Frontend/Service/Factory.php:29
 #: src/Controller/Frontend/Basket/Factory.php:30
 #: src/Controller/Frontend/Common/Factory/Abstract.php:54
 #: src/Controller/Frontend/Catalog/Factory.php:30
-#: src/Controller/Frontend/Service/Factory.php:29
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Недопустимые знаки в имени класса \"%1$s\""

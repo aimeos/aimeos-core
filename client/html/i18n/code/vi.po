@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# 
+#
+#
 # Translators:
 # Translators:
 # Translators:
@@ -14,14 +14,26 @@ msgstr ""
 "PO-Revision-Date: 2013-11-19 16:51+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias/language/vi/)\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Product attribute
+msgid "color"
+msgstr ""
 
 #. Address salutation
 msgid "company"
+msgstr ""
+
+#. Product attribute
+msgid "length"
+msgstr ""
+
+#. Address salutation
+msgid "miss"
 msgstr ""
 
 #. Address salutation
@@ -32,24 +44,8 @@ msgstr ""
 msgid "mrs"
 msgstr ""
 
-#. Address salutation
-msgid "miss"
-msgstr ""
-
-#. Product attribute
-msgid "size"
-msgstr ""
-
-#. Product attribute
-msgid "length"
-msgstr ""
-
-#. Product attribute
-msgid "width"
-msgstr ""
-
-#. Product attribute
-msgid "color"
+#. Order type value
+msgid "order:phone"
 msgstr ""
 
 #. Order type value
@@ -58,10 +54,6 @@ msgstr ""
 
 #. Order type value
 msgid "order:web"
-msgstr ""
-
-#. Order type value
-msgid "order:phone"
 msgstr ""
 
 #. Payment status value
@@ -94,6 +86,26 @@ msgstr ""
 
 #. Payment status value
 msgid "pay:6"
+msgstr ""
+
+#. Direct debit service provider
+msgid "payment.directdebit.accountno"
+msgstr ""
+
+#. Direct debit service provider
+msgid "payment.directdebit.accountowner"
+msgstr ""
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankcode"
+msgstr ""
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankname"
+msgstr ""
+
+#. Product attribute
+msgid "size"
 msgstr ""
 
 #. Delivery status value
@@ -132,26 +144,6 @@ msgstr ""
 msgid "stat:7"
 msgstr ""
 
-#. Direct debit service provider
-msgid "payment.directdebit.accountowner"
-msgstr ""
-
-#. Direct debit service provider
-msgid "payment.directdebit.accountno"
-msgstr ""
-
-#. Direct debit service provider
-msgid "payment.directdebit.bankcode"
-msgstr ""
-
-#. Direct debit service provider
-msgid "payment.directdebit.bankname"
-msgstr ""
-
-#. Stock level
-msgid "stock-unlimited"
-msgstr ""
-
 #. Stock level
 msgid "stock-high"
 msgstr ""
@@ -164,6 +156,14 @@ msgstr ""
 msgid "stock-out"
 msgstr ""
 
+#. Stock level
+msgid "stock-unlimited"
+msgstr ""
+
 #. Warehouse code
 msgid "warehouse:default"
+msgstr ""
+
+#. Product attribute
+msgid "width"
 msgstr ""
