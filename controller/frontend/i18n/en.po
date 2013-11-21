@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-25 13:22+0200\n"
+"POT-Creation-Date: 2013-11-20 16:53+0100\n"
 "PO-Revision-Date: 2013-04-16 15:57+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -43,9 +43,9 @@ msgstr ""
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Factory.php:60
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
 #: src/Controller/Frontend/Common/Factory/Abstract.php:137
+#: src/Controller/Frontend/Factory.php:60
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
@@ -65,10 +65,10 @@ msgstr ""
 msgid "Invalid address properties, please check your input"
 msgstr ""
 
+#: src/Controller/Frontend/Service/Factory.php:29
 #: src/Controller/Frontend/Basket/Factory.php:30
 #: src/Controller/Frontend/Common/Factory/Abstract.php:54
 #: src/Controller/Frontend/Catalog/Factory.php:30
-#: src/Controller/Frontend/Service/Factory.php:29
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""

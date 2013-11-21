@@ -1,38 +1,31 @@
-# German translations for arcavias-core (HTML client codes).
-# Copyright (C) 2013
-# This file is distributed under the same license as the arcavias-core package.
-# Norbert Sendetzky <n.sendetzky@metaways.de>, 2013.
-#
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# nsendetzky <n.sendetzky@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-07-11 13:47+0000\n"
+"PO-Revision-Date: 2013-11-19 16:51+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
-"Language: German\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. Product attribute
-msgid "color"
-msgstr "Farbe"
 
 #. Address salutation
 msgid "company"
 msgstr "Firma"
-
-#. Product attribute
-msgid "length"
-msgstr "Länge"
-
-#. Address salutation
-msgid "miss"
-msgstr "Fräulein"
 
 #. Address salutation
 msgid "mr"
@@ -42,9 +35,25 @@ msgstr "Herr"
 msgid "mrs"
 msgstr "Frau"
 
-#. Order type value
-msgid "order:phone"
-msgstr "Telefon"
+#. Address salutation
+msgid "miss"
+msgstr "Fräulein"
+
+#. Product attribute
+msgid "size"
+msgstr "Größe"
+
+#. Product attribute
+msgid "length"
+msgstr "Länge"
+
+#. Product attribute
+msgid "width"
+msgstr "Weite"
+
+#. Product attribute
+msgid "color"
+msgstr "Farbe"
 
 #. Order type value
 msgid "order:repeat"
@@ -53,6 +62,10 @@ msgstr "wiederholt"
 #. Order type value
 msgid "order:web"
 msgstr "Internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "Telefon"
 
 #. Payment status value
 msgid "pay:-1"
@@ -85,26 +98,6 @@ msgstr "Authorisiert"
 #. Payment status value
 msgid "pay:6"
 msgstr "Erhalten"
-
-#. Direct debit service provider
-msgid "payment.directdebit.accountno"
-msgstr "Kontonummer"
-
-#. Direct debit service provider
-msgid "payment.directdebit.accountowner"
-msgstr "Kontoinhaber"
-
-#. Direct debit service provider
-msgid "payment.directdebit.bankcode"
-msgstr "Bankleitzahl"
-
-#. Direct debit service provider
-msgid "payment.directdebit.bankname"
-msgstr "Name der Bank"
-
-#. Product attribute
-msgid "size"
-msgstr "Größe"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -142,6 +135,26 @@ msgstr "Annahme verweigert"
 msgid "stat:7"
 msgstr "Zurück gesendet"
 
+#. Direct debit service provider
+msgid "payment.directdebit.accountowner"
+msgstr "Kontoinhaber"
+
+#. Direct debit service provider
+msgid "payment.directdebit.accountno"
+msgstr "Kontonummer"
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankcode"
+msgstr "Bankleitzahl"
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankname"
+msgstr "Name der Bank"
+
+#. Stock level
+msgid "stock-unlimited"
+msgstr "verfügbar"
+
 #. Stock level
 msgid "stock-high"
 msgstr "auf Lager"
@@ -154,14 +167,6 @@ msgstr "nur noch wenige vorrätig"
 msgid "stock-out"
 msgstr "ausverkauft"
 
-#. Stock level
-msgid "stock-unlimited"
-msgstr "verfügbar"
-
 #. Warehouse code
 msgid "warehouse:default"
 msgstr " "
-
-#. Product attribute
-msgid "width"
-msgstr "Weite"
