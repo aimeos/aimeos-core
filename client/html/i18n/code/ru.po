@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# doleiynyk <doleiynyk@metaways.de>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2013-11-19 16:51+0000\n"
+"Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/arcavias/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Компания"
+
+#. Address salutation
+msgid "mr"
+msgstr "Господин"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Госпожа"
+
+#. Address salutation
+msgid "miss"
+msgstr ""
+
+#. Product attribute
+msgid "size"
+msgstr "Размер"
+
+#. Product attribute
+msgid "length"
+msgstr "Длина"
+
+#. Product attribute
+msgid "width"
+msgstr "Ширина"
+
+#. Product attribute
+msgid "color"
+msgstr "Цвет"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "повторный"
+
+#. Order type value
+msgid "order:web"
+msgstr "интернет"
+
+#. Order type value
+msgid "order:phone"
+msgstr "телефон"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "незакончен"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "удаолен"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "отменен"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "отклонен"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "возмещен"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "ожидаемый"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "авторизирован"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "получен"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "незакончен"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "удален"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "ожидаемый"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "в прогрессе"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "отправлен"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "получен"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "потерян"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "отклонен"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "возращен"
+
+#. Direct debit service provider
+msgid "payment.directdebit.accountowner"
+msgstr "Владелец счета"
+
+#. Direct debit service provider
+msgid "payment.directdebit.accountno"
+msgstr "Номер счета"
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankcode"
+msgstr "Код банка"
+
+#. Direct debit service provider
+msgid "payment.directdebit.bankname"
+msgstr "Имя банка"
+
+#. Stock level
+msgid "stock-unlimited"
+msgstr "в запасе"
+
+#. Stock level
+msgid "stock-high"
+msgstr "в запасе"
+
+#. Stock level
+msgid "stock-low"
+msgstr "доступно малое количество"
+
+#. Stock level
+msgid "stock-out"
+msgstr "закончился"
+
+#. Warehouse code
+msgid "warehouse:default"
+msgstr "склад:стандартный"
