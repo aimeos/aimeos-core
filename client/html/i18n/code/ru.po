@@ -6,31 +6,32 @@
 # Translators:
 # Translators:
 # Translators:
+# doleiynyk <doleiynyk@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2013-11-19 16:51+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias/language/vi/)\n"
-"Language: vi\n"
+"Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/arcavias/language/ru/)\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. Product attribute
 msgid "color"
-msgstr ""
+msgstr "Цвет"
 
 #. Address salutation
 msgid "company"
-msgstr ""
+msgstr "Компания"
 
 #. Product attribute
 msgid "length"
-msgstr ""
+msgstr "Длина"
 
 #. Address salutation
 msgid "miss"
@@ -38,132 +39,132 @@ msgstr ""
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "Господин"
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "Госпожа"
 
 #. Order type value
 msgid "order:phone"
-msgstr ""
+msgstr "телефон"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "повторный"
 
 #. Order type value
 msgid "order:web"
-msgstr ""
+msgstr "интернет"
 
 #. Payment status value
 msgid "pay:-1"
-msgstr ""
+msgstr "незакончен"
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "удаолен"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "отменен"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "отклонен"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "возмещен"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "ожидаемый"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "авторизирован"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "получен"
 
 #. Direct debit service provider
 msgid "payment.directdebit.accountno"
-msgstr ""
+msgstr "Номер счета"
 
 #. Direct debit service provider
 msgid "payment.directdebit.accountowner"
-msgstr ""
+msgstr "Владелец счета"
 
 #. Direct debit service provider
 msgid "payment.directdebit.bankcode"
-msgstr ""
+msgstr "Код банка"
 
 #. Direct debit service provider
 msgid "payment.directdebit.bankname"
-msgstr ""
+msgstr "Имя банка"
 
 #. Product attribute
 msgid "size"
-msgstr ""
+msgstr "Размер"
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr ""
+msgstr "незакончен"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "удален"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "ожидаемый"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "в прогрессе"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "отправлен"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "получен"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "потерян"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "отклонен"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "возращен"
 
 #. Stock level
 msgid "stock-high"
-msgstr ""
+msgstr "в запасе"
 
 #. Stock level
 msgid "stock-low"
-msgstr ""
+msgstr "доступно малое количество"
 
 #. Stock level
 msgid "stock-out"
-msgstr ""
+msgstr "закончился"
 
 #. Stock level
 msgid "stock-unlimited"
-msgstr ""
+msgstr "в запасе"
 
 #. Warehouse code
 msgid "warehouse:default"
-msgstr ""
+msgstr "склад:стандартный"
 
 #. Product attribute
 msgid "width"
-msgstr ""
+msgstr "Ширина"

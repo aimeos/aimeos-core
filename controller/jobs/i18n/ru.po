@@ -1,49 +1,50 @@
-# English translations for arcavias-core (job controller).
-# Copyright (C) 2013
-# This file is distributed under the same license as the arcavias-core package.
-# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 #
-#
+# Translators:
+# doleiynyk <doleiynyk@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 16:53+0100\n"
-"PO-Revision-Date: 2013-09-24 16:22+0000\n"
+"POT-Creation-Date: 2013-11-21 17:16+0100\n"
+"PO-Revision-Date: 2013-11-01 12:56+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
-"Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
-"Language: English\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/arcavias/language/ru/)\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
 #: src/Controller/Jobs/Common/Factory/Abstract.php:147
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Класс \"%1$s\" не имплементирует интерфейс \"%2$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
 #: src/Controller/Jobs/Common/Factory/Abstract.php:141
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Класс \"%1$s\" не доступен"
 
 #: src/Controller/Jobs/Factory.php:58
-#, php-format
+#, fuzzy, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Класс \"%1$s\" не доступен"
 
 #: src/Controller/Jobs/Factory.php:41
 #, php-format
 msgid "Controller path is empty"
-msgstr ""
+msgstr "Путь контролера пуст"
 
 #: src/Controller/Jobs/Order/Email/Confirm/Default.php:137
 #, php-format
 msgid "Error while trying to send confirmation e-mail for order ID \"%1$s\": %2$s"
-msgstr ""
+msgstr "Ошибка при попытке отправить подтверждающий имейл для заказа с номером \"%1$s\": %2$s"
 
 #: src/Controller/Jobs/Order/Email/Confirm/Factory.php:38
 #: src/Controller/Jobs/Order/Product/Stock/Factory.php:38
@@ -54,44 +55,44 @@ msgstr ""
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:38
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Недопустимые знаки в имени класса \"%1$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:68
 #, php-format
 msgid "Invalid characters in job name \"%1$s\""
-msgstr ""
+msgstr "Недопустимые знаки в имени работы \"%1$s\""
 
 #: src/Controller/Jobs/Factory.php:49
-#, php-format
+#, fuzzy, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Недопустимые знаки в имени контролера \"%1$s\" в \"%2$s\""
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:88
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Неправильный домен \"%1$s\""
 
 #: src/Controller/Jobs/Factory.php:64
-#, php-format
+#, fuzzy, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Неправильный домен \"%1$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:74
 #, php-format
 msgid "Invalid job method \"%1$s\""
-msgstr ""
+msgstr "Неправильный метод работы \"%1$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:91
 #, php-format
 msgid "Method \"%1$s\" not available"
-msgstr ""
+msgstr "Метод \"%1$s\" не доступен"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
 #, php-format
 msgid "Unable to call factory method \"%1$s\""
-msgstr ""
+msgstr "Невозможно вызвать метод фабрики \"%1$s\""
 
 #: src/Controller/Jobs/Common/Decorator/Abstract.php:51
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Невозможно вызвать метод \"%1$s\""
