@@ -24,7 +24,9 @@ $enc = $this->encoder();
 	<nav>
 		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction ) ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
-			<button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
+			<noscript>
+				<button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
+			</noscript>
 		</form>
 	</nav>
 </section>

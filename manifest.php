@@ -17,7 +17,6 @@ return array(
 		'controller/extjs/src',
 		'controller/jobs/src',
 		'lib/mwlib/lib',
-		'lib/phpexcel',
 	),
 	'config' => array(
 		'mysql' => array(

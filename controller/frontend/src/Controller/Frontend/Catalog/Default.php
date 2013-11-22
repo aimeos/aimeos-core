@@ -47,9 +47,21 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
-	 * Returns a product filter for the given category ID.
+	 * Returns the aggregated count of products for the given key.
 	 *
-	 * @param integer $catid ID of the category to get the product list from
+	 * @param MW_Common_Criteria_Interface $filter Critera object which contains the filter conditions
+	 * @param string $key Search key to aggregate for, e.g. "catalog.index.attribute.id"
+	 * @return array Associative list of key values as key and the product count for this key as value
+	 */
+	public function aggregate( MW_Common_Criteria_Interface $filter, $key )
+	{
+		return MShop_Factory::createManager( $this->_getContext(), 'catalog/index' )->aggregate( $filter, $key );
+	}
+
+
+	/**
+	 * Returns the default product filter.
+	 *
 	 * @param string|null $sort Sortation of the product list like "name", "code", "price" and "position", null for no sortation
 	 * @param string $direction Sort direction of the product list ("+", "-")
 	 * @param integer $start Position in the list of found products where to begin retrieving the items
@@ -58,12 +70,12 @@ class Controller_Frontend_Catalog_Default
 	 * @param string $domain Text associated to the domain e.g. product, attribute
 	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
 	 */
-	public function createProductFilterByCategory( $catid, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
+	public function createProductFilterDefault( $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
 	{
 		$expr = $sortations = array();
-		$search = MShop_Factory::createManager( $this->_getContext(), 'catalog/index' )->createSearch( true );
+		$context = $this->_getContext();
 
-		$expr[] = $search->compare( '==', 'catalog.index.catalog.id', $catid );
+		$search = MShop_Factory::createManager( $context, 'catalog/index' )->createSearch( true );
 
 		switch( $sort )
 		{
@@ -72,7 +84,7 @@ class Controller_Frontend_Catalog_Default
 				break;
 
 			case 'name':
-				$langid = $this->_getContext()->getLocale()->getLanguageId();
+				$langid = $context->getLocale()->getLanguageId();
 
 				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name', 'product' ) );
 				$expr[] = $search->compare( '>=', $cmpfunc, '' );
@@ -90,7 +102,7 @@ class Controller_Frontend_Catalog_Default
 				break;
 
 			case 'price':
-				$currencyid = $this->_getContext()->getLocale()->getCurrencyId();
+				$currencyid = $context->getLocale()->getCurrencyId();
 
 				$cmpfunc = $search->createFunction( 'catalog.index.price.value', array( $listtype, $currencyid, 'default' ) );
 				$expr[] = $search->compare( '>=', $cmpfunc, '0.00' );
@@ -111,6 +123,39 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
+	 * Returns a product filter for the given category ID.
+	 *
+	 * @param integer $catid ID of the category to get the product list from
+	 * @param string|null $sort Sortation of the product list like "name", "code", "price" and "position", null for no sortation
+	 * @param string $direction Sort direction of the product list ("+", "-")
+	 * @param integer $start Position in the list of found products where to begin retrieving the items
+	 * @param integer $size Number of products that should be returned
+	 * @param string $listtype Type of the product list, e.g. default, promotion, etc.
+	 * @param string $domain Text associated to the domain e.g. product, attribute
+	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
+	 */
+	public function createProductFilterByCategory( $catid, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
+	{
+		$search = $this->createProductFilterDefault( $sort, $direction, $start, $size, $listtype );
+		$expr = array( $search->compare( '==', 'catalog.index.catalog.id', $catid ) );
+
+		if( $sort === 'position' )
+		{
+			$cmpfunc = $search->createFunction( 'catalog.index.catalog.position', array( $listtype, $catid ) );
+			$expr[] = $search->compare( '>=', $cmpfunc, 0 );
+
+			$sortfunc = $search->createFunction( 'sort:catalog.index.catalog.position', array( $listtype, $catid ) );
+			$search->setSortations( array( $search->sort( $direction, $sortfunc ) ) );
+		}
+
+		$expr[] = $search->getConditions();
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		return $search;
+	}
+
+
+	/**
 	 * Returns product filter for the given search string.
 	 *
 	 * @param string $input Search string entered by the user
@@ -124,51 +169,18 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function createProductFilterByText( $input, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
 	{
-		$locale = $this->_getContext()->getLocale();
-		$langid = $locale->getLanguageId();
-
-		$search = MShop_Factory::createManager( $this->_getContext(), 'catalog/index' )->createSearch( true );
-
+		$langid = $this->_getContext()->getLocale()->getLanguageId();
+		$search = $this->createProductFilterDefault( $sort, $direction, $start, $size, $listtype );
 		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
 
-		$sortations = array();
-
-		switch( $sort )
+		if( $sort === 'relevance' || $sort === 'position' )
 		{
-			case 'code':
-				$sortations[] = $search->sort( $direction, 'product.code' );
-				break;
-
-			case 'name':
-				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name', 'product' ) );
-				$expr[] = $search->compare( '>=', $cmpfunc, '' );
-
-				$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( $listtype, $langid, 'name' ) );
-				$sortations[] = $search->sort( $direction, $sortfunc );
-				break;
-
-			case 'price':
-				$currencyid = $locale->getCurrencyId();
-
-				$cmpfunc = $search->createFunction( 'catalog.index.price.value', array( $listtype, $currencyid, 'default' ) );
-				$expr[] = $search->compare( '>=', $cmpfunc, '0.00' );
-
-				$sortfunc = $search->createFunction( 'sort:catalog.index.price.value', array( $listtype, $currencyid, 'default' ) );
-				$sortations[] = $search->sort( $direction, $sortfunc );
-				break;
-
-			case 'position':
-			case 'relevance':
-				$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( $listtype, $langid, $input ) );
-				$sortations[] = $search->sort( ( $direction === '+' ? '-' : '+' ), $sortfunc );
-				break;
+			$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( $listtype, $langid, $input ) );
+			$search->setSortations( array( $search->sort( ( $direction === '+' ? '-' : '+' ), $sortfunc ) ) );
 		}
 
 		$expr[] = $search->getConditions();
-
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( $sortations );
-		$search->setSlice( $start, $size );
 
 		return $search;
 	}

@@ -184,6 +184,35 @@
 		<exec command="git push --tags" checkreturn="true" logoutput="true" />
 	</target>
 
+	<target name="releaseext" description="Creates new releases of the extensions">
+		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
+		<phing target="release">
+			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<include name="**/phing.xml" />
+			</fileset>
+		</phing>
+	</target>
+
+
+	<target name="createext" description="Creates new extension">
+		<propertyprompt propertyName="extname" promptText="Enter extension name (only A-Z, a-z, 0-9 and -)" promptCharacter=":" useExistingValue="true"/>
+		<copy todir="${coredir}/ext/${extname}" >
+			<fileset dir="${coredir}/misc/ext-template">
+				<include name="**" />
+			</fileset>
+		</copy>
+		<reflexive>
+		  <fileset dir="${coredir}/ext/${extname}">
+		  	<include name="**" />
+		  </fileset>
+		  <filterchain>
+		    <replaceregexp>
+		      <regexp pattern="&lt;extname&gt;" replace="${extname}"/>
+		    </replaceregexp>
+		  </filterchain>
+		</reflexive>
+	</target>
+
 
 	<target name="all" depends="setup,test,check" description="Executes all essential targets for testing" />
 

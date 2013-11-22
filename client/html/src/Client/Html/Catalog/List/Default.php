@@ -193,6 +193,11 @@ class Client_Html_Catalog_List_Default
 			$sortation = (string) $view->param( 'l-sort', 'relevance' );
 			$text = (string) $view->param( 'f-search-text' );
 			$catid = (string) $view->param( 'f-catalog-id' );
+			$attrids = $view->param( 'f-attr-id', array() );
+
+			if( is_string( $attrids ) ) {
+				$attrids = explode( ' ', $attrids );
+			}
 
 			if( $catid == '' ) {
 				$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
@@ -210,25 +215,41 @@ class Client_Html_Catalog_List_Default
 
 
 			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
-			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
 
 			if( $text !== '' )
 			{
 				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
-				$products = $controller->getProductList( $filter, $total, $domains );
 			}
 			else if( $catid !== '' )
 			{
 				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
+
+				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
 				$view->listCatPath = $catalogManager->getPath( $catid, array( 'text', 'media', 'attribute' ) );
 
 				$listCatPath = $view->get( 'listCatPath', array() );
 				if( ( $categoryItem = end( $listCatPath ) ) !== false ) {
 					$view->listCurrentCatItem = $categoryItem;
 				}
-
-				$products = $controller->getProductList( $filter, $total, $domains );
 			}
+			else
+			{
+				$filter = $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
+			}
+
+			if( !empty( $attrids ) )
+			{
+				$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( $attrids ) );
+
+				$expr = array(
+					$filter->getConditions(),
+					$filter->compare( '==', $func, count( $attrids ) ),
+				);
+
+				$filter->setConditions( $filter->combine( '&&', $expr ) );
+			}
+
+			$products = $controller->getProductList( $filter, $total, $domains );
 
 
 			if( !empty( $products ) && $config->get( 'client/html/catalog/list/stock/enable', true ) === true )

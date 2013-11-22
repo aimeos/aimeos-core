@@ -57,13 +57,13 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
 		$attrTypeManager = $attrManager->getSubManager( 'type' );
 
-		$attrTypeItem = $attrTypeManager->createItem();
-		$attrTypeItem->setDomain( 'product' );
-		$attrTypeItem->setCode( 'unitperf-size' );
-		$attrTypeItem->setLabel( 'Size' );
-		$attrTypeItem->setStatus( 1 );
+		$search = $attrTypeManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'size' ) );
+		$result = $attrTypeManager->searchItems( $search );
 
-		$attrTypeManager->saveItem( $attrTypeItem );
+		if( ( $attrTypeItem = reset( $result ) ) === false ) {
+			throw new Exception( 'No attribute type "size" found' );
+		}
 
 		$attrItem = $attrManager->createItem();
 		$attrItem->setTypeId( $attrTypeItem->getId() );
@@ -73,7 +73,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$pos = 0;
 		$attrList = array();
 
-		foreach( array( 's', 'm', 'l' ) as $size )
+		foreach( array( 'small', 'medium', 'large' ) as $size )
 		{
 			$attrItem->setId( null );
 			$attrItem->setCode( $size );

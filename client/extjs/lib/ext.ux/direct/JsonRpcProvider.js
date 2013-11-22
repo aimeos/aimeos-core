@@ -102,6 +102,13 @@ Ext.ux.direct.JsonRpcProvider = Ext.extend(Ext.direct.RemotingProvider, {
         
         xhr.responseText = [];
         Ext.each(rs, function(rpcresponse, i) {
+            if(rpcresponse == undefined) {
+            	rpcresponse = [];
+            	rpcresponse.result = false;
+            	rpcresponse.id = -1;
+            	rpcresponse.error = 'The operation timed out';
+            }
+            
             xhr.responseText[i] = {
                 type: rpcresponse.result ? 'rpc' : 'exception',
                 result: rpcresponse.result,

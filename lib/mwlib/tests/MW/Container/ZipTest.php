@@ -32,40 +32,41 @@ class MW_Container_ZipTest extends MW_Unittest_Testcase
 
 	public function testNewFile()
 	{
-		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile.zip';
+		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile';
 
 		$zip = new MW_Container_Zip( $filename, 'CSV' );
-		$zip->add( $zip->create( 'test.txt' ) );
+		$zip->add( $zip->create( 'test' ) );
 		$zip->close();
 
-		$check = file_exists( $filename );
-		unlink( $filename );
+		$check = file_exists( $zip->getName() );
+		unlink( $zip->getName() );
 
-		$this->assertEquals( true, $check );
-		$this->assertEquals( false, file_exists( $filename ) );
+		$this->assertTrue( $check );
+		$this->assertEquals( '.zip', substr( $zip->getName(), -4 ) );
+		$this->assertFalse( file_exists( $zip->getName() ) );
 	}
 
 
 	public function testAdd()
 	{
-		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile.zip';
+		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile';
 
 		$zip = new MW_Container_Zip( $filename, 'CSV' );
 
-		$content = $zip->create( 'test.txt' );
+		$content = $zip->create( 'test' );
 		$content->add( array( 'test', 'file', 'data' ) );
 
 		$zip->add( $content );
 		$zip->close();
 
 		$za = new ZipArchive();
-		$za->open( $filename );
-		$actual = $za->getFromName( 'test.txt' );
+		$za->open( $zip->getName() );
+		$actual = $za->getFromName( $content->getName() );
 		$za->close();
 
 		$expected = '"test","file","data"' . PHP_EOL;
 
-		unlink( $filename );
+		unlink( $zip->getName() );
 
 		$this->assertEquals( $expected, $actual );
 	}
@@ -73,16 +74,28 @@ class MW_Container_ZipTest extends MW_Unittest_Testcase
 
 	public function testIterator()
 	{
-		$zip = new MW_Container_Zip( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.zip', 'CSV' );
+		$zip = new MW_Container_Zip( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
 
 		$expected = array(
-			'tempfile.csv',
-			'testfile.csv',
+			'tempfile.csv' => 2,
+			'testfile.csv' => 2,
 		);
 
 		$actual = array();
-		foreach( $zip as $entry ) {
-			$actual[] = $entry->getName();
+		foreach( $zip as $entry )
+		{
+			$rows = array();
+			foreach( $entry as $row ) {
+				$rows[] = $row;
+			}
+
+			// test if rewind or reopen works
+			$rows = array();
+			foreach( $entry as $row ) {
+				$rows[] = $row;
+			}
+
+			$actual[ $entry->getName() ] = count( $rows );
 		}
 
 		$this->assertEquals( $expected, $actual );

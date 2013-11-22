@@ -40,11 +40,11 @@ class MW_Container_Content_CSV
 	 */
 	public function __construct( $resource, $name, array $options = array() )
 	{
-		parent::__construct( $resource, $name, $options );
-
 		if( !is_resource( $resource ) )
 		{
-			if( ( $this->_fh = fopen( $resource, 'a+' ) ) === false ) {
+			if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
+				&& ( $this->_fh = fopen( $resource, 'r' ) ) === false
+			) {
 				throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 			}
 		}
@@ -52,6 +52,12 @@ class MW_Container_Content_CSV
 		{
 			$this->_fh = $resource;
 		}
+
+		if( substr( $name, -4 ) !== '.csv' ) {
+			$name .= '.csv';
+		}
+
+		parent::__construct( $resource, $name, $options );
 
 		$this->_separator = $this->_getOption( 'csv-separator', ',' );
 		$this->_enclosure = $this->_getOption( 'csv-enclosure', '"' );
@@ -133,8 +139,13 @@ class MW_Container_Content_CSV
 	 */
 	function rewind()
 	{
-		if( rewind( $this->_fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to rewind file "%1$s"', $this->_resource ) );
+		if( @rewind( $this->_fh ) === false )
+		{
+			fclose( $this->_fh );
+
+			if( ( $this->_fh = fopen( $this->getResource(), 'r' ) ) === false ) {
+				throw new MW_Container_Exception( sprintf( 'Unable to rewind %1$s', $this->_fh ) );
+			}
 		}
 
 		$this->_position = 0;
