@@ -111,7 +111,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.grid.on('rowcontextmenu', this.onGridContextMenu, this);
 		this.grid.on('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
 		this.grid.getSelectionModel().on('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
-
+		
 		MShop.panel.AbstractListUi.superclass.initComponent.apply(this, arguments);
 
 		Ext.apply(this.grid, {
@@ -355,10 +355,15 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	},
 
 	onStoreException: function(proxy, type, action, options, response) {
-		var title = _('Error');
-		var msg = response && response.error ? response.error.message : _('No error information available');
-		var code = response && response.error ? response.error.code : 0;
-
+		var title = _( 'Error' );
+		
+		if( response.error !== undefined ) {
+			var msg = response && response.error ? response.error.message : _( 'No error information available' );
+			var code = response && response.error ? response.error.code : 0;
+		} else {
+			var msg = response && response.xhr.responseText[0].error ? response.xhr.responseText[0].error : _( 'No error information available' );
+			var code = response && response.xhr.responseText[0].tid ? response.xhr.responseText[0].tid : 0;
+		}
 		Ext.Msg.alert([title, ' (', code, ')'].join(''), msg);
 	},
 

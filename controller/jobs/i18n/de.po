@@ -1,21 +1,22 @@
-# German translations for arcavias-core (job controller).
-# Copyright (C) 2013
-# This file is distributed under the same license as the arcavias-core package.
-# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013.
-#
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# dhoffmann <d.hoffmann@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-27 13:26+0200\n"
-"PO-Revision-Date: 2013-09-24 16:22+0000\n"
+"POT-Creation-Date: 2013-11-21 17:16+0100\n"
+"PO-Revision-Date: 2013-11-21 16:23+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
-"Language: German\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
@@ -27,12 +28,16 @@ msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 #: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
 #: src/Controller/Jobs/Common/Factory/Abstract.php:141
-#: src/Controller/Jobs/Factory.php:61
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Klasse \"%1$s\" nicht verfügbar"
 
-#: src/Controller/Jobs/Factory.php:42
+#: src/Controller/Jobs/Factory.php:58
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "Die Klasse \"%1$s\" ist unbekannt"
+
+#: src/Controller/Jobs/Factory.php:41
 #, php-format
 msgid "Controller path is empty"
 msgstr "Controllerpfad ist leer"
@@ -45,28 +50,33 @@ msgstr "Fehler beim Versand der Bestätigungs-E-Mail für Bestellung \"%1$s\": %
 #: src/Controller/Jobs/Order/Email/Confirm/Factory.php:38
 #: src/Controller/Jobs/Order/Product/Stock/Factory.php:38
 #: src/Controller/Jobs/Admin/Job/Factory.php:38
-#: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Service/Delivery/Process/Factory.php:38
-#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:38
+#: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:38
+#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:38
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
-
-#: src/Controller/Jobs/Factory.php:52
-#, php-format
-msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
-msgstr "Controllername \"%1$s\" in \"%2$s\" enthält unerlaubte Zeichen"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:68
 #, php-format
 msgid "Invalid characters in job name \"%1$s\""
 msgstr "Jobname \"%1$s\" enthält unerlaubte Zeichen"
 
+#: src/Controller/Jobs/Factory.php:49
+#, php-format
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr "Ungültiger Name \"%1$s\" des Controllers in \"%2$s\""
+
 #: src/Controller/Jobs/Common/Factory/Abstract.php:88
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr "Ungültige Domäne \"%1$s\""
+
+#: src/Controller/Jobs/Factory.php:64
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "Ungültige Factory \"%1$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:74
 #, php-format
@@ -79,7 +89,6 @@ msgid "Method \"%1$s\" not available"
 msgstr "Methode \"%1$s\" nicht verfügbar"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
-#: src/Controller/Jobs/Factory.php:67
 #, php-format
 msgid "Unable to call factory method \"%1$s\""
 msgstr "Factorymethode \"%1$s\" kann nicht aufgerufen werden"
