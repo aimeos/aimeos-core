@@ -190,7 +190,7 @@ class Client_Html_Catalog_List_Default
 
 			$page = (int) $view->param( 'l-page', 1 );
 			$size = (int) $view->param( 'l-size', $defaultPageSize );
-			$sortation = (string) $view->param( 'l-sort', 'position' );
+			$sortation = (string) $view->param( 'l-sort', 'relevance' );
 			$text = (string) $view->param( 'f-search-text' );
 			$catid = (string) $view->param( 'f-catalog-id' );
 
@@ -200,7 +200,7 @@ class Client_Html_Catalog_List_Default
 
 			$page = ( $page < 1 ? 1 : $page );
 			$size = ( $size < 1 || $size > 100 ? $defaultPageSize : $size );
-			$sortation = ( strlen( $sortation ) === 0 ? $sortation = 'position' : $sortation );
+			$sortation = ( strlen( $sortation ) === 0 ? $sortation = 'relevance' : $sortation );
 
 
 			$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
