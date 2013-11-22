@@ -40,8 +40,6 @@ class MW_Container_Content_CSV
 	 */
 	public function __construct( $resource, $name, array $options = array() )
 	{
-		parent::__construct( $resource, $name, $options );
-
 		if( !is_resource( $resource ) )
 		{
 			if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
@@ -54,6 +52,12 @@ class MW_Container_Content_CSV
 		{
 			$this->_fh = $resource;
 		}
+
+		if( substr( $name, -4 ) !== '.csv' ) {
+			$name .= '.csv';
+		}
+
+		parent::__construct( $resource, $name, $options );
 
 		$this->_separator = $this->_getOption( 'csv-separator', ',' );
 		$this->_enclosure = $this->_getOption( 'csv-enclosure', '"' );
