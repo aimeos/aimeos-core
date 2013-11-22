@@ -93,14 +93,6 @@ class Controller_Frontend_Catalog_Default
 				$sortations[] = $search->sort( $direction, $sortfunc );
 				break;
 
-			case 'relevance':
-				$cmpfunc = $search->createFunction( 'catalog.index.catalog.position', array( $listtype, $catid ) );
-				$expr[] = $search->compare( '>=', $cmpfunc, 0 );
-
-				$sortfunc = $search->createFunction( 'sort:catalog.index.catalog.position', array( $listtype, $catid ) );
-				$sortations[] = $search->sort( $direction, $sortfunc );
-				break;
-
 			case 'price':
 				$currencyid = $context->getLocale()->getCurrencyId();
 
@@ -139,7 +131,7 @@ class Controller_Frontend_Catalog_Default
 		$search = $this->createProductFilterDefault( $sort, $direction, $start, $size, $listtype );
 		$expr = array( $search->compare( '==', 'catalog.index.catalog.id', $catid ) );
 
-		if( $sort === 'position' )
+		if( $sort === 'relevance' )
 		{
 			$cmpfunc = $search->createFunction( 'catalog.index.catalog.position', array( $listtype, $catid ) );
 			$expr[] = $search->compare( '>=', $cmpfunc, 0 );
