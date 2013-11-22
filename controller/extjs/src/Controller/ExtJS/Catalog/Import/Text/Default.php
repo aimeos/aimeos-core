@@ -156,31 +156,83 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 		}
 
 		foreach( $container as $content ) {
-			$catalogTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'catalog' );
+			$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'catalog' );
 		}
 	}
 
 
 	/**
-	 * Gets the id of the item.
+	 * Associates the texts with the products.
 	 *
 	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.) for associating the list items
-	 * @param string $code Code or id of the item
+	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
-	 * @throws Controller_ExtJS_Exception If no item found
 	 */
-	protected function _getItemId( $manager, $code, $domain )
+	protected function _importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
 	{
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', $domain . '.id', $code ) );
-		$search->setSortations( array( $search->sort( '+', $domain.'.id' ) ) );
+		$catalogStart = $catalogTotal = 0;
+		$listManager = $manager->getSubManager( 'list' );
 
-		$result = $manager->searchItems( $search );
+		do
+		{
+			$criteria = $manager->createSearch();
+			$criteria->setConditions( $criteria->compare( '==', 'catalog.id', array_keys( $itemTextMap ) ) );
+			$catalogItems = $manager->searchItems( $criteria );
+			$catalogStart += count( $catalogItems );
 
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new Controller_ExtJS_Exception('No catalog item found');
+			$catalogIds = array();
+
+			foreach( $catalogItems as $item ) {
+				$catalogIds[] = $item->getId();
+			}
+
+			$listStart = $listTotal = 0;
+
+			do
+			{
+				$criteria = $listManager->createSearch();
+				$expr[] = $criteria->compare( '==', 'catalog.list.parentid', $catalogIds );
+				$expr[] = $criteria->compare( '==', 'catalog.list.domain', 'text' );
+				$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+				$listItems = $listManager->searchItems( $criteria, array(), $listTotal );
+				$listStart += count( $catalogItems );
+
+				foreach( $listItems as $item ) {
+					unset( $itemTextMap[ $item->getParentId() ][ $item->getRefId() ] );
+				}
+			}
+			while( $listStart < $listTotal );
+
 		}
+		while( $catalogStart < $catalogTotal );
 
-		return $item->getId();
+
+		$listTypes = $this->_getTextListTypes( $manager, 'catalog' );
+
+		foreach( $itemTextMap as $catalogCode => $textIds )
+		{
+			foreach( $textIds as $textId => $listType )
+			{
+				try
+				{
+					$iface = 'MShop_Common_Item_Type_Interface';
+					if( !isset( $listTypes[$listType] ) || ( $listTypes[$listType] instanceof $iface ) === false ) {
+						throw new Controller_ExtJS_Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
+					}
+
+					$item = $listManager->createItem();
+					$item->setParentId( $catalogCode );
+					$item->setTypeId( $listTypes[$listType]->getId() );
+					$item->setDomain( 'text' );
+					$item->setRefId( $textId );
+
+					$listManager->saveItem( $item );
+				}
+				catch( Exception $e )
+				{
+					$this->_getContext()->getLogger()->log( 'catalog text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
+				}
+			}
+		}
 	}
 }

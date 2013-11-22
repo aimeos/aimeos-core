@@ -153,12 +153,6 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$config = $this->_getContext()->getConfig();
-		$fileExt = $config->get( 'controller/extjs/catalog/export/text/default/container/format', 'zip' );
-		$contExt = $config->get( 'controller/extjs/catalog/export/text/default/content/format', 'csv' );
-		$contExt = $contExt === '' ? '' : '.' . $contExt;
-		$filename .= '.' . $fileExt;
-
 		$containerItem = $this->_createContainer( $filename, 'catalog' );
 
 		$start = 0;
@@ -171,7 +165,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 			{
 				$langid = $item->getId();
 
-				$contentItem = $containerItem->create( $langid . $contExt  );
+				$contentItem = $containerItem->create( $langid );
 				$contentItem->add( array( 'Language ID', 'Catalog label', 'Catalog ID', 'List type', 'Text type', 'Text ID', 'Text' ) );
 				$this->_getContext()->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $contentItem, $langid, $ids );
@@ -187,7 +181,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 		$containerItem->close();
 
-		return $filename;
+		return $containerItem->getName();
 	}
 
 

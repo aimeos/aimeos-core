@@ -161,25 +161,28 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 	public function testImportFromXLSFile()
 	{
 		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/format', 'xls' );
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/content/format', '' );
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/format', 'PHPExcel' );
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/content/format', 'Excel5' );
 		$this->_object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
 
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
 
+		$search = $attributeManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'color' ) );
+
 		$ids = array();
-		foreach( $attributeManager->searchItems( $attributeManager->createSearch() ) as $item ) {
+		foreach( $attributeManager->searchItems( $search ) as $item ) {
 			$ids[] = $item->getId();
+		}
+
+		if( empty( $ids ) ) {
+			throw new Exception( 'Empty id list' );
 		}
 
 		$params = new stdClass();
 		$params->lang = array( 'en' );
 		$params->items = $ids;
 		$params->site = $this->_context->getLocale()->getSite()->getCode();
-
-		if( ob_start() === false ) {
-			throw new Exception( 'Unable to start output buffering' );
-		}
 
 		$exporter = new Controller_ExtJS_Attribute_Export_Text_Default( $this->_context );
 		$result = $exporter->exportFile( $params );

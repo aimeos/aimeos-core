@@ -122,77 +122,90 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 
 	/**
-	 * Gets the id of the item.
+	 * Associates the texts with the products.
 	 *
 	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.) for associating the list items
-	 * @param string $code Code or id of the item
+	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
-	 * @throws Controller_ExtJS_Exception If no item found
 	 */
-	protected function _getItemId( $manager, $code, $domain )
+	protected function _importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
 	{
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', $domain . '.code', $code ) );
+		$search->setConditions( $search->compare( '==', $domain . '.code', array_keys( $itemTextMap ) ) );
 		$search->setSortations( array( $search->sort( '+', $domain.'.id' ) ) );
 
-		$result = $manager->searchItems( $search );
+		$start = 0;
+		$itemIdMap = $itemCodeMap = array();
 
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new Controller_ExtJS_Exception('No item found');
+		do
+		{
+			$result = $manager->searchItems( $search );
+
+			foreach( $result as $item )
+			{
+				$itemIdMap[ $item->getId() ] = $item->getCode();
+				$itemCodeMap[ $item->getCode() ] = $item->getId();
+			}
+
+			$count = count( $result );
+			$start += $count;
+			$search->setSlice( $start );
 		}
-
-		return $item->getId();
-	}
+		while( $count > 0 );
 
 
-	/**
-	 * Associates the texts with the items.
-	 *
-	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.) for associating the list items
-	 * @param MShop_Common_Manager_Interface $listManager Manager object (attribute, product, etc.) for associating the list items
-	 * @param string $code Code or id of the item
-	 * @param string $textId Id of the text item
-	 * @param string $listType List type of the item
-	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
-	 */
-	protected function _importReferences( MShop_Common_Manager_Interface $manager, MShop_Common_Manager_Interface $listManager, $code, $textId, $listType, $domain )
-	{
-		$itemId = $this->_getItemId( $manager, $code, $domain );
+		$listManager = $manager->getSubManager( 'list' );
 
 		$search = $listManager->createSearch();
 		$expr = array(
-			$search->compare( '==', $domain . '.list.parentid', $itemId ),
-			$search->compare( '==', $domain . '.list.refid', $textId ),
-			$search->compare( '==', $domain . '.list.domain', 'text' ),
+				$search->compare( '==', $domain . '.list.parentid', array_keys( $itemIdMap ) ),
+				$search->compare( '==', $domain . '.list.domain', 'text' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
 
-		$result = $listManager->searchItems( $search );
+		$start = 0;
 
-		if( reset( $result ) !== false ) {
-			return;
+		do
+		{
+			$result = $listManager->searchItems( $search );
+
+			foreach( $result as $item ) {
+				unset( $itemTextMap[ $itemIdMap[ $item->getParentId() ] ][ $item->getRefId() ] );
+			}
+
+			$count = count( $result );
+			$start += $count;
+			$search->setSlice( $start );
 		}
+		while( $count > 0 );
+
 
 		$listTypes = $this->_getTextListTypes( $manager, $domain );
 
-		try
+		foreach( $itemTextMap as $itemCode => $textIds )
 		{
-			$iface = 'MShop_Common_Item_Type_Interface';
-			if( !isset( $listTypes[$listType] ) || ( $listTypes[$listType] instanceof $iface ) === false ) {
-				throw new Controller_ExtJS_Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
+			foreach( $textIds as $textId => $listType )
+			{
+				try
+				{
+					$iface = 'MShop_Common_Item_Type_Interface';
+					if( !isset( $listTypes[$listType] ) || ( $listTypes[$listType] instanceof $iface ) === false ) {
+						throw new Controller_ExtJS_Exception( sprintf( 'Invalid list type "%1$s"', $listType ) );
+					}
+
+					$item = $listManager->createItem();
+					$item->setParentId( $itemCodeMap[ $itemCode ] );
+					$item->setTypeId( $listTypes[$listType]->getId() );
+					$item->setDomain( 'text' );
+					$item->setRefId( $textId );
+
+					$listManager->saveItem( $item );
+				}
+				catch( Exception $e ) {
+					$this->_getContext()->getLogger()->log( 'text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
+				}
 			}
-
-			$item = $listManager->createItem();
-			$item->setParentId( $itemId );
-			$item->setTypeId( $listTypes[$listType]->getId() );
-			$item->setDomain( 'text' );
-			$item->setRefId( $textId );
-
-			$listManager->saveItem( $item );
-		}
-		catch( Exception $e ) {
-			$this->_getContext()->getLogger()->log( 'text reference: ' . $e->getMessage(), MW_Logger_Abstract::ERR, 'import' );
 		}
 	}
 
@@ -328,6 +341,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		$textManager = MShop_Text_Manager_Factory::createManager( $context );
 		$manager = MShop_Factory::createManager( $context, $domain );
 		$listManager = $manager->getSubManager( 'list' );
+		$cnt = 0;
 
 		foreach( $contentItem as $row )
 		{
@@ -362,7 +376,16 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 				$textManager->saveItem( $item );
 
-				$this->_importReferences( $manager, $listManager, $row[2], $item->getId(), $row[3], $domain );
+				if( $textId === '' ){
+					$codeIdMap[$row[2]][$item->getId()] = $row[3];
+				}
+
+				if( $cnt++ == 1000) {
+					$this->_importReferences( $manager, $codeIdMap, $domain );
+					$codeIdMap = array();
+					$cnt = 0;
+				}
+
 			}
 			catch( Exception $e )
 			{
@@ -370,7 +393,9 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			}
 		}
 
-		return $codeIdMap;
+		if( !empty($codeIdMap)) {
+			$this->_importReferences( $manager, $codeIdMap, $domain );
+		}
 	}
 
 
@@ -385,13 +410,10 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	protected function _createContainer( $resource, $domain )
 	{
 		$config = $this->_getContext()->getConfig();
-		$containertFormat = $config->get( 'controller/extjs/'.$domain.'/export/text/default/container/format', 'zip' );
+		$type = $config->get( 'controller/extjs/'.$domain.'/export/text/default/container/format', 'Zip' );
+		$format = $config->get( 'controller/extjs/'.$domain.'/export/text/default/content/format', 'CSV' );
 		$options = $config->get( 'controller/extjs/'.$domain.'/export/text/default/container/options', array() );
 
-		if( $containertFormat === 'xls' ) {
-			return new MW_Container_PHPExcel( $resource, 'Excel5', $options );
-		}
-
-		return new MW_Container_Zip( $resource, 'CSV', $options );
+		return MW_Container_Factory::getContainer( $resource, $type, $format, $options );
 	}
 }

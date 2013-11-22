@@ -168,8 +168,8 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 	public function testImportFromXLSFile()
 	{
 		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/format', 'xls' );
-		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/content/format', '' );
+		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/format', 'PHPExcel' );
+		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/content/format', 'Excel5' );
 		$this->_object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->_context );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
@@ -177,7 +177,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
 		$params = new stdClass();
-		$params->lang = array( 'de' );
+		$params->lang = array( 'en' );
 		$params->items = $node->getId();
 		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
@@ -225,7 +225,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 		$expr = array();
 		$expr[] = $criteria->compare( '==', 'text.domain', 'catalog' );
-		$expr[] = $criteria->compare( '==', 'text.languageid', 'de' );
+		$expr[] = $criteria->compare( '==', 'text.languageid', 'en' );
 		$expr[] = $criteria->compare( '==', 'text.status', 1 );
 		$expr[] = $criteria->compare( '~=', 'text.content', 'Root:' );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
