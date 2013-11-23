@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="<extname> extension - ExtJS client" default="all">
+
+	<target name="test" description="Executes tests">
+	</target>
+
+	<target name="coverage" description="Generates code coverage report">
+	</target>
+
+	<target name="testperf" description="Executes performance tests">
+	</target>
+
+	<target name="check" description="Checks javascript files for common mistakes">
+		<jsllint executable="jsl">
+			<fileset dir=".">
+				<include name="lib/**/*.js"/>
+				<include name="src/**/*.js"/>
+			</fileset>
+		</jsllint>
+	</target>
+
+	<target name="clean" description="Cleans up temporary files">
+		<delete dir="deploy/js" quiet="true" failonerror="false" />
+	</target>
+
+	<target name="all" depends="test,check" description="Builds all parts of the package">
+	</target>
+
+</project>

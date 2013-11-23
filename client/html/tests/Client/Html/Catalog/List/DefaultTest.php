@@ -127,6 +127,28 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetBodySearchAttributeList()
+	{
+		$view = $this->_object->getView();
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-attr-id' => array( -1, -2 ) ) );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->_object->getBody();
+		$this->assertStringStartsWith( '<section class="arcavias catalog-list">', $output );
+	}
+
+
+	public function testGetBodySearchAttributeString()
+	{
+		$view = $this->_object->getView();
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-attr-id' => '-1 -2' ) );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->_object->getBody();
+		$this->assertStringStartsWith( '<section class="arcavias catalog-list">', $output );
+	}
+
+
 	public function testGetSubClient()
 	{
 		$client = $this->_object->getSubClient( 'items', 'Default' );

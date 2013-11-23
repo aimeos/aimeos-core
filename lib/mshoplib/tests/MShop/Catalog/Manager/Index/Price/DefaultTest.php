@@ -89,6 +89,34 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'price' );
+
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'price.value', '18.00' ),
+			$search->compare( '==', 'price.currencyid', 'EUR' ),
+			$search->compare( '==', 'price.editor', 'core:unittest' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$items = $manager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'No price item found' );
+		}
+
+
+		$search = $this->_object->createSearch( true );
+		$result = $this->_object->aggregate( $search, 'catalog.index.price.id' );
+
+		$this->assertEquals( 12, count( $result ) );
+		$this->assertArrayHasKey( $item->getId(), $result );
+		$this->assertEquals( $result[ $item->getId() ], 3 );
+	}
+
+
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->_object->getSearchAttributes() as $attribute ) {

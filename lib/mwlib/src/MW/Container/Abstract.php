@@ -17,6 +17,7 @@
 abstract class MW_Container_Abstract
 {
 	private $_options;
+	private $_name;
 
 
 	/**
@@ -24,9 +25,32 @@ abstract class MW_Container_Abstract
 	 *
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( array $options )
+	public function __construct( $name, array $options )
 	{
 		$this->_options = $options;
+		$this->_name = $name;
+	}
+
+
+	/**
+	 * Returns the path of the actual file.
+	 *
+	 * @return string Path to the actual file
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
+
+
+	/**
+	 * Returns all options as array.
+	 *
+	 * @return array Associative list of option keys and values
+	 */
+	protected function _getOptions()
+	{
+		return $this->_options;
 	}
 
 

@@ -22,7 +22,7 @@ class MW_Container_Zip
 	private $_classname;
 	private $_position = 0;
 	private $_content = array();
-	private $_options;
+	private $_resourcepath;
 
 
 	/**
@@ -37,15 +37,19 @@ class MW_Container_Zip
 	 */
 	public function __construct( $resourcepath, $format, array $options = array() )
 	{
-		parent::__construct( $options );
-
 		$this->_classname = 'MW_Container_Content_' . $format;
 
-		if( !class_exists( $this->_classname) ) {
+		if( class_exists( $this->_classname ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unknown format "%1$s"', $format ) );
 		}
 
-		$this->_options = $options;
+		if( is_file( $resourcepath ) === false ) {
+			$resourcepath .= '.zip';
+		}
+
+		parent::__construct( $resourcepath, $options );
+
+		$this->_resourcepath = $resourcepath;
 
 		$this->_container = new ZipArchive();
 		$this->_container->open( $resourcepath, ZipArchive::CREATE );
@@ -67,7 +71,7 @@ class MW_Container_Zip
 	{
 		$tmpfile = tempnam( $this->_getOption( 'tempdir', sys_get_temp_dir() ), '' );
 
-		return new $this->_classname( $tmpfile, $name, $this->_options );
+		return new $this->_classname( $tmpfile, $name, $this->_getOptions() );
 	}
 
 
@@ -121,13 +125,8 @@ class MW_Container_Zip
 			throw new MW_Container_Exception( sprintf( $msg, $this->_position, $this->_container->filename ) );
 		}
 
-		if( ( $resource = $this->_container->getStream( $name ) ) === false )
-		{
-			$msg = 'Unable to get stream for "%1$s" in "%2$s"';
-			throw new MW_Container_Exception( $msg, $name, $this->_container->filename );
-		}
-
-		return new $this->_classname( $resource, $name );
+		// $this->_container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
+		return new $this->_classname( 'zip://' . $this->_resourcepath . '#' . $name, $name );
 	}
 
 

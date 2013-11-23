@@ -13,7 +13,7 @@ $listController = $this->config( 'client/html/catalog/list/url/controller', 'cat
 $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 
 $params = $this->get( 'listParams', array() );
-$sort = $this->param( 'l-sort', 'position' );
+$sort = $this->param( 'l-sort', 'relevance' );
 
 ?>
 <?php if( $this->get( 'listProductTotal', 0 ) > 0 ) : ?>
@@ -22,7 +22,7 @@ $sort = $this->param( 'l-sort', 'position' );
 		<div class="sort">
 			<span><?php echo $enc->html( $this->translate( 'client/html', 'Sort by:' ), $enc::TRUST ); ?></span>
 			<ul>
-				<li><a class="option-position <?php echo ( $sort === 'position' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-sort' => 'position' ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Relevance' ), $enc::TRUST ); ?></a></li>
+				<li><a class="option-relevance <?php echo ( $sort === 'relevance' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-sort' => 'relevance' ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Relevance' ), $enc::TRUST ); ?></a></li>
 				<li><a class="option-name <?php echo ( $sort === 'name' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-sort' => 'name' ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Name' ), $enc::TRUST ); ?></a></li>
 				<li><a class="option-price <?php echo ( $sort === 'price' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-sort' => 'price' ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Price' ), $enc::TRUST ); ?></a></li>
 			</ul>

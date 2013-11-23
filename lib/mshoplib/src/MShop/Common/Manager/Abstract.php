@@ -33,6 +33,55 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 * Counts the number products that are available for the values of the given key.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param string $key Search key (usually the ID) to aggregate products for
+	 * @return array List of ID values as key and the number of counted products as value
+	 */
+	protected function _aggregate( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )
+	{
+		$list = array();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		try
+		{
+			$reqkey = '';
+			$search = clone $search;
+			$attrList = $this->getSearchAttributes();
+
+			if( !isset( $attrList[$key] ) ) {
+				throw new MShop_Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
+			}
+
+			$expr = array( $search->getConditions(), $search->compare( '!=', $key, null ) );
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$total = null;
+
+			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $context->getConfig()->get( $cfgPath ) );
+			$results = $this->_searchItems( $conn, $search, $sql, '', $required, $total, $level );
+
+			while( ( $row = $results->fetch() ) !== false ) {
+				$list[ $row['key'] ] = $row['count'];
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Creates a search object.
 	 *
 	 * @param boolean $default Add default criteria; Optional

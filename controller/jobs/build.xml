@@ -36,11 +36,11 @@
 	<target name="i18n" description="Creates translation message files">
 		<exec command="find ./src/ -type f | xgettext -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=sprintf:1 -o i18n/core-controller-jobs.pot -f -"
 			checkreturn="true" logoutput="true" />
-    <foreach param="po-fname" absparam="po-filename" target="i18n-update">
-        <fileset dir="./i18n">
-            <include name="*.po" />
-        </fileset>
-    </foreach>
+		<foreach param="po-fname" absparam="po-filename" target="i18n-update">
+			<fileset dir="./i18n">
+				<include name="*.po" />
+			</fileset>
+		</foreach>
 	</target>
 	
 	<target name="i18n-update" description="Updates translation message files">
