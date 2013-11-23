@@ -21,6 +21,7 @@ class MW_Container_Content_CSV
 	private $_separator;
 	private $_enclosure;
 	private $_escape;
+	private $_lineend;
 	private $_fh;
 	private $_data;
 	private $_position = 0;
@@ -33,6 +34,7 @@ class MW_Container_Content_CSV
 	 * - csv-separator (default: ',')
 	 * - csv-enclosure (default: '"')
 	 * - csv-escape (default: '"')
+	 * - csv-lineend (default: LF)
 	 *
 	 * @param resource|string $resource File pointer or path to the actual file
 	 * @param string $name Name of the CSV file
@@ -62,6 +64,7 @@ class MW_Container_Content_CSV
 		$this->_separator = $this->_getOption( 'csv-separator', ',' );
 		$this->_enclosure = $this->_getOption( 'csv-enclosure', '"' );
 		$this->_escape = $this->_getOption( 'csv-escape', '"' );
+		$this->_lineend = $this->_getOption( 'csv-lineend', chr( 10 ) );
 		$this->_data = $this->_getData();
 	}
 
@@ -96,7 +99,7 @@ class MW_Container_Content_CSV
 			$data[$key] = $enclosure . str_replace( $enclosure, $this->_escape . $enclosure, $entry ) . $enclosure;
 		}
 
-		if( fwrite( $this->_fh, implode( $this->_separator, $data ) . PHP_EOL ) === false ) {
+		if( fwrite( $this->_fh, implode( $this->_separator, $data ) . $this->_lineend ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->_filename ) );
 		}
 	}
@@ -177,12 +180,13 @@ class MW_Container_Content_CSV
 				return null;
 			}
 		}
-		while( $line === PHP_EOL );
+		while( $line === $this->_lineend );
 
 		$enclosure = $this->_enclosure;
 		$enclen = strlen( $enclosure );
+		$endlen = strlen( $this->_lineend );
 
-		$data = explode( $enclosure . $this->_separator . $enclosure, substr( $line, $enclen, -$enclen - 1 ) );
+		$data = explode( $enclosure . $this->_separator . $enclosure, substr( $line, $enclen, -$enclen - $endlen ) );
 
 		foreach( $data as $key => $entry ) {
 			$data[$key] = str_replace( $enclosure . $enclosure, $enclosure, $entry );
