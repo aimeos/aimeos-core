@@ -356,15 +356,16 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
 	onStoreException: function(proxy, type, action, options, response) {
 		var title = _( 'Error' );
+		var msg, code;
 		
 		if( response.error !== undefined ) {
-			var msg = response && response.error ? response.error.message : _( 'No error information available' );
-			var code = response && response.error ? response.error.code : 0;
+			msg = response && response.error ? response.error.message : _( 'No error information available' );
+			code = response && response.error ? response.error.code : 0;
 		} else {
-			var msg = response && response.xhr.responseText[0].error ? response.xhr.responseText[0].error : _( 'No error information available' );
-			var code = response && response.xhr.responseText[0].tid ? response.xhr.responseText[0].tid : 0;
+			msg = response && response.xhr.responseText[0].error ? response.xhr.responseText[0].error : _( 'No error information available' );
+			code = response && response.xhr.responseText[0].tid ? response.xhr.responseText[0].tid : 0;
 		}
-		Ext.Msg.alert([title, ' (', code, ')'].join(''), msg);
+		Ext.Msg.alert(title + ' (' + code + ')', msg);
 	},
 
 	setSiteParam: function(store) {
