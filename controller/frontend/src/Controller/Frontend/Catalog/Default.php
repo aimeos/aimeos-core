@@ -165,7 +165,7 @@ class Controller_Frontend_Catalog_Default
 		$search = $this->createProductFilterDefault( $sort, $direction, $start, $size, $listtype );
 		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
 
-		if( $sort === 'relevance' || $sort === 'position' )
+		if( $sort === 'relevance' )
 		{
 			$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( $listtype, $langid, $input ) );
 			$search->setSortations( array( $search->sort( ( $direction === '+' ? '-' : '+' ), $sortfunc ) ) );
