@@ -51,7 +51,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No order base item found' );
 		}
 
-		$item->setConfig( array( 'project' => '8502_TEST' ) );
+		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 		$item->setCode( 'test' );
 
 		$this->_object = new MShop_Service_Provider_Delivery_Default(TestHelper::getContext(), $item );
@@ -72,7 +72,7 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetConfigBE()
 	{
-		$this->assertArrayHasKey( 'project', $this->_object->getConfigBE() );
+		$this->assertArrayHasKey( 'default.project', $this->_object->getConfigBE() );
 	}
 
 
@@ -87,39 +87,39 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 
 	public function testCheckConfigBE()
 	{
-		$attributes = array( 'project' => 'Unit', 'url' => 'http://unittest.com' );
+		$attributes = array( 'default.project' => 'Unit', 'default.url' => 'http://unittest.com' );
 		$result = $this->_object->checkConfigBE( $attributes );
 
-		$this->assertInternalType( 'null', $result['project'] );
-		$this->assertInternalType( 'null', $result['url'] );
+		$this->assertInternalType( 'null', $result['default.project'] );
+		$this->assertInternalType( 'null', $result['default.url'] );
 
 
-		$attributes = array( 'project' => '', 'url' => 'http://unittest.com' );
+		$attributes = array( 'default.project' => '', 'default.url' => 'http://unittest.com' );
 		$result = $this->_object->checkConfigBE( $attributes );
 
-		$this->assertInternalType( 'string', $result['project'] );
-		$this->assertInternalType( 'null', $result['url'] );
+		$this->assertInternalType( 'string', $result['default.project'] );
+		$this->assertInternalType( 'null', $result['default.url'] );
 
 
-		$attributes = array( 'project' => 'Unit', 'url' => null );
+		$attributes = array( 'default.project' => 'Unit', 'default.url' => null );
 		$result = $this->_object->checkConfigBE( $attributes );
 
-		$this->assertInternalType( 'null', $result['project'] );
-		$this->assertInternalType( 'string', $result['url'] );
+		$this->assertInternalType( 'null', $result['default.project'] );
+		$this->assertInternalType( 'string', $result['default.url'] );
 	}
 
 
 	public function testCheckConfigBEwrongTypes()
 	{
-		$attributes = array( 'project' => true, 'url' => 'http://unittest.com', 'password' => 1111 );
+		$attributes = array( 'default.project' => true, 'default.url' => 'http://unittest.com', 'default.password' => 1111 );
 		$result = $this->_object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 5, count( $result ) );
-		$this->assertInternalType( 'null', $result['url'] );
-		$this->assertInternalType( 'null', $result['ssl'] );
-		$this->assertInternalType( 'null', $result['username'] );
-		$this->assertInternalType( 'string', $result['password'] );
-		$this->assertInternalType( 'string', $result['project'] );
+		$this->assertInternalType( 'null', $result['default.url'] );
+		$this->assertInternalType( 'null', $result['default.ssl'] );
+		$this->assertInternalType( 'null', $result['default.username'] );
+		$this->assertInternalType( 'string', $result['default.password'] );
+		$this->assertInternalType( 'string', $result['default.project'] );
 	}
 
 

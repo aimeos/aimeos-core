@@ -20,49 +20,49 @@ class MShop_Service_Provider_Delivery_Default
 {
 
 	private $_beConfig = array(
-		'project' => array(
-			'code' => 'project',
-			'internalcode'=> 'project',
+		'default.project' => array(
+			'code' => 'default.project',
+			'internalcode'=> 'default.project',
 			'label'=> 'Project name',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
 			'required'=> true,
 		),
-		'url' => array(
-			'code' => 'url',
-			'internalcode'=> 'url',
+		'default.url' => array(
+			'code' => 'default.url',
+			'internalcode'=> 'default.url',
 			'label'=> 'URL to webservice the HTTP request is sent to',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
 			'required'=> true,
 		),
-		'username' => array(
-			'code' => 'username',
-			'internalcode'=> 'username',
+		'default.username' => array(
+			'code' => 'default.username',
+			'internalcode'=> 'default.username',
 			'label'=> 'Username',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
 			'required'=> false,
 		),
-		'password' => array(
-			'code' => 'password',
-			'internalcode'=> 'password',
+		'default.password' => array(
+			'code' => 'default.password',
+			'internalcode'=> 'default.password',
 			'label'=> 'Password',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
 			'required'=> false,
 		),
-		'ssl' => array(
-			'code' => 'ssl',
-			'internalcode'=> 'ssl',
+		'default.ssl' => array(
+			'code' => 'default.ssl',
+			'internalcode'=> 'default.ssl',
 			'label'=> 'SSL mode ("weak" for self signed certificates)',
 			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
+			'internaltype'=> 'integer',
+			'default'=> 0,
 			'required'=> false,
 		),
 	);
@@ -145,7 +145,7 @@ class MShop_Service_Provider_Delivery_Default
 		$response = '';
 		$config = $this->getServiceItem()->getConfig();
 
-		if( !isset( $config['url'] ) ) {
+		if( !isset( $config['default.url'] ) ) {
 			throw new MShop_Service_Exception(
 				sprintf( 'Parameter "%1$s" for configuration not available', "url" ), parent::ERR_TEMP );
 		}
@@ -158,7 +158,7 @@ class MShop_Service_Provider_Delivery_Default
 		{
 			curl_setopt( $curl, CURLOPT_USERAGENT, 'MShop library' );
 
-			curl_setopt( $curl, CURLOPT_URL, $config['url'] );
+			curl_setopt( $curl, CURLOPT_URL, $config['default.url'] );
 			curl_setopt( $curl, CURLOPT_POST, true );
 			curl_setopt( $curl, CURLOPT_POSTFIELDS, array( 'xml' => $xml ) );
 
@@ -167,17 +167,17 @@ class MShop_Service_Provider_Delivery_Default
 			curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, false );   // don't allow redirects
 			curl_setopt( $curl, CURLOPT_MAXREDIRS, 1 );   // maximum amount of redirects
 
-			if( isset( $config['username'] ) && isset( $config['password'] ) )
+			if( isset( $config['default.username'] ) && isset( $config['default.password'] ) )
 			{
 				$context->getLogger()->log( 'Using user name and password for authentication', MW_Logger_Abstract::NOTICE );
 				curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
-				curl_setopt( $curl, CURLOPT_USERPWD, $config['username'] . ':' . $config['password'] );
+				curl_setopt( $curl, CURLOPT_USERPWD, $config['default.username'] . ':' . $config['default.password'] );
 			}
 
-			$urlinfo = parse_url($config['url']);
+			$urlinfo = parse_url($config['default.url']);
 			if (isset($urlinfo['scheme']) && $urlinfo['scheme'] == 'https')
 			{
-				if( isset( $config['ssl'] ) && $config['ssl'] == 'weak' )
+				if( isset( $config['default.ssl'] ) && $config['default.ssl'] == 'weak' )
 				{
 					$context->getLogger()->log( 'Using weak SSL options', MW_Logger_Abstract::NOTICE );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, false );
@@ -352,7 +352,7 @@ class MShop_Service_Provider_Delivery_Default
 
 		$config = $this->getServiceItem()->getConfig();
 
-		if( !isset( $config['project'] ) ) {
+		if( !isset( $config['default.project'] ) ) {
 			throw new MShop_Service_Exception(
 				sprintf( 'Parameter "%1$s" for configuration not available', "project" ), parent::ERR_TEMP );
 		}
@@ -366,7 +366,7 @@ class MShop_Service_Provider_Delivery_Default
 		}
 
 		$this->_appendChildCDATA( 'customerid', $base->getCustomerId(), $dom, $orderitem );
-		$this->_appendChildCDATA( 'projectcode', $config['project'], $dom, $orderitem );
+		$this->_appendChildCDATA( 'projectcode', $config['default.project'], $dom, $orderitem );
 		$this->_appendChildCDATA( 'languagecode', strtoupper( $base->getLocale()->getLanguageId() ), $dom, $orderitem );
 		$this->_appendChildCDATA( 'currencycode', $base->getPrice()->getCurrencyId(), $dom, $orderitem );
 	}

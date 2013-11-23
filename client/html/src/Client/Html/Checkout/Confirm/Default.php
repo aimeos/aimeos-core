@@ -155,7 +155,7 @@ class Client_Html_Checkout_Confirm_Default
 				{
 					$provider = $serviceManager->getProvider( $serviceItem );
 
-					if( ( $orderItem = $provider->updateSync( $params ) ) != null
+					if( ( $orderItem = $provider->updateSync( $params ) ) !== null
 						&& $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
 					) {
 						$provider->query( $orderItem );

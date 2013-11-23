@@ -105,19 +105,19 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	public function testCheckConfigBE()
 	{
 		$attributes = array(
-			'ApiUsername' => 'user',
-			'ApiPassword' => 'pw',
-			'ApiSignature' => '1df23eh67',
+			'paypalexpress.ApiUsername' => 'user',
+			'paypalexpress.ApiPassword' => 'pw',
+			'paypalexpress.ApiSignature' => '1df23eh67',
 			'payment.url-cancel' => 'http://cancelUrl',
 			'payment.url-success' => 'http://returnUrl'
 		);
 
 		$result = $this->_object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 12, count( $result ) );
-		$this->assertEquals( null, $result['ApiUsername'] );
-		$this->assertEquals( null, $result['ApiPassword'] );
-		$this->assertEquals( null, $result['ApiSignature'] );
+		$this->assertEquals( 10, count( $result ) );
+		$this->assertEquals( null, $result['paypalexpress.ApiUsername'] );
+		$this->assertEquals( null, $result['paypalexpress.ApiPassword'] );
+		$this->assertEquals( null, $result['paypalexpress.ApiSignature'] );
 		$this->assertEquals( null, $result['payment.url-cancel'] );
 		$this->assertEquals( null, $result['payment.url-success'] );
 	}
@@ -160,7 +160,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		}
 
 		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $helperForm );
-		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=UT-99999999', $helperForm->getUrl() );
+		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=UT-99999999', $helperForm->getUrl() );
 		$this->assertEquals( 'POST', $helperForm->getMethod() );
 		$this->assertEquals( array(), $helperForm->getValues() );
 
