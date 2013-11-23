@@ -19,6 +19,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	extends MShop_Service_Provider_Payment_Abstract
 	implements MShop_Service_Provider_Payment_Interface
 {
+	private $_apiendpoint;
+
 	private $_beConfig = array(
 		'paypalexpress.ApiUsername' => array(
 			'code' => 'paypalexpress.ApiUsername',
@@ -47,31 +49,13 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			'default'=> '',
 			'required'=> true,
 		),
-		'paypalexpress.CancelUrl' => array(
-			'code' => 'paypalexpress.CancelUrl',
-			'internalcode'=> 'paypalexpress.CancelUrl',
-			'label'=> 'CancelUrl',
+		'paypalexpress.ApiEndpoint' => array(
+			'code' => 'paypalexpress.ApiEndpoint',
+			'internalcode'=> 'paypalexpress.ApiEndpoint',
+			'label'=> 'APIEndpoint',
 			'type'=> 'string',
 			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> false,
-		),
-		'paypalexpress.ReturnUrl' => array(
-			'code' => 'paypalexpress.ReturnUrl',
-			'internalcode'=> 'paypalexpress.ReturnUrl',
-			'label'=> 'ReturnUrl',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> false,
-		),
-		'paypalexpress.PaymentAction' => array(
-			'code' => 'paypalexpress.PaymentAction',
-			'internalcode'=> 'paypalexpress.PaymentAction',
-			'label'=> 'PaymentAction',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> 'sale',
+			'default'=> 'https://api-3t.paypal.com/nvp',
 			'required'=> false,
 		),
 		'paypalexpress.PaypalUrl' => array(
@@ -80,17 +64,17 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			'label'=> 'PaypalUrl',
 			'type'=> 'string',
 			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true,
+			'default'=> 'https://www.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s',
+			'required'=> false,
 		),
-		'paypalexpress.ApiEndpoint' => array(
-			'code' => 'paypalexpress.ApiEndpoint',
-			'internalcode'=> 'paypalexpress.ApiEndpoint',
-			'label'=> 'APIEndpoint',
+		'paypalexpress.PaymentAction' => array(
+			'code' => 'paypalexpress.PaymentAction',
+			'internalcode'=> 'paypalexpress.PaymentAction',
+			'label'=> 'PaymentAction',
 			'type'=> 'string',
 			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true,
+			'default'=> 'Sale',
+			'required'=> false,
 		),
 	);
 
@@ -103,8 +87,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			'paypalexpress.ApiUsername',
 			'paypalexpress.ApiPassword',
 			'paypalexpress.ApiSignature',
-			'paypalexpress.ApiEndpoint',
-			'paypalexpress.PaypalUrl',
 		);
 
 		$config = $serviceItem->getConfig();
@@ -115,6 +97,9 @@ class MShop_Service_Provider_Payment_PayPalExpress
 				throw new MShop_Service_Exception( sprintf( 'Parameter "%1$s" for configuration not available', $param ) );
 			}
 		}
+
+		$default = 'https://api-3t.paypal.com/nvp';
+		$this->_apiendpoint = $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ), $default );
 	}
 
 
@@ -170,22 +155,20 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values = $this->_getOrderDetails( $orderBaseItem );
 		$values[ 'METHOD' ] = 'SetExpressCheckout';
 		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
-		$values[ 'RETURNURL' ] = $this->_getConfigValue( array( 'payment.url-success' ), '/' ) . '?orderid=' . $orderid;
+		$values[ 'RETURNURL' ] = 'http://returnurl.com/' . $this->_getConfigValue( array( 'payment.url-success' ), '/' );
+		$values[ 'CANCELURL' ] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ), '/' );
 
-$values[ 'RETURNURL' ] = 'http://returnurl.com?orderid=1';
-echo 'apiendpoint: ' . $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ) . PHP_EOL;
+echo 'apiendpoint: ' . $this->_apiendpoint . PHP_EOL;
 print_r( $values );
 
-		$urlQuery = '&' . http_build_query( $values, '', '&' );
-echo $urlQuery . PHP_EOL;
-
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'GET', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
-		$params = array ( 'TOKEN' => $rvals['TOKEN'] );
-		$this->_saveAttributes( $params, $orderBaseItem->getService('payment') );
+		$default = 'https://www.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s';
+		$paypalUrl = sprintf( $this->_getConfigValue( array( 'paypalexpress.PaypalUrl' ), $default ), $rvals['TOKEN'] );
+		$this->_saveAttributes( array ( 'TOKEN' => $rvals['TOKEN'] ), $orderBaseItem->getService('payment') );
 
-		return new MShop_Common_Item_Helper_Form_Default( $this->_getConfigValue( array( 'paypalexpress.PaypalUrl' ) ) . $rvals['TOKEN'], 'POST', array() );
+		return new MShop_Common_Item_Helper_Form_Default( $paypalUrl, 'POST', array() );
 	}
 
 
@@ -212,7 +195,7 @@ echo $urlQuery . PHP_EOL;
 		$values['METHOD'] = 'GetTransactionDetails';
 		$values['TRANSACTIONID'] = $tid;
 
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -248,7 +231,7 @@ echo $urlQuery . PHP_EOL;
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['AMT'] = $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts();
 
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -293,7 +276,7 @@ echo $urlQuery . PHP_EOL;
 		$values['TRANSACTIONID'] = $tid;
 		$values['INVOICEID'] = $order->getId();
 
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'REFUNDTRANSACTIONID' => $rvals['REFUNDTRANSACTIONID'] );
@@ -327,7 +310,7 @@ echo $urlQuery . PHP_EOL;
 		$values['METHOD'] = 'DoVoid';
 		$values['AUTHORIZATIONID'] = $tid;
 
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
@@ -360,11 +343,11 @@ echo $urlQuery . PHP_EOL;
 		$values['METHOD'] = 'DoExpressCheckoutPayment';
 		$values['TOKEN'] = $additional['token'];
 		$values['PAYERID'] = $additional['PayerID'];
-		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'sale' );
+		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'Sale' );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
 
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.ApiEndpoint' ) ), 'POST', $values );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'PAYERID' => $additional['PayerID'] );
@@ -426,8 +409,8 @@ echo $urlQuery . PHP_EOL;
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
 				throw new MShop_Service_Exception( sprintf(
-					'Error in Paypal express response (order ID: "%1$s", error: "%2$s", correlation ID: "%3$s"): %4$s',
-					$orderid, $rvals['L_ERRORCODE0'], $cid, $rvals['L_SHORTMESSAGE0']
+					'Error in Paypal express response for order with ID "%1$s": %2$s',
+					$orderid, print_r( $rvals, true )
 				) );
 			}
 
@@ -575,7 +558,6 @@ echo $urlQuery . PHP_EOL;
 		$values['PAYMENTREQUEST_0_TAXAMT'] = $price->getTaxRate();
 		$values['PAYMENTREQUEST_0_CURRENCYCODE'] = $orderBase->getPrice()->getCurrencyId();
 		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'sale' );
-		$values['CANCELURL'] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ), '/' );
 
 		try
 		{

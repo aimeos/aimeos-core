@@ -114,7 +114,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$result = $this->_object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 12, count( $result ) );
+		$this->assertEquals( 10, count( $result ) );
 		$this->assertEquals( null, $result['paypalexpress.ApiUsername'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiPassword'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiSignature'] );

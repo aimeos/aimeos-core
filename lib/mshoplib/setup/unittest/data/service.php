@@ -63,7 +63,7 @@ return array (
 				'paypalexpress.ApiPassword' => '1370351234',
 				'paypalexpress.ApiSignature' => 'AAZZBfWatx5wyxGsFzOqsM--jPYmApZPsklH4pTAnza8AaIJIyhUd3t.',
 				'paypalexpress.PaymentAction' => 'authorization',
-				'paypalexpress.PaypalUrl' => 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=',
+				'paypalexpress.PaypalUrl' => 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s',
 				'paypalexpress.ApiEndpoint' => 'https://api-3t.sandbox.paypal.com/nvp',
 				'payment.url-return' => 'http://returnurl.com/updatesync.php',
 				'payment.url-cancel' => 'http://cancelurl.com',
