@@ -99,7 +99,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 
 	public function testProductCreateFilterByCategoryPosition()
 	{
-		$filter = $this->_object->createProductFilterByCategory( 0, 'position', '-', 1, 2, 'test' );
+		$filter = $this->_object->createProductFilterByCategory( 0, 'relevance', '-', 1, 2, 'test' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 
