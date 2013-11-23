@@ -155,13 +155,11 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values = $this->_getOrderDetails( $orderBaseItem );
 		$values[ 'METHOD' ] = 'SetExpressCheckout';
 		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
-		$values[ 'RETURNURL' ] = 'http://returnurl.com/' . $this->_getConfigValue( array( 'payment.url-success' ), '/' );
-		$values[ 'CANCELURL' ] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ), '/' );
+		$values[ 'RETURNURL' ] = $this->_getConfigValue( array( 'payment.url-success' ) );
+		$values[ 'CANCELURL' ] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) );
 
-echo 'apiendpoint: ' . $this->_apiendpoint . PHP_EOL;
-print_r( $values );
-
-		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
+		$urlQuery = http_build_query( $values, '', '&' );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$default = 'https://www.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s';
@@ -195,7 +193,8 @@ print_r( $values );
 		$values['METHOD'] = 'GetTransactionDetails';
 		$values['TRANSACTIONID'] = $tid;
 
-		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
+		$urlQuery = http_build_query( $values, '', '&' );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -231,7 +230,8 @@ print_r( $values );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['AMT'] = $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts();
 
-		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
+		$urlQuery = http_build_query( $values, '', '&' );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->_setPaymentStatus( $order, $rvals );
@@ -276,7 +276,8 @@ print_r( $values );
 		$values['TRANSACTIONID'] = $tid;
 		$values['INVOICEID'] = $order->getId();
 
-		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
+		$urlQuery = http_build_query( $values, '', '&' );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'REFUNDTRANSACTIONID' => $rvals['REFUNDTRANSACTIONID'] );
@@ -310,7 +311,8 @@ print_r( $values );
 		$values['METHOD'] = 'DoVoid';
 		$values['AUTHORIZATIONID'] = $tid;
 
-		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
+		$urlQuery = http_build_query( $values, '', '&' );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
@@ -347,7 +349,8 @@ print_r( $values );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
 
-		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $values );
+		$urlQuery = http_build_query( $values, '', '&' );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'PAYERID' => $additional['PayerID'] );

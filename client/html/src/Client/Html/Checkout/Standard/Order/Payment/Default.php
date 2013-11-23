@@ -108,18 +108,18 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		$target = $view->config( 'client/html/checkout/confirm/url/target' );
 		$controller = $view->config( 'client/html/checkout/confirm/url/controller', 'checkout' );
 		$action = $view->config( 'client/html/checkout/confirm/url/action', 'confirm' );
-		$config = $view->config( 'client/html/checkout/confirm/url/config', array() );
+		$config = $view->config( 'client/html/checkout/confirm/url/config', array( 'absoluteUri' => true ) );
 
 		$confirmUrl = $view->url( $target, $controller, $action, array(), array(), $config );
 
 		$target = $view->config( 'client/html/checkout/update/url/target' );
 		$controller = $view->config( 'client/html/checkout/update/url/controller', 'checkout' );
 		$action = $view->config( 'client/html/checkout/update/url/action', 'update' );
-		$config = $view->config( 'client/html/checkout/update/url/config', array() );
+		$config = $view->config( 'client/html/checkout/update/url/config', array( 'absoluteUri' => true ) );
 
-		$notifyUrl = $view->url( $target, $controller, $action, array(), array(), $config );
+		$updateUrl = $view->url( $target, $controller, $action, array(), array(), $config );
 
-		$config = array( 'payment.url-success' => $confirmUrl, 'payment.url-update' => $notifyUrl );
+		$config = array( 'payment.url-success' => $confirmUrl, 'payment.url-update' => $updateUrl );
 
 
 		try
