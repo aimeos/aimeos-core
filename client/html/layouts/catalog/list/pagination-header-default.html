@@ -3,9 +3,18 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: pagination-header-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-echo $this->get( 'pagiHeader' );
+$enc = $this->encoder();
+$params = $this->get( 'listParams', array() );
+
+$listTarget = $this->config( 'client/html/catalog/list/url/target' );
+$listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 
 ?>
+<?php if( $this->get( 'listProductTotal', 0 ) > 0 ) : ?>
+<link rel="prev" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPagePrev ) + $params ) ); ?>" />
+<link rel="next" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageNext ) + $params ) ); ?>" />
+<?php endif; ?>
+<?php echo $this->get( 'pagiHeader' ); ?>

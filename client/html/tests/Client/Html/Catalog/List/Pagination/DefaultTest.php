@@ -74,7 +74,9 @@ class Client_Html_Catalog_List_Pagination_DefaultTest extends MW_Unittest_Testca
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
-		$this->assertEquals( '', $output );
+
+		$this->assertContains( '<link rel="prev"', $output );
+		$this->assertContains( '<link rel="next"', $output );
 	}
 
 
