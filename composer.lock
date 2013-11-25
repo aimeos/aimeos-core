@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Arcavias/ext-phpexcel.git",
-                "reference": "e9b256f635c1f2c0e06dc322d1e221169417ae4e"
+                "reference": "d0c618446ca59bf057e755d9010d3e63b7923b42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Arcavias/ext-phpexcel/zipball/e9b256f635c1f2c0e06dc322d1e221169417ae4e",
-                "reference": "e9b256f635c1f2c0e06dc322d1e221169417ae4e",
+                "url": "https://api.github.com/repos/Arcavias/ext-phpexcel/zipball/d0c618446ca59bf057e755d9010d3e63b7923b42",
+                "reference": "d0c618446ca59bf057e755d9010d3e63b7923b42",
                 "shasum": ""
             },
             "require": {
@@ -39,7 +39,7 @@
             ],
             "description": "Arcavias extension for providing PHPExcel containers",
             "homepage": "http://www.arcavias.com/en",
-            "time": "2013-10-07 17:17:39"
+            "time": "2013-11-22 13:16:42"
         },
         {
             "name": "arcavias/extension-installer",

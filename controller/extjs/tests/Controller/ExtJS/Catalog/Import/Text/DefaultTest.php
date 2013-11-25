@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -11,6 +11,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 	private $_object;
 	private $_testdir;
 	private $_testfile;
+	private $_context;
 
 
 	/**
@@ -36,16 +37,15 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-
-		$this->_testdir = $context->getConfig()->get( 'controller/extjs/catalog/import/text/default/uploaddir', './tmp' );
+		$this->_context = TestHelper::getContext();
+		$this->_testdir = $this->_context->getConfig()->get( 'controller/extjs/catalog/import/text/default/uploaddir', './tmp' );
 		$this->_testfile = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
 		if( !is_dir( $this->_testdir ) && mkdir( $this->_testdir, 0775, true ) === false ) {
 			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->_testdir ) );
 		}
 
-		$this->_object = new Controller_ExtJS_Catalog_Import_Text_Default( $context );
+		$this->_object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->_context );
 	}
 
 
@@ -68,62 +68,57 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$this->assertEquals( 2, count( $desc['Catalog_Import_Text.importFile'] ) );
 	}
 
-	public function testImportFile()
+
+	public function testImportFromCSVFile()
 	{
-		$context = TestHelper::getContext();
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
 
-		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$search = $catalogManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'catalog.code', 'root') );
+		$items = $catalogManager->searchItems( $search );
 
-		$params = new stdClass();
-		$params->lang = array( 'de', 'en' );
-		$params->items = $node->getId();
-		$params->site = $context->getLocale()->getSite()->getCode();
+		if( ( $root = reset( $items ) ) === false ) {
+			throw new Controller_ExtJS_Exception( 'No item found for catalog code "root"' );
+		}
+		$id = $root->getId();
 
-		if( ob_start() === false ) {
-			throw new Exception( 'Unable to start output buffering' );
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: long"'."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta desc"' ."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta keywords"' ."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta title"' ."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: name"' ."\n";
+		$data[] = '"en","Root","'.$id.'","default","name","","Root: short"' ."\n";
+		$data[] = ' ';
+
+		$csv = 'en-catalog-test.csv';
+		$filename = 'catalog-import.zip';
+
+
+		$fh = fopen( $csv, 'w' );
+
+		foreach( $data as $id => $row ) {
+			fwrite( $fh, $row );
 		}
 
-		$exporter = new Controller_ExtJS_Catalog_Export_Text_Default( $context );
-		$exporter->createHttpOutput( $params );
+		fclose( $fh );
 
-		$content = ob_get_contents();
-		ob_end_clean();
+		$zip = new ZipArchive();
+		$zip->open($filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+		$zip->addFile($csv, $csv);
+		$zip->close();
 
-
-		$filename = 'catalog-import.xlsx';
-		$filename2 = 'catalog-import.xls';
-
-		if( file_put_contents( $filename, $content ) === false ) {
-			throw new Exception( 'Unable write import file' );
+		if( unlink( $csv ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
 		}
-
-		$phpExcel = PHPExcel_IOFactory::load($filename);
-
-		if( unlink( $filename ) !== true ) {
-			throw new Exception( sprintf( 'Deleting file "%1$s" failed', $filename ) );
-		}
-
-		$sheet = $phpExcel->getSheet( 1 );
-
-		$sheet->setCellValueByColumnAndRow( 6, 2, 'Root: delivery info' );
-		$sheet->setCellValueByColumnAndRow( 6, 3, 'Root: long' );
-		$sheet->setCellValueByColumnAndRow( 6, 4, 'Root: name' );
-		$sheet->setCellValueByColumnAndRow( 6, 5, 'Root: payment info' );
-		$sheet->setCellValueByColumnAndRow( 6, 6, 'Root: short' );
-
-		$objWriter = PHPExcel_IOFactory::createWriter( $phpExcel, 'Excel5' );
-		$objWriter->save( $filename2 );
 
 
 		$params = new stdClass();
-		$params->site = $context->getLocale()->getSite()->getCode();
-		$params->items = $filename2;
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->items = $filename;
 
 		$this->_object->importFile( $params );
 
-
-		$textManager = MShop_Text_Manager_Factory::createManager( $context );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
@@ -158,22 +153,22 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		}
 
 
-		$this->assertEquals( 5, count( $textItems ) );
-		$this->assertEquals( 5, count( $listItems ) );
-
 		foreach( $textItems as $item ) {
 			$this->assertEquals( 'Root:', substr( $item->getContent(), 0, 5 ) );
 		}
 
-		if( file_exists( $filename2 ) !== false ) {
+		$this->assertEquals( 6, count( $textItems ) );
+		$this->assertEquals( 6, count( $listItems ) );
+
+		if( file_exists( $filename ) !== false ) {
 			throw new Exception( 'Import file was not removed' );
 		}
 	}
 
+
 	public function testUploadFile()
 	{
-		$context = TestHelper::getContext();
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $context );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 		$directory = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testdir';
@@ -189,7 +184,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 		$params = new stdClass();
 		$params->items = $this->_testfile;
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		$result = $this->_object->uploadFile( $params );
 
@@ -215,7 +210,6 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}
 
-
 	public function testUploadFileExeptionNoFiles()
 	{
 		$params = new stdClass();
@@ -227,5 +221,4 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
 		$result = $this->_object->uploadFile( $params );
 	}
-
 }

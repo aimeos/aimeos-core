@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 16:53+0100\n"
+"POT-Creation-Date: 2013-11-25 16:10+0100\n"
 "PO-Revision-Date: 2013-07-29 09:33+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias/language/vi/)\n"
@@ -65,9 +65,9 @@ msgstr ""
 msgid "Invalid address properties, please check your input"
 msgstr ""
 
-#: src/Controller/Frontend/Service/Factory.php:29
 #: src/Controller/Frontend/Basket/Factory.php:30
 #: src/Controller/Frontend/Common/Factory/Abstract.php:54
+#: src/Controller/Frontend/Service/Factory.php:29
 #: src/Controller/Frontend/Catalog/Factory.php:30
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""

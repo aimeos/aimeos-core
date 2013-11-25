@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -9,7 +9,7 @@
 class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
+	private $_context;
 
 	/**
 	 * Runs the test methods of this class.
@@ -34,7 +34,8 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Product_Export_Text_Default( TestHelper::getContext() );
+		$this->_context = TestHelper::getContext();
+		$this->_object = new Controller_ExtJS_Product_Export_Text_Default( $this->_context );
 	}
 
 
@@ -50,82 +51,9 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 	}
 
 
-	public function testcreateHttpOutput()
+	public function testExportCSVFile()
 	{
-		$context = TestHelper::getContext();
-		$manager = MShop_Product_Manager_Factory::createManager( $context );
-		$textTypeManager = MShop_Text_Manager_Factory::createManager( $context )->getSubManager('type');
-
-
-		$typeTotal = 0;
-		$typeSearch = $textTypeManager->createSearch();
-		$typeSearch->setConditions( $typeSearch->compare( '==', 'text.type.domain', 'product' ) );
-		$typeSearch->setSlice( 0, 0 );
-		$textTypeManager->searchItems( $typeSearch, array(), $typeTotal );
-
-
-		$ids = array();
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '!=', 'product.code', array( 'U:HIS', 'U:HISSUB01', 'U:HISSUB02' ) ) );
-		foreach( $manager->searchItems( $search ) as $item ) {
-			$ids[] = $item->getId();
-		}
-
-		$params = new stdClass();
-		$params->lang = array( 'de', 'en' );
-		$params->items = $ids;
-		$params->site = 'unittest';
-
-		if( ob_start() === false ) {
-			throw new Exception( 'Unable to start output buffering' );
-		}
-
-		$this->_object->createHttpOutput( $params );
-
-		$content = ob_get_contents();
-		ob_end_clean();
-
-		$filename = 'product-export.xls';
-
-		if( file_put_contents( $filename, $content ) === false ) {
-			throw new Exception( 'Unable to write export file' );
-		}
-
-		$phpExcel = PHPExcel_IOFactory::load($filename);
-
-		if( unlink( $filename ) === false ) {
-			throw new exception( 'unable to remove export file' );
-		}
-
-
-		$phpExcel->setActiveSheetIndex(0);
-		$sheet = $phpExcel->getActiveSheet();
-
-		$this->assertEquals( 'Language ID', $sheet->getCell('A1')->getValue() );
-		$this->assertEquals( 'Text', $sheet->getCell('G1')->getValue() );
-
-		for( $i = 2; $i < $typeTotal + 1; $i++ )
-		{
-			if( $sheet->getCell( 'E' . $i )->getValue() == 'name' ) {
-				break;
-			}
-		}
-		$this->assertLessThan( $typeTotal, $i );
-
-		$this->assertEquals( 'de', $sheet->getCell('A' . $i)->getValue() );
-		$this->assertEquals( 'default', $sheet->getCell('B' . $i)->getValue() );
-		$this->assertEquals( 'ABCD', $sheet->getCell('C' . $i)->getValue() );
-		$this->assertEquals( 'default', $sheet->getCell('D' . $i)->getValue() );
-		$this->assertEquals( 'name', $sheet->getCell('E' . $i)->getValue() );
-		$this->assertEquals( 'Unterproduct 1', $sheet->getCell('G' . $i)->getValue() );
-	}
-
-
-	public function testExportFile()
-	{
-		$context = TestHelper::getContext();
-
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$criteria = $productManager->createSearch();
 
 		$expr = array();
@@ -138,44 +66,61 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 			throw new Exception( 'No item with product code CNE found' );
 		}
 
-
 		$params = new stdClass();
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 		$params->items = $productItem->getId();
 		$params->lang = 'de';
 
 		$result = $this->_object->exportFile( $params );
+		$file = substr( $result['file'], 9, -14 );
 
-		$this->assertTrue( array_key_exists('file', $result) );
-
-		$file = substr($result['file'], 9, -14);
 		$this->assertTrue( file_exists( $file ) );
 
+		$zip = new ZipArchive();
+		$zip->open($file);
 
-		$inputFileType = PHPExcel_IOFactory::identify( $file );
-		$objReader = PHPExcel_IOFactory::createReader( $inputFileType );
-		$objReader->setLoadSheetsOnly( $params->lang );
-		$objPHPExcel = $objReader->load( $file );
+		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
+		if( mkdir( $testdir ) === false ) {
+			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
+		}
+
+		$zip->extractTo( $testdir );
+		$zip->close();
 
 		if( unlink( $file ) === false ) {
 			throw new Exception( 'Unable to remove export file' );
 		}
 
-		$objWorksheet = $objPHPExcel->getActiveSheet();
+		$deCSV = $testdir . DIRECTORY_SEPARATOR . 'de.csv';
 
-		$product = $productItem->toArray();
-
-		for ( $i = 2; $i < 8; $i++ )
-		{
-			$this->assertEquals( $params->lang, $objWorksheet->getCellByColumnAndRow( 0, $i )->getValue() );
-			$this->assertEquals( $product['product.type'], $objWorksheet->getCellByColumnAndRow( 1, $i )->getValue() );
-			$this->assertEquals( $product['product.code'], $objWorksheet->getCellByColumnAndRow( 2, $i )->getValue() );
+		$this->assertTrue( file_exists( $deCSV ) );
+		$fh = fopen( $deCSV, 'r' );
+		while( ( $data = fgetcsv( $fh ) ) != false ) {
+			$lines[] = $data;
+		}
+		fclose( $fh );
+		if( unlink( $deCSV ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
 		}
 
-		$this->assertEquals( 'List type', $objWorksheet->getCellByColumnAndRow( 3, 1 )->getValue() );
-		$this->assertEquals( 'Text type', $objWorksheet->getCellByColumnAndRow( 4, 1 )->getValue() );
-		$this->assertEquals( 'Text ID', $objWorksheet->getCellByColumnAndRow( 5, 1 )->getValue() );
-		$this->assertEquals( 'Text', $objWorksheet->getCellByColumnAndRow( 6, 1 )->getValue() );
+		if( rmdir( $testdir ) === false ) {
+			throw new Exception( 'Unable to remove test export directory' );
+		}
+
+		$this->assertEquals( $lines[0][0], 'Language ID' );
+		$this->assertEquals( $lines[0][1], 'Product type' );
+		$this->assertEquals( $lines[0][2], 'Product code' );
+		$this->assertEquals( $lines[0][3], 'List type' );
+		$this->assertEquals( $lines[0][4], 'Text type' );
+		$this->assertEquals( $lines[0][5], 'Text ID' );
+		$this->assertEquals( $lines[0][6], 'Text' );
+
+		$this->assertEquals( 'de', $lines[2][0] );
+		$this->assertEquals( 'default', $lines[2][1] );
+		$this->assertEquals( 'CNE', $lines[2][2] );
+		$this->assertEquals( 'unittype13', $lines[2][3] );
+		$this->assertEquals( 'metadescription', $lines[2][4] );
+		$this->assertEquals( 'Expresso', $lines[2][6] );
 	}
 
 
@@ -196,5 +141,4 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 
 		$this->assertEquals( $expected, $actual );
 	}
-
 }

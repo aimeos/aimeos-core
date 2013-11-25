@@ -158,8 +158,8 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 		$search = $listManager->createSearch();
 		$expr = array(
-			$search->compare( '==', $domain . '.list.parentid', array_keys( $itemIdMap ) ),
-			$search->compare( '==', $domain . '.list.domain', 'text' ),
+				$search->compare( '==', $domain . '.list.parentid', array_keys( $itemIdMap ) ),
+				$search->compare( '==', $domain . '.list.domain', 'text' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
@@ -207,68 +207,6 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 				}
 			}
 		}
-	}
-
-
-	/**
-	 * Imports a sheet of texts using the given text types.
-	 *
-	 * @param PHPExcel_Worksheet $sheet Sheet containing texts and associated data
-	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
-	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
-	 * @return array Two dimensional associated list of codes and text IDs as key
-	 */
-	protected function _importTextsFromXLS( PHPExcel_Worksheet $sheet, array $textTypeMap, $domain )
-	{
-		$codeIdMap = array();
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_getContext() );
-
-		$rowIter = $sheet->getRowIterator();
-		$rowIter->next(); // skip first row
-
-		while( $rowIter->valid() !== false )
-		{
-			$row = $rowIter->current();
-			$rowIter->next();
-
-			try
-			{
-				$value = $sheet->getCellByColumnAndRow( 6, $row->getRowIndex() )->getValue();
-				$textId = $sheet->getCellByColumnAndRow( 5, $row->getRowIndex() )->getValue();
-				$textType = $sheet->getCellByColumnAndRow( 4, $row->getRowIndex() )->getValue();
-
-				if( !isset( $textTypeMap[ $textType ] ) ) {
-					throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
-				}
-
-				if( $textId == '' && $value == '' ) {
-					continue;
-				}
-
-				$langId = $sheet->getCellByColumnAndRow( 0, $row->getRowIndex() )->getValue();
-
-				$item = $textManager->createItem();
-				$item->setLanguageId( ( $langId != '' ? $langId : null ) );
-				$item->setTypeId( $textTypeMap[ $textType ] );
-				$item->setDomain( $domain );
-				$item->setContent( $value );
-				$item->setStatus( 1 );
-
-				if( $textId != '' ) {
-					$item->setId( $textId );
-				}
-
-				$textManager->saveItem( $item );
-				$codeIdMap[ $sheet->getCellByColumnAndRow( 2, $row->getRowIndex() )->getValue() ][ $item->getId() ] =
-					$sheet->getCellByColumnAndRow( 3, $row->getRowIndex() )->getValue();
-			}
-			catch( Exception $e )
-			{
-				$this->_getContext()->getLogger()->log( sprintf( '%1$s text insert: %2$s', $domain, $e->getMessage() ), MW_Logger_Abstract::ERR, 'import' );
-			}
-		}
-
-		return $codeIdMap;
 	}
 
 
@@ -385,5 +323,97 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		}
 
 		$context->setLocale( $localeItem );
+	}
+
+
+	/**
+	 * Imports a sheet of texts using the given text types.
+	 *
+	 * @param PHPExcel_Worksheet $sheet Sheet containing texts and associated data
+	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
+	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
+	 * @return array Two dimensional associated list of codes and text IDs as key
+	 */
+	protected function _importTextsFromContent( MW_Container_Content_Interface $contentItem, array $textTypeMap, $domain )
+	{
+		$codeIdMap = array();
+		$context = $this->_getContext();
+		$textManager = MShop_Text_Manager_Factory::createManager( $context );
+		$manager = MShop_Factory::createManager( $context, $domain );
+		$listManager = $manager->getSubManager( 'list' );
+		$cnt = 0;
+
+		foreach( $contentItem as $row )
+		{
+
+			try
+			{
+				$value = isset( $row[6] ) ? $row[6] : '';
+				$textId = isset( $row[5] ) ? $row[5] : '';
+				$textType =  isset( $row[4] ) ? $row[4] : null;
+
+				if( !isset( $textTypeMap[ $textType ] ) ) {
+					throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
+				}
+
+				if( ($textId == '' && $value == '') ) {
+					continue;
+				}
+
+				$langId = $row[0];
+
+				$item = $textManager->createItem();
+
+				if( $textId != '' ) {
+					$item->setId( $textId );
+				}
+
+				$item->setLanguageId( ( $langId != '' ? $langId : null ) );
+				$item->setTypeId( $textTypeMap[ $textType ] );
+				$item->setDomain( $domain );
+				$item->setContent( $value );
+				$item->setStatus( 1 );
+
+				$textManager->saveItem( $item );
+
+				if( $textId === '' ){
+					$codeIdMap[$row[2]][$item->getId()] = $row[3];
+				}
+
+				if( $cnt++ == 1000) {
+					$this->_importReferences( $manager, $codeIdMap, $domain );
+					$codeIdMap = array();
+					$cnt = 0;
+				}
+
+			}
+			catch( Exception $e )
+			{
+				$this->_getContext()->getLogger()->log( sprintf( '%1$s text insert: %2$s', $domain, $e->getMessage() ), MW_Logger_Abstract::ERR, 'import' );
+			}
+		}
+
+		if( !empty($codeIdMap)) {
+			$this->_importReferences( $manager, $codeIdMap, $domain );
+		}
+	}
+
+
+	/**
+	 * Creates container for storing export files.
+	 *
+	 * @param string $resource Path to the file
+	 * @param string $container Extension of the container file
+	 * @param array $containerOptions Options for the container
+	 * @return MW_Container_Interface Container item
+	 */
+	protected function _createContainer( $resource, $key )
+	{
+		$config = $this->_getContext()->getConfig();
+		$type = $config->get( $key . '/type', 'Zip' );
+		$format = $config->get( $key . '/format', 'CSV' );
+		$options = $config->get( $key . '/options', array() );
+
+		return MW_Container_Factory::getContainer( $resource, $type, $format, $options );
 	}
 }

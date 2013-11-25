@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
@@ -30,7 +30,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 
 
 	/**
-	 * Uploads a XLS file with all catalog texts.
+	 * Uploads a CSV file with all catalog texts.
 	 *
 	 * @param stdClass $params Object containing the properties
 	 */
@@ -92,7 +92,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 
 
 	/**
-	 * Imports a XLS file with all catalog texts.
+	 * Imports a CSV file with all catalog texts.
 	 *
 	 * @param stdClass $params Object containing the properties
 	 */
@@ -148,40 +148,36 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 	 */
 	protected function _importFile( $path )
 	{
-		$type = PHPExcel_IOFactory::identify( $path );
-		$reader = PHPExcel_IOFactory::createReader( $type );
-		$reader->setReadDataOnly( true );
-		$phpExcel = $reader->load( $path );
+		$container = $this->_createContainer( $path, 'controller/extjs/catalog/import/text/default/container' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'catalog' ) as $item ) {
 			$textTypeMap[ $item->getCode() ] = $item->getId();
 		}
 
-		foreach( $phpExcel->getWorksheetIterator() as $sheet )
-		{
-			$catalogTextMap = $this->_importTextsFromXLS( $sheet, $textTypeMap, 'catalog' );
-			$this->_importCatalogReferences( $catalogTextMap );
+		foreach( $container as $content ) {
+			$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'catalog' );
 		}
 	}
 
 
 	/**
-	 * Associates the texts with the catalogs.
+	 * Associates the texts with the products.
 	 *
-	 * @param array $catalogTextMap Two dimensional associated list of codes and text IDs as key
+	 * @param MShop_Common_Manager_Interface $manager Manager object (attribute, product, etc.) for associating the list items
+	 * @param array $itemTextMap Two dimensional associated list of codes and text IDs as key
+	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 */
-	protected function _importCatalogReferences( array $catalogTextMap )
+	protected function _importReferences( MShop_Common_Manager_Interface $manager, array $itemTextMap, $domain )
 	{
 		$catalogStart = $catalogTotal = 0;
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
-		$listManager = $catalogManager->getSubManager( 'list' );
+		$listManager = $manager->getSubManager( 'list' );
 
 		do
 		{
-			$criteria = $catalogManager->createSearch();
-			$criteria->setConditions( $criteria->compare( '==', 'catalog.id', array_keys( $catalogTextMap ) ) );
-			$catalogItems = $catalogManager->searchItems( $criteria );
+			$criteria = $manager->createSearch();
+			$criteria->setConditions( $criteria->compare( '==', 'catalog.id', array_keys( $itemTextMap ) ) );
+			$catalogItems = $manager->searchItems( $criteria );
 			$catalogStart += count( $catalogItems );
 
 			$catalogIds = array();
@@ -202,7 +198,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 				$listStart += count( $catalogItems );
 
 				foreach( $listItems as $item ) {
-					unset( $catalogTextMap[ $item->getParentId() ][ $item->getRefId() ] );
+					unset( $itemTextMap[ $item->getParentId() ][ $item->getRefId() ] );
 				}
 			}
 			while( $listStart < $listTotal );
@@ -211,9 +207,9 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 		while( $catalogStart < $catalogTotal );
 
 
-		$listTypes = $this->_getTextListTypes( $catalogManager, 'catalog' );
+		$listTypes = $this->_getTextListTypes( $manager, 'catalog' );
 
-		foreach( $catalogTextMap as $catalogCode => $textIds )
+		foreach( $itemTextMap as $catalogCode => $textIds )
 		{
 			foreach( $textIds as $textId => $listType )
 			{

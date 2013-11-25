@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # dhoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky <n.sendetzky@metaways.de>, 2013
@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:16+0100\n"
+"POT-Creation-Date: 2013-11-25 16:10+0100\n"
 "PO-Revision-Date: 2013-11-21 16:23+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
@@ -25,9 +25,9 @@ msgstr ""
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
-#: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
 #: src/Controller/Jobs/Common/Factory/Abstract.php:141
+#: src/Controller/Jobs/Admin/Job/Default.php:81
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Klasse \"%1$s\" nicht verfügbar"
@@ -47,11 +47,11 @@ msgstr "Controllerpfad ist leer"
 msgid "Error while trying to send confirmation e-mail for order ID \"%1$s\": %2$s"
 msgstr "Fehler beim Versand der Bestätigungs-E-Mail für Bestellung \"%1$s\": %2$s"
 
+#: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Order/Email/Confirm/Factory.php:38
 #: src/Controller/Jobs/Order/Product/Stock/Factory.php:38
 #: src/Controller/Jobs/Admin/Job/Factory.php:38
 #: src/Controller/Jobs/Service/Delivery/Process/Factory.php:38
-#: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:38
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:38
 #, php-format
