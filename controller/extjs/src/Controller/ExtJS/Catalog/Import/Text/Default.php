@@ -148,7 +148,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 	 */
 	protected function _importFile( $path )
 	{
-		$container = $this->_createContainer( $path, 'controller/extjs/catalog/import/text/default/container/', 'controller/extjs/catalog/import/text/default/content/' );
+		$container = $this->_createContainer( $path, 'controller/extjs/catalog/import/text/default/container' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'catalog' ) as $item ) {

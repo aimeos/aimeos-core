@@ -148,7 +148,7 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 	 */
 	protected function _importFile( $path )
 	{
-		$container = $this->_createContainer( $path, 'controller/extjs/attribute/import/text/default/container/', 'controller/extjs/attribute/import/text/default/content/' );
+		$container = $this->_createContainer( $path, 'controller/extjs/attribute/import/text/default/container' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'attribute' ) as $item ) {

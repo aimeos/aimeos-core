@@ -40,7 +40,8 @@ class Controller_ExtJS_Product_Export_Text_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
-		$config = $this->_getContext()->getConfig();
+		$context = $this->_getContext();
+		$config = $context->getConfig();
 		$dir = $config->get( 'controller/extjs/product/export/text/default/exportdir', 'uploads' );
 
 		$items = (array) $params->items;
@@ -64,7 +65,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 			),
 		);
 
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_getContext() );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $context );
 		$jobController->saveItems( $result );
 
 		return array(
@@ -83,12 +84,13 @@ class Controller_ExtJS_Product_Export_Text_Default
 	{
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
-		$actualLangid = $this->_getContext()->getLocale()->getLanguageId();
+		$context = $this->_getContext();
+		$actualLangid = $context->getLocale()->getLanguageId();
 
 		$items = (array) $params->items;
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();
 
-		$config = $this->_getContext()->getConfig();
+		$config = $context->getConfig();
 		$dir = $config->get( 'controller/extjs/product/export/text/default/exportdir', 'uploads' );
 		$perms = $config->get( 'controller/extjs/product/export/text/default/dirperms', 0775 );
 
@@ -99,15 +101,16 @@ class Controller_ExtJS_Product_Export_Text_Default
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
 		}
 
-		$this->_getContext()->getLogger()->log( sprintf( 'Create export directory for product IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
-
-		$this->_getContext()->getLocale()->setLanguageId( $actualLangid );
+		$context->getLogger()->log( sprintf( 'Create export directory for product IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
 		$filename = $this->_exportProductData( $items, $lang, $tmpfolder );
+
+		$context->getLocale()->setLanguageId( $actualLangid );
+
 		$downloadFile = $config->get( 'controller/extjs/product/export/text/default/downloaddir', 'uploads' ) . DIRECTORY_SEPARATOR . basename( $filename );
 
 		return array(
-			'file' => '<a href="'.$downloadFile.'">Download</a>',
+			'file' => '<a href="'.$downloadFile.'">' . $context->getI18n()->dt( 'controller/extjs', 'Download' ) . '</a>',
 		);
 	}
 
@@ -143,7 +146,8 @@ class Controller_ExtJS_Product_Export_Text_Default
 	 */
 	protected function _exportProductData( array $ids, array $lang, $filename )
 	{
-		$manager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
+		$context = $this->_getContext();
+		$manager = MShop_Locale_Manager_Factory::createManager( $context );
 		$globalLanguageManager = $manager->getSubManager( 'language' );
 
 		$search = $globalLanguageManager->createSearch();
@@ -153,7 +157,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$containerItem = $this->_createContainer( $filename, 'controller/extjs/product/export/text/default/container/', 'controller/extjs/product/export/text/default/content/' );
+		$containerItem = $this->_createContainer( $filename, 'controller/extjs/product/export/text/default/container' );
 
 		$start = 0;
 
@@ -167,7 +171,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 
 				$contentItem = $containerItem->create( $langid );
 				$contentItem->add( array( 'Language ID', 'Product type', 'Product code', 'List type', 'Text type', 'Text ID', 'Text' ) );
-				$this->_getContext()->getLocale()->setLanguageId( $langid );
+				$context->getLocale()->setLanguageId( $langid );
 				$this->_addLanguage( $contentItem, $langid, $ids );
 
 				$containerItem->add( $contentItem );
