@@ -163,6 +163,8 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 		$this->_context = TestHelper::getContext();
 		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/format', 'PHPExcel' );
 		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/content/format', 'Excel5' );
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/import/text/default/container/format', 'PHPExcel' );
+		$this->_context->getConfig()->set( 'controller/extjs/attribute/import/text/default/content/format', 'Excel5' );
 		$this->_object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
 
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );

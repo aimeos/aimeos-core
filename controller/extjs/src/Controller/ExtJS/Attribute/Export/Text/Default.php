@@ -157,7 +157,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$containerItem = $this->_createContainer( $filename, 'attribute' );
+		$containerItem = $this->_createContainer( $filename, 'controller/extjs/attribute/export/text/default/container/', 'controller/extjs/attribute/export/text/default/content/' );
 
 		$start = 0;
 

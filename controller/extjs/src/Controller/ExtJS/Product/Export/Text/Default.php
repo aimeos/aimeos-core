@@ -153,7 +153,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		$containerItem = $this->_createContainer( $filename, 'product' );
+		$containerItem = $this->_createContainer( $filename, 'controller/extjs/product/export/text/default/container/', 'controller/extjs/product/export/text/default/content/' );
 
 		$start = 0;
 

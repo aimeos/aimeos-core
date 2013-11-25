@@ -161,6 +161,8 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$this->_context = TestHelper::getContext();
 		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/container/format', 'PHPExcel' );
 		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/content/format', 'Excel5' );
+		$this->_context->getConfig()->set( 'controller/extjs/product/import/text/default/container/format', 'PHPExcel' );
+		$this->_context->getConfig()->set( 'controller/extjs/product/import/text/default/content/format', 'Excel5' );
 		$this->_object = new Controller_ExtJS_Product_Import_Text_Default( $this->_context );
 
 		$filename = 'product-import-test.xlsx';

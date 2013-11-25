@@ -407,12 +407,12 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param array $containerOptions Options for the container
 	 * @return MW_Container_Interface Container item
 	 */
-	protected function _createContainer( $resource, $domain )
+	protected function _createContainer( $resource, $containerKey, $contentKey )
 	{
 		$config = $this->_getContext()->getConfig();
-		$type = $config->get( 'controller/extjs/'.$domain.'/export/text/default/container/format', 'Zip' );
-		$format = $config->get( 'controller/extjs/'.$domain.'/export/text/default/content/format', 'CSV' );
-		$options = $config->get( 'controller/extjs/'.$domain.'/export/text/default/container/options', array() );
+		$type = $config->get( $containerKey . 'format', 'Zip' );
+		$format = $config->get( $contentKey . 'format', 'CSV' );
+		$options = $config->get( $containerKey . 'options', array() );
 
 		return MW_Container_Factory::getContainer( $resource, $type, $format, $options );
 	}
