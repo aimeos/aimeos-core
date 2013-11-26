@@ -93,7 +93,7 @@ abstract class MShop_Service_Provider_Payment_Abstract
 		foreach ( $this->_beConfig as $key => $value )
 		{
 			if( isset( $attributes[$key] ) && $value['type'] != gettype( $attributes[$key] ) ) {
-				$error[ $key ] = sprintf( 'The type of attribute with key "%1$s" must be "%2$s"', $key, $value['type'] );
+				$error[ $key ] = sprintf( 'The type of the configuration option with key "%1$s" must be "%2$s"', $key, $value['type'] );
 			}
 		}
 

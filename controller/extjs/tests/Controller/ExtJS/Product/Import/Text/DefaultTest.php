@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -11,6 +11,7 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 	private $_object;
 	private $_testdir;
 	private $_testfile;
+	private $_context;
 
 
 	/**
@@ -36,16 +37,16 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$this->_context = TestHelper::getContext();
 
-		$this->_testdir = $context->getConfig()->get( 'controller/extjs/product/import/text/default/uploaddir', './tmp' );
+		$this->_testdir = $this->_context->getConfig()->get( 'controller/extjs/product/import/text/default/uploaddir', './tmp' );
 		$this->_testfile = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
 		if( !is_dir( $this->_testdir ) && mkdir( $this->_testdir, 0775, true ) === false ) {
 			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->_testdir ) );
 		}
 
-		$this->_object = new Controller_ExtJS_Product_Import_Text_Default( $context );
+		$this->_object = new Controller_ExtJS_Product_Import_Text_Default( $this->_context );
 	}
 
 
@@ -70,69 +71,43 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 	}
 
 
-	public function testImportFile()
+	public function testImportFromCSVFile()
 	{
-		$context = TestHelper::getContext();
-		$filename = 'product-import-test.xlsx';
+		$data[] = '"en","product","ABCD","default","long","","ABCD: long"'."\n";
+		$data[] = '"en","product","ABCD","default","metadescription","","ABCD: meta desc"' ."\n";
+		$data[] = '"en","product","ABCD","default","metakeywords","","ABCD: meta keywords"'."\n";
+		$data[] = '"en","product","ABCD","default","metatitle","","ABCD: meta title"'."\n";
+		$data[] = '"en","product","ABCD","default","name","","ABCD: name"'."\n";
+		$data[] = '"en","product","ABCD","default","short","","ABCD: short"'."\n";
+		$data[] = ' ';
 
-		$phpExcel = new PHPExcel();
-		$phpExcel->setActiveSheetIndex(0);
-		$sheet = $phpExcel->getActiveSheet();
+		$csv = 'en-product-test.csv';
+		$filename = 'product-import.zip';
+		$fh = fopen( $csv, 'w' );
 
-		$sheet->setCellValueByColumnAndRow( 0, 2, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 3, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 4, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 5, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 6, 'en' );
-		$sheet->setCellValueByColumnAndRow( 0, 7, 'en' );
+		foreach( $data as $id => $row ) {
+			fwrite( $fh, $row );
+		}
 
-		$sheet->setCellValueByColumnAndRow( 1, 2, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 3, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 4, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 5, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 6, 'product' );
-		$sheet->setCellValueByColumnAndRow( 1, 7, 'product' );
+		fclose( $fh );
 
-		$sheet->setCellValueByColumnAndRow( 2, 2, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 3, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 4, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 5, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 6, 'ABCD' );
-		$sheet->setCellValueByColumnAndRow( 2, 7, 'ABCD' );
+		$zip = new ZipArchive();
+		$zip->open($filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+		$zip->addFile($csv, $csv);
+		$zip->close();
 
-		$sheet->setCellValueByColumnAndRow( 3, 2, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 3, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 4, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 5, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 6, 'default' );
-		$sheet->setCellValueByColumnAndRow( 3, 7, 'default' );
-
-		$sheet->setCellValueByColumnAndRow( 4, 2, 'long' );
-		$sheet->setCellValueByColumnAndRow( 4, 3, 'metadescription' );
-		$sheet->setCellValueByColumnAndRow( 4, 4, 'metakeywords' );
-		$sheet->setCellValueByColumnAndRow( 4, 5, 'metatitle' );
-		$sheet->setCellValueByColumnAndRow( 4, 6, 'name' );
-		$sheet->setCellValueByColumnAndRow( 4, 7, 'short' );
-
-		$sheet->setCellValueByColumnAndRow( 6, 2, 'ABCD: long' );
-		$sheet->setCellValueByColumnAndRow( 6, 3, 'ABCD: meta desc' );
-		$sheet->setCellValueByColumnAndRow( 6, 4, 'ABCD: meta keywords' );
-		$sheet->setCellValueByColumnAndRow( 6, 5, 'ABCD: meta title' );
-		$sheet->setCellValueByColumnAndRow( 6, 6, 'ABCD: name' );
-		$sheet->setCellValueByColumnAndRow( 6, 7, 'ABCD: short' );
-
-		$objWriter = PHPExcel_IOFactory::createWriter($phpExcel, 'Excel2007');
-		$objWriter->save($filename);
+		if( unlink( $csv ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
+		}
 
 
 		$params = new stdClass();
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 		$params->items = $filename;
 
 		$this->_object->importFile( $params );
 
-
-		$textManager = MShop_Text_Manager_Factory::createManager( $context );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
@@ -152,7 +127,7 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 		}
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$listManager = $productManager->getSubManager( 'list' );
 		$criteria = $listManager->createSearch();
 
@@ -183,8 +158,7 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 	public function testUploadFile()
 	{
-		$context = TestHelper::getContext();
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $context );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 
@@ -199,7 +173,7 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 		$params = new stdClass();
 		$params->items = $this->_testfile;
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		$result = $this->_object->uploadFile( $params );
 
@@ -228,16 +202,13 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 	public function testUploadFileExceptionNoUploadFile()
 	{
-		$context = TestHelper::getContext();
-
 		$_FILES = array();
 
 		$params = new stdClass();
 		$params->items = 'file.txt';
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
 		$this->_object->uploadFile( $params );
 	}
-
 }

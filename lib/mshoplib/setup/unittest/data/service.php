@@ -28,7 +28,7 @@ return array (
 			'label' => 'unitlabel',
 			'provider' => 'Default',
 			'config' => array(
-				'url' => 'deliveryurl'
+				'default.url' => 'deliveryurl'
 			),
 			'status' => 1
 		),
@@ -59,14 +59,14 @@ return array (
 			'label' => 'PayPalExpress',
 			'provider' => 'PayPalExpress',
 			'config' => array(
-				'ApiUsername' => 'sellerde_api1.metaways.de',
-				'ApiPassword' => '1370351234',
-				'ApiSignature' => 'AAZZBfWatx5wyxGsFzOqsM--jPYmApZPsklH4pTAnza8AaIJIyhUd3t.',
-				'CancelUrl' => 'http://cancelurl.com',
-				'ReturnUrl' => 'http://returnurl.com/updatesync.php',
-				'PaymentAction' => 'authorization',
-				'PaypalUrl' => 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=',
-				'ApiEndpoint' => 'https://api-3t.sandbox.paypal.com/nvp'
+				'paypalexpress.ApiUsername' => 'sellerde_api1.metaways.de',
+				'paypalexpress.ApiPassword' => '1370351234',
+				'paypalexpress.ApiSignature' => 'AAZZBfWatx5wyxGsFzOqsM--jPYmApZPsklH4pTAnza8AaIJIyhUd3t.',
+				'paypalexpress.PaymentAction' => 'authorization',
+				'paypalexpress.PaypalUrl' => 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s',
+				'paypalexpress.ApiEndpoint' => 'https://api-3t.sandbox.paypal.com/nvp',
+				'payment.url-return' => 'http://returnurl.com/updatesync.php',
+				'payment.url-cancel' => 'http://cancelurl.com',
 			),
 			'status' => 1
 		),

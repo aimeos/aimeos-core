@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
@@ -31,7 +31,7 @@ class Controller_ExtJS_Product_Import_Text_Default
 
 
 	/**
-	 * Uploads a XLS file with all product texts.
+	 * Uploads a CSV file with all product texts.
 	 *
 	 * @param stdClass $params Object containing the properties
 	 */
@@ -93,7 +93,7 @@ class Controller_ExtJS_Product_Import_Text_Default
 
 
 	/**
-	 * Imports a XLS file with all product texts.
+	 * Imports a CSV file with all product texts.
 	 *
 	 * @param stdClass $params Object containing the properties
 	 */
@@ -143,28 +143,21 @@ class Controller_ExtJS_Product_Import_Text_Default
 
 
 	/**
-	 * Imports a file that can be understood by PHPExcel.
+	 * Imports a CSV file.
 	 *
 	 * @param string $path Path to file for importing
 	 */
 	protected function _importFile( $path )
 	{
-		$type = PHPExcel_IOFactory::identify( $path );
-		$reader = PHPExcel_IOFactory::createReader( $type );
-		$reader->setReadDataOnly( true );
-		$phpExcel = $reader->load( $path );
+		$container = $this->_createContainer( $path, 'controller/extjs/product/import/text/default/container' );
 
 		$textTypeMap = array();
 		foreach( $this->_getTextTypes( 'product' ) as $item ) {
 			$textTypeMap[ $item->getCode() ] = $item->getId();
 		}
 
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
-
-		foreach( $phpExcel->getWorksheetIterator() as $sheet )
-		{
-			$itemTextMap = $this->_importTextsFromXLS( $sheet, $textTypeMap, 'product' );
-			$this->_importReferences( $manager, $itemTextMap, 'product' );
+		foreach( $container as $content ) {
+			$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'product' );
 		}
 	}
 }

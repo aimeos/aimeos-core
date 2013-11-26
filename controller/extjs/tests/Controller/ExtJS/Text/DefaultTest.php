@@ -53,7 +53,11 @@ class Controller_ExtJS_Text_DefaultTest extends MW_Unittest_Testcase
 	{
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '~=' => (object) array( 'text.content' => 'Cafe Noire Expresso' ) ) ) ),
+			'condition' => (object) array( '&&' => array(
+					0 => (object) array( '~=' => (object) array( 'text.content' => 'Cafe Noire Expresso' ) ),
+					1 => (object) array( '==' => (object) array( 'text.languageid' => 'de' ) ),
+				)
+			),
 			'sort' => 'text.domain',
 			'dir' => 'ASC',
 			'start' => 0,

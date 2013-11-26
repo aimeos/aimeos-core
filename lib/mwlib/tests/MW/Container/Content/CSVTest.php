@@ -32,7 +32,7 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 
 	public function testNewFile()
 	{
-		$csv = new MW_Container_Content_CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile.csv', 'temp.txt' );
+		$csv = new MW_Container_Content_CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile', 'temp' );
 
 		$check = file_exists( $csv->getResource() );
 		unlink( $csv->getResource() );
@@ -44,7 +44,7 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 
 	public function testExistingFile()
 	{
-		$csv = new MW_Container_Content_CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv', 'test.txt' );
+		$csv = new MW_Container_Content_CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv', 'test' );
 
 		$this->assertEquals( true, file_exists( $csv->getResource() ) );
 	}
@@ -56,11 +56,12 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 			'csv-separator' => ';',
 			'csv-enclosure' => ':',
 			'csv-escape' => '\\',
+			'csv-lineend' => '|' . chr( 10 ),
 		);
 
-		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile.csv';
+		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile';
 
-		$csv = new MW_Container_Content_CSV( $path, 'temp.txt', $options );
+		$csv = new MW_Container_Content_CSV( $path, 'temp', $options );
 
 		$data = array(
 			array( 'test', 'file', 'data' ),
@@ -71,7 +72,7 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 			$csv->add( $entry );
 		}
 
-		$expected = ':test:;:file:;:data:' . PHP_EOL . ':\\::;:' . pack( 'x' ) . ':;:\\:' . PHP_EOL;
+		$expected = ':test:;:file:;:data:|' . chr( 10 ) . ':\\::;:' . pack( 'x' ) . ':;:\\:|' . chr( 10 );
 
 		if( ( $actual = file_get_contents( $csv->getResource() ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to get content of file "%1$s"', $csv->getResource() ) );
@@ -85,7 +86,12 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 
 	public function testIterator()
 	{
-		$csv = new MW_Container_Content_CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv', 'test.txt' );
+		$options = array(
+			'csv-lineend' => '|' . chr( 10 ),
+		);
+
+		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv';
+		$csv = new MW_Container_Content_CSV( $filename, 'test', $options );
 
 		$expected = array(
 			array( 'test', 'file', 'data' ),

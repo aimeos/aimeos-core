@@ -24,7 +24,7 @@ class TestHelper
 			self::$_context[$site] = self::_createContext( $site );
 		}
 
-		return self::$_context[$site];
+		return clone self::$_context[$site];
 	}
 
 
@@ -36,7 +36,7 @@ class TestHelper
 		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
 		$view->addHelper( 'translate', $helper );
 
-		$helper = new MW_View_Helper_Url_Default( $view, 'baseurl' );
+		$helper = new MW_View_Helper_Url_Default( $view, 'http://baseurl' );
 		$view->addHelper( 'url', $helper );
 
 		$helper = new MW_View_Helper_Number_Default( $view, '.', '' );

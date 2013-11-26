@@ -1,0 +1,12 @@
+{
+    "projectName": "Arcavias <extname> extension",
+    "deployDir": "deploy",
+    "licenseText": "",
+    "pkgs": [{
+        "name": "Arcavias <extname>",
+        "file": "js/arcavias-<extname>.js",
+        "isDebug": true,
+        "fileIncludes": []
+    }],
+    "resources" : []
+}

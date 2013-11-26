@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -9,6 +9,7 @@
 class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_context;
 
 
 	/**
@@ -34,7 +35,8 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 	 */
 	protected function setUp()
 	{
-		$this->_object = new Controller_ExtJS_Catalog_Export_Text_Default( TestHelper::getContext() );
+		$this->_context = TestHelper::getContext();
+		$this->_object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->_context );
 	}
 
 
@@ -50,73 +52,9 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 	}
 
 
-	public function testcreateHttpOutput()
+	public function testExportCSVFile()
 	{
-		$manager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
-		$node = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
-
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.label', array( 'Root', 'Tee' ) ) );
-
-		$ids = array();
-		foreach ( $manager->searchItems( $search ) as $item ) {
-			$ids[$item->getLabel()] = $item->getId();
-		}
-
-
-		$params = new stdClass();
-		$params->lang = array( 'de', 'fr' );
-		$params->items = array( $node->getId() );
-		$params->site = 'unittest';
-
-		if( ob_start() === false ) {
-			throw new Exception( 'Unable to start output buffering' );
-		}
-
-		$this->_object->createHttpOutput( $params );
-
-		$content = ob_get_contents();
-		ob_end_clean();
-
-
-		$filename = 'catalog-export.xls';
-
-		if( file_put_contents( $filename, $content ) === false ) {
-			throw new Exception( 'Unable to write export file' );
-		}
-
-		$phpExcel = PHPExcel_IOFactory::load($filename);
-
-		if( unlink( $filename ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
-		}
-
-		$phpExcel->setActiveSheetIndex( 0 );
-		$sheet = $phpExcel->getActiveSheet();
-
-		$this->assertEquals( 'Language ID', $sheet->getCell( 'A1' )->getValue() );
-		$this->assertEquals( 'Text', $sheet->getCell( 'G1' )->getValue() );
-
-		$this->assertEquals( 'de', $sheet->getCell( 'A4' )->getValue() );
-		$this->assertEquals( 'Root', $sheet->getCell( 'B4' )->getValue() );
-		$this->assertEquals( $ids['Root'], $sheet->getCell( 'C4' )->getValue() );
-		$this->assertEquals( 'default', $sheet->getCell( 'D4' )->getValue() );
-		$this->assertEquals( 'name', $sheet->getCell( 'E4' )->getValue() );
-		$this->assertEquals( '', $sheet->getCell( 'G4' )->getValue() );
-
-		$this->assertEquals( 'de', $sheet->getCell( 'A21' )->getValue() );
-		$this->assertEquals( 'Tee', $sheet->getCell( 'B21' )->getValue() );
-		$this->assertEquals( $ids['Tee'], $sheet->getCell( 'C21' )->getValue() );
-		$this->assertEquals( 'unittype8', $sheet->getCell( 'D21' )->getValue() );
-		$this->assertEquals( 'long', $sheet->getCell( 'E21' )->getValue() );
-		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $sheet->getCell( 'G21' )->getValue() );
-	}
-
-	public function testExportFile()
-	{
-		$context = TestHelper::getContext();
-
-		$manager = MShop_Catalog_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
 		$node = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
 		$search = $manager->createSearch();
@@ -130,7 +68,7 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$params = new stdClass();
 		$params->lang = array( 'de', 'fr' );
 		$params->items = array( $node->getId() );
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		$result = $this->_object->exportFile( $params );
 
@@ -139,34 +77,58 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$file = substr($result['file'], 9, -14);
 		$this->assertTrue( file_exists( $file ) );
 
+		$zip = new ZipArchive();
+		$zip->open($file);
 
-		$inputFileType = PHPExcel_IOFactory::identify( $file );
-		$objReader = PHPExcel_IOFactory::createReader( $inputFileType );
-		$objPHPExcel = $objReader->load( $file );
-		$objPHPExcel->setActiveSheetIndex( 0 );
+		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport';
+		if( mkdir( $testdir ) === false ) {
+			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
+		}
+
+		$zip->extractTo( $testdir );
+		$zip->close();
 
 		if( unlink( $file ) === false ) {
 			throw new Exception( 'Unable to remove export file' );
 		}
 
-		$sheet = $objPHPExcel->getActiveSheet();
+		$langs['fr'] = $testdir . DIRECTORY_SEPARATOR . 'fr.csv';
+		$langs['de'] = $testdir . DIRECTORY_SEPARATOR . 'de.csv';
 
-		$this->assertEquals( 'Language ID', $sheet->getCell( 'A1' )->getValue() );
-		$this->assertEquals( 'Text', $sheet->getCell( 'G1' )->getValue() );
+		foreach( $langs as $lang => $path )
+		{
+			$this->assertTrue( file_exists( $path ) );
+			$fh = fopen( $path, 'r' );
+			while( ( $data = fgetcsv( $fh ) ) != false ) {
+				$lines[ $lang ][] = $data;
+			}
 
-		$this->assertEquals( 'de', $sheet->getCell( 'A4' )->getValue() );
-		$this->assertEquals( 'Root', $sheet->getCell( 'B4' )->getValue() );
-		$this->assertEquals( $ids['Root'], $sheet->getCell( 'C4' )->getValue() );
-		$this->assertEquals( 'default', $sheet->getCell( 'D4' )->getValue() );
-		$this->assertEquals( 'name', $sheet->getCell( 'E4' )->getValue() );
-		$this->assertEquals( '', $sheet->getCell( 'G4' )->getValue() );
+			fclose( $fh );
+			if( unlink( $path ) === false ) {
+				throw new Exception( 'Unable to remove export file' );
+			}
+		}
 
-		$this->assertEquals( 'de', $sheet->getCell( 'A21' )->getValue() );
-		$this->assertEquals( 'Tee', $sheet->getCell( 'B21' )->getValue() );
-		$this->assertEquals( $ids['Tee'], $sheet->getCell( 'C21' )->getValue() );
-		$this->assertEquals( 'unittype8', $sheet->getCell( 'D21' )->getValue() );
-		$this->assertEquals( 'long', $sheet->getCell( 'E21' )->getValue() );
-		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $sheet->getCell( 'G21' )->getValue() );
+		if( rmdir( $testdir ) === false ) {
+			throw new Exception( 'Unable to remove test export directory' );
+		}
+
+		$this->assertEquals( 'Language ID', $lines['de'][0][0] );
+		$this->assertEquals( 'Text', $lines['de'][0][6] );
+
+		$this->assertEquals( 'de', $lines['de'][3][0] );
+		$this->assertEquals( 'Root', $lines['de'][3][1] );
+		$this->assertEquals( $ids['Root'], $lines['de'][3][2] );
+		$this->assertEquals( 'default', $lines['de'][3][3] );
+		$this->assertEquals( 'name', $lines['de'][3][4] );
+		$this->assertEquals( '', $lines['de'][3][6] );
+
+		$this->assertEquals( 'de', $lines['de'][20][0] );
+		$this->assertEquals( 'Tee', $lines['de'][20][1] );
+		$this->assertEquals( $ids['Tee'], $lines['de'][20][2] );
+		$this->assertEquals( 'unittype8', $lines['de'][20][3] );
+		$this->assertEquals( 'long', $lines['de'][20][4] );
+		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $lines['de'][20][6] );
 	}
 
 
@@ -186,5 +148,4 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 
 		$this->assertEquals( $expected, $actual );
 	}
-
 }

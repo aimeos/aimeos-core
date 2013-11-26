@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-25 13:22+0200\n"
+"POT-Creation-Date: 2013-11-25 16:10+0100\n"
 "PO-Revision-Date: 2013-07-26 11:41+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
@@ -44,9 +44,9 @@ msgstr "Das Produkt an Position \"%1$d\" im Warenkorb kann nicht gelöscht werde
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
-#: src/Controller/Frontend/Factory.php:60
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
 #: src/Controller/Frontend/Common/Factory/Abstract.php:137
+#: src/Controller/Frontend/Factory.php:60
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Klasse \"%1$s\" nicht verfügbar"
@@ -68,8 +68,8 @@ msgstr "Ein oder mehrere Adressteile sind ungültig. Bitte überprüfen Sie Ihre
 
 #: src/Controller/Frontend/Basket/Factory.php:30
 #: src/Controller/Frontend/Common/Factory/Abstract.php:54
-#: src/Controller/Frontend/Catalog/Factory.php:30
 #: src/Controller/Frontend/Service/Factory.php:29
+#: src/Controller/Frontend/Catalog/Factory.php:30
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"

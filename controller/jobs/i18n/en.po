@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-27 13:26+0200\n"
+"POT-Creation-Date: 2013-11-25 16:10+0100\n"
 "PO-Revision-Date: 2013-09-24 16:22+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -23,15 +23,19 @@ msgstr ""
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-#: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
 #: src/Controller/Jobs/Common/Factory/Abstract.php:141
-#: src/Controller/Jobs/Factory.php:61
+#: src/Controller/Jobs/Admin/Job/Default.php:81
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
 
-#: src/Controller/Jobs/Factory.php:42
+#: src/Controller/Jobs/Factory.php:58
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr ""
+
+#: src/Controller/Jobs/Factory.php:41
 #, php-format
 msgid "Controller path is empty"
 msgstr ""
@@ -41,20 +45,15 @@ msgstr ""
 msgid "Error while trying to send confirmation e-mail for order ID \"%1$s\": %2$s"
 msgstr ""
 
+#: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Order/Email/Confirm/Factory.php:38
 #: src/Controller/Jobs/Order/Product/Stock/Factory.php:38
 #: src/Controller/Jobs/Admin/Job/Factory.php:38
-#: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Service/Delivery/Process/Factory.php:38
-#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:38
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:38
+#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:38
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
-
-#: src/Controller/Jobs/Factory.php:52
-#, php-format
-msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:68
@@ -62,9 +61,19 @@ msgstr ""
 msgid "Invalid characters in job name \"%1$s\""
 msgstr ""
 
+#: src/Controller/Jobs/Factory.php:49
+#, php-format
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr ""
+
 #: src/Controller/Jobs/Common/Factory/Abstract.php:88
 #, php-format
 msgid "Invalid domain \"%1$s\""
+msgstr ""
+
+#: src/Controller/Jobs/Factory.php:64
+#, php-format
+msgid "Invalid factory \"%1$s\""
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:74
@@ -78,7 +87,6 @@ msgid "Method \"%1$s\" not available"
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
-#: src/Controller/Jobs/Factory.php:67
 #, php-format
 msgid "Unable to call factory method \"%1$s\""
 msgstr ""

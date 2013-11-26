@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-07-29 09:33+0000\n"
-"Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
+"PO-Revision-Date: 2013-11-19 16:51+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias/language/vi/)\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -146,19 +146,19 @@ msgstr ""
 
 #. Stock level
 msgid "stock-high"
-msgstr "in stock"
+msgstr ""
 
 #. Stock level
 msgid "stock-low"
-msgstr "only a few available"
+msgstr ""
 
 #. Stock level
 msgid "stock-out"
-msgstr "out of stock"
+msgstr ""
 
 #. Stock level
 msgid "stock-unlimited"
-msgstr "in stock"
+msgstr ""
 
 #. Warehouse code
 msgid "warehouse:default"

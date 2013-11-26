@@ -11,7 +11,7 @@
 	
 	<target name="coverage" description="Generates the code coverage report">
 		<echo msg="Generating code coverage report" />
-		<delete file="tests/unittests.log" quiet="true" failonerror="false" />
+		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<exec command="phpunit --configuration=phpunit-coverage.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
@@ -37,11 +37,11 @@
 	<target name="i18n" description="Creates translation message files">
 		<exec command="find ./src/ -type f | xgettext -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=sprintf:1 -o i18n/core-controller-frontend.pot -f -"
 			checkreturn="true" logoutput="true" />
-    <foreach param="po-fname" absparam="po-filename" target="i18n-update">
-        <fileset dir="./i18n">
-            <include name="*.po" />
-        </fileset>
-    </foreach>
+	    <foreach param="po-fname" absparam="po-filename" target="i18n-update">
+	        <fileset dir="./i18n">
+	            <include name="*.po" />
+	        </fileset>
+	    </foreach>
 	</target>
 	
 	<target name="i18n-update" description="Updates translation message files">

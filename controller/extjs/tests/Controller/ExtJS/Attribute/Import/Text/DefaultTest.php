@@ -11,7 +11,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 	private $_object;
 	private $_testdir;
 	private $_testfile;
-
+	private $_context;
 
 	/**
 	 * Runs the test methods of this class.
@@ -36,16 +36,16 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$this->_context = TestHelper::getContext();
 
-		$this->_testdir = $context->getConfig()->get( 'controller/extjs/attribute/import/text/default/uploaddir', './tmp' );
+		$this->_testdir = $this->_context->getConfig()->get( 'controller/extjs/attribute/import/text/default/uploaddir', './tmp' );
 		$this->_testfile = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
 		if( !is_dir( $this->_testdir ) && mkdir( $this->_testdir, 0775, true ) === false ) {
 			throw new Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->_testdir ) );
 		}
 
-		$this->_object = new Controller_ExtJS_Attribute_Import_Text_Default( $context );
+		$this->_object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
 	}
 
 
@@ -73,72 +73,51 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 	}
 
 
-	public function testImportFile()
+	public function testImportFromCSVFile()
 	{
-		$context = TestHelper::getContext();
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $context );
+		$data[] = '"en","color","white","default","name","","unittest: white"'."\n";
+		$data[] = '"en","color","blue","default","name","","unittest: blue"' ."\n";
+		$data[] = '"en","color","red","default","name","","unittest: red"'."\n";
+		$data[] = '"en","size","l","default","name","","unittest: l"'."\n";
+		$data[] = '"en","size","xl","default","name","","unittest: xl"'."\n";
+		$data[] = '"en","size","xxl","default","name","","unittest: xxl"'."\n";
+		$data[] = ' ';
 
-		$ids = array();
-		foreach( $attributeManager->searchItems( $attributeManager->createSearch() ) as $item ) {
-			$ids[] = $item->getId();
+		$csv = 'en-attribute-test.csv';
+		$filename = 'attribute-import.zip';
+
+		$fh = fopen( $csv, 'w' );
+
+		foreach( $data as $id => $row ) {
+			fwrite( $fh, $row );
+		}
+
+		fclose( $fh );
+
+
+		$zip = new ZipArchive();
+		$zip->open($filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+		$zip->addFile($csv, $csv);
+		$zip->close();
+
+		if( unlink( $csv ) === false ) {
+			throw new Exception( 'Unable to remove export file' );
 		}
 
 		$params = new stdClass();
-		$params->lang = array( 'de', 'en' );
-		$params->items = $ids;
-		$params->site = $context->getLocale()->getSite()->getCode();
-
-		if( ob_start() === false ) {
-			throw new Exception( 'Unable to start output buffering' );
-		}
-
-		$exporter = new Controller_ExtJS_Attribute_Export_Text_Default( $context );
-		$exporter->createHttpOutput( $params );
-
-		$content = ob_get_contents();
-		ob_end_clean();
-
-
-		$filename = 'attribute-import.xlsx';
-
-		if( file_put_contents( $filename, $content ) === false ) {
-			throw new Exception( 'Unable write import file' );
-		}
-
-		$phpExcel = PHPExcel_IOFactory::load( $filename );
-
-		$phpExcel->setActiveSheetIndex( 1 );
-		$sheet = $phpExcel->getActiveSheet();
-
-		$sheet->setCellValueByColumnAndRow( 6, 2, 'white: img-desc' );
-		$sheet->setCellValueByColumnAndRow( 6, 3, 'white: long' );
-		$sheet->setCellValueByColumnAndRow( 6, 4, 'white: name' );
-		$sheet->setCellValueByColumnAndRow( 6, 5, 'white: short' );
-		// test exceptions for text types
-		$sheet->setCellValueByColumnAndRow( 4, 2, 'bad-text-type-exception1' );
-		$sheet->setCellValueByColumnAndRow( 5, 2, 'bad-text-type-id-exception2' );
-		// test exceptions for list types
-		$sheet->setCellValueByColumnAndRow( 3, 3, 'bad-list-type-exception3' );
-
-		$objWriter = PHPExcel_IOFactory::createWriter( $phpExcel, 'Excel2007' );
-		$objWriter->save( $filename );
-
-
-		$params = new stdClass();
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 		$params->items = $filename;
 
 		$this->_object->importFile( $params );
 
-
-		$textManager = MShop_Text_Manager_Factory::createManager( $context );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
 		$expr[] = $criteria->compare( '==', 'text.domain', 'attribute' );
 		$expr[] = $criteria->compare( '==', 'text.languageid', 'en' );
 		$expr[] = $criteria->compare( '==', 'text.status', 1 );
-		$expr[] = $criteria->compare( '~=', 'text.content', 'white:' );
+		$expr[] = $criteria->compare( '~=', 'text.content', 'unittest:' );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 		$textItems = $textManager->searchItems( $criteria );
@@ -151,6 +130,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 		}
 
 
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
 		$listManager = $attributeManager->getSubManager( 'list' );
 		$criteria = $listManager->createSearch();
 
@@ -165,13 +145,12 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 			$listManager->deleteItem( $item->getId() );
 		}
 
-
-		$this->assertEquals( 3, count( $textItems ) ); // 4 without exception testing
-		$this->assertEquals( 2, count( $listItems ) ); // 4 without exception testing
-
 		foreach( $textItems as $item ) {
-			$this->assertEquals( 'white:', substr( $item->getContent(), 0, 6 ) );
+			$this->assertEquals( 'unittest:', substr( $item->getContent(), 0, 9 ) );
 		}
+
+		$this->assertEquals( 6, count( $textItems ) );
+		$this->assertEquals( 6, count( $listItems ) );
 
 		if( file_exists( $filename ) !== false ) {
 			throw new Exception( 'Import file was not removed' );
@@ -181,8 +160,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 
 	public function testUploadFile()
 	{
-		$context = TestHelper::getContext();
-		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $context );
+		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 
@@ -196,7 +174,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 
 		$params = new stdClass();
 		$params->items = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
-		$params->site = $context->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		$result = $this->_object->uploadFile( $params );
 
@@ -376,11 +354,10 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 	{
 		set_error_handler( 'TestHelper::errorHandler' );
 
-		$ctx = TestHelper::getContext();
-		$ctx->getConfig()->set('controller/extjs/attribute/import/text/default/uploaddir', '/up/');
-		$ctx->getConfig()->set('controller/extjs/attribute/import/text/default/enablecheck', false);
+		$this->_context->getConfig()->set('controller/extjs/attribute/import/text/default/uploaddir', '/up/');
+		$this->_context->getConfig()->set('controller/extjs/attribute/import/text/default/enablecheck', false);
 
-		$object = new Controller_ExtJS_Attribute_Import_Text_Default( $ctx );
+		$object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 
@@ -388,7 +365,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 
 		$params = new stdClass();
 		$params->items = $this->_testdir . DIRECTORY_SEPARATOR . 'file.txt';
-		$params->site = $ctx->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		$_FILES['unittest'] = array(
 			'name' => 'file.txt',
@@ -447,9 +424,8 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 
 	protected function _prepareCheckFileUpload()
 	{
-		$ctx = TestHelper::getContext();
-		$ctx->getConfig()->set('controller/extjs/attribute/import/text/default/enablecheck', true);
-		$object = new Controller_ExtJS_Attribute_Import_Text_Default( $ctx );
+		$this->_context->getConfig()->set('controller/extjs/attribute/import/text/default/enablecheck', true);
+		$object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 		$directory = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testdir';
@@ -458,7 +434,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 
 		$params = new stdClass();
 		$params->items = $this->_testfile;
-		$params->site = TestHelper::getContext()->getLocale()->getSite()->getCode();
+		$params->site = $this->_context->getLocale()->getSite()->getCode();
 
 		return array($params,$object);
 	}

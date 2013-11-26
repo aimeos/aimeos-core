@@ -55,6 +55,26 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$filter = $this->_object->createProductFilterDefault();
+		$list = $this->_object->aggregate( $filter, 'catalog.index.attribute.id' );
+
+		$this->assertGreaterThan( 0, count( $list ) );
+	}
+
+
+	public function testProductCreateFilterDefault()
+	{
+		$filter = $this->_object->createProductFilterDefault();
+
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertEquals( array(), $filter->getSortations() );
+		$this->assertEquals( 0, $filter->getSliceStart() );
+		$this->assertEquals( 100, $filter->getSliceSize() );
+	}
+
+
 	public function testProductCreateFilterByCategory()
 	{
 		$filter = $this->_object->createProductFilterByCategory( 0 );
@@ -79,7 +99,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 
 	public function testProductCreateFilterByCategoryPosition()
 	{
-		$filter = $this->_object->createProductFilterByCategory( 0, 'position', '-', 1, 2, 'test' );
+		$filter = $this->_object->createProductFilterByCategory( 0, 'relevance', '-', 1, 2, 'test' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
 

@@ -161,9 +161,11 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 
 		$this->_object->process();
 
+		$expectedUrl = 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=';
+
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
 		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $view->get( 'paymentForm' ) );
 		$this->assertEquals( 'POST', $view->paymentForm->getMethod() );
-		$this->assertStringStartsWith( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=', $view->paymentForm->getUrl() );
+		$this->assertStringStartsWith( $expectedUrl, $view->paymentForm->getUrl() );
 	}
 }
