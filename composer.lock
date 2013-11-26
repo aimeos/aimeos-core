@@ -3,44 +3,8 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8b38d8612dd829fd5f13f4a161e044df",
+    "hash": "f508593e614e0361718eaa0fc6017fb6",
     "packages": [
-        {
-            "name": "arcavias/ext-phpexcel",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Arcavias/ext-phpexcel.git",
-                "reference": "d0c618446ca59bf057e755d9010d3e63b7923b42"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Arcavias/ext-phpexcel/zipball/d0c618446ca59bf057e755d9010d3e63b7923b42",
-                "reference": "d0c618446ca59bf057e755d9010d3e63b7923b42",
-                "shasum": ""
-            },
-            "require": {
-                "arcavias/extension-installer": "dev-master"
-            },
-            "type": "arcavias-extension",
-            "autoload": {
-                "psr-0": {
-                    "MW": "lib/custom/src",
-                    "PHPExcel": "lib/phpexcel"
-                },
-                "classmap": [
-                    "lib/custom/src",
-                    "lib/phpexcel"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "description": "Arcavias extension for providing PHPExcel containers",
-            "homepage": "http://www.arcavias.com/en",
-            "time": "2013-11-22 13:16:42"
-        },
         {
             "name": "arcavias/extension-installer",
             "version": "dev-master",
@@ -81,14 +45,14 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "arcavias/extension-installer": 20,
-        "arcavias/ext-phpexcel": 20
+        "arcavias/extension-installer": 20
     },
     "platform": {
         "php": ">=5.2.0",
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-json": "*",
+        "ext-iconv": "*",
         "ext-pcre": "*",
         "ext-pdo": "*",
         "ext-pdo_mysql": "*",
