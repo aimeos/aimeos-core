@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
+ * Copyright (c) Metaways Infosystems GmbH, 2013
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -19,7 +19,35 @@ MShop.elements.sitelanguage.ComboBox = function(config) {
         pageSize: 20,
         emptyText: _('all'),
         typeAhead: true
-    });
+//        listeners: 
+//        { 
+//        	'render' : 
+//	        {
+//				fn: function(combo, metaData, record, rowIndex, colIndex, store) {
+//					if(combo.getValue() == 'all') {
+//						combo.setValue('all');
+//					} else {
+//						console.log( combo );
+//						console.log(combo.getRawValue());
+//						var lang = MShop.elements.sitelanguage.getStore().getById(combo.getRawValue());
+//						
+//						var mappedLang = MShop.elements.sitelanguage.getLanguagesStore().getById(lang);
+//						combo.setValue( mappedLang );
+//					}
+//				}
+//			}
+//			'expand' :
+//			{
+//				fn: function(langId, metaData, record, rowIndex, colIndex, store) {
+//					var lang = MShop.elements.sitelanguage.getStore().getById(langId);
+//					var mappedLang = MShop.elements.sitelanguage.getLanguagesStore().getById(lang);
+//					console.log( 'expand' );
+//					metaData.css = 'statustext-' + ( lang ? Number( lang.get('locale.status') ) : '1' );
+//					this.setValue( mappedLang ) || this.setValue('all');
+//				}
+//			}
+//		}
+    }); 
     
     MShop.elements.sitelanguage.ComboBox.superclass.constructor.call(this, config);
 };
@@ -37,17 +65,14 @@ Ext.reg('MShop.elements.sitelanguage.combo', MShop.elements.sitelanguage.ComboBo
  */
 MShop.elements.sitelanguage.renderer = function(langId, metaData, record, rowIndex, colIndex, store) {
 
-//	var lang = MShop.elements.sitelanguage.getStore().getById(langId);
-//
-//    metaData.css = 'statustext-' + ( lang ? Number( lang.get('locale.status') ) : '1' );
-//
-//    return langId || _('all');
+	var lang = MShop.elements.sitelanguage.getStore().getById(langId);
+	var mappedLang = MShop.elements.sitelanguage.getLanguagesStore().getById(lang);
+
+    metaData.css = 'statustext-' + ( lang ? Number( lang.get('locale.status') ) : '1' );
+
+    return mappedLang || _('all');
 };
 
-
-MShop.elements.sitelanguage.getFields = function() {
-	
-}
 
 /**
  * @static
@@ -55,18 +80,29 @@ MShop.elements.sitelanguage.getFields = function() {
  * @return {Ext.data.DirectStore}
  */
 MShop.elements.sitelanguage.getStore = function() {
-	var newEntry = Ext.data.Record.create([
-			{name:'locale.languageid', mapping:'locale.languageid' },
-			{name:'locale.status', mapping:'locale.status' },
-			{name:'locale.language.label', mapping:'locale.language.label' }
-		] 
-	);
-	
-	
-	
-	
-	if (! MShop.elements.sitelanguage._store) {
+    if (! MShop.elements.sitelanguage._store) {
         MShop.elements.sitelanguage._store = MShop.GlobalStoreMgr.createStore('Locale', {
+            remoteSort: true,
+            autoLoad: true,
+            sortInfo: {
+                field: 'locale.status',
+                direction: 'DESC'
+            }
+        });
+        
+        MShop.elements.sitelanguage._store.each(function (el) {
+        	console.log(el.toString());
+        });
+        console.error(MShop.elements.sitelanguage._store.count());
+    }
+    
+    return MShop.elements.sitelanguage._store;
+};
+
+
+MShop.elements.sitelanguage.getLanguagesStore = function() {
+    if (! MShop.elements.sitelanguage._langstore) {
+        MShop.elements.sitelanguage._langstore = MShop.GlobalStoreMgr.createStore('Locale_Language', {
             remoteSort: true,
             sortInfo: {
                 field: 'locale.status',
@@ -75,53 +111,11 @@ MShop.elements.sitelanguage.getStore = function() {
         });
     }
     
-    if (! MShop.elements.sitelanguage._languages) {
-        MShop.elements.sitelanguage._languages = MShop.GlobalStoreMgr.createStore('Locale_Language', {
-            remoteSort: true,
-            sortInfo: {
-                field: 'locale.language.status',
-                direction: 'DESC'
-            }
-        });
-        
-        
-        var langid = [];
-        var status = [];
-        MShop.elements.sitelanguage._store.load(function(){
-		    this.each(function(record){
-		        langid.push(record.get('locale.languageid'));
-		        status.push(record.get('locale.status'));
-		       // Do stuff with value
-		    })
-		});
-
-		    
-    if(! MShop.elements.sitelanguage._newstore ) {
-    	MShop.elements.sitelanguage._newstore = new Ext.data.DirectStore(Ext.apply({
-    		autoLoad: true
-    	}));
-    }
-    
-    return MShop.elements.sitelanguage._newstore;
-};
-
-
-MShop.elements.sitelanguage.getLanguageStore = function() {
-	   if (! MShop.elements.sitelanguage._languages) {
-        MShop.elements.sitelanguage._languages = MShop.GlobalStoreMgr.createStore('Locale_Language', {
-            remoteSort: true,
-            sortInfo: {
-                field: 'locale.language.status',
-                direction: 'DESC'
-            }
-        });
-        
-        return MShop.elements.sitelanguage._languages;
-    }
+    return MShop.elements.sitelanguage._langstore;
 };
 
 // preload
-Ext.onReady(function() { 
-MShop.elements.sitelanguage.getLanguageStore().load(); 
-MShop.elements.sitelanguage.getStore().load(); 
-})};
+Ext.onReady(function() {
+	MShop.elements.sitelanguage.getStore().load(); 
+	MShop.elements.sitelanguage.getLanguagesStore().load(); 
+});
