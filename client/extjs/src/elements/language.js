@@ -32,22 +32,6 @@ Ext.reg('MShop.elements.language.combo', MShop.elements.language.ComboBox);
 /**
  * @static
  * 
- * @param {String} langId
- * @return {String} label
- */
-MShop.elements.language.renderer = function(langId, metaData, record, rowIndex, colIndex, store) {
-
-	var lang = MShop.elements.language.getStore().getById(langId);
-
-    metaData.css = 'statustext-' + ( lang ? Number( lang.get('locale.language.status') ) : '1' );
-
-    return langId || _('all');
-};
-
-
-/**
- * @static
- * 
  * @return {Ext.data.DirectStore}
  */
 MShop.elements.language.getStore = function() {
