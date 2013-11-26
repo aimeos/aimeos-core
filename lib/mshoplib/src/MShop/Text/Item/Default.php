@@ -145,7 +145,7 @@ class MShop_Text_Item_Default
 	{
 		if ( $text == $this->getContent() ) { return; }
 
-		$this->_values['content'] = (string) $text;
+		$this->_values['content'] = @iconv( 'UTF-8', 'UTF-8//IGNORE', (string) $text );
 		$this->setModified();
 	}
 

@@ -147,6 +147,15 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testSetContentUtf8Invalid()
+	{
+		$this->_object->setContent( chr( 0x96 ) . 'укгезәөшөхзәхөшк2049һһлдябчсячмииюсит.июбҗрарэ' );
+		$this->assertEquals( 'укгезәөшөхзәхөшк2049һһлдябчсячмииюсит.июбҗрарэ', $this->_object->getContent() );
+
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( 2, $this->_object->getStatus() );
