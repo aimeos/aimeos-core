@@ -65,12 +65,9 @@ MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							maxLength : 255,
 							emptyText : _('Job label (required)')
 						}, {
-							xtype : 'textfield',
+							xtype : 'displayfield',
 							fieldLabel : _('Method'),
 							name : 'job.method',
-							allowBlank : false,
-							maxLength : 255,
-							emptyText : _('Called controller/method (required)')
 						}, {
 							xtype : 'displayfield',
 							fieldLabel : _('Created'),
