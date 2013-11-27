@@ -85,7 +85,6 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 		$context = $this->_getContext();
-		$actualLangid = $context->getLocale()->getLanguageId();
 
 		$items = (array) $params->items;
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();
@@ -93,6 +92,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		$config = $context->getConfig();
 		$dir = $config->get( 'controller/extjs/catalog/export/text/default/exportdir', 'uploads' );
 		$perms = $config->get( 'controller/extjs/catalog/export/text/default/dirperms', 0775 );
+		$downloaddir = $config->get( 'controller/extjs/catalog/export/text/default/downloaddir', 'uploads' );
 
 		$foldername = 'catalog-text-export_' . date('Y-m-d_H:i:s') . '_' . md5( time() . getmypid() );
 		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
@@ -103,11 +103,8 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 		$context->getLogger()->log( sprintf( 'Create export directory for catalog IDs: %1$s', implode( ',', $items ) ), MW_Logger_Abstract::DEBUG );
 
-		$filename = $this->_exportCatalogData( $items, $lang, $tmpfolder );
-
-		$context->getLocale()->setLanguageId( $actualLangid );
-
-		$downloadFile = $config->get( 'controller/extjs/catalog/export/text/default/downloaddir', 'uploads' ) . DIRECTORY_SEPARATOR . basename( $filename );
+		$filename = $this->_exportData( $items, $lang, $tmpfolder );
+		$downloadFile = $downloaddir . DIRECTORY_SEPARATOR . basename( $filename );
 
 		return array(
 			'file' => '<a href="'.$downloadFile.'">'.$context->getI18n()->dt( 'controller/extjs', 'Download' ).'</a>',
@@ -144,7 +141,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * @param string $filename Temporary folder name where to write export files
 	 * @return string Path to the exported file
 	 */
-	protected function _exportCatalogData( array $ids, array $lang, $filename )
+	protected function _exportData( array $ids, array $lang, $filename )
 	{
 		$context = $this->_getContext();
 		$manager = MShop_Locale_Manager_Factory::createManager( $context );
@@ -158,7 +155,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		}
 
 		$containerItem = $this->_createContainer( $filename, 'controller/extjs/catalog/export/text/default/container' );
-
+		$actualLangid = $context->getLocale()->getLanguageId();
 		$start = 0;
 
 		do
@@ -183,6 +180,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 		}
 		while( $count == $search->getSliceSize() );
 
+		$context->getLocale()->setLanguageId( $actualLangid );
 		$containerItem->close();
 
 		return $containerItem->getName();
@@ -232,7 +230,6 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 				foreach( $textItems as $textItem )
 				{
 					$listType = ( isset( $listTypes[ $textItem->getId() ] ) ? $listTypes[ $textItem->getId() ] : '' );
-
 					$items = array( $langid, $item->getLabel(), $item->getId(), $listType, $textTypeItem->getCode(), '', '' );
 
 					// use language of the text item because it may be null
