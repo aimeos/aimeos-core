@@ -15,12 +15,12 @@
 		"ext-curl": "*",
 		"ext-dom": "*",
 		"ext-json": "*",
+		"ext-iconv": "*",
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
 		"ext-zip": "*",
-		"arcavias/extension-installer": "dev-master",
-		"arcavias/ext-phpexcel": "dev-master"
+		"arcavias/extension-installer": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
