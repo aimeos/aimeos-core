@@ -4,6 +4,7 @@ vendor/
 
 misc/apidoc/
 coverage/
+tmp/
 *.junit.xml
 *.log
 

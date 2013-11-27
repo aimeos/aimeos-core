@@ -103,10 +103,20 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
-		foreach( $items as $entry )
+		foreach( $items as $path )
 		{
-			$this->_importFile( $entry );
-			unlink( $entry );
+			$container = $this->_createContainer( $path, 'controller/extjs/attribute/import/text/default/container' );
+
+			$textTypeMap = array();
+			foreach( $this->_getTextTypes( 'attribute' ) as $item ) {
+				$textTypeMap[ $item->getCode() ] = $item->getId();
+			}
+
+			foreach( $container as $content ) {
+				$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'attribute' );
+			}
+
+			unlink( $path );
 		}
 
 		return array(
@@ -138,25 +148,5 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 				"returns" => "",
 			),
 		);
-	}
-
-
-	/**
-	 * Imports a file that can be understood by PHPExcel.
-	 *
-	 * @param string $path Path to file for importing
-	 */
-	protected function _importFile( $path )
-	{
-		$container = $this->_createContainer( $path, 'controller/extjs/attribute/import/text/default/container' );
-
-		$textTypeMap = array();
-		foreach( $this->_getTextTypes( 'attribute' ) as $item ) {
-			$textTypeMap[ $item->getCode() ] = $item->getId();
-		}
-
-		foreach( $container as $content ) {
-			$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'attribute' );
-		}
 	}
 }

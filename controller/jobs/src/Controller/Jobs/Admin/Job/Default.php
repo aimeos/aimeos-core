@@ -94,13 +94,13 @@ class Controller_Jobs_Admin_Job_Default
 					$result = $controller->$method( (object) $item->getParameter() );
 
 					$item->setResult( $result );
-					$item->setStatus( 0 );
+					$item->setStatus( -1 );
 				}
 				catch( Exception $e )
 				{
 					$str = 'Error while processing job "%1$s": %2$s';
 					$context->getLogger()->log( sprintf( $str, $item->getMethod(), $e->getMessage() ) );
-					$item->setStatus( -1 );
+					$item->setStatus( 0 );
 				}
 
 				$jobManager->saveItem( $item );

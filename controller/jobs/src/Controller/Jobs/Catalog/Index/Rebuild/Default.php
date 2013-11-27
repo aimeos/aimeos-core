@@ -47,6 +47,11 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 	 */
 	public function run()
 	{
+		$context = clone $this->_getContext();
+
+		$context->getLocale()->setLanguageId( null );
+		$context->getLocale()->setCurrencyId( null );
+
 		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
 		$manager->getSubManager( 'index' )->rebuildIndex();
 	}

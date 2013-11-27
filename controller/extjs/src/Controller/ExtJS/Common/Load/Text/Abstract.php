@@ -336,16 +336,17 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 */
 	protected function _importTextsFromContent( MW_Container_Content_Interface $contentItem, array $textTypeMap, $domain )
 	{
+		$count = 0;
 		$codeIdMap = array();
 		$context = $this->_getContext();
 		$textManager = MShop_Text_Manager_Factory::createManager( $context );
 		$manager = MShop_Factory::createManager( $context, $domain );
 		$listManager = $manager->getSubManager( 'list' );
-		$cnt = 0;
 
-		foreach( $contentItem as $row )
+		$contentItem->next(); // skip description row
+
+		while( ( $row = $contentItem->current() ) !== null )
 		{
-
 			try
 			{
 				$value = isset( $row[6] ) ? $row[6] : '';
@@ -356,11 +357,9 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 					throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
 				}
 
-				if( ($textId == '' && $value == '') ) {
+				if( $textId == '' && $value == '' ) {
 					continue;
 				}
-
-				$langId = $row[0];
 
 				$item = $textManager->createItem();
 
@@ -368,7 +367,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 					$item->setId( $textId );
 				}
 
-				$item->setLanguageId( ( $langId != '' ? $langId : null ) );
+				$item->setLanguageId( ( $row[0] != '' ? $row[0] : null ) );
 				$item->setTypeId( $textTypeMap[ $textType ] );
 				$item->setDomain( $domain );
 				$item->setContent( $value );
@@ -376,24 +375,26 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 				$textManager->saveItem( $item );
 
-				if( $textId === '' ){
-					$codeIdMap[$row[2]][$item->getId()] = $row[3];
+				if( $textId === '' ) {
+					$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
 				}
 
-				if( $cnt++ == 1000) {
+				if( ++$count == 1000 )
+				{
 					$this->_importReferences( $manager, $codeIdMap, $domain );
 					$codeIdMap = array();
-					$cnt = 0;
+					$count = 0;
 				}
-
 			}
 			catch( Exception $e )
 			{
 				$this->_getContext()->getLogger()->log( sprintf( '%1$s text insert: %2$s', $domain, $e->getMessage() ), MW_Logger_Abstract::ERR, 'import' );
 			}
+
+			$contentItem->next();
 		}
 
-		if( !empty($codeIdMap)) {
+		if( !empty( $codeIdMap ) ) {
 			$this->_importReferences( $manager, $codeIdMap, $domain );
 		}
 	}
@@ -410,6 +411,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	protected function _createContainer( $resource, $key )
 	{
 		$config = $this->_getContext()->getConfig();
+
 		$type = $config->get( $key . '/type', 'Zip' );
 		$format = $config->get( $key . '/format', 'CSV' );
 		$options = $config->get( $key . '/options', array() );

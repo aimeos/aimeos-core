@@ -82,6 +82,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		}
 		$id = $root->getId();
 
+		$data[] = '"Language ID","Catalog code","Catalog ID","List type","Text type","Text ID","Text"'."\n";
 		$data[] = '"en","Root","'.$id.'","default","name","","Root: long"'."\n";
 		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta desc"' ."\n";
 		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta keywords"' ."\n";

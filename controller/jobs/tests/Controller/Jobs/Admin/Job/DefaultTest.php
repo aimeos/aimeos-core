@@ -94,7 +94,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 			->with( $this->equalTo( array( 'number' => 42 ) ) );
 
 		$this->_jobItemStub->expects( $this->once() )->method( 'setStatus' )
-			->with( $this->equalTo( 0 ) );
+			->with( $this->equalTo( -1 ) );
 
 
 		$object = new Controller_Jobs_Admin_Job_Default( $context, $arcavias );
@@ -126,7 +126,7 @@ class Controller_Jobs_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 			->will( $this->returnValue( $method ) );
 
 		$this->_jobItemStub->expects( $this->once() )->method( 'setStatus' )
-			->with( $this->equalTo( -1 ) );
+			->with( $this->equalTo( 0 ) );
 
 
 		$object->run();
