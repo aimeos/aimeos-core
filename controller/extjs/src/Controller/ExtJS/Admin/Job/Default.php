@@ -60,8 +60,24 @@ class Controller_ExtJS_Admin_Job_Default
 			if( isset( $entry->{'job.label'} ) ) { $item->setLabel( $entry->{'job.label'} ); }
 			if( isset( $entry->{'job.method'} ) ) { $item->setMethod( $entry->{'job.method'} ); }
 			if( isset( $entry->{'job.status'} ) ) { $item->setStatus( $entry->{'job.status'} ); }
-			if( isset( $entry->{'job.parameter'} ) ) { $item->setParameter( $entry->{'job.parameter'} ); }
-			if( isset( $entry->{'job.result'} ) ) { $item->setResult( $entry->{'job.result'} ); }
+
+			if( isset( $entry->{'job.parameter'} ) )
+			{
+				if( is_string( $entry->{'job.parameter'} ) ) {
+					$item->setParameter( json_decode( $entry->{'job.parameter'}, true ) );
+				} else {
+					$item->setParameter( (array) $entry->{'job.parameter'} );
+				}
+			}
+
+			if( isset( $entry->{'job.result'} ) )
+			{
+				if( is_string( $entry->{'job.result'} ) ) {
+					$item->setResult( json_decode( $entry->{'job.result'}, true ) );
+				} else {
+					$item->setResult( (array) $entry->{'job.result'} );
+				}
+			}
 
 			$this->_manager->saveItem( $item );
 
