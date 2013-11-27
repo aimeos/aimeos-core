@@ -15,7 +15,7 @@
 		"ext-curl": "*",
 		"ext-dom": "*",
 		"ext-json": "*",
-		"ext-iconv": "*",
+		"ext-mbstring": "*",
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",

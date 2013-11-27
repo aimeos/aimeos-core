@@ -370,6 +370,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 				$item->setLanguageId( ( $row[0] != '' ? $row[0] : null ) );
 				$item->setTypeId( $textTypeMap[ $textType ] );
 				$item->setDomain( $domain );
+				$item->setLabel( mb_strcut( $value, 0, 255 ) );
 				$item->setContent( $value );
 				$item->setStatus( 1 );
 
