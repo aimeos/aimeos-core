@@ -56,7 +56,7 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 			'csv-separator' => ';',
 			'csv-enclosure' => ':',
 			'csv-escape' => '\\',
-			'csv-lineend' => '|' . chr( 10 ),
+			'csv-lineend' => "\r\n",
 		);
 
 		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile';
@@ -72,7 +72,7 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 			$csv->add( $entry );
 		}
 
-		$expected = ':test:;:file:;:data:|' . chr( 10 ) . ':\\::;:' . pack( 'x' ) . ':;:\\:|' . chr( 10 );
+		$expected = ":test:;:file:;:data:\r\n:\\::;:" . pack( 'x' ) . ":;:\\:\r\n";
 
 		if( ( $actual = file_get_contents( $csv->getResource() ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to get content of file "%1$s"', $csv->getResource() ) );
@@ -86,12 +86,8 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 
 	public function testIterator()
 	{
-		$options = array(
-			'csv-lineend' => '|' . chr( 10 ),
-		);
-
 		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv';
-		$csv = new MW_Container_Content_CSV( $filename, 'test', $options );
+		$csv = new MW_Container_Content_CSV( $filename, 'test' );
 
 		$expected = array(
 			array( 'test', 'file', 'data' ),

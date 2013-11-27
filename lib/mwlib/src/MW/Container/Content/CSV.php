@@ -176,21 +176,13 @@ class MW_Container_Content_CSV
 	{
 		do
 		{
-			if( ( $line = fgets( $this->_fh ) ) === false ) {
+			$data = fgetcsv( $this->_fh, 0, $this->_separator, $this->_enclosure, $this->_escape );
+
+			if( $data === false ) {
 				return null;
 			}
 		}
-		while( $line === $this->_lineend );
-
-		$enclosure = $this->_enclosure;
-		$enclen = strlen( $enclosure );
-		$endlen = strlen( $this->_lineend );
-
-		$data = explode( $enclosure . $this->_separator . $enclosure, substr( $line, $enclen, -$enclen - $endlen ) );
-
-		foreach( $data as $key => $entry ) {
-			$data[$key] = str_replace( $enclosure . $enclosure, $enclosure, $entry );
-		}
+		while( $data === array( null ) );
 
 		return $data;
 	}
