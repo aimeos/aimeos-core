@@ -139,33 +139,4 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 		$this->assertEquals( 'REDIRECT', $view->paymentForm->getMethod() );
 		$this->assertEquals( 'paymenturl', $view->paymentForm->getUrl() );
 	}
-
-
-	public function testProcessPayPal()
-	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-
-		$search = $orderManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.datepayment', '2011-09-17 16:14:32' ) );
-		$result = $orderManager->searchItems( $search );
-
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No order item found' );
-		}
-
-		$view = TestHelper::getView();
-		$view->orderItem = $item;
-		$view->orderBasket = $orderBaseManager->load( $item->getBaseId() );
-		$this->_object->setView( $view );
-
-		$this->_object->process();
-
-		$expectedUrl = 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=';
-
-		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
-		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $view->get( 'paymentForm' ) );
-		$this->assertEquals( 'POST', $view->paymentForm->getMethod() );
-		$this->assertStringStartsWith( $expectedUrl, $view->paymentForm->getUrl() );
-	}
 }
