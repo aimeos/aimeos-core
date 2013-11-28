@@ -242,11 +242,24 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		}
 	},
 
-	onAfterSave: function() {
+	onAfterSave : function() {
 		this.isSaveing = false;
 		this.saveMask.hide();
-
 		this.close();
+
+		if (this.isCopy === true) {
+			var itemUi = Ext.ComponentMgr.create({
+						xtype : this.xtype,
+						domain : this.domain,
+						record : this.record,
+						store : this.store,
+						listUI : this,
+						isNewRecord: false,
+						isCopy: false
+					});
+
+			itemUi.show();
+		}
 	}
 });
 
