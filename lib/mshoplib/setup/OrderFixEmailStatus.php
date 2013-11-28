@@ -81,6 +81,7 @@ class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
 				7 => 'email-returned',
 			);
 
+			$cntRows = 0;
 			foreach( $mapping as $value => $type )
 			{
 				$stmt = $this->_conn->create( $stmts['change'] );
