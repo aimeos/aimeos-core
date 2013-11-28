@@ -102,7 +102,14 @@ class Controller_ExtJS_Product_Default
 			}
 
 			$this->_manager->saveItem( $item );
-			$ids[] = $item->getId();
+			$id = $item->getId();
+
+			if( isset( $entry->{'isCopiedItem'} ) &&  isset( $entry->{'isCopiedItemOlDId'} ) ) {
+				$this->_copyListItems( $entry->{'isCopiedItemOlDId'}, $id, 'product' );
+// 				echo "oldid:".$entry->{'isCopiedItemOlDId'}."newid:".$id;
+			}
+
+			$ids[] = $id;
 		}
 
 		$search = $this->_manager->createSearch();

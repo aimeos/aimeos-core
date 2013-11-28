@@ -86,6 +86,34 @@ abstract class Controller_ExtJS_Abstract
 	}
 
 
+	protected function _copyListItems( $oldId, $newId, $domain )
+	{
+		$listManager = $this->_getManager()->getSubManager('list');
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', $domain . '.list.parentid', $oldId ) );
+		$listItems = $listManager->searchItems( $search );
+
+		$start = 0;
+
+		do
+		{
+			$result = $listManager->searchItems( $search );
+
+			foreach( $listItems as $item )
+			{
+				$item->setId(null);
+				$item->setParentId( $newId );
+				$listManager->saveItem( $item );
+			}
+
+			$count = count( $result );
+			$start += $count;
+			$search->setSlice( $start );
+		}
+		while( $count == $search->getSliceSize() );
+	}
+
+
 	/**
 	 * Retrieves all items matching the given criteria.
 	 *
