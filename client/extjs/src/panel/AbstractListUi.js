@@ -1,6 +1,6 @@
-/*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
- * LGPLv3, http://www.arcavias.com/en/license
+/*
+ * ! Copyright (c) Metaways Infosystems GmbH, 2011 LGPLv3,
+ * http://www.arcavias.com/en/license
  */
 
 
@@ -111,7 +111,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.grid.on('rowcontextmenu', this.onGridContextMenu, this);
 		this.grid.on('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
 		this.grid.getSelectionModel().on('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
-		
+
 		MShop.panel.AbstractListUi.superclass.initComponent.apply(this, arguments);
 
 		Ext.apply(this.grid, {
@@ -141,7 +141,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			disabled: true,
 			handler: this.onOpenEditWindow.createDelegate(this, ['edit'])
 		});
-		
+
 		this.actionCopy = new Ext.Action({
 			text: _('Copy'),
 			disabled: true,
@@ -234,7 +234,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
 	onBeforeLoad: function(store, options) {
 		this.setSiteParam(store);
-		
+
 		if (this.domain) {
 			this.setDomainFilter(store, options);
 		}
@@ -337,18 +337,21 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
 		itemUi.show();
 	},
-	
+
 	getRecord: function( action ) {
 		if( action == 'add' ) {
 			return null;
-		} 
+		}
 		else if( action == 'copy' )
 		{
 			var record = new this.store.recordType();
 			var edit = this.grid.getSelectionModel().getSelected().copy();
 			record.data = edit.data;
 			record.data[ this.idProperty ] = null;
-			
+
+			record.set("isCopiedItem", true);
+			record.set("isCopiedItemOlDId", edit.id);
+
 			return record;
 		}
 		return this.grid.getSelectionModel().getSelected();
@@ -357,7 +360,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	onStoreException: function(proxy, type, action, options, response) {
 		var title = _( 'Error' );
 		var msg, code;
-		
+
 		if( response.error !== undefined ) {
 			msg = response && response.error ? response.error.message : _( 'No error information available' );
 			code = response && response.error ? response.error.code : 0;
