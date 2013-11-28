@@ -136,8 +136,13 @@ class Controller_ExtJS_Media_Default
 			}
 
 			$this->_manager->saveItem( $item );
+			$id = $item->getId();
 
-			$ids[] = $item->getId();
+			if( isset( $entry->{'isCopiedItem'} ) &&  isset( $entry->{'isCopiedItemOlDId'} ) ) {
+				$this->_copyListItems( $entry->{'isCopiedItemOlDId'}, $id, 'media' );
+			}
+
+			$ids[] = $id;
 		}
 
 		$search = $this->_manager->createSearch();

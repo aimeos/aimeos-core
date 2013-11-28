@@ -106,7 +106,6 @@ class Controller_ExtJS_Product_Default
 
 			if( isset( $entry->{'isCopiedItem'} ) &&  isset( $entry->{'isCopiedItemOlDId'} ) ) {
 				$this->_copyListItems( $entry->{'isCopiedItemOlDId'}, $id, 'product' );
-// 				echo "oldid:".$entry->{'isCopiedItemOlDId'}."newid:".$id;
 			}
 
 			$ids[] = $id;

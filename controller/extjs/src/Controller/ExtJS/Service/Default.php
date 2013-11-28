@@ -64,7 +64,13 @@ class Controller_ExtJS_Service_Default
 			if( isset( $entry->{'service.status'} ) ) { $item->setStatus( $entry->{'service.status'} ); }
 
 			$this->_manager->saveItem( $item );
-			$ids[] = $item->getId();
+			$id = $item->getId();
+
+			if( isset( $entry->{'isCopiedItem'} ) &&  isset( $entry->{'isCopiedItemOlDId'} ) ) {
+				$this->_copyListItems( $entry->{'isCopiedItemOlDId'}, $id, 'service' );
+			}
+
+			$ids[] = $id;
 		}
 
 		$search = $this->_manager->createSearch();

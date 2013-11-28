@@ -124,6 +124,47 @@ class Controller_ExtJS_Product_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCopy()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$listManager = $productManager->getSubManager('list');
+
+		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
+		$result = $typeManager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No product type found' );
+		}
+
+		$saveParams = (object) array(
+			'site' => 'unittest',
+			'items' => (object) array(
+				'product.code' => 'CNEcopy',
+				'product.label' => 'CNE copy test',
+				'product.status' => 1,
+				'product.datestart' => '2000-01-01 00:00:00',
+				'product.dateend' => '2001-01-01 00:00:00',
+				'product.suppliercode' => '',
+				'product.typeid' => $item->getTypeId(),
+				'isCopiedItem' => true,
+				'isCopiedItemOlDId' => $item->getId()
+			),
+		);
+
+		$searchParams = (object) array(
+			'site' => 'unittest',
+			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'product.code' => 'CNEcopy' ) ) ) )
+		);
+
+		$saved = $this->_object->saveItems( $saveParams );
+		$searched = $this->_object->searchItems( $searchParams );
+
+		$search = $listManager->createSearch();
+		$search->setCondition( $search->compare( '==', 'product.list.parentid', $item->getId() ) );
+
+	}
+
+
 	public function testFinish()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );

@@ -64,8 +64,13 @@ class Controller_ExtJS_Price_Default
 			if( isset( $entry->{'price.status'} ) ) { $item->setStatus( $entry->{'price.status'} ); }
 
 			$this->_manager->saveItem( $item );
+			$id = $item->getId();
 
-			$ids[] = $item->getId();
+			if( isset( $entry->{'isCopiedItem'} ) &&  isset( $entry->{'isCopiedItemOlDId'} ) ) {
+				$this->_copyListItems( $entry->{'isCopiedItemOlDId'}, $id, 'price' );
+			}
+
+			$ids[] = $id;
 		}
 
 		$search = $this->_manager->createSearch();

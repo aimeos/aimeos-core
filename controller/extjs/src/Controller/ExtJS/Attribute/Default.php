@@ -61,8 +61,13 @@ class Controller_ExtJS_Attribute_Default
 			if( isset( $entry->{'attribute.status'} ) ) { $item->setStatus( $entry->{'attribute.status'} ); }
 
 			$this->_manager->saveItem( $item );
+			$id = $item->getId();
 
-			$ids[] = $item->getId();
+			if( isset( $entry->{'isCopiedItem'} ) &&  isset( $entry->{'isCopiedItemOlDId'} ) ) {
+				$this->_copyListItems( $entry->{'isCopiedItemOlDId'}, $id, 'attribute' );
+			}
+
+			$ids[] = $id;
 		}
 
 		$search = $this->_manager->createSearch();
