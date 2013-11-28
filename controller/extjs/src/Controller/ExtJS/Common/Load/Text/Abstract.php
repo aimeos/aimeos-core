@@ -347,6 +347,12 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 		while( ( $row = $contentItem->current() ) !== null )
 		{
+			if( count( $row ) !== 7 )
+			{
+				$msg = sprintf( 'Invalid row from %1$s text import: %2$s', $domain, print_r( $row, true ) );
+				$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN, 'import' );
+			}
+
 			try
 			{
 				$value = isset( $row[6] ) ? $row[6] : '';
@@ -389,7 +395,8 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 			}
 			catch( Exception $e )
 			{
-				$this->_getContext()->getLogger()->log( sprintf( '%1$s text insert: %2$s', $domain, $e->getMessage() ), MW_Logger_Abstract::ERR, 'import' );
+				$msg = sprintf( 'Error in %1$s text import: %2$s', $domain, $e->getMessage() );
+				$context->getLogger()->log( $msg, MW_Logger_Abstract::ERR, 'import' );
 			}
 
 			$contentItem->next();
