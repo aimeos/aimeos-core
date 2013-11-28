@@ -14,9 +14,9 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	siteidProperty : 'text.siteid',
 
 	initComponent : function() {
-	
+
 		this.title = _('Text item details');
-		
+
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
@@ -24,7 +24,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			activeTab : 0,
 			border : false,
 			itemId : 'MShop.panel.text.ItemUi',
-			plugins : [ 'ux.itemregistry' ],
+			plugins : (this.isCopy !== true) ? [ 'ux.itemregistry' ] : null,
 			items : [ {
 				xtype : 'panel',
 				title : _('Basic'),
@@ -34,7 +34,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					align : 'stretch'
 				},
 				itemId : 'MShop.panel.text.ItemUi.BasicPanel',
-				plugins : [ 'ux.itemregistry' ],
+				plugins : (this.isCopy !== true) ? [ 'ux.itemregistry' ] : null,
 				defaults : {
 					bodyCssClass : this.readOnlyClass
 				},
@@ -107,7 +107,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		MShop.panel.text.ItemUi.superclass.initComponent.call(this);
 	},
 
-	
+
 	afterRender : function()
 	{
 		var label = this.record ? this.record.data['text.text'] : 'new';

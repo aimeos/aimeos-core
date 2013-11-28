@@ -24,7 +24,7 @@ MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			activeTab : 0,
 			border : false,
 			itemId : 'MShop.panel.price.ItemUi',
-			plugins : [ 'ux.itemregistry' ],
+			plugins : (this.isCopy !== true) ? [ 'ux.itemregistry' ] : null,
 			items : [ {
 				xtype : 'panel',
 				title : _('Basic'),
