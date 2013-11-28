@@ -124,6 +124,56 @@ class Controller_ExtJS_Attribute_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCopyItem()
+	{
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+		$listManager = $attributeManager->getSubManager('list');
+
+		$search = $attributeManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'attribute.code', 'xs' ) );
+		$result = $attributeManager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No attribute item found' );
+		}
+
+		$saveParams = (object) array(
+			'site' => 'unittest',
+			'items' => (object) array(
+				'attribute.typeid' => $item->getTypeId(),
+				'attribute.domain' => 'product',
+				'attribute.code' => 'copiedXS',
+				'attribute.label' => 'test label',
+				'attribute.position' => 1,
+				'attribute.status' => 0,
+				'isCopiedItem' => true,
+				'isCopiedItemOlDId' => $item->getId()
+			),
+		);
+
+		$searchParams = (object) array(
+			'site' => 'unittest',
+			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'attribute.code' => 'xs' ) ) ) )
+		);
+
+		$saved = $this->_object->saveItems( $saveParams );
+		$searched = $this->_object->searchItems( $searchParams );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'attribute.list.parentid', $item->getId() ) );
+		$listItems = $listManager->searchItems( $search );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'attribute.list.parentid', $saved['items']->{'attribute.id'} ) );
+		$copiedListItems = $listManager->searchItems( $search );
+
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'attribute.id'} );
+		$this->_object->deleteItems( $deleteParams );
+
+		$this->assertTrue( !empty( $copiedListItems ) );
+		$this->assertEquals( count($listItems), count( $copiedListItems ) );
+	}
+
 	public function testAbstractInit()
 	{
 		$expected = array('success' => true);

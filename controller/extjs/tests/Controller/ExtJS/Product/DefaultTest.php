@@ -129,11 +129,12 @@ class Controller_ExtJS_Product_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$listManager = $productManager->getSubManager('list');
 
+		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
-		$result = $typeManager->searchItems( $search );
+		$result = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No product type found' );
+			throw new Exception( 'No product item found' );
 		}
 
 		$saveParams = (object) array(
@@ -160,8 +161,18 @@ class Controller_ExtJS_Product_DefaultTest extends MW_Unittest_Testcase
 		$searched = $this->_object->searchItems( $searchParams );
 
 		$search = $listManager->createSearch();
-		$search->setCondition( $search->compare( '==', 'product.list.parentid', $item->getId() ) );
+		$search->setConditions( $search->compare( '==', 'product.list.parentid', $item->getId() ) );
+		$listItems = $listManager->searchItems( $search );
 
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.list.parentid', $saved['items']->{'product.id'} ) );
+		$copiedListItems = $listManager->searchItems( $search );
+
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'product.id'} );
+		$this->_object->deleteItems( $deleteParams );
+
+		$this->assertTrue( !empty( $copiedListItems ) );
+		$this->assertEquals( count($listItems), count( $copiedListItems ) );
 	}
 
 
