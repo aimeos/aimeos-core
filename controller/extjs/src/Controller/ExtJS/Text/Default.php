@@ -51,12 +51,12 @@ class Controller_ExtJS_Text_Default
 		{
 			$item = $this->_manager->createItem();
 
-			if ( isset($entry->{'text.id'}) ) {	$item->setId($entry->{'text.id'});}
-			if ( isset($entry->{'text.typeid'}) ) { $item->setTypeId($entry->{'text.typeid'}); }
-			if ( isset($entry->{'text.domain'}) ) {	$item->setDomain($entry->{'text.domain'}); }
-			if ( isset($entry->{'text.content'}) ) { $item->setContent($entry->{'text.content'}); }
-			if ( isset($entry->{'text.status'}) ) {	$item->setStatus($entry->{'text.status'});}
-			if ( isset($entry->{'text.languageid'}) && $entry->{'text.languageid'} != '' ) {$item->setLanguageId($entry->{'text.languageid'});}
+			if ( isset($entry->{'text.id'}) ) {	$item->setId( $entry->{'text.id'} ); }
+			if ( isset($entry->{'text.typeid'} ) ) { $item->setTypeId( $entry->{'text.typeid'} ); }
+			if ( isset($entry->{'text.domain'} ) ) { $item->setDomain( $entry->{'text.domain'} ); }
+			if ( isset($entry->{'text.content'} ) ) { $item->setContent( trim( $entry->{'text.content'} ) ); }
+			if ( isset($entry->{'text.status'} ) ) { $item->setStatus( $entry->{'text.status'} ); }
+			if ( isset($entry->{'text.languageid'} ) && $entry->{'text.languageid'} != '' ) { $item->setLanguageId( $entry->{'text.languageid'} ); }
 
 			if ( isset( $entry->{'text.label'} ) && $entry->{'text.label'} != '' ) {
 				$item->setLabel( $entry->{'text.label'} );
