@@ -10,6 +10,7 @@ $listTarget = $this->config( 'client/html/catalog/list/url/target' );
 $listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
 $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 
+$params = $this->get( 'filterParams', array() );
 $enc = $this->encoder();
 
 ?>
@@ -22,7 +23,7 @@ $enc = $this->encoder();
 	</ul>
 <?php endif; ?>
 	<nav>
-		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction ) ); ?>">
+		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $params ) ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
 			<noscript>
 				<button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
