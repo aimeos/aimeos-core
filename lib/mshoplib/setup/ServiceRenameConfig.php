@@ -53,7 +53,10 @@ class MW_Setup_Task_ServiceRenameConfig extends MW_Setup_Task_Abstract
 			SET "config" = REPLACE("config", \'"PaypalUrl"\', \'"paypalexpress.PaypalUrl"\')
 			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"PaypalUrl"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
 		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
-			SET "config" = REPLACE("config", \'TOKEN="\', \'TOKEN=%1$s"\')
+			SET "config" = REPLACE("config", \'cmd=_express-checkout&TOKEN="\', \'cmd=_express-checkout&useraction=commit&TOKEN=%1$s"\')
+			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"paypalexpress.PaypalUrl"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
+		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			SET "config" = REPLACE("config", \'cmd=_express-checkout&token="\', \'cmd=_express-checkout&useraction=commit&token=%1$s"\')
 			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"paypalexpress.PaypalUrl"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
 	);
 
