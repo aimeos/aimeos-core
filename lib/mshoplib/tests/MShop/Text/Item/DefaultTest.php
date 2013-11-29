@@ -12,8 +12,9 @@
 class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
 	private $_values;
+
+
 	/**
 	 * Runs the test methods of this class.
 	 *
@@ -53,6 +54,7 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->_object = new MShop_Text_Item_Default( $this->_values );
 	}
 
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -85,10 +87,12 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->_object->getSiteId() );
 	}
+
 
 	public function testGetTypeId()
 	{
@@ -104,10 +108,12 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
+
 	public function testGetLabel()
 	{
 		$this->assertEquals( 'unittest label', $this->_object->getLabel() );
 	}
+
 
 	public function testSetLabel()
 	{
@@ -116,6 +122,7 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertTrue( $this->_object->isModified() );
 	}
+
 
 	public function testGetDomain()
 	{
@@ -149,12 +156,8 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetContentUtf8Invalid()
 	{
-		$this->markTestSkipped( 'iconv does not produce always the same results' );
-
 		$this->_object->setContent( chr( 0x96 ) . 'укгезәөшөхзәхөшк2049һһлдябчсячмииюсит.июбҗрарэ' );
 		$this->assertEquals( 'укгезәөшөхзәхөшк2049һһлдябчсячмииюсит.июбҗрарэ', $this->_object->getContent() );
-
-		$this->assertTrue( $this->_object->isModified() );
 	}
 
 
@@ -172,20 +175,24 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
 	}
+
 
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
 	}
 
+
 	public function testGetEditor()
 	{
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
+
 
 	public function testToArray()
 	{
@@ -213,5 +220,4 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->setExpectedException('MShop_Text_Exception');
 		$this->_object->setLanguageId(0);
 	}
-
 }
