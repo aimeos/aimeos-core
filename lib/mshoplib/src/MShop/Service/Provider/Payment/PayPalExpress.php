@@ -405,23 +405,17 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$rvals = array();
 		parse_str( $response, $rvals );
 
-		$cid = ( isset( $rvals['CORRELATIONID'] ) ? $rvals['CORRELATIONID'] : '<none>' );
-
-		$logger = $this->_getContext()->getLogger();
-		$logger->log( $method . ' : orderID=' . $orderid . ', CORRELATIONID=' . $cid, MW_Logger_Abstract::DEBUG );
-
 		if( $rvals['ACK'] !== 'Success' )
 		{
+			$msg = sprintf( 'Error in Paypal express response for order with ID "%1$s": %2$s', $orderid, print_r( $rvals, true ) );
+			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
+
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
-				throw new MShop_Service_Exception( sprintf(
-					'Error in Paypal express response for order with ID "%1$s": %2$s',
-					$orderid, print_r( $rvals, true )
+				throw new MShop_Service_Exception( sprintf( $msg, $orderid,
+					( isset( $rvals['L_SHORTMESSAGE0'] ) ? $rvals['L_SHORTMESSAGE0'] : '<none>' )
 				) );
 			}
-
-			$str = $method . ' : orderID/token=' . $orderid . ', response=' . print_r( $rvals, true );
-			$logger->log( $str, MW_Logger_Abstract::DEBUG );
 		}
 
 		return $rvals;
