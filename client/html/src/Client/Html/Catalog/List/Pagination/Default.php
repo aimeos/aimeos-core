@@ -19,6 +19,7 @@ class Client_Html_Catalog_List_Pagination_Default
 	implements Client_Html_Interface
 {
 	private $_cache;
+	private $_header;
 	private $_subPartNames = array();
 	private $_subPartPath = 'client/html/catalog/list/pagination/default/subparts';
 
@@ -52,6 +53,12 @@ class Client_Html_Catalog_List_Pagination_Default
 	 */
 	public function getHeader()
 	{
+		// output header only once
+		if( $this->_header !== null ) {
+			return '';
+		}
+
+		$this->_header = true;
 		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
