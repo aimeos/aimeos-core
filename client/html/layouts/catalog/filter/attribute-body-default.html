@@ -25,7 +25,7 @@ $attrIds = array_flip( $attrIds );
 <?php		foreach( $attributes as $id => $attribute ) : ?>
 <?php			$count = ( isset( $aggregate[$id] ) ? $aggregate[$id] : 0 ); ?>
 		<li class="attr-item <?php echo ( $count == 0 ? 'disabled' : '' ); ?>">
-			<input class="attr-item" name="f-attr-id[]" type="checkbox" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : ( $count == 0 ? 'disabled="disabled"' : '' ) ); ?> />
+			<input class="attr-item" name="<?php echo $enc->attr( $this->formparam( array( 'f-attr-id', $id ) ) ); ?>" type="checkbox" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : ( $count == 0 ? 'disabled="disabled"' : '' ) ); ?> />
 			<span class="attr-item"><?php echo $enc->html( $attribute->getName(), $enc::TRUST ); ?></span>
 			<span class="attr-count"><?php echo $enc->html( $count ); ?></span>
 		</li>
