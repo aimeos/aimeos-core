@@ -152,10 +152,13 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$orderBaseItem = $orderBaseManager->load( $order->getBaseId() );
 		$orderid = $order->getId();
 
+		$returnUrl = $this->_getConfigValue( array( 'payment.url-success' ) );
+		$returnUrl .= ( strpos( $returnUrl, '?' ) !== false ? '&' : '?' ) . 'orderid=' . $orderid;
+
 		$values = $this->_getOrderDetails( $orderBaseItem );
 		$values[ 'METHOD' ] = 'SetExpressCheckout';
 		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
-		$values[ 'RETURNURL' ] = $this->_getConfigValue( array( 'payment.url-success' ) );
+		$values[ 'RETURNURL' ] = $returnUrl;
 		$values[ 'CANCELURL' ] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) );
 
 		$urlQuery = http_build_query( $values, '', '&' );
@@ -479,10 +482,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			case 'Canceled-Reversal':
 			case 'Voided':
 				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
-				break;
-
-			case 'None':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_UNFINISHED );
 				break;
 
 			default:

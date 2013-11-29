@@ -164,7 +164,7 @@ class Client_Html_Checkout_Confirm_Default
 				catch( Exception $e )
 				{
 					$msg = 'Updating order ID "%1$s" failed: %2$s';
-					$context->getLogger()->log( sprintf( $msg, $sorderid, $e->getMessage() ) );
+					$context->getLogger()->log( sprintf( $msg, $orderid, $e->getMessage() ) );
 				}
 			}
 
