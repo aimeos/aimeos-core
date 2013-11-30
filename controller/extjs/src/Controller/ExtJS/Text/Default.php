@@ -62,10 +62,10 @@ class Controller_ExtJS_Text_Default
 			} else if( isset( $entry->{'text.content'} ) && $entry->{'text.content'} != '' ) {
 				$label = mb_strcut( $entry->{'text.content'}, 0, 255 );
 			}
-			$item->setLabel( trim( preg_replace( array( '/(<br>)+/', "/\r+/", "/\n+/", '/ +/' ), ' ', $label ) ) );
+			$item->setLabel( trim( preg_replace( array( "/(<br>|\r|\n)+/", '/  +/' ), ' ', $label ) ) );
 
 			if ( isset($entry->{'text.content'} ) ) {
-				$item->setContent( trim( preg_replace( '/(<br>)+$/', '', $entry->{'text.content'} ) ) );
+				$item->setContent( trim( preg_replace( "/(<br>|\r|\n)+$/", '', $entry->{'text.content'} ) ) );
 			}
 
 			$this->_manager->saveItem( $item );

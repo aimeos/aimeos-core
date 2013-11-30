@@ -140,7 +140,7 @@ class Controller_ExtJS_Text_DefaultTest extends MW_Unittest_Testcase
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'text.content' => "<br>\ntest<br>\n<br>\ncontent<br>\n<br>\n",
+				'text.content' => "<br>\ntest<br>\n<br>\ncontent<br>\n<br>\r\n",
 			),
 		);
 
