@@ -74,8 +74,7 @@ class Controller_ExtJS_Text_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSaveDeleteItem()
 	{
-		$manager = MShop_Text_Manager_Factory::createManager( TestHelper::getContext() );
-		$typeManager = $manager->getSubManager( 'type' );
+		$typeManager = MShop_Factory::createManager( TestHelper::getContext(), 'text/type' );
 		$criteria = $typeManager->createSearch();
 		$criteria->setSlice( 0, 1 );
 		$result = $typeManager->searchItems( $criteria );
@@ -122,4 +121,30 @@ class Controller_ExtJS_Text_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals('unittest label', $saved['items']->{'text.label'} );
 	}
 
+
+	public function testSaveItemLabelContent()
+	{
+		$context = TestHelper::getContext();
+		$methods = array( 'createItem', 'saveItem' );
+		$managerStub = $this->getMock( 'MShop_Text_Manager_Default', $methods, array( $context ) );
+		$itemStub = $this->getMock( 'MShop_Text_Item_Default' );
+
+		$managerStub->expects( $this->once() )->method( 'createItem' )->will( $this->returnValue( $itemStub ) );
+		$managerStub->expects( $this->once() )->method( 'saveItem' );
+
+		$itemStub->expects( $this->once() )->method( 'setLabel' )->with( $this->equalTo( 'test content' ) );
+		$itemStub->expects( $this->once() )->method( 'setContent' )->with( $this->equalTo( "<br>\ntest<br>\n<br>\ncontent" ) );
+
+		MShop_Text_Manager_Factory::injectManager( 'MShop_Text_Manager_Default', $managerStub );
+
+		$saveParams = (object) array(
+			'site' => 'unittest',
+			'items' => (object) array(
+				'text.content' => "<br>\ntest<br>\n<br>\ncontent<br>\n<br>\n",
+			),
+		);
+
+		$cntl = new Controller_ExtJS_Text_Default( $context );
+		$cntl->saveItems( $saveParams );
+	}
 }
