@@ -10,8 +10,16 @@ $listTarget = $this->config( 'client/html/catalog/list/url/target' );
 $listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
 $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 
-$params = $this->get( 'filterParams', array() );
 $enc = $this->encoder();
+$params = array();
+
+if( ( $catid = $this->param( 'f-catalog-id' ) ) !== null ) {
+	$params['f-catalog-id'] = $catid;
+}
+
+if( ( $name = $this->param( 'a-name' ) ) !== null ) {
+	$params['a-name'] = $name;
+}
 
 ?>
 <section class="arcavias catalog-filter">
