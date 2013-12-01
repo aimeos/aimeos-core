@@ -146,5 +146,7 @@ class Controller_ExtJS_Text_DefaultTest extends MW_Unittest_Testcase
 
 		$cntl = new Controller_ExtJS_Text_Default( $context );
 		$cntl->saveItems( $saveParams );
+
+		MShop_Text_Manager_Factory::injectManager( 'MShop_Text_Manager_Default', null );
 	}
 }
