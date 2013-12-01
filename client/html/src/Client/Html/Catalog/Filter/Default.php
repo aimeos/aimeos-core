@@ -32,7 +32,7 @@ class Client_Html_Catalog_Filter_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->getView();
 
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -84,7 +84,7 @@ class Client_Html_Catalog_Filter_Default
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->getView();
 
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -168,24 +168,5 @@ class Client_Html_Catalog_Filter_Default
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
-	}
-
-
-	/**
-	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
-	 */
-	protected function _setViewParams( MW_View_Interface $view )
-	{
-		if( !isset( $this->_cache ) )
-		{
-			$view->filterParams = $this->_getClientParams( $view->param() );
-
-			$this->_cache = $view;
-		}
-
-		return $this->_cache;
 	}
 }
