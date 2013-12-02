@@ -97,14 +97,18 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 <?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
 						<img src="<?php echo $enc->attr( $contentUrl . $mediaUrl ); ?>" />
 <?php		endif; ?>
-						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, array( 'l-product-id' => $product->getProductId(), 'a-name' => str_replace( ' ', '-', $product->getName() ) ) ) ); ?>"><?php echo $enc->html( $product->getName() ); ?></a>
+<?php		$params = array( 'l-product-id' => $product->getProductId(), 'a-name' => str_replace( ' ', '-', strip_tags( $product->getName() ) ) ); ?>
+						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params ) ); ?>">
+<?php		echo $enc->html( $product->getName(), $enc::TRUST ); ?>
+						</a>
 <?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
 						<ul class="attr-list">
 <?php			foreach( $product->getAttributes() as $attribute ) : ?>
 <?php				if( ( $type = $attribute->getType() ) !== 'hidden' ) : ?>
 							<li class="attr-item">
 <?php					if( $modify && $type === 'config' ) : ?>
-								<a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ) ) ); ?>">
+<?php						$params = array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ); ?>
+								<a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $params ) ); ?>">
 <?php					endif; ?>
 									<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
 									<span class="value"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?></span>
