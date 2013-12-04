@@ -19,8 +19,8 @@ class MShop_Service_Provider_Payment_DirectDebit
 	implements MShop_Service_Provider_Payment_Interface
 {
 	private $_feConfig = array(
-		'payment.directdebit.accountowner' => array(
-			'code' => 'payment.directdebit.accountowner',
+		'directdebit.accountowner' => array(
+			'code' => 'directdebit.accountowner',
 			'internalcode'=> 'accountowner',
 			'label'=> 'Account owner',
 			'type'=> 'string',
@@ -28,8 +28,8 @@ class MShop_Service_Provider_Payment_DirectDebit
 			'default'=> '',
 			'required'=> true
 		),
-		'payment.directdebit.accountno' => array(
-			'code' => 'payment.directdebit.accountno',
+		'directdebit.accountno' => array(
+			'code' => 'directdebit.accountno',
 			'internalcode'=> 'accountno',
 			'label'=> 'Account number',
 			'type'=> 'string',
@@ -37,8 +37,8 @@ class MShop_Service_Provider_Payment_DirectDebit
 			'default'=> '',
 			'required'=> true
 		),
-		'payment.directdebit.bankcode' => array(
-			'code' => 'payment.directdebit.bankcode',
+		'directdebit.bankcode' => array(
+			'code' => 'directdebit.bankcode',
 			'internalcode'=> 'bankcode',
 			'label'=> 'Bank code',
 			'type'=> 'string',
@@ -46,8 +46,8 @@ class MShop_Service_Provider_Payment_DirectDebit
 			'default'=> '',
 			'required'=> true
 		),
-		'payment.directdebit.bankname' => array(
-			'code' => 'payment.directdebit.bankname',
+		'directdebit.bankname' => array(
+			'code' => 'directdebit.bankname',
 			'internalcode'=> 'bankname',
 			'label'=> 'Bank name',
 			'type'=> 'string',
@@ -75,7 +75,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 			$address = $basket->getAddress();
 
 			if( ( $fn = $address->getFirstname() ) !== '' && ( $ln = $address->getLastname() ) !== '' ) {
-				$feconfig['payment.directdebit.accountowner']['default'] = $fn . ' ' . $ln;
+				$feconfig['directdebit.accountowner']['default'] = $fn . ' ' . $ln;
 			}
 		}
 		catch( MShop_Order_Exception $e ) { ; }
