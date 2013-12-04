@@ -357,20 +357,7 @@ class Controller_Frontend_Basket_Default
 		$price->setRebate( '0.00' );
 		$orderServiceItem->setPrice( $price );
 
-		$orderBaseServiceAttributeManager = MShop_Factory::createManager( $context, 'order/base/service/attribute');
-
-		$attributeItems = array();
-		foreach( $attributes as $key => $value )
-		{
-			$ordBaseAttrItem = $orderBaseServiceAttributeManager->createItem();
-			$ordBaseAttrItem->setCode( $key );
-			$ordBaseAttrItem->setValue( strip_tags( $value ) ); // prevent XSS
-			$ordBaseAttrItem->setType( $type );
-
-			$attributeItems[] = $ordBaseAttrItem;
-		}
-
-		$orderServiceItem->setAttributes( $attributeItems );
+		$provider->setConfigFE( $orderServiceItem, $attributes );
 
 		$this->_basket->setService( $orderServiceItem, $type );
 		$this->_domainManager->setSession( $this->_basket );

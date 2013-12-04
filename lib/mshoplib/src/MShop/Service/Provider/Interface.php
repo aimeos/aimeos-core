@@ -101,6 +101,15 @@ interface MShop_Service_Provider_Interface
 
 
 	/**
+	 * Sets the payment attributes in the given service.
+	 *
+	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
+	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
+	 */
+	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes );
+
+
+	/**
 	 * Sets the communication object for a service provider.
 	 *
 	 * @param MW_Communication_Interface $communication Object of communication
