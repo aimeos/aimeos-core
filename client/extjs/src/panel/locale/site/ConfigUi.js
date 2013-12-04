@@ -82,9 +82,9 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 			}, this);
 		},
 		afteredit: function (obj) {
-			if (obj.record.data.name.trim() !== '' && obj.record.data.value.trim() !== '') {
+			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
-					this.data[obj.originalValue] = undefined;
+					delete this.data[obj.originalValue];
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
