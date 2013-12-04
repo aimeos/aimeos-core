@@ -365,7 +365,7 @@ class Controller_Frontend_Basket_Default
 			$ordBaseAttrItem = $orderBaseServiceAttributeManager->createItem();
 			$ordBaseAttrItem->setCode( $key );
 			$ordBaseAttrItem->setValue( strip_tags( $value ) ); // prevent XSS
-			$ordBaseAttrItem->setType( 'config' );
+			$ordBaseAttrItem->setType( $type );
 
 			$attributeItems[] = $ordBaseAttrItem;
 		}
