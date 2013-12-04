@@ -98,6 +98,9 @@ MShop.panel.service.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
+				if( obj.originalValue != obj.record.data.name ) {
+					this.data[obj.originalValue] = undefined;
+				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
 		}
