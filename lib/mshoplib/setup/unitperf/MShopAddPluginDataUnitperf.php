@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 201
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
 /**
- * Adds default records to tables.
+ * Adds default records to plugin table.
  */
-class MW_Setup_Task_MShopAddTypeDataDefault extends MW_Setup_Task_MShopAddTypeData
+class MW_Setup_Task_MShopAddPluginDataUnitperf extends MW_Setup_Task_MShopAddPluginData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -18,7 +18,7 @@ class MW_Setup_Task_MShopAddTypeDataDefault extends MW_Setup_Task_MShopAddTypeDa
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddLocaleDataDefault' );
+		return array( 'MShopAddTypeDataUnitperf' );
 	}
 
 
