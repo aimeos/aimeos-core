@@ -102,11 +102,9 @@ class Controller_ExtJS_Locale_Language_Default
 		$manager = $this->_getManager();
 
 		$total = 0;
-		if( $this->_getContext()->getConfig()->get( 'controller/extjs/locale/language/default/showall', true ) ) {
-			$search = $manager->createSearch();
-		}
-		else
-		{
+		$search = $manager->createSearch();
+
+		if( !$this->_getContext()->getConfig()->get( 'controller/extjs/locale/language/default/showall', true ) ) {
 			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
 
 			$langids = array();
@@ -114,8 +112,9 @@ class Controller_ExtJS_Locale_Language_Default
 				$langids[] = $item->getLanguageId();
 			}
 
-			$search = $manager->createSearch();
-			$search->setConditions( $search->compare( '==', 'locale.language.id', $langids ) );
+			if( !empty( $langids ) ) {
+				$search->setConditions( $search->compare( '==', 'locale.language.id', $langids ) );
+			}
 		}
 
 		$search = $this->_initCriteria( $search, $params );
