@@ -23,10 +23,6 @@ It's is suited for medium to large size businesses which needs a seamless integr
 
 Arcavias is licensed under the terms of the LGPLv3 Open Source license and is available for free.
 
-PHPExcel 
-License: GNU Library General Public License, version 2.1
-URL: http://phpexcel.codeplex.com/license
-
 Silk icon theme by Mark James (used in phpdoc Extjs template)
 License: Creative Commons Attribution 2.5 License
 URL: http://www.famfamfam.com/lab/icons/silk/
