@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
-#
+# 
+# 
 # Translators:
 # Translators:
 # Translators:
@@ -12,30 +12,18 @@ msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-11-19 16:51+0000\n"
-"Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
+"PO-Revision-Date: 2013-12-05 09:45+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias/language/ru/)\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
-#. Product attribute
-msgid "color"
-msgstr "Цвет"
 
 #. Address salutation
 msgid "company"
 msgstr "Компания"
-
-#. Product attribute
-msgid "length"
-msgstr "Длина"
-
-#. Address salutation
-msgid "miss"
-msgstr ""
 
 #. Address salutation
 msgid "mr"
@@ -45,9 +33,25 @@ msgstr "Господин"
 msgid "mrs"
 msgstr "Госпожа"
 
-#. Order type value
-msgid "order:phone"
-msgstr "телефон"
+#. Address salutation
+msgid "miss"
+msgstr ""
+
+#. Product attribute
+msgid "size"
+msgstr "Размер"
+
+#. Product attribute
+msgid "length"
+msgstr "Длина"
+
+#. Product attribute
+msgid "width"
+msgstr "Ширина"
+
+#. Product attribute
+msgid "color"
+msgstr "Цвет"
 
 #. Order type value
 msgid "order:repeat"
@@ -56,6 +60,10 @@ msgstr "повторный"
 #. Order type value
 msgid "order:web"
 msgstr "интернет"
+
+#. Order type value
+msgid "order:phone"
+msgstr "телефон"
 
 #. Payment status value
 msgid "pay:-1"
@@ -88,26 +96,6 @@ msgstr "авторизирован"
 #. Payment status value
 msgid "pay:6"
 msgstr "получен"
-
-#. Direct debit service provider
-msgid "payment.directdebit.accountno"
-msgstr "Номер счета"
-
-#. Direct debit service provider
-msgid "payment.directdebit.accountowner"
-msgstr "Владелец счета"
-
-#. Direct debit service provider
-msgid "payment.directdebit.bankcode"
-msgstr "Код банка"
-
-#. Direct debit service provider
-msgid "payment.directdebit.bankname"
-msgstr "Имя банка"
-
-#. Product attribute
-msgid "size"
-msgstr "Размер"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -145,6 +133,26 @@ msgstr "отклонен"
 msgid "stat:7"
 msgstr "возращен"
 
+#. Direct debit service provider
+msgid "directdebit.accountowner"
+msgstr ""
+
+#. Direct debit service provider
+msgid "directdebit.accountno"
+msgstr ""
+
+#. Direct debit service provider
+msgid "directdebit.bankcode"
+msgstr ""
+
+#. Direct debit service provider
+msgid "directdebit.bankname"
+msgstr ""
+
+#. Stock level
+msgid "stock-unlimited"
+msgstr "в запасе"
+
 #. Stock level
 msgid "stock-high"
 msgstr "в запасе"
@@ -157,14 +165,6 @@ msgstr "доступно малое количество"
 msgid "stock-out"
 msgstr "закончился"
 
-#. Stock level
-msgid "stock-unlimited"
-msgstr "в запасе"
-
 #. Warehouse code
 msgid "warehouse:default"
 msgstr "склад:стандартный"
-
-#. Product attribute
-msgid "width"
-msgstr "Ширина"
