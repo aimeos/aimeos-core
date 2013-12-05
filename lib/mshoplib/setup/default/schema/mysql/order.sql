@@ -266,10 +266,10 @@ CREATE TABLE "mshop_order_base_product_attr" (
 	"type" VARCHAR(32) NOT NULL,
 	-- Attribute code
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
-	-- Attribute value
-	"value" VARCHAR(255) NOT NULL,
 	-- Localized attribute name
 	"name" VARCHAR(255) NOT NULL,
+	-- Attribute value
+	"value" TEXT NOT NULL,
 	-- Timestamp of the last update
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry
@@ -287,7 +287,7 @@ CONSTRAINT "fk_msordbaprat_ordprodid"
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_msordbaprat_si_oi_ty_cd_va" ON "mshop_order_base_product_attr" ("siteid", "ordprodid", "type", "code", "value");
+CREATE INDEX "idx_msordbaprat_si_oi_ty_cd_va" ON "mshop_order_base_product_attr" ("siteid", "ordprodid", "type", "code", "value"(16));
 
 --
 -- Payment details entered by the customers
@@ -357,10 +357,10 @@ CREATE TABLE "mshop_order_base_service_attr" (
 	"type" VARCHAR(32) NOT NULL,
 	-- Attribute code
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
-	-- Attribute value
-	"value" VARCHAR(255) NOT NULL,
 	-- Attribute name
 	"name" VARCHAR(255) NOT NULL,
+	-- Attribute value
+	"value" TEXT NOT NULL,
 	-- Date of last modification of this database entry
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry
@@ -378,7 +378,7 @@ CONSTRAINT "fk_msordbaseat_ordservid"
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_msordbaseat_si_oi_ty_cd_va" ON "mshop_order_base_service_attr" ("siteid", "ordservid", "type", "code", "value");
+CREATE INDEX "idx_msordbaseat_si_oi_ty_cd_va" ON "mshop_order_base_service_attr" ("siteid", "ordservid", "type", "code", "value"(16));
 
 CREATE INDEX "idx_msordbaseat_si_cd_va" ON "mshop_order_base_service_attr" ("siteid", "code", "value");
 
