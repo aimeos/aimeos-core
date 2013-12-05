@@ -15,9 +15,8 @@
  * @subpackage Service
  */
 class MShop_Service_Provider_Decorator_Example
-extends MShop_Service_Provider_Decorator_Abstract
+	extends MShop_Service_Provider_Decorator_Abstract
 {
-
 	private $_beConfig = array(
 		'country' => array(
 			'code' => 'country',
