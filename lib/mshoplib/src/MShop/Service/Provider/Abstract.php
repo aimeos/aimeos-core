@@ -395,9 +395,9 @@ implements MShop_Service_Provider_Interface
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 * @param string $type Type of the configuration values (delivery or payment)
 	 */
-	public function _setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes, $type )
+	protected function _setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes, $type )
 	{
-		$manager = MShop_Factory::createManager( $this->_context, 'order/base/service/attribute');
+		$manager = MShop_Factory::createManager( $this->_context, 'order/base/service/attribute' );
 
 		$attributeItems = array();
 		foreach( $attributes as $key => $value )
