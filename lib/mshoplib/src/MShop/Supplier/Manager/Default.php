@@ -400,7 +400,7 @@ class MShop_Supplier_Manager_Default
 	{
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig->get( 'resource/default', 'db' );
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
