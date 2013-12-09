@@ -107,7 +107,8 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'catalog.list.refid', null );
 		$expr[] = $search->compare( '>=', 'catalog.list.datestart', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.list.dateend', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.list.position', 0 ) ;
+		$expr[] = $search->compare( '>=', 'catalog.list.position', 0 );
+		$expr[] = $search->compare( '==', 'catalog.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'catalog.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.list.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.list.editor', $this->_editor );

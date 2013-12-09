@@ -188,6 +188,13 @@ class MShop_Catalog_Manager_Default
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'catalog.list.status' => array(
+			'code'=>'catalog.list.status',
+			'internalcode'=>'mcatli."status"',
+			'label'=>'Catalog list status',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'catalog.list.ctime'=> array(
 			'label' => 'Catalog list creation time',
 			'code' => 'catalog.list.ctime',

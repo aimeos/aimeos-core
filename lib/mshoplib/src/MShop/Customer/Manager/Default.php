@@ -461,6 +461,13 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'customer.list.status' => array(
+			'code'=>'customer.list.status',
+			'internalcode'=>'mcusli."status"',
+			'label'=>'Customer list status',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'customer.list.ctime'=> array(
 			'code'=>'customer.list.ctime',
 			'internalcode'=>'mcusli."ctime"',

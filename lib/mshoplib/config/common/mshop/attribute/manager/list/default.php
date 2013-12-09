@@ -17,13 +17,13 @@ return array(
 		',
 		'insert' => '
 			INSERT INTO "mshop_attribute_list"( "parentid", "siteid", "typeid", "domain", "refid", "start",
-				"end", "pos", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+				"end", "pos", "status", "mtime", "editor", "ctime" )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_attribute_list"
 			SET "parentid" = ?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-			"pos" = ?, "mtime" = ?, "editor" = ?
+			"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'updatepos' => '
@@ -47,7 +47,7 @@ return array(
 		',
 		'search' => '
 			SELECT mattli."id", mattli."parentid", mattli."siteid", mattli."typeid", mattli."domain",
-				mattli."refid", mattli."start", mattli."end", mattli."pos", mattli."mtime", mattli."ctime", mattli."editor"
+				mattli."refid", mattli."start", mattli."end", mattli."pos", mattli."status", mattli."mtime", mattli."ctime", mattli."editor"
 			FROM "mshop_attribute_list" AS mattli
 			:joins
 			WHERE :cond

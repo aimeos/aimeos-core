@@ -179,6 +179,8 @@ CREATE TABLE "mshop_product_list" (
 	"end" DATETIME DEFAULT NULL,
 	-- Position of the list element reagrding to the domain and the prodid
 	"pos" INTEGER NOT NULL DEFAULT 0,
+	-- status code (0=hidden, 1=display, >1 for anything special)
+	"status" SMALLINT NOT NULL DEFAULT 0,
 	-- Date of last modification of this database entry
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry

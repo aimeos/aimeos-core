@@ -258,6 +258,7 @@ class MShop_Price_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'price.list.datestart', null );
 		$expr[] = $search->compare( '==', 'price.list.dateend', null );
 		$expr[] = $search->compare( '==', 'price.list.position', 0 );
+		$expr[] = $search->compare( '==', 'price.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'price.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'price.list.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'price.list.editor', $this->_editor );

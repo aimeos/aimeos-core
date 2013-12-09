@@ -179,6 +179,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );
 			$listItem->setPosition( $dataset['pos'] );
+			$listItem->setStatus( $dataset['status'] );
 
 			$customerListManager->saveItem( $listItem, false );
 		}

@@ -253,6 +253,13 @@ class MShop_Media_Manager_Default
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'media.list.status' => array(
+			'code'=>'media.list.status',
+			'internalcode'=>'mmedli."status"',
+			'label'=>'Media list status',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'media.list.ctime'=> array(
 			'code'=>'media.list.ctime',
 			'internalcode'=>'mmedli."ctime"',

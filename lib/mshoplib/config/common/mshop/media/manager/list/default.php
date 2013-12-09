@@ -17,13 +17,13 @@ return array(
 		',
 		'insert' => '
 			INSERT INTO "mshop_media_list"( "parentid", "siteid", "typeid", "domain", "refid", "start",
-				"end", "pos", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+				"end", "pos", "status", "mtime", "editor", "ctime" )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_media_list"
 			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?, "pos" = ?,
-				"mtime" = ?, "editor" = ?
+				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'updatepos' => '
@@ -48,7 +48,7 @@ return array(
 		'search' => '
 			SELECT mmedli."id", mmedli."parentid", mmedli."siteid", mmedli."typeid",
 				mmedli."domain", mmedli."refid", mmedli."start", mmedli."end", mmedli."pos",
-				mmedli."mtime", mmedli."editor", mmedli."ctime"
+				mmedli."status", mmedli."mtime", mmedli."editor", mmedli."ctime"
 			FROM "mshop_media_list" AS mmedli
 			:joins
 			WHERE :cond

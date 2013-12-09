@@ -176,6 +176,13 @@ class MShop_Service_Manager_Default
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'service.list.status' => array(
+			'code' => 'service.list.status',
+			'internalcode' => 'mserli."status"',
+			'label' => 'Service list status',
+			'type' => 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'service.list.ctime'=> array(
 			'code'=>'service.list.ctime',
 			'internalcode'=>'mserli."ctime"',

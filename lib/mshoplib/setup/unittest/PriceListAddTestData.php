@@ -203,6 +203,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );
 			$listItem->setPosition( $dataset['pos'] );
+			$listItem->setStatus( $dataset['status'] );
 
 			$priceListManager->saveItem( $listItem, false );
 		}

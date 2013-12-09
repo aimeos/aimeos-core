@@ -40,6 +40,7 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 			'start' => '2005-01-01 00:00:00',
 			'end' => '2010-12-31 00:00:00',
 			'pos' => 7,
+			'status' => 1,
 			'typeid' => 8,
 			'type' => 'test',
 			'mtime' => '2011-01-01 00:00:02',
@@ -133,9 +134,30 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setDateEnd( '4400-12-31 00:00:00' );
 		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( '4400-12-31 00:00:00', $this->_object->getDateEnd() );
+	}
 
-		$this->setExpectedException('MShop_Exception');
-		$this->_object->setDateEnd('2008-34-12');
+	public function testSetPosition()
+	{
+		$this->_object->setPosition( 1234 );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 1234, $this->_object->getPosition() );
+	}
+
+	public function testGetPosition()
+	{
+		$this->assertEquals( 7, $this->_object->getPosition() );
+	}
+
+	public function testSetStatus()
+	{
+		$this->_object->setStatus( 0 );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 0, $this->_object->getStatus() );
+	}
+
+	public function testGetStatus()
+	{
+		$this->assertEquals( 1, $this->_object->getStatus() );
 	}
 
 	public function testGetTypeId()
@@ -188,6 +210,7 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 			'common.list.datestart' => '2005-01-01 00:00:00',
 			'common.list.dateend' => '2010-12-31 00:00:00',
 			'common.list.position' => 7,
+			'common.list.status' => 1,
 			'common.list.ctime' => '2011-01-01 00:00:01',
 			'common.list.mtime' => '2011-01-01 00:00:02',
 			'common.list.editor' => 'unitTestUser',

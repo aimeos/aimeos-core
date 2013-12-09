@@ -122,6 +122,8 @@ CREATE TABLE "mshop_catalog_list" (
 	"end" DATETIME DEFAULT NULL,
 	-- Position of the list entry
 	"pos" INTEGER NOT NULL,
+	-- status code (0=hidden, 1=display, >1 for anything special)
+	"status" SMALLINT NOT NULL DEFAULT 0,
 	-- Date of last modification of this database entry
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry

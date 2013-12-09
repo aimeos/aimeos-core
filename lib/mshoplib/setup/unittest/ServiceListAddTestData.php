@@ -295,6 +295,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );
 			$listItem->setPosition( $dataset['pos'] );
+			$listItem->setStatus( $dataset['status'] );
 
 			$serviceListManager->saveItem( $listItem, false );
 		}
