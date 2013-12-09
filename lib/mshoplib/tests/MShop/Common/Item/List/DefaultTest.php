@@ -134,6 +134,9 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setDateEnd( '4400-12-31 00:00:00' );
 		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( '4400-12-31 00:00:00', $this->_object->getDateEnd() );
+
+		$this->setExpectedException('MShop_Exception');
+		$this->_object->setDateEnd('2008-34-12');
 	}
 
 	public function testSetPosition()
