@@ -235,17 +235,20 @@ class Client_Html_Catalog_List_Default
 			else
 			{
 				$filter = $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
+				$expr = array(
+					$filter->compare( '!=', 'catalog.index.catalog.id', null ),
+					$filter->getConditions(),
+				);
+				$filter->setConditions( $filter->combine( '&&', $expr ) );
 			}
 
 			if( !empty( $attrids ) )
 			{
 				$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( $attrids ) );
-
 				$expr = array(
 					$filter->getConditions(),
 					$filter->compare( '==', $func, count( $attrids ) ),
 				);
-
 				$filter->setConditions( $filter->combine( '&&', $expr ) );
 			}
 
