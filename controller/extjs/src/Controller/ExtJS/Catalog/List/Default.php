@@ -57,6 +57,7 @@ class Controller_ExtJS_Catalog_List_Default
 			if( isset( $entry->{'catalog.list.parentid'} ) ) { $item->setParentId( $entry->{'catalog.list.parentid'} ); }
 			if( isset( $entry->{'catalog.list.refid'} ) ) { $item->setRefId( $entry->{'catalog.list.refid'} ); }
 			if( isset( $entry->{'catalog.list.position'} ) ) { $item->setPosition( $entry->{'catalog.list.position'} ); }
+			if( isset( $entry->{'catalog.list.status'} ) ) { $item->setStatus( $entry->{'catalog.list.status'} );	}
 
 			if( isset( $entry->{'catalog.list.typeid'} ) && $entry->{'catalog.list.typeid'} != '' ) {
 				$item->setTypeId( $entry->{'catalog.list.typeid'} );

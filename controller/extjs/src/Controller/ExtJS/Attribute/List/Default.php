@@ -57,6 +57,7 @@ class Controller_ExtJS_Attribute_List_Default
 			if( isset( $entry->{'attribute.list.parentid'} ) ) { $item->setParentId( $entry->{'attribute.list.parentid'} ); }
 			if( isset( $entry->{'attribute.list.refid'} ) ) { $item->setRefId( $entry->{'attribute.list.refid'} ); }
 			if( isset( $entry->{'attribute.list.position'} ) ) { $item->setPosition( $entry->{'attribute.list.position'} ); }
+			if( isset( $entry->{'attribute.list.status'} ) ) { $item->setStatus( $entry->{'attribute.list.status'} ); }
 
 			if( isset( $entry->{'attribute.list.typeid'} ) && $entry->{'attribute.list.typeid'} != '' ) {
 				$item->setTypeId( $entry->{'attribute.list.typeid'} );

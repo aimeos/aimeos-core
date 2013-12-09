@@ -59,6 +59,7 @@ class Controller_ExtJS_Product_List_Default
 			if( isset( $entry->{'product.list.parentid'} ) ) { $item->setParentId( $entry->{'product.list.parentid'} ); }
 			if( isset( $entry->{'product.list.refid'} ) ) { $item->setRefId( $entry->{'product.list.refid'} ); }
 			if( isset( $entry->{'product.list.position'} ) ) { $item->setPosition( $entry->{'product.list.position'} ); }
+			if( isset( $entry->{'product.list.status'} ) ) { $item->setStatus( $entry->{'product.list.status'} );	}
 
 			if( isset( $entry->{'product.list.typeid'} ) && $entry->{'product.list.typeid'} != '' ) {
 				$item->setTypeId( $entry->{'product.list.typeid'} );

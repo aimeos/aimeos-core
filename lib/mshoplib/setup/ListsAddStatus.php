@@ -9,7 +9,7 @@
 /**
  * Adds status column to list tables and sets it to enable.
  */
-class MW_Setup_Task_ListsAddTypeid extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ListsAddStatus extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
 		'mshop_attribute_list' => array(
