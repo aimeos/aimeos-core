@@ -476,7 +476,7 @@ class MShop_Text_Manager_Default
 		$map = $typeIds = array();
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig->get( 'resource/default', 'db' );
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
