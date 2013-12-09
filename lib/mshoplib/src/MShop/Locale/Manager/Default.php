@@ -464,7 +464,8 @@ class MShop_Locale_Manager_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
 
@@ -514,11 +515,11 @@ class MShop_Locale_Manager_Default
 				$total = $row['count'];
 			}
 
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 		}
 		catch ( Exception $e )
 		{
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

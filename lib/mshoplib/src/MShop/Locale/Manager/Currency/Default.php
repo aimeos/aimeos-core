@@ -225,7 +225,9 @@ class MShop_Locale_Manager_Currency_Default
 	{
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$config = $context->getConfig();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		$items = array( );
 
@@ -244,7 +246,7 @@ class MShop_Locale_Manager_Currency_Default
 			);
 
 			$path = 'mshop/locale/manager/currency/default/item/search';
-			$sql = $context->getConfig()->get($path, $path);
+			$sql = $config->get($path, $path);
 			$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
 
 			try {
@@ -258,7 +260,7 @@ class MShop_Locale_Manager_Currency_Default
 
 			if ( $total !== null ) {
 				$path = 'mshop/locale/manager/currency/default/item/count';
-				$sql = $context->getConfig()->get($path, $path);
+				$sql = $config->get($path, $path);
 				$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
 
 				$row = $results->fetch();
@@ -271,11 +273,11 @@ class MShop_Locale_Manager_Currency_Default
 				$total = $row['count'];
 			}
 
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 		}
 		catch ( Exception $e )
 		{
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

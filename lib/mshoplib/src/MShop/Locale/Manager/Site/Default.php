@@ -272,7 +272,8 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$conn = $this->_dbm->acquire();
+		$dbname = $this->_config->get( 'resource/default', 'db' );
+		$conn = $this->_dbm->acquire( $dbname );
 		$items = array();
 
 		try
@@ -326,11 +327,11 @@ class MShop_Locale_Manager_Site_Default
 				$total = $row['count'];
 			}
 
-			$this->_dbm->release($conn);
+			$this->_dbm->release( $conn, $dbname );
 		}
 		catch ( Exception $e )
 		{
-			$this->_dbm->release($conn);
+			$this->_dbm->release( $conn, $dbname );
 			throw $e;
 		}
 		return $items;
@@ -426,7 +427,8 @@ class MShop_Locale_Manager_Site_Default
 	{
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $this->_config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -449,11 +451,11 @@ class MShop_Locale_Manager_Site_Default
 			$path = 'mshop/locale/manager/default/item/newid';
 			$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 		}
 		catch ( Exception $e )
 		{
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}

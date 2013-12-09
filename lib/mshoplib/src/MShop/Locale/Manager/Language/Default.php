@@ -233,8 +233,10 @@ class MShop_Locale_Manager_Language_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->_getContext();
+		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 		$items = array( );
 
 		try
@@ -251,7 +253,7 @@ class MShop_Locale_Manager_Language_Default
 				$search->getSliceSize(),
 			);
 
-			$sql = $context->getConfig()->get('mshop/locale/manager/language/default/item/search',
+			$sql = $config->get('mshop/locale/manager/language/default/item/search',
 					'mshop/locale/manager/language/default/item/search');
 
 			$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
@@ -266,7 +268,7 @@ class MShop_Locale_Manager_Language_Default
 			}
 
 			if ( $total !== null ) {
-				$sql = $context->getConfig()->get('mshop/locale/manager/language/default/item/count',
+				$sql = $config->get('mshop/locale/manager/language/default/item/count',
 						'mshop/locale/manager/language/default/item/count');
 				$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
 
@@ -280,11 +282,11 @@ class MShop_Locale_Manager_Language_Default
 				$total = $row['count'];
 			}
 
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 		}
 		catch ( Exception $e )
 		{
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

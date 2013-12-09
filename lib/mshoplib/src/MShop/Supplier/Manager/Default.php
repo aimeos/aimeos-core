@@ -400,7 +400,8 @@ class MShop_Supplier_Manager_Default
 	{
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $context->getConfig->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
 		try
@@ -415,11 +416,11 @@ class MShop_Supplier_Manager_Default
 				$items[$row['id']] = $this->_createItem( $row );
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
