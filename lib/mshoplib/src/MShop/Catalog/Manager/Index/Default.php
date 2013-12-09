@@ -192,7 +192,7 @@ class MShop_Catalog_Manager_Index_Default
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
-		if( count( $items ) > 0 )
+		if( count( $items ) > 0 ) // for the given product items
 		{
 			$paramIds = array();
 			foreach( $items as $item ) {
@@ -209,7 +209,7 @@ class MShop_Catalog_Manager_Index_Default
 			return;
 		}
 
-		if( $mode === 'all' )
+		if( $mode === 'all' ) // for all product items
 		{
 			$this->_writeIndex( $search, $domains, $size );
 			return;
@@ -218,8 +218,9 @@ class MShop_Catalog_Manager_Index_Default
 		$start = 0;
 		$ids = array();
 
+		// for the categorized product items
 		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
-		$categorySearch = $catalogListManager->createSearch( true );
+		$categorySearch = $catalogListManager->createSearch();
 		$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
 		$categorySearch->setSortations( array( $search->sort( '+', 'catalog.list.id' ) ) );
 
@@ -391,44 +392,81 @@ class MShop_Catalog_Manager_Index_Default
 
 		$search = $this->_productManager->createSearch( true );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$search->setSlice( 0, $size );
 		$defaultConditions = $search->getConditions();
+
+		$prodList = array();
+		$numSubProducts = 0;
 
 		foreach( $items as $id => $product )
 		{
-			$subIds = array_keys( $product->getRefItems( 'product', null, 'default' ) );
+			foreach( $product->getRefItems( 'product', null, 'default' ) as $subId => $subItem )
+			{
+				$prodList[$subId] = $id;
+				$numSubProducts++;
+			}
 
-			if( empty( $subIds ) ) { continue; }
+			if( $numSubProducts >= $size )
+			{
+				$expr = array(
+					$search->compare( '==', 'product.id', array_keys( $prodList ) ),
+					$defaultConditions,
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
 
+				$this->_saveSubProductChunk( $search, $domains, $prodList, $size );
+
+				$prodList = array();
+				$numSubProducts = 0;
+			}
+		}
+
+		if( $numSubProducts > 0 )
+		{
 			$expr = array(
-				$search->compare( '==', 'product.id', $subIds ),
+				$search->compare( '==', 'product.id', array_keys( $prodList ) ),
 				$defaultConditions,
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$start = 0;
+			$this->_saveSubProductChunk( $search, $domains, $prodList, $size );
+		}
+	}
 
-			do
+
+	/**
+	 * Saves one chunk of the sub products.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criterias for retrieving the sub-products
+	 * @param array $domains List of domains to fetch list items and referenced items for
+	 * @param array $list Associative list of sub-product IDs as keys and parent products IDs as values
+	 * @param integer $size Number of products per chunk
+	 */
+	protected function _saveSubProductChunk( MW_Common_Criteria_Interface $search, array $domains, array $list, $size )
+	{
+		$start = 0;
+
+		do
+		{
+			$result = $this->_productManager->searchItems( $search, $domains );
+
+			if( !empty( $result ) )
 			{
-				$result = $this->_productManager->searchItems( $search, $domains );
-
-				if( !empty( $result ) )
+				foreach( $result as $refId => $refItem )
 				{
-					foreach( $result as $refItem )
-					{
-						$refItem->setId( null );
-						$refItem->setId( $id );
-					}
-
-					foreach( $this->_submanagers as $submanager ) {
-						$submanager->rebuildIndex( $result );
-					}
+					$refItem->setId( null );
+					$refItem->setId( $list[$refId] );
 				}
 
-				$count = count( $result );
-				$start += $count;
-				$search->setSlice( $start, $size );
+				foreach( $this->_submanagers as $submanager ) {
+					$submanager->rebuildIndex( $result );
+				}
 			}
-			while( $count == $size );
+
+			$count = count( $result );
+			$start += $count;
+			$search->setSlice( $start, $size );
 		}
+		while( $count == $size );
 	}
 }

@@ -119,7 +119,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 11, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 2, $result[ $item->getId() ] );
+		$this->assertEquals( 3, $result[ $item->getId() ] );
 	}
 
 
