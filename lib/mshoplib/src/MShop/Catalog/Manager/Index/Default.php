@@ -344,11 +344,9 @@ class MShop_Catalog_Manager_Index_Default
 	protected function _writeIndex( MW_Common_Criteria_Interface $search, array $domains, $size )
 	{
 		$start = 0;
-		$config = $this->_getContext()->getConfig();
 
 		do
 		{
-			$search->setSlice( $start, $size );
 			$products = $this->_productManager->searchItems( $search, $domains );
 
 			try
@@ -373,15 +371,16 @@ class MShop_Catalog_Manager_Index_Default
 
 			$count = count( $products );
 			$start += $count;
+			$search->setSlice( $start, $size );
 		}
-		while( $count > 0 );
+		while( $count == $search->getSliceSize() );
 	}
 
 
 	/**
 	 * Saves catalog, price, text and attribute of subproduct.
 	 *
-	 * @param MShop_Product_Item_Interface $items Product items
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	protected function _saveSubProducts( array $items )
 	{
@@ -396,38 +395,40 @@ class MShop_Catalog_Manager_Index_Default
 
 		foreach( $items as $id => $product )
 		{
+			$subIds = array_keys( $product->getRefItems( 'product', null, 'default' ) );
+
+			if( empty( $subIds ) ) { continue; }
+
+			$expr = array(
+				$search->compare( '==', 'product.id', $subIds ),
+				$defaultConditions,
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
 			$start = 0;
 
 			do
 			{
-				$ids = array_keys( $product->getRefItems( 'product', null, 'default' ) );
-
-				$expr = array(
-					$search->compare( '==', 'product.id', $ids ),
-					$defaultConditions,
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-				$search->setSlice( $start, $size );
-
 				$result = $this->_productManager->searchItems( $search, $domains );
 
-				$itemList = array();
-				foreach( $result as $refItem )
+				if( !empty( $result ) )
 				{
-					$refItem->setId( null );
-					$refItem->setId( $id );
-					$itemList[] = $refItem;
-				}
+					foreach( $result as $refItem )
+					{
+						$refItem->setId( null );
+						$refItem->setId( $id );
+					}
 
-				foreach( $this->_submanagers as $submanager ) {
-					$submanager->rebuildIndex( $itemList );
+					foreach( $this->_submanagers as $submanager ) {
+						$submanager->rebuildIndex( $result );
+					}
 				}
 
 				$count = count( $result );
 				$start += $count;
+				$search->setSlice( $start, $size );
 			}
-			while( $count > 0 );
-
+			while( $count == $size );
 		}
 	}
 }

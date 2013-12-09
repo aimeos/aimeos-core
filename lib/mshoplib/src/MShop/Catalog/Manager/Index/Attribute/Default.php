@@ -243,7 +243,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	 * Rebuilds the catalog index attribute for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param array $items List of product items implementing MShop_Product_Item_Interface
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -262,7 +262,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 		try
 		{
-			foreach ( $items as $item )
+			foreach( $items as $item )
 			{
 				$listTypes = array();
 				foreach( $item->getListItems( 'attribute' ) as $listItem ) {
@@ -271,15 +271,15 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/attribute/default/item/insert' );
 
-				foreach( $item->getRefItems( 'attribute' ) as $refItem )
+				foreach( $item->getRefItems( 'attribute' ) as $refId => $refItem )
 				{
-					if( !isset( $listTypes[ $refItem->getId() ] ) )
+					if( !isset( $listTypes[$refId] ) )
 					{
-						$msg = sprintf( 'List type for attribute item with ID "%1$s" not available', $refItem->getId() );
+						$msg = sprintf( 'List type for attribute item with ID "%1$s" not available', $refId );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
-					foreach( $listTypes[ $refItem->getId() ] as $listType )
+					foreach( $listTypes[$refId] as $listType )
 					{
 						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
 						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
@@ -317,7 +317,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		$this->rebuildIndex( array( $item ) );
+		$this->rebuildIndex( array( $item->getId() => $item ) );
 	}
 
 
