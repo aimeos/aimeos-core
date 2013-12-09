@@ -258,7 +258,8 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -295,11 +296,11 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

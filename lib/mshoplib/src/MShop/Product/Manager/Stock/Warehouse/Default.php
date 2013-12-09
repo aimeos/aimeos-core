@@ -123,7 +123,8 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 		$config = $context->getConfig();
 		$locale = $context->getLocale();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -162,11 +163,11 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}

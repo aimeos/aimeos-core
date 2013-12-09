@@ -365,7 +365,8 @@ class MShop_Text_Manager_Default
 		$config = $context->getConfig();
 		$locale = $context->getLocale();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -398,11 +399,11 @@ class MShop_Text_Manager_Default
 				$item->setId( $this->_newId( $conn, $config->get($path, $path) ) );
 			}
 
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}

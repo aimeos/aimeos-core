@@ -656,7 +656,8 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -714,11 +715,11 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}

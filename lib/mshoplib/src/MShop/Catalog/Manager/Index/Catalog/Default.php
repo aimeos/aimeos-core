@@ -289,7 +289,8 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$siteid = $context->getLocale()->getSiteId();
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -313,11 +314,11 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

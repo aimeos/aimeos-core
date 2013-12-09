@@ -179,7 +179,8 @@ class MShop_Product_Manager_Tag_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -210,11 +211,11 @@ class MShop_Product_Manager_Tag_Default
 				$item->setId( $this->_newId($conn, $config->get($path, $path) ) );
 			}
 
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}

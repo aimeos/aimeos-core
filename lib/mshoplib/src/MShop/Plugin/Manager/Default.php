@@ -308,7 +308,8 @@ class MShop_Plugin_Manager_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -349,11 +350,11 @@ class MShop_Plugin_Manager_Default
 
 			$this->_plugins[$id] = $item;
 
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}

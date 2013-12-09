@@ -119,9 +119,9 @@ class MShop_Locale_Manager_Currency_Default
 
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
 		$config = $context->getConfig();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -149,11 +149,11 @@ class MShop_Locale_Manager_Currency_Default
 
 			$item->setId($item->getCode()); // set modified flag to false
 
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 		}
 		catch ( Exception $e )
 		{
-			$dbm->release($conn);
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
