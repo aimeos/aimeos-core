@@ -50,13 +50,14 @@ class Controller_ExtJS_Service_Default
 		$ids = array();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
-		if( isset( $entry->{'_copy'} ) ) {
-	       $oldId = $entry->{'service.id'};
-	       $entry->{'service.id'} = null;
-		}
-		
 		foreach( $items as $entry )
 		{
+			if( isset( $entry->{'_copy'} ) )
+			{
+				$oldId = $entry->{'service.id'};
+				$entry->{'service.id'} = null;
+			}
+
 			$item = $this->_manager->createItem();
 
 			if( isset( $entry->{'service.id'} ) ) { $item->setId( $entry->{'service.id'} ); }

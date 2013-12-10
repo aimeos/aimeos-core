@@ -47,13 +47,14 @@ class Controller_ExtJS_Price_Default
 		$ids = array();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
-		if ( isset( $entry->{'_copy'} ) ) {
-			$oldId = $entry->{'price.id'};
-			$entry->{'price.id'} = null;
-		}
-		
 		foreach( $items as $entry )
 		{
+			if ( isset( $entry->{'_copy'} ) )
+			{
+				$oldId = $entry->{'price.id'};
+				$entry->{'price.id'} = null;
+			}
+
 			$item = $this->_manager->createItem();
 
 			if( isset( $entry->{'price.id'} ) ) { $item->setId( $entry->{'price.id'} ); }

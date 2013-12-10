@@ -214,6 +214,7 @@ class Controller_ExtJS_Price_DefaultTest extends MW_Unittest_Testcase
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
+				'price.id' => $item->getId(),
 				'price.typeid' => $item->getTypeId(),
 				'price.domain' => 'product',
 				'price.currencyid' => 'EUR',
@@ -223,8 +224,7 @@ class Controller_ExtJS_Price_DefaultTest extends MW_Unittest_Testcase
 				'price.rebate' => '10.00',
 				'price.taxrate' => '20.00',
 				'price.status' => 0,
-				'isCopiedItem' => true,
-				'isCopiedItemOlDId' => $item->getId()
+				'_copy' => true,
 			),
 		);
 

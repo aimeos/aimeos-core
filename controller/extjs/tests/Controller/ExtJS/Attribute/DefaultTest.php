@@ -140,14 +140,14 @@ class Controller_ExtJS_Attribute_DefaultTest extends MW_Unittest_Testcase
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
+				'attribute.id' => $item->getId(),
 				'attribute.typeid' => $item->getTypeId(),
 				'attribute.domain' => 'product',
 				'attribute.code' => 'copiedXS',
 				'attribute.label' => 'test label',
 				'attribute.position' => 1,
 				'attribute.status' => 0,
-				'isCopiedItem' => true,
-				'isCopiedItemOlDId' => $item->getId()
+				'_copy' => true
 			),
 		);
 

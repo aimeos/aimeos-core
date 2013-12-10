@@ -140,6 +140,7 @@ class Controller_ExtJS_Product_DefaultTest extends MW_Unittest_Testcase
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
+				'product.id' => $item->getId(),
 				'product.code' => 'CNEcopy',
 				'product.label' => 'CNE copy test',
 				'product.status' => 1,
@@ -147,8 +148,7 @@ class Controller_ExtJS_Product_DefaultTest extends MW_Unittest_Testcase
 				'product.dateend' => '2001-01-01 00:00:00',
 				'product.suppliercode' => '',
 				'product.typeid' => $item->getTypeId(),
-				'isCopiedItem' => true,
-				'isCopiedItemOlDId' => $item->getId()
+				'_copy' => true,
 			),
 		);
 

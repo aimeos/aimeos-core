@@ -141,6 +141,7 @@ class Controller_ExtJS_Service_DefaultTest extends MW_Unittest_Testcase
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
+				'service.id' => $item->getId(),
 				'service.position' => 1,
 				'service.label' => 'test service',
 				'service.status' => 1,
@@ -148,8 +149,7 @@ class Controller_ExtJS_Service_DefaultTest extends MW_Unittest_Testcase
 				'service.provider' => 'test provider',
 				'service.config' => array( 'url' => 'www.url.de' ),
 				'service.typeid' => $item->getTypeId(),
-				'isCopiedItem' => true,
-				'isCopiedItemOlDId' => $item->getId()
+				'_copy' => true
 			),
 		);
 
