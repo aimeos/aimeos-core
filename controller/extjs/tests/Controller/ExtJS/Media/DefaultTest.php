@@ -135,6 +135,58 @@ class Controller_ExtJS_Media_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCopyItem()
+	{
+		$mediaManager = MShop_Media_Manager_Factory::createManager( TestHelper::getContext() );
+		$listManager = $mediaManager->getSubManager('list');
+
+		$search = $mediaManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'media.label', 'cn_colombie_266x221' ) );
+		$result = $mediaManager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No media item found' );
+		}
+
+		$saveParams = (object) array(
+			'site' => 'unittest',
+			'items' => (object) array(
+				'media.label' => 'controller test media',
+				'media.domain' => 'attribute',
+				'media.typeid' => $item->getTypeId(),
+				'media.languageid' => 'de',
+				'media.url' => '/test/test.jpg',
+				'media.mimetype' => 'image/jpeg',
+				'media.status' => 0,
+				'isCopiedItem' => true,
+				'isCopiedItemOlDId' => $item->getId()
+			),
+		);
+
+		$searchParams = (object) array(
+			'site' => 'unittest',
+			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'media.label' => 'cn_colombie_266x221' ) ) ) )
+		);
+
+		$saved = $this->_object->saveItems( $saveParams );
+		$searched = $this->_object->searchItems( $searchParams );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'media.list.parentid', $item->getId() ) );
+		$listItems = $listManager->searchItems( $search );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'media.list.parentid', $saved['items']->{'media.id'} ) );
+		$copiedListItems = $listManager->searchItems( $search );
+
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'media.id'} );
+		$this->_object->deleteItems( $deleteParams );
+
+		$this->assertTrue( !empty( $copiedListItems ) );
+		$this->assertEquals( count($listItems), count( $copiedListItems ) );
+	}
+
+
 	public function testUploadJpeg()
 	{
 		$_FILES['unittest'] = array(

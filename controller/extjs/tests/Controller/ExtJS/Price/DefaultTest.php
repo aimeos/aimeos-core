@@ -193,6 +193,65 @@ class Controller_ExtJS_Price_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCopyItem()
+	{
+		$priceManager = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() );
+		$listManager = $priceManager->getSubManager('list');
+
+		$search = $priceManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'price.label', 'Default' ),
+			$search->compare( '==', 'price.value', '99.99' )
+		);
+
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$result = $priceManager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No price item found' );
+		}
+
+		$saveParams = (object) array(
+			'site' => 'unittest',
+			'items' => (object) array(
+				'price.typeid' => $item->getTypeId(),
+				'price.domain' => 'product',
+				'price.currencyid' => 'EUR',
+				'price.quantity' => '10',
+				'price.value' => '49.00',
+				'price.shipping' => '5.00',
+				'price.rebate' => '10.00',
+				'price.taxrate' => '20.00',
+				'price.status' => 0,
+				'isCopiedItem' => true,
+				'isCopiedItemOlDId' => $item->getId()
+			),
+		);
+
+		$searchParams = (object) array(
+			'site' => 'unittest',
+			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'price.label' => 'Default' ) ), 1 => array( '==' => (object) array( 'price.value' => '99.99' ) ) ) )
+		);
+
+		$saved = $this->_object->saveItems( $saveParams );
+		$searched = $this->_object->searchItems( $searchParams );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'price.list.parentid', $item->getId() ) );
+		$listItems = $listManager->searchItems( $search );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'price.list.parentid', $saved['items']->{'price.id'} ) );
+		$copiedListItems = $listManager->searchItems( $search );
+
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'price.id'} );
+		$this->_object->deleteItems( $deleteParams );
+
+		$this->assertTrue( !empty( $copiedListItems ) );
+		$this->assertEquals( count($listItems), count( $copiedListItems ) );
+	}
+
+
 	public function testGetServiceDescription()
 	{
 		$expected = array(
