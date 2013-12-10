@@ -192,42 +192,66 @@ class MShop_Catalog_Manager_Index_Default
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
-		if( count( $items ) > 0 ) // for the given product items
+		$paramIds = array();
+		foreach( $items as $item ) {
+			$paramIds[] = $item->getId();
+		}
+
+		if( $mode === 'all' ) // index all product items
 		{
-			$paramIds = array();
-			foreach( $items as $item ) {
-				$paramIds[] = $item->getId();
+			if( !empty( $paramIds ) )
+			{
+				$expr = array(
+					$search->compare( '==', 'product.id', $paramIds ),
+					$defaultConditions,
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
 			}
 
-			$expr = array(
-				$search->compare( '==', 'product.id', $paramIds ),
-				$defaultConditions,
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
 			$this->_writeIndex( $search, $domains, $size );
 			return;
 		}
 
-		if( $mode === 'all' ) // for all product items
+		// index categorized product items only
+		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'list' );
+		$catalogSearch = $catalogListManager->createSearch( true );
+
+		// use index "idx_mscatli_sid_rid_dom_tid" if only the given products should be indexed
+		// use index "unq_mscatli_sid_pid_dm_rid_tid" if all products should be indexed
+		$sort = array( $catalogSearch->sort( '+', 'catalog.list.siteid' ) );
+		$expr = array();
+
+		if( !empty( $paramIds ) )
 		{
-			$this->_writeIndex( $search, $domains, $size );
-			return;
+			$expr[] = $catalogSearch->compare( '==', 'catalog.list.refid', $paramIds );
+			$sort[] = $catalogSearch->sort( '+', 'catalog.list.refid' );
 		}
+		else
+		{
+			$sort[] = $catalogSearch->sort( '+', 'catalog.list.parentid' );
+		}
+
+		$expr[] = $catalogSearch->compare( '==', 'catalog.list.domain', 'product' );
+		$sort[] = $catalogSearch->sort( '+', 'catalog.list.domain' );
+
+		$expr[] = $catalogSearch->getConditions();
+
+		if( empty( $paramIds ) ) {
+			$sort[] = $catalogSearch->sort( '+', 'catalog.list.refid' );
+		}
+
+		$sort[] = $catalogSearch->sort( '+', 'catalog.list.typeid' );
+
+		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
+		$catalogSearch->setSortations( $sort );
 
 		$start = 0;
 		$ids = array();
 
-		// for the categorized product items
-		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
-		$categorySearch = $catalogListManager->createSearch();
-		$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
-		$categorySearch->setSortations( array( $search->sort( '+', 'catalog.list.id' ) ) );
-
 		do
 		{
-			$categorySearch->setSlice( $start, $size );
-			$result = $catalogListManager->searchItems( $categorySearch );
+			$catalogSearch->setSlice( $start, $size );
+			$result = $catalogListManager->searchItems( $catalogSearch );
 
 			$ids = array();
 			foreach( $result as $catalogListItem ) {
@@ -245,7 +269,7 @@ class MShop_Catalog_Manager_Index_Default
 			$count = count( $ids );
 			$start += $count;
 		}
-		while( $count > 0 );
+		while( $count == $catalogSearch->getSliceSize() );
 	}
 
 
@@ -262,26 +286,11 @@ class MShop_Catalog_Manager_Index_Default
 			throw new MShop_Catalog_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-
-		$itemId = $item->getId();
-
-		if( $itemId === null ) {
+		if( $item->getId() === null ) {
 			throw new MShop_Catalog_Exception( sprintf( 'Item could not be saved using method saveItem(). Item ID not available.' ) );
 		}
 
-
-		$confpath = 'mshop/catalog/manager/index/default/domains';
-		$default = array( 'attribute', 'price', 'text', 'product' );
-
-		$item = $this->getItem( $itemId, $this->_getContext()->getConfig()->get( $confpath, $default ) );
-
-		$this->deleteItem( $itemId );
-
-		foreach ( $this->_submanagers as $submanager ) {
-			$submanager->saveItem( $item );
-		}
-
-		$this->_saveSubProducts( array ( $itemId => $item ) );
+		$this->rebuildIndex( array( $item ) );
 	}
 
 
@@ -414,7 +423,7 @@ class MShop_Catalog_Manager_Index_Default
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
-				$this->_saveSubProductChunk( $search, $domains, $prodList, $size );
+				$this->_saveSubProductsChunk( $search, $domains, $prodList, $size );
 
 				$prodList = array();
 				$numSubProducts = 0;
@@ -429,7 +438,7 @@ class MShop_Catalog_Manager_Index_Default
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$this->_saveSubProductChunk( $search, $domains, $prodList, $size );
+			$this->_saveSubProductsChunk( $search, $domains, $prodList, $size );
 		}
 	}
 
@@ -442,7 +451,7 @@ class MShop_Catalog_Manager_Index_Default
 	 * @param array $list Associative list of sub-product IDs as keys and parent products IDs as values
 	 * @param integer $size Number of products per chunk
 	 */
-	protected function _saveSubProductChunk( MW_Common_Criteria_Interface $search, array $domains, array $list, $size )
+	protected function _saveSubProductsChunk( MW_Common_Criteria_Interface $search, array $domains, array $list, $size )
 	{
 		$start = 0;
 

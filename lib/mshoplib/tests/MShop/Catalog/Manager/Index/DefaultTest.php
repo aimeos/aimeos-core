@@ -180,10 +180,10 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->saveItem( $item );
 
 
-		$this->assertEquals( 7, $cntAttributeA );
+		$this->assertEquals( 8, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );
-		$this->assertEquals( 6, $cntPriceA );
-		$this->assertEquals( 13, $cntTextA );
+		$this->assertEquals( 7, $cntPriceA );
+		$this->assertEquals( 15, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
@@ -198,7 +198,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'MNOP' ) );
+		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$result = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
@@ -219,8 +219,8 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$prodText = $this->_getValue( $dbm, $sqlProd, 'value', $siteId, $item->getId() );
 		$this->_object->deleteItem( $item->getId() );
 
-		$this->assertEquals( '16 discs', $prodText );
-		$this->assertEquals( 'M', $attrText );
+		$this->assertEquals( 'Unterproduct 3', $prodText );
+		$this->assertEquals( 'XL', $attrText );
 	}
 
 
@@ -251,7 +251,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$products = $this->_object->searchItems( $search );
-		$this->assertEquals( 13, count( $products ) );
+		$this->assertEquals( 14, count( $products ) );
 
 		foreach($products as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );
@@ -652,10 +652,10 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
 		$this->_object->rebuildIndex();
 
-		$this->assertEquals( 10, count( $afterInsertAttr ) );
-		$this->assertEquals( 9, count( $afterInsertPrice ) );
-		$this->assertEquals( 7, count( $afterInsertText ) );
-		$this->assertEquals( 5, count( $afterInsertCat ) );
+		$this->assertEquals( 11, count( $afterInsertAttr ) );
+		$this->assertEquals( 10, count( $afterInsertPrice ) );
+		$this->assertEquals( 8, count( $afterInsertText ) );
+		$this->assertEquals( 6, count( $afterInsertCat ) );
 	}
 
 
@@ -728,10 +728,10 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$afterInsertCat = $this->_getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
 
 		//check inserted items
-		$this->assertEquals( 4, count( $afterInsertAttr ) );
-		$this->assertEquals( 5, count( $afterInsertPrice ) );
-		$this->assertEquals( 3, count( $afterInsertText ) );
-		$this->assertEquals( 5, count( $afterInsertCat ) );
+		$this->assertEquals( 5, count( $afterInsertAttr ) );
+		$this->assertEquals( 6, count( $afterInsertPrice ) );
+		$this->assertEquals( 4, count( $afterInsertText ) );
+		$this->assertEquals( 6, count( $afterInsertCat ) );
 	}
 
 
