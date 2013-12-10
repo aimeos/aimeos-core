@@ -232,7 +232,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 		$search->setConditions( $search->compare( '~=', $func, 'x' ) );
 
 		$result = $this->_object->searchItems( $search, array() );
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 3, count( $result ) );
 	}
 
 }
