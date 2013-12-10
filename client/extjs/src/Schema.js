@@ -21,8 +21,7 @@ MShop.Schema = {
             var fields = [],
                 schema = this.getSchema(schemaName);
 
-            fields.push("isCopiedItem");
-            fields.push("isCopiedItemOlDId");
+            fields.push("_copy");
 
             for (var fieldName in schema.properties) {
 

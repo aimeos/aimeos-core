@@ -14,7 +14,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	itemUiXType : 'MShop.panel.product.itemui',
 	exportMethod : 'Product_Export_Text.createJob',
 	importMethod: 'Product_Import_Text.uploadFile',
-
+	
 	autoExpandColumn : 'product-list-label',
 
 	filterConfig : {

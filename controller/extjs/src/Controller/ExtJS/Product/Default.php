@@ -80,6 +80,10 @@ class Controller_ExtJS_Product_Default
 
 		foreach( $items as $entry )
 		{
+		    if( isset( $entry->{'_copy'} ) ) {
+		        $oldId = $entry->{'product.id'};
+		        $entry->{'product.id'} = null;
+		    }
 			$item = $this->_manager->createItem();
 
 			if( isset( $entry->{'product.id'} ) ) { $item->setId( $entry->{'product.id'} ); }
@@ -104,8 +108,9 @@ class Controller_ExtJS_Product_Default
 			$this->_manager->saveItem( $item );
 			$id = $item->getId();
 
-			if( isset( $entry->{'isCopiedItem'} ) &&  isset( $entry->{'isCopiedItemOlDId'} ) ) {
-				$this->_copyListItems( $entry->{'isCopiedItemOlDId'}, $id, 'product' );
+			//  &&  isset( $entry->{'isCopiedItemOlDId'} 
+			if( isset( $entry->{'_copy'} ) ) {
+				$this->_copyListItems( $oldId, $id, 'product' );
 			}
 
 			$ids[] = $id;

@@ -50,6 +50,11 @@ class Controller_ExtJS_Service_Default
 		$ids = array();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
+		if( isset( $entry->{'_copy'} ) ) {
+	       $oldId = $entry->{'service.id'};
+	       $entry->{'service.id'} = null;
+		}
+		
 		foreach( $items as $entry )
 		{
 			$item = $this->_manager->createItem();
@@ -66,8 +71,8 @@ class Controller_ExtJS_Service_Default
 			$this->_manager->saveItem( $item );
 			$id = $item->getId();
 
-			if( isset( $entry->{'isCopiedItem'} ) &&  isset( $entry->{'isCopiedItemOlDId'} ) ) {
-				$this->_copyListItems( $entry->{'isCopiedItemOlDId'}, $id, 'service' );
+			if( isset( $entry->{'_copy'} ) ) {
+				$this->_copyListItems( $oldId, $id, 'service' );
 			}
 
 			$ids[] = $id;

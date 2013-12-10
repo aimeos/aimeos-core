@@ -29,8 +29,10 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 	{
 		this.title = _('Catalog');
 		this.domain = 'catalog';
+		
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
+		this.actionCopy.setHidden(true);
 
 		this.recordClass = MShop.Schema.getRecord(this.recordName);
 
@@ -71,7 +73,9 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 		}, attr.id ) ] );
 
 		this.store.resumeEvents();
-	}
+	},
+	
+	onCopySelectedItems : MShop.panel.AbstractListUi.prototype.onCopySelectedItems
 });
 
 // hook this into the main tab panel

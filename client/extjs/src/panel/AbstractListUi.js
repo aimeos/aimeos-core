@@ -145,7 +145,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.actionCopy = new Ext.Action({
 			text: _('Copy'),
 			disabled: true,
-			handler: this.onOpenEditWindow.createDelegate(this, ['copy'])
+			handler: this.onCopySelectedItems.createDelegate(this)
 		});
 
 		this.actionDelete = new Ext.Action({
@@ -249,7 +249,33 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			this.setDomainProperty(store, action, records, options);
 		}
 	},
-
+	
+	onCopySelectedItems: function() {
+		var that = this;
+		
+		Ext.Msg.show({
+			title: _('Copy item?'),
+			msg: _('Do you want to copy this item?'),
+			buttons: Ext.Msg.YESNO,
+			fn: function (btn) {
+				if (btn == 'yes') {
+					var rec = that.getRecord('copy');
+					Ext.ComponentMgr.create({
+						xtype: that.itemUiXType,
+						domain: that.recordName.toLowerCase(),
+						record: rec,
+						store: that.store,
+						listUI: that,
+						isNewRecord: true,
+						isCopy: true
+					}).show();
+				}
+			},
+			animEl: 'elId',
+			icon: Ext.MessageBox.QUESTION
+		});
+	},
+	
 	onDeleteSelectedItems: function() {
 		var that = this;
 
@@ -328,14 +354,13 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	onOpenEditWindow: function(action) {
 		var itemUi = Ext.ComponentMgr.create({
 			xtype: this.itemUiXType,
-			domain: this.domain,
+			domain: this.recordName.toLowerCase(),
 			record: this.getRecord(action),
 			store: this.store,
 			listUI: this,
 			isNewRecord: action === 'copy' ? true : false,
 			isCopy: action === 'copy' ? true : false
 		});
-
 		itemUi.show();
 	},
 
@@ -347,11 +372,13 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		{
 			var record = new this.store.recordType();
 			var edit = this.grid.getSelectionModel().getSelected().copy();
+			
 			record.data = edit.data;
-			record.data[ this.idProperty ] = null;
+			//record.data[ this.idProperty ] = null;
 
-			record.set("isCopiedItem", true);
-			record.set("isCopiedItemOlDId", edit.id);
+			record.data[ this.recordName.toLowerCase() + ".code" ] = record.data[ this.recordName.toLowerCase() + ".code" ] + "_copy";
+
+			record.set("_copy", true);
 
 			return record;
 		}
