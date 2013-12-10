@@ -232,6 +232,13 @@ class MShop_Text_Manager_Default
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'text.list.config' => array(
+			'code'=>'text.list.config',
+			'internalcode'=>'mtexli."config"',
+			'label'=>'Text list config',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'text.list.position' => array(
 			'code'=>'text.list.position',
 			'internalcode'=>'mtexli."pos"',

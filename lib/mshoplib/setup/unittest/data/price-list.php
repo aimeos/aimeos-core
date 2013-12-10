@@ -10,8 +10,8 @@ return array (
 	),
 
 	'price/list' => array(
-		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'typeid' => 'customer/default', 'domain' => 'customer', 'refid' => 'customer/UTC001', 'start' => null, 'end' => null, 'pos' => 0 ),
-		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'typeid' => 'customer/default', 'domain' => 'customer', 'refid' => 'customer/UTC002', 'start' => null, 'end' => null, 'pos' => 1 ),
-		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'typeid' => 'customer/default', 'domain' => 'customer', 'refid' => 'customer/UTC003', 'start' => '2002-01-01 00:00:00', 'end' => '2006-12-31 23:59:59', 'pos' => 2 ),
+		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'typeid' => 'customer/default', 'domain' => 'customer', 'refid' => 'customer/UTC001', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0 ),
+		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'typeid' => 'customer/default', 'domain' => 'customer', 'refid' => 'customer/UTC002', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1 ),
+		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'typeid' => 'customer/default', 'domain' => 'customer', 'refid' => 'customer/UTC003', 'start' => '2002-01-01 00:00:00', 'end' => '2006-12-31 23:59:59', 'config' => array(), 'pos' => 2 ),
 	)
 );

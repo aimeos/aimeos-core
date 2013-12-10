@@ -176,6 +176,8 @@ CREATE TABLE "mshop_service_list" (
 	"start" DATETIME DEFAULT NULL,
 	-- Valid until
 	"end" DATETIME DEFAULT NULL,
+	-- Configuration
+	"config" TEXT NOT NULL,
 	-- Precedence of the promotion
 	"pos" INTEGER NOT NULL,
 	-- Date of last modification of this database entry

@@ -169,6 +169,13 @@ class MShop_Service_Manager_Default
 			'type' => 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'service.list.config' => array(
+			'code' => 'service.list.config',
+			'internalcode' => 'mserli."config"',
+			'label' => 'Service list config',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'service.list.position' => array(
 			'code' => 'service.list.position',
 			'internalcode' => 'mserli."pos"',

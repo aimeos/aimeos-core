@@ -257,6 +257,7 @@ class MShop_Text_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>', 'text.list.refid', 0 );
 		$expr[] = $search->compare( '==', 'text.list.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'text.list.dateend', '2022-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'text.list.config', null );
 		$expr[] = $search->compare( '==', 'text.list.position', 0 );
 		$expr[] = $search->compare( '==', 'text.list.position', $this->_editor );
 

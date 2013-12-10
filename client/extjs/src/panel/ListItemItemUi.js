@@ -20,9 +20,13 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		this.items = [{
 			xtype : 'form',
 			border : false,
-			layout : 'fit',
 			flex : 1,
+			layout: 'hbox',
+			layoutConfig : {
+				align : 'stretch'
+			},
 			ref : 'mainForm',
+			autoScroll : true,
 			items : [{
 				xtype : 'fieldset',
 				border : false,
@@ -57,10 +61,39 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					anchor : '100%',
 					emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
 				}].concat( this.getAdditionalFields() || [] )
-			}]
+			}, {
+					xtype: 'MShop.panel.listconfigui',
+					layout: 'fit',
+					flex: 1,
+					data: ( this.record ? this.record.get(this.listUI.listNamePrefix +'config') : {} )
+			} ]
 		}];
+		
+		this.store.on('beforesave', this.onBeforeSave, this);
 
 		MShop.panel.ListItemItemUi.superclass.initComponent.call(this);
+	},
+	
+	onBeforeSave: function( store, data ) {
+		var config = {};
+		var editorGrid = this.findByType( 'MShop.panel.listconfigui' );
+		var first = editorGrid.shift();
+		
+		if( first ) {
+			Ext.each( first.data, function( item, index ) {
+				Ext.iterate( item, function( key, value, object ) {
+					if( key.trim() !== '' ) {
+						config[key] = value.trim();
+					}
+				}, this);
+			});
+		}
+
+		if( data.create && data.create[0] ) {
+			data.create[0].data[this.domain + '.list.config'] = config;
+		} else if( data.update && data.update[0] ) {
+			data.update[0].data[this.domain + '.list.config'] = config;
+		}
 	}
 });
 
