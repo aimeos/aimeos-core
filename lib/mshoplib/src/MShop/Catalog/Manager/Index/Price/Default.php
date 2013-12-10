@@ -226,7 +226,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 * Rebuilds the catalog index price for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param array $items List of product items implementing MShop_Product_Item_Interface
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -245,7 +245,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 		try
 		{
-			foreach ( $items as $item )
+			foreach( $items as $item )
 			{
 				$listTypes = array();
 				foreach( $item->getListItems( 'price' ) as $listItem ) {
@@ -254,27 +254,27 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/price/default/item/insert' );
 
-				foreach( $item->getRefItems( 'price' ) as $priceItem )
+				foreach( $item->getRefItems( 'price' ) as $refId => $refItem )
 				{
-					if( !isset( $listTypes[ $priceItem->getId() ] ) )
+					if( !isset( $listTypes[$refId] ) )
 					{
-						$msg = sprintf( 'List type for price item with ID "%1$s" not available', $priceItem->getId() );
+						$msg = sprintf( 'List type for price item with ID "%1$s" not available', $refId );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
-					foreach( $listTypes[ $priceItem->getId() ] as $listType )
+					foreach( $listTypes[$refId] as $listType )
 					{
 						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
 						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 3, $priceItem->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 4, $priceItem->getCurrencyId() );
+						$stmt->bind( 3, $refId, MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 4, $refItem->getCurrencyId() );
 						$stmt->bind( 5, $listType );
-						$stmt->bind( 6, $priceItem->getType() );
-						$stmt->bind( 7, $priceItem->getValue() );
-						$stmt->bind( 8, $priceItem->getCosts() );
-						$stmt->bind( 9, $priceItem->getRebate() );
-						$stmt->bind( 10, $priceItem->getTaxRate() );
-						$stmt->bind( 11, $priceItem->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 6, $refItem->getType() );
+						$stmt->bind( 7, $refItem->getValue() );
+						$stmt->bind( 8, $refItem->getCosts() );
+						$stmt->bind( 9, $refItem->getRebate() );
+						$stmt->bind( 10, $refItem->getTaxRate() );
+						$stmt->bind( 11, $refItem->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );
 						$stmt->bind( 12, $date );//mtime
 						$stmt->bind( 13, $editor );
 						$stmt->bind( 14, $date );//ctime
@@ -306,7 +306,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		$this->rebuildIndex( array( $item ) );
+		$this->rebuildIndex( array( $item->getId() => $item ) );
 	}
 
 

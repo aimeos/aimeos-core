@@ -250,7 +250,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	 * Rebuilds the catalog index catalog for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param array $items List of product items implementing MShop_Product_Item_Interface
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -264,15 +264,15 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$listManager = $catalogManager->getSubManager( 'list' );
 
 		$ids = array();
-		foreach( $items as $key => $item ) {
-			$ids[] = $item->getId();
+		foreach( $items as $id => $item ) {
+			$ids[] = $id;
 		}
 
 		$search = $listManager->createSearch( true );
 		$expr = array(
-			$search->getConditions(),
-			$search->compare( '==', 'catalog.list.domain', 'product' ),
 			$search->compare( '==', 'catalog.list.refid', $ids ),
+			$search->compare( '==', 'catalog.list.domain', 'product' ),
+			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7FFFFFFF );
@@ -280,11 +280,11 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		$result = $listManager->searchItems( $search );
 
 		$listItems = array();
-		foreach( $result as $key => $listItem ) {
+		foreach( $result as $listItem ) {
 			$listItems[ $listItem->getRefId() ][] = $listItem;
 		}
 
-		$date = date('Y-m-d H:i:s' );
+		$date = date( 'Y-m-d H:i:s' );
 		$editor = $context->getEditor();
 		$siteid = $context->getLocale()->getSiteId();
 
@@ -293,15 +293,16 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 		try
 		{
-			foreach ( $items as $key => $item )
+			foreach( $items as $id => $item )
 			{
+				$parentId = $item->getId(); // $id != $item->getId() for sub-products
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/catalog/default/item/insert' );
 
-				if( !array_key_exists( $item->getId(), $listItems ) ) { continue; }
+				if( !array_key_exists( $parentId, $listItems ) ) { continue; }
 
-				foreach ( $listItems[ $item->getId() ] as $listItem )
+				foreach( (array) $listItems[$parentId] as $listItem )
 				{
-					$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
+					$stmt->bind( 1, $parentId, MW_DB_Statement_Abstract::PARAM_INT );
 					$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 					$stmt->bind( 3, $listItem->getParentId(), MW_DB_Statement_Abstract::PARAM_INT );
 					$stmt->bind( 4, $listItem->getType() );
@@ -336,7 +337,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		$this->rebuildIndex( array( $item ) );
+		$this->rebuildIndex( array( $item->getId() => $item ) );
 	}
 
 

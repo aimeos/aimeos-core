@@ -192,7 +192,7 @@ class MShop_Catalog_Manager_Index_Default
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
-		if( count( $items ) > 0 )
+		if( count( $items ) > 0 ) // for the given product items
 		{
 			$paramIds = array();
 			foreach( $items as $item ) {
@@ -209,7 +209,7 @@ class MShop_Catalog_Manager_Index_Default
 			return;
 		}
 
-		if( $mode === 'all' )
+		if( $mode === 'all' ) // for all product items
 		{
 			$this->_writeIndex( $search, $domains, $size );
 			return;
@@ -218,8 +218,9 @@ class MShop_Catalog_Manager_Index_Default
 		$start = 0;
 		$ids = array();
 
+		// for the categorized product items
 		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager('list');
-		$categorySearch = $catalogListManager->createSearch( true );
+		$categorySearch = $catalogListManager->createSearch();
 		$categorySearch->setConditions( $categorySearch->compare( '==', 'catalog.list.domain', 'product' ) );
 		$categorySearch->setSortations( array( $search->sort( '+', 'catalog.list.id' ) ) );
 
@@ -344,11 +345,9 @@ class MShop_Catalog_Manager_Index_Default
 	protected function _writeIndex( MW_Common_Criteria_Interface $search, array $domains, $size )
 	{
 		$start = 0;
-		$config = $this->_getContext()->getConfig();
 
 		do
 		{
-			$search->setSlice( $start, $size );
 			$products = $this->_productManager->searchItems( $search, $domains );
 
 			try
@@ -373,15 +372,16 @@ class MShop_Catalog_Manager_Index_Default
 
 			$count = count( $products );
 			$start += $count;
+			$search->setSlice( $start, $size );
 		}
-		while( $count > 0 );
+		while( $count == $search->getSliceSize() );
 	}
 
 
 	/**
 	 * Saves catalog, price, text and attribute of subproduct.
 	 *
-	 * @param MShop_Product_Item_Interface $items Product items
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	protected function _saveSubProducts( array $items )
 	{
@@ -392,42 +392,81 @@ class MShop_Catalog_Manager_Index_Default
 
 		$search = $this->_productManager->createSearch( true );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$search->setSlice( 0, $size );
 		$defaultConditions = $search->getConditions();
+
+		$prodList = array();
+		$numSubProducts = 0;
 
 		foreach( $items as $id => $product )
 		{
-			$start = 0;
-
-			do
+			foreach( $product->getRefItems( 'product', null, 'default' ) as $subId => $subItem )
 			{
-				$ids = array_keys( $product->getRefItems( 'product', null, 'default' ) );
+				$prodList[$subId] = $id;
+				$numSubProducts++;
+			}
 
+			if( $numSubProducts >= $size )
+			{
 				$expr = array(
-					$search->compare( '==', 'product.id', $ids ),
+					$search->compare( '==', 'product.id', array_keys( $prodList ) ),
 					$defaultConditions,
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
-				$search->setSlice( $start, $size );
 
-				$result = $this->_productManager->searchItems( $search, $domains );
+				$this->_saveSubProductChunk( $search, $domains, $prodList, $size );
 
-				$itemList = array();
-				foreach( $result as $refItem )
+				$prodList = array();
+				$numSubProducts = 0;
+			}
+		}
+
+		if( $numSubProducts > 0 )
+		{
+			$expr = array(
+				$search->compare( '==', 'product.id', array_keys( $prodList ) ),
+				$defaultConditions,
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$this->_saveSubProductChunk( $search, $domains, $prodList, $size );
+		}
+	}
+
+
+	/**
+	 * Saves one chunk of the sub products.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criterias for retrieving the sub-products
+	 * @param array $domains List of domains to fetch list items and referenced items for
+	 * @param array $list Associative list of sub-product IDs as keys and parent products IDs as values
+	 * @param integer $size Number of products per chunk
+	 */
+	protected function _saveSubProductChunk( MW_Common_Criteria_Interface $search, array $domains, array $list, $size )
+	{
+		$start = 0;
+
+		do
+		{
+			$result = $this->_productManager->searchItems( $search, $domains );
+
+			if( !empty( $result ) )
+			{
+				foreach( $result as $refId => $refItem )
 				{
 					$refItem->setId( null );
-					$refItem->setId( $id );
-					$itemList[] = $refItem;
+					$refItem->setId( $list[$refId] );
 				}
 
 				foreach( $this->_submanagers as $submanager ) {
-					$submanager->rebuildIndex( $itemList );
+					$submanager->rebuildIndex( $result );
 				}
-
-				$count = count( $result );
-				$start += $count;
 			}
-			while( $count > 0 );
 
+			$count = count( $result );
+			$start += $count;
+			$search->setSlice( $start, $size );
 		}
+		while( $count == $size );
 	}
 }
