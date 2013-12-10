@@ -118,8 +118,8 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		if( first ) {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
-					if( key.trim() !== '' ) {
-						config[key.trim()] = value.trim();
+					if( ( key = key.trim() ) !== '' ) {
+						config[key] = value.trim();
 					}
 				}, this);
 			});
