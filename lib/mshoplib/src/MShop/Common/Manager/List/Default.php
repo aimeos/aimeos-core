@@ -120,7 +120,7 @@ class MShop_Common_Manager_List_Default
 			$statement->bind( 5, $item->getRefId(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 6, $item->getDateStart(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 7, $item->getDateEnd(), MW_DB_Statement_Abstract::PARAM_STR );
-			$statement->bind( 8, json_encode( $item->getConfig() ) );
+			$statement->bind( 8, json_encode( $item->getConfig() ), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 9, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
 
 			$statement->bind( 10, $time );//mtime
@@ -355,9 +355,11 @@ class MShop_Common_Manager_List_Default
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				if ( ( $row['config'] = json_decode($row['config'], true) ) === null ) {
-					$msg = sprintf('Invalid JSON as search result: %1$s', $row['config']);
-					throw new MShop_Service_Exception($msg);
+				$config = $row['config'];
+				if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+				{
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', $this->_prefix . '.config', $row['id'], $config );
+					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
 				$map[ $row['id'] ] = $row;
