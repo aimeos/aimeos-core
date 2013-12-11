@@ -259,8 +259,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			record: rec,
 			store: that.store,
 			listUI: that,
-			isNewRecord: true,
-			isCopy: true
+			isNewRecord: true
 		}).show();
 		
 		// I leave this if we ever to want a dialog for copy actions again it may be useful
@@ -385,10 +384,11 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			var edit = this.grid.getSelectionModel().getSelected().copy();
 			
 			record.data = edit.data;
-			//record.data[ this.idProperty ] = null;
 
-			record.data[ this.recordName.toLowerCase() + ".code" ] = record.data[ this.recordName.toLowerCase() + ".code" ] + "_copy";
-
+			if ( record.data.hasOwnProperty( this.recordName.toLowerCase() + ".code" ) ) {
+				record.data[ this.recordName.toLowerCase() + ".code" ] = record.data[ this.recordName.toLowerCase() + ".code" ] + "_copy";
+			}
+				
 			record.set("_copy", true);
 
 			return record;
