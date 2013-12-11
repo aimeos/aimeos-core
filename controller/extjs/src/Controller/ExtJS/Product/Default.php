@@ -80,10 +80,10 @@ class Controller_ExtJS_Product_Default
 
 		foreach( $items as $entry )
 		{
-		    if( isset( $entry->{'_copy'} ) ) {
-		        $oldId = $entry->{'product.id'};
-		        $entry->{'product.id'} = null;
-		    }
+			if( isset( $entry->{'_copy'} ) ) {
+				$oldId = $entry->{'product.id'};
+				$entry->{'product.id'} = null;
+			}
 			$item = $this->_manager->createItem();
 
 			if( isset( $entry->{'product.id'} ) ) { $item->setId( $entry->{'product.id'} ); }

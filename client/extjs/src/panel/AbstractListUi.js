@@ -388,7 +388,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			if ( record.data.hasOwnProperty( this.recordName.toLowerCase() + ".code" ) ) {
 				record.data[ this.recordName.toLowerCase() + ".code" ] = record.data[ this.recordName.toLowerCase() + ".code" ] + "_copy";
 			}
-				
+
 			record.set("_copy", true);
 
 			return record;

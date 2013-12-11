@@ -53,8 +53,8 @@ class Controller_ExtJS_Attribute_Default
 			$item = $this->_manager->createItem();
 
 			if ( isset( $entry->{'_copy'} ) ) {
-			    $oldId = $entry->{'attribute.id'};
-			    $entry->{'attribute.id'} = null;
+				$oldId = $entry->{'attribute.id'};
+				$entry->{'attribute.id'} = null;
 			}
 			
 			if( isset( $entry->{'attribute.id'} ) ) { $item->setId( $entry->{'attribute.id'} ); }
