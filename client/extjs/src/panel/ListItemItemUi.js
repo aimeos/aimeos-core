@@ -69,12 +69,71 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			} ]
 		}];
 		
-		this.store.on('beforesave', this.onBeforeSave, this);
-
 		MShop.panel.ListItemItemUi.superclass.initComponent.call(this);
 	},
 	
-	onBeforeSave: function( store, data ) {
+	onSaveItem: function() {
+		// validate data
+		if (! this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
+			Ext.Msg.alert(_('Invalid Data'), _('Please recheck you data'));
+			return;
+		}
+
+		this.saveMask.show();
+		this.isSaveing = true;
+
+		// force record to be saved!
+		this.record.dirty = true;
+
+		this.getConfigRecords(this.store, this.record);
+		
+		if (this.fireEvent('beforesave', this, this.record) === false) {
+			this.isSaveing = false;
+			this.saveMask.hide();
+		}
+
+		console.log("died?");
+		
+		var recordRefIdProperty = this.listUI.listNamePrefix + "refid";
+		var recordTypeIdProperty = this.listUI.listNamePrefix + "typeid";
+		
+		var index = this.store.findBy(function (item, index) {
+			var recordRefId = this.record.get(recordRefIdProperty);
+			var recordTypeId = this.mainForm.getForm().getFieldValues()[recordTypeIdProperty];
+	
+			var itemRefId = item.get(recordRefIdProperty);
+			var itemTypeId = item.get(recordTypeIdProperty);
+			
+			var recordId = this.record.id;
+			var itemId = index;
+			
+			if (! recordRefId || ! recordTypeId || ! itemRefId || ! itemTypeId)
+				return false;
+			
+			return ( recordRefId == itemRefId && recordTypeId == itemTypeId && recordId != itemId );
+		}, this);
+		
+		if (index != -1) {
+			this.isSaveing = false;
+			this.saveMask.hide();
+			Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
+			return;
+		}
+		
+		this.mainForm.getForm().updateRecord(this.record);
+		console.log(this.record);
+		
+		if (this.isNewRecord) {
+			this.store.add(this.record);
+		}
+
+		// store async action is triggered. {@see onStoreWrite/onStoreException}
+		if (! this.store.autoSave) {
+			this.onAfterSave();
+		}
+	},
+	
+	getConfigRecords: function( store, record ) {
 		var config = {};
 		var editorGrid = this.findByType( 'MShop.panel.listconfigui' );
 		var first = editorGrid.shift();
@@ -88,13 +147,9 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 				}, this);
 			});
 		}
-
-		if( data.create && data.create[0] ) {
-			data.create[0].data[this.domain + '.list.config'] = config;
-		} else if( data.update && data.update[0] ) {
-			data.update[0].data[this.domain + '.list.config'] = config;
-		}
+		record.data[this.listUI.listNamePrefix + 'config'] = config;
 	}
+	
 });
 
 Ext.reg('MShop.panel.listitemitemui', MShop.panel.ListItemItemUi);
