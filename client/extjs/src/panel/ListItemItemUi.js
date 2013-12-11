@@ -92,8 +92,6 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			this.saveMask.hide();
 		}
 
-		console.log("died?");
-		
 		var recordRefIdProperty = this.listUI.listNamePrefix + "refid";
 		var recordTypeIdProperty = this.listUI.listNamePrefix + "typeid";
 		
@@ -121,7 +119,6 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		}
 		
 		this.mainForm.getForm().updateRecord(this.record);
-		console.log(this.record);
 		
 		if (this.isNewRecord) {
 			this.store.add(this.record);
