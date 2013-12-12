@@ -12,14 +12,42 @@
 class MW_Setup_Task_ListsAddStatus extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'mshop_attribute_list' => 'ALTER TABLE "mshop_attribute_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
-		'mshop_catalog_list' => 'ALTER TABLE "mshop_catalog_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
-		'mshop_customer_list' => 'ALTER TABLE "mshop_customer_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
-		'mshop_media_list' => 'ALTER TABLE "mshop_media_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
-		'mshop_price_list' => 'ALTER TABLE "mshop_price_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
-		'mshop_product_list' => 'ALTER TABLE "mshop_product_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
-		'mshop_service_list' => 'ALTER TABLE "mshop_service_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
-		'mshop_text_list' => 'ALTER TABLE "mshop_text_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
+		'add' => array(
+			'mshop_attribute_list' => 'ALTER TABLE "mshop_attribute_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
+			'mshop_catalog_list' => 'ALTER TABLE "mshop_catalog_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
+			'mshop_customer_list' => 'ALTER TABLE "mshop_customer_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
+			'mshop_media_list' => 'ALTER TABLE "mshop_media_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
+			'mshop_price_list' => 'ALTER TABLE "mshop_price_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
+			'mshop_product_list' => 'ALTER TABLE "mshop_product_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
+			'mshop_service_list' => 'ALTER TABLE "mshop_service_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
+			'mshop_text_list' => 'ALTER TABLE "mshop_text_list" ADD "status" SMALLINT NOT NULL DEFAULT 0 AFTER "pos"',
+		),
+		'drop' => array(
+			'mshop_attribute_list' => array(
+				'idx_msattli_sid_start_end' => 'ALTER TABLE "mshop_attribute_list" DROP INDEX "idx_msattli_sid_start_end"',
+			),
+			'mshop_catalog_list' => array(
+				'idx_mscatli_sid_start_end' => 'ALTER TABLE "mshop_catalog_list" DROP INDEX "idx_mscatli_sid_start_end"',
+			),
+			'mshop_customer_list' => array(
+				'idx_mscusli_sid_start_end' => 'ALTER TABLE "mshop_customer_list" DROP INDEX "idx_mscusli_sid_start_end"',
+			),
+			'mshop_media_list' => array(
+				'idx_msmedli_sid_start_end' => 'ALTER TABLE "mshop_media_list" DROP INDEX "idx_msmedli_sid_start_end"',
+			),
+			'mshop_price_list' => array(
+				'idx_msprili_sid_start_end' => 'ALTER TABLE "mshop_price_list" DROP INDEX "idx_msprili_sid_start_end"',
+			),
+			'mshop_product_list' => array(
+				'idx_msproli_sid_start_end' => 'ALTER TABLE "mshop_product_list" DROP INDEX "idx_msproli_sid_start_end"',
+			),
+			'mshop_service_list' => array(
+				'idx_msserli_sid_start_end' => 'ALTER TABLE "mshop_service_list" DROP INDEX "idx_msserli_sid_start_end"',
+			),
+			'mshop_text_list' => array(
+				'idx_mstexli_sid_start_end' => 'ALTER TABLE "mshop_text_list" DROP INDEX "idx_mstexli_sid_start_end"',
+			),
+		)
 	);
 
 
@@ -64,7 +92,7 @@ class MW_Setup_Task_ListsAddStatus extends MW_Setup_Task_Abstract
 		$this->_msg( 'Adding status column to all list tables', 0 );
 		$this->_status( '' );
 
-		foreach( $stmts as $table => $stmt )
+		foreach( $stmts['add'] as $table => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
@@ -77,6 +105,25 @@ class MW_Setup_Task_ListsAddStatus extends MW_Setup_Task_Abstract
 			else
 			{
 				$this->_status( 'OK' );
+			}
+		}
+
+		foreach( $stmts['drop'] as $table => $indexes )
+		{
+			foreach ( $indexes AS $index => $stmt )
+			{
+				$this->_msg(sprintf('Checking index "%1$s": ', $index), 1);
+
+				if( $this->_schema->tableExists( $table ) === true
+					&& $this->_schema->indexExists( $table, $index ) === true )
+				{
+					$this->_execute( $stmt );
+					$this->_status( 'dropped' );
+				}
+				else
+				{
+					$this->_status( 'OK' );
+				}
 			}
 		}
 	}

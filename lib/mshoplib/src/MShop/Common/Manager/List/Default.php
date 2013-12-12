@@ -412,6 +412,8 @@ class MShop_Common_Manager_List_Default
 			$expr = array();
 			$curDate = date( 'Y-m-d H:i:00', time() );
 
+			$expr[] = $object->compare( '>', $prefix . '.status', 0 );
+
 			$exprTwo = array();
 			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $curDate );
 			$exprTwo[] = $object->compare( '==', $prefix . '.datestart', null );
@@ -421,8 +423,6 @@ class MShop_Common_Manager_List_Default
 			$exprTwo[] = $object->compare( '>=', $prefix . '.dateend', $curDate );
 			$exprTwo[] = $object->compare( '==', $prefix . '.dateend', null );
 			$expr[] = $object->combine( '||', $exprTwo );
-
-			$expr[] = $object->compare( '>', $prefix . '.status', 0 );
 
 			$searchConditions = $object->combine( '&&', $expr );
 			$object->setConditions( $searchConditions );

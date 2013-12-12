@@ -151,7 +151,7 @@ CONSTRAINT "fk_mscatli_typeid"
 	ON UPDATE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_mscatli_sid_start_end" ON "mshop_catalog_list" ("siteid", "start", "end");
+CREATE INDEX "idx_mscatli_sid_stat_start_end" ON "mshop_catalog_list" ("siteid", "status", "start", "end");
 
 CREATE INDEX "idx_mscatli_sid_rid_dom_tid" ON "mshop_catalog_list" ("siteid", "refid", "domain", "typeid");
 

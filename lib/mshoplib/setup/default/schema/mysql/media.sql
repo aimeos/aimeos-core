@@ -212,7 +212,7 @@ CONSTRAINT "fk_msmedli_typeid"
 	ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX "idx_msmedli_sid_start_end" ON "mshop_media_list" ("siteid", "start", "end");
+CREATE INDEX "idx_msmedli_sid_stat_start_end" ON "mshop_media_list" ("siteid", "status", "start", "end");
 
 CREATE INDEX "idx_msmedli_sid_rid_dom_tid" ON "mshop_media_list" ("siteid", "refid", "domain", "typeid");
 

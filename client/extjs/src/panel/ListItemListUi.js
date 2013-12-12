@@ -155,6 +155,15 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			},
 			{
 				xtype : 'gridcolumn',
+				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'status',
+				header : _('List Status'),
+				width : 50,
+				hidden : true,
+				align: 'center',
+				renderer : this.statusColumnRenderer.createDelegate(this)
+			},
+			{
+				xtype : 'gridcolumn',
 				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'position',
 				header : _('Position'),
 				width : 50,

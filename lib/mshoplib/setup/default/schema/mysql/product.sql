@@ -208,7 +208,7 @@ CONSTRAINT "fk_msproli_typeid"
 	ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX "idx_msproli_sid_start_end" ON "mshop_product_list" ("siteid", "start", "end");
+CREATE INDEX "idx_msproli_sid_stat_start_end" ON "mshop_product_list" ("siteid", "status", "start", "end");
 
 CREATE INDEX "idx_msproli_sid_rid_dom_tid" ON "mshop_product_list" ("siteid", "refid", "domain", "typeid");
 
