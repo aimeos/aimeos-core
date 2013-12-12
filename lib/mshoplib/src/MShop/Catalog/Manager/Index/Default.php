@@ -255,11 +255,11 @@ class MShop_Catalog_Manager_Index_Default
 
 			$ids = array();
 			foreach( $result as $catalogListItem ) {
-				$ids[] = $catalogListItem->getRefId();
+				$ids[ $catalogListItem->getRefId() ] = 0;
 			}
 
 			$expr = array(
-				$search->compare( '==', 'product.id', $ids ),
+				$search->compare( '==', 'product.id', array_keys( $ids ) ),
 				$defaultConditions,
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
