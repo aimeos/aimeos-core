@@ -197,7 +197,6 @@ class MShop_Catalog_Manager_Index_Default
 			$paramIds[] = $item->getId();
 		}
 
-
 		if( $mode === 'all' ) // index all product items
 		{
 			if( !empty( $paramIds ) )
@@ -213,124 +212,61 @@ class MShop_Catalog_Manager_Index_Default
 			return;
 		}
 
-
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
-		$catalogListManager = $catalogManager->getSubManager( 'list' );
-
 		// index categorized product items only
+		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'list' );
+		$catalogSearch = $catalogListManager->createSearch( true );
+
+		// use index "idx_mscatli_sid_rid_dom_tid" if only the given products should be indexed
+		// use index "unq_mscatli_sid_pid_dm_rid_tid" if all products should be indexed
+		$sort = array( $catalogSearch->sort( '+', 'catalog.list.siteid' ) );
+		$expr = array();
+
 		if( !empty( $paramIds ) )
 		{
-			$catalogListSearch = $catalogListManager->createSearch( true );
-
-			// use index "idx_mscatli_sid_rid_dom_tid" if only the given products should be indexed
-			$listExpr = array(
-				$catalogListSearch->compare( '==', 'catalog.list.refid', $paramIds ),
-				$catalogListSearch->compare( '==', 'catalog.list.domain', 'product' ),
-				$catalogListSearch->getConditions(),
-			);
-			$listSort = array(
-				$catalogListSearch->sort( '+', 'catalog.list.siteid' ),
-				$catalogListSearch->sort( '+', 'catalog.list.refid' ),
-				$catalogListSearch->sort( '+', 'catalog.list.domain' ),
-				$catalogListSearch->sort( '+', 'catalog.list.typeid' ),
-				$catalogListSearch->sort( '+', 'catalog.list.parentid' ),
-			);
-
-			$catalogListSearch->setConditions( $catalogListSearch->combine( '&&', $listExpr ) );
-			$catalogListSearch->setSortations( $listSort );
-
-			$start = 0;
-
-			do
-			{
-				$catalogListSearch->setSlice( $start );
-				$result = $catalogListManager->searchItems( $catalogListSearch );
-
-				$ids = array();
-				foreach( $result as $catalogListItem ) {
-					$ids[ $catalogListItem->getRefId() ] = 0;
-				}
-
-				if( !empty( $ids ) )
-				{
-					$expr = array(
-						$search->compare( '==', 'product.id', array_keys( $ids ) ),
-						$defaultConditions,
-					);
-					$search->setConditions( $search->combine( '&&', $expr ) );
-
-					$this->_writeIndex( $search, $domains, $size );
-				}
-
-				$count = count( $ids );
-				$start += $count;
-			}
-			while( $count == $catalogListSearch->getSliceSize() );
-
-			return;
+			$expr[] = $catalogSearch->compare( '==', 'catalog.list.refid', $paramIds );
+			$sort[] = $catalogSearch->sort( '+', 'catalog.list.refid' );
+		}
+		else
+		{
+			$sort[] = $catalogSearch->sort( '+', 'catalog.list.parentid' );
 		}
 
+		$expr[] = $catalogSearch->compare( '==', 'catalog.list.domain', 'product' );
+		$sort[] = $catalogSearch->sort( '+', 'catalog.list.domain' );
 
-		$catalogSearch = $catalogManager->createSearch( true );
-		$catalogListSearch = $catalogListManager->createSearch( true );
-		$defaultListConditions = $catalogListSearch->getConditions();
+		$expr[] = $catalogSearch->getConditions();
 
-		// use index "unq_mscatli_sid_pid_dm_rid_tid" if all products should be indexed
-		$listSort = array(
-			$catalogListSearch->sort( '+', 'catalog.list.siteid' ),
-			$catalogListSearch->sort( '+', 'catalog.list.parentid' ),
-			$catalogListSearch->sort( '+', 'catalog.list.domain' ),
-			$catalogListSearch->sort( '+', 'catalog.list.refid' ),
-			$catalogListSearch->sort( '+', 'catalog.list.typeid' ),
-		);
-		$catalogListSearch->setSortations( $listSort );
+		if( empty( $paramIds ) ) {
+			$sort[] = $catalogSearch->sort( '+', 'catalog.list.refid' );
+		}
+
+		$sort[] = $catalogSearch->sort( '+', 'catalog.list.typeid' );
+
+		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
+		$catalogSearch->setSortations( $sort );
 
 		$start = 0;
+		$ids = array();
 
 		do
 		{
-			$catalogSearch->setSlice( $start );
-			$catalogItems = $catalogManager->searchItems( $catalogSearch );
+			$catalogSearch->setSlice( $start, $size );
+			$result = $catalogListManager->searchItems( $catalogSearch );
 
-			foreach( $catalogItems as $catId => $catItem )
-			{
-				$listExpr = array(
-					$catalogListSearch->compare( '==', 'catalog.list.parentid', $catId ),
-					$catalogListSearch->compare( '==', 'catalog.list.domain', 'product' ),
-					$defaultListConditions,
-				);
-				$catalogListSearch->setConditions( $catalogListSearch->combine( '&&', $listExpr ) );
-
-				$listStart = 0;
-
-				do
-				{
-					$catalogListSearch->setSlice( $listStart );
-					$catalogListItems = $catalogListManager->searchItems( $catalogListSearch );
-
-					$ids = array();
-					foreach( $catalogListItems as $catalogListItem ) {
-						$ids[ $catalogListItem->getRefId() ] = 0;
-					}
-
-					if( !empty( $ids ) )
-					{
-						$expr = array(
-							$search->compare( '==', 'product.id', array_keys( $ids ) ),
-							$defaultConditions,
-						);
-						$search->setConditions( $search->combine( '&&', $expr ) );
-
-						$this->_writeIndex( $search, $domains, $size );
-					}
-
-					$listCount = count( $catalogListItems );
-					$listStart += $listCount;
-				}
-				while( $listCount == $catalogListSearch->getSliceSize() );
+			$ids = array();
+			foreach( $result as $catalogListItem ) {
+				$ids[] = $catalogListItem->getRefId();
 			}
 
-			$count = count( $catalogItems );
+			$expr = array(
+				$search->compare( '==', 'product.id', $ids ),
+				$defaultConditions,
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$this->_writeIndex( $search, $domains, $size );
+
+			$count = count( $ids );
 			$start += $count;
 		}
 		while( $count == $catalogSearch->getSliceSize() );
@@ -421,7 +357,6 @@ class MShop_Catalog_Manager_Index_Default
 
 		do
 		{
-			$search->setSlice( $start, $size );
 			$products = $this->_productManager->searchItems( $search, $domains );
 
 			try
@@ -446,6 +381,7 @@ class MShop_Catalog_Manager_Index_Default
 
 			$count = count( $products );
 			$start += $count;
+			$search->setSlice( $start, $size );
 		}
 		while( $count == $search->getSliceSize() );
 	}
