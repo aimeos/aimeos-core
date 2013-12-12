@@ -24,7 +24,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			activeTab : 0,
 			border : false,
 			itemId : 'MShop.panel.text.ItemUi',
-			plugins : (this.isCopy !== true) ? [ 'ux.itemregistry' ] : null,
+			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
 				title : _('Basic'),
@@ -34,7 +34,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					align : 'stretch'
 				},
 				itemId : 'MShop.panel.text.ItemUi.BasicPanel',
-				plugins : (this.isCopy !== true) ? [ 'ux.itemregistry' ] : null,
+				plugins : [ 'ux.itemregistry' ],
 				defaults : {
 					bodyCssClass : this.readOnlyClass
 				},

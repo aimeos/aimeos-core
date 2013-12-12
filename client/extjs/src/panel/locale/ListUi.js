@@ -110,9 +110,7 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 		this.tbar = [
 			this.actionAdd,
 			this.actionEdit,
-			this.actionDelete,
-			this.actionExport,
-			this.importButton
+			this.actionDelete
 		];
 	}
 } );
