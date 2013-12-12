@@ -391,6 +391,27 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	}
 
 
+	protected function _ipnListener( $additional )
+	{
+		//1. receive string with data
+		$additional['cmd'] = '_notify-validate';
+
+		//2. verify
+		$urlQuery = http_build_query( $additional, '', '&' );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypal.ipn' ) ), 'POST', $urlQuery );
+		$rvals = $this->_checkResponse( null, $response, __METHOD__ );
+
+		if( $rvals === 'INVALID' ) {
+			//exception
+			echo "Invalid ipn";
+		}
+
+		$rvals['payment_status'];
+		$rvals['payment_status'];
+
+	}
+
+
 	/**
 	 * Checks the response from the payment server.
 	 *
