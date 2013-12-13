@@ -18,6 +18,7 @@ class Client_Html_Catalog_Stage_Image_Default
 	extends Client_Html_Abstract
 	implements Client_Html_Interface
 {
+	private $_cache;
 	private $_subPartNames = array();
 	private $_subPartPath = 'client/html/catalog/stage/image/default/subparts';
 
