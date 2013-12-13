@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 12:24+0100\n"
-"PO-Revision-Date: 2013-12-04 11:25+0000\n"
+"POT-Creation-Date: 2013-12-13 14:51+0100\n"
+"PO-Revision-Date: 2013-12-13 13:53+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -63,8 +63,9 @@ msgid ""
 msgstr ""
 
 #. / Price format with price value (%1$s) and currency (%2$s)
-#: layouts/catalog/list/items-body-default.html:17
-#: layouts/catalog/detail/basket-body-default.html:14
+#: layouts/catalog/list/items-body-default.html:16
+#: layouts/catalog/session/seen-body-default.html:18
+#: layouts/catalog/detail/basket-body-default.html:13
 #: layouts/common/summary/detail-body-default.html:66
 #: layouts/basket/mini/main-body-default.html:23
 #: layouts/email/confirm/main-text-detail-body-default.html:55
@@ -76,7 +77,7 @@ msgstr ""
 
 #. / Configurable product attribute name (%1$s) with price value (%2$s) and
 #. currency (%3$s)
-#: layouts/catalog/detail/basket-attribute-body-default.html:32
+#: layouts/catalog/detail/basket-attribute-body-default.html:31
 #, php-format
 msgid "%1$s ( +%2$s%3$s )"
 msgstr ""
@@ -88,8 +89,9 @@ msgid "%1$s at %2$s"
 msgstr ""
 
 #. / Percent format with value (%1$s) and % sign
-#: layouts/catalog/list/items-body-default.html:19
-#: layouts/catalog/detail/basket-body-default.html:16
+#: layouts/catalog/list/items-body-default.html:18
+#: layouts/catalog/session/seen-body-default.html:20
+#: layouts/catalog/detail/basket-body-default.html:15
 #, php-format
 msgid "%1$s%%"
 msgstr ""
@@ -111,7 +113,7 @@ msgstr "+ Стоимость оплаты"
 msgid "+ Shipping"
 msgstr "+ Доставка"
 
-#: layouts/catalog/detail/basket-body-default.html:49
+#: layouts/catalog/detail/basket-body-default.html:48
 msgid "Add to basket"
 msgstr "Добавить в корзину"
 
@@ -142,7 +144,7 @@ msgid ""
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards.\n"
 msgstr ""
 
-#: layouts/catalog/detail/basic-body-default.html:17
+#: layouts/catalog/detail/basic-body-default.html:16
 msgid "Article no.:"
 msgstr "Номер товара:"
 
@@ -282,7 +284,7 @@ msgstr "Адрес доставки"
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "\"%1$s\" часть адреса доставки не хватает"
 
-#: layouts/catalog/detail/additional-text-body-default.html:19
+#: layouts/catalog/detail/additional-text-body-default.html:18
 msgid "Description"
 msgstr "Описание"
 
@@ -342,6 +344,7 @@ msgstr "Содержит %1$s%% НДС"
 #: src/Client/Html/Basket/Mini/Factory.php:39
 #: src/Client/Html/Account/History/Factory.php:39
 #: src/Client/Html/Catalog/Stock/Factory.php:39
+#: src/Client/Html/Catalog/Session/Factory.php:39
 #: src/Client/Html/Catalog/Filter/Factory.php:39
 #: src/Client/Html/Catalog/Stage/Factory.php:39
 #: src/Client/Html/Catalog/Detail/Factory.php:39
@@ -369,6 +372,10 @@ msgstr "Язык"
 #: layouts/checkout/standard/address-billing-body-default.html:119
 msgid "Last name"
 msgstr "Фамилия"
+
+#: layouts/catalog/session/seen-body-default.html:25
+msgid "Last seen"
+msgstr ""
 
 #: layouts/catalog/list/pagination-body-default.html:25
 msgid "Name"
@@ -488,7 +495,7 @@ msgid "Relevance"
 msgstr "Уместность"
 
 #. / Product search hint with user provided search string (%1$s)
-#: layouts/catalog/list/header-default.html:23
+#: layouts/catalog/list/header-default.html:22
 #, php-format
 msgid "Result for \"%1$s\""
 msgstr "Результат для \"%1$s\""
@@ -530,7 +537,7 @@ msgstr "Сервисы"
 msgid "Shipping"
 msgstr "Пересылка"
 
-#: layouts/catalog/filter/body-default.html:38
+#: layouts/catalog/filter/body-default.html:37
 msgid "Show"
 msgstr "Показать"
 
