@@ -66,6 +66,7 @@ class Client_Html_Catalog_Session_Seen_DefaultTest extends MW_Unittest_Testcase
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
 		$items = $manager->searchItems( $search );
 
 		$str = serialize( $items );
@@ -73,7 +74,7 @@ class Client_Html_Catalog_Session_Seen_DefaultTest extends MW_Unittest_Testcase
 
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#.*Cappuccino.*Expresso.*#smU', $output );
+		$this->assertRegExp( '#.*Expresso.*Cappuccino.*#smU', $output );
 		$this->assertStringStartsWith( '<section class="catalog-session-seen">', $output );
 	}
 
