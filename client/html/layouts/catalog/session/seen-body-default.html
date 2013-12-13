@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+$productItems = $this->get( 'seenItems', array() );
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
+
+$detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
+$detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+$detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
+
+/// Price format with price value (%1$s) and currency (%2$s)
+$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+/// Percent format with value (%1$s) and % sign
+$percentFormat = $this->translate( 'client/html', '%1$s%%' );
+
+?>
+<section class="catalog-session-seen">
+<?php if( !empty( $productItems ) ) : ?>
+	<h2 class="header"><?php echo $this->translate( 'client/html', 'Last seen' ); ?></h2>
+	<ul class="seen-items"> 
+<?php	foreach( $productItems as $productItem ) : ?>
+		<li class="seen-item">
+<?php		$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'l-product-id' => $productItem->getId() ); ?>
+			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params ) ); ?>">
+<?php		$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
+<?php		if( ( $mediaItem = reset( $mediaItems ) ) !== false ) : ?>
+				<div class="media-item" style="background-image: url('<?php echo $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>')"></div>
+<?php		endif; ?>
+				<h3 class="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
+				<div class="price-list">
+<?php	foreach( $productItem->getRefItems( 'price', 'default', 'default' ) as $priceItem ) : ?>
+<?php		$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() ); ?>
+					<div class="price-item">
+						<span class="quantity"><?php echo $enc->html( $priceItem->getQuantity() ); ?></span>
+						<span class="value"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getValue() ), $currency ) ); ?></span>
+<?php		if( ( $rebate = $priceItem->getRebate() ) > 0 ) : ?>
+						<span class="rebate"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $rebate ), $currency ) ); ?></span>
+						<span class="rebatepercent"><?php echo $enc->html( sprintf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ) ); ?></span>
+<?php		endif; ?>
+						<span class="shipping"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getCosts() ), $currency ) ); ?></span>
+						<span class="taxrate"><?php echo $enc->html( sprintf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ) ); ?></span>
+					</div>
+<?php	endforeach; ?>
+			</div>
+			</a>
+		</li>
+<?php	endforeach; ?>
+	</ul>
+<?php endif; ?>
+<?php echo $this->seenBody; ?>
+</section>
