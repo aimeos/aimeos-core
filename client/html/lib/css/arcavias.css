@@ -882,11 +882,11 @@
 
 
 /* Session items */
-.catalog-session-seen {
+.catalog-session {
 	clear: both;
 }
 
-.catalog-session-seen .header {
+.catalog-session .header {
 	border: 0 none;
 	font-size: 1em;
 	font-weight: bold;
