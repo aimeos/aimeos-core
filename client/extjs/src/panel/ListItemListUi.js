@@ -51,6 +51,13 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		this.itemUi.on('save', this.onItemUiSave, this);
 
 		MShop.panel.ListItemListUi.superclass.initComponent.call(this);
+		
+		this.grid.getView().getRowClass = function(record, rowIndex, rowParams, store){ 
+			if( record.phantom === false && record.get( this.listItemPickerUi.itemConfig.listNamePrefix + 'status' ) != 1 ) {
+				return this.rowCssClass;
+			}
+			return '';
+		}.createDelegate(this);
 	},
 
 	initStore: function() {
@@ -211,5 +218,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		].concat(this.getAdditionalColumns() || []);
 	}
 });
+
+
 
 Ext.reg('MShop.panel.listitemlistui', MShop.panel.ListItemListUi);

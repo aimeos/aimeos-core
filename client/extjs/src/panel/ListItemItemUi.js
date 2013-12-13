@@ -56,6 +56,9 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					format : 'Y-m-d H:i:s',
 					anchor : '100%',
 					emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
+				}, {
+					xtype : 'MShop.elements.status.combo',
+					name : this.listUI.listNamePrefix + 'status'
 				}].concat( this.getAdditionalFields() || [] )
 			}]
 		}];
