@@ -44,18 +44,16 @@ class MShop_Plugin_Provider_Order_ServicesAvailable
 	{
 		if( $value & MShop_Order_Item_Base_Abstract::PARTS_SERVICE )
 		{
-			$config = $this->_getItem()->getConfig();
 			$problems = array();
-
 			$availableServices = $order->getServices();
 
-			foreach( $config as $type => $value )
+			foreach( $this->_getItem()->getConfig() as $type => $value )
 			{
 				if ( ( $value == true ) && ( !isset( $availableServices[$type] ) ) ) {
 					$problems[$type] = 'available.none';
 				}
 
-				if ( ( $value !== null ) && ( $value == false ) && ( isset( $availableServices[$type] ) ) ) {
+				if ( ( $value != null ) && ( $value == false ) && ( isset( $availableServices[$type] ) ) ) {
 					$problems[$type] = 'available.notallowed';
 				}
 			}
