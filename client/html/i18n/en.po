@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-13 14:51+0100\n"
+"POT-Creation-Date: 2013-12-13 17:41+0100\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -56,9 +56,11 @@ msgid ""
 msgstr ""
 
 #. / Price format with price value (%1$s) and currency (%2$s)
+#: layouts/catalog/list/promo-body-default.html:18
 #: layouts/catalog/list/items-body-default.html:16
 #: layouts/catalog/session/seen-body-default.html:18
 #: layouts/catalog/detail/basket-body-default.html:13
+#: layouts/catalog/detail/suggest-body-default.html:19
 #: layouts/common/summary/detail-body-default.html:66
 #: layouts/basket/mini/main-body-default.html:23
 #: layouts/email/confirm/main-text-detail-body-default.html:55
@@ -81,9 +83,11 @@ msgid "%1$s at %2$s"
 msgstr ""
 
 #. / Percent format with value (%1$s) and % sign
+#: layouts/catalog/list/promo-body-default.html:20
 #: layouts/catalog/list/items-body-default.html:18
 #: layouts/catalog/session/seen-body-default.html:20
 #: layouts/catalog/detail/basket-body-default.html:15
+#: layouts/catalog/detail/suggest-body-default.html:21
 #, php-format
 msgid "%1$s%%"
 msgstr ""
@@ -559,6 +563,10 @@ msgstr ""
 msgid "Sub-total"
 msgstr ""
 
+#: layouts/catalog/detail/suggest-body-default.html:26
+msgid "Suggested products"
+msgstr ""
+
 #: layouts/common/summary/detail-body-default.html:86
 #: layouts/email/confirm/main-text-detail-body-default.html:76
 msgid "Sum"
@@ -587,6 +595,10 @@ msgstr ""
 #: layouts/email/confirm/main-text-head-body-default.html:38
 #, php-format
 msgid "Thank you for your order on %2$s. The ID of your order is %1$s and contains the following details:"
+msgstr ""
+
+#: layouts/catalog/list/promo-body-default.html:25
+msgid "Top seller"
 msgstr ""
 
 #: layouts/common/summary/detail-body-default.html:213

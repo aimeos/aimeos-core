@@ -20,7 +20,7 @@ class Client_Html_Catalog_List_Default
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/catalog/list/default/subparts';
-	private $_subPartNames = array( 'head', 'pagination', 'items', 'pagination' );
+	private $_subPartNames = array( 'head', 'promo', 'pagination', 'items', 'pagination' );
 
 
 	/**
@@ -225,9 +225,10 @@ class Client_Html_Catalog_List_Default
 				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
 
 				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
-				$view->listCatPath = $catalogManager->getPath( $catid, array( 'text', 'media', 'attribute' ) );
+				$view->listCatPath = $catalogManager->getPath( $catid, $domains );
 
 				$listCatPath = $view->get( 'listCatPath', array() );
+
 				if( ( $categoryItem = end( $listCatPath ) ) !== false ) {
 					$view->listCurrentCatItem = $categoryItem;
 				}

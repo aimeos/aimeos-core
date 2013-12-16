@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+
+?>
+<?php if( ( $url = $this->get( 'promoStockUrl' ) ) != null ) : ?>
+<script type="text/javascript" defer="defer" src="<?php echo $enc->attr( $url ); ?>"></script>
+<?php endif; ?>
+<?php echo $this->get( 'promoHeader' ); ?>
