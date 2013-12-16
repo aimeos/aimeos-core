@@ -62,6 +62,15 @@ interface MW_Mail_Message_Interface
 	public function addReplyTo( $email, $name = null );
 
 	/**
+	 * Adds a custom header to the message.
+	 *
+	 * @param string $name Name of the custom e-mail header
+	 * @param string $value Text content of the custom e-mail header
+	 * @return MW_Mail_Message_Interface Message object
+	 */
+	public function addHeader( $name, $value );
+
+	/**
 	 * Sets the e-mail address and name of the sender of the message (higher precedence than "From").
 	 *
 	 * @param string $email Source e-mail address
