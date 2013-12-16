@@ -53,7 +53,7 @@ class MShop_Plugin_Provider_Order_AddressesAvailable
 					$problems[$type] = 'available.none';
 				}
 
-				if ( $value != null && $value == false && isset( $availableAddresses[$type] ) ) {
+				if ( $value !== null && $value !== '' && $value == false && isset( $availableAddresses[$type] ) ) {
 					$problems[$type] = 'available.notallowed';
 				}
 			}
