@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 12:24+0100\n"
-"PO-Revision-Date: 2013-12-04 11:26+0000\n"
+"POT-Creation-Date: 2013-12-13 14:51+0100\n"
+"PO-Revision-Date: 2013-12-13 13:55+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -66,8 +66,9 @@ msgid ""
 msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
-#: layouts/catalog/list/items-body-default.html:17
-#: layouts/catalog/detail/basket-body-default.html:14
+#: layouts/catalog/list/items-body-default.html:16
+#: layouts/catalog/session/seen-body-default.html:18
+#: layouts/catalog/detail/basket-body-default.html:13
 #: layouts/common/summary/detail-body-default.html:66
 #: layouts/basket/mini/main-body-default.html:23
 #: layouts/email/confirm/main-text-detail-body-default.html:55
@@ -79,7 +80,7 @@ msgstr "%1$s %2$s"
 
 #. / Configurable product attribute name (%1$s) with price value (%2$s) and
 #. currency (%3$s)
-#: layouts/catalog/detail/basket-attribute-body-default.html:32
+#: layouts/catalog/detail/basket-attribute-body-default.html:31
 #, php-format
 msgid "%1$s ( +%2$s%3$s )"
 msgstr "%1$s ( +%2$s%3$s )"
@@ -91,8 +92,9 @@ msgid "%1$s at %2$s"
 msgstr "%1$s am %2$s"
 
 #. / Percent format with value (%1$s) and % sign
-#: layouts/catalog/list/items-body-default.html:19
-#: layouts/catalog/detail/basket-body-default.html:16
+#: layouts/catalog/list/items-body-default.html:18
+#: layouts/catalog/session/seen-body-default.html:20
+#: layouts/catalog/detail/basket-body-default.html:15
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -114,7 +116,7 @@ msgstr "+ Zahlungsgebühren"
 msgid "+ Shipping"
 msgstr "+ Versandkosten"
 
-#: layouts/catalog/detail/basket-body-default.html:49
+#: layouts/catalog/detail/basket-body-default.html:48
 msgid "Add to basket"
 msgstr "In den Warenkorb"
 
@@ -145,7 +147,7 @@ msgid ""
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards.\n"
 msgstr "Alle Lieferungen erfolgen gemäß unseren AGBs, die Sie auf unserer Website einsehen können und die Sie bei der Auftragserteilung akzeptiert haben.\n\nDiese E-Mail enthält vertrauliche Information und darf ausschließlich von der angesprochenen Person verwendet werden. Sollten Sie nicht diese Person sein, antworten Sie bitte auf diese E-Mail und löschen Sie diese anschließend.\n"
 
-#: layouts/catalog/detail/basic-body-default.html:17
+#: layouts/catalog/detail/basic-body-default.html:16
 msgid "Article no.:"
 msgstr "Artikelnummer:"
 
@@ -285,7 +287,7 @@ msgstr "Lieferadresse"
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "Bitte tragen Sie in der Versandadresse Ihre Daten in das Feld \"%1$s\" ein"
 
-#: layouts/catalog/detail/additional-text-body-default.html:19
+#: layouts/catalog/detail/additional-text-body-default.html:18
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -345,6 +347,7 @@ msgstr "Enthält %1$s%% USt."
 #: src/Client/Html/Basket/Mini/Factory.php:39
 #: src/Client/Html/Account/History/Factory.php:39
 #: src/Client/Html/Catalog/Stock/Factory.php:39
+#: src/Client/Html/Catalog/Session/Factory.php:39
 #: src/Client/Html/Catalog/Filter/Factory.php:39
 #: src/Client/Html/Catalog/Stage/Factory.php:39
 #: src/Client/Html/Catalog/Detail/Factory.php:39
@@ -372,6 +375,10 @@ msgstr "Sprache"
 #: layouts/checkout/standard/address-billing-body-default.html:119
 msgid "Last name"
 msgstr "Nachname"
+
+#: layouts/catalog/session/seen-body-default.html:25
+msgid "Last seen"
+msgstr "Zuletzt angesehen"
 
 #: layouts/catalog/list/pagination-body-default.html:25
 msgid "Name"
@@ -491,7 +498,7 @@ msgid "Relevance"
 msgstr "Relevanz"
 
 #. / Product search hint with user provided search string (%1$s)
-#: layouts/catalog/list/header-default.html:23
+#: layouts/catalog/list/header-default.html:22
 #, php-format
 msgid "Result for \"%1$s\""
 msgstr "Suchergebnis für \"%1$s\""
@@ -532,7 +539,7 @@ msgstr "Zahlung und Lieferung"
 msgid "Shipping"
 msgstr "Versandkosten"
 
-#: layouts/catalog/filter/body-default.html:38
+#: layouts/catalog/filter/body-default.html:37
 msgid "Show"
 msgstr "Anzeigen"
 
