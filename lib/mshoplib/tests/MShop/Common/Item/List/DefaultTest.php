@@ -39,6 +39,7 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 			'refid' => 'unitId',
 			'start' => '2005-01-01 00:00:00',
 			'end' => '2010-12-31 00:00:00',
+			'config' => array( 'cnt'=>'40' ),
 			'pos' => 7,
 			'typeid' => 8,
 			'type' => 'test',
@@ -170,6 +171,19 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+	public function testGetConfig()
+	{
+		$this->assertEquals( array('cnt'=>'40'), $this->_object->getConfig() );
+	}
+
+
+	public function testSetConfig()
+	{
+		$this->_object->setConfig( array('new value'=>'20.00') );
+		$this->assertEquals( array('new value'=>'20.00'), $this->_object->getConfig() );
+		$this->assertEquals( true, $this->_object->isModified() );
+	}
+
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->_object->isModified() );
@@ -187,6 +201,7 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 			'common.list.refid' => 'unitId',
 			'common.list.datestart' => '2005-01-01 00:00:00',
 			'common.list.dateend' => '2010-12-31 00:00:00',
+			'common.list.config' => array( 'cnt' => '40' ),
 			'common.list.position' => 7,
 			'common.list.ctime' => '2011-01-01 00:00:01',
 			'common.list.mtime' => '2011-01-01 00:00:02',

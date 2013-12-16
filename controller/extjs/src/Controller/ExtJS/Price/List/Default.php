@@ -56,6 +56,7 @@ class Controller_ExtJS_Price_List_Default
 			if( isset( $entry->{'price.list.domain'} ) ) { $item->setDomain( $entry->{'price.list.domain'} ); }
 			if( isset( $entry->{'price.list.parentid'} ) ) { $item->setParentId( $entry->{'price.list.parentid'} ); }
 			if( isset( $entry->{'price.list.refid'} ) ) { $item->setRefId( $entry->{'price.list.refid'} ); }
+			if( isset( $entry->{'price.list.config'} ) ) { $item->setConfig( (array) $entry->{'price.list.config'} ); }
 			if( isset( $entry->{'price.list.position'} ) ) { $item->setPosition( $entry->{'price.list.position'} ); }
 
 			if( isset( $entry->{'price.list.typeid'} ) && $entry->{'price.list.typeid'} != '' ) {
