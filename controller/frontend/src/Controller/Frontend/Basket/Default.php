@@ -136,8 +136,8 @@ class Controller_Frontend_Basket_Default
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$price = $priceManager->getLowestPrice( $prices, $quantity );
 
-		$attr += $this->_createOrderProductAttributes( $price, $prodid, $quantity, $configAttributeIds, 'config' );
-		$attr += $this->_createOrderProductAttributes( $price, $prodid, $quantity, $hiddenAttributeIds, 'hidden' );
+		$attr = array_merge( $attr, $this->_createOrderProductAttributes( $price, $prodid, $quantity, $configAttributeIds, 'config' ) );
+		$attr = array_merge( $attr, $this->_createOrderProductAttributes( $price, $prodid, $quantity, $hiddenAttributeIds, 'hidden' ) );
 
 		// remove product rebate of original price in favor to rebates granted for the order
 		$price->setRebate( '0.00' );
