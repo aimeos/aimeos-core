@@ -7,7 +7,6 @@
 
 $enc = $this->encoder();
 $productItems = $this->get( 'promoItems', array() );
-$positionItems = $this->get( 'promoPositionItems', array() );
 $contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
@@ -23,49 +22,47 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php if( !empty( $productItems ) ) : ?>
 <section class="catalog-list-promo">
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Top seller' ); ?></h2>
-<?php	foreach( $positionItems as $id => $item ) : ?>
-<?php		if( isset( $productItems[$id] ) ) : $productItem = $productItems[$id]; $firstImage = true; ?>
-<?php			$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'l-product-id' => $id ); ?>
+<?php	foreach( $productItems as $id => $productItem ) : ?>
+<?php		$firstImage = true; $params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'l-product-id' => $id ); ?>
 	<div class="product" data-id="<?php echo $id; ?>">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params + $this->listParams ) ); ?>">
 			<div class="media-list">
-<?php			foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
-<?php				$mediaUrl = $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>
-<?php				if( $firstImage === true ) : $firstImage = false; ?>
+<?php		foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
+<?php			$mediaUrl = $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>
+<?php			if( $firstImage === true ) : $firstImage = false; ?>
 				<noscript><div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')"></div></noscript>
 				<div class="media-item lazy-image" data-src="<?php echo $mediaUrl; ?>"></div>
-<?php				else : ?>
+<?php			else : ?>
 				<div class="media-item" data-src="<?php echo $mediaUrl; ?>"></div>
-<?php				endif; ?>
-<?php			endforeach; ?>
+<?php			endif; ?>
+<?php		endforeach; ?>
 			</div>
 			<div class="text-list">
 				<h2><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h2>
-<?php			foreach( $productItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>
+<?php		foreach( $productItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>
 				<div class="text-item">
-<?php				echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?><br/>
+<?php			echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?><br/>
 				</div>
-<?php			endforeach; ?>
+<?php		endforeach; ?>
 			</div>
 			<div class="price-list">
-<?php			foreach( $productItem->getRefItems( 'price', 'default', 'default' ) as $priceItem ) : ?>
-<?php				$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() ); ?>
+<?php		foreach( $productItem->getRefItems( 'price', 'default', 'default' ) as $priceItem ) : ?>
+<?php			$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() ); ?>
 				<div class="price-item">
 					<span class="quantity"><?php echo $enc->html( $priceItem->getQuantity() ); ?></span>
 					<span class="value"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getValue() ), $currency ) ); ?></span>
-<?php				if( ( $rebate = $priceItem->getRebate() ) > 0 ) : ?>
+<?php			if( ( $rebate = $priceItem->getRebate() ) > 0 ) : ?>
 					<span class="rebate"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $rebate ), $currency ) ); ?></span>
 					<span class="rebatepercent"><?php echo $enc->html( sprintf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ) ); ?></span>
-<?php				endif; ?>
+<?php			endif; ?>
 					<span class="shipping"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getCosts() ), $currency ) ); ?></span>
 					<span class="taxrate"><?php echo $enc->html( sprintf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ) ); ?></span>
 				</div>
-<?php			endforeach; ?>
+<?php		endforeach; ?>
 			</div>
 			<div class="stock"></div>
 		</a>
 	</div>
-<?php		endif; ?>
 <?php	endforeach; ?>
 <?php	echo $this->get( 'promoBody' ); ?>
 </section>

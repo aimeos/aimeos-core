@@ -113,26 +113,16 @@ class Client_Html_Catalog_List_Promo_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
+			$products = array();
 			$context = $this->_getContext();
 			$config = $context->getConfig();
-			$products = $productPosItems = array();
 
 			if( isset( $view->listCurrentCatItem ) )
 			{
-				$productPosItems = $view->listCurrentCatItem->getRefItems( 'product', null, 'promotion' );
-
-				$manager = MShop_Factory::createManager( $context, 'product' );
-
-				$search = $manager->createSearch( true );
-				$expr = array(
-					$search->compare( '==', 'product.id', array_keys( $productPosItems ) ),
-					$search->getConditions(),
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-
-				$products = $manager->searchItems( $search, array( 'text', 'price', 'media' ) );
+				$catId = $view->listCurrentCatItem->getId();
+				$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
+				$products = $this->_getCatalogRefItems( $catId, 'product', array( 'promotion' ), $domains );
 			}
-
 
 			if( !empty( $products ) && $config->get( 'client/html/catalog/list/stock/enable', true ) === true )
 			{
@@ -148,13 +138,74 @@ class Client_Html_Catalog_List_Promo_Default
 				$view->promoStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
 			}
 
-
-			$view->promoPositionItems = $productPosItems;
 			$view->promoItems = $products;
 
 			$this->_cache = $view;
 		}
 
 		return $this->_cache;
+	}
+
+
+	/**
+	 * Retrieves the items from the given domain that are associated via the list.
+	 *
+	 * @param string $catId ID of the category containing the associated items
+	 * @param string $domain Domain of the items that should be retrieved
+	 * @param array $listTypes List of list types that should be filtered for
+	 * @param array $ref List of domains that should be retrieved with the items
+	 * @param integer $start Position to start retrieving the items
+	 * @param integer $size Number of items that should be fetched
+	 * @return MShop_Common_Item_Interface Fetched items that are associated to the category
+	 */
+	protected function _getCatalogRefItems( $catId, $domain, array $listTypes, array $ref, $start = 0, $size = 100 )
+	{
+		$refIds = $result = array();
+		$context = $this->_getContext();
+
+		$manager = MShop_Factory::createManager( $context, 'catalog/list' );
+
+		$search = $manager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'catalog.list.parentid', $catId ),
+			$search->compare( '==', 'catalog.list.domain', 'product' ),
+			$search->compare( '==', 'catalog.list.type.code', $listTypes ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$sort = array(
+			$search->sort( '+', 'catalog.list.parentid' ),
+			$search->sort( '+', 'catalog.list.siteid' ),
+			$search->sort( '+', 'catalog.list.position' ),
+		);
+		$search->setSortations( $sort );
+		$search->setSlice( $start, $size );
+
+		foreach( $manager->searchItems( $search ) as $id => $listItem ) {
+			$refIds[ $listItem->getRefId() ] = 0;
+		}
+
+
+		$manager = MShop_Factory::createManager( $context, $domain );
+
+		$search = $manager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', $domain . '.id', array_keys( $refIds ) ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( $start, $size );
+
+		$items = $manager->searchItems( $search, $ref );
+
+
+		foreach( $refIds as $refId => $value )
+		{
+			if( isset( $items[$refId] ) ) {
+				$result[$refId] = $items[$refId];
+			}
+		}
+
+		return $result;
 	}
 }

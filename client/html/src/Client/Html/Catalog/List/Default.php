@@ -225,9 +225,10 @@ class Client_Html_Catalog_List_Default
 				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
 
 				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
-				$view->listCatPath = $catalogManager->getPath( $catid, array( 'text', 'media', 'attribute', 'product' ) );
+				$view->listCatPath = $catalogManager->getPath( $catid, $domains );
 
 				$listCatPath = $view->get( 'listCatPath', array() );
+
 				if( ( $categoryItem = end( $listCatPath ) ) !== false ) {
 					$view->listCurrentCatItem = $categoryItem;
 				}
