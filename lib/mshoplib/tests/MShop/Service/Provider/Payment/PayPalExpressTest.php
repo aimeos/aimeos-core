@@ -114,7 +114,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$result = $this->_object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 10, count( $result ) );
+		$this->assertEquals( 11, count( $result ) );
 		$this->assertEquals( null, $result['paypalexpress.ApiUsername'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiPassword'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiSignature'] );
@@ -172,19 +172,30 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 	public function testUpdateSync()
 	{
-		$what = array( 'TOKEN' => 'UT-99999999' );
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=updatesync method error';
-		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111111&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM='.$this->_order->getId();
+		$what = array(
+			'residence_country' => 'US',
+			'address_city' => 'San+Jose',
+			'first_name' => 'John',
+			'payment_status' => 'Completed',
+			'invoice' => $this->_order->getId(),
+			'txn_id' => 111111111
+		);
+		$error = 'INVALID';
+		$success = 'VERIFIED';
 
 		$com = new MW_Communication_TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->_object->setCommunication( $com );
 
-		$response = array ( 'token' => 'UT-99999999', 'PayerID' => 'PaypalUnitTestBuyer', 'orderid' => $this->_order->getId() );
-
+		$response = array (
+			'residence_country' => 'US',
+			'address_city' => 'San+Jose',
+			'first_name' => 'John',
+			'payment_status' => 'Completed',
+			'invoice' => $this->_order->getId(),
+			'txn_id' => 111111111
+		);
 		$testData = array(
-			'TOKEN' => 'UT-99999999',
-			'PAYERID' => 'PaypalUnitTestBuyer',
 			'TRANSACTIONID' => '111111111',
 		);
 
@@ -205,6 +216,10 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		foreach( $testData AS $key => $value ) {
 			$this->assertEquals( $attributeList[ $key ]->getValue(), $testData[ $key ] );
 		}
+
+		$this->_order = $orderManager->getItem( $this->_order->getId() );
+
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->_order->getPaymentStatus() );
 	}
 
 
@@ -228,7 +243,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$testData = array(
 			'TOKEN' => 'UT-99999999',
-			'PAYERID' => 'PaypalUnitTestBuyer',
 			'TRANSACTIONID' => '111111111',
 			'REFUNDTRANSACTIONID' => '88888888'
 		);

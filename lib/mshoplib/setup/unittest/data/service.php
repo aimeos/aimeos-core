@@ -59,7 +59,7 @@ return array (
 			'label' => 'PayPalExpress',
 			'provider' => 'PayPalExpress',
 			'config' => array(
-				'paypal.ipn' => 'https://www.sandbox.paypal.com/webscr&',
+				'paypal.Ipn' => 'https://www.sandbox.paypal.com/webscr&cmd=_notify-validate',
 				'paypalexpress.ApiUsername' => 'selling_api1.metaways.de',
 				'paypalexpress.ApiPassword' => '1386850805',
 				'paypalexpress.ApiSignature' => 'AuXHw.oeakbZYO3vDxAN91eJ-DvSAPR5bKlxkH4Upsd1qc1gbP3BhyGf',

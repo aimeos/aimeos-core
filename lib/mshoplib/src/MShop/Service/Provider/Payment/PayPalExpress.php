@@ -76,6 +76,15 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			'default'=> 'Sale',
 			'required'=> false,
 		),
+		'paypal.Ipn' => array(
+			'code' => 'paypal.Ipn',
+			'internalcode'=> 'paypal.Ipn',
+			'label'=> 'IPN',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> 'https://www.paypal.com/webscr&cmd=_notify-validate',
+			'required'=> false,
+		),
 	);
 
 
@@ -332,41 +341,44 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	public function updateSync( $additional )
 	{
-		if( !isset( $additional['token'] ) || !isset( $additional['PayerID'] ) || !isset( $additional['orderid'] ) ) {
+		//tid needed for capture, refund, cancel
+		if( !isset( $additional['txn_id'] ) )
+		{
+			$str = 'No transactionid for orderID=' . $additional['invoice'];
+			$this->_getContext()->getLogger()->log( $str, MW_Logger_Abstract::WARN );
 			return null;
 		}
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderBaseManager = $orderManager->getSubManager('base');
+		$urlQuery = http_build_query( $additional, '', '&' );
 
-		$order = $orderManager->getItem( $additional['orderid'] );
-		$baseid = $order->getBaseId();
-		$baseItem = $orderBaseManager->getItem( $baseid );
-		$serviceItem = $this->_getOrderServiceItem( $baseid );
+		//validation
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypal.Ipn' ) ), 'POST', $urlQuery );
 
-		$values = $this->_getAuthParameter();
-		$values['METHOD'] = 'DoExpressCheckoutPayment';
-		$values['TOKEN'] = $additional['token'];
-		$values['PAYERID'] = $additional['PayerID'];
-		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'Sale' );
-		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
-		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
+		if( $response === 'VERIFIED' )
+		{
+			$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
+			$orderBaseManager = $orderManager->getSubManager('base');
+			$order = $orderManager->getItem( $additional['invoice'] );
+			$baseid = $order->getBaseId();
+			$baseItem = $orderBaseManager->getItem( $baseid );
+			$serviceItem = $this->_getOrderServiceItem( $baseid );
 
-		$urlQuery = http_build_query( $values, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
-		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
+			$status['PAYMENTSTATUS'] = $additional['payment_status'];
+			$attributes['TRANSACTIONID'] = $additional['txn_id'];
+			$this->_saveAttributes( $attributes, $serviceItem );
 
-		$attributes = array( 'PAYERID' => $additional['PayerID'] );
+			$this->_setPaymentStatus( $order, $status );
+			$orderManager->saveItem( $order );
 
-		if( isset( $rvals['TRANSACTIONID'] ) ) {
-			$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
+			return $order;
+		}
+		else
+		{
+			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s": %2$s', $urlQuery );
+			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
 		}
 
-		$this->_saveAttributes( $attributes, $serviceItem );
-		$this->_setPaymentStatus( $order, $rvals );
-		$orderManager->saveItem( $order );
-
-		return $order;
+		return null;
 	}
 
 
@@ -388,27 +400,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		}
 
 		return false;
-	}
-
-
-	protected function _ipnListener( $additional )
-	{
-		//1. receive string with data
-		$additional['cmd'] = '_notify-validate';
-
-		//2. verify
-		$urlQuery = http_build_query( $additional, '', '&' );
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypal.ipn' ) ), 'POST', $urlQuery );
-		$rvals = $this->_checkResponse( null, $response, __METHOD__ );
-
-		if( $rvals === 'INVALID' ) {
-			//exception
-			echo "Invalid ipn";
-		}
-
-		$rvals['payment_status'];
-		$rvals['payment_status'];
-
 	}
 
 
