@@ -24,7 +24,7 @@ interface Controller_Frontend_Catalog_Interface
 	 * @param array $domains Domain names of items that are associated with the categories and that should be fetched too
 	 * @return array Associative list of items implementing MShop_Catalog_Item_Interface with their IDs as keys
 	 */
-	public function getCatalogPath( $id, $domains = array( 'text', 'media' ) );
+	public function getCatalogPath( $id, array $domains = array( 'text', 'media' ) );
 
 
 	/**
@@ -36,7 +36,7 @@ interface Controller_Frontend_Catalog_Interface
 	 * 	specific node only, LEVEL_LIST for node and all direct child nodes, LEVEL_TREE for the whole tree
 	 * @return MShop_Catalog_Item_Interface Catalog node, maybe with children depending on the level constant
 	 */
-	public function getCatalogTree( $id = null, $domains = array( 'text', 'media' ), $level = MW_Tree_Manager_Abstract::LEVEL_TREE );
+	public function getCatalogTree( $id = null, array $domains = array( 'text', 'media' ), $level = MW_Tree_Manager_Abstract::LEVEL_TREE );
 
 
 	/**
@@ -75,7 +75,7 @@ interface Controller_Frontend_Catalog_Interface
 	 * @param array $domains Domain names of items that are associated with the products and that should be fetched too
 	 * @return array Ordered list of product items implementing MShop_Product_Item_Interface
 	 */
-	public function getProductList( MW_Common_Criteria_Interface $filter, &$total = null, $domains = array( 'media', 'price', 'text') );
+	public function getProductList( MW_Common_Criteria_Interface $filter, &$total = null, array $domains = array( 'media', 'price', 'text') );
 
 
 	/**
