@@ -341,10 +341,14 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	public function updateSync( $additional )
 	{
+		if( isset( $additional['token'] ) && isset( $additional['PayerID'] ) && isset( $additional['orderid'] ) ) {
+			return $this->_doExpressCheckoutPayment( $additional );
+		}
+
 		//tid needed for capture, refund, cancel
 		if( !isset( $additional['txn_id'] ) )
 		{
-			$str = 'No transactionid for orderID=' . $additional['invoice'];
+			$str = 'No transactionid for orderID in' . print_r( $additional, true );
 			$this->_getContext()->getLogger()->log( $str, MW_Logger_Abstract::WARN );
 			return null;
 		}
@@ -363,9 +367,14 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			$baseItem = $orderBaseManager->getItem( $baseid );
 			$serviceItem = $this->_getOrderServiceItem( $baseid );
 
+			if( ( $tid = $serviceItem->getAttribute('TRANSACTIONID') ) !== $additional['txn_id'] )
+			{
+				$msg = sprintf( 'Transactionid missmatch for orderID="%1$s" TRANSACTIONID="%2$s" txn_id="%3$s"', $additional['invoice'], $tid, $additional['txn_id'] );
+				$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+				return null;
+			}
+
 			$status['PAYMENTSTATUS'] = $additional['payment_status'];
-			$attributes['TRANSACTIONID'] = $additional['txn_id'];
-			$this->_saveAttributes( $attributes, $serviceItem );
 
 			$this->_setPaymentStatus( $order, $status );
 			$orderManager->saveItem( $order );
@@ -374,8 +383,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		}
 		else
 		{
-			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s": %2$s', $urlQuery );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
+			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
+			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 		}
 
 		return null;
@@ -400,6 +409,42 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		}
 
 		return false;
+	}
+
+
+	protected function _doExpressCheckoutPayment( $addtional )
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
+		$orderBaseManager = $orderManager->getSubManager('base');
+
+		$order = $orderManager->getItem( $additional['orderid'] );
+		$baseid = $order->getBaseId();
+		$baseItem = $orderBaseManager->getItem( $baseid );
+		$serviceItem = $this->_getOrderServiceItem( $baseid );
+
+		$values = $this->_getAuthParameter();
+		$values['METHOD'] = 'DoExpressCheckoutPayment';
+		$values['TOKEN'] = $additional['token'];
+		$values['PAYERID'] = $additional['PayerID'];
+		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'Sale' );
+		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
+		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
+
+		$urlQuery = http_build_query( $values, '', '&' );
+		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
+		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
+
+		$attributes = array( 'PAYERID' => $additional['PayerID'] );
+
+		if( isset( $rvals['TRANSACTIONID'] ) ) {
+			$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
+		}
+
+		$this->_saveAttributes( $attributes, $serviceItem );
+		$this->_setPaymentStatus( $order, $rvals );
+		$orderManager->saveItem( $order );
+
+		return $order;
 	}
 
 
