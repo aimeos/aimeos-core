@@ -60,9 +60,9 @@ return array (
 			'provider' => 'PayPalExpress',
 			'config' => array(
 				'paypal.Ipn' => 'https://www.sandbox.paypal.com/webscr&cmd=_notify-validate',
-				'paypalexpress.ApiUsername' => 'selling_api1.metaways.de',
-				'paypalexpress.ApiPassword' => '1386850805',
-				'paypalexpress.ApiSignature' => 'AuXHw.oeakbZYO3vDxAN91eJ-DvSAPR5bKlxkH4Upsd1qc1gbP3BhyGf',
+				'paypalexpress.ApiUsername' => 'selling2_api1.metaways.de',
+				'paypalexpress.ApiPassword' => '1387373899',
+				'paypalexpress.ApiSignature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AwYOtMFx3HZuxFjoJ0gfSXrDHgnp',
 				'paypalexpress.PaymentAction' => 'authorization',
 				'paypalexpress.PaypalUrl' => 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s',
 				'paypalexpress.ApiEndpoint' => 'https://api-3t.sandbox.paypal.com/nvp',

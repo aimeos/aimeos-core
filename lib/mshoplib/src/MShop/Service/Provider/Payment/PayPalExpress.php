@@ -412,7 +412,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	}
 
 
-	protected function _doExpressCheckoutPayment( $addtional )
+	protected function _doExpressCheckoutPayment( $additional )
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
 		$orderBaseManager = $orderManager->getSubManager('base');
