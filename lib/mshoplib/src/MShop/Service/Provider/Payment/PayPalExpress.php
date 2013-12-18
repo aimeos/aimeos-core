@@ -367,15 +367,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			$baseItem = $orderBaseManager->getItem( $baseid );
 			$serviceItem = $this->_getOrderServiceItem( $baseid );
 
-			if( ( $tid = $serviceItem->getAttribute('TRANSACTIONID') ) !== $additional['txn_id'] )
-			{
-				$msg = sprintf( 'Transactionid missmatch for orderID="%1$s" TRANSACTIONID="%2$s" txn_id="%3$s"', $additional['invoice'], $tid, $additional['txn_id'] );
-				$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
-				return null;
-			}
-
 			$status['PAYMENTSTATUS'] = $additional['payment_status'];
+			$attributes['TRANSACTIONID'] = $additional['txn_id'];
 
+			$this->_saveAttributes( $attributes, $serviceItem );
 			$this->_setPaymentStatus( $order, $status );
 			$orderManager->saveItem( $order );
 
