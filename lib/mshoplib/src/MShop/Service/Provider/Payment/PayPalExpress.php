@@ -169,7 +169,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
 		$values[ 'RETURNURL' ] = $returnUrl;
 		$values[ 'CANCELURL' ] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) );
-		$values[ 'NOTIFYURL' ] = $this->_getConfigValue( array( 'payment.url-update' ) );
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
@@ -424,6 +423,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['PAYERID'] = $additional['PayerID'];
 		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'Sale' );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
+		$values['NOTIFYURL'] = $this->_getConfigValue( array( 'payment.url-update' ) );
 		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
 
 		$urlQuery = http_build_query( $values, '', '&' );
