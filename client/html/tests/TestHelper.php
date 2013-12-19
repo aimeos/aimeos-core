@@ -28,8 +28,12 @@ class TestHelper
 	}
 
 
-	public static function getView( $site = 'unittest' )
+	public static function getView( $site = 'unittest', MW_Config_Interface $config = null )
 	{
+		if( $config === null ) {
+			$config = self::getContext( $site )->getConfig();
+		}
+
 		$view = new MW_View_Default();
 
 		$trans = new MW_Translation_None( 'de_DE' );
@@ -45,7 +49,7 @@ class TestHelper
 		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new MW_View_Helper_Config_Default( $view, self::getContext( $site )->getConfig() );
+		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
