@@ -23,17 +23,6 @@ class MW_Setup_Task_MShopAddTypeDataDefault extends MW_Setup_Task_MShopAddTypeDa
 
 
 	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return array();
-	}
-
-
-	/**
 	 * Executes the task for MySQL databases.
 	 */
 	protected function _mysql()

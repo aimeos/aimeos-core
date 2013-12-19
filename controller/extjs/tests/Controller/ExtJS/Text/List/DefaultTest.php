@@ -95,6 +95,7 @@ class Controller_ExtJS_Text_List_DefaultTest extends MW_Unittest_Testcase
 				'text.list.refid' => 123,
 				'text.list.datestart' => '2000-01-01 00:00:00',
 				'text.list.dateend' => '2001-01-01 00:00:00',
+				'text.list.config' => array('test' => 'unit'),
 				'text.list.position' => 1,
 				'text.list.status' => 1,
 			),
@@ -122,6 +123,7 @@ class Controller_ExtJS_Text_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $saved['items']->{'text.list.refid'}, $searched['items'][0]->{'text.list.refid'});
 		$this->assertEquals( $saved['items']->{'text.list.datestart'}, $searched['items'][0]->{'text.list.datestart'});
 		$this->assertEquals( $saved['items']->{'text.list.dateend'}, $searched['items'][0]->{'text.list.dateend'});
+		$this->assertEquals( $saved['items']->{'text.list.config'}, $searched['items'][0]->{'text.list.config'});
 		$this->assertEquals( $saved['items']->{'text.list.position'}, $searched['items'][0]->{'text.list.position'});
 		$this->assertEquals( $saved['items']->{'text.list.status'}, $searched['items'][0]->{'text.list.status'});
 		$this->assertEquals( 1, count( $searched['items'] ) );

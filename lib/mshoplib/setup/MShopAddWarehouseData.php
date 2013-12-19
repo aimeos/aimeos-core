@@ -39,7 +39,8 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_process();
+		// executed by tasks in sub-directories for specific sites
+		// $this->_process();
 	}
 
 
@@ -56,7 +57,7 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 		$this->_msg( 'Adding warehouse data', 0 );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'warehouse.php';
+		$path = dirname( __FILE__ ) . $ds . 'default' . $ds . 'data' . $ds . 'warehouse.php';
 
 		if( ( $data = include( $path ) ) == false ) {
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product stock domain', $path ) );

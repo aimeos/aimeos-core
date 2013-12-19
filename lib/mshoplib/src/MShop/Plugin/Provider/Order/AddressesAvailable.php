@@ -45,7 +45,6 @@ class MShop_Plugin_Provider_Order_AddressesAvailable
 		if( $value & MShop_Order_Item_Base_Abstract::PARTS_ADDRESS )
 		{
 			$problems = array();
-
 			$availableAddresses = $order->getAddresses();
 
 			foreach( $this->_getItem()->getConfig() as $type => $value )
@@ -54,7 +53,7 @@ class MShop_Plugin_Provider_Order_AddressesAvailable
 					$problems[$type] = 'available.none';
 				}
 
-				if ( $value !== null && $value == false && isset( $availableAddresses[$type] ) ) {
+				if ( $value !== null && $value !== '' && $value == false && isset( $availableAddresses[$type] ) ) {
 					$problems[$type] = 'available.notallowed';
 				}
 			}
@@ -65,6 +64,7 @@ class MShop_Plugin_Provider_Order_AddressesAvailable
 				throw new MShop_Plugin_Provider_Exception( sprintf( 'Checks for available addresses in basket failed' ), -1, null, $code );
 			}
 		}
+
 		return true;
 	}
 }

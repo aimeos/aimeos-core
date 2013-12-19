@@ -27,7 +27,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTP') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTP' ) );
 
 		$items = $productManager->searchItems( $search, array( 'text' ) );
 
@@ -58,7 +58,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'CNC') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
 		$items = $productManager->searchItems( $search, array( 'text' ) );
 
@@ -81,7 +81,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'CNC') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
 		$items = $productManager->searchItems( $search, array( 'text' ) );
 
@@ -113,7 +113,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
 
 		$items = $productManager->searchItems( $search, array() );
 
@@ -151,7 +151,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
 
 		$items = $productManager->searchItems( $search, array() );
 
@@ -273,7 +273,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTSUB03') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
 
 		$items = $productManager->searchItems( $search );
 
@@ -282,7 +282,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		}
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $item->getId(), 101 );
+		$this->_object->addProduct( $item->getId(), 1001 );
 	}
 
 
@@ -291,7 +291,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTSUB04') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'QRST' ) );
 
 		$items = $productManager->searchItems( $search );
 
@@ -308,24 +308,8 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTSUB03') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'MNOP' ) );
 
-		$items = $productManager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'Product not found' );
-		}
-
-		$this->setExpectedException( 'MShop_Price_Exception' );
-		$this->_object->addProduct( $item->getId(), 1 );
-	}
-
-
-	public function testAddProductLowQuantityException()
-	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTSUB03') );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -348,7 +332,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:noSel') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:noSel' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -367,7 +351,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $productManager->createSearch();
 
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTPSUB01') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTPSUB01' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -378,21 +362,37 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testAddProductHigherQuantities()
+	public function testAddProductLowQuantityException()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTSUB05') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 5 );
+		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->_object->addProduct( $item->getId(), 1 );
+	}
 
-		$this->assertEquals( 5, $this->_object->get()->getProduct( 0 )->getQuantity() );
-		$this->assertEquals( 'U:TESTSUB05', $this->_object->get()->getProduct( 0 )->getProductCode() );
+
+	public function testAddProductHigherQuantities()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
+		$items = $productManager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Product not found' );
+		}
+
+		$this->_object->addProduct( $item->getId(), 2 );
+
+		$this->assertEquals( 2, $this->_object->get()->getProduct( 0 )->getQuantity() );
+		$this->assertEquals( 'IJKL', $this->_object->get()->getProduct( 0 )->getProductCode() );
 	}
 
 
@@ -427,7 +427,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTP') );
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTP' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {

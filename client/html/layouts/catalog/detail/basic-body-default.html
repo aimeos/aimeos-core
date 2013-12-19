@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: basic-body-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
 $enc = $this->encoder();
@@ -12,7 +11,7 @@ $enc = $this->encoder();
 <?php if( isset( $this->detailProductItem ) ) : ?>
 <div class="catalog-detail-basic">
 	<p class="supplier"><?php echo $enc->html( $this->detailProductItem->getSupplierCode() ); ?></p>
-	<h1 class="name"><?php echo $enc->html( $this->detailProductItem->getName() ); ?></h1>
+	<h1 class="name"><?php echo $enc->html( $this->detailProductItem->getName(), $enc::TRUST ); ?></h1>
 	<p class="code">
 		<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Article no.:' ), $enc::TRUST ); ?></span>
 		<span class="value"><?php echo $enc->html( $this->detailProductItem->getCode() ); ?></span>

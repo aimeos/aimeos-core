@@ -20,9 +20,13 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		this.items = [{
 			xtype : 'form',
 			border : false,
-			layout : 'fit',
 			flex : 1,
+			layout: 'hbox',
+			layoutConfig : {
+				align : 'stretch'
+			},
 			ref : 'mainForm',
+			autoScroll : true,
 			items : [{
 				xtype : 'fieldset',
 				border : false,
@@ -60,11 +64,92 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					xtype : 'MShop.elements.status.combo',
 					name : this.listUI.listNamePrefix + 'status'
 				}].concat( this.getAdditionalFields() || [] )
-			}]
+			}, {
+					xtype: 'MShop.panel.listconfigui',
+					layout: 'fit',
+					flex: 1,
+					data: ( this.record ? this.record.get(this.listUI.listNamePrefix +'config') : {} )
+			} ]
 		}];
-
+		
 		MShop.panel.ListItemItemUi.superclass.initComponent.call(this);
+	},
+	
+	onSaveItem: function() {
+		// validate data
+		if (! this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
+			Ext.Msg.alert(_('Invalid Data'), _('Please recheck you data'));
+			return;
+		}
+
+		this.saveMask.show();
+		this.isSaveing = true;
+
+		// force record to be saved!
+		this.record.dirty = true;
+
+		this.getConfigRecords(this.store, this.record);
+		
+		if (this.fireEvent('beforesave', this, this.record) === false) {
+			this.isSaveing = false;
+			this.saveMask.hide();
+		}
+
+		var recordRefIdProperty = this.listUI.listNamePrefix + "refid";
+		var recordTypeIdProperty = this.listUI.listNamePrefix + "typeid";
+		
+		var index = this.store.findBy(function (item, index) {
+			var recordRefId = this.record.get(recordRefIdProperty);
+			var recordTypeId = this.mainForm.getForm().getFieldValues()[recordTypeIdProperty];
+	
+			var itemRefId = item.get(recordRefIdProperty);
+			var itemTypeId = item.get(recordTypeIdProperty);
+			
+			var recordId = this.record.id;
+			var itemId = index;
+			
+			if (! recordRefId || ! recordTypeId || ! itemRefId || ! itemTypeId)
+				return false;
+			
+			return ( recordRefId == itemRefId && recordTypeId == itemTypeId && recordId != itemId );
+		}, this);
+		
+		if (index != -1) {
+			this.isSaveing = false;
+			this.saveMask.hide();
+			Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
+			return;
+		}
+		
+		this.mainForm.getForm().updateRecord(this.record);
+		
+		if (this.isNewRecord) {
+			this.store.add(this.record);
+		}
+
+		// store async action is triggered. {@see onStoreWrite/onStoreException}
+		if (! this.store.autoSave) {
+			this.onAfterSave();
+		}
+	},
+	
+	getConfigRecords: function( store, record ) {
+		var config = {};
+		var editorGrid = this.findByType( 'MShop.panel.listconfigui' );
+		var first = editorGrid.shift();
+		
+		if( first ) {
+			Ext.each( first.data, function( item, index ) {
+				Ext.iterate( item, function( key, value, object ) {
+					if( ( key = key.trim() ) !== '' ) {
+						config[key] = value.trim();
+					}
+				}, this);
+			});
+		}
+		record.data[this.listUI.listNamePrefix + 'config'] = config;
 	}
+	
 });
 
 Ext.reg('MShop.panel.listitemitemui', MShop.panel.ListItemItemUi);

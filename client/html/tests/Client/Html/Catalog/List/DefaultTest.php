@@ -95,6 +95,10 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<section class="arcavias catalog-list">', $output );
+		$this->assertNotRegExp( '#.*U:TESTPSUB01.*#smu', $output );
+		$this->assertNotRegExp( '#.*U:TESTSUB03.*#smu', $output );
+		$this->assertNotRegExp( '#.*U:TESTSUB04.*#smu', $output );
+		$this->assertNotRegExp( '#.*U:TESTSUB05.*#smu', $output );
 	}
 
 

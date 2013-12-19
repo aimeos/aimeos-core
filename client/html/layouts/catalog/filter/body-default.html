@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: body-default.html 1348 2012-10-27 12:49:19Z nsendetzky $
  */
 
 $listTarget = $this->config( 'client/html/catalog/list/url/target' );
@@ -11,6 +10,15 @@ $listController = $this->config( 'client/html/catalog/list/url/controller', 'cat
 $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 
 $enc = $this->encoder();
+$params = array();
+
+if( ( $catid = $this->param( 'f-catalog-id' ) ) !== null ) {
+	$params['f-catalog-id'] = $catid;
+}
+
+if( ( $name = $this->param( 'a-name' ) ) !== null ) {
+	$params['a-name'] = $name;
+}
 
 ?>
 <section class="arcavias catalog-filter">
@@ -22,11 +30,13 @@ $enc = $this->encoder();
 	</ul>
 <?php endif; ?>
 	<nav>
-		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction ) ); ?>">
+		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $params ) ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
+<?php if( $this->config( 'client/html/catalog/filter/default/button', true ) ) : ?>
 			<noscript>
 				<button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
 			</noscript>
+<?php endif; ?>
 		</form>
 	</nav>
 </section>

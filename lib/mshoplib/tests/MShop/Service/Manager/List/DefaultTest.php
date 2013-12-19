@@ -268,6 +268,7 @@ class MShop_Service_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>', 'service.list.refid', 0 );
 		$expr[] = $search->compare( '==', 'service.list.datestart', null );
 		$expr[] = $search->compare( '==', 'service.list.dateend', null );
+		$expr[] = $search->compare( '!=', 'service.list.config', null );
 		$expr[] = $search->compare( '==', 'service.list.position', 0 );
 		$expr[] = $search->compare( '==', 'service.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'service.list.mtime', '1970-01-01 00:00:00' );

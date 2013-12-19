@@ -286,6 +286,7 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 			$search->compare( '==', 'product.list.domain', 'media' ),
 			$search->compare( '==', 'product.list.datestart', '2000-01-01 00:00:00' ),
 			$search->compare( '==', 'product.list.dateend', '2100-01-01 00:00:00' ),
+			$search->compare( '!=', 'product.list.config', null ),
 			$search->compare( '==', 'product.list.position', 0 ),
 			$search->compare( '==', 'product.list.status', 1 ),
 			$search->compare( '==', 'product.list.editor', $this->_editor ),
@@ -310,6 +311,7 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'product.list.refid', $listItem->getRefId() );
 		$expr[] = $search->compare( '==', 'product.list.datestart', '2000-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.list.dateend', '2100-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'product.list.config', null );
 		$expr[] = $search->compare( '==', 'product.list.position', 0 );
 		$expr[] = $search->compare( '==', 'product.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'product.list.mtime', '1970-01-01 00:00:00' );

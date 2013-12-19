@@ -132,19 +132,19 @@ msgid "stat:7"
 msgstr "returned"
 
 #. Direct debit service provider
-msgid "payment.directdebit.accountowner"
+msgid "directdebit.accountowner"
 msgstr "Account owner"
 
 #. Direct debit service provider
-msgid "payment.directdebit.accountno"
+msgid "directdebit.accountno"
 msgstr "Account number"
 
 #. Direct debit service provider
-msgid "payment.directdebit.bankcode"
+msgid "directdebit.bankcode"
 msgstr "Bank code"
 
 #. Direct debit service provider
-msgid "payment.directdebit.bankname"
+msgid "directdebit.bankname"
 msgstr "Bank name"
 
 #. Stock level

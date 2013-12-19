@@ -120,6 +120,8 @@ CREATE TABLE "mshop_catalog_list" (
 	"start" DATETIME DEFAULT NULL,
 	-- Valid until
 	"end" DATETIME DEFAULT NULL,
+	-- Configuration
+	"config" TEXT NOT NULL,
 	-- Position of the list entry
 	"pos" INTEGER NOT NULL,
 	-- status code (0=hidden, 1=display, >1 for anything special)

@@ -201,6 +201,7 @@ class MShop_Product_Manager_DefaultTest extends MW_Unittest_Testcase
 			$search->compare( '==', 'product.list.type.code', 'suggestion' ),
 			$search->compare( '==', 'product.list.datestart', null ),
 			$search->compare( '==', 'product.list.dateend', null ),
+			$search->compare( '!=', 'product.list.config', null ),
 			$search->compare( '==', 'product.list.position', 0 ),
 			$search->compare( '==', 'product.list.status', 1 ),
 			$search->compare( '==', 'product.list.editor', $this->_editor ),
@@ -262,6 +263,7 @@ class MShop_Product_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>', 'product.list.refid', 0 );
 		$expr[] = $search->compare( '==', 'product.list.datestart', null );
 		$expr[] = $search->compare( '==', 'product.list.dateend', null );
+		$expr[] = $search->compare( '!=', 'product.list.config', null );
 		$expr[] = $search->compare( '==', 'product.list.position', 0 );
 		$expr[] = $search->compare( '==', 'product.list.status', 1 );
 		$expr[] = $search->compare( '==', 'product.list.editor', $this->_editor );

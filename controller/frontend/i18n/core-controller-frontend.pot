@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 16:10+0100\n"
+"POT-Creation-Date: 2013-12-04 12:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,9 +65,9 @@ msgstr ""
 msgid "Invalid address properties, please check your input"
 msgstr ""
 
+#: src/Controller/Frontend/Service/Factory.php:29
 #: src/Controller/Frontend/Basket/Factory.php:30
 #: src/Controller/Frontend/Common/Factory/Abstract.php:54
-#: src/Controller/Frontend/Service/Factory.php:29
 #: src/Controller/Frontend/Catalog/Factory.php:30
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""

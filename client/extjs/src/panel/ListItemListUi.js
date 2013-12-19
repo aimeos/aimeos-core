@@ -193,6 +193,21 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				hidden : true
 			},
 			{
+				xtype : 'gridcolumn',
+				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'config',
+				header : _('Configuration'),
+				width : 200,
+				editable : false,
+				hidden : true,
+				renderer: function (value) {
+					var s = "";
+					Ext.iterate(value, function (key, value, object) {
+						s = s + String.format('<div>{0}: {1}</div>', key, value);
+					}, this);
+					return s;
+				}
+			},
+			{
 				xtype : 'datecolumn',
 				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'ctime',
 				header : _('Created'),

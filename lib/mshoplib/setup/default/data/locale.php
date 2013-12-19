@@ -366,7 +366,7 @@ return array(
 	),
 
 	'locale' => array(
-		array( 'siteid' => 'default', 'langid' => 'en', 'currencyid' => 'EUR', 'pos' => 0, 'status' => 0 ),
+		array( 'siteid' => 'default', 'langid' => 'en', 'currencyid' => 'EUR', 'pos' => 0, 'status' => 1 ),
 	),
 
 );

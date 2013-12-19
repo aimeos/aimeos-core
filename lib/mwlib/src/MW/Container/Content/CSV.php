@@ -123,7 +123,11 @@ class MW_Container_Content_CSV
 	 */
 	function key()
 	{
-		return $this->_position;
+		if( $this->_data !== null ) {
+			return $this->_position;
+		}
+
+		return null;
 	}
 
 
@@ -178,7 +182,7 @@ class MW_Container_Content_CSV
 		{
 			$data = fgetcsv( $this->_fh, 0, $this->_separator, $this->_enclosure, $this->_escape );
 
-			if( $data === false ) {
+			if( $data === false || $data === null ) {
 				return null;
 			}
 		}

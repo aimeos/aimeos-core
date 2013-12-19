@@ -246,6 +246,13 @@ class MShop_Product_Manager_Default
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'product.list.config' => array(
+			'code'=>'product.list.config',
+			'internalcode'=>'mproli."config"',
+			'label'=>'Product list config',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'product.list.position' => array(
 			'code'=>'product.list.position',
 			'internalcode'=>'mproli."pos"',

@@ -17,13 +17,13 @@ return array(
 		',
 		'insert' => '
 			INSERT INTO "mshop_customer_list"( "parentid", "siteid", "typeid", "domain", "refid", "start", "end",
-			"pos", "status", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+				"config", "pos", "status", "mtime", "editor", "ctime" )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_customer_list"
 			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-				"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+				"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'updatepos' => '
@@ -47,8 +47,8 @@ return array(
 		',
 		'search' => '
 			SELECT mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."typeid",
-				mcusli."domain", mcusli."refid", mcusli."start", mcusli."end", mcusli."pos",
-				mcusli."status", mcusli."mtime", mcusli."editor", mcusli."ctime"
+				mcusli."domain", mcusli."refid", mcusli."start", mcusli."end", mcusli."config",
+				mcusli."pos", mcusli."status", mcusli."mtime", mcusli."editor", mcusli."ctime"
 			FROM "mshop_customer_list" AS mcusli
 			:joins
 			WHERE :cond

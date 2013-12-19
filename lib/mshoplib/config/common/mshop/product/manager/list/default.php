@@ -16,14 +16,14 @@ return array(
 				AND "domain" = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_product_list"( "parentid", "siteid", "typeid", "domain", "refid", "start", "end", "pos",
-				"status", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_product_list"( "parentid", "siteid", "typeid", "domain", "refid", "start", "end", "config",
+				"pos", "status", "mtime", "editor", "ctime" )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_product_list"
 			SET "parentid" = ?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-				"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+				"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'updatepos' => '
@@ -47,7 +47,7 @@ return array(
 		',
 		'search' => '
 			SELECT mproli."id", mproli."parentid", mproli."siteid", mproli."typeid", mproli."domain",
-				mproli."refid", mproli."start", mproli."end", mproli."pos", mproli."status", mproli."mtime", mproli."editor", mproli."ctime"
+				mproli."refid", mproli."start", mproli."end", mproli."config", mproli."pos", mproli."status", mproli."mtime", mproli."editor", mproli."ctime"
 			FROM "mshop_product_list" AS mproli
 			:joins
 			WHERE :cond

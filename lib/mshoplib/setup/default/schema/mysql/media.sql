@@ -181,6 +181,8 @@ CREATE TABLE "mshop_media_list" (
 	"start" DATETIME DEFAULT NULL,
 	-- Valid until
 	"end" DATETIME DEFAULT NULL,
+	-- Configuration
+	"config" TEXT NOT NULL,
 	-- Precedence of the promotion
 	"pos" INTEGER NOT NULL,
 	-- status code (0=hidden, 1=display, >1 for anything special)

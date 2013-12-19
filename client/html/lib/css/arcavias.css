@@ -463,6 +463,116 @@
 	outline: none;
 }
 
+.catalog-list .product {
+	display: inline-block;
+	vertical-align: top;
+	width: 180px;
+	position: relative;
+	overflow: hidden;
+	margin: 0 1px;
+}
+
+.catalog-list .product a {
+	text-decoration: none;
+	display: inline-block; 
+}
+
+/* media list */
+.catalog-list .media-list {
+	height: 240px;
+	width: 180px;
+	background-color: #FFFFFF;
+	background-image: url(images/arcavias.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	text-align: center;
+	overflow: hidden;
+}
+
+.catalog-list .media-item {
+	background-color: #FFFFFF;
+	background-image: url(images/progress.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 240px;
+	width: 180px;
+}
+
+/* text list */
+.catalog-list .text-list {
+	height: 5.3125em;
+	padding: 3px 5px;
+	text-align: left;
+	overflow: hidden;
+	border-top: 1px solid #C3D9E5;
+	border-bottom: 1px solid #C3D9E5;
+}
+
+/* price list */
+.catalog-list .price-list {
+	padding: 5px;
+	font-weight: bold;
+	color: #004266;
+	height: 1em;
+	float: left;
+}
+
+.catalog-list .price-item {
+	display: none;
+}
+
+.catalog-list .price-item:first-child {
+	display: block;
+}
+
+.catalog-list .price-item:first-child .quantity,
+.catalog-list .price-item:first-child .rebatepercent,
+.catalog-list .price-item:first-child .rebate,
+.catalog-list .price-item:first-child .shipping,
+.catalog-list .price-item:first-child .taxrate {
+	display: none;
+}
+
+/* Stock level */
+.catalog-list .stock {
+	padding: 5px;
+	float: left;
+}
+
+.catalog-list .stockitem {
+	display: none;
+}
+
+.catalog-list .stockitem:first-child {
+	display: block;
+}
+
+.catalog-list .stocklevel {
+	display: inline-block;
+	height: 0.85em;
+	width: 0.85em;
+}
+
+.catalog-list .stocktext {
+	display: none;
+}
+
+.catalog-list .stock-unlimited .stocklevel,
+.catalog-list .stock-high .stocklevel {
+	background-color: #0BA008;
+}
+
+.catalog-list .stock-low .stocklevel {
+	background-color: #F0A008;
+}
+
+.catalog-list-items .stock-out .stocklevel {
+	background-color: #F01800;
+}
+
+/* List head section */
 .catalog-list-head {
 	padding: 0px 0px 20px 0px;
 }
@@ -491,11 +601,12 @@
 	background-color: #F2F7FA;
 	border: 1px solid #689DB9;
 	color: #004266;
-	padding: 5px;
+	padding: 0.75em;
 	text-align: right;
 }
 
 .catalog-list-pagination .sort {
+	padding: 0.5em;
 	float: left;
 }
 
@@ -510,7 +621,7 @@
 }
 
 .catalog-list-pagination .sort a {
-	padding: 0px 5px 0px 0px;
+	padding: 0.4em;
 	color: #004266;
 	text-decoration: none;
 }
@@ -526,13 +637,40 @@
 
 .catalog-list-pagination .browser {
 	display: inline;
+	white-space: nowrap;
 }
 
 .catalog-list-pagination .browser a {
+	display: inline-block;
 	font-weight: bold;
-	padding: 0 0.25em;
+	margin: 0 0.2em;
+	padding: 0.4em;
+	width: 1.3em;
 	color: #004266;
+	text-align: center;
 	text-decoration: none;
+	box-shadow: 1px 1px 2px #5C88A1;
+	border: 1px solid #689DB9;
+	border-radius: 4px;
+}
+
+.catalog-list-pagination .browser a:hover {
+	box-shadow: 1px 1px 2px #5C88A1 inset;
+}
+
+/* Product list, promotion section */
+.catalog-list-promo {
+	margin: 2em 0 4em;
+}
+
+.catalog-list-promo .header {
+	border: 0 none;
+	font-size: 1.25em;
+	font-weight: bold;
+	padding: 0.75em;
+	color: #004266;
+	background-color: #F2F7FA;
+	border: 1px solid #689DB9;
 }
 
 /* Product list, items section */
@@ -540,116 +678,21 @@
 	margin: 10px 0px;
 }
 
-.catalog-list-items .product {
-	display: inline-block;
-	width: 180px;
-	position: relative;
-	overflow: hidden;
-	margin: 0 1px;
-}
 
-.catalog-list-items .product a {
-	text-decoration: none;
-	display: inline-block; 
-}
+/* Product details */
 
-/* media list */
-.catalog-list-items .media-list {
-	height: 240px;
-	width: 180px;
-	background-color: #FFFFFF;
-	background-image: url(images/arcavias.gif);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	text-align: center;
-	overflow: hidden;
-}
-
-.catalog-list-items .media-item {
-	background-color: #FFFFFF;
-	background-image: url(images/progress.gif);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 240px;
-	width: 180px;
-}
-
-/* text list */
-.catalog-list-items .text-list {
-	height: 5.3125em;
-	padding: 3px 5px;
-	text-align: left;
-	overflow: hidden;
-	border-top: 1px solid #C3D9E5;
-	border-bottom: 1px solid #C3D9E5;
-}
-
-/* price list */
-.catalog-list-items .price-list {
-	padding: 5px;
+.catalog-detail .header {
+	border: 0 none;
+	font-size: 1em;
 	font-weight: bold;
-	color: #004266;
-	height: 1em;
-	float: left;
+	height: 2em;
+	line-height: 2em;
+	padding: 0px 0px 0px 5px;
+	color: #ffffff;
+	background-color: #679CB8;
 }
 
-.catalog-list-items .price-item {
-	display: none;
-}
-
-.catalog-list-items .price-item:first-child {
-	display: block;
-}
-
-.catalog-list-items .price-item:first-child .quantity,
-.catalog-list-items .price-item:first-child .rebatepercent,
-.catalog-list-items .price-item:first-child .rebate,
-.catalog-list-items .price-item:first-child .shipping,
-.catalog-list-items .price-item:first-child .taxrate {
-	display: none;
-}
-
-/* Stock level */
-.catalog-list-items .stock {
-	padding: 5px;
-	float: left;
-}
-
-.catalog-list-items .stockitem {
-	display: none;
-}
-
-.catalog-list-items .stockitem:first-child {
-	display: block;
-}
-
-.catalog-list-items .stocklevel {
-	display: inline-block;
-	height: 0.85em;
-	width: 0.85em;
-}
-
-.catalog-list-items .stocktext {
-	display: none;
-}
-
-.catalog-list-items .stock-unlimited .stocklevel,
-.catalog-list-items .stock-high .stocklevel {
-	background-color: #0BA008;
-}
-
-.catalog-list-items .stock-low .stocklevel {
-	background-color: #F0A008;
-}
-
-.catalog-list-items .stock-out .stocklevel {
-	background-color: #F01800;
-}
-
-
-/* Product detail, image section */
+/* Product images */
 .catalog-detail-image {
 	float: left;
 	padding: 0px 10px 0px 0px;
@@ -841,17 +884,6 @@
 	width: 100%;
 }
 
-.catalog-detail-additional .header {
-	border: 0 none;
-	font-size: 1em;
-	font-weight: bold;
-	height: 2em;
-	line-height: 2em;
-	padding: 0px 0px 0px 5px;
-	color: #ffffff;
-	background-color: #679CB8;
-}
-
 .catalog-detail-additional .content {
 	padding: 1% 0 1% 0.5%;
 }
@@ -876,6 +908,128 @@
 
 .catalog-detail-basic .stock-out {
 	color: #F01800;
+}
+
+/* Product suggestions */
+.catalog-detail-suggest {
+	clear: both;
+	padding: 1em 0;
+}
+
+.catalog-detail-suggest li.suggest-item {
+	display: inline-block;
+	vertical-align: top;
+	width: 90px;
+	margin: 0 2%;
+}
+
+.catalog-detail-suggest .media-item {
+	background-color: #FFFFFF;
+	background-image: url(images/arcavias.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 120px;
+	width: 90px;
+}
+
+.catalog-detail-suggest .name {
+	height: 2em;
+	padding: 3px 5px;
+	text-align: left;
+	overflow: hidden;
+	border-top: 1px solid #C3D9E5;
+	border-bottom: 1px solid #C3D9E5;
+}
+
+.catalog-detail-suggest .price-list {
+	padding: 5px;
+	font-weight: bold;
+	color: #004266;
+	height: 1em;
+}
+
+.catalog-detail-suggest .price-item {
+	display: none;
+}
+
+.catalog-detail-suggest .price-item:first-child {
+	display: block;
+}
+
+.catalog-detail-suggest .price-item:first-child .quantity,
+.catalog-detail-suggest .price-item:first-child .rebatepercent,
+.catalog-detail-suggest .price-item:first-child .rebate,
+.catalog-detail-suggest .price-item:first-child .shipping,
+.catalog-detail-suggest .price-item:first-child .taxrate {
+	display: none;
+}
+
+
+/* Session items */
+.catalog-session {
+	clear: both;
+	padding: 1em 0;
+}
+
+.catalog-session .header {
+	border: 0 none;
+	font-size: 1em;
+	font-weight: bold;
+	height: 2em;
+	line-height: 2em;
+	padding: 0px 0px 0px 5px;
+	color: #ffffff;
+	background-color: #679CB8;
+}
+
+.catalog-session-seen li.seen-item {
+	display: inline-block;
+	vertical-align: top;
+	width: 90px;
+	padding: 0 2%;
+}
+
+.catalog-session-seen .media-item {
+	background-color: #FFFFFF;
+	background-image: url(images/arcavias.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 120px;
+	width: 90px;
+}
+
+.catalog-session-seen .name {
+	height: 2em;
+	padding: 3px 5px;
+	text-align: left;
+	overflow: hidden;
+	border-top: 1px solid #C3D9E5;
+	border-bottom: 1px solid #C3D9E5;
+}
+
+.catalog-session-seen .price-list {
+	padding: 5px;
+	font-weight: bold;
+	color: #004266;
+	height: 1em;
+}
+
+.catalog-session-seen .price-item {
+	display: none;
+}
+
+.catalog-session-seen .price-item:first-child {
+	display: block;
+}
+
+.catalog-session-seen .price-item:first-child .quantity,
+.catalog-session-seen .price-item:first-child .rebatepercent,
+.catalog-session-seen .price-item:first-child .rebate,
+.catalog-session-seen .price-item:first-child .shipping,
+.catalog-session-seen .price-item:first-child .taxrate {
+	display: none;
 }
 
 

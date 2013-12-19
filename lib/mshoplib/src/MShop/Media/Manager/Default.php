@@ -246,6 +246,13 @@ class MShop_Media_Manager_Default
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'media.list.config' => array(
+			'code'=>'media.list.config',
+			'internalcode'=>'mmedli."config"',
+			'label'=>'Media list config',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'media.list.position' => array(
 			'code'=>'media.list.position',
 			'internalcode'=>'mmedli."pos"',

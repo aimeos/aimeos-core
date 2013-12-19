@@ -114,8 +114,8 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 		if( first ) {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
-					if( key.trim() !== '' ) {
-						config[key] = value;
+					if( ( key = key.trim() ) !== '' ) {
+						config[key] = value.trim();
 					}
 				}, this);
 			});
@@ -126,7 +126,43 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 		} else if( data.update && data.update[0] ) {
 			data.update[0].data['locale.site.config'] = config;
 		}
+	},
+	
+	onSaveItem: function() {
+		if( !this.mainForm.getForm().isValid() && this.fireEvent( 'validate', this ) !== false )
+		{
+			Ext.Msg.alert( _( 'Invalid Data' ), _( 'Please recheck you data' ) );
+			return;
+		}
+
+		this.saveMask.show();
+		this.isSaveing = true;
+
+		this.record.dirty = true;
+
+		if( this.fireEvent( 'beforesave', this, this.record ) === false )
+		{
+			this.isSaveing = false;
+			this.saveMask.hide();
+		}
+
+		this.record.beginEdit();
+		this.record.set( 'locale.site.label', this.mainForm.getForm().findField( 'locale.site.label' ).getValue() );
+		this.record.set( 'locale.site.status', this.mainForm.getForm().findField( 'locale.site.status' ).getValue() );
+		this.record.set( 'locale.site.code', this.mainForm.getForm().findField( 'locale.site.code' ).getValue() );
+		this.record.endEdit();
+
+		if( this.isNewRecord ) {
+			this.store.add( this.record );
+		}
+
+		if( !this.store.autoSave ) {
+			this.onAfterSave();
+		}
 	}
 } );
+
+
+
 
 Ext.reg( 'MShop.panel.locale.site.itemui', MShop.panel.locale.site.ItemUi );

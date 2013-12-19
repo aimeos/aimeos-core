@@ -454,6 +454,13 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'customer.list.config' => array(
+			'code'=>'customer.list.config',
+			'internalcode'=>'mcusli."config"',
+			'label'=>'Customer list config',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'customer.list.position' => array(
 			'code'=>'customer.list.position',
 			'internalcode'=>'mcusli."pos"',

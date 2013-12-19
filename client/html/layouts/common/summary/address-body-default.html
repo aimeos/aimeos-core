@@ -122,7 +122,10 @@ $salutations = array(
 			$addr->getWebsite()
 		) ) ) );
 	}
-	catch( Exception $e ) { ; }
+	catch( Exception $e )
+	{
+		echo $enc->html( $this->translate( 'client/html', 'like billing address' ), $enc::TRUST );
+	}
 ?>
 		</div>
 	</div>

@@ -138,8 +138,10 @@ class Client_Html_Catalog_Filter_Tree_Default
 					}
 				}
 
-				if( ( $node = reset( $catItems ) ) === false ) {
-					throw new Client_Html_Exception( sprintf( 'Category with ID "%1$s" not available', $currentid ) );
+				if( ( $node = reset( $catItems ) ) === false )
+				{
+					$msg = sprintf( 'Category with ID "%1$s" not below ID "%2$s"', $currentid, $startid );
+					throw new Client_Html_Exception( $msg );
 				}
 			}
 			else if( $startid != '' )

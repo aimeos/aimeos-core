@@ -152,10 +152,13 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$orderBaseItem = $orderBaseManager->load( $order->getBaseId() );
 		$orderid = $order->getId();
 
+		$returnUrl = $this->_getConfigValue( array( 'payment.url-success' ) );
+		$returnUrl .= ( strpos( $returnUrl, '?' ) !== false ? '&' : '?' ) . 'orderid=' . $orderid;
+
 		$values = $this->_getOrderDetails( $orderBaseItem );
 		$values[ 'METHOD' ] = 'SetExpressCheckout';
 		$values[ 'PAYMENTREQUEST_0_INVNUM' ] = $orderid;
-		$values[ 'RETURNURL' ] = $this->_getConfigValue( array( 'payment.url-success' ) );
+		$values[ 'RETURNURL' ] = $returnUrl;
 		$values[ 'CANCELURL' ] = $this->_getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) );
 
 		$urlQuery = http_build_query( $values, '', '&' );
@@ -402,23 +405,17 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$rvals = array();
 		parse_str( $response, $rvals );
 
-		$cid = ( isset( $rvals['CORRELATIONID'] ) ? $rvals['CORRELATIONID'] : '<none>' );
-
-		$logger = $this->_getContext()->getLogger();
-		$logger->log( $method . ' : orderID=' . $orderid . ', CORRELATIONID=' . $cid, MW_Logger_Abstract::DEBUG );
-
 		if( $rvals['ACK'] !== 'Success' )
 		{
+			$msg = sprintf( 'Error in Paypal express response for order with ID "%1$s": %2$s', $orderid, print_r( $rvals, true ) );
+			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
+
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
-				throw new MShop_Service_Exception( sprintf(
-					'Error in Paypal express response for order with ID "%1$s": %2$s',
-					$orderid, print_r( $rvals, true )
+				throw new MShop_Service_Exception( sprintf( $msg, $orderid,
+					( isset( $rvals['L_SHORTMESSAGE0'] ) ? $rvals['L_SHORTMESSAGE0'] : '<none>' )
 				) );
 			}
-
-			$str = $method . ' : orderID/token=' . $orderid . ', response=' . print_r( $rvals, true );
-			$logger->log( $str, MW_Logger_Abstract::DEBUG );
 		}
 
 		return $rvals;
@@ -479,10 +476,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			case 'Canceled-Reversal':
 			case 'Voided':
 				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
-				break;
-
-			case 'None':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_UNFINISHED );
 				break;
 
 			default:
