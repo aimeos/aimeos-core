@@ -359,7 +359,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		if( $response !== 'VERIFIED' )
 		{
 			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::NOTICE );
 
 			return null;
 		}
