@@ -299,12 +299,13 @@ class MShop_Locale_Manager_Site_Default
 				while ( ($row = $results->fetch()) !== false )
 				{
 					$config = $row['config'];
-					if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null ) {
+					if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
 						$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 					}
 
-					$items[ $row['id'] ] = $this->_createItem($row);
+					$items[ $row['id'] ] = $this->_createItem( $row );
 				}
 			} catch ( Exception $e ) {
 				$results->finish();

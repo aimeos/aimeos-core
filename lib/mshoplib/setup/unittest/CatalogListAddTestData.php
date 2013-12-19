@@ -244,6 +244,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 			$listItem->setDomain( $dataset['domain'] );
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );
+			$listItem->setConfig( $dataset['config'] );
 			$listItem->setPosition( $dataset['pos'] );
 
 			$catalogListManager->saveItem( $listItem, false );

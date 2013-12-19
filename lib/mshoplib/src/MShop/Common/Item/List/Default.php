@@ -234,6 +234,29 @@ class MShop_Common_Item_List_Default
 
 
 	/**
+	 * Returns the configuration of the list item.
+	 *
+	 * @return string Custom configuration values
+	 */
+	public function getConfig()
+	{
+		return ( isset( $this->_values['config'] ) ? $this->_values['config'] : array() );
+	}
+
+
+	/**
+	 * Sets the new configuration for the list item.
+	 *
+	 * @param array $config Custom configuration values
+	 */
+	public function setConfig( array $config )
+	{
+		$this->_values['config'] = $config;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return Associative list of item properties and their values
@@ -249,6 +272,7 @@ class MShop_Common_Item_List_Default
 		$list[$this->_prefix . 'refid'] = $this->getRefId();
 		$list[$this->_prefix . 'datestart'] = $this->getDateStart();
 		$list[$this->_prefix . 'dateend'] = $this->getDateEnd();
+		$list[$this->_prefix . 'config'] = $this->getConfig();
 		$list[$this->_prefix . 'position'] = $this->getPosition();
 
 		return $list;

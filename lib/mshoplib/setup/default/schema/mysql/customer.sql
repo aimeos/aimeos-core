@@ -256,6 +256,8 @@ CREATE TABLE "mshop_customer_list" (
 	"start" DATETIME DEFAULT NULL,
 	-- Valid until
 	"end" DATETIME DEFAULT NULL,
+	-- Configuration
+	"config" TEXT NOT NULL,
 	-- Precedence rating
 	"pos" INTEGER NOT NULL,
 	-- Date of last modification of this database entry

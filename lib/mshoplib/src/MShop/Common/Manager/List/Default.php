@@ -121,16 +121,17 @@ class MShop_Common_Manager_List_Default
 			$statement->bind( 5, $item->getRefId(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 6, $item->getDateStart(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 7, $item->getDateEnd(), MW_DB_Statement_Abstract::PARAM_STR );
-			$statement->bind( 8, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$statement->bind( 8, json_encode( $item->getConfig() ), MW_DB_Statement_Abstract::PARAM_STR );
+			$statement->bind( 9, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
 
-			$statement->bind( 9, $time);//mtime
-			$statement->bind(10, $this->_getContext()->getEditor());
+			$statement->bind( 10, $time );//mtime
+			$statement->bind( 11, $this->_getContext()->getEditor() );
 
 
 			if( $id !== null ) {
-				$statement->bind( 11, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$statement->bind( 12, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$statement->bind( 11, $time ); //ctime
+				$statement->bind( 12, $time ); //ctime
 			}
 
 			$result = $statement->execute()->finish();
@@ -355,6 +356,13 @@ class MShop_Common_Manager_List_Default
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
+				$config = $row['config'];
+				if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+				{
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', $this->_prefix . '.config', $row['id'], $config );
+					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+				}
+
 				$map[ $row['id'] ] = $row;
 				$typeIds[ $row['typeid'] ] = null;
 			}

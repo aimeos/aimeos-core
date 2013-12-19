@@ -230,6 +230,13 @@ class MShop_Attribute_Manager_Default
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'attribute.list.config' => array(
+			'code'=>'attribute.list.config',
+			'internalcode'=>'mattli."config"',
+			'label'=>'Attribute list config',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'attribute.list.position' => array(
 			'code'=>'attribute.list.position',
 			'internalcode'=>'mattli."pos"',

@@ -126,7 +126,7 @@ class Client_Html_Catalog_Stage_Default
 	 */
 	public function isCachable( $what )
 	{
-		return false;
+		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
 	}
 
 

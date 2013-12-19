@@ -399,9 +399,11 @@ class MShop_Plugin_Manager_Default
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				if ( ( $row['config'] = json_decode($row['config'], true) ) === null ) {
-					$msg = sprintf('Invalid JSON as search result: %1$s', $row['config']);
-					throw new MShop_Service_Exception($msg);
+				$config = $row['config'];
+				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+				{
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['id'], $config );
+					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				}
 
 				$map[ $row['id'] ] = $row;

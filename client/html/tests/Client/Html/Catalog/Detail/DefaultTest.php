@@ -97,6 +97,12 @@ class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testProcess()
+	{
+		$this->_object->process();
+	}
+
+
 	protected function _getProductItem()
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );

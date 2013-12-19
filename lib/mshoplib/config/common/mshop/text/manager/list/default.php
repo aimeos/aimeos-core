@@ -16,14 +16,14 @@ return array(
 				AND "domain" = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_text_list"( "parentid", "siteid", "typeid", "domain", "refid", "start", "end", "pos",
-				"mtime", "editor", "ctime")
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_text_list"( "parentid", "siteid", "typeid", "domain", "refid", "start", "end", "config",
+				"pos", "mtime", "editor", "ctime")
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_text_list"
-			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?, "pos" = ?,
-				"mtime" = ?, "editor" = ?
+			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?, "config" = ?,
+				"pos" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'updatepos' => '
@@ -47,8 +47,8 @@ return array(
 		',
 		'search' => '
 			SELECT mtexli."id", mtexli."parentid", mtexli."siteid", mtexli."typeid",
-				mtexli."domain", mtexli."refid", mtexli."start", mtexli."end", mtexli."pos",
-				mtexli."mtime", mtexli."editor", mtexli."ctime"
+				mtexli."domain", mtexli."refid", mtexli."start", mtexli."end", mtexli."config",
+				mtexli."pos", mtexli."mtime", mtexli."editor", mtexli."ctime"
 			FROM "mshop_text_list" AS mtexli
 			:joins
 			WHERE :cond

@@ -82,7 +82,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( $result[ $item->getId() ], 7 );
+		$this->assertEquals( 3, $result[ $item->getId() ] );
 	}
 
 
@@ -204,7 +204,7 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 		$search->setConditions( $search->compare( '!=', 'catalog.index.catalog.id', null ) ); // catalog ID
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertEquals( 9, count( $result ) );
+		$this->assertEquals( 6, count( $result ) );
 
 		$func = $search->createFunction( 'catalog.index.catalog.position', array( 'promotion', $catItem->getId() ) );
 		$search->setConditions( $search->compare( '>=', $func, 0 ) ); // position
