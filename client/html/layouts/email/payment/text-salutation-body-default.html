@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$salutations = array(
+	MShop_Common_Item_Address_Abstract::SALUTATION_MR,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MRS,
+	MShop_Common_Item_Address_Abstract::SALUTATION_MISS,
+);
+
+try
+{
+	/// Payment e-mail form of address with salutation (%1$s), first name (%2$s) and last name (%3$s)
+	$msg = $this->translate( 'client/html', 'Dear %1$s %2$s %3$s' );
+	$addr = $this->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+
+	$string = sprintf( $msg,
+		( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html/code', $addr->getSalutation() ) : '' ),
+		$addr->getFirstName(),
+		$addr->getLastName()
+	);
+}
+catch( Exception $e )
+{
+	$string = $this->translate( 'client/html/email', 'Dear Sir or Madam' );
+}
+
+?>
+<?php echo wordwrap( strip_tags( $string ) ); ?>
+<?php echo $this->get( 'salutationBody' ); ?>
