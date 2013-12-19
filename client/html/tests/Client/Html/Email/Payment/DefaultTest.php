@@ -45,7 +45,7 @@ class Client_Html_Email_Payment_DefaultTest extends MW_Unittest_Testcase
 		$paths = TestHelper::getHtmlTemplatePaths();
 		$this->_object = new Client_Html_Email_Payment_Default( $this->_context, $paths );
 
-		$view = TestHelper::getView();
+		$view = TestHelper::getView( 'unittest', $this->_context->getConfig() );
 		$view->extOrderItem = self::$_orderItem;
 		$view->extOrderBaseItem = self::$_orderBaseItem;
 		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->_emailMock ) );
