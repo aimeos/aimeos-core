@@ -91,17 +91,19 @@ CONSTRAINT "fk_msord_baseid"
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_msord_sid_pdate_pstat_dstat" ON "mshop_order" ("siteid", "datepayment", "statuspayment", "statusdelivery");
+CREATE INDEX "idx_msord_sid_mtime_pstat" ON "mshop_order" ("siteid", "mtime", "statuspayment");
+
+CREATE INDEX "idx_msord_sid_mtime_dstat" ON "mshop_order" ("siteid", "mtime", "statusdelivery");
 
 CREATE INDEX "idx_msord_sid_type" ON "mshop_order" ("siteid", "type");
+
+CREATE INDEX "idx_msord_sid_pdate" ON "mshop_order" ("siteid", "datepayment");
 
 CREATE INDEX "idx_msord_sid_ddate" ON "mshop_order" ("siteid", "datedelivery");
 
 CREATE INDEX "idx_msord_sid_dstatus" ON "mshop_order" ("siteid", "statusdelivery");
 
 CREATE INDEX "idx_msord_sid_ctime" ON "mshop_order" ("siteid", "ctime");
-
-CREATE INDEX "idx_msord_sid_mtime" ON "mshop_order" ("siteid", "mtime");
 
 CREATE INDEX "idx_msord_sid_editor" ON "mshop_order" ("siteid", "editor");
 
