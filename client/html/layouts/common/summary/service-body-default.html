@@ -31,14 +31,16 @@ $contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 <?php	if( count( $service->getAttributes() ) > 0 ) : ?>
 		<ul class="attr-list">
 <?php		foreach( $service->getAttributes() as $attribute ) : ?>
+<?php			if( $attribute->getType() === 'delivery' ) : ?>
 			<li class="<?php echo $enc->attr( $attribute->getCode() ); ?>">
 				<span class="name"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/service', $attribute->getCode() ) ) ); ?></span>
-<?php			switch( $attribute->getValue() ) : case 'array': case 'object': ?>
+<?php				switch( $attribute->getValue() ) : case 'array': case 'object': ?>
 				<span class="value"><?php echo $enc->html( join( ', ', (array) $attribute->getValue() ) ); ?></span>
-<?php				break; default: ?>
+<?php					break; default: ?>
 				<span class="value"><?php echo $enc->html( $attribute->getValue() ); ?></span>
-<?php			endswitch; ?>
+<?php				endswitch; ?>
 			</li>
+<?php			endif; ?>
 <?php		endforeach; ?>
 		</ul>
 <?php	endif; ?>
@@ -63,14 +65,16 @@ $contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 <?php	if( count( $service->getAttributes() ) > 0 ) : ?>
 		<ul class="attr-list">
 <?php		foreach( $service->getAttributes() as $attribute ) : ?>
+<?php			if( $attribute->getType() === 'payment' ) : ?>
 				<li class="<?php echo $enc->attr( $attribute->getCode() ); ?>">
 					<span class="name"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) ) ); ?></span>
-<?php			switch( $attribute->getValue() ) : case 'array': case 'object': ?>
+<?php				switch( $attribute->getValue() ) : case 'array': case 'object': ?>
 					<span class="value"><?php echo $enc->html( join( ', ', (array) $attribute->getValue() ) ); ?></span>
-<?php				break; default: ?>
+<?php					break; default: ?>
 					<span class="value"><?php echo $enc->html( $attribute->getValue() ); ?></span>
-<?php			endswitch; ?>
+<?php				endswitch; ?>
 				</li>
+<?php			endif; ?>
 <?php		endforeach; ?>
 		</ul>
 <?php	endif; ?>

@@ -134,18 +134,6 @@ class Client_Html_Basket_Standard_Default
 
 
 	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 */
-	public function isCachable( $what )
-	{
-		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
-	}
-
-
-	/**
 	 * Sets the necessary parameter values in the view.
 	 */
 	public function process()

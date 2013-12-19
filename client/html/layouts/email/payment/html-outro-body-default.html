@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+
+/// Payment e-mail outro
+$string = $this->translate( 'client/html', 'If you have any questions, please reply to this e-mail' );
+
+?>
+<p class="email-payment-outro content-block">
+<?php echo $enc->html( nl2br( $string ), $enc::TRUST ); ?>
+<?php echo $this->get( 'outroBody' ); ?>
+</p>

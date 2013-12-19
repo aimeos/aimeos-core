@@ -41,17 +41,6 @@
 	padding: 10px 0px;
 }
 
-.arcavias .attr-list,
-.arcavias .form-list {
-	padding: 0;
-	margin: 0;
-}
-
-.arcavias li.attr-item,
-.arcavias li.form-item {
-	list-style: none;
-}
-
 .arcavias .error-list {
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
@@ -62,7 +51,18 @@
 	padding: 0.25em 0.5em;
 }
 
+.arcavias .attr-list,
+.arcavias .form-list {
+	padding: 0;
+	margin: 0;
+}
+
 /* Common summary CSS also used in e-mail ===>>> */
+
+.arcavias li.attr-item,
+.arcavias li.form-item {
+	list-style: none;
+}
 
 .arcavias .container {
 	border-radius: 5px;
@@ -71,6 +71,7 @@
 	border: solid 1px #689DB9;
 	margin: 10px 0px;
 	padding: 0px 5px;
+	min-width: 240px;
 }
 
 

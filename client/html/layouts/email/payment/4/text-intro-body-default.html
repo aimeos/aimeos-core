@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$order = $this->extOrderItem;
+$format = $this->translate( 'client/html', 'Y-m-d' );
+
+$msg = $this->translate( 'client/html', 'Thank you for your order %1$s from %2$s.
+
+The order is pending until we receive the final payment. If you\'ve chosen to pay in advance, please transfer the money to our bank account with the order ID %1$s as reference.' );
+
+
+$string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ) );
+
+?>
+
+
+<?php echo strip_tags( $string ); ?>
+<?php echo $this->get( 'introBody' ); ?>
