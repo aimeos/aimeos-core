@@ -68,7 +68,7 @@ return array (
 				'paypalexpress.ApiEndpoint' => 'https://api-3t.sandbox.paypal.com/nvp',
 				'payment.url-success' => 'http://returnurl.com/updatesync.php',
 				'payment.url-cancel' => 'http://cancelurl.com',
-				'payment.url-update' => 'http://demo.arcavias.com/test/zfapp/public/index.php/zf-demo/checkout/confirm'
+				'payment.url-update' => 'http://shopurl.com/ipn.php'
 			),
 			'status' => 1
 		),

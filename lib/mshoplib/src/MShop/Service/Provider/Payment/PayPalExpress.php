@@ -345,11 +345,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			return $this->_doExpressCheckoutPayment( $additional );
 		}
 
-		//tid needed for capture, refund, cancel
-		if( !isset( $additional['txn_id'] ) )
-		{
-			$str = 'No transactionid for orderID in' . print_r( $additional, true );
-			$this->_getContext()->getLogger()->log( $str, MW_Logger_Abstract::WARN );
+		//tid from ipn
+		if( !isset( $additional['txn_id'] ) ) {
 			return null;
 		}
 
