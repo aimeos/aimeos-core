@@ -60,9 +60,11 @@ msgid ""
 msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
+#: layouts/catalog/list/promo-body-default.html:18
 #: layouts/catalog/list/items-body-default.html:16
 #: layouts/catalog/session/seen-body-default.html:18
 #: layouts/catalog/detail/basket-body-default.html:13
+#: layouts/catalog/detail/suggest-body-default.html:19
 #: layouts/common/summary/detail-body-default.html:66
 #: layouts/basket/mini/main-body-default.html:23
 #: layouts/email/payment/text-summary-detail-body-default.html:55
@@ -86,9 +88,11 @@ msgid "%1$s at %2$s"
 msgstr "%1$s am %2$s"
 
 #. / Percent format with value (%1$s) and % sign
+#: layouts/catalog/list/promo-body-default.html:20
 #: layouts/catalog/list/items-body-default.html:18
 #: layouts/catalog/session/seen-body-default.html:20
 #: layouts/catalog/detail/basket-body-default.html:15
+#: layouts/catalog/detail/suggest-body-default.html:21
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -576,6 +580,10 @@ msgstr "Straße"
 msgid "Sub-total"
 msgstr "Zwischensumme"
 
+#: layouts/catalog/detail/suggest-body-default.html:26
+msgid "Suggested products"
+msgstr "Empfohlene Produkte"
+
 #: layouts/common/summary/detail-body-default.html:86
 #: layouts/email/payment/text-summary-detail-body-default.html:76
 msgid "Sum"
@@ -632,6 +640,10 @@ msgstr "Vielen Dank für Ihre Bestellung %1$s vom %2$s.\n\nWir haben Ihre Zahlun
 #, php-format
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr "Die Zahlung für Ihre Bestellung %1$s vom %2$s wurde erstattet."
+
+#: layouts/catalog/list/promo-body-default.html:25
+msgid "Top seller"
+msgstr "Beliebteste Produkte"
 
 #: layouts/common/summary/detail-body-default.html:213
 #: layouts/email/payment/text-summary-detail-body-default.html:93

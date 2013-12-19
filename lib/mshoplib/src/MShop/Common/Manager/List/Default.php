@@ -96,7 +96,8 @@ class MShop_Common_Manager_List_Default
 		$config = $this->_getContext()->getConfig();
 		$locale = $this->_getContext()->getLocale();
 		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -144,11 +145,11 @@ class MShop_Common_Manager_List_Default
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}

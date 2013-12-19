@@ -663,7 +663,8 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -721,11 +722,11 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -741,8 +742,10 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 		$map = array();
 
 		try
@@ -757,11 +760,11 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 				$map[ $row['id'] ] = $row;
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
