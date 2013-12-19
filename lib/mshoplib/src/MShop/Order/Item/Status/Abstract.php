@@ -37,11 +37,6 @@ abstract class MShop_Order_Item_Status_Abstract
 	 */
 	const EMAIL_DELIVERY = 'email-delivery';
 
-	/**
-	 * Order confirmation e-mail is already sent.
-	 */
-	const EMAIL_ACCEPTED = 'email-accepted';
-
 
 	/**
 	 * Stock level is already updated.
