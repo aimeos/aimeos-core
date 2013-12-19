@@ -53,8 +53,8 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		MShop.panel.ListItemListUi.superclass.initComponent.call(this);
 		
 		this.grid.getView().getRowClass = function(record, rowIndex, rowParams, store){ 
-			if( record.phantom === false && record.get( this.listItemPickerUi.itemConfig.listNamePrefix + 'status' ) != 1 ) {
-				return this.rowCssClass;
+			if( record.phantom === false && record.get( this.listItemPickerUi.itemConfig.listNamePrefix + 'status' ) <= 0 ) {
+				return this.rowCssDisabled; 
 			}
 			return '';
 		}.createDelegate(this);

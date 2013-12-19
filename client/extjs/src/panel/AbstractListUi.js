@@ -71,6 +71,8 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	 * @cfg {Object} rowCssClass (inherited)
 	 */
 	rowCssClass: 'site-mismatch',
+	
+	rowCssDisabled: 'status-disabled',
 
 
 	/**
