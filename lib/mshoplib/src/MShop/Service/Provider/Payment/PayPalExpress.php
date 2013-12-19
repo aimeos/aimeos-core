@@ -355,31 +355,30 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		//validation
 		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypal.Ipn' ) ), 'POST', $urlQuery );
 
-		if( $response === 'VERIFIED' )
-		{
-			$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-			$orderBaseManager = $orderManager->getSubManager('base');
-			$order = $orderManager->getItem( $additional['invoice'] );
-			$baseid = $order->getBaseId();
-			$baseItem = $orderBaseManager->getItem( $baseid );
-			$serviceItem = $this->_getOrderServiceItem( $baseid );
 
-			$status['PAYMENTSTATUS'] = $additional['payment_status'];
-			$attributes['TRANSACTIONID'] = $additional['txn_id'];
-
-			$this->_saveAttributes( $attributes, $serviceItem );
-			$this->_setPaymentStatus( $order, $status );
-			$orderManager->saveItem( $order );
-
-			return $order;
-		}
-		else
+		if( $response !== 'VERIFIED' )
 		{
 			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
 			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+
+			return null;
 		}
 
-		return null;
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
+		$orderBaseManager = $orderManager->getSubManager('base');
+		$order = $orderManager->getItem( $additional['invoice'] );
+		$baseid = $order->getBaseId();
+		$baseItem = $orderBaseManager->getItem( $baseid );
+		$serviceItem = $this->_getOrderServiceItem( $baseid );
+
+		$status['PAYMENTSTATUS'] = $additional['payment_status'];
+		$attributes['TRANSACTIONID'] = $additional['txn_id'];
+
+		$this->_saveAttributes( $attributes, $serviceItem );
+		$this->_setPaymentStatus( $order, $status );
+		$orderManager->saveItem( $order );
+
+		return $order;
 	}
 
 
@@ -420,7 +419,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['PAYERID'] = $additional['PayerID'];
 		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'Sale' );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
-		$values['NOTIFYURL'] = $this->_getConfigValue( array( 'payment.url-update' ) );
+		$values['NOTIFYURL'] = $this->_getConfigValue( array( 'payment.url-update', 'payment.url-success' ) );
 		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
 
 		$urlQuery = http_build_query( $values, '', '&' );
