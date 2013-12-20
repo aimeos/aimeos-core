@@ -364,25 +364,25 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		//validation
 		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
 
-
-		if( $response !== 'VERIFIED' )
+		try
 		{
-			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::NOTICE );
+			if( $response !== 'VERIFIED' )
+			{
+				$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
+				throw new MShop_Service_Exception( $msg );
+			}
 
-			return null;
-		}
+
+			$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
+			$orderBaseManager = $orderManager->getSubManager('base');
+			$order = $orderManager->getItem( $additional['invoice'] );
+			$baseid = $order->getBaseId();
+			$baseItem = $orderBaseManager->getItem( $baseid );
+			$serviceItem = $this->_getOrderServiceItem( $baseid );
 
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderBaseManager = $orderManager->getSubManager('base');
-		$order = $orderManager->getItem( $additional['invoice'] );
-		$baseid = $order->getBaseId();
-		$baseItem = $orderBaseManager->getItem( $baseid );
-		$serviceItem = $this->_getOrderServiceItem( $baseid );
-
-		try {
 			$this->_checkIPN( $orderBaseManager, $baseItem, $additional );
+
 		}
 		catch ( MShop_Service_Exception $e )
 		{
@@ -394,7 +394,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		$status['PAYMENTSTATUS'] = $additional['payment_status'];
 		if( isset( $additional['pending_reason'] ) ) {
-			$status['PENDINGREASON'] = mb_strcut( $additional['pending_reason'], 1, 255 );
+			$status['PENDINGREASON'] = $additional['pending_reason'];
 		}
 
 
@@ -511,7 +511,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( $this->_getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $additional['receiver_email'] )
 		{
-			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
+			$msg = sprintf( 'Error in PaypalExpress: Wrong receiver email "%1$s"', $additional['receiver_email'] );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -519,7 +519,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$amount = $price->getValue() + $price->getCosts();
 		if( $amount != $additional['payment_amount'] )
 		{
-			$msg = sprintf( 'Error in PaypalExpress: "%1$s"', $urlQuery );
+			$msg = sprintf( 'Error in PaypalExpress: Wrong payment amount "%1$s"', $additional['payment_amount'] );
 			throw new MShop_Service_Exception( $msg );
 		}
 
