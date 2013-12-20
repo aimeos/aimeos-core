@@ -31,10 +31,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			'default'=> '',
 			'required'=> true,
 		),
-		'paypalexpress.ApiEmail' => array(
-			'code' => 'paypalexpress.ApiEmail',
-			'internalcode'=> 'paypalexpress.ApiEmail',
-			'label'=> 'Email',
+		'paypalexpress.AccountEmail' => array(
+			'code' => 'paypalexpress.AccountEmail',
+			'internalcode'=> 'paypalexpress.AccountEmail',
+			'label'=> 'Registered e-mail address of the shop owner in PayPal',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
@@ -441,7 +441,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['PAYERID'] = $additional['PayerID'];
 		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'Sale' );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
-		$values['NOTIFYURL'] = $this->_getConfigValue( array( 'paypalexpress.url-validate', 'payment.url-success' ) );
+		$values['NOTIFYURL'] = $this->_getConfigValue( array( 'payment.url-update', 'payment.url-success' ) );
 		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
 
 		$urlQuery = http_build_query( $values, '', '&' );

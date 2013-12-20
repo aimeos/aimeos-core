@@ -106,7 +106,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	{
 		$attributes = array(
 			'paypalexpress.ApiUsername' => 'user',
-			'paypalexpress.ApiEmail' => 'user@test.de',
+			'paypalexpress.AccountEmail' => 'user@test.de',
 			'paypalexpress.ApiPassword' => 'pw',
 			'paypalexpress.ApiSignature' => '1df23eh67',
 			'payment.url-cancel' => 'http://cancelUrl',
@@ -117,7 +117,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$this->assertEquals( 12, count( $result ) );
 		$this->assertEquals( null, $result['paypalexpress.ApiUsername'] );
-		$this->assertEquals( null, $result['paypalexpress.ApiEmail'] );
+		$this->assertEquals( null, $result['paypalexpress.AccountEmail'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiPassword'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiSignature'] );
 		$this->assertEquals( null, $result['payment.url-cancel'] );
