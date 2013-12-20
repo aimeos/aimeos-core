@@ -183,6 +183,7 @@ class MW_Setup_Task_TextListAddTestData extends MW_Setup_Task_Abstract
 			$tList->setDateEnd( $dataset['end'] );
 			$tList->setConfig( $dataset['config'] );
 			$tList->setPosition( $dataset['pos'] );
+			$tList->setStatus( $dataset['status'] );
 
 			$textListManager->saveItem( $tList, false );
 		}

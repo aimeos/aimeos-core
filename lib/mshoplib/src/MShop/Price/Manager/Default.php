@@ -273,6 +273,13 @@ class MShop_Price_Manager_Default
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'price.list.status' => array(
+			'code' => 'price.list.status',
+			'internalcode' => 'mprili."status"',
+			'label' => 'Price list status',
+			'type' => 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'price.list.ctime' => array(
 			'code' => 'price.list.ctime',
 			'internalcode' => 'mprili."ctime"',

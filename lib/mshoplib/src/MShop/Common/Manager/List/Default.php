@@ -123,15 +123,16 @@ class MShop_Common_Manager_List_Default
 			$statement->bind( 7, $item->getDateEnd(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 8, json_encode( $item->getConfig() ), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 9, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$statement->bind( 10, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 
-			$statement->bind( 10, $time );//mtime
-			$statement->bind( 11, $this->_getContext()->getEditor() );
+			$statement->bind( 11, $time);//mtime
+			$statement->bind( 12, $this->_getContext()->getEditor());
 
 
 			if( $id !== null ) {
-				$statement->bind( 12, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$statement->bind( 13, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$statement->bind( 12, $time ); //ctime
+				$statement->bind( 13, $time ); //ctime
 			}
 
 			$result = $statement->execute()->finish();
@@ -419,6 +420,8 @@ class MShop_Common_Manager_List_Default
 
 			$expr = array();
 			$curDate = date( 'Y-m-d H:i:00', time() );
+
+			$expr[] = $object->compare( '>', $prefix . '.status', 0 );
 
 			$exprTwo = array();
 			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $curDate );

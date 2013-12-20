@@ -244,6 +244,13 @@ class MShop_Attribute_Manager_Default
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'attribute.list.status' => array(
+			'code'=>'attribute.list.status',
+			'internalcode'=>'mattli."status"',
+			'label'=>'Attribute list status',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'attribute.list.ctime'=> array(
 			'code'=>'attribute.list.ctime',
 			'internalcode'=>'mattli."ctime"',

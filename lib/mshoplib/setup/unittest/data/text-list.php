@@ -21,19 +21,19 @@ return array (
 	),
 
 	'text/list' => array (
-		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example1.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0 ),
-		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 1 ),
-		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 2 ),
-		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 3 ),
+		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example1.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 1, 'status' => 1 ),
+		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 2, 'status' => 1 ),
+		array( 'parentid' => 'text/cafe_long_desc', 'typeid' => 'media/align-left', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 3, 'status' => 1 ),
 
-		array( 'parentid' => 'text/tea_long_desc', 'typeid' => 'media/align-right', 'domain' => 'media', 'refid' => 'media/path/to/folder/example1.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2002-01-01 00:00:00', 'config' => array(), 'pos' => 3 ),
-		array( 'parentid' => 'text/tea_long_desc', 'typeid' => 'media/align-right', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 2 ),
-		array( 'parentid' => 'text/tea_long_desc', 'typeid' => 'media/align-right', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 1 ),
-		array( 'parentid' => 'text/tea_long_desc', 'typeid' => 'media/align-right', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0 ),
+		array( 'parentid' => 'text/tea_long_desc', 'typeid' => 'media/align-right', 'domain' => 'media', 'refid' => 'media/path/to/folder/example1.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2002-01-01 00:00:00', 'config' => array(), 'pos' => 3, 'status' => 1 ),
+		array( 'parentid' => 'text/tea_long_desc', 'typeid' => 'media/align-right', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 2, 'status' => 1 ),
+		array( 'parentid' => 'text/tea_long_desc', 'typeid' => 'media/align-right', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 1, 'status' => 1 ),
+		array( 'parentid' => 'text/tea_long_desc', 'typeid' => 'media/align-right', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
 
-		array( 'parentid' => 'text/misc_long_desc', 'typeid' => 'media/align-top', 'domain' => 'media', 'refid' => 'media/path/to/folder/example1.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 1 ),
-		array( 'parentid' => 'text/misc_long_desc', 'typeid' => 'media/align-top', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0 ),
-		array( 'parentid' => 'text/misc_long_desc', 'typeid' => 'media/align-top', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 3 ),
-		array( 'parentid' => 'text/misc_long_desc', 'typeid' => 'media/align-top', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2002-01-01 00:00:00', 'config' => array(), 'pos' => 2 ),
+		array( 'parentid' => 'text/misc_long_desc', 'typeid' => 'media/align-top', 'domain' => 'media', 'refid' => 'media/path/to/folder/example1.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 1, 'status' => 1 ),
+		array( 'parentid' => 'text/misc_long_desc', 'typeid' => 'media/align-top', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'text/misc_long_desc', 'typeid' => 'media/align-top', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 3, 'status' => 1 ),
+		array( 'parentid' => 'text/misc_long_desc', 'typeid' => 'media/align-top', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2002-01-01 00:00:00', 'config' => array(), 'pos' => 2, 'status' => 1 ),
 	)
 );

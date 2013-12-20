@@ -100,6 +100,7 @@ class Controller_ExtJS_Service_List_DefaultTest extends MW_Unittest_Testcase
 				'service.list.dateend' => '2001-01-01 00:00:00',
 				'service.list.config' => array('test' => 'unit'),
 				'service.list.position' => 1,
+				'service.list.status' => 1,
 			),
 		);
 
@@ -127,6 +128,7 @@ class Controller_ExtJS_Service_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $saved['items']->{'service.list.dateend'}, $searched['items'][0]->{'service.list.dateend'});
 		$this->assertEquals( $saved['items']->{'service.list.config'}, $searched['items'][0]->{'service.list.config'});
 		$this->assertEquals( $saved['items']->{'service.list.position'}, $searched['items'][0]->{'service.list.position'});
+		$this->assertEquals( $saved['items']->{'service.list.status'}, $searched['items'][0]->{'service.list.status'});
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

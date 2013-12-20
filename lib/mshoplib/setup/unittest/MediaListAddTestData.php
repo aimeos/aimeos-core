@@ -239,6 +239,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 			$medList->setDateEnd( $dataset['end'] );
 			$medList->setConfig( $dataset['config'] );
 			$medList->setPosition( $dataset['pos'] );
+			$medList->setStatus( $dataset['status'] );
 
 			$mediaListManager->saveItem( $medList, false );
 		}

@@ -234,6 +234,33 @@ class MShop_Common_Item_List_Default
 
 
 	/**
+	 * Returns the status of the list item.
+	 *
+	 * @return integer Status of the item
+	 */
+	public function getStatus()
+	{
+		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+	}
+
+
+	/**
+	 * Sets the new status of the list item.
+	 *
+	 * @param integer $status Status of the item
+	 */
+	public function setStatus( $status )
+	{
+		if ( $status == $this->getStatus() ) {
+			return;
+		}
+
+		$this->_values['status'] = (int) $status;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Returns the configuration of the list item.
 	 *
 	 * @return string Custom configuration values
@@ -274,6 +301,7 @@ class MShop_Common_Item_List_Default
 		$list[$this->_prefix . 'dateend'] = $this->getDateEnd();
 		$list[$this->_prefix . 'config'] = $this->getConfig();
 		$list[$this->_prefix . 'position'] = $this->getPosition();
+		$list[$this->_prefix . 'status'] = $this->getStatus();
 
 		return $list;
 	}

@@ -101,6 +101,7 @@ class Controller_ExtJS_Attribute_List_DefaultTest extends MW_Unittest_Testcase
 				'attribute.list.dateend' => '2000-01-01 00:00:00',
 				'attribute.list.config' => array('test' => 'unit'),
 				'attribute.list.position' => 1,
+				'attribute.list.status' => 1,
 			),
 		);
 
@@ -128,6 +129,7 @@ class Controller_ExtJS_Attribute_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $saved['items']->{'attribute.list.dateend'}, $searched['items'][0]->{'attribute.list.dateend'});
 		$this->assertEquals( $saved['items']->{'attribute.list.config'}, $searched['items'][0]->{'attribute.list.config'});
 		$this->assertEquals( $saved['items']->{'attribute.list.position'}, $searched['items'][0]->{'attribute.list.position'});
+		$this->assertEquals( $saved['items']->{'attribute.list.status'}, $searched['items'][0]->{'attribute.list.status'});
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

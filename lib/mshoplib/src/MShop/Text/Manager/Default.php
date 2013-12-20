@@ -246,6 +246,13 @@ class MShop_Text_Manager_Default
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'text.list.status' => array(
+			'code'=>'text.list.status',
+			'internalcode'=>'mtexli."status"',
+			'label'=>'Text list status',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'text.list.ctime'=> array(
 			'code'=>'text.list.ctime',
 			'internalcode'=>'mtexli."ctime"',

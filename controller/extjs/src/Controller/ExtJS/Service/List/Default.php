@@ -58,6 +58,7 @@ class Controller_ExtJS_Service_List_Default
 			if( isset( $entry->{'service.list.refid'} ) ) { $item->setRefId( $entry->{'service.list.refid'} ); }
 			if( isset( $entry->{'service.list.config'} ) ) { $item->setConfig( (array) $entry->{'service.list.config'} ); }
 			if( isset( $entry->{'service.list.position'} ) ) { $item->setPosition( $entry->{'service.list.position'} ); }
+			if( isset( $entry->{'service.list.status'} ) ) { $item->setStatus( $entry->{'service.list.status'} );	}
 
 			if( isset( $entry->{'service.list.typeid'} ) && $entry->{'service.list.typeid'} != '' ) {
 				$item->setTypeId( $entry->{'service.list.typeid'} );

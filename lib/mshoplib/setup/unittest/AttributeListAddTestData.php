@@ -290,6 +290,7 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 			$listItem->setDateEnd( $dataset['end'] );
 			$listItem->setConfig( $dataset['config'] );
 			$listItem->setPosition( $dataset['pos'] );
+			$listItem->setStatus( $dataset['status'] );
 
 			$attributeListManager->saveItem( $listItem, false );
 		}

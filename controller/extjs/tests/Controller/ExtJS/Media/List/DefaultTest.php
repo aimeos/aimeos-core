@@ -97,6 +97,7 @@ class Controller_ExtJS_Media_List_DefaultTest extends MW_Unittest_Testcase
 				'media.list.dateend' => '2000-01-01 00:00:00',
 				'media.list.config' => array('test' => 'unit'),
 				'media.list.position' => 1,
+				'media.list.status' => 1,
 			),
 		);
 
@@ -124,6 +125,7 @@ class Controller_ExtJS_Media_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $saved['items']->{'media.list.dateend'}, $searched['items'][0]->{'media.list.dateend'});
 		$this->assertEquals( $saved['items']->{'media.list.config'}, $searched['items'][0]->{'media.list.config'});
 		$this->assertEquals( $saved['items']->{'media.list.position'}, $searched['items'][0]->{'media.list.position'});
+		$this->assertEquals( $saved['items']->{'media.list.status'}, $searched['items'][0]->{'media.list.status'});
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

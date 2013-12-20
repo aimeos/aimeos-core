@@ -58,6 +58,7 @@ class Controller_ExtJS_Price_List_Default
 			if( isset( $entry->{'price.list.refid'} ) ) { $item->setRefId( $entry->{'price.list.refid'} ); }
 			if( isset( $entry->{'price.list.config'} ) ) { $item->setConfig( (array) $entry->{'price.list.config'} ); }
 			if( isset( $entry->{'price.list.position'} ) ) { $item->setPosition( $entry->{'price.list.position'} ); }
+			if( isset( $entry->{'price.list.status'} ) ) { $item->setStatus( $entry->{'price.list.status'} ); }
 
 			if( isset( $entry->{'price.list.typeid'} ) && $entry->{'price.list.typeid'} != '' ) {
 				$item->setTypeId( $entry->{'price.list.typeid'} );

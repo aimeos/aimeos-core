@@ -164,6 +164,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 				data[this.itemConfig.listNamePrefix + 'refid'] = record.id;
 				data[this.itemConfig.listNamePrefix + 'domain'] = this.itemListUi.domain;
 				data[this.itemConfig.listNamePrefix + 'typeid'] = typeId;
+				data[this.itemConfig.listNamePrefix + 'status'] = 1;
 				rs.push(new recordType(data));
 			},
 			this );

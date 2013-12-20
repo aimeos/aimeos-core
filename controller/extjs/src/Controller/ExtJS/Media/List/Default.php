@@ -58,6 +58,7 @@ class Controller_ExtJS_Media_List_Default
 			if( isset( $entry->{'media.list.refid'} ) ) { $item->setRefId( $entry->{'media.list.refid'} ); }
 			if( isset( $entry->{'media.list.config'} ) ) { $item->setConfig( (array) $entry->{'media.list.config'} ); }
 			if( isset( $entry->{'media.list.position'} ) ) { $item->setPosition( $entry->{'media.list.position'} ); }
+			if( isset( $entry->{'media.list.status'} ) ) { $item->setStatus( $entry->{'media.list.status'} );	}
 
 			if( isset( $entry->{'media.list.typeid'} ) && $entry->{'media.list.typeid'} != '' ) {
 				$item->setTypeId( $entry->{'media.list.typeid'} );

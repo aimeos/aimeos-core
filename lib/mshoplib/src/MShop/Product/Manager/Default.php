@@ -260,6 +260,13 @@ class MShop_Product_Manager_Default
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
+		'product.list.status' => array(
+			'code'=>'product.list.status',
+			'internalcode'=>'mproli."status"',
+			'label'=>'Product list status',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
 		'product.list.ctime'=> array(
 			'code'=>'product.list.ctime',
 			'internalcode'=>'mproli."ctime"',

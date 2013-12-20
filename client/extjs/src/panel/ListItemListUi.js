@@ -51,6 +51,13 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		this.itemUi.on('save', this.onItemUiSave, this);
 
 		MShop.panel.ListItemListUi.superclass.initComponent.call(this);
+		
+		this.grid.getView().getRowClass = function(record, rowIndex, rowParams, store){ 
+			if( record.phantom === false && record.get( this.listItemPickerUi.itemConfig.listNamePrefix + 'status' ) <= 0 ) {
+				return this.rowCssDisabled; 
+			}
+			return '';
+		}.createDelegate(this);
 	},
 
 	initStore: function() {
@@ -155,6 +162,15 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			},
 			{
 				xtype : 'gridcolumn',
+				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'status',
+				header : _('List Status'),
+				width : 50,
+				hidden : true,
+				align: 'center',
+				renderer : this.statusColumnRenderer.createDelegate(this)
+			},
+			{
+				xtype : 'gridcolumn',
 				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'position',
 				header : _('Position'),
 				width : 50,
@@ -217,5 +233,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		].concat(this.getAdditionalColumns() || []);
 	}
 });
+
+
 
 Ext.reg('MShop.panel.listitemlistui', MShop.panel.ListItemListUi);
