@@ -86,9 +86,9 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			'required'=> false,
 		),
 		'paypalexpress.url-validate' => array(
-			'code' => 'paypal.Ipn',
-			'internalcode'=> 'paypal.Ipn',
-			'label'=> 'IPN',
+			'code' => 'paypalexpress.url-validate',
+			'internalcode'=> 'paypalexpress.url-validate',
+			'label'=> 'Validation URL',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> 'https://www.paypal.com/webscr&cmd=_notify-validate',
@@ -362,7 +362,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$urlQuery = http_build_query( $additional, '', '&' );
 
 		//validation
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypal.Ipn' ) ), 'POST', $urlQuery );
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
 
 
 		if( $response !== 'VERIFIED' )
