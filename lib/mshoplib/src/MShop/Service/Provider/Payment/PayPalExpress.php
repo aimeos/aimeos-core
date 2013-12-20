@@ -381,22 +381,26 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$baseItem = $orderBaseManager->getItem( $baseid );
 		$serviceItem = $this->_getOrderServiceItem( $baseid );
 
-		//ipn validation checks
-		if( !$this->_isIpnValid( $orderBaseManager->getSubManager('service')->getSubManager('attribute'), $baseItem, $additional ) ) {
+		try {
+			$this->_checkIPN( $orderBaseManager, $baseItem, $additional );
+		}
+		catch ( MShop_Service_Exception $e )
+		{
+			$this->_getContext()->getLogger()->log( $e->getMessage(), MW_Logger_Abstract::NOTICE );
 
 			return null;
 		}
 
+
 		$status['PAYMENTSTATUS'] = $additional['payment_status'];
 		if( isset( $additional['pending_reason'] ) ) {
-			$status['PENDINGREASON'] = $additional['pending_reason'];
+			$status['PENDINGREASON'] = mb_strcut( $additional['pending_reason'], 1, 255 );
 		}
 
 
-		$attributes['TRANSACTIONID'] = $additional['txn_id'];
-		$attributes[$additional['txn_id']] = $additional['payment_status'];
+		$this->_saveAttributes( array( 'TRANSACTIONID' => $additional['txn_id'] ), $serviceItem );
+		$this->_saveAttributes( array( $additional['txn_id'] => $additional['payment_status'] ), $serviceItem, 'payment/paypal/txn' );
 
-		$this->_saveAttributes( $attributes, $serviceItem, 'payment/paypal/txn' );
 		$this->_setPaymentStatus( $order, $status );
 		$orderManager->saveItem( $order );
 
@@ -452,10 +456,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( isset( $rvals['TRANSACTIONID'] ) ) {
 			$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
-			$attributes[$rvals['TRANSACTIONID']] = $rvals['PAYMENTSTATUS'];
+			$this->_saveAttributes( array( $rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS'] ), $serviceItem );
 		}
 
-		$this->_saveAttributes( $attributes, $serviceItem, 'payment/paypal/txn' );
+		$this->_saveAttributes( $attributes, $serviceItem );
 		$this->_setPaymentStatus( $order, $rvals );
 		$orderManager->saveItem( $order );
 
@@ -497,18 +501,18 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Checks if IPN message from paypal is valid.
 	 *
-	 * @param MShop_Order_Manager_Base_Service_Attribute_Interface $attrManager
+	 * @param MShop_Order_Manager_Base_Interface $baseManager
 	 * @param MShop_Order_Item_Base_Interface $basket
 	 * @param array $additional
 	 */
-	protected function _isIpnValid( $attrManager, $basket, $additional )
+	protected function _checkIPN( $baseManager, $basket, $additional )
 	{
-		if( $this->_getConfigValue( array( 'paypalexpress.ApiEmail' ) ) !== $additional['receiver_email'] )
+		$attrManager = $baseManager->getSubManager('service')->getSubManager('attribute');
+
+		if( $this->_getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $additional['receiver_email'] )
 		{
 			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::NOTICE );
-
-			return null;
+			throw new MShop_Service_Exception( $msg );
 		}
 
 		$price = $basket->getPrice();
@@ -516,9 +520,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		if( $amount != $additional['payment_amount'] )
 		{
 			$msg = sprintf( 'Error in PaypalExpress: "%1$s"', $urlQuery );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::NOTICE );
-
-			return null;
+			throw new MShop_Service_Exception( $msg );
 		}
 
 		$search = $attrManager->createSearch();
@@ -533,12 +535,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		if ( ( $attr = reset( $results ) ) !== false )
 		{
 			$msg = sprintf( 'Transactionid "%1$s" with status "%2$s" already used', $additional['txn_id'], $additional['txn_status'] );
-			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::NOTICE );
-
-			return false;
+			throw new MShop_Service_Exception( $msg );
 		}
-
-		return true;
 	}
 
 
