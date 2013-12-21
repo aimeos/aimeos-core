@@ -72,6 +72,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 
 		$expr[] = $search->compare( '!=', 'order.base.service.attribute.id', null );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'order.base.service.attribute.attributeid', null );
 		$expr[] = $search->compare( '!=', 'order.base.service.attribute.serviceid', null );
 		$expr[] = $search->compare( '!=', 'order.base.service.attribute.type', '' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.code', 'NAME' );
@@ -153,6 +154,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
+		$this->assertEquals( $item->getAttributeId(), $itemSaved->getAttributeId() );
 		$this->assertEquals( $item->getServiceId(), $itemSaved->getServiceId() );
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
@@ -165,6 +167,7 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
+		$this->assertEquals( $itemExp->getAttributeId(), $itemUpd->getAttributeId() );
 		$this->assertEquals( $itemExp->getServiceId(), $itemUpd->getServiceId() );
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );

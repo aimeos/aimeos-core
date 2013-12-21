@@ -14,8 +14,23 @@
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Item_Base_Service_Attribute_Interface extends MShop_Common_Item_Interface
+interface MShop_Order_Item_Base_Service_Attribute_Interface
+	extends MShop_Common_Item_Interface
 {
+	/**
+	 * Returns the original attribute ID of the ordered service attribute.
+	 *
+	 * @return string Attribute ID of the ordered service attribute
+	 */
+	public function getAttributeId();
+
+	/**
+	 * Sets the original attribute ID of the ordered service attribute.
+	 *
+	 * @param string $id Attribute ID of the ordered service attribute
+	 */
+	public function setAttributeId( $id );
+
 	/**
 	 * Returns the order service id of the order service attribute if available.
 	 *

@@ -35,9 +35,34 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 
 
 	/**
+	 * Returns the original attribute ID of the product attribute item.
+	 *
+	 * @return string Attribute ID of the product attribute item
+	 */
+	public function getAttributeId()
+	{
+		return ( isset( $this->_values['attrid'] ) ? (string) $this->_values['attrid'] : '' );
+	}
+
+
+	/**
+	 * Sets the original attribute ID of the product attribute item.
+	 *
+	 * @param string $id Attribute ID of the product attribute item
+	 */
+	public function setAttributeId( $id )
+	{
+		if ( $id == $this->getAttributeId() ) { return; }
+
+		$this->_values['attrid'] = (string) $id;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Returns the product ID of the ordered product.
 	 *
-	 * @return string Product ID of the ordered product
+	 * @return string|null Product ID of the ordered product
 	 */
 	public function getProductId()
 	{
@@ -48,7 +73,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	/**
 	 * Sets the product ID of the ordered product.
 	 *
-	 * @param int $id product ID of the ordered product
+	 * @param string $id Product ID of the ordered product
 	 */
 	public function setProductId( $id )
 	{
@@ -168,6 +193,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	 */
 	public function copyFrom( MShop_Attribute_Item_Interface $item )
 	{
+		$this->setAttributeId( $item->getId() );
 		$this->setName( $item->getName() );
 		$this->setCode( $item->getType() );
 		$this->setValue( $item->getCode() );
@@ -185,6 +211,7 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	{
 		$list = parent::toArray();
 
+		$list['order.base.product.attribute.attrid'] = $this->getAttributeId();
 		$list['order.base.product.attribute.productid'] = $this->getProductId();
 		$list['order.base.product.attribute.type'] = $this->getType();
 		$list['order.base.product.attribute.code'] = $this->getCode();

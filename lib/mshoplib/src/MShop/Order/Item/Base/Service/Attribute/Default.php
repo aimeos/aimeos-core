@@ -35,6 +35,31 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 
 
 	/**
+	 * Returns the original attribute ID of the service attribute item.
+	 *
+	 * @return string Attribute ID of the service attribute item
+	 */
+	public function getAttributeId()
+	{
+		return ( isset( $this->_values['attrid'] ) ? (string) $this->_values['attrid'] : '' );
+	}
+
+
+	/**
+	 * Sets the original attribute ID of the service attribute item.
+	 *
+	 * @param string $id Attribute ID of the service attribute item
+	 */
+	public function setAttributeId( $id )
+	{
+		if ( $id == $this->getAttributeId() ) { return; }
+
+		$this->_values['attrid'] = (string) $id;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Returns the order service id of the order service attribute if available.
 	 *
 	 * @return integer|null Returns the order service id of the order service attribute if available.
@@ -166,6 +191,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	 */
 	public function copyFrom( MShop_Attribute_Item_Interface $item )
 	{
+		$this->setAttributeId( $item->getId() );
 		$this->setName( $item->getName() );
 		$this->setCode( $item->getType() );
 		$this->setValue( $item->getCode() );
@@ -183,6 +209,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	{
 		$list = parent::toArray();
 
+		$list['order.base.service.attribute.attrid'] = $this->getAttributeId();
 		$list['order.base.service.attribute.ordservid'] = $this->getServiceId();
 		$list['order.base.service.attribute.type'] = $this->getType();
 		$list['order.base.service.attribute.name'] = $this->getName();
