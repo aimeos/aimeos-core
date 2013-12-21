@@ -261,6 +261,31 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAddProductAttributeNotAssigned()
+	{
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $attributeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'attribute.code', '30' ),
+			$search->compare( '==', 'attribute.type.code', 'width' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$attribute = $attributeManager->searchItems( $search );
+
+		if( empty( $attribute ) ) {
+			throw new Exception( 'Attribute not found' );
+		}
+
+		$hiddenAttrIds = array_keys( $attribute );
+		$configAttrIds = array_keys( $attribute );
+
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->_object->addProduct( $this->_testItem->getId(), 1, true, array(), $configAttrIds, $hiddenAttrIds );
+	}
+
+
 	public function testAddProductNegativeQuantityException()
 	{
 		$this->setExpectedException( 'MShop_Order_Exception' );

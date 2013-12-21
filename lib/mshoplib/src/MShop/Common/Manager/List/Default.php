@@ -360,8 +360,8 @@ class MShop_Common_Manager_List_Default
 				$config = $row['config'];
 				if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', $this->_prefix . '.config', $row['id'], $config );
-					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', $this->_prefix . 'config', $row['id'], $config );
+					$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::NOTICE );
 				}
 
 				$map[ $row['id'] ] = $row;
