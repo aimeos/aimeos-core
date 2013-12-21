@@ -259,6 +259,8 @@ CREATE TABLE "mshop_order_base_product_attr" (
 	"id" BIGINT NOT NULL AUTO_INCREMENT,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original attribute ID
+	"attrid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Order product id
 	"ordprodid" BIGINT NOT NULL,
 	-- Attribute type
@@ -348,6 +350,8 @@ CREATE TABLE "mshop_order_base_service_attr" (
 	"id" BIGINT NOT NULL AUTO_INCREMENT,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original attribute ID
+	"attrid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Order service id
 	"ordservid" BIGINT NOT NULL,
 	-- Attribute type

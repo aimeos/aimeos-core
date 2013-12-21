@@ -38,6 +38,14 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
+		'order.base.product.attribute.attributeid' => array(
+			'code'=>'order.base.product.attribute.attributeid',
+			'internalcode'=>'mordbaprat."attrid"',
+			'label'=>'Order base product attribute original ID',
+			'type'=> 'string',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
 		'order.base.product.attribute.productid' => array(
 			'code'=>'order.base.product.attribute.productid',
 			'internalcode'=>'mordbaprat."ordprodid"',
@@ -163,24 +171,26 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 		try
 		{
 			$id = $item->getId();
+			$date = date( 'Y-m-d H:i:s' );
 
 			$path = 'mshop/order/manager/base/product/attribute/default/item/';
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
-			$stmt = $this->_getCachedStatement($conn, $path);
-			$stmt->bind(1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(2, $item->getProductId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind(3, $item->getType() );
-			$stmt->bind(4, $item->getCode() );
-			$stmt->bind(5, $item->getValue() );
-			$stmt->bind(6, $item->getName() );
-			$stmt->bind(7, date('Y-m-d H:i:s', time()) );// mtime
-			$stmt->bind(8, $context->getEditor() );
+			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $item->getAttributeId() );
+			$stmt->bind( 3, $item->getProductId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getType() );
+			$stmt->bind( 5, $item->getCode() );
+			$stmt->bind( 6, $item->getValue() );
+			$stmt->bind( 7, $item->getName() );
+			$stmt->bind( 8, $date ); // mtime
+			$stmt->bind( 9, $context->getEditor() );
 
 			if ( $id !== null ) {
-				$stmt->bind(9, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$stmt->bind(9, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
+				$stmt->bind( 10, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -191,7 +201,7 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 					$path = 'mshop/order/manager/base/product/attribute/default/item/newid';
 					$item->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
 				} else {
-					$item->setId($id);
+					$item->setId( $id );
 				}
 			}
 
@@ -228,14 +238,14 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 		$list = array();
 
 		foreach( $this->_searchConfig as $key => $fields ) {
-			$list[ $key ] = new MW_Common_Criteria_Attribute_Default($fields);
+			$list[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
-		if ($withsub === true)
+		if( $withsub === true )
 		{
 			$path = 'classes/order/manager/base/product/attribute/submanagers';
-			foreach ($this->_getContext()->getConfig()->get($path, array()) as $domain) {
-				$list = array_merge($list, $this->getSubManager($domain)->getSearchAttributes());
+			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
 			}
 		}
 

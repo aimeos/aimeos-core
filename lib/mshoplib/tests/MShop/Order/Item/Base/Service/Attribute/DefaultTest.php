@@ -41,7 +41,8 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 
 		$this->_values = array(
 			'id' => 3,
-			'siteid'=>99,
+			'siteid' => 99,
+			'attrid' => 22,
 			'ordservid' => 42,
 			'type' => 'UnitType',
 			'name' => 'UnitName',
@@ -94,6 +95,20 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 	}
 
 
+	public function testGetAttributeId()
+	{
+		$this->assertEquals( $this->_values['attrid'], $this->_object->getAttributeId() );
+	}
+
+
+	public function testSetAttributeId()
+	{
+		$this->_object->setAttributeId( 44 );
+		$this->assertEquals( 44, $this->_object->getAttributeId() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+
 	public function testGetServiceId()
 	{
 		$this->assertEquals( $this->_values['ordservid'], $this->_object->getServiceId() );
@@ -135,8 +150,8 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->assertEquals( 'testCode', $this->_object->getCode() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
-	
-	
+
+
 	public function testGetValue()
 	{
 		$this->assertEquals($this->_values['value'], $this->_object->getValue());
@@ -191,6 +206,7 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 
 		$this->_object->copyFrom( $item );
 
+		$this->assertEquals( $item->getId(), $this->_object->getAttributeId() );
 		$this->assertEquals( $item->getLabel(), $this->_object->getName() );
 		$this->assertEquals( $item->getType(), $this->_object->getCode() );
 		$this->assertEquals( $item->getCode(), $this->_object->getValue() );
@@ -198,20 +214,21 @@ class MShop_Order_Item_Base_Service_Attribute_DefaultTest extends MW_Unittest_Te
 
 	public function testToArray()
 	{
-		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( count( $this->_values ), count( $arrayObject ) );
+		$list = $this->_object->toArray();
+		$this->assertEquals( count( $this->_values ), count( $list ) );
 
-		$this->assertEquals( $this->_object->getId(), $arrayObject['order.base.service.attribute.id'] );
-		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['order.base.service.attribute.siteid'] );
-		$this->assertEquals( $this->_object->getServiceId(), $arrayObject['order.base.service.attribute.ordservid'] );
-		$this->assertEquals( $this->_object->getType(), $arrayObject['order.base.service.attribute.type'] );
-		$this->assertEquals( $this->_object->getCode(), $arrayObject['order.base.service.attribute.code']) ;
-		$this->assertEquals( $this->_object->getValue(), $arrayObject['order.base.service.attribute.value'] );
-		$this->assertEquals( $this->_object->getName(), $arrayObject['order.base.service.attribute.name'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['order.base.service.attribute.mtime'] );
-		$this->assertEquals( $this->_object->getTimeCreated(), $arrayObject['order.base.service.attribute.ctime'] );
-		$this->assertEquals( $this->_object->getTimeModified(), $arrayObject['order.base.service.attribute.mtime'] );
-		$this->assertEquals( $this->_object->getEditor(), $arrayObject['order.base.service.attribute.editor'] );
+		$this->assertEquals( $this->_object->getId(), $list['order.base.service.attribute.id'] );
+		$this->assertEquals( $this->_object->getSiteId(), $list['order.base.service.attribute.siteid'] );
+		$this->assertEquals( $this->_object->getAttributeId(), $list['order.base.service.attribute.attrid'] );
+		$this->assertEquals( $this->_object->getServiceId(), $list['order.base.service.attribute.ordservid'] );
+		$this->assertEquals( $this->_object->getType(), $list['order.base.service.attribute.type'] );
+		$this->assertEquals( $this->_object->getCode(), $list['order.base.service.attribute.code']) ;
+		$this->assertEquals( $this->_object->getValue(), $list['order.base.service.attribute.value'] );
+		$this->assertEquals( $this->_object->getName(), $list['order.base.service.attribute.name'] );
+		$this->assertEquals( $this->_object->getTimeModified(), $list['order.base.service.attribute.mtime'] );
+		$this->assertEquals( $this->_object->getTimeCreated(), $list['order.base.service.attribute.ctime'] );
+		$this->assertEquals( $this->_object->getTimeModified(), $list['order.base.service.attribute.mtime'] );
+		$this->assertEquals( $this->_object->getEditor(), $list['order.base.service.attribute.editor'] );
 	}
 
 	public function testIsModified()

@@ -11,11 +11,8 @@
  */
 class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MShop_Order_Item_Base_Product_Attribute_Default
-	 * @access protected
-	 */
 	private $_object;
+	private $_values;
 
 
 	/**
@@ -32,6 +29,7 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
+
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -40,9 +38,10 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 	 */
 	protected function setUp()
 	{
-		$this->values = array(
+		$this->_values = array(
 			'id' => 4,
 			'siteid' => 99,
+			'attrid' => 22,
 			'ordprodid' => 11,
 			'type' => 'UnitType',
 			'code' => 'size',
@@ -53,8 +52,9 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Order_Item_Base_Product_Attribute_Default($this->values);
+		$this->_object = new MShop_Order_Item_Base_Product_Attribute_Default($this->_values);
 	}
+
 
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
@@ -67,10 +67,12 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 		unset($this->_object);
 	}
 
+
 	public function testGetId()
 	{
-		$this->assertEquals($this->values['id'], $this->_object->getId());
+		$this->assertEquals($this->_values['id'], $this->_object->getId());
 	}
+
 
 	public function testSetId()
 	{
@@ -86,19 +88,36 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->_object->setId(3);
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->_object->getSiteId() );
 	}
 
+
+	public function testGetAttributeId()
+	{
+		$this->assertEquals( $this->_values['attrid'], $this->_object->getAttributeId() );
+	}
+
+
+	public function testSetAttributeId()
+	{
+		$this->_object->setAttributeId( 44 );
+		$this->assertEquals( 44, $this->_object->getAttributeId() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+
 	public function testGetProductId()
 	{
-		$this->assertEquals($this->values['ordprodid'], $this->_object->getProductId());
+		$this->assertEquals( $this->_values['ordprodid'], $this->_object->getProductId() );
 	}
+
 
 	public function testSetProductId()
 	{
-		$this->_object->setProductId(33);
+		$this->_object->setProductId( 33 );
 		$this->assertEquals( 33, $this->_object->getProductId() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
@@ -106,7 +125,7 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 
 	public function testGetType()
 	{
-		$this->assertEquals( $this->values['type'], $this->_object->getType());
+		$this->assertEquals( $this->_values['type'], $this->_object->getType());
 	}
 
 
@@ -120,8 +139,9 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 
 	public function testGetCode()
 	{
-		$this->assertEquals($this->values['code'], $this->_object->getCode());
+		$this->assertEquals($this->_values['code'], $this->_object->getCode());
 	}
+
 
 	public function testSetCode()
 	{
@@ -130,10 +150,12 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->assertTrue($this->_object->isModified());
 	}
 
+
 	public function testGetValue()
 	{
-		$this->assertEquals( $this->values['value'], $this->_object->getValue() );
+		$this->assertEquals( $this->_values['value'], $this->_object->getValue() );
 	}
+
 
 	public function testSetValue()
 	{
@@ -142,10 +164,12 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
+
 	public function testGetName()
 	{
-		$this->assertEquals( $this->values['name'], $this->_object->getName() );
+		$this->assertEquals( $this->_values['name'], $this->_object->getName() );
 	}
+
 
 	public function testSetName()
 	{
@@ -154,21 +178,25 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
+
 	public function testGetTimeModified()
 	{
 		$regexp = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 		$this->assertRegExp($regexp, $this->_object->getTimeModified());
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
 	}
 
+
 	public function testGetEditor()
 	{
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
+
 
 	public function testCopyFrom()
 	{
@@ -181,19 +209,22 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 
 		$this->_object->copyFrom( $item );
 
+		$this->assertEquals( $item->getId(), $this->_object->getAttributeId() );
 		$this->assertEquals( $item->getLabel(), $this->_object->getName() );
 		$this->assertEquals( $item->getType(), $this->_object->getCode() );
 		$this->assertEquals( $item->getCode(), $this->_object->getValue() );
 	}
 
+
 	public function testToArray()
 	{
 		$list = $this->_object->toArray();
 
-		$this->assertEquals( count( $this->values ), count( $list ) );
-		
+		$this->assertEquals( count( $this->_values ), count( $list ) );
+
 		$this->assertEquals( $this->_object->getId(), $list['order.base.product.attribute.id'] );
 		$this->assertEquals( $this->_object->getSiteId(), $list['order.base.product.attribute.siteid'] );
+		$this->assertEquals( $this->_object->getAttributeId(), $list['order.base.product.attribute.attrid'] );
 		$this->assertEquals( $this->_object->getProductId(), $list['order.base.product.attribute.productid'] );
 		$this->assertEquals( $this->_object->getType(), $list['order.base.product.attribute.type'] );
 		$this->assertEquals( $this->_object->getCode(), $list['order.base.product.attribute.code'] );
@@ -203,6 +234,7 @@ class MShop_Order_Item_Base_Product_Attribute_DefaultTest extends MW_Unittest_Te
 		$this->assertEquals( $this->_object->getTimeCreated(), $list['order.base.product.attribute.ctime'] );
 		$this->assertEquals( $this->_object->getEditor(), $list['order.base.product.attribute.editor'] );
 	}
+
 
 	public function testIsModified()
 	{
