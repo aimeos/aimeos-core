@@ -260,6 +260,10 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordServAttr->setName( $dataset['name'] );
 			$ordServAttr->setType( $dataset['type'] );
 
+			if( isset( $dataset['attrid'] ) ) {
+				$ordServAttr->setAttributeId( $dataset['attrid'] );
+			}
+
 			$orderBaseServiceAttrManager->saveItem( $ordServAttr, false );
 		}
 
@@ -365,6 +369,10 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordProdAttr->setCode( $dataset['code'] );
 			$ordProdAttr->setValue( $dataset['value'] );
 			$ordProdAttr->setName( $dataset['name'] );
+
+			if( isset( $dataset['attrid'] ) ) {
+				$ordProdAttr->setAttributeId( $dataset['attrid'] );
+			}
 
 			if( isset( $dataset['type'] ) ) {
 				$ordProdAttr->setType( $prodTypes[$dataset['type']] );
