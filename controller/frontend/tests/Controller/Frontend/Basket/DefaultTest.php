@@ -261,48 +261,28 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testAddProductConfigHiddenAttribute()
+	public function testAddProductAttributeNotAssigned()
 	{
 		$attributeManager = MShop_Attribute_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'attribute.code', '29' ),
+			$search->compare( '==', 'attribute.code', '30' ),
 			$search->compare( '==', 'attribute.type.code', 'width' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$hiddenAttr = $attributeManager->searchItems( $search );
+		$attribute = $attributeManager->searchItems( $search );
 
-		if( empty( $hiddenAttr ) ) {
-			throw new Exception( 'Hidden attribute not found' );
+		if( empty( $attribute ) ) {
+			throw new Exception( 'Attribute not found' );
 		}
 
-		$search = $attributeManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'attribute.code', 'xs' ),
-			$search->compare( '==', 'attribute.type.code', 'size' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$hiddenAttrIds = array_keys( $attribute );
+		$configAttrIds = array_keys( $attribute );
 
-		$configAttr = $attributeManager->searchItems( $search );
-
-		if( empty( $configAttr ) ) {
-			throw new Exception( 'Config attribute not found' );
-		}
-
-		$hiddenAttrIds = array_keys( $hiddenAttr );
-		$configAttrIds = array_keys( $configAttr );
-
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->_object->addProduct( $this->_testItem->getId(), 1, true, array(), $configAttrIds, $hiddenAttrIds );
-		$basket = $this->_object->get();
-
-		$this->assertEquals( 1, count( $basket->getProducts() ) );
-
-		$product = $basket->getProduct( 0 );
-		$this->assertEquals( 'U:TESTPSUB01', $product->getProductCode() );
-
-		$this->assertEquals( 2, count( $product->getAttributes() ) );
 	}
 
 
