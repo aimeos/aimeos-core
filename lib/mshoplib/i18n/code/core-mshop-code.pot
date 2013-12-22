@@ -65,7 +65,7 @@ msgstr "Sorry, at least one product is not available any more. Please remove it 
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr "The price of at least one product has changed and it was updated automatically"
+msgstr "The price of at least one product has changed in the meantime and it was updated automatically"
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"

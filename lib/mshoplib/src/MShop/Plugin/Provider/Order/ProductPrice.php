@@ -68,8 +68,9 @@ class MShop_Plugin_Provider_Order_ProductPrice
 
 			foreach( $item->getAttributes() as $ordAttrItem )
 			{
-				$id = $ordAttrItem->getAttributeId();
-				if( $id != '' ) { $attrIds[$id] = null; }
+				if( ( $id = $ordAttrItem->getAttributeId() ) != '' ) {
+					$attrIds[$id] = null;
+				}
 			}
 		}
 
