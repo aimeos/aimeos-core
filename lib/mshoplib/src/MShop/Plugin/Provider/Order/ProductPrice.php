@@ -56,29 +56,54 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		}
 
 
-		$codes = $prodMap = $changedProducts = array();
+		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
+
+		$attrIds = $attributes = $prodCodes = $prodMap = $changedProducts = array();
 		$orderProducts = $order->getProducts();
 
-		foreach( $orderProducts as $pos => $item ) {
-			$codes[] = $item->getProductCode();
+		foreach( $orderProducts as $pos => $item )
+		{
+			$prodCodes[] = $item->getProductCode();
+
+			foreach( $item->getAttributes() as $ordAttrItem )
+			{
+				if( ( $id = $ordAttrItem->getAttributeId() ) != '' ) {
+					$attrIds[$id] = null;
+				}
+			}
 		}
 
 
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		if( !empty( $attrIds ) )
+		{
+			$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
 
-		$search = $productManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'product.code', $codes ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+			$search = $attrManager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', 'attribute.id', array_keys( $attrIds ) ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$products = $productManager->searchItems( $search, array( 'price' ) );
+			$attributes = $attrManager->searchItems( $search, array( 'price' ) );
+		}
 
 
-		foreach( $products as $item ) {
-			$prodMap[ $item->getCode() ] = $item;
+		if( !empty( $prodCodes ) )
+		{
+			$search = $productManager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', 'product.code', $prodCodes ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$products = $productManager->searchItems( $search, array( 'price' ) );
+
+			foreach( $products as $item ) {
+				$prodMap[ $item->getCode() ] = $item;
+			}
 		}
 
 
@@ -86,25 +111,44 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		{
 			$refPrices = array();
 
+			// fetch prices of articles/sub-products
 			if( isset( $prodMap[ $orderProduct->getProductCode() ] ) ) {
 				$refPrices = $prodMap[ $orderProduct->getProductCode() ]->getRefItems( 'price' );
 			}
 
+			// fetch prices of selection/parent products
 			if( empty( $refPrices ) )
 			{
 				$product = $productManager->getItem( $orderProduct->getProductId(), array( 'price' ) );
-				$refPrices = $product->getRefItems( 'price' );
+				$refPrices = $product->getRefItems( 'price', 'default', 'default' );
 
 				if( empty( $refPrices ) )
 				{
-					$code = array( 'product' => array( $pos => 'product.price' ) );
-					$str = 'No price for product ID "%1$s" or product code "%2$s" available';
-					$msg = sprintf( $str, $orderProduct->getProductId(), $orderProduct->getProductCode() );
-					throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $code );
+					$pid = $orderProduct->getProductId();
+					$pcode = $orderProduct->getProductCode();
+					$codes = array( 'product' => array( $pos => 'product.price' ) );
+					$msg = sprintf( 'No price for product ID "%1$s" or product code "%2$s" available', $pid, $pcode );
+
+					throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $codes );
 				}
 			}
 
 			$price = $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
+
+			// add prices of product attributes to compute the end price for comparison
+			foreach( $orderProduct->getAttributes() as $orderAttribute )
+			{
+				$attrId = $orderAttribute->getAttributeId();
+
+				if( isset( $attributes[$attrId] ) )
+				{
+					$attrPrices = $attributes[$attrId]->getRefItems( 'price', 'default', 'default' );
+
+					if( !empty( $attrPrices ) ) {
+						$price->addItem( $priceManager->getLowestPrice( $attrPrices, $orderProduct->getQuantity() ) );
+					}
+				}
+			}
 
 			if( ( $orderProducts[$pos]->getPrice()->getValue() !== $price->getValue()
 				|| $orderProducts[$pos]->getPrice()->getCosts() !== $price->getCosts()
@@ -123,7 +167,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		if ( count( $changedProducts ) > 0 )
 		{
 			$code = array( 'product' => $changedProducts );
-			$msg = sprintf( 'The price of at least one product in the basket has changed in the meantime and was updated' );
+			$msg = sprintf( 'Please have a look at the prices of the products in your basket' );
 			throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $code );
 		}
 
