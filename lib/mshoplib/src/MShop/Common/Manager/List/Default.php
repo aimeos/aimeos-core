@@ -327,6 +327,7 @@ class MShop_Common_Manager_List_Default
 	 * Search for all list items based on the given critera.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of list items implementing MShop_Common_Item_List_Interface
 	 * @throws MShop_Exception if creating items failed
@@ -404,9 +405,11 @@ class MShop_Common_Manager_List_Default
 	 * sorting, but no criteria from the referenced items.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of list items implementing MShop_Common_Item_List_Interface
-	 * @throws MShop_Exception if creating items failed
+	 * @return array Associative list of domains as keys and lists with pairs
+	 *	of IDs and items implementing MShop_Common_Item_Interface
+	 * @throws MShop_Exception If creating items failed
 	 * @see MW_Common_Criteria_SQL
 	 */
 	public function searchRefItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
