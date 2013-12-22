@@ -324,12 +324,13 @@ class MShop_Common_Manager_List_Default
 
 
 	/**
-	 * Search for all text items based on the given critera.
+	 * Search for all list items based on the given critera.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of list items implementing MShop_Common_Item_List_Interface
-	 * @throws MShop_Common_Exception if creating items failed
+	 * @throws MShop_Exception if creating items failed
 	 * @see MW_Common_Criteria_SQL
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
@@ -340,7 +341,7 @@ class MShop_Common_Manager_List_Default
 
 		try
 		{
-			$domain = explode( '.', $this->_prefix);
+			$domain = explode( '.', $this->_prefix );
 
 			if ( ( $topdomain = array_shift( $domain ) ) === null ) {
 				throw new MShop_Exception( sprintf( 'Configuration not available' ) );
@@ -390,6 +391,83 @@ class MShop_Common_Manager_List_Default
 					$row['type'] = $typeItems[ $row['typeid'] ]->getCode();
 				}
 				$items[ $row['id'] ] = $this->_createItem( $row );
+			}
+		}
+
+		return $items;
+	}
+
+
+	/**
+	 * Search for all referenced items from the list based on the given critera.
+	 *
+	 * Only criteria from the list and list type can be used for searching and
+	 * sorting, but no criteria from the referenced items.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param array $ref List of domains to fetch referenced items for
+	 * @param integer &$total Number of items that are available in total
+	 * @return array Associative list of domains as keys and lists with pairs
+	 *	of IDs and items implementing MShop_Common_Item_Interface
+	 * @throws MShop_Exception If creating items failed
+	 * @see MW_Common_Criteria_SQL
+	 */
+	public function searchRefItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	{
+		$items = $map = array();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		try
+		{
+			$domain = explode( '.', $this->_prefix );
+
+			if ( ( $topdomain = array_shift( $domain ) ) === null ) {
+				throw new MShop_Exception( sprintf( 'Configuration not available' ) );
+			}
+
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$cfgPathSearch = $this->_config['search'];
+			$cfgPathCount =  $this->_config['count'];
+
+			$name = trim( $this->_prefix, '.' );
+			$required = array( $name );
+
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+
+			while( ( $row = $results->fetch() ) !== false ) {
+				$map[ $row['domain'] ][] = $row['refid'];
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+
+
+		foreach( $map as $domain => $list )
+		{
+			$manager = MShop_Factory::createManager( $context, $domain );
+
+			$search = $manager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', str_replace( '/', '.', $domain ) . '.id', $list ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSlice( 0, 0x7fffffff );
+
+			$refItems = $manager->searchItems( $search, $ref );
+
+			foreach( $list as $refid )
+			{
+				if( isset( $refItems[$refid] ) ) {
+					$items[$domain][$refid] = $refItems[$refid];
+				}
 			}
 		}
 
