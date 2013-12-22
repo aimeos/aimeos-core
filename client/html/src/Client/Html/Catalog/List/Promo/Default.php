@@ -119,9 +119,31 @@ class Client_Html_Catalog_List_Promo_Default
 
 			if( isset( $view->listCurrentCatItem ) )
 			{
-				$catId = $view->listCurrentCatItem->getId();
+				$size = $config->get( 'client/html/catalog/list/promo/size', 6 );
 				$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
-				$products = $this->_getCatalogRefItems( $catId, 'product', array( 'promotion' ), $domains );
+				$manager = MShop_Factory::createManager( $context, 'catalog/list' );
+
+				$search = $manager->createSearch( true );
+				$expr = array(
+					$search->compare( '==', 'catalog.list.parentid', $view->listCurrentCatItem->getId() ),
+					$search->compare( '==', 'catalog.list.domain', 'product' ),
+					$search->compare( '==', 'catalog.list.type.code', 'promotion' ),
+					$search->getConditions(),
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
+				$sort = array(
+					$search->sort( '+', 'catalog.list.parentid' ),
+					$search->sort( '+', 'catalog.list.siteid' ),
+					$search->sort( '+', 'catalog.list.position' ),
+				);
+				$search->setSortations( $sort );
+				$search->setSlice( 0, $size );
+
+				$result = $manager->searchRefItems( $search, $domains );
+
+				if( isset( $result['product'] ) ) {
+					$products = $result['product'];
+				}
 			}
 
 			if( !empty( $products ) && $config->get( 'client/html/catalog/list/stock/enable', true ) === true )
@@ -181,31 +203,6 @@ class Client_Html_Catalog_List_Promo_Default
 		$search->setSortations( $sort );
 		$search->setSlice( $start, $size );
 
-		foreach( $manager->searchItems( $search ) as $id => $listItem ) {
-			$refIds[ $listItem->getRefId() ] = 0;
-		}
-
-
-		$manager = MShop_Factory::createManager( $context, $domain );
-
-		$search = $manager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', $domain . '.id', array_keys( $refIds ) ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( $start, $size );
-
-		$items = $manager->searchItems( $search, $ref );
-
-
-		foreach( $refIds as $refId => $value )
-		{
-			if( isset( $items[$refId] ) ) {
-				$result[$refId] = $items[$refId];
-			}
-		}
-
-		return $result;
+		$manager->searchRefItems( $search, $ref );
 	}
 }
