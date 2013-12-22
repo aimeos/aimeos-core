@@ -341,4 +341,26 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		}
 	}
 
+
+	public function testSearchRefItems()
+	{
+		$total = 0;
+		$siteid = TestHelper::getContext()->getLocale()->getSiteId();
+
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.list.domain', array( 'attribute', 'media' ) ) );
+
+		$result = $this->_object->searchRefItems( $search, array( 'text' ), $total );
+
+		$this->assertArrayHasKey( 'attribute', $result );
+		$this->assertArrayHasKey( 'media', $result );
+		$this->assertArrayNotHasKey( 'price', $result );
+
+		$this->assertEquals( 11, count( $result['attribute'] ) );
+		$this->assertEquals( 8, count( $result['media'] ) );
+
+		// this is the total of list items, not the total of referenced items
+		// whose number might be lower due to duplicates
+		$this->assertEquals( 36, $total );
+	}
 }

@@ -158,6 +158,24 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	}
 
 
+	/**
+	 * Search for all referenced items from the list based on the given critera.
+	 *
+	 * Only criteria from the list and list type can be used for searching and
+	 * sorting, but no criteria from the referenced items.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param integer &$total Number of items that are available in total
+	 * @return array List of list items implementing MShop_Common_Item_List_Interface
+	 * @throws MShop_Exception if creating items failed
+	 * @see MW_Common_Criteria_SQL
+	 */
+	public function searchRefItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	{
+		return $this->_manager->searchRefItems( $search, $ref, $total );
+	}
+
+
 
 	/**
 	 * Returns the manager object.
