@@ -287,6 +287,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 		$orderBaseProductAttrManager = $orderBaseProductManager->getSubManager( 'attribute', 'Default' );
 		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_additional, 'Default' );
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->_additional, 'Default' );
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_additional, 'Default' );
 
 		$products = array();
 		foreach( $testdata['order/base/product'] as $key => $dataset ) {
@@ -357,6 +358,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordProds[ $key ] = $ordProdItem->getId();
 		}
 
+
+		$attrCodes = array();
+		foreach( $attributeManager->searchItems( $attributeManager->createSearch() ) as $attrItem ) {
+			$attrCodes[ $attrItem->getType() ][] = $attrItem;
+		}
+
 		$ordProdAttr = $orderBaseProductAttrManager->createItem();
 		foreach ( $testdata['order/base/product/attr'] as $dataset )
 		{
@@ -370,8 +377,14 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordProdAttr->setValue( $dataset['value'] );
 			$ordProdAttr->setName( $dataset['name'] );
 
-			if( isset( $dataset['attrid'] ) ) {
-				$ordProdAttr->setAttributeId( $dataset['attrid'] );
+			if( isset( $attrCodes[ $dataset['code'] ] ) )
+			{
+				foreach( $attrCodes[ $dataset['code'] ] as $attrItem )
+				{
+					if( $attrItem->getCode() == $dataset['value'] ) {
+						$ordProdAttr->setAttributeId( $attrItem->getId() );
+					}
+				}
 			}
 
 			if( isset( $dataset['type'] ) ) {
