@@ -4,7 +4,6 @@
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2011
 -- License LGPLv3, http://www.arcavias.com/en/license
--- $Id: plugin.sql 14854 2012-01-13 12:54:14Z doleiynyk $
 --
 
 
