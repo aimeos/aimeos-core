@@ -33,6 +33,9 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 				flex : 1,
 				labelAlign : 'top',
 				items : [{
+					xtype : 'MShop.elements.status.combo',
+					name : this.listUI.listNamePrefix + 'status'
+				}, {
 					xtype : 'combo',
 					fieldLabel : _('List type'),
 					name : this.listUI.listNamePrefix + 'typeid',
@@ -60,9 +63,6 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					format : 'Y-m-d H:i:s',
 					anchor : '100%',
 					emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
-				}, {
-					xtype : 'MShop.elements.status.combo',
-					name : this.listUI.listNamePrefix + 'status'
 				}].concat( this.getAdditionalFields() || [] )
 			}, {
 					xtype: 'MShop.panel.listconfigui',
