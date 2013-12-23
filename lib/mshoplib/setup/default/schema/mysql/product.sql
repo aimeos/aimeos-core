@@ -3,7 +3,6 @@
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2011
 -- License LGPLv3, http://www.arcavias.com/en/license
--- $Id: product.sql 14456 2011-12-19 16:18:24Z fblasel $
 --
 
 

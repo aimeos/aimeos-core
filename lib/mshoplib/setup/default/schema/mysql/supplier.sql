@@ -3,7 +3,6 @@
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2011
 -- License LGPLv3, http://www.arcavias.com/en/license
--- $Id: supplier.sql 14277 2011-12-12 11:28:56Z spopp $
 --
 
 
