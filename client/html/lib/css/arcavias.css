@@ -45,6 +45,8 @@
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
 	padding: 0.5em;
+	padding-left: 2em;
+	list-style: disc;
 }
 
 .arcavias .error-item {
