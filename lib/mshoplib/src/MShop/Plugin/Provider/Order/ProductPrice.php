@@ -113,7 +113,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 
 			// fetch prices of articles/sub-products
 			if( isset( $prodMap[ $orderProduct->getProductCode() ] ) ) {
-				$refPrices = $prodMap[ $orderProduct->getProductCode() ]->getRefItems( 'price' );
+				$refPrices = $prodMap[ $orderProduct->getProductCode() ]->getRefItems( 'price', 'default', 'default' );
 			}
 
 			// fetch prices of selection/parent products
@@ -121,16 +121,16 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			{
 				$product = $productManager->getItem( $orderProduct->getProductId(), array( 'price' ) );
 				$refPrices = $product->getRefItems( 'price', 'default', 'default' );
+			}
 
-				if( empty( $refPrices ) )
-				{
-					$pid = $orderProduct->getProductId();
-					$pcode = $orderProduct->getProductCode();
-					$codes = array( 'product' => array( $pos => 'product.price' ) );
-					$msg = sprintf( 'No price for product ID "%1$s" or product code "%2$s" available', $pid, $pcode );
+			if( empty( $refPrices ) )
+			{
+				$pid = $orderProduct->getProductId();
+				$pcode = $orderProduct->getProductCode();
+				$codes = array( 'product' => array( $pos => 'product.price' ) );
+				$msg = sprintf( 'No price for product ID "%1$s" or product code "%2$s" available', $pid, $pcode );
 
-					throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $codes );
-				}
+				throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $codes );
 			}
 
 			$price = $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
@@ -138,27 +138,29 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			// add prices of product attributes to compute the end price for comparison
 			foreach( $orderProduct->getAttributes() as $orderAttribute )
 			{
+				$attrPrices = array();
 				$attrId = $orderAttribute->getAttributeId();
 
-				if( isset( $attributes[$attrId] ) )
-				{
+				if( isset( $attributes[$attrId] ) ) {
 					$attrPrices = $attributes[$attrId]->getRefItems( 'price', 'default', 'default' );
+				}
 
-					if( !empty( $attrPrices ) ) {
-						$price->addItem( $priceManager->getLowestPrice( $attrPrices, $orderProduct->getQuantity() ) );
-					}
+				if( !empty( $attrPrices ) ) {
+					$price->addItem( $priceManager->getLowestPrice( $attrPrices, $orderProduct->getQuantity() ) );
 				}
 			}
 
-			if( ( $orderProducts[$pos]->getPrice()->getValue() !== $price->getValue()
-				|| $orderProducts[$pos]->getPrice()->getCosts() !== $price->getCosts()
-				|| $orderProducts[$pos]->getPrice()->getTaxrate() !== $price->getTaxrate() )
-				&& $orderProducts[$pos]->getFlags() !== MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
+			$orderPosPrice = $orderProduct->getPrice();
+
+			if( ( $orderPosPrice->getValue() !== $price->getValue()
+				|| $orderPosPrice->getCosts() !== $price->getCosts()
+				|| $orderPosPrice->getTaxrate() !== $price->getTaxrate() )
+				&& $orderProduct->getFlags() !== MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 			{
-				$orderProducts[$pos]->setPrice( $price );
+				$orderProduct->setPrice( $price );
 
 				$order->deleteProduct( $pos );
-				$order->addProduct( $orderProducts[$pos], $pos );
+				$order->addProduct( $orderProduct, $pos );
 
 				$changedProducts[$pos] = 'price.changed';
 			}
