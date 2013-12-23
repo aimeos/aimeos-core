@@ -240,7 +240,7 @@ class MShop_Common_Item_List_Default
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 0 );
+		return ( isset( $this->_values['status'] ) ? (int) $this->_values['status'] : 1 );
 	}
 
 

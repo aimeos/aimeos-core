@@ -52,9 +52,9 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 		MShop.panel.ListItemListUi.superclass.initComponent.call(this);
 		
-		this.grid.getView().getRowClass = function(record, rowIndex, rowParams, store){ 
-			if( record.phantom === false && record.get( this.listItemPickerUi.itemConfig.listNamePrefix + 'status' ) <= 0 ) {
-				return this.rowCssDisabled; 
+		this.grid.getView().getRowClass = function(record, rowIndex, rowParams, store) { 
+			if( ( status = record.get( this.listItemPickerUi.itemConfig.listNamePrefix + 'status' ) ) <= 0 ) {
+				return  'statustext-' + Number( status );
 			}
 			return '';
 		}.createDelegate(this);
