@@ -359,13 +359,14 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			return null;
 		}
 
-		$urlQuery = http_build_query( $additional, '', '&' );
-
-		//validation
-		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
-
 		try
 		{
+			$urlQuery = http_build_query( $additional, '', '&' );
+
+			//validation
+			$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
+
+
 			if( $response !== 'VERIFIED' )
 			{
 				$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
@@ -380,9 +381,21 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			$baseItem = $orderBaseManager->getItem( $baseid );
 			$serviceItem = $this->_getOrderServiceItem( $baseid );
 
-
 			$this->_checkIPN( $orderBaseManager, $baseItem, $additional );
 
+			$status['PAYMENTSTATUS'] = $additional['payment_status'];
+			if( isset( $additional['pending_reason'] ) ) {
+				$status['PENDINGREASON'] = $additional['pending_reason'];
+			}
+
+
+			$this->_saveAttributes( array( 'TRANSACTIONID' => $additional['txn_id'] ), $serviceItem );
+			$this->_saveAttributes( array( $additional['txn_id'] => $additional['payment_status'] ), $serviceItem, 'payment/paypal/txn' );
+
+			$this->_setPaymentStatus( $order, $status );
+			$orderManager->saveItem( $order );
+
+			return $order;
 		}
 		catch ( MShop_Service_Exception $e )
 		{
@@ -390,21 +403,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 			return null;
 		}
-
-
-		$status['PAYMENTSTATUS'] = $additional['payment_status'];
-		if( isset( $additional['pending_reason'] ) ) {
-			$status['PENDINGREASON'] = $additional['pending_reason'];
-		}
-
-
-		$this->_saveAttributes( array( 'TRANSACTIONID' => $additional['txn_id'] ), $serviceItem );
-		$this->_saveAttributes( array( $additional['txn_id'] => $additional['payment_status'] ), $serviceItem, 'payment/paypal/txn' );
-
-		$this->_setPaymentStatus( $order, $status );
-		$orderManager->saveItem( $order );
-
-		return $order;
 	}
 
 
@@ -428,7 +426,12 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		return false;
 	}
 
-
+	/**
+	 * Begins paypalexpress transaction and saves transaction id.
+	 *
+	 * @param mixed $additional Update information whose format depends on the payment provider
+	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 */
 	protected function _doExpressCheckoutPayment( $additional )
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
@@ -456,7 +459,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( isset( $rvals['TRANSACTIONID'] ) ) {
 			$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
-			$this->_saveAttributes( array( $rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS'] ), $serviceItem );
+			$this->_saveAttributes( array( $rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS'] ), $serviceItem, 'payment/paypal/txn' );
 		}
 
 		$this->_saveAttributes( $attributes, $serviceItem );
