@@ -266,7 +266,7 @@ CREATE TABLE "mshop_catalog_index_price" (
 	-- price value
 	"value" DECIMAL(12,2) NOT NULL,
 	-- price value
-	"shipping" DECIMAL(12,2) NOT NULL,
+	"costs" DECIMAL(12,2) NOT NULL,
 	-- price value
 	"rebate" DECIMAL(12,2) NOT NULL,
 	-- price value

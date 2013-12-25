@@ -10,7 +10,7 @@ return array(
 		'delete' => 'DELETE FROM "mshop_catalog_index_price" WHERE :cond AND "siteid" = ?',
 		'insert' => '
 			INSERT INTO "mshop_catalog_index_price" ("prodid", "siteid", "priceid", "currencyid", "listtype", "type", "value",
-				"shipping", "rebate", "taxrate", "quantity", "mtime", "editor", "ctime" )
+				"costs", "rebate", "taxrate", "quantity", "mtime", "editor", "ctime" )
 			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'search' => '
