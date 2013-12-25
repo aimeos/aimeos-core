@@ -234,6 +234,7 @@ class MShop_Catalog_Manager_Index_Default
 			$catalogSearch->sort( '+', 'catalog.list.domain' ),
 			$catalogSearch->sort( '+', 'catalog.list.refid' ),
 			$catalogSearch->sort( '+', 'catalog.list.typeid' ),
+			$catalogSearch->sort( '+', 'catalog.list.parentid' ),
 		);
 		$catalogSearch->setSortations( $sort );
 

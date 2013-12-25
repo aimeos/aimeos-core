@@ -150,8 +150,9 @@ class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Abstract
 			{
 				$this->_msg( sprintf( 'Adding constraint "%1$s": ', $name ), 1 );
 
-				if( $this->_schema->constraintExists( $table, $name ) === false )
-				{
+				if( $this->_schema->tableExists( $table ) === true
+					&& $this->_schema->constraintExists( $table, $name ) === false
+				) {
 					$this->_execute( $stmt );
 					$this->_status( 'done' );
 				} else {
@@ -166,8 +167,9 @@ class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Abstract
 			{
 				$this->_msg( sprintf( 'Deleting constraint "%1$s": ', $name ), 1 );
 
-				if( $this->_schema->constraintExists( $table, $name ) === true )
-				{
+				if( $this->_schema->tableExists( $table ) === true
+					&& $this->_schema->constraintExists( $table, $name ) === true
+				) {
 					$this->_execute( $stmt );
 					$this->_status( 'done' );
 				} else {
@@ -182,8 +184,9 @@ class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Abstract
 			{
 				$this->_msg( sprintf( 'Dropping index "%1$s": ', $name ), 1 );
 
-				if( $this->_schema->indexExists( $table, $name ) === true )
-				{
+				if( $this->_schema->tableExists( $table ) === true
+					&& $this->_schema->indexExists( $table, $name ) === true
+				) {
 					$this->_execute( $stmt );
 					$this->_status( 'done' );
 				} else {
