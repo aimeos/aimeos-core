@@ -15,7 +15,6 @@ class MW_Setup_Task_CustomerModifyIndexes extends MW_Setup_Task_Abstract
 		'add' => array (
 			'mshop_customer_list' => array (
 				'fk_mscusli_pid' => 'ALTER TABLE "mshop_customer_list" ADD INDEX "fk_mscusli_pid" ("parentid")',
-				'unq_mscusli_sid_pid_dm_rid_tid' => 'ALTER TABLE "mshop_customer_list" ADD UNIQUE INDEX "unq_mscusli_sid_pid_dm_rid_tid" ("siteid", "parentid", "domain", "refid", "typeid")'
 			),
 		),
 		'delete' => array (

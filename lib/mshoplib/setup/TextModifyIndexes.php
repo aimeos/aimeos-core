@@ -15,7 +15,6 @@ class MW_Setup_Task_TextModifyIndexes extends MW_Setup_Task_Abstract
 		'add' => array(
 			'mshop_text_list' => array (
 				'fk_mstexli_pid' => 'ALTER TABLE "mshop_text_list" ADD INDEX "fk_mstexli_pid" ("parentid")',
-				'unq_mstexli_sid_pid_dm_rid_tid' => 'ALTER TABLE "mshop_text_list" ADD UNIQUE INDEX "unq_mstexli_sid_pid_dm_rid_tid" ("siteid", "parentid", "domain", "refid", "typeid")',
 			)
 		),
 		'delete' => array(

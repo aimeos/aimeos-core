@@ -188,8 +188,8 @@ CREATE TABLE "mshop_text_list" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mstexli_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "unq_mstexli_sid_pid_dm_rid_tid"
-	UNIQUE ("siteid", "parentid", "domain", "refid", "typeid"),
+CONSTRAINT "unq_mstexli_sid_dm_rid_tid_pid"
+	UNIQUE ("siteid", "domain", "refid", "typeid", "parentid"),
 CONSTRAINT "fk_mstexli_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_text" ("id")
@@ -209,9 +209,7 @@ CONSTRAINT "fk_mstexli_typeid"
 
 CREATE INDEX "idx_mstexli_sid_stat_start_end" ON "mshop_text_list" ("siteid", "status", "start", "end");
 
-CREATE INDEX "idx_mstexli_sid_rid_dom_tid" ON "mshop_text_list" ("siteid", "refid", "domain", "typeid");
-
-CREATE INDEX "idx_mstexli_pid_sid_rid" ON "mshop_text_list" ("parentid", "siteid", "refid");
+CREATE INDEX "idx_mstexli_pid_sid_rid_dom_tid" ON "mshop_text_list" ("parentid", "siteid", "refid", "domain", "typeid");
 
 CREATE INDEX "idx_mstexli_pid_sid_start" ON "mshop_text_list" ("parentid", "siteid", "start");
 
