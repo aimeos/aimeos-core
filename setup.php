@@ -109,6 +109,7 @@ try
 	}
 
 	$conf = new MW_Config_Array( array(), $confPaths );
+	$conf = new MW_Config_Decorator_Memory( $conf );
 	$ctx->setConfig( $conf );
 
 	if( ( $dbconfig = $conf->get( 'resource/db' ) ) === null ) {
