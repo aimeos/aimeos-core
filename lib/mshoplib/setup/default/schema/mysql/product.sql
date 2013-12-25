@@ -190,8 +190,8 @@ CREATE TABLE "mshop_product_list" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_msproli_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "unq_msproli_sid_pid_dm_rid_tid"
-	UNIQUE ("siteid", "parentid", "domain", "refid", "typeid"),
+CONSTRAINT "unq_msproli_sid_dm_rid_tid_pid"
+	UNIQUE ("siteid", "domain", "refid", "typeid", "parentid"),
 CONSTRAINT "fk_msproli_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_product" ("id")
@@ -211,9 +211,7 @@ CONSTRAINT "fk_msproli_typeid"
 
 CREATE INDEX "idx_msproli_sid_stat_start_end" ON "mshop_product_list" ("siteid", "status", "start", "end");
 
-CREATE INDEX "idx_msproli_sid_rid_dom_tid" ON "mshop_product_list" ("siteid", "refid", "domain", "typeid");
-
-CREATE INDEX "idx_msproli_pid_sid_rid" ON "mshop_product_list" ("parentid", "siteid", "refid");
+CREATE INDEX "idx_msproli_pid_sid_rid_dom_tid" ON "mshop_product_list" ("parentid", "siteid", "refid", "domain", "typeid");
 
 CREATE INDEX "idx_msproli_pid_sid_start" ON "mshop_product_list" ("parentid", "siteid", "start");
 

@@ -269,8 +269,8 @@ CREATE TABLE "mshop_customer_list" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mscusli_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "unq_mscusli_sid_pid_dm_rid_tid"
-	UNIQUE ("siteid", "parentid", "domain", "refid", "typeid"),
+CONSTRAINT "unq_mscusli_sid_dm_rid_tid_pid"
+	UNIQUE ("siteid", "domain", "refid", "typeid", "parentid"),
 CONSTRAINT "fk_mscusli_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_customer" ("id")
@@ -290,9 +290,7 @@ CONSTRAINT "fk_mscusli_typeid"
 
 CREATE INDEX "idx_mscusli_sid_stat_start_end" ON "mshop_customer_list" ("siteid", "status", "start", "end");
 
-CREATE INDEX "idx_mscusli_sid_rid_dom_tid" ON "mshop_customer_list" ("siteid", "refid", "domain", "typeid");
-
-CREATE INDEX "idx_mscusli_pid_sid_rid" ON "mshop_customer_list" ("parentid", "siteid", "refid");
+CREATE INDEX "idx_mscusli_pid_sid_rid_dom_tid" ON "mshop_customer_list" ("parentid", "siteid", "refid", "domain", "typeid");
 
 CREATE INDEX "idx_mscusli_pid_sid_start" ON "mshop_customer_list" ("parentid", "siteid", "start");
 

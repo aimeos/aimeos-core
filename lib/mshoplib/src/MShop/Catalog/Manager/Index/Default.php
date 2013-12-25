@@ -218,33 +218,24 @@ class MShop_Catalog_Manager_Index_Default
 		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'list' );
 		$catalogSearch = $catalogListManager->createSearch( true );
 
-		// use index "idx_mscatli_sid_rid_dom_tid" if only the given products should be indexed
-		// use index "unq_mscatli_sid_pid_dm_rid_tid" if all products should be indexed
-		$sort = array( $catalogSearch->sort( '+', 'catalog.list.siteid' ) );
-		$expr = array();
+		$expr = array( $catalogSearch->compare( '==', 'catalog.list.domain', 'product' ) );
 
-		if( !empty( $paramIds ) )
-		{
+		if( !empty( $paramIds ) ) {
 			$expr[] = $catalogSearch->compare( '==', 'catalog.list.refid', $paramIds );
-			$sort[] = $catalogSearch->sort( '+', 'catalog.list.refid' );
 		}
-		else
-		{
-			$sort[] = $catalogSearch->sort( '+', 'catalog.list.parentid' );
-		}
-
-		$expr[] = $catalogSearch->compare( '==', 'catalog.list.domain', 'product' );
-		$sort[] = $catalogSearch->sort( '+', 'catalog.list.domain' );
 
 		$expr[] = $catalogSearch->getConditions();
 
-		if( empty( $paramIds ) ) {
-			$sort[] = $catalogSearch->sort( '+', 'catalog.list.refid' );
-		}
-
-		$sort[] = $catalogSearch->sort( '+', 'catalog.list.typeid' );
-
 		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
+
+		// use index "unq_mscatli_sid_dm_rid_tid_pid"
+		$sort = array(
+			$catalogSearch->sort( '+', 'catalog.list.siteid' ),
+			$catalogSearch->sort( '+', 'catalog.list.domain' ),
+			$catalogSearch->sort( '+', 'catalog.list.refid' ),
+			$catalogSearch->sort( '+', 'catalog.list.typeid' ),
+			$catalogSearch->sort( '+', 'catalog.list.parentid' ),
+		);
 		$catalogSearch->setSortations( $sort );
 
 		$start = 0;
@@ -268,10 +259,10 @@ class MShop_Catalog_Manager_Index_Default
 
 			$this->_writeIndex( $search, $domains, $size );
 
-			$count = count( $ids );
+			$count = count( $result );
 			$start += $count;
 		}
-		while( $count == $catalogSearch->getSliceSize() );
+		while( $count == $search->getSliceSize() );
 	}
 
 
@@ -361,6 +352,7 @@ class MShop_Catalog_Manager_Index_Default
 
 		do
 		{
+			$search->setSlice( $start, $size );
 			$products = $this->_productManager->searchItems( $search, $domains );
 
 			try
@@ -385,7 +377,6 @@ class MShop_Catalog_Manager_Index_Default
 
 			$count = count( $products );
 			$start += $count;
-			$search->setSlice( $start, $size );
 		}
 		while( $count == $search->getSliceSize() );
 	}
