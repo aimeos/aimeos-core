@@ -29,10 +29,18 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
+		'catalog.index.price.quantity' => array(
+			'code'=>'catalog.index.price.quantity',
+			'internalcode'=>'mcatinpr."quantity"',
+			'label'=>'Product price quantity',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
 		'catalog.index.price.value' => array(
 			'code'=>'catalog.index.price.value()',
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."value"',
-			'label'=>'Product price, parameter(<list type code>,<currency ID>,<price type code>)',
+			'label'=>'Product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 			'public' => false,
@@ -40,11 +48,59 @@ class MShop_Catalog_Manager_Index_Price_Default
 		'sort:catalog.index.price.value' => array(
 			'code'=>'sort:catalog.index.price.value()',
 			'internalcode'=>'mcatinpr."value"',
-			'label'=>'Sort product price, parameter(<list type code>,<currency ID>,<price type code>)',
+			'label'=>'Sort product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 			'public' => false,
-		)
+		),
+		'catalog.index.price.costs' => array(
+			'code'=>'catalog.index.price.costs()',
+			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."costs"',
+			'label'=>'Product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'decimal',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'sort:catalog.index.price.costs' => array(
+			'code'=>'sort:catalog.index.price.costs()',
+			'internalcode'=>'mcatinpr."costs"',
+			'label'=>'Sort product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'catalog.index.price.rebate' => array(
+			'code'=>'catalog.index.price.rebate()',
+			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."rebate"',
+			'label'=>'Product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'decimal',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'sort:catalog.index.price.rebate' => array(
+			'code'=>'sort:catalog.index.price.rebate()',
+			'internalcode'=>'mcatinpr."rebate"',
+			'label'=>'Sort product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'catalog.index.price.taxrate' => array(
+			'code'=>'catalog.index.price.taxrate()',
+			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."taxrate"',
+			'label'=>'Product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'decimal',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'sort:catalog.index.price.taxrate' => array(
+			'code'=>'sort:catalog.index.price.taxrate()',
+			'internalcode'=>'mcatinpr."taxrate"',
+			'label'=>'Sort product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
 	);
 
 
@@ -72,7 +128,11 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 		$string = $search->getConditionString( $types, array( 'siteid' => 'mcatinpr."siteid"' ) );
 
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.quantity'], 'mcatinpr."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.value'], 'mcatinpr."siteid"', $site );
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.costs'], 'mcatinpr."siteid"', $site );
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.rebate'], 'mcatinpr."siteid"', $site );
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.taxrate'], 'mcatinpr."siteid"', $site );
 
 
 		$confpath = 'mshop/catalog/manager/index/price/default/submanagers';
