@@ -555,6 +555,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$stmt->bind( 10, $editor );
 		$stmt->bind( 11, $date );//ctime
 
-		$stmt->execute()->finish();
+		try {
+			$result = $stmt->execute()->finish();
+		} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
 	}
 }
