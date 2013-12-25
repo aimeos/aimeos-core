@@ -293,7 +293,10 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 						$stmt->bind( 7, $date ); // mtime
 						$stmt->bind( 8, $editor );
 						$stmt->bind( 9, $date ); // ctime
-						$result = $stmt->execute()->finish();
+
+						try {
+							$result = $stmt->execute()->finish();
+						} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
 					}
 				}
 			}

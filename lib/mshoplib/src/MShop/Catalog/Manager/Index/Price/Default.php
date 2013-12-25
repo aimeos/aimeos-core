@@ -281,7 +281,10 @@ class MShop_Catalog_Manager_Index_Price_Default
 						$stmt->bind( 12, $date );//mtime
 						$stmt->bind( 13, $editor );
 						$stmt->bind( 14, $date );//ctime
-						$result = $stmt->execute()->finish();
+
+						try {
+							$result = $stmt->execute()->finish();
+						} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
 					}
 				}
 			}
