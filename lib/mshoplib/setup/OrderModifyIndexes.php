@@ -24,7 +24,6 @@ class MW_Setup_Task_OrderModifyIndexes extends MW_Setup_Task_Abstract
 				'idx_msord_pdate_pstat_dstat' => 'ALTER TABLE "mshop_order" DROP INDEX "idx_msord_pdate_pstat_dstat"',
 				'idx_msord_pstat_dstat_email' => 'ALTER TABLE "mshop_order" DROP INDEX "idx_msord_pstat_dstat_email"',
 				'idx_msord_pstat_dstat_flag' => 'ALTER TABLE "mshop_order" DROP INDEX "idx_msord_pstat_dstat_flag"',
-				'idx_msord_sid_pdate' => 'ALTER TABLE "mshop_order" DROP INDEX "idx_msord_sid_pdate"',
 			),
 			'mshop_order_base_address' => array(
 				'idx_msordbaad_bid_typ_sid' => 'ALTER TABLE "mshop_order_base_address" DROP INDEX "idx_msordbaad_bid_typ_sid"'
