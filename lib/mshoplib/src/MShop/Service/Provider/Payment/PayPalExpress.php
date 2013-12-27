@@ -359,50 +359,41 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			return null;
 		}
 
-		try
+		$urlQuery = http_build_query( $additional, '', '&' );
+
+		//validation
+		$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
+
+
+		if( $response !== 'VERIFIED' )
 		{
-			$urlQuery = http_build_query( $additional, '', '&' );
-
-			//validation
-			$response = $this->_getCommunication()->transmit( $this->_getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
-
-
-			if( $response !== 'VERIFIED' )
-			{
-				$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
-				throw new MShop_Service_Exception( $msg );
-			}
-
-
-			$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-			$orderBaseManager = $orderManager->getSubManager('base');
-			$order = $orderManager->getItem( $additional['invoice'] );
-			$baseid = $order->getBaseId();
-			$baseItem = $orderBaseManager->getItem( $baseid );
-			$serviceItem = $this->_getOrderServiceItem( $baseid );
-
-			$this->_checkIPN( $orderBaseManager, $baseItem, $additional );
-
-			$status['PAYMENTSTATUS'] = $additional['payment_status'];
-			if( isset( $additional['pending_reason'] ) ) {
-				$status['PENDINGREASON'] = $additional['pending_reason'];
-			}
-
-
-			$this->_saveAttributes( array( 'TRANSACTIONID' => $additional['txn_id'] ), $serviceItem );
-			$this->_saveAttributes( array( $additional['txn_id'] => $additional['payment_status'] ), $serviceItem, 'payment/paypal/txn' );
-
-			$this->_setPaymentStatus( $order, $status );
-			$orderManager->saveItem( $order );
-
-			return $order;
+			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
+			throw new MShop_Service_Exception( $msg );
 		}
-		catch ( MShop_Service_Exception $e )
-		{
-			$this->_getContext()->getLogger()->log( $e->getMessage(), MW_Logger_Abstract::NOTICE );
 
-			return null;
+
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
+		$orderBaseManager = $orderManager->getSubManager('base');
+		$order = $orderManager->getItem( $additional['invoice'] );
+		$baseid = $order->getBaseId();
+		$baseItem = $orderBaseManager->getItem( $baseid );
+		$serviceItem = $this->_getOrderServiceItem( $baseid );
+
+		$this->_checkIPN( $orderBaseManager, $baseItem, $additional );
+
+		$status['PAYMENTSTATUS'] = $additional['payment_status'];
+		if( isset( $additional['pending_reason'] ) ) {
+			$status['PENDINGREASON'] = $additional['pending_reason'];
 		}
+
+
+		$this->_saveAttributes( array( 'TRANSACTIONID' => $additional['txn_id'] ), $serviceItem );
+		$this->_saveAttributes( array( $additional['txn_id'] => $additional['payment_status'] ), $serviceItem, 'payment/paypal/txn' );
+
+		$this->_setPaymentStatus( $order, $status );
+		$orderManager->saveItem( $order );
+
+		return $order;
 	}
 
 
