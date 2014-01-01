@@ -106,6 +106,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	{
 		$attributes = array(
 			'paypalexpress.ApiUsername' => 'user',
+			'paypalexpress.AccountEmail' => 'user@test.de',
 			'paypalexpress.ApiPassword' => 'pw',
 			'paypalexpress.ApiSignature' => '1df23eh67',
 			'payment.url-cancel' => 'http://cancelUrl',
@@ -114,8 +115,9 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$result = $this->_object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 10, count( $result ) );
+		$this->assertEquals( 12, count( $result ) );
 		$this->assertEquals( null, $result['paypalexpress.ApiUsername'] );
+		$this->assertEquals( null, $result['paypalexpress.AccountEmail'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiPassword'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiSignature'] );
 		$this->assertEquals( null, $result['payment.url-cancel'] );
@@ -172,24 +174,65 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 	public function testUpdateSync()
 	{
+		//DoExpressCheckout
+
 		$what = array( 'TOKEN' => 'UT-99999999' );
+
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=updatesync method error';
-		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111111&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM='.$this->_order->getId();
+		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111110&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM='.$this->_order->getId();
 
 		$com = new MW_Communication_TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->_object->setCommunication( $com );
 
-		$response = array ( 'token' => 'UT-99999999', 'PayerID' => 'PaypalUnitTestBuyer', 'orderid' => $this->_order->getId() );
-
-		$testData = array(
-			'TOKEN' => 'UT-99999999',
-			'PAYERID' => 'PaypalUnitTestBuyer',
-			'TRANSACTIONID' => '111111111',
-		);
-
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
+
+		$response = array(
+			'token' => 'UT-99999999',
+			'PayerID' => 'PaypalUnitTestBuyer',
+			'orderid' => $this->_order->getId()
+		);
+
+		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $this->_object->updateSync( $response ) );
+
+		//IPN Call
+		$price = $orderBaseManager->getItem( $this->_order->getBaseId() )->getPrice();
+		$amount = $price->getValue() + $price->getCosts();
+		$what = array(
+			'residence_country' => 'US',
+			'address_city' => 'San+Jose',
+			'first_name' => 'John',
+			'payment_status' => 'Completed',
+			'invoice' => $this->_order->getId(),
+			'txn_id' => '111111111',
+			'payment_amount' => $amount,
+			'receiver_email' => 'selling2@metaways.de',
+		);
+		$error = 'INVALID';
+		$success = 'VERIFIED';
+
+		$com = new MW_Communication_TestPayPalExpress();
+		$com->addRule( $what, $error, $success );
+		$this->_object->setCommunication( $com );
+
+
+		$response = array (
+			'residence_country' => 'US',
+			'receiver_email' => 'selling2@metaways.de',
+			'address_city' => 'San+Jose',
+			'first_name' => 'John',
+			'payment_status' => 'Completed',
+			'invoice' => $this->_order->getId(),
+			'txn_id' => '111111111',
+			'payment_amount' => $amount
+		);
+		$testData = array(
+			'TRANSACTIONID' => '111111111',
+			'PAYERID' => 'PaypalUnitTestBuyer',
+			'111111110' => 'Pending',
+			'111111111' => 'Completed'
+		);
 
 		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $this->_object->updateSync( $response ) );
 
@@ -197,14 +240,25 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
 
+		$attrManager = $orderBaseManager->getSubManager('service')->getSubManager('attribute');
+
 		$attributeList = array();
 		foreach( $attributes as $attribute ){
+			//remove attr where txn ids as keys, because next test with same txn id would fail
+			if( $attribute->getCode() === '111111110' || $attribute->getCode() === '111111111' ) {
+				$attrManager->deleteItem( $attribute->getId() );
+			}
+
 			$attributeList[ $attribute->getCode() ] = $attribute;
 		}
 
 		foreach( $testData AS $key => $value ) {
 			$this->assertEquals( $attributeList[ $key ]->getValue(), $testData[ $key ] );
 		}
+
+		$this->_order = $orderManager->getItem( $this->_order->getId() );
+
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->_order->getPaymentStatus() );
 	}
 
 
@@ -228,7 +282,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$testData = array(
 			'TOKEN' => 'UT-99999999',
-			'PAYERID' => 'PaypalUnitTestBuyer',
 			'TRANSACTIONID' => '111111111',
 			'REFUNDTRANSACTIONID' => '88888888'
 		);

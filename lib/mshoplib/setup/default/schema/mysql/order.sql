@@ -380,6 +380,8 @@ CONSTRAINT "fk_msordbaseat_ordservid"
 
 CREATE INDEX "idx_msordbaseat_si_oi_ty_cd_va" ON "mshop_order_base_service_attr" ("siteid", "ordservid", "type", "code", "value");
 
+CREATE INDEX "idx_msordbaseat_si_cd_va" ON "mshop_order_base_service_attr" ("siteid", "code", "value");
+
 --
 -- Status of the order
 --
