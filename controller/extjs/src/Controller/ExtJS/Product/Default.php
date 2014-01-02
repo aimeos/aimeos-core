@@ -108,7 +108,6 @@ class Controller_ExtJS_Product_Default
 			$this->_manager->saveItem( $item );
 			$id = $item->getId();
 
-			//  &&  isset( $entry->{'isCopiedItemOlDId'} 
 			if( isset( $entry->{'_copy'} ) ) {
 				$this->_copyListItems( $oldId, $id, 'product' );
 			}
