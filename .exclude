@@ -3,7 +3,6 @@
 ./.gitignore
 ./.travis.yml
 ./.tx
-./dev
 ./ext/*
 ./ext/.gitignore
 ./config/resource.php
