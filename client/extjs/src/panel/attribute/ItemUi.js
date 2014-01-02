@@ -18,7 +18,7 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		this.title = _('Attribute item details');
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
-		
+
 		var storeConfig = {
 			baseParams: {
 				site: MShop.config.site["locale.site.code"],
@@ -123,7 +123,7 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		MShop.panel.attribute.ItemUi.superclass.initComponent.call(this);
 	},
 
-	
+
 	afterRender : function()
 	{
 		var label = this.record ? this.record.data['attribute.label'] : 'new';

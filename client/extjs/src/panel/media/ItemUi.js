@@ -14,9 +14,9 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	siteidProperty : 'media.siteid',
 
 	initComponent : function() {
-		
+
 		this.title = _('Media item details');
-		
+
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
@@ -126,7 +126,7 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		MShop.panel.media.ItemUi.superclass.initComponent.call(this);
 	},
 
-	
+
 	afterRender : function()
 	{
 		var label = this.record ? this.record.data['media.label'] : 'new';

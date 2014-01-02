@@ -87,6 +87,14 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 				hidden : true
 			}
 		];
+	},
+
+	initToolbar: function() {
+		this.tbar = [
+			this.actionAdd,
+			this.actionEdit,
+			this.actionDelete
+		];
 	}
 } );
 

@@ -123,4 +123,56 @@ class Controller_ExtJS_Service_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}
+
+
+	public function testCopy()
+	{
+		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+		$listManager = $serviceManager->getSubManager('list');
+
+		$search = $serviceManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.code', 'unitcode' ) );
+		$result = $serviceManager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No service item found' );
+		}
+
+		$saveParams = (object) array(
+			'site' => 'unittest',
+			'items' => (object) array(
+				'service.id' => $item->getId(),
+				'service.position' => 1,
+				'service.label' => 'test service',
+				'service.status' => 1,
+				'service.code' => 'test code',
+				'service.provider' => 'test provider',
+				'service.config' => array( 'url' => 'www.url.de' ),
+				'service.typeid' => $item->getTypeId(),
+				'_copy' => true
+			),
+		);
+
+		$searchParams = (object) array(
+			'site' => 'unittest',
+			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'service.code' => 'unitcode' ) ) ) )
+		);
+
+		$saved = $this->_object->saveItems( $saveParams );
+		$searched = $this->_object->searchItems( $searchParams );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.list.parentid', $item->getId() ) );
+		$listItems = $listManager->searchItems( $search );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.list.parentid', $saved['items']->{'service.id'} ) );
+		$copiedListItems = $listManager->searchItems( $search );
+
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'service.id'} );
+		$this->_object->deleteItems( $deleteParams );
+
+		$this->assertTrue( !empty( $copiedListItems ) );
+		$this->assertEquals( count($listItems), count( $copiedListItems ) );
+	}
 }

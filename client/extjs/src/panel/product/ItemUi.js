@@ -145,7 +145,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		MShop.panel.product.ItemUi.superclass.initComponent.call(this);
 	},
-	
+
 
 	afterRender : function() {
 
@@ -155,19 +155,19 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
-	
-	
+
+
 	onStoreWrite : function(store, action, result, transaction, rs) {
 
         var records = Ext.isArray(rs) ? rs : [rs];
         var ids = [];
 
         MShop.panel.product.ItemUi.superclass.onStoreWrite.apply( this, arguments );
-        
+
         for( var i = 0; i < records.length; i++ ) {
         	ids.push( records[i].id );
         }
-         
+
         MShop.API.Product.finish( MShop.config.site["locale.site.code"], ids );
 	}
 });

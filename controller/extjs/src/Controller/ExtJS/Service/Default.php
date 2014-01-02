@@ -52,6 +52,12 @@ class Controller_ExtJS_Service_Default
 
 		foreach( $items as $entry )
 		{
+			if( isset( $entry->{'_copy'} ) )
+			{
+				$oldId = $entry->{'service.id'};
+				$entry->{'service.id'} = null;
+			}
+
 			$item = $this->_manager->createItem();
 
 			if( isset( $entry->{'service.id'} ) ) { $item->setId( $entry->{'service.id'} ); }
@@ -64,7 +70,13 @@ class Controller_ExtJS_Service_Default
 			if( isset( $entry->{'service.status'} ) ) { $item->setStatus( $entry->{'service.status'} ); }
 
 			$this->_manager->saveItem( $item );
-			$ids[] = $item->getId();
+			$id = $item->getId();
+
+			if( isset( $entry->{'_copy'} ) ) {
+				$this->_copyListItems( $oldId, $id, 'service' );
+			}
+
+			$ids[] = $id;
 		}
 
 		$search = $this->_manager->createSearch();

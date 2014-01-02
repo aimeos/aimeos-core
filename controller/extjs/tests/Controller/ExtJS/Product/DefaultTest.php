@@ -124,6 +124,58 @@ class Controller_ExtJS_Product_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCopy()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$listManager = $productManager->getSubManager('list');
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
+		$result = $productManager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No product item found' );
+		}
+
+		$saveParams = (object) array(
+			'site' => 'unittest',
+			'items' => (object) array(
+				'product.id' => $item->getId(),
+				'product.code' => 'CNEcopy',
+				'product.label' => 'CNE copy test',
+				'product.status' => 1,
+				'product.datestart' => '2000-01-01 00:00:00',
+				'product.dateend' => '2001-01-01 00:00:00',
+				'product.suppliercode' => '',
+				'product.typeid' => $item->getTypeId(),
+				'_copy' => true,
+			),
+		);
+
+		$searchParams = (object) array(
+			'site' => 'unittest',
+			'condition' => (object) array( '&&' => array( 0 => array( '==' => (object) array( 'product.code' => 'CNEcopy' ) ) ) )
+		);
+
+		$saved = $this->_object->saveItems( $saveParams );
+		$searched = $this->_object->searchItems( $searchParams );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.list.parentid', $item->getId() ) );
+		$listItems = $listManager->searchItems( $search );
+
+		$search = $listManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.list.parentid', $saved['items']->{'product.id'} ) );
+		$copiedListItems = $listManager->searchItems( $search );
+
+		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'product.id'} );
+		$this->_object->deleteItems( $deleteParams );
+
+		$this->assertTrue( !empty( $copiedListItems ) );
+		$this->assertEquals( count($listItems), count( $copiedListItems ) );
+	}
+
+
 	public function testFinish()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
