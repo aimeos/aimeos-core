@@ -18,7 +18,31 @@ interface MShop_Common_Manager_List_Interface
 	extends MShop_Common_Manager_Interface
 {
 	/**
-	 * Creates new common list item object.
+	 * Moves an existing list item to a new position.
+	 *
+	 * The position is in front of the item with the ID given in $ref or at the
+	 * end of the list if $ref is null.
+	 *
+	 * <code>
+	 * // item ID list in database: 1, 2, 3, 4
+	 * $listManager->moveItem( 2, 4 );
+	 * // result: 1, 3, 2, 4
+	 *
+	 * // item ID list in database: 1, 2, 3, 4
+	 * $listManager->moveItem( 2, null );
+	 * // result: 1, 3, 4, 2
+	 * </code>
+	 *
+	 * The method updates the position of the record with the given ID in $id
+	 * and of all records afterwards. The gap left behind by the moved record
+	 * is closed automatically. To retrive the items according to the new
+	 * positions, you have to sort them by the '<domain>.list.position' key:
+	 *
+	 * <code>
+	 * $search = $listManager->createSearch();
+	 * $search->setSortations( array( $search->sort( '+', 'product.list.position' ) ) );
+	 * $result = $listManager->searchItems( $search );
+	 * </code>
 	 *
 	 * @param integer $id Id of the item which should be moved
 	 * @param integer|null $ref Id where the given Id should be inserted before (null for appending)
@@ -39,9 +63,14 @@ interface MShop_Common_Manager_List_Interface
 	 *     $search->getConditions(),
 	 * );
 	 * $search->setConditions( $search->combine( '&&', $expr ) );
-	 * $result = $searchRefItems( $search, array( 'text', 'media' ) );
 	 *
-	 * // The result in the example will be:
+	 * $total = 0;
+	 * $result = $listManager->searchRefItems( $search, array( 'text', 'media' ) );
+	 * </code>
+	 *
+	 * The result in the example will be:
+	 *
+	 * <code>
 	 * array(
 	 *     'attribute' => array(
 	 *         <attribute id 1> => <attribute item with text and media items>,
@@ -53,6 +82,17 @@ interface MShop_Common_Manager_List_Interface
 	 *     ),
 	 * )
 	 * </code>
+	 *
+	 * The list of domains used in the compare() method will be the domains that
+	 * are available as keys in the result array if at least one active
+	 * referenced item is found in that domain. The list of domains in the
+	 * searchRefItems() method are the items that will be included in the
+	 * referenced items and are available via the $item->getRefItems() method.
+	 *
+	 * Please be aware that the value in $total will be the total number of list
+	 * items. The number of referenced items returned can be lower if multiple
+	 * list items in one slice point to the same referenced item. In this case
+	 * the referenced item is only returned once in that slice.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch referenced items for
