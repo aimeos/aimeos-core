@@ -16,22 +16,22 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 	 * @cfg {String} idProperty (required)
 	 */
 	idProperty: null,
-	
+
 	/**
 	 * @cfg {String} idProperty (required)
 	 */
 	domain: null,
-	
+
 	/**
 	 * @cfg {String} exportMethod (required)
 	 */
 	exportMethod: null,
-	
+
 	/**
 	 * @cfg {Object} importMethod (optional)
 	 */
 	importMethod: null,
-	
+
 	rootVisible : true,
 	useArrows : true,
 	autoScroll : true,
@@ -45,17 +45,17 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 	{
 		// store is used for data transfer mainly
 		this.initStore();
-		
+
 		this.on('movenode', this.onMoveNode, this);
 		this.on('containercontextmenu', this.onContainerContextMenu, this);
 		this.on('contextmenu', this.onContextMenu, this);
 		this.on('dblclick', this.onOpenEditWindow.createDelegate(this, [ 'edit' ]), this);
 		this.on('expandnode', this.onExpandNode, this);
 		this.getSelectionModel().on('selectionchange', this.onSelectionChange, this, { buffer : 10 });
-		
+
 		MShop.panel.AbstractTreeUi.superclass.initComponent.call(this);
 	},
-	
+
 	afterRender: function() {
 		MShop.panel.AbstractTreeUi.superclass.afterRender.apply(this, arguments);
 
@@ -95,12 +95,17 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 		var domain = this.domain;
 		Ext.each(node["childNodes"], function(node) {
 			if(node["attributes"].hasOwnProperty(domain + ".hasChildren") && node["attributes"][domain + ".hasChildren"] === false) {
-				node.ui.ecNode.style.visibility = 'hidden'; 
+				node.ui.ecNode.style.visibility = 'hidden';
 			}
 		}, this);
 	},
-	
-	initLoader : function()
+
+	/**
+	 * Init Loader
+	 *
+	 * @param {} showRootId
+	 */
+	initLoader : function(showRootId)
 	{
 		var domain = this.domain;
 		this.loader = new Ext.tree.TreeLoader( {
@@ -110,7 +115,7 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 				baseParams : {
 					site : MShop.config.site["locale.site.code"]
 				},
-				
+
 				directFn : MShop.API[this.recordName].getTree,
 
 				processResponse : function(response, node, callback, scope)
@@ -119,9 +124,9 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 					if (node.id === 'root') {
 						// we create the node to have it in the store
 						var newNode = this.createNode(response.responseText.items);
-		
+
 						node.setId(response.responseText.items[domain + '.id']);
-						node.setText(response.responseText.items[domain + '.label']);
+						node.setText((showRootId !== true) ? response.responseText.items[domain + '.label'] : response.responseText.items[domain + '.id'] + " - " + response.responseText.items[domain + '.label']);
 						node.getUI().addClass(newNode.attributes.cls);
 						node.getOwnerTree().enable();
 						node.getOwnerTree().actionAdd.setDisabled(node.id !== 'root');
@@ -130,10 +135,10 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 					response.responseData = response.responseText.items.children;
 					return Ext.tree.TreeLoader.prototype.processResponse.apply(this, arguments);
 				},
-				
+
 				createNode : Ext.tree.TreeLoader.prototype.createNode.createInterceptor( this.inspectCreateNode, this )
 		});
-		
+
 		this.loader.on('loadexception', function(loader, node, response) {
 
 			if (node.id === 'root') {
@@ -308,8 +313,8 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 			},
 			this );
 	},
-	
-	
+
+
 	onOpenEditWindow : function(action)
 	{
 		var record;
@@ -325,7 +330,7 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 				store : this.store
 			}
 		);
-		
+
 		itemUi.show();
 	},
 

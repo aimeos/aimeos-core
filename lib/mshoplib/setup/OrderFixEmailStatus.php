@@ -64,7 +64,7 @@ class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
 	 */
 	protected function _process( array $stmts )
 	{
-		$this->_msg( 'Fixing order email status values', 0 ); $this->_status( '' );
+		$this->_msg( 'Fixing order email status values', 0 );
 
 		if( $this->_schema->tableExists( 'mshop_order_status' ) === true )
 		{
@@ -81,6 +81,7 @@ class MW_Setup_Task_OrderFixEmailStatus extends MW_Setup_Task_Abstract
 				7 => 'email-returned',
 			);
 
+			$cntRows = 0;
 			foreach( $mapping as $value => $type )
 			{
 				$stmt = $this->_conn->create( $stmts['change'] );

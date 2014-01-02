@@ -85,7 +85,6 @@ try
 		usage();
 	}
 
-
 	spl_autoload_register( 'setup_autoload' );
 
 	require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
@@ -106,10 +105,11 @@ try
 
 	$confPaths = $arcavias->getConfigPaths( 'mysql' );
 	if( isset( $options['config'] ) ) {
-		$confPaths[] = $options['config'];
+		$confPaths = array_merge( $confPaths, (array) $options['config'] );
 	}
 
 	$conf = new MW_Config_Array( array(), $confPaths );
+	$conf = new MW_Config_Decorator_Memory( $conf );
 	$ctx->setConfig( $conf );
 
 	if( ( $dbconfig = $conf->get( 'resource/db' ) ) === null ) {

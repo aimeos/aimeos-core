@@ -181,17 +181,107 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array() );
 
 		$this->assertEquals( 1, count( $result ) );
+	}
+
+
+	public function testSearchItemsIdNull()
+	{
+		$search = $this->_object->createSearch();
 
 		$search->setConditions( $search->compare( '!=', 'catalog.index.price.id', null ) );
 		$result = $this->_object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+	}
 
+
+	public function testSearchItemsQuantity()
+	{
+		$search = $this->_object->createSearch();
+
+		$search->setConditions( $search->compare( '==', 'catalog.index.price.quantity', 1 ) );
+		$result = $this->_object->searchItems( $search, array() );
+
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+	}
+
+
+	public function testSearchItemsQuantityValue()
+	{
+		$search = $this->_object->createSearch();
+
+		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
+		$expr = array(
+			$search->compare( '>=', $func, '10.00' ),
+			$search->compare( '==', 'catalog.index.price.quantity', 1 ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$sortfunc = $search->createFunction( 'sort:catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+
+		$result = $this->_object->searchItems( $search, array() );
+
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+	}
+
+
+	public function testSearchItemsValue()
+	{
+		$search = $this->_object->createSearch();
 
 		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '>=', $func, '18.00' ) );
 
 		$sortfunc = $search->createFunction( 'sort:catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+
+		$result = $this->_object->searchItems( $search, array() );
+
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+	}
+
+
+	public function testSearchItemsCosts()
+	{
+		$search = $this->_object->createSearch();
+
+		$func = $search->createFunction( 'catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
+		$search->setConditions( $search->compare( '>=', $func, '20.00' ) );
+
+		$sortfunc = $search->createFunction( 'sort:catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+
+		$result = $this->_object->searchItems( $search, array() );
+
+		$this->assertGreaterThanOrEqual( 1, count( $result ) );
+	}
+
+
+	public function testSearchItemsRebate()
+	{
+		$search = $this->_object->createSearch();
+
+		$func = $search->createFunction( 'catalog.index.price.rebate', array( 'default', 'EUR', 'default' ) );
+		$search->setConditions( $search->compare( '>', $func, '0.00' ) );
+
+		$sortfunc = $search->createFunction( 'sort:catalog.index.price.rebate', array( 'default', 'EUR', 'default' ) );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+
+		$result = $this->_object->searchItems( $search, array() );
+
+		$this->assertGreaterThanOrEqual( 1, count( $result ) );
+	}
+
+
+	public function testSearchItemsTaxrate()
+	{
+		$search = $this->_object->createSearch();
+
+		$func = $search->createFunction( 'catalog.index.price.taxrate', array( 'default', 'EUR', 'default' ) );
+		$search->setConditions( $search->compare( '==', $func, '19.00' ) );
+
+		$sortfunc = $search->createFunction( 'sort:catalog.index.price.taxrate', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->_object->searchItems( $search, array() );

@@ -265,7 +265,9 @@ class MShop_Catalog_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>', 'catalog.list.refid', 0 );
 		$expr[] = $search->compare( '==', 'catalog.list.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.list.dateend', '2099-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'catalog.list.config', null );
 		$expr[] = $search->compare( '==', 'catalog.list.position', 0 );
+		$expr[] = $search->compare( '==', 'catalog.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'catalog.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.list.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.list.editor', $this->_editor );
@@ -296,7 +298,7 @@ class MShop_Catalog_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->_object->searchItems($search);
-		$this->assertEquals( 45, count( $results ) );
+		$this->assertEquals( 44, count( $results ) );
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

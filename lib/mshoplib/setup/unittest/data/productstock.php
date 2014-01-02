@@ -24,7 +24,6 @@ return array (
 		array ( 'prodid' => 'product/EFGH', 'warehouseid' => 'unit_warehouse2', 'stocklevel' => 1300, 'backdate' => '2015-05-01 00:00:00' ),
 		array ( 'prodid' => 'product/IJKL', 'warehouseid' => 'unit_warehouse3', 'stocklevel' => 300, 'backdate' => '2006-06-01 00:00:00' ),
 		array ( 'prodid' => 'product/MNOP', 'warehouseid' => 'unit_warehouse4', 'stocklevel' => 200, 'backdate' => null ),
-		array ( 'prodid' => 'product/QRST', 'warehouseid' => 'unit_warehouse5', 'stocklevel' => 2100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:TESTP', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:TESTPSUB01', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:TESTSUB03', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),

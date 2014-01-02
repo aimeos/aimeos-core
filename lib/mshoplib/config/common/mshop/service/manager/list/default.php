@@ -9,13 +9,13 @@ return array(
 	'item' => array(
 		'insert' => '
 			INSERT INTO "mshop_service_list" ( "parentid", "siteid", "typeid", "domain", "refid", "start", "end",
-				"pos", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+				"config", "pos", "status", "mtime", "editor", "ctime" )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_service_list"
 			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-				"pos" = ?, "mtime" = ?, "editor" = ?
+				"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'delete' => '
@@ -47,8 +47,8 @@ return array(
 		',
 		'search' => '
 			SELECT mserli."id", mserli."parentid", mserli."siteid", mserli."typeid",
-				mserli."domain", mserli."refid", mserli."start", mserli."end", mserli."pos",
-				mserli."mtime", mserli."editor", mserli."ctime"
+				mserli."domain", mserli."refid", mserli."start", mserli."end", mserli."config",
+				mserli."pos", mserli."status", mserli."mtime", mserli."editor", mserli."ctime"
 			FROM "mshop_service_list" AS mserli
 			:joins
 			WHERE :cond

@@ -135,7 +135,8 @@ class MShop_Common_Manager_Address_Default
 
 		$config = $this->_context->getConfig();
 		$dbm = $this->_context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -188,11 +189,11 @@ class MShop_Common_Manager_Address_Default
 				$item->setId( $this->_newId( $conn, $this->_config['newid'] ) );
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch ( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}

@@ -96,7 +96,8 @@ class MShop_Common_Manager_List_Default
 		$config = $this->_getContext()->getConfig();
 		$locale = $this->_getContext()->getLocale();
 		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -120,16 +121,18 @@ class MShop_Common_Manager_List_Default
 			$statement->bind( 5, $item->getRefId(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 6, $item->getDateStart(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 7, $item->getDateEnd(), MW_DB_Statement_Abstract::PARAM_STR );
-			$statement->bind( 8, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$statement->bind( 8, json_encode( $item->getConfig() ), MW_DB_Statement_Abstract::PARAM_STR );
+			$statement->bind( 9, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$statement->bind( 10, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 
-			$statement->bind( 9, $time);//mtime
-			$statement->bind(10, $this->_getContext()->getEditor());
+			$statement->bind( 11, $time);//mtime
+			$statement->bind( 12, $this->_getContext()->getEditor());
 
 
 			if( $id !== null ) {
-				$statement->bind( 11, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$statement->bind( 13, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
-				$statement->bind( 11, $time ); //ctime
+				$statement->bind( 13, $time ); //ctime
 			}
 
 			$result = $statement->execute()->finish();
@@ -143,11 +146,11 @@ class MShop_Common_Manager_List_Default
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -321,12 +324,13 @@ class MShop_Common_Manager_List_Default
 
 
 	/**
-	 * Search for all text items based on the given critera.
+	 * Search for all list items based on the given critera.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of list items implementing MShop_Common_Item_List_Interface
-	 * @throws MShop_Common_Exception if creating items failed
+	 * @throws MShop_Exception if creating items failed
 	 * @see MW_Common_Criteria_SQL
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
@@ -337,7 +341,7 @@ class MShop_Common_Manager_List_Default
 
 		try
 		{
-			$domain = explode( '.', $this->_prefix);
+			$domain = explode( '.', $this->_prefix );
 
 			if ( ( $topdomain = array_shift( $domain ) ) === null ) {
 				throw new MShop_Exception( sprintf( 'Configuration not available' ) );
@@ -354,6 +358,10 @@ class MShop_Common_Manager_List_Default
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
+				if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null ) {
+					$row['config'] = array();
+				}
+
 				$map[ $row['id'] ] = $row;
 				$typeIds[ $row['typeid'] ] = null;
 			}
@@ -388,6 +396,83 @@ class MShop_Common_Manager_List_Default
 
 
 	/**
+	 * Search for all referenced items from the list based on the given critera.
+	 *
+	 * Only criteria from the list and list type can be used for searching and
+	 * sorting, but no criteria from the referenced items.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param array $ref List of domains to fetch referenced items for
+	 * @param integer &$total Number of items that are available in total
+	 * @return array Associative list of domains as keys and lists with pairs
+	 *	of IDs and items implementing MShop_Common_Item_Interface
+	 * @throws MShop_Exception If creating items failed
+	 * @see MW_Common_Criteria_SQL
+	 */
+	public function searchRefItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	{
+		$items = $map = array();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire();
+
+		try
+		{
+			$domain = explode( '.', $this->_prefix );
+
+			if ( ( $topdomain = array_shift( $domain ) ) === null ) {
+				throw new MShop_Exception( sprintf( 'Configuration not available' ) );
+			}
+
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$cfgPathSearch = $this->_config['search'];
+			$cfgPathCount =  $this->_config['count'];
+
+			$name = trim( $this->_prefix, '.' );
+			$required = array( $name );
+
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+
+			while( ( $row = $results->fetch() ) !== false ) {
+				$map[ $row['domain'] ][] = $row['refid'];
+			}
+
+			$dbm->release( $conn );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn );
+			throw $e;
+		}
+
+
+		foreach( $map as $domain => $list )
+		{
+			$manager = MShop_Factory::createManager( $context, $domain );
+
+			$search = $manager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', str_replace( '/', '.', $domain ) . '.id', $list ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSlice( 0, 0x7fffffff );
+
+			$refItems = $manager->searchItems( $search, $ref );
+
+			foreach( $list as $refid )
+			{
+				if( isset( $refItems[$refid] ) ) {
+					$items[$domain][$refid] = $refItems[$refid];
+				}
+			}
+		}
+
+		return $items;
+	}
+
+
+	/**
 	 * Creates a search object including the base criteria (optionally).
 	 *
 	 * @param boolean $default Include default criteria
@@ -410,6 +495,8 @@ class MShop_Common_Manager_List_Default
 
 			$expr = array();
 			$curDate = date( 'Y-m-d H:i:00', time() );
+
+			$expr[] = $object->compare( '>', $prefix . '.status', 0 );
 
 			$exprTwo = array();
 			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $curDate );

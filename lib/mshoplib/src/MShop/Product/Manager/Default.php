@@ -246,10 +246,24 @@ class MShop_Product_Manager_Default
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'product.list.config' => array(
+			'code'=>'product.list.config',
+			'internalcode'=>'mproli."config"',
+			'label'=>'Product list config',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'product.list.position' => array(
 			'code'=>'product.list.position',
 			'internalcode'=>'mproli."pos"',
 			'label'=>'Product list position',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
+		'product.list.status' => array(
+			'code'=>'product.list.status',
+			'internalcode'=>'mproli."status"',
+			'label'=>'Product list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
@@ -400,7 +414,8 @@ class MShop_Product_Manager_Default
 		$config = $context->getConfig();
 		$locale = $context->getLocale();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -438,11 +453,11 @@ class MShop_Product_Manager_Default
 					$item->setId( $id ); //so item is no longer modified
 				}
 			}
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -486,8 +501,10 @@ class MShop_Product_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -504,11 +521,11 @@ class MShop_Product_Manager_Default
 				$typeIds[ $row['typeid'] ] = null;
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

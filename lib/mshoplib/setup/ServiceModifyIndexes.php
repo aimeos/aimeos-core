@@ -15,7 +15,6 @@ class MW_Setup_Task_ServiceModifyIndexes extends MW_Setup_Task_Abstract
 		'add' => array(
 			'mshop_service_list' => array (
 				'fk_msserli_pid' => 'ALTER TABLE "mshop_service_list" ADD INDEX "fk_msserli_pid" ("parentid")',
-				'unq_msserli_sid_pid_dm_rid_tid' => 'ALTER TABLE "mshop_service_list" ADD UNIQUE INDEX "unq_msserli_sid_pid_dm_rid_tid" ("siteid", "parentid", "domain", "refid", "typeid")',
 			)
 		),
 		'delete' => array (

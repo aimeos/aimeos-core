@@ -3,7 +3,6 @@
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2011
 -- License LGPLv3, http://www.arcavias.com/en/license
--- $Id: customer.sql 14277 2011-12-12 11:28:56Z spopp $
 --
 
 
@@ -256,8 +255,12 @@ CREATE TABLE "mshop_customer_list" (
 	"start" DATETIME DEFAULT NULL,
 	-- Valid until
 	"end" DATETIME DEFAULT NULL,
+	-- Configuration
+	"config" TEXT NOT NULL,
 	-- Precedence rating
 	"pos" INTEGER NOT NULL,
+	-- status code (0=hidden, 1=display, >1 for anything special)
+	"status" SMALLINT NOT NULL DEFAULT 0,
 	-- Date of last modification of this database entry
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry
@@ -266,8 +269,8 @@ CREATE TABLE "mshop_customer_list" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mscusli_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "unq_mscusli_sid_pid_dm_rid_tid"
-	UNIQUE ("siteid", "parentid", "domain", "refid", "typeid"),
+CONSTRAINT "unq_mscusli_sid_dm_rid_tid_pid"
+	UNIQUE ("siteid", "domain", "refid", "typeid", "parentid"),
 CONSTRAINT "fk_mscusli_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_customer" ("id")
@@ -285,11 +288,9 @@ CONSTRAINT "fk_mscusli_typeid"
 	ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX "idx_mscusli_sid_start_end" ON "mshop_customer_list" ("siteid", "start", "end");
+CREATE INDEX "idx_mscusli_sid_stat_start_end" ON "mshop_customer_list" ("siteid", "status", "start", "end");
 
-CREATE INDEX "idx_mscusli_sid_rid_dom_tid" ON "mshop_customer_list" ("siteid", "refid", "domain", "typeid");
-
-CREATE INDEX "idx_mscusli_pid_sid_rid" ON "mshop_customer_list" ("parentid", "siteid", "refid");
+CREATE INDEX "idx_mscusli_pid_sid_rid_dom_tid" ON "mshop_customer_list" ("parentid", "siteid", "refid", "domain", "typeid");
 
 CREATE INDEX "idx_mscusli_pid_sid_start" ON "mshop_customer_list" ("parentid", "siteid", "start");
 

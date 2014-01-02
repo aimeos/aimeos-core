@@ -29,10 +29,18 @@ class MShop_Catalog_Manager_Index_Price_Default
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
+		'catalog.index.price.quantity' => array(
+			'code'=>'catalog.index.price.quantity',
+			'internalcode'=>'mcatinpr."quantity"',
+			'label'=>'Product price quantity',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
 		'catalog.index.price.value' => array(
 			'code'=>'catalog.index.price.value()',
 			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."value"',
-			'label'=>'Product price, parameter(<list type code>,<currency ID>,<price type code>)',
+			'label'=>'Product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 			'public' => false,
@@ -40,11 +48,59 @@ class MShop_Catalog_Manager_Index_Price_Default
 		'sort:catalog.index.price.value' => array(
 			'code'=>'sort:catalog.index.price.value()',
 			'internalcode'=>'mcatinpr."value"',
-			'label'=>'Sort product price, parameter(<list type code>,<currency ID>,<price type code>)',
+			'label'=>'Sort product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 			'public' => false,
-		)
+		),
+		'catalog.index.price.costs' => array(
+			'code'=>'catalog.index.price.costs()',
+			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."costs"',
+			'label'=>'Product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'decimal',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'sort:catalog.index.price.costs' => array(
+			'code'=>'sort:catalog.index.price.costs()',
+			'internalcode'=>'mcatinpr."costs"',
+			'label'=>'Sort product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'catalog.index.price.rebate' => array(
+			'code'=>'catalog.index.price.rebate()',
+			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."rebate"',
+			'label'=>'Product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'decimal',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'sort:catalog.index.price.rebate' => array(
+			'code'=>'sort:catalog.index.price.rebate()',
+			'internalcode'=>'mcatinpr."rebate"',
+			'label'=>'Sort product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'catalog.index.price.taxrate' => array(
+			'code'=>'catalog.index.price.taxrate()',
+			'internalcode'=>':site AND mcatinpr."listtype" = $1 AND mcatinpr."currencyid" = $2 AND mcatinpr."type" = $3 AND mcatinpr."taxrate"',
+			'label'=>'Product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'decimal',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
+		'sort:catalog.index.price.taxrate' => array(
+			'code'=>'sort:catalog.index.price.taxrate()',
+			'internalcode'=>'mcatinpr."taxrate"',
+			'label'=>'Sort product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'public' => false,
+		),
 	);
 
 
@@ -72,7 +128,11 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 		$string = $search->getConditionString( $types, array( 'siteid' => 'mcatinpr."siteid"' ) );
 
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.quantity'], 'mcatinpr."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.value'], 'mcatinpr."siteid"', $site );
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.costs'], 'mcatinpr."siteid"', $site );
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.rebate'], 'mcatinpr."siteid"', $site );
+		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.taxrate'], 'mcatinpr."siteid"', $site );
 
 
 		$confpath = 'mshop/catalog/manager/index/price/default/submanagers';
@@ -197,21 +257,23 @@ class MShop_Catalog_Manager_Index_Price_Default
 	public function optimize()
 	{
 		$context = $this->_getContext();
+		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
 			$path = 'mshop/catalog/manager/index/price/default/optimize';
-			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
+			foreach( $config->get( $path, array() ) as $sql ) {
 				$conn->create( $sql )->execute()->finish();
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -226,7 +288,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 * Rebuilds the catalog index price for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param array $items List of product items implementing MShop_Product_Item_Interface
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -241,11 +303,12 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
-			foreach ( $items as $item )
+			foreach( $items as $item )
 			{
 				$listTypes = array();
 				foreach( $item->getListItems( 'price' ) as $listItem ) {
@@ -254,40 +317,43 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/price/default/item/insert' );
 
-				foreach( $item->getRefItems( 'price' ) as $priceItem )
+				foreach( $item->getRefItems( 'price' ) as $refId => $refItem )
 				{
-					if( !isset( $listTypes[ $priceItem->getId() ] ) )
+					if( !isset( $listTypes[$refId] ) )
 					{
-						$msg = sprintf( 'List type for price item with ID "%1$s" not available', $priceItem->getId() );
+						$msg = sprintf( 'List type for price item with ID "%1$s" not available', $refId );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
-					foreach( $listTypes[ $priceItem->getId() ] as $listType )
+					foreach( $listTypes[$refId] as $listType )
 					{
 						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
 						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 3, $priceItem->getId(), MW_DB_Statement_Abstract::PARAM_INT );
-						$stmt->bind( 4, $priceItem->getCurrencyId() );
+						$stmt->bind( 3, $refId, MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 4, $refItem->getCurrencyId() );
 						$stmt->bind( 5, $listType );
-						$stmt->bind( 6, $priceItem->getType() );
-						$stmt->bind( 7, $priceItem->getValue() );
-						$stmt->bind( 8, $priceItem->getCosts() );
-						$stmt->bind( 9, $priceItem->getRebate() );
-						$stmt->bind( 10, $priceItem->getTaxRate() );
-						$stmt->bind( 11, $priceItem->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );
+						$stmt->bind( 6, $refItem->getType() );
+						$stmt->bind( 7, $refItem->getValue() );
+						$stmt->bind( 8, $refItem->getCosts() );
+						$stmt->bind( 9, $refItem->getRebate() );
+						$stmt->bind( 10, $refItem->getTaxRate() );
+						$stmt->bind( 11, $refItem->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT );
 						$stmt->bind( 12, $date );//mtime
 						$stmt->bind( 13, $editor );
 						$stmt->bind( 14, $date );//ctime
-						$result = $stmt->execute()->finish();
+
+						try {
+							$result = $stmt->execute()->finish();
+						} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
 					}
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -306,7 +372,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		$this->rebuildIndex( array( $item ) );
+		$this->rebuildIndex( array( $item->getId() => $item ) );
 	}
 
 
@@ -321,8 +387,10 @@ class MShop_Catalog_Manager_Index_Price_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = $ids = array();
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -337,11 +405,11 @@ class MShop_Catalog_Manager_Index_Price_Default
 				$ids[] = $row['id'];
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

@@ -3,7 +3,6 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: items-body-default.html 1351 2012-10-28 11:29:07Z nsendetzky $
  */
 
 $enc = $this->encoder();
@@ -20,10 +19,10 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 ?>
 <div class="catalog-list-items">
-<?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : ?>
-<?php	$name = $productItem->getName(); $firstImage = true; ?>
+<?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : $firstImage = true; ?>
+<?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'l-product-id' => $id ); ?>
 	<div class="product" data-id="<?php echo $id; ?>">
-		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, array( 'a-name' => str_replace( ' ', '-', $name ), 'l-product-id' => $id ) + $this->listParams ) ); ?>">
+		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params + $this->listParams ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
 <?php		$mediaUrl = $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>
@@ -36,7 +35,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php	endforeach; ?>
 			</div>
 			<div class="text-list">
-				<h2><?php echo $enc->html( $name ); ?></h2>
+				<h2><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h2>
 <?php	foreach( $productItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>
 				<div class="text-item">
 <?php		echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?><br/>

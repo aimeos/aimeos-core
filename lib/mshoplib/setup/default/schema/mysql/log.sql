@@ -3,7 +3,6 @@
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2011
 -- License LGPLv3, http://www.arcavias.com/en/license
--- $Id: log.sql 14246 2011-12-09 12:25:12Z nsendetzky $
 --
 
 

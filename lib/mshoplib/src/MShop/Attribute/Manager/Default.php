@@ -230,10 +230,24 @@ class MShop_Attribute_Manager_Default
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'attribute.list.config' => array(
+			'code'=>'attribute.list.config',
+			'internalcode'=>'mattli."config"',
+			'label'=>'Attribute list config',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'attribute.list.position' => array(
 			'code'=>'attribute.list.position',
 			'internalcode'=>'mattli."pos"',
 			'label'=>'Attribute list position',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
+		'attribute.list.status' => array(
+			'code'=>'attribute.list.status',
+			'internalcode'=>'mattli."status"',
+			'label'=>'Attribute list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
@@ -403,7 +417,8 @@ class MShop_Attribute_Manager_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -441,11 +456,11 @@ class MShop_Attribute_Manager_Default
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -478,8 +493,10 @@ class MShop_Attribute_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -496,11 +513,11 @@ class MShop_Attribute_Manager_Default
 				$typeIds[ $row['typeid'] ] = null;
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

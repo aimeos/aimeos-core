@@ -454,10 +454,24 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'customer.list.config' => array(
+			'code'=>'customer.list.config',
+			'internalcode'=>'mcusli."config"',
+			'label'=>'Customer list config',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'customer.list.position' => array(
 			'code'=>'customer.list.position',
 			'internalcode'=>'mcusli."pos"',
 			'label'=>'Customer list position',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
+		'customer.list.status' => array(
+			'code'=>'customer.list.status',
+			'internalcode'=>'mcusli."status"',
+			'label'=>'Customer list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
@@ -656,7 +670,8 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -714,11 +729,11 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -734,8 +749,10 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 		$map = array();
 
 		try
@@ -750,11 +767,11 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 				$map[ $row['id'] ] = $row;
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

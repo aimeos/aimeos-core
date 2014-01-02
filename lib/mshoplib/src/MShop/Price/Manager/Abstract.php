@@ -57,6 +57,6 @@ abstract class MShop_Price_Manager_Abstract
 			}
 		}
 
-		return $price;
+		return clone $price;
 	}
 }

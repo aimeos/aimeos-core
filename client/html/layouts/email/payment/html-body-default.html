@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$content = false;
+$enc = $this->encoder();
+
+/// Payment e-mail HTML title
+$title = $this->translate( 'client/html', 'Your order' );
+
+if( ( $logo = $this->config( 'client/html/email/logo', 'client/html/lib/css/images/arcavias.gif' ) ) != '' )
+{
+	$filename = basename( $logo );
+
+	if( file_exists( $logo ) !== false )
+	{
+		$content = file_get_contents( $logo );
+		$finfo = new finfo( FILEINFO_MIME_TYPE );
+		$mimetype = $finfo->file( $logo );
+	}
+}
+
+?>
+<html>
+	<head>
+		<title><?php echo $enc->html( $title, $enc::TRUST ); ?></title>
+		<meta name="application-name" content="Arcavias" />
+	</head>
+	<body>
+		<style type="text/css">
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+.arcavias .content-block {
+	margin: 1.5em 5%;
+}
+.arcavias .logo {
+	margin: 1.5em 5%;
+	margin-top: 0;
+	float: right;
+}
+.arcavias .common-summary {
+	clear: both;
+}
+		</style>
+		<div class="arcavias">
+<?php if( $content !== false ) : ?>
+			<img class="logo" src="<?php echo $this->mail()->embedAttachment( $content, $mimetype, $filename ); ?>" />
+<?php endif; ?>
+<?php echo $this->get( 'htmlBody' ); ?>
+		</div>
+	</body>
+</html>

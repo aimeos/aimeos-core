@@ -90,11 +90,12 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	public function createSearch( $default = false )
 	{
 		$dbm = $this->_context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		$object = new MW_Common_Criteria_SQL( $conn );
 
-		$dbm->release( $conn );
+		$dbm->release( $conn, $dbname );
 
 		return $object;
 	}
@@ -142,12 +143,13 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	protected function _createSearch( $domain )
 	{
 		$dbm = $this->_context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		$object = new MW_Common_Criteria_SQL( $conn );
 		$object->setConditions( $object->compare( '>', $domain . '.status', 0 ) );
 
-		$dbm->release( $conn );
+		$dbm->release( $conn, $dbname );
 
 		return $object;
 	}
@@ -907,12 +909,12 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 		$cond = $search->getConditionString( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $sql );
-
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 
 		try
 		{
 			$dbm = $context->getDatabaseManager();
-			$conn = $dbm->acquire();
+			$conn = $dbm->acquire( $dbname );
 
 			$stmt = $conn->create( $sql );
 
@@ -922,11 +924,11 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 			$stmt->execute()->finish();
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -934,45 +936,42 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 	/**
 	 * Starts a database transaction on the connection identified by the given name.
-	 *
-	 * @param string $name Connection name as named in the resource file
 	 */
-	protected function _begin( $name = 'db' )
+	protected function _begin()
 	{
 		$dbm = $this->_context->getDatabaseManager();
+		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
 
-		$conn = $dbm->acquire( $name );
+		$conn = $dbm->acquire( $dbname );
 		$conn->begin();
-		$dbm->release( $conn, $name );
+		$dbm->release( $conn, $dbname );
 	}
 
 
 	/**
 	 * Commits the running database transaction on the connection identified by the given name.
-	 *
-	 * @param string $name Connection name as named in the resource file
 	 */
-	protected function _commit( $name = 'db' )
+	protected function _commit()
 	{
 		$dbm = $this->_context->getDatabaseManager();
+		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
 
-		$conn = $dbm->acquire( $name );
+		$conn = $dbm->acquire( $dbname );
 		$conn->commit();
-		$dbm->release( $conn, $name );
+		$dbm->release( $conn, $dbname );
 	}
 
 
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name.
-	 *
-	 * @param string $name Connection name as named in the resource file
 	 */
-	protected function _rollback( $name = 'db' )
+	protected function _rollback()
 	{
 		$dbm = $this->_context->getDatabaseManager();
+		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
 
-		$conn = $dbm->acquire( $name );
+		$conn = $dbm->acquire( $dbname );
 		$conn->rollback();
-		$dbm->release( $conn, $name );
+		$dbm->release( $conn, $dbname );
 	}
 }

@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+/// Payment e-mail intro
+$msg = $this->translate( 'client/html', 'Thank you for your order %1$s from %2$s.' );
+$format = $this->translate( 'client/html', 'Y-m-d' );
+$order = $this->extOrderItem;
+
+$string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ) );
+
+?>
+
+
+<?php echo wordwrap( strip_tags( $string ) ); ?>
+<?php echo $this->get( 'introBody' ); ?>

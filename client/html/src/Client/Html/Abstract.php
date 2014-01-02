@@ -40,6 +40,18 @@ abstract class Client_Html_Abstract
 
 
 	/**
+	 * Tests if the output of is cachable.
+	 *
+	 * @param integer $what Header or body constant from Client_HTML_Abstract
+	 * @return boolean True if the output can be cached, false if not
+	 */
+	public function isCachable( $what )
+	{
+		return false;
+	}
+
+
+	/**
 	 * Returns the view object that will generate the HTML output.
 	 *
 	 * @return MW_View_Interface $view The view object which generates the HTML output
@@ -64,26 +76,6 @@ abstract class Client_Html_Abstract
 	{
 		$this->_view = $view;
 		return $this;
-	}
-
-
-	/**
-	 * Processes the input, e.g. store given values.
-	 * A view must be available and this method doesn't generate any output
-	 * besides setting view variables.
-	 *
-	 * @param string $confpath Path to the configuration that contains the configured sub-clients
-	 * @param array $default List of sub-client names that should be used if no other configuration is available
-	 */
-	protected function _process( $confpath, array $default )
-	{
-		$view = $this->getView();
-
-		foreach( $this->_getSubClients( $confpath, $default ) as $subclient )
-		{
-			$subclient->setView( $view );
-			$subclient->process();
-		}
 	}
 
 
@@ -211,25 +203,30 @@ abstract class Client_Html_Abstract
 	 * It uses the first one found from the configured paths in the manifest files, but in reverse order.
 	 *
 	 * @param string $file Relative file path segments and its name separated by slashes
+	 * @param string|array $default Relative file name or list of file names to use when nothing else is configured
 	 * @return Absolute path the to the template file
 	 * @throws Client_Html_Exception If no template file was found
 	 */
 	protected function _getTemplate( $confpath, $default )
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$file = $this->_context->getConfig()->get( $confpath, $default );
 
-		foreach( array_reverse( $this->_templatePaths ) as $path => $relPaths )
+		foreach( (array) $default as $fname )
 		{
-			foreach( $relPaths as $relPath )
-			{
-				$absPath = $path . $ds . $relPath . $ds . $file;
-				if( $ds !== '/' ) {
-					$absPath = str_replace( '/', $ds, $absPath );
-				}
+			$file = $this->_context->getConfig()->get( $confpath, $fname );
 
-				if( is_file( $absPath ) ) {
-					return $absPath;
+			foreach( array_reverse( $this->_templatePaths ) as $path => $relPaths )
+			{
+				foreach( $relPaths as $relPath )
+				{
+					$absPath = $path . $ds . $relPath . $ds . $file;
+					if( $ds !== '/' ) {
+						$absPath = str_replace( '/', $ds, $absPath );
+					}
+
+					if( is_file( $absPath ) ) {
+						return $absPath;
+					}
 				}
 			}
 		}
@@ -256,6 +253,38 @@ abstract class Client_Html_Abstract
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		return $view;
+	}
+
+
+	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 *
+	 * @param string $confpath Path to the configuration that contains the configured sub-clients
+	 * @param array $default List of sub-client names that should be used if no other configuration is available
+	 */
+	protected function _process( $confpath, array $default )
+	{
+		$view = $this->getView();
+
+		foreach( $this->_getSubClients( $confpath, $default ) as $subclient )
+		{
+			$subclient->setView( $view );
+			$subclient->process();
+		}
 	}
 
 

@@ -252,7 +252,9 @@ class MShop_Attribute_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>', 'attribute.list.refid', 0 );
 		$expr[] = $search->compare( '==', 'attribute.list.datestart', '2000-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'attribute.list.dateend', '2001-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'attribute.list.config', null );
 		$expr[] = $search->compare( '==', 'attribute.list.position', 0 );
+		$expr[] = $search->compare( '==', 'attribute.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'attribute.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'attribute.list.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'attribute.list.editor', $this->_editor );

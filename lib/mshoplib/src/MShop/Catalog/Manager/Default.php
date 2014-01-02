@@ -171,13 +171,20 @@ class MShop_Catalog_Manager_Default
 			'code'=>'catalog.list.datestart',
 			'internalcode'=>'mcatli."start"',
 			'label'=>'Catalog list start date',
-			'type'=> 'string',
+			'type'=> 'datetime',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
 		'catalog.list.dateend' => array(
 			'code'=>'catalog.list.dateend',
 			'internalcode'=>'mcatli."end"',
 			'label'=>'Catalog list end date',
+			'type'=> 'datetime',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'catalog.list.config' => array(
+			'code'=>'catalog.list.config',
+			'internalcode'=>'mcatli."config"',
+			'label'=>'Catalog list config',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
@@ -185,6 +192,13 @@ class MShop_Catalog_Manager_Default
 			'code'=>'catalog.list.position',
 			'internalcode'=>'mcatli."pos"',
 			'label'=>'Catalog list position',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
+		'catalog.list.status' => array(
+			'code'=>'catalog.list.status',
+			'internalcode'=>'mcatli."status"',
+			'label'=>'Catalog list status',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
@@ -485,8 +499,11 @@ class MShop_Catalog_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$nodeMap = $siteMap = array();
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -512,11 +529,11 @@ class MShop_Catalog_Manager_Default
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -826,7 +843,8 @@ class MShop_Catalog_Manager_Default
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -857,11 +875,11 @@ class MShop_Catalog_Manager_Default
 
 			$result = $stmt->execute()->finish();
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}

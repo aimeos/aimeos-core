@@ -13,18 +13,20 @@ return array(
 			AND siteid = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_order_base_service_attr" ( "siteid", "ordservid", "type", "code", "value", "name",
-				"mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_order_base_service_attr" ( "siteid", "attrid", "ordservid", "type", "code", "value",
+				"name", "mtime", "editor", "ctime" )
+			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
 		'update' => '
 			UPDATE "mshop_order_base_service_attr"
-			SET "siteid" = ?, "ordservid" = ?, "type" = ?, "code" = ?, "value" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "attrid" = ?, "ordservid" = ?, "type" = ?, "code" = ?, "value" = ?,
+				"name" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT mordbaseat."id", mordbaseat."siteid", mordbaseat."ordservid", mordbaseat."type", mordbaseat."code",
-			mordbaseat."value", mordbaseat."name", mordbaseat."mtime", mordbaseat."ctime", mordbaseat."editor"
+			SELECT mordbaseat."id", mordbaseat."siteid", mordbaseat."attrid", mordbaseat."ordservid",
+				mordbaseat."type", mordbaseat."code", mordbaseat."value", mordbaseat."name", mordbaseat."mtime",
+				mordbaseat."ctime", mordbaseat."editor"
 			FROM "mshop_order_base_service_attr" AS mordbaseat
 			:joins
 			WHERE :cond

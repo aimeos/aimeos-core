@@ -67,7 +67,7 @@ MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						}, {
 							xtype : 'displayfield',
 							fieldLabel : _('Method'),
-							name : 'job.method',
+							name : 'job.method'
 						}, {
 							xtype : 'displayfield',
 							fieldLabel : _('Created'),

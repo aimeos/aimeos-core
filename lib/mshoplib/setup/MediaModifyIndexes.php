@@ -15,7 +15,6 @@ class MW_Setup_Task_MediaModifyIndexes extends MW_Setup_Task_Abstract
 		'add' => array(
 			'mshop_media_list' => array (
 				'fk_msmedli_pid' => 'ALTER TABLE "mshop_media_list" ADD INDEX "fk_msmedli_pid" ("parentid")',
-				'unq_msmedli_sid_pid_dm_rid_tid' => 'ALTER TABLE "mshop_media_list" ADD UNIQUE INDEX "unq_msmedli_sid_pid_dm_rid_tid" ("siteid", "parentid", "domain", "refid", "typeid")',
 			)
 		),
 		'delete' => array(

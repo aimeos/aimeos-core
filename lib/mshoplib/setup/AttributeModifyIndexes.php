@@ -14,7 +14,6 @@ class MW_Setup_Task_AttributeModifyIndexes extends MW_Setup_Task_Abstract
 	private $_mysql = array(
 		'add' => array (
 			'mshop_attribute_list' => array (
-				'unq_msattli_sid_pid_dm_rid_tid' => 'ALTER TABLE "mshop_attribute_list" ADD UNIQUE INDEX "unq_msattli_sid_pid_dm_rid_tid" ("siteid", "parentid", "domain", "refid", "typeid")',
 				'fk_msattli_pid' => 'ALTER TABLE "mshop_attribute_list" ADD INDEX "fk_msattli_pid" ("parentid")',
 			)
 		),

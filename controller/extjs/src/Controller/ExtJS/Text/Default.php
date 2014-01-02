@@ -51,17 +51,21 @@ class Controller_ExtJS_Text_Default
 		{
 			$item = $this->_manager->createItem();
 
-			if ( isset($entry->{'text.id'}) ) {	$item->setId($entry->{'text.id'});}
-			if ( isset($entry->{'text.typeid'}) ) { $item->setTypeId($entry->{'text.typeid'}); }
-			if ( isset($entry->{'text.domain'}) ) {	$item->setDomain($entry->{'text.domain'}); }
-			if ( isset($entry->{'text.content'}) ) { $item->setContent($entry->{'text.content'}); }
-			if ( isset($entry->{'text.status'}) ) {	$item->setStatus($entry->{'text.status'});}
-			if ( isset($entry->{'text.languageid'}) && $entry->{'text.languageid'} != '' ) {$item->setLanguageId($entry->{'text.languageid'});}
+			if ( isset($entry->{'text.id'}) ) {	$item->setId( $entry->{'text.id'} ); }
+			if ( isset($entry->{'text.typeid'} ) ) { $item->setTypeId( $entry->{'text.typeid'} ); }
+			if ( isset($entry->{'text.domain'} ) ) { $item->setDomain( $entry->{'text.domain'} ); }
+			if ( isset($entry->{'text.status'} ) ) { $item->setStatus( $entry->{'text.status'} ); }
+			if ( isset($entry->{'text.languageid'} ) && $entry->{'text.languageid'} != '' ) { $item->setLanguageId( $entry->{'text.languageid'} ); }
 
 			if ( isset( $entry->{'text.label'} ) && $entry->{'text.label'} != '' ) {
-				$item->setLabel( $entry->{'text.label'} );
-			} else if( isset( $entry->{'text.content'} ) ) {
-				$item->setLabel( substr( $entry->{'text.content'}, 0, 255 ) );
+				$label = mb_strcut( $entry->{'text.label'}, 0, 255 );
+			} else if( isset( $entry->{'text.content'} ) && $entry->{'text.content'} != '' ) {
+				$label = mb_strcut( $entry->{'text.content'}, 0, 255 );
+			}
+			$item->setLabel( trim( preg_replace( array( "/(<br>|\r|\n)+/", '/  +/' ), ' ', $label ) ) );
+
+			if ( isset($entry->{'text.content'} ) ) {
+				$item->setContent( trim( preg_replace( "/(<br>|\r|\n)+$/", '', $entry->{'text.content'} ) ) );
 			}
 
 			$this->_manager->saveItem( $item );

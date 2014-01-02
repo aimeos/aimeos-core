@@ -260,7 +260,9 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>', 'customer.list.refid', 0 );
 		$expr[] = $search->compare( '==', 'customer.list.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.list.dateend', '2022-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'customer.list.config', null );
 		$expr[] = $search->compare( '>', 'customer.list.position', 0 );
+		$expr[] = $search->compare( '==', 'customer.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.list.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.list.editor', $this->_editor );

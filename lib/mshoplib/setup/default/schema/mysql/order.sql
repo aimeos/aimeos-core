@@ -3,7 +3,6 @@
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2011
 -- License LGPLv3, http://www.arcavias.com/en/license
--- $Id: order.sql 14818 2012-01-12 09:53:56Z spopp $
 --
 
 
@@ -91,17 +90,19 @@ CONSTRAINT "fk_msord_baseid"
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_msord_sid_pdate_pstat_dstat" ON "mshop_order" ("siteid", "datepayment", "statuspayment", "statusdelivery");
+CREATE INDEX "idx_msord_sid_mtime_pstat" ON "mshop_order" ("siteid", "mtime", "statuspayment");
+
+CREATE INDEX "idx_msord_sid_mtime_dstat" ON "mshop_order" ("siteid", "mtime", "statusdelivery");
 
 CREATE INDEX "idx_msord_sid_type" ON "mshop_order" ("siteid", "type");
+
+CREATE INDEX "idx_msord_sid_pdate" ON "mshop_order" ("siteid", "datepayment");
 
 CREATE INDEX "idx_msord_sid_ddate" ON "mshop_order" ("siteid", "datedelivery");
 
 CREATE INDEX "idx_msord_sid_dstatus" ON "mshop_order" ("siteid", "statusdelivery");
 
 CREATE INDEX "idx_msord_sid_ctime" ON "mshop_order" ("siteid", "ctime");
-
-CREATE INDEX "idx_msord_sid_mtime" ON "mshop_order" ("siteid", "mtime");
 
 CREATE INDEX "idx_msord_sid_editor" ON "mshop_order" ("siteid", "editor");
 
@@ -257,6 +258,8 @@ CREATE TABLE "mshop_order_base_product_attr" (
 	"id" BIGINT NOT NULL AUTO_INCREMENT,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original attribute ID
+	"attrid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Order product id
 	"ordprodid" BIGINT NOT NULL,
 	-- Attribute type
@@ -346,6 +349,8 @@ CREATE TABLE "mshop_order_base_service_attr" (
 	"id" BIGINT NOT NULL AUTO_INCREMENT,
 	-- Site ID
 	"siteid" INTEGER NULL,
+	-- Original attribute ID
+	"attrid" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Order service id
 	"ordservid" BIGINT NOT NULL,
 	-- Attribute type
@@ -374,6 +379,8 @@ CONSTRAINT "fk_msordbaseat_ordservid"
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_msordbaseat_si_oi_ty_cd_va" ON "mshop_order_base_service_attr" ("siteid", "ordservid", "type", "code", "value");
+
+CREATE INDEX "idx_msordbaseat_si_cd_va" ON "mshop_order_base_service_attr" ("siteid", "code", "value");
 
 --
 -- Status of the order

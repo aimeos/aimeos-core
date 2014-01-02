@@ -3,7 +3,6 @@
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2011
 -- License LGPLv3, http://www.arcavias.com/en/license
--- $Id: service.sql 14246 2011-12-09 12:25:12Z nsendetzky $
 --
 
 
@@ -176,8 +175,12 @@ CREATE TABLE "mshop_service_list" (
 	"start" DATETIME DEFAULT NULL,
 	-- Valid until
 	"end" DATETIME DEFAULT NULL,
+	-- Configuration
+	"config" TEXT NOT NULL,
 	-- Precedence of the promotion
 	"pos" INTEGER NOT NULL,
+	-- status code (0=hidden, 1=display, >1 for anything special)
+	"status" SMALLINT NOT NULL DEFAULT 0,
 	-- Date of last modification of this database entry
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry
@@ -186,8 +189,8 @@ CREATE TABLE "mshop_service_list" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_msserviceli_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "unq_msserli_sid_pid_dm_rid_tid"
-	UNIQUE ("siteid", "parentid", "domain", "refid", "typeid"),
+CONSTRAINT "unq_msserli_sid_dm_rid_tid_pid"
+	UNIQUE ("siteid", "domain", "refid", "typeid", "parentid"),
 CONSTRAINT "fk_msserli_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_service" ("id")
@@ -205,11 +208,9 @@ CONSTRAINT "fk_msserli_typeid"
 	ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX "idx_msserli_sid_start_end" ON "mshop_service_list" ("siteid", "start", "end");
+CREATE INDEX "idx_msserli_sid_stat_start_end" ON "mshop_service_list" ("siteid", "status", "start", "end");
 
-CREATE INDEX "idx_msserli_sid_rid_dom_tid" ON "mshop_service_list" ("siteid", "refid", "domain", "typeid");
-
-CREATE INDEX "idx_msserli_pid_sid_rid" ON "mshop_service_list" ("parentid", "siteid", "refid");
+CREATE INDEX "idx_msserli_pid_sid_rid_dom_tid" ON "mshop_service_list" ("parentid", "siteid", "refid", "domain", "typeid");
 
 CREATE INDEX "idx_msserli_pid_sid_start" ON "mshop_service_list" ("parentid", "siteid", "start");
 

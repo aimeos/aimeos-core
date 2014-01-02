@@ -56,7 +56,9 @@ class Controller_ExtJS_Text_List_Default
 			if( isset( $entry->{'text.list.domain'} ) ) { $item->setDomain( $entry->{'text.list.domain'} ); }
 			if( isset( $entry->{'text.list.parentid'} ) ) { $item->setParentId( $entry->{'text.list.parentid'} ); }
 			if( isset( $entry->{'text.list.refid'} ) ) { $item->setRefId( $entry->{'text.list.refid'} ); }
+			if( isset( $entry->{'text.list.config'} ) ) { $item->setConfig( (array) $entry->{'text.list.config'} ); }
 			if( isset( $entry->{'text.list.position'} ) ) { $item->setPosition( $entry->{'text.list.position'} ); }
+			if( isset( $entry->{'text.list.status'} ) ) {	$item->setStatus( $entry->{'text.list.status'} ); }
 
 			if( isset( $entry->{'text.list.typeid'} ) && $entry->{'text.list.typeid'} != '' ) {
 				$item->setTypeId( $entry->{'text.list.typeid'} );

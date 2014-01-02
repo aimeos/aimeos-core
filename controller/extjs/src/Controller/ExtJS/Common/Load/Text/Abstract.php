@@ -363,34 +363,33 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 					throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
 				}
 
-				if( $textId == '' && $value == '' ) {
-					continue;
-				}
-
-				$item = $textManager->createItem();
-
-				if( $textId != '' ) {
-					$item->setId( $textId );
-				}
-
-				$item->setLanguageId( ( $row[0] != '' ? $row[0] : null ) );
-				$item->setTypeId( $textTypeMap[ $textType ] );
-				$item->setDomain( $domain );
-				$item->setLabel( mb_strcut( $value, 0, 255 ) );
-				$item->setContent( $value );
-				$item->setStatus( 1 );
-
-				$textManager->saveItem( $item );
-
-				if( $textId === '' ) {
-					$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
-				}
-
-				if( ++$count == 1000 )
+				if( $textId != '' || $value != '' )
 				{
-					$this->_importReferences( $manager, $codeIdMap, $domain );
-					$codeIdMap = array();
-					$count = 0;
+					$item = $textManager->createItem();
+
+					if( $textId != '' ) {
+						$item->setId( $textId );
+					}
+
+					$item->setLanguageId( ( $row[0] != '' ? $row[0] : null ) );
+					$item->setTypeId( $textTypeMap[ $textType ] );
+					$item->setDomain( $domain );
+					$item->setLabel( mb_strcut( $value, 0, 255 ) );
+					$item->setContent( $value );
+					$item->setStatus( 1 );
+
+					$textManager->saveItem( $item );
+
+					if( $textId === '' ) {
+						$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
+					}
+
+					if( ++$count == 1000 )
+					{
+						$this->_importReferences( $manager, $codeIdMap, $domain );
+						$codeIdMap = array();
+						$count = 0;
+					}
 				}
 			}
 			catch( Exception $e )

@@ -99,8 +99,26 @@ class Controller_ExtJS_Locale_Language_Default
 	 */
 	public function searchItems( stdClass $params )
 	{
+		$manager = $this->_getManager();
+
 		$total = 0;
-		$search = $this->_initCriteria( $this->_getManager()->createSearch(), $params );
+		$search = $manager->createSearch();
+
+		if( !$this->_getContext()->getConfig()->get( 'controller/extjs/locale/language/default/showall', true ) )
+		{
+			$localeManager = MShop_Locale_Manager_Factory::createManager( $this->_getContext() );
+
+			$langids = array();
+			foreach( $localeManager->searchItems( $localeManager->createSearch() ) as $item ) {
+				$langids[] = $item->getLanguageId();
+			}
+
+			if( !empty( $langids ) ) {
+				$search->setConditions( $search->compare( '==', 'locale.language.id', $langids ) );
+			}
+		}
+
+		$search = $this->_initCriteria( $search, $params );
 
 		$sort = $search->getSortations();
 		$sort[] = $search->sort( '+', 'locale.language.label' );

@@ -14,8 +14,23 @@
  * @package MShop
  * @subpackage Order
  */
-interface MShop_Order_Item_Base_Product_Attribute_Interface extends MShop_Common_Item_Interface
+interface MShop_Order_Item_Base_Product_Attribute_Interface
+	extends MShop_Common_Item_Interface
 {
+	/**
+	 * Returns the original attribute ID of the ordered product attribute.
+	 *
+	 * @return string Attribute ID of the ordered product attribute
+	 */
+	public function getAttributeId();
+
+	/**
+	 * Sets the original attribute ID of the ordered product attribute.
+	 *
+	 * @param string $id Attribute ID of the ordered product attribute
+	 */
+	public function setAttributeId( $id );
+
 	/**
 	 * Returns the product ID of the ordered product.
 	 *
@@ -43,7 +58,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface extends MShop_Common
 	 * @param string $type Type of the attribute
 	 */
 	public function setType( $type );
-	
+
 	/**
 	 * Returns the code of the product attibute.
 	 *

@@ -363,8 +363,18 @@ class Controller_ExtJS_Attribute_DefaultTest extends MW_Unittest_Testcase
 					'optional' => false,
 					'type' => 'datetime',
 				),
+				'attribute.list.config' => array(
+					'description' => 'Attribute list config',
+					'optional' => false,
+					'type' => 'string',
+				),
 				'attribute.list.position' => array(
 					'description' => 'Attribute list position',
+					'optional' => false,
+					'type' => 'integer',
+				),
+				'attribute.list.status' => array(
+					'description' => 'Attribute list status',
 					'optional' => false,
 					'type' => 'integer',
 				),

@@ -39,7 +39,9 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 			'refid' => 'unitId',
 			'start' => '2005-01-01 00:00:00',
 			'end' => '2010-12-31 00:00:00',
+			'config' => array( 'cnt'=>'40' ),
 			'pos' => 7,
+			'status' => 1,
 			'typeid' => 8,
 			'type' => 'test',
 			'mtime' => '2011-01-01 00:00:02',
@@ -138,6 +140,30 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setDateEnd('2008-34-12');
 	}
 
+	public function testSetPosition()
+	{
+		$this->_object->setPosition( 1234 );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 1234, $this->_object->getPosition() );
+	}
+
+	public function testGetPosition()
+	{
+		$this->assertEquals( 7, $this->_object->getPosition() );
+	}
+
+	public function testSetStatus()
+	{
+		$this->_object->setStatus( 0 );
+		$this->assertTrue( $this->_object->isModified() );
+		$this->assertEquals( 0, $this->_object->getStatus() );
+	}
+
+	public function testGetStatus()
+	{
+		$this->assertEquals( 1, $this->_object->getStatus() );
+	}
+
 	public function testGetTypeId()
 	{
 		$this->assertEquals( 8, $this->_object->getTypeId() );
@@ -170,6 +196,19 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
 
+	public function testGetConfig()
+	{
+		$this->assertEquals( array('cnt'=>'40'), $this->_object->getConfig() );
+	}
+
+
+	public function testSetConfig()
+	{
+		$this->_object->setConfig( array('new value'=>'20.00') );
+		$this->assertEquals( array('new value'=>'20.00'), $this->_object->getConfig() );
+		$this->assertEquals( true, $this->_object->isModified() );
+	}
+
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->_object->isModified() );
@@ -187,7 +226,9 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 			'common.list.refid' => 'unitId',
 			'common.list.datestart' => '2005-01-01 00:00:00',
 			'common.list.dateend' => '2010-12-31 00:00:00',
+			'common.list.config' => array( 'cnt' => '40' ),
 			'common.list.position' => 7,
+			'common.list.status' => 1,
 			'common.list.ctime' => '2011-01-01 00:00:01',
 			'common.list.mtime' => '2011-01-01 00:00:02',
 			'common.list.editor' => 'unitTestUser',

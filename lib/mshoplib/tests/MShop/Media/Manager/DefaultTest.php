@@ -103,7 +103,9 @@ class MShop_Media_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>', 'media.list.refid', 0 );
 		$expr[] = $search->compare( '==', 'media.list.datestart', null );
 		$expr[] = $search->compare( '==', 'media.list.dateend', null );
+		$expr[] = $search->compare( '!=', 'media.list.config', null );
 		$expr[] = $search->compare( '==', 'media.list.position', 0 );
+		$expr[] = $search->compare( '==', 'media.list.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.list.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'media.list.editor', $this->_editor );

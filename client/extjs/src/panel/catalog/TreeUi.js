@@ -36,21 +36,21 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 
 		this.recordClass = MShop.Schema.getRecord(this.recordName);
 
-		this.initLoader();
+		this.initLoader(true);
 
 		// fake a root -> needed by extjs
 		this.root = new Ext.tree.AsyncTreeNode( { id : 'root' } );
-		
+
 		MShop.panel.catalog.TreeUi.superclass.initComponent.call(this);
 	},
-		
+
 	inspectCreateNode : function(attr)
 	{
 		// adding label to object as text is necessary
 		var status = attr['catalog.status'];
 
 		attr.id = attr['catalog.id'];
-		attr.text = attr['catalog.label'];
+		attr.text = attr['catalog.id'] + " - " + attr['catalog.label'];
 		attr.code = attr['catalog.code'];
 		attr.cls = 'statustext-' + status;
 
@@ -77,6 +77,8 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 	
 	onCopySelectedItems : MShop.panel.AbstractListUi.prototype.onCopySelectedItems
 });
+
+
 
 // hook this into the main tab panel
 Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.catalog.treeui', MShop.panel.catalog.TreeUi, 30);

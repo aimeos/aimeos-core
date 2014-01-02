@@ -15,7 +15,6 @@ class MW_Setup_Task_ProductModifyIndexes extends MW_Setup_Task_Abstract
 		'add' => array (
 			'mshop_product_list' => array (
 				'fk_msproli_pid' => 'ALTER TABLE "mshop_product_list" ADD INDEX "fk_msproli_pid" ("parentid")',
-				'unq_msproli_sid_pid_dm_rid_tid' => 'ALTER TABLE "mshop_product_list" ADD UNIQUE INDEX "unq_msproli_sid_pid_dm_rid_tid" ("siteid", "parentid", "domain", "refid", "typeid")'
 			),
 			'mshop_product_stock_warehouse' => array (
 				'unq_msprostwa_sid_code' => 'ALTER TABLE "mshop_product_stock_warehouse" ADD UNIQUE INDEX "unq_msprostwa_sid_code" ("siteid", "code")'

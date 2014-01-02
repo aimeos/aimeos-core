@@ -3,7 +3,6 @@
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2011
 -- License LGPLv3, http://www.arcavias.com/en/license
--- $Id: catalog.sql 14518 2011-12-21 09:30:48Z sneubert $
 --
 
 
@@ -120,8 +119,12 @@ CREATE TABLE "mshop_catalog_list" (
 	"start" DATETIME DEFAULT NULL,
 	-- Valid until
 	"end" DATETIME DEFAULT NULL,
+	-- Configuration
+	"config" TEXT NOT NULL,
 	-- Position of the list entry
 	"pos" INTEGER NOT NULL,
+	-- status code (0=hidden, 1=display, >1 for anything special)
+	"status" SMALLINT NOT NULL DEFAULT 0,
 	-- Date of last modification of this database entry
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry
@@ -130,8 +133,8 @@ CREATE TABLE "mshop_catalog_list" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mscatli_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "unq_mscatli_sid_pid_dm_rid_tid"
-	UNIQUE ("siteid", "parentid", "domain", "refid", "typeid"),
+CONSTRAINT "unq_mscatli_sid_dm_rid_tid_pid"
+	UNIQUE ("siteid", "domain", "refid", "typeid", "parentid"),
 CONSTRAINT "fk_mscatli_siteid"
 	FOREIGN KEY ("siteid")
 	REFERENCES "mshop_locale_site" ("id")
@@ -149,11 +152,9 @@ CONSTRAINT "fk_mscatli_typeid"
 	ON UPDATE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_mscatli_sid_start_end" ON "mshop_catalog_list" ("siteid", "start", "end");
+CREATE INDEX "idx_mscatli_sid_stat_start_end" ON "mshop_catalog_list" ("siteid", "status", "start", "end");
 
-CREATE INDEX "idx_mscatli_sid_rid_dom_tid" ON "mshop_catalog_list" ("siteid", "refid", "domain", "typeid");
-
-CREATE INDEX "idx_mscatli_pid_sid_rid" ON "mshop_catalog_list" ("parentid", "siteid", "refid");
+CREATE INDEX "idx_mscatli_pid_sid_rid_dm_tid" ON "mshop_catalog_list" ("parentid", "siteid", "refid", "domain", "typeid");
 
 CREATE INDEX "idx_mscatli_pid_sid_start" ON "mshop_catalog_list" ("parentid", "siteid", "start");
 
@@ -165,6 +166,50 @@ CREATE INDEX "idx_mscatli_pid_sid_pos" ON "mshop_catalog_list" ("parentid", "sit
 --
 -- Table structures for default indexer
 --
+
+
+CREATE TABLE "mshop_catalog_index_attribute" (
+	-- Product id
+	"prodid" INTEGER NOT NULL,
+	-- site id, references mshop_locale_site.id
+	"siteid" INTEGER NOT NULL,
+	-- attribute ID
+	"attrid" INTEGER NULL,
+	-- product list type
+	"listtype" VARCHAR(32) NOT NULL,
+	-- attribute type
+	"type" VARCHAR(32) NOT NULL,
+	-- attribute code
+	"code" VARCHAR(32) NOT NULL,
+	-- Date of last modification of this database entry
+	"mtime" DATETIME NOT NULL,
+	-- Date of creation of this database entry
+	"ctime" DATETIME NOT NULL,
+	-- Editor who modified this entry at last
+	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "unq_mscatinat_p_s_aid_lt"
+	UNIQUE ("prodid", "siteid", "attrid", "listtype"),
+CONSTRAINT "fk_mscatinat_prodid"
+	FOREIGN KEY ("prodid")
+	REFERENCES "mshop_product" ("id")
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+CONSTRAINT "fk_mscatinat_siteid"
+	FOREIGN KEY ("siteid")
+	REFERENCES "mshop_locale_site" ("id")
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+CONSTRAINT "fk_mscatinat_attrid"
+	FOREIGN KEY ("attrid")
+	REFERENCES "mshop_attribute" ("id")
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX "idx_mscatinat_s_at_lt" ON "mshop_catalog_index_attribute" ("siteid", "attrid", "listtype");
+
+CREATE INDEX "idx_mscatinat_p_s_lt_t_c" ON "mshop_catalog_index_attribute" ("prodid", "siteid", "listtype", "type", "code");
+
 
 CREATE TABLE "mshop_catalog_index_catalog" (
 	-- Product id
@@ -183,6 +228,8 @@ CREATE TABLE "mshop_catalog_index_catalog" (
 	"ctime" DATETIME NOT NULL,
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "unq_mscatinca_p_s_cid_lt_po"
+	UNIQUE ("prodid", "siteid", "catid", "listtype", "pos"),
 CONSTRAINT "fk_mscatinca_prodid"
 	FOREIGN KEY ("prodid")
 	REFERENCES "mshop_product" ("id")
@@ -202,8 +249,6 @@ CONSTRAINT "fk_mscatinca_catid"
 
 CREATE INDEX "idx_mscatinca_s_ca_lt_po" ON "mshop_catalog_index_catalog" ("siteid", "catid", "listtype", "pos");
 
-CREATE INDEX "idx_mscatinca_p_s_ca_lt_po" ON "mshop_catalog_index_catalog" ("prodid", "siteid", "catid", "listtype", "pos");
-
 
 CREATE TABLE "mshop_catalog_index_price" (
 	-- Product id
@@ -221,7 +266,7 @@ CREATE TABLE "mshop_catalog_index_price" (
 	-- price value
 	"value" DECIMAL(12,2) NOT NULL,
 	-- price value
-	"shipping" DECIMAL(12,2) NOT NULL,
+	"costs" DECIMAL(12,2) NOT NULL,
 	-- price value
 	"rebate" DECIMAL(12,2) NOT NULL,
 	-- price value
@@ -234,6 +279,8 @@ CREATE TABLE "mshop_catalog_index_price" (
 	"ctime" DATETIME NOT NULL,
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "unq_mscatinpr_p_s_prid_lt"
+	UNIQUE ("prodid", "siteid", "priceid", "listtype"),
 CONSTRAINT "fk_mscatinpr_prodid"
 	FOREIGN KEY ("prodid")
 	REFERENCES "mshop_product" ("id")
@@ -284,6 +331,8 @@ CREATE TABLE "mshop_catalog_index_text" (
 	"ctime" DATETIME NOT NULL,
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "unq_mscatinte_p_s_tid_lt"
+	UNIQUE ("prodid", "siteid", "textid", "listtype"),
 CONSTRAINT "fk_mscatinte_prodid"
 	FOREIGN KEY ("prodid")
 	REFERENCES "mshop_product" ("id")
@@ -309,46 +358,3 @@ CONSTRAINT "fk_mscatinte_langid"
 CREATE FULLTEXT INDEX "idx_mscatinte_value" ON "mshop_catalog_index_text" ("value");
 
 CREATE INDEX "idx_mscatinte_p_s_lt_la_ty_va" ON "mshop_catalog_index_text" ("prodid", "siteid", "listtype", "langid", "type", "value"(16));
-
-
-CREATE TABLE "mshop_catalog_index_attribute" (
-	-- Product id
-	"prodid" INTEGER NOT NULL,
-	-- site id, references mshop_locale_site.id
-	"siteid" INTEGER NOT NULL,
-	-- attribute ID
-	"attrid" INTEGER NULL,
-	-- product list type
-	"listtype" VARCHAR(32) NOT NULL,
-	-- attribute type
-	"type" VARCHAR(32) NOT NULL,
-	-- attribute code
-	"code" VARCHAR(32) NOT NULL,
-	-- Date of last modification of this database entry
-	"mtime" DATETIME NOT NULL,
-	-- Date of creation of this database entry
-	"ctime" DATETIME NOT NULL,
-	-- Editor who modified this entry at last
-	"editor" VARCHAR(255) NOT NULL,
-CONSTRAINT "fk_mscatinat_prodid"
-	FOREIGN KEY ("prodid")
-	REFERENCES "mshop_product" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mscatinat_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mscatinat_attrid"
-	FOREIGN KEY ("attrid")
-	REFERENCES "mshop_attribute" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE INDEX "idx_mscatinat_s_at_lt" ON "mshop_catalog_index_attribute" ("siteid", "attrid", "listtype");
-
-CREATE INDEX "idx_mscatinat_p_s_at_lt" ON "mshop_catalog_index_attribute" ("prodid", "siteid", "attrid", "listtype");
-
-CREATE INDEX "idx_mscatinat_p_s_lt_t_c" ON "mshop_catalog_index_attribute" ("prodid", "siteid", "listtype", "type", "code");

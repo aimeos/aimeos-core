@@ -214,21 +214,23 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	public function optimize()
 	{
 		$context = $this->_getContext();
+		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
 			$path = 'mshop/catalog/manager/index/attribute/default/optimize';
-			foreach( $context->getConfig()->get( $path, array() ) as $sql ) {
+			foreach( $config->get( $path, array() ) as $sql ) {
 				$conn->create( $sql )->execute()->finish();
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -243,7 +245,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	 * Rebuilds the catalog index attribute for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param array $items List of product items implementing MShop_Product_Item_Interface
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -258,11 +260,12 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
-			foreach ( $items as $item )
+			foreach( $items as $item )
 			{
 				$listTypes = array();
 				foreach( $item->getListItems( 'attribute' ) as $listItem ) {
@@ -271,15 +274,15 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/attribute/default/item/insert' );
 
-				foreach( $item->getRefItems( 'attribute' ) as $refItem )
+				foreach( $item->getRefItems( 'attribute' ) as $refId => $refItem )
 				{
-					if( !isset( $listTypes[ $refItem->getId() ] ) )
+					if( !isset( $listTypes[$refId] ) )
 					{
-						$msg = sprintf( 'List type for attribute item with ID "%1$s" not available', $refItem->getId() );
+						$msg = sprintf( 'List type for attribute item with ID "%1$s" not available', $refId );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
-					foreach( $listTypes[ $refItem->getId() ] as $listType )
+					foreach( $listTypes[$refId] as $listType )
 					{
 						$stmt->bind( 1, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
 						$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
@@ -290,16 +293,19 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 						$stmt->bind( 7, $date ); // mtime
 						$stmt->bind( 8, $editor );
 						$stmt->bind( 9, $date ); // ctime
-						$result = $stmt->execute()->finish();
+
+						try {
+							$result = $stmt->execute()->finish();
+						} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
 					}
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -317,7 +323,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		$this->rebuildIndex( array( $item ) );
+		$this->rebuildIndex( array( $item->getId() => $item ) );
 	}
 
 
@@ -332,8 +338,10 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = $ids = array();
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -348,11 +356,11 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 				$ids[] = $row['id'];
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

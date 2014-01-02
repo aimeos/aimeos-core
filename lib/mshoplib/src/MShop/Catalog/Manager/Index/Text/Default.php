@@ -221,8 +221,10 @@ class MShop_Catalog_Manager_Index_Text_Default
 	public function optimize()
 	{
 		$context = $this->_getContext();
+		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -231,11 +233,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 				$conn->create( $sql )->execute()->finish();
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -250,7 +252,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 * Rebuilds the catalog index text for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param array $items List of product items implementing MShop_Product_Item_Interface
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -266,12 +268,15 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
-			foreach ( $items as $item )
+			foreach( $items as $item )
 			{
+				$parentId = $item->getId(); // array id != $item->getId() for sub-products
+
 				$listTypes = array();
 				foreach( $item->getListItems( 'text' ) as $listItem ) {
 					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
@@ -279,31 +284,39 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 				$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
 
-				foreach( $item->getRefItems( 'text' ) as $refItem )
+				foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
 				{
-					if( !isset( $listTypes[ $refItem->getId() ] ) ) {
-						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refItem->getId() );
+					if( !isset( $listTypes[$refId] ) ) {
+						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refId );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
-					foreach( $listTypes[ $refItem->getId() ] as $listType )	{
-						$this->_saveText( $stmt, $item->getId(), $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'product', $refItem->getContent(), $date, $editor );
+					foreach( $listTypes[$refId] as $listType )
+					{
+						$this->_saveText(
+							$stmt, $parentId, $siteid, $refId, $refItem->getLanguageId(), $listType,
+							$refItem->getType(), 'product', $refItem->getContent(), $date, $editor
+						);
 					}
 				}
 
 				$names = $item->getRefItems( 'text', 'name' );
 
-				if( empty( $names ) ) {
-					$this->_saveText( $stmt, $item->getId(), $siteid, null, $locale->getLanguageId(), 'default', 'name', 'product', $item->getLabel(), $date, $editor );
+				if( empty( $names ) )
+				{
+					$this->_saveText(
+						$stmt, $parentId, $siteid, null, $locale->getLanguageId(), 'default',
+						'name', 'product', $item->getLabel(), $date, $editor
+					);
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -323,7 +336,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		$this->rebuildIndex( array( $item ) );
+		$this->rebuildIndex( array( $item->getId() => $item ) );
 	}
 
 
@@ -338,8 +351,10 @@ class MShop_Catalog_Manager_Index_Text_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = $ids = array();
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -355,11 +370,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 				$ids[] = $row['id'];
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -387,8 +402,10 @@ class MShop_Catalog_Manager_Index_Text_Default
 	public function searchTexts( MW_Common_Criteria_Interface $search )
 	{
 		$list = array();
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$context = $this->_getContext();
+		$dbm = $context->getDatabaseManager();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -403,11 +420,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 				$list[ $row['prodid'] ] = $row['value'];
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -418,12 +435,11 @@ class MShop_Catalog_Manager_Index_Text_Default
 	/**
 	 * Saves texts associated with attributes to catalog_index_text.
 	 *
-	 * @param array $items List of product items implementing MShop_Product_Item_Interface
+	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	protected function _saveAttributeTexts( array $items )
 	{
-		$attrIds = array();
-		$prodIds = array();
+		$attrIds = $prodIds = array();
 
 		foreach( $items as $item )
 		{
@@ -444,7 +460,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
 
-		$attributeItems = $attrManager->searchItems( $search, array('text') );
+		$attributeItems = $attrManager->searchItems( $search, array( 'text' ) );
 
 
 		$context = $this->_getContext();
@@ -455,53 +471,77 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-		$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
-			foreach ( $attributeItems as $item )
+			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/item/insert' );
+
+			foreach( $attributeItems as $id => $item )
 			{
 				$listTypes = array();
 				foreach( $item->getListItems( 'text', 'default' ) as $listItem ) {
 					$listTypes[ $listItem->getRefId() ][] = $listItem->getType();
 				}
 
-
-
-				foreach( $item->getRefItems( 'text' ) as $refItem )
+				foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
 				{
-					if( !isset( $listTypes[ $refItem->getId() ] ) ) {
-						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refItem->getId() );
+					if( !isset( $listTypes[$refId] ) ) {
+						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refId );
 						throw new MShop_Catalog_Exception( $msg );
 					}
 
-					foreach( $listTypes[ $refItem->getId() ] as $listType )
+					foreach( $listTypes[$refId] as $listType )
 					{
-						foreach( $prodIds[$item->getId()] as $idx => $productId ) {
-							$this->_saveText( $stmt, $productId, $siteid, $refItem->getId(), $refItem->getLanguageId(), $listType, $refItem->getType(), 'attribute', $refItem->getContent(), $date, $editor );
+						foreach( $prodIds[$id] as $productId )
+						{
+							$this->_saveText(
+								$stmt, $productId, $siteid, $refId, $refItem->getLanguageId(), $listType,
+								$refItem->getType(), 'attribute', $refItem->getContent(), $date, $editor
+							);
 						}
 					}
 				}
 
 				$names = $item->getRefItems( 'text', 'name' );
 
-				if( empty( $names ) ) {
-					$this->_saveText( $stmt, $prodIds[$item->getId()], $siteid, null, $locale->getLanguageId(), 'default', 'name', 'attribute', $item->getLabel(), $date, $editor );
+				if( empty( $names ) )
+				{
+					$this->_saveText(
+						$stmt, $prodIds[$id], $siteid, null, $locale->getLanguageId(), 'default',
+						'name', 'attribute', $item->getLabel(), $date, $editor
+					);
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
 
 
-	protected function _saveText( $stmt, $id, $siteid, $refid, $lang, $listtype, $reftype, $domain, $label, $date, $editor )
+	/**
+	 * Saves the text record with given set of parameters.
+	 *
+	 * @param MW_Database_Statement_Interface $stmt Prepared SQL statement with place holders
+	 * @param integer $id ID of the product item
+	 * @param integer $siteid Site ID
+	 * @param string $refid ID of the text item that contains the text
+	 * @param string $lang Two letter ISO language code
+	 * @param string $listtype Type of the referenced text in the list item
+	 * @param string $reftype Type of the referenced text item
+	 * @param string $domain Domain the text is from
+	 * @param string $content Text content to store
+	 * @param string $date Current timestamp in "YYYY-MM-DD HH:mm:ss" format
+	 * @param string $editor Name of the editor who stored the product
+	 */
+	protected function _saveText( MW_DB_Statement_Interface $stmt, $id, $siteid, $refid, $lang, $listtype,
+		$reftype, $domain, $content, $date, $editor )
 	{
 		$stmt->bind( 1, $id, MW_DB_Statement_Abstract::PARAM_INT );
 		$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
@@ -510,10 +550,13 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$stmt->bind( 5, $listtype );
 		$stmt->bind( 6, $reftype );
 		$stmt->bind( 7, $domain );
-		$stmt->bind( 8, $label );
+		$stmt->bind( 8, $content );
 		$stmt->bind( 9, $date );//mtime
-		$stmt->bind( 10, $editor, MW_DB_Statement_Abstract::PARAM_STR );
+		$stmt->bind( 10, $editor );
 		$stmt->bind( 11, $date );//ctime
-		$stmt->execute()->finish();
+
+		try {
+			$result = $stmt->execute()->finish();
+		} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
 	}
 }

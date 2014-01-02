@@ -20,7 +20,7 @@ class Client_Html_Catalog_List_Default
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/catalog/list/default/subparts';
-	private $_subPartNames = array( 'head', 'pagination', 'items', 'pagination' );
+	private $_subPartNames = array( 'head', 'promo', 'pagination', 'items', 'pagination' );
 
 
 	/**
@@ -119,18 +119,6 @@ class Client_Html_Catalog_List_Default
 
 
 	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 */
-	public function isCachable( $what )
-	{
-		return false;
-	}
-
-
-	/**
 	 * Processes the input, e.g. store given values.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
@@ -225,9 +213,10 @@ class Client_Html_Catalog_List_Default
 				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
 
 				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
-				$view->listCatPath = $catalogManager->getPath( $catid, array( 'text', 'media', 'attribute' ) );
+				$view->listCatPath = $catalogManager->getPath( $catid, $domains );
 
 				$listCatPath = $view->get( 'listCatPath', array() );
+
 				if( ( $categoryItem = end( $listCatPath ) ) !== false ) {
 					$view->listCurrentCatItem = $categoryItem;
 				}
@@ -235,17 +224,20 @@ class Client_Html_Catalog_List_Default
 			else
 			{
 				$filter = $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
+				$expr = array(
+					$filter->compare( '!=', 'catalog.index.catalog.id', null ),
+					$filter->getConditions(),
+				);
+				$filter->setConditions( $filter->combine( '&&', $expr ) );
 			}
 
 			if( !empty( $attrids ) )
 			{
 				$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( $attrids ) );
-
 				$expr = array(
 					$filter->getConditions(),
 					$filter->compare( '==', $func, count( $attrids ) ),
 				);
-
 				$filter->setConditions( $filter->combine( '&&', $expr ) );
 			}
 

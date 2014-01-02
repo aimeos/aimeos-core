@@ -20,6 +20,7 @@ class Client_Html_Catalog_Filter_Default
 {
 	private $_subPartPath = 'client/html/catalog/filter/default/subparts';
 	private $_subPartNames = array( 'tree', 'attribute' );
+	private $_cache;
 
 
 	/**
