@@ -1,5 +1,5 @@
 /*
- * ! Copyright (c) Metaways Infosystems GmbH, 2011 LGPLv3,
+ * Copyright (c) Metaways Infosystems GmbH, 2011 LGPLv3,
  * http://www.arcavias.com/en/license
  */
 
@@ -261,29 +261,6 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			listUI: that,
 			isNewRecord: true
 		}).show();
-		
-		// I leave this if we ever to want a dialog for copy actions again it may be useful
-		/*Ext.Msg.show({
-			title: _('Copy item?'),
-			msg: _('Do you want to copy this item?'),
-			buttons: Ext.Msg.YESNO,
-			fn: function (btn) {
-				if (btn == 'yes') {
-					var rec = that.getRecord('copy');
-					Ext.ComponentMgr.create({
-						xtype: that.itemUiXType,
-						domain: that.recordName.toLowerCase(),
-						record: rec,
-						store: that.store,
-						listUI: that,
-						isNewRecord: true,
-						isCopy: true
-					}).show();
-				}
-			},
-			animEl: 'elId',
-			icon: Ext.MessageBox.QUESTION
-		});*/
 	},
 	
 	onDeleteSelectedItems: function() {

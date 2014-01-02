@@ -32,7 +32,7 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			activeTab : 0,
 			border : false,
 			itemId : 'MShop.panel.attribute.ItemUi',
-			plugins : (this.isCopy !== true) ? [ 'ux.itemregistry' ] : null,
+			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
 				title : _('Basic'),

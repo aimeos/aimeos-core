@@ -123,10 +123,6 @@ MShop.panel.log.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
 				hidden : true
 			}
 		];
-	},
-
-	initToolbar: function() {
-		this.tbar = [];
 	}
 } );
 

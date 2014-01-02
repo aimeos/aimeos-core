@@ -144,16 +144,6 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 				editable : false
 			}
 		];
-	},
-	
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionDelete,
-			this.actionExport,
-			this.importButton
-		];
 	}
 } );
 
