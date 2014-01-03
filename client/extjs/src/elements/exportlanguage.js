@@ -477,6 +477,11 @@ MShop.elements.exportlanguage.Window = Ext.extend( Ext.Window, {
 
 		this.fireEvent( 'save', this, rs );
 		this.close();
+		
+		Ext.MessageBox.alert(
+			_('Export successful'),
+			_('The file with the exported texts will be available within a few minutes. It can then be downloaded from the "Job" panel of the "Overview" tab.')
+		);
 	},
 
 	statusColumnRenderer : function( status, metaData ) {
