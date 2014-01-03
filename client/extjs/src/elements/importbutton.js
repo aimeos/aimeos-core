@@ -69,7 +69,10 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
 
 			Ext.MessageBox.alert(
 				_('Upload successful'),
-				_('Your file was uploaded successfully and the import will be finished within a few minutes.') );
+				_('The texts of your uploaded file will be imported within a few minutes. <br />' +
+					'You can check the status of the import in the "Job" panel of the ' +
+					'"Overview" tab.'
+			) );
 	}
 });
 
