@@ -158,7 +158,7 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 			$start += $count;
 			$search->setSlice( $start );
 		}
-		while( $count > 0 );
+		while( $count == $search->getSliceSize() );
 
 		$this->_txCommit();
 
