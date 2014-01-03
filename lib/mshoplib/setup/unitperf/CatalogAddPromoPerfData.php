@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
 /**
- * Adds product performance records to catalog list table.
+ * Adds product promotion performance records to catalog list table.
  */
-class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -18,7 +18,7 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'CatalogAddBasePerfData', 'MShopAddTypeDataUnitperf', 'ProductAddBasePerfData', 'ProductAddSelectPerfData' );
+		return array( 'CatalogAddProductPerfData' );
 	}
 
 
@@ -34,11 +34,11 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 
 
 	/**
-	 * Insert catalog nodes and product/catalog relations.
+	 * Inserts catalog promotion products.
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product categories performance data', 0);
+		$this->_msg( 'Adding catalog promotion performance data', 0 );
 
 
 		$context =  $this->_getContext();
@@ -51,7 +51,7 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 		$search = $catalogListTypeManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'catalog.list.type.domain', 'product' ),
-			$search->compare( '==', 'catalog.list.type.code', 'default' ),
+			$search->compare( '==', 'catalog.list.type.code', 'promotion' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $catalogListTypeManager->searchItems( $search );
@@ -63,9 +63,6 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 
 		$search = $catalogManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'catalog.level' ), $search->sort( '+', 'catalog.left' ) ) );
-		$search->setSlice( 0, 0x7fffffff );
-
-		$catIds = array_keys( $catalogManager->searchItems( $search ) );
 
 
 		$listItem = $catalogListManager->createItem();
@@ -73,48 +70,45 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 		$listItem->setDomain( 'product' );
 
 
-		$this->_txBegin();
-
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$search = $productManager->createSearch();
-		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
-
-		$start = $pos = 0;
+		$start = 0;
 
 		do
 		{
-			$catId = current( $catIds );
+			$this->_txBegin();
 
-			if( ( $catId2 = next( $catIds ) ) === false ) {
-				$catId2 = reset( $catIds );
-			}
+			$result = $catalogManager->searchItems( $search );
 
-			$result = $productManager->searchItems( $search );
-
-			foreach( $result as $id => $item )
+			foreach( $result as $catId => $catItem )
 			{
-				$listItem->setId( null );
-				$listItem->setParentId( $catId );
-				$listItem->setRefId( $id );
-				$listItem->setPosition( $pos++ );
+				$pos = 0;
 
-				$catalogListManager->saveItem( $listItem, false );
+				$search = $catalogListManager->createSearch();
+				$expr = array(
+					$search->compare( '==', 'catalog.list.parentid', $catId ),
+					$search->compare( '==', 'catalog.list.position', array( 20, 40, 60, 80 ) ),
+					$search->compare( '==', 'catalog.list.domain', 'product' ),
+					$search->compare( '==', 'catalog.list.type.code', 'default' ),
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
 
-				$listItem->setId( null );
-				$listItem->setParentId( $catId2 );
-				$listItem->setRefId( $id );
-				$listItem->setPosition( $pos++ );
+				foreach( $catalogListManager->searchItems( $search ) as $item )
+				{
+					$listItem->setId( null );
+					$listItem->setParentId( $item->getParentId() );
+					$listItem->setRefId( $item->getRefId() );
+					$listItem->setPosition( $pos++ );
 
-				$catalogListManager->saveItem( $listItem, false );
+					$catalogListManager->saveItem( $listItem, false );
+				}
 			}
 
 			$count = count( $result );
 			$start += $count;
 			$search->setSlice( $start );
+
+			$this->_txCommit();
 		}
 		while( $count == $search->getSliceSize() );
-
-		$this->_txCommit();
 
 
 		$this->_status( 'done' );

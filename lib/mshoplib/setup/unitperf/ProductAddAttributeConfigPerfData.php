@@ -138,7 +138,7 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 			$start += $count;
 			$search->setSlice( $start );
 		}
-		while( $count > 0 );
+		while( $count == $search->getSliceSize() );
 
 		$this->_txCommit();
 

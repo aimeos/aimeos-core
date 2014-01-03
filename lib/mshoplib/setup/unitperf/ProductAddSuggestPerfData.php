@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
 /**
- * Adds selection performance records to product table.
+ * Adds suggestion performance records to products.
  */
-class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductAddSuggestPerfData extends MW_Setup_Task_Abstract
 {
 	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
 	{
@@ -29,7 +29,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddPerfData', 'ProductAddBasePerfData', 'ProductAddTextPerfData' );
+		return array( 'ProductAddBasePerfData', 'ProductAddSelectPerfData' );
 	}
 
 
@@ -40,7 +40,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'ProductAddMediaPerfData', 'CatalogRebuildPerfIndex' );
+		return array( 'CatalogRebuildPerfIndex' );
 	}
 
 
@@ -58,64 +58,16 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product selection performance data', 0);
+		$this->_msg( 'Adding product suggestion performance data', 0 );
 
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
-		$productTypeManager = $productManager->getSubManager( 'type' );
-
-		$expr = array();
-		$search = $productTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.type.domain', 'product');
-		$expr[] = $search->compare('==', 'product.type.code', 'select');
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productTypeManager->searchItems($search);
-
-		if ( ($productTypeItem = reset($types)) === false) {
-			throw new Exception('Product type item not found');
-		}
-
-
-		$this->_txBegin();
-
-		$productItem = $productManager->createItem();
-		$productItem->setTypeId( $productTypeItem->getId() );
-		$productItem->setStatus( 1 );
-		$productItem->setSupplierCode( 'My selection brand' );
-		$productItem->setDateStart( '1970-01-01 00:00:00' );
-
-		$selProducts = array();
-
-		for( $i = 0; $i < 1000; $i++ )
-		{
-			$productItem->setId( null );
-			$productItem->setCode( 'perf-select-' . str_pad( $i, 5, '0', STR_PAD_LEFT ) );
-			$productItem->setLabel( 'Selection product ' . ($i+1) );
-			$productManager->saveItem( $productItem );
-
-			$selProducts[] = $productItem->getId();
-		}
-
-		$this->_txCommit();
-
-
-		$expr = array();
-		$search = $productTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.type.domain', 'product');
-		$expr[] = $search->compare('==', 'product.type.code', 'default');
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productTypeManager->searchItems($search);
-
-		if ( ($productTypeItem = reset($types)) === false) {
-			throw new Exception('Product type item not found');
-		}
-
 		$productListManager = $productManager->getSubManager( 'list' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
+		$expr[] = $search->compare('==', 'product.list.type.code', 'suggestion');
 		$expr[] = $search->compare('==', 'product.list.type.domain', 'product');
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems($search);
@@ -125,8 +77,11 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 		}
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.typeid', $productTypeItem->getId() ) );
-		$search->setSortations( array( $search->sort( '-', 'product.id' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+
+		$refsearch = $productManager->createSearch();
+		$refsearch->setSortations( array( $refsearch->sort( '+', 'product.id' ) ) );
+		$refsearch->setSlice( 1 );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
@@ -135,21 +90,29 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 
 		$this->_txBegin();
 
-		$start = $num = 0;
+		$start = 0;
 
 		do
 		{
+			$num = 0;
+
 			$result = $productManager->searchItems( $search );
+			$refresult = $productManager->searchItems( $refsearch );
 
 			foreach( $result as $id => $product )
 			{
-				$pos = (int) ( $num / 9 );
+				$pos = 0;
+				$length = ( $num % 4 ) + 3;
 
-				$listItem->setId( null );
-				$listItem->setParentId( $selProducts[ $pos ] );
-				$listItem->setRefId( $id );
+				foreach( array_slice( $refresult, $num, $length, true ) as $refid => $refproduct )
+				{
+					$listItem->setId( null );
+					$listItem->setParentId( $id );
+					$listItem->setRefId( $refid );
+					$listItem->setPosition( $pos++ );
 
-				$productListManager->saveItem( $listItem, false );
+					$productListManager->saveItem( $listItem, false );
+				}
 
 				$num++;
 			}
@@ -157,6 +120,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 			$count = count( $result );
 			$start += $count;
 			$search->setSlice( $start );
+			$refsearch->setSlice( $start + 1 );
 		}
 		while( $count == $search->getSliceSize() );
 
