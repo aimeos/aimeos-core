@@ -18,6 +18,7 @@ It's is suited for medium to large size businesses which needs a seamless integr
 * [Documentation Wiki](https://docs.arcavias.com/)
 * [Issue tracker](https://bugs.arcavias.com/)
 * [Forum](https://forum.arcavias.com/)
+* [Facebook](https://facebook.com/Arcavias)
 
 ## License
 
