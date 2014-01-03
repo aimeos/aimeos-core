@@ -139,7 +139,7 @@ jQuery(document).ready( function($) {
 				}
 			);
 		},
-		select: function( event, ui ) { 
+		select: function( event, ui ) {
 			arcaviasInputComplete.val( ui.item.value );
 			$( ".catalog-filter-search > form" ).submit();
 		}
@@ -147,8 +147,8 @@ jQuery(document).ready( function($) {
 
 
 	/* Lazy product image loading in list view */
-	var arcaviasLazyLoader = (function() { 
-		var elements = $(".catalog-list-items .lazy-image");
+	var arcaviasLazyLoader = (function() {
+		var elements = $(".catalog-list-items .lazy-image, .catalog-list-promo .lazy-image");
 		for( var i = 0; i < elements.length; i++ ) {
 			var element = $(elements[i]);
 	        if( $(window).scrollTop() + $(window).height() + 2 * element.height() >= element.offset().top ) {
