@@ -11,14 +11,6 @@
 		</jsllint>
 	</target>
 
-	<target name="clean" description="Cleans up temporary files">
-		<delete quiet="true" failonerror="false">
-			<fileset dir="deploy/js">
-				<include name="*.js" />
-			</fileset>
-		</delete>
-	</target>
-
 	<target name="all" depends="check" description="Builds all parts of the package">
 	</target>
 
