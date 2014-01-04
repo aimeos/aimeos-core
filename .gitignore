@@ -1,5 +1,4 @@
 resource.php
-client/extjs/deploy/*
 vendor/
 
 misc/apidoc/
