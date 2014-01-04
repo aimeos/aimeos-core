@@ -127,7 +127,6 @@
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="clean" haltonfailure="true" dir="${coredir}/client/extjs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="clean" haltonfailure="true">
