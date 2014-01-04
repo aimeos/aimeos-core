@@ -333,6 +333,8 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 
 		itemUi.show();
 	},
+	
+	onCopySelectedItems : MShop.panel.AbstractListUi.prototype.onCopySelectedItems,
 
 	setDomainProperty : MShop.panel.AbstractListUi.prototype.setDomainProperty,
 	setSiteParam : MShop.panel.AbstractListUi.prototype.setSiteParam
