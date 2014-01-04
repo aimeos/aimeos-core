@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 14:36+0100\n"
+"POT-Creation-Date: 2014-01-04 15:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,7 +52,7 @@ msgid ""
 msgstr ""
 
 #. / Price format with price value (%1$s) and currency (%2$s)
-#: layouts/catalog/list/promo-body-default.html:18
+#: layouts/catalog/list/promo-body-default.html:17
 #: layouts/catalog/list/items-body-default.html:16
 #: layouts/catalog/session/seen-body-default.html:18
 #: layouts/catalog/detail/basket-body-default.html:13
@@ -79,7 +79,7 @@ msgid "%1$s at %2$s"
 msgstr ""
 
 #. / Percent format with value (%1$s) and % sign
-#: layouts/catalog/list/promo-body-default.html:20
+#: layouts/catalog/list/promo-body-default.html:19
 #: layouts/catalog/list/items-body-default.html:18
 #: layouts/catalog/session/seen-body-default.html:20
 #: layouts/catalog/detail/basket-body-default.html:15
@@ -187,7 +187,7 @@ msgstr ""
 #: layouts/common/summary/address-body-default.html:78
 #: layouts/common/summary/detail-body-default.html:75
 #: layouts/common/summary/service-body-default.html:19
-#: layouts/common/summary/service-body-default.html:51
+#: layouts/common/summary/service-body-default.html:53
 msgid "Change"
 msgstr ""
 
@@ -620,7 +620,7 @@ msgstr ""
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr ""
 
-#: layouts/catalog/list/promo-body-default.html:25
+#: layouts/catalog/list/promo-body-default.html:24
 msgid "Top seller"
 msgstr ""
 
@@ -715,7 +715,7 @@ msgstr ""
 msgid "order"
 msgstr ""
 
-#: layouts/common/summary/service-body-default.html:49
+#: layouts/common/summary/service-body-default.html:51
 #: layouts/checkout/standard/payment-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Payment/Default.php:12
 msgid "payment"

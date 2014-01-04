@@ -5,14 +5,14 @@
 # Translators:
 # dhoffmann <d.hoffmann@metaways.de>, 2013
 # dhoffmann <d.hoffmann@metaways.de>, 2013
-# nsendetzky <n.sendetzky@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2013-2014
 # nsendetzky <n.sendetzky@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 22:53+0100\n"
-"PO-Revision-Date: 2013-12-22 21:57+0000\n"
+"POT-Creation-Date: 2014-01-04 15:00+0100\n"
+"PO-Revision-Date: 2014-01-04 14:11+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -122,7 +122,7 @@ msgid "Configuration invalid"
 msgstr "Konfiguration ist ungültig"
 
 #: src/MShop/Common/Manager/List/Default.php:347
-#: src/MShop/Common/Manager/List/Default.php:427
+#: src/MShop/Common/Manager/List/Default.php:424
 #, php-format
 msgid "Configuration not available"
 msgstr "Konfiguration nicht verfügbar"
@@ -161,11 +161,6 @@ msgstr "DOM-Struktur der vom Logistikdienstleister erhaltenen XML-Datei konnte n
 msgid "Database manager object not available"
 msgstr "Datenbankmanager-Objekt nicht verfügbar"
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:410
-#, php-format
-msgid "Error in Paypal express response for order with ID \"%1$s\": %2$s"
-msgstr "Fehlerhafte Antwort von PayPal für die Bestellung mit der ID \"%1$s\": %2$s"
-
 #: src/MShop/Order/Item/Base/Abstract.php:64
 #: src/MShop/Order/Item/Base/Product/Abstract.php:39
 #, php-format
@@ -187,7 +182,6 @@ msgstr "Internationalisierungs-Objekt für \"%1$s\" nicht verfügbar"
 #: src/MAdmin/Job/Manager/Default.php:262
 #: src/MShop/Locale/Manager/Site/Default.php:304
 #: src/MShop/Service/Manager/Default.php:524
-#: src/MShop/Common/Manager/List/Default.php:364
 #: src/MShop/Plugin/Manager/Default.php:405
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
@@ -322,7 +316,7 @@ msgstr "Ungültige URL \"%1$s\" für Webseite"
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr "Item kann nicht gelöscht werden. Aktuelle Site-ID stimmt nicht mit Site-ID des Items überein."
 
-#: src/MShop/Catalog/Manager/Index/Default.php:292
+#: src/MShop/Catalog/Manager/Index/Default.php:283
 #, php-format
 msgid ""
 "Item could not be saved using method saveItem(). Item ID not available."
@@ -353,7 +347,7 @@ msgstr "List-Item mit ID \"%2$s\" in \"%1$s\" nicht gefunden"
 msgid "List type for attribute item with ID \"%1$s\" not available"
 msgstr "Listentyp für Attribut-Item mit ID \"%1$s\" nicht verfügbar"
 
-#: src/MShop/Catalog/Manager/Index/Price/Default.php:264
+#: src/MShop/Catalog/Manager/Index/Price/Default.php:324
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
 msgstr "Listentyp für Preis-Item mit ID \"%1$s\" nicht verfügbar"
@@ -436,7 +430,7 @@ msgid ""
 "method \"insertItem()\" instead."
 msgstr "Neu erstellte Seite kann nicht mit Methode \"saveItem()\" gespeichert werden. Versuchen Sie Methode \"insertItem()\"."
 
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:130
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:131
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
 msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%2$s\" verfügbar"
@@ -463,7 +457,7 @@ msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%
 #: src/MShop/Common/Manager/List/Default.php:93
 #: src/MShop/Common/Manager/Address/Default.php:133
 #: src/MShop/Text/Manager/Default.php:373
-#: src/MShop/Catalog/Manager/Index/Default.php:288
+#: src/MShop/Catalog/Manager/Index/Default.php:279
 #: src/MShop/Catalog/Manager/Default.php:470
 #: src/MShop/Product/Manager/Stock/Warehouse/Default.php:119
 #: src/MShop/Product/Manager/Stock/Default.php:115
@@ -529,26 +523,51 @@ msgstr "Typ \"%1$s\" für Bestellart liegt nicht innerhalb des vorgegebenen Wert
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
 msgstr "Bestellung mit ID \"%1$s\" wurde mit Code \"%2$s\" abgelehnt: %3$s"
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:97
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:115
 #: src/MShop/Service/Provider/Delivery/Default.php:150
 #: src/MShop/Service/Provider/Delivery/Default.php:357
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr "Parameter \"%1$s\" für Konfiguration nicht verfügbar"
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:539
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:531
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgstr "PayPal Express: Transaktion mit ID \"%1$s\" und Status \"%2$s\" schon vorhanden"
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:370
+#, php-format
+msgid "PayPal Express: Invalid request \"%1$s\""
+msgstr "PayPal Express: Ungültige Anfrage \"%1$s\""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:209
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:242
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:289
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:327
+#, php-format
+msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgstr "PayPal Express: Die Zahlungstransaktions-ID für die Bestellung \"%1$s\" ist nicht verfügbar"
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:486
+#, php-format
+msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
+msgstr "PayPal Express: Die Anfrage für die Bestell-ID \"%1$s\" schlug fehl: \"%2$s\""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:516
+#, php-format
+msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
+msgstr "PayPal Express: Falscher Zahlungsbetrag \"%1$s\" für die Bestell-ID \"%2$s\""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:508
+#, php-format
+msgid "PayPal Express: Wrong receiver email \"%1$s\""
+msgstr "PayPal Express: Falsche Empfängeradresse \"%1$s\""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:651
 msgid "Payment costs"
 msgstr "Zahlungsgebühren"
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:191
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:224
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:271
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:309
-#, php-format
-msgid "Paypal express payment transaction ID for order ID \"%1$s\" not available"
-msgstr "Transaktions-ID für Paypal-Express-Bezahlvorgang für Bestellung mit ID \"%1$s\" nicht verfügbar"
-
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:170
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:172
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
 msgstr "Bitte werfen Sie einen Blick auf die Preise der Produkte in Ihrem Warenkorb"
@@ -657,7 +676,7 @@ msgstr "Übertragung der Bestelldaten zum Logistikdienstleister fehlgeschlagen: 
 msgid "Service of type \"%1$s\" not available"
 msgstr "Service vom Typ \"%1$s\" nicht verfügbar"
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:648
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:760
 #, php-format
 msgid "Service payment provider for order base ID \"%1$s\" not found"
 msgstr "Bezahldienst (Payment-Provider) mit Order-Base-ID \"%1$s\" nicht gefunden"

@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
-#
+# 
+# 
 # Translators:
 # Translators:
 # Translators:
@@ -16,27 +16,43 @@ msgstr ""
 "PO-Revision-Date: 2013-12-21 23:36+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. Address plugin error: Delivery address not available
-msgid "address.delivery.available.none"
-msgstr "Die Lieferadresse fehlt"
-
-#. Address plugin error: Delivery address not allowed
-msgid "address.delivery.available.notallowed"
-msgstr "Eine Lieferadresse ist nicht erlaubt"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
 msgstr "Die Rechnungsadresse fehlt"
 
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "Die Lieferadresse fehlt"
+
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
 msgstr "Eine Rechnungsadresse ist nicht erlaubt"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "Eine Lieferadresse ist nicht erlaubt"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "Die Bezahloption fehlt"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "Die Lieferoption fehlt"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "Eine Bezahloption ist nicht erlaubt"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "Eine Lieferoption ist nicht erlaubt"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
@@ -57,19 +73,3 @@ msgstr "Der Preis von mindestens einem Produkt im Warenkorb hat sich in der Zwis
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
 msgstr "Es tut uns sehr leid, mindestens ein Produkt ist nicht mehr auf Lager. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
-
-#. Service plugin error: Delivery service not available
-msgid "service.delivery.available.none"
-msgstr "Die Lieferoption fehlt"
-
-#. Service plugin error: Delivery service not allowed
-msgid "service.delivery.available.notallowed"
-msgstr "Eine Lieferoption ist nicht erlaubt"
-
-#. Service plugin error: Payment service not available
-msgid "service.payment.available.none"
-msgstr "Die Bezahloption fehlt"
-
-#. Service plugin error: Payment service not allowed
-msgid "service.payment.available.notallowed"
-msgstr "Eine Bezahloption ist nicht erlaubt"
