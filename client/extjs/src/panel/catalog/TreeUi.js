@@ -74,8 +74,6 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 
 		this.store.resumeEvents();
 	},
-	
-	onCopySelectedItems : MShop.panel.AbstractListUi.prototype.onCopySelectedItems
 });
 
 
