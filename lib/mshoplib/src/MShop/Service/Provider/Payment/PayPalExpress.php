@@ -206,7 +206,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( ( $tid = $this->_getOrderServiceItem( $baseid )->getAttribute('TRANSACTIONID') ) === null )
 		{
-			$msg = sprintf( 'Paypal express payment transaction ID for order ID "%1$s" not available', $order->getId() );
+			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -239,7 +239,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( ( $tid = $serviceItem->getAttribute('TRANSACTIONID') ) === null )
 		{
-			$msg = sprintf( 'Paypal express payment transaction ID for order ID "%1$s" not available', $order->getId() );
+			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -286,7 +286,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( ( $tid = $serviceItem->getAttribute('TRANSACTIONID') ) === null )
 		{
-			$msg = sprintf( 'Paypal express payment transaction ID for order ID "%1$s" not available', $order->getId() );
+			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -324,7 +324,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( ( $tid = $this->_getOrderServiceItem( $baseid )->getAttribute('TRANSACTIONID') ) === null )
 		{
-			$msg = sprintf( 'Paypal express payment transaction ID for order ID "%1$s" not available', $order->getId() );
+			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -367,7 +367,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( $response !== 'VERIFIED' )
 		{
-			$msg = sprintf( 'Error in PaypalExpress with validation request "%1$s"', $urlQuery );
+			$msg = sprintf( 'PayPal Express: Invalid request "%1$s"', $urlQuery );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -477,14 +477,14 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( $rvals['ACK'] !== 'Success' )
 		{
-			$msg = sprintf( 'Error in Paypal express response for order with ID "%1$s": %2$s', $orderid, print_r( $rvals, true ) );
+			$msg = 'PayPal Express: method = ' . $method . ', order ID = ' . $orderid . ', response = ' . print_r( $rvals, true );
 			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
 
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
-				throw new MShop_Service_Exception( sprintf( $msg, $orderid,
-					( isset( $rvals['L_SHORTMESSAGE0'] ) ? $rvals['L_SHORTMESSAGE0'] : '<none>' )
-				) );
+				$short = ( isset( $rvals['L_SHORTMESSAGE0'] ) ? $rvals['L_SHORTMESSAGE0'] : '<none>' );
+				$msg = sprintf( 'PayPal Express: Request for order ID "%1$s" failed with "%2$s"', $orderid, $short );
+				throw new MShop_Service_Exception( $msg );
 			}
 		}
 
@@ -505,7 +505,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if( $this->_getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $additional['receiver_email'] )
 		{
-			$msg = sprintf( 'Error in PaypalExpress: Wrong receiver email "%1$s"', $additional['receiver_email'] );
+			$msg = sprintf( 'PayPal Express: Wrong receiver email "%1$s"', $additional['receiver_email'] );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -513,7 +513,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$amount = $price->getValue() + $price->getCosts();
 		if( $amount != $additional['payment_amount'] )
 		{
-			$msg = sprintf( 'Error in PaypalExpress: Wrong payment amount "%1$s"', $additional['payment_amount'] );
+			$msg = sprintf( 'PayPal Express: Wrong payment amount "%1$s" for order ID "%2$s"', $additional['payment_amount'], $additional['invoice'] );
 			throw new MShop_Service_Exception( $msg );
 		}
 
@@ -528,7 +528,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		if ( ( $attr = reset( $results ) ) !== false )
 		{
-			$msg = sprintf( 'Transactionid "%1$s" with status "%2$s" already used', $additional['txn_id'], $additional['txn_status'] );
+			$msg = sprintf( 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s" ', $additional['txn_id'], $additional['txn_status'] );
 			throw new MShop_Service_Exception( $msg );
 		}
 	}
@@ -557,7 +557,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 						break;
 					}
 
-					$str = __METHOD__ . ' : orderID=' . $invoice->getId() . ', PENDINGREASON=' . $response['PENDINGREASON'];
+					$str = 'PayPal Express: order ID = ' . $invoice->getId() . ', PENDINGREASON = ' . $response['PENDINGREASON'];
 					$this->_getContext()->getLogger()->log( $str, MW_Logger_Abstract::INFO );
 				}
 
@@ -591,7 +591,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 				break;
 
 			default:
-				$str = __METHOD__ . ' : orderID=' . $invoice->getId() . ', response => ' . print_r( $response, true );
+				$str = 'PayPal Express: order ID = ' . $invoice->getId() . ', response = ' . print_r( $response, true );
 				$this->_getContext()->getLogger()->log( $str, MW_Logger_Abstract::INFO );
 		}
 	}
