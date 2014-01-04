@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 22:53+0100\n"
+"POT-Creation-Date: 2014-01-04 15:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,7 +118,7 @@ msgid "Configuration invalid"
 msgstr ""
 
 #: src/MShop/Common/Manager/List/Default.php:347
-#: src/MShop/Common/Manager/List/Default.php:427
+#: src/MShop/Common/Manager/List/Default.php:424
 #, php-format
 msgid "Configuration not available"
 msgstr ""
@@ -155,11 +155,6 @@ msgstr ""
 msgid "Database manager object not available"
 msgstr ""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:410
-#, php-format
-msgid "Error in Paypal express response for order with ID \"%1$s\": %2$s"
-msgstr ""
-
 #: src/MShop/Order/Item/Base/Abstract.php:64
 #: src/MShop/Order/Item/Base/Product/Abstract.php:39
 #, php-format
@@ -181,7 +176,6 @@ msgstr ""
 #: src/MAdmin/Job/Manager/Default.php:262
 #: src/MShop/Locale/Manager/Site/Default.php:304
 #: src/MShop/Service/Manager/Default.php:524
-#: src/MShop/Common/Manager/List/Default.php:364
 #: src/MShop/Plugin/Manager/Default.php:405
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
@@ -310,7 +304,7 @@ msgstr ""
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr ""
 
-#: src/MShop/Catalog/Manager/Index/Default.php:292
+#: src/MShop/Catalog/Manager/Index/Default.php:283
 #, php-format
 msgid "Item could not be saved using method saveItem(). Item ID not available."
 msgstr ""
@@ -340,7 +334,7 @@ msgstr ""
 msgid "List type for attribute item with ID \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Catalog/Manager/Index/Price/Default.php:264
+#: src/MShop/Catalog/Manager/Index/Price/Default.php:324
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
 msgstr ""
@@ -421,7 +415,7 @@ msgstr ""
 msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:130
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:131
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
 msgstr ""
@@ -448,7 +442,7 @@ msgstr ""
 #: src/MShop/Common/Manager/List/Default.php:93
 #: src/MShop/Common/Manager/Address/Default.php:133
 #: src/MShop/Text/Manager/Default.php:373
-#: src/MShop/Catalog/Manager/Index/Default.php:288
+#: src/MShop/Catalog/Manager/Index/Default.php:279
 #: src/MShop/Catalog/Manager/Default.php:470
 #: src/MShop/Product/Manager/Stock/Warehouse/Default.php:119
 #: src/MShop/Product/Manager/Stock/Default.php:115
@@ -510,26 +504,51 @@ msgstr ""
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
 msgstr ""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:97
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:115
 #: src/MShop/Service/Provider/Delivery/Default.php:150
 #: src/MShop/Service/Provider/Delivery/Default.php:357
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr ""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:539
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:531
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:370
+#, php-format
+msgid "PayPal Express: Invalid request \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:209
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:242
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:289
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:327
+#, php-format
+msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:486
+#, php-format
+msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:516
+#, php-format
+msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:508
+#, php-format
+msgid "PayPal Express: Wrong receiver email \"%1$s\""
+msgstr ""
+
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:651
 msgid "Payment costs"
 msgstr ""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:191
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:224
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:271
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:309
-#, php-format
-msgid "Paypal express payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
-
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:170
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:172
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
 msgstr ""
@@ -634,7 +653,7 @@ msgstr ""
 msgid "Service of type \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:648
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:760
 #, php-format
 msgid "Service payment provider for order base ID \"%1$s\" not found"
 msgstr ""

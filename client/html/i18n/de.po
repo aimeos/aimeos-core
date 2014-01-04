@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 14:36+0100\n"
-"PO-Revision-Date: 2013-12-19 13:49+0000\n"
+"POT-Creation-Date: 2014-01-04 15:00+0100\n"
+"PO-Revision-Date: 2013-12-21 23:38+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgid ""
 msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
-#: layouts/catalog/list/promo-body-default.html:18
+#: layouts/catalog/list/promo-body-default.html:17
 #: layouts/catalog/list/items-body-default.html:16
 #: layouts/catalog/session/seen-body-default.html:18
 #: layouts/catalog/detail/basket-body-default.html:13
@@ -88,7 +88,7 @@ msgid "%1$s at %2$s"
 msgstr "%1$s am %2$s"
 
 #. / Percent format with value (%1$s) and % sign
-#: layouts/catalog/list/promo-body-default.html:20
+#: layouts/catalog/list/promo-body-default.html:19
 #: layouts/catalog/list/items-body-default.html:18
 #: layouts/catalog/session/seen-body-default.html:20
 #: layouts/catalog/detail/basket-body-default.html:15
@@ -197,7 +197,7 @@ msgstr "Kategorie mit der ID \"%1$s\" ist nicht unterhalb der ID \"%2$s\""
 #: layouts/common/summary/address-body-default.html:78
 #: layouts/common/summary/detail-body-default.html:75
 #: layouts/common/summary/service-body-default.html:19
-#: layouts/common/summary/service-body-default.html:51
+#: layouts/common/summary/service-body-default.html:53
 msgid "Change"
 msgstr "Ändern"
 
@@ -641,7 +641,7 @@ msgstr "Vielen Dank für Ihre Bestellung %1$s vom %2$s.\n\nWir haben Ihre Zahlun
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr "Die Zahlung für Ihre Bestellung %1$s vom %2$s wurde erstattet."
 
-#: layouts/catalog/list/promo-body-default.html:25
+#: layouts/catalog/list/promo-body-default.html:24
 msgid "Top seller"
 msgstr "Beliebteste Produkte"
 
@@ -736,7 +736,7 @@ msgstr "Neue Adresse"
 msgid "order"
 msgstr "Bestellung"
 
-#: layouts/common/summary/service-body-default.html:49
+#: layouts/common/summary/service-body-default.html:51
 #: layouts/checkout/standard/payment-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Payment/Default.php:12
 msgid "payment"
