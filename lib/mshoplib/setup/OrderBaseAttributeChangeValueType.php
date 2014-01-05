@@ -13,12 +13,18 @@ class MW_Setup_Task_OrderBaseAttributeChangeValueType extends MW_Setup_Task_Abst
 {
 	private $_mysql = array(
 		'mshop_order_base_product_attr' => array(
-			'DROP INDEX "idx_msordbaprat_si_oi_ty_cd_va" ON "mshop_order_base_product_attr"',
-			'ALTER TABLE "mshop_order_base_product_attr" MODIFY "value" TEXT NOT NULL',
+			'index' => array(
+				'idx_msordbaprat_si_oi_ty_cd_va' => 'DROP INDEX "idx_msordbaprat_si_oi_ty_cd_va" ON "mshop_order_base_product_attr"',
+				'idx_msordbaprat_si_cd_va' => 'DROP INDEX "idx_msordbaprat_si_cd_va" ON "mshop_order_base_product_attr"',
+			),
+			'column' => 'ALTER TABLE "mshop_order_base_product_attr" MODIFY "value" TEXT NOT NULL',
 		),
 		'mshop_order_base_service_attr' => array(
-			'DROP INDEX "idx_msordbaseat_si_oi_ty_cd_va" ON "mshop_order_base_service_attr"',
-			'ALTER TABLE "mshop_order_base_service_attr" MODIFY "value" TEXT NOT NULL',
+			'index' => array(
+				'idx_msordbaseat_si_oi_ty_cd_va' => 'DROP INDEX "idx_msordbaseat_si_oi_ty_cd_va" ON "mshop_order_base_service_attr"',
+				'idx_msordbaseat_si_cd_va' => 'DROP INDEX "idx_msordbaseat_si_cd_va" ON "mshop_order_base_service_attr"',
+			),
+			'column' => 'ALTER TABLE "mshop_order_base_service_attr" MODIFY "value" TEXT NOT NULL',
 		),
 	);
 
@@ -60,7 +66,7 @@ class MW_Setup_Task_OrderBaseAttributeChangeValueType extends MW_Setup_Task_Abst
 		$this->_msg( 'Changing attribute value type in order domain', 0 );
 		$this->_status( '' );
 
-		foreach ( $stmts as $table => $stmts )
+		foreach( $stmts as $table => $stmts )
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
@@ -68,7 +74,14 @@ class MW_Setup_Task_OrderBaseAttributeChangeValueType extends MW_Setup_Task_Abst
 				$this->_schema->columnExists( $table, 'value' ) === true &&
 				$this->_schema->getColumnDetails( $table, 'value' )->getDataType() === 'varchar'
 			) {
-				$this->_executeList( $stmts );
+				foreach( $stmts['index'] as $index => $sql )
+				{
+					if( $this->_schema->indexExists( $table, $index ) === true ) {
+						$this->_execute( $sql );
+					}
+				}
+
+				$this->_execute( $stmts['column'] );
 				$this->_status( 'changed' );
 			}
 			else

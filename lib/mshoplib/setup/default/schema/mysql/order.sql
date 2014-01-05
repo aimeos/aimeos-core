@@ -289,6 +289,9 @@ CONSTRAINT "fk_msordbaprat_ordprodid"
 
 CREATE INDEX "idx_msordbaprat_si_oi_ty_cd_va" ON "mshop_order_base_product_attr" ("siteid", "ordprodid", "type", "code", "value"(16));
 
+CREATE INDEX "idx_msordbaprat_si_cd_va" ON "mshop_order_base_product_attr" ("siteid", "code", "value"(16));
+
+
 --
 -- Payment details entered by the customers
 --
@@ -380,7 +383,8 @@ CONSTRAINT "fk_msordbaseat_ordservid"
 
 CREATE INDEX "idx_msordbaseat_si_oi_ty_cd_va" ON "mshop_order_base_service_attr" ("siteid", "ordservid", "type", "code", "value"(16));
 
-CREATE INDEX "idx_msordbaseat_si_cd_va" ON "mshop_order_base_service_attr" ("siteid", "code", "value");
+CREATE INDEX "idx_msordbaseat_si_cd_va" ON "mshop_order_base_service_attr" ("siteid", "code", "value"(16));
+
 
 --
 -- Status of the order
