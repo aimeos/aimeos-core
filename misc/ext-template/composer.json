@@ -13,7 +13,7 @@
 			"Client_Html": "client/html/src",
 			"Controller_Frontend": "controller/frontend/src",
 			"Controller_ExtJS": "controller/extjs/src",
-			"Controller_Jobs": "controller/jobs/src",
+			"Controller_Jobs": "controller/jobs/src"
 		},
 		"classmap": [
 			"lib/custom/src",

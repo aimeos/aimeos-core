@@ -19,16 +19,22 @@
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="phpcs -n --standard=${codestddir}/Metaways src tests"
+		<exec command="phpcs -n --standard=${codestddir}/Metaways src tests/MShop tests/MW"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
 		<delete file="tests/<extname>_lib-custom_test.junit.xml" quiet="true" failonerror="false" />
+		<delete dir="tests/coverage" quiet="true" failonerror="false" />
+		<delete quiet="true" failonerror="false" >
+			<fileset dir="tests">
+				<include name="*.log" />
+			</fileset>
+		</delete>
 	</target>
 
 	<target name="i18n" description="Creates translation message files">
-		<exec command="find ./src/ -type f | xgettext -s --no-wrap --language=PHP --from-code=UTF-8 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/<extname>-custom.pot -f -"
+		<exec command="find ./src/ -type f | xgettext -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/<extname>-custom.pot -f -"
 			checkreturn="true" logoutput="true" /> 
         <foreach param="po-fname" absparam="po-filename" target="i18n-update">
             <fileset dir="./i18n">
