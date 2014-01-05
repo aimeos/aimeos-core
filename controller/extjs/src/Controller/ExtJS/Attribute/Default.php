@@ -50,13 +50,14 @@ class Controller_ExtJS_Attribute_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if ( isset( $entry->{'_copy'} ) ) {
+			if ( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true )
+			{
 				$oldId = $entry->{'attribute.id'};
 				$entry->{'attribute.id'} = null;
 			}
-			
+
+			$item = $this->_manager->createItem();
+
 			if( isset( $entry->{'attribute.id'} ) ) { $item->setId( $entry->{'attribute.id'} ); }
 			if( isset( $entry->{'attribute.typeid'} ) ) { $item->setTypeId( $entry->{'attribute.typeid'} ); }
 			if( isset( $entry->{'attribute.domain'} ) ) { $item->setDomain( $entry->{'attribute.domain'} ); }
@@ -68,7 +69,7 @@ class Controller_ExtJS_Attribute_Default
 			$this->_manager->saveItem( $item );
 			$id = $item->getId();
 
-			if( isset( $entry->{'_copy'} ) ) {
+			if( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true ) {
 				$this->_copyListItems( $oldId, $id, 'attribute' );
 			}
 

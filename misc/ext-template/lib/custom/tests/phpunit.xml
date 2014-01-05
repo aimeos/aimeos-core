@@ -5,6 +5,9 @@
 		<testsuite name="MShop suite">
 			<directory>MShop/</directory>
 		</testsuite>
+		<testsuite name="MShop suite">
+			<directory>MW/</directory>
+		</testsuite>
 	</testsuites>
 	<logging>
 		<log type="junit" target="<extname>_lib-custom_test.junit.xml" />

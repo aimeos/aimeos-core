@@ -49,7 +49,7 @@ class Controller_ExtJS_Price_Default
 
 		foreach( $items as $entry )
 		{
-			if ( isset( $entry->{'_copy'} ) )
+			if ( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true )
 			{
 				$oldId = $entry->{'price.id'};
 				$entry->{'price.id'} = null;
@@ -72,7 +72,7 @@ class Controller_ExtJS_Price_Default
 			$this->_manager->saveItem( $item );
 			$id = $item->getId();
 
-			if( isset( $entry->{'_copy'} ) ) {
+			if( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true ) {
 				$this->_copyListItems( $oldId, $id, 'price' );
 			}
 

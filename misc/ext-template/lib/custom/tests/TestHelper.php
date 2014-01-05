@@ -27,7 +27,7 @@ class TestHelper
 			self::$_context[$site] = self::_createContext( $site );
 		}
 
-		return self::$_context[$site];
+		return clone self::$_context[$site];
 	}
 
 
