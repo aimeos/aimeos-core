@@ -225,7 +225,6 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	onStoreException: function(proxy, type, action, options, response) {
 		if (/*itwasus &&*/ this.isSaveing) {
 			this.isSaveing = false;
-			this.store.removeAt(this.store.getCount()-1);
 			this.saveMask.hide();
 		}
 	},
