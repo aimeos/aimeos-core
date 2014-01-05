@@ -73,7 +73,7 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 		}, attr.id ) ] );
 
 		this.store.resumeEvents();
-	},
+	}
 });
 
 

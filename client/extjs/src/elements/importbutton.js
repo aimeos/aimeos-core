@@ -65,12 +65,11 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
 	 * @private
 	 */
 	onUploadSucess: function(uploader, record, response) {
-			this.loadMask.hide();
+		this.loadMask.hide();
 
-			Ext.MessageBox.alert(
-				_('Upload successful'),
-				_('The texts of your uploaded file will be imported within a few minutes. You can check the status of the import in the "Job" panel of the "Overview" tab.')
-			);
+		Ext.MessageBox.alert(
+			_('Upload successful'),
+			_('The texts of your uploaded file will be imported within a few minutes. You can check the status of the import in the "Job" panel of the "Overview" tab.') );
 	}
 });
 
