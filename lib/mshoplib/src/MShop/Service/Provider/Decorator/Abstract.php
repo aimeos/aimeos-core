@@ -187,6 +187,18 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 
 
 	/**
+	 * Sets the payment attributes in the given service.
+	 *
+	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
+	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
+	 */
+	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
+	{
+		$this->_object->setConfigFE( $orderServiceItem, $attributes );
+	}
+
+
+	/**
 	 * Looks for new update files and updates the orders for which status updates were received.
 	 * If batch processing of files isn't supported, this method can be empty.
 	 *

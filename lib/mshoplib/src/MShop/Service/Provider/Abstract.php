@@ -378,12 +378,39 @@ implements MShop_Service_Provider_Interface
 
 
 	/**
-	 * Returns context item.
+	 * Returns the context item.
 	 *
+	 * @return MShop_Context_Item_Interface Context item
 	 */
 	protected function _getContext()
 	{
 		return $this->_context;
+	}
+
+
+	/**
+	 * Sets the attributes in the given service item.
+	 *
+	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
+	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
+	 * @param string $type Type of the configuration values (delivery or payment)
+	 */
+	protected function _setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes, $type )
+	{
+		$manager = MShop_Factory::createManager( $this->_context, 'order/base/service/attribute' );
+
+		$attributeItems = array();
+		foreach( $attributes as $key => $value )
+		{
+			$ordBaseAttrItem = $manager->createItem();
+			$ordBaseAttrItem->setCode( $key );
+			$ordBaseAttrItem->setValue( strip_tags( $value ) ); // prevent XSS
+			$ordBaseAttrItem->setType( $type );
+
+			$attributeItems[] = $ordBaseAttrItem;
+		}
+
+		$orderServiceItem->setAttributes( $attributeItems );
 	}
 
 }

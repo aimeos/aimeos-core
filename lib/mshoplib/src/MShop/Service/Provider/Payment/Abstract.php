@@ -169,6 +169,18 @@ abstract class MShop_Service_Provider_Payment_Abstract
 
 
 	/**
+	 * Sets the payment attributes in the given service.
+	 *
+	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
+	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
+	 */
+	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
+	{
+		$this->_setConfigFE( $orderServiceItem, $attributes, 'payment' );
+	}
+
+
+	/**
 	 * Sets or adds a attribute value to the list of service payment items.
 	 *
 	 * @param array &$attributes Associative array of existing service attributes code/item pairs

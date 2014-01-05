@@ -88,4 +88,17 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 		$this->assertEquals( MShop_Order_Item_Abstract::STAT_PROGRESS, $order->getDeliveryStatus() );
 	}
 
+
+	public function testSetConfigFE()
+	{
+		$item = MShop_Factory::createManager( TestHelper::getContext(), 'order/base/service' )->createItem();
+		$this->_object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
+
+		$this->assertEquals( 2, count( $item->getAttributes() ) );
+		$this->assertEquals( 'abc', $item->getAttribute( 'test.code' ) );
+		$this->assertEquals( 123, $item->getAttribute( 'test.number' ) );
+		$this->assertEquals( 'delivery', $item->getAttributeItem( 'test.code' )->getType() );
+		$this->assertEquals( 'delivery', $item->getAttributeItem( 'test.number' )->getType() );
+	}
+
 }
