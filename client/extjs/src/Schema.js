@@ -21,16 +21,16 @@ MShop.Schema = {
             var fields = [],
                 schema = this.getSchema(schemaName);
 
-            fields.push("_copy");
-
             for (var fieldName in schema.properties) {
-
                 fields.push({
                     name: fieldName,
                     type: this.getType(schema.properties[fieldName]),
                     dateFormat: 'Y-m-d H:i:s'
                 });
             }
+
+            // Extend item schema by internal copy marker
+            fields.push("_copy");
 
             this.recordCache[schemaName] = Ext.data.Record.create(fields);
         }
