@@ -116,21 +116,14 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		];
 	},
 
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionDelete
-		];
-	},
-	
-	onOpenEditWindow: function(action) {
-		if (action === 'add') {
-			return Ext.Msg.alert(_('Not implemented'), _('Sorry, adding orders manually is currently not implemented'));
-		}
 
-		return MShop.panel.order.ListUi.superclass.onOpenEditWindow.apply(this, arguments);
-	}
+    onOpenEditWindow: function(action) {
+        if (action === 'add') {
+            return Ext.Msg.alert(_('Not implemented'), _('Sorry, adding orders manually is currently not implemented'));
+        }
+
+        return MShop.panel.order.ListUi.superclass.onOpenEditWindow.apply(this, arguments);
+    }
 } );
 
 Ext.reg('MShop.panel.order.listui', MShop.panel.order.ListUi);

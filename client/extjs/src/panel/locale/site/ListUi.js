@@ -29,7 +29,7 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 		
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
-		
+
 		this.initStore();
 
 		MShop.panel.locale.site.ListUi.superclass.initComponent.call( this );

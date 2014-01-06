@@ -14,9 +14,9 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	siteidProperty : 'text.siteid',
 
 	initComponent : function() {
-
+	
 		this.title = _('Text item details');
-
+		
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
@@ -107,7 +107,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		MShop.panel.text.ItemUi.superclass.initComponent.call(this);
 	},
 
-
+	
 	afterRender : function()
 	{
 		var label = this.record ? this.record.data['text.text'] : 'new';

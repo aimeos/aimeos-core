@@ -34,8 +34,7 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
-		this.actionCopy.setHidden(true);
-		
+
 		MShop.panel.locale.ListUi.superclass.initComponent.call( this );
 	},
 
@@ -103,14 +102,6 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 				editable : false,
 				hidden : true
 			}
-		];
-	},
-
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionDelete
 		];
 	}
 } );

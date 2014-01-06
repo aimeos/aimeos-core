@@ -50,12 +50,6 @@ class Controller_ExtJS_Attribute_Default
 
 		foreach( $items as $entry )
 		{
-			if ( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true )
-			{
-				$oldId = $entry->{'attribute.id'};
-				$entry->{'attribute.id'} = null;
-			}
-
 			$item = $this->_manager->createItem();
 
 			if( isset( $entry->{'attribute.id'} ) ) { $item->setId( $entry->{'attribute.id'} ); }
@@ -67,13 +61,8 @@ class Controller_ExtJS_Attribute_Default
 			if( isset( $entry->{'attribute.status'} ) ) { $item->setStatus( $entry->{'attribute.status'} ); }
 
 			$this->_manager->saveItem( $item );
-			$id = $item->getId();
 
-			if( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true ) {
-				$this->_copyListItems( $oldId, $id, 'attribute' );
-			}
-
-			$ids[] = $id;
+			$ids[] = $item->getId();
 		}
 
 		$search = $this->_manager->createSearch();

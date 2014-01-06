@@ -2125,37 +2125,35 @@ Ext.ns('MShop');
 MShop.Schema = {
     recordCache: {},
     filterModelCache: {},
-
+    
     schemaMap: {},
     searchSchemaMap: {},
-
+    
     getRecord: function (schemaName) {
         if (! this.recordCache.hasOwnProperty(schemaName)) {
             var fields = [],
                 schema = this.getSchema(schemaName);
-
-            fields.push("_copy");
-
+            
             for (var fieldName in schema.properties) {
-
+                
                 fields.push({
                     name: fieldName,
                     type: this.getType(schema.properties[fieldName]),
                     dateFormat: 'Y-m-d H:i:s'
                 });
             }
-
+            
             this.recordCache[schemaName] = Ext.data.Record.create(fields);
         }
-
+        
         return this.recordCache[schemaName];
     },
-
+    
     getFilterModel: function(schemaName) {
         if (! this.filterModelCache.hasOwnProperty(schemaName)) {
             var fields = [],
                 schema = this.getSearchSchema(schemaName);
-
+                
             for (var dataIndex in schema.criteria) {
                 fields.push({
                     label: schema.criteria[dataIndex].description,
@@ -2163,13 +2161,13 @@ MShop.Schema = {
                     xtype: this.getFilterXType(schema.criteria[dataIndex])
                 });
             }
-
+            
             this.filterModelCache[schemaName] = fields;
         }
-
+        
         return this.filterModelCache[schemaName];
     },
-
+    
     getFilterXType: function(criteriaModel) {
         switch (criteriaModel.type) {
             case 'string': return 'ux.textfilter';
@@ -2180,7 +2178,7 @@ MShop.Schema = {
             default: return 'ux.textfilter';
         }
     },
-
+    
     getType: function (field) {
         switch (field.type) {
             case 'datetime': return 'date';
@@ -2188,29 +2186,29 @@ MShop.Schema = {
             default: return 'auto';
         }
     },
-
+    
     getSchema: function (schemaName) {
     	if (! this.schemaMap.hasOwnProperty(schemaName)) {
             throw new Ext.Error('schema "' + schemaName + '" is  not registered');
         }
-
+        
         return this.schemaMap[schemaName];
     },
-
+    
     getSearchSchema: function (schemaName) {
         if (! this.searchSchemaMap.hasOwnProperty(schemaName)) {
             throw new Ext.Error('search schema "' + schemaName + '" is  not registered');
         }
-
+        
         return this.searchSchemaMap[schemaName];
     },
-
+    
     // MShop specific
     register: function(itemschema, searchschema) {
         this.schemaMap = itemschema;
         this.searchSchemaMap = searchschema;
     }
-
+    
 };/*!
  * Copyright (c) Metaways Infosystems GmbH, 2013
  * LGPLv3, http://www.arcavias.com/license
@@ -2517,16 +2515,16 @@ Ext.ns('MShop');
 
 /**
  * a store with remote data loaded at first usage
- *
+ * 
  * @singelton
  * @class       MShop.GlobalStore
  */
 MShop.GlobalStoreMgr = {
     stores: {},
-
+    
     /**
      * get store for given recordName
-     *
+     * 
      * @param {String} recordName
      * @param {String} domain (optionl)
      * @param {Object} storeConfig (optional)
@@ -2535,24 +2533,24 @@ MShop.GlobalStoreMgr = {
     get: function(recordName, domain, storeConfig) {
         domain = domain || '__NODOMAIN__';
         this.stores[domain] = this.stores[domain] || {};
-
+        
         if (! this.stores[domain][recordName]) {
             this.stores[domain][recordName] = this.createStore(recordName, storeConfig);
-
+            
             this.stores[domain][recordName].load();
         }
-
+        
         return this.stores[domain][recordName];
     },
-
+    
     createStore: function(recordName, storeConfig) {
         storeConfig = storeConfig || {};
-
+        
         // autodetect idProperty
         if (! storeConfig.idProperty) {
             storeConfig.idProperty = recordName.toLowerCase().replace(/_/g, '.') + '.id';
         }
-
+        
         var store = new Ext.data.DirectStore(Ext.apply({
             autoLoad: false,
             remoteSort : false,
@@ -2575,7 +2573,7 @@ MShop.GlobalStoreMgr = {
                 site: MShop.config.site["locale.site.code"]
             }
         }, storeConfig));
-
+        
         return store;
     }
 };
@@ -2825,9 +2823,9 @@ MShop.elements.domain._store = new Ext.data.ArrayStore({
     	['text', _('Text')],
     	['price', _('Price')]
     ]
-});/*
- * Copyright (c) Metaways Infosystems GmbH, 2011 LGPLv3,
- * http://www.arcavias.com/en/license
+});/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2011
+ * LGPLv3, http://www.arcavias.com/en/license
  */
 
 
@@ -2938,7 +2936,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.grid.on('rowcontextmenu', this.onGridContextMenu, this);
 		this.grid.on('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
 		this.grid.getSelectionModel().on('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
-
+		
 		MShop.panel.AbstractListUi.superclass.initComponent.apply(this, arguments);
 
 		Ext.apply(this.grid, {
@@ -2968,11 +2966,11 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			disabled: true,
 			handler: this.onOpenEditWindow.createDelegate(this, ['edit'])
 		});
-
+		
 		this.actionCopy = new Ext.Action({
 			text: _('Copy'),
 			disabled: true,
-			handler: this.onCopySelectedItems.createDelegate(this)
+			handler: this.onOpenEditWindow.createDelegate(this, ['copy'])
 		});
 
 		this.actionDelete = new Ext.Action({
@@ -3061,7 +3059,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
 	onBeforeLoad: function(store, options) {
 		this.setSiteParam(store);
-
+		
 		if (this.domain) {
 			this.setDomainFilter(store, options);
 		}
@@ -3076,20 +3074,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			this.setDomainProperty(store, action, records, options);
 		}
 	},
-	
-	onCopySelectedItems: function() {
-		var that = this;
-		var rec = that.getRecord('copy');
-		Ext.ComponentMgr.create({
-			xtype: that.itemUiXType,
-			domain: that.recordName.toLowerCase(),
-			record: rec,
-			store: that.store,
-			listUI: that,
-			isNewRecord: true
-		}).show();
-	},
-	
+
 	onDeleteSelectedItems: function() {
 		var that = this;
 
@@ -3168,33 +3153,27 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	onOpenEditWindow: function(action) {
 		var itemUi = Ext.ComponentMgr.create({
 			xtype: this.itemUiXType,
-			domain: this.recordName.toLowerCase(),
+			domain: this.domain,
 			record: this.getRecord(action),
 			store: this.store,
 			listUI: this,
-			isNewRecord: action === 'copy' ? true : false,
-			isCopy: action === 'copy' ? true : false
+			isNewRecord: action === 'copy' ? true : false
 		});
+
 		itemUi.show();
 	},
-
+	
 	getRecord: function( action ) {
 		if( action == 'add' ) {
 			return null;
-		}
+		} 
 		else if( action == 'copy' )
 		{
 			var record = new this.store.recordType();
 			var edit = this.grid.getSelectionModel().getSelected().copy();
-			
 			record.data = edit.data;
-
-			if ( record.data.hasOwnProperty( this.recordName.toLowerCase() + ".code" ) ) {
-				record.data[ this.recordName.toLowerCase() + ".code" ] = record.data[ this.recordName.toLowerCase() + ".code" ] + "_copy";
-			}
-
-			record.set("_copy", true);
-
+			record.data[ this.idProperty ] = null;
+			
 			return record;
 		}
 		return this.grid.getSelectionModel().getSelected();
@@ -3203,7 +3182,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	onStoreException: function(proxy, type, action, options, response) {
 		var title = _( 'Error' );
 		var msg, code;
-
+		
 		if( response.error !== undefined ) {
 			msg = response && response.error ? response.error.message : _( 'No error information available' );
 			code = response && response.error ? response.error.code : 0;
@@ -3299,7 +3278,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	maximized : true,
 	layout: 'fit',
 	modal: true,
-
+	
 	initComponent: function() {
 		this.addEvents(
 			/**
@@ -3381,7 +3360,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			// wait till ref if here
 			return this.initRecord.defer(50, this, arguments);
 		}
-
+		
 		if (! this.record) {
 			this.record = new this.recordType();
 			this.isNewRecord = true;
@@ -3442,32 +3421,32 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 
 		var recordRefIdProperty = this.listUI.listNamePrefix + "refid";
 		var recordTypeIdProperty = this.listUI.listNamePrefix + "typeid";
-
+		
 		var index = this.store.findBy(function (item, index) {
 			var recordRefId = this.record.get(recordRefIdProperty);
 			var recordTypeId = this.mainForm.getForm().getFieldValues()[recordTypeIdProperty];
-
+	
 			var itemRefId = item.get(recordRefIdProperty);
 			var itemTypeId = item.get(recordTypeIdProperty);
-
+			
 			var recordId = this.record.id;
 			var itemId = index;
-
+			
 			if (! recordRefId || ! recordTypeId || ! itemRefId || ! itemTypeId)
 				return false;
-
+			
 			return ( recordRefId == itemRefId && recordTypeId == itemTypeId && recordId != itemId );
 		}, this);
-
+		
 		if (index != -1) {
 			this.isSaveing = false;
 			this.saveMask.hide();
 			Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
 			return;
 		}
-
+		
 		this.mainForm.getForm().updateRecord(this.record);
-
+		
 		if (this.isNewRecord) {
 			this.store.add(this.record);
 		}
@@ -3481,7 +3460,6 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	onStoreException: function(proxy, type, action, options, response) {
 		if (/*itwasus &&*/ this.isSaveing) {
 			this.isSaveing = false;
-			this.store.removeAt(this.store.getCount()-1);
 			this.saveMask.hide();
 		}
 	},
@@ -3493,15 +3471,16 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		if (records.indexOf(this.record) !== -1 && this.isSaveing) {
 			var ticketFn = this.onAfterSave.deferByTickets(this),
 				wrapTicket = ticketFn();
-
+			
 			this.fireEvent('save', this, this.record, ticketFn);
 			wrapTicket();
 		}
 	},
 
-	onAfterSave : function() {
+	onAfterSave: function() {
 		this.isSaveing = false;
 		this.saveMask.hide();
+
 		this.close();
 	}
 });
@@ -4616,8 +4595,6 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 
 		itemUi.show();
 	},
-	
-	onCopySelectedItems : MShop.panel.AbstractListUi.prototype.onCopySelectedItems,
 
 	setDomainProperty : MShop.panel.AbstractListUi.prototype.setDomainProperty,
 	setSiteParam : MShop.panel.AbstractListUi.prototype.setSiteParam
@@ -5216,12 +5193,11 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
 	 * @private
 	 */
 	onUploadSucess: function(uploader, record, response) {
-			this.loadMask.hide();
+		this.loadMask.hide();
 
-			Ext.MessageBox.alert(
-				_('Upload successful'),
-				_('The texts of your uploaded file will be imported within a few minutes. You can check the status of the import in the "Job" panel of the "Overview" tab.')
-			);
+		Ext.MessageBox.alert(
+			_('Upload successful'),
+			_('The texts of your uploaded file will be imported within a few minutes. You can check the status of the import in the "Job" panel of the "Overview" tab.') );
 	}
 });
 
@@ -5708,8 +5684,7 @@ MShop.elements.exportlanguage.Window = Ext.extend( Ext.Window, {
 		
 		Ext.MessageBox.alert(
 			_('Export successful'),
-			_('The file with the exported texts will be available within a few minutes. It can then be downloaded from the "Job" panel of the "Overview" tab.')
-		);
+			_('The file with the exported texts will be available within a few minutes. It can then be downloaded from the "Job" panel of the "Overview" tab.') );
 	},
 
 	statusColumnRenderer : function( status, metaData ) {
@@ -5872,9 +5847,9 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	siteidProperty : 'text.siteid',
 
 	initComponent : function() {
-
+	
 		this.title = _('Text item details');
-
+		
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
@@ -5965,7 +5940,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		MShop.panel.text.ItemUi.superclass.initComponent.call(this);
 	},
 
-
+	
 	afterRender : function()
 	{
 		var label = this.record ? this.record.data['text.text'] : 'new';
@@ -6253,9 +6228,9 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	siteidProperty : 'media.siteid',
 
 	initComponent : function() {
-
+		
 		this.title = _('Media item details');
-
+		
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
@@ -6365,7 +6340,7 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		MShop.panel.media.ItemUi.superclass.initComponent.call(this);
 	},
 
-
+	
 	afterRender : function()
 	{
 		var label = this.record ? this.record.data['media.label'] : 'new';
@@ -6848,7 +6823,7 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		this.title = _('Attribute item details');
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
-
+		
 		var storeConfig = {
 			baseParams: {
 				site: MShop.config.site["locale.site.code"],
@@ -6953,7 +6928,7 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		MShop.panel.attribute.ItemUi.superclass.initComponent.call(this);
 	},
 
-
+	
 	afterRender : function()
 	{
 		var label = this.record ? this.record.data['attribute.label'] : 'new';
@@ -7542,7 +7517,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	itemUiXType : 'MShop.panel.product.itemui',
 	exportMethod : 'Product_Export_Text.createJob',
 	importMethod: 'Product_Import_Text.uploadFile',
-	
+
 	autoExpandColumn : 'product-list-label',
 
 	filterConfig : {
@@ -7811,7 +7786,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		MShop.panel.product.ItemUi.superclass.initComponent.call(this);
 	},
-
+	
 
 	afterRender : function() {
 
@@ -7821,19 +7796,19 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
-
-
+	
+	
 	onStoreWrite : function(store, action, result, transaction, rs) {
 
         var records = Ext.isArray(rs) ? rs : [rs];
         var ids = [];
 
         MShop.panel.product.ItemUi.superclass.onStoreWrite.apply( this, arguments );
-
+        
         for( var i = 0; i < records.length; i++ ) {
         	ids.push( records[i].id );
         }
-
+         
         MShop.API.Product.finish( MShop.config.site["locale.site.code"], ids );
 	}
 });
@@ -9426,10 +9401,8 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 	{
 		this.title = _('Catalog');
 		this.domain = 'catalog';
-		
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
-		this.actionCopy.setHidden(true);
 
 		this.recordClass = MShop.Schema.getRecord(this.recordName);
 
@@ -9470,7 +9443,7 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 		}, attr.id ) ] );
 
 		this.store.resumeEvents();
-	},
+	}
 });
 
 
@@ -10005,7 +9978,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 	initComponent : function() {
 		this.title = _('Service item details');
-
+		
 		this.items = [ {
 			xtype : 'tabpanel',
 			activeTab : 0,
@@ -10115,7 +10088,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		MShop.panel.service.ItemUi.superclass.initComponent.call(this);
 	},
-
+	
 
 	afterRender : function()
 	{
@@ -10132,7 +10105,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		var config = {};
 		var editorGrid = this.findByType( 'MShop.panel.service.configui' );
 		var first = editorGrid.shift();
-
+		
 		if( first ) {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
@@ -10880,21 +10853,14 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		];
 	},
 
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionDelete
-		];
-	},
-	
-	onOpenEditWindow: function(action) {
-		if (action === 'add') {
-			return Ext.Msg.alert(_('Not implemented'), _('Sorry, adding orders manually is currently not implemented'));
-		}
 
-		return MShop.panel.order.ListUi.superclass.onOpenEditWindow.apply(this, arguments);
-	}
+    onOpenEditWindow: function(action) {
+        if (action === 'add') {
+            return Ext.Msg.alert(_('Not implemented'), _('Sorry, adding orders manually is currently not implemented'));
+        }
+
+        return MShop.panel.order.ListUi.superclass.onOpenEditWindow.apply(this, arguments);
+    }
 } );
 
 Ext.reg('MShop.panel.order.listui', MShop.panel.order.ListUi);
@@ -13462,14 +13428,6 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 				hidden : true
 			}
 		];
-	},
-
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionDelete
-		];
 	}
 } );
 
@@ -13616,8 +13574,7 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
-		this.actionCopy.setHidden(true);
-		
+
 		MShop.panel.locale.ListUi.superclass.initComponent.call( this );
 	},
 
@@ -13685,14 +13642,6 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 				editable : false,
 				hidden : true
 			}
-		];
-	},
-
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionDelete
 		];
 	}
 } );
@@ -13841,7 +13790,7 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 		
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
-		
+
 		this.initStore();
 
 		MShop.panel.locale.site.ListUi.superclass.initComponent.call( this );
@@ -14338,16 +14287,6 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				hidden : true
 			}
 		];
-	},
-
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionDelete,
-			this.actionExport,
-			this.importButton
-		];
 	}
 });
 
@@ -14572,16 +14511,6 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				editable : false,
 				hidden : true
 			}
-		];
-	},
-
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionDelete,
-			this.actionExport,
-			this.importButton
 		];
 	}
 });

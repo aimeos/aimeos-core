@@ -29,7 +29,6 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 	{
 		this.title = _('Catalog');
 		this.domain = 'catalog';
-		
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 

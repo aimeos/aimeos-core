@@ -118,12 +118,6 @@ class Controller_ExtJS_Media_Default
 
 		foreach( $items as $entry )
 		{
-			if ( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true )
-			{
-				$oldId = $entry->{'media.id'};
-				$entry->{'media.id'} = null;
-			}
-
 			$item = $this->_manager->createItem();
 
 			if( isset( $entry->{'media.id'} ) ) { $item->setId( $entry->{'media.id'} ); }
@@ -142,13 +136,8 @@ class Controller_ExtJS_Media_Default
 			}
 
 			$this->_manager->saveItem( $item );
-			$id = $item->getId();
 
-			if( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true ) {
-				$this->_copyListItems( $oldId, $id, 'media' );
-			}
-
-			$ids[] = $id;
+			$ids[] = $item->getId();
 		}
 
 		$search = $this->_manager->createSearch();
