@@ -15,7 +15,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 	initComponent : function() {
 		this.title = _('Service item details');
-
+		
 		this.items = [ {
 			xtype : 'tabpanel',
 			activeTab : 0,
@@ -125,7 +125,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		MShop.panel.service.ItemUi.superclass.initComponent.call(this);
 	},
-
+	
 
 	afterRender : function()
 	{
@@ -142,7 +142,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		var config = {};
 		var editorGrid = this.findByType( 'MShop.panel.service.configui' );
 		var first = editorGrid.shift();
-
+		
 		if( first ) {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {

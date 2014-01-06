@@ -49,12 +49,6 @@ class Controller_ExtJS_Price_Default
 
 		foreach( $items as $entry )
 		{
-			if ( isset( $entry->{'_copy'} ) )
-			{
-				$oldId = $entry->{'price.id'};
-				$entry->{'price.id'} = null;
-			}
-
 			$item = $this->_manager->createItem();
 
 			if( isset( $entry->{'price.id'} ) ) { $item->setId( $entry->{'price.id'} ); }
@@ -70,13 +64,8 @@ class Controller_ExtJS_Price_Default
 			if( isset( $entry->{'price.status'} ) ) { $item->setStatus( $entry->{'price.status'} ); }
 
 			$this->_manager->saveItem( $item );
-			$id = $item->getId();
 
-			if( isset( $entry->{'_copy'} ) ) {
-				$this->_copyListItems( $oldId, $id, 'price' );
-			}
-
-			$ids[] = $id;
+			$ids[] = $item->getId();
 		}
 
 		$search = $this->_manager->createSearch();

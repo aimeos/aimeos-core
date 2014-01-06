@@ -121,6 +121,7 @@ class Controller_ExtJS_Text_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals('unittest label', $saved['items']->{'text.label'} );
 	}
 
+
 	public function testSaveItemLabelContent()
 	{
 		$context = TestHelper::getContext();

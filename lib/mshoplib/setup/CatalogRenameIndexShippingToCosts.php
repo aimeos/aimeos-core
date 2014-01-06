@@ -21,7 +21,7 @@ class MW_Setup_Task_CatalogRenameIndexShippingToCosts extends MW_Setup_Task_Abst
 	 */
 	public function getPreDependencies()
 	{
-		return array('CatalogAddIndexUniqueIndexes');
+		return array();
 	}
 
 

@@ -1,6 +1,6 @@
-/*
- * Copyright (c) Metaways Infosystems GmbH, 2011 LGPLv3,
- * http://www.arcavias.com/en/license
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2011
+ * LGPLv3, http://www.arcavias.com/en/license
  */
 
 
@@ -111,7 +111,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.grid.on('rowcontextmenu', this.onGridContextMenu, this);
 		this.grid.on('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
 		this.grid.getSelectionModel().on('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
-
+		
 		MShop.panel.AbstractListUi.superclass.initComponent.apply(this, arguments);
 
 		Ext.apply(this.grid, {
@@ -141,11 +141,11 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			disabled: true,
 			handler: this.onOpenEditWindow.createDelegate(this, ['edit'])
 		});
-
+		
 		this.actionCopy = new Ext.Action({
 			text: _('Copy'),
 			disabled: true,
-			handler: this.onCopySelectedItems.createDelegate(this)
+			handler: this.onOpenEditWindow.createDelegate(this, ['copy'])
 		});
 
 		this.actionDelete = new Ext.Action({
@@ -234,7 +234,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
 	onBeforeLoad: function(store, options) {
 		this.setSiteParam(store);
-
+		
 		if (this.domain) {
 			this.setDomainFilter(store, options);
 		}
@@ -249,20 +249,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			this.setDomainProperty(store, action, records, options);
 		}
 	},
-	
-	onCopySelectedItems: function() {
-		var that = this;
-		var rec = that.getRecord('copy');
-		Ext.ComponentMgr.create({
-			xtype: that.itemUiXType,
-			domain: that.recordName.toLowerCase(),
-			record: rec,
-			store: that.store,
-			listUI: that,
-			isNewRecord: true
-		}).show();
-	},
-	
+
 	onDeleteSelectedItems: function() {
 		var that = this;
 
@@ -341,33 +328,27 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	onOpenEditWindow: function(action) {
 		var itemUi = Ext.ComponentMgr.create({
 			xtype: this.itemUiXType,
-			domain: this.recordName.toLowerCase(),
+			domain: this.domain,
 			record: this.getRecord(action),
 			store: this.store,
 			listUI: this,
-			isNewRecord: action === 'copy' ? true : false,
-			isCopy: action === 'copy' ? true : false
+			isNewRecord: action === 'copy' ? true : false
 		});
+
 		itemUi.show();
 	},
-
+	
 	getRecord: function( action ) {
 		if( action == 'add' ) {
 			return null;
-		}
+		} 
 		else if( action == 'copy' )
 		{
 			var record = new this.store.recordType();
 			var edit = this.grid.getSelectionModel().getSelected().copy();
-			
 			record.data = edit.data;
-
-			if ( record.data.hasOwnProperty( this.recordName.toLowerCase() + ".code" ) ) {
-				record.data[ this.recordName.toLowerCase() + ".code" ] = record.data[ this.recordName.toLowerCase() + ".code" ] + "_copy";
-			}
-
-			record.set("_copy", true);
-
+			record.data[ this.idProperty ] = null;
+			
 			return record;
 		}
 		return this.grid.getSelectionModel().getSelected();
@@ -376,7 +357,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	onStoreException: function(proxy, type, action, options, response) {
 		var title = _( 'Error' );
 		var msg, code;
-
+		
 		if( response.error !== undefined ) {
 			msg = response && response.error ? response.error.message : _( 'No error information available' );
 			code = response && response.error ? response.error.code : 0;

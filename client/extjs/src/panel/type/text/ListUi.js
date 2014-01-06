@@ -107,16 +107,6 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				hidden : true
 			}
 		];
-	},
-
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionDelete,
-			this.actionExport,
-			this.importButton
-		];
 	}
 });
 
