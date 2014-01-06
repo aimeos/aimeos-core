@@ -52,7 +52,7 @@ class Controller_ExtJS_Service_Default
 
 		foreach( $items as $entry )
 		{
-			if( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true )
+			if( isset( $entry->{'_copy'} ) )
 			{
 				$oldId = $entry->{'service.id'};
 				$entry->{'service.id'} = null;
@@ -72,7 +72,7 @@ class Controller_ExtJS_Service_Default
 			$this->_manager->saveItem( $item );
 			$id = $item->getId();
 
-			if( isset( $entry->{'_copy'} ) && $entry->{'_copy'} === true ) {
+			if( isset( $entry->{'_copy'} ) ) {
 				$this->_copyListItems( $oldId, $id, 'service' );
 			}
 

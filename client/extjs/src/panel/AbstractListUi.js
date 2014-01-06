@@ -145,7 +145,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.actionCopy = new Ext.Action({
 			text: _('Copy'),
 			disabled: true,
-			handler: this.onOpenEditWindow.createDelegate(this, ['copy'])
+			handler: this.onCopySelectedItems.createDelegate(this)
 		});
 
 		this.actionDelete = new Ext.Action({
@@ -250,6 +250,19 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		}
 	},
 	
+	onCopySelectedItems: function() {
+		var that = this;
+		var rec = that.getRecord('copy');
+		Ext.ComponentMgr.create({
+			xtype: that.itemUiXType,
+			domain: that.recordName.toLowerCase(),
+			record: rec,
+			store: that.store,
+			listUI: that,
+			isNewRecord: true
+		}).show();
+	},
+	
 	onDeleteSelectedItems: function() {
 		var that = this;
 
@@ -332,32 +345,32 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			record: this.getRecord(action),
 			store: this.store,
 			listUI: this,
-			isNewRecord: action === 'add' || action === 'copy' ? true : false
+			isNewRecord: action === 'copy' ? true : false,
+			isCopy: action === 'copy' ? true : false
 		});
 		itemUi.show();
 	},
 
 	getRecord: function( action ) {
-		switch( action ) {
-			case 'add':
-				return null;
-
-			case 'copy':
-				var key = this.recordName.toLowerCase() + '.code';
-				var record = this.grid.getSelectionModel().getSelected().copy();
-	
-				if ( record.data.hasOwnProperty( key ) ) {
-					record.set(key, record.get(key) + '_copy');
-				}
-				record.set("_copy", true);
-				record.phantom = true;
-				record.id = null;
-
-				return record;
-
-			default:
-				return this.grid.getSelectionModel().getSelected();
+		if( action == 'add' ) {
+			return null;
 		}
+		else if( action == 'copy' )
+		{
+			var record = new this.store.recordType();
+			var edit = this.grid.getSelectionModel().getSelected().copy();
+			
+			record.data = edit.data;
+
+			if ( record.data.hasOwnProperty( this.recordName.toLowerCase() + ".code" ) ) {
+				record.data[ this.recordName.toLowerCase() + ".code" ] = record.data[ this.recordName.toLowerCase() + ".code" ] + "_copy";
+			}
+
+			record.set("_copy", true);
+
+			return record;
+		}
+		return this.grid.getSelectionModel().getSelected();
 	},
 
 	onStoreException: function(proxy, type, action, options, response) {
