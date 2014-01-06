@@ -32,7 +32,6 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 		
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
-		this.actionCopy.setHidden(true);
 
 		this.recordClass = MShop.Schema.getRecord(this.recordName);
 
