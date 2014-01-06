@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f508593e614e0361718eaa0fc6017fb6",
+    "hash": "d89628d26e2b6a8ef6241e5f09ca7200",
     "packages": [
         {
             "name": "arcavias/extension-installer",
@@ -52,7 +52,7 @@
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-json": "*",
-        "ext-iconv": "*",
+        "ext-mbstring": "*",
         "ext-pcre": "*",
         "ext-pdo": "*",
         "ext-pdo_mysql": "*",
