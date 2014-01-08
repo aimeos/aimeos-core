@@ -93,9 +93,6 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 	onStoreLoad: function(store) {
 		this.store.sort(this.listItemPickerUi.itemConfig.listNamePrefix + 'position', 'ASC');
-
-		// create store of graph items ->
-		//console.log(store.reader.jsonData);
 	},
 
 	onStoreWrite: function() {
@@ -105,6 +102,10 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	onItemUiSave: function(itemUi, record, ticketFn) {
 		// make sure all parentid are set
 		this.store.each(function(r) {
+			// Remove list id if the reference should be copied
+			if (this.itemUi._copy == true) {
+				r.id = null;
+			}
 			r.set(this.listItemPickerUi.itemConfig.listNamePrefix + 'parentid', record.id);
 		}, this);
 

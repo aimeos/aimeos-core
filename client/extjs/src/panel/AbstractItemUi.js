@@ -79,6 +79,10 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		this.store.on('exception', this.onStoreException, this);
 		this.store.on('write', this.onStoreWrite, this);
 
+		if (this._copy == true) {
+			this.items[0].deferredRender = false;
+		}
+		
 		MShop.panel.AbstractItemUi.superclass.initComponent.call(this);
 	},
 
@@ -211,6 +215,13 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		}
 		
 		this.mainForm.getForm().updateRecord(this.record);
+		
+		//this_copy
+		if (this.record.get('_copy') == true) {
+			this.record.id = null;
+			this.record.phantom = true;
+		}
+		
 		
 		if (this.isNewRecord) {
 			this.store.add(this.record);

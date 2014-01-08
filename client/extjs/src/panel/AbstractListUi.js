@@ -332,8 +332,9 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			record: this.getRecord(action),
 			store: this.store,
 			listUI: this,
-			isNewRecord: action === 'copy' ? true : false
-		});
+			isNewRecord: action == 'copy' || action == 'add' ? true : false,
+			_copy: action == 'copy' ? true : false
+		}, this);
 
 		itemUi.show();
 	},
@@ -344,13 +345,21 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		} 
 		else if( action == 'copy' )
 		{
-			var record = new this.store.recordType();
-			var edit = this.grid.getSelectionModel().getSelected().copy();
-			record.data = edit.data;
-			record.data[ this.idProperty ] = null;
-			
-			return record;
+            var edit = this.grid.getSelectionModel().getSelected().copy();
+
+            edit.data[this.recordName.toLowerCase() + '.id'] = null;
+
+            edit.phantom = false;
+
+            if ( edit.data.hasOwnProperty( this.recordName.toLowerCase() + ".code" ) ) {
+            	edit.data[ this.recordName.toLowerCase() + ".code" ] = edit.data[ this.recordName.toLowerCase() + ".code" ] + "_copy";
+            }
+
+            edit.set("_copy", true);
+
+            return edit;
 		}
+
 		return this.grid.getSelectionModel().getSelected();
 	},
 
