@@ -39,7 +39,7 @@ class Client_Html_Email_Payment_Html_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/html/default/template-body';
-		$default = array( 'email/payment/' . $status . '/html-body-default.html', 'email/payment/html-body-default.html' );
+		$default = array( 'email/payment/' . $status . '/html-body-default.html', 'email/common/html-body-default.html' );
 
 		$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 		$view->mail()->setBodyHtml( $html );
@@ -64,7 +64,7 @@ class Client_Html_Email_Payment_Html_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/html/default/template-header';
-		$default = array( 'email/payment/' . $status . '/html-header-default.html', 'email/payment/html-header-default.html' );
+		$default = array( 'email/payment/' . $status . '/html-header-default.html', 'email/common/html-header-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}

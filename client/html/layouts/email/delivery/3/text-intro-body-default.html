@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+/// Delivery e-mail intro
+$msg = $this->translate( 'client/html', 'Your order %1$s from %2$s has been dispatched.' );
+$format = $this->translate( 'client/html', 'Y-m-d' );
+$order = $this->extOrderItem;
+
+$key = 'stat:' . $this->extOrderItem->getDeliveryStatus();
+$status = $this->translate( 'client/html/code', $key );
+
+$string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ), $status );
+
+?>
+
+
+<?php echo wordwrap( strip_tags( $string ) ); ?>
+<?php echo $this->get( 'introBody' ); ?>

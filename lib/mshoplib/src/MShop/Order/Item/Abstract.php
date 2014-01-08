@@ -87,14 +87,13 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 	/**
 	 * Parcel was refused.
 	 * The delivery of the parcel failed because the customer has refused to
-	 * accept it.
+	 * accept it or the address was invalid.
 	 */
 	const STAT_REFUSED = 6;
 
 	/**
 	 * Parcel was returned.
-	 * The delivery of the parcel failed because e.g. the address was invalid
-	 * and the parcel was returned to the merchant.
+	 * The parcel was sent back by the customer.
 	 */
 	const STAT_RETURNED = 7;
 

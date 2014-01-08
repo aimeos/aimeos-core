@@ -18,7 +18,7 @@ The order is pending until we receive the final payment. If you\'ve chosen to pa
 $string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ) );
 
 ?>
-<p class="email-payment-intro content-block">
+<p class="email-common-intro content-block">
 <?php echo $enc->html( nl2br( $string ), $enc::TRUST ); ?>
 <?php echo $this->get( 'introBody' ); ?>
 </p>

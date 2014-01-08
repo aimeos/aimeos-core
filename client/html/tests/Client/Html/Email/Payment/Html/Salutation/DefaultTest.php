@@ -76,7 +76,7 @@ class Client_Html_Email_Payment_Html_Salutation_DefaultTest extends MW_Unittest_
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<p class="email-payment-salutation', $output );
+		$this->assertStringStartsWith( '<p class="email-common-salutation', $output );
 		$this->assertContains( 'Dear mr Our Unittest', $output );
 	}
 

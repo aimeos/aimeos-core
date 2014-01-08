@@ -14,7 +14,7 @@ $string = $this->translate( 'client/html',
 This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards.' );
 
 ?>
-<p class="email-payment-legal content-block">
+<p class="email-common-legal content-block">
 <?php echo nl2br( $enc->html( $string, $enc::TRUST ) ); ?>
 <?php echo $this->get( 'legalBody' ); ?>
 </p>
