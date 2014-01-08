@@ -433,5 +433,4 @@ class MShop_Plugin_Manager_Default
 	{
 		return $this->_getSubManager( 'plugin', $manager, $name );
 	}
-
 }

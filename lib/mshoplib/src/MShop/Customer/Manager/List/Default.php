@@ -161,11 +161,7 @@ class MShop_Customer_Manager_List_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$list = array();
-
-		foreach( $this->_searchConfig as $key => $fields ) {
-			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
-		}
+		$list = parent::getSearchAttributes();
 
 		if( $withsub === true )
 		{
@@ -182,7 +178,7 @@ class MShop_Customer_Manager_List_Default
 
 
 	/**
-	 * Returns a new manager for attribute list extensions
+	 * Returns a new manager for customer list extensions.
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null

@@ -222,11 +222,7 @@ class MShop_Customer_Manager_Address_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$list = array();
-
-		foreach( $this->_searchConfig as $key => $fields ) {
-			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
-		}
+		$list = parent::getSearchAttributes();
 
 		if( $withsub === true )
 		{
