@@ -39,7 +39,7 @@ class Client_Html_Email_Payment_Html_Summary_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/html/summary/default/template-body';
-		$default = 'email/payment/html-summary-body-default.html';
+		$default = 'email/common/html-summary-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -62,7 +62,7 @@ class Client_Html_Email_Payment_Html_Summary_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/html/summary/default/template-header';
-		$default = 'email/payment/html-summary-header-default.html';
+		$default = 'email/common/html-summary-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}

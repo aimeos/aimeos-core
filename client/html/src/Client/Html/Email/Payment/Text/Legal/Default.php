@@ -39,7 +39,7 @@ class Client_Html_Email_Payment_Text_Legal_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/text/legal/default/template-body';
-		$default = array( 'email/payment/' . $status . '/text-legal-body-default.html', 'email/payment/text-legal-body-default.html' );
+		$default = array( 'email/payment/' . $status . '/text-legal-body-default.html', 'email/common/text-legal-body-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -62,7 +62,7 @@ class Client_Html_Email_Payment_Text_Legal_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/text/legal/default/template-header';
-		$default = array( 'email/payment/' . $status . '/text-legal-header-default.html', 'email/payment/text-legal-header-default.html' );
+		$default = array( 'email/payment/' . $status . '/text-legal-header-default.html', 'email/common/text-legal-header-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}

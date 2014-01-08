@@ -39,7 +39,7 @@ class Client_Html_Email_Payment_Text_Salutation_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/text/salutation/default/template-body';
-		$default = array( 'email/payment/' . $status . '/text-salutation-body-default.html', 'email/payment/text-salutation-body-default.html' );
+		$default = array( 'email/payment/' . $status . '/text-salutation-body-default.html', 'email/common/text-salutation-body-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -62,7 +62,7 @@ class Client_Html_Email_Payment_Text_Salutation_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/text/salutation/default/template-header';
-		$default = array( 'email/payment/' . $status . '/text-salutation-header-default.html', 'email/payment/text-salutation-header-default.html' );
+		$default = array( 'email/payment/' . $status . '/text-salutation-header-default.html', 'email/common/text-salutation-header-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}

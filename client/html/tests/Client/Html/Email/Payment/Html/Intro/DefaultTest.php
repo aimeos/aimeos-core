@@ -76,7 +76,7 @@ class Client_Html_Email_Payment_Html_Intro_DefaultTest extends MW_Unittest_Testc
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<p class="email-payment-intro', $output );
+		$this->assertStringStartsWith( '<p class="email-common-intro', $output );
 		$this->assertContains( 'Thank you for your order', $output );
 	}
 
@@ -91,7 +91,7 @@ class Client_Html_Email_Payment_Html_Intro_DefaultTest extends MW_Unittest_Testc
 
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<p class="email-payment-intro', $output );
+		$this->assertStringStartsWith( '<p class="email-common-intro', $output );
 		$this->assertContains( 'The payment for your order', $output );
 	}
 
@@ -106,7 +106,7 @@ class Client_Html_Email_Payment_Html_Intro_DefaultTest extends MW_Unittest_Testc
 
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<p class="email-payment-intro', $output );
+		$this->assertStringStartsWith( '<p class="email-common-intro', $output );
 		$this->assertContains( 'The order is pending until we receive the final payment', $output );
 	}
 
@@ -121,7 +121,7 @@ class Client_Html_Email_Payment_Html_Intro_DefaultTest extends MW_Unittest_Testc
 
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<p class="email-payment-intro', $output );
+		$this->assertStringStartsWith( '<p class="email-common-intro', $output );
 		$this->assertContains( 'We received the payment', $output );
 	}
 

@@ -76,7 +76,7 @@ class Client_Html_Email_Payment_Html_Legal_DefaultTest extends MW_Unittest_Testc
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<p class="email-payment-legal', $output );
+		$this->assertStringStartsWith( '<p class="email-common-legal', $output );
 		$this->assertContains( 'All deliveries shipped', $output );
 	}
 

@@ -40,7 +40,7 @@ class Client_Html_Email_Payment_Text_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/text/default/template-body';
-		$default = array( 'email/payment/' . $status . '/text-body-default.html', 'email/payment/text-body-default.html' );
+		$default = array( 'email/payment/' . $status . '/text-body-default.html', 'email/common/text-body-default.html' );
 
 		$text = $view->render( $this->_getTemplate( $tplconf, $default ) );
 		$view->mail()->setBody( $text );
@@ -65,7 +65,7 @@ class Client_Html_Email_Payment_Text_Default
 
 		$status = $view->extOrderItem->getPaymentStatus();
 		$tplconf = 'client/html/email/payment/text/default/template-header';
-		$default = array( 'email/payment/' . $status . '/text-header-default.html', 'email/payment/text-header-default.html' );
+		$default = array( 'email/payment/' . $status . '/text-header-default.html', 'email/common/text-header-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}

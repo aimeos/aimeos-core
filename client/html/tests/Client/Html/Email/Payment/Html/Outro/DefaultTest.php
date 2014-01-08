@@ -76,7 +76,7 @@ class Client_Html_Email_Payment_Html_Outro_DefaultTest extends MW_Unittest_Testc
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<p class="email-payment-outro', $output );
+		$this->assertStringStartsWith( '<p class="email-common-outro', $output );
 		$this->assertContains( 'If you have any questions', $output );
 	}
 
