@@ -27,7 +27,7 @@ return array(
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT msupad."id", msupad."refid", msupad."company", msupad."salutation", msupad."title",
+			SELECT msupad."id", msupad."siteid", msupad."refid", msupad."company", msupad."salutation", msupad."title",
 				   msupad."firstname", msupad."lastname", msupad."address1", msupad."address2", msupad."address3",
 				   msupad."postal", msupad."city", msupad."state", msupad."countryid", msupad."langid", msupad."telephone",
 				   msupad."email", msupad."telefax", msupad."website", msupad."flag", msupad."pos",

@@ -102,75 +102,6 @@ class MShop_Plugin_Manager_Default
 		),
 	);
 
-	private $_typeSearchConfig = array(
-		'plugin.type.id'=> array(
-			'code'=>'plugin.type.id',
-			'internalcode'=>'mpluty."id"',
-			'internaldeps'=> array( 'LEFT JOIN "mshop_plugin_type" AS mpluty ON ( mpluty."id" = mplu."typeid" )' ),
-			'label'=>'Plugin type ID',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'plugin.type.siteid'=> array(
-			'code'=>'plugin.type.siteid',
-			'internalcode'=>'mpluty."siteid"',
-			'label'=>'Plugin type site ID',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'plugin.type.code' => array(
-			'code'=>'plugin.type.code',
-			'internalcode'=>'mpluty."code"',
-			'label'=>'Plugin type code',
-			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'plugin.type.domain' => array(
-			'code'=>'plugin.type.domain',
-			'internalcode'=>'mpluty."domain"',
-			'label'=>'Plugin type domain',
-			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'plugin.type.label' => array(
-			'code'=>'plugin.type.label',
-			'internalcode'=>'mpluty."label"',
-			'label'=>'Plugin type label',
-			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'plugin.type.status' => array(
-			'code'=>'plugin.type.status',
-			'internalcode'=>'mpluty."status"',
-			'label'=>'Plugin type status',
-			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
-		),
-		'plugin.type.mtime'=> array(
-			'code'=>'plugin.type.mtime',
-			'internalcode'=>'mpluty."mtime"',
-			'label'=>'Plugin type modification date',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'plugin.type.ctime'=> array(
-			'code'=>'plugin.type.ctime',
-			'internalcode'=>'mpluty."ctime"',
-			'label'=>'Plugin type creation date/time',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'plugin.type.editor'=> array(
-			'code'=>'plugin.type.editor',
-			'internalcode'=>'mpluty."editor"',
-			'label'=>'Plugin type editor',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-	);
-
 
 	/**
 	 * Creates a new plugin object.
@@ -500,13 +431,6 @@ class MShop_Plugin_Manager_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		switch( $manager )
-		{
-			case 'type':
-				return $this->_getTypeManager( 'plugin', $manager, $name, $this->_typeSearchConfig );
-			default:
-				return $this->_getSubManager( 'plugin', $manager, $name );
-		}
+		return $this->_getSubManager( 'plugin', $manager, $name );
 	}
-
 }
