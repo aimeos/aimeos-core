@@ -24,22 +24,18 @@ msgid "company"
 msgstr "Company"
 
 #. Direct debit service provider
-#, fuzzy
 msgid "directdebit.accountno"
 msgstr "Account number"
 
 #. Direct debit service provider
-#, fuzzy
 msgid "directdebit.accountowner"
 msgstr "Account owner"
 
 #. Direct debit service provider
-#, fuzzy
 msgid "directdebit.bankcode"
 msgstr "Bank code"
 
 #. Direct debit service provider
-#, fuzzy
 msgid "directdebit.bankname"
 msgstr "Bank name"
 

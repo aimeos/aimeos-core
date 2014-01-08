@@ -150,6 +150,12 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setContent( 'unit test text' );
 		$this->assertEquals( 'unit test text', $this->_object->getContent() );
 
+		$this->_object->setContent( mb_convert_encoding( '&#x0630;&#x0631;&#x0632;', 'UTF-8', 'HTML-ENTITIES' ) );
+		$this->assertEquals( 'ذرز', $this->_object->getContent() );
+
+		$this->_object->setContent( mb_convert_encoding( '&#x27144;&#x0631;&#x0632;', 'UTF-8', 'HTML-ENTITIES' ) );
+		$this->assertEquals( mb_convert_encoding( '&#x27144;&#x0631;&#x0632;', 'UTF-8', 'HTML-ENTITIES' ), $this->_object->getContent() );
+
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
@@ -158,6 +164,9 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->_object->setContent( chr( 0x96 ) . 'укгезәөшөхзәхөшк2049һһлдябчсячмииюсит.июбҗрарэ' );
 		$this->assertEquals( 'укгезәөшөхзәхөшк2049һһлдябчсячмииюсит.июбҗрарэ', $this->_object->getContent() );
+
+		$this->_object->setContent( mb_convert_encoding( '&#xD800;&#x0631;&#x0632;', 'UTF-8', 'HTML-ENTITIES' ) );
+		$this->assertEquals( mb_convert_encoding( '&#x0631;&#x0632;', 'UTF-8', 'HTML-ENTITIES' ), $this->_object->getContent() );
 	}
 
 

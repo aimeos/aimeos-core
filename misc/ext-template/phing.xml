@@ -54,6 +54,7 @@
     </target>
 
 	<target name="release" description="Creates new release" depends="build">
+		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
 		<exec command="git branch ${version}" checkreturn="true" logoutput="true" />
 		<exec command="git tag -a ext-<extname>_${version} -m 'Release ${version}'" checkreturn="true" logoutput="true" />
 		<exec command="git push origin ${version}" checkreturn="true" logoutput="true" />
