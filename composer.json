@@ -22,6 +22,9 @@
 		"ext-zip": "*",
 		"arcavias/extension-installer": "dev-master"
 	},
+	"require-dev": {
+		"phpdocumentor/phpdocumentor": "2.*"
+	},
 	"autoload": {
 		"psr-0": {
 			"MShop": "lib/mshoplib/src",
