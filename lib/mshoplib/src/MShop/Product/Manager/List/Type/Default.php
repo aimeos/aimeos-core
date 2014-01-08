@@ -1,0 +1,142 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ * @package MShop
+ * @subpackage Product
+ */
+
+
+/**
+ * Default product list type manager for creating and handling product list type items.
+ * @package MShop
+ * @subpackage Product
+ */
+class MShop_Product_Manager_List_Type_Default
+	extends MShop_Common_Manager_Type_Default
+	implements MShop_Product_Manager_List_Type_Interface
+{
+	private $_searchConfig = array(
+		'product.list.type.id' => array(
+			'code'=>'product.list.type.id',
+			'internalcode'=>'mprolity."id"',
+			'internaldeps'=>array( 'LEFT JOIN "mshop_product_list_type" AS mprolity ON ( mproli."typeid" = mprolity."id" )' ),
+			'label'=>'Product list type ID',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
+		'product.list.type.siteid' => array(
+			'code'=>'product.list.type.siteid',
+			'internalcode'=>'mprolity."siteid"',
+			'label'=>'Product list type site ID',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
+		'product.list.type.code' => array(
+			'code'=>'product.list.type.code',
+			'internalcode'=>'mprolity."code"',
+			'label'=>'Product list type code',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.list.type.domain' => array(
+			'code'=>'product.list.type.domain',
+			'internalcode'=>'mprolity."domain"',
+			'label'=>'Product list type domain',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.list.type.label' => array(
+			'code'=>'product.list.type.label',
+			'internalcode'=>'mprolity."label"',
+			'label'=>'Product list type label',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.list.type.status' => array(
+			'code'=>'product.list.type.status',
+			'internalcode'=>'mprolity."status"',
+			'label'=>'Product list type status',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
+		'product.list.type.ctime'=> array(
+			'code'=>'product.list.type.ctime',
+			'internalcode'=>'mprolity."ctime"',
+			'label'=>'Product list type create date/time',
+			'type'=> 'datetime',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.list.type.mtime'=> array(
+			'code'=>'product.list.type.mtime',
+			'internalcode'=>'mprolity."mtime"',
+			'label'=>'Product list type modification date/time',
+			'type'=> 'datetime',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.list.type.editor'=> array(
+			'code'=>'product.list.type.editor',
+			'internalcode'=>'mprolity."editor"',
+			'label'=>'Product list type editor',
+			'type'=> 'string',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
+	);
+
+
+	/**
+	 * Creates the type manager using the given context object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param array $config Associative list of SQL statements
+	 * @param array $searchConfig Associative list of search configuration
+	 *
+	 * @throws MShop_Common_Exception if no configuration is available
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		$config = $context->getConfig();
+		$confpath = 'mshop/product/manager/list/type/default/item/';
+		$conf = array(
+			'insert' => $config->get( $confpath . 'insert' ),
+			'update' => $config->get( $confpath . 'update' ),
+			'delete' => $config->get( $confpath . 'delete' ),
+			'search' => $config->get( $confpath . 'search' ),
+			'count' => $config->get( $confpath . 'count' ),
+			'newid' => $config->get( $confpath . 'newid' ),
+		);
+
+		parent::__construct( $context, $conf, $this->_searchConfig );
+	}
+
+
+	/**
+	 * Returns the attributes that can be used for searching.
+	 *
+	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 */
+	public function getSearchAttributes( $withsub = true )
+	{
+		$list = array();
+
+		foreach( $this->_searchConfig as $key => $fields ) {
+			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
+		}
+
+		if( $withsub === true )
+		{
+			$context = $this->_getContext();
+
+			$path = 'classes/product/manager/list/type/submanagers';
+			foreach( $context->getConfig()->get($path, array() ) as $domain ) {
+				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
+			}
+		}
+
+		return $list;
+	}
+}

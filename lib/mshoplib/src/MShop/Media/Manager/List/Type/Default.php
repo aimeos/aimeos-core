@@ -1,0 +1,142 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ * @package MShop
+ * @subpackage Media
+ */
+
+
+/**
+ * Default media list type manager for creating and handling media list type items.
+ * @package MShop
+ * @subpackage Media
+ */
+class MShop_Media_Manager_List_Type_Default
+	extends MShop_Common_Manager_Type_Default
+	implements MShop_Media_Manager_List_Type_Interface
+{
+	private $_searchConfig = array(
+		'media.list.type.id' => array(
+			'code'=>'media.list.type.id',
+			'internalcode'=>'mmedlity."id"',
+			'internaldeps'=> array( 'LEFT JOIN "mshop_media_list_type" AS mmedlity ON ( mmedli."typeid" = mmedlity."id" )' ),
+			'label'=>'Media list type Id',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
+		'media.list.type.siteid' => array(
+			'code'=>'media.list.type.siteid',
+			'internalcode'=>'mmedlity."siteid"',
+			'label'=>'Media list type site Id',
+			'type'=> 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
+		'media.list.type.code' => array(
+			'code'=>'media.list.type.code',
+			'internalcode'=>'mmedlity."code"',
+			'label'=>'Media list type code',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'media.list.type.domain' => array(
+			'code'=>'media.list.type.domain',
+			'internalcode'=>'mmedlity."domain"',
+			'label'=>'Media list type domain',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'media.list.type.label' => array(
+			'label' => 'Media list type label',
+			'code' => 'media.list.type.label',
+			'internalcode' => 'mmedlity."label"',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'media.list.type.status' => array(
+			'label' => 'Media list type status',
+			'code' => 'media.list.type.status',
+			'internalcode' => 'mmedlity."status"',
+			'type' => 'integer',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+		),
+		'media.list.type.ctime'=> array(
+			'code'=>'media.list.type.ctime',
+			'internalcode'=>'mmedlity."ctime"',
+			'label'=>'Media list type create date/time',
+			'type'=> 'datetime',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'media.list.type.mtime'=> array(
+			'code'=>'media.list.type.mtime',
+			'internalcode'=>'mmedlity."mtime"',
+			'label'=>'Media list type modification date/time',
+			'type'=> 'datetime',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'media.list.type.editor'=> array(
+			'code'=>'media.list.type.editor',
+			'internalcode'=>'mmedlity."editor"',
+			'label'=>'Media list type editor',
+			'type'=> 'string',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
+	);
+
+
+	/**
+	 * Creates the type manager using the given context object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param array $config Associative list of SQL statements
+	 * @param array $searchConfig Associative list of search configuration
+	 *
+	 * @throws MShop_Common_Exception if no configuration is available
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		$config = $context->getConfig();
+		$confpath = 'mshop/media/manager/list/type/default/item/';
+		$conf = array(
+			'insert' => $config->get( $confpath . 'insert' ),
+			'update' => $config->get( $confpath . 'update' ),
+			'delete' => $config->get( $confpath . 'delete' ),
+			'search' => $config->get( $confpath . 'search' ),
+			'count' => $config->get( $confpath . 'count' ),
+			'newid' => $config->get( $confpath . 'newid' ),
+		);
+
+		parent::__construct( $context, $conf, $this->_searchConfig );
+	}
+
+
+	/**
+	 * Returns the attributes that can be used for searching.
+	 *
+	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 */
+	public function getSearchAttributes( $withsub = true )
+	{
+		$list = array();
+
+		foreach( $this->_searchConfig as $key => $fields ) {
+			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
+		}
+
+		if( $withsub === true )
+		{
+			$context = $this->_getContext();
+
+			$path = 'classes/media/manager/list/type/submanagers';
+			foreach( $context->getConfig()->get($path, array() ) as $domain ) {
+				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
+			}
+		}
+
+		return $list;
+	}
+}
