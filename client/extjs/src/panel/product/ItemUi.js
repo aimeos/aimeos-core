@@ -34,6 +34,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					align : 'stretch'
 				},
 				itemId : 'MShop.panel.product.ItemUi.BasicPanel',
+				plugins : [ 'ux.itemregistry' ],
 				defaults : {
 					bodyCssClass : this.readOnlyClass
 				},
