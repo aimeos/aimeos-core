@@ -103,7 +103,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		// make sure all parentid are set
 		this.store.each(function(r) {
 			// Remove list id if the reference should be copied
-			if (this.itemUi._copy == true) {
+			if (this.itemUi.isCopy == true) {
 				r.id = null;
 			}
 			r.set(this.listItemPickerUi.itemConfig.listNamePrefix + 'parentid', record.id);
