@@ -153,6 +153,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		this.setTitle( 'Product: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
 
+		
 		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
 	

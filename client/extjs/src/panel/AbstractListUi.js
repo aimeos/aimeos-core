@@ -111,7 +111,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		this.grid.on('rowcontextmenu', this.onGridContextMenu, this);
 		this.grid.on('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
 		this.grid.getSelectionModel().on('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
-		
+
 		MShop.panel.AbstractListUi.superclass.initComponent.apply(this, arguments);
 
 		Ext.apply(this.grid, {
@@ -141,7 +141,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			disabled: true,
 			handler: this.onOpenEditWindow.createDelegate(this, ['edit'])
 		});
-		
+
 		this.actionCopy = new Ext.Action({
 			text: _('Copy'),
 			disabled: true,
@@ -234,7 +234,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
 	onBeforeLoad: function(store, options) {
 		this.setSiteParam(store);
-		
+
 		if (this.domain) {
 			this.setDomainFilter(store, options);
 		}
@@ -332,32 +332,39 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 			record: this.getRecord(action),
 			store: this.store,
 			listUI: this,
-			isNewRecord: action === 'copy' ? true : false
-		});
+			isNewRecord: action == 'copy' || action == 'add' ? true : false,
+			isCopy: action == 'copy' ? true : false
+		}, this);
 
 		itemUi.show();
 	},
-	
+
 	getRecord: function( action ) {
 		if( action == 'add' ) {
 			return null;
-		} 
+		}
 		else if( action == 'copy' )
 		{
-			var record = new this.store.recordType();
 			var edit = this.grid.getSelectionModel().getSelected().copy();
-			record.data = edit.data;
-			record.data[ this.idProperty ] = null;
-			
-			return record;
+			var codeProperty = this.recordName.toLowerCase(); + ".code";
+
+			edit.data[ this.idProperty ] = null;
+			edit.phantom = false;
+
+			if ( edit.data.hasOwnProperty( codeProperty ) ) {
+				edit.data[ codeProperty ] = edit.data[ codeProperty ] + "_copy";
+			}
+
+			return edit;
 		}
+
 		return this.grid.getSelectionModel().getSelected();
 	},
 
 	onStoreException: function(proxy, type, action, options, response) {
 		var title = _( 'Error' );
 		var msg, code;
-		
+
 		if( response.error !== undefined ) {
 			msg = response && response.error ? response.error.message : _( 'No error information available' );
 			code = response && response.error ? response.error.code : 0;
@@ -405,6 +412,6 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 	},
 
 	statusColumnRenderer : function(status, metaData) {
-	    metaData.css = 'statusicon-' + Number( status );
+		metaData.css = 'statusicon-' + Number( status );
 	}
 });
