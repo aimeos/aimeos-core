@@ -15,7 +15,7 @@
  * @subpackage Supplier
  */
 class MShop_Supplier_Manager_Address_Default
-	extends MShop_Common_Manager_Address_Default
+	extends MShop_Common_Manager_Address_Abstract
 	implements MShop_Supplier_Manager_Address_Interface
 {
 	private $_searchConfig = array(
@@ -202,19 +202,6 @@ class MShop_Supplier_Manager_Address_Default
 
 
 	/**
-	 * Initializes a new common address manager object using the given context object.
-	 *
-	 * @param MShop_Context_Interface $_context Context object with required objects
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		$conf = $context->getConfig()->get('mshop/supplier/manager/address/default/item', 'mshop/supplier/manager/address/default/item');
-
-		parent::__construct( $context, $conf, $this->_searchConfig );
-	}
-
-
-	/**
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
@@ -248,5 +235,23 @@ class MShop_Supplier_Manager_Address_Default
 	public function getSubManager( $manager, $name = null )
 	{
 		return $this->_getSubManager( 'supplier', 'address/' . $manager, $name );
+	}
+
+
+	/**
+	 * Gets the config path for configuration.
+	 */
+	protected function _getConfigPath()
+	{
+		return 'mshop/supplier/manager/address/default/item';
+	}
+
+
+	/**
+	 * Gets the searchConfig for search.
+	 */
+	protected function _getSearchConfig()
+	{
+		return $this->_searchConfig;
 	}
 }

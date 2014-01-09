@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Manager_Address_Default
+abstract class MShop_Common_Manager_Address_Abstract
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Common_Manager_Address_Interface
 {
@@ -29,9 +29,12 @@ class MShop_Common_Manager_Address_Default
 	 *
 	 * @param MShop_Context_Interface $_context Context object with required objects
 	 */
-	public function __construct( MShop_Context_Item_Interface $context,
-		array $config = array(), array $searchConfig = array() )
+	public function __construct( MShop_Context_Item_Interface $context )
 	{
+		$config = $context->getConfig()->get( $this->_getConfigPath() );
+
+		$searchConfig = $this->_getSearchConfig();
+
 		$whitelist = array( 'delete', 'insert', 'update', 'search', 'count', 'newid' );
 		$isList = array_keys( $config );
 		foreach ( $whitelist as $str ) {
@@ -257,6 +260,18 @@ class MShop_Common_Manager_Address_Default
 
 
 	/**
+	 * Gets the config path for configuration.
+	 */
+	abstract protected function _getConfigPath();
+
+
+	/**
+	 * Gets the searchConfig for search.
+	 */
+	abstract protected function _getSearchConfig();
+
+
+	/**
 	 * Creates a new address item
 	 *
 	 * @param array $values List of attributes for address item
@@ -266,5 +281,4 @@ class MShop_Common_Manager_Address_Default
 	{
 		return new MShop_Common_Item_Address_Default( $this->_prefix, $values );
 	}
-
 }

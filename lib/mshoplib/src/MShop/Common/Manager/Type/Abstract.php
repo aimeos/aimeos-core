@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Manager_Type_Default
+abstract class MShop_Common_Manager_Type_Abstract
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Common_Manager_Type_Interface
 {
@@ -33,8 +33,21 @@ class MShop_Common_Manager_Type_Default
 	 *
 	 * @throws MShop_Common_Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, array $config, array $searchConfig )
+	public function __construct( MShop_Context_Item_Interface $context )
 	{
+		$conf = $context->getConfig();
+		$confpath = $this->_getConfigPath();
+		$config = array(
+			'insert' => $conf->get( $confpath . 'insert' ),
+			'update' => $conf->get( $confpath . 'update' ),
+			'delete' => $conf->get( $confpath . 'delete' ),
+			'search' => $conf->get( $confpath . 'search' ),
+			'count' => $conf->get( $confpath . 'count' ),
+			'newid' => $conf->get( $confpath . 'newid' ),
+		);
+
+		$searchConfig = $this->_getSearchConfig();
+
 		$required = array( 'count', 'delete', 'insert', 'newid', 'search', 'update' );
 		$isList = array_keys( $config );
 
@@ -268,6 +281,20 @@ class MShop_Common_Manager_Type_Default
 	{
 		return $this->_getSubManager( 'common', 'type/' . $manager, $name );
 	}
+
+
+
+
+	/**
+	 * Gets the config path for configuration.
+	 */
+	abstract protected function _getConfigPath();
+
+
+	/**
+	 * Gets the searchConfig for search.
+	 */
+	abstract protected function _getSearchConfig();
 
 
 	/**

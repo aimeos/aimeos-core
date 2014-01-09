@@ -14,7 +14,7 @@
  * @subpackage Service
  */
 class MShop_Service_Manager_List_Default
-	extends MShop_Common_Manager_List_Default
+	extends MShop_Common_Manager_List_Abstract
 	implements MShop_Service_Manager_List_Interface
 {
 	private $_searchConfig = array(
@@ -125,36 +125,6 @@ class MShop_Service_Manager_List_Default
 
 
 	/**
-	 * Creates the common list manager using the given context object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param array $config array with SQL statements
-	 * @param array $searchConfig array with search configuration
-	 * @param MShop_Common_Manager_Type_Interface $typeManager Common type manager
-	 *
-	 * @throws MShop_Common_Exception if no configuration is available
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		$config = $context->getConfig();
-		$confpath = 'mshop/service/manager/list/default/item/';
-		$conf = array(
-			'getposmax' => $config->get( $confpath . 'getposmax' ),
-			'insert' => $config->get( $confpath . 'insert' ),
-			'update' => $config->get( $confpath . 'update' ),
-			'updatepos' => $config->get( $confpath . 'updatepos' ),
-			'delete' => $config->get( $confpath . 'delete' ),
-			'move' => $config->get( $confpath . 'move' ),
-			'search' => $config->get( $confpath . 'search' ),
-			'count' => $config->get( $confpath . 'count' ),
-			'newid' => $config->get( $confpath . 'newid' ),
-		);
-
-		parent::__construct( $context, $conf, $this->_searchConfig );
-	}
-
-
-	/**
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
@@ -188,5 +158,23 @@ class MShop_Service_Manager_List_Default
 	public function getSubManager( $manager, $name = null )
 	{
 		return $this->_getSubManager( 'service', 'list/' . $manager, $name );
+	}
+
+
+	/**
+	 * Gets the config path for configuration.
+	 */
+	protected function _getConfigPath()
+	{
+		return 'mshop/service/manager/list/default/item/';
+	}
+
+
+	/**
+	 * Gets the searchConfig for search.
+	 */
+	protected function _getSearchConfig()
+	{
+		return $this->_searchConfig;
 	}
 }

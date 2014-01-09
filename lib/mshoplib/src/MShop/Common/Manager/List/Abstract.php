@@ -14,7 +14,7 @@
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Manager_List_Default
+abstract class MShop_Common_Manager_List_Abstract
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Common_Manager_List_Interface
 {
@@ -28,15 +28,27 @@ class MShop_Common_Manager_List_Default
 	 * Creates the common list manager using the given context object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param array $config array with SQL statements
-	 * @param array $searchConfig array with search configuration
-	 * @param MShop_Common_Manager_Type_Interface $typeManager Common type manager
 	 *
 	 * @throws MShop_Common_Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context,
-		array $config = array(), array $searchConfig = array(), $typeManager = null )
+	public function __construct( MShop_Context_Item_Interface $context )
 	{
+		$conf = $context->getConfig();
+		$confpath = $this->_getConfigPath();
+		$config = array(
+			'getposmax' => $conf->get( $confpath . 'getposmax' ),
+			'insert' => $conf->get( $confpath . 'insert' ),
+			'update' => $conf->get( $confpath . 'update' ),
+			'updatepos' => $conf->get( $confpath . 'updatepos' ),
+			'delete' => $conf->get( $confpath . 'delete' ),
+			'move' => $conf->get( $confpath . 'move' ),
+			'search' => $conf->get( $confpath . 'search' ),
+			'count' => $conf->get( $confpath . 'count' ),
+			'newid' => $conf->get( $confpath . 'newid' ),
+		);
+
+		$searchConfig = $this->_getSearchConfig();
+
 		$whitelistItem = array( 'insert', 'update', 'delete', 'move', 'search', 'count', 'newid', 'updatepos', 'getposmax' );
 		$isList = array_keys( $config );
 
@@ -62,8 +74,7 @@ class MShop_Common_Manager_List_Default
 		parent::__construct( $context );
 
 		$this->_config = $config;
-		$this->_searchConfig = $searchConfig;
-		$this->_typeManager = $typeManager;
+		$this->_searchConfig = $this->_getSearchConfig();
 	}
 
 
@@ -311,7 +322,7 @@ class MShop_Common_Manager_List_Default
 	{
 		$list = array();
 
-		foreach( $this->_searchConfig as $key => $fields ) {
+		foreach( $this->_getSearchConfig() as $key => $fields ) {
 			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
@@ -525,16 +536,20 @@ class MShop_Common_Manager_List_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		switch( $manager )
-		{
-			case 'type':
-				if( isset( $this->_typeManager ) ) {
-					return $this->_typeManager;
-				}
-			default:
-				return $this->_getSubManager( 'common', 'list/' . $manager, $name );
-		}
+		return $this->_getSubManager( 'common', 'list/' . $manager, $name );
 	}
+
+
+	/**
+	 * Gets the config path for configuration.
+	 */
+	abstract protected function _getConfigPath();
+
+
+	/**
+	 * Gets the searchConfig for search.
+	 */
+	abstract protected function _getSearchConfig();
 
 
 	/**
