@@ -14,7 +14,7 @@
  * @subpackage Price
  */
 class MShop_Price_Manager_List_Type_Default
-	extends MShop_Common_Manager_Type_Default
+	extends MShop_Common_Manager_Type_Abstract
 	implements MShop_Price_Manager_List_Type_Interface
 {
 	private $_searchConfig = array(
@@ -88,32 +88,6 @@ class MShop_Price_Manager_List_Type_Default
 
 
 	/**
-	 * Creates the type manager using the given context object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param array $config Associative list of SQL statements
-	 * @param array $searchConfig Associative list of search configuration
-	 *
-	 * @throws MShop_Common_Exception if no configuration is available
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		$config = $context->getConfig();
-		$confpath = 'mshop/price/manager/list/type/default/item/';
-		$conf = array(
-			'insert' => $config->get( $confpath . 'insert' ),
-			'update' => $config->get( $confpath . 'update' ),
-			'delete' => $config->get( $confpath . 'delete' ),
-			'search' => $config->get( $confpath . 'search' ),
-			'count' => $config->get( $confpath . 'count' ),
-			'newid' => $config->get( $confpath . 'newid' ),
-		);
-
-		parent::__construct( $context, $conf, $this->_searchConfig );
-	}
-
-
-	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
@@ -147,5 +121,24 @@ class MShop_Price_Manager_List_Type_Default
 	public function getSubManager( $manager, $name = null )
 	{
 		return $this->_getSubManager( 'price', 'list/type/' . $manager, $name );
+	}
+
+
+
+	/**
+	 * Gets the config path for configuration.
+	 */
+	protected function _getConfigPath()
+	{
+		return 'mshop/price/manager/list/type/default/item/';
+	}
+
+
+	/**
+	 * Gets the searchConfig for search.
+	 */
+	protected function _getSearchConfig()
+	{
+		return $this->_searchConfig;
 	}
 }

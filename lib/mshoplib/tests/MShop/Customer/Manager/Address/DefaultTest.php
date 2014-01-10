@@ -7,10 +7,10 @@
 
 
 /**
- * Test class for MShop_Common_Manager_Address_Default
+ * Test class for MShop_Customer_Manager_Address_Default
  * @subpackage Common
  */
-class MShop_Common_Manager_Address_DefaultTest extends MW_Unittest_Testcase
+class MShop_Common_Manager_Address_AbstractTest extends MW_Unittest_Testcase
 {
 	private $_fixture = null;
 	private $_object = null;
@@ -28,7 +28,7 @@ class MShop_Common_Manager_Address_DefaultTest extends MW_Unittest_Testcase
 	{
 		require_once 'PHPUnit/TextUI/TestRunner.php';
 
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Common_Manager_Address_DefaultTest');
+		$suite  = new PHPUnit_Framework_TestSuite('MShop_Common_Manager_Address_AbstractTest');
 		PHPUnit_TextUI_TestRunner::run($suite);
 	}
 

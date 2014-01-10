@@ -9,12 +9,12 @@
 
 
 /**
- * Default list manager implementation
+ * Abstract list manager implementation
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Manager_List_Default
+abstract class MShop_Common_Manager_List_Abstract
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Common_Manager_List_Interface
 {
@@ -28,26 +28,38 @@ class MShop_Common_Manager_List_Default
 	 * Creates the common list manager using the given context object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param array $config array with SQL statements
-	 * @param array $searchConfig array with search configuration
-	 * @param MShop_Common_Manager_Type_Interface $typeManager Common type manager
 	 *
-	 * @throws MShop_Common_Exception if no configuration is available
+	 * @throws MShop_Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context,
-		array $config = array(), array $searchConfig = array(), $typeManager = null )
+	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		$whitelistItem = array( 'insert', 'update', 'delete', 'move', 'search', 'count', 'newid', 'updatepos', 'getposmax' );
-		$isList = array_keys( $config );
+		$conf = $context->getConfig();
+		$confpath = $this->_getConfigPath();
+		$this->_config = array(
+			'getposmax' => $conf->get( $confpath . 'getposmax' ),
+			'insert' => $conf->get( $confpath . 'insert' ),
+			'update' => $conf->get( $confpath . 'update' ),
+			'updatepos' => $conf->get( $confpath . 'updatepos' ),
+			'delete' => $conf->get( $confpath . 'delete' ),
+			'move' => $conf->get( $confpath . 'move' ),
+			'search' => $conf->get( $confpath . 'search' ),
+			'count' => $conf->get( $confpath . 'count' ),
+			'newid' => $conf->get( $confpath . 'newid' ),
+		);
 
-		foreach($whitelistItem as $str)
+		$this->_searchConfig = $this->_getSearchConfig();
+
+		$whitelistItem = array( 'insert', 'update', 'delete', 'move', 'search', 'count', 'newid', 'updatepos', 'getposmax' );
+		$isList = array_keys( $this->_config );
+
+		foreach( $whitelistItem as $str )
 		{
 			if ( !in_array($str, $isList ) ) {
 				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $str ) );
 			}
 		}
 
-		if( ( $entry = reset( $searchConfig ) ) === false ) {
+		if( ( $entry = reset( $this->_searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
@@ -60,10 +72,6 @@ class MShop_Common_Manager_List_Default
 		}
 
 		parent::__construct( $context );
-
-		$this->_config = $config;
-		$this->_searchConfig = $searchConfig;
-		$this->_typeManager = $typeManager;
 	}
 
 
@@ -525,16 +533,20 @@ class MShop_Common_Manager_List_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		switch( $manager )
-		{
-			case 'type':
-				if( isset( $this->_typeManager ) ) {
-					return $this->_typeManager;
-				}
-			default:
-				return $this->_getSubManager( 'common', 'list/' . $manager, $name );
-		}
+		return $this->_getSubManager( 'common', 'list/' . $manager, $name );
 	}
+
+
+	/**
+	 * Gets the config path for configuration.
+	 */
+	abstract protected function _getConfigPath();
+
+
+	/**
+	 * Gets the searchConfig for search.
+	 */
+	abstract protected function _getSearchConfig();
 
 
 	/**

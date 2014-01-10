@@ -9,12 +9,12 @@
 
 
 /**
- * Default type manager implementation.
+ * Abstract type manager implementation.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Manager_Type_Default
+abstract class MShop_Common_Manager_Type_Abstract
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Common_Manager_Type_Interface
 {
@@ -28,15 +28,26 @@ class MShop_Common_Manager_Type_Default
 	 * Creates the type manager using the given context object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param array $config Associative list of SQL statements
-	 * @param array $searchConfig Associative list of search configuration
 	 *
-	 * @throws MShop_Common_Exception if no configuration is available
+	 * @throws MShop_Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, array $config, array $searchConfig )
+	public function __construct( MShop_Context_Item_Interface $context )
 	{
+		$conf = $context->getConfig();
+		$confpath = $this->_getConfigPath();
+		$this->_config = array(
+			'insert' => $conf->get( $confpath . 'insert' ),
+			'update' => $conf->get( $confpath . 'update' ),
+			'delete' => $conf->get( $confpath . 'delete' ),
+			'search' => $conf->get( $confpath . 'search' ),
+			'count' => $conf->get( $confpath . 'count' ),
+			'newid' => $conf->get( $confpath . 'newid' ),
+		);
+
+		$this->_searchConfig = $this->_getSearchConfig();
+
 		$required = array( 'count', 'delete', 'insert', 'newid', 'search', 'update' );
-		$isList = array_keys( $config );
+		$isList = array_keys( $this->_config );
 
 		foreach( $required as $key )
 		{
@@ -47,11 +58,9 @@ class MShop_Common_Manager_Type_Default
 
 		parent::__construct( $context );
 
-		$this->_config = $config;
 		$this->_context = $context;
-		$this->_searchConfig = $searchConfig;
 
-		if( ( $entry = reset( $searchConfig ) ) === false ) {
+		if( ( $entry = reset( $this->_searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
@@ -268,6 +277,20 @@ class MShop_Common_Manager_Type_Default
 	{
 		return $this->_getSubManager( 'common', 'type/' . $manager, $name );
 	}
+
+
+
+
+	/**
+	 * Gets the config path for configuration.
+	 */
+	abstract protected function _getConfigPath();
+
+
+	/**
+	 * Gets the searchConfig for search.
+	 */
+	abstract protected function _getSearchConfig();
 
 
 	/**

@@ -9,12 +9,12 @@
 
 
 /**
- * Common address manager implementation.
+ * Common abstract address manager implementation.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Manager_Address_Default
+abstract class MShop_Common_Manager_Address_Abstract
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Common_Manager_Address_Interface
 {
@@ -28,26 +28,28 @@ class MShop_Common_Manager_Address_Default
 	 * Initializes a new common address manager object using the given context object.
 	 *
 	 * @param MShop_Context_Interface $_context Context object with required objects
+	 *
+	 * @throws MShop_Exception if no configuration is available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context,
-		array $config = array(), array $searchConfig = array() )
+	public function __construct( MShop_Context_Item_Interface $context )
 	{
+		$this->_config = $context->getConfig()->get( $this->_getConfigPath() );
+
+		$this->_searchConfig = $this->_getSearchConfig();
+
 		$whitelist = array( 'delete', 'insert', 'update', 'search', 'count', 'newid' );
-		$isList = array_keys( $config );
+		$isList = array_keys( $this->_config );
 		foreach ( $whitelist as $str ) {
 			if ( !in_array($str, $isList) ) {
 				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $str ) );
 			}
 		}
 
-		$this->_config = $config;
-
 		parent::__construct( $context );
 
 		$this->_context = $context;
-		$this->_searchConfig = $searchConfig;
 
-		if ( ( $entry = reset( $searchConfig ) ) === false ) {
+		if ( ( $entry = reset( $this->_searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
@@ -257,6 +259,18 @@ class MShop_Common_Manager_Address_Default
 
 
 	/**
+	 * Gets the config path for configuration.
+	 */
+	abstract protected function _getConfigPath();
+
+
+	/**
+	 * Gets the searchConfig for search.
+	 */
+	abstract protected function _getSearchConfig();
+
+
+	/**
 	 * Creates a new address item
 	 *
 	 * @param array $values List of attributes for address item
@@ -266,5 +280,4 @@ class MShop_Common_Manager_Address_Default
 	{
 		return new MShop_Common_Item_Address_Default( $this->_prefix, $values );
 	}
-
 }

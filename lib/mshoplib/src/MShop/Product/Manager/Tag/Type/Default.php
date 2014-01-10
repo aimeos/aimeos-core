@@ -4,83 +4,83 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
- * @subpackage Service
+ * @subpackage Product
  */
 
 
 /**
- * Default service type manager for creating and handling service type items.
+ * Default product tag type manager for creating and handling product tag type items.
  * @package MShop
- * @subpackage Service
+ * @subpackage Product
  */
-class MShop_Service_Manager_Type_Default
+class MShop_Product_Manager_Tag_Type_Default
 	extends MShop_Common_Manager_Type_Abstract
-	implements MShop_Service_Manager_Type_Interface
+	implements MShop_Product_Manager_Tag_Type_Interface
 {
 	private $_searchConfig = array(
-		'service.type.id' => array(
-			'code' => 'service.type.id',
-			'internalcode' => 'mserty."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_service_type" AS mserty ON ( mser."typeid" = mserty."id" )' ),
-			'label' => 'Service type ID',
+		'product.tag.type.id' => array(
+			'code' => 'product.tag.type.id',
+			'internalcode' => 'mprotaty."id"',
+			'internaldeps' => array( 'LEFT JOIN "mshop_product_tag_type" AS mprotaty ON ( mprota."typeid" = mprotaty."id" )' ),
+			'label' => 'Product tag type ID',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
-		'service.type.siteid' => array(
-			'code' => 'service.type.siteid',
-			'internalcode' => 'mserty."siteid"',
-			'label' => 'Service type site ID',
+		'product.tag.type.siteid' => array(
+			'code' => 'product.tag.type.siteid',
+			'internalcode' => 'mprotaty."siteid"',
+			'label' => 'Product tag type site ID',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
-		'service.type.code' => array(
-			'code' => 'service.type.code',
-			'internalcode' => 'mserty."code"',
-			'label' => 'Service type code',
+		'product.tag.type.code' => array(
+			'code' => 'product.tag.type.code',
+			'internalcode' => 'mprotaty."code"',
+			'label' => 'Product tag type code',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'service.type.domain' => array(
-			'code' => 'service.type.domain',
-			'internalcode' => 'mserty."domain"',
-			'label' => 'Service type domain',
+		'product.tag.type.domain' => array(
+			'code' => 'product.tag.type.domain',
+			'internalcode' => 'mprotaty."domain"',
+			'label' => 'Product tag type domain',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'service.type.label' => array(
-			'code' => 'service.type.label',
-			'internalcode' => 'mserty."label"',
-			'label' => 'Service type label',
+		'product.tag.type.label' => array(
+			'code' => 'product.tag.type.label',
+			'internalcode' => 'mprotaty."label"',
+			'label' => 'Product tag type label',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'service.type.status' => array(
-			'code' => 'service.type.status',
-			'internalcode' => 'mserty."status"',
-			'label' => 'Service type status',
+		'product.tag.type.status' => array(
+			'code' => 'product.tag.type.status',
+			'internalcode' => 'mprotaty."status"',
+			'label' => 'Product tag type status',
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 		),
-		'service.type.ctime'=> array(
-			'code'=>'service.type.ctime',
-			'internalcode'=>'mserty."ctime"',
-			'label'=>'Service type create date/time',
+		'product.tag.type.mtime'=> array(
+			'code'=>'product.tag.type.mtime',
+			'internalcode'=>'mprotaty."mtime"',
+			'label'=>'Product tag type modification date',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'service.type.mtime'=> array(
-			'code'=>'service.type.mtime',
-			'internalcode'=>'mserty."mtime"',
-			'label'=>'Service type modification date/time',
+		'product.tag.type.ctime'=> array(
+			'code'=>'product.tag.type.ctime',
+			'internalcode'=>'mprotaty."ctime"',
+			'label'=>'Product tag type creation date/time',
 			'type'=> 'datetime',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'service.type.editor'=> array(
-			'code'=>'service.type.editor',
-			'internalcode'=>'mserty."editor"',
-			'label'=>'Service type editor',
+		'product.tag.type.editor'=> array(
+			'code'=>'product.tag.type.editor',
+			'internalcode'=>'mprotaty."editor"',
+			'label'=>'Product tag type editor',
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
@@ -101,7 +101,7 @@ class MShop_Service_Manager_Type_Default
 		{
 			$context = $this->_getContext();
 
-			$path = 'classes/service/manager/type/submanagers';
+			$path = 'classes/product/manager/tag/type/submanagers';
 			foreach( $context->getConfig()->get($path, array() ) as $domain ) {
 				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
 			}
@@ -112,7 +112,7 @@ class MShop_Service_Manager_Type_Default
 
 
 	/**
-	 * Returns a new manager for service type extensions.
+	 * Returns a new manager for product type extensions.
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
@@ -120,7 +120,7 @@ class MShop_Service_Manager_Type_Default
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'service', 'type/' . $manager, $name );
+		return $this->_getSubManager( 'product', 'tag/type/' . $manager, $name );
 	}
 
 
@@ -129,7 +129,7 @@ class MShop_Service_Manager_Type_Default
 	 */
 	protected function _getConfigPath()
 	{
-		return 'mshop/service/manager/type/default/item/';
+		return 'mshop/product/manager/tag/type/default/item/';
 	}
 
 
