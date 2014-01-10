@@ -36,6 +36,12 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	mainForm: null,
 
 	/**
+	 * Action from listUi
+	 * default is "add": creating new entry as phantom
+	 */
+	action: 'add',
+	
+	/**
 	 * @type Boolean isSaveing
 	 */
 	isSaveing: false,
@@ -79,7 +85,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		this.store.on('exception', this.onStoreException, this);
 		this.store.on('write', this.onStoreWrite, this);
 
-		if (this.isCopy == true) {
+		if (this.action == 'copy') {
 			this.items[0].deferredRender = false;
 		}
 		
@@ -132,7 +138,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		
 		if (! this.record) {
 			this.record = new this.recordType();
-			this.isNewRecord = true;
+			this.action = 'add';
 		}
 
 		this.mainForm.getForm().loadRecord(this.record);
@@ -197,32 +203,31 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	
 			var itemRefId = item.get(recordRefIdProperty);
 			var itemTypeId = item.get(recordTypeIdProperty);
-			
+
 			var recordId = this.record.id;
 			var itemId = index;
-			
+
 			if (! recordRefId || ! recordTypeId || ! itemRefId || ! itemTypeId)
 				return false;
-			
+
 			return ( recordRefId == itemRefId && recordTypeId == itemTypeId && recordId != itemId );
 		}, this);
-		
+
 		if (index != -1) {
 			this.isSaveing = false;
 			this.saveMask.hide();
 			Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
 			return;
 		}
-		
+
 		this.mainForm.getForm().updateRecord(this.record);
 		
-		if (this.isCopy == true) {
+		if (this.action == 'copy') {
 			this.record.id = null;
 			this.record.phantom = true;
 		}
-		
-		
-		if (this.isNewRecord) {
+
+		if (this.action == 'copy' || this.action == 'add') {
 			this.store.add(this.record);
 		}
 
