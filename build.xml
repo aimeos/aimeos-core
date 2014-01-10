@@ -99,6 +99,7 @@
 
 
 	<target name="clean" description="Cleans up temporary files">
+		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/extjs" />
