@@ -9,7 +9,7 @@
 
 
 /**
- * Default list manager implementation
+ * Abstract list manager implementation
  *
  * @package MShop
  * @subpackage Common
@@ -29,13 +29,13 @@ abstract class MShop_Common_Manager_List_Abstract
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 *
-	 * @throws MShop_Common_Exception if no configuration is available
+	 * @throws MShop_Exception if no configuration is available
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		$conf = $context->getConfig();
 		$confpath = $this->_getConfigPath();
-		$config = array(
+		$this->_config = array(
 			'getposmax' => $conf->get( $confpath . 'getposmax' ),
 			'insert' => $conf->get( $confpath . 'insert' ),
 			'update' => $conf->get( $confpath . 'update' ),
@@ -47,19 +47,19 @@ abstract class MShop_Common_Manager_List_Abstract
 			'newid' => $conf->get( $confpath . 'newid' ),
 		);
 
-		$searchConfig = $this->_getSearchConfig();
+		$this->_searchConfig = $this->_getSearchConfig();
 
 		$whitelistItem = array( 'insert', 'update', 'delete', 'move', 'search', 'count', 'newid', 'updatepos', 'getposmax' );
-		$isList = array_keys( $config );
+		$isList = array_keys( $this->_config );
 
-		foreach($whitelistItem as $str)
+		foreach( $whitelistItem as $str )
 		{
 			if ( !in_array($str, $isList ) ) {
 				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $str ) );
 			}
 		}
 
-		if( ( $entry = reset( $searchConfig ) ) === false ) {
+		if( ( $entry = reset( $this->_searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 
@@ -72,9 +72,6 @@ abstract class MShop_Common_Manager_List_Abstract
 		}
 
 		parent::__construct( $context );
-
-		$this->_config = $config;
-		$this->_searchConfig = $this->_getSearchConfig();
 	}
 
 
@@ -322,7 +319,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	{
 		$list = array();
 
-		foreach( $this->_getSearchConfig() as $key => $fields ) {
+		foreach( $this->_searchConfig as $key => $fields ) {
 			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 

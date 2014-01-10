@@ -7,7 +7,7 @@
 
 
 /**
- * Test class for MShop_Common_Manager_Address_Abstract
+ * Test class for MShop_Customer_Manager_Address_Default
  * @subpackage Common
  */
 class MShop_Common_Manager_Address_AbstractTest extends MW_Unittest_Testcase

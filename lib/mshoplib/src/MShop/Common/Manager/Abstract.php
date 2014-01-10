@@ -599,8 +599,10 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	{
 		$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_INT );
 		$translations = array( 'siteid' => $column );
+		$conn = new MW_DB_Connection_None();
 
-		$search = $this->createSearch();
+		$search = new MW_Common_Criteria_SQL( $conn );
+
 		$expr = $search->compare( '==', 'siteid', $value );
 		$string = $expr->toString( $types, $translations );
 

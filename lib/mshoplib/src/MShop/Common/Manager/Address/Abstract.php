@@ -9,7 +9,7 @@
 
 
 /**
- * Common address manager implementation.
+ * Common abstract address manager implementation.
  *
  * @package MShop
  * @subpackage Common
@@ -28,29 +28,28 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 * Initializes a new common address manager object using the given context object.
 	 *
 	 * @param MShop_Context_Interface $_context Context object with required objects
+	 *
+	 * @throws MShop_Exception if no configuration is available
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		$config = $context->getConfig()->get( $this->_getConfigPath() );
+		$this->_config = $context->getConfig()->get( $this->_getConfigPath() );
 
-		$searchConfig = $this->_getSearchConfig();
+		$this->_searchConfig = $this->_getSearchConfig();
 
 		$whitelist = array( 'delete', 'insert', 'update', 'search', 'count', 'newid' );
-		$isList = array_keys( $config );
+		$isList = array_keys( $this->_config );
 		foreach ( $whitelist as $str ) {
 			if ( !in_array($str, $isList) ) {
 				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $str ) );
 			}
 		}
 
-		$this->_config = $config;
-
 		parent::__construct( $context );
 
 		$this->_context = $context;
-		$this->_searchConfig = $searchConfig;
 
-		if ( ( $entry = reset( $searchConfig ) ) === false ) {
+		if ( ( $entry = reset( $this->_searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 

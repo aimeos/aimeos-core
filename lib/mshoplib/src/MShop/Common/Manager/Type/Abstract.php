@@ -9,7 +9,7 @@
 
 
 /**
- * Default type manager implementation.
+ * Abstract type manager implementation.
  *
  * @package MShop
  * @subpackage Common
@@ -28,16 +28,14 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 * Creates the type manager using the given context object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 * @param array $config Associative list of SQL statements
-	 * @param array $searchConfig Associative list of search configuration
 	 *
-	 * @throws MShop_Common_Exception if no configuration is available
+	 * @throws MShop_Exception if no configuration is available
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		$conf = $context->getConfig();
 		$confpath = $this->_getConfigPath();
-		$config = array(
+		$this->_config = array(
 			'insert' => $conf->get( $confpath . 'insert' ),
 			'update' => $conf->get( $confpath . 'update' ),
 			'delete' => $conf->get( $confpath . 'delete' ),
@@ -46,10 +44,10 @@ abstract class MShop_Common_Manager_Type_Abstract
 			'newid' => $conf->get( $confpath . 'newid' ),
 		);
 
-		$searchConfig = $this->_getSearchConfig();
+		$this->_searchConfig = $this->_getSearchConfig();
 
 		$required = array( 'count', 'delete', 'insert', 'newid', 'search', 'update' );
-		$isList = array_keys( $config );
+		$isList = array_keys( $this->_config );
 
 		foreach( $required as $key )
 		{
@@ -60,11 +58,9 @@ abstract class MShop_Common_Manager_Type_Abstract
 
 		parent::__construct( $context );
 
-		$this->_config = $config;
 		$this->_context = $context;
-		$this->_searchConfig = $searchConfig;
 
-		if( ( $entry = reset( $searchConfig ) ) === false ) {
+		if( ( $entry = reset( $this->_searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
 		}
 

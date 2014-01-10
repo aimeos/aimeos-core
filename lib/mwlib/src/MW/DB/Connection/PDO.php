@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage DB
  */
-class  MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Connection_Interface
+class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Connection_Interface
 {
 	private $_connection = null;
 

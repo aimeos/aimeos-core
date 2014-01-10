@@ -11,7 +11,7 @@
 class MShop_Product_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 {
 	/**
-	 * @var    MShop_Common_Manager_List_Abstract
+	 * @var    MShop_Product_Manager_List_Type_Default
 	 * @access protected
 	 */
 	private $_object;
