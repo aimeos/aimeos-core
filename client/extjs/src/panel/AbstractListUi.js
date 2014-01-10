@@ -346,7 +346,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 		else if( action == 'copy' )
 		{
 			var edit = this.grid.getSelectionModel().getSelected().copy();
-			var codeProperty = this.recordName.toLowerCase(); + ".code";
+			var codeProperty = this.recordName.toLowerCase() + ".code";
 
 			edit.data[ this.idProperty ] = null;
 			edit.phantom = false;
