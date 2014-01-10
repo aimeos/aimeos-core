@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 
 
@@ -12,7 +12,7 @@
  * Default implementation of catalog attribute filter section in HTML client.
  *
  * @package Client
- * @subpackage HTML
+ * @subpackage Html
  */
 class Client_Html_Catalog_Filter_Attribute_Default
 	extends Client_Html_Abstract

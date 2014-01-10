@@ -81,8 +81,24 @@ class Controller_ExtJS_Catalog_List_Default
 
 			$this->_manager->saveItem( $item );
 
+			$refIds[] = $item->getRefId();
 			$ids[] = $item->getId();
 		}
+
+
+		if( $item->getDomain() === 'product' )
+		{
+			$context = $this->_getContext();
+			$productManager = MShop_Factory::createManager( $context, 'product' );
+
+			$search = $productManager->createSearch();
+			$search->setConditions( $search->compare( '==', 'product.id', $refIds ) );
+			$search->setSlice( 0, count( $refIds ) );
+
+			$indexManager = MShop_Factory::createManager( $context, 'catalog/index' );
+			$indexManager->rebuildIndex( $productManager->searchItems( $search ) );
+		}
+
 
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.list.id', $ids ) );

@@ -91,38 +91,15 @@
 	<target name="doc" description="Generates the API documentation">
 		<echo msg="Generating API documentation" />
 		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
-		<phpdocext title="Arcavias API documentation"
-			destdir="${coredir}/misc/apidoc"
-			output="HTML:frames/Extjs:default,HTML:Smarty:PHP"
-			sourcecode="true"
-			templatebase="misc/phpdoc"
-			undocumentedelements="true">
-			<fileset dir="${coredir}">
-				<include name="Arcavias.php" />
-			</fileset>
-			<fileset dir="client/html/src">
-				<include name="**/*.php" />
-			</fileset>
-			<fileset dir="controller/frontend/src">
-				<include name="**/*.php" />
-			</fileset>
-			<fileset dir="controller/extjs/src">
-				<include name="**/*.php" />
-			</fileset>
-			<fileset dir="controller/jobs/src">
-				<include name="**/*.php" />
-			</fileset>
-			<fileset dir="lib/mshoplib/src">
-				<include name="**/*.php" />
-			</fileset>
-			<fileset dir="lib/mwlib/src">
-				<include name="**/*.php" />
-			</fileset>
-		</phpdocext>
+		<exec command="${coredir}/vendor/bin/phpdoc.php --sourcecode -t ${coredir}/misc/apidoc
+			-d client/html/src -d controller/frontend/src -d controller/extjs/src
+			-d controller/jobs/src -d lib/mshoplib/src -d lib/mwlib/src -f Arcavias.php
+			--template=responsive-twig" />
 	</target>
 
 
 	<target name="clean" description="Cleans up temporary files">
+		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/extjs" />
