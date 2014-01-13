@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @package MW
  * @subpackage DB
@@ -17,60 +17,67 @@
 class MW_DB_Connection_None implements MW_DB_Connection_Interface
 {
 	/**
-	 * Throws MW_DB_Exception.
+	 * Creates a database statement.
+	 *
+	 * Throws an exception because there is no implementation available.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
 	 * @param integer $type Simple or prepared statement type constant from abstract class
 	 * @throws MW_DB_Exception
 	 */
-	public function create($sql, $type = MW_DB_Connection_Abstract::TYPE_SIMPLE)
+	public function create( $sql, $type = MW_DB_Connection_Abstract::TYPE_SIMPLE )
 	{
-		throw new MW_DB_Exception( 'This method is not implemented in the MW_DB_Connection_None' );
+		throw new MW_DB_Exception( 'This method is not implemented' );
 	}
 
 
 	/**
-	 * Throws MW_DB_Exception.
+	 * Escapes the value if necessary for direct inclusion in SQL statement.
 	 *
 	 * @param string $data Value to escape
-	 *
-	 * @throws MW_DB_Exception
+	 * @return string Escaped string
 	 */
-	public function escape($data)
+	public function escape( $data )
 	{
-		throw new MW_DB_Exception( 'This method is not implemented in the MW_DB_Connection_None' );
+		return str_replace( '\'', '\'\'', $data);
 	}
 
 
 	/**
-	 * Throws MW_DB_Exception.
+	 * Starts a transaction for this connection.
+	 *
+	 * Throws an exception because there is no implementation available.
 	 *
 	 * @throws MW_DB_Exception
 	 */
 	public function begin()
 	{
-		throw new MW_DB_Exception( 'This method is not implemented in the MW_DB_Connection_None' );
+		throw new MW_DB_Exception( 'This method is not implemented' );
 	}
 
 
 	/**
-	 * Throws MW_DB_Exception.
+	 * Commits the changes done inside of the transaction to the storage.
+	 *
+	 * Throws an exception because there is no implementation available.
 	 *
 	 * @throws MW_DB_Exception
 	 */
 	public function commit()
 	{
-		throw new MW_DB_Exception( 'This method is not implemented in the MW_DB_Connection_None' );
+		throw new MW_DB_Exception( 'This method is not implemented' );
 	}
 
 
 	/**
-	 * Throws MW_DB_Exception.
+	 * Discards the changes done inside of the transaction.
+	 *
+	 * Throws an exception because there is no implementation available.
 	 *
 	 * @throws MW_DB_Exception
 	 */
 	public function rollback()
 	{
-		throw new MW_DB_Exception( 'This method is not implemented in the MW_DB_Connection_None' );
+		throw new MW_DB_Exception( 'This method is not implemented' );
 	}
 }
