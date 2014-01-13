@@ -113,62 +113,62 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _searchProducts( MW_View_Interface $view )
 	{
-			$context = $this->_getContext();
-			$config = $context->getConfig();
+		$context = $this->_getContext();
+		$config = $context->getConfig();
 
-			$domains = $config->get( 'client/html/catalog/domains', array( 'media', 'price', 'text' ) );
+		$domains = $config->get( 'client/html/catalog/domains', array( 'media', 'price', 'text' ) );
 
-			$text = (string) $view->param( 'f-search-text' );
-			$catid = (string) $view->param( 'f-catalog-id' );
-			$attrids = $view->param( 'f-attr-id', array() );
+		$text = (string) $view->param( 'f-search-text' );
+		$catid = (string) $view->param( 'f-catalog-id' );
+		$attrids = $view->param( 'f-attr-id', array() );
 
-			if( is_string( $attrids ) ) {
-				$attrids = explode( ' ', $attrids );
-			}
+		if( is_string( $attrids ) ) {
+			$attrids = explode( ' ', $attrids );
+		}
 
-			if( $catid == '' ) {
-				$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
-			}
+		if( $catid == '' ) {
+			$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
+		}
 
-			$page = $this->_getProductListPage( $view );
-			$size = $this->_getProductListSize( $view );
-			$sortation = $this->_getProductListSort( $view );
+		$page = $this->_getProductListPage( $view );
+		$size = $this->_getProductListSize( $view );
+		$sortation = $this->_getProductListSort( $view );
 
-			$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
-			$sort = ltrim( $sortation, '-' );
+		$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
+		$sort = ltrim( $sortation, '-' );
 
 
-			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
+		$controller = Controller_Frontend_Catalog_Factory::createController( $context );
 
-			if( $text !== '' )
-			{
-				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
-			}
-			else if( $catid !== '' )
-			{
-				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
-			}
-			else
-			{
-				$filter = $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
-				$expr = array(
-					$filter->compare( '!=', 'catalog.index.catalog.id', null ),
-					$filter->getConditions(),
-				);
-				$filter->setConditions( $filter->combine( '&&', $expr ) );
-			}
+		if( $text !== '' )
+		{
+			$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
+		}
+		else if( $catid !== '' )
+		{
+			$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
+		}
+		else
+		{
+			$filter = $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
+			$expr = array(
+				$filter->compare( '!=', 'catalog.index.catalog.id', null ),
+				$filter->getConditions(),
+			);
+			$filter->setConditions( $filter->combine( '&&', $expr ) );
+		}
 
-			if( !empty( $attrids ) )
-			{
-				$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( $attrids ) );
-				$expr = array(
-					$filter->getConditions(),
-					$filter->compare( '==', $func, count( $attrids ) ),
-				);
-				$filter->setConditions( $filter->combine( '&&', $expr ) );
-			}
+		if( !empty( $attrids ) )
+		{
+			$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( $attrids ) );
+			$expr = array(
+				$filter->getConditions(),
+				$filter->compare( '==', $func, count( $attrids ) ),
+			);
+			$filter->setConditions( $filter->combine( '&&', $expr ) );
+		}
 
-			self::$_productFilter = $filter;
-			self::$_productList = $controller->getProductList( $filter, self::$_productTotal, $domains );
+		self::$_productFilter = $filter;
+		self::$_productList = $controller->getProductList( $filter, self::$_productTotal, $domains );
 	}
 }
