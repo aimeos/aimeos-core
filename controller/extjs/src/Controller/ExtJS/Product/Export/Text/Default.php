@@ -203,7 +203,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
 		}
 
-		$sort = array( $search->sort( '+', 'product.type.code' ), $search->sort( '+', 'product.code' ) );
+		$sort = array( $search->sort( '+', 'product.code' ) );
 		$search->setSortations( $sort );
 
 		$start = 0;

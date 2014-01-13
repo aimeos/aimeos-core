@@ -206,7 +206,12 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'attribute.id', $ids ) );
 		}
 
-		$sort = array( $search->sort( '+', 'attribute.type.code' ), $search->sort( '+', 'attribute.position' ), $search->sort( '-', 'attribute.id' ) );
+		$sort = array(
+			$search->sort( '+', 'attribute.siteid' ),
+			$search->sort( '+', 'attribute.domain' ),
+			$search->sort( '-', 'attribute.code' ),
+			$search->sort( '-', 'attribute.typeid' ),
+		);
 		$search->setSortations( $sort );
 
 		$start = 0;
