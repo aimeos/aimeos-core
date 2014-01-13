@@ -111,18 +111,18 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends MW_Unittest_Tes
 
 		$this->assertEquals( 'de', $lines[7][0] );
 		$this->assertEquals( 'color', $lines[7][1] );
-		$this->assertEquals( 'white', $lines[7][2] );
+		$this->assertEquals( 'red', $lines[7][2] );
 		$this->assertEquals( 'default', $lines[7][3] );
 		$this->assertEquals( 'name', $lines[7][4] );
-		$this->assertEquals( 'weiß', $lines[7][6] );
+		$this->assertEquals( '', $lines[7][6] );
 
 
 		$this->assertEquals( '', $lines[123][0] );
 		$this->assertEquals( 'width', $lines[123][1] );
-		$this->assertEquals( '36', $lines[123][2] );
+		$this->assertEquals( '29', $lines[123][2] );
 		$this->assertEquals( 'default', $lines[123][3] );
 		$this->assertEquals( 'name', $lines[123][4] );
-		$this->assertEquals( '36', $lines[123][6] );
+		$this->assertEquals( '29', $lines[123][6] );
 	}
 
 
