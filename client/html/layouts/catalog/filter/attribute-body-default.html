@@ -6,7 +6,8 @@
  */
 
 $enc = $this->encoder();
-$aggregate = $this->get( 'attributeAggregate', array() );
+$enableAggregate = $this->get( 'attributeAggregate', false );
+$aggregate = $this->get( 'attributeAggregateList', array() );
 $attrIds = $this->param( 'f-attr-id', array() );
 
 if( is_string( $attrIds ) ) {
@@ -18,16 +19,18 @@ $attrIds = array_flip( $attrIds );
 ?>
 <section class="catalog-filter-attribute">
 <?php foreach( $this->get( 'attributeMap', array() ) as $attrType => $attributes ) : ?>
-<?php if( !empty( $attributes ) ) : ?>
+<?php	if( !empty( $attributes ) ) : ?>
 <fieldset class="attr-<?php echo $enc->attr( $attrType ); ?>">
 	<legend><?php echo $enc->html( $this->translate( 'client/html/code', $attrType ), $enc::TRUST ); ?></legend>
 	<ul class="attr-list">
 <?php		foreach( $attributes as $id => $attribute ) : ?>
-<?php			$count = ( isset( $aggregate[$id] ) ? $aggregate[$id] : 0 ); ?>
-		<li class="attr-item <?php echo ( $count == 0 ? 'disabled' : '' ); ?>">
-			<input class="attr-item" name="<?php echo $enc->attr( $this->formparam( array( 'f-attr-id', $id ) ) ); ?>" type="checkbox" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : ( $count == 0 ? 'disabled="disabled"' : '' ) ); ?> />
+<?php			$disabled = ( $enableAggregate && !isset( $aggregate[$id] ) || isset( $aggregate[$id] ) && $aggregate[$id] == 0 ? true : false ); ?>
+		<li class="attr-item <?php echo ( $disabled ? 'disabled' : '' ); ?>">
+			<input class="attr-item" name="<?php echo $enc->attr( $this->formparam( array( 'f-attr-id', $id ) ) ); ?>" type="checkbox" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : ( $disabled ? 'disabled="disabled"' : '' ) ); ?> />
 			<span class="attr-item"><?php echo $enc->html( $attribute->getName(), $enc::TRUST ); ?></span>
-			<span class="attr-count"><?php echo $enc->html( $count ); ?></span>
+<?php			if( isset( $aggregate[$id] ) ) : ?>
+			<span class="attr-count"><?php echo $enc->html( $aggregate[$id] ); ?></span>
+<?php			endif; ?>
 		</li>
 <?php 		endforeach; ?>
 	</ul>

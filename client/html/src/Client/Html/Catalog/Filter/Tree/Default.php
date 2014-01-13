@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Catalog_Filter_Tree_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Catalog_Abstract
 	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/catalog/filter/tree/default/subparts';
