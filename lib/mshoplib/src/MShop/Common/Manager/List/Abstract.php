@@ -538,13 +538,17 @@ abstract class MShop_Common_Manager_List_Abstract
 
 
 	/**
-	 * Gets the config path for configuration.
+	 * Returns the config path for retrieving the configuration values.
+	 *
+	 * @return string Configuration path
 	 */
 	abstract protected function _getConfigPath();
 
 
 	/**
-	 * Gets the searchConfig for search.
+	 * Returns the search configuration for searching items.
+	 *
+	 * @return array Associative list of search keys and search definitions
 	 */
 	abstract protected function _getSearchConfig();
 

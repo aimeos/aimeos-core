@@ -161,9 +161,10 @@ class MShop_Media_Manager_List_Default
 	}
 
 
-
 	/**
-	 * Gets the config path for configuration.
+	 * Returns the config path for retrieving the configuration values.
+	 *
+	 * @return string Configuration path
 	 */
 	protected function _getConfigPath()
 	{
@@ -172,7 +173,9 @@ class MShop_Media_Manager_List_Default
 
 
 	/**
-	 * Gets the searchConfig for search.
+	 * Returns the search configuration for searching items.
+	 *
+	 * @return array Associative list of search keys and search definitions
 	 */
 	protected function _getSearchConfig()
 	{
