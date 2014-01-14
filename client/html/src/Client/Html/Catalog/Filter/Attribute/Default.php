@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Catalog_Filter_Attribute_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Catalog_Abstract
 	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/catalog/filter/attribute/default/subparts';
@@ -134,45 +134,22 @@ class Client_Html_Catalog_Filter_Attribute_Default
 				$attrMap[ $item->getType() ][$id] = $item;
 			}
 
-
-			$text = (string) $view->param( 'f-search-text' );
-			$catid = (string) $view->param( 'f-catalog-id' );
-			$attrids = $view->param( 'f-attr-id', array() );
-
-			if( is_string( $attrids ) ) {
-				$attrids = explode( ' ', $attrids );
-			}
-
-			if( $catid == '' ) {
-				$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
-			}
-
-			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
-
-			if( $text !== '' ) {
-				$filter = $controller->createProductFilterByText( $text );
-			} else if( $catid !== '' ) {
-				$filter = $controller->createProductFilterByCategory( $catid );
-			} else {
-				$filter = $controller->createProductFilterDefault();
-			}
-
-			if( !empty( $attrids ) )
+			if( ( $aggregate = $config->get( 'client/html/catalog/filter/attribute/aggregate', true ) ) === true )
 			{
-				$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( $attrids ) );
-
-				$expr = array(
-					$filter->getConditions(),
-					$filter->compare( '==', $func, count( $attrids ) ),
-				);
-
-				$filter->setConditions( $filter->combine( '&&', $expr ) );
+				// Limit must be the same or less than the limit in the catalog index manager
+				if( $this->_getProductListTotal( $view ) < 1000 )
+				{
+					$filter = $this->_getProductListFilter( $view );
+					$controller = Controller_Frontend_Catalog_Factory::createController( $context );
+					$view->attributeAggregateList = $controller->aggregate( $filter, 'catalog.index.attribute.id' );
+				}
+				else
+				{
+					$aggregate = false;
+				}
 			}
 
-			if( $config->get( 'client/html/catalog/filter/attribute/aggregate', true ) === true ) {
-				$view->attributeAggregate = $controller->aggregate( $filter, 'catalog.index.attribute.id' );
-			}
-
+			$view->attributeAggregate = $aggregate;
 			$view->attributeMap = $attrMap;
 
 			$this->_cache = $view;
