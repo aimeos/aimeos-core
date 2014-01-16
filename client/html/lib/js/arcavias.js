@@ -110,6 +110,11 @@ jQuery(document).ready( function($) {
 
 	
 	/* Catalog filter */
+	$(".catalog-filter-tree li.cat-item").on("click", function() {
+		$(".catalog-filter").fadeTo( 1000, 0.5 );
+		$(".catalog-list").fadeTo( 1000, 0.5 );
+	});
+
 	$(".catalog-filter-attribute input.attr-item").on("click", function() {
 		$(".catalog-filter form").submit();
 		$(".catalog-filter").fadeTo( 1000, 0.5 );
