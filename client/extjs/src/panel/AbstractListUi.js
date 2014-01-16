@@ -329,34 +329,13 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
         var itemUi = Ext.ComponentMgr.create({
             xtype: this.itemUiXType,
             domain: this.domain,
-            record: this.getRecord(action),
+            record: this.grid.getSelectionModel().getSelected(),
             store: this.store,
             listUI: this,
             action: action
         }, this);
 
         itemUi.show();
-    },
-
-    getRecord: function( action ) {
-        if( action == 'add' ) {
-            return null;
-        }
-        else if( action == 'copy' )
-        {
-            var edit = this.grid.getSelectionModel().getSelected().copy();
-            var codeProperty = this.recordName.toLowerCase() + ".code";
-
-            edit.data[ this.idProperty ] = null;
-
-            if ( edit.data.hasOwnProperty( codeProperty ) ) {
-                edit.data[ codeProperty ] = edit.data[ codeProperty ] + "_copy";
-            }
-
-            return edit;
-        }
-
-        return this.grid.getSelectionModel().getSelected();
     },
 
     onStoreException: function(proxy, type, action, options, response) {

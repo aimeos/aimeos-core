@@ -88,7 +88,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		if (this.action == 'copy') {
 			this.items[0].deferredRender = false;
 		}
-		
+
 		MShop.panel.AbstractItemUi.superclass.initComponent.call(this);
 	},
 
@@ -135,10 +135,26 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			// wait till ref if here
 			return this.initRecord.defer(50, this, arguments);
 		}
-		
-		if (! this.record) {
+
+		if (! this.record ) {
 			this.record = new this.recordType();
 			this.action = 'add';
+		} else if (this.action == 'copy') {
+		    this.action = 'copy';
+
+            // Copy selected record
+            var edit = this.record.copy();
+
+            var codeProperty = this.listUI.recordName.toLowerCase() + ".code";
+
+            // Remove ID because it should be a copy of the original record
+            edit.data[ this.idProperty ] = null;
+
+            if ( edit.data.hasOwnProperty( codeProperty ) ) {
+                edit.set(codeProperty, edit.data[ codeProperty ] + "_copy");
+            }
+
+            this.record = edit;
 		}
 
 		this.mainForm.getForm().loadRecord(this.record);
@@ -238,7 +254,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	},
 
 	onStoreException: function(proxy, type, action, options, response) {
-		if (/*itwasus &&*/ this.isSaveing) {
+		if (this.isSaveing) {
 			this.isSaveing = false;
 			this.saveMask.hide();
 		}
