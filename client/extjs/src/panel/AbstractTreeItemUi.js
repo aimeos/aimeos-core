@@ -20,58 +20,10 @@ Ext.ns('MShop.panel');
  */
 MShop.panel.AbstractTreeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     /**
-     * Action from treeUi
-     * default is "add": creating new entry as phantom
-     */
-    action: 'add',
-    
-    /**
      * Reference to the parent treeUi
      * Where this itemUi is opened from
      */
     treeUI: null,
-    
-    initComponent: function() {
-        this.addEvents(
-            /**
-             * @event beforesave
-             * Fired before record gets saved
-             * @param {MShop.panel.AbstractItemUi} this
-             * @param {Ext.data.Record} record
-             */
-            'beforesave',
-            /**
-             * @event save
-             * Fired after record got saved
-             * @param {MShop.panel.AbstractItemUi} this
-             * @param {Ext.data.Record} record
-             * @param {Function} ticketFn
-             */
-            'save',
-            /**
-             * @event validate
-             * Fired when validating user data. return false to signal invalid data
-             * @param {MShop.panel.AbstractItemUi} this
-             * @param {Ext.data.Record} record
-             */
-            'validate' );
-
-        this.recordType = this.store.recordType;
-        this.idProperty = this.idProperty || this.store.reader.meta.idProperty;
-
-        this.initFbar();
-        this.initRecord();
-
-        this.store.on('beforewrite', this.onStoreBeforeWrite, this);
-        this.store.on('exception', this.onStoreException, this);
-        this.store.on('write', this.onStoreWrite, this);
-
-        if (this.action == 'copy') {
-            this.items[0].deferredRender = false;
-        }
-        
-        MShop.panel.AbstractItemUi.superclass.initComponent.call(this);
-    },
 
     onSaveItem: function() {
         // validate data
@@ -92,7 +44,7 @@ MShop.panel.AbstractTreeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
         }
 
         this.mainForm.getForm().updateRecord(this.record);
-        
+
         if (this.action == 'copy') {
             this.record.id = null;
             this.record.phantom = true;
@@ -106,33 +58,6 @@ MShop.panel.AbstractTreeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
         if (! this.store.autoSave) {
             this.onAfterSave();
         }
-    },
-
-    onStoreException: function(proxy, type, action, options, response) {
-        if (/*itwasus &&*/ this.isSaveing) {
-            this.isSaveing = false;
-            this.saveMask.hide();
-        }
-    },
-
-    onStoreWrite: function(store, action, result, transaction, rs) {
-
-        var records = Ext.isArray(rs) ? rs : [rs];
-
-        if (records.indexOf(this.record) !== -1 && this.isSaveing) {
-            var ticketFn = this.onAfterSave.deferByTickets(this),
-                wrapTicket = ticketFn();
-            
-            this.fireEvent('save', this, this.record, ticketFn);
-            wrapTicket();
-        }
-    },
-
-    onAfterSave: function() {
-        this.isSaveing = false;
-        this.saveMask.hide();
-
-        this.close();
     }
 });
 
