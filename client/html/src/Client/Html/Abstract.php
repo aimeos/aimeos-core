@@ -157,15 +157,16 @@ abstract class Client_Html_Abstract
 	 * Returns the parameters used by the html client.
 	 *
 	 * @param array $params Associative list of all parameters
+	 * @param array $prefixes List of prefixes the parameters must start with
 	 * @return array Associative list of parameters used by the html client
 	 */
-	protected function _getClientParams( array $params )
+	protected function _getClientParams( array $params, array $prefixes = array( 'f', 'l', 'd', 'a' ) )
 	{
 		$list = array();
 
 		foreach( $params as $key => $value )
 		{
-			if( ( $key[0] === 'f' || $key[0] === 'l' || $key[0] === 'd' || $key[0] === 'a' ) && $key[1] === '-' ) {
+			if( in_array( $key[0], $prefixes ) && $key[1] === '-' ) {
 				$list[$key] = $value;
 			}
 		}
