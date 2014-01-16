@@ -6,7 +6,7 @@
 
 Ext.ns('MShop.panel.media');
 
-MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
+MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 	maximized : true,
 	layout : 'fit',

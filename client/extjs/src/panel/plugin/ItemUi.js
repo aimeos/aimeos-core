@@ -6,7 +6,7 @@
 
 Ext.ns('MShop.panel.plugin');
 
-MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
+MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 	maximized : true,
 	layout : 'fit',
