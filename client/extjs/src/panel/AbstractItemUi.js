@@ -136,7 +136,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			return this.initRecord.defer(50, this, arguments);
 		}
 
-		if (! this.record ) {
+		if (! this.record || this.action == 'add' ) {
 			this.record = new this.recordType();
 			this.action = 'add';
 		} else if (this.action == 'copy') {
