@@ -7,14 +7,18 @@
 
 $enc = $this->encoder();
 $params = $this->get( 'listParams', array() );
+$total = $this->get( 'listProductTotal', 1 ) / $this->get( 'listPageSize', 1 );
+$current = $this->get( 'listPageCurr', 1 );
 
 $listTarget = $this->config( 'client/html/catalog/list/url/target' );
 $listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
 $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 
 ?>
-<?php if( $this->get( 'listProductTotal', 0 ) > 0 ) : ?>
+<?php if( $current > 1 ) : ?>
 <link rel="prev" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPagePrev ) + $params ) ); ?>" />
+<?php endif; ?>
+<?php if( $current > 1 && $current < $total ) : // Optimization to avoid loading next page while the user is still filtering ?>
 <link rel="next" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageNext ) + $params ) ); ?>" />
 <?php endif; ?>
 <?php echo $this->get( 'pagiHeader' ); ?>
