@@ -6,7 +6,12 @@
 
 Ext.ns( 'MShop.panel.product.stock' );
 
-MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
+/**
+ * Concrete ItemUi
+ * 
+ * @extends Mshop.panel.AbstractListItemUi
+ */
+MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 
 	recordName : 'Product_Stock',
 	idProperty : 'product.stock.id',

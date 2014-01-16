@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
+ * Copyright (c) Metaways Infosystems GmbH, 2013
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -26,10 +26,6 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 * @cfg  {Ext.data.Record} record (optional)
 	 */
 	record: null,
-	/**
-	 * @cfg {MShop.panel.AbstractListUi}
-	 */
-	listUI: null,
 	/**
 	 * @cfg {Ext.from.FormPanel} mainForm
 	 */
@@ -210,7 +206,10 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			this.saveMask.hide();
 		}
 
-		var recordRefIdProperty = this.listUI.listNamePrefix + "refid";
+		/*
+		 *this code has moved to his concret 
+		 * 
+		 *var recordRefIdProperty = this.listUI.listNamePrefix + "refid";
 		var recordTypeIdProperty = this.listUI.listNamePrefix + "typeid";
 		
 		var index = this.store.findBy(function (item, index) {
@@ -234,7 +233,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			this.saveMask.hide();
 			Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
 			return;
-		}
+		}*/
 
 		this.mainForm.getForm().updateRecord(this.record);
 		

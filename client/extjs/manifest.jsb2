@@ -136,6 +136,9 @@
 			"text": "AbstractItemUi.js",
 			"path": "src/panel/"
 		}, {
+			"text": "AbstractListItemUi.js",
+			"path": "src/panel/"
+		}, {
 			"text": "ListItemListUi.js",
 			"path": "src/panel/"
 		}, {
