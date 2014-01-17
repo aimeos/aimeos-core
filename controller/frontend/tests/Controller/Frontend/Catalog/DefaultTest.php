@@ -170,6 +170,23 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAddProductFilterCategory()
+	{
+		$filter = $this->_object->createProductFilterDefault();
+		$filter = $this->_object->addProductFilterCategory( $filter, 0 );
+
+		$list = $filter->getConditions()->getExpressions();
+
+		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Interface ) ) {
+			throw new Exception( 'Wrong expression' );
+		}
+
+		$this->assertEquals( 'catalog.index.catalog.id', $list[0]->getName() );
+		$this->assertEquals( 0, $list[0]->getValue() );
+		$this->assertEquals( array(), $filter->getSortations() );
+	}
+
+
 	public function testCreateProductFilterByText()
 	{
 		$filter = $this->_object->createProductFilterByText( 'Espresso' );
@@ -261,6 +278,23 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 		$filter = $this->_object->createProductFilterByText( '', 'failure' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
+		$this->assertEquals( array(), $filter->getSortations() );
+	}
+
+
+	public function testAddProductFilterText()
+	{
+		$filter = $this->_object->createProductFilterByText( 'Espresso' );
+		$filter = $this->_object->addProductFilterText( $filter, 'Espresso' );
+
+		$list = $filter->getConditions()->getExpressions();
+
+		if( !isset( $list[0] ) || !( $list[0] instanceof MW_Common_Criteria_Expression_Compare_Interface ) ) {
+			throw new Exception( 'Wrong expression' );
+		}
+
+		$this->assertEquals( 'catalog.index.text.relevance("default","de","Espresso")', $list[0]->getName() );
+		$this->assertEquals( 0, $list[0]->getValue() );
 		$this->assertEquals( array(), $filter->getSortations() );
 	}
 
