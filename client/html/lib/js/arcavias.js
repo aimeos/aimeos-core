@@ -98,6 +98,21 @@ document.createElement("section");
 document.createElement("article");
 
 
+/* Lazy product image loading in list view */
+var arcaviasLazyLoader = (function() {
+	var elements = $(".catalog-list-items .lazy-image, .catalog-list-promo .lazy-image");
+	for( var i = 0; i < elements.length; i++ ) {
+		var element = $(elements[i]);
+        if( $(window).scrollTop() + $(window).height() + 2 * element.height() >= element.offset().top ) {
+        	element.css( "background-image", "url('" + element.data( "src" ) + "')" );
+        	element.removeClass( "lazy-image" );
+        }
+	}
+});
+
+arcaviasLazyLoader();
+
+
 jQuery(document).ready( function($) {
 
 	/*
@@ -116,7 +131,7 @@ jQuery(document).ready( function($) {
 	});
 
 	$(".catalog-filter-attribute input.attr-item").on("click", function() {
-		$(".catalog-filter form").submit();
+		$(this).parents(".catalog-filter form").submit();
 		$(".catalog-filter").fadeTo( 1000, 0.5 );
 		$(".catalog-list").fadeTo( 1000, 0.5 );
 	});
@@ -146,23 +161,12 @@ jQuery(document).ready( function($) {
 		},
 		select: function( event, ui ) {
 			arcaviasInputComplete.val( ui.item.value );
-			$( ".catalog-filter-search > form" ).submit();
+			$(ui).parents(".catalog-filter form").submit();
 		}
 	} );
 
 
 	/* Lazy product image loading in list view */
-	var arcaviasLazyLoader = (function() {
-		var elements = $(".catalog-list-items .lazy-image, .catalog-list-promo .lazy-image");
-		for( var i = 0; i < elements.length; i++ ) {
-			var element = $(elements[i]);
-	        if( $(window).scrollTop() + $(window).height() + 2 * element.height() >= element.offset().top ) {
-	        	element.css( "background-image", "url('" + element.data( "src" ) + "')" );
-	        	element.removeClass( "lazy-image" );
-	        }
-		}
-	});
-	
 	arcaviasLazyLoader();
 	$(window).bind("resize", arcaviasLazyLoader);
 	$(window).bind("scroll", arcaviasLazyLoader);
@@ -241,7 +245,7 @@ jQuery(document).ready( function($) {
 	);
 
 	/* Delivery/payment form slide up/down when selected */
-	$( ".checkout-standard-delivery,.checkout-standard-payment .option" ).bind( "click",
+	$( ".checkout-standard-delivery, .checkout-standard-payment .option" ).bind( "click",
 		function( event ) {
 			$( ".checkout-standard .form-list" ).slideUp( 400 );
 			$( ".checkout-standard .item-service" ).has( this ).find( ".form-list" ).slideDown( 400 );
@@ -251,7 +255,7 @@ jQuery(document).ready( function($) {
 	/* Check for mandatory fields in all forms */
 	$( ".checkout-standard form" ).on( "submit", function( event ) {
 			var retval = true;
-			$( ".checkout-standard .item-new,.item-service" )
+			$( ".checkout-standard .item-new, .item-service" )
 				.has( ".header,label" ).has( "input:checked" ) // combining in one has() doesn't work
 				.find( ".form-list .mandatory" )
 				.each( function() {
