@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+
+var attributeCounts = <?php echo json_encode( $this->get( 'attributeCountList', array() ), JSON_FORCE_OBJECT ); ?>;
+
+$( ".catalog-filter-attribute li.attr-item" ).each( function( index, item ) {	
+	$(item).append( function() {
+		var itemId = $(this).data( "id" );
+		
+		if( attributeCounts[itemId] ) {
+			var node = document.createElement( 'span' );
+			node.appendChild( document.createTextNode( attributeCounts[itemId] ) );
+			$(node).addClass( 'attr-count' );
+			return node;
+		}
+		
+		$(this).addClass( 'disabled' );
+	});
+});
+
+<?php echo $this->get( 'attributeBody' ); ?>
