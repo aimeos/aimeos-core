@@ -266,14 +266,32 @@
 
 
 /* Catalog filter */
-.catalog-filter button {
+.catalog-filter button.filter {
 	width: 100%;
 	margin: 0 !important;
+}
+
+.catalog-filter-tree .disabled,
+.catalog-filter-tree .disabled a:link,
+.catalog-filter-tree .disabled a:visited,
+.catalog-filter-attribute .disabled {
+	color: #B0B0B0;
+}
+
+.catalog-filter-tree .cat-count:before,
+.catalog-filter-attribute .attr-count:before {
+        content: "(";
+}
+
+.catalog-filter-tree .cat-count:after,
+.catalog-filter-attribute .attr-count:after {
+        content: ")";
 }
 
 /* Catalog filter, tree section */
 .catalog-filter-tree {
 	line-height: 125%;
+	margin: 1em 0;
 }
 
 .catalog-filter-tree ul {
@@ -293,8 +311,7 @@
 	border: 1px solid #C3D9E5;
 }
 
-/* Hide all list blocks of the sub-levels. The active ones will be enabled by the interal style sheet */
-.catalog-filter-tree .level-0 li a {
+.catalog-filter-tree .level-0 li {
 	text-transform: uppercase;
 	font-size: 1em;
 	color: #004266;
@@ -304,7 +321,7 @@
 	margin: 10px 0;
 }
 
-.catalog-filter-tree .level-1 li a {
+.catalog-filter-tree .level-1 li {
 	text-transform: none;
 }
 
@@ -328,7 +345,7 @@
 	background: url("images/listIconOpen.png") no-repeat scroll 0px 4px transparent;
 }
 
-.catalog-filter-tree .level-2 li a {
+.catalog-filter-tree .level-2 li {
 	color: #689DB9;
 }
 
@@ -346,12 +363,12 @@
 }
 
 
-.catalog-filter-tree .level-3 li a {
+.catalog-filter-tree .level-3 li {
 	font-weight: normal;
 	margin-top: 1px;
 }
 
-.catalog-filter-tree .level-3 .active a {
+.catalog-filter-tree .level-3 .active {
 	font-weight: bold;
 }
 
@@ -363,6 +380,7 @@
 	border: 1px solid #689DB9;
 	border-radius: 4px;
 	white-space: nowrap;
+	margin: 1em 0;
 }
 
 .catalog-filter-search:hover {
@@ -376,6 +394,7 @@
 	min-width: 5em;
 	max-width: 25em;
 	height: 1.55em;
+	width: 80%;
 }
 
 .catalog-filter-search .standardbutton {
@@ -384,7 +403,9 @@
 	border-radius: 0;
 	border: 0 none;
 	min-width: 2em;
-	padding: 0 5px;
+	padding: 0;
+	margin: 0;
+	width: 20%;
 }
 
 .catalog-filter-search .standardbutton:hover {
@@ -397,7 +418,7 @@
 
 /* Catalog filter, attribute section */
 .catalog-filter-attribute {
-	padding: 5px 0;
+	margin: 1em 0;
 }
 
 .catalog-filter-attribute fieldset {
@@ -413,26 +434,14 @@
         font-size: 120%;
 }
 
-.catalog-filter-attribute li.disabled {
-        font-weight: normal;
-}
-
 .catalog-filter-attribute input.attr-item {
         border: 1px solid #C3D9E5;
 }
 
-.catalog-filter-attribute .attr-count:before {
-        content: "(";
-}
-
-.catalog-filter-attribute .attr-count:after {
-        content: ")";
-}
-
 
 /* Product list, stage section */
-.catalog-stage-breadcrumb {
-	padding: 0px 0px 10px 0px;
+.catalog-stage-breadcrumb .breadcrumb {
+	margin: 1em 0;
 }
 
 .catalog-stage-breadcrumb .title {
@@ -577,7 +586,7 @@
 
 /* List head section */
 .catalog-list-head {
-	padding: 0px 0px 20px 0px;
+	padding: 1em 0;
 }
 
 .catalog-list-head .short {
@@ -586,7 +595,7 @@
 
 .catalog-list-head h1 {
 	font-size: 1.5em;
-	padding: 10px 0px 10px 0px;
+	padding: 0.5em 0;
 }
 
 .catalog-list-head .head-search {
