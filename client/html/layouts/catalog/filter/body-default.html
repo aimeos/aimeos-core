@@ -8,33 +8,25 @@
 $listTarget = $this->config( 'client/html/catalog/list/url/target' );
 $listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
 $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
+$listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
 
 $enc = $this->encoder();
-$params = array();
-
-if( ( $catid = $this->param( 'f-catalog-id' ) ) !== null ) {
-	$params['f-catalog-id'] = $catid;
-}
-
-if( ( $name = $this->param( 'a-name' ) ) !== null ) {
-	$params['a-name'] = $name;
-}
 
 ?>
 <section class="arcavias catalog-filter">
 <?php if( isset( $this->filterErrorList ) ) : ?>
 	<ul class="error-list">
-<?php foreach( (array) $this->filterErrorList as $errmsg ) : ?>
+<?php	foreach( (array) $this->filterErrorList as $errmsg ) : ?>
 		<li class="error-item"><?php echo $enc->html( $errmsg ); ?></li>
-<?php endforeach; ?>
+<?php	endforeach; ?>
 	</ul>
 <?php endif; ?>
 	<nav>
-		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $params ) ); ?>">
+		<form method="POST" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction ) ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
 <?php if( $this->config( 'client/html/catalog/filter/default/button', true ) ) : ?>
 			<noscript>
-				<button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
+				<button class="filter standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
 			</noscript>
 <?php endif; ?>
 		</form>
