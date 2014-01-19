@@ -116,10 +116,7 @@ class Client_Html_Catalog_Filter_Attribute_Default
 		if( !isset( $this->_cache ) )
 		{
 			$attrMap = array();
-			$context = $this->_getContext();
-			$config = $context->getConfig();
-
-			$manager = MShop_Factory::createManager( $context, 'attribute' );
+			$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
 
 			$search = $manager->createSearch( true );
 			$expr = array(
@@ -134,22 +131,6 @@ class Client_Html_Catalog_Filter_Attribute_Default
 				$attrMap[ $item->getType() ][$id] = $item;
 			}
 
-			if( ( $aggregate = $config->get( 'client/html/catalog/filter/attribute/aggregate', true ) ) === true )
-			{
-				// Limit must be the same or less than the limit in the catalog index manager
-				if( $this->_getProductListTotal( $view ) < 1000 )
-				{
-					$filter = $this->_getProductListFilter( $view );
-					$controller = Controller_Frontend_Catalog_Factory::createController( $context );
-					$view->attributeAggregateList = $controller->aggregate( $filter, 'catalog.index.attribute.id' );
-				}
-				else
-				{
-					$aggregate = false;
-				}
-			}
-
-			$view->attributeAggregate = $aggregate;
 			$view->attributeMap = $attrMap;
 
 			$this->_cache = $view;
