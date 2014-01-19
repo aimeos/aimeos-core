@@ -49,9 +49,9 @@ class Client_Html_Catalog_List_Pagination_DefaultTest extends MW_Unittest_Testca
 		$view = TestHelper::getView();
 
 		$view->listProductItems = array();
-		$view->listProductTotal = 1;
-		$view->listPageSize = 100;
-		$view->listPageCurr = 1;
+		$view->listProductTotal = 100;
+		$view->listPageSize = 10;
+		$view->listPageCurr = 2;
 		$view->listParams = array();
 		$view->listCatPath = array( $catalogManager->createItem(), $catItem );
 
@@ -76,7 +76,7 @@ class Client_Html_Catalog_List_Pagination_DefaultTest extends MW_Unittest_Testca
 		$output = $this->_object->getHeader();
 
 		$this->assertContains( '<link rel="prev"', $output );
-		$this->assertContains( '<link rel="next"', $output );
+		$this->assertContains( '<link rel="next prefetch"', $output );
 	}
 
 

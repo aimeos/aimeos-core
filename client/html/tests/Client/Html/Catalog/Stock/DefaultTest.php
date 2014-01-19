@@ -70,7 +70,6 @@ class Client_Html_Catalog_Stock_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( 'jQuery', $output );
 		$this->assertRegExp( '/"' . $productId . '".*stock-high/', $output );
 	}
 
@@ -82,7 +81,6 @@ class Client_Html_Catalog_Stock_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( 'jQuery', $output );
 		$this->assertRegExp( '/"-1".*stock-unlimited/', $output );
 	}
 

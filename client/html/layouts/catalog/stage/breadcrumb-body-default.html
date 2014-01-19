@@ -14,7 +14,7 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 ?>
 <div class="catalog-stage-breadcrumb">
 <?php if( isset( $this->stageCatPath ) ) : ?>
-	<nav>
+	<nav class="breadcrumb">
 		<span class="title"><?php echo $enc->html( $this->translate( 'client/html', 'You are here:' ), $enc::TRUST ); ?></span>
 		<ol>
 <?php	foreach( (array) $this->stageCatPath as $cat ) : ?>

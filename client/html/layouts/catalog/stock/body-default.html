@@ -73,16 +73,13 @@ foreach( $stockProductIds as $prodId )
 }
 
 ?>
-jQuery(document).ready( function($) {
 
-	var stockHtml = <?php echo json_encode( $result, JSON_FORCE_OBJECT ); ?>;
+var stockHtml = <?php echo json_encode( $result, JSON_FORCE_OBJECT ); ?>;
 
-	$( ".arcavias .product" ).each( function( index, product ) {
-		var productId = $(product).data( "id" );
-		
-		if( stockHtml[productId] ) {
-			$( ".stock", product ).html( stockHtml[productId] );
-		}
-	} );
+$( ".arcavias .product" ).each( function( index, product ) {
+	var productId = $(product).data( "id" );
 	
+	if( stockHtml[productId] ) {
+		$( ".stock", product ).html( stockHtml[productId] );
+	}
 } );
