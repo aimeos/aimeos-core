@@ -106,29 +106,6 @@ class Client_Html_Catalog_Filter_Tree_Default
 	}
 
 
-	protected function _getCatalogFilter( MShop_Catalog_Item_Interface $tree, array $path, $currentId )
-	{
-		if( $tree->getId() == $currentId )
-		{
-			$ids = array();
-			foreach( $tree->getChildren() as $item ) {
-				$ids[] = $item->getId();
-			}
-
-			return $ids;
-		}
-
-		foreach( $tree->getChildren() as $child )
-		{
-			if( isset( $path[ $child->getId() ] ) ) {
-				return $this->_getCatalogFilter( $child, $path, $currentId );
-			}
-		}
-
-		return array();
-	}
-
-
 	/**
 	 * Sets the necessary parameter values in the view.
 	 *
