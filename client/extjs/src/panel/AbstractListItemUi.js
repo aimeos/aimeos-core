@@ -46,6 +46,11 @@ MShop.panel.AbstractListItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             this.saveMask.hide();
         }
 
+        /**
+         * @todo
+         * this could be more generic or at least configurable
+         * actually this code works only with itemUis, maybe it would be better to move it there
+         */
         var recordRefIdProperty = this.listUI.listNamePrefix + "refid";
         var recordTypeIdProperty = this.listUI.listNamePrefix + "typeid";
         
