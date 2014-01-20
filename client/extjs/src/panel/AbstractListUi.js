@@ -329,7 +329,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
         var itemUi = Ext.ComponentMgr.create({
             xtype: this.itemUiXType,
             domain: this.domain,
-            record: this.grid.getSelectionModel().getSelected(),
+            record: (action == 'copy' || action == 'edit') ? this.grid.getSelectionModel().getSelected() : null,
             store: this.store,
             listUI: this,
             action: action
