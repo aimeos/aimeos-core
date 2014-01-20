@@ -123,7 +123,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		
 		this.mainForm.getForm().updateRecord(this.record);
 		
-		if (this.isNewRecord) {
+		if ( this.action == 'add' || this.action == 'copy' ) {
 			this.store.add(this.record);
 		}
 

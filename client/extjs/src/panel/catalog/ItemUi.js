@@ -157,7 +157,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		this.record.set( 'catalog.code', this.mainForm.getForm().findField( 'code' ).getValue() );
 		this.record.endEdit();
 
-		if( this.isNewRecord ) {
+		if( this.action == 'add' || this.action == 'copy' ) {
 			this.store.add( this.record );
 		}
 

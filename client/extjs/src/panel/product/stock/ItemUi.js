@@ -145,7 +145,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 		this.mainForm.getForm().updateRecord( this.record );
 		this.record.data['product.stock.productid'] = this.listUI.itemUi.record.id;
 
-		if( this.isNewRecord ) {
+		if( this.action == 'add' || this.action == 'copy' ) {
 			this.store.add( this.record );
 		}
 
