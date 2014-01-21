@@ -16,7 +16,6 @@
  */
 class Client_Html_Catalog_Filter_Attribute_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/catalog/filter/attribute/default/subparts';
 	private $_subPartNames = array();

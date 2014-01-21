@@ -16,7 +16,6 @@
  */
 class Client_Html_Checkout_Confirm_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/checkout/confirm/default/subparts';
 	private $_subPartNames = array( 'basic' );

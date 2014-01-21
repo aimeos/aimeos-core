@@ -16,6 +16,5 @@
  */
 class Client_Html_Email_Delivery_Html_Summary_Address_Default
 	extends Client_Html_Common_Summary_Address_Default
-	implements Client_Html_Interface
 {
 }

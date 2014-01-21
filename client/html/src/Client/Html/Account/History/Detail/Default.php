@@ -16,7 +16,6 @@
  */
 class Client_Html_Account_History_Detail_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/account/history/detail/default/subparts';

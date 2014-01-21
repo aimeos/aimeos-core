@@ -16,6 +16,5 @@
  */
 class Client_Html_Account_History_Detail_Service_Default
 	extends Client_Html_Common_Summary_Service_Default
-	implements Client_Html_Interface
 {
 }
