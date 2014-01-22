@@ -48,4 +48,11 @@ Ext.onReady(function() {
             }]
         }]
     });
+    
+    /*
+     * Apply scrolling fix for Chrome
+     * Have a look at ext-override.js
+     */
+    Ext.get(document.body).addClass('ext-chrome-fixes');
+    Ext.util.CSS.createStyleSheet('@media screen and (-webkit-min-device-pixel-ratio:0) {.x-grid3-cell{box-sizing: border-box !important;}}', 'chrome-fixes-box-sizing');
 });
