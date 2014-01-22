@@ -3,9 +3,12 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
- * @version $Id: header-default.html 1320 2012-10-19 19:57:38Z nsendetzky $
  */
 
-echo $this->get( 'filterHeader' );
+$enc = $this->encoder();
 
 ?>
+<?php if( ( $url = $this->get( 'filterCountUrl' ) ) != null ) : ?>
+<script type="text/javascript" defer="defer" src="<?php echo $enc->attr( $url ); ?>"></script>
+<?php endif; ?>
+<?php echo $this->filterHeader; ?>

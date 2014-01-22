@@ -46,9 +46,10 @@ class MW_View_Helper_NavTree_Default
 	 *
 	 * @param MShop_Catalog_Item_Interface $item Catalog item with child nodes
 	 * @param array Associative list of catalog IDs as keys and catalog nodes as values
+	 * @param array Associative list of parameters used for filtering
 	 * @return string Rendered HTML of the navigation tree
 	 */
-	public function transform( MShop_Catalog_Item_Interface $item, array $path )
+	public function transform( MShop_Catalog_Item_Interface $item, array $path, array $params = array() )
 	{
 		if( $item->getStatus() <= 0 ) {
 			return '';
@@ -62,10 +63,16 @@ class MW_View_Helper_NavTree_Default
 		$class .= ( isset( $path[ $item->getId() ] ) ? ' active' : '' );
 		$class .= ( isset( $config['css-class'] ) ? ' ' . $config['css-class'] : '' );
 
-		$params = array( 'a-name' => str_replace( ' ', '-', $item->getName() ), 'f-catalog-id' => $id );
+		$params['a-name'] = str_replace( ' ', '-', $item->getName() );
+		$params['f-catalog-id'] = $id;
+
 		$url = $enc->attr( $this->url( $this->_target, $this->_controller, $this->_action, $params ) );
 
-		$output = '<li class="catid-' . $enc->attr( $id . $class ) . '"><a href="' . $url . '">' . $enc->html( $item->getName() ) . '</a>';
+		$output = '
+		<li class="cat-item catid-' . $enc->attr( $id . $class ) . '" data-id="' . $id . '" >
+			<a class="cat-item" href="' . $url . '">
+				<span class="cat-name">' . $enc->html( $item->getName(), $enc::TRUST ) . '</span>
+			</a>';
 
 		$children = $item->getChildren();
 
@@ -74,7 +81,7 @@ class MW_View_Helper_NavTree_Default
 			$output .= '<ul class="level-' . $enc->attr( $item->getNode()->level + 1 ) . '">';
 
 			foreach( $children as $child ) {
-				$output .= $this->transform( $child, $path );
+				$output .= $this->transform( $child, $path, $params );
 			}
 
 			$output .= '</ul>';

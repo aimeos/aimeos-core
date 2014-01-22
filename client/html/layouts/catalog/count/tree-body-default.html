@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+?>
+
+var categoryCounts = <?php echo json_encode( $this->get( 'treeCountList', array() ), JSON_FORCE_OBJECT ); ?>;
+
+$( ".catalog-filter-tree li.cat-item" ).each( function( index, item ) {	
+	var itemId = $(item).data( "id" );
+
+	$("> a.cat-item", item).append( function() {
+		if( categoryCounts[itemId] ) {
+			var node = document.createElement( 'span' );
+			node.appendChild( document.createTextNode( categoryCounts[itemId] ) );
+			$(node).addClass( 'cat-count' );
+			return node;
+		}
+		
+		$(item).addClass( 'disabled' );
+	});
+});
+
+<?php echo $this->get( 'treeBody' ); ?>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
  * @subpackage Html
@@ -9,16 +9,16 @@
 
 
 /**
- * Default implementation of catalog attribute filter section in HTML client.
+ * Default implementation of catalog count attribute HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Filter_Attribute_Default
+class Client_Html_Catalog_Count_Attribute_Default
 	extends Client_Html_Catalog_Abstract
 	implements Client_Html_Interface
 {
-	private $_subPartPath = 'client/html/catalog/filter/attribute/default/subparts';
+	private $_subPartPath = 'client/html/catalog/count/attribute/default/subparts';
 	private $_subPartNames = array();
 	private $_cache;
 
@@ -39,8 +39,8 @@ class Client_Html_Catalog_Filter_Attribute_Default
 		}
 		$view->attributeBody = $html;
 
-		$tplconf = 'client/html/catalog/filter/attribute/default/template-body';
-		$default = 'catalog/filter/attribute-body-default.html';
+		$tplconf = 'client/html/catalog/count/attribute/default/template-body';
+		$default = 'catalog/count/attribute-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -62,8 +62,8 @@ class Client_Html_Catalog_Filter_Attribute_Default
 		}
 		$view->attributeHeader = $html;
 
-		$tplconf = 'client/html/catalog/filter/attribute/default/template-header';
-		$default = 'catalog/filter/attribute-header-default.html';
+		$tplconf = 'client/html/catalog/count/attribute/default/template-header';
+		$default = 'catalog/count/attribute-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -78,19 +78,7 @@ class Client_Html_Catalog_Filter_Attribute_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'catalog/filter/attribute/' . $type, $name );
-	}
-
-
-	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 */
-	public function isCachable( $what )
-	{
-		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
+		return $this->_createSubClient( 'catalog/count/attribute/' . $type, $name );
 	}
 
 
@@ -115,23 +103,14 @@ class Client_Html_Catalog_Filter_Attribute_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$attrMap = array();
-			$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+			$context = $this->_getContext();
 
-			$search = $manager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'attribute.domain', 'product' ),
-				$search->getConditions(),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', 'attribute.position' ) ) );
-			$search->setSlice( 0, 1000 );
-
-			foreach( $manager->searchItems( $search, array( 'text' ) ) as $id => $item ) {
-				$attrMap[ $item->getType() ][$id] = $item;
+			if( $context->getConfig()->get( 'client/html/catalog/count/attribute/aggregate', true ) == true )
+			{
+				$filter = $this->_getProductListFilter( $view );
+				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+				$view->attributeCountList = $controller->aggregate( $filter, 'catalog.index.attribute.id' );
 			}
-
-			$view->attributeMap = $attrMap;
 
 			$this->_cache = $view;
 		}
