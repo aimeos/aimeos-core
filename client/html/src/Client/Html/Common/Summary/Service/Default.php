@@ -16,7 +16,6 @@
  */
 class Client_Html_Common_Summary_Service_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/common/summary/service/default/subparts';
 	private $_subPartNames = array();

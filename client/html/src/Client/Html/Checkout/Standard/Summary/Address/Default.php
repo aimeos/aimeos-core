@@ -16,7 +16,6 @@
  */
 class Client_Html_Checkout_Standard_Summary_Address_Default
 	extends Client_Html_Common_Summary_Address_Default
-	implements Client_Html_Interface
 {
 	private $_cache;
 

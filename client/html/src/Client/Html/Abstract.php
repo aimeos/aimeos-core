@@ -15,6 +15,7 @@
  * @subpackage Html
  */
 abstract class Client_Html_Abstract
+	implements Client_Html_Common_Client_Factory_Interface
 {
 	const CACHE_BODY = 1;
 	const CACHE_HEADER = 2;

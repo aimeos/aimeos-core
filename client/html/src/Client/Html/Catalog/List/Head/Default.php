@@ -16,7 +16,6 @@
  */
 class Client_Html_Catalog_List_Head_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_subPartNames = array();
 	private $_subPartPath = 'client/html/catalog/list/head/default/subparts';

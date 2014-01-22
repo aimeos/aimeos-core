@@ -16,7 +16,6 @@
  */
 class Client_Html_Catalog_List_Default
 	extends Client_Html_Catalog_Abstract
-	implements Client_Html_Interface
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/catalog/list/default/subparts';

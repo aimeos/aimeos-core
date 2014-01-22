@@ -16,7 +16,6 @@
  */
 class Client_Html_Email_Delivery_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/email/delivery/default/subparts';
 	private $_subPartNames = array( 'text', 'html' );

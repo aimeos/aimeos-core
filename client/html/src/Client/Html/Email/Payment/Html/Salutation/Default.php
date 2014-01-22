@@ -16,7 +16,6 @@
  */
 class Client_Html_Email_Payment_Html_Salutation_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/email/payment/html/salutation/default/subparts';
 	private $_subPartNames = array();

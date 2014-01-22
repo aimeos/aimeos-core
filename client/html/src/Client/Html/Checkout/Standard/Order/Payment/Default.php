@@ -16,7 +16,6 @@
  */
 class Client_Html_Checkout_Standard_Order_Payment_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/checkout/standard/order/payment/default/subparts';

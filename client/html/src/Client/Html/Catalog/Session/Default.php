@@ -16,7 +16,6 @@
  */
 class Client_Html_Catalog_Session_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/catalog/session/default/subparts';
 	private $_subPartNames = array( 'seen' );

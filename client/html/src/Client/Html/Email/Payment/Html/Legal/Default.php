@@ -16,7 +16,6 @@
  */
 class Client_Html_Email_Payment_Html_Legal_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/email/payment/html/legal/default/subparts';
 	private $_subPartNames = array();

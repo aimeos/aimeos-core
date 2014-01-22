@@ -16,7 +16,6 @@
  */
 class Client_Html_Catalog_Detail_Default
 	extends Client_Html_Abstract
-	implements Client_Html_Interface
 {
 	private $_subPartPath = 'client/html/catalog/detail/default/subparts';
 	private $_subPartNames = array( 'image', 'basic', 'basket', 'additional', 'suggest', 'seen' );
