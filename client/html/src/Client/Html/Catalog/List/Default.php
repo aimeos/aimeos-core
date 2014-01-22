@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Catalog_List_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Catalog_Abstract
 {
 	private $_cache;
 	private $_subPartPath = 'client/html/catalog/list/default/subparts';
