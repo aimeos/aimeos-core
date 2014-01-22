@@ -115,12 +115,14 @@ class Client_Html_Catalog_Filter_Tree_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
+			$context = $this->_getContext();
+			$manager = MShop_Catalog_Manager_Factory::createManager( $context );
 
 			$ref = array( 'text', 'media', 'attribute' );
 			$startid = $view->config( 'client/html/catalog/filter/tree/startid', '' );
-			$currentid = $view->param( 'f-catalog-id', '' );
+			$currentid = (string) $view->param( 'f-catalog-id', '' );
 			$catItems = array();
+
 
 			if( $currentid != '' )
 			{
@@ -154,6 +156,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 				$catItems = array( $node->getId() => $node );
 			}
 
+
 			$search = $manager->createSearch();
 			$expr = $search->compare( '==', 'catalog.parentid', array_keys( $catItems ) );
 			$expr = $search->combine( '||', array( $expr, $search->compare( '==', 'catalog.id', $node->getId() ) ) );
@@ -171,12 +174,49 @@ class Client_Html_Catalog_Filter_Tree_Default
 			$id = ( $startid != '' ? $startid : null );
 			$level = MW_Tree_Manager_Abstract::LEVEL_TREE;
 
-			$view->treeCatalogTree = $manager->getTree( $id, $ref, $level, $search );
 			$view->treeCatalogPath = $catItems;
+			$view->treeCatalogTree = $manager->getTree( $id, $ref, $level, $search );
+			$view->treeCatalogIds = $this->_getCatalogIds( $view->treeCatalogTree, $catItems, $currentid );
+			$view->treeFilterParams = $this->_getClientParams( $view->param(), array( 'f' ) );
+
 
 			$this->_cache = $view;
 		}
 
 		return $this->_cache;
+	}
+
+
+	/**
+	 * Returns the category IDs of the given catalog tree.
+	 *
+	 * Only the IDs of the children of the current category are returned.
+	 *
+	 * @param MShop_Catalog_Item_Interface $tree Catalog node as entry point of the tree
+	 * @param array $path Associative list of category IDs as keys and the catalog
+	 * 	nodes from the currently selected category up to the root node
+	 * @param string $currentId Currently selected category
+	 * @return array List of category IDs
+	 */
+	protected function _getCatalogIds( MShop_Catalog_Item_Interface $tree, array $path, $currentId )
+	{
+		if( $tree->getId() == $currentId )
+		{
+			$ids = array();
+			foreach( $tree->getChildren() as $item ) {
+				$ids[] = $item->getId();
+			}
+
+			return $ids;
+		}
+
+		foreach( $tree->getChildren() as $child )
+		{
+			if( isset( $path[ $child->getId() ] ) ) {
+				return $this->_getCatalogIds( $child, $path, $currentId );
+			}
+		}
+
+		return array();
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
  * @subpackage Html
@@ -9,15 +9,16 @@
 
 
 /**
- * Default implementation of catalog attribute filter section in HTML client.
+ * Default implementation of catalog count tree section HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Filter_Attribute_Default
-	extends Client_Html_Abstract
+class Client_Html_Catalog_Count_Tree_Default
+	extends Client_Html_Catalog_Abstract
+	implements Client_Html_Interface
 {
-	private $_subPartPath = 'client/html/catalog/filter/attribute/default/subparts';
+	private $_subPartPath = 'client/html/catalog/count/tree/default/subparts';
 	private $_subPartNames = array();
 	private $_cache;
 
@@ -25,10 +26,9 @@ class Client_Html_Catalog_Filter_Attribute_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
-	 * @param string|null $name Template name
 	 * @return string HTML code
 	 */
-	public function getBody( $name = null )
+	public function getBody()
 	{
 		$view = $this->_setViewParams( $this->getView() );
 
@@ -36,10 +36,10 @@ class Client_Html_Catalog_Filter_Attribute_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->attributeBody = $html;
+		$view->treeBody = $html;
 
-		$tplconf = 'client/html/catalog/filter/attribute/default/template-body';
-		$default = 'catalog/filter/attribute-body-default.html';
+		$tplconf = 'client/html/catalog/count/tree/default/template-body';
+		$default = 'catalog/count/tree-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -48,10 +48,9 @@ class Client_Html_Catalog_Filter_Attribute_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
-	 * @param string|null $name Template name
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader( $name = null )
+	public function getHeader()
 	{
 		$view = $this->_setViewParams( $this->getView() );
 
@@ -59,10 +58,10 @@ class Client_Html_Catalog_Filter_Attribute_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->attributeHeader = $html;
+		$view->treeHeader = $html;
 
-		$tplconf = 'client/html/catalog/filter/attribute/default/template-header';
-		$default = 'catalog/filter/attribute-header-default.html';
+		$tplconf = 'client/html/catalog/count/tree/default/template-header';
+		$default = 'catalog/count/tree-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -77,19 +76,7 @@ class Client_Html_Catalog_Filter_Attribute_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'catalog/filter/attribute/' . $type, $name );
-	}
-
-
-	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 */
-	public function isCachable( $what )
-	{
-		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
+		return $this->_createSubClient( 'catalog/count/tree/' . $type, $name );
 	}
 
 
@@ -114,23 +101,17 @@ class Client_Html_Catalog_Filter_Attribute_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$attrMap = array();
-			$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+			$context = $this->_getContext();
 
-			$search = $manager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'attribute.domain', 'product' ),
-				$search->getConditions(),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', 'attribute.position' ) ) );
-			$search->setSlice( 0, 1000 );
+			if( $context->getConfig()->get( 'client/html/catalog/count/tree/aggregate', true ) == true )
+			{
+				$manager = MShop_Factory::createManager( $context, 'catalog/index' );
 
-			foreach( $manager->searchItems( $search, array( 'text' ) ) as $id => $item ) {
-				$attrMap[ $item->getType() ][$id] = $item;
+				$filter = $manager->createSearch( true );
+				$this->_addAttributeFilter( $view, $filter );
+
+				$view->treeCountList = $manager->aggregate( $filter, 'catalog.index.catalog.id' );
 			}
-
-			$view->attributeMap = $attrMap;
 
 			$this->_cache = $view;
 		}

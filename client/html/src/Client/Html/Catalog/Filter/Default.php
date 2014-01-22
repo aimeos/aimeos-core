@@ -17,8 +17,9 @@
 class Client_Html_Catalog_Filter_Default
 	extends Client_Html_Abstract
 {
+	private static $_countSingleton;
 	private $_subPartPath = 'client/html/catalog/filter/default/subparts';
-	private $_subPartNames = array( 'tree', 'attribute' );
+	private $_subPartNames = array( 'search', 'tree', 'attribute' );
 	private $_cache;
 
 
@@ -31,7 +32,7 @@ class Client_Html_Catalog_Filter_Default
 	{
 		try
 		{
-			$view = $this->getView();
+			$view = $this->_setViewParams( $this->getView() );
 
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -83,7 +84,7 @@ class Client_Html_Catalog_Filter_Default
 	{
 		try
 		{
-			$view = $this->getView();
+			$view = $this->_setViewParams( $this->getView() );
 
 			$html = '';
 			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -167,5 +168,38 @@ class Client_Html_Catalog_Filter_Default
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->filterErrorList = $view->get( 'filterErrorList', array() ) + $error;
 		}
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		if( !isset( $this->_cache ) )
+		{
+			$config = $this->_getContext()->getConfig();
+
+			if( self::$_countSingleton === null && $config->get( 'client/html/catalog/count/enable', true ) == true )
+			{
+				$target = $config->get( 'client/html/catalog/count/url/target' );
+				$controller = $config->get( 'client/html/catalog/count/url/controller', 'catalog' );
+				$action = $config->get( 'client/html/catalog/count/url/action', 'count' );
+				$config = $config->get( 'client/html/catalog/count/url/config', array() );
+				$params = $this->_getClientParams( $view->param(), array( 'f' ) );
+
+				$view->filterCountUrl = $view->url( $target, $controller, $action, $params, array(), $config );
+
+				/** @todo: Could be a problem in multi-threaded environments */
+				self::$_countSingleton = true;
+			}
+
+			$this->_cache = $view;
+		}
+
+		return $this->_cache;
 	}
 }

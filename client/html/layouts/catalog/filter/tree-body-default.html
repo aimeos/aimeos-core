@@ -6,11 +6,18 @@
  */
 
 $enc = $this->encoder();
+$path = $this->get( 'treeCatalogPath', array() );
+$params = $this->get( 'treeFilterParams', array() );
 
 ?>
-<div class="catalog-filter-tree">
+<section class="catalog-filter-tree">
+<?php if( ( $catid = $this->param( 'f-catalog-id' ) ) != null ) : ?>
+	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f-catalog-id' ) ); ?>" value="<?php echo $enc->attr( $catid ); ?>" />
+<?php endif; ?>
 <?php if( $this->treeCatalogTree ) : ?>
-	<ul class="level-<?php echo $enc->attr( $this->treeCatalogTree->getNode()->level ); ?>"><?php echo $this->navtree( $this->treeCatalogTree, $this->get( 'treeCatalogPath', array() ) ); ?></ul>
+	<ul class="level-<?php echo $enc->attr( $this->treeCatalogTree->getNode()->level ); ?>">
+		<?php echo $this->navtree( $this->treeCatalogTree, $path, $params ); ?>
+	</ul>
 <?php endif; ?>
 <?php echo $this->get( 'treeBody' ); ?>
-</div>
+</section>
