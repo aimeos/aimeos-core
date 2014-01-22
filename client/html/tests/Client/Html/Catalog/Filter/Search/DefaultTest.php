@@ -60,7 +60,7 @@ class Client_Html_Catalog_Filter_Search_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<div class="arcavias catalog-filter-search">', $output );
+		$this->assertStringStartsWith( '<section class="catalog-filter-search">', $output );
 	}
 
 

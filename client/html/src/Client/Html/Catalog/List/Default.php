@@ -171,45 +171,18 @@ class Client_Html_Catalog_List_Default
 			$context = $this->_getContext();
 			$config = $context->getConfig();
 
-			$defaultPageSize = $config->get( 'client/html/catalog/list/size', 48 );
-			$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
+			$products = $this->_getProductList( $view );
 
-
-			$page = (int) $view->param( 'l-page', 1 );
-			$size = (int) $view->param( 'l-size', $defaultPageSize );
-			$sortation = (string) $view->param( 'l-sort', 'relevance' );
 			$text = (string) $view->param( 'f-search-text' );
 			$catid = (string) $view->param( 'f-catalog-id' );
-			$attrids = $view->param( 'f-attr-id', array() );
-
-			if( is_string( $attrids ) ) {
-				$attrids = explode( ' ', $attrids );
-			}
 
 			if( $catid == '' ) {
 				$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
 			}
 
-			$page = ( $page < 1 ? 1 : $page );
-			$size = ( $size < 1 || $size > 100 ? $defaultPageSize : $size );
-			$sortation = ( strlen( $sortation ) === 0 ? $sortation = 'relevance' : $sortation );
-
-
-			$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
-			$sort = ltrim( $sortation, '-' );
-			$products = array();
-			$total = 0;
-
-
-			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
-
-			if( $text !== '' )
+			if( $text === '' && $catid !== '' )
 			{
-				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
-			}
-			else if( $catid !== '' )
-			{
-				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
+				$domains = $config->get( 'client/html/catalog/domains', array( 'media', 'text' ) );
 
 				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
 				$view->listCatPath = $catalogManager->getPath( $catid, $domains );
@@ -220,28 +193,6 @@ class Client_Html_Catalog_List_Default
 					$view->listCurrentCatItem = $categoryItem;
 				}
 			}
-			else
-			{
-				$filter = $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
-				$expr = array(
-					$filter->compare( '!=', 'catalog.index.catalog.id', null ),
-					$filter->getConditions(),
-				);
-				$filter->setConditions( $filter->combine( '&&', $expr ) );
-			}
-
-			if( !empty( $attrids ) )
-			{
-				$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( $attrids ) );
-				$expr = array(
-					$filter->getConditions(),
-					$filter->compare( '==', $func, count( $attrids ) ),
-				);
-				$filter->setConditions( $filter->combine( '&&', $expr ) );
-			}
-
-			$products = $controller->getProductList( $filter, $total, $domains );
-
 
 			if( !empty( $products ) && $config->get( 'client/html/catalog/list/stock/enable', true ) === true )
 			{
@@ -257,13 +208,12 @@ class Client_Html_Catalog_List_Default
 				$view->listStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
 			}
 
-
 			$view->listParams = $this->_getClientParams( $view->param() );
+			$view->listProductTotal = $this->_getProductListTotal( $view );
+			$view->listProductSort = $this->_getProductListSort( $view );
+			$view->listPageCurr = $this->_getProductListPage( $view );
+			$view->listPageSize = $this->_getProductListSize( $view );
 			$view->listProductItems = $products;
-			$view->listProductTotal = $total;
-			$view->listProductSort = $sortation;
-			$view->listPageCurr = $page;
-			$view->listPageSize = $size;
 
 			$this->_cache = $view;
 		}

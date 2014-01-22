@@ -179,6 +179,44 @@ class Controller_Frontend_Catalog_Default
 
 
 	/**
+	 * Returns the given search filter with the conditions attached for filtering texts.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Criteria object used for product search
+	 * @param string $catid Selected category by the user
+	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
+	 */
+	public function addProductFilterCategory( MW_Common_Criteria_Interface $search, $catid )
+	{
+		$expr = array( $search->compare( '==', 'catalog.index.catalog.id', $catid ) );
+
+		$expr[] = $search->getConditions();
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		return $search;
+	}
+
+
+	/**
+	 * Returns the given search filter with the conditions attached for filtering texts.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Criteria object used for product search
+	 * @param string $input Search string entered by the user
+	 * @param string $listtype List type of the text associated to the product, usually "default"
+	 * @return MW_Common_Criteria_Interface Criteria object containing the conditions for searching
+	 */
+	public function addProductFilterText( MW_Common_Criteria_Interface $search, $input, $listtype = 'default' )
+	{
+		$langid = $this->_getContext()->getLocale()->getLanguageId();
+		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
+
+		$expr[] = $search->getConditions();
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		return $search;
+	}
+
+
+	/**
 	 * Returns a product list filtered by the given criteria object.
 	 *
 	 * @param MW_Common_Criteria_Interface $filter Critera object which contains the filter conditions
