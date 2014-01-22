@@ -56,3 +56,12 @@
     max-width: 360px;
     max-height: 280px;
 }
+
+/*
+ * CSS fix for horizontal scrolling in grids
+ */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .x-grid3-cell {
+        box-sizing: border-box !important;
+    }
+}

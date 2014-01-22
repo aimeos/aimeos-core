@@ -61,3 +61,26 @@ Ext.util.JSON.encodeDate = function( o ) {
     	pad(o.getMinutes()) + ":" +
     	pad(o.getSeconds()) + '"';
 };
+
+/*
+ * Fix for wrong width calculations
+ * 
+ * Thanks to uwolfer:
+ *  http://www.sencha.com/forum/showthread.php?198124-Grids-are-rendered-differently-in-upcoming-versions-of-Google-Chrome/page6
+ */
+if (Ext.isWebKit && Ext.webKitVersion >= 535.2) { // probably not the exact version, but the issues started appearing in chromium 19
+    Ext.override(Ext.grid.ColumnModel, {
+        getTotalWidth: function (includeHidden) {
+            if (!this.totalWidth) {
+                var boxsizeadj = 2;
+                this.totalWidth = 0;
+                for (var i = 0, len = this.config.length; i < len; i++) {
+                    if (includeHidden || !this.isHidden(i)) {
+                        this.totalWidth += (this.getColumnWidth(i) + boxsizeadj);
+                    }
+                }
+            }
+            return this.totalWidth;
+        }
+    });
+}
