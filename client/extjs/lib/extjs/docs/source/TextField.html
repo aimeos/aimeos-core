@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-form-TextField-method-constructor'><span id='Ext-form-TextField'>/**
+</span></span> * @class Ext.form.TextField
+ * @extends Ext.form.Field
+ * &lt;p&gt;Basic text field.  Can be used as a direct replacement for traditional text inputs,
+ * or as the base class for more sophisticated input controls (like {@link Ext.form.TextArea}
+ * and {@link Ext.form.ComboBox}).&lt;/p&gt;
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Validation&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ * &lt;p&gt;The validation procedure is described in the documentation for {@link #validateValue}.&lt;/p&gt;
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Alter Validation Behavior&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ * &lt;p&gt;Validation behavior for each field can be configured:&lt;/p&gt;
+ * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;&lt;code&gt;{@link Ext.form.TextField#invalidText invalidText}&lt;/code&gt; : the default validation message to
+ * show if any validation step above does not provide a message when invalid&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;{@link Ext.form.TextField#maskRe maskRe}&lt;/code&gt; : filter out keystrokes before any validation occurs&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;{@link Ext.form.TextField#stripCharsRe stripCharsRe}&lt;/code&gt; : filter characters after being typed in,
+ * but before being validated&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;{@link Ext.form.Field#invalidClass invalidClass}&lt;/code&gt; : alternate style when invalid&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;{@link Ext.form.Field#validateOnBlur validateOnBlur}&lt;/code&gt;,
+ * &lt;code&gt;{@link Ext.form.Field#validationDelay validationDelay}&lt;/code&gt;, and
+ * &lt;code&gt;{@link Ext.form.Field#validationEvent validationEvent}&lt;/code&gt; : modify how/when validation is triggered&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ * 
+ * @constructor Creates a new TextField
+ * @param {Object} config Configuration options
+ * 
+ * @xtype textfield
+ */
+Ext.form.TextField = Ext.extend(Ext.form.Field,  {
+<span id='Ext-form-TextField-cfg-vtypeText'>    /**
+</span>     * @cfg {String} vtypeText A custom error message to display in place of the default message provided
+     * for the &lt;b&gt;&lt;code&gt;{@link #vtype}&lt;/code&gt;&lt;/b&gt; currently set for this field (defaults to &lt;tt&gt;''&lt;/tt&gt;).  &lt;b&gt;Note&lt;/b&gt;:
+     * only applies if &lt;b&gt;&lt;code&gt;{@link #vtype}&lt;/code&gt;&lt;/b&gt; is set, else ignored.
+     */
+<span id='Ext-form-TextField-cfg-stripCharsRe'>    /**
+</span>     * @cfg {RegExp} stripCharsRe A JavaScript RegExp object used to strip unwanted content from the value
+     * before validation (defaults to &lt;tt&gt;null&lt;/tt&gt;).
+     */
+<span id='Ext-form-TextField-cfg-grow'>    /**
+</span>     * @cfg {Boolean} grow &lt;tt&gt;true&lt;/tt&gt; if this field should automatically grow and shrink to its content
+     * (defaults to &lt;tt&gt;false&lt;/tt&gt;)
+     */
+    grow : false,
+<span id='Ext-form-TextField-cfg-growMin'>    /**
+</span>     * @cfg {Number} growMin The minimum width to allow when &lt;code&gt;&lt;b&gt;{@link #grow}&lt;/b&gt; = true&lt;/code&gt; (defaults
+     * to &lt;tt&gt;30&lt;/tt&gt;)
+     */
+    growMin : 30,
+<span id='Ext-form-TextField-cfg-growMax'>    /**
+</span>     * @cfg {Number} growMax The maximum width to allow when &lt;code&gt;&lt;b&gt;{@link #grow}&lt;/b&gt; = true&lt;/code&gt; (defaults
+     * to &lt;tt&gt;800&lt;/tt&gt;)
+     */
+    growMax : 800,
+<span id='Ext-form-TextField-cfg-vtype'>    /**
+</span>     * @cfg {String} vtype A validation type name as defined in {@link Ext.form.VTypes} (defaults to &lt;tt&gt;null&lt;/tt&gt;)
+     */
+    vtype : null,
+<span id='Ext-form-TextField-cfg-maskRe'>    /**
+</span>     * @cfg {RegExp} maskRe An input mask regular expression that will be used to filter keystrokes that do
+     * not match (defaults to &lt;tt&gt;null&lt;/tt&gt;). The maskRe will not operate on any paste events.
+     */
+    maskRe : null,
+<span id='Ext-form-TextField-cfg-disableKeyFilter'>    /**
+</span>     * @cfg {Boolean} disableKeyFilter Specify &lt;tt&gt;true&lt;/tt&gt; to disable input keystroke filtering (defaults
+     * to &lt;tt&gt;false&lt;/tt&gt;)
+     */
+    disableKeyFilter : false,
+<span id='Ext-form-TextField-cfg-allowBlank'>    /**
+</span>     * @cfg {Boolean} allowBlank Specify &lt;tt&gt;false&lt;/tt&gt; to validate that the value's length is &gt; 0 (defaults to
+     * &lt;tt&gt;true&lt;/tt&gt;)
+     */
+    allowBlank : true,
+<span id='Ext-form-TextField-cfg-minLength'>    /**
+</span>     * @cfg {Number} minLength Minimum input field length required (defaults to &lt;tt&gt;0&lt;/tt&gt;)
+     */
+    minLength : 0,
+<span id='Ext-form-TextField-cfg-maxLength'>    /**
+</span>     * @cfg {Number} maxLength Maximum input field length allowed by validation (defaults to Number.MAX_VALUE).
+     * This behavior is intended to provide instant feedback to the user by improving usability to allow pasting
+     * and editing or overtyping and back tracking. To restrict the maximum number of characters that can be
+     * entered into the field use &lt;tt&gt;&lt;b&gt;{@link Ext.form.Field#autoCreate autoCreate}&lt;/b&gt;&lt;/tt&gt; to add
+     * any attributes you want to a field, for example:&lt;pre&gt;&lt;code&gt;
+var myField = new Ext.form.NumberField({
+    id: 'mobile',
+    anchor:'90%',
+    fieldLabel: 'Mobile',
+    maxLength: 16, // for validation
+    autoCreate: {tag: 'input', type: 'text', size: '20', autocomplete: 'off', maxlength: '10'}
+});
+&lt;/code&gt;&lt;/pre&gt;
+     */
+    maxLength : Number.MAX_VALUE,
+<span id='Ext-form-TextField-cfg-minLengthText'>    /**
+</span>     * @cfg {String} minLengthText Error text to display if the &lt;b&gt;&lt;tt&gt;{@link #minLength minimum length}&lt;/tt&gt;&lt;/b&gt;
+     * validation fails (defaults to &lt;tt&gt;'The minimum length for this field is {minLength}'&lt;/tt&gt;)
+     */
+    minLengthText : 'The minimum length for this field is {0}',
+<span id='Ext-form-TextField-cfg-maxLengthText'>    /**
+</span>     * @cfg {String} maxLengthText Error text to display if the &lt;b&gt;&lt;tt&gt;{@link #maxLength maximum length}&lt;/tt&gt;&lt;/b&gt;
+     * validation fails (defaults to &lt;tt&gt;'The maximum length for this field is {maxLength}'&lt;/tt&gt;)
+     */
+    maxLengthText : 'The maximum length for this field is {0}',
+<span id='Ext-form-TextField-cfg-selectOnFocus'>    /**
+</span>     * @cfg {Boolean} selectOnFocus &lt;tt&gt;true&lt;/tt&gt; to automatically select any existing field text when the field
+     * receives input focus (defaults to &lt;tt&gt;false&lt;/tt&gt;)
+     */
+    selectOnFocus : false,
+<span id='Ext-form-TextField-cfg-blankText'>    /**
+</span>     * @cfg {String} blankText The error text to display if the &lt;b&gt;&lt;tt&gt;{@link #allowBlank}&lt;/tt&gt;&lt;/b&gt; validation
+     * fails (defaults to &lt;tt&gt;'This field is required'&lt;/tt&gt;)
+     */
+    blankText : 'This field is required',
+<span id='Ext-form-TextField-cfg-validator'>    /**
+</span>     * @cfg {Function} validator
+     * &lt;p&gt;A custom validation function to be called during field validation ({@link #validateValue})
+     * (defaults to &lt;tt&gt;null&lt;/tt&gt;). If specified, this function will be called first, allowing the
+     * developer to override the default validation process.&lt;/p&gt;
+     * &lt;br&gt;&lt;p&gt;This function will be passed the following Parameters:&lt;/p&gt;
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;code&gt;value&lt;/code&gt;: &lt;i&gt;Mixed&lt;/i&gt;
+     * &lt;div class=&quot;sub-desc&quot;&gt;The current field value&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * &lt;br&gt;&lt;p&gt;This function is to Return:&lt;/p&gt;
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;code&gt;true&lt;/code&gt;: &lt;i&gt;Boolean&lt;/i&gt;
+     * &lt;div class=&quot;sub-desc&quot;&gt;&lt;code&gt;true&lt;/code&gt; if the value is valid&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;msg&lt;/code&gt;: &lt;i&gt;String&lt;/i&gt;
+     * &lt;div class=&quot;sub-desc&quot;&gt;An error message if the value is invalid&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+    validator : null,
+<span id='Ext-form-TextField-cfg-regex'>    /**
+</span>     * @cfg {RegExp} regex A JavaScript RegExp object to be tested against the field value during validation
+     * (defaults to &lt;tt&gt;null&lt;/tt&gt;). If the test fails, the field will be marked invalid using
+     * &lt;b&gt;&lt;tt&gt;{@link #regexText}&lt;/tt&gt;&lt;/b&gt;.
+     */
+    regex : null,
+<span id='Ext-form-TextField-cfg-regexText'>    /**
+</span>     * @cfg {String} regexText The error text to display if &lt;b&gt;&lt;tt&gt;{@link #regex}&lt;/tt&gt;&lt;/b&gt; is used and the
+     * test fails during validation (defaults to &lt;tt&gt;''&lt;/tt&gt;)
+     */
+    regexText : '',
+<span id='Ext-form-TextField-cfg-emptyText'>    /**
+</span>     * @cfg {String} emptyText The default text to place into an empty field (defaults to &lt;tt&gt;null&lt;/tt&gt;).
+     * &lt;b&gt;Note&lt;/b&gt;: that this value will be submitted to the server if this field is enabled and configured
+     * with a {@link #name}.
+     */
+    emptyText : null,
+<span id='Ext-form-TextField-cfg-emptyClass'>    /**
+</span>     * @cfg {String} emptyClass The CSS class to apply to an empty field to style the &lt;b&gt;&lt;tt&gt;{@link #emptyText}&lt;/tt&gt;&lt;/b&gt;
+     * (defaults to &lt;tt&gt;'x-form-empty-field'&lt;/tt&gt;).  This class is automatically added and removed as needed
+     * depending on the current field value.
+     */
+    emptyClass : 'x-form-empty-field',
+
+<span id='Ext-form-TextField-cfg-enableKeyEvents'>    /**
+</span>     * @cfg {Boolean} enableKeyEvents &lt;tt&gt;true&lt;/tt&gt; to enable the proxying of key events for the HTML input
+     * field (defaults to &lt;tt&gt;false&lt;/tt&gt;)
+     */
+
+    initComponent : function(){
+        Ext.form.TextField.superclass.initComponent.call(this);
+        this.addEvents(
+<span id='Ext-form-TextField-event-autosize'>            /**
+</span>             * @event autosize
+             * Fires when the &lt;tt&gt;&lt;b&gt;{@link #autoSize}&lt;/b&gt;&lt;/tt&gt; function is triggered. The field may or
+             * may not have actually changed size according to the default logic, but this event provides
+             * a hook for the developer to apply additional logic at runtime to resize the field if needed.
+             * @param {Ext.form.Field} this This text field
+             * @param {Number} width The new field width
+             */
+            'autosize',
+
+<span id='Ext-form-TextField-event-keydown'>            /**
+</span>             * @event keydown
+             * Keydown input field event. This event only fires if &lt;tt&gt;&lt;b&gt;{@link #enableKeyEvents}&lt;/b&gt;&lt;/tt&gt;
+             * is set to true.
+             * @param {Ext.form.TextField} this This text field
+             * @param {Ext.EventObject} e
+             */
+            'keydown',
+<span id='Ext-form-TextField-event-keyup'>            /**
+</span>             * @event keyup
+             * Keyup input field event. This event only fires if &lt;tt&gt;&lt;b&gt;{@link #enableKeyEvents}&lt;/b&gt;&lt;/tt&gt;
+             * is set to true.
+             * @param {Ext.form.TextField} this This text field
+             * @param {Ext.EventObject} e
+             */
+            'keyup',
+<span id='Ext-form-TextField-event-keypress'>            /**
+</span>             * @event keypress
+             * Keypress input field event. This event only fires if &lt;tt&gt;&lt;b&gt;{@link #enableKeyEvents}&lt;/b&gt;&lt;/tt&gt;
+             * is set to true.
+             * @param {Ext.form.TextField} this This text field
+             * @param {Ext.EventObject} e
+             */
+            'keypress'
+        );
+    },
+
+<span id='Ext-form-TextField-method-initEvents'>    // private
+</span>    initEvents : function(){
+        Ext.form.TextField.superclass.initEvents.call(this);
+        if(this.validationEvent == 'keyup'){
+            this.validationTask = new Ext.util.DelayedTask(this.validate, this);
+            this.mon(this.el, 'keyup', this.filterValidation, this);
+        }
+        else if(this.validationEvent !== false &amp;&amp; this.validationEvent != 'blur'){
+        	this.mon(this.el, this.validationEvent, this.validate, this, {buffer: this.validationDelay});
+        }
+        if(this.selectOnFocus || this.emptyText){            
+            this.mon(this.el, 'mousedown', this.onMouseDown, this);
+            
+            if(this.emptyText){
+                this.applyEmptyText();
+            }
+        }
+        if(this.maskRe || (this.vtype &amp;&amp; this.disableKeyFilter !== true &amp;&amp; (this.maskRe = Ext.form.VTypes[this.vtype+'Mask']))){
+        	this.mon(this.el, 'keypress', this.filterKeys, this);
+        }
+        if(this.grow){
+        	this.mon(this.el, 'keyup', this.onKeyUpBuffered, this, {buffer: 50});
+			this.mon(this.el, 'click', this.autoSize, this);
+        }
+        if(this.enableKeyEvents){
+            this.mon(this.el, {
+                scope: this,
+                keyup: this.onKeyUp,
+                keydown: this.onKeyDown,
+                keypress: this.onKeyPress
+            });
+        }
+    },
+    
+<span id='Ext-form-TextField-method-onMouseDown'>    onMouseDown: function(e){
+</span>        if(!this.hasFocus){
+            this.mon(this.el, 'mouseup', Ext.emptyFn, this, { single: true, preventDefault: true });
+        }
+    },
+
+<span id='Ext-form-TextField-method-processValue'>    processValue : function(value){
+</span>        if(this.stripCharsRe){
+            var newValue = value.replace(this.stripCharsRe, '');
+            if(newValue !== value){
+                this.setRawValue(newValue);
+                return newValue;
+            }
+        }
+        return value;
+    },
+
+<span id='Ext-form-TextField-method-filterValidation'>    filterValidation : function(e){
+</span>        if(!e.isNavKeyPress()){
+            this.validationTask.delay(this.validationDelay);
+        }
+    },
+    
+<span id='Ext-form-TextField-method-onDisable'>    //private
+</span>    onDisable: function(){
+        Ext.form.TextField.superclass.onDisable.call(this);
+        if(Ext.isIE){
+            this.el.dom.unselectable = 'on';
+        }
+    },
+    
+<span id='Ext-form-TextField-method-onEnable'>    //private
+</span>    onEnable: function(){
+        Ext.form.TextField.superclass.onEnable.call(this);
+        if(Ext.isIE){
+            this.el.dom.unselectable = '';
+        }
+    },
+
+<span id='Ext-form-TextField-method-onKeyUpBuffered'>    // private
+</span>    onKeyUpBuffered : function(e){
+        if(this.doAutoSize(e)){
+            this.autoSize();
+        }
+    },
+    
+<span id='Ext-form-TextField-method-doAutoSize'>    // private
+</span>    doAutoSize : function(e){
+        return !e.isNavKeyPress();
+    },
+
+<span id='Ext-form-TextField-method-onKeyUp'>    // private
+</span>    onKeyUp : function(e){
+        this.fireEvent('keyup', this, e);
+    },
+
+<span id='Ext-form-TextField-method-onKeyDown'>    // private
+</span>    onKeyDown : function(e){
+        this.fireEvent('keydown', this, e);
+    },
+
+<span id='Ext-form-TextField-method-onKeyPress'>    // private
+</span>    onKeyPress : function(e){
+        this.fireEvent('keypress', this, e);
+    },
+
+<span id='Ext-form-TextField-method-reset'>    /**
+</span>     * Resets the current field value to the originally-loaded value and clears any validation messages.
+     * Also adds &lt;tt&gt;&lt;b&gt;{@link #emptyText}&lt;/b&gt;&lt;/tt&gt; and &lt;tt&gt;&lt;b&gt;{@link #emptyClass}&lt;/b&gt;&lt;/tt&gt; if the
+     * original value was blank.
+     */
+    reset : function(){
+        Ext.form.TextField.superclass.reset.call(this);
+        this.applyEmptyText();
+    },
+
+<span id='Ext-form-TextField-method-applyEmptyText'>    applyEmptyText : function(){
+</span>        if(this.rendered &amp;&amp; this.emptyText &amp;&amp; this.getRawValue().length &lt; 1 &amp;&amp; !this.hasFocus){
+            this.setRawValue(this.emptyText);
+            this.el.addClass(this.emptyClass);
+        }
+    },
+
+<span id='Ext-form-TextField-method-preFocus'>    // private
+</span>    preFocus : function(){
+        var el = this.el,
+            isEmpty;
+        if(this.emptyText){
+            if(el.dom.value == this.emptyText){
+                this.setRawValue('');
+                isEmpty = true;
+            }
+            el.removeClass(this.emptyClass);
+        }
+        if(this.selectOnFocus || isEmpty){
+            el.dom.select();
+        }
+    },
+
+<span id='Ext-form-TextField-method-postBlur'>    // private
+</span>    postBlur : function(){
+        this.applyEmptyText();
+    },
+
+<span id='Ext-form-TextField-method-filterKeys'>    // private
+</span>    filterKeys : function(e){
+        if(e.ctrlKey){
+            return;
+        }
+        var k = e.getKey();
+        if(Ext.isGecko &amp;&amp; (e.isNavKeyPress() || k == e.BACKSPACE || (k == e.DELETE &amp;&amp; e.button == -1))){
+            return;
+        }
+        var cc = String.fromCharCode(e.getCharCode());
+        if(!Ext.isGecko &amp;&amp; e.isSpecialKey() &amp;&amp; !cc){
+            return;
+        }
+        if(!this.maskRe.test(cc)){
+            e.stopEvent();
+        }
+    },
+
+<span id='Ext-form-TextField-method-setValue'>    setValue : function(v){
+</span>        if(this.emptyText &amp;&amp; this.el &amp;&amp; !Ext.isEmpty(v)){
+            this.el.removeClass(this.emptyClass);
+        }
+        Ext.form.TextField.superclass.setValue.apply(this, arguments);
+        this.applyEmptyText();
+        this.autoSize();
+        return this;
+    },
+
+<span id='Ext-form-TextField-method-getErrors'>    /**
+</span>     * &lt;p&gt;Validates a value according to the field's validation rules and returns an array of errors
+     * for any failing validations. Validation rules are processed in the following order:&lt;/p&gt;
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * 
+     * &lt;li&gt;&lt;b&gt;1. Field specific validator&lt;/b&gt;
+     * &lt;div class=&quot;sub-desc&quot;&gt;
+     * &lt;p&gt;A validator offers a way to customize and reuse a validation specification.
+     * If a field is configured with a &lt;code&gt;{@link #validator}&lt;/code&gt;
+     * function, it will be passed the current field value.  The &lt;code&gt;{@link #validator}&lt;/code&gt;
+     * function is expected to return either:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;Boolean &lt;tt&gt;true&lt;/tt&gt; if the value is valid (validation continues).&lt;/li&gt;
+     * &lt;li&gt;a String to represent the invalid message if invalid (validation halts).&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * &lt;/div&gt;&lt;/li&gt;
+     * 
+     * &lt;li&gt;&lt;b&gt;2. Basic Validation&lt;/b&gt;
+     * &lt;div class=&quot;sub-desc&quot;&gt;
+     * &lt;p&gt;If the &lt;code&gt;{@link #validator}&lt;/code&gt; has not halted validation,
+     * basic validation proceeds as follows:&lt;/p&gt;
+     * 
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * 
+     * &lt;li&gt;&lt;code&gt;{@link #allowBlank}&lt;/code&gt; : (Invalid message =
+     * &lt;code&gt;{@link #emptyText}&lt;/code&gt;)&lt;div class=&quot;sub-desc&quot;&gt;
+     * Depending on the configuration of &lt;code&gt;{@link #allowBlank}&lt;/code&gt;, a
+     * blank field will cause validation to halt at this step and return
+     * Boolean true or false accordingly.  
+     * &lt;/div&gt;&lt;/li&gt;
+     * 
+     * &lt;li&gt;&lt;code&gt;{@link #minLength}&lt;/code&gt; : (Invalid message =
+     * &lt;code&gt;{@link #minLengthText}&lt;/code&gt;)&lt;div class=&quot;sub-desc&quot;&gt;
+     * If the passed value does not satisfy the &lt;code&gt;{@link #minLength}&lt;/code&gt;
+     * specified, validation halts.
+     * &lt;/div&gt;&lt;/li&gt;
+     * 
+     * &lt;li&gt;&lt;code&gt;{@link #maxLength}&lt;/code&gt; : (Invalid message =
+     * &lt;code&gt;{@link #maxLengthText}&lt;/code&gt;)&lt;div class=&quot;sub-desc&quot;&gt;
+     * If the passed value does not satisfy the &lt;code&gt;{@link #maxLength}&lt;/code&gt;
+     * specified, validation halts.
+     * &lt;/div&gt;&lt;/li&gt;
+     * 
+     * &lt;/ul&gt;&lt;/div&gt;
+     * &lt;/div&gt;&lt;/li&gt;
+     * 
+     * &lt;li&gt;&lt;b&gt;3. Preconfigured Validation Types (VTypes)&lt;/b&gt;
+     * &lt;div class=&quot;sub-desc&quot;&gt;
+     * &lt;p&gt;If none of the prior validation steps halts validation, a field
+     * configured with a &lt;code&gt;{@link #vtype}&lt;/code&gt; will utilize the
+     * corresponding {@link Ext.form.VTypes VTypes} validation function.
+     * If invalid, either the field's &lt;code&gt;{@link #vtypeText}&lt;/code&gt; or
+     * the VTypes vtype Text property will be used for the invalid message.
+     * Keystrokes on the field will be filtered according to the VTypes
+     * vtype Mask property.&lt;/p&gt;
+     * &lt;/div&gt;&lt;/li&gt;
+     * 
+     * &lt;li&gt;&lt;b&gt;4. Field specific regex test&lt;/b&gt;
+     * &lt;div class=&quot;sub-desc&quot;&gt;
+     * &lt;p&gt;If none of the prior validation steps halts validation, a field's
+     * configured &lt;code&gt;{@link #regex}&lt;/code&gt; test will be processed.
+     * The invalid message for this test is configured with
+     * &lt;code&gt;{@link #regexText}&lt;/code&gt;.&lt;/p&gt;
+     * &lt;/div&gt;&lt;/li&gt;
+     * 
+     * @param {Mixed} value The value to validate. The processed raw value will be used if nothing is passed
+     * @return {Array} Array of any validation errors
+     */
+    getErrors: function(value) {
+        var errors = Ext.form.TextField.superclass.getErrors.apply(this, arguments);
+        
+        value = Ext.isDefined(value) ? value : this.processValue(this.getRawValue());        
+        
+        if (Ext.isFunction(this.validator)) {
+            var msg = this.validator(value);
+            if (msg !== true) {
+                errors.push(msg);
+            }
+        }
+        
+        if (value.length &lt; 1 || value === this.emptyText) {
+            if (this.allowBlank) {
+                //if value is blank and allowBlank is true, there cannot be any additional errors
+                return errors;
+            } else {
+                errors.push(this.blankText);
+            }
+        }
+        
+        if (!this.allowBlank &amp;&amp; (value.length &lt; 1 || value === this.emptyText)) { // if it's blank
+            errors.push(this.blankText);
+        }
+        
+        if (value.length &lt; this.minLength) {
+            errors.push(String.format(this.minLengthText, this.minLength));
+        }
+        
+        if (value.length &gt; this.maxLength) {
+            errors.push(String.format(this.maxLengthText, this.maxLength));
+        }
+        
+        if (this.vtype) {
+            var vt = Ext.form.VTypes;
+            if(!vt[this.vtype](value, this)){
+                errors.push(this.vtypeText || vt[this.vtype +'Text']);
+            }
+        }
+        
+        if (this.regex &amp;&amp; !this.regex.test(value)) {
+            errors.push(this.regexText);
+        }
+        
+        return errors;
+    },
+
+<span id='Ext-form-TextField-method-selectText'>    /**
+</span>     * Selects text in this field
+     * @param {Number} start (optional) The index where the selection should start (defaults to 0)
+     * @param {Number} end (optional) The index where the selection should end (defaults to the text length)
+     */
+    selectText : function(start, end){
+        var v = this.getRawValue();
+        var doFocus = false;
+        if(v.length &gt; 0){
+            start = start === undefined ? 0 : start;
+            end = end === undefined ? v.length : end;
+            var d = this.el.dom;
+            if(d.setSelectionRange){
+                d.setSelectionRange(start, end);
+            }else if(d.createTextRange){
+                var range = d.createTextRange();
+                range.moveStart('character', start);
+                range.moveEnd('character', end-v.length);
+                range.select();
+            }
+            doFocus = Ext.isGecko || Ext.isOpera;
+        }else{
+            doFocus = true;
+        }
+        if(doFocus){
+            this.focus();
+        }
+    },
+
+<span id='Ext-form-TextField-method-autoSize'>    /**
+</span>     * Automatically grows the field to accomodate the width of the text up to the maximum field width allowed.
+     * This only takes effect if &lt;tt&gt;&lt;b&gt;{@link #grow}&lt;/b&gt; = true&lt;/tt&gt;, and fires the {@link #autosize} event.
+     */
+    autoSize : function(){
+        if(!this.grow || !this.rendered){
+            return;
+        }
+        if(!this.metrics){
+            this.metrics = Ext.util.TextMetrics.createInstance(this.el);
+        }
+        var el = this.el;
+        var v = el.dom.value;
+        var d = document.createElement('div');
+        d.appendChild(document.createTextNode(v));
+        v = d.innerHTML;
+        Ext.removeNode(d);
+        d = null;
+        v += '&amp;#160;';
+        var w = Math.min(this.growMax, Math.max(this.metrics.getWidth(v) + /* add extra padding */ 10, this.growMin));
+        this.el.setWidth(w);
+        this.fireEvent('autosize', this, w);
+    },
+	
+<span id='Ext-form-TextField-method-onDestroy'>	onDestroy: function(){
+</span>		if(this.validationTask){
+			this.validationTask.cancel();
+			this.validationTask = null;
+		}
+		Ext.form.TextField.superclass.onDestroy.call(this);
+	}
+});
+Ext.reg('textfield', Ext.form.TextField);
+</pre>
+</body>
+</html>

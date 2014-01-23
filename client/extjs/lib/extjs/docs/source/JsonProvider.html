@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-direct-JsonProvider'>/**
+</span> * @class Ext.direct.JsonProvider
+ * @extends Ext.direct.Provider
+ */
+Ext.direct.JsonProvider = Ext.extend(Ext.direct.Provider, {
+<span id='Ext-direct-JsonProvider-method-parseResponse'>    parseResponse: function(xhr){
+</span>        if(!Ext.isEmpty(xhr.responseText)){
+            if(typeof xhr.responseText == 'object'){
+                return xhr.responseText;
+            }
+            return Ext.decode(xhr.responseText);
+        }
+        return null;
+    },
+
+<span id='Ext-direct-JsonProvider-method-getEvents'>    getEvents: function(xhr){
+</span>        var data = null;
+        try{
+            data = this.parseResponse(xhr);
+        }catch(e){
+            var event = new Ext.Direct.ExceptionEvent({
+                data: e,
+                xhr: xhr,
+                code: Ext.Direct.exceptions.PARSE,
+                message: 'Error parsing json response: \n\n ' + data
+            });
+            return [event];
+        }
+        var events = [];
+        if(Ext.isArray(data)){
+            for(var i = 0, len = data.length; i &lt; len; i++){
+                events.push(Ext.Direct.createEvent(data[i]));
+            }
+        }else{
+            events.push(Ext.Direct.createEvent(data));
+        }
+        return events;
+    }
+});</pre>
+</body>
+</html>

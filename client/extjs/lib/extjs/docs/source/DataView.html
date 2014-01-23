@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-DataView-method-constructor'><span id='Ext-DataView'>/**
+</span></span> * @class Ext.DataView
+ * @extends Ext.BoxComponent
+ * A mechanism for displaying data using custom layout templates and formatting. DataView uses an {@link Ext.XTemplate}
+ * as its internal templating mechanism, and is bound to an {@link Ext.data.Store}
+ * so that as the data in the store changes the view is automatically updated to reflect the changes.  The view also
+ * provides built-in behavior for many common events that can occur for its contained items including click, doubleclick,
+ * mouseover, mouseout, etc. as well as a built-in selection model. &lt;b&gt;In order to use these features, an {@link #itemSelector}
+ * config must be provided for the DataView to determine what nodes it will be working with.&lt;/b&gt;
+ *
+ * &lt;p&gt;The example below binds a DataView to a {@link Ext.data.Store} and renders it into an {@link Ext.Panel}.&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var store = new Ext.data.JsonStore({
+    url: 'get-images.php',
+    root: 'images',
+    fields: [
+        'name', 'url',
+        {name:'size', type: 'float'},
+        {name:'lastmod', type:'date', dateFormat:'timestamp'}
+    ]
+});
+store.load();
+
+var tpl = new Ext.XTemplate(
+    '&amp;lt;tpl for=&quot;.&quot;&amp;gt;',
+        '&amp;lt;div class=&quot;thumb-wrap&quot; id=&quot;{name}&quot;&amp;gt;',
+        '&amp;lt;div class=&quot;thumb&quot;&amp;gt;&amp;lt;img src=&quot;{url}&quot; title=&quot;{name}&quot;&amp;gt;&amp;lt;/div&amp;gt;',
+        '&amp;lt;span class=&quot;x-editable&quot;&amp;gt;{shortName}&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;',
+    '&amp;lt;/tpl&amp;gt;',
+    '&amp;lt;div class=&quot;x-clear&quot;&amp;gt;&amp;lt;/div&amp;gt;'
+);
+
+var panel = new Ext.Panel({
+    id:'images-view',
+    frame:true,
+    width:535,
+    autoHeight:true,
+    collapsible:true,
+    layout:'fit',
+    title:'Simple DataView',
+
+    items: new Ext.DataView({
+        store: store,
+        tpl: tpl,
+        autoHeight:true,
+        multiSelect: true,
+        overClass:'x-view-over',
+        itemSelector:'div.thumb-wrap',
+        emptyText: 'No images to display'
+    })
+});
+panel.render(document.body);
+&lt;/code&gt;&lt;/pre&gt;
+ * @constructor
+ * Create a new DataView
+ * @param {Object} config The config object
+ * @xtype dataview
+ */
+Ext.DataView = Ext.extend(Ext.BoxComponent, {
+<span id='Ext-DataView-cfg-tpl'>    /**
+</span>     * @cfg {String/Array} tpl
+     * The HTML fragment or an array of fragments that will make up the template used by this DataView.  This should
+     * be specified in the same format expected by the constructor of {@link Ext.XTemplate}.
+     */
+<span id='Ext-DataView-cfg-store'>    /**
+</span>     * @cfg {Ext.data.Store} store
+     * The {@link Ext.data.Store} to bind this DataView to.
+     */
+<span id='Ext-DataView-cfg-itemSelector'>    /**
+</span>     * @cfg {String} itemSelector
+     * &lt;b&gt;This is a required setting&lt;/b&gt;. A simple CSS selector (e.g. &lt;tt&gt;div.some-class&lt;/tt&gt; or 
+     * &lt;tt&gt;span:first-child&lt;/tt&gt;) that will be used to determine what nodes this DataView will be
+     * working with.
+     */
+<span id='Ext-DataView-cfg-multiSelect'>    /**
+</span>     * @cfg {Boolean} multiSelect
+     * True to allow selection of more than one item at a time, false to allow selection of only a single item
+     * at a time or no selection at all, depending on the value of {@link #singleSelect} (defaults to false).
+     */
+<span id='Ext-DataView-cfg-singleSelect'>    /**
+</span>     * @cfg {Boolean} singleSelect
+     * True to allow selection of exactly one item at a time, false to allow no selection at all (defaults to false).
+     * Note that if {@link #multiSelect} = true, this value will be ignored.
+     */
+<span id='Ext-DataView-cfg-simpleSelect'>    /**
+</span>     * @cfg {Boolean} simpleSelect
+     * True to enable multiselection by clicking on multiple items without requiring the user to hold Shift or Ctrl,
+     * false to force the user to hold Ctrl or Shift to select more than on item (defaults to false).
+     */
+<span id='Ext-DataView-cfg-overClass'>    /**
+</span>     * @cfg {String} overClass
+     * A CSS class to apply to each item in the view on mouseover (defaults to undefined).
+     */
+<span id='Ext-DataView-cfg-loadingText'>    /**
+</span>     * @cfg {String} loadingText
+     * A string to display during data load operations (defaults to undefined).  If specified, this text will be
+     * displayed in a loading div and the view's contents will be cleared while loading, otherwise the view's
+     * contents will continue to display normally until the new data is loaded and the contents are replaced.
+     */
+<span id='Ext-DataView-cfg-selectedClass'>    /**
+</span>     * @cfg {String} selectedClass
+     * A CSS class to apply to each selected item in the view (defaults to 'x-view-selected').
+     */
+    selectedClass : &quot;x-view-selected&quot;,
+<span id='Ext-DataView-cfg-emptyText'>    /**
+</span>     * @cfg {String} emptyText
+     * The text to display in the view when there is no data to display (defaults to '').
+     */
+    emptyText : &quot;&quot;,
+
+<span id='Ext-DataView-cfg-deferEmptyText'>    /**
+</span>     * @cfg {Boolean} deferEmptyText True to defer emptyText being applied until the store's first load
+     */
+    deferEmptyText: true,
+<span id='Ext-DataView-cfg-trackOver'>    /**
+</span>     * @cfg {Boolean} trackOver True to enable mouseenter and mouseleave events
+     */
+    trackOver: false,
+    
+<span id='Ext-DataView-cfg-blockRefresh'>    /**
+</span>     * @cfg {Boolean} blockRefresh Set this to true to ignore datachanged events on the bound store. This is useful if
+     * you wish to provide custom transition animations via a plugin (defaults to false)
+     */
+    blockRefresh: false,
+
+<span id='Ext-DataView-property-last'>    //private
+</span>    last: false,
+
+<span id='Ext-DataView-method-initComponent'>    // private
+</span>    initComponent : function(){
+        Ext.DataView.superclass.initComponent.call(this);
+        if(Ext.isString(this.tpl) || Ext.isArray(this.tpl)){
+            this.tpl = new Ext.XTemplate(this.tpl);
+        }
+
+        this.addEvents(
+<span id='Ext-DataView-event-beforeclick'>            /**
+</span>             * @event beforeclick
+             * Fires before a click is processed. Returns false to cancel the default action.
+             * @param {Ext.DataView} this
+             * @param {Number} index The index of the target node
+             * @param {HTMLElement} node The target node
+             * @param {Ext.EventObject} e The raw event object
+             */
+            &quot;beforeclick&quot;,
+<span id='Ext-DataView-event-click'>            /**
+</span>             * @event click
+             * Fires when a template node is clicked.
+             * @param {Ext.DataView} this
+             * @param {Number} index The index of the target node
+             * @param {HTMLElement} node The target node
+             * @param {Ext.EventObject} e The raw event object
+             */
+            &quot;click&quot;,
+<span id='Ext-DataView-event-mouseenter'>            /**
+</span>             * @event mouseenter
+             * Fires when the mouse enters a template node. trackOver:true or an overClass must be set to enable this event.
+             * @param {Ext.DataView} this
+             * @param {Number} index The index of the target node
+             * @param {HTMLElement} node The target node
+             * @param {Ext.EventObject} e The raw event object
+             */
+            &quot;mouseenter&quot;,
+<span id='Ext-DataView-event-mouseleave'>            /**
+</span>             * @event mouseleave
+             * Fires when the mouse leaves a template node. trackOver:true or an overClass must be set to enable this event.
+             * @param {Ext.DataView} this
+             * @param {Number} index The index of the target node
+             * @param {HTMLElement} node The target node
+             * @param {Ext.EventObject} e The raw event object
+             */
+            &quot;mouseleave&quot;,
+<span id='Ext-DataView-event-containerclick'>            /**
+</span>             * @event containerclick
+             * Fires when a click occurs and it is not on a template node.
+             * @param {Ext.DataView} this
+             * @param {Ext.EventObject} e The raw event object
+             */
+            &quot;containerclick&quot;,
+<span id='Ext-DataView-event-dblclick'>            /**
+</span>             * @event dblclick
+             * Fires when a template node is double clicked.
+             * @param {Ext.DataView} this
+             * @param {Number} index The index of the target node
+             * @param {HTMLElement} node The target node
+             * @param {Ext.EventObject} e The raw event object
+             */
+            &quot;dblclick&quot;,
+<span id='Ext-DataView-event-contextmenu'>            /**
+</span>             * @event contextmenu
+             * Fires when a template node is right clicked.
+             * @param {Ext.DataView} this
+             * @param {Number} index The index of the target node
+             * @param {HTMLElement} node The target node
+             * @param {Ext.EventObject} e The raw event object
+             */
+            &quot;contextmenu&quot;,
+<span id='Ext-DataView-event-containercontextmenu'>            /**
+</span>             * @event containercontextmenu
+             * Fires when a right click occurs that is not on a template node.
+             * @param {Ext.DataView} this
+             * @param {Ext.EventObject} e The raw event object
+             */
+            &quot;containercontextmenu&quot;,
+<span id='Ext-DataView-event-selectionchange'>            /**
+</span>             * @event selectionchange
+             * Fires when the selected nodes change.
+             * @param {Ext.DataView} this
+             * @param {Array} selections Array of the selected nodes
+             */
+            &quot;selectionchange&quot;,
+
+<span id='Ext-DataView-event-beforeselect'>            /**
+</span>             * @event beforeselect
+             * Fires before a selection is made. If any handlers return false, the selection is cancelled.
+             * @param {Ext.DataView} this
+             * @param {HTMLElement} node The node to be selected
+             * @param {Array} selections Array of currently selected nodes
+             */
+            &quot;beforeselect&quot;
+        );
+
+        this.store = Ext.StoreMgr.lookup(this.store);
+        this.all = new Ext.CompositeElementLite();
+        this.selected = new Ext.CompositeElementLite();
+    },
+
+<span id='Ext-DataView-method-afterRender'>    // private
+</span>    afterRender : function(){
+        Ext.DataView.superclass.afterRender.call(this);
+
+		this.mon(this.getTemplateTarget(), {
+            &quot;click&quot;: this.onClick,
+            &quot;dblclick&quot;: this.onDblClick,
+            &quot;contextmenu&quot;: this.onContextMenu,
+            scope:this
+        });
+
+        if(this.overClass || this.trackOver){
+            this.mon(this.getTemplateTarget(), {
+                &quot;mouseover&quot;: this.onMouseOver,
+                &quot;mouseout&quot;: this.onMouseOut,
+                scope:this
+            });
+        }
+
+        if(this.store){
+            this.bindStore(this.store, true);
+        }
+    },
+
+<span id='Ext-DataView-method-refresh'>    /**
+</span>     * Refreshes the view by reloading the data from the store and re-rendering the template.
+     */
+    refresh : function() {
+        this.clearSelections(false, true);
+        var el = this.getTemplateTarget(),
+            records = this.store.getRange();
+            
+        el.update('');
+        if(records.length &lt; 1){
+            if(!this.deferEmptyText || this.hasSkippedEmptyText){
+                el.update(this.emptyText);
+            }
+            this.all.clear();
+        }else{
+            this.tpl.overwrite(el, this.collectData(records, 0));
+            this.all.fill(Ext.query(this.itemSelector, el.dom));
+            this.updateIndexes(0);
+        }
+        this.hasSkippedEmptyText = true;
+    },
+
+<span id='Ext-DataView-method-getTemplateTarget'>    getTemplateTarget: function(){
+</span>        return this.el;
+    },
+
+<span id='Ext-DataView-method-prepareData'>    /**
+</span>     * Function which can be overridden to provide custom formatting for each Record that is used by this
+     * DataView's {@link #tpl template} to render each node.
+     * @param {Array/Object} data The raw data object that was used to create the Record.
+     * @param {Number} recordIndex the index number of the Record being prepared for rendering.
+     * @param {Record} record The Record being prepared for rendering.
+     * @return {Array/Object} The formatted data in a format expected by the internal {@link #tpl template}'s overwrite() method.
+     * (either an array if your params are numeric (i.e. {0}) or an object (i.e. {foo: 'bar'}))
+     */
+    prepareData : function(data){
+        return data;
+    },
+
+<span id='Ext-DataView-method-collectData'>    /**
+</span>     * &lt;p&gt;Function which can be overridden which returns the data object passed to this
+     * DataView's {@link #tpl template} to render the whole DataView.&lt;/p&gt;
+     * &lt;p&gt;This is usually an Array of data objects, each element of which is processed by an
+     * {@link Ext.XTemplate XTemplate} which uses &lt;tt&gt;'&amp;lt;tpl for=&quot;.&quot;&amp;gt;'&lt;/tt&gt; to iterate over its supplied
+     * data object as an Array. However, &lt;i&gt;named&lt;/i&gt; properties may be placed into the data object to
+     * provide non-repeating data such as headings, totals etc.&lt;/p&gt;
+     * @param {Array} records An Array of {@link Ext.data.Record}s to be rendered into the DataView.
+     * @param {Number} startIndex the index number of the Record being prepared for rendering.
+     * @return {Array} An Array of data objects to be processed by a repeating XTemplate. May also
+     * contain &lt;i&gt;named&lt;/i&gt; properties.
+     */
+    collectData : function(records, startIndex){
+        var r = [],
+            i = 0,
+            len = records.length;
+        for(; i &lt; len; i++){
+            r[r.length] = this.prepareData(records[i].data, startIndex + i, records[i]);
+        }
+        return r;
+    },
+
+<span id='Ext-DataView-method-bufferRender'>    // private
+</span>    bufferRender : function(records, index){
+        var div = document.createElement('div');
+        this.tpl.overwrite(div, this.collectData(records, index));
+        return Ext.query(this.itemSelector, div);
+    },
+
+<span id='Ext-DataView-method-onUpdate'>    // private
+</span>    onUpdate : function(ds, record){
+        var index = this.store.indexOf(record);
+        if(index &gt; -1){
+            var sel = this.isSelected(index),
+                original = this.all.elements[index],
+                node = this.bufferRender([record], index)[0];
+
+            this.all.replaceElement(index, node, true);
+            if(sel){
+                this.selected.replaceElement(original, node);
+                this.all.item(index).addClass(this.selectedClass);
+            }
+            this.updateIndexes(index, index);
+        }
+    },
+
+<span id='Ext-DataView-method-onAdd'>    // private
+</span>    onAdd : function(ds, records, index){
+        if(this.all.getCount() === 0){
+            this.refresh();
+            return;
+        }
+        var nodes = this.bufferRender(records, index), n, a = this.all.elements;
+        if(index &lt; this.all.getCount()){
+            n = this.all.item(index).insertSibling(nodes, 'before', true);
+            a.splice.apply(a, [index, 0].concat(nodes));
+        }else{
+            n = this.all.last().insertSibling(nodes, 'after', true);
+            a.push.apply(a, nodes);
+        }
+        this.updateIndexes(index);
+    },
+
+<span id='Ext-DataView-method-onRemove'>    // private
+</span>    onRemove : function(ds, record, index){
+        this.deselect(index);
+        this.all.removeElement(index, true);
+        this.updateIndexes(index);
+        if (this.store.getCount() === 0){
+            this.refresh();
+        }
+    },
+
+<span id='Ext-DataView-method-refreshNode'>    /**
+</span>     * Refreshes an individual node's data from the store.
+     * @param {Number} index The item's data index in the store
+     */
+    refreshNode : function(index){
+        this.onUpdate(this.store, this.store.getAt(index));
+    },
+
+<span id='Ext-DataView-method-updateIndexes'>    // private
+</span>    updateIndexes : function(startIndex, endIndex){
+        var ns = this.all.elements;
+        startIndex = startIndex || 0;
+        endIndex = endIndex || ((endIndex === 0) ? 0 : (ns.length - 1));
+        for(var i = startIndex; i &lt;= endIndex; i++){
+            ns[i].viewIndex = i;
+        }
+    },
+    
+<span id='Ext-DataView-method-getStore'>    /**
+</span>     * Returns the store associated with this DataView.
+     * @return {Ext.data.Store} The store
+     */
+    getStore : function(){
+        return this.store;
+    },
+
+<span id='Ext-DataView-method-bindStore'>    /**
+</span>     * Changes the data store bound to this view and refreshes it.
+     * @param {Store} store The store to bind to this view
+     */
+    bindStore : function(store, initial){
+        if(!initial &amp;&amp; this.store){
+            if(store !== this.store &amp;&amp; this.store.autoDestroy){
+                this.store.destroy();
+            }else{
+                this.store.un(&quot;beforeload&quot;, this.onBeforeLoad, this);
+                this.store.un(&quot;datachanged&quot;, this.onDataChanged, this);
+                this.store.un(&quot;add&quot;, this.onAdd, this);
+                this.store.un(&quot;remove&quot;, this.onRemove, this);
+                this.store.un(&quot;update&quot;, this.onUpdate, this);
+                this.store.un(&quot;clear&quot;, this.refresh, this);
+            }
+            if(!store){
+                this.store = null;
+            }
+        }
+        if(store){
+            store = Ext.StoreMgr.lookup(store);
+            store.on({
+                scope: this,
+                beforeload: this.onBeforeLoad,
+                datachanged: this.onDataChanged,
+                add: this.onAdd,
+                remove: this.onRemove,
+                update: this.onUpdate,
+                clear: this.refresh
+            });
+        }
+        this.store = store;
+        if(store){
+            this.refresh();
+        }
+    },
+    
+<span id='Ext-DataView-method-onDataChanged'>    /**
+</span>     * @private
+     * Calls this.refresh if this.blockRefresh is not true
+     */
+    onDataChanged: function() {
+        if (this.blockRefresh !== true) {
+            this.refresh.apply(this, arguments);
+        }
+    },
+
+<span id='Ext-DataView-method-findItemFromChild'>    /**
+</span>     * Returns the template node the passed child belongs to, or null if it doesn't belong to one.
+     * @param {HTMLElement} node
+     * @return {HTMLElement} The template node
+     */
+    findItemFromChild : function(node){
+        return Ext.fly(node).findParent(this.itemSelector, this.getTemplateTarget());
+    },
+
+<span id='Ext-DataView-method-onClick'>    // private
+</span>    onClick : function(e){
+        var item = e.getTarget(this.itemSelector, this.getTemplateTarget()),
+            index;
+        if(item){
+            index = this.indexOf(item);
+            if(this.onItemClick(item, index, e) !== false){
+                this.fireEvent(&quot;click&quot;, this, index, item, e);
+            }
+        }else{
+            if(this.fireEvent(&quot;containerclick&quot;, this, e) !== false){
+                this.onContainerClick(e);
+            }
+        }
+    },
+
+<span id='Ext-DataView-method-onContainerClick'>    onContainerClick : function(e){
+</span>        this.clearSelections();
+    },
+
+<span id='Ext-DataView-method-onContextMenu'>    // private
+</span>    onContextMenu : function(e){
+        var item = e.getTarget(this.itemSelector, this.getTemplateTarget());
+        if(item){
+            this.fireEvent(&quot;contextmenu&quot;, this, this.indexOf(item), item, e);
+        }else{
+            this.fireEvent(&quot;containercontextmenu&quot;, this, e);
+        }
+    },
+
+<span id='Ext-DataView-method-onDblClick'>    // private
+</span>    onDblClick : function(e){
+        var item = e.getTarget(this.itemSelector, this.getTemplateTarget());
+        if(item){
+            this.fireEvent(&quot;dblclick&quot;, this, this.indexOf(item), item, e);
+        }
+    },
+
+<span id='Ext-DataView-method-onMouseOver'>    // private
+</span>    onMouseOver : function(e){
+        var item = e.getTarget(this.itemSelector, this.getTemplateTarget());
+        if(item &amp;&amp; item !== this.lastItem){
+            this.lastItem = item;
+            Ext.fly(item).addClass(this.overClass);
+            this.fireEvent(&quot;mouseenter&quot;, this, this.indexOf(item), item, e);
+        }
+    },
+
+<span id='Ext-DataView-method-onMouseOut'>    // private
+</span>    onMouseOut : function(e){
+        if(this.lastItem){
+            if(!e.within(this.lastItem, true, true)){
+                Ext.fly(this.lastItem).removeClass(this.overClass);
+                this.fireEvent(&quot;mouseleave&quot;, this, this.indexOf(this.lastItem), this.lastItem, e);
+                delete this.lastItem;
+            }
+        }
+    },
+
+<span id='Ext-DataView-method-onItemClick'>    // private
+</span>    onItemClick : function(item, index, e){
+        if(this.fireEvent(&quot;beforeclick&quot;, this, index, item, e) === false){
+            return false;
+        }
+        if(this.multiSelect){
+            this.doMultiSelection(item, index, e);
+            e.preventDefault();
+        }else if(this.singleSelect){
+            this.doSingleSelection(item, index, e);
+            e.preventDefault();
+        }
+        return true;
+    },
+
+<span id='Ext-DataView-method-doSingleSelection'>    // private
+</span>    doSingleSelection : function(item, index, e){
+        if(e.ctrlKey &amp;&amp; this.isSelected(index)){
+            this.deselect(index);
+        }else{
+            this.select(index, false);
+        }
+    },
+
+<span id='Ext-DataView-method-doMultiSelection'>    // private
+</span>    doMultiSelection : function(item, index, e){
+        if(e.shiftKey &amp;&amp; this.last !== false){
+            var last = this.last;
+            this.selectRange(last, index, e.ctrlKey);
+            this.last = last; // reset the last
+        }else{
+            if((e.ctrlKey||this.simpleSelect) &amp;&amp; this.isSelected(index)){
+                this.deselect(index);
+            }else{
+                this.select(index, e.ctrlKey || e.shiftKey || this.simpleSelect);
+            }
+        }
+    },
+
+<span id='Ext-DataView-method-getSelectionCount'>    /**
+</span>     * Gets the number of selected nodes.
+     * @return {Number} The node count
+     */
+    getSelectionCount : function(){
+        return this.selected.getCount();
+    },
+
+<span id='Ext-DataView-method-getSelectedNodes'>    /**
+</span>     * Gets the currently selected nodes.
+     * @return {Array} An array of HTMLElements
+     */
+    getSelectedNodes : function(){
+        return this.selected.elements;
+    },
+
+<span id='Ext-DataView-method-getSelectedIndexes'>    /**
+</span>     * Gets the indexes of the selected nodes.
+     * @return {Array} An array of numeric indexes
+     */
+    getSelectedIndexes : function(){
+        var indexes = [], 
+            selected = this.selected.elements,
+            i = 0,
+            len = selected.length;
+            
+        for(; i &lt; len; i++){
+            indexes.push(selected[i].viewIndex);
+        }
+        return indexes;
+    },
+
+<span id='Ext-DataView-method-getSelectedRecords'>    /**
+</span>     * Gets an array of the selected records
+     * @return {Array} An array of {@link Ext.data.Record} objects
+     */
+    getSelectedRecords : function(){
+        return this.getRecords(this.selected.elements);
+    },
+
+<span id='Ext-DataView-method-getRecords'>    /**
+</span>     * Gets an array of the records from an array of nodes
+     * @param {Array} nodes The nodes to evaluate
+     * @return {Array} records The {@link Ext.data.Record} objects
+     */
+    getRecords : function(nodes){
+        var records = [], 
+            i = 0,
+            len = nodes.length;
+            
+        for(; i &lt; len; i++){
+            records[records.length] = this.store.getAt(nodes[i].viewIndex);
+        }
+        return records;
+    },
+
+<span id='Ext-DataView-method-getRecord'>    /**
+</span>     * Gets a record from a node
+     * @param {HTMLElement} node The node to evaluate
+     * @return {Record} record The {@link Ext.data.Record} object
+     */
+    getRecord : function(node){
+        return this.store.getAt(node.viewIndex);
+    },
+
+<span id='Ext-DataView-method-clearSelections'>    /**
+</span>     * Clears all selections.
+     * @param {Boolean} suppressEvent (optional) True to skip firing of the selectionchange event
+     */
+    clearSelections : function(suppressEvent, skipUpdate){
+        if((this.multiSelect || this.singleSelect) &amp;&amp; this.selected.getCount() &gt; 0){
+            if(!skipUpdate){
+                this.selected.removeClass(this.selectedClass);
+            }
+            this.selected.clear();
+            this.last = false;
+            if(!suppressEvent){
+                this.fireEvent(&quot;selectionchange&quot;, this, this.selected.elements);
+            }
+        }
+    },
+
+<span id='Ext-DataView-method-isSelected'>    /**
+</span>     * Returns true if the passed node is selected, else false.
+     * @param {HTMLElement/Number/Ext.data.Record} node The node, node index or record to check
+     * @return {Boolean} True if selected, else false
+     */
+    isSelected : function(node){
+        return this.selected.contains(this.getNode(node));
+    },
+
+<span id='Ext-DataView-method-deselect'>    /**
+</span>     * Deselects a node.
+     * @param {HTMLElement/Number/Record} node The node, node index or record to deselect
+     */
+    deselect : function(node){
+        if(this.isSelected(node)){
+            node = this.getNode(node);
+            this.selected.removeElement(node);
+            if(this.last == node.viewIndex){
+                this.last = false;
+            }
+            Ext.fly(node).removeClass(this.selectedClass);
+            this.fireEvent(&quot;selectionchange&quot;, this, this.selected.elements);
+        }
+    },
+
+<span id='Ext-DataView-method-select'>    /**
+</span>     * Selects a set of nodes.
+     * @param {Array/HTMLElement/String/Number/Ext.data.Record} nodeInfo An HTMLElement template node, index of a template node,
+     * id of a template node, record associated with a node or an array of any of those to select
+     * @param {Boolean} keepExisting (optional) true to keep existing selections
+     * @param {Boolean} suppressEvent (optional) true to skip firing of the selectionchange vent
+     */
+    select : function(nodeInfo, keepExisting, suppressEvent){
+        if(Ext.isArray(nodeInfo)){
+            if(!keepExisting){
+                this.clearSelections(true);
+            }
+            for(var i = 0, len = nodeInfo.length; i &lt; len; i++){
+                this.select(nodeInfo[i], true, true);
+            }
+            if(!suppressEvent){
+                this.fireEvent(&quot;selectionchange&quot;, this, this.selected.elements);
+            }
+        } else{
+            var node = this.getNode(nodeInfo);
+            if(!keepExisting){
+                this.clearSelections(true);
+            }
+            if(node &amp;&amp; !this.isSelected(node)){
+                if(this.fireEvent(&quot;beforeselect&quot;, this, node, this.selected.elements) !== false){
+                    Ext.fly(node).addClass(this.selectedClass);
+                    this.selected.add(node);
+                    this.last = node.viewIndex;
+                    if(!suppressEvent){
+                        this.fireEvent(&quot;selectionchange&quot;, this, this.selected.elements);
+                    }
+                }
+            }
+        }
+    },
+
+<span id='Ext-DataView-method-selectRange'>    /**
+</span>     * Selects a range of nodes. All nodes between start and end are selected.
+     * @param {Number} start The index of the first node in the range
+     * @param {Number} end The index of the last node in the range
+     * @param {Boolean} keepExisting (optional) True to retain existing selections
+     */
+    selectRange : function(start, end, keepExisting){
+        if(!keepExisting){
+            this.clearSelections(true);
+        }
+        this.select(this.getNodes(start, end), true);
+    },
+
+<span id='Ext-DataView-method-getNode'>    /**
+</span>     * Gets a template node.
+     * @param {HTMLElement/String/Number/Ext.data.Record} nodeInfo An HTMLElement template node, index of a template node, 
+     * the id of a template node or the record associated with the node.
+     * @return {HTMLElement} The node or null if it wasn't found
+     */
+    getNode : function(nodeInfo){
+        if(Ext.isString(nodeInfo)){
+            return document.getElementById(nodeInfo);
+        }else if(Ext.isNumber(nodeInfo)){
+            return this.all.elements[nodeInfo];
+        }else if(nodeInfo instanceof Ext.data.Record){
+            var idx = this.store.indexOf(nodeInfo);
+            return this.all.elements[idx];
+        }
+        return nodeInfo;
+    },
+
+<span id='Ext-DataView-method-getNodes'>    /**
+</span>     * Gets a range nodes.
+     * @param {Number} start (optional) The index of the first node in the range
+     * @param {Number} end (optional) The index of the last node in the range
+     * @return {Array} An array of nodes
+     */
+    getNodes : function(start, end){
+        var ns = this.all.elements,
+            nodes = [],
+            i;
+            
+        start = start || 0;
+        end = !Ext.isDefined(end) ? Math.max(ns.length - 1, 0) : end;
+        if(start &lt;= end){
+            for(i = start; i &lt;= end &amp;&amp; ns[i]; i++){
+                nodes.push(ns[i]);
+            }
+        } else{
+            for(i = start; i &gt;= end &amp;&amp; ns[i]; i--){
+                nodes.push(ns[i]);
+            }
+        }
+        return nodes;
+    },
+
+<span id='Ext-DataView-method-indexOf'>    /**
+</span>     * Finds the index of the passed node.
+     * @param {HTMLElement/String/Number/Record} nodeInfo An HTMLElement template node, index of a template node, the id of a template node
+     * or a record associated with a node.
+     * @return {Number} The index of the node or -1
+     */
+    indexOf : function(node){
+        node = this.getNode(node);
+        if(Ext.isNumber(node.viewIndex)){
+            return node.viewIndex;
+        }
+        return this.all.indexOf(node);
+    },
+
+<span id='Ext-DataView-method-onBeforeLoad'>    // private
+</span>    onBeforeLoad : function(){
+        if(this.loadingText){
+            this.clearSelections(false, true);
+            this.getTemplateTarget().update('&lt;div class=&quot;loading-indicator&quot;&gt;'+this.loadingText+'&lt;/div&gt;');
+            this.all.clear();
+        }
+    },
+
+<span id='Ext-DataView-method-onDestroy'>    onDestroy : function(){
+</span>        this.all.clear();
+        this.selected.clear();
+        Ext.DataView.superclass.onDestroy.call(this);
+        this.bindStore(null);
+    }
+});
+
+<span id='Ext-DataView-method-setStore'>/**
+</span> * Changes the data store bound to this view and refreshes it. (deprecated in favor of bindStore)
+ * @param {Store} store The store to bind to this view
+ */
+Ext.DataView.prototype.setStore = Ext.DataView.prototype.bindStore;
+
+Ext.reg('dataview', Ext.DataView);
+</pre>
+</body>
+</html>

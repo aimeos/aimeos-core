@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-state-Provider'>/**
+</span> * @class Ext.state.Provider
+ * Abstract base class for state provider implementations. This class provides methods
+ * for encoding and decoding &lt;b&gt;typed&lt;/b&gt; variables including dates and defines the
+ * Provider interface.
+ */
+Ext.state.Provider = Ext.extend(Ext.util.Observable, {
+    
+<span id='Ext-state-Provider-method-constructor'>    constructor : function(){
+</span><span id='Ext-state-Provider-event-statechange'>        /**
+</span>         * @event statechange
+         * Fires when a state change occurs.
+         * @param {Provider} this This state provider
+         * @param {String} key The state key which was changed
+         * @param {String} value The encoded value for the state
+         */
+        this.addEvents(&quot;statechange&quot;);
+        this.state = {};
+        Ext.state.Provider.superclass.constructor.call(this);
+    },
+    
+<span id='Ext-state-Provider-method-get'>    /**
+</span>     * Returns the current value for a key
+     * @param {String} name The key name
+     * @param {Mixed} defaultValue A default value to return if the key's value is not found
+     * @return {Mixed} The state data
+     */
+    get : function(name, defaultValue){
+        return typeof this.state[name] == &quot;undefined&quot; ?
+            defaultValue : this.state[name];
+    },
+
+<span id='Ext-state-Provider-method-clear'>    /**
+</span>     * Clears a value from the state
+     * @param {String} name The key name
+     */
+    clear : function(name){
+        delete this.state[name];
+        this.fireEvent(&quot;statechange&quot;, this, name, null);
+    },
+
+<span id='Ext-state-Provider-method-set'>    /**
+</span>     * Sets the value for a key
+     * @param {String} name The key name
+     * @param {Mixed} value The value to set
+     */
+    set : function(name, value){
+        this.state[name] = value;
+        this.fireEvent(&quot;statechange&quot;, this, name, value);
+    },
+
+<span id='Ext-state-Provider-method-decodeValue'>    /**
+</span>     * Decodes a string previously encoded with {@link #encodeValue}.
+     * @param {String} value The value to decode
+     * @return {Mixed} The decoded value
+     */
+    decodeValue : function(cookie){
+<span id='Ext-state-Provider-property-re'>        /**
+</span>         * a -&gt; Array
+         * n -&gt; Number
+         * d -&gt; Date
+         * b -&gt; Boolean
+         * s -&gt; String
+         * o -&gt; Object
+         * -&gt; Empty (null)
+         */
+        var re = /^(a|n|d|b|s|o|e)\:(.*)$/,
+            matches = re.exec(unescape(cookie)),
+            all,
+            type,
+            v,
+            kv;
+        if(!matches || !matches[1]){
+            return; // non state cookie
+        }
+        type = matches[1];
+        v = matches[2];
+        switch(type){
+            case 'e':
+                return null;
+            case 'n':
+                return parseFloat(v);
+            case 'd':
+                return new Date(Date.parse(v));
+            case 'b':
+                return (v == '1');
+            case 'a':
+                all = [];
+                if(v != ''){
+                    Ext.each(v.split('^'), function(val){
+                        all.push(this.decodeValue(val));
+                    }, this);
+                }
+                return all;
+           case 'o':
+                all = {};
+                if(v != ''){
+                    Ext.each(v.split('^'), function(val){
+                        kv = val.split('=');
+                        all[kv[0]] = this.decodeValue(kv[1]);
+                    }, this);
+                }
+                return all;
+           default:
+                return v;
+        }
+    },
+
+<span id='Ext-state-Provider-method-encodeValue'>    /**
+</span>     * Encodes a value including type information.  Decode with {@link #decodeValue}.
+     * @param {Mixed} value The value to encode
+     * @return {String} The encoded value
+     */
+    encodeValue : function(v){
+        var enc,
+            flat = '',
+            i = 0,
+            len,
+            key;
+        if(v == null){
+            return 'e:1';    
+        }else if(typeof v == 'number'){
+            enc = 'n:' + v;
+        }else if(typeof v == 'boolean'){
+            enc = 'b:' + (v ? '1' : '0');
+        }else if(Ext.isDate(v)){
+            enc = 'd:' + v.toGMTString();
+        }else if(Ext.isArray(v)){
+            for(len = v.length; i &lt; len; i++){
+                flat += this.encodeValue(v[i]);
+                if(i != len - 1){
+                    flat += '^';
+                }
+            }
+            enc = 'a:' + flat;
+        }else if(typeof v == 'object'){
+            for(key in v){
+                if(typeof v[key] != 'function' &amp;&amp; v[key] !== undefined){
+                    flat += key + '=' + this.encodeValue(v[key]) + '^';
+                }
+            }
+            enc = 'o:' + flat.substring(0, flat.length-1);
+        }else{
+            enc = 's:' + v;
+        }
+        return escape(enc);
+    }
+});
+</pre>
+</body>
+</html>

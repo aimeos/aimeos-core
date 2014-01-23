@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ButtonGroup-method-constructor'><span id='Ext-ButtonGroup'>/**
+</span></span> * @class Ext.ButtonGroup
+ * @extends Ext.Panel
+ * Container for a group of buttons. Example usage:
+ * &lt;pre&gt;&lt;code&gt;
+var p = new Ext.Panel({
+    title: 'Panel with Button Group',
+    width: 300,
+    height:200,
+    renderTo: document.body,
+    html: 'whatever',
+    tbar: [{
+        xtype: 'buttongroup',
+        {@link #columns}: 3,
+        title: 'Clipboard',
+        items: [{
+            text: 'Paste',
+            scale: 'large',
+            rowspan: 3, iconCls: 'add',
+            iconAlign: 'top',
+            cls: 'x-btn-as-arrow'
+        },{
+            xtype:'splitbutton',
+            text: 'Menu Button',
+            scale: 'large',
+            rowspan: 3,
+            iconCls: 'add',
+            iconAlign: 'top',
+            arrowAlign:'bottom',
+            menu: [{text: 'Menu Item 1'}]
+        },{
+            xtype:'splitbutton', text: 'Cut', iconCls: 'add16', menu: [{text: 'Cut Menu Item'}]
+        },{
+            text: 'Copy', iconCls: 'add16'
+        },{
+            text: 'Format', iconCls: 'add16'
+        }]
+    }]
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ * @constructor
+ * Create a new ButtonGroup.
+ * @param {Object} config The config object
+ * @xtype buttongroup
+ */
+Ext.ButtonGroup = Ext.extend(Ext.Panel, {
+<span id='Ext-ButtonGroup-cfg-columns'>    /**
+</span>     * @cfg {Number} columns The &lt;tt&gt;columns&lt;/tt&gt; configuration property passed to the
+     * {@link #layout configured layout manager}. See {@link Ext.layout.TableLayout#columns}.
+     */
+<span id='Ext-ButtonGroup-cfg-baseCls'>    /**
+</span>     * @cfg {String} baseCls  Defaults to &lt;tt&gt;'x-btn-group'&lt;/tt&gt;.  See {@link Ext.Panel#baseCls}.
+     */
+    baseCls: 'x-btn-group',
+<span id='Ext-ButtonGroup-cfg-layout'>    /**
+</span>     * @cfg {String} layout  Defaults to &lt;tt&gt;'table'&lt;/tt&gt;.  See {@link Ext.Container#layout}.
+     */
+    layout:'table',
+<span id='Ext-ButtonGroup-cfg-defaultType'>    defaultType: 'button',
+</span><span id='Ext-ButtonGroup-cfg-frame'>    /**
+</span>     * @cfg {Boolean} frame  Defaults to &lt;tt&gt;true&lt;/tt&gt;.  See {@link Ext.Panel#frame}.
+     */
+    frame: true,
+<span id='Ext-ButtonGroup-property-internalDefaults'>    internalDefaults: {removeMode: 'container', hideParent: true},
+</span>
+<span id='Ext-ButtonGroup-method-initComponent'>    initComponent : function(){
+</span>        this.layoutConfig = this.layoutConfig || {};
+        Ext.applyIf(this.layoutConfig, {
+            columns : this.columns
+        });
+        if(!this.title){
+            this.addClass('x-btn-group-notitle');
+        }
+        this.on('afterlayout', this.onAfterLayout, this);
+        Ext.ButtonGroup.superclass.initComponent.call(this);
+    },
+
+<span id='Ext-ButtonGroup-method-applyDefaults'>    applyDefaults : function(c){
+</span>        c = Ext.ButtonGroup.superclass.applyDefaults.call(this, c);
+        var d = this.internalDefaults;
+        if(c.events){
+            Ext.applyIf(c.initialConfig, d);
+            Ext.apply(c, d);
+        }else{
+            Ext.applyIf(c, d);
+        }
+        return c;
+    },
+
+<span id='Ext-ButtonGroup-method-onAfterLayout'>    onAfterLayout : function(){
+</span>        var bodyWidth = this.body.getFrameWidth('lr') + this.body.dom.firstChild.offsetWidth;
+        this.body.setWidth(bodyWidth);
+        this.el.setWidth(bodyWidth + this.getFrameWidth());
+    }
+<span id='Ext-ButtonGroup-cfg-tools'>    /**
+</span>     * @cfg {Array} tools  @hide
+     */
+});
+
+Ext.reg('buttongroup', Ext.ButtonGroup);
+</pre>
+</body>
+</html>

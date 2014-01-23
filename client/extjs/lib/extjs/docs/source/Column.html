@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-grid-Column'>/**
+</span> * @class Ext.grid.Column
+ * &lt;p&gt;This class encapsulates column configuration data to be used in the initialization of a
+ * {@link Ext.grid.ColumnModel ColumnModel}.&lt;/p&gt;
+ * &lt;p&gt;While subclasses are provided to render data in different ways, this class renders a passed
+ * data field unchanged and is usually used for textual columns.&lt;/p&gt;
+ */
+Ext.grid.Column = Ext.extend(Ext.util.Observable, {
+<span id='Ext-grid-Column-cfg-editable'>    /**
+</span>     * @cfg {Boolean} editable Optional. Defaults to &lt;tt&gt;true&lt;/tt&gt;, enabling the configured
+     * &lt;tt&gt;{@link #editor}&lt;/tt&gt;.  Set to &lt;tt&gt;false&lt;/tt&gt; to initially disable editing on this column.
+     * The initial configuration may be dynamically altered using
+     * {@link Ext.grid.ColumnModel}.{@link Ext.grid.ColumnModel#setEditable setEditable()}.
+     */
+<span id='Ext-grid-Column-cfg-id'>    /**
+</span>     * @cfg {String} id Optional. A name which identifies this column (defaults to the column's initial
+     * ordinal position.) The &lt;tt&gt;id&lt;/tt&gt; is used to create a CSS &lt;b&gt;class&lt;/b&gt; name which is applied to all
+     * table cells (including headers) in that column (in this context the &lt;tt&gt;id&lt;/tt&gt; does not need to be
+     * unique). The class name takes the form of &lt;pre&gt;x-grid3-td-&lt;b&gt;id&lt;/b&gt;&lt;/pre&gt;
+     * Header cells will also receive this class name, but will also have the class &lt;pre&gt;x-grid3-hd&lt;/pre&gt;
+     * So, to target header cells, use CSS selectors such as:&lt;pre&gt;.x-grid3-hd-row .x-grid3-td-&lt;b&gt;id&lt;/b&gt;&lt;/pre&gt;
+     * The {@link Ext.grid.GridPanel#autoExpandColumn} grid config option references the column via this
+     * unique identifier.
+     */
+<span id='Ext-grid-Column-cfg-header'>    /**
+</span>     * @cfg {String} header Optional. The header text to be used as innerHTML
+     * (html tags are accepted) to display in the Grid view.  &lt;b&gt;Note&lt;/b&gt;: to
+     * have a clickable header with no text displayed use &lt;tt&gt;'&amp;amp;#160;'&lt;/tt&gt;.
+     */
+<span id='Ext-grid-Column-cfg-groupable'>    /**
+</span>     * @cfg {Boolean} groupable Optional. If the grid is being rendered by an {@link Ext.grid.GroupingView}, this option
+     * may be used to disable the header menu item to group by the column selected. Defaults to &lt;tt&gt;true&lt;/tt&gt;,
+     * which enables the header menu group option.  Set to &lt;tt&gt;false&lt;/tt&gt; to disable (but still show) the
+     * group option in the header menu for the column. See also &lt;code&gt;{@link #groupName}&lt;/code&gt;.
+     */
+<span id='Ext-grid-Column-cfg-groupName'>    /**
+</span>     * @cfg {String} groupName Optional. If the grid is being rendered by an {@link Ext.grid.GroupingView}, this option
+     * may be used to specify the text with which to prefix the group field value in the group header line.
+     * See also {@link #groupRenderer} and
+     * {@link Ext.grid.GroupingView}.{@link Ext.grid.GroupingView#showGroupName showGroupName}.
+     */
+<span id='Ext-grid-Column-cfg-groupRenderer'>    /**
+</span>     * @cfg {Function} groupRenderer &lt;p&gt;Optional. If the grid is being rendered by an {@link Ext.grid.GroupingView}, this option
+     * may be used to specify the function used to format the grouping field value for display in the group
+     * {@link #groupName header}.  If a &lt;tt&gt;&lt;b&gt;groupRenderer&lt;/b&gt;&lt;/tt&gt; is not specified, the configured
+     * &lt;tt&gt;&lt;b&gt;{@link #renderer}&lt;/b&gt;&lt;/tt&gt; will be called; if a &lt;tt&gt;&lt;b&gt;{@link #renderer}&lt;/b&gt;&lt;/tt&gt; is also not specified
+     * the new value of the group field will be used.&lt;/p&gt;
+     * &lt;p&gt;The called function (either the &lt;tt&gt;&lt;b&gt;groupRenderer&lt;/b&gt;&lt;/tt&gt; or &lt;tt&gt;&lt;b&gt;{@link #renderer}&lt;/b&gt;&lt;/tt&gt;) will be
+     * passed the following parameters:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;v&lt;/b&gt; : Object&lt;p class=&quot;sub-desc&quot;&gt;The new value of the group field.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;unused&lt;/b&gt; : undefined&lt;p class=&quot;sub-desc&quot;&gt;Unused parameter.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;r&lt;/b&gt; : Ext.data.Record&lt;p class=&quot;sub-desc&quot;&gt;The Record providing the data
+     * for the row which caused group change.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;rowIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;The row index of the Record which caused group change.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;colIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;The column index of the group field.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;ds&lt;/b&gt; : Ext.data.Store&lt;p class=&quot;sub-desc&quot;&gt;The Store which is providing the data Model.&lt;/p&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;&lt;/p&gt;
+     * &lt;p&gt;The function should return a string value.&lt;/p&gt;
+     */
+<span id='Ext-grid-Column-cfg-emptyGroupText'>    /**
+</span>     * @cfg {String} emptyGroupText Optional. If the grid is being rendered by an {@link Ext.grid.GroupingView}, this option
+     * may be used to specify the text to display when there is an empty group value. Defaults to the
+     * {@link Ext.grid.GroupingView}.{@link Ext.grid.GroupingView#emptyGroupText emptyGroupText}.
+     */
+<span id='Ext-grid-Column-cfg-dataIndex'>    /**
+</span>     * @cfg {String} dataIndex &lt;p&gt;&lt;b&gt;Required&lt;/b&gt;. The name of the field in the
+     * grid's {@link Ext.data.Store}'s {@link Ext.data.Record} definition from
+     * which to draw the column's value.&lt;/p&gt;
+     */
+<span id='Ext-grid-Column-cfg-width'>    /**
+</span>     * @cfg {Number} width
+     * Optional. The initial width in pixels of the column.
+     * The width of each column can also be affected if any of the following are configured:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;{@link Ext.grid.GridPanel}.&lt;tt&gt;{@link Ext.grid.GridPanel#autoExpandColumn autoExpandColumn}&lt;/tt&gt;&lt;/li&gt;
+     * &lt;li&gt;{@link Ext.grid.GridView}.&lt;tt&gt;{@link Ext.grid.GridView#forceFit forceFit}&lt;/tt&gt;
+     * &lt;div class=&quot;sub-desc&quot;&gt;
+     * &lt;p&gt;By specifying &lt;tt&gt;forceFit:true&lt;/tt&gt;, {@link #fixed non-fixed width} columns will be
+     * re-proportioned (based on the relative initial widths) to fill the width of the grid so
+     * that no horizontal scrollbar is shown.&lt;/p&gt;
+     * &lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;{@link Ext.grid.GridView}.&lt;tt&gt;{@link Ext.grid.GridView#autoFill autoFill}&lt;/tt&gt;&lt;/li&gt;
+     * &lt;li&gt;{@link Ext.grid.GridPanel}.&lt;tt&gt;{@link Ext.grid.GridPanel#minColumnWidth minColumnWidth}&lt;/tt&gt;&lt;/li&gt;
+     * &lt;br&gt;&lt;p&gt;&lt;b&gt;Note&lt;/b&gt;: when the width of each column is determined, a space on the right side
+     * is reserved for the vertical scrollbar.  The
+     * {@link Ext.grid.GridView}.&lt;tt&gt;{@link Ext.grid.GridView#scrollOffset scrollOffset}&lt;/tt&gt;
+     * can be modified to reduce or eliminate the reserved offset.&lt;/p&gt;
+     */
+<span id='Ext-grid-Column-cfg-sortable'>    /**
+</span>     * @cfg {Boolean} sortable Optional. &lt;tt&gt;true&lt;/tt&gt; if sorting is to be allowed on this column.
+     * Defaults to the value of the &lt;code&gt;{@link Ext.grid.ColumnModel#defaultSortable}&lt;/code&gt; property.
+     * Whether local/remote sorting is used is specified in &lt;code&gt;{@link Ext.data.Store#remoteSort}&lt;/code&gt;.
+     */
+<span id='Ext-grid-Column-cfg-fixed'>    /**
+</span>     * @cfg {Boolean} fixed Optional. &lt;tt&gt;true&lt;/tt&gt; if the column width cannot be changed.  Defaults to &lt;tt&gt;false&lt;/tt&gt;.
+     */
+<span id='Ext-grid-Column-cfg-resizable'>    /**
+</span>     * @cfg {Boolean} resizable Optional. &lt;tt&gt;false&lt;/tt&gt; to disable column resizing. Defaults to &lt;tt&gt;true&lt;/tt&gt;.
+     */
+<span id='Ext-grid-Column-cfg-menuDisabled'>    /**
+</span>     * @cfg {Boolean} menuDisabled Optional. &lt;tt&gt;true&lt;/tt&gt; to disable the column menu. Defaults to &lt;tt&gt;false&lt;/tt&gt;.
+     */
+<span id='Ext-grid-Column-cfg-hidden'>    /**
+</span>     * @cfg {Boolean} hidden
+     * Optional. &lt;tt&gt;true&lt;/tt&gt; to initially hide this column. Defaults to &lt;tt&gt;false&lt;/tt&gt;.
+     * A hidden column {@link Ext.grid.GridPanel#enableColumnHide may be shown via the header row menu}.
+     * If a column is never to be shown, simply do not include this column in the Column Model at all.
+     */
+<span id='Ext-grid-Column-cfg-tooltip'>    /**
+</span>     * @cfg {String} tooltip Optional. A text string to use as the column header's tooltip.  If Quicktips
+     * are enabled, this value will be used as the text of the quick tip, otherwise it will be set as the
+     * header's HTML title attribute. Defaults to ''.
+     */
+<span id='Ext-grid-Column-cfg-renderer'>    /**
+</span>     * @cfg {Mixed} renderer
+     * &lt;p&gt;For an alternative to specifying a renderer see &lt;code&gt;{@link #xtype}&lt;/code&gt;&lt;/p&gt;
+     * &lt;p&gt;Optional. A renderer is an 'interceptor' method which can be used transform data (value,
+     * appearance, etc.) before it is rendered). This may be specified in either of three ways:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;A renderer function used to return HTML markup for a cell given the cell's data value.&lt;/li&gt;
+     * &lt;li&gt;A string which references a property name of the {@link Ext.util.Format} class which
+     * provides a renderer function.&lt;/li&gt;
+     * &lt;li&gt;An object specifying both the renderer function, and its execution scope (&lt;tt&gt;&lt;b&gt;this&lt;/b&gt;&lt;/tt&gt;
+     * reference) e.g.:&lt;pre style=&quot;margin-left:1.2em&quot;&gt;&lt;code&gt;
+{
+    fn: this.gridRenderer,
+    scope: this
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+     * If not specified, the default renderer uses the raw data value.&lt;/p&gt;
+     * &lt;p&gt;For information about the renderer function (passed parameters, etc.), see
+     * {@link Ext.grid.ColumnModel#setRenderer}. An example of specifying renderer function inline:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+var companyColumn = {
+   header: 'Company Name',
+   dataIndex: 'company',
+   renderer: function(value, metaData, record, rowIndex, colIndex, store) {
+      // provide the logic depending on business rules
+      // name of your own choosing to manipulate the cell depending upon
+      // the data in the underlying Record object.
+      if (value == 'whatever') {
+          //metaData.css : String : A CSS class name to add to the TD element of the cell.
+          //metaData.attr : String : An html attribute definition string to apply to
+          //                         the data container element within the table
+          //                         cell (e.g. 'style=&quot;color:red;&quot;').
+          metaData.css = 'name-of-css-class-you-will-define';
+      }
+      return value;
+   }
+}
+     * &lt;/code&gt;&lt;/pre&gt;
+     * See also {@link #scope}.
+     */
+<span id='Ext-grid-Column-cfg-xtype'>    /**
+</span>     * @cfg {String} xtype Optional. A String which references a predefined {@link Ext.grid.Column} subclass
+     * type which is preconfigured with an appropriate &lt;code&gt;{@link #renderer}&lt;/code&gt; to be easily
+     * configured into a ColumnModel. The predefined {@link Ext.grid.Column} subclass types are:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;gridcolumn&lt;/tt&gt;&lt;/b&gt; : {@link Ext.grid.Column} (&lt;b&gt;Default&lt;/b&gt;)&lt;p class=&quot;sub-desc&quot;&gt;&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;booleancolumn&lt;/tt&gt;&lt;/b&gt; : {@link Ext.grid.BooleanColumn}&lt;p class=&quot;sub-desc&quot;&gt;&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;numbercolumn&lt;/tt&gt;&lt;/b&gt; : {@link Ext.grid.NumberColumn}&lt;p class=&quot;sub-desc&quot;&gt;&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;datecolumn&lt;/tt&gt;&lt;/b&gt; : {@link Ext.grid.DateColumn}&lt;p class=&quot;sub-desc&quot;&gt;&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;templatecolumn&lt;/tt&gt;&lt;/b&gt; : {@link Ext.grid.TemplateColumn}&lt;p class=&quot;sub-desc&quot;&gt;&lt;/p&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * &lt;p&gt;Configuration properties for the specified &lt;code&gt;xtype&lt;/code&gt; may be specified with
+     * the Column configuration properties, for example:&lt;/p&gt;
+     * &lt;pre&gt;&lt;code&gt;
+var grid = new Ext.grid.GridPanel({
+    ...
+    columns: [{
+        header: 'Last Updated',
+        dataIndex: 'lastChange',
+        width: 85,
+        sortable: true,
+        //renderer: Ext.util.Format.dateRenderer('m/d/Y'),
+        xtype: 'datecolumn', // use xtype instead of renderer
+        format: 'M/d/Y' // configuration property for {@link Ext.grid.DateColumn}
+    }, {
+        ...
+    }]
+});
+     * &lt;/code&gt;&lt;/pre&gt;
+     */
+<span id='Ext-grid-Column-cfg-scope'>    /**
+</span>     * @cfg {Object} scope Optional. The scope (&lt;tt&gt;&lt;b&gt;this&lt;/b&gt;&lt;/tt&gt; reference) in which to execute the
+     * renderer.  Defaults to the Column configuration object.
+     */
+<span id='Ext-grid-Column-cfg-align'>    /**
+</span>     * @cfg {String} align Optional. Set the CSS text-align property of the column.  Defaults to undefined.
+     */
+<span id='Ext-grid-Column-cfg-css'>    /**
+</span>     * @cfg {String} css Optional. An inline style definition string which is applied to all table cells in the column
+     * (excluding headers). Defaults to undefined.
+     */
+<span id='Ext-grid-Column-cfg-hideable'>    /**
+</span>     * @cfg {Boolean} hideable Optional. Specify as &lt;tt&gt;false&lt;/tt&gt; to prevent the user from hiding this column
+     * (defaults to true).  To disallow column hiding globally for all columns in the grid, use
+     * {@link Ext.grid.GridPanel#enableColumnHide} instead.
+     */
+<span id='Ext-grid-Column-cfg-editor'>    /**
+</span>     * @cfg {Ext.form.Field} editor Optional. The {@link Ext.form.Field} to use when editing values in this column
+     * if editing is supported by the grid. See &lt;tt&gt;{@link #editable}&lt;/tt&gt; also.
+     */
+
+<span id='Ext-grid-Column-cfg-isColumn'>    /**
+</span>     * @private
+     * @cfg {Boolean} isColumn
+     * Used by ColumnModel setConfig method to avoid reprocessing a Column
+     * if &lt;code&gt;isColumn&lt;/code&gt; is not set ColumnModel will recreate a new Ext.grid.Column
+     * Defaults to true.
+     */
+    isColumn : true,
+
+<span id='Ext-grid-Column-method-constructor'>    constructor : function(config){
+</span>        Ext.apply(this, config);
+
+        if(Ext.isString(this.renderer)){
+            this.renderer = Ext.util.Format[this.renderer];
+        }else if(Ext.isObject(this.renderer)){
+            this.scope = this.renderer.scope;
+            this.renderer = this.renderer.fn;
+        }
+        if(!this.scope){
+            this.scope = this;
+        }
+
+        var ed = this.editor;
+        delete this.editor;
+        this.setEditor(ed);
+        this.addEvents(
+<span id='Ext-grid-Column-event-click'>            /**
+</span>             * @event click
+             * Fires when this Column is clicked.
+             * @param {Column} this
+             * @param {Grid} The owning GridPanel
+             * @param {Number} rowIndex
+             * @param {Ext.EventObject} e
+             */
+            'click',
+<span id='Ext-grid-Column-event-contextmenu'>            /**
+</span>             * @event contextmenu
+             * Fires when this Column is right clicked.
+             * @param {Column} this
+             * @param {Grid} The owning GridPanel
+             * @param {Number} rowIndex
+             * @param {Ext.EventObject} e
+             */
+            'contextmenu',
+<span id='Ext-grid-Column-event-dblclick'>            /**
+</span>             * @event dblclick
+             * Fires when this Column is double clicked.
+             * @param {Column} this
+             * @param {Grid} The owning GridPanel
+             * @param {Number} rowIndex
+             * @param {Ext.EventObject} e
+             */
+            'dblclick',
+<span id='Ext-grid-Column-event-mousedown'>            /**
+</span>             * @event mousedown
+             * Fires when this Column receives a mousedown event.
+             * @param {Column} this
+             * @param {Grid} The owning GridPanel
+             * @param {Number} rowIndex
+             * @param {Ext.EventObject} e
+             */
+            'mousedown'
+        );
+        Ext.grid.Column.superclass.constructor.call(this);
+    },
+
+<span id='Ext-grid-Column-method-processEvent'>    /**
+</span>     * @private
+     * Process and refire events routed from the GridView's processEvent method.
+     * Returns the event handler's status to allow cancelling of GridView's bubbling process.
+     */
+    processEvent : function(name, e, grid, rowIndex, colIndex){
+        return this.fireEvent(name, this, grid, rowIndex, e);
+    },
+
+<span id='Ext-grid-Column-method-destroy'>    /**
+</span>     * @private
+     * Clean up. Remove any Editor. Remove any listeners.
+     */
+    destroy: function() {
+        if(this.setEditor){
+            this.setEditor(null);
+        }
+        this.purgeListeners();
+    },
+
+<span id='Ext-grid-Column-property-renderer'>    /**
+</span>     * Optional. A function which returns displayable data when passed the following parameters:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;value&lt;/b&gt; : Object&lt;p class=&quot;sub-desc&quot;&gt;The data value for the cell.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;metadata&lt;/b&gt; : Object&lt;p class=&quot;sub-desc&quot;&gt;An object in which you may set the following attributes:&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;css&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;A CSS class name to add to the cell's TD element.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;attr&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;An HTML attribute definition string to apply to the data container
+     * element &lt;i&gt;within&lt;/i&gt; the table cell (e.g. 'style=&quot;color:red;&quot;').&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;record&lt;/b&gt; : Ext.data.record&lt;p class=&quot;sub-desc&quot;&gt;The {@link Ext.data.Record} from which the data was
+     * extracted.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;rowIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;Row index&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;colIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;Column index&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;store&lt;/b&gt; : Ext.data.Store&lt;p class=&quot;sub-desc&quot;&gt;The {@link Ext.data.Store} object from which the Record
+     * was extracted.&lt;/p&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * @property renderer
+     * @type Function
+     */
+    renderer : function(value){
+        return value;
+    },
+
+<span id='Ext-grid-Column-method-getEditor'>    // private
+</span>    getEditor: function(rowIndex){
+        return this.editable !== false ? this.editor : null;
+    },
+
+<span id='Ext-grid-Column-method-setEditor'>    /**
+</span>     * Sets a new editor for this column.
+     * @param {Ext.Editor/Ext.form.Field} editor The editor to set
+     */
+    setEditor : function(editor){
+        var ed = this.editor;
+        if(ed){
+            if(ed.gridEditor){
+                ed.gridEditor.destroy();
+                delete ed.gridEditor;
+            }else{
+                ed.destroy();
+            }
+        }
+        this.editor = null;
+        if(editor){
+            //not an instance, create it
+            if(!editor.isXType){
+                editor = Ext.create(editor, 'textfield');
+            }
+            this.editor = editor;
+        }
+    },
+
+<span id='Ext-grid-Column-method-getCellEditor'>    /**
+</span>     * Returns the {@link Ext.Editor editor} defined for this column that was created to wrap the {@link Ext.form.Field Field}
+     * used to edit the cell.
+     * @param {Number} rowIndex The row index
+     * @return {Ext.Editor}
+     */
+    getCellEditor: function(rowIndex){
+        var ed = this.getEditor(rowIndex);
+        if(ed){
+            if(!ed.startEdit){
+                if(!ed.gridEditor){
+                    ed.gridEditor = new Ext.grid.GridEditor(ed);
+                }
+                ed = ed.gridEditor;
+            }
+        }
+        return ed;
+    }
+});
+
+<span id='Ext-grid-BooleanColumn'>/**
+</span> * @class Ext.grid.BooleanColumn
+ * @extends Ext.grid.Column
+ * &lt;p&gt;A Column definition class which renders boolean data fields.  See the {@link Ext.grid.Column#xtype xtype}
+ * config option of {@link Ext.grid.Column} for more details.&lt;/p&gt;
+ */
+Ext.grid.BooleanColumn = Ext.extend(Ext.grid.Column, {
+<span id='Ext-grid-BooleanColumn-cfg-trueText'>    /**
+</span>     * @cfg {String} trueText
+     * The string returned by the renderer when the column value is not falsy (defaults to &lt;tt&gt;'true'&lt;/tt&gt;).
+     */
+    trueText: 'true',
+<span id='Ext-grid-BooleanColumn-cfg-falseText'>    /**
+</span>     * @cfg {String} falseText
+     * The string returned by the renderer when the column value is falsy (but not undefined) (defaults to
+     * &lt;tt&gt;'false'&lt;/tt&gt;).
+     */
+    falseText: 'false',
+<span id='Ext-grid-BooleanColumn-cfg-undefinedText'>    /**
+</span>     * @cfg {String} undefinedText
+     * The string returned by the renderer when the column value is undefined (defaults to &lt;tt&gt;'&amp;amp;#160;'&lt;/tt&gt;).
+     */
+    undefinedText: '&amp;#160;',
+
+<span id='Ext-grid-BooleanColumn-method-constructor'>    constructor: function(cfg){
+</span>        Ext.grid.BooleanColumn.superclass.constructor.call(this, cfg);
+        var t = this.trueText, f = this.falseText, u = this.undefinedText;
+        this.renderer = function(v){
+            if(v === undefined){
+                return u;
+            }
+            if(!v || v === 'false'){
+                return f;
+            }
+            return t;
+        };
+    }
+});
+
+<span id='Ext-grid-NumberColumn'>/**
+</span> * @class Ext.grid.NumberColumn
+ * @extends Ext.grid.Column
+ * &lt;p&gt;A Column definition class which renders a numeric data field according to a {@link #format} string.  See the
+ * {@link Ext.grid.Column#xtype xtype} config option of {@link Ext.grid.Column} for more details.&lt;/p&gt;
+ */
+Ext.grid.NumberColumn = Ext.extend(Ext.grid.Column, {
+<span id='Ext-grid-NumberColumn-cfg-format'>    /**
+</span>     * @cfg {String} format
+     * A formatting string as used by {@link Ext.util.Format#number} to format a numeric value for this Column
+     * (defaults to &lt;tt&gt;'0,000.00'&lt;/tt&gt;).
+     */
+    format : '0,000.00',
+<span id='Ext-grid-NumberColumn-method-constructor'>    constructor: function(cfg){
+</span>        Ext.grid.NumberColumn.superclass.constructor.call(this, cfg);
+        this.renderer = Ext.util.Format.numberRenderer(this.format);
+    }
+});
+
+<span id='Ext-grid-DateColumn'>/**
+</span> * @class Ext.grid.DateColumn
+ * @extends Ext.grid.Column
+ * &lt;p&gt;A Column definition class which renders a passed date according to the default locale, or a configured
+ * {@link #format}. See the {@link Ext.grid.Column#xtype xtype} config option of {@link Ext.grid.Column}
+ * for more details.&lt;/p&gt;
+ */
+Ext.grid.DateColumn = Ext.extend(Ext.grid.Column, {
+<span id='Ext-grid-DateColumn-cfg-format'>    /**
+</span>     * @cfg {String} format
+     * A formatting string as used by {@link Date#format} to format a Date for this Column
+     * (defaults to &lt;tt&gt;'m/d/Y'&lt;/tt&gt;).
+     */
+    format : 'm/d/Y',
+<span id='Ext-grid-DateColumn-method-constructor'>    constructor: function(cfg){
+</span>        Ext.grid.DateColumn.superclass.constructor.call(this, cfg);
+        this.renderer = Ext.util.Format.dateRenderer(this.format);
+    }
+});
+
+<span id='Ext-grid-TemplateColumn'>/**
+</span> * @class Ext.grid.TemplateColumn
+ * @extends Ext.grid.Column
+ * &lt;p&gt;A Column definition class which renders a value by processing a {@link Ext.data.Record Record}'s
+ * {@link Ext.data.Record#data data} using a {@link #tpl configured} {@link Ext.XTemplate XTemplate}.
+ * See the {@link Ext.grid.Column#xtype xtype} config option of {@link Ext.grid.Column} for more
+ * details.&lt;/p&gt;
+ */
+Ext.grid.TemplateColumn = Ext.extend(Ext.grid.Column, {
+<span id='Ext-grid-TemplateColumn-cfg-tpl'>    /**
+</span>     * @cfg {String/XTemplate} tpl
+     * An {@link Ext.XTemplate XTemplate}, or an XTemplate &lt;i&gt;definition string&lt;/i&gt; to use to process a
+     * {@link Ext.data.Record Record}'s {@link Ext.data.Record#data data} to produce a column's rendered value.
+     */
+    constructor: function(cfg){
+        Ext.grid.TemplateColumn.superclass.constructor.call(this, cfg);
+        var tpl = (!Ext.isPrimitive(this.tpl) &amp;&amp; this.tpl.compile) ? this.tpl : new Ext.XTemplate(this.tpl);
+        this.renderer = function(value, p, r){
+            return tpl.apply(r.data);
+        };
+        this.tpl = tpl;
+    }
+});
+
+<span id='Ext-grid-ActionColumn'>/**
+</span> * @class Ext.grid.ActionColumn
+ * @extends Ext.grid.Column
+ * &lt;p&gt;A Grid column type which renders an icon, or a series of icons in a grid cell, and offers a scoped click
+ * handler for each icon. Example usage:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+new Ext.grid.GridPanel({
+    store: myStore,
+    columns: [
+        {
+            xtype: 'actioncolumn',
+            width: 50,
+            items: [
+                {
+                    icon   : 'sell.gif',                // Use a URL in the icon config
+                    tooltip: 'Sell stock',
+                    handler: function(grid, rowIndex, colIndex) {
+                        var rec = store.getAt(rowIndex);
+                        alert(&quot;Sell &quot; + rec.get('company'));
+                    }
+                },
+                {
+                    getClass: function(v, meta, rec) {  // Or return a class from a function
+                        if (rec.get('change') &lt; 0) {
+                            this.items[1].tooltip = 'Do not buy!';
+                            return 'alert-col';
+                        } else {
+                            this.items[1].tooltip = 'Buy stock';
+                            return 'buy-col';
+                        }
+                    },
+                    handler: function(grid, rowIndex, colIndex) {
+                        var rec = store.getAt(rowIndex);
+                        alert(&quot;Buy &quot; + rec.get('company'));
+                    }
+                }
+            ]
+        }
+        //any other columns here
+    ]
+});
+&lt;/pre&gt;&lt;/code&gt;
+ * &lt;p&gt;The action column can be at any index in the columns array, and a grid can have any number of
+ * action columns. &lt;/p&gt;
+ */
+Ext.grid.ActionColumn = Ext.extend(Ext.grid.Column, {
+<span id='Ext-grid-ActionColumn-cfg-icon'>    /**
+</span>     * @cfg {String} icon
+     * The URL of an image to display as the clickable element in the column. 
+     * Optional - defaults to &lt;code&gt;{@link Ext#BLANK_IMAGE_URL Ext.BLANK_IMAGE_URL}&lt;/code&gt;.
+     */
+<span id='Ext-grid-ActionColumn-cfg-iconCls'>    /**
+</span>     * @cfg {String} iconCls
+     * A CSS class to apply to the icon image. To determine the class dynamically, configure the Column with a &lt;code&gt;{@link #getClass}&lt;/code&gt; function.
+     */
+<span id='Ext-grid-ActionColumn-cfg-handler'>    /**
+</span>     * @cfg {Function} handler A function called when the icon is clicked.
+     * The handler is passed the following parameters:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;code&gt;grid&lt;/code&gt; : GridPanel&lt;div class=&quot;sub-desc&quot;&gt;The owning GridPanel.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;rowIndex&lt;/code&gt; : Number&lt;div class=&quot;sub-desc&quot;&gt;The row index clicked on.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;colIndex&lt;/code&gt; : Number&lt;div class=&quot;sub-desc&quot;&gt;The column index clicked on.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;item&lt;/code&gt; : Object&lt;div class=&quot;sub-desc&quot;&gt;The clicked item (or this Column if multiple 
+     * {@link #items} were not configured).&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;e&lt;/code&gt; : Event&lt;div class=&quot;sub-desc&quot;&gt;The click event.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+<span id='Ext-grid-ActionColumn-cfg-scope'>    /**
+</span>     * @cfg {Object} scope The scope (&lt;tt&gt;&lt;b&gt;this&lt;/b&gt;&lt;/tt&gt; reference) in which the &lt;code&gt;{@link #handler}&lt;/code&gt;
+     * and &lt;code&gt;{@link #getClass}&lt;/code&gt; fuctions are executed. Defaults to this Column.
+     */
+<span id='Ext-grid-ActionColumn-cfg-tooltip'>    /**
+</span>     * @cfg {String} tooltip A tooltip message to be displayed on hover. {@link Ext.QuickTips#init Ext.QuickTips} must have 
+     * been initialized.
+     */
+<span id='Ext-grid-ActionColumn-cfg-stopSelection'>    /**
+</span>     * @cfg {Boolean} stopSelection Defaults to &lt;code&gt;true&lt;/code&gt;. Prevent grid &lt;i&gt;row&lt;/i&gt; selection upon mousedown.
+     */
+<span id='Ext-grid-ActionColumn-cfg-getClass'>    /**
+</span>     * @cfg {Function} getClass A function which returns the CSS class to apply to the icon image.
+     * The function is passed the following parameters:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     *     &lt;li&gt;&lt;b&gt;v&lt;/b&gt; : Object&lt;p class=&quot;sub-desc&quot;&gt;The value of the column's configured field (if any).&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;metadata&lt;/b&gt; : Object&lt;p class=&quot;sub-desc&quot;&gt;An object in which you may set the following attributes:&lt;ul&gt;
+     *         &lt;li&gt;&lt;b&gt;css&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;A CSS class name to add to the cell's TD element.&lt;/p&gt;&lt;/li&gt;
+     *         &lt;li&gt;&lt;b&gt;attr&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;An HTML attribute definition string to apply to the data container element &lt;i&gt;within&lt;/i&gt; the table cell
+     *         (e.g. 'style=&quot;color:red;&quot;').&lt;/p&gt;&lt;/li&gt;
+     *     &lt;/ul&gt;&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;r&lt;/b&gt; : Ext.data.Record&lt;p class=&quot;sub-desc&quot;&gt;The Record providing the data.&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;rowIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;The row index..&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;colIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;The column index.&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;store&lt;/b&gt; : Ext.data.Store&lt;p class=&quot;sub-desc&quot;&gt;The Store which is providing the data Model.&lt;/p&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+<span id='Ext-grid-ActionColumn-cfg-items'>    /**
+</span>     * @cfg {Array} items An Array which may contain multiple icon definitions, each element of which may contain:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;code&gt;icon&lt;/code&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;The url of an image to display as the clickable element 
+     * in the column.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;iconCls&lt;/code&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;A CSS class to apply to the icon image.
+     * To determine the class dynamically, configure the item with a &lt;code&gt;getClass&lt;/code&gt; function.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;getClass&lt;/code&gt; : Function&lt;div class=&quot;sub-desc&quot;&gt;A function which returns the CSS class to apply to the icon image.
+     * The function is passed the following parameters:&lt;ul&gt;
+     *     &lt;li&gt;&lt;b&gt;v&lt;/b&gt; : Object&lt;p class=&quot;sub-desc&quot;&gt;The value of the column's configured field (if any).&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;metadata&lt;/b&gt; : Object&lt;p class=&quot;sub-desc&quot;&gt;An object in which you may set the following attributes:&lt;ul&gt;
+     *         &lt;li&gt;&lt;b&gt;css&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;A CSS class name to add to the cell's TD element.&lt;/p&gt;&lt;/li&gt;
+     *         &lt;li&gt;&lt;b&gt;attr&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;An HTML attribute definition string to apply to the data container element &lt;i&gt;within&lt;/i&gt; the table cell
+     *         (e.g. 'style=&quot;color:red;&quot;').&lt;/p&gt;&lt;/li&gt;
+     *     &lt;/ul&gt;&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;r&lt;/b&gt; : Ext.data.Record&lt;p class=&quot;sub-desc&quot;&gt;The Record providing the data.&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;rowIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;The row index..&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;colIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;The column index.&lt;/p&gt;&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;store&lt;/b&gt; : Ext.data.Store&lt;p class=&quot;sub-desc&quot;&gt;The Store which is providing the data Model.&lt;/p&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;handler&lt;/code&gt; : Function&lt;div class=&quot;sub-desc&quot;&gt;A function called when the icon is clicked.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;scope&lt;/code&gt; : Scope&lt;div class=&quot;sub-desc&quot;&gt;The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which the 
+     * &lt;code&gt;handler&lt;/code&gt; and &lt;code&gt;getClass&lt;/code&gt; functions are executed. Fallback defaults are this Column's
+     * configured scope, then this Column.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;tooltip&lt;/code&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;A tooltip message to be displayed on hover. 
+     * {@link Ext.QuickTips#init Ext.QuickTips} must have been initialized.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+    header: '&amp;#160;',
+
+<span id='Ext-grid-ActionColumn-property-actionIdRe'>    actionIdRe: /x-action-col-(\d+)/,
+</span>    
+<span id='Ext-grid-ActionColumn-cfg-altText'>    /**
+</span>     * @cfg {String} altText The alt text to use for the image element. Defaults to &lt;tt&gt;''&lt;/tt&gt;.
+     */
+    altText: '',
+
+<span id='Ext-grid-ActionColumn-method-constructor'>    constructor: function(cfg) {
+</span>        var me = this,
+            items = cfg.items || (me.items = [me]),
+            l = items.length,
+            i,
+            item;
+
+        Ext.grid.ActionColumn.superclass.constructor.call(me, cfg);
+
+//      Renderer closure iterates through items creating an &lt;img&gt; element for each and tagging with an identifying 
+//      class name x-action-col-{n}
+        me.renderer = function(v, meta) {
+//          Allow a configured renderer to create initial value (And set the other values in the &quot;metadata&quot; argument!)
+            v = Ext.isFunction(cfg.renderer) ? cfg.renderer.apply(this, arguments)||'' : '';
+
+            meta.css += ' x-action-col-cell';
+            for (i = 0; i &lt; l; i++) {
+                item = items[i];
+                v += '&lt;img alt=&quot;' + (item.altText || me.altText) + '&quot; src=&quot;' + (item.icon || Ext.BLANK_IMAGE_URL) +
+                    '&quot; class=&quot;x-action-col-icon x-action-col-' + String(i) + ' ' + (item.iconCls || '') +
+                    ' ' + (Ext.isFunction(item.getClass) ? item.getClass.apply(item.scope||this.scope||this, arguments) : '') + '&quot;' +
+                    ((item.tooltip) ? ' ext:qtip=&quot;' + item.tooltip + '&quot;' : '') + ' /&gt;';
+            }
+            return v;
+        };
+    },
+
+<span id='Ext-grid-ActionColumn-method-destroy'>    destroy: function() {
+</span>        delete this.items;
+        delete this.renderer;
+        return Ext.grid.ActionColumn.superclass.destroy.apply(this, arguments);
+    },
+
+<span id='Ext-grid-ActionColumn-method-processEvent'>    /**
+</span>     * @private
+     * Process and refire events routed from the GridView's processEvent method.
+     * Also fires any configured click handlers. By default, cancels the mousedown event to prevent selection.
+     * Returns the event handler's status to allow cancelling of GridView's bubbling process.
+     */
+    processEvent : function(name, e, grid, rowIndex, colIndex){
+        var m = e.getTarget().className.match(this.actionIdRe),
+            item, fn;
+        if (m &amp;&amp; (item = this.items[parseInt(m[1], 10)])) {
+            if (name == 'click') {
+                (fn = item.handler || this.handler) &amp;&amp; fn.call(item.scope||this.scope||this, grid, rowIndex, colIndex, item, e);
+            } else if ((name == 'mousedown') &amp;&amp; (item.stopSelection !== false)) {
+                return false;
+            }
+        }
+        return Ext.grid.ActionColumn.superclass.processEvent.apply(this, arguments);
+    }
+});
+
+/*
+ * @property types
+ * @type Object
+ * @member Ext.grid.Column
+ * @static
+ * &lt;p&gt;An object containing predefined Column classes keyed by a mnemonic code which may be referenced
+ * by the {@link Ext.grid.ColumnModel#xtype xtype} config option of ColumnModel.&lt;/p&gt;
+ * &lt;p&gt;This contains the following properties&lt;/p&gt;&lt;div class=&quot;mdesc-details&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;gridcolumn : &lt;b&gt;{@link Ext.grid.Column Column constructor}&lt;/b&gt;&lt;/li&gt;
+ * &lt;li&gt;booleancolumn : &lt;b&gt;{@link Ext.grid.BooleanColumn BooleanColumn constructor}&lt;/b&gt;&lt;/li&gt;
+ * &lt;li&gt;numbercolumn : &lt;b&gt;{@link Ext.grid.NumberColumn NumberColumn constructor}&lt;/b&gt;&lt;/li&gt;
+ * &lt;li&gt;datecolumn : &lt;b&gt;{@link Ext.grid.DateColumn DateColumn constructor}&lt;/b&gt;&lt;/li&gt;
+ * &lt;li&gt;templatecolumn : &lt;b&gt;{@link Ext.grid.TemplateColumn TemplateColumn constructor}&lt;/b&gt;&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ */
+Ext.grid.Column.types = {
+    gridcolumn : Ext.grid.Column,
+    booleancolumn: Ext.grid.BooleanColumn,
+    numbercolumn: Ext.grid.NumberColumn,
+    datecolumn: Ext.grid.DateColumn,
+    templatecolumn: Ext.grid.TemplateColumn,
+    actioncolumn: Ext.grid.ActionColumn
+};</pre>
+</body>
+</html>

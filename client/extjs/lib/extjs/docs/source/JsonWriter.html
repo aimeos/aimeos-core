@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-data-JsonWriter'>/**
+</span> * @class Ext.data.JsonWriter
+ * @extends Ext.data.DataWriter
+ * DataWriter extension for writing an array or single {@link Ext.data.Record} object(s) in preparation for executing a remote CRUD action.
+ */
+Ext.data.JsonWriter = Ext.extend(Ext.data.DataWriter, {
+<span id='Ext-data-JsonWriter-cfg-encode'>    /**
+</span>     * @cfg {Boolean} encode &lt;p&gt;&lt;tt&gt;true&lt;/tt&gt; to {@link Ext.util.JSON#encode JSON encode} the
+     * {@link Ext.data.DataWriter#toHash hashed data} into a standard HTTP parameter named after this
+     * Reader's &lt;code&gt;meta.root&lt;/code&gt; property which, by default is imported from the associated Reader. Defaults to &lt;tt&gt;true&lt;/tt&gt;.&lt;/p&gt;
+     * &lt;p&gt;If set to &lt;code&gt;false&lt;/code&gt;, the hashed data is {@link Ext.util.JSON#encode JSON encoded}, along with
+     * the associated {@link Ext.data.Store}'s {@link Ext.data.Store#baseParams baseParams}, into the POST body.&lt;/p&gt;
+     * &lt;p&gt;When using {@link Ext.data.DirectProxy}, set this to &lt;tt&gt;false&lt;/tt&gt; since Ext.Direct.JsonProvider will perform
+     * its own json-encoding.  In addition, if you're using {@link Ext.data.HttpProxy}, setting to &lt;tt&gt;false&lt;/tt&gt;
+     * will cause HttpProxy to transmit data using the &lt;b&gt;jsonData&lt;/b&gt; configuration-params of {@link Ext.Ajax#request}
+     * instead of &lt;b&gt;params&lt;/b&gt;.&lt;/p&gt;
+     * &lt;p&gt;When using a {@link Ext.data.Store#restful} Store, some serverside frameworks are
+     * tuned to expect data through the jsonData mechanism.  In those cases, one will want to set &lt;b&gt;encode: &lt;tt&gt;false&lt;/tt&gt;&lt;/b&gt;, as in
+     * let the lower-level connection object (eg: Ext.Ajax) do the encoding.&lt;/p&gt;
+     */
+    encode : true,
+<span id='Ext-data-JsonWriter-cfg-encodeDelete'>    /**
+</span>     * @cfg {Boolean} encodeDelete False to send only the id to the server on delete, true to encode it in an object
+     * literal, eg: &lt;pre&gt;&lt;code&gt;
+{id: 1}
+ * &lt;/code&gt;&lt;/pre&gt; Defaults to &lt;tt&gt;false&lt;/tt&gt;
+     */
+    encodeDelete: false,
+    
+<span id='Ext-data-JsonWriter-method-constructor'>    constructor : function(config){
+</span>        Ext.data.JsonWriter.superclass.constructor.call(this, config);    
+    },
+
+<span id='Ext-data-JsonWriter-method-render'>    /**
+</span>     * &lt;p&gt;This method should not need to be called by application code, however it may be useful on occasion to
+     * override it, or augment it with an {@link Function#createInterceptor interceptor} or {@link Function#createSequence sequence}.&lt;/p&gt;
+     * &lt;p&gt;The provided implementation encodes the serialized data representing the Store's modified Records into the Ajax request's
+     * &lt;code&gt;params&lt;/code&gt; according to the &lt;code&gt;{@link #encode}&lt;/code&gt; setting.&lt;/p&gt;
+     * @param {Object} Ajax request params object to write into.
+     * @param {Object} baseParams as defined by {@link Ext.data.Store#baseParams}.  The baseParms must be encoded by the extending class, eg: {@link Ext.data.JsonWriter}, {@link Ext.data.XmlWriter}.
+     * @param {Object/Object[]} data Data object representing the serialized modified records from the Store. May be either a single object,
+     * or an Array of objects - user implementations must handle both cases.
+     */
+    render : function(params, baseParams, data) {
+        if (this.encode === true) {
+            // Encode here now.
+            Ext.apply(params, baseParams);
+            params[this.meta.root] = Ext.encode(data);
+        } else {
+            // defer encoding for some other layer, probably in {@link Ext.Ajax#request}.  Place everything into &quot;jsonData&quot; key.
+            var jdata = Ext.apply({}, baseParams);
+            jdata[this.meta.root] = data;
+            params.jsonData = jdata;
+        }
+    },
+<span id='Ext-data-JsonWriter-method-createRecord'>    /**
+</span>     * Implements abstract Ext.data.DataWriter#createRecord
+     * @protected
+     * @param {Ext.data.Record} rec
+     * @return {Object}
+     */
+    createRecord : function(rec) {
+       return this.toHash(rec);
+    },
+<span id='Ext-data-JsonWriter-method-updateRecord'>    /**
+</span>     * Implements abstract Ext.data.DataWriter#updateRecord
+     * @protected
+     * @param {Ext.data.Record} rec
+     * @return {Object}
+     */
+    updateRecord : function(rec) {
+        return this.toHash(rec);
+
+    },
+<span id='Ext-data-JsonWriter-method-destroyRecord'>    /**
+</span>     * Implements abstract Ext.data.DataWriter#destroyRecord
+     * @protected
+     * @param {Ext.data.Record} rec
+     * @return {Object}
+     */
+    destroyRecord : function(rec){
+        if(this.encodeDelete){
+            var data = {};
+            data[this.meta.idProperty] = rec.id;
+            return data;
+        }else{
+            return rec.id;
+        }
+    }
+});</pre>
+</body>
+</html>

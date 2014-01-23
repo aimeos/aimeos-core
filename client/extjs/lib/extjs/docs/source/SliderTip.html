@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-slider-Tip'>/**
+</span> * @class Ext.slider.Tip
+ * @extends Ext.Tip
+ * Simple plugin for using an Ext.Tip with a slider to show the slider value. Example usage:
+&lt;pre&gt;
+new Ext.Slider({
+    width: 214,
+    minValue: 0,
+    maxValue: 100,
+    plugins: new Ext.slider.Tip()
+});
+&lt;/pre&gt;
+ * Optionally provide your own tip text by overriding getText:
+ &lt;pre&gt;
+ new Ext.Slider({
+     width: 214,
+     minValue: 0,
+     maxValue: 100,
+     plugins: new Ext.slider.Tip({
+         getText: function(thumb){
+             return String.format('&lt;b&gt;{0}% complete&lt;/b&gt;', thumb.value);
+         }
+     })
+ });
+ &lt;/pre&gt;
+ */
+Ext.slider.Tip = Ext.extend(Ext.Tip, {
+<span id='Ext-slider-Tip-cfg-minWidth'>    minWidth: 10,
+</span><span id='Ext-slider-Tip-property-offsets'>    offsets : [0, -10],
+</span>    
+<span id='Ext-slider-Tip-method-init'>    init: function(slider) {
+</span>        slider.on({
+            scope    : this,
+            dragstart: this.onSlide,
+            drag     : this.onSlide,
+            dragend  : this.hide,
+            destroy  : this.destroy
+        });
+    },
+    
+<span id='Ext-slider-Tip-method-onSlide'>    /**
+</span>     * @private
+     * Called whenever a dragstart or drag event is received on the associated Thumb. 
+     * Aligns the Tip with the Thumb's new position.
+     * @param {Ext.slider.MultiSlider} slider The slider
+     * @param {Ext.EventObject} e The Event object
+     * @param {Ext.slider.Thumb} thumb The thumb that the Tip is attached to
+     */
+    onSlide : function(slider, e, thumb) {
+        this.show();
+        this.body.update(this.getText(thumb));
+        this.doAutoWidth();
+        this.el.alignTo(thumb.el, 'b-t?', this.offsets);
+    },
+
+<span id='Ext-slider-Tip-method-getText'>    /**
+</span>     * Used to create the text that appears in the Tip's body. By default this just returns
+     * the value of the Slider Thumb that the Tip is attached to. Override to customize.
+     * @param {Ext.slider.Thumb} thumb The Thumb that the Tip is attached to
+     * @return {String} The text to display in the tip
+     */
+    getText : function(thumb) {
+        return String(thumb.value);
+    }
+});
+
+//backwards compatibility - SliderTip used to be a ux before 3.2
+Ext.ux.SliderTip = Ext.slider.Tip;</pre>
+</body>
+</html>

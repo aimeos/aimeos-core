@@ -1,0 +1,45 @@
+/*
+This file is part of Ext JS 3.4
+
+Copyright (c) 2011-2013 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as
+published by the Free Software Foundation and appearing in the file LICENSE included in the
+packaging of this file.
+
+Please review the following information to ensure the GNU General Public License version 3.0
+requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department
+at http://www.sencha.com/contact.
+
+Build date: 2013-04-03 15:07:25
+*/
+#details-panel .x-panel-body {
+    padding: 10px;
+    background: #eee;
+    color: #555;
+}
+#details-panel a:link, #details-panel a:visited {
+    color: #369;
+}
+#details-panel h2 {
+    color: #369;
+    font-size: 15px;
+}
+#details-panel p {
+    margin-bottom: 5px;
+}
+
+.author-m {
+    background-image: url(../shared/icons/fam/user.gif) !important;
+}
+.author-f {
+    background-image: url(../shared/icons/fam/user_female.gif) !important;
+}
+.book {
+    background-image: url(../shared/icons/fam/book.png) !important;
+}

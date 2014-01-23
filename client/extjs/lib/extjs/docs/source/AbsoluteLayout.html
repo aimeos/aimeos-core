@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-layout-AbsoluteLayout'>/**
+</span> * @class Ext.layout.AbsoluteLayout
+ * @extends Ext.layout.AnchorLayout
+ * &lt;p&gt;This is a layout that inherits the anchoring of &lt;b&gt;{@link Ext.layout.AnchorLayout}&lt;/b&gt; and adds the
+ * ability for x/y positioning using the standard x and y component config options.&lt;/p&gt;
+ * &lt;p&gt;This class is intended to be extended or created via the &lt;tt&gt;&lt;b&gt;{@link Ext.Container#layout layout}&lt;/b&gt;&lt;/tt&gt;
+ * configuration property.  See &lt;tt&gt;&lt;b&gt;{@link Ext.Container#layout}&lt;/b&gt;&lt;/tt&gt; for additional details.&lt;/p&gt;
+ * &lt;p&gt;Example usage:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var form = new Ext.form.FormPanel({
+    title: 'Absolute Layout',
+    layout:'absolute',
+    layoutConfig: {
+        // layout-specific configs go here
+        extraCls: 'x-abs-layout-item',
+    },
+    baseCls: 'x-plain',
+    url:'save-form.php',
+    defaultType: 'textfield',
+    items: [{
+        x: 0,
+        y: 5,
+        xtype:'label',
+        text: 'Send To:'
+    },{
+        x: 60,
+        y: 0,
+        name: 'to',
+        anchor:'100%'  // anchor width by percentage
+    },{
+        x: 0,
+        y: 35,
+        xtype:'label',
+        text: 'Subject:'
+    },{
+        x: 60,
+        y: 30,
+        name: 'subject',
+        anchor: '100%'  // anchor width by percentage
+    },{
+        x:0,
+        y: 60,
+        xtype: 'textarea',
+        name: 'msg',
+        anchor: '100% 100%'  // anchor width and height
+    }]
+});
+&lt;/code&gt;&lt;/pre&gt;
+ */
+Ext.layout.AbsoluteLayout = Ext.extend(Ext.layout.AnchorLayout, {
+
+<span id='Ext-layout-AbsoluteLayout-cfg-extraCls'>    extraCls: 'x-abs-layout-item',
+</span>
+<span id='Ext-layout-AbsoluteLayout-property-type'>    type: 'absolute',
+</span>
+<span id='Ext-layout-AbsoluteLayout-method-onLayout'>    onLayout : function(ct, target){
+</span>        target.position();
+        this.paddingLeft = target.getPadding('l');
+        this.paddingTop = target.getPadding('t');
+        Ext.layout.AbsoluteLayout.superclass.onLayout.call(this, ct, target);
+    },
+
+<span id='Ext-layout-AbsoluteLayout-method-adjustWidthAnchor'>    // private
+</span>    adjustWidthAnchor : function(value, comp){
+        return value ? value - comp.getPosition(true)[0] + this.paddingLeft : value;
+    },
+
+<span id='Ext-layout-AbsoluteLayout-method-adjustHeightAnchor'>    // private
+</span>    adjustHeightAnchor : function(value, comp){
+        return  value ? value - comp.getPosition(true)[1] + this.paddingTop : value;
+    }
+<span id='Ext-layout-AbsoluteLayout-property-activeItem'>    /**
+</span>     * @property activeItem
+     * @hide
+     */
+});
+Ext.Container.LAYOUTS['absolute'] = Ext.layout.AbsoluteLayout;
+</pre>
+</body>
+</html>

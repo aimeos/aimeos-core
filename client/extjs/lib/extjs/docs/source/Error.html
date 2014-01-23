@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-method-handleError'>/**
+</span> * Framework-wide error-handler.  Developers can override this method to provide
+ * custom exception-handling.  Framework errors will often extend from the base
+ * Ext.Error class.
+ * @param {Object/Error} e The thrown exception object.
+ * @member Ext
+ */
+Ext.handleError = function(e) {
+    throw e;
+};
+
+<span id='Ext-Error'>/**
+</span> * @class Ext.Error
+ * @extends Error
+ * &lt;p&gt;A base error class. Future implementations are intended to provide more
+ * robust error handling throughout the framework (&lt;b&gt;in the debug build only&lt;/b&gt;)
+ * to check for common errors and problems. The messages issued by this class
+ * will aid error checking. Error checks will be automatically removed in the
+ * production build so that performance is not negatively impacted.&lt;/p&gt;
+ * &lt;p&gt;Some sample messages currently implemented:&lt;/p&gt;&lt;pre&gt;
+&quot;DataProxy attempted to execute an API-action but found an undefined
+url / function. Please review your Proxy url/api-configuration.&quot;
+ * &lt;/pre&gt;&lt;pre&gt;
+&quot;Could not locate your &quot;root&quot; property in your server response.
+Please review your JsonReader config to ensure the config-property
+&quot;root&quot; matches the property your server-response.  See the JsonReader
+docs for additional assistance.&quot;
+ * &lt;/pre&gt;
+ * &lt;p&gt;An example of the code used for generating error messages:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+try {
+    generateError({
+        foo: 'bar'
+    });
+}
+catch (e) {
+    console.error(e);
+}
+function generateError(data) {
+    throw new Ext.Error('foo-error', data);
+}
+ * &lt;/code&gt;&lt;/pre&gt;
+ * @param {String} message
+ */
+Ext.Error = function(message) {
+    // Try to read the message from Ext.Error.lang
+    this.message = (this.lang[message]) ? this.lang[message] : message;
+};
+
+Ext.Error.prototype = new Error();
+Ext.apply(Ext.Error.prototype, {
+    // protected.  Extensions place their error-strings here.
+    lang: {},
+
+    name: 'Ext.Error',
+<span id='Ext-Error-method-getName'>    /**
+</span>     * getName
+     * @return {String}
+     */
+    getName : function() {
+        return this.name;
+    },
+<span id='Ext-Error-method-getMessage'>    /**
+</span>     * getMessage
+     * @return {String}
+     */
+    getMessage : function() {
+        return this.message;
+    },
+<span id='Ext-Error-method-toJson'>    /**
+</span>     * toJson
+     * @return {String}
+     */
+    toJson : function() {
+        return Ext.encode(this);
+    }
+});
+</pre>
+</body>
+</html>

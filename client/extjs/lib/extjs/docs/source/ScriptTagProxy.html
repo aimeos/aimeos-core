@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-data-ScriptTagProxy-method-constructor'><span id='Ext-data-ScriptTagProxy'>/**
+</span></span> * @class Ext.data.ScriptTagProxy
+ * @extends Ext.data.DataProxy
+ * An implementation of Ext.data.DataProxy that reads a data object from a URL which may be in a domain
+ * other than the originating domain of the running page.&lt;br&gt;
+ * &lt;p&gt;
+ * &lt;b&gt;Note that if you are retrieving data from a page that is in a domain that is NOT the same as the originating domain
+ * of the running page, you must use this class, rather than HttpProxy.&lt;/b&gt;&lt;br&gt;
+ * &lt;p&gt;
+ * The content passed back from a server resource requested by a ScriptTagProxy &lt;b&gt;must&lt;/b&gt; be executable JavaScript
+ * source code because it is used as the source inside a &amp;lt;script&gt; tag.&lt;br&gt;
+ * &lt;p&gt;
+ * In order for the browser to process the returned data, the server must wrap the data object
+ * with a call to a callback function, the name of which is passed as a parameter by the ScriptTagProxy.
+ * Below is a Java example for a servlet which returns data for either a ScriptTagProxy, or an HttpProxy
+ * depending on whether the callback name was passed:
+ * &lt;p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+boolean scriptTag = false;
+String cb = request.getParameter(&quot;callback&quot;);
+if (cb != null) {
+    scriptTag = true;
+    response.setContentType(&quot;text/javascript&quot;);
+} else {
+    response.setContentType(&quot;application/x-json&quot;);
+}
+Writer out = response.getWriter();
+if (scriptTag) {
+    out.write(cb + &quot;(&quot;);
+}
+out.print(dataBlock.toJsonString());
+if (scriptTag) {
+    out.write(&quot;);&quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Below is a PHP example to do the same thing:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+$callback = $_REQUEST['callback'];
+
+// Create the output object.
+$output = array('a' =&gt; 'Apple', 'b' =&gt; 'Banana');
+
+//start output
+if ($callback) {
+    header('Content-Type: text/javascript');
+    echo $callback . '(' . json_encode($output) . ');';
+} else {
+    header('Content-Type: application/x-json');
+    echo json_encode($output);
+}
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Below is the ASP.Net code to do the same thing:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+String jsonString = &quot;{success: true}&quot;;
+String cb = Request.Params.Get(&quot;callback&quot;);
+String responseString = &quot;&quot;;
+if (!String.IsNullOrEmpty(cb)) {
+    responseString = cb + &quot;(&quot; + jsonString + &quot;)&quot;;
+} else {
+    responseString = jsonString;
+}
+Response.Write(responseString);
+&lt;/code&gt;&lt;/pre&gt;
+ *
+ * @constructor
+ * @param {Object} config A configuration object.
+ */
+Ext.data.ScriptTagProxy = function(config){
+    Ext.apply(this, config);
+
+    Ext.data.ScriptTagProxy.superclass.constructor.call(this, config);
+
+    this.head = document.getElementsByTagName(&quot;head&quot;)[0];
+
+<span id='Ext-data-ScriptTagProxy-event-loadexception'>    /**
+</span>     * @event loadexception
+     * &lt;b&gt;Deprecated&lt;/b&gt; in favor of 'exception' event.
+     * Fires if an exception occurs in the Proxy during data loading.  This event can be fired for one of two reasons:
+     * &lt;ul&gt;&lt;li&gt;&lt;b&gt;The load call timed out.&lt;/b&gt;  This means the load callback did not execute within the time limit
+     * specified by {@link #timeout}.  In this case, this event will be raised and the
+     * fourth parameter (read error) will be null.&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;The load succeeded but the reader could not read the response.&lt;/b&gt;  This means the server returned
+     * data, but the configured Reader threw an error while reading the data.  In this case, this event will be
+     * raised and the caught error will be passed along as the fourth parameter of this event.&lt;/li&gt;&lt;/ul&gt;
+     * Note that this event is also relayed through {@link Ext.data.Store}, so you can listen for it directly
+     * on any Store instance.
+     * @param {Object} this
+     * @param {Object} options The loading options that were specified (see {@link #load} for details).  If the load
+     * call timed out, this parameter will be null.
+     * @param {Object} arg The callback's arg object passed to the {@link #load} function
+     * @param {Error} e The JavaScript Error object caught if the configured Reader could not read the data.
+     * If the remote request returns success: false, this parameter will be null.
+     */
+};
+
+Ext.data.ScriptTagProxy.TRANS_ID = 1000;
+
+Ext.extend(Ext.data.ScriptTagProxy, Ext.data.DataProxy, {
+<span id='Ext-data-ScriptTagProxy-cfg-url'>    /**
+</span>     * @cfg {String} url The URL from which to request the data object.
+     */
+<span id='Ext-data-ScriptTagProxy-cfg-timeout'>    /**
+</span>     * @cfg {Number} timeout (optional) The number of milliseconds to wait for a response. Defaults to 30 seconds.
+     */
+    timeout : 30000,
+<span id='Ext-data-ScriptTagProxy-cfg-callbackParam'>    /**
+</span>     * @cfg {String} callbackParam (Optional) The name of the parameter to pass to the server which tells
+     * the server the name of the callback function set up by the load call to process the returned data object.
+     * Defaults to &quot;callback&quot;.&lt;p&gt;The server-side processing must read this parameter value, and generate
+     * javascript output which calls this named function passing the data object as its only parameter.
+     */
+    callbackParam : &quot;callback&quot;,
+<span id='Ext-data-ScriptTagProxy-cfg-nocache'>    /**
+</span>     *  @cfg {Boolean} nocache (optional) Defaults to true. Disable caching by adding a unique parameter
+     * name to the request.
+     */
+    nocache : true,
+
+<span id='Ext-data-ScriptTagProxy-method-doRequest'>    /**
+</span>     * HttpProxy implementation of DataProxy#doRequest
+     * @param {String} action
+     * @param {Ext.data.Record/Ext.data.Record[]} rs If action is &lt;tt&gt;read&lt;/tt&gt;, rs will be null
+     * @param {Object} params An object containing properties which are to be used as HTTP parameters
+     * for the request to the remote server.
+     * @param {Ext.data.DataReader} reader The Reader object which converts the data
+     * object into a block of Ext.data.Records.
+     * @param {Function} callback The function into which to pass the block of Ext.data.Records.
+     * The function must be passed &lt;ul&gt;
+     * &lt;li&gt;The Record block object&lt;/li&gt;
+     * &lt;li&gt;The &quot;arg&quot; argument from the load function&lt;/li&gt;
+     * &lt;li&gt;A boolean success indicator&lt;/li&gt;
+     * &lt;/ul&gt;
+     * @param {Object} scope The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the callback function is executed. Defaults to the browser window.
+     * @param {Object} arg An optional argument which is passed to the callback as its second parameter.
+     */
+    doRequest : function(action, rs, params, reader, callback, scope, arg) {
+        var p = Ext.urlEncode(Ext.apply(params, this.extraParams));
+
+        var url = this.buildUrl(action, rs);
+        if (!url) {
+            throw new Ext.data.Api.Error('invalid-url', url);
+        }
+        url = Ext.urlAppend(url, p);
+
+        if(this.nocache){
+            url = Ext.urlAppend(url, '_dc=' + (new Date().getTime()));
+        }
+        var transId = ++Ext.data.ScriptTagProxy.TRANS_ID;
+        var trans = {
+            id : transId,
+            action: action,
+            cb : &quot;stcCallback&quot;+transId,
+            scriptId : &quot;stcScript&quot;+transId,
+            params : params,
+            arg : arg,
+            url : url,
+            callback : callback,
+            scope : scope,
+            reader : reader
+        };
+        window[trans.cb] = this.createCallback(action, rs, trans);
+        url += String.format(&quot;&amp;{0}={1}&quot;, this.callbackParam, trans.cb);
+        if(this.autoAbort !== false){
+            this.abort();
+        }
+
+        trans.timeoutId = this.handleFailure.defer(this.timeout, this, [trans]);
+
+        var script = document.createElement(&quot;script&quot;);
+        script.setAttribute(&quot;src&quot;, url);
+        script.setAttribute(&quot;type&quot;, &quot;text/javascript&quot;);
+        script.setAttribute(&quot;id&quot;, trans.scriptId);
+        this.head.appendChild(script);
+
+        this.trans = trans;
+    },
+
+    // @private createCallback
+    createCallback : function(action, rs, trans) {
+        var self = this;
+        return function(res) {
+            self.trans = false;
+            self.destroyTrans(trans, true);
+            if (action === Ext.data.Api.actions.read) {
+                self.onRead.call(self, action, trans, res);
+            } else {
+                self.onWrite.call(self, action, trans, res, rs);
+            }
+        };
+    },
+<span id='Ext-data-ScriptTagProxy-method-onRead'>    /**
+</span>     * Callback for read actions
+     * @param {String} action [Ext.data.Api.actions.create|read|update|destroy]
+     * @param {Object} trans The request transaction object
+     * @param {Object} res The server response
+     * @protected
+     */
+    onRead : function(action, trans, res) {
+        var result;
+        try {
+            result = trans.reader.readRecords(res);
+        }catch(e){
+            // @deprecated: fire loadexception
+            this.fireEvent(&quot;loadexception&quot;, this, trans, res, e);
+
+            this.fireEvent('exception', this, 'response', action, trans, res, e);
+            trans.callback.call(trans.scope||window, null, trans.arg, false);
+            return;
+        }
+        if (result.success === false) {
+            // @deprecated: fire old loadexception for backwards-compat.
+            this.fireEvent('loadexception', this, trans, res);
+
+            this.fireEvent('exception', this, 'remote', action, trans, res, null);
+        } else {
+            this.fireEvent(&quot;load&quot;, this, res, trans.arg);
+        }
+        trans.callback.call(trans.scope||window, result, trans.arg, result.success);
+    },
+<span id='Ext-data-ScriptTagProxy-method-onWrite'>    /**
+</span>     * Callback for write actions
+     * @param {String} action [Ext.data.Api.actions.create|read|update|destroy]
+     * @param {Object} trans The request transaction object
+     * @param {Object} res The server response
+     * @protected
+     */
+    onWrite : function(action, trans, response, rs) {
+        var reader = trans.reader;
+        try {
+            // though we already have a response object here in STP, run through readResponse to catch any meta-data exceptions.
+            var res = reader.readResponse(action, response);
+        } catch (e) {
+            this.fireEvent('exception', this, 'response', action, trans, res, e);
+            trans.callback.call(trans.scope||window, null, res, false);
+            return;
+        }
+        if(!res.success === true){
+            this.fireEvent('exception', this, 'remote', action, trans, res, rs);
+            trans.callback.call(trans.scope||window, null, res, false);
+            return;
+        }
+        this.fireEvent(&quot;write&quot;, this, action, res.data, res, rs, trans.arg );
+        trans.callback.call(trans.scope||window, res.data, res, true);
+    },
+
+    // private
+    isLoading : function(){
+        return this.trans ? true : false;
+    },
+
+<span id='Ext-data-ScriptTagProxy-method-abort'>    /**
+</span>     * Abort the current server request.
+     */
+    abort : function(){
+        if(this.isLoading()){
+            this.destroyTrans(this.trans);
+        }
+    },
+
+    // private
+    destroyTrans : function(trans, isLoaded){
+        this.head.removeChild(document.getElementById(trans.scriptId));
+        clearTimeout(trans.timeoutId);
+        if(isLoaded){
+            window[trans.cb] = undefined;
+            try{
+                delete window[trans.cb];
+            }catch(e){}
+        }else{
+            // if hasn't been loaded, wait for load to remove it to prevent script error
+            window[trans.cb] = function(){
+                window[trans.cb] = undefined;
+                try{
+                    delete window[trans.cb];
+                }catch(e){}
+            };
+        }
+    },
+
+    // private
+    handleFailure : function(trans){
+        this.trans = false;
+        this.destroyTrans(trans, false);
+        if (trans.action === Ext.data.Api.actions.read) {
+            // @deprecated firing loadexception
+            this.fireEvent(&quot;loadexception&quot;, this, null, trans.arg);
+        }
+
+        this.fireEvent('exception', this, 'response', trans.action, {
+            response: null,
+            options: trans.arg
+        });
+        trans.callback.call(trans.scope||window, null, trans.arg, false);
+    },
+
+    // inherit docs
+    destroy: function(){
+        this.abort();
+        Ext.data.ScriptTagProxy.superclass.destroy.call(this);
+    }
+});</pre>
+</body>
+</html>

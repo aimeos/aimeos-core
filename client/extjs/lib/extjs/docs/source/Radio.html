@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-form-Radio-method-constructor'><span id='Ext-form-Radio'>/**
+</span></span> * @class Ext.form.Radio
+ * @extends Ext.form.Checkbox
+ * Single radio field.  Same as Checkbox, but provided as a convenience for automatically setting the input type.
+ * Radio grouping is handled automatically by the browser if you give each radio in a group the same name.
+ * @constructor
+ * Creates a new Radio
+ * @param {Object} config Configuration options
+ * @xtype radio
+ */
+Ext.form.Radio = Ext.extend(Ext.form.Checkbox, {
+<span id='Ext-form-Radio-cfg-inputType'>    inputType: 'radio',
+</span>
+<span id='Ext-form-Radio-method-markInvalid'>    /**
+</span>     * Overridden and disabled. The editor element does not support standard valid/invalid marking. @hide
+     * @method
+     */
+    markInvalid : Ext.emptyFn,
+<span id='Ext-form-Radio-method-clearInvalid'>    /**
+</span>     * Overridden and disabled. The editor element does not support standard valid/invalid marking. @hide
+     * @method
+     */
+    clearInvalid : Ext.emptyFn,
+
+<span id='Ext-form-Radio-method-getGroupValue'>    /**
+</span>     * If this radio is part of a group, it will return the selected value
+     * @return {String}
+     */
+    getGroupValue : function(){
+    	var p = this.el.up('form') || Ext.getBody();
+        var c = p.child('input[name=&quot;'+this.el.dom.name+'&quot;]:checked', true);
+        return c ? c.value : null;
+    },
+
+<span id='Ext-form-Radio-method-setValue'>    /**
+</span>     * Sets either the checked/unchecked status of this Radio, or, if a string value
+     * is passed, checks a sibling Radio of the same name whose value is the value specified.
+     * @param value {String/Boolean} Checked value, or the value of the sibling radio button to check.
+     * @return {Ext.form.Field} this
+     */
+    setValue : function(v){
+    	var checkEl,
+            els,
+            radio;
+    	if (typeof v == 'boolean') {
+            Ext.form.Radio.superclass.setValue.call(this, v);
+        } else if (this.rendered) {
+            checkEl = this.getCheckEl();
+            radio = checkEl.child('input[name=&quot;' + this.el.dom.name + '&quot;][value=&quot;' + v + '&quot;]', true);
+            if(radio){
+                Ext.getCmp(radio.id).setValue(true);
+            }
+        }
+        if(this.rendered &amp;&amp; this.checked){
+            checkEl = checkEl || this.getCheckEl();
+            els = this.getCheckEl().select('input[name=&quot;' + this.el.dom.name + '&quot;]');
+			els.each(function(el){
+				if(el.dom.id != this.id){
+					Ext.getCmp(el.dom.id).setValue(false);
+				}
+			}, this);
+        }
+        return this;
+    },
+
+<span id='Ext-form-Radio-method-getCheckEl'>    // private
+</span>    getCheckEl: function(){
+        if(this.inGroup){
+            return this.el.up('.x-form-radio-group');
+        }
+        return this.el.up('form') || Ext.getBody();
+    }
+});
+Ext.reg('radio', Ext.form.Radio);
+</pre>
+</body>
+</html>

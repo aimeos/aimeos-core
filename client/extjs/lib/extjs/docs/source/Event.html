@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.Direct.Event = function(config){
+    Ext.apply(this, config);
+};
+
+Ext.Direct.Event.prototype = {
+    status: true,
+    getData: function(){
+        return this.data;
+    }
+};
+
+Ext.Direct.RemotingEvent = Ext.extend(Ext.Direct.Event, {
+    type: 'rpc',
+    getTransaction: function(){
+        return this.transaction || Ext.Direct.getTransaction(this.tid);
+    }
+});
+
+Ext.Direct.ExceptionEvent = Ext.extend(Ext.Direct.RemotingEvent, {
+    status: false,
+    type: 'exception'
+});
+
+Ext.Direct.eventTypes = {
+    'rpc':  Ext.Direct.RemotingEvent,
+    'event':  Ext.Direct.Event,
+    'exception':  Ext.Direct.ExceptionEvent
+};
+</pre>
+</body>
+</html>

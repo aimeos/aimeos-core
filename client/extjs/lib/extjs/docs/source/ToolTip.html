@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ToolTip-method-constructor'><span id='Ext-ToolTip'>/**
+</span></span> * @class Ext.ToolTip
+ * @extends Ext.Tip
+ * A standard tooltip implementation for providing additional information when hovering over a target element.
+ * @xtype tooltip
+ * @constructor
+ * Create a new Tooltip
+ * @param {Object} config The configuration options
+ */
+Ext.ToolTip = Ext.extend(Ext.Tip, {
+<span id='Ext-ToolTip-property-triggerElement'>    /**
+</span>     * When a Tooltip is configured with the &lt;code&gt;{@link #delegate}&lt;/code&gt;
+     * option to cause selected child elements of the &lt;code&gt;{@link #target}&lt;/code&gt;
+     * Element to each trigger a seperate show event, this property is set to
+     * the DOM element which triggered the show.
+     * @type DOMElement
+     * @property triggerElement
+     */
+<span id='Ext-ToolTip-cfg-target'>    /**
+</span>     * @cfg {Mixed} target The target HTMLElement, Ext.Element or id to monitor
+     * for mouseover events to trigger showing this ToolTip.
+     */
+<span id='Ext-ToolTip-cfg-autoHide'>    /**
+</span>     * @cfg {Boolean} autoHide True to automatically hide the tooltip after the
+     * mouse exits the target element or after the &lt;code&gt;{@link #dismissDelay}&lt;/code&gt;
+     * has expired if set (defaults to true).  If &lt;code&gt;{@link closable} = true&lt;/code&gt;
+     * a close tool button will be rendered into the tooltip header.
+     */
+<span id='Ext-ToolTip-cfg-showDelay'>    /**
+</span>     * @cfg {Number} showDelay Delay in milliseconds before the tooltip displays
+     * after the mouse enters the target element (defaults to 500)
+     */
+    showDelay : 500,
+<span id='Ext-ToolTip-cfg-hideDelay'>    /**
+</span>     * @cfg {Number} hideDelay Delay in milliseconds after the mouse exits the
+     * target element but before the tooltip actually hides (defaults to 200).
+     * Set to 0 for the tooltip to hide immediately.
+     */
+    hideDelay : 200,
+<span id='Ext-ToolTip-cfg-dismissDelay'>    /**
+</span>     * @cfg {Number} dismissDelay Delay in milliseconds before the tooltip
+     * automatically hides (defaults to 5000). To disable automatic hiding, set
+     * dismissDelay = 0.
+     */
+    dismissDelay : 5000,
+<span id='Ext-ToolTip-cfg-mouseOffset'>    /**
+</span>     * @cfg {Array} mouseOffset An XY offset from the mouse position where the
+     * tooltip should be shown (defaults to [15,18]).
+     */
+<span id='Ext-ToolTip-cfg-trackMouse'>    /**
+</span>     * @cfg {Boolean} trackMouse True to have the tooltip follow the mouse as it
+     * moves over the target element (defaults to false).
+     */
+    trackMouse : false,
+<span id='Ext-ToolTip-cfg-anchorToTarget'>    /**
+</span>     * @cfg {Boolean} anchorToTarget True to anchor the tooltip to the target
+     * element, false to anchor it relative to the mouse coordinates (defaults
+     * to true).  When &lt;code&gt;anchorToTarget&lt;/code&gt; is true, use
+     * &lt;code&gt;{@link #defaultAlign}&lt;/code&gt; to control tooltip alignment to the
+     * target element.  When &lt;code&gt;anchorToTarget&lt;/code&gt; is false, use
+     * &lt;code&gt;{@link #anchorPosition}&lt;/code&gt; instead to control alignment.
+     */
+    anchorToTarget : true,
+<span id='Ext-ToolTip-cfg-anchorOffset'>    /**
+</span>     * @cfg {Number} anchorOffset A numeric pixel value used to offset the
+     * default position of the anchor arrow (defaults to 0).  When the anchor
+     * position is on the top or bottom of the tooltip, &lt;code&gt;anchorOffset&lt;/code&gt;
+     * will be used as a horizontal offset.  Likewise, when the anchor position
+     * is on the left or right side, &lt;code&gt;anchorOffset&lt;/code&gt; will be used as
+     * a vertical offset.
+     */
+    anchorOffset : 0,
+<span id='Ext-ToolTip-cfg-delegate'>    /**
+</span>     * @cfg {String} delegate &lt;p&gt;Optional. A {@link Ext.DomQuery DomQuery}
+     * selector which allows selection of individual elements within the
+     * &lt;code&gt;{@link #target}&lt;/code&gt; element to trigger showing and hiding the
+     * ToolTip as the mouse moves within the target.&lt;/p&gt;
+     * &lt;p&gt;When specified, the child element of the target which caused a show
+     * event is placed into the &lt;code&gt;{@link #triggerElement}&lt;/code&gt; property
+     * before the ToolTip is shown.&lt;/p&gt;
+     * &lt;p&gt;This may be useful when a Component has regular, repeating elements
+     * in it, each of which need a Tooltip which contains information specific
+     * to that element. For example:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+var myGrid = new Ext.grid.gridPanel(gridConfig);
+myGrid.on('render', function(grid) {
+    var store = grid.getStore();  // Capture the Store.
+    var view = grid.getView();    // Capture the GridView.
+    myGrid.tip = new Ext.ToolTip({
+        target: view.mainBody,    // The overall target element.
+        delegate: '.x-grid3-row', // Each grid row causes its own seperate show and hide.
+        trackMouse: true,         // Moving within the row should not hide the tip.
+        renderTo: document.body,  // Render immediately so that tip.body can be
+                                  //  referenced prior to the first show.
+        listeners: {              // Change content dynamically depending on which element
+                                  //  triggered the show.
+            beforeshow: function updateTipBody(tip) {
+                var rowIndex = view.findRowIndex(tip.triggerElement);
+                tip.body.dom.innerHTML = 'Over Record ID ' + store.getAt(rowIndex).id;
+            }
+        }
+    });
+});
+     *&lt;/code&gt;&lt;/pre&gt;
+     */
+
+<span id='Ext-ToolTip-property-targetCounter'>    // private
+</span>    targetCounter : 0,
+
+<span id='Ext-ToolTip-property-constrainPosition'>    constrainPosition : false,
+</span>
+<span id='Ext-ToolTip-method-initComponent'>    // private
+</span>    initComponent : function(){
+        Ext.ToolTip.superclass.initComponent.call(this);
+        this.lastActive = new Date();
+        this.initTarget(this.target);
+        this.origAnchor = this.anchor;
+    },
+
+<span id='Ext-ToolTip-method-onRender'>    // private
+</span>    onRender : function(ct, position){
+        Ext.ToolTip.superclass.onRender.call(this, ct, position);
+        this.anchorCls = 'x-tip-anchor-' + this.getAnchorPosition();
+        this.anchorEl = this.el.createChild({
+            cls: 'x-tip-anchor ' + this.anchorCls
+        });
+    },
+
+<span id='Ext-ToolTip-method-afterRender'>    // private
+</span>    afterRender : function(){
+        Ext.ToolTip.superclass.afterRender.call(this);
+        this.anchorEl.setStyle('z-index', this.el.getZIndex() + 1).setVisibilityMode(Ext.Element.DISPLAY);
+    },
+
+<span id='Ext-ToolTip-method-initTarget'>    /**
+</span>     * Binds this ToolTip to the specified element. The tooltip will be displayed when the mouse moves over the element.
+     * @param {Mixed} t The Element, HtmlElement, or ID of an element to bind to
+     */
+    initTarget : function(target){
+        var t;
+        if((t = Ext.get(target))){
+            if(this.target){
+                var tg = Ext.get(this.target);
+                this.mun(tg, 'mouseover', this.onTargetOver, this);
+                this.mun(tg, 'mouseout', this.onTargetOut, this);
+                this.mun(tg, 'mousemove', this.onMouseMove, this);
+            }
+            this.mon(t, {
+                mouseover: this.onTargetOver,
+                mouseout: this.onTargetOut,
+                mousemove: this.onMouseMove,
+                scope: this
+            });
+            this.target = t;
+        }
+        if(this.anchor){
+            this.anchorTarget = this.target;
+        }
+    },
+
+<span id='Ext-ToolTip-method-onMouseMove'>    // private
+</span>    onMouseMove : function(e){
+        var t = this.delegate ? e.getTarget(this.delegate) : this.triggerElement = true;
+        if (t) {
+            this.targetXY = e.getXY();
+            if (t === this.triggerElement) {
+                if(!this.hidden &amp;&amp; this.trackMouse){
+                    this.setPagePosition(this.getTargetXY());
+                }
+            } else {
+                this.hide();
+                this.lastActive = new Date(0);
+                this.onTargetOver(e);
+            }
+        } else if (!this.closable &amp;&amp; this.isVisible()) {
+            this.hide();
+        }
+    },
+
+<span id='Ext-ToolTip-method-getTargetXY'>    // private
+</span>    getTargetXY : function(){
+        if(this.delegate){
+            this.anchorTarget = this.triggerElement;
+        }
+        if(this.anchor){
+            this.targetCounter++;
+            var offsets = this.getOffsets(),
+                xy = (this.anchorToTarget &amp;&amp; !this.trackMouse) ? this.el.getAlignToXY(this.anchorTarget, this.getAnchorAlign()) : this.targetXY,
+                dw = Ext.lib.Dom.getViewWidth() - 5,
+                dh = Ext.lib.Dom.getViewHeight() - 5,
+                de = document.documentElement,
+                bd = document.body,
+                scrollX = (de.scrollLeft || bd.scrollLeft || 0) + 5,
+                scrollY = (de.scrollTop || bd.scrollTop || 0) + 5,
+                axy = [xy[0] + offsets[0], xy[1] + offsets[1]],
+                sz = this.getSize();
+                
+            this.anchorEl.removeClass(this.anchorCls);
+
+            if(this.targetCounter &lt; 2){
+                if(axy[0] &lt; scrollX){
+                    if(this.anchorToTarget){
+                        this.defaultAlign = 'l-r';
+                        if(this.mouseOffset){this.mouseOffset[0] *= -1;}
+                    }
+                    this.anchor = 'left';
+                    return this.getTargetXY();
+                }
+                if(axy[0]+sz.width &gt; dw){
+                    if(this.anchorToTarget){
+                        this.defaultAlign = 'r-l';
+                        if(this.mouseOffset){this.mouseOffset[0] *= -1;}
+                    }
+                    this.anchor = 'right';
+                    return this.getTargetXY();
+                }
+                if(axy[1] &lt; scrollY){
+                    if(this.anchorToTarget){
+                        this.defaultAlign = 't-b';
+                        if(this.mouseOffset){this.mouseOffset[1] *= -1;}
+                    }
+                    this.anchor = 'top';
+                    return this.getTargetXY();
+                }
+                if(axy[1]+sz.height &gt; dh){
+                    if(this.anchorToTarget){
+                        this.defaultAlign = 'b-t';
+                        if(this.mouseOffset){this.mouseOffset[1] *= -1;}
+                    }
+                    this.anchor = 'bottom';
+                    return this.getTargetXY();
+                }
+            }
+
+            this.anchorCls = 'x-tip-anchor-'+this.getAnchorPosition();
+            this.anchorEl.addClass(this.anchorCls);
+            this.targetCounter = 0;
+            return axy;
+        }else{
+            var mouseOffset = this.getMouseOffset();
+            return [this.targetXY[0]+mouseOffset[0], this.targetXY[1]+mouseOffset[1]];
+        }
+    },
+
+<span id='Ext-ToolTip-method-getMouseOffset'>    getMouseOffset : function(){
+</span>        var offset = this.anchor ? [0,0] : [15,18];
+        if(this.mouseOffset){
+            offset[0] += this.mouseOffset[0];
+            offset[1] += this.mouseOffset[1];
+        }
+        return offset;
+    },
+
+<span id='Ext-ToolTip-method-getAnchorPosition'>    // private
+</span>    getAnchorPosition : function(){
+        if(this.anchor){
+            this.tipAnchor = this.anchor.charAt(0);
+        }else{
+            var m = this.defaultAlign.match(/^([a-z]+)-([a-z]+)(\?)?$/);
+            if(!m){
+               throw 'AnchorTip.defaultAlign is invalid';
+            }
+            this.tipAnchor = m[1].charAt(0);
+        }
+
+        switch(this.tipAnchor){
+            case 't': return 'top';
+            case 'b': return 'bottom';
+            case 'r': return 'right';
+        }
+        return 'left';
+    },
+
+<span id='Ext-ToolTip-method-getAnchorAlign'>    // private
+</span>    getAnchorAlign : function(){
+        switch(this.anchor){
+            case 'top'  : return 'tl-bl';
+            case 'left' : return 'tl-tr';
+            case 'right': return 'tr-tl';
+            default     : return 'bl-tl';
+        }
+    },
+
+<span id='Ext-ToolTip-method-getOffsets'>    // private
+</span>    getOffsets : function(){
+        var offsets, 
+            ap = this.getAnchorPosition().charAt(0);
+        if(this.anchorToTarget &amp;&amp; !this.trackMouse){
+            switch(ap){
+                case 't':
+                    offsets = [0, 9];
+                    break;
+                case 'b':
+                    offsets = [0, -13];
+                    break;
+                case 'r':
+                    offsets = [-13, 0];
+                    break;
+                default:
+                    offsets = [9, 0];
+                    break;
+            }
+        }else{
+            switch(ap){
+                case 't':
+                    offsets = [-15-this.anchorOffset, 30];
+                    break;
+                case 'b':
+                    offsets = [-19-this.anchorOffset, -13-this.el.dom.offsetHeight];
+                    break;
+                case 'r':
+                    offsets = [-15-this.el.dom.offsetWidth, -13-this.anchorOffset];
+                    break;
+                default:
+                    offsets = [25, -13-this.anchorOffset];
+                    break;
+            }
+        }
+        var mouseOffset = this.getMouseOffset();
+        offsets[0] += mouseOffset[0];
+        offsets[1] += mouseOffset[1];
+
+        return offsets;
+    },
+
+<span id='Ext-ToolTip-method-onTargetOver'>    // private
+</span>    onTargetOver : function(e){
+        if(this.disabled || e.within(this.target.dom, true)){
+            return;
+        }
+        var t = e.getTarget(this.delegate);
+        if (t) {
+            this.triggerElement = t;
+            this.clearTimer('hide');
+            this.targetXY = e.getXY();
+            this.delayShow();
+        }
+    },
+
+<span id='Ext-ToolTip-method-delayShow'>    // private
+</span>    delayShow : function(){
+        if(this.hidden &amp;&amp; !this.showTimer){
+            if(this.lastActive.getElapsed() &lt; this.quickShowInterval){
+                this.show();
+            }else{
+                this.showTimer = this.show.defer(this.showDelay, this);
+            }
+        }else if(!this.hidden &amp;&amp; this.autoHide !== false){
+            this.show();
+        }
+    },
+
+<span id='Ext-ToolTip-method-onTargetOut'>    // private
+</span>    onTargetOut : function(e){
+        if(this.disabled || e.within(this.target.dom, true)){
+            return;
+        }
+        this.clearTimer('show');
+        if(this.autoHide !== false){
+            this.delayHide();
+        }
+    },
+
+<span id='Ext-ToolTip-method-delayHide'>    // private
+</span>    delayHide : function(){
+        if(!this.hidden &amp;&amp; !this.hideTimer){
+            this.hideTimer = this.hide.defer(this.hideDelay, this);
+        }
+    },
+
+<span id='Ext-ToolTip-method-hide'>    /**
+</span>     * Hides this tooltip if visible.
+     */
+    hide: function(){
+        this.clearTimer('dismiss');
+        this.lastActive = new Date();
+        if(this.anchorEl){
+            this.anchorEl.hide();
+        }
+        Ext.ToolTip.superclass.hide.call(this);
+        delete this.triggerElement;
+    },
+
+<span id='Ext-ToolTip-method-show'>    /**
+</span>     * Shows this tooltip at the current event target XY position.
+     */
+    show : function(){
+        if(this.anchor){
+            // pre-show it off screen so that the el will have dimensions
+            // for positioning calcs when getting xy next
+            this.showAt([-1000,-1000]);
+            this.origConstrainPosition = this.constrainPosition;
+            this.constrainPosition = false;
+            this.anchor = this.origAnchor;
+        }
+        this.showAt(this.getTargetXY());
+
+        if(this.anchor){
+            this.anchorEl.show();
+            this.syncAnchor();
+            this.constrainPosition = this.origConstrainPosition;
+        }else{
+            this.anchorEl.hide();
+        }
+    },
+
+<span id='Ext-ToolTip-method-showAt'>    // inherit docs
+</span>    showAt : function(xy){
+        this.lastActive = new Date();
+        this.clearTimers();
+        Ext.ToolTip.superclass.showAt.call(this, xy);
+        if(this.dismissDelay &amp;&amp; this.autoHide !== false){
+            this.dismissTimer = this.hide.defer(this.dismissDelay, this);
+        }
+        if(this.anchor &amp;&amp; !this.anchorEl.isVisible()){
+            this.syncAnchor();
+            this.anchorEl.show();
+        }else{
+            this.anchorEl.hide();
+        }
+    },
+
+<span id='Ext-ToolTip-method-syncAnchor'>    // private
+</span>    syncAnchor : function(){
+        var anchorPos, targetPos, offset;
+        switch(this.tipAnchor.charAt(0)){
+            case 't':
+                anchorPos = 'b';
+                targetPos = 'tl';
+                offset = [20+this.anchorOffset, 2];
+                break;
+            case 'r':
+                anchorPos = 'l';
+                targetPos = 'tr';
+                offset = [-2, 11+this.anchorOffset];
+                break;
+            case 'b':
+                anchorPos = 't';
+                targetPos = 'bl';
+                offset = [20+this.anchorOffset, -2];
+                break;
+            default:
+                anchorPos = 'r';
+                targetPos = 'tl';
+                offset = [2, 11+this.anchorOffset];
+                break;
+        }
+        this.anchorEl.alignTo(this.el, anchorPos+'-'+targetPos, offset);
+    },
+
+<span id='Ext-ToolTip-method-setPagePosition'>    // private
+</span>    setPagePosition : function(x, y){
+        Ext.ToolTip.superclass.setPagePosition.call(this, x, y);
+        if(this.anchor){
+            this.syncAnchor();
+        }
+    },
+
+<span id='Ext-ToolTip-method-clearTimer'>    // private
+</span>    clearTimer : function(name){
+        name = name + 'Timer';
+        clearTimeout(this[name]);
+        delete this[name];
+    },
+
+<span id='Ext-ToolTip-method-clearTimers'>    // private
+</span>    clearTimers : function(){
+        this.clearTimer('show');
+        this.clearTimer('dismiss');
+        this.clearTimer('hide');
+    },
+
+<span id='Ext-ToolTip-method-onShow'>    // private
+</span>    onShow : function(){
+        Ext.ToolTip.superclass.onShow.call(this);
+        Ext.getDoc().on('mousedown', this.onDocMouseDown, this);
+    },
+
+<span id='Ext-ToolTip-method-onHide'>    // private
+</span>    onHide : function(){
+        Ext.ToolTip.superclass.onHide.call(this);
+        Ext.getDoc().un('mousedown', this.onDocMouseDown, this);
+    },
+
+<span id='Ext-ToolTip-method-onDocMouseDown'>    // private
+</span>    onDocMouseDown : function(e){
+        if(this.autoHide !== true &amp;&amp; !this.closable &amp;&amp; !e.within(this.el.dom)){
+            this.disable();
+            this.doEnable.defer(100, this);
+        }
+    },
+    
+<span id='Ext-ToolTip-method-doEnable'>    // private
+</span>    doEnable : function(){
+        if(!this.isDestroyed){
+            this.enable();
+        }
+    },
+
+<span id='Ext-ToolTip-method-onDisable'>    // private
+</span>    onDisable : function(){
+        this.clearTimers();
+        this.hide();
+    },
+
+<span id='Ext-ToolTip-method-adjustPosition'>    // private
+</span>    adjustPosition : function(x, y){
+        if(this.constrainPosition){
+            var ay = this.targetXY[1], h = this.getSize().height;
+            if(y &lt;= ay &amp;&amp; (y+h) &gt;= ay){
+                y = ay-h-5;
+            }
+        }
+        return {x : x, y: y};
+    },
+    
+<span id='Ext-ToolTip-method-beforeDestroy'>    beforeDestroy : function(){
+</span>        this.clearTimers();
+        Ext.destroy(this.anchorEl);
+        delete this.anchorEl;
+        delete this.target;
+        delete this.anchorTarget;
+        delete this.triggerElement;
+        Ext.ToolTip.superclass.beforeDestroy.call(this);    
+    },
+
+<span id='Ext-ToolTip-method-onDestroy'>    // private
+</span>    onDestroy : function(){
+        Ext.getDoc().un('mousedown', this.onDocMouseDown, this);
+        Ext.ToolTip.superclass.onDestroy.call(this);
+    }
+});
+
+Ext.reg('tooltip', Ext.ToolTip);</pre>
+</body>
+</html>

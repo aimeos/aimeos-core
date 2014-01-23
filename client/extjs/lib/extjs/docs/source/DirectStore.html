@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-data-DirectStore-method-constructor'><span id='Ext-data-DirectStore'>/**
+</span></span> * @class Ext.data.DirectStore
+ * @extends Ext.data.Store
+ * &lt;p&gt;Small helper class to create an {@link Ext.data.Store} configured with an
+ * {@link Ext.data.DirectProxy} and {@link Ext.data.JsonReader} to make interacting
+ * with an {@link Ext.Direct} Server-side {@link Ext.direct.Provider Provider} easier.
+ * To create a different proxy/reader combination create a basic {@link Ext.data.Store}
+ * configured as needed.&lt;/p&gt;
+ *
+ * &lt;p&gt;&lt;b&gt;*Note:&lt;/b&gt; Although they are not listed, this class inherits all of the config options of:&lt;/p&gt;
+ * &lt;div&gt;&lt;ul class=&quot;mdetail-params&quot;&gt;
+ * &lt;li&gt;&lt;b&gt;{@link Ext.data.Store Store}&lt;/b&gt;&lt;/li&gt;
+ * &lt;div class=&quot;sub-desc&quot;&gt;&lt;ul class=&quot;mdetail-params&quot;&gt;
+ *
+ * &lt;/ul&gt;&lt;/div&gt;
+ * &lt;li&gt;&lt;b&gt;{@link Ext.data.JsonReader JsonReader}&lt;/b&gt;&lt;/li&gt;
+ * &lt;div class=&quot;sub-desc&quot;&gt;&lt;ul class=&quot;mdetail-params&quot;&gt;
+ * &lt;li&gt;&lt;tt&gt;&lt;b&gt;{@link Ext.data.JsonReader#root root}&lt;/b&gt;&lt;/tt&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;tt&gt;&lt;b&gt;{@link Ext.data.JsonReader#idProperty idProperty}&lt;/b&gt;&lt;/tt&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;tt&gt;&lt;b&gt;{@link Ext.data.JsonReader#totalProperty totalProperty}&lt;/b&gt;&lt;/tt&gt;&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ *
+ * &lt;li&gt;&lt;b&gt;{@link Ext.data.DirectProxy DirectProxy}&lt;/b&gt;&lt;/li&gt;
+ * &lt;div class=&quot;sub-desc&quot;&gt;&lt;ul class=&quot;mdetail-params&quot;&gt;
+ * &lt;li&gt;&lt;tt&gt;&lt;b&gt;{@link Ext.data.DirectProxy#directFn directFn}&lt;/b&gt;&lt;/tt&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;tt&gt;&lt;b&gt;{@link Ext.data.DirectProxy#paramOrder paramOrder}&lt;/b&gt;&lt;/tt&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;tt&gt;&lt;b&gt;{@link Ext.data.DirectProxy#paramsAsHash paramsAsHash}&lt;/b&gt;&lt;/tt&gt;&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ *
+ * @xtype directstore
+ *
+ * @constructor
+ * @param {Object} config
+ */
+Ext.data.DirectStore = Ext.extend(Ext.data.Store, {
+    constructor : function(config){
+        // each transaction upon a singe record will generate a distinct Direct transaction since Direct queues them into one Ajax request.
+        var c = Ext.apply({}, {
+            batchTransactions: false
+        }, config);
+        Ext.data.DirectStore.superclass.constructor.call(this, Ext.apply(c, {
+            proxy: Ext.isDefined(c.proxy) ? c.proxy : new Ext.data.DirectProxy(Ext.copyTo({}, c, 'paramOrder,paramsAsHash,directFn,api')),
+            reader: (!Ext.isDefined(c.reader) &amp;&amp; c.fields) ? new Ext.data.JsonReader(Ext.copyTo({}, c, 'totalProperty,root,idProperty'), c.fields) : c.reader
+        }));
+    }
+});
+Ext.reg('directstore', Ext.data.DirectStore);
+</pre>
+</body>
+</html>

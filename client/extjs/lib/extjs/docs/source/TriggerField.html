@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-form-TriggerField-method-constructor'><span id='Ext-form-TriggerField'>/**
+</span></span> * @class Ext.form.TriggerField
+ * @extends Ext.form.TextField
+ * Provides a convenient wrapper for TextFields that adds a clickable trigger button (looks like a combobox by default).
+ * The trigger has no default action, so you must assign a function to implement the trigger click handler by
+ * overriding {@link #onTriggerClick}. You can create a TriggerField directly, as it renders exactly like a combobox
+ * for which you can provide a custom implementation.  For example:
+ * &lt;pre&gt;&lt;code&gt;
+var trigger = new Ext.form.TriggerField();
+trigger.onTriggerClick = myTriggerFn;
+trigger.applyToMarkup('my-field');
+&lt;/code&gt;&lt;/pre&gt;
+ *
+ * However, in general you will most likely want to use TriggerField as the base class for a reusable component.
+ * {@link Ext.form.DateField} and {@link Ext.form.ComboBox} are perfect examples of this.
+ *
+ * @constructor
+ * Create a new TriggerField.
+ * @param {Object} config Configuration options (valid {@Ext.form.TextField} config options will also be applied
+ * to the base TextField)
+ * @xtype trigger
+ */
+Ext.form.TriggerField = Ext.extend(Ext.form.TextField,  {
+<span id='Ext-form-TriggerField-cfg-triggerClass'>    /**
+</span>     * @cfg {String} triggerClass
+     * An additional CSS class used to style the trigger button.  The trigger will always get the
+     * class &lt;tt&gt;'x-form-trigger'&lt;/tt&gt; by default and &lt;tt&gt;triggerClass&lt;/tt&gt; will be &lt;b&gt;appended&lt;/b&gt; if specified.
+     */
+<span id='Ext-form-TriggerField-cfg-triggerConfig'>    /**
+</span>     * @cfg {Mixed} triggerConfig
+     * &lt;p&gt;A {@link Ext.DomHelper DomHelper} config object specifying the structure of the
+     * trigger element for this Field. (Optional).&lt;/p&gt;
+     * &lt;p&gt;Specify this when you need a customized element to act as the trigger button for a TriggerField.&lt;/p&gt;
+     * &lt;p&gt;Note that when using this option, it is the developer's responsibility to ensure correct sizing, positioning
+     * and appearance of the trigger.  Defaults to:&lt;/p&gt;
+     * &lt;pre&gt;&lt;code&gt;{tag: &quot;img&quot;, src: Ext.BLANK_IMAGE_URL, cls: &quot;x-form-trigger &quot; + this.triggerClass}&lt;/code&gt;&lt;/pre&gt;
+     */
+<span id='Ext-form-TriggerField-cfg-autoCreate'>    /**
+</span>     * @cfg {String/Object} autoCreate &lt;p&gt;A {@link Ext.DomHelper DomHelper} element spec, or true for a default
+     * element spec. Used to create the {@link Ext.Component#getEl Element} which will encapsulate this Component.
+     * See &lt;tt&gt;{@link Ext.Component#autoEl autoEl}&lt;/tt&gt; for details.  Defaults to:&lt;/p&gt;
+     * &lt;pre&gt;&lt;code&gt;{tag: &quot;input&quot;, type: &quot;text&quot;, size: &quot;16&quot;, autocomplete: &quot;off&quot;}&lt;/code&gt;&lt;/pre&gt;
+     */
+    defaultAutoCreate : {tag: &quot;input&quot;, type: &quot;text&quot;, size: &quot;16&quot;, autocomplete: &quot;off&quot;},
+<span id='Ext-form-TriggerField-cfg-hideTrigger'>    /**
+</span>     * @cfg {Boolean} hideTrigger &lt;tt&gt;true&lt;/tt&gt; to hide the trigger element and display only the base
+     * text field (defaults to &lt;tt&gt;false&lt;/tt&gt;)
+     */
+    hideTrigger:false,
+<span id='Ext-form-TriggerField-cfg-editable'>    /**
+</span>     * @cfg {Boolean} editable &lt;tt&gt;false&lt;/tt&gt; to prevent the user from typing text directly into the field,
+     * the field will only respond to a click on the trigger to set the value. (defaults to &lt;tt&gt;true&lt;/tt&gt;).
+     */
+    editable: true,
+<span id='Ext-form-TriggerField-cfg-readOnly'>    /**
+</span>     * @cfg {Boolean} readOnly &lt;tt&gt;true&lt;/tt&gt; to prevent the user from changing the field, and
+     * hides the trigger.  Superceeds the editable and hideTrigger options if the value is true.
+     * (defaults to &lt;tt&gt;false&lt;/tt&gt;)
+     */
+    readOnly: false,
+<span id='Ext-form-TriggerField-cfg-wrapFocusClass'>    /**
+</span>     * @cfg {String} wrapFocusClass The class added to the to the wrap of the trigger element. Defaults to
+     * &lt;tt&gt;x-trigger-wrap-focus&lt;/tt&gt;.
+     */
+    wrapFocusClass: 'x-trigger-wrap-focus',
+<span id='Ext-form-TriggerField-method-autoSize'>    /**
+</span>     * @hide
+     * @method autoSize
+     */
+    autoSize: Ext.emptyFn,
+<span id='Ext-form-TriggerField-property-monitorTab'>    // private
+</span>    monitorTab : true,
+<span id='Ext-form-TriggerField-property-deferHeight'>    // private
+</span>    deferHeight : true,
+<span id='Ext-form-TriggerField-property-mimicing'>    // private
+</span>    mimicing : false,
+
+<span id='Ext-form-TriggerField-property-actionMode'>    actionMode: 'wrap',
+</span>
+<span id='Ext-form-TriggerField-property-defaultTriggerWidth'>    defaultTriggerWidth: 17,
+</span>
+<span id='Ext-form-TriggerField-method-onResize'>    // private
+</span>    onResize : function(w, h){
+        Ext.form.TriggerField.superclass.onResize.call(this, w, h);
+        var tw = this.getTriggerWidth();
+        if(Ext.isNumber(w)){
+            this.el.setWidth(w - tw);
+        }
+        this.wrap.setWidth(this.el.getWidth() + tw);
+    },
+
+<span id='Ext-form-TriggerField-method-getTriggerWidth'>    getTriggerWidth: function(){
+</span>        var tw = this.trigger.getWidth();
+        if(!this.hideTrigger &amp;&amp; !this.readOnly &amp;&amp; tw === 0){
+            tw = this.defaultTriggerWidth;
+        }
+        return tw;
+    },
+
+<span id='Ext-form-TriggerField-method-alignErrorIcon'>    // private
+</span>    alignErrorIcon : function(){
+        if(this.wrap){
+            this.errorIcon.alignTo(this.wrap, 'tl-tr', [2, 0]);
+        }
+    },
+
+<span id='Ext-form-TriggerField-method-onRender'>    // private
+</span>    onRender : function(ct, position){
+        this.doc = Ext.isIE ? Ext.getBody() : Ext.getDoc();
+        Ext.form.TriggerField.superclass.onRender.call(this, ct, position);
+
+        this.wrap = this.el.wrap({cls: 'x-form-field-wrap x-form-field-trigger-wrap'});
+        this.trigger = this.wrap.createChild(this.triggerConfig ||
+                {tag: &quot;img&quot;, src: Ext.BLANK_IMAGE_URL, alt: &quot;&quot;, cls: &quot;x-form-trigger &quot; + this.triggerClass});
+        this.initTrigger();
+        if(!this.width){
+            this.wrap.setWidth(this.el.getWidth()+this.trigger.getWidth());
+        }
+        this.resizeEl = this.positionEl = this.wrap;
+    },
+
+<span id='Ext-form-TriggerField-method-getWidth'>    getWidth: function() {
+</span>        return(this.el.getWidth() + this.trigger.getWidth());
+    },
+
+<span id='Ext-form-TriggerField-method-updateEditState'>    updateEditState: function(){
+</span>        if(this.rendered){
+            if (this.readOnly) {
+                this.el.dom.readOnly = true;
+                this.el.addClass('x-trigger-noedit');
+                this.mun(this.el, 'click', this.onTriggerClick, this);
+                this.trigger.setDisplayed(false);
+            } else {
+                if (!this.editable) {
+                    this.el.dom.readOnly = true;
+                    this.el.addClass('x-trigger-noedit');
+                    this.mon(this.el, 'click', this.onTriggerClick, this);
+                } else {
+                    this.el.dom.readOnly = false;
+                    this.el.removeClass('x-trigger-noedit');
+                    this.mun(this.el, 'click', this.onTriggerClick, this);
+                }
+                this.trigger.setDisplayed(!this.hideTrigger);
+            }
+            this.onResize(this.width || this.wrap.getWidth());
+        }
+    },
+
+<span id='Ext-form-TriggerField-method-setHideTrigger'>    /**
+</span>     * Changes the hidden status of the trigger.
+     * @param {Boolean} hideTrigger True to hide the trigger, false to show it.
+     */
+    setHideTrigger: function(hideTrigger){
+        if(hideTrigger != this.hideTrigger){
+            this.hideTrigger = hideTrigger;
+            this.updateEditState();
+        }
+    },
+
+<span id='Ext-form-TriggerField-method-setEditable'>    /**
+</span>     * Allow or prevent the user from directly editing the field text.  If false is passed,
+     * the user will only be able to modify the field using the trigger.  Will also add
+     * a click event to the text field which will call the trigger. This method
+     * is the runtime equivalent of setting the {@link #editable} config option at config time.
+     * @param {Boolean} value True to allow the user to directly edit the field text.
+     */
+    setEditable: function(editable){
+        if(editable != this.editable){
+            this.editable = editable;
+            this.updateEditState();
+        }
+    },
+
+<span id='Ext-form-TriggerField-method-setReadOnly'>    /**
+</span>     * Setting this to true will supersede settings {@link #editable} and {@link #hideTrigger}.
+     * Setting this to false will defer back to {@link #editable} and {@link #hideTrigger}. This method
+     * is the runtime equivalent of setting the {@link #readOnly} config option at config time.
+     * @param {Boolean} value True to prevent the user changing the field and explicitly
+     * hide the trigger.
+     */
+    setReadOnly: function(readOnly){
+        if(readOnly != this.readOnly){
+            this.readOnly = readOnly;
+            this.updateEditState();
+        }
+    },
+
+<span id='Ext-form-TriggerField-method-afterRender'>    afterRender : function(){
+</span>        Ext.form.TriggerField.superclass.afterRender.call(this);
+        this.updateEditState();
+    },
+
+<span id='Ext-form-TriggerField-method-initTrigger'>    // private
+</span>    initTrigger : function(){
+        this.mon(this.trigger, 'click', this.onTriggerClick, this, {preventDefault:true});
+        this.trigger.addClassOnOver('x-form-trigger-over');
+        this.trigger.addClassOnClick('x-form-trigger-click');
+    },
+
+<span id='Ext-form-TriggerField-method-onDestroy'>    // private
+</span>    onDestroy : function(){
+        Ext.destroy(this.trigger, this.wrap);
+        if (this.mimicing){
+            this.doc.un('mousedown', this.mimicBlur, this);
+        }
+        delete this.doc;
+        Ext.form.TriggerField.superclass.onDestroy.call(this);
+    },
+
+<span id='Ext-form-TriggerField-method-onFocus'>    // private
+</span>    onFocus : function(){
+        Ext.form.TriggerField.superclass.onFocus.call(this);
+        if(!this.mimicing){
+            this.wrap.addClass(this.wrapFocusClass);
+            this.mimicing = true;
+            this.doc.on('mousedown', this.mimicBlur, this, {delay: 10});
+            if(this.monitorTab){
+                this.on('specialkey', this.checkTab, this);
+            }
+        }
+    },
+
+<span id='Ext-form-TriggerField-method-checkTab'>    // private
+</span>    checkTab : function(me, e){
+        if(e.getKey() == e.TAB){
+            this.triggerBlur();
+        }
+    },
+
+<span id='Ext-form-TriggerField-method-onBlur'>    // private
+</span>    onBlur : Ext.emptyFn,
+
+<span id='Ext-form-TriggerField-method-mimicBlur'>    // private
+</span>    mimicBlur : function(e){
+        if(!this.isDestroyed &amp;&amp; !this.wrap.contains(e.target) &amp;&amp; this.validateBlur(e)){
+            this.triggerBlur();
+        }
+    },
+
+<span id='Ext-form-TriggerField-method-triggerBlur'>    // private
+</span>    triggerBlur : function(){
+        this.mimicing = false;
+        this.doc.un('mousedown', this.mimicBlur, this);
+        if(this.monitorTab &amp;&amp; this.el){
+            this.un('specialkey', this.checkTab, this);
+        }
+        Ext.form.TriggerField.superclass.onBlur.call(this);
+        if(this.wrap){
+            this.wrap.removeClass(this.wrapFocusClass);
+        }
+    },
+
+<span id='Ext-form-TriggerField-method-beforeBlur'>    beforeBlur : Ext.emptyFn,
+</span>
+<span id='Ext-form-TriggerField-method-validateBlur'>    // private
+</span>    // This should be overriden by any subclass that needs to check whether or not the field can be blurred.
+    validateBlur : function(e){
+        return true;
+    },
+
+<span id='Ext-form-TriggerField-method-onTriggerClick'>    /**
+</span>     * The function that should handle the trigger's click event.  This method does nothing by default
+     * until overridden by an implementing function.  See Ext.form.ComboBox and Ext.form.DateField for
+     * sample implementations.
+     * @method
+     * @param {EventObject} e
+     */
+    onTriggerClick : Ext.emptyFn
+
+<span id='Ext-form-TriggerField-cfg-grow'>    /**
+</span>     * @cfg {Boolean} grow @hide
+     */
+<span id='Ext-form-TriggerField-cfg-growMin'>    /**
+</span>     * @cfg {Number} growMin @hide
+     */
+<span id='Ext-form-TriggerField-cfg-growMax'>    /**
+</span>     * @cfg {Number} growMax @hide
+     */
+});
+
+<span id='Ext-form-TwinTriggerField'>/**
+</span> * @class Ext.form.TwinTriggerField
+ * @extends Ext.form.TriggerField
+ * TwinTriggerField is not a public class to be used directly.  It is meant as an abstract base class
+ * to be extended by an implementing class.  For an example of implementing this class, see the custom
+ * SearchField implementation here:
+ * &lt;a href=&quot;http://extjs.com/deploy/ext/examples/form/custom.html&quot;&gt;http://extjs.com/deploy/ext/examples/form/custom.html&lt;/a&gt;
+ */
+Ext.form.TwinTriggerField = Ext.extend(Ext.form.TriggerField, {
+<span id='Ext-form-TwinTriggerField-cfg-triggerConfig'>    /**
+</span>     * @cfg {Mixed} triggerConfig
+     * &lt;p&gt;A {@link Ext.DomHelper DomHelper} config object specifying the structure of the trigger elements
+     * for this Field. (Optional).&lt;/p&gt;
+     * &lt;p&gt;Specify this when you need a customized element to contain the two trigger elements for this Field.
+     * Each trigger element must be marked by the CSS class &lt;tt&gt;x-form-trigger&lt;/tt&gt; (also see
+     * &lt;tt&gt;{@link #trigger1Class}&lt;/tt&gt; and &lt;tt&gt;{@link #trigger2Class}&lt;/tt&gt;).&lt;/p&gt;
+     * &lt;p&gt;Note that when using this option, it is the developer's responsibility to ensure correct sizing,
+     * positioning and appearance of the triggers.&lt;/p&gt;
+     */
+<span id='Ext-form-TwinTriggerField-cfg-trigger1Class'>    /**
+</span>     * @cfg {String} trigger1Class
+     * An additional CSS class used to style the trigger button.  The trigger will always get the
+     * class &lt;tt&gt;'x-form-trigger'&lt;/tt&gt; by default and &lt;tt&gt;triggerClass&lt;/tt&gt; will be &lt;b&gt;appended&lt;/b&gt; if specified.
+     */
+<span id='Ext-form-TwinTriggerField-cfg-trigger2Class'>    /**
+</span>     * @cfg {String} trigger2Class
+     * An additional CSS class used to style the trigger button.  The trigger will always get the
+     * class &lt;tt&gt;'x-form-trigger'&lt;/tt&gt; by default and &lt;tt&gt;triggerClass&lt;/tt&gt; will be &lt;b&gt;appended&lt;/b&gt; if specified.
+     */
+
+    initComponent : function(){
+        Ext.form.TwinTriggerField.superclass.initComponent.call(this);
+
+        this.triggerConfig = {
+            tag:'span', cls:'x-form-twin-triggers', cn:[
+            {tag: &quot;img&quot;, src: Ext.BLANK_IMAGE_URL, alt: &quot;&quot;, cls: &quot;x-form-trigger &quot; + this.trigger1Class},
+            {tag: &quot;img&quot;, src: Ext.BLANK_IMAGE_URL, alt: &quot;&quot;, cls: &quot;x-form-trigger &quot; + this.trigger2Class}
+        ]};
+    },
+
+<span id='Ext-form-TwinTriggerField-method-getTrigger'>    getTrigger : function(index){
+</span>        return this.triggers[index];
+    },
+    
+<span id='Ext-form-TwinTriggerField-method-afterRender'>    afterRender: function(){
+</span>        Ext.form.TwinTriggerField.superclass.afterRender.call(this);
+        var triggers = this.triggers,
+            i = 0,
+            len = triggers.length;
+            
+        for(; i &lt; len; ++i){
+            if(this['hideTrigger' + (i + 1)]){
+                    triggers[i].hide();
+                }
+
+        }    
+    },
+
+<span id='Ext-form-TwinTriggerField-method-initTrigger'>    initTrigger : function(){
+</span>        var ts = this.trigger.select('.x-form-trigger', true),
+            triggerField = this;
+            
+        ts.each(function(t, all, index){
+            var triggerIndex = 'Trigger'+(index+1);
+            t.hide = function(){
+                var w = triggerField.wrap.getWidth();
+                this.dom.style.display = 'none';
+                triggerField.el.setWidth(w-triggerField.trigger.getWidth());
+                triggerField['hidden' + triggerIndex] = true;
+            };
+            t.show = function(){
+                var w = triggerField.wrap.getWidth();
+                this.dom.style.display = '';
+                triggerField.el.setWidth(w-triggerField.trigger.getWidth());
+                triggerField['hidden' + triggerIndex] = false;
+            };
+            this.mon(t, 'click', this['on'+triggerIndex+'Click'], this, {preventDefault:true});
+            t.addClassOnOver('x-form-trigger-over');
+            t.addClassOnClick('x-form-trigger-click');
+        }, this);
+        this.triggers = ts.elements;
+    },
+
+<span id='Ext-form-TwinTriggerField-method-getTriggerWidth'>    getTriggerWidth: function(){
+</span>        var tw = 0;
+        Ext.each(this.triggers, function(t, index){
+            var triggerIndex = 'Trigger' + (index + 1),
+                w = t.getWidth();
+            if(w === 0 &amp;&amp; !this['hidden' + triggerIndex]){
+                tw += this.defaultTriggerWidth;
+            }else{
+                tw += w;
+            }
+        }, this);
+        return tw;
+    },
+
+<span id='Ext-form-TwinTriggerField-method-onDestroy'>    // private
+</span>    onDestroy : function() {
+        Ext.destroy(this.triggers);
+        Ext.form.TwinTriggerField.superclass.onDestroy.call(this);
+    },
+
+<span id='Ext-form-TwinTriggerField-method-onTrigger1Click'>    /**
+</span>     * The function that should handle the trigger's click event.  This method does nothing by default
+     * until overridden by an implementing function. See {@link Ext.form.TriggerField#onTriggerClick}
+     * for additional information.
+     * @method
+     * @param {EventObject} e
+     */
+    onTrigger1Click : Ext.emptyFn,
+<span id='Ext-form-TwinTriggerField-method-onTrigger2Click'>    /**
+</span>     * The function that should handle the trigger's click event.  This method does nothing by default
+     * until overridden by an implementing function. See {@link Ext.form.TriggerField#onTriggerClick}
+     * for additional information.
+     * @method
+     * @param {EventObject} e
+     */
+    onTrigger2Click : Ext.emptyFn
+});
+Ext.reg('trigger', Ext.form.TriggerField);
+Ext.reg('twintrigger', Ext.form.TwinTriggerField);</pre>
+</body>
+</html>

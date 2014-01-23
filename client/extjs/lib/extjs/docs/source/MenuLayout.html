@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-layout-MenuLayout'>/**
+</span> * @class Ext.layout.MenuLayout
+ * @extends Ext.layout.ContainerLayout
+ * &lt;p&gt;Layout manager used by {@link Ext.menu.Menu}. Generally this class should not need to be used directly.&lt;/p&gt;
+ */
+ Ext.layout.MenuLayout = Ext.extend(Ext.layout.ContainerLayout, {
+<span id='Ext-layout-MenuLayout-property-monitorResize'>    monitorResize : true,
+</span>
+<span id='Ext-layout-MenuLayout-property-type'>    type: 'menu',
+</span>
+<span id='Ext-layout-MenuLayout-method-setContainer'>    setContainer : function(ct){
+</span>        this.monitorResize = !ct.floating;
+        // This event is only fired by the menu in IE, used so we don't couple
+        // the menu with the layout.
+        ct.on('autosize', this.doAutoSize, this);
+        Ext.layout.MenuLayout.superclass.setContainer.call(this, ct);
+    },
+
+<span id='Ext-layout-MenuLayout-method-renderItem'>    renderItem : function(c, position, target){
+</span>        if (!this.itemTpl) {
+            this.itemTpl = Ext.layout.MenuLayout.prototype.itemTpl = new Ext.XTemplate(
+                '&lt;li id=&quot;{itemId}&quot; class=&quot;{itemCls}&quot;&gt;',
+                    '&lt;tpl if=&quot;needsIcon&quot;&gt;',
+                        '&lt;img alt=&quot;{altText}&quot; src=&quot;{icon}&quot; class=&quot;{iconCls}&quot;/&gt;',
+                    '&lt;/tpl&gt;',
+                '&lt;/li&gt;'
+            );
+        }
+
+        if(c &amp;&amp; !c.rendered){
+            if(Ext.isNumber(position)){
+                position = target.dom.childNodes[position];
+            }
+            var a = this.getItemArgs(c);
+
+//          The Component's positionEl is the &lt;li&gt; it is rendered into
+            c.render(c.positionEl = position ?
+                this.itemTpl.insertBefore(position, a, true) :
+                this.itemTpl.append(target, a, true));
+
+//          Link the containing &lt;li&gt; to the item.
+            c.positionEl.menuItemId = c.getItemId();
+
+//          If rendering a regular Component, and it needs an icon,
+//          move the Component rightwards.
+            if (!a.isMenuItem &amp;&amp; a.needsIcon) {
+                c.positionEl.addClass('x-menu-list-item-indent');
+            }
+            this.configureItem(c);
+        }else if(c &amp;&amp; !this.isValidParent(c, target)){
+            if(Ext.isNumber(position)){
+                position = target.dom.childNodes[position];
+            }
+            target.dom.insertBefore(c.getActionEl().dom, position || null);
+        }
+    },
+
+<span id='Ext-layout-MenuLayout-method-getItemArgs'>    getItemArgs : function(c) {
+</span>        var isMenuItem = c instanceof Ext.menu.Item,
+            canHaveIcon = !(isMenuItem || c instanceof Ext.menu.Separator);
+
+        return {
+            isMenuItem: isMenuItem,
+            needsIcon: canHaveIcon &amp;&amp; (c.icon || c.iconCls),
+            icon: c.icon || Ext.BLANK_IMAGE_URL,
+            iconCls: 'x-menu-item-icon ' + (c.iconCls || ''),
+            itemId: 'x-menu-el-' + c.id,
+            itemCls: 'x-menu-list-item ',
+            altText: c.altText || ''
+        };
+    },
+
+<span id='Ext-layout-MenuLayout-method-isValidParent'>    //  Valid if the Component is in a &lt;li&gt; which is part of our target &lt;ul&gt;
+</span>    isValidParent : function(c, target) {
+        return c.el.up('li.x-menu-list-item', 5).dom.parentNode === (target.dom || target);
+    },
+
+<span id='Ext-layout-MenuLayout-method-onLayout'>    onLayout : function(ct, target){
+</span>        Ext.layout.MenuLayout.superclass.onLayout.call(this, ct, target);
+        this.doAutoSize();
+    },
+
+<span id='Ext-layout-MenuLayout-method-doAutoSize'>    doAutoSize : function(){
+</span>        var ct = this.container, w = ct.width;
+        if(ct.floating){
+            if(w){
+                ct.setWidth(w);
+            }else if(Ext.isIE9m){
+                ct.setWidth(Ext.isStrict &amp;&amp; (Ext.isIE7 || Ext.isIE8 || Ext.isIE9) ? 'auto' : ct.minWidth);
+                var el = ct.getEl(), t = el.dom.offsetWidth; // force recalc
+                ct.setWidth(ct.getLayoutTarget().getWidth() + el.getFrameWidth('lr'));
+            }
+        }
+    }
+});
+Ext.Container.LAYOUTS['menu'] = Ext.layout.MenuLayout;
+</pre>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-layout-BoxLayout'>/**
+</span> * @class Ext.layout.BoxLayout
+ * @extends Ext.layout.ContainerLayout
+ * &lt;p&gt;Base Class for HBoxLayout and VBoxLayout Classes. Generally it should not need to be used directly.&lt;/p&gt;
+ */
+Ext.layout.BoxLayout = Ext.extend(Ext.layout.ContainerLayout, {
+<span id='Ext-layout-BoxLayout-cfg-defaultMargins'>    /**
+</span>     * @cfg {Object} defaultMargins
+     * &lt;p&gt;If the individual contained items do not have a &lt;tt&gt;margins&lt;/tt&gt;
+     * property specified, the default margins from this property will be
+     * applied to each item.&lt;/p&gt;
+     * &lt;br&gt;&lt;p&gt;This property may be specified as an object containing margins
+     * to apply in the format:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+{
+    top: (top margin),
+    right: (right margin),
+    bottom: (bottom margin),
+    left: (left margin)
+}&lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;This property may also be specified as a string containing
+     * space-separated, numeric margin values. The order of the sides associated
+     * with each value matches the way CSS processes margin values:&lt;/p&gt;
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;If there is only one value, it applies to all sides.&lt;/li&gt;
+     * &lt;li&gt;If there are two values, the top and bottom borders are set to the
+     * first value and the right and left are set to the second.&lt;/li&gt;
+     * &lt;li&gt;If there are three values, the top is set to the first value, the left
+     * and right are set to the second, and the bottom is set to the third.&lt;/li&gt;
+     * &lt;li&gt;If there are four values, they apply to the top, right, bottom, and
+     * left, respectively.&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * &lt;p&gt;Defaults to:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+     * {top:0, right:0, bottom:0, left:0}
+     * &lt;/code&gt;&lt;/pre&gt;
+     */
+    defaultMargins : {left:0,top:0,right:0,bottom:0},
+<span id='Ext-layout-BoxLayout-cfg-padding'>    /**
+</span>     * @cfg {String} padding
+     * &lt;p&gt;Sets the padding to be applied to all child items managed by this layout.&lt;/p&gt;
+     * &lt;p&gt;This property must be specified as a string containing
+     * space-separated, numeric padding values. The order of the sides associated
+     * with each value matches the way CSS processes padding values:&lt;/p&gt;
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;If there is only one value, it applies to all sides.&lt;/li&gt;
+     * &lt;li&gt;If there are two values, the top and bottom borders are set to the
+     * first value and the right and left are set to the second.&lt;/li&gt;
+     * &lt;li&gt;If there are three values, the top is set to the first value, the left
+     * and right are set to the second, and the bottom is set to the third.&lt;/li&gt;
+     * &lt;li&gt;If there are four values, they apply to the top, right, bottom, and
+     * left, respectively.&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * &lt;p&gt;Defaults to: &lt;code&gt;&quot;0&quot;&lt;/code&gt;&lt;/p&gt;
+     */
+    padding : '0',
+<span id='Ext-layout-BoxLayout-property-pack'>    // documented in subclasses
+</span>    pack : 'start',
+
+<span id='Ext-layout-BoxLayout-property-monitorResize'>    // private
+</span>    monitorResize : true,
+<span id='Ext-layout-BoxLayout-property-type'>    type: 'box',
+</span><span id='Ext-layout-BoxLayout-property-scrollOffset'>    scrollOffset : 0,
+</span><span id='Ext-layout-BoxLayout-cfg-extraCls'>    extraCls : 'x-box-item',
+</span><span id='Ext-layout-BoxLayout-property-targetCls'>    targetCls : 'x-box-layout-ct',
+</span><span id='Ext-layout-BoxLayout-property-innerCls'>    innerCls : 'x-box-inner',
+</span>
+<span id='Ext-layout-BoxLayout-method-constructor'>    constructor : function(config){
+</span>        Ext.layout.BoxLayout.superclass.constructor.call(this, config);
+
+        if (Ext.isString(this.defaultMargins)) {
+            this.defaultMargins = this.parseMargins(this.defaultMargins);
+        }
+        
+        var handler = this.overflowHandler;
+        
+        if (typeof handler == 'string') {
+            handler = {
+                type: handler
+            };
+        }
+        
+        var handlerType = 'none';
+        if (handler &amp;&amp; handler.type != undefined) {
+            handlerType = handler.type;
+        }
+        
+        var constructor = Ext.layout.boxOverflow[handlerType];
+        if (constructor[this.type]) {
+            constructor = constructor[this.type];
+        }
+        
+        this.overflowHandler = new constructor(this, handler);
+    },
+
+<span id='Ext-layout-BoxLayout-method-onLayout'>    /**
+</span>     * @private
+     * Runs the child box calculations and caches them in childBoxCache. Subclasses can used these cached values
+     * when laying out
+     */
+    onLayout: function(container, target) {
+        Ext.layout.BoxLayout.superclass.onLayout.call(this, container, target);
+
+        var tSize = this.getLayoutTargetSize(),
+            items = this.getVisibleItems(container),
+            calcs = this.calculateChildBoxes(items, tSize),
+            boxes = calcs.boxes,
+            meta  = calcs.meta;
+        
+        //invoke the overflow handler, if one is configured
+        if (tSize.width &gt; 0) {
+            var handler = this.overflowHandler,
+                method  = meta.tooNarrow ? 'handleOverflow' : 'clearOverflow';
+            
+            var results = handler[method](calcs, tSize);
+            
+            if (results) {
+                if (results.targetSize) {
+                    tSize = results.targetSize;
+                }
+                
+                if (results.recalculate) {
+                    items = this.getVisibleItems(container);
+                    calcs = this.calculateChildBoxes(items, tSize);
+                    boxes = calcs.boxes;
+                }
+            }
+        }
+        
+<span id='Ext-layout-BoxLayout-property-layoutTargetLastSize'>        /**
+</span>         * @private
+         * @property layoutTargetLastSize
+         * @type Object
+         * Private cache of the last measured size of the layout target. This should never be used except by
+         * BoxLayout subclasses during their onLayout run.
+         */
+        this.layoutTargetLastSize = tSize;
+        
+<span id='Ext-layout-BoxLayout-property-childBoxCache'>        /**
+</span>         * @private
+         * @property childBoxCache
+         * @type Array
+         * Array of the last calculated height, width, top and left positions of each visible rendered component
+         * within the Box layout.
+         */
+        this.childBoxCache = calcs;
+        
+        this.updateInnerCtSize(tSize, calcs);
+        this.updateChildBoxes(boxes);
+
+        // Putting a box layout into an overflowed container is NOT correct and will make a second layout pass necessary.
+        this.handleTargetOverflow(tSize, container, target);
+    },
+
+<span id='Ext-layout-BoxLayout-method-updateChildBoxes'>    /**
+</span>     * Resizes and repositions each child component
+     * @param {Array} boxes The box measurements
+     */
+    updateChildBoxes: function(boxes) {
+        for (var i = 0, length = boxes.length; i &lt; length; i++) {
+            var box  = boxes[i],
+                comp = box.component;
+            
+            if (box.dirtySize) {
+                comp.setSize(box.width, box.height);
+            }
+            // Don't set positions to NaN
+            if (isNaN(box.left) || isNaN(box.top)) {
+                continue;
+            }
+            
+            comp.setPosition(box.left, box.top);
+        }
+    },
+
+<span id='Ext-layout-BoxLayout-method-updateInnerCtSize'>    /**
+</span>     * @private
+     * Called by onRender just before the child components are sized and positioned. This resizes the innerCt
+     * to make sure all child items fit within it. We call this before sizing the children because if our child
+     * items are larger than the previous innerCt size the browser will insert scrollbars and then remove them
+     * again immediately afterwards, giving a performance hit.
+     * Subclasses should provide an implementation.
+     * @param {Object} currentSize The current height and width of the innerCt
+     * @param {Array} calculations The new box calculations of all items to be laid out
+     */
+    updateInnerCtSize: function(tSize, calcs) {
+        var align   = this.align,
+            padding = this.padding,
+            width   = tSize.width,
+            height  = tSize.height;
+        
+        if (this.type == 'hbox') {
+            var innerCtWidth  = width,
+                innerCtHeight = calcs.meta.maxHeight + padding.top + padding.bottom;
+
+            if (align == 'stretch') {
+                innerCtHeight = height;
+            } else if (align == 'middle') {
+                innerCtHeight = Math.max(height, innerCtHeight);
+            }
+        } else {
+            var innerCtHeight = height,
+                innerCtWidth  = calcs.meta.maxWidth + padding.left + padding.right;
+
+            if (align == 'stretch') {
+                innerCtWidth = width;
+            } else if (align == 'center') {
+                innerCtWidth = Math.max(width, innerCtWidth);
+            }
+        }
+
+        this.innerCt.setSize(innerCtWidth || undefined, innerCtHeight || undefined);
+    },
+
+<span id='Ext-layout-BoxLayout-method-handleTargetOverflow'>    /**
+</span>     * @private
+     * This should be called after onLayout of any BoxLayout subclass. If the target's overflow is not set to 'hidden',
+     * we need to lay out a second time because the scrollbars may have modified the height and width of the layout
+     * target. Having a Box layout inside such a target is therefore not recommended.
+     * @param {Object} previousTargetSize The size and height of the layout target before we just laid out
+     * @param {Ext.Container} container The container
+     * @param {Ext.Element} target The target element
+     */
+    handleTargetOverflow: function(previousTargetSize, container, target) {
+        var overflow = target.getStyle('overflow');
+
+        if (overflow &amp;&amp; overflow != 'hidden' &amp;&amp;!this.adjustmentPass) {
+            var newTargetSize = this.getLayoutTargetSize();
+            if (newTargetSize.width != previousTargetSize.width || newTargetSize.height != previousTargetSize.height){
+                this.adjustmentPass = true;
+                this.onLayout(container, target);
+            }
+        }
+
+        delete this.adjustmentPass;
+    },
+
+<span id='Ext-layout-BoxLayout-method-isValidParent'>    // private
+</span>    isValidParent : function(c, target) {
+        return this.innerCt &amp;&amp; c.getPositionEl().dom.parentNode == this.innerCt.dom;
+    },
+
+<span id='Ext-layout-BoxLayout-method-getVisibleItems'>    /**
+</span>     * @private
+     * Returns all items that are both rendered and visible
+     * @return {Array} All matching items
+     */
+    getVisibleItems: function(ct) {
+        var ct  = ct || this.container,
+            t   = ct.getLayoutTarget(),
+            cti = ct.items.items,
+            len = cti.length,
+
+            i, c, items = [];
+
+        for (i = 0; i &lt; len; i++) {
+            if((c = cti[i]).rendered &amp;&amp; this.isValidParent(c, t) &amp;&amp; c.hidden !== true  &amp;&amp; c.collapsed !== true &amp;&amp; c.shouldLayout !== false){
+                items.push(c);
+            }
+        }
+
+        return items;
+    },
+
+<span id='Ext-layout-BoxLayout-method-renderAll'>    // private
+</span>    renderAll : function(ct, target) {
+        if (!this.innerCt) {
+            // the innerCt prevents wrapping and shuffling while the container is resizing
+            this.innerCt = target.createChild({cls:this.innerCls});
+            this.padding = this.parseMargins(this.padding);
+        }
+        Ext.layout.BoxLayout.superclass.renderAll.call(this, ct, this.innerCt);
+    },
+
+<span id='Ext-layout-BoxLayout-method-getLayoutTargetSize'>    getLayoutTargetSize : function() {
+</span>        var target = this.container.getLayoutTarget(), ret;
+        
+        if (target) {
+            ret = target.getViewSize();
+
+            // IE in strict mode will return a width of 0 on the 1st pass of getViewSize.
+            // Use getStyleSize to verify the 0 width, the adjustment pass will then work properly
+            // with getViewSize
+            if (Ext.isIE9m &amp;&amp; Ext.isStrict &amp;&amp; ret.width == 0){
+                ret =  target.getStyleSize();
+            }
+
+            ret.width  -= target.getPadding('lr');
+            ret.height -= target.getPadding('tb');
+        }
+        
+        return ret;
+    },
+
+<span id='Ext-layout-BoxLayout-method-renderItem'>    // private
+</span>    renderItem : function(c) {
+        if(Ext.isString(c.margins)){
+            c.margins = this.parseMargins(c.margins);
+        }else if(!c.margins){
+            c.margins = this.defaultMargins;
+        }
+        Ext.layout.BoxLayout.superclass.renderItem.apply(this, arguments);
+    },
+    
+<span id='Ext-layout-BoxLayout-method-destroy'>    /**
+</span>     * @private
+     */
+    destroy: function() {
+        Ext.destroy(this.overflowHandler);
+        
+        Ext.layout.BoxLayout.superclass.destroy.apply(this, arguments);
+    }
+});
+
+<span id='Ext-layout-boxOverflow-None'>/**
+</span> * @class Ext.layout.boxOverflow.None
+ * @extends Object
+ * Base class for Box Layout overflow handlers. These specialized classes are invoked when a Box Layout
+ * (either an HBox or a VBox) has child items that are either too wide (for HBox) or too tall (for VBox)
+ * for its container.
+ */
+
+Ext.layout.boxOverflow.None = Ext.extend(Object, {
+<span id='Ext-layout-boxOverflow-None-method-constructor'>    constructor: function(layout, config) {
+</span>        this.layout = layout;
+        
+        Ext.apply(this, config || {});
+    },
+    
+<span id='Ext-layout-boxOverflow-None-method-handleOverflow'>    handleOverflow: Ext.emptyFn,
+</span>    
+<span id='Ext-layout-boxOverflow-None-method-clearOverflow'>    clearOverflow: Ext.emptyFn
+</span>});
+
+
+Ext.layout.boxOverflow.none = Ext.layout.boxOverflow.None;
+</pre>
+</body>
+</html>

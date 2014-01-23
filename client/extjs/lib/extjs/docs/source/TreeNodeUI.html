@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-tree-TreeNodeUI'>/**
+</span> * @class Ext.tree.TreeNodeUI
+ * This class provides the default UI implementation for Ext TreeNodes.
+ * The TreeNode UI implementation is separate from the
+ * tree implementation, and allows customizing of the appearance of
+ * tree nodes.&lt;br&gt;
+ * &lt;p&gt;
+ * If you are customizing the Tree's user interface, you
+ * may need to extend this class, but you should never need to instantiate this class.&lt;br&gt;
+ * &lt;p&gt;
+ * This class provides access to the user interface components of an Ext TreeNode, through
+ * {@link Ext.tree.TreeNode#getUI}
+ */
+Ext.tree.TreeNodeUI = Ext.extend(Object, {
+    
+<span id='Ext-tree-TreeNodeUI-method-constructor'>    constructor : function(node){
+</span>        Ext.apply(this, {
+            node: node,
+            rendered: false,
+            animating: false,
+            wasLeaf: true,
+            ecc: 'x-tree-ec-icon x-tree-elbow',
+            emptyIcon: Ext.BLANK_IMAGE_URL    
+        });
+    },
+    
+<span id='Ext-tree-TreeNodeUI-method-removeChild'>    // private
+</span>    removeChild : function(node){
+        if(this.rendered){
+            this.ctNode.removeChild(node.ui.getEl());
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-beforeLoad'>    // private
+</span>    beforeLoad : function(){
+         this.addClass(&quot;x-tree-node-loading&quot;);
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-afterLoad'>    // private
+</span>    afterLoad : function(){
+         this.removeClass(&quot;x-tree-node-loading&quot;);
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onTextChange'>    // private
+</span>    onTextChange : function(node, text, oldText){
+        if(this.rendered){
+            this.textNode.innerHTML = text;
+        }
+    },
+    
+<span id='Ext-tree-TreeNodeUI-method-onIconClsChange'>    // private
+</span>    onIconClsChange : function(node, cls, oldCls){
+        if(this.rendered){
+            Ext.fly(this.iconNode).replaceClass(oldCls, cls);
+        }
+    },
+    
+<span id='Ext-tree-TreeNodeUI-method-onIconChange'>    // private
+</span>    onIconChange : function(node, icon){
+        if(this.rendered){
+            //'&lt;img src=&quot;', a.icon || this.emptyIcon, '&quot; class=&quot;x-tree-node-icon',(a.icon ? &quot; x-tree-node-inline-icon&quot; : &quot;&quot;),(a.iconCls ? &quot; &quot;+a.iconCls : &quot;&quot;),'&quot; unselectable=&quot;on&quot; /&gt;',
+            var empty = Ext.isEmpty(icon);
+            this.iconNode.src = empty ? this.emptyIcon : icon;
+            Ext.fly(this.iconNode)[empty ? 'removeClass' : 'addClass']('x-tree-node-inline-icon');
+        }
+    },
+    
+<span id='Ext-tree-TreeNodeUI-method-onTipChange'>    // private
+</span>    onTipChange : function(node, tip, title){
+        if(this.rendered){
+            var hasTitle = Ext.isDefined(title);
+            if(this.textNode.setAttributeNS){
+                this.textNode.setAttributeNS(&quot;ext&quot;, &quot;qtip&quot;, tip);
+                if(hasTitle){
+                    this.textNode.setAttributeNS(&quot;ext&quot;, &quot;qtitle&quot;, title);
+                }
+            }else{
+                this.textNode.setAttribute(&quot;ext:qtip&quot;, tip);
+                if(hasTitle){
+                    this.textNode.setAttribute(&quot;ext:qtitle&quot;, title);
+                }
+            }
+        }
+    },
+    
+<span id='Ext-tree-TreeNodeUI-method-onHrefChange'>    // private
+</span>    onHrefChange : function(node, href, target){
+        if(this.rendered){
+            this.anchor.href = this.getHref(href);
+            if(Ext.isDefined(target)){
+                this.anchor.target = target;
+            }
+        }
+    },
+    
+<span id='Ext-tree-TreeNodeUI-method-onClsChange'>    // private
+</span>    onClsChange : function(node, cls, oldCls){
+        if(this.rendered){
+            Ext.fly(this.elNode).replaceClass(oldCls, cls);
+        }    
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onDisableChange'>    // private
+</span>    onDisableChange : function(node, state){
+        this.disabled = state;
+        if (this.checkbox) {
+            this.checkbox.disabled = state;
+        }
+        this[state ? 'addClass' : 'removeClass']('x-tree-node-disabled');
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onSelectedChange'>    // private
+</span>    onSelectedChange : function(state){
+        if(state){
+            this.focus();
+            this.addClass(&quot;x-tree-selected&quot;);
+        }else{
+            //this.blur();
+            this.removeClass(&quot;x-tree-selected&quot;);
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onMove'>    // private
+</span>    onMove : function(tree, node, oldParent, newParent, index, refNode){
+        this.childIndent = null;
+        if(this.rendered){
+            var targetNode = newParent.ui.getContainer();
+            if(!targetNode){//target not rendered
+                this.holder = document.createElement(&quot;div&quot;);
+                this.holder.appendChild(this.wrap);
+                return;
+            }
+            var insertBefore = refNode ? refNode.ui.getEl() : null;
+            if(insertBefore){
+                targetNode.insertBefore(this.wrap, insertBefore);
+            }else{
+                targetNode.appendChild(this.wrap);
+            }
+            this.node.renderIndent(true, oldParent != newParent);
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-addClass'>/**
+</span> * Adds one or more CSS classes to the node's UI element.
+ * Duplicate classes are automatically filtered out.
+ * @param {String/Array} className The CSS class to add, or an array of classes
+ */
+    addClass : function(cls){
+        if(this.elNode){
+            Ext.fly(this.elNode).addClass(cls);
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-removeClass'>/**
+</span> * Removes one or more CSS classes from the node's UI element.
+ * @param {String/Array} className The CSS class to remove, or an array of classes
+ */
+    removeClass : function(cls){
+        if(this.elNode){
+            Ext.fly(this.elNode).removeClass(cls);
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-remove'>    // private
+</span>    remove : function(){
+        if(this.rendered){
+            this.holder = document.createElement(&quot;div&quot;);
+            this.holder.appendChild(this.wrap);
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-fireEvent'>    // private
+</span>    fireEvent : function(){
+        return this.node.fireEvent.apply(this.node, arguments);
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-initEvents'>    // private
+</span>    initEvents : function(){
+        this.node.on(&quot;move&quot;, this.onMove, this);
+
+        if(this.node.disabled){
+            this.onDisableChange(this.node, true);
+        }
+        if(this.node.hidden){
+            this.hide();
+        }
+        var ot = this.node.getOwnerTree();
+        var dd = ot.enableDD || ot.enableDrag || ot.enableDrop;
+        if(dd &amp;&amp; (!this.node.isRoot || ot.rootVisible)){
+            Ext.dd.Registry.register(this.elNode, {
+                node: this.node,
+                handles: this.getDDHandles(),
+                isHandle: false
+            });
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-getDDHandles'>    // private
+</span>    getDDHandles : function(){
+        return [this.iconNode, this.textNode, this.elNode];
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-hide'>/**
+</span> * Hides this node.
+ */
+    hide : function(){
+        this.node.hidden = true;
+        if(this.wrap){
+            this.wrap.style.display = &quot;none&quot;;
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-show'>/**
+</span> * Shows this node.
+ */
+    show : function(){
+        this.node.hidden = false;
+        if(this.wrap){
+            this.wrap.style.display = &quot;&quot;;
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onContextMenu'>    // private
+</span>    onContextMenu : function(e){
+        if (this.node.hasListener(&quot;contextmenu&quot;) || this.node.getOwnerTree().hasListener(&quot;contextmenu&quot;)) {
+            e.preventDefault();
+            this.focus();
+            this.fireEvent(&quot;contextmenu&quot;, this.node, e);
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onClick'>    // private
+</span>    onClick : function(e){
+        if(this.dropping){
+            e.stopEvent();
+            return;
+        }
+        if(this.fireEvent(&quot;beforeclick&quot;, this.node, e) !== false){
+            var a = e.getTarget('a');
+            if(!this.disabled &amp;&amp; this.node.attributes.href &amp;&amp; a){
+                this.fireEvent(&quot;click&quot;, this.node, e);
+                return;
+            }else if(a &amp;&amp; e.ctrlKey){
+                e.stopEvent();
+            }
+            e.preventDefault();
+            if(this.disabled){
+                return;
+            }
+
+            if(this.node.attributes.singleClickExpand &amp;&amp; !this.animating &amp;&amp; this.node.isExpandable()){
+                this.node.toggle();
+            }
+
+            this.fireEvent(&quot;click&quot;, this.node, e);
+        }else{
+            e.stopEvent();
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onDblClick'>    // private
+</span>    onDblClick : function(e){
+        e.preventDefault();
+        if(this.disabled){
+            return;
+        }
+        if(this.fireEvent(&quot;beforedblclick&quot;, this.node, e) !== false){
+            if(this.checkbox){
+                this.toggleCheck();
+            }
+            if(!this.animating &amp;&amp; this.node.isExpandable()){
+                this.node.toggle();
+            }
+            this.fireEvent(&quot;dblclick&quot;, this.node, e);
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onOver'>    onOver : function(e){
+</span>        this.addClass('x-tree-node-over');
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onOut'>    onOut : function(e){
+</span>        this.removeClass('x-tree-node-over');
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onCheckChange'>    // private
+</span>    onCheckChange : function(){
+        var checked = this.checkbox.checked;
+        // fix for IE6
+        this.checkbox.defaultChecked = checked;
+        this.node.attributes.checked = checked;
+        this.fireEvent('checkchange', this.node, checked);
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-ecClick'>    // private
+</span>    ecClick : function(e){
+        if(!this.animating &amp;&amp; this.node.isExpandable()){
+            this.node.toggle();
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-startDrop'>    // private
+</span>    startDrop : function(){
+        this.dropping = true;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-endDrop'>    // delayed drop so the click event doesn't get fired on a drop
+</span>    endDrop : function(){
+       setTimeout(function(){
+           this.dropping = false;
+       }.createDelegate(this), 50);
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-expand'>    // private
+</span>    expand : function(){
+        this.updateExpandIcon();
+        this.ctNode.style.display = &quot;&quot;;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-focus'>    // private
+</span>    focus : function(){
+        if(!this.node.preventHScroll){
+            try{this.anchor.focus();
+            }catch(e){}
+        }else{
+            try{
+                var noscroll = this.node.getOwnerTree().getTreeEl().dom;
+                var l = noscroll.scrollLeft;
+                this.anchor.focus();
+                noscroll.scrollLeft = l;
+            }catch(e){}
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-toggleCheck'>/**
+</span> * Sets the checked status of the tree node to the passed value, or, if no value was passed,
+ * toggles the checked status. If the node was rendered with no checkbox, this has no effect.
+ * @param {Boolean} value (optional) The new checked status.
+ */
+    toggleCheck : function(value){
+        var cb = this.checkbox;
+        if(cb){
+            cb.checked = (value === undefined ? !cb.checked : value);
+            this.onCheckChange();
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-blur'>    // private
+</span>    blur : function(){
+        try{
+            this.anchor.blur();
+        }catch(e){}
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-animExpand'>    // private
+</span>    animExpand : function(callback){
+        var ct = Ext.get(this.ctNode);
+        ct.stopFx();
+        if(!this.node.isExpandable()){
+            this.updateExpandIcon();
+            this.ctNode.style.display = &quot;&quot;;
+            Ext.callback(callback);
+            return;
+        }
+        this.animating = true;
+        this.updateExpandIcon();
+
+        ct.slideIn('t', {
+           callback : function(){
+               this.animating = false;
+               Ext.callback(callback);
+            },
+            scope: this,
+            duration: this.node.ownerTree.duration || .25
+        });
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-highlight'>    // private
+</span>    highlight : function(){
+        var tree = this.node.getOwnerTree();
+        Ext.fly(this.wrap).highlight(
+            tree.hlColor || &quot;C3DAF9&quot;,
+            {endColor: tree.hlBaseColor}
+        );
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-collapse'>    // private
+</span>    collapse : function(){
+        this.updateExpandIcon();
+        this.ctNode.style.display = &quot;none&quot;;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-animCollapse'>    // private
+</span>    animCollapse : function(callback){
+        var ct = Ext.get(this.ctNode);
+        ct.enableDisplayMode('block');
+        ct.stopFx();
+
+        this.animating = true;
+        this.updateExpandIcon();
+
+        ct.slideOut('t', {
+            callback : function(){
+               this.animating = false;
+               Ext.callback(callback);
+            },
+            scope: this,
+            duration: this.node.ownerTree.duration || .25
+        });
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-getContainer'>    // private
+</span>    getContainer : function(){
+        return this.ctNode;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-getEl'>/**
+</span> * Returns the element which encapsulates this node.
+ * @return {HtmlElement} The DOM element. The default implementation uses a &lt;code&gt;&amp;lt;li&gt;&lt;/code&gt;.
+ */
+    getEl : function(){
+        return this.wrap;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-appendDDGhost'>    // private
+</span>    appendDDGhost : function(ghostNode){
+        ghostNode.appendChild(this.elNode.cloneNode(true));
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-getDDRepairXY'>    // private
+</span>    getDDRepairXY : function(){
+        return Ext.lib.Dom.getXY(this.iconNode);
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onRender'>    // private
+</span>    onRender : function(){
+        this.render();
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-render'>    // private
+</span>    render : function(bulkRender){
+        var n = this.node, a = n.attributes;
+        var targetNode = n.parentNode ?
+              n.parentNode.ui.getContainer() : n.ownerTree.innerCt.dom;
+
+        if(!this.rendered){
+            this.rendered = true;
+
+            this.renderElements(n, a, targetNode, bulkRender);
+
+            if(a.qtip){
+                this.onTipChange(n, a.qtip, a.qtipTitle);
+            }else if(a.qtipCfg){
+                a.qtipCfg.target = Ext.id(this.textNode);
+                Ext.QuickTips.register(a.qtipCfg);
+            }
+            this.initEvents();
+            if(!this.node.expanded){
+                this.updateExpandIcon(true);
+            }
+        }else{
+            if(bulkRender === true) {
+                targetNode.appendChild(this.wrap);
+            }
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-renderElements'>    // private
+</span>    renderElements : function(n, a, targetNode, bulkRender){
+        // add some indent caching, this helps performance when rendering a large tree
+        this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() : '';
+
+        var cb = Ext.isBoolean(a.checked),
+            nel,
+            href = this.getHref(a.href),
+            buf = ['&lt;li class=&quot;x-tree-node&quot;&gt;&lt;div ext:tree-node-id=&quot;',n.id,'&quot; class=&quot;x-tree-node-el x-tree-node-leaf x-unselectable ', a.cls,'&quot; unselectable=&quot;on&quot;&gt;',
+            '&lt;span class=&quot;x-tree-node-indent&quot;&gt;',this.indentMarkup,&quot;&lt;/span&gt;&quot;,
+            '&lt;img alt=&quot;&quot; src=&quot;', this.emptyIcon, '&quot; class=&quot;x-tree-ec-icon x-tree-elbow&quot; /&gt;',
+            '&lt;img alt=&quot;&quot; src=&quot;', a.icon || this.emptyIcon, '&quot; class=&quot;x-tree-node-icon',(a.icon ? &quot; x-tree-node-inline-icon&quot; : &quot;&quot;),(a.iconCls ? &quot; &quot;+a.iconCls : &quot;&quot;),'&quot; unselectable=&quot;on&quot; /&gt;',
+            cb ? ('&lt;input class=&quot;x-tree-node-cb&quot; type=&quot;checkbox&quot; ' + (a.checked ? 'checked=&quot;checked&quot; /&gt;' : '/&gt;')) : '',
+            '&lt;a hidefocus=&quot;on&quot; class=&quot;x-tree-node-anchor&quot; href=&quot;',href,'&quot; tabIndex=&quot;1&quot; ',
+             a.hrefTarget ? ' target=&quot;'+a.hrefTarget+'&quot;' : &quot;&quot;, '&gt;&lt;span unselectable=&quot;on&quot;&gt;',n.text,&quot;&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;&quot;,
+            '&lt;ul class=&quot;x-tree-node-ct&quot; style=&quot;display:none;&quot;&gt;&lt;/ul&gt;',
+            &quot;&lt;/li&gt;&quot;].join('');
+
+        if(bulkRender !== true &amp;&amp; n.nextSibling &amp;&amp; (nel = n.nextSibling.ui.getEl())){
+            this.wrap = Ext.DomHelper.insertHtml(&quot;beforeBegin&quot;, nel, buf);
+        }else{
+            this.wrap = Ext.DomHelper.insertHtml(&quot;beforeEnd&quot;, targetNode, buf);
+        }
+
+        this.elNode = this.wrap.childNodes[0];
+        this.ctNode = this.wrap.childNodes[1];
+        var cs = this.elNode.childNodes;
+        this.indentNode = cs[0];
+        this.ecNode = cs[1];
+        this.iconNode = cs[2];
+        var index = 3;
+        if(cb){
+            this.checkbox = cs[3];
+            // fix for IE6
+            this.checkbox.defaultChecked = this.checkbox.checked;
+            index++;
+        }
+        this.anchor = cs[index];
+        this.textNode = cs[index].firstChild;
+    },
+    
+<span id='Ext-tree-TreeNodeUI-method-getHref'>    /**
+</span>     * @private Gets a normalized href for the node.
+     * @param {String} href
+     */
+    getHref : function(href){
+        return Ext.isEmpty(href) ? (Ext.isGecko ? '' : '#') : href;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-getAnchor'>/**
+</span> * Returns the &amp;lt;a&gt; element that provides focus for the node's UI.
+ * @return {HtmlElement} The DOM anchor element.
+ */
+    getAnchor : function(){
+        return this.anchor;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-getTextEl'>/**
+</span> * Returns the text node.
+ * @return {HtmlNode} The DOM text node.
+ */
+    getTextEl : function(){
+        return this.textNode;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-getIconEl'>/**
+</span> * Returns the icon &amp;lt;img&gt; element.
+ * @return {HtmlElement} The DOM image element.
+ */
+    getIconEl : function(){
+        return this.iconNode;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-isChecked'>/**
+</span> * Returns the checked status of the node. If the node was rendered with no
+ * checkbox, it returns false.
+ * @return {Boolean} The checked flag.
+ */
+    isChecked : function(){
+        return this.checkbox ? this.checkbox.checked : false;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-updateExpandIcon'>    // private
+</span>    updateExpandIcon : function(){
+        if(this.rendered){
+            var n = this.node,
+                c1,
+                c2,
+                cls = n.isLast() ? &quot;x-tree-elbow-end&quot; : &quot;x-tree-elbow&quot;,
+                hasChild = n.hasChildNodes();
+            if(hasChild || n.attributes.expandable){
+                if(n.expanded){
+                    cls += &quot;-minus&quot;;
+                    c1 = &quot;x-tree-node-collapsed&quot;;
+                    c2 = &quot;x-tree-node-expanded&quot;;
+                }else{
+                    cls += &quot;-plus&quot;;
+                    c1 = &quot;x-tree-node-expanded&quot;;
+                    c2 = &quot;x-tree-node-collapsed&quot;;
+                }
+                if(this.wasLeaf){
+                    this.removeClass(&quot;x-tree-node-leaf&quot;);
+                    this.wasLeaf = false;
+                }
+                if(this.c1 != c1 || this.c2 != c2){
+                    Ext.fly(this.elNode).replaceClass(c1, c2);
+                    this.c1 = c1; this.c2 = c2;
+                }
+            }else{
+                if(!this.wasLeaf){
+                    Ext.fly(this.elNode).replaceClass(&quot;x-tree-node-expanded&quot;, &quot;x-tree-node-collapsed&quot;);
+                    delete this.c1;
+                    delete this.c2;
+                    this.wasLeaf = true;
+                }
+            }
+            var ecc = &quot;x-tree-ec-icon &quot;+cls;
+            if(this.ecc != ecc){
+                this.ecNode.className = ecc;
+                this.ecc = ecc;
+            }
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-onIdChange'>    // private
+</span>    onIdChange: function(id){
+        if(this.rendered){
+            this.elNode.setAttribute('ext:tree-node-id', id);
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-getChildIndent'>    // private
+</span>    getChildIndent : function(){
+        if(!this.childIndent){
+            var buf = [],
+                p = this.node;
+            while(p){
+                if(!p.isRoot || (p.isRoot &amp;&amp; p.ownerTree.rootVisible)){
+                    if(!p.isLast()) {
+                        buf.unshift('&lt;img alt=&quot;&quot; src=&quot;'+this.emptyIcon+'&quot; class=&quot;x-tree-elbow-line&quot; /&gt;');
+                    } else {
+                        buf.unshift('&lt;img alt=&quot;&quot; src=&quot;'+this.emptyIcon+'&quot; class=&quot;x-tree-icon&quot; /&gt;');
+                    }
+                }
+                p = p.parentNode;
+            }
+            this.childIndent = buf.join(&quot;&quot;);
+        }
+        return this.childIndent;
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-renderIndent'>    // private
+</span>    renderIndent : function(){
+        if(this.rendered){
+            var indent = &quot;&quot;,
+                p = this.node.parentNode;
+            if(p){
+                indent = p.ui.getChildIndent();
+            }
+            if(this.indentMarkup != indent){ // don't rerender if not required
+                this.indentNode.innerHTML = indent;
+                this.indentMarkup = indent;
+            }
+            this.updateExpandIcon();
+        }
+    },
+
+<span id='Ext-tree-TreeNodeUI-method-destroy'>    destroy : function(){
+</span>        if(this.elNode){
+            Ext.dd.Registry.unregister(this.elNode.id);
+        }
+
+        Ext.each(['textnode', 'anchor', 'checkbox', 'indentNode', 'ecNode', 'iconNode', 'elNode', 'ctNode', 'wrap', 'holder'], function(el){
+            if(this[el]){
+                Ext.fly(this[el]).remove();
+                delete this[el];
+            }
+        }, this);
+        delete this.node;
+    }
+});
+
+<span id='Ext-tree-RootTreeNodeUI'>/**
+</span> * @class Ext.tree.RootTreeNodeUI
+ * This class provides the default UI implementation for &lt;b&gt;root&lt;/b&gt; Ext TreeNodes.
+ * The RootTreeNode UI implementation allows customizing the appearance of the root tree node.&lt;br&gt;
+ * &lt;p&gt;
+ * If you are customizing the Tree's user interface, you
+ * may need to extend this class, but you should never need to instantiate this class.&lt;br&gt;
+ */
+Ext.tree.RootTreeNodeUI = Ext.extend(Ext.tree.TreeNodeUI, {
+<span id='Ext-tree-RootTreeNodeUI-method-render'>    // private
+</span>    render : function(){
+        if(!this.rendered){
+            var targetNode = this.node.ownerTree.innerCt.dom;
+            this.node.expanded = true;
+            targetNode.innerHTML = '&lt;div class=&quot;x-tree-root-node&quot;&gt;&lt;/div&gt;';
+            this.wrap = this.ctNode = targetNode.firstChild;
+        }
+    },
+<span id='Ext-tree-RootTreeNodeUI-method-collapse'>    collapse : Ext.emptyFn,
+</span><span id='Ext-tree-RootTreeNodeUI-method-expand'>    expand : Ext.emptyFn
+</span>});</pre>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-grid-RowNumberer-method-constructor'><span id='Ext-grid-RowNumberer'>/**
+</span></span> * @class Ext.grid.RowNumberer
+ * This is a utility class that can be passed into a {@link Ext.grid.ColumnModel} as a column config that provides
+ * an automatic row numbering column.
+ * &lt;br&gt;Usage:&lt;br&gt;
+ &lt;pre&gt;&lt;code&gt;
+ // This is a typical column config with the first column providing row numbers
+ var colModel = new Ext.grid.ColumnModel([
+    new Ext.grid.RowNumberer(),
+    {header: &quot;Name&quot;, width: 80, sortable: true},
+    {header: &quot;Code&quot;, width: 50, sortable: true},
+    {header: &quot;Description&quot;, width: 200, sortable: true}
+ ]);
+ &lt;/code&gt;&lt;/pre&gt;
+ * @constructor
+ * @param {Object} config The configuration options
+ */
+Ext.grid.RowNumberer = Ext.extend(Object, {
+<span id='Ext-grid-RowNumberer-cfg-header'>    /**
+</span>     * @cfg {String} header Any valid text or HTML fragment to display in the header cell for the row
+     * number column (defaults to '').
+     */
+    header: &quot;&quot;,
+<span id='Ext-grid-RowNumberer-cfg-width'>    /**
+</span>     * @cfg {Number} width The default width in pixels of the row number column (defaults to 23).
+     */
+    width: 23,
+<span id='Ext-grid-RowNumberer-cfg-sortable'>    /**
+</span>     * @cfg {Boolean} sortable True if the row number column is sortable (defaults to false).
+     * @hide
+     */
+    sortable: false,
+    
+    constructor : function(config){
+        Ext.apply(this, config);
+        if(this.rowspan){
+            this.renderer = this.renderer.createDelegate(this);
+        }
+    },
+
+<span id='Ext-grid-RowNumberer-property-fixed'>    // private
+</span>    fixed:true,
+<span id='Ext-grid-RowNumberer-property-hideable'>    hideable: false,
+</span><span id='Ext-grid-RowNumberer-property-menuDisabled'>    menuDisabled:true,
+</span><span id='Ext-grid-RowNumberer-property-dataIndex'>    dataIndex: '',
+</span><span id='Ext-grid-RowNumberer-property-id'>    id: 'numberer',
+</span><span id='Ext-grid-RowNumberer-property-rowspan'>    rowspan: undefined,
+</span>
+<span id='Ext-grid-RowNumberer-method-renderer'>    // private
+</span>    renderer : function(v, p, record, rowIndex){
+        if(this.rowspan){
+            p.cellAttr = 'rowspan=&quot;'+this.rowspan+'&quot;';
+        }
+        return rowIndex+1;
+    }
+});</pre>
+</body>
+</html>

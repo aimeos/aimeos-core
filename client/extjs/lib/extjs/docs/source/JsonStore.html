@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-data-JsonStore-method-constructor'><span id='Ext-data-JsonStore'>/**
+</span></span> * @class Ext.data.JsonStore
+ * @extends Ext.data.Store
+ * &lt;p&gt;Small helper class to make creating {@link Ext.data.Store}s from JSON data easier.
+ * A JsonStore will be automatically configured with a {@link Ext.data.JsonReader}.&lt;/p&gt;
+ * &lt;p&gt;A store configuration would be something like:&lt;pre&gt;&lt;code&gt;
+var store = new Ext.data.JsonStore({
+    // store configs
+    autoDestroy: true,
+    url: 'get-images.php',
+    storeId: 'myStore',
+    // reader configs
+    root: 'images',
+    idProperty: 'name',
+    fields: ['name', 'url', {name:'size', type: 'float'}, {name:'lastmod', type:'date'}]
+});
+ * &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+ * &lt;p&gt;This store is configured to consume a returned object of the form:&lt;pre&gt;&lt;code&gt;
+{
+    images: [
+        {name: 'Image one', url:'/GetImage.php?id=1', size:46.5, lastmod: new Date(2007, 10, 29)},
+        {name: 'Image Two', url:'/GetImage.php?id=2', size:43.2, lastmod: new Date(2007, 10, 30)}
+    ]
+}
+ * &lt;/code&gt;&lt;/pre&gt;
+ * An object literal of this form could also be used as the {@link #data} config option.&lt;/p&gt;
+ * &lt;p&gt;&lt;b&gt;*Note:&lt;/b&gt; Although not listed here, this class accepts all of the configuration options of
+ * &lt;b&gt;{@link Ext.data.JsonReader JsonReader}&lt;/b&gt;.&lt;/p&gt;
+ * @constructor
+ * @param {Object} config
+ * @xtype jsonstore
+ */
+Ext.data.JsonStore = Ext.extend(Ext.data.Store, {
+<span id='Ext-data-JsonStore-cfg-reader'>    /**
+</span>     * @cfg {Ext.data.DataReader} reader @hide
+     */
+    constructor: function(config){
+        Ext.data.JsonStore.superclass.constructor.call(this, Ext.apply(config, {
+            reader: new Ext.data.JsonReader(config)
+        }));
+    }
+});
+Ext.reg('jsonstore', Ext.data.JsonStore);</pre>
+</body>
+</html>

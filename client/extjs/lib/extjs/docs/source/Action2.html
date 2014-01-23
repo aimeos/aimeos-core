@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-form-Action'>/**
+</span> * @class Ext.form.Action
+ * &lt;p&gt;The subclasses of this class provide actions to perform upon {@link Ext.form.BasicForm Form}s.&lt;/p&gt;
+ * &lt;p&gt;Instances of this class are only created by a {@link Ext.form.BasicForm Form} when
+ * the Form needs to perform an action such as submit or load. The Configuration options
+ * listed for this class are set through the Form's action methods: {@link Ext.form.BasicForm#submit submit},
+ * {@link Ext.form.BasicForm#load load} and {@link Ext.form.BasicForm#doAction doAction}&lt;/p&gt;
+ * &lt;p&gt;The instance of Action which performed the action is passed to the success
+ * and failure callbacks of the Form's action methods ({@link Ext.form.BasicForm#submit submit},
+ * {@link Ext.form.BasicForm#load load} and {@link Ext.form.BasicForm#doAction doAction}),
+ * and to the {@link Ext.form.BasicForm#actioncomplete actioncomplete} and
+ * {@link Ext.form.BasicForm#actionfailed actionfailed} event handlers.&lt;/p&gt;
+ */
+Ext.form.Action = function(form, options){
+    this.form = form;
+    this.options = options || {};
+};
+
+<span id='Ext-form-Action-static-property-CLIENT_INVALID'>/**
+</span> * Failure type returned when client side validation of the Form fails
+ * thus aborting a submit action. Client side validation is performed unless
+ * {@link #clientValidation} is explicitly set to &lt;tt&gt;false&lt;/tt&gt;.
+ * @type {String}
+ * @static
+ */
+Ext.form.Action.CLIENT_INVALID = 'client';
+<span id='Ext-form-Action-static-property-SERVER_INVALID'>/**
+</span> * &lt;p&gt;Failure type returned when server side processing fails and the {@link #result}'s
+ * &lt;tt style=&quot;font-weight:bold&quot;&gt;success&lt;/tt&gt; property is set to &lt;tt&gt;false&lt;/tt&gt;.&lt;/p&gt;
+ * &lt;p&gt;In the case of a form submission, field-specific error messages may be returned in the
+ * {@link #result}'s &lt;tt style=&quot;font-weight:bold&quot;&gt;errors&lt;/tt&gt; property.&lt;/p&gt;
+ * @type {String}
+ * @static
+ */
+Ext.form.Action.SERVER_INVALID = 'server';
+<span id='Ext-form-Action-static-property-CONNECT_FAILURE'>/**
+</span> * Failure type returned when a communication error happens when attempting
+ * to send a request to the remote server. The {@link #response} may be examined to
+ * provide further information.
+ * @type {String}
+ * @static
+ */
+Ext.form.Action.CONNECT_FAILURE = 'connect';
+<span id='Ext-form-Action-static-property-LOAD_FAILURE'>/**
+</span> * Failure type returned when the response's &lt;tt style=&quot;font-weight:bold&quot;&gt;success&lt;/tt&gt;
+ * property is set to &lt;tt&gt;false&lt;/tt&gt;, or no field values are returned in the response's
+ * &lt;tt style=&quot;font-weight:bold&quot;&gt;data&lt;/tt&gt; property.
+ * @type {String}
+ * @static
+ */
+Ext.form.Action.LOAD_FAILURE = 'load';
+
+Ext.form.Action.prototype = {
+<span id='Ext-form-Action-cfg-url'>/**
+</span> * @cfg {String} url The URL that the Action is to invoke.
+ */
+<span id='Ext-form-Action-cfg-reset'>/**
+</span> * @cfg {Boolean} reset When set to &lt;tt&gt;&lt;b&gt;true&lt;/b&gt;&lt;/tt&gt;, causes the Form to be
+ * {@link Ext.form.BasicForm.reset reset} on Action success. If specified, this happens
+ * &lt;b&gt;before&lt;/b&gt; the {@link #success} callback is called and before the Form's
+ * {@link Ext.form.BasicForm.actioncomplete actioncomplete} event fires.
+ */
+<span id='Ext-form-Action-cfg-method'>/**
+</span> * @cfg {String} method The HTTP method to use to access the requested URL. Defaults to the
+ * {@link Ext.form.BasicForm}'s method, or if that is not specified, the underlying DOM form's method.
+ */
+<span id='Ext-form-Action-cfg-params'>/**
+</span> * @cfg {Mixed} params &lt;p&gt;Extra parameter values to pass. These are added to the Form's
+ * {@link Ext.form.BasicForm#baseParams} and passed to the specified URL along with the Form's
+ * input fields.&lt;/p&gt;
+ * &lt;p&gt;Parameters are encoded as standard HTTP parameters using {@link Ext#urlEncode}.&lt;/p&gt;
+ */
+<span id='Ext-form-Action-cfg-timeout'>/**
+</span> * @cfg {Number} timeout The number of seconds to wait for a server response before
+ * failing with the {@link #failureType} as {@link #Action.CONNECT_FAILURE}. If not specified,
+ * defaults to the configured &lt;tt&gt;{@link Ext.form.BasicForm#timeout timeout}&lt;/tt&gt; of the
+ * {@link Ext.form.BasicForm form}.
+ */
+<span id='Ext-form-Action-cfg-success'>/**
+</span> * @cfg {Function} success The function to call when a valid success return packet is recieved.
+ * The function is passed the following parameters:&lt;ul class=&quot;mdetail-params&quot;&gt;
+ * &lt;li&gt;&lt;b&gt;form&lt;/b&gt; : Ext.form.BasicForm&lt;div class=&quot;sub-desc&quot;&gt;The form that requested the action&lt;/div&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;action&lt;/b&gt; : Ext.form.Action&lt;div class=&quot;sub-desc&quot;&gt;The Action class. The {@link #result}
+ * property of this object may be examined to perform custom postprocessing.&lt;/div&gt;&lt;/li&gt;
+ * &lt;/ul&gt;
+ */
+<span id='Ext-form-Action-cfg-failure'>/**
+</span> * @cfg {Function} failure The function to call when a failure packet was recieved, or when an
+ * error ocurred in the Ajax communication.
+ * The function is passed the following parameters:&lt;ul class=&quot;mdetail-params&quot;&gt;
+ * &lt;li&gt;&lt;b&gt;form&lt;/b&gt; : Ext.form.BasicForm&lt;div class=&quot;sub-desc&quot;&gt;The form that requested the action&lt;/div&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;action&lt;/b&gt; : Ext.form.Action&lt;div class=&quot;sub-desc&quot;&gt;The Action class. If an Ajax
+ * error ocurred, the failure type will be in {@link #failureType}. The {@link #result}
+ * property of this object may be examined to perform custom postprocessing.&lt;/div&gt;&lt;/li&gt;
+ * &lt;/ul&gt;
+ */
+<span id='Ext-form-Action-cfg-scope'>/**
+</span> * @cfg {Object} scope The scope in which to call the callback functions (The &lt;tt&gt;this&lt;/tt&gt; reference
+ * for the callback functions).
+ */
+<span id='Ext-form-Action-cfg-waitMsg'>/**
+</span> * @cfg {String} waitMsg The message to be displayed by a call to {@link Ext.MessageBox#wait}
+ * during the time the action is being processed.
+ */
+<span id='Ext-form-Action-cfg-waitTitle'>/**
+</span> * @cfg {String} waitTitle The title to be displayed by a call to {@link Ext.MessageBox#wait}
+ * during the time the action is being processed.
+ */
+
+<span id='Ext-form-Action-cfg-submitEmptyText'>/**
+</span> * @cfg {Boolean} submitEmptyText If set to &lt;tt&gt;true&lt;/tt&gt;, the emptyText value will be sent with the form
+ * when it is submitted.  Defaults to &lt;tt&gt;true&lt;/tt&gt;.
+ */
+
+<span id='Ext-form-Action-property-type'>/**
+</span> * The type of action this Action instance performs.
+ * Currently only &quot;submit&quot; and &quot;load&quot; are supported.
+ * @type {String}
+ */
+    type : 'default',
+<span id='Ext-form-Action-property-failureType'>/**
+</span> * The type of failure detected will be one of these: {@link #CLIENT_INVALID},
+ * {@link #SERVER_INVALID}, {@link #CONNECT_FAILURE}, or {@link #LOAD_FAILURE}.  Usage:
+ * &lt;pre&gt;&lt;code&gt;
+var fp = new Ext.form.FormPanel({
+...
+buttons: [{
+    text: 'Save',
+    formBind: true,
+    handler: function(){
+        if(fp.getForm().isValid()){
+            fp.getForm().submit({
+                url: 'form-submit.php',
+                waitMsg: 'Submitting your data...',
+                success: function(form, action){
+                    // server responded with success = true
+                    var result = action.{@link #result};
+                },
+                failure: function(form, action){
+                    if (action.{@link #failureType} === Ext.form.Action.{@link #CONNECT_FAILURE}) {
+                        Ext.Msg.alert('Error',
+                            'Status:'+action.{@link #response}.status+': '+
+                            action.{@link #response}.statusText);
+                    }
+                    if (action.failureType === Ext.form.Action.{@link #SERVER_INVALID}){
+                        // server responded with success = false
+                        Ext.Msg.alert('Invalid', action.{@link #result}.errormsg);
+                    }
+                }
+            });
+        }
+    }
+},{
+    text: 'Reset',
+    handler: function(){
+        fp.getForm().reset();
+    }
+}]
+ * &lt;/code&gt;&lt;/pre&gt;
+ * @property failureType
+ * @type {String}
+ */
+<span id='Ext-form-Action-property-response'> /**
+</span> * The XMLHttpRequest object used to perform the action.
+ * @property response
+ * @type {Object}
+ */
+<span id='Ext-form-Action-property-result'> /**
+</span> * The decoded response object containing a boolean &lt;tt style=&quot;font-weight:bold&quot;&gt;success&lt;/tt&gt; property and
+ * other, action-specific properties.
+ * @property result
+ * @type {Object}
+ */
+
+    // interface method
+    run : function(options){
+
+    },
+
+    // interface method
+    success : function(response){
+
+    },
+
+    // interface method
+    handleResponse : function(response){
+
+    },
+
+    // default connection failure
+    failure : function(response){
+        this.response = response;
+        this.failureType = Ext.form.Action.CONNECT_FAILURE;
+        this.form.afterAction(this, false);
+    },
+
+    // private
+    // shared code among all Actions to validate that there was a response
+    // with either responseText or responseXml
+    processResponse : function(response){
+        this.response = response;
+        if(!response.responseText &amp;&amp; !response.responseXML){
+            return true;
+        }
+        this.result = this.handleResponse(response);
+        return this.result;
+    },
+    
+    decodeResponse: function(response) {
+        try {
+            return Ext.decode(response.responseText);
+        } catch(e) {
+            return false;
+        } 
+    },
+
+    // utility functions used internally
+    getUrl : function(appendParams){
+        var url = this.options.url || this.form.url || this.form.el.dom.action;
+        if(appendParams){
+            var p = this.getParams();
+            if(p){
+                url = Ext.urlAppend(url, p);
+            }
+        }
+        return url;
+    },
+
+    // private
+    getMethod : function(){
+        return (this.options.method || this.form.method || this.form.el.dom.method || 'POST').toUpperCase();
+    },
+
+    // private
+    getParams : function(){
+        var bp = this.form.baseParams;
+        var p = this.options.params;
+        if(p){
+            if(typeof p == &quot;object&quot;){
+                p = Ext.urlEncode(Ext.applyIf(p, bp));
+            }else if(typeof p == 'string' &amp;&amp; bp){
+                p += '&amp;' + Ext.urlEncode(bp);
+            }
+        }else if(bp){
+            p = Ext.urlEncode(bp);
+        }
+        return p;
+    },
+
+    // private
+    createCallback : function(opts){
+        var opts = opts || {};
+        return {
+            success: this.success,
+            failure: this.failure,
+            scope: this,
+            timeout: (opts.timeout*1000) || (this.form.timeout*1000),
+            upload: this.form.fileUpload ? this.success : undefined
+        };
+    }
+};
+
+<span id='Ext-form-Action-Submit'>/**
+</span> * @class Ext.form.Action.Submit
+ * @extends Ext.form.Action
+ * &lt;p&gt;A class which handles submission of data from {@link Ext.form.BasicForm Form}s
+ * and processes the returned response.&lt;/p&gt;
+ * &lt;p&gt;Instances of this class are only created by a {@link Ext.form.BasicForm Form} when
+ * {@link Ext.form.BasicForm#submit submit}ting.&lt;/p&gt;
+ * &lt;p&gt;&lt;u&gt;&lt;b&gt;Response Packet Criteria&lt;/b&gt;&lt;/u&gt;&lt;/p&gt;
+ * &lt;p&gt;A response packet may contain:
+ * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;&lt;b&gt;&lt;code&gt;success&lt;/code&gt;&lt;/b&gt; property : Boolean
+ * &lt;div class=&quot;sub-desc&quot;&gt;The &lt;code&gt;success&lt;/code&gt; property is required.&lt;/div&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;&lt;code&gt;errors&lt;/code&gt;&lt;/b&gt; property : Object
+ * &lt;div class=&quot;sub-desc&quot;&gt;&lt;div class=&quot;sub-desc&quot;&gt;The &lt;code&gt;errors&lt;/code&gt; property,
+ * which is optional, contains error messages for invalid fields.&lt;/div&gt;&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ * &lt;p&gt;&lt;u&gt;&lt;b&gt;JSON Packets&lt;/b&gt;&lt;/u&gt;&lt;/p&gt;
+ * &lt;p&gt;By default, response packets are assumed to be JSON, so a typical response
+ * packet may look like this:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+{
+    success: false,
+    errors: {
+        clientCode: &quot;Client not found&quot;,
+        portOfLoading: &quot;This field must not be null&quot;
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Other data may be placed into the response for processing by the {@link Ext.form.BasicForm}'s callback
+ * or event handler methods. The object decoded from this JSON is available in the
+ * {@link Ext.form.Action#result result} property.&lt;/p&gt;
+ * &lt;p&gt;Alternatively, if an {@link #errorReader} is specified as an {@link Ext.data.XmlReader XmlReader}:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+    errorReader: new Ext.data.XmlReader({
+            record : 'field',
+            success: '@success'
+        }, [
+            'id', 'msg'
+        ]
+    )
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;then the results may be sent back in XML format:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;
+&amp;lt;message success=&quot;false&quot;&amp;gt;
+&amp;lt;errors&amp;gt;
+    &amp;lt;field&amp;gt;
+        &amp;lt;id&amp;gt;clientCode&amp;lt;/id&amp;gt;
+        &amp;lt;msg&amp;gt;&amp;lt;![CDATA[Code not found. &amp;lt;br /&amp;gt;&amp;lt;i&amp;gt;This is a test validation message from the server &amp;lt;/i&amp;gt;]]&amp;gt;&amp;lt;/msg&amp;gt;
+    &amp;lt;/field&amp;gt;
+    &amp;lt;field&amp;gt;
+        &amp;lt;id&amp;gt;portOfLoading&amp;lt;/id&amp;gt;
+        &amp;lt;msg&amp;gt;&amp;lt;![CDATA[Port not found. &amp;lt;br /&amp;gt;&amp;lt;i&amp;gt;This is a test validation message from the server &amp;lt;/i&amp;gt;]]&amp;gt;&amp;lt;/msg&amp;gt;
+    &amp;lt;/field&amp;gt;
+&amp;lt;/errors&amp;gt;
+&amp;lt;/message&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Other elements may be placed into the response XML for processing by the {@link Ext.form.BasicForm}'s callback
+ * or event handler methods. The XML document is available in the {@link #errorReader}'s {@link Ext.data.XmlReader#xmlData xmlData} property.&lt;/p&gt;
+ */
+Ext.form.Action.Submit = function(form, options){
+    Ext.form.Action.Submit.superclass.constructor.call(this, form, options);
+};
+
+Ext.extend(Ext.form.Action.Submit, Ext.form.Action, {
+<span id='Ext-form-Action-Submit-cfg-errorReader'>    /**
+</span>     * @cfg {Ext.data.DataReader} errorReader &lt;p&gt;&lt;b&gt;Optional. JSON is interpreted with
+     * no need for an errorReader.&lt;/b&gt;&lt;/p&gt;
+     * &lt;p&gt;A Reader which reads a single record from the returned data. The DataReader's
+     * &lt;b&gt;success&lt;/b&gt; property specifies how submission success is determined. The Record's
+     * data provides the error messages to apply to any invalid form Fields.&lt;/p&gt;
+     */
+<span id='Ext-form-Action-Submit-cfg-clientValidation'>    /**
+</span>     * @cfg {boolean} clientValidation Determines whether a Form's fields are validated
+     * in a final call to {@link Ext.form.BasicForm#isValid isValid} prior to submission.
+     * Pass &lt;tt&gt;false&lt;/tt&gt; in the Form's submit options to prevent this. If not defined, pre-submission field validation
+     * is performed.
+     */
+    type : 'submit',
+
+    // private
+    run : function(){
+        var o = this.options,
+            method = this.getMethod(),
+            isGet = method == 'GET';
+        if(o.clientValidation === false || this.form.isValid()){
+            if (o.submitEmptyText === false) {
+                var fields = this.form.items,
+                    emptyFields = [],
+                    setupEmptyFields = function(f){
+                        if (f.el.getValue() == f.emptyText) {
+                            emptyFields.push(f);
+                            f.el.dom.value = &quot;&quot;;
+                        }
+                        if(f.isComposite &amp;&amp; f.rendered){
+                            f.items.each(setupEmptyFields);
+                        }
+                    };
+                    
+                fields.each(setupEmptyFields);
+            }
+            Ext.Ajax.request(Ext.apply(this.createCallback(o), {
+                form:this.form.el.dom,
+                url:this.getUrl(isGet),
+                method: method,
+                headers: o.headers,
+                params:!isGet ? this.getParams() : null,
+                isUpload: this.form.fileUpload
+            }));
+            if (o.submitEmptyText === false) {
+                Ext.each(emptyFields, function(f) {
+                    if (f.applyEmptyText) {
+                        f.applyEmptyText();
+                    }
+                });
+            }
+        }else if (o.clientValidation !== false){ // client validation failed
+            this.failureType = Ext.form.Action.CLIENT_INVALID;
+            this.form.afterAction(this, false);
+        }
+    },
+
+    // private
+    success : function(response){
+        var result = this.processResponse(response);
+        if(result === true || result.success){
+            this.form.afterAction(this, true);
+            return;
+        }
+        if(result.errors){
+            this.form.markInvalid(result.errors);
+        }
+        this.failureType = Ext.form.Action.SERVER_INVALID;
+        this.form.afterAction(this, false);
+    },
+
+    // private
+    handleResponse : function(response){
+        if(this.form.errorReader){
+            var rs = this.form.errorReader.read(response);
+            var errors = [];
+            if(rs.records){
+                for(var i = 0, len = rs.records.length; i &lt; len; i++) {
+                    var r = rs.records[i];
+                    errors[i] = r.data;
+                }
+            }
+            if(errors.length &lt; 1){
+                errors = null;
+            }
+            return {
+                success : rs.success,
+                errors : errors
+            };
+        }
+        return this.decodeResponse(response);
+    }
+});
+
+
+<span id='Ext-form-Action-Load'>/**
+</span> * @class Ext.form.Action.Load
+ * @extends Ext.form.Action
+ * &lt;p&gt;A class which handles loading of data from a server into the Fields of an {@link Ext.form.BasicForm}.&lt;/p&gt;
+ * &lt;p&gt;Instances of this class are only created by a {@link Ext.form.BasicForm Form} when
+ * {@link Ext.form.BasicForm#load load}ing.&lt;/p&gt;
+ * &lt;p&gt;&lt;u&gt;&lt;b&gt;Response Packet Criteria&lt;/b&gt;&lt;/u&gt;&lt;/p&gt;
+ * &lt;p&gt;A response packet &lt;b&gt;must&lt;/b&gt; contain:
+ * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;&lt;b&gt;&lt;code&gt;success&lt;/code&gt;&lt;/b&gt; property : Boolean&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;&lt;code&gt;data&lt;/code&gt;&lt;/b&gt; property : Object&lt;/li&gt;
+ * &lt;div class=&quot;sub-desc&quot;&gt;The &lt;code&gt;data&lt;/code&gt; property contains the values of Fields to load.
+ * The individual value object for each Field is passed to the Field's
+ * {@link Ext.form.Field#setValue setValue} method.&lt;/div&gt;&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ * &lt;p&gt;&lt;u&gt;&lt;b&gt;JSON Packets&lt;/b&gt;&lt;/u&gt;&lt;/p&gt;
+ * &lt;p&gt;By default, response packets are assumed to be JSON, so for the following form load call:&lt;pre&gt;&lt;code&gt;
+var myFormPanel = new Ext.form.FormPanel({
+    title: 'Client and routing info',
+    items: [{
+        fieldLabel: 'Client',
+        name: 'clientName'
+    }, {
+        fieldLabel: 'Port of loading',
+        name: 'portOfLoading'
+    }, {
+        fieldLabel: 'Port of discharge',
+        name: 'portOfDischarge'
+    }]
+});
+myFormPanel.{@link Ext.form.FormPanel#getForm getForm}().{@link Ext.form.BasicForm#load load}({
+    url: '/getRoutingInfo.php',
+    params: {
+        consignmentRef: myConsignmentRef
+    },
+    failure: function(form, action) {
+        Ext.Msg.alert(&quot;Load failed&quot;, action.result.errorMessage);
+    }
+});
+&lt;/code&gt;&lt;/pre&gt;
+ * a &lt;b&gt;success response&lt;/b&gt; packet may look like this:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+{
+    success: true,
+    data: {
+        clientName: &quot;Fred. Olsen Lines&quot;,
+        portOfLoading: &quot;FXT&quot;,
+        portOfDischarge: &quot;OSL&quot;
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+ * while a &lt;b&gt;failure response&lt;/b&gt; packet may look like this:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+{
+    success: false,
+    errorMessage: &quot;Consignment reference not found&quot;
+}&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Other data may be placed into the response for processing the {@link Ext.form.BasicForm Form}'s
+ * callback or event handler methods. The object decoded from this JSON is available in the
+ * {@link Ext.form.Action#result result} property.&lt;/p&gt;
+ */
+Ext.form.Action.Load = function(form, options){
+    Ext.form.Action.Load.superclass.constructor.call(this, form, options);
+    this.reader = this.form.reader;
+};
+
+Ext.extend(Ext.form.Action.Load, Ext.form.Action, {
+    // private
+    type : 'load',
+
+    // private
+    run : function(){
+        Ext.Ajax.request(Ext.apply(
+                this.createCallback(this.options), {
+                    method:this.getMethod(),
+                    url:this.getUrl(false),
+                    headers: this.options.headers,
+                    params:this.getParams()
+        }));
+    },
+
+    // private
+    success : function(response){
+        var result = this.processResponse(response);
+        if(result === true || !result.success || !result.data){
+            this.failureType = Ext.form.Action.LOAD_FAILURE;
+            this.form.afterAction(this, false);
+            return;
+        }
+        this.form.clearInvalid();
+        this.form.setValues(result.data);
+        this.form.afterAction(this, true);
+    },
+
+    // private
+    handleResponse : function(response){
+        if(this.form.reader){
+            var rs = this.form.reader.read(response);
+            var data = rs.records &amp;&amp; rs.records[0] ? rs.records[0].data : null;
+            return {
+                success : rs.success,
+                data : data
+            };
+        }
+        return this.decodeResponse(response);
+    }
+});
+
+
+
+<span id='Ext-form-Action-DirectLoad'>/**
+</span> * @class Ext.form.Action.DirectLoad
+ * @extends Ext.form.Action.Load
+ * &lt;p&gt;Provides Ext.direct support for loading form data.&lt;/p&gt;
+ * &lt;p&gt;This example illustrates usage of Ext.Direct to &lt;b&gt;load&lt;/b&gt; a form through Ext.Direct.&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var myFormPanel = new Ext.form.FormPanel({
+    // configs for FormPanel
+    title: 'Basic Information',
+    renderTo: document.body,
+    width: 300, height: 160,
+    padding: 10,
+
+    // configs apply to child items
+    defaults: {anchor: '100%'},
+    defaultType: 'textfield',
+    items: [{
+        fieldLabel: 'Name',
+        name: 'name'
+    },{
+        fieldLabel: 'Email',
+        name: 'email'
+    },{
+        fieldLabel: 'Company',
+        name: 'company'
+    }],
+
+    // configs for BasicForm
+    api: {
+        // The server-side method to call for load() requests
+        load: Profile.getBasicInfo,
+        // The server-side must mark the submit handler as a 'formHandler'
+        submit: Profile.updateBasicInfo
+    },
+    // specify the order for the passed params
+    paramOrder: ['uid', 'foo']
+});
+
+// load the form
+myFormPanel.getForm().load({
+    // pass 2 arguments to server side getBasicInfo method (len=2)
+    params: {
+        foo: 'bar',
+        uid: 34
+    }
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ * The data packet sent to the server will resemble something like:
+ * &lt;pre&gt;&lt;code&gt;
+[
+    {
+        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;getBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:2,
+        &quot;data&quot;:[34,&quot;bar&quot;] // note the order of the params
+    }
+]
+ * &lt;/code&gt;&lt;/pre&gt;
+ * The form will process a data packet returned by the server that is similar
+ * to the following format:
+ * &lt;pre&gt;&lt;code&gt;
+[
+    {
+        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;getBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:2,
+        &quot;result&quot;:{
+            &quot;success&quot;:true,
+            &quot;data&quot;:{
+                &quot;name&quot;:&quot;Fred Flintstone&quot;,
+                &quot;company&quot;:&quot;Slate Rock and Gravel&quot;,
+                &quot;email&quot;:&quot;fred.flintstone@slaterg.com&quot;
+            }
+        }
+    }
+]
+ * &lt;/code&gt;&lt;/pre&gt;
+ */
+Ext.form.Action.DirectLoad = Ext.extend(Ext.form.Action.Load, {
+<span id='Ext-form-Action-DirectLoad-method-constructor'>    constructor: function(form, opts) {
+</span>        Ext.form.Action.DirectLoad.superclass.constructor.call(this, form, opts);
+    },
+<span id='Ext-form-Action-DirectLoad-property-type'>    type : 'directload',
+</span>
+<span id='Ext-form-Action-DirectLoad-method-run'>    run : function(){
+</span>        var args = this.getParams();
+        args.push(this.success, this);
+        this.form.api.load.apply(window, args);
+    },
+
+<span id='Ext-form-Action-DirectLoad-method-getParams'>    getParams : function() {
+</span>        var buf = [], o = {};
+        var bp = this.form.baseParams;
+        var p = this.options.params;
+        Ext.apply(o, p, bp);
+        var paramOrder = this.form.paramOrder;
+        if(paramOrder){
+            for(var i = 0, len = paramOrder.length; i &lt; len; i++){
+                buf.push(o[paramOrder[i]]);
+            }
+        }else if(this.form.paramsAsHash){
+            buf.push(o);
+        }
+        return buf;
+    },
+<span id='Ext-form-Action-DirectLoad-method-processResponse'>    // Direct actions have already been processed and therefore
+</span>    // we can directly set the result; Direct Actions do not have
+    // a this.response property.
+    processResponse : function(result) {
+        this.result = result;
+        return result;
+    },
+
+<span id='Ext-form-Action-DirectLoad-method-success'>    success : function(response, trans){
+</span>        if(trans.type == Ext.Direct.exceptions.SERVER){
+            response = {};
+        }
+        Ext.form.Action.DirectLoad.superclass.success.call(this, response);
+    }
+});
+
+<span id='Ext-form-Action-DirectSubmit'>/**
+</span> * @class Ext.form.Action.DirectSubmit
+ * @extends Ext.form.Action.Submit
+ * &lt;p&gt;Provides Ext.direct support for submitting form data.&lt;/p&gt;
+ * &lt;p&gt;This example illustrates usage of Ext.Direct to &lt;b&gt;submit&lt;/b&gt; a form through Ext.Direct.&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var myFormPanel = new Ext.form.FormPanel({
+    // configs for FormPanel
+    title: 'Basic Information',
+    renderTo: document.body,
+    width: 300, height: 160,
+    padding: 10,
+    buttons:[{
+        text: 'Submit',
+        handler: function(){
+            myFormPanel.getForm().submit({
+                params: {
+                    foo: 'bar',
+                    uid: 34
+                }
+            });
+        }
+    }],
+
+    // configs apply to child items
+    defaults: {anchor: '100%'},
+    defaultType: 'textfield',
+    items: [{
+        fieldLabel: 'Name',
+        name: 'name'
+    },{
+        fieldLabel: 'Email',
+        name: 'email'
+    },{
+        fieldLabel: 'Company',
+        name: 'company'
+    }],
+
+    // configs for BasicForm
+    api: {
+        // The server-side method to call for load() requests
+        load: Profile.getBasicInfo,
+        // The server-side must mark the submit handler as a 'formHandler'
+        submit: Profile.updateBasicInfo
+    },
+    // specify the order for the passed params
+    paramOrder: ['uid', 'foo']
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ * The data packet sent to the server will resemble something like:
+ * &lt;pre&gt;&lt;code&gt;
+{
+    &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;updateBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:&quot;6&quot;,
+    &quot;result&quot;:{
+        &quot;success&quot;:true,
+        &quot;id&quot;:{
+            &quot;extAction&quot;:&quot;Profile&quot;,&quot;extMethod&quot;:&quot;updateBasicInfo&quot;,
+            &quot;extType&quot;:&quot;rpc&quot;,&quot;extTID&quot;:&quot;6&quot;,&quot;extUpload&quot;:&quot;false&quot;,
+            &quot;name&quot;:&quot;Aaron Conran&quot;,&quot;email&quot;:&quot;aaron@extjs.com&quot;,&quot;company&quot;:&quot;Ext JS, LLC&quot;
+        }
+    }
+}
+ * &lt;/code&gt;&lt;/pre&gt;
+ * The form will process a data packet returned by the server that is similar
+ * to the following:
+ * &lt;pre&gt;&lt;code&gt;
+// sample success packet (batched requests)
+[
+    {
+        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;updateBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:3,
+        &quot;result&quot;:{
+            &quot;success&quot;:true
+        }
+    }
+]
+
+// sample failure packet (one request)
+{
+        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;updateBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:&quot;6&quot;,
+        &quot;result&quot;:{
+            &quot;errors&quot;:{
+                &quot;email&quot;:&quot;already taken&quot;
+            },
+            &quot;success&quot;:false,
+            &quot;foo&quot;:&quot;bar&quot;
+        }
+}
+ * &lt;/code&gt;&lt;/pre&gt;
+ * Also see the discussion in {@link Ext.form.Action.DirectLoad}.
+ */
+Ext.form.Action.DirectSubmit = Ext.extend(Ext.form.Action.Submit, {
+<span id='Ext-form-Action-DirectSubmit-method-constructor'>    constructor : function(form, opts) {
+</span>        Ext.form.Action.DirectSubmit.superclass.constructor.call(this, form, opts);
+    },
+<span id='Ext-form-Action-DirectSubmit-property-type'>    type : 'directsubmit',
+</span><span id='Ext-form-Action-DirectSubmit-method-run'>    // override of Submit
+</span>    run : function(){
+        var o = this.options;
+        if(o.clientValidation === false || this.form.isValid()){
+            // tag on any additional params to be posted in the
+            // form scope
+            this.success.params = this.getParams();
+            this.form.api.submit(this.form.el.dom, this.success, this);
+        }else if (o.clientValidation !== false){ // client validation failed
+            this.failureType = Ext.form.Action.CLIENT_INVALID;
+            this.form.afterAction(this, false);
+        }
+    },
+
+<span id='Ext-form-Action-DirectSubmit-method-getParams'>    getParams : function() {
+</span>        var o = {};
+        var bp = this.form.baseParams;
+        var p = this.options.params;
+        Ext.apply(o, p, bp);
+        return o;
+    },
+<span id='Ext-form-Action-DirectSubmit-method-processResponse'>    // Direct actions have already been processed and therefore
+</span>    // we can directly set the result; Direct Actions do not have
+    // a this.response property.
+    processResponse : function(result) {
+        this.result = result;
+        return result;
+    },
+
+<span id='Ext-form-Action-DirectSubmit-method-success'>    success : function(response, trans){
+</span>        if(trans.type == Ext.Direct.exceptions.SERVER){
+            response = {};
+        }
+        Ext.form.Action.DirectSubmit.superclass.success.call(this, response);
+    }
+});
+
+Ext.form.Action.ACTION_TYPES = {
+    'load' : Ext.form.Action.Load,
+    'submit' : Ext.form.Action.Submit,
+    'directload' : Ext.form.Action.DirectLoad,
+    'directsubmit' : Ext.form.Action.DirectSubmit
+};
+</pre>
+</body>
+</html>

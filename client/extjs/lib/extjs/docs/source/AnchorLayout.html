@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-layout-AnchorLayout'>/**
+</span> * @class Ext.layout.AnchorLayout
+ * @extends Ext.layout.ContainerLayout
+ * &lt;p&gt;This is a layout that enables anchoring of contained elements relative to the container's dimensions.
+ * If the container is resized, all anchored items are automatically rerendered according to their
+ * &lt;b&gt;&lt;tt&gt;{@link #anchor}&lt;/tt&gt;&lt;/b&gt; rules.&lt;/p&gt;
+ * &lt;p&gt;This class is intended to be extended or created via the layout:'anchor' {@link Ext.Container#layout}
+ * config, and should generally not need to be created directly via the new keyword.&lt;/p&gt;
+ * &lt;p&gt;AnchorLayout does not have any direct config options (other than inherited ones). By default,
+ * AnchorLayout will calculate anchor measurements based on the size of the container itself. However, the
+ * container using the AnchorLayout can supply an anchoring-specific config property of &lt;b&gt;anchorSize&lt;/b&gt;.
+ * If anchorSize is specifed, the layout will use it as a virtual container for the purposes of calculating
+ * anchor measurements based on it instead, allowing the container to be sized independently of the anchoring
+ * logic if necessary.  For example:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var viewport = new Ext.Viewport({
+    layout:'anchor',
+    anchorSize: {width:800, height:600},
+    items:[{
+        title:'Item 1',
+        html:'Content 1',
+        width:800,
+        anchor:'right 20%'
+    },{
+        title:'Item 2',
+        html:'Content 2',
+        width:300,
+        anchor:'50% 30%'
+    },{
+        title:'Item 3',
+        html:'Content 3',
+        width:600,
+        anchor:'-100 50%'
+    }]
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ */
+Ext.layout.AnchorLayout = Ext.extend(Ext.layout.ContainerLayout, {
+<span id='Ext-layout-AnchorLayout-cfg-anchor'>    /**
+</span>     * @cfg {String} anchor
+     * &lt;p&gt;This configuation option is to be applied to &lt;b&gt;child &lt;tt&gt;items&lt;/tt&gt;&lt;/b&gt; of a container managed by
+     * this layout (ie. configured with &lt;tt&gt;layout:'anchor'&lt;/tt&gt;).&lt;/p&gt;&lt;br/&gt;
+     *
+     * &lt;p&gt;This value is what tells the layout how an item should be anchored to the container. &lt;tt&gt;items&lt;/tt&gt;
+     * added to an AnchorLayout accept an anchoring-specific config property of &lt;b&gt;anchor&lt;/b&gt; which is a string
+     * containing two values: the horizontal anchor value and the vertical anchor value (for example, '100% 50%').
+     * The following types of anchor values are supported:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     *
+     * &lt;li&gt;&lt;b&gt;Percentage&lt;/b&gt; : Any value between 1 and 100, expressed as a percentage.&lt;div class=&quot;sub-desc&quot;&gt;
+     * The first anchor is the percentage width that the item should take up within the container, and the
+     * second is the percentage height.  For example:&lt;pre&gt;&lt;code&gt;
+// two values specified
+anchor: '100% 50%' // render item complete width of the container and
+                   // 1/2 height of the container
+// one value specified
+anchor: '100%'     // the width value; the height will default to auto
+     * &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+     *
+     * &lt;li&gt;&lt;b&gt;Offsets&lt;/b&gt; : Any positive or negative integer value.&lt;div class=&quot;sub-desc&quot;&gt;
+     * This is a raw adjustment where the first anchor is the offset from the right edge of the container,
+     * and the second is the offset from the bottom edge. For example:&lt;pre&gt;&lt;code&gt;
+// two values specified
+anchor: '-50 -100' // render item the complete width of the container
+                   // minus 50 pixels and
+                   // the complete height minus 100 pixels.
+// one value specified
+anchor: '-50'      // anchor value is assumed to be the right offset value
+                   // bottom offset will default to 0
+     * &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+     *
+     * &lt;li&gt;&lt;b&gt;Sides&lt;/b&gt; : Valid values are &lt;tt&gt;'right'&lt;/tt&gt; (or &lt;tt&gt;'r'&lt;/tt&gt;) and &lt;tt&gt;'bottom'&lt;/tt&gt;
+     * (or &lt;tt&gt;'b'&lt;/tt&gt;).&lt;div class=&quot;sub-desc&quot;&gt;
+     * Either the container must have a fixed size or an anchorSize config value defined at render time in
+     * order for these to have any effect.&lt;/div&gt;&lt;/li&gt;
+     *
+     * &lt;li&gt;&lt;b&gt;Mixed&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;
+     * Anchor values can also be mixed as needed.  For example, to render the width offset from the container
+     * right edge by 50 pixels and 75% of the container's height use:
+     * &lt;pre&gt;&lt;code&gt;
+anchor: '-50 75%'
+     * &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+     *
+     *
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+
+<span id='Ext-layout-AnchorLayout-property-monitorResize'>    // private
+</span>    monitorResize : true,
+
+<span id='Ext-layout-AnchorLayout-property-type'>    type : 'anchor',
+</span>
+<span id='Ext-layout-AnchorLayout-cfg-defaultAnchor'>    /**
+</span>     * @cfg {String} defaultAnchor
+     *
+     * default anchor for all child container items applied if no anchor or specific width is set on the child item.  Defaults to '100%'.
+     *
+     */
+    defaultAnchor : '100%',
+
+<span id='Ext-layout-AnchorLayout-property-parseAnchorRE'>    parseAnchorRE : /^(r|right|b|bottom)$/i,
+</span>
+
+<span id='Ext-layout-AnchorLayout-method-getLayoutTargetSize'>    getLayoutTargetSize : function() {
+</span>        var target = this.container.getLayoutTarget(), ret = {};
+        if (target) {
+            ret = target.getViewSize();
+
+            // IE in strict mode will return a width of 0 on the 1st pass of getViewSize.
+            // Use getStyleSize to verify the 0 width, the adjustment pass will then work properly
+            // with getViewSize
+            if (Ext.isIE9m &amp;&amp; Ext.isStrict &amp;&amp; ret.width == 0){
+                ret =  target.getStyleSize();
+            }
+            ret.width -= target.getPadding('lr');
+            ret.height -= target.getPadding('tb');
+        }
+        return ret;
+    },
+
+<span id='Ext-layout-AnchorLayout-method-onLayout'>    // private
+</span>    onLayout : function(container, target) {
+        Ext.layout.AnchorLayout.superclass.onLayout.call(this, container, target);
+
+        var size = this.getLayoutTargetSize(),
+            containerWidth = size.width,
+            containerHeight = size.height,
+            overflow = target.getStyle('overflow'),
+            components = this.getRenderedItems(container),
+            len = components.length,
+            boxes = [],
+            box,
+            anchorWidth,
+            anchorHeight,
+            component,
+            anchorSpec,
+            calcWidth,
+            calcHeight,
+            anchorsArray,
+            totalHeight = 0,
+            i,
+            el;
+
+        if(containerWidth &lt; 20 &amp;&amp; containerHeight &lt; 20){
+            return;
+        }
+
+        // find the container anchoring size
+        if(container.anchorSize) {
+            if(typeof container.anchorSize == 'number') {
+                anchorWidth = container.anchorSize;
+            } else {
+                anchorWidth = container.anchorSize.width;
+                anchorHeight = container.anchorSize.height;
+            }
+        } else {
+            anchorWidth = container.initialConfig.width;
+            anchorHeight = container.initialConfig.height;
+        }
+
+        for(i = 0; i &lt; len; i++) {
+            component = components[i];
+            el = component.getPositionEl();
+
+            // If a child container item has no anchor and no specific width, set the child to the default anchor size
+            if (!component.anchor &amp;&amp; component.items &amp;&amp; !Ext.isNumber(component.width) &amp;&amp; !(Ext.isIE6 &amp;&amp; Ext.isStrict)){
+                component.anchor = this.defaultAnchor;
+            }
+
+            if(component.anchor) {
+                anchorSpec = component.anchorSpec;
+                // cache all anchor values
+                if(!anchorSpec){
+                    anchorsArray = component.anchor.split(' ');
+                    component.anchorSpec = anchorSpec = {
+                        right: this.parseAnchor(anchorsArray[0], component.initialConfig.width, anchorWidth),
+                        bottom: this.parseAnchor(anchorsArray[1], component.initialConfig.height, anchorHeight)
+                    };
+                }
+                calcWidth = anchorSpec.right ? this.adjustWidthAnchor(anchorSpec.right(containerWidth) - el.getMargins('lr'), component) : undefined;
+                calcHeight = anchorSpec.bottom ? this.adjustHeightAnchor(anchorSpec.bottom(containerHeight) - el.getMargins('tb'), component) : undefined;
+
+                if(calcWidth || calcHeight) {
+                    boxes.push({
+                        component: component,
+                        width: calcWidth || undefined,
+                        height: calcHeight || undefined
+                    });
+                }
+            }
+        }
+        for (i = 0, len = boxes.length; i &lt; len; i++) {
+            box = boxes[i];
+            box.component.setSize(box.width, box.height);
+        }
+
+        if (overflow &amp;&amp; overflow != 'hidden' &amp;&amp; !this.adjustmentPass) {
+            var newTargetSize = this.getLayoutTargetSize();
+            if (newTargetSize.width != size.width || newTargetSize.height != size.height){
+                this.adjustmentPass = true;
+                this.onLayout(container, target);
+            }
+        }
+
+        delete this.adjustmentPass;
+    },
+
+<span id='Ext-layout-AnchorLayout-method-parseAnchor'>    // private
+</span>    parseAnchor : function(a, start, cstart) {
+        if (a &amp;&amp; a != 'none') {
+            var last;
+            // standard anchor
+            if (this.parseAnchorRE.test(a)) {
+                var diff = cstart - start;
+                return function(v){
+                    if(v !== last){
+                        last = v;
+                        return v - diff;
+                    }
+                };
+            // percentage
+            } else if(a.indexOf('%') != -1) {
+                var ratio = parseFloat(a.replace('%', ''))*.01;
+                return function(v){
+                    if(v !== last){
+                        last = v;
+                        return Math.floor(v*ratio);
+                    }
+                };
+            // simple offset adjustment
+            } else {
+                a = parseInt(a, 10);
+                if (!isNaN(a)) {
+                    return function(v) {
+                        if (v !== last) {
+                            last = v;
+                            return v + a;
+                        }
+                    };
+                }
+            }
+        }
+        return false;
+    },
+
+<span id='Ext-layout-AnchorLayout-method-adjustWidthAnchor'>    // private
+</span>    adjustWidthAnchor : function(value, comp){
+        return value;
+    },
+
+<span id='Ext-layout-AnchorLayout-method-adjustHeightAnchor'>    // private
+</span>    adjustHeightAnchor : function(value, comp){
+        return value;
+    }
+
+<span id='Ext-layout-AnchorLayout-property-activeItem'>    /**
+</span>     * @property activeItem
+     * @hide
+     */
+});
+Ext.Container.LAYOUTS['anchor'] = Ext.layout.AnchorLayout;
+</pre>
+</body>
+</html>

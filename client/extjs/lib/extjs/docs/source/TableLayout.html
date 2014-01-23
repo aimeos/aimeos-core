@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-layout-TableLayout'>/**
+</span> * @class Ext.layout.TableLayout
+ * @extends Ext.layout.ContainerLayout
+ * &lt;p&gt;This layout allows you to easily render content into an HTML table.  The total number of columns can be
+ * specified, and rowspan and colspan can be used to create complex layouts within the table.
+ * This class is intended to be extended or created via the layout:'table' {@link Ext.Container#layout} config,
+ * and should generally not need to be created directly via the new keyword.&lt;/p&gt;
+ * &lt;p&gt;Note that when creating a layout via config, the layout-specific config properties must be passed in via
+ * the {@link Ext.Container#layoutConfig} object which will then be applied internally to the layout.  In the
+ * case of TableLayout, the only valid layout config property is {@link #columns}.  However, the items added to a
+ * TableLayout can supply the following table-specific config properties:&lt;/p&gt;
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;b&gt;rowspan&lt;/b&gt; Applied to the table cell containing the item.&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;colspan&lt;/b&gt; Applied to the table cell containing the item.&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;cellId&lt;/b&gt; An id applied to the table cell containing the item.&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;cellCls&lt;/b&gt; A CSS class name added to the table cell containing the item.&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;p&gt;The basic concept of building up a TableLayout is conceptually very similar to building up a standard
+ * HTML table.  You simply add each panel (or &quot;cell&quot;) that you want to include along with any span attributes
+ * specified as the special config properties of rowspan and colspan which work exactly like their HTML counterparts.
+ * Rather than explicitly creating and nesting rows and columns as you would in HTML, you simply specify the
+ * total column count in the layoutConfig and start adding panels in their natural order from left to right,
+ * top to bottom.  The layout will automatically figure out, based on the column count, rowspans and colspans,
+ * how to position each panel within the table.  Just like with HTML tables, your rowspans and colspans must add
+ * up correctly in your overall layout or you'll end up with missing and/or extra cells!  Example usage:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+// This code will generate a layout table that is 3 columns by 2 rows
+// with some spanning included.  The basic layout will be:
+// +--------+-----------------+
+// |   A    |   B             |
+// |        |--------+--------|
+// |        |   C    |   D    |
+// +--------+--------+--------+
+var table = new Ext.Panel({
+    title: 'Table Layout',
+    layout:'table',
+    defaults: {
+        // applied to each contained panel
+        bodyStyle:'padding:20px'
+    },
+    layoutConfig: {
+        // The total column count must be specified here
+        columns: 3
+    },
+    items: [{
+        html: '&amp;lt;p&amp;gt;Cell A content&amp;lt;/p&amp;gt;',
+        rowspan: 2
+    },{
+        html: '&amp;lt;p&amp;gt;Cell B content&amp;lt;/p&amp;gt;',
+        colspan: 2
+    },{
+        html: '&amp;lt;p&amp;gt;Cell C content&amp;lt;/p&amp;gt;',
+        cellCls: 'highlight'
+    },{
+        html: '&amp;lt;p&amp;gt;Cell D content&amp;lt;/p&amp;gt;'
+    }]
+});
+&lt;/code&gt;&lt;/pre&gt;
+ */
+Ext.layout.TableLayout = Ext.extend(Ext.layout.ContainerLayout, {
+<span id='Ext-layout-TableLayout-cfg-columns'>    /**
+</span>     * @cfg {Number} columns
+     * The total number of columns to create in the table for this layout.  If not specified, all Components added to
+     * this layout will be rendered into a single row using one column per Component.
+     */
+
+<span id='Ext-layout-TableLayout-property-monitorResize'>    // private
+</span>    monitorResize:false,
+
+<span id='Ext-layout-TableLayout-property-type'>    type: 'table',
+</span>
+<span id='Ext-layout-TableLayout-property-targetCls'>    targetCls: 'x-table-layout-ct',
+</span>
+<span id='Ext-layout-TableLayout-cfg-tableAttrs'>    /**
+</span>     * @cfg {Object} tableAttrs
+     * &lt;p&gt;An object containing properties which are added to the {@link Ext.DomHelper DomHelper} specification
+     * used to create the layout's &lt;tt&gt;&amp;lt;table&amp;gt;&lt;/tt&gt; element. Example:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+{
+    xtype: 'panel',
+    layout: 'table',
+    layoutConfig: {
+        tableAttrs: {
+            style: {
+                width: '100%'
+            }
+        },
+        columns: 3
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+     */
+    tableAttrs:null,
+
+<span id='Ext-layout-TableLayout-method-setContainer'>    // private
+</span>    setContainer : function(ct){
+        Ext.layout.TableLayout.superclass.setContainer.call(this, ct);
+
+        this.currentRow = 0;
+        this.currentColumn = 0;
+        this.cells = [];
+    },
+    
+<span id='Ext-layout-TableLayout-method-onLayout'>    // private
+</span>    onLayout : function(ct, target){
+        var cs = ct.items.items, len = cs.length, c, i;
+
+        if(!this.table){
+            target.addClass('x-table-layout-ct');
+
+            this.table = target.createChild(
+                Ext.apply({tag:'table', cls:'x-table-layout', cellspacing: 0, cn: {tag: 'tbody'}}, this.tableAttrs), null, true);
+        }
+        this.renderAll(ct, target);
+    },
+
+<span id='Ext-layout-TableLayout-method-getRow'>    // private
+</span>    getRow : function(index){
+        var row = this.table.tBodies[0].childNodes[index];
+        if(!row){
+            row = document.createElement('tr');
+            this.table.tBodies[0].appendChild(row);
+        }
+        return row;
+    },
+
+<span id='Ext-layout-TableLayout-method-getNextCell'>    // private
+</span>    getNextCell : function(c){
+        var cell = this.getNextNonSpan(this.currentColumn, this.currentRow);
+        var curCol = this.currentColumn = cell[0], curRow = this.currentRow = cell[1];
+        for(var rowIndex = curRow; rowIndex &lt; curRow + (c.rowspan || 1); rowIndex++){
+            if(!this.cells[rowIndex]){
+                this.cells[rowIndex] = [];
+            }
+            for(var colIndex = curCol; colIndex &lt; curCol + (c.colspan || 1); colIndex++){
+                this.cells[rowIndex][colIndex] = true;
+            }
+        }
+        var td = document.createElement('td');
+        if(c.cellId){
+            td.id = c.cellId;
+        }
+        var cls = 'x-table-layout-cell';
+        if(c.cellCls){
+            cls += ' ' + c.cellCls;
+        }
+        td.className = cls;
+        if(c.colspan){
+            td.colSpan = c.colspan;
+        }
+        if(c.rowspan){
+            td.rowSpan = c.rowspan;
+        }
+        this.getRow(curRow).appendChild(td);
+        return td;
+    },
+
+<span id='Ext-layout-TableLayout-method-getNextNonSpan'>    // private
+</span>    getNextNonSpan: function(colIndex, rowIndex){
+        var cols = this.columns;
+        while((cols &amp;&amp; colIndex &gt;= cols) || (this.cells[rowIndex] &amp;&amp; this.cells[rowIndex][colIndex])) {
+            if(cols &amp;&amp; colIndex &gt;= cols){
+                rowIndex++;
+                colIndex = 0;
+            }else{
+                colIndex++;
+            }
+        }
+        return [colIndex, rowIndex];
+    },
+
+<span id='Ext-layout-TableLayout-method-renderItem'>    // private
+</span>    renderItem : function(c, position, target){
+        // Ensure we have our inner table to get cells to render into.
+        if(!this.table){
+            this.table = target.createChild(
+                Ext.apply({tag:'table', cls:'x-table-layout', cellspacing: 0, cn: {tag: 'tbody'}}, this.tableAttrs), null, true);
+        }
+        if(c &amp;&amp; !c.rendered){
+            c.render(this.getNextCell(c));
+            this.configureItem(c);
+        }else if(c &amp;&amp; !this.isValidParent(c, target)){
+            var container = this.getNextCell(c);
+            container.insertBefore(c.getPositionEl().dom, null);
+            c.container = Ext.get(container);
+            this.configureItem(c);
+        }
+    },
+
+<span id='Ext-layout-TableLayout-method-isValidParent'>    // private
+</span>    isValidParent : function(c, target){
+        return c.getPositionEl().up('table', 5).dom.parentNode === (target.dom || target);
+    },
+    
+<span id='Ext-layout-TableLayout-method-destroy'>    destroy: function(){
+</span>        delete this.table;
+        Ext.layout.TableLayout.superclass.destroy.call(this);
+    }
+
+<span id='Ext-layout-TableLayout-property-activeItem'>    /**
+</span>     * @property activeItem
+     * @hide
+     */
+});
+
+Ext.Container.LAYOUTS['table'] = Ext.layout.TableLayout;</pre>
+</body>
+</html>

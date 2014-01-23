@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-form-DisplayField-method-constructor'><span id='Ext-form-DisplayField'>/**
+</span></span> * @class Ext.form.DisplayField
+ * @extends Ext.form.Field
+ * A display-only text field which is not validated and not submitted.
+ * @constructor
+ * Creates a new DisplayField.
+ * @param {Object} config Configuration options
+ * @xtype displayfield
+ */
+Ext.form.DisplayField = Ext.extend(Ext.form.Field,  {
+<span id='Ext-form-DisplayField-cfg-validationEvent'>    validationEvent : false,
+</span><span id='Ext-form-DisplayField-cfg-validateOnBlur'>    validateOnBlur : false,
+</span><span id='Ext-form-DisplayField-property-defaultAutoCreate'>    defaultAutoCreate : {tag: &quot;div&quot;},
+</span><span id='Ext-form-DisplayField-cfg-fieldClass'>    /**
+</span>     * @cfg {String} fieldClass The default CSS class for the field (defaults to &lt;tt&gt;&quot;x-form-display-field&quot;&lt;/tt&gt;)
+     */
+    fieldClass : &quot;x-form-display-field&quot;,
+<span id='Ext-form-DisplayField-cfg-htmlEncode'>    /**
+</span>     * @cfg {Boolean} htmlEncode &lt;tt&gt;false&lt;/tt&gt; to skip HTML-encoding the text when rendering it (defaults to
+     * &lt;tt&gt;false&lt;/tt&gt;). This might be useful if you want to include tags in the field's innerHTML rather than
+     * rendering them as string literals per the default logic.
+     */
+    htmlEncode: false,
+
+<span id='Ext-form-DisplayField-method-initEvents'>    // private
+</span>    initEvents : Ext.emptyFn,
+
+<span id='Ext-form-DisplayField-method-isValid'>    isValid : function(){
+</span>        return true;
+    },
+
+<span id='Ext-form-DisplayField-method-validate'>    validate : function(){
+</span>        return true;
+    },
+
+<span id='Ext-form-DisplayField-method-getRawValue'>    getRawValue : function(){
+</span>        var v = this.rendered ? this.el.dom.innerHTML : Ext.value(this.value, '');
+        if(v === this.emptyText){
+            v = '';
+        }
+        if(this.htmlEncode){
+            v = Ext.util.Format.htmlDecode(v);
+        }
+        return v;
+    },
+
+<span id='Ext-form-DisplayField-method-getValue'>    getValue : function(){
+</span>        return this.getRawValue();
+    },
+    
+<span id='Ext-form-DisplayField-method-getName'>    getName: function() {
+</span>        return this.name;
+    },
+
+<span id='Ext-form-DisplayField-method-setRawValue'>    setRawValue : function(v){
+</span>        if(this.htmlEncode){
+            v = Ext.util.Format.htmlEncode(v);
+        }
+        return this.rendered ? (this.el.dom.innerHTML = (Ext.isEmpty(v) ? '' : v)) : (this.value = v);
+    },
+
+<span id='Ext-form-DisplayField-method-setValue'>    setValue : function(v){
+</span>        this.setRawValue(v);
+        return this;
+    }
+<span id='Ext-form-DisplayField-cfg-inputType'>    /** 
+</span>     * @cfg {String} inputType 
+     * @hide
+     */
+<span id='Ext-form-DisplayField-cfg-disabled'>    /** 
+</span>     * @cfg {Boolean} disabled 
+     * @hide
+     */
+<span id='Ext-form-DisplayField-cfg-readOnly'>    /** 
+</span>     * @cfg {Boolean} readOnly 
+     * @hide
+     */
+<span id='Ext-form-DisplayField-cfg-validateOnBlur'>    /** 
+</span>     * @cfg {Boolean} validateOnBlur 
+     * @hide
+     */
+<span id='Ext-form-DisplayField-cfg-validationDelay'>    /** 
+</span>     * @cfg {Number} validationDelay 
+     * @hide
+     */
+<span id='Ext-form-DisplayField-cfg-validationEvent'>    /** 
+</span>     * @cfg {String/Boolean} validationEvent 
+     * @hide
+     */
+});
+
+Ext.reg('displayfield', Ext.form.DisplayField);
+</pre>
+</body>
+</html>

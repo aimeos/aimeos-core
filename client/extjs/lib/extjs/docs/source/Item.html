@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-menu-Item-method-constructor'><span id='Ext-menu-Item'>/**
+</span></span> * @class Ext.menu.Item
+ * @extends Ext.menu.BaseItem
+ * A base class for all menu items that require menu-related functionality (like sub-menus) and are not static
+ * display items.  Item extends the base functionality of {@link Ext.menu.BaseItem} by adding menu-specific
+ * activation and click handling.
+ * @constructor
+ * Creates a new Item
+ * @param {Object} config Configuration options
+ * @xtype menuitem
+ */
+Ext.menu.Item = Ext.extend(Ext.menu.BaseItem, {
+<span id='Ext-menu-Item-property-menu'>    /**
+</span>     * @property menu
+     * @type Ext.menu.Menu
+     * The submenu associated with this Item if one was configured.
+     */
+<span id='Ext-menu-Item-cfg-menu'>    /**
+</span>     * @cfg {Mixed} menu (optional) Either an instance of {@link Ext.menu.Menu} or the config object for an
+     * {@link Ext.menu.Menu} which acts as the submenu when this item is activated.
+     */
+<span id='Ext-menu-Item-cfg-icon'>    /**
+</span>     * @cfg {String} icon The path to an icon to display in this item (defaults to Ext.BLANK_IMAGE_URL).  If
+     * icon is specified {@link #iconCls} should not be.
+     */
+<span id='Ext-menu-Item-cfg-iconCls'>    /**
+</span>     * @cfg {String} iconCls A CSS class that specifies a background image that will be used as the icon for
+     * this item (defaults to '').  If iconCls is specified {@link #icon} should not be.
+     */
+<span id='Ext-menu-Item-cfg-text'>    /**
+</span>     * @cfg {String} text The text to display in this item (defaults to '').
+     */
+<span id='Ext-menu-Item-cfg-href'>    /**
+</span>     * @cfg {String} href The href attribute to use for the underlying anchor link (defaults to '#').
+     */
+<span id='Ext-menu-Item-cfg-hrefTarget'>    /**
+</span>     * @cfg {String} hrefTarget The target attribute to use for the underlying anchor link (defaults to '').
+     */
+<span id='Ext-menu-Item-cfg-itemCls'>    /**
+</span>     * @cfg {String} itemCls The default CSS class to use for menu items (defaults to 'x-menu-item')
+     */
+    itemCls : 'x-menu-item',
+<span id='Ext-menu-Item-cfg-canActivate'>    /**
+</span>     * @cfg {Boolean} canActivate True if this item can be visually activated (defaults to true)
+     */
+    canActivate : true,
+<span id='Ext-menu-Item-cfg-showDelay'>    /**
+</span>     * @cfg {Number} showDelay Length of time in milliseconds to wait before showing this item (defaults to 200)
+     */
+    showDelay: 200,
+    
+<span id='Ext-menu-Item-cfg-altText'>    /**
+</span>     * @cfg {String} altText The altText to use for the icon, if it exists. Defaults to &lt;tt&gt;''&lt;/tt&gt;.
+     */
+    altText: '',
+    
+<span id='Ext-menu-Item-property-hideDelay'>    // doc'd in BaseItem
+</span>    hideDelay: 200,
+
+<span id='Ext-menu-Item-property-ctype'>    // private
+</span>    ctype: 'Ext.menu.Item',
+
+<span id='Ext-menu-Item-method-initComponent'>    initComponent : function(){
+</span>        Ext.menu.Item.superclass.initComponent.call(this);
+        if(this.menu){
+            // If array of items, turn it into an object config so we
+            // can set the ownerCt property in the config
+            if (Ext.isArray(this.menu)){
+                this.menu = { items: this.menu };
+            }
+            
+            // An object config will work here, but an instance of a menu
+            // will have already setup its ref's and have no effect
+            if (Ext.isObject(this.menu)){
+                this.menu.ownerCt = this;
+            }
+            
+            this.menu = Ext.menu.MenuMgr.get(this.menu);
+            this.menu.ownerCt = undefined;
+        }
+    },
+
+<span id='Ext-menu-Item-method-onRender'>    // private
+</span>    onRender : function(container, position){
+        if (!this.itemTpl) {
+            this.itemTpl = Ext.menu.Item.prototype.itemTpl = new Ext.XTemplate(
+                '&lt;a id=&quot;{id}&quot; class=&quot;{cls} x-unselectable&quot; hidefocus=&quot;true&quot; unselectable=&quot;on&quot; href=&quot;{href}&quot;',
+                    '&lt;tpl if=&quot;hrefTarget&quot;&gt;',
+                        ' target=&quot;{hrefTarget}&quot;',
+                    '&lt;/tpl&gt;',
+                 '&gt;',
+                     '&lt;img alt=&quot;{altText}&quot; src=&quot;{icon}&quot; class=&quot;x-menu-item-icon {iconCls}&quot;/&gt;',
+                     '&lt;span class=&quot;x-menu-item-text&quot;&gt;{text}&lt;/span&gt;',
+                 '&lt;/a&gt;'
+             );
+        }
+        var a = this.getTemplateArgs();
+        this.el = position ? this.itemTpl.insertBefore(position, a, true) : this.itemTpl.append(container, a, true);
+        this.iconEl = this.el.child('img.x-menu-item-icon');
+        this.textEl = this.el.child('.x-menu-item-text');
+        if(!this.href) { // if no link defined, prevent the default anchor event
+            this.mon(this.el, 'click', Ext.emptyFn, null, { preventDefault: true });
+        }
+        Ext.menu.Item.superclass.onRender.call(this, container, position);
+    },
+
+<span id='Ext-menu-Item-method-getTemplateArgs'>    getTemplateArgs: function() {
+</span>        return {
+            id: this.id,
+            cls: this.itemCls + (this.menu ?  ' x-menu-item-arrow' : '') + (this.cls ?  ' ' + this.cls : ''),
+            href: this.href || '#',
+            hrefTarget: this.hrefTarget,
+            icon: this.icon || Ext.BLANK_IMAGE_URL,
+            iconCls: this.iconCls || '',
+            text: this.itemText||this.text||'&amp;#160;',
+            altText: this.altText || ''
+        };
+    },
+
+<span id='Ext-menu-Item-method-setText'>    /**
+</span>     * Sets the text to display in this menu item
+     * @param {String} text The text to display
+     */
+    setText : function(text){
+        this.text = text||'&amp;#160;';
+        if(this.rendered){
+            this.textEl.update(this.text);
+            this.parentMenu.layout.doAutoSize();
+        }
+    },
+
+<span id='Ext-menu-Item-method-setIconClass'>    /**
+</span>     * Sets the CSS class to apply to the item's icon element
+     * @param {String} cls The CSS class to apply
+     */
+    setIconClass : function(cls){
+        var oldCls = this.iconCls;
+        this.iconCls = cls;
+        if(this.rendered){
+            this.iconEl.replaceClass(oldCls, this.iconCls);
+        }
+    },
+
+<span id='Ext-menu-Item-method-beforeDestroy'>    //private
+</span>    beforeDestroy: function(){
+        clearTimeout(this.showTimer);
+        clearTimeout(this.hideTimer);
+        if (this.menu){
+            delete this.menu.ownerCt;
+            this.menu.destroy();
+        }
+        Ext.menu.Item.superclass.beforeDestroy.call(this);
+    },
+
+<span id='Ext-menu-Item-method-handleClick'>    // private
+</span>    handleClick : function(e){
+        if(!this.href){ // if no link defined, stop the event automatically
+            e.stopEvent();
+        }
+        Ext.menu.Item.superclass.handleClick.apply(this, arguments);
+    },
+
+<span id='Ext-menu-Item-method-activate'>    // private
+</span>    activate : function(autoExpand){
+        if(Ext.menu.Item.superclass.activate.apply(this, arguments)){
+            this.focus();
+            if(autoExpand){
+                this.expandMenu();
+            }
+        }
+        return true;
+    },
+
+<span id='Ext-menu-Item-method-shouldDeactivate'>    // private
+</span>    shouldDeactivate : function(e){
+        if(Ext.menu.Item.superclass.shouldDeactivate.call(this, e)){
+            if(this.menu &amp;&amp; this.menu.isVisible()){
+                return !this.menu.getEl().getRegion().contains(e.getPoint());
+            }
+            return true;
+        }
+        return false;
+    },
+
+<span id='Ext-menu-Item-method-deactivate'>    // private
+</span>    deactivate : function(){
+        Ext.menu.Item.superclass.deactivate.apply(this, arguments);
+        this.hideMenu();
+    },
+
+<span id='Ext-menu-Item-method-expandMenu'>    // private
+</span>    expandMenu : function(autoActivate){
+        if(!this.disabled &amp;&amp; this.menu){
+            clearTimeout(this.hideTimer);
+            delete this.hideTimer;
+            if(!this.menu.isVisible() &amp;&amp; !this.showTimer){
+                this.showTimer = this.deferExpand.defer(this.showDelay, this, [autoActivate]);
+            }else if (this.menu.isVisible() &amp;&amp; autoActivate){
+                this.menu.tryActivate(0, 1);
+            }
+        }
+    },
+
+<span id='Ext-menu-Item-method-deferExpand'>    // private
+</span>    deferExpand : function(autoActivate){
+        delete this.showTimer;
+        this.menu.show(this.container, this.parentMenu.subMenuAlign || 'tl-tr?', this.parentMenu);
+        if(autoActivate){
+            this.menu.tryActivate(0, 1);
+        }
+    },
+
+<span id='Ext-menu-Item-method-hideMenu'>    // private
+</span>    hideMenu : function(){
+        clearTimeout(this.showTimer);
+        delete this.showTimer;
+        if(!this.hideTimer &amp;&amp; this.menu &amp;&amp; this.menu.isVisible()){
+            this.hideTimer = this.deferHide.defer(this.hideDelay, this);
+        }
+    },
+
+<span id='Ext-menu-Item-method-deferHide'>    // private
+</span>    deferHide : function(){
+        delete this.hideTimer;
+        if(this.menu.over){
+            this.parentMenu.setActiveItem(this, false);
+        }else{
+            this.menu.hide();
+        }
+    }
+});
+Ext.reg('menuitem', Ext.menu.Item);</pre>
+</body>
+</html>

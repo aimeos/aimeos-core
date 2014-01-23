@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-form-FieldSet-method-constructor'><span id='Ext-form-FieldSet'>/**
+</span></span> * @class Ext.form.FieldSet
+ * @extends Ext.Panel
+ * Standard container used for grouping items within a {@link Ext.form.FormPanel form}.
+ * &lt;pre&gt;&lt;code&gt;
+var form = new Ext.FormPanel({
+    title: 'Simple Form with FieldSets',
+    labelWidth: 75, // label settings here cascade unless overridden
+    url: 'save-form.php',
+    frame:true,
+    bodyStyle:'padding:5px 5px 0',
+    width: 700,
+    renderTo: document.body,
+    layout:'column', // arrange items in columns
+    defaults: {      // defaults applied to items
+        layout: 'form',
+        border: false,
+        bodyStyle: 'padding:4px'
+    },
+    items: [{
+        // Fieldset in Column 1
+        xtype:'fieldset',
+        columnWidth: 0.5,
+        title: 'Fieldset 1',
+        collapsible: true,
+        autoHeight:true,
+        defaults: {
+            anchor: '-20' // leave room for error icon
+        },
+        defaultType: 'textfield',
+        items :[{
+                fieldLabel: 'Field 1'
+            }, {
+                fieldLabel: 'Field 2'
+            }, {
+                fieldLabel: 'Field 3'
+            }
+        ]
+    },{
+        // Fieldset in Column 2 - Panel inside
+        xtype:'fieldset',
+        title: 'Show Panel', // title, header, or checkboxToggle creates fieldset header
+        autoHeight:true,
+        columnWidth: 0.5,
+        checkboxToggle: true,
+        collapsed: true, // fieldset initially collapsed
+        layout:'anchor',
+        items :[{
+            xtype: 'panel',
+            anchor: '100%',
+            title: 'Panel inside a fieldset',
+            frame: true,
+            height: 100
+        }]
+    }]
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ * @constructor
+ * @param {Object} config Configuration options
+ * @xtype fieldset
+ */
+Ext.form.FieldSet = Ext.extend(Ext.Panel, {
+<span id='Ext-form-FieldSet-cfg-checkboxToggle'>    /**
+</span>     * @cfg {Mixed} checkboxToggle &lt;tt&gt;true&lt;/tt&gt; to render a checkbox into the fieldset frame just
+     * in front of the legend to expand/collapse the fieldset when the checkbox is toggled. (defaults
+     * to &lt;tt&gt;false&lt;/tt&gt;).
+     * &lt;p&gt;A {@link Ext.DomHelper DomHelper} element spec may also be specified to create the checkbox.
+     * If &lt;tt&gt;true&lt;/tt&gt; is specified, the default DomHelper config object used to create the element
+     * is:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+     * {tag: 'input', type: 'checkbox', name: this.checkboxName || this.id+'-checkbox'}
+     * &lt;/code&gt;&lt;/pre&gt;
+     */
+<span id='Ext-form-FieldSet-cfg-checkboxName'>    /**
+</span>     * @cfg {String} checkboxName The name to assign to the fieldset's checkbox if &lt;tt&gt;{@link #checkboxToggle} = true&lt;/tt&gt;
+     * (defaults to &lt;tt&gt;'[checkbox id]-checkbox'&lt;/tt&gt;).
+     */
+<span id='Ext-form-FieldSet-cfg-collapsible'>    /**
+</span>     * @cfg {Boolean} collapsible
+     * &lt;tt&gt;true&lt;/tt&gt; to make the fieldset collapsible and have the expand/collapse toggle button automatically
+     * rendered into the legend element, &lt;tt&gt;false&lt;/tt&gt; to keep the fieldset statically sized with no collapse
+     * button (defaults to &lt;tt&gt;false&lt;/tt&gt;). Another option is to configure &lt;tt&gt;{@link #checkboxToggle}&lt;/tt&gt;.
+     */
+<span id='Ext-form-FieldSet-cfg-labelWidth'>    /**
+</span>     * @cfg {Number} labelWidth The width of labels. This property cascades to child containers.
+     */
+<span id='Ext-form-FieldSet-cfg-itemCls'>    /**
+</span>     * @cfg {String} itemCls A css class to apply to the &lt;tt&gt;x-form-item&lt;/tt&gt; of fields (see
+     * {@link Ext.layout.FormLayout}.{@link Ext.layout.FormLayout#fieldTpl fieldTpl} for details).
+     * This property cascades to child containers.
+     */
+<span id='Ext-form-FieldSet-cfg-baseCls'>    /**
+</span>     * @cfg {String} baseCls The base CSS class applied to the fieldset (defaults to &lt;tt&gt;'x-fieldset'&lt;/tt&gt;).
+     */
+    baseCls : 'x-fieldset',
+<span id='Ext-form-FieldSet-cfg-layout'>    /**
+</span>     * @cfg {String} layout The {@link Ext.Container#layout} to use inside the fieldset (defaults to &lt;tt&gt;'form'&lt;/tt&gt;).
+     */
+    layout : 'form',
+<span id='Ext-form-FieldSet-cfg-animCollapse'>    /**
+</span>     * @cfg {Boolean} animCollapse
+     * &lt;tt&gt;true&lt;/tt&gt; to animate the transition when the panel is collapsed, &lt;tt&gt;false&lt;/tt&gt; to skip the
+     * animation (defaults to &lt;tt&gt;false&lt;/tt&gt;).
+     */
+    animCollapse : false,
+
+<span id='Ext-form-FieldSet-method-onRender'>    // private
+</span>    onRender : function(ct, position){
+        if(!this.el){
+            this.el = document.createElement('fieldset');
+            this.el.id = this.id;
+            if (this.title || this.header || this.checkboxToggle) {
+                this.el.appendChild(document.createElement('legend')).className = this.baseCls + '-header';
+            }
+        }
+
+        Ext.form.FieldSet.superclass.onRender.call(this, ct, position);
+
+        if(this.checkboxToggle){
+            var o = typeof this.checkboxToggle == 'object' ?
+                    this.checkboxToggle :
+                    {tag: 'input', type: 'checkbox', name: this.checkboxName || this.id+'-checkbox'};
+            this.checkbox = this.header.insertFirst(o);
+            this.checkbox.dom.checked = !this.collapsed;
+            this.mon(this.checkbox, 'click', this.onCheckClick, this);
+        }
+    },
+
+<span id='Ext-form-FieldSet-method-onCollapse'>    // private
+</span>    onCollapse : function(doAnim, animArg){
+        if(this.checkbox){
+            this.checkbox.dom.checked = false;
+        }
+        Ext.form.FieldSet.superclass.onCollapse.call(this, doAnim, animArg);
+
+    },
+
+<span id='Ext-form-FieldSet-method-onExpand'>    // private
+</span>    onExpand : function(doAnim, animArg){
+        if(this.checkbox){
+            this.checkbox.dom.checked = true;
+        }
+        Ext.form.FieldSet.superclass.onExpand.call(this, doAnim, animArg);
+    },
+
+<span id='Ext-form-FieldSet-method-onCheckClick'>    /**
+</span>     * This function is called by the fieldset's checkbox when it is toggled (only applies when
+     * checkboxToggle = true).  This method should never be called externally, but can be
+     * overridden to provide custom behavior when the checkbox is toggled if needed.
+     */
+    onCheckClick : function(){
+        this[this.checkbox.dom.checked ? 'expand' : 'collapse']();
+    }
+
+<span id='Ext-form-FieldSet-cfg-activeItem'>    /**
+</span>     * @cfg {String/Number} activeItem
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-applyTo'>    /**
+</span>     * @cfg {Mixed} applyTo
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-bodyBorder'>    /**
+</span>     * @cfg {Boolean} bodyBorder
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-border'>    /**
+</span>     * @cfg {Boolean} border
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-bufferResize'>    /**
+</span>     * @cfg {Boolean/Number} bufferResize
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-collapseFirst'>    /**
+</span>     * @cfg {Boolean} collapseFirst
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-defaultType'>    /**
+</span>     * @cfg {String} defaultType
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-disabledClass'>    /**
+</span>     * @cfg {String} disabledClass
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-elements'>    /**
+</span>     * @cfg {String} elements
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-floating'>    /**
+</span>     * @cfg {Boolean} floating
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-footer'>    /**
+</span>     * @cfg {Boolean} footer
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-frame'>    /**
+</span>     * @cfg {Boolean} frame
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-header'>    /**
+</span>     * @cfg {Boolean} header
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-headerAsText'>    /**
+</span>     * @cfg {Boolean} headerAsText
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-hideCollapseTool'>    /**
+</span>     * @cfg {Boolean} hideCollapseTool
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-iconCls'>    /**
+</span>     * @cfg {String} iconCls
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-shadow'>    /**
+</span>     * @cfg {Boolean/String} shadow
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-shadowOffset'>    /**
+</span>     * @cfg {Number} shadowOffset
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-shim'>    /**
+</span>     * @cfg {Boolean} shim
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-tbar'>    /**
+</span>     * @cfg {Object/Array} tbar
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-tools'>    /**
+</span>     * @cfg {Array} tools
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-toolTemplate'>    /**
+</span>     * @cfg {Ext.Template/Ext.XTemplate} toolTemplate
+     * @hide
+     */
+<span id='Ext-form-FieldSet-cfg-xtype'>    /**
+</span>     * @cfg {String} xtype
+     * @hide
+     */
+<span id='Ext-form-FieldSet-property-header'>    /**
+</span>     * @property header
+     * @hide
+     */
+<span id='Ext-form-FieldSet-property-footer'>    /**
+</span>     * @property footer
+     * @hide
+     */
+<span id='Ext-form-FieldSet-method-focus'>    /**
+</span>     * @method focus
+     * @hide
+     */
+<span id='Ext-form-FieldSet-method-getBottomToolbar'>    /**
+</span>     * @method getBottomToolbar
+     * @hide
+     */
+<span id='Ext-form-FieldSet-method-getTopToolbar'>    /**
+</span>     * @method getTopToolbar
+     * @hide
+     */
+<span id='Ext-form-FieldSet-method-setIconClass'>    /**
+</span>     * @method setIconClass
+     * @hide
+     */
+<span id='Ext-form-FieldSet-event-activate'>    /**
+</span>     * @event activate
+     * @hide
+     */
+<span id='Ext-form-FieldSet-event-beforeclose'>    /**
+</span>     * @event beforeclose
+     * @hide
+     */
+<span id='Ext-form-FieldSet-event-bodyresize'>    /**
+</span>     * @event bodyresize
+     * @hide
+     */
+<span id='Ext-form-FieldSet-event-close'>    /**
+</span>     * @event close
+     * @hide
+     */
+<span id='Ext-form-FieldSet-event-deactivate'>    /**
+</span>     * @event deactivate
+     * @hide
+     */
+});
+Ext.reg('fieldset', Ext.form.FieldSet);</pre>
+</body>
+</html>

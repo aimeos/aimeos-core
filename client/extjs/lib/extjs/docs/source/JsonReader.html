@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-data-JsonReader-method-constructor'><span id='Ext-data-JsonReader'>/**
+</span></span> * @class Ext.data.JsonReader
+ * @extends Ext.data.DataReader
+ * &lt;p&gt;Data reader class to create an Array of {@link Ext.data.Record} objects
+ * from a JSON packet based on mappings in a provided {@link Ext.data.Record}
+ * constructor.&lt;/p&gt;
+ * &lt;p&gt;Example code:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var myReader = new Ext.data.JsonReader({
+    // metadata configuration options:
+    {@link #idProperty}: 'id'
+    {@link #root}: 'rows',
+    {@link #totalProperty}: 'results',
+    {@link Ext.data.DataReader#messageProperty}: &quot;msg&quot;  // The element within the response that provides a user-feedback message (optional)
+
+    // the fields config option will internally create an {@link Ext.data.Record}
+    // constructor that provides mapping for reading the record data objects
+    {@link Ext.data.DataReader#fields fields}: [
+        // map Record&amp;#39;s 'firstname' field to data object&amp;#39;s key of same name
+        {name: 'name', mapping: 'firstname'},
+        // map Record&amp;#39;s 'job' field to data object&amp;#39;s 'occupation' key
+        {name: 'job', mapping: 'occupation'}
+    ]
+});
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;This would consume a JSON data object of the form:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+{
+    results: 2000, // Reader&amp;#39;s configured {@link #totalProperty}
+    rows: [        // Reader&amp;#39;s configured {@link #root}
+        // record data objects:
+        { {@link #idProperty id}: 1, firstname: 'Bill', occupation: 'Gardener' },
+        { {@link #idProperty id}: 2, firstname: 'Ben' , occupation: 'Horticulturalist' },
+        ...
+    ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Automatic configuration using metaData&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ * &lt;p&gt;It is possible to change a JsonReader's metadata at any time by including
+ * a &lt;b&gt;&lt;tt&gt;metaData&lt;/tt&gt;&lt;/b&gt; property in the JSON data object. If the JSON data
+ * object has a &lt;b&gt;&lt;tt&gt;metaData&lt;/tt&gt;&lt;/b&gt; property, a {@link Ext.data.Store Store}
+ * object using this Reader will reconfigure itself to use the newly provided
+ * field definition and fire its {@link Ext.data.Store#metachange metachange}
+ * event. The metachange event handler may interrogate the &lt;b&gt;&lt;tt&gt;metaData&lt;/tt&gt;&lt;/b&gt;
+ * property to perform any configuration required.&lt;/p&gt;
+ * &lt;p&gt;Note that reconfiguring a Store potentially invalidates objects which may
+ * refer to Fields or Records which no longer exist.&lt;/p&gt;
+ * &lt;p&gt;To use this facility you would create the JsonReader like this:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+var myReader = new Ext.data.JsonReader();
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;The first data packet from the server would configure the reader by
+ * containing a &lt;b&gt;&lt;tt&gt;metaData&lt;/tt&gt;&lt;/b&gt; property &lt;b&gt;and&lt;/b&gt; the data. For
+ * example, the JSON data object might take the form:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+{
+    metaData: {
+        &quot;{@link #idProperty}&quot;: &quot;id&quot;,
+        &quot;{@link #root}&quot;: &quot;rows&quot;,
+        &quot;{@link #totalProperty}&quot;: &quot;results&quot;
+        &quot;{@link #successProperty}&quot;: &quot;success&quot;,
+        &quot;{@link Ext.data.DataReader#fields fields}&quot;: [
+            {&quot;name&quot;: &quot;name&quot;},
+            {&quot;name&quot;: &quot;job&quot;, &quot;mapping&quot;: &quot;occupation&quot;}
+        ],
+        // used by store to set its sortInfo
+        &quot;sortInfo&quot;:{
+           &quot;field&quot;: &quot;name&quot;,
+           &quot;direction&quot;: &quot;ASC&quot;
+        },
+        // {@link Ext.PagingToolbar paging data} (if applicable)
+        &quot;start&quot;: 0,
+        &quot;limit&quot;: 2,
+        // custom property
+        &quot;foo&quot;: &quot;bar&quot;
+    },
+    // Reader&amp;#39;s configured {@link #successProperty}
+    &quot;success&quot;: true,
+    // Reader&amp;#39;s configured {@link #totalProperty}
+    &quot;results&quot;: 2000,
+    // Reader&amp;#39;s configured {@link #root}
+    // (this data simulates 2 results {@link Ext.PagingToolbar per page})
+    &quot;rows&quot;: [ // &lt;b&gt;*Note:&lt;/b&gt; this must be an Array
+        { &quot;id&quot;: 1, &quot;name&quot;: &quot;Bill&quot;, &quot;occupation&quot;: &quot;Gardener&quot; },
+        { &quot;id&quot;: 2, &quot;name&quot;:  &quot;Ben&quot;, &quot;occupation&quot;: &quot;Horticulturalist&quot; }
+    ]
+}
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;The &lt;b&gt;&lt;tt&gt;metaData&lt;/tt&gt;&lt;/b&gt; property in the JSON data object should contain:&lt;/p&gt;
+ * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;any of the configuration options for this class&lt;/li&gt;
+ * &lt;li&gt;a &lt;b&gt;&lt;tt&gt;{@link Ext.data.Record#fields fields}&lt;/tt&gt;&lt;/b&gt; property which
+ * the JsonReader will use as an argument to the
+ * {@link Ext.data.Record#create data Record create method} in order to
+ * configure the layout of the Records it will produce.&lt;/li&gt;
+ * &lt;li&gt;a &lt;b&gt;&lt;tt&gt;{@link Ext.data.Store#sortInfo sortInfo}&lt;/tt&gt;&lt;/b&gt; property
+ * which the JsonReader will use to set the {@link Ext.data.Store}'s
+ * {@link Ext.data.Store#sortInfo sortInfo} property&lt;/li&gt;
+ * &lt;li&gt;any custom properties needed&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ *
+ * @constructor
+ * Create a new JsonReader
+ * @param {Object} meta Metadata configuration options.
+ * @param {Array/Object} recordType
+ * &lt;p&gt;Either an Array of {@link Ext.data.Field Field} definition objects (which
+ * will be passed to {@link Ext.data.Record#create}, or a {@link Ext.data.Record Record}
+ * constructor created from {@link Ext.data.Record#create}.&lt;/p&gt;
+ */
+Ext.data.JsonReader = function(meta, recordType){
+    meta = meta || {};
+<span id='Ext-data-JsonReader-cfg-idProperty'>    /**
+</span>     * @cfg {String} idProperty [id] Name of the property within a row object
+     * that contains a record identifier value.  Defaults to &lt;tt&gt;id&lt;/tt&gt;
+     */
+<span id='Ext-data-JsonReader-cfg-successProperty'>    /**
+</span>     * @cfg {String} successProperty [success] Name of the property from which to
+     * retrieve the success attribute. Defaults to &lt;tt&gt;success&lt;/tt&gt;.  See
+     * {@link Ext.data.DataProxy}.{@link Ext.data.DataProxy#exception exception}
+     * for additional information.
+     */
+<span id='Ext-data-JsonReader-cfg-totalProperty'>    /**
+</span>     * @cfg {String} totalProperty [total] Name of the property from which to
+     * retrieve the total number of records in the dataset. This is only needed
+     * if the whole dataset is not passed in one go, but is being paged from
+     * the remote server.  Defaults to &lt;tt&gt;total&lt;/tt&gt;.
+     */
+<span id='Ext-data-JsonReader-cfg-root'>    /**
+</span>     * @cfg {String} root [undefined] &lt;b&gt;Required&lt;/b&gt;.  The name of the property
+     * which contains the Array of row objects.  Defaults to &lt;tt&gt;undefined&lt;/tt&gt;.
+     * An exception will be thrown if the root property is undefined. The data
+     * packet value for this property should be an empty array to clear the data
+     * or show no data.
+     */
+    Ext.applyIf(meta, {
+        idProperty: 'id',
+        successProperty: 'success',
+        totalProperty: 'total'
+    });
+
+    Ext.data.JsonReader.superclass.constructor.call(this, meta, recordType || meta.fields);
+};
+Ext.extend(Ext.data.JsonReader, Ext.data.DataReader, {
+<span id='Ext-data-JsonReader-property-meta'>    /**
+</span>     * This JsonReader's metadata as passed to the constructor, or as passed in
+     * the last data packet's &lt;b&gt;&lt;tt&gt;metaData&lt;/tt&gt;&lt;/b&gt; property.
+     * @type Mixed
+     * @property meta
+     */
+<span id='Ext-data-JsonReader-method-read'>    /**
+</span>     * This method is only used by a DataProxy which has retrieved data from a remote server.
+     * @param {Object} response The XHR object which contains the JSON data in its responseText.
+     * @return {Object} data A data block which is used by an Ext.data.Store object as
+     * a cache of Ext.data.Records.
+     */
+    read : function(response){
+        var json = response.responseText;
+        var o = Ext.decode(json);
+        if(!o) {
+            throw {message: 'JsonReader.read: Json object not found'};
+        }
+        return this.readRecords(o);
+    },
+
+    /*
+     * TODO: refactor code between JsonReader#readRecords, #readResponse into 1 method.
+     * there's ugly duplication going on due to maintaining backwards compat. with 2.0.  It's time to do this.
+     */
+<span id='Ext-data-JsonReader-method-readResponse'>    /**
+</span>     * Decode a JSON response from server.
+     * @param {String} action [Ext.data.Api.actions.create|read|update|destroy]
+     * @param {Object} response The XHR object returned through an Ajax server request.
+     * @return {Response} A {@link Ext.data.Response Response} object containing the data response, and also status information.
+     */
+    readResponse : function(action, response) {
+        var o = (response.responseText !== undefined) ? Ext.decode(response.responseText) : response;
+        if(!o) {
+            throw new Ext.data.JsonReader.Error('response');
+        }
+
+        var root = this.getRoot(o),
+            success = this.getSuccess(o);
+        if (success &amp;&amp; action === Ext.data.Api.actions.create) {
+            var def = Ext.isDefined(root);
+            if (def &amp;&amp; Ext.isEmpty(root)) {
+                throw new Ext.data.JsonReader.Error('root-empty', this.meta.root);
+            }
+            else if (!def) {
+                throw new Ext.data.JsonReader.Error('root-undefined-response', this.meta.root);
+            }
+        }
+
+        // instantiate response object
+        var res = new Ext.data.Response({
+            action: action,
+            success: success,
+            data: (root) ? this.extractData(root, false) : [],
+            message: this.getMessage(o),
+            raw: o
+        });
+
+        // blow up if no successProperty
+        if (Ext.isEmpty(res.success)) {
+            throw new Ext.data.JsonReader.Error('successProperty-response', this.meta.successProperty);
+        }
+        return res;
+    },
+
+<span id='Ext-data-JsonReader-method-readRecords'>    /**
+</span>     * Create a data block containing Ext.data.Records from a JSON object.
+     * @param {Object} o An object which contains an Array of row objects in the property specified
+     * in the config as 'root, and optionally a property, specified in the config as 'totalProperty'
+     * which contains the total size of the dataset.
+     * @return {Object} data A data block which is used by an Ext.data.Store object as
+     * a cache of Ext.data.Records.
+     */
+    readRecords : function(o){
+<span id='Ext-data-JsonReader-property-jsonData'>        /**
+</span>         * After any data loads, the raw JSON data is available for further custom processing.  If no data is
+         * loaded or there is a load exception this property will be undefined.
+         * @type Object
+         */
+        this.jsonData = o;
+        if(o.metaData){
+            this.onMetaChange(o.metaData);
+        }
+        var s = this.meta, Record = this.recordType,
+            f = Record.prototype.fields, fi = f.items, fl = f.length, v;
+
+        var root = this.getRoot(o), c = root.length, totalRecords = c, success = true;
+        if(s.totalProperty){
+            v = parseInt(this.getTotal(o), 10);
+            if(!isNaN(v)){
+                totalRecords = v;
+            }
+        }
+        if(s.successProperty){
+            v = this.getSuccess(o);
+            if(v === false || v === 'false'){
+                success = false;
+            }
+        }
+
+        // TODO return Ext.data.Response instance instead.  @see #readResponse
+        return {
+            success : success,
+            records : this.extractData(root, true), // &lt;-- true to return [Ext.data.Record]
+            totalRecords : totalRecords
+        };
+    },
+
+    // private
+    buildExtractors : function() {
+        if(this.ef){
+            return;
+        }
+        var s = this.meta, Record = this.recordType,
+            f = Record.prototype.fields, fi = f.items, fl = f.length;
+
+        if(s.totalProperty) {
+            this.getTotal = this.createAccessor(s.totalProperty);
+        }
+        if(s.successProperty) {
+            this.getSuccess = this.createAccessor(s.successProperty);
+        }
+        if (s.messageProperty) {
+            this.getMessage = this.createAccessor(s.messageProperty);
+        }
+        this.getRoot = s.root ? this.createAccessor(s.root) : function(p){return p;};
+        if (s.id || s.idProperty) {
+            var g = this.createAccessor(s.id || s.idProperty);
+            this.getId = function(rec) {
+                var r = g(rec);
+                return (r === undefined || r === '') ? null : r;
+            };
+        } else {
+            this.getId = function(){return null;};
+        }
+        var ef = [];
+        for(var i = 0; i &lt; fl; i++){
+            f = fi[i];
+            var map = (f.mapping !== undefined &amp;&amp; f.mapping !== null) ? f.mapping : f.name;
+            ef.push(this.createAccessor(map));
+        }
+        this.ef = ef;
+    },
+
+<span id='global-method-simpleAccess'>    /**
+</span>     * @ignore
+     * TODO This isn't used anywhere??  Don't we want to use this where possible instead of complex #createAccessor?
+     */
+    simpleAccess : function(obj, subsc) {
+        return obj[subsc];
+    },
+
+<span id='global-property-createAccessor'>    /**
+</span>     * @ignore
+     */
+    createAccessor : function(){
+        var re = /[\[\.]/;
+        return function(expr) {
+            if(Ext.isEmpty(expr)){
+                return Ext.emptyFn;
+            }
+            if(Ext.isFunction(expr)){
+                return expr;
+            }
+            var i = String(expr).search(re);
+            if(i &gt;= 0){
+                return new Function('obj', 'return obj' + (i &gt; 0 ? '.' : '') + expr);
+            }
+            return function(obj){
+                return obj[expr];
+            };
+
+        };
+    }(),
+
+<span id='Ext-data-JsonReader-method-extractValues'>    /**
+</span>     * type-casts a single row of raw-data from server
+     * @param {Object} data
+     * @param {Array} items
+     * @param {Integer} len
+     * @private
+     */
+    extractValues : function(data, items, len) {
+        var f, values = {};
+        for(var j = 0; j &lt; len; j++){
+            f = items[j];
+            var v = this.ef[j](data);
+            values[f.name] = f.convert((v !== undefined) ? v : f.defaultValue, data);
+        }
+        return values;
+    }
+});
+
+<span id='Ext-data-JsonReader-Error'>/**
+</span> * @class Ext.data.JsonReader.Error
+ * Error class for JsonReader
+ */
+Ext.data.JsonReader.Error = Ext.extend(Ext.Error, {
+<span id='Ext-data-JsonReader-Error-method-constructor'>    constructor : function(message, arg) {
+</span>        this.arg = arg;
+        Ext.Error.call(this, message);
+    },
+<span id='Ext-data-JsonReader-Error-property-name'>    name : 'Ext.data.JsonReader'
+</span>});
+Ext.apply(Ext.data.JsonReader.Error.prototype, {
+    lang: {
+        'response': 'An error occurred while json-decoding your server response',
+        'successProperty-response': 'Could not locate your &quot;successProperty&quot; in your server response.  Please review your JsonReader config to ensure the config-property &quot;successProperty&quot; matches the property in your server-response.  See the JsonReader docs.',
+        'root-undefined-config': 'Your JsonReader was configured without a &quot;root&quot; property.  Please review your JsonReader config and make sure to define the root property.  See the JsonReader docs.',
+        'idProperty-undefined' : 'Your JsonReader was configured without an &quot;idProperty&quot;  Please review your JsonReader configuration and ensure the &quot;idProperty&quot; is set (e.g.: &quot;id&quot;).  See the JsonReader docs.',
+        'root-empty': 'Data was expected to be returned by the server in the &quot;root&quot; property of the response.  Please review your JsonReader configuration to ensure the &quot;root&quot; property matches that returned in the server-response.  See JsonReader docs.'
+    }
+});
+</pre>
+</body>
+</html>

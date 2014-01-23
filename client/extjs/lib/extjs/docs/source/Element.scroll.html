@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-Element'>/**
+</span> * @class Ext.Element
+ */
+Ext.Element.addMethods({
+<span id='Ext-Element-method-isScrollable'>    /**
+</span>     * Returns true if this element is scrollable.
+     * @return {Boolean}
+     */
+    isScrollable : function(){
+        var dom = this.dom;
+        return dom.scrollHeight &gt; dom.clientHeight || dom.scrollWidth &gt; dom.clientWidth;
+    },
+
+<span id='Ext-Element-method-scrollTo'>    /**
+</span>     * Scrolls this element the specified scroll point. It does NOT do bounds checking so if you scroll to a weird value it will try to do it. For auto bounds checking, use scroll().
+     * @param {String} side Either &quot;left&quot; for scrollLeft values or &quot;top&quot; for scrollTop values.
+     * @param {Number} value The new scroll value.
+     * @return {Element} this
+     */
+    scrollTo : function(side, value){
+        this.dom[&quot;scroll&quot; + (/top/i.test(side) ? &quot;Top&quot; : &quot;Left&quot;)] = value;
+        return this;
+    },
+
+<span id='Ext-Element-method-getScroll'>    /**
+</span>     * Returns the current scroll position of the element.
+     * @return {Object} An object containing the scroll position in the format {left: (scrollLeft), top: (scrollTop)}
+     */
+    getScroll : function(){
+        var d = this.dom, 
+            doc = document,
+            body = doc.body,
+            docElement = doc.documentElement,
+            l,
+            t,
+            ret;
+
+        if(d == doc || d == body){
+            if(Ext.isIE &amp;&amp; Ext.isStrict){
+                l = docElement.scrollLeft; 
+                t = docElement.scrollTop;
+            }else{
+                l = window.pageXOffset;
+                t = window.pageYOffset;
+            }
+            ret = {left: l || (body ? body.scrollLeft : 0), top: t || (body ? body.scrollTop : 0)};
+        }else{
+            ret = {left: d.scrollLeft, top: d.scrollTop};
+        }
+        return ret;
+    }
+});</pre>
+</body>
+</html>

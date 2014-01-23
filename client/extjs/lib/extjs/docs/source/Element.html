@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-Element-method-constructor'><span id='Ext-Element'>/**
+</span></span> * @class Ext.Element
+ * &lt;p&gt;Encapsulates a DOM element, adding simple DOM manipulation facilities, normalizing for browser differences.&lt;/p&gt;
+ * &lt;p&gt;All instances of this class inherit the methods of {@link Ext.Fx} making visual effects easily available to all DOM elements.&lt;/p&gt;
+ * &lt;p&gt;Note that the events documented in this class are not Ext events, they encapsulate browser events. To
+ * access the underlying browser event, see {@link Ext.EventObject#browserEvent}. Some older
+ * browsers may not support the full range of events. Which events are supported is beyond the control of ExtJs.&lt;/p&gt;
+ * Usage:&lt;br&gt;
+&lt;pre&gt;&lt;code&gt;
+// by id
+var el = Ext.get(&quot;my-div&quot;);
+
+// by DOM element reference
+var el = Ext.get(myDivElement);
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;b&gt;Animations&lt;/b&gt;&lt;br /&gt;
+ * &lt;p&gt;When an element is manipulated, by default there is no animation.&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var el = Ext.get(&quot;my-div&quot;);
+
+// no animation
+el.setWidth(100);
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Many of the functions for manipulating an element have an optional &quot;animate&quot; parameter.  This
+ * parameter can be specified as boolean (&lt;tt&gt;true&lt;/tt&gt;) for default animation effects.&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+// default animation
+el.setWidth(100, true);
+ * &lt;/code&gt;&lt;/pre&gt;
+ *
+ * &lt;p&gt;To configure the effects, an object literal with animation options to use as the Element animation
+ * configuration object can also be specified. Note that the supported Element animation configuration
+ * options are a subset of the {@link Ext.Fx} animation options specific to Fx effects.  The supported
+ * Element animation configuration options are:&lt;/p&gt;
+&lt;pre&gt;
+Option    Default   Description
+--------- --------  ---------------------------------------------
+{@link Ext.Fx#duration duration}  .35       The duration of the animation in seconds
+{@link Ext.Fx#easing easing}    easeOut   The easing method
+{@link Ext.Fx#callback callback}  none      A function to execute when the anim completes
+{@link Ext.Fx#scope scope}     this      The scope (this) of the callback function
+&lt;/pre&gt;
+ *
+ * &lt;pre&gt;&lt;code&gt;
+// Element animation options object
+var opt = {
+    {@link Ext.Fx#duration duration}: 1,
+    {@link Ext.Fx#easing easing}: 'elasticIn',
+    {@link Ext.Fx#callback callback}: this.foo,
+    {@link Ext.Fx#scope scope}: this
+};
+// animation with some options set
+el.setWidth(100, opt);
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;The Element animation object being used for the animation will be set on the options
+ * object as &quot;anim&quot;, which allows you to stop or manipulate the animation. Here is an example:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+// using the &quot;anim&quot; property to get the Anim object
+if(opt.anim.isAnimated()){
+    opt.anim.stop();
+}
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Also see the &lt;tt&gt;{@link #animate}&lt;/tt&gt; method for another animation technique.&lt;/p&gt;
+ * &lt;p&gt;&lt;b&gt; Composite (Collections of) Elements&lt;/b&gt;&lt;/p&gt;
+ * &lt;p&gt;For working with collections of Elements, see {@link Ext.CompositeElement}&lt;/p&gt;
+ * @constructor Create a new Element directly.
+ * @param {String/HTMLElement} element
+ * @param {Boolean} forceNew (optional) By default the constructor checks to see if there is already an instance of this element in the cache and if there is it returns the same instance. This will skip that check (useful for extending this class).
+ */
+(function(){
+var DOC = document;
+
+Ext.Element = function(element, forceNew){
+    var dom = typeof element == &quot;string&quot; ?
+              DOC.getElementById(element) : element,
+        id;
+
+    if(!dom) return null;
+
+    id = dom.id;
+
+    if(!forceNew &amp;&amp; id &amp;&amp; Ext.elCache[id]){ // element object already exists
+        return Ext.elCache[id].el;
+    }
+
+<span id='Ext-Element-property-dom'>    /**
+</span>     * The DOM element
+     * @type HTMLElement
+     */
+    this.dom = dom;
+
+<span id='Ext-Element-property-id'>    /**
+</span>     * The DOM element ID
+     * @type String
+     */
+    this.id = id || Ext.id(dom);
+};
+
+var DH = Ext.DomHelper,
+    El = Ext.Element,
+    EC = Ext.elCache;
+
+El.prototype = {
+<span id='Ext-Element-method-set'>    /**
+</span>     * Sets the passed attributes as attributes of this element (a style attribute can be a string, object or function)
+     * @param {Object} o The object with the attributes
+     * @param {Boolean} useSet (optional) false to override the default setAttribute to use expandos.
+     * @return {Ext.Element} this
+     */
+    set : function(o, useSet){
+        var el = this.dom,
+            attr,
+            val,
+            useSet = (useSet !== false) &amp;&amp; !!el.setAttribute;
+
+        for (attr in o) {
+            if (o.hasOwnProperty(attr)) {
+                val = o[attr];
+                if (attr == 'style') {
+                    DH.applyStyles(el, val);
+                } else if (attr == 'cls') {
+                    el.className = val;
+                } else if (useSet) {
+                    el.setAttribute(attr, val);
+                } else {
+                    el[attr] = val;
+                }
+            }
+        }
+        return this;
+    },
+
+//  Mouse events
+<span id='Ext-Element-event-click'>    /**
+</span>     * @event click
+     * Fires when a mouse click is detected within the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-contextmenu'>    /**
+</span>     * @event contextmenu
+     * Fires when a right click is detected within the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-dblclick'>    /**
+</span>     * @event dblclick
+     * Fires when a mouse double click is detected within the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-mousedown'>    /**
+</span>     * @event mousedown
+     * Fires when a mousedown is detected within the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-mouseup'>    /**
+</span>     * @event mouseup
+     * Fires when a mouseup is detected within the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-mouseover'>    /**
+</span>     * @event mouseover
+     * Fires when a mouseover is detected within the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-mousemove'>    /**
+</span>     * @event mousemove
+     * Fires when a mousemove is detected with the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-mouseout'>    /**
+</span>     * @event mouseout
+     * Fires when a mouseout is detected with the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-mouseenter'>    /**
+</span>     * @event mouseenter
+     * Fires when the mouse enters the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-mouseleave'>    /**
+</span>     * @event mouseleave
+     * Fires when the mouse leaves the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+
+//  Keyboard events
+<span id='Ext-Element-event-keypress'>    /**
+</span>     * @event keypress
+     * Fires when a keypress is detected within the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-keydown'>    /**
+</span>     * @event keydown
+     * Fires when a keydown is detected within the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-keyup'>    /**
+</span>     * @event keyup
+     * Fires when a keyup is detected within the element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+
+
+//  HTML frame/object events
+<span id='Ext-Element-event-load'>    /**
+</span>     * @event load
+     * Fires when the user agent finishes loading all content within the element. Only supported by window, frames, objects and images.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-unload'>    /**
+</span>     * @event unload
+     * Fires when the user agent removes all content from a window or frame. For elements, it fires when the target element or any of its content has been removed.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-abort'>    /**
+</span>     * @event abort
+     * Fires when an object/image is stopped from loading before completely loaded.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-error'>    /**
+</span>     * @event error
+     * Fires when an object/image/frame cannot be loaded properly.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-resize'>    /**
+</span>     * @event resize
+     * Fires when a document view is resized.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-scroll'>    /**
+</span>     * @event scroll
+     * Fires when a document view is scrolled.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+
+//  Form events
+<span id='Ext-Element-event-select'>    /**
+</span>     * @event select
+     * Fires when a user selects some text in a text field, including input and textarea.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-change'>    /**
+</span>     * @event change
+     * Fires when a control loses the input focus and its value has been modified since gaining focus.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-submit'>    /**
+</span>     * @event submit
+     * Fires when a form is submitted.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-reset'>    /**
+</span>     * @event reset
+     * Fires when a form is reset.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-focus'>    /**
+</span>     * @event focus
+     * Fires when an element receives focus either via the pointing device or by tab navigation.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-blur'>    /**
+</span>     * @event blur
+     * Fires when an element loses focus either via the pointing device or by tabbing navigation.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+
+//  User Interface events
+<span id='Ext-Element-event-DOMFocusIn'>    /**
+</span>     * @event DOMFocusIn
+     * Where supported. Similar to HTML focus event, but can be applied to any focusable element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-DOMFocusOut'>    /**
+</span>     * @event DOMFocusOut
+     * Where supported. Similar to HTML blur event, but can be applied to any focusable element.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-DOMActivate'>    /**
+</span>     * @event DOMActivate
+     * Where supported. Fires when an element is activated, for instance, through a mouse click or a keypress.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+
+//  DOM Mutation events
+<span id='Ext-Element-event-DOMSubtreeModified'>    /**
+</span>     * @event DOMSubtreeModified
+     * Where supported. Fires when the subtree is modified.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-DOMNodeInserted'>    /**
+</span>     * @event DOMNodeInserted
+     * Where supported. Fires when a node has been added as a child of another node.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-DOMNodeRemoved'>    /**
+</span>     * @event DOMNodeRemoved
+     * Where supported. Fires when a descendant node of the element is removed.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-DOMNodeRemovedFromDocument'>    /**
+</span>     * @event DOMNodeRemovedFromDocument
+     * Where supported. Fires when a node is being removed from a document.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-DOMNodeInsertedIntoDocument'>    /**
+</span>     * @event DOMNodeInsertedIntoDocument
+     * Where supported. Fires when a node is being inserted into a document.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-DOMAttrModified'>    /**
+</span>     * @event DOMAttrModified
+     * Where supported. Fires when an attribute has been modified.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+<span id='Ext-Element-event-DOMCharacterDataModified'>    /**
+</span>     * @event DOMCharacterDataModified
+     * Where supported. Fires when the character data has been modified.
+     * @param {Ext.EventObject} e The {@link Ext.EventObject} encapsulating the DOM event.
+     * @param {HtmlElement} t The target of the event.
+     * @param {Object} o The options configuration passed to the {@link #addListener} call.
+     */
+
+<span id='Ext-Element-property-defaultUnit'>    /**
+</span>     * The default unit to append to CSS values where a unit isn't provided (defaults to px).
+     * @type String
+     */
+    defaultUnit : &quot;px&quot;,
+
+<span id='Ext-Element-method-is'>    /**
+</span>     * Returns true if this element matches the passed simple selector (e.g. div.some-class or span:first-child)
+     * @param {String} selector The simple selector to test
+     * @return {Boolean} True if this element matches the selector, else false
+     */
+    is : function(simpleSelector){
+        return Ext.DomQuery.is(this.dom, simpleSelector);
+    },
+
+<span id='Ext-Element-method-focus'>    /**
+</span>     * Tries to focus the element. Any exceptions are caught and ignored.
+     * @param {Number} defer (optional) Milliseconds to defer the focus
+     * @return {Ext.Element} this
+     */
+    focus : function(defer, /* private */ dom) {
+        var me = this,
+            dom = dom || me.dom;
+        try{
+            if(Number(defer)){
+                me.focus.defer(defer, null, [null, dom]);
+            }else{
+                dom.focus();
+            }
+        }catch(e){}
+        return me;
+    },
+
+<span id='Ext-Element-method-blur'>    /**
+</span>     * Tries to blur the element. Any exceptions are caught and ignored.
+     * @return {Ext.Element} this
+     */
+    blur : function() {
+        try{
+            this.dom.blur();
+        }catch(e){}
+        return this;
+    },
+
+<span id='Ext-Element-method-getValue'>    /**
+</span>     * Returns the value of the &quot;value&quot; attribute
+     * @param {Boolean} asNumber true to parse the value as a number
+     * @return {String/Number}
+     */
+    getValue : function(asNumber){
+        var val = this.dom.value;
+        return asNumber ? parseInt(val, 10) : val;
+    },
+
+<span id='Ext-Element-method-addListener'>    /**
+</span>     * Appends an event handler to this element.  The shorthand version {@link #on} is equivalent.
+     * @param {String} eventName The name of event to handle.
+     * @param {Function} fn The handler function the event invokes. This function is passed
+     * the following parameters:&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;evt&lt;/b&gt; : EventObject&lt;div class=&quot;sub-desc&quot;&gt;The {@link Ext.EventObject EventObject} describing the event.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;el&lt;/b&gt; : HtmlElement&lt;div class=&quot;sub-desc&quot;&gt;The DOM element which was the target of the event.
+     * Note that this may be filtered by using the &lt;tt&gt;delegate&lt;/tt&gt; option.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;o&lt;/b&gt; : Object&lt;div class=&quot;sub-desc&quot;&gt;The options object from the addListener call.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;
+     * @param {Object} scope (optional) The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which the handler function is executed.
+     * &lt;b&gt;If omitted, defaults to this Element.&lt;/b&gt;.
+     * @param {Object} options (optional) An object containing handler configuration properties.
+     * This may contain any of the following properties:&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;scope&lt;/b&gt; Object : &lt;div class=&quot;sub-desc&quot;&gt;The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which the handler function is executed.
+     * &lt;b&gt;If omitted, defaults to this Element.&lt;/b&gt;&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;delegate&lt;/b&gt; String: &lt;div class=&quot;sub-desc&quot;&gt;A simple selector to filter the target or look for a descendant of the target. See below for additional details.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;stopEvent&lt;/b&gt; Boolean: &lt;div class=&quot;sub-desc&quot;&gt;True to stop the event. That is stop propagation, and prevent the default action.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;preventDefault&lt;/b&gt; Boolean: &lt;div class=&quot;sub-desc&quot;&gt;True to prevent the default action&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;stopPropagation&lt;/b&gt; Boolean: &lt;div class=&quot;sub-desc&quot;&gt;True to prevent event propagation&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;normalized&lt;/b&gt; Boolean: &lt;div class=&quot;sub-desc&quot;&gt;False to pass a browser event to the handler function instead of an Ext.EventObject&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;target&lt;/b&gt; Ext.Element: &lt;div class=&quot;sub-desc&quot;&gt;Only call the handler if the event was fired on the target Element, &lt;i&gt;not&lt;/i&gt; if the event was bubbled up from a child node.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;delay&lt;/b&gt; Number: &lt;div class=&quot;sub-desc&quot;&gt;The number of milliseconds to delay the invocation of the handler after the event fires.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;single&lt;/b&gt; Boolean: &lt;div class=&quot;sub-desc&quot;&gt;True to add a handler to handle just the next firing of the event, and then remove itself.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;buffer&lt;/b&gt; Number: &lt;div class=&quot;sub-desc&quot;&gt;Causes the handler to be scheduled to run in an {@link Ext.util.DelayedTask} delayed
+     * by the specified number of milliseconds. If the event fires again within that time, the original
+     * handler is &lt;em&gt;not&lt;/em&gt; invoked, but the new handler is scheduled in its place.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;br&gt;
+     * &lt;p&gt;
+     * &lt;b&gt;Combining Options&lt;/b&gt;&lt;br&gt;
+     * In the following examples, the shorthand form {@link #on} is used rather than the more verbose
+     * addListener.  The two are equivalent.  Using the options argument, it is possible to combine different
+     * types of listeners:&lt;br&gt;
+     * &lt;br&gt;
+     * A delayed, one-time listener that auto stops the event and adds a custom argument (forumId) to the
+     * options object. The options object is available as the third parameter in the handler function.&lt;div style=&quot;margin: 5px 20px 20px;&quot;&gt;
+     * Code:&lt;pre&gt;&lt;code&gt;
+el.on('click', this.onClick, this, {
+    single: true,
+    delay: 100,
+    stopEvent : true,
+    forumId: 4
+});&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+     * &lt;p&gt;
+     * &lt;b&gt;Attaching multiple handlers in 1 call&lt;/b&gt;&lt;br&gt;
+     * The method also allows for a single argument to be passed which is a config object containing properties
+     * which specify multiple handlers.&lt;/p&gt;
+     * &lt;p&gt;
+     * Code:&lt;pre&gt;&lt;code&gt;
+el.on({
+    'click' : {
+        fn: this.onClick,
+        scope: this,
+        delay: 100
+    },
+    'mouseover' : {
+        fn: this.onMouseOver,
+        scope: this
+    },
+    'mouseout' : {
+        fn: this.onMouseOut,
+        scope: this
+    }
+});&lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;
+     * Or a shorthand syntax:&lt;br&gt;
+     * Code:&lt;pre&gt;&lt;code&gt;&lt;/p&gt;
+el.on({
+    'click' : this.onClick,
+    'mouseover' : this.onMouseOver,
+    'mouseout' : this.onMouseOut,
+    scope: this
+});
+     * &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+     * &lt;p&gt;&lt;b&gt;delegate&lt;/b&gt;&lt;/p&gt;
+     * &lt;p&gt;This is a configuration option that you can pass along when registering a handler for
+     * an event to assist with event delegation. Event delegation is a technique that is used to
+     * reduce memory consumption and prevent exposure to memory-leaks. By registering an event
+     * for a container element as opposed to each element within a container. By setting this
+     * configuration option to a simple selector, the target element will be filtered to look for
+     * a descendant of the target.
+     * For example:&lt;pre&gt;&lt;code&gt;
+// using this markup:
+&amp;lt;div id='elId'&gt;
+    &amp;lt;p id='p1'&gt;paragraph one&amp;lt;/p&gt;
+    &amp;lt;p id='p2' class='clickable'&gt;paragraph two&amp;lt;/p&gt;
+    &amp;lt;p id='p3'&gt;paragraph three&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+// utilize event delegation to registering just one handler on the container element:
+el = Ext.get('elId');
+el.on(
+    'click',
+    function(e,t) {
+        // handle click
+        console.info(t.id); // 'p2'
+    },
+    this,
+    {
+        // filter the target element to be a descendant with the class 'clickable'
+        delegate: '.clickable'
+    }
+);
+     * &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+     * @return {Ext.Element} this
+     */
+    addListener : function(eventName, fn, scope, options){
+        Ext.EventManager.on(this.dom,  eventName, fn, scope || this, options);
+        return this;
+    },
+
+<span id='Ext-Element-method-removeListener'>    /**
+</span>     * Removes an event handler from this element.  The shorthand version {@link #un} is equivalent.
+     * &lt;b&gt;Note&lt;/b&gt;: if a &lt;i&gt;scope&lt;/i&gt; was explicitly specified when {@link #addListener adding} the
+     * listener, the same scope must be specified here.
+     * Example:
+     * &lt;pre&gt;&lt;code&gt;
+el.removeListener('click', this.handlerFn);
+// or
+el.un('click', this.handlerFn);
+&lt;/code&gt;&lt;/pre&gt;
+     * @param {String} eventName The name of the event from which to remove the handler.
+     * @param {Function} fn The handler function to remove. &lt;b&gt;This must be a reference to the function passed into the {@link #addListener} call.&lt;/b&gt;
+     * @param {Object} scope If a scope (&lt;b&gt;&lt;code&gt;this&lt;/code&gt;&lt;/b&gt; reference) was specified when the listener was added,
+     * then this must refer to the same object.
+     * @return {Ext.Element} this
+     */
+    removeListener : function(eventName, fn, scope){
+        Ext.EventManager.removeListener(this.dom,  eventName, fn, scope || this);
+        return this;
+    },
+
+<span id='Ext-Element-method-removeAllListeners'>    /**
+</span>     * Removes all previous added listeners from this element
+     * @return {Ext.Element} this
+     */
+    removeAllListeners : function(){
+        Ext.EventManager.removeAll(this.dom);
+        return this;
+    },
+
+<span id='Ext-Element-method-purgeAllListeners'>    /**
+</span>     * Recursively removes all previous added listeners from this element and its children
+     * @return {Ext.Element} this
+     */
+    purgeAllListeners : function() {
+        Ext.EventManager.purgeElement(this, true);
+        return this;
+    },
+<span id='Ext-Element-method-addUnits'>    /**
+</span>     * @private Test if size has a unit, otherwise appends the default
+     */
+    addUnits : function(size){
+        if(size === &quot;&quot; || size == &quot;auto&quot; || size === undefined){
+            size = size || '';
+        } else if(!isNaN(size) || !unitPattern.test(size)){
+            size = size + (this.defaultUnit || 'px');
+        }
+        return size;
+    },
+
+<span id='Ext-Element-method-load'>    /**
+</span>     * &lt;p&gt;Updates the &lt;a href=&quot;http://developer.mozilla.org/en/DOM/element.innerHTML&quot;&gt;innerHTML&lt;/a&gt; of this Element
+     * from a specified URL. Note that this is subject to the &lt;a href=&quot;http://en.wikipedia.org/wiki/Same_origin_policy&quot;&gt;Same Origin Policy&lt;/a&gt;&lt;/p&gt;
+     * &lt;p&gt;Updating innerHTML of an element will &lt;b&gt;not&lt;/b&gt; execute embedded &lt;tt&gt;&amp;lt;script&gt;&lt;/tt&gt; elements. This is a browser restriction.&lt;/p&gt;
+     * @param {Mixed} options. Either a sring containing the URL from which to load the HTML, or an {@link Ext.Ajax#request} options object specifying
+     * exactly how to request the HTML.
+     * @return {Ext.Element} this
+     */
+    load : function(url, params, cb){
+        Ext.Ajax.request(Ext.apply({
+            params: params,
+            url: url.url || url,
+            callback: cb,
+            el: this.dom,
+            indicatorText: url.indicatorText || ''
+        }, Ext.isObject(url) ? url : {}));
+        return this;
+    },
+
+<span id='Ext-Element-method-isBorderBox'>    /**
+</span>     * Tests various css rules/browsers to determine if this element uses a border box
+     * @return {Boolean}
+     */
+    isBorderBox : function(){
+        return Ext.isBorderBox || Ext.isForcedBorderBox || noBoxAdjust[(this.dom.tagName || &quot;&quot;).toLowerCase()];
+    },
+
+<span id='Ext-Element-method-remove'>    /**
+</span>     * &lt;p&gt;Removes this element's dom reference.  Note that event and cache removal is handled at {@link Ext#removeNode}&lt;/p&gt;
+     */
+    remove : function(){
+        var me = this,
+            dom = me.dom;
+
+        if (dom) {
+            delete me.dom;
+            Ext.removeNode(dom);
+        }
+    },
+
+<span id='Ext-Element-method-hover'>    /**
+</span>     * Sets up event handlers to call the passed functions when the mouse is moved into and out of the Element.
+     * @param {Function} overFn The function to call when the mouse enters the Element.
+     * @param {Function} outFn The function to call when the mouse leaves the Element.
+     * @param {Object} scope (optional) The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the functions are executed. Defaults to the Element's DOM element.
+     * @param {Object} options (optional) Options for the listener. See {@link Ext.util.Observable#addListener the &lt;tt&gt;options&lt;/tt&gt; parameter}.
+     * @return {Ext.Element} this
+     */
+    hover : function(overFn, outFn, scope, options){
+        var me = this;
+        me.on('mouseenter', overFn, scope || me.dom, options);
+        me.on('mouseleave', outFn, scope || me.dom, options);
+        return me;
+    },
+
+<span id='Ext-Element-method-contains'>    /**
+</span>     * Returns true if this element is an ancestor of the passed element
+     * @param {HTMLElement/String} el The element to check
+     * @return {Boolean} True if this element is an ancestor of el, else false
+     */
+    contains : function(el){
+        return !el ? false : Ext.lib.Dom.isAncestor(this.dom, el.dom ? el.dom : el);
+    },
+
+<span id='Ext-Element-method-getAttributeNS'>    /**
+</span>     * Returns the value of a namespaced attribute from the element's underlying DOM node.
+     * @param {String} namespace The namespace in which to look for the attribute
+     * @param {String} name The attribute name
+     * @return {String} The attribute value
+     * @deprecated
+     */
+    getAttributeNS : function(ns, name){
+        return this.getAttribute(name, ns);
+    },
+
+<span id='Ext-Element-method-getAttribute'>    /**
+</span>     * Returns the value of an attribute from the element's underlying DOM node.
+     * @param {String} name The attribute name
+     * @param {String} namespace (optional) The namespace in which to look for the attribute
+     * @return {String} The attribute value
+     */
+    getAttribute: (function(){
+        var test = document.createElement('table'),
+            isBrokenOnTable = false,
+            hasGetAttribute = 'getAttribute' in test,
+            unknownRe = /undefined|unknown/;
+
+        if (hasGetAttribute) {
+
+            try {
+                test.getAttribute('ext:qtip');
+            } catch (e) {
+                isBrokenOnTable = true;
+            }
+
+            return function(name, ns) {
+                var el = this.dom,
+                    value;
+
+                if (el.getAttributeNS) {
+                    value  = el.getAttributeNS(ns, name) || null;
+                }
+
+                if (value == null) {
+                    if (ns) {
+                        if (isBrokenOnTable &amp;&amp; el.tagName.toUpperCase() == 'TABLE') {
+                            try {
+                                value = el.getAttribute(ns + ':' + name);
+                            } catch (e) {
+                                value = '';
+                            }
+                        } else {
+                            value = el.getAttribute(ns + ':' + name);
+                        }
+                    } else {
+                        value = el.getAttribute(name) || el[name];
+                    }
+                }
+                return value || '';
+            };
+        } else {
+            return function(name, ns) {
+                var el = this.om,
+                    value,
+                    attribute;
+
+                if (ns) {
+                    attribute = el[ns + ':' + name];
+                    value = unknownRe.test(typeof attribute) ? undefined : attribute;
+                } else {
+                    value = el[name];
+                }
+                return value || '';
+            };
+        }
+        test = null;
+    })(),
+
+<span id='Ext-Element-method-update'>    /**
+</span>    * Update the innerHTML of this element
+    * @param {String} html The new HTML
+    * @return {Ext.Element} this
+     */
+    update : function(html) {
+        if (this.dom) {
+            this.dom.innerHTML = html;
+        }
+        return this;
+    }
+};
+
+var ep = El.prototype;
+
+El.addMethods = function(o){
+   Ext.apply(ep, o);
+};
+
+<span id='Ext-Element-method-on'>/**
+</span> * Appends an event handler (shorthand for {@link #addListener}).
+ * @param {String} eventName The name of event to handle.
+ * @param {Function} fn The handler function the event invokes.
+ * @param {Object} scope (optional) The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the handler function is executed.
+ * @param {Object} options (optional) An object containing standard {@link #addListener} options
+ * @member Ext.Element
+ * @method on
+ */
+ep.on = ep.addListener;
+
+<span id='Ext-Element-method-un'>/**
+</span> * Removes an event handler from this element (see {@link #removeListener} for additional notes).
+ * @param {String} eventName The name of the event from which to remove the handler.
+ * @param {Function} fn The handler function to remove. &lt;b&gt;This must be a reference to the function passed into the {@link #addListener} call.&lt;/b&gt;
+ * @param {Object} scope If a scope (&lt;b&gt;&lt;code&gt;this&lt;/code&gt;&lt;/b&gt; reference) was specified when the listener was added,
+ * then this must refer to the same object.
+ * @return {Ext.Element} this
+ * @member Ext.Element
+ * @method un
+ */
+ep.un = ep.removeListener;
+
+<span id='Ext-Element-property-autoBoxAdjust'>/**
+</span> * true to automatically adjust width and height settings for box-model issues (default to true)
+ */
+ep.autoBoxAdjust = true;
+
+// private
+var unitPattern = /\d+(px|em|%|en|ex|pt|in|cm|mm|pc)$/i,
+    docEl;
+
+<span id='Ext-Element-static-method-get'>/**
+</span> * Retrieves Ext.Element objects.
+ * &lt;p&gt;&lt;b&gt;This method does not retrieve {@link Ext.Component Component}s.&lt;/b&gt; This method
+ * retrieves Ext.Element objects which encapsulate DOM elements. To retrieve a Component by
+ * its ID, use {@link Ext.ComponentMgr#get}.&lt;/p&gt;
+ * &lt;p&gt;Uses simple caching to consistently return the same object. Automatically fixes if an
+ * object was recreated with the same id via AJAX or DOM.&lt;/p&gt;
+ * @param {Mixed} el The id of the node, a DOM Node or an existing Element.
+ * @return {Element} The Element object (or null if no matching element was found)
+ * @static
+ * @member Ext.Element
+ * @method get
+ */
+El.get = function(el){
+    var ex,
+        elm,
+        id;
+    if(!el){ return null; }
+    if (typeof el == &quot;string&quot;) { // element id
+        if (!(elm = DOC.getElementById(el))) {
+            return null;
+        }
+        if (EC[el] &amp;&amp; EC[el].el) {
+            ex = EC[el].el;
+            ex.dom = elm;
+        } else {
+            ex = El.addToCache(new El(elm));
+        }
+        return ex;
+    } else if (el.tagName) { // dom element
+        if(!(id = el.id)){
+            id = Ext.id(el);
+        }
+        if (EC[id] &amp;&amp; EC[id].el) {
+            ex = EC[id].el;
+            ex.dom = el;
+        } else {
+            ex = El.addToCache(new El(el));
+        }
+        return ex;
+    } else if (el instanceof El) {
+        if(el != docEl){
+            // refresh dom element in case no longer valid,
+            // catch case where it hasn't been appended
+
+            // If an el instance is passed, don't pass to getElementById without some kind of id
+            if (Ext.isIE &amp;&amp; (el.id == undefined || el.id == '')) {
+                el.dom = el.dom;
+            } else {
+                el.dom = DOC.getElementById(el.id) || el.dom;
+            }
+        }
+        return el;
+    } else if(el.isComposite) {
+        return el;
+    } else if(Ext.isArray(el)) {
+        return El.select(el);
+    } else if(el == DOC) {
+        // create a bogus element object representing the document object
+        if(!docEl){
+            var f = function(){};
+            f.prototype = El.prototype;
+            docEl = new f();
+            docEl.dom = DOC;
+        }
+        return docEl;
+    }
+    return null;
+};
+
+El.addToCache = function(el, id){
+    id = id || el.id;
+    EC[id] = {
+        el:  el,
+        data: {},
+        events: {}
+    };
+    return el;
+};
+
+// private method for getting and setting element data
+El.data = function(el, key, value){
+    el = El.get(el);
+    if (!el) {
+        return null;
+    }
+    var c = EC[el.id].data;
+    if(arguments.length == 2){
+        return c[key];
+    }else{
+        return (c[key] = value);
+    }
+};
+
+// private
+// Garbage collection - uncache elements/purge listeners on orphaned elements
+// so we don't hold a reference and cause the browser to retain them
+function garbageCollect(){
+    if(!Ext.enableGarbageCollector){
+        clearInterval(El.collectorThreadId);
+    } else {
+        var eid,
+            el,
+            d,
+            o;
+
+        for(eid in EC){
+            o = EC[eid];
+            if(o.skipGC){
+                Ext.EventManager.removeFromSpecialCache(o.el);
+                continue;
+            }
+            el = o.el;
+            d = el.dom;
+            // -------------------------------------------------------
+            // Determining what is garbage:
+            // -------------------------------------------------------
+            // !d
+            // dom node is null, definitely garbage
+            // -------------------------------------------------------
+            // !d.parentNode
+            // no parentNode == direct orphan, definitely garbage
+            // -------------------------------------------------------
+            // !d.offsetParent &amp;&amp; !document.getElementById(eid)
+            // display none elements have no offsetParent so we will
+            // also try to look it up by it's id. However, check
+            // offsetParent first so we don't do unneeded lookups.
+            // This enables collection of elements that are not orphans
+            // directly, but somewhere up the line they have an orphan
+            // parent.
+            // -------------------------------------------------------
+            if(!d || !d.parentNode || (!d.offsetParent &amp;&amp; !DOC.getElementById(eid))){
+                if(Ext.enableListenerCollection){
+                    Ext.EventManager.removeAll(d);
+                }
+                delete EC[eid];
+            }
+        }
+        // Cleanup IE Object leaks
+        if (Ext.isIE) {
+            var t = {};
+            for (eid in EC) {
+                t[eid] = EC[eid];
+            }
+            EC = Ext.elCache = t;
+        }
+    }
+}
+El.collectorThreadId = setInterval(garbageCollect, 30000);
+
+var flyFn = function(){};
+flyFn.prototype = El.prototype;
+
+// dom is optional
+El.Flyweight = function(dom){
+    this.dom = dom;
+};
+
+El.Flyweight.prototype = new flyFn();
+El.Flyweight.prototype.isFlyweight = true;
+El._flyweights = {};
+
+<span id='Ext-Element-method-fly'>/**
+</span> * &lt;p&gt;Gets the globally shared flyweight Element, with the passed node as the active element. Do not store a reference to this element -
+ * the dom node can be overwritten by other code. Shorthand of {@link Ext.Element#fly}&lt;/p&gt;
+ * &lt;p&gt;Use this to make one-time references to DOM elements which are not going to be accessed again either by
+ * application code, or by Ext's classes. If accessing an element which will be processed regularly, then {@link Ext#get}
+ * will be more appropriate to take advantage of the caching provided by the Ext.Element class.&lt;/p&gt;
+ * @param {String/HTMLElement} el The dom node or id
+ * @param {String} named (optional) Allows for creation of named reusable flyweights to prevent conflicts
+ * (e.g. internally Ext uses &quot;_global&quot;)
+ * @return {Element} The shared Element object (or null if no matching element was found)
+ * @member Ext.Element
+ * @method fly
+ */
+El.fly = function(el, named){
+    var ret = null;
+    named = named || '_global';
+
+    if (el = Ext.getDom(el)) {
+        (El._flyweights[named] = El._flyweights[named] || new El.Flyweight()).dom = el;
+        ret = El._flyweights[named];
+    }
+    return ret;
+};
+
+<span id='Ext-method-get'>/**
+</span> * Retrieves Ext.Element objects.
+ * &lt;p&gt;&lt;b&gt;This method does not retrieve {@link Ext.Component Component}s.&lt;/b&gt; This method
+ * retrieves Ext.Element objects which encapsulate DOM elements. To retrieve a Component by
+ * its ID, use {@link Ext.ComponentMgr#get}.&lt;/p&gt;
+ * &lt;p&gt;Uses simple caching to consistently return the same object. Automatically fixes if an
+ * object was recreated with the same id via AJAX or DOM.&lt;/p&gt;
+ * Shorthand of {@link Ext.Element#get}
+ * @param {Mixed} el The id of the node, a DOM Node or an existing Element.
+ * @return {Element} The Element object (or null if no matching element was found)
+ * @member Ext
+ * @method get
+ */
+Ext.get = El.get;
+
+<span id='Ext-method-fly'>/**
+</span> * &lt;p&gt;Gets the globally shared flyweight Element, with the passed node as the active element. Do not store a reference to this element -
+ * the dom node can be overwritten by other code. Shorthand of {@link Ext.Element#fly}&lt;/p&gt;
+ * &lt;p&gt;Use this to make one-time references to DOM elements which are not going to be accessed again either by
+ * application code, or by Ext's classes. If accessing an element which will be processed regularly, then {@link Ext#get}
+ * will be more appropriate to take advantage of the caching provided by the Ext.Element class.&lt;/p&gt;
+ * @param {String/HTMLElement} el The dom node or id
+ * @param {String} named (optional) Allows for creation of named reusable flyweights to prevent conflicts
+ * (e.g. internally Ext uses &quot;_global&quot;)
+ * @return {Element} The shared Element object (or null if no matching element was found)
+ * @member Ext
+ * @method fly
+ */
+Ext.fly = El.fly;
+
+// speedy lookup for elements never to box adjust
+var noBoxAdjust = Ext.isStrict ? {
+    select:1
+} : {
+    input:1, select:1, textarea:1
+};
+if(Ext.isIE || Ext.isGecko){
+    noBoxAdjust['button'] = 1;
+}
+
+})();
+</pre>
+</body>
+</html>

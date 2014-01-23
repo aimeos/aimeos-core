@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-util-JSON'>/**
+</span> * @class Ext.util.JSON
+ * Modified version of Douglas Crockford&quot;s json.js that doesn&quot;t
+ * mess with the Object prototype
+ * http://www.json.org/js.html
+ * @singleton
+ */
+Ext.util.JSON = new (function(){
+    var useHasOwn = !!{}.hasOwnProperty,
+        isNative = function() {
+            var useNative = null;
+
+            return function() {
+                if (useNative === null) {
+                    useNative = Ext.USE_NATIVE_JSON &amp;&amp; window.JSON &amp;&amp; JSON.toString() == '[object JSON]';
+                }
+        
+                return useNative;
+            };
+        }(),
+        pad = function(n) {
+            return n &lt; 10 ? &quot;0&quot; + n : n;
+        },
+        doDecode = function(json){
+            return json ? eval(&quot;(&quot; + json + &quot;)&quot;) : &quot;&quot;;    
+        },
+        doEncode = function(o){
+            if(!Ext.isDefined(o) || o === null){
+                return &quot;null&quot;;
+            }else if(Ext.isArray(o)){
+                return encodeArray(o);
+            }else if(Ext.isDate(o)){
+                return Ext.util.JSON.encodeDate(o);
+            }else if(Ext.isString(o)){
+                return encodeString(o);
+            }else if(typeof o == &quot;number&quot;){
+                //don't use isNumber here, since finite checks happen inside isNumber
+                return isFinite(o) ? String(o) : &quot;null&quot;;
+            }else if(Ext.isBoolean(o)){
+                return String(o);
+            }else {
+                var a = [&quot;{&quot;], b, i, v;
+                for (i in o) {
+                    // don't encode DOM objects
+                    if(!o.getElementsByTagName){
+                        if(!useHasOwn || o.hasOwnProperty(i)) {
+                            v = o[i];
+                            switch (typeof v) {
+                            case &quot;undefined&quot;:
+                            case &quot;function&quot;:
+                            case &quot;unknown&quot;:
+                                break;
+                            default:
+                                if(b){
+                                    a.push(',');
+                                }
+                                a.push(doEncode(i), &quot;:&quot;,
+                                        v === null ? &quot;null&quot; : doEncode(v));
+                                b = true;
+                            }
+                        }
+                    }
+                }
+                a.push(&quot;}&quot;);
+                return a.join(&quot;&quot;);
+            }    
+        },
+        m = {
+            &quot;\b&quot;: '\\b',
+            &quot;\t&quot;: '\\t',
+            &quot;\n&quot;: '\\n',
+            &quot;\f&quot;: '\\f',
+            &quot;\r&quot;: '\\r',
+            '&quot;' : '\\&quot;',
+            &quot;\\&quot;: '\\\\'
+        },
+        encodeString = function(s){
+            if (/[&quot;\\\x00-\x1f]/.test(s)) {
+                return '&quot;' + s.replace(/([\x00-\x1f\\&quot;])/g, function(a, b) {
+                    var c = m[b];
+                    if(c){
+                        return c;
+                    }
+                    c = b.charCodeAt();
+                    return &quot;\\u00&quot; +
+                        Math.floor(c / 16).toString(16) +
+                        (c % 16).toString(16);
+                }) + '&quot;';
+            }
+            return '&quot;' + s + '&quot;';
+        },
+        encodeArray = function(o){
+            var a = [&quot;[&quot;], b, i, l = o.length, v;
+                for (i = 0; i &lt; l; i += 1) {
+                    v = o[i];
+                    switch (typeof v) {
+                        case &quot;undefined&quot;:
+                        case &quot;function&quot;:
+                        case &quot;unknown&quot;:
+                            break;
+                        default:
+                            if (b) {
+                                a.push(',');
+                            }
+                            a.push(v === null ? &quot;null&quot; : Ext.util.JSON.encode(v));
+                            b = true;
+                    }
+                }
+                a.push(&quot;]&quot;);
+                return a.join(&quot;&quot;);
+        };
+
+<span id='Ext-util-JSON-method-encodeDate'>    /**
+</span>     * &lt;p&gt;Encodes a Date. This returns the actual string which is inserted into the JSON string as the literal expression.
+     * &lt;b&gt;The returned value includes enclosing double quotation marks.&lt;/b&gt;&lt;/p&gt;
+     * &lt;p&gt;The default return format is &quot;yyyy-mm-ddThh:mm:ss&quot;.&lt;/p&gt;
+     * &lt;p&gt;To override this:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+Ext.util.JSON.encodeDate = function(d) {
+    return d.format('&quot;Y-m-d&quot;');
+};
+&lt;/code&gt;&lt;/pre&gt;
+     * @param {Date} d The Date to encode
+     * @return {String} The string literal to use in a JSON string.
+     */
+    this.encodeDate = function(o){
+        return '&quot;' + o.getFullYear() + &quot;-&quot; +
+                pad(o.getMonth() + 1) + &quot;-&quot; +
+                pad(o.getDate()) + &quot;T&quot; +
+                pad(o.getHours()) + &quot;:&quot; +
+                pad(o.getMinutes()) + &quot;:&quot; +
+                pad(o.getSeconds()) + '&quot;';
+    };
+
+<span id='Ext-util-JSON-method-encode'>    /**
+</span>     * Encodes an Object, Array or other value
+     * @param {Mixed} o The variable to encode
+     * @return {String} The JSON string
+     */
+    this.encode = function() {
+        var ec;
+        return function(o) {
+            if (!ec) {
+                // setup encoding function on first access
+                ec = isNative() ? JSON.stringify : doEncode;
+            }
+            return ec(o);
+        };
+    }();
+
+
+<span id='Ext-util-JSON-method-decode'>    /**
+</span>     * Decodes (parses) a JSON string to an object. If the JSON is invalid, this function throws a SyntaxError unless the safe option is set.
+     * @param {String} json The JSON string
+     * @return {Object} The resulting object
+     */
+    this.decode = function() {
+        var dc;
+        return function(json) {
+            if (!dc) {
+                // setup decoding function on first access
+                dc = isNative() ? JSON.parse : doDecode;
+            }
+            return dc(json);
+        };
+    }();
+
+})();
+<span id='Ext-method-encode'>/**
+</span> * Shorthand for {@link Ext.util.JSON#encode}
+ * @param {Mixed} o The variable to encode
+ * @return {String} The JSON string
+ * @member Ext
+ * @method encode
+ */
+Ext.encode = Ext.util.JSON.encode;
+<span id='Ext-method-decode'>/**
+</span> * Shorthand for {@link Ext.util.JSON#decode}
+ * @param {String} json The JSON string
+ * @param {Boolean} safe (optional) Whether to return null or throw an exception if the JSON is invalid.
+ * @return {Object} The resulting object
+ * @member Ext
+ * @method decode
+ */
+Ext.decode = Ext.util.JSON.decode;
+</pre>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-grid-ColumnModel-method-constructor'><span id='Ext-grid-ColumnModel'>/**
+</span></span> * @class Ext.grid.ColumnModel
+ * @extends Ext.util.Observable
+ * &lt;p&gt;After the data has been read into the client side cache (&lt;b&gt;{@link Ext.data.Store Store}&lt;/b&gt;),
+ * the ColumnModel is used to configure how and what parts of that data will be displayed in the
+ * vertical slices (columns) of the grid. The Ext.grid.ColumnModel Class is the default implementation
+ * of a ColumnModel used by implentations of {@link Ext.grid.GridPanel GridPanel}.&lt;/p&gt;
+ * &lt;p&gt;Data is mapped into the store's records and then indexed into the ColumnModel using the
+ * &lt;tt&gt;{@link Ext.grid.Column#dataIndex dataIndex}&lt;/tt&gt;:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+{data source} == mapping ==&gt; {data store} == &lt;b&gt;&lt;tt&gt;{@link Ext.grid.Column#dataIndex dataIndex}&lt;/tt&gt;&lt;/b&gt; ==&gt; {ColumnModel}
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Each {@link Ext.grid.Column Column} in the grid's ColumnModel is configured with a
+ * &lt;tt&gt;{@link Ext.grid.Column#dataIndex dataIndex}&lt;/tt&gt; to specify how the data within
+ * each record in the store is indexed into the ColumnModel.&lt;/p&gt;
+ * &lt;p&gt;There are two ways to initialize the ColumnModel class:&lt;/p&gt;
+ * &lt;p&gt;&lt;u&gt;Initialization Method 1: an Array&lt;/u&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+ var colModel = new Ext.grid.ColumnModel([
+    { header: &quot;Ticker&quot;, width: 60, sortable: true},
+    { header: &quot;Company Name&quot;, width: 150, sortable: true, id: 'company'},
+    { header: &quot;Market Cap.&quot;, width: 100, sortable: true},
+    { header: &quot;$ Sales&quot;, width: 100, sortable: true, renderer: money},
+    { header: &quot;Employees&quot;, width: 100, sortable: true, resizable: false}
+ ]);
+ &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;The ColumnModel may be initialized with an Array of {@link Ext.grid.Column} column configuration
+ * objects to define the initial layout / display of the columns in the Grid. The order of each
+ * {@link Ext.grid.Column} column configuration object within the specified Array defines the initial
+ * order of the column display.  A Column's display may be initially hidden using the
+ * &lt;tt&gt;{@link Ext.grid.Column#hidden hidden}&lt;/tt&gt;&lt;/b&gt; config property (and then shown using the column
+ * header menu).  Fields that are not included in the ColumnModel will not be displayable at all.&lt;/p&gt;
+ * &lt;p&gt;How each column in the grid correlates (maps) to the {@link Ext.data.Record} field in the
+ * {@link Ext.data.Store Store} the column draws its data from is configured through the
+ * &lt;b&gt;&lt;tt&gt;{@link Ext.grid.Column#dataIndex dataIndex}&lt;/tt&gt;&lt;/b&gt;.  If the
+ * &lt;b&gt;&lt;tt&gt;{@link Ext.grid.Column#dataIndex dataIndex}&lt;/tt&gt;&lt;/b&gt; is not explicitly defined (as shown in the
+ * example above) it will use the column configuration's index in the Array as the index.&lt;/p&gt;
+ * &lt;p&gt;See &lt;b&gt;&lt;tt&gt;{@link Ext.grid.Column}&lt;/tt&gt;&lt;/b&gt; for additional configuration options for each column.&lt;/p&gt;
+ * &lt;p&gt;&lt;u&gt;Initialization Method 2: an Object&lt;/u&gt;&lt;/p&gt;
+ * &lt;p&gt;In order to use configuration options from &lt;tt&gt;Ext.grid.ColumnModel&lt;/tt&gt;, an Object may be used to
+ * initialize the ColumnModel.  The column configuration Array will be specified in the &lt;tt&gt;&lt;b&gt;{@link #columns}&lt;/b&gt;&lt;/tt&gt;
+ * config property. The &lt;tt&gt;&lt;b&gt;{@link #defaults}&lt;/b&gt;&lt;/tt&gt; config property can be used to apply defaults
+ * for all columns, e.g.:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+ var colModel = new Ext.grid.ColumnModel({
+    columns: [
+        { header: &quot;Ticker&quot;, width: 60, menuDisabled: false},
+        { header: &quot;Company Name&quot;, width: 150, id: 'company'},
+        { header: &quot;Market Cap.&quot;},
+        { header: &quot;$ Sales&quot;, renderer: money},
+        { header: &quot;Employees&quot;, resizable: false}
+    ],
+    defaults: {
+        sortable: true,
+        menuDisabled: true,
+        width: 100
+    },
+    listeners: {
+        {@link #hiddenchange}: function(cm, colIndex, hidden) {
+            saveConfig(colIndex, hidden);
+        }
+    }
+});
+ &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;In both examples above, the ability to apply a CSS class to all cells in a column (including the
+ * header) is demonstrated through the use of the &lt;b&gt;&lt;tt&gt;{@link Ext.grid.Column#id id}&lt;/tt&gt;&lt;/b&gt; config
+ * option. This column could be styled by including the following css:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+ //add this css *after* the core css is loaded
+.x-grid3-td-company {
+    color: red; // entire column will have red font
+}
+// modify the header row only, adding an icon to the column header
+.x-grid3-hd-company {
+    background: transparent
+        url(../../resources/images/icons/silk/building.png)
+        no-repeat 3px 3px ! important;
+        padding-left:20px;
+}
+ &lt;/code&gt;&lt;/pre&gt;
+ * Note that the &quot;Company Name&quot; column could be specified as the
+ * &lt;b&gt;&lt;tt&gt;{@link Ext.grid.GridPanel}.{@link Ext.grid.GridPanel#autoExpandColumn autoExpandColumn}&lt;/tt&gt;&lt;/b&gt;.
+ * @constructor
+ * @param {Mixed} config Specify either an Array of {@link Ext.grid.Column} configuration objects or specify
+ * a configuration Object (see introductory section discussion utilizing Initialization Method 2 above).
+ */
+Ext.grid.ColumnModel = Ext.extend(Ext.util.Observable, {
+<span id='Ext-grid-ColumnModel-cfg-defaultWidth'>    /**
+</span>     * @cfg {Number} defaultWidth (optional) The width of columns which have no &lt;tt&gt;{@link #width}&lt;/tt&gt;
+     * specified (defaults to &lt;tt&gt;100&lt;/tt&gt;).  This property shall preferably be configured through the
+     * &lt;tt&gt;&lt;b&gt;{@link #defaults}&lt;/b&gt;&lt;/tt&gt; config property.
+     */
+    defaultWidth: 100,
+
+<span id='Ext-grid-ColumnModel-cfg-defaultSortable'>    /**
+</span>     * @cfg {Boolean} defaultSortable (optional) Default sortable of columns which have no
+     * sortable specified (defaults to &lt;tt&gt;false&lt;/tt&gt;).  This property shall preferably be configured
+     * through the &lt;tt&gt;&lt;b&gt;{@link #defaults}&lt;/b&gt;&lt;/tt&gt; config property.
+     */
+    defaultSortable: false,
+
+<span id='Ext-grid-ColumnModel-cfg-columns'>    /**
+</span>     * @cfg {Array} columns An Array of object literals.  The config options defined by
+     * &lt;b&gt;{@link Ext.grid.Column}&lt;/b&gt; are the options which may appear in the object literal for each
+     * individual column definition.
+     */
+
+<span id='Ext-grid-ColumnModel-cfg-defaults'>    /**
+</span>     * @cfg {Object} defaults Object literal which will be used to apply {@link Ext.grid.Column}
+     * configuration options to all &lt;tt&gt;&lt;b&gt;{@link #columns}&lt;/b&gt;&lt;/tt&gt;.  Configuration options specified with
+     * individual {@link Ext.grid.Column column} configs will supersede these &lt;tt&gt;&lt;b&gt;{@link #defaults}&lt;/b&gt;&lt;/tt&gt;.
+     */
+
+    constructor : function(config) {
+<span id='Ext-grid-ColumnModel-property-config'>        /**
+</span>	     * An Array of {@link Ext.grid.Column Column definition} objects representing the configuration
+	     * of this ColumnModel.  See {@link Ext.grid.Column} for the configuration properties that may
+	     * be specified.
+	     * @property config
+	     * @type Array
+	     */
+	    if (config.columns) {
+	        Ext.apply(this, config);
+	        this.setConfig(config.columns, true);
+	    } else {
+	        this.setConfig(config, true);
+	    }
+	    
+	    this.addEvents(
+<span id='Ext-grid-ColumnModel-event-widthchange'>	        /**
+</span>	         * @event widthchange
+	         * Fires when the width of a column is programmaticially changed using
+	         * &lt;code&gt;{@link #setColumnWidth}&lt;/code&gt;.
+	         * Note internal resizing suppresses the event from firing. See also
+	         * {@link Ext.grid.GridPanel}.&lt;code&gt;{@link #columnresize}&lt;/code&gt;.
+	         * @param {ColumnModel} this
+	         * @param {Number} columnIndex The column index
+	         * @param {Number} newWidth The new width
+	         */
+	        &quot;widthchange&quot;,
+	        
+<span id='Ext-grid-ColumnModel-event-headerchange'>	        /**
+</span>	         * @event headerchange
+	         * Fires when the text of a header changes.
+	         * @param {ColumnModel} this
+	         * @param {Number} columnIndex The column index
+	         * @param {String} newText The new header text
+	         */
+	        &quot;headerchange&quot;,
+	        
+<span id='Ext-grid-ColumnModel-event-hiddenchange'>	        /**
+</span>	         * @event hiddenchange
+	         * Fires when a column is hidden or &quot;unhidden&quot;.
+	         * @param {ColumnModel} this
+	         * @param {Number} columnIndex The column index
+	         * @param {Boolean} hidden true if hidden, false otherwise
+	         */
+	        &quot;hiddenchange&quot;,
+	        
+<span id='Ext-grid-ColumnModel-event-columnmoved'>	        /**
+</span>	         * @event columnmoved
+	         * Fires when a column is moved.
+	         * @param {ColumnModel} this
+	         * @param {Number} oldIndex
+	         * @param {Number} newIndex
+	         */
+	        &quot;columnmoved&quot;,
+	        
+<span id='Ext-grid-ColumnModel-event-configchange'>	        /**
+</span>	         * @event configchange
+	         * Fires when the configuration is changed
+	         * @param {ColumnModel} this
+	         */
+	        &quot;configchange&quot;
+	    );
+	    
+	    Ext.grid.ColumnModel.superclass.constructor.call(this);
+    },
+
+<span id='Ext-grid-ColumnModel-method-getColumnId'>    /**
+</span>     * Returns the id of the column at the specified index.
+     * @param {Number} index The column index
+     * @return {String} the id
+     */
+    getColumnId : function(index) {
+        return this.config[index].id;
+    },
+
+<span id='Ext-grid-ColumnModel-method-getColumnAt'>    getColumnAt : function(index) {
+</span>        return this.config[index];
+    },
+
+<span id='Ext-grid-ColumnModel-method-setConfig'>    /**
+</span>     * &lt;p&gt;Reconfigures this column model according to the passed Array of column definition objects.
+     * For a description of the individual properties of a column definition object, see the
+     * &lt;a href=&quot;#Ext.grid.ColumnModel-configs&quot;&gt;Config Options&lt;/a&gt;.&lt;/p&gt;
+     * &lt;p&gt;Causes the {@link #configchange} event to be fired. A {@link Ext.grid.GridPanel GridPanel}
+     * using this ColumnModel will listen for this event and refresh its UI automatically.&lt;/p&gt;
+     * @param {Array} config Array of Column definition objects.
+     * @param {Boolean} initial Specify &lt;tt&gt;true&lt;/tt&gt; to bypass cleanup which deletes the &lt;tt&gt;totalWidth&lt;/tt&gt;
+     * and destroys existing editors.
+     */
+    setConfig : function(config, initial) {
+        var i, c, len;
+        
+        if (!initial) { // cleanup
+            delete this.totalWidth;
+            
+            for (i = 0, len = this.config.length; i &lt; len; i++) {
+                c = this.config[i];
+                
+                if (c.setEditor) {
+                    //check here, in case we have a special column like a CheckboxSelectionModel
+                    c.setEditor(null);
+                }
+            }
+        }
+
+        // backward compatibility
+        this.defaults = Ext.apply({
+            width: this.defaultWidth,
+            sortable: this.defaultSortable
+        }, this.defaults);
+
+        this.config = config;
+        this.lookup = {};
+
+        for (i = 0, len = config.length; i &lt; len; i++) {
+            c = Ext.applyIf(config[i], this.defaults);
+            
+            // if no id, create one using column's ordinal position
+            if (Ext.isEmpty(c.id)) {
+                c.id = i;
+            }
+            
+            if (!c.isColumn) {
+                var Cls = Ext.grid.Column.types[c.xtype || 'gridcolumn'];
+                c = new Cls(c);
+                config[i] = c;
+            }
+            
+            this.lookup[c.id] = c;
+        }
+        
+        if (!initial) {
+            this.fireEvent('configchange', this);
+        }
+    },
+
+<span id='Ext-grid-ColumnModel-method-getColumnById'>    /**
+</span>     * Returns the column for a specified id.
+     * @param {String} id The column id
+     * @return {Object} the column
+     */
+    getColumnById : function(id) {
+        return this.lookup[id];
+    },
+
+<span id='Ext-grid-ColumnModel-method-getIndexById'>    /**
+</span>     * Returns the index for a specified column id.
+     * @param {String} id The column id
+     * @return {Number} the index, or -1 if not found
+     */
+    getIndexById : function(id) {
+        for (var i = 0, len = this.config.length; i &lt; len; i++) {
+            if (this.config[i].id == id) {
+                return i;
+            }
+        }
+        return -1;
+    },
+
+<span id='Ext-grid-ColumnModel-method-moveColumn'>    /**
+</span>     * Moves a column from one position to another.
+     * @param {Number} oldIndex The index of the column to move.
+     * @param {Number} newIndex The position at which to reinsert the coolumn.
+     */
+    moveColumn : function(oldIndex, newIndex) {
+        var config = this.config,
+            c      = config[oldIndex];
+            
+        config.splice(oldIndex, 1);
+        config.splice(newIndex, 0, c);
+        this.dataMap = null;
+        this.fireEvent(&quot;columnmoved&quot;, this, oldIndex, newIndex);
+    },
+
+<span id='Ext-grid-ColumnModel-method-getColumnCount'>    /**
+</span>     * Returns the number of columns.
+     * @param {Boolean} visibleOnly Optional. Pass as true to only include visible columns.
+     * @return {Number}
+     */
+    getColumnCount : function(visibleOnly) {
+        var length = this.config.length,
+            c = 0,
+            i;
+        
+        if (visibleOnly === true) {
+            for (i = 0; i &lt; length; i++) {
+                if (!this.isHidden(i)) {
+                    c++;
+                }
+            }
+            
+            return c;
+        }
+        
+        return length;
+    },
+
+<span id='Ext-grid-ColumnModel-method-getColumnsBy'>    /**
+</span>     * Returns the column configs that return true by the passed function that is called
+     * with (columnConfig, index)
+&lt;pre&gt;&lt;code&gt;
+// returns an array of column config objects for all hidden columns
+var columns = grid.getColumnModel().getColumnsBy(function(c){
+  return c.hidden;
+});
+&lt;/code&gt;&lt;/pre&gt;
+     * @param {Function} fn A function which, when passed a {@link Ext.grid.Column Column} object, must
+     * return &lt;code&gt;true&lt;/code&gt; if the column is to be included in the returned Array.
+     * @param {Object} scope (optional) The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the function
+     * is executed. Defaults to this ColumnModel.
+     * @return {Array} result
+     */
+    getColumnsBy : function(fn, scope) {
+        var config = this.config,
+            length = config.length,
+            result = [],
+            i, c;
+            
+        for (i = 0; i &lt; length; i++){
+            c = config[i];
+            
+            if (fn.call(scope || this, c, i) === true) {
+                result[result.length] = c;
+            }
+        }
+        
+        return result;
+    },
+
+<span id='Ext-grid-ColumnModel-method-isSortable'>    /**
+</span>     * Returns true if the specified column is sortable.
+     * @param {Number} col The column index
+     * @return {Boolean}
+     */
+    isSortable : function(col) {
+        return !!this.config[col].sortable;
+    },
+
+<span id='Ext-grid-ColumnModel-method-isMenuDisabled'>    /**
+</span>     * Returns true if the specified column menu is disabled.
+     * @param {Number} col The column index
+     * @return {Boolean}
+     */
+    isMenuDisabled : function(col) {
+        return !!this.config[col].menuDisabled;
+    },
+
+<span id='Ext-grid-ColumnModel-method-getRenderer'>    /**
+</span>     * Returns the rendering (formatting) function defined for the column.
+     * @param {Number} col The column index.
+     * @return {Function} The function used to render the cell. See {@link #setRenderer}.
+     */
+    getRenderer : function(col) {
+        return this.config[col].renderer || Ext.grid.ColumnModel.defaultRenderer;
+    },
+
+<span id='Ext-grid-ColumnModel-method-getRendererScope'>    getRendererScope : function(col) {
+</span>        return this.config[col].scope;
+    },
+
+<span id='Ext-grid-ColumnModel-method-setRenderer'>    /**
+</span>     * Sets the rendering (formatting) function for a column.  See {@link Ext.util.Format} for some
+     * default formatting functions.
+     * @param {Number} col The column index
+     * @param {Function} fn The function to use to process the cell's raw data
+     * to return HTML markup for the grid view. The render function is called with
+     * the following parameters:&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;value&lt;/b&gt; : Object&lt;p class=&quot;sub-desc&quot;&gt;The data value for the cell.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;metadata&lt;/b&gt; : Object&lt;p class=&quot;sub-desc&quot;&gt;An object in which you may set the following attributes:&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;css&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;A CSS class name to add to the cell's TD element.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;attr&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;An HTML attribute definition string to apply to the data container element &lt;i&gt;within&lt;/i&gt; the table cell
+     * (e.g. 'style=&quot;color:red;&quot;').&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;record&lt;/b&gt; : Ext.data.record&lt;p class=&quot;sub-desc&quot;&gt;The {@link Ext.data.Record} from which the data was extracted.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;rowIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;Row index&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;colIndex&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;Column index&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;store&lt;/b&gt; : Ext.data.Store&lt;p class=&quot;sub-desc&quot;&gt;The {@link Ext.data.Store} object from which the Record was extracted.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+     */
+    setRenderer : function(col, fn) {
+        this.config[col].renderer = fn;
+    },
+
+<span id='Ext-grid-ColumnModel-method-getColumnWidth'>    /**
+</span>     * Returns the width for the specified column.
+     * @param {Number} col The column index
+     * @return {Number}
+     */
+    getColumnWidth : function(col) {
+        var width = this.config[col].width;
+        if(typeof width != 'number'){
+            width = this.defaultWidth;
+        }
+        return width;
+    },
+
+<span id='Ext-grid-ColumnModel-method-setColumnWidth'>    /**
+</span>     * Sets the width for a column.
+     * @param {Number} col The column index
+     * @param {Number} width The new width
+     * @param {Boolean} suppressEvent True to suppress firing the &lt;code&gt;{@link #widthchange}&lt;/code&gt;
+     * event. Defaults to false.
+     */
+    setColumnWidth : function(col, width, suppressEvent) {
+        this.config[col].width = width;
+        this.totalWidth = null;
+        
+        if (!suppressEvent) {
+             this.fireEvent(&quot;widthchange&quot;, this, col, width);
+        }
+    },
+
+<span id='Ext-grid-ColumnModel-method-getTotalWidth'>    /**
+</span>     * Returns the total width of all columns.
+     * @param {Boolean} includeHidden True to include hidden column widths
+     * @return {Number}
+     */
+    getTotalWidth : function(includeHidden) {
+        if (!this.totalWidth) {
+            this.totalWidth = 0;
+            for (var i = 0, len = this.config.length; i &lt; len; i++) {
+                if (includeHidden || !this.isHidden(i)) {
+                    this.totalWidth += this.getColumnWidth(i);
+                }
+            }
+        }
+        return this.totalWidth;
+    },
+
+<span id='Ext-grid-ColumnModel-method-getColumnHeader'>    /**
+</span>     * Returns the header for the specified column.
+     * @param {Number} col The column index
+     * @return {String}
+     */
+    getColumnHeader : function(col) {
+        return this.config[col].header;
+    },
+
+<span id='Ext-grid-ColumnModel-method-setColumnHeader'>    /**
+</span>     * Sets the header for a column.
+     * @param {Number} col The column index
+     * @param {String} header The new header
+     */
+    setColumnHeader : function(col, header) {
+        this.config[col].header = header;
+        this.fireEvent(&quot;headerchange&quot;, this, col, header);
+    },
+
+<span id='Ext-grid-ColumnModel-method-getColumnTooltip'>    /**
+</span>     * Returns the tooltip for the specified column.
+     * @param {Number} col The column index
+     * @return {String}
+     */
+    getColumnTooltip : function(col) {
+            return this.config[col].tooltip;
+    },
+<span id='Ext-grid-ColumnModel-method-setColumnTooltip'>    /**
+</span>     * Sets the tooltip for a column.
+     * @param {Number} col The column index
+     * @param {String} tooltip The new tooltip
+     */
+    setColumnTooltip : function(col, tooltip) {
+            this.config[col].tooltip = tooltip;
+    },
+
+<span id='Ext-grid-ColumnModel-method-getDataIndex'>    /**
+</span>     * Returns the dataIndex for the specified column.
+&lt;pre&gt;&lt;code&gt;
+// Get field name for the column
+var fieldName = grid.getColumnModel().getDataIndex(columnIndex);
+&lt;/code&gt;&lt;/pre&gt;
+     * @param {Number} col The column index
+     * @return {String} The column's dataIndex
+     */
+    getDataIndex : function(col) {
+        return this.config[col].dataIndex;
+    },
+
+<span id='Ext-grid-ColumnModel-method-setDataIndex'>    /**
+</span>     * Sets the dataIndex for a column.
+     * @param {Number} col The column index
+     * @param {String} dataIndex The new dataIndex
+     */
+    setDataIndex : function(col, dataIndex) {
+        this.config[col].dataIndex = dataIndex;
+    },
+
+<span id='Ext-grid-ColumnModel-method-findColumnIndex'>    /**
+</span>     * Finds the index of the first matching column for the given dataIndex.
+     * @param {String} col The dataIndex to find
+     * @return {Number} The column index, or -1 if no match was found
+     */
+    findColumnIndex : function(dataIndex) {
+        var c = this.config;
+        for(var i = 0, len = c.length; i &lt; len; i++){
+            if(c[i].dataIndex == dataIndex){
+                return i;
+            }
+        }
+        return -1;
+    },
+
+<span id='Ext-grid-ColumnModel-method-isCellEditable'>    /**
+</span>     * Returns true if the cell is editable.
+&lt;pre&gt;&lt;code&gt;
+var store = new Ext.data.Store({...});
+var colModel = new Ext.grid.ColumnModel({
+  columns: [...],
+  isCellEditable: function(col, row) {
+    var record = store.getAt(row);
+    if (record.get('readonly')) { // replace with your condition
+      return false;
+    }
+    return Ext.grid.ColumnModel.prototype.isCellEditable.call(this, col, row);
+  }
+});
+var grid = new Ext.grid.GridPanel({
+  store: store,
+  colModel: colModel,
+  ...
+});
+&lt;/code&gt;&lt;/pre&gt;
+     * @param {Number} colIndex The column index
+     * @param {Number} rowIndex The row index
+     * @return {Boolean}
+     */
+    isCellEditable : function(colIndex, rowIndex) {
+        var c = this.config[colIndex],
+            ed = c.editable;
+
+        //force boolean
+        return !!(ed || (!Ext.isDefined(ed) &amp;&amp; c.editor));
+    },
+
+<span id='Ext-grid-ColumnModel-method-getCellEditor'>    /**
+</span>     * Returns the editor defined for the cell/column.
+     * @param {Number} colIndex The column index
+     * @param {Number} rowIndex The row index
+     * @return {Ext.Editor} The {@link Ext.Editor Editor} that was created to wrap
+     * the {@link Ext.form.Field Field} used to edit the cell.
+     */
+    getCellEditor : function(colIndex, rowIndex) {
+        return this.config[colIndex].getCellEditor(rowIndex);
+    },
+
+<span id='Ext-grid-ColumnModel-method-setEditable'>    /**
+</span>     * Sets if a column is editable.
+     * @param {Number} col The column index
+     * @param {Boolean} editable True if the column is editable
+     */
+    setEditable : function(col, editable) {
+        this.config[col].editable = editable;
+    },
+
+<span id='Ext-grid-ColumnModel-method-isHidden'>    /**
+</span>     * Returns &lt;tt&gt;true&lt;/tt&gt; if the column is &lt;code&gt;{@link Ext.grid.Column#hidden hidden}&lt;/code&gt;,
+     * &lt;tt&gt;false&lt;/tt&gt; otherwise.
+     * @param {Number} colIndex The column index
+     * @return {Boolean}
+     */
+    isHidden : function(colIndex) {
+        return !!this.config[colIndex].hidden; // ensure returns boolean
+    },
+
+<span id='Ext-grid-ColumnModel-method-isFixed'>    /**
+</span>     * Returns &lt;tt&gt;true&lt;/tt&gt; if the column is &lt;code&gt;{@link Ext.grid.Column#fixed fixed}&lt;/code&gt;,
+     * &lt;tt&gt;false&lt;/tt&gt; otherwise.
+     * @param {Number} colIndex The column index
+     * @return {Boolean}
+     */
+    isFixed : function(colIndex) {
+        return !!this.config[colIndex].fixed;
+    },
+
+<span id='Ext-grid-ColumnModel-method-isResizable'>    /**
+</span>     * Returns true if the column can be resized
+     * @return {Boolean}
+     */
+    isResizable : function(colIndex) {
+        return colIndex &gt;= 0 &amp;&amp; this.config[colIndex].resizable !== false &amp;&amp; this.config[colIndex].fixed !== true;
+    },
+    
+<span id='Ext-grid-ColumnModel-method-setHidden'>    /**
+</span>     * Sets if a column is hidden.
+&lt;pre&gt;&lt;code&gt;
+myGrid.getColumnModel().setHidden(0, true); // hide column 0 (0 = the first column).
+&lt;/code&gt;&lt;/pre&gt;
+     * @param {Number} colIndex The column index
+     * @param {Boolean} hidden True if the column is hidden
+     */
+    setHidden : function(colIndex, hidden) {
+        var c = this.config[colIndex];
+        if(c.hidden !== hidden){
+            c.hidden = hidden;
+            this.totalWidth = null;
+            this.fireEvent(&quot;hiddenchange&quot;, this, colIndex, hidden);
+        }
+    },
+
+<span id='Ext-grid-ColumnModel-method-setEditor'>    /**
+</span>     * Sets the editor for a column and destroys the prior editor.
+     * @param {Number} col The column index
+     * @param {Object} editor The editor object
+     */
+    setEditor : function(col, editor) {
+        this.config[col].setEditor(editor);
+    },
+
+<span id='Ext-grid-ColumnModel-method-destroy'>    /**
+</span>     * Destroys this column model by purging any event listeners. Destroys and dereferences all Columns.
+     */
+    destroy : function() {
+        var length = this.config.length,
+            i = 0;
+
+        for (; i &lt; length; i++){
+            this.config[i].destroy(); // Column's destroy encapsulates all cleanup.
+        }
+        delete this.config;
+        delete this.lookup;
+        this.purgeListeners();
+    },
+
+<span id='Ext-grid-ColumnModel-method-setState'>    /**
+</span>     * @private
+     * Setup any saved state for the column, ensures that defaults are applied.
+     */
+    setState : function(col, state) {
+        state = Ext.applyIf(state, this.defaults);
+        Ext.apply(this.config[col], state);
+    }
+});
+
+// private
+Ext.grid.ColumnModel.defaultRenderer = function(value) {
+    if (typeof value == &quot;string&quot; &amp;&amp; value.length &lt; 1) {
+        return &quot;&amp;#160;&quot;;
+    }
+    return value;
+};</pre>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-menu-ColorMenu'>/**
+</span> * @class Ext.menu.ColorMenu
+ * @extends Ext.menu.Menu
+ * &lt;p&gt;A menu containing a {@link Ext.ColorPalette} Component.&lt;/p&gt;
+ * &lt;p&gt;Notes:&lt;/p&gt;&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;Although not listed here, the &lt;b&gt;constructor&lt;/b&gt; for this class
+ * accepts all of the configuration options of &lt;b&gt;{@link Ext.ColorPalette}&lt;/b&gt;.&lt;/li&gt;
+ * &lt;li&gt;If subclassing ColorMenu, any configuration options for the ColorPalette must be
+ * applied to the &lt;tt&gt;&lt;b&gt;initialConfig&lt;/b&gt;&lt;/tt&gt; property of the ColorMenu.
+ * Applying {@link Ext.ColorPalette ColorPalette} configuration settings to
+ * &lt;b&gt;&lt;tt&gt;this&lt;/tt&gt;&lt;/b&gt; will &lt;b&gt;not&lt;/b&gt; affect the ColorPalette's configuration.&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt; * 
+ * @xtype colormenu
+ */
+ Ext.menu.ColorMenu = Ext.extend(Ext.menu.Menu, {
+<span id='Ext-menu-ColorMenu-cfg-enableScrolling'>    /** 
+</span>     * @cfg {Boolean} enableScrolling
+     * @hide 
+     */
+    enableScrolling : false,
+<span id='Ext-menu-ColorMenu-cfg-handler'>    /**
+</span>     * @cfg {Function} handler
+     * Optional. A function that will handle the select event of this menu.
+     * The handler is passed the following parameters:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;code&gt;palette&lt;/code&gt; : ColorPalette&lt;div class=&quot;sub-desc&quot;&gt;The {@link #palette Ext.ColorPalette}.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;color&lt;/code&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;The 6-digit color hex code (without the # symbol).&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+<span id='Ext-menu-ColorMenu-cfg-scope'>    /**
+</span>     * @cfg {Object} scope
+     * The scope (&lt;tt&gt;&lt;b&gt;this&lt;/b&gt;&lt;/tt&gt; reference) in which the &lt;code&gt;{@link #handler}&lt;/code&gt;
+     * function will be called.  Defaults to this ColorMenu instance.
+     */    
+    
+<span id='Ext-menu-ColorMenu-cfg-hideOnClick'>    /** 
+</span>     * @cfg {Boolean} hideOnClick
+     * False to continue showing the menu after a color is selected, defaults to true.
+     */
+    hideOnClick : true,
+    
+<span id='Ext-menu-ColorMenu-cfg-cls'>    cls : 'x-color-menu',
+</span>    
+<span id='Ext-menu-ColorMenu-cfg-paletteId'>    /** 
+</span>     * @cfg {String} paletteId
+     * An id to assign to the underlying color palette. Defaults to &lt;tt&gt;null&lt;/tt&gt;.
+     */
+    paletteId : null,
+    
+<span id='Ext-menu-ColorMenu-cfg-maxHeight'>    /** 
+</span>     * @cfg {Number} maxHeight
+     * @hide 
+     */
+<span id='Ext-menu-ColorMenu-cfg-scrollIncrement'>    /** 
+</span>     * @cfg {Number} scrollIncrement
+     * @hide 
+     */
+<span id='Ext-menu-ColorMenu-property-palette'>    /**
+</span>     * @property palette
+     * @type ColorPalette
+     * The {@link Ext.ColorPalette} instance for this ColorMenu
+     */
+    
+    
+<span id='Ext-menu-ColorMenu-event-click'>    /**
+</span>     * @event click
+     * @hide
+     */
+    
+<span id='Ext-menu-ColorMenu-event-itemclick'>    /**
+</span>     * @event itemclick
+     * @hide
+     */
+    
+    initComponent : function(){
+        Ext.apply(this, {
+            plain: true,
+            showSeparator: false,
+            items: this.palette = new Ext.ColorPalette(Ext.applyIf({
+                id: this.paletteId
+            }, this.initialConfig))
+        });
+        this.palette.purgeListeners();
+        Ext.menu.ColorMenu.superclass.initComponent.call(this);
+<span id='Ext-menu-ColorMenu-event-select'>        /**
+</span>         * @event select
+         * Fires when a color is selected from the {@link #palette Ext.ColorPalette}
+         * @param {Ext.ColorPalette} palette The {@link #palette Ext.ColorPalette}
+	     * @param {String} color The 6-digit color hex code (without the # symbol)
+         */
+        this.relayEvents(this.palette, ['select']);
+        this.on('select', this.menuHide, this);
+        if(this.handler){
+            this.on('select', this.handler, this.scope || this);
+        }
+    },
+
+<span id='Ext-menu-ColorMenu-method-menuHide'>    menuHide : function(){
+</span>        if(this.hideOnClick){
+            this.hide(true);
+        }
+    }
+});
+Ext.reg('colormenu', Ext.menu.ColorMenu);
+</pre>
+</body>
+</html>

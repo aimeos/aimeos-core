@@ -1,0 +1,83 @@
+/*
+This file is part of Ext JS 3.4
+
+Copyright (c) 2011-2013 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as
+published by the Free Software Foundation and appearing in the file LICENSE included in the
+packaging of this file.
+
+Please review the following information to ensure the GNU General Public License version 3.0
+requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department
+at http://www.sencha.com/contact.
+
+Build date: 2013-04-03 15:07:25
+*/
+
+.x-bubble-ml {
+    padding-left:4px;
+	background:transparent url(../images/bubble-lr.gif) repeat-y 0 0;
+	zoom:1;
+}
+
+.x-bubble-mr {
+    padding-right:4px;
+	background:transparent url(../images/bubble-lr.gif) repeat-y right 0;
+	zoom:1;
+}
+.x-bubble-mc {
+	background:#fff;
+	overflow:hidden;
+}
+
+.x-bubble-tl {
+    
+    background: #fff url(../images/bubble-cs.gif) no-repeat 0 0;
+    padding-left:11px;
+    zoom:1;
+}
+.x-bubble-tr {
+    background: transparent url(../images/bubble-cs.gif) no-repeat right top;
+    padding-right:11px;
+    zoom:1;
+}
+.x-bubble-tc {
+    height: 9px;
+    overflow: hidden;
+    padding-top: 4px;
+    background: #fff url(../images/bubble-tb.gif) repeat-x 0 0;
+}
+
+.x-bubble-bl {
+	background: #fff url(../images/bubble-cs.gif) no-repeat 0 bottom;
+	padding-left:11px;
+    zoom:1;
+}
+.x-bubble-br {
+	background: transparent url(../images/bubble-cs.gif) no-repeat right bottom;
+	padding-right:11px;
+    zoom:1;
+}
+.x-bubble-bc {
+	height:11px;
+	font-size:1px;
+	line-height:1px;
+	overflow:hidden;
+	background: #fff url(../images/bubble-tb.gif) repeat-x 0 bottom;
+}
+.x-bubble-bwrap {	
+	background: #fff url(../images/bubble-tb.gif) repeat-x 0 0;
+	overflow:hidden;
+	zoom:1;
+
+}
+.x-bubble-body {
+	background: #fff;
+	overflow:hidden;
+}
+

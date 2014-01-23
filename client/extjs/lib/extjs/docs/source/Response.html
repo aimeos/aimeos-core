@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-data-Response'>/**
+</span> * @class Ext.data.Response
+ * A generic response class to normalize response-handling internally to the framework.
+ */
+Ext.data.Response = function(params) {
+    Ext.apply(this, params);
+};
+Ext.data.Response.prototype = {
+<span id='Ext-data-Response-cfg-action'>    /**
+</span>     * @cfg {String} action {@link Ext.data.Api#actions}
+     */
+    action: undefined,
+<span id='Ext-data-Response-cfg-success'>    /**
+</span>     * @cfg {Boolean} success
+     */
+    success : undefined,
+<span id='Ext-data-Response-cfg-message'>    /**
+</span>     * @cfg {String} message
+     */
+    message : undefined,
+<span id='Ext-data-Response-cfg-data'>    /**
+</span>     * @cfg {Array/Object} data
+     */
+    data: undefined,
+<span id='Ext-data-Response-cfg-raw'>    /**
+</span>     * @cfg {Object} raw The raw response returned from server-code
+     */
+    raw: undefined,
+<span id='Ext-data-Response-cfg-records'>    /**
+</span>     * @cfg {Ext.data.Record/Ext.data.Record[]} records related to the Request action
+     */
+    records: undefined
+};
+</pre>
+</body>
+</html>

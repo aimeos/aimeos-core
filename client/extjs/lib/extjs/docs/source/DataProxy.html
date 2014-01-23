@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-data-DataProxy'>/**
+</span> * @class Ext.data.DataProxy
+ * @extends Ext.util.Observable
+ * &lt;p&gt;Abstract base class for implementations which provide retrieval of unformatted data objects.
+ * This class is intended to be extended and should not be created directly. For existing implementations,
+ * see {@link Ext.data.DirectProxy}, {@link Ext.data.HttpProxy}, {@link Ext.data.ScriptTagProxy} and
+ * {@link Ext.data.MemoryProxy}.&lt;/p&gt;
+ * &lt;p&gt;DataProxy implementations are usually used in conjunction with an implementation of {@link Ext.data.DataReader}
+ * (of the appropriate type which knows how to parse the data object) to provide a block of
+ * {@link Ext.data.Records} to an {@link Ext.data.Store}.&lt;/p&gt;
+ * &lt;p&gt;The parameter to a DataProxy constructor may be an {@link Ext.data.Connection} or can also be the
+ * config object to an {@link Ext.data.Connection}.&lt;/p&gt;
+ * &lt;p&gt;Custom implementations must implement either the &lt;code&gt;&lt;b&gt;doRequest&lt;/b&gt;&lt;/code&gt; method (preferred) or the
+ * &lt;code&gt;load&lt;/code&gt; method (deprecated). See
+ * {@link Ext.data.HttpProxy}.{@link Ext.data.HttpProxy#doRequest doRequest} or
+ * {@link Ext.data.HttpProxy}.{@link Ext.data.HttpProxy#load load} for additional details.&lt;/p&gt;
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Example 1&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+proxy: new Ext.data.ScriptTagProxy({
+    {@link Ext.data.Connection#url url}: 'http://extjs.com/forum/topics-remote.php'
+}),
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Example 2&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+proxy : new Ext.data.HttpProxy({
+    {@link Ext.data.Connection#method method}: 'GET',
+    {@link Ext.data.HttpProxy#prettyUrls prettyUrls}: false,
+    {@link Ext.data.Connection#url url}: 'local/default.php', // see options parameter for {@link Ext.Ajax#request}
+    {@link #api}: {
+        // all actions except the following will use above url
+        create  : 'local/new.php',
+        update  : 'local/update.php'
+    }
+}),
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;And &lt;b&gt;new in Ext version 3&lt;/b&gt;, attach centralized event-listeners upon the DataProxy class itself!  This is a great place
+ * to implement a &lt;i&gt;messaging system&lt;/i&gt; to centralize your application's user-feedback and error-handling.&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+// Listen to all &quot;beforewrite&quot; event fired by all proxies.
+Ext.data.DataProxy.on('beforewrite', function(proxy, action) {
+    console.log('beforewrite: ', action);
+});
+
+// Listen to &quot;write&quot; event fired by all proxies
+Ext.data.DataProxy.on('write', function(proxy, action, data, res, rs) {
+    console.info('write: ', action);
+});
+
+// Listen to &quot;exception&quot; event fired by all proxies
+Ext.data.DataProxy.on('exception', function(proxy, type, action, exception) {
+    console.error(type + action + ' exception);
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;b&gt;Note:&lt;/b&gt; These three events are all fired with the signature of the corresponding &lt;i&gt;DataProxy instance&lt;/i&gt; event {@link #beforewrite beforewrite}, {@link #write write} and {@link #exception exception}.
+ */
+Ext.data.DataProxy = function(conn){
+    // make sure we have a config object here to support ux proxies.
+    // All proxies should now send config into superclass constructor.
+    conn = conn || {};
+
+    // This line caused a bug when people use custom Connection object having its own request method.
+    // http://extjs.com/forum/showthread.php?t=67194.  Have to set DataProxy config
+    //Ext.applyIf(this, conn);
+
+    this.api     = conn.api;
+    this.url     = conn.url;
+    this.restful = conn.restful;
+    this.listeners = conn.listeners;
+
+    // deprecated
+    this.prettyUrls = conn.prettyUrls;
+
+<span id='Ext-data-DataProxy-cfg-api'>    /**
+</span>     * @cfg {Object} api
+     * Specific urls to call on CRUD action methods &quot;read&quot;, &quot;create&quot;, &quot;update&quot; and &quot;destroy&quot;.
+     * Defaults to:&lt;pre&gt;&lt;code&gt;
+api: {
+    read    : undefined,
+    create  : undefined,
+    update  : undefined,
+    destroy : undefined
+}
+     * &lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;The url is built based upon the action being executed &lt;tt&gt;[load|create|save|destroy]&lt;/tt&gt;
+     * using the commensurate &lt;tt&gt;{@link #api}&lt;/tt&gt; property, or if undefined default to the
+     * configured {@link Ext.data.Store}.{@link Ext.data.Store#url url}.&lt;/p&gt;&lt;br&gt;
+     * &lt;p&gt;For example:&lt;/p&gt;
+     * &lt;pre&gt;&lt;code&gt;
+api: {
+    load :    '/controller/load',
+    create :  '/controller/new',  // Server MUST return idProperty of new record
+    save :    '/controller/update',
+    destroy : '/controller/destroy_action'
+}
+
+// Alternatively, one can use the object-form to specify each API-action
+api: {
+    load: {url: 'read.php', method: 'GET'},
+    create: 'create.php',
+    destroy: 'destroy.php',
+    save: 'update.php'
+}
+     * &lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;If the specific URL for a given CRUD action is undefined, the CRUD action request
+     * will be directed to the configured &lt;tt&gt;{@link Ext.data.Connection#url url}&lt;/tt&gt;.&lt;/p&gt;
+     * &lt;br&gt;&lt;p&gt;&lt;b&gt;Note&lt;/b&gt;: To modify the URL for an action dynamically the appropriate API
+     * property should be modified before the action is requested using the corresponding before
+     * action event.  For example to modify the URL associated with the load action:
+     * &lt;pre&gt;&lt;code&gt;
+// modify the url for the action
+myStore.on({
+    beforeload: {
+        fn: function (store, options) {
+            // use &lt;tt&gt;{@link Ext.data.HttpProxy#setUrl setUrl}&lt;/tt&gt; to change the URL for *just* this request.
+            store.proxy.setUrl('changed1.php');
+
+            // set optional second parameter to true to make this URL change
+            // permanent, applying this URL for all subsequent requests.
+            store.proxy.setUrl('changed1.php', true);
+
+            // Altering the proxy API should be done using the public
+            // method &lt;tt&gt;{@link Ext.data.DataProxy#setApi setApi}&lt;/tt&gt;.
+            store.proxy.setApi('read', 'changed2.php');
+
+            // Or set the entire API with a config-object.
+            // When using the config-object option, you must redefine the &lt;b&gt;entire&lt;/b&gt;
+            // API -- not just a specific action of it.
+            store.proxy.setApi({
+                read    : 'changed_read.php',
+                create  : 'changed_create.php',
+                update  : 'changed_update.php',
+                destroy : 'changed_destroy.php'
+            });
+        }
+    }
+});
+     * &lt;/code&gt;&lt;/pre&gt;
+     * &lt;/p&gt;
+     */
+
+    this.addEvents(
+<span id='Ext-data-DataProxy-event-exception'>        /**
+</span>         * @event exception
+         * &lt;p&gt;Fires if an exception occurs in the Proxy during a remote request. This event is relayed
+         * through a corresponding {@link Ext.data.Store}.{@link Ext.data.Store#exception exception},
+         * so any Store instance may observe this event.&lt;/p&gt;
+         * &lt;p&gt;In addition to being fired through the DataProxy instance that raised the event, this event is also fired
+         * through the Ext.data.DataProxy &lt;i&gt;class&lt;/i&gt; to allow for centralized processing of exception events from &lt;b&gt;all&lt;/b&gt;
+         * DataProxies by attaching a listener to the Ext.data.DataProxy class itself.&lt;/p&gt;
+         * &lt;p&gt;This event can be fired for one of two reasons:&lt;/p&gt;
+         * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+         * &lt;li&gt;remote-request &lt;b&gt;failed&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;
+         * The server did not return status === 200.
+         * &lt;/div&gt;&lt;/li&gt;
+         * &lt;li&gt;remote-request &lt;b&gt;succeeded&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;
+         * The remote-request succeeded but the reader could not read the response.
+         * This means the server returned data, but the configured Reader threw an
+         * error while reading the response.  In this case, this event will be
+         * raised and the caught error will be passed along into this event.
+         * &lt;/div&gt;&lt;/li&gt;
+         * &lt;/ul&gt;&lt;/div&gt;
+         * &lt;br&gt;&lt;p&gt;This event fires with two different contexts based upon the 2nd
+         * parameter &lt;tt&gt;type [remote|response]&lt;/tt&gt;.  The first four parameters
+         * are identical between the two contexts -- only the final two parameters
+         * differ.&lt;/p&gt;
+         * @param {DataProxy} this The proxy that sent the request
+         * @param {String} type
+         * &lt;p&gt;The value of this parameter will be either &lt;tt&gt;'response'&lt;/tt&gt; or &lt;tt&gt;'remote'&lt;/tt&gt;.&lt;/p&gt;
+         * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+         * &lt;li&gt;&lt;b&gt;&lt;tt&gt;'response'&lt;/tt&gt;&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;
+         * &lt;p&gt;An &lt;b&gt;invalid&lt;/b&gt; response from the server was returned: either 404,
+         * 500 or the response meta-data does not match that defined in the DataReader
+         * (e.g.: root, idProperty, successProperty).&lt;/p&gt;
+         * &lt;/div&gt;&lt;/li&gt;
+         * &lt;li&gt;&lt;b&gt;&lt;tt&gt;'remote'&lt;/tt&gt;&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;
+         * &lt;p&gt;A &lt;b&gt;valid&lt;/b&gt; response was returned from the server having
+         * successProperty === false.  This response might contain an error-message
+         * sent from the server.  For example, the user may have failed
+         * authentication/authorization or a database validation error occurred.&lt;/p&gt;
+         * &lt;/div&gt;&lt;/li&gt;
+         * &lt;/ul&gt;&lt;/div&gt;
+         * @param {String} action Name of the action (see {@link Ext.data.Api#actions}.
+         * @param {Object} options The options for the action that were specified in the {@link #request}.
+         * @param {Object} response
+         * &lt;p&gt;The value of this parameter depends on the value of the &lt;code&gt;type&lt;/code&gt; parameter:&lt;/p&gt;
+         * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+         * &lt;li&gt;&lt;b&gt;&lt;tt&gt;'response'&lt;/tt&gt;&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;
+         * &lt;p&gt;The raw browser response object (e.g.: XMLHttpRequest)&lt;/p&gt;
+         * &lt;/div&gt;&lt;/li&gt;
+         * &lt;li&gt;&lt;b&gt;&lt;tt&gt;'remote'&lt;/tt&gt;&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;
+         * &lt;p&gt;The decoded response object sent from the server.&lt;/p&gt;
+         * &lt;/div&gt;&lt;/li&gt;
+         * &lt;/ul&gt;&lt;/div&gt;
+         * @param {Mixed} arg
+         * &lt;p&gt;The type and value of this parameter depends on the value of the &lt;code&gt;type&lt;/code&gt; parameter:&lt;/p&gt;
+         * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+         * &lt;li&gt;&lt;b&gt;&lt;tt&gt;'response'&lt;/tt&gt;&lt;/b&gt; : Error&lt;div class=&quot;sub-desc&quot;&gt;
+         * &lt;p&gt;The JavaScript Error object caught if the configured Reader could not read the data.
+         * If the remote request returns success===false, this parameter will be null.&lt;/p&gt;
+         * &lt;/div&gt;&lt;/li&gt;
+         * &lt;li&gt;&lt;b&gt;&lt;tt&gt;'remote'&lt;/tt&gt;&lt;/b&gt; : Record/Record[]&lt;div class=&quot;sub-desc&quot;&gt;
+         * &lt;p&gt;This parameter will only exist if the &lt;tt&gt;action&lt;/tt&gt; was a &lt;b&gt;write&lt;/b&gt; action
+         * (Ext.data.Api.actions.create|update|destroy).&lt;/p&gt;
+         * &lt;/div&gt;&lt;/li&gt;
+         * &lt;/ul&gt;&lt;/div&gt;
+         */
+        'exception',
+<span id='Ext-data-DataProxy-event-beforeload'>        /**
+</span>         * @event beforeload
+         * Fires before a request to retrieve a data object.
+         * @param {DataProxy} this The proxy for the request
+         * @param {Object} params The params object passed to the {@link #request} function
+         */
+        'beforeload',
+<span id='Ext-data-DataProxy-event-load'>        /**
+</span>         * @event load
+         * Fires before the load method's callback is called.
+         * @param {DataProxy} this The proxy for the request
+         * @param {Object} o The request transaction object
+         * @param {Object} options The callback's &lt;tt&gt;options&lt;/tt&gt; property as passed to the {@link #request} function
+         */
+        'load',
+<span id='Ext-data-DataProxy-event-loadexception'>        /**
+</span>         * @event loadexception
+         * &lt;p&gt;This event is &lt;b&gt;deprecated&lt;/b&gt;.  The signature of the loadexception event
+         * varies depending on the proxy, use the catch-all {@link #exception} event instead.
+         * This event will fire in addition to the {@link #exception} event.&lt;/p&gt;
+         * @param {misc} misc See {@link #exception}.
+         * @deprecated
+         */
+        'loadexception',
+<span id='Ext-data-DataProxy-event-beforewrite'>        /**
+</span>         * @event beforewrite
+         * &lt;p&gt;Fires before a request is generated for one of the actions Ext.data.Api.actions.create|update|destroy&lt;/p&gt;
+         * &lt;p&gt;In addition to being fired through the DataProxy instance that raised the event, this event is also fired
+         * through the Ext.data.DataProxy &lt;i&gt;class&lt;/i&gt; to allow for centralized processing of beforewrite events from &lt;b&gt;all&lt;/b&gt;
+         * DataProxies by attaching a listener to the Ext.data.DataProxy class itself.&lt;/p&gt;
+         * @param {DataProxy} this The proxy for the request
+         * @param {String} action [Ext.data.Api.actions.create|update|destroy]
+         * @param {Record/Record[]} rs The Record(s) to create|update|destroy.
+         * @param {Object} params The request &lt;code&gt;params&lt;/code&gt; object.  Edit &lt;code&gt;params&lt;/code&gt; to add parameters to the request.
+         */
+        'beforewrite',
+<span id='Ext-data-DataProxy-event-write'>        /**
+</span>         * @event write
+         * &lt;p&gt;Fires before the request-callback is called&lt;/p&gt;
+         * &lt;p&gt;In addition to being fired through the DataProxy instance that raised the event, this event is also fired
+         * through the Ext.data.DataProxy &lt;i&gt;class&lt;/i&gt; to allow for centralized processing of write events from &lt;b&gt;all&lt;/b&gt;
+         * DataProxies by attaching a listener to the Ext.data.DataProxy class itself.&lt;/p&gt;
+         * @param {DataProxy} this The proxy that sent the request
+         * @param {String} action [Ext.data.Api.actions.create|upate|destroy]
+         * @param {Object} data The data object extracted from the server-response
+         * @param {Object} response The decoded response from server
+         * @param {Record/Record[]} rs The Record(s) from Store
+         * @param {Object} options The callback's &lt;tt&gt;options&lt;/tt&gt; property as passed to the {@link #request} function
+         */
+        'write'
+    );
+    Ext.data.DataProxy.superclass.constructor.call(this);
+
+    // Prepare the proxy api.  Ensures all API-actions are defined with the Object-form.
+    try {
+        Ext.data.Api.prepare(this);
+    } catch (e) {
+        if (e instanceof Ext.data.Api.Error) {
+            e.toConsole();
+        }
+    }
+    // relay each proxy's events onto Ext.data.DataProxy class for centralized Proxy-listening
+    Ext.data.DataProxy.relayEvents(this, ['beforewrite', 'write', 'exception']);
+};
+
+Ext.extend(Ext.data.DataProxy, Ext.util.Observable, {
+<span id='Ext-data-DataProxy-cfg-restful'>    /**
+</span>     * @cfg {Boolean} restful
+     * &lt;p&gt;Defaults to &lt;tt&gt;false&lt;/tt&gt;.  Set to &lt;tt&gt;true&lt;/tt&gt; to operate in a RESTful manner.&lt;/p&gt;
+     * &lt;br&gt;&lt;p&gt; Note: this parameter will automatically be set to &lt;tt&gt;true&lt;/tt&gt; if the
+     * {@link Ext.data.Store} it is plugged into is set to &lt;code&gt;restful: true&lt;/code&gt;. If the
+     * Store is RESTful, there is no need to set this option on the proxy.&lt;/p&gt;
+     * &lt;br&gt;&lt;p&gt;RESTful implementations enable the serverside framework to automatically route
+     * actions sent to one url based upon the HTTP method, for example:
+     * &lt;pre&gt;&lt;code&gt;
+store: new Ext.data.Store({
+    restful: true,
+    proxy: new Ext.data.HttpProxy({url:'/users'}); // all requests sent to /users
+    ...
+)}
+     * &lt;/code&gt;&lt;/pre&gt;
+     * If there is no &lt;code&gt;{@link #api}&lt;/code&gt; specified in the configuration of the proxy,
+     * all requests will be marshalled to a single RESTful url (/users) so the serverside
+     * framework can inspect the HTTP Method and act accordingly:
+     * &lt;pre&gt;
+&lt;u&gt;Method&lt;/u&gt;   &lt;u&gt;url&lt;/u&gt;        &lt;u&gt;action&lt;/u&gt;
+POST     /users     create
+GET      /users     read
+PUT      /users/23  update
+DESTROY  /users/23  delete
+     * &lt;/pre&gt;&lt;/p&gt;
+     * &lt;p&gt;If set to &lt;tt&gt;true&lt;/tt&gt;, a {@link Ext.data.Record#phantom non-phantom} record's
+     * {@link Ext.data.Record#id id} will be appended to the url. Some MVC (e.g., Ruby on Rails,
+     * Merb and Django) support segment based urls where the segments in the URL follow the
+     * Model-View-Controller approach:&lt;pre&gt;&lt;code&gt;
+     * someSite.com/controller/action/id
+     * &lt;/code&gt;&lt;/pre&gt;
+     * Where the segments in the url are typically:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;The first segment : represents the controller class that should be invoked.&lt;/li&gt;
+     * &lt;li&gt;The second segment : represents the class function, or method, that should be called.&lt;/li&gt;
+     * &lt;li&gt;The third segment : represents the ID (a variable typically passed to the method).&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;&lt;/p&gt;
+     * &lt;br&gt;&lt;p&gt;Refer to &lt;code&gt;{@link Ext.data.DataProxy#api}&lt;/code&gt; for additional information.&lt;/p&gt;
+     */
+    restful: false,
+
+<span id='Ext-data-DataProxy-method-setApi'>    /**
+</span>     * &lt;p&gt;Redefines the Proxy's API or a single action of an API. Can be called with two method signatures.&lt;/p&gt;
+     * &lt;p&gt;If called with an object as the only parameter, the object should redefine the &lt;b&gt;entire&lt;/b&gt; API, e.g.:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+proxy.setApi({
+    read    : '/users/read',
+    create  : '/users/create',
+    update  : '/users/update',
+    destroy : '/users/destroy'
+});
+&lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;If called with two parameters, the first parameter should be a string specifying the API action to
+     * redefine and the second parameter should be the URL (or function if using DirectProxy) to call for that action, e.g.:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;
+proxy.setApi(Ext.data.Api.actions.read, '/users/new_load_url');
+&lt;/code&gt;&lt;/pre&gt;
+     * @param {String/Object} api An API specification object, or the name of an action.
+     * @param {String/Function} url The URL (or function if using DirectProxy) to call for the action.
+     */
+    setApi : function() {
+        if (arguments.length == 1) {
+            var valid = Ext.data.Api.isValid(arguments[0]);
+            if (valid === true) {
+                this.api = arguments[0];
+            }
+            else {
+                throw new Ext.data.Api.Error('invalid', valid);
+            }
+        }
+        else if (arguments.length == 2) {
+            if (!Ext.data.Api.isAction(arguments[0])) {
+                throw new Ext.data.Api.Error('invalid', arguments[0]);
+            }
+            this.api[arguments[0]] = arguments[1];
+        }
+        Ext.data.Api.prepare(this);
+    },
+
+<span id='Ext-data-DataProxy-method-isApiAction'>    /**
+</span>     * Returns true if the specified action is defined as a unique action in the api-config.
+     * request.  If all API-actions are routed to unique urls, the xaction parameter is unecessary.  However, if no api is defined
+     * and all Proxy actions are routed to DataProxy#url, the server-side will require the xaction parameter to perform a switch to
+     * the corresponding code for CRUD action.
+     * @param {String} action CREATE READ UPDATE or DESTROY
+     * @return {Boolean}
+     */
+    isApiAction : function(action) {
+        return (this.api[action]) ? true : false;
+    },
+
+<span id='Ext-data-DataProxy-method-request'>    /**
+</span>     * All proxy actions are executed through this method.  Automatically fires the &quot;before&quot; + action event
+     * @param {String} action Name of the action
+     * @param {Ext.data.Record/Ext.data.Record[]/null} rs Will be null when action is 'load'
+     * @param {Object} params
+     * @param {Ext.data.DataReader} reader
+     * @param {Function} callback
+     * @param {Object} scope The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the callback function is executed. Defaults to the Proxy object.
+     * @param {Object} options Any options specified for the action (e.g. see {@link Ext.data.Store#load}.
+     */
+    request : function(action, rs, params, reader, callback, scope, options) {
+        if (!this.api[action] &amp;&amp; !this.load) {
+            throw new Ext.data.DataProxy.Error('action-undefined', action);
+        }
+        params = params || {};
+        if ((action === Ext.data.Api.actions.read) ? this.fireEvent(&quot;beforeload&quot;, this, params) : this.fireEvent(&quot;beforewrite&quot;, this, action, rs, params) !== false) {
+            this.doRequest.apply(this, arguments);
+        }
+        else {
+            callback.call(scope || this, null, options, false);
+        }
+    },
+
+
+<span id='Ext-data-DataProxy-method-load'>    /**
+</span>     * &lt;b&gt;Deprecated&lt;/b&gt; load method using old method signature. See {@doRequest} for preferred method.
+     * @deprecated
+     * @param {Object} params
+     * @param {Object} reader
+     * @param {Object} callback
+     * @param {Object} scope
+     * @param {Object} arg
+     */
+    load : null,
+
+<span id='Ext-data-DataProxy-cfg-doRequest'>    /**
+</span>     * @cfg {Function} doRequest Abstract method that should be implemented in all subclasses.  &lt;b&gt;Note:&lt;/b&gt; Should only be used by custom-proxy developers.
+     * (e.g.: {@link Ext.data.HttpProxy#doRequest HttpProxy.doRequest},
+     * {@link Ext.data.DirectProxy#doRequest DirectProxy.doRequest}).
+     */
+    doRequest : function(action, rs, params, reader, callback, scope, options) {
+        // default implementation of doRequest for backwards compatibility with 2.0 proxies.
+        // If we're executing here, the action is probably &quot;load&quot;.
+        // Call with the pre-3.0 method signature.
+        this.load(params, reader, callback, scope, options);
+    },
+
+<span id='Ext-data-DataProxy-cfg-onRead'>    /**
+</span>     * @cfg {Function} onRead Abstract method that should be implemented in all subclasses.  &lt;b&gt;Note:&lt;/b&gt; Should only be used by custom-proxy developers.  Callback for read {@link Ext.data.Api#actions action}.
+     * @param {String} action Action name as per {@link Ext.data.Api.actions#read}.
+     * @param {Object} o The request transaction object
+     * @param {Object} res The server response
+     * @fires loadexception (deprecated)
+     * @fires exception
+     * @fires load
+     * @protected
+     */
+    onRead : Ext.emptyFn,
+<span id='Ext-data-DataProxy-cfg-onWrite'>    /**
+</span>     * @cfg {Function} onWrite Abstract method that should be implemented in all subclasses.  &lt;b&gt;Note:&lt;/b&gt; Should only be used by custom-proxy developers.  Callback for &lt;i&gt;create, update and destroy&lt;/i&gt; {@link Ext.data.Api#actions actions}.
+     * @param {String} action [Ext.data.Api.actions.create|read|update|destroy]
+     * @param {Object} trans The request transaction object
+     * @param {Object} res The server response
+     * @fires exception
+     * @fires write
+     * @protected
+     */
+    onWrite : Ext.emptyFn,
+<span id='Ext-data-DataProxy-method-buildUrl'>    /**
+</span>     * buildUrl
+     * Sets the appropriate url based upon the action being executed.  If restful is true, and only a single record is being acted upon,
+     * url will be built Rails-style, as in &quot;/controller/action/32&quot;.  restful will aply iff the supplied record is an
+     * instance of Ext.data.Record rather than an Array of them.
+     * @param {String} action The api action being executed [read|create|update|destroy]
+     * @param {Ext.data.Record/Ext.data.Record[]} record The record or Array of Records being acted upon.
+     * @return {String} url
+     * @private
+     */
+    buildUrl : function(action, record) {
+        record = record || null;
+
+        // conn.url gets nullified after each request.  If it's NOT null here, that means the user must have intervened with a call
+        // to DataProxy#setUrl or DataProxy#setApi and changed it before the request was executed.  If that's the case, use conn.url,
+        // otherwise, build the url from the api or this.url.
+        var url = (this.conn &amp;&amp; this.conn.url) ? this.conn.url : (this.api[action]) ? this.api[action].url : this.url;
+        if (!url) {
+            throw new Ext.data.Api.Error('invalid-url', action);
+        }
+
+        // look for urls having &quot;provides&quot; suffix used in some MVC frameworks like Rails/Merb and others.  The provides suffice informs
+        // the server what data-format the client is dealing with and returns data in the same format (eg: application/json, application/xml, etc)
+        // e.g.: /users.json, /users.xml, etc.
+        // with restful routes, we need urls like:
+        // PUT /users/1.json
+        // DELETE /users/1.json
+        var provides = null;
+        var m = url.match(/(.*)(\.json|\.xml|\.html)$/);
+        if (m) {
+            provides = m[2];    // eg &quot;.json&quot;
+            url      = m[1];    // eg: &quot;/users&quot;
+        }
+        // prettyUrls is deprectated in favor of restful-config
+        if ((this.restful === true || this.prettyUrls === true) &amp;&amp; record instanceof Ext.data.Record &amp;&amp; !record.phantom) {
+            url += '/' + record.id;
+        }
+        return (provides === null) ? url : url + provides;
+    },
+
+<span id='Ext-data-DataProxy-method-destroy'>    /**
+</span>     * Destroys the proxy by purging any event listeners and cancelling any active requests.
+     */
+    destroy: function(){
+        this.purgeListeners();
+    }
+});
+
+// Apply the Observable prototype to the DataProxy class so that proxy instances can relay their
+// events to the class.  Allows for centralized listening of all proxy instances upon the DataProxy class.
+Ext.apply(Ext.data.DataProxy, Ext.util.Observable.prototype);
+Ext.util.Observable.call(Ext.data.DataProxy);
+
+<span id='Ext-data-DataProxy-Error'>/**
+</span> * @class Ext.data.DataProxy.Error
+ * @extends Ext.Error
+ * DataProxy Error extension.
+ * constructor
+ * @param {String} message Message describing the error.
+ * @param {Record/Record[]} arg
+ */
+Ext.data.DataProxy.Error = Ext.extend(Ext.Error, {
+<span id='Ext-data-DataProxy-Error-method-constructor'>    constructor : function(message, arg) {
+</span>        this.arg = arg;
+        Ext.Error.call(this, message);
+    },
+<span id='Ext-data-DataProxy-Error-property-name'>    name: 'Ext.data.DataProxy'
+</span>});
+Ext.apply(Ext.data.DataProxy.Error.prototype, {
+    lang: {
+        'action-undefined': &quot;DataProxy attempted to execute an API-action but found an undefined url / function.  Please review your Proxy url/api-configuration.&quot;,
+        'api-invalid': 'Recieved an invalid API-configuration.  Please ensure your proxy API-configuration contains only the actions from Ext.data.Api.actions.'
+    }
+});
+
+
+</pre>
+</body>
+</html>

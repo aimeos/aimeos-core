@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-LoadMask-method-constructor'><span id='Ext-LoadMask'>/**
+</span></span> * @class Ext.LoadMask
+ * A simple utility class for generically masking elements while loading data.  If the {@link #store}
+ * config option is specified, the masking will be automatically synchronized with the store's loading
+ * process and the mask element will be cached for reuse.  For all other elements, this mask will replace the
+ * element's Updater load indicator and will be destroyed after the initial load.
+ * &lt;p&gt;Example usage:&lt;/p&gt;
+ *&lt;pre&gt;&lt;code&gt;
+// Basic mask:
+var myMask = new Ext.LoadMask(Ext.getBody(), {msg:&quot;Please wait...&quot;});
+myMask.show();
+&lt;/code&gt;&lt;/pre&gt;
+ * @constructor
+ * Create a new LoadMask
+ * @param {Mixed} el The element or DOM node, or its id
+ * @param {Object} config The config object
+ */
+Ext.LoadMask = function(el, config){
+    this.el = Ext.get(el);
+    Ext.apply(this, config);
+    if(this.store){
+        this.store.on({
+            scope: this,
+            beforeload: this.onBeforeLoad,
+            load: this.onLoad,
+            exception: this.onLoad
+        });
+        this.removeMask = Ext.value(this.removeMask, false);
+    }else{
+        var um = this.el.getUpdater();
+        um.showLoadIndicator = false; // disable the default indicator
+        um.on({
+            scope: this,
+            beforeupdate: this.onBeforeLoad,
+            update: this.onLoad,
+            failure: this.onLoad
+        });
+        this.removeMask = Ext.value(this.removeMask, true);
+    }
+};
+
+Ext.LoadMask.prototype = {
+<span id='Ext-LoadMask-cfg-store'>    /**
+</span>     * @cfg {Ext.data.Store} store
+     * Optional Store to which the mask is bound. The mask is displayed when a load request is issued, and
+     * hidden on either load sucess, or load fail.
+     */
+<span id='Ext-LoadMask-cfg-removeMask'>    /**
+</span>     * @cfg {Boolean} removeMask
+     * True to create a single-use mask that is automatically destroyed after loading (useful for page loads),
+     * False to persist the mask element reference for multiple uses (e.g., for paged data widgets).  Defaults to false.
+     */
+<span id='Ext-LoadMask-cfg-msg'>    /**
+</span>     * @cfg {String} msg
+     * The text to display in a centered loading message box (defaults to 'Loading...')
+     */
+    msg : 'Loading...',
+<span id='Ext-LoadMask-cfg-msgCls'>    /**
+</span>     * @cfg {String} msgCls
+     * The CSS class to apply to the loading message element (defaults to &quot;x-mask-loading&quot;)
+     */
+    msgCls : 'x-mask-loading',
+
+<span id='Ext-LoadMask-property-disabled'>    /**
+</span>     * Read-only. True if the mask is currently disabled so that it will not be displayed (defaults to false)
+     * @type Boolean
+     */
+    disabled: false,
+
+<span id='Ext-LoadMask-method-disable'>    /**
+</span>     * Disables the mask to prevent it from being displayed
+     */
+    disable : function(){
+       this.disabled = true;
+    },
+
+<span id='Ext-LoadMask-method-enable'>    /**
+</span>     * Enables the mask so that it can be displayed
+     */
+    enable : function(){
+        this.disabled = false;
+    },
+
+    // private
+    onLoad : function(){
+        this.el.unmask(this.removeMask);
+    },
+
+    // private
+    onBeforeLoad : function(){
+        if(!this.disabled){
+            this.el.mask(this.msg, this.msgCls);
+        }
+    },
+
+<span id='Ext-LoadMask-method-show'>    /**
+</span>     * Show this LoadMask over the configured Element.
+     */
+    show: function(){
+        this.onBeforeLoad();
+    },
+
+<span id='Ext-LoadMask-method-hide'>    /**
+</span>     * Hide this LoadMask.
+     */
+    hide: function(){
+        this.onLoad();
+    },
+
+    // private
+    destroy : function(){
+        if(this.store){
+            this.store.un('beforeload', this.onBeforeLoad, this);
+            this.store.un('load', this.onLoad, this);
+            this.store.un('exception', this.onLoad, this);
+        }else{
+            var um = this.el.getUpdater();
+            um.un('beforeupdate', this.onBeforeLoad, this);
+            um.un('update', this.onLoad, this);
+            um.un('failure', this.onLoad, this);
+        }
+    }
+};</pre>
+</body>
+</html>

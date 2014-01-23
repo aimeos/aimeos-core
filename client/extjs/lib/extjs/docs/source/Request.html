@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-data-Request'>/**
+</span> * @class Ext.data.Request
+ * A simple Request class used internally to the data package to provide more generalized remote-requests
+ * to a DataProxy.
+ * TODO Not yet implemented.  Implement in Ext.data.Store#execute
+ */
+Ext.data.Request = function(params) {
+    Ext.apply(this, params);
+};
+Ext.data.Request.prototype = {
+<span id='Ext-data-Request-cfg-action'>    /**
+</span>     * @cfg {String} action
+     */
+    action : undefined,
+<span id='Ext-data-Request-cfg-rs'>    /**
+</span>     * @cfg {Ext.data.Record[]/Ext.data.Record} rs The Store recordset associated with the request.
+     */
+    rs : undefined,
+<span id='Ext-data-Request-cfg-params'>    /**
+</span>     * @cfg {Object} params HTTP request params
+     */
+    params: undefined,
+<span id='Ext-data-Request-cfg-callback'>    /**
+</span>     * @cfg {Function} callback The function to call when request is complete
+     */
+    callback : Ext.emptyFn,
+<span id='Ext-data-Request-cfg-scope'>    /**
+</span>     * @cfg {Object} scope The scope of the callback funtion
+     */
+    scope : undefined,
+<span id='Ext-data-Request-cfg-reader'>    /**
+</span>     * @cfg {Ext.data.DataReader} reader The DataReader instance which will parse the received response
+     */
+    reader : undefined
+};
+</pre>
+</body>
+</html>

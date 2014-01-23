@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ColorPalette-method-constructor'><span id='Ext-ColorPalette'>/**
+</span></span> * @class Ext.ColorPalette
+ * @extends Ext.Component
+ * Simple color palette class for choosing colors.  The palette can be rendered to any container.&lt;br /&gt;
+ * Here's an example of typical usage:
+ * &lt;pre&gt;&lt;code&gt;
+var cp = new Ext.ColorPalette({value:'993300'});  // initial selected color
+cp.render('my-div');
+
+cp.on('select', function(palette, selColor){
+    // do something with selColor
+});
+&lt;/code&gt;&lt;/pre&gt;
+ * @constructor
+ * Create a new ColorPalette
+ * @param {Object} config The config object
+ * @xtype colorpalette
+ */
+Ext.ColorPalette = Ext.extend(Ext.Component, {
+<span id='Ext-ColorPalette-cfg-tpl'>	/**
+</span>	 * @cfg {String} tpl An existing XTemplate instance to be used in place of the default template for rendering the component.
+	 */
+<span id='Ext-ColorPalette-cfg-itemCls'>    /**
+</span>     * @cfg {String} itemCls
+     * The CSS class to apply to the containing element (defaults to 'x-color-palette')
+     */
+    itemCls : 'x-color-palette',
+<span id='Ext-ColorPalette-cfg-value'>    /**
+</span>     * @cfg {String} value
+     * The initial color to highlight (should be a valid 6-digit color hex code without the # symbol).  Note that
+     * the hex codes are case-sensitive.
+     */
+    value : null,
+<span id='Ext-ColorPalette-cfg-clickEvent'>    /**
+</span>     * @cfg {String} clickEvent
+     * The DOM event that will cause a color to be selected. This can be any valid event name (dblclick, contextmenu). 
+     * Defaults to &lt;tt&gt;'click'&lt;/tt&gt;.
+     */
+    clickEvent :'click',
+<span id='Ext-ColorPalette-property-ctype'>    // private
+</span>    ctype : 'Ext.ColorPalette',
+
+<span id='Ext-ColorPalette-cfg-allowReselect'>    /**
+</span>     * @cfg {Boolean} allowReselect If set to true then reselecting a color that is already selected fires the {@link #select} event
+     */
+    allowReselect : false,
+
+<span id='Ext-ColorPalette-property-colors'>    /**
+</span>     * &lt;p&gt;An array of 6-digit color hex code strings (without the # symbol).  This array can contain any number
+     * of colors, and each hex code should be unique.  The width of the palette is controlled via CSS by adjusting
+     * the width property of the 'x-color-palette' class (or assigning a custom class), so you can balance the number
+     * of colors with the width setting until the box is symmetrical.&lt;/p&gt;
+     * &lt;p&gt;You can override individual colors if needed:&lt;/p&gt;
+     * &lt;pre&gt;&lt;code&gt;
+var cp = new Ext.ColorPalette();
+cp.colors[0] = 'FF0000';  // change the first box to red
+&lt;/code&gt;&lt;/pre&gt;
+
+Or you can provide a custom array of your own for complete control:
+&lt;pre&gt;&lt;code&gt;
+var cp = new Ext.ColorPalette();
+cp.colors = ['000000', '993300', '333300'];
+&lt;/code&gt;&lt;/pre&gt;
+     * @type Array
+     */
+    colors : [
+        '000000', '993300', '333300', '003300', '003366', '000080', '333399', '333333',
+        '800000', 'FF6600', '808000', '008000', '008080', '0000FF', '666699', '808080',
+        'FF0000', 'FF9900', '99CC00', '339966', '33CCCC', '3366FF', '800080', '969696',
+        'FF00FF', 'FFCC00', 'FFFF00', '00FF00', '00FFFF', '00CCFF', '993366', 'C0C0C0',
+        'FF99CC', 'FFCC99', 'FFFF99', 'CCFFCC', 'CCFFFF', '99CCFF', 'CC99FF', 'FFFFFF'
+    ],
+
+<span id='Ext-ColorPalette-cfg-handler'>    /**
+</span>     * @cfg {Function} handler
+     * Optional. A function that will handle the select event of this palette.
+     * The handler is passed the following parameters:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;code&gt;palette&lt;/code&gt; : ColorPalette&lt;div class=&quot;sub-desc&quot;&gt;The {@link #palette Ext.ColorPalette}.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;color&lt;/code&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;The 6-digit color hex code (without the # symbol).&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+<span id='Ext-ColorPalette-cfg-scope'>    /**
+</span>     * @cfg {Object} scope
+     * The scope (&lt;tt&gt;&lt;b&gt;this&lt;/b&gt;&lt;/tt&gt; reference) in which the &lt;code&gt;{@link #handler}&lt;/code&gt;
+     * function will be called.  Defaults to this ColorPalette instance.
+     */
+    
+<span id='Ext-ColorPalette-method-initComponent'>    // private
+</span>    initComponent : function(){
+        Ext.ColorPalette.superclass.initComponent.call(this);
+        this.addEvents(
+<span id='Ext-ColorPalette-event-select'>            /**
+</span>             * @event select
+             * Fires when a color is selected
+             * @param {ColorPalette} this
+             * @param {String} color The 6-digit color hex code (without the # symbol)
+             */
+            'select'
+        );
+
+        if(this.handler){
+            this.on('select', this.handler, this.scope, true);
+        }    
+    },
+
+<span id='Ext-ColorPalette-method-onRender'>    // private
+</span>    onRender : function(container, position){
+        this.autoEl = {
+            tag: 'div',
+            cls: this.itemCls
+        };
+        Ext.ColorPalette.superclass.onRender.call(this, container, position);
+        var t = this.tpl || new Ext.XTemplate(
+            '&lt;tpl for=&quot;.&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;color-{.}&quot; hidefocus=&quot;on&quot;&gt;&lt;em&gt;&lt;span style=&quot;background:#{.}&quot; class=&quot;x-unselectable&quot; unselectable=&quot;on&quot;&gt;&amp;#160;&lt;/span&gt;&lt;/em&gt;&lt;/a&gt;&lt;/tpl&gt;'
+        );
+        t.overwrite(this.el, this.colors);
+        this.mon(this.el, this.clickEvent, this.handleClick, this, {delegate: 'a'});
+        if(this.clickEvent != 'click'){
+        	this.mon(this.el, 'click', Ext.emptyFn, this, {delegate: 'a', preventDefault: true});
+        }
+    },
+
+<span id='Ext-ColorPalette-method-afterRender'>    // private
+</span>    afterRender : function(){
+        Ext.ColorPalette.superclass.afterRender.call(this);
+        if(this.value){
+            var s = this.value;
+            this.value = null;
+            this.select(s, true);
+        }
+    },
+
+<span id='Ext-ColorPalette-method-handleClick'>    // private
+</span>    handleClick : function(e, t){
+        e.preventDefault();
+        if(!this.disabled){
+            var c = t.className.match(/(?:^|\s)color-(.{6})(?:\s|$)/)[1];
+            this.select(c.toUpperCase());
+        }
+    },
+
+<span id='Ext-ColorPalette-method-select'>    /**
+</span>     * Selects the specified color in the palette (fires the {@link #select} event)
+     * @param {String} color A valid 6-digit color hex code (# will be stripped if included)
+     * @param {Boolean} suppressEvent (optional) True to stop the select event from firing. Defaults to &lt;tt&gt;false&lt;/tt&gt;.
+     */
+    select : function(color, suppressEvent){
+        color = color.replace('#', '');
+        if(color != this.value || this.allowReselect){
+            var el = this.el;
+            if(this.value){
+                el.child('a.color-'+this.value).removeClass('x-color-palette-sel');
+            }
+            el.child('a.color-'+color).addClass('x-color-palette-sel');
+            this.value = color;
+            if(suppressEvent !== true){
+                this.fireEvent('select', this, color);
+            }
+        }
+    }
+
+<span id='Ext-ColorPalette-cfg-autoEl'>    /**
+</span>     * @cfg {String} autoEl @hide
+     */
+});
+Ext.reg('colorpalette', Ext.ColorPalette);</pre>
+</body>
+</html>

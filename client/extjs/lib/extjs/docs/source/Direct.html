@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-Direct'>/**
+</span> * @class Ext.Direct
+ * @extends Ext.util.Observable
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Overview&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ *
+ * &lt;p&gt;Ext.Direct aims to streamline communication between the client and server
+ * by providing a single interface that reduces the amount of common code
+ * typically required to validate data and handle returned data packets
+ * (reading data, error conditions, etc).&lt;/p&gt;
+ *
+ * &lt;p&gt;The Ext.direct namespace includes several classes for a closer integration
+ * with the server-side. The Ext.data namespace also includes classes for working
+ * with Ext.data.Stores which are backed by data from an Ext.Direct method.&lt;/p&gt;
+ *
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Specification&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ *
+ * &lt;p&gt;For additional information consult the
+ * &lt;a href=&quot;http://extjs.com/products/extjs/direct.php&quot;&gt;Ext.Direct Specification&lt;/a&gt;.&lt;/p&gt;
+ *
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Providers&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ *
+ * &lt;p&gt;Ext.Direct uses a provider architecture, where one or more providers are
+ * used to transport data to and from the server. There are several providers
+ * that exist in the core at the moment:&lt;/p&gt;&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ *
+ * &lt;li&gt;{@link Ext.direct.JsonProvider JsonProvider} for simple JSON operations&lt;/li&gt;
+ * &lt;li&gt;{@link Ext.direct.PollingProvider PollingProvider} for repeated requests&lt;/li&gt;
+ * &lt;li&gt;{@link Ext.direct.RemotingProvider RemotingProvider} exposes server side
+ * on the client.&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ *
+ * &lt;p&gt;A provider does not need to be invoked directly, providers are added via
+ * {@link Ext.Direct}.{@link Ext.Direct#add add}.&lt;/p&gt;
+ *
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Router&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ *
+ * &lt;p&gt;Ext.Direct utilizes a &quot;router&quot; on the server to direct requests from the client
+ * to the appropriate server-side method. Because the Ext.Direct API is completely
+ * platform-agnostic, you could completely swap out a Java based server solution
+ * and replace it with one that uses C# without changing the client side JavaScript
+ * at all.&lt;/p&gt;
+ *
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Server side events&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;
+ *
+ * &lt;p&gt;Custom events from the server may be handled by the client by adding
+ * listeners, for example:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+{&quot;type&quot;:&quot;event&quot;,&quot;name&quot;:&quot;message&quot;,&quot;data&quot;:&quot;Successfully polled at: 11:19:30 am&quot;}
+
+// add a handler for a 'message' event sent by the server
+Ext.Direct.on('message', function(e){
+    out.append(String.format('&amp;lt;p&gt;&amp;lt;i&gt;{0}&amp;lt;/i&gt;&amp;lt;/p&gt;', e.data));
+            out.el.scrollTo('t', 100000, true);
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ * @singleton
+ */
+Ext.Direct = Ext.extend(Ext.util.Observable, {
+<span id='Ext-Direct-property-eventTypes'>    /**
+</span>     * Each event type implements a getData() method. The default event types are:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;event&lt;/tt&gt;&lt;/b&gt; : Ext.Direct.Event&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;exception&lt;/tt&gt;&lt;/b&gt; : Ext.Direct.ExceptionEvent&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;rpc&lt;/tt&gt;&lt;/b&gt; : Ext.Direct.RemotingEvent&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * @property eventTypes
+     * @type Object
+     */
+
+<span id='Ext-Direct-property-exceptions'>    /**
+</span>     * Four types of possible exceptions which can occur:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;Ext.Direct.exceptions.TRANSPORT&lt;/tt&gt;&lt;/b&gt; : 'xhr'&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;Ext.Direct.exceptions.PARSE&lt;/tt&gt;&lt;/b&gt; : 'parse'&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;Ext.Direct.exceptions.LOGIN&lt;/tt&gt;&lt;/b&gt; : 'login'&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;Ext.Direct.exceptions.SERVER&lt;/tt&gt;&lt;/b&gt; : 'exception'&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * @property exceptions
+     * @type Object
+     */
+    exceptions: {
+        TRANSPORT: 'xhr',
+        PARSE: 'parse',
+        LOGIN: 'login',
+        SERVER: 'exception'
+    },
+
+<span id='Ext-Direct-method-constructor'>    // private
+</span>    constructor: function(){
+        this.addEvents(
+<span id='Ext-Direct-event-event'>            /**
+</span>             * @event event
+             * Fires after an event.
+             * @param {event} e The {@link Ext.Direct#eventTypes Ext.Direct.Event type} that occurred.
+             * @param {Ext.direct.Provider} provider The {@link Ext.direct.Provider Provider}.
+             */
+            'event',
+<span id='Ext-Direct-event-exception'>            /**
+</span>             * @event exception
+             * Fires after an event exception.
+             * @param {event} e The {@link Ext.Direct#eventTypes Ext.Direct.Event type} that occurred.
+             */
+            'exception'
+        );
+        this.transactions = {};
+        this.providers = {};
+    },
+
+<span id='Ext-Direct-method-addProvider'>    /**
+</span>     * Adds an Ext.Direct Provider and creates the proxy or stub methods to execute server-side methods.
+     * If the provider is not already connected, it will auto-connect.
+     * &lt;pre&gt;&lt;code&gt;
+var pollProv = new Ext.direct.PollingProvider({
+    url: 'php/poll2.php'
+});
+
+Ext.Direct.addProvider(
+    {
+        &quot;type&quot;:&quot;remoting&quot;,       // create a {@link Ext.direct.RemotingProvider}
+        &quot;url&quot;:&quot;php\/router.php&quot;, // url to connect to the Ext.Direct server-side router.
+        &quot;actions&quot;:{              // each property within the actions object represents a Class
+            &quot;TestAction&quot;:[       // array of methods within each server side Class
+            {
+                &quot;name&quot;:&quot;doEcho&quot;, // name of method
+                &quot;len&quot;:1
+            },{
+                &quot;name&quot;:&quot;multiply&quot;,
+                &quot;len&quot;:1
+            },{
+                &quot;name&quot;:&quot;doForm&quot;,
+                &quot;formHandler&quot;:true, // handle form on server with Ext.Direct.Transaction
+                &quot;len&quot;:1
+            }]
+        },
+        &quot;namespace&quot;:&quot;myApplication&quot;,// namespace to create the Remoting Provider in
+    },{
+        type: 'polling', // create a {@link Ext.direct.PollingProvider}
+        url:  'php/poll.php'
+    },
+    pollProv // reference to previously created instance
+);
+     * &lt;/code&gt;&lt;/pre&gt;
+     * @param {Object/Array} provider Accepts either an Array of Provider descriptions (an instance
+     * or config object for a Provider) or any number of Provider descriptions as arguments.  Each
+     * Provider description instructs Ext.Direct how to create client-side stub methods.
+     */
+    addProvider : function(provider){
+        var a = arguments;
+        if(a.length &gt; 1){
+            for(var i = 0, len = a.length; i &lt; len; i++){
+                this.addProvider(a[i]);
+            }
+            return;
+        }
+
+        // if provider has not already been instantiated
+        if(!provider.events){
+            provider = new Ext.Direct.PROVIDERS[provider.type](provider);
+        }
+        provider.id = provider.id || Ext.id();
+        this.providers[provider.id] = provider;
+
+        provider.on('data', this.onProviderData, this);
+        provider.on('exception', this.onProviderException, this);
+
+
+        if(!provider.isConnected()){
+            provider.connect();
+        }
+
+        return provider;
+    },
+
+<span id='Ext-Direct-method-getProvider'>    /**
+</span>     * Retrieve a {@link Ext.direct.Provider provider} by the
+     * &lt;b&gt;&lt;tt&gt;{@link Ext.direct.Provider#id id}&lt;/tt&gt;&lt;/b&gt; specified when the provider is
+     * {@link #addProvider added}.
+     * @param {String} id Unique identifier assigned to the provider when calling {@link #addProvider}
+     */
+    getProvider : function(id){
+        return this.providers[id];
+    },
+
+<span id='Ext-Direct-method-removeProvider'>    removeProvider : function(id){
+</span>        var provider = id.id ? id : this.providers[id];
+        provider.un('data', this.onProviderData, this);
+        provider.un('exception', this.onProviderException, this);
+        delete this.providers[provider.id];
+        return provider;
+    },
+
+<span id='Ext-Direct-method-addTransaction'>    addTransaction: function(t){
+</span>        this.transactions[t.tid] = t;
+        return t;
+    },
+
+<span id='Ext-Direct-method-removeTransaction'>    removeTransaction: function(t){
+</span>        delete this.transactions[t.tid || t];
+        return t;
+    },
+
+<span id='Ext-Direct-method-getTransaction'>    getTransaction: function(tid){
+</span>        return this.transactions[tid.tid || tid];
+    },
+
+<span id='Ext-Direct-method-onProviderData'>    onProviderData : function(provider, e){
+</span>        if(Ext.isArray(e)){
+            for(var i = 0, len = e.length; i &lt; len; i++){
+                this.onProviderData(provider, e[i]);
+            }
+            return;
+        }
+        if(e.name &amp;&amp; e.name != 'event' &amp;&amp; e.name != 'exception'){
+            this.fireEvent(e.name, e);
+        }else if(e.type == 'exception'){
+            this.fireEvent('exception', e);
+        }
+        this.fireEvent('event', e, provider);
+    },
+
+<span id='Ext-Direct-method-createEvent'>    createEvent : function(response, extraProps){
+</span>        return new Ext.Direct.eventTypes[response.type](Ext.apply(response, extraProps));
+    }
+});
+// overwrite impl. with static instance
+Ext.Direct = new Ext.Direct();
+
+Ext.Direct.TID = 1;
+Ext.Direct.PROVIDERS = {};</pre>
+</body>
+</html>

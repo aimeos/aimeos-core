@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-DatePicker-method-constructor'><span id='Ext-DatePicker'>/**
+</span></span> * @class Ext.DatePicker
+ * @extends Ext.Component
+ * &lt;p&gt;A popup date picker. This class is used by the {@link Ext.form.DateField DateField} class
+ * to allow browsing and selection of valid dates.&lt;/p&gt;
+ * &lt;p&gt;All the string values documented below may be overridden by including an Ext locale file in
+ * your page.&lt;/p&gt;
+ * @constructor
+ * Create a new DatePicker
+ * @param {Object} config The config object
+ * @xtype datepicker
+ */
+Ext.DatePicker = Ext.extend(Ext.BoxComponent, {
+<span id='Ext-DatePicker-cfg-todayText'>    /**
+</span>     * @cfg {String} todayText
+     * The text to display on the button that selects the current date (defaults to &lt;code&gt;'Today'&lt;/code&gt;)
+     */
+    todayText : 'Today',
+<span id='Ext-DatePicker-cfg-okText'>    /**
+</span>     * @cfg {String} okText
+     * The text to display on the ok button (defaults to &lt;code&gt;'&amp;#160;OK&amp;#160;'&lt;/code&gt; to give the user extra clicking room)
+     */
+    okText : '&amp;#160;OK&amp;#160;',
+<span id='Ext-DatePicker-cfg-cancelText'>    /**
+</span>     * @cfg {String} cancelText
+     * The text to display on the cancel button (defaults to &lt;code&gt;'Cancel'&lt;/code&gt;)
+     */
+    cancelText : 'Cancel',
+<span id='Ext-DatePicker-cfg-handler'>    /**
+</span>     * @cfg {Function} handler
+     * Optional. A function that will handle the select event of this picker.
+     * The handler is passed the following parameters:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;code&gt;picker&lt;/code&gt; : DatePicker&lt;div class=&quot;sub-desc&quot;&gt;This DatePicker.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;date&lt;/code&gt; : Date&lt;div class=&quot;sub-desc&quot;&gt;The selected date.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+<span id='Ext-DatePicker-cfg-scope'>    /**
+</span>     * @cfg {Object} scope
+     * The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which the &lt;code&gt;{@link #handler}&lt;/code&gt;
+     * function will be called.  Defaults to this DatePicker instance.
+     */
+<span id='Ext-DatePicker-cfg-todayTip'>    /**
+</span>     * @cfg {String} todayTip
+     * A string used to format the message for displaying in a tooltip over the button that
+     * selects the current date. Defaults to &lt;code&gt;'{0} (Spacebar)'&lt;/code&gt; where
+     * the &lt;code&gt;{0}&lt;/code&gt; token is replaced by today's date.
+     */
+    todayTip : '{0} (Spacebar)',
+<span id='Ext-DatePicker-cfg-minText'>    /**
+</span>     * @cfg {String} minText
+     * The error text to display if the minDate validation fails (defaults to &lt;code&gt;'This date is before the minimum date'&lt;/code&gt;)
+     */
+    minText : 'This date is before the minimum date',
+<span id='Ext-DatePicker-cfg-maxText'>    /**
+</span>     * @cfg {String} maxText
+     * The error text to display if the maxDate validation fails (defaults to &lt;code&gt;'This date is after the maximum date'&lt;/code&gt;)
+     */
+    maxText : 'This date is after the maximum date',
+<span id='Ext-DatePicker-cfg-format'>    /**
+</span>     * @cfg {String} format
+     * The default date format string which can be overriden for localization support.  The format must be
+     * valid according to {@link Date#parseDate} (defaults to &lt;code&gt;'m/d/y'&lt;/code&gt;).
+     */
+    format : 'm/d/y',
+<span id='Ext-DatePicker-cfg-disabledDaysText'>    /**
+</span>     * @cfg {String} disabledDaysText
+     * The tooltip to display when the date falls on a disabled day (defaults to &lt;code&gt;'Disabled'&lt;/code&gt;)
+     */
+    disabledDaysText : 'Disabled',
+<span id='Ext-DatePicker-cfg-disabledDatesText'>    /**
+</span>     * @cfg {String} disabledDatesText
+     * The tooltip text to display when the date falls on a disabled date (defaults to &lt;code&gt;'Disabled'&lt;/code&gt;)
+     */
+    disabledDatesText : 'Disabled',
+<span id='Ext-DatePicker-cfg-monthNames'>    /**
+</span>     * @cfg {Array} monthNames
+     * An array of textual month names which can be overriden for localization support (defaults to Date.monthNames)
+     */
+    monthNames : Date.monthNames,
+<span id='Ext-DatePicker-cfg-dayNames'>    /**
+</span>     * @cfg {Array} dayNames
+     * An array of textual day names which can be overriden for localization support (defaults to Date.dayNames)
+     */
+    dayNames : Date.dayNames,
+<span id='Ext-DatePicker-cfg-nextText'>    /**
+</span>     * @cfg {String} nextText
+     * The next month navigation button tooltip (defaults to &lt;code&gt;'Next Month (Control+Right)'&lt;/code&gt;)
+     */
+    nextText : 'Next Month (Control+Right)',
+<span id='Ext-DatePicker-cfg-prevText'>    /**
+</span>     * @cfg {String} prevText
+     * The previous month navigation button tooltip (defaults to &lt;code&gt;'Previous Month (Control+Left)'&lt;/code&gt;)
+     */
+    prevText : 'Previous Month (Control+Left)',
+<span id='Ext-DatePicker-cfg-monthYearText'>    /**
+</span>     * @cfg {String} monthYearText
+     * The header month selector tooltip (defaults to &lt;code&gt;'Choose a month (Control+Up/Down to move years)'&lt;/code&gt;)
+     */
+    monthYearText : 'Choose a month (Control+Up/Down to move years)',
+<span id='Ext-DatePicker-cfg-startDay'>    /**
+</span>     * @cfg {Number} startDay
+     * Day index at which the week should begin, 0-based (defaults to 0, which is Sunday)
+     */
+    startDay : 0,
+<span id='Ext-DatePicker-cfg-showToday'>    /**
+</span>     * @cfg {Boolean} showToday
+     * False to hide the footer area containing the Today button and disable the keyboard handler for spacebar
+     * that selects the current date (defaults to &lt;code&gt;true&lt;/code&gt;).
+     */
+    showToday : true,
+<span id='Ext-DatePicker-cfg-minDate'>    /**
+</span>     * @cfg {Date} minDate
+     * Minimum allowable date (JavaScript date object, defaults to null)
+     */
+<span id='Ext-DatePicker-cfg-maxDate'>    /**
+</span>     * @cfg {Date} maxDate
+     * Maximum allowable date (JavaScript date object, defaults to null)
+     */
+<span id='Ext-DatePicker-cfg-disabledDays'>    /**
+</span>     * @cfg {Array} disabledDays
+     * An array of days to disable, 0-based. For example, [0, 6] disables Sunday and Saturday (defaults to null).
+     */
+<span id='Ext-DatePicker-cfg-disabledDatesRE'>    /**
+</span>     * @cfg {RegExp} disabledDatesRE
+     * JavaScript regular expression used to disable a pattern of dates (defaults to null).  The {@link #disabledDates}
+     * config will generate this regex internally, but if you specify disabledDatesRE it will take precedence over the
+     * disabledDates value.
+     */
+<span id='Ext-DatePicker-cfg-disabledDates'>    /**
+</span>     * @cfg {Array} disabledDates
+     * An array of 'dates' to disable, as strings. These strings will be used to build a dynamic regular
+     * expression so they are very powerful. Some examples:
+     * &lt;ul&gt;
+     * &lt;li&gt;['03/08/2003', '09/16/2003'] would disable those exact dates&lt;/li&gt;
+     * &lt;li&gt;['03/08', '09/16'] would disable those days for every year&lt;/li&gt;
+     * &lt;li&gt;['^03/08'] would only match the beginning (useful if you are using short years)&lt;/li&gt;
+     * &lt;li&gt;['03/../2006'] would disable every day in March 2006&lt;/li&gt;
+     * &lt;li&gt;['^03'] would disable every day in every March&lt;/li&gt;
+     * &lt;/ul&gt;
+     * Note that the format of the dates included in the array should exactly match the {@link #format} config.
+     * In order to support regular expressions, if you are using a date format that has '.' in it, you will have to
+     * escape the dot when restricting dates. For example: ['03\\.08\\.03'].
+     */
+
+<span id='Ext-DatePicker-property-focusOnSelect'>    // private
+</span>    // Set by other components to stop the picker focus being updated when the value changes.
+    focusOnSelect: true,
+
+<span id='Ext-DatePicker-property-initHour'>    // default value used to initialise each date in the DatePicker
+</span>    // (note: 12 noon was chosen because it steers well clear of all DST timezone changes)
+    initHour: 12, // 24-hour format
+
+<span id='Ext-DatePicker-method-initComponent'>    // private
+</span>    initComponent : function(){
+        Ext.DatePicker.superclass.initComponent.call(this);
+
+        this.value = this.value ?
+                 this.value.clearTime(true) : new Date().clearTime();
+
+        this.addEvents(
+<span id='Ext-DatePicker-event-select'>            /**
+</span>             * @event select
+             * Fires when a date is selected
+             * @param {DatePicker} this DatePicker
+             * @param {Date} date The selected date
+             */
+            'select'
+        );
+
+        if(this.handler){
+            this.on('select', this.handler,  this.scope || this);
+        }
+
+        this.initDisabledDays();
+    },
+
+<span id='Ext-DatePicker-method-initDisabledDays'>    // private
+</span>    initDisabledDays : function(){
+        if(!this.disabledDatesRE &amp;&amp; this.disabledDates){
+            var dd = this.disabledDates,
+                len = dd.length - 1,
+                re = '(?:';
+
+            Ext.each(dd, function(d, i){
+                re += Ext.isDate(d) ? '^' + Ext.escapeRe(d.dateFormat(this.format)) + '$' : dd[i];
+                if(i != len){
+                    re += '|';
+                }
+            }, this);
+            this.disabledDatesRE = new RegExp(re + ')');
+        }
+    },
+
+<span id='Ext-DatePicker-method-setDisabledDates'>    /**
+</span>     * Replaces any existing disabled dates with new values and refreshes the DatePicker.
+     * @param {Array/RegExp} disabledDates An array of date strings (see the {@link #disabledDates} config
+     * for details on supported values), or a JavaScript regular expression used to disable a pattern of dates.
+     */
+    setDisabledDates : function(dd){
+        if(Ext.isArray(dd)){
+            this.disabledDates = dd;
+            this.disabledDatesRE = null;
+        }else{
+            this.disabledDatesRE = dd;
+        }
+        this.initDisabledDays();
+        this.update(this.value, true);
+    },
+
+<span id='Ext-DatePicker-method-setDisabledDays'>    /**
+</span>     * Replaces any existing disabled days (by index, 0-6) with new values and refreshes the DatePicker.
+     * @param {Array} disabledDays An array of disabled day indexes. See the {@link #disabledDays} config
+     * for details on supported values.
+     */
+    setDisabledDays : function(dd){
+        this.disabledDays = dd;
+        this.update(this.value, true);
+    },
+
+<span id='Ext-DatePicker-method-setMinDate'>    /**
+</span>     * Replaces any existing {@link #minDate} with the new value and refreshes the DatePicker.
+     * @param {Date} value The minimum date that can be selected
+     */
+    setMinDate : function(dt){
+        this.minDate = dt;
+        this.update(this.value, true);
+    },
+
+<span id='Ext-DatePicker-method-setMaxDate'>    /**
+</span>     * Replaces any existing {@link #maxDate} with the new value and refreshes the DatePicker.
+     * @param {Date} value The maximum date that can be selected
+     */
+    setMaxDate : function(dt){
+        this.maxDate = dt;
+        this.update(this.value, true);
+    },
+
+<span id='Ext-DatePicker-method-setValue'>    /**
+</span>     * Sets the value of the date field
+     * @param {Date} value The date to set
+     */
+    setValue : function(value){
+        this.value = value.clearTime(true);
+        this.update(this.value);
+    },
+
+<span id='Ext-DatePicker-method-getValue'>    /**
+</span>     * Gets the current selected value of the date field
+     * @return {Date} The selected date
+     */
+    getValue : function(){
+        return this.value;
+    },
+
+<span id='Ext-DatePicker-method-focus'>    // private
+</span>    focus : function(){
+        this.update(this.activeDate);
+    },
+
+<span id='Ext-DatePicker-method-onEnable'>    // private
+</span>    onEnable: function(initial){
+        Ext.DatePicker.superclass.onEnable.call(this);
+        this.doDisabled(false);
+        this.update(initial ? this.value : this.activeDate);
+        if(Ext.isIE9m){
+            this.el.repaint();
+        }
+
+    },
+
+<span id='Ext-DatePicker-method-onDisable'>    // private
+</span>    onDisable : function(){
+        Ext.DatePicker.superclass.onDisable.call(this);
+        this.doDisabled(true);
+        if(Ext.isIE9m &amp;&amp; !Ext.isIE8){
+            /* Really strange problem in IE6/7, when disabled, have to explicitly
+             * repaint each of the nodes to get them to display correctly, simply
+             * calling repaint on the main element doesn't appear to be enough.
+             */
+             Ext.each([].concat(this.textNodes, this.el.query('th span')), function(el){
+                 Ext.fly(el).repaint();
+             });
+        }
+    },
+
+<span id='Ext-DatePicker-method-doDisabled'>    // private
+</span>    doDisabled : function(disabled){
+        this.keyNav.setDisabled(disabled);
+        this.prevRepeater.setDisabled(disabled);
+        this.nextRepeater.setDisabled(disabled);
+        if(this.showToday){
+            this.todayKeyListener.setDisabled(disabled);
+            this.todayBtn.setDisabled(disabled);
+        }
+    },
+
+<span id='Ext-DatePicker-method-onRender'>    // private
+</span>    onRender : function(container, position){
+        var m = [
+             '&lt;table cellspacing=&quot;0&quot;&gt;',
+                '&lt;tr&gt;&lt;td class=&quot;x-date-left&quot;&gt;&lt;a href=&quot;#&quot; title=&quot;', this.prevText ,'&quot;&gt;&amp;#160;&lt;/a&gt;&lt;/td&gt;&lt;td class=&quot;x-date-middle&quot; align=&quot;center&quot;&gt;&lt;/td&gt;&lt;td class=&quot;x-date-right&quot;&gt;&lt;a href=&quot;#&quot; title=&quot;', this.nextText ,'&quot;&gt;&amp;#160;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;',
+                '&lt;tr&gt;&lt;td colspan=&quot;3&quot;&gt;&lt;table class=&quot;x-date-inner&quot; cellspacing=&quot;0&quot;&gt;&lt;thead&gt;&lt;tr&gt;'],
+                dn = this.dayNames,
+                i;
+        for(i = 0; i &lt; 7; i++){
+            var d = this.startDay+i;
+            if(d &gt; 6){
+                d = d-7;
+            }
+            m.push('&lt;th&gt;&lt;span&gt;', dn[d].substr(0,1), '&lt;/span&gt;&lt;/th&gt;');
+        }
+        m[m.length] = '&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;';
+        for(i = 0; i &lt; 42; i++) {
+            if(i % 7 === 0 &amp;&amp; i !== 0){
+                m[m.length] = '&lt;/tr&gt;&lt;tr&gt;';
+            }
+            m[m.length] = '&lt;td&gt;&lt;a href=&quot;#&quot; hidefocus=&quot;on&quot; class=&quot;x-date-date&quot; tabIndex=&quot;1&quot;&gt;&lt;em&gt;&lt;span&gt;&lt;/span&gt;&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;';
+        }
+        m.push('&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;',
+                this.showToday ? '&lt;tr&gt;&lt;td colspan=&quot;3&quot; class=&quot;x-date-bottom&quot; align=&quot;center&quot;&gt;&lt;/td&gt;&lt;/tr&gt;' : '',
+                '&lt;/table&gt;&lt;div class=&quot;x-date-mp&quot;&gt;&lt;/div&gt;');
+
+        var el = document.createElement('div');
+        el.className = 'x-date-picker';
+        el.innerHTML = m.join('');
+
+        container.dom.insertBefore(el, position);
+
+        this.el = Ext.get(el);
+        this.eventEl = Ext.get(el.firstChild);
+
+        this.prevRepeater = new Ext.util.ClickRepeater(this.el.child('td.x-date-left a'), {
+            handler: this.showPrevMonth,
+            scope: this,
+            preventDefault:true,
+            stopDefault:true
+        });
+
+        this.nextRepeater = new Ext.util.ClickRepeater(this.el.child('td.x-date-right a'), {
+            handler: this.showNextMonth,
+            scope: this,
+            preventDefault:true,
+            stopDefault:true
+        });
+
+        this.monthPicker = this.el.down('div.x-date-mp');
+        this.monthPicker.enableDisplayMode('block');
+
+        this.keyNav = new Ext.KeyNav(this.eventEl, {
+            'left' : function(e){
+                if(e.ctrlKey){
+                    this.showPrevMonth();
+                }else{
+                    this.update(this.activeDate.add('d', -1));
+                }
+            },
+
+            'right' : function(e){
+                if(e.ctrlKey){
+                    this.showNextMonth();
+                }else{
+                    this.update(this.activeDate.add('d', 1));
+                }
+            },
+
+            'up' : function(e){
+                if(e.ctrlKey){
+                    this.showNextYear();
+                }else{
+                    this.update(this.activeDate.add('d', -7));
+                }
+            },
+
+            'down' : function(e){
+                if(e.ctrlKey){
+                    this.showPrevYear();
+                }else{
+                    this.update(this.activeDate.add('d', 7));
+                }
+            },
+
+            'pageUp' : function(e){
+                this.showNextMonth();
+            },
+
+            'pageDown' : function(e){
+                this.showPrevMonth();
+            },
+
+            'enter' : function(e){
+                e.stopPropagation();
+                return true;
+            },
+
+            scope : this
+        });
+
+        this.el.unselectable();
+
+        this.cells = this.el.select('table.x-date-inner tbody td');
+        this.textNodes = this.el.query('table.x-date-inner tbody span');
+
+        this.mbtn = new Ext.Button({
+            text: '&amp;#160;',
+            tooltip: this.monthYearText,
+            renderTo: this.el.child('td.x-date-middle', true)
+        });
+        this.mbtn.el.child('em').addClass('x-btn-arrow');
+
+        if(this.showToday){
+            this.todayKeyListener = this.eventEl.addKeyListener(Ext.EventObject.SPACE, this.selectToday,  this);
+            var today = (new Date()).dateFormat(this.format);
+            this.todayBtn = new Ext.Button({
+                renderTo: this.el.child('td.x-date-bottom', true),
+                text: String.format(this.todayText, today),
+                tooltip: String.format(this.todayTip, today),
+                handler: this.selectToday,
+                scope: this
+            });
+        }
+        this.mon(this.eventEl, 'mousewheel', this.handleMouseWheel, this);
+        this.mon(this.eventEl, 'click', this.handleDateClick,  this, {delegate: 'a.x-date-date'});
+        this.mon(this.mbtn, 'click', this.showMonthPicker, this);
+        this.onEnable(true);
+    },
+
+<span id='Ext-DatePicker-method-createMonthPicker'>    // private
+</span>    createMonthPicker : function(){
+        if(!this.monthPicker.dom.firstChild){
+            var buf = ['&lt;table border=&quot;0&quot; cellspacing=&quot;0&quot;&gt;'];
+            for(var i = 0; i &lt; 6; i++){
+                buf.push(
+                    '&lt;tr&gt;&lt;td class=&quot;x-date-mp-month&quot;&gt;&lt;a href=&quot;#&quot;&gt;', Date.getShortMonthName(i), '&lt;/a&gt;&lt;/td&gt;',
+                    '&lt;td class=&quot;x-date-mp-month x-date-mp-sep&quot;&gt;&lt;a href=&quot;#&quot;&gt;', Date.getShortMonthName(i + 6), '&lt;/a&gt;&lt;/td&gt;',
+                    i === 0 ?
+                    '&lt;td class=&quot;x-date-mp-ybtn&quot; align=&quot;center&quot;&gt;&lt;a class=&quot;x-date-mp-prev&quot;&gt;&lt;/a&gt;&lt;/td&gt;&lt;td class=&quot;x-date-mp-ybtn&quot; align=&quot;center&quot;&gt;&lt;a class=&quot;x-date-mp-next&quot;&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;' :
+                    '&lt;td class=&quot;x-date-mp-year&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;/a&gt;&lt;/td&gt;&lt;td class=&quot;x-date-mp-year&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;'
+                );
+            }
+            buf.push(
+                '&lt;tr class=&quot;x-date-mp-btns&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;x-date-mp-ok&quot;&gt;',
+                    this.okText,
+                    '&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;x-date-mp-cancel&quot;&gt;',
+                    this.cancelText,
+                    '&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;',
+                '&lt;/table&gt;'
+            );
+            this.monthPicker.update(buf.join(''));
+
+            this.mon(this.monthPicker, 'click', this.onMonthClick, this);
+            this.mon(this.monthPicker, 'dblclick', this.onMonthDblClick, this);
+
+            this.mpMonths = this.monthPicker.select('td.x-date-mp-month');
+            this.mpYears = this.monthPicker.select('td.x-date-mp-year');
+
+            this.mpMonths.each(function(m, a, i){
+                i += 1;
+                if((i%2) === 0){
+                    m.dom.xmonth = 5 + Math.round(i * 0.5);
+                }else{
+                    m.dom.xmonth = Math.round((i-1) * 0.5);
+                }
+            });
+        }
+    },
+
+<span id='Ext-DatePicker-method-showMonthPicker'>    // private
+</span>    showMonthPicker : function(){
+        if(!this.disabled){
+            this.createMonthPicker();
+            var size = this.el.getSize();
+            this.monthPicker.setSize(size);
+            this.monthPicker.child('table').setSize(size);
+
+            this.mpSelMonth = (this.activeDate || this.value).getMonth();
+            this.updateMPMonth(this.mpSelMonth);
+            this.mpSelYear = (this.activeDate || this.value).getFullYear();
+            this.updateMPYear(this.mpSelYear);
+
+            this.monthPicker.slideIn('t', {duration:0.2});
+        }
+    },
+
+<span id='Ext-DatePicker-method-updateMPYear'>    // private
+</span>    updateMPYear : function(y){
+        this.mpyear = y;
+        var ys = this.mpYears.elements;
+        for(var i = 1; i &lt;= 10; i++){
+            var td = ys[i-1], y2;
+            if((i%2) === 0){
+                y2 = y + Math.round(i * 0.5);
+                td.firstChild.innerHTML = y2;
+                td.xyear = y2;
+            }else{
+                y2 = y - (5-Math.round(i * 0.5));
+                td.firstChild.innerHTML = y2;
+                td.xyear = y2;
+            }
+            this.mpYears.item(i-1)[y2 == this.mpSelYear ? 'addClass' : 'removeClass']('x-date-mp-sel');
+        }
+    },
+
+<span id='Ext-DatePicker-method-updateMPMonth'>    // private
+</span>    updateMPMonth : function(sm){
+        this.mpMonths.each(function(m, a, i){
+            m[m.dom.xmonth == sm ? 'addClass' : 'removeClass']('x-date-mp-sel');
+        });
+    },
+
+<span id='Ext-DatePicker-method-selectMPMonth'>    // private
+</span>    selectMPMonth : function(m){
+
+    },
+
+<span id='Ext-DatePicker-method-onMonthClick'>    // private
+</span>    onMonthClick : function(e, t){
+        e.stopEvent();
+        var el = new Ext.Element(t), pn;
+        if(el.is('button.x-date-mp-cancel')){
+            this.hideMonthPicker();
+        }
+        else if(el.is('button.x-date-mp-ok')){
+            var d = new Date(this.mpSelYear, this.mpSelMonth, (this.activeDate || this.value).getDate());
+            if(d.getMonth() != this.mpSelMonth){
+                // 'fix' the JS rolling date conversion if needed
+                d = new Date(this.mpSelYear, this.mpSelMonth, 1).getLastDateOfMonth();
+            }
+            this.update(d);
+            this.hideMonthPicker();
+        }
+        else if((pn = el.up('td.x-date-mp-month', 2))){
+            this.mpMonths.removeClass('x-date-mp-sel');
+            pn.addClass('x-date-mp-sel');
+            this.mpSelMonth = pn.dom.xmonth;
+        }
+        else if((pn = el.up('td.x-date-mp-year', 2))){
+            this.mpYears.removeClass('x-date-mp-sel');
+            pn.addClass('x-date-mp-sel');
+            this.mpSelYear = pn.dom.xyear;
+        }
+        else if(el.is('a.x-date-mp-prev')){
+            this.updateMPYear(this.mpyear-10);
+        }
+        else if(el.is('a.x-date-mp-next')){
+            this.updateMPYear(this.mpyear+10);
+        }
+    },
+
+<span id='Ext-DatePicker-method-onMonthDblClick'>    // private
+</span>    onMonthDblClick : function(e, t){
+        e.stopEvent();
+        var el = new Ext.Element(t), pn;
+        if((pn = el.up('td.x-date-mp-month', 2))){
+            this.update(new Date(this.mpSelYear, pn.dom.xmonth, (this.activeDate || this.value).getDate()));
+            this.hideMonthPicker();
+        }
+        else if((pn = el.up('td.x-date-mp-year', 2))){
+            this.update(new Date(pn.dom.xyear, this.mpSelMonth, (this.activeDate || this.value).getDate()));
+            this.hideMonthPicker();
+        }
+    },
+
+<span id='Ext-DatePicker-method-hideMonthPicker'>    // private
+</span>    hideMonthPicker : function(disableAnim){
+        if(this.monthPicker){
+            if(disableAnim === true){
+                this.monthPicker.hide();
+            }else{
+                this.monthPicker.slideOut('t', {duration:0.2});
+            }
+        }
+    },
+
+<span id='Ext-DatePicker-method-showPrevMonth'>    // private
+</span>    showPrevMonth : function(e){
+        this.update(this.activeDate.add('mo', -1));
+    },
+
+<span id='Ext-DatePicker-method-showNextMonth'>    // private
+</span>    showNextMonth : function(e){
+        this.update(this.activeDate.add('mo', 1));
+    },
+
+<span id='Ext-DatePicker-method-showPrevYear'>    // private
+</span>    showPrevYear : function(){
+        this.update(this.activeDate.add('y', -1));
+    },
+
+<span id='Ext-DatePicker-method-showNextYear'>    // private
+</span>    showNextYear : function(){
+        this.update(this.activeDate.add('y', 1));
+    },
+
+<span id='Ext-DatePicker-method-handleMouseWheel'>    // private
+</span>    handleMouseWheel : function(e){
+        e.stopEvent();
+        if(!this.disabled){
+            var delta = e.getWheelDelta();
+            if(delta &gt; 0){
+                this.showPrevMonth();
+            } else if(delta &lt; 0){
+                this.showNextMonth();
+            }
+        }
+    },
+
+<span id='Ext-DatePicker-method-handleDateClick'>    // private
+</span>    handleDateClick : function(e, t){
+        e.stopEvent();
+        if(!this.disabled &amp;&amp; t.dateValue &amp;&amp; !Ext.fly(t.parentNode).hasClass('x-date-disabled')){
+            this.cancelFocus = this.focusOnSelect === false;
+            this.setValue(new Date(t.dateValue));
+            delete this.cancelFocus;
+            this.fireEvent('select', this, this.value);
+        }
+    },
+
+<span id='Ext-DatePicker-method-selectToday'>    // private
+</span>    selectToday : function(){
+        if(this.todayBtn &amp;&amp; !this.todayBtn.disabled){
+            this.setValue(new Date().clearTime());
+            this.fireEvent('select', this, this.value);
+        }
+    },
+
+<span id='Ext-DatePicker-method-update'>    // private
+</span>    update : function(date, forceRefresh){
+        if(this.rendered){
+            var vd = this.activeDate, vis = this.isVisible();
+            this.activeDate = date;
+            if(!forceRefresh &amp;&amp; vd &amp;&amp; this.el){
+                var t = date.getTime();
+                if(vd.getMonth() == date.getMonth() &amp;&amp; vd.getFullYear() == date.getFullYear()){
+                    this.cells.removeClass('x-date-selected');
+                    this.cells.each(function(c){
+                       if(c.dom.firstChild.dateValue == t){
+                           c.addClass('x-date-selected');
+                           if(vis &amp;&amp; !this.cancelFocus){
+                               Ext.fly(c.dom.firstChild).focus(50);
+                           }
+                           return false;
+                       }
+                    }, this);
+                    return;
+                }
+            }
+            var days = date.getDaysInMonth(),
+                firstOfMonth = date.getFirstDateOfMonth(),
+                startingPos = firstOfMonth.getDay()-this.startDay;
+
+            if(startingPos &lt; 0){
+                startingPos += 7;
+            }
+            days += startingPos;
+
+            var pm = date.add('mo', -1),
+                prevStart = pm.getDaysInMonth()-startingPos,
+                cells = this.cells.elements,
+                textEls = this.textNodes,
+                // convert everything to numbers so it's fast
+                d = (new Date(pm.getFullYear(), pm.getMonth(), prevStart, this.initHour)),
+                today = new Date().clearTime().getTime(),
+                sel = date.clearTime(true).getTime(),
+                min = this.minDate ? this.minDate.clearTime(true) : Number.NEGATIVE_INFINITY,
+                max = this.maxDate ? this.maxDate.clearTime(true) : Number.POSITIVE_INFINITY,
+                ddMatch = this.disabledDatesRE,
+                ddText = this.disabledDatesText,
+                ddays = this.disabledDays ? this.disabledDays.join('') : false,
+                ddaysText = this.disabledDaysText,
+                format = this.format;
+
+            if(this.showToday){
+                var td = new Date().clearTime(),
+                    disable = (td &lt; min || td &gt; max ||
+                    (ddMatch &amp;&amp; format &amp;&amp; ddMatch.test(td.dateFormat(format))) ||
+                    (ddays &amp;&amp; ddays.indexOf(td.getDay()) != -1));
+
+                if(!this.disabled){
+                    this.todayBtn.setDisabled(disable);
+                    this.todayKeyListener[disable ? 'disable' : 'enable']();
+                }
+            }
+
+            var setCellClass = function(cal, cell){
+                cell.title = '';
+                var t = d.clearTime(true).getTime();
+                cell.firstChild.dateValue = t;
+                if(t == today){
+                    cell.className += ' x-date-today';
+                    cell.title = cal.todayText;
+                }
+                if(t == sel){
+                    cell.className += ' x-date-selected';
+                    if(vis){
+                        Ext.fly(cell.firstChild).focus(50);
+                    }
+                }
+                // disabling
+                if(t &lt; min) {
+                    cell.className = ' x-date-disabled';
+                    cell.title = cal.minText;
+                    return;
+                }
+                if(t &gt; max) {
+                    cell.className = ' x-date-disabled';
+                    cell.title = cal.maxText;
+                    return;
+                }
+                if(ddays){
+                    if(ddays.indexOf(d.getDay()) != -1){
+                        cell.title = ddaysText;
+                        cell.className = ' x-date-disabled';
+                    }
+                }
+                if(ddMatch &amp;&amp; format){
+                    var fvalue = d.dateFormat(format);
+                    if(ddMatch.test(fvalue)){
+                        cell.title = ddText.replace('%0', fvalue);
+                        cell.className = ' x-date-disabled';
+                    }
+                }
+            };
+
+            var i = 0;
+            for(; i &lt; startingPos; i++) {
+                textEls[i].innerHTML = (++prevStart);
+                d.setDate(d.getDate()+1);
+                cells[i].className = 'x-date-prevday';
+                setCellClass(this, cells[i]);
+            }
+            for(; i &lt; days; i++){
+                var intDay = i - startingPos + 1;
+                textEls[i].innerHTML = (intDay);
+                d.setDate(d.getDate()+1);
+                cells[i].className = 'x-date-active';
+                setCellClass(this, cells[i]);
+            }
+            var extraDays = 0;
+            for(; i &lt; 42; i++) {
+                 textEls[i].innerHTML = (++extraDays);
+                 d.setDate(d.getDate()+1);
+                 cells[i].className = 'x-date-nextday';
+                 setCellClass(this, cells[i]);
+            }
+
+            this.mbtn.setText(this.monthNames[date.getMonth()] + ' ' + date.getFullYear());
+
+            if(!this.internalRender){
+                var main = this.el.dom.firstChild,
+                    w = main.offsetWidth;
+                this.el.setWidth(w + this.el.getBorderWidth('lr'));
+                Ext.fly(main).setWidth(w);
+                this.internalRender = true;
+                // opera does not respect the auto grow header center column
+                // then, after it gets a width opera refuses to recalculate
+                // without a second pass
+                if(Ext.isOpera &amp;&amp; !this.secondPass){
+                    main.rows[0].cells[1].style.width = (w - (main.rows[0].cells[0].offsetWidth+main.rows[0].cells[2].offsetWidth)) + 'px';
+                    this.secondPass = true;
+                    this.update.defer(10, this, [date]);
+                }
+            }
+        }
+    },
+
+<span id='Ext-DatePicker-method-beforeDestroy'>    // private
+</span>    beforeDestroy : function() {
+        if(this.rendered){
+            Ext.destroy(
+                this.keyNav,
+                this.monthPicker,
+                this.eventEl,
+                this.mbtn,
+                this.nextRepeater,
+                this.prevRepeater,
+                this.cells.el,
+                this.todayBtn
+            );
+            delete this.textNodes;
+            delete this.cells.elements;
+        }
+    }
+
+<span id='Ext-DatePicker-cfg-autoEl'>    /**
+</span>     * @cfg {String} autoEl @hide
+     */
+});
+
+Ext.reg('datepicker', Ext.DatePicker);
+</pre>
+</body>
+</html>

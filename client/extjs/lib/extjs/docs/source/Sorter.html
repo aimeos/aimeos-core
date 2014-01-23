@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-list-Sorter-method-constructor'><span id='Ext-list-Sorter'>/**
+</span></span> * @class Ext.list.Sorter
+ * @extends Ext.util.Observable
+ * &lt;p&gt;Supporting Class for Ext.list.ListView&lt;/p&gt;
+ * @constructor
+ * @param {Object} config
+ */
+Ext.list.Sorter = Ext.extend(Ext.util.Observable, {
+<span id='Ext-list-Sorter-cfg-sortClasses'>    /**
+</span>     * @cfg {Array} sortClasses
+     * The CSS classes applied to a header when it is sorted. (defaults to &lt;tt&gt;[&quot;sort-asc&quot;, &quot;sort-desc&quot;]&lt;/tt&gt;)
+     */
+    sortClasses : [&quot;sort-asc&quot;, &quot;sort-desc&quot;],
+
+    constructor: function(config){
+        Ext.apply(this, config);
+        Ext.list.Sorter.superclass.constructor.call(this);
+    },
+
+<span id='Ext-list-Sorter-method-init'>    init : function(listView){
+</span>        this.view = listView;
+        listView.on('render', this.initEvents, this);
+    },
+
+<span id='Ext-list-Sorter-method-initEvents'>    initEvents : function(view){
+</span>        view.mon(view.innerHd, 'click', this.onHdClick, this);
+        view.innerHd.setStyle('cursor', 'pointer');
+        view.mon(view.store, 'datachanged', this.updateSortState, this);
+        this.updateSortState.defer(10, this, [view.store]);
+    },
+
+<span id='Ext-list-Sorter-method-updateSortState'>    updateSortState : function(store){
+</span>        var state = store.getSortState();
+        if(!state){
+            return;
+        }
+        this.sortState = state;
+        var cs = this.view.columns, sortColumn = -1;
+        for(var i = 0, len = cs.length; i &lt; len; i++){
+            if(cs[i].dataIndex == state.field){
+                sortColumn = i;
+                break;
+            }
+        }
+        if(sortColumn != -1){
+            var sortDir = state.direction;
+            this.updateSortIcon(sortColumn, sortDir);
+        }
+    },
+
+<span id='Ext-list-Sorter-method-updateSortIcon'>    updateSortIcon : function(col, dir){
+</span>        var sc = this.sortClasses;
+        var hds = this.view.innerHd.select('em').removeClass(sc);
+        hds.item(col).addClass(sc[dir == &quot;DESC&quot; ? 1 : 0]);
+    },
+
+<span id='Ext-list-Sorter-method-onHdClick'>    onHdClick : function(e){
+</span>        var hd = e.getTarget('em', 3);
+        if(hd &amp;&amp; !this.view.disableHeaders){
+            var index = this.view.findHeaderIndex(hd);
+            this.view.store.sort(this.view.columns[index].dataIndex);
+        }
+    }
+});
+
+// Backwards compatibility alias
+Ext.ListView.Sorter = Ext.list.Sorter;</pre>
+</body>
+</html>

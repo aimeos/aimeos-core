@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-layout-AutoLayout'>/**
+</span> * @class Ext.layout.AutoLayout
+ * &lt;p&gt;The AutoLayout is the default layout manager delegated by {@link Ext.Container} to
+ * render any child Components when no &lt;tt&gt;{@link Ext.Container#layout layout}&lt;/tt&gt; is configured into
+ * a {@link Ext.Container Container}.&lt;/tt&gt;.  AutoLayout provides only a passthrough of any layout calls
+ * to any child containers.&lt;/p&gt;
+ */
+Ext.layout.AutoLayout = Ext.extend(Ext.layout.ContainerLayout, {
+<span id='Ext-layout-AutoLayout-property-type'>    type: 'auto',
+</span>
+<span id='Ext-layout-AutoLayout-property-monitorResize'>    monitorResize: true,
+</span>
+<span id='Ext-layout-AutoLayout-method-onLayout'>    onLayout : function(ct, target){
+</span>        Ext.layout.AutoLayout.superclass.onLayout.call(this, ct, target);
+        var cs = this.getRenderedItems(ct), len = cs.length, i, c;
+        for(i = 0; i &lt; len; i++){
+            c = cs[i];
+            if (c.doLayout){
+                // Shallow layout children
+                c.doLayout(true);
+            }
+        }
+    }
+});
+
+Ext.Container.LAYOUTS['auto'] = Ext.layout.AutoLayout;
+</pre>
+</body>
+</html>

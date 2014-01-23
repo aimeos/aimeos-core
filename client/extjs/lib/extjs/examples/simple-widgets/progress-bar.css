@@ -1,0 +1,46 @@
+/*
+This file is part of Ext JS 3.4
+
+Copyright (c) 2011-2013 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as
+published by the Free Software Foundation and appearing in the file LICENSE included in the
+packaging of this file.
+
+Please review the following information to ensure the GNU General Public License version 3.0
+requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department
+at http://www.sencha.com/contact.
+
+Build date: 2013-04-03 15:07:25
+*/
+.status {
+    color:#555;
+}
+.x-progress-wrap.left-align .x-progress-text {
+    text-align:left;
+}
+.x-progress-wrap.custom {
+    height:17px;
+    border:1px solid #686868;
+    overflow:hidden;
+    padding:0 2px;
+}
+.ext-ie .x-progress-wrap.custom {
+    height:19px;
+}
+.custom .x-progress-inner {
+    height:17px;
+    background: #fff;
+}
+.custom .x-progress-bar {
+    height:15px;
+    background:transparent url(images/custom-bar.gif) repeat-x 0 0;
+    border-top:1px solid #BEBEBE;
+    border-bottom:1px solid #EFEFEF;
+    border-right:0;
+}

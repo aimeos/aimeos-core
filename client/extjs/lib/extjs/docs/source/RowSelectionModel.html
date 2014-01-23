@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-grid-RowSelectionModel-method-constructor'><span id='Ext-grid-RowSelectionModel'>/**
+</span></span> * @class Ext.grid.RowSelectionModel
+ * @extends Ext.grid.AbstractSelectionModel
+ * The default SelectionModel used by {@link Ext.grid.GridPanel}.
+ * It supports multiple selections and keyboard selection/navigation. The objects stored
+ * as selections and returned by {@link #getSelected}, and {@link #getSelections} are
+ * the {@link Ext.data.Record Record}s which provide the data for the selected rows.
+ * @constructor
+ * @param {Object} config
+ */
+Ext.grid.RowSelectionModel = Ext.extend(Ext.grid.AbstractSelectionModel,  {
+<span id='Ext-grid-RowSelectionModel-cfg-singleSelect'>    /**
+</span>     * @cfg {Boolean} singleSelect
+     * &lt;tt&gt;true&lt;/tt&gt; to allow selection of only one row at a time (defaults to &lt;tt&gt;false&lt;/tt&gt;
+     * allowing multiple selections)
+     */
+    singleSelect : false,
+    
+    constructor : function(config){
+        Ext.apply(this, config);
+        this.selections = new Ext.util.MixedCollection(false, function(o){
+            return o.id;
+        });
+
+        this.last = false;
+        this.lastActive = false;
+
+        this.addEvents(
+<span id='Ext-grid-RowSelectionModel-event-selectionchange'>	        /**
+</span>	         * @event selectionchange
+	         * Fires when the selection changes
+	         * @param {SelectionModel} this
+	         */
+	        'selectionchange',
+<span id='Ext-grid-RowSelectionModel-event-beforerowselect'>	        /**
+</span>	         * @event beforerowselect
+	         * Fires before a row is selected, return false to cancel the selection.
+	         * @param {SelectionModel} this
+	         * @param {Number} rowIndex The index to be selected
+	         * @param {Boolean} keepExisting False if other selections will be cleared
+	         * @param {Record} record The record to be selected
+	         */
+	        'beforerowselect',
+<span id='Ext-grid-RowSelectionModel-event-rowselect'>	        /**
+</span>	         * @event rowselect
+	         * Fires when a row is selected.
+	         * @param {SelectionModel} this
+	         * @param {Number} rowIndex The selected index
+	         * @param {Ext.data.Record} r The selected record
+	         */
+	        'rowselect',
+<span id='Ext-grid-RowSelectionModel-event-rowdeselect'>	        /**
+</span>	         * @event rowdeselect
+	         * Fires when a row is deselected.  To prevent deselection
+	         * {@link Ext.grid.AbstractSelectionModel#lock lock the selections}. 
+	         * @param {SelectionModel} this
+	         * @param {Number} rowIndex
+	         * @param {Record} record
+	         */
+	        'rowdeselect'
+        );
+        Ext.grid.RowSelectionModel.superclass.constructor.call(this);
+    },
+
+<span id='Ext-grid-RowSelectionModel-cfg-moveEditorOnEnter'>    /**
+</span>     * @cfg {Boolean} moveEditorOnEnter
+     * &lt;tt&gt;false&lt;/tt&gt; to turn off moving the editor to the next row down when the enter key is pressed
+     * or the next row up when shift + enter keys are pressed.
+     */
+<span id='Ext-grid-RowSelectionModel-method-initEvents'>    // private
+</span>    initEvents : function(){
+
+        if(!this.grid.enableDragDrop &amp;&amp; !this.grid.enableDrag){
+            this.grid.on('rowmousedown', this.handleMouseDown, this);
+        }
+
+        this.rowNav = new Ext.KeyNav(this.grid.getGridEl(), {
+            up: this.onKeyPress, 
+            down: this.onKeyPress,
+            scope: this
+        });
+
+        this.grid.getView().on({
+            scope: this,
+            refresh: this.onRefresh,
+            rowupdated: this.onRowUpdated,
+            rowremoved: this.onRemove
+        });
+    },
+    
+<span id='Ext-grid-RowSelectionModel-method-onKeyPress'>    onKeyPress : function(e, name){
+</span>        var up = name == 'up',
+            method = up ? 'selectPrevious' : 'selectNext',
+            add = up ? -1 : 1,
+            last;
+        if(!e.shiftKey || this.singleSelect){
+            this[method](false);
+        }else if(this.last !== false &amp;&amp; this.lastActive !== false){
+            last = this.last;
+            this.selectRange(this.last,  this.lastActive + add);
+            this.grid.getView().focusRow(this.lastActive);
+            if(last !== false){
+                this.last = last;
+            }
+        }else{
+           this.selectFirstRow();
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-onRefresh'>    // private
+</span>    onRefresh : function(){
+        var ds = this.grid.store,
+            s = this.getSelections(),
+            i = 0,
+            len = s.length, 
+            index, r;
+            
+        this.silent = true;
+        this.clearSelections(true);
+        for(; i &lt; len; i++){
+            r = s[i];
+            if((index = ds.indexOfId(r.id)) != -1){
+                this.selectRow(index, true);
+            }
+        }
+        if(s.length != this.selections.getCount()){
+            this.fireEvent('selectionchange', this);
+        }
+        this.silent = false;
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-onRemove'>    // private
+</span>    onRemove : function(v, index, r){
+        if(this.selections.remove(r) !== false){
+            this.fireEvent('selectionchange', this);
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-onRowUpdated'>    // private
+</span>    onRowUpdated : function(v, index, r){
+        if(this.isSelected(r)){
+            v.onRowSelect(index);
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-selectRecords'>    /**
+</span>     * Select records.
+     * @param {Array} records The records to select
+     * @param {Boolean} keepExisting (optional) &lt;tt&gt;true&lt;/tt&gt; to keep existing selections
+     */
+    selectRecords : function(records, keepExisting){
+        if(!keepExisting){
+            this.clearSelections();
+        }
+        var ds = this.grid.store,
+            i = 0,
+            len = records.length;
+        for(; i &lt; len; i++){
+            this.selectRow(ds.indexOf(records[i]), true);
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-getCount'>    /**
+</span>     * Gets the number of selected rows.
+     * @return {Number}
+     */
+    getCount : function(){
+        return this.selections.length;
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-selectFirstRow'>    /**
+</span>     * Selects the first row in the grid.
+     */
+    selectFirstRow : function(){
+        this.selectRow(0);
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-selectLastRow'>    /**
+</span>     * Select the last row.
+     * @param {Boolean} keepExisting (optional) &lt;tt&gt;true&lt;/tt&gt; to keep existing selections
+     */
+    selectLastRow : function(keepExisting){
+        this.selectRow(this.grid.store.getCount() - 1, keepExisting);
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-selectNext'>    /**
+</span>     * Selects the row immediately following the last selected row.
+     * @param {Boolean} keepExisting (optional) &lt;tt&gt;true&lt;/tt&gt; to keep existing selections
+     * @return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if there is a next row, else &lt;tt&gt;false&lt;/tt&gt;
+     */
+    selectNext : function(keepExisting){
+        if(this.hasNext()){
+            this.selectRow(this.last+1, keepExisting);
+            this.grid.getView().focusRow(this.last);
+            return true;
+        }
+        return false;
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-selectPrevious'>    /**
+</span>     * Selects the row that precedes the last selected row.
+     * @param {Boolean} keepExisting (optional) &lt;tt&gt;true&lt;/tt&gt; to keep existing selections
+     * @return {Boolean} &lt;tt&gt;true&lt;/tt&gt; if there is a previous row, else &lt;tt&gt;false&lt;/tt&gt;
+     */
+    selectPrevious : function(keepExisting){
+        if(this.hasPrevious()){
+            this.selectRow(this.last-1, keepExisting);
+            this.grid.getView().focusRow(this.last);
+            return true;
+        }
+        return false;
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-hasNext'>    /**
+</span>     * Returns true if there is a next record to select
+     * @return {Boolean}
+     */
+    hasNext : function(){
+        return this.last !== false &amp;&amp; (this.last+1) &lt; this.grid.store.getCount();
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-hasPrevious'>    /**
+</span>     * Returns true if there is a previous record to select
+     * @return {Boolean}
+     */
+    hasPrevious : function(){
+        return !!this.last;
+    },
+
+
+<span id='Ext-grid-RowSelectionModel-method-getSelections'>    /**
+</span>     * Returns the selected records
+     * @return {Array} Array of selected records
+     */
+    getSelections : function(){
+        return [].concat(this.selections.items);
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-getSelected'>    /**
+</span>     * Returns the first selected record.
+     * @return {Record}
+     */
+    getSelected : function(){
+        return this.selections.itemAt(0);
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-each'>    /**
+</span>     * Calls the passed function with each selection. If the function returns
+     * &lt;tt&gt;false&lt;/tt&gt;, iteration is stopped and this function returns
+     * &lt;tt&gt;false&lt;/tt&gt;. Otherwise it returns &lt;tt&gt;true&lt;/tt&gt;.
+     * @param {Function} fn The function to call upon each iteration. It is passed the selected {@link Ext.data.Record Record}.
+     * @param {Object} scope (optional) The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the function is executed. Defaults to this RowSelectionModel.
+     * @return {Boolean} true if all selections were iterated
+     */
+    each : function(fn, scope){
+        var s = this.getSelections(),
+            i = 0,
+            len = s.length;
+            
+        for(; i &lt; len; i++){
+            if(fn.call(scope || this, s[i], i) === false){
+                return false;
+            }
+        }
+        return true;
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-clearSelections'>    /**
+</span>     * Clears all selections if the selection model
+     * {@link Ext.grid.AbstractSelectionModel#isLocked is not locked}.
+     * @param {Boolean} fast (optional) &lt;tt&gt;true&lt;/tt&gt; to bypass the
+     * conditional checks and events described in {@link #deselectRow}.
+     */
+    clearSelections : function(fast){
+        if(this.isLocked()){
+            return;
+        }
+        if(fast !== true){
+            var ds = this.grid.store,
+                s = this.selections;
+            s.each(function(r){
+                this.deselectRow(ds.indexOfId(r.id));
+            }, this);
+            s.clear();
+        }else{
+            this.selections.clear();
+        }
+        this.last = false;
+    },
+
+
+<span id='Ext-grid-RowSelectionModel-method-selectAll'>    /**
+</span>     * Selects all rows if the selection model
+     * {@link Ext.grid.AbstractSelectionModel#isLocked is not locked}. 
+     */
+    selectAll : function(){
+        if(this.isLocked()){
+            return;
+        }
+        this.selections.clear();
+        for(var i = 0, len = this.grid.store.getCount(); i &lt; len; i++){
+            this.selectRow(i, true);
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-hasSelection'>    /**
+</span>     * Returns &lt;tt&gt;true&lt;/tt&gt; if there is a selection.
+     * @return {Boolean}
+     */
+    hasSelection : function(){
+        return this.selections.length &gt; 0;
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-isSelected'>    /**
+</span>     * Returns &lt;tt&gt;true&lt;/tt&gt; if the specified row is selected.
+     * @param {Number/Record} index The record or index of the record to check
+     * @return {Boolean}
+     */
+    isSelected : function(index){
+        var r = Ext.isNumber(index) ? this.grid.store.getAt(index) : index;
+        return (r &amp;&amp; this.selections.key(r.id) ? true : false);
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-isIdSelected'>    /**
+</span>     * Returns &lt;tt&gt;true&lt;/tt&gt; if the specified record id is selected.
+     * @param {String} id The id of record to check
+     * @return {Boolean}
+     */
+    isIdSelected : function(id){
+        return (this.selections.key(id) ? true : false);
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-handleMouseDown'>    // private
+</span>    handleMouseDown : function(g, rowIndex, e){
+        if(e.button !== 0 || this.isLocked()){
+            return;
+        }
+        var view = this.grid.getView();
+        if(e.shiftKey &amp;&amp; !this.singleSelect &amp;&amp; this.last !== false){
+            var last = this.last;
+            this.selectRange(last, rowIndex, e.ctrlKey);
+            this.last = last; // reset the last
+            view.focusRow(rowIndex);
+        }else{
+            var isSelected = this.isSelected(rowIndex);
+            if(e.ctrlKey &amp;&amp; isSelected){
+                this.deselectRow(rowIndex);
+            }else if(!isSelected || this.getCount() &gt; 1){
+                this.selectRow(rowIndex, e.ctrlKey || e.shiftKey);
+                view.focusRow(rowIndex);
+            }
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-selectRows'>    /**
+</span>     * Selects multiple rows.
+     * @param {Array} rows Array of the indexes of the row to select
+     * @param {Boolean} keepExisting (optional) &lt;tt&gt;true&lt;/tt&gt; to keep
+     * existing selections (defaults to &lt;tt&gt;false&lt;/tt&gt;)
+     */
+    selectRows : function(rows, keepExisting){
+        if(!keepExisting){
+            this.clearSelections();
+        }
+        for(var i = 0, len = rows.length; i &lt; len; i++){
+            this.selectRow(rows[i], true);
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-selectRange'>    /**
+</span>     * Selects a range of rows if the selection model
+     * {@link Ext.grid.AbstractSelectionModel#isLocked is not locked}.
+     * All rows in between startRow and endRow are also selected.
+     * @param {Number} startRow The index of the first row in the range
+     * @param {Number} endRow The index of the last row in the range
+     * @param {Boolean} keepExisting (optional) True to retain existing selections
+     */
+    selectRange : function(startRow, endRow, keepExisting){
+        var i;
+        if(this.isLocked()){
+            return;
+        }
+        if(!keepExisting){
+            this.clearSelections();
+        }
+        if(startRow &lt;= endRow){
+            for(i = startRow; i &lt;= endRow; i++){
+                this.selectRow(i, true);
+            }
+        }else{
+            for(i = startRow; i &gt;= endRow; i--){
+                this.selectRow(i, true);
+            }
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-deselectRange'>    /**
+</span>     * Deselects a range of rows if the selection model
+     * {@link Ext.grid.AbstractSelectionModel#isLocked is not locked}.  
+     * All rows in between startRow and endRow are also deselected.
+     * @param {Number} startRow The index of the first row in the range
+     * @param {Number} endRow The index of the last row in the range
+     */
+    deselectRange : function(startRow, endRow, preventViewNotify){
+        if(this.isLocked()){
+            return;
+        }
+        for(var i = startRow; i &lt;= endRow; i++){
+            this.deselectRow(i, preventViewNotify);
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-selectRow'>    /**
+</span>     * Selects a row.  Before selecting a row, checks if the selection model
+     * {@link Ext.grid.AbstractSelectionModel#isLocked is locked} and fires the
+     * {@link #beforerowselect} event.  If these checks are satisfied the row
+     * will be selected and followed up by  firing the {@link #rowselect} and
+     * {@link #selectionchange} events.
+     * @param {Number} row The index of the row to select
+     * @param {Boolean} keepExisting (optional) &lt;tt&gt;true&lt;/tt&gt; to keep existing selections
+     * @param {Boolean} preventViewNotify (optional) Specify &lt;tt&gt;true&lt;/tt&gt; to
+     * prevent notifying the view (disables updating the selected appearance)
+     */
+    selectRow : function(index, keepExisting, preventViewNotify){
+        if(this.isLocked() || (index &lt; 0 || index &gt;= this.grid.store.getCount()) || (keepExisting &amp;&amp; this.isSelected(index))){
+            return;
+        }
+        var r = this.grid.store.getAt(index);
+        if(r &amp;&amp; this.fireEvent('beforerowselect', this, index, keepExisting, r) !== false){
+            if(!keepExisting || this.singleSelect){
+                this.clearSelections();
+            }
+            this.selections.add(r);
+            this.last = this.lastActive = index;
+            if(!preventViewNotify){
+                this.grid.getView().onRowSelect(index);
+            }
+            if(!this.silent){
+                this.fireEvent('rowselect', this, index, r);
+                this.fireEvent('selectionchange', this);
+            }
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-deselectRow'>    /**
+</span>     * Deselects a row.  Before deselecting a row, checks if the selection model
+     * {@link Ext.grid.AbstractSelectionModel#isLocked is locked}.
+     * If this check is satisfied the row will be deselected and followed up by
+     * firing the {@link #rowdeselect} and {@link #selectionchange} events.
+     * @param {Number} row The index of the row to deselect
+     * @param {Boolean} preventViewNotify (optional) Specify &lt;tt&gt;true&lt;/tt&gt; to
+     * prevent notifying the view (disables updating the selected appearance)
+     */
+    deselectRow : function(index, preventViewNotify){
+        if(this.isLocked()){
+            return;
+        }
+        if(this.last == index){
+            this.last = false;
+        }
+        if(this.lastActive == index){
+            this.lastActive = false;
+        }
+        var r = this.grid.store.getAt(index);
+        if(r){
+            this.selections.remove(r);
+            if(!preventViewNotify){
+                this.grid.getView().onRowDeselect(index);
+            }
+            this.fireEvent('rowdeselect', this, index, r);
+            this.fireEvent('selectionchange', this);
+        }
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-acceptsNav'>    // private
+</span>    acceptsNav : function(row, col, cm){
+        return !cm.isHidden(col) &amp;&amp; cm.isCellEditable(col, row);
+    },
+
+<span id='Ext-grid-RowSelectionModel-method-onEditorKey'>    // private
+</span>    onEditorKey : function(field, e){
+        var k = e.getKey(), 
+            newCell, 
+            g = this.grid, 
+            last = g.lastEdit,
+            ed = g.activeEditor,
+            shift = e.shiftKey,
+            ae, last, r, c;
+            
+        if(k == e.TAB){
+            e.stopEvent();
+            ed.completeEdit();
+            if(shift){
+                newCell = g.walkCells(ed.row, ed.col-1, -1, this.acceptsNav, this);
+            }else{
+                newCell = g.walkCells(ed.row, ed.col+1, 1, this.acceptsNav, this);
+            }
+        }else if(k == e.ENTER){
+            if(this.moveEditorOnEnter !== false){
+                if(shift){
+                    newCell = g.walkCells(last.row - 1, last.col, -1, this.acceptsNav, this);
+                }else{
+                    newCell = g.walkCells(last.row + 1, last.col, 1, this.acceptsNav, this);
+                }
+            }
+        }
+        if(newCell){
+            r = newCell[0];
+            c = newCell[1];
+
+            this.onEditorSelect(r, last.row);
+
+            if(g.isEditor &amp;&amp; g.editing){ // *** handle tabbing while editorgrid is in edit mode
+                ae = g.activeEditor;
+                if(ae &amp;&amp; ae.field.triggerBlur){
+                    // *** if activeEditor is a TriggerField, explicitly call its triggerBlur() method
+                    ae.field.triggerBlur();
+                }
+            }
+            g.startEditing(r, c);
+        }
+    },
+    
+<span id='Ext-grid-RowSelectionModel-method-onEditorSelect'>    onEditorSelect: function(row, lastRow){
+</span>        if(lastRow != row){
+            this.selectRow(row); // *** highlight newly-selected cell and update selection
+        }
+    },
+    
+<span id='Ext-grid-RowSelectionModel-method-destroy'>    destroy : function(){
+</span>        Ext.destroy(this.rowNav);
+        this.rowNav = null;
+        Ext.grid.RowSelectionModel.superclass.destroy.call(this);
+    }
+});
+</pre>
+</body>
+</html>

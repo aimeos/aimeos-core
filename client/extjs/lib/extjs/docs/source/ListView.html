@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-list-ListView-method-constructor'><span id='Ext-list-ListView'>/**
+</span></span> * @class Ext.list.ListView
+ * @extends Ext.DataView
+ * &lt;p&gt;Ext.list.ListView is a fast and light-weight implentation of a
+ * {@link Ext.grid.GridPanel Grid} like view with the following characteristics:&lt;/p&gt;
+ * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;resizable columns&lt;/li&gt;
+ * &lt;li&gt;selectable&lt;/li&gt;
+ * &lt;li&gt;column widths are initially proportioned by percentage based on the container
+ * width and number of columns&lt;/li&gt;
+ * &lt;li&gt;uses templates to render the data in any required format&lt;/li&gt;
+ * &lt;li&gt;no horizontal scrolling&lt;/li&gt;
+ * &lt;li&gt;no editing&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ * &lt;p&gt;Example usage:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+// consume JSON of this form:
+{
+   &quot;images&quot;:[
+      {
+         &quot;name&quot;:&quot;dance_fever.jpg&quot;,
+         &quot;size&quot;:2067,
+         &quot;lastmod&quot;:1236974993000,
+         &quot;url&quot;:&quot;images\/thumbs\/dance_fever.jpg&quot;
+      },
+      {
+         &quot;name&quot;:&quot;zack_sink.jpg&quot;,
+         &quot;size&quot;:2303,
+         &quot;lastmod&quot;:1236974993000,
+         &quot;url&quot;:&quot;images\/thumbs\/zack_sink.jpg&quot;
+      }
+   ]
+}
+var store = new Ext.data.JsonStore({
+    url: 'get-images.php',
+    root: 'images',
+    fields: [
+        'name', 'url',
+        {name:'size', type: 'float'},
+        {name:'lastmod', type:'date', dateFormat:'timestamp'}
+    ]
+});
+store.load();
+
+var listView = new Ext.list.ListView({
+    store: store,
+    multiSelect: true,
+    emptyText: 'No images to display',
+    reserveScrollOffset: true,
+    columns: [{
+        header: 'File',
+        width: .5,
+        dataIndex: 'name'
+    },{
+        header: 'Last Modified',
+        width: .35,
+        dataIndex: 'lastmod',
+        tpl: '{lastmod:date(&quot;m-d h:i a&quot;)}'
+    },{
+        header: 'Size',
+        dataIndex: 'size',
+        tpl: '{size:fileSize}', // format using Ext.util.Format.fileSize()
+        align: 'right'
+    }]
+});
+
+// put it in a Panel so it looks pretty
+var panel = new Ext.Panel({
+    id:'images-view',
+    width:425,
+    height:250,
+    collapsible:true,
+    layout:'fit',
+    title:'Simple ListView &lt;i&gt;(0 items selected)&lt;/i&gt;',
+    items: listView
+});
+panel.render(document.body);
+
+// little bit of feedback
+listView.on('selectionchange', function(view, nodes){
+    var l = nodes.length;
+    var s = l != 1 ? 's' : '';
+    panel.setTitle('Simple ListView &lt;i&gt;('+l+' item'+s+' selected)&lt;/i&gt;');
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ * @constructor
+ * @param {Object} config
+ * @xtype listview
+ */
+Ext.list.ListView = Ext.extend(Ext.DataView, {
+<span id='Ext-list-ListView-property-disableHeaders'>    /**
+</span>     * Set this property to &lt;tt&gt;true&lt;/tt&gt; to disable the header click handler disabling sort
+     * (defaults to &lt;tt&gt;false&lt;/tt&gt;).
+     * @type Boolean
+     * @property disableHeaders
+     */
+<span id='Ext-list-ListView-cfg-hideHeaders'>    /**
+</span>     * @cfg {Boolean} hideHeaders
+     * &lt;tt&gt;true&lt;/tt&gt; to hide the {@link #internalTpl header row} (defaults to &lt;tt&gt;false&lt;/tt&gt; so
+     * the {@link #internalTpl header row} will be shown).
+     */
+<span id='Ext-list-ListView-cfg-itemSelector'>    /**
+</span>     * @cfg {String} itemSelector
+     * Defaults to &lt;tt&gt;'dl'&lt;/tt&gt; to work with the preconfigured &lt;b&gt;&lt;tt&gt;{@link Ext.DataView#tpl tpl}&lt;/tt&gt;&lt;/b&gt;.
+     * This setting specifies the CSS selector (e.g. &lt;tt&gt;div.some-class&lt;/tt&gt; or &lt;tt&gt;span:first-child&lt;/tt&gt;)
+     * that will be used to determine what nodes the ListView will be working with.
+     */
+    itemSelector: 'dl',
+<span id='Ext-list-ListView-cfg-selectedClass'>    /**
+</span>     * @cfg {String} selectedClass The CSS class applied to a selected row (defaults to
+     * &lt;tt&gt;'x-list-selected'&lt;/tt&gt;). An example overriding the default styling:
+    &lt;pre&gt;&lt;code&gt;
+    .x-list-selected {background-color: yellow;}
+    &lt;/code&gt;&lt;/pre&gt;
+     * @type String
+     */
+    selectedClass:'x-list-selected',
+<span id='Ext-list-ListView-cfg-overClass'>    /**
+</span>     * @cfg {String} overClass The CSS class applied when over a row (defaults to
+     * &lt;tt&gt;'x-list-over'&lt;/tt&gt;). An example overriding the default styling:
+    &lt;pre&gt;&lt;code&gt;
+    .x-list-over {background-color: orange;}
+    &lt;/code&gt;&lt;/pre&gt;
+     * @type String
+     */
+    overClass:'x-list-over',
+<span id='Ext-list-ListView-cfg-reserveScrollOffset'>    /**
+</span>     * @cfg {Boolean} reserveScrollOffset
+     * By default will defer accounting for the configured &lt;b&gt;&lt;tt&gt;{@link #scrollOffset}&lt;/tt&gt;&lt;/b&gt;
+     * for 10 milliseconds.  Specify &lt;tt&gt;true&lt;/tt&gt; to account for the configured
+     * &lt;b&gt;&lt;tt&gt;{@link #scrollOffset}&lt;/tt&gt;&lt;/b&gt; immediately.
+     */
+<span id='Ext-list-ListView-cfg-scrollOffset'>    /**
+</span>     * @cfg {Number} scrollOffset The amount of space to reserve for the scrollbar (defaults to
+     * &lt;tt&gt;undefined&lt;/tt&gt;). If an explicit value isn't specified, this will be automatically
+     * calculated.
+     */
+    scrollOffset : undefined,
+<span id='Ext-list-ListView-cfg-columnResize'>    /**
+</span>     * @cfg {Boolean/Object} columnResize
+     * Specify &lt;tt&gt;true&lt;/tt&gt; or specify a configuration object for {@link Ext.list.ListView.ColumnResizer}
+     * to enable the columns to be resizable (defaults to &lt;tt&gt;true&lt;/tt&gt;).
+     */
+    columnResize: true,
+<span id='Ext-list-ListView-cfg-columns'>    /**
+</span>     * @cfg {Array} columns An array of column configuration objects, for example:
+     * &lt;pre&gt;&lt;code&gt;
+{
+    align: 'right',
+    dataIndex: 'size',
+    header: 'Size',
+    tpl: '{size:fileSize}',
+    width: .35
+}
+     * &lt;/code&gt;&lt;/pre&gt;
+     * Acceptable properties for each column configuration object are:
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;align&lt;/tt&gt;&lt;/b&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;Set the CSS text-align property
+     * of the column. Defaults to &lt;tt&gt;'left'&lt;/tt&gt;.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;dataIndex&lt;/tt&gt;&lt;/b&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;See {@link Ext.grid.Column}.
+     * {@link Ext.grid.Column#dataIndex dataIndex} for details.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;header&lt;/tt&gt;&lt;/b&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;See {@link Ext.grid.Column}.
+     * {@link Ext.grid.Column#header header} for details.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;tpl&lt;/tt&gt;&lt;/b&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;Specify a string to pass as the
+     * configuration string for {@link Ext.XTemplate}.  By default an {@link Ext.XTemplate}
+     * will be implicitly created using the &lt;tt&gt;dataIndex&lt;/tt&gt;.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;width&lt;/tt&gt;&lt;/b&gt; : Number&lt;div class=&quot;sub-desc&quot;&gt;Percentage of the container width
+     * this column should be allocated.  Columns that have no width specified will be
+     * allocated with an equal percentage to fill 100% of the container width.  To easily take
+     * advantage of the full container width, leave the width of at least one column undefined.
+     * Note that if you do not want to take up the full width of the container, the width of
+     * every column needs to be explicitly defined.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+<span id='Ext-list-ListView-cfg-columnSort'>    /**
+</span>     * @cfg {Boolean/Object} columnSort
+     * Specify &lt;tt&gt;true&lt;/tt&gt; or specify a configuration object for {@link Ext.list.ListView.Sorter}
+     * to enable the columns to be sortable (defaults to &lt;tt&gt;true&lt;/tt&gt;).
+     */
+    columnSort: true,
+<span id='Ext-list-ListView-cfg-internalTpl'>    /**
+</span>     * @cfg {String/Array} internalTpl
+     * The template to be used for the header row.  See {@link #tpl} for more details.
+     */
+
+<span id='Ext-list-ListView-property-maxColumnWidth'>    /*
+</span>     * IE has issues when setting percentage based widths to 100%. Default to 99.
+     */
+    maxColumnWidth: Ext.isIE9m ? 99 : 100,
+
+<span id='Ext-list-ListView-method-initComponent'>    initComponent : function(){
+</span>        if(this.columnResize){
+            this.colResizer = new Ext.list.ColumnResizer(this.colResizer);
+            this.colResizer.init(this);
+        }
+        if(this.columnSort){
+            this.colSorter = new Ext.list.Sorter(this.columnSort);
+            this.colSorter.init(this);
+        }
+        if(!this.internalTpl){
+            this.internalTpl = new Ext.XTemplate(
+                '&lt;div class=&quot;x-list-header&quot;&gt;&lt;div class=&quot;x-list-header-inner&quot;&gt;',
+                    '&lt;tpl for=&quot;columns&quot;&gt;',
+                    '&lt;div style=&quot;width:{[values.width*100]}%;text-align:{align};&quot;&gt;&lt;em class=&quot;x-unselectable&quot; unselectable=&quot;on&quot; id=&quot;',this.id, '-xlhd-{#}&quot;&gt;',
+                        '{header}',
+                    '&lt;/em&gt;&lt;/div&gt;',
+                    '&lt;/tpl&gt;',
+                    '&lt;div class=&quot;x-clear&quot;&gt;&lt;/div&gt;',
+                '&lt;/div&gt;&lt;/div&gt;',
+                '&lt;div class=&quot;x-list-body&quot;&gt;&lt;div class=&quot;x-list-body-inner&quot;&gt;',
+                '&lt;/div&gt;&lt;/div&gt;'
+            );
+        }
+        if(!this.tpl){
+            this.tpl = new Ext.XTemplate(
+                '&lt;tpl for=&quot;rows&quot;&gt;',
+                    '&lt;dl&gt;',
+                        '&lt;tpl for=&quot;parent.columns&quot;&gt;',
+                        '&lt;dt style=&quot;width:{[values.width*100]}%;text-align:{align};&quot;&gt;',
+                        '&lt;em unselectable=&quot;on&quot;&lt;tpl if=&quot;cls&quot;&gt; class=&quot;{cls}&lt;/tpl&gt;&quot;&gt;',
+                            '{[values.tpl.apply(parent)]}',
+                        '&lt;/em&gt;&lt;/dt&gt;',
+                        '&lt;/tpl&gt;',
+                        '&lt;div class=&quot;x-clear&quot;&gt;&lt;/div&gt;',
+                    '&lt;/dl&gt;',
+                '&lt;/tpl&gt;'
+            );
+        };
+
+        var cs = this.columns,
+            allocatedWidth = 0,
+            colsWithWidth = 0,
+            len = cs.length,
+            columns = [];
+
+        for(var i = 0; i &lt; len; i++){
+            var c = cs[i];
+            if(!c.isColumn) {
+                c.xtype = c.xtype ? (/^lv/.test(c.xtype) ? c.xtype : 'lv' + c.xtype) : 'lvcolumn';
+                c = Ext.create(c);
+            }
+            if(c.width) {
+                allocatedWidth += c.width*100;
+                if(allocatedWidth &gt; this.maxColumnWidth){
+                    c.width -= (allocatedWidth - this.maxColumnWidth) / 100;
+                }
+                colsWithWidth++;
+            }
+            columns.push(c);
+        }
+
+        cs = this.columns = columns;
+
+        // auto calculate missing column widths
+        if(colsWithWidth &lt; len){
+            var remaining = len - colsWithWidth;
+            if(allocatedWidth &lt; this.maxColumnWidth){
+                var perCol = ((this.maxColumnWidth-allocatedWidth) / remaining)/100;
+                for(var j = 0; j &lt; len; j++){
+                    var c = cs[j];
+                    if(!c.width){
+                        c.width = perCol;
+                    }
+                }
+            }
+        }
+        Ext.list.ListView.superclass.initComponent.call(this);
+    },
+
+<span id='Ext-list-ListView-method-onRender'>    onRender : function(){
+</span>        this.autoEl = {
+            cls: 'x-list-wrap'
+        };
+        Ext.list.ListView.superclass.onRender.apply(this, arguments);
+
+        this.internalTpl.overwrite(this.el, {columns: this.columns});
+
+        this.innerBody = Ext.get(this.el.dom.childNodes[1].firstChild);
+        this.innerHd = Ext.get(this.el.dom.firstChild.firstChild);
+
+        if(this.hideHeaders){
+            this.el.dom.firstChild.style.display = 'none';
+        }
+    },
+
+<span id='Ext-list-ListView-method-getTemplateTarget'>    getTemplateTarget : function(){
+</span>        return this.innerBody;
+    },
+
+<span id='Ext-list-ListView-method-collectData'>    /**
+</span>     * &lt;p&gt;Function which can be overridden which returns the data object passed to this
+     * view's {@link #tpl template} to render the whole ListView. The returned object
+     * shall contain the following properties:&lt;/p&gt;
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;columns&lt;/b&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;See &lt;tt&gt;{@link #columns}&lt;/tt&gt;&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;rows&lt;/b&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;See
+     * &lt;tt&gt;{@link Ext.DataView}.{@link Ext.DataView#collectData collectData}&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * @param {Array} records An Array of {@link Ext.data.Record}s to be rendered into the DataView.
+     * @param {Number} startIndex the index number of the Record being prepared for rendering.
+     * @return {Object} A data object containing properties to be processed by a repeating
+     * XTemplate as described above.
+     */
+    collectData : function(){
+        var rs = Ext.list.ListView.superclass.collectData.apply(this, arguments);
+        return {
+            columns: this.columns,
+            rows: rs
+        };
+    },
+
+<span id='Ext-list-ListView-method-verifyInternalSize'>    verifyInternalSize : function(){
+</span>        if(this.lastSize){
+            this.onResize(this.lastSize.width, this.lastSize.height);
+        }
+    },
+
+<span id='Ext-list-ListView-method-onResize'>    // private
+</span>    onResize : function(w, h){
+        var body = this.innerBody.dom,
+            header = this.innerHd.dom,
+            scrollWidth = w - Ext.num(this.scrollOffset, Ext.getScrollBarWidth()) + 'px',
+            parentNode;
+            
+        if(!body){
+            return;
+        }
+        parentNode = body.parentNode;
+        if(Ext.isNumber(w)){
+            if(this.reserveScrollOffset || ((parentNode.offsetWidth - parentNode.clientWidth) &gt; 10)){
+                body.style.width = scrollWidth;
+                header.style.width = scrollWidth;
+            }else{
+                body.style.width = w + 'px';
+                header.style.width = w + 'px';
+                setTimeout(function(){
+                    if((parentNode.offsetWidth - parentNode.clientWidth) &gt; 10){
+                        body.style.width = scrollWidth;
+                        header.style.width = scrollWidth;
+                    }
+                }, 10);
+            }
+        }
+        if(Ext.isNumber(h)){
+            parentNode.style.height = Math.max(0, h - header.parentNode.offsetHeight) + 'px';
+        }
+    },
+
+<span id='Ext-list-ListView-method-updateIndexes'>    updateIndexes : function(){
+</span>        Ext.list.ListView.superclass.updateIndexes.apply(this, arguments);
+        this.verifyInternalSize();
+    },
+
+<span id='Ext-list-ListView-method-findHeaderIndex'>    findHeaderIndex : function(header){
+</span>        header = header.dom || header;
+        var parentNode = header.parentNode, 
+            children = parentNode.parentNode.childNodes,
+            i = 0,
+            c;
+        for(; c = children[i]; i++){
+            if(c == parentNode){
+                return i;
+            }
+        }
+        return -1;
+    },
+
+<span id='Ext-list-ListView-method-setHdWidths'>    setHdWidths : function(){
+</span>        var els = this.innerHd.dom.getElementsByTagName('div'),
+            i = 0,
+            columns = this.columns,
+            len = columns.length;
+            
+        for(; i &lt; len; i++){
+            els[i].style.width = (columns[i].width*100) + '%';
+        }
+    }
+});
+
+Ext.reg('listview', Ext.list.ListView);
+
+// Backwards compatibility alias
+Ext.ListView = Ext.list.ListView;</pre>
+</body>
+</html>

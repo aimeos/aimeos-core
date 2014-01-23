@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-PagingToolbar-method-constructor'><span id='Ext-PagingToolbar'>/**
+</span></span> * @class Ext.PagingToolbar
+ * @extends Ext.Toolbar
+ * &lt;p&gt;As the amount of records increases, the time required for the browser to render
+ * them increases. Paging is used to reduce the amount of data exchanged with the client.
+ * Note: if there are more records/rows than can be viewed in the available screen area, vertical
+ * scrollbars will be added.&lt;/p&gt;
+ * &lt;p&gt;Paging is typically handled on the server side (see exception below). The client sends
+ * parameters to the server side, which the server needs to interpret and then respond with the
+ * approprate data.&lt;/p&gt;
+ * &lt;p&gt;&lt;b&gt;Ext.PagingToolbar&lt;/b&gt; is a specialized toolbar that is bound to a {@link Ext.data.Store}
+ * and provides automatic paging control. This Component {@link Ext.data.Store#load load}s blocks
+ * of data into the &lt;tt&gt;{@link #store}&lt;/tt&gt; by passing {@link Ext.data.Store#paramNames paramNames} used for
+ * paging criteria.&lt;/p&gt;
+ * &lt;p&gt;PagingToolbar is typically used as one of the Grid's toolbars:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+Ext.QuickTips.init(); // to display button quicktips
+
+var myStore = new Ext.data.Store({
+    reader: new Ext.data.JsonReader({
+        {@link Ext.data.JsonReader#totalProperty totalProperty}: 'results', 
+        ...
+    }),
+    ...
+});
+
+var myPageSize = 25;  // server script should only send back 25 items at a time
+
+var grid = new Ext.grid.GridPanel({
+    ...
+    store: myStore,
+    bbar: new Ext.PagingToolbar({
+        {@link #store}: myStore,       // grid and PagingToolbar using same store
+        {@link #displayInfo}: true,
+        {@link #pageSize}: myPageSize,
+        {@link #prependButtons}: true,
+        items: [
+            'text 1'
+        ]
+    })
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ *
+ * &lt;p&gt;To use paging, pass the paging requirements to the server when the store is first loaded.&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+store.load({
+    params: {
+        // specify params for the first page load if using paging
+        start: 0,          
+        limit: myPageSize,
+        // other params
+        foo:   'bar'
+    }
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ * 
+ * &lt;p&gt;If using {@link Ext.data.Store#autoLoad store's autoLoad} configuration:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var myStore = new Ext.data.Store({
+    {@link Ext.data.Store#autoLoad autoLoad}: {params:{start: 0, limit: 25}},
+    ...
+});
+ * &lt;/code&gt;&lt;/pre&gt;
+ * 
+ * &lt;p&gt;The packet sent back from the server would have this form:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+{
+    &quot;success&quot;: true,
+    &quot;results&quot;: 2000, 
+    &quot;rows&quot;: [ // &lt;b&gt;*Note:&lt;/b&gt; this must be an Array 
+        { &quot;id&quot;:  1, &quot;name&quot;: &quot;Bill&quot;, &quot;occupation&quot;: &quot;Gardener&quot; },
+        { &quot;id&quot;:  2, &quot;name&quot;:  &quot;Ben&quot;, &quot;occupation&quot;: &quot;Horticulturalist&quot; },
+        ...
+        { &quot;id&quot;: 25, &quot;name&quot;:  &quot;Sue&quot;, &quot;occupation&quot;: &quot;Botanist&quot; }
+    ]
+}
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;&lt;u&gt;Paging with Local Data&lt;/u&gt;&lt;/p&gt;
+ * &lt;p&gt;Paging can also be accomplished with local data using extensions:&lt;/p&gt;
+ * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;&lt;a href=&quot;http://extjs.com/forum/showthread.php?t=71532&quot;&gt;Ext.ux.data.PagingStore&lt;/a&gt;&lt;/li&gt;
+ * &lt;li&gt;Paging Memory Proxy (examples/ux/PagingMemoryProxy.js)&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ * @constructor Create a new PagingToolbar
+ * @param {Object} config The config object
+ * @xtype paging
+ */
+(function() {
+
+var T = Ext.Toolbar;
+
+Ext.PagingToolbar = Ext.extend(Ext.Toolbar, {
+<span id='Ext-PagingToolbar-cfg-store'>    /**
+</span>     * @cfg {Ext.data.Store} store
+     * The {@link Ext.data.Store} the paging toolbar should use as its data source (required).
+     */
+<span id='Ext-PagingToolbar-cfg-displayInfo'>    /**
+</span>     * @cfg {Boolean} displayInfo
+     * &lt;tt&gt;true&lt;/tt&gt; to display the displayMsg (defaults to &lt;tt&gt;false&lt;/tt&gt;)
+     */
+<span id='Ext-PagingToolbar-cfg-pageSize'>    /**
+</span>     * @cfg {Number} pageSize
+     * The number of records to display per page (defaults to &lt;tt&gt;20&lt;/tt&gt;)
+     */
+    pageSize : 20,
+<span id='Ext-PagingToolbar-cfg-prependButtons'>    /**
+</span>     * @cfg {Boolean} prependButtons
+     * &lt;tt&gt;true&lt;/tt&gt; to insert any configured &lt;tt&gt;items&lt;/tt&gt; &lt;i&gt;before&lt;/i&gt; the paging buttons.
+     * Defaults to &lt;tt&gt;false&lt;/tt&gt;.
+     */
+<span id='Ext-PagingToolbar-cfg-displayMsg'>    /**
+</span>     * @cfg {String} displayMsg
+     * The paging status message to display (defaults to &lt;tt&gt;'Displaying {0} - {1} of {2}'&lt;/tt&gt;).
+     * Note that this string is formatted using the braced numbers &lt;tt&gt;{0}-{2}&lt;/tt&gt; as tokens
+     * that are replaced by the values for start, end and total respectively. These tokens should
+     * be preserved when overriding this string if showing those values is desired.
+     */
+    displayMsg : 'Displaying {0} - {1} of {2}',
+<span id='Ext-PagingToolbar-cfg-emptyMsg'>    /**
+</span>     * @cfg {String} emptyMsg
+     * The message to display when no records are found (defaults to 'No data to display')
+     */
+    emptyMsg : 'No data to display',
+<span id='Ext-PagingToolbar-cfg-beforePageText'>    /**
+</span>     * @cfg {String} beforePageText
+     * The text displayed before the input item (defaults to &lt;tt&gt;'Page'&lt;/tt&gt;).
+     */
+    beforePageText : 'Page',
+<span id='Ext-PagingToolbar-cfg-afterPageText'>    /**
+</span>     * @cfg {String} afterPageText
+     * Customizable piece of the default paging text (defaults to &lt;tt&gt;'of {0}'&lt;/tt&gt;). Note that
+     * this string is formatted using &lt;tt&gt;{0}&lt;/tt&gt; as a token that is replaced by the number of
+     * total pages. This token should be preserved when overriding this string if showing the
+     * total page count is desired.
+     */
+    afterPageText : 'of {0}',
+<span id='Ext-PagingToolbar-cfg-firstText'>    /**
+</span>     * @cfg {String} firstText
+     * The quicktip text displayed for the first page button (defaults to &lt;tt&gt;'First Page'&lt;/tt&gt;).
+     * &lt;b&gt;Note&lt;/b&gt;: quick tips must be initialized for the quicktip to show.
+     */
+    firstText : 'First Page',
+<span id='Ext-PagingToolbar-cfg-prevText'>    /**
+</span>     * @cfg {String} prevText
+     * The quicktip text displayed for the previous page button (defaults to &lt;tt&gt;'Previous Page'&lt;/tt&gt;).
+     * &lt;b&gt;Note&lt;/b&gt;: quick tips must be initialized for the quicktip to show.
+     */
+    prevText : 'Previous Page',
+<span id='Ext-PagingToolbar-cfg-nextText'>    /**
+</span>     * @cfg {String} nextText
+     * The quicktip text displayed for the next page button (defaults to &lt;tt&gt;'Next Page'&lt;/tt&gt;).
+     * &lt;b&gt;Note&lt;/b&gt;: quick tips must be initialized for the quicktip to show.
+     */
+    nextText : 'Next Page',
+<span id='Ext-PagingToolbar-cfg-lastText'>    /**
+</span>     * @cfg {String} lastText
+     * The quicktip text displayed for the last page button (defaults to &lt;tt&gt;'Last Page'&lt;/tt&gt;).
+     * &lt;b&gt;Note&lt;/b&gt;: quick tips must be initialized for the quicktip to show.
+     */
+    lastText : 'Last Page',
+<span id='Ext-PagingToolbar-cfg-refreshText'>    /**
+</span>     * @cfg {String} refreshText
+     * The quicktip text displayed for the Refresh button (defaults to &lt;tt&gt;'Refresh'&lt;/tt&gt;).
+     * &lt;b&gt;Note&lt;/b&gt;: quick tips must be initialized for the quicktip to show.
+     */
+    refreshText : 'Refresh',
+
+<span id='Ext-PagingToolbar-property-paramNames'>    /**
+</span>     * &lt;p&gt;&lt;b&gt;Deprecated&lt;/b&gt;. &lt;code&gt;paramNames&lt;/code&gt; should be set in the &lt;b&gt;data store&lt;/b&gt;
+     * (see {@link Ext.data.Store#paramNames}).&lt;/p&gt;
+     * &lt;br&gt;&lt;p&gt;Object mapping of parameter names used for load calls, initially set to:&lt;/p&gt;
+     * &lt;pre&gt;{start: 'start', limit: 'limit'}&lt;/pre&gt;
+     * @type Object
+     * @property paramNames
+     * @deprecated
+     */
+
+<span id='Ext-PagingToolbar-property-pageSize'>    /**
+</span>     * The number of records to display per page.  See also &lt;tt&gt;{@link #cursor}&lt;/tt&gt;.
+     * @type Number
+     * @property pageSize
+     */
+
+<span id='Ext-PagingToolbar-property-cursor'>    /**
+</span>     * Indicator for the record position.  This property might be used to get the active page
+     * number for example:&lt;pre&gt;&lt;code&gt;
+     * // t is reference to the paging toolbar instance
+     * var activePage = Math.ceil((t.cursor + t.pageSize) / t.pageSize);
+     * &lt;/code&gt;&lt;/pre&gt;
+     * @type Number
+     * @property cursor
+     */
+
+    initComponent : function(){
+        var pagingItems = [this.first = new T.Button({
+            tooltip: this.firstText,
+            overflowText: this.firstText,
+            iconCls: 'x-tbar-page-first',
+            disabled: true,
+            handler: this.moveFirst,
+            scope: this
+        }), this.prev = new T.Button({
+            tooltip: this.prevText,
+            overflowText: this.prevText,
+            iconCls: 'x-tbar-page-prev',
+            disabled: true,
+            handler: this.movePrevious,
+            scope: this
+        }), '-', this.beforePageText,
+        this.inputItem = new Ext.form.NumberField({
+            cls: 'x-tbar-page-number',
+            allowDecimals: false,
+            allowNegative: false,
+            enableKeyEvents: true,
+            selectOnFocus: true,
+            submitValue: false,
+            listeners: {
+                scope: this,
+                keydown: this.onPagingKeyDown,
+                blur: this.onPagingBlur
+            }
+        }), this.afterTextItem = new T.TextItem({
+            text: String.format(this.afterPageText, 1)
+        }), '-', this.next = new T.Button({
+            tooltip: this.nextText,
+            overflowText: this.nextText,
+            iconCls: 'x-tbar-page-next',
+            disabled: true,
+            handler: this.moveNext,
+            scope: this
+        }), this.last = new T.Button({
+            tooltip: this.lastText,
+            overflowText: this.lastText,
+            iconCls: 'x-tbar-page-last',
+            disabled: true,
+            handler: this.moveLast,
+            scope: this
+        }), '-', this.refresh = new T.Button({
+            tooltip: this.refreshText,
+            overflowText: this.refreshText,
+            iconCls: 'x-tbar-loading',
+            handler: this.doRefresh,
+            scope: this
+        })];
+
+
+        var userItems = this.items || this.buttons || [];
+        if (this.prependButtons) {
+            this.items = userItems.concat(pagingItems);
+        }else{
+            this.items = pagingItems.concat(userItems);
+        }
+        delete this.buttons;
+        if(this.displayInfo){
+            this.items.push('-&gt;');
+            this.items.push(this.displayItem = new T.TextItem({}));
+        }
+        Ext.PagingToolbar.superclass.initComponent.call(this);
+        this.addEvents(
+<span id='Ext-PagingToolbar-event-change'>            /**
+</span>             * @event change
+             * Fires after the active page has been changed.
+             * @param {Ext.PagingToolbar} this
+             * @param {Object} pageData An object that has these properties:&lt;ul&gt;
+             * &lt;li&gt;&lt;code&gt;total&lt;/code&gt; : Number &lt;div class=&quot;sub-desc&quot;&gt;The total number of records in the dataset as
+             * returned by the server&lt;/div&gt;&lt;/li&gt;
+             * &lt;li&gt;&lt;code&gt;activePage&lt;/code&gt; : Number &lt;div class=&quot;sub-desc&quot;&gt;The current page number&lt;/div&gt;&lt;/li&gt;
+             * &lt;li&gt;&lt;code&gt;pages&lt;/code&gt; : Number &lt;div class=&quot;sub-desc&quot;&gt;The total number of pages (calculated from
+             * the total number of records in the dataset as returned by the server and the current {@link #pageSize})&lt;/div&gt;&lt;/li&gt;
+             * &lt;/ul&gt;
+             */
+            'change',
+<span id='Ext-PagingToolbar-event-beforechange'>            /**
+</span>             * @event beforechange
+             * Fires just before the active page is changed.
+             * Return false to prevent the active page from being changed.
+             * @param {Ext.PagingToolbar} this
+             * @param {Object} params An object hash of the parameters which the PagingToolbar will send when
+             * loading the required page. This will contain:&lt;ul&gt;
+             * &lt;li&gt;&lt;code&gt;start&lt;/code&gt; : Number &lt;div class=&quot;sub-desc&quot;&gt;The starting row number for the next page of records to
+             * be retrieved from the server&lt;/div&gt;&lt;/li&gt;
+             * &lt;li&gt;&lt;code&gt;limit&lt;/code&gt; : Number &lt;div class=&quot;sub-desc&quot;&gt;The number of records to be retrieved from the server&lt;/div&gt;&lt;/li&gt;
+             * &lt;/ul&gt;
+             * &lt;p&gt;(note: the names of the &lt;b&gt;start&lt;/b&gt; and &lt;b&gt;limit&lt;/b&gt; properties are determined
+             * by the store's {@link Ext.data.Store#paramNames paramNames} property.)&lt;/p&gt;
+             * &lt;p&gt;Parameters may be added as required in the event handler.&lt;/p&gt;
+             */
+            'beforechange'
+        );
+        this.on('afterlayout', this.onFirstLayout, this, {single: true});
+        this.cursor = 0;
+        this.bindStore(this.store, true);
+    },
+
+    // private
+    onFirstLayout : function(){
+        if(this.dsLoaded){
+            this.onLoad.apply(this, this.dsLoaded);
+        }
+    },
+
+    // private
+    updateInfo : function(){
+        if(this.displayItem){
+            var count = this.store.getCount();
+            var msg = count == 0 ?
+                this.emptyMsg :
+                String.format(
+                    this.displayMsg,
+                    this.cursor+1, this.cursor+count, this.store.getTotalCount()
+                );
+            this.displayItem.setText(msg);
+        }
+    },
+
+    // private
+    onLoad : function(store, r, o){
+        if(!this.rendered){
+            this.dsLoaded = [store, r, o];
+            return;
+        }
+        var p = this.getParams();
+        this.cursor = (o.params &amp;&amp; o.params[p.start]) ? o.params[p.start] : 0;
+        var d = this.getPageData(), ap = d.activePage, ps = d.pages;
+
+        this.afterTextItem.setText(String.format(this.afterPageText, d.pages));
+        this.inputItem.setValue(ap);
+        this.first.setDisabled(ap == 1);
+        this.prev.setDisabled(ap == 1);
+        this.next.setDisabled(ap == ps);
+        this.last.setDisabled(ap == ps);
+        this.refresh.enable();
+        this.updateInfo();
+        this.fireEvent('change', this, d);
+    },
+
+    // private
+    getPageData : function(){
+        var total = this.store.getTotalCount();
+        return {
+            total : total,
+            activePage : Math.ceil((this.cursor+this.pageSize)/this.pageSize),
+            pages :  total &lt; this.pageSize ? 1 : Math.ceil(total/this.pageSize)
+        };
+    },
+
+<span id='Ext-PagingToolbar-method-changePage'>    /**
+</span>     * Change the active page
+     * @param {Integer} page The page to display
+     */
+    changePage : function(page){
+        this.doLoad(((page-1) * this.pageSize).constrain(0, this.store.getTotalCount()));
+    },
+
+    // private
+    onLoadError : function(){
+        if(!this.rendered){
+            return;
+        }
+        this.refresh.enable();
+    },
+
+    // private
+    readPage : function(d){
+        var v = this.inputItem.getValue(), pageNum;
+        if (!v || isNaN(pageNum = parseInt(v, 10))) {
+            this.inputItem.setValue(d.activePage);
+            return false;
+        }
+        return pageNum;
+    },
+
+    onPagingFocus : function(){
+        this.inputItem.select();
+    },
+
+    //private
+    onPagingBlur : function(e){
+        this.inputItem.setValue(this.getPageData().activePage);
+    },
+
+    // private
+    onPagingKeyDown : function(field, e){
+        var k = e.getKey(), d = this.getPageData(), pageNum;
+        if (k == e.RETURN) {
+            e.stopEvent();
+            pageNum = this.readPage(d);
+            if(pageNum !== false){
+                pageNum = Math.min(Math.max(1, pageNum), d.pages) - 1;
+                this.doLoad(pageNum * this.pageSize);
+            }
+        }else if (k == e.HOME || k == e.END){
+            e.stopEvent();
+            pageNum = k == e.HOME ? 1 : d.pages;
+            field.setValue(pageNum);
+        }else if (k == e.UP || k == e.PAGEUP || k == e.DOWN || k == e.PAGEDOWN){
+            e.stopEvent();
+            if((pageNum = this.readPage(d))){
+                var increment = e.shiftKey ? 10 : 1;
+                if(k == e.DOWN || k == e.PAGEDOWN){
+                    increment *= -1;
+                }
+                pageNum += increment;
+                if(pageNum &gt;= 1 &amp; pageNum &lt;= d.pages){
+                    field.setValue(pageNum);
+                }
+            }
+        }
+    },
+
+    // private
+    getParams : function(){
+        //retain backwards compat, allow params on the toolbar itself, if they exist.
+        return this.paramNames || this.store.paramNames;
+    },
+
+    // private
+    beforeLoad : function(){
+        if(this.rendered &amp;&amp; this.refresh){
+            this.refresh.disable();
+        }
+    },
+
+    // private
+    doLoad : function(start){
+        var o = {}, pn = this.getParams();
+        o[pn.start] = start;
+        o[pn.limit] = this.pageSize;
+        if(this.fireEvent('beforechange', this, o) !== false){
+            this.store.load({params:o});
+        }
+    },
+
+<span id='Ext-PagingToolbar-method-moveFirst'>    /**
+</span>     * Move to the first page, has the same effect as clicking the 'first' button.
+     */
+    moveFirst : function(){
+        this.doLoad(0);
+    },
+
+<span id='Ext-PagingToolbar-method-movePrevious'>    /**
+</span>     * Move to the previous page, has the same effect as clicking the 'previous' button.
+     */
+    movePrevious : function(){
+        this.doLoad(Math.max(0, this.cursor-this.pageSize));
+    },
+
+<span id='Ext-PagingToolbar-method-moveNext'>    /**
+</span>     * Move to the next page, has the same effect as clicking the 'next' button.
+     */
+    moveNext : function(){
+        this.doLoad(this.cursor+this.pageSize);
+    },
+
+<span id='Ext-PagingToolbar-method-moveLast'>    /**
+</span>     * Move to the last page, has the same effect as clicking the 'last' button.
+     */
+    moveLast : function(){
+        var total = this.store.getTotalCount(),
+            extra = total % this.pageSize;
+
+        this.doLoad(extra ? (total - extra) : total - this.pageSize);
+    },
+
+<span id='Ext-PagingToolbar-method-doRefresh'>    /**
+</span>     * Refresh the current page, has the same effect as clicking the 'refresh' button.
+     */
+    doRefresh : function(){
+        this.doLoad(this.cursor);
+    },
+
+<span id='Ext-PagingToolbar-method-bindStore'>    /**
+</span>     * Binds the paging toolbar to the specified {@link Ext.data.Store}
+     * @param {Store} store The store to bind to this toolbar
+     * @param {Boolean} initial (Optional) true to not remove listeners
+     */
+    bindStore : function(store, initial){
+        var doLoad;
+        if(!initial &amp;&amp; this.store){
+            if(store !== this.store &amp;&amp; this.store.autoDestroy){
+                this.store.destroy();
+            }else{
+                this.store.un('beforeload', this.beforeLoad, this);
+                this.store.un('load', this.onLoad, this);
+                this.store.un('exception', this.onLoadError, this);
+            }
+            if(!store){
+                this.store = null;
+            }
+        }
+        if(store){
+            store = Ext.StoreMgr.lookup(store);
+            store.on({
+                scope: this,
+                beforeload: this.beforeLoad,
+                load: this.onLoad,
+                exception: this.onLoadError
+            });
+            doLoad = true;
+        }
+        this.store = store;
+        if(doLoad){
+            this.onLoad(store, null, {});
+        }
+    },
+
+<span id='Ext-PagingToolbar-method-unbind'>    /**
+</span>     * Unbinds the paging toolbar from the specified {@link Ext.data.Store} &lt;b&gt;(deprecated)&lt;/b&gt;
+     * @param {Ext.data.Store} store The data store to unbind
+     */
+    unbind : function(store){
+        this.bindStore(null);
+    },
+
+<span id='Ext-PagingToolbar-method-bind'>    /**
+</span>     * Binds the paging toolbar to the specified {@link Ext.data.Store} &lt;b&gt;(deprecated)&lt;/b&gt;
+     * @param {Ext.data.Store} store The data store to bind
+     */
+    bind : function(store){
+        this.bindStore(store);
+    },
+
+    // private
+    onDestroy : function(){
+        this.bindStore(null);
+        Ext.PagingToolbar.superclass.onDestroy.call(this);
+    }
+});
+
+})();
+Ext.reg('paging', Ext.PagingToolbar);</pre>
+</body>
+</html>

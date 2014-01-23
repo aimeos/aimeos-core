@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-grid-CheckboxSelectionModel-method-constructor'><span id='Ext-grid-CheckboxSelectionModel'>/**
+</span></span> * @class Ext.grid.CheckboxSelectionModel
+ * @extends Ext.grid.RowSelectionModel
+ * A custom selection model that renders a column of checkboxes that can be toggled to select or deselect rows.
+ * @constructor
+ * @param {Object} config The configuration options
+ */
+Ext.grid.CheckboxSelectionModel = Ext.extend(Ext.grid.RowSelectionModel, {
+
+<span id='Ext-grid-CheckboxSelectionModel-cfg-checkOnly'>    /**
+</span>     * @cfg {Boolean} checkOnly &lt;tt&gt;true&lt;/tt&gt; if rows can only be selected by clicking on the
+     * checkbox column (defaults to &lt;tt&gt;false&lt;/tt&gt;).
+     */
+<span id='Ext-grid-CheckboxSelectionModel-cfg-header'>    /**
+</span>     * @cfg {String} header Any valid text or HTML fragment to display in the header cell for the
+     * checkbox column.  Defaults to:&lt;pre&gt;&lt;code&gt;
+     * '&amp;lt;div class=&quot;x-grid3-hd-checker&quot;&gt;&amp;#38;#160;&amp;lt;/div&gt;'&lt;/tt&gt;
+     * &lt;/code&gt;&lt;/pre&gt;
+     * The default CSS class of &lt;tt&gt;'x-grid3-hd-checker'&lt;/tt&gt; displays a checkbox in the header
+     * and provides support for automatic check all/none behavior on header click. This string
+     * can be replaced by any valid HTML fragment, including a simple text string (e.g.,
+     * &lt;tt&gt;'Select Rows'&lt;/tt&gt;), but the automatic check all/none behavior will only work if the
+     * &lt;tt&gt;'x-grid3-hd-checker'&lt;/tt&gt; class is supplied.
+     */
+    header : '&lt;div class=&quot;x-grid3-hd-checker&quot;&gt;&amp;#160;&lt;/div&gt;',
+<span id='Ext-grid-CheckboxSelectionModel-cfg-width'>    /**
+</span>     * @cfg {Number} width The default width in pixels of the checkbox column (defaults to &lt;tt&gt;20&lt;/tt&gt;).
+     */
+    width : 20,
+<span id='Ext-grid-CheckboxSelectionModel-cfg-sortable'>    /**
+</span>     * @cfg {Boolean} sortable &lt;tt&gt;true&lt;/tt&gt; if the checkbox column is sortable (defaults to
+     * &lt;tt&gt;false&lt;/tt&gt;).
+     */
+    sortable : false,
+
+<span id='Ext-grid-CheckboxSelectionModel-property-menuDisabled'>    // private
+</span>    menuDisabled : true,
+<span id='Ext-grid-CheckboxSelectionModel-property-fixed'>    fixed : true,
+</span><span id='Ext-grid-CheckboxSelectionModel-property-hideable'>    hideable: false,
+</span><span id='Ext-grid-CheckboxSelectionModel-property-dataIndex'>    dataIndex : '',
+</span><span id='Ext-grid-CheckboxSelectionModel-property-id'>    id : 'checker',
+</span><span id='Ext-grid-CheckboxSelectionModel-method-constructor'><span id='Ext-grid-CheckboxSelectionModel-property-isColumn'>    isColumn: true, // So that ColumnModel doesn't feed this through the Column constructor
+</span></span>
+    constructor : function(){
+        Ext.grid.CheckboxSelectionModel.superclass.constructor.apply(this, arguments);
+        if(this.checkOnly){
+            this.handleMouseDown = Ext.emptyFn;
+        }
+    },
+
+<span id='Ext-grid-CheckboxSelectionModel-method-initEvents'>    // private
+</span>    initEvents : function(){
+        Ext.grid.CheckboxSelectionModel.superclass.initEvents.call(this);
+        this.grid.on('render', function(){
+            Ext.fly(this.grid.getView().innerHd).on('mousedown', this.onHdMouseDown, this);
+        }, this);
+    },
+
+<span id='Ext-grid-CheckboxSelectionModel-method-processEvent'>    /**
+</span>     * @private
+     * Process and refire events routed from the GridView's processEvent method.
+     */
+    processEvent : function(name, e, grid, rowIndex, colIndex){
+        if (name == 'mousedown') {
+            this.onMouseDown(e, e.getTarget());
+            return false;
+        } else {
+            return Ext.grid.Column.prototype.processEvent.apply(this, arguments);
+        }
+    },
+
+<span id='Ext-grid-CheckboxSelectionModel-method-onMouseDown'>    // private
+</span>    onMouseDown : function(e, t){
+        if(e.button === 0 &amp;&amp; t.className == 'x-grid3-row-checker'){ // Only fire if left-click
+            e.stopEvent();
+            var row = e.getTarget('.x-grid3-row');
+            if(row){
+                var index = row.rowIndex;
+                if(this.isSelected(index)){
+                    this.deselectRow(index);
+                }else{
+                    this.selectRow(index, true);
+                    this.grid.getView().focusRow(index);
+                }
+            }
+        }
+    },
+
+<span id='Ext-grid-CheckboxSelectionModel-method-onHdMouseDown'>    // private
+</span>    onHdMouseDown : function(e, t) {
+        if(t.className == 'x-grid3-hd-checker'){
+            e.stopEvent();
+            var hd = Ext.fly(t.parentNode);
+            var isChecked = hd.hasClass('x-grid3-hd-checker-on');
+            if(isChecked){
+                hd.removeClass('x-grid3-hd-checker-on');
+                this.clearSelections();
+            }else{
+                hd.addClass('x-grid3-hd-checker-on');
+                this.selectAll();
+            }
+        }
+    },
+
+<span id='Ext-grid-CheckboxSelectionModel-method-renderer'>    // private
+</span>    renderer : function(v, p, record){
+        return '&lt;div class=&quot;x-grid3-row-checker&quot;&gt;&amp;#160;&lt;/div&gt;';
+    },
+    
+<span id='Ext-grid-CheckboxSelectionModel-method-onEditorSelect'>    onEditorSelect: function(row, lastRow){
+</span>        if(lastRow != row &amp;&amp; !this.checkOnly){
+            this.selectRow(row); // *** highlight newly-selected cell and update selection
+        }
+    }
+});</pre>
+</body>
+</html>

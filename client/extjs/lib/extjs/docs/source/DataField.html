@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-data-Field'>/**
+</span> * @class Ext.data.Field
+ * &lt;p&gt;This class encapsulates the field definition information specified in the field definition objects
+ * passed to {@link Ext.data.Record#create}.&lt;/p&gt;
+ * &lt;p&gt;Developers do not need to instantiate this class. Instances are created by {@link Ext.data.Record.create}
+ * and cached in the {@link Ext.data.Record#fields fields} property of the created Record constructor's &lt;b&gt;prototype.&lt;/b&gt;&lt;/p&gt;
+ */
+Ext.data.Field = Ext.extend(Object, {
+    
+<span id='Ext-data-Field-method-constructor'>    constructor : function(config){
+</span>        if(Ext.isString(config)){
+            config = {name: config};
+        }
+        Ext.apply(this, config);
+        
+        var types = Ext.data.Types,
+            st = this.sortType,
+            t;
+
+        if(this.type){
+            if(Ext.isString(this.type)){
+                this.type = Ext.data.Types[this.type.toUpperCase()] || types.AUTO;
+            }
+        }else{
+            this.type = types.AUTO;
+        }
+
+        // named sortTypes are supported, here we look them up
+        if(Ext.isString(st)){
+            this.sortType = Ext.data.SortTypes[st];
+        }else if(Ext.isEmpty(st)){
+            this.sortType = this.type.sortType;
+        }
+
+        if(!this.convert){
+            this.convert = this.type.convert;
+        }
+    },
+    
+<span id='Ext-data-Field-cfg-name'>    /**
+</span>     * @cfg {String} name
+     * The name by which the field is referenced within the Record. This is referenced by, for example,
+     * the &lt;code&gt;dataIndex&lt;/code&gt; property in column definition objects passed to {@link Ext.grid.ColumnModel}.
+     * &lt;p&gt;Note: In the simplest case, if no properties other than &lt;code&gt;name&lt;/code&gt; are required, a field
+     * definition may consist of just a String for the field name.&lt;/p&gt;
+     */
+<span id='Ext-data-Field-cfg-type'>    /**
+</span>     * @cfg {Mixed} type
+     * (Optional) The data type for automatic conversion from received data to the &lt;i&gt;stored&lt;/i&gt; value if &lt;code&gt;{@link Ext.data.Field#convert convert}&lt;/code&gt;
+     * has not been specified. This may be specified as a string value. Possible values are
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;auto (Default, implies no conversion)&lt;/li&gt;
+     * &lt;li&gt;string&lt;/li&gt;
+     * &lt;li&gt;int&lt;/li&gt;
+     * &lt;li&gt;float&lt;/li&gt;
+     * &lt;li&gt;boolean&lt;/li&gt;
+     * &lt;li&gt;date&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+     * &lt;p&gt;This may also be specified by referencing a member of the {@link Ext.data.Types} class.&lt;/p&gt;
+     * &lt;p&gt;Developers may create their own application-specific data types by defining new members of the
+     * {@link Ext.data.Types} class.&lt;/p&gt;
+     */
+<span id='Ext-data-Field-cfg-convert'>    /**
+</span>     * @cfg {Function} convert
+     * (Optional) A function which converts the value provided by the Reader into an object that will be stored
+     * in the Record. It is passed the following parameters:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;v&lt;/b&gt; : Mixed&lt;div class=&quot;sub-desc&quot;&gt;The data value as read by the Reader, if undefined will use
+     * the configured &lt;code&gt;{@link Ext.data.Field#defaultValue defaultValue}&lt;/code&gt;.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;rec&lt;/b&gt; : Mixed&lt;div class=&quot;sub-desc&quot;&gt;The data object containing the row as read by the Reader.
+     * Depending on the Reader type, this could be an Array ({@link Ext.data.ArrayReader ArrayReader}), an object
+     *  ({@link Ext.data.JsonReader JsonReader}), or an XML element ({@link Ext.data.XMLReader XMLReader}).&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * &lt;pre&gt;&lt;code&gt;
+// example of convert function
+function fullName(v, record){
+    return record.name.last + ', ' + record.name.first;
+}
+
+function location(v, record){
+    return !record.city ? '' : (record.city + ', ' + record.state);
+}
+
+var Dude = Ext.data.Record.create([
+    {name: 'fullname',  convert: fullName},
+    {name: 'firstname', mapping: 'name.first'},
+    {name: 'lastname',  mapping: 'name.last'},
+    {name: 'city', defaultValue: 'homeless'},
+    'state',
+    {name: 'location',  convert: location}
+]);
+
+// create the data store
+var store = new Ext.data.Store({
+    reader: new Ext.data.JsonReader(
+        {
+            idProperty: 'key',
+            root: 'daRoot',
+            totalProperty: 'total'
+        },
+        Dude  // recordType
+    )
+});
+
+var myData = [
+    { key: 1,
+      name: { first: 'Fat',    last:  'Albert' }
+      // notice no city, state provided in data object
+    },
+    { key: 2,
+      name: { first: 'Barney', last:  'Rubble' },
+      city: 'Bedrock', state: 'Stoneridge'
+    },
+    { key: 3,
+      name: { first: 'Cliff',  last:  'Claven' },
+      city: 'Boston',  state: 'MA'
+    }
+];
+     * &lt;/code&gt;&lt;/pre&gt;
+     */
+<span id='Ext-data-Field-cfg-dateFormat'>    /**
+</span>     * @cfg {String} dateFormat
+     * &lt;p&gt;(Optional) Used when converting received data into a Date when the {@link #type} is specified as &lt;code&gt;&quot;date&quot;&lt;/code&gt;.&lt;/p&gt;
+     * &lt;p&gt;A format string for the {@link Date#parseDate Date.parseDate} function, or &quot;timestamp&quot; if the
+     * value provided by the Reader is a UNIX timestamp, or &quot;time&quot; if the value provided by the Reader is a
+     * javascript millisecond timestamp. See {@link Date}&lt;/p&gt;
+     */
+    dateFormat: null,
+    
+<span id='Ext-data-Field-cfg-useNull'>    /**
+</span>     * @cfg {Boolean} useNull
+     * &lt;p&gt;(Optional) Use when converting received data into a Number type (either int or float). If the value cannot be parsed,
+     * null will be used if useNull is true, otherwise the value will be 0. Defaults to &lt;tt&gt;false&lt;/tt&gt;
+     */
+    useNull: false,
+    
+<span id='Ext-data-Field-cfg-defaultValue'>    /**
+</span>     * @cfg {Mixed} defaultValue
+     * (Optional) The default value used &lt;b&gt;when a Record is being created by a {@link Ext.data.Reader Reader}&lt;/b&gt;
+     * when the item referenced by the &lt;code&gt;{@link Ext.data.Field#mapping mapping}&lt;/code&gt; does not exist in the data
+     * object (i.e. undefined). (defaults to &quot;&quot;)
+     */
+    defaultValue: &quot;&quot;,
+<span id='Ext-data-Field-cfg-mapping'>    /**
+</span>     * @cfg {String/Number} mapping
+     * &lt;p&gt;(Optional) A path expression for use by the {@link Ext.data.DataReader} implementation
+     * that is creating the {@link Ext.data.Record Record} to extract the Field value from the data object.
+     * If the path expression is the same as the field name, the mapping may be omitted.&lt;/p&gt;
+     * &lt;p&gt;The form of the mapping expression depends on the Reader being used.&lt;/p&gt;
+     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;{@link Ext.data.JsonReader}&lt;div class=&quot;sub-desc&quot;&gt;The mapping is a string containing the javascript
+     * expression to reference the data from an element of the data item's {@link Ext.data.JsonReader#root root} Array. Defaults to the field name.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;{@link Ext.data.XmlReader}&lt;div class=&quot;sub-desc&quot;&gt;The mapping is an {@link Ext.DomQuery} path to the data
+     * item relative to the DOM element that represents the {@link Ext.data.XmlReader#record record}. Defaults to the field name.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;{@link Ext.data.ArrayReader}&lt;div class=&quot;sub-desc&quot;&gt;The mapping is a number indicating the Array index
+     * of the field's value. Defaults to the field specification's Array position.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * &lt;p&gt;If a more complex value extraction strategy is required, then configure the Field with a {@link #convert}
+     * function. This is passed the whole row object, and may interrogate it in whatever way is necessary in order to
+     * return the desired data.&lt;/p&gt;
+     */
+    mapping: null,
+<span id='Ext-data-Field-cfg-sortType'>    /**
+</span>     * @cfg {Function} sortType
+     * (Optional) A function which converts a Field's value to a comparable value in order to ensure
+     * correct sort ordering. Predefined functions are provided in {@link Ext.data.SortTypes}. A custom
+     * sort example:&lt;pre&gt;&lt;code&gt;
+// current sort     after sort we want
+// +-+------+          +-+------+
+// |1|First |          |1|First |
+// |2|Last  |          |3|Second|
+// |3|Second|          |2|Last  |
+// +-+------+          +-+------+
+
+sortType: function(value) {
+   switch (value.toLowerCase()) // native toLowerCase():
+   {
+      case 'first': return 1;
+      case 'second': return 2;
+      default: return 3;
+   }
+}
+     * &lt;/code&gt;&lt;/pre&gt;
+     */
+    sortType : null,
+<span id='Ext-data-Field-cfg-sortDir'>    /**
+</span>     * @cfg {String} sortDir
+     * (Optional) Initial direction to sort (&lt;code&gt;&quot;ASC&quot;&lt;/code&gt; or  &lt;code&gt;&quot;DESC&quot;&lt;/code&gt;).  Defaults to
+     * &lt;code&gt;&quot;ASC&quot;&lt;/code&gt;.
+     */
+    sortDir : &quot;ASC&quot;,
+<span id='Ext-data-Field-cfg-allowBlank'>    /**
+</span>     * @cfg {Boolean} allowBlank
+     * (Optional) Used for validating a {@link Ext.data.Record record}, defaults to &lt;code&gt;true&lt;/code&gt;.
+     * An empty value here will cause {@link Ext.data.Record}.{@link Ext.data.Record#isValid isValid}
+     * to evaluate to &lt;code&gt;false&lt;/code&gt;.
+     */
+    allowBlank : true
+});
+</pre>
+</body>
+</html>

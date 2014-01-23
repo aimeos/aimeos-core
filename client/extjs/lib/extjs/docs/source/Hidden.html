@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-form-Hidden-method-constructor'><span id='Ext-form-Hidden'>/**
+</span></span> * @class Ext.form.Hidden
+ * @extends Ext.form.Field
+ * A basic hidden field for storing hidden values in forms that need to be passed in the form submit.
+ * @constructor
+ * Create a new Hidden field.
+ * @param {Object} config Configuration options
+ * @xtype hidden
+ */
+Ext.form.Hidden = Ext.extend(Ext.form.Field, {
+<span id='Ext-form-Hidden-cfg-inputType'>    // private
+</span>    inputType : 'hidden',
+    
+<span id='Ext-form-Hidden-property-shouldLayout'>    shouldLayout: false,
+</span>
+<span id='Ext-form-Hidden-method-onRender'>    // private
+</span>    onRender : function(){
+        Ext.form.Hidden.superclass.onRender.apply(this, arguments);
+    },
+
+<span id='Ext-form-Hidden-method-initEvents'>    // private
+</span>    initEvents : function(){
+        this.originalValue = this.getValue();
+    },
+
+<span id='Ext-form-Hidden-method-setSize'>    // These are all private overrides
+</span>    setSize : Ext.emptyFn,
+<span id='Ext-form-Hidden-method-setWidth'>    setWidth : Ext.emptyFn,
+</span><span id='Ext-form-Hidden-method-setHeight'>    setHeight : Ext.emptyFn,
+</span><span id='Ext-form-Hidden-method-setPosition'>    setPosition : Ext.emptyFn,
+</span><span id='Ext-form-Hidden-method-setPagePosition'>    setPagePosition : Ext.emptyFn,
+</span><span id='Ext-form-Hidden-method-markInvalid'>    markInvalid : Ext.emptyFn,
+</span><span id='Ext-form-Hidden-method-clearInvalid'>    clearInvalid : Ext.emptyFn
+</span>});
+Ext.reg('hidden', Ext.form.Hidden);</pre>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-form-RadioGroup-method-constructor'><span id='Ext-form-RadioGroup'>/**
+</span></span> * @class Ext.form.RadioGroup
+ * @extends Ext.form.CheckboxGroup
+ * A grouping container for {@link Ext.form.Radio} controls.
+ * @constructor
+ * Creates a new RadioGroup
+ * @param {Object} config Configuration options
+ * @xtype radiogroup
+ */
+Ext.form.RadioGroup = Ext.extend(Ext.form.CheckboxGroup, {
+<span id='Ext-form-RadioGroup-cfg-items'>    /**
+</span>     * @cfg {Array} items An Array of {@link Ext.form.Radio Radio}s or Radio config objects
+     * to arrange in the group.
+     */
+<span id='Ext-form-RadioGroup-cfg-allowBlank'>    /**
+</span>     * @cfg {Boolean} allowBlank True to allow every item in the group to be blank (defaults to true).
+     * If allowBlank = false and no items are selected at validation time, {@link @blankText} will
+     * be used as the error text.
+     */
+    allowBlank : true,
+<span id='Ext-form-RadioGroup-cfg-blankText'>    /**
+</span>     * @cfg {String} blankText Error text to display if the {@link #allowBlank} validation fails
+     * (defaults to 'You must select one item in this group')
+     */
+    blankText : 'You must select one item in this group',
+    
+<span id='Ext-form-RadioGroup-property-defaultType'>    // private
+</span>    defaultType : 'radio',
+    
+<span id='Ext-form-RadioGroup-property-groupCls'>    // private
+</span>    groupCls : 'x-form-radio-group',
+    
+<span id='Ext-form-RadioGroup-event-change'>    /**
+</span>     * @event change
+     * Fires when the state of a child radio changes.
+     * @param {Ext.form.RadioGroup} this
+     * @param {Ext.form.Radio} checked The checked radio
+     */
+    
+<span id='Ext-form-RadioGroup-method-getValue'>    /**
+</span>     * Gets the selected {@link Ext.form.Radio} in the group, if it exists.
+     * @return {Ext.form.Radio} The selected radio.
+     */
+    getValue : function(){
+        var out = null;
+        this.eachItem(function(item){
+            if(item.checked){
+                out = item;
+                return false;
+            }
+        });
+        return out;
+    },
+    
+<span id='Ext-form-RadioGroup-method-onSetValue'>    /**
+</span>     * Sets the checked radio in the group.
+     * @param {String/Ext.form.Radio} id The radio to check.
+     * @param {Boolean} value The value to set the radio.
+     * @return {Ext.form.RadioGroup} this
+     */
+    onSetValue : function(id, value){
+        if(arguments.length &gt; 1){
+            var f = this.getBox(id);
+            if(f){
+                f.setValue(value);
+                if(f.checked){
+                    this.eachItem(function(item){
+                        if (item !== f){
+                            item.setValue(false);
+                        }
+                    });
+                }
+            }
+        }else{
+            this.setValueForItem(id);
+        }
+    },
+    
+<span id='Ext-form-RadioGroup-method-setValueForItem'>    setValueForItem : function(val){
+</span>        val = String(val).split(',')[0];
+        this.eachItem(function(item){
+            item.setValue(val == item.inputValue);
+        });
+    },
+    
+<span id='Ext-form-RadioGroup-method-fireChecked'>    // private
+</span>    fireChecked : function(){
+        if(!this.checkTask){
+            this.checkTask = new Ext.util.DelayedTask(this.bufferChecked, this);
+        }
+        this.checkTask.delay(10);
+    },
+    
+<span id='Ext-form-RadioGroup-method-bufferChecked'>    // private
+</span>    bufferChecked : function(){
+        var out = null;
+        this.eachItem(function(item){
+            if(item.checked){
+                out = item;
+                return false;
+            }
+        });
+        this.fireEvent('change', this, out);
+    },
+    
+<span id='Ext-form-RadioGroup-method-onDestroy'>    onDestroy : function(){
+</span>        if(this.checkTask){
+            this.checkTask.cancel();
+            this.checkTask = null;
+        }
+        Ext.form.RadioGroup.superclass.onDestroy.call(this);
+    }
+
+});
+
+Ext.reg('radiogroup', Ext.form.RadioGroup);
+</pre>
+</body>
+</html>

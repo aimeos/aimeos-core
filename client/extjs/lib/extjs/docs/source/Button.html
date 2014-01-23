@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-Button-method-constructor'><span id='Ext-Button-cfg-repeat'><span id='Ext-Button-cfg-toggleGroup'><span id='Ext-Button-cfg-pressed'><span id='Ext-Button-cfg-disabled'><span id='Ext-Button-cfg-hidden'><span id='Ext-Button-cfg-tooltip'><span id='Ext-Button-cfg-minWidth'><span id='Ext-Button-cfg-handler'><span id='Ext-Button-cfg-icon'><span id='Ext-Button-cfg-text'><span id='Ext-Button'>/**
+</span></span></span></span></span></span></span></span></span></span></span></span> * @class Ext.Button
+ * @extends Ext.BoxComponent
+ * Simple Button class
+ * @cfg {String} text The button text to be used as innerHTML (html tags are accepted)
+ * @cfg {String} icon The path to an image to display in the button (the image will be set as the background-image
+ * CSS property of the button by default, so if you want a mixed icon/text button, set cls:'x-btn-text-icon')
+ * @cfg {Function} handler A function called when the button is clicked (can be used instead of click event).
+ * The handler is passed the following parameters:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;&lt;code&gt;b&lt;/code&gt; : Button&lt;div class=&quot;sub-desc&quot;&gt;This Button.&lt;/div&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;e&lt;/code&gt; : EventObject&lt;div class=&quot;sub-desc&quot;&gt;The click event.&lt;/div&gt;&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ * @cfg {Number} minWidth The minimum width for this button (used to give a set of buttons a common width).
+ * See also {@link Ext.Panel}.&lt;tt&gt;{@link Ext.Panel#minButtonWidth minButtonWidth}&lt;/tt&gt;.
+ * @cfg {String/Object} tooltip The tooltip for the button - can be a string to be used as innerHTML (html tags are accepted) or QuickTips config object
+ * @cfg {Boolean} hidden True to start hidden (defaults to false)
+ * @cfg {Boolean} disabled True to start disabled (defaults to false)
+ * @cfg {Boolean} pressed True to start pressed (only if enableToggle = true)
+ * @cfg {String} toggleGroup The group this toggle button is a member of (only 1 per group can be pressed)
+ * @cfg {Boolean/Object} repeat True to repeat fire the click event while the mouse is down. This can also be
+ * a {@link Ext.util.ClickRepeater ClickRepeater} config object (defaults to false).
+ * @constructor
+ * Create a new button
+ * @param {Object} config The config object
+ * @xtype button
+ */
+Ext.Button = Ext.extend(Ext.BoxComponent, {
+<span id='Ext-Button-property-hidden'>    /**
+</span>     * Read-only. True if this button is hidden
+     * @type Boolean
+     */
+    hidden : false,
+<span id='Ext-Button-property-disabled'>    /**
+</span>     * Read-only. True if this button is disabled
+     * @type Boolean
+     */
+    disabled : false,
+<span id='Ext-Button-property-pressed'>    /**
+</span>     * Read-only. True if this button is pressed (only if enableToggle = true)
+     * @type Boolean
+     */
+    pressed : false,
+
+<span id='Ext-Button-cfg-tabIndex'>    /**
+</span>     * @cfg {Number} tabIndex Set a DOM tabIndex for this button (defaults to undefined)
+     */
+
+<span id='Ext-Button-cfg-allowDepress'>    /**
+</span>     * @cfg {Boolean} allowDepress
+     * False to not allow a pressed Button to be depressed (defaults to undefined). Only valid when {@link #enableToggle} is true.
+     */
+
+<span id='Ext-Button-cfg-enableToggle'>    /**
+</span>     * @cfg {Boolean} enableToggle
+     * True to enable pressed/not pressed toggling (defaults to false)
+     */
+    enableToggle : false,
+<span id='Ext-Button-cfg-toggleHandler'>    /**
+</span>     * @cfg {Function} toggleHandler
+     * Function called when a Button with {@link #enableToggle} set to true is clicked. Two arguments are passed:&lt;ul class=&quot;mdetail-params&quot;&gt;
+     * &lt;li&gt;&lt;b&gt;button&lt;/b&gt; : Ext.Button&lt;div class=&quot;sub-desc&quot;&gt;this Button object&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;state&lt;/b&gt; : Boolean&lt;div class=&quot;sub-desc&quot;&gt;The next state of the Button, true means pressed.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;
+     */
+<span id='Ext-Button-cfg-menu'>    /**
+</span>     * @cfg {Mixed} menu
+     * Standard menu attribute consisting of a reference to a menu object, a menu id or a menu config blob (defaults to undefined).
+     */
+<span id='Ext-Button-cfg-menuAlign'>    /**
+</span>     * @cfg {String} menuAlign
+     * The position to align the menu to (see {@link Ext.Element#alignTo} for more details, defaults to 'tl-bl?').
+     */
+    menuAlign : 'tl-bl?',
+
+<span id='Ext-Button-cfg-overflowText'>    /**
+</span>     * @cfg {String} overflowText If used in a {@link Ext.Toolbar Toolbar}, the
+     * text to be used if this item is shown in the overflow menu. See also
+     * {@link Ext.Toolbar.Item}.&lt;code&gt;{@link Ext.Toolbar.Item#overflowText overflowText}&lt;/code&gt;.
+     */
+<span id='Ext-Button-cfg-iconCls'>    /**
+</span>     * @cfg {String} iconCls
+     * A css class which sets a background image to be used as the icon for this button
+     */
+<span id='Ext-Button-cfg-type'>    /**
+</span>     * @cfg {String} type
+     * submit, reset or button - defaults to 'button'
+     */
+    type : 'button',
+
+<span id='Ext-Button-property-menuClassTarget'>    // private
+</span>    menuClassTarget : 'tr:nth(2)',
+
+<span id='Ext-Button-cfg-clickEvent'>    /**
+</span>     * @cfg {String} clickEvent
+     * The DOM event that will fire the handler of the button. This can be any valid event name (dblclick, contextmenu).
+     * Defaults to &lt;tt&gt;'click'&lt;/tt&gt;.
+     */
+    clickEvent : 'click',
+
+<span id='Ext-Button-cfg-handleMouseEvents'>    /**
+</span>     * @cfg {Boolean} handleMouseEvents
+     * False to disable visual cues on mouseover, mouseout and mousedown (defaults to true)
+     */
+    handleMouseEvents : true,
+
+<span id='Ext-Button-cfg-tooltipType'>    /**
+</span>     * @cfg {String} tooltipType
+     * The type of tooltip to use. Either 'qtip' (default) for QuickTips or 'title' for title attribute.
+     */
+    tooltipType : 'qtip',
+
+<span id='Ext-Button-cfg-buttonSelector'>    /**
+</span>     * @cfg {String} buttonSelector
+     * &lt;p&gt;(Optional) A {@link Ext.DomQuery DomQuery} selector which is used to extract the active, clickable element from the
+     * DOM structure created.&lt;/p&gt;
+     * &lt;p&gt;When a custom {@link #template} is used, you  must ensure that this selector results in the selection of
+     * a focussable element.&lt;/p&gt;
+     * &lt;p&gt;Defaults to &lt;b&gt;&lt;tt&gt;'button:first-child'&lt;/tt&gt;&lt;/b&gt;.&lt;/p&gt;
+     */
+    buttonSelector : 'button:first-child',
+
+<span id='Ext-Button-cfg-scale'>    /**
+</span>     * @cfg {String} scale
+     * &lt;p&gt;(Optional) The size of the Button. Three values are allowed:&lt;/p&gt;
+     * &lt;ul class=&quot;mdetail-params&quot;&gt;
+     * &lt;li&gt;'small'&lt;div class=&quot;sub-desc&quot;&gt;Results in the button element being 16px high.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;'medium'&lt;div class=&quot;sub-desc&quot;&gt;Results in the button element being 24px high.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;'large'&lt;div class=&quot;sub-desc&quot;&gt;Results in the button element being 32px high.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;
+     * &lt;p&gt;Defaults to &lt;b&gt;&lt;tt&gt;'small'&lt;/tt&gt;&lt;/b&gt;.&lt;/p&gt;
+     */
+    scale : 'small',
+
+<span id='Ext-Button-cfg-scope'>    /**
+</span>     * @cfg {Object} scope The scope (&lt;tt&gt;&lt;b&gt;this&lt;/b&gt;&lt;/tt&gt; reference) in which the
+     * &lt;code&gt;{@link #handler}&lt;/code&gt; and &lt;code&gt;{@link #toggleHandler}&lt;/code&gt; is
+     * executed. Defaults to this Button.
+     */
+
+<span id='Ext-Button-cfg-iconAlign'>    /**
+</span>     * @cfg {String} iconAlign
+     * &lt;p&gt;(Optional) The side of the Button box to render the icon. Four values are allowed:&lt;/p&gt;
+     * &lt;ul class=&quot;mdetail-params&quot;&gt;
+     * &lt;li&gt;'top'&lt;div class=&quot;sub-desc&quot;&gt;&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;'right'&lt;div class=&quot;sub-desc&quot;&gt;&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;'bottom'&lt;div class=&quot;sub-desc&quot;&gt;&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;'left'&lt;div class=&quot;sub-desc&quot;&gt;&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;
+     * &lt;p&gt;Defaults to &lt;b&gt;&lt;tt&gt;'left'&lt;/tt&gt;&lt;/b&gt;.&lt;/p&gt;
+     */
+    iconAlign : 'left',
+
+<span id='Ext-Button-cfg-arrowAlign'>    /**
+</span>     * @cfg {String} arrowAlign
+     * &lt;p&gt;(Optional) The side of the Button box to render the arrow if the button has an associated {@link #menu}.
+     * Two values are allowed:&lt;/p&gt;
+     * &lt;ul class=&quot;mdetail-params&quot;&gt;
+     * &lt;li&gt;'right'&lt;div class=&quot;sub-desc&quot;&gt;&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;'bottom'&lt;div class=&quot;sub-desc&quot;&gt;&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;
+     * &lt;p&gt;Defaults to &lt;b&gt;&lt;tt&gt;'right'&lt;/tt&gt;&lt;/b&gt;.&lt;/p&gt;
+     */
+    arrowAlign : 'right',
+
+<span id='Ext-Button-property-template'>    /**
+</span>     * @cfg {Ext.Template} template (Optional)
+     * &lt;p&gt;A {@link Ext.Template Template} used to create the Button's DOM structure.&lt;/p&gt;
+     * Instances, or subclasses which need a different DOM structure may provide a different
+     * template layout in conjunction with an implementation of {@link #getTemplateArgs}.
+     * @type Ext.Template
+     * @property template
+     */
+<span id='Ext-Button-cfg-cls'>    /**
+</span>     * @cfg {String} cls
+     * A CSS class string to apply to the button's main element.
+     */
+<span id='Ext-Button-property-menu'>    /**
+</span>     * @property menu
+     * @type Menu
+     * The {@link Ext.menu.Menu Menu} object associated with this Button when configured with the {@link #menu} config option.
+     */
+<span id='Ext-Button-cfg-autoWidth'>    /**
+</span>     * @cfg {Boolean} autoWidth
+     * By default, if a width is not specified the button will attempt to stretch horizontally to fit its content.
+     * If the button is being managed by a width sizing layout (hbox, fit, anchor), set this to false to prevent
+     * the button from doing this automatic sizing.
+     * Defaults to &lt;tt&gt;undefined&lt;/tt&gt;.
+     */
+
+    initComponent : function(){
+        if(this.menu){
+            // If array of items, turn it into an object config so we
+            // can set the ownerCt property in the config
+            if (Ext.isArray(this.menu)){
+                this.menu = { items: this.menu };
+            }
+            
+            // An object config will work here, but an instance of a menu
+            // will have already setup its ref's and have no effect
+            if (Ext.isObject(this.menu)){
+                this.menu.ownerCt = this;
+            }
+            
+            this.menu = Ext.menu.MenuMgr.get(this.menu);
+            this.menu.ownerCt = undefined;
+        }
+        
+        Ext.Button.superclass.initComponent.call(this);
+
+        this.addEvents(
+<span id='Ext-Button-event-click'>            /**
+</span>             * @event click
+             * Fires when this button is clicked
+             * @param {Button} this
+             * @param {EventObject} e The click event
+             */
+            'click',
+<span id='Ext-Button-event-toggle'>            /**
+</span>             * @event toggle
+             * Fires when the 'pressed' state of this button changes (only if enableToggle = true)
+             * @param {Button} this
+             * @param {Boolean} pressed
+             */
+            'toggle',
+<span id='Ext-Button-event-mouseover'>            /**
+</span>             * @event mouseover
+             * Fires when the mouse hovers over the button
+             * @param {Button} this
+             * @param {Event} e The event object
+             */
+            'mouseover',
+<span id='Ext-Button-event-mouseout'>            /**
+</span>             * @event mouseout
+             * Fires when the mouse exits the button
+             * @param {Button} this
+             * @param {Event} e The event object
+             */
+            'mouseout',
+<span id='Ext-Button-event-menushow'>            /**
+</span>             * @event menushow
+             * If this button has a menu, this event fires when it is shown
+             * @param {Button} this
+             * @param {Menu} menu
+             */
+            'menushow',
+<span id='Ext-Button-event-menuhide'>            /**
+</span>             * @event menuhide
+             * If this button has a menu, this event fires when it is hidden
+             * @param {Button} this
+             * @param {Menu} menu
+             */
+            'menuhide',
+<span id='Ext-Button-event-menutriggerover'>            /**
+</span>             * @event menutriggerover
+             * If this button has a menu, this event fires when the mouse enters the menu triggering element
+             * @param {Button} this
+             * @param {Menu} menu
+             * @param {EventObject} e
+             */
+            'menutriggerover',
+<span id='Ext-Button-event-menutriggerout'>            /**
+</span>             * @event menutriggerout
+             * If this button has a menu, this event fires when the mouse leaves the menu triggering element
+             * @param {Button} this
+             * @param {Menu} menu
+             * @param {EventObject} e
+             */
+            'menutriggerout'
+        );
+        
+        if(Ext.isString(this.toggleGroup)){
+            this.enableToggle = true;
+        }
+    },
+
+<span id='Ext-Button-method-getTemplateArgs'>/**
+</span>  * &lt;p&gt;This method returns an Array which provides substitution parameters for the {@link #template Template} used
+  * to create this Button's DOM structure.&lt;/p&gt;
+  * &lt;p&gt;Instances or subclasses which use a different Template to create a different DOM structure may need to provide their
+  * own implementation of this method.&lt;/p&gt;
+  * &lt;p&gt;The default implementation which provides data for the default {@link #template} returns an Array containing the
+  * following items:&lt;/p&gt;&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+  * &lt;li&gt;The &amp;lt;button&amp;gt;'s {@link #type}&lt;/li&gt;
+  * &lt;li&gt;A CSS class name applied to the Button's main &amp;lt;tbody&amp;gt; element which determines the button's scale and icon alignment.&lt;/li&gt;
+  * &lt;li&gt;A CSS class to determine the presence and position of an arrow icon. (&lt;code&gt;'x-btn-arrow'&lt;/code&gt; or &lt;code&gt;'x-btn-arrow-bottom'&lt;/code&gt; or &lt;code&gt;''&lt;/code&gt;)&lt;/li&gt;
+  * &lt;li&gt;The {@link #cls} CSS class name applied to the button's wrapping &amp;lt;table&amp;gt; element.&lt;/li&gt;
+  * &lt;li&gt;The Component id which is applied to the button's wrapping &amp;lt;table&amp;gt; element.&lt;/li&gt;
+  * &lt;/ul&gt;&lt;/div&gt;
+  * @return {Array} Substitution data for a Template.
+ */
+    getTemplateArgs : function(){
+        return [this.type, 'x-btn-' + this.scale + ' x-btn-icon-' + this.scale + '-' + this.iconAlign, this.getMenuClass(), this.cls, this.id];
+    },
+
+<span id='Ext-Button-method-setButtonClass'>    // private
+</span>    setButtonClass : function(){
+        if(this.useSetClass){
+            if(!Ext.isEmpty(this.oldCls)){
+                this.el.removeClass([this.oldCls, 'x-btn-pressed']);
+            }
+            this.oldCls = (this.iconCls || this.icon) ? (this.text ? 'x-btn-text-icon' : 'x-btn-icon') : 'x-btn-noicon';
+            this.el.addClass([this.oldCls, this.pressed ? 'x-btn-pressed' : null]);
+        }
+    },
+
+<span id='Ext-Button-method-getMenuClass'>    // protected
+</span>    getMenuClass : function(){
+        return this.menu ? (this.arrowAlign != 'bottom' ? 'x-btn-arrow' : 'x-btn-arrow-bottom') : '';
+    },
+
+<span id='Ext-Button-method-onRender'>    // private
+</span>    onRender : function(ct, position){
+        if(!this.template){
+            if(!Ext.Button.buttonTemplate){
+                // hideous table template
+                Ext.Button.buttonTemplate = new Ext.Template(
+                    '&lt;table id=&quot;{4}&quot; cellspacing=&quot;0&quot; class=&quot;x-btn {3}&quot;&gt;&lt;tbody class=&quot;{1}&quot;&gt;',
+                    '&lt;tr&gt;&lt;td class=&quot;x-btn-tl&quot;&gt;&lt;i&gt;&amp;#160;&lt;/i&gt;&lt;/td&gt;&lt;td class=&quot;x-btn-tc&quot;&gt;&lt;/td&gt;&lt;td class=&quot;x-btn-tr&quot;&gt;&lt;i&gt;&amp;#160;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;',
+                    '&lt;tr&gt;&lt;td class=&quot;x-btn-ml&quot;&gt;&lt;i&gt;&amp;#160;&lt;/i&gt;&lt;/td&gt;&lt;td class=&quot;x-btn-mc&quot;&gt;&lt;em class=&quot;{2} x-unselectable&quot; unselectable=&quot;on&quot;&gt;&lt;button type=&quot;{0}&quot;&gt;&lt;/button&gt;&lt;/em&gt;&lt;/td&gt;&lt;td class=&quot;x-btn-mr&quot;&gt;&lt;i&gt;&amp;#160;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;',
+                    '&lt;tr&gt;&lt;td class=&quot;x-btn-bl&quot;&gt;&lt;i&gt;&amp;#160;&lt;/i&gt;&lt;/td&gt;&lt;td class=&quot;x-btn-bc&quot;&gt;&lt;/td&gt;&lt;td class=&quot;x-btn-br&quot;&gt;&lt;i&gt;&amp;#160;&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;',
+                    '&lt;/tbody&gt;&lt;/table&gt;');
+                Ext.Button.buttonTemplate.compile();
+            }
+            this.template = Ext.Button.buttonTemplate;
+        }
+
+        var btn, targs = this.getTemplateArgs();
+
+        if(position){
+            btn = this.template.insertBefore(position, targs, true);
+        }else{
+            btn = this.template.append(ct, targs, true);
+        }
+<span id='Ext-Button-property-btnEl'>        /**
+</span>         * An {@link Ext.Element Element} encapsulating the Button's clickable element. By default,
+         * this references a &lt;tt&gt;&amp;lt;button&amp;gt;&lt;/tt&gt; element. Read only.
+         * @type Ext.Element
+         * @property btnEl
+         */
+        this.btnEl = btn.child(this.buttonSelector);
+        this.mon(this.btnEl, {
+            scope: this,
+            focus: this.onFocus,
+            blur: this.onBlur
+        });
+
+        this.initButtonEl(btn, this.btnEl);
+
+        Ext.ButtonToggleMgr.register(this);
+    },
+
+<span id='Ext-Button-method-initButtonEl'>    // private
+</span>    initButtonEl : function(btn, btnEl){
+        this.el = btn;
+        this.setIcon(this.icon);
+        this.setText(this.text);
+        this.setIconClass(this.iconCls);
+        if(Ext.isDefined(this.tabIndex)){
+            btnEl.dom.tabIndex = this.tabIndex;
+        }
+        if(this.tooltip){
+            this.setTooltip(this.tooltip, true);
+        }
+
+        if(this.handleMouseEvents){
+            this.mon(btn, {
+                scope: this,
+                mouseover: this.onMouseOver,
+                mousedown: this.onMouseDown
+            });
+
+            // new functionality for monitoring on the document level
+            //this.mon(btn, 'mouseout', this.onMouseOut, this);
+        }
+
+        if(this.menu){
+            this.mon(this.menu, {
+                scope: this,
+                show: this.onMenuShow,
+                hide: this.onMenuHide
+            });
+        }
+
+        if(this.repeat){
+            var repeater = new Ext.util.ClickRepeater(btn, Ext.isObject(this.repeat) ? this.repeat : {});
+            this.mon(repeater, 'click', this.onRepeatClick, this);
+        }else{
+            this.mon(btn, this.clickEvent, this.onClick, this);
+        }
+    },
+
+<span id='Ext-Button-method-afterRender'>    // private
+</span>    afterRender : function(){
+        Ext.Button.superclass.afterRender.call(this);
+        this.useSetClass = true;
+        this.setButtonClass();
+        this.doc = Ext.getDoc();
+        this.doAutoWidth();
+    },
+
+<span id='Ext-Button-method-setIconClass'>    /**
+</span>     * Sets the CSS class that provides a background image to use as the button's icon.  This method also changes
+     * the value of the {@link iconCls} config internally.
+     * @param {String} cls The CSS class providing the icon image
+     * @return {Ext.Button} this
+     */
+    setIconClass : function(cls){
+        this.iconCls = cls;
+        if(this.el){
+            this.btnEl.dom.className = '';
+            this.btnEl.addClass(['x-btn-text', cls || '']);
+            this.setButtonClass();
+        }
+        return this;
+    },
+
+<span id='Ext-Button-method-setTooltip'>    /**
+</span>     * Sets the tooltip for this Button.
+     * @param {String/Object} tooltip. This may be:&lt;div class=&quot;mdesc-details&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;String&lt;/b&gt; : A string to be used as innerHTML (html tags are accepted) to show in a tooltip&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;Object&lt;/b&gt; : A configuration object for {@link Ext.QuickTips#register}.&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     * @return {Ext.Button} this
+     */
+    setTooltip : function(tooltip, /* private */ initial){
+        if(this.rendered){
+            if(!initial){
+                this.clearTip();
+            }
+            if(Ext.isObject(tooltip)){
+                Ext.QuickTips.register(Ext.apply({
+                      target: this.btnEl.id
+                }, tooltip));
+                this.tooltip = tooltip;
+            }else{
+                this.btnEl.dom[this.tooltipType] = tooltip;
+            }
+        }else{
+            this.tooltip = tooltip;
+        }
+        return this;
+    },
+
+<span id='Ext-Button-method-clearTip'>    // private
+</span>    clearTip : function(){
+        if(Ext.isObject(this.tooltip)){
+            Ext.QuickTips.unregister(this.btnEl);
+        }
+    },
+
+<span id='Ext-Button-method-beforeDestroy'>    // private
+</span>    beforeDestroy : function(){
+        if(this.rendered){
+            this.clearTip();
+        }
+        if(this.menu &amp;&amp; this.destroyMenu !== false) {
+            Ext.destroy(this.btnEl, this.menu);
+        }
+        Ext.destroy(this.repeater);
+    },
+
+<span id='Ext-Button-method-onDestroy'>    // private
+</span>    onDestroy : function(){
+        if(this.rendered){
+            this.doc.un('mouseover', this.monitorMouseOver, this);
+            this.doc.un('mouseup', this.onMouseUp, this);
+            delete this.doc;
+            delete this.btnEl;
+            Ext.ButtonToggleMgr.unregister(this);
+        }
+        Ext.Button.superclass.onDestroy.call(this);
+    },
+
+<span id='Ext-Button-method-doAutoWidth'>    // private
+</span>    doAutoWidth : function(){
+        if(this.autoWidth !== false &amp;&amp; this.el &amp;&amp; this.text &amp;&amp; this.width === undefined){
+            this.el.setWidth('auto');
+            if(Ext.isIE7 &amp;&amp; Ext.isStrict){
+                var ib = this.btnEl;
+                if(ib &amp;&amp; ib.getWidth() &gt; 20){
+                    ib.clip();
+                    ib.setWidth(Ext.util.TextMetrics.measure(ib, this.text).width+ib.getFrameWidth('lr'));
+                }
+            }
+            if(this.minWidth){
+                if(this.el.getWidth() &lt; this.minWidth){
+                    this.el.setWidth(this.minWidth);
+                }
+            }
+        }
+    },
+
+<span id='Ext-Button-method-setHandler'>    /**
+</span>     * Assigns this Button's click handler
+     * @param {Function} handler The function to call when the button is clicked
+     * @param {Object} scope (optional) The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the handler function is executed.
+     * Defaults to this Button.
+     * @return {Ext.Button} this
+     */
+    setHandler : function(handler, scope){
+        this.handler = handler;
+        this.scope = scope;
+        return this;
+    },
+
+<span id='Ext-Button-method-setText'>    /**
+</span>     * Sets this Button's text
+     * @param {String} text The button text
+     * @return {Ext.Button} this
+     */
+    setText : function(text){
+        this.text = text;
+        if(this.el){
+            this.btnEl.update(text || '&amp;#160;');
+            this.setButtonClass();
+        }
+        this.doAutoWidth();
+        return this;
+    },
+
+<span id='Ext-Button-method-setIcon'>    /**
+</span>     * Sets the background image (inline style) of the button.  This method also changes
+     * the value of the {@link icon} config internally.
+     * @param {String} icon The path to an image to display in the button
+     * @return {Ext.Button} this
+     */
+    setIcon : function(icon){
+        this.icon = icon;
+        if(this.el){
+            this.btnEl.setStyle('background-image', icon ? 'url(' + icon + ')' : '');
+            this.setButtonClass();
+        }
+        return this;
+    },
+
+<span id='Ext-Button-method-getText'>    /**
+</span>     * Gets the text for this Button
+     * @return {String} The button text
+     */
+    getText : function(){
+        return this.text;
+    },
+
+<span id='Ext-Button-method-toggle'>    /**
+</span>     * If a state it passed, it becomes the pressed state otherwise the current state is toggled.
+     * @param {Boolean} state (optional) Force a particular state
+     * @param {Boolean} supressEvent (optional) True to stop events being fired when calling this method.
+     * @return {Ext.Button} this
+     */
+    toggle : function(state, suppressEvent){
+        state = state === undefined ? !this.pressed : !!state;
+        if(state != this.pressed){
+            if(this.rendered){
+                this.el[state ? 'addClass' : 'removeClass']('x-btn-pressed');
+            }
+            this.pressed = state;
+            if(!suppressEvent){
+                this.fireEvent('toggle', this, state);
+                if(this.toggleHandler){
+                    this.toggleHandler.call(this.scope || this, this, state);
+                }
+            }
+        }
+        return this;
+    },
+
+<span id='Ext-Button-method-onDisable'>    // private
+</span>    onDisable : function(){
+        this.onDisableChange(true);
+    },
+
+<span id='Ext-Button-method-onEnable'>    // private
+</span>    onEnable : function(){
+        this.onDisableChange(false);
+    },
+
+<span id='Ext-Button-method-onDisableChange'>    onDisableChange : function(disabled){
+</span>        if(this.el){
+            if(!Ext.isIE6 || !this.text){
+                this.el[disabled ? 'addClass' : 'removeClass'](this.disabledClass);
+            }
+            this.el.dom.disabled = disabled;
+        }
+        this.disabled = disabled;
+    },
+
+<span id='Ext-Button-method-showMenu'>    /**
+</span>     * Show this button's menu (if it has one)
+     */
+    showMenu : function(){
+        if(this.rendered &amp;&amp; this.menu){
+            if(this.tooltip){
+                Ext.QuickTips.getQuickTip().cancelShow(this.btnEl);
+            }
+            if(this.menu.isVisible()){
+                this.menu.hide();
+            }
+            this.menu.ownerCt = this;
+            this.menu.show(this.el, this.menuAlign);
+        }
+        return this;
+    },
+
+<span id='Ext-Button-method-hideMenu'>    /**
+</span>     * Hide this button's menu (if it has one)
+     */
+    hideMenu : function(){
+        if(this.hasVisibleMenu()){
+            this.menu.hide();
+        }
+        return this;
+    },
+
+<span id='Ext-Button-method-hasVisibleMenu'>    /**
+</span>     * Returns true if the button has a menu and it is visible
+     * @return {Boolean}
+     */
+    hasVisibleMenu : function(){
+        return this.menu &amp;&amp; this.menu.ownerCt == this &amp;&amp; this.menu.isVisible();
+    },
+    
+<span id='Ext-Button-method-onRepeatClick'>    // private
+</span>    onRepeatClick : function(repeat, e){
+        this.onClick(e);
+    },
+
+<span id='Ext-Button-method-onClick'>    // private
+</span>    onClick : function(e){
+        if(e){
+            e.preventDefault();
+        }
+        if(e.button !== 0){
+            return;
+        }
+        if(!this.disabled){
+            this.doToggle();
+            if(this.menu &amp;&amp; !this.hasVisibleMenu() &amp;&amp; !this.ignoreNextClick){
+                this.showMenu();
+            }
+            this.fireEvent('click', this, e);
+            if(this.handler){
+                //this.el.removeClass('x-btn-over');
+                this.handler.call(this.scope || this, this, e);
+            }
+        }
+    },
+    
+<span id='Ext-Button-method-doToggle'>    // private
+</span>    doToggle: function(){
+        if (this.enableToggle &amp;&amp; (this.allowDepress !== false || !this.pressed)) {
+            this.toggle();
+        }
+    },
+
+<span id='Ext-Button-method-isMenuTriggerOver'>    // private
+</span>    isMenuTriggerOver : function(e, internal){
+        return this.menu &amp;&amp; !internal;
+    },
+
+<span id='Ext-Button-method-isMenuTriggerOut'>    // private
+</span>    isMenuTriggerOut : function(e, internal){
+        return this.menu &amp;&amp; !internal;
+    },
+
+<span id='Ext-Button-method-onMouseOver'>    // private
+</span>    onMouseOver : function(e){
+        if(!this.disabled){
+            var internal = e.within(this.el,  true);
+            if(!internal){
+                this.el.addClass('x-btn-over');
+                if(!this.monitoringMouseOver){
+                    this.doc.on('mouseover', this.monitorMouseOver, this);
+                    this.monitoringMouseOver = true;
+                }
+                this.fireEvent('mouseover', this, e);
+            }
+            if(this.isMenuTriggerOver(e, internal)){
+                this.fireEvent('menutriggerover', this, this.menu, e);
+            }
+        }
+    },
+
+<span id='Ext-Button-method-monitorMouseOver'>    // private
+</span>    monitorMouseOver : function(e){
+        if(e.target != this.el.dom &amp;&amp; !e.within(this.el)){
+            if(this.monitoringMouseOver){
+                this.doc.un('mouseover', this.monitorMouseOver, this);
+                this.monitoringMouseOver = false;
+            }
+            this.onMouseOut(e);
+        }
+    },
+
+<span id='Ext-Button-method-onMouseOut'>    // private
+</span>    onMouseOut : function(e){
+        var internal = e.within(this.el) &amp;&amp; e.target != this.el.dom;
+        this.el.removeClass('x-btn-over');
+        this.fireEvent('mouseout', this, e);
+        if(this.isMenuTriggerOut(e, internal)){
+            this.fireEvent('menutriggerout', this, this.menu, e);
+        }
+    },
+
+<span id='Ext-Button-method-focus'>    focus : function() {
+</span>        this.btnEl.focus();
+    },
+
+<span id='Ext-Button-method-blur'>    blur : function() {
+</span>        this.btnEl.blur();
+    },
+
+<span id='Ext-Button-method-onFocus'>    // private
+</span>    onFocus : function(e){
+        if(!this.disabled){
+            this.el.addClass('x-btn-focus');
+        }
+    },
+<span id='Ext-Button-method-onBlur'>    // private
+</span>    onBlur : function(e){
+        this.el.removeClass('x-btn-focus');
+    },
+
+<span id='Ext-Button-method-getClickEl'>    // private
+</span>    getClickEl : function(e, isUp){
+       return this.el;
+    },
+
+<span id='Ext-Button-method-onMouseDown'>    // private
+</span>    onMouseDown : function(e){
+        if(!this.disabled &amp;&amp; e.button === 0){
+            this.getClickEl(e).addClass('x-btn-click');
+            this.doc.on('mouseup', this.onMouseUp, this);
+        }
+    },
+<span id='Ext-Button-method-onMouseUp'>    // private
+</span>    onMouseUp : function(e){
+        if(e.button === 0){
+            this.getClickEl(e, true).removeClass('x-btn-click');
+            this.doc.un('mouseup', this.onMouseUp, this);
+        }
+    },
+<span id='Ext-Button-method-onMenuShow'>    // private
+</span>    onMenuShow : function(e){
+        if(this.menu.ownerCt == this){
+            this.menu.ownerCt = this;
+            this.ignoreNextClick = 0;
+            this.el.addClass('x-btn-menu-active');
+            this.fireEvent('menushow', this, this.menu);
+        }
+    },
+<span id='Ext-Button-method-onMenuHide'>    // private
+</span>    onMenuHide : function(e){
+        if(this.menu.ownerCt == this){
+            this.el.removeClass('x-btn-menu-active');
+            this.ignoreNextClick = this.restoreClick.defer(250, this);
+            this.fireEvent('menuhide', this, this.menu);
+            delete this.menu.ownerCt;
+        }
+    },
+
+<span id='Ext-Button-method-restoreClick'>    // private
+</span>    restoreClick : function(){
+        this.ignoreNextClick = 0;
+    }
+
+<span id='Ext-Button-cfg-autoEl'>    /**
+</span>     * @cfg {String} autoEl @hide
+     */
+<span id='Ext-Button-cfg-html'>    /**
+</span>     * @cfg {String/Object} html @hide
+     */
+<span id='Ext-Button-cfg-contentEl'>    /**
+</span>     * @cfg {String} contentEl  @hide
+     */
+<span id='Ext-Button-cfg-data'>    /**
+</span>     * @cfg {Mixed} data  @hide
+     */
+<span id='Ext-Button-cfg-tpl'>    /**
+</span>     * @cfg {Mixed} tpl  @hide
+     */
+<span id='Ext-Button-cfg-tplWriteMode'>    /**
+</span>     * @cfg {String} tplWriteMode  @hide
+     */
+});
+Ext.reg('button', Ext.Button);
+
+// Private utility class used by Button
+Ext.ButtonToggleMgr = function(){
+   var groups = {};
+
+   function toggleGroup(btn, state){
+       if(state){
+           var g = groups[btn.toggleGroup];
+           for(var i = 0, l = g.length; i &lt; l; i++){
+               if(g[i] != btn){
+                   g[i].toggle(false);
+               }
+           }
+       }
+   }
+
+   return {
+       register : function(btn){
+           if(!btn.toggleGroup){
+               return;
+           }
+           var g = groups[btn.toggleGroup];
+           if(!g){
+               g = groups[btn.toggleGroup] = [];
+           }
+           g.push(btn);
+           btn.on('toggle', toggleGroup);
+       },
+
+       unregister : function(btn){
+           if(!btn.toggleGroup){
+               return;
+           }
+           var g = groups[btn.toggleGroup];
+           if(g){
+               g.remove(btn);
+               btn.un('toggle', toggleGroup);
+           }
+       },
+
+<span id='Ext-Button-method-getPressed'>       /**
+</span>        * Gets the pressed button in the passed group or null
+        * @param {String} group
+        * @return Button
+        */
+       getPressed : function(group){
+           var g = groups[group];
+           if(g){
+               for(var i = 0, len = g.length; i &lt; len; i++){
+                   if(g[i].pressed === true){
+                       return g[i];
+                   }
+               }
+           }
+           return null;
+       }
+   };
+}();
+</pre>
+</body>
+</html>

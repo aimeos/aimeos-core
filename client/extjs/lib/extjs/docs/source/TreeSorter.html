@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-tree-TreeSorter-method-constructor'><span id='Ext-tree-TreeSorter'>/**
+</span></span> * @class Ext.tree.TreeSorter
+ * Provides sorting of nodes in a {@link Ext.tree.TreePanel}.  The TreeSorter automatically monitors events on the
+ * associated TreePanel that might affect the tree's sort order (beforechildrenrendered, append, insert and textchange).
+ * Example usage:&lt;br /&gt;
+ * &lt;pre&gt;&lt;code&gt;
+new Ext.tree.TreeSorter(myTree, {
+    folderSort: true,
+    dir: &quot;desc&quot;,
+    sortType: function(value, node) {
+        // sort by a custom, typed attribute:
+        return parseInt(node.id, 10);
+    }
+});
+&lt;/code&gt;&lt;/pre&gt;
+ * @constructor
+ * @param {TreePanel} tree
+ * @param {Object} config
+ */
+Ext.tree.TreeSorter = Ext.extend(Object, {
+    
+    constructor: function(tree, config){
+<span id='Ext-tree-TreeSorter-cfg-folderSort'>        /**
+</span>     * @cfg {Boolean} folderSort True to sort leaf nodes under non-leaf nodes (defaults to false)
+     */
+<span id='Ext-tree-TreeSorter-cfg-property'>    /**
+</span>     * @cfg {String} property The named attribute on the node to sort by (defaults to &quot;text&quot;).  Note that this
+     * property is only used if no {@link #sortType} function is specified, otherwise it is ignored.
+     */
+<span id='Ext-tree-TreeSorter-cfg-dir'>    /**
+</span>     * @cfg {String} dir The direction to sort (&quot;asc&quot; or &quot;desc,&quot; case-insensitive, defaults to &quot;asc&quot;)
+     */
+<span id='Ext-tree-TreeSorter-cfg-leafAttr'>    /**
+</span>     * @cfg {String} leafAttr The attribute used to determine leaf nodes when {@link #folderSort} = true (defaults to &quot;leaf&quot;)
+     */
+<span id='Ext-tree-TreeSorter-cfg-caseSensitive'>    /**
+</span>     * @cfg {Boolean} caseSensitive true for case-sensitive sort (defaults to false)
+     */
+<span id='Ext-tree-TreeSorter-cfg-sortType'>    /**
+</span>     * @cfg {Function} sortType A custom &quot;casting&quot; function used to convert node values before sorting.  The function
+     * will be called with a two parameters, the {@link #property} value for the node and the {@link Ext.tree.TreeNode} being evaluated. 
+     * It is expected to return the node's sort value cast to the specific data type required for sorting.  This could be used, for example, when
+     * a node's text (or other attribute) should be sorted as a date or numeric value.  See the class description for
+     * example usage.
+     */
+
+    Ext.apply(this, config);
+    tree.on({
+        scope: this,
+        beforechildrenrendered: this.doSort,
+        append: this.updateSort,
+        insert: this.updateSort,
+        textchange: this.updateSortParent
+    });
+
+    var desc = this.dir &amp;&amp; this.dir.toLowerCase() == 'desc',
+        prop = this.property || 'text',
+        sortType = this.sortType,
+        folderSort = this.folderSort,
+        caseSensitive = this.caseSensitive === true,
+        leafAttr = this.leafAttr || 'leaf';
+
+    if(Ext.isString(sortType)){
+        sortType = Ext.data.SortTypes[sortType];
+    }
+    this.sortFn = function(n1, n2){
+        var attr1 = n1.attributes,
+            attr2 = n2.attributes;
+            
+        if(folderSort){
+            if(attr1[leafAttr] &amp;&amp; !attr2[leafAttr]){
+                return 1;
+            }
+            if(!attr1[leafAttr] &amp;&amp; attr2[leafAttr]){
+                return -1;
+            }
+        }
+        var prop1 = attr1[prop],
+            prop2 = attr2[prop],
+            v1 = sortType ? sortType(prop1, n1) : (caseSensitive ? prop1 : prop1.toUpperCase()),
+            v2 = sortType ? sortType(prop2, n2) : (caseSensitive ? prop2 : prop2.toUpperCase());
+            
+        if(v1 &lt; v2){
+            return desc ? 1 : -1;
+        }else if(v1 &gt; v2){
+            return desc ? -1 : 1;
+        }
+        return 0;
+    };
+    },
+    
+<span id='Ext-tree-TreeSorter-method-doSort'>    doSort : function(node){
+</span>        node.sort(this.sortFn);
+    },
+
+<span id='Ext-tree-TreeSorter-method-updateSort'>    updateSort : function(tree, node){
+</span>        if(node.childrenRendered){
+            this.doSort.defer(1, this, [node]);
+        }
+    },
+
+<span id='Ext-tree-TreeSorter-method-updateSortParent'>    updateSortParent : function(node){
+</span>        var p = node.parentNode;
+        if(p &amp;&amp; p.childrenRendered){
+            this.doSort.defer(1, this, [p]);
+        }
+    }    
+});
+</pre>
+</body>
+</html>
