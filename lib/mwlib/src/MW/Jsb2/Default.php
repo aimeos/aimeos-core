@@ -89,7 +89,7 @@ class MW_Jsb2_Default
 				}
 
 				if( $usePackage === true) {
-					$filesToDisplay = array( $packageFileURL );
+					$filesToDisplay = array( $packageFileURL . '?v=' . $packageFileTime );
 				}
 
 				foreach( $filesToDisplay as $singleFile )
