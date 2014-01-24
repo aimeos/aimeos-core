@@ -2111,6 +2111,29 @@ Ext.util.JSON.encodeDate = function( o ) {
     	pad(o.getMinutes()) + ":" +
     	pad(o.getSeconds()) + '"';
 };
+
+/*
+ * Fix for wrong width calculations
+ * 
+ * Thanks to uwolfer:
+ *  http://www.sencha.com/forum/showthread.php?198124-Grids-are-rendered-differently-in-upcoming-versions-of-Google-Chrome/page6
+ */
+if (Ext.isWebKit && Ext.webKitVersion >= 535.2) { // probably not the exact version, but the issues started appearing in chromium 19
+    Ext.override(Ext.grid.ColumnModel, {
+        getTotalWidth: function (includeHidden) {
+            if (!this.totalWidth) {
+                var boxsizeadj = 2;
+                this.totalWidth = 0;
+                for (var i = 0, len = this.config.length; i < len; i++) {
+                    if (includeHidden || !this.isHidden(i)) {
+                        this.totalWidth += (this.getColumnWidth(i) + boxsizeadj);
+                    }
+                }
+            }
+            return this.totalWidth;
+        }
+    });
+}
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
@@ -2434,6 +2457,12 @@ Ext.onReady(function() {
             }]
         }]
     });
+    
+    /*
+     * Apply scrolling fix for Chrome
+     * Have a look at ext-override.js
+     */
+    Ext.get(document.body).addClass('ext-chrome-fixes');
 });
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
@@ -2832,406 +2861,390 @@ MShop.elements.domain._store = new Ext.data.ArrayStore({
 Ext.ns('MShop.panel');
 
 MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
-	/**
-	 * @cfg {String} recordName (required)
-	 */
-	recordName: null,
+    /**
+     * @cfg {String} recordName (required)
+     */
+    recordName: null,
 
-	/**
-	 * @cfg {String} idProperty (required)
-	 */
-	idProperty: null,
+    /**
+     * @cfg {String} idProperty (required)
+     */
+    idProperty: null,
 
-	/**
-	 * @cfg {String} siteidProperty (required)
-	 */
-	siteidProperty: null,
+    /**
+     * @cfg {String} siteidProperty (required)
+     */
+    siteidProperty: null,
 
-	/**
-	 * @cfg {String} exportMethod (required)
-	 */
-	exportMethod: null,
+    /**
+     * @cfg {String} exportMethod (required)
+     */
+    exportMethod: null,
 
-	/**
-	 * @cfg {String} domain (optional)
-	 */
-	domain: null,
+    /**
+     * @cfg {String} domain (optional)
+     */
+    domain: null,
 
-	/**
-	 * @cfg {String} domainProperty (optional)
-	 */
-	domainProperty: null,
+    /**
+     * @cfg {String} domainProperty (optional)
+     */
+    domainProperty: null,
 
-	/**
-	 * @cfg {Object} sortInfo (optional)
-	 */
-	sortInfo: null,
+    /**
+     * @cfg {Object} sortInfo (optional)
+     */
+    sortInfo: null,
 
-	/**
-	 * @cfg {String} autoExpandColumn (optional)
-	 */
-	autoExpandColumn: null,
+    /**
+     * @cfg {String} autoExpandColumn (optional)
+     */
+    autoExpandColumn: null,
 
-	/**
-	 * @cfg {Object} storeConfig (optional)
-	 */
-	storeConfig: null,
+    /**
+     * @cfg {Object} storeConfig (optional)
+     */
+    storeConfig: null,
 
-	/**
-	 * @cfg {Object} gridConfig (optional)
-	 */
-	gridConfig: null,
+    /**
+     * @cfg {Object} gridConfig (optional)
+     */
+    gridConfig: null,
 
-	/**
-	 * @cfg {Object} filterConfig (optional)
-	 */
-	filterConfig: null,
+    /**
+     * @cfg {Object} filterConfig (optional)
+     */
+    filterConfig: null,
 
-	/**
-	 * @cfg {String} itemUi xtype
-	 */
-	itemUi: '',
+    /**
+     * @cfg {String} itemUi xtype
+     */
+    itemUi: '',
 
-	/**
-	 * @cfg {Object} rowCssClass (inherited)
-	 */
-	rowCssClass: 'site-mismatch',
+    /**
+     * @cfg {Object} rowCssClass (inherited)
+     */
+    rowCssClass: 'site-mismatch',
 
 
-	/**
-	 * @cfg {Object} importMethod (optional)
-	 */
-	importMethod: null,
+    /**
+     * @cfg {Object} importMethod (optional)
+     */
+    importMethod: null,
 
-	border: false,
-	layout: 'fit',
+    border: false,
+    layout: 'fit',
 
-	initComponent: function() {
-		this.initActions();
-		this.initToolbar();
-		this.initStore();
+    initComponent: function() {
+        this.initActions();
+        this.initToolbar();
+        this.initStore();
 
-		if (this.filterConfig) {
-			this.filterConfig.filterModel = this.filterConfig.filterModel || MShop.Schema.getFilterModel(this.recordName);
-		}
+        if (this.filterConfig) {
+            this.filterConfig.filterModel = this.filterConfig.filterModel || MShop.Schema.getFilterModel(this.recordName);
+        }
 
-		this.grid = new Ext.grid.GridPanel(Ext.apply({
-			border: false,
-			store: this.store,
-			loadMask: true,
-			autoExpandColumn: this.autoExpandColumn,
-			columns: this.getColumns(),
-			tbar: Ext.apply({
-				xtype: 'ux.advancedsearch',
-				store: this.store
-			}, this.filterConfig),
-			bbar: {
-				xtype: 'MShop.elements.pagingtoolbar',
-				store: this.store
-			}
-		}, this.gridConfig));
+        this.grid = new Ext.grid.GridPanel(Ext.apply({
+            border: false,
+            store: this.store,
+            loadMask: true,
+            autoExpandColumn: this.autoExpandColumn,
+            columns: this.getColumns(),
+            tbar: Ext.apply({
+                xtype: 'ux.advancedsearch',
+                store: this.store
+            }, this.filterConfig),
+            bbar: {
+                xtype: 'MShop.elements.pagingtoolbar',
+                store: this.store
+            }
+        }, this.gridConfig));
 
-		this.items = [this.grid];
+        this.items = [this.grid];
 
-		this.grid.on('rowcontextmenu', this.onGridContextMenu, this);
-		this.grid.on('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
-		this.grid.getSelectionModel().on('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
-		
-		MShop.panel.AbstractListUi.superclass.initComponent.apply(this, arguments);
+        this.grid.on('rowcontextmenu', this.onGridContextMenu, this);
+        this.grid.on('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
+        this.grid.getSelectionModel().on('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
 
-		Ext.apply(this.grid, {
-			viewConfig: {
-				emptyText: _( 'No Items' ),
-				getRowClass: function( record, index ) {
+        MShop.panel.AbstractListUi.superclass.initComponent.apply(this, arguments);
 
-					siteid = MShop.config.site['locale.site.id'];
-					if( record.phantom === false && record.get( this.siteidProperty ) != siteid ) {
-						return this.rowCssClass;
-					}
-					return '';
+        Ext.apply(this.grid, {
+            viewConfig: {
+                emptyText: _( 'No Items' ),
+                getRowClass: function( record, index ) {
 
-				}.createDelegate(this)
-			}
-		});
-	},
+                    siteid = MShop.config.site['locale.site.id'];
+                    if( record.phantom === false && record.get( this.siteidProperty ) != siteid ) {
+                        return this.rowCssClass;
+                    }
+                    return '';
 
-	initActions: function() {
-		this.actionAdd = new Ext.Action({
-			text: _('Add'),
-			handler: this.onOpenEditWindow.createDelegate(this, ['add'])
-		});
+                }.createDelegate(this)
+            }
+        });
+    },
 
-		this.actionEdit = new Ext.Action({
-			text: _('Edit'),
-			disabled: true,
-			handler: this.onOpenEditWindow.createDelegate(this, ['edit'])
-		});
-		
-		this.actionCopy = new Ext.Action({
-			text: _('Copy'),
-			disabled: true,
-			handler: this.onOpenEditWindow.createDelegate(this, ['copy'])
-		});
+    initActions: function() {
+        this.actionAdd = new Ext.Action({
+            text: _('Add'),
+            handler: this.onOpenEditWindow.createDelegate(this, ['add'])
+        });
 
-		this.actionDelete = new Ext.Action({
-			text: _('Delete'),
-			disabled: true,
-			handler: this.onDeleteSelectedItems.createDelegate(this)
-		});
+        this.actionEdit = new Ext.Action({
+            text: _('Edit'),
+            disabled: true,
+            handler: this.onOpenEditWindow.createDelegate(this, ['edit'])
+        });
 
-		this.actionExport = new Ext.Action({
-			text: _('Export'),
-			disabled: false,
-			handler: this.onExport ? this.onExport.createDelegate(this) : Ext.emptyFn
-		});
+        this.actionCopy = new Ext.Action({
+            text: _('Copy'),
+            disabled: true,
+            handler: this.onOpenEditWindow.createDelegate(this, ['copy'])
+        });
 
-		this.importButton = new MShop.elements.ImportButton({
-			importMethod: this.importMethod,
-			text: _('Import'),
-			disabled: (this.importMethod === null)
-		});
+        this.actionDelete = new Ext.Action({
+            text: _('Delete'),
+            disabled: true,
+            handler: this.onDeleteSelectedItems.createDelegate(this)
+        });
 
-	},
+        this.actionExport = new Ext.Action({
+            text: _('Export'),
+            disabled: false,
+            handler: this.onExport ? this.onExport.createDelegate(this) : Ext.emptyFn
+        });
 
-	initToolbar: function() {
-		this.tbar = [
-			this.actionAdd,
-			this.actionEdit,
-			this.actionCopy,
-			this.actionDelete,
-			this.actionExport,
-			this.importButton
-		];
-	},
+        this.importButton = new MShop.elements.ImportButton({
+            importMethod: this.importMethod,
+            text: _('Import'),
+            disabled: (this.importMethod === null)
+        });
 
-	initStore: function() {
-		this.store = new Ext.data.DirectStore(Ext.apply({
-			autoLoad: false,
-			remoteSort : true,
-			hasMultiSort: true,
-			fields: MShop.Schema.getRecord(this.recordName),
-			api: {
-				read    : MShop.API[this.recordName].searchItems,
-				create  : MShop.API[this.recordName].saveItems,
-				update  : MShop.API[this.recordName].saveItems,
-				destroy : MShop.API[this.recordName].deleteItems
-			},
-			writer: new Ext.data.JsonWriter({
-				writeAllFields: true,
-				encode: false
-			}),
-			paramsAsHash: true,
-			root: 'items',
-			totalProperty: 'total',
-			idProperty: this.idProperty,
-			sortInfo: this.sortInfo
-		}, this.storeConfig));
+    },
 
-		// make sure site param gets set for read/write actions
-		this.store.on('beforeload', this.onBeforeLoad, this);
-		this.store.on('exception', this.onStoreException, this);
-		this.store.on('beforewrite', this.onBeforeWrite, this);
-	},
+    initToolbar: function() {
+        this.tbar = [
+            this.actionAdd,
+            this.actionEdit,
+            this.actionCopy,
+            this.actionDelete,
+            this.actionExport,
+            this.importButton
+        ];
+    },
 
-	afterRender: function() {
-		MShop.panel.AbstractListUi.superclass.afterRender.apply(this, arguments);
+    initStore: function() {
+        this.store = new Ext.data.DirectStore(Ext.apply({
+            autoLoad: false,
+            remoteSort : true,
+            hasMultiSort: true,
+            fields: MShop.Schema.getRecord(this.recordName),
+            api: {
+                read    : MShop.API[this.recordName].searchItems,
+                create  : MShop.API[this.recordName].saveItems,
+                update  : MShop.API[this.recordName].saveItems,
+                destroy : MShop.API[this.recordName].deleteItems
+            },
+            writer: new Ext.data.JsonWriter({
+                writeAllFields: true,
+                encode: false
+            }),
+            paramsAsHash: true,
+            root: 'items',
+            totalProperty: 'total',
+            idProperty: this.idProperty,
+            sortInfo: this.sortInfo
+        }, this.storeConfig));
 
-		if (! this.store.autoLoad) {
-			this.store.load.defer(50, this.store);
-		}
-	},
+        // make sure site param gets set for read/write actions
+        this.store.on('beforeload', this.onBeforeLoad, this);
+        this.store.on('exception', this.onStoreException, this);
+        this.store.on('beforewrite', this.onBeforeWrite, this);
+    },
 
-	getCtxMenu: function() {
-		if (! this.ctxMenu) {
-			this.ctxMenu = new Ext.menu.Menu({
-				items: [
-					this.actionAdd,
-					this.actionEdit,
-					this.actionCopy,
-					this.actionDelete,
-					this.actionExport
-				]
-			});
-		}
+    afterRender: function() {
+        MShop.panel.AbstractListUi.superclass.afterRender.apply(this, arguments);
 
-		return this.ctxMenu;
-	},
+        if (! this.store.autoLoad) {
+            this.store.load.defer(50, this.store);
+        }
+    },
 
-	onBeforeLoad: function(store, options) {
-		this.setSiteParam(store);
-		
-		if (this.domain) {
-			this.setDomainFilter(store, options);
-		}
+    getCtxMenu: function() {
+        if (! this.ctxMenu) {
+            this.ctxMenu = new Ext.menu.Menu({
+                items: [
+                    this.actionAdd,
+                    this.actionEdit,
+                    this.actionCopy,
+                    this.actionDelete,
+                    this.actionExport
+                ]
+            });
+        }
 
-		this.actionExport.setDisabled(this.exportMethod === null);
-	},
+        return this.ctxMenu;
+    },
 
-	onBeforeWrite: function(store, action, records, options) {
-		this.setSiteParam(store);
+    onBeforeLoad: function(store, options) {
+        this.setSiteParam(store);
 
-		if (this.domain) {
-			this.setDomainProperty(store, action, records, options);
-		}
-	},
+        if (this.domain) {
+            this.setDomainFilter(store, options);
+        }
 
-	onDeleteSelectedItems: function() {
-		var that = this;
+        this.actionExport.setDisabled(this.exportMethod === null);
+    },
 
-		Ext.Msg.show({
-			title: _('Delete items?'),
-			msg: _('You are going to delete one or more items. Would you like to proceed?'),
-			buttons: Ext.Msg.YESNO,
-			fn: function (btn) {
-				if (btn == 'yes') {
-					that.store.remove(that.grid.getSelectionModel().getSelections());
-				}
-			},
-			animEl: 'elId',
-			icon: Ext.MessageBox.QUESTION
-		});
-	},
+    onBeforeWrite: function(store, action, records, options) {
+        this.setSiteParam(store);
 
-	/**
-	 * start download
-	 */
-	onExport: function() {
-		var win = new MShop.elements.exportlanguage.Window();
-		win.on('save', this.finishExport, this);
-		win.show();
-	},
+        if (this.domain) {
+            this.setDomainProperty(store, action, records, options);
+        }
+    },
 
-	finishExport: function(langwin, languages) {
-		var selection = this.grid.getSelectionModel().getSelections(),
-		ids = [];
+    onDeleteSelectedItems: function() {
+        var that = this;
 
-		Ext.each(selection, function(r){
-			ids.push(r.id);
-		}, this);
+        Ext.Msg.show({
+            title: _('Delete items?'),
+            msg: _('You are going to delete one or more items. Would you like to proceed?'),
+            buttons: Ext.Msg.YESNO,
+            fn: function (btn) {
+                if (btn == 'yes') {
+                    that.store.remove(that.grid.getSelectionModel().getSelections());
+                }
+            },
+            animEl: 'elId',
+            icon: Ext.MessageBox.QUESTION
+        });
+    },
 
-		var downloader = new Ext.ux.file.Downloader({
-			url: MShop.config.smd.target,
-			params: {
-				method: this.exportMethod,
-				params: Ext.encode({
-					items: ids,
-					lang: languages,
-					site: MShop.config.site['locale.site.code']
-				})
-			}
-		}).start();
-	},
+    /**
+     * start download
+     */
+    onExport: function() {
+        var win = new MShop.elements.exportlanguage.Window();
+        win.on('save', this.finishExport, this);
+        win.show();
+    },
 
-	onDestroy: function() {
-		this.grid.un('rowcontextmenu', this.onGridContextMenu, this);
-		this.grid.un('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
-		this.grid.getSelectionModel().un('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
-		this.store.un('beforeload', this.onBeforeLoad, this);
-		this.store.un('beforewrite', this.onBeforeWrite, this);
-		this.store.un('exception', this.onStoreException, this);
+    finishExport: function(langwin, languages) {
+        var selection = this.grid.getSelectionModel().getSelections(),
+        ids = [];
 
-		MShop.panel.AbstractListUi.superclass.onDestroy.apply(this, arguments);
-	},
+        Ext.each(selection, function(r){
+            ids.push(r.id);
+        }, this);
 
-	onGridContextMenu: function(grid, row, e) {
-		e.preventDefault();
-		var selModel = grid.getSelectionModel();
-		if(!selModel.isSelected(row)) {
-			selModel.selectRow(row);
-		}
-		this.getCtxMenu().showAt(e.getXY());
-	},
+        var downloader = new Ext.ux.file.Downloader({
+            url: MShop.config.smd.target,
+            params: {
+                method: this.exportMethod,
+                params: Ext.encode({
+                    items: ids,
+                    lang: languages,
+                    site: MShop.config.site['locale.site.code']
+                })
+            }
+        }).start();
+    },
 
-	onGridSelectionChange: function(sm) {
-		var numSelected = sm.getCount();
-		this.actionEdit.setDisabled(numSelected !== 1);
-		this.actionCopy.setDisabled(numSelected !== 1);
-		this.actionDelete.setDisabled(numSelected === 0);
-		this.actionExport.setDisabled(this.exportMethod === null);
-	},
+    onDestroy: function() {
+        this.grid.un('rowcontextmenu', this.onGridContextMenu, this);
+        this.grid.un('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
+        this.grid.getSelectionModel().un('selectionchange', this.onGridSelectionChange, this, {buffer: 10});
+        this.store.un('beforeload', this.onBeforeLoad, this);
+        this.store.un('beforewrite', this.onBeforeWrite, this);
+        this.store.un('exception', this.onStoreException, this);
 
-	onOpenEditWindow: function(action) {
-		var itemUi = Ext.ComponentMgr.create({
-			xtype: this.itemUiXType,
-			domain: this.domain,
-			record: this.getRecord(action),
-			store: this.store,
-			listUI: this,
-			isNewRecord: action === 'copy' ? true : false
-		});
+        MShop.panel.AbstractListUi.superclass.onDestroy.apply(this, arguments);
+    },
 
-		itemUi.show();
-	},
-	
-	getRecord: function( action ) {
-		if( action == 'add' ) {
-			return null;
-		} 
-		else if( action == 'copy' )
-		{
-			var record = new this.store.recordType();
-			var edit = this.grid.getSelectionModel().getSelected().copy();
-			record.data = edit.data;
-			record.data[ this.idProperty ] = null;
-			
-			return record;
-		}
-		return this.grid.getSelectionModel().getSelected();
-	},
+    onGridContextMenu: function(grid, row, e) {
+        e.preventDefault();
+        var selModel = grid.getSelectionModel();
+        if(!selModel.isSelected(row)) {
+            selModel.selectRow(row);
+        }
+        this.getCtxMenu().showAt(e.getXY());
+    },
 
-	onStoreException: function(proxy, type, action, options, response) {
-		var title = _( 'Error' );
-		var msg, code;
-		
-		if( response.error !== undefined ) {
-			msg = response && response.error ? response.error.message : _( 'No error information available' );
-			code = response && response.error ? response.error.code : 0;
-		} else {
-			msg = response && response.xhr.responseText[0].error ? response.xhr.responseText[0].error : _( 'No error information available' );
-			code = response && response.xhr.responseText[0].tid ? response.xhr.responseText[0].tid : 0;
-		}
-		Ext.Msg.alert(title + ' (' + code + ')', msg);
-	},
+    onGridSelectionChange: function(sm) {
+        var numSelected = sm.getCount();
+        this.actionEdit.setDisabled(numSelected !== 1);
+        this.actionCopy.setDisabled(numSelected !== 1);
+        this.actionDelete.setDisabled(numSelected === 0);
+        this.actionExport.setDisabled(this.exportMethod === null);
+    },
 
-	setSiteParam: function(store) {
-		store.baseParams = store.baseParams || {};
-		store.baseParams.site = MShop.config.site["locale.site.code"];
-	},
+    onOpenEditWindow: function(action) {
+        var itemUi = Ext.ComponentMgr.create({
+            xtype: this.itemUiXType,
+            domain: this.domain,
+            record: (action == 'copy' || action == 'edit') ? this.grid.getSelectionModel().getSelected() : null,
+            store: this.store,
+            listUI: this,
+            action: action
+        }, this);
 
-	setDomainFilter: function(store, options) {
-		options.params = options.params || {};
-		options.params.condition = options.params.condition || {};
-		options.params.condition['&&'] = options.params.condition['&&'] || [];
+        itemUi.show();
+    },
 
-		if (! this.domainProperty) {
-			this.domainProperty = this.idProperty.replace(/\..*$/, '.domain');
-		}
+    onStoreException: function(proxy, type, action, options, response) {
+        var title = _( 'Error' );
+        var msg, code;
 
-		var condition = {};
-		condition[this.domainProperty] = this.domain;
+        if( response.error !== undefined ) {
+            msg = response && response.error ? response.error.message : _( 'No error information available' );
+            code = response && response.error ? response.error.code : 0;
+        } else {
+            msg = response && response.xhr.responseText[0].error ? response.xhr.responseText[0].error : _( 'No error information available' );
+            code = response && response.xhr.responseText[0].tid ? response.xhr.responseText[0].tid : 0;
+        }
+        Ext.Msg.alert(title + ' (' + code + ')', msg);
+    },
 
-		options.params.condition['&&'].push({'==': condition});
-	},
+    setSiteParam: function(store) {
+        store.baseParams = store.baseParams || {};
+        store.baseParams.site = MShop.config.site["locale.site.code"];
+    },
 
-	setDomainProperty: function(store, action, records, options) {
-		var rs = [].concat(records);
+    setDomainFilter: function(store, options) {
+        options.params = options.params || {};
+        options.params.condition = options.params.condition || {};
+        options.params.condition['&&'] = options.params.condition['&&'] || [];
 
-		Ext.each(rs, function(record) {
-			if (! this.domainProperty) {
-				this.domainProperty = this.idProperty.replace(/\..*$/, '.domain');
-			}
-			record.data[this.domainProperty] = this.domain;
-		}, this);
-	},
+        if (! this.domainProperty) {
+            this.domainProperty = this.idProperty.replace(/\..*$/, '.domain');
+        }
 
-	typeColumnRenderer : function( typeId, metaData, record, rowIndex, colIndex, store, typeStore, displayField ) {
-		var type = typeStore.getById(typeId);
-		return type ? type.get(displayField) : typeId;
-	},
+        var condition = {};
+        condition[this.domainProperty] = this.domain;
 
-	statusColumnRenderer : function(status, metaData) {
-	    metaData.css = 'statusicon-' + Number( status );
-	}
+        options.params.condition['&&'].push({'==': condition});
+    },
+
+    setDomainProperty: function(store, action, records, options) {
+        var rs = [].concat(records);
+
+        Ext.each(rs, function(record) {
+            if (! this.domainProperty) {
+                this.domainProperty = this.idProperty.replace(/\..*$/, '.domain');
+            }
+            record.data[this.domainProperty] = this.domain;
+        }, this);
+    },
+
+    typeColumnRenderer : function( typeId, metaData, record, rowIndex, colIndex, store, typeStore, displayField ) {
+        var type = typeStore.getById(typeId);
+        return type ? type.get(displayField) : typeId;
+    },
+
+    statusColumnRenderer : function(status, metaData) {
+        metaData.css = 'statusicon-' + Number( status );
+    }
 });
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
@@ -3270,6 +3283,12 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 */
 	mainForm: null,
 
+	/**
+	 * Action from listUi
+	 * default is "add": creating new entry as phantom
+	 */
+	action: 'add',
+	
 	/**
 	 * @type Boolean isSaveing
 	 */
@@ -3313,6 +3332,10 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		this.store.on('beforewrite', this.onStoreBeforeWrite, this);
 		this.store.on('exception', this.onStoreException, this);
 		this.store.on('write', this.onStoreWrite, this);
+
+		if (this.action == 'copy') {
+			this.items[0].deferredRender = false;
+		}
 
 		MShop.panel.AbstractItemUi.superclass.initComponent.call(this);
 	},
@@ -3360,10 +3383,26 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			// wait till ref if here
 			return this.initRecord.defer(50, this, arguments);
 		}
-		
-		if (! this.record) {
+
+		if (! this.record || this.action == 'add' ) {
 			this.record = new this.recordType();
-			this.isNewRecord = true;
+			this.action = 'add';
+		} else if (this.action == 'copy') {
+		    this.action = 'copy';
+
+            // Copy selected record
+            var edit = this.record.copy();
+
+            var codeProperty = this.listUI.recordName.toLowerCase() + ".code";
+
+            // Remove ID because it should be a copy of the original record
+            edit.data[ this.idProperty ] = null;
+
+            if ( edit.data.hasOwnProperty( codeProperty ) ) {
+                edit.set(codeProperty, edit.data[ codeProperty ] + "_copy");
+            }
+
+            this.record = edit;
 		}
 
 		this.mainForm.getForm().loadRecord(this.record);
@@ -3428,26 +3467,31 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	
 			var itemRefId = item.get(recordRefIdProperty);
 			var itemTypeId = item.get(recordTypeIdProperty);
-			
+
 			var recordId = this.record.id;
 			var itemId = index;
-			
+
 			if (! recordRefId || ! recordTypeId || ! itemRefId || ! itemTypeId)
 				return false;
-			
+
 			return ( recordRefId == itemRefId && recordTypeId == itemTypeId && recordId != itemId );
 		}, this);
-		
+
 		if (index != -1) {
 			this.isSaveing = false;
 			this.saveMask.hide();
 			Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
 			return;
 		}
-		
+
 		this.mainForm.getForm().updateRecord(this.record);
 		
-		if (this.isNewRecord) {
+		if (this.action == 'copy') {
+			this.record.id = null;
+			this.record.phantom = true;
+		}
+
+		if (this.action == 'copy' || this.action == 'add') {
 			this.store.add(this.record);
 		}
 
@@ -3458,7 +3502,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	},
 
 	onStoreException: function(proxy, type, action, options, response) {
-		if (/*itwasus &&*/ this.isSaveing) {
+		if (this.isSaveing) {
 			this.isSaveing = false;
 			this.saveMask.hide();
 		}
@@ -3496,231 +3540,231 @@ Ext.reg('MShop.panel.abstractitemui', MShop.panel.AbstractItemUi);
 Ext.ns('MShop.panel');
 
 MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
-	/**
-	 * @cfg {String} domain
-	 */
-	domain: null,
+    /**
+     * @cfg {String} domain
+     */
+    domain: null,
 
-	/**
-	 * @cfg {Function} getAdditionalColumns
-	 */
-	getAdditionalColumns: Ext.emptyFn,
+    /**
+     * @cfg {Function} getAdditionalColumns
+     */
+    getAdditionalColumns: Ext.emptyFn,
 
-	/**
-	 * @property MShop.panel.AbstractItemUi itemUi
-	 * parent itemUi this listpanel is child of
-	 */
-	itemUi: null,
+    /**
+     * @property MShop.panel.AbstractItemUi itemUi
+     * parent itemUi this listpanel is child of
+     */
+    itemUi: null,
 
-	/**
-	 * @property MShop.panel.AbstractListItemPickerUi listItemPickerUi
-	 * parent listItemPickerUi this listpanel is agregated in
-	 */
-	listItemPickerUi: null,
+    /**
+     * @property MShop.panel.AbstractListItemPickerUi listItemPickerUi
+     * parent listItemPickerUi this listpanel is agregated in
+     */
+    listItemPickerUi: null,
 
-	itemUiXType: 'MShop.panel.listitemitemui',
+    itemUiXType: 'MShop.panel.listitemitemui',
 
-	initComponent: function() {
-		// remove filter + paging
-		this.gridConfig = this.gridConfig || {};
-		this.gridConfig.tbar = null;
-		this.gridConfig.bbar = null;
+    initComponent: function() {
+        // remove filter + paging
+        this.gridConfig = this.gridConfig || {};
+        this.gridConfig.tbar = null;
+        this.gridConfig.bbar = null;
 
-		this.autoExpandColumn = 'refcontent';
+        this.autoExpandColumn = 'refcontent';
 
-		// fetch ListItemPickerUi
-		this.listItemPickerUi = this.findParentBy(function(c){
-			return c.isXType(MShop.panel.AbstractListItemPickerUi, false);
-		});
+        // fetch ListItemPickerUi
+        this.listItemPickerUi = this.findParentBy(function(c){
+            return c.isXType(MShop.panel.AbstractListItemPickerUi, false);
+        });
 
-		// fetch ItemUI
-		this.itemUi = this.findParentBy(function(c){
-			return c.isXType(MShop.panel.AbstractItemUi, false);
-		});
-		this.itemUi.on('save', this.onItemUiSave, this);
+        // fetch ItemUI
+        this.itemUi = this.findParentBy(function(c){
+            return c.isXType(MShop.panel.AbstractItemUi, false);
+        });
+        this.itemUi.on('save', this.onItemUiSave, this);
 
-		MShop.panel.ListItemListUi.superclass.initComponent.call(this);
-		
-		this.grid.getView().getRowClass = function(record, rowIndex, rowParams, store) { 
-			if( ( status = record.get( this.listItemPickerUi.itemConfig.listNamePrefix + 'status' ) ) <= 0 ) {
-				return  'statustext-' + Number( status );
-			}
-			return '';
-		}.createDelegate(this);
-	},
+        MShop.panel.ListItemListUi.superclass.initComponent.call(this);
 
-	initStore: function() {
-		this.storeConfig = this.storeConfig || {};
-		this.storeConfig.remoteSort = false;
-		this.storeConfig.autoSave = false;
+        this.grid.getView().getRowClass = function(record, rowIndex, rowParams, store) {
+            if( ( status = record.get( this.listItemPickerUi.itemConfig.listNamePrefix + 'status' ) ) <= 0 ) {
+                return  'statustext-' + Number( status );
+            }
+            return '';
+        }.createDelegate(this);
+    },
 
-		MShop.panel.ListItemListUi.superclass.initStore.call(this);
+    initStore: function() {
+        this.storeConfig = this.storeConfig || {};
+        this.storeConfig.remoteSort = false;
+        this.storeConfig.autoSave = false;
 
-		this.store.on('load', this.onStoreLoad, this);
-		this.store.on('beforeload', this.setFilters, this);
-		this.store.on('write', this.onStoreWrite, this);
-		//this.store.on('exception', this.onStoreException, this);
+        MShop.panel.ListItemListUi.superclass.initStore.call(this);
 
-	},
+        this.store.on('load', this.onStoreLoad, this);
+        this.store.on('beforeload', this.setFilters, this);
+        this.store.on('write', this.onStoreWrite, this);
+        //this.store.on('exception', this.onStoreException, this);
+    },
 
-	onDestroy: function() {
-		this.store.un('load', this.onStoreLoad, this);
-		this.store.un('beforeload', this.setFilters, this);
-		this.store.un('write', this.onStoreWrite, this);
-		//this.store.un('exception', this.onStoreException, this);
+    onDestroy: function() {
+        this.store.un('load', this.onStoreLoad, this);
+        this.store.un('beforeload', this.setFilters, this);
+        this.store.un('write', this.onStoreWrite, this);
+        //this.store.un('exception', this.onStoreException, this);
 
-		MShop.panel.ListItemListUi.superclass.onDestroy.apply(this, arguments);
-	},
+        MShop.panel.ListItemListUi.superclass.onDestroy.apply(this, arguments);
+    },
 
-	onOpenEditWindow: function(action) {
-		if (action === 'add') {
-			return Ext.Msg.alert(_('Select Item'), _('Please select an item on the right side and add it via drag and drop to this list.'));
-		}
+    onOpenEditWindow: function(action) {
+        if (action === 'add') {
+            return Ext.Msg.alert(_('Select Item'), _('Please select an item on the right side and add it via drag and drop to this list.'));
+        }
 
-		return MShop.panel.ListItemListUi.superclass.onOpenEditWindow.apply(this, arguments);
-	},
+        return MShop.panel.ListItemListUi.superclass.onOpenEditWindow.apply(this, arguments);
+    },
 
-	onStoreLoad: function(store) {
-		this.store.sort(this.listItemPickerUi.itemConfig.listNamePrefix + 'position', 'ASC');
+    onStoreLoad: function(store) {
+        this.store.sort(this.listItemPickerUi.itemConfig.listNamePrefix + 'position', 'ASC');
+    },
 
-		// create store of graph items ->
-		//console.log(store.reader.jsonData);
-	},
+    onStoreWrite: function() {
+        this.returnTicket();
+    },
 
-	onStoreWrite: function() {
-		this.returnTicket();
-	},
+    onItemUiSave: function(itemUi, record, ticketFn) {
+        // make sure all parentid are set
+        this.store.each(function(r) {
+            // Remove list id if the reference should be copied
+            if (this.itemUi.action == 'copy') {
+                r.id = null;
+            }
+            r.set(this.listItemPickerUi.itemConfig.listNamePrefix + 'parentid', record.id);
+        }, this);
 
-	onItemUiSave: function(itemUi, record, ticketFn) {
-		// make sure all parentid are set
-		this.store.each(function(r) {
-			r.set(this.listItemPickerUi.itemConfig.listNamePrefix + 'parentid', record.id);
-		}, this);
+        if (this.store.save() !== -1) {
+            this.returnTicket = ticketFn();
+        }
+    },
 
-		if (this.store.save() !== -1) {
-			this.returnTicket = ticketFn();
-		}
-	},
+    setFilters: function(store, options) {
+        if (this.itemUi.record.phantom && this.itemUi.action != 'copy') {
+            // nothing to load
+            return false;
+        }
 
-	setFilters: function(store, options) {
-		if (this.itemUi.record.phantom) {
-			// nothing to load
-			return false;
-		}
+        // filter for refid
+        //var parentIdProp = this.listItemPickerUi.listNamePrefix + ''
+        var parentIdCriteria = {};
+        parentIdCriteria[this.listItemPickerUi.itemConfig.listNamePrefix + 'parentid'] = this.itemUi.record.id;
+        var domainCriteria = {};
+        domainCriteria[this.listItemPickerUi.itemConfig.listNamePrefix + 'domain'] = this.domain;
 
-		// filter for refid
-		//var parentIdProp = this.listItemPickerUi.listNamePrefix + ''
-		var parentIdCriteria = {};
-		parentIdCriteria[this.listItemPickerUi.itemConfig.listNamePrefix + 'parentid'] = this.itemUi.record.id;
-		var domainCriteria = {};
-		domainCriteria[this.listItemPickerUi.itemConfig.listNamePrefix + 'domain'] = this.domain;
+        options.params = options.params || {};
+        options.params.condition = {'&&': [
+            {'==': parentIdCriteria},
+            {'==': domainCriteria}
+        ]};
 
-		options.params = options.params || {};
-		options.params.condition = {'&&': [
-			{'==': parentIdCriteria},
-			{'==': domainCriteria}
-		]};
+        return true;
+    },
 
-		return true;
-	},
+    getColumns : function() {
+        var expr = this.listTypeCondition;
+        var storeConfig = {
+            baseParams: {
+                site: MShop.config.site["locale.site.code"],
+                condition: expr
+            }
+        };
+        this.itemTypeStore = MShop.GlobalStoreMgr.get(this.listTypeControllerName, this.listTypeKey, storeConfig);
 
-	getColumns : function() {
-		var expr = this.listTypeCondition;
-		var storeConfig = {
-			baseParams: {
-				site: MShop.config.site["locale.site.code"],
-				condition: expr
-			}
-		};
-		this.itemTypeStore = MShop.GlobalStoreMgr.get(this.listTypeControllerName, this.listTypeKey, storeConfig);
-
-		return [
-			{
-				xtype : 'gridcolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'id',
-				header : _('Id'),
-				width : 50,
-				hidden : true
-			},
-			{
-				xtype : 'gridcolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'refid',
-				header : _('Ref-Id'),
-				width : 50,
-				hidden : true
-			},
-			{
-				xtype : 'gridcolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'status',
-				header : _('List Status'),
-				width : 50,
-				hidden : true,
-				align: 'center',
-				renderer : this.statusColumnRenderer.createDelegate(this)
-			},
-			{
-				xtype : 'gridcolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'position',
-				header : _('Position'),
-				width : 50,
-				hidden : true
-			},
-			{
-				xtype : 'datecolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'datestart',
-				header : _('Start date'),
-				width : 120,
-				format : 'Y-m-d H:i:s',
-				hidden : true
-			},
-			{
-				xtype : 'datecolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'dateend',
-				header : _('End date'),
-				width : 120,
-				format : 'Y-m-d H:i:s',
-				hidden : true
-			},
-			{
-				xtype : 'gridcolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'config',
-				header : _('Configuration'),
-				width : 200,
-				editable : false,
-				hidden : true,
-				renderer: function (value) {
-					var s = "";
-					Ext.iterate(value, function (key, value, object) {
-						s = s + String.format('<div>{0}: {1}</div>', key, value);
-					}, this);
-					return s;
-				}
-			},
-			{
-				xtype : 'datecolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'ctime',
-				header : _('Created'),
-				width : 120,
-				format : 'Y-m-d H:i:s',
-				hidden : true
-			},
-			{
-				xtype : 'datecolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'mtime',
-				header : _('Last modified'),
-				width : 120,
-				format : 'Y-m-d H:i:s',
-				hidden : true
-			},
-			{
-				xtype : 'gridcolumn',
-				dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'editor',
-				header : _('Editor'),
-				width : 50,
-				hidden : true
-			}
-		].concat(this.getAdditionalColumns() || []);
-	}
+        return [
+            {
+                xtype : 'gridcolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'id',
+                header : _('Id'),
+                width : 50,
+                hidden : true
+            },
+            {
+                xtype : 'gridcolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'refid',
+                header : _('Ref-Id'),
+                width : 50,
+                hidden : true
+            },
+            {
+                xtype : 'gridcolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'status',
+                header : _('List Status'),
+                width : 50,
+                hidden : true,
+                align: 'center',
+                renderer : this.statusColumnRenderer.createDelegate(this)
+            },
+            {
+                xtype : 'gridcolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'position',
+                header : _('Position'),
+                width : 50,
+                hidden : true
+            },
+            {
+                xtype : 'datecolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'datestart',
+                header : _('Start date'),
+                width : 120,
+                format : 'Y-m-d H:i:s',
+                hidden : true
+            },
+            {
+                xtype : 'datecolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'dateend',
+                header : _('End date'),
+                width : 120,
+                format : 'Y-m-d H:i:s',
+                hidden : true
+            },
+            {
+                xtype : 'gridcolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'config',
+                header : _('Configuration'),
+                width : 200,
+                editable : false,
+                hidden : true,
+                renderer: function (value) {
+                    var s = "";
+                    Ext.iterate(value, function (key, value, object) {
+                        s = s + String.format('<div>{0}: {1}</div>', key, value);
+                    }, this);
+                    return s;
+                }
+            },
+            {
+                xtype : 'datecolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'ctime',
+                header : _('Created'),
+                width : 120,
+                format : 'Y-m-d H:i:s',
+                hidden : true
+            },
+            {
+                xtype : 'datecolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'mtime',
+                header : _('Last modified'),
+                width : 120,
+                format : 'Y-m-d H:i:s',
+                hidden : true
+            },
+            {
+                xtype : 'gridcolumn',
+                dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'editor',
+                header : _('Editor'),
+                width : 50,
+                hidden : true
+            }
+        ].concat(this.getAdditionalColumns() || []);
+    }
 });
 
 
@@ -3851,7 +3895,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		
 		this.mainForm.getForm().updateRecord(this.record);
 		
-		if (this.isNewRecord) {
+		if ( this.action == 'add' || this.action == 'copy' ) {
 			this.store.add(this.record);
 		}
 
@@ -7794,6 +7838,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		this.setTitle( 'Product: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
 
+		
 		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
 	
@@ -8753,7 +8798,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 		this.mainForm.getForm().updateRecord( this.record );
 		this.record.data['product.stock.productid'] = this.listUI.itemUi.record.id;
 
-		if( this.isNewRecord ) {
+		if( this.action == 'add' || this.action == 'copy' ) {
 			this.store.add( this.record );
 		}
 
@@ -9609,7 +9654,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		this.record.set( 'catalog.code', this.mainForm.getForm().findField( 'code' ).getValue() );
 		this.record.endEdit();
 
-		if( this.isNewRecord ) {
+		if( this.action == 'add' || this.action == 'copy' ) {
 			this.store.add( this.record );
 		}
 
@@ -14070,7 +14115,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 		this.record.set( 'locale.site.code', this.mainForm.getForm().findField( 'locale.site.code' ).getValue() );
 		this.record.endEdit();
 
-		if( this.isNewRecord ) {
+		if( this.action == 'add' || this.action == 'copy' ) {
 			this.store.add( this.record );
 		}
 
