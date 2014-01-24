@@ -6,7 +6,7 @@
 
 Ext.ns('MShop.panel.product');
 
-MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
+MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 	maximized : true,
 	layout : 'fit',
@@ -17,7 +17,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 		this.title = _('Product item details');
 
-		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
+		MShop.panel.AbstractListItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
 			xtype : 'tabpanel',
