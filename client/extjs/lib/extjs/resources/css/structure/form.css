@@ -1,9 +1,23 @@
-/*!
- * Ext JS Library 3.2.1
- * Copyright(c) 2006-2010 Ext JS, Inc.
- * licensing@extjs.com
- * http://www.extjs.com/license
- */
+/*
+This file is part of Ext JS 3.4
+
+Copyright (c) 2011-2013 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as
+published by the Free Software Foundation and appearing in the file LICENSE included in the
+packaging of this file.
+
+Please review the following information to ensure the GNU General Public License version 3.0
+requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department
+at http://www.sencha.com/contact.
+
+Build date: 2013-04-03 15:07:25
+*/
 /* all fields */
 .x-form-field{
     margin: 0 0 0 0;
@@ -36,6 +50,26 @@ textarea.x-form-field {
     line-height:18px;
 }
 
+.x-quirks .ext-ie9 .x-form-text {
+    height: 22px;
+    padding-top: 3px;
+    padding-bottom: 0px;
+}
+
+/* Ugly hacks for the bogus 1px margin bug in IE9 quirks */
+.x-quirks .ext-ie9 .x-input-wrapper .x-form-text,
+.x-quirks .ext-ie9 .x-form-field-trigger-wrap .x-form-text {
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+.x-quirks .ext-ie9 .x-input-wrapper .x-form-element {
+    margin-bottom: -1px;
+}
+
+.ext-ie6 .x-form-field-wrap .x-form-file-btn, .ext-ie7 .x-form-field-wrap .x-form-file-btn {
+    top: -1px; /* because of all these margin hacks, these buttons are off by one pixel in IE6,7 */
+}
+
 .ext-ie6 textarea.x-form-field, .ext-ie7 textarea.x-form-field {
     margin:-1px 0; /* ie bogus margin bug */
 }
@@ -48,9 +82,11 @@ textarea.x-form-field {
     margin-bottom:-2px; /* another bogus margin bug, safari/mac only */
 }
 
+/*
 .ext-strict .ext-ie8 .x-form-text, .ext-strict .ext-ie8 textarea.x-form-field {
     margin-bottom: 1px;
 }
+*/
 
 .ext-gecko .x-form-text , .ext-ie8 .x-form-text {
     padding-top:2px; /* FF won't center the text vertically */
@@ -322,6 +358,10 @@ textarea {
 
 .ext-webkit .x-small-editor .x-form-text{padding-top:3px;font-size:100%;}
 
+.ext-strict .ext-webkit .x-small-editor .x-form-text{
+    height:14px !important;
+}
+
 .x-form-clear {
     clear:both;
     height:0;
@@ -465,6 +505,10 @@ textarea {
     margin-bottom:10px;
 }
 
+.ext-strict .ext-ie9 .x-fieldset legend.x-fieldset-header {
+    padding-top: 1px;
+}
+
 .ext-ie .x-fieldset {
     padding-top: 0;
     padding-bottom:10px;
@@ -530,6 +574,10 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
     -moz-outline: none;
     outline: none;
     overflow: auto;
+}
+
+.ext-mac.ext-gecko .x-window-body .x-form-item {
+    overflow:hidden;
 }
 
 .ext-gecko .x-form-item {

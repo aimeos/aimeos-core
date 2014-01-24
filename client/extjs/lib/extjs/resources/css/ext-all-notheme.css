@@ -1,10 +1,31 @@
-/*!
- * Ext JS Library 3.2.1
- * Copyright(c) 2006-2010 Ext JS, Inc.
- * licensing@extjs.com
- * http://www.extjs.com/license
- */
-html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}img,body,html{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul {list-style:none;}caption,th {text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;}q:before,q:after{content:'';}.ext-el-mask {
+/*
+This file is part of Ext JS 3.4
+
+Copyright (c) 2011-2013 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as
+published by the Free Software Foundation and appearing in the file LICENSE included in the
+packaging of this file.
+
+Please review the following information to ensure the GNU General Public License version 3.0
+requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department
+at http://www.sencha.com/contact.
+
+Build date: 2013-04-03 15:07:25
+*/
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}img,body,html{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul {list-style:none;}caption,th {text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;}q:before,q:after{content:'';}
+
+.ext-forced-border-box, .ext-forced-border-box * {
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.ext-el-mask {
     z-index: 100;
     position: absolute;
     top:0;
@@ -68,6 +89,16 @@ html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,bloc
     display:none !important;
 }
 
+.x-hide-nosize,
+.x-hide-nosize *    /* Emulate display:none for children */
+ {
+   height:0px!important;
+   width:0px!important;
+   visibility:hidden!important;
+   border:none!important;
+   zoom:1;
+}
+
 .x-hide-visibility {
     visibility:hidden !important;
 }
@@ -88,9 +119,13 @@ html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,bloc
 }
 
 .x-unselectable, .x-unselectable * {
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select:ignore;
+    user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    
+    cursor:default;
 }
 
 .x-repaint {
@@ -224,7 +259,7 @@ html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,bloc
 .x-shadow .xsmc {
     float: left;
     height: 100%;
-    background: transparent;
+    background-color: transparent;
 }
 
 .x-shadow .xst, .x-shadow .xsb {
@@ -640,22 +675,28 @@ ul.x-tab-strip li.x-tab-edge {
 }
 
 /*
- * Horrible hack for IE8 in quirks mode
+ * For IE8/9 in quirks mode
  */
-.ext-ie8 ul.x-tab-strip li {
+.ext-ie8 .x-tab-strip li {
     position: relative;
 }
-.ext-ie8 .x-tab-strip .x-tab-right{
-    margin-bottom: 0 !important;
+.ext-border-box .ext-ie8 .x-tab-strip-top .x-tab-right, .ext-border-box .ext-ie9 .x-tab-strip-top .x-tab-right {
     top: 1px;
 }
-.ext-ie8 ul.x-tab-strip-top {
+.ext-ie8 .x-tab-strip-top, .ext-ie9 .x-tab-strip-top {
+    padding-top: 1px;
+}
+.ext-border-box .ext-ie8 .x-tab-strip-top, .ext-border-box .ext-ie9 .x-tab-strip-top {
     padding-top: 0;
 }
-.ext-ie8 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
+.ext-ie8 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close, .ext-ie9 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
+    top:3px;
+}
+.ext-border-box .ext-ie8 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close,
+.ext-border-box .ext-ie9 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
     top:4px;
 }
-.ext-ie8 .x-tab-strip-bottom .x-tab-right{
+.ext-ie8 .x-tab-strip-bottom .x-tab-right, .ext-ie9 .x-tab-strip-bottom .x-tab-right{
     top:0;
 }
 
@@ -884,6 +925,26 @@ textarea.x-form-field {
     line-height:18px;
 }
 
+.x-quirks .ext-ie9 .x-form-text {
+    height: 22px;
+    padding-top: 3px;
+    padding-bottom: 0px;
+}
+
+/* Ugly hacks for the bogus 1px margin bug in IE9 quirks */
+.x-quirks .ext-ie9 .x-input-wrapper .x-form-text,
+.x-quirks .ext-ie9 .x-form-field-trigger-wrap .x-form-text {
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+.x-quirks .ext-ie9 .x-input-wrapper .x-form-element {
+    margin-bottom: -1px;
+}
+
+.ext-ie6 .x-form-field-wrap .x-form-file-btn, .ext-ie7 .x-form-field-wrap .x-form-file-btn {
+    top: -1px; /* because of all these margin hacks, these buttons are off by one pixel in IE6,7 */
+}
+
 .ext-ie6 textarea.x-form-field, .ext-ie7 textarea.x-form-field {
     margin:-1px 0; /* ie bogus margin bug */
 }
@@ -896,9 +957,11 @@ textarea.x-form-field {
     margin-bottom:-2px; /* another bogus margin bug, safari/mac only */
 }
 
+/*
 .ext-strict .ext-ie8 .x-form-text, .ext-strict .ext-ie8 textarea.x-form-field {
     margin-bottom: 1px;
 }
+*/
 
 .ext-gecko .x-form-text , .ext-ie8 .x-form-text {
     padding-top:2px; /* FF won't center the text vertically */
@@ -1170,6 +1233,10 @@ textarea {
 
 .ext-webkit .x-small-editor .x-form-text{padding-top:3px;font-size:100%;}
 
+.ext-strict .ext-webkit .x-small-editor .x-form-text{
+    height:14px !important;
+}
+
 .x-form-clear {
     clear:both;
     height:0;
@@ -1313,6 +1380,10 @@ textarea {
     margin-bottom:10px;
 }
 
+.ext-strict .ext-ie9 .x-fieldset legend.x-fieldset-header {
+    padding-top: 1px;
+}
+
 .ext-ie .x-fieldset {
     padding-top: 0;
     padding-bottom:10px;
@@ -1380,6 +1451,10 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
     overflow: auto;
 }
 
+.ext-mac.ext-gecko .x-window-body .x-form-item {
+    overflow:hidden;
+}
+
 .ext-gecko .x-form-item {
     -moz-outline: none;
     outline: none;
@@ -1416,7 +1491,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 
 .x-btn button{
     border:0 none;
-    background:transparent;
+    background-color:transparent;
     padding-left:3px;
     padding-right:3px;
     cursor:pointer;
@@ -1748,7 +1823,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 /* height adjustment class */
 .x-btn-as-arrow .x-btn-mc em {
     display:block;
-    background:transparent;
+    background-color:transparent;
 	padding-bottom:14px;
 }
 
@@ -1807,7 +1882,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 }
 
 .x-btn-group-mc .x-btn-group-body {
-    background:transparent;
+    background-color:transparent;
     border: 0 none;
 }
 
@@ -2032,7 +2107,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 
 .x-toolbar-more em.x-btn-arrow {
     display:inline;
-    background:transparent;
+    background-color:transparent;
 	padding-right:0;
 }
 
@@ -2152,6 +2227,16 @@ div.x-toolbar-no-items {
 	text-overflow: ellipsis;
     padding:3px 3px 3px 5px;
     white-space: nowrap;
+}
+
+/* ActionColumn, reduce padding to accommodate 16x16 icons in normal row height */
+.x-action-col-cell .x-grid3-cell-inner {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.x-action-col-icon {
+    cursor: pointer;
 }
 
 .x-grid3-hd-inner {
@@ -2431,7 +2516,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid3-col-dd {
     border:0 none;
     padding:0;
-    background:transparent;
+    background-color:transparent;
 }
 
 .x-dd-drag-ghost .x-grid3-dd-wrap {
@@ -2619,6 +2704,11 @@ a.x-grid3-hd-btn:hover {
     top:-1px;
 }
 
+.x-grid-editor .x-form-check-wrap {
+    text-align: center;
+    margin-top: -4px;
+}
+
 .ext-ie .x-props-grid .x-editor .x-form-text {
     position:static;
     top:0;
@@ -2659,7 +2749,65 @@ a.x-grid3-hd-btn:hover {
     padding-right:0;
     border-right:1px solid;
 }
-.x-dd-drag-proxy{
+.x-pivotgrid .x-grid3-header-offset table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.x-pivotgrid .x-grid3-header-offset table td {
+    padding: 4px 3px 4px 5px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    line-height: 13px;
+    font-family: tahoma;
+}
+
+.x-pivotgrid .x-grid3-row-headers {
+    display: block;
+    float: left;
+}
+
+.x-pivotgrid .x-grid3-row-headers table {
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.x-pivotgrid .x-grid3-row-headers table td {
+    height: 18px;
+    padding: 2px 7px 0 0;
+    text-align: right;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    font-family: tahoma;
+}
+
+.ext-gecko .x-pivotgrid .x-grid3-row-headers table td {
+    height: 21px;
+}
+
+.x-grid3-header-title {
+    top: 0%;
+    left: 0%;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    font-family: tahoma;
+    font-size: 11px;
+    padding: auto 1px;
+    display: table-cell;
+}
+
+.x-grid3-header-title span {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 100%;
+    margin-top: -6px;
+}.x-dd-drag-proxy{
 	position:absolute;
 	left:0;
     top:0;
@@ -2784,20 +2932,20 @@ input.x-tree-node-cb {
 
 /* No line styles */
 .x-tree-no-lines .x-tree-elbow{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-no-lines .x-tree-elbow-end{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-no-lines .x-tree-elbow-line{
-	background:transparent;
+	background-color:transparent;
 }
 
 /* Arrows */
 .x-tree-arrows .x-tree-elbow{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-arrows .x-tree-elbow-plus{
@@ -2809,7 +2957,7 @@ input.x-tree-node-cb {
 }
 
 .x-tree-arrows .x-tree-elbow-end{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-arrows .x-tree-elbow-end-plus{
@@ -2821,7 +2969,7 @@ input.x-tree-node-cb {
 }
 
 .x-tree-arrows .x-tree-elbow-line{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-arrows .x-tree-ec-over .x-tree-elbow-plus{
@@ -2882,7 +3030,7 @@ input.x-tree-node-cb {
 }
 
 .x-tree-node .x-tree-node-inline-icon{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-node a:hover, .x-dd-drag-ghost a:hover{
@@ -3356,7 +3504,7 @@ td.x-date-mp-sep {
 
 .x-menu-list{
     padding: 2px;
-	background:transparent;
+	background-color:transparent;
 	border:0 none;
     overflow:hidden;
     overflow-y: hidden;
@@ -3478,7 +3626,7 @@ a.x-menu-item {
 }
 
 .x-menu-group-item .x-menu-item-icon{
-	background: transparent;
+	background-color: transparent;
 }
 
 .x-menu-item-checked .x-menu-group-item .x-menu-item-icon{
@@ -3521,6 +3669,13 @@ a.x-menu-item {
 }
 .ext-strict .ext-ie6 .x-menu-sep {
     margin: 0;
+    height: 1px;
+}
+
+/*
+ * Fixes an issue with "fat" separators in webkit
+ */
+.ext-webkit .x-menu-sep{
     height: 1px;
 }
 
@@ -3722,7 +3877,7 @@ a.x-menu-item {
 .x-panel-tl .x-panel-header {
     padding:5px 0 4px 0;
     border:0 none;
-    background:transparent;
+    background:transparent no-repeat;
 }
 
 .x-panel-tl .x-panel-icon, .x-window-tl .x-panel-icon {
@@ -3795,7 +3950,7 @@ a.x-menu-item {
 }
 
 .x-panel-mc .x-panel-body {
-    background:transparent;
+    background-color:transparent;
     border: 0 none;
 }
 
@@ -3933,6 +4088,22 @@ a.x-menu-item {
     background-position:-15px -90px;
 }
 
+.x-tool-prev {
+    background-position:0 -105px;
+}
+
+.x-tool-prev-over {
+    background-position:-15px -105px;
+}
+
+.x-tool-next {
+    background-position:0 -120px;
+}
+
+.x-tool-next-over {
+    background-position:-15px -120px;
+}
+
 .x-tool-pin {
     background-position:0 -135px;
 }
@@ -3965,20 +4136,20 @@ a.x-menu-item {
     background-position:-15px -180px;
 }
 
-.x-tool-up {
-    background-position:0 -210px;
-}
-
-.x-tool-up-over {
-    background-position:-15px -210px;
-}
-
 .x-tool-down {
     background-position:0 -195px;
 }
 
 .x-tool-down-over {
     background-position:-15px -195px;
+}
+
+.x-tool-up {
+    background-position:0 -210px;
+}
+
+.x-tool-up-over {
+    background-position:-15px -210px;
 }
 
 .x-tool-refresh {
@@ -3989,20 +4160,20 @@ a.x-menu-item {
     background-position:-15px -225px;
 }
 
-.x-tool-minus {
-    background-position:0 -255px;
-}
-
-.x-tool-minus-over {
-    background-position:-15px -255px;
-}
-
 .x-tool-plus {
     background-position:0 -240px;
 }
 
 .x-tool-plus-over {
     background-position:-15px -240px;
+}
+
+.x-tool-minus {
+    background-position:0 -255px;
+}
+
+.x-tool-minus-over {
+    background-position:-15px -255px;
 }
 
 .x-tool-search {
@@ -4035,6 +4206,38 @@ a.x-menu-item {
 
 .x-tool-print-over {
     background-position:-15px -315px;
+}
+
+.x-tool-expand {
+    background-position:0 -330px;
+}
+
+.x-tool-expand-over {
+    background-position:-15px -330px;
+}
+
+.x-tool-collapse {
+    background-position:0 -345px;
+}
+
+.x-tool-collapse-over {
+    background-position:-15px -345px;
+}
+
+.x-tool-resize {
+    background-position:0 -360px;
+}
+
+.x-tool-resize-over {
+    background-position:-15px -360px;
+}
+
+.x-tool-move {
+    background-position:0 -375px;
+}
+
+.x-tool-move-over {
+    background-position:-15px -375px;
 }
 
 /* Ghosting */
@@ -4390,7 +4593,7 @@ a.x-menu-item {
 }
 
 .x-window-body {
-    background:transparent;
+    background-color:transparent;
 }
 
 .x-panel-ghost .x-window-tl {
@@ -4667,7 +4870,7 @@ body.ext-ie6.x-body-masked .x-window select {
 
 .x-tool-expand-east, .x-tool-expand-west {
     float:none;
-    margin:3px auto;
+    margin:3px 2px;
 }
 
 .x-accordion-hd .x-tool-toggle {
@@ -4831,14 +5034,14 @@ body.ext-ie6.x-body-masked .x-window select {
     border:0 none;
     width:5px !important;
     padding:0;
-    background:transparent;
+    background-color:transparent;
 }
 
 .x-layout-cmini-north, .x-layout-cmini-south {
     border:0 none;
     height:5px !important;
     padding:0;
-    background:transparent;
+    background-color:transparent;
 }
 
 .x-viewport, .x-viewport body {
@@ -5133,12 +5336,9 @@ body.ext-ie6.x-body-masked .x-window select {
     height:32px;
 }
 
-.ext-ie .x-window-dlg .ext-mb-icon {
-    width:44px; /* 3px IE margin issue */
-}
-
 .x-window-dlg .x-dlg-icon .ext-mb-content{
-    zoom: 1; margin-left: 47px;
+    zoom: 1; 
+    margin-left: 47px;
 }
 
 .x-window-dlg .ext-mb-info, .x-window-dlg .ext-mb-warning, .x-window-dlg .ext-mb-question, .x-window-dlg .ext-mb-error {

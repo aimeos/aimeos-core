@@ -1,9 +1,23 @@
-/*!
- * Ext JS Library 3.2.1
- * Copyright(c) 2006-2010 Ext JS, Inc.
- * licensing@extjs.com
- * http://www.extjs.com/license
- */
+/*
+This file is part of Ext JS 3.4
+
+Copyright (c) 2011-2013 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as
+published by the Free Software Foundation and appearing in the file LICENSE included in the
+packaging of this file.
+
+Please review the following information to ensure the GNU General Public License version 3.0
+requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department
+at http://www.sencha.com/contact.
+
+Build date: 2013-04-03 15:07:25
+*/
 .x-menu {
 	z-index: 15000;
 	zoom: 1;
@@ -25,7 +39,7 @@
 
 .x-menu-list{
     padding: 2px;
-	background:transparent;
+	background-color:transparent;
 	border:0 none;
     overflow:hidden;
     overflow-y: hidden;
@@ -147,7 +161,7 @@ a.x-menu-item {
 }
 
 .x-menu-group-item .x-menu-item-icon{
-	background: transparent;
+	background-color: transparent;
 }
 
 .x-menu-item-checked .x-menu-group-item .x-menu-item-icon{
@@ -190,6 +204,13 @@ a.x-menu-item {
 }
 .ext-strict .ext-ie6 .x-menu-sep {
     margin: 0;
+    height: 1px;
+}
+
+/*
+ * Fixes an issue with "fat" separators in webkit
+ */
+.ext-webkit .x-menu-sep{
     height: 1px;
 }
 

@@ -1,9 +1,23 @@
-/*!
- * Ext JS Library 3.2.1
- * Copyright(c) 2006-2010 Ext JS, Inc.
- * licensing@extjs.com
- * http://www.extjs.com/license
- */
+/*
+This file is part of Ext JS 3.4
+
+Copyright (c) 2011-2013 Sencha Inc
+
+Contact:  http://www.sencha.com/contact
+
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as
+published by the Free Software Foundation and appearing in the file LICENSE included in the
+packaging of this file.
+
+Please review the following information to ensure the GNU General Public License version 3.0
+requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+
+If you are unsure which license is appropriate for your use, please contact the sales department
+at http://www.sencha.com/contact.
+
+Build date: 2013-04-03 15:07:25
+*/
 .x-tab-panel {
     overflow:hidden;
 }
@@ -172,22 +186,28 @@ ul.x-tab-strip li.x-tab-edge {
 }
 
 /*
- * Horrible hack for IE8 in quirks mode
+ * For IE8/9 in quirks mode
  */
-.ext-ie8 ul.x-tab-strip li {
+.ext-ie8 .x-tab-strip li {
     position: relative;
 }
-.ext-ie8 .x-tab-strip .x-tab-right{
-    margin-bottom: 0 !important;
+.ext-border-box .ext-ie8 .x-tab-strip-top .x-tab-right, .ext-border-box .ext-ie9 .x-tab-strip-top .x-tab-right {
     top: 1px;
 }
-.ext-ie8 ul.x-tab-strip-top {
+.ext-ie8 .x-tab-strip-top, .ext-ie9 .x-tab-strip-top {
+    padding-top: 1px;
+}
+.ext-border-box .ext-ie8 .x-tab-strip-top, .ext-border-box .ext-ie9 .x-tab-strip-top {
     padding-top: 0;
 }
-.ext-ie8 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
+.ext-ie8 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close, .ext-ie9 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
+    top:3px;
+}
+.ext-border-box .ext-ie8 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close,
+.ext-border-box .ext-ie9 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
     top:4px;
 }
-.ext-ie8 .x-tab-strip-bottom .x-tab-right{
+.ext-ie8 .x-tab-strip-bottom .x-tab-right, .ext-ie9 .x-tab-strip-bottom .x-tab-right{
     top:0;
 }
 
