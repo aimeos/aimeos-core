@@ -9,7 +9,6 @@ Ext.ns('MShop.panel.type');
 /**
  * Nest all types in a types tab
  * 
- * @todo abstract this if useful
  * @class MShop.panel.type.TabUi
  * @extends Ext.Panel
  */

@@ -6,7 +6,7 @@
 
 Ext.ns( 'MShop.panel.locale' );
 
-MShop.panel.locale.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
+MShop.panel.locale.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 
 	recordName : 'Locale',
 	idProperty : 'locale.id',

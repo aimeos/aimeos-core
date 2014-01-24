@@ -6,6 +6,9 @@
 
 Ext.ns('MShop.panel.order.base.address');
 
+/**
+ * @todo rename it's not a itemUi'
+ */
 MShop.panel.order.base.address.ItemUi = Ext.extend(Ext.Panel, {
 
 	recordName : 'Order_Base_Address',

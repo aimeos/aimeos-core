@@ -1,12 +1,16 @@
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
+ * Copyright (c) Metaways Infosystems GmbH, 2014
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
 
 Ext.ns( 'MShop.panel.locale.site' );
 
-MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
+
+/**
+ * @todo refactor some of these overloads to his abstracts
+ */
+MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 
 	recordName : 'Locale_Site',
 	idProperty : 'locale.site.id',
@@ -16,7 +20,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	{
 		this.title = _('Locale site item details');
 
-		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
+		MShop.panel.AbstractListItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
 			xtype : 'tabpanel',

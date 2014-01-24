@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
+ * Copyright (c) Metaways Infosystems GmbH, 2013
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
@@ -26,10 +26,6 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 * @cfg  {Ext.data.Record} record (optional)
 	 */
 	record: null,
-	/**
-	 * @cfg {MShop.panel.AbstractListUi}
-	 */
-	listUI: null,
 	/**
 	 * @cfg {Ext.from.FormPanel} mainForm
 	 */
@@ -208,32 +204,6 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		if (this.fireEvent('beforesave', this, this.record) === false) {
 			this.isSaveing = false;
 			this.saveMask.hide();
-		}
-
-		var recordRefIdProperty = this.listUI.listNamePrefix + "refid";
-		var recordTypeIdProperty = this.listUI.listNamePrefix + "typeid";
-		
-		var index = this.store.findBy(function (item, index) {
-			var recordRefId = this.record.get(recordRefIdProperty);
-			var recordTypeId = this.mainForm.getForm().getFieldValues()[recordTypeIdProperty];
-	
-			var itemRefId = item.get(recordRefIdProperty);
-			var itemTypeId = item.get(recordTypeIdProperty);
-
-			var recordId = this.record.id;
-			var itemId = index;
-
-			if (! recordRefId || ! recordTypeId || ! itemRefId || ! itemTypeId)
-				return false;
-
-			return ( recordRefId == itemRefId && recordTypeId == itemTypeId && recordId != itemId );
-		}, this);
-
-		if (index != -1) {
-			this.isSaveing = false;
-			this.saveMask.hide();
-			Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
-			return;
 		}
 
 		this.mainForm.getForm().updateRecord(this.record);

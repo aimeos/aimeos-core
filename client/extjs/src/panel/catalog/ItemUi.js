@@ -6,7 +6,10 @@
 
 Ext.ns('MShop.panel.catalog');
 
-MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
+/**
+ * move some parts to AbstractTreeItemUI and parametresize
+ */
+MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
 
 	maximized : true,
 	layout : 'fit',

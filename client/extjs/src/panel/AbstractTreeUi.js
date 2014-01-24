@@ -327,6 +327,8 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 			{
 				xtype : 'MShop.panel.' + this.domain +'.itemui',
 				record : record,
+				action : this.action,
+				treeUI : this,
 				store : this.store
 			}
 		);
