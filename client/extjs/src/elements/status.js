@@ -39,10 +39,10 @@ MShop.elements.status._store = new Ext.data.ArrayStore({
        {name: 'label', type: 'string'}
     ],
     data : [
-    	[-2, MShop.I18n.dt( 'client/extjs', 'archive' ) ],
-    	[-1, MShop.I18n.dt( 'client/extjs', 'review' ) ],
-    	[0, MShop.I18n.dt( 'client/extjs', 'disabled' ) ],
-    	[1, MShop.I18n.dt( 'client/extjs', 'enabled' ) ]
+    	[-2, MShop.I18n.dt( 'client/extjs', 'status:archive' ) ],
+    	[-1, MShop.I18n.dt( 'client/extjs', 'status:review' ) ],
+    	[0, MShop.I18n.dt( 'client/extjs', 'status:disabled' ) ],
+    	[1, MShop.I18n.dt( 'client/extjs', 'status:enabled' ) ]
     ]
 });
 
