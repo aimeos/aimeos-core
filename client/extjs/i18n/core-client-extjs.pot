@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 10:54+0100\n"
+"POT-Creation-Date: 2014-01-28 15:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1141,18 +1141,6 @@ msgstr ""
 msgid "You are going to delete one or more items. Would you like to proceed?"
 msgstr ""
 
-#: src/elements/status.js:42
-msgid "archive"
-msgstr ""
-
-#: src/elements/status.js:44
-msgid "disabled"
-msgstr ""
-
-#: src/elements/status.js:45
-msgid "enabled"
-msgstr ""
-
 #: src/panel/plugin/ItemUi.js:132 src/panel/attribute/ItemUi.js:127
 #: src/panel/catalog/ItemUi.js:106 src/panel/price/ItemUi.js:149
 #: src/panel/type/text/ItemUi.js:102 src/panel/type/media/ItemUi.js:102
@@ -1195,10 +1183,6 @@ msgstr ""
 msgid "pay:unfinished"
 msgstr ""
 
-#: src/elements/status.js:43
-msgid "review"
-msgstr ""
-
 #: src/elements/deliverystatus.js:36
 msgid "stat:deleted"
 msgstr ""
@@ -1233,4 +1217,20 @@ msgstr ""
 
 #: src/elements/deliverystatus.js:35
 msgid "stat:unfinished"
+msgstr ""
+
+#: src/elements/status.js:42
+msgid "status:archive"
+msgstr ""
+
+#: src/elements/status.js:44
+msgid "status:disabled"
+msgstr ""
+
+#: src/elements/status.js:45
+msgid "status:enabled"
+msgstr ""
+
+#: src/elements/status.js:43
+msgid "status:review"
 msgstr ""
