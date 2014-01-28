@@ -111,4 +111,10 @@ class MW_Translation_NoneTest extends MW_Unittest_Testcase
 		}
 	}
 
+
+	public function testGetAll()
+	{
+		$this->assertEquals( array(), $this->_object->getAll( 'testDomain' ) );
+	}
+
 }
