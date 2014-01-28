@@ -8,7 +8,7 @@ Ext.ns( 'MShop.panel.order.base.product.attribute' );
 
 MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
 
-	title: _( 'Attribute' ),
+	title: MShop.I18n.dt( 'client/extjs', 'Attribute' ),
 	recordName : 'Order_Base_Product_Attribute',
 	idProperty : 'order.base.product.attribute.id',
 	siteidProperty : 'order.base.product.attribute.siteid',
@@ -72,47 +72,47 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend( MShop.panel.A
 		return [ {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.attribute.id',
-				header : _( 'ID' ),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				width : 50,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.attribute.type',
-				header : _('Type'),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 				width : 150
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.attribute.name',
-				header : _('Name'),
+				header : MShop.I18n.dt( 'client/extjs', 'Name' ),
 				id : 'order-base-product-attribute-name'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.attribute.code',
-				header : _( 'Code' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
 				width : 150
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.attribute.value',
-				header : _( 'Value' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Value' ),
 				width : 150
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.product.attribute.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				width : 130,
 				format : 'Y-m-d H:i:s',
 				hidden : true
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.product.attribute.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				width : 130,
 				format : 'Y-m-d H:i:s',
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.attribute.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				width : 130,
 				hidden : true
 			}

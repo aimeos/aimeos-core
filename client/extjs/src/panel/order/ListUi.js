@@ -30,7 +30,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 	initComponent : function()
 	{
-		this.title = _('Order');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Order' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -44,52 +44,52 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'order.id',
-				header : _('Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				width : 55,
 				id : 'order-list-id'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.type',
-				header : _('Type/Source'),
+				header : MShop.I18n.dt( 'client/extjs', 'Source' ),
 				sortable : true,
 				width : 85,
 				align: 'center'
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.datepayment',
-				header : _('Purchase date'),
-				sortable : true,
-				width : 180,
-				format : 'Y-m-d H:i:s'
-			}, {
-				xtype : 'datecolumn',
-				dataIndex : 'order.datedelivery',
-				header : _('Delivery date'),
+				header : MShop.I18n.dt( 'client/extjs', 'Purchase date' ),
 				sortable : true,
 				width : 180,
 				format : 'Y-m-d H:i:s'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.statuspayment',
-				header : _('Payment status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Payment status' ),
 				sortable : true,
 				renderer: MShop.elements.paymentstatus.renderer
 			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'order.datedelivery',
+				header : MShop.I18n.dt( 'client/extjs', 'Delivery date' ),
+				sortable : true,
+				width : 180,
+				format : 'Y-m-d H:i:s'
+			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.statusdelivery',
-				header : _('Delivery status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Delivery status' ),
 				sortable : true,
 				renderer: MShop.elements.deliverystatus.renderer
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.relatedid',
-				header : _('Related Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'Related order ID' ),
 				id: 'order-relatedid'
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				width : 130,
 				format : 'Y-m-d H:i:s',
 				sortable : true,
@@ -98,7 +98,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				width : 130,
 				format : 'Y-m-d H:i:s',
 				sortable : true,
@@ -107,7 +107,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				width : 130,
 				sortable : true,
 				editable : false,
@@ -119,7 +119,9 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     onOpenEditWindow: function(action) {
         if (action === 'add') {
-            return Ext.Msg.alert(_('Not implemented'), _('Sorry, adding orders manually is currently not implemented'));
+            return Ext.Msg.alert(
+            	MShop.I18n.dt( 'client/extjs', 'Not implemented' ),
+            	MShop.I18n.dt( 'client/extjs', 'Sorry, adding orders manually is currently not implemented' ) );
         }
 
         return MShop.panel.order.ListUi.superclass.onOpenEditWindow.apply(this, arguments);

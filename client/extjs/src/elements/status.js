@@ -8,7 +8,7 @@ Ext.ns('MShop.elements.status');
 
 MShop.elements.status.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel: _('Status'),
+        fieldLabel: MShop.I18n.dt( 'client/extjs', 'Status' ),
         anchor: '100%',
         store: MShop.elements.status._store,
         mode: 'local',
@@ -39,10 +39,10 @@ MShop.elements.status._store = new Ext.data.ArrayStore({
        {name: 'label', type: 'string'}
     ],
     data : [
-    	[-2, _('archive')],
-    	[-1, _('review')],
-    	[0, _('disabled')],
-    	[1, _('enabled')]
+    	[-2, MShop.I18n.dt( 'client/extjs', 'archive' ) ],
+    	[-1, MShop.I18n.dt( 'client/extjs', 'review' ) ],
+    	[0, MShop.I18n.dt( 'client/extjs', 'disabled' ) ],
+    	[1, MShop.I18n.dt( 'client/extjs', 'enabled' ) ]
     ]
 });
 

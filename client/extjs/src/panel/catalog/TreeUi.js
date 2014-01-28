@@ -27,7 +27,7 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 
 	initComponent : function()
 	{
-		this.title = _('Catalog');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Catalog' );
 		this.domain = 'catalog';
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);

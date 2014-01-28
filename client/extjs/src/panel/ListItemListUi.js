@@ -84,7 +84,9 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     onOpenEditWindow: function(action) {
         if (action === 'add') {
-            return Ext.Msg.alert(_('Select Item'), _('Please select an item on the right side and add it via drag and drop to this list.'));
+            return Ext.Msg.alert(
+            	MShop.I18n.dt( 'client/extjs', 'Select Item' ),
+            	MShop.I18n.dt( 'client/extjs', 'Please select an item on the right side and add it via drag and drop to this list.' ) );
         }
 
         return MShop.panel.ListItemListUi.superclass.onOpenEditWindow.apply(this, arguments);
@@ -149,21 +151,21 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'id',
-                header : _('Id'),
+                header : MShop.I18n.dt( 'client/extjs', 'ID' ),
                 width : 50,
                 hidden : true
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'refid',
-                header : _('Ref-Id'),
+                header : MShop.I18n.dt( 'client/extjs', 'Ref-ID' ),
                 width : 50,
                 hidden : true
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'status',
-                header : _('List Status'),
+                header : MShop.I18n.dt( 'client/extjs', 'List Status' ),
                 width : 50,
                 hidden : true,
                 align: 'center',
@@ -172,14 +174,14 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'position',
-                header : _('Position'),
+                header : MShop.I18n.dt( 'client/extjs', 'Position' ),
                 width : 50,
                 hidden : true
             },
             {
                 xtype : 'datecolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'datestart',
-                header : _('Start date'),
+                header : MShop.I18n.dt( 'client/extjs', 'Start date' ),
                 width : 120,
                 format : 'Y-m-d H:i:s',
                 hidden : true
@@ -187,7 +189,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'dateend',
-                header : _('End date'),
+                header : MShop.I18n.dt( 'client/extjs', 'End date' ),
                 width : 120,
                 format : 'Y-m-d H:i:s',
                 hidden : true
@@ -195,7 +197,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'config',
-                header : _('Configuration'),
+                header : MShop.I18n.dt( 'client/extjs', 'Configuration' ),
                 width : 200,
                 editable : false,
                 hidden : true,
@@ -210,7 +212,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'ctime',
-                header : _('Created'),
+                header : MShop.I18n.dt( 'client/extjs', 'Created' ),
                 width : 120,
                 format : 'Y-m-d H:i:s',
                 hidden : true
@@ -218,7 +220,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'mtime',
-                header : _('Last modified'),
+                header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
                 width : 120,
                 format : 'Y-m-d H:i:s',
                 hidden : true
@@ -226,7 +228,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'editor',
-                header : _('Editor'),
+                header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
                 width : 50,
                 hidden : true
             }

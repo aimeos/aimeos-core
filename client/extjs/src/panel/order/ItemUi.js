@@ -14,8 +14,10 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	idProperty : 'id',
 	siteidProperty : 'order.siteid',
 
+	
 	initComponent : function() {
-		this.title = _('Order item details');
+
+		this.title = MShop.I18n.dt( 'client/extjs', 'Order item details' );
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
@@ -27,7 +29,7 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic'),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -55,19 +57,21 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _('ID'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'order.id'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Source'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Source' ),
 							name : 'order.type'
 						}, {
-							xtype : 'displayfield',
-							fieldLabel : _('Purchase date'),
-							name : 'order.datepayment'
+							xtype : 'datefield',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Payment date' ),
+							name : 'order.datepayment',
+							format : 'Y-m-d H:i:s',
+							emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 						}, {
 							xtype : 'combo',
-							fieldLabel : _('Payment status'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Payment status' ),
 							name: 'order.statuspayment',
 							mode : 'local',
 							store : MShop.elements.paymentstatus._store,
@@ -75,17 +79,16 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							valueField : 'value',
 							triggerAction : 'all',
 							allowBlank : false,
-							typeAhead : true,
-							emptyText : _('Status (required)')
+							typeAhead : true
 						}, {
 							xtype : 'datefield',
-							fieldLabel : 'Delivery date',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Delivery date' ),
 							name : 'order.datedelivery',
 							format : 'Y-m-d H:i:s',
-							emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 						}, {
 							xtype : 'combo',
-							fieldLabel : _('Delivery status'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Delivery status' ),
 							name: 'order.statusdelivery',
 							mode : 'local',
 							store : MShop.elements.deliverystatus._store,
@@ -93,19 +96,18 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							valueField : 'value',
 							triggerAction : 'all',
 							allowBlank : false,
-							typeAhead : true,
-							emptyText : _('Status (required)')
+							typeAhead : true
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'order.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'order.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'order.editor'
 						} ]
 					} ]

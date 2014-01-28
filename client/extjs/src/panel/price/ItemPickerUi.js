@@ -8,19 +8,19 @@ Ext.ns('MShop.panel.price');
 
 MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerUi, {
 
-	title : _('Price'),
+	title : MShop.I18n.dt( 'client/extjs', 'Price'),
 
 	initComponent : function() {
 
 		Ext.apply(this.itemConfig, {
-			title : _('Associated Prices'),
+			title : MShop.I18n.dt( 'client/extjs', 'Associated prices' ),
 			xtype : 'MShop.panel.listitemlistui',
 			domain : 'price',
 			getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
 		});
 
 		Ext.apply(this.listConfig, {
-			title : _('Available Prices'),
+			title : MShop.I18n.dt( 'client/extjs', 'Available prices' ),
 			xtype : 'MShop.panel.price.listuismall'
 		});
 
@@ -37,7 +37,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'typeid',
-				header : _('List type'),
+				header : MShop.I18n.dt( 'client/extjs', 'List type' ),
 				id : 'listtype',
 				width : 70,
 				renderer : this.typeColumnRenderer.createDelegate(this, [ this.listTypeStore, conf.listTypeLabelProperty ], true)
@@ -45,7 +45,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				id : 'refstatus',
 				width : 50,
 				align: 'center',
@@ -54,7 +54,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Type'),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 				id : 'reftype',
 				width : 70,
 				renderer : this.refTypeColumnRenderer.createDelegate(this, [ this.typeStore, 'price.typeid', 'price.type.label' ], true)
@@ -62,7 +62,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				id : 'reflabel',
 				width : 100,
 				hidden : true,
@@ -71,7 +71,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Currency'),
+				header : MShop.I18n.dt( 'client/extjs', 'Currency' ),
 				id : 'refcurrency',
 				width : 50,
 				renderer : this.refColumnRenderer.createDelegate(this, [ "price.currencyid" ], true)
@@ -79,7 +79,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Quantity'),
+				header : MShop.I18n.dt( 'client/extjs', 'Quantity' ),
 				id : 'refquantiy',
 				width : 70,
 				align : 'right',
@@ -88,7 +88,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Price'),
+				header : MShop.I18n.dt( 'client/extjs', 'Price' ),
 				id : 'refcontent',
 				align : 'right',
 				renderer : this.refDecimalColumnRenderer.createDelegate(this, [ "price.value" ], true)
@@ -96,7 +96,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Rebate'),
+				header : MShop.I18n.dt( 'client/extjs', 'Rebate' ),
 				id : 'refrebate',
 				width : 70,
 				align : 'right',
@@ -106,7 +106,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Costs'),
+				header : MShop.I18n.dt( 'client/extjs', 'Costs' ),
 				sortable : false,
 				id : 'refshipping',
 				width : 70,
@@ -117,13 +117,13 @@ MShop.panel.price.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Tax rate'),
+				header : MShop.I18n.dt( 'client/extjs', 'Tax rate' ),
 				sortable : false,
 				id : 'reftaxrate',
 				width : 70,
 				align : 'right',
 				hidden : !MShop.Config.get( 'client/extjs/panel/price/itempickerui/taxrate', 
-				MShop.Config.get('client/extjs/panel/price/taxrate', false ) ),
+						MShop.Config.get('client/extjs/panel/price/taxrate', false ) ),
 				renderer : this.refDecimalColumnRenderer.createDelegate(this, [ "price.taxrate" ], true)
 			}
 		];

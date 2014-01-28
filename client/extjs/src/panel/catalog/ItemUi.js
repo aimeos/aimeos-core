@@ -14,8 +14,8 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	idProperty : 'id',
 	siteidProperty : 'catalog.siteid',
 
+	
 	initComponent : function() {
-		this.title = _( 'Catalog item details' );
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 		
@@ -27,7 +27,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			plugins : ['ux.itemregistry'],
 			items : [ {
 				xtype : 'panel',
-				title : _( 'Basic' ),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -54,35 +54,35 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'status'
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Code'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
 							name : 'code',
 							allowBlank : false,
 							maxLength : 32,
-							emptyText : _('Category code (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Unique code (required)')
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Label'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'label',
 							allowBlank : false,
-							emptyText : _( 'Category name (required)' )
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'catalog.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'catalog.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'catalog.editor'
 						} ]
 					} ]
@@ -103,8 +103,10 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['label'] : 'new';
-		this.setTitle( 'Catalog: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
+		var label = this.record ? this.record.data['label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Catalog item panel title with catalog label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Catalog: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.catalog.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
@@ -134,9 +136,10 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 	
 	onSaveItem: function() {
-		if( !this.mainForm.getForm().isValid() && this.fireEvent( 'validate', this ) !== false )
-		{
-			Ext.Msg.alert( _( 'Invalid Data' ), _( 'Please recheck you data' ) );
+		if( !this.mainForm.getForm().isValid() && this.fireEvent( 'validate', this ) !== false ) {
+			Ext.Msg.alert(
+				MShop.I18n.dt( 'client/extjs', 'Invalid data' ), 
+				MShop.I18n.dt( 'client/extjs', 'Please recheck you data' ) );
 			return;
 		}
 

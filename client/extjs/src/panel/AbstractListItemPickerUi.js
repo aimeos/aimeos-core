@@ -50,7 +50,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 
 		Ext.apply(this.itemListUi.grid, {
 			viewConfig: {
-				emptyText: _('No Items'),
+				emptyText: MShop.I18n.dt( 'client/extjs', 'No Items' ),
 				getRowClass: function( record, index ) {
 					
 					siteid = MShop.config.site['locale.site.id'];
@@ -299,7 +299,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 
 	typeColumnRenderer : function(refId, metaData, record, rowIndex, colIndex, store, typeStore, displayField) {
 		if( Ext.isEmpty( displayField ) ) {
-			throw new Ext.Error( 'Display field is empty' );
+			throw new Ext.Error( MShop.I18n.dt( 'client/extjs', 'Display field is empty' ) );
 		}
 
 		if( ! Ext.isEmpty( refId ) )
@@ -356,7 +356,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 		var refItem = this.getRefStore().getById(refId);
 
 		if (refItem) {
-			return refItem.get(displayField) || _('all');
+			return refItem.get(displayField) || MShop.I18n.dt( 'client/extjs', 'All' );
 		}
 
 		return '';

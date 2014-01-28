@@ -37,7 +37,7 @@ Ext.extend(MShop.elements.site.ComboBox, Ext.form.ComboBox, {
 			domainTabIdx = mainTabPanel.items.indexOf(activeTabPanel),
 			siteCode = site ? site.get('locale.site.code') : 'default';
 
-		new Ext.LoadMask(Ext.getBody(), {msg: _('Switching Site...')}).show();
+		new Ext.LoadMask( Ext.getBody(), { msg: MShop.I18n.dt( 'client/extjs', 'Switching site ...' ) } ).show();
 
 		MShop.urlManager.redirect( { site: siteCode, tab : domainTabIdx } );
 	}

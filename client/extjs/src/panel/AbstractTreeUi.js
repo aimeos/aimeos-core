@@ -220,8 +220,8 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 		var that = this;
 
 		Ext.Msg.show({
-			title: _('Delete items?'),
-			msg: _('You are going to delete one or more items. Would you like to proceed?'),
+			title: MShop.I18n.dt( 'client/extjs', 'Delete items?' ),
+			msg: MShop.I18n.dt( 'client/extjs', 'You are going to delete one or more items. Would you like to proceed?' ),
 			buttons: Ext.Msg.YESNO,
 			fn: function (btn) {
 				if (btn == 'yes') {
@@ -308,7 +308,7 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
 					case 'destroy':
 						break; // do nothing
 					default:
-						throw new Ext.Error('Invalid action "' + action + '"');
+						throw new Ext.Error( String.format( MShop.I18n.dt( 'client/extjs', 'Invalid action "{0}"' ), action ) );
 				}
 			},
 			this );

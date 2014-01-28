@@ -33,13 +33,13 @@ MShop.elements.paymentstatus._store = new Ext.data.ArrayStore({
 		{name: 'label', type: 'string'}
 	],
 	data : [
-		[-1, _('unfinished')],
-		[0, _('deleted')],
-		[1, _('canceled')],
-		[2, _('refused')],
-		[3, _('refund')],
-		[4, _('pending')],
-		[5, _('authorized')],
-		[6, _('received')]
+		[-1, MShop.I18n.dt( 'client/extjs', 'pay:unfinished' ) ],
+		[0, MShop.I18n.dt( 'client/extjs', 'pay:deleted' ) ],
+		[1, MShop.I18n.dt( 'client/extjs', 'pay:canceled' ) ],
+		[2, MShop.I18n.dt( 'client/extjs', 'pay:refused' ) ],
+		[3, MShop.I18n.dt( 'client/extjs', 'pay:refund' ) ],
+		[4, MShop.I18n.dt( 'client/extjs', 'pay:pending' ) ],
+		[5, MShop.I18n.dt( 'client/extjs', 'pay:authorized' ) ],
+		[6, MShop.I18n.dt( 'client/extjs', 'pay:received' ) ]
 	]
 });

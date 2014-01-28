@@ -112,7 +112,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 			items: [
 				{
 					xtype: 'button',
-					text: _('Cancel'),
+					text: MShop.I18n.dt( 'client/extjs', 'Cancel' ),
 					width: 120,
 					scale: 'medium',
 					handler: this.close,
@@ -120,7 +120,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 				},
 				{
 					xtype: 'button',
-					text: _('Save'),
+					text: MShop.I18n.dt( 'client/extjs', 'Save' ),
 					width: 120,
 					scale: 'medium',
 					handler: this.onSaveItem,
@@ -169,7 +169,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		// kill x scrollers
 		this.getEl().select('form').applyStyles({'overflow-x': 'hidden'});
 
-		this.saveMask = new Ext.LoadMask(this.el, {msg: _('Saving')});
+		this.saveMask = new Ext.LoadMask( this.el, { msg: MShop.I18n.dt( 'client/extjs', 'Saving' ) } );
 	},
 
 	onDestroy: function() {
@@ -181,7 +181,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	},
 
 	/**
-	 * if it's not us who is saving, cancle save request
+	 * if it is not us who is saving, cancel the save request
 	 */
 	onStoreBeforeWrite: function(store, action, rs, options ) {
 		var records = Ext.isArray(rs) ? rs : [rs];
@@ -195,7 +195,9 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	onSaveItem: function() {
 		// validate data
 		if (! this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-			Ext.Msg.alert(_('Invalid Data'), _('Please recheck you data'));
+			Ext.Msg.alert(
+				MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+				MShop.I18n.dt( 'client/extjs', 'Please recheck you data' ) );
 			return;
 		}
 
@@ -232,7 +234,9 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		if (index != -1) {
 			this.isSaveing = false;
 			this.saveMask.hide();
-			Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
+			Ext.Msg.alert(
+				MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+				MShop.I18n.dt( 'client/extjs', 'This combination already exists' ) );
 			return;
 		}
 

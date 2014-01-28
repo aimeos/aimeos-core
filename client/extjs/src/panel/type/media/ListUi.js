@@ -8,7 +8,6 @@ Ext.ns('MShop.panel.media.type');
 
 MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
-	// Data Record (MShop_Media_Type like db. just without MShop)
 	recordName : 'Media_Type',
 	idProperty : 'media.type.id',
 	siteidProperty : 'media.type.siteid',
@@ -33,7 +32,7 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	// Override initComponent to set Label of tab.
 	initComponent : function()
 	{
-		this.title = _('Media Type');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Media type' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -48,14 +47,14 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		return [ {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.id',
-				header : _('ID'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				editable : false,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.status',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				width : 50,
 				align: 'center',
@@ -63,12 +62,12 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.domain',
-				header : _('Domain'),
+				header : MShop.I18n.dt( 'client/extjs', 'Domain' ),
 				sortable : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.code',
-				header : _('Code'),
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
 				sortable : true,
 				width : 150,
 				align: 'center',
@@ -77,13 +76,13 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.label',
 				id: 'media-type-label',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				editable : false
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'media.type.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -92,7 +91,7 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'media.type.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -101,7 +100,7 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'media.type.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				editable : false,

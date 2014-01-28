@@ -13,9 +13,8 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	modal : true,
 	siteidProperty : 'attribute.siteid',
 
+	
 	initComponent : function() {
-
-		this.title = _('Attribute item details');
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 		
@@ -35,7 +34,7 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -48,7 +47,7 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 				},
 				items : [ {
 					xtype : 'form',
-					title : 'Details',
+					title : MShop.I18n.dt( 'client/extjs', 'Details' ),
 					flex : 1,
 					ref : '../../mainForm',
 					autoScroll : true,
@@ -63,14 +62,14 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'attribute.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'attribute.status'
 						}, {
 							xtype : 'combo',
-							fieldLabel : _('Type'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Type' ),
 							name : 'attribute.typeid',
 							mode : 'local',
 							store : this.typeStore,
@@ -79,40 +78,39 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 							forceSelection : true,
 							triggerAction : 'all',
 							allowBlank : false,
-							typeAhead : true,
-							emptyText : _('Attribute type, e.g width, size, etc. (required)')
+							typeAhead : true
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Code'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
 							name : 'attribute.code',
 							allowBlank : false,
 							maxLength : 32,
-							emptyText : _('Attribute code (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Unique code (required)' )
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Label'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'attribute.label',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Internal attribute name (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'numberfield',
-							fieldLabel : _('Item position sharing the same type'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Item position within the same type' ),
 							name : 'attribute.position',
 							allowDecimals : false,
 							allowBlank : false,
 							value : 0
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'attribute.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'attribute.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'attribute.editor'
 						} ]
 					} ]
@@ -126,8 +124,10 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['attribute.label'] : 'new';
-		this.setTitle( 'Attribute: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
+		var label = this.record ? this.record.data['attribute.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Attribute item panel title with attribute label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Attribute: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.attribute.ItemUi.superclass.afterRender.apply( this, arguments );
 	}

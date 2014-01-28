@@ -8,14 +8,15 @@ Ext.ns('MShop.elements.domain');
 
 MShop.elements.domain.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel: _('Domain'),
+        fieldLabel: MShop.I18n.dt( 'client/extjs', 'Domain' ),
         anchor: '100%',
         store: MShop.elements.domain._store,
         mode: 'local',
         displayField: 'label',
-        emptyText : _('Domain (required)'),
+        emptyText : MShop.I18n.dt( 'client/extjs', 'Domain (required)' ),
         valueField: 'value',
         triggerAction: 'all',
+        allowEmpty: false,
         typeAhead: true
     });
 
@@ -50,15 +51,15 @@ MShop.elements.domain._store = new Ext.data.ArrayStore({
        {name: 'label', type: 'string'}
     ],
     data : [
-  		['attribute', _('Attribute')],
-    	['product', _('Product')],
-    	['media', _('Media')],
-    	['catalog', _('Catalog')],
-    	['service', _('Service')],
-    	['plugin', _('Plugin')],
-    	['customer', _('Customer')],
-    	['supplier', _('Supplier')],
-    	['text', _('Text')],
-    	['price', _('Price')]
+  		['attribute', MShop.I18n.dt( 'client/extjs', 'Attribute' ) ],
+    	['catalog', MShop.I18n.dt( 'client/extjs', 'Catalog' ) ],
+    	['customer', MShop.I18n.dt( 'client/extjs', 'Customer' ) ],
+    	['media', MShop.I18n.dt( 'client/extjs', 'Media' ) ],
+    	['plugin', MShop.I18n.dt( 'client/extjs', 'Plugin' ) ],
+    	['price', MShop.I18n.dt( 'client/extjs', 'Price' ) ],
+    	['product', MShop.I18n.dt( 'client/extjs', 'Product' ) ],
+    	['service', MShop.I18n.dt( 'client/extjs', 'Service' ) ],
+    	['supplier', MShop.I18n.dt( 'client/extjs', 'Supplier' ) ],
+    	['text', MShop.I18n.dt( 'client/extjs', 'Text' ) ]
     ]
 });

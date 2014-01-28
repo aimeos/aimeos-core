@@ -12,9 +12,10 @@ MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	layout : 'fit',
 	modal : true,
 
+
 	initComponent : function() {
 
-		this.title = _('Job item details');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Job item details' );
 
 		this.items = [ {
 			xtype : 'tabpanel',
@@ -24,7 +25,7 @@ MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -37,7 +38,7 @@ MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 				},
 				items : [ {
 					xtype : 'form',
-					title : 'Details',
+					title : MShop.I18n.dt( 'client/extjs', 'Details' ),
 					flex : 1,
 					ref : '../../mainForm',
 					autoScroll : true,
@@ -52,33 +53,33 @@ MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'job.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'job.status'
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Label'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'job.label',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Job label (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Method'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Method' ),
 							name : 'job.method'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'job.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'job.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'job.editor'
 						} ]
 					} ]

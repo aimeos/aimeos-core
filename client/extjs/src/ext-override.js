@@ -5,8 +5,8 @@
 
 
 /**
- * don't evaluate to dot (.) as obj seperator when creating accessors, 
- * to support dot's in fieldnames
+ * do not evaluate to dot (.) as obj seperator when creating accessors, 
+ * to support dots in fieldnames
  */
 Ext.apply(Ext.data.JsonReader.prototype, {
     createAccessor : function(){
@@ -31,7 +31,7 @@ Ext.apply(Ext.data.JsonReader.prototype, {
 });
 
 /**
- * - support dot's in fieldnames
+ * - support dots in fieldnames
  * - generic status renderer
  */
 Ext.form.ComboBox.prototype.initList = Ext.form.ComboBox.prototype.initList.createInterceptor(function() {

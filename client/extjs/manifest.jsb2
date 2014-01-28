@@ -97,10 +97,13 @@
 			"text": "ext-override.js",
 			"path": "src/"
 		}, {
-			"text": "Schema.js",
+			"text": "Config.js",
 			"path": "src/"
 		}, {
-			"text": "Config.js",
+			"text": "I18n.js",
+			"path": "src/"
+		}, {
+			"text": "Schema.js",
 			"path": "src/"
 		}, {
 			"text": "pagingtoolbar.js",
