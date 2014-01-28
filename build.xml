@@ -115,6 +115,7 @@
 
 
 	<target name="i18n" description="Creates all translation files">
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/extjs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
@@ -131,6 +132,7 @@
 		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/misc/phing" />
 		<jsbpackages />
 		<exec command="tx pull -a -f" checkreturn="true" logoutput="true"/>
+		<phing target="build" haltonfailure="true" dir="${coredir}/client/extjs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />

@@ -2,6 +2,16 @@
 host = https://www.transifex.com
 type = PO
 
+[arcavias.client-extjs]
+file_filter = client/extjs/i18n/<lang>.po
+source_file = client/extjs/i18n/core-client-extjs.pot
+source_lang = en
+
+[arcavias.client-extjs-ext]
+file_filter = client/extjs/i18n/ext/<lang>.po    
+source_file = client/extjs/i18n/ext/core-client-extjs-ext.pot
+source_lang = en
+
 [arcavias.client-html]
 file_filter = client/html/i18n/<lang>.po
 source_file = client/html/i18n/core-client-html.pot
