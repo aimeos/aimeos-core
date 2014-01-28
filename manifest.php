@@ -29,6 +29,8 @@ return array(
 		),
 	),
 	'i18n' => array(
+		'client/extjs' => 'client/extjs/i18n',
+		'client/extjs/ext' => 'client/extjs/i18n/ext',
 		'client/html' => 'client/html/i18n',
 		'client/html/code' => 'client/html/i18n/code',
 		'client/html/country' => 'client/html/i18n/country',
