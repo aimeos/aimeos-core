@@ -61,6 +61,20 @@ abstract class MW_Translation_Decorator_Abstract
 
 
 	/**
+	 * Returns all locale string of the given domain.
+	 *
+	 * @param string $domain Translation domain
+	 * @return array Associative list with original string as key and translation
+	 * 	as value or an associative list with index => translation as value if
+	 * 	plural forms are available
+	 */
+	public function getAll( $domain )
+	{
+		return $this->_object->getAll( $domain );
+	}
+
+
+	/**
 	 * Returns the current locale string.
 	 *
 	 * @return string ISO locale string
