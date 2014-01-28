@@ -5,8 +5,10 @@
 
 
 /* superglobal lang stubs */
-_ = function(m) {return m; };
-n_ = function(s,p,n) {return ( n > 1 ? p : s ); };
+
+_ = function( string ) { return MShop.I18n.dt( 'client/extjs/ext', string ); };
+_n = function( singular, plural, num ) {return MShop.I18n.dn( 'client/extjs/ext', singular, plural, num ); };
+
 
 Ext.onReady(function() {
 
@@ -26,9 +28,6 @@ Ext.onReady(function() {
 	//init config and translations
 	MShop.Config.init(MShop.config.configuration);
 	MShop.I18n.init(MShop.i18n);
-    
-    // no endswith textfilters operators
-    Ext.ux.AdvancedSearch.TextFilter.prototype.operators = ['equals', 'contains', 'startswith'];
     
     MShop.urlManager = new MShop.UrlManager( window.location.href );
     

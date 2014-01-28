@@ -187,7 +187,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 		for( var i = 0; i < 1 /*ddElement.selections.length*/; i++ ) {
 			criteria.push( {
 				dataIndex : this.listUi.prefix + 'id',
-				operator  : 'equals',
+				operator  : '==',
 				value     : ddElement.selections[i].data[this.itemConfig.listNamePrefix + 'refid']
 			} );
 		}

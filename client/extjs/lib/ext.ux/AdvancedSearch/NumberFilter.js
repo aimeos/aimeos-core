@@ -8,20 +8,16 @@
 Ext.ns('Ext.ux.AdvancedSearch');
 
 Ext.ux.AdvancedSearch.NumberFilter = Ext.extend(Ext.ux.AdvancedSearch.Filter, {
-    
-    defaultOperator: 'equals',
-    
+
+    operators: ['==', '>=', '=<', '>', '<'],
+    defaultOperator: '==',
     defaultValue: '',
-    
-    // _('equals') _('greaterequals') _('lessequals') _('greater') _('less')
-    operators: ['equals', 'greaterequals', 'lessequals', 'greater', 'less'],
-    
+
+
     initComponent: function() {
-        
         Ext.ux.AdvancedSearch.NumberFilter.superclass.initComponent.call(this);
     }
-    
-    
+
 });
 
 Ext.reg('ux.numberfilter', Ext.ux.AdvancedSearch.NumberFilter);
