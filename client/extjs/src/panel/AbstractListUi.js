@@ -116,7 +116,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
         Ext.apply(this.grid, {
             viewConfig: {
-                emptyText: _( 'No Items' ),
+                emptyText: MShop.I18n.dt( 'client/extjs', 'No Items' ),
                 getRowClass: function( record, index ) {
 
                     siteid = MShop.config.site['locale.site.id'];
@@ -132,37 +132,37 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
     initActions: function() {
         this.actionAdd = new Ext.Action({
-            text: _('Add'),
+            text: MShop.I18n.dt( 'client/extjs', 'Add' ),
             handler: this.onOpenEditWindow.createDelegate(this, ['add'])
         });
 
         this.actionEdit = new Ext.Action({
-            text: _('Edit'),
+            text: MShop.I18n.dt( 'client/extjs', 'Edit' ),
             disabled: true,
             handler: this.onOpenEditWindow.createDelegate(this, ['edit'])
         });
 
         this.actionCopy = new Ext.Action({
-            text: _('Copy'),
+            text: MShop.I18n.dt( 'client/extjs', 'Copy' ),
             disabled: true,
             handler: this.onOpenEditWindow.createDelegate(this, ['copy'])
         });
 
         this.actionDelete = new Ext.Action({
-            text: _('Delete'),
+            text: MShop.I18n.dt( 'client/extjs', 'Delete' ),
             disabled: true,
             handler: this.onDeleteSelectedItems.createDelegate(this)
         });
 
         this.actionExport = new Ext.Action({
-            text: _('Export'),
+            text: MShop.I18n.dt( 'client/extjs', 'Export' ),
             disabled: false,
             handler: this.onExport ? this.onExport.createDelegate(this) : Ext.emptyFn
         });
 
         this.importButton = new MShop.elements.ImportButton({
             importMethod: this.importMethod,
-            text: _('Import'),
+            text: MShop.I18n.dt( 'client/extjs', 'Import' ),
             disabled: (this.importMethod === null)
         });
 
@@ -254,8 +254,8 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
         var that = this;
 
         Ext.Msg.show({
-            title: _('Delete items?'),
-            msg: _('You are going to delete one or more items. Would you like to proceed?'),
+            title: MShop.I18n.dt( 'client/extjs', 'Delete items?' ),
+            msg: MShop.I18n.dt( 'client/extjs', 'You are going to delete one or more items. Would you like to proceed?' ),
             buttons: Ext.Msg.YESNO,
             fn: function (btn) {
                 if (btn == 'yes') {
@@ -339,14 +339,15 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
     },
 
     onStoreException: function(proxy, type, action, options, response) {
-        var title = _( 'Error' );
-        var msg, code;
+    	var msg, code;
+        var title = MShop.I18n.dt( 'client/extjs', 'Error' );
+        var errmsg = MShop.I18n.dt( 'client/extjs', 'No error information available' );
 
         if( response.error !== undefined ) {
-            msg = response && response.error ? response.error.message : _( 'No error information available' );
+            msg = response && response.error ? response.error.message : errmsg;
             code = response && response.error ? response.error.code : 0;
         } else {
-            msg = response && response.xhr.responseText[0].error ? response.xhr.responseText[0].error : _( 'No error information available' );
+            msg = response && response.xhr.responseText[0].error ? response.xhr.responseText[0].error : errmsg;
             code = response && response.xhr.responseText[0].tid ? response.xhr.responseText[0].tid : 0;
         }
         Ext.Msg.alert(title + ' (' + code + ')', msg);

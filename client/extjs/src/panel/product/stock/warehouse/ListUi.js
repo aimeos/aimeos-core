@@ -25,7 +25,7 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
 	initComponent : function()
 	{
-		this.title = _( 'Warehouse' );
+		this.title = MShop.I18n.dt( 'client/extjs', 'Warehouse' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
@@ -40,32 +40,32 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 		return [ {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.warehouse.id',
-				header : _( 'Id' ),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				width : 50,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.warehouse.status',
-				header : _( 'Status' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				align: 'center',
 				renderer : this.statusColumnRenderer.createDelegate( this )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.warehouse.code',
-				header : _( 'Code' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
 				sortable : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.warehouse.label',
-				header : _( 'Label' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				id : 'product-warehouse-list-label'
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'product.stock.warehouse.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -73,7 +73,7 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'product.stock.warehouse.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -81,7 +81,7 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.warehouse.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				hidden : true

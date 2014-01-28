@@ -13,9 +13,10 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	modal : true,
 	getAdditionalFields : Ext.emptyFn,
 
+
 	initComponent : function() {
 
-		this.title = _('List item details');
+		this.title = MShop.I18n.dt( 'client/extjs', 'List item details' );
 
 		this.items = [{
 			xtype : 'form',
@@ -37,7 +38,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					name : this.listUI.listNamePrefix + 'status'
 				}, {
 					xtype : 'combo',
-					fieldLabel : _('List type'),
+					fieldLabel : MShop.I18n.dt( 'client/extjs', 'List type' ),
 					name : this.listUI.listNamePrefix + 'typeid',
 					mode : 'local',
 					store : this.listUI.itemTypeStore,
@@ -48,21 +49,21 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					allowBlank : false,
 					typeAhead : true,
 					anchor : '100%',
-					emptyText : _('List type')
+					emptyText : MShop.I18n.dt( 'client/extjs', 'List type' )
 				}, {
 					xtype : 'datefield',
-					fieldLabel : _('Available from'),
+					fieldLabel : MShop.I18n.dt( 'client/extjs', 'Start date' ),
 					name : this.listUI.listNamePrefix + 'datestart',
 					format : 'Y-m-d H:i:s',
 					anchor : '100%',
-					emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
+					emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 				}, {
 					xtype : 'datefield',
-					fieldLabel : _('Available until'),
+					fieldLabel : MShop.I18n.dt( 'client/extjs', 'End date' ),
 					name : this.listUI.listNamePrefix + 'dateend',
 					format : 'Y-m-d H:i:s',
 					anchor : '100%',
-					emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
+					emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 				}].concat( this.getAdditionalFields() || [] )
 			}, {
 					xtype: 'MShop.panel.listconfigui',
@@ -78,7 +79,9 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	onSaveItem: function() {
 		// validate data
 		if (! this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-			Ext.Msg.alert(_('Invalid Data'), _('Please recheck you data'));
+			Ext.Msg.alert(
+				MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+				MShop.I18n.dt( 'client/extjs', 'Please recheck you data' ) );
 			return;
 		}
 
@@ -117,7 +120,9 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 		if (index != -1) {
 			this.isSaveing = false;
 			this.saveMask.hide();
-			Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
+			Ext.Msg.alert(
+				MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+				MShop.I18n.dt( 'client/extjs', 'This combination already exists' ) );
 			return;
 		}
 		

@@ -13,9 +13,10 @@ MShop.panel.order.product.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	modal : true,
 	siteidProperty : 'order.base.product.siteid',
 
+	
 	initComponent : function() {
 
-		this.title = _('Product item details');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Product item details' );
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
@@ -27,7 +28,7 @@ MShop.panel.order.product.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _( 'Product' ),
+				title : MShop.I18n.dt( 'client/extjs', 'Product' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -40,7 +41,7 @@ MShop.panel.order.product.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 				},
 				items : [ {
 					xtype : 'form',
-					title : 'Details',
+					title : MShop.I18n.dt( 'client/extjs', 'Details' ),
 					flex : 1,
 					ref : '../../mainForm',
 					autoScroll : true,
@@ -55,64 +56,64 @@ MShop.panel.order.product.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'order.base.product.id'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Product ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Product ID' ),
 							name : 'order.base.product.productid'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Order Product ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Order product ID' ),
 							name : 'order.base.product.orderproductid'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Type' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Type' ),
 							name : 'order.base.product.type'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Code' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
 							name : 'order.base.product.prodcode'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Name' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Name' ),
 							name : 'order.base.product.name'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Quantity' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Quantity' ),
 							name : 'order.base.product.quantity'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Price' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Price' ),
 							name : 'order.base.product.price'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Costs' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Costs' ),
 							name : 'order.base.product.costs'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Rebate' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Rebate' ),
 							name : 'order.base.product.rebate'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'Tax rate in %' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Tax rate in %' ),
 							name : 'order.base.product.taxrate'
 						}, {
 							xtype : 'ux.formattabledisplayfield',
-							fieldLabel : _( 'Status' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Status' ),
 							name : 'order.base.product.status',
 							renderer : MShop.elements.deliverystatus.renderer
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'order.base.product.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'order.base.product.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'order.base.product.editor'
 						} ]
 					} ]

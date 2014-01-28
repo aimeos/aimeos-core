@@ -3,7 +3,6 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-
 Ext.ns('MShop.elements.deliverystatus');
 
 /**
@@ -33,15 +32,15 @@ MShop.elements.deliverystatus._store = new Ext.data.ArrayStore({
 		{name: 'label', type: 'string'}
 	],
 	data : [
-		[-1, _('unfinished')],
-		[0, _('deleted')],
-		[1, _('pending')],
-		[2, _('progress')],
-		[3, _('dispatched')],
-		[4, _('delivered')],
-		[5, _('lost')],
-		[6, _('refused')],
-		[7, _('returned')]
+		[-1, MShop.I18n.dt( 'client/extjs', 'stat:unfinished' ) ],
+		[0, MShop.I18n.dt( 'client/extjs', 'stat:deleted' ) ],
+		[1, MShop.I18n.dt( 'client/extjs', 'stat:pending' ) ],
+		[2, MShop.I18n.dt( 'client/extjs', 'stat:progress' ) ],
+		[3, MShop.I18n.dt( 'client/extjs', 'stat:dispatched' ) ],
+		[4, MShop.I18n.dt( 'client/extjs', 'stat:delivered' ) ],
+		[5, MShop.I18n.dt( 'client/extjs', 'stat:lost' ) ],
+		[6, MShop.I18n.dt( 'client/extjs', 'stat:refused' ) ],
+		[7, MShop.I18n.dt( 'client/extjs', 'stat:returned' ) ]
 	]
 });
 

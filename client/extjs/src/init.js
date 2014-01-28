@@ -23,8 +23,9 @@ Ext.onReady(function() {
 	// init schemas
 	MShop.Schema.register(MShop.config.itemschema, MShop.config.searchschema);
     
-	//init configs
+	//init config and translations
 	MShop.Config.init(MShop.config.configuration);
+	MShop.I18n.init(MShop.i18n);
     
     // no endswith textfilters operators
     Ext.ux.AdvancedSearch.TextFilter.prototype.operators = ['equals', 'contains', 'startswith'];
@@ -37,7 +38,7 @@ Ext.onReady(function() {
         items: [{
             layout: 'fit',
             border: false,
-            tbar: ['->', /*_('Site:'),*/ {xtype: 'MShop.elements.site.combo'}],
+            tbar: ['->', {xtype: 'MShop.elements.site.combo'}],
             items: [{
                 xtype: 'tabpanel',
                 border: false,

@@ -8,19 +8,19 @@ Ext.ns('MShop.panel.product.tag');
 
 MShop.panel.product.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-	title : _('Tags'),
+	title : MShop.I18n.dt( 'client/extjs', 'Tags' ),
 
 	initComponent : function() {
 
 		Ext.apply(this.itemConfig, {
-			title : _('Associated Tags'),
+			title : MShop.I18n.dt( 'client/extjs', 'Associated tags' ),
 			xtype : 'MShop.panel.listitemlistui',
 			domain : 'product/tag',
 			getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
 		});
 
 		Ext.apply(this.listConfig, {
-			title : _('Available Tags'),
+			title : MShop.I18n.dt( 'client/extjs', 'Available tags' ),
 			xtype : 'MShop.panel.product.tag.listuismall'
 		});
 
@@ -37,7 +37,7 @@ MShop.panel.product.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPi
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'typeid',
-				header : _('List type'),
+				header : MShop.I18n.dt( 'client/extjs', 'List type' ),
 				id : 'listtype',
 				width : 70,
 				renderer : this.typeColumnRenderer.createDelegate(this, [ this.listTypeStore, conf.listTypeLabelProperty ], true)
@@ -45,7 +45,7 @@ MShop.panel.product.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPi
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Type'),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 				id : 'reftype',
 				width : 70,
 				renderer : this.refTypeColumnRenderer.createDelegate(this, [ this.typeStore, 'product.tag.typeid', 'product.tag.type.label' ], true)
@@ -53,7 +53,7 @@ MShop.panel.product.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPi
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Lang'),
+				header : MShop.I18n.dt( 'client/extjs', 'Language' ),
 				id : 'reflang',
 				width : 70,
 				renderer : this.refLangColumnRenderer.createDelegate(this, [ 'product.tag.languageid' ], true)
@@ -61,7 +61,7 @@ MShop.panel.product.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPi
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				id : 'refcontent',
 				renderer : this.refColumnRenderer.createDelegate(this, [ 'product.tag.label' ], true)
 			}

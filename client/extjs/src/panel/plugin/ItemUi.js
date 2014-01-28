@@ -14,7 +14,6 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 
 	initComponent : function() {
-		this.title = _('Plugin item details');
 		
 		this.items = [ {
 			xtype : 'tabpanel',
@@ -24,7 +23,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -37,7 +36,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 				},
 				items : [ {
 					xtype : 'form',
-					title : 'Details',
+					title : MShop.I18n.dt( 'client/extjs', 'Details' ),
 					flex : 1,
 					ref : '../../mainForm',
 					autoScroll : true,
@@ -51,14 +50,14 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs',  'ID' ),
 							name : 'plugin.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'plugin.status'
 						}, {
 							xtype : 'combo',
-							fieldLabel : _('Type'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Type' ),
 							name : 'plugin.typeid',
 							mode : 'local',
 							store : MShop.GlobalStoreMgr.get('Plugin_Type'),
@@ -68,7 +67,6 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							triggerAction : 'all',
 							allowBlank : false,
 							typeAhead : true,
-							emptyText : _('Plugin type (required)'),
 							listeners: {
 								'render' : {
 									fn: function() {
@@ -81,36 +79,36 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							}
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Provider'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Provider' ),
 							name : 'plugin.provider',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Name of the plugin provider class (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Name of the plugin provider class (required)' )
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Label'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'plugin.label',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Internal plugin name (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'numberfield',
-							fieldLabel : _('Position'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Position' ),
 							name : 'plugin.position',
 							allowDecimals : false,
 							allowBlank : false,
 							value : 0
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'plugin.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'plugin.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'plugin.editor'
 						} ]
 					} ]
@@ -131,9 +129,10 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['plugin.label'] : 'new';
-
-		this.setTitle( 'Plugin: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
+		var label = this.record ? this.record.data['plugin.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Plugin item panel title with attribute label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Plugin: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
