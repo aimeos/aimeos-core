@@ -36,7 +36,6 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
     initComponent : function(){
         this.bindStore(this.store, true);
         
-        //this.searchBox = new Ext.form.TextField({});
         this.searchBtn = new Ext.Button({
             flex: 0,
             text: _('Search'),
@@ -46,7 +45,6 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
         
         this.resetBtn = new Ext.Button({
             flex: 0,
-            //text: _('Reset'),
             iconCls: 'ux-advancedsearch-action-resetall',
             scope: this,
             handler: this.doReset
@@ -126,19 +124,7 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
     
     // TODO move this to some sort of `serializer`
     getPolishNotation: function(filterData) {
-        var pnGroup = {},
-            pnFilters = [],
-            pnOpMap = {
-                'equals' : '==',
-                'contains': '~=',
-                'startswith': '=~',
-                'greaterequals': '>=',
-                'lessequals': '<=',
-                'greater': '>',
-                'less': '<',
-                'after': '>',
-                'before': '<'
-            };
+        var pnGroup = {}, pnFilters = [];
 
         Ext.each(filterData.filters, function(filter) {
             if (filter.hasOwnProperty('condition')) {
@@ -148,7 +134,7 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
                     pnVal = {};
                     
                 pnVal[filter.dataIndex] = filter.value;
-                pnCrit[pnOpMap[filter.operator]] = pnVal;
+                pnCrit[filter.operator] = pnVal;
                 
                 pnFilters.push(pnCrit);
             }

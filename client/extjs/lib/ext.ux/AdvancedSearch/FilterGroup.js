@@ -65,12 +65,10 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
             filter: filter
         });
         criteria.addBtn = new Ext.Button({
-//            text: _('add'),
             iconCls: 'ux-advancedsearch-action-addcriteria',
             handler: this.onAddBtnClick.createDelegate(this, [criteria])
         });
         criteria.delBtn = new Ext.Button({
-//            text: _('del'),
             iconCls: 'ux-advancedsearch-action-delcriteria',
             handler: this.onDelBtnClick.createDelegate(this, [criteria])
         });
@@ -143,7 +141,6 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
         }, this);
         
         this.action_reset = new Ext.Action({
-            text: _('Reset all filters in this group'),
             iconCls: 'ux-advancedsearch-action-resetgroup',
             handler: this.resetFilters,
             scope: this

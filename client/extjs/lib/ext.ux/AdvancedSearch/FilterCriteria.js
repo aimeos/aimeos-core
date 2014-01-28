@@ -60,7 +60,6 @@ Ext.ux.AdvancedSearch.FilterCriteria = Ext.extend(Ext.Container, {
             triggerAction: 'all',
             lazyRender:true,
             forceSelection: true,
-            emptyText: _('select a criteria'),
             mode: 'local',
             store: this.filterModel,
             valueField: 'dataIndex',

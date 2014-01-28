@@ -8,20 +8,16 @@
 Ext.ns('Ext.ux.AdvancedSearch');
 
 Ext.ux.AdvancedSearch.BooleanFilter = Ext.extend(Ext.ux.AdvancedSearch.Filter, {
-    
-    defaultOperator: 'equals',
-    
+
+    operators: ['=='],
+    defaultOperator: '==',
     defaultValue: '',
-    
-    // _('equals')
-    operators: ['equals'],
-    
+
+
     initComponent: function() {
-        
         Ext.ux.AdvancedSearch.BooleanFilter.superclass.initComponent.call(this);
     }
-    
-    
+
 });
 
 Ext.reg('ux.booleanfilter', Ext.ux.AdvancedSearch.BooleanFilter);

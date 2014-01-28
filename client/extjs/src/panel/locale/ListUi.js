@@ -23,7 +23,7 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'locale.position',
-			operator : 'greaterequals',
+			operator : '>=',
 			value : 0
 		} ]
 	},
