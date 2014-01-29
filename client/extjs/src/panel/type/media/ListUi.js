@@ -24,7 +24,7 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'media.type.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},

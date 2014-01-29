@@ -44,7 +44,7 @@ MShop.elements.exportlanguage.Window = Ext.extend( Ext.Window, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'locale.language.label',
-			operator : 'contains',
+			operator : '=~',
 			value : ''
 		} ]
 	},

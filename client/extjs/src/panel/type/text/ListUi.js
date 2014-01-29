@@ -23,7 +23,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'text.type.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},

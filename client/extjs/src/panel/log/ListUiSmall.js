@@ -23,7 +23,7 @@ MShop.panel.log.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'log.timestamp',
-			operator : 'after',
+			operator : '>',
 			value : Ext.util.Format.date( new Date( new Date().valueOf() - 86400 * 1000 ), 'Y-m-d H:i:s' )
 		} ]
 	},

@@ -18,7 +18,7 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'locale.site.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : 0
 		} ]
 	},

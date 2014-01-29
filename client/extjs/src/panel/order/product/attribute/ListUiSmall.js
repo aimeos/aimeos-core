@@ -24,7 +24,7 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend( MShop.panel.A
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'order.base.product.attribute.code',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},

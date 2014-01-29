@@ -18,7 +18,7 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'service.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},

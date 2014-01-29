@@ -18,7 +18,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'price.currencyid',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},

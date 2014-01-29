@@ -23,7 +23,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'order.datepayment',
-			operator : 'after',
+			operator : '>',
 			value : Ext.util.Format.date( new Date( new Date().valueOf() - 7 * 86400 * 1000 ), 'Y-m-d H:i:s' )
 		} ]
 	},
