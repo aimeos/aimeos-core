@@ -10,6 +10,16 @@ _ = function( string ) { return MShop.I18n.dt( 'client/extjs/ext', string ); };
 _n = function( singular, plural, num ) {return MShop.I18n.dn( 'client/extjs/ext', singular, plural, num ); };
 
 
+//init config and translations
+if( MShop.config.configuration ) {
+	MShop.Config.init( MShop.config.configuration );
+}
+
+if( MShop.i18n ) {
+	MShop.I18n.init( MShop.i18n.content, MShop.i18n.locale );
+}
+
+
 Ext.onReady(function() {
 
 	Ext.ns('MShop.API');
@@ -24,10 +34,6 @@ Ext.onReady(function() {
     
 	// init schemas
 	MShop.Schema.register(MShop.config.itemschema, MShop.config.searchschema);
-    
-	//init config and translations
-	MShop.Config.init(MShop.config.configuration);
-	MShop.I18n.init(MShop.i18n);
     
     MShop.urlManager = new MShop.UrlManager( window.location.href );
     
