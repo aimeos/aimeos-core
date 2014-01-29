@@ -9,7 +9,7 @@ Ext.ns('Ext.ux.AdvancedSearch');
 
 Ext.ux.AdvancedSearch.DateFilter = Ext.extend(Ext.ux.AdvancedSearch.Filter, {
 
-	operators : ['<', '==', '>'],
+	operators : ['>', '>=', '==', '!=', '<', '<='],
 	defaultOperator : '==',
 	defaultValue : '',
 
