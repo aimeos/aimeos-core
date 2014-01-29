@@ -18,29 +18,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "!="
-msgstr ""
+msgstr "not equals"
 
 msgid "<"
-msgstr ""
+msgstr "before"
 
 msgid "<="
-msgstr ""
+msgstr "before (incl.)"
 
 msgid "=="
-msgstr ""
+msgstr "equals"
 
 msgid "=~"
-msgstr ""
+msgstr "starts with"
 
 msgid ">"
-msgstr ""
+msgstr "after"
 
 msgid ">="
-msgstr ""
+msgstr "after (incl.)"
 
 #: lib/ext.ux/AdvancedSearch.js:41 lib/ext.ux/AdvancedSearch.js:41
 msgid "Search"
 msgstr ""
 
 msgid "~="
-msgstr ""
+msgstr "contains"
