@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-29 14:27+0100\n"
+"POT-Creation-Date: 2014-01-29 21:20+0100\n"
 "PO-Revision-Date: 2014-01-29 12:00+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -474,18 +474,15 @@ msgstr ""
 msgid "Internal name (required)"
 msgstr ""
 
-#: src/panel/AbstractListItemUi.js:79
-msgid "Invalid Data"
-msgstr ""
-
 #: src/panel/AbstractTreeUi.js:311
 msgid "Invalid action \"{0}\""
 msgstr ""
 
 #: src/panel/catalog/ItemUi.js:144 src/panel/product/stock/ItemUi.js:127
 #: src/panel/locale/site/ItemUi.js:140 src/panel/AbstractItemUi.js:195
-#: src/panel/AbstractListItemUi.js:35 src/panel/AbstractTreeItemUi.js:32
-#: src/panel/ListItemItemUi.js:83 src/panel/ListItemItemUi.js:124
+#: src/panel/AbstractListItemUi.js:35 src/panel/AbstractListItemUi.js:79
+#: src/panel/AbstractTreeItemUi.js:32 src/panel/ListItemItemUi.js:83
+#: src/panel/ListItemItemUi.js:124
 msgid "Invalid data"
 msgstr ""
 
@@ -707,7 +704,7 @@ msgstr ""
 msgid "Name of the service provider class (required)"
 msgstr ""
 
-#: src/panel/AbstractListUi.js:119 src/panel/AbstractListItemPickerUi.js:53
+#: src/panel/AbstractListItemPickerUi.js:53
 #: src/panel/order/delivery/AttributeItemUi.js:48
 #: src/panel/order/product/ListUi.js:51
 #: src/panel/order/payment/AttributeItemUi.js:48
@@ -720,6 +717,10 @@ msgstr ""
 #: src/panel/order/payment/AttributeItemUi.js:154
 #: src/elements/exportlanguage.js:425
 msgid "No error information available"
+msgstr ""
+
+#: src/panel/AbstractListUi.js:119
+msgid "No items"
 msgstr ""
 
 #: src/panel/order/ListUi.js:123

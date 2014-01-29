@@ -76,7 +76,7 @@ MShop.panel.AbstractListItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             this.isSaveing = false;
             this.saveMask.hide();
             Ext.Msg.alert(
-           		MShop.I18n.dt( 'client/extjs', 'Invalid Data' ),
+           		MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
            		MShop.I18n.dt( 'client/extjs', 'This combination already exists' ) );
             return;
         }
