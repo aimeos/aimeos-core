@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-29 21:20+0100\n"
+"POT-Creation-Date: 2014-01-29 21:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -705,13 +705,6 @@ msgstr ""
 msgid "Name of the service provider class (required)"
 msgstr ""
 
-#: src/panel/AbstractListItemPickerUi.js:53
-#: src/panel/order/delivery/AttributeItemUi.js:48
-#: src/panel/order/product/ListUi.js:51
-#: src/panel/order/payment/AttributeItemUi.js:48
-msgid "No Items"
-msgstr ""
-
 #: src/panel/AbstractListUi.js:344 src/panel/AbstractUsedByListUi.js:182
 #: src/panel/order/delivery/AttributeItemUi.js:154
 #: src/panel/order/product/ListUi.js:148
@@ -720,7 +713,10 @@ msgstr ""
 msgid "No error information available"
 msgstr ""
 
-#: src/panel/AbstractListUi.js:119
+#: src/panel/AbstractListUi.js:119 src/panel/AbstractListItemPickerUi.js:53
+#: src/panel/order/delivery/AttributeItemUi.js:48
+#: src/panel/order/product/ListUi.js:51
+#: src/panel/order/payment/AttributeItemUi.js:48
 msgid "No items"
 msgstr ""
 
