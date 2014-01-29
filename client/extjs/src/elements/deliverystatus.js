@@ -3,7 +3,6 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-
 Ext.ns('MShop.elements.deliverystatus');
 
 
@@ -52,7 +51,6 @@ MShop.elements.deliverystatus.getStore = function() {
 				[7, MShop.I18n.dt( 'client/extjs', 'stat:returned' ) ]
 			]
 		});
-
     }
     
     return MShop.elements.deliverystatus._store;

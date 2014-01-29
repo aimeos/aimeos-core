@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 18:40+0100\n"
-"PO-Revision-Date: 2014-01-28 16:00+0100\n"
+"POT-Creation-Date: 2014-01-29 14:27+0100\n"
+"PO-Revision-Date: 2014-01-29 12:00+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
 "Language: English\n"
@@ -85,7 +85,7 @@ msgstr ""
 
 #: src/panel/attribute/ListUi.js:30 src/panel/attribute/ItemPickerUi.js:11
 #: src/panel/order/product/attribute/ListUiSmall.js:11
-#: src/elements/domain.js:54
+#: src/elements/domain.js:60
 msgid "Attribute"
 msgstr ""
 
@@ -152,7 +152,7 @@ msgid "Cancel"
 msgstr ""
 
 #: src/panel/catalog/TreeUi.js:30 src/panel/product/UsedByCatalogListUi.js:31
-#: src/elements/domain.js:55
+#: src/elements/domain.js:61
 msgid "Catalog"
 msgstr ""
 
@@ -283,7 +283,7 @@ msgstr ""
 msgid "Currency (required)"
 msgstr ""
 
-#: src/panel/order/OrderItemUi.js:43 src/elements/domain.js:56
+#: src/panel/order/OrderItemUi.js:43 src/elements/domain.js:62
 msgid "Customer"
 msgstr ""
 
@@ -652,7 +652,7 @@ msgstr ""
 msgid "Locale site: {0} ({1})"
 msgstr ""
 
-#: src/panel/media/ItemPickerUi.js:11 src/elements/domain.js:57
+#: src/panel/media/ItemPickerUi.js:11 src/elements/domain.js:63
 msgid "Media"
 msgstr ""
 
@@ -769,7 +769,7 @@ msgstr ""
 msgid "Please select an item on the right side and add it via drag and drop to this list."
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:28 src/elements/domain.js:58
+#: src/panel/plugin/ListUi.js:28 src/elements/domain.js:64
 msgid "Plugin"
 msgstr ""
 
@@ -798,7 +798,7 @@ msgstr ""
 #: src/panel/price/ListUiSmall.js:83 src/panel/price/ItemPickerUi.js:11
 #: src/panel/price/ItemPickerUi.js:91 src/panel/order/delivery/ItemUi.js:64
 #: src/panel/order/product/ListUi.js:247 src/panel/order/product/ItemUi.js:87
-#: src/panel/order/payment/ItemUi.js:64 src/elements/domain.js:59
+#: src/panel/order/payment/ItemUi.js:64 src/elements/domain.js:65
 msgid "Price"
 msgstr ""
 
@@ -812,7 +812,7 @@ msgid "Priority"
 msgstr ""
 
 #: src/panel/product/ListUi.js:30 src/panel/product/ItemPickerUi.js:11
-#: src/panel/order/product/ItemUi.js:31 src/elements/domain.js:60
+#: src/panel/order/product/ItemUi.js:31 src/elements/domain.js:66
 msgid "Product"
 msgstr ""
 
@@ -917,7 +917,7 @@ msgstr ""
 msgid "Select languages to export"
 msgstr ""
 
-#: src/panel/service/ListUi.js:28 src/elements/domain.js:61
+#: src/panel/service/ListUi.js:28 src/elements/domain.js:67
 msgid "Service"
 msgstr ""
 
@@ -988,7 +988,7 @@ msgstr ""
 #: src/panel/product/ListUiSmall.js:71 src/panel/product/ListUi.js:84
 #: src/panel/product/ItemUi.js:100
 #: src/panel/product/UsedByProductListUi.js:132
-#: src/panel/product/ItemPickerUi.js:80 src/elements/domain.js:62
+#: src/panel/product/ItemPickerUi.js:80 src/elements/domain.js:68
 msgid "Supplier"
 msgstr ""
 
@@ -1024,7 +1024,7 @@ msgstr ""
 msgid "Telephone"
 msgstr ""
 
-#: src/panel/text/ItemPickerUi.js:11 src/elements/domain.js:63
+#: src/panel/text/ItemPickerUi.js:11 src/elements/domain.js:69
 msgid "Text"
 msgstr ""
 
@@ -1155,86 +1155,86 @@ msgstr ""
 msgid "new"
 msgstr ""
 
-#: src/elements/paymentstatus.js:42
+#: src/elements/paymentstatus.js:50
 msgid "pay:authorized"
 msgstr "authorized"
 
-#: src/elements/paymentstatus.js:38
+#: src/elements/paymentstatus.js:46
 msgid "pay:canceled"
 msgstr "canceled"
 
-#: src/elements/paymentstatus.js:37
+#: src/elements/paymentstatus.js:45
 msgid "pay:deleted"
 msgstr "deleted"
 
-#: src/elements/paymentstatus.js:41
+#: src/elements/paymentstatus.js:49
 msgid "pay:pending"
 msgstr "pending"
 
-#: src/elements/paymentstatus.js:43
+#: src/elements/paymentstatus.js:51
 msgid "pay:received"
 msgstr "received"
 
-#: src/elements/paymentstatus.js:40
+#: src/elements/paymentstatus.js:48
 msgid "pay:refund"
 msgstr "refund"
 
-#: src/elements/paymentstatus.js:39
+#: src/elements/paymentstatus.js:47
 msgid "pay:refused"
 msgstr "refused"
 
-#: src/elements/paymentstatus.js:36
+#: src/elements/paymentstatus.js:44
 msgid "pay:unfinished"
 msgstr "unfinished"
 
-#: src/elements/deliverystatus.js:36
+#: src/elements/deliverystatus.js:44
 msgid "stat:deleted"
 msgstr "deleted"
 
-#: src/elements/deliverystatus.js:40
+#: src/elements/deliverystatus.js:48
 msgid "stat:delivered"
 msgstr "delivered"
 
-#: src/elements/deliverystatus.js:39
+#: src/elements/deliverystatus.js:47
 msgid "stat:dispatched"
 msgstr "dispatched"
 
-#: src/elements/deliverystatus.js:41
+#: src/elements/deliverystatus.js:49
 msgid "stat:lost"
 msgstr "lost"
 
-#: src/elements/deliverystatus.js:37
+#: src/elements/deliverystatus.js:45
 msgid "stat:pending"
 msgstr "pending"
 
-#: src/elements/deliverystatus.js:38
+#: src/elements/deliverystatus.js:46
 msgid "stat:progress"
 msgstr "progress"
 
-#: src/elements/deliverystatus.js:42
+#: src/elements/deliverystatus.js:50
 msgid "stat:refused"
 msgstr "refused"
 
-#: src/elements/deliverystatus.js:43
+#: src/elements/deliverystatus.js:51
 msgid "stat:returned"
 msgstr "returned"
 
-#: src/elements/deliverystatus.js:35
+#: src/elements/deliverystatus.js:43
 msgid "stat:unfinished"
 msgstr "unfinished"
 
-#: src/elements/status.js:42
+#: src/elements/status.js:46
 msgid "status:archive"
 msgstr "archive"
 
-#: src/elements/status.js:44
+#: src/elements/status.js:48
 msgid "status:disabled"
 msgstr "disabled"
 
-#: src/elements/status.js:45
+#: src/elements/status.js:49
 msgid "status:enabled"
 msgstr "enabled"
 
-#: src/elements/status.js:43
+#: src/elements/status.js:47
 msgid "status:review"
 msgstr "review"

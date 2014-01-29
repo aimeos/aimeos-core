@@ -49,7 +49,6 @@ MShop.elements.status.getStore = function() {
 		    	[1, MShop.I18n.dt( 'client/extjs', 'status:enabled' ) ]
 		    ]
 		});
-
     }
     
     return MShop.elements.status._store;

@@ -51,7 +51,6 @@ MShop.elements.paymentstatus.getStore = function() {
 				[6, MShop.I18n.dt( 'client/extjs', 'pay:received' ) ]
 			]
 		});
-
     }
     
     return MShop.elements.paymentstatus._store;
