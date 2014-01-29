@@ -50,7 +50,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 
 		Ext.apply(this.itemListUi.grid, {
 			viewConfig: {
-				emptyText: MShop.I18n.dt( 'client/extjs', 'No Items' ),
+				emptyText: MShop.I18n.dt( 'client/extjs', 'No items' ),
 				getRowClass: function( record, index ) {
 					
 					siteid = MShop.config.site['locale.site.id'];

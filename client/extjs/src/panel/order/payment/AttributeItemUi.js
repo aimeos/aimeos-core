@@ -45,7 +45,7 @@ MShop.panel.order.base.service.payment.attribute.ItemUi = Ext.extend(Ext.Panel, 
 
 		Ext.apply(this.grid, {
 			viewConfig: {
-				emptyText: MShop.I18n.dt( 'client/extjs', 'No Items' ),
+				emptyText: MShop.I18n.dt( 'client/extjs', 'No items' ),
 				getRowClass: function (record, index){
 					if (record.phantom === true) {
 						return '';
