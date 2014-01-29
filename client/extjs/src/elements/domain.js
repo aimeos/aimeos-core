@@ -10,7 +10,7 @@ MShop.elements.domain.ComboBox = function(config) {
     Ext.applyIf(config, {
         fieldLabel: MShop.I18n.dt( 'client/extjs', 'Domain' ),
         anchor: '100%',
-        store: MShop.elements.domain._store,
+        store: MShop.elements.domain.getStore(),
         mode: 'local',
         displayField: 'label',
         emptyText : MShop.I18n.dt( 'client/extjs', 'Domain (required)' ),
@@ -27,9 +27,10 @@ Ext.extend(MShop.elements.domain.ComboBox, Ext.form.ComboBox);
 
 Ext.reg('MShop.elements.domain.combo', MShop.elements.domain.ComboBox);
 
+
 MShop.elements.domain.renderer = function(id, metaData, record, rowIndex, colIndex, store) {
 
-    var value = MShop.elements.domain._store.getById(id);
+    var value = MShop.elements.domain.getStore().getById(id);
 
     if( value ) {
     	metaData.css = 'text_type_' + value.get('value');
@@ -39,27 +40,36 @@ MShop.elements.domain.renderer = function(id, metaData, record, rowIndex, colInd
     return value;
 };
 
+
 /**
  * @static
- *
+ * 
  * @return {Ext.data.DirectStore}
  */
-MShop.elements.domain._store = new Ext.data.ArrayStore({
-    idIndex : 0,
-    fields : [
-       {name: 'value', type: 'string'},
-       {name: 'label', type: 'string'}
-    ],
-    data : [
-  		['attribute', MShop.I18n.dt( 'client/extjs', 'Attribute' ) ],
-    	['catalog', MShop.I18n.dt( 'client/extjs', 'Catalog' ) ],
-    	['customer', MShop.I18n.dt( 'client/extjs', 'Customer' ) ],
-    	['media', MShop.I18n.dt( 'client/extjs', 'Media' ) ],
-    	['plugin', MShop.I18n.dt( 'client/extjs', 'Plugin' ) ],
-    	['price', MShop.I18n.dt( 'client/extjs', 'Price' ) ],
-    	['product', MShop.I18n.dt( 'client/extjs', 'Product' ) ],
-    	['service', MShop.I18n.dt( 'client/extjs', 'Service' ) ],
-    	['supplier', MShop.I18n.dt( 'client/extjs', 'Supplier' ) ],
-    	['text', MShop.I18n.dt( 'client/extjs', 'Text' ) ]
-    ]
-});
+MShop.elements.domain.getStore = function() {
+	
+    if ( !MShop.elements.domain._store ) {
+    	
+        MShop.elements.domain._store = new Ext.data.ArrayStore({
+            idIndex : 0,
+            fields : [
+               {name: 'value', type: 'string'},
+               {name: 'label', type: 'string'}
+            ],
+            data : [
+          		['attribute', MShop.I18n.dt( 'client/extjs', 'Attribute' ) ],
+            	['catalog', MShop.I18n.dt( 'client/extjs', 'Catalog' ) ],
+            	['customer', MShop.I18n.dt( 'client/extjs', 'Customer' ) ],
+            	['media', MShop.I18n.dt( 'client/extjs', 'Media' ) ],
+            	['plugin', MShop.I18n.dt( 'client/extjs', 'Plugin' ) ],
+            	['price', MShop.I18n.dt( 'client/extjs', 'Price' ) ],
+            	['product', MShop.I18n.dt( 'client/extjs', 'Product' ) ],
+            	['service', MShop.I18n.dt( 'client/extjs', 'Service' ) ],
+            	['supplier', MShop.I18n.dt( 'client/extjs', 'Supplier' ) ],
+            	['text', MShop.I18n.dt( 'client/extjs', 'Text' ) ]
+            ]
+        });
+    }
+    
+    return MShop.elements.language._store;
+};
