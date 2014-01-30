@@ -87,7 +87,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							name : 'product.code',
 							allowBlank : false,
 							maxLength : 32,
-							emptyText : MShop.I18n.dt( 'client/extjs', 'EAN, SKU or article numer (required)' )
+							emptyText : MShop.I18n.dt( 'client/extjs', 'EAN, SKU or article number (required)' )
 						}, {
 							xtype : 'textarea',
 							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
