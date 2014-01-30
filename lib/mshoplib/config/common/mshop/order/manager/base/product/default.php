@@ -9,17 +9,15 @@ return array(
 	'item' => array(
 		'insert' => '
 			INSERT INTO "mshop_order_base_product" ("baseid", "siteid", "ordprodid", "type", "prodid", "prodcode", "suppliercode", "name",
-				"mediaurl", "quantity", "price", "costs", "rebate", "taxrate", "flags", "status",
-				"mtime", "editor", "ctime", "pos")
-				SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE( MAX("pos"), 0 ) + 1
-				FROM "mshop_order_base_product"
-				WHERE baseid = ?
+				"mediaurl", "quantity", "price", "costs", "rebate", "taxrate", "flags", "status", "pos",
+				"mtime", "editor", "ctime")
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		',
 		'update' => '
 			UPDATE "mshop_order_base_product"
 			SET "baseid" = ?, "siteid" = ?, "ordprodid" = ?, "type" = ?, "prodid" = ?, "prodcode" = ?, "suppliercode" = ?, "name" = ?, "mediaurl" = ?,
-				"quantity" = ?, "price" = ?, "costs" = ?, "rebate" = ?, "taxrate" = ?, "flags" = ?, "status" = ?,
-				"mtime" = ? , "editor" = ?, "pos" = ?
+				"quantity" = ?, "price" = ?, "costs" = ?, "rebate" = ?, "taxrate" = ?, "flags" = ?, "status" = ?, "pos" = ?,
+				"mtime" = ? , "editor" = ?
 			WHERE "id" = ?
 		',
 		'delete' => '

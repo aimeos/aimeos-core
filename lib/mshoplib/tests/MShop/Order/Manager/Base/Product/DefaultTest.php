@@ -170,6 +170,7 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		}
 
 		$item->setId( null );
+		$item->setPosition( $item->getPosition() + 1 );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
 
@@ -194,15 +195,15 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
 		$this->assertEquals( $item->getMediaUrl(), $itemSaved->getMediaUrl() );
 		$this->assertEquals( $item->getPrice(), $itemSaved->getPrice() );
-		$this->assertEquals( $item->getPosition() + 1, $itemSaved->getPosition() );
+		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getQuantity(), $itemSaved->getQuantity() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getFlags(), $itemSaved->getFlags() );
 
-
 		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
+
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
