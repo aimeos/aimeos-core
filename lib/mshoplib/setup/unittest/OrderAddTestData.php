@@ -326,18 +326,8 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$prices[$dataset['prodcode'].'/'.$dataset['baseid']] = $priceManager->createItem();
 			$ordProdItem->setId(null);
 			$ordProdItem->setBaseId( $bases['ids'][ $dataset['baseid'] ] );
-
-			if( isset( $dataset['prodid'] ) ) {
-				$ordProdItem->setProductId( $prodIds[$dataset['prodid']] );
-			}
-
-			// product bundle related fields
-			if( isset( $dataset['ordprodid'] ) ){
-				$ordProdItem->setOrderProductId( $ordProds[ $dataset['ordprodid'] ] );
-			}
-			if( isset( $dataset['type'] ) ) {
-				$ordProdItem->setType( $dataset['type'] );
-			}
+			$ordProdItem->setProductId( $prodIds[$dataset['prodid']] );
+			$ordProdItem->setType( $dataset['type'] );
 			$ordProdItem->setSupplierCode( $dataset['suppliercode'] );
 			$ordProdItem->setProductCode( $dataset['prodcode'] );
 			$ordProdItem->setName( $dataset['name'] );
@@ -345,6 +335,12 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordProdItem->setQuantity( $dataset['amount'] );
 			$ordProdItem->setFlags( $dataset['flags'] );
 			$ordProdItem->setStatus( $dataset['status'] );
+			$ordProdItem->setPosition( $dataset['pos'] );
+
+			// product bundle related fields
+			if( isset( $dataset['ordprodid'] ) ){
+				$ordProdItem->setOrderProductId( $ordProds[ $dataset['ordprodid'] ] );
+			}
 
 			$priceItem = $priceManager->createItem();
 			$priceItem->setValue( $dataset['price'] );
