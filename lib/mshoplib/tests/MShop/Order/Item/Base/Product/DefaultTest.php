@@ -265,7 +265,27 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetPosition()
 	{
-		$this->assertEquals($this->_values['pos'], $this->_object->getPosition());
+		$this->assertEquals( 1, $this->_object->getPosition() );
+	}
+
+	public function testSetPosition()
+	{
+		$this->_object->setPosition( 2 );
+		$this->assertEquals( 2, $this->_object->getPosition() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+	public function testSetPositionReset()
+	{
+		$this->_object->setPosition( null );
+		$this->assertEquals( null, $this->_object->getPosition() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+	public function testSetPositionInvalid()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->setPosition( 0 );
 	}
 
 	public function testGetStatus()
@@ -290,6 +310,13 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setBaseId(111);
 		$this->assertEquals(111, $this->_object->getBaseId());
 		$this->assertTrue($this->_object->isModified());
+	}
+
+	public function testSetBaseIdReset()
+	{
+		$this->_object->setBaseId( null );
+		$this->assertEquals( null , $this->_object->getBaseId() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetTimeModified()
