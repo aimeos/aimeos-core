@@ -63,10 +63,12 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		unset($this->_object);
 	}
 
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf('MShop_Order_Item_Base_Interface', $this->_object->createItem());
 	}
+
 
 	public function testGetItem()
 	{
@@ -80,6 +82,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals($expected, $this->_object->getItem($expected->getId()));
 	}
+
 
 	public function testSaveUpdateDeleteItem()
 	{
@@ -318,7 +321,88 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testLoadStore()
+	public function testLoad()
+	{
+		$search = $this->_object->createSearch();
+		$conditions = array(
+			$search->compare('==', 'order.base.price', 53.50 ),
+			$search->compare('==', 'order.base.editor', $this->_editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$results = $this->_object->searchItems( $search );
+
+		if ( ( $item = reset($results) ) === false ) {
+			throw new Exception('No order found');
+		}
+
+		$order = $this->_object->load( $item->getId() );
+
+
+		foreach( $order->getAddresses() as $address )
+		{
+			$this->assertInternalType( 'string', $address->getId() );
+			$this->assertNotEquals( '', $address->getId() );
+			$this->assertInternalType( 'integer', $address->getBaseId() );
+		}
+
+		foreach( $order->getProducts() as $product )
+		{
+			$this->assertInternalType( 'string', $product->getId() );
+			$this->assertNotEquals( '', $product->getId() );
+			$this->assertInternalType( 'integer', $product->getBaseId() );
+			$this->assertGreaterThan( 0, $product->getPosition() );
+		}
+
+		foreach( $order->getServices() as $service )
+		{
+			$this->assertInternalType( 'string', $service->getId() );
+			$this->assertNotEquals( '', $service->getId() );
+			$this->assertInternalType( 'integer', $service->getBaseId() );
+		}
+	}
+
+
+	public function testLoadFresh()
+	{
+		$search = $this->_object->createSearch();
+		$conditions = array(
+			$search->compare('==', 'order.base.price', 53.50 ),
+			$search->compare('==', 'order.base.editor', $this->_editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$results = $this->_object->searchItems($search);
+
+		if ( ( $item = reset($results) ) === false ) {
+			throw new Exception('No order found');
+		}
+
+		$order = $this->_object->load( $item->getId(), true );
+
+
+		$this->assertEquals( 0, count( $order->getCoupons() ) );
+
+		foreach( $order->getAddresses() as $address )
+		{
+			$this->assertEquals( null, $address->getId() );
+			$this->assertEquals( null, $address->getBaseId() );
+		}
+
+		foreach( $order->getProducts() as $product )
+		{
+			$this->assertEquals( null, $product->getId() );
+			$this->assertEquals( null, $product->getBaseId() );
+			$this->assertEquals( null, $product->getPosition() );
+		}
+
+		foreach( $order->getServices() as $service )
+		{
+			$this->assertEquals( null, $service->getId() );
+			$this->assertEquals( null, $service->getBaseId() );
+		}
+	}
+
+
+	public function testStore()
 	{
 		$search = $this->_object->createSearch();
 
@@ -341,7 +425,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->_object->load( $newBasketId, true );
+		$basket = $this->_object->load( $newBasketId );
 		$this->_object->deleteItem( $newBasketId );
 
 
@@ -378,7 +462,60 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->getItem( $newBasketId );
 	}
 
-	public function testLoadStoreBundles()
+
+	public function testStoreExisting()
+	{
+		$search = $this->_object->createSearch();
+
+		$expr[] = $search->compare( '==', 'order.base.rebate', 14.50 );
+		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
+		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );
+		$expr[] = $search->compare( '==', 'order.base.editor', $this->_editor );
+		$search->setConditions( $search->combine('&&', $expr) );
+		$results = $this->_object->searchItems($search);
+
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$results = $this->_object->searchItems( $search );
+
+		if ( ( $item = reset($results) ) === false ) {
+			throw new Exception('No order found');
+		}
+
+		$basket = $this->_object->load( $item->getId(), true );
+		$this->_object->store( $basket );
+		$newBasketId = $basket->getId();
+		$this->_object->store( $basket );
+		$newBasket = $this->_object->load( $newBasketId );
+
+		$this->_object->deleteItem( $newBasketId );
+
+
+		$newAddresses = $newBasket->getAddresses();
+
+		foreach( $basket->getAddresses() as $key => $address ) {
+			$this->assertEquals( $address->getId(), $newAddresses[$key]->getId() );
+		}
+
+		$newProducts = $newBasket->getProducts();
+
+		foreach( $basket->getProducts() as $key => $product )
+		{
+			// key+1 is because of the array_splice() in MShop_Order_Item_Base_Default::addProduct()
+			// so it doesn't make sense to hand over the key as second parameter to addProduct() in
+			// MShop_Order_Manager_Base_Default::_loadFresh() to try to enforce a 1-based numbering
+			$this->assertEquals( $product->getId(), $newProducts[$key+1]->getId() );
+			$this->assertEquals( $product->getPosition(), $newProducts[$key+1]->getPosition() );
+		}
+
+		$newServices = $newBasket->getServices();
+
+		foreach( $basket->getServices() as $key => $service ) {
+			$this->assertEquals( $service->getId(), $newServices[$key]->getId() );
+		}
+	}
+
+
+	public function testStoreBundles()
 	{
 		$search = $this->_object->createSearch();
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
@@ -395,7 +532,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->_object->load( $newBasketId, true );
+		$basket = $this->_object->load( $newBasketId );
 		$this->_object->deleteItem( $newBasketId );
 
 		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
@@ -414,43 +551,6 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $newBasketId );
-	}
-
-	public function testLoad()
-	{
-		$search = $this->_object->createSearch();
-		$conditions = array(
-			$search->compare('==', 'order.base.price', 53.50 ),
-			$search->compare('==', 'order.base.editor', $this->_editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->_object->searchItems( $search );
-
-		if ( ( $item = reset($results) ) === false ) {
-			throw new Exception('No order found');
-		}
-
-		$order = $this->_object->load( $item->getId() );
-	}
-
-
-	public function testLoadFresh()
-	{
-		$search = $this->_object->createSearch();
-		$conditions = array(
-			$search->compare('==', 'order.base.price', 53.50 ),
-			$search->compare('==', 'order.base.editor', $this->_editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->_object->searchItems($search);
-
-		if ( ( $item = reset($results) ) === false ) {
-			throw new Exception('No order found');
-		}
-
-		$order = $this->_object->load( $item->getId(), true );
-
-		$this->assertEquals( 0, count( $order->getCoupons() ) );
 	}
 
 
@@ -482,4 +582,5 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$lock = $manager->getSessionLock( 'test' );
 		$this->assertEquals( MShop_Order_Manager_Base_Abstract::LOCK_ENABLE, $lock );
 	}
+
 }

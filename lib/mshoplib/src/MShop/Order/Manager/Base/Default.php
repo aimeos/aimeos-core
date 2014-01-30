@@ -602,6 +602,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 			if( $fresh == true )
 			{
+				$item->setPosition( null );
 				$item->setBaseId( null );
 				$item->setId( null );
 			}
@@ -683,6 +684,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	protected function _storeProducts( MShop_Order_Item_Base_Interface $basket )
 	{
+		$position = 1;
 		$manager = $this->getSubManager( 'product' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
@@ -690,6 +692,13 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		{
 			$baseId = $basket->getId();
 			$item->setBaseId( $baseId );
+
+			if( ( $pos = $item->getPosition() ) === null ) {
+				$item->setPosition( $position++ );
+			} else {
+				$position = ++$pos;
+			}
+
 			$manager->saveItem( $item );
 			$productId = $item->getId();
 
@@ -700,15 +709,21 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			}
 
 			// if the item is a bundle, it probably contains sub-products
-			foreach ( $item->getProducts() as $subProduct )
+			foreach( $item->getProducts() as $subProduct )
 			{
-
-				$subProduct->setOrderProductId( $productId );
 				$subProduct->setBaseId( $baseId );
+				$subProduct->setOrderProductId( $productId );
+
+				if( ( $pos = $subProduct->getPosition() ) === null ) {
+					$subProduct->setPosition( $position++ );
+				} else {
+					$position = ++$pos;
+				}
+
 				$manager->saveItem( $subProduct );
 				$subProductId = $subProduct->getId();
 
-				foreach ( $subProduct->getAttributes() as $attribute )
+				foreach( $subProduct->getAttributes() as $attribute )
 				{
 					$attribute->setProductId( $subProductId );
 					$attrManager->saveItem( $attribute );
@@ -716,6 +731,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			}
 		}
 	}
+
 
 	/**
 	 * Saves the addresses of the order to the storage.
