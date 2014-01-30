@@ -109,6 +109,13 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 66, $this->_object->getBaseId());
 	}
 
+	public function testSetBaseIdReset()
+	{
+		$this->_object->setBaseId( null );
+		$this->assertEquals( null , $this->_object->getBaseId() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
 	public function testGetAddressId()
 	{
 		$this->assertEquals( 11, $this->_object->getAddressId() );
