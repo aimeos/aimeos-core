@@ -315,7 +315,7 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 	public function testSetBaseIdReset()
 	{
 		$this->_object->setBaseId( null );
-		$this->assertEquals( null , $this->_object->getBaseId() );
+		$this->assertEquals( null, $this->_object->getBaseId() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
