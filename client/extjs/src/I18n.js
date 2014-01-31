@@ -15,8 +15,8 @@ MShop.I18n = {
 	
 	init : function( content, locale ) {
 
-		this.tx = JSON.parse( content );
 		this.locale = locale;
+		this.tx = content;
 	},
 
 	

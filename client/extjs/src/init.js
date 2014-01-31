@@ -11,8 +11,8 @@ _n = function( singular, plural, num ) {return MShop.I18n.dn( 'client/extjs/ext'
 
 
 //init config and translations
-if( MShop.config.configuration ) {
-	MShop.Config.init( MShop.config.configuration );
+if( MShop.config.data ) {
+	MShop.Config.init( MShop.config.data );
 }
 
 if( MShop.i18n ) {
