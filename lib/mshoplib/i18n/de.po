@@ -9,10 +9,10 @@
 # nsendetzky <n.sendetzky@metaways.de>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: Arcavias\n"
+"Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-04 15:00+0100\n"
-"PO-Revision-Date: 2014-01-04 14:11+0000\n"
+"POT-Creation-Date: 2014-01-30 23:20+0100\n"
+"PO-Revision-Date: 2014-01-30 17:36+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr "Anschrift vom Typ \"%1$s\" nicht verfügbar"
 msgid "Address salutation \"%1$s\" not within allowed range"
 msgstr "Anrede \"%1$s\" liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
-#: src/MShop/Common/Manager/Address/Default.php:116
+#: src/MShop/Common/Manager/Address/Abstract.php:118
 #, php-format
 msgid "Address search configuration not available"
 msgstr "Suchkonfiguration für Adresse nicht verfügbar"
@@ -51,12 +51,12 @@ msgstr "Warenkorb leer"
 msgid "Cache object not available"
 msgstr "Cache-Objekt ist nicht verfübar"
 
-#: src/MShop/Catalog/Manager/Default.php:635
+#: src/MShop/Catalog/Manager/Default.php:464
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
 msgstr "Kategorie (\"catalog node\") mit ID \"%1$s\" nicht verfügbar"
 
-#: src/MShop/Catalog/Manager/Default.php:575
+#: src/MShop/Catalog/Manager/Default.php:404
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
 msgstr "Katalog-Pfad mit ID \"%1$s\" nicht gefunden"
@@ -79,34 +79,28 @@ msgstr "Unterseite mit Index \"%1$d\" nicht verfügbar"
 
 #: src/MAdmin/Common/Manager/Abstract.php:59
 #: src/MShop/Service/Manager/Abstract.php:41
-#: src/MShop/Service/Manager/Default.php:597
+#: src/MShop/Service/Manager/Default.php:353
 #: src/MShop/Common/Factory/Abstract.php:64
 #: src/MShop/Common/Factory/Abstract.php:131
-#: src/MShop/Common/Manager/Abstract.php:246
-#: src/MShop/Common/Manager/Abstract.php:301
-#: src/MShop/Common/Manager/Abstract.php:348
-#: src/MShop/Common/Manager/Abstract.php:385
-#: src/MShop/Common/Manager/Abstract.php:494
-#: src/MShop/Product/Manager/Tag/Default.php:401
+#: src/MShop/Common/Manager/Abstract.php:233
+#: src/MShop/Common/Manager/Abstract.php:342
+#: src/MShop/Product/Manager/Tag/Default.php:326
 #: src/MShop/Plugin/Manager/Abstract.php:41
-#: src/MShop/Plugin/Manager/Default.php:260
+#: src/MShop/Plugin/Manager/Default.php:191
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
 #: src/MAdmin/Common/Manager/Abstract.php:53 src/MAdmin/Factory.php:66
 #: src/MShop/Service/Manager/Abstract.php:35
-#: src/MShop/Service/Manager/Default.php:590
+#: src/MShop/Service/Manager/Default.php:346
 #: src/MShop/Common/Factory/Abstract.php:58
 #: src/MShop/Common/Factory/Abstract.php:125
 #: src/MShop/Common/Manager/Abstract.php:227
-#: src/MShop/Common/Manager/Abstract.php:285
-#: src/MShop/Common/Manager/Abstract.php:342
-#: src/MShop/Common/Manager/Abstract.php:378
-#: src/MShop/Common/Manager/Abstract.php:488
-#: src/MShop/Product/Manager/Tag/Default.php:391 src/MShop/Factory.php:67
+#: src/MShop/Common/Manager/Abstract.php:336
+#: src/MShop/Product/Manager/Tag/Default.php:316 src/MShop/Factory.php:67
 #: src/MShop/Plugin/Manager/Abstract.php:35
-#: src/MShop/Plugin/Manager/Default.php:252
+#: src/MShop/Plugin/Manager/Default.php:183
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Klasse \"%1$s\" nicht verfügbar"
@@ -121,8 +115,8 @@ msgstr "Der eindeutige Code darf nicht länger als 32 Zeichen sein"
 msgid "Configuration invalid"
 msgstr "Konfiguration ist ungültig"
 
-#: src/MShop/Common/Manager/List/Default.php:347
-#: src/MShop/Common/Manager/List/Default.php:424
+#: src/MShop/Common/Manager/List/Abstract.php:355
+#: src/MShop/Common/Manager/List/Abstract.php:432
 #, php-format
 msgid "Configuration not available"
 msgstr "Konfiguration nicht verfügbar"
@@ -132,9 +126,9 @@ msgstr "Konfiguration nicht verfügbar"
 msgid "Configuration object not available"
 msgstr "Konfigurations-Objekt nicht verfügbar"
 
-#: src/MShop/Common/Manager/Type/Default.php:44
-#: src/MShop/Common/Manager/List/Default.php:46
-#: src/MShop/Common/Manager/Address/Default.php:39
+#: src/MShop/Common/Manager/Type/Abstract.php:55
+#: src/MShop/Common/Manager/List/Abstract.php:58
+#: src/MShop/Common/Manager/Address/Abstract.php:44
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
 msgstr "Konfiguration des erforderlichen SQL-Statements für \"%1$s\" nicht verfügbar"
@@ -181,8 +175,8 @@ msgstr "Internationalisierungs-Objekt für \"%1$s\" nicht verfügbar"
 #: src/MAdmin/Job/Manager/Default.php:255
 #: src/MAdmin/Job/Manager/Default.php:262
 #: src/MShop/Locale/Manager/Site/Default.php:304
-#: src/MShop/Service/Manager/Default.php:524
-#: src/MShop/Plugin/Manager/Default.php:405
+#: src/MShop/Service/Manager/Default.php:280
+#: src/MShop/Plugin/Manager/Default.php:336
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
 msgstr "Ungültiges JSON als Suchergebnis in \"%1$s\" mit ID \"%2$s\": \"%3$s\""
@@ -225,7 +219,7 @@ msgstr "Ein Attribut für die Providerkonfiguration enthält unerlaubte Zeichen.
 #: src/MShop/Customer/Manager/Factory.php:39
 #: src/MShop/Attribute/Manager/Factory.php:39
 #: src/MShop/Common/Factory/Abstract.php:52
-#: src/MShop/Common/Manager/Abstract.php:482
+#: src/MShop/Common/Manager/Abstract.php:330
 #: src/MShop/Text/Manager/Factory.php:39
 #: src/MShop/Catalog/Manager/Factory.php:38
 #: src/MShop/Product/Manager/Factory.php:39
@@ -237,7 +231,7 @@ msgstr "Ein Attribut für die Providerkonfiguration enthält unerlaubte Zeichen.
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
-#: src/MShop/Order/Item/Abstract.php:162 src/MShop/Common/Item/Abstract.php:97
+#: src/MShop/Order/Item/Abstract.php:161 src/MShop/Common/Item/Abstract.php:97
 #, php-format
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
@@ -250,11 +244,9 @@ msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr "Datum  \"%1$s\" enthält unerlaubte Zeichen. ISO Format \"YYYY-MM-DD\" erwartet."
 
 #: src/MAdmin/Common/Manager/Abstract.php:35
-#: src/MShop/Service/Manager/Default.php:573
-#: src/MShop/Common/Manager/Abstract.php:212
-#: src/MShop/Common/Manager/Abstract.php:270
-#: src/MShop/Common/Manager/Abstract.php:323
-#: src/MShop/Plugin/Manager/Default.php:232
+#: src/MShop/Service/Manager/Default.php:329
+#: src/MShop/Common/Manager/Abstract.php:208
+#: src/MShop/Plugin/Manager/Default.php:163
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
 msgstr "Domainname \"%1$s\" enthält unerlaubte Zeichen"
@@ -265,12 +257,9 @@ msgid "Invalid characters in email address: \"%1$s\""
 msgstr "E-Mail-Adresse \"%1$s\" enthält unerlaubte Zeichen"
 
 #: src/MAdmin/Common/Manager/Abstract.php:43
-#: src/MShop/Common/Manager/Abstract.php:220
-#: src/MShop/Common/Manager/Abstract.php:278
-#: src/MShop/Common/Manager/Abstract.php:332
-#: src/MShop/Common/Manager/Abstract.php:371
-#: src/MShop/Common/Manager/Abstract.php:555
-#: src/MShop/Product/Manager/Tag/Default.php:384
+#: src/MShop/Common/Manager/Abstract.php:217
+#: src/MShop/Common/Manager/Abstract.php:403
+#: src/MShop/Product/Manager/Tag/Default.php:309
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
 msgstr "Managername \"%1$s\" enthält unerlaubte Zeichen"
@@ -285,8 +274,8 @@ msgstr "Managername \"%1$s\" in \"%2$s\" enthält unerlaubte Zeichen"
 msgid "Invalid characters in price \"%1$s\""
 msgstr "Preis \"%1$s\" enthält unerlaubte Zeichen"
 
-#: src/MShop/Service/Manager/Default.php:583
-#: src/MShop/Plugin/Manager/Default.php:240
+#: src/MShop/Service/Manager/Default.php:339
+#: src/MShop/Plugin/Manager/Default.php:171
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
 msgstr "Providername \"%1$s\" enthält unerlaubte Zeichen"
@@ -322,12 +311,12 @@ msgid ""
 "Item could not be saved using method saveItem(). Item ID not available."
 msgstr "Item konnte nicht mit Methode saveItem() gespeichert werden. Item-ID nicht verfügbar."
 
-#: src/MShop/Common/Manager/Abstract.php:700
+#: src/MShop/Common/Manager/Abstract.php:548
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
 msgstr "In Domäne \"%1$s\" referenzierte Items nicht gefunden: %2$s"
 
-#: src/MShop/Common/Manager/Abstract.php:724
+#: src/MShop/Common/Manager/Abstract.php:572
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr "\"item\" mit ID \"%2$s\" in \"%1$s\" nicht gefunden"
@@ -337,7 +326,7 @@ msgstr "\"item\" mit ID \"%2$s\" in \"%1$s\" nicht gefunden"
 msgid "Job with ID \"%1$s\" not found"
 msgstr "Job mit ID \"%1$s\" nicht gefunden"
 
-#: src/MShop/Common/Manager/List/Default.php:190
+#: src/MShop/Common/Manager/List/Abstract.php:198
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr "List-Item mit ID \"%2$s\" in \"%1$s\" nicht gefunden"
@@ -366,7 +355,7 @@ msgstr "Verarbeitung der vom Logistikdienstleister erhaltenen XML-Datei \"%1$s\"
 #: src/MShop/Locale/Manager/Default.php:418
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr "Gebietsschema (Locale-Item) für Seite \"%1$s\" nicht gefunden"
+msgstr "Gebietsschema (Locale-Item) für Mandant \"%1$s\" nicht gefunden"
 
 #: src/MShop/Context/Item/Default.php:197
 #, php-format
@@ -406,10 +395,10 @@ msgstr "Der Pfad zum Manager ist leer"
 #: src/MShop/Locale/Manager/Site/Default.php:475
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr "Methode \"%1$s\" für Gebietsschema-Seiten-Manager nicht verfügbar"
+msgstr "Die Methode \"%1$s\" ist im Mandanten-Manager für die Gebietsschemas nicht verfügbar"
 
 #: src/MShop/Service/Provider/Abstract.php:174
-#: src/MShop/Service/Provider/Decorator/Abstract.php:248
+#: src/MShop/Service/Provider/Decorator/Abstract.php:260
 #: src/MShop/Service/Provider/Payment/Abstract.php:129
 #: src/MShop/Service/Provider/Payment/Abstract.php:140
 #: src/MShop/Service/Provider/Payment/Abstract.php:167
@@ -445,26 +434,26 @@ msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%
 #: src/MShop/Order/Manager/Base/Address/Default.php:250
 #: src/MShop/Order/Manager/Status/Default.php:122
 #: src/MShop/Order/Manager/Default.php:188
-#: src/MShop/Supplier/Manager/Default.php:337
+#: src/MShop/Supplier/Manager/Default.php:156
 #: src/MShop/Locale/Manager/Site/Default.php:156
 #: src/MShop/Locale/Manager/Default.php:216
 #: src/MShop/Locale/Manager/Language/Default.php:111
 #: src/MShop/Locale/Manager/Currency/Default.php:115
-#: src/MShop/Service/Manager/Default.php:430
-#: src/MShop/Customer/Manager/Default.php:665
-#: src/MShop/Attribute/Manager/Default.php:412
-#: src/MShop/Common/Manager/Type/Default.php:106
-#: src/MShop/Common/Manager/List/Default.php:93
-#: src/MShop/Common/Manager/Address/Default.php:133
-#: src/MShop/Text/Manager/Default.php:373
+#: src/MShop/Service/Manager/Default.php:186
+#: src/MShop/Customer/Manager/Default.php:308
+#: src/MShop/Attribute/Manager/Default.php:168
+#: src/MShop/Common/Manager/Type/Abstract.php:115
+#: src/MShop/Common/Manager/List/Abstract.php:101
+#: src/MShop/Common/Manager/Address/Abstract.php:135
+#: src/MShop/Text/Manager/Default.php:127
 #: src/MShop/Catalog/Manager/Index/Default.php:279
-#: src/MShop/Catalog/Manager/Default.php:470
+#: src/MShop/Catalog/Manager/Default.php:299
 #: src/MShop/Product/Manager/Stock/Warehouse/Default.php:119
 #: src/MShop/Product/Manager/Stock/Default.php:115
-#: src/MShop/Product/Manager/Tag/Default.php:174
-#: src/MShop/Product/Manager/Default.php:408
-#: src/MShop/Media/Manager/Default.php:438
-#: src/MShop/Plugin/Manager/Default.php:303
+#: src/MShop/Product/Manager/Tag/Default.php:105
+#: src/MShop/Product/Manager/Default.php:164
+#: src/MShop/Media/Manager/Default.php:200
+#: src/MShop/Plugin/Manager/Default.php:234
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:47
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:52
 #: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:53
@@ -478,7 +467,7 @@ msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:51
 #: src/MShop/Plugin/Provider/Order/Shipping.php:55
 #: src/MShop/Price/Manager/Abstract.php:35
-#: src/MShop/Price/Manager/Default.php:458
+#: src/MShop/Price/Manager/Default.php:214
 #, php-format
 msgid "Object is not of required type \"%1$s\""
 msgstr "Objekt ist nicht vom geforderten Typ \"%1$s\""
@@ -503,17 +492,17 @@ msgid ""
 "according to XML response"
 msgstr "Zum Logistikdienstleister übertragene Bestelldaten wurden laut XML-Antwort mit Code \"%1$s\" abgelehnt"
 
-#: src/MShop/Order/Item/Abstract.php:178
+#: src/MShop/Order/Item/Abstract.php:177
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
 msgstr "Lieferstatus \"%1$s\" liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
-#: src/MShop/Order/Item/Abstract.php:194
+#: src/MShop/Order/Item/Abstract.php:193
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
 msgstr "Bezahlstatus \"%1$s\" liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
-#: src/MShop/Order/Item/Abstract.php:214
+#: src/MShop/Order/Item/Abstract.php:213
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
 msgstr "Typ \"%1$s\" für Bestellart liegt nicht innerhalb des vorgegebenen Wertebereichs"
@@ -632,8 +621,8 @@ msgstr "Produkte nicht mehr auf Lager"
 msgid "Property name \"%1$s\" not within allowed range"
 msgstr "Eigenschaftsname \"%1$s\" liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
-#: src/MShop/Service/Manager/Default.php:578
-#: src/MShop/Plugin/Manager/Default.php:225
+#: src/MShop/Service/Manager/Default.php:334
+#: src/MShop/Plugin/Manager/Default.php:156
 #, php-format
 msgid "Provider in \"%1$s\" not available"
 msgstr "Provider in \"%1$s\" nicht verfügbar"
@@ -643,20 +632,20 @@ msgstr "Provider in \"%1$s\" nicht verfügbar"
 msgid "Required attribute \"%1$s\" in provider configuration not available"
 msgstr "Gefordertes Attribut \"%1$s\" in Provider-Konfiguration nicht verfügbar"
 
-#: src/MShop/Common/Manager/Type/Default.php:59
-#: src/MShop/Common/Manager/Type/Default.php:63
-#: src/MShop/Common/Manager/List/Default.php:55
-#: src/MShop/Common/Manager/List/Default.php:59
-#: src/MShop/Common/Manager/Address/Default.php:55
-#: src/MShop/Common/Manager/Address/Default.php:59
+#: src/MShop/Common/Manager/Type/Abstract.php:68
+#: src/MShop/Common/Manager/Type/Abstract.php:72
+#: src/MShop/Common/Manager/List/Abstract.php:67
+#: src/MShop/Common/Manager/List/Abstract.php:71
+#: src/MShop/Common/Manager/Address/Abstract.php:57
+#: src/MShop/Common/Manager/Address/Abstract.php:61
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
 msgstr "Suchkonfiguration für \"%1$s\" ist nicht verfügbar"
 
-#: src/MShop/Common/Manager/Type/Default.php:55
-#: src/MShop/Common/Manager/List/Default.php:51
-#: src/MShop/Common/Manager/List/Default.php:181
-#: src/MShop/Common/Manager/Address/Default.php:51
+#: src/MShop/Common/Manager/Type/Abstract.php:64
+#: src/MShop/Common/Manager/List/Abstract.php:63
+#: src/MShop/Common/Manager/List/Abstract.php:189
+#: src/MShop/Common/Manager/Address/Abstract.php:53
 #, php-format
 msgid "Search configuration not available"
 msgstr "Suchkonfiguration nicht verfügbar"
@@ -756,7 +745,7 @@ msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr "Grenzwert für kostenlosen Versand für Währung mit ID \"%1$s\" nicht vergfügbar"
 
 #: src/MShop/Locale/Manager/Default.php:512
-#: src/MShop/Common/Manager/Abstract.php:872
+#: src/MShop/Common/Manager/Abstract.php:722
 #, php-format
 msgid "Total results value not found"
 msgstr "Wert für Anzahl der Ergebnisse nicht gefunden"
@@ -766,7 +755,7 @@ msgstr "Wert für Anzahl der Ergebnisse nicht gefunden"
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
 msgstr "Ausgangsseite mit Code \"%1$s\" in \"%2$s\" nicht gefunden"
 
-#: src/MShop/Common/Manager/Type/Default.php:191
+#: src/MShop/Common/Manager/Type/Abstract.php:200
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
 msgstr "\"type item\" mit ID \"%1$s\" in \"%2$s\" nicht gefunden"

@@ -7,9 +7,9 @@
 # doleiynyk <doleiynyk@metaways.de>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: Arcavias\n"
+"Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-04 15:00+0100\n"
+"POT-Creation-Date: 2014-01-30 23:20+0100\n"
 "PO-Revision-Date: 2013-11-20 12:31+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias/language/ru/)\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:402
+#: src/Controller/Frontend/Basket/Default.php:389
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "Добавлять продукт с номером \"%1$s\" запрещено"
 
-#: src/Controller/Frontend/Basket/Default.php:582
+#: src/Controller/Frontend/Basket/Default.php:569
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Доступные номера атрибутов \"%1$s\" не совпадают с данными номерами атрибутов \"%2$s\""
@@ -57,12 +57,12 @@ msgstr "Класс \"%1$s\" не доступен"
 msgid "Controller path is empty"
 msgstr "Путь контролера пуст"
 
-#: src/Controller/Frontend/Basket/Default.php:439
+#: src/Controller/Frontend/Basket/Default.php:426
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Неправельные \"%1$s\" ссылки для продукта с номером \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:546
+#: src/Controller/Frontend/Basket/Default.php:533
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Неверные свойства адреса, пожалуйста проверьте ваш ввод"
@@ -95,7 +95,7 @@ msgstr "Неверная фабрика \"%1$s\" "
 msgid "Invalid value for address type \"%1$s\""
 msgstr "Неверные значения для типа адреса \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:616
+#: src/Controller/Frontend/Basket/Default.php:603
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Тип списка для домена \"%1$s\"и код \"%2$s\" не найден"
@@ -120,7 +120,7 @@ msgstr "Не найден уникальный товар для выбраны�
 msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
 msgstr "Сервисная деталь для типа \"%1$s\" с номером \"%2$s\" не найдена"
 
-#: src/Controller/Frontend/Basket/Default.php:476
+#: src/Controller/Frontend/Basket/Default.php:463
 #, php-format
 msgid "There are not enough products (ID \"%1$s\") in stock"
 msgstr "Не достаточно продуктов в запасе (номер \"%1$s\")"

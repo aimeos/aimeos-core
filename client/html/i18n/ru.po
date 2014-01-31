@@ -7,10 +7,10 @@
 # doleiynyk <doleiynyk@metaways.de>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: Arcavias\n"
+"Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:03+0100\n"
-"PO-Revision-Date: 2014-01-08 13:03+0000\n"
+"POT-Creation-Date: 2014-01-30 23:20+0100\n"
+"PO-Revision-Date: 2014-01-30 22:29+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -126,7 +126,7 @@ msgstr "Дополнительно"
 msgid "Additional 2"
 msgstr "Дополнительно 2"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:181
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:180
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
 msgstr "Адрес с номером \"%1$s\" не найден"
@@ -147,12 +147,12 @@ msgstr ""
 msgid "Article no.:"
 msgstr "Номер товара:"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:162
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:161
 #, php-format
 msgid "At least one billing address part is missing"
 msgstr "Не хватает минимум одной части адреса счета"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:161
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:160
 #, php-format
 msgid "At least one delivery address part is missing"
 msgstr "Не хватает минимум одной части адреса доставки"
@@ -176,8 +176,8 @@ msgstr "Корзина"
 msgid "Billing address"
 msgstr "Адрес счета"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:144
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:155
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:143
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:154
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "\"%1$s\" часть адреса счета не хватает"
@@ -186,7 +186,7 @@ msgstr "\"%1$s\" часть адреса счета не хватает"
 msgid "Buy now"
 msgstr "Купить"
 
-#: src/Client/Html/Catalog/Filter/Tree/Default.php:143
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:144
 #, php-format
 msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
 msgstr ""
@@ -212,16 +212,26 @@ msgstr "Касса"
 msgid "City"
 msgstr "Город"
 
-#: src/Client/Html/Abstract.php:149
-#: src/Client/Html/Common/Factory/Abstract.php:38
+#: src/Client/Html/Common/Factory/Abstract.php:66
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr ""
+
+#: src/Client/Html/Abstract.php:150
+#: src/Client/Html/Common/Factory/Abstract.php:145
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:143
-#: src/Client/Html/Common/Factory/Abstract.php:32
+#: src/Client/Html/Abstract.php:144
+#: src/Client/Html/Common/Factory/Abstract.php:139
 #, php-format
 msgid "Class \"%1$s\" not available"
+msgstr ""
+
+#: src/Client/Html/Common/Factory/Abstract.php:60
+#, php-format
+msgid "Class \"%1$s\" not found"
 msgstr ""
 
 #: layouts/account/history/detail-body-default.html:16
@@ -243,7 +253,7 @@ msgstr "Подтверждение"
 msgid "Country"
 msgstr "Страна"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:181
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:180
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
 msgstr ""
@@ -272,8 +282,8 @@ msgstr "Доставка"
 msgid "Delivery address"
 msgstr "Адрес доставки"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:143
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:154
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:142
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:153
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "\"%1$s\" часть адреса доставки не хватает"
@@ -305,7 +315,7 @@ msgstr "Поля с * обязательны"
 msgid "First name"
 msgstr "Имя"
 
-#: layouts/catalog/filter/search-body-default.html:26
+#: layouts/catalog/filter/search-body-default.html:21
 msgid "Go"
 msgstr "Дальше"
 
@@ -353,16 +363,27 @@ msgstr "Содержит %1$s%% НДС"
 #: src/Client/Html/Catalog/Stage/Factory.php:39
 #: src/Client/Html/Catalog/Detail/Factory.php:39
 #: src/Client/Html/Catalog/List/Factory.php:39
+#: src/Client/Html/Catalog/Count/Factory.php:39
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:95 src/Client/Html/Abstract.php:134
+#: src/Client/Html/Abstract.php:96 src/Client/Html/Abstract.php:135
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:142
+#: src/Client/Html/Common/Factory/Abstract.php:54
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Common/Factory/Abstract.php:86
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:141
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
 msgstr ""
@@ -398,7 +419,7 @@ msgid ""
 "try again with a different keyword."
 msgstr ""
 
-#: src/Client/Html/Abstract.php:62
+#: src/Client/Html/Abstract.php:63
 #, php-format
 msgid "No view available"
 msgstr ""
@@ -429,7 +450,7 @@ msgstr "Подробности заказа"
 msgid "Order history"
 msgstr "История заказа"
 
-#: src/Client/Html/Account/History/Detail/Default.php:134
+#: src/Client/Html/Account/History/Detail/Default.php:133
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
 msgstr "Заказ с номером \"%1$s\" не найден"
@@ -453,7 +474,7 @@ msgstr "Стоимость оплаты"
 msgid "Payment status"
 msgstr "Статус оплаты"
 
-#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:114
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:113
 msgid "Please accept the terms and conditions"
 msgstr "Пожалуйста примите договор и его условия"
 
@@ -541,7 +562,7 @@ msgstr "Сервисы"
 msgid "Shipping"
 msgstr "Пересылка"
 
-#: layouts/catalog/filter/body-default.html:37
+#: layouts/catalog/filter/body-default.html:29
 msgid "Show"
 msgstr "Показать"
 
@@ -597,7 +618,7 @@ msgstr "Сумма"
 msgid "Telephone"
 msgstr "Телефон"
 
-#: src/Client/Html/Abstract.php:234
+#: src/Client/Html/Abstract.php:236
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "Шаблон \"%1$s\" не доступен"
@@ -680,7 +701,12 @@ msgstr ""
 msgid "Try again"
 msgstr "Попробуйте еще раз"
 
-#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:126
+#: src/Client/Html/Common/Decorator/Abstract.php:49
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:125
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr "Невозможно сохранить адрес для клиента \"%1$s\": %2$s"

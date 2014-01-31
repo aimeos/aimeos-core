@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-04 14:00+0100\n"
+"POT-Creation-Date: 2014-01-30 23:20+0100\n"
 "PO-Revision-Date: 2013-09-24 16:22+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -41,6 +41,7 @@ msgid "Controller path is empty"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Email/Payment/Factory.php:38
+#: src/Controller/Jobs/Order/Email/Delivery/Factory.php:38
 #: src/Controller/Jobs/Order/Product/Stock/Factory.php:38
 #: src/Controller/Jobs/Admin/Job/Factory.php:38
 #: src/Controller/Jobs/Service/Delivery/Process/Factory.php:38

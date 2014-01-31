@@ -9,7 +9,7 @@
 # doleiynyk <doleiynyk@metaways.de>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: Arcavias\n"
+"Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2013-12-05 09:45+0000\n"

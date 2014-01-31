@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-30 15:04+0100\n"
+"POT-Creation-Date: 2014-01-30 23:20+0100\n"
 "PO-Revision-Date: 2014-01-29 12:00+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -759,7 +759,7 @@ msgstr ""
 #: src/panel/locale/site/ItemUi.js:141 src/panel/AbstractItemUi.js:196
 #: src/panel/AbstractListItemUi.js:36 src/panel/AbstractTreeItemUi.js:33
 #: src/panel/ListItemItemUi.js:84
-msgid "Please recheck you data"
+msgid "Please recheck your data"
 msgstr ""
 
 #: src/panel/ListItemListUi.js:89

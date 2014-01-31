@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-30 23:20+0100\n"
+"PO-Revision-Date: 2014-01-29 22:14+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/arcavias/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/Controller/Frontend/Basket/Default.php:389
+#, php-format
+msgid "Adding product with ID \"%1$s\" is not allowed"
+msgstr "L'ajout du produit avec l'ID \"%1$s\" n'est pas autorisé"
+
+#: src/Controller/Frontend/Basket/Default.php:569
+#, php-format
+msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
+msgstr "Les IDs d'attribut disponibles \"%1$s\" ne correspondent pas aux IDs d'attribut données \"%2$s\""
+
+#: src/Controller/Frontend/Basket/Default.php:187
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be changed"
+msgstr "L'article du panier en position \"%1$d\" ne peut être modifié"
+
+#: src/Controller/Frontend/Basket/Default.php:165
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be deleted manually"
+msgstr "L'article du panier en position \"%1$d\" ne peut être effacé manuellement"
+
+#: src/Controller/Frontend/Common/Factory/Abstract.php:66
+#: src/Controller/Frontend/Common/Factory/Abstract.php:143
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "La classe \"%1$s\" n'implémente pas l'interface \"%2$s\""
+
+#: src/Controller/Frontend/Common/Factory/Abstract.php:60
+#: src/Controller/Frontend/Common/Factory/Abstract.php:137
+#: src/Controller/Frontend/Factory.php:60
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Classe \"%1$s\" non disponible"
+
+#: src/Controller/Frontend/Factory.php:39
+#, php-format
+msgid "Controller path is empty"
+msgstr "Le chemin du contrôleur est vide"
+
+#: src/Controller/Frontend/Basket/Default.php:426
+#, php-format
+msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
+msgstr "Références \"%1$s\" non valides pour le produit avec l'ID \"%2$s\""
+
+#: src/Controller/Frontend/Basket/Default.php:533
+#, php-format
+msgid "Invalid address properties, please check your input"
+msgstr "Propriétés d'adresse non valides, merci de vérifier votre saisie"
+
+#: src/Controller/Frontend/Service/Factory.php:29
+#: src/Controller/Frontend/Basket/Factory.php:30
+#: src/Controller/Frontend/Common/Factory/Abstract.php:54
+#: src/Controller/Frontend/Catalog/Factory.php:30
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Caractères non valides dans le nom de classe \"%1$s\""
+
+#: src/Controller/Frontend/Factory.php:51
+#, php-format
+msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
+msgstr "Caractères non valides dans le nom du contrôleur \"%1$s\" in \"%2$s\""
+
+#: src/Controller/Frontend/Common/Factory/Abstract.php:86
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr "Domaine non valide \"%1$s\""
+
+#: src/Controller/Frontend/Factory.php:66
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "Usine non valide \"%1$s\""
+
+#: src/Controller/Frontend/Basket/Default.php:311
+#, php-format
+msgid "Invalid value for address type \"%1$s\""
+msgstr "Valeur  non valide pour le type d'adresse \"%1$s\""
+
+#: src/Controller/Frontend/Basket/Default.php:603
+#, php-format
+msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
+msgstr "Type de liste pour le domaine \"%1$s\" et le code \"%2$s\" non trouvé"
+
+#: src/Controller/Frontend/Basket/Default.php:130
+#, php-format
+msgid "No article found for selected attributes and product ID \"%1$s\""
+msgstr "Pas d'article trouvé pour les attributs et le produit sélectionnés \"%1$s\""
+
+#: src/Controller/Frontend/Basket/Default.php:206
+#, php-format
+msgid "No product with code \"%1$s\" found"
+msgstr "Pas de produit avec le code \"%1$s\" trouvé"
+
+#: src/Controller/Frontend/Basket/Default.php:103
+#, php-format
+msgid "No unique article found for selected attributes and product ID \"%1$s\""
+msgstr "Pas d'article unique trouvé pour les attributs et le produit sélectionnés \"%1$s\""
+
+#: src/Controller/Frontend/Service/Default.php:173
+#, php-format
+msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
+msgstr "Article de service pour le type \"%1$s\" et l'ID \"%2$s\" non trouvé"
+
+#: src/Controller/Frontend/Basket/Default.php:463
+#, php-format
+msgid "There are not enough products (ID \"%1$s\") in stock"
+msgstr "Il n'y a pas assez de produits (ID \"%1$s\") en stock"
+
+#: src/Controller/Frontend/Common/Decorator/Abstract.php:50
+#, php-format
+msgid "Unable to call method \"%1$s::%2$s\""
+msgstr "Impossible d'appeler la méthode \"%1$s::%2$s\""
+
+#: src/Controller/Frontend/Service/Default.php:67
+#, php-format
+msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
+msgstr "Impossible de créer le fournisseur \"%1$s\" pour le service avec l'ID \"%2$s\""
+
+#: src/Controller/Frontend/Basket/Default.php:340
+#, php-format
+msgid "Unknown attributes \"%1$s\""
+msgstr "Attributs inconnus \"%1$s\""
