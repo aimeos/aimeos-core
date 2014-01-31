@@ -17,9 +17,10 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 	idProperty : 'product.stock.id',
 	siteidProperty : 'product.stock.siteid',
 
+	
 	initComponent : function() {
 
-		this.title = _( 'Stock & warehouse' );
+		this.title = MShop.I18n.dt( 'client/extjs', 'Product stock' );
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
@@ -31,7 +32,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _( 'Basic' ),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -44,11 +45,10 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 				},
 				items : [ {
 					xtype : 'form',
-					title : 'Details',
+					title : MShop.I18n.dt( 'client/extjs', 'Details' ),
 					flex : 1,
 					ref : '../../mainForm',
 					autoScroll : true,
-					id: 'MShop.panel.product.stock.ItemUi.BasicPanel.Title',
 					items : [ {
 						xtype : 'fieldset',
 						style: 'padding-right: 25px;',
@@ -63,11 +63,11 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 							name : 'product.stock.productid'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'product.stock.id'
 						}, {
 							xtype : 'combo',
-							fieldLabel : 'Warehouse',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Warehouse' ),
 							name : 'product.stock.warehouseid',
 							mode : 'local',
 							store : MShop.GlobalStoreMgr.get( 'Product_Stock_Warehouse', this.domain ),
@@ -76,7 +76,6 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 							forceSelection : true,
 							triggerAction : 'all',
 							typeAhead : true,
-							emptyText : _( 'Product repository (required)' ),
 							listeners: {
 								'render' : {
 									fn: function() {
@@ -89,26 +88,26 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 							}
 						}, {
 							xtype : 'numberfield',
-							fieldLabel : 'Stock level',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Stock level' ),
 							name : 'product.stock.stocklevel',
-							emptyText : _( 'Quantity or empty if unlimited (optional)' )
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Quantity or empty if unlimited (optional)' )
 						}, {
 							xtype : 'datefield',
-							fieldLabel : 'Back in stock',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Back in stock' ),
 							name : 'product.stock.dateback',
 							format : 'Y-m-d H:i:s',
-							emptyText : _( 'YYYY-MM-DD hh:mm:ss (optional)' )
+							emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'product.stock.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'product.stock.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'product.stock.editor'
 						} ]
 					} ]
@@ -118,21 +117,15 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 
 		MShop.panel.product.stock.ItemUi.superclass.initComponent.call( this );
 	},
-	
-	afterRender: function()
-	{
-		MShop.panel.product.stock.ItemUi.superclass.afterRender.apply( this, arguments );
-		
-		var oldTitle = Ext.getCmp('MShop.panel.product.stock.ItemUi.BasicPanel.Title').title;
-		Ext.getCmp('MShop.panel.product.stock.ItemUi.BasicPanel.Title').setTitle( this.listUI.itemUi.record.data['product.label'] + ' - ' + oldTitle );
-	},
 
 
 	onSaveItem : function()
 	{
 		// validate data
 		if( !this.mainForm.getForm().isValid() && this.fireEvent( 'validate', this ) !== false ) {
-			Ext.Msg.alert( _( 'Invalid Data' ), _( 'Please recheck you data' ) );
+			Ext.Msg.alert(
+				MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+				MShop.I18n.dt( 'client/extjs', 'Please recheck your data' ) );
 			return;
 		}
 

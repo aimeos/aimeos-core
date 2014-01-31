@@ -9,7 +9,7 @@ Ext.ns('MShop.panel.order.base.product');
 MShop.panel.order.base.product.ListUi = Ext.extend(Ext.Panel, {
 	layout: 'fit',
 
-	title : _('Products'),
+	title : MShop.I18n.dt( 'client/extjs', 'Products' ),
 
 	recordName : 'Order_Base_Product',
 
@@ -48,7 +48,7 @@ MShop.panel.order.base.product.ListUi = Ext.extend(Ext.Panel, {
 
 		Ext.apply(this.grid, {
 			viewConfig: {
-				emptyText: _('No Items'),
+				emptyText: MShop.I18n.dt( 'client/extjs', 'No items' ),
 				getRowClass: function (record, index){
 					if (record.phantom === true) {
 						return '';
@@ -144,8 +144,9 @@ MShop.panel.order.base.product.ListUi = Ext.extend(Ext.Panel, {
 	},
 
 	onStoreException: function(proxy, type, action, options, response) {
-		var title = _('Error');
-		var msg = response && response.error ? response.error.message : _('No error information available');
+		var title = MShop.I18n.dt( 'client/extjs', 'Error' );
+		var errmsg = MShop.I18n.dt( 'client/extjs', 'No error information available' );
+		var msg = response && response.error ? response.error.message : errmsg;
 		var code = response && response.error ? response.error.code : 0;
 
 		Ext.Msg.alert([title, ' (', code, ')'].join(''), msg);
@@ -200,71 +201,71 @@ MShop.panel.order.base.product.ListUi = Ext.extend(Ext.Panel, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.id',
-				header : _('Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.baseid',
-				header : _('BaseId'),
+				header : MShop.I18n.dt( 'client/extjs', 'Base ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.productid',
-				header : _('Product ID'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.orderproductid',
-				header : _('Order Product ID'),
+				header : MShop.I18n.dt( 'client/extjs', 'Order product ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.type',
-				header : _('Type'),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.prodcode',
-				header : _('Code')
+				header : MShop.I18n.dt( 'client/extjs', 'Code' )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.name',
-				header : _('Name'),
+				header : MShop.I18n.dt( 'client/extjs', 'Name' ),
 				id: 'order-base-product-Label'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.quantity',
-				header : _('Quantity')
+				header : MShop.I18n.dt( 'client/extjs', 'Quantity' )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.price',
-				header : _('Price')
+				header : MShop.I18n.dt( 'client/extjs', 'Price' )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.costs',
-				header : _('Costs')
+				header : MShop.I18n.dt( 'client/extjs', 'Costs' )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.rebate',
-				header : _('Discount')
+				header : MShop.I18n.dt( 'client/extjs', 'Rebate' )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.taxrate',
-				header : _('Taxrate')
+				header : MShop.I18n.dt( 'client/extjs', 'Tax rate' )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.status',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				renderer: MShop.elements.deliverystatus.renderer
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.product.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -272,7 +273,7 @@ MShop.panel.order.base.product.ListUi = Ext.extend(Ext.Panel, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.product.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -280,7 +281,7 @@ MShop.panel.order.base.product.ListUi = Ext.extend(Ext.Panel, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				hidden : true

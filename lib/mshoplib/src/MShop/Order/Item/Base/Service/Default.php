@@ -65,15 +65,16 @@ class MShop_Order_Item_Base_Service_Default
 	/**
 	 * Sets the order service base ID of the order service item.
 	 *
-	 * @param integer Order service base id
+	 * @param integer|null $value Order service base ID
 	 */
-	public function setBaseId( $id )
+	public function setBaseId( $value )
 	{
-		if ( $id == $this->getBaseId() ) { return; }
+		if ( $value == $this->getBaseId() ) { return; }
 
-		$this->_values['baseid'] = (int) $id;
+		$this->_values['baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
+
 
 	/**
 	 * Returns the original ID of the service item used for the order.
@@ -84,6 +85,7 @@ class MShop_Order_Item_Base_Service_Default
 	{
 		return( isset( $this->_values['servid'] ) ? (string) $this->_values['servid'] : '' );
 	}
+
 
 	/**
 	 * Sets a new ID of the service item used for the order.
@@ -97,6 +99,7 @@ class MShop_Order_Item_Base_Service_Default
 		$this->_values['servid'] = (string) $servid;
 		$this->setModified();
 	}
+
 
 	/**
 	 * Returns the code of the service item.

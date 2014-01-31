@@ -18,7 +18,7 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'text.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},
@@ -39,14 +39,14 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'text.id',
-				header : _('ID'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				editable : false,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.status',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				width : 50,
 				align: 'center',
@@ -54,13 +54,13 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.typeid',
-				header : _('Type'),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 				width : 70,
 				renderer : this.typeColumnRenderer.createDelegate(this, [ this.typeStore, "text.type.label" ], true)
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.languageid',
-				header : _('Lang'),
+				header : MShop.I18n.dt( 'client/extjs', 'Language' ),
 				sortable : true,
 				width : 50,
 				renderer : MShop.elements.language.renderer
@@ -68,18 +68,18 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 				xtype : 'gridcolumn',
 				id : 'text-list-label',
 				dataIndex : 'text.label',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				editable : false
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.content',
-				header : _('Content'),
+				header : MShop.I18n.dt( 'client/extjs', 'Content' ),
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 120,
 				editable : false,
@@ -87,7 +87,7 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 120,
 				editable : false,
@@ -95,7 +95,7 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 120,
 				editable : false,

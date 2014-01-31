@@ -16,8 +16,11 @@ MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
 	modal : true,
 	idProperty : 'id',
 
+	
 	initComponent : function() {
-		this.title = _('Overview');
+
+		this.title = MShop.I18n.dt( 'client/extjs', 'Overview' );
+		
 		this.items = [ {
 			xtype:'portal',
 			region:'center',

@@ -8,9 +8,9 @@ Ext.ns('MShop.elements.status');
 
 MShop.elements.status.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel: _('Status'),
+        fieldLabel: MShop.I18n.dt( 'client/extjs', 'Status' ),
         anchor: '100%',
-        store: MShop.elements.status._store,
+        store: MShop.elements.status.getStore(),
         mode: 'local',
         displayField: 'label',
         valueField: 'value',
@@ -29,20 +29,27 @@ Ext.reg('MShop.elements.status.combo', MShop.elements.status.ComboBox);
 
 /**
  * @static
- *
+ * 
  * @return {Ext.data.DirectStore}
  */
-MShop.elements.status._store = new Ext.data.ArrayStore({
-    idIndex : 0,
-    fields : [
-       {name: 'value', type: 'integer'},
-       {name: 'label', type: 'string'}
-    ],
-    data : [
-    	[-2, _('archive')],
-    	[-1, _('review')],
-    	[0, _('disabled')],
-    	[1, _('enabled')]
-    ]
-});
-
+MShop.elements.status.getStore = function() {
+	
+    if ( !MShop.elements.status._store ) {
+    	
+		MShop.elements.status._store = new Ext.data.ArrayStore({
+		    idIndex : 0,
+		    fields : [
+		       {name: 'value', type: 'integer'},
+		       {name: 'label', type: 'string'}
+		    ],
+		    data : [
+		    	[-2, MShop.I18n.dt( 'client/extjs', 'status:archive' ) ],
+		    	[-1, MShop.I18n.dt( 'client/extjs', 'status:review' ) ],
+		    	[0, MShop.I18n.dt( 'client/extjs', 'status:disabled' ) ],
+		    	[1, MShop.I18n.dt( 'client/extjs', 'status:enabled' ) ]
+		    ]
+		});
+    }
+    
+    return MShop.elements.status._store;
+};

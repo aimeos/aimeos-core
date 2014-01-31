@@ -69,7 +69,6 @@ Ext.ux.AdvancedSearch.Filter = Ext.extend(Ext.Container, {
             typeAhead: true,
             triggerAction: 'all',
             lazyRender:true,
-            emptyText: _('select an operator'),
             forceSelection: true,
             mode: 'local',
             store: this.operatorStore,

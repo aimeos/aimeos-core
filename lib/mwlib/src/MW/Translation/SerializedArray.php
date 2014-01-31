@@ -60,16 +60,18 @@ class MW_Translation_SerializedArray
 	{
 		try
 		{
-			$content = $this->_getTranslation( $domain );
+			foreach( $this->_getTranslations( $domain ) as $content )
+			{
+				if ( isset( $content[$string][0] ) && is_array( $content[$string] ) ) {
+					return $content[$string][0];
+				}
 
-			if ( isset( $content[$string][0] ) ) {
-				return $content[$string][0];
+				if ( isset( $content[$string] ) && is_string( $content[$string] ) ) {
+					return $content[$string];
+				}
 			}
 		}
-		catch( Exception $e )
-		{
-			;
-		}
+		catch( Exception $e ) { ; }
 
 		return (string) $string;
 	}
@@ -91,22 +93,40 @@ class MW_Translation_SerializedArray
 
 		try
 		{
-			$content = $this->_getTranslation( $domain );
-
-			if ( isset( $content[ $singular ][ $index ] ) ) {
-				return $content[ $singular ][ $index ];
+			foreach( $this->_getTranslations( $domain ) as $content )
+			{
+				if ( isset( $content[$singular][$index] ) && is_array( $content[$singular] ) ) {
+					return $content[$singular][$index];
+				}
 			}
 		}
-		catch( Exception $e )
-		{
-			;
-		}
+		catch( Exception $e ) { ; }
 
 		if( $index > 0 ) {
 			return (string) $plural;
 		}
 
 		return (string) $singular;
+	}
+
+
+	/**
+	 * Returns all locale string of the given domain.
+	 *
+	 * @param string $domain Translation domain
+	 * @return array Associative list with original string as key and translation
+	 * 	as value or an associative list with index => translation as value if
+	 * 	plural forms are available
+	 */
+	public function getAll( $domain )
+	{
+		$messages = array();
+
+		foreach( $this->_getTranslations( $domain ) as $list ) {
+			$messages = $messages + $list;
+		}
+
+		return $messages;
 	}
 
 
@@ -128,7 +148,7 @@ class MW_Translation_SerializedArray
 	 * @return array Returns a list with key value pairs for each domain.
 	 * @throws MW_Translation_Exception Throws exception on initialization of the translation
 	 */
-	private function _getTranslation( $domain )
+	private function _getTranslations( $domain )
 	{
 		if( !isset( $this->_translations[$domain] ) )
 		{
@@ -138,7 +158,8 @@ class MW_Translation_SerializedArray
 				throw new MW_Translation_Exception( $msg );
 			}
 
-			$locations = $this->_getTranslationFileLocations( $this->_translationSources[$domain], $this->_locale );
+			// Reverse locations so the former gets not overwritten by the later
+			$locations = array_reverse( $this->_getTranslationFileLocations( $this->_translationSources[$domain], $this->_locale ) );
 			$translations = array();
 
 			foreach( $locations as $location )
@@ -151,10 +172,8 @@ class MW_Translation_SerializedArray
 					throw new MW_Translation_Exception( 'Invalid content in translation file "%1$s"', $location );
 				}
 
-				$translations = $translations + $content;
+				$this->_translations[$domain][] = $content;
 			}
-
-			$this->_translations[$domain] = $translations;
 		}
 
 		return $this->_translations[$domain];

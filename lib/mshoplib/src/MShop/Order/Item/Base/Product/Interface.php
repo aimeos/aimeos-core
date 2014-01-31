@@ -187,6 +187,14 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	public function getPosition();
 
 	/**
+	 * Sets the position of the product within the list of ordered products.
+	 *
+	 * @param integer Product position in the order from 1-n
+	 * @throws MShop_Order_Exception If there's already a position set
+	 */
+	public function setPosition( $value );
+
+	/**
 	 * Returns the current delivery status of the order product item.
 	 * The returned status values are the STAT_* constants from the
 	 * MShop_Order_Item_Abstract class

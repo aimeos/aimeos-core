@@ -12,7 +12,7 @@ MShop.panel.order.OrderUi = Ext.extend(Ext.FormPanel, {
 	idProperty : 'order.base.id',
 	siteidProperty : 'order.base.siteid',
 
-	title : 'Order',
+	title : MShop.I18n.dt( 'client/extjs', 'Order' ),
 	layout : 'fit',
 	flex : 1,
 
@@ -32,31 +32,31 @@ MShop.panel.order.OrderUi = Ext.extend(Ext.FormPanel, {
 			},
 			items : [ {
 				xtype : 'displayfield',
-				fieldLabel : _( 'Base ID' ),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Base ID' ),
 				name : 'order.base.id'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Site'),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Site' ),
 				name : 'order.base.sitecode'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Customer'),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Customer' ),
 				name : 'order.base.customerid'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Currency'),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Currency' ),
 				name : 'order.base.currencyid'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Total'),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Total' ),
 				name : 'order.base.price'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Costs'),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Costs' ),
 				name : 'order.base.costs'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Comment'),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Comment' ),
 				name : 'order.base.comment'
 			} ]
 		} ];

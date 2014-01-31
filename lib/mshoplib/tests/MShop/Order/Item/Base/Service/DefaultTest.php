@@ -48,7 +48,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 			'id' => 1,
 			'siteid'=>99,
 			'servid' => 'ServiceID',
-			'baseid' => 99,
+			'baseid' => 42,
 			'code' => 'UnitCode',
 			'name' => 'UnitName',
 			'mediaurl' => 'Url for test',
@@ -94,6 +94,25 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->_object->getSiteId() );
+	}
+
+	public function testGetBaseId()
+	{
+		$this->assertEquals( 42, $this->_object->getBaseId() );
+	}
+
+	public function testSetBaseId()
+	{
+		$this->_object->setBaseId( 111 );
+		$this->assertEquals( 111, $this->_object->getBaseId() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+	public function testSetBaseIdReset()
+	{
+		$this->_object->setBaseId( null );
+		$this->assertEquals( null, $this->_object->getBaseId() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetServiceId()

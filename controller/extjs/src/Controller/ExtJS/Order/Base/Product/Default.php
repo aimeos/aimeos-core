@@ -64,6 +64,7 @@ class Controller_ExtJS_Order_Base_Product_Default
 			if( isset( $entry->{'order.base.product.quantity'} ) ) { $item->setQuantity( $entry->{'order.base.product.quantity'} ); }
 			if( isset( $entry->{'order.base.product.flags'} ) ) { $item->setFlags( $entry->{'order.base.product.flags'} ); }
 			if( isset( $entry->{'order.base.product.status'} ) ) { $item->setStatus( $entry->{'order.base.product.status'} ); }
+			if( isset( $entry->{'order.base.product.position'} ) ) { $item->setPosition( $entry->{'order.base.product.position'} ); }
 
 			$this->_manager->saveItem( $item );
 

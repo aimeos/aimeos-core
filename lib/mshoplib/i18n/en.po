@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-04 15:00+0100\n"
+"POT-Creation-Date: 2014-01-30 23:20+0100\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -33,7 +33,7 @@ msgstr ""
 
 # error domain: manager
 # error type: value, parameter, object etc. not available
-#: src/MShop/Common/Manager/Address/Default.php:116
+#: src/MShop/Common/Manager/Address/Abstract.php:118
 #, php-format
 msgid "Address search configuration not available"
 msgstr ""
@@ -61,12 +61,12 @@ msgstr ""
 
 # error domain: catalog
 # error type: value, parameter, object etc. not available
-#: src/MShop/Catalog/Manager/Default.php:635
+#: src/MShop/Catalog/Manager/Default.php:464
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Catalog/Manager/Default.php:575
+#: src/MShop/Catalog/Manager/Default.php:404
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
 msgstr ""
@@ -97,17 +97,14 @@ msgstr ""
 # error type: object does not implement interface
 #: src/MAdmin/Common/Manager/Abstract.php:59
 #: src/MShop/Service/Manager/Abstract.php:41
-#: src/MShop/Service/Manager/Default.php:597
+#: src/MShop/Service/Manager/Default.php:353
 #: src/MShop/Common/Factory/Abstract.php:64
 #: src/MShop/Common/Factory/Abstract.php:131
-#: src/MShop/Common/Manager/Abstract.php:246
-#: src/MShop/Common/Manager/Abstract.php:301
-#: src/MShop/Common/Manager/Abstract.php:348
-#: src/MShop/Common/Manager/Abstract.php:385
-#: src/MShop/Common/Manager/Abstract.php:494
-#: src/MShop/Product/Manager/Tag/Default.php:401
+#: src/MShop/Common/Manager/Abstract.php:233
+#: src/MShop/Common/Manager/Abstract.php:342
+#: src/MShop/Product/Manager/Tag/Default.php:326
 #: src/MShop/Plugin/Manager/Abstract.php:41
-#: src/MShop/Plugin/Manager/Default.php:260
+#: src/MShop/Plugin/Manager/Default.php:191
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
@@ -116,17 +113,14 @@ msgstr ""
 # error type: value, parameter, object etc. not available
 #: src/MAdmin/Common/Manager/Abstract.php:53 src/MAdmin/Factory.php:66
 #: src/MShop/Service/Manager/Abstract.php:35
-#: src/MShop/Service/Manager/Default.php:590
+#: src/MShop/Service/Manager/Default.php:346
 #: src/MShop/Common/Factory/Abstract.php:58
 #: src/MShop/Common/Factory/Abstract.php:125
 #: src/MShop/Common/Manager/Abstract.php:227
-#: src/MShop/Common/Manager/Abstract.php:285
-#: src/MShop/Common/Manager/Abstract.php:342
-#: src/MShop/Common/Manager/Abstract.php:378
-#: src/MShop/Common/Manager/Abstract.php:488
-#: src/MShop/Product/Manager/Tag/Default.php:391 src/MShop/Factory.php:67
+#: src/MShop/Common/Manager/Abstract.php:336
+#: src/MShop/Product/Manager/Tag/Default.php:316 src/MShop/Factory.php:67
 #: src/MShop/Plugin/Manager/Abstract.php:35
-#: src/MShop/Plugin/Manager/Default.php:252
+#: src/MShop/Plugin/Manager/Default.php:183
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
@@ -145,8 +139,8 @@ msgstr ""
 
 # error domain: manager
 # error type: value, parameter, object etc. not available
-#: src/MShop/Common/Manager/List/Default.php:347
-#: src/MShop/Common/Manager/List/Default.php:424
+#: src/MShop/Common/Manager/List/Abstract.php:355
+#: src/MShop/Common/Manager/List/Abstract.php:432
 #, php-format
 msgid "Configuration not available"
 msgstr ""
@@ -160,9 +154,9 @@ msgstr ""
 
 # error domain: manager
 # error type: value, parameter, object etc. not available
-#: src/MShop/Common/Manager/Type/Default.php:44
-#: src/MShop/Common/Manager/List/Default.php:46
-#: src/MShop/Common/Manager/Address/Default.php:39
+#: src/MShop/Common/Manager/Type/Abstract.php:55
+#: src/MShop/Common/Manager/List/Abstract.php:58
+#: src/MShop/Common/Manager/Address/Abstract.php:44
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
 msgstr ""
@@ -223,8 +217,8 @@ msgstr ""
 #: src/MAdmin/Job/Manager/Default.php:255
 #: src/MAdmin/Job/Manager/Default.php:262
 #: src/MShop/Locale/Manager/Site/Default.php:304
-#: src/MShop/Service/Manager/Default.php:524
-#: src/MShop/Plugin/Manager/Default.php:405
+#: src/MShop/Service/Manager/Default.php:280
+#: src/MShop/Plugin/Manager/Default.php:336
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
 msgstr ""
@@ -273,7 +267,7 @@ msgstr ""
 #: src/MShop/Customer/Manager/Factory.php:39
 #: src/MShop/Attribute/Manager/Factory.php:39
 #: src/MShop/Common/Factory/Abstract.php:52
-#: src/MShop/Common/Manager/Abstract.php:482
+#: src/MShop/Common/Manager/Abstract.php:330
 #: src/MShop/Text/Manager/Factory.php:39
 #: src/MShop/Catalog/Manager/Factory.php:38
 #: src/MShop/Product/Manager/Factory.php:39
@@ -287,7 +281,7 @@ msgstr ""
 
 # error domain: misc.
 # error type: invalid characters in name or value
-#: src/MShop/Order/Item/Abstract.php:162 src/MShop/Common/Item/Abstract.php:97
+#: src/MShop/Order/Item/Abstract.php:161 src/MShop/Common/Item/Abstract.php:97
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
 msgstr ""
@@ -302,11 +296,9 @@ msgstr ""
 # error domain: misc.
 # error type: invalid characters in name or value
 #: src/MAdmin/Common/Manager/Abstract.php:35
-#: src/MShop/Service/Manager/Default.php:573
-#: src/MShop/Common/Manager/Abstract.php:212
-#: src/MShop/Common/Manager/Abstract.php:270
-#: src/MShop/Common/Manager/Abstract.php:323
-#: src/MShop/Plugin/Manager/Default.php:232
+#: src/MShop/Service/Manager/Default.php:329
+#: src/MShop/Common/Manager/Abstract.php:208
+#: src/MShop/Plugin/Manager/Default.php:163
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
 msgstr ""
@@ -321,12 +313,9 @@ msgstr ""
 # error domain: manager
 # error type: invalid characters in name or value
 #: src/MAdmin/Common/Manager/Abstract.php:43
-#: src/MShop/Common/Manager/Abstract.php:220
-#: src/MShop/Common/Manager/Abstract.php:278
-#: src/MShop/Common/Manager/Abstract.php:332
-#: src/MShop/Common/Manager/Abstract.php:371
-#: src/MShop/Common/Manager/Abstract.php:555
-#: src/MShop/Product/Manager/Tag/Default.php:384
+#: src/MShop/Common/Manager/Abstract.php:217
+#: src/MShop/Common/Manager/Abstract.php:403
+#: src/MShop/Product/Manager/Tag/Default.php:309
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
 msgstr ""
@@ -345,8 +334,8 @@ msgstr ""
 
 # error domain: misc.
 # error type: invalid characters in name or value
-#: src/MShop/Service/Manager/Default.php:583
-#: src/MShop/Plugin/Manager/Default.php:240
+#: src/MShop/Service/Manager/Default.php:339
+#: src/MShop/Plugin/Manager/Default.php:171
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
 msgstr ""
@@ -391,14 +380,14 @@ msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Common/Manager/Abstract.php:700
+#: src/MShop/Common/Manager/Abstract.php:548
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
 msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Common/Manager/Abstract.php:724
+#: src/MShop/Common/Manager/Abstract.php:572
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr ""
@@ -412,7 +401,7 @@ msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Common/Manager/List/Default.php:190
+#: src/MShop/Common/Manager/List/Abstract.php:198
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr ""
@@ -508,7 +497,7 @@ msgstr ""
 # error domain: service
 # error type: value, parameter, object etc. not available
 #: src/MShop/Service/Provider/Abstract.php:174
-#: src/MShop/Service/Provider/Decorator/Abstract.php:248
+#: src/MShop/Service/Provider/Decorator/Abstract.php:260
 #: src/MShop/Service/Provider/Payment/Abstract.php:129
 #: src/MShop/Service/Provider/Payment/Abstract.php:140
 #: src/MShop/Service/Provider/Payment/Abstract.php:167
@@ -548,26 +537,26 @@ msgstr ""
 #: src/MShop/Order/Manager/Base/Address/Default.php:250
 #: src/MShop/Order/Manager/Status/Default.php:122
 #: src/MShop/Order/Manager/Default.php:188
-#: src/MShop/Supplier/Manager/Default.php:337
+#: src/MShop/Supplier/Manager/Default.php:156
 #: src/MShop/Locale/Manager/Site/Default.php:156
 #: src/MShop/Locale/Manager/Default.php:216
 #: src/MShop/Locale/Manager/Language/Default.php:111
 #: src/MShop/Locale/Manager/Currency/Default.php:115
-#: src/MShop/Service/Manager/Default.php:430
-#: src/MShop/Customer/Manager/Default.php:665
-#: src/MShop/Attribute/Manager/Default.php:412
-#: src/MShop/Common/Manager/Type/Default.php:106
-#: src/MShop/Common/Manager/List/Default.php:93
-#: src/MShop/Common/Manager/Address/Default.php:133
-#: src/MShop/Text/Manager/Default.php:373
+#: src/MShop/Service/Manager/Default.php:186
+#: src/MShop/Customer/Manager/Default.php:308
+#: src/MShop/Attribute/Manager/Default.php:168
+#: src/MShop/Common/Manager/Type/Abstract.php:115
+#: src/MShop/Common/Manager/List/Abstract.php:101
+#: src/MShop/Common/Manager/Address/Abstract.php:135
+#: src/MShop/Text/Manager/Default.php:127
 #: src/MShop/Catalog/Manager/Index/Default.php:279
-#: src/MShop/Catalog/Manager/Default.php:470
+#: src/MShop/Catalog/Manager/Default.php:299
 #: src/MShop/Product/Manager/Stock/Warehouse/Default.php:119
 #: src/MShop/Product/Manager/Stock/Default.php:115
-#: src/MShop/Product/Manager/Tag/Default.php:174
-#: src/MShop/Product/Manager/Default.php:408
-#: src/MShop/Media/Manager/Default.php:438
-#: src/MShop/Plugin/Manager/Default.php:303
+#: src/MShop/Product/Manager/Tag/Default.php:105
+#: src/MShop/Product/Manager/Default.php:164
+#: src/MShop/Media/Manager/Default.php:200
+#: src/MShop/Plugin/Manager/Default.php:234
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:47
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:52
 #: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:53
@@ -581,7 +570,7 @@ msgstr ""
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:51
 #: src/MShop/Plugin/Provider/Order/Shipping.php:55
 #: src/MShop/Price/Manager/Abstract.php:35
-#: src/MShop/Price/Manager/Default.php:458
+#: src/MShop/Price/Manager/Default.php:214
 #, php-format
 msgid "Object is not of required type \"%1$s\""
 msgstr ""
@@ -610,21 +599,21 @@ msgstr ""
 
 # error domain: order
 # error type: value not within allowed range
-#: src/MShop/Order/Item/Abstract.php:178
+#: src/MShop/Order/Item/Abstract.php:177
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
 msgstr ""
 
 # error domain: order
 # error type: value not within allowed range
-#: src/MShop/Order/Item/Abstract.php:194
+#: src/MShop/Order/Item/Abstract.php:193
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
 msgstr ""
 
 # error domain: order
 # error type: value not within allowed range
-#: src/MShop/Order/Item/Abstract.php:214
+#: src/MShop/Order/Item/Abstract.php:213
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
 msgstr ""
@@ -765,8 +754,8 @@ msgstr ""
 
 # error domain: misc.
 # error type: value, parameter, object etc. not available
-#: src/MShop/Service/Manager/Default.php:578
-#: src/MShop/Plugin/Manager/Default.php:225
+#: src/MShop/Service/Manager/Default.php:334
+#: src/MShop/Plugin/Manager/Default.php:156
 #, php-format
 msgid "Provider in \"%1$s\" not available"
 msgstr ""
@@ -780,22 +769,22 @@ msgstr ""
 
 # error domain: manager
 # error type: value, parameter, object etc. not available
-#: src/MShop/Common/Manager/Type/Default.php:59
-#: src/MShop/Common/Manager/Type/Default.php:63
-#: src/MShop/Common/Manager/List/Default.php:55
-#: src/MShop/Common/Manager/List/Default.php:59
-#: src/MShop/Common/Manager/Address/Default.php:55
-#: src/MShop/Common/Manager/Address/Default.php:59
+#: src/MShop/Common/Manager/Type/Abstract.php:68
+#: src/MShop/Common/Manager/Type/Abstract.php:72
+#: src/MShop/Common/Manager/List/Abstract.php:67
+#: src/MShop/Common/Manager/List/Abstract.php:71
+#: src/MShop/Common/Manager/Address/Abstract.php:57
+#: src/MShop/Common/Manager/Address/Abstract.php:61
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
 msgstr ""
 
 # error domain: manager
 # error type: value, parameter, object etc. not available
-#: src/MShop/Common/Manager/Type/Default.php:55
-#: src/MShop/Common/Manager/List/Default.php:51
-#: src/MShop/Common/Manager/List/Default.php:181
-#: src/MShop/Common/Manager/Address/Default.php:51
+#: src/MShop/Common/Manager/Type/Abstract.php:64
+#: src/MShop/Common/Manager/List/Abstract.php:63
+#: src/MShop/Common/Manager/List/Abstract.php:189
+#: src/MShop/Common/Manager/Address/Abstract.php:53
 #, php-format
 msgid "Search configuration not available"
 msgstr ""
@@ -911,7 +900,7 @@ msgstr ""
 # error domain: search
 # error type: empty search result
 #: src/MShop/Locale/Manager/Default.php:512
-#: src/MShop/Common/Manager/Abstract.php:872
+#: src/MShop/Common/Manager/Abstract.php:722
 #, php-format
 msgid "Total results value not found"
 msgstr ""
@@ -925,7 +914,7 @@ msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Common/Manager/Type/Default.php:191
+#: src/MShop/Common/Manager/Type/Abstract.php:200
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
 msgstr ""

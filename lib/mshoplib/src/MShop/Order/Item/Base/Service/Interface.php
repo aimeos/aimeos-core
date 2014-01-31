@@ -31,12 +31,16 @@ interface MShop_Order_Item_Base_Service_Interface extends MShop_Common_Item_Inte
 	public function setBaseId( $id );
 
 	/**
-	 * Returns the original service ID
+	 * Returns the original ID of the service item used for the order.
+	 *
+	 * @return string Original service ID
 	 */
 	public function getServiceId();
 
 	/**
-	 * Sets the original service ID
+	 * Sets a new ID of the service item used for the order.
+	 *
+	 * @param string $servid ID of the service item used for the order
 	 */
 	public function setServiceId( $servid );
 

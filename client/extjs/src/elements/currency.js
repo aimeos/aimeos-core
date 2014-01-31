@@ -8,7 +8,7 @@ Ext.ns('MShop.elements.currency');
 
 MShop.elements.currency.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel: _('Currency'),
+        fieldLabel: MShop.I18n.dt( 'client/extjs', 'Currency' ),
         anchor: '100%',
         store: MShop.elements.currency.getStore(),
         mode: 'local',
@@ -36,11 +36,14 @@ Ext.reg('MShop.elements.currency.combo', MShop.elements.currency.ComboBox);
  * @return {String} label
  */
 MShop.elements.currency.renderer = function(currencyId, metaData, record, rowIndex, colIndex, store) {
-
 	var currency = MShop.elements.currency.getStore().getById(currencyId);
-    
-    metaData.css = 'statustext-' + ( currency ? Number( currency.get( 'locale.currency.status' ) ) : '1' );
-    
+
+	if( currency ) {
+		metaData.css = 'statustext-' + Number( currency.get( 'locale.currency.status' ) );
+		return currency.get( 'locale.currency.label' );
+	}
+
+	metaData.css = 'statustext-1';
     return currencyId;
 };
 

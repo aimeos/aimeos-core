@@ -90,12 +90,14 @@ class Controller_ExtJS_Order_Base_Product_DefaultTest extends MW_Unittest_Testca
 			'items' => (object) array(
 				'order.base.product.id' => null,
 				'order.base.product.baseid' => $expected->getId(),
+				'order.base.product.type' => 'default',
 				'order.base.product.suppliercode' => 'unitsupplier',
 				'order.base.product.prodcode' => 'EFGH22',
 				'order.base.product.name' => 'FoooBar',
 				'order.base.product.quantity' => 5,
 				'order.base.product.flags' => 0,
-				'order.base.product.status' => 1
+				'order.base.product.status' => 1,
+				'order.base.product.position' => 5,
 			),
 		);
 

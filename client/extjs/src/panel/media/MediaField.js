@@ -50,10 +50,13 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         });
         this.buttonCt.setSize(this.width, this.height);
         
-        this.loadMask = new Ext.LoadMask(this.buttonCt, {msg: _('Loading'), msgCls: 'x-mask-loading'});
+        this.loadMask = new Ext.LoadMask(this.buttonCt, {
+        	msg: MShop.I18n.dt( 'client/extjs', 'Loading' ),
+        	msgCls: 'x-mask-loading'
+        } );
         
         // the click to edit text container
-        var clickToEditText = _('Click to edit');
+        var clickToEditText = MShop.I18n.dt( 'client/extjs', 'Click to upload' );
         this.textCt = Ext.DomHelper.insertFirst(this.buttonCt, '<div class="x-ux-from-imagefield-text">' + clickToEditText + '</div>', true);
         this.textCt.setSize(this.width, this.height/3);
         var tm = Ext.util.TextMetrics.createInstance(this.textCt);
@@ -132,8 +135,10 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
      * @private
      */
     onUploadFail: function() {
+        Ext.MessageBox.alert(
+       	    MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
+       	    MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' ) ).setIcon( Ext.MessageBox.ERROR );
         this.loadMask.hide();
-        Ext.MessageBox.alert(_('Upload Failed'), _('Could not upload image. Please notify your Administrator')).setIcon(Ext.MessageBox.ERROR);
     },
     
     onUploadSucess: function(uploader, record, response) {
@@ -142,7 +147,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
                 continue;
             }
             
-            // bullshit! -> sequence updateRecord fn?
+            // sequence updateRecord fn?
             this.itemUi.record.data[field] = response[field];
             
             var formField = this.itemUi.mainForm.getForm().findField(field);
@@ -150,8 +155,6 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
                 formField.setValue(response[field]);
             }
         }
-        
-        //this.setValue(response['media.preview']);
     },
     
     updateImage: function() {
@@ -168,7 +171,9 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
                 this.loadMask.hide();
             }, this);
             img.on('error', function() {
-                Ext.MessageBox.alert(_('Image Failed'), _('Could not load file. Please notify your Administrator')).setIcon(Ext.MessageBox.ERROR);
+                Ext.MessageBox.alert(
+               		MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
+               		MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' ) ).setIcon( Ext.MessageBox.ERROR );
                 this.loadMask.hide();
             }, this);
         }

@@ -13,8 +13,8 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	modal : true,
 	siteidProperty : 'media.type.siteid',
 
+
 	initComponent : function() {
-		this.title = _('Media type details');
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
@@ -26,7 +26,7 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -53,7 +53,7 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs',  'ID' ),
 							name : 'media.type.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
@@ -66,26 +66,27 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						}, {
 							xtype : 'textfield',
 							name : 'media.type.code',
-							fieldLabel : _('Code'),
-							emptyText : _('Code (required)'),
-							allowBlank : false
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
+							allowBlank : false,
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Unique code (required)' )
 						}, {
 							xtype : 'textfield',
 							name : 'media.type.label',
-							fieldLabel : _('Label'),
-							emptyText : _('Label (required)'),
-							allowBlank : false
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
+							allowBlank : false,
+							maxLength : 255,
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'media.type.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'media.type.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'media.type.editor'
 						}]
 					} ]
@@ -98,9 +99,10 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['media.type.label'] : 'new';
-
-		this.setTitle( 'Media Type: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
+		var label = this.record ? this.record.data['media.type.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Media type item panel title with type label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Media type: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.media.type.ItemUi.superclass.afterRender.apply( this, arguments );
 	}

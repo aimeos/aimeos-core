@@ -18,7 +18,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'media.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},
@@ -38,14 +38,14 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		return [ {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.id',
-			header : _('ID'),
+			header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 			sortable : true,
 			editable : false,
 			hidden : true
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.status',
-			header : _('Status'),
+			header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 			sortable : true,
 			width : 50,
 			align: 'center',
@@ -53,40 +53,40 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.typeid',
-			header : _('Type'),
+			header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 			width : 70,
 			renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "media.type.label" ], true)
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.languageid',
-			header : _('Lang'),
+			header : MShop.I18n.dt( 'client/extjs', 'Language' ),
 			sortable : true,
 			width : 50,
 			renderer : MShop.elements.language.renderer
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.mimetype',
-			header : _('Mimetype'),
+			header : MShop.I18n.dt( 'client/extjs', 'Mimetype' ),
 			sortable : true,
 			width : 80,
 			hidden : true
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.label',
-			header : _('Label'),
+			header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 			sortable : true,
 			id : 'media-list-label'
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.preview',
-			header : _('Preview'),
+			header : MShop.I18n.dt( 'client/extjs', 'Preview' ),
 			renderer : this.previewRenderer.createDelegate(this),
 			id : 'media-list-preview',
 			width : 100
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.ctime',
-			header : _('Created'),
+			header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 			sortable : true,
 			width : 120,
 			editable : false,
@@ -94,7 +94,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.mtime',
-			header : _('Last modified'),
+			header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 			sortable : true,
 			width : 120,
 			editable : false,
@@ -102,7 +102,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'media.editor',
-			header : _('Editor'),
+			header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 			sortable : true,
 			width : 120,
 			editable : false,

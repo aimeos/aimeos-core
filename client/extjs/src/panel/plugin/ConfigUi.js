@@ -11,7 +11,7 @@ MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	stripeRows: true,
 
 	initComponent: function() {
-		this.title = _('Configuration');		
+		this.title = MShop.I18n.dt( 'client/extjs', 'Configuration' );		
 		this.colModel = this.getColumnModel();
 		this.tbar = this.getToolBar();
 		this.store = this.getStore();
@@ -32,13 +32,13 @@ MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 		var that = this;
 		return new Ext.Toolbar([
 			{
-				text: _('Add'), 
+				text: MShop.I18n.dt( 'client/extjs', 'Add' ), 
 				handler: function () {
 					that.store.insert(0, new that.record({name: '', value: ''}));
 				}
 			},
 			{
-				text: _('Delete'), 
+				text: MShop.I18n.dt( 'client/extjs', 'Delete' ), 
 				handler: function () {
 					var selection = that.getSelectionModel().getSelections()[0];
 					if (selection) {
@@ -57,10 +57,15 @@ MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	getColumnModel: function() {
 		return new Ext.grid.ColumnModel({
 			defaults: { width: 250, sortable: true },
-			columns: [
-				{header: _('Name'), dataIndex: 'name', editor: { xtype: 'textfield'}},
-				{header: _('Value'), dataIndex: 'value', editor: { xtype: 'textfield'}}
-			]
+			columns: [ {
+				header: MShop.I18n.dt( 'client/extjs', 'Name' ),
+				dataIndex: 'name',
+				editor: { xtype: 'textfield'}
+			}, {
+				header: MShop.I18n.dt( 'client/extjs', 'Value' ),
+				dataIndex: 'value',
+				editor: { xtype: 'textfield'}
+			} ]
 		});
 	},
 

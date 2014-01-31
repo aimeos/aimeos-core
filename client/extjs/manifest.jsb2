@@ -43,6 +43,21 @@
 		"file": "js/arcavias-core.js",
 		"isDebug": true,
 		"fileIncludes": [{
+			"text": "ext-override.js",
+			"path": "src/"
+		}, {
+			"text": "Config.js",
+			"path": "src/"
+		}, {
+			"text": "I18n.js",
+			"path": "src/"
+		}, {
+			"text": "init.js",
+			"path": "src/"
+		}, {
+			"text": "Schema.js",
+			"path": "src/"
+		}, {
 			"text": "Filter.js",
 			"path": "lib/ext.ux/AdvancedSearch/"
 		}, {
@@ -94,22 +109,10 @@
 			"text": "FormattableDisplayField.js",
 			"path": "lib/ext.ux/form/"
 		}, {
-			"text": "ext-override.js",
-			"path": "src/"
-		}, {
-			"text": "Schema.js",
-			"path": "src/"
-		}, {
-			"text": "Config.js",
-			"path": "src/"
-		}, {
 			"text": "pagingtoolbar.js",
 			"path": "src/elements/"
 		}, {
 			"text": "UrlManager.js",
-			"path": "src/"
-		}, {
-			"text": "init.js",
 			"path": "src/"
 		}, {
 			"text": "site.js",

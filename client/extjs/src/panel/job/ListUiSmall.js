@@ -23,14 +23,14 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'job.ctime',
-			operator : 'after',
+			operator : '>',
 			value : Ext.util.Format.date( new Date( new Date().valueOf() - 7 * 86400 * 1000 ), 'Y-m-d H:i:s' )
 		} ]
 	},
 
 	initComponent : function()
 	{
-		this.title = _('Job');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Job' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -44,7 +44,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'job.id',
-				header : _('Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				width : 50,
 				editable : false,
@@ -52,7 +52,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'job.status',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				width : 50,
 				align: 'center',
@@ -60,14 +60,14 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'job.label',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				editable : false,
 				id : 'job-list-label'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'job.method',
-				header : _('Method'),
+				header : MShop.I18n.dt( 'client/extjs', 'Method' ),
 				sortable : true,
 				width : 200,
 				editable : false,
@@ -75,7 +75,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'job.parameter',
-				header : _('Parameter'),
+				header : MShop.I18n.dt( 'client/extjs', 'Parameter' ),
 				sortable : false,
 				width : 100,
 				editable : false,
@@ -96,7 +96,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'job.result',
-				header : _('Result'),
+				header : MShop.I18n.dt( 'client/extjs', 'Result' ),
 				sortable : false,
 				width : 200,
 				editable : false,
@@ -120,7 +120,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'job.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -129,7 +129,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'job.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -138,7 +138,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'job.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 80,
 				editable : false
@@ -148,6 +148,3 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 } );
 
 Ext.reg('MShop.panel.job.listuismall', MShop.panel.job.ListUiSmall);
-
-// hook this into the main tab panel
-// Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', MShop.panel.job.ListUi, 20);

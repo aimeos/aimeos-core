@@ -18,7 +18,7 @@ MShop.panel.product.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'product.tag.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},
@@ -33,34 +33,34 @@ MShop.panel.product.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'product.tag.id',
-				header : _('Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				width : 50,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.tag.typeid',
-				header : _('Type'),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 				sortable : true,
 				width : 70,
 				renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "product.tag.type.label" ], true)
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.tag.languageid',
-				header : _('Lang'),
+				header : MShop.I18n.dt( 'client/extjs', 'Language' ),
 				sortable : true,
 				width : 70,
 				renderer : MShop.elements.language.renderer
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.tag.label',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				id : 'product-tag-label'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.tag.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				editable : false,
@@ -68,7 +68,7 @@ MShop.panel.product.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.tag.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				editable : false,
@@ -76,7 +76,7 @@ MShop.panel.product.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.tag.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				editable : false,

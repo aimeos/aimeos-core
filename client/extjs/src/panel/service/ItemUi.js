@@ -14,7 +14,6 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 
 	initComponent : function() {
-		this.title = _('Service item details');
 		
 		this.items = [ {
 			xtype : 'tabpanel',
@@ -24,7 +23,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -52,14 +51,14 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs',  'ID' ),
 							name : 'service.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'service.status'
 						}, {
 							xtype : 'combo',
-							fieldLabel : _('Type'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Type' ),
 							name : 'service.typeid',
 							mode : 'local',
 							store : MShop.GlobalStoreMgr.get('Service_Type'),
@@ -68,47 +67,46 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							forceSelection : true,
 							triggerAction : 'all',
 							allowBlank : false,
-							typeAhead : true,
-							emptyText : _('Payment or delivery (required)')
+							typeAhead : true
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Code'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
 							name : 'service.code',
 							allowBlank : false,
 							maxLength : 32,
-							emptyText : _('Unique service code (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Unique code (required)' )
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Provider'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Provider' ),
 							name : 'service.provider',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Name of the service provider class (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Name of the service provider class (required)' )
 						}, {
 							xtype : 'textarea',
-							fieldLabel : _('Label'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'service.label',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Internal service name (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'numberfield',
-							fieldLabel : _('Position'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Position' ),
 							name : 'service.position',
 							allowDecimals : false,
 							allowBlank : false,
 							value : 0
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'service.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'service.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'service.editor'
 						} ]
 					} ]
@@ -129,9 +127,10 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['service.label'] : 'new';
-
-		this.setTitle( 'Service: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
+		var label = this.record ? this.record.data['service.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Service item panel title with service label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Service: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
 	},

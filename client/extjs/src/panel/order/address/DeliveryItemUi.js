@@ -8,7 +8,7 @@ Ext.ns('MShop.panel.order.base.address');
 
 MShop.panel.order.base.address.DeliveryItemUi = Ext.extend(Ext.FormPanel, {
 
-	title : _('Delivery address'),
+	title : MShop.I18n.dt( 'client/extjs', 'Delivery address' ),
 	flex: 1,
 	autoScroll : true,
 	recordName : 'Order_Base_Address',
@@ -30,87 +30,87 @@ MShop.panel.order.base.address.DeliveryItemUi = Ext.extend(Ext.FormPanel, {
 			},
 			items : [ {
 				xtype : 'displayfield',
-				fieldLabel : _( 'ID' ),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				name : 'order.base.address.id'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _( 'Address ID' ),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Address ID' ),
 				name : 'order.base.address.addressid'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Company',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Company' ),
 				name: 'order.base.address.company'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Salutation',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Salutation' ),
 				name: 'order.base.address.salutation'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Title',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Title' ),
 				name: 'order.base.address.title'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Firstname',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Firstname' ),
 				name: 'order.base.address.firstname'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Lastname',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Lastname' ),
 				name: 'order.base.address.lastname'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Address 1',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Address 1' ),
 				name: 'order.base.address.address1'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Address 2',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Address 2' ),
 				name: 'order.base.address.address2'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Address 3',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Address 3' ),
 				name: 'order.base.address.address3'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Postal code',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Postal code' ),
 				name: 'order.base.address.postal'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'City',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'City' ),
 				name: 'order.base.address.city'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'State',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'State' ),
 				name: 'order.base.address.state'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Country',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Country' ),
 				name: 'order.base.address.countryid'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Telephone',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Telephone' ),
 				name: 'order.base.address.telephone'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Telefax',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Telefax' ),
 				name: 'order.base.address.telefax'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'E-Mail',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'E-Mail' ),
 				name: 'order.base.address.email'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: 'Website',
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Website' ),
 				name: 'order.base.address.website'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Created'),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				name : 'order.base.address.ctime'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Last modified'),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				name : 'order.base.address.mtime'
 			}, {
 				xtype : 'displayfield',
-				fieldLabel : _('Editor'),
+				fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				name : 'order.base.address.editor'
 			} ]
 		} ];

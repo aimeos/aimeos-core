@@ -5,8 +5,20 @@
 
 
 /* superglobal lang stubs */
-_ = function(m) {return m; };
-n_ = function(s,p,n) {return ( n > 1 ? p : s ); };
+
+_ = function( string ) { return MShop.I18n.dt( 'client/extjs/ext', string ); };
+_n = function( singular, plural, num ) {return MShop.I18n.dn( 'client/extjs/ext', singular, plural, num ); };
+
+
+//init config and translations
+if( MShop.config.data ) {
+	MShop.Config.init( MShop.config.data );
+}
+
+if( MShop.i18n ) {
+	MShop.I18n.init( MShop.i18n.content, MShop.i18n.locale );
+}
+
 
 Ext.onReady(function() {
 
@@ -23,12 +35,6 @@ Ext.onReady(function() {
 	// init schemas
 	MShop.Schema.register(MShop.config.itemschema, MShop.config.searchschema);
     
-	//init configs
-	MShop.Config.init(MShop.config.configuration);
-    
-    // no endswith textfilters operators
-    Ext.ux.AdvancedSearch.TextFilter.prototype.operators = ['equals', 'contains', 'startswith'];
-    
     MShop.urlManager = new MShop.UrlManager( window.location.href );
     
     // build interface
@@ -37,7 +43,7 @@ Ext.onReady(function() {
         items: [{
             layout: 'fit',
             border: false,
-            tbar: ['->', /*_('Site:'),*/ {xtype: 'MShop.elements.site.combo'}],
+            tbar: ['->', {xtype: 'MShop.elements.site.combo'}],
             items: [{
                 xtype: 'tabpanel',
                 border: false,

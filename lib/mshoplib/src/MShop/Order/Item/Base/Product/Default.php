@@ -65,15 +65,15 @@ class MShop_Order_Item_Base_Product_Default
 
 
 	/**
-	 * Sets the base ID.
+	 * Sets the base order ID the product belongs to.
 	 *
-	 * @param integer $baseid new base ID
+	 * @param integer $value New order base ID
 	 */
-	public function setBaseId( $baseid )
+	public function setBaseId( $value )
 	{
-		if ( $baseid == $this->getBaseId() ) { return; }
+		if ( $value == $this->getBaseId() ) { return; }
 
-		$this->_values['baseid'] = (int) $baseid;
+		$this->_values['baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 
@@ -384,7 +384,26 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->_values['pos'] ) ? (int) $this->_values['pos'] : 0 );
+		return ( isset( $this->_values['pos'] ) ? (int) $this->_values['pos'] : null );
+	}
+
+
+	/**
+	 * Sets the position of the product within the list of ordered products.
+	 *
+	 * @param integer|null Product position in the order from 1-n or null for resetting the position
+	 * @throws MShop_Order_Exception If there's already a position set
+	 */
+	public function setPosition( $value )
+	{
+		if( $value == $this->getPosition() ) { return; }
+
+		if( $value !== null && $value < 1 ) {
+			throw new MShop_Order_Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
+		}
+
+		$this->_values['pos'] = ( $value !== null ? (int) $value : null );
+		$this->setModified();
 	}
 
 
