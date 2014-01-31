@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-30 23:20+0100\n"
-"PO-Revision-Date: 2014-01-31 10:45+0000\n"
+"PO-Revision-Date: 2014-01-31 13:03+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -645,12 +645,12 @@ msgstr "Details des Gebietsschemas ({1})"
 
 #: src/panel/locale/site/ListUi.js:28
 msgid "Locale site"
-msgstr "Mandant für das Gebietschema"
+msgstr "Mandant"
 
 #. : Locale site item panel title with site label ({0}) and site code ({1)}
 #: src/panel/locale/site/ItemUi.js:108
 msgid "Locale site: {0} ({1})"
-msgstr "Mandant für das Gebietschema: {0} ({1})"
+msgstr "Mandant: {0} ({1})"
 
 #: src/panel/media/ItemPickerUi.js:11 src/elements/domain.js:63
 msgid "Media"

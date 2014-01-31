@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# nsendetzky <n.sendetzky@metaways.de>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-30 23:20+0100\n"
-"PO-Revision-Date: 2014-01-30 22:29+0000\n"
+"PO-Revision-Date: 2014-01-31 13:02+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -212,7 +213,7 @@ msgstr "Ciudad"
 #: src/Client/Html/Common/Factory/Abstract.php:66
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr ""
+msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
 
 #: src/Client/Html/Abstract.php:150
 #: src/Client/Html/Common/Factory/Abstract.php:145
@@ -229,7 +230,7 @@ msgstr "La clase \"%1$s\" no está disponible"
 #: src/Client/Html/Common/Factory/Abstract.php:60
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "La clase \"%1$s\" no está disponible"
 
 #: layouts/account/history/detail-body-default.html:16
 #: layouts/account/history/detail-body-default.html:20
@@ -378,7 +379,7 @@ msgstr ""
 #: src/Client/Html/Common/Factory/Abstract.php:86
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Dominio no válido \"%1$s\""
 
 #: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:141
 #, php-format
@@ -700,7 +701,7 @@ msgstr "Probar de nuevo"
 #: src/Client/Html/Common/Decorator/Abstract.php:49
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "No se puede llamar al método \"%1$s\""
 
 #: src/Client/Html/Checkout/Standard/Order/Address/Default.php:125
 #, php-format
