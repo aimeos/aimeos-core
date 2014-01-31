@@ -72,10 +72,11 @@ class Controller_Frontend_Catalog_Default
 	 */
 	public function createProductFilterDefault( $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
 	{
-		$expr = $sortations = array();
+		$sortations = array();
 		$context = $this->_getContext();
 
 		$search = MShop_Factory::createManager( $context, 'catalog/index' )->createSearch( true );
+		$expr = array( $search->compare( '!=', 'catalog.index.catalog.id', null ) );
 
 		switch( $sort )
 		{
