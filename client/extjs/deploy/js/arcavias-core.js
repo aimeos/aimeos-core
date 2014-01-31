@@ -3792,7 +3792,7 @@ MShop.panel.AbstractListItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
         if (! this.store.autoSave) {
             this.onAfterSave();
         }
-    },
+    }
 
 });
 
