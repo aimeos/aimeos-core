@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2014-01-29 20:15+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "Falta la dirección de facturación"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "Falta la dirección de entrega"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "No se permite dirección de facturación"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "No se permite dirección de entrega"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "Falta la opción de pago"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "Falta la opción de entrega"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "No se permite opción de pago"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "No se permite opción de entrega"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "Lo sentimos, al menos uno de los productos ha dejado de existir. Elimínelo de la cesta para continuar"
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "Lo sentimos, al menos uno de los productos ha sido deshabilitado. Elimínelo de la cesta para continuar"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "Lo sentimos, al menos uno de los productos ha dejado de estar disponible. Elimínelo de la cesta para continuar"
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "El precio de al menos un producto ha cambiado entretanto y se ha actualizado automáticamente"
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "Lo sentimos, al menos uno de los productos está agotado. Elimínelo de la cesta para continuar"

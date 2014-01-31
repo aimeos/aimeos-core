@@ -8,19 +8,19 @@ Ext.ns('MShop.panel.attribute');
 
 MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-	title : _('Attribute'),
+	title : MShop.I18n.dt( 'client/extjs', 'Attribute' ),
 
 	initComponent : function() {
 
 		Ext.apply(this.itemConfig, {
-			title : _('Associated Attributes'),
+			title : MShop.I18n.dt( 'client/extjs', 'Associated attributes' ),
 			xtype : 'MShop.panel.listitemlistui',
 			domain : 'attribute',
 			getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
 		});
 
 		Ext.apply(this.listConfig, {
-			title : _('Available Attributes'),
+			title : MShop.I18n.dt( 'client/extjs', 'Available attributes' ),
 			xtype : 'MShop.panel.attribute.listuismall'
 		});
 
@@ -37,7 +37,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'typeid',
-				header : _('List type'),
+				header : MShop.I18n.dt( 'client/extjs', 'List type' ),
 				id : 'listtype',
 				width : 70,
 				renderer : this.typeColumnRenderer.createDelegate(this, [ this.listTypeStore, conf.listTypeLabelProperty ], true)
@@ -45,7 +45,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				id : 'refstatus',
 				width : 50,
 				align: 'center',
@@ -54,7 +54,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Type'),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 				id : 'reftype',
 				width : 70,
 				renderer : this.refTypeColumnRenderer.createDelegate(this, [ this.typeStore, 'attribute.typeid', 'attribute.type.label' ], true)
@@ -62,7 +62,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Code'),
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
 				id : 'refcode',
 				width : 80,
 				renderer : this.refColumnRenderer.createDelegate(this, [ 'attribute.code' ], true)
@@ -70,7 +70,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
 			{
 				xtype : 'gridcolumn',
 				dataIndex : conf.listNamePrefix + 'refid',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				id : 'refcontent',
 				renderer : this.refColumnRenderer.createDelegate(this, [ 'attribute.label' ], true)
 			}

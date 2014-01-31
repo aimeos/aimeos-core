@@ -18,14 +18,14 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'plugin.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},
 
 	initComponent : function()
 	{
-		this.title = _('Plugin');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Plugin');
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -42,7 +42,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'plugin.id',
-				header : _('Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				width : 50,
 				editable : false,
@@ -51,7 +51,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'plugin.status',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				width : 70,
 				align: 'center',
@@ -60,20 +60,20 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'plugin.typeid',
-				header : _('Type'),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 				width : 100,
 				renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "plugin.type.label" ], true)
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'plugin.provider',
-				header : _('Provider'),
+				header : MShop.I18n.dt( 'client/extjs', 'Provider' ),
 				id : 'plugin-list-provider',
 				sortable : true,
 				editable : false
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'plugin.label',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				width : 100,
 				editable : false,
@@ -81,14 +81,14 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'plugin.position',
-				header : _('Position'),
+				header : MShop.I18n.dt( 'client/extjs', 'Position' ),
 				sortable : true,
 				width : 100,
 				editable : false
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'plugin.config',
-				header : _('Configuration'),
+				header : MShop.I18n.dt( 'client/extjs', 'Configuration' ),
 				width : 200,
 				editable : false,
 				renderer: function (value) {	
@@ -101,7 +101,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'plugin.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -109,7 +109,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'plugin.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -117,7 +117,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'plugin.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				hidden : true

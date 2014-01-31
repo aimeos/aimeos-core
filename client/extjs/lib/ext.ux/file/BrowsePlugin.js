@@ -59,7 +59,7 @@ Ext.ux.file.BrowsePlugin.prototype = {
      * @property originalScope
      * @type Object
      * The scope originally defined for the Ext.Button during construction using the "scope" config option.
-     * While the "scope" property doesn't need to be nulled, to be consistent with originalHandler, we do.
+     * While the "scope" property does not need to be nulled, to be consistent with originalHandler, we do.
      * @private
      */
     originalScope: null,

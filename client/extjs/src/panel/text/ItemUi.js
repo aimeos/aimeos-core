@@ -13,9 +13,8 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 	modal : true,
 	siteidProperty : 'text.siteid',
 
+
 	initComponent : function() {
-	
-		this.title = _('Text item details');
 		
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
@@ -27,7 +26,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -56,14 +55,14 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs',  'ID' ),
 							name : 'text.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'text.status'
 						}, {
 							xtype : 'combo',
-							fieldLabel : _('Type'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Type' ),
 							name : 'text.typeid',
 							mode : 'local',
 							store : this.listUI.ItemTypeStore,
@@ -72,31 +71,33 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							forceSelection : true,
 							triggerAction : 'all',
 							allowBlank : false,
-							typeAhead : true,
-							emptyText : _('Name, description, etc. (required)')
+							typeAhead : true
 						}, {
 							xtype : 'MShop.elements.language.combo',
 							name : 'text.languageid'
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Label'),
-							name : 'text.label'
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
+							name : 'text.label',
+							allowBlank : true,
+							maxLength : 255,
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name' )
 						}, {
 							xtype : MShop.Config.get('client/extjs/common/editor', 'htmleditor'),
-							fieldLabel : 'Content',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Content' ),
 							name : 'text.content',
 							enableFont : false
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'text.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'text.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'text.editor'
 						} ]
 					} ]
@@ -110,8 +111,10 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 	
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['text.text'] : 'new';
-		this.setTitle( 'Text: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
+		var label = this.record ? this.record.data['text.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Text item panel title with text label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Text: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.text.ItemUi.superclass.afterRender.apply( this, arguments );
 	}

@@ -22,7 +22,7 @@ MShop.Config = {
 	},
 	
 	init : function( configuration ) {
-		this.configuration = JSON.parse(configuration);
+		this.configuration = configuration;
 	},
 	
 	set: function( name, value ) {

@@ -8,20 +8,16 @@
 Ext.ns('Ext.ux.AdvancedSearch');
 
 Ext.ux.AdvancedSearch.TextFilter = Ext.extend(Ext.ux.AdvancedSearch.Filter, {
-    
-    defaultOperator: 'startswith',
-    
+
+    operators: ['=~', '~=', '==', '!='],
+    defaultOperator: '=~',
     defaultValue: '',
-    
-    // _('equals') _('contains') _('startswith') _('endswith')
-    operators: ['equals', 'contains', 'startswith', 'endswith'],
-    
+
+
     initComponent: function() {
-        
         Ext.ux.AdvancedSearch.TextFilter.superclass.initComponent.call(this);
     }
-    
-    
+
 });
 
 Ext.reg('ux.textfilter', Ext.ux.AdvancedSearch.TextFilter);

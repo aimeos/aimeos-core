@@ -69,14 +69,16 @@ MShop.Schema = {
     getType: function (field) {
         switch (field.type) {
             case 'datetime': return 'date';
-            case 'integer': return 'auto'; // we convert to auto to support NULL's
+            case 'integer': return 'auto'; // we convert to auto to support NULLs
             default: return 'auto';
         }
     },
     
     getSchema: function (schemaName) {
     	if (! this.schemaMap.hasOwnProperty(schemaName)) {
-            throw new Ext.Error('schema "' + schemaName + '" is  not registered');
+    		/// Schema error message with schema name ({0})
+    		var msg = MShop.I18n.dt( 'client/extjs', 'Schema {0} is  not registered' );
+            throw new Ext.Error( String.format( msg, schemaName ) );
         }
         
         return this.schemaMap[schemaName];
@@ -84,7 +86,9 @@ MShop.Schema = {
     
     getSearchSchema: function (schemaName) {
         if (! this.searchSchemaMap.hasOwnProperty(schemaName)) {
-            throw new Ext.Error('search schema "' + schemaName + '" is  not registered');
+    		/// Search schema error message with search schema name ({0})
+    		var msg = MShop.I18n.dt( 'client/extjs', 'Search schema {0} is  not registered' );
+            throw new Ext.Error( String.format( msg, schemaName ) );
         }
         
         return this.searchSchemaMap[schemaName];

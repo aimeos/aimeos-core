@@ -15,7 +15,7 @@ MShop.panel.order.base.service.delivery.ItemUi = Ext.extend(Ext.Panel, {
 	idProperty : 'order.base.service.id',
 	siteidProperty : 'order.base.service.siteid',
 
-	title : _('Delivery'),
+	title : MShop.I18n.dt( 'client/extjs', 'Delivery' ),
 	border : false,
 	layout : 'hbox',
 	layoutConfig : {
@@ -24,13 +24,14 @@ MShop.panel.order.base.service.delivery.ItemUi = Ext.extend(Ext.Panel, {
 	itemId : 'MShop.panel.order.base.service.delivery.ItemUi',
 	plugins : [ 'ux.itemregistry' ],
 
+
 	initComponent : function() {
 
 		this.initStore();
 
 		this.items = [ {
 			xtype : 'form',
-			title : 'Details',
+			title : MShop.I18n.dt( 'client/extjs', 'Details' ),
 			flex : 1,
 			autoScroll : true,
 			items : [ {
@@ -43,48 +44,48 @@ MShop.panel.order.base.service.delivery.ItemUi = Ext.extend(Ext.Panel, {
 				},
 				items : [ {
 					xtype : 'displayfield',
-					fieldLabel : _( 'ID' ),
+					fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 					name : 'order.base.service.id'
 				}, {
 					xtype: 'displayfield',
-					fieldLabel: 'Service ID',
+					fieldLabel: MShop.I18n.dt( 'client/extjs', 'Service ID' ),
 					name: 'order.base.service.serviceid'
 				}, {
 					xtype: 'displayfield',
-					fieldLabel: 'Code',
+					fieldLabel: MShop.I18n.dt( 'client/extjs', 'Code' ),
 					maxLength : 32,
 					name: 'order.base.service.code'
 				}, {
 					xtype: 'displayfield',
-					fieldLabel: 'Name',
+					fieldLabel: MShop.I18n.dt( 'client/extjs', 'Name' ),
 					name: 'order.base.service.name'
 				}, {
 					xtype: 'displayfield',
-					fieldLabel: 'Price',
+					fieldLabel: MShop.I18n.dt( 'client/extjs', 'Price' ),
 					name: 'order.base.service.price'
 				}, {
 					xtype: 'displayfield',
-					fieldLabel: 'Costs',
+					fieldLabel: MShop.I18n.dt( 'client/extjs', 'Costs' ),
 					name: 'order.base.service.costs'
 				}, {
 					xtype: 'displayfield',
-					fieldLabel: 'Rebate',
+					fieldLabel: MShop.I18n.dt( 'client/extjs', 'Rebate' ),
 					name: 'order.base.service.rebate'
 				}, {
 					xtype: 'displayfield',
-					fieldLabel: 'Tax rate in %',
+					fieldLabel: MShop.I18n.dt( 'client/extjs', 'Tax rate in %' ),
 					name: 'order.base.service.taxrate'
 				}, {
 					xtype : 'displayfield',
-					fieldLabel : _('Created'),
+					fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 					name : 'order.base.service.ctime'
 				}, {
 					xtype : 'displayfield',
-					fieldLabel : _('Last modified'),
+					fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 					name : 'order.base.service.mtime'
 				}, {
 					xtype : 'displayfield',
-					fieldLabel : _('Editor'),
+					fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 					name : 'order.base.service.editor'
 				} ]
 			} ]

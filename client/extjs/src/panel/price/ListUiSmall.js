@@ -18,7 +18,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'price.currencyid',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},
@@ -38,21 +38,21 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		return [ {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.id',
-			header : _('ID'),
+			header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 			sortable : true,
 			editable : false,
 			hidden : true
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.label',
-			header: _('Label'),
+			header: MShop.I18n.dt( 'client/extjs', 'Label' ),
 			sortable: true,
 			align: 'left',
 			id : 'price-label'
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.status',
-			header : _('Status'),
+			header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 			sortable : true,
 			width : 50,
 			align: 'center',
@@ -60,19 +60,19 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.typeid',
-			header : _('Type'),
+			header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 			width : 70,
 			renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "price.type.label" ], true)
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.currencyid',
-			header : _('Currency'),
+			header : MShop.I18n.dt( 'client/extjs', 'Currency' ),
 			sortable : true,
 			width : 50
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.quantity',
-			header : _('Quantity'),
+			header : MShop.I18n.dt( 'client/extjs', 'Quantity' ),
 			align : 'right',
 			sortable : true,
 			width : 70,
@@ -80,7 +80,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'numbercolumn',
 			dataIndex : 'price.value',
-			header : _('Price'),
+			header : MShop.I18n.dt( 'client/extjs', 'Price' ),
 			sortable : true,
 			width: 100,
 			id : 'price-list-price',
@@ -88,7 +88,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'numbercolumn',
 			dataIndex : 'price.rebate',
-			header : _('Rebate'),
+			header : MShop.I18n.dt( 'client/extjs', 'Rebate' ),
 			sortable : true,
 			width : 70,
 			hidden : true,
@@ -96,7 +96,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'numbercolumn',
 			dataIndex : 'price.costs',
-			header : _('Costs'),
+			header : MShop.I18n.dt( 'client/extjs', 'Costs' ),
 			sortable : true,
 			width : 70,
 			hidden : true,
@@ -104,16 +104,16 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.taxrate',
-			header : _('Tax rate'),
+			header : MShop.I18n.dt( 'client/extjs', 'Tax rate' ),
 			sortable : true,
 			width : 70,
 			align : 'right',
 			hidden : !MShop.Config.get( 'client/extjs/panel/price/listuismall/taxrate', 
-			MShop.Config.get('client/extjs/panel/price/taxrate', false ) )
+					MShop.Config.get('client/extjs/panel/price/taxrate', false ) )
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.ctime',
-			header : _('Created'),
+			header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 			sortable : true,
 			width : 120,
 			editable : false,
@@ -121,7 +121,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.mtime',
-			header : _('Last modified'),
+			header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 			sortable : true,
 			width : 120,
 			editable : false,
@@ -129,7 +129,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'price.editor',
-			header : _('Editor'),
+			header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 			sortable : true,
 			width : 120,
 			editable : false,

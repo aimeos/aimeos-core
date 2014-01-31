@@ -16,9 +16,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 	idProperty : 'locale.site.id',
 	siteidProperty : 'locale.site.id',
 
-	initComponent : function()
-	{
-		this.title = _('Locale site item details');
+	initComponent : function() {
 
 		MShop.panel.AbstractListItemUi.prototype.setSiteCheck( this );
 
@@ -30,7 +28,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -57,35 +55,35 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'locale.site.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'locale.site.status'
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Code'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
 							name : 'locale.site.code',
 							allowBlank : false,
 							maxLength : 32,
-							emptyText : _('Unique site code (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Unique code (required)' )
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Label'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'locale.site.label',
 							allowBlank : false,
-							emptyText : _('Internal site name (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'locale.site.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'locale.site.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'locale.site.editor'
 						} ]
 					} ]
@@ -105,7 +103,10 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 
 	afterRender : function()
 	{
-		this.setTitle( this.title + ' (' + MShop.config.site["locale.site.label"] + ')' );
+		var label = this.record ? this.record.data['locale.site.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Locale site item panel title with site label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Locale site: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.locale.site.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
@@ -135,7 +136,9 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 	onSaveItem: function() {
 		if( !this.mainForm.getForm().isValid() && this.fireEvent( 'validate', this ) !== false )
 		{
-			Ext.Msg.alert( _( 'Invalid Data' ), _( 'Please recheck you data' ) );
+			Ext.Msg.alert( 
+				MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+				MShop.I18n.dt( 'client/extjs', 'Please recheck your data' ) );
 			return;
 		}
 

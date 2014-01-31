@@ -49,8 +49,8 @@ Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {
 
         var con = new Ext.data.Connection({
             // firefox specific problem -> see http://www.extjs.com/forum/archive/index.php/t-44862.html
-            //  "It appears that this is because the "load" is completing once the initial download dialog is displayed, 
-            //  but the frame is then destroyed before the "save as" dialog is shown."
+            //  It appears that this is because the "load" is completing once the initial download dialog is displayed, 
+            //  but the frame is then destroyed before the "save as" dialog is shown.
             //
             // TODO check if we can handle firefox event 'onSaveAsSubmit' (or something like that)
             //

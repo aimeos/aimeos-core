@@ -12,9 +12,8 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 	idProperty : 'product.stock.warehouse.id',
 	siteidProperty : 'product.stock.warehouse.siteid',
 
+	
 	initComponent : function() {
-
-		this.title = _( 'Warehouse' );
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
@@ -26,7 +25,7 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _( 'Basic' ),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -54,35 +53,35 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'product.stock.warehouse.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'product.stock.warehouse.status'
 						}, {
 							xtype : 'textfield',
-							fieldLabel : 'Warehouse code',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
 							name : 'product.stock.warehouse.code',
 							allowBlank : false,
 							maxLength : 32,
-							emptyText : _( 'Warehouse code (required)' )
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Unique code (required)' )
 						}, {
 							xtype : 'textfield',
-							fieldLabel : 'Warehouse label',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'product.stock.warehouse.label',
 							allowBlank : false,
-							emptyText : _( 'Warehouse label (required)' )
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'product.stock.warehouse.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'product.stock.warehouse.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'product.stock.warehouse.editor'
 						} ]
 					} ]
@@ -96,8 +95,10 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
 
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['product.stock.warehouse.label'] : 'new';
-		this.setTitle( 'Warehouse: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
+		var label = this.record ? this.record.data['product.stock.warehouse.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Product warehouse item panel title with warehouse label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Warehouse: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.stock.warehouse.ItemUi.superclass.afterRender.apply( this, arguments );
 	}

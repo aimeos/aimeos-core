@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2014-01-29 19:44+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Compañía"
+
+#. Address salutation
+msgid "mr"
+msgstr "Señor"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Señora"
+
+#. Address salutation
+msgid "miss"
+msgstr "Señorita"
+
+#. Product attribute
+msgid "size"
+msgstr "Talla"
+
+#. Product attribute
+msgid "length"
+msgstr "Longitud"
+
+#. Product attribute
+msgid "width"
+msgstr "Ancho"
+
+#. Product attribute
+msgid "color"
+msgstr "Color"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "repetido"
+
+#. Order type value
+msgid "order:web"
+msgstr "Internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "teléfono"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "inacabado"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "eliminado"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "cancelado"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "rechazado"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "reembolsado"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "pendiente"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "autorizado"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "recibido"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "inacabado"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "eliminado"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "pendiente"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "en progreso"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "enviado"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "entregado"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "perdido"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "rechazado"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "devuelto"
+
+#. Direct debit service provider
+msgid "directdebit.accountowner"
+msgstr "Titular de la cuenta"
+
+#. Direct debit service provider
+msgid "directdebit.accountno"
+msgstr "Número de cuenta"
+
+#. Direct debit service provider
+msgid "directdebit.bankcode"
+msgstr "Código del banco"
+
+#. Direct debit service provider
+msgid "directdebit.bankname"
+msgstr "Nombre del banco"
+
+#. Stock level
+msgid "stock-unlimited"
+msgstr "en almacén"
+
+#. Stock level
+msgid "stock-high"
+msgstr "en almacén"
+
+#. Stock level
+msgid "stock-low"
+msgstr "solo unos pocos disponibles"
+
+#. Stock level
+msgid "stock-out"
+msgstr "agotado"
+
+#. Warehouse code
+msgid "warehouse:default"
+msgstr "almacén:predeterminado"

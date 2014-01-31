@@ -8,7 +8,6 @@ Ext.ns('MShop.panel.text.type');
 
 MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
-	// Data Record (MShop_Text_Type like db. just without MShop)
 	recordName : 'Text_Type',
 	idProperty : 'text.type.id',
 	siteidProperty : 'text.type.siteid',
@@ -24,7 +23,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'text.type.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},
@@ -32,7 +31,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	// Override initComponent to set Label of tab.
 	initComponent : function()
 	{
-		this.title = _('Text Type');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Text type' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -47,14 +46,14 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		return [ {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.type.id',
-				header : _('ID'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				editable : false,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.type.status',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				width : 50,
 				align: 'center',
@@ -62,12 +61,12 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.type.domain',
-				header : _('Domain'),
+				header : MShop.I18n.dt( 'client/extjs', 'Domain' ),
 				sortable : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.type.code',
-				header : _('Code'),
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
 				sortable : true,
 				width : 150,
 				align: 'center',
@@ -76,13 +75,13 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.type.label',
 				id: 'text-type-label',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				editable : false
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'text.type.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -91,7 +90,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'text.type.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -100,7 +99,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'text.type.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				editable : false,

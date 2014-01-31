@@ -31,7 +31,9 @@ MShop.panel.AbstractListItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     onSaveItem: function() {
         // validate data
         if (! this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(_('Invalid Data'), _('Please recheck you data'));
+            Ext.Msg.alert(
+           		MShop.I18n.dt( 'client/extjs', 'Invalid data'),
+           		MShop.I18n.dt( 'client/extjs', 'Please recheck your data' ) );
             return;
         }
 
@@ -73,7 +75,9 @@ MShop.panel.AbstractListItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
         if (index != -1) {
             this.isSaveing = false;
             this.saveMask.hide();
-            Ext.Msg.alert(_('Invalid Data'), _('This combination does already exist.'));
+            Ext.Msg.alert(
+           		MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+           		MShop.I18n.dt( 'client/extjs', 'This combination already exists' ) );
             return;
         }
 

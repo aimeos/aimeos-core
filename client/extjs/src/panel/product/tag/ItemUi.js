@@ -13,9 +13,8 @@ MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 	modal : true,
 	siteidProperty : 'product.tag.siteid',
 
+	
 	initComponent : function() {
-
-		this.title = _('Product tag details');
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
@@ -27,7 +26,7 @@ MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic'),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -56,11 +55,11 @@ MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs',  'ID' ),
 							name : 'product.tag.id'
 						}, {
 							xtype : 'combo',
-							fieldLabel : _('Type'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Type' ),
 							name : 'product.tag.typeid',
 							mode : 'local',
 							store : this.listUI.typeStore,
@@ -69,28 +68,27 @@ MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							forceSelection : true,
 							triggerAction : 'all',
 							allowBlank : false,
-							typeAhead : true,
-							emptyText : _('Type of product tag (required)')
+							typeAhead : true
 						}, {
 							xtype : 'MShop.elements.language.combo',
 							name : 'product.tag.languageid'
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Label'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'product.tag.label',
 							allowBlank : false,
-							emptyText : _('Tag value (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Tag value (required)' )
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'product.tag.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'product.tag.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'product.tag.editor'
 						} ]
 					} ]
@@ -103,9 +101,10 @@ MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['product.tag.label'] : 'new';
-
-		this.setTitle( 'Product tag: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
+		var label = this.record ? this.record.data['product.tag.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Product tag item panel title with product label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Product tag: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.product.tag.ItemUi.superclass.afterRender.apply( this, arguments );
 	}

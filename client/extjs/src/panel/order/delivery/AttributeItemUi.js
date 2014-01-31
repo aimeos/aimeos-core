@@ -8,7 +8,7 @@ Ext.ns('MShop.panel.order.base.service.delivery.attribute');
 
 MShop.panel.order.base.service.delivery.attribute.ItemUi = Ext.extend(Ext.Panel, {
 
-	title : _('Attributes'),
+	title : MShop.I18n.dt( 'client/extjs', 'Attributes' ),
 	flex : 1,
 	layout: 'fit',
 
@@ -45,7 +45,7 @@ MShop.panel.order.base.service.delivery.attribute.ItemUi = Ext.extend(Ext.Panel,
 
 		Ext.apply(this.grid, {
 			viewConfig: {
-				emptyText: _('No Items'),
+				emptyText: MShop.I18n.dt( 'client/extjs', 'No items' ),
 				getRowClass: function (record, index){
 					if (record.phantom === true) {
 						return '';
@@ -150,8 +150,9 @@ MShop.panel.order.base.service.delivery.attribute.ItemUi = Ext.extend(Ext.Panel,
 	},
 
 	onStoreException: function(proxy, type, action, options, response) {
-		var title = _('Error');
-		var msg = response && response.error ? response.error.message : _('No error information available');
+		var title = MShop.I18n.dt( 'client/extjs', 'Error' );
+		var errmsg = MShop.I18n.dt( 'client/extjs', 'No error information available' );
+		var msg = response && response.error ? response.error.message : errmsg;
 		var code = response && response.error ? response.error.code : 0;
 
 		Ext.Msg.alert([title, ' (', code, ')'].join(''), msg);
@@ -194,47 +195,47 @@ MShop.panel.order.base.service.delivery.attribute.ItemUi = Ext.extend(Ext.Panel,
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.service.attribute.id',
-				header : _('ID'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				width : 55,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.service.attribute.type',
-				header : _('Type'),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
 				width : 150
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.service.attribute.name',
-				header : _('Name'),
+				header : MShop.I18n.dt( 'client/extjs', 'Name' ),
 				id : 'order-base-service-attribute-delivery-name-id'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.service.attribute.code',
-				header : _('Code'),
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
 				width : 150
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.service.attribute.value',
-				header : _('Value'),
+				header : MShop.I18n.dt( 'client/extjs', 'Value' ),
 				width : 150
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.service.attribute.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				width : 130,
 				format : 'Y-m-d H:i:s',
 				hidden : true
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.service.attribute.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				width : 130,
 				format : 'Y-m-d H:i:s',
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.service.attribute.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				width : 130,
 				hidden : true
 			}

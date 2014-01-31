@@ -18,14 +18,14 @@ MShop.panel.product.stock.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, 
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'product.stock.warehouse.label',
-			operator : 'startswith',
+			operator : '=~',
 			value : ''
 		} ]
 	},
 
 	initComponent : function()
 	{
-		this.title = _('Stock');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Stock' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
@@ -66,41 +66,41 @@ MShop.panel.product.stock.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, 
 		return [ {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.id',
-				header : _( 'Id' ),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				width : 50,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.productid',
-				header : _( 'Product Id' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Product ID' ),
 				width : 50,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.warehouseid',
-				header : _( 'Warehouse' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Warehouse' ),
 				align: 'center',
 				id : 'product-stock-warehouse',
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.typeStore, "product.stock.warehouse.label" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.stocklevel',
-				header : _( 'Quantity' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Quantity' ),
 				sortable : true,
 				align: 'center',
 				width : 80
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'product.stock.dateback',
-				header : _( 'Dateback' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Date back' ),
 				format : 'Y-m-d H:i:s',
 				sortable : true,
 				width : 130
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'product.stock.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				format : 'Y-m-d H:i:s',
 				sortable : true,
 				width : 130,
@@ -109,7 +109,7 @@ MShop.panel.product.stock.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, 
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'product.stock.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				format : 'Y-m-d H:i:s',
 				sortable : true,
 				width : 130,
@@ -118,7 +118,7 @@ MShop.panel.product.stock.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, 
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'product.stock.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				editable : false,
