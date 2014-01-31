@@ -17,18 +17,18 @@
 interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Interface
 {
 	/**
-	 * Returns the base Id.
+	 * Returns the order base ID the address belongs to.
 	 *
-	 * @return integer Base Id
+	 * @return integer|null Base ID
 	 */
 	public function getBaseId();
 
 	/**
-	 * Sets the Base Id.
+	 * Sets the order base ID the address belongs to.
 	 *
-	 * @param integer $baseid New base Id
+	 * @param integer|null $value New base ID
 	 */
-	public function setBaseId( $baseid );
+	public function setBaseId( $value );
 
 	/**
 	 * Returns the type of the address which can be billing or delivery.

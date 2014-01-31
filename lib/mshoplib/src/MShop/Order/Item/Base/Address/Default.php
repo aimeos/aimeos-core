@@ -34,9 +34,9 @@ class MShop_Order_Item_Base_Address_Default
 
 
 	/**
-	 * Returns the order base ID.
+	 * Returns the order base ID the address belongs to.
 	 *
-	 * @return integer Order base ID
+	 * @return integer|null Base ID
 	 */
 	public function getBaseId()
 	{
@@ -45,15 +45,15 @@ class MShop_Order_Item_Base_Address_Default
 
 
 	/**
-	 * Sets the order base ID.
+	 * Sets the order base ID the address belongs to.
 	 *
-	 * @param integer $baseid New order base ID
+	 * @param integer|null $value New base ID
 	 */
-	public function setBaseId( $baseid )
+	public function setBaseId( $value )
 	{
-		if ( $baseid == $this->getBaseId() ) { return; }
+		if ( $value == $this->getBaseId() ) { return; }
 
-		$this->_values['baseid'] = (int) $baseid;
+		$this->_values['baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 

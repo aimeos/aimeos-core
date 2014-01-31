@@ -275,15 +275,14 @@ class MShop_Order_Manager_Base_Product_Default
 			$stmt->bind(14, $price->getTaxRate(), MW_DB_Statement_Abstract::PARAM_STR);
 			$stmt->bind(15, $item->getFlags(), MW_DB_Statement_Abstract::PARAM_INT);
 			$stmt->bind(16, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(17, date('Y-m-d H:i:s', time()), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(18, $context->getEditor() );
+			$stmt->bind(17, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT);
+			$stmt->bind(18, date('Y-m-d H:i:s'), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind(19, $context->getEditor() );
 
 			if ( $id !== null ) {
-				$stmt->bind(19, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT);
 				$stmt->bind(20, $id, MW_DB_Statement_Abstract::PARAM_INT);
 			} else {
-				$stmt->bind(19, date('Y-m-d H:i:s', time()), MW_DB_Statement_Abstract::PARAM_STR);// ctime
-				$stmt->bind(20, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind(20, date('Y-m-d H:i:s'), MW_DB_Statement_Abstract::PARAM_STR);// ctime
 			}
 
 			$stmt->execute()->finish();
