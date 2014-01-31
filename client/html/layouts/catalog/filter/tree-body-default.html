@@ -8,9 +8,11 @@
 $enc = $this->encoder();
 $path = $this->get( 'treeCatalogPath', array() );
 $params = $this->get( 'treeFilterParams', array() );
+$counts = $this->config( 'client/html/catalog/count/enable', true );
+
 
 ?>
-<section class="catalog-filter-tree">
+<section class="catalog-filter-tree <?php echo ( $counts == true ? 'catalog-filter-count' : '' ); ?>">
 <?php if( ( $catid = $this->param( 'f-catalog-id' ) ) != null ) : ?>
 	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f-catalog-id' ) ); ?>" value="<?php echo $enc->attr( $catid ); ?>" />
 <?php endif; ?>
