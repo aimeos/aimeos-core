@@ -30,7 +30,7 @@ MShop.panel.AbstractTreeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
         if (! this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
             Ext.Msg.alert(
            		MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
-           		MShop.I18n.dt( 'client/extjs', 'Please recheck you data' ) );
+           		MShop.I18n.dt( 'client/extjs', 'Please recheck your data' ) );
             return;
         }
 
