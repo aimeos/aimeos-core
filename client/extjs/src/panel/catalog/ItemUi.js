@@ -124,7 +124,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( ( key = key.trim() ) !== '' ) {
-						config[key] = value.trim();
+						config[key] = (typeof value === "string") ? value.trim() : value;
 					}
 				}, this);
 			});
