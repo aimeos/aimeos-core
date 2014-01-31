@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-30 23:20+0100\n"
-"PO-Revision-Date: 2014-01-30 22:29+0000\n"
+"PO-Revision-Date: 2014-01-31 13:00+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -217,7 +217,7 @@ msgstr "Ort"
 #: src/Client/Html/Common/Factory/Abstract.php:66
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr ""
+msgstr "Die Klasse \"%1$s\" implementiert nicht \"%2$s\""
 
 #: src/Client/Html/Abstract.php:150
 #: src/Client/Html/Common/Factory/Abstract.php:145
@@ -234,7 +234,7 @@ msgstr "Die Klasse \"%1$s\" wurde nicht gefunden"
 #: src/Client/Html/Common/Factory/Abstract.php:60
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Die Klasse \"%1$s\" ist unbekannt"
 
 #: layouts/account/history/detail-body-default.html:16
 #: layouts/account/history/detail-body-default.html:20
@@ -378,12 +378,12 @@ msgstr "Client-Name \"%1$s\" enthält unerlaubte Zeichen"
 #: src/Client/Html/Common/Factory/Abstract.php:54
 #, php-format
 msgid "Invalid class name \"%1$s\""
-msgstr ""
+msgstr "Der Klassenname \"%1$s\" is ungültig"
 
 #: src/Client/Html/Common/Factory/Abstract.php:86
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Unbekannte Domäne \"%1$s\""
 
 #: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:141
 #, php-format
@@ -705,7 +705,7 @@ msgstr "Nochmal versuchen"
 #: src/Client/Html/Common/Decorator/Abstract.php:49
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"
 
 #: src/Client/Html/Checkout/Standard/Order/Address/Default.php:125
 #, php-format
