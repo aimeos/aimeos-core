@@ -105,12 +105,9 @@ class Client_Html_Catalog_Count_Tree_Default
 
 			if( $context->getConfig()->get( 'client/html/catalog/count/tree/aggregate', true ) == true )
 			{
-				$manager = MShop_Factory::createManager( $context, 'catalog/index' );
-
-				$filter = $manager->createSearch( true );
-				$this->_addAttributeFilter( $view, $filter );
-
-				$view->treeCountList = $manager->aggregate( $filter, 'catalog.index.catalog.id' );
+				$filter = $this->_getProductListFilter( $view, false );
+				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+				$view->treeCountList = $controller->aggregate( $filter, 'catalog.index.catalog.id' );
 			}
 
 			$this->_cache = $view;
