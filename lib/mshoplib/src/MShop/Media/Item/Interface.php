@@ -18,16 +18,17 @@ interface MShop_Media_Item_Interface
 	extends MShop_Common_Item_Interface, MShop_Common_Item_ListRef_Interface, MShop_Common_Item_Typeid_Interface
 {
 	/**
-	 * Returns the language ID of the text item.
+	 * Returns the ISO language code.
 	 *
-	 * @return string|null Language ID of the text item
+	 * @return string|null ISO language code (e.g. de or de_DE)
 	 */
 	public function getLanguageId();
 
 	/**
-	 *  Sets the language ID of the text item.
+	 * Sets the ISO language code.
 	 *
-	 * @param string|null $langid Language ID of the text type
+	 * @param string|null $langid ISO language code (e.g. de or de_DE)
+	 * @throws MShop_Exception If the language ID is invalid
 	 */
 	public function setLanguageId( $langid );
 

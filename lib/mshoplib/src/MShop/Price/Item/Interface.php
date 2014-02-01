@@ -110,16 +110,17 @@ interface MShop_Price_Item_Interface
 	public function setRebate( $price );
 
 	/**
-	 * Returns the used currency as three letter code.
+	 * Returns the currency ID.
 	 *
-	 * @return string Currency ID
+	 * @return string|null Three letter ISO currency code (e.g. EUR)
 	 */
 	public function getCurrencyId();
 
 	/**
-	 * Sets the used currency ID.
+	 * Sets the currency ID.
 	 *
-	 * @param string $currencyid Three letter currency code
+	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
+	 * @throws MShop_Exception If the currency ID is invalid
 	 */
 	public function setCurrencyId( $currencyid );
 

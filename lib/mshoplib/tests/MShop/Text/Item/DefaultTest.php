@@ -221,12 +221,25 @@ class MShop_Text_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetLanguageId()
+	{
+		$this->assertEquals( 'de', $this->_object->getLanguageId() );
+	}
+
+
 	public function testSetLanguageId()
 	{
-		$this->_object->setLanguageId('en');
+		$this->_object->setLanguageId( 'en' );
 		$this->assertEquals( 'en', $this->_object->getLanguageId() );
 
-		$this->setExpectedException('MShop_Text_Exception');
+		$this->setExpectedException('MShop_Exception');
+		$this->_object->setLanguageId(0);
+	}
+
+
+	public function testSetLanguageIdInvalid()
+	{
+		$this->setExpectedException('MShop_Exception');
 		$this->_object->setLanguageId(0);
 	}
 }

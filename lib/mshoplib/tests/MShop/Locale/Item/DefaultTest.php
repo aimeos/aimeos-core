@@ -107,9 +107,42 @@ class MShop_Locale_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setLanguageId('en');
 		$this->assertTrue($this->_object->isModified());
 		$this->assertEquals('en', $this->_object->getLanguageId());
+	}
 
-		$this->setExpectedException('MShop_Locale_Exception');
+
+	public function testSetLanguageIdNull()
+	{
+		$this->_object->setLanguageId(null);
+		$this->assertTrue($this->_object->isModified());
+		$this->assertEquals(null, $this->_object->getLanguageId());
+	}
+
+
+	public function testSetLanguageIdCountry()
+	{
+		$this->_object->setLanguageId('en_GB');
+		$this->assertEquals('en_GB', $this->_object->getLanguageId());
+	}
+
+
+	public function testSetLanguageIdInvalid()
+	{
+		$this->setExpectedException('MShop_Exception');
 		$this->_object->setLanguageId('test');
+	}
+
+
+	public function testSetLanguageIdCountryInvalid()
+	{
+		$this->setExpectedException('MShop_Exception');
+		$this->_object->setLanguageId('en-GB');
+	}
+
+
+	public function testSetLanguageIdCountryInvalidLowerCase()
+	{
+		$this->setExpectedException('MShop_Exception');
+		$this->_object->setLanguageId('en_gb');
 	}
 
 
@@ -124,8 +157,20 @@ class MShop_Locale_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setCurrencyId('AWG');
 		$this->assertTrue($this->_object->isModified());
 		$this->assertEquals('AWG', $this->_object->getCurrencyId());
+	}
 
-		$this->setExpectedException('MShop_Locale_Exception');
+
+	public function testSetCurrencyIdNull()
+	{
+		$this->_object->setCurrencyId(null);
+		$this->assertTrue($this->_object->isModified());
+		$this->assertEquals(null, $this->_object->getCurrencyId());
+	}
+
+
+	public function testSetCurrencyIdInvalid()
+	{
+		$this->setExpectedException('MShop_Exception');
 		$this->_object->setCurrencyId('TEST');
 	}
 

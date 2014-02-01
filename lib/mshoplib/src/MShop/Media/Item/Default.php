@@ -35,9 +35,9 @@ class MShop_Media_Item_Default
 
 
 	/**
-	 * Returns the language ID of the text item.
+	 * Returns the ISO language code.
 	 *
-	 * @return string|null Language ID of the text item
+	 * @return string|null ISO language code (e.g. de or de_DE)
 	 */
 	public function getLanguageId()
 	{
@@ -46,15 +46,17 @@ class MShop_Media_Item_Default
 
 
 	/**
-	 *  Sets the language ID of the text item.
+	 * Sets the ISO language code.
 	 *
-	 * @param string|null $langid Language ID of the text type
+	 * @param string|null $langid ISO language code (e.g. de or de_DE)
+	 * @throws MShop_Exception If the language ID is invalid
 	 */
 	public function setLanguageId( $langid )
 	{
 		if ( $langid === $this->getLanguageId() ) { return; }
 
-		$this->_values['langid'] = ( $langid !== null ? (string) $langid : null );
+		$this->_checkLanguageId( $langid );
+		$this->_values['langid'] = $langid;
 		$this->setModified();
 	}
 
@@ -190,6 +192,10 @@ class MShop_Media_Item_Default
 	{
 		if ( $mimetype == $this->getMimeType() ) { return; }
 
+		if( preg_match( '/^[a-z\-]+\/[a-zA-Z0-9\.\-\+]+$/', $mimetype ) !== 1 ) {
+			throw new MShop_Media_Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
+		}
+
 		$this->_values['mimetype'] = (string) $mimetype;
 		$this->setModified();
 	}
@@ -257,9 +263,9 @@ class MShop_Media_Item_Default
 		$list['media.domain'] = $this->getDomain();
 		$list['media.label'] = $this->getLabel();
 		$list['media.languageid'] = $this->getLanguageId();
-		$list['media.mimetype'] = $this->getMimeType(); 
+		$list['media.mimetype'] = $this->getMimeType();
 		$list['media.typeid'] = $this->getTypeId();
-		$list['media.type'] = $this->getType(); 
+		$list['media.type'] = $this->getType();
 		$list['media.url'] = $this->getUrl();
 		$list['media.preview'] = $this->getPreview();
 		$list['media.status'] = $this->getStatus();

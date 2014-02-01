@@ -114,30 +114,28 @@ class MShop_Locale_Item_Default
 
 
 	/**
-	 * Returns the two letter ISO language code.
+	 * Returns the ISO language code.
 	 *
-	 * @return string Language ID
+	 * @return string|null ISO language code (e.g. de or de_DE)
 	 */
 	public function getLanguageId()
 	{
-		return ( isset( $this->_values['langid'] ) ? (string) $this->_values['langid'] : '' );
+		return ( isset( $this->_values['langid'] ) ? (string) $this->_values['langid'] : null );
 	}
 
 
 	/**
-	 * Sets the language ID.
+	 * Sets the ISO language code.
 	 *
-	 * @param string $langid Two letter ISO language code
+	 * @param string|null $langid ISO language code (e.g. de or de_DE)
+	 * @throws MShop_Exception If the language ID is invalid
 	 */
 	public function setLanguageId( $langid )
 	{
 		if ( $langid == $this->getLanguageId() ) { return; }
 
-		if( ! empty( $langid ) && ( strlen( $langid ) !== 2 || ctype_alpha( $langid ) === false ) ) {
-			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $langid ) );
-		}
-
-		$this->_values['langid'] = (string) $langid;
+		$this->_checkLanguageId( $langid );
+		$this->_values['langid'] = $langid;
 		$this->setModified();
 	}
 
@@ -145,28 +143,26 @@ class MShop_Locale_Item_Default
 	/**
 	 * Returns the currency ID.
 	 *
-	 * @return string Currency ID (e.g: EUR)
+	 * @return string|null Three letter ISO currency code (e.g. EUR)
 	 */
 	public function getCurrencyId()
 	{
-		return ( isset( $this->_values['currencyid'] ) ? (string) $this->_values['currencyid'] : '' );
+		return ( isset( $this->_values['currencyid'] ) ? (string) $this->_values['currencyid'] : null );
 	}
 
 
 	/**
 	 * Sets the currency ID.
 	 *
-	 * @param string $currencyid Currency (e.g: EUR)
+	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
+	 * @throws MShop_Exception If the currency ID is invalid
 	 */
 	public function setCurrencyId( $currencyid )
 	{
 		if ( $currencyid == $this->getCurrencyId() ) { return; }
 
-		if( ! empty( $currencyid ) && ( strlen( $currencyid ) !== 3 || ctype_alpha( $currencyid ) === false ) ) {
-			throw new MShop_Locale_Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $currencyid ) );
-		}
-
-		$this->_values['currencyid'] = (string) $currencyid;
+		$this->_checkCurrencyId( $currencyid );
+		$this->_values['currencyid'] = $currencyid;
 		$this->setModified();
 	}
 
