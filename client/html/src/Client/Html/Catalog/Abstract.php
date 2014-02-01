@@ -18,7 +18,6 @@ abstract class Client_Html_Catalog_Abstract
 	extends Client_Html_Abstract
 {
 	static private $_productList;
-	static private $_productFilter;
 	static private $_productTotal = 0;
 
 
@@ -68,55 +67,54 @@ abstract class Client_Html_Catalog_Abstract
 	 * Returns the filter from the parameters for the product list.
 	 *
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
+	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
+	 * @param boolean $textfilter True to include text criteria in product filter, false if not
+	 * @param boolean $attrfilter True to include attribute criteria in product filter, false if not
 	 * @return array List of products implementing MShop_Product_Item_Interface
 	 */
-	protected function _getProductListFilter( MW_View_Interface $view )
+	protected function _getProductListFilter( MW_View_Interface $view, $catfilter = true, $textfilter = true, $attrfilter = true )
 	{
-		if( self::$_productFilter === null )
-		{
-			$context = $this->_getContext();
-			$config = $context->getConfig();
+		$sortdir = '+';
+		$context = $this->_getContext();
+		$config = $context->getConfig();
 
-			$text = (string) $view->param( 'f-search-text' );
-			$catid = (string) $view->param( 'f-catalog-id' );
+		$text = (string) $view->param( 'f-search-text' );
+		$catid = (string) $view->param( 'f-catalog-id' );
 
-			if( $catid == '' ) {
-				$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
-			}
-
-			$page = $this->_getProductListPage( $view );
-			$size = $this->_getProductListSize( $view );
-			$sortation = $this->_getProductListSort( $view );
-
-			$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
-			$sort = ltrim( $sortation, '-' );
-
-
-			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
-
-			if( $text !== '' )
-			{
-				$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
-
-				if( $catid !== '' ) {
-					$filter = $controller->addProductFilterCategory( $filter, $catid );
-				}
-			}
-			elseif( $catid !== '' )
-			{
-				$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
-			}
-			else
-			{
-				$filter = $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
-			}
-
-			$this->_addAttributeFilter( $view, $filter );
-
-			self::$_productFilter = $filter;
+		if( $catid == '' && $catfilter === true ) {
+			$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
 		}
 
-		return self::$_productFilter;
+		$page = $this->_getProductListPage( $view );
+		$size = $this->_getProductListSize( $view );
+		$sort = $this->_getProductListSort( $view, $sortdir );
+
+
+		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+
+		if( $text !== '' && $textfilter === true )
+		{
+			$filter = $controller->createProductFilterByText( $text, $sort, $sortdir, ($page-1) * $size, $size );
+
+			if( $catid !== '' && $catfilter === true ) {
+				$filter = $controller->addProductFilterCategory( $filter, $catid );
+			}
+		}
+		elseif( $catid !== '' && $catfilter === true )
+		{
+			$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
+		}
+		else
+		{
+			$filter = $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
+		}
+
+		if( $attrfilter === true ) {
+			$this->_addAttributeFilter( $view, $filter );
+		}
+
+
+		return $filter;
 	}
 
 
@@ -168,12 +166,17 @@ abstract class Client_Html_Catalog_Abstract
 	 * Returns the sanitized sortation from the parameters for the product list.
 	 *
 	 * @param MW_View_Interface $view View instance with helper for retrieving the required parameters
+	 * @param string &$sortdir Value-result parameter where the sort direction will be stored
 	 * @return string Sortation string (relevance, name, price)
 	 */
-	protected function _getProductListSort( MW_View_Interface $view )
+	protected function _getProductListSort( MW_View_Interface $view, &$sortdir )
 	{
 		$sortation = (string) $view->param( 'l-sort', 'relevance' );
-		return ( strlen( $sortation ) === 0 ? $sortation = 'relevance' : $sortation );
+
+		$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
+		$sort = ltrim( $sortation, '-' );
+
+		return ( strlen( $sort ) > 0 ? $sort : 'relevance' );
 	}
 
 

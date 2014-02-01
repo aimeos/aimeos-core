@@ -209,10 +209,10 @@ class Client_Html_Catalog_List_Default
 			}
 
 			$view->listParams = $this->_getClientParams( $view->param() );
-			$view->listProductTotal = $this->_getProductListTotal( $view );
-			$view->listProductSort = $this->_getProductListSort( $view );
 			$view->listPageCurr = $this->_getProductListPage( $view );
 			$view->listPageSize = $this->_getProductListSize( $view );
+			$view->listProductTotal = $this->_getProductListTotal( $view );
+			$view->listProductSort = $view->param( 'l-sort', 'relevance' );
 			$view->listProductItems = $products;
 
 			$this->_cache = $view;
