@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-30 23:20+0100\n"
+"POT-Creation-Date: 2014-02-01 18:12+0100\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -304,7 +304,7 @@ msgstr ""
 msgid "First name"
 msgstr ""
 
-#: layouts/catalog/filter/search-body-default.html:21
+#: layouts/catalog/filter/search-body-default.html:23
 msgid "Go"
 msgstr ""
 
@@ -471,6 +471,10 @@ msgstr ""
 
 #: layouts/checkout/standard/payment-body-default.html:43
 msgid "Please choose your payment method"
+msgstr ""
+
+#: layouts/catalog/filter/search-body-default.html:11
+msgid "Please enter at least three characters"
 msgstr ""
 
 #: layouts/catalog/detail/basket-selection-body-default.html:21

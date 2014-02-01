@@ -372,6 +372,14 @@
 	font-weight: bold;
 }
 
+.catalog-filter .search-hint {
+	position: absolute;
+	background-color: #ffeeee;
+	border: solid 1px #FF3300;
+	padding: 0.5em;
+	color: #FF0000;
+}
+
 .catalog-filter-search {
 	background-image: url("images/buttonfond.png");
 	background-repeat: repeat-x;

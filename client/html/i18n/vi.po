@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-30 23:20+0100\n"
-"PO-Revision-Date: 2014-01-30 22:29+0000\n"
+"POT-Creation-Date: 2014-02-01 18:12+0100\n"
+"PO-Revision-Date: 2014-02-01 17:13+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -314,7 +314,7 @@ msgstr "Các mục với phần dấu *"
 msgid "First name"
 msgstr "Tên"
 
-#: layouts/catalog/filter/search-body-default.html:21
+#: layouts/catalog/filter/search-body-default.html:23
 msgid "Go"
 msgstr "Truy cập"
 
@@ -488,6 +488,10 @@ msgstr "Xin vui lòng chọn phương thức vận chuyển"
 #: layouts/checkout/standard/payment-body-default.html:43
 msgid "Please choose your payment method"
 msgstr "Xin vui lòng chọn phương thức thanh toán của bạn"
+
+#: layouts/catalog/filter/search-body-default.html:11
+msgid "Please enter at least three characters"
+msgstr ""
 
 #: layouts/catalog/detail/basket-selection-body-default.html:21
 msgid "Please select"
