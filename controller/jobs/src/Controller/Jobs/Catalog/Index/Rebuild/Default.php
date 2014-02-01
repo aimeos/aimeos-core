@@ -52,7 +52,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 		$context->getLocale()->setLanguageId( null );
 		$context->getLocale()->setCurrencyId( null );
 
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_getContext() );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$manager->getSubManager( 'index' )->rebuildIndex();
 	}
 }
