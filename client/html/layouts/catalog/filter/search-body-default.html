@@ -6,18 +6,20 @@
  */
 
 $enc = $this->encoder();
-$phrase = $this->param( 'f-search-text' );
+$phrase = $enc->attr( $this->param( 'f-search-text' ) );
+$name = $enc->attr( $this->formparam( 'f-search-text' ) );
+$hint = $this->translate( 'client/html', 'Please enter at least three characters' );
 
 $listSimpleTarget = $this->config( 'client/html/catalog/listsimple/url/target' );
 $listSimpleController = $this->config( 'client/html/catalog/listsimple/url/controller', 'catalog' );
 $listSimpleAction = $this->config( 'client/html/catalog/listsimple/url/action', 'listsimple' );
 $listSimpleConfig = $this->config( 'client/html/catalog/listsimple/url/config', array() );
 
-$listSimpleUrl = $this->url( $listSimpleTarget, $listSimpleController, $listSimpleAction, array(), array(), $listSimpleConfig );
+$listSimpleUrl = $enc->attr( $this->url( $listSimpleTarget, $listSimpleController, $listSimpleAction, array(), array(), $listSimpleConfig ) );
 
 ?>
 <section class="catalog-filter-search">
-	<input class="value" type="text" name="<?php echo $enc->attr( $this->formparam( 'f-search-text' ) ); ?>" value="<?php echo $enc->attr( $phrase ); ?>" data-url="<?php echo $enc->attr( $listSimpleUrl ); ?>" /><!--
+	<input class="value" type="text" name="<?php echo $name; ?>" value="<?php echo $phrase; ?>" data-url="<?php echo $listSimpleUrl; ?>" data-hint="<?php echo $hint; ?>" /><!--
 	--><button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Go' ), $enc::TRUST ); ?></button>
 <?php echo $this->get( 'searchBody' ); ?>
 </section>

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-30 23:20+0100\n"
-"PO-Revision-Date: 2014-01-31 13:00+0000\n"
+"POT-Creation-Date: 2014-02-01 18:12+0100\n"
+"PO-Revision-Date: 2014-02-01 17:15+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -317,7 +317,7 @@ msgstr "Felder mit einem * müssen ausgefüllt werden"
 msgid "First name"
 msgstr "Vorname"
 
-#: layouts/catalog/filter/search-body-default.html:21
+#: layouts/catalog/filter/search-body-default.html:23
 msgid "Go"
 msgstr "Los"
 
@@ -491,6 +491,10 @@ msgstr "Bitte wählen sie die gewünschte Liefermethode"
 #: layouts/checkout/standard/payment-body-default.html:43
 msgid "Please choose your payment method"
 msgstr "Bitte wählen sie die gewünschte Zahlungsart"
+
+#: layouts/catalog/filter/search-body-default.html:11
+msgid "Please enter at least three characters"
+msgstr "Bitte geben Sie mindestens drei Zeichen ein"
 
 #: layouts/catalog/detail/basket-selection-body-default.html:21
 msgid "Please select"
