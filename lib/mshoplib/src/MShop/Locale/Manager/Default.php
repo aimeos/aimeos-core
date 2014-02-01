@@ -331,12 +331,19 @@ class MShop_Locale_Manager_Default
 
 		// Try to find exact match
 		$search = $this->createSearch( $active );
-		$expr = array(
-			$search->compare( '==', 'locale.siteid', $sitePath ),
-			$search->compare( '==', 'locale.languageid', $lang ),
-			$search->compare( '==', 'locale.currencyid', $currency ),
-			$search->getConditions(),
-		);
+
+		$expr = array( $search->compare( '==', 'locale.siteid', $sitePath ) );
+
+		if( !empty( $lang ) ) {
+			$expr[] = $search->compare( '==', 'locale.languageid', $lang );
+		}
+
+		if( !empty( $currency ) ) {
+			$expr[] = $search->compare( '==', 'locale.currencyid', $currency );
+		}
+
+		$expr[] = $search->getConditions();
+
 
 		if ( $active === true )
 		{
