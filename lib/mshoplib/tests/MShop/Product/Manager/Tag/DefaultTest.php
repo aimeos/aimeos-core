@@ -36,6 +36,7 @@ class MShop_Product_Manager_Tag_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object );
+		MShop_Factory::clear();
 	}
 
 

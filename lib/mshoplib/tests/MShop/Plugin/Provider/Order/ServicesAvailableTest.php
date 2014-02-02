@@ -66,6 +66,8 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 		unset( $this->_plugin );
 		unset( $this->_service );
 		unset( $this->_order );
+
+		MShop_Factory::clear();
 	}
 
 

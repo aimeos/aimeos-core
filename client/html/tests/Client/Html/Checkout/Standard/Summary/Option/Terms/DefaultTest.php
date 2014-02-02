@@ -52,6 +52,9 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends MW_
 	{
 		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
 		unset( $this->_object );
+
+		Controller_Frontend_Factory::clear();
+		MShop_Factory::clear();
 	}
 
 

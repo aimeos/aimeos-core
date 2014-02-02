@@ -47,6 +47,7 @@ class Controller_ExtJS_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 
@@ -126,4 +127,5 @@ class Controller_ExtJS_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}
+
 }

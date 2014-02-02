@@ -53,6 +53,7 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 	protected function tearDown()
 	{
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_DefaultMock', null );
+		MShop_Factory::clear();
 	}
 
 

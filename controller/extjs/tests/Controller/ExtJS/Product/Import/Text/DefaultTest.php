@@ -59,6 +59,7 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 

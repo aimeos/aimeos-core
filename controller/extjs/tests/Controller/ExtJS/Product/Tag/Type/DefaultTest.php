@@ -47,6 +47,7 @@ class Controller_ExtJS_Product_Tag_Type_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 
@@ -100,7 +101,7 @@ class Controller_ExtJS_Product_Tag_Type_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $saved['items']->{'product.tag.type.domain'}, $searched['items'][0]->{'product.tag.type.domain'} );
 		$this->assertEquals( $saved['items']->{'product.tag.type.label'}, $searched['items'][0]->{'product.tag.type.label'} );
 		$this->assertEquals( $saved['items']->{'product.tag.type.status'}, $searched['items'][0]->{'product.tag.type.status'} );
-		
+
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}

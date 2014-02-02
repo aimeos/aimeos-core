@@ -91,7 +91,7 @@ class MAdmin_Job_Manager_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
-		
+
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
@@ -127,7 +127,7 @@ class MAdmin_Job_Manager_DefaultTest extends MW_Unittest_Testcase
 		$itemUpd = $this->_object->getItem( $item->getId() );
 
 		$this->_object->deleteItem( $item->getId() );
-		
+
 		$context = TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
@@ -141,7 +141,7 @@ class MAdmin_Job_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $context->getEditor(), $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
-		
+
 		$this->assertEquals( $itemExp->getId(), $itemSaved->getId() );
 		$this->assertEquals( $itemExp->getSiteid(), $itemSaved->getSiteId() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
@@ -152,7 +152,7 @@ class MAdmin_Job_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
-		
+
 		$this->setExpectedException( 'MAdmin_Job_Exception' );
 		$this->_object->getItem( $item->getId() );
 	}

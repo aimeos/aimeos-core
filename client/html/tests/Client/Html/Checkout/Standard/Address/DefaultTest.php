@@ -50,7 +50,11 @@ class Client_Html_Checkout_Standard_Address_DefaultTest extends MW_Unittest_Test
 	 */
 	protected function tearDown()
 	{
+		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
 		unset( $this->_object );
+
+		Controller_Frontend_Factory::clear();
+		MShop_Factory::clear();
 	}
 
 

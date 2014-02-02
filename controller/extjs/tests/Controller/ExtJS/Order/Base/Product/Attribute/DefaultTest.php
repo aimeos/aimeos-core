@@ -47,6 +47,7 @@ class Controller_ExtJS_Order_Base_Product_Attribute_DefaultTest extends MW_Unitt
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 
@@ -102,13 +103,13 @@ class Controller_ExtJS_Order_Base_Product_Attribute_DefaultTest extends MW_Unitt
 		);
 
 		$saved = $this->_object->saveItems( $saveParams );
-		
+
 		$searched = $this->_object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'order.base.product.attribute.id'} );
 		$this->_object->deleteItems( $deleteParams );
 		$result = $this->_object->searchItems( $searchParams );
-		
+
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'order.base.product.attribute.id'} );
 		$this->assertEquals( $saved['items']->{'order.base.product.attribute.id'}, $searched['items'][0]->{'order.base.product.attribute.id'} );

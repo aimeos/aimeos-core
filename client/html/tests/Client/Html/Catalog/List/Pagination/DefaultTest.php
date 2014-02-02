@@ -68,6 +68,8 @@ class Client_Html_Catalog_List_Pagination_DefaultTest extends MW_Unittest_Testca
 	protected function tearDown()
 	{
 		unset( $this->_object );
+		Controller_Frontend_Factory::clear();
+		MShop_Factory::clear();
 	}
 
 

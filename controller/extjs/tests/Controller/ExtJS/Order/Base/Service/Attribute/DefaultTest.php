@@ -47,6 +47,7 @@ class Controller_ExtJS_Order_Base_Service_Attribute_DefaultTest extends MW_Unitt
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 

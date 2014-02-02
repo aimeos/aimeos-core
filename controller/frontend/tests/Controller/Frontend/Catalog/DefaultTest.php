@@ -27,6 +27,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 
 	protected function tearDown()
 	{
+		MShop_Factory::clear();
 	}
 
 

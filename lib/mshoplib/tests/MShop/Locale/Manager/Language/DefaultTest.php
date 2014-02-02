@@ -36,6 +36,7 @@ class MShop_Locale_Manager_Language_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 
@@ -106,7 +107,7 @@ class MShop_Locale_Manager_Language_DefaultTest extends MW_Unittest_Testcase
 		$search = $this->_object->createSearch();
 
 		$expr[] = $search->compare( '==', 'locale.language.id', 'de' );
-		
+
 		$expr[] = $search->compare( '>=', 'locale.language.label', 'German' );
 		$expr[] = $search->compare( '==', 'locale.language.code', 'de' );
 		$expr[] = $search->compare( '==', 'locale.language.status', 1 );

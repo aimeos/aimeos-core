@@ -49,6 +49,7 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 

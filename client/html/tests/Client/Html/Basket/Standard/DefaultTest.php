@@ -52,6 +52,9 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	{
 		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
 		unset( $this->_object );
+
+		Controller_Frontend_Factory::clear();
+		MShop_Factory::clear();
 	}
 
 

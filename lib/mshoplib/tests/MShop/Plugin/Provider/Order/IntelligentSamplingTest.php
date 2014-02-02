@@ -44,37 +44,37 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 		$this->_orderManager = MShop_Order_Manager_Factory::createManager( $context );
 		$orderBaseManager = $this->_orderManager->getSubManager('base');
 		$orderBaseProductManager = $orderBaseManager->getSubManager('product');
-		
+
 		$manager = MShop_Product_Manager_Factory::createManager( $context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'EFGH', 'IJKL', 'MNOP' ) ) );
-		
+
 		$pResults = $manager->searchItems( $search );
-		
+
 		if ( count($pResults) !== 3 ) {
 			throw new Exception('Wrong number of products');
 		}
-		
+
 		$this->products = array();
 		foreach( $pResults as $prod ) {
 			$this->products[ $prod->getCode() ] = $prod;
 		}
-		
+
 		$product1 = $orderBaseProductManager->createItem();
 		$product1->copyFrom( $this->products['EFGH'] );
-		
+
 		$product2 = $orderBaseProductManager->createItem();
 		$product2->copyFrom( $this->products['IJKL'] );
-		
+
 		$product3 = $orderBaseProductManager->createItem();
 		$product3->copyFrom( $this->products['MNOP'] );
-		
+
 		$this->_order = $orderBaseManager->createItem();
 
 		$this->_order->addProduct( $product1 );
 		$this->_order->addProduct( $product2 );
 		$this->_order->addProduct( $product3 );
-		
+
 		$search = $orderBaseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', 672.00 ) );
 		$search->setSlice(0, 1);
@@ -82,7 +82,7 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 		if( ( $baseItem = reset($items) ) === false ) {
 			throw new Exception( 'No order base item found.' );
 		}
-		
+
 		$this->_order->setCustomerId( $baseItem->getCustomerId() );
 	}
 
@@ -97,6 +97,8 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 	{
 		unset( $this->_orderManager );
 		unset($this->_plugin);
+
+		MShop_Factory::clear();
 	}
 
 

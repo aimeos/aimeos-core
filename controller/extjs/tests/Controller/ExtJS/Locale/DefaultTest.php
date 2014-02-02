@@ -47,6 +47,7 @@ class Controller_ExtJS_Locale_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 
@@ -76,7 +77,7 @@ class Controller_ExtJS_Locale_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSaveDeleteItem()
 	{
-		
+
 		$saveParam = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(

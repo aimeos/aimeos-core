@@ -48,6 +48,8 @@ class Client_Html_Catalog_Detail_Basket_Attribute_DefaultTest extends MW_Unittes
 	protected function tearDown()
 	{
 		unset( $this->_object );
+		Controller_Frontend_Factory::clear();
+		MShop_Factory::clear();
 	}
 
 

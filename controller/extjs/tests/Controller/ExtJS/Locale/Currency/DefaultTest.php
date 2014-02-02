@@ -47,6 +47,7 @@ class Controller_ExtJS_Locale_Currency_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 

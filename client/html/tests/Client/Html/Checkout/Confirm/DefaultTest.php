@@ -52,17 +52,23 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object );
+		Controller_Frontend_Factory::clear();
+		MShop_Factory::clear();
 	}
 
 
 	public function testGetHeader()
 	{
+		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrderId() );
+
 		$this->_object->getHeader();
 	}
 
 
 	public function testGetBody()
 	{
+		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrderId() );
+
 		$output = $this->_object->getBody();
 		$this->assertStringStartsWith( '<section class="arcavias checkout-confirm">', $output );
 	}
@@ -85,5 +91,21 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 	public function testProcess()
 	{
 		$this->_object->process();
+	}
+
+
+	protected function _getOrderId()
+	{
+		$manager = MShop_Factory::createManager( $this->_context, 'order' );
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$search->setSlice( 0, 1 );
+		$result = $manager->searchItems( $search );
+
+		if( ( $order = reset( $result ) ) === false ) {
+			throw new Exception( 'No order found' );
+		}
+
+		return $order->getId();
 	}
 }

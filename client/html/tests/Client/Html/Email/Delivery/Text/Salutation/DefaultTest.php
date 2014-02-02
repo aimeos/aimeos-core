@@ -63,6 +63,8 @@ class Client_Html_Email_Delivery_Text_Salutation_DefaultTest extends MW_Unittest
 	protected function tearDown()
 	{
 		unset( $this->_object );
+		Controller_Frontend_Factory::clear();
+		MShop_Factory::clear();
 	}
 
 
