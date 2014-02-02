@@ -20,6 +20,31 @@ class Controller_ExtJS_Factory
 
 
 	/**
+	 * Removes the controller objects from the cache.
+	 *
+	 * If neither a site ID nor a path is given, the complete cache will be pruned.
+	 *
+	 * @param integer $siteid ID of the site to clear
+	 * @param string $path Path describing the controller to clear, e.g. "product/list/type"
+	 */
+	static public function clear( $siteid = null, $path = null )
+	{
+		if( $siteid !== null )
+		{
+			if( $path !== null ) {
+				self::$_controllers[$siteid][$path] = null;
+			} else {
+				self::$_controllers[$siteid] = array();
+			}
+
+			return;
+		}
+
+		self::$_controllers = array();
+	}
+
+
+	/**
 	 * Creates the required controller specified by the given path of controller names.
 	 *
 	 * Controllers are created by providing only the domain name, e.g.
