@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-30 23:20+0100\n"
-"PO-Revision-Date: 2014-01-04 14:02+0000\n"
+"POT-Creation-Date: 2014-02-02 15:30+0100\n"
+"PO-Revision-Date: 2014-02-02 14:31+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -94,14 +94,14 @@ msgstr ""
 #: src/MShop/Common/Factory/Abstract.php:125
 #: src/MShop/Common/Manager/Abstract.php:227
 #: src/MShop/Common/Manager/Abstract.php:336
-#: src/MShop/Product/Manager/Tag/Default.php:316 src/MShop/Factory.php:67
+#: src/MShop/Product/Manager/Tag/Default.php:316 src/MShop/Factory.php:92
 #: src/MShop/Plugin/Manager/Abstract.php:35
 #: src/MShop/Plugin/Manager/Default.php:183
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Common/Item/Abstract.php:111
+#: src/MShop/Common/Item/Abstract.php:204
 #, php-format
 msgid "Code must not be longer than 32 characters"
 msgstr ""
@@ -168,6 +168,17 @@ msgstr ""
 msgid "Internationalization object not available for \"%1$s\""
 msgstr ""
 
+#: src/MShop/Common/Item/Abstract.php:219
+#: src/MShop/Common/Item/Abstract.php:223
+#, php-format
+msgid "Invalid ISO currency code \"%1$s\""
+msgstr ""
+
+#: src/MShop/Common/Item/Abstract.php:237
+#, php-format
+msgid "Invalid ISO language code \"%1$s\""
+msgstr ""
+
 #: src/MAdmin/Job/Manager/Default.php:255
 #: src/MAdmin/Job/Manager/Default.php:262
 #: src/MShop/Locale/Manager/Site/Default.php:304
@@ -184,16 +195,12 @@ msgid ""
 "\"%1$d\""
 msgstr ""
 
-#: src/MShop/Locale/Item/Default.php:166
 #: src/MShop/Locale/Item/Currency/Default.php:94
-#: src/MShop/Price/Item/Default.php:374
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
 msgstr ""
 
-#: src/MShop/Locale/Item/Default.php:137
 #: src/MShop/Locale/Item/Language/Default.php:97
-#: src/MShop/Text/Item/Default.php:59
 #: src/MShop/Product/Item/Tag/Default.php:56
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
@@ -227,7 +234,8 @@ msgstr ""
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/MShop/Order/Item/Abstract.php:161 src/MShop/Common/Item/Abstract.php:97
+#: src/MShop/Order/Item/Abstract.php:161
+#: src/MShop/Common/Item/Abstract.php:190
 #, php-format
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
@@ -260,7 +268,7 @@ msgstr ""
 msgid "Invalid characters in manager name \"%1$s\""
 msgstr ""
 
-#: src/MAdmin/Factory.php:52 src/MShop/Factory.php:53
+#: src/MAdmin/Factory.php:52 src/MShop/Factory.php:78
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
 msgstr ""
@@ -281,9 +289,14 @@ msgstr ""
 msgid "Invalid characters in purchase date \"%1$s\""
 msgstr ""
 
-#: src/MAdmin/Factory.php:72 src/MShop/Factory.php:73
+#: src/MAdmin/Factory.php:72 src/MShop/Factory.php:98
 #, php-format
 msgid "Invalid factory \"%1$s\""
+msgstr ""
+
+#: src/MShop/Media/Item/Default.php:196
+#, php-format
+msgid "Invalid mime type \"%1$s\""
 msgstr ""
 
 #: src/MShop/Order/Manager/Base/Default.php:383
@@ -348,7 +361,7 @@ msgstr ""
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
 msgstr ""
 
-#: src/MShop/Locale/Manager/Default.php:418
+#: src/MShop/Locale/Manager/Default.php:425
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
 msgstr ""
@@ -378,12 +391,12 @@ msgstr ""
 msgid "Mail object not available"
 msgstr ""
 
-#: src/MAdmin/Factory.php:57 src/MShop/Factory.php:58
+#: src/MAdmin/Factory.php:57 src/MShop/Factory.php:83
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
 msgstr ""
 
-#: src/MAdmin/Factory.php:40 src/MShop/Factory.php:41
+#: src/MAdmin/Factory.php:40 src/MShop/Factory.php:66
 #, php-format
 msgid "Manager path is empty"
 msgstr ""
@@ -403,7 +416,7 @@ msgstr ""
 msgid "Method \"%1$s\" for provider not available"
 msgstr ""
 
-#: src/MShop/Common/Item/Abstract.php:80
+#: src/MShop/Common/Item/Abstract.php:172
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr ""
@@ -496,6 +509,11 @@ msgstr ""
 #: src/MShop/Order/Item/Abstract.php:193
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
+msgstr ""
+
+#: src/MShop/Order/Item/Base/Product/Default.php:402
+#, php-format
+msgid "Order product position \"%1$s\" must be greater than 0"
 msgstr ""
 
 #: src/MShop/Order/Item/Abstract.php:213
@@ -740,7 +758,7 @@ msgstr ""
 msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr ""
 
-#: src/MShop/Locale/Manager/Default.php:512
+#: src/MShop/Locale/Manager/Default.php:519
 #: src/MShop/Common/Manager/Abstract.php:722
 #, php-format
 msgid "Total results value not found"
