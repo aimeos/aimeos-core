@@ -62,7 +62,7 @@ MShop.I18n = {
 
 		num = Math.abs( Number( num ) );
 
-		if( locale == 'pt_BR' ) {
+		if( locale === 'pt_BR' ) {
 			locale = 'xbr'; // temporary set a locale for brasilian
 		}
 
@@ -123,7 +123,7 @@ MShop.I18n = {
 			case 'tk':
 			case 'ur':
 			case 'zu':
-				return (num == 1) ? 0 : 1;
+				return (num === 1) ? 0 : 1;
 
 			case 'am':
 			case 'bh':
@@ -137,7 +137,7 @@ MShop.I18n = {
 			case 'xbr':
 			case 'ti':
 			case 'wa':
-				return ((num == 0) || (num == 1)) ? 0 : 1;
+				return ((num === 0) || (num === 1)) ? 0 : 1;
 
 			case 'be':
 			case 'bs':
@@ -145,41 +145,41 @@ MShop.I18n = {
 			case 'ru':
 			case 'sr':
 			case 'uk':
-				return ((num % 10 == 1) && (num % 100 != 11)) ? 0 : (((num % 10 >= 2) && (num % 10 <= 4) && ((num % 100 < 10) || (num % 100 >= 20))) ? 1 : 2);
+				return ((num % 10 === 1) && (num % 100 !== 11)) ? 0 : (((num % 10 >= 2) && (num % 10 <= 4) && ((num % 100 < 10) || (num % 100 >= 20))) ? 1 : 2);
 
 			case 'cs':
 			case 'sk':
-				return (num == 1) ? 0 : (((num >= 2) && (num <= 4)) ? 1 : 2);
+				return (num === 1) ? 0 : (((num >= 2) && (num <= 4)) ? 1 : 2);
 
 			case 'ar':
-				return (num == 0) ? 0 : ((num == 1) ? 1 : ((num == 2) ? 2 : (((num >= 3) && (num <= 10)) ? 3 : (((num >= 11) && (num <= 99)) ? 4 : 5))));
+				return (num === 0) ? 0 : ((num === 1) ? 1 : ((num === 2) ? 2 : (((num >= 3) && (num <= 10)) ? 3 : (((num >= 11) && (num <= 99)) ? 4 : 5))));
 
 			case 'cy':
-				return (num == 1) ? 0 : ((num == 2) ? 1 : (((num == 8) || (num == 11)) ? 2 : 3));
+				return (num === 1) ? 0 : ((num === 2) ? 1 : (((num === 8) || (num === 11)) ? 2 : 3));
 
 			case 'ga':
-				return (num == 1) ? 0 : ((num == 2) ? 1 : 2);
+				return (num === 1) ? 0 : ((num === 2) ? 1 : 2);
 
 			case 'lt':
-				return ((num % 10 == 1) && (num % 100 != 11)) ? 0 : (((num % 10 >= 2) && ((num % 100 < 10) || (num % 100 >= 20))) ? 1 : 2);
+				return ((num % 10 === 1) && (num % 100 !== 11)) ? 0 : (((num % 10 >= 2) && ((num % 100 < 10) || (num % 100 >= 20))) ? 1 : 2);
 
 			case 'lv':
-				return (num == 0) ? 0 : (((num % 10 == 1) && (num % 100 != 11)) ? 1 : 2);
+				return (num === 0) ? 0 : (((num % 10 === 1) && (num % 100 !== 11)) ? 1 : 2);
 
 			case 'mk':
-				return (num % 10 == 1) ? 0 : 1;
+				return (num % 10 === 1) ? 0 : 1;
 
 			case 'mt':
-				return (num == 1) ? 0 : (((num == 0) || ((num % 100 > 1) && (num % 100 < 11))) ? 1 : (((num % 100 > 10) && (num % 100 < 20)) ? 2 : 3));
+				return (num === 1) ? 0 : (((num === 0) || ((num % 100 > 1) && (num % 100 < 11))) ? 1 : (((num % 100 > 10) && (num % 100 < 20)) ? 2 : 3));
 
 			case 'pl':
-				return (num == 1) ? 0 : (((num % 10 >= 2) && (num % 10 <= 4) && ((num % 100 < 12) || (num % 100 > 14))) ? 1 : 2);
+				return (num === 1) ? 0 : (((num % 10 >= 2) && (num % 10 <= 4) && ((num % 100 < 12) || (num % 100 > 14))) ? 1 : 2);
 
 			case 'ro':
-				return (num == 1) ? 0 : (((num == 0) || ((num % 100 > 0) && (num % 100 < 20))) ? 1 : 2);
+				return (num === 1) ? 0 : (((num === 0) || ((num % 100 > 0) && (num % 100 < 20))) ? 1 : 2);
 
 			case 'sl':
-				return (num % 100 == 1) ? 0 : ((num % 100 == 2) ? 1 : (((num % 100 == 3) || (num % 100 == 4)) ? 2 : 3));
+				return (num % 100 === 1) ? 0 : ((num % 100 === 2) ? 1 : (((num % 100 === 3) || (num % 100 === 4)) ? 2 : 3));
 
 			default:
 				return 0;
