@@ -51,8 +51,6 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 	}
 
 
-
-
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -62,6 +60,7 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 	protected function tearDown()
 	{
 		unset( $this->_object );
+		MShop_Factory::clear();
 	}
 
 

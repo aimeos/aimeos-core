@@ -56,6 +56,7 @@ class MShop_Customer_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object );
+		MShop_Factory::clear();
 	}
 
 

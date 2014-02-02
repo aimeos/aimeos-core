@@ -25,6 +25,7 @@ class MShop_Locale_Manager_Site_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 

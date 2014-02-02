@@ -35,6 +35,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 

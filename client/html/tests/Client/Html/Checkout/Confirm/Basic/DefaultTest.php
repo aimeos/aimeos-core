@@ -51,6 +51,8 @@ class Client_Html_Checkout_Confirm_Basic_DefaultTest extends MW_Unittest_Testcas
 	protected function tearDown()
 	{
 		unset( $this->_object );
+		Controller_Frontend_Factory::clear();
+		MShop_Factory::clear();
 	}
 
 

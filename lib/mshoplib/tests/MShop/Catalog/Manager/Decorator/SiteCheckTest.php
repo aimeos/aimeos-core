@@ -42,6 +42,19 @@ class MShop_Catalog_Manager_Decorator_SiteCheckTest extends MW_Unittest_Testcase
 	}
 
 
+	/**
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 *
+	 * @access protected
+	 */
+	protected function tearDown()
+	{
+		unset( $this->_object );
+		MShop_Factory::clear();
+	}
+
+
 	public function testGetTreePath()
 	{
 		$parent = $this->_object->getTree(null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE);

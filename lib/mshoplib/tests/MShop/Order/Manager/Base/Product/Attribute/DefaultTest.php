@@ -40,6 +40,7 @@ class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends MW_Unittest
 	protected function tearDown()
 	{
 		unset($this->_object);
+		MShop_Factory::clear();
 	}
 
 

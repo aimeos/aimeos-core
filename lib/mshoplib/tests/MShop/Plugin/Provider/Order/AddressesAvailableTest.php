@@ -66,6 +66,8 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 		unset( $this->_plugin );
 		unset( $this->_order );
 		unset( $this->_address );
+
+		MShop_Factory::clear();
 	}
 
 

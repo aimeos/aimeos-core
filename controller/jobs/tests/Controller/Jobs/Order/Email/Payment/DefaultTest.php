@@ -35,6 +35,7 @@ class Controller_Jobs_Order_Email_Payment_DefaultTest extends MW_Unittest_Testca
 	protected function tearDown()
 	{
 		$this->_object = null;
+		MShop_Factory::clear();
 	}
 
 

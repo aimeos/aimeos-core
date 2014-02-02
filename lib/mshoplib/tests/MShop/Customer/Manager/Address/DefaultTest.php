@@ -86,6 +86,7 @@ class MShop_Common_Manager_Address_AbstractTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset($this->_object, $this->_fixture);
+		MShop_Factory::clear();
 	}
 
 	public function testGetSearchAttributes()

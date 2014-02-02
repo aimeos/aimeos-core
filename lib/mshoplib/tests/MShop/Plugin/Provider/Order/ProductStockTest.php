@@ -71,6 +71,8 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 		unset( $this->_order );
 		unset( $this->_plugin );
 		unset( $this->_product );
+
+		MShop_Factory::clear();
 	}
 
 

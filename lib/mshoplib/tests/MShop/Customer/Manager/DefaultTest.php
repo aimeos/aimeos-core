@@ -53,8 +53,8 @@ class MShop_Customer_Manager_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = $this->_fixture = $this->_address = null;
 		unset($this->_object, $this->_fixture, $this->_address);
+		MShop_Factory::clear();
 	}
 
 

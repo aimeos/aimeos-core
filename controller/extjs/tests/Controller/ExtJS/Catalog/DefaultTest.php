@@ -55,6 +55,7 @@ class Controller_ExtJS_Catalog_DefaultTest extends MW_Unittest_Testcase
 	{
 		unset( $this->_object );
 		unset( $this->_rootnode );
+		MShop_Factory::clear();
 	}
 
 

@@ -87,6 +87,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object, $this->_order, $this->_plugin, $this->_products );
+		MShop_Factory::clear();
 	}
 
 
@@ -108,7 +109,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends MW_Unittest_Testcase
 
 
 		// two conditions
-		$this->_plugin->setConfig( array( 
+		$this->_plugin->setConfig( array(
 			'product.stock.warehouse.code' => 'unit_warehouse2',
 			'product.suppliercode' => 'unitSupplier',
 		) );
@@ -130,7 +131,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends MW_Unittest_Testcase
 
 	public function testUpdateFailMultipleConditions()
 	{
-		$this->_plugin->setConfig( array( 
+		$this->_plugin->setConfig( array(
 			'product.stock.warehouse.code' => 'unit_warehouse2',
 			'product.suppliercode' => 'wrongSupplier',
 		) );

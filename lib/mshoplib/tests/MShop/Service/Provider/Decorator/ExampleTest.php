@@ -51,6 +51,19 @@ class MShop_Service_Provider_Decorator_ExampleTest extends MW_Unittest_Testcase
 	}
 
 
+	/**
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 *
+	 * @access protected
+	 */
+	protected function tearDown()
+	{
+		unset( $this->_object );
+		MShop_Factory::clear();
+	}
+
+
 	public function testGetConfigBE()
 	{
 		$this->assertArrayHasKey( 'country', $this->_object->getConfigBE() );

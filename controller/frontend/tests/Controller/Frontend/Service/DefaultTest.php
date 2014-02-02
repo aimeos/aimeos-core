@@ -36,6 +36,7 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 
 	protected function tearDown()
 	{
+		MShop_Factory::clear();
 	}
 
 
