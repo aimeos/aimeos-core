@@ -60,4 +60,48 @@ class Controller_Frontend_FactoryTest extends MW_Unittest_Testcase
 		Controller_Frontend_Factory::createController( TestHelper::getContext(), 'basket/notexist' );
 	}
 
+
+	public function testClear()
+	{
+		$context = TestHelper::getContext();
+
+		$controller1 = Controller_Frontend_Factory::createController( $context, 'basket' );
+		Controller_Frontend_Factory::clear();
+		$controller2 = Controller_Frontend_Factory::createController( $context, 'basket' );
+
+		$this->assertNotSame( $controller1, $controller2 );
+	}
+
+
+	public function testClearSite()
+	{
+		$context = TestHelper::getContext();
+
+		$basket1 = Controller_Frontend_Factory::createController( $context, 'basket' );
+		$catalog1 = Controller_Frontend_Factory::createController( $context, 'catalog' );
+		Controller_Frontend_Factory::clear( $context->getLocale()->getSiteId() );
+
+		$basket2 = Controller_Frontend_Factory::createController( $context, 'basket' );
+		$catalog2 = Controller_Frontend_Factory::createController( $context, 'catalog' );
+
+		$this->assertNotSame( $basket1, $basket2 );
+		$this->assertNotSame( $catalog1, $catalog2 );
+	}
+
+
+	public function testClearSpecific()
+	{
+		$context = TestHelper::getContext();
+
+		$basket1 = Controller_Frontend_Factory::createController( $context, 'basket' );
+		$catalog1 = Controller_Frontend_Factory::createController( $context, 'catalog' );
+		Controller_Frontend_Factory::clear( $context->getLocale()->getSiteId(), 'basket' );
+
+		$basket2 = Controller_Frontend_Factory::createController( $context, 'basket' );
+		$catalog2 = Controller_Frontend_Factory::createController( $context, 'catalog' );
+
+		$this->assertNotSame( $basket1, $basket2 );
+		$this->assertSame( $catalog1, $catalog2 );
+	}
+
 }
