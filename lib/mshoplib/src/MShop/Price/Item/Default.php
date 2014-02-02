@@ -75,7 +75,7 @@ class MShop_Price_Item_Default
 	 *
 	 * @return string|null Three letter ISO currency code (e.g. EUR)
 	 */
-		public function getCurrencyId()
+	public function getCurrencyId()
 	{
 		return ( isset( $this->_values['currencyid'] ) ? (string) $this->_values['currencyid'] : null );
 	}
