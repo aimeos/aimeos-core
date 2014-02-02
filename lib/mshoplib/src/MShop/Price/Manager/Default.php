@@ -350,7 +350,7 @@ class MShop_Price_Manager_Default
 			$object = $this->_createSearch( 'price' );
 			$currencyid = $this->_getContext()->getLocale()->getCurrencyId();
 
-			if( $currencyid !== '' )
+			if( $currencyid !== null )
 			{
 				$expr[] = $object->compare( '==', 'price.currencyid', $currencyid );
 				$expr[] = $object->getConditions();

@@ -324,14 +324,18 @@ class MShop_Media_Manager_Default
 		if( $default === true )
 		{
 			$object = $this->_createSearch( 'media' );
+			$langid = $this->_getContext()->getLocale()->getLanguageId();
 
-			$temp[] = $object->compare( '==', 'media.languageid', $this->_getContext()->getLocale()->getLanguageId() );
-			$temp[] = $object->compare( '==', 'media.languageid', null );
+			if( $langid !== null )
+			{
+				$temp[] = $object->compare( '==', 'media.languageid', $langid );
+				$temp[] = $object->compare( '==', 'media.languageid', null );
 
-			$expr[] = $object->combine( '||', $temp );
-			$expr[] = $object->getConditions();
+				$expr[] = $object->getConditions();
+				$expr[] = $object->combine( '||', $temp );
 
-			$object->setConditions( $object->combine( '&&', $expr ) );
+				$object->setConditions( $object->combine( '&&', $expr ) );
+			}
 
 			return $object;
 		}
