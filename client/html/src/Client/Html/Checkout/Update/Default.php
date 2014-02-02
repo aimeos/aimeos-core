@@ -145,8 +145,8 @@ class Client_Html_Checkout_Update_Default
 					$view->updateHttpString = 'HTTP/1.1 500 Error updating payment status';
 					$view->updateError = $e->getMessage();
 
-					$msg = 'Updating order ID "%1$s" failed: %2$s';
-					$this->_getContext()->getLogger()->log( sprintf( $msg, $sorderid, $e->getMessage() ) );
+					$msg = "Updating order failed: %1\$s\n%2\$s";
+					$this->_getContext()->getLogger()->log( sprintf( $msg, $e->getMessage(), $view->param() ) );
 				}
 			}
 
