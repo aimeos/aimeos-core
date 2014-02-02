@@ -45,6 +45,15 @@ class MShop_Locale_Item_Default
 
 
 	/**
+	 * Clones internal objects of the locale item.
+	 */
+	public function __clone()
+	{
+		$this->_site = ( isset( $this->_site ) ? clone $this->_site : null );
+	}
+
+
+	/**
 	 * Returns the site item object.
 	 *
 	 * @return MShop_Locale_Item_Site_Interface Site item object
