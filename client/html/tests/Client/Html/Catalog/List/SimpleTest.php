@@ -66,13 +66,13 @@ class Client_Html_Catalog_List_SimpleTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-search-text' => 'Cafe' ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-search-text' => 'Unterpro' ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
 
 		$this->assertNotEquals( array(), $this->_object->getView()->listTextItems );
-		$this->assertRegExp( '#"name":"Cafe#smU', $output );
+		$this->assertRegExp( '#"name":"Unterpro#smU', $output );
 	}
 
 
