@@ -71,9 +71,9 @@ class MShop_Price_Item_Default
 
 
 	/**
-	 * Returns the used currency as three letter code.
+	 * Returns the currency ID.
 	 *
-	 * @return string|null Currency ID
+	 * @return string|null Three letter ISO currency code (e.g. EUR)
 	 */
 	public function getCurrencyId()
 	{
@@ -85,14 +85,14 @@ class MShop_Price_Item_Default
 	 * Sets the used currency ID.
 	 *
 	 * @param string $currencyid Three letter currency code
+	 * @throws MShop_Exception If the language ID is invalid
 	 */
 	public function setCurrencyId( $currencyid )
 	{
 		if ( $currencyid == $this->getCurrencyId() ) { return; }
 
-		$this->_checkCurrencyId( $currencyid );
-
-		$this->_values['currencyid'] = (string) $currencyid;
+		$this->_checkCurrencyId( $currencyid, false );
+		$this->_values['currencyid'] = $currencyid;
 		$this->setModified();
 	}
 
@@ -358,20 +358,6 @@ class MShop_Price_Item_Default
 	{
 		if( !is_numeric( $value ) ) {
 			throw new MShop_Price_Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
-		}
-	}
-
-
-	/**
-	 * Tests if the currency ID is within the requirements.
-	 *
-	 * @param string $value Three letter currency ID
-	 */
-	protected function _checkCurrencyId( $value )
-	{
-		if( strlen( $value ) !== 3 || ctype_alpha( $value ) === false )
-		{
-			throw new MShop_Price_Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $value ) );
 		}
 	}
 

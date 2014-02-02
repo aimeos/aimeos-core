@@ -116,7 +116,19 @@ class MShop_Price_Item_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->_object->setCurrencyId( 'USD' );
 		$this->assertEquals( 'USD', $this->_object->getCurrencyId() );
-		$this->assertTrue($this->_object->isModified());
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+	public function testSetCurrencyIdNull()
+	{
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setCurrencyId( null );
+	}
+
+	public function testSetCurrencyIdInvalid()
+	{
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setCurrencyId( 'usd' );
 	}
 
 	public function testGetDomain()

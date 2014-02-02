@@ -118,6 +118,27 @@ class MShop_Media_Item_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetLanguageId()
+	{
+		$this->assertEquals( 'de', $this->_object->getLanguageId() );
+	}
+
+
+	public function testSetLanguageId()
+	{
+		$this->_object->setLanguageId( 'en' );
+		$this->assertEquals( 'en', $this->_object->getLanguageId() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+
+	public function testSetLanguageIdInvalid()
+	{
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->setLanguageId( 'EN' );
+	}
+
+
 	public function testGetMimeType()
 	{
 		$this->assertEquals( 'image/jpeg', $this->_object->getMimeType() );
@@ -129,6 +150,20 @@ class MShop_Media_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setMimeType( 'image/png' );
 		$this->assertEquals( 'image/png', $this->_object->getMimeType() );
 		$this->assertEquals( true, $this->_object->isModified() );
+	}
+
+
+	public function testSetMimeTypeNoSlash()
+	{
+		$this->setExpectedException( 'MShop_Media_Exception' );
+		$this->_object->setMimeType( 'image' );
+	}
+
+
+	public function testSetMimeTypeInvalidCategory()
+	{
+		$this->setExpectedException( 'MShop_Media_Exception' );
+		$this->_object->setMimeType( 'image+audio/test' );
 	}
 
 

@@ -42,17 +42,17 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 
 
 	/**
-	 * Returns the two letter ISO language code.
+	 * Returns the ISO language code.
 	 *
-	 * @return string Language ID
+	 * @return string|null ISO language code (e.g. de or de_DE)
 	 */
 	public function getLanguageId();
 
 
 	/**
-	 * Sets the language ID.
+	 * Sets the ISO language code.
 	 *
-	 * @param string $langid Two letter ISO language code
+	 * @param string|null $langid ISO language code (e.g. de or de_DE)
 	 */
 	public function setLanguageId( $langid );
 
@@ -60,7 +60,7 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 	/**
 	 * Returns the currency ID.
 	 *
-	 * @return string Currency ID (e.g: EUR)
+	 * @return string|null Three letter ISO currency code (e.g. EUR)
 	 */
 	public function getCurrencyId();
 
@@ -68,7 +68,8 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 	/**
 	 * Sets the currency ID.
 	 *
-	 * @param string $currencyid Currency (e.g: EUR)
+	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
+	 * @throws MShop_Exception If the currency ID is invalid
 	 */
 	public function setCurrencyId( $currencyid );
 
