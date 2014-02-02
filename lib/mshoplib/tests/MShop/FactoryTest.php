@@ -67,4 +67,48 @@ class MShop_FactoryTest extends MW_Unittest_Testcase
 		MShop_Factory::createManager( TestHelper::getContext(), 'attribute/notexist' );
 	}
 
+
+	public function testClear()
+	{
+		$context = TestHelper::getContext();
+
+		$controller1 = MShop_Factory::createManager( $context, 'attribute' );
+		MShop_Factory::clear();
+		$controller2 = MShop_Factory::createManager( $context, 'attribute' );
+
+		$this->assertNotSame( $controller1, $controller2 );
+	}
+
+
+	public function testClearSite()
+	{
+		$context = TestHelper::getContext();
+
+		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
+		$managerB1 = MShop_Factory::createManager( $context, 'attribute/list/type' );
+		MShop_Factory::clear( $context->getLocale()->getSiteId() );
+
+		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
+		$managerB2 = MShop_Factory::createManager( $context, 'attribute/list/type' );
+
+		$this->assertNotSame( $managerA1, $managerA2 );
+		$this->assertNotSame( $managerB1, $managerB2 );
+	}
+
+
+	public function testClearSpecific()
+	{
+		$context = TestHelper::getContext();
+
+		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
+		$managerB1 = MShop_Factory::createManager( $context, 'attribute/list/type' );
+		MShop_Factory::clear( $context->getLocale()->getSiteId(), 'attribute' );
+
+		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
+		$managerB2 = MShop_Factory::createManager( $context, 'attribute/list/type' );
+
+		$this->assertNotSame( $managerA1, $managerA2 );
+		$this->assertSame( $managerB1, $managerB2 );
+	}
+
 }

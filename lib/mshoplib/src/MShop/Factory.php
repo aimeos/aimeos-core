@@ -18,6 +18,31 @@ class MShop_Factory
 
 
 	/**
+	 * Removes all manager objects from the cache.
+	 *
+	 * If neither a site ID nor a path is given, the complete cache will be pruned.
+	 *
+	 * @param integer $siteid ID of the site to clear
+	 * @param string $path Path describing the manager to clear, e.g. "product/list/type"
+	 */
+	static public function clear( $siteid = null, $path = null )
+	{
+		if( $siteid !== null )
+		{
+			if( $path !== null ) {
+				self::$_managers[$siteid][$path] = null;
+			} else {
+				self::$_managers[$siteid] = array();
+			}
+
+			return;
+		}
+
+		self::$_managers = array();
+	}
+
+
+	/**
 	 * Creates the required manager specified by the given path of manager names.
 	 *
 	 * Domain managers are created by providing only the domain name, e.g.

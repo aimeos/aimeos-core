@@ -67,4 +67,48 @@ class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
 		Controller_ExtJS_Factory::createController( TestHelper::getContext(), 'attribute/notexist' );
 	}
 
+
+	public function testClear()
+	{
+		$context = TestHelper::getContext();
+
+		$controller1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
+		Controller_ExtJS_Factory::clear();
+		$controller2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
+
+		$this->assertNotSame( $controller1, $controller2 );
+	}
+
+
+	public function testClearSite()
+	{
+		$context = TestHelper::getContext();
+
+		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
+		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
+		Controller_ExtJS_Factory::clear( $context->getLocale()->getSiteId() );
+
+		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
+		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
+
+		$this->assertNotSame( $cntlA1, $cntlA2 );
+		$this->assertNotSame( $cntlB1, $cntlB2 );
+	}
+
+
+	public function testClearSpecific()
+	{
+		$context = TestHelper::getContext();
+
+		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
+		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
+		Controller_ExtJS_Factory::clear( $context->getLocale()->getSiteId(), 'attribute' );
+
+		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
+		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
+
+		$this->assertNotSame( $cntlA1, $cntlA2 );
+		$this->assertSame( $cntlB1, $cntlB2 );
+	}
+
 }
