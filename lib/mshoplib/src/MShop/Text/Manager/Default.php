@@ -237,7 +237,6 @@ class MShop_Text_Manager_Default
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of text items implementing MShop_Text_Item_Interface
-	 * @throws MShop_Service_Exception if creating items failed
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
@@ -316,7 +315,7 @@ class MShop_Text_Manager_Default
 			$object = $this->_createSearch( 'text' );
 			$langid = $this->_getContext()->getLocale()->getLanguageId();
 
-			if( $langid !== '' )
+			if( $langid !== null )
 			{
 				$temp[] = $object->compare( '==', 'text.languageid', $langid );
 				$temp[] = $object->compare( '==', 'text.languageid', null );
