@@ -18,8 +18,6 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Base_Product_Attribute_Interface
 {
-	private $_dbname = 'db';
-
 	private $_searchConfig = array(
 		'order.base.product.attribute.id' => array(
 			'code'=>'order.base.product.attribute.id',
@@ -107,21 +105,6 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 
 
 	/**
-	 * Creates the manager that will use the given context object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		parent::__construct( $context );
-
-		if( $context->getConfig()->get( 'resource/db-order/adapter', null ) !== null ) {
-			$this->_dbname = 'db-order';
-		}
-	}
-
-
-	/**
 	 * Creates a new order base product attribute object.
 	 *
 	 * @return MShop_Order_Item_Base_Product_Attribute_Interface New media object
@@ -166,7 +149,8 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -205,11 +189,11 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 				}
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch(Exception $e)
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -278,10 +262,11 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
 		$logger = $context->getLogger();
-		$conn = $dbm->acquire( $this->_dbname );
+		$config = $context->getConfig();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
-		$config = $context->getConfig();
 
 		try
 		{
@@ -305,11 +290,11 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 				throw $e;
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

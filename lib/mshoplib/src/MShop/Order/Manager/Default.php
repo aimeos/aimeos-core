@@ -18,8 +18,6 @@ class MShop_Order_Manager_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Interface
 {
-	private $_dbname = 'db';
-
 	private $_searchConfig = array(
 		'order.id'=> array(
 			'code'=>'order.id',
@@ -132,10 +130,6 @@ class MShop_Order_Manager_Default
 
 		$sites = $context->getLocale()->getSiteSubTree();
 		$this->_replaceSiteMarker( $this->_searchConfig['order.containsStatus'], 'mordst_cs."siteid"', $sites, ':site' );
-
-		if( $context->getConfig()->get( 'resource/db-order/adapter', null ) !== null ) {
-			$this->_dbname = 'db-order';
-		}
 	}
 
 
@@ -197,7 +191,8 @@ class MShop_Order_Manager_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -233,11 +228,11 @@ class MShop_Order_Manager_Default
 				$item->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -335,10 +330,11 @@ class MShop_Order_Manager_Default
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
 		$logger = $context->getLogger();
-		$conn = $dbm->acquire( $this->_dbname );
+		$config = $context->getConfig();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
-		$config = $context->getConfig();
 
 		try
 		{
@@ -362,11 +358,11 @@ class MShop_Order_Manager_Default
 				throw $e;
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

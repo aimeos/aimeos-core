@@ -19,7 +19,6 @@ class MAdmin_Log_Manager_Default
 	implements MAdmin_Log_Manager_Interface, MW_Logger_Interface
 {
 	private $_requestid;
-	private $_dbname = 'db';
 
 	private $_searchConfig = array(
 		'log.id' => array(
@@ -87,10 +86,6 @@ class MAdmin_Log_Manager_Default
 
 		$this->_loglevel = $config->get( 'madmin/log/manager/default/loglevel', MW_Logger_Abstract::WARN );
 		$this->_requestid = md5( php_uname('n') . getmypid() . date( 'Y-m-d H:i:s' ) );
-
-		if( $config->get( 'resource/db-log/adapter', null ) !== null ) {
-			$this->_dbname = 'db-log';
-		}
 	}
 
 
@@ -139,7 +134,8 @@ class MAdmin_Log_Manager_Default
 		}
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -173,11 +169,11 @@ class MAdmin_Log_Manager_Default
 				}
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -228,7 +224,8 @@ class MAdmin_Log_Manager_Default
 	{
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
 		try
@@ -244,11 +241,11 @@ class MAdmin_Log_Manager_Default
 				$items[ $row['id'] ] = $this->_createItem( $row );
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

@@ -18,8 +18,6 @@ class MShop_Order_Manager_Base_Product_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Base_Product_Interface
 {
-	private $_dbname = 'db';
-
 	private $_searchConfig = array(
 		'order.base.product.id' => array(
 			'code'=>'order.base.product.id',
@@ -186,21 +184,6 @@ class MShop_Order_Manager_Base_Product_Default
 
 
 	/**
-	 * Creates the manager that will use the given context object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		parent::__construct( $context );
-
-		if( $context->getConfig()->get( 'resource/db-order/adapter', null ) !== null ) {
-			$this->_dbname = 'db-order';
-		}
-	}
-
-
-	/**
 	 * Create new order base product item object.
 	 *
 	 * @return MShop_Order_Item_Base_Product_Interface
@@ -248,7 +231,8 @@ class MShop_Order_Manager_Base_Product_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -295,11 +279,11 @@ class MShop_Order_Manager_Base_Product_Default
 				$item->setId($id);
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch(Exception $e)
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -369,11 +353,12 @@ class MShop_Order_Manager_Base_Product_Default
 		$logger = $context->getLogger();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
 
 		$items = array();
-		$conn = $dbm->acquire( $this->_dbname );
 
 		try
 		{
@@ -403,11 +388,11 @@ class MShop_Order_Manager_Base_Product_Default
 				throw $e;
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
