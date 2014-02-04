@@ -14,10 +14,7 @@ $( ".catalog-filter-count li.cat-item" ).each( function( index, item ) {
 
 	$("> a.cat-item", item).append( function() {
 		if( categoryCounts[itemId] ) {
-			var node = document.createElement( 'span' );
-			node.appendChild( document.createTextNode( categoryCounts[itemId] ) );
-			$(node).addClass( 'cat-count' );
-			return node;
+			return ' <span class="cat-count">' + categoryCounts[itemId] + '</span>';
 		}
 
 		$(item).addClass( 'disabled' );
