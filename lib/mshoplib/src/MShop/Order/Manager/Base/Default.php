@@ -16,8 +16,6 @@
  */
 class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 {
-	private $_dbname = 'db';
-
 	private $_searchConfig = array(
 		'order.base.id'=> array(
 			'code'=>'order.base.id',
@@ -121,21 +119,6 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
 	);
-
-
-	/**
-	 * Creates the manager that will use the given context object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		parent::__construct( $context );
-
-		if( $context->getConfig()->get( 'resource/db-order/adapter', null ) !== null ) {
-			$this->_dbname = 'db-order';
-		}
-	}
 
 
 	/**
@@ -243,7 +226,8 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$dbname = $config->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -288,11 +272,11 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				}
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -317,7 +301,8 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -346,11 +331,11 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				$items[ $row['id'] ] = $this->_createItem( $price, $localeItem, $row );
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -464,7 +449,8 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -479,11 +465,11 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			}
 			$results->finish();
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
