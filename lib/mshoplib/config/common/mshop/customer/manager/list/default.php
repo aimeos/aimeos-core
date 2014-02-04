@@ -8,11 +8,16 @@
 return array(
 	'item' => array(
 		'aggregate' => '
-			SELECT :key AS "key", COUNT(DISTINCT mcusli."id") AS "count"
-			FROM "mshop_customer_list" mcusli
-			:joins
-			WHERE :cond
-			GROUP BY :key
+			SELECT "key", COUNT(DISTINCT "id") AS "count"
+			FROM (
+				SELECT :key AS "key", mcusli."id" AS "id"
+				FROM "mshop_customer_list" AS mcusli
+				:joins
+				WHERE :cond
+				/*-orderby*/ ORDER BY :order /*orderby-*/
+				LIMIT :size OFFSET :start
+			) AS list
+			GROUP BY "key"
 		',
 		'getposmax' => '
 			SELECT MAX( "pos" ) AS pos

@@ -8,11 +8,16 @@
 return array(
 	'item' => array(
 		'aggregate' => '
-			SELECT :key AS "key", COUNT(DISTINCT mserli."id") AS "count"
-			FROM "mshop_service_list" mserli
-			:joins
-			WHERE :cond
-			GROUP BY :key
+			SELECT "key", COUNT(DISTINCT "id") AS "count"
+			FROM (
+				SELECT :key AS "key", mserli."id" AS "id"
+				FROM "mshop_service_list" AS mserli
+				:joins
+				WHERE :cond
+				/*-orderby*/ ORDER BY :order /*orderby-*/
+				LIMIT :size OFFSET :start
+			) AS list
+			GROUP BY "key"
 		',
 		'insert' => '
 			INSERT INTO "mshop_service_list" ( "parentid", "siteid", "typeid", "domain", "refid", "start", "end",

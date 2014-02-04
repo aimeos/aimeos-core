@@ -7,11 +7,16 @@
 
 return array(
 	'aggregate' => '
-		SELECT :key AS "key", COUNT(DISTINCT mpro."id") AS "count"
-		FROM "mshop_product" mpro
-		:joins
-		WHERE :cond
-		GROUP BY :key
+		SELECT "key", COUNT(DISTINCT "id") AS "count"
+		FROM (
+			SELECT :key AS "key", mpro."id" AS "id"
+			FROM "mshop_product" AS mpro
+			:joins
+			WHERE :cond
+			/*-orderby*/ ORDER BY :order /*orderby-*/
+			LIMIT :size OFFSET :start
+		) AS list
+		GROUP BY "key"
 	',
 	'item' => array(
 		'search' => '
