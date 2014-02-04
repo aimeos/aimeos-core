@@ -227,42 +227,26 @@ class MShop_Catalog_Manager_Index_Default
 		$expr[] = $catalogSearch->getConditions();
 
 		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
-
-		// use index "unq_mscatli_sid_dm_rid_tid_pid"
-		$sort = array(
-			$catalogSearch->sort( '+', 'catalog.list.siteid' ),
-			$catalogSearch->sort( '+', 'catalog.list.domain' ),
-			$catalogSearch->sort( '+', 'catalog.list.refid' ),
-			$catalogSearch->sort( '+', 'catalog.list.typeid' ),
-			$catalogSearch->sort( '+', 'catalog.list.parentid' ),
-		);
-		$catalogSearch->setSortations( $sort );
+		$catalogSearch->setSortations( array( $catalogSearch->sort( '+', 'catalog.list.refid' ) ) );
 
 		$start = 0;
-		$ids = array();
 
 		do
 		{
 			$catalogSearch->setSlice( $start, $size );
-			$result = $catalogListManager->searchItems( $catalogSearch );
-
-			$ids = array();
-			foreach( $result as $catalogListItem ) {
-				$ids[ $catalogListItem->getRefId() ] = 0;
-			}
+			$result = $catalogListManager->aggregate( $catalogSearch, 'catalog.list.refid' );
 
 			$expr = array(
-				$search->compare( '==', 'product.id', array_keys( $ids ) ),
+				$search->compare( '==', 'product.id', array_keys( $result ) ),
 				$defaultConditions,
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$this->_writeIndex( $search, $domains, $size );
 
-			$count = count( $result );
-			$start += $count;
+			$start += $size;
 		}
-		while( $count == $search->getSliceSize() );
+		while( count( $result ) > 0 );
 	}
 
 
