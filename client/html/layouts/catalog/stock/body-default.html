@@ -18,30 +18,40 @@ $stockLow = $this->config( 'client/html/catalog/stock/level/low', 5 );
 $textStockIn = $this->translate( 'client/html', 'Stock: %1$s, %2$s' );
 /// Stock string composition with warehouse name (%1$s, normally left out), stock level string (%2$s) and back in stock date (%3$s)
 $textStockOut = $this->translate( 'client/html', 'Stock: %1$s, %2$s, back on %3$s' );
-
-$textStockInf = $this->translate( 'client/html/code', 'stock-unlimited' );
 $dateFormat = $this->translate( 'client/html', 'Y-m-d' );
+
+$textStock = array(
+	'stock-out' => nl2br( $enc->html( $this->translate( 'client/html/code', 'stock-out' ) ) ),
+	'stock-low' => nl2br( $enc->html( $this->translate( 'client/html/code', 'stock-low' ) ) ),
+	'stock-high' => nl2br( $enc->html( $this->translate( 'client/html/code', 'stock-high' ) ) ),
+	'stock-unlimited' => nl2br( $enc->html( $this->translate( 'client/html/code', 'stock-unlimited' ) ) ),
+);
 
 
 foreach( $stockProductIds as $prodId )
 {
-	$stocks = array( 'stock-high' => '', 'stock-low' => '', 'stock-out' => '' );
-
 	if( !isset( $stockItemsByProducts[$prodId] ) )
 	{
-		$text = nl2br( $enc->html( $textStockInf, $enc::TRUST ) );
-		$result[$prodId] = '<div class="stockitem stock-unlimited"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
+		$result[$prodId] = '<div class="stockitem stock-unlimited"><div class="stocklevel"></div><span class="stocktext">' . $textStock['stock-unlimited'] . '</span></div>';
 		continue;
 	}
+
+	$stocks = array( 'stock-unlimited' => '', 'stock-high' => '', 'stock-low' => '', 'stock-out' => '' );
 
 	foreach( (array) $stockItemsByProducts[$prodId] as $item )
 	{
 		$whId = $item->getWarehouseId();
 		$whCode = ( isset( $warehouseItems[$whId] ) ? 'warehouse:' . $warehouseItems[$whId]->getCode() : '' );
 
+		if( !isset( $whText[$whCode] ) ) {
+			$whText[$whCode] = $this->translate( 'client/html/code', $whCode );
+		}
+
 		$stocklevel = $item->getStockLevel();
 
-		if( $stocklevel <= 0 ) {
+		if( $stocklevel === null ) {
+			$level = 'stock-unlimited';
+		} elseif( $stocklevel <= 0 ) {
 			$level = 'stock-out';
 		} elseif( $stocklevel <= $stockLow ) {
 			$level = 'stock-low';
@@ -52,16 +62,16 @@ foreach( $stockProductIds as $prodId )
 		if( $stocklevel <= 0 && ( $date = $item->getDateBack() ) != '' )
 		{
 			$text = sprintf( $textStockOut,
-				$this->translate( 'client/html/code', $whCode ),
-				$this->translate( 'client/html/code', $level ),
+				$whText[$whCode],
+				$textStock[$level],
 				date_create( $date )->format( $dateFormat )
 			);
 		}
 		else
 		{
 			$text = sprintf( $textStockIn,
-				$this->translate( 'client/html/code', $whCode ),
-				$this->translate( 'client/html/code', $level )
+				$whText[$whCode],
+				$textStock[$level]
 			);
 		}
 

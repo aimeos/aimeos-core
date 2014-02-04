@@ -68,11 +68,8 @@ class MW_View_Helper_NavTree_Default
 
 		$url = $enc->attr( $this->url( $this->_target, $this->_controller, $this->_action, $params ) );
 
-		$output = '
-		<li class="cat-item catid-' . $enc->attr( $id . $class ) . '" data-id="' . $id . '" >
-			<a class="cat-item" href="' . $url . '">
-				<span class="cat-name">' . $enc->html( $item->getName(), $enc::TRUST ) . '</span>
-			</a>';
+		$output = '<li class="cat-item catid-' . $enc->attr( $id . $class ) . '" data-id="' . $id . '" ><!--
+			--><a class="cat-item" href="' . $url . '"><span class="cat-name">' . $enc->html( $item->getName(), $enc::TRUST ) . '</span></a>';
 
 		$children = $item->getChildren();
 
