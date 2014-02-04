@@ -173,7 +173,7 @@ class Client_Html_Checkout_Standard_Default
 
 			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + array($e->getMessage());
+			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 	}
 
