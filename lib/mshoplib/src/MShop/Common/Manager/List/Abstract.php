@@ -137,7 +137,8 @@ abstract class MShop_Common_Manager_List_Abstract
 			if( $fetch === true )
 			{
 				if( $id === null ) {
-					$item->setId( $this->_newId( $conn, $this->_configPath . 'newid' ) );
+					$path = $this->_configPath . 'newid';
+					$item->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
 				} else {
 					$item->setId( $id ); // modified false
 				}
@@ -160,7 +161,8 @@ abstract class MShop_Common_Manager_List_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_configPath . 'delete' );
+		$path = $this->_configPath . 'delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -226,7 +228,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			{
 				$newpos = $refListItem->getPosition();
 
-				$sql = $config->get( $this->_configPath . 'getposmax' );
+				$sql = $config->get( $this->_configPath . 'move' );
 
 				$stmt = $conn->create( $sql );
 				$stmt->bind( 1, +1, MW_DB_Statement_Abstract::PARAM_INT );
@@ -345,8 +347,8 @@ abstract class MShop_Common_Manager_List_Abstract
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = $this->_configPath . 'search' );
-			$cfgPathCount =  $this->_configPath . 'count' );
+			$cfgPathSearch = $this->_configPath . 'search';
+			$cfgPathCount =  $this->_configPath . 'count';
 
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
@@ -422,8 +424,8 @@ abstract class MShop_Common_Manager_List_Abstract
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = $this->_configPath . 'search' );
-			$cfgPathCount =  $this->_configPath . 'count' );
+			$cfgPathSearch = $this->_configPath . 'search';
+			$cfgPathCount =  $this->_configPath . 'count';
 
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
@@ -479,7 +481,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	{
 		if( $default === true )
 		{
-			$prefix = $this->getPrefix();
+			$prefix = rtrim( $this->_getPrefix(), '.' );
 			$object = $this->_createSearch( $prefix );
 
 			$expr = array();
@@ -498,6 +500,8 @@ abstract class MShop_Common_Manager_List_Abstract
 			$expr[] = $object->combine( '||', $exprTwo );
 
 			$object->setConditions( $object->combine( '&&', $expr ) );
+
+			return $object;
 		}
 
 		return parent::createSearch();
@@ -554,16 +558,5 @@ abstract class MShop_Common_Manager_List_Abstract
 	protected function _getPrefix()
 	{
 		return $this->_prefix;
-	}
-
-
-	/**
-	* Returns the config array with SQL statements.
-	*
-	* @return array Associative list of operation as key and the SQL statement as value
-	*/
-	protected function _getConfig()
-	{
-		return $this->_config;
 	}
 }
