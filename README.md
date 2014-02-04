@@ -15,15 +15,12 @@ It's is suited for medium to large size businesses which needs a seamless integr
 ## Links
 
 * [Official web site](http://www.arcavias.com/)
-* [Documentation Wiki](https://docs.arcavias.com/)
+* [News](https://facebook.com/Arcavias)
+* [Documentation](https://docs.arcavias.com/)
 * [Issue tracker](https://bugs.arcavias.com/)
 * [Forum](https://forum.arcavias.com/)
-* [Facebook](https://facebook.com/Arcavias)
+* [Translate](https://www.transifex.com/projects/p/arcavias-core/)
 
 ## License
 
 Arcavias is licensed under the terms of the LGPLv3 Open Source license and is available for free.
-
-Silk icon theme by Mark James (used in phpdoc Extjs template)
-License: Creative Commons Attribution 2.5 License
-URL: http://www.famfamfam.com/lab/icons/silk/

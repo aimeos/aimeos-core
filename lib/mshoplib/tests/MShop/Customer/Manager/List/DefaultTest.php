@@ -58,6 +58,17 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch( true );
+		$result = $this->_object->aggregate( $search, 'customer.list.domain' );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertArrayHasKey( 'text', $result );
+		$this->assertEquals( 4, $result['text'] );
+	}
+
+
 	public function testCreateItem()
 	{
 		$item = $this->_object->createItem();

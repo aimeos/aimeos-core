@@ -36,20 +36,21 @@ abstract class MShop_Common_Manager_List_Abstract
 		$conf = $context->getConfig();
 		$confpath = $this->_getConfigPath();
 		$this->_config = array(
-			'getposmax' => $conf->get( $confpath . 'getposmax' ),
-			'insert' => $conf->get( $confpath . 'insert' ),
-			'update' => $conf->get( $confpath . 'update' ),
-			'updatepos' => $conf->get( $confpath . 'updatepos' ),
-			'delete' => $conf->get( $confpath . 'delete' ),
-			'move' => $conf->get( $confpath . 'move' ),
-			'search' => $conf->get( $confpath . 'search' ),
-			'count' => $conf->get( $confpath . 'count' ),
-			'newid' => $conf->get( $confpath . 'newid' ),
+			'aggregate' => $conf->get( $confpath . 'aggregate', $confpath . 'aggregate' ),
+			'getposmax' => $conf->get( $confpath . 'getposmax', $confpath . 'getposmax' ),
+			'insert' => $conf->get( $confpath . 'insert', $confpath . 'insert' ),
+			'update' => $conf->get( $confpath . 'update', $confpath . 'update' ),
+			'updatepos' => $conf->get( $confpath . 'updatepos', $confpath . 'updatepos' ),
+			'delete' => $conf->get( $confpath . 'delete', $confpath . 'delete' ),
+			'move' => $conf->get( $confpath . 'move', $confpath . 'move' ),
+			'search' => $conf->get( $confpath . 'search', $confpath . 'search' ),
+			'count' => $conf->get( $confpath . 'count', $confpath . 'count' ),
+			'newid' => $conf->get( $confpath . 'newid', $confpath . 'newid' ),
 		);
 
 		$this->_searchConfig = $this->_getSearchConfig();
 
-		$whitelistItem = array( 'insert', 'update', 'delete', 'move', 'search', 'count', 'newid', 'updatepos', 'getposmax' );
+		$whitelistItem = array( 'aggregate', 'insert', 'update', 'delete', 'move', 'search', 'count', 'newid', 'updatepos', 'getposmax' );
 		$isList = array_keys( $this->_config );
 
 		foreach( $whitelistItem as $str )
@@ -72,6 +73,20 @@ abstract class MShop_Common_Manager_List_Abstract
 		}
 
 		parent::__construct( $context );
+	}
+
+
+	/**
+	 * Counts the number items that are available for the values of the given key.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param string $key Search key to aggregate items for
+	 * @return array List of the search keys as key and the number of counted items as value
+	 */
+	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	{
+		$required = array( trim( $this->_prefix, '.' ) );
+		return $this->_aggregate( $search, $key, $this->_config['aggregate'], $required );
 	}
 
 
