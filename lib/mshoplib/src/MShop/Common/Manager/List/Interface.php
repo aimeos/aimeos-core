@@ -18,6 +18,44 @@ interface MShop_Common_Manager_List_Interface
 	extends MShop_Common_Manager_Interface
 {
 	/**
+	 * Counts the number items that are available for the values of the given key.
+	 *
+	 * The keys of the result array are the values found for the given key (second
+	 * parameter). The values of these keys are how often an item for this key is
+	 * found, e.g.
+	 *
+	 * <code>
+	 * // records in table:
+	 * // first record: domain='text', refid=10
+	 * // second record: domain='text', refid=11
+	 * // third record: domain='media', refid=11
+	 *
+	 * $listManager->aggregate( $listManager->createSearch(), 'catalog.list.domain' );
+	 * </code>
+	 *
+	 * The result in the example will be:
+	 *
+	 * <code>
+	 * array(
+	 *     'text' => 2, // refid 10 and 11
+	 *     'media' => 1, // refid 11
+	 * )
+	 * </code>
+	 *
+	 * The items used for aggregation can be filtered before counting the items by
+	 * adding criteria to the first parameter instaed of handing over a default
+	 * search object for no further filtering ($listManager->createSearch() in this
+	 * case).
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param string $key Search key to aggregate items for
+	 * @return array List of the search keys as key and the number of counted items as value
+	 * @see MW_Common_Criteria_Interface
+	 */
+	public function aggregate( MW_Common_Criteria_Interface $search, $key );
+
+
+	/**
 	 * Moves an existing list item to a new position.
 	 *
 	 * The position is in front of the item with the ID given in $ref or at the
@@ -99,8 +137,7 @@ interface MShop_Common_Manager_List_Interface
 	 * @param integer &$total Number of items that are available in total
 	 * @return array Associative list of domains as keys and lists with pairs
 	 *	of IDs and items implementing MShop_Common_Item_Interface
-	 * @throws MShop_Exception If creating items failed
-	 * @see MW_Common_Criteria_SQL
+	 * @see MW_Common_Criteria_Interface
 	 */
 	public function searchRefItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null );
 }
