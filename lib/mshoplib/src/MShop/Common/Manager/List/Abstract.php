@@ -19,7 +19,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	implements MShop_Common_Manager_List_Interface
 {
 	private $_prefix;
-	private $_config;
+	private $_configPath;
 	private $_searchConfig;
 	private $_typeManager;
 
@@ -33,32 +33,8 @@ abstract class MShop_Common_Manager_List_Abstract
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
-		$conf = $context->getConfig();
-		$confpath = $this->_getConfigPath();
-		$this->_config = array(
-			'aggregate' => $conf->get( $confpath . 'aggregate', $confpath . 'aggregate' ),
-			'getposmax' => $conf->get( $confpath . 'getposmax', $confpath . 'getposmax' ),
-			'insert' => $conf->get( $confpath . 'insert', $confpath . 'insert' ),
-			'update' => $conf->get( $confpath . 'update', $confpath . 'update' ),
-			'updatepos' => $conf->get( $confpath . 'updatepos', $confpath . 'updatepos' ),
-			'delete' => $conf->get( $confpath . 'delete', $confpath . 'delete' ),
-			'move' => $conf->get( $confpath . 'move', $confpath . 'move' ),
-			'search' => $conf->get( $confpath . 'search', $confpath . 'search' ),
-			'count' => $conf->get( $confpath . 'count', $confpath . 'count' ),
-			'newid' => $conf->get( $confpath . 'newid', $confpath . 'newid' ),
-		);
-
+		$this->_configPath = $this->_getConfigPath();
 		$this->_searchConfig = $this->_getSearchConfig();
-
-		$whitelistItem = array( 'aggregate', 'insert', 'update', 'delete', 'move', 'search', 'count', 'newid', 'updatepos', 'getposmax' );
-		$isList = array_keys( $this->_config );
-
-		foreach( $whitelistItem as $str )
-		{
-			if ( !in_array($str, $isList ) ) {
-				throw new MShop_Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $str ) );
-			}
-		}
 
 		if( ( $entry = reset( $this->_searchConfig ) ) === false ) {
 			throw new MShop_Exception( sprintf( 'Search configuration not available' ) );
@@ -86,7 +62,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	public function aggregate( MW_Common_Criteria_Interface $search, $key )
 	{
 		$required = array( trim( $this->_prefix, '.' ) );
-		return $this->_aggregate( $search, $key, $this->_config['aggregate'], $required );
+		return $this->_aggregate( $search, $key, $this->_configPath . 'aggregate', $required );
 	}
 
 
@@ -127,15 +103,13 @@ abstract class MShop_Common_Manager_List_Abstract
 			$id = $item->getId();
 
 			if( $id === null ) {
-				$sql = $this->_config['insert'];
-				$path = $this->_prefix . 'insert';
+				$path = $this->_configPath . 'insert';
 			} else {
-				$sql = $this->_config['update'];
-				$path = $this->_prefix . 'update';
+				$path = $this->_configPath . 'update';
 			}
 
 			$time = date( 'Y-m-d H:i:s' );
-			$statement = $this->_getCachedStatement($conn, $path, $sql);
+			$statement = $this->_getCachedStatement( $conn, $path );
 
 			$statement->bind( 1, $item->getParentId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$statement->bind( 2, $locale->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -163,7 +137,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			if( $fetch === true )
 			{
 				if( $id === null ) {
-					$item->setId( $this->_newId( $conn, $this->_config['newid'] ) );
+					$item->setId( $this->_newId( $conn, $this->_configPath . 'newid' ) );
 				} else {
 					$item->setId( $id ); // modified false
 				}
@@ -186,7 +160,7 @@ abstract class MShop_Common_Manager_List_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_config['delete'] );
+		$this->_deleteItems( $ids, $this->_configPath . 'delete' );
 	}
 
 
@@ -252,7 +226,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			{
 				$newpos = $refListItem->getPosition();
 
-				$sql = $this->_config['move'];
+				$sql = $config->get( $this->_configPath . 'getposmax' );
 
 				$stmt = $conn->create( $sql );
 				$stmt->bind( 1, +1, MW_DB_Statement_Abstract::PARAM_INT );
@@ -268,7 +242,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			}
 			else
 			{
-				$sql = $this->_config['getposmax'];
+				$sql = $config->get( $this->_configPath . 'getposmax' );
 
 				$statement = $conn->create( $sql );
 
@@ -286,7 +260,7 @@ abstract class MShop_Common_Manager_List_Abstract
 				}
 			}
 
-			$sql = $this->_config['updatepos'];
+			$sql = $config->get( $this->_configPath . 'updatepos' );
 
 			$stmt = $conn->create( $sql );
 			$stmt->bind( 1, $newpos, MW_DB_Statement_Abstract::PARAM_INT );
@@ -300,7 +274,7 @@ abstract class MShop_Common_Manager_List_Abstract
 				$oldpos++;
 			}
 
-			$sql = $this->_config['move'];
+			$sql = $config->get( $this->_configPath . 'move' );
 
 			$stmt = $conn->create( $sql );
 			$stmt->bind( 1, -1, MW_DB_Statement_Abstract::PARAM_INT );
@@ -371,8 +345,8 @@ abstract class MShop_Common_Manager_List_Abstract
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = $this->_config['search'];
-			$cfgPathCount =  $this->_config['count'];
+			$cfgPathSearch = $this->_configPath . 'search' );
+			$cfgPathCount =  $this->_configPath . 'count' );
 
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
@@ -448,8 +422,8 @@ abstract class MShop_Common_Manager_List_Abstract
 			}
 
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = $this->_config['search'];
-			$cfgPathCount =  $this->_config['count'];
+			$cfgPathSearch = $this->_configPath . 'search' );
+			$cfgPathCount =  $this->_configPath . 'count' );
 
 			$name = trim( $this->_prefix, '.' );
 			$required = array( $name );
@@ -503,23 +477,15 @@ abstract class MShop_Common_Manager_List_Abstract
 	 */
 	public function createSearch( $default = false )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		$object = new MW_Common_Criteria_SQL( $conn );
-
-		$dbm->release( $conn );
-
-
 		if( $default === true )
 		{
-			$item = reset( $this->_searchConfig );
-			$prefix = substr( $item['code'], 0, strrpos( $item['code'], '.' ) );
+			$prefix = $this->getPrefix();
+			$object = $this->_createSearch( $prefix );
 
 			$expr = array();
-			$curDate = date( 'Y-m-d H:i:00', time() );
+			$curDate = date( 'Y-m-d H:i:00' );
 
-			$expr[] = $object->compare( '>', $prefix . '.status', 0 );
+			$expr[] = $object->getConditions();
 
 			$exprTwo = array();
 			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $curDate );
@@ -531,11 +497,10 @@ abstract class MShop_Common_Manager_List_Abstract
 			$exprTwo[] = $object->compare( '==', $prefix . '.dateend', null );
 			$expr[] = $object->combine( '||', $exprTwo );
 
-			$searchConditions = $object->combine( '&&', $expr );
-			$object->setConditions( $searchConditions );
+			$object->setConditions( $object->combine( '&&', $expr ) );
 		}
 
-		return $object;
+		return parent::createSearch();
 	}
 
 

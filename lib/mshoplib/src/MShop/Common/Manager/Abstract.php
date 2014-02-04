@@ -56,6 +56,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 				throw new MShop_Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
 			}
 
+			/** @todo Required to get the joins for the catalog index managers, but there should be a better way */
 			$expr = array( $search->getConditions(), $search->compare( '!=', $key, null ) );
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
