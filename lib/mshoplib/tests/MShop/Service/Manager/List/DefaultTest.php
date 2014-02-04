@@ -59,6 +59,17 @@ class MShop_Service_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch( true );
+		$result = $this->_object->aggregate( $search, 'service.list.domain' );
+
+		$this->assertEquals( 3, count( $result ) );
+		$this->assertArrayHasKey( 'text', $result );
+		$this->assertEquals( 7, $result['text'] );
+	}
+
+
 	public function testCreateItem()
 	{
 		$item = $this->_object->createItem();

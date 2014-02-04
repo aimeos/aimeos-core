@@ -55,11 +55,30 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		MShop_Factory::clear();
 	}
 
+
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch( true );
+		$expr = array(
+			$search->getConditions(),
+			$search->compare( '==', 'product.list.editor', 'core:unittest' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$result = $this->_object->aggregate( $search, 'product.list.domain' );
+
+		$this->assertEquals( 6, count( $result ) );
+		$this->assertArrayHasKey( 'price', $result );
+		$this->assertEquals( 21, $result['price'] );
+	}
+
+
 	public function testCreateItem()
 	{
 		$item = $this->_object->createItem();
 		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $item );
 	}
+
 
 	public function testGetItem()
 	{

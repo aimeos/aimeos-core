@@ -58,6 +58,17 @@ class MShop_Price_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch( true );
+		$result = $this->_object->aggregate( $search, 'price.list.domain' );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertArrayHasKey( 'customer', $result );
+		$this->assertEquals( 2, $result['customer'] );
+	}
+
+
 	public function testCreateItem()
 	{
 		$item = $this->_object->createItem();

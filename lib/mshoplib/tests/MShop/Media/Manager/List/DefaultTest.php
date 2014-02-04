@@ -58,6 +58,17 @@ class MShop_Media_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch( true );
+		$result = $this->_object->aggregate( $search, 'media.list.domain' );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( 'attribute', $result );
+		$this->assertEquals( 6, $result['attribute'] );
+	}
+
+
 	public function testCreateItem()
 	{
 		$item = $this->_object->createItem();

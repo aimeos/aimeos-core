@@ -58,6 +58,17 @@ class MShop_Text_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch( true );
+		$result = $this->_object->aggregate( $search, 'text.list.domain' );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertArrayHasKey( 'media', $result );
+		$this->assertEquals( 10, $result['media'] );
+	}
+
+
 	public function testCreateItem()
 	{
 		$item = $this->_object->createItem();

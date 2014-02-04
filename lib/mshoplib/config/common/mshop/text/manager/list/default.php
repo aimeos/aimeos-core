@@ -7,6 +7,13 @@
 
 return array(
 	'item' => array(
+		'aggregate' => '
+			SELECT :key AS "key", COUNT(DISTINCT mtexli."id") AS "count"
+			FROM "mshop_text_list" mtexli
+			:joins
+			WHERE :cond
+			GROUP BY :key
+		',
 		'getposmax' => '
 			SELECT MAX( "pos" ) AS pos
 			FROM "mshop_text_list"
