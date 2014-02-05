@@ -271,10 +271,10 @@
 	margin: 0 !important;
 }
 
-.catalog-filter-tree .disabled,
-.catalog-filter-tree .disabled a:link,
-.catalog-filter-tree .disabled a:visited,
-.catalog-filter-attribute .disabled {
+.catalog-filter-tree .disabled > .cat-item,
+.catalog-filter-tree .disabled > .cat-item:link,
+.catalog-filter-tree .disabled > .cat-item:visited,
+.catalog-filter-attribute .disabled .attr-name {
 	color: #B0B0B0;
 }
 
