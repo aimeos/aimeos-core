@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Client
  * @subpackage Html
@@ -9,24 +9,25 @@
 
 
 /**
- * Default implementation of catalog detail item section for HTML clients.
+ * Default implementation of additional attribute item section for catalog detail HTML clients.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Detail_Additional_Default
+class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	extends Client_Html_Abstract
 {
-	private $_subPartNames = array( 'text', 'attribute' );
-	private $_subPartPath = 'client/html/catalog/detail/additional/default/subparts';
+	private $_subPartNames = array();
+	private $_subPartPath = 'client/html/catalog/detail/additional/attribute/default/subparts';
 
 
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string|null $name Template name
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $name = null )
 	{
 		$view = $this->getView();
 
@@ -34,10 +35,10 @@ class Client_Html_Catalog_Detail_Additional_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
 		}
-		$view->additionalBody = $html;
+		$view->attributeBody = $html;
 
-		$tplconf = 'client/html/catalog/detail/additional/default/template-body';
-		$default = 'catalog/detail/additional-body-default.html';
+		$tplconf = 'client/html/catalog/detail/additional/attribute/default/template-body';
+		$default = 'catalog/detail/additional-attribute-body-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -46,9 +47,10 @@ class Client_Html_Catalog_Detail_Additional_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string|null $name Template name
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $name = null )
 	{
 		$view = $this->getView();
 
@@ -56,10 +58,10 @@ class Client_Html_Catalog_Detail_Additional_Default
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader();
 		}
-		$view->additionalHeader = $html;
+		$view->attributeHeader = $html;
 
-		$tplconf = 'client/html/catalog/detail/additional/default/template-header';
-		$default = 'catalog/detail/additional-header-default.html';
+		$tplconf = 'client/html/catalog/detail/additional/attribute/default/template-header';
+		$default = 'catalog/detail/additional-attribute-header-default.html';
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -74,7 +76,7 @@ class Client_Html_Catalog_Detail_Additional_Default
 	 */
 	public function getSubClient( $type, $name = null )
 	{
-		return $this->_createSubClient( 'catalog/detail/additional/' . $type, $name );
+		return $this->_createSubClient( 'catalog/detail/additional/attribute/' . $type, $name );
 	}
 
 
