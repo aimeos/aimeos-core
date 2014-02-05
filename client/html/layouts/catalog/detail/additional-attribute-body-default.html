@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+if( isset( $this->detailProductItem ) ) {
+	$attrItems = $this->detailProductItem->getRefItems( 'attribute', null, 'default' );
+} else {
+	$attrItems = array();
+}
+
+$enc = $this->encoder();
+
+?>
+<?php if( count( $attrItems ) > 0 ) : ?>
+<h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristics' ), $enc::TRUST ); ?></h2>
+<table class="content attributes">
+	<thead>
+		<tr class="head">
+			<th class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristic name' ), $enc::TRUST ); ?></th>
+			<th class="value"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristic value' ), $enc::TRUST ); ?></th>
+		</tr>
+	</thead>
+	<tbody>
+<?php foreach( $attrItems as $attrItem ) : ?>
+		<tr class="item">
+			<td class="name"><?php echo $enc->html( $this->translate( 'client/html', $attrItem->getType() ), $enc::TRUST ); ?></td>
+			<td class="value"><?php echo $enc->html( $attrItem->getName() ); ?></td>
+		</tr>
+<?php endforeach; ?>
+	</tbody>
+</table>
+<?php echo $this->get( 'attributeBody' ); ?>
+</div>
+<?php endif; ?>
