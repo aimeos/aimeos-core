@@ -104,10 +104,13 @@ class Client_Html_Catalog_Count_Attribute_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
+			$config = $context->getConfig();
 
-			if( $context->getConfig()->get( 'client/html/catalog/count/attribute/aggregate', true ) == true )
+			if( $config->get( 'client/html/catalog/count/attribute/aggregate', true ) == true )
 			{
 				$filter = $this->_getProductListFilter( $view );
+				$filter->setSlice( 0, $config->get( 'client/html/catalog/count/limit', 10000 ) );
+
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 				$view->attributeCountList = $controller->aggregate( $filter, 'catalog.index.attribute.id' );
 			}
