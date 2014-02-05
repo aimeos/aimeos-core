@@ -7,7 +7,6 @@
 
 class Controller_ExtJS_DemoTest extends MW_Unittest_Testcase
 {
-	private $_context;
 	private $_object;
 
 
@@ -19,7 +18,7 @@ class Controller_ExtJS_DemoTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		// $this->_object = new Controller_ExtJS_Demo_Default( TestHelper::getContext() );
 	}
 
 
@@ -32,6 +31,9 @@ class Controller_ExtJS_DemoTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object );
+
+		Controller_ExtJS_Factory::clear();
+		MShop_Factory::clear();
 	}
 
 

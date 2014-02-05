@@ -7,7 +7,6 @@
 
 class MShop_DemoTest extends MW_Unittest_Testcase
 {
-	private $_context;
 	private $_object;
 
 
@@ -19,7 +18,7 @@ class MShop_DemoTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		// $this->_object = new MShop_Demo_Manager_Default( TestHelper::getContext() );
 	}
 
 
@@ -32,6 +31,7 @@ class MShop_DemoTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object );
+		MShop_Factory::clear();
 	}
 
 
