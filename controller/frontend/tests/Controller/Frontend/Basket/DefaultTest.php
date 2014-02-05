@@ -39,10 +39,10 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_testItem );
-
 		$this->_object->clear();
 		MShop_Factory::clear();
+
+		unset( $this->_object, $this->_testItem );
 	}
 
 
