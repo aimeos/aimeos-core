@@ -78,7 +78,7 @@ class Client_Html_Email_Delivery_Html_DefaultTest extends MW_Unittest_Testcase
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( dirname( dirname( dirname( dirname( dirname( __DIR__ ) ) ) ) ) );
-		$file = $path . $ds . 'lib' . $ds . 'css' . $ds . 'images' . $ds . 'arcavias.gif';
+		$file = $path . $ds . 'lib' . $ds . 'css' . $ds . 'images' . $ds . 'arcavias.png';
 		$this->_context->getConfig()->set( 'client/html/email/logo', $file );
 
 		$this->_emailMock->expects( $this->once() )->method( 'embedAttachment' )
