@@ -7,7 +7,6 @@
 
 class MW_DemoTest extends MW_Unittest_Testcase
 {
-	private $_context;
 	private $_object;
 
 
@@ -19,7 +18,7 @@ class MW_DemoTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_context = TestHelper::getContext();
+		// $this->_object = new MW_View_Helper_Test_Default();
 	}
 
 
