@@ -721,7 +721,7 @@
 }
 
 .catalog-detail-image .image-single {
-	background-image: url(images/arcavias.gif);
+	background-image: url(images/arcavias.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -918,8 +918,11 @@
 	width: 98%;
 }
 
-.catalog-detail-additional table.attributes td {
-	border: 1px solid #C3D9E5;
+.catalog-detail-additional .attributes tr:nth-child(2n) {
+	background-color: #C3D9E5;
+}	
+
+.catalog-detail-additional .attributes td {
 	padding: 0.5em;
 	width: 50%;
 }	
@@ -961,7 +964,7 @@
 
 .catalog-detail-suggest .media-item {
 	background-color: #FFFFFF;
-	background-image: url(images/arcavias.gif);
+	background-image: url(images/arcavias.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -1028,7 +1031,7 @@
 
 .catalog-session-seen .media-item {
 	background-color: #FFFFFF;
-	background-image: url(images/arcavias.gif);
+	background-image: url(images/arcavias.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
