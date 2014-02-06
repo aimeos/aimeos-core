@@ -20,6 +20,6 @@ $enc = $this->encoder();
 <?php foreach( $textItems as $textItem ) : ?> 
 	<div class="long"><?php echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?></div>
 <?php endforeach; ?>
-<?php echo $this->get( 'textBody' ); ?>
 </div>
 <?php endif; ?>
+<?php echo $this->get( 'textBody' ); ?>
