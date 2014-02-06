@@ -109,7 +109,6 @@ class Client_Html_Catalog_Count_Attribute_Default
 			if( $config->get( 'client/html/catalog/count/attribute/aggregate', true ) == true )
 			{
 				$filter = $this->_getProductListFilter( $view );
-				$filter->setSortations( array( $filter->sort( '+', 'product.id' ) ) );
 				$filter->setSlice( 0, $config->get( 'client/html/catalog/count/limit', 10000 ) );
 
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
