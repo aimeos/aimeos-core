@@ -269,10 +269,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array( 'media' ) );
 
 		$this->assertEquals( 2, count( $result ) );
-
-		foreach( $result as $product ) {
-			$this->assertEquals( 3, count( $product->getRefItems( 'media' ) ) );
-		}
 	}
 
 

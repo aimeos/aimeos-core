@@ -87,6 +87,7 @@ return array (
 		array( 'domain' => 'attribute', 'code' => 'hidden', 'label' => 'Hidden', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		array( 'domain' => 'media', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
 		array( 'domain' => 'price', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'service', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),

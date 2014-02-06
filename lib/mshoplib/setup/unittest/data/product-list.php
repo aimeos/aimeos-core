@@ -13,6 +13,7 @@ return array (
 		'attribute/hidden' => array( 'domain' => 'attribute', 'code' => 'hidden', 'label' => 'Hidden', 'status' => 1 ),
 		'catalog/default' => array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'media/default' => array( 'domain' => 'media', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		'media/download' => array( 'domain' => 'media', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
 		'price/default' => array( 'domain' => 'price', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
@@ -125,7 +126,7 @@ return array (
 		array( 'parentid' => 'product/CNC', 'typeid' => 'media/unittype10', 'domain' => 'media', 'refid' => 'media/prod_179x178/196_prod_179x178.jpg', 'start' => '2000-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'config' => array(), 'pos' => 3, 'status' => 1 ),
 		array( 'parentid' => 'product/CNC', 'typeid' => 'media/unittype11', 'domain' => 'media', 'refid' => 'media/prod_242x416/197_CafeNoire_Colombia_242x416.jpg', 'start' => '2000-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'config' => array(), 'pos' => 4, 'status' => 1 ),
 		array( 'parentid' => 'product/CNC', 'typeid' => 'media/unittype12', 'domain' => 'media', 'refid' => 'media/prod_97x93/199_prod_97x93.jpg', 'start' => '2000-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'config' => array(), 'pos' => 5, 'status' => 1 ),
-		//new
+		array( 'parentid' => 'product/CNC', 'typeid' => 'media/download', 'domain' => 'media', 'refid' => 'media/path/to/folder/example5.jpg', 'start' => '2000-01-01 00:00:00', 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TEST', 'typeid' => 'media/unittype1', 'domain' => 'media', 'refid' => 'media/path/to/folder/example5.jpg', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TEST', 'typeid' => 'media/unittype1', 'domain' => 'media', 'refid' => 'media/path/to/folder/example6.jpg', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
 
