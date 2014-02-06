@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+if( isset( $this->detailProductItem ) ) {
+	$items = $this->detailProductItem->getRefItems( 'media', null, 'download' );
+} else {
+	$items = array();
+}
+
+$mediaItems = $this->get( 'detailProductMediaItems', array() );
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
+$enc = $this->encoder();
+
+?>
+<?php if( count( $items ) > 0 ) : ?>
+<h2 class="header downloads"><?php echo $enc->html( $this->translate( 'client/html', 'Downloads' ), $enc::TRUST ); ?></h2>
+<ul class="content downloads">
+<?php foreach( $items as $id => $item ) : ?>
+<?php	if( isset( $mediaItems[$id] ) ) { $item = $mediaItems[$id]; } ?>
+	<li class="item">
+		<a href="<?php echo $enc->attr( $contentUrl . $item->getUrl() ); ?>" title="<?php echo $enc->attr( $item->getName() ); ?>">
+			<img class="media-image" src="<?php echo $enc->attr( $contentUrl . $item->getPreview() ); ?>" alt="<?php echo $enc->attr( $item->getName() ); ?>" />
+			<span class="media-name"><?php echo $enc->html( $item->getName() ); ?></span>
+		</a>
+	</li>
+<?php endforeach; ?>
+</ul>
+<?php endif; ?>
+<?php echo $this->get( 'downloadBody' ); ?>

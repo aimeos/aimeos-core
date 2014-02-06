@@ -381,6 +381,6 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 
 		// this is the total of list items, not the total of referenced items
 		// whose number might be lower due to duplicates
-		$this->assertEquals( 36, $total );
+		$this->assertEquals( 37, $total );
 	}
 }

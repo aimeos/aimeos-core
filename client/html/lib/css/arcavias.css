@@ -927,6 +927,21 @@
 	width: 50%;
 }	
 
+.catalog-detail-additional .attributes .attr-images {
+	display: inline-block;
+}	
+
+/* Product detail, additional download section */
+.catalog-detail-additional ul.downloads {
+	margin: 2% 1%;
+	width: 98%;
+}
+
+.catalog-detail-additional .downloads .media-image {
+	height: 40px;
+}
+
+
 /* Stock level */
 .catalog-detail-basic .stock {
 	margin: 0.5em 0;
