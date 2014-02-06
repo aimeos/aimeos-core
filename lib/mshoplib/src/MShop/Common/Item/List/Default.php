@@ -20,6 +20,7 @@ class MShop_Common_Item_List_Default
 {
 	private $_prefix;
 	private $_values;
+	private $_refItem;
 
 
 	/**
@@ -280,6 +281,28 @@ class MShop_Common_Item_List_Default
 	{
 		$this->_values['config'] = $config;
 		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the referenced item if it's available.
+	 *
+	 * @return MShop_Common_Item_Interface|null Referenced list item
+	 */
+	public function getRefItem()
+	{
+		return $this->_refItem;
+	}
+
+
+	/**
+	 * Stores the item referenced by the list item.
+	 *
+	 * @param MShop_Common_Item_Interface $refItem Item referenced by the list item
+	 */
+	public function setRefItem( MShop_Common_Item_Interface $refItem )
+	{
+		$this->_refItem = $refItem;
 	}
 
 

@@ -57,6 +57,15 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 
 		if( !isset( $this->_sortedLists[$domain] ) )
 		{
+			foreach( $this->_listItems[$domain] as $listItem )
+			{
+				$refId = $listItem->getRefId();
+
+				if( isset( $this->_refItems[$domain][$refId] ) ) {
+					$listItem->setRefItem( $this->_refItems[$domain][$refId] );
+				}
+			}
+
 			uasort( $this->_listItems[$domain], array( $this, '_comparePosition' ) );
 			$this->_sortedLists[$domain] = true;
 		}
