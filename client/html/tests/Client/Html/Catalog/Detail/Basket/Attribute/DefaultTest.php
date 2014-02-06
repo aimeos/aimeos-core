@@ -67,6 +67,7 @@ class Client_Html_Catalog_Detail_Basket_Attribute_DefaultTest extends MW_Unittes
 	{
 		$view = $this->_object->getView();
 		$view->detailProductItem = $this->_getProductItem();
+		$view->detailProductAttributeItems = $view->detailProductItem->getRefItems( 'attribute', null, 'config' );
 
 		$configAttr = $view->detailProductItem->getRefItems( 'attribute', null, 'config' );
 		$hiddenAttr = $view->detailProductItem->getRefItems( 'attribute', null, 'hidden' );
@@ -85,6 +86,7 @@ class Client_Html_Catalog_Detail_Basket_Attribute_DefaultTest extends MW_Unittes
 			$this->assertRegexp( '#<input type="hidden" .* value="' . $id . '" />#', $output );
 		}
 	}
+
 
 	public function testGetSubClient()
 	{

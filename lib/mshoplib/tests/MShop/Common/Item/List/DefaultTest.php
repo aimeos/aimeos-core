@@ -214,6 +214,20 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 		$this->assertFalse( $this->_object->isModified() );
 	}
 
+	public function testGetRefItem()
+	{
+		$this->assertEquals( null, $this->_object->getRefItem() );
+	}
+
+	public function testSetRefItem()
+	{
+		$obj = new MShop_Common_Item_List_Default( 'reftest', array() );
+
+		$this->_object->setRefItem( $obj );
+		$this->assertFalse( $this->_object->isModified() );
+		$this->assertSame( $obj, $this->_object->getRefItem() );
+	}
+
 	public function testToArray()
 	{
 		$expected = array(

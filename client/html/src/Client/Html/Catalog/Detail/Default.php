@@ -197,9 +197,32 @@ class Client_Html_Catalog_Detail_Default
 				$view->detailStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
 			}
 
-			$manager = MShop_Product_Manager_Factory::createManager( $context );
 
-			$view->detailProductItem = $manager->getItem( $prodid, $domains );
+			$manager = MShop_Factory::createManager( $context, 'product' );
+			$productItem = $manager->getItem( $prodid, $domains );
+
+
+			$attrManager = MShop_Factory::createManager( $context, 'attribute' );
+			$attrSearch = $attrManager->createSearch( true );
+			$expr = array(
+				$attrSearch->compare( '==', 'attribute.id', array_keys( $productItem->getRefItems( 'attribute' ) ) ),
+				$attrSearch->getConditions(),
+			);
+			$attrSearch->setConditions( $attrSearch->combine( '&&', $expr ) );
+
+
+			$mediaManager = MShop_Factory::createManager( $context, 'media' );
+			$mediaSearch = $mediaManager->createSearch( true );
+			$expr = array(
+				$mediaSearch->compare( '==', 'media.id', array_keys( $productItem->getRefItems( 'media' ) ) ),
+				$mediaSearch->getConditions(),
+			);
+			$mediaSearch->setConditions( $mediaSearch->combine( '&&', $expr ) );
+
+
+			$view->detailProductItem = $productItem;
+			$view->detailProductAttributeItems = $attrManager->searchItems( $attrSearch, $default );
+			$view->detailProductMediaItems = $mediaManager->searchItems( $mediaSearch, $default );
 			$view->detailParams = $this->_getClientParams( $view->param() );
 
 			$this->_cache = $view;

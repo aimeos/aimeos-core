@@ -457,14 +457,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			$search->setConditions( $search->combine( '&&', $expr ) );
 			$search->setSlice( 0, 0x7fffffff );
 
-			$refItems = $manager->searchItems( $search, $ref );
-
-			foreach( $list as $refid )
-			{
-				if( isset( $refItems[$refid] ) ) {
-					$items[$domain][$refid] = $refItems[$refid];
-				}
-			}
+			$items[$domain] = $manager->searchItems( $search, $ref );
 		}
 
 		return $items;

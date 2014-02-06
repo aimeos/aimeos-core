@@ -1,37 +1,42 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 if( isset( $this->detailProductItem ) ) {
-	$attrItems = $this->detailProductItem->getRefItems( 'attribute', null, 'default' );
+	$items = $this->detailProductItem->getRefItems( 'attribute', null, 'default' );
 } else {
-	$attrItems = array();
+	$items = array();
 }
 
+$attrItems = $this->get( 'detailProductAttributeItems', array() );
+$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 $enc = $this->encoder();
 
 ?>
-<?php if( count( $attrItems ) > 0 ) : ?>
+<?php if( count( $items ) > 0 ) : ?>
 <h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristics' ), $enc::TRUST ); ?></h2>
 <table class="content attributes">
-	<thead>
-		<tr class="head">
-			<th class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristic name' ), $enc::TRUST ); ?></th>
-			<th class="value"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristic value' ), $enc::TRUST ); ?></th>
-		</tr>
-	</thead>
 	<tbody>
-<?php foreach( $attrItems as $attrItem ) : ?>
+<?php foreach( $items as $id => $item ) : ?>
+<?php	if( isset( $attrItems[$id] ) ) { $item = $attrItems[$id]; } ?>
 		<tr class="item">
-			<td class="name"><?php echo $enc->html( $this->translate( 'client/html', $attrItem->getType() ), $enc::TRUST ); ?></td>
-			<td class="value"><?php echo $enc->html( $attrItem->getName() ); ?></td>
+			<td class="name"><?php echo $enc->html( $this->translate( 'client/html', $item->getType() ), $enc::TRUST ); ?></td>
+			<td class="value">
+				<div class="attr-images">
+<?php		foreach( $item->getListItems( 'media', 'default' ) as $listItem ) : ?>
+<?php			if( ( $mediaItem = $listItem->getRefItem() ) !== null ) : ?>
+					<img class="attr-image" src="<?php echo $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>" alt="<?php echo $enc->attr( $mediaItem->getName() ); ?>" />
+<?php			endif; ?>
+<?php		endforeach; ?>
+				</div>
+				<span class="attr-name"><?php echo $enc->html( $item->getName() ); ?></span>
+			</td>
 		</tr>
 <?php endforeach; ?>
 	</tbody>
 </table>
-<?php echo $this->get( 'attributeBody' ); ?>
-</div>
 <?php endif; ?>
+<?php echo $this->get( 'attributeBody' ); ?>

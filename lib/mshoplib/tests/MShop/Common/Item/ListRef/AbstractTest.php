@@ -121,6 +121,22 @@ class MShop_Common_Item_ListRef_AbstractTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetListItemsWithRefItems()
+	{
+		$result = $this->_object->getListItems( 'text' );
+		$expected = array(
+			$this->_textItem2->getId() => $this->_textItem2,
+			$this->_textItem1->getId() => $this->_textItem1,
+		);
+
+		foreach( $result as $listItem )
+		{
+			$this->assertInstanceof( 'MShop_Text_Item_Interface', $listItem->getRefItem() );
+			$this->assertSame( $expected[ $listItem->getRefId() ], $listItem->getRefItem() );
+		}
+	}
+
+
 	public function testGetRefItems()
 	{
 		$result = $this->_object->getRefItems( 'text' );

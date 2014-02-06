@@ -86,4 +86,18 @@ interface MShop_Common_Item_List_Interface
 	 * @param string $date New end date of the common list item (YYYY-MM-DD hh:mm:ss)
 	 */
 	public function setDateEnd( $date );
+
+	/**
+	 * Returns the referenced item if it's available.
+	 *
+	 * @return MShop_Common_Item_Interface|null Referenced list item
+	 */
+	public function getRefItem();
+
+	/**
+	 * Stores the item referenced by the list item.
+	 *
+	 * @param MShop_Common_Item_Interface $refItem Item referenced by the list item
+	 */
+	public function setRefItem( MShop_Common_Item_Interface $refItem );
 }
