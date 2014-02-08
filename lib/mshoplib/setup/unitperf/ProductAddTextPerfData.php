@@ -18,7 +18,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'ProductAddBasePerfData', 'MShopAddTypeDataUnitperf' );
+		return array( 'ProductAddColorPerfData', 'MShopAddTypeDataUnitperf' );
 	}
 
 
@@ -38,67 +38,9 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 	 */
 	protected function _process()
 	{
-		$this->_msg('Adding product text performance data', 0);
+		$this->_msg( 'Adding product text performance data', 0 );
 
 
-		$context =  $this->_getContext();
-
-		$textManager = MShop_Text_Manager_Factory::createManager( $context );
-		$textTypeManager = $textManager->getSubManager( 'type' );
-
-		$expr = array();
-		$search = $textTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'text.type.domain', 'product');
-		$expr[] = $search->compare('==', 'text.type.code', array( 'name', 'short', 'long' ) );
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $textTypeManager->searchItems($search);
-
-		$textTypes = array();
-		foreach( $types as $type ) {
-			$textTypes[ $type->getCode() ] = $type->getId();
-		}
-
-
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$productListManager = $productManager->getSubManager( 'list' );
-		$productListTypeManager = $productListManager->getSubManager( 'type' );
-
-		$expr = array();
-		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'text');
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
-
-		if ( ($listTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
-		}
-
-
-		$listItem = $productListManager->createItem();
-		$listItem->setTypeId( $listTypeItem->getId() );
-		$listItem->setDomain( 'text' );
-
-		$textItem = $textManager->createItem();
-		$textItem->setLanguageId( 'en' );
-		$textItem->setDomain( 'product' );
-		$textItem->setStatus( 1 );
-
-
-		$colors = array(
-			'red', 'green', 'blue', 'black', 'white', 'orange', 'yellow', 'purple', 'brown', 'turquise',
-			'violet', 'teal', 'sienna', 'olive', 'navy', 'maroon', 'magenta', 'lime', 'lemon', 'khaki',
-			'pink', 'grey', 'ocher', 'terra cotta', 'champagne', 'garnet', 'bronze', 'ruby', 'silver', 'gold',
-			'ivory', 'indigo', 'fuchsia', 'cyan', 'crimson', 'chocolate', 'beige', 'azure', 'aquamarine', 'aqua',
-			'titan', 'platin', 'cobalt', 'chrome', 'copper', 'rose', 'almond', 'wooden', 'coral', 'cornflower',
-			'orchid', 'salmon', 'honey', 'lavender', 'peach', 'plum', 'sand', 'steel', 'smoke', 'snow',
-			'wine', 'melon', 'strawberry', 'wheaten', 'tangerine', 'cerise', 'burgundy', 'auburn', 'cinnabar', 'verdigris',
-			'vanilla', 'cardinal', 'umber', 'ultramarine', 'topaz', 'thistle', 'taupe', 'slate', 'sepia', 'scarlet',
-			'sapphire', 'saffron', 'rust', 'russet', 'ruddy', 'amaranth', 'rosewood', 'lila', 'candy', 'carmine',
-			'raspberry', 'quartz', 'pistachio', 'pearl', 'onyx', 'mustard', 'mulberry', 'mint', 'vermilion', 'mauve',
-			'mahogany', 'jade', 'ginger', 'fallow', 'emerald', 'eggshell', 'eggplant', 'ecru', 'ebony', 'coffee',
-			'chestnut', 'carrot', 'claret', 'buff', 'brass', 'blond', 'avocado', 'antique', 'amethyst', 'amber',
-		);
 		$attribute = array(
 			'plain', 'checked', 'striped', 'curled', 'colored', 'bubbled', 'geometric', 'quilted', 'pimpled', 'dotted',
 			'light', 'heavy', 'simple', 'clear', 'cool', 'thin', 'thick', 'airy', 'breezy', 'blowy',
@@ -124,8 +66,36 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 			'(L)', '(XL)', '(2XL)', '(3XL)', '(4XL)', '(5XL)', '(6XL)', '(7XL)', '(8XL)', '(9XL)',
 		);
 
-		$search = $productManager->createSearch();
-		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+
+		$context = $this->_getContext();
+		$textManager = MShop_Factory::createManager( $context, 'text' );
+		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
+		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
+
+
+		$attrSearch = $attrManager->createSearch();
+		$attrSearch->setConditions( $attrSearch->compare( '==', 'attribute.type.code', 'color' ) );
+		$attrSearch->setSlice( 0, 1000 );
+
+		$attrIds = $attrManager->searchItems( $attrSearch );
+
+
+		$textListItem = $this->_getProductListItem( 'text', 'default' );
+		$textTypes = $this->_getTextTypeIds();
+
+		$textItem = $textManager->createItem();
+		$textItem->setLanguageId( 'en' );
+		$textItem->setDomain( 'product' );
+		$textItem->setStatus( 1 );
+
+
+		$search = $productListManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.list.domain', 'attribute' ),
+			$search->compare( '==', 'product.list.type.code', 'default' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'product.list.id' ) ) );
 
 
 		$this->_txBegin();
@@ -134,11 +104,16 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 		do
 		{
-			$result = $productManager->searchItems( $search );
+			$result = $productListManager->searchItems( $search );
 
-			foreach ( $result as $id => $item )
+			foreach ( $result as $listItem )
 			{
-				$text = current( $colors ) . ' ' . current( $attribute ) . ' ' . current( $articles ) . ' ' . current( $size );
+				$id = $listItem->getParentId();
+				$refId = $listItem->getRefId();
+				$color = ( $attrIds[$refId] ? $attrIds[$refId]->getName() : 'solid' );
+
+				$text = $attrIds[ $listItem->getRefId() ]->getName() . ' ' . current( $attribute )
+					. ' ' . current( $articles ) . ' ' . current( $size );
 
 
 				$textItem->setId( null );
@@ -147,10 +122,10 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 				$textItem->setContent( $text );
 				$textManager->saveItem( $textItem );
 
-				$listItem->setId( null );
-				$listItem->setParentId( $id );
-				$listItem->setRefId( $textItem->getId() );
-				$productListManager->saveItem( $listItem, false );
+				$textListItem->setId( null );
+				$textListItem->setParentId( $id );
+				$textListItem->setRefId( $textItem->getId() );
+				$productListManager->saveItem( $textListItem, false );
 
 
 				$textItem->setId( null );
@@ -159,10 +134,10 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 				$textItem->setContent( 'Short description for ' . $text );
 				$textManager->saveItem( $textItem );
 
-				$listItem->setId( null );
-				$listItem->setParentId( $id );
-				$listItem->setRefId( $textItem->getId() );
-				$productListManager->saveItem( $listItem, false );
+				$textListItem->setId( null );
+				$textListItem->setParentId( $id );
+				$textListItem->setRefId( $textItem->getId() );
+				$productListManager->saveItem( $textListItem, false );
 
 
 				$textItem->setId( null );
@@ -171,29 +146,23 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 				$textItem->setContent( 'Long description for ' . $text . '. This may include some "lorem ipsum" text' );
 				$textManager->saveItem( $textItem );
 
-				$listItem->setId( null );
-				$listItem->setParentId( $id );
-				$listItem->setRefId( $textItem->getId() );
-				$productListManager->saveItem( $listItem, false );
+				$textListItem->setId( null );
+				$textListItem->setParentId( $id );
+				$textListItem->setRefId( $textItem->getId() );
+				$productListManager->saveItem( $textListItem, false );
 
 
-				if( next( $colors ) === false )
+				if( current( $attribute ) === false )
 				{
-					reset( $colors );
-					next( $attribute );
+					reset( $attribute );
+					next( $articles );
 
-					if( current( $attribute ) === false )
-					{
-						reset( $attribute );
-						next( $articles );
+					if( current( $articles ) === false ) {
+						reset( $articles );
+						next( $size );
 
-						if( current( $articles ) === false ) {
-							reset( $articles );
-							next( $size );
-
-							if( current( $size ) === false ) {
-								reset( $size );
-							}
+						if( current( $size ) === false ) {
+							reset( $size );
 						}
 					}
 				}
@@ -209,5 +178,27 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 
 		$this->_status( 'done' );
+	}
+
+
+	protected function _getTextTypeIds()
+	{
+		$textTypeManager = MShop_Factory::createManager( $this->_getContext(), 'text/type' );
+
+		$search = $textTypeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'text.type.domain', 'product' ),
+			$search->compare( '==', 'text.type.code', array( 'name', 'short', 'long' ) ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$types = $textTypeManager->searchItems( $search );
+
+		$textTypes = array();
+		foreach( $types as $type ) {
+			$textTypes[ $type->getCode() ] = $type->getId();
+		}
+
+		return $textTypes;
 	}
 }
