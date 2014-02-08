@@ -430,20 +430,25 @@
 }
 
 .catalog-filter-attribute fieldset {
-        border: 1px solid #C3D9E5;
-        color: #679CB8;
-        font-weight: bold;
-        padding: 5px;
-        margin: 10px 0px;
+	border: 1px solid #C3D9E5;
+	color: #679CB8;
+	font-weight: bold;
+	padding: 5px;
+	margin: 10px 0px;
 }
 
 .catalog-filter-attribute legend {
-        color: #004266;
-        font-size: 120%;
+	color: #004266;
+	font-size: 120%;
+}
+
+.catalog-filter-attribute .attr-list {
+	max-height: 10em;
+	overflow: auto;
 }
 
 .catalog-filter-attribute input.attr-item {
-        border: 1px solid #C3D9E5;
+	border: 1px solid #C3D9E5;
 }
 
 
@@ -909,10 +914,6 @@
 }
 
 /* Product detail, additional attributes section */
-.catalog-detail-additional .attributes thead {
-	display: none;
-}
-
 .catalog-detail-additional table.attributes {
 	margin: 2% 1%;
 	width: 98%;
@@ -923,11 +924,16 @@
 }	
 
 .catalog-detail-additional .attributes td {
+	vertical-align: middle;
 	padding: 0.5em;
 	width: 50%;
 }	
 
-.catalog-detail-additional .attributes .attr-images {
+.catalog-detail-additional .attributes .media-list {
+	display: inline-block;
+}
+
+.catalog-detail-additional .attributes .media-item {
 	display: inline-block;
 }	
 

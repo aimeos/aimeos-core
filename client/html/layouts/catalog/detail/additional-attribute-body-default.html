@@ -12,7 +12,7 @@ if( isset( $this->detailProductItem ) ) {
 }
 
 $attrItems = $this->get( 'detailProductAttributeItems', array() );
-$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
+$contentUrl = $this->config( 'client/html/common/content/baseurl' );
 $enc = $this->encoder();
 
 ?>
@@ -20,19 +20,22 @@ $enc = $this->encoder();
 <h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristics' ), $enc::TRUST ); ?></h2>
 <table class="content attributes">
 	<tbody>
-<?php foreach( $items as $id => $item ) : ?>
-<?php	if( isset( $attrItems[$id] ) ) { $item = $attrItems[$id]; } ?>
+<?php foreach( $items as $id => $attrItem ) : ?>
+<?php	if( isset( $attrItems[$id] ) ) { $attrItem = $attrItems[$id]; } ?>
 		<tr class="item">
-			<td class="name"><?php echo $enc->html( $this->translate( 'client/html', $item->getType() ), $enc::TRUST ); ?></td>
+			<td class="name"><?php echo $enc->html( $this->translate( 'client/html', $attrItem->getType() ), $enc::TRUST ); ?></td>
 			<td class="value">
-				<div class="attr-images">
-<?php		foreach( $item->getListItems( 'media', 'default' ) as $listItem ) : ?>
-<?php			if( ( $mediaItem = $listItem->getRefItem() ) !== null ) : ?>
-					<img class="attr-image" src="<?php echo $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>" alt="<?php echo $enc->attr( $mediaItem->getName() ); ?>" />
-<?php			endif; ?>
-<?php		endforeach; ?>
+				<div class="media-list">
+<?php
+			foreach( $attrItem->getListItems( 'media', 'default' ) as $listItem )
+			{
+				if( ( $item = $listItem->getRefItem() ) !== null ) {
+					echo $this->media( $item, $contentUrl, array( 'class' => 'media-item' ) );
+				}
+			}
+?>
 				</div>
-				<span class="attr-name"><?php echo $enc->html( $item->getName() ); ?></span>
+				<span class="attr-name"><?php echo $enc->html( $attrItem->getName() ); ?></span>
 			</td>
 		</tr>
 <?php endforeach; ?>
