@@ -125,4 +125,32 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 		$conn->commit();
 		$dbm->release( $conn );
 	}
+
+
+	protected function _getProductListItem( $domain, $code )
+	{
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/list/type' );
+
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.list.type.code', $code ),
+			$search->compare ('==', 'product.list.type.domain', $domain ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$types = $manager->searchItems( $search );
+
+		if( ( $listTypeItem = reset( $types ) ) === false ) {
+			throw new Exception( 'Product list type item not found' );
+		}
+
+
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
+
+		$listItem = $manager->createItem();
+		$listItem->setTypeId( $listTypeItem->getId() );
+		$listItem->setDomain( $domain );
+
+		return $listItem;
+	}
 }
