@@ -41,4 +41,15 @@ abstract class MW_View_Helper_Abstract
 	{
 		return call_user_func_array( array( $this->_view, $name ), $args );
 	}
+
+
+	/**
+	 * Returns the view object.
+	 *
+	 * @return MW_View_Interface View object
+	 */
+	protected function _getView()
+	{
+		return $this->_view;
+	}
 }

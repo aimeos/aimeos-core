@@ -79,10 +79,24 @@ class MW_View_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testCallException()
+	public function testCallCreateHelper()
+	{
+		$enc = $this->_object->encoder();
+		$this->assertInstanceOf( 'MW_View_Helper_Interface', $enc );
+	}
+
+
+	public function testCallInvalidName()
 	{
 		$this->setExpectedException( 'MW_View_Exception' );
-		$this->assertEquals( 'File', $this->_object->translate( 'test', 'File', 'Files', 1 ) );
+		$this->_object->_invalid();
+	}
+
+
+	public function testCallUnknown()
+	{
+		$this->setExpectedException( 'MW_View_Exception' );
+		$this->_object->unknown();
 	}
 
 
