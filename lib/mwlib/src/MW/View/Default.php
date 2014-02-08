@@ -29,8 +29,22 @@ class MW_View_Default implements MW_View_Interface
 	 */
 	public function __call( $name, array $args )
 	{
-		if( !isset( $this->_helper[$name] ) ) {
-			throw new MW_View_Exception( sprintf( 'No view helper "%1$s" found', $name ) );
+		if( !isset( $this->_helper[$name] ) )
+		{
+			if( ctype_alnum( $name ) === false )
+			{
+				$classname = is_string( $name ) ? 'MW_View_Helper_' . $name : '<not a string>';
+				throw new MW_View_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			}
+
+			$iface = 'MW_View_Helper_Interface';
+			$classname = 'MW_View_Helper_' . ucfirst( $name ) . '_Default';
+
+			if( class_exists( $classname ) === false ) {
+				throw new MW_View_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			}
+
+			$this->_helper[$name] = new $classname( $this );;
 		}
 
 		return call_user_func_array( array( $this->_helper[$name], 'transform' ), $args );
