@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-02 15:30+0100\n"
+"POT-Creation-Date: 2014-02-10 14:59+0100\n"
 "PO-Revision-Date: 2014-02-02 14:35+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/arcavias/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/projects/p/arcavias-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -79,8 +79,8 @@ msgstr "Nœud enfant avec l'index \"%1$d\" n'est pas disponible"
 #: src/MShop/Service/Manager/Default.php:353
 #: src/MShop/Common/Factory/Abstract.php:64
 #: src/MShop/Common/Factory/Abstract.php:131
-#: src/MShop/Common/Manager/Abstract.php:233
-#: src/MShop/Common/Manager/Abstract.php:342
+#: src/MShop/Common/Manager/Abstract.php:234
+#: src/MShop/Common/Manager/Abstract.php:343
 #: src/MShop/Product/Manager/Tag/Default.php:326
 #: src/MShop/Plugin/Manager/Abstract.php:41
 #: src/MShop/Plugin/Manager/Default.php:191
@@ -93,8 +93,8 @@ msgstr "La classe \"%1$s\" n'implémente pas l'interface \"%2$s\""
 #: src/MShop/Service/Manager/Default.php:346
 #: src/MShop/Common/Factory/Abstract.php:58
 #: src/MShop/Common/Factory/Abstract.php:125
-#: src/MShop/Common/Manager/Abstract.php:227
-#: src/MShop/Common/Manager/Abstract.php:336
+#: src/MShop/Common/Manager/Abstract.php:228
+#: src/MShop/Common/Manager/Abstract.php:337
 #: src/MShop/Product/Manager/Tag/Default.php:316 src/MShop/Factory.php:92
 #: src/MShop/Plugin/Manager/Abstract.php:35
 #: src/MShop/Plugin/Manager/Default.php:183
@@ -112,8 +112,8 @@ msgstr "Le code ne doit pas être plus long que 32 caractères"
 msgid "Configuration invalid"
 msgstr "Configuration invalide"
 
-#: src/MShop/Common/Manager/List/Abstract.php:355
-#: src/MShop/Common/Manager/List/Abstract.php:432
+#: src/MShop/Common/Manager/List/Abstract.php:346
+#: src/MShop/Common/Manager/List/Abstract.php:423
 #, php-format
 msgid "Configuration not available"
 msgstr "Configuration indisponible"
@@ -124,7 +124,6 @@ msgid "Configuration object not available"
 msgstr "Objet de configuration indisponible"
 
 #: src/MShop/Common/Manager/Type/Abstract.php:55
-#: src/MShop/Common/Manager/List/Abstract.php:58
 #: src/MShop/Common/Manager/Address/Abstract.php:44
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
@@ -158,7 +157,7 @@ msgstr "Objet de gestionnaire de base de donnée indisponible"
 msgid "Flags \"%1$s\" not within allowed range"
 msgstr "Les drapeaux \"%1$s\" se sont pas dans la plage autorisée"
 
-#: src/MShop/Common/Manager/Abstract.php:128
+#: src/MShop/Common/Manager/Abstract.php:129
 #, php-format
 msgid "ID of last inserted database record not available"
 msgstr "Numéro du dernier enregistrement de la base de données indisponible"
@@ -223,7 +222,7 @@ msgstr "Caractères invalides en attribut pour la configuration du fournisseur. 
 #: src/MShop/Customer/Manager/Factory.php:39
 #: src/MShop/Attribute/Manager/Factory.php:39
 #: src/MShop/Common/Factory/Abstract.php:52
-#: src/MShop/Common/Manager/Abstract.php:330
+#: src/MShop/Common/Manager/Abstract.php:331
 #: src/MShop/Text/Manager/Factory.php:39
 #: src/MShop/Catalog/Manager/Factory.php:38
 #: src/MShop/Product/Manager/Factory.php:39
@@ -250,7 +249,7 @@ msgstr "Caractères invalides dans la date \"%1$s\". Format ISO \"AAAA-MM-JJ\" a
 
 #: src/MAdmin/Common/Manager/Abstract.php:35
 #: src/MShop/Service/Manager/Default.php:329
-#: src/MShop/Common/Manager/Abstract.php:208
+#: src/MShop/Common/Manager/Abstract.php:209
 #: src/MShop/Plugin/Manager/Default.php:163
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
@@ -262,8 +261,8 @@ msgid "Invalid characters in email address: \"%1$s\""
 msgstr "Caractères invalides dans l'adresse e-mail : \"%1$s\""
 
 #: src/MAdmin/Common/Manager/Abstract.php:43
-#: src/MShop/Common/Manager/Abstract.php:217
-#: src/MShop/Common/Manager/Abstract.php:403
+#: src/MShop/Common/Manager/Abstract.php:218
+#: src/MShop/Common/Manager/Abstract.php:404
 #: src/MShop/Product/Manager/Tag/Default.php:309
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
@@ -315,18 +314,18 @@ msgstr "URL de site web invalide \"%1$s\""
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr "L'entrée ne peut être supprimée. La valeur de site de l'entrée diffère de la valeur de site actuelle."
 
-#: src/MShop/Catalog/Manager/Index/Default.php:283
+#: src/MShop/Catalog/Manager/Index/Default.php:267
 #, php-format
 msgid ""
 "Item could not be saved using method saveItem(). Item ID not available."
 msgstr "L'entrée n'a pu être sauvegardée en utilisant la méthode saveItem(). Valeur de l'entrée indisponible."
 
-#: src/MShop/Common/Manager/Abstract.php:548
+#: src/MShop/Common/Manager/Abstract.php:549
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
 msgstr "Entrée référencée dans le domaine \"%1$s\" introuvable : %2$s"
 
-#: src/MShop/Common/Manager/Abstract.php:572
+#: src/MShop/Common/Manager/Abstract.php:573
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr "Entrée \"%2$s\" dans \"%1$s\" introuvable"
@@ -336,7 +335,7 @@ msgstr "Entrée \"%2$s\" dans \"%1$s\" introuvable"
 msgid "Job with ID \"%1$s\" not found"
 msgstr "Tâche \"%1$s\" introuvable"
 
-#: src/MShop/Common/Manager/List/Abstract.php:198
+#: src/MShop/Common/Manager/List/Abstract.php:189
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr "Entrée de liste \"%2$s\" dans \"%1$s\" introuvable"
@@ -453,10 +452,10 @@ msgstr "Pas de prix pour le produit \"%1$s\" ou code produit \"%2$s\" disponible
 #: src/MShop/Customer/Manager/Default.php:308
 #: src/MShop/Attribute/Manager/Default.php:168
 #: src/MShop/Common/Manager/Type/Abstract.php:115
-#: src/MShop/Common/Manager/List/Abstract.php:101
+#: src/MShop/Common/Manager/List/Abstract.php:92
 #: src/MShop/Common/Manager/Address/Abstract.php:135
 #: src/MShop/Text/Manager/Default.php:127
-#: src/MShop/Catalog/Manager/Index/Default.php:279
+#: src/MShop/Catalog/Manager/Index/Default.php:263
 #: src/MShop/Catalog/Manager/Default.php:299
 #: src/MShop/Product/Manager/Stock/Warehouse/Default.php:119
 #: src/MShop/Product/Manager/Stock/Default.php:115
@@ -649,8 +648,8 @@ msgstr "Attribut requis \"%1$s\" dans la configuration du fournisseur indisponib
 
 #: src/MShop/Common/Manager/Type/Abstract.php:68
 #: src/MShop/Common/Manager/Type/Abstract.php:72
-#: src/MShop/Common/Manager/List/Abstract.php:67
-#: src/MShop/Common/Manager/List/Abstract.php:71
+#: src/MShop/Common/Manager/List/Abstract.php:44
+#: src/MShop/Common/Manager/List/Abstract.php:48
 #: src/MShop/Common/Manager/Address/Abstract.php:57
 #: src/MShop/Common/Manager/Address/Abstract.php:61
 #, php-format
@@ -658,8 +657,8 @@ msgid "Search configuration for \"%1$s\" not available"
 msgstr "Configuration de recherche pour \"%1$s\" indisponible"
 
 #: src/MShop/Common/Manager/Type/Abstract.php:64
-#: src/MShop/Common/Manager/List/Abstract.php:63
-#: src/MShop/Common/Manager/List/Abstract.php:189
+#: src/MShop/Common/Manager/List/Abstract.php:40
+#: src/MShop/Common/Manager/List/Abstract.php:180
 #: src/MShop/Common/Manager/Address/Abstract.php:53
 #, php-format
 msgid "Search configuration not available"
@@ -760,7 +759,7 @@ msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr "Seuil pour l'expédition gratuite pour la devise \"%1$s\" indisponible"
 
 #: src/MShop/Locale/Manager/Default.php:519
-#: src/MShop/Common/Manager/Abstract.php:722
+#: src/MShop/Common/Manager/Abstract.php:723
 #, php-format
 msgid "Total results value not found"
 msgstr "Valeur totale des résultats introuvable"

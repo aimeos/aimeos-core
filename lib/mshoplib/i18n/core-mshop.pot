@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-02 15:30+0100\n"
+"POT-Creation-Date: 2014-02-10 14:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,8 +78,8 @@ msgstr ""
 #: src/MShop/Service/Manager/Default.php:353
 #: src/MShop/Common/Factory/Abstract.php:64
 #: src/MShop/Common/Factory/Abstract.php:131
-#: src/MShop/Common/Manager/Abstract.php:233
-#: src/MShop/Common/Manager/Abstract.php:342
+#: src/MShop/Common/Manager/Abstract.php:234
+#: src/MShop/Common/Manager/Abstract.php:343
 #: src/MShop/Product/Manager/Tag/Default.php:326
 #: src/MShop/Plugin/Manager/Abstract.php:41
 #: src/MShop/Plugin/Manager/Default.php:191
@@ -92,8 +92,8 @@ msgstr ""
 #: src/MShop/Service/Manager/Default.php:346
 #: src/MShop/Common/Factory/Abstract.php:58
 #: src/MShop/Common/Factory/Abstract.php:125
-#: src/MShop/Common/Manager/Abstract.php:227
-#: src/MShop/Common/Manager/Abstract.php:336
+#: src/MShop/Common/Manager/Abstract.php:228
+#: src/MShop/Common/Manager/Abstract.php:337
 #: src/MShop/Product/Manager/Tag/Default.php:316 src/MShop/Factory.php:92
 #: src/MShop/Plugin/Manager/Abstract.php:35
 #: src/MShop/Plugin/Manager/Default.php:183
@@ -111,8 +111,8 @@ msgstr ""
 msgid "Configuration invalid"
 msgstr ""
 
-#: src/MShop/Common/Manager/List/Abstract.php:355
-#: src/MShop/Common/Manager/List/Abstract.php:432
+#: src/MShop/Common/Manager/List/Abstract.php:346
+#: src/MShop/Common/Manager/List/Abstract.php:423
 #, php-format
 msgid "Configuration not available"
 msgstr ""
@@ -123,7 +123,6 @@ msgid "Configuration object not available"
 msgstr ""
 
 #: src/MShop/Common/Manager/Type/Abstract.php:55
-#: src/MShop/Common/Manager/List/Abstract.php:58
 #: src/MShop/Common/Manager/Address/Abstract.php:44
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
@@ -155,7 +154,7 @@ msgstr ""
 msgid "Flags \"%1$s\" not within allowed range"
 msgstr ""
 
-#: src/MShop/Common/Manager/Abstract.php:128
+#: src/MShop/Common/Manager/Abstract.php:129
 #, php-format
 msgid "ID of last inserted database record not available"
 msgstr ""
@@ -216,7 +215,7 @@ msgstr ""
 #: src/MShop/Customer/Manager/Factory.php:39
 #: src/MShop/Attribute/Manager/Factory.php:39
 #: src/MShop/Common/Factory/Abstract.php:52
-#: src/MShop/Common/Manager/Abstract.php:330
+#: src/MShop/Common/Manager/Abstract.php:331
 #: src/MShop/Text/Manager/Factory.php:39
 #: src/MShop/Catalog/Manager/Factory.php:38
 #: src/MShop/Product/Manager/Factory.php:39
@@ -241,7 +240,7 @@ msgstr ""
 
 #: src/MAdmin/Common/Manager/Abstract.php:35
 #: src/MShop/Service/Manager/Default.php:329
-#: src/MShop/Common/Manager/Abstract.php:208
+#: src/MShop/Common/Manager/Abstract.php:209
 #: src/MShop/Plugin/Manager/Default.php:163
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
@@ -253,8 +252,8 @@ msgid "Invalid characters in email address: \"%1$s\""
 msgstr ""
 
 #: src/MAdmin/Common/Manager/Abstract.php:43
-#: src/MShop/Common/Manager/Abstract.php:217
-#: src/MShop/Common/Manager/Abstract.php:403
+#: src/MShop/Common/Manager/Abstract.php:218
+#: src/MShop/Common/Manager/Abstract.php:404
 #: src/MShop/Product/Manager/Tag/Default.php:309
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
@@ -306,17 +305,17 @@ msgstr ""
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr ""
 
-#: src/MShop/Catalog/Manager/Index/Default.php:283
+#: src/MShop/Catalog/Manager/Index/Default.php:267
 #, php-format
 msgid "Item could not be saved using method saveItem(). Item ID not available."
 msgstr ""
 
-#: src/MShop/Common/Manager/Abstract.php:548
+#: src/MShop/Common/Manager/Abstract.php:549
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
 msgstr ""
 
-#: src/MShop/Common/Manager/Abstract.php:572
+#: src/MShop/Common/Manager/Abstract.php:573
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr ""
@@ -326,7 +325,7 @@ msgstr ""
 msgid "Job with ID \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Common/Manager/List/Abstract.php:198
+#: src/MShop/Common/Manager/List/Abstract.php:189
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr ""
@@ -441,10 +440,10 @@ msgstr ""
 #: src/MShop/Customer/Manager/Default.php:308
 #: src/MShop/Attribute/Manager/Default.php:168
 #: src/MShop/Common/Manager/Type/Abstract.php:115
-#: src/MShop/Common/Manager/List/Abstract.php:101
+#: src/MShop/Common/Manager/List/Abstract.php:92
 #: src/MShop/Common/Manager/Address/Abstract.php:135
 #: src/MShop/Text/Manager/Default.php:127
-#: src/MShop/Catalog/Manager/Index/Default.php:279
+#: src/MShop/Catalog/Manager/Index/Default.php:263
 #: src/MShop/Catalog/Manager/Default.php:299
 #: src/MShop/Product/Manager/Stock/Warehouse/Default.php:119
 #: src/MShop/Product/Manager/Stock/Default.php:115
@@ -629,8 +628,8 @@ msgstr ""
 
 #: src/MShop/Common/Manager/Type/Abstract.php:68
 #: src/MShop/Common/Manager/Type/Abstract.php:72
-#: src/MShop/Common/Manager/List/Abstract.php:67
-#: src/MShop/Common/Manager/List/Abstract.php:71
+#: src/MShop/Common/Manager/List/Abstract.php:44
+#: src/MShop/Common/Manager/List/Abstract.php:48
 #: src/MShop/Common/Manager/Address/Abstract.php:57
 #: src/MShop/Common/Manager/Address/Abstract.php:61
 #, php-format
@@ -638,8 +637,8 @@ msgid "Search configuration for \"%1$s\" not available"
 msgstr ""
 
 #: src/MShop/Common/Manager/Type/Abstract.php:64
-#: src/MShop/Common/Manager/List/Abstract.php:63
-#: src/MShop/Common/Manager/List/Abstract.php:189
+#: src/MShop/Common/Manager/List/Abstract.php:40
+#: src/MShop/Common/Manager/List/Abstract.php:180
 #: src/MShop/Common/Manager/Address/Abstract.php:53
 #, php-format
 msgid "Search configuration not available"
@@ -736,7 +735,7 @@ msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr ""
 
 #: src/MShop/Locale/Manager/Default.php:519
-#: src/MShop/Common/Manager/Abstract.php:722
+#: src/MShop/Common/Manager/Abstract.php:723
 #, php-format
 msgid "Total results value not found"
 msgstr ""
