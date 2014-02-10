@@ -48,7 +48,6 @@ class Client_Html_Catalog_Detail_Seen_Default
 			$html = $lastSeen[$id];
 			unset( $lastSeen[$id] );
 			$lastSeen[$id] = $html;
-echo 'change, no render';
 
 			$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
 
@@ -70,7 +69,6 @@ echo 'change, no render';
 
 		if( $output !== '' )
 		{
-echo 'new, after render';
 			$max = $this->_getContext()->getConfig()->get( 'client/html/catalog/session/seen/default/maxitems', 6 );
 
 			$lastSeen[$id] = $output;
