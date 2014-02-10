@@ -15,8 +15,8 @@ $enc = $this->encoder();
 		<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'cs-order' ) ) ); ?>" value="1" />
 <?php echo $this->get( 'summaryBody' ); ?>
 		<div class="button-group">
-			<a class="standardbutton" href="<?php echo $enc->attr( $this->get( 'standardUrlBack' ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a> 
-			<button class="standardbutton"><?php echo $enc->html( $this->translate( 'client/html', 'Buy now' ), $enc::TRUST ); ?></button>
+			<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->get( 'standardUrlBack' ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a> 
+			<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Buy now' ), $enc::TRUST ); ?></button>
 		</div>
 	</form>
 </section>

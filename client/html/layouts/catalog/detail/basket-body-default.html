@@ -46,7 +46,7 @@ $enc = $this->encoder();
 				<input name="<?php echo $enc->attr( $this->formparam( 'b-action' ) ); ?>" type="hidden" value="add" />
 				<input name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'prod-id' ) ) ); ?>" type="hidden" value="<?php echo $enc->attr( $this->param( 'l-product-id' ) ); ?>" />
 				<input name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'quantity' ) ) ); ?>" type="text" value="1" />
-				<button class="standardbutton" type="submit" value=""><?php echo $enc->html( $this->translate( 'client/html', 'Add to basket' ), $enc::TRUST ); ?></button>
+				<button class="standardbutton btn-action" type="submit" value=""><?php echo $enc->html( $this->translate( 'client/html', 'Add to basket' ), $enc::TRUST ); ?></button>
 			</div>
 		</div>
 	</form>

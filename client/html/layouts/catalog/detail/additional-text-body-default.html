@@ -18,7 +18,7 @@ $enc = $this->encoder();
 <h2 class="header description"><?php echo $enc->html( $this->translate( 'client/html', 'Description' ), $enc::TRUST ); ?></h2>
 <div class="content description">
 <?php foreach( $textItems as $textItem ) : ?> 
-	<div class="long"><?php echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?></div>
+	<div class="long item"><?php echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?></div>
 <?php endforeach; ?>
 </div>
 <?php endif; ?>

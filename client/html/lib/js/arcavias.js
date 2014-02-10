@@ -302,7 +302,7 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Go back to underlying page */
-	$("body").on("click", ".basket-standard a.back", function(event) {
+	$("body").on("click", ".basket-standard a.btn-back", function(event) {
 		var container = $(".arcavias-container");
 		var overlay = $(".arcavias-overlay");
 		
