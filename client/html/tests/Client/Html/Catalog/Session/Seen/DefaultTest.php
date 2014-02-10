@@ -65,18 +65,12 @@ class Client_Html_Catalog_Session_Seen_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBody()
 	{
-		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
-		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
-		$items = $manager->searchItems( $search );
-
-		$str = serialize( $items );
+		$str = serialize( array( 1 => 'html product one',  2 => 'html product two' ) );
 		$this->_context->getSession()->set( 'arcavias/client/html/catalog/session/seen', $str );
 
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#.*Expresso.*Cappuccino.*#smU', $output );
+		$this->assertRegExp( '#.*html product two.*html product one.*#smU', $output ); // list is reversed
 		$this->assertStringStartsWith( '<section class="catalog-session-seen">', $output );
 	}
 
