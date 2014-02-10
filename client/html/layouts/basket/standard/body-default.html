@@ -13,13 +13,10 @@ $checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
 $checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
 $checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
 
-try
-{
+$checkout = true;
+try {
 	$this->standardBasket->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
-	$checkout = true;
-}
-catch( Exception $e )
-{
+} catch( Exception $e ) {
 	$checkout = false;
 }
 
@@ -39,9 +36,12 @@ $enc = $this->encoder();
 		<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'b-action' ) ); ?>" value="edit" />
 <?php echo $this->get( 'standardBody' ); ?>
 		<div class="button-group">
-			<button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Update' ), $enc::TRUST ); ?></button>
+<?php if( isset( $this->standardBackUrl ) ) : ?>
+			<a class="standardbutton back" href="<?php echo $enc->attr( $this->standardBackUrl ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a>
+<?php endif; ?>
+			<button class="standardbutton update" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Update' ), $enc::TRUST ); ?></button>
 <?php if( $checkout === true ) : ?>
-			<a class="standardbutton" href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Checkout' ), $enc::TRUST ); ?></a>
+			<a class="standardbutton checkout" href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Checkout' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 	</form>

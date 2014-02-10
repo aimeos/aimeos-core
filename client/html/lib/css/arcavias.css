@@ -15,25 +15,26 @@
 	color: #FFFFFF;
 	padding: 4px;
 	margin: 5px;
-	min-width: 60px;
+	min-width: 6em;
 	line-height: 1em;
 	display: inline-block;
 	vertical-align: middle;
 	cursor: pointer;
 }
 
-.arcavias .standardbutton:hover {
+.arcavias .standardbutton:hover,
+.arcavias .minibutton:hover {
 	background-image: url("images/buttonfond-active.png");
 }
 
-.arcavias .minibutton {
-	min-width: 0;
+.arcavias .standardbutton::-moz-focus-inner,
+.arcavias .minibutton::-moz-focus-inner {
+	padding: 0; 
+	border: 0; 
 }
 
-/** Enforce equal width/height for buttons */
-.arcavias .button-group button.standardbutton {
-	height: 22px;
-	min-width: 70px;
+.arcavias .minibutton {
+	min-width: 1em;
 }
 
 .arcavias .button-group {
@@ -58,6 +59,32 @@
 	padding: 0;
 	margin: 0;
 }
+
+.arcavias-overlay {
+	background-color: #FFFFFF;
+	position: fixed;
+	z-index: 1000;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	left: 0;
+	top: 0;
+}
+
+.arcavias-container {
+	position: absolute;
+	z-index: 1001;
+	opacity: 1;
+	border-radius: 1em;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	border: solid 1px #689DB9;
+	background-color: #FFFFFF;
+	max-width: 800px;
+	width: 96%;
+	padding: 2%;
+}
+
 
 /* Common summary CSS also used in e-mail ===>>> */
 

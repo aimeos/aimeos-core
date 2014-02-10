@@ -67,6 +67,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
 $modify = $this->get( 'summaryEnableModify', false );
 $errors = $this->get( 'summaryErrorCodes', array() );
+$backParams = $this->get( 'summaryParams', array() );
 
 ?>
 <div class="common-summary-detail container">
@@ -125,13 +126,13 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 					<td class="quantity">
 <?php		if( $modify ) : ?>
 <?php			if( $product->getQuantity() > 1 ) : ?>
-						<a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) ) ); ?>">-</a>
+						<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) + $backParams ) ); ?>">-</a>
 <?php			else : ?>
 						&nbsp;
 <?php			endif; ?>
 						<input type="text" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'quantity' ) ) ); ?>" value="<?php echo $enc->attr( $product->getQuantity() ); ?>" />
 						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'position' ) ) ); ?>" value="<?php echo $enc->attr( $position ); ?>" />
-						<a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) ) ); ?>">+</a>
+						<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) + $backParams ) ); ?>">+</a>
 <?php		else : ?>	
 <?php 			echo $enc->html( $product->getQuantity() ); ?>
 <?php		endif; ?>
@@ -140,7 +141,7 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ) ); ?></td>
 <?php		if( $modify ) : ?>
 					<td class="action">
-						<a class="minibutton" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
+						<a class="minibutton change" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
 					</td>
 <?php		endif; ?>
 				</tr>
