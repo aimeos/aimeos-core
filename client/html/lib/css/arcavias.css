@@ -37,6 +37,15 @@
 	min-width: 1em;
 }
 
+.arcavias .btn-action {
+	background-image: url("images/buttonfond-action.png");
+	font-size: 150%;
+}
+
+.arcavias .btn-action:hover {
+	background-image: url("images/buttonfond-action-active.png");
+}
+
 .arcavias .button-group {
 	text-align: center;
 	padding: 10px 0px;
