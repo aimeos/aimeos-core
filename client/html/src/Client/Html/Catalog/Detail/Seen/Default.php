@@ -30,19 +30,50 @@ class Client_Html_Catalog_Detail_Seen_Default
 	{
 		$view = $this->getView();
 
-		if( isset( $view->detailProductItem ) )
+		if( !isset( $view->detailProductItem ) ) {
+			return '';
+		}
+
+		$session = $this->_getContext()->getSession();
+		$str = $session->get( 'arcavias/client/html/catalog/session/seen' );
+
+		if( ( $lastSeen = @unserialize( $str ) ) === false ) {
+			$lastSeen = array();
+		}
+
+		$id = $view->detailProductItem->getId();
+
+		if( isset( $lastSeen[$id] ) )
 		{
-			$context = $this->_getContext();
-			$session = $context->getSession();
+			$html = $lastSeen[$id];
+			unset( $lastSeen[$id] );
+			$lastSeen[$id] = $html;
+echo 'change, no render';
 
-			$max = $context->getConfig()->get( 'client/html/catalog/session/seen/default/maxitems', 6 );
-			$str = $session->get( 'arcavias/client/html/catalog/session/seen' );
+			$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
 
-			if( ( $lastSeen = @unserialize( $str ) ) === false ) {
-				$lastSeen = array();
-			}
+			return '';
+		}
 
-			$lastSeen[ $view->detailProductItem->getId() ] = $view->detailProductItem;
+
+		$html = '';
+		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody();
+		}
+		$view->seenBody = $html;
+
+		$tplconf = 'client/html/catalog/detail/seen/default/template-body';
+		$default = 'catalog/detail/seen-body-default.html';
+
+		$output = $view->render( $this->_getTemplate( $tplconf, $default ) );
+
+
+		if( $output !== '' )
+		{
+echo 'new, after render';
+			$max = $this->_getContext()->getConfig()->get( 'client/html/catalog/session/seen/default/maxitems', 6 );
+
+			$lastSeen[$id] = $output;
 			$lastSeen = array_slice( $lastSeen, -$max, $max, true );
 
 			$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
