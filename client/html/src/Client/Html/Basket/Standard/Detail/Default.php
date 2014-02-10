@@ -38,7 +38,7 @@ class Client_Html_Basket_Standard_Detail_Default
 			$cntl = $view->config( 'client/html/checkout/standard/url/controller', 'checkout' );
 			$action = $view->config( 'client/html/checkout/standard/url/action', 'index' );
 
-			$view->summaryParams = $view->standardParams;
+			$view->summaryParams = $view->get( 'standardParams', array() );
 			$view->summaryUrlServicePayment = $view->url( $target, $cntl, $action, array( 'c-step' => 'payment' ) );
 			$view->summaryUrlServiceDelivery = $view->url( $target, $cntl, $action, array( 'c-step' => 'delivery' ) );
 			$view->summaryTaxRates = $this->_getTaxRates( $basket );
