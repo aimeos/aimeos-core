@@ -73,13 +73,17 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 			throw new Exception('Product list type item not found');
 		}
 
+		$expr = array();
+		$search = $productListTypeManager->createSearch();
+		$expr[] = $search->compare('==', 'product.list.type.domain', 'media');
+		$expr[] = $search->compare('==', 'product.list.type.code', 'download');
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$types = $productListTypeManager->searchItems($search);
 
-		$search = $productManager->createSearch();
-		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		if ( ($downloadListTypeItem = reset($types)) === false) {
+			throw new Exception('Product list type item not found');
+		}
 
-		$listItem = $productListManager->createItem();
-		$listItem->setTypeId( $productListTypeItem->getId() );
-		$listItem->setDomain( 'media' );
 
 		$mediaItem = $mediaManager->createItem();
 		$mediaItem->setTypeId( $mediaTypeItem->getId() );
@@ -87,6 +91,33 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 		$mediaItem->setDomain( 'product' );
 		$mediaItem->setMimeType( 'image/jpeg' );
 		$mediaItem->setStatus( 1 );
+
+		$downloadItem = $mediaManager->createItem();
+		$downloadItem->setTypeId( $mediaTypeItem->getId() );
+		$downloadItem->setLanguageId( null );
+		$downloadItem->setDomain( 'product' );
+		$downloadItem->setMimeType( 'application/pdf' );
+		$downloadItem->setLabel( 'PDF download' );
+		$downloadItem->setPreview( 'unitperf/download-preview.jpg' );
+		$downloadItem->setUrl( 'unitperf/download.pdf' );
+		$downloadItem->setStatus( 1 );
+
+		$mediaManager->saveItem( $downloadItem );
+
+
+		$listItem = $productListManager->createItem();
+		$listItem->setTypeId( $productListTypeItem->getId() );
+		$listItem->setDomain( 'media' );
+
+		$downloadListItem = $productListManager->createItem();
+		$downloadListItem->setTypeId( $downloadListTypeItem->getId() );
+		$downloadListItem->setRefId( $downloadItem->getId() );
+		$downloadListItem->setDomain( 'media' );
+		$downloadListItem->setPosition( 0 );
+
+
+		$search = $productManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 
 		$this->_txBegin();
@@ -152,6 +183,11 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 
 				$pos++;
+
+
+				$downloadListItem->setId( null );
+				$downloadListItem->setParentId( $id );
+				$productListManager->saveItem( $downloadListItem, false );
 			}
 
 			$count = count( $result );
