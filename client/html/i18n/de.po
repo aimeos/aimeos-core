@@ -12,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-01 18:12+0100\n"
-"PO-Revision-Date: 2014-02-01 17:15+0000\n"
+"POT-Creation-Date: 2014-02-10 14:59+0100\n"
+"PO-Revision-Date: 2014-02-10 13:56+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/arcavias/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,9 +62,9 @@ msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%1
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: layouts/catalog/list/promo-body-default.html:17
 #: layouts/catalog/list/items-body-default.html:16
-#: layouts/catalog/session/seen-body-default.html:18
-#: layouts/catalog/detail/basket-body-default.html:13
+#: layouts/catalog/detail/basket-body-default.html:14
 #: layouts/catalog/detail/suggest-body-default.html:19
+#: layouts/catalog/detail/seen-body-default.html:17
 #: layouts/common/summary/detail-body-default.html:66
 #: layouts/basket/mini/main-body-default.html:23
 #: layouts/email/common/text-summary-detail-body-default.html:55
@@ -90,9 +90,9 @@ msgstr "%1$s am %2$s"
 #. / Percent format with value (%1$s) and % sign
 #: layouts/catalog/list/promo-body-default.html:19
 #: layouts/catalog/list/items-body-default.html:18
-#: layouts/catalog/session/seen-body-default.html:20
-#: layouts/catalog/detail/basket-body-default.html:15
+#: layouts/catalog/detail/basket-body-default.html:16
 #: layouts/catalog/detail/suggest-body-default.html:21
+#: layouts/catalog/detail/seen-body-default.html:19
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -114,7 +114,7 @@ msgstr "+ Zahlungsgebühren"
 msgid "+ Shipping"
 msgstr "+ Versandkosten"
 
-#: layouts/catalog/detail/basket-body-default.html:48
+#: layouts/catalog/detail/basket-body-default.html:49
 msgid "Add to basket"
 msgstr "In den Warenkorb"
 
@@ -159,6 +159,7 @@ msgstr "Mindestens ein erforderliches Feld in der Rechnungsadresse wurde nicht a
 msgid "At least one delivery address part is missing"
 msgstr "Mindestens ein erforderliches Feld in der Versandadresse wurde nicht ausgefüllt"
 
+#: layouts/basket/standard/body-default.html:40
 #: layouts/checkout/standard/address-body-default.html:17
 #: layouts/checkout/standard/payment-body-default.html:92
 #: layouts/checkout/standard/summary-body-default.html:18
@@ -166,7 +167,7 @@ msgstr "Mindestens ein erforderliches Feld in der Versandadresse wurde nicht aus
 msgid "Back"
 msgstr "Zurück"
 
-#: layouts/basket/standard/body-default.html:37
+#: layouts/basket/standard/body-default.html:34
 #: layouts/basket/mini/body-default.html:23
 #: layouts/checkout/standard/body-default.html:25
 msgid "Basket"
@@ -195,7 +196,7 @@ msgstr "Kategorie mit der ID \"%1$s\" ist nicht unterhalb der ID \"%2$s\""
 
 #: layouts/common/summary/address-body-default.html:24
 #: layouts/common/summary/address-body-default.html:78
-#: layouts/common/summary/detail-body-default.html:75
+#: layouts/common/summary/detail-body-default.html:76
 #: layouts/common/summary/service-body-default.html:19
 #: layouts/common/summary/service-body-default.html:53
 msgid "Change"
@@ -204,6 +205,10 @@ msgstr "Ändern"
 #: layouts/checkout/confirm/basic-body-default.html:35
 msgid "Change payment"
 msgstr "Zahlung ändern"
+
+#: layouts/catalog/detail/additional-attribute-body-default.html:20
+msgid "Characteristics"
+msgstr "Eigenschaften"
 
 #: layouts/basket/standard/body-default.html:44
 msgid "Checkout"
@@ -294,9 +299,13 @@ msgstr "Bitte tragen Sie in der Versandadresse Ihre Daten in das Feld \"%1$s\" e
 msgid "Description"
 msgstr "Beschreibung"
 
-#: layouts/common/summary/detail-body-default.html:77
+#: layouts/common/summary/detail-body-default.html:78
 msgid "Details"
 msgstr "Details"
+
+#: layouts/catalog/detail/additional-download-body-default.html:20
+msgid "Downloads"
+msgstr "Downloads"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:170
 #: layouts/checkout/standard/address-billing-body-default.html:166
@@ -339,13 +348,13 @@ msgstr "Ich akzeptiere die <a href=\"%1$s\" target=\"_blank\" title=\"AGBs\" alt
 msgid "If you have any questions, please reply to this e-mail"
 msgstr "Falls Sie Fragen haben sollten, antworten Sie bitte auf diese E-Mail"
 
-#: layouts/common/summary/detail-body-default.html:229
+#: layouts/common/summary/detail-body-default.html:230
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
 msgstr "Enthaltene Rabatte"
 
-#: layouts/common/summary/detail-body-default.html:221
+#: layouts/common/summary/detail-body-default.html:222
 #: layouts/email/common/text-summary-detail-body-default.html:104
 #, php-format
 msgid "Includes %1$s%% VAT"
@@ -400,7 +409,7 @@ msgstr "Sprache"
 msgid "Last name"
 msgstr "Nachname"
 
-#: layouts/catalog/session/seen-body-default.html:25
+#: layouts/catalog/session/seen-body-default.html:14
 msgid "Last seen"
 msgstr "Zuletzt angesehen"
 
@@ -468,7 +477,7 @@ msgstr "Seite %1$d von %2$d"
 msgid "Payment"
 msgstr "Zahlung"
 
-#: layouts/common/summary/detail-body-default.html:205
+#: layouts/common/summary/detail-body-default.html:206
 msgid "Payment costs"
 msgstr "Zahlungsgebühren"
 
@@ -506,7 +515,7 @@ msgid "Postal code"
 msgstr "PLZ"
 
 #: layouts/catalog/list/pagination-body-default.html:26
-#: layouts/common/summary/detail-body-default.html:85
+#: layouts/common/summary/detail-body-default.html:86
 #: layouts/email/common/text-summary-detail-body-default.html:74
 msgid "Price"
 msgstr "Preis"
@@ -516,7 +525,7 @@ msgstr "Preis"
 msgid "Proceed"
 msgstr "Weiter"
 
-#: layouts/common/summary/detail-body-default.html:84
+#: layouts/common/summary/detail-body-default.html:85
 #: layouts/email/common/text-summary-detail-body-default.html:72
 msgid "Quantity"
 msgstr "Anzahl"
@@ -563,7 +572,7 @@ msgstr "Gebühren für Versand und/oder Zahlung"
 msgid "Services"
 msgstr "Zahlung und Lieferung"
 
-#: layouts/common/summary/detail-body-default.html:197
+#: layouts/common/summary/detail-body-default.html:198
 msgid "Shipping"
 msgstr "Versandkosten"
 
@@ -603,7 +612,7 @@ msgstr "%2$s, wieder verfügbar am %3$s %1$s"
 msgid "Street"
 msgstr "Straße"
 
-#: layouts/common/summary/detail-body-default.html:190
+#: layouts/common/summary/detail-body-default.html:191
 #: layouts/email/common/text-summary-detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:97
 msgid "Sub-total"
@@ -613,7 +622,7 @@ msgstr "Zwischensumme"
 msgid "Suggested products"
 msgstr "Empfohlene Produkte"
 
-#: layouts/common/summary/detail-body-default.html:86
+#: layouts/common/summary/detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:76
 msgid "Sum"
 msgstr "Summe"
@@ -696,7 +705,7 @@ msgstr "Die Zahlung für Ihre Bestellung %1$s vom %2$s wurde erstattet."
 msgid "Top seller"
 msgstr "Beliebteste Produkte"
 
-#: layouts/common/summary/detail-body-default.html:213
+#: layouts/common/summary/detail-body-default.html:214
 #: layouts/email/common/text-summary-detail-body-default.html:93
 #: layouts/email/common/text-summary-detail-body-default.html:101
 msgid "Total"
@@ -733,12 +742,12 @@ msgstr "Wir haben Ihre Rücksendung für Ihre Bestellung %1$s vom %2$s erhalten.
 msgid "Web site"
 msgstr "Webseite"
 
-#: layouts/common/summary/detail-body-default.html:143
+#: layouts/common/summary/detail-body-default.html:144
 msgid "X"
 msgstr "X"
 
 #: layouts/account/history/list-body-default.html:14
-#: layouts/catalog/stock/body-default.html:23
+#: layouts/catalog/stock/body-default.html:21
 #: layouts/email/delivery/7/text-intro-body-default.html:15
 #: layouts/email/delivery/7/html-intro-body-default.html:16
 #: layouts/email/delivery/6/text-intro-body-default.html:15
@@ -824,7 +833,23 @@ msgstr "Bestellung"
 msgid "payment"
 msgstr "Zahlung"
 
-#: layouts/catalog/stock/body-default.html:22
+#. / code for "in stock"
+#: layouts/catalog/stock/body-default.html:29
+msgid "stock-high"
+msgstr "Auf Lager"
+
+#. / code for "only a few available"
+#: layouts/catalog/stock/body-default.html:27
+msgid "stock-low"
+msgstr "Nur noch wenige verfügbar"
+
+#. / code for "out ot stock"
+#: layouts/catalog/stock/body-default.html:25
+msgid "stock-out"
+msgstr "Zur Zeit ausverkauft"
+
+#. / code for "no stock limit"
+#: layouts/catalog/stock/body-default.html:31
 msgid "stock-unlimited"
 msgstr "verfügbar"
 

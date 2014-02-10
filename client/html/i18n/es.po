@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-01 18:12+0100\n"
-"PO-Revision-Date: 2014-02-01 17:13+0000\n"
+"POT-Creation-Date: 2014-02-10 14:59+0100\n"
+"PO-Revision-Date: 2014-02-10 13:42+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
-"Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias/language/es/)\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,9 +58,9 @@ msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%1
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: layouts/catalog/list/promo-body-default.html:17
 #: layouts/catalog/list/items-body-default.html:16
-#: layouts/catalog/session/seen-body-default.html:18
-#: layouts/catalog/detail/basket-body-default.html:13
+#: layouts/catalog/detail/basket-body-default.html:14
 #: layouts/catalog/detail/suggest-body-default.html:19
+#: layouts/catalog/detail/seen-body-default.html:17
 #: layouts/common/summary/detail-body-default.html:66
 #: layouts/basket/mini/main-body-default.html:23
 #: layouts/email/common/text-summary-detail-body-default.html:55
@@ -86,9 +86,9 @@ msgstr "%1$s en %2$s"
 #. / Percent format with value (%1$s) and % sign
 #: layouts/catalog/list/promo-body-default.html:19
 #: layouts/catalog/list/items-body-default.html:18
-#: layouts/catalog/session/seen-body-default.html:20
-#: layouts/catalog/detail/basket-body-default.html:15
+#: layouts/catalog/detail/basket-body-default.html:16
 #: layouts/catalog/detail/suggest-body-default.html:21
+#: layouts/catalog/detail/seen-body-default.html:19
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -110,7 +110,7 @@ msgstr "+ Comisiones de pago"
 msgid "+ Shipping"
 msgstr "+ Envío"
 
-#: layouts/catalog/detail/basket-body-default.html:48
+#: layouts/catalog/detail/basket-body-default.html:49
 msgid "Add to basket"
 msgstr "Añadir a la cesta"
 
@@ -155,6 +155,7 @@ msgstr "Falta al menos una parte de la dirección de facturación"
 msgid "At least one delivery address part is missing"
 msgstr "Falta al menos una parte de la dirección de entrega"
 
+#: layouts/basket/standard/body-default.html:40
 #: layouts/checkout/standard/address-body-default.html:17
 #: layouts/checkout/standard/payment-body-default.html:92
 #: layouts/checkout/standard/summary-body-default.html:18
@@ -162,7 +163,7 @@ msgstr "Falta al menos una parte de la dirección de entrega"
 msgid "Back"
 msgstr "Volver"
 
-#: layouts/basket/standard/body-default.html:37
+#: layouts/basket/standard/body-default.html:34
 #: layouts/basket/mini/body-default.html:23
 #: layouts/checkout/standard/body-default.html:25
 msgid "Basket"
@@ -191,7 +192,7 @@ msgstr "La categoría con ID \"%1$s\" no está por debajo del ID \"%2$s\""
 
 #: layouts/common/summary/address-body-default.html:24
 #: layouts/common/summary/address-body-default.html:78
-#: layouts/common/summary/detail-body-default.html:75
+#: layouts/common/summary/detail-body-default.html:76
 #: layouts/common/summary/service-body-default.html:19
 #: layouts/common/summary/service-body-default.html:53
 msgid "Change"
@@ -200,6 +201,10 @@ msgstr "Cambio"
 #: layouts/checkout/confirm/basic-body-default.html:35
 msgid "Change payment"
 msgstr "Cambiar pago"
+
+#: layouts/catalog/detail/additional-attribute-body-default.html:20
+msgid "Characteristics"
+msgstr ""
 
 #: layouts/basket/standard/body-default.html:44
 msgid "Checkout"
@@ -290,9 +295,13 @@ msgstr "Falta la parte \"%1$s\" de la dirección de entrega"
 msgid "Description"
 msgstr "Descripción"
 
-#: layouts/common/summary/detail-body-default.html:77
+#: layouts/common/summary/detail-body-default.html:78
 msgid "Details"
 msgstr "Detalles"
+
+#: layouts/catalog/detail/additional-download-body-default.html:20
+msgid "Downloads"
+msgstr ""
 
 #: layouts/checkout/standard/address-delivery-body-default.html:170
 #: layouts/checkout/standard/address-billing-body-default.html:166
@@ -335,13 +344,13 @@ msgstr "Acepto los <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditio
 msgid "If you have any questions, please reply to this e-mail"
 msgstr "Si tiene alguna pregunta, responda a este email"
 
-#: layouts/common/summary/detail-body-default.html:229
+#: layouts/common/summary/detail-body-default.html:230
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
 msgstr "Rebajas incluidas"
 
-#: layouts/common/summary/detail-body-default.html:221
+#: layouts/common/summary/detail-body-default.html:222
 #: layouts/email/common/text-summary-detail-body-default.html:104
 #, php-format
 msgid "Includes %1$s%% VAT"
@@ -396,7 +405,7 @@ msgstr "Idioma"
 msgid "Last name"
 msgstr "Apellido"
 
-#: layouts/catalog/session/seen-body-default.html:25
+#: layouts/catalog/session/seen-body-default.html:14
 msgid "Last seen"
 msgstr "Última vista"
 
@@ -464,7 +473,7 @@ msgstr "Página %1$d de %2$d"
 msgid "Payment"
 msgstr "Pago"
 
-#: layouts/common/summary/detail-body-default.html:205
+#: layouts/common/summary/detail-body-default.html:206
 msgid "Payment costs"
 msgstr "Comisiones de pago"
 
@@ -502,7 +511,7 @@ msgid "Postal code"
 msgstr "Código postal"
 
 #: layouts/catalog/list/pagination-body-default.html:26
-#: layouts/common/summary/detail-body-default.html:85
+#: layouts/common/summary/detail-body-default.html:86
 #: layouts/email/common/text-summary-detail-body-default.html:74
 msgid "Price"
 msgstr "Precio"
@@ -512,7 +521,7 @@ msgstr "Precio"
 msgid "Proceed"
 msgstr "Siguiente"
 
-#: layouts/common/summary/detail-body-default.html:84
+#: layouts/common/summary/detail-body-default.html:85
 #: layouts/email/common/text-summary-detail-body-default.html:72
 msgid "Quantity"
 msgstr "Cantidad"
@@ -559,7 +568,7 @@ msgstr "Tarifas del servicio"
 msgid "Services"
 msgstr "Servicios"
 
-#: layouts/common/summary/detail-body-default.html:197
+#: layouts/common/summary/detail-body-default.html:198
 msgid "Shipping"
 msgstr "Envío"
 
@@ -599,7 +608,7 @@ msgstr "Stock: %1$s, %2$s, de vuelta el %3$s"
 msgid "Street"
 msgstr "Calle"
 
-#: layouts/common/summary/detail-body-default.html:190
+#: layouts/common/summary/detail-body-default.html:191
 #: layouts/email/common/text-summary-detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:97
 msgid "Sub-total"
@@ -609,7 +618,7 @@ msgstr "Subtotal"
 msgid "Suggested products"
 msgstr "Productos recomendados"
 
-#: layouts/common/summary/detail-body-default.html:86
+#: layouts/common/summary/detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:76
 msgid "Sum"
 msgstr "Suma"
@@ -692,7 +701,7 @@ msgstr "El pago de su pedido %1$s desde %2$s le ha sido devuelto."
 msgid "Top seller"
 msgstr "Éxito de ventas"
 
-#: layouts/common/summary/detail-body-default.html:213
+#: layouts/common/summary/detail-body-default.html:214
 #: layouts/email/common/text-summary-detail-body-default.html:93
 #: layouts/email/common/text-summary-detail-body-default.html:101
 msgid "Total"
@@ -729,12 +738,12 @@ msgstr "Hemos recibido el paquete devuelto de su pedido %1$s desde %2$s."
 msgid "Web site"
 msgstr "Sitio web"
 
-#: layouts/common/summary/detail-body-default.html:143
+#: layouts/common/summary/detail-body-default.html:144
 msgid "X"
 msgstr "X"
 
 #: layouts/account/history/list-body-default.html:14
-#: layouts/catalog/stock/body-default.html:23
+#: layouts/catalog/stock/body-default.html:21
 #: layouts/email/delivery/7/text-intro-body-default.html:15
 #: layouts/email/delivery/7/html-intro-body-default.html:16
 #: layouts/email/delivery/6/text-intro-body-default.html:15
@@ -820,7 +829,23 @@ msgstr "pedido"
 msgid "payment"
 msgstr "pago"
 
-#: layouts/catalog/stock/body-default.html:22
+#. / code for "in stock"
+#: layouts/catalog/stock/body-default.html:29
+msgid "stock-high"
+msgstr ""
+
+#. / code for "only a few available"
+#: layouts/catalog/stock/body-default.html:27
+msgid "stock-low"
+msgstr ""
+
+#. / code for "out ot stock"
+#: layouts/catalog/stock/body-default.html:25
+msgid "stock-out"
+msgstr ""
+
+#. / code for "no stock limit"
+#: layouts/catalog/stock/body-default.html:31
 msgid "stock-unlimited"
 msgstr "sin límite de stock"
 
