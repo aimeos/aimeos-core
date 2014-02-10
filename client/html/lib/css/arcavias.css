@@ -8,13 +8,13 @@
 	background-size: contain;
 	box-shadow: 2px 2px 4px #5C88A1;
 	border: 1px solid #689DB9;
-	border-radius: 4px;
+	border-radius: 0.3em;
 	text-decoration: none;
 	font-weight: bold;
 	font-size: 100%;
 	color: #FFFFFF;
-	padding: 4px;
-	margin: 5px;
+	padding: 0.4em;
+	margin: 0.25em;
 	min-width: 6em;
 	line-height: 1em;
 	display: inline-block;
@@ -83,6 +83,10 @@
 	max-width: 800px;
 	width: 96%;
 	padding: 2%;
+}
+
+.arcavias .header {
+	border-radius: 0.5em;
 }
 
 
@@ -894,6 +898,7 @@
 	padding: 0.5em;
 	margin-top: 1em;
 	text-align: right;
+	border-radius: 0.5em;
 	background-color: #88B3CB;
 }
 
@@ -902,10 +907,6 @@
 	text-align: center;
 	height: 1.6em;
 	width: 3em;
-}
-
-.catalog-detail-basket .group .standardbutton {
-	font-size: 150%;
 }
 
 /* product attributes */
@@ -937,12 +938,16 @@
 }
 
 .catalog-detail-additional .content {
-	padding: 1% 0 1% 0.5%;
+	padding: 1%;
+}
+
+.catalog-detail-additional .item {
+	padding: 1%;
 }
 
 /* Product detail, additional attributes section */
 .catalog-detail-additional table.attributes {
-	margin: 2% 1%;
+	margin: 1%;
 	width: 98%;
 }
 
@@ -952,7 +957,7 @@
 
 .catalog-detail-additional .attributes td {
 	vertical-align: middle;
-	padding: 0.5em;
+	padding: 1%;
 	width: 50%;
 }	
 
@@ -966,8 +971,6 @@
 
 /* Product detail, additional download section */
 .catalog-detail-additional ul.downloads {
-	margin: 2% 1%;
-	width: 98%;
 }
 
 .catalog-detail-additional .downloads .media-image {
