@@ -34,7 +34,7 @@ else
 <?php	endforeach; ?>
 <?php echo $this->get( 'paymentBody' ); ?>
 		<noscript>
-			<button class="standardbutton"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
+			<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Proceed' ), $enc::TRUST ); ?></button>
 		</noscript>
 	</form>
 <?php endif; ?>

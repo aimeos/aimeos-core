@@ -26,7 +26,7 @@ $enc = $this->encoder();
 <?php echo $this->get( 'filterBody' ); ?>
 <?php if( $this->config( 'client/html/catalog/filter/default/button', true ) ) : ?>
 			<noscript>
-				<button class="filter standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
+				<button class="filter standardbutton btn-action" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
 			</noscript>
 <?php endif; ?>
 		</form>

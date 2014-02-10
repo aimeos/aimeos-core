@@ -37,11 +37,11 @@ $enc = $this->encoder();
 <?php echo $this->get( 'standardBody' ); ?>
 		<div class="button-group">
 <?php if( isset( $this->standardBackUrl ) ) : ?>
-			<a class="standardbutton back" href="<?php echo $enc->attr( $this->standardBackUrl ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a>
+			<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->standardBackUrl ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
-			<button class="standardbutton update" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Update' ), $enc::TRUST ); ?></button>
+			<button class="standardbutton btn-update" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Update' ), $enc::TRUST ); ?></button>
 <?php if( $checkout === true ) : ?>
-			<a class="standardbutton checkout" href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Checkout' ), $enc::TRUST ); ?></a>
+			<a class="standardbutton btn-action" href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Checkout' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 	</form>

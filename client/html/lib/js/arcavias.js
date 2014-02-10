@@ -290,7 +290,7 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Update quantity and delete without page reload */
-	$("body").on("click", ".basket-standard a.change", function(event) {
+	$("body").on("click", ".basket-standard .change", function(event) {
 
 		$.post($(this).attr("href"), function(data) {
 			var doc = document.createElement("html");
@@ -302,7 +302,7 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Go back to underlying page */
-	$("body").on("click", ".basket-standard a.back", function(event) {
+	$("body").on("click", ".basket-standard .btn-back", function(event) {
 		var container = $(".arcavias-container");
 		var overlay = $(".arcavias-overlay");
 		
