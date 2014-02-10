@@ -29,7 +29,7 @@ class Client_Html_Catalog_Detail_Basket_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -51,7 +51,7 @@ class Client_Html_Catalog_Detail_Basket_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -99,5 +99,23 @@ class Client_Html_Catalog_Detail_Basket_Default
 	public function process()
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		if( !isset( $this->_cache ) )
+		{
+			$view->basketParams = $this->_getClientParams( $view->param() );
+
+			$this->_cache = $view;
+		}
+
+		return $this->_cache;
 	}
 }

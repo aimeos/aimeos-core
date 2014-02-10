@@ -8,6 +8,7 @@
 $basketTarget = $this->config( 'client/html/basket/standard/url/target' );
 $basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
 $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+$basketParams = $this->get( 'basketParams', array() );
 
 /// Price format with price value (%1$s) and currency (%2$s)
 $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
@@ -38,7 +39,7 @@ $enc = $this->encoder();
 <?php	endif; ?>
 <?php endif; ?>
 	</div>
-	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction ) ); ?>">
+	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $basketParams ) ); ?>">
 <?php echo $this->get( 'basketBody' ); ?>
 		<div class="addbasket">
 			<div class="group">

@@ -261,7 +261,27 @@ class Client_Html_Basket_Standard_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
+			$params = $this->_getClientParams( $view->param() );
+
+			if( isset( $params['l-product-id'] ) )
+			{
+				$target = $view->config( 'client/html/catalog/detail/url/target' );
+				$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+				$action = $view->config( 'client/html/catalog/detail/url/action', 'detail' );
+
+				$view->standardBackUrl = $view->url( $target, $controller, $action, $params );
+			}
+			else if( count( $this->_getClientParams( $view->param(), array( 'f' ) ) ) > 0 )
+			{
+				$target = $view->config( 'client/html/catalog/list/url/target' );
+				$controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
+				$action = $view->config( 'client/html/catalog/list/url/action', 'list' );
+
+				$view->standardBackUrl = $view->url( $target, $controller, $action, $params );
+			}
+
 			$view->standardBasket = $this->_controller->get();
+			$view->standardParams = $params;
 
 			$this->_cache = $view;
 		}

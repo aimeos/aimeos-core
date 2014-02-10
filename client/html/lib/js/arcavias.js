@@ -237,6 +237,82 @@ jQuery(document).ready( function($) {
 		return false;
 	});
 
+	/* Add to basket without page reload */
+	$(".catalog-detail-basket form").on("submit", function(event) {
+
+		var overlay = $(document.createElement("div"));
+		overlay.addClass("arcavias-overlay");
+		overlay.fadeTo(1000, 0.5);
+		$("body").append(overlay);
+
+		$.post($(this).attr("action"), $(this).serialize(), function(data) {
+			var doc = document.createElement("html");
+			doc.innerHTML = data;
+			
+			var basket = $(document.createElement("div"));
+			basket.addClass("arcavias-container");
+			basket.append( $(".basket-standard", doc) );
+			basket.fadeTo(400, 1.0);
+			$("body").append(basket);
+			
+			var resize = function() {
+				var jqwin = $(window);
+				var left = (jqwin.width() - basket.outerWidth()) / 2;
+				var top = (jqwin.height() - basket.outerHeight()) / 2;
+
+				basket.css("left", (left>0 ? left : 0 ));
+				basket.css("top", (top>0 ? top : 0 ));
+			};
+			
+			$(window).on("resize", resize);
+			resize();
+		});
+
+		return false;
+	});
+
+	
+	/*
+	 * Basket clients
+	 */
+	
+	/* Update without page reload */
+	$("body").on("submit", ".basket-standard form", function(event) {
+		var form = $(this);
+
+		$.post(form.attr("action"), form.serialize(), function(data) {
+			var doc = document.createElement("html");
+			doc.innerHTML = data;
+			$(".basket-standard").html( $(".basket-standard", doc).html() );
+		});
+
+		return false;
+	});
+
+	/* Update quantity and delete without page reload */
+	$("body").on("click", ".basket-standard a.change", function(event) {
+
+		$.post($(this).attr("href"), function(data) {
+			var doc = document.createElement("html");
+			doc.innerHTML = data;
+			$(".basket-standard").html( $(".basket-standard", doc).html() );
+		});
+
+		return false;
+	});
+
+	/* Go back to underlying page */
+	$("body").on("click", ".basket-standard a.back", function(event) {
+		var container = $(".arcavias-container");
+		var overlay = $(".arcavias-overlay");
+		
+		if( container.size() + overlay.size() > 0 ) {
+			container.remove();
+			overlay.remove();
+			return false;
+		}
+	});
+	
 	
 	/*
 	 * Checkout clients
