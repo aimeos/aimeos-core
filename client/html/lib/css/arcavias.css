@@ -491,6 +491,15 @@
 	border: 1px solid #C3D9E5;
 }
 
+.catalog-filter-attribute .media-list {
+	display: inline-block;
+}
+
+.catalog-filter-attribute .media-item img {
+	height: 1em;
+	width: 1em;
+}
+
 
 /* Product list, stage section */
 .catalog-stage-breadcrumb .breadcrumb {
@@ -976,12 +985,13 @@
 
 .catalog-detail-additional .attributes .media-item {
 	display: inline-block;
+}
+
+.catalog-detail-additional .attributes img {
+	height: 20px;
 }	
 
 /* Product detail, additional download section */
-.catalog-detail-additional ul.downloads {
-}
-
 .catalog-detail-additional .downloads .media-image {
 	height: 40px;
 }

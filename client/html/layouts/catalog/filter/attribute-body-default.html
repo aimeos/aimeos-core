@@ -6,6 +6,7 @@
  */
 
 $enc = $this->encoder();
+$contentUrl = $this->config( 'client/html/common/content/baseurl' );
 $attrIds = $this->param( 'f-attr-id', array() );
 
 if( is_string( $attrIds ) ) {
@@ -24,6 +25,16 @@ $attrIds = array_flip( $attrIds );
 <?php		foreach( $attributes as $id => $attribute ) : ?>
 		<li class="attr-item" data-id="<?php echo $id; ?>">
 			<input class="attr-item" name="<?php echo $enc->attr( $this->formparam( array( 'f-attr-id', $id ) ) ); ?>" type="checkbox" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : '' ); ?> />
+			<div class="media-list">
+<?php
+			foreach( $attribute->getListItems( 'media', 'default' ) as $listItem )
+			{
+				if( ( $item = $listItem->getRefItem() ) !== null ) {
+					echo $this->media( $item, $contentUrl, array( 'class' => 'media-item' ) );
+				}
+			}
+?>
+			</div>
 			<span class="attr-name"><?php echo $enc->html( $attribute->getName(), $enc::TRUST ); ?></span>
 		</li>
 <?php 		endforeach; ?>

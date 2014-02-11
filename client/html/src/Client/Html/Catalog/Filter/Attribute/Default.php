@@ -126,7 +126,7 @@ class Client_Html_Catalog_Filter_Attribute_Default
 			$search->setSortations( array( $search->sort( '+', 'attribute.position' ) ) );
 			$search->setSlice( 0, 1000 );
 
-			foreach( $manager->searchItems( $search, array( 'text' ) ) as $id => $item ) {
+			foreach( $manager->searchItems( $search, array( 'text', 'media' ) ) as $id => $item ) {
 				$attrMap[ $item->getType() ][$id] = $item;
 			}
 
