@@ -976,12 +976,13 @@
 
 .catalog-detail-additional .attributes .media-item {
 	display: inline-block;
+}
+
+.catalog-detail-additional .attributes img {
+	height: 20px;
 }	
 
 /* Product detail, additional download section */
-.catalog-detail-additional ul.downloads {
-}
-
 .catalog-detail-additional .downloads .media-image {
 	height: 40px;
 }
