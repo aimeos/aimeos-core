@@ -23,17 +23,20 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 ?>
 <div class="catalog-detail-image">
 	<div class="image-single">
-		<a id="prev-image" class="disabled"></a>
-		<a id="next-image" class="disabled"></a>
 		<div class="carousel">
 <?php foreach( $mediaItems as $id => $mediaItem ) : ?>
-			<div id="image-<?php echo $enc->attr( $id ); ?>" class="item" style="background-image: url('<?php echo $contentUrl . $mediaItem->getUrl(); ?>')"></div>
+<?php	$previewUrl = $enc->attr( $contentUrl . $mediaItem->getPreview() ); ?>
+			<div id="image-<?php echo $enc->attr( $id ); ?>" class="item"
+				style="background-image: url('<?php echo $previewUrl; ?>')"
+				data-image="<?php echo $previewUrl; ?>"
+				data-zoom-image="<?php echo $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>">
+			</div>
 <?php endforeach; ?>
 		</div>
 	</div>
 	<div class="image-thumbs">
-		<a id="prev-thumbs" class="disabled"></a>
-		<a id="next-thumbs" class="disabled"></a>
+		<a class="prev-thumbs disabled"></a>
+		<a class="next-thumbs disabled"></a>
 		<div class="thumbs">
 <?php
 	if( count( $mediaItems ) > 1 )
