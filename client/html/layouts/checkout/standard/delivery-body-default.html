@@ -56,7 +56,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php	endif; ?>
 				<div class="icons">
 <?php	foreach( $service->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
-					<img src="<?php echo $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>" />
+					<img src="<?php echo $enc->attr( $contentUrl . $mediaItem->getPreview() ); ?>" />
 <?php	endforeach; ?>
 				</div>
 				<h2><?php echo $enc->html( $service->getName() ); ?></h2>
