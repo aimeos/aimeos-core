@@ -104,7 +104,7 @@ class MW_View_Helper_Media_Default
 					$tag = '';
 			}
 
-			$string .= sprintf( $tag, $mediaItem->getUrl(), $mimetype );
+			$string .= sprintf( $tag, $mediaItem->getPreview(), $mimetype );
 		}
 
 		return $string;
