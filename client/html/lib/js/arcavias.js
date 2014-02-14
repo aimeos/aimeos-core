@@ -105,7 +105,7 @@ jQuery(document).ready( function($) {
 		},
 		select: function( event, ui ) {
 			arcaviasInputComplete.val( ui.item.value );
-			$(ui).parents(".catalog-filter form").submit();
+			$(event.target).parents(".catalog-filter form").submit();
 		}
 	} );
 
