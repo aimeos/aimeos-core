@@ -5,6 +5,10 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-echo $this->get( 'basketHeader' );
+$enc = $this->encoder();
 
 ?>
+<?php if( ( $url = $this->get( 'basketStockUrl' ) ) != null ) : ?>
+<script type="text/javascript" defer="defer" src="<?php echo $enc->attr( $url ); ?>"></script>
+<?php endif; ?>
+<?php echo $this->get( 'basketHeader' ); ?>

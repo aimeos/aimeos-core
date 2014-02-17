@@ -111,6 +111,23 @@ class Client_Html_Catalog_Detail_Basket_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
+			$config = $this->_getContext()->getConfig();
+
+			if( isset( $view->detailProductItem ) && $config->get( 'client/html/catalog/detail/stock/enable', true ) === true )
+			{
+				$stockTarget = $config->get( 'client/html/catalog/stock/url/target' );
+				$stockController = $config->get( 'client/html/catalog/stock/url/controller', 'catalog' );
+				$stockAction = $config->get( 'client/html/catalog/stock/url/action', 'stock' );
+				$stockConfig = $config->get( 'client/html/catalog/stock/url/config', array() );
+
+				$prodIds = array_keys( $view->detailProductItem->getRefItems( 'product', null, 'default' ) );
+				array_unshift( $prodIds, $view->detailProductItem->getId() );
+				$params = array( 's-product-id' => $prodIds );
+
+				$view->basketStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
+				$view->basketProductIds = $prodIds;
+			}
+
 			$view->basketParams = $this->_getClientParams( $view->param() );
 
 			$this->_cache = $view;

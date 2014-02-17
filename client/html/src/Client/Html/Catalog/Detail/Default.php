@@ -186,17 +186,6 @@ class Client_Html_Catalog_Detail_Default
 			$domains = $config->get( 'client/html/catalog/detail/default/domains', $default );
 			$prodid = $view->param( 'l-product-id' );
 
-			if( $config->get( 'client/html/catalog/detail/stock/enable', true ) === true )
-			{
-				$stockTarget = $config->get( 'client/html/catalog/stock/url/target' );
-				$stockController = $config->get( 'client/html/catalog/stock/url/controller', 'catalog' );
-				$stockAction = $config->get( 'client/html/catalog/stock/url/action', 'stock' );
-				$stockConfig = $config->get( 'client/html/catalog/stock/url/config', array() );
-
-				$params = array( 's-product-id' => $prodid );
-				$view->detailStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
-			}
-
 
 			$manager = MShop_Factory::createManager( $context, 'product' );
 			$productItem = $manager->getItem( $prodid, $domains );

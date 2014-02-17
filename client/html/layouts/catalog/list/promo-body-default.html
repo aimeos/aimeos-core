@@ -24,7 +24,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Top seller' ); ?></h2>
 <?php	foreach( $productItems as $id => $productItem ) : ?>
 <?php		$firstImage = true; $params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'l-product-id' => $id ); ?>
-	<div class="product" data-id="<?php echo $id; ?>">
+	<div class="product">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params + $this->listParams ) ); ?>">
 			<div class="media-list">
 <?php		foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
@@ -60,7 +60,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 				</div>
 <?php		endforeach; ?>
 			</div>
-			<div class="stock"></div>
+			<div class="stock" data-prodid="<?php echo $id; ?>"></div>
 		</a>
 	</div>
 <?php	endforeach; ?>

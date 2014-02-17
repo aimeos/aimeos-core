@@ -59,7 +59,7 @@ class Client_Html_Catalog_Detail_Basket_DefaultTest extends MW_Unittest_Testcase
 		$view->detailProductItem = $this->_getProductItem();
 
 		$output = $this->_object->getHeader();
-		$this->assertEquals( '', $output );
+		$this->assertStringStartsWith( '<script type="text/javascript" defer="defer" src="http://baseurl/catalog/stock/?s-product-id', $output );
 	}
 
 
