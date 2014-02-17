@@ -619,7 +619,7 @@
 	display: none;
 }
 
-.catalog-list .stockitem:first-child {
+.catalog-list .stock-actual {
 	display: block;
 }
 
@@ -866,23 +866,55 @@
 	margin: 0px 0px 0px 252px;
 }
 
-/* main price */
+.catalog-detail-basket .price {
+	margin: 1.5em 0;
+	color: #004266;
+	display: none;
+}
+
+
 .catalog-detail-basket .price-item {
-	margin-top: 1.5em;
+	margin: 0.75em 0;
 }
 
 .catalog-detail-basket .price-item .quantity,
-.catalog-detail-basket .price-item .rebatepercent,
+.catalog-detail-basket .price-item .value,
 .catalog-detail-basket .price-item .rebate,
-.catalog-detail-basket .price-item .shipping,
+.catalog-detail-basket .price-item .rebatepercent,
+.catalog-detail-basket .price-item .taxrate {
+	display: inline-block;
+	min-width: 5em;
+}
+
+.catalog-detail-basket .price-actual,
+.catalog-detail-basket .price-item:first-child .taxrate {
+	display: block;
+}
+
+.catalog-detail-basket .price-item:first-child .quantity,
+.catalog-detail-basket .price-item .rebate,
 .catalog-detail-basket .price-item .taxrate {
 	display: none;
 }
 
-.catalog-detail-basket .price-item .value {
-	color: #004266;
-	font-weight: bold;
+.catalog-detail-basket .price-item:first-child .value {
 	font-size: 1.5em;
+}
+
+.catalog-detail-basket .price-item .value {
+	font-weight: bold;
+}
+
+.catalog-detail-basket .price-item .rebatepercent {
+	color: #FF0000;
+}
+
+.catalog-detail-basket .price-item .rebatepercent:before {
+	content: '(';
+}
+
+.catalog-detail-basket .price-item .rebatepercent:after {
+	content: ')';
 }
 
 /* add to basket */
@@ -902,8 +934,8 @@
 }
 
 /* product attributes */
-.catalog-detail-basket-selection,
-.catalog-detail-basket-attribute {
+.catalog-detail-basket-selection .select-name,
+.catalog-detail-basket-attribute .select-name {
 	margin-top: 1.5em;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -971,24 +1003,32 @@
 
 
 /* Stock level */
-.catalog-detail-basic .stock {
+.catalog-detail .stock {
 	margin: 0.5em 0;
 }
 
-.catalog-detail-basic .stocklevel {
+.catalog-detail .stockitem {
 	display: none;
 }
 
-.catalog-detail-basic .stock-unlimited,
-.catalog-detail-basic .stock-high {
+.catalog-detail .stock-actual {
+	display: block;
+}
+
+.catalog-detail .stocklevel {
+	display: none;
+}
+
+.catalog-detail .stock-unlimited,
+.catalog-detail .stock-high {
 	color: #0BA008;
 }
 
-.catalog-detail-basic .stock-low {
+.catalog-detail .stock-low {
 	color: #F0A008;
 }
 
-.catalog-detail-basic .stock-out {
+.catalog-detail .stock-out {
 	color: #F01800;
 }
 
