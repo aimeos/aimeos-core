@@ -72,7 +72,7 @@ jQuery(document).ready( function($) {
 
 	/* Slider for thumbnail gallery (small ones) */
 	$(".catalog-detail-image .thumbs").carouFredSel({
-		responsive: false,
+		responsive: true,
 		circular: false,
 		infinite: false,
 		auto: false,
@@ -129,4 +129,149 @@ jQuery(document).ready( function($) {
 		return false;
 	});
 
+	
+
+	/**
+	 * Evaluates the product variant dependencies.
+	 * 
+	 * It does not only work with <select> and <option> tags but also if a
+	 * 
+	 * <div class="select-list" data-index="<index value: 0-30>"> and
+	 * 
+	 * <input class="select-option" type="radio"> or
+	 * <input class="select-option" type="checkbox">
+	 * 
+	 * are used. The data-index attribute of the .select-list container is
+	 * required to calculate the disabled attributes for each option according
+	 * to its dependencies. It must start with "0" and an unique, ascending value
+	 * must be assigned to each container. The maximum number of possible indexes
+	 * (and therefore dependent containers within an .selection node) is 31
+	 * because it's an integer bitmap.
+	 */
+	$(".catalog-detail-basket-selection").on("change", ".select-list", function(event) {
+
+		var elem = $(this);
+		var index = elem.data("index");
+		var value = elem.find(".select-option:checked").val();
+		
+		var attrDeps = $(event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
+		var prodDeps = $(event.delegateTarget).data("proddeps") || {}; // {"<prodid>":["attrid",...],...}
+		var attrMap = {}, attrList = [];
+
+		
+		if( typeof index === "undefined" ) {
+			throw new Error( "HTML select node has no attribute data-index" );
+		}
+		
+
+		// Retrieves the list of available attribute ID => product ID
+		// combinations for the selected value
+		if( attrDeps.hasOwnProperty(value) ) {
+
+			for( var i=0; i<attrDeps[value].length; i++ ) {
+				
+				var prodId = attrDeps[value][i];
+
+				if( prodDeps.hasOwnProperty(prodId) ) {
+
+					for( var j=0; j<prodDeps[prodId].length; j++ ) {
+						attrMap[prodDeps[prodId][j]] = prodId;
+					}
+				}
+			}
+		}
+
+	
+		$(".select-list", event.delegateTarget).each(function(i, select) {
+			
+			if( event.currentTarget == select ) {
+				return;
+			}
+
+			$(this).find(".select-option").each(function(i, option) {
+				
+				var opt = $(option);
+				var val = opt.val();
+				var by = opt.data("by") || {};
+				var disabled = opt.data("disabled") || 0;
+				
+				
+				// Sets or removes the disabled bits in the bitmap of the
+				// .select-option and by which .select-list it was disabled.
+				// Each option can be disabled by multiple dependencies and
+				// we can remove each of the bits separately again.
+				if( value !== "" && val !== "" && !attrMap.hasOwnProperty(val) ) {
+					disabled |= Math.pow(2, index);
+					by[index] = 1;
+				} else if( by.hasOwnProperty(index) ) {
+					disabled &= ~Math.pow(2, index);
+					delete by[index];
+				}
+				
+				if( disabled > 0 ) {
+					opt.attr("disabled", "disabled");
+				} else {
+					opt.removeAttr("disabled");
+				}
+
+				opt.data("disabled", disabled);
+				opt.data("by", by);
+			});
+		});
+	});
+		
+
+		
+	$(".catalog-detail-basket").on("change", ".selection .select-list", function(event) {
+
+		var map = {}, len = 0;
+		var attrDeps = $(".catalog-detail-basket-selection", event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
+
+		
+		$(".select-option:checked", event.delegateTarget).each(function(i, option) {
+		
+			var value = $(option).val();			
+
+			if( value !== "" && attrDeps.hasOwnProperty(value) ) {
+
+				for( var i=0; i<attrDeps[value].length; i++ ) {
+					
+					if( map.hasOwnProperty(attrDeps[value][i]) ) {
+						map[attrDeps[value][i]]++;
+					} else {
+						map[attrDeps[value][i]] = 1;
+					}
+				}
+			}
+			
+			len++;
+		});
+		
+		
+		for( var prodId in map ) {
+			
+			if( map.hasOwnProperty(prodId) && map[prodId] === len ) {
+
+				var parent = $(event.delegateTarget);
+				var newPrice = parent.find(".price-prodid-" + prodId);
+				var newStock = parent.find(".stock-prodid-" + prodId);
+				
+				parent.find(".price").removeClass("price-actual");
+
+				if( newPrice.length === 0 ) {
+					$(".price-main", parent).addClass("price-actual");
+				} else {
+					newPrice.addClass("price-actual");
+				}
+				
+				parent.find(".stockitem").removeClass("stock-actual");
+
+				if( newStock.length === 0 ) {
+					$(".stockitem:first-child", parent).addClass("stock-actual");
+				} else {
+					newStock.addClass("stock-actual");
+				}
+			}
+		}
+	});
 });

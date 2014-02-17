@@ -5,30 +5,39 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$index = 0;
 $enc = $this->encoder();
-
 $attributes = $this->get( 'selectionAttributeItems', array() );
+$prodDeps = json_encode( $this->get( 'selectionProductDependencies', new stdClass() ) );
+$attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdClass() ) );
+
 
 ?>
-<div class="catalog-detail-basket-selection">
-	<table>
-		<tbody>
-<?php foreach( $this->get( 'selectionAttributeMap', array() ) as $code => $list ) : ?>
-			<tr>
-				<td><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></td>
-				<td>
-					<select name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrvar-id', $code ) ) ); ?>">
-						<option value=""><?php echo $enc->attr( $this->translate( 'client/html', 'Please select' ) ); ?></option>
-<?php	foreach( $list as $id => $value ) : ?>
-<?php		if( isset( $attributes[$id] ) ) : ?>
-						<option value="<?php echo $enc->attr( $id ); ?>"><?php echo $enc->html( $attributes[$id]->getName() ); ?></option>
+<div class="catalog-detail-basket-selection" data-proddeps="<?php echo $enc->attr( $prodDeps ); ?>" data-attrdeps="<?php echo $enc->attr( $attrDeps ); ?>">
+<?php foreach( $this->get( 'selectionProducts', array() ) as $prodid => $product ) : ?>
+<?php	$prices = $product->getRefItems( 'price', 'default', 'default' ); ?>
+<?php	if( !empty( $prices ) ) : ?>
+	<div class="price price-prodid-<?php echo $prodid; ?>">
+<?php		echo $this->price( $prices ); ?>
+	</div>
+<?php	endif; ?>
+<?php endforeach; ?>
+	<table class="selection">
+<?php foreach( $this->get( 'selectionAttributeTypeDependencies', array() ) as $type => $attrIds ) : ?>
+		<tr class="select-item">
+			<td class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $type ) ); ?></td>
+			<td class="select-value">
+				<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrvar-id', $type ) ) ); ?>" data-index="<?php echo $index++; ?>">
+					<option class="select-option" value=""><?php echo $enc->attr( $this->translate( 'client/html', 'Please select' ) ); ?></option>
+<?php	foreach( $attrIds as $attrId => $value ) : ?>
+<?php		if( isset( $attributes[$attrId] ) ) : ?>
+					<option class="select-option" value="<?php echo $enc->attr( $attrId ); ?>"><?php echo $enc->html( $attributes[$attrId]->getName() ); ?></option>
 <?php		endif; ?>
 <?php	endforeach; ?>
-					</select>
-				</td>
-			</tr>
+				</select>
+			</td>
+		</tr>
 <?php endforeach; ?>
-		</tbody>
 	</table>
 <?php echo $this->get( 'selectionBody' ); ?>
 </div>

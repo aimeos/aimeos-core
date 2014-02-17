@@ -78,11 +78,11 @@ class Client_Html_Catalog_Detail_Basket_Selection_DefaultTest extends MW_Unittes
 		$this->assertStringStartsWith( '<div class="catalog-detail-basket-selection', $output );
 
 		foreach( $variantAttr1 as $id => $item ) {
-			$this->assertRegexp( '#<option value="' . $id . '">#', $output );
+			$this->assertRegexp( '#<option class="select-option" value="' . $id . '">#', $output );
 		}
 
 		foreach( $variantAttr2 as $id => $item ) {
-			$this->assertRegexp( '#<option value="' . $id . '">#', $output );
+			$this->assertRegexp( '#<option class="select-option" value="' . $id . '">#', $output );
 		}
 	}
 

@@ -126,15 +126,18 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
-				$attrIds = $attrMap = array();
 				$domains = array( 'text', 'price', 'media', 'attribute' );
+				$subproducts = $productManager->searchItems( $search, $domains );
+				$attrIds = $attrMap = $prodDeps = $attrDeps = $attrTypeDeps = array();
 
-				foreach( $productManager->searchItems( $search, $domains ) as $subProduct )
+				foreach( $subproducts as $subProdId => $subProduct )
 				{
-					foreach( $subProduct->getRefItems( 'attribute', null, 'variant' ) as $id => $attrItem )
+					foreach( $subProduct->getRefItems( 'attribute', null, 'variant' ) as $attrId => $attrItem )
 					{
-						$attrMap[ $attrItem->getType() ][$id] = $attrItem;
-						$attrIds[] = $id;
+						$attrTypeDeps[ $attrItem->getType() ][$attrId] = 1;
+						$attrDeps[$attrId][] = $subProdId;
+						$prodDeps[$subProdId][] = $attrId;
+						$attrIds[] = $attrId;
 					}
 				}
 
@@ -145,8 +148,11 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
+				$view->selectionProducts = $subproducts;
+				$view->selectionProductDependencies = $prodDeps;
+				$view->selectionAttributeDependencies = $attrDeps;
+				$view->selectionAttributeTypeDependencies = $attrTypeDeps;
 				$view->selectionAttributeItems = $attrManager->searchItems( $search, array( 'text', 'media' ) );
-				$view->selectionAttributeMap = $attrMap;
 			}
 
 			$this->_cache = $view;
