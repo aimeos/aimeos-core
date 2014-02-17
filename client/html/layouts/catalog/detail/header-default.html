@@ -18,7 +18,4 @@ $enc = $this->encoder();
 <?php	endforeach; ?>
 <?php endif; ?>
 <meta name="application-name" content="Arcavias" />
-<?php if( ( $url = $this->get( 'detailStockUrl' ) ) != null ) : ?>
-<script type="text/javascript" defer="defer" src="<?php echo $enc->attr( $url ); ?>"></script>
-<?php endif; ?>
 <?php echo $this->get( 'detailHeader' ); ?>

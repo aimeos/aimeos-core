@@ -36,7 +36,7 @@ foreach( $stockProductIds as $prodId )
 {
 	if( !isset( $stockItemsByProducts[$prodId] ) )
 	{
-		$result[$prodId] = '<div class="stockitem stock-unlimited"><div class="stocklevel"></div><span class="stocktext">' . $textStock['stock-unlimited'] . '</span></div>';
+		$result[$prodId] = '<div class="stockitem stock-prodid-' . $prodId . ' stock-unlimited"><div class="stocklevel"></div><span class="stocktext">' . $textStock['stock-unlimited'] . '</span></div>';
 		continue;
 	}
 
@@ -80,20 +80,31 @@ foreach( $stockProductIds as $prodId )
 		}
 
 		$text = nl2br( $enc->html( $text, $enc::TRUST ) );
-		$stocks[$level] .= '<div class="stockitem ' . $level . '"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
+		$stocks[$level] .= '<div class="stockitem stock-prodid-' . $prodId . ' ' . $level . '"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
 	}
 
 	$result[$prodId] = implode( '', $stocks );
 }
 
 ?>
+// <!--
+var arcaviasStockHtml = <?php echo json_encode( $result, JSON_FORCE_OBJECT ); ?>;
 
-var stockHtml = <?php echo json_encode( $result, JSON_FORCE_OBJECT ); ?>;
+$( ".arcavias .product .stock" ).each( function( index, product ) {
 
-$( ".arcavias .product" ).each( function( index, product ) {
-	var productId = $(product).data( "id" );
+	var html = "";
+	var elem = $(this);
+	var productIds = String( elem.data("prodid") ).split(" ");
 	
-	if( stockHtml[productId] ) {
-		$( ".stock", product ).html( stockHtml[productId] );
+	for( var i=0; i<productIds.length; i++ ) {
+		if( arcaviasStockHtml[productIds[i]] ) {
+			html += arcaviasStockHtml[productIds[i]];
+		}
+	}
+	
+	if( html !== '' ) {
+		elem.html( html );
+		$(".stockitem:first-child", elem).addClass("stock-actual");
 	}
 } );
+// -->
