@@ -58,7 +58,7 @@ class Controller_ExtJS_Price_Default
 			if( isset( $entry->{'price.label'} ) ) { $item->setLabel( $entry->{'price.label'} ); }
 			if( isset( $entry->{'price.quantity'} ) ) { $item->setQuantity( $entry->{'price.quantity'} ); }
 			if( isset( $entry->{'price.value'} ) ) { $item->setValue( $entry->{'price.value'} ); }
-			if( isset( $entry->{'price.shipping'} ) ) { $item->setCosts( $entry->{'price.shipping'} ); }
+			if( isset( $entry->{'price.costs'} ) ) { $item->setCosts( $entry->{'price.costs'} ); }
 			if( isset( $entry->{'price.rebate'} ) ) { $item->setRebate( $entry->{'price.rebate'} ); }
 			if( isset( $entry->{'price.taxrate'} ) ) { $item->setTaxRate( $entry->{'price.taxrate'} ); }
 			if( isset( $entry->{'price.status'} ) ) { $item->setStatus( $entry->{'price.status'} ); }
