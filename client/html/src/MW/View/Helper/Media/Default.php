@@ -35,35 +35,37 @@ class MW_View_Helper_Media_Default
 		}
 
 		$url = $item->getUrl();
+		$previewUrl = $item->getPreview();
 		$subItems = $item->getRefItems( 'media' );
 		$parts = explode( '/', $item->getMimetype() );
 
 		switch( $parts[0] )
 		{
 			case 'audio':
-				$tag = '<audio %2$s>';
-				$tag .= '<source src="%1$s" type="%3$s" />';
+				$tag = '<audio %3$s>';
+				$tag .= '<source src="%1$s" type="%4$s" />';
 				$tag .= $this->_createAssociatedMediaString( $subItems );
-				$tag .= '%4$s';
+				$tag .= '%5$s';
 				$tag .= '</audio>';
 				break;
 			case 'video':
-				$tag = '<video %2$s>';
-				$tag .= '<source src="%1$s" type="%3$s" />';
+				$tag = '<video %3$s>';
+				$tag .= '<source src="%1$s" type="%4$s" />';
 				$tag .= $this->_createAssociatedMediaString( $subItems );
-				$tag .= '%4$s';
+				$tag .= '%5$s';
 				$tag .= '</video>';
 				break;
 			case 'image':
-				$tag = '<div %2$s>';
-				$tag .= '<img src="%1$s" />';
+				$tag = '<div %3$s>';
+				$tag .= '<img src="%2$s" data-orig="%1$s" />';
 				$tag .= $this->_createAssociatedMediaString( $subItems );
 				$tag .= '</div>';
 				break;
 			default:
-				$tag = '<a href="%1$s" %2$s>';
+				$tag = '<a href="%1$s" %3$s>';
+				$tag .= '<img src="%2$s" />';
 				$tag .= $this->_createAssociatedMediaString( $subItems );
-				$tag .= '%4$s';
+				$tag .= '%5$s';
 				$tag .= '</a>';
 				break;
 		}
@@ -72,7 +74,14 @@ class MW_View_Helper_Media_Default
 			$url = $baseurl . '/' . $url;
 		}
 
-		return sprintf( $tag, $enc->attr( $url ), $attr, $item->getMimetype(), $item->getName() );
+		if( strncmp( $previewUrl, 'data', 4 ) !== 0 && $baseurl !== null ) {
+			$previewUrl = $baseurl . '/' . $previewUrl;
+		}
+
+		$mimetype = $enc->attr( $item->getMimetype() );
+		$name = $enc->html( $item->getName() );
+
+		return sprintf( $tag, $enc->attr( $url ), $enc->attr( $previewUrl ), $attr, $mimetype, $name );
 	}
 
 
@@ -85,6 +94,7 @@ class MW_View_Helper_Media_Default
 	protected function _createAssociatedMediaString( array $mediaItems )
 	{
 		$string = '';
+		$enc = $this->encoder();
 
 		foreach( $mediaItems as $mediaItem )
 		{
@@ -104,7 +114,7 @@ class MW_View_Helper_Media_Default
 					$tag = '';
 			}
 
-			$string .= sprintf( $tag, $mediaItem->getPreview(), $mimetype );
+			$string .= sprintf( $tag, $enc->attr( $mediaItem->getPreview() ), $enc->attr( $mimetype ) );
 		}
 
 		return $string;
