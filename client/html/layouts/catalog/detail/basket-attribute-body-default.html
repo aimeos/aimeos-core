@@ -10,15 +10,14 @@ $enc = $this->encoder();
 ?>
 <div class="catalog-detail-basket-attribute">
 	<table>
-		<tbody>
 <?php foreach( $this->get( 'attributeConfigItems', array() ) as $code => $attributes ) : ?> 
-			<tr>
-				<td><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></td>
-				<td>
-					<select name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrconf-id' ) ) ); ?>">
-						<option value=""></option>
+		<tr class="select-item">
+			<td class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></td>
+			<td class="select-value">
+				<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrconf-id' ) ) ); ?>">
+					<option class="select-option" value=""></option>
 <?php	foreach( $attributes as $id => $attribute ) : ?>
-						<option value="<?php echo $enc->attr( $id ); ?>">
+					<option class="select-option" value="<?php echo $enc->attr( $id ); ?>">
 <?php
 			$priceItems = $attribute->getRefItems( 'price', 'default', 'default' );
 
@@ -35,13 +34,12 @@ $enc = $this->encoder();
 				echo $enc->html( $attribute->getName(), $enc::TRUST );
 			}
 ?>
-						</option>
+					</option>
 <?php	endforeach; ?>
-					</select>
-				</td>
-			</tr>
+				</select>
+			</td>
+		</tr>
 <?php endforeach; ?>
-		</tbody>
 	</table>
 <?php foreach( $this->get( 'attributeHiddenItems', array() ) as $id => $attribute ) : ?> 
 	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrhide-id', $id ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />

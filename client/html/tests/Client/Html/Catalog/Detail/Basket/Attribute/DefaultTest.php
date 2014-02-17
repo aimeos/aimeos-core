@@ -79,7 +79,7 @@ class Client_Html_Catalog_Detail_Basket_Attribute_DefaultTest extends MW_Unittes
 		$this->assertStringStartsWith( '<div class="catalog-detail-basket-attribute', $output );
 
 		foreach( $configAttr as $id => $item ) {
-			$this->assertRegexp( '#<option value="' . $id . '">#', $output );
+			$this->assertRegexp( '#<option class="select-option" value="' . $id . '">#', $output );
 		}
 
 		foreach( $hiddenAttr as $id => $item ) {
