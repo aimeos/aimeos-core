@@ -72,7 +72,7 @@ jQuery(document).ready( function($) {
 
 	/* Slider for thumbnail gallery (small ones) */
 	$(".catalog-detail-image .thumbs").carouFredSel({
-		responsive: true,
+		responsive: false,
 		circular: false,
 		infinite: false,
 		auto: false,
