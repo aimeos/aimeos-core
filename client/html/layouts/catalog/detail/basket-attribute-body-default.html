@@ -25,7 +25,7 @@ $enc = $this->encoder();
 			{
 				$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
 				$value = $priceItem->getValue() + $priceItem->getCosts();
-				$sign = ( $value < 0 ? '-' : '+' );
+				$sign = ( $value < 0 ? '−' : '+' );
 				$value = $this->number( abs( $value ) );
 				
 				/// Configurable product attribute name (%1$s) with sign (%4$s, +/-), price value (%2$s) and currency (%3$s)

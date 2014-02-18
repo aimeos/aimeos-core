@@ -126,7 +126,7 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="quantity">
 <?php		if( $modify ) : ?>
 <?php			if( $product->getQuantity() > 1 ) : ?>
-						<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) + $backParams ) ); ?>">-</a>
+						<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) + $backParams ) ); ?>">−</a>
 <?php			else : ?>
 						&nbsp;
 <?php			endif; ?>
