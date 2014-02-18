@@ -67,9 +67,9 @@ msgstr "%2$s %1$s"
 
 #. / Rebate format with rebate value (%1$s) and currency (%2$s)
 #: src/MW/View/Helper/Price/Default.php:82
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s %2$s off"
-msgstr "%2$s %1$s"
+msgstr "%2$s %1$s off"
 
 #. / Configurable product attribute name (%1$s) with price value (%2$s) and currency (%3$s)
 #: layouts/catalog/detail/basket-attribute-body-default.html:30
@@ -102,9 +102,9 @@ msgstr "%3$s%1$s + %3$s%2$s"
 
 #. / Price shipping format with shipping / payment cost value (%1$s) and currency (%2$s)
 #: src/MW/View/Helper/Price/Default.php:80
-#, fuzzy, php-format
+#, php-format
 msgid "+ %1$s %2$s/item"
-msgstr "%2$s %1$s"
+msgstr "+ %2$s %1$s/item"
 
 #: layouts/email/common/text-summary-detail-body-default.html:91
 msgid "+ Payment costs"
@@ -117,9 +117,9 @@ msgstr ""
 
 #. / Rebate percent format with rebate percent value (%1$s)
 #: src/MW/View/Helper/Price/Default.php:84
-#, fuzzy, php-format
+#, php-format
 msgid "-%1$s%%"
-msgstr "%2$s %1$s"
+msgstr ""
 
 #: layouts/catalog/detail/basket-body-default.html:36
 msgid "Add to basket"
@@ -771,9 +771,9 @@ msgstr ""
 
 #. / E-mail HTML title
 #: layouts/email/common/html-body-default.html:12
-#, fuzzy
+#
 msgid "Your order"
-msgstr "Order"
+msgstr ""
 
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
@@ -836,18 +836,18 @@ msgstr "Payment"
 #. / code for "in stock"
 #: layouts/catalog/stock/body-default.html:29
 msgid "stock-high"
-msgstr ""
+msgstr "in stock"
 
 #. / code for "only a few available"
 #: layouts/catalog/stock/body-default.html:27
 msgid "stock-low"
-msgstr ""
+msgstr "only a few available"
 
 #. / code for "out ot stock"
 #: layouts/catalog/stock/body-default.html:25
-#, fuzzy
+#
 msgid "stock-out"
-msgstr "available"
+msgstr "out ot stock"
 
 #. / code for "no stock limit"
 #: layouts/catalog/stock/body-default.html:31
