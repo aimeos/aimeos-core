@@ -52,41 +52,12 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 
 		$this->_txBegin();
 
-		$context =  $this->_getContext();
-
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
-		$attrTypeManager = $attrManager->getSubManager( 'type' );
-
-		$search = $attrTypeManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'size' ) );
-		$result = $attrTypeManager->searchItems( $search );
-
-		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute type "size" found' );
-		}
-
-		$attrItem = $attrManager->createItem();
-		$attrItem->setTypeId( $attrTypeItem->getId() );
-		$attrItem->setDomain( 'product' );
-		$attrItem->setStatus( 1 );
-
-		$pos = 0;
-		$attrList = array();
-
-		foreach( array( 'small', 'medium', 'large' ) as $size )
-		{
-			$attrItem->setId( null );
-			$attrItem->setCode( $size );
-			$attrItem->setLabel( $size );
-			$attrItem->setPosition( $pos++ );
-
-			$attrManager->saveItem( $attrItem );
-
-			$attrList[ $attrItem->getId() ] = clone $attrItem;
-		}
+		$attrList = $this->_getAttributeList();
 
 		$this->_txCommit();
 
+
+		$context =  $this->_getContext();
 
 		$productManager = MShop_Product_Manager_Factory::createManager( $context );
 		$productListManager = $productManager->getSubManager( 'list' );
@@ -144,5 +115,103 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 
 
 		$this->_status( 'done' );
+	}
+
+
+	protected function _getAttributeList()
+	{
+		$context =  $this->_getContext();
+
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$priceTypeManager = MShop_Factory::createManager( $context, 'price/type' );
+
+		$search = $priceTypeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'price.type.domain', 'attribute' ),
+			$search->compare( '==', 'price.type.code', 'default' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$result = $priceTypeManager->searchItems( $search );
+
+		if( ( $priceTypeItem = reset( $result ) ) === false ) {
+			throw new Exception( 'No price type "default" found' );
+		}
+
+		$priceItem = $priceManager->createItem();
+		$priceItem->setTypeId( $priceTypeItem->getId() );
+		$priceItem->setDomain( 'attribute' );
+		$priceItem->setTaxRate( '20.00' );
+		$priceItem->setStatus( 1 );
+
+
+		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
+		$attrTypeManager = MShop_Factory::createManager( $context, 'attribute/type' );
+
+		$search = $attrTypeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'attribute.type.domain', 'product' ),
+			$search->compare( '==', 'attribute.type.code', 'size' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$result = $attrTypeManager->searchItems( $search );
+
+		if( ( $attrTypeItem = reset( $result ) ) === false ) {
+			throw new Exception( 'No attribute type "size" found' );
+		}
+
+		$attrItem = $attrManager->createItem();
+		$attrItem->setTypeId( $attrTypeItem->getId() );
+		$attrItem->setDomain( 'product' );
+		$attrItem->setStatus( 1 );
+
+
+		$listManager = MShop_Factory::createManager( $context, 'attribute/list' );
+		$listTypeManager = MShop_Factory::createManager( $context, 'attribute/list/type' );
+
+		$search = $listTypeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'attribute.list.type.domain', 'price' ),
+			$search->compare( '==', 'attribute.list.type.code', 'default' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$result = $listTypeManager->searchItems( $search );
+
+		if( ( $listTypeItem = reset( $result ) ) === false ) {
+			throw new Exception( 'No price list type "default" found' );
+		}
+
+		$listItem = $listManager->createItem();
+		$listItem->setTypeId( $listTypeItem->getId() );
+		$listItem->setDomain( 'price' );
+		$listItem->setStatus( 1 );
+
+
+		$pos = 0;
+		$attrList = array();
+
+		foreach( array( 'small' => '-0.50', 'medium' => null, 'large' => '+0.50' ) as $size => $price )
+		{
+			$attrItem->setId( null );
+			$attrItem->setCode( $size );
+			$attrItem->setLabel( $size );
+			$attrItem->setPosition( $pos++ );
+			$attrManager->saveItem( $attrItem );
+
+			$attrList[ $attrItem->getId() ] = clone $attrItem;
+
+			if( $price !== null )
+			{
+				$priceItem->setId( null );
+				$priceItem->setValue( $price );
+				$priceManager->saveItem( $priceItem );
+
+				$listItem->setId( null );
+				$listItem->setParentId( $attrItem->getId() );
+				$listItem->setRefId( $priceItem->getId() );
+				$listManager->saveItem( $listItem, false );
+			}
+		}
+
+		return $attrList;
 	}
 }
