@@ -61,6 +61,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 			'shoes', 'sandals', 'flip-flops', 'ballerinas', 'slingbacks', 'clogs', 'moccasins', 'sneakers', 'boots', 'slippers',
 		);
 		$size = array(
+			'',
 			'(9XS)', '(8XS)', '(7XS)', '(6XS)', '(5XS)', '(4XS)', '(3XS)', '(2XS)', '(XS)', '(S)',
 			'(SS-M)', '(S-M)', '(M)', '(M-L)', '(M-LL)',
 			'(L)', '(XL)', '(2XL)', '(3XL)', '(4XL)', '(5XL)', '(6XL)', '(7XL)', '(8XL)', '(9XL)',
