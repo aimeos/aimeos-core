@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-18 10:49+0100\n"
+"POT-Creation-Date: 2014-02-18 13:19+0100\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -71,10 +71,10 @@ msgstr "%2$s %1$s"
 msgid "%1$s %2$s off"
 msgstr "%2$s %1$s off"
 
-#. / Configurable product attribute name (%1$s) with price value (%2$s) and currency (%3$s)
-#: layouts/catalog/detail/basket-attribute-body-default.html:30
-#, php-format
-msgid "%1$s ( +%2$s%3$s )"
+#. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price value (%2$s) and currency (%3$s)
+#: layouts/catalog/detail/basket-attribute-body-default.html:32
+#, fuzzy, php-format
+msgid "%1$s ( %4$s%2$s%3$s )"
 msgstr "%1$s ( +%3$s%2$s )"
 
 #: layouts/account/history/list-body-default.html:15
@@ -769,9 +769,9 @@ msgstr ""
 msgid "You will now be forwarded to the next step"
 msgstr ""
 
+#
 #. / E-mail HTML title
 #: layouts/email/common/html-body-default.html:12
-#
 msgid "Your order"
 msgstr ""
 
@@ -843,9 +843,9 @@ msgstr "in stock"
 msgid "stock-low"
 msgstr "only a few available"
 
+#
 #. / code for "out ot stock"
 #: layouts/catalog/stock/body-default.html:25
-#
 msgid "stock-out"
 msgstr "out ot stock"
 

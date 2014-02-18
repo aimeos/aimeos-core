@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-18 10:49+0100\n"
-"PO-Revision-Date: 2014-02-18 09:50+0000\n"
+"POT-Creation-Date: 2014-02-18 13:19+0100\n"
+"PO-Revision-Date: 2014-02-18 12:25+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -77,12 +77,12 @@ msgstr "%1$s %2$s"
 msgid "%1$s %2$s off"
 msgstr ""
 
-#. / Configurable product attribute name (%1$s) with price value (%2$s) and
-#. currency (%3$s)
-#: layouts/catalog/detail/basket-attribute-body-default.html:30
+#. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
+#. value (%2$s) and currency (%3$s)
+#: layouts/catalog/detail/basket-attribute-body-default.html:32
 #, php-format
-msgid "%1$s ( +%2$s%3$s )"
-msgstr "%1$s ( +%2$s%3$s )"
+msgid "%1$s ( %4$s%2$s%3$s )"
+msgstr "%1$s ( %4$s%2$s%3$s )"
 
 #: layouts/account/history/list-body-default.html:15
 #: layouts/account/history/list-body-default.html:30
@@ -128,7 +128,7 @@ msgstr "+ Envío"
 #: src/MW/View/Helper/Price/Default.php:84
 #, php-format
 msgid "-%1$s%%"
-msgstr ""
+msgstr "-%1$s%%"
 
 #: layouts/catalog/detail/basket-body-default.html:36
 msgid "Add to basket"
@@ -370,7 +370,7 @@ msgstr "Si tiene alguna pregunta, responda a este email"
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
 msgid "Incl. %1$s%% VAT"
-msgstr ""
+msgstr "Incl. el %1$s%% de IVA"
 
 #: layouts/common/summary/detail-body-default.html:230
 #: layouts/email/common/text-summary-detail-body-default.html:95
