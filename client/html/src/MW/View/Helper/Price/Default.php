@@ -41,7 +41,7 @@ class MW_View_Helper_Price_Default
 		foreach( $prices as $priceItem )
 		{
 			if( !( $priceItem instanceof $iface ) ) {
-				throw new MW_View_Exception( sprintf( 'Item does not implement "%1$s"', $iface ) );
+				throw new MW_View_Exception( sprintf( 'Object doesn\'t implement "%1$s"', $iface ) );
 			}
 
 			$costs = $priceItem->getCosts();
@@ -83,7 +83,7 @@ class MW_View_Helper_Price_Default
 				/// Rebate percent format with rebate percent value (%1$s)
 				'rebate%' => $this->translate( 'client/html', '-%1$s%%' ),
 				/// Tax rate format with tax rate in percent (%1$s)
-				'taxrate' => $this->translate( 'client/html', 'incl. %1$s%% VAT' ),
+				'taxrate' => $this->translate( 'client/html', 'Incl. %1$s%% VAT' ),
 			);
 		}
 

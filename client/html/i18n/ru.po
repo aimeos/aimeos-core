@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-10 14:59+0100\n"
-"PO-Revision-Date: 2014-02-10 13:42+0000\n"
+"POT-Creation-Date: 2014-02-18 10:49+0100\n"
+"PO-Revision-Date: 2014-02-18 09:50+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -68,13 +68,20 @@ msgstr ""
 #: layouts/email/common/text-summary-detail-body-default.html:55
 #: layouts/checkout/standard/payment-body-default.html:38
 #: layouts/checkout/standard/delivery-body-default.html:38
+#: src/MW/View/Helper/Price/Default.php:78
 #, php-format
 msgid "%1$s %2$s"
 msgstr ""
 
+#. / Rebate format with rebate value (%1$s) and currency (%2$s)
+#: src/MW/View/Helper/Price/Default.php:82
+#, php-format
+msgid "%1$s %2$s off"
+msgstr ""
+
 #. / Configurable product attribute name (%1$s) with price value (%2$s) and
 #. currency (%3$s)
-#: layouts/catalog/detail/basket-attribute-body-default.html:31
+#: layouts/catalog/detail/basket-attribute-body-default.html:30
 #, php-format
 msgid "%1$s ( +%2$s%3$s )"
 msgstr ""
@@ -103,6 +110,13 @@ msgstr ""
 msgid "%1$s%3$s + %2$s%3$s"
 msgstr "%1$s%3$s + %2$s%3$s"
 
+#. / Price shipping format with shipping / payment cost value (%1$s) and
+#. currency (%2$s)
+#: src/MW/View/Helper/Price/Default.php:80
+#, php-format
+msgid "+ %1$s %2$s/item"
+msgstr ""
+
 #: layouts/email/common/text-summary-detail-body-default.html:91
 msgid "+ Payment costs"
 msgstr "+ Стоимость оплаты"
@@ -112,7 +126,13 @@ msgstr "+ Стоимость оплаты"
 msgid "+ Shipping"
 msgstr "+ Доставка"
 
-#: layouts/catalog/detail/basket-body-default.html:49
+#. / Rebate percent format with rebate percent value (%1$s)
+#: src/MW/View/Helper/Price/Default.php:84
+#, php-format
+msgid "-%1$s%%"
+msgstr ""
+
+#: layouts/catalog/detail/basket-body-default.html:36
 msgid "Add to basket"
 msgstr "Добавить в корзину"
 
@@ -346,17 +366,19 @@ msgstr ""
 msgid "If you have any questions, please reply to this e-mail"
 msgstr ""
 
+#. / Tax rate format with tax rate in percent (%1$s)
+#: layouts/common/summary/detail-body-default.html:222
+#: layouts/email/common/text-summary-detail-body-default.html:104
+#: src/MW/View/Helper/Price/Default.php:86
+#, php-format
+msgid "Incl. %1$s%% VAT"
+msgstr ""
+
 #: layouts/common/summary/detail-body-default.html:230
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
 msgstr "Включаемые скидки"
-
-#: layouts/common/summary/detail-body-default.html:222
-#: layouts/email/common/text-summary-detail-body-default.html:104
-#, php-format
-msgid "Includes %1$s%% VAT"
-msgstr "Содержит %1$s%% НДС"
 
 #: src/Client/Html/Checkout/Update/Factory.php:39
 #: src/Client/Html/Checkout/Confirm/Factory.php:39
@@ -433,6 +455,11 @@ msgstr ""
 msgid "No view available"
 msgstr ""
 
+#: src/MW/View/Helper/Price/Default.php:44
+#, php-format
+msgid "Object doesn't implement \"%1$s\""
+msgstr ""
+
 #: layouts/checkout/standard/summary-option-body-default.html:12
 msgid "Options"
 msgstr "Опции"
@@ -503,7 +530,7 @@ msgstr "Пожалуйста выберите ваш метод оплаты"
 msgid "Please enter at least three characters"
 msgstr ""
 
-#: layouts/catalog/detail/basket-selection-body-default.html:21
+#: layouts/catalog/detail/basket-selection-body-default.html:31
 msgid "Please select"
 msgstr "Пожалуйста выберите"
 
@@ -809,6 +836,12 @@ msgstr "основное"
 #: src/Client/Html/Checkout/Standard/Delivery/Default.php:12
 msgid "delivery"
 msgstr "доставка"
+
+#. / Price quantity format with quantity (%1$s)
+#: src/MW/View/Helper/Price/Default.php:76
+#, php-format
+msgid "from %1$s"
+msgstr ""
 
 #: layouts/common/summary/address-body-default.html:127
 #: layouts/email/common/text-summary-address-body-default.html:111

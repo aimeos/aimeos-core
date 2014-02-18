@@ -101,7 +101,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php echo strip_tags( $this->translate( 'client/html', 'Total' ) ); ?>: <?php printf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ); ?>
 <?php foreach( $this->get( 'commonTaxRates', array() ) as $taxRate => $priceValue ) : ?>
 
-<?php echo strip_tags( sprintf( $this->translate( 'client/html', 'Includes %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?>: <?php printf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ); ?>
+<?php echo strip_tags( sprintf( $this->translate( 'client/html', 'Incl. %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?>: <?php printf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ); ?>
 <?php endforeach; ?>
 
 <?php echo strip_tags( $this->translate( 'client/html', 'Included rebates' ) ); ?>: <?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?>
