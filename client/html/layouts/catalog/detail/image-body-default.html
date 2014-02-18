@@ -44,7 +44,7 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 		$class = 'item selected';
 		foreach( $mediaItems as $id => $mediaItem )
 		{
-			echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $enc->attr( $contentUrl . $mediaItem->getUrl() ) . '\')"></a>';
+			echo '<a href="' . $url . '#image-' . $id . '" class="' . $class . '" style="background-image: url(\'' . $enc->attr( $contentUrl . $mediaItem->getPreview() ) . '\')"></a>';
 			$class = 'item';
 		}
 	}
