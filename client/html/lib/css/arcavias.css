@@ -16,7 +16,7 @@
 	min-width: 6em;
 	padding: 0.4em 1em;
 	margin: 0.25em;
-	line-height: normal;
+	line-height: 1;
 	display: inline-block;
 	vertical-align: middle;
 	cursor: pointer;
@@ -46,6 +46,7 @@
 	background-image: url("images/buttonfond-action.png");
 	box-shadow: 2px 2px 4px #48A7A1;
 	border: 1px solid #52b652;
+	line-height: normal;
 	font-size: 133%;
 }
 
