@@ -89,8 +89,16 @@ jQuery(document).ready( function($) {
 	});
 	
 	/* Image zoom */
-	$(".catalog-detail-image .image-single .item").on("mouseenter", function() {
+	$(".catalog-detail-image .image-single").on("mouseenter", ".item", function(event) {
+		
 		var item = $(this);
+		var container = $(event.delegateTarget);
+
+		// image is outside of the container
+		if( item.offset().top >= container.offset().top + container.height() ) {
+			return;
+		}
+		
 		var options = {
 			responsive: true,
 			scrollZoom: true,
@@ -100,7 +108,7 @@ jQuery(document).ready( function($) {
 			loadingIcon: '../css/images/progress.gif',
 			lensFadeIn: 500,
 			lensFadeOut: 500,
-			zoomLevel: 1/3,
+			zoomLevel: 0.75,
 			zoomWindowFadeIn: 500,
 			zoomWindowFadeOut: 500,
 			zoomWindowWidth: 240, // should be in CSS
@@ -136,7 +144,7 @@ jQuery(document).ready( function($) {
 	 * 
 	 * It does not only work with <select> and <option> tags but also if a
 	 * 
-	 * <div class="select-list" data-index="<index value: 0-30>"> and
+	 * <div class="select-list" data-index="<index value: 0-31>"> and
 	 * 
 	 * <input class="select-option" type="radio"> or
 	 * <input class="select-option" type="checkbox">
