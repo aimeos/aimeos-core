@@ -8,15 +8,15 @@
 	background-size: contain;
 	box-shadow: 2px 2px 4px #5C88A1;
 	border: 1px solid #689DB9;
-	border-radius: 0.3em;
+	border-radius: 0.4em;
 	text-decoration: none;
 	font-weight: bold;
 	font-size: 100%;
 	color: #FFFFFF;
-	padding: 0.4em;
-	margin: 0.25em;
 	min-width: 6em;
-	line-height: 1em;
+	padding: 0.4em 1em;
+	margin: 0.25em;
+	line-height: normal;
 	display: inline-block;
 	vertical-align: middle;
 	cursor: pointer;
@@ -27,9 +27,14 @@
 	background-image: url("images/buttonfond-active.png");
 }
 
+/* Buttons calculate width incl. padding, links not! */
+.arcavias button.standardbutton {
+	min-width: 8.01em;
+}
+
 .arcavias .standardbutton::-moz-focus-inner,
 .arcavias .minibutton::-moz-focus-inner {
-	padding: 0; 
+	padding: 0;
 	border: 0; 
 }
 
@@ -39,7 +44,9 @@
 
 .arcavias .btn-action {
 	background-image: url("images/buttonfond-action.png");
-	font-size: 150%;
+	box-shadow: 2px 2px 4px #48A7A1;
+	border: 1px solid #52b652;
+	font-size: 133%;
 }
 
 .arcavias .btn-action:hover {
@@ -445,7 +452,7 @@
 	width: 80%;
 }
 
-.catalog-filter-search .standardbutton {
+.catalog-filter-search button.standardbutton {
 	background: none;
 	box-shadow: none;
 	border-radius: 0;
