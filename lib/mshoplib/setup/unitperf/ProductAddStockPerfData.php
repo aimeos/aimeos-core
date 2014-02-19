@@ -51,7 +51,7 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 		$start = 0;
-		$stocklevel = 1;
+		$stocklevels = array( null, 100, 80, 60, 40, 20, 10, 5, 2, 0 );
 
 
 		$this->_txBegin();
@@ -64,8 +64,12 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 			{
 				$item->setId( null );
 				$item->setProductId( $id );
-				$item->setStockLevel( $stocklevel++ );
+				$item->setStockLevel( current( $stocklevels ) );
 				$productStockManager->saveItem( $item );
+
+				if( next( $stocklevels ) === false ) {
+					reset( $stocklevels );
+				}
 			}
 
 			$count = count( $result );
