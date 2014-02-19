@@ -492,7 +492,7 @@ class Controller_Frontend_Basket_Default
 			return null;
 		}
 
-		$stocklevel = 0;
+		$stocklevel = null;
 
 		foreach( $result as $item ) {
 			$stocklevel = max( $stocklevel, $item->getStockLevel() );
