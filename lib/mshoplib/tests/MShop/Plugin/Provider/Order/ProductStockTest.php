@@ -9,7 +9,7 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 {
 	private $_order;
 	private $_plugin;
-	private $_product;
+	private $_context;
 
 
 	/**
@@ -35,28 +35,15 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$this->_context = TestHelper::getContext();
 
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
+		$pluginManager = MShop_Factory::createManager( $this->_context, 'plugin' );
 		$this->_plugin = $pluginManager->createItem();
 		$this->_plugin->setProvider( 'ProductCode' );
 		$this->_plugin->setStatus( 1 );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $orderManager->getSubManager('base');
-
+		$orderBaseManager = MShop_Factory::createManager( $this->_context, 'order/base' );
 		$this->_order = $orderBaseManager->createItem();
-
-		$orderBaseProductManager = $orderBaseManager->getSubManager('product');
-		$search = $orderBaseProductManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.product.prodcode', 'CNE' ) );
-		$productItems = $orderBaseProductManager->searchItems( $search );
-
-		if ( ( $productItem = reset( $productItems ) ) == false ) {
-			throw new Exception( 'No order base product item found.' );
-		}
-
-		$this->_product = $productItem;
 	}
 
 
@@ -68,74 +55,90 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_order );
-		unset( $this->_plugin );
-		unset( $this->_product );
-
+		unset( $this->_plugin, $this->_order, $this->_context );
 		MShop_Factory::clear();
 	}
 
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_ProductStock(TestHelper::getContext(), $this->_plugin);
+		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->_context, $this->_plugin );
 		$object->register( $this->_order );
 	}
+
 
 	public function testUpdateNone()
 	{
 		// MShop_Order_Item_Base_Abstract::PARTS_PRODUCT not set, so update shall not be executed
-		$object = new MShop_Plugin_Provider_Order_ProductStock(TestHelper::getContext(), $this->_plugin);
-		$this->AssertTrue( $object->update( $this->_order, 'check.after' ) );
+		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->_context, $this->_plugin );
+		$this->assertTrue( $object->update( $this->_order, 'check.after' ) );
 	}
+
 
 	public function testUpdateOk()
 	{
-		$object = new MShop_Plugin_Provider_Order_ProductStock(TestHelper::getContext(), $this->_plugin);
-		$result = $object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
-
-		$this->assertTrue( $result );
+		$constant = MShop_Order_Item_Base_Abstract::PARTS_PRODUCT;
+		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->_context, $this->_plugin );
+		$this->assertTrue( $object->update( $this->_order, 'check.after', $constant ) );
 	}
+
 
 	public function testUpdateOutOfStock()
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$stockManager = $productManager->getSubManager('stock');
+		$this->_order->addProduct( $this->_getOrderProduct( 'EFGH' ) );
+		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->_context, $this->_plugin );
 
-		$search = $stockManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.productid', $this->_product->getProductId() ) );
-		$stockResult = $stockManager->searchItems( $search );
-
-		if( ( $stockItem = reset( $stockResult ) ) === false ) {
-			throw new Exception( 'Stock item not found.' );
-		}
-
-		$oldStocklevel = $stockItem->getStocklevel();
-		$stockItem->setStocklevel( 5 );
-		$stockManager->saveItem( $stockItem );
-
-		$this->_product->setQuantity( 9 );
-		$this->_order->addProduct( $this->_product );
-
-		$object = new MShop_Plugin_Provider_Order_ProductStock(TestHelper::getContext(), $this->_plugin);
-
-		try {
-			$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
-		}
-		catch( MShop_Plugin_Provider_Exception $mppe )
+		try
 		{
-			$stockItem->setStocklevel( $oldStocklevel );
-			$stockManager->saveItem( $stockItem );
-
+			$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+			throw new Exception( 'Expected exception not thrown' );
+		}
+		catch( MShop_Plugin_Provider_Exception $e )
+		{
 			$ref = array( 'product' => array( '0' => 'stock.notenough' ) );
-			$this->assertEquals( $ref, $mppe->getErrorCodes() );
+			$this->assertEquals( $ref, $e->getErrorCodes() );
+		}
+	}
 
-			return;
+
+	public function testUpdateNoStockItem()
+	{
+		$const = MShop_Order_Item_Base_Abstract::PARTS_PRODUCT;
+		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->_context, $this->_plugin );
+
+		$this->_order->addProduct( $this->_getOrderProduct( 'QRST' ) );
+
+		$this->assertTrue( $object->update( $this->_order, 'check.after', $const ) );
+	}
+
+
+	public function testUpdateStockUnlimited()
+	{
+		$const = MShop_Order_Item_Base_Abstract::PARTS_PRODUCT;
+		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->_context, $this->_plugin );
+
+		$this->_order->addProduct( $this->_getOrderProduct( 'MNOP' ) );
+
+		$this->assertTrue( $object->update( $this->_order, 'check.after', $const ) );
+	}
+
+
+	protected function _getOrderProduct( $code )
+	{
+		$productManager = MShop_Factory::createManager( $this->_context, 'product' );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
+		$productItems = $productManager->searchItems( $search );
+
+		if ( ( $productItem = reset( $productItems ) ) == false ) {
+			throw new Exception( 'No product item found' );
 		}
 
-		$stockItem->setStocklevel( $oldStocklevel );
-		$stockManager->saveItem( $stockItem );
+		$orderProductManager = MShop_Factory::createManager( $this->_context, 'order/base/product' );
+		$orderProductItem = $orderProductManager->createItem();
+		$orderProductItem->copyFrom( $productItem );
 
-		$this->fail( 'Stock problem not recognized.' );
+		return $orderProductItem;
 	}
 }
