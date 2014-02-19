@@ -64,7 +64,7 @@ class Controller_Frontend_Basket_Default
 	 *
 	 * @param string $prodid ID of the base product to add
 	 * @param integer $quantity Amount of products that should by added
-	 * @param array $options Possible options are: 'stock'=>true and 'variant'=>true
+	 * @param array $options Possible options are: 'stock'=>true|false and 'variant'=>true|false
 	 * 	The 'stock'=>false option allows adding products without being in stock.
 	 * 	The 'variant'=>false option allows adding the selection product to the basket
 	 * 	instead of the specific sub-product if the variant-building attribute IDs
@@ -80,10 +80,6 @@ class Controller_Frontend_Basket_Default
 		$configAttributeIds = array(), $hiddenAttributeIds = array() )
 	{
 		$this->_checkCategory( $prodid );
-
-		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
-			$this->_checkStockLevel( $prodid, $quantity );
-		}
 
 
 		$context = $this->_getContext();
@@ -108,8 +104,9 @@ class Controller_Frontend_Basket_Default
 				$msg = sprintf( 'No unique article found for selected attributes and product ID "%1$s"', $prodid );
 				throw new Controller_Frontend_Basket_Exception( $msg );
 			}
-			else if( ( $productItem = reset( $productItems ) ) !== false )
+			else if( ( $result = reset( $productItems ) ) !== false ) // count == 1
 			{
+				$productItem = $result;
 				$orderBaseProductItem->setProductCode( $productItem->getCode() );
 
 				$subprices = $productItem->getRefItems( 'price', 'default', 'default' );
@@ -130,7 +127,7 @@ class Controller_Frontend_Basket_Default
 					$attr[] = $orderAttributeItem;
 				}
 			}
-			else if( !isset( $options['variant'] ) || $options['variant'] != false )
+			else if( !isset( $options['variant'] ) || $options['variant'] != false ) // count == 0
 			{
 				$msg = sprintf( 'No article found for selected attributes and product ID "%1$s"', $prodid );
 				throw new Controller_Frontend_Basket_Exception( $msg );
@@ -151,8 +148,29 @@ class Controller_Frontend_Basket_Default
 		$orderBaseProductItem->setAttributes( $attr );
 
 
-		$this->_basket->addProduct( $orderBaseProductItem );
+		$stocklevel = null;
+		$position = $this->_basket->addProduct( $orderBaseProductItem );
+		$item = clone $this->_basket->getProduct( $position );
+
+		if( !isset( $options['stock'] ) || $options['stock'] != false )
+		{
+			$stocklevel = $this->_getStockLevel( $productItem->getId() );
+
+			if( $stocklevel !== null && $stocklevel < $item->getQuantity() )
+			{
+				$this->_basket->deleteProduct( $position );
+				$orderBaseProductItem->setQuantity( $stocklevel );
+				$this->_basket->addProduct( $orderBaseProductItem, $position );
+			}
+		}
+
 		$this->_domainManager->setSession( $this->_basket );
+
+		if( $stocklevel !== null && $stocklevel < $item->getQuantity() )
+		{
+			$msg = sprintf( 'There are not enough products "%1$s" in stock', $item->getName() );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
 	}
 
 
@@ -181,9 +199,11 @@ class Controller_Frontend_Basket_Default
 	 *
 	 * @param integer $position Position number (key) of the order product item
 	 * @param integer $quantity New quantiy of the product item
+	 * @param array $options Possible options are: 'stock'=>true|false
+	 * 	The 'stock'=>false option allows adding products without being in stock.
 	 * @param array $configAttributeCodes Codes of the product config attributes that should be REMOVED
 	 */
-	public function editProduct( $position, $quantity, $configAttributeCodes = array() )
+	public function editProduct( $position, $quantity, $options = array(), $configAttributeCodes = array() )
 	{
 		$product = $this->_basket->getProduct( $position );
 
@@ -204,16 +224,13 @@ class Controller_Frontend_Basket_Default
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $productManager->searchItems( $search, array( 'price' ) );
+		$result = $productManager->searchItems( $search, array( 'price', 'text' ) );
 
 		if( ( $productItem = reset( $result ) ) === false )
 		{
 			$msg = sprintf( 'No product with code "%1$s" found', $product->getProductCode() );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
-
-
-		$this->_checkStockLevel( $productItem->getId(), $quantity );
 
 
 		$prices = $productItem->getRefItems( 'price', 'default' );
@@ -272,13 +289,24 @@ class Controller_Frontend_Basket_Default
 		// remove product rebate of original price in favor to rebates granted for the order
 		$price->setRebate( '0.00' );
 
+		$stocklevel = null;
+		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
+			$stocklevel = $this->_getStockLevel( $productItem->getId() );
+		}
+
 		$product->setPrice( $price );
-		$product->setQuantity( $quantity );
+		$product->setQuantity( ( $stocklevel !== null ? min( $stocklevel, $quantity ) : $quantity ) );
 		$product->setAttributes( $attributes );
 
 		$this->_basket->deleteProduct( $position );
 		$this->_basket->addProduct( $product, $position );
 		$this->_domainManager->setSession( $this->_basket );
+
+		if( $stocklevel !== null && $stocklevel < $quantity )
+		{
+			$msg = sprintf( 'There are not enough products "%1$s" in stock', $productItem->getName() );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
 	}
 
 
@@ -435,13 +463,12 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
-	 * Checks if there are enough products in stock.
+	 * Returns the highest stock level for the product.
 	 *
 	 * @param string $prodid Unique ID of the product
-	 * @param integer $quantity Number of products the customer would like to buy
-	 * @throws Controller_Frontend_Basket_Exception If there are not enough products in stock
+	 * @return integer|null Number of available items in stock (null for unlimited stock)
 	 */
-	protected function _checkStockLevel( $prodid, $quantity )
+	protected function _getStockLevel( $prodid )
 	{
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
 
@@ -455,18 +482,16 @@ class Controller_Frontend_Basket_Default
 		$result = $manager->searchItems( $search );
 
 		if( empty( $result ) ) {
-			return;
+			return null;
 		}
 
-		foreach( $result as $item )
-		{
-			if( $item->getStockLevel() >= $quantity ) {
-				return;
-			}
+		$stocklevel = 0;
+
+		foreach( $result as $item ) {
+			$stocklevel = max( $stocklevel, $item->getStockLevel() );
 		}
 
-		$msg = sprintf( 'There are not enough products (ID "%1$s") in stock', $prodid );
-		throw new Controller_Frontend_Basket_Exception( $msg );
+		return $stocklevel;
 	}
 
 
