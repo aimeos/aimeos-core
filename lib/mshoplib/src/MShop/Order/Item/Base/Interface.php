@@ -85,6 +85,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 *
 	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
+	 * @return integer Position the product item was inserted at
 	 */
 	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position=null );
 
@@ -115,6 +116,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 *
 	 * @param MShop_Order_Item_Base_Address_Interface $address Order address item for the given domain
 	 * @param string $domain Address domain defined in MShop_Order_Item_Base_Address_Abstract
+	 * @return MShop_Order_Item_Base_Address_Interface Item that was really added to the basket
 	 */
 	public function setAddress( MShop_Order_Item_Base_Address_Interface $address,
 		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY
@@ -147,6 +149,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 *
 	 * @param MShop_Order_Item_Base_Service_Interface $service Order service item for the given domain
 	 * @param string $type Service type
+	 * @return MShop_Order_Item_Base_Service_Interface Item that was really added to the basket
 	 */
 	public function setService( MShop_Order_Item_Base_Service_Interface $service, $type );
 
