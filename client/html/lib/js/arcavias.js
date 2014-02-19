@@ -49,26 +49,30 @@ jQuery(document).ready( function($) {
 	
 	/* Catalog filter */
 	$(".catalog-filter form").on("submit", function( event ) {
-		var input = $("input.value", this);
+		
+		var result = true;
 
-		if( input.val() != '' && input.val().length < 3 ) {
+		$("input.value", this).each(function(i, input) {
 
-			if( $(this).has(".search-hint").length === 0 ) {
-
-				var node = $('<div/>', {html: input.data("hint"), class: "search-hint"});
-				$(".catalog-filter-search", this).after(node);
-
-				var pos = node.position();
-				node.css("left", pos.left).css("top", pos.top);
-				node.delay(3000).fadeOut(1000, function() {
-					node.remove();
-				});
+			if( input.val() != '' && input.val().length < 3 ) {
+	
+				if( $(this).has(".search-hint").length === 0 ) {
+	
+					var node = $('<div/>', {html: input.data("hint"), class: "search-hint"});
+					$(".catalog-filter-search", this).after(node);
+	
+					var pos = node.position();
+					node.css("left", pos.left).css("top", pos.top);
+					node.delay(3000).fadeOut(1000, function() {
+						node.remove();
+					});
+				}
+	
+				result = false;
 			}
+		});
 
-			return false;
-		}
-
-		return true;
+		return result;
 	});
 
 	$(".catalog-filter-tree li.cat-item").on("click", function() {
