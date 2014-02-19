@@ -149,14 +149,17 @@ class Controller_Frontend_Basket_Default
 
 
 		$stocklevel = null;
-		$position = $this->_basket->addProduct( $orderBaseProductItem );
-		$item = clone $this->_basket->getProduct( $position );
-
-		if( !isset( $options['stock'] ) || $options['stock'] != false )
-		{
+		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
 			$stocklevel = $this->_getStockLevel( $productItem->getId() );
+		}
 
-			if( $stocklevel !== null && $stocklevel < $item->getQuantity() )
+		if( $stocklevel === null || $stocklevel > 0 )
+		{
+			$position = $this->_basket->addProduct( $orderBaseProductItem );
+			$orderBaseProductItem = clone $this->_basket->getProduct( $position );
+			$quantity = $orderBaseProductItem->getQuantity();
+
+			if( $stocklevel > 0 && $stocklevel < $quantity )
 			{
 				$this->_basket->deleteProduct( $position );
 				$orderBaseProductItem->setQuantity( $stocklevel );
@@ -166,9 +169,9 @@ class Controller_Frontend_Basket_Default
 
 		$this->_domainManager->setSession( $this->_basket );
 
-		if( $stocklevel !== null && $stocklevel < $item->getQuantity() )
+		if( $stocklevel !== null && $stocklevel < $quantity )
 		{
-			$msg = sprintf( 'There are not enough products "%1$s" in stock', $item->getName() );
+			$msg = sprintf( 'There are not enough products "%1$s" in stock', $orderBaseProductItem->getName() );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 	}
@@ -295,12 +298,16 @@ class Controller_Frontend_Basket_Default
 		}
 
 		$product->setPrice( $price );
-		$product->setQuantity( ( $stocklevel !== null ? min( $stocklevel, $quantity ) : $quantity ) );
+		$product->setQuantity( ( $stocklevel !== null && $stocklevel > 0 ? min( $stocklevel, $quantity ) : $quantity ) );
 		$product->setAttributes( $attributes );
 
 		$this->_basket->deleteProduct( $position );
-		$this->_basket->addProduct( $product, $position );
-		$this->_domainManager->setSession( $this->_basket );
+
+		if( $stocklevel === null || $stocklevel > 0 )
+		{
+			$this->_basket->addProduct( $product, $position );
+			$this->_domainManager->setSession( $this->_basket );
+		}
 
 		if( $stocklevel !== null && $stocklevel < $quantity )
 		{

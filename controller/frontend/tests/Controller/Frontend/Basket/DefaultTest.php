@@ -323,6 +323,31 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAddProductNoStockException()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'EFGH' ) );
+
+		$items = $productManager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Product not found' );
+		}
+
+		try
+		{
+			$this->_object->addProduct( $item->getId(), 5 );
+			throw new Exception( 'Expected exception not thrown' );
+		}
+		catch( Controller_Frontend_Basket_Exception $e )
+		{
+			$this->assertEquals( array(), $this->_object->get()->getProducts() );
+		}
+	}
+
+
 	public function testAddProductNoStockRequired()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
@@ -554,6 +579,41 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			$item = $this->_object->get()->getProduct( 0 );
 			$this->assertEquals( 3, $item->getQuantity() );
 			$this->assertEquals( 'IJKL', $item->getProductCode() );
+		}
+	}
+
+
+	public function testEditProductNoStock()
+	{
+		$context = TestHelper::getContext();
+
+		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'EFGH' ) );
+		$items = $productManager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Product not found' );
+		}
+
+		$orderProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
+		$orderProductItem = $orderProductManager->createItem();
+		$orderProductItem->copyFrom( $item );
+		$orderProductItem->setQuantity( 2 );
+
+		$this->_object->get()->addProduct( $orderProductItem );
+
+		$item = $this->_object->get()->getProduct( 0 );
+		$this->assertEquals( 2, $item->getQuantity() );
+
+		try
+		{
+			$this->_object->editProduct( 0, 5 );
+			throw new Exception( 'Expected exception not thrown' );
+		}
+		catch( Controller_Frontend_Basket_Exception $e )
+		{
+			$this->assertEquals( array(), $this->_object->get()->getProducts() );
 		}
 	}
 
