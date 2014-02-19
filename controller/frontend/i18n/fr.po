@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-10 14:59+0100\n"
-"PO-Revision-Date: 2014-01-29 22:14+0000\n"
+"POT-Creation-Date: 2014-02-19 14:47+0100\n"
+"PO-Revision-Date: 2014-02-19 13:48+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/arcavias-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:389
+#: src/Controller/Frontend/Basket/Default.php:422
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "L'ajout du produit avec l'ID \"%1$s\" n'est pas autorisé"
 
-#: src/Controller/Frontend/Basket/Default.php:569
+#: src/Controller/Frontend/Basket/Default.php:599
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Les IDs d'attribut disponibles \"%1$s\" ne correspondent pas aux IDs d'attribut données \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:187
+#: src/Controller/Frontend/Basket/Default.php:212
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be changed"
 msgstr "L'article du panier en position \"%1$d\" ne peut être modifié"
 
-#: src/Controller/Frontend/Basket/Default.php:165
+#: src/Controller/Frontend/Basket/Default.php:188
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "L'article du panier en position \"%1$d\" ne peut être effacé manuellement"
@@ -55,12 +55,12 @@ msgstr "Classe \"%1$s\" non disponible"
 msgid "Controller path is empty"
 msgstr "Le chemin du contrôleur est vide"
 
-#: src/Controller/Frontend/Basket/Default.php:426
+#: src/Controller/Frontend/Basket/Default.php:459
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Références \"%1$s\" non valides pour le produit avec l'ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:533
+#: src/Controller/Frontend/Basket/Default.php:563
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Propriétés d'adresse non valides, merci de vérifier votre saisie"
@@ -88,27 +88,27 @@ msgstr "Domaine non valide \"%1$s\""
 msgid "Invalid factory \"%1$s\""
 msgstr "Usine non valide \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:311
+#: src/Controller/Frontend/Basket/Default.php:344
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr "Valeur  non valide pour le type d'adresse \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:603
+#: src/Controller/Frontend/Basket/Default.php:633
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Type de liste pour le domaine \"%1$s\" et le code \"%2$s\" non trouvé"
 
-#: src/Controller/Frontend/Basket/Default.php:130
+#: src/Controller/Frontend/Basket/Default.php:132
 #, php-format
 msgid "No article found for selected attributes and product ID \"%1$s\""
 msgstr "Pas d'article trouvé pour les attributs et le produit sélectionnés \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:206
+#: src/Controller/Frontend/Basket/Default.php:231
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "Pas de produit avec le code \"%1$s\" trouvé"
 
-#: src/Controller/Frontend/Basket/Default.php:103
+#: src/Controller/Frontend/Basket/Default.php:104
 #, php-format
 msgid "No unique article found for selected attributes and product ID \"%1$s\""
 msgstr "Pas d'article unique trouvé pour les attributs et le produit sélectionnés \"%1$s\""
@@ -118,10 +118,11 @@ msgstr "Pas d'article unique trouvé pour les attributs et le produit sélection
 msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
 msgstr "Article de service pour le type \"%1$s\" et l'ID \"%2$s\" non trouvé"
 
-#: src/Controller/Frontend/Basket/Default.php:463
+#: src/Controller/Frontend/Basket/Default.php:171
+#: src/Controller/Frontend/Basket/Default.php:307
 #, php-format
-msgid "There are not enough products (ID \"%1$s\") in stock"
-msgstr "Il n'y a pas assez de produits (ID \"%1$s\") en stock"
+msgid "There are not enough products \"%1$s\" in stock"
+msgstr ""
 
 #: src/Controller/Frontend/Common/Decorator/Abstract.php:50
 #, php-format
@@ -133,7 +134,7 @@ msgstr "Impossible d'appeler la méthode \"%1$s::%2$s\""
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr "Impossible de créer le fournisseur \"%1$s\" pour le service avec l'ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:340
+#: src/Controller/Frontend/Basket/Default.php:373
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr "Attributs inconnus \"%1$s\""

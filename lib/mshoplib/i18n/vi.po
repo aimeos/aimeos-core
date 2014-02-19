@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-10 14:59+0100\n"
+"POT-Creation-Date: 2014-02-19 14:47+0100\n"
 "PO-Revision-Date: 2014-02-02 14:31+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias-core/language/vi/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/MShop/Order/Item/Base/Default.php:318
+#: src/MShop/Order/Item/Base/Default.php:328
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
 msgstr ""
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:509
+#: src/MShop/Order/Item/Base/Default.php:525
 #, php-format
 msgid "Basket empty"
 msgstr ""
@@ -604,7 +604,7 @@ msgid "Product matching given properties not found"
 msgstr ""
 
 #: src/MShop/Order/Item/Base/Default.php:235
-#: src/MShop/Order/Item/Base/Default.php:285
+#: src/MShop/Order/Item/Base/Default.php:295
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
 msgstr ""
@@ -614,7 +614,7 @@ msgstr ""
 msgid "Product with code \"%1$s\" not found"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:744
+#: src/MShop/Order/Item/Base/Default.php:761
 #, php-format
 msgid "Product with the same signatur not available"
 msgstr ""
@@ -673,7 +673,7 @@ msgstr ""
 msgid "Sending order to delivery provider failed: \"%1$s\""
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:387
+#: src/MShop/Order/Item/Base/Default.php:400
 #, php-format
 msgid "Service of type \"%1$s\" not available"
 msgstr ""

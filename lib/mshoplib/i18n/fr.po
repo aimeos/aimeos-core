@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-10 14:59+0100\n"
+"POT-Creation-Date: 2014-02-19 14:47+0100\n"
 "PO-Revision-Date: 2014-02-02 14:35+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/arcavias-core/language/fr/)\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/MShop/Order/Item/Base/Default.php:318
+#: src/MShop/Order/Item/Base/Default.php:328
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
 msgstr "Adresse du domaine \"%1$s\" indisponible"
@@ -38,7 +38,7 @@ msgstr "Configuration de la recherche d'adresse indisponible"
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Type d'adresse \"%1$s\" pas dans la plage autorisée"
 
-#: src/MShop/Order/Item/Base/Default.php:509
+#: src/MShop/Order/Item/Base/Default.php:525
 #, php-format
 msgid "Basket empty"
 msgstr "Panier vide"
@@ -605,7 +605,7 @@ msgid "Product matching given properties not found"
 msgstr "Produit correspondant aux propriétés données introuvable"
 
 #: src/MShop/Order/Item/Base/Default.php:235
-#: src/MShop/Order/Item/Base/Default.php:285
+#: src/MShop/Order/Item/Base/Default.php:295
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
 msgstr "Produit avec la clé de tableau \"%1$d\" indisponible"
@@ -615,7 +615,7 @@ msgstr "Produit avec la clé de tableau \"%1$d\" indisponible"
 msgid "Product with code \"%1$s\" not found"
 msgstr "Produit de code \"%1$s\" introuvable"
 
-#: src/MShop/Order/Item/Base/Default.php:744
+#: src/MShop/Order/Item/Base/Default.php:761
 #, php-format
 msgid "Product with the same signatur not available"
 msgstr "Produit de la même signature indisponible"
@@ -674,7 +674,7 @@ msgstr "Envoi de la commande au prestataire de livraison échoué avec statut HT
 msgid "Sending order to delivery provider failed: \"%1$s\""
 msgstr "Envoi de la commande au prestataire de livraison échoué : \"%1$s\""
 
-#: src/MShop/Order/Item/Base/Default.php:387
+#: src/MShop/Order/Item/Base/Default.php:400
 #, php-format
 msgid "Service of type \"%1$s\" not available"
 msgstr "Service de type \"%1$s\" indisponible"
