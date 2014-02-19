@@ -179,6 +179,9 @@ class Client_Html_Basket_Standard_Default
 				case 'edit':
 
 					$products = (array) $view->param( 'b-prod', array() );
+					$options = array(
+						'stock' => $view->config( 'client/html/basket/standard/require-stock', true ),
+					);
 
 					if( ( $positon = $view->param( 'b-position', null ) ) !== null )
 					{
@@ -194,6 +197,7 @@ class Client_Html_Basket_Standard_Default
 						$this->_controller->editProduct(
 							( isset( $values['position'] ) ? $values['position'] : null ),
 							( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
+							$options,
 							( isset( $values['attrconf-code'] ) ? array_filter( (array) $values['attrconf-code'] ) : array() )
 						);
 					}

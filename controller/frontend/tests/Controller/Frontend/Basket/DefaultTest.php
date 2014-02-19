@@ -302,7 +302,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
+		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 
 		$items = $productManager->searchItems( $search );
 
@@ -310,8 +310,16 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $item->getId(), 1001 );
+		try
+		{
+			$this->_object->addProduct( $item->getId(), 5 );
+			throw new Exception( 'Expected exception not thrown' );
+		}
+		catch( Controller_Frontend_Basket_Exception $e )
+		{
+			$item = $this->_object->get()->getProduct( 0 );
+			$this->assertEquals( 3, $item->getQuantity() );
+		}
 	}
 
 
@@ -502,7 +510,8 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No attributes available' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 1, true, array(), array_keys( $attributes ) );
+
+		$this->_object->addProduct( $item->getId(), 1, array(), array(), array_keys( $attributes ) );
 		$this->_object->editProduct( 0, 4 );
 
 		$item = $this->_object->get()->getProduct( 0 );
@@ -510,12 +519,66 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 4, $item->getQuantity() );
 
 
-		$this->_object->editProduct( 0, 3, array( $attribute->getType() ), true );
+		$this->_object->editProduct( 0, 3, array(), array( $attribute->getType() ) );
 
 		$item = $this->_object->get()->getProduct( 0 );
 		$this->assertEquals( 3, $item->getQuantity() );
 		$this->assertEquals( 1, count( $item->getAttributes() ) );
 		$this->assertEquals( 'U:TESTPSUB01', $item->getProductCode() );
+	}
+
+
+	public function testEditProductNotEnoughStock()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
+		$items = $productManager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Product not found' );
+		}
+
+		$this->_object->addProduct( $item->getId(), 2 );
+
+		$item = $this->_object->get()->getProduct( 0 );
+		$this->assertEquals( 2, $item->getQuantity() );
+
+		try
+		{
+			$this->_object->editProduct( 0, 5 );
+			throw new Exception( 'Expected exception not thrown' );
+		}
+		catch( Controller_Frontend_Basket_Exception $e )
+		{
+			$item = $this->_object->get()->getProduct( 0 );
+			$this->assertEquals( 3, $item->getQuantity() );
+			$this->assertEquals( 'IJKL', $item->getProductCode() );
+		}
+	}
+
+
+	public function testEditProductStockNotChecked()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
+		$items = $productManager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Product not found' );
+		}
+
+		$this->_object->addProduct( $item->getId(), 2 );
+
+		$item = $this->_object->get()->getProduct( 0 );
+		$this->assertEquals( 2, $item->getQuantity() );
+
+		$this->_object->editProduct( 0, 5, array( 'stock' => false ) );
+
+		$item = $this->_object->get()->getProduct( 0 );
+		$this->assertEquals( 5, $item->getQuantity() );
+		$this->assertEquals( 'IJKL', $item->getProductCode() );
 	}
 
 
