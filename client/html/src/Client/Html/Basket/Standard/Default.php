@@ -146,7 +146,10 @@ class Client_Html_Basket_Standard_Default
 				case 'add':
 
 					$products = (array) $view->param( 'b-prod', array() );
-					$reqvariant = $view->config( 'client/html/basket/standard/require-variant', true );
+					$options = array(
+						'stock' => $view->config( 'client/html/basket/standard/require-stock', true ),
+						'variant' => $view->config( 'client/html/basket/standard/require-variant', true ),
+					);
 
 					if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
 					{
@@ -164,7 +167,7 @@ class Client_Html_Basket_Standard_Default
 						$this->_controller->addProduct(
 							( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
 							( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
-							$reqvariant,
+							$options,
 							( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
 							( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
 							( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() )

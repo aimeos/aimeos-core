@@ -64,9 +64,11 @@ class Controller_Frontend_Basket_Default
 	 *
 	 * @param string $prodid ID of the base product to add
 	 * @param integer $quantity Amount of products that should by added
-	 * @param boolean $requireVariant True if a specific product must be matched by the variant-building attribute IDs
-	 *  or false if the parent product can be added to the basket when the variant-building attributes don't match or
-	 *  are missing
+	 * @param array $options Possible options are: 'stock'=>true and 'variant'=>true
+	 * 	The 'stock'=>false option allows adding products without being in stock.
+	 * 	The 'variant'=>false option allows adding the selection product to the basket
+	 * 	instead of the specific sub-product if the variant-building attribute IDs
+	 * 	doesn't match a specific sub-product or if the attribute IDs are missing.
 	 * @param array $variantAttributeIds List of variant-building attribute IDs that identify a specific product
 	 * 	in a selection products
 	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
@@ -74,11 +76,14 @@ class Controller_Frontend_Basket_Default
 	 * @param array $hiddenAttributeIds List of attribute IDs that should be stored along with the product in the order
 	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
 	 */
-	public function addProduct( $prodid, $quantity = 1, $requireVariant = true, $variantAttributeIds = array(),
+	public function addProduct( $prodid, $quantity = 1, $options = array(), $variantAttributeIds = array(),
 		$configAttributeIds = array(), $hiddenAttributeIds = array() )
 	{
 		$this->_checkCategory( $prodid );
-		$this->_checkStockLevel( $prodid, $quantity );
+
+		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
+			$this->_checkStockLevel( $prodid, $quantity );
+		}
 
 
 		$context = $this->_getContext();
@@ -125,7 +130,7 @@ class Controller_Frontend_Basket_Default
 					$attr[] = $orderAttributeItem;
 				}
 			}
-			else if( $requireVariant === true )
+			else if( !isset( $options['variant'] ) || $options['variant'] != false )
 			{
 				$msg = sprintf( 'No article found for selected attributes and product ID "%1$s"', $prodid );
 				throw new Controller_Frontend_Basket_Exception( $msg );

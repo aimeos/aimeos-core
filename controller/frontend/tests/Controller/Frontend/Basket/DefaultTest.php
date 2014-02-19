@@ -104,7 +104,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1, true, array_keys( $attributes ) );
+		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
 
 		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
 		$this->assertEquals( 'CNC', $this->_object->get()->getProduct( 0 )->getProductCode() );
@@ -141,7 +141,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1, true, array_keys( $attributes ) );
+		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
 
 		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
 		$this->assertEquals( 'U:TESTSUB02', $this->_object->get()->getProduct( 0 )->getProductCode() );
@@ -180,7 +180,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $item->getId(), 1, true, array_keys( $attributes ) );
+		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
 	}
 
 
@@ -197,8 +197,9 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Attribute not found' );
 		}
 
+		$options = array( 'variant' => false );
 
-		$this->_object->addProduct( $this->_testItem->getId(), 1, false, array_keys( $attributes ) );
+		$this->_object->addProduct( $this->_testItem->getId(), 1, $options, array_keys( $attributes ) );
 
 		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
 		$this->assertEquals( 'U:TESTP', $this->_object->get()->getProduct( 0 )->getProductCode() );
@@ -218,7 +219,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Attribute not found' );
 		}
 
-		$this->_object->addProduct( $this->_testItem->getId(), 1, true, array(), array_keys( $attributes ) );
+		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), array_keys( $attributes ) );
 		$basket = $this->_object->get();
 
 		$this->assertEquals( 1, count( $basket->getProducts() ) );
@@ -244,7 +245,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Attribute not found' );
 		}
 
-		$this->_object->addProduct( $this->_testItem->getId(), 1, true, array(), array(), array_keys( $attributes ) );
+		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), array(), array_keys( $attributes ) );
 
 		$basket = $this->_object->get();
 		$this->assertEquals( 1, count( $basket->getProducts() ) );
@@ -285,7 +286,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$configAttrIds = array_keys( $attribute );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $this->_testItem->getId(), 1, true, array(), $configAttrIds, $hiddenAttrIds );
+		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), $configAttrIds, $hiddenAttrIds );
 	}
 
 
@@ -311,6 +312,23 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->_object->addProduct( $item->getId(), 1001 );
+	}
+
+
+	public function testAddProductNoStockRequired()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
+
+		$items = $productManager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Product not found' );
+		}
+
+		$this->_object->addProduct( $item->getId(), 5, array( 'stock' => false ) );
 	}
 
 
@@ -352,7 +370,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	public function testAddProductConfigAttributeException()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$this->_object->addProduct( $this->_testItem->getId(), 1, true, array(), array( -1 ) );
+		$this->_object->addProduct( $this->_testItem->getId(), 1, array(), array(), array( -1 ) );
 	}
 
 
