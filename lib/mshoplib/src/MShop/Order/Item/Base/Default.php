@@ -245,6 +245,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 *
 	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
+	 * @return integer Position the product item was inserted at
 	 */
 	public function addProduct( MShop_Order_Item_Base_Product_Interface $item, $position = null )
 	{
@@ -256,21 +257,30 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 		try
 		{
 			$quantity = $item->getQuantity();
-			$item = $this->_getSameProduct( $item );
+			$position = $this->_getSameProduct( $item );
+
+			$item = $this->_products[$position];
 			$item->setQuantity( $item->getQuantity() + $quantity );
 		}
 		catch( MShop_Order_Exception $e )
 		{
-			if( $position !== null ) {
-				array_splice( $this->_products, $position, 0, array( $item ) );
-			} else {
+			if( $position === null )
+			{
 				$this->_products[] = $item;
+				end( $this->_products );
+				$position = key( $this->_products );
+			}
+			else
+			{
+				array_splice( $this->_products, $position, 0, array( $item ) );
 			}
 		}
 
 		$this->_modified = true;
 
 		$this->_notifyListeners( 'addProduct.after', $item );
+
+		return $position;
 	}
 
 
@@ -327,6 +337,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 *
 	 * @param MShop_Order_Item_Base_Address_Interface $address Order address item for the given domain
 	 * @param string $domain Address domain, usually "billing" or "delivery"
+	 * @return MShop_Order_Item_Base_Address_Interface Item that was really added to the basket
 	 */
 	public function setAddress(MShop_Order_Item_Base_Address_Interface $address,
 		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT)
@@ -338,10 +349,12 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 		// enforce that the type is the same as the given one
 		$address->setType( $domain );
 
-		$this->_addresses[ $domain ] = clone $address;
+		$this->_addresses[$domain] = clone $address;
 		$this->_modified = true;
 
 		$this->_notifyListeners( 'setAddress.after', $address );
+
+		return $this->_addresses[$domain];
 	}
 
 
@@ -396,6 +409,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 *
 	 * @param MShop_Order_Item_Base_Service_Interface $service Order service item for the given domain
 	 * @param string $type Service type
+	 * @return MShop_Order_Item_Base_Service_Interface Item that was really added to the basket
 	 */
 	public function setService(MShop_Order_Item_Base_Service_Interface $service, $type)
 	{
@@ -410,6 +424,8 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 		$this->_modified = true;
 
 		$this->_notifyListeners( 'setService.after', $service );
+
+		return $this->_services[$type];
 	}
 
 
@@ -680,6 +696,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * the existing product can be updated.
 	 *
 	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item
+	 * @return integer Positon of the same product in the product list
 	 * @throws MShop_Order_Exception If no similar item was found
 	 */
 	protected function _getSameProduct( MShop_Order_Item_Base_Product_Interface $item )
@@ -690,7 +707,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			$attributeMap[ $attributeItem->getCode() ] = $attributeItem;
 		}
 
-		foreach( $this->_products as $product )
+		foreach( $this->_products as $position => $product )
 		{
 			if( $product->getProductCode() !== $item->getProductCode() ) {
 				continue;
@@ -738,7 +755,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 				}
 			}
 
-			return $product;
+			return $position;
 		}
 
 		throw new MShop_Order_Exception( sprintf( 'Product with the same signatur not available' ) );

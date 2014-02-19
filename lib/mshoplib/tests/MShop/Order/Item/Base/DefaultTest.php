@@ -276,8 +276,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 
 	public function testFinish()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete( 'This test has not been implemented yet.' );
+		$this->_object->finish();
 	}
 
 
@@ -292,56 +291,89 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testAddProduct()
+	public function testAddProductAppend()
 	{
 		foreach( $this->_products as $product ) {
 			$this->_object->addProduct( $product );
 		}
 
-		$orderManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext());
-		$orderProductManager = $orderManager->getSubManager( 'base' )->getSubManager( 'product' );
-		$product = $orderProductManager->createItem();
-
-		$price = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
-		$price->setValue( '2.99' );
-
-		$product->setPrice( $price );
-		$product->setProductCode('prodid3');
-
-
 		$products = $this->_object->getProducts();
-		$this->_object->addProduct($product);
+		$product = $this->_createProduct( 'prodid3' );
 		$products[] = $product;
 
-		$this->assertSame($products, $this->_object->getProducts());
-		$this->assertTrue($this->_object->isModified());
+		$pos = $this->_object->addProduct($product);
+
+		$this->assertSame( $products, $this->_object->getProducts() );
+		$this->assertSame( $product, $this->_object->getProduct( $pos ) );
+		$this->assertTrue( $this->_object->isModified() );
+	}
 
 
-		$orderProduct = clone $product;
-		$orderProduct->setProductCode('prodid4');
-		array_splice($products, 2, 0, array( $orderProduct ));
-		$this->_object->addProduct($orderProduct, 2 );
+	public function testAddProductInsert()
+	{
+		foreach( $this->_products as $product ) {
+			$this->_object->addProduct( $product );
+		}
+
+		$products = $this->_object->getProducts();
+		$product = $this->_createProduct( 'prodid3' );
+		array_splice( $products, 1, 0, array( $product ) );
+
+		$pos = $this->_object->addProduct( $product, 1 );
+
 		$this->assertEquals( $products, $this->_object->getProducts() );
+		$this->assertSame( $product, $this->_object->getProduct( $pos ) );
+		$this->assertTrue( $this->_object->isModified() );
+	}
 
 
-		$orderProduct = clone $product;
-		$orderProduct->setProductCode('prodid5');
-		array_splice($products, 2, 0, array( $orderProduct ));
-		$this->_object->addProduct($orderProduct, 2 );
+	public function testAddProductInsertEnd()
+	{
+		foreach( $this->_products as $product ) {
+			$this->_object->addProduct( $product );
+		}
+
+		$products = $this->_object->getProducts();
+		$product = $this->_createProduct( 'prodid3' );
+		array_splice( $products, 2, 0, array( $product ) );
+
+		$pos = $this->_object->addProduct( $product, 2 );
+
 		$this->assertEquals( $products, $this->_object->getProducts() );
+		$this->assertSame( $product, $this->_object->getProduct( $pos ) );
+		$this->assertTrue( $this->_object->isModified() );
+	}
 
 
-		$orderProductSame = clone $product;
-		$orderProductSame->setProductCode('prodid5');
-		$orderProductSame->setQuantity( 5 );
-		$orderProduct->setQuantity( 4 );
+	public function testAddProductSame()
+	{
+		foreach( $this->_products as $product ) {
+			$this->_object->addProduct( $product );
+		}
 
-		$this->_object->addProduct($orderProductSame );
+		$products = $this->_object->getProducts();
+		$product = $this->_createProduct( 'prodid3' );
+		$product->setQuantity( 5 );
+		$products[] = $product;
+
+		$pos1 = $this->_object->addProduct( $product );
+		$pos2 = $this->_object->addProduct( $product );
+
 		$this->assertEquals( $products, $this->_object->getProducts() );
+		$this->assertEquals( 10, $this->_object->getProduct( $pos2 )->getQuantity() );
+		$this->assertEquals( $pos1, $pos2 );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+
+	public function testAddProductExceedLimit()
+	{
+		$product = $this->_createProduct( 'prodid3' );
+		$product->setQuantity( 11 );
 
 		// Exceed limit for single product
 		$this->setExpectedException( 'MShop_Plugin_Exception' );
-		$this->_object->addProduct($orderProductSame );
+		$this->_object->addProduct( $product );
 	}
 
 
@@ -384,8 +416,9 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$orderAddressManager = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 		$address = $orderAddressManager->createItem();
 
-		$this->_object->setAddress($address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT);
+		$result = $this->_object->setAddress($address, MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT);
 		$this->assertEquals($address, $this->_object->getAddress(MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT));
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Address_Interface', $result );
 
 		$this->assertTrue($this->_object->isModified());
 	}
@@ -415,8 +448,9 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
 		$service = $orderServiceManager->createItem();
 
-		$this->_object->setService($service, $type);
+		$result = $this->_object->setService($service, $type);
 		$this->assertEquals($service, $this->_object->getService($type));
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $result );
 		$this->assertTrue($this->_object->isModified());
 	}
 
@@ -529,5 +563,21 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
 		$this->_object->check( MShop_Order_Item_Base_Abstract::PARTS_SERVICE );
+	}
+
+
+	protected function _createProduct( $code )
+	{
+		$orderManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext());
+		$orderProductManager = $orderManager->getSubManager( 'base' )->getSubManager( 'product' );
+		$product = $orderProductManager->createItem();
+
+		$price = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$price->setValue( '2.99' );
+
+		$product->setPrice( $price );
+		$product->setProductCode( $code );
+
+		return $product;
 	}
 }
