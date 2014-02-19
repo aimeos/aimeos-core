@@ -65,10 +65,10 @@ class Controller_Frontend_Basket_Default
 	 * @param string $prodid ID of the base product to add
 	 * @param integer $quantity Amount of products that should by added
 	 * @param array $options Possible options are: 'stock'=>true and 'variant'=>true
-	 * 	The 'stock'=>true option require products to be in stock before they can be added.
-	 * 	The 'variant'=>true option requires that a specific product must be matched
-	 * 	by the variant-building attribute IDs or false if the parent product can be
-	 * 	added to the basket when the variant-building attributes don't match or are missing.
+	 * 	The 'stock'=>false option allows adding products without being in stock.
+	 * 	The 'variant'=>false option allows adding the selection product to the basket
+	 * 	instead of the specific sub-product if the variant-building attribute IDs
+	 * 	doesn't match a specific sub-product or if the attribute IDs are missing.
 	 * @param array $variantAttributeIds List of variant-building attribute IDs that identify a specific product
 	 * 	in a selection products
 	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
