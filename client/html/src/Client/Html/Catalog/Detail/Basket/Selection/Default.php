@@ -134,7 +134,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				{
 					foreach( $subProduct->getRefItems( 'attribute', null, 'variant' ) as $attrId => $attrItem )
 					{
-						$attrTypeDeps[ $attrItem->getType() ][$attrId] = 1;
+						$attrTypeDeps[ $attrItem->getType() ][$attrId] = $attrItem->getPosition();
 						$attrDeps[$attrId][] = $subProdId;
 						$prodDeps[$subProdId][] = $attrId;
 						$attrIds[] = $attrId;

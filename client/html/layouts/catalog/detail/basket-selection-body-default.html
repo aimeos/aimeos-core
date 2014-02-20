@@ -11,7 +11,6 @@ $attributes = $this->get( 'selectionAttributeItems', array() );
 $prodDeps = json_encode( $this->get( 'selectionProductDependencies', new stdClass() ) );
 $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdClass() ) );
 
-
 ?>
 <div class="catalog-detail-basket-selection" data-proddeps="<?php echo $enc->attr( $prodDeps ); ?>" data-attrdeps="<?php echo $enc->attr( $attrDeps ); ?>">
 <?php foreach( $this->get( 'selectionProducts', array() ) as $prodid => $product ) : ?>
@@ -23,13 +22,13 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 <?php	endif; ?>
 <?php endforeach; ?>
 	<table class="selection">
-<?php foreach( $this->get( 'selectionAttributeTypeDependencies', array() ) as $type => $attrIds ) : ?>
+<?php foreach( $this->get( 'selectionAttributeTypeDependencies', array() ) as $type => $attrIds ) : asort( $attrIds ); ?>
 		<tr class="select-item">
 			<td class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $type ) ); ?></td>
 			<td class="select-value">
 				<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrvar-id', $type ) ) ); ?>" data-index="<?php echo $index++; ?>">
 					<option class="select-option" value=""><?php echo $enc->attr( $this->translate( 'client/html', 'Please select' ) ); ?></option>
-<?php	foreach( $attrIds as $attrId => $value ) : ?>
+<?php	foreach( $attrIds as $attrId => $position ) : ?>
 <?php		if( isset( $attributes[$attrId] ) ) : ?>
 					<option class="select-option" value="<?php echo $enc->attr( $attrId ); ?>"><?php echo $enc->html( $attributes[$attrId]->getName() ); ?></option>
 <?php		endif; ?>
