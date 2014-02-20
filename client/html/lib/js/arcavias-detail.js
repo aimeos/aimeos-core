@@ -264,20 +264,24 @@ jQuery(document).ready( function($) {
 				var newPrice = parent.find(".price-prodid-" + prodId);
 				var newStock = parent.find(".stock-prodid-" + prodId);
 				
-				parent.find(".price").removeClass("price-actual");
-
 				if( newPrice.length === 0 ) {
-					$(".price-main", parent).addClass("price-actual");
-				} else {
-					newPrice.addClass("price-actual");
+					newPrice = $(".price-main", parent);
 				}
-				
-				parent.find(".stockitem").removeClass("stock-actual");
 
 				if( newStock.length === 0 ) {
-					$(".stockitem:first-child", parent).addClass("stock-actual");
+					newStock = $(".stockitem:first-child", parent);
+				}
+				
+				parent.find(".price").removeClass("price-actual");
+				newPrice.addClass("price-actual");
+				
+				parent.find(".stockitem").removeClass("stock-actual");
+				newStock.addClass("stock-actual");
+				
+				if( parent.data("reqstock") && newStock.hasClass("stock-out") ) {
+					parent.find(".addbasket .btn-action").addClass("btn-disabled").attr("disabled", "disabled");
 				} else {
-					newStock.addClass("stock-actual");
+					parent.find(".addbasket .btn-action").removeClass("btn-disabled").removeAttr("disabled");
 				}
 			}
 		}
