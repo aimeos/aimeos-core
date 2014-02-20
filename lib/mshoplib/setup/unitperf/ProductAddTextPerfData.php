@@ -93,7 +93,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 		$search = $productListManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'product.list.domain', 'attribute' ),
-			$search->compare( '==', 'product.list.type.code', 'default' ),
+			$search->compare( '==', 'product.list.type.code', 'variant' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'product.list.id' ) ) );
@@ -109,12 +109,14 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 			foreach ( $result as $listItem )
 			{
-				$id = $listItem->getParentId();
 				$refId = $listItem->getRefId();
-				$color = ( $attrIds[$refId] ? $attrIds[$refId]->getName() : 'solid' );
 
-				$text = $attrIds[ $listItem->getRefId() ]->getName() . ' ' . current( $attribute )
-					. ' ' . current( $articles ) . ' ' . current( $size );
+				if( !isset( $attrIds[$refId] ) ) {
+					continue;
+				}
+
+				$id = $listItem->getParentId();
+				$text = $attrIds[$refId]->getName() . ' ' . current( $attribute ) . ' ' . current( $articles ) . ' ' . current( $size );
 
 
 				$textItem->setId( null );

@@ -11,6 +11,9 @@
  */
 class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 {
+	private $_count = 9000;
+
+
 	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
 	{
 		$iface = 'MShop_Context_Item_Interface';
@@ -84,7 +87,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 		$productItem->setSupplierCode( 'My brand' );
 		$productItem->setDateStart( '1970-01-01 00:00:00' );
 
-		for( $i = 0; $i < 9000; $i++ )
+		for( $i = 0; $i < $this->_count; $i++ )
 		{
 			$code = 'perf-' . str_pad( $i, 5, '0', STR_PAD_LEFT );
 
@@ -104,26 +107,6 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	protected function _getContext()
 	{
 		return $this->_additional;
-	}
-
-
-	protected function _txBegin()
-	{
-		$dbm = $this->_additional->getDatabaseManager();
-
-		$conn = $dbm->acquire();
-		$conn->begin();
-		$dbm->release( $conn );
-	}
-
-
-	protected function _txCommit()
-	{
-		$dbm = $this->_additional->getDatabaseManager();
-
-		$conn = $dbm->acquire();
-		$conn->commit();
-		$dbm->release( $conn );
 	}
 
 
@@ -152,5 +135,25 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 		$listItem->setDomain( $domain );
 
 		return $listItem;
+	}
+
+
+	protected function _txBegin()
+	{
+		$dbm = $this->_additional->getDatabaseManager();
+
+		$conn = $dbm->acquire();
+		$conn->begin();
+		$dbm->release( $conn );
+	}
+
+
+	protected function _txCommit()
+	{
+		$dbm = $this->_additional->getDatabaseManager();
+
+		$conn = $dbm->acquire();
+		$conn->commit();
+		$dbm->release( $conn );
 	}
 }

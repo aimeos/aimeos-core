@@ -43,24 +43,8 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 
 		$context =  $this->_getContext();
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$productListManager = $productManager->getSubManager( 'list' );
-		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
-		$expr = array();
-		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'price');
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
-
-		if ( ($listTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
-		}
-
-
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
-		$priceTypeManager = $priceManager->getSubManager( 'type' );
+		$priceTypeManager = MShop_Factory::createManager( $context, 'price/type' );
 
 		$expr = array();
 		$search = $priceTypeManager->createSearch();
@@ -74,6 +58,8 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		}
 
 
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+
 		$priceItem = $priceManager->createItem();
 		$priceItem->setTypeId( $priceTypeItem->getId() );
 		$priceItem->setDomain( 'product' );
@@ -83,13 +69,30 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$priceItem->setQuantity( 1 );
 		$priceItem->setStatus( 1 );
 
+
+		$productListTypeManager = MShop_Factory::createManager( $context, 'product/list/type' );
+
+		$expr = array();
+		$search = $productListTypeManager->createSearch();
+		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
+		$expr[] = $search->compare('==', 'product.list.type.domain', 'price');
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$types = $productListTypeManager->searchItems($search);
+
+		if ( ($listTypeItem = reset($types)) === false) {
+			throw new Exception('Product list type item not found');
+		}
+
+
+		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
+
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
 		$listItem->setDomain( 'price' );
 		$listItem->setPosition( 0 );
 
 
-		$this->_txBegin();
+		$productManager = MShop_Factory::createManager( $context, 'product' );
 
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
@@ -97,23 +100,31 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$start = 0;
 		$price = 1000;
 
+		$this->_txBegin();
+
 		do
 		{
 			$result = $productManager->searchItems( $search );
 
 			foreach ( $result as $id => $item )
 			{
-				$priceItem->setId( null );
-				$priceItem->setValue( $price );
-				$priceItem->setRebate( $price / 10 );
-				$priceManager->saveItem( $priceItem );
-
-				$listItem->setId( null );
 				$listItem->setParentId( $id );
-				$listItem->setRefId( $priceItem->getId() );
-				$productListManager->saveItem( $listItem, false );
 
-				if( --$price < 1 ) {
+				for( $i = 0; $i < 3; $i++ )
+				{
+					$priceItem->setId( null );
+					$priceItem->setQuantity( 1 + $i * 5 );
+					$priceItem->setValue( $price - $i * 10 );
+					$priceItem->setRebate( $i * 10 );
+					$priceManager->saveItem( $priceItem );
+
+					$listItem->setId( null );
+					$listItem->setPosition( $i );
+					$listItem->setRefId( $priceItem->getId() );
+					$productListManager->saveItem( $listItem, false );
+				}
+
+				if( --$price < 100 ) {
 					$price = 1000;
 				}
 			}
