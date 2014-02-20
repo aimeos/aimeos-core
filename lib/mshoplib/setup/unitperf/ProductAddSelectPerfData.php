@@ -9,17 +9,9 @@
 /**
  * Adds selection performance records to product table.
  */
-class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
+class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBasePerfData
 {
-	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
-	{
-		$iface = 'MShop_Context_Item_Interface';
-		if( !( $additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
-		}
-
-		parent::__construct( $schema, $conn, $additional );
-	}
+	private $_count = 100;
 
 
 	/**
@@ -29,7 +21,10 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddPerfData', 'ProductAddBasePerfData', 'ProductAddTextPerfData' );
+		return array(
+			'LocaleAddPerfData', 'ProductAddBasePerfData', 'ProductAddTextPerfData',
+			'ProductAddPricePerfData', 'ProductAddStockPerfData'
+		);
 	}
 
 
@@ -61,43 +56,14 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 		$this->_msg('Adding product selection performance data', 0);
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
-		$productTypeManager = $productManager->getSubManager( 'type' );
-
-		$expr = array();
-		$search = $productTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.type.domain', 'product');
-		$expr[] = $search->compare('==', 'product.type.code', 'select');
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productTypeManager->searchItems($search);
-
-		if ( ($productTypeItem = reset($types)) === false) {
-			throw new Exception('Product type item not found');
-		}
-
-
 		$this->_txBegin();
 
-		$productItem = $productManager->createItem();
-		$productItem->setTypeId( $productTypeItem->getId() );
-		$productItem->setStatus( 1 );
-		$productItem->setSupplierCode( 'My selection brand' );
-		$productItem->setDateStart( '1970-01-01 00:00:00' );
-
-		$selProducts = array();
-
-		for( $i = 0; $i < 1000; $i++ )
-		{
-			$productItem->setId( null );
-			$productItem->setCode( 'perf-select-' . str_pad( $i, 5, '0', STR_PAD_LEFT ) );
-			$productItem->setLabel( 'Selection product ' . ($i+1) );
-			$productManager->saveItem( $productItem );
-
-			$selProducts[] = $productItem->getId();
-		}
+		$selProducts = $this->_getSelectionProductIds();
 
 		$this->_txCommit();
 
+
+		$productTypeManager = MShop_Factory::createManager( $this->_getContext(), 'product/type' );
 
 		$expr = array();
 		$search = $productTypeManager->createSearch();
@@ -110,8 +76,8 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 			throw new Exception('Product type item not found');
 		}
 
-		$productListManager = $productManager->getSubManager( 'list' );
-		$productListTypeManager = $productListManager->getSubManager( 'type' );
+
+		$productListTypeManager = MShop_Factory::createManager( $this->_getContext(), 'product/list/type' );
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
@@ -124,31 +90,60 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 			throw new Exception('Product list type item not found');
 		}
 
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.typeid', $productTypeItem->getId() ) );
-		$search->setSortations( array( $search->sort( '-', 'product.id' ) ) );
+
+		$productListManager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
 		$listItem->setDomain( 'product' );
 
 
+		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.typeid', $productTypeItem->getId() ) );
+		$search->setSortations( array( $search->sort( '-', 'product.id' ) ) );
+
+
 		$this->_txBegin();
 
+		$selCount = count( $selProducts );
+		$selPrices = array();
 		$start = $num = 0;
 
 		do
 		{
-			$result = $productManager->searchItems( $search );
+			$result = $productManager->searchItems( $search, array( 'price' ) );
 
 			foreach( $result as $id => $product )
 			{
-				$pos = (int) ( $num / 9 );
+				$pos = (int) ( ($num / 9) % $selCount );
+				$prices = $product->getRefItems( 'price', 'default', 'default' );
+				$selPrices[$pos] = $this->_getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
 
 				$listItem->setId( null );
-				$listItem->setParentId( $selProducts[ $pos ] );
+				$listItem->setParentId( $selProducts[$pos] );
 				$listItem->setRefId( $id );
+				$productListManager->saveItem( $listItem, false );
 
+
+				$pos = (int) ( ($num / 9 + 1) % $selCount );
+				$prices = $product->getRefItems( 'price', 'default', 'default' );
+				$selPrices[$pos] = $this->_getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
+
+				$listItem->setId( null );
+				$listItem->setParentId( $selProducts[$pos] );
+				$listItem->setRefId( $id );
+				$productListManager->saveItem( $listItem, false );
+
+
+				$pos = (int) ( ($num / 9 + 2) % $selCount );
+				$prices = $product->getRefItems( 'price', 'default', 'default' );
+				$selPrices[$pos] = $this->_getLowestPrice( ( isset( $selPrices[$pos] ) ? $selPrices[$pos] : null ), $prices );
+
+				$listItem->setId( null );
+				$listItem->setParentId( $selProducts[$pos] );
+				$listItem->setRefId( $id );
 				$productListManager->saveItem( $listItem, false );
 
 				$num++;
@@ -163,32 +158,170 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_Abstract
 		$this->_txCommit();
 
 
+		$expr = array();
+		$search = $productListTypeManager->createSearch();
+		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
+		$expr[] = $search->compare('==', 'product.list.type.domain', 'price');
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$types = $productListTypeManager->searchItems($search);
+
+		if ( ($listTypeItem = reset($types)) === false) {
+			throw new Exception('Product list type item not found');
+		}
+
+		$listItem->setTypeId( $listTypeItem->getId() );
+		$listItem->setDomain( 'price' );
+
+		$this->_txBegin();
+
+		foreach( $selPrices as $pos => $priceItem )
+		{
+			$listItem->setId( null );
+			$listItem->setRefId( $priceItem->getId() );
+			$listItem->setParentId( $selProducts[$pos] );
+			$productListManager->saveItem( $listItem, false );
+		}
+
+		$this->_txCommit();
+
+
 		$this->_status( 'done' );
 	}
 
 
-	protected function _getContext()
+	protected function _getLowestPrice( MShop_Price_Item_Interface $price = null, array $prices = array() )
 	{
-		return $this->_additional;
+		foreach( $prices as $item )
+		{
+			if( $price === null )
+			{
+				$price = $item;
+				continue;
+			}
+
+			if( $price !== null && $item->getValue() < $price->getValue() ) {
+				$price = $item;
+			}
+		}
+
+		return $price;
 	}
 
 
-	protected function _txBegin()
+	protected function _getSelectionProductIds()
 	{
-		$dbm = $this->_additional->getDatabaseManager();
-
-		$conn = $dbm->acquire();
-		$conn->begin();
-		$dbm->release( $conn );
-	}
+		$context = $this->_getContext();
 
 
-	protected function _txCommit()
-	{
-		$dbm = $this->_additional->getDatabaseManager();
+		$textTypeManager = MShop_Factory::createManager( $context, 'text/type' );
 
-		$conn = $dbm->acquire();
-		$conn->commit();
-		$dbm->release( $conn );
+		$search = $textTypeManager->createSearch();
+		$expr = array(
+			$search->compare('==', 'text.type.domain', 'product'),
+			$search->combine( '||', array(
+				$search->compare('==', 'text.type.code', 'short'),
+				$search->compare('==', 'text.type.code', 'long'),
+			) ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		foreach( $textTypeManager->searchItems($search) as $item ) {
+			$textTypeItems[ $item->getCode() ] = $item;
+		}
+
+		if( count( $textTypeItems ) !== 2 ) {
+			throw new Exception( 'Text type items not found' );
+		}
+
+
+		$textManager = MShop_Factory::createManager( $context, 'text' );
+
+		$textItem = $textManager->createItem();
+		$textItem->setDomain( 'product' );
+		$textItem->setStatus( 1 );
+
+
+		$productListTypeManager = MShop_Factory::createManager( $context, 'product/list/type' );
+
+		$expr = array();
+		$search = $productListTypeManager->createSearch();
+		$expr[] = $search->compare('==', 'product.list.type.domain', 'text');
+		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$types = $productListTypeManager->searchItems($search);
+
+		if ( ($productListTypeItem = reset($types)) === false) {
+			throw new Exception('Product list type item not found');
+		}
+
+
+		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
+
+		$productListItem = $productListManager->createItem();
+		$productListItem->setTypeId( $productListTypeItem->getId() );
+		$productListItem->setDomain( 'text' );
+		$productListItem->setStatus( 1 );
+
+
+		$productTypeManager = MShop_Factory::createManager( $context, 'product/type' );
+
+		$expr = array();
+		$search = $productTypeManager->createSearch();
+		$expr[] = $search->compare('==', 'product.type.domain', 'product');
+		$expr[] = $search->compare('==', 'product.type.code', 'select');
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$types = $productTypeManager->searchItems($search);
+
+		if ( ($productTypeItem = reset($types)) === false) {
+			throw new Exception('Product type item not found');
+		}
+
+
+		$productManager = MShop_Factory::createManager( $context, 'product' );
+
+		$productItem = $productManager->createItem();
+		$productItem->setTypeId( $productTypeItem->getId() );
+		$productItem->setSupplierCode( 'My selection brand' );
+		$productItem->setDateStart( '1970-01-01 00:00:00' );
+		$productItem->setStatus( 1 );
+
+
+		$selProducts = array();
+
+		for( $i = 0; $i < $this->_count; $i++ )
+		{
+			$productItem->setId( null );
+			$productItem->setCode( 'perf-select-' . str_pad( $i, 5, '0', STR_PAD_LEFT ) );
+			$productItem->setLabel( 'Selection product ' . ($i+1) );
+			$productManager->saveItem( $productItem );
+
+			$selProducts[] = $productItem->getId();
+
+
+			$textItem->setId( null );
+			$textItem->setTypeId( $textTypeItems['short']->getId() );
+			$textItem->setLabel( 'Short description for ' . ($i+1) . '. selection product' );
+			$textItem->setContent( 'Short description for ' . ($i+1) . '. selection product' );
+			$textManager->saveItem( $textItem );
+
+			$productListItem->setId( null );
+			$productListItem->setParentId( $productItem->getId() );
+			$productListItem->setRefId( $textItem->getId() );
+			$productListManager->saveItem( $productListItem, false );
+
+
+			$textItem->setId( null );
+			$textItem->setTypeId( $textTypeItems['long']->getId() );
+			$textItem->setLabel( 'Long description for ' . ($i+1) . '. selection product' );
+			$textItem->setContent( 'Long description for ' . ($i+1) . '. selection product. This may contain some "Lorem ipsum" text' );
+			$textManager->saveItem( $textItem );
+
+			$productListItem->setId( null );
+			$productListItem->setParentId( $productItem->getId() );
+			$productListItem->setRefId( $textItem->getId() );
+			$productListManager->saveItem( $productListItem, false );
+		}
+
+		return $selProducts;
 	}
 }
