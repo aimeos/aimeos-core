@@ -5,8 +5,8 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$result = array();
 $enc = $this->encoder();
-$result = $stocklevels = array();
 
 $stockProductIds = $this->get( 'stockProductIds', array() );
 $stockItemsByProducts = $this->get( 'stockItemsByProducts', array() );
@@ -81,7 +81,6 @@ foreach( $stockProductIds as $prodId )
 
 		$text = nl2br( $enc->html( $text, $enc::TRUST ) );
 		$stocks[$level] .= '<div class="stockitem stock-prodid-' . $prodId . ' ' . $level . '"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
-		$stocklevels[$prodId] = $level;
 	}
 
 	$result[$prodId] = implode( '', $stocks );
@@ -90,7 +89,6 @@ foreach( $stockProductIds as $prodId )
 ?>
 // <!--
 var arcaviasStockHtml = <?php echo json_encode( $result, JSON_FORCE_OBJECT ); ?>;
-var arcaviasStockLevel = <?php echo json_encode( $stocklevels, JSON_FORCE_OBJECT ); ?>;
 
 $(".arcavias .product .stock").each(function() {
 
@@ -110,15 +108,12 @@ $(".arcavias .product .stock").each(function() {
 	}
 });
 
-if(<?php echo (int) $this->config( 'client/html/basket/standard/require-stock', true ); ?>) {
-	$(".arcavias .product").each(function() {
-	
-		var elem = $(this);
-		var prodId = elem.data("id");
-		
-		if( arcaviasStockLevel.hasOwnProperty(prodId) && arcaviasStockLevel[prodId] === 'stock-out' ) {
-			$(".addbasket .btn-action", elem).addClass("btn-disabled").attr("disabled", "disabled");
-		}
-	});
-}
+$(".arcavias .catalog-detail-basket").each(function() {
+
+	var elem = $(this);
+
+	if( elem.data("reqstock") && $(".stockitem:first-child", elem).hasClass("stock-out") ) {
+		$(".addbasket .btn-action", elem).addClass("btn-disabled").attr("disabled", "disabled");
+	}
+});
 // -->

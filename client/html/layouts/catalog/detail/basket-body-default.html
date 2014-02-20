@@ -10,15 +10,11 @@ $basketController = $this->config( 'client/html/basket/standard/url/controller',
 $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
 $basketParams = $this->get( 'basketParams', array() );
 
-/// Price format with price value (%1$s) and currency (%2$s)
-$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
-/// Percent format with value (%1$s) and % sign
-$percentFormat = $this->translate( 'client/html', '%1$s%%' );
-
+$reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', true );
 $enc = $this->encoder();
 
 ?>
-<div class="catalog-detail-basket">
+<div class="catalog-detail-basket" data-reqstock="<?php echo $reqstock; ?>">
 <?php if( isset( $this->detailProductItem ) ) : ?>
 	<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', $this->get( 'basketProductIds', array() ) ) ); ?>"></div>
 	<div class="price price-main price-actual price-prodid-<?php echo $this->detailProductItem->getId(); ?>">
