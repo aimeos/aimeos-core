@@ -11,7 +11,7 @@
  */
 class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBasePerfData
 {
-	private $_count = 100;
+	private $_count = 10000;
 
 
 	/**
