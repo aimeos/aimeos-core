@@ -236,7 +236,7 @@ jQuery(document).ready( function($) {
 		var attrDeps = $(".catalog-detail-basket-selection", event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
 
 		
-		$(".select-option:checked", event.delegateTarget).each(function(i, option) {
+		$(".selection .select-option:checked", event.delegateTarget).each(function(i, option) {
 		
 			var value = $(option).val();			
 
