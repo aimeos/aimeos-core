@@ -254,28 +254,29 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		$this->_notifyListeners( 'addProduct.before', $item );
 
-		if( ( $position = $this->_getSameProduct( $item ) ) !== false )
+		if( ( $pos = $this->_getSameProduct( $item ) ) !== false )
 		{
 			$quantity = $item->getQuantity();
-			$item = $this->_products[$position];
+			$item = $this->_products[$pos];
 			$item->setQuantity( $item->getQuantity() + $quantity );
 		}
 		else if( $position === null )
 		{
 			$this->_products[] = $item;
 			end( $this->_products );
-			$position = key( $this->_products );
+			$pos = key( $this->_products );
 		}
 		else
 		{
 			array_splice( $this->_products, $position, 0, array( $item ) );
+			$pos = $position;
 		}
 
 		$this->_modified = true;
 
 		$this->_notifyListeners( 'addProduct.after', $item );
 
-		return $position;
+		return $pos;
 	}
 
 
