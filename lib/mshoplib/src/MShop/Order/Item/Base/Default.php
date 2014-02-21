@@ -254,26 +254,21 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		$this->_notifyListeners( 'addProduct.before', $item );
 
-		try
+		if( ( $position = $this->_getSameProduct( $item ) ) !== false )
 		{
 			$quantity = $item->getQuantity();
-			$position = $this->_getSameProduct( $item );
-
 			$item = $this->_products[$position];
 			$item->setQuantity( $item->getQuantity() + $quantity );
 		}
-		catch( MShop_Order_Exception $e )
+		else if( $position === null )
 		{
-			if( $position === null )
-			{
-				$this->_products[] = $item;
-				end( $this->_products );
-				$position = key( $this->_products );
-			}
-			else
-			{
-				array_splice( $this->_products, $position, 0, array( $item ) );
-			}
+			$this->_products[] = $item;
+			end( $this->_products );
+			$position = key( $this->_products );
+		}
+		else
+		{
+			array_splice( $this->_products, $position, 0, array( $item ) );
 		}
 
 		$this->_modified = true;
@@ -758,6 +753,6 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			return $position;
 		}
 
-		throw new MShop_Order_Exception( sprintf( 'Product with the same signatur not available' ) );
+		return false;
 	}
 }
