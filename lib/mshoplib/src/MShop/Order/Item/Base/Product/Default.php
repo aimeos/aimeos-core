@@ -298,13 +298,15 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setQuantity( $quantity )
 	{
-		if ( $quantity == $this->getQuantity() ) { return; }
+		$quantity = (int) $quantity;
 
-		if ( (int) $quantity < 1 ) {
-			throw new MShop_Order_Exception('Quantity must be a positive integer');
+		if( $quantity == $this->getQuantity() ) { return; }
+
+		if( $quantity < 1 || $quantity > 2147483647 ) {
+			throw new MShop_Order_Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
 		}
 
-		$this->_values['quantity'] = (int) $quantity;
+		$this->_values['quantity'] = $quantity;
 		$this->setModified();
 	}
 

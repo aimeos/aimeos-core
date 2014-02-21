@@ -299,7 +299,7 @@
 .common-summary-detail td.quantity input {
 	text-align: center;
 	display: inline;
-	width: 3em;
+	width: 4em;
 }
 
 .common-summary-detail th.action,
@@ -959,7 +959,7 @@
 	margin-right: 1.5em;
 	text-align: center;
 	height: 1.6em;
-	width: 3em;
+	width: 5em;
 }
 
 /* product attributes */
