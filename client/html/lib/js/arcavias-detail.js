@@ -209,10 +209,10 @@ jQuery(document).ready( function($) {
 				// Each option can be disabled by multiple dependencies and
 				// we can remove each of the bits separately again.
 				if( value !== "" && val !== "" && !attrMap.hasOwnProperty(val) ) {
-					disabled |= Math.pow(2, index);
+					disabled |= 2<<index;
 					by[index] = 1;
 				} else if( by.hasOwnProperty(index) ) {
-					disabled &= ~Math.pow(2, index);
+					disabled &= ~(2<<index);
 					delete by[index];
 				}
 				
