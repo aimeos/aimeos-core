@@ -221,12 +221,34 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetQuantity()
 	{
-		$this->_object->setQuantity(20);
-		$this->assertEquals(20, $this->_object->getQuantity());
-		$this->assertTrue($this->_object->isModified());
+		$this->_object->setQuantity( 20 );
+		$this->assertEquals( 20, $this->_object->getQuantity() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
 
-		$this->setExpectedException('MShop_Order_Exception');
-		$this->_object->setQuantity(-5);
+	public function testSetQuantityDecimal()
+	{
+		$this->_object->setQuantity( 1.5 );
+		$this->assertEquals( 1, $this->_object->getQuantity() );
+		$this->assertTrue( $this->_object->isModified() );
+	}
+
+	public function testSetQuantityNegative()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->setQuantity( -5 );
+	}
+
+	public function testSetQuantityZero()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->setQuantity( 0 );
+	}
+
+	public function testSetQuantityOverflow()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->setQuantity( 2147483648 );
 	}
 
 	public function testGetPrice()
