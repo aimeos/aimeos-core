@@ -98,7 +98,8 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 
 		$start = 0;
-		$price = 1000;
+		$price = 100;
+		$value = +1;
 
 		$this->_txBegin();
 
@@ -124,9 +125,13 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 					$productListManager->saveItem( $listItem, false );
 				}
 
-				if( --$price < 100 ) {
-					$price = 1000;
+				if( $price >= 999 ) {
+					$value = -1;
+				} else if( $price <= 100 ) {
+					$value = +1;
 				}
+
+				$price += $value;
 			}
 
 			$count = count( $result );
