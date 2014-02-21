@@ -494,6 +494,9 @@
 
 .catalog-filter-attribute fieldset {
 	border: 1px solid #C3D9E5;
+	-webkit-border-radius: 0.5em;
+	-moz-border-radius: 0.5em;
+	border-radius: 0.5em;
 	color: #679CB8;
 	font-weight: bold;
 	padding: 5px;
@@ -694,12 +697,15 @@
 
 /* Product list, pagination section */
 .catalog-list-pagination {
-	clear: left;
 	background-color: #F2F7FA;
 	border: 1px solid #689DB9;
+	-webkit-border-radius: 0.5em;
+	-moz-border-radius: 0.5em;
+	border-radius: 0.5em;
 	color: #004266;
 	padding: 0.75em;
 	text-align: right;
+	clear: left;
 }
 
 .catalog-list-pagination .sort {
@@ -780,7 +786,7 @@
 
 .catalog-detail .header {
 	background-color: #679CB8;
-	padding: 0px 0px 0px 5px;
+	padding: 0 1em;
 	border: 0 none;
 	font-weight: bold;
 	font-size: 1em;
@@ -1129,7 +1135,7 @@
 	font-weight: bold;
 	height: 2em;
 	line-height: 2em;
-	padding: 0px 0px 0px 5px;
+	padding: 0 1em;
 	color: #ffffff;
 	background-color: #679CB8;
 }
