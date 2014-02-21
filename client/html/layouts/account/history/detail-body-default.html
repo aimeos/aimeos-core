@@ -13,10 +13,10 @@ $accountAction = $this->config( 'client/html/account/history/url/action', 'histo
 
 ?>
 <div class="account-history-detail common-summary">
-	<a class="modify" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Close' ), $enc::TRUST ); ?></a>
+	<a class="modify btn-close" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Close' ), $enc::TRUST ); ?></a>
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Order details' ), $enc::TRUST ); ?></h2>
 <?php echo $this->get( 'detailBody' ); ?>
 	<div class="button-group">
-		<a class="standardbutton" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Close' ), $enc::TRUST ); ?></a>
+		<a class="standardbutton btn-close" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Close' ), $enc::TRUST ); ?></a>
 	</div>
 </div>

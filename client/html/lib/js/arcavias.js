@@ -270,4 +270,41 @@ jQuery(document).ready( function($) {
 		if( url ) { window.location = url; }
 	});
 
+	
+	/*
+	 * Account clients
+	 */
+	
+	/* Show order details without page reload */
+	$(".account-history .history-item").on("click", "a", function(event) {
+
+		var details = $(".account-history-detail", event.delegateTarget);
+		
+		if( details.length === 0 ) {
+			
+			$.get($(this).attr("href"), function(data) {
+				
+				var doc = document.createElement("html");
+				doc.innerHTML = data;
+				
+				var node = $(".account-history-detail", doc);
+				node.css("display", "none");
+				$(event.delegateTarget).append(node);
+				node.slideDown();
+			});
+			
+		} else {
+			details.slideToggle();
+		}
+
+		return false;
+	});
+
+
+	/* Close order details */
+	$(".account-history .history-item").on("click", ".btn-close", function(event) {
+		$(".account-history-detail", event.delegateTarget).slideUp();
+		return false;
+	});
+
 });
