@@ -1523,11 +1523,6 @@
 }
 
 /* Checkout summary */
-.checkout-standard-summary,
-.account-history-detail {
-	padding: 0px 0px 0px 17px;
-}
-
 .checkout-standard-summary h3,
 .account-history-detail h3 {
 	display: inline-block;
@@ -1615,31 +1610,32 @@
 
 /* Order history */
 .account-history-list .history-item {
-	display: inline-block;
-	padding: 5px;
-	margin: 5px 0;
 	border: solid 1px #689DB9;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	display: block;
+	padding: 10px;
+	margin: 10px;
 }
 
-.account-history-list .attr-item {
+.account-history-list a .attr-item {
 	display: inline-block;
+	margin: 10px;
 }
 
-.account-history-list .attr-item .name,
-.account-history-list .attr-item .value {
+.account-history-list a .attr-item .name,
+.account-history-list a .attr-item .value {
 	display: inline-block;
 	vertical-align: top;
-	width: 218px;
+	min-width: 208px;
 }
 
-.account-history-list .attr-item .name {
+.account-history-list a .attr-item .name {
 	font-weight: bold;
 }
 
-.account-history .attr-item .name:after {
+.account-history-list a .attr-item .name:after {
 	content: ": ";
 }
 

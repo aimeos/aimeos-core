@@ -121,7 +121,7 @@ class Client_Html_Account_History_List_Default
 				$search->compare( '==', 'order.base.customerid', $context->getUserId() ),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '-', 'order.ctime' ) ) );
+			$search->setSortations( array( $search->sort( '-', 'order.id' ) ) );
 
 
 			$view->listOrderItems = $manager->searchItems( $search );
