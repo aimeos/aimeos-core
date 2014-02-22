@@ -152,6 +152,7 @@
 	vertical-align: top;
 	min-width: 232px;
 	width: 50%;
+	clear: both;
 }
 
 .common-summary .item li {
@@ -321,6 +322,18 @@
 .common-summary-detail tr.rebate,
 .common-summary-detail tr.tax {
 	font-weight: normal;
+}
+
+@media (max-width: 480px) {
+	.common-summary .item {
+		display: block;
+		width: 100%;
+	}
+	
+	.common-summary-detail .unitprice {
+		display: table-column;
+		width: 0;
+	}
 }
 
 /* <<<=== Common summary CSS also used in e-mail*/
