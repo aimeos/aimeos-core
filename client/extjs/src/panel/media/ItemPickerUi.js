@@ -91,7 +91,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 
 	refPreviewRenderer : function(refId, metaData, record, rowIndex, colIndex, store) {
 		var refItem = this.getRefStore().getById(refId);
-		return (refItem ? "<img class='mshop-admin-media-list-preview' src=\"" + refItem.get('media.preview') + "\" />" : '');
+		return (refItem ? '<img class="arcavias-admin-media-list-preview" src="' + MShop.config.baseurl.content + '/' + refItem.get('media.preview') + '" />' : '');
 	}
 });
 
