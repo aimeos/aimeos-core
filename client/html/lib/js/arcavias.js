@@ -150,6 +150,8 @@ jQuery(document).ready( function($) {
 			basket.fadeTo(400, 1.0);
 			$("body").append(basket);
 			
+			$(".basket-mini").html( $(".basket-mini", doc).html() );
+			
 			var resize = function() {
 				var jqwin = $(window);
 				var left = (jqwin.width() - basket.outerWidth()) / 2;
@@ -178,7 +180,9 @@ jQuery(document).ready( function($) {
 		$.post(form.attr("action"), form.serialize(), function(data) {
 			var doc = document.createElement("html");
 			doc.innerHTML = data;
+
 			$(".basket-standard").html( $(".basket-standard", doc).html() );
+			$(".basket-mini").html( $(".basket-mini", doc).html() );
 		});
 
 		return false;
@@ -190,7 +194,9 @@ jQuery(document).ready( function($) {
 		$.post($(this).attr("href"), function(data) {
 			var doc = document.createElement("html");
 			doc.innerHTML = data;
+
 			$(".basket-standard").html( $(".basket-standard", doc).html() );
+			$(".basket-mini").html( $(".basket-mini", doc).html() );
 		});
 
 		return false;
