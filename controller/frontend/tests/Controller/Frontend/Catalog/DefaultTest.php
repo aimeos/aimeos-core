@@ -215,15 +215,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 		$filter = $this->_object->createProductFilterByText( 'Espresso', 'relevance', '-', 1, 2, 'test' );
 
 		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $filter );
-
-		$sort = $filter->getSortations();
-		if( ( $item = reset( $sort ) ) === false ) {
-			throw new Exception( 'Sortation not set' );
-		}
-
-		$this->assertEquals( 'sort:catalog.index.text.relevance("test","de","Espresso")', $item->getName() );
-		$this->assertEquals( '+', $item->getOperator() );
-
+		$this->assertEquals( array(), $filter->getSortations() );
 		$this->assertEquals( 1, $filter->getSliceStart() );
 		$this->assertEquals( 2, $filter->getSliceSize() );
 	}
