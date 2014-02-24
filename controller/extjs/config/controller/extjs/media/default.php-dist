@@ -57,28 +57,6 @@ return array(
 	),
 	
 	/*
-	 * Unix commands executed on a shell
-	 */
-	'command' => array(
-	
-		/*
-		 * "file" command for identifying the mime type of a file
-		 */
-		'file' => 'file -b --mime-type %1$s',
-		
-		/*
-		 * ImageMagick "identfy" command for identifying the type of an image
-		 */
-		'identify' => 'identify -format "%%m" %1$s',
-		
-		/*
-		 * ImageMagick "convert" command for converting an image
-		 * The "-flatten" creates only one image even if there are multiple layers
-		 */
-		'convert' => 'convert %1$s -resize %3$sx%4$s -flatten %2$s',
-	),
-	
-	/*
 	 * Parameter for images
 	 */	
 	'files' => array(
@@ -92,7 +70,7 @@ return array(
 		/*
 		 * Image type to which all other image types will be converted to
 		 */
-		'defaulttype' => 'jpeg',
+		'defaulttype' => 'image/jpeg',
 	
 		/*
 		 * Maximum width of an image
@@ -127,7 +105,7 @@ return array(
 		/*
 		 * Image type to which all other image types will be converted to
 		 */
-		'defaulttype' => 'jpeg',
+		'defaulttype' => 'image/jpeg',
 
 		/*
 		 * Maximum width of a preview image
@@ -136,7 +114,7 @@ return array(
 		 * doesn't restrict the size of the image if it's scaled due to a value
 		 * in the "maxheight" parameter
 		 */
-		'maxwidth' => 320,
+		'maxwidth' => 240,
 	
 		/*
 		 * Maximum height of a preview image
@@ -145,6 +123,6 @@ return array(
 		 * doesn't restrict the size of the image if it's scaled due to a value
 		 * in the "maxwidth" parameter
 		 */
-		'maxheight' => 240,
+		'maxheight' => 320,
 	),
 );

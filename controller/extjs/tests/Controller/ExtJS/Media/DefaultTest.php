@@ -170,8 +170,8 @@ class Controller_ExtJS_Media_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
 		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
 
-		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.preview'} ) );
-		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.preview'} );
+		// No mime icons in file system available, so it will be unknown.png
+		$this->assertEquals( 'tmp/media/mimeicons/unknown.png', $mediaItem->{'media.preview'} );
 	}
 
 	public function testUploadBinary()
@@ -231,25 +231,6 @@ class Controller_ExtJS_Media_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );// no upload directory
 		$mediaItem = $object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
-	}
-
-
-	public function testProtectedConvertImageExecutionException()
-	{
-		$context = TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/default/command/convert', 'test 0 -eq 1' );
-
-		$object = new Controller_ExtJS_Media_Default( $context );
-
-		$_FILES['unittest'] = array(
-			'name' => 'test-jpeg.jpg',
-			'tmp_name' => $this->_directory . '/testfiles/test.jpeg',
-			'error' => UPLOAD_ERR_OK,
-		);
-
-		$mediaItem = $object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
-
-		$this->assertEquals( 'tmp/media/mimeicons/unknown.png', $mediaItem->{'media.preview'} );
 	}
 
 
@@ -315,41 +296,6 @@ class Controller_ExtJS_Media_DefaultTest extends MW_Unittest_Testcase
 		$mediaItem = $object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
 		restore_error_handler();
-	}
-
-	public function testProtectedGetMimeTypeExceptionExecError()
-	{
-		$context = TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/default/command/file', 'test 0 -eq 1' );
-
-		$object = new Controller_ExtJS_Media_Default( $context );
-
-		$_FILES['unittest'] = array(
-			'name' => 'test-jpeg.jpg',
-			'tmp_name' => $this->_directory . '/testfiles/test.jpeg',
-			'error' => UPLOAD_ERR_OK,
-		);
-
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$mediaItem = $object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
-	}
-
-
-	public function testProtectedGetMimeTypeExceptionInvalidMimeType()
-	{
-		$context = TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/default/command/file', 'echo "jpeg"' );
-
-		$object = new Controller_ExtJS_Media_Default( $context );
-
-		$_FILES['unittest'] = array(
-			'name' => 'test-jpeg.jpg',
-			'tmp_name' => $this->_directory . '/testfiles/test.jpeg',
-			'error' => UPLOAD_ERR_OK,
-		);
-
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$mediaItem = $object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 
 
