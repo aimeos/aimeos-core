@@ -5,6 +5,7 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+$totalQuantity = 0;
 $enc = $this->encoder();
 $contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
@@ -92,8 +93,8 @@ $backParams = $this->get( 'summaryParams', array() );
 			</thead>
 			<tbody>
 <?php if( isset( $this->summaryBasket ) ) : ?>
-<?php 	foreach( $this->summaryBasket->getProducts() as $position => $product ) : ?>
-				<tr class="<?php echo ( isset( $errors['product'][$position] ) ? 'error' : '' ); ?>">
+<?php 	foreach( $this->summaryBasket->getProducts() as $position => $product ) : $totalQuantity += $product->getQuantity(); ?>
+				<tr class="product <?php echo ( isset( $errors['product'][$position] ) ? 'error' : '' ); ?>">
 					<td class="details">
 <?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
 						<img src="<?php echo $enc->attr( $contentUrl . $mediaUrl ); ?>" />
@@ -130,7 +131,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php			else : ?>
 						&nbsp;
 <?php			endif; ?>
-						<input type="text" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'quantity' ) ) ); ?>" value="<?php echo $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required" />
+						<input class="value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'quantity' ) ) ); ?>" value="<?php echo $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required" />
 						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'position' ) ) ); ?>" value="<?php echo $enc->attr( $position ); ?>" />
 						<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) + $backParams ) ); ?>">+</a>
 <?php		else : ?>	
@@ -147,7 +148,7 @@ $backParams = $this->get( 'summaryParams', array() );
 				</tr>
 <?php 	endforeach; ?>
 <?php	if( $deliveryPriceValue > 0 ) : ?>
-				<tr>
+				<tr class="delivery">
 					<td class="details">
 <?php		if( isset( $this->summaryUrlServiceDelivery ) ) : ?>
 						<a href="<?php echo $enc->attr( $this->summaryUrlServiceDelivery ); ?>">
@@ -166,7 +167,7 @@ $backParams = $this->get( 'summaryParams', array() );
 				</tr>
 <?php	endif; ?>
 <?php	if( $paymentPriceValue > 0 ) : ?>
-				<tr>
+				<tr class="payment">
 					<td class="details">
 <?php		if( isset( $this->summaryUrlServicePayment ) ) : ?>
 						<a href="<?php echo $enc->attr( $this->summaryUrlServicePayment ); ?>">
@@ -229,6 +230,13 @@ $backParams = $this->get( 'summaryParams', array() );
 				<tr class="rebate">
 					<td colspan="3"><?php echo $enc->html( $this->translate( 'client/html', 'Included rebates' ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ) ); ?></td>
+<?php if( $modify ) : ?>
+					<td class="action"></td>
+<?php endif; ?>
+				</tr>
+				<tr class="quantity">
+					<td colspan="3"><?php echo $enc->html( $this->translate( 'client/html', 'Total quantity' ) ); ?></td>
+					<td class="value"><?php echo $enc->html( sprintf( $this->translate( 'client/html', '%1$d article', '%1$d articles', $totalQuantity ), $totalQuantity ) ); ?></td>
 <?php if( $modify ) : ?>
 					<td class="action"></td>
 <?php endif; ?>

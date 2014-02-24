@@ -272,6 +272,7 @@
 	content: ":";
 }
 
+.common-summary-detail tfoot tr.quantity,
 .common-summary-detail tr.subtotal,
 .common-summary-detail tr.delivery,
 .common-summary-detail tr.payment,
@@ -317,6 +318,7 @@
 	font-weight: bold;
 }
 
+.common-summary-detail tfoot .quantity,
 .common-summary-detail tfoot .delivery,
 .common-summary-detail tfoot .payment,
 .common-summary-detail tr.rebate,

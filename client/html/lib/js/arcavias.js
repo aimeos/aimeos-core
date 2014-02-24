@@ -131,7 +131,7 @@ jQuery(document).ready( function($) {
 	$(window).bind("resize", arcaviasLazyLoader);
 	$(window).bind("scroll", arcaviasLazyLoader);
 	
-
+	
 	/* Add to basket without page reload */
 	$(".catalog-detail-basket form").on("submit", function(event) {
 
@@ -144,21 +144,24 @@ jQuery(document).ready( function($) {
 			var doc = document.createElement("html");
 			doc.innerHTML = data;
 			
-			var basket = $(document.createElement("div"));
-			basket.addClass("arcavias-container");
-			basket.append( $(".basket-standard", doc) );
-			basket.fadeTo(400, 1.0);
-			$("body").append(basket);
+			var container = $(document.createElement("div"));
+			var basket = $(".basket-standard", doc);
+
+			container.addClass("arcavias-container");
+			container.append(basket);
+			container.fadeTo(400, 1.0);
+			$("body").append(container);
 			
-			$(".basket-mini").html( $(".basket-mini", doc).html() );
+			$(".basket-mini-main .value").text( $(".basket .total .price", basket).text() );
+			$(".basket-mini-main .quantity").text( $(".basket .quantity .value", basket).text() );
 			
 			var resize = function() {
 				var jqwin = $(window);
 				var left = (jqwin.width() - basket.outerWidth()) / 2;
 				var top = (jqwin.height() - basket.outerHeight()) / 2;
 
-				basket.css("left", (left>0 ? left : 0 ));
-				basket.css("top", (top>0 ? top : 0 ));
+				container.css("left", (left>0 ? left : 0 ));
+				container.css("top", (top>0 ? top : 0 ));
 			};
 			
 			$(window).on("resize", resize);
@@ -178,11 +181,15 @@ jQuery(document).ready( function($) {
 		var form = $(this);
 
 		$.post(form.attr("action"), form.serialize(), function(data) {
+			
 			var doc = document.createElement("html");
 			doc.innerHTML = data;
+			
+			var basket = $(".basket-standard", doc);
 
-			$(".basket-standard").html( $(".basket-standard", doc).html() );
-			$(".basket-mini").html( $(".basket-mini", doc).html() );
+			$(".basket-standard").html( basket.html() );
+			$(".basket-mini-main .value").text( $(".basket .total .price", basket).text() );
+			$(".basket-mini-main .quantity").text( $(".basket .quantity .value", basket).text() );
 		});
 
 		return false;
@@ -192,11 +199,15 @@ jQuery(document).ready( function($) {
 	$("body").on("click", ".basket-standard .change", function(event) {
 
 		$.post($(this).attr("href"), function(data) {
+			
 			var doc = document.createElement("html");
 			doc.innerHTML = data;
+			
+			var basket = $(".basket-standard", doc);
 
-			$(".basket-standard").html( $(".basket-standard", doc).html() );
-			$(".basket-mini").html( $(".basket-mini", doc).html() );
+			$(".basket-standard").html( basket.html() );
+			$(".basket-mini-main .value").text( $(".basket .total .price", basket).text() );
+			$(".basket-mini-main .quantity").text( $(".basket .quantity .value", basket).text() );
 		});
 
 		return false;
