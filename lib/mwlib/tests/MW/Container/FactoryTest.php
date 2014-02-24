@@ -3,7 +3,7 @@
 /**
  * Test class for MW_Container_Factory.
  *
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
 class MW_Container_FactoryTest extends MW_Unittest_Testcase
