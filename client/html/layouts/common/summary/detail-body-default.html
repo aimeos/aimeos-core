@@ -99,7 +99,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
 						<img src="<?php echo $enc->attr( $contentUrl . $mediaUrl ); ?>" />
 <?php		endif; ?>
-<?php		$params = array( 'l-product-id' => $product->getProductId(), 'a-name' => str_replace( ' ', '-', strip_tags( $product->getName() ) ) ); ?>
+<?php		$params = array( 'd-product-id' => $product->getProductId(), 'a-name' => str_replace( ' ', '-', strip_tags( $product->getName() ) ) ); ?>
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params ) ); ?>">
 <?php		echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 						</a>
