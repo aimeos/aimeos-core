@@ -59,6 +59,7 @@ jQuery(document).ready( function($) {
 	$(".catalog-detail-image .item").css("background-size", "contain");
 
 	
+
 	/* Catalog filter */
 	$(".catalog-filter form").on("submit", function( event ) {
 		
@@ -87,14 +88,28 @@ jQuery(document).ready( function($) {
 		return result;
 	});
 
+	
+	/* Fade out on page reload */
 	$(".catalog-filter-tree li.cat-item").on("click", function() {
 		$(".catalog-list").fadeTo( 1000, 0.5 );
 	});
 
+	/* Submit form when clicking on filter attribute names or counts */
+	$(".catalog-filter-attribute li.attr-item").on("click", ".attr-name, .attr-count", function(event) {
+
+		var input = $("input", event.delegateTarget);
+		input.prop("checked") ? input.prop("checked", false) : input.prop("checked", true);
+
+		$(this).parents(".catalog-filter form").submit();
+		$(".catalog-list").fadeTo( 1000, 0.5 );
+	});
+
+	/* Submit form when clicking on filter attributes */
 	$(".catalog-filter-attribute input.attr-item").on("click", function() {
 		$(this).parents(".catalog-filter form").submit();
 		$(".catalog-list").fadeTo( 1000, 0.5 );
 	});
+
 
 	/* Autocompleter for quick search */
 	var arcaviasInputComplete = $( ".catalog-filter-search .value" );
