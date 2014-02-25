@@ -20,7 +20,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 ?>
 <?php if( isset( $this->detailProductItem ) ) : $productItem = $this->detailProductItem; ?>
-<?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'l-product-id' => $productItem->getId() ); ?>
+<?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $productItem->getId() ); ?>
 <a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php	$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
 <?php	if( ( $mediaItem = reset( $mediaItems ) ) !== false ) : ?>

@@ -270,7 +270,7 @@ class Client_Html_Basket_Standard_Default
 		{
 			$params = $this->_getClientParams( $view->param() );
 
-			if( isset( $params['l-product-id'] ) )
+			if( isset( $params['d-product-id'] ) )
 			{
 				$target = $view->config( 'client/html/catalog/detail/url/target' );
 				$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );

@@ -184,7 +184,7 @@ class Client_Html_Catalog_Detail_Default
 
 			$default = array( 'media', 'price', 'text', 'attribute', 'product' );
 			$domains = $config->get( 'client/html/catalog/detail/default/domains', $default );
-			$prodid = $view->param( 'l-product-id' );
+			$prodid = $view->param( 'd-product-id' );
 
 
 			$manager = MShop_Factory::createManager( $context, 'product' );

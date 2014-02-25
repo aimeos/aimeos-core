@@ -20,7 +20,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 ?>
 <div class="catalog-list-items">
 <?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : $firstImage = true; ?>
-<?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'l-product-id' => $id ); ?>
+<?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id ); ?>
 	<div class="product">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params + $this->listParams ) ); ?>">
 			<div class="media-list">
