@@ -32,6 +32,10 @@ foreach( $this->get( 'deliveryOptional', array() ) as $name ) {
 	$deliveryCss[$name][] = 'optional';
 }
 
+foreach( $this->get( 'deliveryHidden', array() ) as $name ) {
+	$deliveryCss[$name][] = 'hidden';
+}
+
 foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 	$deliveryCss[$name][] = 'error';
 }
