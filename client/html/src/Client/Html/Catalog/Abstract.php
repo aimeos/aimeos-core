@@ -171,7 +171,7 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _getProductListSort( MW_View_Interface $view, &$sortdir )
 	{
-		$sortation = (string) $view->param( 'l-sort', 'relevance' );
+		$sortation = (string) $view->param( 'f-sort', 'relevance' );
 
 		$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
 		$sort = ltrim( $sortation, '-' );

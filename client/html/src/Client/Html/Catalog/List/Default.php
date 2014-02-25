@@ -212,7 +212,7 @@ class Client_Html_Catalog_List_Default
 			$view->listPageCurr = $this->_getProductListPage( $view );
 			$view->listPageSize = $this->_getProductListSize( $view );
 			$view->listProductTotal = $this->_getProductListTotal( $view );
-			$view->listProductSort = $view->param( 'l-sort', 'relevance' );
+			$view->listProductSort = $view->param( 'f-sort', 'relevance' );
 			$view->listProductItems = $products;
 
 			$this->_cache = $view;
