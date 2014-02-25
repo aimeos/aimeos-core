@@ -298,6 +298,10 @@ class MShop_Order_Item_Base_Product_Default
 	 */
 	public function setQuantity( $quantity )
 	{
+		if( !is_numeric( $quantity ) ) {
+			throw new MShop_Order_Exception( 'Quantity is invalid. Please enter a positive integer' );
+		}
+
 		$quantity = (int) $quantity;
 
 		if( $quantity == $this->getQuantity() ) { return; }
