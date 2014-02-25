@@ -23,6 +23,9 @@ $enc = $this->encoder();
 <?php endif; ?>
 	<nav>
 		<form method="POST" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction ) ); ?>">
+<?php if( ( $sort = $this->param( 'f-sort' ) ) != null ) : ?>
+			<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f-sort' ) ); ?>" value="<?php echo $enc->attr( $sort ); ?>" />
+<?php endif; ?>
 <?php echo $this->get( 'filterBody' ); ?>
 <?php if( $this->config( 'client/html/catalog/filter/default/button', true ) ) : ?>
 			<noscript>
