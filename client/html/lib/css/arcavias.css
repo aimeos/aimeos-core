@@ -540,6 +540,11 @@
 	width: 1em;
 }
 
+.catalog-filter-attribute .attr-name,
+.catalog-filter-attribute .attr-count {
+	cursor: pointer;
+}
+
 
 /* Product list, stage section */
 .catalog-stage-breadcrumb .breadcrumb {
