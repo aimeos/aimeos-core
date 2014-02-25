@@ -173,7 +173,7 @@ class Client_Html_Checkout_Standard_Address_Default
 			}
 
 			$view->addressLanguages = $languages;
-			$view->addressCountries = $view->config( 'checkout/address/countries', array() );
+			$view->addressCountries = $view->config( 'client/html/common/address/countries', array() );
 
 
 			$this->_cache = $view;

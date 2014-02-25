@@ -216,11 +216,18 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				$view->deliveryLanguage = $context->getLocale()->getLanguageId();
 			}
 
+			$hidden = $view->config( 'client/html/common/address/delivery/hidden', array() );
+
+			if( count( $view->get( 'addressLanguages', array() ) ) === 1 ) {
+				$hidden[] = 'order.base.address.languageid';
+			}
+
 			$salutations = array( 'company', 'mr', 'mrs' );
 			$view->deliverySalutations = $view->config( 'client/html/common/address/delivery/salutations', $salutations );
 
 			$view->deliveryMandatory = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
 			$view->deliveryOptional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
+			$view->deliveryHidden = $hidden;
 
 
 			$this->_cache = $view;

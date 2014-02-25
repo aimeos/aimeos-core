@@ -32,6 +32,10 @@ foreach( $this->get( 'billingOptional', array() ) as $name ) {
 	$paymentCss[$name][] = 'optional';
 }
 
+foreach( $this->get( 'billingHidden', array() ) as $name ) {
+	$paymentCss[$name][] = 'hidden';
+}
+
 foreach( $this->get( 'billingError', array() ) as $name => $msg ) {
 	$paymentCss[$name][] = 'error';
 }

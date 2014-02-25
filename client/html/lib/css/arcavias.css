@@ -1412,7 +1412,7 @@
 }
 .checkout-standard-address .item-address .header input {
 	display: inline;
-	vertical-align: top;
+	vertical-align: middle;
 	margin-right: 10px;
 	border: none;
 }
@@ -1423,10 +1423,12 @@
 }
 
 .checkout-standard .form-list .mandatory,
-.checkout-standard .form-list .optional, 
+.checkout-standard .form-list .optional,
+.checkout-standard .form-list .hidden,
 .checkout-standard .form-list .error,
 .checkout-standard .attr-list .mandatory,
-.checkout-standard .attr-list .optional, 
+.checkout-standard .attr-list .optional,
+.checkout-standard .attr-list .hidden,
 .checkout-standard .attr-list .error {
 	clear: both;
 }
@@ -1443,6 +1445,10 @@
 
 .checkout-standard-address .form-list .optional {
 	display: list-item;
+}
+
+.checkout-standard-address .form-list .hidden {
+	display: none;
 }
 
 .checkout-standard-address .form-list .mandatory label:after {
