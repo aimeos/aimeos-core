@@ -260,18 +260,39 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			$item = $this->_products[$pos];
 			$item->setQuantity( $item->getQuantity() + $quantity );
 		}
-		else if( $position === null )
+		else if( $position !== null )
+		{
+			if( isset( $this->_products[$position] ) )
+			{
+				$products = array();
+
+				foreach( $this->_products as $key => $product )
+				{
+					if( $key < $position ) {
+						$products[$key] = $product;
+					} else if( $key >= $position ) {
+						$products[$key+1] = $product;
+					}
+				}
+
+				$products[$position] = $item;
+				$this->_products = $products;
+			}
+			else
+			{
+				$this->_products[$position] = $item;
+			}
+
+			$pos = $position;
+		}
+		else
 		{
 			$this->_products[] = $item;
 			end( $this->_products );
 			$pos = key( $this->_products );
 		}
-		else
-		{
-			array_splice( $this->_products, $position, 0, array( $item ) );
-			$pos = $position;
-		}
 
+		ksort( $this->_products );
 		$this->_modified = true;
 
 		$this->_notifyListeners( 'addProduct.after', $item );
