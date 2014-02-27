@@ -139,22 +139,6 @@ msgstr "refused"
 msgid "stat:7"
 msgstr "returned"
 
-#. Stock level
-msgid "stock-high"
-msgstr "in stock"
-
-#. Stock level
-msgid "stock-low"
-msgstr "only a few available"
-
-#. Stock level
-msgid "stock-out"
-msgstr "out of stock"
-
-#. Stock level
-msgid "stock-unlimited"
-msgstr "available"
-
 #. Warehouse code
 msgid "warehouse:default"
 msgstr " "

@@ -13,6 +13,26 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 
 $params = $this->get( 'listParams', array() );
 $sort = $this->param( 'f-sort', 'relevance' );
+$sortname = ltrim( $sort, '-' );
+
+$nameDir = '';
+$priceDir = '';
+
+if( $sort === 'name' ) {
+	$nameSort = $this->translate( 'client/html', '▼ Name' ); $nameDir = '-';
+} else if( $sort === '-name' ) {
+	$nameSort = $this->translate( 'client/html', '▲ Name' );
+} else {
+	$nameSort = $this->translate( 'client/html', 'Name' );
+}
+
+if( $sort === 'price' ) {
+	$priceSort = $this->translate( 'client/html', '▼ Price' ); $priceDir = '-';
+} else if( $sort === '-price' ) {
+	$priceSort = $this->translate( 'client/html', '▲ Price' );
+} else {
+	$priceSort = $this->translate( 'client/html', 'Price' );
+}
 
 ?>
 <?php if( $this->get( 'listProductTotal', 0 ) > 0 ) : ?>
@@ -22,16 +42,16 @@ $sort = $this->param( 'f-sort', 'relevance' );
 			<span><?php echo $enc->html( $this->translate( 'client/html', 'Sort by:' ), $enc::TRUST ); ?></span>
 			<ul>
 				<li><a class="option-relevance <?php echo ( $sort === 'relevance' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'f-sort' => 'relevance' ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Relevance' ), $enc::TRUST ); ?></a></li>
-				<li><a class="option-name <?php echo ( $sort === 'name' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'f-sort' => 'name' ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Name' ), $enc::TRUST ); ?></a></li>
-				<li><a class="option-price <?php echo ( $sort === 'price' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'f-sort' => 'price' ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Price' ), $enc::TRUST ); ?></a></li>
+				<li><a class="option-name <?php echo ( $sortname === 'name' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'f-sort' => $nameDir . 'name' ) + $params ) ); ?>"><?php echo $enc->html( $nameSort, $enc::TRUST ); ?></a></li>
+				<li><a class="option-price <?php echo ( $sortname === 'price' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'f-sort' => $priceDir . 'price' ) + $params ) ); ?>"><?php echo $enc->html( $priceSort, $enc::TRUST ); ?></a></li>
 			</ul>
 		</div>
 		<div class="browser">
-			<a class="first" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageFirst ) + $params ) ); ?>">&lt;&lt;</a>
-			<a class="prev" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPagePrev ) + $params ) ); ?>" rel="prev">&lt;</a>
+			<a class="first" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageFirst ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '◀◀' ), $enc::TRUST ); ?></a>
+			<a class="prev" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPagePrev ) + $params ) ); ?>" rel="prev"><?php echo $enc->html( $this->translate( 'client/html', '◀' ), $enc::TRUST ); ?></a>
 			<span><?php echo $enc->html( sprintf( $this->translate( 'client/html', 'Page %1$d of %2$d' ), $this->get( 'listPageCurr', 1 ), $this->get( 'pagiPageLast', 1 ) ) ); ?></span>
-			<a class="next" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageNext ) + $params ) ); ?>" rel="next">&gt;</a>
-			<a class="last" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageLast ) + $params ) ); ?>">&gt;&gt;</a>
+			<a class="next" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageNext ) + $params ) ); ?>" rel="next"><?php echo $enc->html( $this->translate( 'client/html', '▶' ), $enc::TRUST ); ?></a>
+			<a class="last" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageLast ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '▶▶' ), $enc::TRUST ); ?></a>
 		</div>
 <?php echo $this->get( 'pagiBody' ); ?>
 	</nav>

@@ -366,6 +366,27 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAddProductStablePosition()
+	{
+		foreach( $this->_products as $product ) {
+			$this->_object->addProduct( $product );
+		}
+
+		$product = $this->_createProduct( 'prodid3' );
+		$product->setQuantity( 5 );
+		$this->_object->addProduct( $product );
+
+		$this->_object->deleteProduct( 0 );
+		$testProduct = $this->_object->getProduct( 1 );
+
+		$this->_object->deleteProduct( 1 );
+		$this->_object->addProduct( $testProduct, 1 );
+
+		$expected = array( 1 => $testProduct, 2 => $product );
+		$this->assertEquals( $expected, $this->_object->getProducts() );
+	}
+
+
 	public function testAddProductExceedLimit()
 	{
 		$product = $this->_createProduct( 'prodid3' );

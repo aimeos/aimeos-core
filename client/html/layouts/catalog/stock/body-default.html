@@ -21,14 +21,14 @@ $textStockOut = $this->translate( 'client/html', 'Stock: %1$s, %2$s, back on %3$
 $dateFormat = $this->translate( 'client/html', 'Y-m-d' );
 
 $textStock = array(
-	/// code for "out ot stock"
-	'stock-out' => nl2br( $enc->html( $this->translate( 'client/html/code', 'stock-out' ) ) ),
-	/// code for "only a few available"
-	'stock-low' => nl2br( $enc->html( $this->translate( 'client/html/code', 'stock-low' ) ) ),
-	/// code for "in stock"
-	'stock-high' => nl2br( $enc->html( $this->translate( 'client/html/code', 'stock-high' ) ) ),
-	/// code for "no stock limit"
-	'stock-unlimited' => nl2br( $enc->html( $this->translate( 'client/html/code', 'stock-unlimited' ) ) ),
+	/// code for "product is out ot stock"
+	'stock-out' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-out' ) ) ),
+	/// code for "only a few products are available"
+	'stock-low' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-low' ) ) ),
+	/// code for "product is in stock"
+	'stock-high' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-high' ) ) ),
+	/// code for "product is available (without stock limit)"
+	'stock-unlimited' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-unlimited' ) ) ),
 );
 
 

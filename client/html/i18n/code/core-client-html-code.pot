@@ -147,22 +147,6 @@ msgstr "Bank code"
 msgid "directdebit.bankname"
 msgstr "Bank name"
 
-#. Stock level
-msgid "stock-unlimited"
-msgstr "in stock"
-
-#. Stock level
-msgid "stock-high"
-msgstr "in stock"
-
-#. Stock level
-msgid "stock-low"
-msgstr "only a few available"
-
-#. Stock level
-msgid "stock-out"
-msgstr "out of stock"
-
 #. Warehouse code
 msgid "warehouse:default"
 msgstr ""

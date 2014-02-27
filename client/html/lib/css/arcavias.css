@@ -646,8 +646,19 @@
 	display: block;
 }
 
+.catalog-list .price-item:first-child .rebatepercent {
+	color: #FF0000;
+}
+
+.catalog-list .price-item:first-child .rebatepercent:before {
+	content: '(';
+}
+
+.catalog-list .price-item:first-child .rebatepercent:after {
+	content: ')';
+}
+
 .catalog-list .price-item:first-child .quantity,
-.catalog-list .price-item:first-child .rebatepercent,
 .catalog-list .price-item:first-child .rebate,
 .catalog-list .price-item:first-child .shipping,
 .catalog-list .price-item:first-child .taxrate {
@@ -767,7 +778,7 @@
 	font-weight: bold;
 	margin: 0 0.2em;
 	padding: 0.4em;
-	width: 1.3em;
+	width: 1.5em;
 	color: #004266;
 	text-align: center;
 	text-decoration: none;
@@ -946,7 +957,11 @@
 }
 
 .catalog-detail-basket .price-item:first-child .value {
-	font-size: 1.5em;
+	font-size: 250%;
+}
+
+.catalog-detail-basket .price-item:first-child .rebatepercent {
+	font-size: 200%;
 }
 
 .catalog-detail-basket .price-item .value {
@@ -955,14 +970,6 @@
 
 .catalog-detail-basket .price-item .rebatepercent {
 	color: #FF0000;
-}
-
-.catalog-detail-basket .price-item .rebatepercent:before {
-	content: '(';
-}
-
-.catalog-detail-basket .price-item .rebatepercent:after {
-	content: ')';
 }
 
 /* add to basket */
@@ -1058,7 +1065,10 @@
 
 /* Stock level */
 .catalog-detail .stock {
+	font-size: 125%;
+	font-weight: bold;
 	margin: 0.5em 0;
+	text-align: center;
 }
 
 .catalog-detail .stockitem {

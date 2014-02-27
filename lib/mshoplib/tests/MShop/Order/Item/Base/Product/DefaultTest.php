@@ -233,6 +233,12 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->isModified() );
 	}
 
+	public function testSetQuantityNoNumber()
+	{
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->setQuantity( 'a' );
+	}
+
 	public function testSetQuantityNegative()
 	{
 		$this->setExpectedException( 'MShop_Order_Exception' );

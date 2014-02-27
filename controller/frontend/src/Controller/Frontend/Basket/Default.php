@@ -209,6 +209,8 @@ class Controller_Frontend_Basket_Default
 	public function editProduct( $position, $quantity, $options = array(), $configAttributeCodes = array() )
 	{
 		$product = $this->_basket->getProduct( $position );
+		$product->setQuantity( $quantity ); // Enforce check immediately
+
 
 		if( $product->getFlags() === MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 		{

@@ -65,7 +65,9 @@ jQuery(document).ready( function($) {
 		
 		var result = true;
 
-		$("input.value", this).each(function(i, input) {
+		$("input.value", this).each( function() {
+
+			var input = $(this);
 
 			if( input.val() != '' && input.val().length < 3 ) {
 	
@@ -134,7 +136,7 @@ jQuery(document).ready( function($) {
 				}
 			);
 		},
-		select: function( event, ui ) {
+		select: function(event, ui) {
 			arcaviasInputComplete.val( ui.item.value );
 			$(event.target).parents(".catalog-filter form").submit();
 		}
