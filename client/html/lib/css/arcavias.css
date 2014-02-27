@@ -1069,7 +1069,10 @@
 
 /* Stock level */
 .catalog-detail .stock {
+	font-size: 125%;
+	font-weight: bold;
 	margin: 0.5em 0;
+	text-align: center;
 }
 
 .catalog-detail .stockitem {
