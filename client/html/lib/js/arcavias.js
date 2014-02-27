@@ -192,6 +192,12 @@ jQuery(document).ready( function($) {
 	/*
 	 * Basket clients
 	 */
+
+	/* Hide update button an show only on quantity change */
+	$(".basket-standard .btn-update").hide();
+	$(".basket-standard").on("focusin", ".basket .product .quantity .value", {}, function(event) {
+		$(".btn-update", event.delegateTarget).show();
+	});
 	
 	/* Update without page reload */
 	$("body").on("submit", ".basket-standard form", function(event) {
