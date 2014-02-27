@@ -5,12 +5,13 @@
 # Translators:
 # doleiynyk <doleiynyk@metaways.de>, 2013
 # doleiynyk <doleiynyk@metaways.de>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-18 13:19+0100\n"
-"PO-Revision-Date: 2014-02-18 12:20+0000\n"
+"POT-Creation-Date: 2014-02-27 14:27+0100\n"
+"PO-Revision-Date: 2014-02-27 13:36+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +20,7 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: layouts/common/summary/detail-body-default.html:239
 #: layouts/basket/mini/main-body-default.html:29
 #, php-format
 msgid "%1$d article"
@@ -39,8 +41,8 @@ msgstr[2] "%1$d товаров"
 #: layouts/common/summary/address-body-default.html:92
 #: layouts/email/common/text-summary-address-body-default.html:28
 #: layouts/email/common/text-summary-address-body-default.html:76
-#: layouts/checkout/standard/address-delivery-body-default.html:61
-#: layouts/checkout/standard/address-billing-body-default.html:57
+#: layouts/checkout/standard/address-delivery-body-default.html:65
+#: layouts/checkout/standard/address-billing-body-default.html:61
 #, php-format
 msgid ""
 "%1$s\n"
@@ -60,10 +62,9 @@ msgstr ""
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: layouts/catalog/list/promo-body-default.html:17
 #: layouts/catalog/list/items-body-default.html:16
-#: layouts/catalog/detail/basket-body-default.html:14
 #: layouts/catalog/detail/suggest-body-default.html:19
 #: layouts/catalog/detail/seen-body-default.html:17
-#: layouts/common/summary/detail-body-default.html:66
+#: layouts/common/summary/detail-body-default.html:67
 #: layouts/basket/mini/main-body-default.html:23
 #: layouts/email/common/text-summary-detail-body-default.html:55
 #: layouts/checkout/standard/payment-body-default.html:38
@@ -95,7 +96,6 @@ msgstr ""
 #. / Percent format with value (%1$s) and % sign
 #: layouts/catalog/list/promo-body-default.html:19
 #: layouts/catalog/list/items-body-default.html:18
-#: layouts/catalog/detail/basket-body-default.html:16
 #: layouts/catalog/detail/suggest-body-default.html:21
 #: layouts/catalog/detail/seen-body-default.html:19
 #, php-format
@@ -132,17 +132,17 @@ msgstr "+ Доставка"
 msgid "-%1$s%%"
 msgstr ""
 
-#: layouts/catalog/detail/basket-body-default.html:36
+#: layouts/catalog/detail/basket-body-default.html:31
 msgid "Add to basket"
 msgstr "Добавить в корзину"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:131
-#: layouts/checkout/standard/address-billing-body-default.html:127
+#: layouts/checkout/standard/address-delivery-body-default.html:135
+#: layouts/checkout/standard/address-billing-body-default.html:131
 msgid "Additional"
 msgstr "Дополнительно"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:135
-#: layouts/checkout/standard/address-billing-body-default.html:131
+#: layouts/checkout/standard/address-delivery-body-default.html:139
+#: layouts/checkout/standard/address-billing-body-default.html:135
 msgid "Additional 2"
 msgstr "Дополнительно 2"
 
@@ -193,7 +193,7 @@ msgstr "Корзина"
 
 #: layouts/common/summary/address-body-default.html:22
 #: layouts/email/common/text-summary-address-body-default.html:17
-#: layouts/checkout/standard/address-billing-body-default.html:43
+#: layouts/checkout/standard/address-billing-body-default.html:47
 msgid "Billing address"
 msgstr "Адрес счета"
 
@@ -214,7 +214,7 @@ msgstr ""
 
 #: layouts/common/summary/address-body-default.html:24
 #: layouts/common/summary/address-body-default.html:78
-#: layouts/common/summary/detail-body-default.html:76
+#: layouts/common/summary/detail-body-default.html:77
 #: layouts/common/summary/service-body-default.html:19
 #: layouts/common/summary/service-body-default.html:53
 msgid "Change"
@@ -224,7 +224,7 @@ msgstr "Поменять"
 msgid "Change payment"
 msgstr "Изменть оплату"
 
-#: layouts/catalog/detail/additional-attribute-body-default.html:20
+#: layouts/catalog/detail/additional-attribute-body-default.html:21
 msgid "Characteristics"
 msgstr ""
 
@@ -232,8 +232,8 @@ msgstr ""
 msgid "Checkout"
 msgstr "Касса"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:143
-#: layouts/checkout/standard/address-billing-body-default.html:139
+#: layouts/checkout/standard/address-delivery-body-default.html:147
+#: layouts/checkout/standard/address-billing-body-default.html:143
 msgid "City"
 msgstr "Город"
 
@@ -264,8 +264,8 @@ msgstr ""
 msgid "Close"
 msgstr "Закрыть"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:115
-#: layouts/checkout/standard/address-billing-body-default.html:111
+#: layouts/checkout/standard/address-delivery-body-default.html:119
+#: layouts/checkout/standard/address-billing-body-default.html:115
 msgid "Company"
 msgstr "Компания"
 
@@ -273,8 +273,8 @@ msgstr "Компания"
 msgid "Confirmation"
 msgstr "Подтверждение"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:151
-#: layouts/checkout/standard/address-billing-body-default.html:147
+#: layouts/checkout/standard/address-delivery-body-default.html:155
+#: layouts/checkout/standard/address-billing-body-default.html:151
 msgid "Country"
 msgstr "Страна"
 
@@ -303,7 +303,7 @@ msgstr "Доставка"
 
 #: layouts/common/summary/address-body-default.html:76
 #: layouts/email/common/text-summary-address-body-default.html:65
-#: layouts/checkout/standard/address-delivery-body-default.html:43
+#: layouts/checkout/standard/address-delivery-body-default.html:47
 msgid "Delivery address"
 msgstr "Адрес доставки"
 
@@ -317,7 +317,7 @@ msgstr "\"%1$s\" часть адреса доставки не хватает"
 msgid "Description"
 msgstr "Описание"
 
-#: layouts/common/summary/detail-body-default.html:78
+#: layouts/common/summary/detail-body-default.html:79
 msgid "Details"
 msgstr "Подробности"
 
@@ -325,13 +325,13 @@ msgstr "Подробности"
 msgid "Downloads"
 msgstr ""
 
-#: layouts/checkout/standard/address-delivery-body-default.html:170
-#: layouts/checkout/standard/address-billing-body-default.html:166
+#: layouts/checkout/standard/address-delivery-body-default.html:174
+#: layouts/checkout/standard/address-billing-body-default.html:170
 msgid "E-Mail"
 msgstr "Имейл"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:178
-#: layouts/checkout/standard/address-billing-body-default.html:174
+#: layouts/checkout/standard/address-delivery-body-default.html:182
+#: layouts/checkout/standard/address-billing-body-default.html:178
 msgid "Fax"
 msgstr "Факс"
 
@@ -339,8 +339,8 @@ msgstr "Факс"
 msgid "Fields with an * are mandatory"
 msgstr "Поля с * обязательны"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:119
-#: layouts/checkout/standard/address-billing-body-default.html:115
+#: layouts/checkout/standard/address-delivery-body-default.html:123
+#: layouts/checkout/standard/address-billing-body-default.html:119
 msgid "First name"
 msgstr "Имя"
 
@@ -367,14 +367,14 @@ msgid "If you have any questions, please reply to this e-mail"
 msgstr ""
 
 #. / Tax rate format with tax rate in percent (%1$s)
-#: layouts/common/summary/detail-body-default.html:222
+#: layouts/common/summary/detail-body-default.html:223
 #: layouts/email/common/text-summary-detail-body-default.html:104
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
 msgid "Incl. %1$s%% VAT"
 msgstr ""
 
-#: layouts/common/summary/detail-body-default.html:230
+#: layouts/common/summary/detail-body-default.html:231
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
@@ -419,13 +419,13 @@ msgstr ""
 msgid "Invalid process response from service provider with code \"%1$s\""
 msgstr ""
 
-#: layouts/checkout/standard/address-delivery-body-default.html:162
-#: layouts/checkout/standard/address-billing-body-default.html:158
+#: layouts/checkout/standard/address-delivery-body-default.html:166
+#: layouts/checkout/standard/address-billing-body-default.html:162
 msgid "Language"
 msgstr "Язык"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:123
-#: layouts/checkout/standard/address-billing-body-default.html:119
+#: layouts/checkout/standard/address-delivery-body-default.html:127
+#: layouts/checkout/standard/address-billing-body-default.html:123
 msgid "Last name"
 msgstr "Фамилия"
 
@@ -433,7 +433,7 @@ msgstr "Фамилия"
 msgid "Last seen"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:25
+#: layouts/catalog/list/pagination-body-default.html:26
 msgid "Name"
 msgstr "Имя"
 
@@ -491,7 +491,7 @@ msgstr "История заказа"
 msgid "Order with ID \"%1$s\" not found"
 msgstr "Заказ с номером \"%1$s\" не найден"
 
-#: layouts/catalog/list/pagination-body-default.html:32
+#: layouts/catalog/list/pagination-body-default.html:52
 #, php-format
 msgid "Page %1$d of %2$d"
 msgstr "Страница %1$d из %2$d"
@@ -502,7 +502,7 @@ msgstr "Страница %1$d из %2$d"
 msgid "Payment"
 msgstr "Оплата"
 
-#: layouts/common/summary/detail-body-default.html:206
+#: layouts/common/summary/detail-body-default.html:207
 msgid "Payment costs"
 msgstr "Стоимость оплаты"
 
@@ -530,17 +530,17 @@ msgstr "Пожалуйста выберите ваш метод оплаты"
 msgid "Please enter at least three characters"
 msgstr ""
 
-#: layouts/catalog/detail/basket-selection-body-default.html:31
+#: layouts/catalog/detail/basket-selection-body-default.html:30
 msgid "Please select"
 msgstr "Пожалуйста выберите"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:139
-#: layouts/checkout/standard/address-billing-body-default.html:135
+#: layouts/checkout/standard/address-delivery-body-default.html:143
+#: layouts/checkout/standard/address-billing-body-default.html:139
 msgid "Postal code"
 msgstr "Почтовый индекс"
 
-#: layouts/catalog/list/pagination-body-default.html:26
-#: layouts/common/summary/detail-body-default.html:86
+#: layouts/catalog/list/pagination-body-default.html:34
+#: layouts/common/summary/detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:74
 msgid "Price"
 msgstr "Цена"
@@ -550,12 +550,12 @@ msgstr "Цена"
 msgid "Proceed"
 msgstr "Продолжить"
 
-#: layouts/common/summary/detail-body-default.html:85
+#: layouts/common/summary/detail-body-default.html:86
 #: layouts/email/common/text-summary-detail-body-default.html:72
 msgid "Quantity"
 msgstr "Количество"
 
-#: layouts/catalog/list/pagination-body-default.html:24
+#: layouts/catalog/list/pagination-body-default.html:44
 msgid "Relevance"
 msgstr "Уместность"
 
@@ -565,8 +565,8 @@ msgstr "Уместность"
 msgid "Result for \"%1$s\""
 msgstr "Результат для \"%1$s\""
 
-#: layouts/checkout/standard/address-delivery-body-default.html:106
-#: layouts/checkout/standard/address-billing-body-default.html:102
+#: layouts/checkout/standard/address-delivery-body-default.html:110
+#: layouts/checkout/standard/address-billing-body-default.html:106
 msgid "Salutation"
 msgstr "Приветствие"
 
@@ -580,13 +580,13 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: layouts/checkout/standard/address-delivery-body-default.html:154
-#: layouts/checkout/standard/address-billing-body-default.html:150
+#: layouts/checkout/standard/address-delivery-body-default.html:158
+#: layouts/checkout/standard/address-billing-body-default.html:154
 msgid "Select country"
 msgstr "Выберите страну"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:108
-#: layouts/checkout/standard/address-billing-body-default.html:104
+#: layouts/checkout/standard/address-delivery-body-default.html:112
+#: layouts/checkout/standard/address-billing-body-default.html:108
 msgid "Select salutation"
 msgstr "Выберите приветствие"
 
@@ -598,11 +598,11 @@ msgstr "Плата за сервис"
 msgid "Services"
 msgstr "Сервисы"
 
-#: layouts/common/summary/detail-body-default.html:198
+#: layouts/common/summary/detail-body-default.html:199
 msgid "Shipping"
 msgstr "Пересылка"
 
-#: layouts/catalog/filter/body-default.html:29
+#: layouts/catalog/filter/body-default.html:32
 msgid "Show"
 msgstr "Показать"
 
@@ -610,12 +610,12 @@ msgstr "Показать"
 msgid "Show all quotes"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:22
+#: layouts/catalog/list/pagination-body-default.html:42
 msgid "Sort by:"
 msgstr "Сортировать по:"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:147
-#: layouts/checkout/standard/address-billing-body-default.html:143
+#: layouts/checkout/standard/address-delivery-body-default.html:151
+#: layouts/checkout/standard/address-billing-body-default.html:147
 msgid "State"
 msgstr "Штат"
 
@@ -633,12 +633,12 @@ msgstr "Ассортимент: %1$s, %2$s"
 msgid "Stock: %1$s, %2$s, back on %3$s"
 msgstr ""
 
-#: layouts/checkout/standard/address-delivery-body-default.html:127
-#: layouts/checkout/standard/address-billing-body-default.html:123
+#: layouts/checkout/standard/address-delivery-body-default.html:131
+#: layouts/checkout/standard/address-billing-body-default.html:127
 msgid "Street"
 msgstr "Улица"
 
-#: layouts/common/summary/detail-body-default.html:191
+#: layouts/common/summary/detail-body-default.html:192
 #: layouts/email/common/text-summary-detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:97
 msgid "Sub-total"
@@ -648,13 +648,13 @@ msgstr ""
 msgid "Suggested products"
 msgstr ""
 
-#: layouts/common/summary/detail-body-default.html:87
+#: layouts/common/summary/detail-body-default.html:88
 #: layouts/email/common/text-summary-detail-body-default.html:76
 msgid "Sum"
 msgstr "Сумма"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:174
-#: layouts/checkout/standard/address-billing-body-default.html:170
+#: layouts/checkout/standard/address-delivery-body-default.html:178
+#: layouts/checkout/standard/address-billing-body-default.html:174
 msgid "Telephone"
 msgstr "Телефон"
 
@@ -731,10 +731,14 @@ msgstr ""
 msgid "Top seller"
 msgstr ""
 
-#: layouts/common/summary/detail-body-default.html:214
+#: layouts/common/summary/detail-body-default.html:215
 #: layouts/email/common/text-summary-detail-body-default.html:93
 #: layouts/email/common/text-summary-detail-body-default.html:101
 msgid "Total"
+msgstr ""
+
+#: layouts/common/summary/detail-body-default.html:238
+msgid "Total quantity"
 msgstr ""
 
 #: layouts/checkout/confirm/basic-body-default.html:36
@@ -763,12 +767,12 @@ msgstr "Обновить"
 msgid "We received the returned parcel for your order %1$s from %2$s."
 msgstr ""
 
-#: layouts/checkout/standard/address-delivery-body-default.html:182
-#: layouts/checkout/standard/address-billing-body-default.html:178
+#: layouts/checkout/standard/address-delivery-body-default.html:186
+#: layouts/checkout/standard/address-billing-body-default.html:182
 msgid "Web site"
 msgstr "Вебсайт"
 
-#: layouts/common/summary/detail-body-default.html:144
+#: layouts/common/summary/detail-body-default.html:145
 msgid "X"
 msgstr "Х"
 
@@ -845,12 +849,12 @@ msgstr ""
 
 #: layouts/common/summary/address-body-default.html:127
 #: layouts/email/common/text-summary-address-body-default.html:111
-#: layouts/checkout/standard/address-delivery-body-default.html:47
+#: layouts/checkout/standard/address-delivery-body-default.html:51
 msgid "like billing address"
 msgstr "как адрес счета"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:102
-#: layouts/checkout/standard/address-billing-body-default.html:98
+#: layouts/checkout/standard/address-delivery-body-default.html:106
+#: layouts/checkout/standard/address-billing-body-default.html:102
 msgid "new address"
 msgstr "новый адрес"
 
@@ -865,22 +869,22 @@ msgstr "заказ"
 msgid "payment"
 msgstr "оплата"
 
-#. / code for "in stock"
+#. / code for "product is in stock"
 #: layouts/catalog/stock/body-default.html:29
 msgid "stock-high"
 msgstr ""
 
-#. / code for "only a few available"
+#. / code for "only a few products are available"
 #: layouts/catalog/stock/body-default.html:27
 msgid "stock-low"
 msgstr ""
 
-#. / code for "out ot stock"
+#. / code for "product is out ot stock"
 #: layouts/catalog/stock/body-default.html:25
 msgid "stock-out"
 msgstr ""
 
-#. / code for "no stock limit"
+#. / code for "product is available (without stock limit)"
 #: layouts/catalog/stock/body-default.html:31
 msgid "stock-unlimited"
 msgstr ""
@@ -889,3 +893,35 @@ msgstr ""
 #: src/Client/Html/Checkout/Standard/Summary/Default.php:12
 msgid "summary"
 msgstr "краткое содержание"
+
+#: layouts/catalog/list/pagination-body-default.html:24
+msgid "▲ Name"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:32
+msgid "▲ Price"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:53
+msgid "▶"
+msgstr "▶"
+
+#: layouts/catalog/list/pagination-body-default.html:54
+msgid "▶▶"
+msgstr "▶▶"
+
+#: layouts/catalog/list/pagination-body-default.html:22
+msgid "▼ Name"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:30
+msgid "▼ Price"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:51
+msgid "◀"
+msgstr "◀"
+
+#: layouts/catalog/list/pagination-body-default.html:50
+msgid "◀◀"
+msgstr "◀◀"

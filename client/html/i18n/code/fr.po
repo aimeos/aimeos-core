@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2014-01-29 16:59+0000\n"
+"PO-Revision-Date: 2014-02-27 13:30+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/arcavias-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -147,22 +147,6 @@ msgstr "Référence bancaire"
 #. Direct debit service provider
 msgid "directdebit.bankname"
 msgstr "Nom de l'établissement bancaire"
-
-#. Stock level
-msgid "stock-unlimited"
-msgstr "en stock"
-
-#. Stock level
-msgid "stock-high"
-msgstr "en stock"
-
-#. Stock level
-msgid "stock-low"
-msgstr "peu d'articles en stock"
-
-#. Stock level
-msgid "stock-out"
-msgstr "stock épuisé"
 
 #. Warehouse code
 msgid "warehouse:default"
