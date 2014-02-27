@@ -127,13 +127,13 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="quantity">
 <?php		if( $modify ) : ?>
 <?php			if( $product->getQuantity() > 1 ) : ?>
-						<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) + $backParams ) ); ?>">−</a>
+						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) + $backParams ) ); ?>">−</a>
 <?php			else : ?>
 						&nbsp;
 <?php			endif; ?>
 						<input class="value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'quantity' ) ) ); ?>" value="<?php echo $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required" />
 						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'position' ) ) ); ?>" value="<?php echo $enc->attr( $position ); ?>" />
-						<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) + $backParams ) ); ?>">+</a>
+						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) + $backParams ) ); ?>">+</a>
 <?php		else : ?>	
 <?php 			echo $enc->html( $product->getQuantity() ); ?>
 <?php		endif; ?>
