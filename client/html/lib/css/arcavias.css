@@ -646,8 +646,19 @@
 	display: block;
 }
 
+.catalog-list .price-item:first-child .rebatepercent {
+	color: #FF0000;
+}
+
+.catalog-list .price-item:first-child .rebatepercent:before {
+	content: '(';
+}
+
+.catalog-list .price-item:first-child .rebatepercent:after {
+	content: ')';
+}
+
 .catalog-list .price-item:first-child .quantity,
-.catalog-list .price-item:first-child .rebatepercent,
 .catalog-list .price-item:first-child .rebate,
 .catalog-list .price-item:first-child .shipping,
 .catalog-list .price-item:first-child .taxrate {

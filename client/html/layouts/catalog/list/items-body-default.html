@@ -43,19 +43,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php	endforeach; ?>
 			</div>
 			<div class="price-list">
-<?php	foreach( $productItem->getRefItems( 'price', 'default', 'default' ) as $priceItem ) : ?>
-<?php		$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() ); ?>
-				<div class="price-item">
-					<span class="quantity"><?php echo $enc->html( $priceItem->getQuantity() ); ?></span>
-					<span class="value"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getValue() ), $currency ) ); ?></span>
-<?php		if( ( $rebate = $priceItem->getRebate() ) > 0 ) : ?>
-					<span class="rebate"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $rebate ), $currency ) ); ?></span>
-					<span class="rebatepercent"><?php echo $enc->html( sprintf( $percentFormat, $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ) ); ?></span>
-<?php		endif; ?>
-					<span class="shipping"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceItem->getCosts() ), $currency ) ); ?></span>
-					<span class="taxrate"><?php echo $enc->html( sprintf( $percentFormat, $this->number( $priceItem->getTaxrate() ) ) ); ?></span>
-				</div>
-<?php	endforeach; ?>
+<?php	echo $this->price( $productItem->getRefItems( 'price', 'default', 'default' ) ); ?>
 			</div>
 			<div class="stock" data-prodid="<?php echo $id; ?>"></div>
 <?php	echo $this->get( 'itemsBody' ); ?>
