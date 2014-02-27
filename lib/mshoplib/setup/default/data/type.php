@@ -11,6 +11,7 @@ return array (
 		array( 'domain' => 'product', 'code' => 'size', 'label' => 'Size', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'width', 'label' => 'Width', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'length', 'label' => 'Length', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'option', 'label' => 'Option', 'status' => 1 ),
 	),
 
 	'attribute/list/type' => array (

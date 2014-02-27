@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2014-02-27 13:30+0000\n"
+"PO-Revision-Date: 2014-02-27 15:36+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias-core/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -50,6 +50,10 @@ msgstr ""
 
 #. Product attribute
 msgid "color"
+msgstr ""
+
+#. Product attribute
+msgid "option"
 msgstr ""
 
 #. Order type value

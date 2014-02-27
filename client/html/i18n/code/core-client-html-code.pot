@@ -51,6 +51,10 @@ msgstr "Width"
 msgid "color"
 msgstr "Color"
 
+#. Product attribute
+msgid "option"
+msgstr "Option"
+
 #. Order type value
 msgid "order:repeat"
 msgstr "repeated"
