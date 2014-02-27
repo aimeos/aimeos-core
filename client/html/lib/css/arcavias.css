@@ -733,20 +733,18 @@
 	-moz-border-radius: 0.5em;
 	border-radius: 0.5em;
 	color: #004266;
-	padding: 0.75em;
-	text-align: right;
+	padding: 0.5em;
 	clear: left;
 }
 
 .catalog-list-pagination .sort {
-	padding: 0.5em;
-	float: left;
+	display: inline-block;
 }
 
 .catalog-list-pagination .sort ul {
+	list-style: none outside none;
 	display: inline;
 	margin: 0px;
-	list-style: none outside none;
 }
 
 .catalog-list-pagination .sort ul li {
@@ -754,9 +752,9 @@
 }
 
 .catalog-list-pagination .sort a {
-	padding: 0.4em;
-	color: #004266;
 	text-decoration: none;
+	padding: 0 0.5em;
+	color: #004266;
 }
 
 .catalog-list-pagination .sort a:hover {
@@ -769,26 +767,18 @@
 }
 
 .catalog-list-pagination .browser {
-	display: inline;
+	display: inline-block;
 	white-space: nowrap;
+	float: right;
 }
 
+.catalog-list-pagination .browser span,
 .catalog-list-pagination .browser a {
 	display: inline-block;
-	font-weight: bold;
-	margin: 0 0.2em;
-	padding: 0.4em;
-	width: 1.5em;
+	padding: 0 0.5em;
 	color: #004266;
 	text-align: center;
 	text-decoration: none;
-	box-shadow: 1px 1px 2px #5C88A1;
-	border: 1px solid #689DB9;
-	border-radius: 4px;
-}
-
-.catalog-list-pagination .browser a:hover {
-	box-shadow: 1px 1px 2px #5C88A1 inset;
 }
 
 /* Product list, promotion section */
@@ -800,7 +790,7 @@
 	border: 0 none;
 	font-size: 1.25em;
 	font-weight: bold;
-	padding: 0.75em;
+	padding: 0.5em;
 	color: #004266;
 	background-color: #F2F7FA;
 	border: 1px solid #689DB9;
