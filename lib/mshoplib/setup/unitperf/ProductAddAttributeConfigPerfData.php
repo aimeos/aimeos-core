@@ -150,13 +150,13 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$search = $attrTypeManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'attribute.type.domain', 'product' ),
-			$search->compare( '==', 'attribute.type.code', 'size' ),
+			$search->compare( '==', 'attribute.type.code', 'option' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $attrTypeManager->searchItems( $search );
 
 		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute type "size" found' );
+			throw new Exception( 'No attribute type "option" found' );
 		}
 
 		$attrItem = $attrManager->createItem();
@@ -189,11 +189,11 @@ class MW_Setup_Task_ProductAddAttributeConfigPerfData extends MW_Setup_Task_Prod
 		$pos = 0;
 		$attrList = array();
 
-		foreach( array( 'small' => '-0.50', 'medium' => null, 'large' => '+0.50' ) as $size => $price )
+		foreach( array( 'small sticker' => '+2.50', 'large sticker' => '+7.50' ) as $option => $price )
 		{
 			$attrItem->setId( null );
-			$attrItem->setCode( $size );
-			$attrItem->setLabel( $size );
+			$attrItem->setCode( $option );
+			$attrItem->setLabel( $option );
 			$attrItem->setPosition( $pos++ );
 			$attrManager->saveItem( $attrItem );
 
