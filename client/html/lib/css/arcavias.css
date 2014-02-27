@@ -957,7 +957,11 @@
 }
 
 .catalog-detail-basket .price-item:first-child .value {
-	font-size: 1.5em;
+	font-size: 250%;
+}
+
+.catalog-detail-basket .price-item:first-child .rebatepercent {
+	font-size: 200%;
 }
 
 .catalog-detail-basket .price-item .value {
@@ -966,14 +970,6 @@
 
 .catalog-detail-basket .price-item .rebatepercent {
 	color: #FF0000;
-}
-
-.catalog-detail-basket .price-item .rebatepercent:before {
-	content: '(';
-}
-
-.catalog-detail-basket .price-item .rebatepercent:after {
-	content: ')';
 }
 
 /* add to basket */
