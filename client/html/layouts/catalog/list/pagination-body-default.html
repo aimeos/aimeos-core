@@ -46,6 +46,7 @@ if( $sort === 'price' ) {
 				<li><a class="option-price <?php echo ( $sortname === 'price' ? 'active' : '' ); ?>" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'f-sort' => $priceDir . 'price' ) + $params ) ); ?>"><?php echo $enc->html( $priceSort, $enc::TRUST ); ?></a></li>
 			</ul>
 		</div>
+<?php if( $this->get( 'pagiPageLast', 1 ) > 1 ) : ?>
 		<div class="browser">
 			<a class="first" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageFirst ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '◀◀' ), $enc::TRUST ); ?></a>
 			<a class="prev" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPagePrev ) + $params ) ); ?>" rel="prev"><?php echo $enc->html( $this->translate( 'client/html', '◀' ), $enc::TRUST ); ?></a>
@@ -53,6 +54,7 @@ if( $sort === 'price' ) {
 			<a class="next" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageNext ) + $params ) ); ?>" rel="next"><?php echo $enc->html( $this->translate( 'client/html', '▶' ), $enc::TRUST ); ?></a>
 			<a class="last" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'l-page' => $this->pagiPageLast ) + $params ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '▶▶' ), $enc::TRUST ); ?></a>
 		</div>
+<?php endif; ?>
 <?php echo $this->get( 'pagiBody' ); ?>
 	</nav>
 </div>
