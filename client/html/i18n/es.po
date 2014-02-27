@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-27 14:27+0100\n"
-"PO-Revision-Date: 2014-02-27 13:37+0000\n"
+"POT-Creation-Date: 2014-02-27 15:38+0100\n"
+"PO-Revision-Date: 2014-02-27 14:44+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -663,10 +663,6 @@ msgstr "Plantilla \"%1$s\" no disponible"
 msgid "Terms and conditions"
 msgstr "Términos y condiciones"
 
-#: layouts/checkout/confirm/basic-body-default.html:13
-msgid "Thank you for your order"
-msgstr "Gracias por su pedido"
-
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
 #: layouts/email/payment/text-intro-body-default.html:11
@@ -696,6 +692,12 @@ msgid ""
 "\n"
 "We received the payment and will care about your order immediately."
 msgstr "Gracias por su pedido %1$s desde %2$s.\n\nHemos recibido el pago y nos encargaremos de su pedido inmediatamente."
+
+#: layouts/checkout/confirm/basic-body-default.html:13
+msgid ""
+"Thank you for your order. You will receive an e-mail with the order details "
+"within the next minutes"
+msgstr ""
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)

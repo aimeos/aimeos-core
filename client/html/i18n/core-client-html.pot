@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-27 14:27+0100\n"
+"POT-Creation-Date: 2014-02-27 15:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -645,10 +645,6 @@ msgstr ""
 msgid "Terms and conditions"
 msgstr ""
 
-#: layouts/checkout/confirm/basic-body-default.html:13
-msgid "Thank you for your order"
-msgstr ""
-
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment status (%3%s)
 #: layouts/email/payment/text-intro-body-default.html:11
 #: layouts/email/payment/html-intro-body-default.html:12
@@ -674,6 +670,10 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "We received the payment and will care about your order immediately."
+msgstr ""
+
+#: layouts/checkout/confirm/basic-body-default.html:13
+msgid "Thank you for your order. You will receive an e-mail with the order details within the next minutes"
 msgstr ""
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and delivery status (%3%s)

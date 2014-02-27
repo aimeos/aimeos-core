@@ -10,7 +10,7 @@ $enc = $this->encoder();
 ?>
 <div class="checkout-confirm-basic">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Order' ), $enc::TRUST ); ?></h2>
-	<p class="note"><?php echo $enc->html( $this->translate( 'client/html', 'Thank you for your order' ), $enc::TRUST ); ?></p>
+	<p class="note"><?php echo $enc->html( $this->translate( 'client/html', 'Thank you for your order. You will receive an e-mail with the order details within the next minutes' ), $enc::TRUST ); ?></p>
 <?php if( isset( $this->confirmOrderItem ) ) : ?>
 	<ul class="attr-list">
 		<li class="form-item">

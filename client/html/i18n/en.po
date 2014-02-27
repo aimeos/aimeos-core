@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-27 14:17+0100\n"
+"POT-Creation-Date: 2014-02-27 15:38+0100\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -643,10 +643,6 @@ msgstr ""
 msgid "Terms and conditions"
 msgstr ""
 
-#: layouts/checkout/confirm/basic-body-default.html:13
-msgid "Thank you for your order"
-msgstr ""
-
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment status (%3%s)
 #: layouts/email/payment/text-intro-body-default.html:11
 #: layouts/email/payment/html-intro-body-default.html:12
@@ -672,6 +668,10 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "We received the payment and will care about your order immediately."
+msgstr ""
+
+#: layouts/checkout/confirm/basic-body-default.html:13
+msgid "Thank you for your order. You will receive an e-mail with the order details within the next minutes"
 msgstr ""
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and delivery status (%3%s)

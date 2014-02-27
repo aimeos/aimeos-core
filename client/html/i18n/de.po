@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-27 14:27+0100\n"
-"PO-Revision-Date: 2014-02-27 13:39+0000\n"
+"POT-Creation-Date: 2014-02-27 15:38+0100\n"
+"PO-Revision-Date: 2014-02-27 14:52+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -667,10 +667,6 @@ msgstr "Es wurde keine Vorlage für \"%1$s\" gefunden"
 msgid "Terms and conditions"
 msgstr "AGBs"
 
-#: layouts/checkout/confirm/basic-body-default.html:13
-msgid "Thank you for your order"
-msgstr "Vielen Dank für Ihre Bestellung"
-
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
 #: layouts/email/payment/text-intro-body-default.html:11
@@ -700,6 +696,12 @@ msgid ""
 "\n"
 "We received the payment and will care about your order immediately."
 msgstr "Vielen Dank für Ihre Bestellung %1$s vom %2$s.\n\nWir haben Ihre Zahlung erhalten und kümmern uns schnellstmöglich um Ihre Bestellung."
+
+#: layouts/checkout/confirm/basic-body-default.html:13
+msgid ""
+"Thank you for your order. You will receive an e-mail with the order details "
+"within the next minutes"
+msgstr "Vielen Dank für Ihre Bestellung. Sie erhalten innerhalb der nächsten Minuten eine E-Mail mit den Details Ihrer Bestellung"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
