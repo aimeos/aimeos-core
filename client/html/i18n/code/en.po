@@ -146,3 +146,7 @@ msgstr " "
 #. Product attribute
 msgid "width"
 msgstr "Width"
+
+#. Product attribute
+msgid "option"
+msgstr "Option"
