@@ -50,6 +50,7 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 			'id' => 4,
 			'siteid' => 99,
 			'ordprodid' => 11,
+			'type' => 'default',
 			'code' => 'size',
 			'value' => '30',
 			'name' => 'small',
@@ -418,9 +419,19 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( null, $result );
 	}
 
-	public function testGetSetAttributes()
+	public function testGetAttributes()
 	{
 		$this->assertEquals( $this->_attribute, $this->_object->getAttributes() );
+	}
+
+	public function testGetAttributesByType()
+	{
+		$this->assertEquals( $this->_attribute, $this->_object->getAttributes( 'default' ) );
+	}
+
+	public function testGetAttributesInvalidType()
+	{
+		$this->assertEquals( array(), $this->_object->getAttributes( 'invalid' ) );
 	}
 
 	public function testSetAttributes()

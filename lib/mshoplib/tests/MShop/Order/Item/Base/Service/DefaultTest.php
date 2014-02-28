@@ -35,6 +35,7 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 			'siteid'=>99,
 			'ordservid' => 42,
 			'name' => 'UnitName',
+			'type' => 'default',
 			'code' => 'UnitCode',
 			'value' => 'UnitValue',
 			'mtime' => '2020-12-31 23:59:59',
@@ -240,9 +241,19 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( null, $result );
 	}
 
-	public function testGetSetAttributes()
+	public function testGetAttributes()
 	{
 		$this->assertEquals( $this->_attribute, $this->_object->getAttributes() );
+	}
+
+	public function testGetAttributesByType()
+	{
+		$this->assertEquals( $this->_attribute, $this->_object->getAttributes( 'default' ) );
+	}
+
+	public function testGetAttributesInvalidType()
+	{
+		$this->assertEquals( array(), $this->_object->getAttributes( 'invalid' ) );
 	}
 
 	public function testSetAttributes()
