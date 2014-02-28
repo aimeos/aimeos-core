@@ -22,13 +22,13 @@ $dateFormat = $this->translate( 'client/html', 'Y-m-d' );
 
 $textStock = array(
 	/// code for "product is out ot stock"
-	'stock-out' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-out' ) ) ),
+	'stock-out' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-out' ), $enc::TRUST ) ),
 	/// code for "only a few products are available"
-	'stock-low' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-low' ) ) ),
+	'stock-low' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-low' ), $enc::TRUST ) ),
 	/// code for "product is in stock"
-	'stock-high' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-high' ) ) ),
+	'stock-high' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-high' ), $enc::TRUST ) ),
 	/// code for "product is available (without stock limit)"
-	'stock-unlimited' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-unlimited' ) ) ),
+	'stock-unlimited' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-unlimited' ), $enc::TRUST ) ),
 );
 
 
@@ -36,7 +36,7 @@ foreach( $stockProductIds as $prodId )
 {
 	if( !isset( $stockItemsByProducts[$prodId] ) )
 	{
-		$result[$prodId] = '<div class="stockitem stock-prodid-' . $prodId . ' stock-unlimited"><div class="stocklevel"></div><span class="stocktext">' . $textStock['stock-unlimited'] . '</span></div>';
+		$result[$prodId] = '<div class="stockitem stock-prodid-' . $enc->attr( $prodId ) . ' stock-unlimited" title="' . $enc->attr( $textStock['stock-unlimited'] ) . '"><div class="stocklevel"></div><span class="stocktext">' . $textStock['stock-unlimited'] . '</span></div>';
 		continue;
 	}
 
@@ -80,7 +80,7 @@ foreach( $stockProductIds as $prodId )
 		}
 
 		$text = nl2br( $enc->html( $text, $enc::TRUST ) );
-		$stocks[$level] .= '<div class="stockitem stock-prodid-' . $prodId . ' ' . $level . '"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
+		$stocks[$level] .= '<div class="stockitem stock-prodid-' . $enc->attr( $prodId ) . ' ' . $level . '" title="' . $enc->attr( $textStock['stock-unlimited'] ) . '"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
 	}
 
 	$result[$prodId] = implode( '', $stocks );
