@@ -81,6 +81,7 @@
 	border: solid 1px #FF3300;
 	padding: 0.5em;
 	padding-left: 2em;
+	margin-bottom: 2em;
 	list-style: disc;
 }
 
@@ -1245,11 +1246,6 @@
 	min-width: 240px;
 	max-width: 920px;
 	margin: 0 auto;
-}
-
-.basket-standard .error-list,
-.account-history .error-list {
-	margin: 0px 0px 20px 0px;
 }
  
 .basket-standard .note,
