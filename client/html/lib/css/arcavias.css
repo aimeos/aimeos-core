@@ -269,6 +269,7 @@
 	max-width: 60px;
 	max-height: 80px;
 	overflow: hidden;
+	margin-right: 1em;
 }
 
 .common-summary-detail .details .product-name {
