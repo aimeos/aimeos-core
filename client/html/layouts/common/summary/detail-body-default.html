@@ -103,22 +103,31 @@ $backParams = $this->get( 'summaryParams', array() );
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params ) ); ?>">
 <?php		echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 						</a>
-<?php		if( ( $attributes = $product->getAttributes() ) !== array() ) : ?>
-						<ul class="attr-list">
-<?php			foreach( $product->getAttributes() as $attribute ) : ?>
-<?php				if( ( $type = $attribute->getType() ) !== 'hidden' ) : ?>
+<?php		if( ( $attributes = $product->getAttributes( 'variant' ) ) !== array() ) : ?>
+						<ul class="attr-list attr-list-variant">
+<?php			foreach( $attributes as $attribute ) : ?>
 							<li class="attr-item">
-<?php					if( $modify && $type === 'config' ) : ?>
+								<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
+								<span class="value"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?></span>
+							</li>
+<?php			endforeach; ?>
+						</ul>
+<?php		endif; ?>
+<?php		if( ( $attributes = $product->getAttributes( 'config' ) ) !== array() ) : ?>
+						<ul class="attr-list attr-list-config">
+<?php			foreach( $attributes as $attribute ) : ?>
+							<li class="attr-item">
+<?php					if( $modify ) : ?>
 <?php						$params = array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ); ?>
 								<a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $params ) ); ?>">
 <?php					endif; ?>
+									<span class="sign">−</span>
 									<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
 									<span class="value"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?></span>
-<?php					if( $modify && $type === 'config' ) : ?>
+<?php					if( $modify ) : ?>
 								</a>
 <?php					endif; ?>
 							</li>
-<?php				endif; ?>
 <?php			endforeach; ?>
 						</ul>
 <?php		endif; ?>

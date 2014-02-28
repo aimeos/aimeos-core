@@ -240,15 +240,32 @@ jQuery(document).ready( function($) {
 		return false;
 	});
 
-	/* Go back to underlying page */
-	$("body").on("click", ".basket-standard .btn-back", function(event) {
+	/* Remove the basket overlay container */
+	var arcaviasRemoveOverlay = function() {
+		
 		var container = $(".arcavias-container");
 		var overlay = $(".arcavias-overlay");
 		
+		// remove only if in overlay mode
 		if( container.size() + overlay.size() > 0 ) {
+			
 			container.remove();
 			overlay.remove();
 			return false;
+		}
+
+		return true;
+	};
+
+	/* Go back to underlying page when button is clicked */
+	$("body").on("click", ".basket-standard .btn-back", function(event) {
+		return arcaviasRemoveOverlay();
+	});
+
+	/* Go back to underlying page when ESC is pressed */
+	$("body").on("keydown", function(event) {
+		if ( event.which == 27 ) {
+			return arcaviasRemoveOverlay();
 		}
 	});
 	

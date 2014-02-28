@@ -81,6 +81,7 @@
 	border: solid 1px #FF3300;
 	padding: 0.5em;
 	padding-left: 2em;
+	margin-bottom: 2em;
 	list-style: disc;
 }
 
@@ -259,16 +260,41 @@
 
 .common-summary-detail th,
 .common-summary-detail td {
-	padding: 5px;
 	vertical-align: middle;
+	padding: 5px;
 }
 
 .common-summary-detail .details img {
-	display: none;
 	float: left;
 	max-width: 60px;
 	max-height: 80px;
 	overflow: hidden;
+}
+
+.common-summary-detail .details .product-name {
+	font-weight: bold;
+	font-size: 133%;
+	margin: 0.5em;
+	display: block;
+}
+
+.common-summary-detail .attr-list {
+	color: #004266;
+	margin: 0.5em;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.common-summary-detail .attr-list-variant li.attr-item {
+	list-style: disc inside none;
+}
+
+.common-summary-detail .attr-list-config .attr-item {
+	font-weight: bold;
+}
+
+.common-summary-detail .attr-list .sign {
+	font-size: 150%;
 }
 
 .common-summary-detail .attr-item .name:after {
@@ -1220,11 +1246,6 @@
 	min-width: 240px;
 	max-width: 920px;
 	margin: 0 auto;
-}
-
-.basket-standard .error-list,
-.account-history .error-list {
-	margin: 0px 0px 20px 0px;
 }
  
 .basket-standard .note,

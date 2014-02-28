@@ -268,11 +268,25 @@ class MShop_Order_Item_Base_Service_Default
 	/**
 	 * Returns the list of attribute items for the service.
 	 *
+	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
 	 * @return array List of attribute items implementing MShop_Order_Item_Base_Service_Attribute_Interface
 	 */
-	public function getAttributes()
+	public function getAttributes( $type = null )
 	{
-		return $this->_attributes;
+		if( $type === null ) {
+			return $this->_attributes;
+		}
+
+		$list = array();
+
+		foreach( $this->_attributes as $attrItem )
+		{
+			if( $attrItem->getType() === $type ) {
+				$list[] = $attrItem;
+			}
+		}
+
+		return $list;
 	}
 
 
