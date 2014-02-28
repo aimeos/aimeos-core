@@ -662,6 +662,7 @@
 /* price list */
 .catalog-list .price-list {
 	padding: 5px;
+	font-size: 133%;
 	font-weight: bold;
 	color: #004266;
 	height: 1em;
