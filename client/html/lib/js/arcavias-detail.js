@@ -286,4 +286,23 @@ jQuery(document).ready( function($) {
 			}
 		}
 	});
+	
+	
+	/* Checks if all variant attributes are selected */
+	$(".catalog-detail-basket").on("click", ".addbasket .btn-action", {}, function(event) {
+		
+		var result = true;
+
+		$(".selection .select-item", event.delegateTarget).each( function() {
+			
+			if( $(".select-list", this).val() == '' ) {
+				$(this).addClass("error");
+				result = false;
+			} else {
+				$(this).removeClass("error");
+			}
+		});
+		
+		return result;
+	});
 });
