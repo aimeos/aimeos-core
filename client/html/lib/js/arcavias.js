@@ -164,6 +164,8 @@ jQuery(document).ready( function($) {
 			var container = $(document.createElement("div"));
 			var basket = $(".basket-standard", doc);
 
+			$(".btn-update", basket).hide();
+			
 			container.addClass("arcavias-container");
 			container.append(basket);
 			container.fadeTo(400, 1.0);
@@ -192,6 +194,12 @@ jQuery(document).ready( function($) {
 	/*
 	 * Basket clients
 	 */
+
+	/* Hide update button an show only on quantity change */
+	$(".basket-standard .btn-update").hide();
+	$("body").on("focusin", ".basket-standard .basket .product .quantity .value", {}, function(event) {
+		$(".btn-update", event.delegateTarget).show();
+	});
 	
 	/* Update without page reload */
 	$("body").on("submit", ".basket-standard form", function(event) {
@@ -204,6 +212,7 @@ jQuery(document).ready( function($) {
 			
 			var basket = $(".basket-standard", doc);
 
+			$(".btn-update", basket).hide();
 			$(".basket-standard").html( basket.html() );
 			$(".basket-mini-main .value").text( $(".basket .total .price", basket).text() );
 			$(".basket-mini-main .quantity").text( $(".basket .quantity .value", basket).text() );
@@ -222,6 +231,7 @@ jQuery(document).ready( function($) {
 			
 			var basket = $(".basket-standard", doc);
 
+			$(".btn-update", basket).hide();
 			$(".basket-standard").html( basket.html() );
 			$(".basket-mini-main .value").text( $(".basket .total .price", basket).text() );
 			$(".basket-mini-main .quantity").text( $(".basket .quantity .value", basket).text() );

@@ -1,14 +1,15 @@
 ﻿/* Arcavias standard CSS */
 
 
-.arcavias .standardbutton,
-.arcavias .minibutton {
+.arcavias .standardbutton {
 	background-image: url("images/buttonfond.png");
 	background-repeat: repeat-x;
 	background-size: contain;
 	box-shadow: 2px 2px 4px #5C88A1;
-	border: 1px solid #689DB9;
+	border: none;
 	border-radius: 0.4em;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
 	text-decoration: none;
 	font-weight: bold;
 	font-size: 100%;
@@ -22,8 +23,7 @@
 	cursor: pointer;
 }
 
-.arcavias .standardbutton:hover,
-.arcavias .minibutton:hover {
+.arcavias .standardbutton:hover {
 	background-image: url("images/buttonfond-active.png");
 }
 
@@ -32,20 +32,24 @@
 	min-width: 8.01em;
 }
 
+.arcavias .minibutton {
+	color: #689DB9;
+	font-size: 150%;
+	font-weight: bold;
+	min-width: 1em;
+	padding: 0;
+	margin: 0;
+}
+
 .arcavias .standardbutton::-moz-focus-inner,
 .arcavias .minibutton::-moz-focus-inner {
 	padding: 0;
 	border: 0; 
 }
 
-.arcavias .minibutton {
-	min-width: 1em;
-}
-
 .arcavias .btn-action {
 	background-image: url("images/buttonfond-action.png");
 	box-shadow: 2px 2px 4px #48A7A1;
-	border: 1px solid #52b652;
 	line-height: normal;
 	font-size: 133%;
 }
@@ -299,7 +303,7 @@
 .common-summary-detail td.quantity input {
 	text-align: center;
 	display: inline;
-	width: 4em;
+	width: 3em;
 }
 
 .common-summary-detail th.action,
