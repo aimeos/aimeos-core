@@ -120,6 +120,12 @@
 	padding: 2%;
 }
 
+.arcavias-container .btn-close {
+	display: block;
+	cursor: pointer;
+	text-align: right;
+}
+
 
 /* Common summary CSS also used in e-mail ===>>> */
 
