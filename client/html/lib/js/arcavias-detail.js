@@ -89,15 +89,7 @@ jQuery(document).ready( function($) {
 	});
 	
 	/* Image zoom */
-	$(".catalog-detail-image .image-single").on("mouseenter", ".item", function(event) {
-		
-		var item = $(this);
-		var container = $(event.delegateTarget);
-
-		// image is outside of the container
-		if( item.offset().top >= container.offset().top + container.height() ) {
-			return;
-		}
+	var arcaviasImageZoom = function(item, container) {
 		
 		var options = {
 			responsive: true,
@@ -113,6 +105,7 @@ jQuery(document).ready( function($) {
 			zoomWindowFadeOut: 500,
 			zoomWindowWidth: container.width(),
 			zoomWindowHeight: container.height(),
+			zoomWindowBgColour: container.css("background-color"),
 			zoomWindowPosition: 1,
 			zoomWindowOffetx: 10
 		};
@@ -124,14 +117,29 @@ jQuery(document).ready( function($) {
 		}
 	
 		item.elevateZoom(options);
+	};
+	
+	/* Enable image zoom for first image by default */
+	$(".catalog-detail-image .image-single").each( function() {
+		
+		if(window.location.hash) {
+			arcaviasImageZoom( $(window.location.hash), $(this) );
+		} else {
+			arcaviasImageZoom( $(".item", this).first(), $(this) );
+		}
 	});
 	
 	/* Display big image and highlight thumbnail after it was selected */
-	$(".catalog-detail-image .thumbs .item").on("click", function() {
-		$(".zoomContainer").remove();
-		window.location.hash = '#' + this.href.split("#").pop();
+	$(".catalog-detail-image").on("click", ".thumbs .item", {}, function(event) {
 		
-		$(".catalog-detail-image .thumbs .item").removeClass("selected");
+		var imageId = this.href.split("#").pop();
+		var container = $(".image-single", event.delegateTarget);
+
+		$(".zoomContainer").remove();
+		arcaviasImageZoom($("#" + imageId), container);
+		window.location.hash = '#' + imageId;
+		
+		$(".thumbs .item", event.delegateTarget).removeClass("selected");
 		$(this).addClass("selected");
 		
 		return false;
