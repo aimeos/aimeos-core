@@ -104,15 +104,15 @@ jQuery(document).ready( function($) {
 			scrollZoom: true,
 			easing : true,
 			borderSize: 1,
-			borderColour: '#C3D9E6',
+			borderColour: container.css("border-top-color"),
 			loadingIcon: '../css/images/progress.gif',
 			lensFadeIn: 500,
 			lensFadeOut: 500,
 			zoomLevel: 0.75,
 			zoomWindowFadeIn: 500,
 			zoomWindowFadeOut: 500,
-			zoomWindowWidth: 240, // should be in CSS
-			zoomWindowHeight: 320, // should be in CSS
+			zoomWindowWidth: container.width(),
+			zoomWindowHeight: container.height(),
 			zoomWindowPosition: 1,
 			zoomWindowOffetx: 10
 		};
