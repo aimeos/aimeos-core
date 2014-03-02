@@ -84,7 +84,36 @@ if (Ext.isWebKit && Ext.webKitVersion >= 535.2) { // probably not the exact vers
         }
     });
 }
-/*!
+
+/*
+ * Fix for broken drag&drop groups in ExtJS 3.*
+ * 
+ * Thanks to  berniesaurus:
+ *  http://www.sencha.com/forum/showthread.php?264400-Ext-JS-3.4.4.1-Drag-amp-Drop-broken
+ */
+Ext.dd.DragDropMgr.getZIndex = function(element) {
+    var body = document.body,
+        z,
+        zIndex = -1;
+    var overTargetEl = element;
+
+    element = Ext.getDom(element);
+    while (element !== body) {
+
+        // this fixes the problem
+        if(!element) {
+            this._remove(overTargetEl); // remove the drop target from the manager
+            break;
+        }
+        // fix end
+
+        if (!isNaN(z = Number(Ext.fly(element).getStyle('zIndex')))) {
+            zIndex = z;
+        }
+        element = element.parentNode;
+    }
+    return zIndex;
+};/*!
  * Copyright (c) Metaways Infosystems GmbH, 2013
  * LGPLv3, http://www.arcavias.com/license
  */
@@ -6602,7 +6631,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	},
 
 	previewRenderer : function(preview) {
-		return "<img class='arcavias-admin-media-list-preview' src=\"" + preview + "\" />";
+		return '<img class="arcavias-admin-media-list-preview" src="' + MShop.config.baseurl.content + '/' + preview + '" />';
 	}
 });
 
@@ -6838,7 +6867,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 
 	refPreviewRenderer : function(refId, metaData, record, rowIndex, colIndex, store) {
 		var refItem = this.getRefStore().getById(refId);
-		return (refItem ? "<img class='mshop-admin-media-list-preview' src=\"" + refItem.get('media.preview') + "\" />" : '');
+		return (refItem ? '<img class="arcavias-admin-media-list-preview" src="' + MShop.config.baseurl.content + '/' + refItem.get('media.preview') + '" />' : '');
 	}
 });
 
