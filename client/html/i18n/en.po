@@ -839,23 +839,23 @@ msgstr "Payment"
 #. / code for "product is in stock"
 #: layouts/catalog/stock/body-default.html:29
 msgid "stock-high"
-msgstr "in stock"
+msgstr "Product is in stock"
 
 #. / code for "only a few products are available"
 #: layouts/catalog/stock/body-default.html:27
 msgid "stock-low"
-msgstr "only a few available"
+msgstr "Only a few products are available"
 
 #
 #. / code for "product is out ot stock"
 #: layouts/catalog/stock/body-default.html:25
 msgid "stock-out"
-msgstr "out ot stock"
+msgstr "Product is out ot stock"
 
 #. / code for "product is available (without stock limit)"
 #: layouts/catalog/stock/body-default.html:31
 msgid "stock-unlimited"
-msgstr "available"
+msgstr "Product is available"
 
 #: layouts/checkout/standard/summary-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Summary/Default.php:12
