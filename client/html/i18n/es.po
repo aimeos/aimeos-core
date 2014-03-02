@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-27 15:38+0100\n"
-"PO-Revision-Date: 2014-02-27 14:44+0000\n"
+"POT-Creation-Date: 2014-03-01 19:26+0100\n"
+"PO-Revision-Date: 2014-03-01 23:28+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: layouts/common/summary/detail-body-default.html:239
+#: layouts/common/summary/detail-body-default.html:252
 #: layouts/basket/mini/main-body-default.html:29
 #, php-format
 msgid "%1$d article"
@@ -75,7 +75,7 @@ msgstr "%1$s %2$s"
 #: src/MW/View/Helper/Price/Default.php:82
 #, php-format
 msgid "%1$s %2$s off"
-msgstr ""
+msgstr "%1$s %2$s menos"
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
 #. value (%2$s) and currency (%3$s)
@@ -112,7 +112,7 @@ msgstr "%1$s%3$s + %2$s%3$s"
 #: src/MW/View/Helper/Price/Default.php:80
 #, php-format
 msgid "+ %1$s %2$s/item"
-msgstr ""
+msgstr "+ %1$s %2$s/unidad"
 
 #: layouts/email/common/text-summary-detail-body-default.html:91
 msgid "+ Payment costs"
@@ -223,7 +223,7 @@ msgstr "Cambiar pago"
 
 #: layouts/catalog/detail/additional-attribute-body-default.html:21
 msgid "Characteristics"
-msgstr ""
+msgstr "Características"
 
 #: layouts/basket/standard/body-default.html:44
 msgid "Checkout"
@@ -320,7 +320,7 @@ msgstr "Detalles"
 
 #: layouts/catalog/detail/additional-download-body-default.html:20
 msgid "Downloads"
-msgstr ""
+msgstr "Descargas"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:174
 #: layouts/checkout/standard/address-billing-body-default.html:170
@@ -364,14 +364,14 @@ msgid "If you have any questions, please reply to this e-mail"
 msgstr "Si tiene alguna pregunta, responda a este email"
 
 #. / Tax rate format with tax rate in percent (%1$s)
-#: layouts/common/summary/detail-body-default.html:223
+#: layouts/common/summary/detail-body-default.html:233
 #: layouts/email/common/text-summary-detail-body-default.html:104
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
 msgid "Incl. %1$s%% VAT"
 msgstr "Incl. el %1$s%% de IVA"
 
-#: layouts/common/summary/detail-body-default.html:231
+#: layouts/common/summary/detail-body-default.html:243
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
@@ -404,7 +404,7 @@ msgstr "Caracteres no válidos en el nombre del cliente \"%1$s\""
 #: src/Client/Html/Common/Factory/Abstract.php:54
 #, php-format
 msgid "Invalid class name \"%1$s\""
-msgstr ""
+msgstr "Nombre de clase no válido \"%1$s\""
 
 #: src/Client/Html/Common/Factory/Abstract.php:86
 #, php-format
@@ -455,7 +455,7 @@ msgstr "No hay vistas disponibles"
 #: src/MW/View/Helper/Price/Default.php:44
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
-msgstr ""
+msgstr "El objeto no implementa \"%1$s\""
 
 #: layouts/checkout/standard/summary-option-body-default.html:12
 msgid "Options"
@@ -488,7 +488,7 @@ msgstr "Historial de pedidos"
 msgid "Order with ID \"%1$s\" not found"
 msgstr "No se ha encontrado el pedido con ID \"%1$s\""
 
-#: layouts/catalog/list/pagination-body-default.html:52
+#: layouts/catalog/list/pagination-body-default.html:53
 #, php-format
 msgid "Page %1$d of %2$d"
 msgstr "Página %1$d de %2$d"
@@ -499,7 +499,7 @@ msgstr "Página %1$d de %2$d"
 msgid "Payment"
 msgstr "Pago"
 
-#: layouts/common/summary/detail-body-default.html:207
+#: layouts/common/summary/detail-body-default.html:216
 msgid "Payment costs"
 msgstr "Comisiones de pago"
 
@@ -525,7 +525,7 @@ msgstr "Elija su método de pago"
 
 #: layouts/catalog/filter/search-body-default.html:11
 msgid "Please enter at least three characters"
-msgstr ""
+msgstr "Por favor, introduzca al menos tres caracteres"
 
 #: layouts/catalog/detail/basket-selection-body-default.html:30
 msgid "Please select"
@@ -594,7 +594,7 @@ msgstr "Tarifas del servicio"
 msgid "Services"
 msgstr "Servicios"
 
-#: layouts/common/summary/detail-body-default.html:199
+#: layouts/common/summary/detail-body-default.html:208
 msgid "Shipping"
 msgstr "Envío"
 
@@ -634,7 +634,7 @@ msgstr "Stock: %1$s, %2$s, de vuelta el %3$s"
 msgid "Street"
 msgstr "Calle"
 
-#: layouts/common/summary/detail-body-default.html:192
+#: layouts/common/summary/detail-body-default.html:201
 #: layouts/email/common/text-summary-detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:97
 msgid "Sub-total"
@@ -697,7 +697,7 @@ msgstr "Gracias por su pedido %1$s desde %2$s.\n\nHemos recibido el pago y nos e
 msgid ""
 "Thank you for your order. You will receive an e-mail with the order details "
 "within the next minutes"
-msgstr ""
+msgstr "Gracias por su compra. En los próximos minutos, recibirá un correo electrónico con los detalles relativos a su pedido."
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -729,15 +729,15 @@ msgstr "El pago de su pedido %1$s desde %2$s le ha sido devuelto."
 msgid "Top seller"
 msgstr "Éxito de ventas"
 
-#: layouts/common/summary/detail-body-default.html:215
+#: layouts/common/summary/detail-body-default.html:224
 #: layouts/email/common/text-summary-detail-body-default.html:93
 #: layouts/email/common/text-summary-detail-body-default.html:101
 msgid "Total"
 msgstr "Total"
 
-#: layouts/common/summary/detail-body-default.html:238
+#: layouts/common/summary/detail-body-default.html:251
 msgid "Total quantity"
-msgstr ""
+msgstr "Cantidad total"
 
 #: layouts/checkout/confirm/basic-body-default.html:36
 msgid "Try again"
@@ -770,7 +770,7 @@ msgstr "Hemos recibido el paquete devuelto de su pedido %1$s desde %2$s."
 msgid "Web site"
 msgstr "Sitio web"
 
-#: layouts/common/summary/detail-body-default.html:145
+#: layouts/common/summary/detail-body-default.html:154
 msgid "X"
 msgstr "X"
 
@@ -843,7 +843,7 @@ msgstr "entrega"
 #: src/MW/View/Helper/Price/Default.php:76
 #, php-format
 msgid "from %1$s"
-msgstr ""
+msgstr "desde %1$s"
 
 #: layouts/common/summary/address-body-default.html:127
 #: layouts/email/common/text-summary-address-body-default.html:111
@@ -870,22 +870,22 @@ msgstr "pago"
 #. / code for "product is in stock"
 #: layouts/catalog/stock/body-default.html:29
 msgid "stock-high"
-msgstr ""
+msgstr "\"stock\"-alto"
 
 #. / code for "only a few products are available"
 #: layouts/catalog/stock/body-default.html:27
 msgid "stock-low"
-msgstr ""
+msgstr "\"stock\"-bajo"
 
-#. / code for "product is out ot stock"
+#. / code for "product is out of stock"
 #: layouts/catalog/stock/body-default.html:25
 msgid "stock-out"
-msgstr ""
+msgstr "\"stock\"-agotado"
 
-#. / code for "product is available (without stock limit)"
+#. / code for "product is available"
 #: layouts/catalog/stock/body-default.html:31
 msgid "stock-unlimited"
-msgstr "sin límite de stock"
+msgstr "\"stock\"-ilimitado"
 
 #: layouts/checkout/standard/summary-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Summary/Default.php:12
@@ -894,32 +894,32 @@ msgstr "resumen"
 
 #: layouts/catalog/list/pagination-body-default.html:24
 msgid "▲ Name"
-msgstr ""
+msgstr "▲ Nombre"
 
 #: layouts/catalog/list/pagination-body-default.html:32
 msgid "▲ Price"
-msgstr ""
+msgstr "▲ Precio"
 
-#: layouts/catalog/list/pagination-body-default.html:53
+#: layouts/catalog/list/pagination-body-default.html:54
 msgid "▶"
 msgstr "▶"
 
-#: layouts/catalog/list/pagination-body-default.html:54
+#: layouts/catalog/list/pagination-body-default.html:55
 msgid "▶▶"
 msgstr "▶▶"
 
 #: layouts/catalog/list/pagination-body-default.html:22
 msgid "▼ Name"
-msgstr ""
+msgstr "▼ Nombre"
 
 #: layouts/catalog/list/pagination-body-default.html:30
 msgid "▼ Price"
-msgstr ""
+msgstr "▼ Precio"
 
-#: layouts/catalog/list/pagination-body-default.html:51
+#: layouts/catalog/list/pagination-body-default.html:52
 msgid "◀"
 msgstr "◀"
 
-#: layouts/catalog/list/pagination-body-default.html:50
+#: layouts/catalog/list/pagination-body-default.html:51
 msgid "◀◀"
 msgstr "◀◀"

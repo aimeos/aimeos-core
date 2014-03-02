@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-27 15:38+0100\n"
+"POT-Creation-Date: 2014-03-01 19:26+0100\n"
 "PO-Revision-Date: 2014-02-27 14:44+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: layouts/common/summary/detail-body-default.html:239
+#: layouts/common/summary/detail-body-default.html:252
 #: layouts/basket/mini/main-body-default.html:29
 #, php-format
 msgid "%1$d article"
@@ -367,14 +367,14 @@ msgid "If you have any questions, please reply to this e-mail"
 msgstr ""
 
 #. / Tax rate format with tax rate in percent (%1$s)
-#: layouts/common/summary/detail-body-default.html:223
+#: layouts/common/summary/detail-body-default.html:233
 #: layouts/email/common/text-summary-detail-body-default.html:104
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
 msgid "Incl. %1$s%% VAT"
 msgstr ""
 
-#: layouts/common/summary/detail-body-default.html:231
+#: layouts/common/summary/detail-body-default.html:243
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
@@ -491,7 +491,7 @@ msgstr "История заказа"
 msgid "Order with ID \"%1$s\" not found"
 msgstr "Заказ с номером \"%1$s\" не найден"
 
-#: layouts/catalog/list/pagination-body-default.html:52
+#: layouts/catalog/list/pagination-body-default.html:53
 #, php-format
 msgid "Page %1$d of %2$d"
 msgstr "Страница %1$d из %2$d"
@@ -502,7 +502,7 @@ msgstr "Страница %1$d из %2$d"
 msgid "Payment"
 msgstr "Оплата"
 
-#: layouts/common/summary/detail-body-default.html:207
+#: layouts/common/summary/detail-body-default.html:216
 msgid "Payment costs"
 msgstr "Стоимость оплаты"
 
@@ -598,7 +598,7 @@ msgstr "Плата за сервис"
 msgid "Services"
 msgstr "Сервисы"
 
-#: layouts/common/summary/detail-body-default.html:199
+#: layouts/common/summary/detail-body-default.html:208
 msgid "Shipping"
 msgstr "Пересылка"
 
@@ -638,7 +638,7 @@ msgstr ""
 msgid "Street"
 msgstr "Улица"
 
-#: layouts/common/summary/detail-body-default.html:192
+#: layouts/common/summary/detail-body-default.html:201
 #: layouts/email/common/text-summary-detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:97
 msgid "Sub-total"
@@ -733,13 +733,13 @@ msgstr ""
 msgid "Top seller"
 msgstr ""
 
-#: layouts/common/summary/detail-body-default.html:215
+#: layouts/common/summary/detail-body-default.html:224
 #: layouts/email/common/text-summary-detail-body-default.html:93
 #: layouts/email/common/text-summary-detail-body-default.html:101
 msgid "Total"
 msgstr ""
 
-#: layouts/common/summary/detail-body-default.html:238
+#: layouts/common/summary/detail-body-default.html:251
 msgid "Total quantity"
 msgstr ""
 
@@ -774,7 +774,7 @@ msgstr ""
 msgid "Web site"
 msgstr "Вебсайт"
 
-#: layouts/common/summary/detail-body-default.html:145
+#: layouts/common/summary/detail-body-default.html:154
 msgid "X"
 msgstr "Х"
 
@@ -881,12 +881,12 @@ msgstr ""
 msgid "stock-low"
 msgstr ""
 
-#. / code for "product is out ot stock"
+#. / code for "product is out of stock"
 #: layouts/catalog/stock/body-default.html:25
 msgid "stock-out"
 msgstr ""
 
-#. / code for "product is available (without stock limit)"
+#. / code for "product is available"
 #: layouts/catalog/stock/body-default.html:31
 msgid "stock-unlimited"
 msgstr ""
@@ -904,11 +904,11 @@ msgstr ""
 msgid "▲ Price"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:53
+#: layouts/catalog/list/pagination-body-default.html:54
 msgid "▶"
 msgstr "▶"
 
-#: layouts/catalog/list/pagination-body-default.html:54
+#: layouts/catalog/list/pagination-body-default.html:55
 msgid "▶▶"
 msgstr "▶▶"
 
@@ -920,10 +920,10 @@ msgstr ""
 msgid "▼ Price"
 msgstr ""
 
-#: layouts/catalog/list/pagination-body-default.html:51
+#: layouts/catalog/list/pagination-body-default.html:52
 msgid "◀"
 msgstr "◀"
 
-#: layouts/catalog/list/pagination-body-default.html:50
+#: layouts/catalog/list/pagination-body-default.html:51
 msgid "◀◀"
 msgstr "◀◀"

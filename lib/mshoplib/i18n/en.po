@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-19 14:47+0100\n"
+"POT-Creation-Date: 2014-03-01 19:26+0100\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 # error domain: order
 # error type: value, parameter, object etc. not available
-#: src/MShop/Order/Item/Base/Default.php:328
+#: src/MShop/Order/Item/Base/Default.php:345
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
 msgstr ""
@@ -47,7 +47,7 @@ msgstr ""
 
 # error domain: order
 # error type: misc.
-#: src/MShop/Order/Item/Base/Default.php:525
+#: src/MShop/Order/Item/Base/Default.php:542
 #, php-format
 msgid "Basket empty"
 msgstr ""
@@ -235,7 +235,7 @@ msgstr ""
 
 # error domain: search
 # error type: invalid JSON as search result
-#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:288
+#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:273
 #, php-format
 msgid "Invalid JSON as result of search for order service attribute with ID \"%1$d\""
 msgstr ""
@@ -366,7 +366,7 @@ msgstr ""
 
 # error domain: order
 # error type: misc.
-#: src/MShop/Order/Manager/Base/Default.php:383
+#: src/MShop/Order/Manager/Base/Default.php:368
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr ""
@@ -470,7 +470,7 @@ msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MAdmin/Log/Manager/Default.php:212
+#: src/MAdmin/Log/Manager/Default.php:208
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
 msgstr ""
@@ -540,15 +540,15 @@ msgstr ""
 # error domain: misc.
 # error type: object does not implement interface
 #: src/MAdmin/Job/Manager/Default.php:133
-#: src/MAdmin/Log/Manager/Default.php:125
-#: src/MShop/Order/Manager/Base/Default.php:238
-#: src/MShop/Order/Manager/Base/Service/Default.php:176
-#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:160
-#: src/MShop/Order/Manager/Base/Product/Default.php:243
-#: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:161
-#: src/MShop/Order/Manager/Base/Address/Default.php:250
-#: src/MShop/Order/Manager/Status/Default.php:122
-#: src/MShop/Order/Manager/Default.php:188
+#: src/MAdmin/Log/Manager/Default.php:120
+#: src/MShop/Order/Manager/Base/Default.php:221
+#: src/MShop/Order/Manager/Base/Service/Default.php:159
+#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:143
+#: src/MShop/Order/Manager/Base/Product/Default.php:226
+#: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:144
+#: src/MShop/Order/Manager/Base/Address/Default.php:233
+#: src/MShop/Order/Manager/Status/Default.php:105
+#: src/MShop/Order/Manager/Default.php:182
 #: src/MShop/Supplier/Manager/Default.php:156
 #: src/MShop/Locale/Manager/Site/Default.php:156
 #: src/MShop/Locale/Manager/Default.php:216
@@ -596,7 +596,7 @@ msgstr ""
 
 # error domain: search
 # error type: empty search result
-#: src/MShop/Order/Manager/Base/Default.php:478
+#: src/MShop/Order/Manager/Base/Default.php:464
 #: src/MShop/Service/Provider/Delivery/Default.php:291
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
@@ -623,7 +623,7 @@ msgstr ""
 msgid "Order payment status \"%1$s\" not within allowed range"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Product/Default.php:402
+#: src/MShop/Order/Item/Base/Product/Default.php:408
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
 msgstr ""
@@ -729,7 +729,7 @@ msgstr ""
 # error domain: order
 # error type: value, parameter, object etc. not available
 #: src/MShop/Order/Item/Base/Default.php:235
-#: src/MShop/Order/Item/Base/Default.php:295
+#: src/MShop/Order/Item/Base/Default.php:312
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
 msgstr ""
@@ -743,13 +743,6 @@ msgstr ""
 
 # error domain: order
 # error type: value, parameter, object etc. not available
-#: src/MShop/Order/Item/Base/Default.php:761
-#, php-format
-msgid "Product with the same signatur not available"
-msgstr ""
-
-# error domain: order
-# error type: value, parameter, object etc. not available
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:100
 #, php-format
 msgid "Products in basket not available"
@@ -757,7 +750,7 @@ msgstr ""
 
 # error domain: plugin
 # error type: value, parameter, object etc. not available
-#: src/MShop/Plugin/Provider/Order/ProductStock.php:93
+#: src/MShop/Plugin/Provider/Order/ProductStock.php:95
 #, php-format
 msgid "Products out of stock"
 msgstr ""
@@ -775,6 +768,11 @@ msgstr ""
 #: src/MShop/Plugin/Manager/Default.php:156
 #, php-format
 msgid "Provider in \"%1$s\" not available"
+msgstr ""
+
+#: src/MShop/Order/Item/Base/Product/Default.php:310
+#, php-format
+msgid "Quantity must be a positive integer and must not exceed %1$d"
 msgstr ""
 
 # error domain: service
@@ -822,7 +820,7 @@ msgstr ""
 
 # error domain: order
 # error type: value, parameter, object etc. not available
-#: src/MShop/Order/Item/Base/Default.php:400
+#: src/MShop/Order/Item/Base/Default.php:417
 #, php-format
 msgid "Service of type \"%1$s\" not available"
 msgstr ""

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-19 14:47+0100\n"
-"PO-Revision-Date: 2014-02-02 14:35+0000\n"
+"POT-Creation-Date: 2014-03-01 19:26+0100\n"
+"PO-Revision-Date: 2014-03-01 18:31+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/MShop/Order/Item/Base/Default.php:328
+#: src/MShop/Order/Item/Base/Default.php:345
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
 msgstr "Anschrift vom Typ \"%1$s\" nicht verfügbar"
@@ -41,7 +41,7 @@ msgstr "Suchkonfiguration für Adresse nicht verfügbar"
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Typ \"%1$s\" für Anschrift liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
-#: src/MShop/Order/Item/Base/Default.php:525
+#: src/MShop/Order/Item/Base/Default.php:542
 #, php-format
 msgid "Basket empty"
 msgstr "Warenkorb leer"
@@ -191,7 +191,7 @@ msgstr "Ungültiger ISO-Sprachcode \"%1$s\""
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
 msgstr "Ungültiges JSON als Suchergebnis in \"%1$s\" mit ID \"%2$s\": \"%3$s\""
 
-#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:288
+#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:273
 #, php-format
 msgid ""
 "Invalid JSON as result of search for order service attribute with ID "
@@ -302,7 +302,7 @@ msgstr "Ungültige Factory \"%1$s\""
 msgid "Invalid mime type \"%1$s\""
 msgstr "Üngültiger Dateityp \"%1$s\""
 
-#: src/MShop/Order/Manager/Base/Default.php:383
+#: src/MShop/Order/Manager/Base/Default.php:368
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr "Warenkorb ist fehlerhaft serialisiert. \"%1$s\" liefert \"%2$s\"."
@@ -379,7 +379,7 @@ msgstr "Gebietsschema-Objekt (Locale-Item) nicht verfügbar"
 msgid "Lock flag \"%1$d\" not within allowed range"
 msgstr "Flag \"%1$d\" für Lock liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
-#: src/MAdmin/Log/Manager/Default.php:212
+#: src/MAdmin/Log/Manager/Default.php:208
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
 msgstr "Log-Eintrag mit ID \"%1$s\" nicht gefunden"
@@ -437,15 +437,15 @@ msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
 msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%2$s\" verfügbar"
 
 #: src/MAdmin/Job/Manager/Default.php:133
-#: src/MAdmin/Log/Manager/Default.php:125
-#: src/MShop/Order/Manager/Base/Default.php:238
-#: src/MShop/Order/Manager/Base/Service/Default.php:176
-#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:160
-#: src/MShop/Order/Manager/Base/Product/Default.php:243
-#: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:161
-#: src/MShop/Order/Manager/Base/Address/Default.php:250
-#: src/MShop/Order/Manager/Status/Default.php:122
-#: src/MShop/Order/Manager/Default.php:188
+#: src/MAdmin/Log/Manager/Default.php:120
+#: src/MShop/Order/Manager/Base/Default.php:221
+#: src/MShop/Order/Manager/Base/Service/Default.php:159
+#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:143
+#: src/MShop/Order/Manager/Base/Product/Default.php:226
+#: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:144
+#: src/MShop/Order/Manager/Base/Address/Default.php:233
+#: src/MShop/Order/Manager/Status/Default.php:105
+#: src/MShop/Order/Manager/Default.php:182
 #: src/MShop/Supplier/Manager/Default.php:156
 #: src/MShop/Locale/Manager/Site/Default.php:156
 #: src/MShop/Locale/Manager/Default.php:216
@@ -491,7 +491,7 @@ msgid ""
 "invoice ID \"%2$s\" of the order"
 msgstr "ID \"%1$s\" der Bestelldaten in XML-Antwort des Logistikdienstleisters stimmt nicht mit hinterlegter Rechnungs-ID \"%2$s\" der Bestellung überein"
 
-#: src/MShop/Order/Manager/Base/Default.php:478
+#: src/MShop/Order/Manager/Base/Default.php:464
 #: src/MShop/Service/Provider/Delivery/Default.php:291
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
@@ -514,7 +514,7 @@ msgstr "Lieferstatus \"%1$s\" liegt nicht innerhalb des vorgegebenen Wertebereic
 msgid "Order payment status \"%1$s\" not within allowed range"
 msgstr "Bezahlstatus \"%1$s\" liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
-#: src/MShop/Order/Item/Base/Product/Default.php:402
+#: src/MShop/Order/Item/Base/Product/Default.php:408
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
 msgstr "Produktposition \"%1$s\" in der Bestellung muss grösser \"0\" sein"
@@ -608,7 +608,7 @@ msgid "Product matching given properties not found"
 msgstr "Produkt mit entsprechenden vorgegebenen Eigenschaften nicht gefunden"
 
 #: src/MShop/Order/Item/Base/Default.php:235
-#: src/MShop/Order/Item/Base/Default.php:295
+#: src/MShop/Order/Item/Base/Default.php:312
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
 msgstr "Produkt mit Array-Schlüssel \"%1$d\" nicht verfügbar"
@@ -618,17 +618,12 @@ msgstr "Produkt mit Array-Schlüssel \"%1$d\" nicht verfügbar"
 msgid "Product with code \"%1$s\" not found"
 msgstr "Produkt mit Code \"%1$s\" nicht gefunden"
 
-#: src/MShop/Order/Item/Base/Default.php:761
-#, php-format
-msgid "Product with the same signatur not available"
-msgstr "Produkt mit der gleichen Signatur nicht verfügbar"
-
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:100
 #, php-format
 msgid "Products in basket not available"
 msgstr "Produkte im Warenkorb nicht vergfübar"
 
-#: src/MShop/Plugin/Provider/Order/ProductStock.php:93
+#: src/MShop/Plugin/Provider/Order/ProductStock.php:95
 #, php-format
 msgid "Products out of stock"
 msgstr "Produkte nicht mehr auf Lager"
@@ -643,6 +638,11 @@ msgstr "Eigenschaftsname \"%1$s\" liegt nicht innerhalb des vorgegebenen Wertebe
 #, php-format
 msgid "Provider in \"%1$s\" not available"
 msgstr "Provider in \"%1$s\" nicht verfügbar"
+
+#: src/MShop/Order/Item/Base/Product/Default.php:310
+#, php-format
+msgid "Quantity must be a positive integer and must not exceed %1$d"
+msgstr "Produktanzahl muss eine ganze Zahl zwischen 1 und %1$d sein"
 
 #: src/MShop/Service/Provider/Abstract.php:303
 #, php-format
@@ -677,7 +677,7 @@ msgstr "Übertragung der Bestelldaten zum Logistikdienstleister mit HTTP-Status 
 msgid "Sending order to delivery provider failed: \"%1$s\""
 msgstr "Übertragung der Bestelldaten zum Logistikdienstleister fehlgeschlagen: \"%1$s\""
 
-#: src/MShop/Order/Item/Base/Default.php:400
+#: src/MShop/Order/Item/Base/Default.php:417
 #, php-format
 msgid "Service of type \"%1$s\" not available"
 msgstr "Service vom Typ \"%1$s\" nicht verfügbar"
