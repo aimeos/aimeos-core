@@ -120,6 +120,12 @@
 	padding: 2%;
 }
 
+.arcavias-container .btn-close {
+	display: block;
+	cursor: pointer;
+	text-align: right;
+}
+
 
 /* Common summary CSS also used in e-mail ===>>> */
 
@@ -269,6 +275,7 @@
 	max-width: 60px;
 	max-height: 80px;
 	overflow: hidden;
+	margin-right: 1em;
 }
 
 .common-summary-detail .details .product-name {
@@ -661,6 +668,7 @@
 /* price list */
 .catalog-list .price-list {
 	padding: 5px;
+	font-size: 133%;
 	font-weight: bold;
 	color: #004266;
 	height: 1em;
@@ -1012,6 +1020,7 @@
 .catalog-detail-basket-selection,
 .catalog-detail-basket-attribute {
 	margin: 0.5em 0;
+	color: #004266;
 }
 
 .catalog-detail-basket-selection .select-name,
@@ -1020,7 +1029,6 @@
 	font-weight: bold;
 	margin-top: 1.5em;
 	min-width: 5em;
-	color: #004266;
 }
 
 .catalog-detail-basket-selection select,
@@ -1033,6 +1041,15 @@
 .catalog-detail-basket-selection td,
 .catalog-detail-basket-attribute td {
 	padding-right: 5px;
+}
+
+.catalog-detail-basket .selection .error {
+	color: #FF3300;
+}
+
+.catalog-detail-basket .selection .error select {
+	background-color: #ffeeee;
+	border: solid 1px #FF3300;
 }
 
 /* Product detail, additional section */

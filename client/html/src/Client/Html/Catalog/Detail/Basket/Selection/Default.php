@@ -141,6 +141,8 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 					}
 				}
 
+				ksort( $attrTypeDeps );
+
 				$search = $attrManager->createSearch( true );
 				$expr = array(
 					$search->compare( '==', 'attribute.id', $attrIds ),

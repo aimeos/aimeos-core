@@ -118,12 +118,18 @@ class Client_Html_Catalog_Filter_Attribute_Default
 			$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
 
 			$search = $manager->createSearch( true );
+
 			$expr = array(
 				$search->compare( '==', 'attribute.domain', 'product' ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', 'attribute.position' ) ) );
+
+			$sort = array(
+				$search->sort( '+', 'attribute.type.code' ),
+				$search->sort( '+', 'attribute.position' ),
+			);
+			$search->setSortations( $sort );
 			$search->setSlice( 0, 1000 );
 
 			foreach( $manager->searchItems( $search, array( 'text', 'media' ) ) as $id => $item ) {

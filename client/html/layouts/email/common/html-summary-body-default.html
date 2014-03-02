@@ -84,7 +84,6 @@
 
 .common-summary .header,
 .common-summary-detail .header {
-	border-bottom: 1px solid #689DB9;
 	background-color: #F2F7FA;
 	padding: 5px 10px;
 	margin: 5px;
@@ -146,16 +145,42 @@
 
 .common-summary-detail th,
 .common-summary-detail td {
-	padding: 5px;
 	vertical-align: middle;
+	padding: 5px;
 }
 
 .common-summary-detail .details img {
-	display: none;
 	float: left;
 	max-width: 60px;
 	max-height: 80px;
 	overflow: hidden;
+	margin-right: 1em;
+}
+
+.common-summary-detail .details .product-name {
+	font-weight: bold;
+	font-size: 133%;
+	margin: 0.5em;
+	display: block;
+}
+
+.common-summary-detail .attr-list {
+	color: #004266;
+	margin: 0.5em;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.common-summary-detail .attr-list-variant li.attr-item {
+	list-style: disc inside none;
+}
+
+.common-summary-detail .attr-list-config .attr-item {
+	font-weight: bold;
+}
+
+.common-summary-detail .attr-list .sign {
+	font-size: 150%;
 }
 
 .common-summary-detail .attr-item .name:after {
@@ -190,7 +215,7 @@
 .common-summary-detail td.quantity input {
 	text-align: center;
 	display: inline;
-	width: 4em;
+	width: 3em;
 }
 
 .common-summary-detail th.action,

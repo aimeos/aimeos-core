@@ -149,6 +149,21 @@ jQuery(document).ready( function($) {
 	$(window).bind("scroll", arcaviasLazyLoader);
 	
 	
+	/* Updata baskets */
+	var arcaviasBasketUpdate = function(data) {
+		
+		var doc = document.createElement("html");
+		doc.innerHTML = data;
+		
+		var basket = $(".basket-standard", doc);
+
+		$(".btn-update", basket).hide();
+		$(".basket-mini-main .value").text( $(".basket .total .price", basket).text() );
+		$(".basket-mini-main .quantity").text( $(".basket .quantity .value", basket).text() );
+		
+		return basket;
+	};
+	
 	/* Add to basket without page reload */
 	$(".catalog-detail-basket form").on("submit", function(event) {
 
@@ -158,26 +173,26 @@ jQuery(document).ready( function($) {
 		$("body").append(overlay);
 
 		$.post($(this).attr("action"), $(this).serialize(), function(data) {
-			var doc = document.createElement("html");
-			doc.innerHTML = data;
-			
-			var container = $(document.createElement("div"));
-			var basket = $(".basket-standard", doc);
 
-			$(".btn-update", basket).hide();
-			
+			var container = $(document.createElement("div"));
+			var btnclose = $(document.createElement("a"));
+
+			btnclose.text("X");
+			btnclose.addClass("minibutton");
+			btnclose.addClass("btn-close");
+
 			container.addClass("arcavias-container");
-			container.append(basket);
+			container.addClass("arcavias");
+			container.prepend(btnclose);
 			container.fadeTo(400, 1.0);
+			container.append(arcaviasBasketUpdate(data));
+
 			$("body").append(container);
-			
-			$(".basket-mini-main .value").text( $(".basket .total .price", basket).text() );
-			$(".basket-mini-main .quantity").text( $(".basket .quantity .value", basket).text() );
 			
 			var resize = function() {
 				var jqwin = $(window);
-				var left = (jqwin.width() - basket.outerWidth()) / 2;
-				var top = (jqwin.height() - basket.outerHeight()) / 2;
+				var left = (jqwin.width() - container.outerWidth()) / 2;
+				var top = (jqwin.height() - container.outerHeight()) / 2;
 
 				container.css("left", (left>0 ? left : 0 ));
 				container.css("top", (top>0 ? top : 0 ));
@@ -200,22 +215,13 @@ jQuery(document).ready( function($) {
 	$("body").on("focusin", ".basket-standard .basket .product .quantity .value", {}, function(event) {
 		$(".btn-update", event.delegateTarget).show();
 	});
-	
+
 	/* Update without page reload */
 	$("body").on("submit", ".basket-standard form", function(event) {
 		var form = $(this);
 
 		$.post(form.attr("action"), form.serialize(), function(data) {
-			
-			var doc = document.createElement("html");
-			doc.innerHTML = data;
-			
-			var basket = $(".basket-standard", doc);
-
-			$(".btn-update", basket).hide();
-			$(".basket-standard").html( basket.html() );
-			$(".basket-mini-main .value").text( $(".basket .total .price", basket).text() );
-			$(".basket-mini-main .quantity").text( $(".basket .quantity .value", basket).text() );
+			$(".basket-standard").html( arcaviasBasketUpdate(data).html() );
 		});
 
 		return false;
@@ -225,23 +231,14 @@ jQuery(document).ready( function($) {
 	$("body").on("click", ".basket-standard .change", function(event) {
 
 		$.post($(this).attr("href"), function(data) {
-			
-			var doc = document.createElement("html");
-			doc.innerHTML = data;
-			
-			var basket = $(".basket-standard", doc);
-
-			$(".btn-update", basket).hide();
-			$(".basket-standard").html( basket.html() );
-			$(".basket-mini-main .value").text( $(".basket .total .price", basket).text() );
-			$(".basket-mini-main .quantity").text( $(".basket .quantity .value", basket).text() );
+			$(".basket-standard").html( arcaviasBasketUpdate(data).html() );
 		});
 
 		return false;
 	});
 
 	/* Remove the basket overlay container */
-	var arcaviasRemoveOverlay = function() {
+	var arcaviasOverlayRemove = function() {
 		
 		var container = $(".arcavias-container");
 		var overlay = $(".arcavias-overlay");
@@ -257,15 +254,15 @@ jQuery(document).ready( function($) {
 		return true;
 	};
 
-	/* Go back to underlying page when button is clicked */
-	$("body").on("click", ".basket-standard .btn-back", function(event) {
-		return arcaviasRemoveOverlay();
+	/* Go back to underlying page when back or close button is clicked */
+	$("body").on("click", ".basket-standard .btn-back, .arcavias-container .btn-close", function(event) {
+		return arcaviasOverlayRemove();
 	});
 
 	/* Go back to underlying page when ESC is pressed */
 	$("body").on("keydown", function(event) {
 		if ( event.which == 27 ) {
-			return arcaviasRemoveOverlay();
+			return arcaviasOverlayRemove();
 		}
 	});
 	
