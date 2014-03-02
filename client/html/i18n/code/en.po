@@ -55,6 +55,10 @@ msgstr "Mr"
 msgid "mrs"
 msgstr "Mrs"
 
+#. Product attribute
+msgid "option"
+msgstr "Option"
+
 #. Order type value
 msgid "order:phone"
 msgstr "telephone"
@@ -146,7 +150,3 @@ msgstr " "
 #. Product attribute
 msgid "width"
 msgstr "Width"
-
-#. Product attribute
-msgid "option"
-msgstr "Option"

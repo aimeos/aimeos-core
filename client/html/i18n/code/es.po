@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2014-02-27 15:36+0000\n"
+"PO-Revision-Date: 2014-03-01 19:58+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Color"
 
 #. Product attribute
 msgid "option"
-msgstr ""
+msgstr "Opción"
 
 #. Order type value
 msgid "order:repeat"

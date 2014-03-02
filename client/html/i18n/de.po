@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-27 15:38+0100\n"
+"POT-Creation-Date: 2014-03-01 19:26+0100\n"
 "PO-Revision-Date: 2014-02-27 14:52+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: layouts/common/summary/detail-body-default.html:239
+#: layouts/common/summary/detail-body-default.html:252
 #: layouts/basket/mini/main-body-default.html:29
 #, php-format
 msgid "%1$d article"
@@ -368,14 +368,14 @@ msgid "If you have any questions, please reply to this e-mail"
 msgstr "Falls Sie Fragen haben sollten, antworten Sie bitte auf diese E-Mail"
 
 #. / Tax rate format with tax rate in percent (%1$s)
-#: layouts/common/summary/detail-body-default.html:223
+#: layouts/common/summary/detail-body-default.html:233
 #: layouts/email/common/text-summary-detail-body-default.html:104
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
 msgid "Incl. %1$s%% VAT"
 msgstr "Inkl. %1$s%% MwSt."
 
-#: layouts/common/summary/detail-body-default.html:231
+#: layouts/common/summary/detail-body-default.html:243
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
@@ -492,7 +492,7 @@ msgstr "Bestellhistorie"
 msgid "Order with ID \"%1$s\" not found"
 msgstr "Bestellung mit ID \"%1$s\" nicht gefunden"
 
-#: layouts/catalog/list/pagination-body-default.html:52
+#: layouts/catalog/list/pagination-body-default.html:53
 #, php-format
 msgid "Page %1$d of %2$d"
 msgstr "Seite %1$d von %2$d"
@@ -503,7 +503,7 @@ msgstr "Seite %1$d von %2$d"
 msgid "Payment"
 msgstr "Zahlung"
 
-#: layouts/common/summary/detail-body-default.html:207
+#: layouts/common/summary/detail-body-default.html:216
 msgid "Payment costs"
 msgstr "Zahlungsgebühren"
 
@@ -598,7 +598,7 @@ msgstr "Gebühren für Versand und/oder Zahlung"
 msgid "Services"
 msgstr "Zahlung und Lieferung"
 
-#: layouts/common/summary/detail-body-default.html:199
+#: layouts/common/summary/detail-body-default.html:208
 msgid "Shipping"
 msgstr "Versandkosten"
 
@@ -638,7 +638,7 @@ msgstr "%2$s, wieder verfügbar am %3$s %1$s"
 msgid "Street"
 msgstr "Straße"
 
-#: layouts/common/summary/detail-body-default.html:192
+#: layouts/common/summary/detail-body-default.html:201
 #: layouts/email/common/text-summary-detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:97
 msgid "Sub-total"
@@ -733,13 +733,13 @@ msgstr "Die Zahlung für Ihre Bestellung %1$s vom %2$s wurde erstattet."
 msgid "Top seller"
 msgstr "Beliebteste Produkte"
 
-#: layouts/common/summary/detail-body-default.html:215
+#: layouts/common/summary/detail-body-default.html:224
 #: layouts/email/common/text-summary-detail-body-default.html:93
 #: layouts/email/common/text-summary-detail-body-default.html:101
 msgid "Total"
 msgstr "Gesamtsumme"
 
-#: layouts/common/summary/detail-body-default.html:238
+#: layouts/common/summary/detail-body-default.html:251
 msgid "Total quantity"
 msgstr "Gesamtanzahl"
 
@@ -774,7 +774,7 @@ msgstr "Wir haben Ihre Rücksendung für Ihre Bestellung %1$s vom %2$s erhalten.
 msgid "Web site"
 msgstr "Webseite"
 
-#: layouts/common/summary/detail-body-default.html:145
+#: layouts/common/summary/detail-body-default.html:154
 msgid "X"
 msgstr "X"
 
@@ -881,12 +881,12 @@ msgstr "Produkt ist auf Lager"
 msgid "stock-low"
 msgstr "Nur noch wenige Produkte verfügbar"
 
-#. / code for "product is out ot stock"
+#. / code for "product is out of stock"
 #: layouts/catalog/stock/body-default.html:25
 msgid "stock-out"
 msgstr "Produkt ist zur Zeit ausverkauft"
 
-#. / code for "product is available (without stock limit)"
+#. / code for "product is available"
 #: layouts/catalog/stock/body-default.html:31
 msgid "stock-unlimited"
 msgstr "Produkt ist verfügbar"
@@ -904,11 +904,11 @@ msgstr "▲ Name"
 msgid "▲ Price"
 msgstr "▲ Preis"
 
-#: layouts/catalog/list/pagination-body-default.html:53
+#: layouts/catalog/list/pagination-body-default.html:54
 msgid "▶"
 msgstr "▶"
 
-#: layouts/catalog/list/pagination-body-default.html:54
+#: layouts/catalog/list/pagination-body-default.html:55
 msgid "▶▶"
 msgstr "▶▶"
 
@@ -920,10 +920,10 @@ msgstr "▼ Name"
 msgid "▼ Price"
 msgstr "▼ Preis"
 
-#: layouts/catalog/list/pagination-body-default.html:51
+#: layouts/catalog/list/pagination-body-default.html:52
 msgid "◀"
 msgstr "◀"
 
-#: layouts/catalog/list/pagination-body-default.html:50
+#: layouts/catalog/list/pagination-body-default.html:51
 msgid "◀◀"
 msgstr "◀◀"
