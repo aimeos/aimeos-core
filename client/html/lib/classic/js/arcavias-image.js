@@ -21,6 +21,12 @@ if(typeof Object.create!=="function"){Object.create=function(e){function t(){}t.
 
 
 
+/*
+ * Javascript for image section of catalog detail view
+ * 
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
 jQuery(document).ready( function($) {
 
 	/* Image zoom */

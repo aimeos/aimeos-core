@@ -54,6 +54,12 @@
 
 
 
+/*
+ * Javascript for catalog detail view
+ * 
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
 jQuery(document).ready( function($) {
 
 	/* Slider for thumbnail gallery (small ones) */
