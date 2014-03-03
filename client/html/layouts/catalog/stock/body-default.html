@@ -80,7 +80,7 @@ foreach( $stockProductIds as $prodId )
 		}
 
 		$text = nl2br( $enc->html( $text, $enc::TRUST ) );
-		$stocks[$level] .= '<div class="stockitem stock-prodid-' . $enc->attr( $prodId ) . ' ' . $level . '" title="' . $enc->attr( $textStock['stock-unlimited'] ) . '"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
+		$stocks[$level] .= '<div class="stockitem stock-prodid-' . $enc->attr( $prodId ) . ' ' . $level . '" title="' . $enc->attr( $textStock[$level] ) . '"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
 	}
 
 	$result[$prodId] = implode( '', $stocks );
