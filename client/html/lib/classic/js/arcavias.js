@@ -228,7 +228,7 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Update quantity and delete without page reload */
-	$("body").on("click", ".basket-standard .change", function(event) {
+	$("body").on("click", ".basket-standard a.change", function(event) {
 
 		$.post($(this).attr("href"), function(data) {
 			$(".basket-standard").html( arcaviasBasketUpdate(data).html() );

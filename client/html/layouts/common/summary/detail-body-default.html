@@ -119,7 +119,7 @@ $backParams = $this->get( 'summaryParams', array() );
 							<li class="attr-item">
 <?php					if( $modify ) : ?>
 <?php						$params = array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ); ?>
-								<a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $params ) ); ?>">
+								<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $params ) ); ?>">
 <?php					endif; ?>
 									<span class="sign">−</span>
 									<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>

@@ -197,7 +197,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<li class="attr-item">.*<a href=[^>]*>.*<span class="value">weiß</span>.*</a>.*</li>#smU', $output );
+		$this->assertRegExp( '#<li class="attr-item">.*<a class="change" href=[^>]*>.*<span class="value">weiß</span>.*</a>.*</li>#smU', $output );
 	}
 
 
