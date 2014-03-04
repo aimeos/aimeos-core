@@ -43,7 +43,7 @@ Ext.onReady(function() {
         items: [{
             layout: 'fit',
             border: false,
-            tbar: ['->', {xtype: 'MShop.elements.site.combo'}],
+            tbar: ['->', {xtype: 'MShop.elements.siteLanguage.combo'}, {xtype: 'MShop.elements.site.combo'}],
             items: [{
                 xtype: 'tabpanel',
                 border: false,

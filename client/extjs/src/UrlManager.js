@@ -11,6 +11,7 @@ MShop.UrlManager = function( href ) {
 		this.tmpl = new Ext.Template( MShop.config.urlTemplate );
 		this.data = {
 			site: MShop.config.site['locale.site.code'],
+			locale: MShop.i18n.locale,
 			tab : MShop.config.activeTab
 		};
 };
@@ -23,6 +24,10 @@ MShop.UrlManager.prototype = {
 				if( config.hasOwnProperty( 'site' ) ) {
 					this.setSiteCode( config.site );
 				}
+
+				if( MShop.i18n.hasOwnProperty( 'locale' ) ) {
+                    this.setLanguageCode( config.locale );
+                }
 
 				if( config.hasOwnProperty( 'tab' ) ) {
 					this.setActiveTab( config.tab );
@@ -41,5 +46,10 @@ MShop.UrlManager.prototype = {
 
 		setSiteCode: function( siteCode ) {
 			this.data.site = siteCode;
-		}
+		},
+
+		setLanguageCode: function( languageCode ) {
+            this.data.locale = languageCode;
+            console.log(languageCode);
+        }
 };

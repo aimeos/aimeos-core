@@ -118,6 +118,9 @@
 			"text": "site.js",
 			"path": "src/elements/"
 		}, {
+			"text": "siteLanguage.js",
+			"path": "src/elements/"
+		}, {
 			"text": "GlobalStoreMgr.js",
 			"path": "src/"
 		}, {
