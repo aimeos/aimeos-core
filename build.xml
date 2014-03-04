@@ -94,7 +94,7 @@
 		<exec command="${coredir}/vendor/bin/phpdoc.php --sourcecode -t ${coredir}/misc/apidoc
 			-d client/html/src -d controller/frontend/src -d controller/extjs/src
 			-d controller/jobs/src -d lib/mshoplib/src -d lib/mwlib/src -f Arcavias.php
-			--template=responsive-twig" />
+			--template=responsive-twig" checkreturn="true" logoutput="true" />
 	</target>
 
 
