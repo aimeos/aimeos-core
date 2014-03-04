@@ -157,7 +157,7 @@
 	<target name="release" description="Creates new release" depends="build">
 		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
 		<exec command="git branch ${version}" checkreturn="true" logoutput="true" />
-		<exec command="git tag -a arcavias-core_${version} -m 'Release ${version}'" checkreturn="true" logoutput="true" />
+		<exec command="git tag -a ${version}.0 -m 'Release ${version}.0'" checkreturn="true" logoutput="true" />
 		<exec command="git push origin ${version}" checkreturn="true" logoutput="true" />
 		<exec command="git push --tags" checkreturn="true" logoutput="true" />
 	</target>
