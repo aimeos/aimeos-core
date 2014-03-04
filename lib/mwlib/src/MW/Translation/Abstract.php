@@ -16,6 +16,35 @@
  */
 abstract class MW_Translation_Abstract
 {
+	private $_locale;
+
+
+	/**
+	 * Initializes the translation object.
+	 *
+	 * @param string $locale Locale string, e.g. en or en_GB
+	 */
+	public function __construct( $locale )
+	{
+		if( preg_match( '/^[a-z]{2,3}(_[A-Z]{2})?$/', $locale ) !== 1 ) {
+			throw new MW_Translation_Exception( sprintf( 'Invalid locale "%1$s"', $locale ) );
+		}
+
+		$this->_locale = (string) $locale;
+	}
+
+
+	/**
+	 * Returns the current locale string.
+	 *
+	 * @return string ISO locale string
+	 */
+	public function getLocale()
+	{
+		return $this->_locale;
+	}
+
+
 	/**
 	 * Returns the location of the translation file.
 	 * If the requested file does exists (eg: de_DE) the implementation
