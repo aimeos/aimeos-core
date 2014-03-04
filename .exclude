@@ -9,3 +9,4 @@
 ./config/.resource.php.ci
 ./lib/mwlib/tests/config/resource.php
 ./lib/mwlib/tests/config/.resource.php.ci
+./vendor
