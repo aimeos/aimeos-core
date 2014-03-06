@@ -50,6 +50,39 @@ class MW_Translation_NoneTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testConstructTwoLetterLocale()
+	{
+		$object = new MW_Translation_None( 'de' );
+	}
+
+
+	public function testConstructFiveLetterLocale()
+	{
+		$object = new MW_Translation_None( 'de_DE' );
+	}
+
+
+	public function testConstructInvalidUnderscoreLocale()
+	{
+		$this->setExpectedException( 'MW_Translation_Exception' );
+		$object = new MW_Translation_None( 'de_' );
+	}
+
+
+	public function testConstructInvalidCaseLocale()
+	{
+		$this->setExpectedException( 'MW_Translation_Exception' );
+		$object = new MW_Translation_None( 'de_de' );
+	}
+
+
+	public function testConstructInvalidCharLocale()
+	{
+		$this->setExpectedException( 'MW_Translation_Exception' );
+		$object = new MW_Translation_None( 'd' );
+	}
+
+
 	public function testDt()
 	{
 		$this->assertEquals( 'File', $this->_object->dt( 'testDomain', 'File' ) );
@@ -87,7 +120,6 @@ class MW_Translation_NoneTest extends MW_Unittest_Testcase
 
 		$lcList = array(
 			0 => array(
-				'1', // test input = output
 				'am', 'ar','bh', 'fil', 'fr', 'gun', 'hi', 'ln', 'lv','mg', 'nso', 'xbr', 'ti', 'wa', 'pt_BR'
 			),
 			1 => array(
