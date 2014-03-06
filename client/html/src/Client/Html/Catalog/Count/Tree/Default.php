@@ -108,6 +108,7 @@ class Client_Html_Catalog_Count_Tree_Default
 			{
 				$filter = $this->_getProductListFilter( $view, false );
 				$filter->setSlice( 0, $config->get( 'client/html/catalog/count/limit', 10000 ) );
+				$filter->setSortations( array() ); // it's not necessary and slows down the query
 
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 				$view->treeCountList = $controller->aggregate( $filter, 'catalog.index.catalog.id' );
