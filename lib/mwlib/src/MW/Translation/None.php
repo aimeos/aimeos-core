@@ -18,20 +18,6 @@ class MW_Translation_None
 	extends MW_Translation_Abstract
 	implements MW_Translation_Interface
 {
-	private $_locale;
-
-
-	/**
-	 * Initializes the translation object.
-	 *
-	 * @param string $locale Locale string, e.g. en or en_GB
-	 */
-	public function __construct( $locale )
-	{
-		$this->_locale = (string) $locale;
-	}
-
-
 	/**
 	 * Returns the given string for the given domain.
 	 *
@@ -58,7 +44,7 @@ class MW_Translation_None
 	 */
 	public function dn( $domain, $singular, $plural, $number )
 	{
-		if( $this->_getPluralIndex( $number, $this->_locale ) > 0 ) {
+		if( $this->_getPluralIndex( $number, $this->getLocale() ) > 0 ) {
 			return (string) $plural;
 		}
 
@@ -77,17 +63,6 @@ class MW_Translation_None
 	public function getAll( $domain )
 	{
 		return array();
-	}
-
-
-	/**
-	 * Returns the current locale string.
-	 *
-	 * @return string ISO locale string
-	 */
-	public function getLocale()
-	{
-		return $this->_locale;
 	}
 
 }
