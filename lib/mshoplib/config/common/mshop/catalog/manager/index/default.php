@@ -7,9 +7,9 @@
 
 return array(
 	'aggregate' => '
-		SELECT "key", COUNT(DISTINCT "id") AS "count"
+		SELECT "key", COUNT("id") AS "count"
 		FROM (
-			SELECT :key AS "key", mpro."id" AS "id"
+			SELECT DISTINCT :key AS "key", mpro."id" AS "id"
 			FROM "mshop_product" AS mpro
 			:joins
 			WHERE :cond
