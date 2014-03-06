@@ -11,34 +11,13 @@ MShop.elements.siteLanguage.ComboBox = function(config) {
         anchor : '100%',
         store : MShop.elements.siteLanguage.getStore(),
         mode : 'local',
-        displayField : 'locale.language.label',
-        valueField : 'locale.language.id',
-        statusField : 'locale.language.status',
+        displayField : 'label',
+        valueField : 'label',
         triggerAction : 'all',
-        pageSize : 20,
-        emptyText : MShop.I18n.dt('client/extjs', 'All'),
-        typeAhead : true
+        emptyText : MShop.I18n.dt('client/extjs', 'Language')
     });
 
     MShop.elements.siteLanguage.ComboBox.superclass.constructor.call(this, config);
-};
-
-/**
- * @static
- *
- * @param {String} langId
- * @return {String} label
- */
-MShop.elements.siteLanguage.renderer = function(langId, metaData, record, rowIndex, colIndex, store) {
-    var language = MShop.elements.siteLanguage.getStore().getById(langId);
-
-    if (language) {
-        metaData.css = 'statustext-' + Number(language.get('locale.language.status'));
-        return language.get('locale.language.label');
-    }
-
-    metaData.css = 'statustext-1';
-    return langId || MShop.I18n.dt('client/extjs', 'All');
 };
 
 Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
@@ -50,14 +29,19 @@ Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
     },
 
     onSiteLanguageSelect : function(ComboBox, language) {
-        var mainTabPanel = Ext.getCmp('MShop.MainTabPanel'), activeTabPanel = mainTabPanel.getActiveTab(), domainTabIdx = mainTabPanel.items.indexOf(activeTabPanel), languageCode = language ? language.get('locale.language.code') : 'en';
+        var mainTabPanel = Ext.getCmp('MShop.MainTabPanel');
+        var activeTabPanel = mainTabPanel.getActiveTab();
+        var domainTabIdx = mainTabPanel.items.indexOf(activeTabPanel);
+        var languageCode = language ? language.get('id') : 'en';
 
         new Ext.LoadMask(Ext.getBody(), {
-            msg : MShop.I18n.dt('client/extjs', 'Switching site language ...')
+            msg : MShop.I18n.dt('client/extjs', 'Switching language ...')
         }).show();
 
         MShop.urlManager.redirect({
-            locale : languageCode
+            locale : languageCode,
+            tab : domainTabIdx
+            // site : how to receive without window.location in extjs style?
         });
     }
 });
@@ -70,20 +54,12 @@ Ext.reg('MShop.elements.siteLanguage.combo', MShop.elements.siteLanguage.ComboBo
  * @return {Ext.data.DirectStore}
  */
 MShop.elements.siteLanguage.getStore = function() {
-    if (!MShop.elements.siteLanguage._store) {
-        MShop.elements.siteLanguage._store = MShop.GlobalStoreMgr.createStore('Locale_Language', {
-            remoteSort : true,
-            sortInfo : {
-                field : 'locale.language.label',
-                direction : 'ASC'
-            }
+    if (!MShop.elements.siteLanguage.store) {
+        MShop.elements.siteLanguage.store = new Ext.data.JsonStore({
+            fields : ['id', 'label'],
+            data : MShop.i18n.availableLanguages
         });
     }
 
-    return MShop.elements.siteLanguage._store;
+    return MShop.elements.siteLanguage.store;
 };
-
-//preload
-Ext.onReady(function() {
-    MShop.elements.siteLanguage.getStore().load();
-});
