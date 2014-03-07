@@ -40,8 +40,8 @@ Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
 
         MShop.urlManager.redirect({
             locale : languageCode,
-            tab : domainTabIdx
-            // site : how to receive without window.location in extjs style?
+            tab : domainTabIdx,
+            site : MShop.urlManager.data.site
         });
     }
 });
