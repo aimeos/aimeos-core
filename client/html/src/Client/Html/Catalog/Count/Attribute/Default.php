@@ -110,6 +110,7 @@ class Client_Html_Catalog_Count_Attribute_Default
 			{
 				$filter = $this->_getProductListFilter( $view );
 				$filter->setSlice( 0, $config->get( 'client/html/catalog/count/limit', 10000 ) );
+				$filter->setSortations( array() ); // it's not necessary and slows down the query
 
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 				$view->attributeCountList = $controller->aggregate( $filter, 'catalog.index.attribute.id' );

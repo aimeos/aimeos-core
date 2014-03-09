@@ -8,9 +8,9 @@
 return array(
 	'item' => array(
 		'aggregate' => '
-			SELECT "key", COUNT(DISTINCT "id") AS "count"
+			SELECT "key", COUNT("id") AS "count"
 			FROM (
-				SELECT :key AS "key", mcatli."id" AS "id"
+				SELECT DISTINCT :key AS "key", mcatli."id" AS "id"
 				FROM "mshop_catalog_list" AS mcatli
 				:joins
 				WHERE :cond
