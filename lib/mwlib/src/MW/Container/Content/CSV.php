@@ -146,13 +146,14 @@ class MW_Container_Content_CSV
 	 */
 	function rewind()
 	{
-		if( @rewind( $this->_fh ) === false )
-		{
-			fclose( $this->_fh );
+		$filename = $this->getResource();
 
-			if( ( $this->_fh = fopen( $this->getResource(), 'r' ) ) === false ) {
-				throw new MW_Container_Exception( sprintf( 'Unable to rewind %1$s', $this->_fh ) );
-			}
+		if( fclose( $this->_fh ) === false ) {
+			throw new MW_Container_Exception( sprintf( 'Unable to close file handle for %1$s', $filename ) );
+		}
+
+		if( ( $this->_fh = fopen( $filename, 'r' ) ) === false ) {
+			throw new MW_Container_Exception( sprintf( 'Unable to open file %1$s', $filename ) );
 		}
 
 		$this->_position = 0;

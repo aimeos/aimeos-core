@@ -22,6 +22,10 @@ setlocale(LC_NUMERIC, 'POSIX');
 setlocale(LC_CTYPE, 'en_US.UTF-8');
 setlocale(LC_TIME, 'POSIX');
 
+if( !function_exists( '_' ) ) {
+	function _() {};
+}
+
 
 require_once 'TestHelper.php';
 TestHelper::bootstrap();

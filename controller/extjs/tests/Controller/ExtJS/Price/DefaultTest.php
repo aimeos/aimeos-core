@@ -158,7 +158,7 @@ class Controller_ExtJS_Price_DefaultTest extends MW_Unittest_Testcase
 				'price.currencyid' => 'EUR',
 				'price.quantity' => '10',
 				'price.value' => '49.00',
-				'price.shipping' => '5.00',
+				'price.costs' => '5.00',
 				'price.rebate' => '10.00',
 				'price.taxrate' => '20.00',
 				'price.status' => 0,
@@ -185,7 +185,7 @@ class Controller_ExtJS_Price_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $saved['items']->{'price.currencyid'}, $searched['items'][0]->{'price.currencyid'} );
 		$this->assertEquals( $saved['items']->{'price.quantity'}, $searched['items'][0]->{'price.quantity'} );
 		$this->assertEquals( $saved['items']->{'price.value'}, $searched['items'][0]->{'price.value'} );
-		$this->assertEquals( $saved['items']->{'price.shipping'}, $searched['items'][0]->{'price.shipping'} );
+		$this->assertEquals( $saved['items']->{'price.costs'}, $searched['items'][0]->{'price.costs'} );
 		$this->assertEquals( $saved['items']->{'price.rebate'}, $searched['items'][0]->{'price.rebate'} );
 		$this->assertEquals( $saved['items']->{'price.taxrate'}, $searched['items'][0]->{'price.taxrate'} );
 		$this->assertEquals( $saved['items']->{'price.status'}, $searched['items'][0]->{'price.status'} );

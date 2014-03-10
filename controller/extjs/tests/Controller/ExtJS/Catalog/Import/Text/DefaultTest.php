@@ -93,24 +93,20 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$data[] = '"en","Root","'.$id.'","default","name","","Root: short"' ."\n";
 		$data[] = ' ';
 
+		$ds = DIRECTORY_SEPARATOR;
 		$csv = 'en-catalog-test.csv';
-		$filename = 'catalog-import.zip';
+		$filename = PATH_TESTS . $ds . 'tmp' . $ds . 'catalog-import.zip';
 
-
-		$fh = fopen( $csv, 'w' );
-
-		foreach( $data as $id => $row ) {
-			fwrite( $fh, $row );
+		if( file_put_contents( PATH_TESTS . $ds . 'tmp' . $ds . $csv, implode( '', $data ) ) === false ) {
+			throw new Exception( sprintf( 'Unable to write test file "%1$s"', $csv ) );
 		}
 
-		fclose( $fh );
-
 		$zip = new ZipArchive();
-		$zip->open($filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
-		$zip->addFile($csv, $csv);
+		$zip->open( $filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE );
+		$zip->addFile( PATH_TESTS . $ds . 'tmp' . $ds . $csv, $csv );
 		$zip->close();
 
-		if( unlink( $csv ) === false ) {
+		if( unlink( PATH_TESTS . $ds . 'tmp' . $ds . $csv ) === false ) {
 			throw new Exception( 'Unable to remove export file' );
 		}
 

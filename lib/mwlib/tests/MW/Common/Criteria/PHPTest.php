@@ -105,42 +105,36 @@ class MW_Common_Criteria_PHPTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->getConditionString( $types, $translations );
 		$this->assertEquals( "1 == 1", $result );
-		$this->assertEquals( null, eval( $result . ';' ) );
 		$this->assertEquals( true, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->_object->compare( '==', 'int_value', 'a' ), $this->_object->compare( '==', 'str_value', 'test' ) );
 		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
 		$result = $this->_object->getConditionString( $types, $translations, $plugins );
 		$this->assertEquals( "( \$intval == 10 && \$strval == 'test' )", $result );
-		$this->assertEquals( null, eval( $result . ';' ) );
 		$this->assertEquals( false, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->_object->compare( '==', 'int_value', array( 1, 2, 4, 8 ) ), $this->_object->compare( '==', 'str_value', 'test' ) );
 		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
 		$result = $this->_object->getConditionString( $types, $translations );
 		$this->assertEquals( "( ( \$intval == 1 || \$intval == 2 || \$intval == 4 || \$intval == 8 ) && \$strval == 'test' )", $result );
-		$this->assertEquals( null, eval( $result . ';' ) );
 		$this->assertEquals( true, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->_object->compare( '==', 'int_value', 1 ), $this->_object->compare( '!=', 'int_value', 2 ) );
 		$this->_object->setConditions( $this->_object->combine( '!', array( $this->_object->combine( '&&', $expr ) ) ) );
 		$result = $this->_object->getConditionString( $types, $translations );
 		$this->assertEquals( " ! ( \$intval == 1 && \$intval != 2 )", $result );
-		$this->assertEquals( null, eval( $result . ';' ) );
 		$this->assertEquals( false, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->_object->compare( '==', 'int_value', null ), $this->_object->compare( '!=', 'str_value', null ) );
 		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
 		$result = $this->_object->getConditionString( $types, $translations );
 		$this->assertEquals( "( \$intval === null && \$strval !== null )", $result );
-		$this->assertEquals( null, eval( $result . ';' ) );
 		$this->assertEquals( false, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->_object->compare( '==', 'int_value', 1 ) );
 		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
 		$result = $this->_object->getConditionString( $types, $translations );
 		$this->assertEquals( "( \$intval == 1 )", $result );
-		$this->assertEquals( null, eval( $result . ';' ) );
 		$this->assertEquals( true, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->_object->compare( '==', 'str_value', 'test' ) );
@@ -148,7 +142,6 @@ class MW_Common_Criteria_PHPTest extends MW_Unittest_Testcase
 		$this->_object->setConditions( $this->_object->combine( '&&', $expr ) );
 		$result = $this->_object->getConditionString( $types, $translations );
 		$this->assertEquals( "( \$intval == 1 && ( \$strval == 'test' ) )", $result );
-		$this->assertEquals( null, eval( $result . ';' ) );
 		$this->assertEquals( true, eval( 'return ' . $result . ';' ) );
 
 		$types = array( 'column' => 'bool' );
@@ -213,7 +206,6 @@ class MW_Common_Criteria_PHPTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->getSortationString( $types, $translations );
 		$this->assertEquals( 'asort($ascIntList); arsort($descStrList);', $result );
-		$this->assertEquals( null, eval( $result . ';' ) );
 		$this->assertEquals( array( 0 => 1, 2 => 5, 1 => 9 ), $ascIntList );
 		$this->assertEquals( array( 1 => 'xyz', 2 => 'mno', 0 => 'abc' ), $descStrList );
 	}
@@ -249,7 +241,6 @@ class MW_Common_Criteria_PHPTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->getSortationString( $types, $translations );
 		$this->assertEquals('asort($ascIntList);', $result);
-		$this->assertEquals( null, eval( $result . ';' ) );
 		$this->assertEquals( array( 0 => 1, 2 => 5, 1 => 9 ), $ascIntList );
 	}
 
