@@ -49,14 +49,14 @@ class MW_Logger_ErrorlogTest extends MW_Unittest_Testcase
 
 	public function testLog()
 	{
-		ini_set("error_log", "error.log");
+		ini_set( "error_log", "error.log" );
 
 		$this->_object->log( 'error test' );
 		$this->_object->log( 'warning test', MW_Logger_Abstract::WARN );
 		$this->_object->log( 'notice test', MW_Logger_Abstract::NOTICE );
 		$this->_object->log( 'info test', MW_Logger_Abstract::INFO );
 		$this->_object->log( 'debug test', MW_Logger_Abstract::DEBUG );
-		$this->_object->log(array('scalar', 'test'));
+		$this->_object->log( array( 'scalar', 'test' ) );
 
 		if( ( $content = file( 'error.log' ) ) === false ) {
 			throw new Exception( 'Unable to open file "error.log"' );

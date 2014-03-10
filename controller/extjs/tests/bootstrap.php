@@ -24,7 +24,7 @@ setlocale(LC_TIME, 'POSIX');
 /*
  * Set include path for tests
  */
-define('PATH_TESTS', dirname( __FILE__ ));
+define('PATH_TESTS', __DIR__);
 
 require_once 'TestHelper.php';
 TestHelper::bootstrap();

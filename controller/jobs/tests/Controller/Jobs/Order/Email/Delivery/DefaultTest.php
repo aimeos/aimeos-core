@@ -101,7 +101,7 @@ class Controller_Jobs_Order_Email_Delivery_DefaultTest extends MW_Unittest_Testc
 		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_' . $name, $orderManagerStub );
 
 
-		$orderItem = $orderManagerStub->createItem();
+		$orderItem = new MShop_Order_Item_Default( array( 'ctime' => '2000-01-01 00:00:00' ) );
 		$orderBaseItem = $orderBaseManagerStub->createItem();
 		$orderBaseItem->setAddress( $orderAddressItem );
 
