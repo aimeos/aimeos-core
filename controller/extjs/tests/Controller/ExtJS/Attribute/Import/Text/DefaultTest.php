@@ -86,24 +86,20 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 		$data[] = '"en","size","xxl","default","name","","unittest: xxl"'."\n";
 		$data[] = ' ';
 
+		$ds = DIRECTORY_SEPARATOR;
 		$csv = 'en-attribute-test.csv';
-		$filename = 'attribute-import.zip';
+		$filename = PATH_TESTS . $ds . 'tmp' . $ds . 'attribute-import.zip';
 
-		$fh = fopen( $csv, 'w' );
-
-		foreach( $data as $id => $row ) {
-			fwrite( $fh, $row );
+		if( file_put_contents( PATH_TESTS . $ds . 'tmp' . $ds . $csv, implode( '', $data ) ) === false ) {
+			throw new Exception( sprintf( 'Unable to write test file "%1$s"', $csv ) );
 		}
 
-		fclose( $fh );
-
-
 		$zip = new ZipArchive();
-		$zip->open($filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
-		$zip->addFile($csv, $csv);
+		$zip->open( $filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE );
+		$zip->addFile( PATH_TESTS . $ds . 'tmp' . $ds . $csv, $csv );
 		$zip->close();
 
-		if( unlink( $csv ) === false ) {
+		if( unlink( PATH_TESTS . $ds . 'tmp' . $ds . $csv ) === false ) {
 			throw new Exception( 'Unable to remove export file' );
 		}
 
