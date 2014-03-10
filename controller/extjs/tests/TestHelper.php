@@ -14,6 +14,8 @@ class TestHelper
 
 	public static function bootstrap()
 	{
+		set_error_handler( 'TestHelper::errorHandler' );
+
 		self::_getArcavias();
 	}
 

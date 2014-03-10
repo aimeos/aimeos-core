@@ -277,11 +277,9 @@ class Controller_ExtJS_Media_DefaultTest extends MW_Unittest_Testcase
 
 	public function testProtectedGetAbsoluteDirectoryErrorByUploadItem()
 	{
-		set_error_handler( 'TestHelper::errorHandler' );
-
 		$context = TestHelper::getContext();
 
-		$context->getConfig()->set( 'controller/extjs/media/default/basedir', '/1/');
+		$context->getConfig()->set( 'controller/extjs/media/default/basedir', '/root/');
 		$context->getConfig()->set( 'controller/extjs/media/default/mimeicon/directory', '/2/');
 
 		$object = new Controller_ExtJS_Media_Default( $context );
@@ -294,8 +292,6 @@ class Controller_ExtJS_Media_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
 		$mediaItem = $object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
-
-		restore_error_handler();
 	}
 
 
