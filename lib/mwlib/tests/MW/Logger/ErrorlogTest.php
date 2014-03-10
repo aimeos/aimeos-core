@@ -49,6 +49,10 @@ class MW_Logger_ErrorlogTest extends MW_Unittest_Testcase
 
 	public function testLog()
 	{
+		if( defined( 'HHVM_VERSION' ) ) {
+			$this->markTestSkipped( 'Hiphop VM does not support ini settings yet' );
+		}
+
 		ini_set( "error_log", "error.log" );
 
 		$this->_object->log( 'error test' );
