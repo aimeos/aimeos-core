@@ -23,7 +23,10 @@
 		"arcavias/extension-installer": "dev-master"
 	},
 	"require-dev": {
-		"phpdocumentor/phpdocumentor": "2.*"
+		"phpdocumentor/phpdocumentor": "2.*",
+		"squizlabs/php_codesniffer": "1.*",
+		"phpunit/phpunit": "3.7.*",
+		"phing/phing": "2.4.*"
 	},
 	"autoload": {
 		"psr-0": {
