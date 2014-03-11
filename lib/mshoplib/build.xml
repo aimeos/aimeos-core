@@ -5,7 +5,7 @@
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
-		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit.xml"
+		<exec command="${bindir}phpunit -d memory_limit=-1 --configuration=phpunit.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	
@@ -13,7 +13,7 @@
 		<echo msg="Executing performance tests" />
 		<delete file="tests/unitperf.log" quiet="true" failonerror="false" />
 		<delete file="tests/lib-mshoplib-jperf.xml" quiet="true" failonerror="false" />
-		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit-perf.xml --repeat 5"
+		<exec command="${bindir}phpunit -d memory_limit=-1 --configuration=phpunit-perf.xml --repeat 5"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	
@@ -21,13 +21,13 @@
 		<echo msg="Generating code coverage report" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
-		<exec command="phpunit -d memory_limit=-1 --configuration=phpunit-coverage.xml"
+		<exec command="${bindir}phpunit -d memory_limit=-1 --configuration=phpunit-coverage.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="phpcs -n --standard=${codestddir}/Metaways config setup src tests/MAdmin tests/MShop tests/MW tests/Perf tests/bootstrap.php tests/TestHelper.php"
+		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways config setup src tests/MAdmin tests/MShop tests/MW tests/Perf tests/bootstrap.php tests/TestHelper.php"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 
