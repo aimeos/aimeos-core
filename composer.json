@@ -23,11 +23,13 @@
 		"arcavias/extension-installer": "dev-master"
 	},
 	"require-dev": {
-		"phpdocumentor/phpdocumentor": "2.*",
 		"squizlabs/php_codesniffer": "1.*",
 		"phpunit/phpunit": "3.7.*",
 		"phing/phing": "2.4.*"
 	},
+	"suggest": {
+        "phpdocumentor/phpdocumentor": "Required for generating the API documentation"
+    },
 	"autoload": {
 		"psr-0": {
 			"MShop": "lib/mshoplib/src",
