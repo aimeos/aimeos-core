@@ -4,6 +4,7 @@
 
 	<property name="coredir" value="${project.basedir}" override="true" />
 	<property name="extdir" value="${project.basedir}/ext" override="true" />
+	<property name="bindir" value="${project.basedir}/vendor/bin/" override="true" />
 
 
 	<target name="setup" description="Sets up database incl. unit test data">

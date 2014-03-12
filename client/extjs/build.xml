@@ -3,7 +3,7 @@
 <project name="Arcavias ExtJS client" default="all">
 
 	<target name="check" description="Checks javascript files for common mistakes">
-		<jsllint executable="jsl" haltonfailure="true">
+		<jsllint haltonfailure="true">
 			<fileset dir=".">
 				<include name="lib/ext.ux/**/*.js"/>
 				<include name="src/**/*.js"/>
