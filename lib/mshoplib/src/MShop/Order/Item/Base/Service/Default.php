@@ -343,7 +343,7 @@ class MShop_Order_Item_Base_Service_Default
 		$this->setType( $service->getType() );
 		$this->setServiceId( $service->getId() );
 
-		$items = $service->getRefItems( 'media', 'default' );
+		$items = $service->getRefItems( 'media', 'default', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
 			$this->setMediaUrl( $item->getUrl() );
 		}

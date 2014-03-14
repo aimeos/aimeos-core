@@ -559,7 +559,7 @@ class MShop_Order_Item_Base_Product_Default
 		$this->setProductCode( $product->getCode() );
 		$this->setProductId( $product->getId() );
 
-		$items = $product->getRefItems( 'media', 'default' );
+		$items = $product->getRefItems( 'media', 'default', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
 			$this->setMediaUrl( $item->getUrl() );
 		}
