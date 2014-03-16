@@ -112,7 +112,7 @@ class MShop_Catalog_Item_Default
 	/**
 	 * Returns the config property of the catalog.
 	 *
-	 * @return array Returns the config of the Site
+	 * @return array Returns the config of the catalog node
 	 */
 	public function getConfig()
 	{
@@ -123,7 +123,7 @@ class MShop_Catalog_Item_Default
 	/**
 	 * Sets the config property of the catalog item.
 	 *
-	 * @param array $options Options to be set for the Site
+	 * @param array $options Options to be set for the catalog node
 	 */
 	public function setConfig( array $options )
 	{

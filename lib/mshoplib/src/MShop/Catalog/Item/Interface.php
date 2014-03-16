@@ -45,6 +45,20 @@ interface MShop_Catalog_Item_Interface extends MShop_Common_Item_Interface
 	public function setCode( $name );
 
 	/**
+	 * Returns the config property of the catalog.
+	 *
+	 * @return array Returns the config of the catalog node
+	 */
+	public function getConfig();
+
+	/**
+	 * Sets the config property of the catalog item.
+	 *
+	 * @param array $options Options to be set for the catalog node
+	 */
+	public function setConfig( array $options );
+
+	/**
 	 * Returns the status of the item.
 	 *
 	 * @return boolean True if enabled, false if not
