@@ -496,6 +496,7 @@
 	border: solid 1px #FF3300;
 	padding: 0.5em;
 	color: #FF0000;
+	z-index: 1000;
 }
 
 .catalog-filter-search {
