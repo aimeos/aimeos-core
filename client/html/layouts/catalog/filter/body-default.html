@@ -22,7 +22,7 @@ $enc = $this->encoder();
 	</ul>
 <?php endif; ?>
 	<nav>
-		<form method="POST" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction ) ); ?>">
+		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction ) ); ?>">
 <?php if( ( $sort = $this->param( 'f-sort' ) ) != null ) : ?>
 			<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f-sort' ) ); ?>" value="<?php echo $enc->attr( $sort ); ?>" />
 <?php endif; ?>
