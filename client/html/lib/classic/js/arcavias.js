@@ -64,6 +64,7 @@ jQuery(document).ready( function($) {
 	$(".catalog-filter form").on("submit", function( event ) {
 		
 		var result = true;
+		var form = $(this);
 
 		$("input.value", this).each( function() {
 
@@ -74,7 +75,7 @@ jQuery(document).ready( function($) {
 				if( $(this).has(".search-hint").length === 0 ) {
 	
 					var node = $('<div/>', {html: input.data("hint"), class: "search-hint"});
-					$(".catalog-filter-search", this).after(node);
+					$(".catalog-filter-search", form).after(node);
 	
 					var pos = node.position();
 					node.css("left", pos.left).css("top", pos.top);
