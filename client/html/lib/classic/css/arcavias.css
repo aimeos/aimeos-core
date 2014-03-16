@@ -703,7 +703,7 @@
 
 .catalog-list .price-item:first-child .quantity,
 .catalog-list .price-item:first-child .rebate,
-.catalog-list .price-item:first-child .shipping,
+.catalog-list .price-item:first-child .costs,
 .catalog-list .price-item:first-child .taxrate {
 	display: none;
 }
@@ -750,13 +750,21 @@
 	padding: 1em 0;
 }
 
+.catalog-list-head h1 {
+	font-size: 1.5em;
+	font-weight: bold;
+	padding: 0.5em 0;
+}
+
 .catalog-list-head .short {
+	font-weight: bold;
+	padding: 0.5em 0;
 	color: #004266;
 }
 
-.catalog-list-head h1 {
-	font-size: 1.5em;
+.catalog-list-head .long {
 	padding: 0.5em 0;
+	color: #004266;
 }
 
 .catalog-list-head .head-search {
