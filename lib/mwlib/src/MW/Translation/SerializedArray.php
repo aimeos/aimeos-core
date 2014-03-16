@@ -18,7 +18,6 @@ class MW_Translation_SerializedArray
 	extends MW_Translation_Abstract
 	implements MW_Translation_Interface
 {
-	private $_locale;
 	private $_translations = array();
 	private $_translationSources = array();
 
@@ -43,8 +42,9 @@ class MW_Translation_SerializedArray
 	 */
 	public function __construct( array $translationSources, $locale )
 	{
+		parent::__construct( $locale );
+
 		$this->_translationSources = $translationSources;
-		$this->_locale = (string) $locale;
 	}
 
 
@@ -89,7 +89,7 @@ class MW_Translation_SerializedArray
 	 */
 	public function dn( $domain, $singular, $plural, $number )
 	{
-		$index = $this->_getPluralIndex( $number, $this->_locale );
+		$index = $this->_getPluralIndex( $number, $this->getLocale() );
 
 		try
 		{
@@ -131,17 +131,6 @@ class MW_Translation_SerializedArray
 
 
 	/**
-	 * Returns the current locale string.
-	 *
-	 * @return string ISO locale string
-	 */
-	public function getLocale()
-	{
-		return $this->_locale;
-	}
-
-
-	/**
 	 * Gets, adds and loads necessary translation data if it was not set befor.
 	 *
 	 * @param string $domain Translation domain
@@ -159,7 +148,7 @@ class MW_Translation_SerializedArray
 			}
 
 			// Reverse locations so the former gets not overwritten by the later
-			$locations = array_reverse( $this->_getTranslationFileLocations( $this->_translationSources[$domain], $this->_locale ) );
+			$locations = array_reverse( $this->_getTranslationFileLocations( $this->_translationSources[$domain], $this->getLocale() ) );
 			$translations = array();
 
 			foreach( $locations as $location )

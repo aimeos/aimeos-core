@@ -133,7 +133,6 @@ class MW_Translation_SerializedArrayTest extends MW_Unittest_Testcase
 
 		$lcList = array(
 			0 => array(
-				'1', // test input = output
 				'am', 'ar','bh', 'fil', 'fr', 'gun', 'hi', 'ln', 'lv','mg', 'nso', 'xbr', 'ti', 'wa', 'pt_BR'
 			),
 			1 => array(
