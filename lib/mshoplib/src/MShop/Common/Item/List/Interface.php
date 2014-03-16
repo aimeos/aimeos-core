@@ -88,6 +88,34 @@ interface MShop_Common_Item_List_Interface
 	public function setDateEnd( $date );
 
 	/**
+	 * Returns the configuration of the list item.
+	 *
+	 * @return string Custom configuration values
+	 */
+	public function getConfig();
+
+	/**
+	 * Sets the new configuration for the list item.
+	 *
+	 * @param array $config Custom configuration values
+	 */
+	public function setConfig( array $config );
+
+	/**
+	 * Returns the status of the list item.
+	 *
+	 * @return integer Status of the item
+	 */
+	public function getStatus();
+
+	/**
+	 * Sets the new status of the list item.
+	 *
+	 * @param integer $status Status of the item
+	 */
+	public function setStatus( $status );
+
+	/**
 	 * Returns the referenced item if it's available.
 	 *
 	 * @return MShop_Common_Item_Interface|null Referenced list item
