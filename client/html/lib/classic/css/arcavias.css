@@ -1197,7 +1197,7 @@
 .catalog-detail-suggest .price-item:first-child .quantity,
 .catalog-detail-suggest .price-item:first-child .rebatepercent,
 .catalog-detail-suggest .price-item:first-child .rebate,
-.catalog-detail-suggest .price-item:first-child .shipping,
+.catalog-detail-suggest .price-item:first-child .costs,
 .catalog-detail-suggest .price-item:first-child .taxrate {
 	display: none;
 }
