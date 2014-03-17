@@ -1264,7 +1264,7 @@
 .catalog-session-seen .price-item:first-child .quantity,
 .catalog-session-seen .price-item:first-child .rebatepercent,
 .catalog-session-seen .price-item:first-child .rebate,
-.catalog-session-seen .price-item:first-child .shipping,
+.catalog-session-seen .price-item:first-child .costs,
 .catalog-session-seen .price-item:first-child .taxrate {
 	display: none;
 }
