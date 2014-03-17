@@ -1416,19 +1416,28 @@
 }
 
 .checkout-standard .item-service .description .short {
-	padding-top: 5px;
 	font-weight: bold;
+	padding: 0.5em 0;
 }
 
 .checkout-standard .item-service .description .long {
-	padding-top: 5px;
+	padding: 0.5em 0;
 }
 
 .checkout-standard .item-service .description h2,
 .checkout-standard .item-service .description p,
 .checkout-standard .item-service .icons {
+	margin: 0 10px;
+}
+
+.checkout-standard .item-service .description p {
 	margin-left: 40px;
-	margin-right: 10px;
+}
+
+.checkout-standard .item-service .description h2,
+.checkout-standard .item-service .icons {
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .checkout-standard .item-service .option {
@@ -1440,7 +1449,7 @@
 	float: right;
 	margin: 5px 10px;
 	font-weight: bold;
-	font-size: 1em;
+	font-size: 150%;
 	color: #004266;
 }
 
