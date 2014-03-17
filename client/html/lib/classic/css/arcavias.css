@@ -979,6 +979,7 @@
 
 .catalog-detail-basket .price-item .quantity,
 .catalog-detail-basket .price-item .value,
+.catalog-detail-basket .price-item .costs,
 .catalog-detail-basket .price-item .rebate,
 .catalog-detail-basket .price-item .rebatepercent,
 .catalog-detail-basket .price-item .taxrate {
@@ -987,9 +988,13 @@
 	min-width: 5em;
 }
 
-.catalog-detail-basket .price-actual,
+.catalog-detail-basket .price-actual {
+	display: inline-block;
+}
+
 .catalog-detail-basket .price-item:first-child .taxrate {
 	display: inline-block;
+	padding: 0 1em;
 }
 
 .catalog-detail-basket .price-item:first-child .quantity,
