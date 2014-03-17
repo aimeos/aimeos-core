@@ -57,7 +57,7 @@ class MW_View_Helper_Price_Default
 				<span class="rebatepercent">' . $enc->html( sprintf( $format['rebate%'], $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ), $enc::TRUST ) . '</span>'
 				: '' ) .
 				( $costs > 0 ? '
-				<span class="cost">' . $enc->html( sprintf( $format['cost'], $this->number( $costs ), $currency ), $enc::TRUST ) . '</span>'
+				<span class="costs">' . $enc->html( sprintf( $format['costs'], $this->number( $costs ), $currency ), $enc::TRUST ) . '</span>'
 				: '' ) .
 				'<span class="taxrate">' . $enc->html( sprintf( $format['taxrate'], $this->number( $priceItem->getTaxrate() ) ), $enc::TRUST ) . '</span>
 			</div>';
@@ -77,7 +77,7 @@ class MW_View_Helper_Price_Default
 				/// Price format with price value (%1$s) and currency (%2$s)
 				'value' => $this->translate( 'client/html', '%1$s %2$s' ),
 				/// Price shipping format with shipping / payment cost value (%1$s) and currency (%2$s)
-				'cost' => $this->translate( 'client/html', '+ %1$s %2$s/item' ),
+				'costs' => $this->translate( 'client/html', '+ %1$s %2$s/item' ),
 				/// Rebate format with rebate value (%1$s) and currency (%2$s)
 				'rebate' => $this->translate( 'client/html', '%1$s %2$s off' ),
 				/// Rebate percent format with rebate percent value (%1$s)
