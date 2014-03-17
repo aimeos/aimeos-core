@@ -979,6 +979,7 @@
 
 .catalog-detail-basket .price-item .quantity,
 .catalog-detail-basket .price-item .value,
+.catalog-detail-basket .price-item .costs,
 .catalog-detail-basket .price-item .rebate,
 .catalog-detail-basket .price-item .rebatepercent,
 .catalog-detail-basket .price-item .taxrate {
@@ -987,9 +988,13 @@
 	min-width: 5em;
 }
 
-.catalog-detail-basket .price-actual,
+.catalog-detail-basket .price-actual {
+	display: inline-block;
+}
+
 .catalog-detail-basket .price-item:first-child .taxrate {
 	display: inline-block;
+	padding: 0 1em;
 }
 
 .catalog-detail-basket .price-item:first-child .quantity,
@@ -1197,7 +1202,7 @@
 .catalog-detail-suggest .price-item:first-child .quantity,
 .catalog-detail-suggest .price-item:first-child .rebatepercent,
 .catalog-detail-suggest .price-item:first-child .rebate,
-.catalog-detail-suggest .price-item:first-child .shipping,
+.catalog-detail-suggest .price-item:first-child .costs,
 .catalog-detail-suggest .price-item:first-child .taxrate {
 	display: none;
 }
@@ -1264,7 +1269,7 @@
 .catalog-session-seen .price-item:first-child .quantity,
 .catalog-session-seen .price-item:first-child .rebatepercent,
 .catalog-session-seen .price-item:first-child .rebate,
-.catalog-session-seen .price-item:first-child .shipping,
+.catalog-session-seen .price-item:first-child .costs,
 .catalog-session-seen .price-item:first-child .taxrate {
 	display: none;
 }
@@ -1416,19 +1421,28 @@
 }
 
 .checkout-standard .item-service .description .short {
-	padding-top: 5px;
 	font-weight: bold;
+	padding: 0.5em 0;
 }
 
 .checkout-standard .item-service .description .long {
-	padding-top: 5px;
+	padding: 0.5em 0;
 }
 
 .checkout-standard .item-service .description h2,
 .checkout-standard .item-service .description p,
 .checkout-standard .item-service .icons {
+	margin: 0 10px;
+}
+
+.checkout-standard .item-service .description p {
 	margin-left: 40px;
-	margin-right: 10px;
+}
+
+.checkout-standard .item-service .description h2,
+.checkout-standard .item-service .icons {
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .checkout-standard .item-service .option {
@@ -1440,7 +1454,7 @@
 	float: right;
 	margin: 5px 10px;
 	font-weight: bold;
-	font-size: 1em;
+	font-size: 150%;
 	color: #004266;
 }
 
