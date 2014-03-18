@@ -57,7 +57,7 @@ MShop.elements.siteLanguage.getStore = function() {
     if (!MShop.elements.siteLanguage.store) {
         MShop.elements.siteLanguage.store = new Ext.data.JsonStore({
             fields : ['id', 'label'],
-            data : MShop.i18n.availableLanguages
+            data : MShop.i18n.available
         });
     }
 
