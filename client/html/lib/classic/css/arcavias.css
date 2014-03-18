@@ -197,9 +197,15 @@
 	width: 198px;
 }
 
+.common-summary .item h4,
 .common-summary .item .item-icons {
-	float: right;
-	margin: 0 20px 10px 20px;
+	vertical-align: middle;
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.common-summary .item .item-icons img {
+	max-width: 60px;
 }
 
 .common-summary .item .attr-list {
@@ -1443,6 +1449,10 @@
 .checkout-standard .item-service .icons {
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.checkout-standard .item-service .icons img {
+	max-height: 40px;
 }
 
 .checkout-standard .item-service .option {
