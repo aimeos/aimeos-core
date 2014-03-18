@@ -41,6 +41,10 @@ MShop.UrlManager.prototype = {
         return this.data.tab;
     },
 
+    getLanguageCode : function() {
+        return this.data.locale;
+    },
+
     setSiteCode : function(siteCode) {
         this.data.site = siteCode;
     },
