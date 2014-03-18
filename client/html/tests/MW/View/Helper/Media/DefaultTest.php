@@ -50,7 +50,7 @@ class MW_View_Helper_Media_DefaultTest extends MW_Unittest_Testcase
 		$item->setLabel( 'test image' );
 
 		$attr = array( 'class' => 'testclass' );
-		$expected = '<div class="testclass" ><img src="/base/path/to/preview.jpg" data-orig="/base/path/to/original.jpg" /></div>';
+		$expected = '<div class="testclass" ><img src="/base/path/to/preview.jpg" title="test image"  /></div>';
 
 		$output = $this->_object->transform( $item, '/base', $attr );
 		$this->assertContains( $expected, $output );
@@ -67,10 +67,11 @@ class MW_View_Helper_Media_DefaultTest extends MW_Unittest_Testcase
 		$item->setMimetype( 'application/pdf' );
 		$item->setLabel( 'test PDF' );
 
-		$attr = array( 'class' => 'testclass' );
-		$expected = '<a href="/base/path/to/file.pdf" class="testclass" ><img src="/base/path/to/preview.jpg" />test PDF</a>';
+		$boxattr = array( 'class' => 'boxclass' );
+		$itemattr = array( 'class' => 'itemclass' );
+		$expected = '<a href="/base/path/to/file.pdf" class="boxclass" ><img src="/base/path/to/preview.jpg" title="test PDF" class="itemclass"  />test PDF</a>';
 
-		$output = $this->_object->transform( $item, '/base', $attr );
+		$output = $this->_object->transform( $item, '/base', $boxattr, $itemattr );
 		$this->assertContains( $expected, $output );
 	}
 }
