@@ -37,7 +37,7 @@ function setup_autoload( $classname )
 
 function usage()
 {
-	printf( "Usage: php setup.php [--config=<path>] [--extdir=<path>]* [sitecode]\n" );
+	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>] [--option=key:value]* [sitecode]\n" );
 	exit ( 1 );
 }
 
@@ -117,6 +117,22 @@ try
 	}
 	$conf->set( 'resource/db/limit', 2 );
 	$conf->set( 'setup/site', $site );
+
+	if( isset( $options['option'] ) )
+	{
+		foreach( (array) $options['option'] as $option )
+		{
+			$parts = explode( ':', $option );
+
+			if( count( $parts ) !== 2 )
+			{
+				printf( "Invalid config option \"%1\$s\"\n", $option );
+				usage();
+			}
+
+			$conf->set( $parts[0], $parts[1] );
+		}
+	}
 
 	$dbm = new MW_DB_Manager_PDO( $conf );
 	$ctx->setDatabaseManager( $dbm );
