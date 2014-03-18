@@ -6,8 +6,6 @@
  */
 
 $enc = $this->encoder();
-$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
-
 $catPath = $this->get( 'listCatPath', array() );
 $searchText = $this->param( 'f-search-text', null );
 
@@ -16,7 +14,7 @@ $searchText = $this->param( 'f-search-text', null );
 <?php if( ( $catItem = end( $catPath ) ) !== false ) : ?>
 	<div class="imagelist-default">
 <?php	foreach( $catItem->getRefItems( 'media', 'head', 'default' ) as $mediaItem ) : ?>
-		<img class="<?php echo $enc->attr( $mediaItem->getType() ); ?>" src="<?php echo $enc->attr( $contentUrl . $mediaItem->getUrl() ); ?>" />
+		<img class="<?php echo $enc->attr( $mediaItem->getType() ); ?>" src="<?php echo $this->content( $mediaItem->getUrl() ); ?>" />
 <?php	endforeach; ?>
 	</div>
 	<h1><?php echo $enc->html( $catItem->getName() ); ?></h1>

@@ -12,7 +12,6 @@ if( isset( $this->detailProductItem ) ) {
 }
 
 $mediaItems = $this->get( 'detailProductMediaItems', array() );
-$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 $enc = $this->encoder();
 
 ?>
@@ -22,8 +21,8 @@ $enc = $this->encoder();
 <?php foreach( $items as $id => $item ) : ?>
 <?php	if( isset( $mediaItems[$id] ) ) { $item = $mediaItems[$id]; } ?>
 	<li class="item">
-		<a href="<?php echo $enc->attr( $contentUrl . $item->getUrl() ); ?>" title="<?php echo $enc->attr( $item->getName() ); ?>">
-			<img class="media-image" src="<?php echo $enc->attr( $contentUrl . $item->getPreview() ); ?>" alt="<?php echo $enc->attr( $item->getName() ); ?>" />
+		<a href="<?php echo $this->content( $item->getUrl() ); ?>" title="<?php echo $enc->attr( $item->getName() ); ?>">
+			<img class="media-image" src="<?php echo $this->content( $item->getPreview() ); ?>" alt="<?php echo $enc->attr( $item->getName() ); ?>" />
 			<span class="media-name"><?php echo $enc->html( $item->getName() ); ?></span>
 		</a>
 	</li>

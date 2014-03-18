@@ -7,7 +7,6 @@
 
 $totalQuantity = 0;
 $enc = $this->encoder();
-$contentUrl = $this->config( 'client/html/common/content/baseurl' ) . '/';
 
 $basketTarget = $this->config( 'client/html/basket/standard/url/target' );
 $basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
@@ -96,8 +95,8 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php 	foreach( $this->summaryBasket->getProducts() as $position => $product ) : $totalQuantity += $product->getQuantity(); ?>
 				<tr class="product <?php echo ( isset( $errors['product'][$position] ) ? 'error' : '' ); ?>">
 					<td class="details">
-<?php		if( ( $mediaUrl = $product->getMediaUrl() ) != '' ) : ?>
-						<img src="<?php echo $enc->attr( $contentUrl . $mediaUrl ); ?>" />
+<?php		if( ( $url = $product->getMediaUrl() ) != '' ) : ?>
+						<img src="<?php echo $this->content( $url ); ?>" />
 <?php		endif; ?>
 <?php		$params = array( 'd-product-id' => $product->getProductId(), 'a-name' => str_replace( ' ', '-', strip_tags( $product->getName() ) ) ); ?>
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params ) ); ?>">
