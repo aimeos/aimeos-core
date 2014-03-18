@@ -62,7 +62,11 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 */
 	isSaveing: false,
 
-	maximized : false,
+    /**
+     * Start window maximized if screen is smaller than 800px
+     */
+    maximized : Ext.lib.Dom.getViewportWidth() <= 800 ? true : false,
+
 	layout: 'fit',
 	modal: true,
 	
