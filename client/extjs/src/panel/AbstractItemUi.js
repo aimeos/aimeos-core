@@ -31,6 +31,26 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 */
 	mainForm: null,
 
+    /**
+     * Set 90% height of viewport size
+     */
+    height : Ext.lib.Dom.getViewportHeight() * 0.90,
+    
+    /**
+     * Set 80% width of viewport size
+     */
+    width : Ext.lib.Dom.getViewportWidth() * 0.80,
+    
+    /**
+     * Min width for window
+     */
+    minWidth : 800,
+    
+    /**
+     * Disable drag and drop of modal window
+     */
+    draggable : false,
+
 	/**
 	 * Action from listUi
 	 * default is "add": creating new entry as phantom
@@ -42,7 +62,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 */
 	isSaveing: false,
 
-	maximized : true,
+	maximized : false,
 	layout: 'fit',
 	modal: true,
 	

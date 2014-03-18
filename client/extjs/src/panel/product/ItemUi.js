@@ -8,9 +8,6 @@ Ext.ns('MShop.panel.product');
 
 MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'product.siteid',
 
 	
@@ -136,7 +133,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 				},{
 					xtype: 'MShop.panel.product.stock.listuismall',
 					layout: 'fit',
-					flex: 1
+					flex: 2
 				} ]
 			} ]
 		} ];

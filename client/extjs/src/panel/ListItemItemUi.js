@@ -9,8 +9,6 @@ Ext.ns('MShop.panel');
 
 MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
-	layout : 'fit',
-	modal : true,
 	getAdditionalFields : Ext.emptyFn,
 
 
