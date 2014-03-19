@@ -677,6 +677,11 @@
 	border-bottom: 1px solid #C3D9E5;
 }
 
+.catalog-list .text-list h2 {
+	font-size: 100%;
+	margin: 0;
+}
+
 /* price list */
 .catalog-list .price-list {
 	padding: 5px;
