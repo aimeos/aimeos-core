@@ -39,7 +39,7 @@ Ext.extend(MShop.elements.site.ComboBox, Ext.form.ComboBox, {
 
 		new Ext.LoadMask( Ext.getBody(), { msg: MShop.I18n.dt( 'client/extjs', 'Switching site ...' ) } ).show();
 
-		MShop.urlManager.redirect( { site: siteCode, tab : domainTabIdx } );
+		MShop.urlManager.redirect( { site: siteCode, tab : domainTabIdx, locale: MShop.urlManager.getLanguageCode() || null } );
 	}
 });
 
