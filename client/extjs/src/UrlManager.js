@@ -3,43 +3,53 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-
 Ext.ns('MShop');
 
-MShop.UrlManager = function( href ) {
-		this.href = href || null;
-		this.tmpl = new Ext.Template( MShop.config.urlTemplate );
-		this.data = {
-			site: MShop.config.site['locale.site.code'],
-			tab : MShop.config.activeTab
-		};
+MShop.UrlManager = function(href) {
+    this.href = href || null;
+    this.tmpl = new Ext.Template(MShop.config.urlTemplate);
+    this.data = {
+        site : MShop.config.site['locale.site.code'],
+        locale : MShop.i18n.locale,
+        tab : MShop.config.activeTab
+    };
 };
 
 MShop.UrlManager.prototype = {
-		redirect: function( config )
-		{
-			if( typeof config == 'object' )
-			{
-				if( config.hasOwnProperty( 'site' ) ) {
-					this.setSiteCode( config.site );
-				}
+    redirect : function(config) {
+        if ( typeof config == 'object') {
+            if (config.hasOwnProperty('site')) {
+                this.setSiteCode(config.site);
+            }
 
-				if( config.hasOwnProperty( 'tab' ) ) {
-					this.setActiveTab( config.tab );
-				}
-			}
-			window.location.href = this.tmpl.apply( this.data );
-		},
+            if (MShop.i18n.hasOwnProperty('locale')) {
+                this.setLanguageCode(config.locale);
+            }
 
-		setActiveTab: function( value ) {
-			this.data.tab = parseInt( value, 10 );
-		},
+            if (config.hasOwnProperty('tab')) {
+                this.setActiveTab(config.tab);
+            }
+        }
+        window.location.href = this.tmpl.apply(this.data);
+    },
 
-		getActiveTab: function() {
-			return this.data.tab;
-		},
+    setActiveTab : function(value) {
+        this.data.tab = parseInt(value, 10);
+    },
 
-		setSiteCode: function( siteCode ) {
-			this.data.site = siteCode;
-		}
+    getActiveTab : function() {
+        return this.data.tab;
+    },
+
+    getLanguageCode : function() {
+        return this.data.locale;
+    },
+
+    setSiteCode : function(siteCode) {
+        this.data.site = siteCode;
+    },
+
+    setLanguageCode : function(languageCode) {
+        this.data.locale = languageCode;
+    }
 };
