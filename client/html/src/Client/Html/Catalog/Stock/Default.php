@@ -126,8 +126,12 @@ class Client_Html_Catalog_Stock_Default
 		{
 			$context = $this->_getContext();
 			$siteConfig = $context->getLocale()->getSite()->getConfig();
-			$productIds = explode( ' ', $view->param( 's-product-id' ) );
 			$sortkey = $context->getConfig()->get( 'client/html/catalog/stock/sort', 'product.stock.warehouseid' );
+			$productIds = $view->param( 's-product-id' );
+
+			if( !is_array( $productIds ) ) {
+				$productIds = explode( ' ', $productIds );
+			}
 
 
 			$stockManager = MShop_Factory::createManager( $context, 'product/stock' );

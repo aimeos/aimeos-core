@@ -5,6 +5,16 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
+.arcavias,
+.arcavias h1, .arcavias h2,
+.arcavias h3, .arcavias h4 {
+	color: #004266;
+}
+
+.arcavias a:link,
+.arcavias a:visited {
+	color: #689DB9;
+}
 
 .arcavias .standardbutton {
 	background-image: url("images/buttonfond.png");
@@ -26,6 +36,11 @@
 	display: inline-block;
 	vertical-align: middle;
 	cursor: pointer;
+}
+
+.arcavias .standardbutton:link,
+.arcavias .standardbutton:visited {
+	color: #FFFFFF;
 }
 
 .arcavias .standardbutton:hover {
@@ -1333,8 +1348,10 @@
 	display: none;
 }
 
-.basket-mini-main .quantity {
+.basket-mini-main .quantity,
+.basket-mini-main .value {
 	display: block;
+	text-align: center;
 }
 
 .basket-mini-main .value {
@@ -1356,7 +1373,16 @@
 	text-decoration: none;
 }
 
+.basket-standard .button-group {
+	text-align: center !important;
+}
+
+
 /* Checkout */
+.checkout-standard .button-group {
+	text-align: center !important;
+}
+
 .checkout-standard .steps {
 	font-weight: bold;
 	text-align: center;
