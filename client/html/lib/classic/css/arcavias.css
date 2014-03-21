@@ -152,6 +152,8 @@
 .arcavias li.attr-item,
 .arcavias li.form-item {
 	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 .arcavias .header {
@@ -1049,9 +1051,9 @@
 .catalog-detail-basket .addbasket {
 	padding: 0.5em;
 	margin-top: 1em;
-	text-align: right;
 	border-radius: 0.5em;
 	background-color: #88B3CB;
+	text-align: right !important;
 }
 
 .catalog-detail-basket .group input {
@@ -1188,7 +1190,7 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 90px;
-	margin: 0 2%;
+	margin: 0 1%;
 }
 
 .catalog-detail-suggest .media-item {
@@ -1202,8 +1204,9 @@
 }
 
 .catalog-detail-suggest .name {
-	height: 2em;
-	padding: 3px 5px;
+	margin: 0;
+	padding: 0;
+	height: 3em;
 	text-align: left;
 	overflow: hidden;
 	border-top: 1px solid #C3D9E5;
@@ -1211,10 +1214,11 @@
 }
 
 .catalog-detail-suggest .price-list {
-	padding: 5px;
 	font-weight: bold;
 	color: #004266;
 	height: 1em;
+	padding: 0;
+	margin: 0;
 }
 
 .catalog-detail-suggest .price-item {
@@ -1255,7 +1259,7 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 90px;
-	padding: 0 2%;
+	padding: 0 1%;
 }
 
 .catalog-session-seen .media-item {
@@ -1269,8 +1273,9 @@
 }
 
 .catalog-session-seen .name {
-	height: 2em;
-	padding: 3px 5px;
+	margin: 0;
+	padding: 0;
+	height: 3em;
 	text-align: left;
 	overflow: hidden;
 	border-top: 1px solid #C3D9E5;
@@ -1278,10 +1283,11 @@
 }
 
 .catalog-session-seen .price-list {
-	padding: 5px;
 	font-weight: bold;
 	color: #004266;
 	height: 1em;
+	padding: 0;
+	margin: 0;
 }
 
 .catalog-session-seen .price-item {
