@@ -60,7 +60,7 @@ abstract class MW_Config_Decorator_Abstract implements MW_Config_Decorator_Inter
 	 */
 	public function set( $path, $value )
 	{
-		$this->_object->set( $path, $default );
+		$this->_object->set( $path, $value );
 	}
 
 
