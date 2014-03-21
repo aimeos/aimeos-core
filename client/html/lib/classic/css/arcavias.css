@@ -1190,6 +1190,7 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 90px;
+	padding: 0;
 	margin: 0 1%;
 }
 
@@ -1259,7 +1260,8 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 90px;
-	padding: 0 1%;
+	padding: 0;
+	margin: 0 1%;
 }
 
 .catalog-session-seen .media-item {
