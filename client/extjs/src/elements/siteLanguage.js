@@ -25,7 +25,13 @@ Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
     initComponent : function() {
         this.store = MShop.elements.siteLanguage.getStore();
         this.on('select', this.onSiteLanguageSelect, this);
-        this.setValue(this.store.getAt(this.store.findExact('id', MShop.urlManager.getLanguageCode())).get('label'));
+
+        if ( ( id = this.store.findExact('id', MShop.urlManager.getLanguageCode() ) ) >= 0 ) {
+            this.setValue( this.store.getAt(id).get('label') );
+        } else {
+            this.setValue( this.store.getAt( this.store.findExact('id', 'en') ).get('label') );
+        }
+
         MShop.elements.siteLanguage.ComboBox.superclass.initComponent.call(this);
     },
 
