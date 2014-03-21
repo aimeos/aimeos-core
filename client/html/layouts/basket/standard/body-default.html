@@ -8,10 +8,12 @@
 $basketTarget = $this->config( 'client/html/basket/standard/url/target' );
 $basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
 $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+$basketConfig = $this->config( 'client/html/basket/standard/url/config', array() );
 
 $checkoutTarget = $this->config( 'client/html/checkout/standard/url/target' );
 $checkoutController = $this->config( 'client/html/checkout/standard/url/controller', 'checkout' );
 $checkoutAction = $this->config( 'client/html/checkout/standard/url/action', 'index' );
+$checkoutConfig = $this->config( 'client/html/checkout/standard/url/config', array() );
 
 $checkout = true;
 try {
@@ -32,7 +34,7 @@ $enc = $this->encoder();
 	</ul>
 <?php endif; ?>
 	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Basket' ), $enc::TRUST ); ?></h1>
-	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction ) ); ?>">
+	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
 		<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'b-action' ) ); ?>" value="edit" />
 <?php echo $this->get( 'standardBody' ); ?>
 		<div class="button-group">
@@ -41,7 +43,7 @@ $enc = $this->encoder();
 <?php endif; ?>
 			<button class="standardbutton btn-update" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Update' ), $enc::TRUST ); ?></button>
 <?php if( $checkout === true ) : ?>
-			<a class="standardbutton btn-action" href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Checkout' ), $enc::TRUST ); ?></a>
+			<a class="standardbutton btn-action" href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array(), array(), $checkoutConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Checkout' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 	</form>

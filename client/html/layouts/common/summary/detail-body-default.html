@@ -11,10 +11,12 @@ $enc = $this->encoder();
 $basketTarget = $this->config( 'client/html/basket/standard/url/target' );
 $basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
 $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+$basketConfig = $this->config( 'client/html/basket/standard/url/config', array() );
 
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
+$detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
 if( isset( $this->summaryBasket ) )
 {
@@ -99,7 +101,7 @@ $backParams = $this->get( 'summaryParams', array() );
 						<img src="<?php echo $this->content( $url ); ?>" />
 <?php		endif; ?>
 <?php		$params = array( 'd-product-id' => $product->getProductId(), 'a-name' => str_replace( ' ', '-', strip_tags( $product->getName() ) ) ); ?>
-						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params ) ); ?>">
+						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php		echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 						</a>
 <?php		if( ( $attributes = $product->getAttributes( 'variant' ) ) !== array() ) : ?>
@@ -118,7 +120,7 @@ $backParams = $this->get( 'summaryParams', array() );
 							<li class="attr-item">
 <?php					if( $modify ) : ?>
 <?php						$params = array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity(), 'b-attrconf-code' => $attribute->getCode() ); ?>
-								<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $params ) ); ?>">
+								<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $params, array(), $basketConfig ) ); ?>">
 <?php					endif; ?>
 									<span class="sign">−</span>
 									<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
@@ -135,13 +137,13 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="quantity">
 <?php		if( $modify ) : ?>
 <?php			if( $product->getQuantity() > 1 ) : ?>
-						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) + $backParams ) ); ?>">−</a>
+						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) + $backParams, array(), $basketConfig ) ); ?>">−</a>
 <?php			else : ?>
 						&nbsp;
 <?php			endif; ?>
 						<input class="value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'quantity' ) ) ); ?>" value="<?php echo $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required" />
 						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'position' ) ) ); ?>" value="<?php echo $enc->attr( $position ); ?>" />
-						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) + $backParams ) ); ?>">+</a>
+						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) + $backParams, array(), $basketConfig ) ); ?>">+</a>
 <?php		else : ?>	
 <?php 			echo $enc->html( $product->getQuantity() ); ?>
 <?php		endif; ?>
@@ -150,7 +152,7 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ) ); ?></td>
 <?php		if( $modify ) : ?>
 					<td class="action">
-						<a class="minibutton change" href="<?php echo $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'delete', 'b-position' => $position ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
+						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'delete', 'b-position' => $position ), array(), $basketConfig ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
 					</td>
 <?php		endif; ?>
 				</tr>
