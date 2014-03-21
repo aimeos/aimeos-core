@@ -10,6 +10,7 @@ $enc = $this->encoder();
 $listTarget = $this->config( 'client/html/catalog/list/url/target' );
 $listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
 $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
+$listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
 
 ?>
 <div class="catalog-stage-breadcrumb">
@@ -18,7 +19,7 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 		<span class="title"><?php echo $enc->html( $this->translate( 'client/html', 'You are here:' ), $enc::TRUST ); ?></span>
 		<ol>
 <?php	foreach( (array) $this->stageCatPath as $cat ) : ?>
-			<li><a href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'f-catalog-id' => $cat->getId() ), array( $cat->getName() ) ) ); ?>"><?php echo $enc->html( $cat->getName() ); ?></a></li>
+			<li><a href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array( 'f-catalog-id' => $cat->getId() ), array( $cat->getName() ), $listConfig ) ); ?>"><?php echo $enc->html( $cat->getName() ); ?></a></li>
 <?php	endforeach; ?>
 		</ol>
 	</nav>

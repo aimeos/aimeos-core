@@ -10,12 +10,14 @@ $enc = $this->encoder();
 $termsTarget = $this->config( 'client/html/checkout/standard/summary/option/terms/url/target' );
 $termsController = $this->config( 'client/html/checkout/standard/summary/option/terms/url/controller' );
 $termsAction = $this->config( 'client/html/checkout/standard/summary/option/terms/url/action' );
-$termsUrl = $this->url( $termsTarget, $termsController, $termsAction );
+$termsConfig = $this->config( 'client/html/checkout/standard/summary/option/terms/url/config', array() );
+$termsUrl = $this->url( $termsTarget, $termsController, $termsAction, array(), $termsConfig );
 
 $privacyTarget = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/target' );
 $privacyController = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/controller' );
 $privacyAction = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/action' );
-$privacyUrl = $this->url( $privacyTarget, $privacyController, $privacyAction );
+$privacyConfig = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/config', array() );
+$privacyUrl = $this->url( $privacyTarget, $privacyController, $privacyAction, array(), $privacyConfig );
 
 ?>
 <div class="checkout-standard-summary-option-terms">

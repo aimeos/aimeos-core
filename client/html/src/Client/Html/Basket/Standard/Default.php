@@ -275,16 +275,18 @@ class Client_Html_Basket_Standard_Default
 				$target = $view->config( 'client/html/catalog/detail/url/target' );
 				$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );
 				$action = $view->config( 'client/html/catalog/detail/url/action', 'detail' );
+				$config = $view->config( 'client/html/catalog/detail/url/config', array() );
 
-				$view->standardBackUrl = $view->url( $target, $controller, $action, $params );
+				$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
 			}
 			else if( count( $this->_getClientParams( $view->param(), array( 'f' ) ) ) > 0 )
 			{
 				$target = $view->config( 'client/html/catalog/list/url/target' );
 				$controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
 				$action = $view->config( 'client/html/catalog/list/url/action', 'list' );
+				$config = $view->config( 'client/html/catalog/list/url/config', array() );
 
-				$view->standardBackUrl = $view->url( $target, $controller, $action, $params );
+				$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
 			}
 
 			$view->standardBasket = $this->_controller->get();

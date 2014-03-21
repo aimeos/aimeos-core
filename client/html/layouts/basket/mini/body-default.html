@@ -8,6 +8,7 @@
 $basketTarget = $this->config( 'client/html/basket/standard/url/target' );
 $basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
 $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+$basketConfig = $this->config( 'client/html/basket/standard/url/config', array() );
 
 $enc = $this->encoder();
 
@@ -21,7 +22,7 @@ $enc = $this->encoder();
 	</ul>
 <?php endif; ?>
 	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Basket' ), $enc::TRUST ); ?></h1>
-	<a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction ) ); ?>">
+	<a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
 <?php echo $this->get( 'miniBody' ); ?>
 	</a>
 </section>
