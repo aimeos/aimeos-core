@@ -37,14 +37,16 @@ class Client_Html_Checkout_Standard_Summary_Detail_Default
 			$bTarget = $view->config( 'client/html/basket/standard/url/target' );
 			$bCntl = $view->config( 'client/html/basket/standard/url/controller', 'basket' );
 			$bAction = $view->config( 'client/html/basket/standard/url/action', 'index' );
+			$bConfig = $view->config( 'client/html/basket/standard/url/config', array() );
 
 			$target = $view->config( 'client/html/checkout/standard/url/target' );
 			$cntl = $view->config( 'client/html/checkout/standard/url/controller', 'checkout' );
 			$action = $view->config( 'client/html/checkout/standard/url/action', 'index' );
+			$config = $view->config( 'client/html/checkout/standard/url/config', array() );
 
-			$view->summaryUrlServicePayment = $view->url( $target, $cntl, $action, array( 'c-step' => 'payment' ) );
-			$view->summaryUrlServiceDelivery = $view->url( $target, $cntl, $action, array( 'c-step' => 'delivery' ) );
-			$view->summaryUrlBasket = $view->url( $bTarget, $bCntl, $bAction );
+			$view->summaryUrlServicePayment = $view->url( $target, $cntl, $action, array( 'c-step' => 'payment' ), array(), $config );
+			$view->summaryUrlServiceDelivery = $view->url( $target, $cntl, $action, array( 'c-step' => 'delivery' ), array(), $config );
+			$view->summaryUrlBasket = $view->url( $bTarget, $bCntl, $bAction, array(), array(), $bConfig );
 			$view->summaryTaxRates = $this->_getTaxRates( $basket );
 			$view->summaryBasket = $view->standardBasket;
 

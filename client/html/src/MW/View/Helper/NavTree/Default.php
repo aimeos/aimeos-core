@@ -21,6 +21,7 @@ class MW_View_Helper_NavTree_Default
 	private $_target;
 	private $_controller;
 	private $_action;
+	private $_config;
 	private $_encoder;
 
 
@@ -36,6 +37,7 @@ class MW_View_Helper_NavTree_Default
 		$this->_target = $view->config( 'client/html/catalog/list/url/target' );
 		$this->_controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
 		$this->_action = $view->config( 'client/html/catalog/list/url/action', 'list' );
+		$this->_config = $view->config( 'client/html/catalog/list/url/config', array() );
 
 		$this->_encoder = $view->encoder();
 	}
@@ -66,7 +68,7 @@ class MW_View_Helper_NavTree_Default
 		$params['a-name'] = str_replace( ' ', '-', $item->getName() );
 		$params['f-catalog-id'] = $id;
 
-		$url = $enc->attr( $this->url( $this->_target, $this->_controller, $this->_action, $params ) );
+		$url = $enc->attr( $this->url( $this->_target, $this->_controller, $this->_action, $params, array(), $this->_config ) );
 
 		$output = '<li class="cat-item catid-' . $enc->attr( $id . $class ) . '" data-id="' . $id . '" ><!--
 			--><a class="cat-item" href="' . $url . '"><span class="cat-name">' . $enc->html( $item->getName(), $enc::TRUST ) . '</span></a>';

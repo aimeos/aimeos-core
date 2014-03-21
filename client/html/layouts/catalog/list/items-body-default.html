@@ -10,6 +10,7 @@ $enc = $this->encoder();
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
+$detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
 /// Price format with price value (%1$s) and currency (%2$s)
 $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
@@ -21,7 +22,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : $firstImage = true; ?>
 <?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id ); ?>
 	<div class="product">
-		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params + $this->listParams ) ); ?>">
+		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params + $this->listParams, array(), $detailConfig ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
 <?php		$mediaUrl = $this->content( $mediaItem->getPreview() ); ?>
