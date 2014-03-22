@@ -20,8 +20,8 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 ?>
+<?php if( !empty( $productItems ) && $this->suggestBody != '' ) : ?>
 <section class="catalog-detail-suggest">
-<?php if( !empty( $productItems ) ) : ?>
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Suggested products' ); ?></h2>
 	<ul class="suggest-items"> 
 <?php	foreach( $positionItems as $id => $item ) : ?>
@@ -44,6 +44,6 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php		endif; ?>
 <?php	endforeach; ?>
 	</ul>
-<?php endif; ?>
 <?php echo $this->suggestBody; ?>
 </section>
+<?php endif; ?>
