@@ -1032,11 +1032,11 @@
 }
 
 .catalog-detail-basket .price-item:first-child .value {
-	font-size: 250%;
+	font-size: 200%;
 }
 
 .catalog-detail-basket .price-item:first-child .rebatepercent {
-	font-size: 200%;
+	font-size: 166%;
 }
 
 .catalog-detail-basket .price-item .value {
