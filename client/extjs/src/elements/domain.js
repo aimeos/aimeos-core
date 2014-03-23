@@ -71,5 +71,5 @@ MShop.elements.domain.getStore = function() {
         });
     }
     
-    return MShop.elements.language._store;
+    return MShop.elements.domain._store;
 };
