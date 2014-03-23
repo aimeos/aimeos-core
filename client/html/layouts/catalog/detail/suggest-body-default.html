@@ -20,7 +20,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 ?>
-<?php if( !empty( $productItems ) && $this->suggestBody != '' ) : ?>
+<?php if( !empty( $productItems ) || $this->suggestBody != '' ) : ?>
 <section class="catalog-detail-suggest">
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Suggested products' ); ?></h2>
 	<ul class="suggest-items"> 
