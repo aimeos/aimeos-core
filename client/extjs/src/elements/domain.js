@@ -28,19 +28,6 @@ Ext.extend(MShop.elements.domain.ComboBox, Ext.form.ComboBox);
 Ext.reg('MShop.elements.domain.combo', MShop.elements.domain.ComboBox);
 
 
-MShop.elements.domain.renderer = function(id, metaData, record, rowIndex, colIndex, store) {
-
-    var entry = MShop.elements.domain.getStore().getById(id);
-
-    if( entry ) {
-    	metaData.css = 'type_' + entry.get('value');
-    	return entry.get('label');
-    }
-
-    return id;
-};
-
-
 /**
  * @static
  * 
