@@ -102,6 +102,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		parent::__construct( $context, $serviceItem );
 
 		$configParameters = array(
+			'paypalexpress.AccountEmail',
 			'paypalexpress.ApiUsername',
 			'paypalexpress.ApiPassword',
 			'paypalexpress.ApiSignature',
