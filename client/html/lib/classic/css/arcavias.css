@@ -1344,8 +1344,8 @@
 	background-image: url("images/basket.png");
 	background-repeat: no-repeat;
 	background-position: center;
-	margin: 5px;
-	margin-top: 0;
+	margin: 0 auto;
+	margin-bottom: 5px;
 	padding: 5px;
 	height: 60px;
 	width: 70px;
