@@ -1,28 +1,29 @@
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2013
+ * Copyright (c) Metaways Infosystems GmbH, 2014
  * LGPLv3, http://www.arcavias.com/license
  */
 
 
-Ext.ns('MShop.panel.text.type');
+Ext.ns('MShop.panel.attribute.type');
 
-MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
+MShop.panel.attribute.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
-	recordName : 'Text_Type',
-	idProperty : 'text.type.id',
-	siteidProperty : 'text.type.siteid',
-	itemUiXType : 'MShop.panel.text.type.itemui',
+	recordName : 'Attribute_Type',
+	idProperty : 'attribute.type.id',
+	siteidProperty : 'attribute.type.siteid',
+	
+	itemUiXType : 'MShop.panel.attribute.type.itemui',
 	
 	// Sort by id ASC
 	sortInfo : {
-		field : 'text.type.id',
+		field : 'attribute.type.id',
 		direction : 'ASC'
 	},
 
 	// Create filter
 	filterConfig : {
 		filters : [ {
-			dataIndex : 'text.type.label',
+			dataIndex : 'attribute.type.label',
 			operator : '=~',
 			value : ''
 		} ]
@@ -31,28 +32,28 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	// Override initComponent to set Label of tab.
 	initComponent : function()
 	{
-		this.title = MShop.I18n.dt( 'client/extjs', 'Text type' );
+		this.title = MShop.I18n.dt( 'client/extjs', 'Attribute type' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
-		MShop.panel.text.type.ListUi.superclass.initComponent.call(this);
+		MShop.panel.attribute.type.ListUi.superclass.initComponent.call(this);
 	},
 	
 	
-	autoExpandColumn : 'text-type-label',
+	autoExpandColumn : 'attribute-type-label',
 
 	getColumns : function() {
 		return [ {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.id',
+				dataIndex : 'attribute.type.id',
 				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				editable : false,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.status',
+				dataIndex : 'attribute.type.status',
 				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				width : 50,
@@ -60,12 +61,12 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				renderer : this.statusColumnRenderer.createDelegate(this)
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.domain',
+				dataIndex : 'attribute.type.domain',
 				header : MShop.I18n.dt( 'client/extjs', 'Domain' ),
 				sortable : true
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.code',
+				dataIndex : 'attribute.type.code',
 				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
 				sortable : true,
 				width : 150,
@@ -73,14 +74,14 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				editable : false
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.label',
-				id: 'text-type-label',
+				dataIndex : 'attribute.type.label',
+				id: 'attribute-type-label',
 				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				editable : false
 			}, {
 				xtype : 'datecolumn',
-				dataIndex : 'text.type.ctime',
+				dataIndex : 'attribute.type.ctime',
 				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
@@ -89,7 +90,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				hidden : true
 			}, {
 				xtype : 'datecolumn',
-				dataIndex : 'text.type.mtime',
+				dataIndex : 'attribute.type.mtime',
 				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
@@ -98,7 +99,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.editor',
+				dataIndex : 'attribute.type.editor',
 				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
@@ -109,6 +110,6 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	}
 });
 
-Ext.reg('MShop.panel.text.type.listui', MShop.panel.text.type.ListUi);
+Ext.reg('MShop.panel.attribute.type.listui', MShop.panel.attribute.type.ListUi);
 
-Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.text.type.listui', MShop.panel.text.type.ListUi, 70);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.attribute.type.listui', MShop.panel.attribute.type.ListUi, 10);

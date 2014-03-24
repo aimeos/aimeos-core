@@ -422,16 +422,46 @@
 			"path": "src/panel/locale/site/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/text/"
+			"path": "src/panel/type/attribute/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/text/"
+			"path": "src/panel/type/attribute/"
 		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/type/media/"
 		}, {
 			"text": "ItemUi.js",
 			"path": "src/panel/type/media/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/type/plugin/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/type/plugin/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/type/price/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/type/price/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/type/product/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/type/product/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/type/service/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/type/service/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/type/text/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/type/text/"
 		}, {
 			"text": "TabUi.js",
 			"path": "src/panel/type/"
