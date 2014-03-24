@@ -1053,6 +1053,9 @@
 	margin-top: 1em;
 	border-radius: 0.5em;
 	background-color: #88B3CB;
+}
+
+.catalog-detail-basket .group {
 	text-align: right !important;
 }
 
