@@ -7,10 +7,7 @@
 Ext.ns('MShop.panel.attribute.type');
 
 MShop.panel.attribute.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
-	
-	maximized : true,
-	layout : 'fit',
-	modal : true,
+
 	siteidProperty : 'attribute.type.siteid',
 
 

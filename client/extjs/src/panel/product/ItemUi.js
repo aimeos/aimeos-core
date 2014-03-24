@@ -10,7 +10,6 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 	siteidProperty : 'product.siteid',
 
-	
 	initComponent : function() {
 
 		MShop.panel.AbstractListItemUi.prototype.setSiteCheck( this );

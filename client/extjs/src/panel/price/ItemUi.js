@@ -7,12 +7,7 @@
 Ext.ns('MShop.panel.price');
 
 MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'price.siteid',
-
 
 	initComponent : function() {
 

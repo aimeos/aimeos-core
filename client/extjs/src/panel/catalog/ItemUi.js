@@ -10,14 +10,9 @@ Ext.ns('MShop.panel.catalog');
  * move some parts to AbstractTreeItemUI and parametresize
  */
 MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	idProperty : 'id',
 	siteidProperty : 'catalog.siteid',
 
-	
 	initComponent : function() {
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
