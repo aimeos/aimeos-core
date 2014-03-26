@@ -52,7 +52,12 @@ class TestHelper
 	private static function _createConfig()
 	{
 		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
-		return new MW_Config_Array( array(), $path );
+		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
+
+		$object = new MW_Config_Array( array(), $path );
+		$object = new MW_Config_Decorator_Documentor( $object, $file );
+
+		return $object;
 	}
 
 
