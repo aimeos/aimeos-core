@@ -97,7 +97,7 @@
 			optfile="${coredir}/client/html/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-client-html.wiki">
 			<fileset dir="${coredir}/client/html" expandsymboliclinks="true" >
-				<include name="layout/**/*.php" />
+				<include name="layouts/**/*.html" />
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
