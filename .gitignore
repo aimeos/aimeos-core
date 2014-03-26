@@ -2,8 +2,10 @@ resource.php
 vendor/
 
 misc/apidoc/
+misc/confdoc/
 coverage/
 tmp/
+confdoc.ser
 *.junit.xml
 *.log
 
