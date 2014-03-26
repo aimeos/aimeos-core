@@ -90,51 +90,52 @@
 
 
 	<target name="doc" description="Generates the documentation" depends="setup,test">
-		<taskdef name="configdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
+		<taskdef name="confdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
 		<mkdir dir="${coredir}/misc/confdoc/" />
 		<echo msg="Generating config documentation" />
-		<configdoc keyprefix="client/html" wikiprefix="Configuration"
+		<confdoc keyprefix="client/html" wikiprefix="Configuration/Core"
 			optfile="${coredir}/client/html/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/client-html.wiki">
-			<fileset dir="${coredir}/client/html/src" expandsymboliclinks="true" >
-				<include name="**/*.php" />
+			outfile="${coredir}/misc/confdoc/core-client-html.wiki">
+			<fileset dir="${coredir}/client/html" expandsymboliclinks="true" >
+				<include name="layout/**/*.php" />
+				<include name="src/**/*.php" />
 			</fileset>
-		</configdoc>
-		<configdoc keyprefix="controller/extjs" wikiprefix="Configuration"
+		</confdoc>
+		<confdoc keyprefix="controller/extjs" wikiprefix="Configuration/Core"
 			optfile="${coredir}/controller/extjs/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/controller-extjs.wiki">
+			outfile="${coredir}/misc/confdoc/core-controller-extjs.wiki">
 			<fileset dir="${coredir}/controller/extjs/src" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
-		</configdoc>
-		<configdoc keyprefix="controller/frontend" wikiprefix="Configuration"
+		</confdoc>
+		<confdoc keyprefix="controller/frontend" wikiprefix="Configuration/Core"
 			optfile="${coredir}/controller/frontend/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/controller-frontend.wiki">
+			outfile="${coredir}/misc/confdoc/core-controller-frontend.wiki">
 			<fileset dir="${coredir}/controller/frontend/src" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
-		</configdoc>
-		<configdoc keyprefix="controller/jobs" wikiprefix="Configuration"
+		</confdoc>
+		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core"
 			optfile="${coredir}/controller/jobs/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/controller-jobs.wiki">
+			outfile="${coredir}/misc/confdoc/core-controller-jobs.wiki">
 			<fileset dir="${coredir}/controller/jobs/src" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
-		</configdoc>
-		<configdoc keyprefix="mshop" wikiprefix="Configuration" keyparts="2"
+		</confdoc>
+		<confdoc keyprefix="mshop" wikiprefix="Configuration/Core" keyparts="2"
 			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/mshop.wiki">
+			outfile="${coredir}/misc/confdoc/core-mshop.wiki">
 			<fileset dir="${coredir}/lib/mshoplib/src/MShop" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
-		</configdoc>
-		<configdoc keyprefix="madmin" wikiprefix="Configuration" keyparts="2"
+		</confdoc>
+		<confdoc keyprefix="madmin" wikiprefix="Configuratio/Coren" keyparts="2"
 			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/madmin.wiki">
+			outfile="${coredir}/misc/confdoc/core-madmin.wiki">
 			<fileset dir="${coredir}/lib/mshoplib/src/MAdmin" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
-		</configdoc>
+		</confdoc>
 		<echo msg="Generating API documentation" />
 		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
 		<exec command="composer require phpdocumentor/phpdocumentor:2.3.*" checkreturn="true" logoutput="true" />
