@@ -231,6 +231,10 @@ class MShopConfigDocTask extends Task
 				foreach( $list['long'] as $desc ) {
 					$data .= "\n" . str_replace( array( '<', '>' ), array( '&lt;', '&gt;' ), $desc );
 				}
+
+				if( ( $data = preg_replace( '/\{\@link ([^ ]+) ([^\}]*)\}/', '[\1 \2]', $data ) ) === null ) {
+					throw new BuildException( 'Unable to compile link regex' );
+				}
 			}
 
 			if( isset( $list['see'] ) )
