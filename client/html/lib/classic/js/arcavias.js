@@ -193,7 +193,7 @@ jQuery(document).ready( function($) {
 			var resize = function() {
 				var jqwin = $(window);
 				var left = (jqwin.width() - container.outerWidth()) / 2;
-				var top = (jqwin.height() - container.outerHeight()) / 2;
+				var top = jqwin.scrollTop() + (jqwin.height() - container.outerHeight()) / 2;
 
 				container.css("left", (left>0 ? left : 0 ));
 				container.css("top", (top>0 ? top : 0 ));
