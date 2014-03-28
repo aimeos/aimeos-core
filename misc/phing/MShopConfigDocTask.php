@@ -87,6 +87,8 @@ class MShopConfigDocTask extends Task
 		{
 			if( strncmp( $key, $this->_keyprefix, $len ) !== 0 ) {
 				unset( $options[$key] );
+			} else if( strpos( $key, 'unknown' ) !== false ) {
+				unset( $options[$key] );
 			}
 		}
 
@@ -194,7 +196,9 @@ class MShopConfigDocTask extends Task
 			$parts = explode( '/', substr( $key, $prefixlen ) );
 			$first = implode( '/', array_slice( $parts, 0, $this->_keyparts ) );
 
-			if( count( $parts ) > $this->_keyparts + 1 ) {
+			if( $this->_keyparts == 0 ) {
+				$sections[ $parts[0] ][] = $key;
+			} else if( count( $parts ) > $this->_keyparts + 1 ) {
 				$sections[$first][ $parts[$this->_keyparts] ][] = $key;
 			} else {
 				$sections[$first]['global'][] = $key;
@@ -206,7 +210,7 @@ class MShopConfigDocTask extends Task
 					throw new BuildException( 'Invalid match pattern' );
 				}
 
-				$type = "* Type: ${matches[1]} (${matches[2]})";
+				$type = "* Type: ${matches[1]} -> ${matches[2]}";
 			}
 
 			if( isset( $list['since'] ) ) {
@@ -232,7 +236,7 @@ class MShopConfigDocTask extends Task
 					$data .= "\n" . str_replace( array( '<', '>' ), array( '&lt;', '&gt;' ), $desc );
 				}
 
-				if( ( $data = preg_replace( '/\{\@link ([^ ]+) ([^\}]*)\}/', '[\1 \2]', $data ) ) === null ) {
+				if( ( $desc = preg_replace( '/\{\@link ([^ ]+) ([^\}]*)\}/', '[\1 \2]', $desc ) ) === null ) {
 					throw new BuildException( 'Unable to compile link regex' );
 				}
 			}
@@ -300,12 +304,20 @@ class MShopConfigDocTask extends Task
 
 			foreach( $list as $subname => $keys )
 			{
-				$data .= "\n=== $subname ===\n";
-
-				foreach( $keys as $key )
+				if( is_array( $keys ) )
 				{
-					$desc = $options[$key]['short'];
-					$data .= "\n; [[$wikiprefix/$key|$key]] : $desc\n";
+					$data .= "\n=== $subname ===\n";
+
+					foreach( $keys as $key )
+					{
+						$desc = $options[$key]['short'];
+						$data .= "\n; [[$wikiprefix/$key|$key]] : $desc\n";
+					}
+				}
+				else
+				{
+					$desc = $options[$keys]['short'];
+					$data .= "\n; [[$wikiprefix/$keys|$keys]] : $desc\n";
 				}
 			}
 		}
@@ -374,7 +386,9 @@ class MShopConfigDocTask extends Task
 				unset( $desc[0] );
 			}
 
-			$options[$key]['long'] = $desc;
+			if( !empty( $desc ) ) {
+				$options[$key]['long'] = $desc;
+			}
 		}
 
 		return $result;

@@ -93,7 +93,7 @@
 		<taskdef name="confdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
 		<mkdir dir="${coredir}/misc/confdoc/" />
 		<echo msg="Generating config documentation" />
-		<confdoc keyprefix="client/html" wikiprefix="Configuration/Core"
+		<confdoc keyprefix="client/html" wikiprefix="Configuration/Core" keyparts="1"
 			optfile="${coredir}/client/html/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-client-html.wiki">
 			<fileset dir="${coredir}/client/html" expandsymboliclinks="true" >
@@ -101,25 +101,53 @@
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="controller/extjs" wikiprefix="Configuration/Core"
+		<confdoc keyprefix="classes/client/html" wikiprefix="Configuration/Core" keyparts="0"
+			optfile="${coredir}/client/html/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/core-classes-client-html.wiki">
+			<fileset dir="${coredir}/client/html" expandsymboliclinks="true" >
+				<include name="src/**/*.php" />
+			</fileset>
+		</confdoc>
+		<confdoc keyprefix="controller/extjs" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${coredir}/controller/extjs/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-controller-extjs.wiki">
 			<fileset dir="${coredir}/controller/extjs/src" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="controller/frontend" wikiprefix="Configuration/Core"
+		<confdoc keyprefix="classes/controller/extjs" wikiprefix="Configuration/Core" keyparts="0"
+			optfile="${coredir}/controller/extjs/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/core-classes-controller-extjs.wiki">
+			<fileset dir="${coredir}/controller/extjs/src" expandsymboliclinks="true" >
+				<include name="src/**/*.php" />
+			</fileset>
+		</confdoc>
+		<confdoc keyprefix="controller/frontend" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${coredir}/controller/frontend/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-controller-frontend.wiki">
 			<fileset dir="${coredir}/controller/frontend/src" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core"
+		<confdoc keyprefix="classes/controller/frontend" wikiprefix="Configuration/Core" keyparts="0"
+			optfile="${coredir}/controller/frontend/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/core-classes-controller-frontend.wiki">
+			<fileset dir="${coredir}/controller/frontend/src" expandsymboliclinks="true" >
+				<include name="src/**/*.php" />
+			</fileset>
+		</confdoc>
+		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${coredir}/controller/jobs/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-controller-jobs.wiki">
 			<fileset dir="${coredir}/controller/jobs/src" expandsymboliclinks="true" >
 				<include name="**/*.php" />
+			</fileset>
+		</confdoc>
+		<confdoc keyprefix="classes/controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
+			optfile="${coredir}/controller/jobs/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/core-classes-controller-jobs.wiki">
+			<fileset dir="${coredir}/controller/jobs/src" expandsymboliclinks="true" >
+				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="mshop" wikiprefix="Configuration/Core" keyparts="2"
@@ -129,11 +157,18 @@
 				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="madmin" wikiprefix="Configuratio/Coren" keyparts="2"
+		<confdoc keyprefix="madmin" wikiprefix="Configuration/Core" keyparts="2"
 			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-madmin.wiki">
 			<fileset dir="${coredir}/lib/mshoplib/src/MAdmin" expandsymboliclinks="true" >
 				<include name="**/*.php" />
+			</fileset>
+		</confdoc>
+		<confdoc keyprefix="classes" wikiprefix="Configuration/Core" keyparts="0"
+			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/core-classes-mshop.wiki">
+			<fileset dir="${coredir}/lib/mshoplib/src" expandsymboliclinks="true" >
+				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
 		<echo msg="Generating API documentation" />
