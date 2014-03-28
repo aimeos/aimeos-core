@@ -209,6 +209,10 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			throw new MShop_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 		}
 
+		if( preg_match( '/^[a-z0-9\/]+$/', $manager ) !== 1 ) {
+			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
+		}
+
 		if( $name === null ) {
 			$path = 'classes/' . $domain . '/manager/' . $manager . '/name';
 			$name = $this->_context->getConfig()->get( $path, 'Default' );
