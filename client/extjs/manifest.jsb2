@@ -452,10 +452,10 @@
 			"path": "src/panel/product/type/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/service/"
+			"path": "src/panel/service/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/service/"
+			"path": "src/panel/service/type/"
 		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/type/text/"
