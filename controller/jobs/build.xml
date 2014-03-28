@@ -25,6 +25,7 @@
 
 	<target name="clean" description="Executes all deployment tasks">
 		<delete file="tests/core_controller-jobs_test.junit.xml" quiet="true" failonerror="false" />
+		<delete file="tests/confdoc.ser" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >
 			<fileset dir="tests">
