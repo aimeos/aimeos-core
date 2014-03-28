@@ -170,6 +170,7 @@
 	margin: 10px 0px;
 	padding: 0px 5px;
 	min-width: 240px;
+	max-width: 100%;
 }
 
 
@@ -542,7 +543,6 @@
 	border-radius: 4px 0 0 4px;
 	border: none;
 	min-width: 5em;
-	max-width: 25em;
 	height: 1.55em;
 	width: 80%;
 }
@@ -585,6 +585,8 @@
 .catalog-filter-attribute legend {
 	color: #004266;
 	font-size: 120%;
+	border: none;
+	width: auto;
 }
 
 .catalog-filter-attribute .attr-list {
@@ -690,11 +692,13 @@
 	padding: 3px 5px;
 	text-align: left;
 	overflow: hidden;
+	line-height: 1;
 	border-top: 1px solid #C3D9E5;
 	border-bottom: 1px solid #C3D9E5;
 }
 
 .catalog-list .text-list h2 {
+	font-weight: bold;
 	font-size: 100%;
 	margin: 0;
 }
@@ -702,7 +706,6 @@
 /* price list */
 .catalog-list .price-list {
 	padding: 5px;
-	font-size: 133%;
 	font-weight: bold;
 	color: #004266;
 	height: 1em;
@@ -1211,6 +1214,8 @@
 	margin: 0;
 	padding: 0;
 	height: 3em;
+	font-size: 100%;
+	font-weight: bold;
 	text-align: left;
 	overflow: hidden;
 	border-top: 1px solid #C3D9E5;
@@ -1261,6 +1266,7 @@
 
 .catalog-session-seen .seen-items {
 	text-align: center;
+	padding: 0;
 }
 
 .catalog-session-seen .seen-item {
@@ -1285,6 +1291,8 @@
 	margin: 0;
 	padding: 0;
 	height: 3em;
+	font-size: 100%;
+	font-weight: bold;
 	text-align: left;
 	overflow: hidden;
 	border-top: 1px solid #C3D9E5;
@@ -1293,6 +1301,7 @@
 
 .catalog-session-seen .price-list {
 	font-weight: bold;
+	text-align: left;
 	color: #004266;
 	height: 1em;
 	padding: 0;
@@ -1350,7 +1359,7 @@
 	margin: 0 auto;
 	margin-bottom: 5px;
 	padding: 5px;
-	height: 60px;
+	height: 70px;
 	width: 70px;
 	background-color: #F2F7FA;
 	border: 1px solid #C3D9E5;
@@ -1425,7 +1434,6 @@
 	display: inline-block;
 	vertical-align: top;
 	overflow: hidden;
-	height: 1.25em;
 	width: 19%;
 	color: #d3dbde;
 	border-bottom: solid 8px #d3dbde;
@@ -1628,7 +1636,7 @@
 	display: inline-block;
 	vertical-align: top;
 	min-width: 218px;
-	max-width: 438px;
+	max-width: 440px;
 	padding: 5px 10px 10px 10px;
 }
 
@@ -1678,6 +1686,7 @@
 .account-history-detail h3 {
 	display: inline-block;
 	font-size: 1em;
+	margin: 0;
 }
 
 .checkout-standard-summary a:hover,
@@ -1700,7 +1709,7 @@
 
 /* Checkout summary option terms */
 .checkout-standard-summary-option-terms {
-	margin: 0px 10px;
+	margin: 10px;
 }
 
 .checkout-standard-summary-option h2 {
@@ -1708,9 +1717,10 @@
 }
 
 .checkout-standard-summary-option h3 {
-	display: block;
+	margin: 0;
 	padding: 5px;
 	padding-top: 10px;
+	display: block;
 }
 
 .checkout-standard-summary-option p {
@@ -1743,10 +1753,6 @@
 /* Checkout confirm basic part */
 .checkout-confirm {
 	padding: 0px 0px 0px 17px;
-}
-
-.checkout-confirm-basic h2 {
-	font-size: 1em;
 }
 
 .checkout-confirm-basic .attr-list .name,
