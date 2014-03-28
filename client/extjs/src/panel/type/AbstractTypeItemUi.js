@@ -4,23 +4,23 @@
  * @author Michael Spahn <m.spahn@metaways.de>
  */
 
-Ext.ns('MShop.panel.type');
+Ext.ns('MShop.panel');
 
-MShop.panel.type.AbstractTypeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
+MShop.panel.AbstractTypeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
    /**
     * Domain to configure fields
     * 
     * E.g. attribute.type
     */
-   typeDomain : null,
+    typeDomain : null,
 
-   initComponent : function() {
-        //MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
+    initComponent : function() {
+        MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
         this.items = [{
             xtype : 'tabpanel',
             activeTab : 0,
             border : false,
-            itemId : 'MShop.panel.' + typeDomain + '.ItemUi',
+            itemId : 'MShop.panel.' + this.typeDomain + '.ItemUi',
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
@@ -30,7 +30,7 @@ MShop.panel.type.AbstractTypeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 layoutConfig : {
                     align : 'stretch'
                 },
-                itemId : 'MShop.panel.' + typeDomain + '.ItemUi.BasicPanel',
+                itemId : 'MShop.panel.' + this.typeDomain + '.ItemUi.BasicPanel',
                 plugins : ['ux.itemregistry'],
                 defaults : {
                     bodyCssClass : this.readOnlyClass
@@ -52,24 +52,24 @@ MShop.panel.type.AbstractTypeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         items : [{
                             xtype : 'displayfield',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
-                            name : typeDomain + '.id'
+                            name : this.typeDomain + '.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
-                            name : typeDomain + '.status',
+                            name : this.typeDomain + '.status',
                             allowBlank : false
                         }, {
                             xtype : 'MShop.elements.domain.combo',
-                            name : typeDomain + '.domain',
+                            name : this.typeDomain + '.domain',
                             allowBlank : false
                         }, {
                             xtype : 'textfield',
-                            name : typeDomain + '.code',
+                            name : this.typeDomain + '.code',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
                             allowBlank : false,
                             emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            name : typeDomain + '.label',
+                            name : this.typeDomain + '.label',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
                             allowBlank : false,
                             maxLength : 255,
@@ -77,23 +77,23 @@ MShop.panel.type.AbstractTypeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         }, {
                             xtype : 'displayfield',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
-                            name : typeDomain + '.ctime'
+                            name : this.typeDomain + '.ctime'
                         }, {
                             xtype : 'displayfield',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
-                            name : typeDomain + '.mtime'
+                            name : this.typeDomain + '.mtime'
                         }, {
                             xtype : 'displayfield',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
-                            name : typeDomain + '.editor'
+                            name : this.typeDomain + '.editor'
                         }]
                     }]
                 }]
             }]
         }];
 
-        MShop.panel.AbstractItemUi.superclass.initComponent.call(this);
+       MShop.panel.AbstractTypeItemUi.superclass.initComponent.call(this);
     }
 });
 
-Ext.reg('MShop.panel.type.abstracttypeitemui', MShop.panel.type.AbstractTypeItemUi);
+Ext.reg('MShop.panel.abstracttypeitemui', MShop.panel.AbstractTypeItemUi);

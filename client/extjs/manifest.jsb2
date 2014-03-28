@@ -142,6 +142,9 @@
 			"text": "AbstractItemUi.js",
 			"path": "src/panel/"
 		}, {
+			"text": "AbstractTypeItemUi.js",
+			"path": "src/panel/type/"
+		}, {
 			"text": "AbstractListItemUi.js",
 			"path": "src/panel/"
 		}, {
@@ -464,9 +467,6 @@
 			"path": "src/panel/text/type/"
 		}, {
 			"text": "TabUi.js",
-			"path": "src/panel/type/"
-		}, {
-			"text": "AbstractTypeItemUi.js",
 			"path": "src/panel/type/"
 		}]
 	}],
