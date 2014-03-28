@@ -422,10 +422,10 @@
 			"path": "src/panel/locale/site/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/attribute/"
+			"path": "src/panel/attribute/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/attribute/"
+			"path": "src/panel/attribute/type/"
 		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/type/media/"
