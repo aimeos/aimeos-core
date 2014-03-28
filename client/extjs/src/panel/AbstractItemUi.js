@@ -34,22 +34,17 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
     /**
      * Set 90% height of viewport size
      */
-    height : Ext.lib.Dom.getViewportHeight() * 0.90,
+    height : null,
     
     /**
      * Set 80% width of viewport size
      */
-    width : Ext.lib.Dom.getViewportWidth() * 0.80,
-    
-    /**
-     * Min width for window
-     */
-    minWidth : 800,
+    width : null,
     
     /**
      * Disable drag and drop of modal window
      */
-    draggable : false,
+    draggable : true,
 
 	/**
 	 * Action from listUi
@@ -65,7 +60,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
     /**
      * Start window maximized if screen is smaller than 800px
      */
-    maximized : Ext.lib.Dom.getViewportWidth() <= 800 ? true : false,
+    maximized : null,
 
 	layout: 'fit',
 	modal: true,
@@ -108,6 +103,10 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		if (this.action == 'copy') {
 			this.items[0].deferredRender = false;
 		}
+
+		this.height = Ext.getBody().getViewSize().height * 0.95;
+		this.width = Ext.getBody().getViewSize().width * 0.80;
+		this.maximized = this.width <= 800 ? true : false;
 
 		MShop.panel.AbstractItemUi.superclass.initComponent.call(this);
 	},
