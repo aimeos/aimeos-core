@@ -428,10 +428,10 @@
 			"path": "src/panel/attribute/type/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/media/"
+			"path": "src/panel/media/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/media/"
+			"path": "src/panel/media/type/"
 		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/type/plugin/"
