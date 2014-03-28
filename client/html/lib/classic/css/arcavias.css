@@ -587,6 +587,7 @@
 	font-size: 120%;
 	border: none;
 	width: auto;
+	margin: 0;
 }
 
 .catalog-filter-attribute .attr-list {
@@ -1190,6 +1191,11 @@
 .catalog-detail-suggest {
 	clear: both;
 	padding: 1em 0;
+}
+
+.catalog-detail-suggest .suggest-items {
+	padding: 0;
+	margin: 0;
 }
 
 .catalog-detail-suggest .suggest-item {
