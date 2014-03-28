@@ -458,10 +458,10 @@
 			"path": "src/panel/service/type/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/text/"
+			"path": "src/panel/text/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/text/"
+			"path": "src/panel/text/type/"
 		}, {
 			"text": "TabUi.js",
 			"path": "src/panel/type/"
