@@ -352,6 +352,7 @@ return array(
 		'code' => 'demo-paypal', 'type' => 'payment', 'label' => 'PayPal',
 		'provider' => 'PayPalExpress', 'position' => 2, 'status' => 1,
 		'config' => array(
+			'paypalexpress.AccountEmail' => 'selling2@metaways.de',
 			'paypalexpress.ApiUsername' => 'unit_1340199666_biz_api1.yahoo.de',
 			'paypalexpress.ApiPassword' => '1340199685',
 			'paypalexpress.ApiSignature' => 'A34BfbVoMVoHt7Sf8BlufLXS8tKcAVxmJoDiDUgBjWi455pJoZXGoJ87',
