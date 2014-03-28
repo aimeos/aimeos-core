@@ -210,7 +210,7 @@ class MShopConfigDocTask extends Task
 					throw new BuildException( 'Invalid match pattern' );
 				}
 
-				$type = "* Type: ${matches[1]} -> ${matches[2]}";
+				$type = "* Type: ${matches[1]} - ${matches[2]}";
 			}
 
 			if( isset( $list['since'] ) ) {
