@@ -19,8 +19,7 @@
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
-		"ext-zip": "*",
-		"arcavias/extension-installer": "dev-master"
+		"ext-zip": "*"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "1.*",
