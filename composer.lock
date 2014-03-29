@@ -3,39 +3,9 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e840ab8285770d1e2488c13c243c8a6d",
+    "hash": "3ae9fb43593514acb324934c0cdf9c74",
     "packages": [
-        {
-            "name": "arcavias/extension-installer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Arcavias/extension-installer.git",
-                "reference": "d9585ed9256de66b5aff2e65649955f10193b631"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Arcavias/extension-installer/zipball/d9585ed9256de66b5aff2e65649955f10193b631",
-                "reference": "d9585ed9256de66b5aff2e65649955f10193b631",
-                "shasum": ""
-            },
-            "type": "composer-installer",
-            "extra": {
-                "class": "Arcavias\\Composer\\ExtensionInstaller"
-            },
-            "autoload": {
-                "psr-0": {
-                    "Arcavias\\Composer": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "description": "custom composer installer for Arcavias extensions",
-            "homepage": "http://www.arcavias.com/en",
-            "time": "2013-07-08 12:47:55"
-        }
+
     ],
     "packages-dev": [
         {
@@ -92,16 +62,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "1.2.16",
+            "version": "1.2.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "69e55e68481cf708a6db43aff0b504e31402fe27"
+                "reference": "6ef2bf3a1c47eca07ea95f0d8a902a6340390b34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/69e55e68481cf708a6db43aff0b504e31402fe27",
-                "reference": "69e55e68481cf708a6db43aff0b504e31402fe27",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6ef2bf3a1c47eca07ea95f0d8a902a6340390b34",
+                "reference": "6ef2bf3a1c47eca07ea95f0d8a902a6340390b34",
                 "shasum": ""
             },
             "require": {
@@ -149,7 +119,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-02-25 03:34:05"
+            "time": "2014-03-28 10:53:45"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -336,16 +306,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "3.7.32",
+            "version": "3.7.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2752cbb9ea5bd84c2811b34b6953f76965ec7a2f"
+                "reference": "248d6ce95e6ca7f0e3135252c0b984bbe1f52f19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2752cbb9ea5bd84c2811b34b6953f76965ec7a2f",
-                "reference": "2752cbb9ea5bd84c2811b34b6953f76965ec7a2f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/248d6ce95e6ca7f0e3135252c0b984bbe1f52f19",
+                "reference": "248d6ce95e6ca7f0e3135252c0b984bbe1f52f19",
                 "shasum": ""
             },
             "require": {
@@ -354,11 +324,11 @@
                 "ext-reflection": "*",
                 "ext-spl": "*",
                 "php": ">=5.3.3",
-                "phpunit/php-code-coverage": "~1.2.1",
-                "phpunit/php-file-iterator": ">=1.3.1",
-                "phpunit/php-text-template": ">=1.1.1",
-                "phpunit/php-timer": ">=1.0.4",
-                "phpunit/phpunit-mock-objects": "~1.2.0",
+                "phpunit/php-code-coverage": "~1.2",
+                "phpunit/php-file-iterator": "~1.3",
+                "phpunit/php-text-template": "~1.1",
+                "phpunit/php-timer": "~1.0",
+                "phpunit/phpunit-mock-objects": "~1.2",
                 "symfony/yaml": "~2.0"
             },
             "require-dev": {
@@ -368,7 +338,7 @@
                 "ext-json": "*",
                 "ext-simplexml": "*",
                 "ext-tokenizer": "*",
-                "phpunit/php-invoker": ">=1.1.0,<1.2.0"
+                "phpunit/php-invoker": "~1.1"
             },
             "bin": [
                 "composer/bin/phpunit"
@@ -406,7 +376,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-02-25 03:47:29"
+            "time": "2014-03-28 11:04:36"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -581,9 +551,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "arcavias/extension-installer": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.2.0",
         "ext-curl": "*",
