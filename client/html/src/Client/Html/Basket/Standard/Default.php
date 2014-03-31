@@ -141,15 +141,58 @@ class Client_Html_Basket_Standard_Default
 
 		try
 		{
+			/** client/html/basket/standard/require-stock
+			 * @deprecated Use "client/html/basket/require-stock" instead
+			 * @see client/html/basket/require-stock
+			 */
+			$reqstock = $view->config( 'client/html/basket/standard/require-stock', true );
+
+			/** client/html/basket/standard/require-variant
+			 * @deprecated Use "client/html/basket/require-variant" instead
+			 * @see client/html/basket/require-variant
+			 */
+			$reqvariant = $view->config( 'client/html/basket/standard/require-variant', true );
+
+			$options = array(
+
+				/** client/html/basket/require-stock
+				 * Customers can order products only if there are enough products in stock
+				 *
+				 * Checks that the requested product quantity is in stock before
+				 * the customer can add them to his basket and order them. If there
+				 * are not enough products available, the customer will get a notice.
+				 *
+				 * @param boolean True if products must be in stock, false if products can be sold without stock
+				 * @since 2014.03
+				 * @category Developer
+				 * @category User
+				 */
+				'stock' => $view->config( 'client/html/basket/require-stock', $reqstock ),
+
+				/** client/html/basket/require-variant
+				 * A variant of a selection product must be chosen
+				 *
+				 * Selection products normally consist of several article variants and by default
+				 * exactly one article variant of a selection product can be put into the basket.
+				 *
+				 * By setting this option to false, the selection product including the chosen
+				 * attributes (if any attribute values were selected) can be put into the basket
+				 * as well. This makes it possible to get all articles or a subset of articles
+				 * (e.g. all of a color) at once.
+				 *
+				 * @param boolean True if a variant must be chosen, false if also the selection product with attributes can be added
+				 * @since 2014.03
+				 * @category Developer
+				 * @category User
+				 */
+				'variant' => $view->config( 'client/html/basket/require-variant', $reqvariant ),
+			);
+
 			switch( $view->param( 'b-action' ) )
 			{
 				case 'add':
 
 					$products = (array) $view->param( 'b-prod', array() );
-					$options = array(
-						'stock' => $view->config( 'client/html/basket/standard/require-stock', true ),
-						'variant' => $view->config( 'client/html/basket/standard/require-variant', true ),
-					);
 
 					if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
 					{
@@ -179,9 +222,6 @@ class Client_Html_Basket_Standard_Default
 				case 'edit':
 
 					$products = (array) $view->param( 'b-prod', array() );
-					$options = array(
-						'stock' => $view->config( 'client/html/basket/standard/require-stock', true ),
-					);
 
 					if( ( $positon = $view->param( 'b-position', null ) ) !== null )
 					{
