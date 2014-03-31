@@ -11,6 +11,19 @@ $enc = $this->encoder();
 /// E-mail HTML title
 $title = $this->translate( 'client/html', 'Your order' );
 
+/** client/html/email/logo
+ * Path to the logo image displayed in HTML e-mails
+ *
+ * The path can either be an absolute local path or an URL to a file on a
+ * remote server. If the file is stored on a remote server, "allow_url_fopen"
+ * must be enabled. See {@link http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen php.ini allow_url_fopen}
+ * documentation for details.
+ *
+ * @param string Absolute file system path or remote URL to the logo image
+ * @since 2014.03
+ * @category User
+ * @see client/html/email/from-email
+ */
 if( ( $logo = $this->config( 'client/html/email/logo', 'client/html/lib/classic/css/images/arcavias.png' ) ) != '' )
 {
 	$filename = basename( $logo );
