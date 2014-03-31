@@ -11,11 +11,8 @@
  */
 class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MShop_Service_Provider_Payment_DirectDebit
-	 * @access protected
-	 */
 	private $_object;
+	private $_ordServItem;
 
 
 	/**
@@ -42,9 +39,9 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
 
-		$serviceItem = $serviceManager->createItem();
+		$this->_ordServItem = MShop_Factory::createManager( $context, 'order/base/service' )->createItem();
+		$serviceItem = MShop_Factory::createManager( $context, 'service' )->createItem();
 		$serviceItem->setCode( 'test' );
 
 		$this->_object = new MShop_Service_Provider_Payment_DirectDebit( $context, $serviceItem );
@@ -151,6 +148,20 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 		$this->assertFalse( $result['directdebit.accountno'] === null );
 		$this->assertTrue( $result['directdebit.bankcode'] === null );
 		$this->assertTrue( $result['directdebit.bankname'] === null );
+	}
+
+
+	public function testSetConfigFE()
+	{
+		$this->_object->setConfigFE( $this->_ordServItem, array( 'directdebit.accountno' => '123456' ) );
+
+		$attrItem = $this->_ordServItem->getAttributeItem( 'directdebit.accountno' );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attrItem );
+		$this->assertEquals( 'XXX456', $attrItem->getValue() );
+
+		$attrItem = $this->_ordServItem->getAttributeItem( 'directdebit.accountno/hidden' );
+		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Attribute_Interface', $attrItem );
+		$this->assertEquals( '123456', $attrItem->getValue() );
 	}
 
 

@@ -100,6 +100,35 @@ class MShop_Service_Provider_Payment_DirectDebit
 		return $this->_checkConfig( $this->_feConfig, $attributes );
 	}
 
+	/**
+	 * Sets the payment attributes in the given service.
+	 *
+	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
+	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
+	 */
+	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
+	{
+		parent::setConfigFE( $orderServiceItem, $attributes );
+
+		$attributeItems = $orderServiceItem->getAttributes();
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service/attribute' );
+
+		if( ( $attrItem = $orderServiceItem->getAttributeItem( 'directdebit.accountno' ) ) !== null )
+		{
+			$ordBaseAttrItem = $manager->createItem();
+			$ordBaseAttrItem->setType( $attrItem->getType() . '/hidden' );
+			$ordBaseAttrItem->setCode( $attrItem->getCode() . '/hidden' );
+			$ordBaseAttrItem->setValue( $attrItem->getValue() );
+
+			$attributeItems[] = $ordBaseAttrItem;
+
+			$value = $attrItem->getValue();
+			$attrItem->setValue( str_repeat( 'X', strlen( $value ) - 3 ) . substr( $value, -3 ) );
+		}
+
+		$orderServiceItem->setAttributes( $attributeItems );
+	}
+
 
 	/**
 	 * Tries to get an authorization or captures the money immediately for the given order if capturing the money
