@@ -88,7 +88,7 @@ class Client_Html_Email_Delivery_Default
 		 *
 		 * The name of the person or e-mail account that is used for sending all
 		 * shop related delivery e-mails to customers. This configuration option
-		 * overwrite the name set in "client/html/email/from-name".
+		 * overwrites the name set in "client/html/email/from-name".
 		 *
 		 * @param string Name shown in the e-mail
 		 * @since 2014.03
@@ -140,7 +140,9 @@ class Client_Html_Email_Delivery_Default
 		 * Recipient name displayed when the customer replies to e-mails
 		 *
 		 * The name of the person or e-mail account the customer should
-		 * reply to in case of questions or problems.
+		 * reply to in case of questions or problems. If no reply name is
+		 * configured, the name person or e-mail account set via
+		 * "client/html/email/from-name" is used.
 		 *
 		 * @param string Name shown in the e-mail
 		 * @since 2014.03
@@ -148,12 +150,13 @@ class Client_Html_Email_Delivery_Default
 		 * @see client/html/email/reply-email
 		 * @see client/html/email/delivery/reply-email
 		 * @see client/html/email/from-email
+		 * @see client/html/email/from-name
 		 * @see client/html/email/bcc-email
 		 */
 		$replyName = $view->config( 'client/html/email/reply-name', $fromName );
 
 		/** client/html/email/delivery/reply-name
-		 * Recipient name displayed when the customer replies to e-mails
+		 * Recipient name displayed when the customer replies to delivery e-mails
 		 *
 		 * The name of the person or e-mail account the customer should
 		 * reply to in case of questions or problems. This configuration option
@@ -163,6 +166,7 @@ class Client_Html_Email_Delivery_Default
 		 * @since 2014.03
 		 * @category User
 		 * @see client/html/email/delivery/reply-email
+		 * @see client/html/email/reply-name
 		 * @see client/html/email/reply-email
 		 * @see client/html/email/from-email
 		 * @see client/html/email/bcc-email
@@ -186,7 +190,7 @@ class Client_Html_Email_Delivery_Default
 		$replyEmail = $view->config( 'client/html/email/reply-email', $fromEmail );
 
 		/** client/html/email/delivery/reply-email
-		 * E-Mail address used by the customer when replying to e-mails
+		 * E-Mail address used by the customer when replying to delivery e-mails
 		 *
 		 * The e-mail address of the person or e-mail account the customer
 		 * should reply to in case of questions or problems. This configuration
@@ -208,9 +212,9 @@ class Client_Html_Email_Delivery_Default
 		/** client/html/email/bcc-email
 		 * E-Mail address all e-mails should be also sent to
 		 *
-		 * Using this option you can send a copy of all delivery and payment
-		 * related e-mails to a second e-mail account. This can be handy for
-		 * testing and checking the e-mails sent to customers.
+		 * Using this option you can send a copy of all shop related e-mails to
+		 * a second e-mail account. This can be handy for testing and checking
+		 * the e-mails sent to customers.
 		 *
 		 * It also allows shop owners with a very small volume of orders to be
 		 * notified about new orders. Be aware that this isn't useful if the

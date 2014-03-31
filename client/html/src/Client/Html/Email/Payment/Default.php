@@ -68,7 +68,7 @@ class Client_Html_Email_Payment_Default
 
 
 		/** client/html/email/from-name
-		 * @see client/html/email/payment/from-name
+		 * @see client/html/email/payment/from-email
 		 */
 		$fromName = $view->config( 'client/html/email/from-name' );
 
@@ -131,6 +131,7 @@ class Client_Html_Email_Payment_Default
 		 * @since 2014.03
 		 * @category User
 		 * @see client/html/email/payment/reply-email
+		 * @see client/html/email/reply-name
 		 * @see client/html/email/reply-email
 		 * @see client/html/email/from-email
 		 * @see client/html/email/bcc-email
