@@ -911,6 +911,7 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
+	background-color: #FFFFFF;
 	border: 1px solid #C3D9E6;
 	position: relative;
 	overflow: hidden;
@@ -1114,6 +1115,7 @@
 }
 
 .catalog-detail-additional .content {
+	list-style: none;
 	padding: 1%;
 }
 
