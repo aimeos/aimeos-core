@@ -51,5 +51,15 @@ MShop.UrlManager.prototype = {
 
     setLanguageCode : function(languageCode) {
         this.data.locale = languageCode;
+    },
+
+
+    getAbsoluteUrl : function(url) {
+
+    	if( url.substr( 0, 4 ) !== 'http' && url.substr( 0, 5 ) !== 'data:' ) {
+    		return MShop.config.baseurl.content + '/' + url;
+    	}
+    	
+    	return url;
     }
 };

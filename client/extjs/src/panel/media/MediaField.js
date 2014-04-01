@@ -21,6 +21,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     defaultAutoCreate : {tag:'input', type:'hidden'},
     handleMouseEvents: true,
     
+
     initComponent: function() {
         this.scope = this;
         this.handler = this.onFileSelect;
@@ -33,7 +34,8 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         
         MShop.panel.media.MediaField.superclass.initComponent.call(this);
         
-        this.imageSrc = this.defaultImage;
+        this.imageSrc = this.value || this.defaultImage;
+
         if(this.border === true) {
             this.width = this.width;
             this.height = this.height;
@@ -43,12 +45,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     onRender: function(ct, position) {
         MShop.panel.media.MediaField.superclass.onRender.call(this, ct, position);
         
-        // the container for the browe button
+        // the container for the browse button
         this.buttonCt = Ext.DomHelper.insertFirst(ct, '<div>&nbsp;</div>', true);
+        this.buttonCt.setSize(this.width, this.height);
         this.buttonCt.applyStyles({
             border: this.border === true ? '1px solid #B5B8C8' : '0'
         });
-        this.buttonCt.setSize(this.width, this.height);
         
         this.loadMask = new Ext.LoadMask(this.buttonCt, {
         	msg: MShop.I18n.dt( 'client/extjs', 'Loading' ),
@@ -65,7 +67,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         
         // the image container
         // NOTE: this will atm. always be the default image for the first few miliseconds
-        this.imageCt = Ext.DomHelper.insertFirst(this.buttonCt, '<img class="' + this.cls + '" src="' + MShop.config.baseurl.content + '/' + this.imageSrc + '"/>' , true);
+        this.imageCt = Ext.DomHelper.insertFirst(this.buttonCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);
         this.imageCt.setOpacity(0.2);
         this.imageCt.setStyle({
             position: 'absolute',
@@ -87,13 +89,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     },
     
     getValue: function() {
-        var value = MShop.panel.media.MediaField.superclass.getValue.call(this);
-        return value;
+        return MShop.panel.media.MediaField.superclass.getValue.call(this);
     },
     
     setValue: function(value) {
         MShop.panel.media.MediaField.superclass.setValue.call(this, value);
-        
+
         if (! value || value == this.defaultImage) {
             this.imageSrc = this.defaultImage;
         } else {
@@ -125,6 +126,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
             allowHTML5Uploads: false,
             HTML4params: { 'params' : Ext.encode( params ) }
         });
+        
         uploader.on('uploadcomplete', this.onUploadSucess, this);
         uploader.on('uploadfailure', this.onUploadFail, this);
         
@@ -135,6 +137,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
      * @private
      */
     onUploadFail: function() {
+    	
         Ext.MessageBox.alert(
        	    MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
        	    MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' ) ).setIcon( Ext.MessageBox.ERROR );
@@ -142,6 +145,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     },
     
     onUploadSucess: function(uploader, record, response) {
+    	
         for (var field in response) {
             if (field.match(/\.status|\.label|\.typeid|\.langid/) && this.itemUi.record.get(field)) {
                 continue;
@@ -155,13 +159,18 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
                 formField.setValue(response[field]);
             }
         }
+        
+        this.setValue(response[this.name]);
     },
     
     updateImage: function() {
+
         // only update when new image differs from current
         if(this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
+        	
             var ct = this.imageCt.up('div');
-            var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.config.baseurl.content + this.imageSrc + '"/>' , true);
+            var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);
+            
             // replace image after load
             img.on('load', function(){
                 this.imageCt.remove();
@@ -170,6 +179,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
                 this.imageCt.setOpacity(this.imageSrc == this.defaultImage ? 0.2 : 1);
                 this.loadMask.hide();
             }, this);
+            
             img.on('error', function() {
                 Ext.MessageBox.alert(
                		MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
