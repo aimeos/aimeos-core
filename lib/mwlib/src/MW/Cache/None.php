@@ -15,16 +15,57 @@
  * @package MW
  * @subpackage Cache
  */
-class MW_Cache_None implements MW_Cache_Interface
+class MW_Cache_None
+	extends MW_Cache_Abstract
+	implements MW_Cache_Interface
 {
 	/**
-	 * Tests if caching is available.
+	 * Removes the cache entry identified by the given key.
 	 *
-	 * @return boolean True if available, false if not
+	 * @param string $key Key string that identifies the single cache entry
 	 */
-	public function isAvailable()
+	public function delete( $key )
 	{
-		return false;
+
+	}
+
+
+	/**
+	 * Removes the cache entries identified by the given keys.
+	 *
+	 * @param array $keys List of key strings that identify the cache entries
+	 * 	that should be removed
+	 */
+	public function deleteList( array $keys )
+	{
+
+	}
+
+
+	/**
+	 * Removes the cache entries identified by the given tags.
+	 *
+	 * @param array $tags List of tag strings that are associated to one or more
+	 * 	cache entries that should be removed
+	 */
+	public function deleteByTags( array $tags )
+	{
+
+	}
+
+
+	/**
+	 * Removes all entries from the cache so it's completely empty.
+	 *
+	 * This method deletes all cached entries from the cache server the client
+	 * has access to. This method is primarily usefull to provide a clean start
+	 * before new entries are added to the cache and you don't know which
+	 * entries are still in the cache.
+	 *
+	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 */
+	public function flush()
+	{
 	}
 
 
@@ -42,12 +83,58 @@ class MW_Cache_None implements MW_Cache_Interface
 
 
 	/**
+	 * Returns the cached values for the given cache keys.
+	 *
+	 * @param array $keys List of key strings for the requested cache entries
+	 * @return array Associative list of key/value pairs for the requested cache
+	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
+	 * 	will be in the result list
+	 */
+	public function getList( array $keys )
+	{
+
+	}
+
+
+	/**
+	 * Returns the cached keys and values associated to the given tags.
+	 *
+	 * @param array $tags List of tag strings associated to the requested cache entries
+	 * @return array Associative list of key/value pairs for the requested cache
+	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
+	 * 	for that tag
+	 */
+	public function getListByTags( array $tags )
+	{
+
+	}
+
+
+	/**
 	 * Sets the value for the specified key.
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
 	 * @param mixed $value Value that should be associated with the given path
 	 */
-	public function set( $name, $value )
+	public function set( $name, $value, array $tags = array(), $expire = null )
 	{
+	}
+
+
+	/**
+	 * Adds the given key/value pairs to the cache.
+	 *
+	 * @inheritDoc
+	 *
+	 * @param array $pairs Associative list of key/value pairs. Both must be
+	 * 	a string
+	 * @param array $expires Associative list of key/datetime pairs.
+	 * @param array $tags Associative list of key/tag or key/tags pairs that should be
+	 * 	associated to the values identified by their key. The value associated
+	 * 	to the key can either be a tag string or an array of tag strings
+	 */
+	public function setList( array $pairs, array $tags = array(), array $expires = array() )
+	{
+
 	}
 }
