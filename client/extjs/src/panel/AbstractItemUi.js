@@ -32,12 +32,12 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	mainForm: null,
 
     /**
-     * Set 90% height of viewport size
+     * Viewport height
      */
     height : null,
     
     /**
-     * Set 80% width of viewport size
+     * Viewport width
      */
     width : null,
     

@@ -132,7 +132,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 				},{
 					xtype: 'MShop.panel.product.stock.listuismall',
 					layout: 'fit',
-					flex: 2
+					flex: 1
 				} ]
 			} ]
 		} ];
