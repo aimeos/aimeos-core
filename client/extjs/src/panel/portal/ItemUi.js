@@ -10,13 +10,8 @@ Ext.ns('MShop.panel.portal');
  * @todo this class is misnamed, it's actually not a itemUi'
  */
 MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	idProperty : 'id',
 
-	
 	initComponent : function() {
 
 		this.title = MShop.I18n.dt( 'client/extjs', 'Overview' );

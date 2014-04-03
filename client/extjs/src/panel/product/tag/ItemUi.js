@@ -7,10 +7,6 @@
 Ext.ns('MShop.panel.product.tag');
 
 MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'product.tag.siteid',
 
 	

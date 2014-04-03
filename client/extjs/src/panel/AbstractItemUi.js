@@ -31,6 +31,21 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 */
 	mainForm: null,
 
+    /**
+     * Viewport height
+     */
+    height : null,
+    
+    /**
+     * Viewport width
+     */
+    width : null,
+    
+    /**
+     * Disable drag and drop of modal window
+     */
+    draggable : true,
+
 	/**
 	 * Action from listUi
 	 * default is "add": creating new entry as phantom
@@ -42,7 +57,11 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 */
 	isSaveing: false,
 
-	maximized : true,
+    /**
+     * Start window maximized if screen is smaller than 800px
+     */
+    maximized : null,
+
 	layout: 'fit',
 	modal: true,
 	
@@ -84,6 +103,10 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		if (this.action == 'copy') {
 			this.items[0].deferredRender = false;
 		}
+
+		this.height = Ext.getBody().getViewSize().height * 0.95;
+		this.width = Ext.getBody().getViewSize().width * 0.80;
+		this.maximized = this.width <= 800 ? true : false;
 
 		MShop.panel.AbstractItemUi.superclass.initComponent.call(this);
 	},

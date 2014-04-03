@@ -7,12 +7,6 @@
 Ext.ns('MShop.panel.job');
 
 MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
-
-
 	initComponent : function() {
 
 		this.title = MShop.I18n.dt( 'client/extjs', 'Job item details' );

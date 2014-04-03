@@ -142,6 +142,9 @@
 			"text": "AbstractItemUi.js",
 			"path": "src/panel/"
 		}, {
+			"text": "AbstractTypeItemUi.js",
+			"path": "src/panel/type/"
+		}, {
 			"text": "AbstractListItemUi.js",
 			"path": "src/panel/"
 		}, {
@@ -422,46 +425,46 @@
 			"path": "src/panel/locale/site/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/attribute/"
+			"path": "src/panel/attribute/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/attribute/"
+			"path": "src/panel/attribute/type/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/media/"
+			"path": "src/panel/media/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/media/"
+			"path": "src/panel/media/type/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/plugin/"
+			"path": "src/panel/plugin/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/plugin/"
+			"path": "src/panel/plugin/type/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/price/"
+			"path": "src/panel/price/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/price/"
+			"path": "src/panel/price/type/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/product/"
+			"path": "src/panel/product/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/product/"
+			"path": "src/panel/product/type/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/service/"
+			"path": "src/panel/service/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/service/"
+			"path": "src/panel/service/type/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/type/text/"
+			"path": "src/panel/text/type/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/type/text/"
+			"path": "src/panel/text/type/"
 		}, {
 			"text": "TabUi.js",
 			"path": "src/panel/type/"

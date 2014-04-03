@@ -7,12 +7,7 @@
 Ext.ns('MShop.panel.text');
 
 MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'text.siteid',
-
 
 	initComponent : function() {
 		
