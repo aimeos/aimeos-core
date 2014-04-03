@@ -96,10 +96,19 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							allowBlank : false,
 							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
+							xtype : 'textfield',
+							name : 'media.preview',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Preview URL' )
+						}, {
+							xtype : 'textfield',
+							name : 'media.url',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'File URL' )
+						}, {
 							// NOTE: this is not used as a field, more like a
 							// component which works on the whole record
 							xtype : 'MShop.panel.media.mediafield',
 							name : 'media.preview',
+							value : this.record.get('media.preview'),
 							width : 360,
 							height : 280
 						}, {
