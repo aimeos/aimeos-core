@@ -81,7 +81,25 @@ abstract class Client_Html_Catalog_Abstract
 		$text = (string) $view->param( 'f-search-text' );
 		$catid = (string) $view->param( 'f-catalog-id' );
 
-		if( $catid == '' && $catfilter === true ) {
+		if( $catid == '' && $catfilter === true )
+		{
+			/** client/html/catalog/list/catid-default
+			 * The default category ID used if none is given as parameter
+			 *
+			 * If users view a product list page without a category ID in the
+			 * parameter list, the first found products are displayed with a
+			 * random order. You can circumvent this by configuring a default
+			 * category ID that should be used in this case (the ID of the root
+			 * category is best for this). In most cases you can set this value
+			 * via the administration interface of the shop application.
+			 *
+			 * @param string Category ID
+			 * @since 2014.03
+			 * @category User
+			 * @category Developer
+			 * @see client/html/catalog/list/size
+			 * @see client/html/catalog/list/domains
+			 */
 			$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
 		}
 
@@ -155,6 +173,26 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _getProductListSize( MW_View_Interface $view )
 	{
+		/** client/html/catalog/list/size
+		 * The number of products shown in a list page
+		 *
+		 * Limits the number of products that is shown in the list pages to the
+		 * given value. If more products are available, the products are split
+		 * into bunches which will be shown on their own list page. The user is
+		 * able to move to the next page (or previous one if it's not the first)
+		 * to display the next (or previous) products.
+		 *
+		 * The value must be an integer number from 1 to 100. Negative values as
+		 * well as values above 100 are not allowed. The value can be overwritten
+		 * per request if the "l-size" parameter is part of the URL.
+		 *
+		 * @param integer Number of products
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see client/html/catalog/list/catid-default
+		 * @see client/html/catalog/list/domains
+		 */
 		$defaultSize = $this->_getContext()->getConfig()->get( 'client/html/catalog/list/size', 48 );
 
 		$size = (int) $view->param( 'l-size', $defaultSize );
@@ -191,7 +229,57 @@ abstract class Client_Html_Catalog_Abstract
 	protected function _searchProducts( MW_View_Interface $view )
 	{
 		$context = $this->_getContext();
-		$domains = $context->getConfig()->get( 'client/html/catalog/domains', array( 'media', 'price', 'text' ) );
+		$config = $context->getConfig();
+
+		/** client/html/catalog/domains
+		 * A list of domain names whose items should be available in the catalog view templates
+		 *
+		 * The templates rendering catalog related data usually add the images and
+		 * texts associated to each item. If you want to display additional
+		 * content like the attributes, you can configure your own list of
+		 * domains (attribute, media, price, product, text, etc. are domains)
+		 * whose items are fetched from the storage. Please keep in mind that
+		 * the more domains you add to the configuration, the more time is required
+		 * for fetching the content!
+		 *
+		 * This configuration option can be overwritten by the "client/html/catalog/list/domains"
+		 * configuration option that allows to configure the domain names of the
+		 * items fetched specifically for all types of product listings.
+		 *
+		 * @param array List of domain names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see client/html/catalog/list/domains
+		 * @see client/html/catalog/list/catid-default
+		 * @see client/html/catalog/list/size
+		 */
+		$domains = $config->get( 'client/html/catalog/domains', array( 'media', 'price', 'text' ) );
+
+		/** client/html/catalog/list/domains
+		 * A list of domain names whose items should be available in the product list view template
+		 *
+		 * The templates rendering product lists usually add the images, prices
+		 * and texts associated to each product item. If you want to display additional
+		 * content like the product attributes, you can configure your own list of
+		 * domains (attribute, media, price, product, text, etc. are domains)
+		 * whose items are fetched from the storage. Please keep in mind that
+		 * the more domains you add to the configuration, the more time is required
+		 * for fetching the content!
+		 *
+		 * This configuration option overwrites the "client/html/catalog/domains"
+		 * option that allows to configure the domain names of the items fetched
+		 * for all catalog related data.
+		 *
+		 * @param array List of domain names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see client/html/catalog/domains
+		 * @see client/html/catalog/detail/domains
+		 * @see client/html/catalog/stage/domains
+		 * @see client/html/catalog/list/catid-default
+		 * @see client/html/catalog/list/size
+		 */
+		$domains = $config->get( 'client/html/catalog/list/domains', $domains );
 
 		$productFilter = $this->_getProductListFilter( $view );
 		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
