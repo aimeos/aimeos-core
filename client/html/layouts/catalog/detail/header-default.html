@@ -6,6 +6,22 @@
  */
 
 $enc = $this->encoder();
+
+/** client/html/common/template/baseurl
+ * Path to the template directory or template base URL to a server
+ *
+ * This option must point to the base path or URL of the used template. This
+ * directory must contain a "css/, "js/" and "images/" subdirectory with the
+ * necessary files referenced in the HTML code.
+ *
+ * If you use an absolute URL prefer the https protocol to avoid issues with mixed
+ * content. Browsers avoid to load files via http if the page was retrieved via
+ * https. 
+ *  
+ * @param string Relative path or absolute URL
+ * @since 2014.03
+ * @see client/html/common/content/baseurl
+ */
 $templateUrl = $this->config( 'client/html/common/template/baseurl' );
 
 ?>

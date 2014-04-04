@@ -12,6 +12,33 @@ $stockProductIds = $this->get( 'stockProductIds', array() );
 $stockItemsByProducts = $this->get( 'stockItemsByProducts', array() );
 $warehouseItems = $this->get( 'stockWarehouseItems', array() );
 
+/** client/html/catalog/stock/level/low
+ * The number of products in stock below it's considered a low stock level
+ *
+ * There are four stock levels available:
+ * * unlimited
+ * * high
+ * * low
+ * * out
+ *
+ * If no stock information is available, the number of products is considered
+ * unlimited, which is useful for digital products. Zero or less products in
+ * stock means out of stock while a quantity of products above the option value
+ * represents a high stock value.
+ *
+ * There can be the case that a stock level is sometimes negative even if only
+ * products that are in stock can be bought. This is due to the time difference
+ * the product is actually ordered and the stock level is decreased. If you've
+ * configured the stock level update every minute, within this minute another
+ * customer can buy the same product that is considered to be still in stock at
+ * this time. 
+ * 
+ * @param integer Number of products in stock
+ * @since 2014.03
+ * @category User
+ * @category Developer
+ * @see client/html/catalog/stock/sort
+ */
 $stockLow = $this->config( 'client/html/catalog/stock/level/low', 5 );
 
 /// Stock string composition with warehouse name (%1$s, normally left out) and stock level string (%2$s)
