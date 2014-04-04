@@ -43,6 +43,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 						style: 'padding-right: 25px;',
 						border : false,
 						flex : 1,
+						autoScroll : true,
 						labelAlign : 'top',
 						defaults : {
 							readOnly : this.fieldsReadOnly,
