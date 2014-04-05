@@ -30,15 +30,26 @@ class MW_Media_Factory
 	 */
 	public static function get( $filename, array $options = array() )
 	{
-		$value = 0;
-		$msg = array();
-		$cmd = ( isset( $options['file'] ) ? $options['file'] : 'file -b --mime-type %1$s' );
-
-		$cmdline = sprintf( $cmd, escapeshellarg( $filename ) );
-		$mimetype = exec( $cmdline, $msg, $value );
-
-		if( $value != 0 ) {
-			throw new MW_Media_Exception( sprintf( 'Error executing "%1$s": %2$s', $cmdline, print_r( $msg, true ) ) );
+		if( class_exists( 'finfo' ) )
+		{
+			try
+			{
+				$finfo = new finfo( FILEINFO_MIME_TYPE );
+				$mimetype = $finfo->file( $filename );
+			}
+			catch( Exception $e )
+			{
+				throw new MW_Media_Exception( $e->getMessage() );
+			}
+		}
+		else if( function_exists( 'mime_content_type' ) )
+		{
+			$mimetype = mime_content_type( $filename );
+		}
+		else
+		{
+			$msg = sprintf( 'No method for retrieving the mime type available: %1$s', 'finfo, mime_content_type' );
+			throw new MW_Media_Exception( $msg );
 		}
 
 		$mimeparts = explode( '/', $mimetype );
