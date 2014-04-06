@@ -136,11 +136,18 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     /**
      * @private
      */
-    onUploadFail: function() {
+    onUploadFail: function( uploader, response ) {
+
+    	var msg, code;
+        var title = MShop.I18n.dt( 'client/extjs', 'Upload failed' );
+        var errmsg = MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' );
     	
-        Ext.MessageBox.alert(
-       	    MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
-       	    MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' ) ).setIcon( Ext.MessageBox.ERROR );
+        if( response && response.data && response.data.error ) {
+            msg = response.data.error.message ? response.data.error.message : errmsg;
+            code = response.data.error.code ? response.data.error.code : 0;
+        }
+        
+        Ext.Msg.alert( title + ' (' + code + ')', msg ).setIcon( Ext.MessageBox.ERROR );
         this.loadMask.hide();
     },
     
@@ -166,7 +173,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     updateImage: function() {
 
         // only update when new image differs from current
-        if(this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
+        if(this.imageSrc != '' && this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
         	
             var ct = this.imageCt.up('div');
             var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);

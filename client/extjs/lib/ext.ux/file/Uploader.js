@@ -272,6 +272,10 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
     onUploadFail: function(response, options, fileRecord) {
         fileRecord.set('status', 'failure');
         
+        if( response.error ) {
+        	fileRecord.set('error', response.error);
+        }
+        
         this.fireEvent('uploadfailure', this, fileRecord);
     },
     
