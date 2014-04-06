@@ -110,7 +110,7 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							name : 'media.preview',
 							value : ( this.record ? this.record.get('media.preview') : '' ),
 							width : 360,
-							height : 280
+							height : 360
 						}, {
 							xtype : 'displayfield',
 							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
