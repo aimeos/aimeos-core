@@ -121,17 +121,32 @@ class Controller_ExtJS_JsonRpc
 	 */
 	public function process( array $reqparams, $inputstream )
 	{
-		if( isset( $reqparams['method'] ) )
+		try
 		{
-			if( !isset( $reqparams['params'] ) || ( $params = json_decode( $reqparams['params'] ) ) === null ) {
-				throw new Controller_ExtJS_Exception( 'Required parameters are missing or not JSON encoded' );
-			}
+			if( isset( $reqparams['method'] ) )
+			{
+				if( !isset( $reqparams['params'] ) || ( $params = json_decode( $reqparams['params'] ) ) === null ) {
+					throw new Controller_ExtJS_Exception( 'Required parameters are missing or not JSON encoded' );
+				}
 
-			if( ( $result = $this->_callMethod( $reqparams['method'], $params ) ) !== null ) {
-				return json_encode( $result );
-			}
+				if( ( $result = $this->_callMethod( $reqparams['method'], $params ) ) !== null ) {
+					return json_encode( $result );
+				}
 
-			return;
+				return;
+			}
+		}
+		catch( Exception $e )
+		{
+			$response = array(
+				'error' => array(
+					'code' => ( $e->getCode() != 0 ? $e->getCode() : -1 ),
+					'message' => $e->getMessage(),
+				),
+				'status' => 'failure'
+			);
+
+			return json_encode( $response );
 		}
 
 
@@ -173,7 +188,7 @@ class Controller_ExtJS_JsonRpc
 				'error' => array(
 					'code' => ( $e->getCode() != 0 ? $e->getCode() : -1 ),
 					'message' => $e->getMessage(),
-			),
+				),
 				'id' => null,
 			);
 		}

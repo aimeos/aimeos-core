@@ -141,8 +141,10 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 			'method' => 'Product.searchItems',
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		self::$_object->process( $params, '' );
+		$result = self::$_object->process( $params, '' );
+		$object = json_decode( $result );
+
+		$this->assertObjectHasAttribute( 'error', $object );
 	}
 
 
@@ -153,8 +155,10 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 			'params' => '',
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		self::$_object->process( $params, '' );
+		$result = self::$_object->process( $params, '' );
+		$object = json_decode( $result );
+
+		$this->assertObjectHasAttribute( 'error', $object );
 	}
 
 
@@ -165,8 +169,10 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 			'params' => '{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}',
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		self::$_object->process( $params, '' );
+		$result = self::$_object->process( $params, '' );
+		$object = json_decode( $result );
+
+		$this->assertObjectHasAttribute( 'error', $object );
 	}
 
 
@@ -177,8 +183,10 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 			'params' => '{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}',
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		self::$_object->process( $params, '' );
+		$result = self::$_object->process( $params, '' );
+		$object = json_decode( $result );
+
+		$this->assertObjectHasAttribute( 'error', $object );
 	}
 
 
@@ -189,8 +197,10 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 			'params' => '{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}',
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		self::$_object->process( $params, '' );
+		$result = self::$_object->process( $params, '' );
+		$object = json_decode( $result );
+
+		$this->assertObjectHasAttribute( 'error', $object );
 	}
 
 
@@ -207,8 +217,10 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 			'params' => '{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}',
 		);
 
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		self::$_object->process( $params, '' );
+		$result = self::$_object->process( $params, '' );
+		$object = json_decode( $result );
+
+		$this->assertObjectHasAttribute( 'error', $object );
 	}
 
 

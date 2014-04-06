@@ -104,7 +104,7 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							// component which works on the whole record
 							xtype : 'MShop.panel.media.mediafield',
 							name : 'media.preview',
-							value : this.record.get('media.preview'),
+							value : ( this.record ? this.record.get('media.preview') : '' ),
 							width : 360,
 							height : 280
 						}, {

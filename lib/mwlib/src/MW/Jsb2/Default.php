@@ -35,7 +35,7 @@ class MW_Jsb2_Default
 		$manifest = $this->_getManifest( $filename );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$this->_baseURL = rtrim( $baseURL, $ds ) . $ds;
+		$this->_baseURL = rtrim( $baseURL, '/' ) . '/';
 		$this->_basePath = dirname( $filename ) . $ds;
 		$this->_deployDir = $manifest->deployDir . $ds;
 
