@@ -406,7 +406,7 @@ class Controller_ExtJS_Media_Default
 			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 		}
 
-		return $filepath . $ds . $filename . $fileext;
+		return "${mediadir}/${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
 	}
 
 
@@ -441,6 +441,6 @@ class Controller_ExtJS_Media_Default
 			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 		}
 
-		return $filepath . $ds . $filename . $fileext;
+		return "${mediadir}/files/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
 	}
 }
