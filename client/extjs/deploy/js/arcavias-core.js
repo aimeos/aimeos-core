@@ -412,7 +412,7 @@ Ext.onReady(function() {
         items: [{
             layout: 'fit',
             border: false,
-            tbar: ['->', {xtype: 'MShop.elements.site.combo'}],
+            tbar: ['->', MShop.i18n.available ? {xtype: 'MShop.elements.siteLanguage.combo'} : {}, ' ', {xtype: 'MShop.elements.site.combo'}],
             items: [{
                 xtype: 'tabpanel',
                 border: false,
@@ -2380,6 +2380,10 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
     onUploadFail: function(response, options, fileRecord) {
         fileRecord.set('status', 'failure');
         
+        if( response.error ) {
+        	fileRecord.set('error', response.error);
+        }
+        
         this.fireEvent('uploadfailure', this, fileRecord);
     },
     
@@ -2617,45 +2621,65 @@ Ext.reg('MShop.elements.pagingtoolbar', MShop.elements.PagingToolbar);
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-
 Ext.ns('MShop');
 
-MShop.UrlManager = function( href ) {
-		this.href = href || null;
-		this.tmpl = new Ext.Template( MShop.config.urlTemplate );
-		this.data = {
-			site: MShop.config.site['locale.site.code'],
-			tab : MShop.config.activeTab
-		};
+MShop.UrlManager = function(href) {
+    this.href = href || null;
+    this.tmpl = new Ext.Template(MShop.config.urlTemplate);
+    this.data = {
+        site : MShop.config.site['locale.site.code'],
+        locale : MShop.i18n.locale,
+        tab : MShop.config.activeTab
+    };
 };
 
 MShop.UrlManager.prototype = {
-		redirect: function( config )
-		{
-			if( typeof config == 'object' )
-			{
-				if( config.hasOwnProperty( 'site' ) ) {
-					this.setSiteCode( config.site );
-				}
+    redirect : function(config) {
+        if ( typeof config == 'object') {
+            if (config.hasOwnProperty('site')) {
+                this.setSiteCode(config.site);
+            }
 
-				if( config.hasOwnProperty( 'tab' ) ) {
-					this.setActiveTab( config.tab );
-				}
-			}
-			window.location.href = this.tmpl.apply( this.data );
-		},
+            if (MShop.i18n.hasOwnProperty('locale')) {
+                this.setLanguageCode(config.locale);
+            }
 
-		setActiveTab: function( value ) {
-			this.data.tab = parseInt( value, 10 );
-		},
+            if (config.hasOwnProperty('tab')) {
+                this.setActiveTab(config.tab);
+            }
+        }
+        window.location.href = this.tmpl.apply(this.data);
+    },
 
-		getActiveTab: function() {
-			return this.data.tab;
-		},
+    setActiveTab : function(value) {
+        this.data.tab = parseInt(value, 10);
+    },
 
-		setSiteCode: function( siteCode ) {
-			this.data.site = siteCode;
-		}
+    getActiveTab : function() {
+        return this.data.tab;
+    },
+
+    getLanguageCode : function() {
+        return this.data.locale;
+    },
+
+    setSiteCode : function(siteCode) {
+        this.data.site = siteCode;
+    },
+
+    setLanguageCode : function(languageCode) {
+        this.data.locale = languageCode;
+    },
+
+
+    getAbsoluteUrl : function(url) {
+
+    	if( url.substr( 0, 4 ) !== 'http' && url.substr( 0, 5 ) !== 'data:' ) {
+    		return MShop.config.baseurl.content + '/' + url;
+    	}
+    	
+    	return url;
+    }
 };
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
@@ -2698,7 +2722,7 @@ Ext.extend(MShop.elements.site.ComboBox, Ext.form.ComboBox, {
 
 		new Ext.LoadMask( Ext.getBody(), { msg: MShop.I18n.dt( 'client/extjs', 'Switching site ...' ) } ).show();
 
-		MShop.urlManager.redirect( { site: siteCode, tab : domainTabIdx } );
+		MShop.urlManager.redirect( { site: siteCode, tab : domainTabIdx, locale: MShop.urlManager.getLanguageCode() || null } );
 	}
 });
 
@@ -2727,6 +2751,79 @@ MShop.elements.site.getStore = function() {
 
 //preload
 Ext.onReady(function() { MShop.elements.site.getStore().load(); });
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/en/license
+ */
+
+Ext.ns('MShop.elements.siteLanguage');
+
+MShop.elements.siteLanguage.ComboBox = function(config) {
+    Ext.applyIf(config, {
+        fieldLabel : MShop.I18n.dt('client/extjs', 'Language'),
+        anchor : '100%',
+        store : MShop.elements.siteLanguage.getStore(),
+        mode : 'local',
+        displayField : 'label',
+        valueField : 'label',
+        triggerAction : 'all',
+        emptyText : MShop.I18n.dt('client/extjs', 'Language')
+    });
+
+    MShop.elements.siteLanguage.ComboBox.superclass.constructor.call(this, config);
+};
+
+Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
+
+    initComponent : function() {
+        this.store = MShop.elements.siteLanguage.getStore();
+        this.on('select', this.onSiteLanguageSelect, this);
+
+        var index;
+        if ( ( index = this.store.findExact('id', MShop.urlManager.getLanguageCode() ) ) >= 0 ) {
+            this.setValue( this.store.getAt(index).get('label') );
+        } else {
+            this.setValue( this.store.getAt( this.store.findExact('id', 'en') ).get('label') );
+        }
+
+        MShop.elements.siteLanguage.ComboBox.superclass.initComponent.call(this);
+    },
+
+    onSiteLanguageSelect : function(ComboBox, language) {
+        var mainTabPanel = Ext.getCmp('MShop.MainTabPanel');
+        var activeTabPanel = mainTabPanel.getActiveTab();
+        var domainTabIdx = mainTabPanel.items.indexOf(activeTabPanel);
+        var languageCode = language ? language.get('id') : 'en';
+
+        new Ext.LoadMask(Ext.getBody(), {
+            msg : MShop.I18n.dt('client/extjs', 'Switching language ...')
+        }).show();
+
+        MShop.urlManager.redirect({
+            locale : languageCode,
+            tab : domainTabIdx,
+            site : MShop.urlManager.data.site
+        });
+    }
+});
+
+Ext.reg('MShop.elements.siteLanguage.combo', MShop.elements.siteLanguage.ComboBox);
+
+/**
+ * @static
+ *
+ * @return {Ext.data.DirectStore}
+ */
+MShop.elements.siteLanguage.getStore = function() {
+    if (!MShop.elements.siteLanguage.store) {
+        MShop.elements.siteLanguage.store = new Ext.data.JsonStore({
+            fields : ['id', 'label'],
+            data : MShop.i18n.available
+        });
+    }
+
+    return MShop.elements.siteLanguage.store;
+};
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
@@ -3026,19 +3123,6 @@ Ext.extend(MShop.elements.domain.ComboBox, Ext.form.ComboBox);
 Ext.reg('MShop.elements.domain.combo', MShop.elements.domain.ComboBox);
 
 
-MShop.elements.domain.renderer = function(id, metaData, record, rowIndex, colIndex, store) {
-
-    var value = MShop.elements.domain.getStore().getById(id);
-
-    if( value ) {
-    	metaData.css = 'text_type_' + value.get('value');
-    	return label;
-    }
-
-    return value;
-};
-
-
 /**
  * @static
  * 
@@ -3069,7 +3153,7 @@ MShop.elements.domain.getStore = function() {
         });
     }
     
-    return MShop.elements.language._store;
+    return MShop.elements.domain._store;
 };
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
@@ -3499,6 +3583,21 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 */
 	mainForm: null,
 
+    /**
+     * Viewport height
+     */
+    height : null,
+    
+    /**
+     * Viewport width
+     */
+    width : null,
+    
+    /**
+     * Disable drag and drop of modal window
+     */
+    draggable : true,
+
 	/**
 	 * Action from listUi
 	 * default is "add": creating new entry as phantom
@@ -3510,7 +3609,11 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 	 */
 	isSaveing: false,
 
-	maximized : true,
+    /**
+     * Start window maximized if screen is smaller than 800px
+     */
+    maximized : null,
+
 	layout: 'fit',
 	modal: true,
 	
@@ -3552,6 +3655,10 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		if (this.action == 'copy') {
 			this.items[0].deferredRender = false;
 		}
+
+		this.height = Ext.getBody().getViewSize().height * 0.95;
+		this.width = Ext.getBody().getViewSize().width * 0.80;
+		this.maximized = this.width <= 800 ? true : false;
 
 		MShop.panel.AbstractItemUi.superclass.initComponent.call(this);
 	},
@@ -3723,6 +3830,105 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 
 // NOTE: we need to register this abstract class so getByXtype can find decedents
 Ext.reg('MShop.panel.abstractitemui', MShop.panel.AbstractItemUi);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ * @author Michael Spahn <m.spahn@metaways.de>
+ */
+
+Ext.ns('MShop.panel');
+
+MShop.panel.AbstractTypeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
+   /**
+    * Domain to configure fields
+    * 
+    * E.g. attribute.type
+    */
+    typeDomain : null,
+
+    initComponent : function() {
+        MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
+        this.items = [{
+            xtype : 'tabpanel',
+            activeTab : 0,
+            border : false,
+            itemId : 'MShop.panel.' + this.typeDomain + '.ItemUi',
+            plugins : ['ux.itemregistry'],
+            items : [{
+                xtype : 'panel',
+                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                border : false,
+                layout : 'hbox',
+                layoutConfig : {
+                    align : 'stretch'
+                },
+                itemId : 'MShop.panel.' + this.typeDomain + '.ItemUi.BasicPanel',
+                plugins : ['ux.itemregistry'],
+                defaults : {
+                    bodyCssClass : this.readOnlyClass
+                },
+                items : [{
+                    xtype : 'form',
+                    flex : 1,
+                    ref : '../../mainForm',
+                    autoScroll : true,
+                    items : [{
+                        xtype : 'fieldset',
+                        style : 'padding-right: 25px;',
+                        border : false,
+                        labelAlign : 'top',
+                        defaults : {
+                            anchor : '100%',
+                            readOnly : this.fieldsReadOnly
+                        },
+                        items : [{
+                            xtype : 'displayfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            name : this.typeDomain + '.id'
+                        }, {
+                            xtype : 'MShop.elements.status.combo',
+                            name : this.typeDomain + '.status',
+                            allowBlank : false
+                        }, {
+                            xtype : 'MShop.elements.domain.combo',
+                            name : this.typeDomain + '.domain',
+                            allowBlank : false
+                        }, {
+                            xtype : 'textfield',
+                            name : this.typeDomain + '.code',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            allowBlank : false,
+                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                        }, {
+                            xtype : 'textfield',
+                            name : this.typeDomain + '.label',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            allowBlank : false,
+                            maxLength : 255,
+                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                        }, {
+                            xtype : 'displayfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            name : this.typeDomain + '.ctime'
+                        }, {
+                            xtype : 'displayfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            name : this.typeDomain + '.mtime'
+                        }, {
+                            xtype : 'displayfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            name : this.typeDomain + '.editor'
+                        }]
+                    }]
+                }]
+            }]
+        }];
+
+       MShop.panel.AbstractTypeItemUi.superclass.initComponent.call(this);
+    }
+});
+
+Ext.reg('MShop.panel.abstracttypeitemui', MShop.panel.AbstractTypeItemUi);
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2014
  * LGPLv3, http://www.arcavias.com/en/license
@@ -4147,8 +4353,6 @@ Ext.ns('MShop.panel');
 
 MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
-	layout : 'fit',
-	modal : true,
 	getAdditionalFields : Ext.emptyFn,
 
 
@@ -5266,12 +5470,7 @@ Ext.reg('MShop.panel.price.listuismall', MShop.panel.price.ListUiSmall);
 Ext.ns('MShop.panel.price');
 
 MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'price.siteid',
-
 
 	initComponent : function() {
 
@@ -6261,12 +6460,7 @@ Ext.reg('MShop.panel.text.listuismall', MShop.panel.text.ListUiSmall);
 Ext.ns('MShop.panel.text');
 
 MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'text.siteid',
-
 
 	initComponent : function() {
 		
@@ -6302,6 +6496,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 						style: 'padding-right: 25px;',
 						border : false,
 						flex : 1,
+						autoScroll : true,
 						labelAlign : 'top',
 						defaults : {
 							readOnly : this.fieldsReadOnly,
@@ -6631,7 +6826,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	},
 
 	previewRenderer : function(preview) {
-		return '<img class="arcavias-admin-media-list-preview" src="' + MShop.config.baseurl.content + '/' + preview + '" />';
+		return '<img class="arcavias-admin-media-list-preview" src="' + MShop.urlManager.getAbsoluteUrl( preview ) + '" />';
 	}
 });
 
@@ -6645,10 +6840,6 @@ Ext.reg('MShop.panel.media.listuismall', MShop.panel.media.ListUiSmall);
 Ext.ns('MShop.panel.media');
 
 MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'media.siteid',
 
 	initComponent : function() {
@@ -6734,12 +6925,21 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							allowBlank : false,
 							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
+							xtype : 'textfield',
+							name : 'media.preview',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Preview URL' )
+						}, {
+							xtype : 'textfield',
+							name : 'media.url',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'File URL' )
+						}, {
 							// NOTE: this is not used as a field, more like a
 							// component which works on the whole record
 							xtype : 'MShop.panel.media.mediafield',
 							name : 'media.preview',
+							value : ( this.record ? this.record.get('media.preview') : '' ),
 							width : 360,
-							height : 280
+							height : 360
 						}, {
 							xtype : 'displayfield',
 							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
@@ -6867,7 +7067,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 
 	refPreviewRenderer : function(refId, metaData, record, rowIndex, colIndex, store) {
 		var refItem = this.getRefStore().getById(refId);
-		return (refItem ? '<img class="arcavias-admin-media-list-preview" src="' + MShop.config.baseurl.content + '/' + refItem.get('media.preview') + '" />' : '');
+		return (refItem ? '<img class="arcavias-admin-media-list-preview" src="' + MShop.urlManager.getAbsoluteUrl( refItem.get('media.preview') ) + '" />' : '');
 	}
 });
 
@@ -6944,13 +7144,14 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     /**
      * @cfg {String}
      */
-    defaultImage: '',
+    defaultImage: 'mimeicons/unknown.png',
     
     cls: 'arcavias-admin-media-item-preview',
     
     defaultAutoCreate : {tag:'input', type:'hidden'},
     handleMouseEvents: true,
     
+
     initComponent: function() {
         this.scope = this;
         this.handler = this.onFileSelect;
@@ -6963,7 +7164,8 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         
         MShop.panel.media.MediaField.superclass.initComponent.call(this);
         
-        this.imageSrc = this.defaultImage;
+        this.imageSrc = this.value || this.defaultImage;
+
         if(this.border === true) {
             this.width = this.width;
             this.height = this.height;
@@ -6973,12 +7175,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     onRender: function(ct, position) {
         MShop.panel.media.MediaField.superclass.onRender.call(this, ct, position);
         
-        // the container for the browe button
+        // the container for the browse button
         this.buttonCt = Ext.DomHelper.insertFirst(ct, '<div>&nbsp;</div>', true);
+        this.buttonCt.setSize(this.width, this.height);
         this.buttonCt.applyStyles({
             border: this.border === true ? '1px solid #B5B8C8' : '0'
         });
-        this.buttonCt.setSize(this.width, this.height);
         
         this.loadMask = new Ext.LoadMask(this.buttonCt, {
         	msg: MShop.I18n.dt( 'client/extjs', 'Loading' ),
@@ -6995,11 +7197,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         
         // the image container
         // NOTE: this will atm. always be the default image for the first few miliseconds
-        this.imageCt = Ext.DomHelper.insertFirst(this.buttonCt, '<img class="' + this.cls + '" src="' + MShop.config.baseurl.content + '/' + this.imageSrc + '"/>' , true);
+        this.imageCt = Ext.DomHelper.insertFirst(this.buttonCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);
         this.imageCt.setOpacity(0.2);
         this.imageCt.setStyle({
-            position: 'absolute',
-            top: '18px'
+            top: ((this.height - this.imageCt.getHeight()) / 2) + 'px',
+            left: ((this.width - this.imageCt.getWidth()) / 2) + 'px',
+            position: 'absolute'
         });
         
         Ext.apply(this.browsePlugin, {
@@ -7017,13 +7220,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     },
     
     getValue: function() {
-        var value = MShop.panel.media.MediaField.superclass.getValue.call(this);
-        return value;
+        return MShop.panel.media.MediaField.superclass.getValue.call(this);
     },
     
     setValue: function(value) {
         MShop.panel.media.MediaField.superclass.setValue.call(this, value);
-        
+
         if (! value || value == this.defaultImage) {
             this.imageSrc = this.defaultImage;
         } else {
@@ -7055,6 +7257,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
             allowHTML5Uploads: false,
             HTML4params: { 'params' : Ext.encode( params ) }
         });
+        
         uploader.on('uploadcomplete', this.onUploadSucess, this);
         uploader.on('uploadfailure', this.onUploadFail, this);
         
@@ -7064,14 +7267,23 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     /**
      * @private
      */
-    onUploadFail: function() {
-        Ext.MessageBox.alert(
-       	    MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
-       	    MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' ) ).setIcon( Ext.MessageBox.ERROR );
+    onUploadFail: function( uploader, response ) {
+
+    	var msg, code;
+        var title = MShop.I18n.dt( 'client/extjs', 'Upload failed' );
+        var errmsg = MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' );
+    	
+        if( response && response.data && response.data.error ) {
+            msg = response.data.error.message ? response.data.error.message : errmsg;
+            code = response.data.error.code ? response.data.error.code : 0;
+        }
+        
+        Ext.Msg.alert( title + ' (' + code + ')', msg ).setIcon( Ext.MessageBox.ERROR );
         this.loadMask.hide();
     },
     
     onUploadSucess: function(uploader, record, response) {
+    	
         for (var field in response) {
             if (field.match(/\.status|\.label|\.typeid|\.langid/) && this.itemUi.record.get(field)) {
                 continue;
@@ -7085,21 +7297,32 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
                 formField.setValue(response[field]);
             }
         }
+        
+        this.setValue(response[this.name]);
     },
     
     updateImage: function() {
+
         // only update when new image differs from current
-        if(this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
+        if(this.imageSrc != '' && this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
+        	
             var ct = this.imageCt.up('div');
-            var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.config.baseurl.content + this.imageSrc + '"/>' , true);
+            var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);
+            
             // replace image after load
             img.on('load', function(){
                 this.imageCt.remove();
                 this.imageCt = img;
-                this.textCt.setVisible(this.imageSrc == this.defaultImage);
                 this.imageCt.setOpacity(this.imageSrc == this.defaultImage ? 0.2 : 1);
+                this.imageCt.setStyle({
+                    top: ((this.height - this.imageCt.getHeight()) / 2) + 'px',
+                    left: ((this.width - this.imageCt.getWidth()) / 2) + 'px',
+                    position: 'absolute'
+                });
+                this.textCt.setVisible(this.imageSrc == this.defaultImage);
                 this.loadMask.hide();
             }, this);
+            
             img.on('error', function() {
                 Ext.MessageBox.alert(
                		MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
@@ -7235,13 +7458,8 @@ Ext.reg('MShop.panel.attribute.listui', MShop.panel.attribute.ListUi);
 Ext.ns('MShop.panel.attribute');
 
 MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'attribute.siteid',
 
-	
 	initComponent : function() {
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
@@ -7882,13 +8100,8 @@ Ext.ns('MShop.panel.portal');
  * @todo this class is misnamed, it's actually not a itemUi'
  */
 MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	idProperty : 'id',
 
-	
 	initComponent : function() {
 
 		this.title = MShop.I18n.dt( 'client/extjs', 'Overview' );
@@ -8078,12 +8291,8 @@ Ext.ns('MShop.panel.product');
 
 MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'product.siteid',
 
-	
 	initComponent : function() {
 
 		MShop.panel.AbstractListItemUi.prototype.setSiteCheck( this );
@@ -8613,10 +8822,6 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
 Ext.ns('MShop.panel.product.tag');
 
 MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	siteidProperty : 'product.tag.siteid',
 
 	
@@ -9074,6 +9279,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 					align : 'stretch'
 				},
 				itemId : 'MShop.panel.product.stock.ItemUi.BasicPanel',
+				
 				plugins : [ 'ux.itemregistry' ],
 				defaults : {
 					bodyCssClass : this.readOnlyClass
@@ -9914,14 +10120,9 @@ Ext.ns('MShop.panel.catalog');
  * move some parts to AbstractTreeItemUI and parametresize
  */
 MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
 	idProperty : 'id',
 	siteidProperty : 'catalog.siteid',
 
-	
 	initComponent : function() {
 
 		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
@@ -10435,11 +10636,6 @@ Ext.ns('MShop.panel.service');
 
 MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
-	maximized : true,
-	layout : 'fit',
-	modal : true,
-
-
 	initComponent : function() {
 		
 		this.items = [ {
@@ -10948,12 +11144,6 @@ Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.plugin.listu
 Ext.ns('MShop.panel.plugin');
 
 MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
-
-
 	initComponent : function() {
 		
 		this.items = [ {
@@ -13483,12 +13673,6 @@ Ext.reg( 'MShop.panel.order.base.product.attribute.listuismall', MShop.panel.ord
 Ext.ns('MShop.panel.job');
 
 MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
-
-	maximized : true,
-	layout : 'fit',
-	modal : true,
-
-
 	initComponent : function() {
 
 		this.title = MShop.I18n.dt( 'client/extjs', 'Job item details' );
@@ -14704,30 +14888,31 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 });
 
 Ext.reg('MShop.panel.locale.site.configui', MShop.panel.locale.site.ConfigUi);/*!
- * Copyright (c) Metaways Infosystems GmbH, 2013
+ * Copyright (c) Metaways Infosystems GmbH, 2014
  * LGPLv3, http://www.arcavias.com/license
  */
 
 
-Ext.ns('MShop.panel.text.type');
+Ext.ns('MShop.panel.attribute.type');
 
-MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
+MShop.panel.attribute.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
-	recordName : 'Text_Type',
-	idProperty : 'text.type.id',
-	siteidProperty : 'text.type.siteid',
-	itemUiXType : 'MShop.panel.text.type.itemui',
+	recordName : 'Attribute_Type',
+	idProperty : 'attribute.type.id',
+	siteidProperty : 'attribute.type.siteid',
+	
+	itemUiXType : 'MShop.panel.attribute.type.itemui',
 	
 	// Sort by id ASC
 	sortInfo : {
-		field : 'text.type.id',
+		field : 'attribute.type.id',
 		direction : 'ASC'
 	},
 
 	// Create filter
 	filterConfig : {
 		filters : [ {
-			dataIndex : 'text.type.label',
+			dataIndex : 'attribute.type.label',
 			operator : '=~',
 			value : ''
 		} ]
@@ -14736,28 +14921,28 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	// Override initComponent to set Label of tab.
 	initComponent : function()
 	{
-		this.title = MShop.I18n.dt( 'client/extjs', 'Text type' );
+		this.title = MShop.I18n.dt( 'client/extjs', 'Attribute type' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
-		MShop.panel.text.type.ListUi.superclass.initComponent.call(this);
+		MShop.panel.attribute.type.ListUi.superclass.initComponent.call(this);
 	},
 	
 	
-	autoExpandColumn : 'text-type-label',
+	autoExpandColumn : 'attribute-type-label',
 
 	getColumns : function() {
 		return [ {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.id',
+				dataIndex : 'attribute.type.id',
 				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				editable : false,
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.status',
+				dataIndex : 'attribute.type.status',
 				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				width : 50,
@@ -14765,12 +14950,12 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				renderer : this.statusColumnRenderer.createDelegate(this)
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.domain',
+				dataIndex : 'attribute.type.domain',
 				header : MShop.I18n.dt( 'client/extjs', 'Domain' ),
 				sortable : true
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.code',
+				dataIndex : 'attribute.type.code',
 				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
 				sortable : true,
 				width : 150,
@@ -14778,14 +14963,14 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				editable : false
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.label',
-				id: 'text-type-label',
+				dataIndex : 'attribute.type.label',
+				id: 'attribute-type-label',
 				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				editable : false
 			}, {
 				xtype : 'datecolumn',
-				dataIndex : 'text.type.ctime',
+				dataIndex : 'attribute.type.ctime',
 				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
@@ -14794,7 +14979,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				hidden : true
 			}, {
 				xtype : 'datecolumn',
-				dataIndex : 'text.type.mtime',
+				dataIndex : 'attribute.type.mtime',
 				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
@@ -14803,7 +14988,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				hidden : true
 			}, {
 				xtype : 'gridcolumn',
-				dataIndex : 'text.type.editor',
+				dataIndex : 'attribute.type.editor',
 				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
@@ -14814,120 +14999,40 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	}
 });
 
-Ext.reg('MShop.panel.text.type.listui', MShop.panel.text.type.ListUi);
+Ext.reg('MShop.panel.attribute.type.listui', MShop.panel.attribute.type.ListUi);
 
-Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.text.type.listui', MShop.panel.text.type.ListUi, 10);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.attribute.type.listui', MShop.panel.attribute.type.ListUi, 10);
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2013
+ * Copyright (c) Metaways Infosystems GmbH, 2014
  * LGPLv3, http://www.arcavias.com/license
+ * @author Michael Spahn <m.spahn@metaways.de>
  */
 
+Ext.ns('MShop.panel.attribute.type');
 
-Ext.ns('MShop.panel.text.type');
+MShop.panel.attribute.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
 
-MShop.panel.text.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
+	siteidProperty : 'attribute.type.siteid',
 
-	maximized : true,
-	layout : 'fit',
-	modal : true,
-	siteidProperty : 'text.type.siteid',
+	typeDomain : 'attribute.type',
 
-	
 	initComponent : function() {
-
-		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
-
-		this.items = [ {
-			xtype : 'tabpanel',
-			activeTab : 0,
-			border : false,
-			itemId : 'MShop.panel.text.type.ItemUi',
-			plugins : [ 'ux.itemregistry' ],
-			items : [ {
-				xtype : 'panel',
-				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
-				border : false,
-				layout : 'hbox',
-				layoutConfig : {
-					align : 'stretch'
-				},
-				itemId : 'MShop.panel.text.type.ItemUi.BasicPanel',
-				plugins : [ 'ux.itemregistry' ],
-				defaults : {
-					bodyCssClass : this.readOnlyClass
-				},
-				items : [ {
-					xtype : 'form',
-					flex : 1,
-					ref : '../../mainForm',
-					autoScroll : true,
-					items : [ {
-						xtype : 'fieldset',
-						style: 'padding-right: 25px;',
-						border : false,
-						labelAlign : 'top',
-						defaults: {
-							anchor : '100%',
-							readOnly : this.fieldsReadOnly
-						},
-						items : [ {
-							xtype : 'displayfield',
-							fieldLabel : MShop.I18n.dt( 'client/extjs',  'ID' ),
-							name : 'text.type.id'
-						}, {
-							xtype : 'MShop.elements.status.combo',
-							name : 'text.type.status',
-							allowBlank : false
-						}, {
-							xtype : 'MShop.elements.domain.combo',
-							name : 'text.type.domain',
-							allowBlank : false
-						}, {
-							xtype : 'textfield',
-							name : 'text.type.code',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
-							allowBlank : false,
-							emptyText : MShop.I18n.dt( 'client/extjs', 'Unique code (required)' )
-						}, {
-							xtype : 'textfield',
-							name : 'text.type.label',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
-							allowBlank : false,
-							maxLength : 255,
-							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
-						}, {
-							xtype : 'displayfield',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
-							name : 'text.type.ctime'
-						}, {
-							xtype : 'displayfield',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
-							name : 'text.type.mtime'
-						}, {
-							xtype : 'displayfield',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
-							name : 'text.type.editor'
-						}]
-					} ]
-				} ]
-			} ]
-		} ];
-
-		MShop.panel.text.type.ItemUi.superclass.initComponent.call(this);
+		MShop.panel.AbstractTypeItemUi.prototype.setSiteCheck( this );
+		MShop.panel.attribute.type.ItemUi.superclass.initComponent.call(this);
 	},
 
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['text.type.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
-		//#: Text type item panel title with type label ({0}) and site code ({1)}
-		var string = MShop.I18n.dt( 'client/extjs', 'Text type: {0} ({1})' );
+		var label = this.record ? this.record.data['attribute.type.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Attribute type item panel title with type label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Attribute type: {0} ({1})' );
 		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
-		MShop.panel.text.type.ItemUi.superclass.afterRender.apply( this, arguments );
+		MShop.panel.attribute.type.ItemUi.superclass.afterRender.apply( this, arguments );
 	}
 });
 
-Ext.reg('MShop.panel.text.type.itemui', MShop.panel.text.type.ItemUi);
+Ext.reg('MShop.panel.attribute.type.itemui', MShop.panel.attribute.type.ItemUi);
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2013
  * LGPLv3, http://www.arcavias.com/license
@@ -15044,101 +15149,20 @@ Ext.reg('MShop.panel.media.type.listui', MShop.panel.media.type.ListUi);
 
 Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.media.type.listui', MShop.panel.media.type.ListUi, 20);
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2013
+ * Copyright (c) Metaways Infosystems GmbH, 2014
  * LGPLv3, http://www.arcavias.com/license
+ * @author Michael Spahn <m.spahn@metaways.de>
  */
 
 
 Ext.ns('MShop.panel.media.type');
 
-MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
-	
-	maximized : true,
-	layout : 'fit',
-	modal : true,
+MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
 	siteidProperty : 'media.type.siteid',
-
+	typeDomain : 'media.type',
 
 	initComponent : function() {
-
-		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
-
-		this.items = [ {
-			xtype : 'tabpanel',
-			activeTab : 0,
-			border : false,
-			itemId : 'MShop.panel.media.type.ItemUi',
-			plugins : [ 'ux.itemregistry' ],
-			items : [ {
-				xtype : 'panel',
-				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
-				border : false,
-				layout : 'hbox',
-				layoutConfig : {
-					align : 'stretch'
-				},
-				itemId : 'MShop.panel.media.type.ItemUi.BasicPanel',
-				plugins : [ 'ux.itemregistry' ],
-				defaults : {
-					bodyCssClass : this.readOnlyClass
-				},
-				items : [ {
-					xtype : 'form',
-					flex : 1,
-					ref : '../../mainForm',
-					autoScroll : true,
-					items : [ {
-						xtype : 'fieldset',
-						style: 'padding-right: 25px;',
-						border : false,
-						labelAlign : 'top',
-						defaults: {
-							anchor : '100%',
-							readOnly : this.fieldsReadOnly
-						},
-						items : [ {
-							xtype : 'displayfield',
-							fieldLabel : MShop.I18n.dt( 'client/extjs',  'ID' ),
-							name : 'media.type.id'
-						}, {
-							xtype : 'MShop.elements.status.combo',
-							name : 'media.type.status',
-							allowBlank : false
-						}, {
-							xtype : 'MShop.elements.domain.combo',
-							name : 'media.type.domain',
-							allowBlank : false
-						}, {
-							xtype : 'textfield',
-							name : 'media.type.code',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
-							allowBlank : false,
-							emptyText : MShop.I18n.dt( 'client/extjs', 'Unique code (required)' )
-						}, {
-							xtype : 'textfield',
-							name : 'media.type.label',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
-							allowBlank : false,
-							maxLength : 255,
-							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
-						}, {
-							xtype : 'displayfield',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
-							name : 'media.type.ctime'
-						}, {
-							xtype : 'displayfield',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
-							name : 'media.type.mtime'
-						}, {
-							xtype : 'displayfield',
-							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
-							name : 'media.type.editor'
-						}]
-					} ]
-				} ]
-			} ]
-		} ];
-
+		MShop.panel.AbstractTypeItemUi.prototype.setSiteCheck( this );
 		MShop.panel.media.type.ItemUi.superclass.initComponent.call(this);
 	},
 
@@ -15154,6 +15178,730 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 });
 
 Ext.reg('MShop.panel.media.type.itemui', MShop.panel.media.type.ItemUi);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ */
+
+
+Ext.ns('MShop.panel.plugin.type');
+
+MShop.panel.plugin.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
+
+	recordName : 'Plugin_Type',
+	idProperty : 'plugin.type.id',
+	siteidProperty : 'plugin.type.siteid',
+	
+	itemUiXType : 'MShop.panel.plugin.type.itemui',
+	
+	// Sort by id ASC
+	sortInfo : {
+		field : 'plugin.type.id',
+		direction : 'ASC'
+	},
+
+	// Create filter
+	filterConfig : {
+		filters : [ {
+			dataIndex : 'plugin.type.label',
+			operator : '=~',
+			value : ''
+		} ]
+	},
+	
+	// Override initComponent to set Label of tab.
+	initComponent : function()
+	{
+		this.title = MShop.I18n.dt( 'client/extjs', 'Plugin type' );
+
+		MShop.panel.AbstractListUi.prototype.initActions.call(this);
+		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
+
+		MShop.panel.plugin.type.ListUi.superclass.initComponent.call(this);
+	},
+	
+	
+	autoExpandColumn : 'plugin-type-label',
+
+	getColumns : function() {
+		return [ {
+				xtype : 'gridcolumn',
+				dataIndex : 'plugin.type.id',
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+				sortable : true,
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'plugin.type.status',
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+				sortable : true,
+				width : 50,
+				align: 'center',
+				renderer : this.statusColumnRenderer.createDelegate(this)
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'plugin.type.domain',
+				header : MShop.I18n.dt( 'client/extjs', 'Domain' ),
+				sortable : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'plugin.type.code',
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+				sortable : true,
+				width : 150,
+				align: 'center',
+				editable : false
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'plugin.type.label',
+				id: 'plugin-type-label',
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
+				sortable : true,
+				editable : false
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'plugin.type.ctime',
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'plugin.type.mtime',
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'plugin.type.editor',
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+				sortable : true,
+				width : 130,
+				editable : false,
+				hidden : true
+			}
+		];
+	}
+});
+
+Ext.reg('MShop.panel.plugin.type.listui', MShop.panel.plugin.type.ListUi);
+
+Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.plugin.type.listui', MShop.panel.plugin.type.ListUi, 30);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ * @author Michael Spahn <m.spahn@metaways.de>
+ */
+
+
+Ext.ns('MShop.panel.plugin.type');
+
+MShop.panel.plugin.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
+	siteidProperty : 'plugin.type.siteid',
+	typeDomain : 'plugin.type',
+
+	initComponent : function() {
+		MShop.panel.AbstractTypeItemUi.prototype.setSiteCheck( this );
+		MShop.panel.plugin.type.ItemUi.superclass.initComponent.call(this);
+	},
+
+	afterRender : function()
+	{
+		var label = this.record ? this.record.data['plugin.type.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Plugin type item panel title with type label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Plugin type: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
+
+		MShop.panel.plugin.type.ItemUi.superclass.afterRender.apply( this, arguments );
+	}
+});
+
+Ext.reg('MShop.panel.plugin.type.itemui', MShop.panel.plugin.type.ItemUi);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ */
+
+
+Ext.ns('MShop.panel.price.type');
+
+MShop.panel.price.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
+
+	recordName : 'Price_Type',
+	idProperty : 'price.type.id',
+	siteidProperty : 'price.type.siteid',
+	
+	itemUiXType : 'MShop.panel.price.type.itemui',
+	
+	// Sort by id ASC
+	sortInfo : {
+		field : 'price.type.id',
+		direction : 'ASC'
+	},
+
+	// Create filter
+	filterConfig : {
+		filters : [ {
+			dataIndex : 'price.type.label',
+			operator : '=~',
+			value : ''
+		} ]
+	},
+	
+	// Override initComponent to set Label of tab.
+	initComponent : function()
+	{
+		this.title = MShop.I18n.dt( 'client/extjs', 'Price type' );
+
+		MShop.panel.AbstractListUi.prototype.initActions.call(this);
+		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
+
+		MShop.panel.price.type.ListUi.superclass.initComponent.call(this);
+	},
+	
+	
+	autoExpandColumn : 'price-type-label',
+
+	getColumns : function() {
+		return [ {
+				xtype : 'gridcolumn',
+				dataIndex : 'price.type.id',
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+				sortable : true,
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'price.type.status',
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+				sortable : true,
+				width : 50,
+				align: 'center',
+				renderer : this.statusColumnRenderer.createDelegate(this)
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'price.type.domain',
+				header : MShop.I18n.dt( 'client/extjs', 'Domain' ),
+				sortable : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'price.type.code',
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+				sortable : true,
+				width : 150,
+				align: 'center',
+				editable : false
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'price.type.label',
+				id: 'price-type-label',
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
+				sortable : true,
+				editable : false
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'price.type.ctime',
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'price.type.mtime',
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'price.type.editor',
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+				sortable : true,
+				width : 130,
+				editable : false,
+				hidden : true
+			}
+		];
+	}
+});
+
+Ext.reg('MShop.panel.price.type.listui', MShop.panel.price.type.ListUi);
+
+Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.price.type.listui', MShop.panel.price.type.ListUi, 40);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ * @author Michael Spahn <m.spahn@metaways.de>
+ */
+
+
+Ext.ns('MShop.panel.price.type');
+
+MShop.panel.price.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
+	siteidProperty : 'price.type.siteid',
+	typeDomain : 'price.type',
+
+	initComponent : function() {
+		MShop.panel.AbstractTypeItemUi.prototype.setSiteCheck( this );
+		MShop.panel.price.type.ItemUi.superclass.initComponent.call(this);
+	},
+
+	afterRender : function()
+	{
+		var label = this.record ? this.record.data['price.type.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Price type item panel title with type label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Price type: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
+
+		MShop.panel.price.type.ItemUi.superclass.afterRender.apply( this, arguments );
+	}
+});
+
+Ext.reg('MShop.panel.price.type.itemui', MShop.panel.price.type.ItemUi);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ */
+
+
+Ext.ns('MShop.panel.product.type');
+
+MShop.panel.product.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
+
+	recordName : 'Product_Type',
+	idProperty : 'product.type.id',
+	siteidProperty : 'product.type.siteid',
+	
+	itemUiXType : 'MShop.panel.product.type.itemui',
+	
+	// Sort by id ASC
+	sortInfo : {
+		field : 'product.type.id',
+		direction : 'ASC'
+	},
+
+	// Create filter
+	filterConfig : {
+		filters : [ {
+			dataIndex : 'product.type.label',
+			operator : '=~',
+			value : ''
+		} ]
+	},
+	
+	// Override initComponent to set Label of tab.
+	initComponent : function()
+	{
+		this.title = MShop.I18n.dt( 'client/extjs', 'Product type' );
+
+		MShop.panel.AbstractListUi.prototype.initActions.call(this);
+		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
+
+		MShop.panel.product.type.ListUi.superclass.initComponent.call(this);
+	},
+	
+	
+	autoExpandColumn : 'product-type-label',
+
+	getColumns : function() {
+		return [ {
+				xtype : 'gridcolumn',
+				dataIndex : 'product.type.id',
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+				sortable : true,
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'product.type.status',
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+				sortable : true,
+				width : 50,
+				align: 'center',
+				renderer : this.statusColumnRenderer.createDelegate(this)
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'product.type.domain',
+				header : MShop.I18n.dt( 'client/extjs', 'Domain' ),
+				sortable : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'product.type.code',
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+				sortable : true,
+				width : 150,
+				align: 'center',
+				editable : false
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'product.type.label',
+				id: 'product-type-label',
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
+				sortable : true,
+				editable : false
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'product.type.ctime',
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'product.type.mtime',
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'product.type.editor',
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+				sortable : true,
+				width : 130,
+				editable : false,
+				hidden : true
+			}
+		];
+	}
+});
+
+Ext.reg('MShop.panel.product.type.listui', MShop.panel.product.type.ListUi);
+
+Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.product.type.listui', MShop.panel.product.type.ListUi, 50);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ * @author Michael Spahn <m.spahn@metaways.de>
+ */
+
+
+Ext.ns('MShop.panel.product.type');
+
+MShop.panel.product.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
+	siteidProperty : 'product.type.siteid',
+	typeDomain : 'product.type',
+	
+	initComponent : function() {
+		MShop.panel.AbstractTypeItemUi.prototype.setSiteCheck( this );
+		MShop.panel.product.type.ItemUi.superclass.initComponent.call(this);
+	},
+
+	afterRender : function()
+	{
+		var label = this.record ? this.record.data['product.type.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Product type item panel title with type label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Product type: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
+
+		MShop.panel.product.type.ItemUi.superclass.afterRender.apply( this, arguments );
+	}
+});
+
+Ext.reg('MShop.panel.product.type.itemui', MShop.panel.product.type.ItemUi);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ */
+
+
+Ext.ns('MShop.panel.service.type');
+
+MShop.panel.service.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
+
+	recordName : 'Service_Type',
+	idProperty : 'service.type.id',
+	siteidProperty : 'service.type.siteid',
+	
+	itemUiXType : 'MShop.panel.service.type.itemui',
+	
+	// Sort by id ASC
+	sortInfo : {
+		field : 'service.type.id',
+		direction : 'ASC'
+	},
+
+	// Create filter
+	filterConfig : {
+		filters : [ {
+			dataIndex : 'service.type.label',
+			operator : '=~',
+			value : ''
+		} ]
+	},
+	
+	// Override initComponent to set Label of tab.
+	initComponent : function()
+	{
+		this.title = MShop.I18n.dt( 'client/extjs', 'Service type' );
+
+		MShop.panel.AbstractListUi.prototype.initActions.call(this);
+		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
+
+		MShop.panel.service.type.ListUi.superclass.initComponent.call(this);
+	},
+	
+	
+	autoExpandColumn : 'service-type-label',
+
+	getColumns : function() {
+		return [ {
+				xtype : 'gridcolumn',
+				dataIndex : 'service.type.id',
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+				sortable : true,
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'service.type.status',
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+				sortable : true,
+				width : 50,
+				align: 'center',
+				renderer : this.statusColumnRenderer.createDelegate(this)
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'service.type.domain',
+				header : MShop.I18n.dt( 'client/extjs', 'Domain' ),
+				sortable : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'service.type.code',
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+				sortable : true,
+				width : 150,
+				align: 'center',
+				editable : false
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'service.type.label',
+				id: 'service-type-label',
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
+				sortable : true,
+				editable : false
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'service.type.ctime',
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'service.type.mtime',
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'service.type.editor',
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+				sortable : true,
+				width : 130,
+				editable : false,
+				hidden : true
+			}
+		];
+	}
+});
+
+Ext.reg('MShop.panel.service.type.listui', MShop.panel.service.type.ListUi);
+
+Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.service.type.listui', MShop.panel.service.type.ListUi, 60);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ * @author Michael Spahn <m.spahn@metaways.de>
+ */
+
+
+Ext.ns('MShop.panel.service.type');
+
+MShop.panel.service.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
+	siteidProperty : 'service.type.siteid',
+	typeDomain : 'service.type',
+
+	initComponent : function() {
+		MShop.panel.AbstractTypeItemUi.prototype.setSiteCheck( this );
+		MShop.panel.service.type.ItemUi.superclass.initComponent.call(this);
+	},
+
+	afterRender : function()
+	{
+		var label = this.record ? this.record.data['service.type.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Service type item panel title with type label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Service type: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
+
+		MShop.panel.service.type.ItemUi.superclass.afterRender.apply( this, arguments );
+	}
+});
+
+Ext.reg('MShop.panel.service.type.itemui', MShop.panel.service.type.ItemUi);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2013
+ * LGPLv3, http://www.arcavias.com/license
+ */
+
+
+Ext.ns('MShop.panel.text.type');
+
+MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
+
+	recordName : 'Text_Type',
+	idProperty : 'text.type.id',
+	siteidProperty : 'text.type.siteid',
+	itemUiXType : 'MShop.panel.text.type.itemui',
+	
+	// Sort by id ASC
+	sortInfo : {
+		field : 'text.type.id',
+		direction : 'ASC'
+	},
+
+	// Create filter
+	filterConfig : {
+		filters : [ {
+			dataIndex : 'text.type.label',
+			operator : '=~',
+			value : ''
+		} ]
+	},
+	
+	// Override initComponent to set Label of tab.
+	initComponent : function()
+	{
+		this.title = MShop.I18n.dt( 'client/extjs', 'Text type' );
+
+		MShop.panel.AbstractListUi.prototype.initActions.call(this);
+		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
+
+		MShop.panel.text.type.ListUi.superclass.initComponent.call(this);
+	},
+	
+	
+	autoExpandColumn : 'text-type-label',
+
+	getColumns : function() {
+		return [ {
+				xtype : 'gridcolumn',
+				dataIndex : 'text.type.id',
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+				sortable : true,
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'text.type.status',
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+				sortable : true,
+				width : 50,
+				align: 'center',
+				renderer : this.statusColumnRenderer.createDelegate(this)
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'text.type.domain',
+				header : MShop.I18n.dt( 'client/extjs', 'Domain' ),
+				sortable : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'text.type.code',
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+				sortable : true,
+				width : 150,
+				align: 'center',
+				editable : false
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'text.type.label',
+				id: 'text-type-label',
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
+				sortable : true,
+				editable : false
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'text.type.ctime',
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'text.type.mtime',
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				editable : false,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'text.type.editor',
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+				sortable : true,
+				width : 130,
+				editable : false,
+				hidden : true
+			}
+		];
+	}
+});
+
+Ext.reg('MShop.panel.text.type.listui', MShop.panel.text.type.ListUi);
+
+Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.text.type.listui', MShop.panel.text.type.ListUi, 70);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/license
+ * @author Michael Spahn <m.spahn@metaways.de>
+ */
+
+
+Ext.ns('MShop.panel.text.type');
+
+MShop.panel.text.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
+	siteidProperty : 'text.type.siteid',
+	typeDomain : 'text.type',
+
+	initComponent : function() {
+		MShop.panel.AbstractTypeItemUi.prototype.setSiteCheck( this );
+		MShop.panel.text.type.ItemUi.superclass.initComponent.call(this);
+	},
+
+	afterRender : function()
+	{
+		var label = this.record ? this.record.data['text.type.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Text type item panel title with type label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Text type: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
+
+		MShop.panel.text.type.ItemUi.superclass.afterRender.apply( this, arguments );
+	}
+});
+
+Ext.reg('MShop.panel.text.type.itemui', MShop.panel.text.type.ItemUi);
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2013
  * LGPLv3, http://www.arcavias.com/en/license
