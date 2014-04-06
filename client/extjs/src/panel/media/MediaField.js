@@ -14,7 +14,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     /**
      * @cfg {String}
      */
-    defaultImage: '',
+    defaultImage: 'mimeicons/unknown.png',
     
     cls: 'arcavias-admin-media-item-preview',
     
@@ -70,8 +70,9 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         this.imageCt = Ext.DomHelper.insertFirst(this.buttonCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);
         this.imageCt.setOpacity(0.2);
         this.imageCt.setStyle({
-            position: 'absolute',
-            top: '18px'
+            top: ((this.height - this.imageCt.getHeight()) / 2) + 'px',
+            left: ((this.width - this.imageCt.getWidth()) / 2) + 'px',
+            position: 'absolute'
         });
         
         Ext.apply(this.browsePlugin, {
@@ -182,8 +183,13 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
             img.on('load', function(){
                 this.imageCt.remove();
                 this.imageCt = img;
-                this.textCt.setVisible(this.imageSrc == this.defaultImage);
                 this.imageCt.setOpacity(this.imageSrc == this.defaultImage ? 0.2 : 1);
+                this.imageCt.setStyle({
+                    top: ((this.height - this.imageCt.getHeight()) / 2) + 'px',
+                    left: ((this.width - this.imageCt.getWidth()) / 2) + 'px',
+                    position: 'absolute'
+                });
+                this.textCt.setVisible(this.imageSrc == this.defaultImage);
                 this.loadMask.hide();
             }, this);
             
