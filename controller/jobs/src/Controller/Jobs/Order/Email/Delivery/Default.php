@@ -65,6 +65,22 @@ class Controller_Jobs_Order_Email_Delivery_Default
 		$orderStatusManager = $orderManager->getSubManager( 'status' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
+		/** controller/jobs/order/email/delivery/default/limit-days
+		 * Only send delivery e-mails of orders that were created in the past within the configured number of days
+		 *
+		 * The delivery e-mails are normally send immediately after the delivery
+		 * status has changed. This option prevents e-mails for old order from
+		 * being send in case anything went wrong or an update failed to avoid
+		 * confusion of customers.
+		 *
+		 * @param integer Number of days
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see controller/jobs/order/email/delivery/default/status
+		 * @see controller/jobs/order/email/payment/default/limit-days
+		 * @see controller/jobs/service/delivery/process/limit-days
+		 */
 		$limit = $config->get( 'controller/jobs/order/email/delivery/default/limit-days', 90 );
 		$limitDate = date( 'Y-m-d H:i:s', time() - $limit * 86400 );
 
@@ -75,6 +91,30 @@ class Controller_Jobs_Order_Email_Delivery_Default
 			MShop_Order_Item_Abstract::STAT_RETURNED,
 		);
 
+		/** controller/jobs/order/email/delivery/default/status
+		 * Only send order delivery notification e-mails for these delivery status values
+		 *
+		 * Notification e-mail about delivery status changes can be sent for these
+		 * status values:
+		 * * 0: deleted
+		 * * 1: pending
+		 * * 2: progress
+		 * * 3: dispatched
+		 * * 4: delivered
+		 * * 5: lost
+		 * * 6: refused
+		 * * 7: returned
+		 *
+		 * User-defined status values are possible but should be in the private
+		 * block of values between 30000 and 32767.
+		 *
+		 * @param integer Delivery status constant
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see controller/jobs/order/email/payment/default/status
+		 * @see controller/jobs/order/email/delivery/default/limit-days
+		 */
 		foreach( (array) $config->get( 'controller/jobs/order/email/delivery/default/status', $default ) as $status )
 		{
 			$orderSearch = $orderManager->createSearch();

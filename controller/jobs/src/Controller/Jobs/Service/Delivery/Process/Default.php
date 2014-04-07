@@ -49,6 +49,21 @@ class Controller_Jobs_Service_Delivery_Process_Default
 	{
 		$context = $this->_getContext();
 
+		/** controller/jobs/service/delivery/process/limit-days
+		 * Only start the delivery process of orders that were created in the past within the configured number of days
+		 *
+		 * The delivery process is normally started immediately after the
+		 * notification about a successful payment arrived. This option prevents
+		 * orders from being shipped in case anything went wrong or an update
+		 * failed and old orders would have been shipped now.
+		 *
+		 * @param integer Number of days
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see controller/jobs/order/email/payment/default/limit-days
+		 * @see controller/jobs/order/email/delivery/default/limit-days
+		 */
 		$days = $context->getConfig()->get( 'controller/jobs/service/delivery/process/limit-days', 90 );
 		$date = date( 'Y-m-d 00:00:00', time() - 86400 * $days );
 
