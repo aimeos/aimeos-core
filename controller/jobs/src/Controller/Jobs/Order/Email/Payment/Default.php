@@ -65,6 +65,21 @@ class Controller_Jobs_Order_Email_Payment_Default
 		$orderStatusManager = $orderManager->getSubManager( 'status' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
+		/** controller/jobs/order/email/payment/default/limit-days
+		 * Only send payment e-mails of orders that were created in the past within the configured number of days
+		 *
+		 * The payment e-mails are normally send immediately after the payment
+		 * status has changed. This option prevents e-mails for old order from
+		 * being send in case anything went wrong or an update failed to avoid
+		 * confusion of customers.
+		 *
+		 * @param integer Number of days
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see controller/jobs/order/email/delivery/default/limit-days
+		 * @see controller/jobs/service/delivery/process/limit-days
+		 */
 		$limit = $config->get( 'controller/jobs/order/email/payment/default/limit-days', 30 );
 		$limitDate = date( 'Y-m-d H:i:s', time() - $limit * 86400 );
 
@@ -75,6 +90,29 @@ class Controller_Jobs_Order_Email_Payment_Default
 			MShop_Order_Item_Abstract::PAY_RECEIVED,
 		);
 
+		/** controller/jobs/order/email/payment/default/status
+		 * Only send order payment notification e-mails for these payment status values
+		 *
+		 * Notification e-mail about payment status changes can be sent for these
+		 * status values:
+		 * * 0: deleted
+		 * * 1: canceled
+		 * * 2: refused
+		 * * 3: refund
+		 * * 4: pending
+		 * * 5: authorized
+		 * * 6: received
+		 *
+		 * User-defined status values are possible but should be in the private
+		 * block of values between 30000 and 32767.
+		 *
+		 * @param integer Payment status constant
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see controller/jobs/order/email/delivery/default/status
+		 * @see controller/jobs/order/email/payment/default/limit-days
+		 */
 		foreach( (array) $config->get( 'controller/jobs/order/email/payment/default/status', $default ) as $status )
 		{
 			$orderSearch = $orderManager->createSearch();
