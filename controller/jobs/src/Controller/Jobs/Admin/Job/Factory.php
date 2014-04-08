@@ -31,9 +31,9 @@ class Controller_Jobs_Admin_Job_Factory
 		/** classes/controller/jobs/admin/job/name
 		 * Class name of the used admin jobs scheduler controller implementation
 		 *
-		 * Each default HTML client can be replace by an alternative imlementation.
+		 * Each default job controller can be replace by an alternative imlementation.
 		 * To use this implementation, you have to set the last part of the class
-		 * name as configuration value so the client factory knows which class it
+		 * name as configuration value so the controller factory knows which class it
 		 * has to instantiate.
 		 *
 		 * For example, if the name of the default class is
