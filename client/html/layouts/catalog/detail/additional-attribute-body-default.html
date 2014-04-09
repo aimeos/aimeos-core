@@ -18,13 +18,13 @@ $enc = $this->encoder();
 
 ?>
 <?php if( count( $items ) > 0 ) : ?>
-<h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client/html/code', 'Characteristics' ), $enc::TRUST ); ?></h2>
+<h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristics' ), $enc::TRUST ); ?></h2>
 <table class="content attributes">
 	<tbody>
 <?php foreach( $items as $id => $attrItem ) : ?>
 <?php	if( isset( $attrItems[$id] ) ) { $attrItem = $attrItems[$id]; } ?>
 		<tr class="item">
-			<td class="name"><?php echo $enc->html( $this->translate( 'client/html', $attrItem->getType() ), $enc::TRUST ); ?></td>
+			<td class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attrItem->getType() ), $enc::TRUST ); ?></td>
 			<td class="value">
 				<div class="media-list">
 <?php
