@@ -156,14 +156,14 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
         this.actionExport = new Ext.Action({
             text: MShop.I18n.dt( 'client/extjs', 'Export' ),
-            disabled: false,
+            disabled: (this.exportMethod === null),
             handler: this.onExport ? this.onExport.createDelegate(this) : Ext.emptyFn
         });
 
         this.importButton = new MShop.elements.ImportButton({
-            importMethod: this.importMethod,
             text: MShop.I18n.dt( 'client/extjs', 'Import' ),
-            disabled: (this.importMethod === null)
+            disabled: (this.importMethod === null),
+            importMethod: this.importMethod
         });
 
     },
