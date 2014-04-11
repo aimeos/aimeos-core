@@ -5,26 +5,19 @@
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-if( isset( $this->detailProductItem ) ) {
-	$items = $this->detailProductItem->getRefItems( 'attribute', null, 'default' );
-	$items += $this->detailProductItem->getRefItems( 'attribute', null, 'variant' );
-} else {
-	$items = array();
-}
-
-$attrItems = $this->get( 'detailProductAttributeItems', array() );
 $contentUrl = $this->config( 'client/html/common/content/baseurl' );
+$attrMap = $this->get( 'attributeMap', array() );
 $enc = $this->encoder();
 
 ?>
-<?php if( count( $items ) > 0 ) : ?>
+<?php if( count( $attrMap ) > 0 ) : ?>
 <h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristics' ), $enc::TRUST ); ?></h2>
 <table class="content attributes">
 	<tbody>
-<?php foreach( $items as $id => $attrItem ) : ?>
-<?php	if( isset( $attrItems[$id] ) ) { $attrItem = $attrItems[$id]; } ?>
+<?php foreach( $attrMap as $type => $attrItems ) : ?>
+<?php	foreach( $attrItems as $attrItem ) : ?>
 		<tr class="item">
-			<td class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attrItem->getType() ), $enc::TRUST ); ?></td>
+			<td class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $type ), $enc::TRUST ); ?></td>
 			<td class="value">
 				<div class="media-list">
 <?php
@@ -39,6 +32,7 @@ $enc = $this->encoder();
 				<span class="attr-name"><?php echo $enc->html( $attrItem->getName() ); ?></span>
 			</td>
 		</tr>
+<?php	endforeach; ?>
 <?php endforeach; ?>
 	</tbody>
 </table>
