@@ -52,6 +52,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 */
 	private $_subPartPath = 'client/html/catalog/detail/additional/attribute/default/subparts';
 	private $_subPartNames = array();
+	private $_cache;
 
 
 	/**
@@ -62,7 +63,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 */
 	public function getBody( $name = null )
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -105,7 +106,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 */
 	public function getHeader( $name = null )
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView() );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
@@ -174,5 +175,35 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	public function process()
 	{
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 */
+	protected function _setViewParams( MW_View_Interface $view )
+	{
+		if( !isset( $this->_cache ) )
+		{
+			$items = $attributeMap = array();
+
+			if( isset( $view->detailProductItem ) )
+			{
+				$items = $view->detailProductItem->getRefItems( 'attribute', null, 'default' );
+				$items += $view->detailProductItem->getRefItems( 'attribute', null, 'variant' );
+			}
+
+			foreach( $items as $id => $attribute ) {
+					$attributeMap[ $attribute->getType() ][$id] = $attribute;
+			}
+
+			$view->attributeMap = $attributeMap;
+
+			$this->_cache = $view;
+		}
+
+		return $this->_cache;
 	}
 }
