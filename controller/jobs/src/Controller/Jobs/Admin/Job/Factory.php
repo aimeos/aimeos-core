@@ -96,7 +96,7 @@ class Controller_Jobs_Admin_Job_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
 		 * @see controller/jobs/admin/decorators/global
 		 * @see controller/jobs/admin/decorators/local
@@ -120,7 +120,7 @@ class Controller_Jobs_Admin_Job_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
 		 * @see controller/jobs/admin/decorators/excludes
 		 * @see controller/jobs/admin/decorators/local
@@ -145,7 +145,7 @@ class Controller_Jobs_Admin_Job_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
 		 * @see controller/jobs/admin/decorators/excludes
 		 * @see controller/jobs/admin/decorators/global

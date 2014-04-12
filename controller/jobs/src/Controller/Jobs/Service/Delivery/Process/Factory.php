@@ -96,7 +96,7 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
 		 * @see controller/jobs/service/decorators/global
 		 * @see controller/jobs/service/decorators/local
@@ -120,7 +120,7 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
 		 * @see controller/jobs/service/decorators/excludes
 		 * @see controller/jobs/service/decorators/local
@@ -146,7 +146,7 @@ class Controller_Jobs_Service_Delivery_Process_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
 		 * @see controller/jobs/service/decorators/excludes
 		 * @see controller/jobs/service/decorators/global

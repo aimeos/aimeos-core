@@ -88,7 +88,7 @@ class Controller_Frontend_Basket_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/frontend/common/decorators/default
 		 * @see controller/frontend/basket/decorators/global
 		 * @see controller/frontend/basket/decorators/local
@@ -112,7 +112,7 @@ class Controller_Frontend_Basket_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/frontend/common/decorators/default
 		 * @see controller/frontend/basket/decorators/excludes
 		 * @see controller/frontend/basket/decorators/local
@@ -137,7 +137,7 @@ class Controller_Frontend_Basket_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/frontend/common/decorators/default
 		 * @see controller/frontend/basket/decorators/excludes
 		 * @see controller/frontend/basket/decorators/global
