@@ -114,7 +114,7 @@ class Controller_Frontend_Common_Factory_Abstract
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
+		 * @category Developers
 		 */
 		$decorators = $config->get( 'controller/frontend/common/decorators/default', array() );
 		$excludes = $config->get( 'controller/frontend/' . $domain . '/decorators/excludes', array() );

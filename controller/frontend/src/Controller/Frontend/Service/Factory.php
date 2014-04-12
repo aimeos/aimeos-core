@@ -87,7 +87,7 @@ class Controller_Frontend_Service_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
+		 * @category Developers
 		 * @see controller/frontend/common/decorators/default
 		 * @see controller/frontend/service/decorators/global
 		 * @see controller/frontend/service/decorators/local
@@ -111,7 +111,7 @@ class Controller_Frontend_Service_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
+		 * @category Developers
 		 * @see controller/frontend/common/decorators/default
 		 * @see controller/frontend/service/decorators/excludes
 		 * @see controller/frontend/service/decorators/local
@@ -136,7 +136,7 @@ class Controller_Frontend_Service_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developer
+		 * @category Developers
 		 * @see controller/frontend/common/decorators/default
 		 * @see controller/frontend/service/decorators/excludes
 		 * @see controller/frontend/service/decorators/global
