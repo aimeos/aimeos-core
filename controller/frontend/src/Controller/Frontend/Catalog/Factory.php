@@ -108,7 +108,7 @@ class Controller_Frontend_Catalog_Factory
 		 *  controller/frontend/catalog/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Controller_Frontend_Common_Decorator_Decorator1" only to the job controller.
+		 * "Controller_Frontend_Common_Decorator_Decorator1" only to the frontend controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -132,7 +132,7 @@ class Controller_Frontend_Catalog_Factory
 		 *  controller/frontend/catalog/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_Frontend_Catalog_Decorator_Decorator2" only to the job
+		 * "Controller_Frontend_Catalog_Decorator_Decorator2" only to the frontend
 		 * controller.
 		 *
 		 * @param array List of decorator names
