@@ -116,7 +116,7 @@ class Controller_Jobs_Common_Factory_Abstract
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 */
 		$decorators = $config->get( 'controller/jobs/common/decorators/default', array() );
 		$excludes = $config->get( 'controller/jobs/' . $domain . '/decorators/excludes', array() );

@@ -96,7 +96,7 @@ class Controller_Jobs_Order_Email_Delivery_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
 		 * @see controller/jobs/order/decorators/global
 		 * @see controller/jobs/order/decorators/local
@@ -120,7 +120,7 @@ class Controller_Jobs_Order_Email_Delivery_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
 		 * @see controller/jobs/order/decorators/excludes
 		 * @see controller/jobs/order/decorators/local
@@ -146,7 +146,7 @@ class Controller_Jobs_Order_Email_Delivery_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
 		 * @see controller/jobs/order/decorators/excludes
 		 * @see controller/jobs/order/decorators/global

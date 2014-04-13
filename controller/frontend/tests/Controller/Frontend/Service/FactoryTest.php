@@ -28,18 +28,6 @@ class Controller_Frontend_Service_FactoryTest extends MW_Unittest_Testcase
 	{
 	}
 
-
-	public function testCreateController()
-	{
-		$target = 'Controller_Frontend_Service_Interface';
-
-		$controller = Controller_Frontend_Service_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( $target, $controller );
-
-		$controller = Controller_Frontend_Service_Factory::createController( TestHelper::getContext(), 'Default' );
-		$this->assertInstanceOf( $target, $controller );
-	}
-
 	public function testCreateControllerInvalidImplementation()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Exception' );
@@ -112,6 +100,21 @@ class Controller_Frontend_Service_FactoryTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'Controller_Frontend_Exception' );
 		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Default' );
+	}
+
+	public function testCreateController()
+	{
+		$context = TestHelper::getContext();
+		$config = $context->getConfig();
+		$config->set( 'controller/frontend/common/decorators/default', array() );
+
+		$target = 'Controller_Frontend_Service_Interface';
+
+		$controller = Controller_Frontend_Service_Factory::createController( TestHelper::getContext() );
+		$this->assertInstanceOf( $target, $controller );
+
+		$controller = Controller_Frontend_Service_Factory::createController( TestHelper::getContext(), 'Default' );
+		$this->assertInstanceOf( $target, $controller );
 	}
 
 }
