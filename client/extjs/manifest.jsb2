@@ -344,12 +344,6 @@
 			"path": "src/panel/service/"
 		}, {
 			"text": "ListUi.js",
-			"path": "src/panel/supplier/"
-		}, {
-			"text": "ItemUi.js",
-			"path": "src/panel/supplier/"
-		}, {
-			"text": "ListUi.js",
 			"path": "src/panel/plugin/"
 		}, {
 			"text": "ItemUi.js",
