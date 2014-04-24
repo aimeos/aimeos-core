@@ -45,6 +45,25 @@ abstract class MShop_Plugin_Provider_Order_Abstract
 
 
 	/**
+	 * Returns the configuration value from the service item specified by its key.
+	 *
+	 * @param string $key Configuration key
+	 * @param mixed $default Default value if configuration key isn't available
+	 * @return mixed Value from service item configuration
+	 */
+	protected function _getConfigValue( $key, $default = null )
+	{
+		$config = $this->_item->getConfig();
+
+		if( isset( $config[$key] ) ) {
+			return $config[$key];
+		}
+
+		return $default;
+	}
+
+
+	/**
 	 * Returns the context object.
 	 *
 	 * @return MShop_Context_Item_Interface Context item object
