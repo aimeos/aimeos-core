@@ -56,6 +56,7 @@ class MW_Setup_Task_TablesCreateMShop extends MW_Setup_Task_Abstract
 			dirname(realpath(__FILE__)) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'supplier.sql',
 			dirname(realpath(__FILE__)) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'text.sql',
 			dirname(realpath(__FILE__)) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'catalog.sql',
+			dirname(realpath(__FILE__)) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'coupon.sql',
 		);
 
 		$this->_setup($files);
