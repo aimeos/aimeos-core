@@ -218,6 +218,15 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>=', 'order.base.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.address.editor', $this->_editor );
 
+		$expr[] = $search->compare( '!=', 'order.base.coupon.id', null );
+		$expr[] = $search->compare( '==', 'order.base.coupon.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'order.base.coupon.baseid', null );
+		$expr[] = $search->compare( '!=', 'order.base.coupon.productid', null );
+		$expr[] = $search->compare( '==', 'order.base.coupon.code', 'OPQR' );
+		$expr[] = $search->compare( '>=', 'order.base.coupon.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.base.coupon.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.base.coupon.editor', '' );
+
 		$expr[] = $search->compare( '!=', 'order.base.product.id', null );
 		$expr[] = $search->compare( '==', 'order.base.product.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.product.baseid', null );
@@ -304,6 +313,9 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('address') );
 		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('address', 'Default') );
 
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('coupon') );
+		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('coupon', 'Default') );
+
 		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('product') );
 		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->_object->getSubManager('product', 'Default') );
 
@@ -344,6 +356,17 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 			$this->assertInternalType( 'string', $address->getId() );
 			$this->assertNotEquals( '', $address->getId() );
 			$this->assertInternalType( 'integer', $address->getBaseId() );
+		}
+
+		$this->assertEquals( 2, count( $order->getCoupons() ) );
+
+		foreach( $order->getCoupons() as $code => $products )
+		{
+			$this->assertNotEquals( '', $code );
+
+			foreach( $products as $product ) {
+				$this->assertInstanceOf( 'MShop_Order_Item_Base_Product_Interface', $product );
+			}
 		}
 
 		foreach( $order->getProducts() as $product )
@@ -552,6 +575,37 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getItem( $newBasketId );
+	}
+
+
+	public function testLoadStoreCoupons()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions($search->compare('==', 'order.base.price', '672.00'));
+		$results = $this->_object->searchItems($search);
+
+		if ( ( $item = reset($results) ) === false ) {
+			throw new Exception( 'No order found' );
+		}
+
+		$basket = $this->_object->load( $item->getId(), true );
+
+		$this->assertEquals( '672.00', $basket->getPrice()->getValue() );
+		$this->assertEquals( '32.00', $basket->getPrice()->getCosts() );
+		$this->assertEquals( 0, count( $basket->getCoupons() ) );
+
+		$basket->addCoupon( 'CDEF' );
+		$basket->addCoupon( '5678', $basket->getProducts() );
+		$this->assertEquals( 2, count( $basket->getCoupons() ) );
+
+		$this->_object->store( $basket );
+		$newBasket = $this->_object->load( $basket->getId() );
+		$this->_object->deleteItem( $newBasket->getId() );
+
+		$this->assertEquals( '1344.00', $newBasket->getPrice()->getValue() );
+		$this->assertEquals( '64.00', $newBasket->getPrice()->getCosts() );
+		$this->assertEquals( '5.00', $newBasket->getPrice()->getRebate() );
+		$this->assertEquals( 2, count( $newBasket->getCoupons() ) );
 	}
 
 

@@ -328,7 +328,10 @@ class MShop_Service_Provider_Delivery_DefaultTest extends MW_Unittest_Testcase
 					</addresslist>
 					<additional>
 						<comment><![CDATA[]]></comment>
-						<discount/>
+						<discount>
+							<code><![CDATA[5678]]></code>
+							<code><![CDATA[OPQR]]></code>
+						</discount>
 					</additional>
 				</orderitem>
 			</orderlist>';

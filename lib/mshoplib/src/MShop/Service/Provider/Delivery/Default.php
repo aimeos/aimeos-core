@@ -632,12 +632,22 @@ class MShop_Service_Provider_Delivery_Default
 	protected function _buildXMLAdditional( MShop_Common_Manager_Interface $orderBaseManager,
 		MShop_Order_Item_Base_Interface $base, DOMDocument $dom, DOMElement $orderitem )
 	{
+		$orderCouponManager = $orderBaseManager->getSubManager( 'coupon' );
+		$criteria = $orderCouponManager->createSearch();
+		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $base->getId() ) );
+		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.coupon.code' ) ) );
+		$coupons = $orderCouponManager->searchItems( $criteria );
+
 		$additional = $dom->createElement( 'additional' );
 		$this->_appendChildCDATA( 'comment', '', $dom, $additional );
 
-		$emptyCouponItem = $dom->createElement( 'discount' );
+		$couponItem = $dom->createElement( 'discount' );
 
-		$additional->appendChild( $emptyCouponItem );
+		foreach( $coupons as $coupon ) {
+			$this->_appendChildCDATA( 'code', $coupon->getCode(), $dom, $couponItem );
+		}
+
+		$additional->appendChild( $couponItem );
 		$orderitem->appendChild( $additional );
 	}
 

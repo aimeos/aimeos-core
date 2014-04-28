@@ -188,6 +188,45 @@ CREATE INDEX "idx_msordbaad_bid_sid_city" ON "mshop_order_base_address" ("baseid
 CREATE INDEX "idx_msordbaad_bid_sid_email" ON "mshop_order_base_address" ("baseid", "siteid", "email");
 
 
+
+--
+-- Order coupons
+--
+
+CREATE TABLE "mshop_order_base_coupon" (
+	-- Unique id of the ordered coupon
+	"id" BIGINT NOT NULL AUTO_INCREMENT,
+	-- ID from mshop_order_base
+	"baseid" BIGINT NOT NULL,
+	-- Site ID
+	"siteid" INTEGER NOT NULL,
+	-- Unique id of affected product
+	"ordprodid" BIGINT DEFAULT NULL,
+	-- coupon code added by customer
+	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
+	-- Timestamp of the last update
+	"mtime" DATETIME NOT NULL,
+	-- Date of creation of this database entry
+	"ctime" DATETIME NOT NULL,
+	-- Editor who modified this entry at last
+	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "pk_msordbadi_id"
+	PRIMARY KEY ("id"),
+CONSTRAINT "fk_msordbaco_baseid"
+	FOREIGN KEY ("baseid")
+	REFERENCES "mshop_order_base" ("id")
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+CONSTRAINT "fk_msordbaco_ordprodid"
+	FOREIGN KEY ("ordprodid")
+	REFERENCES "mshop_order_base_product" ("id")
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX "idx_msordbaco_sid_bid_code" ON "mshop_order_base_coupon" ("siteid", "baseid", "code");
+
+
 --
 -- Ordered products by customers
 --
