@@ -184,7 +184,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		if( $withsub === true )
 		{
 			$config = $this->_getContext()->getConfig();
-			$default = array( 'address', 'product', 'service' );
+			$default = array( 'address', 'coupon', 'product', 'service' );
 
 			foreach( $config->get( 'classes/order/manager/base/submanagers', $default ) as $domain ) {
 				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
@@ -510,6 +510,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$this->saveItem( $basket );
 
 		$this->_storeProducts( $basket );
+		$this->_storeCoupons( $basket );
 		$this->_storeAddresses( $basket );
 		$this->_storeServices( $basket );
 
@@ -628,6 +629,43 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 
 	/**
+	 * Retrieves the coupons of the order from the storage.
+	 *
+	 * @param integer $id Order base ID
+	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param array List of order products from the basket
+	 * @return array Associative list of coupon codes as keys and items implementing MShop_Order_Item_Product_Interface
+	 */
+	protected function _loadCoupons( $id, $fresh, array $products )
+	{
+		$items = array();
+		$manager = $this->getSubManager( 'coupon' );
+
+		$criteria = $manager->createSearch();
+		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $id ) );
+
+		foreach( $manager->searchItems( $criteria ) as $item )
+		{
+			if( !isset( $items[ $item->getCode() ] ) ) {
+				$items[ $item->getCode() ] = array();
+			}
+
+			if( $item->getProductId() !== null )
+			{
+				foreach( $products as $product )
+				{
+					if( $product->getId() == $item->getProductId() ) {
+						$items[ $item->getCode() ][] = $product;
+					}
+				}
+			}
+		}
+
+		return $items;
+	}
+
+
+	/**
 	 * Retrieves the services of the order from the storage.
 	 *
 	 * @param integer $id Order base ID
@@ -738,6 +776,39 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 
 	/**
+	 * Saves the coupons of the order to the storage.
+	 *
+	 * @param MShop_Order_Item_Base_Interface $basket Basket containing coupon items
+	 */
+	protected function _storeCoupons( MShop_Order_Item_Base_Interface $basket )
+	{
+		$manager = $this->getSubManager( 'coupon' );
+
+		$item = $manager->createItem();
+		$item->setBaseId( $basket->getId() );
+
+		foreach( $basket->getCoupons() as $code => $products )
+		{
+			$item->setCode( $code );
+
+			if( empty( $products ) )
+			{
+				$item->setId( null );
+				$manager->saveItem( $item );
+				continue;
+			}
+
+			foreach( $products as $product )
+			{
+				$item->setId( null );
+				$item->setProductId( $product->getId() );
+				$manager->saveItem( $item );
+			}
+		}
+	}
+
+
+	/**
 	 * Saves the services of the order to the storage.
 	 *
 	 * @param MShop_Order_Item_Base_Interface $basket Basket containing service items
@@ -776,8 +847,9 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$products = $this->_loadProducts( $id, false );
 		$addresses = $this->_loadAddresses( $id, false );
 		$services = $this->_loadServices( $id, false );
+		$coupons = $this->_loadCoupons ( $id, false, $products );
 
-		$basket =  $this->_createItem( $price, $localeItem, $row, $products, $addresses, $services );
+		$basket =  $this->_createItem( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
 
 		return $basket;
 	}

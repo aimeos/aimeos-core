@@ -325,6 +325,15 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>=', 'order.base.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.address.editor', $this->_editor );
 
+		$expr[] = $search->compare( '!=', 'order.base.coupon.id', null );
+		$expr[] = $search->compare( '==', 'order.base.coupon.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'order.base.coupon.baseid', null );
+		$expr[] = $search->compare( '!=', 'order.base.coupon.productid', null );
+		$expr[] = $search->compare( '==', 'order.base.coupon.code', 'OPQR' );
+		$expr[] = $search->compare( '>=', 'order.base.coupon.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.base.coupon.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'order.base.coupon.editor', '' );
+
 		$expr[] = $search->compare( '!=', 'order.base.product.id', null );
 		$expr[] = $search->compare( '==', 'order.base.product.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.product.baseid', null );

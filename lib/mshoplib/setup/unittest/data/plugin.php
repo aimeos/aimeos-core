@@ -19,6 +19,7 @@ return array (
 		'plugin/order/ProductPrice-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'ProductPrice-Plugin', 'provider' => 'ProductPrice,Example', 'config' => array( "update" => false ), 'status' => 1 ),
 		'plugin/order/ProductStock-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'ProductStock-Plugin', 'provider' => 'ProductStock,Example', 'config' => array() , 'status' => 1 ),
 		'plugin/order/ProductGone-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'ProductGone-Plugin', 'provider' => 'ProductGone,Example', 'config' => array() , 'status' => 1 ),
+		'plugin/order/Coupon-Plugin' => array( 'typeid' => 'plugin/order', 'label' => 'Coupon-Plugin', 'provider' => 'Coupon,Example', 'config' => array(), 'status' => 1 ),
 		'plugin/order/IntelligentSampling-Plugin' => array ( 'typeid' => 'plugin/order', 'label' => 'IntelligentSampling-Plugin', 'provider' => 'IntelligentSampling,Example', 'config' => array( "samples" => array( "CNE" => array ("conditions" => array ("&&" => array( array("!=" => array("exists(\"U:MD\")" => true)), array("!=" => array("exists(\"U:SD\")" => true))))), "CNC" => array ("conditions" => array ("&&" => array ( array( "!=" => array ("exists(\"U:MD\")" => true)), array ("!=" => array ( "exists(\"U:SD\")" => true)), array ("!=" => array ("exists(\"U:PD\")" => true)))))), "alternative" => "CNE", "firsttime" => 1 ), 'status' => 1),
 	)
 );

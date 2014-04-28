@@ -357,6 +357,15 @@
 		}, {
 			"text": "ConfigUi.js",
 			"path": "src/panel/plugin/"
+        }, {
+            "text": "ListUi.js",
+            "path": "src/panel/coupon/"
+        }, {
+            "text": "ItemUi.js",
+            "path": "src/panel/coupon/"
+        }, {
+            "text": "ConfigUi.js",
+            "path": "src/panel/coupon/"
 		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/order/"
@@ -387,6 +396,9 @@
 		}, {
 			"text": "AttributeItemUi.js",
 			"path": "src/panel/order/payment/"
+		}, {
+            "text": "ListUi.js",
+            "path": "src/panel/order/coupon/"
 		}, {
 			"text": "paymentstatus.js",
 			"path": "src/elements/"

@@ -65,15 +65,19 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	{
 		$this->_price = clone $this->_price;
 		$this->_locale = clone $this->_locale;
+
 		foreach( $this->_products as $key => $value ) {
 			$this->_products[$key] = $value;
 		}
+
 		foreach( $this->_addresses as $key => $value ) {
 			$this->_addresses[$key] = $value;
 		}
+
 		foreach( $this->_services as $key => $value ) {
 			$this->_services[$key] = $value;
 		}
+
 		foreach( $this->_coupons as $key => $value ) {
 			$this->_coupons[$key] = $value;
 		}
