@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @version $Id: coupon.php 180 2012-11-08 17:21:23Z doleiynyk $
  */
 
 return array (

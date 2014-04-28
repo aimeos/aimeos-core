@@ -1,8 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @version $Id: default.php 37 2012-08-08 17:37:40Z fblasel $
  */
 
 return array(

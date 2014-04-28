@@ -1,8 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @version $Id: DefaultTest.php 43 2012-08-14 15:49:41Z doleiynyk $
  */
 
 

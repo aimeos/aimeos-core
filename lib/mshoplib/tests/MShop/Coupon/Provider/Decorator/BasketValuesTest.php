@@ -1,13 +1,8 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
- * @license LGPLv3, http://www.arcavias.com/en/license
- */
-
-
-/**
- * Test class for MShop_Coupon_Provider_Decorator_BasketValues.
+ * Test class for MShop_Coupon_Provider_Decorator_BasketConditions.
+ *
  */
 class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework_TestCase
 {

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://www.arcavias.com/en/license
- */
-
 return array(
 	'item' => array(
 		'insert' => '
