@@ -295,12 +295,25 @@ class MShop_Coupon_Manager_Code_Default
 
 
 	/**
-	 * Decreases the count of the coupon code.
+	 * Decreases the counter of the coupon code.
 	 *
 	 * @param string $couponCode Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be decreased
 	 */
-	public function decrease( $couponCode, $amount = 1 )
+	public function decrease( $couponCode, $amount )
+	{
+		$this->increase( $couponCode, -$amount );
+	}
+
+
+
+	/**
+	 * Increases the counter of the coupon code.
+	 *
+	 * @param string $couponCode Unique code of a coupon
+	 * @param integer $amount Amount the coupon count should be increased
+	 */
+	public function increase( $couponCode, $amount )
 	{
 		$context = $this->_getContext();
 
@@ -309,20 +322,20 @@ class MShop_Coupon_Manager_Code_Default
 
 		$types = array(	'coupon.code.siteid' => $this->_searchConfig['coupon.code.siteid']['internaltype'] );
 		$translations = array( 'coupon.code.siteid' => 'siteid' );
-		$conditions = $search->getConditionString($types, $translations);
+		$conditions = $search->getConditionString( $types, $translations );
 
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
 		try
 		{
-			$path = 'mshop/coupon/manager/code/default/item/decrease';
+			$path = 'mshop/coupon/manager/code/default/item/counter';
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $context->getConfig()->get( $path, $path ) ) );
 
 			$stmt->bind( 1, $amount, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, date('Y-m-d H:i:s', time()) );// mtime
+			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) );// mtime
 			$stmt->bind( 3, $context->getEditor() );
-			$stmt->bind( 4, $couponCode, MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 4, $couponCode);
 
 			$result = $stmt->execute()->finish();
 		}
