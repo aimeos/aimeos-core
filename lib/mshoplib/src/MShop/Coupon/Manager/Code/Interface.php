@@ -18,10 +18,19 @@ interface MShop_Coupon_Manager_Code_Interface
 	extends MShop_Common_Manager_Factory_Interface
 {
 	/**
-	 * Decreases the count of the coupon code.
+	 * Decreases the counter of the coupon code.
 	 *
 	 * @param string $couponCode Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be decreased
 	 */
-	public function decrease( $couponCode, $amount = 1 );
+	public function decrease( $couponCode, $amount );
+
+
+	/**
+	 * Increases the counter of the coupon code.
+	 *
+	 * @param string $couponCode Unique code of a coupon
+	 * @param integer $amount Amount the coupon count should be increased
+	 */
+	public function increase( $couponCode, $amount );
 }
