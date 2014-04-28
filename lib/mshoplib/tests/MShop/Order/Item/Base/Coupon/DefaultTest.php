@@ -1,7 +1,8 @@
 <?php
 
 /**
- * @version $Id: DefaultTest.php 37 2012-08-08 17:37:40Z fblasel $
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
@@ -134,12 +135,12 @@ class MShop_Order_Item_Base_Coupon_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
 	}
-	
+
 	public function testGetEditor()
 	{
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );
 	}
-	
+
 	public function testToArray()
 	{
 		$array = $this->_object->toArray();

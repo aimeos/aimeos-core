@@ -1,9 +1,10 @@
 <?php
+
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Coupon
- * @version $Id: Example.php 37 2012-08-08 17:37:40Z fblasel $
  */
 
 

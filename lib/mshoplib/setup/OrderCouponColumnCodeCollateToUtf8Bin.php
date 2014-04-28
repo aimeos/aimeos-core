@@ -2,7 +2,7 @@
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
- * @version $Id: OrderCouponColumnCodeCollateToUtf8Bin.php 37 2012-08-08 17:37:40Z fblasel $
+ * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 

@@ -2,9 +2,9 @@
 
 /**
  * @copyright Copyright (c) 2010, Metaways Infosystems GmbH
+ * @license LGPLv3, http://www.arcavias.com/en/license
  * @package Controller
  * @subpackage ExtJS
- * @version $Id: Factory.php 37 2012-08-08 17:37:40Z fblasel $
  */
 
 
