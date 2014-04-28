@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH
- * @version $Id: OrderBaseCouponAddSiteidConstraint.php 47 2012-08-23 11:03:10Z nsendetzky $
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-/*
+/**
  * Adds a foreign key constraint on mshop_locale_site to mshop_order_base_coupon.
  *
  * 2012-08-08

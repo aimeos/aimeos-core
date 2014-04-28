@@ -1,7 +1,8 @@
 <?php
 
 /**
- * @version $Id: DefaultTest.php 37 2012-08-08 17:37:40Z fblasel $
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
@@ -95,7 +96,7 @@ class MShop_Coupon_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'unitTest', $this->_object->getLabel() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
-	
+
 	public function testGetDateStart()
 	{
 		$this->assertNull( $this->_object->getDateStart() );
@@ -173,7 +174,7 @@ class MShop_Coupon_Item_DefaultTest extends MW_Unittest_Testcase
 	{
 		$arrayObject = $this->_object->toArray();
 		$this->assertEquals( (count( $this->values ) + 1), count( $arrayObject ) );
-		
+
 		$this->assertEquals( $this->_object->getId(), $arrayObject['coupon.id'] );
 		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['coupon.siteid'] );
 		$this->assertEquals( $this->_object->getConfig(), $arrayObject['coupon.config'] );

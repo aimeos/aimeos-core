@@ -1,3 +1,9 @@
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2013
+ * LGPLv3, http://www.arcavias.com/en/license
+ */
+
+
 Ext.ns('MShop.panel.order.base.coupon');
 
 MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {

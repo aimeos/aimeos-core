@@ -2,7 +2,7 @@
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
- * @version $Id: CouponAddCouponTestData.php 180 2012-11-08 17:21:23Z doleiynyk $
+ * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
