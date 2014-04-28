@@ -60,7 +60,7 @@ class Controller_ExtJS_Coupon_DefaultTest extends MW_Unittest_Testcase
 			'condition' => (object) array(
 				'&&' => array(
 					0 => array( '~=' => (object) array( 'coupon.provider' => 'FixedRebate' ) ),
-					1 => array( '==' => (object) array( 'coupon.editor' => 'coupon:test' ) )
+					1 => array( '==' => (object) array( 'coupon.editor' => 'core:unittest' ) )
 				)
 			),
 			'sort' => 'coupon.label',
