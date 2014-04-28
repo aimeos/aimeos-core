@@ -231,6 +231,11 @@ class MShop_Coupon_Manager_DefaultTest extends MW_Unittest_Testcase
 
 		//search with base criteria
 		$search = $this->_object->createSearch(true);
-		$this->assertEquals( 6, count( $this->_object->searchItems( $search ) ) );
+		$expr = array(
+			$search->getConditions(),
+			$search->compare( '==', 'coupon.code.editor', 'core:unittest' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$this->assertEquals( 5, count( $this->_object->searchItems( $search ) ) );
 	}
 }
