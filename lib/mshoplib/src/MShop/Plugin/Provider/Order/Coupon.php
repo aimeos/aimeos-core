@@ -2,9 +2,9 @@
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH
+ * @license LGPLv3, http://www.arcavias.com/en/license
  * @package MShop
  * @subpackage Plugin
- * @version $Id: Coupon.php 37 2012-08-08 17:37:40Z fblasel $
  */
 
 

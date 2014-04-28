@@ -2,7 +2,7 @@
 
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH
- * @version $Id: TablesChangeSiteidNotNullCoupon.php 37 2012-08-08 17:37:40Z fblasel $
+ * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
