@@ -41,7 +41,7 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 		$couponManager = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() );
 
 		$search = $couponManager->createSearch();
-		$search->setConditions( $search->compare( '~=', 'coupon.code.code', '1234') );
+		$search->setConditions( $search->compare( '~=', 'coupon.code.code', 'OPQR') );
 		$results = $couponManager->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -81,7 +81,7 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'coupon.code.code', '1234') );
+		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR') );
 		$results = $this->_object->searchItems( $search );
 
 		if ( ( $codeItem = reset( $results ) ) === false) {
@@ -161,10 +161,10 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'coupon.code.id', null );
 		$expr[] = $search->compare( '!=', 'coupon.code.siteid', null );
 		$expr[] = $search->compare( '!=', 'coupon.code.couponid', null );
-		$expr[] = $search->compare( '==', 'coupon.code.code', '5678' );
+		$expr[] = $search->compare( '==', 'coupon.code.code', 'OPQR' );
 		$expr[] = $search->compare( '==', 'coupon.code.count', 2000000 );
-		$expr[] = $search->compare( '==', 'coupon.code.datestart', '2000-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'coupon.code.dateend', '2004-12-21 23:59:59' );
+		$expr[] = $search->compare( '==', 'coupon.code.datestart', null );
+		$expr[] = $search->compare( '==', 'coupon.code.dateend', null );
 		$expr[] = $search->compare( '>=', 'coupon.code.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'coupon.code.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'coupon.code.editor', '' );

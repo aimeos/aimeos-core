@@ -18,7 +18,7 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'TablesCreateMShop' );
+		return array( 'TablesCreateMShop', 'LocaleAddTestData', 'OrderAddTestData' );
 	}
 
 
@@ -47,13 +47,7 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 	 */
 	protected function _process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
-		}
-		$this->_additional->setEditor( 'coupon:test' );
-
-		$this->_msg( 'Setting up Arcavias Coupon test data', 0 );
+		$this->_msg( 'Adding coupon test data', 0 );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'coupon.php';

@@ -94,7 +94,7 @@ class MShop_Coupon_Manager_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException( 'MShop_Exception' );
 		$this->_object->getSubManager( 'Code', 'unknown' );
 	}
 
@@ -102,21 +102,21 @@ class MShop_Coupon_Manager_DefaultTest extends MW_Unittest_Testcase
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'coupon.code.code', '1234') );
+		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR') );
 		$results = $this->_object->searchItems( $search );
-		$itemA = reset($results);
-		if ($itemA === false)
-		{
+
+		if( ( $itemA = reset( $results ) ) === false ) {
 			throw new Exception( 'No results available' );
 		}
+
 		$itemB = $this->_object->getItem( $itemA->getId() );
-		$this->assertEquals('Unit test cheapest free', $itemB->getLabel() );
+		$this->assertEquals( 'Unit test example', $itemB->getLabel() );
 	}
 
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$result = $this->_object->searchItems($search);
+		$result = $this->_object->searchItems( $search );
 
 		if ( ( $item = reset($result) ) === false ) {
 			throw new Exception('No coupon item found');
