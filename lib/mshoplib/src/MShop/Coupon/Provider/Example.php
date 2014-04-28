@@ -14,7 +14,9 @@
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_Example extends MShop_Coupon_Provider_Abstract
+class MShop_Coupon_Provider_Example
+	extends MShop_Coupon_Provider_Abstract
+	implements MShop_Coupon_Provider_Factory_Interface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
@@ -43,5 +45,16 @@ class MShop_Coupon_Provider_Example extends MShop_Coupon_Provider_Abstract
 	 */
 	public function updateCoupon( MShop_Order_Item_Base_Interface $base )
 	{
+	}
+
+
+	/**
+	 * Tests if a coupon should be granted
+	 *
+	 * @param MShop_Order_Item_Base_Interface $base
+	 */
+	public function isAvailable( MShop_Order_Item_Base_Interface $base )
+	{
+		return true;
 	}
 }
