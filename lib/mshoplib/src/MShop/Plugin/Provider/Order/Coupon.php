@@ -45,12 +45,7 @@ class MShop_Plugin_Provider_Order_Coupon
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
 		$context = $this->_getContext();
-
 		$context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
-
-		if ( self::$_lock === true ) { return; }
-
-		self::$_lock = true;
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
@@ -59,25 +54,27 @@ class MShop_Plugin_Provider_Order_Coupon
 			throw new MShop_Plugin_Exception(sprintf($msg, get_class($order), $class));
 		}
 
-		$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
-		$searchObj = $couponManager->createSearch();
-		foreach( $order->getCoupons() as $code => $products )
+		if( self::$_lock === false )
 		{
-			$search = clone $searchObj;
-			$search->setConditions( $search->compare( '==', 'coupon.code.code', $code ) );
-			$results = $couponManager->searchItems( $search );
+			self::$_lock = true;
 
-			if( ( $couponItem = reset( $results ) ) === false )
+			$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
+			$search = $couponManager->createSearch();
+
+			foreach( $order->getCoupons() as $code => $products )
 			{
-				$msg = 'no item found with code "%1$s" in method: "%2$s"';
-				throw new MShop_Plugin_Exception( sprintf($msg, $code, __METHOD__) );
+				$search->setConditions( $search->compare( '==', 'coupon.code.code', $code ) );
+				$results = $couponManager->searchItems( $search );
+
+				if( ( $couponItem = reset( $results ) ) !== false )
+				{
+					$couponProvider = $couponManager->getProvider( $couponItem, $code );
+					$couponProvider->updateCoupon( $order );
+				}
 			}
 
-			$couponProvider = $couponManager->getProvider($couponItem, $code);
-			$couponProvider->updateCoupon( $order );
+			self::$_lock = false;
 		}
-
-		self::$_lock = false;
 
 		return true;
 	}
