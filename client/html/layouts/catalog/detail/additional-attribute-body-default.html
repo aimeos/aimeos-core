@@ -37,4 +37,14 @@ $enc = $this->encoder();
 	</tbody>
 </table>
 <?php endif; ?>
+?php foreach($subAttributes as $subProductID => $subProduct ) : ?>
+<table class="content attributes subArticleAttributes sub-prodid-<?php echo $subProductID; ?>">
+<?php foreach( $subProduct as $attrItem ) : ?>
+	<tr class="item">
+		<td class="name"><?php echo $attrItem->getType(); ?></td>
+		<td class="value"><?php echo $attrItem->getName(); ?></td>
+	</tr>
+<?php endforeach; ?>
+</table>
+<?php endforeach; ?>
 <?php echo $this->get( 'attributeBody' ); ?>
