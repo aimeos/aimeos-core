@@ -31,11 +31,11 @@ class MShop_Coupon_Provider_PercentRebate
 
 		$config = $this->_getItem()->getConfig();
 
-		if( !isset( $config['product'] ) || !isset( $config['rebate']) )
+		if( !isset( $config['percentrebate.productcode'] ) || !isset( $config['percentrebate.rebate']) )
 		{
 			throw new MShop_Coupon_Exception( sprintf(
 				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->_getItem()->getProvider(), 'product, rebate'
+				$this->_getItem()->getProvider(), 'percentrebate.productcode, percentrebate.rebate'
 			) );
 		}
 
@@ -44,12 +44,12 @@ class MShop_Coupon_Provider_PercentRebate
 			$sum += $product->getPrice()->getValue() * $product->getQuantity();
 		}
 
-		$rebate = round( $sum * (float) $config['rebate'] / 100, 2 );
+		$rebate = round( $sum * (float) $config['percentrebate.rebate'] / 100, 2 );
 		$price = MShop_Price_Manager_Factory::createManager( $this->_getContext() )->createItem();
 		$price->setValue( -$rebate );
 		$price->setRebate( $rebate );
 
-		$orderProduct = $this->_createProduct( $config['product'], 1 );
+		$orderProduct = $this->_createProduct( $config['percentrebate.productcode'], 1 );
 		$orderProduct->setPrice( $price );
 
 		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );

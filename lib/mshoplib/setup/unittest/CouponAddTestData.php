@@ -87,7 +87,7 @@ class MW_Setup_Task_CouponAddTestData extends MW_Setup_Task_Abstract
 			$coupon->setStatus( $dataset['status'] );
 
 			$couponManager->saveItem( $coupon );
-			$couponIds[ $dataset['provider'] . '/' . $dataset['status'] ] = $coupon->getId();
+			$couponIds[$key] = $coupon->getId();
 		}
 
 
