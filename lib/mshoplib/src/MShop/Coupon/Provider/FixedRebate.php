@@ -29,6 +29,8 @@ class MShop_Coupon_Provider_FixedRebate
 			return;
 		}
 
+		$config = $this->_getItem()->getConfig();
+
 		if( !isset( $config['fixedrebate.productcode'] ) || !isset( $config['fixedrebate.rebate']) )
 		{
 			throw new MShop_Coupon_Exception( sprintf(
