@@ -25,11 +25,11 @@ class MShop_Coupon_Provider_Decorator_Required
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $base )
 	{
-		if( isset( $config['required.productcode'] ) )
+		if( ( $prodcode = $this->_getConfigValue( 'required.productcode' ) ) !== null )
 		{
 			foreach( $base->getProducts() as $product )
 			{
-				if( $product->getProductCode() == $config['required.productcode'] ) {
+				if( $product->getProductCode() == $prodcode ) {
 					return parent::isAvailable( $base );
 				}
 			}
