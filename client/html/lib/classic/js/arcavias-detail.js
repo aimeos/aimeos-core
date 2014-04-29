@@ -229,8 +229,8 @@ jQuery(document).ready( function($) {
 			}
 		}
 		// Show attributes from subarticles 
-		$(".subArticleAttribtes.attributes-actual").removeClass("attributes-actual");
-		$(".subArticleAttribtes.sub-prodid-"+ prodId).addClass("attributes-actual");
+		$(".subArticleAttributes.attributes-actual").removeClass("attributes-actual");
+		$(".subArticleAttributes.sub-prodid-"+ prodId).addClass("attributes-actual");
 	});
 	
 	
