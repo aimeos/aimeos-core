@@ -12,10 +12,8 @@
 class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework_TestCase
 {
 	private $_object;
-	private $_outer;
 	private $_orderBase;
-	private $_context;
-	private $_couponManager;
+	private $_couponItem;
 
 	/**
 	 * Runs the test methods of this class.
@@ -85,6 +83,7 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 	{
 		unset( $this->_object );
 		unset( $this->_orderBase );
+		unset( $this->_couponItem );
 	}
 
 
