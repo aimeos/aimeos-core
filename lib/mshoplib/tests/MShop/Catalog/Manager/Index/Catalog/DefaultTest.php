@@ -227,4 +227,10 @@ class MShop_Catalog_Manager_Index_Catalog_DefaultTest extends MW_Unittest_Testca
 		$this->assertEquals( 1, count( $result ) );
 	}
 
+
+	public function testCleanupIndex()
+	{
+		$this->_object->cleanupIndex( '0000-00-00 00:00:00' );
+	}
+
 }
