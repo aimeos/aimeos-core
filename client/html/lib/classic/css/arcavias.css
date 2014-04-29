@@ -1107,6 +1107,14 @@
 	border: solid 1px #FF3300;
 }
 
+/* Product detail, additional attributes from Subporoducts*/
+.catalog-detail-additional .subArticleAttributes {
+  display: none;
+}
+.catalog-detail-additional .subArticleAttributes.attributes-actual {
+	display: table;
+}
+
 /* Product detail, additional section */
 .catalog-detail-additional {
 	padding-top: 1em;
