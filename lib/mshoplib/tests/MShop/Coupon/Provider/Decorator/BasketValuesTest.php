@@ -11,10 +11,6 @@
  */
 class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var    MShop_Coupon_Provider_Decorator_BasketValues
-	 * @access protected
-	 */
 	private $_object;
 	private $_outer;
 	private $_orderBase;
@@ -43,15 +39,14 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$outer = null;
-
 		$context = TestHelper::getContext();
 
 		$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
 		$this->_couponItem = $couponManager->createItem();
 
-		$provider = new MShop_Coupon_Provider_Example($context, $this->_couponItem, 'abcd', $outer);
-		$this->_object = new MShop_Coupon_Provider_Decorator_BasketValues( $context, $this->_couponItem, 'abcd', $provider, $outer );
+		$provider = new MShop_Coupon_Provider_Example( $context, $this->_couponItem, 'abcd' );
+		$this->_object = new MShop_Coupon_Provider_Decorator_BasketValues( $context, $this->_couponItem, 'abcd', $provider );
+		$this->_object->setObject( $this->_object );
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 		$orderBaseManager = $orderManager->getSubManager('base');
