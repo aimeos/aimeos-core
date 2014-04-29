@@ -68,7 +68,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends MW_Unittest_Test
 			->getMock();
 
 		$catalogIndexManagerStub = $this->getMockBuilder( 'MShop_Catalog_Manager_Index_Default' )
-			->setMethods( array( 'rebuildIndex' ) )
+			->setMethods( array( 'rebuildIndex', 'cleanupIndex' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
@@ -79,6 +79,7 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends MW_Unittest_Test
 			->will( $this->returnValue( $catalogIndexManagerStub ) );
 
 		$catalogIndexManagerStub->expects( $this->once() )->method( 'rebuildIndex' );
+		$catalogIndexManagerStub->expects( $this->once() )->method( 'cleanupIndex' );
 
 
 		$object = new Controller_Jobs_Catalog_Index_Rebuild_Default( $context, $arcavias );
