@@ -1109,7 +1109,7 @@
 
 /* Product detail, additional attributes from Subporoducts*/
 .catalog-detail-additional .subArticleAttributes {
-  display: none;
+  	display: none;
 }
 .catalog-detail-additional .subArticleAttributes.attributes-actual {
 	display: table;
