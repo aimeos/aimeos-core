@@ -183,7 +183,7 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 			$search->compare( '==', 'coupon.code.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$this->assertEquals( 5, count( $this->_object->searchItems( $search ) ) );
+		$this->assertEquals( 4, count( $this->_object->searchItems( $search ) ) );
 	}
 
 
@@ -197,29 +197,12 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No coupon code item found.' );
 		}
 
-		$this->_object->decrease( $codeItem->getCode(), 1 );
+		$this->_object->decrease( $codeItem->getCode() );
 		$actual = $this->_object->getItem( $codeItem->getId() );
-		$this->_object->increase( $codeItem->getCode(), 1 );
+
+		$this->_object->saveItem( $codeItem );
 
 		$this->assertEquals( $codeItem->getCount() - 1, $actual->getCount() );
-	}
-
-
-	public function testIncrease()
-	{
-		$search = $this->_object->createSearch();
-		$search->setSlice(0, 1);
-		$results = $this->_object->searchItems( $search );
-
-		if( ( $codeItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No coupon code item found.' );
-		}
-
-		$this->_object->increase( $codeItem->getCode(), 1 );
-		$actual = $this->_object->getItem( $codeItem->getId() );
-		$this->_object->decrease( $codeItem->getCode(), 1 );
-
-		$this->assertEquals( $codeItem->getCount() + 1, $actual->getCount() );
 	}
 
 
