@@ -14,7 +14,9 @@
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_FixedRebate extends MShop_Coupon_Provider_Abstract
+class MShop_Coupon_Provider_FixedRebate
+	extends MShop_Coupon_Provider_Abstract
+	implements MShop_Coupon_Provider_Factory_Interface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
@@ -23,7 +25,9 @@ class MShop_Coupon_Provider_FixedRebate extends MShop_Coupon_Provider_Abstract
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$config = $this->_getItem()->getConfig();
+		if( $this->_getObject()->isAvailable( $base ) === false ) {
+			return;
+		}
 
 		if( !isset( $config['fixedrebate.productcode'] ) || !isset( $config['fixedrebate.rebate']) )
 		{
@@ -40,6 +44,6 @@ class MShop_Coupon_Provider_FixedRebate extends MShop_Coupon_Provider_Abstract
 		$orderProduct = $this->_createProduct( $config['fixedrebate.productcode'], 1 );
 		$orderProduct->setPrice( $price );
 
-		$base->addCoupon( $this->_getCode(), $coupons );
+		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
 	}
 }

@@ -14,7 +14,9 @@
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_PercentRebate extends MShop_Coupon_Provider_Abstract
+class MShop_Coupon_Provider_PercentRebate
+	extends MShop_Coupon_Provider_Abstract
+	implements MShop_Coupon_Provider_Factory_Interface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
@@ -23,7 +25,10 @@ class MShop_Coupon_Provider_PercentRebate extends MShop_Coupon_Provider_Abstract
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$coupons = array();
+		if( $this->_getObject()->isAvailable( $base ) === false ) {
+			return;
+		}
+
 		$config = $this->_getItem()->getConfig();
 
 		if( !isset( $config['percentrebate.productcode'] ) || !isset( $config['percentrebate.rebate']) )
@@ -34,15 +39,10 @@ class MShop_Coupon_Provider_PercentRebate extends MShop_Coupon_Provider_Abstract
 			) );
 		}
 
-			$sum = 0.00;
-			foreach( $base->getProducts() AS $prod ) {
-				$sum += $prod->getPrice()->getValue() * $prod->getQuantity();
-			}
-
-			$rebate = round( $sum * (float) $config['rebate'] / 100, 2 );
-			$price = MShop_Price_Manager_Factory::createManager( $this->_getContext() )->createItem();
-			$price->setValue( -$rebate );
-			$price->setRebate( $rebate );
+		$sum = 0.00;
+		foreach( $base->getProducts() as $product ) {
+			$sum += $product->getPrice()->getValue() * $product->getQuantity();
+		}
 
 		$rebate = round( $sum * (float) $config['percentrebate.rebate'] / 100, 2 );
 		$price = MShop_Price_Manager_Factory::createManager( $this->_getContext() )->createItem();
@@ -52,6 +52,6 @@ class MShop_Coupon_Provider_PercentRebate extends MShop_Coupon_Provider_Abstract
 		$orderProduct = $this->_createProduct( $config['percentrebate.productcode'], 1 );
 		$orderProduct->setPrice( $price );
 
-		$base->addCoupon( $this->_getCode(), $coupons );
+		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
 	}
 }

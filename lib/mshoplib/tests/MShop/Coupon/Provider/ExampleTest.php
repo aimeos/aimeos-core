@@ -39,15 +39,12 @@ class MShop_Coupon_Provider_ExampleTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$item = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
-
-		$outer = null;
-		$this->_object = new MShop_Coupon_Provider_Example( $context, $item, '1234', $outer );
-
 		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
+		$item = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
 
 		// Don't create order base item by createItem() as this would already register the plugins
 		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->_object = new MShop_Coupon_Provider_Example( $context, $item, '1234' );
 	}
 
 
