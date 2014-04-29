@@ -213,6 +213,19 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 						$prodDeps[$subProdId][] = $attrId;
 						$attrIds[] = $attrId;
 					}
+					
+					// find regular attributes from Subproducts
+					foreach( $subProduct->getRefItems( 'attribute', null, 'default' ) as $attrId => $attrItem )
+					{
+						$subAttrIds[$subProdId][] = $attrId;
+					}
+					$searchSubAttr = $attrManager->createSearch( true );
+					$exprSubAttr = array(
+						$searchSubAttr->compare( '==', 'attribute.id', $subAttrIds[$subProdId]),
+						$searchSubAttr->getConditions(),
+					);
+					$searchSubAttr->setConditions( $searchSubAttr->combine( '&&', $exprSubAttr ) );
+					$subAttr[$subProdId] = $attrManager->searchItems( $searchSubAttr, array( 'text', 'attribute' ) );
 				}
 
 				ksort( $attrTypeDeps );
@@ -229,6 +242,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				$view->selectionAttributeDependencies = $attrDeps;
 				$view->selectionAttributeTypeDependencies = $attrTypeDeps;
 				$view->selectionAttributeItems = $attrManager->searchItems( $search, array( 'text', 'media' ) );
+				$view->selectionSubAttributeItems = $subAttr;
 			}
 
 			$this->_cache = $view;
