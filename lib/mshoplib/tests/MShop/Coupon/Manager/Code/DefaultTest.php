@@ -184,7 +184,7 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 			$search->compare( '==', 'coupon.code.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$this->assertEquals( 5, count( $this->_object->searchItems( $search ) ) );
+		$this->assertEquals( 4, count( $this->_object->searchItems( $search ) ) );
 	}
 
 
