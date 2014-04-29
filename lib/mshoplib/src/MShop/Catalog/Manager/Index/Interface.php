@@ -36,6 +36,15 @@ interface MShop_Catalog_Manager_Index_Interface
 
 
 	/**
+	 * Removes all entries not touched after the given timestamp in the catalog index.
+	 * This can be a long lasting operation.
+	 *
+	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
+	 */
+	public function cleanupIndex( $timestamp );
+
+
+	/**
 	 * Rebuilds the catalog index for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *

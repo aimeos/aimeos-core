@@ -625,6 +625,12 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCleanupIndex()
+	{
+		$this->_object->cleanupIndex( '0000-00-00 00:00:00' );
+	}
+
+
 	public function testRebuildIndexAll()
 	{
 		$config = $this->_context->getConfig();
