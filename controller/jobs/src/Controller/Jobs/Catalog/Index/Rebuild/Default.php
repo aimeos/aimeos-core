@@ -47,12 +47,14 @@ class Controller_Jobs_Catalog_Index_Rebuild_Default
 	 */
 	public function run()
 	{
+		$timestamp = date( 'Y-m-d H:i:s' );
 		$context = clone $this->_getContext();
 
 		$context->getLocale()->setLanguageId( null );
 		$context->getLocale()->setCurrencyId( null );
 
-		$manager = MShop_Catalog_Manager_Factory::createManager( $context );
-		$manager->getSubManager( 'index' )->rebuildIndex();
+		$manager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'index' );
+		$manager->rebuildIndex();
+		$manager->cleanupIndex( $timestamp );
 	}
 }
