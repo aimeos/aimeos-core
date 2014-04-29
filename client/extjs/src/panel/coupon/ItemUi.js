@@ -14,7 +14,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 
 	initComponent : function() {
-		this.title = _('Coupon item details');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Coupon item details' );
 
 		this.items = [ {
 			xtype : 'tabpanel',
@@ -24,7 +24,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			coupons : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
@@ -51,48 +51,48 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'coupon.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'coupon.status'
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Provider'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Provider' ),
 							name : 'coupon.provider',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Name of the coupon provider class (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Name of the coupon provider class (required)' )
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Label'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'coupon.label',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Internal coupon name (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'datefield',
-							fieldLabel : _('Available from'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Start date'),
 							name : 'coupon.datestart',
 							format : 'Y-m-d H:i:s',
-							emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 						}, {
 							xtype : 'datefield',
-							fieldLabel : _('Available until'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'End date'),
 							name : 'coupon.dateend',
 							format : 'Y-m-d H:i:s',
-							emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'coupon.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'coupon.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'coupon.editor'
 						} ]
 					} ]
@@ -113,11 +113,12 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['coupon.label'] : 'new';
+		var label = this.record ? this.record.data['coupon.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Coupon item panel title with coupon label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Coupon: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
-		this.setTitle( 'Coupon: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
-
-		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
+		MShop.panel.coupon.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
 
 
@@ -130,7 +131,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( ( key = key.trim() ) !== '' ) {
-						config[key] = value;
+						config[key] = (typeof value === "string") ? value.trim() : value;
 					}
 				}, this);
 			});

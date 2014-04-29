@@ -8,7 +8,7 @@ Ext.ns('MShop.panel.order.base.coupon');
 
 MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	layout: 'fit',
-	title : _('Coupons'),
+	title : MShop.I18n.dt( 'client/extjs', 'Coupons' ),
 	recordName : 'Order_Base_Coupon',
 	idProperty : 'order.base.coupon.id',
 	siteidProperty : 'order.base.coupon.siteid',
@@ -93,65 +93,65 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.id',
-				header : _('Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.baseid',
-				header : _('Base Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'Base ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.code',
-				header : _('Coupon code')
+				header : MShop.I18n.dt( 'client/extjs', 'Coupon code' )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product code'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product code' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.prodcode" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product name'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product name' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.name" ], true ),
 				id: 'order-base-coupon-name'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product quantity'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product quantity' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.quantity" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product price'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product price' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.price" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product shipping'),
-				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.shipping" ], true )
+				header : MShop.I18n.dt( 'client/extjs', 'Product costs' ),
+				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.costs" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product rebate'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product rebate' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.rebate" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product taxrate'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product tax rate' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.taxrate" ], true )
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.coupon.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -160,7 +160,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.coupon.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -169,7 +169,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				editable : false,

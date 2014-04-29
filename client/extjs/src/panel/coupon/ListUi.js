@@ -25,7 +25,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 	initComponent : function()
 	{
-		this.title = _('Coupon');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Coupon' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -39,7 +39,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.id',
-				header : _('Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				width : 50,
 				editable : false,
@@ -47,7 +47,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.status',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				width : 70,
 				align: 'center',
@@ -55,14 +55,13 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.provider',
-				header : _('Provider'),
-				id : 'coupon-list-provider',
+				header : MShop.I18n.dt( 'client/extjs', 'Provider' ),
 				sortable : true,
 				editable : false
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.label',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				width : 100,
 				editable : false,
@@ -70,21 +69,21 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'coupon.datestart',
-				header : _('Start Date'),
+				header : MShop.I18n.dt( 'client/extjs', 'Start date' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s'
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'coupon.dateend',
-				header : _('End Date'),
+				header : MShop.I18n.dt( 'client/extjs', 'End date' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.config',
-				header : _('Configuration'),
+				header : MShop.I18n.dt( 'client/extjs', 'Configuration' ),
 				width : 200,
 				editable : false,
 				renderer: function (value) {
@@ -97,7 +96,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'coupon.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -105,7 +104,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'coupon.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -113,7 +112,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				hidden : true

@@ -366,6 +366,12 @@
         }, {
             "text": "ConfigUi.js",
             "path": "src/panel/coupon/"
+        }, {
+            "text": "ListUi.js",
+            "path": "src/panel/coupon/code/"
+        }, {
+            "text": "ItemUi.js",
+            "path": "src/panel/coupon/code/"
 		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/order/"
