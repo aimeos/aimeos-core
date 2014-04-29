@@ -81,7 +81,7 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR') );
+		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$results = $this->_object->searchItems( $search );
 
 		if ( ( $codeItem = reset( $results ) ) === false) {
@@ -96,6 +96,7 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$result = $this->_object->searchItems($search);
 
 		if ( ( $item = reset($result) ) === false ) {
@@ -190,19 +191,36 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 	public function testDecrease()
 	{
 		$search = $this->_object->createSearch();
-		$search->setSlice(0, 1);
+		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$results = $this->_object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
 			throw new Exception( 'No coupon code item found.' );
 		}
 
-		$this->_object->decrease( $codeItem->getCode() );
+		$this->_object->decrease( $codeItem->getCode(), 1 );
 		$actual = $this->_object->getItem( $codeItem->getId() );
-
-		$this->_object->saveItem( $codeItem );
+		$this->_object->increase( $codeItem->getCode(), 1 );
 
 		$this->assertEquals( $codeItem->getCount() - 1, $actual->getCount() );
+	}
+
+
+	public function testIncrease()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
+		$results = $this->_object->searchItems( $search );
+
+		if( ( $codeItem = reset( $results ) ) === false ) {
+			throw new Exception( 'No coupon code item found.' );
+		}
+
+		$this->_object->increase( $codeItem->getCode(), 1 );
+		$actual = $this->_object->getItem( $codeItem->getId() );
+		$this->_object->decrease( $codeItem->getCode(), 1 );
+
+		$this->assertEquals( $codeItem->getCount() + 1, $actual->getCount() );
 	}
 
 
