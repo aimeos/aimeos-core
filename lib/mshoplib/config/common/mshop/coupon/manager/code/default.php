@@ -37,9 +37,9 @@ return array(
 			FROM "mshop_coupon_code" AS mcouco
 			WHERE :cond
 		',
-		'counter' => '
+		'decrease' => '
 			UPDATE "mshop_coupon_code"
-			SET	"count" = "count" + ?, "mtime" = ?, "editor" = ?
+			SET	"count" = "count" - ?, "mtime" = ?, "editor" = ?
 			WHERE :cond AND "code" = ?
 		',
 	),

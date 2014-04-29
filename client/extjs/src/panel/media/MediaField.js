@@ -174,7 +174,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     updateImage: function() {
 
         // only update when new image differs from current
-        if(this.imageSrc != '' && this.imageCt.dom.src.substr(-1 * this.imageSrc.length) !== this.imageSrc) {
+        if(this.imageSrc != '' && this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
         	
             var ct = this.imageCt.up('div');
             var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);

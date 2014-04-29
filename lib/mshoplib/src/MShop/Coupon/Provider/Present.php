@@ -14,9 +14,7 @@
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_Present
-	extends MShop_Coupon_Provider_Abstract
-	implements MShop_Coupon_Provider_Factory_Interface
+class MShop_Coupon_Provider_Present extends MShop_Coupon_Provider_Abstract
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
@@ -25,10 +23,7 @@ class MShop_Coupon_Provider_Present
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
-			return;
-		}
-
+		$coupons = array();
 		$config = $this->_getItem()->getConfig();
 
 		if( !isset( $config['present.productcode'] ) || !isset( $config['present.quantity']) )
@@ -41,6 +36,6 @@ class MShop_Coupon_Provider_Present
 
 		$orderProduct = $this->_createProduct( $config['present.productcode'], $config['present.quantity'] );
 
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->_getCode(), $coupons );
 	}
 }

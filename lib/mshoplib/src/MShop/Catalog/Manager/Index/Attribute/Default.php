@@ -242,6 +242,49 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 
 	/**
+	 * Removes all entries not touched after the given timestamp in the catalog index.
+	 * This can be a long lasting operation.
+	 *
+	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
+	 */
+	public function cleanupIndex( $timestamp )
+	{
+		$context = $this->_getContext();
+		$siteid = $context->getLocale()->getSiteId();
+
+
+		$dbm = $context->getDatabaseManager();
+		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$conn = $dbm->acquire( $dbname );
+
+		try
+		{
+			$this->_begin();
+
+			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/attribute/default/cleanup' );
+
+			$stmt->bind( 1, $timestamp ); // ctime
+			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+
+			$stmt->execute()->finish();
+
+			$this->_commit();
+			$dbm->release( $conn, $dbname );
+		}
+		catch( Exception $e )
+		{
+			$this->_rollback();
+			$dbm->release( $conn, $dbname );
+			throw $e;
+		}
+
+		foreach ( $this->_submanagers as $submanager ) {
+			$submanager->cleanupIndex( $timestamp );
+		}
+	}
+
+
+	/**
 	 * Rebuilds the catalog index attribute for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *

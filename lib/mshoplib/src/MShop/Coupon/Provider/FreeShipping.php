@@ -14,9 +14,7 @@
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_FreeShipping
-	extends MShop_Coupon_Provider_Abstract
-	implements MShop_Coupon_Provider_Factory_Interface
+class MShop_Coupon_Provider_FreeShipping extends MShop_Coupon_Provider_Abstract
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
@@ -25,10 +23,7 @@ class MShop_Coupon_Provider_FreeShipping
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
-			return;
-		}
-
+		$coupons = array();
 		$config = $this->_getItem()->getConfig();
 
 		if( !isset( $config['freeshipping.productcode'] ) )
@@ -39,13 +34,13 @@ class MShop_Coupon_Provider_FreeShipping
 			) );
 		}
 
-		$price = clone ( $base->getService('delivery')->getPrice() );
-		$price->setRebate( $price->getCosts() );
-		$price->setCosts( -$price->getCosts() );
+			$price = clone ( $base->getService('delivery')->getPrice() );
+			$price->setRebate( $price->getCosts() );
+			$price->setCosts( -$price->getCosts() );
 
 		$orderProduct = $this->_createProduct( $config['freeshipping.productcode'], 1 );
 		$orderProduct->setPrice( $price );
 
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->_getCode(), $coupons );
 	}
 }

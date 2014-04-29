@@ -88,7 +88,7 @@ class Controller_Frontend_Basket_Factory
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/frontend/common/decorators/default
 		 * @see controller/frontend/basket/decorators/global
 		 * @see controller/frontend/basket/decorators/local
@@ -108,11 +108,11 @@ class Controller_Frontend_Basket_Factory
 		 *  controller/frontend/basket/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Controller_Frontend_Common_Decorator_Decorator1" only to the job controller.
+		 * "Controller_Frontend_Common_Decorator_Decorator1" only to the frontend controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/frontend/common/decorators/default
 		 * @see controller/frontend/basket/decorators/excludes
 		 * @see controller/frontend/basket/decorators/local
@@ -132,12 +132,12 @@ class Controller_Frontend_Basket_Factory
 		 *  controller/frontend/basket/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_Frontend_Basket_Decorator_Decorator2" only to the job
+		 * "Controller_Frontend_Basket_Decorator_Decorator2" only to the frontend
 		 * controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
-		 * @category Developers
+		 * @category Developer
 		 * @see controller/frontend/common/decorators/default
 		 * @see controller/frontend/basket/decorators/excludes
 		 * @see controller/frontend/basket/decorators/global

@@ -198,9 +198,8 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'No coupon code item found.' );
 		}
 
-		$this->_object->decrease( $codeItem->getCode(), 1 );
+		$this->_object->decrease( $codeItem->getCode() );
 		$actual = $this->_object->getItem( $codeItem->getId() );
-		$this->_object->increase( $codeItem->getCode(), 1 );
 
 		$this->assertEquals( $codeItem->getCount() - 1, $actual->getCount() );
 	}
@@ -212,15 +211,7 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$results = $this->_object->searchItems( $search );
 
-		if( ( $codeItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No coupon code item found.' );
-		}
-
-		$this->_object->increase( $codeItem->getCode(), 1 );
-		$actual = $this->_object->getItem( $codeItem->getId() );
-		$this->_object->decrease( $codeItem->getCode(), 1 );
-
-		$this->assertEquals( $codeItem->getCount() + 1, $actual->getCount() );
+		$this->assertEquals( $codeItem->getCount() - 1, $actual->getCount() );
 	}
 
 

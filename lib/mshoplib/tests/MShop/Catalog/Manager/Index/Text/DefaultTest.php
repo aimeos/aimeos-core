@@ -260,4 +260,10 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 		$this->assertContains( 'Cafe Noire Cappuccino', $result );
 	}
 
+
+	public function testCleanupIndex()
+	{
+		$this->_object->cleanupIndex( '0000-00-00 00:00:00' );
+	}
+
 }

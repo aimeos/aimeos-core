@@ -31,5 +31,8 @@ return array(
 				LIMIT 1000 OFFSET 0
 			) AS list
 		',
-	)
+	),
+	'cleanup' => '
+		DELETE FROM "mshop_catalog_index_price" WHERE "ctime" < ? AND "siteid" = ?
+	',
 );

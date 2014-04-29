@@ -41,6 +41,7 @@ class MShop_Coupon_Provider_PresentTest extends MW_Unittest_Testcase
 	{
 		$context = TestHelper::getContext();
 
+
 		$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
 		$search = $couponManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'GHIJ') );
@@ -50,7 +51,8 @@ class MShop_Coupon_Provider_PresentTest extends MW_Unittest_Testcase
 			throw new Exception( 'No coupon item found' );
 		}
 
-		$this->_object = new MShop_Coupon_Provider_Present( $context, $couponItem, 'GHIJ' );
+		$outer = null;
+		$this->_object = new MShop_Coupon_Provider_Present( $context, $couponItem, 'GHIJ', $outer );
 
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
