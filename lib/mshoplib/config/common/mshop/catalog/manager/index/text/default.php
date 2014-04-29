@@ -32,6 +32,9 @@ return array(
 			) AS list
 		',
 	),
+	'cleanup' => '
+		DELETE FROM "mshop_catalog_index_text" WHERE "ctime" < ? AND "siteid" = ?
+	',
 	'text' => array(
 		'search' => '
 			SELECT DISTINCT mcatinte."prodid", mcatinte."value"
