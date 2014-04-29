@@ -14,9 +14,7 @@
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_PercentRebate
-	extends MShop_Coupon_Provider_Abstract
-	implements MShop_Coupon_Provider_Factory_Interface
+class MShop_Coupon_Provider_PercentRebate extends MShop_Coupon_Provider_Abstract
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
@@ -25,33 +23,31 @@ class MShop_Coupon_Provider_PercentRebate
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
-			return;
-		}
-
+		$coupons = array();
 		$config = $this->_getItem()->getConfig();
 
-		if( !isset( $config['product'] ) || !isset( $config['rebate']) )
+		if( $this->_checkConstraints( $base, $config ) === true )
 		{
-			throw new MShop_Coupon_Exception( sprintf(
-				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->_getItem()->getProvider(), 'product, rebate'
-			) );
+			if( !isset( $config['product'] ) || !isset( $config['rebate'] ) ) {
+				throw new MShop_Coupon_Exception( 'Invalid configuration for percent rebate, "product" and "rebate" required.');
+			}
+
+			$sum = 0.00;
+			foreach( $base->getProducts() AS $prod ) {
+				$sum += $prod->getPrice()->getValue() * $prod->getQuantity();
+			}
+
+			$rebate = round( $sum * (float) $config['rebate'] / 100, 2 );
+			$price = MShop_Price_Manager_Factory::createManager( $this->_getContext() )->createItem();
+			$price->setValue( -$rebate );
+			$price->setRebate( $rebate );
+
+			$orderProduct = $this->_createProduct( $config['product'], 1 );
+			$orderProduct->setPrice( $price );
+
+			$coupons[] = $orderProduct;
 		}
 
-		$sum = 0.00;
-		foreach( $base->getProducts() as $product ) {
-			$sum += $product->getPrice()->getValue() * $product->getQuantity();
-		}
-
-		$rebate = round( $sum * (float) $config['rebate'] / 100, 2 );
-		$price = MShop_Price_Manager_Factory::createManager( $this->_getContext() )->createItem();
-		$price->setValue( -$rebate );
-		$price->setRebate( $rebate );
-
-		$orderProduct = $this->_createProduct( $config['product'], 1 );
-		$orderProduct->setPrice( $price );
-
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->_getCode(), $coupons );
 	}
 }

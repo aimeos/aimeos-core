@@ -14,9 +14,7 @@
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_FixedRebate
-	extends MShop_Coupon_Provider_Abstract
-	implements MShop_Coupon_Provider_Factory_Interface
+class MShop_Coupon_Provider_FixedRebate extends MShop_Coupon_Provider_Abstract
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
@@ -25,27 +23,26 @@ class MShop_Coupon_Provider_FixedRebate
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
-			return;
-		}
-
 		$config = $this->_getItem()->getConfig();
 
-		if( !isset( $config['product'] ) || !isset( $config['rebate']) )
+		$coupons = array();
+
+		if( ( $this->_checkConstraints( $base, $config ) === true ) && ( $this->_getOuterObject()->isAvailable( $base ) ) )
 		{
-			throw new MShop_Coupon_Exception( sprintf(
-				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->_getItem()->getProvider(), 'product, rebate'
-			) );
+			if( !isset( $config['product'] ) || !isset( $config['rebate']) ) {
+				throw new MShop_Coupon_Exception( 'Invalid configuration for fixed rebate, need "product" and "rebate"' );
+			}
+
+			$price = MShop_Price_Manager_Factory::createManager( $this->_getContext() )->createItem();
+			$price->setValue( -$config['rebate'] );
+			$price->setRebate( $config['rebate'] );
+
+			$orderProduct = $this->_createProduct( $config['product'], 1 );
+			$orderProduct->setPrice( $price );
+
+			$coupons[] = $orderProduct;
 		}
 
-		$price = MShop_Price_Manager_Factory::createManager( $this->_getContext() )->createItem();
-		$price->setValue( -$config['rebate'] );
-		$price->setRebate( $config['rebate'] );
-
-		$orderProduct = $this->_createProduct( $config['product'], 1 );
-		$orderProduct->setPrice( $price );
-
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->_getCode(), $coupons );
 	}
 }

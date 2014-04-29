@@ -323,7 +323,8 @@ class MShop_Coupon_Manager_Default
 		}
 
 		$context = $this->_getContext();
-		$provider = new $classname( $context, $item, $code );
+		$outer = null;
+		$provider = new $classname( $context, $item, $code, $outer );
 
 		if( ( $provider instanceof $interface ) === false )
 		{
@@ -331,13 +332,10 @@ class MShop_Coupon_Manager_Default
 			throw new MShop_Coupon_Exception( $msg );
 		}
 
+		$provider = $this->_addCouponDecorators( $item, $code, $provider, $names, $outer );
+		$outer = $provider;
 		$decorators = $context->getConfig()->get( 'mshop/coupon/provider/decorators', array() );
-
-		$object = $this->_addCouponDecorators( $item, $code, $provider, $names );
-		$object = $this->_addCouponDecorators( $item, $code, $object, $decorators );
-		$object->setObject( $object );
-
-		return $object;
+		return $this->_addCouponDecorators( $item, $code, $provider, $decorators, $outer );
 	}
 
 

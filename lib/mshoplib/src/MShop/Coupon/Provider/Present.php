@@ -14,9 +14,7 @@
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_Present
-	extends MShop_Coupon_Provider_Abstract
-	implements MShop_Coupon_Provider_Factory_Interface
+class MShop_Coupon_Provider_Present extends MShop_Coupon_Provider_Abstract
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
@@ -25,22 +23,20 @@ class MShop_Coupon_Provider_Present
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		if( $this->_getObject()->isAvailable( $base ) === false ) {
-			return;
-		}
-
+		$coupons = array();
 		$config = $this->_getItem()->getConfig();
 
-		if( !isset( $config['product'] ) || !isset( $config['quantity']) )
+		if( $this->_checkConstraints( $base, $config ) === true )
 		{
-			throw new MShop_Coupon_Exception( sprintf(
-				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->_getItem()->getProvider(), 'product, quantity'
-			) );
+			if( !isset( $config['product'] ) || !isset( $config['quantity'] ) ) {
+				throw new MShop_Coupon_Exception( 'Invalid configuration for coupon, "product" and "quantity" required!' );
+			}
+
+			$orderProduct = $this->_createProduct( $config['product'], $config['quantity'] );
+
+			$coupons[] = $orderProduct;
 		}
 
-		$orderProduct = $this->_createProduct( $config['product'], $config['quantity'] );
-
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->_getCode(), $coupons );
 	}
 }

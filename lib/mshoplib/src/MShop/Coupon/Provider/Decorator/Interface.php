@@ -26,5 +26,5 @@ interface MShop_Coupon_Provider_Decorator_Interface
 	 * @param MShop_Coupon_Provider_Interface $provider Coupon provider
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Coupon_Item_Interface $item,
-		$code, MShop_Coupon_Provider_Interface $provider );
+		$code, MShop_Coupon_Provider_Interface $provider, &$outer );
 }
