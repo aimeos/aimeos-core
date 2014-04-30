@@ -201,7 +201,7 @@ class MShop_Coupon_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'coupon.id', null );
 		$expr[] = $search->compare( '!=', 'coupon.siteid', null );
 		$expr[] = $search->compare( '==', 'coupon.label', 'Unit test fixed rebate' );
-		$expr[] = $search->compare( '==', 'coupon.provider', 'FixedRebate' );
+		$expr[] = $search->compare( '=~', 'coupon.provider', 'FixedRebate' );
 		$expr[] = $search->compare( '~=', 'coupon.config', 'product' );
 		$expr[] = $search->compare( '==', 'coupon.datestart', '2002-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'coupon.dateend', '2100-12-31 00:00:00' );

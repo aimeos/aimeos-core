@@ -107,6 +107,10 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 			$item->setConfig( $dataset['config'] );
 			$item->setStatus( $dataset['status'] );
 
+			if( isset( $dataset['position'] ) ) {
+				$item->setPosition( $dataset['position'] );
+			}
+
 			try {
 				$pluginManager->saveItem( $item );
 				$num++;
