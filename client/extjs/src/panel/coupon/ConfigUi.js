@@ -81,10 +81,26 @@ MShop.panel.coupon.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 				this.store.loadData([[key, value]], true);
 			}, this);
 		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
+		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}

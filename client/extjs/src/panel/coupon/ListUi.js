@@ -90,6 +90,9 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				renderer: function (value) {
 					var s = "";
 					Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
 						s = s + String.format('<div>{0}: {1}</div>', key, value);
 					}, this);
 					return s;
