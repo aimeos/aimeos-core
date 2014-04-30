@@ -78,6 +78,9 @@ MShop.panel.coupon.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
 		},
