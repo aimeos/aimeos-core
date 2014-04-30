@@ -2380,6 +2380,10 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
     onUploadFail: function(response, options, fileRecord) {
         fileRecord.set('status', 'failure');
         
+        if( response.error ) {
+        	fileRecord.set('error', response.error);
+        }
+        
         this.fireEvent('uploadfailure', this, fileRecord);
     },
     
@@ -2665,6 +2669,16 @@ MShop.UrlManager.prototype = {
 
     setLanguageCode : function(languageCode) {
         this.data.locale = languageCode;
+    },
+
+
+    getAbsoluteUrl : function(url) {
+
+    	if( url.substr( 0, 4 ) !== 'http' && url.substr( 0, 5 ) !== 'data:' ) {
+    		return MShop.config.baseurl.content + '/' + url;
+    	}
+    	
+    	return url;
     }
 };
 /*!
@@ -4171,6 +4185,9 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
                 renderer: function (value) {
                     var s = "";
                     Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
                         s = s + String.format('<div>{0}: {1}</div>', key, value);
                     }, this);
                     return s;
@@ -4355,7 +4372,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( ( key = key.trim() ) !== '' ) {
-						config[key] = value.trim();
+						config[key] = (typeof value === "string") ? value.trim() : value;
 					}
 				}, this);
 			});
@@ -5171,13 +5188,32 @@ MShop.panel.ListConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
@@ -6372,6 +6408,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 						style: 'padding-right: 25px;',
 						border : false,
 						flex : 1,
+						autoScroll : true,
 						labelAlign : 'top',
 						defaults : {
 							readOnly : this.fieldsReadOnly,
@@ -6701,7 +6738,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 	},
 
 	previewRenderer : function(preview) {
-		return '<img class="arcavias-admin-media-list-preview" src="' + MShop.config.baseurl.content + '/' + preview + '" />';
+		return '<img class="arcavias-admin-media-list-preview" src="' + MShop.urlManager.getAbsoluteUrl( preview ) + '" />';
 	}
 });
 
@@ -6804,12 +6841,21 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 							allowBlank : false,
 							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
+							xtype : 'textfield',
+							name : 'media.preview',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Preview URL' )
+						}, {
+							xtype : 'textfield',
+							name : 'media.url',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'File URL' )
+						}, {
 							// NOTE: this is not used as a field, more like a
 							// component which works on the whole record
 							xtype : 'MShop.panel.media.mediafield',
 							name : 'media.preview',
+							value : ( this.record ? this.record.get('media.preview') : '' ),
 							width : 360,
-							height : 280
+							height : 360
 						}, {
 							xtype : 'displayfield',
 							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
@@ -6937,7 +6983,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend( MShop.panel.AbstractListItemPickerU
 
 	refPreviewRenderer : function(refId, metaData, record, rowIndex, colIndex, store) {
 		var refItem = this.getRefStore().getById(refId);
-		return (refItem ? '<img class="arcavias-admin-media-list-preview" src="' + MShop.config.baseurl.content + '/' + refItem.get('media.preview') + '" />' : '');
+		return (refItem ? '<img class="arcavias-admin-media-list-preview" src="' + MShop.urlManager.getAbsoluteUrl( refItem.get('media.preview') ) + '" />' : '');
 	}
 });
 
@@ -7014,13 +7060,14 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     /**
      * @cfg {String}
      */
-    defaultImage: '',
+    defaultImage: 'mimeicons/unknown.png',
     
     cls: 'arcavias-admin-media-item-preview',
     
     defaultAutoCreate : {tag:'input', type:'hidden'},
     handleMouseEvents: true,
     
+
     initComponent: function() {
         this.scope = this;
         this.handler = this.onFileSelect;
@@ -7033,7 +7080,8 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         
         MShop.panel.media.MediaField.superclass.initComponent.call(this);
         
-        this.imageSrc = this.defaultImage;
+        this.imageSrc = this.value || this.defaultImage;
+
         if(this.border === true) {
             this.width = this.width;
             this.height = this.height;
@@ -7043,12 +7091,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     onRender: function(ct, position) {
         MShop.panel.media.MediaField.superclass.onRender.call(this, ct, position);
         
-        // the container for the browe button
+        // the container for the browse button
         this.buttonCt = Ext.DomHelper.insertFirst(ct, '<div>&nbsp;</div>', true);
+        this.buttonCt.setSize(this.width, this.height);
         this.buttonCt.applyStyles({
             border: this.border === true ? '1px solid #B5B8C8' : '0'
         });
-        this.buttonCt.setSize(this.width, this.height);
         
         this.loadMask = new Ext.LoadMask(this.buttonCt, {
         	msg: MShop.I18n.dt( 'client/extjs', 'Loading' ),
@@ -7065,11 +7113,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         
         // the image container
         // NOTE: this will atm. always be the default image for the first few miliseconds
-        this.imageCt = Ext.DomHelper.insertFirst(this.buttonCt, '<img class="' + this.cls + '" src="' + MShop.config.baseurl.content + '/' + this.imageSrc + '"/>' , true);
+        this.imageCt = Ext.DomHelper.insertFirst(this.buttonCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);
         this.imageCt.setOpacity(0.2);
         this.imageCt.setStyle({
-            position: 'absolute',
-            top: '18px'
+            top: ((this.height - this.imageCt.getHeight()) / 2) + 'px',
+            left: ((this.width - this.imageCt.getWidth()) / 2) + 'px',
+            position: 'absolute'
         });
         
         Ext.apply(this.browsePlugin, {
@@ -7087,13 +7136,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     },
     
     getValue: function() {
-        var value = MShop.panel.media.MediaField.superclass.getValue.call(this);
-        return value;
+        return MShop.panel.media.MediaField.superclass.getValue.call(this);
     },
     
     setValue: function(value) {
         MShop.panel.media.MediaField.superclass.setValue.call(this, value);
-        
+
         if (! value || value == this.defaultImage) {
             this.imageSrc = this.defaultImage;
         } else {
@@ -7125,6 +7173,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
             allowHTML5Uploads: false,
             HTML4params: { 'params' : Ext.encode( params ) }
         });
+        
         uploader.on('uploadcomplete', this.onUploadSucess, this);
         uploader.on('uploadfailure', this.onUploadFail, this);
         
@@ -7134,14 +7183,23 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     /**
      * @private
      */
-    onUploadFail: function() {
-        Ext.MessageBox.alert(
-       	    MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
-       	    MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' ) ).setIcon( Ext.MessageBox.ERROR );
+    onUploadFail: function( uploader, response ) {
+
+    	var msg, code;
+        var title = MShop.I18n.dt( 'client/extjs', 'Upload failed' );
+        var errmsg = MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' );
+    	
+        if( response && response.data && response.data.error ) {
+            msg = response.data.error.message ? response.data.error.message : errmsg;
+            code = response.data.error.code ? response.data.error.code : 0;
+        }
+        
+        Ext.Msg.alert( title + ' (' + code + ')', msg ).setIcon( Ext.MessageBox.ERROR );
         this.loadMask.hide();
     },
     
     onUploadSucess: function(uploader, record, response) {
+    	
         for (var field in response) {
             if (field.match(/\.status|\.label|\.typeid|\.langid/) && this.itemUi.record.get(field)) {
                 continue;
@@ -7155,21 +7213,32 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
                 formField.setValue(response[field]);
             }
         }
+        
+        this.setValue(response[this.name]);
     },
     
     updateImage: function() {
+
         // only update when new image differs from current
-        if(this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
+        if(this.imageSrc != '' && this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
+        	
             var ct = this.imageCt.up('div');
-            var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.config.baseurl.content + this.imageSrc + '"/>' , true);
+            var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);
+            
             // replace image after load
             img.on('load', function(){
                 this.imageCt.remove();
                 this.imageCt = img;
-                this.textCt.setVisible(this.imageSrc == this.defaultImage);
                 this.imageCt.setOpacity(this.imageSrc == this.defaultImage ? 0.2 : 1);
+                this.imageCt.setStyle({
+                    top: ((this.height - this.imageCt.getHeight()) / 2) + 'px',
+                    left: ((this.width - this.imageCt.getWidth()) / 2) + 'px',
+                    position: 'absolute'
+                });
+                this.textCt.setVisible(this.imageSrc == this.defaultImage);
                 this.loadMask.hide();
             }, this);
+            
             img.on('error', function() {
                 Ext.MessageBox.alert(
                		MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
@@ -10233,13 +10302,32 @@ MShop.panel.catalog.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
@@ -10458,6 +10546,9 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				renderer: function (value) {	
 					var s = "";
 					Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
 						s = s + String.format('<div>{0}: {1}</div>', key, value);
 					}, this);
 					return s;
@@ -10861,13 +10952,32 @@ MShop.panel.service.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
@@ -11082,6 +11192,11 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 	autoExpandColumn : 'plugin-list-label',
 
+	sortInfo : {
+		field : 'plugin.position',
+		direction : 'ASC'
+	},
+
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'plugin.label',
@@ -11161,6 +11276,9 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				renderer: function (value) {	
 					var s = "";
 					Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
 						s = s + String.format('<div>{0}: {1}</div>', key, value);
 					}, this);
 					return s;
@@ -11446,13 +11564,32 @@ MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
@@ -14609,6 +14746,9 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 				renderer: function (value) {
 					var s = "";
 					Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
 						s = s + String.format('<div>{0}: {1}</div>', key, value);
 					}, this);
 					return s;
@@ -14809,7 +14949,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( ( key = key.trim() ) !== '' ) {
-						config[key] = value.trim();
+						config[key] = (typeof value === "string") ? value.trim() : value;
 					}
 				}, this);
 			});
@@ -14872,7 +15012,6 @@ Ext.ns('MShop.panel.locale.site');
 MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 
 	stripeRows: true,
-	autoExpandColumn : 'locale-site-config-value',
 
 	initComponent: function() {
 		this.title = MShop.I18n.dt( 'client/extjs', 'Configuration' );		
@@ -14880,6 +15019,7 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 		this.tbar = this.getToolBar();
 		this.store = this.getStore();
 		this.sm = new Ext.grid.RowSelectionModel();
+		this.autoExpandColumn = 'locale-site-config-value';
 		this.record = Ext.data.Record.create([
 			{name: 'name', type: 'string'},
 			{name: 'value', type: 'string'}
@@ -14904,15 +15044,16 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 			{
 				text: MShop.I18n.dt( 'client/extjs', 'Delete' ), 
 				handler: function () {
-					var selection = that.getSelectionModel().getSelections()[0];
-					if (selection) {
+					Ext.each( that.getSelectionModel().getSelections(), function( selection, idx ) {
 						that.store.remove(selection);
-						var data = {};
-						Ext.each(that.store.data.items, function (item, index) {
-							data[item.data.name] = item.data.value;
-						}, this);
-						that.data = data;
-					}
+					}, this );
+
+					var data = {};
+					Ext.each( that.store.data.items, function( item, index ) {
+						data[item.data.name] = item.data.value;
+					}, this );
+					
+					that.data = data;
 				}
 			}
 		]);
@@ -14947,13 +15088,32 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
