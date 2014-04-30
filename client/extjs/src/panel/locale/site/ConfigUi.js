@@ -9,7 +9,6 @@ Ext.ns('MShop.panel.locale.site');
 MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 
 	stripeRows: true,
-	autoExpandColumn : 'locale-site-config-value',
 
 	initComponent: function() {
 		this.title = MShop.I18n.dt( 'client/extjs', 'Configuration' );		
@@ -17,6 +16,7 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 		this.tbar = this.getToolBar();
 		this.store = this.getStore();
 		this.sm = new Ext.grid.RowSelectionModel();
+		this.autoExpandColumn = 'locale-site-config-value';
 		this.record = Ext.data.Record.create([
 			{name: 'name', type: 'string'},
 			{name: 'value', type: 'string'}
@@ -41,15 +41,16 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 			{
 				text: MShop.I18n.dt( 'client/extjs', 'Delete' ), 
 				handler: function () {
-					var selection = that.getSelectionModel().getSelections()[0];
-					if (selection) {
+					Ext.each( that.getSelectionModel().getSelections(), function( selection, idx ) {
 						that.store.remove(selection);
-						var data = {};
-						Ext.each(that.store.data.items, function (item, index) {
-							data[item.data.name] = item.data.value;
-						}, this);
-						that.data = data;
-					}
+					}, this );
+
+					var data = {};
+					Ext.each( that.store.data.items, function( item, index ) {
+						data[item.data.name] = item.data.value;
+					}, this );
+					
+					that.data = data;
 				}
 			}
 		]);
@@ -84,13 +85,32 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
