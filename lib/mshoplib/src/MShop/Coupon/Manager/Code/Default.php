@@ -183,7 +183,7 @@ class MShop_Coupon_Manager_Code_Default
 	{
 		$iface = 'MShop_Coupon_Item_Code_Interface';
 		if( !( $code instanceof $iface ) ) {
-			throw new MShop_Coupon_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Coupon_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$code->isModified() ) { return; }
@@ -278,8 +278,17 @@ class MShop_Coupon_Manager_Code_Default
 			$required = array( 'coupon.code' );
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
-				$items[ $row['id'] ] = $this->_createItem( $row );
+
+			try
+			{
+				while( ( $row = $results->fetch() ) !== false ) {
+					$items[ $row['id'] ] = $this->_createItem( $row );
+				}
+			}
+			catch( Exception $e )
+			{
+				$results->finish();
+				throw $e;
 			}
 
 			$dbm->release( $conn );

@@ -329,10 +329,8 @@ class MShop_Service_Manager_Default
 			throw new MShop_Service_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
 		}
 
-		if( ( $provider = array_shift( $names ) ) === null )
-		{
-			$msg = sprintf( 'Provider in "%1$s" not available', $item->getProvider() );
-			throw new MShop_Service_Exception( $msg );
+		if( ( $provider = array_shift( $names ) ) === null ) {
+			throw new MShop_Service_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
 		}
 
 		if ( ctype_alnum( $provider ) === false ) {
@@ -343,23 +341,22 @@ class MShop_Service_Manager_Default
 		$classname = 'MShop_Service_Provider_' . $domain . '_' . $provider;
 
 		if ( class_exists( $classname ) === false ) {
-			throw new MShop_Service_Exception(sprintf('Class "%1$s" not available', $classname));
+			throw new MShop_Service_Exception(sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$context = $this->_getContext();
-		$provider = new $classname($context, $item);
+		$provider = new $classname( $context, $item );
 
-		if ( ( $provider instanceof $interface ) === false ) {
-			$msg = sprintf('Class "%1$s" does not implement interface "%2$s"', $classname, $interface);
+		if ( ( $provider instanceof $interface ) === false )
+		{
+			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
 			throw new MShop_Service_Exception($msg);
 		}
-
-
-		$provider = $this->_addServiceDecorators( $item, $provider, $names );
 
 		$config = $context->getConfig();
 		$decorators = $config->get( 'mshop/service/provider/' . $item->getType() . '/decorators', array() );
 
+		$provider = $this->_addServiceDecorators( $item, $provider, $names );
 		return $this->_addServiceDecorators( $item, $provider, $decorators );
 	}
 

@@ -29,12 +29,14 @@ class MShop_Coupon_Manager_Factory
 	 */
 	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
 	{
-		if ( $name === null ) {
+		if( $name === null ) {
 			$name = $context->getConfig()->get('classes/coupon/manager/name', 'Default');
 		}
 
-		if ( ctype_alnum($name) === false ) {
-			throw new MShop_Coupon_Exception(sprintf('Invalid class name "%1$s"', $name));
+		if( ctype_alnum( $name ) === false )
+		{
+			$classname = is_string( $name ) ? 'MShop_Customer_Manager_' . $name : '<not a string>';
+			throw new MShop_Coupon_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'MShop_Coupon_Manager_Interface';

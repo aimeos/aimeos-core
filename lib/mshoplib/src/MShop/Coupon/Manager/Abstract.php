@@ -25,22 +25,22 @@ abstract class MShop_Coupon_Manager_Abstract
 		foreach( $names as $name )
 		{
 			if ( ctype_alnum( $name ) === false ) {
-				throw new MShop_Coupon_Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
+				throw new MShop_Coupon_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 			}
 
 			$classname = $classprefix . $name;
 
 			if ( class_exists( $classname ) === false ) {
-				throw new MShop_Coupon_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
+				throw new MShop_Coupon_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
 			$provider = new $classname( $this->_getContext(), $item, $code, $provider );
 
 			if ( ( $provider instanceof $iface ) === false ) {
-				$msg = sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface );
-				throw new MShop_Coupon_Exception( $msg );
+				throw new MShop_Coupon_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 			}
 		}
+
 		return $provider;
 	}
 }

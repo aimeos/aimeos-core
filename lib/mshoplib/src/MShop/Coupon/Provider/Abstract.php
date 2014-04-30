@@ -170,7 +170,7 @@ abstract class MShop_Coupon_Provider_Abstract
 		$products = $productManager->searchItems( $search, array( 'text', 'media', 'price' ) );
 
 		if( ( $product = reset( $products ) ) === false ) {
-			throw new MShop_Coupon_Exception( sprintf( 'No product for code "%1$s" found', $productCode ) );
+			throw new MShop_Coupon_Exception( sprintf( 'No product with code "%1$s" found', $productCode ) );
 		}
 
 		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_context );

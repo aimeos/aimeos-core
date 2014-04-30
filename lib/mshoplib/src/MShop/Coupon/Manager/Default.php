@@ -161,7 +161,7 @@ class MShop_Coupon_Manager_Default
 	{
 		$iface = 'MShop_Coupon_Item_Interface';
 		if( !( $coupon instanceof $iface ) ) {
-			throw new MShop_Coupon_Exception( sprintf( 'Object does not implement "%1$s"', $iface ) );
+			throw new MShop_Coupon_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$coupon->isModified() ) { return; }
@@ -261,9 +261,14 @@ class MShop_Coupon_Manager_Default
 			{
 				while( ( $row = $results->fetch() ) !== false )
 				{
-					if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null ) {
-						throw new MShop_Coupon_Exception( sprintf( 'Incorrect json decoding for "%1$s"', $row['config'] ) );
+					$config = $row['config'];
+
+					if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+					{
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
+						$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 					}
+
 					$items[ $row['id'] ] = $this->_createItem( $row );
 				}
 			}
@@ -309,17 +314,19 @@ class MShop_Coupon_Manager_Default
 	{
 		$names = explode( ',', $item->getProvider() );
 
-		if( ( $providername = array_shift( $names ) ) === null )
-		{
-			$msg = sprintf( 'No coupon provider available in "%1$s"', $item->getProvider() );
-			throw new MShop_Coupon_Exception( $msg );
+		if( ( $providername = array_shift( $names ) ) === null ){
+			throw new MShop_Coupon_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
+		}
+
+		if ( ctype_alnum( $provider ) === false ) {
+			throw new MShop_Coupon_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
 		$interface = 'MShop_Coupon_Provider_Factory_Interface';
 		$classname = 'MShop_Coupon_Provider_' . $providername;
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Coupon_Exception( sprintf('Class "%1$s" not found', $classname ) );
+			throw new MShop_Coupon_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$context = $this->_getContext();
@@ -327,7 +334,7 @@ class MShop_Coupon_Manager_Default
 
 		if( ( $provider instanceof $interface ) === false )
 		{
-			$msg = sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, $interface );
+			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
 			throw new MShop_Coupon_Exception( $msg );
 		}
 
