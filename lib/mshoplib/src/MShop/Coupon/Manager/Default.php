@@ -318,8 +318,8 @@ class MShop_Coupon_Manager_Default
 			throw new MShop_Coupon_Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
 		}
 
-		if ( ctype_alnum( $provider ) === false ) {
-			throw new MShop_Coupon_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
+		if ( ctype_alnum( $providername ) === false ) {
+			throw new MShop_Coupon_Exception( sprintf( 'Invalid characters in provider name "%1$s"', $providername ) );
 		}
 
 		$interface = 'MShop_Coupon_Provider_Factory_Interface';
