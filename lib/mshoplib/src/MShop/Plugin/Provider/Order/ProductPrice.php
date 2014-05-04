@@ -64,6 +64,10 @@ class MShop_Plugin_Provider_Order_ProductPrice
 
 		foreach( $orderProducts as $pos => $item )
 		{
+			if( $item->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE != 0 ) {
+				continue;
+			}
+
 			$prodCodes[] = $item->getProductCode();
 
 			foreach( $item->getAttributes() as $ordAttrItem )
@@ -111,6 +115,9 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		{
 			$refPrices = array();
 
+			if( $orderProduct->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE != 0 ) {
+				continue;
+			}
 			// fetch prices of articles/sub-products
 			if( isset( $prodMap[ $orderProduct->getProductCode() ] ) ) {
 				$refPrices = $prodMap[ $orderProduct->getProductCode() ]->getRefItems( 'price', 'default', 'default' );
