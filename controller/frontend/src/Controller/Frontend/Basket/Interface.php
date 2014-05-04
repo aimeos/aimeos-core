@@ -66,6 +66,24 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 
 
 	/**
+	 * Adds the given coupon code and updates the basket.
+	 *
+	 * @param string $code Coupon code entered by the user
+	 * @throws Controller_Frontend_Basket_Exception if the coupon code is invalid or not allowed
+	 */
+	public function addCoupon( $code );
+
+
+	/**
+	 * Removes the given coupon code and its effects from the basket.
+	 *
+	 * @param string $code Coupon code entered by the user
+	 * @throws Controller_Frontend_Basket_Exception if the coupon code is invalid
+	 */
+	public function deleteCoupon( $code );
+
+
+	/**
 	 * Sets the address of the customer in the basket.
 	 *
 	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract
