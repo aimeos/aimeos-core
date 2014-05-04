@@ -45,11 +45,14 @@ abstract class MShop_Coupon_Provider_Abstract
 	{
 		$config = $this->_getItem()->getConfig();
 
-		$this->deleteCoupon( $base );
-
-		if( $this->_getObject()->isAvailable( $base ) !== false ) {
-			$this->addCoupon( $base );
+		if( $this->_getObject()->isAvailable( $base ) !== true )
+		{
+			$base->deleteCoupon( $this->_code );
+			return;
 		}
+
+		$this->deleteCoupon( $base );
+		$this->addCoupon( $base );
 	}
 
 
@@ -60,7 +63,7 @@ abstract class MShop_Coupon_Provider_Abstract
 	 */
 	public function deleteCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$base->deleteCoupon( $this->_code );
+		$base->deleteCoupon( $this->_code, true );
 	}
 
 

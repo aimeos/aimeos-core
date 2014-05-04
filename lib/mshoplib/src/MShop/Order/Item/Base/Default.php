@@ -470,6 +470,10 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 */
 	public function addCoupon( $code, array $products = array() )
 	{
+		if( isset( $this->_coupons[$code] ) ) {
+			throw new MShop_Order_Exception( sprintf( 'Duplicate coupon code "%1$s"', $code ) );
+		}
+
 		foreach( $products as $product )
 		{
 			$this->_checkProduct( $product );

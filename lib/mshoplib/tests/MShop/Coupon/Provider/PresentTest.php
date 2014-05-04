@@ -144,7 +144,7 @@ class MShop_Coupon_Provider_PresentTest extends MW_Unittest_Testcase
 		$products = $this->_orderBase->getProducts();
 
 		$this->assertEquals( 1, count( $products ) );
-		$this->assertEquals( 0, count( $coupons['GHIJ'] ) );
+		$this->assertArrayNotHasKey( 'GHIJ', $coupons );
 	}
 
 

@@ -146,7 +146,7 @@ class MShop_Coupon_Provider_FixedRebateTest extends MW_Unittest_Testcase
 		$coupons = $this->_orderBase->getCoupons();
 
 		$this->assertEquals( 1, count( $products ) );
-		$this->assertEquals( 0, count( $coupons['5678'] ) );
+		$this->assertArrayNotHasKey( '5678', $coupons );
 	}
 
 
