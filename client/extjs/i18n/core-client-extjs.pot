@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-29 17:53+0200\n"
+"POT-Creation-Date: 2014-05-05 20:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,8 +149,8 @@ msgstr ""
 #: src/panel/product/stock/ItemUi.js:35
 #: src/panel/product/stock/warehouse/ItemUi.js:28
 #: src/panel/product/ItemUi.js:25 src/panel/product/tag/ItemUi.js:25
-#: src/panel/supplier/ItemUi.js:21 src/panel/coupon/ItemUi.js:27
-#: src/panel/coupon/code/ItemUi.js:27 src/panel/locale/ItemUi.js:28
+#: src/panel/supplier/ItemUi.js:21 src/panel/coupon/ItemUi.js:28
+#: src/panel/coupon/code/ItemUi.js:28 src/panel/locale/ItemUi.js:28
 #: src/panel/locale/site/ItemUi.js:31 src/panel/text/ItemUi.js:24
 #: src/panel/service/ItemUi.js:21 src/panel/media/ItemUi.js:24
 #: src/panel/order/ItemUi.js:32
@@ -195,8 +195,8 @@ msgstr ""
 #: src/panel/product/ListUiSmall.js:59 src/panel/product/ListUi.js:69
 #: src/panel/product/ItemUi.js:82 src/panel/product/type/ListUi.js:70
 #: src/panel/product/UsedByProductListUi.js:118
-#: src/panel/product/ItemPickerUi.js:65 src/panel/coupon/code/ListUi.js:50
-#: src/panel/coupon/code/ItemUi.js:58 src/panel/locale/site/ListUi.js:59
+#: src/panel/product/ItemPickerUi.js:65 src/panel/coupon/code/ListUi.js:53
+#: src/panel/coupon/code/ItemUi.js:59 src/panel/locale/site/ListUi.js:59
 #: src/panel/locale/site/ItemUi.js:65 src/panel/text/type/ListUi.js:69
 #: src/panel/service/ListUi.js:69 src/panel/service/ItemUi.js:68
 #: src/panel/service/type/ListUi.js:70 src/panel/media/type/ListUi.js:70
@@ -209,6 +209,10 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
+#: src/panel/coupon/code/ListUi.js:31
+msgid "Codes"
+msgstr ""
+
 #: src/panel/order/OrderItemUi.js:59
 msgid "Comment"
 msgstr ""
@@ -218,10 +222,10 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:91 src/panel/plugin/ConfigUi.js:14
+#: src/panel/plugin/ListUi.js:96 src/panel/plugin/ConfigUi.js:14
 #: src/panel/ListItemListUi.js:200 src/panel/catalog/ConfigUi.js:15
 #: src/panel/coupon/ListUi.js:86 src/panel/coupon/ConfigUi.js:15
-#: src/panel/locale/site/ListUi.js:74 src/panel/locale/site/ConfigUi.js:15
+#: src/panel/locale/site/ListUi.js:74 src/panel/locale/site/ConfigUi.js:14
 #: src/panel/ListConfigUi.js:15 src/panel/service/ListUi.js:98
 #: src/panel/service/ConfigUi.js:14
 msgid "Configuration"
@@ -252,7 +256,7 @@ msgstr ""
 msgid "Could not upload file. Please notify your administrator"
 msgstr ""
 
-#: src/panel/coupon/code/ListUi.js:57 src/panel/coupon/code/ItemUi.js:65
+#: src/panel/coupon/code/ListUi.js:59 src/panel/coupon/code/ItemUi.js:66
 msgid "Count"
 msgstr ""
 
@@ -265,25 +269,25 @@ msgstr ""
 msgid "Coupon"
 msgstr ""
 
-#: src/panel/coupon/code/ListUi.js:28 src/panel/order/coupon/ListUi.js:108
+#: src/panel/order/coupon/ListUi.js:108
 msgid "Coupon code"
 msgstr ""
 
-#: src/panel/coupon/code/ItemUi.js:17
+#: src/panel/coupon/code/ItemUi.js:16
 msgid "Coupon code item details"
 msgstr ""
 
 #. : Coupon code item panel title with coupon code ({0}) and site code ({1)}
-#: src/panel/coupon/code/ItemUi.js:110
+#: src/panel/coupon/code/ItemUi.js:111
 msgid "Coupon code: {0} ({1})"
 msgstr ""
 
-#: src/panel/coupon/ItemUi.js:17
+#: src/panel/coupon/ItemUi.js:16
 msgid "Coupon item details"
 msgstr ""
 
 #. : Coupon item panel title with coupon label ({0}) and site code ({1)}
-#: src/panel/coupon/ItemUi.js:118
+#: src/panel/coupon/ItemUi.js:119
 msgid "Coupon: {0} ({1})"
 msgstr ""
 
@@ -291,11 +295,11 @@ msgstr ""
 msgid "Coupons"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:104 src/panel/plugin/ItemUi.js:97
+#: src/panel/plugin/ListUi.js:112 src/panel/plugin/ItemUi.js:97
 #: src/panel/plugin/type/ListUi.js:85 src/panel/job/ListUiSmall.js:123
 #: src/panel/job/ItemUi.js:68 src/panel/attribute/ListUiSmall.js:87
 #: src/panel/attribute/ListUi.js:88 src/panel/attribute/ItemUi.js:100
-#: src/panel/attribute/type/ListUi.js:85 src/panel/ListItemListUi.js:215
+#: src/panel/attribute/type/ListUi.js:85 src/panel/ListItemListUi.js:218
 #: src/panel/catalog/ItemUi.js:75 src/panel/price/ListUiSmall.js:116
 #: src/panel/price/ItemUi.js:123 src/panel/price/type/ListUi.js:85
 #: src/panel/type/AbstractTypeItemUi.js:79
@@ -309,12 +313,12 @@ msgstr ""
 #: src/panel/product/UsedByProductListUi.js:158
 #: src/panel/product/tag/ListUiSmall.js:63 src/panel/product/tag/ItemUi.js:79
 #: src/panel/supplier/ListUi.js:65 src/panel/supplier/ItemUi.js:63
-#: src/panel/coupon/ListUi.js:99 src/panel/coupon/ItemUi.js:87
-#: src/panel/coupon/code/ListUi.js:79 src/panel/coupon/code/ItemUi.js:84
+#: src/panel/coupon/ListUi.js:102 src/panel/coupon/ItemUi.js:88
+#: src/panel/coupon/code/ListUi.js:79 src/panel/coupon/code/ItemUi.js:85
 #: src/panel/locale/ListUi.js:83 src/panel/locale/ItemUi.js:82
-#: src/panel/locale/site/ListUi.js:87 src/panel/locale/site/ItemUi.js:78
+#: src/panel/locale/site/ListUi.js:90 src/panel/locale/site/ItemUi.js:78
 #: src/panel/text/ListUiSmall.js:82 src/panel/text/ItemUi.js:88
-#: src/panel/text/type/ListUi.js:84 src/panel/service/ListUi.js:111
+#: src/panel/text/type/ListUi.js:84 src/panel/service/ListUi.js:114
 #: src/panel/service/ItemUi.js:96 src/panel/service/type/ListUi.js:85
 #: src/panel/media/ListUiSmall.js:89 src/panel/media/ItemUi.js:112
 #: src/panel/media/type/ListUi.js:85
@@ -417,11 +421,11 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:120 src/panel/plugin/ItemUi.js:105
+#: src/panel/plugin/ListUi.js:128 src/panel/plugin/ItemUi.js:105
 #: src/panel/plugin/type/ListUi.js:103 src/panel/job/ListUiSmall.js:141
 #: src/panel/job/ItemUi.js:76 src/panel/attribute/ListUiSmall.js:103
 #: src/panel/attribute/ListUi.js:106 src/panel/attribute/ItemUi.js:108
-#: src/panel/attribute/type/ListUi.js:103 src/panel/ListItemListUi.js:231
+#: src/panel/attribute/type/ListUi.js:103 src/panel/ListItemListUi.js:234
 #: src/panel/catalog/ItemUi.js:83 src/panel/price/ListUiSmall.js:132
 #: src/panel/price/ItemUi.js:131 src/panel/price/type/ListUi.js:103
 #: src/panel/type/AbstractTypeItemUi.js:87
@@ -435,12 +439,12 @@ msgstr ""
 #: src/panel/product/UsedByProductListUi.js:176
 #: src/panel/product/tag/ListUiSmall.js:79 src/panel/product/tag/ItemUi.js:87
 #: src/panel/supplier/ListUi.js:81 src/panel/supplier/ItemUi.js:71
-#: src/panel/coupon/ListUi.js:115 src/panel/coupon/ItemUi.js:95
-#: src/panel/coupon/code/ListUi.js:95 src/panel/coupon/code/ItemUi.js:92
+#: src/panel/coupon/ListUi.js:118 src/panel/coupon/ItemUi.js:96
+#: src/panel/coupon/code/ListUi.js:95 src/panel/coupon/code/ItemUi.js:93
 #: src/panel/locale/ListUi.js:101 src/panel/locale/ItemUi.js:90
-#: src/panel/locale/site/ListUi.js:105 src/panel/locale/site/ItemUi.js:86
+#: src/panel/locale/site/ListUi.js:108 src/panel/locale/site/ItemUi.js:86
 #: src/panel/text/ListUiSmall.js:98 src/panel/text/ItemUi.js:96
-#: src/panel/text/type/ListUi.js:102 src/panel/service/ListUi.js:127
+#: src/panel/text/type/ListUi.js:102 src/panel/service/ListUi.js:130
 #: src/panel/service/ItemUi.js:104 src/panel/service/type/ListUi.js:103
 #: src/panel/media/ListUiSmall.js:105 src/panel/media/ItemUi.js:120
 #: src/panel/media/type/ListUi.js:103
@@ -461,8 +465,8 @@ msgstr ""
 #: src/panel/product/ListUi.js:99 src/panel/product/ItemUi.js:114
 #: src/panel/product/UsedByProductListUi.js:149
 #: src/panel/product/ItemPickerUi.js:98 src/panel/coupon/ListUi.js:79
-#: src/panel/coupon/ItemUi.js:81 src/panel/coupon/code/ListUi.js:72
-#: src/panel/coupon/code/ItemUi.js:78 src/panel/ListItemItemUi.js:60
+#: src/panel/coupon/ItemUi.js:82 src/panel/coupon/code/ListUi.js:72
+#: src/panel/coupon/code/ItemUi.js:79 src/panel/ListItemItemUi.js:60
 msgid "End date"
 msgstr ""
 
@@ -495,7 +499,7 @@ msgstr ""
 msgid "Firstname"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:45 src/panel/plugin/ItemUi.js:47
+#: src/panel/plugin/ListUi.js:50 src/panel/plugin/ItemUi.js:47
 #: src/panel/plugin/type/ListUi.js:50 src/panel/job/ListUiSmall.js:47
 #: src/panel/job/ItemUi.js:50 src/panel/attribute/ListUiSmall.js:46
 #: src/panel/attribute/ListUi.js:47 src/panel/attribute/ItemUi.js:60
@@ -513,8 +517,8 @@ msgstr ""
 #: src/panel/product/UsedByProductListUi.js:98
 #: src/panel/product/tag/ListUiSmall.js:36 src/panel/product/tag/ItemUi.js:54
 #: src/panel/supplier/ListUi.js:41 src/panel/supplier/ItemUi.js:49
-#: src/panel/coupon/ListUi.js:42 src/panel/coupon/ItemUi.js:54
-#: src/panel/coupon/code/ListUi.js:42 src/panel/coupon/code/ItemUi.js:54
+#: src/panel/coupon/ListUi.js:42 src/panel/coupon/ItemUi.js:55
+#: src/panel/coupon/code/ListUi.js:46 src/panel/coupon/code/ItemUi.js:55
 #: src/panel/locale/ListUi.js:47 src/panel/locale/ItemUi.js:55
 #: src/panel/locale/site/ListUi.js:44 src/panel/locale/site/ItemUi.js:58
 #: src/panel/text/ListUiSmall.js:42 src/panel/text/ItemUi.js:54
@@ -549,7 +553,7 @@ msgstr ""
 #: src/panel/price/ItemUi.js:84 src/panel/type/AbstractTypeItemUi.js:76
 #: src/panel/product/stock/warehouse/ItemUi.js:73
 #: src/panel/product/ItemUi.js:93 src/panel/supplier/ItemUi.js:60
-#: src/panel/coupon/ItemUi.js:72 src/panel/locale/site/ItemUi.js:75
+#: src/panel/coupon/ItemUi.js:73 src/panel/locale/site/ItemUi.js:75
 #: src/panel/service/ItemUi.js:86 src/panel/media/ItemUi.js:93
 msgid "Internal name (required)"
 msgstr ""
@@ -558,12 +562,21 @@ msgstr ""
 msgid "Invalid action \"{0}\""
 msgstr ""
 
-#: src/panel/catalog/ItemUi.js:139 src/panel/product/stock/ItemUi.js:128
-#: src/panel/locale/site/ItemUi.js:140 src/panel/AbstractItemUi.js:218
+#: src/panel/plugin/ConfigUi.js:106 src/panel/catalog/ItemUi.js:139
+#: src/panel/catalog/ConfigUi.js:108 src/panel/product/stock/ItemUi.js:128
+#: src/panel/coupon/ConfigUi.js:102 src/panel/locale/site/ItemUi.js:140
+#: src/panel/locale/site/ConfigUi.js:109 src/panel/ListConfigUi.js:108
+#: src/panel/AbstractItemUi.js:218 src/panel/service/ConfigUi.js:117
 #: src/panel/AbstractListItemUi.js:35 src/panel/AbstractListItemUi.js:79
 #: src/panel/AbstractTreeItemUi.js:32 src/panel/ListItemItemUi.js:81
 #: src/panel/ListItemItemUi.js:122
 msgid "Invalid data"
+msgstr ""
+
+#: src/panel/plugin/ConfigUi.js:107 src/panel/catalog/ConfigUi.js:109
+#: src/panel/coupon/ConfigUi.js:103 src/panel/locale/site/ConfigUi.js:110
+#: src/panel/ListConfigUi.js:109 src/panel/service/ConfigUi.js:118
+msgid "Invalid value for configuration key \"{0}\""
 msgstr ""
 
 #: src/panel/attribute/ItemUi.js:93
@@ -578,7 +591,7 @@ msgstr ""
 msgid "Job item details"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:76 src/panel/plugin/ItemUi.js:83
+#: src/panel/plugin/ListUi.js:81 src/panel/plugin/ItemUi.js:83
 #: src/panel/plugin/type/ListUi.js:79 src/panel/job/ListUiSmall.js:63
 #: src/panel/job/ItemUi.js:57 src/panel/attribute/ListUiSmall.js:73
 #: src/panel/attribute/ListUi.js:74 src/panel/attribute/ItemUi.js:86
@@ -597,7 +610,7 @@ msgstr ""
 #: src/panel/product/tag/ListUiSmall.js:57 src/panel/product/tag/ItemUi.js:73
 #: src/panel/product/tag/ItemPickerUi.js:64 src/panel/supplier/ListUi.js:57
 #: src/panel/supplier/ItemUi.js:56 src/panel/coupon/ListUi.js:64
-#: src/panel/coupon/ItemUi.js:68 src/panel/locale/site/ListUi.js:66
+#: src/panel/coupon/ItemUi.js:69 src/panel/locale/site/ListUi.js:66
 #: src/panel/locale/site/ItemUi.js:72 src/panel/text/ListUiSmall.js:71
 #: src/panel/text/ItemUi.js:76 src/panel/text/type/ListUi.js:78
 #: src/panel/text/ItemPickerUi.js:73 src/panel/service/ListUi.js:83
@@ -621,11 +634,11 @@ msgstr ""
 msgid "Language (required)"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:112 src/panel/plugin/ItemUi.js:101
+#: src/panel/plugin/ListUi.js:120 src/panel/plugin/ItemUi.js:101
 #: src/panel/plugin/type/ListUi.js:94 src/panel/job/ListUiSmall.js:132
 #: src/panel/job/ItemUi.js:72 src/panel/attribute/ListUiSmall.js:95
 #: src/panel/attribute/ListUi.js:97 src/panel/attribute/ItemUi.js:104
-#: src/panel/attribute/type/ListUi.js:94 src/panel/ListItemListUi.js:223
+#: src/panel/attribute/type/ListUi.js:94 src/panel/ListItemListUi.js:226
 #: src/panel/catalog/ItemUi.js:79 src/panel/price/ListUiSmall.js:124
 #: src/panel/price/ItemUi.js:127 src/panel/price/type/ListUi.js:94
 #: src/panel/type/AbstractTypeItemUi.js:83
@@ -639,12 +652,12 @@ msgstr ""
 #: src/panel/product/UsedByProductListUi.js:167
 #: src/panel/product/tag/ListUiSmall.js:71 src/panel/product/tag/ItemUi.js:83
 #: src/panel/supplier/ListUi.js:73 src/panel/supplier/ItemUi.js:67
-#: src/panel/coupon/ListUi.js:107 src/panel/coupon/ItemUi.js:91
-#: src/panel/coupon/code/ListUi.js:87 src/panel/coupon/code/ItemUi.js:88
+#: src/panel/coupon/ListUi.js:110 src/panel/coupon/ItemUi.js:92
+#: src/panel/coupon/code/ListUi.js:87 src/panel/coupon/code/ItemUi.js:89
 #: src/panel/locale/ListUi.js:92 src/panel/locale/ItemUi.js:86
-#: src/panel/locale/site/ListUi.js:96 src/panel/locale/site/ItemUi.js:82
+#: src/panel/locale/site/ListUi.js:99 src/panel/locale/site/ItemUi.js:82
 #: src/panel/text/ListUiSmall.js:90 src/panel/text/ItemUi.js:92
-#: src/panel/text/type/ListUi.js:93 src/panel/service/ListUi.js:119
+#: src/panel/text/type/ListUi.js:93 src/panel/service/ListUi.js:122
 #: src/panel/service/ItemUi.js:100 src/panel/service/type/ListUi.js:94
 #: src/panel/media/ListUiSmall.js:97 src/panel/media/ItemUi.js:116
 #: src/panel/media/type/ListUi.js:94
@@ -777,7 +790,7 @@ msgid "Minimum quantity"
 msgstr ""
 
 #: src/panel/plugin/ConfigUi.js:61 src/panel/catalog/ConfigUi.js:62
-#: src/panel/coupon/ConfigUi.js:62 src/panel/locale/site/ConfigUi.js:62
+#: src/panel/coupon/ConfigUi.js:62 src/panel/locale/site/ConfigUi.js:63
 #: src/panel/ListConfigUi.js:62 src/panel/service/ConfigUi.js:67
 #: src/panel/order/delivery/AttributeItemUi.js:209
 #: src/panel/order/delivery/ItemUi.js:60
@@ -788,7 +801,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: src/panel/coupon/ItemUi.js:65
+#: src/panel/coupon/ItemUi.js:66
 msgid "Name of the coupon provider class (required)"
 msgstr ""
 
@@ -862,7 +875,7 @@ msgstr ""
 msgid "Please select an item on the right side and add it via drag and drop to this list."
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:28 src/elements/domain.js:51
+#: src/panel/plugin/ListUi.js:33 src/elements/domain.js:51
 msgid "Plugin"
 msgstr ""
 
@@ -880,7 +893,7 @@ msgstr ""
 msgid "Plugin: {0} ({1})"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:84 src/panel/plugin/ItemUi.js:90
+#: src/panel/plugin/ListUi.js:89 src/panel/plugin/ItemUi.js:90
 #: src/panel/attribute/ListUiSmall.js:80 src/panel/attribute/ListUi.js:81
 #: src/panel/ListItemListUi.js:177 src/panel/locale/ListUi.js:77
 #: src/panel/locale/ItemUi.js:75 src/panel/service/ListUi.js:91
@@ -1000,8 +1013,8 @@ msgstr ""
 msgid "Products"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:69 src/panel/plugin/ItemUi.js:76
-#: src/panel/coupon/ListUi.js:58 src/panel/coupon/ItemUi.js:61
+#: src/panel/plugin/ListUi.js:74 src/panel/plugin/ItemUi.js:76
+#: src/panel/coupon/ListUi.js:58 src/panel/coupon/ItemUi.js:62
 #: src/panel/service/ListUi.js:76 src/panel/service/ItemUi.js:75
 msgid "Provider"
 msgstr ""
@@ -1109,8 +1122,8 @@ msgstr ""
 #: src/panel/product/ListUi.js:91 src/panel/product/ItemUi.js:108
 #: src/panel/product/UsedByProductListUi.js:140
 #: src/panel/product/ItemPickerUi.js:89 src/panel/coupon/ListUi.js:72
-#: src/panel/coupon/ItemUi.js:75 src/panel/coupon/code/ListUi.js:65
-#: src/panel/coupon/code/ItemUi.js:72 src/panel/ListItemItemUi.js:53
+#: src/panel/coupon/ItemUi.js:76 src/panel/coupon/code/ListUi.js:65
+#: src/panel/coupon/code/ItemUi.js:73 src/panel/ListItemItemUi.js:53
 msgid "Start date"
 msgstr ""
 
@@ -1119,7 +1132,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:54 src/panel/plugin/type/ListUi.js:57
+#: src/panel/plugin/ListUi.js:59 src/panel/plugin/type/ListUi.js:57
 #: src/panel/job/ListUiSmall.js:55 src/panel/attribute/ListUiSmall.js:53
 #: src/panel/attribute/ListUi.js:54 src/panel/attribute/type/ListUi.js:57
 #: src/panel/attribute/ItemPickerUi.js:48 src/panel/price/ListUiSmall.js:55
@@ -1240,7 +1253,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: src/panel/plugin/ListUi.js:63 src/panel/plugin/ItemUi.js:54
+#: src/panel/plugin/ListUi.js:68 src/panel/plugin/ItemUi.js:54
 #: src/panel/attribute/ListUiSmall.js:61 src/panel/attribute/ListUi.js:62
 #: src/panel/attribute/ItemUi.js:67 src/panel/attribute/ItemPickerUi.js:57
 #: src/panel/price/ListUiSmall.js:63 src/panel/price/ItemUi.js:59
@@ -1268,7 +1281,7 @@ msgstr ""
 #: src/panel/attribute/ItemUi.js:83 src/panel/catalog/ItemUi.js:66
 #: src/panel/type/AbstractTypeItemUi.js:69
 #: src/panel/product/stock/warehouse/ItemUi.js:67
-#: src/panel/coupon/code/ItemUi.js:62 src/panel/locale/site/ItemUi.js:69
+#: src/panel/coupon/code/ItemUi.js:63 src/panel/locale/site/ItemUi.js:69
 #: src/panel/service/ItemUi.js:72
 msgid "Unique code (required)"
 msgstr ""
@@ -1287,7 +1300,7 @@ msgid "Used by"
 msgstr ""
 
 #: src/panel/plugin/ConfigUi.js:65 src/panel/catalog/ConfigUi.js:66
-#: src/panel/coupon/ConfigUi.js:63 src/panel/locale/site/ConfigUi.js:66
+#: src/panel/coupon/ConfigUi.js:63 src/panel/locale/site/ConfigUi.js:67
 #: src/panel/ListConfigUi.js:66 src/panel/service/ConfigUi.js:74
 #: src/panel/order/delivery/AttributeItemUi.js:219
 #: src/panel/order/product/attribute/ListUiSmall.js:96
@@ -1312,9 +1325,9 @@ msgid "Website"
 msgstr ""
 
 #: src/panel/product/stock/ItemUi.js:100 src/panel/product/ItemUi.js:111
-#: src/panel/product/ItemUi.js:117 src/panel/coupon/ItemUi.js:78
-#: src/panel/coupon/ItemUi.js:84 src/panel/coupon/code/ItemUi.js:75
-#: src/panel/coupon/code/ItemUi.js:81 src/panel/order/ItemUi.js:71
+#: src/panel/product/ItemUi.js:117 src/panel/coupon/ItemUi.js:79
+#: src/panel/coupon/ItemUi.js:85 src/panel/coupon/code/ItemUi.js:76
+#: src/panel/coupon/code/ItemUi.js:82 src/panel/order/ItemUi.js:71
 #: src/panel/order/ItemUi.js:88 src/panel/ListItemItemUi.js:57
 #: src/panel/ListItemItemUi.js:64
 msgid "YYYY-MM-DD hh:mm:ss (optional)"
@@ -1332,7 +1345,7 @@ msgstr ""
 #: src/panel/product/stock/warehouse/ItemUi.js:98
 #: src/panel/product/ItemUi.js:146 src/panel/product/type/ItemUi.js:21
 #: src/panel/product/tag/ItemUi.js:100 src/panel/supplier/ItemUi.js:85
-#: src/panel/coupon/ItemUi.js:116 src/panel/coupon/code/ItemUi.js:108
+#: src/panel/coupon/ItemUi.js:117 src/panel/coupon/code/ItemUi.js:109
 #: src/panel/locale/site/ItemUi.js:106 src/panel/text/ItemUi.js:110
 #: src/panel/text/type/ItemUi.js:21 src/panel/service/ItemUi.js:125
 #: src/panel/service/type/ItemUi.js:21 src/panel/media/ItemUi.js:134

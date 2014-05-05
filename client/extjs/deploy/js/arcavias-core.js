@@ -4307,6 +4307,9 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
                 renderer: function (value) {
                     var s = "";
                     Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
                         s = s + String.format('<div>{0}: {1}</div>', key, value);
                     }, this);
                     return s;
@@ -4489,7 +4492,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( ( key = key.trim() ) !== '' ) {
-						config[key] = value.trim();
+						config[key] = (typeof value === "string") ? value.trim() : value;
 					}
 				}, this);
 			});
@@ -5305,13 +5308,32 @@ MShop.panel.ListConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
@@ -7304,7 +7326,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     updateImage: function() {
 
         // only update when new image differs from current
-        if(this.imageSrc != '' && this.imageCt.dom.src.substr(-1 * this.imageSrc.length) != this.imageSrc) {
+        if(this.imageSrc && this.imageCt.dom.src.substr(-1 * this.imageSrc.length) !== this.imageSrc) {
         	
             var ct = this.imageCt.up('div');
             var img = Ext.DomHelper.insertAfter(this.imageCt, '<img class="' + this.cls + '" src="' + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>' , true);
@@ -10364,13 +10386,32 @@ MShop.panel.catalog.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
@@ -10589,6 +10630,9 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				renderer: function (value) {	
 					var s = "";
 					Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
 						s = s + String.format('<div>{0}: {1}</div>', key, value);
 					}, this);
 					return s;
@@ -10987,13 +11031,32 @@ MShop.panel.service.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
@@ -11208,6 +11271,11 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 	autoExpandColumn : 'plugin-list-label',
 
+	sortInfo : {
+		field : 'plugin.position',
+		direction : 'ASC'
+	},
+
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'plugin.label',
@@ -11287,6 +11355,9 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				renderer: function (value) {	
 					var s = "";
 					Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
 						s = s + String.format('<div>{0}: {1}</div>', key, value);
 					}, this);
 					return s;
@@ -11566,13 +11637,32 @@ MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
@@ -11583,6 +11673,7 @@ MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 
 Ext.reg('MShop.panel.plugin.configui', MShop.panel.plugin.ConfigUi);/*!
  * Copyright (c) Metaways Infosystems GmbH, 2013
+ * LGPLv3, http://www.arcavias.com/en/license
  */
 
 
@@ -11607,7 +11698,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 	initComponent : function()
 	{
-		this.title = _('Coupon');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Coupon' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -11621,7 +11712,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.id',
-				header : _('Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				sortable : true,
 				width : 50,
 				editable : false,
@@ -11629,7 +11720,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.status',
-				header : _('Status'),
+				header : MShop.I18n.dt( 'client/extjs', 'Status' ),
 				sortable : true,
 				width : 70,
 				align: 'center',
@@ -11637,14 +11728,13 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.provider',
-				header : _('Provider'),
-				id : 'coupon-list-provider',
+				header : MShop.I18n.dt( 'client/extjs', 'Provider' ),
 				sortable : true,
 				editable : false
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.label',
-				header : _('Label'),
+				header : MShop.I18n.dt( 'client/extjs', 'Label' ),
 				sortable : true,
 				width : 100,
 				editable : false,
@@ -11652,26 +11742,29 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'coupon.datestart',
-				header : _('Start Date'),
+				header : MShop.I18n.dt( 'client/extjs', 'Start date' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s'
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'coupon.dateend',
-				header : _('End Date'),
+				header : MShop.I18n.dt( 'client/extjs', 'End date' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.config',
-				header : _('Configuration'),
+				header : MShop.I18n.dt( 'client/extjs', 'Configuration' ),
 				width : 200,
 				editable : false,
 				renderer: function (value) {
 					var s = "";
 					Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
 						s = s + String.format('<div>{0}: {1}</div>', key, value);
 					}, this);
 					return s;
@@ -11679,7 +11772,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'coupon.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -11687,7 +11780,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'coupon.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -11695,7 +11788,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'coupon.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				hidden : true
@@ -11711,6 +11804,7 @@ Ext.reg('MShop.panel.coupon.listui', MShop.panel.coupon.ListUi);
 Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.coupon.listui', MShop.panel.coupon.ListUi, 120);
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2013
+ * LGPLv3, http://www.arcavias.com/en/license
  */
 
 
@@ -11718,30 +11812,31 @@ Ext.ns('MShop.panel.coupon');
 
 MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
-	maximized : true,
-	layout : 'fit',
-	modal : true,
+	siteidProperty : 'coupon.siteid',
 
 
 	initComponent : function() {
-		this.title = _('Coupon item details');
+
+		this.title = MShop.I18n.dt( 'client/extjs', 'Coupon item details' );
+
+		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
 			xtype : 'tabpanel',
 			activeTab : 0,
 			border : false,
 			itemId : 'MShop.panel.coupon.ItemUi',
-			coupons : [ 'ux.itemregistry' ],
+			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
-				title : _('Basic'),
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
 				border : false,
 				layout : 'hbox',
 				layoutConfig : {
 					align : 'stretch'
 				},
 				itemId : 'MShop.panel.coupon.ItemUi.BasicPanel',
-				coupons : [ 'ux.itemregistry' ],
+				plugins : [ 'ux.itemregistry' ],
 				defaults : {
 					bodyCssClass : this.readOnlyClass
 				},
@@ -11761,48 +11856,48 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						},
 						items : [ {
 							xtype : 'displayfield',
-							fieldLabel : _( 'ID' ),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
 							name : 'coupon.id'
 						}, {
 							xtype : 'MShop.elements.status.combo',
 							name : 'coupon.status'
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Provider'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Provider' ),
 							name : 'coupon.provider',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Name of the coupon provider class (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Name of the coupon provider class (required)' )
 						}, {
 							xtype : 'textfield',
-							fieldLabel : _('Label'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
 							name : 'coupon.label',
 							allowBlank : false,
 							maxLength : 255,
-							emptyText : _('Internal coupon name (required)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
 						}, {
 							xtype : 'datefield',
-							fieldLabel : _('Available from'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Start date'),
 							name : 'coupon.datestart',
 							format : 'Y-m-d H:i:s',
-							emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 						}, {
 							xtype : 'datefield',
-							fieldLabel : _('Available until'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'End date'),
 							name : 'coupon.dateend',
 							format : 'Y-m-d H:i:s',
-							emptyText : _('YYYY-MM-DD hh:mm:ss (optional)')
+							emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Created'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
 							name : 'coupon.ctime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Last modified'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 							name : 'coupon.mtime'
 						}, {
 							xtype : 'displayfield',
-							fieldLabel : _('Editor'),
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 							name : 'coupon.editor'
 						} ]
 					} ]
@@ -11823,11 +11918,12 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 	afterRender : function()
 	{
-		var label = this.record ? this.record.data['coupon.label'] : 'new';
+		var label = this.record ? this.record.data['coupon.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Coupon item panel title with coupon label ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Coupon: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
-		this.setTitle( 'Coupon: ' + label + ' (' + MShop.config.site["locale.site.label"] + ')' );
-
-		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
+		MShop.panel.coupon.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
 
 
@@ -11840,7 +11936,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( ( key = key.trim() ) !== '' ) {
-						config[key] = value;
+						config[key] = (typeof value === "string") ? value.trim() : value;
 					}
 				}, this);
 			});
@@ -11854,8 +11950,10 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	}
 });
 
-Ext.reg('MShop.panel.coupon.itemui', MShop.panel.coupon.ItemUi);/*!
+Ext.reg('MShop.panel.coupon.itemui', MShop.panel.coupon.ItemUi);
+/*!
  * Copyright (c) Metaways Infosystems GmbH, 2013
+ * LGPLv3, http://www.arcavias.com/en/license
  */
 
 
@@ -11867,7 +11965,7 @@ MShop.panel.coupon.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	autoExpandColumn : 'coupon-config-value',
 
 	initComponent: function() {
-		this.title = _('Configuration');
+		this.title = MShop.I18n.dt( 'client/extjs', 'Configuration' );
 		this.colModel = this.getColumnModel();
 		this.tbar = this.getToolBar();
 		this.store = this.getStore();
@@ -11888,13 +11986,13 @@ MShop.panel.coupon.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 		var that = this;
 		return new Ext.Toolbar([
 			{
-				text: _('Add'),
+				text: MShop.I18n.dt( 'client/extjs', 'Add' ),
 				handler: function () {
 					that.store.insert(0, new that.record({name: '', value: ''}));
 				}
 			},
 			{
-				text: _('Delete'),
+				text: MShop.I18n.dt( 'client/extjs', 'Delete' ),
 				handler: function () {
 					var selection = that.getSelectionModel().getSelections()[0];
 					if (selection) {
@@ -11914,8 +12012,8 @@ MShop.panel.coupon.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 		return new Ext.grid.ColumnModel({
 			defaults: { width: 250, sortable: true },
 			columns: [
-				{header: _('Name'), dataIndex: 'name', editor: { xtype: 'textfield'}},
-				{header: _('Value'), dataIndex: 'value', editor: { xtype: 'textfield'}, id:'coupon-config-value'}
+				{header: MShop.I18n.dt( 'client/extjs', 'Name' ), dataIndex: 'name', editor: { xtype: 'textfield'}},
+				{header: MShop.I18n.dt( 'client/extjs', 'Value' ), dataIndex: 'value', editor: { xtype: 'textfield'}, id:'coupon-config-value'}
 			]
 		});
 	},
@@ -11933,13 +12031,32 @@ MShop.panel.coupon.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}
@@ -11948,7 +12065,268 @@ MShop.panel.coupon.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 
 });
 
-Ext.reg('MShop.panel.coupon.configui', MShop.panel.coupon.ConfigUi);/*!
+Ext.reg('MShop.panel.coupon.configui', MShop.panel.coupon.ConfigUi);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/en/license
+ */
+
+
+Ext.ns('MShop.panel.coupon.code');
+
+MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
+
+	recordName : 'Coupon_Code',
+	idProperty : 'coupon.code.id',
+	siteidProperty : 'coupon.code.siteid',
+	itemUiXType : 'MShop.panel.coupon.code.itemui',
+
+	ParentItemUi : null,
+
+	autoExpandColumn : 'coupon-code-list-code',
+
+	filterConfig : {
+		filters : [ {
+			dataIndex : 'coupon.code.code',
+			operator : 'startswith',
+			value : ''
+		} ]
+	},
+
+	
+	initComponent : function()
+	{
+		this.title = MShop.I18n.dt( 'client/extjs', 'Codes' );
+
+		MShop.panel.AbstractListUi.prototype.initActions.call(this);
+		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
+
+		MShop.panel.coupon.code.ListUi.superclass.initComponent.call(this);
+	},
+
+	
+	getColumns : function()
+	{
+		return [
+			{
+				xtype : 'gridcolumn',
+				dataIndex : 'coupon.code.id',
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+				sortable : true,
+				width : 50,
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'coupon.code.code',
+				header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+				id : 'coupon-code-list-code',
+				sortable : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'coupon.code.count',
+				header : MShop.I18n.dt( 'client/extjs', 'Count' ),
+				sortable : true,
+				width : 100
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'coupon.code.datestart',
+				header : MShop.I18n.dt( 'client/extjs', 'Start date' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s'
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'coupon.code.dateend',
+				header : MShop.I18n.dt( 'client/extjs', 'End date' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s'
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'coupon.code.ctime',
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				hidden : true
+			}, {
+				xtype : 'datecolumn',
+				dataIndex : 'coupon.code.mtime',
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+				sortable : true,
+				width : 130,
+				format : 'Y-m-d H:i:s',
+				hidden : true
+			}, {
+				xtype : 'gridcolumn',
+				dataIndex : 'coupon.code.editor',
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+				sortable : true,
+				width : 130,
+				hidden : true
+			}
+		];
+	},
+
+
+	onBeforeLoad: function(store, options) {
+
+		MShop.panel.coupon.code.ListUi.superclass.onBeforeLoad.apply(this, arguments);
+
+		// filter for refid
+		options.params = options.params || {};
+		options.params.condition = {
+			'&&' : [ {
+				'==' : {
+					'coupon.code.couponid' : this.ParentItemUi.record.data['coupon.id']
+				}
+			} ]
+		};
+	},
+
+	
+	afterRender: function() {
+		
+		MShop.panel.coupon.code.ListUi.superclass.afterRender.apply(this, arguments);
+
+		this.ParentItemUi = this.findParentBy(function(c) {
+			return c.isXType(MShop.panel.AbstractItemUi, false);
+		});
+	}
+
+} );
+
+Ext.reg('MShop.panel.coupon.code.listui', MShop.panel.coupon.code.ListUi);
+
+Ext.ux.ItemRegistry.registerItem('MShop.panel.coupon.ItemUi', 'MShop.panel.coupon.code.listui', MShop.panel.coupon.code.ListUi, 10);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2014
+ * LGPLv3, http://www.arcavias.com/en/license
+ */
+
+
+Ext.ns('MShop.panel.coupon.code');
+
+MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
+
+	siteidProperty : 'coupon.code.siteid',
+
+
+	initComponent : function() {
+
+		this.title = MShop.I18n.dt( 'client/extjs', 'Coupon code item details' );
+
+		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
+
+		this.items = [ {
+			xtype : 'tabpanel',
+			activeTab : 0,
+			border : false,
+			itemId : 'MShop.panel.coupon.code.ItemUi',
+			plugins : [ 'ux.itemregistry' ],
+			items : [ {
+				xtype : 'panel',
+				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
+				border : false,
+				layout : 'hbox',
+				layoutConfig : {
+					align : 'stretch'
+				},
+				itemId : 'MShop.panel.coupon.code.ItemUi.BasicPanel',
+				plugins : [ 'ux.itemregistry' ],
+				defaults : {
+					bodyCssClass : this.readOnlyClass
+				},
+				items : [ {
+					xtype : 'form',
+					title : 'Details',
+					flex : 1,
+					ref : '../../mainForm',
+					autoScroll : true,
+					items : [ {
+						xtype : 'fieldset',
+						style: 'padding-right: 25px;',
+						border : false,
+						labelAlign : 'top',
+						defaults: {
+							anchor : '100%'
+						},
+						items : [ {
+							xtype : 'displayfield',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
+							name : 'coupon.code.id'
+						}, {
+							xtype : 'textfield',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Code' ),
+							name : 'coupon.code.code',
+							allowBlank : false,
+							maxLength : 32,
+							emptyText : MShop.I18n.dt( 'client/extjs', 'Unique code (required)' )
+						}, {
+							xtype : 'numberfield',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Count' ),
+							name : 'coupon.code.count',
+							allowDecimals : false,
+							allowBlank : false,
+							value : 1
+						}, {
+							xtype : 'datefield',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Start date' ),
+							name : 'coupon.code.datestart',
+							format : 'Y-m-d H:i:s',
+							emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
+						}, {
+							xtype : 'datefield',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'End date' ),
+							name : 'coupon.code.dateend',
+							format : 'Y-m-d H:i:s',
+							emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
+						}, {
+							xtype : 'displayfield',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
+							name : 'coupon.code.ctime'
+						}, {
+							xtype : 'displayfield',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+							name : 'coupon.code.mtime'
+						}, {
+							xtype : 'displayfield',
+							fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+							name : 'coupon.code.editor'
+						} ]
+					} ]
+				}]
+			} ]
+		} ];
+
+		this.store.on('beforesave', this.onBeforeSave, this);
+
+		MShop.panel.coupon.code.ItemUi.superclass.initComponent.call(this);
+	},
+
+
+	afterRender : function() {
+
+		var label = this.record ? this.record.data['coupon.code.code'] : MShop.I18n.dt( 'client/extjs', 'new' );
+		//#: Coupon code item panel title with coupon code ({0}) and site code ({1)}
+		var string = MShop.I18n.dt( 'client/extjs', 'Coupon code: {0} ({1})' );
+		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
+
+		MShop.panel.coupon.code.ItemUi.superclass.afterRender.apply( this, arguments );
+	},
+
+
+	onBeforeSave: function( store, data ) {
+
+		if( data.create && data.create[0] ) {
+			data.create[0].data['coupon.code.couponid'] = this.listUI.ParentItemUi.record.id;
+		}
+	}
+
+});
+
+Ext.reg('MShop.panel.coupon.code.itemui', MShop.panel.coupon.code.ItemUi);
+/*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://www.arcavias.com/en/license
  */
@@ -13851,11 +14229,17 @@ Ext.reg('MShop.panel.order.base.service.payment.attribute.itemui', MShop.panel.o
 
 //hook order base address into the order ItemUi
 Ext.ux.ItemRegistry.registerItem('MShop.panel.order.base.service.payment.ItemUi', 'MShop.panel.order.base.service.payment.attribute.ItemUi', MShop.panel.order.base.service.payment.attribute.ItemUi, 20);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2013
+ * LGPLv3, http://www.arcavias.com/en/license
+ */
+
+
 Ext.ns('MShop.panel.order.base.coupon');
 
 MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	layout: 'fit',
-	title : _('Coupons'),
+	title : MShop.I18n.dt( 'client/extjs', 'Coupons' ),
 	recordName : 'Order_Base_Coupon',
 	idProperty : 'order.base.coupon.id',
 	siteidProperty : 'order.base.coupon.siteid',
@@ -13940,65 +14324,65 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			{
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.id',
-				header : _('Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.baseid',
-				header : _('Base Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'Base ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.code',
-				header : _('Coupon code')
+				header : MShop.I18n.dt( 'client/extjs', 'Coupon code' )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product Id'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product ID' ),
 				width : 50,
 				hidden: true
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product code'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product code' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.prodcode" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product name'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product name' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.name" ], true ),
 				id: 'order-base-coupon-name'
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product quantity'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product quantity' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.quantity" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product price'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product price' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.price" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product shipping'),
-				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.shipping" ], true )
+				header : MShop.I18n.dt( 'client/extjs', 'Product costs' ),
+				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.costs" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product rebate'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product rebate' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.rebate" ], true )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.productid',
-				header : _('Product taxrate'),
+				header : MShop.I18n.dt( 'client/extjs', 'Product tax rate' ),
 				renderer : this.typeColumnRenderer.createDelegate( this, [this.productStore, "order.base.product.taxrate" ], true )
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.coupon.ctime',
-				header : _('Created'),
+				header : MShop.I18n.dt( 'client/extjs', 'Created' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -14007,7 +14391,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'datecolumn',
 				dataIndex : 'order.base.coupon.mtime',
-				header : _('Last modified'),
+				header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
 				sortable : true,
 				width : 130,
 				format : 'Y-m-d H:i:s',
@@ -14016,7 +14400,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.coupon.editor',
-				header : _('Editor'),
+				header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
 				sortable : true,
 				width : 130,
 				editable : false,
@@ -15269,6 +15653,9 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 				renderer: function (value) {
 					var s = "";
 					Ext.iterate(value, function (key, value, object) {
+						if( typeof value === "object" ) {
+							value = Ext.util.JSON.encode(value);
+						}
 						s = s + String.format('<div>{0}: {1}</div>', key, value);
 					}, this);
 					return s;
@@ -15469,7 +15856,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 			Ext.each( first.data, function( item, index ) {
 				Ext.iterate( item, function( key, value, object ) {
 					if( ( key = key.trim() ) !== '' ) {
-						config[key] = value.trim();
+						config[key] = (typeof value === "string") ? value.trim() : value;
 					}
 				}, this);
 			});
@@ -15532,7 +15919,6 @@ Ext.ns('MShop.panel.locale.site');
 MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 
 	stripeRows: true,
-	autoExpandColumn : 'locale-site-config-value',
 
 	initComponent: function() {
 		this.title = MShop.I18n.dt( 'client/extjs', 'Configuration' );		
@@ -15540,6 +15926,7 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 		this.tbar = this.getToolBar();
 		this.store = this.getStore();
 		this.sm = new Ext.grid.RowSelectionModel();
+		this.autoExpandColumn = 'locale-site-config-value';
 		this.record = Ext.data.Record.create([
 			{name: 'name', type: 'string'},
 			{name: 'value', type: 'string'}
@@ -15564,15 +15951,16 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 			{
 				text: MShop.I18n.dt( 'client/extjs', 'Delete' ), 
 				handler: function () {
-					var selection = that.getSelectionModel().getSelections()[0];
-					if (selection) {
+					Ext.each( that.getSelectionModel().getSelections(), function( selection, idx ) {
 						that.store.remove(selection);
-						var data = {};
-						Ext.each(that.store.data.items, function (item, index) {
-							data[item.data.name] = item.data.value;
-						}, this);
-						that.data = data;
-					}
+					}, this );
+
+					var data = {};
+					Ext.each( that.store.data.items, function( item, index ) {
+						data[item.data.name] = item.data.value;
+					}, this );
+					
+					that.data = data;
 				}
 			}
 		]);
@@ -15607,13 +15995,32 @@ MShop.panel.locale.site.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 	listeners: {
 		render: function (r) {
 			Ext.iterate(this.data, function (key, value, object) {
+				if( typeof value === "object" ) {
+					value = Ext.util.JSON.encode(value);
+				}
 				this.store.loadData([[key, value]], true);
 			}, this);
+		},
+		beforeedit: function (e) {
+			if( typeof e.value === "object" ) {
+				e.record.data[e.field] = Ext.util.JSON.encode(e.value);
+			}
 		},
 		afteredit: function (obj) {
 			if (obj.record.data.name.trim() !== '') {
 				if( obj.originalValue != obj.record.data.name ) {
 					delete this.data[obj.originalValue];
+				}
+				if( obj.record.data.value[0] === '{' ) {
+					try {
+						obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
+					} catch( err ) {
+						Ext.Msg.alert(
+							MShop.I18n.dt( 'client/extjs', 'Invalid data' ),
+							String.format( MShop.I18n.dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+						
+						throw new Ext.Error('InvalidData', obj.record.data);
+					}
 				}
 				this.data[obj.record.data.name] = obj.record.data.value;
 			}

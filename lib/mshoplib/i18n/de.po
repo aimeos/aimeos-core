@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-30 18:27+0200\n"
-"PO-Revision-Date: 2014-04-30 16:28+0000\n"
+"POT-Creation-Date: 2014-05-05 20:48+0200\n"
+"PO-Revision-Date: 2014-05-05 18:51+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr "Suchkonfiguration für Adresse nicht verfügbar"
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Typ \"%1$s\" für Anschrift liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
-#: src/MShop/Order/Item/Base/Default.php:546
+#: src/MShop/Order/Item/Base/Default.php:550
 #, php-format
 msgid "Basket empty"
 msgstr "Warenkorb leer"
@@ -157,6 +157,11 @@ msgstr "DOM-Struktur der vom Logistikdienstleister erhaltenen XML-Datei konnte n
 #, php-format
 msgid "Database manager object not available"
 msgstr "Datenbankmanager-Objekt nicht verfügbar"
+
+#: src/MShop/Order/Item/Base/Default.php:474
+#, php-format
+msgid "Duplicate coupon code \"%1$s\""
+msgstr "Doppelter Gutscheincode \"%1$s\""
 
 #: src/MShop/Order/Item/Base/Abstract.php:64
 #: src/MShop/Order/Item/Base/Product/Abstract.php:39
@@ -453,13 +458,13 @@ msgid ""
 "method \"insertItem()\" instead."
 msgstr "Neu erstellte Seite kann nicht mit Methode \"saveItem()\" gespeichert werden. Versuchen Sie Methode \"insertItem()\"."
 
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:131
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:138
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
 msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%2$s\" verfügbar"
 
 #: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:132
-#: src/MShop/Coupon/Provider/Abstract.php:173
+#: src/MShop/Coupon/Provider/Abstract.php:176
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "Es konnte kein Produkt mit dem Code \"%1$s\" gefunden werden"
@@ -604,7 +609,7 @@ msgstr "PayPal Express: Falsche Empfängeradresse \"%1$s\""
 msgid "Payment costs"
 msgstr "Zahlungsgebühren"
 
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:172
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:179
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
 msgstr "Bitte werfen Sie einen Blick auf die Preise der Produkte in Ihrem Warenkorb"

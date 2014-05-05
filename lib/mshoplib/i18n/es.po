@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-30 18:27+0200\n"
-"PO-Revision-Date: 2014-04-30 16:27+0000\n"
+"POT-Creation-Date: 2014-05-05 20:48+0200\n"
+"PO-Revision-Date: 2014-05-05 18:50+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "La configuración de búsqueda de direcciones no está disponible"
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "La dirección tipo \"%1$s\" está fuera del rango permitido"
 
-#: src/MShop/Order/Item/Base/Default.php:546
+#: src/MShop/Order/Item/Base/Default.php:550
 #, php-format
 msgid "Basket empty"
 msgstr "Cesta vacía"
@@ -154,6 +154,11 @@ msgstr "El árbol DOM de la respuesta XML del proveedor de entrega no puede conv
 #, php-format
 msgid "Database manager object not available"
 msgstr "Objeto de administrador de base de datos no disponible"
+
+#: src/MShop/Order/Item/Base/Default.php:474
+#, php-format
+msgid "Duplicate coupon code \"%1$s\""
+msgstr ""
 
 #: src/MShop/Order/Item/Base/Abstract.php:64
 #: src/MShop/Order/Item/Base/Product/Abstract.php:39
@@ -450,13 +455,13 @@ msgid ""
 "method \"insertItem()\" instead."
 msgstr "El sitio recién creado no puede guardarse usando el método \"saveItem()\". Inténtelo mejor con el método \"insertItem()\". "
 
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:131
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:138
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
 msgstr "No hay precio disponible para el producto con ID \"%1$s\" ni código de producto \"%2$s\""
 
 #: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:132
-#: src/MShop/Coupon/Provider/Abstract.php:173
+#: src/MShop/Coupon/Provider/Abstract.php:176
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr ""
@@ -601,7 +606,7 @@ msgstr "PayPal Express: receptor de correo electrónico \"%1$s\" incorrecto"
 msgid "Payment costs"
 msgstr "Costes de pago"
 
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:172
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:179
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
 msgstr "Por favor, revise los precios de los productos de su cesta"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 19:26+0100\n"
-"PO-Revision-Date: 2014-03-01 19:43+0000\n"
+"POT-Creation-Date: 2014-05-05 20:48+0200\n"
+"PO-Revision-Date: 2014-05-05 18:50+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:431
+#: src/Controller/Frontend/Basket/Default.php:509
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "No está permitido añadir un producto con ID \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:613
+#: src/Controller/Frontend/Basket/Default.php:691
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Los ID de artículos disponibles \"%1$s\" no se corresponden con los ID de los atributos proporcionados  \"%2$s\""
@@ -38,13 +38,13 @@ msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "El artículo de la cesta en posición \"%1$d\" no puede borrarse manualmente"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:143
+#: src/Controller/Frontend/Common/Factory/Abstract.php:165
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:137
+#: src/Controller/Frontend/Common/Factory/Abstract.php:159
 #: src/Controller/Frontend/Factory.php:85
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -55,20 +55,31 @@ msgstr "Clase \"%1$s\" no disponible"
 msgid "Controller path is empty"
 msgstr "La ruta del controlador está vacía"
 
-#: src/Controller/Frontend/Basket/Default.php:468
+#: src/Controller/Frontend/Basket/Default.php:345
+#: src/Controller/Frontend/Basket/Default.php:392
+#, php-format
+msgid "Coupon code \"%1$s\" is invalid"
+msgstr ""
+
+#: src/Controller/Frontend/Basket/Default.php:360
+#, php-format
+msgid "Coupon code \"%1$s\" is not allowed"
+msgstr ""
+
+#: src/Controller/Frontend/Basket/Default.php:546
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Referencias \"%1$s\" no válidas para el producto con ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:577
+#: src/Controller/Frontend/Basket/Default.php:655
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Propiedades de dirección no válidas. Compruebe lo que ha introducido"
 
-#: src/Controller/Frontend/Service/Factory.php:29
-#: src/Controller/Frontend/Basket/Factory.php:30
+#: src/Controller/Frontend/Service/Factory.php:62
+#: src/Controller/Frontend/Basket/Factory.php:63
 #: src/Controller/Frontend/Common/Factory/Abstract.php:54
-#: src/Controller/Frontend/Catalog/Factory.php:30
+#: src/Controller/Frontend/Catalog/Factory.php:63
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Caracteres no válidos en el nombre de clase \"%1$s\""
@@ -88,12 +99,12 @@ msgstr "Dominio \"%1$s\" no válido"
 msgid "Invalid factory \"%1$s\""
 msgstr "Fábrica \"%1$s\" no válida "
 
-#: src/Controller/Frontend/Basket/Default.php:353
+#: src/Controller/Frontend/Basket/Default.php:431
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr "Valor no válido para el tipo de dirección \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:647
+#: src/Controller/Frontend/Basket/Default.php:725
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "No se ha encontrado el tipo de lista para el dominio  \"%1$s\" y el código \"%2$s\""
@@ -112,6 +123,11 @@ msgstr "No se ha encontrado ningún producto con el código \"%1$s\""
 #, php-format
 msgid "No unique article found for selected attributes and product ID \"%1$s\""
 msgstr "No se ha encontrado un artículo único para los atributos seleccionados y el ID de producto \"%1$s\""
+
+#: src/Controller/Frontend/Basket/Default.php:367
+#, php-format
+msgid "Requirements for coupon code \"%1$s\" aren't met"
+msgstr ""
 
 #: src/Controller/Frontend/Service/Default.php:173
 #, php-format
@@ -134,7 +150,7 @@ msgstr "No se pudo llamar al método \"%1$s::%2$s\""
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr "No se pudo crear el proveedor \"%1$s\" para el servicio con ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:382
+#: src/Controller/Frontend/Basket/Default.php:460
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr "Atributos desconocidos \"%1$s\""

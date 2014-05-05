@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 19:26+0100\n"
+"POT-Creation-Date: 2014-05-05 20:48+0200\n"
 "PO-Revision-Date: 2014-01-29 22:14+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/arcavias-core/language/fr/)\n"
@@ -18,14 +18,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
-#: src/Controller/Jobs/Common/Factory/Abstract.php:147
+#: src/Controller/Jobs/Common/Factory/Abstract.php:169
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "La classe \"%1$s\" n'implémente pas l'interface \"%2$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
-#: src/Controller/Jobs/Common/Factory/Abstract.php:141
+#: src/Controller/Jobs/Common/Factory/Abstract.php:163
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Classe \"%1$s\" non disponible"
@@ -40,14 +40,15 @@ msgstr "Classe \"%1$s\" non trouvée"
 msgid "Controller path is empty"
 msgstr "Le chemin du contrôleur est vide"
 
-#: src/Controller/Jobs/Order/Email/Payment/Factory.php:38
-#: src/Controller/Jobs/Order/Email/Delivery/Factory.php:38
-#: src/Controller/Jobs/Order/Product/Stock/Factory.php:38
-#: src/Controller/Jobs/Admin/Job/Factory.php:38
-#: src/Controller/Jobs/Service/Delivery/Process/Factory.php:38
+#: src/Controller/Jobs/Order/Email/Payment/Factory.php:71
+#: src/Controller/Jobs/Order/Email/Delivery/Factory.php:71
+#: src/Controller/Jobs/Order/Product/Stock/Factory.php:71
+#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:71
+#: src/Controller/Jobs/Admin/Job/Factory.php:71
+#: src/Controller/Jobs/Service/Delivery/Process/Factory.php:71
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
-#: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:38
-#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:38
+#: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
+#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Caractères non valides dans le nom de classe \"%1$s\""
