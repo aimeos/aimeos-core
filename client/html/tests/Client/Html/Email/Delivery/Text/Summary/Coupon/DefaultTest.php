@@ -1,11 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-class Client_Html_Email_Delivery_Html_Summary_DefaultTest extends MW_Unittest_Testcase
+class Client_Html_Email_Delivery_Text_Summary_Coupon_DefaultTest
+extends MW_Unittest_Testcase
 {
 	private static $_orderItem;
 	private static $_orderBaseItem;
@@ -43,7 +44,7 @@ class Client_Html_Email_Delivery_Html_Summary_DefaultTest extends MW_Unittest_Te
 		$this->_emailMock = $this->getMock( 'MW_Mail_Message_None' );
 
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Email_Delivery_Html_Summary_Default( $this->_context, $paths );
+		$this->_object = new Client_Html_Email_Delivery_Text_Summary_Coupon_Default( $this->_context, $paths );
 
 		$view = TestHelper::getView();
 		$view->extOrderItem = self::$_orderItem;
@@ -78,11 +79,7 @@ class Client_Html_Email_Delivery_Html_Summary_DefaultTest extends MW_Unittest_Te
 	{
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<style type="text/css">', $output );
-		$this->assertContains( '<div class="common-summary-address container">', $output );
-		$this->assertContains( '<div class="common-summary-service container">', $output );
-		$this->assertContains( '<div class="common-summary-coupon container">', $output );
-		$this->assertContains( '<div class="common-summary-detail container">', $output );
+		$this->assertContains( 'Coupons', $output );
 	}
 
 

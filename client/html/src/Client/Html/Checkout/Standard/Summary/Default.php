@@ -99,7 +99,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'address', 'service', 'option', 'detail' );
+	private $_subPartNames = array( 'address', 'service', 'coupon', 'option', 'detail' );
 
 
 	/**

@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+
+$coupons = array();
+if( isset( $this->summaryBasket ) ) {
+	$coupons = $this->summaryBasket->getCoupons();
+}
+
+?>
+<div class="common-summary-coupon container">
+	<div class="header">
+<?php if( isset( $this->summaryUrlCoupon ) ) : ?>
+		<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlCoupon ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
+<?php endif; ?>
+		<h2><?php echo $enc->html( $this->translate( 'client/html', 'Coupons' ), $enc::TRUST ); ?></h2>
+	</div>
+	<div class="content">
+<?php if( !empty( $coupons ) ) : ?>
+		<ul class="coupon-list">
+<?php	foreach( $coupons as $code => $products ) : ?>
+			<li class="coupon-item"><?php echo $code; ?></li>
+<?php	endforeach; ?>
+		</ul>
+<?php endif; ?>
+	</div>
+<?php echo $this->get( 'couponBody' ); ?>
+</div>

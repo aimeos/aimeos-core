@@ -53,7 +53,7 @@ class Client_Html_Basket_Standard_Default
 	private $_subPartPath = 'client/html/basket/standard/default/subparts';
 
 	/** client/html/basket/standard/detail/name
-	 * Name of the detail part used by the basket mini client implementation
+	 * Name of the detail part used by the basket standard detail client implementation
 	 *
 	 * Use "Myname" if your class is named "Client_Html_Basket_Standard_Detail_Myname".
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
@@ -62,10 +62,19 @@ class Client_Html_Basket_Standard_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'detail' );
 
+	/** client/html/basket/standard/coupon/name
+	 * Name of the detail part used by the basket standard coupon client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Basket_Standard_Detail_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.03
+	 * @category Developer
+	 */
+	private $_subPartNames = array( 'detail', 'coupon' );
 	private $_controller;
-
 	private $_cache;
 
 
@@ -80,7 +89,7 @@ class Client_Html_Basket_Standard_Default
 	{
 		parent::__construct( $context, $templatePaths );
 
-		$this->_controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+		$this->_controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
 	}
 
 
@@ -311,7 +320,17 @@ class Client_Html_Basket_Standard_Default
 
 					break;
 
-				case 'edit':
+				case 'delete':
+
+					$products = (array) $view->param( 'b-position', array() );
+
+					foreach( $products as $position ) {
+						$this->_controller->deleteProduct( $position );
+					}
+
+					break;
+
+				default:
 
 					$products = (array) $view->param( 'b-prod', array() );
 
@@ -332,16 +351,6 @@ class Client_Html_Basket_Standard_Default
 							$options,
 							( isset( $values['attrconf-code'] ) ? array_filter( (array) $values['attrconf-code'] ) : array() )
 						);
-					}
-
-					break;
-
-				case 'delete':
-
-					$products = (array) $view->param( 'b-position', array() );
-
-					foreach( $products as $position ) {
-						$this->_controller->deleteProduct( $position );
 					}
 
 					break;

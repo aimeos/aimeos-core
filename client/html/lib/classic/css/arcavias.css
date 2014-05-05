@@ -194,8 +194,8 @@
 	padding-top: 5px;
 }
 
-.common-summary .item .content {
-	margin: 10px 10px 10px 10px;
+.common-summary .content {
+	margin: 10px;
 }
 
 .common-summary .item .name {
@@ -1403,6 +1403,76 @@
 .basket-standard-main td.quantity a,
 .basket-standard-main td.action a {
 	text-decoration: none;
+}
+
+.basket-standard-coupon {
+	padding: 10px;
+	margin: 0;
+}
+
+.basket-standard-coupon .header {
+	padding: 5px 10px 0;
+	margin: 0px 5px 5px;
+}
+
+.basket-standard-coupon .content {
+	padding: 0 10px;
+}
+
+.basket-standard-coupon .coupon-list {
+	display: inline-block;
+	font-wight: bold;
+	margin: 0.5em;
+	width: 46%;
+}
+
+.basket-standard-coupon .coupon-item .coupon-code,
+.basket-standard-coupon .coupon-item .change {
+	font-weight: bold;
+	font-size: 133%;
+	padding: 0.5em;
+}
+
+.basket-standard-coupon .coupon-new {
+	background-image: url("images/buttonfond.png");
+	background-repeat: repeat-x;
+	background-size: 100% 100%;
+	background-color: #689DB9;
+	border: 1px solid #689DB9;
+	border-radius: 4px;
+	white-space: nowrap;
+	margin: 0.5em;
+	width: 46%;
+	font-size: 150%;
+	display: inline-block;
+}
+
+.basket-standard-coupon .coupon-new:hover {
+	background-image: url("images/buttonfond-active.png");
+}
+
+.basket-standard-coupon .coupon-new .coupon-code {
+	background-color: #FFFFFF;
+	border-radius: 4px 0 0 4px;
+	border: none;
+	min-width: 5em;
+	height: 1.25em;
+	width: 80%;
+}
+
+.basket-standard-coupon .coupon-new button.standardbutton {
+	background: none;
+	box-shadow: none;
+	border-radius: 0;
+	border: 0 none;
+	min-width: 2em;
+	padding: 0;
+	margin: 0;
+	width: 20%;
+}
+
+.basket-standard-coupon .coupon-new .standardbutton:hover {
+	background: none;
 }
 
 .basket-standard .button-group {
