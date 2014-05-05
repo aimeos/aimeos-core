@@ -8,20 +8,21 @@ Ext.ns('MShop.panel.coupon');
 
 MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
-	maximized : true,
-	layout : 'fit',
-	modal : true,
+	siteidProperty : 'coupon.siteid',
 
 
 	initComponent : function() {
+
 		this.title = MShop.I18n.dt( 'client/extjs', 'Coupon item details' );
+
+		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
 			xtype : 'tabpanel',
 			activeTab : 0,
 			border : false,
 			itemId : 'MShop.panel.coupon.ItemUi',
-			coupons : [ 'ux.itemregistry' ],
+			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
 				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
@@ -31,7 +32,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					align : 'stretch'
 				},
 				itemId : 'MShop.panel.coupon.ItemUi.BasicPanel',
-				coupons : [ 'ux.itemregistry' ],
+				plugins : [ 'ux.itemregistry' ],
 				defaults : {
 					bodyCssClass : this.readOnlyClass
 				},

@@ -8,20 +8,21 @@ Ext.ns('MShop.panel.coupon.code');
 
 MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
-	maximized : true,
-	layout : 'fit',
-	modal : true,
+	siteidProperty : 'coupon.code.siteid',
 
 
 	initComponent : function() {
+
 		this.title = MShop.I18n.dt( 'client/extjs', 'Coupon code item details' );
+
+		MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
 
 		this.items = [ {
 			xtype : 'tabpanel',
 			activeTab : 0,
 			border : false,
 			itemId : 'MShop.panel.coupon.code.ItemUi',
-			coupons : [ 'ux.itemregistry' ],
+			plugins : [ 'ux.itemregistry' ],
 			items : [ {
 				xtype : 'panel',
 				title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
@@ -31,7 +32,7 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					align : 'stretch'
 				},
 				itemId : 'MShop.panel.coupon.code.ItemUi.BasicPanel',
-				coupons : [ 'ux.itemregistry' ],
+				plugins : [ 'ux.itemregistry' ],
 				defaults : {
 					bodyCssClass : this.readOnlyClass
 				},
@@ -103,14 +104,22 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	},
 
 
-	afterRender : function()
-	{
+	afterRender : function() {
+
 		var label = this.record ? this.record.data['coupon.code.code'] : MShop.I18n.dt( 'client/extjs', 'new' );
 		//#: Coupon code item panel title with coupon code ({0}) and site code ({1)}
 		var string = MShop.I18n.dt( 'client/extjs', 'Coupon code: {0} ({1})' );
 		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
 		MShop.panel.coupon.code.ItemUi.superclass.afterRender.apply( this, arguments );
+	},
+
+
+	onBeforeSave: function( store, data ) {
+
+		if( data.create && data.create[0] ) {
+			data.create[0].data['coupon.code.couponid'] = this.listUI.ParentItemUi.record.id;
+		}
 	}
 
 });
