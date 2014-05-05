@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-30 23:20+0100\n"
+"POT-Creation-Date: 2014-05-05 20:48+0200\n"
 "PO-Revision-Date: 2013-09-24 16:22+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -18,14 +18,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
-#: src/Controller/Jobs/Common/Factory/Abstract.php:147
+#: src/Controller/Jobs/Common/Factory/Abstract.php:169
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
-#: src/Controller/Jobs/Common/Factory/Abstract.php:141
+#: src/Controller/Jobs/Common/Factory/Abstract.php:163
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
@@ -40,14 +40,15 @@ msgstr ""
 msgid "Controller path is empty"
 msgstr ""
 
-#: src/Controller/Jobs/Order/Email/Payment/Factory.php:38
-#: src/Controller/Jobs/Order/Email/Delivery/Factory.php:38
-#: src/Controller/Jobs/Order/Product/Stock/Factory.php:38
-#: src/Controller/Jobs/Admin/Job/Factory.php:38
-#: src/Controller/Jobs/Service/Delivery/Process/Factory.php:38
+#: src/Controller/Jobs/Order/Email/Payment/Factory.php:71
+#: src/Controller/Jobs/Order/Email/Delivery/Factory.php:71
+#: src/Controller/Jobs/Order/Product/Stock/Factory.php:71
+#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:71
+#: src/Controller/Jobs/Admin/Job/Factory.php:71
+#: src/Controller/Jobs/Service/Delivery/Process/Factory.php:71
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
-#: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:38
-#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:38
+#: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
+#: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""

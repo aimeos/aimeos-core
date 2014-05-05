@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 19:26+0100\n"
-"PO-Revision-Date: 2014-02-19 13:48+0000\n"
+"POT-Creation-Date: 2014-05-05 20:48+0200\n"
+"PO-Revision-Date: 2014-05-05 18:50+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:431
+#: src/Controller/Frontend/Basket/Default.php:509
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "Добавлять продукт с номером \"%1$s\" запрещено"
 
-#: src/Controller/Frontend/Basket/Default.php:613
+#: src/Controller/Frontend/Basket/Default.php:691
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Доступные номера атрибутов \"%1$s\" не совпадают с данными номерами атрибутов \"%2$s\""
@@ -40,13 +40,13 @@ msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "Деталь корзины на позиции \"%1$d\" не может быть удалена вручную"
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:143
+#: src/Controller/Frontend/Common/Factory/Abstract.php:165
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Класс \"%1$s\" не имплементирует интрефейс \"%2$s\""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:137
+#: src/Controller/Frontend/Common/Factory/Abstract.php:159
 #: src/Controller/Frontend/Factory.php:85
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -57,20 +57,31 @@ msgstr "Класс \"%1$s\" не доступен"
 msgid "Controller path is empty"
 msgstr "Путь контролера пуст"
 
-#: src/Controller/Frontend/Basket/Default.php:468
+#: src/Controller/Frontend/Basket/Default.php:345
+#: src/Controller/Frontend/Basket/Default.php:392
+#, php-format
+msgid "Coupon code \"%1$s\" is invalid"
+msgstr ""
+
+#: src/Controller/Frontend/Basket/Default.php:360
+#, php-format
+msgid "Coupon code \"%1$s\" is not allowed"
+msgstr ""
+
+#: src/Controller/Frontend/Basket/Default.php:546
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Неправельные \"%1$s\" ссылки для продукта с номером \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:577
+#: src/Controller/Frontend/Basket/Default.php:655
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Неверные свойства адреса, пожалуйста проверьте ваш ввод"
 
-#: src/Controller/Frontend/Service/Factory.php:29
-#: src/Controller/Frontend/Basket/Factory.php:30
+#: src/Controller/Frontend/Service/Factory.php:62
+#: src/Controller/Frontend/Basket/Factory.php:63
 #: src/Controller/Frontend/Common/Factory/Abstract.php:54
-#: src/Controller/Frontend/Catalog/Factory.php:30
+#: src/Controller/Frontend/Catalog/Factory.php:63
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Недопустимые знаки в имени класса \"%1$s\""
@@ -90,12 +101,12 @@ msgstr "Неверный домен \"%1$s\""
 msgid "Invalid factory \"%1$s\""
 msgstr "Неверная фабрика \"%1$s\" "
 
-#: src/Controller/Frontend/Basket/Default.php:353
+#: src/Controller/Frontend/Basket/Default.php:431
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr "Неверные значения для типа адреса \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:647
+#: src/Controller/Frontend/Basket/Default.php:725
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Тип списка для домена \"%1$s\"и код \"%2$s\" не найден"
@@ -114,6 +125,11 @@ msgstr "Продукт с кодом \"%1$s\" не найден"
 #, php-format
 msgid "No unique article found for selected attributes and product ID \"%1$s\""
 msgstr "Не найден уникальный товар для выбраных атрибутов и номера продукта \"%1$s\""
+
+#: src/Controller/Frontend/Basket/Default.php:367
+#, php-format
+msgid "Requirements for coupon code \"%1$s\" aren't met"
+msgstr ""
 
 #: src/Controller/Frontend/Service/Default.php:173
 #, php-format
@@ -136,7 +152,7 @@ msgstr "Невозможно вызвать метод \"%1$s::%2$s\""
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr "Невозможно создать поставщика \"%1$s\" для сервиса с номером \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:382
+#: src/Controller/Frontend/Basket/Default.php:460
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr "Неизвестные атрибуты \"%1$s\""

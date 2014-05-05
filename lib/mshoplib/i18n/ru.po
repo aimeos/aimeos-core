@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-30 18:27+0200\n"
-"PO-Revision-Date: 2014-04-30 16:27+0000\n"
+"POT-Creation-Date: 2014-05-05 20:48+0200\n"
+"PO-Revision-Date: 2014-05-05 18:50+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:546
+#: src/MShop/Order/Item/Base/Default.php:550
 #, php-format
 msgid "Basket empty"
 msgstr ""
@@ -152,6 +152,11 @@ msgstr ""
 #: src/MShop/Context/Item/Default.php:140
 #, php-format
 msgid "Database manager object not available"
+msgstr ""
+
+#: src/MShop/Order/Item/Base/Default.php:474
+#, php-format
+msgid "Duplicate coupon code \"%1$s\""
 msgstr ""
 
 #: src/MShop/Order/Item/Base/Abstract.php:64
@@ -449,13 +454,13 @@ msgid ""
 "method \"insertItem()\" instead."
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:131
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:138
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
 msgstr ""
 
 #: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:132
-#: src/MShop/Coupon/Provider/Abstract.php:173
+#: src/MShop/Coupon/Provider/Abstract.php:176
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr ""
@@ -600,7 +605,7 @@ msgstr ""
 msgid "Payment costs"
 msgstr ""
 
-#: src/MShop/Plugin/Provider/Order/ProductPrice.php:172
+#: src/MShop/Plugin/Provider/Order/ProductPrice.php:179
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
 msgstr ""
