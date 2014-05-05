@@ -320,6 +320,84 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
+	 * Adds the given coupon code and updates the basket.
+	 *
+	 * @param string $code Coupon code entered by the user
+	 * @throws Controller_Frontend_Basket_Exception if the coupon code is invalid or not allowed
+	 */
+	public function addCoupon( $code )
+	{
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'coupon' );
+		$codeManager = MShop_Factory::createManager( $this->_getContext(), 'coupon/code' );
+
+
+		$search = $codeManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'coupon.code.code', $code ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
+
+		$result = $codeManager->searchItems( $search );
+
+		if( ( $codeItem = reset( $result ) ) === false ) {
+			throw new Controller_Frontend_Basket_Exception( sprintf( 'Coupon code "%1$s" is invalid', $code ) );
+		}
+
+
+		$search = $manager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'coupon.id', $codeItem->getCouponId() ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
+
+		$result = $manager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Controller_Frontend_Basket_Exception( sprintf( 'Coupon code "%1$s" is not allowed', $code ) );
+		}
+
+
+		$provider = $manager->getProvider( $item, $code );
+
+		if( $provider->isAvailable( $this->_basket ) !== true ) {
+			throw new Controller_Frontend_Basket_Exception( sprintf( 'Requirements for coupon code "%1$s" aren\'t met', $code ) );
+		}
+
+		$provider->addCoupon( $this->_basket );
+		$this->_domainManager->setSession( $this->_basket );
+	}
+
+
+	/**
+	 * Removes the given coupon code and its effects from the basket.
+	 *
+	 * @param string $code Coupon code entered by the user
+	 * @throws Controller_Frontend_Basket_Exception if the coupon code is invalid
+	 */
+	public function deleteCoupon( $code )
+	{
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'coupon' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'coupon.code.code', $code ) );
+		$search->setSlice( 0, 1 );
+
+		$result = $manager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Controller_Frontend_Basket_Exception( sprintf( 'Coupon code "%1$s" is invalid', $code ) );
+		}
+
+		$manager->getProvider( $item, $code )->deleteCoupon( $this->_basket );
+		$this->_domainManager->setSession( $this->_basket );
+	}
+
+
+	/**
 	 * Sets the address of the customer in the basket.
 	 *
 	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract

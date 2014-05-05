@@ -654,6 +654,43 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAddCoupon()
+	{
+		$this->_object->addProduct( $this->_testItem->getId(), 2 );
+		$this->_object->addCoupon( 'GHIJ' );
+
+		$basket = $this->_object->get();
+
+		$this->assertEquals( 1, count( $basket->getCoupons() ) );
+	}
+
+
+	public function testAddCouponInvalidCode()
+	{
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->_object->addCoupon( 'invalid' );
+	}
+
+
+	public function testAddCouponMissingRequirements()
+	{
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$this->_object->addCoupon( 'OPQR' );
+	}
+
+
+	public function testDeleteCoupon()
+	{
+		$this->_object->addProduct( $this->_testItem->getId(), 2 );
+		$this->_object->addCoupon( '90AB' );
+		$this->_object->deleteCoupon( '90AB' );
+
+		$basket = $this->_object->get();
+
+		$this->assertEquals( 0, count( $basket->getCoupons() ) );
+	}
+
+
 	public function testClear()
 	{
 		$this->_object->addProduct( $this->_testItem->getId(), 2 );

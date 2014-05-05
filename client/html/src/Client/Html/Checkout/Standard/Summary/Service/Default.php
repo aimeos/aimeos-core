@@ -39,7 +39,6 @@ class Client_Html_Checkout_Standard_Summary_Service_Default
 
 			$view->summaryUrlServicePayment = $view->url( $target, $cntl, $action, array( 'c-step' => 'payment' ), array(), $config );
 			$view->summaryUrlServiceDelivery = $view->url( $target, $cntl, $action, array( 'c-step' => 'delivery' ), array(), $config );
-			$view->summaryBasket = $view->standardBasket;
 
 			$this->_cache = $view;
 		}

@@ -129,7 +129,7 @@ class MShop_Plugin_Provider_Order_IntelligentSampling
 
 		if( ( $product = reset( $products ) ) === false )
 		{
-			$msg = sprintf( 'Product with code "%1$s" not found', $sampleCode );
+			$msg = sprintf( 'No product with code "%1$s" found', $sampleCode );
 			$logger->log($msg, MW_Logger_Abstract::NOTICE);
 			return false;
 		}

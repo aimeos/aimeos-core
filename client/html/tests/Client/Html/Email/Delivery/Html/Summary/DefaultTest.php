@@ -81,6 +81,7 @@ class Client_Html_Email_Delivery_Html_Summary_DefaultTest extends MW_Unittest_Te
 		$this->assertStringStartsWith( '<style type="text/css">', $output );
 		$this->assertContains( '<div class="common-summary-address container">', $output );
 		$this->assertContains( '<div class="common-summary-service container">', $output );
+		$this->assertContains( '<div class="common-summary-coupon container">', $output );
 		$this->assertContains( '<div class="common-summary-detail container">', $output );
 	}
 

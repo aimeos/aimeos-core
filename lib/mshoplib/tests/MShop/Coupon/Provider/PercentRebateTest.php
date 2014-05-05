@@ -40,8 +40,6 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 	{
 		$context = TestHelper::getContext();
 
-		$outer = null;
-
 		$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
 		$search = $couponManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', '90AB') );
@@ -51,7 +49,7 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 			throw new Exception( 'No coupon item found' );
 		}
 
-		$this->_object = new MShop_Coupon_Provider_PercentRebate( $context, $couponItem, '90AB', $outer );
+		$this->_object = new MShop_Coupon_Provider_PercentRebate( $context, $couponItem, '90AB' );
 
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
@@ -147,7 +145,7 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 		$coupons = $this->_orderBase->getCoupons();
 
 		$this->assertEquals( 1, count( $products ) );
-		$this->assertEquals( 0, count( $coupons['90AB'] ) );
+		$this->assertArrayNotHasKey( '90AB', $coupons );
 	}
 
 

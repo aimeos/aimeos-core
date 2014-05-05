@@ -14,7 +14,9 @@
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_FreeShipping extends MShop_Coupon_Provider_Abstract
+class MShop_Coupon_Provider_FreeShipping
+	extends MShop_Coupon_Provider_Abstract
+	implements MShop_Coupon_Provider_Factory_Interface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
@@ -23,25 +25,27 @@ class MShop_Coupon_Provider_FreeShipping extends MShop_Coupon_Provider_Abstract
 	 */
 	public function addCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$coupons = array();
-		$config = $this->_getItem()->getConfig();
-
-		if( $this->_checkConstraints( $base, $config ) === true )
-		{
-			if( !isset( $config['product'] ) ) {
-				throw new MShop_Coupon_Exception( 'Invalid configuration for free shipping, "product" required!' );
-			}
-
-			$price = clone ( $base->getService('delivery')->getPrice() );
-			$price->setRebate( $price->getCosts() );
-			$price->setCosts( -$price->getCosts() );
-
-			$orderProduct = $this->_createProduct( $config['product'], 1 );
-			$orderProduct->setPrice( $price );
-
-			$coupons[] = $orderProduct;
+		if( $this->_getObject()->isAvailable( $base ) === false ) {
+			return;
 		}
 
-		$base->addCoupon( $this->_getCode(), $coupons );
+		$config = $this->_getItem()->getConfig();
+
+		if( !isset( $config['freeshipping.productcode'] ) )
+		{
+			throw new MShop_Coupon_Exception( sprintf(
+				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
+				$this->_getItem()->getProvider(), 'freeshipping.productcode'
+			) );
+		}
+
+		$price = clone ( $base->getService('delivery')->getPrice() );
+		$price->setRebate( $price->getCosts() );
+		$price->setCosts( -$price->getCosts() );
+
+		$orderProduct = $this->_createProduct( $config['freeshipping.productcode'], 1 );
+		$orderProduct->setPrice( $price );
+
+		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
 	}
 }

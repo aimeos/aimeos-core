@@ -135,7 +135,7 @@ $backParams = $this->get( 'summaryParams', array() );
 					</td>
 <?php		$prodPrice = $product->getPrice()->getValue(); ?>
 					<td class="quantity">
-<?php		if( $modify ) : ?>
+<?php		if( $modify && ( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) == 0 ) : ?>
 <?php			if( $product->getQuantity() > 1 ) : ?>
 						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() - 1 ) + $backParams, array(), $basketConfig ) ); ?>">−</a>
 <?php			else : ?>
@@ -150,7 +150,7 @@ $backParams = $this->get( 'summaryParams', array() );
 					</td>
 					<td class="unitprice"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $prodPrice ), $priceCurrency ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ) ); ?></td>
-<?php		if( $modify ) : ?>
+<?php		if( $modify && ( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) == 0 ) : ?>
 					<td class="action">
 						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'delete', 'b-position' => $position ), array(), $basketConfig ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
 					</td>

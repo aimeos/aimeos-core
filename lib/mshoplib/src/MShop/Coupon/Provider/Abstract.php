@@ -14,12 +14,12 @@
  * @package MShop
  * @subpackage Coupon
  */
-abstract class MShop_Coupon_Provider_Abstract implements MShop_Coupon_Provider_Factory_Interface
+abstract class MShop_Coupon_Provider_Abstract
 {
-	private $_context = null;
-	private $_couponItem = null;
+	private $_context;
+	private $_object;
+	private $_item;
 	private $_code = '';
-	private $_outer = null;
 
 	/**
 	 * Initializes the coupon model.
@@ -28,12 +28,11 @@ abstract class MShop_Coupon_Provider_Abstract implements MShop_Coupon_Provider_F
 	 * @param MShop_Coupon_Item_Interface $item Coupon item to set
 	 * @param string $code Coupon code entered by the customer
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Coupon_Item_Interface $item, $code, &$outer )
+	public function __construct( MShop_Context_Item_Interface $context, MShop_Coupon_Item_Interface $item, $code )
 	{
 		$this->_context = $context;
-		$this->_couponItem = $item;
+		$this->_item = $item;
 		$this->_code = $code;
-		$this->_outer = &$outer;
 	}
 
 
@@ -46,11 +45,14 @@ abstract class MShop_Coupon_Provider_Abstract implements MShop_Coupon_Provider_F
 	{
 		$config = $this->_getItem()->getConfig();
 
-		$this->deleteCoupon( $base );
-
-		if( $this->_checkConstraints( $base, $config ) !== false ) {
-			$this->addCoupon( $base );
+		if( $this->_getObject()->isAvailable( $base ) !== true )
+		{
+			$base->deleteCoupon( $this->_code );
+			return;
 		}
+
+		$this->deleteCoupon( $base );
+		$this->addCoupon( $base );
 	}
 
 
@@ -61,10 +63,12 @@ abstract class MShop_Coupon_Provider_Abstract implements MShop_Coupon_Provider_F
 	 */
 	public function deleteCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$base->deleteCoupon( $this->_code );
+		$base->deleteCoupon( $this->_code, true );
 	}
 
+
 	/**
+	 * Tests if a coupon should be granted
 	 *
 	 * @param MShop_Order_Item_Base_Interface $base
 	 */
@@ -72,6 +76,20 @@ abstract class MShop_Coupon_Provider_Abstract implements MShop_Coupon_Provider_F
 	{
 		return true;
 	}
+
+
+	/**
+	 * Sets the reference of the outside object.
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param MShop_Coupon_Provider_Interface $object Reference to the outside provider or decorator
+	 */
+	public function setObject( MShop_Coupon_Provider_Interface $object )
+	{
+		$this->_object = $object;
+	}
+
 
 	/**
 	 * Returns the stored context object.
@@ -96,53 +114,47 @@ abstract class MShop_Coupon_Provider_Abstract implements MShop_Coupon_Provider_F
 
 
 	/**
+	 * Returns the configuration value from the service item specified by its key.
+	 *
+	 * @param string $key Configuration key
+	 * @param mixed $default Default value if configuration key isn't available
+	 * @return mixed Value from service item configuration
+	 */
+	protected function _getConfigValue( $key, $default = null )
+	{
+		$config = $this->_item->getConfig();
+
+		if( isset( $config[$key] ) ) {
+			return $config[$key];
+		}
+
+		return $default;
+	}
+
+
+	/**
 	 * Returns the stored coupon item.
 	 *
 	 * @return MShop_Coupon_Item_Interface Coupon item
 	 */
 	protected function _getItem()
 	{
-		return $this->_couponItem;
+		return $this->_item;
 	}
 
 
 	/**
-	 * Returns the last decorator
+	 * Returns the outmost decorator or a reference to the provider itself.
 	 *
-	 * @return MShop_Coupon_Provider_Decorator_Interface outer object
+	 * @return MShop_Coupon_Provider_Interface Outmost object
 	 */
-	protected function _getOuterObject()
+	protected function _getObject()
 	{
-		return $this->_outer;
-	}
-
-
-	/**
-	 * Checks if the current basket matches the contraints.
-	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
-	 * @param array $config Associative array with config content
-	 * @return boolean True if the basket matches the constraints, false if not
-	 */
-	protected function _checkConstraints( MShop_Order_Item_Base_Interface $base, array $config )
-	{
-		if( isset( $config['minorder'] ) && $config['minorder'] > $base->getPrice()->getValue() ) {
-			return false;
+		if( isset( $this->_object ) ) {
+			return $this->_object;
 		}
 
-		if( isset( $config['reqproduct'] ) )
-		{
-			foreach( $base->getProducts() AS $product )
-			{
-				if( $product->getProductId() == $config['reqproduct'] ) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		return true;
+		return $this;
 	}
 
 
@@ -156,12 +168,22 @@ abstract class MShop_Coupon_Provider_Abstract implements MShop_Coupon_Provider_F
 	protected function _createProduct( $productCode, $quantity = 1 )
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
-		$search = $productManager->createSearch(true);
+		$search = $productManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'product.code', $productCode ) );
 		$products = $productManager->searchItems( $search, array( 'text', 'media', 'price' ) );
 
 		if( ( $product = reset( $products ) ) === false ) {
-			throw new MShop_Coupon_Exception( sprintf( 'No product for code "%1$s" found', $productCode ) );
+			throw new MShop_Coupon_Exception( sprintf( 'No product with code "%1$s" found', $productCode ) );
+		}
+
+		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_context );
+		$prices = $product->getRefItems( 'price', 'default', 'default' );
+
+		if( empty( $prices ) ) {
+			$price = $priceManager->createItem();
+			$price->setCurrencyId( $this->_context->getLocale()->getCurrencyId() );
+		} else {
+			$price = $priceManager->getLowestPrice( $prices, $quantity );
 		}
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
@@ -171,41 +193,9 @@ abstract class MShop_Coupon_Provider_Abstract implements MShop_Coupon_Provider_F
 
 		$orderProduct->copyFrom( $product );
 		$orderProduct->setQuantity( $quantity );
-		$orderProduct->setPrice( $this->_getProductPrice( $product, $quantity ) );
+		$orderProduct->setPrice( $price );
 		$orderProduct->setFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE );
 
 		return $orderProduct;
-	}
-
-
-	/**
-	 * Returns the price item of the product that is valid for the given quantity.
-	 *
-	 * @param MShop_Product_Item_Interface $product Product item
-	 * @param integer $quantity Amount of products ordered
-	 * @return MShop_Price_Item_Interface Price item for the product/quantity combination
-	 */
-	protected function _getProductPrice( MShop_Product_Item_Interface $product, $quantity = 1 )
-	{
-		$prices = $product->getRefItems( 'price' );
-
-		if( ( $priceItem = reset( $prices ) ) !== false )
-		{
-			foreach( $prices as $price )
-			{
-				$amount = $price->getQuantity();
-
-				if( $amount <= $quantity && $amount > $priceItem->getQuantity() ) {
-					$priceItem = $price;
-				}
-			}
-
-			if( $priceItem->getQuantity() <= $quantity ) {
-				return $priceItem;
-			}
-		}
-
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_context );
-		return $priceManager->createItem();
 	}
 }

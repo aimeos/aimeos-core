@@ -35,7 +35,6 @@ $enc = $this->encoder();
 <?php endif; ?>
 	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Basket' ), $enc::TRUST ); ?></h1>
 	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
-		<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'b-action' ) ); ?>" value="edit" />
 <?php echo $this->get( 'standardBody' ); ?>
 		<div class="button-group">
 <?php if( isset( $this->standardBackUrl ) ) : ?>

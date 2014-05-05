@@ -51,8 +51,7 @@ class MShop_Coupon_Provider_FreeShippingTest extends MW_Unittest_Testcase
 			throw new Exception( 'No coupon item found' );
 		}
 
-		$outer = null;
-		$this->_object = new MShop_Coupon_Provider_FreeShipping( $context, $couponItem, 'CDEF', $outer );
+		$this->_object = new MShop_Coupon_Provider_FreeShipping( $context, $couponItem, 'CDEF' );
 
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
@@ -159,7 +158,7 @@ class MShop_Coupon_Provider_FreeShippingTest extends MW_Unittest_Testcase
 		$coupons = $this->_orderBase->getCoupons();
 
 		$this->assertEquals( 1, count( $products ) );
-		$this->assertEquals( 0, count( $coupons['CDEF']) );
+		$this->assertArrayNotHasKey( 'CDEF', $coupons );
 	}
 
 

@@ -75,7 +75,7 @@ class Client_Html_Account_History_Detail_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'address', 'service', 'basket' );
+	private $_subPartNames = array( 'address', 'service', 'coupon', 'basket' );
 
 	private $_cache;
 

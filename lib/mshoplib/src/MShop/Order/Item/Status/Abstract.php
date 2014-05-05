@@ -42,4 +42,10 @@ abstract class MShop_Order_Item_Status_Abstract
 	 * Stock level is already updated.
 	 */
 	const STOCK_UPDATE = 'stock-update';
+
+
+	/**
+	 * Stock level is already updated.
+	 */
+	const COUPON_UPDATE = 'coupon-update';
 }

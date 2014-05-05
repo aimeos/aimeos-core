@@ -45,4 +45,15 @@ class MShop_Coupon_Provider_Decorator_Example
 	public function deleteCoupon( MShop_Order_Item_Base_Interface $base )
 	{
 	}
+
+
+	/**
+	 * Tests if a coupon should be granted
+	 *
+	 * @param MShop_Order_Item_Base_Interface $base
+	 */
+	public function isAvailable( MShop_Order_Item_Base_Interface $base )
+	{
+		return true;
+	}
 }

@@ -84,7 +84,7 @@ class Client_Html_Email_Delivery_Text_Summary_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'address', 'service', 'detail' );
+	private $_subPartNames = array( 'address', 'service', 'coupon', 'detail' );
 
 
 	/**

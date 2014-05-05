@@ -51,9 +51,7 @@ class MShop_Coupon_Provider_FixedRebateTest extends MW_Unittest_Testcase
 			throw new Exception( 'No coupon item found' );
 		}
 
-		$outer = null;
-		$this->_object = new MShop_Coupon_Provider_FixedRebate( $context, $couponItem, '5678', $outer );
-		$outer = $this->_object;
+		$this->_object = new MShop_Coupon_Provider_FixedRebate( $context, $couponItem, '5678' );
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 		$orderBaseManager = $orderManager->getSubManager('base');
@@ -148,7 +146,7 @@ class MShop_Coupon_Provider_FixedRebateTest extends MW_Unittest_Testcase
 		$coupons = $this->_orderBase->getCoupons();
 
 		$this->assertEquals( 1, count( $products ) );
-		$this->assertEquals( 0, count( $coupons['5678'] ) );
+		$this->assertArrayNotHasKey( '5678', $coupons );
 	}
 
 

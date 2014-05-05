@@ -42,7 +42,7 @@ abstract class MShop_Order_Item_Base_Service_Abstract
 			case MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT:
 				return;
 			default:
-				throw new MShop_Order_Exception( sprintf( 'Service type "%1$s" is unknown', $value ) );
+				throw new MShop_Order_Exception( sprintf( 'Service of type "%1$s" not available', $value ) );
 		}
 	}
 }

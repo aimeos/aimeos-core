@@ -307,7 +307,9 @@ class MShop_Locale_Manager_Site_Default
 
 					$items[ $row['id'] ] = $this->_createItem( $row );
 				}
-			} catch ( Exception $e ) {
+			}
+			catch ( Exception $e )
+			{
 				$results->finish();
 				throw $e;
 			}
