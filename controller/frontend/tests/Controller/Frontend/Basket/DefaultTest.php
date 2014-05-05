@@ -674,6 +674,11 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 	public function testAddCouponMissingRequirements()
 	{
+		$products = $this->_object->get()->getProducts();
+		if( !empty( $products ) ) {
+			print_r( $products );
+		}
+
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->_object->addCoupon( 'OPQR' );
 	}
