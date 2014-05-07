@@ -203,4 +203,4 @@ MShop.panel.order.base.address.ItemUi = Ext.extend(Ext.Panel, {
 Ext.reg('MShop.panel.order.base.address.itemui', MShop.panel.order.base.address.ItemUi);
 
 //hook order base address into the order ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.order.ItemUi', 'MShop.panel.order.base.address.ItemUi', MShop.panel.order.base.address.ItemUi, 20);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.order.ItemUi', 'MShop.panel.order.base.address.ItemUi', MShop.panel.order.base.address.ItemUi, 10);

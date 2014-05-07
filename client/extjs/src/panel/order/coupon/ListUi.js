@@ -7,13 +7,19 @@
 Ext.ns('MShop.panel.order.base.coupon');
 
 MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
-	layout: 'fit',
+
 	title : MShop.I18n.dt( 'client/extjs', 'Coupons' ),
 	recordName : 'Order_Base_Coupon',
 	idProperty : 'order.base.coupon.id',
 	siteidProperty : 'order.base.coupon.siteid',
 	itemUiXType : 'MShop.panel.order.product.itemui',
 	autoExpandColumn : 'order-base-coupon-name',
+
+	sortInfo : {
+		field : 'order.base.coupon.code',
+		direction : 'ASC'
+	},
+
 	filterConfig : {
 		filters : [ {
 			dataIndex : 'order.base.coupon.code',
@@ -22,37 +28,22 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		} ]
 	},
 
-	initComponent : function() {
-		MShop.panel.order.base.coupon.ListUi.superclass.initComponent.apply(this, arguments);
-	},
 
-	initToolbar: function() {
-		MShop.panel.order.base.coupon.ListUi.superclass.initToolbar.apply(this, arguments);
-		this.tbar = [];
-	},
+	initToolbar: function() {},
 
+	
 	afterRender: function() {
+		MShop.panel.order.base.coupon.ListUi.superclass.afterRender.apply(this, arguments);
 
 		this.ParentItemUi = this.findParentBy(function(c) {
 			return c.isXType(MShop.panel.AbstractItemUi, false);
 		});
-
-		if (!this.store.autoLoad) {
-			this.store.load();
-		}
-
-		MShop.panel.order.base.coupon.ListUi.superclass.afterRender.apply(this, arguments);
 	},
 
+	
 	onBeforeLoad: function(store, options) {
+		MShop.panel.order.base.coupon.ListUi.superclass.onBeforeLoad.apply(this, arguments);
 
-		this.setSiteParam(store);
-
-		if (this.domain) {
-			this.setDomainFilter(store, options);
-		}
-
-		// filter for refid
 		options.params = options.params || {};
 		options.params.condition = {
 			'&&' : [ {
@@ -63,8 +54,10 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		};
 	},
 
-	onGridContextMenu: function(){},
 
+	onGridContextMenu: function() {},
+
+	
 	onOpenEditWindow: function(action) {
 		var selectedData = this.grid.getSelectionModel().getSelected();
 		
@@ -78,15 +71,16 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 				domain: this.domain,
 				record: orderProduct,
 				store: orderProductStore,
-				listUI: MShop.panel.order.base.product.ListUi
+				listUI: MShop.panel.order.base.product.ListUi,
+	            action: action
 			} );
 	
 			itemUi.show();
 		}
 	},
 
-	getColumns : function()
-	{
+
+	getColumns : function() {
 		this.productStore = MShop.GlobalStoreMgr.get( 'Order_Base_Product' );
 
 		return [
@@ -178,6 +172,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 		];
 	}
 });
+
 
 Ext.reg('MShop.panel.order.base.coupon.listui', MShop.panel.order.base.coupon.ListUi);
 
