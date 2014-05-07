@@ -107,7 +107,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 						} ]
 					} ]
 				}, {
-					xtype: 'MShop.panel.plugin.configui',
+					xtype: 'MShop.panel.configui',
 					layout: 'fit',
 					flex: 1,
 					data: ( this.record ? this.record.get('plugin.config') : {} )
@@ -128,31 +128,12 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 		var string = MShop.I18n.dt( 'client/extjs', 'Plugin: {0} ({1})' );
 		this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
 
-		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
+		MShop.panel.plugin.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
 
 
 	onBeforeSave: function( store, data ) {
-
-		var config = {};
-		var editorGrid = this.findByType( 'MShop.panel.plugin.configui' );
-		var first = editorGrid.shift();
-
-		if( first ) {
-			Ext.each( first.data, function( item, index ) {
-				Ext.iterate( item, function( key, value, object ) {
-					if( ( key = key.trim() ) !== '' ) {
-						config[key] = (typeof value === "string") ? value.trim() : value;
-					}
-				}, this);
-			});
-		}
-
-		if( data.create && data.create[0] ) {
-			data.create[0].data['plugin.config'] = config;
-		} else if( data.update && data.update[0] ) {
-			data.update[0].data['plugin.config'] = config;
-		}
+		MShop.panel.plugin.ItemUi.superclass.onBeforeSave.call(this, store, data, {configname: 'plugin.config'});
 	}
 });
 

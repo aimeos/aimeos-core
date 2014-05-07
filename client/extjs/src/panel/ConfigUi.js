@@ -1,14 +1,15 @@
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
+ * Copyright (c) Metaways Infosystems GmbH, 2013
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
 
-Ext.ns('MShop.panel.plugin');
+Ext.ns('MShop.panel');
 
-MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
+MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 
 	stripeRows: true,
+	autoExpandColumn : 'config-value',
 
 	initComponent: function() {
 		this.title = MShop.I18n.dt( 'client/extjs', 'Configuration' );		
@@ -25,33 +26,33 @@ MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 			this.data = {};
 		}
 
-		MShop.panel.plugin.ConfigUi.superclass.initComponent.call(this);
+		MShop.panel.ConfigUi.superclass.initComponent.call(this);
 	},
 
 	getToolBar: function() {
 		var that = this;
-		return new Ext.Toolbar([
-			{
-				text: MShop.I18n.dt( 'client/extjs', 'Add' ), 
-				handler: function () {
-					that.store.insert(0, new that.record({name: '', value: ''}));
-				}
-			},
-			{
-				text: MShop.I18n.dt( 'client/extjs', 'Delete' ), 
-				handler: function () {
-					var selection = that.getSelectionModel().getSelections()[0];
-					if (selection) {
-						that.store.remove(selection);
-						var data = {};
-						Ext.each(that.store.data.items, function (item, index) {
-							data[item.data.name] = item.data.value;
-						}, this);
-						that.data = data;
-					}
-				}
+		return new Ext.Toolbar([{
+			text: MShop.I18n.dt( 'client/extjs', 'Add' ),
+
+			handler: function () {
+				that.store.insert(0, new that.record({name: '', value: ''}));
 			}
-		]);
+		}, {
+			text: MShop.I18n.dt( 'client/extjs', 'Delete' ),
+
+			handler: function () {
+				Ext.each( that.getSelectionModel().getSelections(), function( selection, idx ) {
+					that.store.remove(selection);
+				}, this );
+
+				var data = {};
+				Ext.each( that.store.data.items, function( item, index ) {
+					data[item.data.name] = item.data.value;
+				}, this );
+					
+				that.data = data;
+			}
+		}]);
 	},
 
 	getColumnModel: function() {
@@ -64,7 +65,8 @@ MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 			}, {
 				header: MShop.I18n.dt( 'client/extjs', 'Value' ),
 				dataIndex: 'value',
-				editor: { xtype: 'textfield'}
+				editor: { xtype: 'textfield' },
+				id:'config-value'
 			} ]
 		});
 	},
@@ -116,4 +118,4 @@ MShop.panel.plugin.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
 
 });
 
-Ext.reg('MShop.panel.plugin.configui', MShop.panel.plugin.ConfigUi);
+Ext.reg('MShop.panel.configui', MShop.panel.ConfigUi);

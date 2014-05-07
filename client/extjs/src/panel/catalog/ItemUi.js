@@ -85,7 +85,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
 						} ]
 					} ]
 				}, {
-					xtype: 'MShop.panel.catalog.configui',
+					xtype: 'MShop.panel.configui',
 					layout: 'fit',
 					flex: 1,
 					data: ( this.record ? this.record.get('catalog.config') : {} )
@@ -111,25 +111,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
 	
 	
 	onBeforeSave: function( store, data ) {
-		var config = {};
-		var editorGrid = this.findByType( 'MShop.panel.catalog.configui' );
-		var first = editorGrid.shift();
-		
-		if( first ) {
-			Ext.each( first.data, function( item, index ) {
-				Ext.iterate( item, function( key, value, object ) {
-					if( ( key = key.trim() ) !== '' ) {
-						config[key] = (typeof value === "string") ? value.trim() : value;
-					}
-				}, this);
-			});
-		}
-
-		if( data.create && data.create[0] ) {
-			data.create[0].data['catalog.config'] = config;
-		} else if( data.update && data.update[0] ) {
-			data.update[0].data['catalog.config'] = config;
-		}
+		MShop.panel.catalog.ItemUi.superclass.onBeforeSave.call(this, store, data, {configname: 'catalog.config'});
 	},
 
 	

@@ -106,7 +106,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 						} ]
 					} ]
 				}, {
-					xtype: 'MShop.panel.service.configui',
+					xtype: 'MShop.panel.configui',
 					layout: 'fit',
 					flex: 1,
 					data: ( this.record ? this.record.get('service.config') : {} )
@@ -129,29 +129,10 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 		MShop.panel.product.ItemUi.superclass.afterRender.apply( this, arguments );
 	},
-
-
+	
+	
 	onBeforeSave: function( store, data ) {
-
-		var config = {};
-		var editorGrid = this.findByType( 'MShop.panel.service.configui' );
-		var first = editorGrid.shift();
-		
-		if( first ) {
-			Ext.each( first.data, function( item, index ) {
-				Ext.iterate( item, function( key, value, object ) {
-					if( ( key = key.trim() ) !== '' ) {
-						config[key] = (typeof value === "string") ? value.trim() : value;
-					}
-				}, this);
-			});
-		}
-
-		if( data.create && data.create[0] ) {
-			data.create[0].data['service.config'] = config;
-		} else if( data.update && data.update[0] ) {
-			data.update[0].data['service.config'] = config;
-		}
+		MShop.panel.service.ItemUi.superclass.onBeforeSave.call(this, store, data, {configname: 'service.config'});
 	}
 });
 

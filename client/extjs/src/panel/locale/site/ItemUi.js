@@ -88,7 +88,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 						} ]
 					} ]
 				}, {
-					xtype: 'MShop.panel.locale.site.configui',
+					xtype: 'MShop.panel.configui',
 					layout: 'fit',
 					flex: 1,
 					data: ( this.record ? this.record.get('locale.site.config') : {} )
@@ -112,25 +112,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 	},
 	
 	onBeforeSave: function( store, data ) {
-		var config = {};
-		var editorGrid = this.findByType( 'MShop.panel.locale.site.configui' );
-		var first = editorGrid.shift();
-		
-		if( first ) {
-			Ext.each( first.data, function( item, index ) {
-				Ext.iterate( item, function( key, value, object ) {
-					if( ( key = key.trim() ) !== '' ) {
-						config[key] = (typeof value === "string") ? value.trim() : value;
-					}
-				}, this);
-			});
-		}
-
-		if( data.create && data.create[0] ) {
-			data.create[0].data['locale.site.config'] = config;
-		} else if( data.update && data.update[0] ) {
-			data.update[0].data['locale.site.config'] = config;
-		}
+		MShop.panel.locale.site.ItemUi.superclass.onBeforeSave.call(this, store, data, {configname: 'locale.site.config'});
 	},
 	
 	onSaveItem: function() {

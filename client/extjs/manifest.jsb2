@@ -163,7 +163,7 @@
 			"text": "AbstractTreeUi.js",
 			"path": "src/panel/"
 		}, {
-			"text": "ListConfigUi.js",
+			"text": "ConfigUi.js",
 			"path": "src/panel/"
 		}, {
 			"text": "ListUiSmall.js",
@@ -307,9 +307,6 @@
 			"text": "ItemUi.js",
 			"path": "src/panel/catalog/"
 		}, {
-			"text": "ConfigUi.js",
-			"path": "src/panel/catalog/"
-		}, {
 			"text": "TextItemPickerUi.js",
 			"path": "src/panel/catalog/"
 		}, {
@@ -340,9 +337,6 @@
 			"text": "PriceItemPickerUi.js",
 			"path": "src/panel/service/"
 		}, {
-			"text": "ConfigUi.js",
-			"path": "src/panel/service/"
-		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/supplier/"
 		}, {
@@ -355,16 +349,10 @@
 			"text": "ItemUi.js",
 			"path": "src/panel/plugin/"
 		}, {
-			"text": "ConfigUi.js",
-			"path": "src/panel/plugin/"
-        }, {
             "text": "ListUi.js",
             "path": "src/panel/coupon/"
         }, {
             "text": "ItemUi.js",
-            "path": "src/panel/coupon/"
-        }, {
-            "text": "ConfigUi.js",
             "path": "src/panel/coupon/"
         }, {
             "text": "ListUi.js",
@@ -382,26 +370,29 @@
 			"text": "OrderItemUi.js",
 			"path": "src/panel/order/"
 		}, {
-			"text": "ListUi.js",
-			"path": "src/panel/order/product/"
-		}, {
 			"text": "ItemUi.js",
 			"path": "src/panel/order/address/"
 		}, {
 			"text": "DeliveryItemUi.js",
 			"path": "src/panel/order/address/"
 		}, {
-			"text": "ItemUi.js",
-			"path": "src/panel/order/delivery/"
-		}, {
-			"text": "AttributeItemUi.js",
-			"path": "src/panel/order/delivery/"
+			"text": "ListUi.js",
+			"path": "src/panel/order/product/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/order/payment/"
+			"path": "src/panel/order/product/"
 		}, {
-			"text": "AttributeItemUi.js",
-			"path": "src/panel/order/payment/"
+			"text": "ListUiSmall.js",
+			"path": "src/panel/order/product/attribute/"
+		}, {
+            "text": "ListUi.js",
+            "path": "src/panel/order/service/"
+		}, {
+            "text": "ItemUi.js",
+            "path": "src/panel/order/service/"
+		}, {
+			"text": "ListUiSmall.js",
+			"path": "src/panel/order/service/attribute/"
 		}, {
             "text": "ListUi.js",
             "path": "src/panel/order/coupon/"
@@ -411,12 +402,6 @@
 		}, {
 			"text": "deliverystatus.js",
 			"path": "src/elements/"
-		}, {
-			"text": "ItemUi.js",
-			"path": "src/panel/order/product/"
-		}, {
-			"text": "ListUiSmall.js",
-			"path": "src/panel/order/product/attribute/"
 		}, {
 			"text": "ItemUi.js",
 			"path": "src/panel/job/"
@@ -443,9 +428,6 @@
 			"path": "src/panel/locale/site/"
 		}, {
 			"text": "ItemUi.js",
-			"path": "src/panel/locale/site/"
-		}, {
-			"text": "ConfigUi.js",
 			"path": "src/panel/locale/site/"
 		}, {
 			"text": "ListUi.js",

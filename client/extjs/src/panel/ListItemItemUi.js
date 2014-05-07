@@ -64,7 +64,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 					emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
 				}].concat( this.getAdditionalFields() || [] )
 			}, {
-					xtype: 'MShop.panel.listconfigui',
+					xtype: 'MShop.panel.configui',
 					layout: 'fit',
 					flex: 1,
 					data: ( this.record ? this.record.get(this.listUI.listNamePrefix +'config') : {} )
@@ -138,7 +138,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 	
 	getConfigRecords: function( store, record ) {
 		var config = {};
-		var editorGrid = this.findByType( 'MShop.panel.listconfigui' );
+		var editorGrid = this.findByType( 'MShop.panel.configui' );
 		var first = editorGrid.shift();
 		
 		if( first ) {

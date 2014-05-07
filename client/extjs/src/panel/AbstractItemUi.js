@@ -199,6 +199,28 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
 		MShop.panel.AbstractItemUi.superclass.onDestroy.apply(this, arguments);
 	},
 
+	onBeforeSave: function( store, data, options ) {
+		var first = this.findByType( 'MShop.panel.configui' ).shift();
+
+		if( first && options && options.configname ) {
+			var config = {};
+
+			Ext.each( first.data, function( item, index ) {
+				Ext.iterate( item, function( key, value, object ) {
+					if( ( key = key.trim() ) !== '' ) {
+						config[key] = (typeof value === "string") ? value.trim() : value;
+					}
+				}, this);
+			});
+
+			if( data.create && data.create[0] ) {
+				data.create[0].data[ options.configname ] = config;
+			} else if( data.update && data.update[0] ) {
+				data.update[0].data[ options.configname ] = config;
+			}
+		}
+	},
+
 	/**
 	 * if it is not us who is saving, cancel the save request
 	 */
