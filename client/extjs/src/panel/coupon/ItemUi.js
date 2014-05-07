@@ -98,7 +98,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 						} ]
 					} ]
 				}, {
-					xtype: 'MShop.panel.coupon.configui',
+					xtype: 'MShop.panel.configui',
 					layout: 'fit',
 					flex: 1,
 					data: ( this.record ? this.record.get('coupon.config') : {} )
@@ -124,25 +124,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 
 	onBeforeSave: function( store, data ) {
-		var config = {};
-		var editorGrid = this.findByType( 'MShop.panel.coupon.configui' );
-		var first = editorGrid.shift();
-
-		if( first ) {
-			Ext.each( first.data, function( item, index ) {
-				Ext.iterate( item, function( key, value, object ) {
-					if( ( key = key.trim() ) !== '' ) {
-						config[key] = (typeof value === "string") ? value.trim() : value;
-					}
-				}, this);
-			});
-		}
-
-		if( data.create && data.create[0] ) {
-			data.create[0].data['coupon.config'] = config;
-		} else if( data.update && data.update[0] ) {
-			data.update[0].data['coupon.config'] = config;
-		}
+		MShop.panel.coupon.ItemUi.superclass.onBeforeSave.call(this, store, data, {configname: 'coupon.config'});
 	}
 });
 
