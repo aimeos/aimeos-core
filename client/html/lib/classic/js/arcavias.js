@@ -323,11 +323,13 @@ jQuery(document).ready( function($) {
 	);
 	
 	/* Redirect to payment provider / confirm page when order has been created successfully */
-	$( ".checkout-standard-order-payment > form" ).first().submit();
-	$( ".checkout-standard-order-payment" ).first().each( function( index, element ) {
-		var url = $(element).data( "url" );
-		if( url ) { window.location = url; }
-	});
+	var arcavias_checkout_form = $( ".checkout-standard-order-payment > form" ).first();
+	if( arcavias_checkout_form.length === 0 || arcavias_checkout_form.submit() === false ) {
+		$( ".checkout-standard-order-payment" ).first().each( function( index, element ) {
+			var url = $(element).data( "url" );
+			if( url ) { window.location = url; }
+		});
+	}
 
 	
 	/*
