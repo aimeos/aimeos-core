@@ -52,6 +52,17 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	private $_subPartPath = 'client/html/checkout/confirm/default/subparts';
 
+	/** client/html/checkout/confirm/intro/name
+	 * Name of the intro part used by the checkout confirm client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Checkout_Confirm_Intro_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.07
+	 * @category Developer
+	 */
+
 	/** client/html/checkout/confirm/basic/name
 	 * Name of the basic part used by the checkout confirm client implementation
 	 *
@@ -62,7 +73,18 @@ class Client_Html_Checkout_Confirm_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'basic' );
+
+	/** client/html/checkout/confirm/retry/name
+	 * Name of the retry part used by the checkout confirm client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Checkout_Confirm_Retry_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.07
+	 * @category Developer
+	 */
+	private $_subPartNames = array( 'intro', 'basic', 'retry' );
 
 
 	/**
