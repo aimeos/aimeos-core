@@ -335,6 +335,11 @@ implements MShop_Service_Provider_Interface
 							$errors[$key] = 'Invalid date and time'; continue 2;
 						}
 						break;
+					case 'map':
+						if( !is_array( $attributes[$key] ) ) {
+							$errors[$key] = 'Not a valid map'; continue 2;
+						}
+						break;
 					default:
 						throw new MShop_Service_Exception( sprintf( 'Invalid characters in attribute for provider configuration. Attribute is not of type "%1$s".', $def['type'] ) );
 				}

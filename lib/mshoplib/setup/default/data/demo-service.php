@@ -10,7 +10,11 @@ return array(
 	// delivery items
 	array(
 		'code' => 'demo-dhl', 'type' => 'delivery', 'label' => 'DHL',
-		'provider' => 'Manual', 'config' => array(), 'position' => 0, 'status' => 1,
+		'provider' => 'Manual,Reduction', 'position' => 0, 'status' => 1,
+		'config' => array(
+			'reduction.basket-value-min' => array( 'EUR', '50.00' ),
+			'reduction.percent' => 100,
+		),
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Lieferung innerhalb von drei Tagen',

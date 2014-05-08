@@ -8,6 +8,7 @@
 return array (
 	'plugin' => array (
 		array ( 'typeid' => 'plugin/order', 'label' => 'Adds addresses/delivery/payment to basket', 'provider' => 'Autofill', 'config' => array("autofill.useorder" => 1, "autofill.orderaddress" => 1, "autofill.orderservice" => 1, "autofill.delivery" => 1, "autofill.payment" => 0), 'position' => 0, 'status' => 1 ),
+		array ( 'typeid' => 'plugin/order', 'label' => 'Updates delivery/payment options on basket change', 'provider' => 'ServicesUpdate', 'config' => array(), 'position' => 1, 'status' => 1 ),
 		array ( 'typeid' => 'plugin/order', 'label' => 'Checks for required addresses (billing/delivery)', 'provider' => 'AddressesAvailable', 'config' => array("payment" => 1, "delivery" => ''), 'position' => 1, 'status' => 1 ),
 		array ( 'typeid' => 'plugin/order', 'label' => 'Checks for required services (delivery/payment)', 'provider' => 'ServicesAvailable', 'config' => array("payment" => 1, "delivery" => 1), 'position' => 2, 'status' => 1 ),
 		array ( 'typeid' => 'plugin/order', 'label' => 'Checks for deleted products', 'provider' => 'ProductGone', 'config' => array(), 'position' => 3, 'status' => 1 ),
