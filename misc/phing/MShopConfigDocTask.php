@@ -213,8 +213,11 @@ class MShopConfigDocTask extends Task
 				$type = "* Type: ${matches[1]} - ${matches[2]}" . "\n";
 			}
 
-			if( isset( $list['since'] ) ) {
-				$since = "* Since: " . $list['since'] . "\n";
+			if( isset( $list['since'] ) )
+			{
+				foreach( $list['since'] as $text ) {
+					$since .= "* Since: " . $text . "\n";
+				}
 			}
 
 			if( isset( $list['deprecated'] ) ) {
@@ -377,7 +380,7 @@ class MShopConfigDocTask extends Task
 				} else if( strncmp( '@param', $line, 6 ) === 0 ) {
 					$options[$key]['param'] = trim( substr( $line, 6 ) );
 				} else if( strncmp( '@since', $line, 6 ) === 0 ) {
-					$options[$key]['since'] = trim( substr( $line, 6 ) );
+					$options[$key]['since'][] = trim( substr( $line, 6 ) );
 				} else if( strncmp( '@category', $line, 9 ) === 0 ) {
 					$options[$key]['category'][] = trim( substr( $line, 9 ) );
 				} else if( strncmp( '@deprecated', $line, 11 ) === 0 ) {
