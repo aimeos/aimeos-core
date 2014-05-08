@@ -110,9 +110,9 @@ extends MShop_Service_Provider_Decorator_Abstract
 			return $price;
 		}
 
-		if( isset( $config['reduction.percentage'] ) )
+		if( isset( $config['reduction.percent'] ) )
 		{
-			$reduction = $price->getCosts() * $config['reduction.percentage'] / 100;
+			$reduction = $price->getCosts() * $config['reduction.percent'] / 100;
 			$price->setRebate( $price->getRebate() + $reduction );
 			$price->setCosts( $price->getCosts() - $reduction );
 		}

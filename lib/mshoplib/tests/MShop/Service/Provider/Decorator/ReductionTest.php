@@ -46,7 +46,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends MW_Unittest_Testcas
 		$result = $this->_object->getConfigBE();
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertArrayHasKey( 'reduction.percentage', $result );
+		$this->assertArrayHasKey( 'reduction.percent', $result );
 		$this->assertArrayHasKey( 'reduction.basket-value-min', $result );
 		$this->assertArrayHasKey( 'reduction.basket-value-max', $result );
 	}
@@ -59,14 +59,14 @@ class MShop_Service_Provider_Decorator_ReductionTest extends MW_Unittest_Testcas
 			->will( $this->returnValue( array() ) );
 
 		$attributes = array(
-			'reduction.percentage' => '1.5',
+			'reduction.percent' => '1.5',
 			'reduction.basket-value-min' => array( 'EUR' => '10.00' ),
 			'reduction.basket-value-max' => array( 'EUR' => '100.00' ),
 		);
 		$result = $this->_object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertInternalType( 'null', $result['reduction.percentage'] );
+		$this->assertInternalType( 'null', $result['reduction.percent'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-min'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-max'] );
 	}
@@ -81,7 +81,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends MW_Unittest_Testcas
 		$result = $this->_object->checkConfigBE( array() );
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertInternalType( 'null', $result['reduction.percentage'] );
+		$this->assertInternalType( 'null', $result['reduction.percent'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-min'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-max'] );
 	}
@@ -115,7 +115,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends MW_Unittest_Testcas
 
 	public function testCalcPrice()
 	{
-		$this->_servItem->setConfig( array( 'reduction.percentage' => 50 ) );
+		$this->_servItem->setConfig( array( 'reduction.percent' => 50 ) );
 		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
@@ -131,7 +131,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends MW_Unittest_Testcas
 
 	public function testCalcPriceMin()
 	{
-		$config = array( 'reduction.percentage' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.00' ) );
+		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.00' ) );
 		$this->_servItem->setConfig( $config );
 		$this->_basket->addProduct( $this->_getOrderProduct() );
 		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
@@ -149,7 +149,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends MW_Unittest_Testcas
 
 	public function testCalcPriceMinNotReached()
 	{
-		$config = array( 'reduction.percentage' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.01' ) );
+		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.01' ) );
 		$this->_servItem->setConfig( $config );
 		$this->_basket->addProduct( $this->_getOrderProduct() );
 		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
@@ -167,7 +167,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends MW_Unittest_Testcas
 
 	public function testCalcPriceMax()
 	{
-		$config = array( 'reduction.percentage' => 50, 'reduction.basket-value-max' => array( 'EUR' => '20.00' ) );
+		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-max' => array( 'EUR' => '20.00' ) );
 		$this->_servItem->setConfig( $config );
 		$this->_basket->addProduct( $this->_getOrderProduct() );
 		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
@@ -185,7 +185,7 @@ class MShop_Service_Provider_Decorator_ReductionTest extends MW_Unittest_Testcas
 
 	public function testCalcPriceMaxExceeded()
 	{
-		$config = array( 'reduction.percentage' => 50, 'reduction.basket-value-max' => array( 'EUR' => '19.99' ) );
+		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-max' => array( 'EUR' => '19.99' ) );
 		$this->_servItem->setConfig( $config );
 		$this->_basket->addProduct( $this->_getOrderProduct() );
 		$priceItem = MShop_Factory::createManager( $this->_context, 'price' )->createItem();
