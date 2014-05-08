@@ -195,11 +195,49 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 				$items += $view->detailProductItem->getRefItems( 'attribute', null, 'variant' );
 			}
 
+			
+			// find regular attributes from Subproducts
+			$context = $this->_getContext();
+			$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
+			$productManager = MShop_Product_Manager_Factory::createManager( $context );
+			$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
+
+			$search = $productManager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', 'product.id', array_keys( $products ) ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$domains = array('attribute');
+			$subproducts = $productManager->searchItems( $search, $domains );
+			$attrIds = $attrMap = $prodDeps = $attrDeps = $attrTypeDeps = array();
+			
+			foreach( $subproducts as $subProdId => $subProduct )
+			{
+				foreach( $subProduct->getRefItems( 'attribute', null, 'default' ) as $attrId => $attrItem )
+				{
+					$subAttrDeps[$attrId][] = $subProdId;
+					$subAttrIds[] = $attrId;
+				}
+			}
+			
+			$searchSubAttr = $attrManager->createSearch( true );
+			$exprSubAttr = array(
+				$searchSubAttr->compare( '==', 'attribute.id', $subAttrIds),
+				$searchSubAttr->getConditions(),
+			);
+			
+			$searchSubAttr->setConditions( $searchSubAttr->combine( '&&', $exprSubAttr ) );
+			$subAttr = $attrManager->searchItems( $searchSubAttr, array( 'attribute' ) );
+			$items = array_merge($items, $subAttr);
+				
 			foreach( $items as $id => $attribute ) {
 					$attributeMap[ $attribute->getType() ][$id] = $attribute;
 			}
 
 			$view->attributeMap = $attributeMap;
+			$view->subAttributeDependencies = $subAttrDeps;
 
 			$this->_cache = $view;
 		}

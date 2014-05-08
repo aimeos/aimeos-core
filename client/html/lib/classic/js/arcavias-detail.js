@@ -228,9 +228,9 @@ jQuery(document).ready( function($) {
 				}
 			}
 		}
-		// Show attributes from subarticles 
-		$(".subArticleAttributes.attributes-actual").removeClass("attributes-actual");
-		$(".subArticleAttributes.sub-prodid-"+ prodId).addClass("attributes-actual");
+		
+		$(".catalog-detail-additional .attributes-actual").removeClass("attributes-actual");
+		$(".catalog-detail-additional .subItem_"+ prodId).addClass("attributes-actual");
 	});
 	
 	

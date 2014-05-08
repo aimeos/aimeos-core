@@ -7,6 +7,7 @@
 
 $contentUrl = $this->config( 'client/html/common/content/baseurl' );
 $attrMap = $this->get( 'attributeMap', array() );
+$subAttrDeps = $this->get( 'subAttributeDependencies', array() );
 $enc = $this->encoder();
 
 ?>
@@ -16,7 +17,15 @@ $enc = $this->encoder();
 	<tbody>
 <?php foreach( $attrMap as $type => $attrItems ) : ?>
 <?php	foreach( $attrItems as $attrItem ) : ?>
-		<tr class="item">
+<?php 	echo '<tr class="item';
+		if($subAttrDeps[  $attrItem->getId() ]) {	
+			echo ' subItem';
+			foreach($subAttrDeps[$attrItem->getId()] as $subProduct) {
+				echo ' subItem_'.$subProduct;
+			}
+		}
+		echo '">';
+?>
 			<td class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $type ), $enc::TRUST ); ?></td>
 			<td class="value">
 				<div class="media-list">
@@ -37,14 +46,4 @@ $enc = $this->encoder();
 	</tbody>
 </table>
 <?php endif; ?>
-<?php foreach($subAttributes as $subProductID => $subProduct ) : ?>
-<table class="content attributes subArticleAttributes sub-prodid-<?php echo $subProductID; ?>">
-<?php foreach( $subProduct as $attrItem ) : ?>
-	<tr class="item">
-		<td class="name"><?php echo $attrItem->getType(); ?></td>
-		<td class="value"><?php echo $attrItem->getName(); ?></td>
-	</tr>
-<?php endforeach; ?>
-</table>
-<?php endforeach; ?>
 <?php echo $this->get( 'attributeBody' ); ?>

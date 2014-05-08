@@ -1107,14 +1107,6 @@
 	border: solid 1px #FF3300;
 }
 
-/* Product detail, additional attributes from Subporoducts*/
-.catalog-detail-additional .subArticleAttributes {
-  	display: none;
-}
-.catalog-detail-additional .subArticleAttributes.attributes-actual {
-	display: table;
-}
-
 /* Product detail, additional section */
 .catalog-detail-additional {
 	padding-top: 1em;
@@ -1129,6 +1121,13 @@
 
 .catalog-detail-additional .item {
 	padding: 1%;
+}
+/* Hide Attributes from subProducts*/
+.catalog-detail-additional .item.subItem {
+	display: none;
+}
+.catalog-detail-additional .subItem.attributes-actual {
+	display: block;
 }
 
 /* Product detail, additional attributes section */
