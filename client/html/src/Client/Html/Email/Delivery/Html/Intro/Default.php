@@ -136,12 +136,12 @@ class Client_Html_Email_Delivery_Html_Intro_Default
 		 * you've implemented an alternative client class as well, "default"
 		 * should be replaced by the name of the new class.
 		 *
-		 * The email payment HTML client allows to use a different template for
-		 * each payment status value. You can create a template for each payment
-		 * status and store it in the "email/payment/<status number>/" directory
+		 * The email delivery HTML client allows to use a different template for
+		 * each delivery status value. You can create a template for each delivery
+		 * status and store it in the "email/delivery/<status number>/" directory
 		 * below the "layouts" directory (usually in client/html/layouts). If no
 		 * specific layout template is found, the common template in the
-		 * "email/payment/" directory is used.
+		 * "email/delivery/" directory is used.
 		 *
 		 * @param string Relative path to the template creating code for the e-mail header
 		 * @since 2014.03
