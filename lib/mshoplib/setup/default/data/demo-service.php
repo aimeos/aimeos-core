@@ -12,7 +12,7 @@ return array(
 		'code' => 'demo-dhl', 'type' => 'delivery', 'label' => 'DHL',
 		'provider' => 'Manual,Reduction', 'position' => 0, 'status' => 1,
 		'config' => array(
-			'reduction.basket-value-min' => array( 'EUR', '50.00' ),
+			'reduction.basket-value-min' => array( 'EUR' => '200.00' ),
 			'reduction.percent' => 100,
 		),
 		'text' => array(
