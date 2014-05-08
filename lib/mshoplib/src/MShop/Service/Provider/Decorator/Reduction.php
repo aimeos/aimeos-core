@@ -9,36 +9,36 @@
 
 
 /**
- * Decorator for service providers adding/substracting a configured percentage.
+ * Decorator for reduction of service providers prices.
  *
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Provider_Decorator_Percent
+class MShop_Service_Provider_Decorator_Reduction
 extends MShop_Service_Provider_Decorator_Abstract
 {
 	private $_beConfig = array(
-		'percent.percentage' => array(
-			'code' => 'percent.percentage',
-			'internalcode'=> 'percent.percentage',
+		'reduction.percentage' => array(
+			'code' => 'reduction.percentage',
+			'internalcode'=> 'reduction.percentage',
 			'label'=> 'Percent: Decimal value in percent (positive or negative)',
 			'type'=> 'decimal',
 			'internaltype'=> 'decimal',
 			'default'=> 0,
-			'required'=> true,
+			'required'=> false,
 		),
-		'percent.basket-value-min' => array(
-			'code' => 'percent.basket-value-min',
-			'internalcode'=> 'percent.basket-value-min',
+		'reduction.basket-value-min' => array(
+			'code' => 'reduction.basket-value-min',
+			'internalcode'=> 'reduction.basket-value-min',
 			'label'=> 'Percent: Minimum basket value required before increasing/decreasing costs',
 			'type'=> 'map',
 			'internaltype'=> 'map',
 			'default'=> 0,
 			'required'=> false,
 		),
-		'percent.basket-value-max' => array(
-			'code' => 'percent.basket-value-max',
-			'internalcode'=> 'percent.basket-value-max',
+		'reduction.basket-value-max' => array(
+			'code' => 'reduction.basket-value-max',
+			'internalcode'=> 'reduction.basket-value-max',
 			'label'=> 'Percent: Maximum basket value required until increasing/decreasing costs',
 			'type'=> 'map',
 			'internaltype'=> 'map',
@@ -94,28 +94,28 @@ extends MShop_Service_Provider_Decorator_Abstract
 	{
 		$config = $this->getServiceItem()->getConfig();
 
-		if( !isset( $config['percent.percentage'] ) ) {
-			throw new MShop_Service_Provider_Exception( sprintf( 'Missing configuration "%1$s"', 'percent.percentage' ) );
-		}
-
 		$price = $this->_getProvider()->calcPrice( $basket );
 		$total = $basket->getPrice()->getValue() + $basket->getPrice()->getRebate();
 		$currency = $price->getCurrencyId();
 
-		if( isset( $config['percent.basket-value-min'][$currency] )
-			&& $total < $config['percent.basket-value-min'][$currency]
+		if( isset( $config['reduction.basket-value-min'][$currency] )
+			&& $total < $config['reduction.basket-value-min'][$currency]
 		) {
 			return $price;
 		}
 
-		if( isset( $config['percent.basket-value-max'][$currency] )
-			&& $total > $config['percent.basket-value-max'][$currency]
+		if( isset( $config['reduction.basket-value-max'][$currency] )
+			&& $total > $config['reduction.basket-value-max'][$currency]
 		) {
 			return $price;
 		}
 
-		$value = $basket->getPrice()->getValue() * $config['percent.percentage'] / 100;
-		$price->setCosts( $price->getCosts() + $value );
+		if( isset( $config['reduction.percentage'] ) )
+		{
+			$reduction = $price->getCosts() * $config['reduction.percentage'] / 100;
+			$price->setRebate( $price->getRebate() + $reduction );
+			$price->setCosts( $price->getCosts() - $reduction );
+		}
 
 		return $price;
 	}
