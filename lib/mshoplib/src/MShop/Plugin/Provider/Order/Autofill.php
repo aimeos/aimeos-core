@@ -135,25 +135,22 @@ class MShop_Plugin_Provider_Order_Autofill
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
-		$search->setSlice( 0, 1 );
 
 		$result = $serviceManager->searchItems( $search, array( 'media', 'price', 'text' ) );
 
-		if( ( $item = reset( $result ) ) === false ) {
-			return null;
+		foreach( $result as $item )
+		{
+			$provider = $serviceManager->getProvider( $item );
+
+			if( $provider->isAvailable( $order ) === true )
+			{
+				$orderServiceManager = MShop_Factory::createManager( $context, 'order/base/service' );
+				$orderServiceItem = $orderServiceManager->createItem();
+				$orderServiceItem->copyFrom( $item );
+				$orderServiceItem->setPrice( $provider->calcPrice( $order ) );
+
+				return $orderServiceItem;
+			}
 		}
-
-		$provider = $serviceManager->getProvider( $item );
-
-		if( $provider->isAvailable( $order ) === false ) {
-			return null;
-		}
-
-		$orderServiceManager = MShop_Factory::createManager( $context, 'order/base/service' );
-		$orderServiceItem = $orderServiceManager->createItem();
-		$orderServiceItem->copyFrom( $item );
-		$orderServiceItem->setPrice( $provider->calcPrice( $order ) );
-
-		return $orderServiceItem;
 	}
 }
