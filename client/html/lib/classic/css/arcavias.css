@@ -1718,6 +1718,10 @@
 	padding: 5px 10px 10px 10px;
 }
 
+.checkout-standard .item-service .icon {
+	display: inline-block;
+}
+
 /* Checkout delivery/payment */
 .checkout-standard-delivery ,
 .checkout-standard-payment {
