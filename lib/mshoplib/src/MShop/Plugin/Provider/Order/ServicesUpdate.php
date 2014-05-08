@@ -18,8 +18,6 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 	extends MShop_Plugin_Provider_Order_Abstract
 	implements MShop_Plugin_Provider_Interface
 {
-
-
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -45,14 +43,28 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
+		$ids = array();
+		$services = $order->getServices();
+
+		foreach( $order->getServices() as $type => $service ) {
+			$ids[$type] = $service->getServiceId();
+		}
+
 		$context = $this->_getContext();
 		$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
-		foreach( $order->getServices() as $type => $service )
+		$search = $serviceManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'service.id', $ids ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		foreach( $serviceManager->searchItems( $search, array( 'price' ) ) as $item )
 		{
-			$provider = $serviceManager->getProvider( $serviceManager->getItem( $service->getServiceId() ) );
-			$service->setPrice( $provider->calcPrice( $order ) );
-			$order->setService( $service, $type );
+			$provider = $serviceManager->getProvider( $item );
+			$services[ $item->getType() ]->setPrice( $provider->calcPrice( $order ) );
+			$order->setService( $services[ $item->getType() ], $type );
 		}
 
 		return true;

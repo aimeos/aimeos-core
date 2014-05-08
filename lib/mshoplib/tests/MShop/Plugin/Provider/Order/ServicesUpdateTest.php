@@ -71,18 +71,20 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 
 
 		$serviceStub = $this->getMockBuilder( 'MShop_Service_Manager_Default' )
-			->setConstructorArgs( array( $context ) )->setMethods( array( 'getItem', 'getProvider' ) )->getMock();
+			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems', 'getProvider' ) )->getMock();
 
 		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_PluginServicesUpdate', $serviceStub );
 		$context->getConfig()->set( 'classes/service/manager/name', 'PluginServicesUpdate' );
 
-		$serviceItem = $serviceStub->createItem();
+		$serviceItemDelivery = new MShop_Service_Item_Default( array( 'type' => 'delivery' ) );
+		$serviceItemPayment = new MShop_Service_Item_Default( array( 'type' => 'payment' ) );
 
 		$providerStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
-			->setConstructorArgs( array( $context, $serviceItem ) )->setMethods( array( 'isAvailable' ) )->getMock();
+			->setConstructorArgs( array( $context, $serviceStub->createItem() ) )
+			->setMethods( array( 'isAvailable' ) )->getMock();
 
-		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getItem' )
-			->will( $this->returnValue( $serviceItem ) );
+		$serviceStub->expects( $this->once() )->method( 'searchItems' )
+			->will( $this->returnValue( array( $serviceItemDelivery, $serviceItemPayment ) ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
 			->will( $this->returnValue( $providerStub ) );
