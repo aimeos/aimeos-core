@@ -18,9 +18,9 @@ class MShop_Service_Provider_Decorator_Reduction
 extends MShop_Service_Provider_Decorator_Abstract
 {
 	private $_beConfig = array(
-		'reduction.percentage' => array(
-			'code' => 'reduction.percentage',
-			'internalcode'=> 'reduction.percentage',
+		'reduction.percent' => array(
+			'code' => 'reduction.percent',
+			'internalcode'=> 'reduction.percent',
 			'label'=> 'Percent: Decimal value in percent (positive or negative)',
 			'type'=> 'decimal',
 			'internaltype'=> 'decimal',
