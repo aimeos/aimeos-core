@@ -1829,8 +1829,14 @@
 }
 
 /* Checkout confirm basic part */
-.checkout-confirm {
-	padding: 0px 0px 0px 17px;
+.checkout-confirm-basic {
+	margin-top: 1.5em;
+}
+
+.checkout-confirm-basic h2 {
+	font-size: 125%;
+	font-weight: bold;
+	margin: 5px 0;
 }
 
 .checkout-confirm-basic .attr-list .name,
