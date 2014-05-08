@@ -50,8 +50,7 @@ class MShop_Plugin_Provider_Order_Shipping
 		$logger->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
 
 		$class = 'MShop_Order_Item_Base_Interface';
-		if( !( $order instanceof $class ) )
-		{
+		if( !( $order instanceof $class ) ) {
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
@@ -68,9 +67,7 @@ class MShop_Plugin_Provider_Order_Shipping
 		$price = $delivery->getPrice();
 		$currency = $price->getCurrencyId();
 
-		if( !isset( $config['threshold'][$currency] ) )
-		{
-			$logger->log( sprintf( 'Threshold for free shipping for currency ID "%1$s" not available', $currency ), MW_Logger_Abstract::WARN );
+		if( !isset( $config['threshold'][$currency] ) ) {
 			return true;
 		}
 
