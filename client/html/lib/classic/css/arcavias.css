@@ -223,7 +223,7 @@
 }
 
 .common-summary .item .item-icons img {
-	max-width: 60px;
+	max-height: 40px;
 }
 
 .common-summary .item .attr-list {
@@ -1558,6 +1558,11 @@
 	padding: 10px 0;
 }
 
+.checkout-standard .item-service .description h2 {
+	font-weight: bold;
+	font-size: 133%;
+}
+
 .checkout-standard .item-service .description .short {
 	font-weight: bold;
 	padding: 0.5em 0;
@@ -1573,10 +1578,6 @@
 	margin: 0 10px;
 }
 
-.checkout-standard .item-service .description p {
-	margin-left: 40px;
-}
-
 .checkout-standard .item-service .description h2,
 .checkout-standard .item-service .icons {
 	display: inline-block;
@@ -1588,8 +1589,7 @@
 }
 
 .checkout-standard .item-service .option {
-	float: left;
-	margin-left: 10px;
+	margin: 10px;
 }
 
 .checkout-standard .item-service .price-value {
