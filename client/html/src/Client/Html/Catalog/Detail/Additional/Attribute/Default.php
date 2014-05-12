@@ -211,7 +211,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 
 			$domains = array('attribute');
 			$subproducts = $productManager->searchItems( $search, $domains );
-			$attrIds = $attrMap = $prodDeps = $attrDeps = $attrTypeDeps = array();
+			$subAttrIds = $subAttrDeps = array();
 			
 			foreach( $subproducts as $subProdId => $subProduct )
 			{
