@@ -228,6 +228,9 @@ jQuery(document).ready( function($) {
 				}
 			}
 		}
+		
+		$(".catalog-detail-additional .attributes-actual").removeClass("attributes-actual");
+		$(".catalog-detail-additional .subItem_"+ prodId).addClass("attributes-actual");
 	});
 	
 	
