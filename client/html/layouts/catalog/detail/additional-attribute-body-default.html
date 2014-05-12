@@ -17,14 +17,14 @@ $enc = $this->encoder();
 	<tbody>
 <?php foreach( $attrMap as $type => $attrItems ) : ?>
 <?php	foreach( $attrItems as $attrItem ) : ?>
-<?php 	echo '<tr class="item';
-		if(array_key_exists( $attrItem->getId(), $subAttrDeps ) && $subAttrDeps[  $attrItem->getId() ] ) {	
-			echo ' subItem';
+<?php 	$attrClasses = "";
+		if( isset( $subAttrDeps[ $attrItem->getId() ] ) ) {	
+			$attrClasses .= ' subItem';
 			foreach($subAttrDeps[$attrItem->getId()] as $subProduct) {
-				echo ' subItem_'.$subProduct;
+				$attrClasses .= ' subItem_'.$subProduct;
 			}
 		}
-		echo '">';
+		echo '<tr class="item'.$attrClasses.'">';
 ?>
 			<td class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $type ), $enc::TRUST ); ?></td>
 			<td class="value">

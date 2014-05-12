@@ -215,7 +215,10 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			
 			foreach( $subproducts as $subProdId => $subProduct )
 			{
-				foreach( $subProduct->getRefItems( 'attribute', null, 'default' ) as $attrId => $attrItem )
+				$subItems = $subProduct->getRefItems( 'attribute', null, 'default' );
+				$subItems += $subProduct->getRefItems( 'attribute', null, 'variant' );
+			
+				foreach( $subItems as $attrId => $attrItem )
 				{
 					$subAttrDeps[$attrId][] = $subProdId;
 					$subAttrIds[] = $attrId;
@@ -229,7 +232,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			);
 			
 			$searchSubAttr->setConditions( $searchSubAttr->combine( '&&', $exprSubAttr ) );
-			$subAttr = $attrManager->searchItems( $searchSubAttr, array( 'attribute' ) );
+			$subAttr = $attrManager->searchItems( $searchSubAttr, array( 'text', 'media') );
 			$items = array_merge($items, $subAttr);
 				
 			foreach( $items as $id => $attribute ) {
