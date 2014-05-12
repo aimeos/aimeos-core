@@ -67,6 +67,81 @@ class Controller_ExtJS_Media_Factory
 		$classname = 'Controller_ExtJS_Media_' . $name;
 
 		$manager = self::_createController( $context, $classname, $iface );
+
+		/** controller/extjs/media/decorators/excludes
+		 * Excludes decorators added by the "common" option from the media ExtJS controllers
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to remove a decorator added via
+		 * "controller/extjs/common/decorators/default" before they are wrapped
+		 * around the ExtJS controller.
+		 *
+		 *  controller/extjs/media/decorators/excludes = array( 'decorator1' )
+		 *
+		 * This would remove the decorator named "decorator1" from the list of
+		 * common decorators ("Controller_ExtJS_Common_Decorator_*") added via
+		 * "controller/extjs/common/decorators/default" for the media ExtJS controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see controller/extjs/common/decorators/default
+		 * @see controller/extjs/media/decorators/global
+		 * @see controller/extjs/media/decorators/local
+		 */
+
+		/** controller/extjs/media/decorators/global
+		 * Adds a list of globally available decorators only to the media ExtJS controllers
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap global decorators
+		 * ("Controller_ExtJS_Common_Decorator_*") around the ExtJS controller.
+		 *
+		 *  controller/extjs/media/decorators/global = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "Controller_ExtJS_Common_Decorator_Decorator1" only to the ExtJS controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see controller/extjs/common/decorators/default
+		 * @see controller/extjs/media/decorators/excludes
+		 * @see controller/extjs/media/decorators/local
+		 */
+
+		/** controller/extjs/media/decorators/local
+		 * Adds a list of local decorators only to the media ExtJS controllers
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap local decorators
+		 * ("Controller_ExtJS_Media_Decorator_*") around the ExtJS controller.
+		 *
+		 *  controller/extjs/media/decorators/local = array( 'decorator2' )
+		 *
+		 * This would add the decorator named "decorator2" defined by
+		 * "Controller_ExtJS_Media_Decorator_Decorator2" only to the ExtJS
+		 * controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see controller/extjs/common/decorators/default
+		 * @see controller/extjs/media/decorators/excludes
+		 * @see controller/extjs/media/decorators/global
+		 */
 		return self::_addControllerDecorators( $context, $manager, 'media' );
 	}
 }

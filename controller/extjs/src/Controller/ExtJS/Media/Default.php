@@ -47,7 +47,52 @@ class Controller_ExtJS_Media_Default
 
 		$config = $this->_getContext()->getConfig();
 
+		/** controller/extjs/media/default/basedir
+		 * Base directory used by all relative directory configuration options
+		 *
+		 * Usually, this is the directory of the document root of your virtual
+		 * host directory as all other directories are relative to that path.
+		 *
+		 * In case you would like to serve files from different domains, the
+		 * basedir option should be the common directory for those domains. If
+		 * e.g. your upload and mimetype directory are totally different, you
+		 * can also use the root directory of your file system ("/") as base
+		 * directory.
+		 *
+		 * @param string Absolute path to the base directory
+		 * @since 2014.03
+		 * @category Developer
+		 */
 		$basedir = $config->get( 'controller/extjs/media/default/basedir', '.' );
+
+		/** controller/extjs/media/default/upload/directory
+		 * Upload directory for files and preview images
+		 *
+		 * All uploaded files including the product or payment/delivery images
+		 * as well as the generated preview files are stored in sub-directories
+		 * of the upload directory.
+		 *
+		 * The upload directory must be relative to the "basedir" configuration
+		 * option. If
+		 *
+		 *  /var/www/test
+		 *
+		 * is the configured base directory and the upload directory should be
+		 * located in
+		 *
+		 *  /var/www/test/files/uploads
+		 *
+		 * then the configuration for the uploads directory must be
+		 *
+		 *  files/uploads
+		 *
+		 * Avoid leading and trailing slashes for the upload directory string!
+		 *
+		 * @param string Path relative to the base directory
+		 * @since 2014.03
+		 * @category Developer
+		 * @see controller/extjs/media/default/basedir
+		 */
 		$uploaddir = $config->get( 'controller/extjs/media/default/upload/directory', 'upload' );
 
 		$idList = array();
@@ -169,8 +214,43 @@ class Controller_ExtJS_Media_Default
 		}
 
 		$config = $this->_getContext()->getConfig();
+
+		/** controller/extjs/media/default/options
+		 * Options used for processing the uploaded media files
+		 *
+		 * When uploading a file, a preview image for that file is generated if
+		 * possible (especially for images). You can configure certain options
+		 * for the generated images, namely the quality of those images with
+		 *
+		 *  array(
+		 *  	'image' => array(
+		 *  		'jpeg' => array(
+		 *  			'quality' => 75
+		 *  		),
+		 *  		'png' => array(
+		 *  			'quality' => 9
+		 *  		),
+		 *  	)
+		 *  )
+		 *
+		 * @param array Multi-dimendional list of configuration options
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
 		$options = $config->get( 'controller/extjs/media/default/options', array() );
 
+		/** controller/extjs/media/default/enablecheck
+		 * Enables checking uploaded files if they are valid and not part of an attack
+		 *
+		 * This configuration option is for unit testing only! Please don't disable
+		 * the checks for uploaded files in production environments as this
+		 * would give attackers the possibility to infiltrate your installation!
+		 *
+		 * @param boolean True to enable, false to disable
+		 * @since 2014.03
+		 * @category Developer
+		 */
 		if( $config->get( 'controller/extjs/media/default/enablecheck', true ) ) {
 			$this->_checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
 		}
@@ -290,8 +370,39 @@ class Controller_ExtJS_Media_Default
 			throw new Controller_ExtJS_Exception( 'No base directory configured' );
 		}
 
-		$dir .= DIRECTORY_SEPARATOR . $relativeDir;
+		/** controller/extjs/media/default/upload/dirperms
+		 * Directory permissions used when creating sub-directories
+		 *
+		 * Uploaded files are stored in sub-directories of the configured upload
+		 * directory depending on the domain (e.g. product, catalog, service,
+		 * etc.) and these directories can also contain more directories. Each
+		 * directory is created with the configured permissions.
+		 *
+		 * The representation of the permissions is in octal notation (using 0-7)
+		 * with a leading zero. The first number after the leading zero are the
+		 * permissions for the web server creating the directory, the second is
+		 * for the primary group of the web server and the last number represents
+		 * the permissions for everyone else.
+		 *
+		 * You should use 0775 or 0755 for the permissions as the web server needs
+		 * to write into the new directory and the files are publically available,
+		 * so it's not necessary to limit read access for everyone else. The group
+		 * permissions are important if you plan to upload files directly via FTP
+		 * or by other means because then the web server needs to be able to read
+		 * and manage those files. In this case use 0775 as permissions, otherwise
+		 * you can limit them to 0755.
+		 *
+		 * A more detailed description of the meaning of the Unix file permission
+		 * bits can be found in the Wikipedia article about
+		 * {@link https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation file system permissions}
+		 *
+		 * @param integer Octal Unix permission representation
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
 		$perms = $config->get( 'controller/extjs/media/default/upload/dirperms', 0775 );
+		$dir .= DIRECTORY_SEPARATOR . $relativeDir;
 
 		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false )
 		{
@@ -335,12 +446,55 @@ class Controller_ExtJS_Media_Default
 	{
 		$config = $this->_getContext()->getConfig();
 
+		/** controller/extjs/media/default/mimeicon/directory
+		 * Directory that contains the icons for the different mime types
+		 *
+		 * If no preview image can be generated from an uploaded file, an icon
+		 * for its mime type is displayed instead. The directory for the mime
+		 * icons is structured by the general mime type (e.g. "image") as
+		 * sub-directory and the specific name of the mime type (e.g. "jpeg")
+		 * as file name.
+		 *
+		 * The mime icon directory must be relative to the "basedir" configuration
+		 * option. If
+		 *
+		 *  /var/www/test
+		 *
+		 * is the configured base directory and the upload directory should be
+		 * located in
+		 *
+		 *  /var/www/test/media/mime
+		 *
+		 * then the configuration for the uploads directory must be
+		 *
+		 *  media/mime
+		 *
+		 * Avoid leading and trailing slashes for the upload directory string!
+		 *
+		 * @param string Path relative to the base directory
+		 * @since 2014.03
+		 * @category Developer
+		 * @see controller/extjs/media/default/basedir
+		 */
 		if( ( $mimedir = $config->get( 'controller/extjs/media/default/mimeicon/directory', null ) ) === null )
 		{
 			$this->_getContext()->getLogger()->log( 'No directory for mime type images configured' );
 			return '';
 		}
 
+		/** controller/extjs/media/default/mimeicon/extension
+		 * File extension of the mime icon images
+		 *
+		 * If you would like to use different mime icons that are available in
+		 * another file format, you have to change the file extension for the
+		 * mime icons to the actual ones.
+		 *
+		 * Note: The configured file extension needs a leading dot!
+		 *
+		 * @param string File extension including a leading dot, e.g ".jpg"
+		 * @since 2014.03
+		 * @category Developer
+		 */
 		$ext = $config->get( 'controller/extjs/media/default/mimeicon/extension', '.png' );
 		$abspath = $this->_getAbsoluteDirectory( $mimedir ) . DIRECTORY_SEPARATOR . $mimetype . $ext;
 		$mimeicon = $mimedir . DIRECTORY_SEPARATOR . $mimetype . $ext;
@@ -368,6 +522,33 @@ class Controller_ExtJS_Media_Default
 	{
 		$mimetype = $mediaFile->getMimetype();
 		$config = $this->_getContext()->getConfig();
+
+		/** controller/extjs/media/default/files/allowedtypes
+		 * A list of image mime types that are allowed for uploaded image files
+		 *
+		 * The list of allowed image types must be explicitly configured for the
+		 * uploaded image files. Trying to upload and store an image file not
+		 * available in the list of allowed mime types will result in an exception.
+		 *
+		 * @param array List of image mime types
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
+
+		/** controller/extjs/media/default/preview/allowedtypes
+		 * A list of image mime types that are allowed for preview image files
+		 *
+		 * The list of allowed image types must be explicitly configured for the
+		 * preview image files. Trying to create a preview image whose mime type
+		 * is not available in the list of allowed mime types will result in an
+		 * exception.
+		 *
+		 * @param array List of image mime types
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
 		$default = array( 'image/jpeg', 'image/png', 'image/gif' );
 		$allowed = $config->get( 'controller/extjs/media/default/' . $type . '/allowedtypes', $default );
 
@@ -391,13 +572,110 @@ class Controller_ExtJS_Media_Default
 		$dest =  $this->_getAbsoluteDirectory( $filepath ). $ds . $filename . $fileext;
 
 
+		/** controller/extjs/media/default/files/maxwidth
+		 * Maximum width of the uploaded images
+		 *
+		 * The uploaded image files are scaled down if their width exceeds the
+		 * configured width of pixels. If the image width in smaller than the
+		 * configured one, no scaling happens. In case of a value of null or if
+		 * no configuration for that option is available, the image width isn't
+		 * scaled at all.
+		 *
+		 * The width/height ratio of the image is always kept.
+		 *
+		 * @param integer|null Width in pixel or null for no scaling
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
+
+		/** controller/extjs/media/default/preview/maxwidth
+		 * Maximum width of the preview images
+		 *
+		 * The preview image files are created with the configured width in
+		 * pixel. If the original image width in smaller than the one configured
+		 * for the preview image, the width of the original image is used. In
+		 * case of a value of null or if no configuration for that option is
+		 * available, the width of the preview image is the same as the width of
+		 * the original image.
+		 *
+		 * The width/height ratio of the preview image is always the same as for
+		 * the original image.
+		 *
+		 * @param integer|null Width in pixel or null for no scaling
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
 		$maxwidth = $config->get( 'controller/extjs/media/default/' . $type . '/maxwidth', null );
+
+		/** controller/extjs/media/default/files/maxheight
+		 * Maximum height of the uploaded images
+		 *
+		 * The uploaded image files are scaled down if their height exceeds the
+		 * configured height of pixels. If the image height in smaller than the
+		 * configured one, no scaling happens. In case of a value of null or if
+		 * no configuration for that option is available, the image width isn't
+		 * scaled at all.
+		 *
+		 * The width/height ratio of the image is always kept.
+		 *
+		 * @param integer|null Height in pixel or null for no scaling
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
+
+		/** controller/extjs/media/default/preview/maxheight
+		 * Maximum height of the preview images
+		 *
+		 * The preview image files are created with the configured width in
+		 * pixel. If the original image height in smaller than the one configured
+		 * for the preview image, the height of the original image is used. In
+		 * case of a value of null or if no configuration for that option is
+		 * available, the height of the preview image is the same as the height
+		 * of the original image.
+		 *
+		 * The width/height ratio of the preview image is always the same as for
+		 * the original image.
+		 *
+		 * @param integer|null Height in pixel or null for no scaling
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
 		$maxheight = $config->get( 'controller/extjs/media/default/' . $type . '/maxheight', null );
 
 		$mediaFile->scale( $maxwidth, $maxheight );
 		$mediaFile->save( $dest, $mimetype );
 
 
+		/** controller/extjs/media/default/upload/fileperms
+		 * File permissions used when storing uploaded or created files
+		 *
+		 * The representation of the permissions is in octal notation (using 0-7)
+		 * with a leading zero. The first number after the leading zero are the
+		 * permissions for the web server creating the directory, the second is
+		 * for the primary group of the web server and the last number represents
+		 * the permissions for everyone else.
+		 *
+		 * You should use 0775 or 0755 for the permissions as the web server needs
+		 * to manage the files and they are publically available, so it's not
+		 * necessary to limit read access for everyone else. The group permissions
+		 * are important if you plan to upload files directly via FTP or by other
+		 * means because then the web server needs to be able to read and manage
+		 * those files. In this case use 0775 as permissions, otherwise you can
+		 * limit them to 0755.
+		 *
+		 * A more detailed description of the meaning of the Unix file permission
+		 * bits can be found in the Wikipedia article about
+		 * {@link https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation file system permissions}
+		 *
+		 * @param integer Octal Unix permission representation
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
 		$perms = $config->get( 'controller/extjs/media/default/upload/fileperms', 0664 );
 
 		if( chmod( $dest, $perms ) === false )
