@@ -18,7 +18,7 @@ $enc = $this->encoder();
 <?php foreach( $attrMap as $type => $attrItems ) : ?>
 <?php	foreach( $attrItems as $attrItem ) : ?>
 <?php 	echo '<tr class="item';
-		if($subAttrDeps[  $attrItem->getId() ]) {	
+		if(array_key_exists( $attrItem->getId(), $subAttrDeps ) && $subAttrDeps[  $attrItem->getId() ] ) {	
 			echo ' subItem';
 			foreach($subAttrDeps[$attrItem->getId()] as $subProduct) {
 				echo ' subItem_'.$subProduct;
