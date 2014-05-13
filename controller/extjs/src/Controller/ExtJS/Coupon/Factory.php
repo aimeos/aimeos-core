@@ -67,6 +67,81 @@ class Controller_ExtJS_Coupon_Factory
 		$classname = 'Controller_ExtJS_Coupon_' . $name;
 
 		$manager = self::_createController( $context, $classname, $iface );
+
+		/** controller/extjs/coupon/decorators/excludes
+		 * Excludes decorators added by the "common" option from the coupon ExtJS controllers
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to remove a decorator added via
+		 * "controller/extjs/common/decorators/default" before they are wrapped
+		 * around the ExtJS controller.
+		 *
+		 *  controller/extjs/coupon/decorators/excludes = array( 'decorator1' )
+		 *
+		 * This would remove the decorator named "decorator1" from the list of
+		 * common decorators ("Controller_ExtJS_Common_Decorator_*") added via
+		 * "controller/extjs/common/decorators/default" for the coupon ExtJS controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see controller/extjs/common/decorators/default
+		 * @see controller/extjs/coupon/decorators/global
+		 * @see controller/extjs/coupon/decorators/local
+		 */
+
+		/** controller/extjs/coupon/decorators/global
+		 * Adds a list of globally available decorators only to the coupon ExtJS controllers
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap global decorators
+		 * ("Controller_ExtJS_Common_Decorator_*") around the ExtJS controller.
+		 *
+		 *  controller/extjs/coupon/decorators/global = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "Controller_ExtJS_Common_Decorator_Decorator1" only to the ExtJS controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see controller/extjs/common/decorators/default
+		 * @see controller/extjs/coupon/decorators/excludes
+		 * @see controller/extjs/coupon/decorators/local
+		 */
+
+		/** controller/extjs/coupon/decorators/local
+		 * Adds a list of local decorators only to the coupon ExtJS controllers
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap local decorators
+		 * ("Controller_ExtJS_Coupon_Decorator_*") around the ExtJS controller.
+		 *
+		 *  controller/extjs/coupon/decorators/local = array( 'decorator2' )
+		 *
+		 * This would add the decorator named "decorator2" defined by
+		 * "Controller_ExtJS_Coupon_Decorator_Decorator2" only to the ExtJS
+		 * controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see controller/extjs/common/decorators/default
+		 * @see controller/extjs/coupon/decorators/excludes
+		 * @see controller/extjs/coupon/decorators/global
+		 */
 		return self::_addControllerDecorators( $context, $manager, 'coupon' );
 	}
 }

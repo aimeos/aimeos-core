@@ -92,8 +92,86 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();
 
 		$config = $context->getConfig();
+
+		/** controller/extjs/attribute/export/text/default/exportdir
+		 * Directory where exported files of attribute texts are stored
+		 *
+		 * All exported files are stored in this file system directory directory.
+		 *
+		 * The export directory must be relative to the "basedir" configuration
+		 * option. If
+		 *
+		 *  /var/www/test
+		 *
+		 * is the configured base directory and the export directory should be
+		 * located in
+		 *
+		 *  /var/www/test/htdocs/files/exports
+		 *
+		 * then the configuration for the export directory must be
+		 *
+		 *  htdocs/files/exports
+		 *
+		 * Avoid leading and trailing slashes for the export directory string!
+		 *
+		 * @param string Relative path in the file system
+		 * @since 2014.03
+		 * @category Developer
+		 * @see controller/extjs/media/default/basedir
+		 */
 		$dir = $config->get( 'controller/extjs/attribute/export/text/default/exportdir', 'uploads' );
-		$perms = $config->get( 'controller/extjs/attribute/export/text/default/dirperms', 0775 );
+
+		/** controller/extjs/attribute/export/text/default/dirperms
+		 * Directory permissions used when creating the directory if it doesn't exist
+		 *
+		 * The representation of the permissions is in octal notation (using 0-7)
+		 * with a leading zero. The first number after the leading zero are the
+		 * permissions for the web server creating the directory, the second is
+		 * for the primary group of the web server and the last number represents
+		 * the permissions for everyone else.
+		 *
+		 * You should use 0700 for the permissions as the web server needs
+		 * to write into the new directory but the files shouldn't be publicall
+		 * available. The group permissions are only important if you plan to
+		 * retrieve the files directly via FTP or by other means because then
+		 * you need to be able to read and manage those files. In this case use
+		 * 0770 as permissions.
+		 *
+		 * A more detailed description of the meaning of the Unix file permission
+		 * bits can be found in the Wikipedia article about
+		 * {@link https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation file system permissions}
+		 *
+		 * @param integer Octal Unix permission representation
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
+		$perms = $config->get( 'controller/extjs/attribute/export/text/default/dirperms', 0700 );
+
+		/** controller/extjs/attribute/export/text/default/downloaddir
+		 * Directory where the exported files can be found through the web
+		 *
+		 * The exported files are stored in this directory.
+		 *
+		 * The download directory must be relative to the document root of your
+		 * virtual host. If the document root is
+		 *
+		 *  /var/www/test/htdocs
+		 *
+		 * and the exported files will be in
+		 *
+		 *  /var/www/test/htdocs/files/exports
+		 *
+		 * then the configuration for the download directory must be
+		 *
+		 *  files/exports
+		 *
+		 * Avoid leading and trailing slashes for the export directory string!
+		 *
+		 * @param string Relative path in the URL
+		 * @since 2014.03
+		 * @category Developer
+		 */
 		$downloaddir = $config->get( 'controller/extjs/attribute/export/text/default/downloaddir', 'uploads' );
 
 		$foldername = 'attribute-text-export_' . date('Y-m-d_H:i:s') . '_' . md5( time() . getmypid() );
@@ -157,6 +235,65 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
+		/** controller/extjs/attribute/export/text/default/container/type
+		 * Container file type storing all language files for the exported texts
+		 *
+		 * When exporting texts, one file or content object is created per
+		 * language. All those files or content objects are put into one container
+		 * file so editors don't have to download one file for each language.
+		 *
+		 * The container file types that are supported by default are:
+		 * * Zip
+		 *
+		 * Extensions implement other container types like spread sheets, XMLs or
+		 * more advanced ways of handling the exported data.
+		 *
+		 * @param string Container file type
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
+
+		/** controller/extjs/attribute/export/text/default/container/format
+		 * Format of the language files for the exported texts
+		 *
+		 * The exported texts are stored in one file or content object per
+		 * language. The format of that file or content object can be configured
+		 * with this option but most formats are bound to a specific container
+		 * type.
+		 *
+		 * The formats that are supported by default are:
+		 * * CSV (requires container type "Zip")
+		 *
+		 * Extensions implement other container types like spread sheets, XMLs or
+		 * more advanced ways of handling the exported data.
+		 *
+		 * @param string Content file type
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
+
+		/** controller/extjs/attribute/export/text/default/container/options
+		 * Options changing the output format of the exported texts
+		 *
+		 * Each content format may support some configuration options to change
+		 * the output for that content type.
+		 *
+		 * The options for the CSV content format are:
+		 * * csv-separator, default ','
+		 * * csv-enclosure, default '"'
+		 * * csv-escape, default '"'
+		 * * csv-lineend, default '\n'
+		 *
+		 * For format options provided by other container types implemented by
+		 * extensions, please have a look into the extension documentation.
+		 *
+		 * @param array Associative list of options with the name as key and its value
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 */
 		$containerItem = $this->_createContainer( $filename, 'controller/extjs/attribute/export/text/default/container' );
 		$actualLangid = $context->getLocale()->getLanguageId();
 		$start = 0;
