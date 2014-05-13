@@ -195,7 +195,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 				$items += $view->detailProductItem->getRefItems( 'attribute', null, 'variant' );
 			}
 
-			
+
 			// find regular attributes from Subproducts
 			$context = $this->_getContext();
 			$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
@@ -209,32 +209,31 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$domains = array('attribute');
-			$subproducts = $productManager->searchItems( $search, $domains );
+			$subproducts = $productManager->searchItems( $search, array( 'attribute' ) );
 			$subAttrIds = $subAttrDeps = array();
-			
+
 			foreach( $subproducts as $subProdId => $subProduct )
 			{
 				$subItems = $subProduct->getRefItems( 'attribute', null, 'default' );
 				$subItems += $subProduct->getRefItems( 'attribute', null, 'variant' );
-			
+
 				foreach( $subItems as $attrId => $attrItem )
 				{
 					$subAttrDeps[$attrId][] = $subProdId;
 					$subAttrIds[] = $attrId;
 				}
 			}
-			
-			$searchSubAttr = $attrManager->createSearch( true );
-			$exprSubAttr = array(
-				$searchSubAttr->compare( '==', 'attribute.id', $subAttrIds),
-				$searchSubAttr->getConditions(),
+
+			$search = $attrManager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', 'attribute.id', $subAttrIds ),
+				$search->getConditions(),
 			);
-			
-			$searchSubAttr->setConditions( $searchSubAttr->combine( '&&', $exprSubAttr ) );
-			$subAttr = $attrManager->searchItems( $searchSubAttr, array( 'text', 'media') );
-			$items = array_merge($items, $subAttr);
-				
+
+			$search->setConditions( $search->combine( '&&', $expr ) );
+			$result = $attrManager->searchItems( $search, array( 'text', 'media') );
+			$items = array_merge( $items, $result );
+
 			foreach( $items as $id => $attribute ) {
 					$attributeMap[ $attribute->getType() ][$id] = $attribute;
 			}
