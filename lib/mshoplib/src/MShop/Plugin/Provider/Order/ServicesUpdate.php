@@ -46,7 +46,18 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 		$ids = array();
 		$services = $order->getServices();
 
-		foreach( $order->getServices() as $type => $service ) {
+		if( count( $order->getProducts() ) === 0 )
+		{
+			$priceManager = MShop_Factory::createManager( $this->_getContext(), 'price' );
+
+			foreach( $services as $type => $service ) {
+				$service->setPrice( $priceManager->createItem() );
+			}
+
+			return true;
+		}
+
+		foreach( $services as $type => $service ) {
 			$ids[$type] = $service->getServiceId();
 		}
 
