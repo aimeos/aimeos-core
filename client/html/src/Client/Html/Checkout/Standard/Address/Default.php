@@ -221,8 +221,10 @@ class Client_Html_Checkout_Standard_Address_Default
 
 			// Test if addresses are available
 			$addresses = $basketCntl->get()->getAddresses();
-			if( !isset( $view->standardStepActive ) && count( $addresses ) === 0 ) {
+			if( !isset( $view->standardStepActive ) && count( $addresses ) === 0 )
+			{
 				$view->standardStepActive = 'address';
+				return false;
 			}
 		}
 		catch( Exception $e )

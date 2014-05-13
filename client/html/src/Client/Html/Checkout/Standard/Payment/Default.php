@@ -225,8 +225,10 @@ class Client_Html_Checkout_Standard_Payment_Default
 
 			// Test if payment service is available
 			$services = $basketCtrl->get()->getServices();
-			if( !isset( $view->standardStepActive ) && !array_key_exists( 'payment', $services ) ) {
+			if( !isset( $view->standardStepActive ) && !array_key_exists( 'payment', $services ) )
+			{
 				$view->standardStepActive = 'payment';
+				return false;
 			}
 		}
 		catch( Exception $e )

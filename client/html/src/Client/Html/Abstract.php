@@ -277,6 +277,7 @@ abstract class Client_Html_Abstract
 	 *
 	 * @param string $confpath Path to the configuration that contains the configured sub-clients
 	 * @param array $default List of sub-client names that should be used if no other configuration is available
+	 * @return boolean False if processing is stopped, otherwise all processing was completed successfully
 	 */
 	protected function _process( $confpath, array $default )
 	{
@@ -285,7 +286,10 @@ abstract class Client_Html_Abstract
 		foreach( $this->_getSubClients( $confpath, $default ) as $subclient )
 		{
 			$subclient->setView( $view );
-			$subclient->process();
+
+			if( $subclient->process() === false ) {
+				return false;
+			}
 		}
 	}
 

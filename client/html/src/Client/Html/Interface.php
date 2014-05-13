@@ -65,6 +65,8 @@ interface Client_Html_Interface
 	 * Processes the input, e.g. store given values.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
+	 *
+	 * @return boolean False if processing is stopped, otherwise all processing was completed successfully
 	 */
 	public function process();
 }

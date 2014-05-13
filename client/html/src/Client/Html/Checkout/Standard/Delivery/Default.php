@@ -225,8 +225,10 @@ class Client_Html_Checkout_Standard_Delivery_Default
 
 			// Test if delivery service is available
 			$services = $basketCtrl->get()->getServices();
-			if( !isset( $view->standardStepActive ) && !array_key_exists( 'delivery', $services ) ) {
+			if( !isset( $view->standardStepActive ) && !array_key_exists( 'delivery', $services ) )
+			{
 				$view->standardStepActive = 'delivery';
+				return false;
 			}
 		}
 		catch( Exception $e )
