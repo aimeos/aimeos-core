@@ -403,8 +403,10 @@ class Client_Html_Checkout_Standard_Default
 			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 			$view->standardSteps = $steps;
 
-			if( !isset( $view->standardStepActive ) ) {
-				$view->standardStepActive = $view->param( 'c-step', reset( $steps ) );
+			if( !isset( $view->standardStepActive ) )
+			{
+					$default = ( !in_array( 'summary', $steps ) ? reset( $steps ) : 'summary' );
+					$view->standardStepActive = $view->param( 'c-step', $default );
 			}
 			$activeStep = $view->standardStepActive;
 

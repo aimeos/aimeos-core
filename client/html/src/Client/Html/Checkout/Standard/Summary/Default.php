@@ -235,7 +235,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 
 		try
 		{
-			$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
 			$controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_ALL );
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );

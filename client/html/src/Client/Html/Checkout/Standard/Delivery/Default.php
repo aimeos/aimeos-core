@@ -192,37 +192,42 @@ class Client_Html_Checkout_Standard_Delivery_Default
 
 		try
 		{
-			// only start if there's something to do
-			if( ( $serviceId = $view->param( 'c-delivery-option', null ) ) === null ) {
-				return;
-			}
-
 			$context = $this->_getContext();
-			$serviceCtrl = Controller_Frontend_Service_Factory::createController( $context );
+			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
-			$attributes = $view->param( 'c-delivery/' . $serviceId, array() );
-			$errors = $serviceCtrl->checkServiceAttributes( 'delivery', $serviceId, $attributes );
-
-			foreach( $errors as $key => $msg )
+			// only start if there's something to do
+			if( ( $serviceId = $view->param( 'c-delivery-option', null ) ) !== null )
 			{
-				if( $msg === null ) {
-					unset( $errors[$key] );
+				$serviceCtrl = Controller_Frontend_Factory::createController( $context, 'service' );
+
+				$attributes = $view->param( 'c-delivery/' . $serviceId, array() );
+				$errors = $serviceCtrl->checkServiceAttributes( 'delivery', $serviceId, $attributes );
+
+				foreach( $errors as $key => $msg )
+				{
+					if( $msg === null ) {
+						unset( $errors[$key] );
+					}
 				}
+
+				if( count( $errors ) === 0 ) {
+					$basketCtrl->setService( 'delivery', $serviceId, $attributes );
+				} else {
+					$view->standardStepActive = 'delivery';
+				}
+
+				$view->deliveryError = $errors;
 			}
 
-			if( count( $errors ) === 0 )
-			{
-				$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
-				$basketCtrl->setService( 'delivery', $serviceId, $attributes );
-			}
-			else
-			{
-				$view->standardStepActive = 'delivery';
-			}
-
-			$view->deliveryError = $errors;
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
+
+
+			// Test if delivery service is available
+			$services = $basketCtrl->get()->getServices();
+			if( !isset( $view->standardStepActive ) && !array_key_exists( 'delivery', $services ) ) {
+				$view->standardStepActive = 'delivery';
+			}
 		}
 		catch( Exception $e )
 		{
@@ -244,8 +249,8 @@ class Client_Html_Checkout_Standard_Delivery_Default
 		{
 			$context = $this->_getContext();
 
-			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
-			$serviceCntl = Controller_Frontend_Service_Factory::createController( $context );
+			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
+			$serviceCntl = Controller_Frontend_Factory::createController( $context, 'service' );
 
 			$basket = $basketCntl->get();
 
