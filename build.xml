@@ -119,7 +119,7 @@
 			optfile="${coredir}/controller/extjs/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-classes-controller-extjs.wiki">
 			<fileset dir="${coredir}/controller/extjs/src" expandsymboliclinks="true" >
-				<include name="src/**/*.php" />
+				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="controller/frontend" wikiprefix="Configuration/Core" keyparts="0"
