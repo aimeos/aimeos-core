@@ -211,9 +211,21 @@ class Client_Html_Checkout_Standard_Address_Default
 	 */
 	public function process()
 	{
+		$view = $this->getView();
+
 		try
 		{
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
+
+			$basketCntl = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+
+			// Test if addresses are available
+			$addresses = $basketCntl->get()->getAddresses();
+			if( !isset( $view->standardStepActive ) && count( $addresses ) === 0 )
+			{
+				$view->standardStepActive = 'address';
+				return false;
+			}
 		}
 		catch( Exception $e )
 		{

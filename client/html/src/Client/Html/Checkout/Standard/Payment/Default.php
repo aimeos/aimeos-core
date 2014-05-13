@@ -192,37 +192,44 @@ class Client_Html_Checkout_Standard_Payment_Default
 
 		try
 		{
-			// only start if there's something to do
-			if( ( $serviceId = $view->param( 'c-payment-option', null ) ) === null ) {
-				return;
-			}
-
 			$context = $this->_getContext();
-			$serviceCtrl = Controller_Frontend_Service_Factory::createController( $context );
+			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
-			$attributes = $view->param( 'c-payment/' . $serviceId, array() );
-			$errors = $serviceCtrl->checkServiceAttributes( 'payment', $serviceId, $attributes );
-
-			foreach( $errors as $key => $msg )
+			// only start if there's something to do
+			if( ( $serviceId = $view->param( 'c-payment-option', null ) ) !== null )
 			{
-				if( $msg === null ) {
-					unset( $errors[$key] );
+				$serviceCtrl = Controller_Frontend_Factory::createController( $context, 'service' );
+
+				$attributes = $view->param( 'c-payment/' . $serviceId, array() );
+				$errors = $serviceCtrl->checkServiceAttributes( 'payment', $serviceId, $attributes );
+
+				foreach( $errors as $key => $msg )
+				{
+					if( $msg === null ) {
+						unset( $errors[$key] );
+					}
 				}
+
+				if( count( $errors ) === 0 ) {
+					$basketCtrl->setService( 'payment', $serviceId, $attributes );
+				} else {
+					$view->standardStepActive = 'payment';
+				}
+
+				$view->paymentError = $errors;
 			}
 
-			if( count( $errors ) === 0 )
-			{
-				$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
-				$basketCtrl->setService( 'payment', $serviceId, $attributes );
-			}
-			else
-			{
-				$view->standardStepActive = 'payment';
-			}
-
-			$view->paymentError = $errors;
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
+
+
+			// Test if payment service is available
+			$services = $basketCtrl->get()->getServices();
+			if( !isset( $view->standardStepActive ) && !array_key_exists( 'payment', $services ) )
+			{
+				$view->standardStepActive = 'payment';
+				return false;
+			}
 		}
 		catch( Exception $e )
 		{
@@ -244,8 +251,8 @@ class Client_Html_Checkout_Standard_Payment_Default
 		{
 			$context = $this->_getContext();
 
-			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
-			$serviceCntl = Controller_Frontend_Service_Factory::createController( $context );
+			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
+			$serviceCntl = Controller_Frontend_Factory::createController( $context, 'service' );
 
 			$basket = $basketCntl->get();
 
