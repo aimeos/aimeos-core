@@ -1123,12 +1123,12 @@
 	padding: 1%;
 }
 
-/* Hide Attributes from subProducts*/
+/* Hide attributes from sub-products*/
 .catalog-detail-additional .attributes .subproduct {
 	display: none;
 }
 .catalog-detail-additional .attributes .subproduct-actual {
-	display: block;
+	display: table-row;
 }
 
 /* Product detail, additional attributes section */
@@ -1137,13 +1137,9 @@
 	width: 98%;
 }
 
-.catalog-detail-additional .attributes tr:nth-child(2n) {
-	background-color: #C3D9E5;
-}	
-
 .catalog-detail-additional .attributes td {
 	padding: 1%;
-	width: 50%;
+	width: 48%;
 }	
 
 .catalog-detail-additional .attributes .media-list {
