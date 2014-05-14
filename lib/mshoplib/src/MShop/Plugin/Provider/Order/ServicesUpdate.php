@@ -25,6 +25,8 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 	 */
 	public function register( MW_Observer_Publisher_Interface $p )
 	{
+		$p->addListener( $this, 'setAddress.after' );
+		$p->addListener( $this, 'deleteAddress.after' );
 		$p->addListener( $this, 'addProduct.after' );
 		$p->addListener( $this, 'deleteProduct.after' );
 		$p->addListener( $this, 'addCoupon.after' );
@@ -44,11 +46,13 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
 		$ids = array();
+		$context = $this->_getContext();
 		$services = $order->getServices();
+
 
 		if( count( $order->getProducts() ) === 0 )
 		{
-			$priceManager = MShop_Factory::createManager( $this->_getContext(), 'price' );
+			$priceManager = MShop_Factory::createManager( $context, 'price' );
 
 			foreach( $services as $type => $service ) {
 				$service->setPrice( $priceManager->createItem() );
@@ -57,11 +61,11 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 			return true;
 		}
 
+
 		foreach( $services as $type => $service ) {
 			$ids[$type] = $service->getServiceId();
 		}
 
-		$context = $this->_getContext();
 		$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
 		$search = $serviceManager->createSearch( true );
@@ -71,11 +75,24 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		foreach( $serviceManager->searchItems( $search, array( 'price' ) ) as $item )
+		$result = $serviceManager->searchItems( $search, array( 'price' ) );
+
+
+		foreach( $services as $type => $service )
 		{
-			$provider = $serviceManager->getProvider( $item );
-			$services[ $item->getType() ]->setPrice( $provider->calcPrice( $order ) );
-			$order->setService( $services[ $item->getType() ], $type );
+			if( isset( $result[ $service->getServiceId() ] ) )
+			{
+				$provider = $serviceManager->getProvider( $result[ $service->getServiceId() ] );
+
+				if( $provider->isAvailable( $order ) )
+				{
+					$service->setPrice( $provider->calcPrice( $order ) );
+					$order->setService( $service, $type );
+					continue;
+				}
+			}
+
+			$order->deleteService( $type );
 		}
 
 		return true;
