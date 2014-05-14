@@ -69,9 +69,9 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 		$orderProduct = $orderBaseProductManager->createItem();
 
 		$serviceDelivery = $orderBaseServiceManager->createItem();
-		$serviceDelivery->setId( 1 );
+		$serviceDelivery->setServiceId( 1 );
 		$servicePayment = $orderBaseServiceManager->createItem();
-		$servicePayment->setId( 2 );
+		$servicePayment->setServiceId( 2 );
 
 
 		$orderStub = $this->getMockBuilder( 'MShop_Order_Item_Base_Default' )
@@ -93,21 +93,121 @@ class MShop_Plugin_Provider_Order_ServicesUpdateTest
 
 		$providerStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
 			->setConstructorArgs( array( $context, $serviceStub->createItem() ) )
-			->setMethods( array( 'isAvailable' ) )->getMock();
+			->setMethods( array( 'isAvailable') )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
 			->will( $this->returnValue( array( $orderProduct ) ) );
 
 		$serviceStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( array( $serviceItemDelivery, $serviceItemPayment ) ) );
+			->will( $this->returnValue( array( 1 => $serviceItemDelivery, 2 => $serviceItemPayment ) ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
 			->will( $this->returnValue( $providerStub ) );
+
+		$providerStub->expects( $this->exactly( 2 ) )->method( 'isAvailable' )
+			->will( $this->returnValue( true ) );
 
 
 		$this->assertTrue( $object->update( $orderStub, 'addProduct.after' ) );
 		$this->assertNotSame( $serviceDelivery, $orderStub->getService( 'delivery' ) );
 		$this->assertNotSame( $servicePayment, $orderStub->getService( 'payment' ) );
+	}
+
+
+	public function testUpdateNotAvailable()
+	{
+		$context = TestHelper::getContext();
+		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->_plugin );
+
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$localeManager = MShop_Factory::createManager( $context, 'locale' );
+		$orderBaseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
+		$orderBaseServiceManager = MShop_Factory::createManager( $context, 'order/base/service' );
+
+		$priceItem = $priceManager->createItem();
+		$localeItem = $localeManager->createItem();
+		$orderProduct = $orderBaseProductManager->createItem();
+
+		$serviceDelivery = $orderBaseServiceManager->createItem();
+		$serviceDelivery->setServiceId( 1 );
+		$servicePayment = $orderBaseServiceManager->createItem();
+		$servicePayment->setServiceId( 2 );
+
+
+		$orderStub = $this->getMockBuilder( 'MShop_Order_Item_Base_Default' )
+			->setConstructorArgs( array( $priceItem, $localeItem ) )->setMethods( array( 'getProducts' ) )->getMock();
+
+		$serviceStub = $this->getMockBuilder( 'MShop_Service_Manager_Default' )
+			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems', 'getProvider' ) )->getMock();
+
+		MShop_Service_Manager_Factory::injectManager( 'MShop_Service_Manager_PluginServicesUpdate', $serviceStub );
+		$context->getConfig()->set( 'classes/service/manager/name', 'PluginServicesUpdate' );
+
+
+		$orderStub->setService( $serviceDelivery, 'delivery' );
+		$orderStub->setService( $servicePayment, 'payment' );
+
+		$serviceItemDelivery = new MShop_Service_Item_Default( array( 'type' => 'delivery' ) );
+		$serviceItemPayment = new MShop_Service_Item_Default( array( 'type' => 'payment' ) );
+
+
+		$providerStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
+			->setConstructorArgs( array( $context, $serviceStub->createItem() ) )
+			->setMethods( array( 'isAvailable') )->getMock();
+
+		$orderStub->expects( $this->once() )->method( 'getProducts' )
+			->will( $this->returnValue( array( $orderProduct ) ) );
+
+		$serviceStub->expects( $this->once() )->method( 'searchItems' )
+			->will( $this->returnValue( array( 1 => $serviceItemDelivery, 2 => $serviceItemPayment ) ) );
+
+		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
+			->will( $this->returnValue( $providerStub ) );
+
+		$providerStub->expects( $this->exactly( 2 ) )->method( 'isAvailable' )
+			->will( $this->returnValue( false ) );
+
+
+		$this->assertTrue( $object->update( $orderStub, 'addProduct.after' ) );
+		$this->assertEquals( array(), $orderStub->getServices() );
+	}
+
+
+	public function testUpdateServicesGone()
+	{
+		$context = TestHelper::getContext();
+		$object = new MShop_Plugin_Provider_Order_ServicesUpdate( $context, $this->_plugin );
+
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$localeManager = MShop_Factory::createManager( $context, 'locale' );
+		$orderBaseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
+		$orderBaseServiceManager = MShop_Factory::createManager( $context, 'order/base/service' );
+
+		$priceItem = $priceManager->createItem();
+		$localeItem = $localeManager->createItem();
+		$orderProduct = $orderBaseProductManager->createItem();
+
+		$serviceDelivery = $orderBaseServiceManager->createItem();
+		$serviceDelivery->setServiceId( -1 );
+		$servicePayment = $orderBaseServiceManager->createItem();
+		$servicePayment->setServiceId( -2 );
+
+
+		$orderStub = $this->getMockBuilder( 'MShop_Order_Item_Base_Default' )
+			->setConstructorArgs( array( $priceItem, $localeItem ) )
+			->setMethods( array( 'getProducts' ) )->getMock();
+
+
+		$orderStub->setService( $serviceDelivery, 'delivery' );
+		$orderStub->setService( $servicePayment, 'payment' );
+
+
+		$orderStub->expects( $this->once() )->method( 'getProducts' )
+			->will( $this->returnValue( array( $orderProduct ) ) );
+
+
+		$this->assertTrue( $object->update( $orderStub, 'addAddress.after' ) );
+		$this->assertEquals( array(), $orderStub->getServices() );
 	}
 
 
