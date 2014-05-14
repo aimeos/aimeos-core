@@ -414,7 +414,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testGetAddresses()
+	public function testGetAddress()
 	{
 		foreach( $this->_addresses as $type => $address ) {
 			$this->_object->setAddress( $address, $type );
@@ -427,7 +427,7 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testSetAddresses()
+	public function testSetAddress()
 	{
 		foreach( $this->_addresses as $type => $address ) {
 			$this->_object->setAddress( $address, $type );
@@ -445,7 +445,22 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testGetServices()
+	public function testDeleteAddress()
+	{
+		foreach( $this->_addresses as $type => $address ) {
+			$this->_object->setAddress( $address, $type );
+		}
+
+		$this->_object->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->_object->deleteAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$this->assertTrue( $this->_object->isModified() );
+
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+	}
+
+
+	public function testGetService()
 	{
 		foreach( $this->_services as $type => $service ) {
 			$this->_object->setService( $service, $type );
@@ -473,6 +488,21 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals($service, $this->_object->getService($type));
 		$this->assertInstanceOf( 'MShop_Order_Item_Base_Service_Interface', $result );
 		$this->assertTrue($this->_object->isModified());
+	}
+
+
+	public function testDeleteService()
+	{
+		foreach( $this->_services as $type => $service ) {
+			$this->_object->setService( $service, $type );
+		}
+
+		$this->_object->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$this->_object->deleteService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$this->assertTrue( $this->_object->isModified() );
+
+		$this->setExpectedException( 'MShop_Order_Exception' );
+		$this->_object->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
 	}
 
 

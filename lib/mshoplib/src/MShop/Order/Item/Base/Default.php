@@ -451,6 +451,22 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 
 	/**
+	 * Deletes the delivery or payment service from the basket.
+	 */
+	public function deleteService( $type )
+	{
+		$this->_notifyListeners( 'deleteService.before', $type );
+
+		if( isset( $this->_services[$type] ) ) {
+			unset( $this->_services[$type] );
+			$this->_modified = true;
+		}
+
+		$this->_notifyListeners( 'deleteService.after', $type );
+	}
+
+
+	/**
 	 * Returns the available coupon codes and the lists of affected product items.
 	 *
 	 * @return array Associative array of codes and lists of product items
