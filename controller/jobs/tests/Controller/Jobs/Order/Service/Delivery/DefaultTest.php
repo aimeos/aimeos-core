@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
-class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_Testcase
+class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 
@@ -22,7 +22,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 		$context = TestHelper::getContext();
 		$arcavias = TestHelper::getArcavias();
 
-		$this->_object = new Controller_Jobs_Service_Delivery_Process_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
 	}
 
 
@@ -41,7 +41,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Process delivery services', $this->_object->getName() );
+		$this->assertEquals( 'Process order delivery services', $this->_object->getName() );
 	}
 
 
@@ -99,7 +99,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 		$orderManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Service_Delivery_Process_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
 		$object->run();
 	}
 
@@ -152,7 +152,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 		$orderManagerStub->expects( $this->never() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Service_Delivery_Process_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
 		$object->run();
 	}
 
@@ -198,7 +198,7 @@ class Controller_Jobs_Service_Delivery_Process_DefaultTest extends MW_Unittest_T
 		$orderManagerStub->expects( $this->never() )->method( 'searchItems' );
 
 
-		$object = new Controller_Jobs_Service_Delivery_Process_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
 		$object->run();
 	}
 }

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
-class Controller_Jobs_Service_Delivery_Process_FactoryTest extends MW_Unittest_Testcase
+class Controller_Jobs_Order_Service_Delivery_FactoryTest extends MW_Unittest_Testcase
 {
 	public function testCreateController()
 	{
 		$context = TestHelper::getContext();
 		$arcavias = TestHelper::getArcavias();
 
-		$obj = Controller_Jobs_Service_Delivery_Process_Factory::createController( $context, $arcavias );
+		$obj = Controller_Jobs_Order_Service_Delivery_Factory::createController( $context, $arcavias );
 		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj);
 	}
 
@@ -24,7 +24,7 @@ class Controller_Jobs_Service_Delivery_Process_FactoryTest extends MW_Unittest_T
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Service_Delivery_Process_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
+		$object = Controller_Jobs_Order_Service_Delivery_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
 	}
 
 
@@ -34,7 +34,7 @@ class Controller_Jobs_Service_Delivery_Process_FactoryTest extends MW_Unittest_T
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Service_Delivery_Process_Factory::createController( $context, $arcavias, 'WrongClass' );
+		$object = Controller_Jobs_Order_Service_Delivery_Factory::createController( $context, $arcavias, 'WrongClass' );
 	}
 
 
@@ -44,7 +44,7 @@ class Controller_Jobs_Service_Delivery_Process_FactoryTest extends MW_Unittest_T
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Service_Delivery_Process_Factory::createController( $context, $arcavias, 'Factory' );
+		$object = Controller_Jobs_Order_Service_Delivery_Factory::createController( $context, $arcavias, 'Factory' );
 	}
 
 }
