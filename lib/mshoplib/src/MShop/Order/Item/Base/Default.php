@@ -33,7 +33,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param array $values Associative list of key/value pairs containing
 	 * 	e.g. the order or user ID
 	 */
-	public function __construct(MShop_Price_Item_Interface $price, MShop_Locale_Item_Interface $locale,
+	public function __construct( MShop_Price_Item_Interface $price, MShop_Locale_Item_Interface $locale,
 		array $values = array(), array $products = array(), array $addresses = array(),
 		array $services = array(), array $coupons = array() )
 	{
@@ -100,7 +100,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 *
 	 * @param string $id Unique ID of the order base object
 	 */
-	public function setId($id)
+	public function setId( $id )
 	{
 		if ( ( $this->_values['id'] = MShop_Common_Item_Abstract::checkId($this->getId(), $id) ) === null ) {
 			$this->_modified = true;
@@ -148,7 +148,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 *
 	 * @param string $comment Comment for the order
 	 */
-	public function setComment($comment)
+	public function setComment( $comment )
 	{
 		if ( $comment == $this->getComment() ) { return; }
 
@@ -174,7 +174,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 *
 	 * @param string $customerId Unique ID of the customer
 	 */
-	public function setCustomerId($customerid)
+	public function setCustomerId( $customerid )
 	{
 		if ( $customerid === $this->getCustomerId() ) { return; }
 
@@ -233,7 +233,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param mixed $key Key returned by getProducts() identifying the requested product
 	 * @return MShop_Order_Item_Base_Product_Interface Product item of an order
 	 */
-	public function getProduct($key)
+	public function getProduct( $key )
 	{
 		if( !isset( $this->_products[$key] ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Product with array key "%1$d" not available', $key ) );
@@ -310,7 +310,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 *
 	 * @param integer $position Position id of the order product item
 	 */
-	public function deleteProduct($position)
+	public function deleteProduct( $position )
 	{
 		if( !array_key_exists( $position, $this->_products ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Product with array key "%1$d" not available', $position ) );
@@ -343,7 +343,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param string $domain Address domain, usually "billing" or "delivery"
 	 * @return MShop_Order_Item_Base_Address_Interface Order address item for the requested domain
 	 */
-	public function getAddress($domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT)
+	public function getAddress( $domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )
 	{
 		if(!isset($this->_addresses[$domain])) {
 			throw new MShop_Order_Exception( sprintf( 'Address for domain "%1$s" not available', $domain ) );
@@ -360,8 +360,8 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param string $domain Address domain, usually "billing" or "delivery"
 	 * @return MShop_Order_Item_Base_Address_Interface Item that was really added to the basket
 	 */
-	public function setAddress(MShop_Order_Item_Base_Address_Interface $address,
-		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT)
+	public function setAddress( MShop_Order_Item_Base_Address_Interface $address,
+		$domain = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )
 	{
 		if ( isset( $this->_addresses[ $domain ] ) && $this->_addresses[ $domain ] === $address ) { return; }
 
@@ -432,7 +432,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * @param string $type Service type
 	 * @return MShop_Order_Item_Base_Service_Interface Item that was really added to the basket
 	 */
-	public function setService(MShop_Order_Item_Base_Service_Interface $service, $type)
+	public function setService( MShop_Order_Item_Base_Service_Interface $service, $type )
 	{
 		$this->_checkPrice( $service->getPrice() );
 
