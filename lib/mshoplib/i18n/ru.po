@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 20:48+0200\n"
-"PO-Revision-Date: 2014-05-05 18:50+0000\n"
+"POT-Creation-Date: 2014-05-15 13:34+0200\n"
+"PO-Revision-Date: 2014-05-15 11:35+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:550
+#: src/MShop/Order/Item/Base/Default.php:566
 #, php-format
 msgid "Basket empty"
 msgstr ""
@@ -154,7 +154,7 @@ msgstr ""
 msgid "Database manager object not available"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:474
+#: src/MShop/Order/Item/Base/Default.php:490
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
 msgstr ""
@@ -215,7 +215,7 @@ msgstr ""
 msgid "Invalid characters in ISO language code \"%1$s\""
 msgstr ""
 
-#: src/MShop/Service/Provider/Abstract.php:339
+#: src/MShop/Service/Provider/Abstract.php:344
 #, php-format
 msgid ""
 "Invalid characters in attribute for provider configuration. Attribute is not"
@@ -783,11 +783,6 @@ msgstr ""
 #: src/MShop/Service/Provider/Payment/Abstract.php:96
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
-
-#: src/MShop/Plugin/Provider/Order/Shipping.php:73
-#, php-format
-msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr ""
 
 #: src/MShop/Locale/Manager/Default.php:519

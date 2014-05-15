@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 20:48+0200\n"
+"POT-Creation-Date: 2014-05-15 13:18+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -47,7 +47,7 @@ msgstr ""
 
 # error domain: order
 # error type: misc.
-#: src/MShop/Order/Item/Base/Default.php:550
+#: src/MShop/Order/Item/Base/Default.php:566
 #, php-format
 msgid "Basket empty"
 msgstr ""
@@ -192,7 +192,7 @@ msgstr ""
 msgid "Database manager object not available"
 msgstr ""
 
-#: src/MShop/Order/Item/Base/Default.php:474
+#: src/MShop/Order/Item/Base/Default.php:490
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
 msgstr ""
@@ -267,7 +267,7 @@ msgstr ""
 
 # error domain: service
 # error type: invalid characters in name or value
-#: src/MShop/Service/Provider/Abstract.php:339
+#: src/MShop/Service/Provider/Abstract.php:344
 #, php-format
 msgid "Invalid characters in attribute for provider configuration. Attribute is not of type \"%1$s\"."
 msgstr ""
@@ -934,13 +934,6 @@ msgstr ""
 #: src/MShop/Service/Provider/Payment/Abstract.php:96
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
-
-# error domain: plugin
-# error type: value, parameter, object etc. not available
-#: src/MShop/Plugin/Provider/Order/Shipping.php:73
-#, php-format
-msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
 msgstr ""
 
 # error domain: search

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 20:48+0200\n"
-"PO-Revision-Date: 2014-05-05 18:50+0000\n"
+"POT-Creation-Date: 2014-05-15 13:34+0200\n"
+"PO-Revision-Date: 2014-05-15 11:35+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/arcavias-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Configuration de la recherche d'adresse indisponible"
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Type d'adresse \"%1$s\" pas dans la plage autorisée"
 
-#: src/MShop/Order/Item/Base/Default.php:550
+#: src/MShop/Order/Item/Base/Default.php:566
 #, php-format
 msgid "Basket empty"
 msgstr "Panier vide"
@@ -155,7 +155,7 @@ msgstr "L'arbre DOM de la réponse XML du prestataire de livraison n'a pu être 
 msgid "Database manager object not available"
 msgstr "Objet de gestionnaire de base de donnée indisponible"
 
-#: src/MShop/Order/Item/Base/Default.php:474
+#: src/MShop/Order/Item/Base/Default.php:490
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
 msgstr ""
@@ -216,7 +216,7 @@ msgstr "Caractères invalides dans le code de devise ISO \"%1$s\""
 msgid "Invalid characters in ISO language code \"%1$s\""
 msgstr "Caractères invalides dans le code de langue ISO \"%1$s\""
 
-#: src/MShop/Service/Provider/Abstract.php:339
+#: src/MShop/Service/Provider/Abstract.php:344
 #, php-format
 msgid ""
 "Invalid characters in attribute for provider configuration. Attribute is not"
@@ -785,11 +785,6 @@ msgstr "La quantité minimum de produit de %1$d n'est pas atteinte"
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
 msgstr "Le type de l'option configuration option de clé \"%1$s\" doit être \"%2$s\""
-
-#: src/MShop/Plugin/Provider/Order/Shipping.php:73
-#, php-format
-msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
-msgstr "Seuil pour l'expédition gratuite pour la devise \"%1$s\" indisponible"
 
 #: src/MShop/Locale/Manager/Default.php:519
 #: src/MShop/Common/Manager/Abstract.php:727
