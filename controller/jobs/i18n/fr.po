@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 20:48+0200\n"
-"PO-Revision-Date: 2014-01-29 22:14+0000\n"
+"POT-Creation-Date: 2014-05-15 13:34+0200\n"
+"PO-Revision-Date: 2014-05-15 11:35+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/arcavias-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/Controller/Jobs/Admin/Job/Default.php:28
+msgid "Admin interface jobs"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Service/Payment/Default.php:39
+msgid ""
+"Authorized payments of orders will be captured after dispatching or after a "
+"configurable amount of time"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Service/Async/Default.php:28
+msgid "Batch update of payment/delivery status"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Service/Payment/Default.php:28
+msgid "Capture authorized payments"
+msgstr ""
+
+#: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:28
+msgid "Catalog index optimization"
+msgstr ""
+
+#: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:28
+msgid "Catalog index rebuild"
+msgstr ""
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
 #: src/Controller/Jobs/Common/Factory/Abstract.php:169
@@ -40,12 +66,36 @@ msgstr "Classe \"%1$s\" non trouvée"
 msgid "Controller path is empty"
 msgstr "Le chemin du contrôleur est vide"
 
+#: src/Controller/Jobs/Order/Coupon/Count/Default.php:39
+msgid "Decreases the counts of successfully redeemed coupons"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Product/Stock/Default.php:39
+msgid "Decreases the stock levels of products in completed orders"
+msgstr ""
+
+#: src/Controller/Jobs/Service/Delivery/Process/Default.php:29
+msgid "Deprecated: Use order/service/delivery"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Service/Async/Default.php:39
+msgid "Executes payment or delivery service providers that uses batch updates"
+msgstr ""
+
+#: src/Controller/Jobs/Admin/Job/Default.php:39
+msgid ""
+"Executes the jobs created by the admin interface, e.g. the text exports"
+msgstr ""
+
 #: src/Controller/Jobs/Order/Email/Payment/Factory.php:71
 #: src/Controller/Jobs/Order/Email/Delivery/Factory.php:71
+#: src/Controller/Jobs/Order/Service/Async/Factory.php:71
+#: src/Controller/Jobs/Order/Service/Payment/Factory.php:71
+#: src/Controller/Jobs/Order/Service/Delivery/Factory.php:71
 #: src/Controller/Jobs/Order/Product/Stock/Factory.php:71
 #: src/Controller/Jobs/Order/Coupon/Count/Factory.php:71
 #: src/Controller/Jobs/Admin/Job/Factory.php:71
-#: src/Controller/Jobs/Service/Delivery/Process/Factory.php:71
+#: src/Controller/Jobs/Service/Delivery/Process/Factory.php:47
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
@@ -82,6 +132,46 @@ msgstr "Méthode tâche non valide \"%1$s\""
 #, php-format
 msgid "Method \"%1$s\" not available"
 msgstr "Méthode \"%1$s\" non disponible"
+
+#: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:39
+msgid "Optimizes the catalog index for searching products"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Coupon/Count/Default.php:28
+msgid "Order coupon counts"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Email/Delivery/Default.php:28
+msgid "Order delivery related e-mails"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Email/Payment/Default.php:28
+msgid "Order payment related e-mails"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Product/Stock/Default.php:28
+msgid "Order product stock levels"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Service/Delivery/Default.php:28
+msgid "Process order delivery services"
+msgstr ""
+
+#: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39
+msgid "Rebuilds the catalog index for searching products"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Email/Payment/Default.php:39
+msgid "Sends order confirmation or payment status update e-mails"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Email/Delivery/Default.php:39
+msgid "Sends order delivery status update e-mails"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Service/Delivery/Default.php:39
+msgid "Sends paid orders to the ERP system or logistic partner"
+msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
 #, php-format
