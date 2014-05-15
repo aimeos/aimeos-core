@@ -147,7 +147,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
 
 		$serviceProviderStub->expects( $this->once() )->method( 'process' )
-			->will( $this->throwException( new MShop_Service_Exception( 'test service delivery process: process' ) ) );
+			->will( $this->throwException( new MShop_Service_Exception( 'test order service delivery: process' ) ) );
 
 		$orderManagerStub->expects( $this->never() )->method( 'saveItem' );
 
@@ -193,7 +193,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 			->will( $this->onConsecutiveCalls( array( $serviceItem ), array() ) );
 
 		$serviceManagerStub->expects( $this->once() )->method( 'getProvider' )
-			->will( $this->throwException( new MShop_Service_Exception( 'test service delivery process: getProvider' ) ) );
+			->will( $this->throwException( new MShop_Service_Exception( 'test sorder service delivery: getProvider' ) ) );
 
 		$orderManagerStub->expects( $this->never() )->method( 'searchItems' );
 
