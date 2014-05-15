@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 20:48+0200\n"
+"POT-Creation-Date: 2014-05-15 13:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -215,11 +215,11 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: layouts/checkout/confirm/basic-body-default.html:36
+#: layouts/checkout/confirm/retry-body-default.html:23
 msgid "Change payment"
 msgstr ""
 
-#: layouts/catalog/detail/additional-attribute-body-default.html:14
+#: layouts/catalog/detail/additional-attribute-body-default.html:15
 msgid "Characteristics"
 msgstr ""
 
@@ -466,12 +466,8 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: layouts/checkout/confirm/basic-body-default.html:12
-msgid "Order"
-msgstr ""
-
 #: layouts/account/history/list-body-default.html:96
-#: layouts/checkout/confirm/basic-body-default.html:17
+#: layouts/checkout/confirm/basic-body-default.html:16
 msgid "Order ID"
 msgstr ""
 
@@ -481,6 +477,7 @@ msgstr ""
 
 #: layouts/account/history/detail-body-default.html:18
 #: layouts/email/common/text-summary-detail-body-default.html:59
+#: layouts/checkout/confirm/basic-body-default.html:12
 msgid "Order details"
 msgstr ""
 
@@ -508,7 +505,7 @@ msgstr ""
 msgid "Payment costs"
 msgstr ""
 
-#: layouts/checkout/confirm/basic-body-default.html:21
+#: layouts/checkout/confirm/basic-body-default.html:20
 msgid "Payment status"
 msgstr ""
 
@@ -691,8 +688,16 @@ msgid ""
 "We received the payment and will care about your order immediately."
 msgstr ""
 
-#: layouts/checkout/confirm/basic-body-default.html:13
-msgid "Thank you for your order. You will receive an e-mail with the order details within the next minutes"
+#: layouts/checkout/confirm/5/intro-body-default.html:12
+msgid ""
+"Thank you for your order and authorizing the payment.\n"
+"An e-mail with the order details will be sent to you within the next few minutes."
+msgstr ""
+
+#: layouts/checkout/confirm/6/intro-body-default.html:12
+msgid ""
+"Thank you for your order.\n"
+"We received your payment and an e-mail with the order details will be sent to you within the next few minutes."
 msgstr ""
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and delivery status (%3%s)
@@ -702,11 +707,23 @@ msgstr ""
 msgid "The delivery status of your order %1$s from %2$s has been changed to \"%3$s\"."
 msgstr ""
 
+#: layouts/checkout/confirm/1/intro-body-default.html:12
+msgid ""
+"The order was canceled.\n"
+"Do you wish to retry your order?"
+msgstr ""
+
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and delivery status (%3%s)
 #: layouts/email/delivery/6/text-intro-body-default.html:11
 #: layouts/email/delivery/6/html-intro-body-default.html:12
 #, php-format
 msgid "The parcel for your order %1$s from %2$s could not be delivered."
+msgstr ""
+
+#: layouts/checkout/confirm/4/intro-body-default.html:12
+msgid ""
+"The payment confirmation for your order is still pending.\n"
+"You will get an e-mail as soon as the payment is authorized."
 msgstr ""
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment status (%3%s)
@@ -730,7 +747,7 @@ msgstr ""
 msgid "Total quantity"
 msgstr ""
 
-#: layouts/checkout/confirm/basic-body-default.html:37
+#: layouts/checkout/confirm/retry-body-default.html:24
 msgid "Try again"
 msgstr ""
 
@@ -742,6 +759,12 @@ msgstr ""
 #: src/Client/Html/Checkout/Standard/Order/Address/Default.php:199
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
+msgstr ""
+
+#: layouts/checkout/confirm/2/intro-body-default.html:12
+msgid ""
+"Unfortunately, the payment for your order was refused.\n"
+"Do you wish to retry?"
 msgstr ""
 
 #: layouts/basket/standard/body-default.html:43
@@ -817,10 +840,6 @@ msgstr ""
 #: layouts/checkout/standard/address-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Address/Default.php:12
 msgid "address"
-msgstr ""
-
-#: src/Client/Html/Checkout/Confirm/Basic/Default.php:12
-msgid "basic"
 msgstr ""
 
 #: layouts/common/summary/service-body-default.html:16

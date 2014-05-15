@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 20:48+0200\n"
-"PO-Revision-Date: 2014-05-05 18:49+0000\n"
+"POT-Creation-Date: 2014-05-15 13:34+0200\n"
+"PO-Revision-Date: 2014-05-15 11:19+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/arcavias-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -222,11 +222,11 @@ msgstr "La catégorie numéro \"%1$s\" pas sous numéro \"%2$s\""
 msgid "Change"
 msgstr "Modifier"
 
-#: layouts/checkout/confirm/basic-body-default.html:36
+#: layouts/checkout/confirm/retry-body-default.html:23
 msgid "Change payment"
 msgstr "Changer de paiement"
 
-#: layouts/catalog/detail/additional-attribute-body-default.html:14
+#: layouts/catalog/detail/additional-attribute-body-default.html:15
 msgid "Characteristics"
 msgstr "Caractéristiques"
 
@@ -480,12 +480,8 @@ msgstr "L'objet n'implémente pas \"%1$s\""
 msgid "Options"
 msgstr "Options"
 
-#: layouts/checkout/confirm/basic-body-default.html:12
-msgid "Order"
-msgstr "Commande"
-
 #: layouts/account/history/list-body-default.html:96
-#: layouts/checkout/confirm/basic-body-default.html:17
+#: layouts/checkout/confirm/basic-body-default.html:16
 msgid "Order ID"
 msgstr "Numéro de commande"
 
@@ -495,6 +491,7 @@ msgstr "Chaîne de commande"
 
 #: layouts/account/history/detail-body-default.html:18
 #: layouts/email/common/text-summary-detail-body-default.html:59
+#: layouts/checkout/confirm/basic-body-default.html:12
 msgid "Order details"
 msgstr "Détails de la commande"
 
@@ -522,7 +519,7 @@ msgstr "Paiement"
 msgid "Payment costs"
 msgstr "Frais de paiement"
 
-#: layouts/checkout/confirm/basic-body-default.html:21
+#: layouts/checkout/confirm/basic-body-default.html:20
 msgid "Payment status"
 msgstr "Statut du paiement"
 
@@ -712,11 +709,17 @@ msgid ""
 "We received the payment and will care about your order immediately."
 msgstr "Nous vous remercions pour votre commande %1$s à %2$s.\n\nNous avons reçu le paiement et nous nous occupons de votre commande dès maintenant."
 
-#: layouts/checkout/confirm/basic-body-default.html:13
+#: layouts/checkout/confirm/5/intro-body-default.html:12
 msgid ""
-"Thank you for your order. You will receive an e-mail with the order details "
-"within the next minutes"
-msgstr "Merci pour votre commande. Vous recevrez un e-mail avec les détails de la commande dans les prochaines minutes"
+"Thank you for your order and authorizing the payment.\n"
+"An e-mail with the order details will be sent to you within the next few minutes."
+msgstr ""
+
+#: layouts/checkout/confirm/6/intro-body-default.html:12
+msgid ""
+"Thank you for your order.\n"
+"We received your payment and an e-mail with the order details will be sent to you within the next few minutes."
+msgstr ""
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -728,6 +731,12 @@ msgid ""
 "\"%3$s\"."
 msgstr "Le statut de livraison de votre commande %1$s à %2$s a été modifié en \"%3$s\"."
 
+#: layouts/checkout/confirm/1/intro-body-default.html:12
+msgid ""
+"The order was canceled.\n"
+"Do you wish to retry your order?"
+msgstr ""
+
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
 #: layouts/email/delivery/6/text-intro-body-default.html:11
@@ -735,6 +744,12 @@ msgstr "Le statut de livraison de votre commande %1$s à %2$s a été modifié e
 #, php-format
 msgid "The parcel for your order %1$s from %2$s could not be delivered."
 msgstr "Le colis de votre commande %1$s à %2$s n'a pas pu être livré."
+
+#: layouts/checkout/confirm/4/intro-body-default.html:12
+msgid ""
+"The payment confirmation for your order is still pending.\n"
+"You will get an e-mail as soon as the payment is authorized."
+msgstr ""
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -758,7 +773,7 @@ msgstr "Total"
 msgid "Total quantity"
 msgstr "Quantité totale"
 
-#: layouts/checkout/confirm/basic-body-default.html:37
+#: layouts/checkout/confirm/retry-body-default.html:24
 msgid "Try again"
 msgstr "Essayez à nouveau"
 
@@ -771,6 +786,12 @@ msgstr "Impossible d'appeler la méthode \"%1$s\""
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr "Impossible de sauvegarder l'adresse pour le client \"%1$s\" : %2$s"
+
+#: layouts/checkout/confirm/2/intro-body-default.html:12
+msgid ""
+"Unfortunately, the payment for your order was refused.\n"
+"Do you wish to retry?"
+msgstr ""
 
 #: layouts/basket/standard/body-default.html:43
 msgid "Update"
@@ -848,10 +869,6 @@ msgstr "Votre commande %1$s à %2$s a été expédiée."
 #: src/Client/Html/Checkout/Standard/Address/Default.php:12
 msgid "address"
 msgstr "Adresse"
-
-#: src/Client/Html/Checkout/Confirm/Basic/Default.php:12
-msgid "basic"
-msgstr "basique"
 
 #: layouts/common/summary/service-body-default.html:16
 #: layouts/checkout/standard/delivery-body-default.html:42
