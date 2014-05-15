@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 20:48+0200\n"
-"PO-Revision-Date: 2014-05-05 18:50+0000\n"
+"POT-Creation-Date: 2014-05-15 13:34+0200\n"
+"PO-Revision-Date: 2014-05-15 11:35+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "La configuración de búsqueda de direcciones no está disponible"
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "La dirección tipo \"%1$s\" está fuera del rango permitido"
 
-#: src/MShop/Order/Item/Base/Default.php:550
+#: src/MShop/Order/Item/Base/Default.php:566
 #, php-format
 msgid "Basket empty"
 msgstr "Cesta vacía"
@@ -155,7 +155,7 @@ msgstr "El árbol DOM de la respuesta XML del proveedor de entrega no puede conv
 msgid "Database manager object not available"
 msgstr "Objeto de administrador de base de datos no disponible"
 
-#: src/MShop/Order/Item/Base/Default.php:474
+#: src/MShop/Order/Item/Base/Default.php:490
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
 msgstr ""
@@ -216,7 +216,7 @@ msgstr "Hay caracteres no válidos en el código ISO de divisa \"%1$s\""
 msgid "Invalid characters in ISO language code \"%1$s\""
 msgstr "Hay caracteres no válidos en el código de lenguaje ISO \"%1$s\""
 
-#: src/MShop/Service/Provider/Abstract.php:339
+#: src/MShop/Service/Provider/Abstract.php:344
 #, php-format
 msgid ""
 "Invalid characters in attribute for provider configuration. Attribute is not"
@@ -785,11 +785,6 @@ msgstr "No se ha alcanzado la cantidad mínima de %1$d productos"
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
 msgstr "El tipo de la opción de configuración con clave \"%1$s\" debe ser \"%2$s\""
-
-#: src/MShop/Plugin/Provider/Order/Shipping.php:73
-#, php-format
-msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
-msgstr "El umbral de envío gratuito para las divisas con ID \"%1$s\" no está disponible"
 
 #: src/MShop/Locale/Manager/Default.php:519
 #: src/MShop/Common/Manager/Abstract.php:727

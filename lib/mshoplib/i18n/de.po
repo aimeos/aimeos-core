@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 20:48+0200\n"
-"PO-Revision-Date: 2014-05-05 18:51+0000\n"
+"POT-Creation-Date: 2014-05-15 13:34+0200\n"
+"PO-Revision-Date: 2014-05-15 11:35+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr "Suchkonfiguration für Adresse nicht verfügbar"
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Typ \"%1$s\" für Anschrift liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
-#: src/MShop/Order/Item/Base/Default.php:550
+#: src/MShop/Order/Item/Base/Default.php:566
 #, php-format
 msgid "Basket empty"
 msgstr "Warenkorb leer"
@@ -158,7 +158,7 @@ msgstr "DOM-Struktur der vom Logistikdienstleister erhaltenen XML-Datei konnte n
 msgid "Database manager object not available"
 msgstr "Datenbankmanager-Objekt nicht verfügbar"
 
-#: src/MShop/Order/Item/Base/Default.php:474
+#: src/MShop/Order/Item/Base/Default.php:490
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
 msgstr "Doppelter Gutscheincode \"%1$s\""
@@ -219,7 +219,7 @@ msgstr "ISO-Währungscode \"%1$s\" enthält unerlaubte Zeichen"
 msgid "Invalid characters in ISO language code \"%1$s\""
 msgstr "ISO-Sprachcode \"%1$s\" enthält unerlaubte Zeichen"
 
-#: src/MShop/Service/Provider/Abstract.php:339
+#: src/MShop/Service/Provider/Abstract.php:344
 #, php-format
 msgid ""
 "Invalid characters in attribute for provider configuration. Attribute is not"
@@ -788,11 +788,6 @@ msgstr "Die minimale Produktanzahl von %1$d ist nicht erreicht"
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
 msgstr "Der Wert der Konfigurationsoption \"%1$s\" muss vom Typ \"%2$s\" sein"
-
-#: src/MShop/Plugin/Provider/Order/Shipping.php:73
-#, php-format
-msgid "Threshold for free shipping for currency ID \"%1$s\" not available"
-msgstr "Grenzwert für kostenlosen Versand für Währung mit ID \"%1$s\" nicht vergfügbar"
 
 #: src/MShop/Locale/Manager/Default.php:519
 #: src/MShop/Common/Manager/Abstract.php:727
