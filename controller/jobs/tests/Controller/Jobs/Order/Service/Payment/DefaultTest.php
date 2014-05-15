@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Testcase
+class Controller_Jobs_Order_Service_Payment_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 
@@ -22,7 +22,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 		$context = TestHelper::getContext();
 		$arcavias = TestHelper::getArcavias();
 
-		$this->_object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
+		$this->_object = new Controller_Jobs_Order_Service_Payment_Default( $context, $arcavias );
 	}
 
 
@@ -41,13 +41,13 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Process order delivery services', $this->_object->getName() );
+		$this->assertEquals( 'Capture authorized payments', $this->_object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
-		$text = 'Sends paid orders to the ERP system or logistic partner';
+		$text = 'Authorized payments of orders will be captured after dispatching or after a configurable amount of time';
 		$this->assertEquals( $text, $this->_object->getDescription() );
 	}
 
@@ -58,7 +58,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 		$arcavias = TestHelper::getArcavias();
 
 
-		$name = 'ControllerJobsServiceDeliveryProcessDefaultRun';
+		$name = 'ControllerJobsServicePaymentProcessDefaultRun';
 		$context->getConfig()->set( 'classes/service/manager/name', $name );
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
@@ -80,7 +80,8 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 		$serviceItem = $serviceManagerStub->createItem();
 		$orderItem = $orderManagerStub->createItem();
 
-		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
+		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
+			->setMethods( array( 'isImplemented', 'capture' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
 
@@ -94,12 +95,15 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
 
-		$serviceProviderStub->expects( $this->once() )->method( 'process' );
+		$serviceProviderStub->expects( $this->once() )->method( 'isImplemented' )
+			->will( $this->returnValue( true ) );
+
+		$serviceProviderStub->expects( $this->once() )->method( 'capture' );
 
 		$orderManagerStub->expects( $this->once() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $arcavias );
 		$object->run();
 	}
 
@@ -110,7 +114,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 		$arcavias = TestHelper::getArcavias();
 
 
-		$name = 'ControllerJobsServiceDeliveryProcessDefaultRun';
+		$name = 'ControllerJobsServicePaymentProcessDefaultRun';
 		$context->getConfig()->set( 'classes/service/manager/name', $name );
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
@@ -132,7 +136,8 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 		$serviceItem = $serviceManagerStub->createItem();
 		$orderItem = $orderManagerStub->createItem();
 
-		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
+		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
+			->setMethods( array( 'isImplemented', 'capture' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
 
@@ -146,13 +151,16 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 		$orderManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $orderItem ), array() ) );
 
-		$serviceProviderStub->expects( $this->once() )->method( 'process' )
-			->will( $this->throwException( new MShop_Service_Exception( 'test order service delivery: process' ) ) );
+		$serviceProviderStub->expects( $this->once() )->method( 'isImplemented' )
+			->will( $this->returnValue( true ) );
+
+		$serviceProviderStub->expects( $this->once() )->method( 'capture' )
+			->will( $this->throwException( new MShop_Service_Exception( 'test oder service payment: capture' ) ) );
 
 		$orderManagerStub->expects( $this->never() )->method( 'saveItem' );
 
 
-		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $arcavias );
 		$object->run();
 	}
 
@@ -163,7 +171,7 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 		$arcavias = TestHelper::getArcavias();
 
 
-		$name = 'ControllerJobsServiceDeliveryProcessDefaultRun';
+		$name = 'ControllerJobsServicePaymentProcessDefaultRun';
 		$context->getConfig()->set( 'classes/service/manager/name', $name );
 		$context->getConfig()->set( 'classes/order/manager/name', $name );
 
@@ -184,7 +192,8 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 
 		$serviceItem = $serviceManagerStub->createItem();
 
-		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
+		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
+			->setMethods( array( 'isImplemented', 'capture' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
 
@@ -193,12 +202,12 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 			->will( $this->onConsecutiveCalls( array( $serviceItem ), array() ) );
 
 		$serviceManagerStub->expects( $this->once() )->method( 'getProvider' )
-			->will( $this->throwException( new MShop_Service_Exception( 'test sorder service delivery: getProvider' ) ) );
+			->will( $this->throwException( new MShop_Service_Exception( 'test service delivery process: getProvider' ) ) );
 
 		$orderManagerStub->expects( $this->never() )->method( 'searchItems' );
 
 
-		$object = new Controller_Jobs_Order_Service_Delivery_Default( $context, $arcavias );
+		$object = new Controller_Jobs_Order_Service_Payment_Default( $context, $arcavias );
 		$object->run();
 	}
 }
