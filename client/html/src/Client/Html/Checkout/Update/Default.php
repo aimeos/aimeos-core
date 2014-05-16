@@ -201,58 +201,39 @@ class Client_Html_Checkout_Update_Default
 
 		try
 		{
-			$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_getContext() );
+			$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
 
 			$search = $serviceManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'service.type.code', 'payment' ) );
 			$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
-			foreach( $serviceManager->searchItems( $search ) as $serviceItem )
+			do
 			{
-				try
-				{
-					$serviceManager->getProvider( $serviceItem )->updateSync( $view->param() );
-				}
-				catch( Exception $e )
-				{
-					$view->updateHttpCode = 500;
-					$view->updateHttpString = 'HTTP/1.1 500 Error updating payment status';
-					$view->updateError = $e->getMessage();
+				$serviceItems = $serviceManager->searchItems( $search );
 
-					$msg = "Updating order failed: %1\$s\n%2\$s";
-					$this->_getContext()->getLogger()->log( sprintf( $msg, $e->getMessage(), $view->param() ) );
+				foreach( $serviceItems as $serviceItem )
+				{
+					if( $serviceManager->getProvider( $serviceItem )->updateSync( $view->param() ) !== null ) {
+						break 2;
+					}
 				}
+
+				$count = count( $serviceItems );
+				$start += $count;
+				$search->setSlice( $start );
 			}
+			while( $count >= $search->getSliceSize() );
 
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
-		catch( Client_Html_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->updateErrorList = $view->get( 'updateErrorList', array() ) + $error;
-		}
-		catch( Controller_Frontend_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->updateErrorList = $view->get( 'updateErrorList', array() ) + $error;
-		}
-		catch( MShop_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->updateErrorList = $view->get( 'updateErrorList', array() ) + $error;
-		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
-			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$view->updateHttpCode = 500;
+			$view->updateHttpString = 'HTTP/1.1 500 Error updating order status';
+			$view->updateError = $e->getMessage();
 
-			$view = $this->getView();
-			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->updateErrorList = $view->get( 'updateErrorList', array() ) + $error;
+			$msg = "Updating order status failed: %1\$s\n%2\$s";
+			$this->_getContext()->getLogger()->log( sprintf( $msg, $e->getMessage(), $view->param() ) );
 		}
 	}
 }

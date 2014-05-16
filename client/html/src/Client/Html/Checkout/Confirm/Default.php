@@ -234,41 +234,59 @@ class Client_Html_Checkout_Confirm_Default
 		{
 			$context = $this->_getContext();
 			$params = $this->getView()->param();
-			$orderid = $context->getSession()->get( 'arcavias/orderid' );
 
-			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-			$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
+			$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
 			$search = $serviceManager->createSearch();
 			$search->setConditions( $search->compare( '==', 'service.type.code', 'payment' ) );
 			$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
-			foreach( $serviceManager->searchItems( $search ) as $serviceItem )
-			{
-				try
-				{
-					$provider = $serviceManager->getProvider( $serviceItem );
+			$start = 0;
 
-					if( ( $orderItem = $provider->updateSync( $params ) ) !== null
-						&& $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
-					) {
-						$provider->query( $orderItem );
+			do
+			{
+				$serviceItems = $serviceManager->searchItems( $search );
+
+				foreach( $serviceItems as $serviceItem )
+				{
+					try
+					{
+						$provider = $serviceManager->getProvider( $serviceItem );
+
+						if( ( $orderItem = $provider->updateSync( $params ) ) !== null )
+						{
+							if( $orderItem->getPaymentStatus() === MShop_Order_Item_Abstract::PAY_UNFINISHED
+								&& $provider->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY )
+							) {
+								$provider->query( $orderItem );
+							}
+
+							break 2;
+						}
+					}
+					catch( Exception $e )
+					{
+						$msg = 'Updating order ID "%1$s" failed: %2$s';
+						$context->getLogger()->log( sprintf( $msg, $orderid, $e->getMessage() ) );
 					}
 				}
-				catch( Exception $e )
-				{
-					$msg = 'Updating order ID "%1$s" failed: %2$s';
-					$context->getLogger()->log( sprintf( $msg, $orderid, $e->getMessage() ) );
-				}
+				$count = count( $serviceItems );
+				$start += $count;
+				$search->setSlice( $start );
 			}
+			while( $count >= $search->getSliceSize() );
 
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 
+
 			// Clear basket
+			$orderid = $context->getSession()->get( 'arcavias/orderid' );
+			$orderManager = MShop_Factory::createManager( $context, 'order' );
+
 			if( $orderManager->getItem( $orderid )->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
 			{
-				$orderBaseManager = MShop_Order_Manager_Factory::createManager( $context )->getSubmanager( 'base' );
+				$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
 				$orderBaseManager->setSession( $orderBaseManager->createItem() );
 			}
 		}
