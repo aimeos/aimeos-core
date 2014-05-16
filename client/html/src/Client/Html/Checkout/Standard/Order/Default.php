@@ -222,20 +222,14 @@ class Client_Html_Checkout_Standard_Order_Default
 			}
 
 			$context = $this->_getContext();
-
-			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-			$orderBaseManager = $orderManager->getSubManager( 'base' );
+			$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
 
 			$basket = $orderBaseManager->getSession();
 			$basket->setCustomerId( $context->getUserId() );
 			$basket->finish();
 
-			$orderBaseManager->store( $basket );
-
-			$orderItem = $orderManager->createItem();
-			$orderItem->setBaseId( $basket->getId() );
-			$orderItem->setType( MShop_Order_Item_Abstract::TYPE_WEB );
-			$orderManager->saveItem( $orderItem );
+			$cntl = Controller_Frontend_Order_Factory::createController( $context );
+			$orderItem = $cntl->store( $basket );
 
 			$context->getSession()->set( 'arcavias/orderid', $orderItem->getId() );
 
@@ -245,7 +239,7 @@ class Client_Html_Checkout_Standard_Order_Default
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 
 			// save again after sub-clients modified it's state
-			$orderManager->saveItem( $orderItem );
+			MShop_Factory::createManager( $context, 'order' )->saveItem( $orderItem );
 		}
 		catch( Exception $e )
 		{

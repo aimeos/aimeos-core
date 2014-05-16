@@ -53,6 +53,7 @@ class MShop_Service_Provider_Decorator_CostsTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object, $this->_basket, $this->_mockProvider, $this->_servItem, $this->_context );
+		MShop_Factory::clear();
 	}
 
 
