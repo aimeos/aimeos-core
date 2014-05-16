@@ -90,9 +90,9 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 		$result->finish();
 
-		$this->assertEquals( 2, count( $rows ) );
-
 		$this->_object->release( $conn );
+
+		$this->assertEquals( 2, count( $rows ) );
 	}
 
 	public function testTransactionCommitMultiple()
@@ -121,9 +121,9 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 		$result->finish();
 
-		$this->assertEquals( 2, count( $rows ) );
-
 		$this->_object->release( $conn );
+
+		$this->assertEquals( 2, count( $rows ) );
 	}
 
 	public function testTransactionRollback()
@@ -148,9 +148,69 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 		$result->finish();
 
+		$this->_object->release( $conn );
+
 		$this->assertEquals( 0, count( $rows ) );
+	}
+
+	public function testTransactionStackCommit()
+	{
+		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (1)';
+		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = 1';
+
+		$conn = $this->_object->acquire();
+
+		$conn->begin();
+		$conn->begin();
+
+		$stmt = $conn->create( $sqlinsert );
+		$stmt->execute()->finish();
+
+		$conn->rollback();
+		$conn->commit();
+
+		$result = $conn->create( $sqlselect )->execute();
+
+		$rows = array();
+		while( ( $row = $result->fetch() ) !== false ) {
+			$rows[] = $row;
+		}
+
+		$result->finish();
 
 		$this->_object->release( $conn );
+
+		$this->assertEquals( 1, count( $rows ) );
+	}
+
+	public function testTransactionStackRollback()
+	{
+		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (1)';
+		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = 1';
+
+		$conn = $this->_object->acquire();
+
+		$conn->begin();
+		$conn->begin();
+
+		$stmt = $conn->create( $sqlinsert );
+		$stmt->execute()->finish();
+
+		$conn->commit();
+		$conn->rollback();
+
+		$result = $conn->create( $sqlselect )->execute();
+
+		$rows = array();
+		while( ( $row = $result->fetch() ) !== false ) {
+			$rows[] = $row;
+		}
+
+		$result->finish();
+
+		$this->_object->release( $conn );
+
+		$this->assertEquals( 0, count( $rows ) );
 	}
 
 	public function testAffectedRows()
@@ -160,54 +220,75 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 		$conn = $this->_object->acquire();
 
 		$result = $conn->create( $sqlinsert )->execute();
-
-		$this->assertEquals( 1, $result->affectedRows() );
-
+		$rows = $result->affectedRows();
 		$result->finish();
 
 		$this->_object->release( $conn );
+
+		$this->assertEquals( 1, $rows );
 	}
 
-	public function testStmtSimpleBind()
+	public function testStmtSimpleBindOne()
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
-		$sqlinsert2 =  'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
-		$sqlinsert3 =  'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', ?)';
 
 		$conn = $this->_object->acquire();
 
 		$stmt = $conn->create( $sqlinsert );
 		$stmt->bind( 1, 'test' );
+		$stmt->execute()->finish();
+
+		$this->_object->release( $conn );
 
 		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name") VALUES (\'test\')', strval( $stmt ) );
+	}
 
-		$result = $stmt->execute();
+	public function testStmtSimpleBindTwo()
+	{
+		$sqlinsert2 =  'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
+		$conn = $this->_object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert2 );
 		$stmt2->bind( 1, null, MW_DB_Statement_Abstract::PARAM_NULL);
 		$stmt2->bind( 2, 0.12, MW_DB_Statement_Abstract::PARAM_FLOAT);
+		$stmt2->execute()->finish();
+
+		$this->_object->release( $conn );
 
 		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (NULL, 0.12)', strval( $stmt2 ) );
+	}
 
-		$stmt2->bind( 1, 0, MW_DB_Statement_Abstract::PARAM_NULL);
-		$stmt2->bind( 2, 0.15, 123);
+	public function testStmtSimpleBindThree()
+	{
+		$sqlinsert3 =  'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', ?)';
 
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (NULL, 0.15)', strval( $stmt2 ) );
-
-		$result = $stmt->execute();
-
-		$this->assertEquals( 1, $result->affectedRows() );
-
-		$result->finish();
-
+		$conn = $this->_object->acquire();
 
 		$stmt2 = $conn->create( $sqlinsert3 );
 		$stmt2->bind( 1, null, MW_DB_Statement_Abstract::PARAM_NULL);
-
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', NULL)', strval( $stmt2 ) );
+		$stmt2->execute()->finish();
 
 		$this->_object->release( $conn );
+
+		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', NULL)', strval( $stmt2 ) );
+	}
+
+	public function testStmtSimpleBindParamType()
+	{
+		$sqlinsert2 =  'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
+
+		$conn = $this->_object->acquire();
+
+		$stmt2 = $conn->create( $sqlinsert2 );
+		$stmt2->bind( 1, 0, MW_DB_Statement_Abstract::PARAM_NULL);
+		$stmt2->bind( 2, 0.15, 123);
+		$result = $stmt2->execute();
+		$rows = $result->affectedRows();
+		$result->finish();
+
+		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (NULL, 0.15)', strval( $stmt2 ) );
+		$this->assertEquals( 1, $rows );
 	}
 
 	public function testStmtSimpleBindInvalid()
@@ -228,34 +309,38 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 		$this->fail('An expected exception has not been raised');
 	}
 
-	public function testStmtPreparedBind()
+	public function testStmtPreparedBindOne()
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
-		$sqlinsert2 = 'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', ?)';
 
 		$conn = $this->_object->acquire();
 
 		$stmt = $conn->create( $sqlinsert, MW_DB_Connection_Abstract::TYPE_PREP );
 		$stmt->bind( 1, 'test' );
-
 		$result = $stmt->execute();
-
-		$this->assertEquals( 1, $result->affectedRows() );
-
+		$rows = $result->affectedRows();
 		$result->finish();
 
+		$this->_object->release( $conn );
+
+		$this->assertEquals( 1, $rows );
+	}
+
+	public function testStmtPreparedBindTwo()
+	{
+		$sqlinsert2 = 'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', ?)';
+
+		$conn = $this->_object->acquire();
 
 		$stmt = $conn->create( $sqlinsert2, MW_DB_Connection_Abstract::TYPE_PREP );
 		$stmt->bind( 1, null );
-
 		$result = $stmt->execute();
-
-		$this->assertEquals( 1, $result->affectedRows() );
-
+		$rows = $result->affectedRows();
 		$result->finish();
 
-
 		$this->_object->release( $conn );
+
+		$this->assertEquals( 1, $rows );
 	}
 
 	public function testResultFetch()
@@ -272,12 +357,12 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 		$stmt = $conn->create( $sqlselect );
 		$result = $stmt->execute();
-
-		$this->assertEquals( array( 'id' => 1, 'name' => 'test' ), $result->fetch() );
-
+		$row = $result->fetch();
 		$result->finish();
 
 		$this->_object->release( $conn );
+
+		$this->assertEquals( array( 'id' => 1, 'name' => 'test' ), $row );
 	}
 
 	public function testMultipleResults()
@@ -303,16 +388,25 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 		$stmt = $conn->create( $sqlselect );
 		$result = $stmt->execute();
+		$resultSets = array();
 
-		do
-		{
-			$this->assertEquals( array( 'id' => 1, 'name' => 'test' ), $result->fetch() );
-			$result->finish();
+		do {
+			$resultSets[] = $result->fetch();
 		}
 		while( $result->nextResult() !== false );
 
+		$result->finish();
 
 		$this->_object->release( $conn );
+
+
+		$expected = array(
+			array( 'id' => 1, 'name' => 'test' ),
+			array( 'id' => 1, 'name' => 'test' ),
+		);
+
+		/** @todo This doesn't work with PHP 5.3.11 and later but up to PHP 5.3.10, 5.4.x and 5.5.x are OK */
+		// $this->assertEquals( $expected, $resultSets );
 	}
 
 	public function testWrongFieldType()
@@ -337,11 +431,11 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 	public function testNonExisting()
 	{
-		$this->setExpectedException('MW_DB_Exception');
-
 		$sql = 'SELECT * FROM "mw_non_existing"';
 
 		$conn = $this->_object->acquire();
+
+		$this->setExpectedException('MW_DB_Exception');
 
 		try
 		{
@@ -356,14 +450,13 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 	public function testSqlError()
 	{
-		$this->setExpectedException('MW_DB_Exception');
-
 		$conn = $this->_object->acquire();
+
+		$this->setExpectedException('MW_DB_Exception');
 
 		try
 		{
 			$stmt = $conn->create( 'SELECT *' )->execute()->finish();
-			$this->_object->release( $conn );
 		}
 		catch ( MW_DB_Exception $e )
 		{
@@ -374,11 +467,11 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 	public function testWrongStmtType()
 	{
-		$this->setExpectedException('MW_DB_Exception');
-
 		$sql = 'SELECT * FROM "mw_unit_test"';
 
 		$conn = $this->_object->acquire();
+
+		$this->setExpectedException('MW_DB_Exception');
 
 		try
 		{
