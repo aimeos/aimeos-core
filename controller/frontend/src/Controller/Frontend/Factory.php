@@ -14,6 +14,7 @@
  */
 class Controller_Frontend_Factory
 {
+	static private $_cache = true;
 	static private $_controllers = array();
 
 
@@ -66,7 +67,7 @@ class Controller_Frontend_Factory
 
 		$siteid = $context->getLocale()->getSiteId();
 
-		if( !isset( self::$_controllers[$siteid][$path] ) )
+		if( self::$_cache === false || !isset( self::$_controllers[$siteid][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -95,5 +96,20 @@ class Controller_Frontend_Factory
 		}
 
 		return self::$_controllers[$siteid][$path];
+	}
+
+
+	/**
+	 * Enables or disables caching of class instances.
+	 *
+	 * @param boolean $value True to enable caching, false to disable it.
+	 * @return boolean Previous cache setting
+	 */
+	static public function setCache( $value )
+	{
+		$old = self::$_cache;
+		self::$_cache = (boolean) $value;
+
+		return $old;
 	}
 }
