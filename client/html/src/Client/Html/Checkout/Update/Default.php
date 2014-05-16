@@ -233,7 +233,7 @@ class Client_Html_Checkout_Update_Default
 			$view->updateError = $e->getMessage();
 
 			$msg = "Updating order status failed: %1\$s\n%2\$s";
-			$this->_getContext()->getLogger()->log( sprintf( $msg, $e->getMessage(), $view->param() ) );
+			$this->_getContext()->getLogger()->log( sprintf( $msg, $e->getMessage(), print_r( $view->param(), true ) ) );
 		}
 	}
 }
