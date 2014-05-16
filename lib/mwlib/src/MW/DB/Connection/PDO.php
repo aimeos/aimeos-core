@@ -17,6 +17,7 @@
 class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Connection_Interface
 {
 	private $_connection = null;
+	private $_txnumber = 0;
 
 
 	/**
@@ -75,8 +76,11 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 	 */
 	public function begin()
 	{
-		if( $this->_connection->beginTransaction() === false ) {
-			throw new MW_DB_Exception( 'Unable to start new transaction' );
+		if( $this->_txnumber++ === 0 )
+		{
+			if( $this->_connection->beginTransaction() === false ) {
+				throw new MW_DB_Exception( 'Unable to start new transaction' );
+			}
 		}
 	}
 
@@ -86,8 +90,11 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 	 */
 	public function commit()
 	{
-		if( $this->_connection->commit() === false ) {
-			throw new MW_DB_Exception( 'Failed to commit transaction' );
+		if( --$this->_txnumber === 0 )
+		{
+			if( $this->_connection->commit() === false ) {
+				throw new MW_DB_Exception( 'Failed to commit transaction' );
+			}
 		}
 	}
 
@@ -97,11 +104,17 @@ class MW_DB_Connection_PDO extends MW_DB_Connection_Abstract implements MW_DB_Co
 	 */
 	public function rollback()
 	{
-		try {
-			if( $this->_connection->rollBack() === false ) {
-				throw new MW_DB_Exception( 'Failed to roll back transaction' );
+		try
+		{
+			if( --$this->_txnumber === 0 )
+			{
+				if( $this->_connection->rollBack() === false ) {
+					throw new MW_DB_Exception( 'Failed to roll back transaction' );
+				}
 			}
-		} catch( PDOException $e ) {
+		}
+		catch( PDOException $e )
+		{
 			throw new MW_DB_Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
 	}
