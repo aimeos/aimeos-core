@@ -368,7 +368,7 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 	public function testMultipleResults()
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
-		$sqlselect = 'SELECT * FROM "mw_unit_test"; SELECT * FROM "mw_unit_test"';
+		$sqlselect = 'SELECT * FROM "mw_unit_test"; SELECT * FROM "mw_unit_test" WHERE 1';
 
 		$conn = $this->_object->acquire();
 
