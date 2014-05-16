@@ -52,9 +52,6 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	{
 		Controller_Frontend_Basket_Factory::createController( $this->_context )->clear();
 		unset( $this->_object );
-
-		Controller_Frontend_Factory::clear();
-		MShop_Factory::clear();
 	}
 
 

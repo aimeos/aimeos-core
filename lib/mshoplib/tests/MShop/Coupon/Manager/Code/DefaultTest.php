@@ -60,7 +60,6 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset($this->_object, $this->_code);
-		MShop_Factory::clear();
 	}
 
 

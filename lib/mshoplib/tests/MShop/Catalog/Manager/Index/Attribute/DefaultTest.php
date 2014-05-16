@@ -48,7 +48,6 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		MShop_Factory::clear();
 	}
 
 

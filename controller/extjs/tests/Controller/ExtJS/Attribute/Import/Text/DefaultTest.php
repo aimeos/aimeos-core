@@ -62,7 +62,6 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 		}
 
 		$this->_object = null;
-		MShop_Factory::clear();
 	}
 
 

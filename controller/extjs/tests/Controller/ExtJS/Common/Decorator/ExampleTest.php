@@ -29,6 +29,12 @@ class Controller_ExtJS_Common_Decorator_ExampleTest extends MW_Unittest_Testcase
 	}
 
 
+	protected function tearDown()
+	{
+		unset( $this->_object );
+	}
+
+
 	public function testCall()
 	{
 		$this->_object->additionalMethod();

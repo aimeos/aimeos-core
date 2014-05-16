@@ -35,7 +35,6 @@ class Controller_Jobs_Catalog_Index_Rebuild_DefaultTest extends MW_Unittest_Test
 	protected function tearDown()
 	{
 		$this->_object = null;
-		MShop_Factory::clear();
 	}
 
 

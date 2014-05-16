@@ -57,7 +57,6 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends MW_Unittest_Testcas
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		MShop_Factory::clear();
 	}
 
 

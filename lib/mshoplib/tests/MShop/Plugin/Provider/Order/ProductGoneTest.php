@@ -93,8 +93,6 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 
 		unset( $this->_orderManager );
 		unset( $this->_plugin );
-
-		MShop_Factory::clear();
 	}
 
 

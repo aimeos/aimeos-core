@@ -63,8 +63,6 @@ class Client_Html_Email_Payment_Text_Legal_DefaultTest extends MW_Unittest_Testc
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		Controller_Frontend_Factory::clear();
-		MShop_Factory::clear();
 	}
 
 

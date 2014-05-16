@@ -47,7 +47,6 @@ class Controller_ExtJS_Product_Tag_Type_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
-		MShop_Factory::clear();
 	}
 
 

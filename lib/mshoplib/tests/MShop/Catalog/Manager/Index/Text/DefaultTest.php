@@ -73,7 +73,6 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		MShop_Factory::clear();
 	}
 
 

@@ -61,8 +61,6 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 		unset( $this->_orderManager );
 		unset( $this->_plugin );
 		unset( $this->_order );
-
-		MShop_Factory::clear();
 	}
 
 

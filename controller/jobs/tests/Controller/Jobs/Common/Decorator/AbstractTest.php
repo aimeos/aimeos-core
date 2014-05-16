@@ -33,6 +33,12 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends MW_Unittest_Testcase
 	}
 
 
+	protected function tearDown()
+	{
+		unset( $this->_object );
+	}
+
+
 	public function testGetName()
 	{
 		$this->_stub->expects( $this->once() )

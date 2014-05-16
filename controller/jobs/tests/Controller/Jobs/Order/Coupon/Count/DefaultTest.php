@@ -36,7 +36,6 @@ class Controller_Jobs_Order_Coupon_Count_DefaultTest
 	protected function tearDown()
 	{
 		$this->_object = null;
-		MShop_Factory::clear();
 	}
 
 

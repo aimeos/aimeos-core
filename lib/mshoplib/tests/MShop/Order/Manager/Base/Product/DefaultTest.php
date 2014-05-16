@@ -51,7 +51,6 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		MShop_Factory::clear();
 	}
 
 

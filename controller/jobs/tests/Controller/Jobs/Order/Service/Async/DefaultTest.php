@@ -35,7 +35,6 @@ class Controller_Jobs_Order_Service_Async_DefaultTest extends MW_Unittest_Testca
 	protected function tearDown()
 	{
 		$this->_object = null;
-		MShop_Factory::clear();
 	}
 
 

@@ -45,7 +45,6 @@ class MShop_Supplier_Manager_Address_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset($this->_object);
-		MShop_Factory::clear();
 	}
 
 

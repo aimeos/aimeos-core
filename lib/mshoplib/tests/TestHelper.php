@@ -15,6 +15,7 @@ class TestHelper
 	public static function bootstrap()
 	{
 		self::_getArcavias();
+		MShop_Factory::setCache( false );
 	}
 
 

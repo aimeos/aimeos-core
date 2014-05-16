@@ -47,9 +47,6 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
-
-		Controller_ExtJS_Factory::clear();
-		MShop_Factory::clear();
 	}
 
 

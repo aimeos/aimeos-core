@@ -56,7 +56,6 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 	protected function tearDown()
 	{
 		unset( $this->_plugin, $this->_order, $this->_context );
-		MShop_Factory::clear();
 	}
 
 

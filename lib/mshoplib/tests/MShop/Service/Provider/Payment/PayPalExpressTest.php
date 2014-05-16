@@ -99,8 +99,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		unset( $this->_object );
 		unset( $this->_serviceItem );
 		unset( $this->_order );
-
-		MShop_Factory::clear();
 	}
 
 

@@ -97,8 +97,6 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 	{
 		unset( $this->_orderManager );
 		unset($this->_plugin);
-
-		MShop_Factory::clear();
 	}
 
 
