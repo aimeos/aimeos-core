@@ -7,6 +7,12 @@
 
 class Controller_Frontend_Order_DefaultTest extends MW_Unittest_Testcase
 {
+	protected function setUp()
+	{
+		MShop_Factory::clear();
+	}
+
+
 	protected function tearDown()
 	{
 		MShop_Factory::clear();
