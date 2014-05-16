@@ -61,7 +61,6 @@ class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestC
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		MShop_Factory::clear();
 	}
 
 

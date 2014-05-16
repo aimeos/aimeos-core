@@ -90,7 +90,6 @@ class MShop_Plugin_Provider_Order_PropertyAddTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object, $this->_order, $this->_plugin, $this->_products );
-		MShop_Factory::clear();
 	}
 
 

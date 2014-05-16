@@ -63,11 +63,15 @@ class Controller_Frontend_FactoryTest extends MW_Unittest_Testcase
 
 	public function testClear()
 	{
+		$cache = Controller_Frontend_Factory::setCache( true );
+
 		$context = TestHelper::getContext();
 
 		$controller1 = Controller_Frontend_Factory::createController( $context, 'basket' );
 		Controller_Frontend_Factory::clear();
 		$controller2 = Controller_Frontend_Factory::createController( $context, 'basket' );
+
+		Controller_Frontend_Factory::setCache( $cache );
 
 		$this->assertNotSame( $controller1, $controller2 );
 	}
@@ -75,6 +79,8 @@ class Controller_Frontend_FactoryTest extends MW_Unittest_Testcase
 
 	public function testClearSite()
 	{
+		$cache = Controller_Frontend_Factory::setCache( true );
+
 		$context = TestHelper::getContext();
 
 		$basket1 = Controller_Frontend_Factory::createController( $context, 'basket' );
@@ -84,6 +90,8 @@ class Controller_Frontend_FactoryTest extends MW_Unittest_Testcase
 		$basket2 = Controller_Frontend_Factory::createController( $context, 'basket' );
 		$catalog2 = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
+		Controller_Frontend_Factory::setCache( $cache );
+
 		$this->assertNotSame( $basket1, $basket2 );
 		$this->assertNotSame( $catalog1, $catalog2 );
 	}
@@ -91,6 +99,8 @@ class Controller_Frontend_FactoryTest extends MW_Unittest_Testcase
 
 	public function testClearSpecific()
 	{
+		$cache = Controller_Frontend_Factory::setCache( true );
+
 		$context = TestHelper::getContext();
 
 		$basket1 = Controller_Frontend_Factory::createController( $context, 'basket' );
@@ -99,6 +109,8 @@ class Controller_Frontend_FactoryTest extends MW_Unittest_Testcase
 
 		$basket2 = Controller_Frontend_Factory::createController( $context, 'basket' );
 		$catalog2 = Controller_Frontend_Factory::createController( $context, 'catalog' );
+
+		Controller_Frontend_Factory::setCache( $cache );
 
 		$this->assertNotSame( $basket1, $basket2 );
 		$this->assertSame( $catalog1, $catalog2 );

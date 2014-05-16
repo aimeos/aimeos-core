@@ -61,7 +61,6 @@ class MShop_Service_Provider_Payment_PrePayTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		MShop_Factory::clear();
 	}
 
 

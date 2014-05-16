@@ -70,11 +70,15 @@ class MShop_FactoryTest extends MW_Unittest_Testcase
 
 	public function testClear()
 	{
+		$cache = MShop_Factory::setCache( true );
+
 		$context = TestHelper::getContext();
 
 		$controller1 = MShop_Factory::createManager( $context, 'attribute' );
 		MShop_Factory::clear();
 		$controller2 = MShop_Factory::createManager( $context, 'attribute' );
+
+		MShop_Factory::setCache( $cache );
 
 		$this->assertNotSame( $controller1, $controller2 );
 	}
@@ -82,6 +86,8 @@ class MShop_FactoryTest extends MW_Unittest_Testcase
 
 	public function testClearSite()
 	{
+		$cache = MShop_Factory::setCache( true );
+
 		$context = TestHelper::getContext();
 
 		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
@@ -91,6 +97,8 @@ class MShop_FactoryTest extends MW_Unittest_Testcase
 		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
 		$managerB2 = MShop_Factory::createManager( $context, 'attribute/list/type' );
 
+		MShop_Factory::setCache( $cache );
+
 		$this->assertNotSame( $managerA1, $managerA2 );
 		$this->assertNotSame( $managerB1, $managerB2 );
 	}
@@ -98,6 +106,8 @@ class MShop_FactoryTest extends MW_Unittest_Testcase
 
 	public function testClearSpecific()
 	{
+		$cache = MShop_Factory::setCache( true );
+
 		$context = TestHelper::getContext();
 
 		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
@@ -106,6 +116,8 @@ class MShop_FactoryTest extends MW_Unittest_Testcase
 
 		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
 		$managerB2 = MShop_Factory::createManager( $context, 'attribute/list/type' );
+
+		MShop_Factory::setCache( $cache );
 
 		$this->assertNotSame( $managerA1, $managerA2 );
 		$this->assertSame( $managerB1, $managerB2 );

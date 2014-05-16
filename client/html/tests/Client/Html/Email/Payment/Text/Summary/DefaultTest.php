@@ -63,8 +63,6 @@ class Client_Html_Email_Payment_Text_Summary_DefaultTest extends MW_Unittest_Tes
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		Controller_Frontend_Factory::clear();
-		MShop_Factory::clear();
 	}
 
 

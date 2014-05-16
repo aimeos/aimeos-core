@@ -93,8 +93,6 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	{
 		unset($this->_object);
 		unset($this->_order);
-
-		MShop_Factory::clear();
 	}
 
 

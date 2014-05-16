@@ -58,7 +58,6 @@ class MShop_Plugin_Provider_Order_ExampleTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset($this->_object);
-		MShop_Factory::clear();
 	}
 
 	/**

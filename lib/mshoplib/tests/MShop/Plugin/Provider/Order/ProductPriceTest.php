@@ -76,8 +76,6 @@ class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_Tes
 		unset( $this->_plugin );
 		unset( $this->_order );
 		unset( $this->_price );
-
-		MShop_Factory::clear();
 	}
 
 

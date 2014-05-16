@@ -33,8 +33,6 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		Controller_Frontend_Factory::clear();
-		MShop_Factory::clear();
 	}
 
 

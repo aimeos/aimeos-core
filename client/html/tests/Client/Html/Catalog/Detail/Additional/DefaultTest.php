@@ -48,8 +48,6 @@ class Client_Html_Catalog_Detail_Additional_DefaultTest extends MW_Unittest_Test
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		Controller_Frontend_Factory::clear();
-		MShop_Factory::clear();
 	}
 
 

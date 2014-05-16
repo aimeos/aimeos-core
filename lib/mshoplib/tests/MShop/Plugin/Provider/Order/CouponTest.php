@@ -59,8 +59,6 @@ class MShop_Plugin_Provider_Order_CouponTest extends MW_Unittest_Testcase
 	{
 		unset( $this->_plugin );
 		unset( $this->_order );
-
-		MShop_Factory::clear();
 	}
 
 

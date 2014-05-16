@@ -38,7 +38,6 @@ class MShop_Service_Provider_Decorator_ReductionTest extends MW_Unittest_Testcas
 	protected function tearDown()
 	{
 		unset( $this->_object, $this->_basket, $this->_mockProvider, $this->_servItem, $this->_context );
-		MShop_Factory::clear();
 	}
 
 

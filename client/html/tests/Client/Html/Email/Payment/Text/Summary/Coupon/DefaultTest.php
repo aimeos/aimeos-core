@@ -64,8 +64,6 @@ class Client_Html_Email_Payment_Text_Summary_Coupon_DefaultTest
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		Controller_Frontend_Factory::clear();
-		MShop_Factory::clear();
 	}
 
 

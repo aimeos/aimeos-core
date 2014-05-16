@@ -70,11 +70,15 @@ class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
 
 	public function testClear()
 	{
+		$cache = Controller_ExtJS_Factory::setCache( true );
+
 		$context = TestHelper::getContext();
 
 		$controller1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
 		Controller_ExtJS_Factory::clear();
 		$controller2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
+
+		Controller_ExtJS_Factory::setCache( $cache );
 
 		$this->assertNotSame( $controller1, $controller2 );
 	}
@@ -82,6 +86,8 @@ class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
 
 	public function testClearSite()
 	{
+		$cache = Controller_ExtJS_Factory::setCache( true );
+
 		$context = TestHelper::getContext();
 
 		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
@@ -91,6 +97,8 @@ class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
 		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
 		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
 
+		Controller_ExtJS_Factory::setCache( $cache );
+
 		$this->assertNotSame( $cntlA1, $cntlA2 );
 		$this->assertNotSame( $cntlB1, $cntlB2 );
 	}
@@ -98,6 +106,8 @@ class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
 
 	public function testClearSpecific()
 	{
+		$cache = Controller_ExtJS_Factory::setCache( true );
+
 		$context = TestHelper::getContext();
 
 		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
@@ -106,6 +116,8 @@ class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
 
 		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
 		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
+
+		Controller_ExtJS_Factory::setCache( $cache );
 
 		$this->assertNotSame( $cntlA1, $cntlA2 );
 		$this->assertSame( $cntlB1, $cntlB2 );

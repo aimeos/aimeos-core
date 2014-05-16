@@ -37,7 +37,6 @@ class MShop_Product_Manager_Stock_Warehouse_DefaultTest extends MW_Unittest_Test
 	protected function tearDown()
 	{
 		unset( $this->_object );
-		MShop_Factory::clear();
 	}
 
 

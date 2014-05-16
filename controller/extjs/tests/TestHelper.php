@@ -17,6 +17,8 @@ class TestHelper
 		set_error_handler( 'TestHelper::errorHandler' );
 
 		self::_getArcavias();
+		MShop_Factory::setCache( false );
+		Controller_ExtJS_Factory::setCache( false );
 	}
 
 

@@ -37,7 +37,6 @@ class MShop_Service_Provider_AbstractTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object = null;
-		MShop_Factory::clear();
 	}
 
 

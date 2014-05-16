@@ -46,7 +46,6 @@ class MShop_Media_Manager_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset($this->_object);
-		MShop_Factory::clear();
 	}
 
 	public function testGetSearchAttributes()

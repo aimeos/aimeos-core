@@ -14,6 +14,7 @@
  */
 class MShop_Factory
 {
+	static private $_cache = true;
 	static private $_managers = array();
 
 
@@ -68,7 +69,7 @@ class MShop_Factory
 
 		$siteid = $context->getLocale()->getSiteId();
 
-		if( !isset( self::$_managers[$siteid][$path] ) )
+		if( self::$_cache === false || !isset( self::$_managers[$siteid][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -84,7 +85,7 @@ class MShop_Factory
 			}
 
 
-			if( !isset( self::$_managers[$siteid][$name] ) )
+			if( self::$_cache === false || !isset( self::$_managers[$siteid][$name] ) )
 			{
 				$factory = 'MShop_' . ucwords( $name ) . '_Manager_Factory';
 
@@ -106,7 +107,7 @@ class MShop_Factory
 			{
 				$tmpname = $name .  '/' . $part;
 
-				if( !isset( self::$_managers[$siteid][$tmpname] ) ) {
+				if( self::$_cache === false || !isset( self::$_managers[$siteid][$tmpname] ) ) {
 					self::$_managers[$siteid][$tmpname] = self::$_managers[$siteid][$name]->getSubManager( $part );
 				}
 
@@ -115,5 +116,20 @@ class MShop_Factory
 		}
 
 		return self::$_managers[$siteid][$path];
+	}
+
+
+	/**
+	 * Enables or disables caching of class instances.
+	 *
+	 * @param boolean $value True to enable caching, false to disable it.
+	 * @return boolean Previous cache setting
+	 */
+	static public function setCache( $value )
+	{
+		$old = self::$_cache;
+		self::$_cache = (boolean) $value;
+
+		return $old;
 	}
 }
