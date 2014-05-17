@@ -17,8 +17,9 @@
 class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 {
 	private $_searchConfig = array();
-	private $_dbm;
 	private $_config;
+	private $_dbname;
+	private $_dbm;
 
 
 	/**
@@ -84,6 +85,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		$this->_checkSearchConfig( $config['search'] );
 		$this->_checkSqlConfig( $config['sql'] );
 
+		$this->_dbname = ( isset( $config['dbname'] ) ? $config['dbname'] : 'db' );
 		$this->_searchConfig = $config['search'];
 		$this->_config = $config['sql'];
 		$this->_dbm = $resource;
@@ -114,9 +116,9 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 */
 	public function createSearch()
 	{
-		$conn = $this->_dbm->acquire();
+		$conn = $this->_dbm->acquire( $this->_dbname );
 		$search = new MW_Common_Criteria_SQL( $conn );
-		$this->_dbm->release( $conn );
+		$this->_dbm->release( $conn, $this->_dbname );
 
 		return $search;
 	}
@@ -142,7 +144,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	{
 		$node = $this->getNode( $id, MW_Tree_Manager_Abstract::LEVEL_ONE );
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->_dbm->acquire( $this->_dbname );
 
 		try
 		{
@@ -166,11 +168,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$stmt->bind( 3, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->execute()->finish();
 
-			$this->_dbm->release($conn);
+			$this->_dbm->release( $conn, $this->_dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 			throw $e;
 		}
 	}
@@ -225,7 +227,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		$conditions = $search->getConditionString( $types, $translations );
 
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->_dbm->acquire( $this->_dbname );
 
 		try
 		{
@@ -241,11 +243,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$node = $this->_createNode( $row );
 			$this->_createTree( $result, $node );
 
-			$this->_dbm->release($conn);
+			$this->_dbm->release( $conn, $this->_dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 			throw $e;
 		}
 
@@ -293,7 +295,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		}
 
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->_dbm->acquire( $this->_dbname );
 
 		try
 		{
@@ -330,11 +332,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 			$node->setId( $row[0] );
 
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 			throw $e;
 		}
 	}
@@ -423,7 +425,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 		}
 
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->_dbm->acquire( $this->_dbname );
 
 		try
 		{
@@ -474,11 +476,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$updateParentId->bind( 2, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			$updateParentId->execute()->finish();
 
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 			throw $e;
 		}
 	}
@@ -502,7 +504,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			return;
 		}
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->_dbm->acquire( $this->_dbname );
 
 		try
 		{
@@ -513,11 +515,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$stmt->bind( 4, $node->getId() );
 			$result = $stmt->execute()->finish();
 
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 			throw $e;
 		}
 	}
@@ -554,7 +556,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$this->_config['search']
 		);
 
-		$conn = $this->_dbm->acquire();
+		$conn = $this->_dbm->acquire( $this->_dbname );
 
 		try
 		{
@@ -576,11 +578,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 				throw $e;
 			}
 
-			$this->_dbm->release($conn);
+			$this->_dbm->release( $conn, $this->_dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 			throw $e;
 		}
 
@@ -757,7 +759,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 */
 	protected function _getNodeById( $id )
 	{
-		$conn = $this->_dbm->acquire();
+		$conn = $this->_dbm->acquire( $this->_dbname );
 
 		try
 		{
@@ -772,11 +774,11 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 			$node = $this->_createNode( $row );
 
-			$this->_dbm->release($conn);
+			$this->_dbm->release( $conn, $this->_dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn, $this->_dbname );
 			throw $e;
 		}
 
