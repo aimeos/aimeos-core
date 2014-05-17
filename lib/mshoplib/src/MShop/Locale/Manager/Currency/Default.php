@@ -118,9 +118,9 @@ class MShop_Locale_Manager_Currency_Default
 		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
-		$config = $context->getConfig();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -166,8 +166,9 @@ class MShop_Locale_Manager_Currency_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$path = 'mshop/locale/manager/currency/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -224,9 +225,10 @@ class MShop_Locale_Manager_Currency_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
 		$config = $context->getConfig();
-		$dbname = $config->get( 'resource/default', 'db' );
+
+		$dbname = $this->_getResourceName( 'db-locale' );
+		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
 
 		$items = array( );
@@ -249,16 +251,20 @@ class MShop_Locale_Manager_Currency_Default
 			$sql = $config->get($path, $path);
 			$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
 
-			try {
+			try
+			{
 				while ( ($row = $results->fetch()) !== false ) {
 					$items[ $row['id'] ] = $this->_createItem($row);
 				}
-			} catch ( Exception $e ) {
+			}
+			catch ( Exception $e )
+			{
 				$results->finish();
 				throw $e;
 			}
 
-			if ( $total !== null ) {
+			if ( $total !== null )
+			{
 				$path = 'mshop/locale/manager/currency/default/item/count';
 				$sql = $config->get($path, $path);
 				$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
@@ -340,6 +346,18 @@ class MShop_Locale_Manager_Currency_Default
 	protected function _createItem( array $data=array( ) )
 	{
 		return new MShop_Locale_Item_Currency_Default($data);
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-locale' )
+	{
+		return parent::_getResourceName( $name );
 	}
 
 }

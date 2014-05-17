@@ -168,8 +168,9 @@ class MShop_Media_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-media' );
 		$path = 'mshop/media/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -203,9 +204,9 @@ class MShop_Media_Manager_Default
 		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-media' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -240,7 +241,7 @@ class MShop_Media_Manager_Default
 
 			if( $id === null && $fetch === true ) {
 				$path = 'mshop/media/manager/default/item/newid';
-				$item->setId( $this->_newId( $conn, $config->get($path, $path) ) );
+				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -266,8 +267,9 @@ class MShop_Media_Manager_Default
 	{
 		$map = $typeIds = array();
 		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-media' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -368,5 +370,17 @@ class MShop_Media_Manager_Default
 	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
 		return new MShop_Media_Item_Default( $values, $listItems, $refItems );
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-media' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

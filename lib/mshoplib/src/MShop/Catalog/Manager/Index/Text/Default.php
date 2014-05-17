@@ -156,8 +156,9 @@ class MShop_Catalog_Manager_Index_Text_Default
 			$submanager->deleteItems( $ids );
 		}
 
+		$dbname = $this->_getResourceName( 'db-index' );
 		$path = 'mshop/catalog/manager/index/text/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'prodid' );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'prodid', $dbname );
 	}
 
 
@@ -266,7 +267,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 		try
 		{
-			$this->_begin();
+			$this->begin();
 
 			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/text/default/cleanup' );
 
@@ -275,7 +276,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 			$stmt->execute()->finish();
 
-			$this->_commit();
+			$this->commit();
 			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
@@ -310,8 +311,8 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$date = date( 'Y-m-d H:i:s' );
 
 
+		$dbname = $this->_getResourceName( 'db-index' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -446,8 +447,9 @@ class MShop_Catalog_Manager_Index_Text_Default
 	{
 		$list = array();
 		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-index' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try

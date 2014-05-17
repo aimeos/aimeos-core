@@ -85,21 +85,6 @@ class MShop_Order_Manager_Base_Coupon_Default
 
 
 	/**
-	 * Creates the manager that will use the given context object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		parent::__construct( $context );
-
-		if( $context->getConfig()->get( 'resource/db-order/adapter', null ) !== null ) {
-			$this->_dbname = 'db-order';
-		}
-	}
-
-
-	/**
 	 * Creates a new order base coupon object.
 	 *
 	 * @return MShop_Order_Item_Base_Coupon_Interface New order coupon object
@@ -141,9 +126,10 @@ class MShop_Order_Manager_Base_Coupon_Default
 		}
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-order' );
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire( $this->_dbname );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -173,17 +159,17 @@ class MShop_Order_Manager_Base_Coupon_Default
 			{
 				if( $id === null ) {
 					$path = 'mshop/order/manager/base/coupon/default/item/newid';
-					$coupon->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
+					$coupon->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$coupon->setId( $id );
 				}
 			}
 
-			$dbm->release($conn, $this->_dbname);
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release($conn, $this->_dbname);
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -196,8 +182,9 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-order' );
 		$path = 'mshop/order/manager/base/coupon/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -238,9 +225,11 @@ class MShop_Order_Manager_Base_Coupon_Default
 	public function searchItems(MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null)
 	{
 		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
 		$logger = $context->getLogger();
-		$conn = $dbm->acquire( $this->_dbname );
+
+		$dbname = $this->_getResourceName( 'db-order' );
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
 		$config = $context->getConfig();
@@ -266,11 +255,11 @@ class MShop_Order_Manager_Base_Coupon_Default
 				throw $e;
 			}
 
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn, $this->_dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -299,5 +288,17 @@ class MShop_Order_Manager_Base_Coupon_Default
 	protected function _createItem(array $values = array())
 	{
 		return new MShop_Order_Item_Base_Coupon_Default($values);
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-order' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

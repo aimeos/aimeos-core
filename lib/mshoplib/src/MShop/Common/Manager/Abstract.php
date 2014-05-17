@@ -19,6 +19,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	private $_context;
 	private $_stmts = array();
 	private $_keySeparator = '.';
+	private $_resourceName;
 
 
 	/**
@@ -110,6 +111,33 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	public function deleteItem( $itemId )
 	{
 		$this->deleteItems( array( $itemId ) );
+	}
+
+
+	/**
+	 * Starts a database transaction on the connection identified by the given name.
+	 */
+	public function begin()
+	{
+		$this->_begin( $this->_getResourceName() );
+	}
+
+
+	/**
+	 * Commits the running database transaction on the connection identified by the given name.
+	 */
+	public function commit()
+	{
+		$this->_commit( $this->_getResourceName() );
+	}
+
+
+	/**
+	 * Rolls back the running database transaction on the connection identified by the given name.
+	 */
+	public function rollback()
+	{
+		$this->_rollback( $this->_getResourceName() );
 	}
 
 
@@ -593,6 +621,29 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db' )
+	{
+		if( $this->_resourceName === null )
+		{
+			$config = $this->_context->getConfig();
+
+			if( $config->get( 'resource/' . $name ) === null ) {
+				$this->_resourceName = $config->get( 'resource/default', 'db' );
+			} else {
+				$this->_resourceName = $name;
+			}
+		}
+
+		return $this->_resourceName;
+	}
+
+
+	/**
 	 * Replaces ":site" marker in a search config item array.
 	 *
 	 * @param array &$searchAttr Single search config definition including the "internalcode" key
@@ -744,13 +795,15 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
-	 * Deletes items specified by ids in array.
+	 * Deletes items specified by its IDs.
 	 *
 	 * @param array $ids List of IDs
-	 * @param string $sql Sql statement
-	 * @param boolean $siteidcheck If siteid is used in the statement
+	 * @param string $sql SQL statement
+	 * @param boolean $siteidcheck If siteid should be used in the statement
+	 * @param string $name Name of the ID column
+	 * @param string $rname Name of the resource that should be used
 	 */
-	protected function _deleteItems( array $ids, $sql, $siteidcheck = true, $name = 'id' )
+	protected function _deleteItems( array $ids, $sql, $siteidcheck = true, $name = 'id', $rname = 'db' )
 	{
 		if( empty( $ids ) ) { return; }
 
@@ -764,10 +817,10 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 		$cond = $search->getConditionString( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $sql );
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 
 		try
 		{
+			$dbname = $this->_getResourceName( $rname );
 			$dbm = $context->getDatabaseManager();
 			$conn = $dbm->acquire( $dbname );
 
@@ -792,10 +845,9 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	/**
 	 * Starts a database transaction on the connection identified by the given name.
 	 */
-	protected function _begin()
+	protected function _begin( $dbname = 'db' )
 	{
 		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
 
 		$conn = $dbm->acquire( $dbname );
 		$conn->begin();
@@ -806,10 +858,9 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	/**
 	 * Commits the running database transaction on the connection identified by the given name.
 	 */
-	protected function _commit()
+	protected function _commit( $dbname = 'db' )
 	{
 		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
 
 		$conn = $dbm->acquire( $dbname );
 		$conn->commit();
@@ -820,10 +871,9 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name.
 	 */
-	protected function _rollback()
+	protected function _rollback( $dbname = 'db' )
 	{
 		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
 
 		$conn = $dbm->acquire( $dbname );
 		$conn->rollback();

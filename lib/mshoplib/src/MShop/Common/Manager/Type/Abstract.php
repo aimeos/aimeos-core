@@ -117,9 +117,8 @@ abstract class MShop_Common_Manager_Type_Abstract
 
 		if( $item->isModified() === false ) { return; }
 
-		$locale = $this->_context->getLocale();
+		$dbname = $this->_getResourceName();
 		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -134,7 +133,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 
 			$statement = $conn->create( $sql );
 
-			$statement->bind( 1, $locale->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$statement->bind( 1, $this->_context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$statement->bind( 2, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 3, $item->getDomain(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 4, $item->getLabel(), MW_DB_Statement_Abstract::PARAM_STR );
@@ -176,7 +175,8 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_config['delete'] );
+		$dbname = $this->_getResourceName();
+		$this->_deleteItems( $ids, $this->_config['delete'], true, 'id', $dbname );
 	}
 
 
@@ -214,9 +214,11 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbm = $this->_context->getDatabaseManager();
-		$conn = $dbm->acquire();
 		$items = array();
+
+		$dbname = $this->_getResourceName();
+		$dbm = $this->_context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -236,11 +238,11 @@ abstract class MShop_Common_Manager_Type_Abstract
 				$items[ $row['id'] ] = $this->_createItem( $row );
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

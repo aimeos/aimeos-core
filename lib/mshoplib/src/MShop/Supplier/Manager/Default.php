@@ -124,8 +124,9 @@ class MShop_Supplier_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-supplier' );
 		$path = 'mshop/supplier/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -159,9 +160,9 @@ class MShop_Supplier_Manager_Default
 		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-supplier' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -191,7 +192,7 @@ class MShop_Supplier_Manager_Default
 			{
 				if( $id === null ) {
 					$path = 'mshop/supplier/manager/default/item/newid';
-					$item->setId( $this->_newId( $conn, $config->get($path, $path) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$item->setId($id);
 				}
@@ -217,11 +218,12 @@ class MShop_Supplier_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
-		$conn = $dbm->acquire( $dbname );
 		$items = array();
+		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-supplier' );
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -286,5 +288,17 @@ class MShop_Supplier_Manager_Default
 	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Supplier_Item_Default( $values );
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-service' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

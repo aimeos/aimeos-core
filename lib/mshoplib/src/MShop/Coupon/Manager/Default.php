@@ -167,9 +167,10 @@ class MShop_Coupon_Manager_Default
 		if( !$coupon->isModified() ) { return; }
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-coupon' );
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -202,17 +203,17 @@ class MShop_Coupon_Manager_Default
 			{
 				if( $id === null ) {
 					$path = 'mshop/coupon/manager/default/item/newid';
-					$coupon->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
+					$coupon->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$coupon->setId( $id );
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -225,8 +226,9 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-coupon' );
 		$path = 'mshop/coupon/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -244,8 +246,9 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		$dbname = $this->_getResourceName( 'db-coupon' );
 		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
 		try
@@ -278,11 +281,11 @@ class MShop_Coupon_Manager_Default
 				throw $e;
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -396,5 +399,17 @@ class MShop_Coupon_Manager_Default
 	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Coupon_Item_Default( $values );
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-coupon' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

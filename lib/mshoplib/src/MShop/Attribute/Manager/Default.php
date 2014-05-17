@@ -171,9 +171,9 @@ class MShop_Attribute_Manager_Default
 		if( $item->isModified() === false ) { return; }
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-attribute' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -188,14 +188,14 @@ class MShop_Attribute_Manager_Default
 			$stmt->bind( 2, $item->getTypeId() );
 			$stmt->bind( 3, $item->getDomain() );
 			$stmt->bind( 4, $item->getCode() );
-			$stmt->bind( 5, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind( 6, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT);
+			$stmt->bind( 5, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 6, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 7, $item->getLabel() );
 			$stmt->bind( 8, date('Y-m-d H:i:s', time()) );
 			$stmt->bind( 9, $context->getEditor() );
 
 			if ( $item->getId() !== null ) {
-				$stmt->bind(10, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind(10, $item->getId(), MW_DB_Statement_Abstract::PARAM_INT );
 			} else {
 				$stmt->bind( 10, date('Y-m-d H:i:s', time()) );
 			}
@@ -206,7 +206,7 @@ class MShop_Attribute_Manager_Default
 			{
 				if ( $id === null ) {
 					$path = 'mshop/attribute/manager/default/item/newid';
-					$item->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$item->setId($id);
 				}
@@ -229,8 +229,9 @@ class MShop_Attribute_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-attribute' );
 		$path = 'mshop/attribute/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -250,8 +251,9 @@ class MShop_Attribute_Manager_Default
 	{
 		$map = $typeIds = array();
 		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-attribute' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -337,6 +339,18 @@ class MShop_Attribute_Manager_Default
 	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
 		return new MShop_Attribute_Item_Default( $values, $listItems, $refItems );
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-attribute' )
+	{
+		return parent::_getResourceName( $name );
 	}
 
 }

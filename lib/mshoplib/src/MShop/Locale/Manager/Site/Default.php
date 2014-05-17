@@ -19,8 +19,6 @@ class MShop_Locale_Manager_Site_Default
 	implements MShop_Locale_Manager_Site_Interface
 {
 	private $_cache = array();
-	private $_config;
-	private $_dbm;
 
 	private $_searchConfig = array(
 		'locale.site.id' => array(
@@ -117,20 +115,6 @@ class MShop_Locale_Manager_Site_Default
 
 
 	/**
-	 * Creates a manager for the locale site.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		parent::__construct($context);
-
-		$this->_config = $context->getConfig();
-		$this->_dbm = $context->getDatabaseManager();
-	}
-
-
-	/**
 	 * Creates a new site object.
 	 *
 	 * @return MShop_Locale_Item_Site_Interface
@@ -164,9 +148,10 @@ class MShop_Locale_Manager_Site_Default
 
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$dbname = $config->get( 'resource/default', 'db' );
-		$conn = $this->_dbm->acquire( $dbname );
+
+		$dbname = $this->_getResourceName( 'db-locale' );
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -186,11 +171,11 @@ class MShop_Locale_Manager_Site_Default
 			$stmt->execute()->finish();
 			$item->setId( $id ); // set Modified false
 
-			$this->_dbm->release( $conn, $dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch ( Exception $e )
 		{
-			$this->_dbm->release( $conn, $dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -203,8 +188,9 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$path = 'mshop/locale/manager/site/default/item/delete';
-		$this->_deleteItems($ids, $this->_getContext()->getConfig()->get( $path, $path ), false );
+		$this->_deleteItems($ids, $this->_getContext()->getConfig()->get( $path, $path ), false, 'id', $dbname );
 	}
 
 
@@ -272,9 +258,12 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbname = $this->_config->get( 'resource/default', 'db' );
-		$conn = $this->_dbm->acquire( $dbname );
 		$items = array();
+		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-locale' );
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -291,7 +280,7 @@ class MShop_Locale_Manager_Site_Default
 			);
 
 			$path = 'mshop/locale/manager/site/default/item/search';
-			$sql = $this->_config->get($path, $path);
+			$sql = $context->getConfig()->get($path, $path);
 			$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
 
 			try
@@ -330,13 +319,14 @@ class MShop_Locale_Manager_Site_Default
 				$total = $row['count'];
 			}
 
-			$this->_dbm->release( $conn, $dbname );
+			$dbm->release( $conn, $dbname );
 		}
 		catch ( Exception $e )
 		{
-			$this->_dbm->release( $conn, $dbname );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
 		return $items;
 	}
 
@@ -429,8 +419,9 @@ class MShop_Locale_Manager_Site_Default
 	public function insertItem( MShop_Locale_Item_Site_Interface $item, $parentId = null, $refId = null )
 	{
 		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -515,5 +506,17 @@ class MShop_Locale_Manager_Site_Default
 	protected function _getSearchConfig()
 	{
 		return $this->_searchConfig;
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-locale' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

@@ -290,8 +290,9 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-customer' );
 		$path = 'mshop/customer/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -311,9 +312,9 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-customer' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -323,9 +324,8 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 			$path = 'mshop/customer/manager/default/item/';
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
-			$sql = $config->get( $path, $path );
+			$stmt = $this->_getCachedStatement( $conn, $path );
 
-			$stmt = $conn->create( $sql );
 			$billingAddress = $item->getPaymentAddress();
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -366,7 +366,7 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 			{
 				if( $id === null ) {
 					$path = 'mshop/customer/manager/default/item/newid';
-					$item->setId( $this->_newId( $conn, $config->get($path, $path) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$item->setId( $id );
 				}
@@ -392,11 +392,12 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
-		$conn = $dbm->acquire( $dbname );
 		$map = array();
+		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-customer' );
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -482,5 +483,17 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 		}
 
 		return $items;
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-customer' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

@@ -114,9 +114,9 @@ class MShop_Locale_Manager_Language_Default
 		if ( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
-		$config = $context->getConfig();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -162,8 +162,9 @@ class MShop_Locale_Manager_Language_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$path = 'mshop/locale/manager/language/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -232,12 +233,13 @@ class MShop_Locale_Manager_Language_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		$items = array( );
 		$context = $this->_getContext();
 		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
-		$items = array( );
 
 		try
 		{
@@ -337,6 +339,18 @@ class MShop_Locale_Manager_Language_Default
 	protected function _createItem( array $data=array( ) )
 	{
 		return new MShop_Locale_Item_Language_Default($data);
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-locale' )
+	{
+		return parent::_getResourceName( $name );
 	}
 
 }

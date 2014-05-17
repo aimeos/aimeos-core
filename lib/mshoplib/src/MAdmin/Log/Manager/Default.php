@@ -125,7 +125,6 @@ class MAdmin_Log_Manager_Default
 		}
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
 
 		try {
 			$siteid = $context->getLocale()->getSiteId();
@@ -133,8 +132,8 @@ class MAdmin_Log_Manager_Default
 			$siteid = null;
 		}
 
+		$dbname = $this->_getResourceName( 'db-log' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -144,7 +143,7 @@ class MAdmin_Log_Manager_Default
 			$path = 'madmin/log/manager/default/';
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
-			$stmt = $conn->create( $config->get( $path, $path ) );
+			$stmt = $this->_getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getFacility() );
 			$stmt->bind( 3, date('Y-m-d H:i:s', time() ) );
@@ -163,7 +162,7 @@ class MAdmin_Log_Manager_Default
 				if( $id === null )
 				{
 					$path = 'madmin/log/manager/default/newid';
-					$item->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$item->setId( $id );
 				}
@@ -186,7 +185,9 @@ class MAdmin_Log_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'madmin/log/manager/default/delete', 'madmin/log/manager/default/delete' ) );
+		$dbname = $this->_getResourceName( 'db-log' );
+		$path = 'madmin/log/manager/default/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -222,11 +223,12 @@ class MAdmin_Log_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
-		$conn = $dbm->acquire( $dbname );
 		$items = array();
+		$context = $this->_getContext();
+
+		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName( 'db-log' );
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -350,5 +352,17 @@ class MAdmin_Log_Manager_Default
 
 			$this->saveItem( $item );
 		}
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-log' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }
