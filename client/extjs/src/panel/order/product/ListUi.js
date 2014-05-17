@@ -88,7 +88,7 @@ MShop.panel.order.base.product.ListUi = Ext.extend( MShop.panel.AbstractListUi, 
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.type',
-				header : MShop.I18n.dt( 'client/extjs', 'Type' ),
+				header : MShop.I18n.dt( 'client/extjs', 'Type' )
 			}, {
 				xtype : 'gridcolumn',
 				dataIndex : 'order.base.product.prodcode',
