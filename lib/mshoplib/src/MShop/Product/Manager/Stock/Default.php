@@ -118,10 +118,9 @@ class MShop_Product_Manager_Stock_Default
 		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$locale = $context->getLocale();
+
+		$dbname = $this->_getResourceName( 'db-product' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -133,7 +132,7 @@ class MShop_Product_Manager_Stock_Default
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $item->getProductId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $locale->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 3, $item->getWarehouseId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 4, $item->getStocklevel(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 5, $item->getDateBack(), MW_DB_Statement_Abstract::PARAM_STR );
@@ -152,7 +151,7 @@ class MShop_Product_Manager_Stock_Default
 			{
 				if( $id === null ) {
 					$path = 'mshop/product/manager/stock/default/item/newid';
-					$item->setId( $this->_newId( $conn, $config->get($path, $path) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$item->setId( $id ); // modified false
 				}
@@ -175,8 +174,9 @@ class MShop_Product_Manager_Stock_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-product' );
 		$path = 'mshop/product/manager/stock/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -234,11 +234,12 @@ class MShop_Product_Manager_Stock_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
-		$conn = $dbm->acquire( $dbname );
 		$items = array();
+		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-product' );
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -367,5 +368,17 @@ class MShop_Product_Manager_Stock_Default
 	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Product_Item_Stock_Default( $values );
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-product' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

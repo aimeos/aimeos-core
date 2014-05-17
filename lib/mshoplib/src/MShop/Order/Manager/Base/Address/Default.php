@@ -236,10 +236,9 @@ class MShop_Order_Manager_Base_Address_Default
 		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$locale = $context->getLocale();
+
+		$dbname = $this->_getResourceName( 'db-order' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -251,7 +250,7 @@ class MShop_Order_Manager_Base_Address_Default
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $locale->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 3, $item->getAddressId(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 4, $item->getType(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 5, $item->getCompany(), MW_DB_Statement_Abstract::PARAM_STR );
@@ -288,7 +287,7 @@ class MShop_Order_Manager_Base_Address_Default
 			{
 				if( $id === null ) {
 					$path = 'mshop/order/manager/base/address/default/item/newid';
-					$item->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$item->setId( $id );
 				}
@@ -311,8 +310,9 @@ class MShop_Order_Manager_Base_Address_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-order' );
 		$path = 'mshop/order/manager/base/address/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -369,10 +369,11 @@ class MShop_Order_Manager_Base_Address_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
 		$logger = $context->getLogger();
 		$config = $context->getConfig();
-		$dbname = $config->get( 'resource/default', 'db' );
+
+		$dbname = $this->_getResourceName( 'db-order' );
+		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
@@ -436,5 +437,17 @@ class MShop_Order_Manager_Base_Address_Default
 	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Order_Item_Base_Address_Default( $values );
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-order' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

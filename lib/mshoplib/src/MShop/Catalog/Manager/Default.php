@@ -120,10 +120,6 @@ class MShop_Catalog_Manager_Default
 	);
 
 
-
-
-
-
 	/**
 	 * Creates new item object.
 	 *
@@ -164,16 +160,16 @@ class MShop_Catalog_Manager_Default
 	public function deleteItem( $id )
 	{
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
-		$this->_begin();
+		$this->begin();
 
 		try
 		{
 			$this->_createTreeManager( $siteid )->deleteNode( $id );
-			$this->_commit();
+			$this->commit();
 		}
 		catch( Exception $e )
 		{
-			$this->_rollback();
+			$this->rollback();
 			throw $e;
 		}
 	}
@@ -241,17 +237,17 @@ class MShop_Catalog_Manager_Default
 	{
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
 		$node = $item->getNode();
-		$this->_begin();
+		$this->begin();
 
 		try
 		{
 			$this->_createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
 			$this->_updateUsage( $node->getId(), $item, true );
-			$this->_commit();
+			$this->commit();
 		}
 		catch( Exception $e )
 		{
-			$this->_rollback();
+			$this->rollback();
 			throw $e;
 		}
 	}
@@ -270,17 +266,17 @@ class MShop_Catalog_Manager_Default
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
 		$item = $this->getItem( $id );
 
-		$this->_begin();
+		$this->begin();
 
 		try
 		{
 			$this->_createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
 			$this->_updateUsage( $id, $item );
-			$this->_commit();
+			$this->commit();
 		}
 		catch( Exception $e )
 		{
-			$this->_rollback();
+			$this->rollback();
 			throw $e;
 		}
 	}
@@ -301,17 +297,17 @@ class MShop_Catalog_Manager_Default
 
 		$siteid = $this->_getContext()->getLocale()->getSiteId();
 		$node = $item->getNode();
-		$this->_begin();
+		$this->begin();
 
 		try
 		{
 			$this->_createTreeManager( $siteid )->saveNode( $node );
 			$this->_updateUsage( $node->getId(), $item );
-			$this->_commit();
+			$this->commit();
 		}
 		catch( Exception $e )
 		{
-			$this->_rollback();
+			$this->rollback();
 			throw $e;
 		}
 	}
@@ -329,9 +325,9 @@ class MShop_Catalog_Manager_Default
 	{
 		$nodeMap = $siteMap = array();
 		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
 
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$dbname = $this->_getResourceName( 'db-catalog' );
+		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -591,6 +587,7 @@ class MShop_Catalog_Manager_Default
 			$dbm = $context->getDatabaseManager();
 
 			$treeConfig['search'] = $this->_searchConfig;
+			$treeConfig['dbname'] = $this->_getResourceName( 'db-catalog' );
 			$treeConfig['sql'] = array(
 				'delete' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/delete' ) ),
 				'get' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/get' ) ),
@@ -653,6 +650,18 @@ class MShop_Catalog_Manager_Default
 
 
 	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-catalog' )
+	{
+		return parent::_getResourceName( $name );
+	}
+
+
+	/**
 	 * Updates the usage information of a node.
 	 *
 	 * @param integer $id Id of the record
@@ -664,8 +673,9 @@ class MShop_Catalog_Manager_Default
 	{
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-catalog' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try

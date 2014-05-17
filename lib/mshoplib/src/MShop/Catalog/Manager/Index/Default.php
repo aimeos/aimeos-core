@@ -338,6 +338,18 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-index' )
+	{
+		return parent::_getResourceName( $name );
+	}
+
+
+	/**
 	* Re-writes the index entries for all products that are search result of given criteria
 	*
 	* @param MW_Common_Criteria_Interface $search Search criteria
@@ -355,7 +367,7 @@ class MShop_Catalog_Manager_Index_Default
 
 			try
 			{
-				$this->_begin();
+				$this->begin();
 
 				$this->deleteItems( array_keys( $products ) );
 
@@ -365,7 +377,7 @@ class MShop_Catalog_Manager_Index_Default
 
 				$this->_saveSubProducts( $products );
 
-				$this->_commit();
+				$this->commit();
 			}
 			catch( Exception $e )
 			{

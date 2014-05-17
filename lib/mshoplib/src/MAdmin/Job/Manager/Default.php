@@ -138,10 +138,10 @@ class MAdmin_Job_Manager_Default
 		}
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
-		$locale = $context->getLocale();
+
+		$dbname = $this->_getResourceName( 'db-job' );
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -150,8 +150,8 @@ class MAdmin_Job_Manager_Default
 			$path = 'madmin/job/manager/default/';
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
-			$stmt = $conn->create( $config->get( $path, $path ) );
-			$stmt->bind( 1, $locale->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, $item->getMethod() );
 			$stmt->bind( 4, json_encode( $item->getParameter() ) );
@@ -173,17 +173,17 @@ class MAdmin_Job_Manager_Default
 				if( $id === null )
 				{
 					$path = 'madmin/job/manager/default/newid';
-					$item->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$item->setId( $id ); // so item is no longer modified
 				}
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -196,7 +196,9 @@ class MAdmin_Job_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( 'madmin/job/manager/default/delete', 'madmin/job/manager/default/delete' ) );
+		$dbname = $this->_getResourceName( 'db-job' );
+		$path = 'madmin/job/manager/default/delete';
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path, true, 'id', $dbname ) );
 	}
 
 
@@ -234,8 +236,10 @@ class MAdmin_Job_Manager_Default
 	{
 		$context = $this->_getContext();
 		$logger = $context->getLogger();
+
+		$dbname = $this->_getResourceName( 'db-job' );
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
 		try
@@ -266,11 +270,11 @@ class MAdmin_Job_Manager_Default
 				$items[ $row['id'] ] = $this->_createItem( $row );
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -347,5 +351,17 @@ class MAdmin_Job_Manager_Default
 		$context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
 
 		return $statement->execute();
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-job' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

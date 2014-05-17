@@ -198,8 +198,9 @@ class MShop_Locale_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$path = 'mshop/locale/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -220,8 +221,9 @@ class MShop_Locale_Manager_Default
 
 		$context = $this->_getContext();
 		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -253,7 +255,7 @@ class MShop_Locale_Manager_Default
 			{
 				if ( $id === null ) {
 					$path = 'mshop/locale/manager/default/item/newid';
-					$item->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$item->setId($id); //so item is no longer modified
 				}
@@ -470,8 +472,9 @@ class MShop_Locale_Manager_Default
 	{
 		$context = $this->_getContext();
 		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
@@ -531,5 +534,17 @@ class MShop_Locale_Manager_Default
 		}
 
 		return $items;
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-locale' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

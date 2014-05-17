@@ -21,7 +21,6 @@ abstract class MShop_Common_Manager_List_Abstract
 	private $_prefix;
 	private $_configPath;
 	private $_searchConfig;
-	private $_typeManager;
 
 
 	/**
@@ -92,10 +91,10 @@ abstract class MShop_Common_Manager_List_Abstract
 			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		$config = $this->_getContext()->getConfig();
-		$locale = $this->_getContext()->getLocale();
+		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName();
 		$dbm = $this->_getContext()->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -112,7 +111,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			$statement = $this->_getCachedStatement( $conn, $path );
 
 			$statement->bind( 1, $item->getParentId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$statement->bind( 2, $locale->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$statement->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$statement->bind( 3, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$statement->bind( 4, $item->getDomain(), MW_DB_Statement_Abstract::PARAM_STR );
 			$statement->bind( 5, $item->getRefId(), MW_DB_Statement_Abstract::PARAM_STR );
@@ -138,7 +137,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			{
 				if( $id === null ) {
 					$path = $this->_configPath . 'newid';
-					$item->setId( $this->_newId( $conn, $config->get( $path, $path ) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
 					$item->setId( $id ); // modified false
 				}
@@ -161,8 +160,9 @@ abstract class MShop_Common_Manager_List_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName();
 		$path = $this->_configPath . 'delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -205,8 +205,11 @@ abstract class MShop_Common_Manager_List_Abstract
 	{
 		$context = $this->_getContext();
 		$config = $context->getConfig();
-		$dbm = $context->getDatabaseManager();
 		$siteid = $context->getLocale()->getSiteId();
+
+		$dbname = $this->_getResourceName();
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -221,8 +224,6 @@ abstract class MShop_Common_Manager_List_Abstract
 			if( !is_null( $ref ) ) {
 				$refListItem = $this->getItem( $ref );
 			}
-
-			$conn = $dbm->acquire();
 
 			if( !is_null( $ref ) )
 			{
@@ -290,11 +291,11 @@ abstract class MShop_Common_Manager_List_Abstract
 
 			$result = $stmt->execute()->finish();
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -335,8 +336,10 @@ abstract class MShop_Common_Manager_List_Abstract
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
+
+		$dbname = $this->_getResourceName();
 		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -365,11 +368,11 @@ abstract class MShop_Common_Manager_List_Abstract
 				$typeIds[ $row['typeid'] ] = null;
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
@@ -412,8 +415,10 @@ abstract class MShop_Common_Manager_List_Abstract
 	{
 		$items = $map = array();
 		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -436,11 +441,11 @@ abstract class MShop_Common_Manager_List_Abstract
 				$map[ $row['domain'] ][] = $row['refid'];
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

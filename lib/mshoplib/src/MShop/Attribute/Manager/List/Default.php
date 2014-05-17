@@ -181,4 +181,16 @@ class MShop_Attribute_Manager_List_Default
 	{
 		return $this->_searchConfig;
 	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-attribute' )
+	{
+		return parent::_getResourceName( $name );
+	}
 }

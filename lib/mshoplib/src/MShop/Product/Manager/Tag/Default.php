@@ -108,9 +108,9 @@ class MShop_Product_Manager_Tag_Default
 		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
+
+		$dbname = $this->_getResourceName( 'db-product' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -120,7 +120,7 @@ class MShop_Product_Manager_Tag_Default
 			$path = 'mshop/product/manager/tag/default/item/';
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
-			$stmt = $conn->create( $config->get( $path, $path ) );
+			$stmt = $this->_getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
 			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
@@ -139,7 +139,7 @@ class MShop_Product_Manager_Tag_Default
 
 			if( $id === null && $fetch === true ) {
 				$path = 'mshop/product/manager/tag/default/item/newid';
-				$item->setId( $this->_newId($conn, $config->get($path, $path) ) );
+				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -159,8 +159,9 @@ class MShop_Product_Manager_Tag_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$dbname = $this->_getResourceName( 'db-product' );
 		$path = 'mshop/product/manager/tag/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
 	}
 
 
@@ -218,8 +219,9 @@ class MShop_Product_Manager_Tag_Default
 	{
 		$map = $typeIds = array();
 		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName( 'db-product' );
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -328,5 +330,17 @@ class MShop_Product_Manager_Tag_Default
 		}
 
 		return $manager;
+	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-product' )
+	{
+		return parent::_getResourceName( $name );
 	}
 }

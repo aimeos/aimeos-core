@@ -100,7 +100,8 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->_deleteItems( $ids, $this->_config['delete'] );
+		$dbname = $this->_getResourceName();
+		$this->_deleteItems( $ids, $this->_config['delete'], true, 'id', $dbname );
 	}
 
 
@@ -135,9 +136,8 @@ abstract class MShop_Common_Manager_Address_Abstract
 			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		$config = $this->_context->getConfig();
+		$dbname = $this->_getResourceName();
 		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -211,8 +211,9 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		$dbname = $this->_getResourceName();
 		$dbm = $this->_context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
 		try
@@ -233,11 +234,11 @@ abstract class MShop_Common_Manager_Address_Abstract
 				$items[ $row['id'] ] = $this->_createItem( $row );
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

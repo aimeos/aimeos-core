@@ -144,4 +144,16 @@ class MShop_Service_Manager_List_Type_Default
 	{
 		return $this->_searchConfig;
 	}
+
+
+	/**
+	 * Returns the name of the requested resource or the name of the default resource.
+	 *
+	 * @param string $name Name of the requested resource
+	 * @return string Name of the resource
+	 */
+	protected function _getResourceName( $name = 'db-service' )
+	{
+		return parent::_getResourceName( $name );
+	}
 }
