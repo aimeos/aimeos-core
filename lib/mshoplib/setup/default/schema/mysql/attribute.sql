@@ -35,12 +35,7 @@ CREATE TABLE "mshop_attribute_type" (
 CONSTRAINT "pk_msattty_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msattty_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_msattty_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_msattty_sid_status" ON "mshop_attribute_type" ("siteid", "status");
@@ -81,11 +76,6 @@ CONSTRAINT "pk_msattr_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msattr_sid_dom_cod_tid"
 	UNIQUE ("siteid", "domain", "code", "typeid"),
-CONSTRAINT "fk_msattr_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_msattr_typeid"
 	FOREIGN KEY ("typeid")
 	REFERENCES "mshop_attribute_type" ("id")
@@ -132,12 +122,7 @@ CREATE TABLE "mshop_attribute_list_type" (
 CONSTRAINT "pk_msattlity_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msattlity_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_msattlity_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_msattlity_sid_status" ON "mshop_attribute_list_type" ("siteid", "status");
@@ -187,11 +172,6 @@ CONSTRAINT "unq_msattli_sid_dm_rid_tid_pid"
 CONSTRAINT "fk_msattrli_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_attribute" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_msattli_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
 CONSTRAINT "fk_msattli_typeid"

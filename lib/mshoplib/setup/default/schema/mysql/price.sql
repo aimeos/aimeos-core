@@ -35,12 +35,7 @@ CREATE TABLE "mshop_price_type" (
 CONSTRAINT "pk_msprity_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msprity_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_msprity_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_msprity_sid_status" ON "mshop_price_type" ("siteid", "status");
@@ -87,22 +82,14 @@ CREATE TABLE "mshop_price" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mspri_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "fk_mspri_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_mspri_typeid"
 	FOREIGN KEY ("typeid")
 	REFERENCES "mshop_price_type" ("id")
 	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mspri_curid"
-	FOREIGN KEY ("currencyid")
-	REFERENCES "mshop_locale_currency" ("id")
-	ON UPDATE CASCADE
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
+
+CREATE INDEY "idx_mspri_curid" ON "mshop_price" ("currencyid");
 
 CREATE INDEX "idx_mspri_sid_status_currencyid" ON "mshop_price" ("siteid", "status", "currencyid");
 
@@ -155,12 +142,7 @@ CREATE TABLE "mshop_price_list_type" (
 CONSTRAINT "pk_msprility_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msprility_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_msprility_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_msprility_sid_status" ON "mshop_price_list_type" ("siteid", "status");
@@ -210,11 +192,6 @@ CONSTRAINT "unq_msprili_sid_dm_rid_tid_pid"
 CONSTRAINT "fk_msprili_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_price" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_msprili_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
 CONSTRAINT "fk_msprili_typeid"

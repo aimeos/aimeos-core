@@ -45,7 +45,8 @@ class MW_Setup_Task_MediaAddForeignKey extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_process( $this->_mysql );
+		// Superseded by MediaDropLocaleConstraints
+		// $this->_process( $this->_mysql );
 	}
 
 

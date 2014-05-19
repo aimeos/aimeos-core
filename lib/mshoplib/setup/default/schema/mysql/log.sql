@@ -30,12 +30,7 @@ CREATE TABLE "madmin_log" (
 	-- request
 	"request" VARCHAR(32) NOT NULL,
 CONSTRAINT "pk_mslog_id"
-	PRIMARY KEY ("id"),
-CONSTRAINT "fk_msadmlog_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	PRIMARY KEY ("id")
 ) CHARACTER SET = utf8;
 
 CREATE INDEX "idx_malog_sid_time_facility_prio" ON "madmin_log" ("siteid", "timestamp", "facility", "priority");

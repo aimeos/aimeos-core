@@ -44,7 +44,8 @@ class MW_Setup_Task_TextAddForeignKey extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_process( $this->_mysql );
+		// Superseded by TextDropLocaleConstraints
+		// $this->_process( $this->_mysql );
 	}
 
 

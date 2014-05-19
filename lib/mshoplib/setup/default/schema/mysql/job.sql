@@ -36,12 +36,7 @@ CREATE TABLE "madmin_job" (
 	-- Modification time stamp
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_majob_id"
-	PRIMARY KEY ("id"),
-CONSTRAINT "fk_majob_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	PRIMARY KEY ("id")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_majob_ctime" ON "madmin_job" ("ctime");

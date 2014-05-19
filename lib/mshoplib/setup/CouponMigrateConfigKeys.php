@@ -82,9 +82,9 @@ class MW_Setup_Task_CouponMigrateConfigKeys extends MW_Setup_Task_Abstract
 	{
 		$this->_msg( 'Migrating configuration keys in coupon tables', 0 );
 
-		if( $this->_schema->tableExists( 'mshop_coupon' ) === true )
+		if( $this->_getSchema( 'db-coupon' )->tableExists( 'mshop_coupon' ) === true )
 		{
-			$this->_executeList( $stmts );
+			$this->_executeList( $stmts, 'db-coupon' );
 			$this->_status( 'done' );
 		}
 
