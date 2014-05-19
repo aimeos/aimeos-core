@@ -31,12 +31,7 @@ CREATE TABLE "mshop_supplier" (
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mssup_id"
-	PRIMARY KEY ("id"),
-CONSTRAINT "fk_mssup_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	PRIMARY KEY ("id")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_mssup_sid_status" ON "mshop_supplier" ("siteid", "status");
@@ -102,17 +97,9 @@ CONSTRAINT "fk_mssupad_refid"
 	FOREIGN KEY ("refid")
 	REFERENCES "mshop_supplier" ("id")
 	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mssupad_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mssupad_langid"
-	FOREIGN KEY ("langid")
-	REFERENCES "mshop_locale_language" ("id")
-	ON UPDATE CASCADE
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
+
+CREATE INDEY "idx_mssupad_langid" ON "mshop_supplier_address" ("langid");
 
 CREATE INDEX "idx_mssupad_sid_rid" ON "mshop_supplier_address" ("siteid", "refid");

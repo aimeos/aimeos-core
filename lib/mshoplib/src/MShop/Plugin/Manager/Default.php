@@ -104,6 +104,18 @@ class MShop_Plugin_Manager_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-plugin' );
+	}
+
+
+	/**
 	 * Creates a new plugin object.
 	 *
 	 * @return MShop_Plugin_Item_Interface New plugin object
@@ -238,8 +250,8 @@ class MShop_Plugin_Manager_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-plugin' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -298,9 +310,8 @@ class MShop_Plugin_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-plugin' );
 		$path = 'mshop/plugin/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -317,8 +328,8 @@ class MShop_Plugin_Manager_Default
 		$map = $typeIds = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-plugin' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -434,17 +445,5 @@ class MShop_Plugin_Manager_Default
 	public function getSubManager( $manager, $name = null )
 	{
 		return $this->_getSubManager( 'plugin', $manager, $name );
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-plugin' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

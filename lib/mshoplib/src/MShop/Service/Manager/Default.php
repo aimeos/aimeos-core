@@ -109,6 +109,18 @@ class MShop_Service_Manager_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-service' );
+	}
+
+
+	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
@@ -154,9 +166,8 @@ class MShop_Service_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-service' );
 		$path = 'mshop/service/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -191,8 +202,8 @@ class MShop_Service_Manager_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-service' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -259,8 +270,8 @@ class MShop_Service_Manager_Default
 		$map = $typeIds = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-service' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -402,17 +413,5 @@ class MShop_Service_Manager_Default
 	protected function _createItem( array $values = array( ), array $listitems = array( ), array $textItems = array( ) )
 	{
 		return new MShop_Service_Item_Default($values, $listitems, $textItems);
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-service' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

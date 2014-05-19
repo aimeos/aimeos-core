@@ -98,6 +98,18 @@ class MShop_Coupon_Manager_Code_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-coupon' );
+	}
+
+
+	/**
 	 * Returns a new sub manager of the given type and name.
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
@@ -190,8 +202,8 @@ class MShop_Coupon_Manager_Code_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-coupon' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -247,9 +259,8 @@ class MShop_Coupon_Manager_Code_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-coupon' );
 		$path = 'mshop/coupon/manager/code/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -268,8 +279,8 @@ class MShop_Coupon_Manager_Code_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbname = $this->_getResourceName( 'db-coupon' );
 		$dbm = $this->_getContext()->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
@@ -337,7 +348,8 @@ class MShop_Coupon_Manager_Code_Default
 		$conditions = $search->getConditionString( $types, $translations );
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $this->_getResourceName();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -353,11 +365,11 @@ class MShop_Coupon_Manager_Code_Default
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
-		$dbm->release( $conn );
+		$dbm->release( $conn, $dbname );
 	}
 
 
@@ -381,11 +393,12 @@ class MShop_Coupon_Manager_Code_Default
 	public function createSearch( $default = false )
 	{
 		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $this->_getResourceName();
+		$conn = $dbm->acquire( $dbname );
 
 		$object = new MW_Common_Criteria_SQL( $conn );
 
-		$dbm->release( $conn );
+		$dbm->release( $conn, $dbname );
 
 		if( $default === true )
 		{
@@ -408,17 +421,4 @@ class MShop_Coupon_Manager_Code_Default
 
 		return $object;
 	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-coupon' )
-	{
-		return parent::_getResourceName( $name );
-	}
-
 }

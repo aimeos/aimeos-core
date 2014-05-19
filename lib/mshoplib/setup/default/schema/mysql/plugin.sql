@@ -37,12 +37,7 @@ CREATE TABLE "mshop_plugin_type" (
 CONSTRAINT "pk_mspluty_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_mspluty_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_mspluty_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_mspluty_sid_status" ON "mshop_plugin_type" ("siteid", "status");
@@ -79,11 +74,6 @@ CONSTRAINT "pk_msplu_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_mspul_sid_tid_provider"
 	UNIQUE ("siteid", "typeid", "provider"),
-CONSTRAINT "fk_msplu_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_msplu_typeid"
 	FOREIGN KEY ("typeid")
 	REFERENCES "mshop_plugin_type" ("id")

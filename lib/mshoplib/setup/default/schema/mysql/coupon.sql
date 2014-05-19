@@ -35,12 +35,7 @@ CREATE TABLE "mshop_coupon" (
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mscou_id"
-	PRIMARY KEY ("id"),
-CONSTRAINT "fk_mscou_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	PRIMARY KEY ("id")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_mscou_sid_stat_start_end" ON "mshop_coupon" ("siteid", "status", "start", "end");
@@ -92,11 +87,6 @@ CONSTRAINT "unq_mscouco_sid_code"
 CONSTRAINT "fk_mscouco_couponid"
 	FOREIGN KEY ("couponid")
 	REFERENCES "mshop_coupon" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mscouco_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;

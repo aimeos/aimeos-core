@@ -71,18 +71,10 @@ CREATE TABLE "mshop_customer" (
 CONSTRAINT "pk_mscus_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_mscus_sid_code"
-	UNIQUE ("siteid", "code"),
-CONSTRAINT "fk_mscus_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mscus_langid"
-	FOREIGN KEY ("langid")
-	REFERENCES "mshop_locale_language" ("id")
-	ON UPDATE CASCADE
-	ON DELETE NO ACTION
+	UNIQUE ("siteid", "code")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
+
+CREATE INDEY "idx_mscus_langid" ON "mshop_customer" ("langid");
 
 CREATE INDEX "idx_mscus_sid_st_ln_fn" ON "mshop_customer" ("siteid", "status", "lastname", "firstname");
 
@@ -157,22 +149,14 @@ CREATE TABLE "mshop_customer_address" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mscusad_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "fk_mscusad_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_mscusad_refid"
 	FOREIGN KEY ("refid")
 	REFERENCES "mshop_customer" ("id")
 	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mscusad_langid"
-	FOREIGN KEY ("langid")
-	REFERENCES "mshop_locale_language" ("id")
-	ON UPDATE CASCADE
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
+
+CREATE INDEY "idx_mscusad_langid" ON "mshop_customer_address" ("langid");
 
 CREATE INDEX "idx_mscusad_sid_ln_fn" ON "mshop_customer_address" ("siteid", "lastname", "firstname");
 
@@ -219,12 +203,7 @@ CREATE TABLE "mshop_customer_list_type" (
 CONSTRAINT "pk_mscuslity_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_mscuslity_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_mscuslity_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_mscuslity_sid_status" ON "mshop_customer_list_type" ("siteid", "status");
@@ -274,11 +253,6 @@ CONSTRAINT "unq_mscusli_sid_dm_rid_tid_pid"
 CONSTRAINT "fk_mscusli_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_customer" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mscusli_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
 CONSTRAINT "fk_mscusli_typeid"

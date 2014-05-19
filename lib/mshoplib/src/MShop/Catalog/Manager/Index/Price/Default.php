@@ -112,6 +112,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
+		$this->_setResourceName( 'db-product' );
 
 		$this->_productManager = MShop_Product_Manager_Factory::createManager( $context );
 
@@ -192,9 +193,8 @@ class MShop_Catalog_Manager_Index_Price_Default
 			$submanager->deleteItems( $ids );
 		}
 
-		$dbname = $this->_getResourceName( 'db-index' );
 		$path = 'mshop/catalog/manager/index/price/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'prodid', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'prodid' );
 	}
 
 
@@ -259,8 +259,9 @@ class MShop_Catalog_Manager_Index_Price_Default
 	{
 		$context = $this->_getContext();
 		$config = $context->getConfig();
+
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -297,14 +298,14 @@ class MShop_Catalog_Manager_Index_Price_Default
 		$siteid = $context->getLocale()->getSiteId();
 
 
+		$this->begin();
+
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
-			$this->begin();
-
 			$stmt = $this->_getCachedStatement( $conn, 'mshop/catalog/manager/index/price/default/cleanup' );
 
 			$stmt->bind( 1, $timestamp ); // ctime
@@ -312,15 +313,16 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 			$stmt->execute()->finish();
 
-			$this->commit();
 			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$this->_rollback();
 			$dbm->release( $conn, $dbname );
+			$this->rollback();
 			throw $e;
 		}
+
+		$this->commit();
 
 		foreach ( $this->_submanagers as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
@@ -346,8 +348,8 @@ class MShop_Catalog_Manager_Index_Price_Default
 		$date = date( 'Y-m-d H:i:s' );
 
 
-		$dbname = $this->_getResourceName( 'db-index' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -433,8 +435,8 @@ class MShop_Catalog_Manager_Index_Price_Default
 		$items = $ids = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-index' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try

@@ -81,6 +81,7 @@ class MAdmin_Log_Manager_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
+		$this->_setResourceName( 'db-log' );
 
 		$config = $context->getConfig();
 
@@ -132,8 +133,8 @@ class MAdmin_Log_Manager_Default
 			$siteid = null;
 		}
 
-		$dbname = $this->_getResourceName( 'db-log' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -185,9 +186,8 @@ class MAdmin_Log_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-log' );
 		$path = 'madmin/log/manager/default/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -227,7 +227,7 @@ class MAdmin_Log_Manager_Default
 		$context = $this->_getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName( 'db-log' );
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -352,17 +352,5 @@ class MAdmin_Log_Manager_Default
 
 			$this->saveItem( $item );
 		}
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-log' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

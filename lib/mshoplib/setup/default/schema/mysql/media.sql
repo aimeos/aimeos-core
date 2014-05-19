@@ -36,12 +36,7 @@ CREATE TABLE "mshop_media_type" (
 CONSTRAINT "pk_msmedty_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msmedty_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_msmedty_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_msmedty_sid_status" ON "mshop_media_type" ("siteid", "status");
@@ -84,22 +79,14 @@ CREATE TABLE "mshop_media" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_msmed_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "fk_msmed_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_msmed_typeid"
 	FOREIGN KEY ("typeid")
 	REFERENCES "mshop_media_type" ("id")
 	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_msmed_langid"
-	FOREIGN KEY ("langid")
-	REFERENCES "mshop_locale_language" ("id")
-	ON UPDATE CASCADE
 	ON DELETE CASCADE
 ) ENGINE=InnoDB CHARACTER SET = utf8;
+
+CREATE INDEY "idx_msmed_langid" ON "mshop_media" ("langid");
 
 CREATE INDEX "idx_msmed_sid_status_langid" ON "mshop_media" ("siteid", "status", "langid");
 
@@ -144,12 +131,7 @@ CREATE TABLE "mshop_media_list_type" (
 CONSTRAINT "pk_msmedlity_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msmedlity_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_msmedlity_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_msmedlity_sid_status" ON "mshop_media_list_type" ("siteid", "status");
@@ -199,11 +181,6 @@ CONSTRAINT "unq_msmedli_sid_dm_rid_tid_pid"
 CONSTRAINT "fk_msmedli_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_media" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_msmedli_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
 CONSTRAINT "fk_msmedli_typeid"

@@ -53,8 +53,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$catalogIndex = new MShop_Catalog_Manager_Index_Default( TestHelper::getContext() );
-		$this->_object = $catalogIndex->getSubManager('price');
+		$this->_object = new MShop_Catalog_Manager_Index_Price_Default( TestHelper::getContext() );
 	}
 
 

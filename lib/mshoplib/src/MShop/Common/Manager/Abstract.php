@@ -17,9 +17,9 @@
 abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 {
 	private $_context;
+	private $_resourceName;
 	private $_stmts = array();
 	private $_keySeparator = '.';
-	private $_resourceName;
 
 
 	/**
@@ -34,56 +34,6 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
-	 * Counts the number products that are available for the values of the given key.
-	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
-	 * @param string $key Search key (usually the ID) to aggregate products for
-	 * @return array List of ID values as key and the number of counted products as value
-	 */
-	protected function _aggregate( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )
-	{
-		$list = array();
-		$context = $this->_getContext();
-		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		try
-		{
-			$reqkey = '';
-			$search = clone $search;
-			$attrList = $this->getSearchAttributes();
-
-			if( !isset( $attrList[$key] ) ) {
-				throw new MShop_Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
-			}
-
-			/** @todo Required to get the joins for the catalog index managers, but there should be a better way */
-			$expr = array( $search->getConditions(), $search->compare( '!=', $key, null ) );
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$total = null;
-
-			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $context->getConfig()->get( $cfgPath, $cfgPath ) );
-			$results = $this->_searchItems( $conn, $search, $sql, '', $required, $total, $level );
-
-			while( ( $row = $results->fetch() ) !== false ) {
-				$list[ $row['key'] ] = $row['count'];
-			}
-
-			$dbm->release( $conn );
-		}
-		catch( Exception $e )
-		{
-			$dbm->release( $conn );
-			throw $e;
-		}
-
-		return $list;
-	}
-
-
-	/**
 	 * Creates a search object.
 	 *
 	 * @param boolean $default Add default criteria; Optional
@@ -92,7 +42,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	public function createSearch( $default = false )
 	{
 		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		$object = new MW_Common_Criteria_SQL( $conn );
@@ -142,6 +92,58 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 * Counts the number products that are available for the values of the given key.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param string $key Search key (usually the ID) to aggregate products for
+	 * @return array List of ID values as key and the number of counted products as value
+	 */
+	protected function _aggregate( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )
+	{
+		$list = array();
+		$context = $this->_getContext();
+
+		$dbname = $this->_getResourceName();
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
+
+		try
+		{
+			$reqkey = '';
+			$search = clone $search;
+			$attrList = $this->getSearchAttributes();
+
+			if( !isset( $attrList[$key] ) ) {
+				throw new MShop_Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
+			}
+
+			/** @todo Required to get the joins for the catalog index managers, but there should be a better way */
+			$expr = array( $search->getConditions(), $search->compare( '!=', $key, null ) );
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$total = null;
+
+			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $context->getConfig()->get( $cfgPath, $cfgPath ) );
+			$results = $this->_searchItems( $conn, $search, $sql, '', $required, $total, $level );
+
+			while( ( $row = $results->fetch() ) !== false ) {
+				$list[ $row['key'] ] = $row['count'];
+			}
+
+			$dbm->release( $conn, $dbname );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn, $dbname );
+			throw $e;
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns the newly created ID for the last record which was inserted.
 	 *
 	 * @param MW_DB_Connection_Interface $conn Database connection used to insert the new record
@@ -172,7 +174,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	protected function _createSearch( $domain )
 	{
 		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_context->getConfig()->get( 'resource/default', 'db' );
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		$object = new MW_Common_Criteria_SQL( $conn );
@@ -621,25 +623,34 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
-	 * Returns the name of the requested resource or the name of the default resource.
+	 * Returns the name of the resource or of the default resource.
 	 *
-	 * @param string $name Name of the requested resource
 	 * @return string Name of the resource
 	 */
-	protected function _getResourceName( $name = 'db' )
+	protected function _getResourceName()
 	{
-		if( $this->_resourceName === null )
-		{
-			$config = $this->_context->getConfig();
-
-			if( $config->get( 'resource/' . $name ) === null ) {
-				$this->_resourceName = $config->get( 'resource/default', 'db' );
-			} else {
-				$this->_resourceName = $name;
-			}
+		if( $this->_resourceName === null ) {
+			$this->_resourceName = $this->_context->getConfig()->get( 'resource/default', 'db' );
 		}
 
 		return $this->_resourceName;
+	}
+
+
+	/**
+	 * Sets the name of the database resource that should be used.
+	 *
+	 * @param $name Name of the resource
+	 */
+	protected function _setResourceName( $name )
+	{
+		$config = $this->_context->getConfig();
+
+		if( $config->get( 'resource/' . $name ) === null ) {
+			$this->_resourceName = $config->get( 'resource/default', 'db' );
+		} else {
+			$this->_resourceName = $name;
+		}
 	}
 
 
@@ -801,13 +812,13 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 * @param string $sql SQL statement
 	 * @param boolean $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
-	 * @param string $rname Name of the resource that should be used
 	 */
-	protected function _deleteItems( array $ids, $sql, $siteidcheck = true, $name = 'id', $rname = 'db' )
+	protected function _deleteItems( array $ids, $sql, $siteidcheck = true, $name = 'id' )
 	{
 		if( empty( $ids ) ) { return; }
 
 		$context = $this->_getContext();
+		$dbname = $this->_getResourceName();
 
 		$search = $this->createSearch();
 		$search->setConditions( $search->compare( '==', $name, $ids ) );
@@ -820,7 +831,6 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 		try
 		{
-			$dbname = $this->_getResourceName( $rname );
 			$dbm = $context->getDatabaseManager();
 			$conn = $dbm->acquire( $dbname );
 

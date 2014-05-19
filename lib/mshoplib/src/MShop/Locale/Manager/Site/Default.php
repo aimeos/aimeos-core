@@ -115,6 +115,18 @@ class MShop_Locale_Manager_Site_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-locale' );
+	}
+
+
+	/**
 	 * Creates a new site object.
 	 *
 	 * @return MShop_Locale_Item_Site_Interface
@@ -149,8 +161,8 @@ class MShop_Locale_Manager_Site_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -188,9 +200,8 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-locale' );
 		$path = 'mshop/locale/manager/site/default/item/delete';
-		$this->_deleteItems($ids, $this->_getContext()->getConfig()->get( $path, $path ), false, 'id', $dbname );
+		$this->_deleteItems($ids, $this->_getContext()->getConfig()->get( $path, $path ), false );
 	}
 
 
@@ -261,8 +272,8 @@ class MShop_Locale_Manager_Site_Default
 		$items = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -420,8 +431,8 @@ class MShop_Locale_Manager_Site_Default
 	{
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -506,17 +517,5 @@ class MShop_Locale_Manager_Site_Default
 	protected function _getSearchConfig()
 	{
 		return $this->_searchConfig;
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-locale' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

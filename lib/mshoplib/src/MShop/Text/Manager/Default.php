@@ -102,6 +102,18 @@ class MShop_Text_Manager_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-text' );
+	}
+
+
+	/**
 	 * Creates new text item object.
 	 *
 	 * @return MShop_Text_Item_Interface New text item object
@@ -131,8 +143,8 @@ class MShop_Text_Manager_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-text' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -183,9 +195,8 @@ class MShop_Text_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-text' );
 		$path = 'mshop/text/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -243,8 +254,8 @@ class MShop_Text_Manager_Default
 		$map = $typeIds = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-text' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -345,17 +356,5 @@ class MShop_Text_Manager_Default
 	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
 		return new MShop_Text_Item_Default( $values, $listItems, $refItems );
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-text' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

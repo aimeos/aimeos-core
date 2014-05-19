@@ -36,12 +36,7 @@ CREATE TABLE "mshop_text_type" (
 CONSTRAINT "pk_mstexty_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_mstexty_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_mstexty_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_mstexty_sid_status" ON "mshop_text_type" ("siteid", "status");
@@ -80,22 +75,14 @@ CREATE TABLE "mshop_text" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mstex_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "fk_mstex_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_mstex_typeid"
 	FOREIGN KEY ("typeid")
 	REFERENCES "mshop_text_type" ("id")
 	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mstex_langid"
-	FOREIGN KEY ("langid")
-	REFERENCES "mshop_locale_language" ("id")
-	ON UPDATE CASCADE
 	ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE INDEY "idx_mstex_langid" ON "mshop_text" ("langid");
 
 CREATE INDEX "idx_mstex_sid_status_langid" ON "mshop_text" ("siteid", "status", "langid");
 
@@ -138,12 +125,7 @@ CREATE TABLE "mshop_text_list_type" (
 CONSTRAINT "pk_mstexlity_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_mstexlity_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_mstexlity_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_mstexlity_sid_status" ON "mshop_text_list_type" ("siteid", "status");
@@ -193,11 +175,6 @@ CONSTRAINT "unq_mstexli_sid_dm_rid_tid_pid"
 CONSTRAINT "fk_mstexli_pid"
 	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_text" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_mstexli_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
 CONSTRAINT "fk_mstexli_typeid"

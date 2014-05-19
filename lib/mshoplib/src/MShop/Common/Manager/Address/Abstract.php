@@ -100,8 +100,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName();
-		$this->_deleteItems( $ids, $this->_config['delete'], true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_config['delete'] );
 	}
 
 
@@ -136,8 +135,8 @@ abstract class MShop_Common_Manager_Address_Abstract
 			throw new MShop_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		$dbname = $this->_getResourceName();
 		$dbm = $this->_context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -211,8 +210,8 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbname = $this->_getResourceName();
 		$dbm = $this->_context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$items = array();
 

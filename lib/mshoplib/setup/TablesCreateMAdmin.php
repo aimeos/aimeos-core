@@ -44,8 +44,8 @@ class MW_Setup_Task_TablesCreateMAdmin extends MW_Setup_Task_Abstract
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
-			dirname(realpath(__FILE__)) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'log.sql',
-			dirname(realpath(__FILE__)) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'job.sql',
+			'db-log' => realpath(__DIR__) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'log.sql',
+			'db-job' => realpath(__DIR__) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'job.sql',
 		);
 
 		$this->_setup($files);
@@ -57,36 +57,38 @@ class MW_Setup_Task_TablesCreateMAdmin extends MW_Setup_Task_Abstract
 	 */
 	protected function _setup( array $files )
 	{
-		foreach ( $files as $filepath )
+		foreach( $files as $rname => $filepath )
 		{
-			$this->_msg('Using tables from ' . basename($filepath), 1); $this->_status('');
+			$this->_msg( 'Using tables from ' . basename( $filepath ), 1 ); $this->_status('');
 
-			if ( ( $content = file_get_contents($filepath) ) === false ) {
-				throw new MW_Setup_Exception(sprintf('Unable to get content from file "%1$s"', $filepath));
+			if ( ( $content = file_get_contents( $filepath ) ) === false ) {
+				throw new MW_Setup_Exception( sprintf( 'Unable to get content from file "%1$s"', $filepath ) );
 			}
 
-			foreach ( $this->_getTableDefinitions($content) as $name => $sql )
-			{
-				$this->_msg(sprintf('Checking table "%1$s": ', $name), 2);
+			$schema = $this->_getSchema( $rname );
 
-				if ( $this->_schema->tableExists($name) !== true ) {
-					$this->_execute($sql);
-					$this->_status('created');
+			foreach( $this->_getTableDefinitions( $content ) as $name => $sql )
+			{
+				$this->_msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
+
+				if( $schema->tableExists( $name ) !== true ) {
+					$this->_execute( $sql, $rname );
+					$this->_status( 'created' );
 				} else {
-					$this->_status('OK');
+					$this->_status( 'OK' );
 				}
 			}
 
-			foreach ( $this->_getIndexDefinitions($content) as $name => $sql )
+			foreach( $this->_getIndexDefinitions( $content ) as $name => $sql )
 			{
-				$parts = explode('.', $name);
-				$this->_msg(sprintf('Checking index "%1$s": ', $name), 2);
+				$parts = explode( '.', $name );
+				$this->_msg( sprintf( 'Checking index "%1$s": ', $name ), 2 );
 
-				if ( $this->_schema->indexExists($parts[0], $parts[1]) !== true ) {
-					$this->_execute($sql);
-					$this->_status('created');
+				if ( $schema->indexExists( $parts[0], $parts[1] ) !== true ) {
+					$this->_execute( $sql, $rname );
+					$this->_status( 'created' );
 				} else {
-					$this->_status('OK');
+					$this->_status( 'OK' );
 				}
 			}
 		}

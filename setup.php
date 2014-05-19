@@ -112,10 +112,6 @@ try
 	$conf = new MW_Config_Decorator_Memory( $conf );
 	$ctx->setConfig( $conf );
 
-	if( ( $dbconfig = $conf->get( 'resource/db' ) ) === null ) {
-		throw new Exception( 'Configuration for database adapter missing' );
-	}
-	$conf->set( 'resource/db/limit', 2 );
 	$conf->set( 'setup/site', $site );
 
 	if( isset( $options['option'] ) )
@@ -134,6 +130,17 @@ try
 		}
 	}
 
+	$dbconfig = $conf->get( 'resource', array() );
+
+	foreach( $dbconfig as $rname => $dbconf )
+	{
+		if( strncmp( $rname, 'db', 2 ) !== 0 ) {
+			unset( $dbconfig[$rname] );
+		} else {
+			$conf->set( "resource/$rname/limit", 2 );
+		}
+	}
+
 	$dbm = new MW_DB_Manager_PDO( $conf );
 	$ctx->setDatabaseManager( $dbm );
 
@@ -143,8 +150,8 @@ try
 	$session = new MW_Session_None();
 	$ctx->setSession( $session );
 
-	$manager = new MW_Setup_Manager_Default( $dbm->acquire(), $dbconfig, $taskPaths, $ctx );
-	$manager->run( $dbconfig['adapter'] );
+	$manager = new MW_Setup_Manager_Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
+	$manager->run( 'mysql' );
 }
 catch( Exception $e )
 {

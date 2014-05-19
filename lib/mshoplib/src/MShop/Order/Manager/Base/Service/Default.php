@@ -132,6 +132,18 @@ class MShop_Order_Manager_Base_Service_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-order' );
+	}
+
+
+	/**
 	 * Creates new order service item object.
 	 *
 	 * @return MShop_Order_Item_Base_Service_Interface New object
@@ -163,8 +175,8 @@ class MShop_Order_Manager_Base_Service_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-order' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -225,9 +237,8 @@ class MShop_Order_Manager_Base_Service_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-order' );
 		$path = 'mshop/order/manager/base/service/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -261,8 +272,8 @@ class MShop_Order_Manager_Base_Service_Default
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 
-		$dbname = $this->_getResourceName( 'db-order' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -389,17 +400,5 @@ class MShop_Order_Manager_Base_Service_Default
 		}
 
 		return $result;
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-order' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

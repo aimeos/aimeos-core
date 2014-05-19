@@ -30,6 +30,7 @@ class MShop_Catalog_Manager_Index_Default
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
+		$this->_setResourceName( 'db-product' );
 
 		$this->_productManager = MShop_Product_Manager_Factory::createManager( $context );
 
@@ -147,8 +148,9 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		$context = $this->_getContext();
 		$config = $context->getConfig();
+
 		$dbm = $context->getDatabaseManager();
-		$dbname = $config->get( 'resource/default', 'db' );
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -297,8 +299,9 @@ class MShop_Catalog_Manager_Index_Default
 	{
 		$items = $ids = array();
 		$context = $this->_getContext();
+
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -334,18 +337,6 @@ class MShop_Catalog_Manager_Index_Default
 		}
 
 		return $items;
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-index' )
-	{
-		return parent::_getResourceName( $name );
 	}
 
 

@@ -117,8 +117,8 @@ abstract class MShop_Common_Manager_Type_Abstract
 
 		if( $item->isModified() === false ) { return; }
 
-		$dbname = $this->_getResourceName();
 		$dbm = $this->_context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -175,8 +175,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName();
-		$this->_deleteItems( $ids, $this->_config['delete'], true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_config['delete'] );
 	}
 
 
@@ -216,8 +215,8 @@ abstract class MShop_Common_Manager_Type_Abstract
 	{
 		$items = array();
 
-		$dbname = $this->_getResourceName();
 		$dbm = $this->_context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try

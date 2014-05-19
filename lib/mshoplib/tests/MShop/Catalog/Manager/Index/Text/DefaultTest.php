@@ -59,8 +59,8 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$this->_editor = TestHelper::getContext()->getEditor();
-		$catalogIndex = new MShop_Catalog_Manager_Index_Default( TestHelper::getContext() );
-		$this->_object = $catalogIndex->getSubManager('text');
+
+		$this->_object = new MShop_Catalog_Manager_Index_Text_Default( TestHelper::getContext() );
 	}
 
 

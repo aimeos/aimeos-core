@@ -82,6 +82,18 @@ class MShop_Locale_Manager_Currency_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-locale' );
+	}
+
+
+	/**
 	 * Creates new currency object.
 	 *
 	 * @return MShop_Locale_Item_Currency_Interface
@@ -119,8 +131,8 @@ class MShop_Locale_Manager_Currency_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -166,9 +178,8 @@ class MShop_Locale_Manager_Currency_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-locale' );
 		$path = 'mshop/locale/manager/currency/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -227,8 +238,8 @@ class MShop_Locale_Manager_Currency_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 
-		$dbname = $this->_getResourceName( 'db-locale' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		$items = array( );
@@ -347,17 +358,4 @@ class MShop_Locale_Manager_Currency_Default
 	{
 		return new MShop_Locale_Item_Currency_Default($data);
 	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-locale' )
-	{
-		return parent::_getResourceName( $name );
-	}
-
 }

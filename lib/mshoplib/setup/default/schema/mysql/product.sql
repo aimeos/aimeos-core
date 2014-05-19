@@ -35,12 +35,7 @@ CREATE TABLE "mshop_product_type" (
 CONSTRAINT "pk_msproty_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msproty_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_msproty_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_msproty_sid_status" ON "mshop_product_type" ("siteid", "status");
@@ -83,11 +78,6 @@ CONSTRAINT "pk_mspro_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_mspro_siteid_code"
 	UNIQUE ("siteid", "code"),
-CONSTRAINT "fk_mspro_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_mspro_typeid"
 	FOREIGN KEY ("typeid")
 	REFERENCES "mshop_product_type" ("id")
@@ -140,12 +130,7 @@ CREATE TABLE "mshop_product_list_type" (
 CONSTRAINT "pk_msprolity_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msprolity_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_msprolity_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_msprolity_sid_status" ON "mshop_product_list_type" ("siteid", "status");
@@ -197,11 +182,6 @@ CONSTRAINT "fk_msproli_pid"
 	REFERENCES "mshop_product" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
-CONSTRAINT "fk_msproli_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_msproli_typeid"
 	FOREIGN KEY ( "typeid" )
 	REFERENCES "mshop_product_list_type" ("id")
@@ -246,12 +226,7 @@ CREATE TABLE "mshop_product_tag_type" (
 CONSTRAINT "pk_msprotaty_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msprotaty_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_msprotaty_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_msprotaty_sid_status" ON "mshop_product_tag_type" ("siteid", "status");
@@ -286,11 +261,6 @@ CONSTRAINT "pk_msprota_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msprota_sid_tid_lid_label"
 	UNIQUE ("siteid", "typeid", "langid", "label"),
-CONSTRAINT "fk_msprota_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_msprota_typeid"
 	FOREIGN KEY ("typeid")
 	REFERENCES "mshop_product_tag_type" ("id")
@@ -327,12 +297,7 @@ CREATE TABLE "mshop_product_stock_warehouse" (
 CONSTRAINT "pk_msprostwa_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msprostwa_sid_code"
-	UNIQUE ("siteid", "code"),
-CONSTRAINT "fk_msprostwa_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_msprostwa_sid_label" ON "mshop_product_stock_warehouse" ("siteid", "label");
@@ -375,11 +340,6 @@ CONSTRAINT "unq_msprost_sid_pid_wid"
 CONSTRAINT "fk_msprost_prodid"
 	FOREIGN KEY ("prodid")
 	REFERENCES "mshop_product" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_msprost_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
 CONSTRAINT "fk_msprost_stock_warehouseid"

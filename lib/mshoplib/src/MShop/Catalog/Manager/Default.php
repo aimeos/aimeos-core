@@ -121,6 +121,18 @@ class MShop_Catalog_Manager_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-catalog' );
+	}
+
+
+	/**
 	 * Creates new item object.
 	 *
 	 * @return MShop_Common_Item_Interface New item object
@@ -326,7 +338,7 @@ class MShop_Catalog_Manager_Default
 		$nodeMap = $siteMap = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-catalog' );
+		$dbname = $this->_getResourceName();
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
 
@@ -587,7 +599,7 @@ class MShop_Catalog_Manager_Default
 			$dbm = $context->getDatabaseManager();
 
 			$treeConfig['search'] = $this->_searchConfig;
-			$treeConfig['dbname'] = $this->_getResourceName( 'db-catalog' );
+			$treeConfig['dbname'] = $this->_getResourceName();
 			$treeConfig['sql'] = array(
 				'delete' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/delete' ) ),
 				'get' => str_replace( ':siteid', $siteid, $config->get( 'mshop/catalog/manager/default/item/get' ) ),
@@ -646,18 +658,6 @@ class MShop_Catalog_Manager_Default
 		}
 
 		return $map;
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-catalog' )
-	{
-		return parent::_getResourceName( $name );
 	}
 
 
