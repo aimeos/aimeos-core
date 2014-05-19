@@ -351,17 +351,4 @@ class MShop_Attribute_Manager_Default
 	{
 		return new MShop_Attribute_Item_Default( $values, $listItems, $refItems );
 	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-attribute' )
-	{
-		return parent::_getResourceName( $name );
-	}
-
 }
