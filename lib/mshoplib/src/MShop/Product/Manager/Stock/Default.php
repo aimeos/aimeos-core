@@ -91,6 +91,18 @@ class MShop_Product_Manager_Stock_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-product' );
+	}
+
+
+	/**
 	 * Creates new stock item object.
 	 *
 	 * @return MShop_Product_Item_Stock_Interface New product stock item object
@@ -119,8 +131,8 @@ class MShop_Product_Manager_Stock_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-product' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -174,9 +186,8 @@ class MShop_Product_Manager_Stock_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-product' );
 		$path = 'mshop/product/manager/stock/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -237,8 +248,8 @@ class MShop_Product_Manager_Stock_Default
 		$items = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-product' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -335,7 +346,8 @@ class MShop_Product_Manager_Stock_Default
 		$conditions = $search->getConditionString( $types, $translations );
 
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $this->_getResourceName();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -348,11 +360,11 @@ class MShop_Product_Manager_Stock_Default
 
 			$result = $stmt->execute()->finish();
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -368,17 +380,5 @@ class MShop_Product_Manager_Stock_Default
 	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Product_Item_Stock_Default( $values );
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-product' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

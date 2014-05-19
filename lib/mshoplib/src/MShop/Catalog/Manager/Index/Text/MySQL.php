@@ -22,7 +22,7 @@ class MShop_Catalog_Manager_Index_Text_MySQL
 		'catalog.index.text.id' => array(
 			'code'=>'catalog.index.text.id',
 			'internalcode'=>'mcatinte."textid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_text" AS mcatinte USE INDEX ("idx_mscatinte_value", "idx_mscatinte_p_s_lt_la_ty_va", "fk_mscatinte_textid") ON mcatinte."prodid" = mpro."id"' ),
+			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_text" AS mcatinte USE INDEX ("idx_mscatinte_value", "idx_mscatinte_p_s_lt_la_ty_va") ON mcatinte."prodid" = mpro."id"' ),
 			'label'=>'Product index text ID',
 			'type'=> 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,

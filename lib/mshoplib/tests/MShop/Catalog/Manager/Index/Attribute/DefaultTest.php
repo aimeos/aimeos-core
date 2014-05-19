@@ -34,8 +34,7 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 	 */
 	protected function setUp()
 	{
-		$catalogIndex = new MShop_Catalog_Manager_Index_Default( TestHelper::getContext() );
-		$this->_object = $catalogIndex->getSubManager('attribute');
+		$this->_object = new MShop_Catalog_Manager_Index_Attribute_Default( TestHelper::getContext() );
 	}
 
 

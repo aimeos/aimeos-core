@@ -220,6 +220,7 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
+		$this->_setResourceName( 'db-customer' );
 
 		$this->_salt = $context->getConfig()->get( 'mshop/customer/manager/default/salt/', 'mshop' );
 	}
@@ -290,9 +291,8 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-customer' );
 		$path = 'mshop/customer/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -313,8 +313,8 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-customer' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -395,8 +395,8 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 		$map = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-customer' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -483,17 +483,5 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 		}
 
 		return $items;
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-customer' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

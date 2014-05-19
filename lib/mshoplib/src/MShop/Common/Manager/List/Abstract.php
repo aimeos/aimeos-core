@@ -93,8 +93,8 @@ abstract class MShop_Common_Manager_List_Abstract
 
 		$context = $this->_getContext();
 
+		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();
-		$dbm = $this->_getContext()->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -160,9 +160,8 @@ abstract class MShop_Common_Manager_List_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName();
 		$path = $this->_configPath . 'delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -207,24 +206,24 @@ abstract class MShop_Common_Manager_List_Abstract
 		$config = $context->getConfig();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$dbname = $this->_getResourceName();
+		$listItem = $this->getItem( $id );
+
+		$newpos = 0;
+		$oldpos = $listItem->getPosition();
+		$parentid = $listItem->getParentId();
+		$typeid = $listItem->getTypeId();
+		$domain = $listItem->getDomain();
+
+		if( !is_null( $ref ) ) {
+			$refListItem = $this->getItem( $ref );
+		}
+
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
-			$listItem = $this->getItem( $id );
-
-			$newpos = 0;
-			$oldpos = $listItem->getPosition();
-			$parentid = $listItem->getParentId();
-			$typeid = $listItem->getTypeId();
-			$domain = $listItem->getDomain();
-
-			if( !is_null( $ref ) ) {
-				$refListItem = $this->getItem( $ref );
-			}
-
 			if( !is_null( $ref ) )
 			{
 				$newpos = $refListItem->getPosition();
@@ -337,8 +336,8 @@ abstract class MShop_Common_Manager_List_Abstract
 	{
 		$items = $map = $typeIds = array();
 
-		$dbname = $this->_getResourceName();
 		$dbm = $this->_getContext()->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -416,8 +415,8 @@ abstract class MShop_Common_Manager_List_Abstract
 		$items = $map = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName();
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try

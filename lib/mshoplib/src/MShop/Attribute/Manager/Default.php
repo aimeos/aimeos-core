@@ -101,6 +101,18 @@ class MShop_Attribute_Manager_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-attribute' );
+	}
+
+
+	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
@@ -172,8 +184,8 @@ class MShop_Attribute_Manager_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-attribute' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -229,9 +241,8 @@ class MShop_Attribute_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-attribute' );
 		$path = 'mshop/attribute/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -252,8 +263,8 @@ class MShop_Attribute_Manager_Default
 		$map = $typeIds = array();
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-attribute' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try

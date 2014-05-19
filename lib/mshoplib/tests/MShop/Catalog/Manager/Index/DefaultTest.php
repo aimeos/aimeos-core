@@ -751,7 +751,15 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	protected function _getValue( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
 	{
 		$value = null;
-		$conn = $dbm->acquire();
+		$config = $this->_context->getConfig();
+
+		if( $config->get( 'resource/db-product' ) === null ) {
+			$dbname = $config->get( 'resource/default', 'db' );
+		} else {
+			$dbname = 'db-product';
+		}
+
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -770,11 +778,11 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 			$value = $row[$column];
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 

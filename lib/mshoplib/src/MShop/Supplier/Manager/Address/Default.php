@@ -202,6 +202,18 @@ class MShop_Supplier_Manager_Address_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-supplier' );
+	}
+
+
+	/**
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
@@ -257,17 +269,5 @@ class MShop_Supplier_Manager_Address_Default
 	protected function _getSearchConfig()
 	{
 		return $this->_searchConfig;
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-supplier' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

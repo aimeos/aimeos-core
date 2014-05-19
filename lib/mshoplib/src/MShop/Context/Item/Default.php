@@ -53,7 +53,6 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	{
 		$this->_cache = ( isset( $this->_cache ) ? clone $this->_cache : null );
 		$this->_config = ( isset( $this->_config ) ? clone $this->_config : null );
-		$this->_dbm = ( isset( $this->_dbm ) ? clone $this->_dbm : null );
 		$this->_locale = ( isset( $this->_locale ) ? clone $this->_locale : null );
 		$this->_logger = ( isset( $this->_logger ) ? clone $this->_logger : null );
 		$this->_session = ( isset( $this->_session ) ? clone $this->_session : null );

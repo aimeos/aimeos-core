@@ -93,6 +93,18 @@ class MAdmin_Job_Manager_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-job' );
+	}
+
+
+	/**
 	 * Create new job item object.
 	 *
 	 * @return MAdmin_Job_Item_Interface
@@ -139,8 +151,8 @@ class MAdmin_Job_Manager_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-job' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -196,9 +208,8 @@ class MAdmin_Job_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-job' );
 		$path = 'madmin/job/manager/default/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path, true, 'id', $dbname ) );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -234,13 +245,13 @@ class MAdmin_Job_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
+		$items = array();
 		$context = $this->_getContext();
 		$logger = $context->getLogger();
 
-		$dbname = $this->_getResourceName( 'db-job' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
-		$items = array();
 
 		try
 		{
@@ -351,17 +362,5 @@ class MAdmin_Job_Manager_Default
 		$context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
 
 		return $statement->execute();
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-job' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

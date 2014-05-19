@@ -101,6 +101,18 @@ class MShop_Coupon_Manager_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-coupon' );
+	}
+
+
+	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
@@ -168,8 +180,8 @@ class MShop_Coupon_Manager_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-coupon' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -226,9 +238,8 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-coupon' );
 		$path = 'mshop/coupon/manager/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -246,8 +257,8 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbname = $this->_getResourceName( 'db-coupon' );
 		$dbm = $this->_getContext()->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$items = array();
 
@@ -359,19 +370,13 @@ class MShop_Coupon_Manager_Default
 	 */
 	public function createSearch( $default = false )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		$object = new MW_Common_Criteria_SQL( $conn );
-
-		$dbm->release( $conn );
-
 		if( $default === true )
 		{
+			$object = $this->_createSearch( 'coupon' );
 			$curDate = date( 'Y-m-d H:i:00', time() );
 
 			$expr = array();
-			$expr[] = $object->compare( '>', 'coupon.status', 0);
+			$expr[] = $object->getConditions();
 
 			$temp = array();
 			$temp[] = $object->compare( '==', 'coupon.datestart', null );
@@ -384,9 +389,11 @@ class MShop_Coupon_Manager_Default
 			$expr[] = $object->combine( '||', $temp );
 
 			$object->setConditions( $object->combine( '&&', $expr ) );
+
+			return $object;
 		}
 
-		return $object;
+		return parent::createSearch();
 	}
 
 
@@ -399,17 +406,5 @@ class MShop_Coupon_Manager_Default
 	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Coupon_Item_Default( $values );
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-coupon' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

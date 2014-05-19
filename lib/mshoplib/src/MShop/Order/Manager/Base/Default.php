@@ -122,6 +122,18 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-order' );
+	}
+
+
+	/**
 	 * Returns a new and empty order base item (shopping basket).
 	 *
 	 * @return MShop_Order_Item_Base_Interface Order base object
@@ -148,9 +160,8 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-order' );
 		$path = 'mshop/order/manager/base/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -226,8 +237,8 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-order' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -301,8 +312,8 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
 		$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
 
-		$dbname = $this->_getResourceName( 'db-order' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -450,7 +461,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$dbname = $context->getConfig()->get( 'resource/default', 'db' );
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -886,17 +897,5 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		}
 
 		return $basket;
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-order' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

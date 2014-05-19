@@ -18,8 +18,6 @@ class MShop_Order_Manager_Base_Coupon_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Order_Manager_Base_Coupon_Interface
 {
-	private $_dbname = 'db';
-
 	private $_searchConfig = array(
 		'order.base.coupon.id'=> array(
 			'code'=>'order.base.coupon.id',
@@ -85,6 +83,18 @@ class MShop_Order_Manager_Base_Coupon_Default
 
 
 	/**
+	 * Initializes the object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-order' );
+	}
+
+
+	/**
 	 * Creates a new order base coupon object.
 	 *
 	 * @return MShop_Order_Item_Base_Coupon_Interface New order coupon object
@@ -127,8 +137,8 @@ class MShop_Order_Manager_Base_Coupon_Default
 
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-order' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -182,9 +192,8 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		$dbname = $this->_getResourceName( 'db-order' );
 		$path = 'mshop/order/manager/base/coupon/default/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), true, 'id', $dbname );
+		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
@@ -227,8 +236,8 @@ class MShop_Order_Manager_Base_Coupon_Default
 		$context = $this->_getContext();
 		$logger = $context->getLogger();
 
-		$dbname = $this->_getResourceName( 'db-order' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		$items = array();
@@ -288,17 +297,5 @@ class MShop_Order_Manager_Base_Coupon_Default
 	protected function _createItem(array $values = array())
 	{
 		return new MShop_Order_Item_Base_Coupon_Default($values);
-	}
-
-
-	/**
-	 * Returns the name of the requested resource or the name of the default resource.
-	 *
-	 * @param string $name Name of the requested resource
-	 * @return string Name of the resource
-	 */
-	protected function _getResourceName( $name = 'db-order' )
-	{
-		return parent::_getResourceName( $name );
 	}
 }

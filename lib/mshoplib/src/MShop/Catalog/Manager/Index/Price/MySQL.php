@@ -22,7 +22,7 @@ class MShop_Catalog_Manager_Index_Price_MySQL
 		'catalog.index.price.id' => array(
 			'code'=>'catalog.index.price.id',
 			'internalcode'=>'mcatinpr."priceid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_price" AS mcatinpr USE INDEX ("idx_mscatinpr_s_lt_cu_ty_va", "idx_mscatinpr_p_s_lt_cu_ty_va", "fk_mscatinpr_priceid") ON mcatinpr."prodid" = mpro."id"' ),
+			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_price" AS mcatinpr USE INDEX ("idx_mscatinpr_s_lt_cu_ty_va", "idx_mscatinpr_p_s_lt_cu_ty_va") ON mcatinpr."prodid" = mpro."id"' ),
 			'label'=>'Product index price ID',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
