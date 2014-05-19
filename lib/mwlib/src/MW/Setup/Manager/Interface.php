@@ -17,16 +17,6 @@
 interface MW_Setup_Manager_Interface
 {
 	/**
-	 * Initializes the setup manager.
-	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection
-	 * @param array $dbconfig Associative list with "adapter", "host", "database", "username" and "password" keys
-	 * @param array|string $taskpath Filesystem paths to the directory which contains the task classes
-	 * @param mixed $additional Additionally provided information for the setup tasks if required
-	 */
-	public function __construct( MW_DB_Connection_Interface $conn, array $dbconfig, $taskpath, $additional = null );
-
-	/**
 	 * Executes all tasks for the given database type.
 	 *
 	 * @param string $dbtype Name of the database type (mysql, etc.)

@@ -16,9 +16,15 @@
  */
 abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 {
-	protected $_schema;
-	protected $_conn;
+	private $_connections = array();
+	private $_schemas = array();
 	protected $_additional;
+
+	/** @deprecated Use getSchema() instead */
+	protected $_schema;
+
+	/** @deprecated Use getConnection() instead */
+	protected $_conn;
 
 
 	/**
@@ -53,6 +59,28 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 
 
 	/**
+	 * Sets the associative list of connections with the resource name as key.
+	 *
+	 * @param array $conns Associative list of connections
+	 */
+	public function setConnections( array $conns )
+	{
+		$this->_connections = $conns;
+	}
+
+
+	/**
+	 * Sets the associative list of schemas with the resource name as key.
+	 *
+	 * @param array $conns Associative list of schemas
+	 */
+	public function setSchemas( array $schemas )
+	{
+		$this->_schemas = $schemas;
+	}
+
+
+	/**
 	 * Executes the task for MySQL databases.
 	 */
 	protected abstract function _mysql();
@@ -62,10 +90,11 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * Executes a given SQL statement.
 	 *
 	 * @param string $sql SQL statement to execute
+	 * @param string $name Name from the resource configuration
 	 */
-	protected function _execute( $sql )
+	protected function _execute( $sql, $name = 'db' )
 	{
-		$this->_conn->create( $sql )->execute()->finish();
+		$this->_getConnection( $name )->create( $sql )->execute()->finish();
 	}
 
 
@@ -73,11 +102,14 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * Executes a list of given SQL statements.
 	 *
 	 * @param array $list List of SQL statement to execute
+	 * @param string $name Name from the resource configuration
 	 */
-	protected function _executeList( array $list )
+	protected function _executeList( array $list, $name = 'db' )
 	{
+		$conn = $this->_getConnection( $name );
+
 		foreach( $list as $sql ) {
-			$this->_conn->create( $sql )->execute()->finish();
+			$conn->create( $sql )->execute()->finish();
 		}
 	}
 
@@ -86,10 +118,11 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * Executes a given SQL statement and returns the value of the named column and first row.
 	 *
 	 * @param string $sql SQL statement to execute
+	 * @param string $name Name from the resource configuration
 	 */
-	protected function _getValue( $sql, $column )
+	protected function _getValue( $sql, $column, $name = 'db' )
 	{
-		$result = $this->_conn->create( $sql )->execute();
+		$result = $this->_getConnection( $name )->create( $sql )->execute();
 
 		if( ( $row = $result->fetch() ) === false ) {
 			throw new MW_Setup_Exception( sprintf( 'No rows found: %1$s', $sql ) );
@@ -102,6 +135,38 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 		$result->finish();
 
 		return $row[$column];
+	}
+
+
+	/**
+	 * Returns the connection specified by the given resource name.
+	 *
+	 * @param string $name Name from resource configuration
+	 * @return MW_DB_Connection_Interface
+	 */
+	protected function _getConnection( $name )
+	{
+		if( !isset( $this->_connections[$name] ) ) {
+			return $this->_conn;
+		}
+
+		return $this->_connections[$name];
+	}
+
+
+	/**
+	 * Returns the schemas specified by the given resource name.
+	 *
+	 * @param string $name Name from resource configuration
+	 * @return MW_Setup_DBSchema_Interface
+	 */
+	protected function _getSchema( $name )
+	{
+		if( !isset( $this->_schemas[$name] ) ) {
+			return $this->_schema;
+		}
+
+		return $this->_schemas[$name];
 	}
 
 
