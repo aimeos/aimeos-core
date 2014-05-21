@@ -115,6 +115,8 @@ class Client_Html_Checkout_Standard_Summary_Default
 			return '';
 		}
 
+		$view = $this->_setViewParams( $view );
+
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody();
@@ -160,6 +162,8 @@ class Client_Html_Checkout_Standard_Summary_Default
 		if( $view->get( 'standardStepActive' ) != 'summary' ) {
 			return '';
 		}
+
+		$view = $this->_setViewParams( $view );
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {

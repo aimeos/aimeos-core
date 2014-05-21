@@ -403,33 +403,33 @@ class Client_Html_Checkout_Standard_Default
 			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 			$view->standardSteps = $steps;
 
-			if( !isset( $view->standardStepActive ) )
-			{
-				/** client/html/checkout/standard/url/step-active
-				 * Name of the checkout process step to jump to if no previous step requires attention
-				 *
-				 * The checkout process consists of several steps which are usually
-				 * displayed one by another to the customer. If the data of a step
-				 * is already available, then that step is skipped. The active step
-				 * is the one that is displayed if all other steps are skipped.
-				 *
-				 * If one of the previous steps misses some data the customer has
-				 * to enter, then this step is displayed first. After providing
-				 * the missing data, the whole series of steps are tested again
-				 * and if no other step requests attention, the configured active
-				 * step will be displayed.
-				 *
-				 * The order of the steps is determined by the order of sub-parts
-				 * that are configured for the checkout client.
-				 *
-				 * @param string Name of the confirm standard HTML client
-				 * @since 2014.07
-				 * @category Developer
-				 * @category User
-				 * @see client/html/checkout/standard/default/subparts
-				 */
-				$default = $view->config( 'client/html/checkout/standard/url/step-active', 'summary' );
-				$default = ( !in_array( $default, $steps ) ? reset( $steps ) : $default );
+			/** client/html/checkout/standard/url/step-active
+			 * Name of the checkout process step to jump to if no previous step requires attention
+			 *
+			 * The checkout process consists of several steps which are usually
+			 * displayed one by another to the customer. If the data of a step
+			 * is already available, then that step is skipped. The active step
+			 * is the one that is displayed if all other steps are skipped.
+			 *
+			 * If one of the previous steps misses some data the customer has
+			 * to enter, then this step is displayed first. After providing
+			 * the missing data, the whole series of steps are tested again
+			 * and if no other step requests attention, the configured active
+			 * step will be displayed.
+			 *
+			 * The order of the steps is determined by the order of sub-parts
+			 * that are configured for the checkout client.
+			 *
+			 * @param string Name of the confirm standard HTML client
+			 * @since 2014.07
+			 * @category Developer
+			 * @category User
+			 * @see client/html/checkout/standard/default/subparts
+			 */
+			$default = $view->config( 'client/html/checkout/standard/url/step-active', 'summary' );
+			$default = ( !in_array( $default, $steps ) ? reset( $steps ) : $default );
+
+			if( !isset( $view->standardStepActive ) ) {
 				$view->standardStepActive = $view->param( 'c-step', $default );
 			}
 			$activeStep = $view->standardStepActive;
@@ -448,8 +448,9 @@ class Client_Html_Checkout_Standard_Default
 				$view->standardUrlBack = $view->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig );
 			}
 
-			if( array_shift( $steps ) !== null ) {
-				$view->standardUrlNext = $view->url( $checkoutTarget, $checkoutController, $checkoutAction, array(), array(), $checkoutConfig );
+			if( ( $nextStep = array_shift( $steps ) ) !== null ) {
+				$param = ( $activeStep === $default ? array( 'c-step' => $nextStep ) : array() );
+				$view->standardUrlNext = $view->url( $checkoutTarget, $checkoutController, $checkoutAction, $param, array(), $checkoutConfig );
 			} else {
 				$view->standardUrlNext = '';
 			}
