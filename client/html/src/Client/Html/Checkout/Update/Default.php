@@ -198,10 +198,12 @@ class Client_Html_Checkout_Update_Default
 	public function process()
 	{
 		$view = $this->getView();
+		$context = $this->_getContext();
 
 		try
 		{
-			$serviceManager = MShop_Factory::createManager( $this->_getContext(), 'service' );
+			$orderCntl = Controller_Frontend_Order_Factory::createController( $context );
+			$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
 			$search = $serviceManager->createSearch();
 			$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
@@ -212,7 +214,12 @@ class Client_Html_Checkout_Update_Default
 
 				foreach( $serviceItems as $serviceItem )
 				{
-					if( $serviceManager->getProvider( $serviceItem )->updateSync( $view->param() ) !== null ) {
+					$provider = $serviceManager->getProvider( $serviceItem );
+
+					if( ( $orderItem = $provider->updateSync( $view->param() ) ) !== null )
+					{
+						// Update stock, coupons, etc.
+						$orderCntl->update( $orderItem );
 						break 2;
 					}
 				}
@@ -233,7 +240,7 @@ class Client_Html_Checkout_Update_Default
 			$view->updateError = $e->getMessage();
 
 			$msg = "Updating order status failed: %1\$s\n%2\$s";
-			$this->_getContext()->getLogger()->log( sprintf( $msg, $e->getMessage(), print_r( $view->param(), true ) ) );
+			$context->getLogger()->log( sprintf( $msg, $e->getMessage(), print_r( $view->param(), true ) ) );
 		}
 	}
 }

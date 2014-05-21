@@ -230,6 +230,7 @@ class Client_Html_Checkout_Standard_Order_Default
 
 			$cntl = Controller_Frontend_Order_Factory::createController( $context );
 			$orderItem = $cntl->store( $basket );
+			$cntl->block( $orderItem );
 
 			$context->getSession()->set( 'arcavias/orderid', $orderItem->getId() );
 
