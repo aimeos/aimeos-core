@@ -202,7 +202,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 5, 'dateback' => null )
+			array( 'stocklevel' => 5, 'warehouse' => 'default', 'dateback' => null )
 		),
 	),
 
@@ -273,7 +273,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 3, 'dateback' => null ),
+			array( 'stocklevel' => 3, 'warehouse' => 'default', 'dateback' => null ),
 		),
 	),
 	array(
@@ -342,7 +342,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 0, 'dateback' => '2015-01-01 12:00:00' ),
+			array( 'stocklevel' => 0, 'warehouse' => 'default', 'dateback' => '2015-01-01 12:00:00' ),
 		),
 	),
 	array(

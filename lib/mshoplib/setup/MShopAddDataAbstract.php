@@ -377,6 +377,13 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 */
 	protected function _addProductStock( $productid, array $data )
 	{
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock/warehouse' );
+
+		$warehouses = array();
+		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
+			$warehouses[ $item->getCode() ] = $id;
+		}
+
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
 
 		$item = $manager->createItem();
@@ -387,6 +394,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$item->setId( null );
 			$item->setDateBack( $entry['dateback'] );
 			$item->setStockLevel( $entry['stocklevel'] );
+			$item->setWarehouseId( $warehouses[ $entry['warehouse'] ] );
 
 			$manager->saveItem( $item, false );
 		}

@@ -87,7 +87,10 @@ class MW_Setup_Task_CouponMigrateConfigKeys extends MW_Setup_Task_Abstract
 			$this->_executeList( $stmts, 'db-coupon' );
 			$this->_status( 'done' );
 		}
+		else
+		{
+			$this->_status( 'OK' );
+		}
 
-		$this->_status( 'OK' );
 	}
 }
