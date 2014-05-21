@@ -24,7 +24,7 @@ return array(
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT mordbaprat."id", mordbaprat."siteid", mordbaprat."attrid", mordbaprat."ordprodid",
+			SELECT DISTINCT mordbaprat."id", mordbaprat."siteid", mordbaprat."attrid", mordbaprat."ordprodid",
 				mordbaprat."type", mordbaprat."code", mordbaprat."value", mordbaprat."name", mordbaprat."mtime",
 				mordbaprat."editor", mordbaprat."ctime"
 			FROM "mshop_order_base_product_attr" AS mordbaprat
