@@ -38,7 +38,7 @@ class Controller_Frontend_Order_Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/controller/jobs/frontend/order/name = Myorder
+		 *  classes/controller/frontend/order/name = Myorder
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
