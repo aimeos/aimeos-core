@@ -209,6 +209,8 @@ CREATE TABLE "mshop_order_base_product" (
 	"prodcode" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Supplier id
 	"suppliercode" VARCHAR(32) NOT NULL COLLATE utf8_bin,
+	-- Supplier id
+	"warehousecode" VARCHAR(32) NOT NULL COLLATE utf8_bin,
 	-- Product name
 	"name" VARCHAR(255) NOT NULL,
 	-- Media url (thumbnail)

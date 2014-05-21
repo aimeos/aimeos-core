@@ -82,6 +82,13 @@ class MShop_Order_Manager_Base_Product_Default
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'order.base.product.warehousecode' => array(
+			'code'=>'order.base.product.warehousecode',
+			'internalcode'=>'mordbapr."warehousecode"',
+			'label'=>'Order base product warehouse code',
+			'type'=> 'string',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'order.base.product.name' => array(
 			'code'=>'order.base.product.name',
 			'internalcode'=>'mordbapr."name"',
@@ -255,30 +262,31 @@ class MShop_Order_Manager_Base_Product_Default
 			$path .= ( $id === null ) ? 'insert' : 'update';
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
-			$stmt->bind(1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(3, $item->getOrderProductId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(4, $item->getType(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(5, $item->getProductId(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(6, $item->getProductCode(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(7, $item->getSupplierCode(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(8, $item->getName(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(9, $item->getMediaUrl(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(10, $item->getQuantity(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(11, $price->getValue(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(12, $price->getCosts(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(13, $price->getRebate(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(14, $price->getTaxRate(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(15, $item->getFlags(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(16, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(17, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(18, date('Y-m-d H:i:s'), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(19, $context->getEditor() );
+			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getOrderProductId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getType() );
+			$stmt->bind( 5, $item->getProductId() );
+			$stmt->bind( 6, $item->getProductCode() );
+			$stmt->bind( 7, $item->getSupplierCode() );
+			$stmt->bind( 8, $item->getWarehouseCode() );
+			$stmt->bind( 9, $item->getName() );
+			$stmt->bind( 10, $item->getMediaUrl() );
+			$stmt->bind( 11, $item->getQuantity() );
+			$stmt->bind( 12, $price->getValue() );
+			$stmt->bind( 13, $price->getCosts() );
+			$stmt->bind( 14, $price->getRebate() );
+			$stmt->bind( 15, $price->getTaxRate() );
+			$stmt->bind( 16, $item->getFlags(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 17, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 18, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 19, date('Y-m-d H:i:s') );
+			$stmt->bind( 20, $context->getEditor() );
 
 			if ( $id !== null ) {
-				$stmt->bind(20, $id, MW_DB_Statement_Abstract::PARAM_INT);
+				$stmt->bind(21, $id, MW_DB_Statement_Abstract::PARAM_INT);
 			} else {
-				$stmt->bind(20, date('Y-m-d H:i:s'), MW_DB_Statement_Abstract::PARAM_STR);// ctime
+				$stmt->bind(21, date('Y-m-d H:i:s'), MW_DB_Statement_Abstract::PARAM_STR);// ctime
 			}
 
 			$stmt->execute()->finish();

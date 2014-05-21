@@ -103,6 +103,20 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	public function setProductCode( $code );
 
 	/**
+	 * Returns the code of the warehouse the product should be retrieved from.
+	 *
+	 * @return string Warehouse code
+	 */
+	public function getWarehouseCode();
+
+	/**
+	 * Sets the code of the warehouse the product should be retrieved from.
+	 *
+	 * @param string $code Warehouse code
+	 */
+	public function setWarehouseCode( $code );
+
+	/**
 	 * Returns the localized name of the product
 	 *
 	 * @return string Returns the localized name of the product
