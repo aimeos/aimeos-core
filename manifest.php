@@ -13,6 +13,7 @@ return array(
 		'lib/mshoplib/src',
 		'lib/mwlib/src',
 		'client/html/src',
+		'controller/common/src',
 		'controller/frontend/src',
 		'controller/extjs/src',
 		'controller/jobs/src',
