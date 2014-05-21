@@ -231,6 +231,33 @@ class MShop_Order_Item_Base_Product_Default
 
 
 	/**
+	 * Returns the code of the warehouse the product should be retrieved from.
+	 *
+	 * @return string Warehouse code
+	 */
+	public function getWarehouseCode()
+	{
+		return ( isset( $this->_values['warehousecode'] ) ? (string) $this->_values['warehousecode'] : '' );
+	}
+
+
+	/**
+	 * Sets the code of the warehouse the product should be retrieved from.
+	 *
+	 * @param string $code Warehouse code
+	 */
+	public function setWarehouseCode( $code )
+	{
+		$this->_checkCode( $code );
+
+		if ( $code == $this->getWarehouseCode() ) { return; }
+
+		$this->_values['warehousecode'] = (string) $code;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Returns the localized name of the product.
 	 *
 	 * @return string Returns the localized name of the product

@@ -24,7 +24,7 @@ return array(
 			AND siteid = ?
 		',
 		'search' => '
-			SELECT mordst."id", mordst."siteid", mordst."parentid", mordst."type", mordst."value",
+			SELECT DISTINCT mordst."id", mordst."siteid", mordst."parentid", mordst."type", mordst."value",
 				mordst."mtime", mordst."ctime", mordst."editor"
 			FROM "mshop_order_status" AS mordst
 			:joins

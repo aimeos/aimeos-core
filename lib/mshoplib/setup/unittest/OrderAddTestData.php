@@ -336,6 +336,10 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$ordProdItem->setStatus( $dataset['status'] );
 			$ordProdItem->setPosition( $dataset['pos'] );
 
+			if( isset( $dataset['warehousecode'] ) ){
+				$ordProdItem->setWarehouseCode( $dataset['warehousecode'] );
+			}
+
 			if( isset( $dataset['prodid'] ) ){
 				$ordProdItem->setProductId( $prodIds[$dataset['prodid']] );
 			}

@@ -70,6 +70,7 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 			'suppliercode' => 'UnitSupplier',
 			'productid' => 111,
 			'prodcode' => 'UnitProd',
+			'warehousecode' => 'unitwarehouse',
 			'name' => 'UnitProduct',
 			'mediaurl' => 'testurl',
 			'quantity' => 11,
@@ -189,6 +190,18 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setProductCode('testProdCode');
 		$this->assertEquals('testProdCode', $this->_object->getProductCode());
 		$this->assertTrue($this->_object->isModified());
+	}
+
+	public function testGetWarehouseCode()
+	{
+		$this->assertEquals( $this->_values['warehousecode'], $this->_object->getWarehouseCode() );
+	}
+
+	public function testSetWarehouseCode()
+	{
+		$this->_object->setWarehouseCode( 'testWarehouseCode' );
+		$this->assertEquals( 'testWarehouseCode', $this->_object->getWarehouseCode() );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 
 	public function testGetName()

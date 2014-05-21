@@ -89,6 +89,7 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'order.base.product.productid', null );
 		$expr[] = $search->compare( '==', 'order.base.product.prodcode', 'CNE' );
 		$expr[] = $search->compare( '==', 'order.base.product.suppliercode', 'unitsupplier' );
+		$expr[] = $search->compare( '==', 'order.base.product.warehousecode', 'unit_warehouse1' );
 		$expr[] = $search->compare( '==', 'order.base.product.name', 'Cafe Noire Expresso' );
 		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
 		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
@@ -192,6 +193,7 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId() );
 		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
 		$this->assertEquals( $item->getSupplierCode(), $itemSaved->getSupplierCode() );
+		$this->assertEquals( $item->getWarehouseCode(), $itemSaved->getWarehouseCode() );
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
 		$this->assertEquals( $item->getMediaUrl(), $itemSaved->getMediaUrl() );
 		$this->assertEquals( $item->getPrice(), $itemSaved->getPrice() );
@@ -213,6 +215,7 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId() );
 		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );
 		$this->assertEquals( $itemExp->getSupplierCode(), $itemUpd->getSupplierCode() );
+		$this->assertEquals( $itemExp->getWarehouseCode(), $itemUpd->getWarehouseCode() );
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
 		$this->assertEquals( $itemExp->getMediaUrl(), $itemUpd->getMediaUrl() );
 		$this->assertEquals( $itemExp->getPrice(), $itemUpd->getPrice() );
