@@ -27,7 +27,7 @@ return array(
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT mordbaad."id", mordbaad."baseid", mordbaad."siteid", mordbaad."addrid", mordbaad."type", mordbaad."company", mordbaad."salutation",
+			SELECT DISTINCT mordbaad."id", mordbaad."baseid", mordbaad."siteid", mordbaad."addrid", mordbaad."type", mordbaad."company", mordbaad."salutation",
 				mordbaad."title", mordbaad."firstname", mordbaad."lastname", mordbaad."address1", mordbaad."address2", mordbaad."address3",
 				mordbaad."postal", mordbaad."city", mordbaad."state", mordbaad."countryid", mordbaad."langid", mordbaad."telephone",
 				mordbaad."email", mordbaad."telefax", mordbaad."website", mordbaad."flag", mordbaad."mtime", mordbaad."editor", mordbaad."ctime"
