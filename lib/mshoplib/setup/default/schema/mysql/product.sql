@@ -322,7 +322,7 @@ CREATE TABLE "mshop_product_stock" (
 	-- site id
 	"siteid" INTEGER NOT NULL,
 	-- warehouse id
-	"warehouseid" INTEGER DEFAULT NULL,
+	"warehouseid" INTEGER NOT NULL,
 	-- available amount in stock
 	"stocklevel" INTEGER DEFAULT NULL,
 	-- product back in stock
