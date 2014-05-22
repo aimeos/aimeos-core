@@ -26,6 +26,7 @@ return array (
 		array ( 'prodid' => 'product/MNOP', 'warehouseid' => 'unit_warehouse4', 'stocklevel' => null, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:TESTP', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:TESTPSUB01', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
+		array ( 'prodid' => 'product/U:TESTSUB02', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:TESTSUB03', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:TESTSUB05', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
 	)

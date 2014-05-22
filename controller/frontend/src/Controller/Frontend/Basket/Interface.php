@@ -31,20 +31,25 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 
 
 	/**
-	 * Adds a product to the basket of the user stored in the session.
+	 * Adds a categorized product to the basket of the user stored in the session.
 	 *
 	 * @param string $prodid ID of the base product to add
 	 * @param integer $quantity Amount of products that should by added
-	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
-	 * 	selection of products but are stored together with the product (e.g. for configurable products)
+	 * @param array $options Possible options are: 'stock'=>true|false and 'variant'=>true|false
+	 * 	The 'stock'=>false option allows adding products without being in stock.
+	 * 	The 'variant'=>false option allows adding the selection product to the basket
+	 * 	instead of the specific sub-product if the variant-building attribute IDs
+	 * 	doesn't match a specific sub-product or if the attribute IDs are missing.
 	 * @param array $variantAttributeIds List of variant-building attribute IDs that identify a specific product
 	 * 	in a selection products
-	 * @param boolean $requireVariant True if a specific product must be matched by the variant-building attribute IDs
-	 *  or false if the parent product can be added to the basket when the variant-building attributes don't match or
-	 *  are missing
-	 * @throws Controller_Frontend_Basket_Exception If the product isn't found
+	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
+	 * 	selection of products but are stored together with the product (e.g. for configurable products)
+	 * @param array $hiddenAttributeIds List of attribute IDs that should be stored along with the product in the order
+	 * @param string $warehouse Unique code of the warehouse to deliver the products from
+	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
 	 */
-	public function addProduct( $prodid, $quantity = 1, $configAttributeIds = array(), $variantAttributeIds = array(), $requireVariant = true );
+	public function addProduct( $prodid, $quantity = 1, $options = array(), $variantAttributeIds = array(),
+		$configAttributeIds = array(), $hiddenAttributeIds = array(), $warehouse = 'default' );
 
 
 	/**

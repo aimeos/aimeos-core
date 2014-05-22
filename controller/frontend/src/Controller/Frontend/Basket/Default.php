@@ -74,10 +74,11 @@ class Controller_Frontend_Basket_Default
 	 * @param array $configAttributeIds  List of attribute IDs that doesn't identify a specific product in a
 	 * 	selection of products but are stored together with the product (e.g. for configurable products)
 	 * @param array $hiddenAttributeIds List of attribute IDs that should be stored along with the product in the order
+	 * @param string $warehouse Unique code of the warehouse to deliver the products from
 	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
 	 */
 	public function addProduct( $prodid, $quantity = 1, $options = array(), $variantAttributeIds = array(),
-		$configAttributeIds = array(), $hiddenAttributeIds = array() )
+		$configAttributeIds = array(), $hiddenAttributeIds = array(), $warehouse = 'default' )
 	{
 		$this->_checkCategory( $prodid );
 
@@ -90,6 +91,7 @@ class Controller_Frontend_Basket_Default
 		$orderBaseProductItem = MShop_Factory::createManager( $context, 'order/base/product' )->createItem();
 		$orderBaseProductItem->copyFrom( $productItem );
 		$orderBaseProductItem->setQuantity( $quantity );
+		$orderBaseProductItem->setWarehouseCode( $warehouse );
 
 		$attr = array();
 		$prices = $productItem->getRefItems( 'price', 'default', 'default' );
@@ -150,7 +152,7 @@ class Controller_Frontend_Basket_Default
 
 		$stocklevel = null;
 		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
-			$stocklevel = $this->_getStockLevel( $productItem->getId() );
+			$stocklevel = $this->_getStockLevel( $productItem->getId(), $warehouse );
 		}
 
 		if( $stocklevel === null || $stocklevel > 0 )
@@ -206,7 +208,8 @@ class Controller_Frontend_Basket_Default
 	 * 	The 'stock'=>false option allows adding products without being in stock.
 	 * @param array $configAttributeCodes Codes of the product config attributes that should be REMOVED
 	 */
-	public function editProduct( $position, $quantity, $options = array(), $configAttributeCodes = array() )
+	public function editProduct( $position, $quantity, $options = array(),
+		$configAttributeCodes = array() )
 	{
 		$product = $this->_basket->getProduct( $position );
 		$product->setQuantity( $quantity ); // Enforce check immediately
@@ -296,7 +299,7 @@ class Controller_Frontend_Basket_Default
 
 		$stocklevel = null;
 		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
-			$stocklevel = $this->_getStockLevel( $productItem->getId() );
+			$stocklevel = $this->_getStockLevel( $productItem->getId(), $product->getWarehouseCode() );
 		}
 
 		$product->setPrice( $price );
@@ -553,23 +556,27 @@ class Controller_Frontend_Basket_Default
 	 * Returns the highest stock level for the product.
 	 *
 	 * @param string $prodid Unique ID of the product
+	 * @param string $warehouse Unique code of the warehouse
 	 * @return integer|null Number of available items in stock (null for unlimited stock)
 	 */
-	protected function _getStockLevel( $prodid )
+	protected function _getStockLevel( $prodid, $warehouse )
 	{
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/stock' );
 
 		$search = $manager->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'product.stock.productid', $prodid ),
-			$search->getConditions()
+			$search->getConditions(),
+			$search->compare( '==', 'product.stock.warehouse.code', $warehouse ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$result = $manager->searchItems( $search );
 
-		if( empty( $result ) ) {
-			return null;
+		if( empty( $result ) )
+		{
+			$msg = sprintf( 'No stock level for product ID "%1$s" and warehouse "%2$s" found', $prodid, $warehouse );
+			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
 		$stocklevel = null;
