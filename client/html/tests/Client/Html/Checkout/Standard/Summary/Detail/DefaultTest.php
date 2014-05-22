@@ -70,7 +70,7 @@ class Client_Html_Checkout_Standard_Summary_Detail_DefaultTest extends MW_Unitte
 	public function testGetBody()
 	{
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$controller->addProduct( $this->_getProductItem( 'CNE' )->getId() );
+		$controller->addProduct( $this->_getProductItem( 'CNE' )->getId(), 1, array(), array(), array(), array(), 'unit_warehouse1' );
 
 		$view = TestHelper::getView();
 		$view->standardBasket = $controller->get();

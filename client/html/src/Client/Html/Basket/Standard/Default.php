@@ -302,7 +302,8 @@ class Client_Html_Basket_Standard_Default
 							'quantity' => $view->param( 'b-quantity', 1 ),
 							'attrvar-id' => array_filter( (array) $view->param( 'b-attrvar-id', array() ) ),
 							'attrconf-id' => array_filter( (array) $view->param( 'b-attrconf-id', array() ) ),
-							'attrhide-id' => array_filter( (array) $view->param( 'b-attrhide-id', array() ) )
+							'attrhide-id' => array_filter( (array) $view->param( 'b-attrhide-id', array() ) ),
+							'warehouse' => $view->param( 'b-warehouse', 'default' ),
 						);
 					}
 
@@ -314,7 +315,8 @@ class Client_Html_Basket_Standard_Default
 							$options,
 							( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
 							( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
-							( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() )
+							( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() ),
+							( isset( $values['warehouse'] ) ? $values['warehouse'] : 'default' )
 						);
 					}
 
