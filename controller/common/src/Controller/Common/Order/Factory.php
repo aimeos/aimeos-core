@@ -100,7 +100,7 @@ class Controller_Common_Order_Factory
 
 		$controller =  new $classname( $context );
 
-		if( !( $controller instanceof $interface ) ) {
+		if( !( $controller instanceof $iface ) ) {
 			throw new Controller_Common_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
