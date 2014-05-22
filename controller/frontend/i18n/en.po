@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 20:48+0200\n"
+"POT-Creation-Date: 2014-05-22 14:20+0200\n"
 "PO-Revision-Date: 2013-04-16 15:57+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/Controller/Frontend/Basket/Default.php:509
+#: src/Controller/Frontend/Basket/Default.php:512
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:691
+#: src/Controller/Frontend/Basket/Default.php:698
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:217
+#: src/Controller/Frontend/Basket/Default.php:220
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be changed"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:191
+#: src/Controller/Frontend/Basket/Default.php:193
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr ""
@@ -45,37 +45,38 @@ msgstr ""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
 #: src/Controller/Frontend/Common/Factory/Abstract.php:159
-#: src/Controller/Frontend/Factory.php:85
+#: src/Controller/Frontend/Factory.php:86
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
 
-#: src/Controller/Frontend/Factory.php:64
+#: src/Controller/Frontend/Factory.php:65
 #, php-format
 msgid "Controller path is empty"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:345
-#: src/Controller/Frontend/Basket/Default.php:392
+#: src/Controller/Frontend/Basket/Default.php:348
+#: src/Controller/Frontend/Basket/Default.php:395
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:360
+#: src/Controller/Frontend/Basket/Default.php:363
 #, php-format
 msgid "Coupon code \"%1$s\" is not allowed"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:546
+#: src/Controller/Frontend/Basket/Default.php:549
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:655
+#: src/Controller/Frontend/Basket/Default.php:662
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr ""
 
+#: src/Controller/Frontend/Order/Factory.php:62
 #: src/Controller/Frontend/Service/Factory.php:62
 #: src/Controller/Frontend/Basket/Factory.php:63
 #: src/Controller/Frontend/Common/Factory/Abstract.php:54
@@ -84,7 +85,7 @@ msgstr ""
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Factory.php:76
+#: src/Controller/Frontend/Factory.php:77
 #, php-format
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
 msgstr ""
@@ -94,37 +95,42 @@ msgstr ""
 msgid "Invalid domain \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Factory.php:91
+#: src/Controller/Frontend/Factory.php:92
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:431
+#: src/Controller/Frontend/Basket/Default.php:434
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:725
+#: src/Controller/Frontend/Basket/Default.php:732
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:132
+#: src/Controller/Frontend/Basket/Default.php:134
 #, php-format
 msgid "No article found for selected attributes and product ID \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:236
+#: src/Controller/Frontend/Basket/Default.php:239
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:104
+#: src/Controller/Frontend/Basket/Default.php:578
+#, php-format
+msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
+msgstr ""
+
+#: src/Controller/Frontend/Basket/Default.php:106
 #, php-format
 msgid "No unique article found for selected attributes and product ID \"%1$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:367
+#: src/Controller/Frontend/Basket/Default.php:370
 #, php-format
 msgid "Requirements for coupon code \"%1$s\" aren't met"
 msgstr ""
@@ -134,8 +140,8 @@ msgstr ""
 msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:174
-#: src/Controller/Frontend/Basket/Default.php:316
+#: src/Controller/Frontend/Basket/Default.php:176
+#: src/Controller/Frontend/Basket/Default.php:319
 #, php-format
 msgid "There are not enough products \"%1$s\" in stock"
 msgstr ""
@@ -150,7 +156,7 @@ msgstr ""
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:460
+#: src/Controller/Frontend/Basket/Default.php:463
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr ""

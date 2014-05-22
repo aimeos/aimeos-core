@@ -575,7 +575,7 @@ class Controller_Frontend_Basket_Default
 
 		if( empty( $result ) )
 		{
-			$msg = sprintf( 'No stock level for product ID "%1$s" and warehouse "%2$s" found', $prodid, $warehouse );
+			$msg = sprintf( 'No stock for product ID "%1$s" and warehouse "%2$s" available', $prodid, $warehouse );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
