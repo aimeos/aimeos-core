@@ -76,6 +76,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b-action' => 'add',
 			'b-prod-id' => $this->_getProductItem( 'CNE' )->getId(),
 			'b-quantity' => 1,
+			'b-warehouse' => 'unit_warehouse1',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -101,10 +102,12 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 				array(
 					'prod-id' => $this->_getProductItem( 'CNC' )->getId(),
 					'quantity' => 1,
+					'warehouse' => 'unit_warehouse2',
 				),
 				array(
 					'prod-id' => $this->_getProductItem( 'CNE' )->getId(),
 					'quantity' => 1,
+					'warehouse' => 'unit_warehouse1',
 				),
 			),
 		);
@@ -132,7 +135,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			$search->compare( '==', 'attribute.domain', 'product' ),
 			$search->combine( '||', array(
 				$search->combine( '&&', array(
-					$search->compare( '==', 'attribute.code', '32' ),
+					$search->compare( '==', 'attribute.code', '30' ),
 					$search->compare( '==', 'attribute.type.code', 'length' ),
 				) ),
 				$search->combine( '&&', array(
@@ -158,8 +161,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<li class="attr-item">.*<span class="value">32</span>.*</li>#smU', $output );
-		$this->assertRegExp( '#<li class="attr-item">.*<span class="value">30</span>.*</li>#smU', $output );
+		$this->assertRegExp( '#<li class="attr-item">.*<span class="value">30</span>.*</li>.*<li class="attr-item">.*<span class="value">30</span>.*</li>#smU', $output );
 	}
 
 
@@ -186,6 +188,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b-prod-id' => $this->_getProductItem( 'CNE' )->getId(),
 			'b-quantity' => 1,
 			'b-attrconf-id' => $attribute->getId(),
+			'b-warehouse' => 'unit_warehouse1',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -221,6 +224,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b-prod-id' => $this->_getProductItem( 'CNE' )->getId(),
 			'b-quantity' => 1,
 			'b-attrhide-id' => $attribute->getId(),
+			'b-warehouse' => 'unit_warehouse1',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -235,7 +239,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyEditSingle()
 	{
-		$this->_addProduct( 'CNE', 2 );
+		$this->_addProduct( 'CNE', 2, 'unit_warehouse1' );
 
 		$view = $this->_object->getView();
 		$param = array(
@@ -259,8 +263,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyEditMulti()
 	{
-		$this->_addProduct( 'CNE', 1 );
-		$this->_addProduct( 'CNC', 2 );
+		$this->_addProduct( 'CNE', 1, 'unit_warehouse1' );
+		$this->_addProduct( 'CNC', 2, 'unit_warehouse2' );
 
 		$view = $this->_object->getView();
 		$param = array(
@@ -293,8 +297,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyDeleteSingle()
 	{
-		$this->_addProduct( 'CNE', 2 );
-		$this->_addProduct( 'CNC', 1 );
+		$this->_addProduct( 'CNE', 2, 'unit_warehouse1' );
+		$this->_addProduct( 'CNC', 1, 'unit_warehouse2' );
 
 		$view = $this->_object->getView();
 		$param = array(
@@ -317,8 +321,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyDeleteMulti()
 	{
-		$this->_addProduct( 'CNE', 1 );
-		$this->_addProduct( 'CNC', 1 );
+		$this->_addProduct( 'CNE', 1, 'unit_warehouse1' );
+		$this->_addProduct( 'CNC', 1, 'unit_warehouse2' );
 
 		$view = $this->_object->getView();
 		$param = array(
@@ -376,7 +380,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	protected function _addProduct( $code, $quantity )
+	protected function _addProduct( $code, $quantity, $warehouse )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$search = $manager->createSearch();
@@ -392,6 +396,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b-action' => 'add',
 			'b-prod-id' => $item->getId(),
 			'b-quantity' => $quantity,
+			'b-warehouse' => $warehouse,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );

@@ -80,7 +80,7 @@ class Client_Html_Basket_Standard_Coupon_DefaultTest extends MW_Unittest_Testcas
 	public function testGetBodyAddCoupon()
 	{
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$controller->addProduct( $this->_getProductItem( 'CNC' )->getId() );
+		$controller->addProduct( $this->_getProductItem( 'CNC' )->getId(), 1, array(), array(), array(), array(), 'unit_warehouse2' );
 
 		$view = $this->_object->getView();
 
@@ -101,7 +101,7 @@ class Client_Html_Basket_Standard_Coupon_DefaultTest extends MW_Unittest_Testcas
 	public function testGetBodyDeleteCoupon()
 	{
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
-		$controller->addProduct( $this->_getProductItem( 'CNC' )->getId() );
+		$controller->addProduct( $this->_getProductItem( 'CNC' )->getId(), 1, array(), array(), array(), array(), 'unit_warehouse2' );
 
 		$view = $this->_object->getView();
 

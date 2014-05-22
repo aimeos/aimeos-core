@@ -280,15 +280,19 @@ class Client_Html_Checkout_Confirm_Default
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 
 
-			// Clear basket
 			$orderid = $context->getSession()->get( 'arcavias/orderid' );
 			$orderManager = MShop_Factory::createManager( $context, 'order' );
+			$orderItem = $orderManager->getItem( $orderid );
 
-			if( $orderManager->getItem( $orderid )->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
+			// Clear basket
+			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
 			{
 				$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
 				$orderBaseManager->setSession( $orderBaseManager->createItem() );
 			}
+
+			// Update stock, coupons, etc.
+			Controller_Frontend_Order_Factory::createController( $context )->update( $orderItem );
 		}
 		catch( Client_Html_Exception $e )
 		{

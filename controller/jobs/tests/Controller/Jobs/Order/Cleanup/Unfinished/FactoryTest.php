@@ -6,7 +6,7 @@
  */
 
 
-class Controller_Jobs_Order_Coupon_Count_FactoryTest
+class Controller_Jobs_Order_Cleanup_Unfinished_FactoryTest
 	extends MW_Unittest_Testcase
 {
 	public function testCreateController()
@@ -14,7 +14,7 @@ class Controller_Jobs_Order_Coupon_Count_FactoryTest
 		$context = TestHelper::getContext();
 		$arcavias = TestHelper::getArcavias();
 
-		$obj = Controller_Jobs_Order_Coupon_Count_Factory::createController( $context, $arcavias );
+		$obj = Controller_Jobs_Order_Cleanup_Unfinished_Factory::createController( $context, $arcavias );
 		$this->assertInstanceOf( 'Controller_Jobs_Interface', $obj);
 	}
 
@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Coupon_Count_FactoryTest
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Order_Coupon_Count_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
+		$object = Controller_Jobs_Order_Cleanup_Unfinished_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
 	}
 
 
@@ -35,7 +35,7 @@ class Controller_Jobs_Order_Coupon_Count_FactoryTest
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Order_Coupon_Count_Factory::createController( $context, $arcavias, 'WrongClass' );
+		$object = Controller_Jobs_Order_Cleanup_Unfinished_Factory::createController( $context, $arcavias, 'WrongClass' );
 	}
 
 
@@ -45,7 +45,7 @@ class Controller_Jobs_Order_Coupon_Count_FactoryTest
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Order_Coupon_Count_Factory::createController( $context, $arcavias, 'Factory' );
+		$object = Controller_Jobs_Order_Cleanup_Unfinished_Factory::createController( $context, $arcavias, 'Factory' );
 	}
 
 }

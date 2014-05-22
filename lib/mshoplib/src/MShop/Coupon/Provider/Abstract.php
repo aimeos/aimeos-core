@@ -163,9 +163,10 @@ abstract class MShop_Coupon_Provider_Abstract
 	 *
 	 * @param string $productCode Unique product code
 	 * @param integer $quantity Number of products in basket
+	 * @param string $warehouse Unique code of the warehouse the product is from
 	 * @return MShop_Order_Base_Product_Interface Ordered product
 	 */
-	protected function _createProduct( $productCode, $quantity = 1 )
+	protected function _createProduct( $productCode, $quantity = 1, $warehouse = 'default' )
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
 		$search = $productManager->createSearch( true );
@@ -193,6 +194,7 @@ abstract class MShop_Coupon_Provider_Abstract
 
 		$orderProduct->copyFrom( $product );
 		$orderProduct->setQuantity( $quantity );
+		$orderProduct->setWarehouseCode( $warehouse );
 		$orderProduct->setPrice( $price );
 		$orderProduct->setFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE );
 

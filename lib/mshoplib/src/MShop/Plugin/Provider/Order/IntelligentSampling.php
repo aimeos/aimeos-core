@@ -136,7 +136,8 @@ class MShop_Plugin_Provider_Order_IntelligentSampling
 
 		$orderProduct = $orderProductManager->createItem();
 		$orderProduct->copyFrom( $product );
-		$orderProduct->setQuantity(1);
+		$orderProduct->setWarehouseCode( 'default' );
+		$orderProduct->setQuantity( 1 );
 
 		$order->addProduct( $orderProduct );
 

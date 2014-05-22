@@ -145,7 +145,6 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 		$view->addHelper( 'param', $helper );
 
 		$this->_object->setView( $view );
-
 		$this->_object->process();
 
 

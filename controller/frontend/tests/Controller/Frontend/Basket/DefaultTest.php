@@ -68,7 +68,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2 );
+		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'unit_warehouse2' );
 		$item2 = $this->_object->get()->getProduct( 1 );
 		$this->_object->deleteProduct( 0 );
 
@@ -103,7 +103,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ) );
+		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ), array(), array(), 'unit_warehouse2' );
 
 		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
 		$this->assertEquals( 'CNC', $this->_object->get()->getProduct( 0 )->getProductCode() );
@@ -311,7 +311,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 		try
 		{
-			$this->_object->addProduct( $item->getId(), 5 );
+			$this->_object->addProduct( $item->getId(), 5, array(), array(), array(), array(), 'unit_warehouse3' );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( Controller_Frontend_Basket_Exception $e )
@@ -337,7 +337,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 		try
 		{
-			$this->_object->addProduct( $item->getId(), 5 );
+			$this->_object->addProduct( $item->getId(), 5, array(), array(), array(), array(), 'unit_warehouse2' );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( Controller_Frontend_Basket_Exception $e )
@@ -377,6 +377,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->_object->addProduct( $item->getId(), 1 );
 	}
 
@@ -440,7 +441,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testAddProductLowQuantityException()
+	public function testAddProductLowQuantityPriceException()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $productManager->createSearch();
@@ -467,7 +468,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2 );
+		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'unit_warehouse3' );
 
 		$this->assertEquals( 2, $this->_object->get()->getProduct( 0 )->getQuantity() );
 		$this->assertEquals( 'IJKL', $this->_object->get()->getProduct( 0 )->getProductCode() );
@@ -563,7 +564,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2 );
+		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'unit_warehouse3' );
 
 		$item = $this->_object->get()->getProduct( 0 );
 		$this->assertEquals( 2, $item->getQuantity() );
@@ -588,7 +589,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'EFGH' ) );
+		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -599,20 +600,21 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$orderProductItem = $orderProductManager->createItem();
 		$orderProductItem->copyFrom( $item );
 		$orderProductItem->setQuantity( 2 );
+		$orderProductItem->setWarehouseCode( 'unit_warehouse3' );
 
-		$this->_object->get()->addProduct( $orderProductItem );
+		$pos = $this->_object->get()->addProduct( $orderProductItem, 1 );
 
-		$item = $this->_object->get()->getProduct( 0 );
+		$item = $this->_object->get()->getProduct( $pos );
 		$this->assertEquals( 2, $item->getQuantity() );
 
 		try
 		{
-			$this->_object->editProduct( 0, 5 );
+			$this->_object->editProduct( $pos, 5 );
 			throw new Exception( 'Expected exception not thrown' );
 		}
 		catch( Controller_Frontend_Basket_Exception $e )
 		{
-			$this->assertEquals( array(), $this->_object->get()->getProducts() );
+			$this->assertEquals( 3, $this->_object->get()->getProduct( $pos )->getQuantity() );
 		}
 	}
 
@@ -628,7 +630,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2 );
+		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'unit_warehouse3' );
 
 		$item = $this->_object->get()->getProduct( 0 );
 		$this->assertEquals( 2, $item->getQuantity() );
