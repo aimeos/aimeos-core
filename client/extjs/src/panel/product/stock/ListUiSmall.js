@@ -17,7 +17,7 @@ MShop.panel.product.stock.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, 
 
 	filterConfig : {
 		filters : [ {
-			dataIndex : 'product.stock.stocklevel',
+			dataIndex : 'product.stock.warehouse.label',
 			operator : '=~',
 			value : ''
 		} ]
