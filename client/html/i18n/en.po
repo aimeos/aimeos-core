@@ -889,7 +889,7 @@ msgstr "Only a few products are available"
 #. / code for "product is out ot stock"
 #: layouts/catalog/stock/body-default.html:52
 msgid "stock-out"
-msgstr "Product is out ot stock"
+msgstr "Product is out of stock"
 
 #. / code for "product is available (without stock limit)"
 #: layouts/catalog/stock/body-default.html:58

@@ -48,7 +48,7 @@ $textStockOut = $this->translate( 'client/html', 'Stock: %1$s, %2$s, back on %3$
 $dateFormat = $this->translate( 'client/html', 'Y-m-d' );
 
 $textStock = array(
-	/// code for "product is out ot stock"
+	/// code for "product is out of stock"
 	'stock-out' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-out' ), $enc::TRUST ) ),
 	/// code for "only a few products are available"
 	'stock-low' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-low' ), $enc::TRUST ) ),
@@ -72,7 +72,7 @@ foreach( $stockProductIds as $prodId )
 	foreach( (array) $stockItemsByProducts[$prodId] as $item )
 	{
 		$whId = $item->getWarehouseId();
-		$whCode = ( isset( $warehouseItems[$whId] ) ? 'warehouse:' . $warehouseItems[$whId]->getCode() : '' );
+		$whCode = ( isset( $warehouseItems[$whId] ) ? 'warehouse:' . $warehouseItems[$whId]->getCode() : 'default' );
 
 		if( !isset( $whText[$whCode] ) ) {
 			$whText[$whCode] = $this->translate( 'client/html/code', $whCode );
