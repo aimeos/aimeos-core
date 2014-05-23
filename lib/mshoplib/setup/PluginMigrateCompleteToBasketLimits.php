@@ -71,7 +71,7 @@ class MW_Setup_Task_PluginMigrateCompleteToBasketLimits extends MW_Setup_Task_Ab
 		) {
 			foreach( $stmts as $key => $list )
 			{
-				$this->_msg( sprintf( 'Migrating "%1$s"', $key ), 0 );
+				$this->_msg( sprintf( 'Migrating "%1$s"', $key ), 1 );
 
 				if( $this->_getValue( $list['select'], 'cnt' ) > 0 )
 				{
