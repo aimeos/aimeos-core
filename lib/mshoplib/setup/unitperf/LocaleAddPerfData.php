@@ -78,27 +78,7 @@ class MW_Setup_Task_LocaleAddPerfData extends MW_Setup_Task_MShopAddLocaleData
 		$search = $localeSiteManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unitperf' ) );
 
-		foreach( $localeSiteManager->searchItems( $search ) as $site )
-		{
-			try
-			{
-				$this->_additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
-
-				$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_additional, 'Default' );
-				$catalogIndexManager = $catalogManager->getSubManager( 'index', 'Default' );
-
-				$search = $catalogIndexManager->createSearch();
-
-				foreach( $catalogIndexManager->searchItems( $search ) as $item ) {
-					$catalogIndexManager->deleteItem( $item->getId() );
-				}
-			}
-			catch( Exception $e )
-			{
-				$this->_msg( 'Error: No locale available for cleaning up catalog index', 1 );
-				$this->_status( 'warn' );
-			}
-
+		foreach( $localeSiteManager->searchItems( $search ) as $site ) {
 			$localeSiteManager->deleteItem( $site->getId() );
 		}
 
