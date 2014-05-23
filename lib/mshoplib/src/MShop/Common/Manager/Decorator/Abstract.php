@@ -53,9 +53,9 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 
 
 	/**
-	 * Creates new item object.
+	 * Removes old entries from the storage
 	 *
-	 * @return MShop_Common_Item_Interface New item object
+	 * @param array $siteids List of IDs for sites Whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{

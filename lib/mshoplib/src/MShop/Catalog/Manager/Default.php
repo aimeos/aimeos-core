@@ -160,16 +160,13 @@ class MShop_Catalog_Manager_Default
 			$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_STR );
 			$translations = array( 'siteid' => '"siteid"' );
 
-			foreach( $siteids as $siteid )
-			{
-				$search->setConditions( $search->compare( '==', 'siteid', $siteid ) );
-				$sql = str_replace( ':siteid', $search->getConditionString( $types, $translations ), $sql );
+			$search->setConditions( $search->compare( '==', 'siteid', $siteids ) );
+			$sql = str_replace( ':siteid', $search->getConditionString( $types, $translations ), $sql );
 
-				$stmt = $conn->create( $sql );
-				$stmt->bind( 1, 0, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->bind( 2, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
-				$stmt->execute()->finish();
-			}
+			$stmt = $conn->create( $sql );
+			$stmt->bind( 1, 0, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
 		}

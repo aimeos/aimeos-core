@@ -106,6 +106,11 @@ class MShop_Media_Manager_List_Type_Default
 	 */
 	public function cleanup( array $siteids )
 	{
+		$path = 'classes/media/manager/list/type/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
 		$this->_cleanup( $siteids, 'mshop/media/manager/list/type/default/item/delete' );
 	}
 
