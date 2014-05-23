@@ -93,6 +93,22 @@ class MShop_Order_Manager_Status_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/order/manager/status/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/order/manager/status/default/item/delete' );
+	}
+
+
+	/**
 	 * Creates a new order status object.
 	 *
 	 * @return MShop_Order_Item_Status_Interface New item object

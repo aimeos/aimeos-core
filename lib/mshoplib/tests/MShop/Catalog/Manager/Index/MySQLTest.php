@@ -68,7 +68,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 		$this->_editor = $context->getEditor();
 		$config = $context->getConfig();
 
-		$dbadapter = $config->get( 'resource/db-product/adapter' );
+		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
 
 		if( $dbadapter !== 'mysql' ) {
 			$this->markTestSkipped( 'MySQL specific test' );

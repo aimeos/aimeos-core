@@ -57,6 +57,12 @@ class MShop_Service_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->_object = null;
 	}
 
+
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf('MShop_Service_Item_Interface', $this->_object->createItem());

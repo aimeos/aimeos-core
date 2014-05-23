@@ -50,6 +50,12 @@ class MShop_Catalog_Manager_Index_Attribute_DefaultTest extends MW_Unittest_Test
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( 'MShop_Product_Item_Interface', $this->_object->createItem() );

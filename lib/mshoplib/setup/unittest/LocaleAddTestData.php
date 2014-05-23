@@ -96,13 +96,12 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 * @param array $sites List with sites
 	 * @return array $sites List with sites
 	 */
-	private function _getCodes( MShop_Locale_Item_Site_Interface $site )
+	private function _getSites( MShop_Locale_Item_Site_Interface $site )
 	{
-		$sites = array();
-		foreach( $site->getChildren() as $child )
-		{
-			$leafSites = $this->_getCodes( $child );
-			$sites = array_merge( $leafSites, $sites );
+		$sites = array( $site );
+
+		foreach( $site->getChildren() as $child ) {
+			$sites = array_merge( $sites, $this->_getSites( $child ) );
 		}
 
 		return $sites;
@@ -126,37 +125,12 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 		foreach( $localeSiteManager->searchItems( $search ) as $site )
 		{
 			$site = $localeSiteManager->getTree( $site->getId() );
-			$sites = array_merge( $sites, $this->_getCodes( $site ) );
-			$sites[ $site->getCode() ] = $site;
+			$sites = array_merge( $sites, $this->_getSites( $site ) );
 		}
 
 		foreach( $sites as $site )
 		{
-
 			$this->_additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
-
-			$orderBaseManager = MShop_Order_Manager_Factory::createManager( $this->_additional )->getSubManager( 'base' );
-
-			$search = $orderBaseManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'order.base.sitecode', $site->getCode() ) );
-
-			$orders = $orderBaseManager->searchItems( $search );
-
-			foreach( $orders as $order ) {
-				$orderBaseManager->deleteItem( $order->getId() );
-			}
-
-			$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_additional );
-			$catalogIndexManager = $catalogManager->getSubManager( 'index' );
-
-			$search = $catalogIndexManager->createSearch();
-
-			foreach( $catalogIndexManager->searchItems( $search ) as $item ) {
-				try{
-					$catalogIndexManager->deleteItem( $item->getId() );
-				} catch( Exception $e) { ; }
-			}
-
 			$localeSiteManager->deleteItem( $site->getId() );
 		}
 	}

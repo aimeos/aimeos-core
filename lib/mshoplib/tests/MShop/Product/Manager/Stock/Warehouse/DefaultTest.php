@@ -40,6 +40,12 @@ class MShop_Product_Manager_Stock_Warehouse_DefaultTest extends MW_Unittest_Test
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
+
 	/**
 	 * Runs the test methods of this class.
 	 *

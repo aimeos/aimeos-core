@@ -144,6 +144,22 @@ class MShop_Order_Manager_Base_Service_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/order/manager/base/service/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'attribute' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/order/manager/base/service/default/item/delete' );
+	}
+
+
+	/**
 	 * Creates new order service item object.
 	 *
 	 * @return MShop_Order_Item_Base_Service_Interface New object

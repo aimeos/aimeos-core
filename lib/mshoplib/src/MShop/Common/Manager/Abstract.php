@@ -34,6 +34,16 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+	}
+
+
+	/**
 	 * Creates a search object.
 	 *
 	 * @param boolean $default Add default criteria; Optional
@@ -161,6 +171,41 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$result->finish();
 
 		return $row[0];
+	}
+
+
+	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string $cfgpath Configuration key to the cleanup statement
+	 */
+	protected function _cleanup( array $siteids, $cfgpath )
+	{
+		$dbm = $this->_context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
+		$conn = $dbm->acquire( $dbname );
+
+		try
+		{
+			$sql = $this->_context->getConfig()->get( $cfgpath, $cfgpath );
+			$sql = str_replace( ':cond', '1=1', $sql );
+
+			$stmt = $conn->create( $sql );
+
+			foreach( $siteids as $siteid )
+			{
+				$stmt->bind( 1, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->execute()->finish();
+			}
+
+			$dbm->release( $conn, $dbname );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn, $dbname );
+			throw $e;
+		}
 	}
 
 
@@ -829,11 +874,11 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		$cond = $search->getConditionString( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $sql );
 
+		$dbm = $context->getDatabaseManager();
+		$conn = $dbm->acquire( $dbname );
+
 		try
 		{
-			$dbm = $context->getDatabaseManager();
-			$conn = $dbm->acquire( $dbname );
-
 			$stmt = $conn->create( $sql );
 
 			if( $siteidcheck ) {

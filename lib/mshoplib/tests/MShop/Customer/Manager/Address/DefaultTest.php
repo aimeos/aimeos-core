@@ -88,6 +88,12 @@ class MShop_Common_Manager_Address_AbstractTest extends MW_Unittest_Testcase
 		unset($this->_object, $this->_fixture);
 	}
 
+
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->_object->getSearchAttributes() as $attribute )

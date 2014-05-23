@@ -55,6 +55,12 @@ class MShop_Product_Manager_Stock_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( 'MShop_Product_Item_Stock_Interface', $this->_object->createItem() );

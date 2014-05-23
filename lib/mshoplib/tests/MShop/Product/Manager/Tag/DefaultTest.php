@@ -54,6 +54,12 @@ class MShop_Product_Manager_Tag_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
+
 	public function testCreateItem()
 	{
 		$item = $this->_object->createItem();

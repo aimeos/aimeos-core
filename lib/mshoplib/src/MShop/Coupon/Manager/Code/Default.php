@@ -110,6 +110,22 @@ class MShop_Coupon_Manager_Code_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/coupon/manager/code/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/coupon/manager/code/default/item/delete' );
+	}
+
+
+	/**
 	 * Returns a new sub manager of the given type and name.
 	 *
 	 * @param string $manager Name of the sub manager type in lower case

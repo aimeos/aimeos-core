@@ -114,6 +114,22 @@ class MShop_Text_Manager_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/text/manager/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type', 'list' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/text/manager/default/item/delete' );
+	}
+
+
+	/**
 	 * Creates new text item object.
 	 *
 	 * @return MShop_Text_Item_Interface New text item object

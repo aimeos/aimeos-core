@@ -136,6 +136,22 @@ class MShop_Order_Manager_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/order/manager/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'status', 'base' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/order/manager/default/item/delete' );
+	}
+
+
+	/**
 	 * Returns a new and empty invoice.
 	 *
 	 * @return MShop_Order_Item_Interface Invoice without assigned values or items

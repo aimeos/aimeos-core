@@ -141,6 +141,22 @@ class MShop_Product_Manager_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/product/manager/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type', 'stock', 'list' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/product/manager/default/item/delete' );
+	}
+
+
+	/**
 	 * Create new product item object.
 	 *
 	 * @return MShop_Product_Item_Interface

@@ -14,7 +14,9 @@
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
+class MShop_Customer_Manager_Default
+	extends MShop_Customer_Manager_Abstract
+	implements MShop_Customer_Manager_Interface
 {
 	private $_salt;
 
@@ -223,6 +225,22 @@ class MShop_Customer_Manager_Default extends MShop_Customer_Manager_Abstract
 		$this->_setResourceName( 'db-customer' );
 
 		$this->_salt = $context->getConfig()->get( 'mshop/customer/manager/default/salt/', 'mshop' );
+	}
+
+
+	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/customer/manager/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/customer/manager/default/item/delete' );
 	}
 
 

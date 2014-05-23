@@ -104,6 +104,22 @@ class MShop_Plugin_Manager_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/plugin/manager/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/plugin/manager/default/item/delete' );
+	}
+
+
+	/**
 	 * Initializes the object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object

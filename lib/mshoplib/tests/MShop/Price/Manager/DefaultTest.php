@@ -56,6 +56,12 @@ class MShop_Price_Manager_DefaultTest extends MW_Unittest_Testcase
 		unset( $this->_object );
 	}
 
+
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
 	public function testGetSearchAttributes()
 	{
 		foreach($this->_object->getSearchAttributes() as $object) {

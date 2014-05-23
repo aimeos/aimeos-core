@@ -95,6 +95,22 @@ class MShop_Order_Manager_Base_Coupon_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/order/manager/base/coupon/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/order/manager/base/coupon/default/item/delete' );
+	}
+
+
+	/**
 	 * Creates a new order base coupon object.
 	 *
 	 * @return MShop_Order_Item_Base_Coupon_Interface New order coupon object
