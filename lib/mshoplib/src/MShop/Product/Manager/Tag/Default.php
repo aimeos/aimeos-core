@@ -93,6 +93,22 @@ class MShop_Product_Manager_Tag_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/product/manager/tag/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/product/manager/tag/default/item/delete' );
+	}
+
+
+	/**
 	 * Creates new tag item object.
 	 *
 	 * @return MShop_Product_Item_Tag_Interface New tag item object

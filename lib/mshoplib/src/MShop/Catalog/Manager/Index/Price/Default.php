@@ -158,6 +158,22 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/catalog/manager/index/price/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/catalog/manager/index/price/default/item/delete' );
+	}
+
+
+	/**
 	 * Creates new price item object.
 	 *
 	 * @return MShop_Price_Item_Interface New product item

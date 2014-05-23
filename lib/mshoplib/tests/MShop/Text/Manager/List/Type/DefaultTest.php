@@ -47,6 +47,12 @@ class MShop_Text_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.

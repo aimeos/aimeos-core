@@ -176,6 +176,22 @@ class MShop_Catalog_Manager_Index_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/catalog/manager/index/submanagers';
+		$default = array( 'attribute', 'catalog', 'price', 'text' );
+
+		foreach( $this->_getContext()->getConfig()->get( $path, $default ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+	}
+
+
+	/**
 	 * Removes all entries not touched after the given timestamp in the catalog index.
 	 * This can be a long lasting operation.
 	 *

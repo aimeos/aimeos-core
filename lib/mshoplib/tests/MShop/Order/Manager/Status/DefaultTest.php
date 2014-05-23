@@ -58,6 +58,12 @@ class MShop_Order_Manager_Status_DefaultTest extends MW_Unittest_Testcase
 		unset($this->_object);
 	}
 
+
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf('MShop_Order_Item_Status_Interface', $this->_object->createItem());

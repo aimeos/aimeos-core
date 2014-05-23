@@ -49,6 +49,12 @@ class MAdmin_Job_Manager_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( 'MAdmin_Job_Item_Interface', $this->_object->createItem() );

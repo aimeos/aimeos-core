@@ -17,6 +17,13 @@
 interface MShop_Common_Manager_Interface
 {
 	/**
+	 * Removes old entries from the storage
+	 *
+	 * @param array $siteids List of IDs for sites Whose entries should be deleted
+	 */
+	public function cleanup( array $siteids );
+
+	/**
 	 * Creates new item object.
 	 *
 	 * @return MShop_Common_Item_Interface New item object
@@ -29,7 +36,7 @@ interface MShop_Common_Manager_Interface
 	 * @param boolean $default Add default criteria
 	 * @return MW_Common_Criteria_Interface Returns the Search object
 	 */
-	public function createSearch($default = false);
+	public function createSearch( $default = false );
 
 	/**
 	 * Deletes the item specified by its ID.

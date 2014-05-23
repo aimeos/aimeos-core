@@ -57,6 +57,17 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	 *
 	 * @return MShop_Common_Item_Interface New item object
 	 */
+	public function cleanup( array $siteids )
+	{
+		return $this->_manager->cleanup( $siteids );
+	}
+
+
+	/**
+	 * Creates new item object.
+	 *
+	 * @return MShop_Common_Item_Interface New item object
+	 */
 	public function createItem()
 	{
 		return $this->_manager->createItem();

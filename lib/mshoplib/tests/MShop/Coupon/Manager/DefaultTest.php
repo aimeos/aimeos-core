@@ -59,6 +59,12 @@ class MShop_Coupon_Manager_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
+
 	public function testGetSearchAttributes()
 	{
 		$attribs = $this->_object->getSearchAttributes();

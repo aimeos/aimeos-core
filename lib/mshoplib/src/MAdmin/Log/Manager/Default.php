@@ -91,6 +91,22 @@ class MAdmin_Log_Manager_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/log/manager/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'madmin/log/manager/default/delete' );
+	}
+
+
+	/**
 	 * Create new log item object.
 	 *
 	 * @return MAdmin_Log_Item_Interface

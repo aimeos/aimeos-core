@@ -134,6 +134,24 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/order/manager/base/submanagers';
+		$default = array( 'address', 'coupon', 'product', 'service' );
+
+		foreach( $this->_getContext()->getConfig()->get( $path, $default ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/order/manager/base/default/item/delete' );
+	}
+
+
+	/**
 	 * Returns a new and empty order base item (shopping basket).
 	 *
 	 * @return MShop_Order_Item_Base_Interface Order base object

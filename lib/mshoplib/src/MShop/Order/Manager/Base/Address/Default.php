@@ -221,6 +221,22 @@ class MShop_Order_Manager_Base_Address_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/order/manager/base/address/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/order/manager/base/address/default/item/delete' );
+	}
+
+
+	/**
 	 * Creates new order base address item object.
 	 *
 	 * @return MShop_Order_Item_Base_Address_Interface New order address item object

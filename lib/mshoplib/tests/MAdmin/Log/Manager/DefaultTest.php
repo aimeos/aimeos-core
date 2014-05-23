@@ -49,6 +49,12 @@ class MAdmin_Log_Manager_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( 'MAdmin_Log_Item_Interface', $this->_object->createItem() );
@@ -124,7 +130,7 @@ class MAdmin_Log_Manager_DefaultTest extends MW_Unittest_Testcase
 		$itemUpd = $this->_object->getItem( $item->getId() );
 
 		$this->_object->deleteItem( $item->getId() );
-		
+
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertTrue( $item->getTimestamp() === null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -133,14 +139,14 @@ class MAdmin_Log_Manager_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getMessage(), $itemSaved->getMessage() );
 		$this->assertEquals( $item->getRequest(), $itemSaved->getRequest() );
 		$this->assertEquals( $item->getPriority(), $itemSaved->getPriority() );
-		
+
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteid(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getFacility(), $itemUpd->getFacility() );
 		$this->assertEquals( $itemExp->getMessage(), $itemUpd->getMessage() );
 		$this->assertEquals( $itemExp->getRequest(), $itemUpd->getRequest() );
 		$this->assertEquals( $itemExp->getPriority(), $itemUpd->getPriority() );
-		
+
 		$this->setExpectedException( 'MAdmin_Log_Exception' );
 		$this->_object->getItem( $item->getId() );
 	}

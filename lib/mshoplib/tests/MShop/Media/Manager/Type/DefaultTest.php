@@ -59,6 +59,12 @@ class MShop_Media_Manager_Type_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup( array( -1 ) );
+	}
+
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $this->_object->createItem() );

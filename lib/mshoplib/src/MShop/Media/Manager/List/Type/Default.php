@@ -100,6 +100,17 @@ class MShop_Media_Manager_List_Type_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$this->_cleanup( $siteids, 'mshop/media/manager/list/type/default/item/delete' );
+	}
+
+
+	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true

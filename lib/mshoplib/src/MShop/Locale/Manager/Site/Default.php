@@ -200,8 +200,29 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		$context = $this->_getContext();
+		$config = $context->getConfig();
+
 		$path = 'mshop/locale/manager/site/default/item/delete';
-		$this->_deleteItems($ids, $this->_getContext()->getConfig()->get( $path, $path ), false );
+		$this->_deleteItems($ids, $config->get( $path, $path ), false );
+
+		$path = 'mshop/locale/manager/site/cleanup/shop/domains';
+		$default = array(
+			'attribute', 'catalog', 'catalog/index', 'coupon', 'customer',
+			'media', 'order', 'plugin', 'price', 'product', 'product/tag',
+			'service', 'supplier', 'text'
+		);
+
+		foreach( $config->get( $path, $default ) as $domain ) {
+			MShop_Factory::createManager( $context, $domain )->cleanup( $ids );
+		}
+
+		$path = 'mshop/locale/manager/site/cleanup/admin/domains';
+		$default = array( 'job', 'log' );
+
+		foreach( $config->get( $path, $default ) as $domain ) {
+			MAdmin_Factory::createManager( $context, $domain )->cleanup( $ids );
+		}
 	}
 
 

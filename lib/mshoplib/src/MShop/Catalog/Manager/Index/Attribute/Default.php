@@ -115,6 +115,22 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/catalog/manager/index/attribute/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/catalog/manager/index/attribute/default/item/delete' );
+	}
+
+
+	/**
 	 * Creates new attribute item object.
 	 *
 	 * @return MShop_Attribute_Item_Interface New product item

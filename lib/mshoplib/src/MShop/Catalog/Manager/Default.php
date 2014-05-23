@@ -133,6 +133,55 @@ class MShop_Catalog_Manager_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$context = $this->_getContext();
+		$config = $context->getConfig();
+		$search = $this->createSearch();
+
+		$path = 'classes/catalog/manager/submanagers';
+		foreach( $config->get( $path, array( 'list' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
+		$conn = $dbm->acquire( $dbname );
+
+		try
+		{
+			$path = 'mshop/catalog/manager/default/item/delete';
+			$sql = $config->get( $path, $path );
+
+			$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_STR );
+			$translations = array( 'siteid' => '"siteid"' );
+
+			foreach( $siteids as $siteid )
+			{
+				$search->setConditions( $search->compare( '==', 'siteid', $siteid ) );
+				$sql = str_replace( ':siteid', $search->getConditionString( $types, $translations ), $sql );
+
+				$stmt = $conn->create( $sql );
+				$stmt->bind( 1, 0, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 2, 0x7FFFFFFF, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->execute()->finish();
+			}
+
+			$dbm->release( $conn, $dbname );
+		}
+		catch( Exception $e )
+		{
+			$dbm->release( $conn, $dbname );
+			throw $e;
+		}
+	}
+
+
+	/**
 	 * Creates new item object.
 	 *
 	 * @return MShop_Common_Item_Interface New item object

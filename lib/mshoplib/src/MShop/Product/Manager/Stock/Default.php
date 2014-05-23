@@ -103,6 +103,22 @@ class MShop_Product_Manager_Stock_Default
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/product/manager/stock/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'warehouse' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->_cleanup( $siteids, 'mshop/product/manager/stock/default/item/delete' );
+	}
+
+
+	/**
 	 * Creates new stock item object.
 	 *
 	 * @return MShop_Product_Item_Stock_Interface New product stock item object
