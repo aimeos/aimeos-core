@@ -15,7 +15,7 @@
  * @subpackage Job
  */
 class MAdmin_Job_Manager_Factory
-	extends MShop_Common_Factory_Abstract
+	extends MAdmin_Common_Factory_Abstract
 	implements MShop_Common_Factory_Interface
 {
 	/**
@@ -31,12 +31,16 @@ class MAdmin_Job_Manager_Factory
 			$name = $context->getConfig()->get( 'classes/job/manager/name', 'Default' );
 		}
 
-		if( ctype_alnum( $name ) === false ) {
-			throw new MAdmin_Job_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
+		if( ctype_alnum( $name ) === false )
+		{
+			$classname = is_string($name) ? 'MAdmin_Job_Manager_' . $name : '<not a string>';
+			throw new MAdmin_Job_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'MAdmin_Job_Manager_Interface';
 		$classname = 'MAdmin_Job_Manager_' . $name;
-		return self::_createManager( $context, $classname, $iface );
+
+		$manager = self::_createManager( $context, $classname, $iface );
+		return self::_addManagerDecorators( $context, $manager, 'job' );
 	}
 }
