@@ -449,21 +449,17 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		}
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
-		$manager =  $this->_addDecorators( $this->_context, $manager,
-			$decorators, $classprefix );
+		$manager =  $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', array() );
-		$manager =  $this->_addDecorators( $this->_context, $manager,
-			$decorators, $classprefix );
+		$manager =  $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
 
 		$subpath = $this->_createSubNames( $managerpath );
 		$classprefix = 'MShop_'. ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', array() );
-		$manager =  $this->_addDecorators( $this->_context, $manager,
-			$decorators, $classprefix );
 
-		return $manager;
+		return $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
 	}
 
 
