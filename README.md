@@ -1,4 +1,8 @@
-# Arcavias core - high performance e-commerce [![Build Status](https://travis-ci.org/Arcavias/arcavias-core.png?branch=master)](https://travis-ci.org/Arcavias/arcavias-core)
+# Arcavias core - high performance e-commerce
+
+[![Build Status](https://travis-ci.org/Arcavias/arcavias-core.png?branch=master)](https://travis-ci.org/Arcavias/arcavias-core)
+[![Total Downloads](https://poser.pugx.org/arcavias/arcavias-core/downloads.svg)](https://packagist.org/packages/arcavias/arcavias-core)
+[![License](https://poser.pugx.org/arcavias/arcavias-core/license.svg)](https://packagist.org/packages/arcavias/arcavias-core)
 
 ## What is Arcavias core?
 
