@@ -234,6 +234,115 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
+		/** classes/order/manager/base/name
+		 * Class name of the used order base manager implementation
+		 *
+		 * Each default order base manager can be replaced by an alternative imlementation.
+		 * To use this implementation, you have to set the last part of the class
+		 * name as configuration value so the manager factory knows which class it
+		 * has to instantiate.
+		 *
+		 * For example, if the name of the default class is
+		 *
+		 *  MShop_Order_Manager_Base_Default
+		 *
+		 * and you want to replace it with your own version named
+		 *
+		 *  MShop_Order_Manager_Base_Mybase
+		 *
+		 * then you have to set the this configuration option:
+		 *
+		 *  classes/order/manager/base/name = Mybase
+		 *
+		 * The value is the last part of your own class name and it's case sensitive,
+		 * so take care that the configuration value is exactly named like the last
+		 * part of the class name.
+		 *
+		 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
+		 * characters are possible! You should always start the last part of the class
+		 * name with an upper case character and continue only with lower case characters
+		 * or numbers. Avoid chamel case names like "MyBase"!
+		 *
+		 * @param string Last part of the class name
+		 * @since 2014.03
+		 * @category Developer
+		 */
+
+		/** mshop/order/manager/base/decorators/excludes
+		 * Excludes decorators added by the "common" option from the order base manager
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to remove a decorator added via
+		 * "mshop/common/manager/decorators/default" before they are wrapped
+		 * around the order base manager.
+		 *
+		 *  mshop/order/manager/base/decorators/excludes = array( 'decorator1' )
+		 *
+		 * This would remove the decorator named "decorator1" from the list of
+		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * "mshop/common/manager/decorators/default" for the order base manager.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/common/manager/decorators/default
+		 * @see mshop/order/manager/base/decorators/global
+		 * @see mshop/order/manager/base/decorators/local
+		 */
+
+		/** mshop/order/manager/base/decorators/global
+		 * Adds a list of globally available decorators only to the order base manager
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap global decorators
+		 * ("MShop_Common_Manager_Decorator_*") around the order base manager.
+		 *
+		 *  mshop/order/manager/base/decorators/global = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "MShop_Common_Manager_Decorator_Decorator1" only to the order controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/common/manager/decorators/default
+		 * @see mshop/order/manager/base/decorators/excludes
+		 * @see mshop/order/manager/base/decorators/local
+		 */
+
+		/** mshop/order/manager/base/decorators/local
+		 * Adds a list of local decorators only to the order base manager
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap local decorators
+		 * ("MShop_Common_Manager_Decorator_*") around the order base manager.
+		 *
+		 *  mshop/order/manager/base/decorators/local = array( 'decorator2' )
+		 *
+		 * This would add the decorator named "decorator2" defined by
+		 * "MShop_Common_Manager_Decorator_Decorator2" only to the order
+		 * controller.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/common/manager/decorators/default
+		 * @see mshop/order/manager/base/decorators/excludes
+		 * @see mshop/order/manager/base/decorators/global
+		 */
+
 		return $this->_getSubManager( 'order', 'base/' . $manager, $name );
 	}
 
