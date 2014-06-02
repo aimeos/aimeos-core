@@ -329,10 +329,6 @@
 	font-weight: bold;
 }
 
-.common-summary-detail .attr-list .sign {
-	font-size: 150%;
-}
-
 .common-summary-detail .attr-item .name:after {
 	content: ":";
 }
@@ -1449,6 +1445,7 @@
 	width: 46%;
 	font-size: 150%;
 	display: inline-block;
+	max-width: 12em;
 }
 
 .basket-standard-coupon .coupon-new:hover {
@@ -1472,7 +1469,7 @@
 	min-width: 2em;
 	padding: 0;
 	margin: 0;
-	width: 20%;
+	vertical-align: baseline;
 }
 
 .basket-standard-coupon .coupon-new .standardbutton:hover {
