@@ -94,7 +94,7 @@ class Client_Html_Basket_Standard_Coupon_DefaultTest extends MW_Unittest_Testcas
 		$view->standardBasket = $controller->get();
 		$output = $this->_object->getBody();
 
-		$this->assertRegExp( '#<li class="coupon-item">.*90AB.*</li>#smU', $output );
+		$this->assertRegExp( '#<li class="attr-item">.*90AB.*</li>#smU', $output );
 	}
 
 
@@ -123,7 +123,7 @@ class Client_Html_Basket_Standard_Coupon_DefaultTest extends MW_Unittest_Testcas
 		$view->standardBasket = $controller->get();
 		$output = $this->_object->getBody();
 
-		$this->assertNotRegExp( '#<ul class="coupon-list">#smU', $output );
+		$this->assertNotRegExp( '#<ul class="attr-list">#smU', $output );
 	}
 
 
