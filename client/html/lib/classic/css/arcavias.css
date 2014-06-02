@@ -255,13 +255,15 @@
 	color: #000000;
 }
 
+.common-summary-detail h2,
+.common-summary-coupon h2 {
+	display: inline-block;
+	font-size: 1em;
+}
+
 .common-summary-detail .header {
 	border-bottom: none;
 	background-color: #FFFFFF;
-}
-
-.common-summary-detail h2 {
-	font-size: 1em;
 }
 
 .common-summary-detail .basket {
