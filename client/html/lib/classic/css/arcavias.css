@@ -1406,24 +1406,25 @@
 }
 
 .basket-standard-coupon {
-	padding: 10px;
+	padding: 1em !important;
 	margin: 0;
 }
 
 .basket-standard-coupon .header {
-	padding: 5px 10px 0;
-	margin: 0px 5px 5px;
+	display: inline-block;
+	font-size: 1em;
+	width: 46%;
 }
 
 .basket-standard-coupon .content {
-	padding: 0 10px;
+	display: inline-block;
+	width: 46%;
 }
 
 .basket-standard-coupon .coupon-list {
 	display: inline-block;
-	font-wight: bold;
+	font-weight: bold;
 	margin: 0.5em;
-	width: 46%;
 }
 
 .basket-standard-coupon .coupon-item .coupon-code,
@@ -1440,12 +1441,10 @@
 	background-color: #689DB9;
 	border: 1px solid #689DB9;
 	border-radius: 4px;
-	white-space: nowrap;
-	margin: 0.5em;
-	width: 46%;
-	font-size: 150%;
 	display: inline-block;
+	white-space: nowrap;
 	max-width: 12em;
+	margin: 0.5em;
 }
 
 .basket-standard-coupon .coupon-new:hover {
@@ -1469,7 +1468,6 @@
 	min-width: 2em;
 	padding: 0;
 	margin: 0;
-	vertical-align: baseline;
 }
 
 .basket-standard-coupon .coupon-new .standardbutton:hover {
