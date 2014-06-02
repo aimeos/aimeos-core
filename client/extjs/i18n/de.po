@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 13:34+0200\n"
-"PO-Revision-Date: 2014-05-15 11:24+0000\n"
+"POT-Creation-Date: 2014-06-02 13:55+0200\n"
+"PO-Revision-Date: 2014-06-02 12:01+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -793,6 +793,10 @@ msgstr "Keine Einträge"
 msgid "Not implemented"
 msgstr "Nicht implementiert"
 
+#: src/panel/coupon/code/ListUi.js:110
+msgid "Notice"
+msgstr "Hinweis"
+
 #: src/panel/order/OrderItemUi.js:15 src/panel/order/ListUi.js:33
 msgid "Order"
 msgstr "Bestellung"
@@ -827,6 +831,10 @@ msgstr "Zahlungsstatus"
 #: src/panel/ListItemItemUi.js:82
 msgid "Please recheck your data"
 msgstr "Bitte überprüfen Sie die Daten"
+
+#: src/panel/coupon/code/ListUi.js:111
+msgid "Please save the coupon first before you can add codes"
+msgstr "Bitte speichern Sie zuerst den Gutschein bevor Sie Codes hinzufügen können"
 
 #: src/panel/ListItemListUi.js:89
 msgid ""

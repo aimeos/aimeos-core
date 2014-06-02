@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 13:34+0200\n"
+"POT-Creation-Date: 2014-06-02 13:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -791,6 +791,10 @@ msgstr ""
 msgid "Not implemented"
 msgstr ""
 
+#: src/panel/coupon/code/ListUi.js:110
+msgid "Notice"
+msgstr ""
+
 #: src/panel/order/OrderItemUi.js:15 src/panel/order/ListUi.js:33
 msgid "Order"
 msgstr ""
@@ -824,6 +828,10 @@ msgstr ""
 #: src/panel/AbstractListItemUi.js:36 src/panel/AbstractTreeItemUi.js:33
 #: src/panel/ListItemItemUi.js:82
 msgid "Please recheck your data"
+msgstr ""
+
+#: src/panel/coupon/code/ListUi.js:111
+msgid "Please save the coupon first before you can add codes"
 msgstr ""
 
 #: src/panel/ListItemListUi.js:89

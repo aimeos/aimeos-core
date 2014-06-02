@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 13:18+0200\n"
+"POT-Creation-Date: 2014-06-02 13:55+0200\n"
 "PO-Revision-Date: 2014-01-29 12:00+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -790,6 +790,10 @@ msgstr ""
 msgid "Not implemented"
 msgstr ""
 
+#: src/panel/coupon/code/ListUi.js:110
+msgid "Notice"
+msgstr ""
+
 #: src/panel/order/OrderItemUi.js:15 src/panel/order/ListUi.js:33
 msgid "Order"
 msgstr ""
@@ -823,6 +827,10 @@ msgstr ""
 #: src/panel/AbstractListItemUi.js:36 src/panel/AbstractTreeItemUi.js:33
 #: src/panel/ListItemItemUi.js:82
 msgid "Please recheck your data"
+msgstr ""
+
+#: src/panel/coupon/code/ListUi.js:111
+msgid "Please save the coupon first before you can add codes"
 msgstr ""
 
 #: src/panel/ListItemListUi.js:89
