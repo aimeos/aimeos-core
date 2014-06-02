@@ -1422,15 +1422,15 @@
 	font-size: 1em;
 }
 
-.basket-standard-coupon .coupon-list {
+.basket-standard-coupon .attr-list {
 	display: inline-block;
 	font-weight: bold;
 	list-style: none;
 	margin: 0.5em;
 }
 
-.basket-standard-coupon .coupon-item .coupon-code,
-.basket-standard-coupon .coupon-item .change {
+.basket-standard-coupon .attr-item .coupon-code,
+.basket-standard-coupon .attr-item .change {
 	font-weight: bold;
 	font-size: 133%;
 	padding: 0.5em;
