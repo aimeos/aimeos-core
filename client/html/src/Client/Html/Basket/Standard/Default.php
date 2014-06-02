@@ -332,7 +332,7 @@ class Client_Html_Basket_Standard_Default
 
 					break;
 
-				default:
+				case 'edit':
 
 					$products = (array) $view->param( 'b-prod', array() );
 

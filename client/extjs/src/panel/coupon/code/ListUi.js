@@ -105,6 +105,15 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 		MShop.panel.coupon.code.ListUi.superclass.onBeforeLoad.apply(this, arguments);
 
+		if( !this.ParentItemUi.record.data['coupon.id'] ) {
+	        Ext.Msg.alert(
+	        	MShop.I18n.dt( 'client/extjs', 'Notice' ),
+	        	MShop.I18n.dt( 'client/extjs', 'Please save the coupon first before you can add codes' ) );
+
+	        this.actionAdd.setDisabled( true );
+			return false;
+		}
+
 		// filter for refid
 		options.params = options.params || {};
 		options.params.condition = {
