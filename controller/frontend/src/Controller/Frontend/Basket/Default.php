@@ -245,8 +245,8 @@ class Controller_Frontend_Basket_Default
 
 		if( empty( $prices ) )
 		{
-			$productItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
-			$prices = $productItem->getRefItems( 'price', 'default' );
+			$parentItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
+			$prices = $parentItem->getRefItems( 'price', 'default' );
 		}
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
