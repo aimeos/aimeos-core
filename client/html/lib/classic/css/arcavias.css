@@ -1423,6 +1423,7 @@
 .basket-standard-coupon .coupon-list {
 	display: inline-block;
 	font-weight: bold;
+	list-style: none;
 	margin: 0.5em;
 }
 
