@@ -18,7 +18,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddTypeDataDefault' );
+		return array( 'MShopAddTypeDataDefault', 'MShopAddWarehouseDataDefault' );
 	}
 
 
