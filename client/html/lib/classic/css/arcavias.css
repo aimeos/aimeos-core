@@ -241,7 +241,8 @@
 }
 
 .common-summary-address h2,
-.common-summary-service h2 {
+.common-summary-service h2,
+.common-summary-coupon h2 {
 	display: none;
 }
 
@@ -255,8 +256,7 @@
 	color: #000000;
 }
 
-.common-summary-detail h2,
-.common-summary-coupon h2 {
+.common-summary-detail h2 {
 	display: inline-block;
 	font-size: 1em;
 }
