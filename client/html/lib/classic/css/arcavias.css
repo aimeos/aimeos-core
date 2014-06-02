@@ -1410,15 +1410,14 @@
 	margin: 0;
 }
 
-.basket-standard-coupon .header {
-	display: inline-block;
-	font-size: 1em;
-	width: 46%;
-}
-
+.basket-standard-coupon .header,
 .basket-standard-coupon .content {
 	display: inline-block;
 	width: 46%;
+}
+
+.basket-standard-coupon .header h2 {
+	font-size: 1em;
 }
 
 .basket-standard-coupon .coupon-list {
@@ -1456,7 +1455,7 @@
 	border-radius: 4px 0 0 4px;
 	border: none;
 	min-width: 5em;
-	height: 1.25em;
+	height: 1.55em;
 	width: 80%;
 }
 
