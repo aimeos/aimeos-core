@@ -294,7 +294,9 @@ class Client_Html_Checkout_Standard_Address_Default
 			 *
 			 * Each list entry must be a two letter ISO country code that is then
 			 * translated into its name. The codes have to be upper case
-			 * characters, e.g. "DE" for Germany or "GB" for Great Britain!
+			 * characters, e.g. "DE" for Germany or "GB" for Great Britain, e.g.
+			 *
+			 *  array( 'DE', 'GB', ... )
 			 *
 			 * To display the country selection, you have to add the key for the
 			 * country ID (order.base.address.languageid) to the "mandatory" or
