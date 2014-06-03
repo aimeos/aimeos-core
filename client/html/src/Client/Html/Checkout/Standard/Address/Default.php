@@ -294,7 +294,7 @@ class Client_Html_Checkout_Standard_Address_Default
 			 *
 			 * Each list entry must be a two letter ISO country code that is then
 			 * translated into its name. The codes have to be upper case
-			 * characters, e.g. "DE" for Germany or "GB" for Great Britain, e.g.
+			 * characters like "DE" for Germany or "GB" for Great Britain, e.g.
 			 *
 			 *  array( 'DE', 'GB', ... )
 			 *
