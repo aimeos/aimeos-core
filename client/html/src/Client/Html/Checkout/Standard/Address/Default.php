@@ -290,13 +290,24 @@ class Client_Html_Checkout_Standard_Address_Default
 			 * shown in the front-end users can select from. It's used e.g.
 			 * if the customer should select the country he is living in the
 			 * checkout process. In case that the list is empty, no country
-			 * selection is shown. Each list entry must be a two letter ISO
-			 * country code that is then translated into its name.
+			 * selection is shown.
+			 *
+			 * Each list entry must be a two letter ISO country code that is then
+			 * translated into its name. The codes have to be upper case
+			 * characters, e.g. "DE" for Germany or "GB" for Great Britain!
+			 *
+			 * To display the country selection, you have to add the key for the
+			 * country ID (order.base.address.languageid) to the "mandatory" or
+			 * "optional" configuration option for billing and delivery addresses.
 			 *
 			 * @param array List of two letter ISO country codes
 			 * @since 2014.03
 			 * @category User
 			 * @category Developer
+			 * @see client/html/common/address/billing/mandatory
+			 * @see client/html/common/address/billing/optional
+			 * @see client/html/common/address/delivery/mandatory
+			 * @see client/html/common/address/delivery/optional
 			 */
 			$view->addressCountries = $view->config( 'client/html/common/address/countries', array() );
 
