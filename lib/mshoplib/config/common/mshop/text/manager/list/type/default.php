@@ -7,24 +7,28 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_text_list_type"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_text_list_type"( "siteid", "code", "domain", "label", "status",
-				"mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_text_list_type" (
+				"siteid", "code", "domain", "label", "status", "mtime",
+				"editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_text_list_type"
-			SET "siteid"=?, "code" = ?, "domain" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?,
+				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_text_list_type"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT mtexlity."id", mtexlity."siteid", mtexlity."code", mtexlity."domain",
-				mtexlity."label", mtexlity."status", mtexlity."mtime", mtexlity."editor", mtexlity."ctime"
+			SELECT DISTINCT mtexlity."id", mtexlity."siteid", mtexlity."code",
+				mtexlity."domain", mtexlity."label", mtexlity."status",
+				mtexlity."mtime", mtexlity."editor", mtexlity."ctime"
 			FROM "mshop_text_list_type" AS mtexlity
 			:joins
 			WHERE :cond

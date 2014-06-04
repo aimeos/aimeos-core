@@ -19,23 +19,29 @@ return array(
 			) AS list
 			GROUP BY "key"
 		',
+		'delete' => '
+			DELETE FROM "mshop_attribute_list"
+			WHERE :cond AND siteid = ?
+		',
 		'getposmax' => '
 			SELECT MAX( "pos" ) AS pos
 			FROM "mshop_attribute_list"
-			WHERE "siteid" = ?
-				AND "parentid" = ?
-				AND "typeid" = ?
+			WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
 				AND "domain" = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_attribute_list"( "parentid", "siteid", "typeid", "domain", "refid", "start",
-				"end", "config", "pos", "status", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_attribute_list"(
+				"parentid", "siteid", "typeid", "domain", "refid", "start",
+				"end", "config", "pos", "status", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_attribute_list"
-			SET "parentid" = ?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-			"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "parentid" = ?, "siteid" = ?, "typeid" = ?, "domain" = ?,
+				"refid" = ?, "start" = ?, "end" = ?, "config" = ?, "pos" = ?,
+				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'updatepos' => '
@@ -43,23 +49,18 @@ return array(
 				SET "pos" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_attribute_list"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'move' => '
 			UPDATE "mshop_attribute_list"
 				SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-			WHERE "siteid" = ?
-				AND "parentid" = ?
-				AND "typeid" = ?
-				AND "domain" = ?
-				AND "pos" >= ?
+			WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+				AND "domain" = ? AND "pos" >= ?
 		',
 		'search' => '
-			SELECT mattli."id", mattli."parentid", mattli."siteid", mattli."typeid", mattli."domain",
-				mattli."refid", mattli."start", mattli."end", mattli."config", mattli."pos", mattli."status", mattli."mtime", mattli."ctime", mattli."editor"
+			SELECT DISTINCT mattli."id", mattli."parentid", mattli."siteid",
+				mattli."typeid", mattli."domain", mattli."refid",
+				mattli."start", mattli."end", mattli."config", mattli."pos",
+				mattli."status", mattli."mtime", mattli."ctime",
+				mattli."editor"
 			FROM "mshop_attribute_list" AS mattli
 			:joins
 			WHERE :cond

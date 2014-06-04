@@ -7,24 +7,28 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_service_type"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_service_type" ( "siteid", "code", "domain", "label", "status",
-				"mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_service_type" (
+				"siteid", "code", "domain", "label", "status", "mtime",
+				"editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_service_type"
-			SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?,
+				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_service_type"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT mserty."id", mserty."siteid", mserty."domain", mserty."code", mserty."label",
-				mserty."status", mserty."mtime", mserty."editor", mserty."ctime"
+			SELECT DISTINCT mserty."id", mserty."siteid", mserty."domain",
+				mserty."code", mserty."label", mserty."status", mserty."mtime",
+				mserty."editor", mserty."ctime"
 			FROM "mshop_service_type" AS mserty
 			:joins
 			WHERE :cond
