@@ -9,21 +9,26 @@ return array(
 	'delete' => '
 		DELETE FROM "madmin_log"
 		WHERE :cond
-		AND siteid = ?
+		AND "siteid" = ?
 	',
 	'insert' => '
-		INSERT INTO "madmin_log" ("siteid", "facility", "timestamp", "priority", "message", "request")
-		VALUES ( ?, ?, ?, ?, ?, ? )
+		INSERT INTO "madmin_log" (
+			"siteid", "facility", "timestamp", "priority", "message", "request"
+		) VALUES (
+			?, ?, ?, ?, ?, ?
+		)
 	',
 	'update' => '
 		UPDATE "madmin_log"
-		SET "siteid" = ?, "facility" = ?, "timestamp" = ?, "priority" = ?, "message" = ?, "request" = ?
+		SET "siteid" = ?, "facility" = ?, "timestamp" = ?, "priority" = ?,
+			"message" = ?, "request" = ?
 		WHERE "id" = ?
 	',
 	'search' => '
 		SELECT malog."id", malog."siteid", malog."facility", malog."timestamp",
 			malog."priority", malog."message", malog."request"
 		FROM "madmin_log" AS malog
+		:joins
 		WHERE :cond
 		/*-orderby*/ ORDER BY :order /*orderby-*/
 		LIMIT :size OFFSET :start
@@ -33,6 +38,7 @@ return array(
 		FROM(
 			SELECT DISTINCT malog."id"
 			FROM "madmin_log" AS malog
+			:joins
 			WHERE :cond
 			LIMIT 10000 OFFSET 0
 		) AS list
