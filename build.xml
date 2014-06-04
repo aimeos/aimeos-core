@@ -143,7 +143,7 @@
 			optfile="${coredir}/controller/frontend/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-classes-controller-frontend.wiki">
 			<fileset dir="${coredir}/controller/frontend/src" expandsymboliclinks="true" >
-				<include name="src/**/*.php" />
+				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
@@ -157,7 +157,7 @@
 			optfile="${coredir}/controller/jobs/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-classes-controller-jobs.wiki">
 			<fileset dir="${coredir}/controller/jobs/src" expandsymboliclinks="true" >
-				<include name="src/**/*.php" />
+				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="mshop" wikiprefix="Configuration/Core" keyparts="2"
@@ -178,7 +178,7 @@
 			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-classes-mshop.wiki">
 			<fileset dir="${coredir}/lib/mshoplib/src" expandsymboliclinks="true" >
-				<include name="src/**/*.php" />
+				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
 		<echo msg="Generating API documentation" />
