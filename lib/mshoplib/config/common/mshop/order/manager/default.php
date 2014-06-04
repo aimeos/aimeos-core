@@ -8,24 +8,30 @@
 return array(
 	'item' => array(
 		'insert' => '
-			INSERT INTO "mshop_order" ("baseid", "siteid", "type", "datepayment", "datedelivery", "statusdelivery", "statuspayment",
-				"relatedid", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_order" (
+				"baseid", "siteid", "type", "datepayment", "datedelivery",
+				"statusdelivery", "statuspayment", "relatedid", "mtime",
+				"editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_order"
-			SET "baseid" = ?, "siteid" = ?, "type" = ?, "datepayment" = ?, "datedelivery" = ?, "statusdelivery" = ?, "statuspayment" = ?,
+			SET "baseid" = ?, "siteid" = ?, "type" = ?, "datepayment" = ?,
+				"datedelivery" = ?, "statusdelivery" = ?, "statuspayment" = ?,
 				"relatedid" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'delete' => '
 			DELETE FROM "mshop_order"
-			WHERE :cond
-			AND siteid = ?
+			WHERE :cond AND siteid = ?
 		',
 		'search' => '
-			SELECT DISTINCT mord."id", mord."baseid", mord."siteid", mord."type", mord."datepayment", mord."datedelivery",
-				mord."statuspayment", mord."statusdelivery", mord."relatedid", mord."ctime", mord."mtime", mord."editor"
+			SELECT DISTINCT mord."id", mord."baseid", mord."siteid",
+				mord."type", mord."datepayment", mord."datedelivery",
+				mord."statuspayment", mord."statusdelivery", mord."relatedid",
+				mord."ctime", mord."mtime", mord."editor"
 			FROM "mshop_order" AS mord
 			:joins
 			WHERE :cond

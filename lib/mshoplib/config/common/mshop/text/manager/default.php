@@ -9,27 +9,30 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_text"
-			WHERE :cond
-			AND siteid = ?
+			WHERE :cond AND siteid = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_text" ("siteid", "langid", "typeid", "domain", "label", "content", "status",
-				"mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_text" (
+				"siteid", "langid", "typeid", "domain", "label", "content",
+				"status", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_text"
-			SET "siteid" = ?, "langid" = ?, "typeid" = ?, "domain" = ?, label = ?, "content" = ?, "status" = ?,
-				"mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "langid" = ?, "typeid" = ?, "domain" = ?,
+				"label" = ?, "content" = ?, "status" = ?, "mtime" = ?,
+				"editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT DISTINCT mtex."id", mtex."siteid", mtex."langid", mtex."typeid", mtex."domain", mtex."label",
-				mtex."content", mtex."status", mtex."mtime", mtex."editor", mtex."ctime"
+			SELECT DISTINCT mtex."id", mtex."siteid", mtex."langid",
+				mtex."typeid", mtex."domain", mtex."label", mtex."content",
+				mtex."status", mtex."mtime", mtex."editor", mtex."ctime"
 			FROM "mshop_text" AS mtex
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',

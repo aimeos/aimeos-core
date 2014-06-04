@@ -7,23 +7,28 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_price_list_type"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_price_list_type"( "siteid", "code", "domain", "label", "status", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_price_list_type" (
+				"siteid", "code", "domain", "label", "status", "mtime",
+				"editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_price_list_type"
-			SET "siteid"=?, "code" = ?, "domain" = ?, "label" = ?, "status" = ?,"mtime" = ?, "editor" = ?
+			SET "siteid"=?, "code" = ?, "domain" = ?, "label" = ?,
+				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_price_list_type"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT mprility."id", mprility."siteid", mprility."code", mprility."domain", mprility."label",
-				mprility."status", mprility."mtime", mprility."editor", mprility."ctime"
+			SELECT DISTINCT mprility."id", mprility."siteid", mprility."code",
+				mprility."domain", mprility."label", mprility."status",
+				mprility."mtime", mprility."editor", mprility."ctime"
 			FROM "mshop_price_list_type" AS mprility
 			:joins
 			WHERE :cond

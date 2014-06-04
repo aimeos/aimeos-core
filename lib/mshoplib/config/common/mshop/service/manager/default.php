@@ -9,27 +9,31 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_service"
-			WHERE :cond
-			AND siteid = ?
+			WHERE :cond AND siteid = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_service" ("siteid", "pos", "typeid", "code", "label", "provider", "config",
-				"status", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_service" (
+				"siteid", "pos", "typeid", "code", "label", "provider",
+				"config", "status", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_service"
-			SET "siteid" = ?, "pos" = ?, "typeid" = ?, "code" = ?, "label" = ?, "provider" = ?, "config" = ?,
-				"status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "pos" = ?, "typeid" = ?, "code" = ?, "label" = ?,
+				"provider" = ?, "config" = ?, "status" = ?, "mtime" = ?,
+				"editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT DISTINCT mser."id", mser."siteid", mser."pos", mser."typeid", mser."code", mser."label",
-				mser."provider", mser."config", mser."status", mser."mtime", mser."editor", mser."ctime"
+			SELECT DISTINCT mser."id", mser."siteid", mser."pos",
+				mser."typeid", mser."code", mser."label", mser."provider",
+				mser."config", mser."status", mser."mtime", mser."editor",
+				mser."ctime"
 			FROM "mshop_service" AS mser
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',

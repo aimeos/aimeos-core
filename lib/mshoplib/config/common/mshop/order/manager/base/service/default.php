@@ -7,27 +7,34 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_order_base_service"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_order_base_service" ("baseid", "siteid", "servid", "type", "code",
-				"name", "mediaurl", "price", "costs", "rebate", "taxrate", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_order_base_service" (
+				"baseid", "siteid", "servid", "type", "code", "name",
+				"mediaurl", "price", "costs", "rebate", "taxrate", "mtime",
+				"editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_order_base_service"
-			SET "baseid" = ?, "siteid" = ?, "servid" = ?, "type" = ?, "code" = ?, "name" = ?, "mediaurl" = ?, "price" = ?,
-				"costs" = ?, "rebate" = ?, "taxrate" = ?, "mtime" = ?, "editor" = ?
+			SET "baseid" = ?, "siteid" = ?, "servid" = ?, "type" = ?,
+				"code" = ?, "name" = ?, "mediaurl" = ?, "price" = ?,
+				"costs" = ?, "rebate" = ?, "taxrate" = ?, "mtime" = ?,
+				"editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_order_base_service"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT DISTINCT mordbase."id", mordbase."baseid", mordbase."siteid", mordbase."servid",
-				mordbase."type", mordbase."code", mordbase."name", mordbase."mediaurl", mordbase."price",
-				mordbase."costs", mordbase."rebate", mordbase."taxrate",
-				mordbase."mtime", mordbase."editor", mordbase."ctime"
+			SELECT DISTINCT mordbase."id", mordbase."baseid",
+				mordbase."siteid", mordbase."servid", mordbase."type",
+				mordbase."code", mordbase."name", mordbase."mediaurl",
+				mordbase."price", mordbase."costs", mordbase."rebate",
+				mordbase."taxrate", mordbase."mtime", mordbase."editor",
+				mordbase."ctime"
 			FROM "mshop_order_base_service" AS mordbase
 			:joins
 			WHERE :cond

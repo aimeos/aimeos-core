@@ -7,24 +7,28 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_media_type"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_media_type" ( "siteid", "code", "domain", "label", "status",
-				"mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_media_type" (
+				"siteid", "code", "domain", "label", "status", "mtime",
+				"editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_media_type"
-			SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?,
+				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_media_type"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT mmedty."id", mmedty."siteid", mmedty."code", mmedty."domain", mmedty."label",
-				mmedty."status", mmedty."mtime", mmedty."editor", mmedty."ctime"
+			SELECT DISTINCT mmedty."id", mmedty."siteid", mmedty."code",
+				mmedty."domain", mmedty."label", mmedty."status",
+				mmedty."mtime", mmedty."editor", mmedty."ctime"
 			FROM "mshop_media_type" mmedty
 			:joins
 			WHERE :cond

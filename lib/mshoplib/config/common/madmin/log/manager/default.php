@@ -25,8 +25,9 @@ return array(
 		WHERE "id" = ?
 	',
 	'search' => '
-		SELECT malog."id", malog."siteid", malog."facility", malog."timestamp",
-			malog."priority", malog."message", malog."request"
+		SELECT DISTINCT malog."id", malog."siteid", malog."facility",
+			malog."timestamp", malog."priority", malog."message",
+			malog."request"
 		FROM "madmin_log" AS malog
 		:joins
 		WHERE :cond

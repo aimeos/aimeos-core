@@ -19,23 +19,29 @@ return array(
 			) AS list
 			GROUP BY "key"
 		',
+		'delete' => '
+			DELETE FROM "mshop_customer_list"
+			WHERE :cond AND siteid = ?
+		',
 		'getposmax' => '
 			SELECT MAX( "pos" ) AS pos
 			FROM "mshop_customer_list"
-			WHERE "siteid" = ?
-				AND "parentid" = ?
-				AND "typeid" = ?
+			WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
 				AND "domain" = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_customer_list"( "parentid", "siteid", "typeid", "domain", "refid", "start", "end",
-				"config", "pos", "status", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_customer_list" (
+				"parentid", "siteid", "typeid", "domain", "refid", "start",
+				"end", "config", "pos", "status", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_customer_list"
-			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-				"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?,
+				"refid" = ?, "start" = ?, "end" = ?, "config" = ?, "pos" = ?,
+				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'updatepos' => '
@@ -43,24 +49,18 @@ return array(
 				SET "pos" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_customer_list"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'move' => '
 			UPDATE "mshop_customer_list"
 				SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-			WHERE "siteid" = ?
-				AND "parentid" = ?
-				AND "typeid" = ?
-				AND "domain" = ?
-				AND "pos" >= ?
+			WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+				AND "domain" = ? AND "pos" >= ?
 		',
 		'search' => '
-			SELECT mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."typeid",
-				mcusli."domain", mcusli."refid", mcusli."start", mcusli."end", mcusli."config",
-				mcusli."pos", mcusli."status", mcusli."mtime", mcusli."editor", mcusli."ctime"
+			SELECT DISTINCT mcusli."id", mcusli."parentid", mcusli."siteid",
+				mcusli."typeid", mcusli."domain", mcusli."refid",
+				mcusli."start", mcusli."end", mcusli."config", mcusli."pos",
+				mcusli."status", mcusli."mtime", mcusli."editor",
+				mcusli."ctime"
 			FROM "mshop_customer_list" AS mcusli
 			:joins
 			WHERE :cond

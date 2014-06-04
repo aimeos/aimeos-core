@@ -19,22 +19,28 @@ return array(
 			) AS list
 			GROUP BY "key"
 		',
+		'delete' => '
+			DELETE FROM "mshop_media_list"
+			WHERE :cond AND siteid = ?
+		',
 		'getposmax' => '
 			SELECT MAX( "pos" ) AS pos
 			FROM "mshop_media_list"
-			WHERE "siteid" = ?
-				AND "parentid" = ?
-				AND "typeid" = ?
+			WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
 				AND "domain" = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_media_list"( "parentid", "siteid", "typeid", "domain", "refid", "start",
-				"end", "config", "pos", "status", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_media_list"(
+				"parentid", "siteid", "typeid", "domain", "refid", "start",
+				"end", "config", "pos", "status", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_media_list"
-			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?, "config" = ?,
+			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?,
+				"refid" = ?, "start" = ?, "end" = ?, "config" = ?,
 				"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
@@ -43,24 +49,18 @@ return array(
 				SET "pos" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_media_list"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'move' => '
 			UPDATE "mshop_media_list"
 				SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-			WHERE "siteid" = ?
-				AND "parentid" = ?
-				AND "typeid" = ?
-				AND "domain" = ?
-				AND "pos" >= ?
+			WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+				AND "domain" = ? AND "pos" >= ?
 		',
 		'search' => '
-			SELECT mmedli."id", mmedli."parentid", mmedli."siteid", mmedli."typeid",
-				mmedli."domain", mmedli."refid", mmedli."start", mmedli."end", mmedli."config",
-				mmedli."pos", mmedli."status", mmedli."mtime", mmedli."editor", mmedli."ctime"
+			SELECT DISTINCT mmedli."id", mmedli."parentid", mmedli."siteid",
+				mmedli."typeid", mmedli."domain", mmedli."refid",
+				mmedli."start", mmedli."end", mmedli."config", mmedli."pos",
+				mmedli."status", mmedli."mtime", mmedli."editor",
+				mmedli."ctime"
 			FROM "mshop_media_list" AS mmedli
 			:joins
 			WHERE :cond

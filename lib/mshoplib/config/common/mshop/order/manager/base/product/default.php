@@ -7,35 +7,45 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_order_base_product"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_order_base_product" ("baseid", "siteid", "ordprodid", "type", "prodid", "prodcode",
-				"suppliercode", "warehousecode", "name", "mediaurl", "quantity", "price", "costs", "rebate", "taxrate",
-				"flags", "status", "pos", "mtime", "editor", "ctime")
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			INSERT INTO "mshop_order_base_product" (
+				"baseid", "siteid", "ordprodid", "type", "prodid", "prodcode",
+				"suppliercode", "warehousecode", "name", "mediaurl",
+				"quantity", "price", "costs", "rebate", "taxrate", "flags",
+				"status", "pos", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_order_base_product"
-			SET "baseid" = ?, "siteid" = ?, "ordprodid" = ?, "type" = ?, "prodid" = ?, "prodcode" = ?,
-				"suppliercode" = ?, "warehousecode" = ?, "name" = ?, "mediaurl" = ?, "quantity" = ?,
-				"price" = ?, "costs" = ?, "rebate" = ?, "taxrate" = ?, "flags" = ?, "status" = ?, "pos" = ?,
-				"mtime" = ? , "editor" = ?
+			SET "baseid" = ?, "siteid" = ?, "ordprodid" = ?, "type" = ?,
+				"prodid" = ?, "prodcode" = ?, "suppliercode" = ?,
+				"warehousecode" = ?, "name" = ?, "mediaurl" = ?,
+				"quantity" = ?, "price" = ?, "costs" = ?, "rebate" = ?,
+				"taxrate" = ?, "flags" = ?, "status" = ?, "pos" = ?,
+				"mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_order_base_product"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT DISTINCT mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid", mordbapr."type",
-				mordbapr."prodid", mordbapr."prodcode", mordbapr."suppliercode", mordbapr."warehousecode", mordbapr."name",
-				mordbapr."mediaurl", mordbapr."quantity", mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."taxrate",
-				mordbapr."flags", mordbapr."status", mordbapr."mtime", mordbapr."pos", mordbapr."editor", mordbapr."ctime"
+			SELECT DISTINCT mordbapr."id", mordbapr."baseid",
+				mordbapr."siteid", mordbapr."ordprodid", mordbapr."type",
+				mordbapr."prodid", mordbapr."prodcode",
+				mordbapr."suppliercode", mordbapr."warehousecode",
+				mordbapr."name", mordbapr."mediaurl", mordbapr."quantity",
+				mordbapr."price", mordbapr."costs", mordbapr."rebate",
+				mordbapr."taxrate", mordbapr."flags", mordbapr."status",
+				mordbapr."mtime", mordbapr."pos", mordbapr."editor",
+				mordbapr."ctime"
 			FROM "mshop_order_base_product" AS mordbapr
 			:joins
 			WHERE :cond
 			/*-orderby*/ ORDER BY :order /*orderby-*/
-			LIMIT :start, :size
+			LIMIT :size OFFSET :start
 		',
 		'count' => '
 			SELECT COUNT(*) AS "count"

@@ -9,21 +9,26 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_locale"
-			WHERE :cond
-			AND siteid = ?
+			WHERE :cond AND siteid = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_locale" ( "siteid", "langid", "currencyid", "pos", "status", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_locale" (
+				"siteid", "langid", "currencyid", "pos", "status", "mtime",
+				"editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_locale"
-			SET "siteid" = ?, "langid" = ?, "currencyid" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "langid" = ?, "currencyid" = ?, "pos" = ?,
+				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT DISTINCT mloc."id", mloc."siteid", mloc."langid", mloc."currencyid", mloc."pos", mloc."status",
-				mloc."mtime", mloc."editor", mloc."ctime"
+			SELECT DISTINCT mloc."id", mloc."siteid", mloc."langid",
+			mloc."currencyid", mloc."pos", mloc."status", mloc."mtime",
+			mloc."editor", mloc."ctime"
 			FROM "mshop_locale" AS mloc
 			LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")
 			LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
