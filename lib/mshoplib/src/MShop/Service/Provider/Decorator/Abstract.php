@@ -19,8 +19,6 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	implements MShop_Service_Provider_Decorator_Interface
 {
 	private $_object;
-	private $_context;
-	private $_item;
 
 
 	/**
@@ -30,12 +28,12 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration for the provider
 	 * @param MShop_Service_Provider_Interface $provider Service provider or decorator
 	 */
-	public function __construct(MShop_Context_Item_Interface $context,
+	public function __construct( MShop_Context_Item_Interface $context,
 		MShop_Service_Item_Interface $serviceItem, MShop_Service_Provider_Interface $provider )
 	{
+		parent::__construct( $context, $serviceItem );
+
 		$this->_object = $provider;
-		$this->_context = $context;
-		$this->_item = $serviceItem;
 	}
 
 
@@ -101,17 +99,6 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
 	{
 		return $this->_object->getConfigFE( $basket );
-	}
-
-
-	/**
-	 * Returns the service item which also includes the configuration for the service provider.
-	 *
-	 * @return MShop_Service_Item_Interface Service item
-	 */
-	public function getServiceItem()
-	{
-		return $this->_item;
 	}
 
 
@@ -221,17 +208,6 @@ abstract class MShop_Service_Provider_Decorator_Abstract
 	public function updateSync( $additional )
 	{
 		return $this->_object->updateSync($additional);
-	}
-
-
-	/**
-	 * Returns the context object.
-	 *
-	 * @return MShop_Context_Item_Interface Context object
-	 */
-	protected function _getContext()
-	{
-		return $this->_context;
 	}
 
 
