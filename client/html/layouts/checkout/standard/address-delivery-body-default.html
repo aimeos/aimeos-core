@@ -158,7 +158,7 @@ $allFields = array_keys( $deliveryCss );
 					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select country' ), $enc::TRUST ); ?></option>
 <?php	endif; ?>
 <?php	foreach( $deliveryCountries as $countryId ) : ?>
-					<option value="<?php echo $enc->attr( $countryId ) ?>" <?php echo ( $country === $deliveryCountry ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
+					<option value="<?php echo $enc->attr( $countryId ) ?>" <?php echo ( $countryId === $deliveryCountry ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
 <?php	endforeach; ?>
 				</select>
 			</li>

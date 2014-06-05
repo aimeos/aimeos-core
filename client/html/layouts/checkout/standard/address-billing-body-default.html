@@ -154,7 +154,7 @@ $allFields = array_keys( $paymentCss );
 					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select country' ), $enc::TRUST ); ?></option>
 <?php	endif; ?>
 <?php	foreach( $billingCountries as $countryId ) : ?>
-					<option value="<?php echo $enc->attr( $countryId ); ?>" <?php echo ( $country === $billingCountry ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
+					<option value="<?php echo $enc->attr( $countryId ); ?>" <?php echo ( $countryId === $billingCountry ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
 <?php	endforeach; ?>
 				</select>
 			</li>
