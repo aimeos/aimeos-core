@@ -60,6 +60,8 @@ class Controller_Frontend_Service_Default
 
 				if( $provider->isAvailable( $basket ) ) {
 					$this->_providers[$type][$id] = $provider;
+				} else {
+					unset( $this->_items[$type][$id] );
 				}
 			}
 			catch( MShop_Service_Exception $e )
