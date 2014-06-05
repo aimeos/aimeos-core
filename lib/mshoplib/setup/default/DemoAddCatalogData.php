@@ -49,6 +49,7 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 	{
 		$this->_msg( 'Processing service demo data', 0 );
 
+		$item = null;
 		$context =  $this->_getContext();
 		$manager = MShop_Factory::createManager( $context, 'catalog' );
 
