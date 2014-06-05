@@ -270,13 +270,13 @@
 
 	<target name="createext" description="Creates new extension">
 		<propertyprompt propertyName="extname" promptText="Enter extension name (only A-Z, a-z, 0-9 and -)" promptCharacter=":" useExistingValue="true"/>
-		<copy todir="${coredir}/ext/${extname}" >
+		<copy todir="${extdir}/${extname}" >
 			<fileset dir="${coredir}/misc/ext-template">
 				<include name="**" />
 			</fileset>
 		</copy>
 		<reflexive>
-		  <fileset dir="${coredir}/ext/${extname}">
+		  <fileset dir="${extdir}/${extname}">
 		  	<include name="**" />
 		  </fileset>
 		  <filterchain>
