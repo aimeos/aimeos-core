@@ -260,9 +260,26 @@ class MShop_Customer_Manager_Default
 
 		if( $withsub === true )
 		{
-			$config = $this->_getContext()->getConfig();
+			/** classes/customer/manager/submanagers
+			 * List of manager names that can be instantiated by the customer manager
+			 *
+			 * Managers provide a generic interface to the underlying storage.
+			 * Each manager has or can have sub-managers caring about particular
+			 * aspects. Each of these sub-managers can be instantiated by its
+			 * parent manager using the getSubManager() method.
+			 *
+			 * The search keys from sub-managers can be normally used in the
+			 * manager as well. It allows you to search for items of the manager
+			 * using the search keys of the sub-managers to further limit the
+			 * retrieved list of items.
+			 *
+			 * @param array List of sub-manager names
+			 * @since 2014.03
+			 * @category Developer
+			 */
+			$path = 'classes/customer/manager/submanagers';
 
-			foreach( $config->get( 'classes/customer/manager/submanagers', array( 'address', 'list' ) ) as $domain ) {
+			foreach( $this->_getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
 				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
 			}
 		}
@@ -309,6 +326,30 @@ class MShop_Customer_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		/** mshop/customer/manager/default/item/delete
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the records specified by the given IDs from the customer database.
+		 * The records must be from the site that is configured via the
+		 * context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/customer/manager/default/item/insert
+		 * @see mshop/customer/manager/default/item/update
+		 * @see mshop/customer/manager/default/item/newid
+		 * @see mshop/customer/manager/default/item/search
+		 * @see mshop/customer/manager/default/item/count
+		 */
 		$path = 'mshop/customer/manager/default/item/delete';
 		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
@@ -338,56 +379,144 @@ class MShop_Customer_Manager_Default
 		try
 		{
 			$id = $item->getId();
+			$date = date( 'Y-m-d H:i:s' );
+			$billingAddress = $item->getPaymentAddress();
 
-			$path = 'mshop/customer/manager/default/item/';
-			$path .= ( $id === null ) ? 'insert' : 'update';
+			if( $id === null )
+			{
+				/** mshop/customer/manager/default/item/insert
+				 * Inserts a new customer record into the database table
+				 *
+				 * Items with no ID yet (i.e. the ID is NULL) will be created in
+				 * the database and the newly created ID retrieved afterwards
+				 * using the "newid" SQL statement.
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the customer item to the statement before they are
+				 * sent to the database server. The number of question marks must
+				 * be the same as the number of columns listed in the INSERT
+				 * statement. The order of the columns must correspond to the
+				 * order in the saveItems() method, so the correct values are
+				 * bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for inserting records
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/customer/manager/default/item/update
+				 * @see mshop/customer/manager/default/item/newid
+				 * @see mshop/customer/manager/default/item/delete
+				 * @see mshop/customer/manager/default/item/search
+				 * @see mshop/customer/manager/default/item/count
+				 */
+				$path = 'mshop/customer/manager/default/item/insert';
+			}
+			else
+			{
+				/** mshop/customer/manager/default/item/update
+				 * Updates an existing customer record in the database
+				 *
+				 * Items which already have an ID (i.e. the ID is not NULL) will
+				 * be updated in the database.
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the customer item to the statement before they are
+				 * sent to the database server. The order of the columns must
+				 * correspond to the order in the saveItems() method, so the
+				 * correct values are bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for updating records
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/customer/manager/default/item/insert
+				 * @see mshop/customer/manager/default/item/newid
+				 * @see mshop/customer/manager/default/item/delete
+				 * @see mshop/customer/manager/default/item/search
+				 * @see mshop/customer/manager/default/item/count
+				 */
+				$path = 'mshop/customer/manager/default/item/update';
+			}
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
-
-			$billingAddress = $item->getPaymentAddress();
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, $item->getCode() );
-			$stmt->bind( 4, $billingAddress->getCompany(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 5, $billingAddress->getSalutation(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 6, $billingAddress->getTitle(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 7, $billingAddress->getFirstname(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 8, $billingAddress->getLastname(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 9, $billingAddress->getAddress1(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 10, $billingAddress->getAddress2(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 11, $billingAddress->getAddress3(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 12, $billingAddress->getPostal(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 13, $billingAddress->getCity(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 14, $billingAddress->getState(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 15, $billingAddress->getCountryId(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 16, $billingAddress->getLanguageId(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 17, $billingAddress->getTelephone(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 18, $billingAddress->getEmail(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 19, $billingAddress->getTelefax(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 20, $billingAddress->getWebsite(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 21, $item->getBirthday(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 4, $billingAddress->getCompany() );
+			$stmt->bind( 5, $billingAddress->getSalutation() );
+			$stmt->bind( 6, $billingAddress->getTitle() );
+			$stmt->bind( 7, $billingAddress->getFirstname() );
+			$stmt->bind( 8, $billingAddress->getLastname() );
+			$stmt->bind( 9, $billingAddress->getAddress1() );
+			$stmt->bind( 10, $billingAddress->getAddress2() );
+			$stmt->bind( 11, $billingAddress->getAddress3() );
+			$stmt->bind( 12, $billingAddress->getPostal() );
+			$stmt->bind( 13, $billingAddress->getCity() );
+			$stmt->bind( 14, $billingAddress->getState() );
+			$stmt->bind( 15, $billingAddress->getCountryId() );
+			$stmt->bind( 16, $billingAddress->getLanguageId() );
+			$stmt->bind( 17, $billingAddress->getTelephone() );
+			$stmt->bind( 18, $billingAddress->getEmail() );
+			$stmt->bind( 19, $billingAddress->getTelefax() );
+			$stmt->bind( 20, $billingAddress->getWebsite() );
+			$stmt->bind( 21, $item->getBirthday() );
 			$stmt->bind( 22, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 23, $item->getPassword() );
-			$stmt->bind( 24, date( 'Y-m-d H:i:s', time() ) ); // Modification time
+			$stmt->bind( 24, $date ); // Modification time
 			$stmt->bind( 25, $context->getEditor() );
 
 			if( $id !== null ) {
 				$stmt->bind( 26, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$item->setId( $id );
 			} else {
-				$stmt->bind( 26, date( 'Y-m-d H:i:s', time() ) ); // Creation time
+				$stmt->bind( 26, $date ); // Creation time
 			}
 
 			$result = $stmt->execute()->finish();
 
-			if( $fetch === true )
+			if( $id === null && $fetch === true )
 			{
-				if( $id === null ) {
-					$path = 'mshop/customer/manager/default/item/newid';
-					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
-				} else {
-					$item->setId( $id );
-				}
+				/** mshop/customer/manager/default/item/newid
+				 * Retrieves the ID generated by the database when inserting a new record
+				 *
+				 * As soon as a new record is inserted into the database table,
+				 * the database server generates a new and unique identifier for
+				 * that record. This ID can be used for retrieving, updating and
+				 * deleting that specific record from the table again.
+				 *
+				 * For MySQL:
+				 *  SELECT LAST_INSERT_ID()
+				 * For PostgreSQL:
+				 *  SELECT currval('seq_mcus_id')
+				 * For SQL Server:
+				 *  SELECT SCOPE_IDENTITY()
+				 * For Oracle:
+				 *  SELECT "seq_mcus_id".CURRVAL FROM DUAL
+				 *
+				 * There's no way to retrive the new ID by a SQL statements that
+				 * fits for most database servers as they implement their own
+				 * specific way.
+				 *
+				 * @param string SQL statement for retrieving the last inserted record ID
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/customer/manager/default/item/insert
+				 * @see mshop/customer/manager/default/item/update
+				 * @see mshop/customer/manager/default/item/delete
+				 * @see mshop/customer/manager/default/item/search
+				 * @see mshop/customer/manager/default/item/count
+				 */
+				$path = 'mshop/customer/manager/default/item/newid';
+				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -419,10 +548,108 @@ class MShop_Customer_Manager_Default
 
 		try
 		{
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
-			$cfgPathSearch = 'mshop/customer/manager/default/item/search';
-			$cfgPathCount = 'mshop/customer/manager/default/item/count';
 			$required = array( 'customer' );
+			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+
+			/** mshop/customer/manager/default/item/search
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * Fetches the records matched by the given criteria from the customer
+			 * database. The records must be from one of the sites that are
+			 * configured via the context item. If the current site is part of
+			 * a tree of sites, the SELECT statement can retrieve all records
+			 * from the current site and the complete sub-tree of sites.
+			 *
+			 * As the records can normally be limited by criteria from sub-managers,
+			 * their tables must be joined in the SQL context. This is done by
+			 * using the "internaldeps" property from the definition of the ID
+			 * column of the sub-managers. These internal dependencies specify
+			 * the JOIN between the tables and the used columns for joining. The
+			 * ":joins" placeholder is then replaced by the JOIN strings from
+			 * the sub-managers.
+			 *
+			 * To limit the records matched, conditions can be added to the given
+			 * criteria object. It can contain comparisons like column names that
+			 * must match specific values which can be combined by AND, OR or NOT
+			 * operators. The resulting string of SQL conditions replaces the
+			 * ":cond" placeholder before the statement is sent to the database
+			 * server.
+			 *
+			 * If the records that are retrieved should be ordered by one or more
+			 * columns, the generated string of column / sort direction pairs
+			 * replaces the ":order" placeholder. In case no ordering is required,
+			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
+			 * markers is removed to speed up retrieving the records. Columns of
+			 * sub-managers can also be used for ordering the result set but then
+			 * no index can be used.
+			 *
+			 * The number of returned records can be limited and can start at any
+			 * number between the begining and the end of the result set. For that
+			 * the ":size" and ":start" placeholders are replaced by the
+			 * corresponding values from the criteria object. The default values
+			 * are 0 for the start and 100 for the size value.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for searching items
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/customer/manager/default/item/insert
+			 * @see mshop/customer/manager/default/item/update
+			 * @see mshop/customer/manager/default/item/newid
+			 * @see mshop/customer/manager/default/item/delete
+			 * @see mshop/customer/manager/default/item/count
+			 */
+			$cfgPathSearch = 'mshop/customer/manager/default/item/search';
+
+			/** mshop/customer/manager/default/item/count
+			 * Counts the number of records matched by the given criteria in the database
+			 *
+			 * Counts all records matched by the given criteria from the customer
+			 * database. The records must be from one of the sites that are
+			 * configured via the context item. If the current site is part of
+			 * a tree of sites, the statement can count all records from the
+			 * current site and the complete sub-tree of sites.
+			 *
+			 * As the records can normally be limited by criteria from sub-managers,
+			 * their tables must be joined in the SQL context. This is done by
+			 * using the "internaldeps" property from the definition of the ID
+			 * column of the sub-managers. These internal dependencies specify
+			 * the JOIN between the tables and the used columns for joining. The
+			 * ":joins" placeholder is then replaced by the JOIN strings from
+			 * the sub-managers.
+			 *
+			 * To limit the records matched, conditions can be added to the given
+			 * criteria object. It can contain comparisons like column names that
+			 * must match specific values which can be combined by AND, OR or NOT
+			 * operators. The resulting string of SQL conditions replaces the
+			 * ":cond" placeholder before the statement is sent to the database
+			 * server.
+			 *
+			 * Both, the strings for ":joins" and for ":cond" are the same as for
+			 * the "search" SQL statement.
+			 *
+			 * Contrary to the "search" statement, it doesn't return any records
+			 * but instead the number of records that have been found. As counting
+			 * thousands of records can be a long running task, the maximum number
+			 * of counted records is limited for performance reasons.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for counting items
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/customer/manager/default/item/insert
+			 * @see mshop/customer/manager/default/item/update
+			 * @see mshop/customer/manager/default/item/newid
+			 * @see mshop/customer/manager/default/item/delete
+			 * @see mshop/customer/manager/default/item/search
+			 */
+			$cfgPathCount = 'mshop/customer/manager/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
