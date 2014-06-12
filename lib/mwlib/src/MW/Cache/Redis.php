@@ -24,27 +24,11 @@ class MW_Cache_Redis
 	/**
 	 * Initializes the object instace.
 	 *
-	 * @param array $options Associative list of Redis options
+	 * @param Predis\Client $client Predis client instance
 	 */
-	public function __construct( array $options )
+	public function __construct( Predis\Client $client )
 	{
-		if( !isset( $options['connection_async'] ) ) {
-			$options['connection_async'] = true;
-		}
-
-		if( !isset( $options['connection_persistent'] ) ) {
-			$options['connection_persistent'] = true;
-		}
-
-		if( !isset( $options['timeout'] ) ) {
-			$options['timeout'] = 0.05; // 50ms
-		}
-
-		if( !isset( $options['read_write_timeout'] ) ) {
-			$options['read_write_timeout'] = 0.05; // 50ms
-		}
-
-		$this->_client = new Predis\Client( $options );
+		$this->_client = $client;
 	}
 
 
@@ -154,7 +138,6 @@ class MW_Cache_Redis
 	public function getList( array $keys )
 	{
 		$result = array();
-		$keys = array_values( $keys );
 
 		foreach( $this->_client->mget( $keys ) as $idx => $value )
 		{
