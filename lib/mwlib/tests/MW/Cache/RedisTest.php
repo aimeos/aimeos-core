@@ -43,6 +43,12 @@ class MW_Cache_RedisTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testConstructorNoObject()
+	{
+		$this->assertInstanceOf( 'MW_Cache_Interface', new MW_Cache_Redis() );
+	}
+
+
 	public function testDelete()
 	{
 		$this->_mock->expects( $this->once() )->method( 'del' )
