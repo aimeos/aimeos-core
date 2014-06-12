@@ -263,6 +263,7 @@ interface MW_Cache_Interface
 	 * false. If everything is OK and caching is possible, then it returns true.
 	 *
 	 * @return boolean True if available, false if not
+	 * @deprecated
 	 */
 	public function isAvailable();
 
@@ -289,7 +290,7 @@ interface MW_Cache_Interface
 	 * before they can be added to the cache. You can use json_encode() or
 	 * the PHP serialize() method for this. Please remember to use json_decode()
 	 * or unserialize() after retrieving the values for these keys to get back
-	 * the list or object again. The maximum length of a value is 512 MB.
+	 * the list or object again. The maximum length of a value is 16 MB.
 	 *
 	 * Additionally, one or more tags can be associated to each key/value pair
 	 * in the cache:
