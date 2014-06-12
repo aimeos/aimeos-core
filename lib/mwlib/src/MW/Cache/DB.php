@@ -79,6 +79,40 @@ class MW_Cache_DB
 
 
 	/**
+	 * Removes all expired cache entries.
+	 *
+	 * @inheritDoc
+	 *
+	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 */
+	public function cleanup()
+	{
+		$conn = $this->_dbm->acquire( $this->_dbname );
+
+		try
+		{
+			$date = date( 'Y-m-d H:i:00' );
+			$search = new MW_Common_Criteria_SQL( $conn );
+			$search->setConditions( $search->compare( '<', $this->_searchConfig['expire']['code'], $date ) );
+
+			$types = $this->_getSearchTypes( $this->_searchConfig );
+			$translations = $this->_getSearchTranslations( $this->_searchConfig );
+			$conditions = $search->getConditionString( $types, $translations );
+
+			$sql = str_replace( ':cond', $conditions, $this->_sql['delete'] );
+			$conn->create( $sql )->execute()->finish();
+
+			$this->_dbm->release( $conn, $this->_dbname );
+		}
+		catch( Exception $e )
+		{
+			$this->_dbm->release( $conn, $this->_dbname );
+			throw $e;
+		}
+	}
+
+
+	/**
 	 * Removes the cache entries identified by the given keys.
 	 *
 	 * @inheritDoc

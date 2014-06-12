@@ -127,6 +127,20 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testCleanup()
+	{
+		$this->_object->cleanup();
+
+
+		$conn = $this->_dbm->acquire();
+		$result = $conn->create( 'SELECT "id" FROM "mw_cache_test"' )->execute();
+		$this->_dbm->release( $conn );
+
+		$this->assertEquals( array( 'id' => 't:1' ), $result->fetch() );
+		$this->assertFalse( $result->fetch() );
+	}
+
+
 	public function testDelete()
 	{
 		$this->_object->delete( 't:1' );
