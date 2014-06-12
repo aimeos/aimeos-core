@@ -44,6 +44,7 @@ class MW_Setup_Task_TablesCreateMAdmin extends MW_Setup_Task_Abstract
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
+			'db-cache' => realpath(__DIR__) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'cache.sql',
 			'db-log' => realpath(__DIR__) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'log.sql',
 			'db-job' => realpath(__DIR__) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'job.sql',
 		);
