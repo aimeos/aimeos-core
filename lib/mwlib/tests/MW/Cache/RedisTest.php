@@ -152,7 +152,7 @@ class MW_Cache_RedisTest extends MW_Unittest_Testcase
 		$this->_mock->expects( $this->once() )->method( 'execute' );
 
 		$this->_mock->expects( $this->once() )->method( 'expireat' )
-			->with( $this->equalTo( 't:1' ), $this->equalTo( 946681200 ) );
+			->with( $this->equalTo( 't:1' ), $this->greaterThan( 0 ) );
 
 		$this->_object->set( 't:1', 'test 1', array( 'tag1', 'tag2' ), '2000-01-01 00:00:00' );
 	}
@@ -171,7 +171,7 @@ class MW_Cache_RedisTest extends MW_Unittest_Testcase
 		$this->_mock->expects( $this->once() )->method( 'execute' );
 
 		$this->_mock->expects( $this->once() )->method( 'expireat' )
-			->with( $this->equalTo( 't:1' ), $this->equalTo( 946681200 ) );
+			->with( $this->equalTo( 't:1' ), $this->greaterThan( 0 ) );
 
 		$this->_object->setList( array( 't:1' => 'test 1' ), array( 'tag1', 'tag2' ), array( 't:1' => '2000-01-01 00:00:00' ) );
 	}
