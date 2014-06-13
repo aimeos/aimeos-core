@@ -164,10 +164,26 @@ class MShop_Service_Manager_List_Default
 
 		if( $withsub === true )
 		{
-			$context = $this->_getContext();
-
+			/** classes/service/manager/list/submanagers
+			 * List of manager names that can be instantiated by the service list manager
+			 *
+			 * Managers provide a generic interface to the underlying storage.
+			 * Each manager has or can have sub-managers caring about particular
+			 * aspects. Each of these sub-managers can be instantiated by its
+			 * parent manager using the getSubManager() method.
+			 *
+			 * The search keys from sub-managers can be normally used in the
+			 * manager as well. It allows you to search for items of the manager
+			 * using the search keys of the sub-managers to further limit the
+			 * retrieved list of items.
+			 *
+			 * @param array List of sub-manager names
+			 * @since 2014.03
+			 * @category Developer
+			 */
 			$path = 'classes/service/manager/list/submanagers';
-			foreach( $context->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+
+			foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
 			}
 		}
