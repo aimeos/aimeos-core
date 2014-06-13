@@ -352,11 +352,11 @@ class MShop_Customer_Manager_List_Type_Default
 		 * For MySQL:
 		 *  SELECT LAST_INSERT_ID()
 		 * For PostgreSQL:
-		 *  SELECT currval('seq_mattlity_id')
+		 *  SELECT currval('seq_mcuslity_id')
 		 * For SQL Server:
 		 *  SELECT SCOPE_IDENTITY()
 		 * For Oracle:
-		 *  SELECT "seq_mattlity_id".CURRVAL FROM DUAL
+		 *  SELECT "seq_mcuslity_id".CURRVAL FROM DUAL
 		 *
 		 * There's no way to retrive the new ID by a SQL statements that
 		 * fits for most database servers as they implement their own

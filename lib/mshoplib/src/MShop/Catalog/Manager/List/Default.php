@@ -389,11 +389,11 @@ class MShop_Catalog_Manager_List_Default
 		 * For MySQL:
 		 *  SELECT LAST_INSERT_ID()
 		 * For PostgreSQL:
-		 *  SELECT currval('seq_mattty_id')
+		 *  SELECT currval('seq_mcatli_id')
 		 * For SQL Server:
 		 *  SELECT SCOPE_IDENTITY()
 		 * For Oracle:
-		 *  SELECT "seq_mattty_id".CURRVAL FROM DUAL
+		 *  SELECT "seq_mcatli_id".CURRVAL FROM DUAL
 		 *
 		 * There's no way to retrive the new ID by a SQL statements that
 		 * fits for most database servers as they implement their own
