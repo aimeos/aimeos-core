@@ -187,7 +187,7 @@ class MShop_Coupon_Manager_Default
 	/**
 	 * Returns the coupons item specified by its ID.
 	 *
-	 * @param integer $couponId Unique ID of the coupon item in the storage
+	 * @param integer $itemId Unique ID of the coupon item in the storage
 	 * @return MShop_Coupon_Item_Interface Returns the coupon item of the given id
 	 * @throws MShop_Coupon_Exception If coupon couldn't be found
 	 */
@@ -200,18 +200,18 @@ class MShop_Coupon_Manager_Default
 	/**
 	 * Saves a coupon item to the storage.
 	 *
-	 * @param MShop_Coupon_Item_Interface $coupon Coupon implementing the coupon interface
+	 * @param MShop_Coupon_Item_Interface $item Coupon implementing the coupon interface
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @throws MShop_Coupon_Exception If coupon couldn't be saved
 	 */
-	public function saveItem( MShop_Common_Item_Interface $coupon, $fetch = true )
+	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
 		$iface = 'MShop_Coupon_Item_Interface';
-		if( !( $coupon instanceof $iface ) ) {
+		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Coupon_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$coupon->isModified() ) { return; }
+		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
 
@@ -221,7 +221,7 @@ class MShop_Coupon_Manager_Default
 
 		try
 		{
-			$id = $coupon->getId();
+			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 
 			if( $id === null )
@@ -288,21 +288,21 @@ class MShop_Coupon_Manager_Default
 				$path = 'mshop/coupon/manager/default/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement($conn, $path);
+			$stmt = $this->_getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId() );
-			$stmt->bind( 2, $coupon->getLabel() );
-			$stmt->bind( 3, $coupon->getProvider() );
-			$stmt->bind( 4, json_encode( $coupon->getConfig() ) );
-			$stmt->bind( 5, $coupon->getDateStart() );
-			$stmt->bind( 6, $coupon->getDateEnd() );
-			$stmt->bind( 7, $coupon->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
+			$stmt->bind( 2, $item->getLabel() );
+			$stmt->bind( 3, $item->getProvider() );
+			$stmt->bind( 4, json_encode( $item->getConfig() ) );
+			$stmt->bind( 5, $item->getDateStart() );
+			$stmt->bind( 6, $item->getDateEnd() );
+			$stmt->bind( 7, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
 			$stmt->bind( 8, $date ); // mtime
 			$stmt->bind( 9, $context->getEditor() );
 
 			if( $id !== null) {
-				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT);
-				$coupon->setId( $id );
+				$stmt->bind( 10, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$item->setId( $id );
 			} else {
 				$stmt->bind( 10, $date ); // ctime
 			}
@@ -342,7 +342,7 @@ class MShop_Coupon_Manager_Default
 				 * @see mshop/coupon/manager/default/item/count
 				 */
 				$path = 'mshop/coupon/manager/default/item/newid';
-				$coupon->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
