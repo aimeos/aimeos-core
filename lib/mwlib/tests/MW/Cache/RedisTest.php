@@ -27,7 +27,7 @@ class MW_Cache_RedisTest extends MW_Unittest_Testcase
 		);
 
 		$this->_mock = $this->getMock( 'Predis\Client', $methods );
-		$this->_object = new MW_Cache_Redis( $this->_mock );
+		$this->_object = new MW_Cache_Redis( array(), $this->_mock );
 	}
 
 
@@ -40,12 +40,6 @@ class MW_Cache_RedisTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		unset( $this->_object, $this->_mock );
-	}
-
-
-	public function testConstructorNoObject()
-	{
-		$this->assertInstanceOf( 'MW_Cache_Interface', new MW_Cache_Redis() );
 	}
 
 

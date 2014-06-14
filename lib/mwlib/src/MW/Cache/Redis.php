@@ -24,33 +24,12 @@ class MW_Cache_Redis
 	/**
 	 * Initializes the object instace.
 	 *
-	 * @param Predis\Client|null $client Predis client instance or null if instance should be created
 	 * @param array $config Configuration for Predis client if instance should be created
+	 * @param Predis\Client $client Predis client instance
 	 */
-	public function __construct( Predis\Client $client = null, array $config = array() )
+	public function __construct( array $config, Predis\Client $resource )
 	{
-		if( $client === null )
-		{
-			if( !isset( $config['connection_async'] ) ) {
-				$config['connection_async'] = true;
-			}
-
-			if( !isset( $config['connection_persistent'] ) ) {
-				$config['connection_persistent'] = true;
-			}
-
-			if( !isset( $config['timeout'] ) ) {
-				$config['timeout'] = 0.05; // 50ms
-			}
-
-			if( !isset( $config['read_write_timeout'] ) ) {
-				$config['read_write_timeout'] = 0.05; // 50ms
-			}
-
-			$client = new Predis\Client( $config );
-		}
-
-		$this->_client = $client;
+		$this->_client = $resource;
 	}
 
 

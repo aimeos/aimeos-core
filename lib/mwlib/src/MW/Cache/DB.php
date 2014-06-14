@@ -36,13 +36,13 @@ class MW_Cache_DB
 	 * The config['sql] array must contain these statement:
 	 *	[delete] =>
 	 *		DELETE FROM cachetable WHERE :cond
-	 *	[deletebytags] =>
+	 *	[deletebytag] =>
 	 *		DELETE FROM cachetable WHERE id IN (
 	 *			SELECT tag.id FROM cachetagtable AS tag WHERE :cond
 	 *		)
 	 *	[get] =>
 	 *		SELECT id, value FROM cachetable WHERE :cond
-	 *	[getbytags] =>
+	 *	[getbytag] =>
 	 *		SELECT id, value FROM cachetable cache
 	 *		JOIN cachetagtable AS tag ON tag.id = cache.id
 	 *		WHERE :cond
@@ -55,10 +55,10 @@ class MW_Cache_DB
 	 * can be also given in the "config" parameter. In this case, use e.g.
 	 *  config['dbname'] = 'db-cache'
 	 *
-	 * @param MW_DB_Manager_Interface $dbm Database manager
 	 * @param array $config Associative list with SQL statements, search attribute definitions and database name
+	 * @param MW_DB_Manager_Interface $dbm Database manager
 	 */
-	public function __construct( MW_DB_Manager_Interface $dbm, array $config )
+	public function __construct( array $config, MW_DB_Manager_Interface $dbm )
 	{
 		if( !isset( $config['search'] ) ) {
 			throw new MW_Cache_Exception( 'Search config is missing' );
