@@ -61,87 +61,6 @@ class Client_Html_Catalog_Detail_Seen_Default
 	 */
 	public function getBody()
 	{
-		$view = $this->getView();
-
-		if( !isset( $view->detailProductItem ) ) {
-			return '';
-		}
-
-		$session = $this->_getContext()->getSession();
-		$str = $session->get( 'arcavias/client/html/catalog/session/seen' );
-
-		if( ( $lastSeen = @unserialize( $str ) ) === false ) {
-			$lastSeen = array();
-		}
-
-		$id = $view->detailProductItem->getId();
-
-		if( isset( $lastSeen[$id] ) )
-		{
-			$html = $lastSeen[$id];
-			unset( $lastSeen[$id] );
-			$lastSeen[$id] = $html;
-
-			$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
-
-			return '';
-		}
-
-
-		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
-		}
-		$view->seenBody = $html;
-
-		/** client/html/catalog/detail/seen/default/template-body
-		 * Relative path to the HTML body template of the catalog detail seen client.
-		 *
-		 * The template file contains the HTML code and processing instructions
-		 * to generate the result shown in the body of the frontend. The
-		 * configuration string is the path to the template file relative
-		 * to the layouts directory (usually in client/html/layouts).
-		 *
-		 * You can overwrite the template file configuration in extensions and
-		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
-		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
-		 * should be replaced by the name of the new class.
-		 *
-		 * @param string Relative path to the template creating code for the HTML page body
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/catalog/detail/seen/default/template-header
-		 */
-		$tplconf = 'client/html/catalog/detail/seen/default/template-body';
-		$default = 'catalog/detail/seen-body-default.html';
-
-		$output = $view->render( $this->_getTemplate( $tplconf, $default ) );
-
-
-		if( $output !== '' )
-		{
-			/** client/html/catalog/session/seen/default/maxitems
-			 * Maximum number of products displayed in the "last seen" section
-			 *
-			 * This option limits the number of products that are shown in the
-			 * "last seen" section after the user visited their detail pages. It
-			 * must be a positive integer value greater than 0.
-			 *
-			 * @param integer Number of products
-			 * @since 2014.03
-			 * @category User
-			 * @category Developer
-			 */
-			$max = $this->_getContext()->getConfig()->get( 'client/html/catalog/session/seen/default/maxitems', 6 );
-
-			$lastSeen[$id] = $output;
-			$lastSeen = array_slice( $lastSeen, -$max, $max, true );
-
-			$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
-		}
-
 		return '';
 	}
 
@@ -177,6 +96,118 @@ class Client_Html_Catalog_Detail_Seen_Default
 	 */
 	public function process()
 	{
+		if( ( $id = $this->getView()->param( 'd-product-id' ) ) !== null )
+		{
+			$session = $this->_getContext()->getSession();
+			$str = $session->get( 'arcavias/client/html/catalog/session/seen' );
+
+			if( ( $lastSeen = @unserialize( $str ) ) === false ) {
+				$lastSeen = array();
+			}
+
+			if( isset( $lastSeen[$id] ) )
+			{
+				$html = $lastSeen[$id];
+				unset( $lastSeen[$id] );
+				$lastSeen[$id] = $html;
+
+				$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
+			}
+			else
+			{
+				/** client/html/catalog/session/seen/default/maxitems
+				 * Maximum number of products displayed in the "last seen" section
+				 *
+				 * This option limits the number of products that are shown in the
+				 * "last seen" section after the user visited their detail pages. It
+				 * must be a positive integer value greater than 0.
+				 *
+				 * @param integer Number of products
+				 * @since 2014.03
+				 * @category User
+				 * @category Developer
+				 */
+				$max = $this->_getContext()->getConfig()->get( 'client/html/catalog/session/seen/default/maxitems', 6 );
+
+				$lastSeen[$id] = $this->_getHtml( $id );
+				$lastSeen = array_slice( $lastSeen, -$max, $max, true );
+
+				$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
+			}
+		}
+
 		$this->_process( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Returns the generated HTML for the given product ID.
+	 *
+	 * @param string $id Product ID
+	 * @return string HTML of the last seen item for the given product ID
+	 */
+	protected function _getHtml( $id )
+	{
+		$view = $this->getView();
+		$default = array( 'media', 'price', 'text' );
+
+		$context = $this->_getContext();
+		$config = $context->getconfig();
+
+		$domains = $config->get( 'client/html/catalog/domains', $default );
+
+		/** client/html/catalog/detail/seen/domains
+		 * A list of domain names whose items should be available in the last seen view template for the product
+		 *
+		 * The templates rendering product details usually add the images,
+		 * prices and texts, etc. associated to the product
+		 * item. If you want to display additional or less content, you can
+		 * configure your own list of domains (attribute, media, price, product,
+		 * text, etc. are domains) whose items are fetched from the storage.
+		 * Please keep in mind that the more domains you add to the configuration,
+		 * the more time is required for fetching the content!
+		 *
+		 * @param array List of domain names
+		 * @since 2014.07
+		 * @category Developer
+		 * @see client/html/catalog/domains
+		 * @see client/html/catalog/list/domains
+		 * @see client/html/catalog/detail/domains
+		 */
+		$domains = $config->get( 'client/html/catalog/detail/seen/domains', $default );
+
+		$view->seenProductItem = MShop_Factory::createManager( $context, 'product' )->getItem( $id, $domains );
+
+
+		$html = '';
+		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody();
+		}
+		$view->seenBody = $html;
+
+		/** client/html/catalog/detail/seen/default/template-body
+		 * Relative path to the HTML body template of the catalog detail seen client.
+		 *
+		 * The template file contains the HTML code and processing instructions
+		 * to generate the result shown in the body of the frontend. The
+		 * configuration string is the path to the template file relative
+		 * to the layouts directory (usually in client/html/layouts).
+		 *
+		 * You can overwrite the template file configuration in extensions and
+		 * provide alternative templates. These alternative templates should be
+		 * named like the default one but with the string "default" replaced by
+		 * an unique name. You may use the name of your project for this. If
+		 * you've implemented an alternative client class as well, "default"
+		 * should be replaced by the name of the new class.
+		 *
+		 * @param string Relative path to the template creating code for the HTML page body
+		 * @since 2014.03
+		 * @category Developer
+		 * @see client/html/catalog/detail/seen/default/template-header
+		 */
+		$tplconf = 'client/html/catalog/detail/seen/default/template-body';
+		$default = 'catalog/detail/seen-body-default.html';
+
+		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
 }
