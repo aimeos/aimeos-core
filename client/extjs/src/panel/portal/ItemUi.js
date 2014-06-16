@@ -12,6 +12,8 @@ Ext.ns('MShop.panel.portal');
 MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
 	idProperty : 'id',
 
+	autoScroll: true,
+
 	initComponent : function() {
 
 		this.title = MShop.I18n.dt( 'client/extjs', 'Overview' );
