@@ -119,12 +119,12 @@ interface MW_Cache_Interface
 
 
 	/**
-	 * Removes all entries from the cache so it's completely empty.
+	 * Removes all entries of the site from the cache.
 	 *
-	 * This method deletes all cached entries from the cache server the client
-	 * has access to. This method is primarily usefull to provide a clean start
-	 * before new entries are added to the cache and you don't know which
-	 * entries are still in the cache.
+	 * This method deletes all cached entries of a site from the cache server
+	 * the client has access to. This method is primarily usefull to provide a
+	 * clean start before new entries are added to the cache and you don't know
+	 * which entries are still in the cache.
 	 *
 	 * @throws MW_Cache_Exception If the cache server doesn't respond
 	 */

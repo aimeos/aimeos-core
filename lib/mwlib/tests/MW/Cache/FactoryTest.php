@@ -22,7 +22,8 @@ class MW_Cache_FactoryTest extends MW_Unittest_Testcase
 				'set' => '', 'settag' => ''
 			),
 			'search' => array(
-				'id' => '', 'value' => '', 'expire' => '', 'tag.name' => ''
+				'cache.id' => '', 'cache.siteid' => '', 'cache.value' => '',
+				'cache.expire' => '', 'cache.tag.name' => ''
 			),
 		);
 

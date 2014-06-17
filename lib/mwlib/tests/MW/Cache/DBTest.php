@@ -26,37 +26,40 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 		}
 
 
-		$this->_config = array();
+		$this->_config = array(
+			'siteid' => 1
+		);
 
 		$this->_config['search'] = array(
-			'id' => array( 'label' => 'Cache ID', 'code' => 'id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'value' => array( 'label' => 'Cached value', 'code' => 'value', 'internalcode' => 'value', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'expire' => array( 'label' => 'Cache expiration date', 'code' => 'expire', 'internalcode' => 'expire', 'type' => 'datetime', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'tag.name' => array( 'label' => 'Cache tag name', 'code' => 'tag.name', 'internalcode' => 't.name', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
+			'cache.id' => array( 'label' => 'Cache ID', 'code' => 'cache.id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
+			'cache.siteid' => array( 'label' => 'Cache site ID', 'code' => 'cache.siteid', 'internalcode' => 'siteid', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Abstract::PARAM_INT ),
+			'cache.value' => array( 'label' => 'Cached value', 'code' => 'cache.value', 'internalcode' => 'value', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
+			'cache.expire' => array( 'label' => 'Cache expiration date', 'code' => 'cache.expire', 'internalcode' => 'expire', 'type' => 'datetime', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
+			'cache.tag.name' => array( 'label' => 'Cache tag name', 'code' => 'cache.tag.name', 'internalcode' => 'tname', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
 		);
 
 		$this->_config['sql'] = array(
 			'delete' => '
-				DELETE FROM "mw_cache_test" WHERE :cond
+				DELETE FROM "mw_cache_test" WHERE "siteid" = ? AND :cond
 			',
 			'deletebytag' => '
-				DELETE FROM "mw_cache_test" WHERE id IN (
-					SELECT t."id" FROM "mw_cache_tag_test" AS t WHERE :cond
+				DELETE FROM "mw_cache_test" WHERE "siteid" = ? AND id IN (
+					SELECT "tid" FROM "mw_cache_tag_test" WHERE "tsiteid" = ? AND :cond
 				)
 			',
 			'get' => '
-				SELECT "id", "value" FROM "mw_cache_test" WHERE :cond
+				SELECT "id", "value", "expire" FROM "mw_cache_test" WHERE "siteid" = ? AND :cond
 			',
 			'getbytag' => '
-				SELECT c."id", c."value" FROM "mw_cache_test" c
-				JOIN "mw_cache_tag_test" AS t ON t."id" = c."id"
-				WHERE :cond
+				SELECT "id", "value", "expire" FROM "mw_cache_test"
+				JOIN "mw_cache_tag_test" ON "tid" = "id"
+				WHERE siteid = ? AND tsiteid = ? AND :cond
 			',
 			'set' => '
-				INSERT INTO "mw_cache_test" ( "id", "expire", "value" ) VALUES ( ?, ?, ? )
+				INSERT INTO "mw_cache_test" ( "id", "siteid", "expire", "value" ) VALUES ( ?, ?, ?, ? )
 			',
 			'settag' => '
-				INSERT INTO "mw_cache_tag_test" ( "id", "name" ) VALUES ( ?, ? )
+				INSERT INTO "mw_cache_tag_test" ( "tid", "tsiteid", "tname" ) VALUES ( ?, ?, ? )
 			',
 		);
 
@@ -73,32 +76,35 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 
 		$sql = '
 			CREATE TABLE IF NOT EXISTS "mw_cache_test" (
-				"id" VARCHAR(255) NOT NULL PRIMARY KEY,
+				"id" VARCHAR(255) NOT NULL,
+				"siteid" INTEGER NULL,
 				"expire" DATETIME NULL,
 				"value" MEDIUMTEXT NOT NULL,
-				KEY ("expire")
+				KEY ("expire"),
+				CONSTRAINT PRIMARY KEY ("id", "siteid")
 			);
 		';
 		$conn->create( $sql )->execute()->finish();
 
 		$sql = '
 			CREATE TABLE IF NOT EXISTS "mw_cache_tag_test" (
-				"id" VARCHAR(255) NOT NULL,
-				"name" VARCHAR(255) NOT NULL,
-				CONSTRAINT UNIQUE ("id", "name"),
-				CONSTRAINT FOREIGN KEY ("id") REFERENCES "mw_cache_test" ("id") ON DELETE CASCADE
+				"tid" VARCHAR(255) NOT NULL,
+				"tsiteid" INTEGER NULL,
+				"tname" VARCHAR(255) NOT NULL,
+				CONSTRAINT UNIQUE ("tid", "tsiteid", "tname"),
+				CONSTRAINT FOREIGN KEY ("tid") REFERENCES "mw_cache_test" ("id") ON DELETE CASCADE
 			);
 		';
 		$conn->create( $sql )->execute()->finish();
 
 
-		$sql = 'INSERT INTO "mw_cache_test" ("id", "expire", "value") VALUES (\'t:1\', NULL, \'test 1\')';
+		$sql = 'INSERT INTO "mw_cache_test" ("id", "siteid", "expire", "value") VALUES (\'t:1\', 1, NULL, \'test 1\')';
 		$conn->create( $sql )->execute()->finish();
 
-		$sql = 'INSERT INTO "mw_cache_test" ("id", "expire", "value") VALUES (\'t:2\', \'2000-01-01 00:00:00\', \'test 2\')';
+		$sql = 'INSERT INTO "mw_cache_test" ("id", "siteid", "expire", "value") VALUES (\'t:2\', 1, \'2000-01-01 00:00:00\', \'test 2\')';
 		$conn->create( $sql )->execute()->finish();
 
-		$sql = 'INSERT INTO "mw_cache_tag_test" ("id", "name") VALUES (\'t:1\', \'tag:1\')';
+		$sql = 'INSERT INTO "mw_cache_tag_test" ("tid", "tsiteid", "tname") VALUES (\'t:1\', 1, \'tag:1\')';
 		$conn->create( $sql )->execute()->finish();
 
 
@@ -167,7 +173,7 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 	public function testConstructorIncompleteSearch()
 	{
 		$config = $this->_config;
-		unset( $config['search']['id'] );
+		unset( $config['search']['cache.id'] );
 
 		$this->setExpectedException( 'MW_Cache_Exception' );
 		$obj = new MW_Cache_DB( $config, $this->_dbm );
@@ -289,11 +295,11 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 
 
 		$conn = $this->_dbm->acquire();
-		$result = $conn->create( 'SELECT "name" FROM "mw_cache_tag_test" WHERE "id" = \'t:3\' ORDER BY "name"' )->execute();
+		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:3\' ORDER BY "tname"' )->execute();
 		$this->_dbm->release( $conn );
 
-		$this->assertEquals( array( 'name' => 'tag:2' ), $result->fetch() );
-		$this->assertEquals( array( 'name' => 'tag:3' ), $result->fetch() );
+		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
+		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
 
 
@@ -304,6 +310,7 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 		$expected = array(
 			'expire' => '2100-00-00 00:00:00',
 			'id' => 't:3',
+			'siteid' => 1,
 			'value' => 'test 3',
 		);
 		$this->assertEquals( $expected, $result->fetch() );
@@ -321,19 +328,19 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 
 
 		$conn = $this->_dbm->acquire();
-		$result = $conn->create( 'SELECT "name" FROM "mw_cache_tag_test" WHERE "id" = \'t:3\' ORDER BY "name"' )->execute();
+		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:3\' ORDER BY "tname"' )->execute();
 		$this->_dbm->release( $conn );
 
-		$this->assertEquals( array( 'name' => 'tag:2' ), $result->fetch() );
-		$this->assertEquals( array( 'name' => 'tag:3' ), $result->fetch() );
+		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
+		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
 
 
 		$conn = $this->_dbm->acquire();
-		$result = $conn->create( 'SELECT "name" FROM "mw_cache_tag_test" WHERE "id" = \'t:4\'' )->execute();
+		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:4\'' )->execute();
 		$this->_dbm->release( $conn );
 
-		$this->assertEquals( array( 'name' => 'tag:4' ), $result->fetch() );
+		$this->assertEquals( array( 'tname' => 'tag:4' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
 
 
@@ -341,7 +348,13 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:3\'' )->execute();
 		$this->_dbm->release( $conn );
 
-		$this->assertEquals( array( 'expire' => '2100-00-00 00:00:00', 'id' => 't:3', 'value' => 'test 3' ), $result->fetch() );
+		$expected = array(
+			'expire' => '2100-00-00 00:00:00',
+			'id' => 't:3',
+			'siteid' => 1,
+			'value' => 'test 3',
+		);
+		$this->assertEquals( $expected, $result->fetch() );
 		$this->assertFalse( $result->fetch() );
 
 
@@ -349,7 +362,13 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:4\'' )->execute();
 		$this->_dbm->release( $conn );
 
-		$this->assertEquals( array( 'expire' => null, 'id' => 't:4', 'value' => 'test 4' ), $result->fetch() );
+		$expected = array(
+			'expire' => null,
+			'id' => 't:4',
+			'siteid' => 1,
+			'value' => 'test 4',
+		);
+		$this->assertEquals( $expected, $result->fetch() );
 		$this->assertFalse( $result->fetch() );
 	}
 

@@ -92,7 +92,7 @@ class MW_Cache_Redis
 
 
 	/**
-	 * Removes all entries from the cache so it's completely empty.
+	 * Removes all entries of the site from the cache.
 	 *
 	 * @inheritDoc
 	 *
