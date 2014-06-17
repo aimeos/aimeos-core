@@ -17,12 +17,14 @@ SET SESSION sql_mode='ANSI';
 CREATE TABLE "madmin_cache" (
 	-- Unique id of the cache entry
 	"id" VARCHAR(255) NOT NULL,
+	-- site id
+	"siteid" INTEGER NULL,
 	-- Expiration time stamp
 	"expire" DATETIME,
 	-- Cached value
 	"value" MEDIUMTEXT NOT NULL,
-CONSTRAINT "pk_macac_id"
-	PRIMARY KEY ("id")
+CONSTRAINT "pk_macac_id_siteid"
+	PRIMARY KEY ("id", "siteid")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_majob_expire" ON "madmin_cache" ("expire");
@@ -34,13 +36,15 @@ CREATE INDEX "idx_majob_expire" ON "madmin_cache" ("expire");
 
 CREATE TABLE "madmin_cache_tag" (
 	-- Unique id of the cache entry
-	"id" VARCHAR(255) NOT NULL,
+	"tid" VARCHAR(255) NOT NULL,
+	-- site id
+	"tsiteid" INTEGER NULL,
 	-- Tag name
-	"name" VARCHAR(255) NOT NULL,
+	"tname" VARCHAR(255) NOT NULL,
 CONSTRAINT "unq_macacta_id_name"
-	UNIQUE KEY ("id", "name"),
-CONSTRAINT "fk_macac_id"
-	FOREIGN KEY ("id")
+	UNIQUE KEY ("tid", "tsiteid", "tname"),
+CONSTRAINT "fk_macac_tid"
+	FOREIGN KEY ("tid")
 	REFERENCES "madmin_cache" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE
