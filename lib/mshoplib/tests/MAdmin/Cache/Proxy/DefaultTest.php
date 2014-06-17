@@ -74,7 +74,7 @@ class MAdmin_Cache_Proxy_DefaultTest extends MW_Unittest_Testcase
 	public function testDeleteByTags()
 	{
 		$this->_mock->expects( $this->once() )->method( 'deleteByTags' )
-			->with( $this->equalTo( array( 't:1', 't:2' ) ) );
+			->with( $this->equalTo( array( 'tag1', 'tag2' ) ) );
 
 		$this->_object->deleteByTags( array( 'tag1', 'tag2' ) );
 	}
@@ -90,6 +90,7 @@ class MAdmin_Cache_Proxy_DefaultTest extends MW_Unittest_Testcase
 	public function testGet()
 	{
 		$this->_mock->expects( $this->once() )->method( 'get' )
+			->with( $this->equalTo( 't:1' ) )
 			->will( $this->returnValue( 'test' ) );
 
 		$this->assertEquals( 'test', $this->_object->get( 't:1' ) );
@@ -99,6 +100,7 @@ class MAdmin_Cache_Proxy_DefaultTest extends MW_Unittest_Testcase
 	public function testGetList()
 	{
 		$this->_mock->expects( $this->once() )->method( 'getList' )
+			->with( $this->equalTo( array( 't:1' ) ) )
 			->will( $this->returnValue( array( 't:1' => 'test' ) ) );
 
 		$this->assertEquals( array( 't:1' => 'test' ), $this->_object->getList( array( 't:1' ) ) );
@@ -108,6 +110,7 @@ class MAdmin_Cache_Proxy_DefaultTest extends MW_Unittest_Testcase
 	public function testGetListByTags()
 	{
 		$this->_mock->expects( $this->once() )->method( 'getListByTags' )
+			->with( $this->equalTo( array( 'tag1', 'tag2' ) ) )
 			->will( $this->returnValue( array( 't:1' => 'test1', 't:2' => 'test2' ) ) );
 
 		$expected = array( 't:1' => 'test1', 't:2' => 'test2' );
