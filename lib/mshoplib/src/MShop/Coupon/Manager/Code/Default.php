@@ -281,7 +281,7 @@ class MShop_Coupon_Manager_Code_Default
 			 */
 			$path = 'classes/coupon/manager/code/submanagers';
 
-			foreach( $this->_getContext()->getConfig()->get( $subcfg, array( ) ) as $domain ) {
+			foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
 				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
 			}
 		}
