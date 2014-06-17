@@ -162,7 +162,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
         for( var i = 0; i < records.length; i++ ) {
         	ids.push( records[i].id );
         }
-         
+
         MShop.API.Product.finish( MShop.config.site["locale.site.code"], ids );
 	}
 });

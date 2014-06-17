@@ -30,7 +30,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
 	initComponent : function()
 	{
-		this.title = MShop.I18n.dt( 'client/extjs', 'Job' );
+		this.title = MShop.I18n.dt( 'client/extjs', 'Jobs' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call(this);
 		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
