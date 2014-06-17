@@ -9,8 +9,8 @@ Ext.ns('MShop.panel.cache');
 MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
 	recordName : 'Admin_Cache',
-	idProperty : 'cached.id',
-	siteidProperty : 'cached.siteid',
+	idProperty : 'cache.id',
+	siteidProperty : 'cache.siteid',
 	itemUiXType : 'MShop.panel.cache.itemui',
 	autoExpandColumn : 'cache-list-value',
 
