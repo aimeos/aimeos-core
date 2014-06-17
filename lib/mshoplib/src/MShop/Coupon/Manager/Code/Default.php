@@ -253,7 +253,7 @@ class MShop_Coupon_Manager_Code_Default
 	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
 	 */
-		public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( $withsub = true )
 	{
 		$list = array();
 		foreach( $this->_searchConfig as $key => $fields ) {
