@@ -344,6 +344,9 @@ class MW_Cache_DB
 	 */
 	public function setList( array $pairs, array $tags = array(), array $expires = array() )
 	{
+		// Remove existing entries first to avoid duplicate key conflicts
+		$this->deleteList( array_keys( $pairs ) );
+
 		$conn = $this->_dbm->acquire( $this->_dbname );
 
 		try

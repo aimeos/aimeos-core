@@ -26,9 +26,7 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 		}
 
 
-		$this->_config = array(
-			'siteid' => 1
-		);
+		$this->_config = array( 'siteid' => 1 );
 
 		$this->_config['search'] = array(
 			'cache.id' => array( 'label' => 'Cache ID', 'code' => 'cache.id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
@@ -320,8 +318,8 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 
 	public function testSetList()
 	{
-		$pairs = array( 't:3' => 'test 3', 't:4' => 'test 4' );
-		$tags = array( 't:3' => array( 'tag:2', 'tag:3' ), 't:4' => array( 'tag:4' ) );
+		$pairs = array( 't:3' => 'test 3', 't:2' => 'test 4' );
+		$tags = array( 't:3' => array( 'tag:2', 'tag:3' ), 't:2' => array( 'tag:4' ) );
 		$expires = array( 't:3' => '2100-00-00 00:00:00' );
 
 		$this->_object->setList( $pairs, $tags, $expires );
@@ -337,7 +335,7 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 
 
 		$conn = $this->_dbm->acquire();
-		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:4\'' )->execute();
+		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:2\'' )->execute();
 		$this->_dbm->release( $conn );
 
 		$this->assertEquals( array( 'tname' => 'tag:4' ), $result->fetch() );
@@ -359,12 +357,12 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 
 
 		$conn = $this->_dbm->acquire();
-		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:4\'' )->execute();
+		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:2\'' )->execute();
 		$this->_dbm->release( $conn );
 
 		$expected = array(
 			'expire' => null,
-			'id' => 't:4',
+			'id' => 't:2',
 			'siteid' => 1,
 			'value' => 'test 4',
 		);
