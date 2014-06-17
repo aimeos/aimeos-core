@@ -22,7 +22,7 @@ class Controller_ExtJS_Admin_Log_Default
 
 
 	/**
-	 * Initializes the text controller.
+	 * Initializes the log controller.
 	 *
 	 * @param MShop_Context_Item_Interface $context MShop context object
 	 */
