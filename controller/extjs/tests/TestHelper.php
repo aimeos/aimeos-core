@@ -75,6 +75,10 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
+		$cache = new MW_Cache_None();
+		$ctx->setCache( $cache );
+
+
 		$session = new MW_Session_None();
 		$ctx->setSession( $session );
 

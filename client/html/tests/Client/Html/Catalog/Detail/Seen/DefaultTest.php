@@ -63,20 +63,29 @@ class Client_Html_Catalog_Detail_Seen_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBody()
 	{
-		$view = $this->_object->getView();
-		$view->detailProductItem = $this->_getProductItem();
-
-		$output = $this->_object->getBody();
-		$str = $this->_context->getSession()->get( 'arcavias/client/html/catalog/session/seen' );
-
+		$output = $this->_object->getHeader();
 		$this->assertEquals( '', $output );
-		$this->assertStringStartsWith( 'a:1:{', $str );
 	}
 
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );
 		$this->_object->getSubClient( 'invalid', 'invalid' );
+	}
+
+
+	public function testProcess()
+	{
+		$view = $this->_object->getView();
+		$param = array( 'd-product-id' => $this->_getProductItem()->getId() );
+
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->process();
+
+		$str = $this->_context->getSession()->get( 'arcavias/client/html/catalog/session/seen' );
+		$this->assertStringStartsWith( 'a:1:{', $str );
 	}
 
 

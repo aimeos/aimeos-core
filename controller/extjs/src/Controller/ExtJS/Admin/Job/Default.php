@@ -22,7 +22,7 @@ class Controller_ExtJS_Admin_Job_Default
 
 
 	/**
-	 * Initializes the attribute controller.
+	 * Initializes the job controller.
 	 *
 	 * @param MShop_Context_Item_Interface $context MShop context object
 	 */

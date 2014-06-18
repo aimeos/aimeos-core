@@ -409,6 +409,12 @@
 			"text": "ListUiSmall.js",
 			"path": "src/panel/job/"
 		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/cache/"
+		}, {
+			"text": "ListUiSmall.js",
+			"path": "src/panel/cache/"
+		}, {
 			"text": "ListUiSmall.js",
 			"path": "src/panel/log/"
 		}, {

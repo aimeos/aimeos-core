@@ -58,6 +58,14 @@ class Controller_ExtJS_Product_Default
 			$indexManager->saveItem( $item );
 		}
 
+
+		$tags = array();
+		foreach( (array) $params->items as $id ) {
+			$tags[] = 'product/id/' . $id;
+		}
+
+		$this->_getContext()->getCache()->deleteByTags( $tags );
+
 		return array(
 			'success' => true,
 		);

@@ -30,7 +30,7 @@ MShop.panel.log.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
 
 	initComponent : function()
 	{
-		this.title = MShop.I18n.dt( 'client/extjs', 'Admin log' );
+		this.title = MShop.I18n.dt( 'client/extjs', 'Logs' );
 
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );

@@ -10,7 +10,9 @@ Ext.ns('MShop.panel.portal');
  * @todo this class is misnamed, it's actually not a itemUi'
  */
 MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
+
 	idProperty : 'id',
+	autoScroll: true,
 
 	autoScroll: true,
 
@@ -22,27 +24,34 @@ MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
 			xtype:'portal',
 			region:'center',
 			items:[{
-				columnWidth: 0.5,
-				style:'margin:5px',
-				items:[{
-					xtype: 'MShop.panel.log.listuismall',
-					layout: 'fit',
-					height: 400,
-					border: true,
-					collapsible : true,
-					draggable : true
-				}]
-			},
-			{
-				columnWidth: 0.5,
-				style:'margin:5px',
+				columnWidth: 1,
 				items:[{
 					xtype: 'MShop.panel.job.listuismall',
+					style:'margin:5px',
 					layout: 'fit',
 					height: 400,
 					border: true,
+					draggable : true,
 					collapsible : true,
-					draggable : true
+					collapsed : false
+				}, {
+					xtype: 'MShop.panel.log.listuismall',
+					style:'margin:5px',
+					layout: 'fit',
+					height: 400,
+					border: true,
+					draggable : true,
+					collapsible : true,
+					collapsed : false
+				}, {
+					xtype: 'MShop.panel.cache.listuismall',
+					style:'margin:5px',
+					layout: 'fit',
+					height: 400,
+					border: true,
+					draggable : true,
+					collapsible : true,
+					collapsed : false
 				}]
 			}]
 		}];
