@@ -131,8 +131,9 @@ class Client_Html_Catalog_Detail_Default
 		$cache = $context->getCache();
 		$view = $this->getView();
 
-		$prodid = $view->param( 'd-product-id' );
-		$key = 'product/id/' . $prodid . ':detail-body';
+		$html = '';
+		$id = $view->param( 'd-product-id' );
+		$key = 'product/id/' . $id . ':detail-body';
 
 		if( ( $html = $cache->get( $key ) ) === null )
 		{
@@ -140,36 +141,31 @@ class Client_Html_Catalog_Detail_Default
 			{
 				$view = $this->_setViewParams( $view );
 
-				$html = '';
+				$output = '';
 				foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-					$html .= $subclient->setView( $view )->getBody();
+					$output .= $subclient->setView( $view )->getBody();
 				}
-				$view->detailBody = $html;
+				$view->detailBody = $output;
 			}
 			catch( Client_Html_Exception $e )
 			{
-				$view = $this->getView();
-				$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+				$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 				$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 			}
 			catch( Controller_Frontend_Exception $e )
 			{
-				$view = $this->getView();
-				$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+				$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 				$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 			}
 			catch( MShop_Exception $e )
 			{
-				$view = $this->getView();
-				$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+				$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 				$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 			}
 			catch( Exception $e )
 			{
-				$context = $this->_getContext();
 				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-				$view = $this->getView();
 				$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 				$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 			}
@@ -199,7 +195,7 @@ class Client_Html_Catalog_Detail_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cache->set( $key, $html, array( 'product/id/' . $prodid ) );
+			$cache->set( $key, $html, array( 'product/id/' . $id ) );
 		}
 
 		return $html;
@@ -217,24 +213,25 @@ class Client_Html_Catalog_Detail_Default
 		$cache = $context->getCache();
 		$view = $this->getView();
 
-		$prodid = $view->param( 'd-product-id' );
-		$key = 'product/id/' . $prodid . ':detail-header';
+		$html = '';
+		$id = $view->param( 'd-product-id' );
+		$key = 'product/id/' . $id . ':detail-header';
 
 		if( ( $html = $cache->get( $key ) ) === null )
 		{
 			try
 			{
-				$view = $this->_setViewParams( $this->getView() );
+				$view = $this->_setViewParams( $view );
 
-				$html = '';
+				$output = '';
 				foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-					$html .= $subclient->setView( $view )->getHeader();
+					$output .= $subclient->setView( $view )->getHeader();
 				}
-				$view->detailHeader = $html;
+				$view->detailHeader = $output;
 			}
 			catch( Exception $e )
 			{
-				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 				return '';
 			}
 
@@ -264,7 +261,7 @@ class Client_Html_Catalog_Detail_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cache->set( $key, $html, array( 'product/id/' . $prodid ) );
+			$cache->set( $key, $html, array( 'product/id/' . $id ) );
 		}
 
 		return $html;
