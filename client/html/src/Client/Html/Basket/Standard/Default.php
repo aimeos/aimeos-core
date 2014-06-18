@@ -234,6 +234,7 @@ class Client_Html_Basket_Standard_Default
 	 */
 	public function process()
 	{
+		$refresh = false;
 		$view = $this->getView();
 
 		try
@@ -293,6 +294,7 @@ class Client_Html_Basket_Standard_Default
 			{
 				case 'add':
 
+					$refresh = true;
 					$products = (array) $view->param( 'b-prod', array() );
 
 					if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
@@ -324,6 +326,7 @@ class Client_Html_Basket_Standard_Default
 
 				case 'delete':
 
+					$refresh = true;
 					$products = (array) $view->param( 'b-position', array() );
 
 					foreach( $products as $position ) {
@@ -334,6 +337,7 @@ class Client_Html_Basket_Standard_Default
 
 				case 'edit':
 
+					$refresh = true;
 					$products = (array) $view->param( 'b-prod', array() );
 
 					if( ( $positon = $view->param( 'b-position', null ) ) !== null )
@@ -356,6 +360,10 @@ class Client_Html_Basket_Standard_Default
 					}
 
 					break;
+			}
+
+			if( $refresh ) {
+				$this->_getContext()->getSession()->set( 'arcavias/basket/mini/body', null );
 			}
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
