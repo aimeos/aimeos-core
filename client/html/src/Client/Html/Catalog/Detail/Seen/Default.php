@@ -98,7 +98,8 @@ class Client_Html_Catalog_Detail_Seen_Default
 	{
 		if( ( $id = $this->getView()->param( 'd-product-id' ) ) !== null )
 		{
-			$session = $this->_getContext()->getSession();
+			$context = $this->_getContext();
+			$session = $context->getSession();
 			$str = $session->get( 'arcavias/client/html/catalog/session/seen' );
 
 			if( ( $lastSeen = @unserialize( $str ) ) === false ) {
@@ -129,7 +130,16 @@ class Client_Html_Catalog_Detail_Seen_Default
 				 */
 				$max = $this->_getContext()->getConfig()->get( 'client/html/catalog/session/seen/default/maxitems', 6 );
 
-				$lastSeen[$id] = $this->_getHtml( $id );
+				$cache = $context->getCache();
+				$key = 'product/id/' . $id . ':detail-seen';
+
+				if( ( $html = $cache->get( $key ) ) === null )
+				{
+					$html = $this->_getHtml( $id );
+					$cache->set( $key, $html, array( 'product/id/' . $id ) );
+				}
+
+				$lastSeen[$id] = $html;
 				$lastSeen = array_slice( $lastSeen, -$max, $max, true );
 
 				$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
