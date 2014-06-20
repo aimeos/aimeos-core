@@ -104,7 +104,7 @@ class Client_Html_Basket_Mini_Main_Default
 	 */
 	public function getHeader()
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->getView();
 
 		$html = '';
 		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {

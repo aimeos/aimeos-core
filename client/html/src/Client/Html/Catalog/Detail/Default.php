@@ -302,6 +302,9 @@ class Client_Html_Catalog_Detail_Default
 	{
 		try
 		{
+			$params = $this->_getClientParams( $this->getView()->param() );
+			$this->_getContext()->getSession()->set( 'arcavias/catalog/detail/params/last', $params );
+
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
 		}
 		catch( Client_Html_Exception $e )
