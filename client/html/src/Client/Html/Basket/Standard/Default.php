@@ -419,29 +419,16 @@ class Client_Html_Basket_Standard_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$params = $this->_getClientParams( $view->param() );
+			$params = $this->_getContext()->getSession()->get( 'arcavias/catalog/detail/params/last', array() );
 
-			if( isset( $params['d-product-id'] ) )
-			{
-				$target = $view->config( 'client/html/catalog/detail/url/target' );
-				$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );
-				$action = $view->config( 'client/html/catalog/detail/url/action', 'detail' );
-				$config = $view->config( 'client/html/catalog/detail/url/config', array() );
+			$target = $view->config( 'client/html/catalog/detail/url/target' );
+			$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+			$action = $view->config( 'client/html/catalog/detail/url/action', 'detail' );
+			$config = $view->config( 'client/html/catalog/detail/url/config', array() );
 
-				$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
-			}
-			else if( count( $this->_getClientParams( $view->param(), array( 'f' ) ) ) > 0 )
-			{
-				$target = $view->config( 'client/html/catalog/list/url/target' );
-				$controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
-				$action = $view->config( 'client/html/catalog/list/url/action', 'list' );
-				$config = $view->config( 'client/html/catalog/list/url/config', array() );
-
-				$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
-			}
-
+			$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
+			$view->standardParams = $this->_getClientParams( $view->param() );
 			$view->standardBasket = $this->_controller->get();
-			$view->standardParams = $params;
 
 			$this->_cache = $view;
 		}
