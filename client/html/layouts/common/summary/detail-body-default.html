@@ -229,7 +229,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php endif; ?>
 				</tr>
 <?php foreach( $this->get( 'summaryTaxRates', array() ) as $taxRate => $priceValue ) : ?>
-<?php	if( $priceValue > '0.00' ) : ?>
+<?php	if( $taxRate > '0.00' && $priceValue > '0.00' ) : ?>
 				<tr class="tax">
 					<td colspan="3"><?php echo $enc->html( sprintf( $this->translate( 'client/html', 'Incl. %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ) ); ?></td>
