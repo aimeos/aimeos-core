@@ -143,6 +143,8 @@ class Client_Html_Basket_Mini_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
+			$cached = $session->get( 'arcavias/basket/cache', array() ) + array( 'arcavias/basket/mini/body' => true );
+			$session->set( 'arcavias/basket/cache', $cached );
 			$session->set( $key, $html );
 		}
 

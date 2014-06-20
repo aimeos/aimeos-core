@@ -362,8 +362,13 @@ class Client_Html_Basket_Standard_Default
 					break;
 			}
 
-			if( $refresh ) {
-				$this->_getContext()->getSession()->set( 'arcavias/basket/mini/body', null );
+			if( $refresh ) // Remove the cached HTML from the session for all baskets
+			{
+				$session = $this->_getContext()->getSession();
+
+				foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
+					$session->set( $key, null );
+				}
 			}
 
 			$this->_process( $this->_subPartPath, $this->_subPartNames );
