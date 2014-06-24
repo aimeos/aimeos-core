@@ -57,9 +57,12 @@ class Client_Html_Catalog_Detail_Seen_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		return '';
 	}
@@ -68,9 +71,12 @@ class Client_Html_Catalog_Detail_Seen_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		return '';
 	}
@@ -86,6 +92,17 @@ class Client_Html_Catalog_Detail_Seen_Default
 	public function getSubClient( $type, $name = null )
 	{
 		return $this->_createSubClient( 'catalog/detail/seen/' . $type, $name );
+	}
+
+
+	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 */
+	protected function _getSubClientNames()
+	{
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 
 

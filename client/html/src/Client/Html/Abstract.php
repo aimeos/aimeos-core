@@ -20,10 +20,13 @@ abstract class Client_Html_Abstract
 	const CACHE_BODY = 1;
 	const CACHE_HEADER = 2;
 
+	private $_tags;
 	private $_view;
+	private $_clients;
 	private $_context;
+	private $_subclients;
 	private $_templatePaths;
-	private $_cache = array();
+	private $_hashes = array();
 
 
 	/**
@@ -37,18 +40,6 @@ abstract class Client_Html_Abstract
 	{
 		$this->_context = $context;
 		$this->_templatePaths = $templatePaths;
-	}
-
-
-	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 */
-	public function isCachable( $what )
-	{
-		return false;
 	}
 
 
@@ -68,6 +59,51 @@ abstract class Client_Html_Abstract
 
 
 	/**
+	 * Tests if the output of is cachable.
+	 *
+	 * @param integer $what Header or body constant from Client_HTML_Abstract
+	 * @return boolean True if the output can be cached, false if not
+	 */
+	public function isCachable( $what )
+	{
+		foreach( $this->_getSubClients() as $client )
+		{
+			if( $client->isCachable( $what ) === false ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Processes the input, e.g. store given values.
+	 * A view must be available and this method doesn't generate any output
+	 * besides setting view variables.
+	 *
+	 * @param string $confpath Path to the configuration that contains the configured sub-clients
+	 * @param array $default List of sub-client names that should be used if no other configuration is available
+	 * @return boolean False if processing is stopped, otherwise all processing was completed successfully
+	 */
+	public function process()
+	{
+		$view = $this->getView();
+
+		foreach( $this->_getSubClients() as $subclient )
+		{
+			$subclient->setView( $view );
+
+			if( $subclient->process() === false ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+
+	/**
 	 * Sets the view object that will generate the HTML output.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
@@ -77,6 +113,42 @@ abstract class Client_Html_Abstract
 	{
 		$this->_view = $view;
 		return $this;
+	}
+
+
+	/**
+	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given item.
+	 *
+	 * @param MShop_Common_Item_Interface $item Item, maybe with associated list items
+	 * @param string $domain Name of the domain the item is from
+	 * @param array $domains List of domains whose items are associated via the list to the item
+	 * @param array &$tags List of tags the new tags will be added to
+	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
+	 */
+	protected function _addMetaData( MShop_Common_Item_Interface $item, $domain, array $domains, array &$tags, &$expire )
+	{
+		$expires = array();
+		$tags[] = $domain . ':' . $item->getId();
+
+		if( method_exists( $item, 'getDateEnd' ) && ( $date = $item->getDateEnd() ) !== null ) {
+			$expires[] = $date;
+		}
+
+		foreach( $domains as $name )
+		{
+			foreach( $item->getListItems( $name ) as $listitem )
+			{
+				$tags[] = $name . ':' . $listitem->getRefId();
+
+				if( ( $date = $listitem->getDateEnd() ) !== null ) {
+					$expires[] = $date;
+				}
+			}
+		}
+
+		if( !empty( $expires ) ) {
+			$expire = min( $expires );
+		}
 	}
 
 
@@ -100,17 +172,6 @@ abstract class Client_Html_Abstract
 		}
 
 		return implode( '_', $names );
-	}
-
-
-	/**
-	 * Returns the context object.
-	 *
-	 * @return MShop_Context_Item_Interface Context object
-	 */
-	protected function _getContext()
-	{
-		return $this->_context;
 	}
 
 
@@ -177,26 +238,84 @@ abstract class Client_Html_Abstract
 
 
 	/**
-	 * Returns the configured sub-clients or the ones named in the default parameter if none are configured.
+	 * Returns the context object.
 	 *
-	 * @param string $confpath Path to the configuration that contains the configured sub-clients
-	 * @param array $default List of sub-client names that should be used if no other configuration is available
-	 * @return array List of sub-clients implementing Client_Html_Interface	ordered in the same way as the names
+	 * @return MShop_Context_Item_Interface Context object
 	 */
-	protected function _getSubClients( $confpath, array $default )
+	protected function _getContext()
 	{
-		$subclients = array();
+		return $this->_context;
+	}
 
-		foreach( $this->_context->getConfig()->get( $confpath, $default ) as $name )
+
+	/**
+	 * Generates an unique hash from based on the input suitable to be used as part of the cache key
+	 *
+	 * @param array $prefixes List of prefixes the parameters must start with
+	 * @param string $key Unique identifier if the content is placed more than once on the same page
+	 * @return string Unique hash
+	 */
+	protected function _getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '' )
+	{
+		$idx = implode( '', $prefixes ) . '/' . $key;
+
+		if( !isset( $this->_hashes[$idx] ) )
 		{
-			if( !isset( $this->_cache[$name] ) ) {
-				$this->_cache[$name] = $this->getSubClient( $name );
+			$params = $this->_getClientParams( $this->getView()->param(), $prefixes );
+			ksort( $params );
+
+			foreach( $params as $name => $value )
+			{
+				if( $value !== '' ) {
+					$key .= $name . $value;
+				}
 			}
 
-			$subclients[] = $this->_cache[$name];
+			$this->_hashes[$idx] = md5( $key );
 		}
 
-		return $subclients;
+		return $this->_hashes[$idx];
+	}
+
+
+	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 * @todo 2015.03 Make abstract so clients have to implement it
+	 */
+	protected function _getSubClientNames()
+	{
+		return array();
+	}
+
+
+	/**
+	 * Returns the configured sub-clients or the ones named in the default parameter if none are configured.
+	 *
+	 * @param string|null $confpath Path to the configuration that contains the configured sub-clients
+	 * @param array $default List of sub-client names that should be used if no other configuration is available
+	 * @return array List of sub-clients implementing Client_Html_Interface	ordered in the same way as the names
+	 * @todo 2015.03 Remove $confpath and $default parameters
+	 */
+	protected function _getSubClients( $confpath = null , array $default = array() )
+	{
+		if( !isset( $this->_subclients ) )
+		{
+			$this->_subclients = array();
+
+			if( $confpath !== null ) {
+				$names = $this->_context->getConfig()->get( $confpath, $default );
+			} else {
+				$names = $this->_getSubClientNames();
+			}
+
+			foreach( $names as $name ) {
+				$this->_subclients[] = $this->getSubClient( $name );
+			}
+		}
+
+		return $this->_subclients;
 	}
 
 
@@ -244,6 +363,8 @@ abstract class Client_Html_Abstract
 	 * @param string $confpath Path to the configuration that contains the configured sub-clients
 	 * @param array $default List of sub-client names that should be used if no other configuration is available
 	 * @return boolean True if the output can be cached, false if not
+	 * @deprecated Implement _getSubClientNames() to use isCachable() from abstract class instead
+	 * @todo 2015.03 Remove method from API
 	 */
 	protected function _isCachable( $what, $confpath, array $default )
 	{
@@ -259,18 +380,6 @@ abstract class Client_Html_Abstract
 
 
 	/**
-	 * Sets the necessary parameter values in the view.
-	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
-	 */
-	protected function _setViewParams( MW_View_Interface $view )
-	{
-		return $view;
-	}
-
-
-	/**
 	 * Processes the input, e.g. store given values.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
@@ -278,6 +387,8 @@ abstract class Client_Html_Abstract
 	 * @param string $confpath Path to the configuration that contains the configured sub-clients
 	 * @param array $default List of sub-client names that should be used if no other configuration is available
 	 * @return boolean False if processing is stopped, otherwise all processing was completed successfully
+	 * @deprecated Implement _getSubClientNames() to use process() from abstract class instead
+	 * @todo 2015.03 Remove method from API
 	 */
 	protected function _process( $confpath, array $default )
 	{
@@ -291,6 +402,22 @@ abstract class Client_Html_Abstract
 				return false;
 			}
 		}
+
+		return true;
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	{
+		return $view;
 	}
 
 

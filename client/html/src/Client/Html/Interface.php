@@ -29,6 +29,7 @@ interface Client_Html_Interface
 	 * Returns the HTML string for insertion into the header.
 	 *
 	 * @return string String including HTML tags for the header
+	 * @todo 2015.03 Add $uid, $tags and $expire parameter to make them mandatory
 	 */
 	public function getHeader();
 
@@ -36,6 +37,7 @@ interface Client_Html_Interface
 	 * Returns the HTML code for insertion into the body.
 	 *
 	 * @return string HTML code
+	 * @todo 2015.03 Add $uid, $tags and $expire parameter to make them mandatory
 	 */
 	public function getBody();
 

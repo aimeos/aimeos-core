@@ -119,31 +119,37 @@ class Client_Html_Catalog_Detail_Default
 	 */
 	private $_subPartNames = array( 'image', 'basic', 'basket', 'additional', 'suggest', 'seen' );
 
+	private $_tags = array();
+	private $_expire;
+	private $_cache;
+
 
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$context = $this->_getContext();
 		$cache = $context->getCache();
 		$view = $this->getView();
 
 		$html = '';
-		$id = $view->param( 'd-product-id' );
-		$key = 'product/id/' . $id . ':detail-body';
+		$key = 'catalog:' . $this->_getParamHash( array( 'd' ), $uid ) . ':detail-body';
 
 		if( ( $html = $cache->get( $key ) ) === null )
 		{
 			try
 			{
-				$view = $this->_setViewParams( $view );
+				$view = $this->_setViewParams( $view, $tags, $expire );
 
 				$output = '';
 				foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-					$output .= $subclient->setView( $view )->getBody();
+					$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 				}
 				$view->detailBody = $output;
 			}
@@ -195,7 +201,7 @@ class Client_Html_Catalog_Detail_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cache->set( $key, $html, array( 'product/id/' . $id ) );
+			$cache->set( $key, $html, array_unique( $tags ), $expire );
 		}
 
 		return $html;
@@ -205,27 +211,29 @@ class Client_Html_Catalog_Detail_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$context = $this->_getContext();
 		$cache = $context->getCache();
 		$view = $this->getView();
 
 		$html = '';
-		$id = $view->param( 'd-product-id' );
-		$key = 'product/id/' . $id . ':detail-header';
+		$key = 'catalog:' . $this->_getParamHash( array( 'd' ), $uid ) . ':detail-header';
 
 		if( ( $html = $cache->get( $key ) ) === null )
 		{
 			try
 			{
-				$view = $this->_setViewParams( $view );
+				$view = $this->_setViewParams( $view, $tags, $expire );
 
 				$output = '';
 				foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-					$output .= $subclient->setView( $view )->getHeader();
+					$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->detailHeader = $output;
 			}
@@ -261,7 +269,7 @@ class Client_Html_Catalog_Detail_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cache->set( $key, $html, array( 'product/id/' . $id ) );
+			$cache->set( $key, $html, array_unique( $tags ), $expire );
 		}
 
 		return $html;
@@ -282,55 +290,41 @@ class Client_Html_Catalog_Detail_Default
 
 
 	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 */
-	public function isCachable( $what )
-	{
-		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
-	}
-
-
-	/**
 	 * Processes the input, e.g. store given values.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
 	 */
 	public function process()
 	{
+		$context = $this->_getContext();
+		$view = $this->getView();
+
 		try
 		{
-			$params = $this->_getClientParams( $this->getView()->param() );
-			$this->_getContext()->getSession()->set( 'arcavias/catalog/detail/params/last', $params );
+			$params = $this->_getClientParams( $view->param() );
+			$context->getSession()->set( 'arcavias/catalog/detail/params/last', $params );
 
-			$this->_process( $this->_subPartPath, $this->_subPartNames );
+			parent::process();
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->detailErrorList = $view->get( 'detailErrorList', array() ) + $error;
 		}
@@ -338,12 +332,25 @@ class Client_Html_Catalog_Detail_Default
 
 
 	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 */
+	protected function _getSubClientNames()
+	{
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->_cache ) )
 		{
@@ -410,8 +417,13 @@ class Client_Html_Catalog_Detail_Default
 			$view->detailProductMediaItems = $mediaManager->searchItems( $mediaSearch, $default );
 			$view->detailParams = $this->_getClientParams( $view->param() );
 
+			$this->_addMetaData( $productItem, 'product', $domains, $this->_tags, $this->_expire );
+
 			$this->_cache = $view;
 		}
+
+		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;
 	}
