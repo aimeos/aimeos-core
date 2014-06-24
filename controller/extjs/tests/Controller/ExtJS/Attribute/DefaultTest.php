@@ -124,22 +124,6 @@ class Controller_ExtJS_Attribute_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testAbstractInit()
-	{
-		$expected = array('success' => true);
-		$actual = $this->_object->init( new stdClass() );
-		$this->assertEquals( $expected, $actual );
-	}
-
-
-	public function testAbstractFinish()
-	{
-		$expected = array('success' => true);
-		$actual = $this->_object->finish( new stdClass() );
-		$this->assertEquals( $expected, $actual );
-	}
-
-
 	public function testAbstractGetItemSchema()
 	{
 		$actual = $this->_object->getItemSchema();
@@ -400,4 +384,9 @@ class Controller_ExtJS_Attribute_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->searchItems( $params );
 	}
 
+
+	public function testFinish()
+	{
+		$this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+	}
 }
