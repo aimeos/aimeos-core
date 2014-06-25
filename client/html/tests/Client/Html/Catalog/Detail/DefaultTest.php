@@ -7,6 +7,7 @@
 
 class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 {
+	private $_mock;
 	private $_object;
 	private $_context;
 
@@ -35,8 +36,8 @@ class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$this->_context = TestHelper::getContext();
-
 		$paths = TestHelper::getHtmlTemplatePaths();
+
 		$this->_object = new Client_Html_Catalog_Detail_Default( $this->_context, $paths );
 		$this->_object->setView( TestHelper::getView() );
 	}
@@ -60,8 +61,13 @@ class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'd-product-id' => $this->_getProductItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getHeader();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getHeader( 1, $tags, $expire );
+
 		$this->assertStringStartsWith( '<title>Cafe Noire Cappuccino</title>', $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 19, count( $tags ) );
 	}
 
 
@@ -71,8 +77,13 @@ class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'd-product-id' => $this->_getProductItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
+
 		$this->assertStringStartsWith( '<section class="arcavias catalog-detail">', $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 19, count( $tags ) );
 	}
 
 
