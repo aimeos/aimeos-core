@@ -154,12 +154,12 @@ class Client_Html_Common_Summary_Coupon_Default
 
 
 	/**
-	 * Processes the input, e.g. store given values.
-	 * A view must be available and this method doesn't generate any output
-	 * besides setting view variables.
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
 	 */
-	public function process()
+	protected function _getSubClientNames()
 	{
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 }

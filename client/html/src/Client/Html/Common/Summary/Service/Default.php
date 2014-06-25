@@ -57,15 +57,18 @@ class Client_Html_Common_Summary_Service_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->serviceBody = $html;
 
@@ -99,15 +102,18 @@ class Client_Html_Common_Summary_Service_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->serviceHeader = $html;
 
@@ -153,24 +159,12 @@ class Client_Html_Common_Summary_Service_Default
 
 
 	/**
-	 * Processes the input, e.g. store given values.
-	 * A view must be available and this method doesn't generate any output
-	 * besides setting view variables.
-	 */
-	public function process()
-	{
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
-	}
-
-
-	/**
-	 * Sets the necessary parameter values in the view.
+	 * Returns the list of sub-client names configured for the client.
 	 *
-	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @return MW_View_Interface Modified view object
+	 * @return array List of HTML client names
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _getSubClientNames()
 	{
-		return $view;
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 }

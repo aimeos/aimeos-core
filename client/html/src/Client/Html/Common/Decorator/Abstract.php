@@ -69,22 +69,28 @@ abstract class Client_Html_Common_Decorator_Abstract
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		return $this->_client->getHeader();
+		return $this->_client->getHeader( $uid, $tags, $expire );
 	}
 
 
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		return $this->_client->getBody();
+		return $this->_client->getBody( $uid, $tags, $expire );
 	}
 
 
@@ -116,6 +122,8 @@ abstract class Client_Html_Common_Decorator_Abstract
 	 *
 	 * @param integer $what Header or body constant from Client_HTML_Abstract
 	 * @return boolean True if the output can be cached, false if not
+	 * @deprecated Not used anymore, caching is done internally
+	 * @todo 2015.03 Remove method from API
 	 */
 	public function isCachable( $what )
 	{
