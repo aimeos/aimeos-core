@@ -63,17 +63,12 @@ abstract class Client_Html_Abstract
 	 *
 	 * @param integer $what Header or body constant from Client_HTML_Abstract
 	 * @return boolean True if the output can be cached, false if not
+	 * @deprecated Not used anymore, caching is done internally
+	 * @todo 2015.03 Remove method from API
 	 */
 	public function isCachable( $what )
 	{
-		foreach( $this->_getSubClients() as $client )
-		{
-			if( $client->isCachable( $what ) === false ) {
-				return false;
-			}
-		}
-
-		return true;
+		return false;
 	}
 
 
@@ -363,7 +358,7 @@ abstract class Client_Html_Abstract
 	 * @param string $confpath Path to the configuration that contains the configured sub-clients
 	 * @param array $default List of sub-client names that should be used if no other configuration is available
 	 * @return boolean True if the output can be cached, false if not
-	 * @deprecated Implement _getSubClientNames() to use isCachable() from abstract class instead
+	 * @deprecated Not used anymore, caching is done internally
 	 * @todo 2015.03 Remove method from API
 	 */
 	protected function _isCachable( $what, $confpath, array $default )
@@ -411,11 +406,10 @@ abstract class Client_Html_Abstract
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
-	 * @param array &$tags Result array for the list of tags that are associated to the output
-	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
+	 * @todo 2015.03 Add $tags and $expire parameters
 	 */
-	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	protected function _setViewParams( MW_View_Interface $view )
 	{
 		return $view;
 	}
