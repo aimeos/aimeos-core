@@ -58,15 +58,18 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->paymentBody = $html;
 
@@ -100,15 +103,18 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->getView();
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->paymentHeader = $html;
 
@@ -150,18 +156,6 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 	public function getSubClient( $type, $name = null )
 	{
 		return $this->_createSubClient( 'checkout/standard/order/payment/' . $type, $name );
-	}
-
-
-	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 */
-	public function isCachable( $what )
-	{
-		return false;
 	}
 
 
@@ -350,6 +344,17 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 			throw new Client_Html_Exception( $msg );
 		}
 
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		parent::process();
+	}
+
+
+	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 */
+	protected function _getSubClientNames()
+	{
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 }
