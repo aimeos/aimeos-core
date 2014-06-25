@@ -199,6 +199,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
+				/** @todo Make referenced domains configurable */
 				$domains = array( 'text', 'price', 'media', 'attribute' );
 				$subproducts = $productManager->searchItems( $search, $domains );
 				$attrIds = $attrMap = $prodDeps = $attrDeps = $attrTypeDeps = array();
@@ -222,8 +223,9 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 					$search->getConditions(),
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
-				$attributes = $attrManager->searchItems( $search, array( 'text', 'media' ) );
 
+				/** @todo Make referenced domains configurable */
+				$attributes = $attrManager->searchItems( $search, array( 'text', 'media' ) );
 
 				foreach( $subproducts as $item ) {
 					$this->_addMetaData( $item, 'product', $domains, $this->_tags, $this->_expire );

@@ -184,13 +184,13 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$items = $attributeMap = array();
 			$context = $this->_getContext();
+			$attrIds = $attributeMap = $subAttrDeps = array();
 
 			if( isset( $view->detailProductItem ) )
 			{
-				$items = $view->detailProductItem->getRefItems( 'attribute', null, 'default' );
-				$items += $view->detailProductItem->getRefItems( 'attribute', null, 'variant' );
+				$attrIds = array_keys( $view->detailProductItem->getRefItems( 'attribute', null, 'default' ) );
+				$attrIds += array_keys( $view->detailProductItem->getRefItems( 'attribute', null, 'variant' ) );
 			}
 
 
@@ -198,7 +198,6 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
 
 			$productManager = MShop_Product_Manager_Factory::createManager( $context );
-			$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
 
 			$search = $productManager->createSearch( true );
 			$expr = array(
@@ -207,10 +206,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$subproducts = $productManager->searchItems( $search, array( 'attribute' ) );
-			$subAttrIds = $subAttrDeps = array();
-
-			foreach( $subproducts as $subProdId => $subProduct )
+			foreach( $productManager->searchItems( $search, array( 'attribute' ) ) as $subProdId => $subProduct )
 			{
 				$subItems = $subProduct->getRefItems( 'attribute', null, 'default' );
 				$subItems += $subProduct->getRefItems( 'attribute', null, 'variant' );
@@ -218,28 +214,25 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 				foreach( $subItems as $attrId => $attrItem )
 				{
 					$subAttrDeps[$attrId][] = $subProdId;
-					$subAttrIds[] = $attrId;
+					$attrIds[] = $attrId;
 				}
 			}
 
 
+			$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
+
 			$search = $attrManager->createSearch( true );
 			$expr = array(
-				$search->compare( '==', 'attribute.id', $subAttrIds ),
+				$search->compare( '==', 'attribute.id', $attrIds ),
 				$search->getConditions(),
 			);
-
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$result = $attrManager->searchItems( $search, array( 'text', 'media') );
-			$items = array_merge( $items, $result );
 
-			foreach( $items as $id => $attribute ) {
-					$attributeMap[ $attribute->getType() ][$id] = $attribute;
-			}
-
-
-			foreach( $result as $item ) {
-					$this->_addMetaData( $item, 'attribute', array( 'text', 'media' ), $this->_tags, $this->_expire );
+			/** @todo Make referenced domains configurable */
+			foreach( $attrManager->searchItems( $search, array( 'text', 'media') ) as $id => $item )
+			{
+				$this->_addMetaData( $item, 'attribute', array( 'text', 'media' ), $this->_tags, $this->_expire );
+				$attributeMap[ $item->getType() ][$id] = $item;
 			}
 
 
