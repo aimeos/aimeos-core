@@ -208,6 +208,8 @@ class Client_Html_Catalog_Filter_Tree_Default
 			 */
 			$startid = $view->config( 'client/html/catalog/filter/tree/startid', '' );
 			$currentid = (string) $view->param( 'f-catalog-id', '' );
+
+			/** @todo Make referenced domains configurable */
 			$ref = array( 'text', 'media', 'attribute' );
 			$catItems = array();
 
@@ -369,7 +371,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 		$this->_addMetaData( $tree, 'catalog', $domains, $tags, $expire );
 
 		foreach( $tree->getChildren() as $child ) {
-			$this->_addMetaData( $child, 'catalog', $domains, $tags, $expire );
+			$this->_addMetaDataCatalog( $child, $domains, $tags, $expire );
 		}
 	}
 }

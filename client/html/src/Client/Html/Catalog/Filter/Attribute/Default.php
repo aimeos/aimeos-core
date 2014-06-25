@@ -186,7 +186,6 @@ class Client_Html_Catalog_Filter_Attribute_Default
 			$manager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
 
 			$search = $manager->createSearch( true );
-
 			$expr = array(
 				$search->compare( '==', 'attribute.domain', 'product' ),
 				$search->getConditions(),
@@ -200,9 +199,8 @@ class Client_Html_Catalog_Filter_Attribute_Default
 			$search->setSortations( $sort );
 			$search->setSlice( 0, 1000 );
 
-			$attributes = $manager->searchItems( $search, array( 'text', 'media' ) );
-
-			foreach( $attributes as $id => $item )
+			/** @todo Make referenced domains configurable */
+			foreach( $manager->searchItems( $search, array( 'text', 'media' ) ) as $id => $item )
 			{
 				$this->_addMetaData( $item, 'attribute', array( 'text', 'media' ), $this->_tags, $this->_expire );
 				$attrMap[ $item->getType() ][$id] = $item;

@@ -198,13 +198,14 @@ class Client_Html_Catalog_Detail_Suggest_Default
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
+				/** @todo Make referenced domains configurable */
 				$domains = array( 'text', 'price', 'media' );
 
 				$view->suggestItems = $manager->searchItems( $search, $domains );
 				$view->suggestPosItems = $products;
 
 
-				foreach( $products as $item ) {
+				foreach( $view->suggestItems as $item ) {
 					$this->_addMetaData( $item, 'product', $domains, $this->_tags, $this->_expire );
 				}
 			}

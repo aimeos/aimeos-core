@@ -464,8 +464,7 @@ class Client_Html_Catalog_List_Default
 			}
 
 
-			$domains = $config->get( 'client/html/catalog/domains', array( 'media', 'price', 'text' ) );
-			$domains = $config->get( 'client/html/catalog/list/domains', $domains );
+			$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
 
 			/* If a product in a list expires, all subsequent list pages should
 			 * be removed from the cache too to get totally correct results.

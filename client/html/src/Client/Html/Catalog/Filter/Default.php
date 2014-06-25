@@ -299,7 +299,7 @@ class Client_Html_Catalog_Filter_Default
 
 	protected function _getSubClientNames()
 	{
-		return $this->_getContext->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 
 
