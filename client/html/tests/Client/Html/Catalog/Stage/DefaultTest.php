@@ -60,7 +60,12 @@ class Client_Html_Catalog_Stage_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $this->_getCatalogItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getHeader();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getHeader( 1, $tags, $expire );
+
+		$this->assertEquals( '2019-01-01 00:00:00', $expire );
+		$this->assertEquals( 6, count( $tags ) );
 	}
 
 
@@ -70,8 +75,13 @@ class Client_Html_Catalog_Stage_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $this->_getCatalogItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
+
 		$this->assertStringStartsWith( '<section class="arcavias catalog-stage home categories coffee">', $output );
+		$this->assertEquals( '2019-01-01 00:00:00', $expire );
+		$this->assertEquals( 6, count( $tags ) );
 	}
 
 

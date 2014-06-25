@@ -68,44 +68,45 @@ class Client_Html_Catalog_Session_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
+		$context = $this->_getContext();
+		$view = $this->getView();
+
 		try
 		{
-			$view = $this->getView();
+			$view = $this->_setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getBody();
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->sessionBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
@@ -140,17 +141,20 @@ class Client_Html_Catalog_Session_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		try
 		{
-			$view = $this->getView();
+			$view = $this->_setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader();
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->sessionHeader = $html;
 		}
@@ -210,7 +214,7 @@ class Client_Html_Catalog_Session_Default
 	{
 		try
 		{
-			$this->_process( $this->_subPartPath, $this->_subPartNames );
+			parent::process();
 		}
 		catch( Client_Html_Exception $e )
 		{
@@ -239,5 +243,16 @@ class Client_Html_Catalog_Session_Default
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->sessionErrorList = $view->get( 'sessionErrorList', array() ) + $error;
 		}
+	}
+
+
+	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 */
+	protected function _getSubClientNames()
+	{
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 }
