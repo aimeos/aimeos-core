@@ -87,7 +87,8 @@ class Client_Html_Email_Payment_DefaultTest extends MW_Unittest_Testcase
 		$this->_emailMock->expects( $this->once() )->method( 'setSubject' )
 			->with( $this->stringContains( 'Your order' ) );
 
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

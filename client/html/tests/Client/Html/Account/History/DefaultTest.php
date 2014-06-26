@@ -58,6 +58,7 @@ class Client_Html_Account_History_DefaultTest extends MW_Unittest_Testcase
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

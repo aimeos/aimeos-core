@@ -205,40 +205,39 @@ class Client_Html_Catalog_Filter_Default
 					$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->filterHeader = $html;
+
+				/** client/html/catalog/filter/default/template-header
+				 * Relative path to the HTML header template of the catalog filter client.
+				 *
+				 * The template file contains the HTML code and processing instructions
+				 * to generate the HTML code that is inserted into the HTML page header
+				 * of the rendered page in the frontend. The configuration string is the
+				 * path to the template file relative to the layouts directory (usually
+				 * in client/html/layouts).
+				 *
+				 * You can overwrite the template file configuration in extensions and
+				 * provide alternative templates. These alternative templates should be
+				 * named like the default one but with the string "default" replaced by
+				 * an unique name. You may use the name of your project for this. If
+				 * you've implemented an alternative client class as well, "default"
+				 * should be replaced by the name of the new class.
+				 *
+				 * @param string Relative path to the template creating code for the HTML page head
+				 * @since 2014.03
+				 * @category Developer
+				 * @see client/html/catalog/filter/default/template-body
+				 */
+				$tplconf = 'client/html/catalog/filter/default/template-header';
+				$default = 'catalog/filter/header-default.html';
+
+				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+
+				$cache->set( $key, $html, array_unique( $tags ), $expire );
 			}
 			catch( Exception $e )
 			{
 				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-				return '';
 			}
-
-			/** client/html/catalog/filter/default/template-header
-			 * Relative path to the HTML header template of the catalog filter client.
-			 *
-			 * The template file contains the HTML code and processing instructions
-			 * to generate the HTML code that is inserted into the HTML page header
-			 * of the rendered page in the frontend. The configuration string is the
-			 * path to the template file relative to the layouts directory (usually
-			 * in client/html/layouts).
-			 *
-			 * You can overwrite the template file configuration in extensions and
-			 * provide alternative templates. These alternative templates should be
-			 * named like the default one but with the string "default" replaced by
-			 * an unique name. You may use the name of your project for this. If
-			 * you've implemented an alternative client class as well, "default"
-			 * should be replaced by the name of the new class.
-			 *
-			 * @param string Relative path to the template creating code for the HTML page head
-			 * @since 2014.03
-			 * @category Developer
-			 * @see client/html/catalog/filter/default/template-body
-			 */
-			$tplconf = 'client/html/catalog/filter/default/template-header';
-			$default = 'catalog/filter/header-default.html';
-
-			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
-
-			$cache->set( $key, $html, array_unique( $tags ), $expire );
 		}
 
 		return $html;
