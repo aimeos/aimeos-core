@@ -166,6 +166,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 	 */
 	protected function _getHtml( $id )
 	{
+		$context = $this->_getContext();
 		$cache = $context->getCache();
 		$key = 'product:' . $id . ':detail-seen';
 
@@ -174,11 +175,9 @@ class Client_Html_Catalog_Detail_Seen_Default
 			$expire = null;
 			$tags = array();
 			$view = $this->getView();
+			$config = $context->getConfig();
+
 			$default = array( 'media', 'price', 'text' );
-
-			$context = $this->_getContext();
-			$config = $context->getconfig();
-
 			$domains = $config->get( 'client/html/catalog/domains', $default );
 
 			/** client/html/catalog/detail/seen/domains
