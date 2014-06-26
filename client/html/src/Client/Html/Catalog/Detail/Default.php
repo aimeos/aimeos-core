@@ -148,7 +148,7 @@ class Client_Html_Catalog_Detail_Default
 				$view = $this->_setViewParams( $view, $tags, $expire );
 
 				$output = '';
-				foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				foreach( $this->_getSubClients() as $subclient ) {
 					$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 				}
 				$view->detailBody = $output;
@@ -232,7 +232,7 @@ class Client_Html_Catalog_Detail_Default
 				$view = $this->_setViewParams( $view, $tags, $expire );
 
 				$output = '';
-				foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+				foreach( $this->_getSubClients() as $subclient ) {
 					$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->detailHeader = $output;

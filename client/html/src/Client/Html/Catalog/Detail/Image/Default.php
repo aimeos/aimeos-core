@@ -67,7 +67,7 @@ class Client_Html_Catalog_Detail_Image_Default
 		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+		foreach( $this->_getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->imageBody = $html;
@@ -112,7 +112,7 @@ class Client_Html_Catalog_Detail_Image_Default
 		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
+		foreach( $this->_getSubClients() as $subclient ) {
 			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->imageHeader = $html;
