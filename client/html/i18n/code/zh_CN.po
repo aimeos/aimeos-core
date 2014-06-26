@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# shihua16165 <shihua16165@163.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2014-06-22 08:28+0000\n"
+"Last-Translator: shihua16165 <shihua16165@163.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/arcavias-core/language/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Address salutation
+msgid "company"
+msgstr "公司"
+
+#. Address salutation
+msgid "mr"
+msgstr "先生"
+
+#. Address salutation
+msgid "mrs"
+msgstr "女士"
+
+#. Address salutation
+msgid "miss"
+msgstr "女士"
+
+#. Product attribute
+msgid "size"
+msgstr "尺寸"
+
+#. Product attribute
+msgid "length"
+msgstr "长度"
+
+#. Product attribute
+msgid "width"
+msgstr "宽度"
+
+#. Product attribute
+msgid "color"
+msgstr "颜色"
+
+#. Product attribute
+msgid "option"
+msgstr "选项"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "反复"
+
+#. Order type value
+msgid "order:web"
+msgstr "通过因特网"
+
+#. Order type value
+msgid "order:phone"
+msgstr "通过电话"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "未完成"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "删除"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "取消"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "已谢绝"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "已退款"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "处理中"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "已授权"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "已收到"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "未完成"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "已删除"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "处理中"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "处理中"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "配送中"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "已交货"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "无法确定"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "被拒收"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "被退货"
+
+#. Direct debit service provider
+msgid "directdebit.accountowner"
+msgstr "账户名"
+
+#. Direct debit service provider
+msgid "directdebit.accountno"
+msgstr "账户号"
+
+#. Direct debit service provider
+msgid "directdebit.bankcode"
+msgstr "银行代码"
+
+#. Direct debit service provider
+msgid "directdebit.bankname"
+msgstr "开户行"
+
+#. Warehouse code
+msgid "warehouse:default"
+msgstr "仓库代码"

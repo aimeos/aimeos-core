@@ -1,0 +1,769 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# manuel.fries <manuel.fries@gdatasoftware.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2014-06-20 07:00+0000\n"
+"Last-Translator: manuel.fries <manuel.fries@gdatasoftware.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/arcavias-core/language/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "AD"
+msgstr "安道尔"
+
+msgid "AE"
+msgstr "阿联酋"
+
+msgid "AF"
+msgstr "阿富汗"
+
+msgid "AG"
+msgstr "安提瓜和巴布达"
+
+msgid "AI"
+msgstr "安圭拉"
+
+msgid "AL"
+msgstr "阿尔巴尼亚"
+
+msgid "AM"
+msgstr "亚美尼亚"
+
+msgid "AO"
+msgstr "安哥拉"
+
+msgid "AQ"
+msgstr "南极洲"
+
+msgid "AR"
+msgstr "阿根廷"
+
+msgid "AS"
+msgstr "美属萨摩亚"
+
+msgid "AT"
+msgstr "奥地利"
+
+msgid "AU"
+msgstr "澳大利亚"
+
+msgid "AW"
+msgstr "阿鲁巴"
+
+msgid "AX"
+msgstr "奥兰群岛"
+
+msgid "AZ"
+msgstr "阿塞拜疆"
+
+msgid "BA"
+msgstr "波斯尼亚和黑塞哥维那"
+
+msgid "BB"
+msgstr "巴巴多斯"
+
+msgid "BD"
+msgstr "孟加拉国"
+
+msgid "BE"
+msgstr "比利时"
+
+msgid "BF"
+msgstr "布基纳法索"
+
+msgid "BG"
+msgstr "保加利亚"
+
+msgid "BH"
+msgstr "巴林"
+
+msgid "BI"
+msgstr "布隆迪"
+
+msgid "BJ"
+msgstr "贝宁"
+
+msgid "BL"
+msgstr "圣巴泰勒米"
+
+msgid "BM"
+msgstr "百慕大"
+
+msgid "BN"
+msgstr "文莱达鲁萨兰国"
+
+msgid "BO"
+msgstr "玻利维亚"
+
+msgid "BQ"
+msgstr "博内尔，圣尤斯特歇斯和萨巴"
+
+msgid "BR"
+msgstr "巴西"
+
+msgid "BS"
+msgstr "巴哈马"
+
+msgid "BT"
+msgstr "不丹"
+
+msgid "BV"
+msgstr "布维岛"
+
+msgid "BW"
+msgstr "博茨瓦纳"
+
+msgid "BY"
+msgstr "白俄罗斯"
+
+msgid "BZ"
+msgstr "伯利兹"
+
+msgid "CA"
+msgstr "加拿大"
+
+msgid "CC"
+msgstr "科科斯(基林) 群岛"
+
+msgid "CD"
+msgstr "刚果民主共和国"
+
+msgid "CF"
+msgstr "中非共和国"
+
+msgid "CG"
+msgstr "刚果"
+
+msgid "CH"
+msgstr "瑞士"
+
+msgid "CI"
+msgstr "科特迪瓦"
+
+msgid "CK"
+msgstr "库克群岛"
+
+msgid "CL"
+msgstr "智利"
+
+msgid "CM"
+msgstr "喀麦隆"
+
+msgid "CN"
+msgstr "中国"
+
+msgid "CO"
+msgstr "哥伦比亚"
+
+msgid "CR"
+msgstr "哥斯达黎加"
+
+msgid "CU"
+msgstr "古巴"
+
+msgid "CV"
+msgstr "佛得角"
+
+msgid "CW"
+msgstr "库拉索岛"
+
+msgid "CX"
+msgstr "圣诞岛"
+
+msgid "CY"
+msgstr "塞浦路斯"
+
+msgid "CZ"
+msgstr "捷克"
+
+msgid "DE"
+msgstr "德国"
+
+msgid "DJ"
+msgstr "吉布提"
+
+msgid "DK"
+msgstr "丹麦"
+
+msgid "DM"
+msgstr "多米尼加"
+
+msgid "DO"
+msgstr "多明尼加共和国"
+
+msgid "DZ"
+msgstr "阿尔及利亚"
+
+msgid "EC"
+msgstr "厄瓜多尔"
+
+msgid "EE"
+msgstr "爱沙尼亚"
+
+msgid "EG"
+msgstr "埃及"
+
+msgid "EH"
+msgstr "西撒哈拉"
+
+msgid "ER"
+msgstr "厄立特里亚"
+
+msgid "ES"
+msgstr "西班牙"
+
+msgid "ET"
+msgstr "埃塞俄比亚"
+
+msgid "FI"
+msgstr "芬兰"
+
+msgid "FJ"
+msgstr "斐"
+
+msgid "FK"
+msgstr "福克兰 (马尔维纳斯) 群岛"
+
+msgid "FM"
+msgstr "密克罗尼西亚联邦"
+
+msgid "FO"
+msgstr "法罗群岛"
+
+msgid "FR"
+msgstr "法国"
+
+msgid "GA"
+msgstr "加蓬"
+
+msgid "GB"
+msgstr "英国"
+
+msgid "GD"
+msgstr "格林纳达"
+
+msgid "GE"
+msgstr "格鲁吉亚"
+
+msgid "GF"
+msgstr "法属圭亚那"
+
+msgid "GG"
+msgstr "根西岛"
+
+msgid "GH"
+msgstr "加纳"
+
+msgid "GI"
+msgstr "直布罗陀"
+
+msgid "GL"
+msgstr "格陵兰"
+
+msgid "GM"
+msgstr "冈比亚"
+
+msgid "GN"
+msgstr "几内亚"
+
+msgid "GP"
+msgstr "瓜德罗普岛"
+
+msgid "GQ"
+msgstr "赤道几内亚"
+
+msgid "GR"
+msgstr "希腊"
+
+msgid "GS"
+msgstr "南乔治亚岛和南桑威奇群岛"
+
+msgid "GT"
+msgstr "危地马拉"
+
+msgid "GU"
+msgstr "关岛"
+
+msgid "GW"
+msgstr "几内亚比绍"
+
+msgid "GY"
+msgstr "圭亚那"
+
+msgid "HK"
+msgstr "香港"
+
+msgid "HM"
+msgstr "赫德岛和麦克唐纳群岛"
+
+msgid "HN"
+msgstr "洪都拉斯"
+
+msgid "HR"
+msgstr "克罗地亚"
+
+msgid "HT"
+msgstr "海地"
+
+msgid "HU"
+msgstr "匈牙利"
+
+msgid "ID"
+msgstr "印尼"
+
+msgid "IE"
+msgstr "爱尔兰"
+
+msgid "IL"
+msgstr "以色列"
+
+msgid "IM"
+msgstr "马恩岛"
+
+msgid "IN"
+msgstr "印度"
+
+msgid "IO"
+msgstr "英属印度洋领地"
+
+msgid "IQ"
+msgstr "伊拉克"
+
+msgid "IR"
+msgstr "伊朗"
+
+msgid "IS"
+msgstr "冰岛"
+
+msgid "IT"
+msgstr "意大利"
+
+msgid "JE"
+msgstr "泽西"
+
+msgid "JM"
+msgstr "牙买加"
+
+msgid "JO"
+msgstr "约旦"
+
+msgid "JP"
+msgstr "日本"
+
+msgid "KE"
+msgstr "肯尼亚"
+
+msgid "KG"
+msgstr "吉尔吉斯斯坦"
+
+msgid "KH"
+msgstr "柬埔寨"
+
+msgid "KI"
+msgstr "基里巴斯"
+
+msgid "KM"
+msgstr "科摩罗"
+
+msgid "KN"
+msgstr "圣基茨和尼维斯"
+
+msgid "KP"
+msgstr "韩国民主人民共和国"
+
+msgid "KR"
+msgstr "韩国"
+
+msgid "KW"
+msgstr "科威特"
+
+msgid "KY"
+msgstr "开曼群岛"
+
+msgid "KZ"
+msgstr "哈萨克斯坦"
+
+msgid "LA"
+msgstr "老挝"
+
+msgid "LB"
+msgstr "黎巴嫩"
+
+msgid "LC"
+msgstr "圣卢西亚"
+
+msgid "LI"
+msgstr "列支敦士登"
+
+msgid "LK"
+msgstr "斯里兰卡"
+
+msgid "LR"
+msgstr "利比里亚"
+
+msgid "LS"
+msgstr "莱索托"
+
+msgid "LT"
+msgstr "立陶宛"
+
+msgid "LU"
+msgstr "卢森堡"
+
+msgid "LV"
+msgstr "拉脱维亚"
+
+msgid "LY"
+msgstr "利比亚"
+
+msgid "MA"
+msgstr "摩洛哥"
+
+msgid "MC"
+msgstr "摩纳哥"
+
+msgid "MD"
+msgstr "摩尔达维亚"
+
+msgid "ME"
+msgstr "黑山"
+
+msgid "MF"
+msgstr "圣马丁(法国部分)"
+
+msgid "MG"
+msgstr "马达加斯加"
+
+msgid "MH"
+msgstr "马绍尔群岛"
+
+msgid "MK"
+msgstr "马其顿"
+
+msgid "ML"
+msgstr "马里"
+
+msgid "MM"
+msgstr "缅甸"
+
+msgid "MN"
+msgstr "蒙古"
+
+msgid "MO"
+msgstr "澳门"
+
+msgid "MP"
+msgstr "北马里亚纳群岛"
+
+msgid "MQ"
+msgstr "马提尼克"
+
+msgid "MR"
+msgstr "毛里塔尼亚"
+
+msgid "MS"
+msgstr "蒙特塞拉特"
+
+msgid "MT"
+msgstr "马耳他"
+
+msgid "MU"
+msgstr "毛里求斯"
+
+msgid "MV"
+msgstr "马尔代夫"
+
+msgid "MW"
+msgstr "马拉维"
+
+msgid "MX"
+msgstr "墨西哥"
+
+msgid "MY"
+msgstr "马来西亚"
+
+msgid "MZ"
+msgstr "莫桑比克"
+
+msgid "NA"
+msgstr "纳米比亚"
+
+msgid "NC"
+msgstr "新喀里多尼亚"
+
+msgid "NE"
+msgstr "尼日尔"
+
+msgid "NF"
+msgstr "诺福克岛"
+
+msgid "NG"
+msgstr "尼日利亚"
+
+msgid "NI"
+msgstr "尼加拉瓜"
+
+msgid "NL"
+msgstr "荷兰"
+
+msgid "NO"
+msgstr "挪威"
+
+msgid "NP"
+msgstr "尼泊尔"
+
+msgid "NR"
+msgstr "瑙鲁"
+
+msgid "NU"
+msgstr "纽埃"
+
+msgid "NZ"
+msgstr "新西兰"
+
+msgid "OM"
+msgstr "阿曼"
+
+msgid "PA"
+msgstr "巴拿马"
+
+msgid "PE"
+msgstr "秘鲁"
+
+msgid "PF"
+msgstr "法属波利尼西亚"
+
+msgid "PG"
+msgstr "巴布亚新几内亚"
+
+msgid "PH"
+msgstr "菲律宾"
+
+msgid "PK"
+msgstr "巴基斯坦"
+
+msgid "PL"
+msgstr "波兰"
+
+msgid "PM"
+msgstr "圣皮埃尔和密克隆"
+
+msgid "PN"
+msgstr "皮特凯恩"
+
+msgid "PR"
+msgstr "波多黎各"
+
+msgid "PS"
+msgstr "巴勒斯坦"
+
+msgid "PT"
+msgstr "葡萄牙"
+
+msgid "PW"
+msgstr "帕劳"
+
+msgid "PY"
+msgstr "巴拉圭"
+
+msgid "QA"
+msgstr "卡塔尔"
+
+msgid "RE"
+msgstr "留尼旺"
+
+msgid "RO"
+msgstr "罗马尼亚"
+
+msgid "RS"
+msgstr "塞尔维亚"
+
+msgid "RU"
+msgstr "俄国"
+
+msgid "RW"
+msgstr "卢旺达"
+
+msgid "SA"
+msgstr "沙特阿拉伯"
+
+msgid "SB"
+msgstr "所罗门群岛"
+
+msgid "SC"
+msgstr "塞舌尔"
+
+msgid "SD"
+msgstr "苏丹"
+
+msgid "SE"
+msgstr "瑞典"
+
+msgid "SG"
+msgstr "新加坡"
+
+msgid "SH"
+msgstr "圣赫勒拿、阿森松与特里斯坦达库尼亚"
+
+msgid "SI"
+msgstr "斯洛文尼亚"
+
+msgid "SJ"
+msgstr "斯瓦尔巴群岛和扬马延岛"
+
+msgid "SK"
+msgstr "斯洛伐克"
+
+msgid "SL"
+msgstr "塞拉利昂"
+
+msgid "SM"
+msgstr "圣马力诺"
+
+msgid "SN"
+msgstr "塞内加尔"
+
+msgid "SO"
+msgstr "索马里"
+
+msgid "SR"
+msgstr "苏里南"
+
+msgid "SS"
+msgstr "南苏丹"
+
+msgid "ST"
+msgstr "圣多美和普林西比"
+
+msgid "SV"
+msgstr "萨尔瓦多"
+
+msgid "SX"
+msgstr "圣马丁岛（荷兰部分）"
+
+msgid "SY"
+msgstr "叙利亚"
+
+msgid "SZ"
+msgstr "斯威士兰"
+
+msgid "TC"
+msgstr "特克斯和凯科斯群岛"
+
+msgid "TD"
+msgstr "乍得"
+
+msgid "TF"
+msgstr "法属南部领土"
+
+msgid "TG"
+msgstr "多哥"
+
+msgid "TH"
+msgstr "泰国"
+
+msgid "TJ"
+msgstr "塔吉克斯坦"
+
+msgid "TK"
+msgstr "托克劳"
+
+msgid "TL"
+msgstr "东帝汶"
+
+msgid "TM"
+msgstr "土库曼斯坦"
+
+msgid "TN"
+msgstr "突尼斯"
+
+msgid "TO"
+msgstr "汤加"
+
+msgid "TR"
+msgstr "土耳其"
+
+msgid "TT"
+msgstr "特里尼达和多巴哥"
+
+msgid "TV"
+msgstr "图瓦卢"
+
+msgid "TW"
+msgstr "台湾"
+
+msgid "TZ"
+msgstr "坦桑尼亚"
+
+msgid "UA"
+msgstr "乌克兰"
+
+msgid "UG"
+msgstr "乌干达"
+
+msgid "UM"
+msgstr "美国本土外小岛屿"
+
+msgid "US"
+msgstr "美国"
+
+msgid "UY"
+msgstr "乌拉圭"
+
+msgid "UZ"
+msgstr "乌兹别克斯坦"
+
+msgid "VA"
+msgstr "梵蒂冈 (城国)"
+
+msgid "VC"
+msgstr "圣文森特和格林纳丁斯"
+
+msgid "VE"
+msgstr "委内瑞拉"
+
+msgid "VG"
+msgstr "英属维尔京群岛"
+
+msgid "VI"
+msgstr "美属维尔京群岛"
+
+msgid "VN"
+msgstr "越南"
+
+msgid "VU"
+msgstr "瓦努阿图"
+
+msgid "WF"
+msgstr "瓦利斯和富图纳群岛"
+
+msgid "WS"
+msgstr "萨摩亚"
+
+msgid "YE"
+msgstr "也门"
+
+msgid "YT"
+msgstr "马约特岛"
+
+msgid "ZA"
+msgstr "南非"
+
+msgid "ZM"
+msgstr "赞比亚"
+
+msgid "ZW"
+msgstr "津巴布韦"
