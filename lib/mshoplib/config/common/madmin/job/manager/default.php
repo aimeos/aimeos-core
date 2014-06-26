@@ -29,8 +29,12 @@ return array(
 		LIMIT :size OFFSET :start
 	',
 	'count' => '
-		SELECT COUNT( majob."id" ) AS "count"
-		FROM "madmin_job" AS majob
-		WHERE :cond
+		SELECT COUNT(*) AS "count"
+		FROM(
+			SELECT DISTINCT majob."id"
+			FROM "madmin_job" AS majob
+			WHERE :cond
+			LIMIT 10000 OFFSET 0
+		) AS list
 	',
 );
