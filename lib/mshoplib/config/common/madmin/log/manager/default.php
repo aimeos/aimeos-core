@@ -29,8 +29,12 @@ return array(
 		LIMIT :size OFFSET :start
 	',
 	'count' => '
-		SELECT COUNT( malog."id" ) AS "count"
-		FROM "madmin_log" AS malog
-		WHERE :cond
+		SELECT COUNT(*) AS "count"
+		FROM(
+			SELECT DISTINCT malog."id"
+			FROM "madmin_log" AS malog
+			WHERE :cond
+			LIMIT 10000 OFFSET 0
+		) AS list
 	',
 );
