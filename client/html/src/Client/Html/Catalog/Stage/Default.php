@@ -94,7 +94,7 @@ class Client_Html_Catalog_Stage_Default
 		$cache = $context->getCache();
 		$view = $this->getView();
 
-		$html = '';
+		$html = null;
 		$key = 'catalog:' . $this->_getParamHash( array( 'f' ), $uid ) . ':stage-body';
 
 		if( ( $html = $cache->get( $key ) ) === null )
@@ -179,7 +179,7 @@ class Client_Html_Catalog_Stage_Default
 		$cache = $context->getCache();
 		$view = $this->getView();
 
-		$html = '';
+		$html = null;
 		$key = 'catalog:' . $this->_getParamHash( array( 'f' ), $uid ) . ':stage-header';
 
 		if( ( $html = $cache->get( $key ) ) === null )

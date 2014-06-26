@@ -138,7 +138,7 @@ class Client_Html_Catalog_Detail_Default
 		$cache = $context->getCache();
 		$view = $this->getView();
 
-		$html = '';
+		$html = null;
 		$key = 'catalog:' . $this->_getParamHash( array( 'd' ), $uid ) . ':detail-body';
 
 		if( ( $html = $cache->get( $key ) ) === null )
@@ -222,7 +222,7 @@ class Client_Html_Catalog_Detail_Default
 		$cache = $context->getCache();
 		$view = $this->getView();
 
-		$html = '';
+		$html = null;
 		$key = 'catalog:' . $this->_getParamHash( array( 'd' ), $uid ) . ':detail-header';
 
 		if( ( $html = $cache->get( $key ) ) === null )

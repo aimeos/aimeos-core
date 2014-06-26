@@ -107,7 +107,7 @@ class Client_Html_Catalog_Filter_Default
 		$cache = $context->getCache();
 		$view = $this->getView();
 
-		$html = '';
+		$html = null;
 		$key = 'catalog:' . $this->_getParamHash( array( 'f' ), $uid ) . ':filter-body';
 
 		if( ( $html = $cache->get( $key ) ) === null )
@@ -191,7 +191,7 @@ class Client_Html_Catalog_Filter_Default
 		$cache = $context->getCache();
 		$view = $this->getView();
 
-		$html = '';
+		$html = null;
 		$key = 'catalog:' . $this->_getParamHash( array( 'f' ), $uid ) . ':filter-header';
 
 		if( ( $html = $cache->get( $key ) ) === null )
