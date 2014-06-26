@@ -52,21 +52,23 @@ class Client_Html_Common_Summary_Coupon_Default
 	 */
 	private $_subPartPath = 'client/html/common/summary/coupon/default/subparts';
 	private $_subPartNames = array();
-	private $_cache;
 
 
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->couponBody = $html;
 
@@ -100,15 +102,18 @@ class Client_Html_Common_Summary_Coupon_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->couponHeader = $html;
 

@@ -17,7 +17,15 @@
 abstract class Client_Html_Abstract
 	implements Client_Html_Common_Client_Factory_Interface
 {
+	/**
+	 * @deprecated Not used as caching is done internally
+	 * @todo 2015.03 Remove constants
+	 */
 	const CACHE_BODY = 1;
+	/**
+	 * @deprecated Not used as caching is done internally
+	 * @todo 2015.03 Remove constants
+	 */
 	const CACHE_HEADER = 2;
 
 	private $_tags;
@@ -252,7 +260,7 @@ abstract class Client_Html_Abstract
 	 */
 	protected function _getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '' )
 	{
-		$idx = implode( '', $prefixes ) . '/' . $key;
+		$idx = implode( $prefixes ) . '/' . $key;
 
 		if( !isset( $this->_hashes[$idx] ) )
 		{
@@ -261,6 +269,10 @@ abstract class Client_Html_Abstract
 
 			foreach( $params as $name => $value )
 			{
+				if( is_array( $value ) ) {
+					$value = implode( $value );
+				}
+
 				if( $value !== '' ) {
 					$key .= $name . $value;
 				}
