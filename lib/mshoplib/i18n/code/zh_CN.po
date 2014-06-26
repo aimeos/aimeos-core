@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# shihua16165 <shihua16165@163.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2014-06-22 08:12+0000\n"
+"Last-Translator: shihua16165 <shihua16165@163.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/arcavias-core/language/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "无帐单地址"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "无送货地址"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "插件错误。账单地址有误"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "插件错误。送货地址有误"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "支付服务不可用"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "送货服务不可用"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "服务选项不可用"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "送货选项不可用"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "对不起，部分产品不存在了。请从购物车中删除，继续"
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "对不起，部分产品被禁用。请从购物车中删除，继续"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "对不起，部分产品暂时无法选择。请从购物车中删除，继续"
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "部分产品价格自动被更新"
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "对不起，部分产品暂时缺货。请从购物车中删除，继续"

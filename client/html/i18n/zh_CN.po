@@ -1,0 +1,960 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# shihua16165 <shihua16165@163.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-15 13:34+0200\n"
+"PO-Revision-Date: 2014-06-22 11:17+0000\n"
+"Last-Translator: shihua16165 <shihua16165@163.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/arcavias-core/language/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: layouts/common/summary/detail-body-default.html:253
+#: layouts/basket/mini/main-body-default.html:29
+#, php-format
+msgid "%1$d article"
+msgid_plural "%1$d articles"
+msgstr[0] "%1$d 产品"
+
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. language (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
+#. (%17$s)
+#: layouts/common/summary/address-body-default.html:38
+#: layouts/common/summary/address-body-default.html:92
+#: layouts/email/common/text-summary-address-body-default.html:28
+#: layouts/email/common/text-summary-address-body-default.html:76
+#: layouts/checkout/standard/address-delivery-body-default.html:65
+#: layouts/checkout/standard/address-billing-body-default.html:61
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s %3$s %4$s %5$s\n"
+"%6$s %7$s\n"
+"%8$s\n"
+"%9$s %10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+"%14$s\n"
+"%15$s\n"
+"%16$s\n"
+"%17$s\n"
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
+
+#. / Price format with price value (%1$s) and currency (%2$s)
+#: layouts/catalog/list/promo-body-default.html:17
+#: layouts/catalog/list/items-body-default.html:16
+#: layouts/catalog/detail/suggest-body-default.html:18
+#: layouts/catalog/detail/seen-body-default.html:16
+#: layouts/common/summary/detail-body-default.html:68
+#: layouts/basket/mini/main-body-default.html:23
+#: layouts/email/common/text-summary-detail-body-default.html:55
+#: layouts/checkout/standard/payment-body-default.html:38
+#: layouts/checkout/standard/delivery-body-default.html:38
+#: src/MW/View/Helper/Price/Default.php:78
+#, php-format
+msgid "%1$s %2$s"
+msgstr "%1$s %2$s"
+
+#. / Rebate format with rebate value (%1$s) and currency (%2$s)
+#: src/MW/View/Helper/Price/Default.php:82
+#, php-format
+msgid "%1$s %2$s off"
+msgstr ""
+
+#. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
+#. value (%2$s) and currency (%3$s)
+#: layouts/catalog/detail/basket-attribute-body-default.html:32
+#, php-format
+msgid "%1$s ( %4$s%2$s%3$s )"
+msgstr ""
+
+#: layouts/account/history/list-body-default.html:82
+#: layouts/account/history/list-body-default.html:97
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s 在 %2$s"
+
+#. / Percent format with value (%1$s) and % sign
+#: layouts/catalog/list/promo-body-default.html:19
+#: layouts/catalog/list/items-body-default.html:18
+#: layouts/catalog/detail/suggest-body-default.html:20
+#: layouts/catalog/detail/seen-body-default.html:18
+#, php-format
+msgid "%1$s%%"
+msgstr "%1$s%%"
+
+#. / Service fee value (%1$s) and shipping cost value (%2$s) with currency
+#. (%3$s)
+#: layouts/checkout/standard/payment-body-default.html:52
+#: layouts/checkout/standard/delivery-body-default.html:52
+#, php-format
+msgid "%1$s%3$s + %2$s%3$s"
+msgstr "%1$s%3$s + %2$s%3$s"
+
+#: layouts/basket/standard/coupon-body-default.html:30
+msgid "+"
+msgstr ""
+
+#. / Price shipping format with shipping / payment cost value (%1$s) and
+#. currency (%2$s)
+#: src/MW/View/Helper/Price/Default.php:80
+#, php-format
+msgid "+ %1$s %2$s/item"
+msgstr ""
+
+#: layouts/email/common/text-summary-detail-body-default.html:91
+msgid "+ Payment costs"
+msgstr "+ 支付系统手续费"
+
+#: layouts/email/common/text-summary-detail-body-default.html:89
+#: layouts/email/common/text-summary-detail-body-default.html:99
+msgid "+ Shipping"
+msgstr "+ 邮费"
+
+#. / Rebate percent format with rebate percent value (%1$s)
+#: src/MW/View/Helper/Price/Default.php:84
+#, php-format
+msgid "-%1$s%%"
+msgstr ""
+
+#: layouts/catalog/detail/basket-body-default.html:32
+msgid "Add to basket"
+msgstr "加入购物车"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:135
+#: layouts/checkout/standard/address-billing-body-default.html:131
+msgid "Additional"
+msgstr "附加"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:139
+#: layouts/checkout/standard/address-billing-body-default.html:135
+msgid "Additional 2"
+msgstr "附加 2"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:336
+#, php-format
+msgid "Address with ID \"%1$s\" not found"
+msgstr "未找到 ID \"%1$s\" 地址"
+
+#: layouts/common/summary/address-body-default.html:19
+msgid "Addresses"
+msgstr "地址"
+
+#: layouts/email/common/html-legal-body-default.html:12
+#: layouts/email/common/text-legal-body-default.html:10
+msgid ""
+"All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
+"\n"
+"This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
+msgstr "所有交付运受限于我们的条款和条件，这是在我们的网站，哪些是你接受当您订货。\n \n此电子邮件包含机密信息，是专为使用寻址的人。如果你不是人没那么请回复此邮件并删除电子邮件和附件之后。"
+
+#: layouts/catalog/detail/basic-body-default.html:16
+msgid "Article no.:"
+msgstr "产品号："
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:319
+#, php-format
+msgid "At least one billing address part is missing"
+msgstr "账单地址有误"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:316
+#, php-format
+msgid "At least one delivery address part is missing"
+msgstr "送货地址有误"
+
+#: layouts/basket/standard/body-default.html:41
+#: layouts/checkout/standard/address-body-default.html:17
+#: layouts/checkout/standard/payment-body-default.html:92
+#: layouts/checkout/standard/summary-body-default.html:18
+#: layouts/checkout/standard/delivery-body-default.html:92
+msgid "Back"
+msgstr "返回"
+
+#: layouts/basket/standard/body-default.html:36
+#: layouts/basket/mini/body-default.html:90
+#: layouts/checkout/standard/body-default.html:27
+msgid "Basket"
+msgstr "购物车"
+
+#: layouts/common/summary/address-body-default.html:22
+#: layouts/email/common/text-summary-address-body-default.html:17
+#: layouts/checkout/standard/address-billing-body-default.html:47
+msgid "Billing address"
+msgstr "账单地址"
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:301
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:312
+#, php-format
+msgid "Billing address part \"%1$s\" is missing"
+msgstr "账单地址 \"%1$s\" 有误"
+
+#: layouts/checkout/standard/summary-body-default.html:19
+msgid "Buy now"
+msgstr "现在购买"
+
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:236
+#, php-format
+msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
+msgstr "类型 \"%1$s\" 无法抵御 ID \"%2$s\""
+
+#: layouts/common/summary/address-body-default.html:24
+#: layouts/common/summary/address-body-default.html:78
+#: layouts/common/summary/detail-body-default.html:78
+#: layouts/common/summary/service-body-default.html:18
+#: layouts/common/summary/service-body-default.html:52
+#: layouts/common/summary/coupon-body-default.html:19
+msgid "Change"
+msgstr "改变"
+
+#: layouts/checkout/confirm/retry-body-default.html:23
+msgid "Change payment"
+msgstr "更改付款"
+
+#: layouts/catalog/detail/additional-attribute-body-default.html:15
+msgid "Characteristics"
+msgstr ""
+
+#: layouts/basket/standard/body-default.html:45
+msgid "Checkout"
+msgstr "结帐"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:147
+#: layouts/checkout/standard/address-billing-body-default.html:143
+msgid "City"
+msgstr "市"
+
+#: src/Client/Html/Common/Factory/Abstract.php:66
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr ""
+
+#: src/Client/Html/Abstract.php:150
+#: src/Client/Html/Common/Factory/Abstract.php:167
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "类型 \"%1$s\" 不实现接口\"%2$s\""
+
+#: src/Client/Html/Abstract.php:144
+#: src/Client/Html/Common/Factory/Abstract.php:161
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "类型 \"%1$s\" 无法使用"
+
+#: src/Client/Html/Common/Factory/Abstract.php:60
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr ""
+
+#: layouts/account/history/detail-body-default.html:17
+#: layouts/account/history/detail-body-default.html:21
+msgid "Close"
+msgstr "关闭"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:119
+#: layouts/checkout/standard/address-billing-body-default.html:115
+msgid "Company"
+msgstr "公司"
+
+#: layouts/checkout/confirm/body-default.html:19
+msgid "Confirmation"
+msgstr "确认"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:155
+#: layouts/checkout/standard/address-billing-body-default.html:151
+msgid "Country"
+msgstr "国家地区"
+
+#: layouts/basket/standard/coupon-body-default.html:24
+msgid "Coupon codes"
+msgstr ""
+
+#: layouts/common/summary/coupon-body-default.html:21
+#: layouts/email/common/text-summary-coupon-body-default.html:11
+msgid "Coupons"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:338
+#, php-format
+msgid "Customer with ID \"%1$s\" not found"
+msgstr "客户 ID \"%1$s\" 未找到"
+
+#. / Payment e-mail form of address with salutation (%1$s), first name (%2$s)
+#. and last name (%3$s)
+#: layouts/email/common/html-salutation-body-default.html:19
+#: layouts/email/common/text-salutation-body-default.html:17
+#, php-format
+msgid "Dear %1$s %2$s %3$s"
+msgstr "尊敬的 %1$s %2$s %3$s"
+
+#: layouts/email/common/html-salutation-body-default.html:30
+#: layouts/email/common/text-salutation-body-default.html:28
+msgid "Dear Sir or Madam"
+msgstr "尊敬的先生或女士"
+
+#: layouts/account/history/list-body-default.html:110
+#: layouts/email/common/text-summary-service-body-default.html:14
+msgid "Delivery"
+msgstr "交货"
+
+#: layouts/common/summary/address-body-default.html:76
+#: layouts/email/common/text-summary-address-body-default.html:65
+#: layouts/checkout/standard/address-delivery-body-default.html:47
+msgid "Delivery address"
+msgstr "送货地址"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:298
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:309
+#, php-format
+msgid "Delivery address part \"%1$s\" is missing"
+msgstr "送货地址 \"%1$s\" 有误"
+
+#: layouts/catalog/detail/additional-text-body-default.html:18
+msgid "Description"
+msgstr "描述"
+
+#: layouts/common/summary/detail-body-default.html:80
+msgid "Details"
+msgstr "明细"
+
+#: layouts/catalog/detail/additional-download-body-default.html:19
+msgid "Downloads"
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:174
+#: layouts/checkout/standard/address-billing-body-default.html:170
+msgid "E-Mail"
+msgstr "电子邮件"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:182
+#: layouts/checkout/standard/address-billing-body-default.html:178
+msgid "Fax"
+msgstr "传真"
+
+#: layouts/checkout/standard/address-body-default.html:13
+msgid "Fields with an * are mandatory"
+msgstr "带*栏目为必填项"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:123
+#: layouts/checkout/standard/address-billing-body-default.html:119
+msgid "First name"
+msgstr "名"
+
+#: layouts/catalog/filter/search-body-default.html:89
+msgid "Go"
+msgstr "前往\n "
+
+#: layouts/checkout/standard/summary-option-terms-body-default.html:163
+#, php-format
+msgid ""
+"I accept the <a href=\"%1$s\" target=\"_blank\" title=\"terms and "
+"conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a "
+"href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy "
+"policy\">privacy policy</a>"
+msgstr "我接受 <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">条款及细则</a> and <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">隐私权政策</a>"
+
+#. / Delivery e-mail outro
+#. / Payment e-mail outro
+#: layouts/email/delivery/text-outro-body-default.html:9
+#: layouts/email/delivery/html-outro-body-default.html:11
+#: layouts/email/payment/text-outro-body-default.html:9
+#: layouts/email/payment/html-outro-body-default.html:11
+msgid "If you have any questions, please reply to this e-mail"
+msgstr "如果您有任何疑问，请回复此邮件"
+
+#. / Tax rate format with tax rate in percent (%1$s)
+#: layouts/common/summary/detail-body-default.html:234
+#: layouts/email/common/text-summary-detail-body-default.html:104
+#: src/MW/View/Helper/Price/Default.php:86
+#, php-format
+msgid "Incl. %1$s%% VAT"
+msgstr ""
+
+#: layouts/common/summary/detail-body-default.html:244
+#: layouts/email/common/text-summary-detail-body-default.html:95
+#: layouts/email/common/text-summary-detail-body-default.html:107
+msgid "Included rebates"
+msgstr "已经打完折"
+
+#: src/Client/Html/Checkout/Update/Factory.php:72
+#: src/Client/Html/Checkout/Confirm/Factory.php:72
+#: src/Client/Html/Checkout/Standard/Factory.php:72
+#: src/Client/Html/Email/Payment/Factory.php:72
+#: src/Client/Html/Email/Delivery/Factory.php:72
+#: src/Client/Html/Basket/Standard/Factory.php:72
+#: src/Client/Html/Basket/Mini/Factory.php:72
+#: src/Client/Html/Account/History/Factory.php:72
+#: src/Client/Html/Catalog/Stock/Factory.php:72
+#: src/Client/Html/Catalog/Session/Factory.php:72
+#: src/Client/Html/Catalog/Filter/Factory.php:72
+#: src/Client/Html/Catalog/Stage/Factory.php:72
+#: src/Client/Html/Catalog/Detail/Factory.php:72
+#: src/Client/Html/Catalog/List/Factory.php:72
+#: src/Client/Html/Catalog/Count/Factory.php:72
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "类名 \"%1$s\"有无效的字符"
+
+#: src/Client/Html/Abstract.php:96 src/Client/Html/Abstract.php:135
+#, php-format
+msgid "Invalid characters in client name \"%1$s\""
+msgstr "客户名 \"%1$s\"有无效的字符 "
+
+#: src/Client/Html/Common/Factory/Abstract.php:54
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Common/Factory/Abstract.php:86
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:349
+#, php-format
+msgid "Invalid process response from service provider with code \"%1$s\""
+msgstr "服务提供商反馈无效回答编码 \"%1$s\""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:166
+#: layouts/checkout/standard/address-billing-body-default.html:162
+msgid "Language"
+msgstr "语言"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:127
+#: layouts/checkout/standard/address-billing-body-default.html:123
+msgid "Last name"
+msgstr "姓名"
+
+#: layouts/catalog/session/seen-body-default.html:14
+msgid "Last seen"
+msgstr "最后出现"
+
+#: layouts/catalog/list/pagination-body-default.html:27
+msgid "Name"
+msgstr "名"
+
+#: layouts/checkout/standard/address-body-default.html:18
+#: layouts/checkout/standard/payment-body-default.html:93
+#: layouts/checkout/standard/delivery-body-default.html:93
+msgid "Next"
+msgstr "下"
+
+#: layouts/catalog/list/head-body-default.html:51
+#, php-format
+msgid ""
+"No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
+"try again with a different keyword."
+msgstr "未找到<span class=\"searchstring\">\"%1$s\"</span>产品。请换关键词再试。"
+
+#: src/Client/Html/Abstract.php:63
+#, php-format
+msgid "No view available"
+msgstr "没有可用的视图"
+
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:203
+#, php-format
+msgid "Number of coupon codes exceeds the limit"
+msgstr ""
+
+#: src/MW/View/Helper/Price/Default.php:44
+#, php-format
+msgid "Object doesn't implement \"%1$s\""
+msgstr ""
+
+#: layouts/checkout/standard/summary-option-body-default.html:12
+msgid "Options"
+msgstr "选项"
+
+#: layouts/account/history/list-body-default.html:96
+#: layouts/checkout/confirm/basic-body-default.html:16
+msgid "Order ID"
+msgstr "订单编号"
+
+#: layouts/account/history/list-body-default.html:100
+msgid "Order channel"
+msgstr "订单渠道"
+
+#: layouts/account/history/detail-body-default.html:18
+#: layouts/email/common/text-summary-detail-body-default.html:59
+#: layouts/checkout/confirm/basic-body-default.html:12
+msgid "Order details"
+msgstr "订单明细"
+
+#: layouts/account/history/list-body-default.html:88
+msgid "Order history"
+msgstr "订单记录"
+
+#: src/Client/Html/Account/History/Detail/Default.php:232
+#, php-format
+msgid "Order with ID \"%1$s\" not found"
+msgstr "订单 ID为 \"%1$s\" 未找到"
+
+#: layouts/catalog/list/pagination-body-default.html:54
+#, php-format
+msgid "Page %1$d of %2$d"
+msgstr "第%1$d 页 共 %2$d"
+
+#: layouts/account/history/list-body-default.html:105
+#: layouts/email/common/text-summary-service-body-default.html:39
+#: layouts/checkout/standard/order-payment-body-default.html:24
+msgid "Payment"
+msgstr "付款"
+
+#: layouts/common/summary/detail-body-default.html:217
+msgid "Payment costs"
+msgstr "支付费"
+
+#: layouts/checkout/confirm/basic-body-default.html:20
+msgid "Payment status"
+msgstr "支付状态"
+
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:187
+msgid "Please accept the terms and conditions"
+msgstr "请接受条款和条件"
+
+#: layouts/checkout/standard/summary-body-default.html:13
+msgid "Please check your order"
+msgstr "请检查您的订单"
+
+#: layouts/checkout/standard/delivery-body-default.html:43
+msgid "Please choose your delivery method"
+msgstr "请选择送货方式"
+
+#: layouts/checkout/standard/payment-body-default.html:43
+msgid "Please choose your payment method"
+msgstr "请选择支付方式 "
+
+#: layouts/catalog/filter/search-body-default.html:11
+msgid "Please enter at least three characters"
+msgstr ""
+
+#: layouts/catalog/detail/basket-selection-body-default.html:30
+msgid "Please select"
+msgstr "请选择"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:143
+#: layouts/checkout/standard/address-billing-body-default.html:139
+msgid "Postal code"
+msgstr "邮政编码"
+
+#: layouts/catalog/list/pagination-body-default.html:35
+#: layouts/common/summary/detail-body-default.html:88
+#: layouts/email/common/text-summary-detail-body-default.html:74
+msgid "Price"
+msgstr "价格"
+
+#: layouts/checkout/standard/order-payment-body-default.html:28
+#: layouts/checkout/standard/order-payment-body-default.html:37
+msgid "Proceed"
+msgstr "继续"
+
+#: layouts/common/summary/detail-body-default.html:87
+#: layouts/email/common/text-summary-detail-body-default.html:72
+msgid "Quantity"
+msgstr "数量"
+
+#: layouts/catalog/list/pagination-body-default.html:45
+msgid "Relevance"
+msgstr "关联"
+
+#. / Product search hint with user provided search string (%1$s)
+#: layouts/catalog/list/header-default.html:22
+#, php-format
+msgid "Result for \"%1$s\""
+msgstr "\"%1$s\"结果"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:110
+#: layouts/checkout/standard/address-billing-body-default.html:106
+msgid "Salutation"
+msgstr "称呼"
+
+#: layouts/catalog/list/head-body-default.html:48
+#, php-format
+msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d article)"
+msgid_plural ""
+"Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
+"articles)"
+msgstr[0] " <span class=\"searchstring\">\"%1$s\"</span> (%2$d articles) 搜素结果"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:158
+#: layouts/checkout/standard/address-billing-body-default.html:154
+msgid "Select country"
+msgstr "选择国家地区"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:112
+#: layouts/checkout/standard/address-billing-body-default.html:108
+msgid "Select salutation"
+msgstr "选择称呼"
+
+#: layouts/email/common/text-summary-detail-body-default.html:82
+msgid "Service fees"
+msgstr "手续费"
+
+#: layouts/common/summary/service-body-default.html:13
+msgid "Services"
+msgstr "服务"
+
+#: layouts/common/summary/detail-body-default.html:209
+msgid "Shipping"
+msgstr "送货费"
+
+#: layouts/catalog/filter/body-default.html:114
+msgid "Show"
+msgstr "显示"
+
+#: layouts/catalog/list/quote-body-default.html:19
+msgid "Show all quotes"
+msgstr "显示所有报价"
+
+#: layouts/catalog/list/pagination-body-default.html:43
+msgid "Sort by:"
+msgstr "排序方式："
+
+#: layouts/checkout/standard/address-delivery-body-default.html:151
+#: layouts/checkout/standard/address-billing-body-default.html:147
+msgid "State"
+msgstr "状态"
+
+#. / Stock string composition with warehouse name (%1$s, normally left out)
+#. and stock level string (%2$s)
+#: layouts/catalog/stock/body-default.html:45
+#, php-format
+msgid "Stock: %1$s, %2$s"
+msgstr "库存: %1$s, %2$s"
+
+#. / Stock string composition with warehouse name (%1$s, normally left out),
+#. stock level string (%2$s) and back in stock date (%3$s)
+#: layouts/catalog/stock/body-default.html:47
+#, php-format
+msgid "Stock: %1$s, %2$s, back on %3$s"
+msgstr "库存: %1$s, %2$s, 补货日期%3$s"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:131
+#: layouts/checkout/standard/address-billing-body-default.html:127
+msgid "Street"
+msgstr "街道"
+
+#: layouts/common/summary/detail-body-default.html:202
+#: layouts/email/common/text-summary-detail-body-default.html:87
+#: layouts/email/common/text-summary-detail-body-default.html:97
+msgid "Sub-total"
+msgstr "小计"
+
+#: layouts/catalog/detail/suggest-body-default.html:25
+msgid "Suggested products"
+msgstr "建议产品"
+
+#: layouts/common/summary/detail-body-default.html:89
+#: layouts/email/common/text-summary-detail-body-default.html:76
+msgid "Sum"
+msgstr "合计"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:178
+#: layouts/checkout/standard/address-billing-body-default.html:174
+msgid "Telephone"
+msgstr "电话"
+
+#: src/Client/Html/Abstract.php:236
+#, php-format
+msgid "Template \"%1$s\" not available"
+msgstr "模板 \"%1$s\" 不可用"
+
+#: layouts/checkout/standard/summary-option-terms-body-default.html:159
+msgid "Terms and conditions"
+msgstr "条款和条件"
+
+#. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
+#. status (%3%s)
+#: layouts/email/payment/text-intro-body-default.html:11
+#: layouts/email/payment/html-intro-body-default.html:12
+#, php-format
+msgid "Thank you for your order %1$s from %2$s."
+msgstr "谢谢您的订单 %1$s 日期 %2$s."
+
+#. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
+#. status (%3%s)
+#: layouts/email/payment/4/text-intro-body-default.html:11
+#: layouts/email/payment/4/html-intro-body-default.html:12
+#, php-format
+msgid ""
+"Thank you for your order %1$s from %2$s.\n"
+"\n"
+"The order is pending until we receive the final payment. If you've chosen to pay in advance, please transfer the money to our bank account with the order ID %1$s as reference."
+msgstr "非常感谢您的%2$s的订单%1$s。\n\n订单正在等待付款。请经通过银行汇款并且填写订单编号%1$s。"
+
+#. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
+#. status (%3%s)
+#: layouts/email/payment/6/text-intro-body-default.html:11
+#: layouts/email/payment/6/html-intro-body-default.html:12
+#, php-format
+msgid ""
+"Thank you for your order %1$s from %2$s.\n"
+"\n"
+"We received the payment and will care about your order immediately."
+msgstr "非常感谢您的%2$s的订单%1$s。\n\n我收到了您的货款并且正在处理订单。"
+
+#: layouts/checkout/confirm/5/intro-body-default.html:12
+msgid ""
+"Thank you for your order and authorizing the payment.\n"
+"An e-mail with the order details will be sent to you within the next few minutes."
+msgstr ""
+
+#: layouts/checkout/confirm/6/intro-body-default.html:12
+msgid ""
+"Thank you for your order.\n"
+"We received your payment and an e-mail with the order details will be sent to you within the next few minutes."
+msgstr ""
+
+#. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
+#. delivery status (%3%s)
+#: layouts/email/delivery/text-intro-body-default.html:11
+#: layouts/email/delivery/html-intro-body-default.html:12
+#, php-format
+msgid ""
+"The delivery status of your order %1$s from %2$s has been changed to "
+"\"%3$s\"."
+msgstr ""
+
+#: layouts/checkout/confirm/1/intro-body-default.html:12
+msgid ""
+"The order was canceled.\n"
+"Do you wish to retry your order?"
+msgstr ""
+
+#. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
+#. delivery status (%3%s)
+#: layouts/email/delivery/6/text-intro-body-default.html:11
+#: layouts/email/delivery/6/html-intro-body-default.html:12
+#, php-format
+msgid "The parcel for your order %1$s from %2$s could not be delivered."
+msgstr "%2$s的订单%1$s包裹无法送到"
+
+#: layouts/checkout/confirm/4/intro-body-default.html:12
+msgid ""
+"The payment confirmation for your order is still pending.\n"
+"You will get an e-mail as soon as the payment is authorized."
+msgstr ""
+
+#. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
+#. status (%3%s)
+#: layouts/email/payment/3/text-intro-body-default.html:11
+#: layouts/email/payment/3/html-intro-body-default.html:12
+#, php-format
+msgid "The payment for your order %1$s from %2$s has been refunded."
+msgstr "%2$s的订单%1$s退款已经完成。"
+
+#: layouts/catalog/list/promo-body-default.html:24
+msgid "Top seller"
+msgstr "畅销产品"
+
+#: layouts/common/summary/detail-body-default.html:225
+#: layouts/email/common/text-summary-detail-body-default.html:93
+#: layouts/email/common/text-summary-detail-body-default.html:101
+msgid "Total"
+msgstr "合计"
+
+#: layouts/common/summary/detail-body-default.html:252
+msgid "Total quantity"
+msgstr ""
+
+#: layouts/checkout/confirm/retry-body-default.html:24
+msgid "Try again"
+msgstr "再试一次"
+
+#: src/Client/Html/Common/Decorator/Abstract.php:49
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:199
+#, php-format
+msgid "Unable to save address for customer \"%1$s\": %2$s"
+msgstr "无法保存客户 \"%1$s\": %2$s地址"
+
+#: layouts/checkout/confirm/2/intro-body-default.html:12
+msgid ""
+"Unfortunately, the payment for your order was refused.\n"
+"Do you wish to retry?"
+msgstr ""
+
+#: layouts/basket/standard/body-default.html:43
+msgid "Update"
+msgstr "更新"
+
+#. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
+#. delivery status (%3%s)
+#: layouts/email/delivery/7/text-intro-body-default.html:11
+#: layouts/email/delivery/7/html-intro-body-default.html:12
+#, php-format
+msgid "We received the returned parcel for your order %1$s from %2$s."
+msgstr ""
+
+#: layouts/checkout/standard/address-delivery-body-default.html:186
+#: layouts/checkout/standard/address-billing-body-default.html:182
+msgid "Web site"
+msgstr "网址"
+
+#: layouts/common/summary/detail-body-default.html:155
+#: layouts/basket/standard/coupon-body-default.html:39
+msgid "X"
+msgstr "X"
+
+#: layouts/account/history/list-body-default.html:81
+#: layouts/catalog/stock/body-default.html:48
+#: layouts/email/delivery/7/text-intro-body-default.html:15
+#: layouts/email/delivery/7/html-intro-body-default.html:16
+#: layouts/email/delivery/6/text-intro-body-default.html:15
+#: layouts/email/delivery/6/html-intro-body-default.html:16
+#: layouts/email/delivery/3/text-intro-body-default.html:15
+#: layouts/email/delivery/3/html-intro-body-default.html:16
+#: layouts/email/delivery/text-intro-body-default.html:15
+#: layouts/email/delivery/html-intro-body-default.html:16
+#: layouts/email/payment/4/text-intro-body-default.html:17
+#: layouts/email/payment/4/html-intro-body-default.html:18
+#: layouts/email/payment/6/text-intro-body-default.html:17
+#: layouts/email/payment/6/html-intro-body-default.html:18
+#: layouts/email/payment/3/text-intro-body-default.html:15
+#: layouts/email/payment/3/html-intro-body-default.html:16
+#: layouts/email/payment/text-intro-body-default.html:15
+#: layouts/email/payment/html-intro-body-default.html:16
+msgid "Y-m-d"
+msgstr "年-月-日"
+
+#: layouts/catalog/stage/breadcrumb-body-default.html:19
+msgid "You are here:"
+msgstr "您现在的位置："
+
+#: layouts/checkout/standard/order-payment-body-default.html:25
+msgid "You will now be forwarded to the next step"
+msgstr "正在转到下一步"
+
+#. / E-mail HTML title
+#: layouts/email/common/html-body-default.html:12
+msgid "Your order"
+msgstr "您的订单"
+
+#. / Delivery e-mail subject with order ID
+#. / Payment e-mail subject with order ID
+#: layouts/email/delivery/header-default.html:9
+#: layouts/email/payment/header-default.html:9
+#, php-format
+msgid "Your order %1$s"
+msgstr "您的订单 %1$s"
+
+#. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
+#. delivery status (%3%s)
+#: layouts/email/delivery/3/text-intro-body-default.html:11
+#: layouts/email/delivery/3/html-intro-body-default.html:12
+#, php-format
+msgid "Your order %1$s from %2$s has been dispatched."
+msgstr ""
+
+#: layouts/checkout/standard/address-body-default.html:12
+#: src/Client/Html/Checkout/Standard/Address/Default.php:12
+msgid "address"
+msgstr "地址"
+
+#: layouts/common/summary/service-body-default.html:16
+#: layouts/checkout/standard/delivery-body-default.html:42
+#: src/Client/Html/Checkout/Standard/Delivery/Default.php:12
+msgid "delivery"
+msgstr "交货"
+
+#. / Price quantity format with quantity (%1$s)
+#: src/MW/View/Helper/Price/Default.php:76
+#, php-format
+msgid "from %1$s"
+msgstr ""
+
+#: layouts/common/summary/address-body-default.html:127
+#: layouts/email/common/text-summary-address-body-default.html:111
+#: layouts/checkout/standard/address-delivery-body-default.html:51
+msgid "like billing address"
+msgstr "跟账单地址一样"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:106
+#: layouts/checkout/standard/address-billing-body-default.html:102
+msgid "new address"
+msgstr "新地址"
+
+#: layouts/checkout/standard/order-body-default.html:12
+#: src/Client/Html/Checkout/Standard/Order/Default.php:12
+msgid "order"
+msgstr "订单"
+
+#: layouts/common/summary/service-body-default.html:50
+#: layouts/checkout/standard/payment-body-default.html:42
+#: src/Client/Html/Checkout/Standard/Payment/Default.php:12
+msgid "payment"
+msgstr "付款"
+
+#. / code for "product is in stock"
+#: layouts/catalog/stock/body-default.html:56
+msgid "stock-high"
+msgstr ""
+
+#. / code for "only a few products are available"
+#: layouts/catalog/stock/body-default.html:54
+msgid "stock-low"
+msgstr ""
+
+#. / code for "product is out ot stock"
+#: layouts/catalog/stock/body-default.html:52
+msgid "stock-out"
+msgstr ""
+
+#. / code for "product is available (without stock limit)"
+#: layouts/catalog/stock/body-default.html:58
+msgid "stock-unlimited"
+msgstr "库存无限"
+
+#: layouts/checkout/standard/summary-body-default.html:12
+#: src/Client/Html/Checkout/Standard/Summary/Default.php:12
+msgid "summary"
+msgstr "总结"
+
+#: layouts/catalog/list/pagination-body-default.html:25
+msgid "▲ Name"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:33
+msgid "▲ Price"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:55
+msgid "▶"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:56
+msgid "▶▶"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:23
+msgid "▼ Name"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:31
+msgid "▼ Price"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:53
+msgid "◀"
+msgstr ""
+
+#: layouts/catalog/list/pagination-body-default.html:52
+msgid "◀◀"
+msgstr ""

@@ -6,14 +6,14 @@
 # Translators:
 # Translators:
 # Translators:
-# doleiynyk <doleiynyk@metaways.de>, 2013
+# Dimitri <doleiynyk@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2013-11-01 12:55+0000\n"
-"Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
+"Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

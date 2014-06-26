@@ -3,8 +3,8 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# dhoffmann <d.hoffmann@metaways.de>, 2013
-# dhoffmann <d.hoffmann@metaways.de>, 2013
+# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
+# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky <n.sendetzky@metaways.de>, 2013-2014
 # nsendetzky <n.sendetzky@metaways.de>, 2013
 msgid ""

@@ -6,8 +6,8 @@
 # Translators:
 # Translators:
 # Translators:
-# dhoffmann <d.hoffmann@metaways.de>, 2013
-# dhoffmann <d.hoffmann@metaways.de>, 2013
+# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
+# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
