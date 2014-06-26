@@ -56,8 +56,13 @@ class Client_Html_Catalog_Detail_Suggest_DefaultTest extends MW_Unittest_Testcas
 		$view = $this->_object->getView();
 		$view->detailProductItem = $this->_getProductItem();
 
-		$output = $this->_object->getHeader();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getHeader( 1, $tags, $expire );
+
 		$this->assertEquals( '', $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 13, count( $tags ) );
 	}
 
 
@@ -66,10 +71,14 @@ class Client_Html_Catalog_Detail_Suggest_DefaultTest extends MW_Unittest_Testcas
 		$view = $this->_object->getView();
 		$view->detailProductItem = $this->_getProductItem();
 
-		$output = $this->_object->getBody();
-		$this->assertRegExp( '/.*Cappuccino.*/', $output );
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '<section class="catalog-detail-suggest">', $output );
+		$this->assertRegExp( '/.*Cappuccino.*/', $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 13, count( $tags ) );
 	}
 
 

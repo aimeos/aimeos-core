@@ -97,129 +97,159 @@ class Client_Html_Catalog_List_Default
 	 */
 	private $_subPartNames = array( 'head', 'promo', 'pagination', 'items', 'pagination' );
 
+	private $_tags = array();
+	private $_expire;
 	private $_cache;
 
 
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		try
-		{
-			$view = $this->_setViewParams( $this->getView() );
+		$context = $this->_getContext();
+		$cache = $context->getCache();
+		$view = $this->getView();
 
-			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getBody();
+		$html = null;
+		$key = 'catalog:' . $this->_getParamHash( array( 'f', 'l' ), $uid ) . ':list-body';
+
+		if( ( $html = $cache->get( $key ) ) === null )
+		{
+			try
+			{
+				$view = $this->_setViewParams( $view, $tags, $expire );
+
+				$html = '';
+				foreach( $this->_getSubClients() as $subclient ) {
+					$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
+				}
+				$view->listBody = $html;
 			}
-			$view->listBody = $html;
-		}
-		catch( Client_Html_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
-		}
-		catch( Controller_Frontend_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
-		}
-		catch( MShop_Exception $e )
-		{
-			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
-		}
-		catch( Exception $e )
-		{
-			$context = $this->_getContext();
-			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			catch( Client_Html_Exception $e )
+			{
+				$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+				$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
+			}
+			catch( Controller_Frontend_Exception $e )
+			{
+				$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+				$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
+			}
+			catch( MShop_Exception $e )
+			{
+				$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+				$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
+			}
+			catch( Exception $e )
+			{
+				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$view = $this->getView();
-			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
-			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
+				$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+				$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
+			}
+
+			/** client/html/catalog/list/default/template-body
+			 * Relative path to the HTML body template of the catalog list client.
+			 *
+			 * The template file contains the HTML code and processing instructions
+			 * to generate the result shown in the body of the frontend. The
+			 * configuration string is the path to the template file relative
+			 * to the layouts directory (usually in client/html/layouts).
+			 *
+			 * You can overwrite the template file configuration in extensions and
+			 * provide alternative templates. These alternative templates should be
+			 * named like the default one but with the string "default" replaced by
+			 * an unique name. You may use the name of your project for this. If
+			 * you've implemented an alternative client class as well, "default"
+			 * should be replaced by the name of the new class.
+			 *
+			 * @param string Relative path to the template creating code for the HTML page body
+			 * @since 2014.03
+			 * @category Developer
+			 * @see client/html/catalog/list/default/template-header
+			 */
+			$tplconf = 'client/html/catalog/list/default/template-body';
+			$default = 'catalog/list/body-default.html';
+
+			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+
+			$cache->set( $key, $html, array_unique( $tags ), $expire );
 		}
 
-		/** client/html/catalog/list/default/template-body
-		 * Relative path to the HTML body template of the catalog list client.
-		 *
-		 * The template file contains the HTML code and processing instructions
-		 * to generate the result shown in the body of the frontend. The
-		 * configuration string is the path to the template file relative
-		 * to the layouts directory (usually in client/html/layouts).
-		 *
-		 * You can overwrite the template file configuration in extensions and
-		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
-		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
-		 * should be replaced by the name of the new class.
-		 *
-		 * @param string Relative path to the template creating code for the HTML page body
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/catalog/list/default/template-header
-		 */
-		$tplconf = 'client/html/catalog/list/default/template-body';
-		$default = 'catalog/list/body-default.html';
-
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $html;
 	}
 
 
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		try
-		{
-			$view = $this->_setViewParams( $this->getView() );
+		$context = $this->_getContext();
+		$cache = $context->getCache();
+		$view = $this->getView();
 
-			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader();
+		$html = null;
+		$key = 'catalog:' . $this->_getParamHash( array( 'f', 'l' ), $uid ) . ':list-header';
+
+		if( ( $html = $cache->get( $key ) ) === null )
+		{
+			try
+			{
+				$view = $this->_setViewParams( $view, $tags, $expire );
+
+				$html = '';
+				foreach( $this->_getSubClients() as $subclient ) {
+					$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
+				}
+				$view->listHeader = $html;
+
+				/** client/html/catalog/list/default/template-header
+				 * Relative path to the HTML header template of the catalog list client.
+				 *
+				 * The template file contains the HTML code and processing instructions
+				 * to generate the HTML code that is inserted into the HTML page header
+				 * of the rendered page in the frontend. The configuration string is the
+				 * path to the template file relative to the layouts directory (usually
+				 * in client/html/layouts).
+				 *
+				 * You can overwrite the template file configuration in extensions and
+				 * provide alternative templates. These alternative templates should be
+				 * named like the default one but with the string "default" replaced by
+				 * an unique name. You may use the name of your project for this. If
+				 * you've implemented an alternative client class as well, "default"
+				 * should be replaced by the name of the new class.
+				 *
+				 * @param string Relative path to the template creating code for the HTML page head
+				 * @since 2014.03
+				 * @category Developer
+				 * @see client/html/catalog/list/default/template-body
+				 */
+				$tplconf = 'client/html/catalog/list/default/template-header';
+				$default = 'catalog/list/header-default.html';
+
+				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+
+				$cache->set( $key, $html, array_unique( $tags ), $expire );
 			}
-			$view->listHeader = $html;
-		}
-		catch( Exception $e )
-		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return '';
+			catch( Exception $e )
+			{
+				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			}
 		}
 
-		/** client/html/catalog/list/default/template-header
-		 * Relative path to the HTML header template of the catalog list client.
-		 *
-		 * The template file contains the HTML code and processing instructions
-		 * to generate the HTML code that is inserted into the HTML page header
-		 * of the rendered page in the frontend. The configuration string is the
-		 * path to the template file relative to the layouts directory (usually
-		 * in client/html/layouts).
-		 *
-		 * You can overwrite the template file configuration in extensions and
-		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
-		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
-		 * should be replaced by the name of the new class.
-		 *
-		 * @param string Relative path to the template creating code for the HTML page head
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/catalog/list/default/template-body
-		 */
-		$tplconf = 'client/html/catalog/list/default/template-header';
-		$default = 'catalog/list/header-default.html';
-
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $html;
 	}
 
 
@@ -243,37 +273,35 @@ class Client_Html_Catalog_List_Default
 	 */
 	public function process()
 	{
+		$context = $this->_getContext();
+		$view = $this->getView();
+
 		try
 		{
-			$params = $this->_getClientParams( $this->getView()->param() );
-			$this->_getContext()->getSession()->set( 'arcavias/catalog/list/params/last', $params );
+			$params = $this->_getClientParams( $view->param() );
+			$context->getSession()->set( 'arcavias/catalog/list/params/last', $params );
 
-			$this->_process( $this->_subPartPath, $this->_subPartNames );
+			parent::process();
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->listErrorList = $view->get( 'listErrorList', array() ) + $error;
 		}
@@ -281,12 +309,25 @@ class Client_Html_Catalog_List_Default
 
 
 	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 */
+	protected function _getSubClientNames()
+	{
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->_cache ) )
 		{
@@ -313,6 +354,10 @@ class Client_Html_Catalog_List_Default
 
 				if( ( $categoryItem = end( $listCatPath ) ) !== false ) {
 					$view->listCurrentCatItem = $categoryItem;
+				}
+
+				foreach( $view->listCatPath as $id => $item ) {
+					$this->_addMetaData( $item, 'catalog', $domains, $this->_tags, $this->_expire );
 				}
 			}
 
@@ -417,6 +462,19 @@ class Client_Html_Catalog_List_Default
 				$view->listStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
 			}
 
+
+			$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
+
+			/* If a product in a list expires, all subsequent list pages should
+			 * be removed from the cache too to get totally correct results.
+			 * This is non-trivial with performance in mind and needs to be
+			 * evaluated in the future.
+			 */
+			foreach( $products as $product ) {
+				$this->_addMetaData( $product, 'product', $domains, $this->_tags, $this->_expire );
+			}
+
+
 			$view->listParams = $this->_getClientParams( $view->param() );
 			$view->listPageCurr = $this->_getProductListPage( $view );
 			$view->listPageSize = $this->_getProductListSize( $view );
@@ -426,6 +484,9 @@ class Client_Html_Catalog_List_Default
 
 			$this->_cache = $view;
 		}
+
+		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;
 	}

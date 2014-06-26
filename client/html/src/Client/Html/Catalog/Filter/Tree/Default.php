@@ -52,24 +52,29 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 */
 	private $_subPartPath = 'client/html/catalog/filter/tree/default/subparts';
 	private $_subPartNames = array();
+	private $_tags = array();
+	private $_expire;
 	private $_cache;
 
 
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$navHelper = new MW_View_Helper_NavTree_Default( $view );
 		$view->addHelper( 'navtree', $navHelper );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->treeBody = $html;
 
@@ -103,15 +108,18 @@ class Client_Html_Catalog_Filter_Tree_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->treeHeader = $html;
 
@@ -157,25 +165,13 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 
 	/**
-	 * Tests if the output of is cachable.
+	 * Returns the list of sub-client names configured for the client.
 	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
+	 * @return array List of HTML client names
 	 */
-	public function isCachable( $what )
+	protected function _getSubClientNames()
 	{
-		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
-	}
-
-
-	/**
-	 * Processes the input, e.g. store given values.
-	 * A view must be available and this method doesn't generate any output
-	 * besides setting view variables.
-	 */
-	public function process()
-	{
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 
 
@@ -185,7 +181,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 * @param MW_View_Interface $view The view object which generates the HTML output
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->_cache ) )
 		{
@@ -212,6 +208,8 @@ class Client_Html_Catalog_Filter_Tree_Default
 			 */
 			$startid = $view->config( 'client/html/catalog/filter/tree/startid', '' );
 			$currentid = (string) $view->param( 'f-catalog-id', '' );
+
+			/** @todo Make referenced domains configurable */
 			$ref = array( 'text', 'media', 'attribute' );
 			$catItems = array();
 
@@ -314,9 +312,13 @@ class Client_Html_Catalog_Filter_Tree_Default
 			$view->treeCatalogIds = $this->_getCatalogIds( $view->treeCatalogTree, $catItems, $currentid );
 			$view->treeFilterParams = $this->_getClientParams( $view->param(), array( 'f' ) );
 
+			$this->_addMetaDataCatalog( $view->treeCatalogTree, $ref, $this->_tags, $this->_expire );
 
 			$this->_cache = $view;
 		}
+
+		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;
 	}
@@ -353,5 +355,23 @@ class Client_Html_Catalog_Filter_Tree_Default
 		}
 
 		return array();
+	}
+
+
+	/**
+	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given catalog tree.
+	 *
+	 * @param MShop_Common_Item_Interface $item Item, maybe with associated list items
+	 * @param array $domains List of domains whose items are associated via the list to the item
+	 * @param array &$tags List of tags the new tags will be added to
+	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
+	 */
+	protected function _addMetaDataCatalog( MShop_Catalog_Item_Interface $tree, $domains, array &$tags = array(), &$expire )
+	{
+		$this->_addMetaData( $tree, 'catalog', $domains, $tags, $expire );
+
+		foreach( $tree->getChildren() as $child ) {
+			$this->_addMetaDataCatalog( $child, $domains, $tags, $expire );
+		}
 	}
 }

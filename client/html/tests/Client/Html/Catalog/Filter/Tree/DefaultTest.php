@@ -53,7 +53,12 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$this->_object->getHeader();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getHeader( 1, $tags, $expire );
+
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 4, count( $tags ) );
 	}
 
 
@@ -66,11 +71,16 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getChild( 1 )->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
 
 		$this->assertContains( 'Groups', $output );
 		$this->assertContains( 'Neu', $output );
 		$this->assertContains( 'level-2', $output );
+
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 18, count( $tags ) );
 	}
 
 
@@ -88,9 +98,13 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
 
 		$this->assertContains( 'level-2', $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 36, count( $tags ) );
 	}
 
 
@@ -108,9 +122,13 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getChild( 0 )->getId() ) );
 		$view->addHelper( 'param', $helper );
 
-		$output = $this->_object->getBody();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
 
 		$this->assertNotContains( 'level-2', $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 4, count( $tags ) );
 	}
 
 

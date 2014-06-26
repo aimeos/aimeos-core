@@ -52,22 +52,26 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 */
 	private $_subPartPath = 'client/html/catalog/detail/additional/attribute/default/subparts';
 	private $_subPartNames = array();
+	private $_tags = array();
+	private $_expire;
 	private $_cache;
 
 
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
-	 * @param string|null $name Template name
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody( $name = null )
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->attributeBody = $html;
 
@@ -101,16 +105,18 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
-	 * @param string|null $name Template name
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader( $name = null )
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->attributeHeader = $html;
 
@@ -156,25 +162,13 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 
 
 	/**
-	 * Tests if the output of is cachable.
+	 * Returns the list of sub-client names configured for the client.
 	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
+	 * @return array List of HTML client names
 	 */
-	public function isCachable( $what )
+	protected function _getSubClientNames()
 	{
-		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
-	}
-
-
-	/**
-	 * Processes the input, e.g. store given values.
-	 * A view must be available and this method doesn't generate any output
-	 * besides setting view variables.
-	 */
-	public function process()
-	{
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 
 
@@ -182,25 +176,28 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
+	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$items = $attributeMap = array();
+			$context = $this->_getContext();
+			$attrIds = $attributeMap = $subAttrDeps = array();
 
 			if( isset( $view->detailProductItem ) )
 			{
-				$items = $view->detailProductItem->getRefItems( 'attribute', null, 'default' );
-				$items += $view->detailProductItem->getRefItems( 'attribute', null, 'variant' );
+				$attrIds = array_keys( $view->detailProductItem->getRefItems( 'attribute', null, 'default' ) );
+				$attrIds += array_keys( $view->detailProductItem->getRefItems( 'attribute', null, 'variant' ) );
 			}
 
 
-			// find regular attributes from Subproducts
-			$context = $this->_getContext();
+			// find regular attributes from sub-products
 			$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
+
 			$productManager = MShop_Product_Manager_Factory::createManager( $context );
-			$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
 
 			$search = $productManager->createSearch( true );
 			$expr = array(
@@ -209,10 +206,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$subproducts = $productManager->searchItems( $search, array( 'attribute' ) );
-			$subAttrIds = $subAttrDeps = array();
-
-			foreach( $subproducts as $subProdId => $subProduct )
+			foreach( $productManager->searchItems( $search, array( 'attribute' ) ) as $subProdId => $subProduct )
 			{
 				$subItems = $subProduct->getRefItems( 'attribute', null, 'default' );
 				$subItems += $subProduct->getRefItems( 'attribute', null, 'variant' );
@@ -220,29 +214,36 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 				foreach( $subItems as $attrId => $attrItem )
 				{
 					$subAttrDeps[$attrId][] = $subProdId;
-					$subAttrIds[] = $attrId;
+					$attrIds[] = $attrId;
 				}
 			}
 
+
+			$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
+
 			$search = $attrManager->createSearch( true );
 			$expr = array(
-				$search->compare( '==', 'attribute.id', $subAttrIds ),
+				$search->compare( '==', 'attribute.id', $attrIds ),
 				$search->getConditions(),
 			);
-
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$result = $attrManager->searchItems( $search, array( 'text', 'media') );
-			$items = array_merge( $items, $result );
 
-			foreach( $items as $id => $attribute ) {
-					$attributeMap[ $attribute->getType() ][$id] = $attribute;
+			/** @todo Make referenced domains configurable */
+			foreach( $attrManager->searchItems( $search, array( 'text', 'media') ) as $id => $item )
+			{
+				$this->_addMetaData( $item, 'attribute', array( 'text', 'media' ), $this->_tags, $this->_expire );
+				$attributeMap[ $item->getType() ][$id] = $item;
 			}
+
 
 			$view->attributeMap = $attributeMap;
 			$view->subAttributeDependencies = $subAttrDeps;
 
 			$this->_cache = $view;
 		}
+
+		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;
 	}

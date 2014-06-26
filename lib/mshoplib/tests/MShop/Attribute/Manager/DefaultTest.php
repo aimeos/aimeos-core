@@ -249,7 +249,7 @@ class MShop_Attribute_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'attribute.list.type.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.list.type.siteid', null );
 		$expr[] = $search->compare( '==', 'attribute.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'attribute.list.type.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'attribute.list.type.domain', 'text' );
 		$expr[] = $search->compare( '==', 'attribute.list.type.label', 'Default' );
 		$expr[] = $search->compare( '==', 'attribute.list.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'attribute.list.type.mtime', '1970-01-01 00:00:00' );

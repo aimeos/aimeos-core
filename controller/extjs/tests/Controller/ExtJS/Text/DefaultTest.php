@@ -149,4 +149,10 @@ class Controller_ExtJS_Text_DefaultTest extends MW_Unittest_Testcase
 
 		MShop_Text_Manager_Factory::injectManager( 'MShop_Text_Manager_Default', null );
 	}
+
+
+	public function testFinish()
+	{
+		$this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+	}
 }

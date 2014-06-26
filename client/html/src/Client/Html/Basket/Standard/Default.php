@@ -96,44 +96,45 @@ class Client_Html_Basket_Standard_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
+		$context = $this->_getContext();
+		$view = $this->getView();
+
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->_setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getBody();
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->standardBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
@@ -168,17 +169,20 @@ class Client_Html_Basket_Standard_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader();
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->standardHeader = $html;
 		}
@@ -236,6 +240,7 @@ class Client_Html_Basket_Standard_Default
 	{
 		$refresh = false;
 		$view = $this->getView();
+		$context = $this->_getContext();
 
 		try
 		{
@@ -364,26 +369,24 @@ class Client_Html_Basket_Standard_Default
 
 			if( $refresh ) // Remove the cached HTML from the session for all baskets
 			{
-				$session = $this->_getContext()->getSession();
+				$session = $context->getSession();
 
 				foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
 					$session->set( $key, null );
 				}
 			}
 
-			$this->_process( $this->_subPartPath, $this->_subPartNames );
+			parent::process();
 
 			$this->_controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
@@ -392,22 +395,18 @@ class Client_Html_Basket_Standard_Default
 			$errors = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$errors = array_merge( $errors, $this->_translatePluginErrorCodes( $e->getErrorCodes() ) );
 
-			$view = $this->getView();
 			$view->summaryErrorCodes = $e->getErrorCodes();
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $errors;
 		}
 		catch( MShop_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
@@ -415,12 +414,25 @@ class Client_Html_Basket_Standard_Default
 
 
 	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 */
+	protected function _getSubClientNames()
+	{
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->_cache ) )
 		{

@@ -56,7 +56,12 @@ class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends MW_Uni
 		$view = $this->_object->getView();
 		$view->detailProductItem = $this->_getProductItem();
 
-		$output = $this->_object->getHeader();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getHeader( 1, $tags, $expire );
+
+		$this->assertEquals( null, $expire );
+		$this->assertEquals( 11, count( $tags ) );
 	}
 
 
@@ -65,10 +70,16 @@ class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends MW_Uni
 		$view = $this->_object->getView();
 		$view->detailProductItem = $this->_getProductItem();
 
-		$output = $this->_object->getBody();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
+
 		$this->assertContains( '<h2 class="header attributes">', $output );
 		$this->assertContains( '<td class="name">size</td>', $output );
-		$this->assertContains( '<span class="attr-name">xs</span>', $output );
+		$this->assertContains( '<span class="attr-name">XS</span>', $output );
+
+		$this->assertEquals( null, $expire );
+		$this->assertEquals( 11, count( $tags ) );
 	}
 
 
@@ -83,11 +94,11 @@ class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends MW_Uni
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
-		$items = $manager->searchItems( $search, array( 'attribute' ) );
+		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
+		$items = $manager->searchItems( $search, array( 'attribute', 'product' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No product item with code "CNC" found' );
+			throw new Exception( 'No product item with code "CNE" found' );
 		}
 
 		return $item;

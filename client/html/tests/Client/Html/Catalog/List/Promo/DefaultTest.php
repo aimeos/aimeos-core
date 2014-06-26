@@ -67,16 +67,26 @@ class Client_Html_Catalog_List_Promo_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$output = $this->_object->getHeader();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getHeader( 1, $tags, $expire );
+
 		$this->assertStringStartsWith( '<script type="text/javascript"', $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 25, count( $tags ) );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
+
 		$this->assertStringStartsWith( '<section class="catalog-list-promo">', $output );
 		$this->assertRegExp( '/.*Expresso.*Cappuccino.*/smu', $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 25, count( $tags ) );
 	}
 
 	public function testGetSubClient()

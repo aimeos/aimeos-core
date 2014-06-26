@@ -33,4 +33,18 @@ return array(
 			?, ?, ?
 		)
 	',
+	'search' => '
+		SELECT "id", "value", "expire" FROM "madmin_cache"
+		WHERE :cond
+		LIMIT :size OFFSET :start
+	',
+	'count' => '
+		SELECT COUNT(*) AS "count"
+		FROM(
+			SELECT DISTINCT "id"
+			FROM "madmin_cache"
+			WHERE :cond
+			LIMIT 10000 OFFSET 0
+		) AS list
+	',
 );

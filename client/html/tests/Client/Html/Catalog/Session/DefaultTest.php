@@ -57,6 +57,7 @@ class Client_Html_Catalog_Session_DefaultTest extends MW_Unittest_Testcase
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

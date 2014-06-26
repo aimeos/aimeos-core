@@ -59,7 +59,8 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrderId() );
 
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

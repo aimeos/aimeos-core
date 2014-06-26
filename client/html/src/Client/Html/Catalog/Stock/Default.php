@@ -58,101 +58,105 @@ class Client_Html_Catalog_Stock_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getBody();
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->stockBody = $html;
+
+			/** client/html/catalog/stock/default/template-body
+			 * Relative path to the HTML body template of the catalog stock client.
+			 *
+			 * The template file contains the HTML code and processing instructions
+			 * to generate the result shown in the body of the frontend. The
+			 * configuration string is the path to the template file relative
+			 * to the layouts directory (usually in client/html/layouts).
+			 *
+			 * You can overwrite the template file configuration in extensions and
+			 * provide alternative templates. These alternative templates should be
+			 * named like the default one but with the string "default" replaced by
+			 * an unique name. You may use the name of your project for this. If
+			 * you've implemented an alternative client class as well, "default"
+			 * should be replaced by the name of the new class.
+			 *
+			 * @param string Relative path to the template creating code for the HTML page body
+			 * @since 2014.03
+			 * @category Developer
+			 * @see client/html/catalog/stock/default/template-header
+			 */
+			$tplconf = 'client/html/catalog/stock/default/template-body';
+			$default = 'catalog/stock/body-default.html';
+
+			return $view->render( $this->_getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return;
 		}
-
-		/** client/html/catalog/stock/default/template-body
-		 * Relative path to the HTML body template of the catalog stock client.
-		 *
-		 * The template file contains the HTML code and processing instructions
-		 * to generate the result shown in the body of the frontend. The
-		 * configuration string is the path to the template file relative
-		 * to the layouts directory (usually in client/html/layouts).
-		 *
-		 * You can overwrite the template file configuration in extensions and
-		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
-		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
-		 * should be replaced by the name of the new class.
-		 *
-		 * @param string Relative path to the template creating code for the HTML page body
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/catalog/stock/default/template-header
-		 */
-		$tplconf = 'client/html/catalog/stock/default/template-body';
-		$default = 'catalog/stock/body-default.html';
-
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
 
 
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		try
 		{
-			$view = $this->getView();
+			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader();
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->stockHeader = $html;
+
+			/** client/html/catalog/stock/default/template-header
+			 * Relative path to the HTML header template of the catalog stock client.
+			 *
+			 * The template file contains the HTML code and processing instructions
+			 * to generate the HTML code that is inserted into the HTML page header
+			 * of the rendered page in the frontend. The configuration string is the
+			 * path to the template file relative to the layouts directory (usually
+			 * in client/html/layouts).
+			 *
+			 * You can overwrite the template file configuration in extensions and
+			 * provide alternative templates. These alternative templates should be
+			 * named like the default one but with the string "default" replaced by
+			 * an unique name. You may use the name of your project for this. If
+			 * you've implemented an alternative client class as well, "default"
+			 * should be replaced by the name of the new class.
+			 *
+			 * @param string Relative path to the template creating code for the HTML page head
+			 * @since 2014.03
+			 * @category Developer
+			 * @see client/html/catalog/stock/default/template-body
+			 */
+			$tplconf = 'client/html/catalog/stock/default/template-header';
+			$default = 'catalog/stock/header-default.html';
+
+			return $view->render( $this->_getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return '';
 		}
-
-		/** client/html/catalog/stock/default/template-header
-		 * Relative path to the HTML header template of the catalog stock client.
-		 *
-		 * The template file contains the HTML code and processing instructions
-		 * to generate the HTML code that is inserted into the HTML page header
-		 * of the rendered page in the frontend. The configuration string is the
-		 * path to the template file relative to the layouts directory (usually
-		 * in client/html/layouts).
-		 *
-		 * You can overwrite the template file configuration in extensions and
-		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
-		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
-		 * should be replaced by the name of the new class.
-		 *
-		 * @param string Relative path to the template creating code for the HTML page head
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/catalog/stock/default/template-body
-		 */
-		$tplconf = 'client/html/catalog/stock/default/template-header';
-		$default = 'catalog/stock/header-default.html';
-
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -178,12 +182,11 @@ class Client_Html_Catalog_Stock_Default
 	{
 		try
 		{
-			$this->_process( $this->_subPartPath, $this->_subPartNames );
+			parent::process();
 		}
 		catch( Exception $e )
 		{
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return;
 		}
 	}
 
@@ -192,9 +195,11 @@ class Client_Html_Catalog_Stock_Default
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->_cache ) )
 		{

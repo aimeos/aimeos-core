@@ -53,15 +53,25 @@ class Client_Html_Catalog_Filter_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$this->_object->getHeader();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getHeader( 1, $tags, $expire );
+
+		$this->assertNotNull( $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 51, count( $tags ) );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '<section class="arcavias catalog-filter">', $output );
+		$this->assertEquals( '2022-01-01 00:00:00', $expire );
+		$this->assertEquals( 51, count( $tags ) );
 	}
 
 

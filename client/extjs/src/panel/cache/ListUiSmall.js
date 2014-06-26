@@ -84,7 +84,7 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 			xtype : 'gridcolumn',
 			dataIndex : 'cache.id',
 			header : MShop.I18n.dt( 'client/extjs', 'ID' ),
-			width: 200
+			width: 400
 		}, {
 			xtype : 'gridcolumn',
 			dataIndex : 'cache.value',

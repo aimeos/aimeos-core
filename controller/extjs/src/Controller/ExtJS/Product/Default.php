@@ -61,7 +61,7 @@ class Controller_ExtJS_Product_Default
 
 		$tags = array();
 		foreach( (array) $params->items as $id ) {
-			$tags[] = 'product/id/' . $id;
+			$tags[] = 'product:' . $id;
 		}
 
 		$this->_getContext()->getCache()->deleteByTags( $tags );

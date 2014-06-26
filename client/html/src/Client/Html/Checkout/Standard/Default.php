@@ -112,44 +112,45 @@ class Client_Html_Checkout_Standard_Default
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
+		$context = $this->_getContext();
+		$view = $this->getView();
+
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->_setViewParams( $view, $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getBody();
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
 			$view->standardBody = $html;
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
@@ -184,51 +185,53 @@ class Client_Html_Checkout_Standard_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		try
 		{
-			$view = $this->_setViewParams( $this->getView() );
+			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 			$html = '';
-			foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader();
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
 			$view->standardHeader = $html;
+
+			/** client/html/checkout/standard/default/template-header
+			 * Relative path to the HTML header template of the checkout standard client.
+			 *
+			 * The template file contains the HTML code and processing instructions
+			 * to generate the HTML code that is inserted into the HTML page header
+			 * of the rendered page in the frontend. The configuration string is the
+			 * path to the template file relative to the layouts directory (usually
+			 * in client/html/layouts).
+			 *
+			 * You can overwrite the template file configuration in extensions and
+			 * provide alternative templates. These alternative templates should be
+			 * named like the default one but with the string "default" replaced by
+			 * an unique name. You may use the name of your project for this. If
+			 * you've implemented an alternative client class as well, "default"
+			 * should be replaced by the name of the new class.
+			 *
+			 * @param string Relative path to the template creating code for the HTML page head
+			 * @since 2014.03
+			 * @category Developer
+			 * @see client/html/checkout/standard/default/template-body
+			 */
+			$tplconf = 'client/html/checkout/standard/default/template-header';
+			$default = 'checkout/standard/header-default.html';
+
+			return $view->render( $this->_getTemplate( $tplconf, $default ) );
 		}
 		catch( Exception $e )
 		{
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-			return '';
 		}
-
-		/** client/html/checkout/standard/default/template-header
-		 * Relative path to the HTML header template of the checkout standard client.
-		 *
-		 * The template file contains the HTML code and processing instructions
-		 * to generate the HTML code that is inserted into the HTML page header
-		 * of the rendered page in the frontend. The configuration string is the
-		 * path to the template file relative to the layouts directory (usually
-		 * in client/html/layouts).
-		 *
-		 * You can overwrite the template file configuration in extensions and
-		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
-		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
-		 * should be replaced by the name of the new class.
-		 *
-		 * @param string Relative path to the template creating code for the HTML page head
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/checkout/standard/default/template-body
-		 */
-		$tplconf = 'client/html/checkout/standard/default/template-header';
-		$default = 'checkout/standard/header-default.html';
-
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
 
 
@@ -246,37 +249,26 @@ class Client_Html_Checkout_Standard_Default
 
 
 	/**
-	 * Tests if the output of is cachable.
-	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
-	 */
-	public function isCachable( $what )
-	{
-		return false;
-	}
-
-
-	/**
 	 * Processes the input, e.g. store given values.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
 	 */
 	public function process()
 	{
+		$view = $this->getView();
+		$context = $this->_getContext();
+
 		try
 		{
-			$this->_process( $this->_subPartPath, $this->_subPartNames );
+			parent::process();
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
@@ -285,22 +277,18 @@ class Client_Html_Checkout_Standard_Default
 			$errors = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$errors = array_merge( $errors, $this->_translatePluginErrorCodes( $e->getErrorCodes() ) );
 
-			$view = $this->getView();
 			$view->summaryErrorCodes = $e->getErrorCodes();
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $errors;
 		}
 		catch( MShop_Exception $e )
 		{
-			$view = $this->getView();
 			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$view = $this->getView();
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
@@ -308,12 +296,25 @@ class Client_Html_Checkout_Standard_Default
 
 
 	/**
+	 * Returns the list of sub-client names configured for the client.
+	 *
+	 * @return array List of HTML client names
+	 */
+	protected function _getSubClientNames()
+	{
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->_cache ) )
 		{

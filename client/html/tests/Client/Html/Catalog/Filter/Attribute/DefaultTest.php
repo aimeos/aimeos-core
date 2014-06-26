@@ -38,18 +38,28 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 
 	public function testGetHeader()
 	{
-		$this->_object->getHeader();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getHeader( 1, $tags, $expire );
+
+		$this->assertEquals( 47, count( $tags ) );
+		$this->assertEquals( null, $expire );
 	}
 
 
 	public function testGetBody()
 	{
-		$output = $this->_object->getBody();
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
 
 		$this->assertContains( '<fieldset class="attr-size">', $output );
 		$this->assertContains( '<fieldset class="attr-length">', $output );
 		$this->assertContains( '<fieldset class="attr-width">', $output );
 		$this->assertContains( '<fieldset class="attr-color">', $output );
+
+		$this->assertEquals( 47, count( $tags ) );
+		$this->assertEquals( null, $expire );
 	}
 
 

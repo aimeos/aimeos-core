@@ -96,4 +96,10 @@ class Controller_ExtJS_Supplier_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}
+
+
+	public function testFinish()
+	{
+		$this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+	}
 }

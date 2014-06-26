@@ -52,20 +52,26 @@ class Client_Html_Catalog_Detail_Suggest_Default
 	 */
 	private $_subPartPath = 'client/html/catalog/detail/suggest/default/subparts';
 	private $_subPartNames = array();
+	private $_tags = array();
+	private $_expire;
+	private $_cache;
 
 
 	/**
 	 * Returns the HTML code for insertion into the body.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string HTML code
 	 */
-	public function getBody()
+	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 		}
 		$view->suggestBody = $html;
 
@@ -99,15 +105,18 @@ class Client_Html_Catalog_Detail_Suggest_Default
 	/**
 	 * Returns the HTML string for insertion into the header.
 	 *
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
 	 * @return string String including HTML tags for the header
 	 */
-	public function getHeader()
+	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView() );
+		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
 		$html = '';
-		foreach( $this->_getSubClients( $this->_subPartPath, $this->_subPartNames ) as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader();
+		foreach( $this->_getSubClients() as $subclient ) {
+			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 		}
 		$view->suggestHeader = $html;
 
@@ -153,25 +162,13 @@ class Client_Html_Catalog_Detail_Suggest_Default
 
 
 	/**
-	 * Tests if the output of is cachable.
+	 * Returns the list of sub-client names configured for the client.
 	 *
-	 * @param integer $what Header or body constant from Client_HTML_Abstract
-	 * @return boolean True if the output can be cached, false if not
+	 * @return array List of HTML client names
 	 */
-	public function isCachable( $what )
+	protected function _getSubClientNames()
 	{
-		return $this->_isCachable( $what, $this->_subPartPath, $this->_subPartNames );
-	}
-
-
-	/**
-	 * Processes the input, e.g. store given values.
-	 * A view must be available and this method doesn't generate any output
-	 * besides setting view variables.
-	 */
-	public function process()
-	{
-		$this->_process( $this->_subPartPath, $this->_subPartNames );
+		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
 
 
@@ -179,8 +176,11 @@ class Client_Html_Catalog_Detail_Suggest_Default
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
+	 * @return MW_View_Interface Modified view object
 	 */
-	protected function _setViewParams( MW_View_Interface $view )
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
 		if( !isset( $this->_cache ) )
 		{
@@ -198,14 +198,23 @@ class Client_Html_Catalog_Detail_Suggest_Default
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
+				/** @todo Make referenced domains configurable */
 				$domains = array( 'text', 'price', 'media' );
 
 				$view->suggestItems = $manager->searchItems( $search, $domains );
 				$view->suggestPosItems = $products;
+
+
+				foreach( $view->suggestItems as $item ) {
+					$this->_addMetaData( $item, 'product', $domains, $this->_tags, $this->_expire );
+				}
 			}
 
 			$this->_cache = $view;
 		}
+
+		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;
 	}

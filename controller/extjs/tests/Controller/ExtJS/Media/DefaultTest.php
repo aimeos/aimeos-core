@@ -385,4 +385,9 @@ class Controller_ExtJS_Media_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals($expected, $actual);
 	}
 
+
+	public function testFinish()
+	{
+		$this->_object->finish( (object) array( 'site' => 'unittest', 'items' => -1 ) );
+	}
 }
