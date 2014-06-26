@@ -106,6 +106,8 @@ class MAdmin_Cache_Manager_Default
 			 * @see madmin/cache/manager/default/getbytag
 			 * @see madmin/cache/manager/default/set
 			 * @see madmin/cache/manager/default/settag
+			 * @see madmin/cache/manager/default/search
+			 * @see madmin/cache/manager/default/count
 			 */
 
 			/** madmin/cache/manager/default/getbytag
@@ -127,6 +129,38 @@ class MAdmin_Cache_Manager_Default
 			 * @see madmin/cache/manager/default/get
 			 * @see madmin/cache/manager/default/set
 			 * @see madmin/cache/manager/default/settag
+			 * @see madmin/cache/manager/default/search
+			 * @see madmin/cache/manager/default/count
+			 */
+
+			/** madmin/cache/manager/default/get
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * Fetches the records matched by the given criteria from the cache
+			 * database. The records must be from the sites that is
+			 * configured in the context item.
+			 *
+			 * To limit the records matched, conditions can be added to the given
+			 * criteria object. It can contain comparisons like column names that
+			 * must match specific values which can be combined by AND, OR or NOT
+			 * operators. The resulting string of SQL conditions replaces the
+			 * ":cond" placeholder before the statement is sent to the database
+			 * server.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for searching items
+			 * @since 2014.03
+			 * @category Developer
+			 * @see madmin/cache/manager/default/getbytag
+			 * @see madmin/cache/manager/default/delete
+			 * @see madmin/cache/manager/default/deletebytag
+			 * @see madmin/cache/manager/default/set
+			 * @see madmin/cache/manager/default/settag
+			 * @see madmin/cache/manager/default/search
+			 * @see madmin/cache/manager/default/count
 			 */
 
 			$context = $this->_getContext();
@@ -184,6 +218,8 @@ class MAdmin_Cache_Manager_Default
 		 * @see madmin/cache/manager/default/getbytag
 		 * @see madmin/cache/manager/default/set
 		 * @see madmin/cache/manager/default/settag
+		 * @see madmin/cache/manager/default/search
+		 * @see madmin/cache/manager/default/count
 		 */
 
 		$this->_cleanup( $siteids, 'madmin/cache/manager/default/delete' );
@@ -252,6 +288,8 @@ class MAdmin_Cache_Manager_Default
 		 * @see madmin/cache/manager/default/get
 		 * @see madmin/cache/manager/default/getbytag
 		 * @see madmin/cache/manager/default/settag
+		 * @see madmin/cache/manager/default/search
+		 * @see madmin/cache/manager/default/count
 		 */
 
 		/** madmin/cache/manager/default/settag
@@ -282,6 +320,8 @@ class MAdmin_Cache_Manager_Default
 		 * @see madmin/cache/manager/default/get
 		 * @see madmin/cache/manager/default/getbytag
 		 * @see madmin/cache/manager/default/set
+		 * @see madmin/cache/manager/default/search
+		 * @see madmin/cache/manager/default/count
 		 */
 
 		$id = $item->getId();
@@ -333,41 +373,7 @@ class MAdmin_Cache_Manager_Default
 	{
 		$items = array();
 		$context = $this->_getContext();
-
-		$attributes = $this->getSearchAttributes();
-		$types = $this->_getSearchTypes( $attributes );
-		$translations = $this->_getSearchTranslations( $attributes );
-
-		/** madmin/cache/manager/default/get
-		 * Retrieves the records matched by the given criteria in the database
-		 *
-		 * Fetches the records matched by the given criteria from the cache
-		 * database. The records must be from the sites that is
-		 * configured in the context item.
-		 *
-		 * To limit the records matched, conditions can be added to the given
-		 * criteria object. It can contain comparisons like column names that
-		 * must match specific values which can be combined by AND, OR or NOT
-		 * operators. The resulting string of SQL conditions replaces the
-		 * ":cond" placeholder before the statement is sent to the database
-		 * server.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for searching items
-		 * @since 2014.03
-		 * @category Developer
-		 * @see madmin/cache/manager/default/getbytag
-		 * @see madmin/cache/manager/default/delete
-		 * @see madmin/cache/manager/default/deletebytag
-		 * @see madmin/cache/manager/default/set
-		 * @see madmin/cache/manager/default/settag
-		 */
-		$path = 'madmin/cache/manager/default/get';
-		$cond = $search->getConditionString( $types, $translations );
-		$sql = str_replace( ':cond', $cond, $context->getConfig()->get( $path, $path ) );
+		$logger = $context->getLogger();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();
@@ -375,9 +381,83 @@ class MAdmin_Cache_Manager_Default
 
 		try
 		{
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$results = $stmt->execute();
+			$required = array( 'cache' );
+			$level = MShop_Locale_Manager_Abstract::SITE_ONE;
+
+			/** madmin/cache/manager/default/search
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * Fetches the records matched by the given criteria from the cache
+			 * database. The records must be from the sites that is
+			 * configured in the context item.
+			 *
+			 * To limit the records matched, conditions can be added to the given
+			 * criteria object. It can contain comparisons like column names that
+			 * must match specific values which can be combined by AND, OR or NOT
+			 * operators. The resulting string of SQL conditions replaces the
+			 * ":cond" placeholder before the statement is sent to the database
+			 * server.
+			 *
+			 * The number of returned records can be limited and can start at any
+			 * number between the begining and the end of the result set. For that
+			 * the ":size" and ":start" placeholders are replaced by the
+			 * corresponding values from the criteria object. The default values
+			 * are 0 for the start and 100 for the size value.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for searching items
+			 * @since 2014.03
+			 * @category Developer
+			 * @see madmin/cache/manager/default/get
+			 * @see madmin/cache/manager/default/getbytag
+			 * @see madmin/cache/manager/default/delete
+			 * @see madmin/cache/manager/default/deletebytag
+			 * @see madmin/cache/manager/default/set
+			 * @see madmin/cache/manager/default/settag
+			 * @see madmin/cache/manager/default/count
+			 */
+			$cfgPathSearch = 'madmin/cache/manager/default/search';
+
+			/** madmin/cache/manager/default/count
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * Fetches the records matched by the given criteria from the cache
+			 * database. The records must be from the sites that is
+			 * configured in the context item.
+			 *
+			 * To limit the records matched, conditions can be added to the given
+			 * criteria object. It can contain comparisons like column names that
+			 * must match specific values which can be combined by AND, OR or NOT
+			 * operators. The resulting string of SQL conditions replaces the
+			 * ":cond" placeholder before the statement is sent to the database
+			 * server.
+			 *
+			 * Contrary to the "search" statement, it doesn't return any records
+			 * but instead the number of records that have been found. As counting
+			 * thousands of records can be a long running task, the maximum number
+			 * of counted records is limited for performance reasons.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for searching items
+			 * @since 2014.03
+			 * @category Developer
+			 * @see madmin/cache/manager/default/get
+			 * @see madmin/cache/manager/default/getbytag
+			 * @see madmin/cache/manager/default/delete
+			 * @see madmin/cache/manager/default/deletebytag
+			 * @see madmin/cache/manager/default/set
+			 * @see madmin/cache/manager/default/settag
+			 * @see madmin/cache/manager/default/search
+			 */
+			$cfgPathCount =  'madmin/cache/manager/default/count';
+
+			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[ $row['id'] ] = $this->_createItem( $row );
@@ -389,10 +469,6 @@ class MAdmin_Cache_Manager_Default
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( $total !== null ) {
-			$total = count( $items );
 		}
 
 		return $items;
