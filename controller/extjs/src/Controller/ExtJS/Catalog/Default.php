@@ -46,12 +46,7 @@ class Controller_ExtJS_Catalog_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
-		$tags = array();
-		foreach( (array) $params->items as $id ) {
-			$tags[] = 'catalog:' . $id;
-		}
-
-		$this->_getContext()->getCache()->deleteByTags( $tags );
+		$this->_getContext()->getCache()->deleteByTags( array( 'catalog' ) );
 
 		return array(
 			'success' => true,

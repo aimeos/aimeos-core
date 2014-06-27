@@ -45,12 +45,7 @@ class Controller_ExtJS_Price_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
-		$tags = array();
-		foreach( (array) $params->items as $id ) {
-			$tags[] = 'price:' . $id;
-		}
-
-		$this->_getContext()->getCache()->deleteByTags( $tags );
+		$this->_getContext()->getCache()->deleteByTags( array( 'price' ) );
 
 		return array(
 			'success' => true,

@@ -47,12 +47,7 @@ class Controller_ExtJS_Service_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
-		$tags = array();
-		foreach( (array) $params->items as $id ) {
-			$tags[] = 'service:' . $id;
-		}
-
-		$this->_getContext()->getCache()->deleteByTags( $tags );
+		$this->_getContext()->getCache()->deleteByTags( array( 'service' ) );
 
 		return array(
 			'success' => true,
