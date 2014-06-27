@@ -58,7 +58,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$output = $this->_object->getHeader( 1, $tags, $expire );
 
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 4, count( $tags ) );
+		$this->assertEquals( 3, count( $tags ) );
 	}
 
 
@@ -80,7 +80,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$this->assertContains( 'level-2', $output );
 
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 18, count( $tags ) );
+		$this->assertEquals( 5, count( $tags ) );
 	}
 
 
@@ -104,7 +104,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertContains( 'level-2', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 36, count( $tags ) );
+		$this->assertEquals( 8, count( $tags ) );
 	}
 
 
@@ -128,7 +128,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertNotContains( 'level-2', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 4, count( $tags ) );
+		$this->assertEquals( 3, count( $tags ) );
 	}
 
 

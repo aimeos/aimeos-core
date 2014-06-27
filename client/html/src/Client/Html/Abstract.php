@@ -131,7 +131,7 @@ abstract class Client_Html_Abstract
 	protected function _addMetaData( MShop_Common_Item_Interface $item, $domain, array $domains, array &$tags, &$expire )
 	{
 		$expires = array();
-		$tags[] = $domain . ':' . $item->getId();
+		$tags[] = $domain;
 
 		if( method_exists( $item, 'getDateEnd' ) && ( $date = $item->getDateEnd() ) !== null ) {
 			$expires[] = $date;
@@ -141,8 +141,6 @@ abstract class Client_Html_Abstract
 		{
 			foreach( $item->getListItems( $name ) as $listitem )
 			{
-				$tags[] = $name . ':' . $listitem->getRefId();
-
 				if( ( $date = $listitem->getDateEnd() ) !== null ) {
 					$expires[] = $date;
 				}

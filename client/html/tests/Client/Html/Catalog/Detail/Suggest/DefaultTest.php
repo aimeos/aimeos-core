@@ -62,7 +62,7 @@ class Client_Html_Catalog_Detail_Suggest_DefaultTest extends MW_Unittest_Testcas
 
 		$this->assertEquals( '', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 13, count( $tags ) );
+		$this->assertEquals( 1, count( $tags ) );
 	}
 
 
@@ -78,7 +78,7 @@ class Client_Html_Catalog_Detail_Suggest_DefaultTest extends MW_Unittest_Testcas
 		$this->assertStringStartsWith( '<section class="catalog-detail-suggest">', $output );
 		$this->assertRegExp( '/.*Cappuccino.*/', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 13, count( $tags ) );
+		$this->assertEquals( 1, count( $tags ) );
 	}
 
 

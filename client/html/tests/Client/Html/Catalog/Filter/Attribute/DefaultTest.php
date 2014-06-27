@@ -42,7 +42,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 		$expire = null;
 		$output = $this->_object->getHeader( 1, $tags, $expire );
 
-		$this->assertEquals( 47, count( $tags ) );
+		$this->assertEquals( 22, count( $tags ) );
 		$this->assertEquals( null, $expire );
 	}
 
@@ -58,7 +58,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 		$this->assertContains( '<fieldset class="attr-width">', $output );
 		$this->assertContains( '<fieldset class="attr-color">', $output );
 
-		$this->assertEquals( 47, count( $tags ) );
+		$this->assertEquals( 22, count( $tags ) );
 		$this->assertEquals( null, $expire );
 	}
 
