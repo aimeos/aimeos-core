@@ -77,6 +77,8 @@ class Controller_ExtJS_Order_Default
 			$ids[] = $item->getId();
 		}
 
+		$this->_clearCache( $ids );
+
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );

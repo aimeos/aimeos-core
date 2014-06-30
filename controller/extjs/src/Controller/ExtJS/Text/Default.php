@@ -35,25 +35,6 @@ class Controller_ExtJS_Text_Default
 
 
 	/**
-	 * Executes tasks after processing the items.
-	 *
-	 * @param stdClass $params Associative list of parameters
-	 * @return array Associative list with success value
-	 */
-	public function finish( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$this->_getContext()->getCache()->deleteByTags( array( 'text' ) );
-
-		return array(
-			'success' => true,
-		);
-	}
-
-
-	/**
 	 * Creates a new text item or updates an existing one or a list thereof.
 	 *
 	 * @param stdClass $params Associative array containing the text properties
@@ -91,6 +72,8 @@ class Controller_ExtJS_Text_Default
 
 			$ids[] = $item->getId();
 		}
+
+		$this->_clearCache( $ids );
 
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.id', $ids ) );
@@ -152,6 +135,8 @@ class Controller_ExtJS_Text_Default
 			}
 			while( $count > 0 );
 		}
+
+		$this->_clearCache( (array) $params->items );
 
 		return array(
 				'items' => $params->items,

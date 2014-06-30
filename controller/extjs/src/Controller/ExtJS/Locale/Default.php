@@ -63,6 +63,8 @@ class Controller_ExtJS_Locale_Default
 			$ids[] = $item->getId();
 		}
 
+		$this->_clearCache( $ids );
+
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );

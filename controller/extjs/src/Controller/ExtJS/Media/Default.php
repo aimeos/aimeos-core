@@ -35,25 +35,6 @@ class Controller_ExtJS_Media_Default
 
 
 	/**
-	 * Executes tasks after processing the items.
-	 *
-	 * @param stdClass $params Associative list of parameters
-	 * @return array Associative list with success value
-	 */
-	public function finish( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$this->_getContext()->getCache()->deleteByTags( array( 'media' ) );
-
-		return array(
-			'success' => true,
-		);
-	}
-
-
-	/**
 	 * Deletes an item or a list of items.
 	 *
 	 * @param stdClass $params Associative list of parameters
@@ -166,6 +147,8 @@ class Controller_ExtJS_Media_Default
 			}
 			while( $count > 0 );
 		}
+
+		$this->_clearCache( (array) $params->items );
 
 		return array(
 			'success' => true,
