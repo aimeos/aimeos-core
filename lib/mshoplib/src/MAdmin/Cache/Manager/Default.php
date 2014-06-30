@@ -54,7 +54,7 @@ class MAdmin_Cache_Manager_Default
 		),
 		'cache.tag.name' => array(
 			'code' => 'cache.tag.name',
-			'internalcode' => '"name"',
+			'internalcode' => '"tname"',
 			'label' => 'Cache tag name',
 			'type' => 'string',
 			'public' => false,
