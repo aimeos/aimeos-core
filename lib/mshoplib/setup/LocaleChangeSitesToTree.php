@@ -24,7 +24,7 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 				( SELECT COALESCE( MAX("nright"), 0 ) + 1 FROM "mshop_locale_site" ),
 				( SELECT COALESCE( MAX("nright"), 0 ) + 2 FROM "mshop_locale_site" )
 			FROM DUAL
-			WHERE ( SELECT COUNT(*) FROM "mshop_locale_site" WHERE "code" =\'default\' ) = 0
+			WHERE ( SELECT COUNT(*) FROM "mshop_locale_site" WHERE "code" = \'default\' ) = 0
 		',
 		'search' => 'SELECT * FROM "mshop_locale_site" WHERE "code" <> \'default\' AND "nleft" = 0 AND "nright" = 0',
 		'update' => 'UPDATE "mshop_locale_site" SET "level" = ?, "nleft" = ?, "nright" = ? WHERE "code" = ? AND "nleft" = 0 AND "nright" = 0',
@@ -69,6 +69,7 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 	 */
 	protected function _process( array $colstmts, array $migstmts )
 	{
+		$migrate = false;
 		$this->_msg( 'Changeing locale sites to tree of sites', 0 ); $this->_status( '' );
 
 		foreach( $colstmts as $column => $stmt )
@@ -78,6 +79,7 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 			if( $this->_schema->tableExists( 'mshop_locale_site' ) === true
 				&& $this->_schema->columnExists( 'mshop_locale_site', $column ) === false )
 			{
+				$migrate = true;
 				$this->_execute( $stmt );
 				$this->_status( 'added' );
 			}
@@ -88,7 +90,7 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 		}
 
 
-		if( $this->_schema->tableExists( 'mshop_locale_site' ) === true )
+		if( $migrate === true )
 		{
 			$this->_msg( 'Migrating site items to tree structure', 1 );
 
