@@ -18,7 +18,7 @@ class MW_Setup_Task_PriceListAddTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddTestData', 'CustomerListAddTestData', 'PriceAddTestData' );
+		return array( 'MShopSetLocale', 'CustomerListAddTestData', 'PriceAddTestData' );
 	}
 
 

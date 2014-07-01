@@ -19,7 +19,7 @@ class MW_Setup_Task_JobAddTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddTestData', 'OrderAddTestData' );
+		return array( 'MShopSetLocale', 'OrderAddTestData' );
 	}
 
 

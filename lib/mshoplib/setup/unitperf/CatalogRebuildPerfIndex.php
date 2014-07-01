@@ -18,7 +18,7 @@ class MW_Setup_Task_CatalogRebuildPerfIndex extends MW_Setup_Task_ProductAddBase
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddPerfData' );
+		return array( 'MShopSetLocale' );
 	}
 
 

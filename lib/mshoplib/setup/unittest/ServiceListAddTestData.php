@@ -18,7 +18,7 @@ class MW_Setup_Task_ServiceListAddTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddTestData', 'CatalogListAddTestData', 'ServiceAddTestData' );
+		return array( 'MShopSetLocale', 'CatalogListAddTestData', 'ServiceAddTestData' );
 	}
 
 

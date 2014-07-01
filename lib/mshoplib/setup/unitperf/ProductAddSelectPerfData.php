@@ -22,7 +22,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 	public function getPreDependencies()
 	{
 		return array(
-			'LocaleAddPerfData', 'ProductAddBasePerfData', 'ProductAddTextPerfData',
+			'MShopSetLocale', 'ProductAddBasePerfData', 'ProductAddTextPerfData',
 			'ProductAddPricePerfData', 'ProductAddStockPerfData'
 		);
 	}
