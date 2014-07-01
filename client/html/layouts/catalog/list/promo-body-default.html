@@ -18,12 +18,14 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 /// Percent format with value (%1$s) and % sign
 $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
+$fparams = ( ( $catid = $this->param( 'f-catalog-id' ) ) != '' ? array( 'f-catalog-id' => $catid ) : array() );
+
 ?>
 <?php if( !empty( $productItems ) ) : ?>
 <section class="catalog-list-promo">
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Top seller' ); ?></h2>
 <?php	foreach( $productItems as $id => $productItem ) : ?>
-<?php		$firstImage = true; $params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id ); ?>
+<?php		$firstImage = true; $params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id ) + $fparams; ?>
 	<div class="product">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 			<div class="media-list">
