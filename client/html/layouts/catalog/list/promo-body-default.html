@@ -27,7 +27,7 @@ $fparams = ( ( $catid = $this->param( 'f-catalog-id' ) ) != '' ? array( 'f-catal
 <?php	foreach( $productItems as $id => $productItem ) : ?>
 <?php		$firstImage = true; $params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id ) + $fparams; ?>
 	<div class="product">
-		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params + $this->get( 'listParams', array() ), array(), $detailConfig ) ); ?>">
+		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 			<div class="media-list">
 <?php		foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
 <?php			$mediaUrl = $this->content( $mediaItem->getPreview() ); ?>
