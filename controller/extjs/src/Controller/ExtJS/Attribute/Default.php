@@ -35,25 +35,6 @@ class Controller_ExtJS_Attribute_Default
 
 
 	/**
-	 * Executes tasks after processing the items.
-	 *
-	 * @param stdClass $params Associative list of parameters
-	 * @return array Associative list with success value
-	 */
-	public function finish( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$this->_getContext()->getCache()->deleteByTags( array( 'attrbute' ) );
-
-		return array(
-			'success' => true,
-		);
-	}
-
-
-	/**
 	 * Creates a new attribute item or updates an existing one or a list thereof.
 	 *
 	 * @param stdClass $params Associative array containing the attribute properties
@@ -83,6 +64,8 @@ class Controller_ExtJS_Attribute_Default
 
 			$ids[] = $item->getId();
 		}
+
+		$this->_clearCache( $ids );
 
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.id', $ids ) );
@@ -143,6 +126,8 @@ class Controller_ExtJS_Attribute_Default
 			}
 			while( $count > 0 );
 		}
+
+		$this->_clearCache( (array) $params->items );
 
 		return array(
 				'items' => $params->items,

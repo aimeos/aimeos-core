@@ -35,25 +35,6 @@ class Controller_ExtJS_Supplier_Default
 
 
 	/**
-	 * Executes tasks after processing the items.
-	 *
-	 * @param stdClass $params Associative list of parameters
-	 * @return array Associative list with success value
-	 */
-	public function finish( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$this->_getContext()->getCache()->deleteByTags( array( 'supplier' ) );
-
-		return array(
-			'success' => true,
-		);
-	}
-
-
-	/**
 	 * Creates a new supplier item or updates an existing one or a list thereof.
 	 *
 	 * @param stdClass $params Associative array containing the supplier properties
@@ -78,6 +59,8 @@ class Controller_ExtJS_Supplier_Default
 
 			$ids[] = $item->getId();
 		}
+
+		$this->_clearCache( $ids );
 
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'supplier.id', $ids ) );

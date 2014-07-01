@@ -79,6 +79,8 @@ abstract class Controller_ExtJS_Abstract
 			$this->_getManager()->deleteItem( $id );
 		}
 
+		$this->_clearCache( (array) $params->items );
+
 		return array(
 			'items' => $params->items,
 			'success' => true,
@@ -213,6 +215,24 @@ abstract class Controller_ExtJS_Abstract
 				throw new Controller_ExtJS_Exception( sprintf( 'Missing parameter "%1$s"', $name ), -1 );
 			}
 		}
+	}
+
+
+	/**
+	 * Removes the cache entries tagged with the domain or domain items.
+	 *
+	 * @param array $ids List of domain IDs
+	 */
+	protected function _clearCache( array $ids )
+	{
+		$domain = str_replace( '_', '/', strtolower( $name ) );
+		$tags = array( $domain );
+
+		foreach( $ids as $id ) {
+			$tags[] = $domain . ':' . $id;
+		}
+
+		$this->_context->getCache()->deleteByTags( $tags );
 	}
 
 

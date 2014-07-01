@@ -66,6 +66,8 @@ class Controller_ExtJS_Plugin_Default
 			$ids[] = $item->getId();
 		}
 
+		$this->_clearCache( $ids );
+
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'plugin.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );

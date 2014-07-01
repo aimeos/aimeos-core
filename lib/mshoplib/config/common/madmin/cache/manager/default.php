@@ -6,7 +6,7 @@ return array(
 	',
 	'deletebytag' => '
 		DELETE FROM "madmin_cache" WHERE "siteid" = ? AND id IN (
-			SELECT t."id" FROM "madmin_cache_tag"
+			SELECT "tid" FROM "madmin_cache_tag"
 			WHERE "tsiteid" = ? AND :cond
 		)
 	',

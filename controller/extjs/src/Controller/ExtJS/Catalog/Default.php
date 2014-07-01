@@ -36,25 +36,6 @@ class Controller_ExtJS_Catalog_Default
 
 
 	/**
-	 * Executes tasks after processing the items.
-	 *
-	 * @param stdClass $params Associative list of parameters
-	 * @return array Associative list with success value
-	 */
-	public function finish( stdClass $params )
-	{
-		$this->_checkParams( $params, array( 'site', 'items' ) );
-		$this->_setLocale( $params->site );
-
-		$this->_getContext()->getCache()->deleteByTags( array( 'catalog' ) );
-
-		return array(
-			'success' => true,
-		);
-	}
-
-
-	/**
 	 * Returns a node or a list of nodes including their children for the given IDs.
 	 *
 	 * @param stdClass $params Associative list of parameters
@@ -116,6 +97,8 @@ class Controller_ExtJS_Catalog_Default
 			$ids[] = $item->getId();
 		}
 
+		$this->_clearCache( $ids );
+
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );
@@ -141,12 +124,17 @@ class Controller_ExtJS_Catalog_Default
 
 		$manager = $this->_getManager();
 
+		$ids = array();
 		$refId = ( isset( $params->refid ) ? $params->refid : null );
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
-		foreach( $items as $entry ) {
+		foreach( $items as $entry )
+		{
 			$manager->moveItem( $entry, $params->oldparentid, $params->newparentid, $refId );
+			$ids[] = $entry->id;
 		}
+
+		$this->_clearCache( $ids );
 
 		return array(
 			'success' => true,
@@ -184,6 +172,8 @@ class Controller_ExtJS_Catalog_Default
 
 			$ids[] = $item->getId();
 		}
+
+		$this->_clearCache( (array) $params->items );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.id', $ids ) );
