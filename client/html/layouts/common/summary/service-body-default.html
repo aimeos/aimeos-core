@@ -20,11 +20,11 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 		</div>
 <?php try { $service = $this->summaryBasket->getService( 'delivery' ); ?>
 		<div class="item">
-			<div class="item-icons">
 <?php	if( ( $url = $service->getMediaUrl() ) != '' ) : ?>
+			<div class="item-icons">
 				<img src="<?php echo $this->content( $url ); ?>" />
-<?php	endif; ?>
 			</div>
+<?php	endif; ?>
 			<h4><?php echo $enc->html( $service->getName() ); ?></h4>
 		</div>
 <?php	if( count( $service->getAttributes() ) > 0 ) : ?>
@@ -54,11 +54,11 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 		</div>
 <?php try { $service = $this->summaryBasket->getService( 'payment' ); ?>
 		<div class="item">
-			<div class="item-icons">
 <?php	if( ( $url = $service->getMediaUrl() ) != '' ) : ?>
+			<div class="item-icons">
 				<img src="<?php echo $this->content( $url ); ?>" />
-<?php	endif; ?>
 			</div>
+<?php	endif; ?>
 			<h4><?php echo $service->getName(); ?></h4>
 		</div>
 <?php	if( count( $service->getAttributes() ) > 0 ) : ?>
