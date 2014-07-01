@@ -225,7 +225,7 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	protected function _clearCache( array $ids )
 	{
-		$domain = str_replace( '_', '/', strtolower( $name ) );
+		$domain = str_replace( '_', '/', strtolower( $this->_name ) );
 		$tags = array( $domain );
 
 		foreach( $ids as $id ) {
