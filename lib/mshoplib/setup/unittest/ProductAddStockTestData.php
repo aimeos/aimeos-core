@@ -30,7 +30,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'CatalogRebuildTestIndex' );
+		return array( 'CatalogRebuildTestIndex', 'MShopAddWarehouseData' );
 	}
 
 

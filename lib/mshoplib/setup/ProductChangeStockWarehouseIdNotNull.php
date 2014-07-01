@@ -15,7 +15,15 @@ class MW_Setup_Task_ProductChangeStockWarehouseIdNotNull extends MW_Setup_Task_A
 		'UPDATE "mshop_product_stock" st
 			SET "warehouseid" = ( SELECT "id" FROM "mshop_product_stock_warehouse" wh WHERE wh."siteid" = st."siteid" AND wh."code" = \'default\' )
 			WHERE "warehouseid" IS NULL',
-		'ALTER TABLE "mshop_product_stock" MODIFY "warehouseid" INTEGER NOT NULL',
+		'ALTER TABLE "mshop_product_stock"
+			DROP FOREIGN KEY "fk_msprost_stock_warehouseid",
+			MODIFY "warehouseid" INTEGER NOT NULL',
+		'ALTER TABLE "mshop_product_stock"
+			ADD CONSTRAINT "fk_msprost_stock_warehouseid"
+				FOREIGN KEY ("warehouseid")
+				REFERENCES "mshop_product_stock_warehouse" ("id")
+				ON UPDATE CASCADE
+				ON DELETE CASCADE',
 	);
 
 
@@ -26,18 +34,7 @@ class MW_Setup_Task_ProductChangeStockWarehouseIdNotNull extends MW_Setup_Task_A
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'ProductWarehouseRenameTable' );
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return array( 'TablesCreateMShop' );
+		return array( 'ProductWarehouseRenameTable', 'MShopAddWarehouseData' );
 	}
 
 

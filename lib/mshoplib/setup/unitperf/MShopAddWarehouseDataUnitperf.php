@@ -29,7 +29,7 @@ class MW_Setup_Task_MShopAddWarehouseDataUnitperf extends MW_Setup_Task_MShopAdd
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'ProductAddBasePerfData' );
+		return array( 'ProductAddBasePerfData', 'MShopAddWarehouseData' );
 	}
 
 

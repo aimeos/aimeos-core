@@ -23,6 +23,17 @@ class MW_Setup_Task_MShopAddWarehouseDataDefault extends MW_Setup_Task_MShopAddW
 
 
 	/**
+	 * Returns the list of task names which depends on this task.
+	 *
+	 * @return array List of task names
+	 */
+	public function getPostDependencies()
+	{
+		return array( 'MShopAddWarehouseData' );
+	}
+
+
+	/**
 	 * Executes the task for MySQL databases.
 	 */
 	protected function _mysql()
