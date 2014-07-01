@@ -18,7 +18,7 @@ class MW_Setup_Task_CatalogAddBasePerfData extends MW_Setup_Task_ProductAddBaseP
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddPerfData' );
+		return array( 'MShopSetLocale' );
 	}
 
 

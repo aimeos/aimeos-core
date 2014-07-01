@@ -18,7 +18,7 @@ class MW_Setup_Task_MShopAddTypeDataDefault extends MW_Setup_Task_MShopAddTypeDa
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddLocaleDataDefault' );
+		return array( 'MShopSetLocale' );
 	}
 
 

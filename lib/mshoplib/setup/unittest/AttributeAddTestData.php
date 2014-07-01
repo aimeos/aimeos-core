@@ -18,7 +18,7 @@ class MW_Setup_Task_AttributeAddTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddTestData', 'TextAddTestData', 'MediaAddTestData' );
+		return array( 'MShopSetLocale', 'TextAddTestData', 'MediaAddTestData' );
 	}
 
 

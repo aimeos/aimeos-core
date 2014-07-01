@@ -19,7 +19,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddTestData', 'MediaListAddTestData', 'PriceListAddTestData', 'ProductAddTestData', 'ProductAddTagTestData' );
+		return array( 'MShopSetLocale', 'MediaListAddTestData', 'PriceListAddTestData', 'ProductAddTestData', 'ProductAddTagTestData' );
 	}
 
 

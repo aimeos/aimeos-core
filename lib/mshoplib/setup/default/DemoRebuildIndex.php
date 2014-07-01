@@ -29,7 +29,7 @@ class MW_Setup_Task_DemoRebuildIndex extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddLocaleDataDefault' );
+		return array( 'MShopSetLocale' );
 	}
 
 

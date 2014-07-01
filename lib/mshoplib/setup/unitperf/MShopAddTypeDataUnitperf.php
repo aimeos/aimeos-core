@@ -18,7 +18,7 @@ class MW_Setup_Task_MShopAddTypeDataUnitperf extends MW_Setup_Task_MShopAddTypeD
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'LocaleAddPerfData' );
+		return array( 'MShopSetLocale' );
 	}
 
 
