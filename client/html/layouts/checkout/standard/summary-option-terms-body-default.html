@@ -78,7 +78,7 @@ $termsAction = $this->config( 'client/html/checkout/standard/summary/option/term
  */
 $termsConfig = $this->config( 'client/html/checkout/standard/summary/option/terms/url/config', array() );
 
-$termsUrl = $this->url( $termsTarget, $termsController, $termsAction, array(), $termsConfig );
+$termsUrl = $this->url( $termsTarget, $termsController, $termsAction, array(), array(), $termsConfig );
 
 
 /** client/html/checkout/standard/summary/option/terms/privacy/url/target
@@ -152,7 +152,7 @@ $privacyAction = $this->config( 'client/html/checkout/standard/summary/option/te
  */
 $privacyConfig = $this->config( 'client/html/checkout/standard/summary/option/terms/privacy/url/config', array() );
 
-$privacyUrl = $this->url( $privacyTarget, $privacyController, $privacyAction, array(), $privacyConfig );
+$privacyUrl = $this->url( $privacyTarget, $privacyController, $privacyAction, array(), array(), $privacyConfig );
 
 ?>
 <div class="checkout-standard-summary-option-terms">
