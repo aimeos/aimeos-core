@@ -80,6 +80,18 @@ class Client_Html_Common_Decorator_ExampleTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testModifyBody()
+	{
+		$this->assertEquals( 'test', $this->_object->modifyBody( 'test' ) );
+	}
+
+
+	public function testModifyHeader()
+	{
+		$this->assertEquals( 'test', $this->_object->modifyHeader( 'test' ) );
+	}
+
+
 	public function testProcess()
 	{
 		$this->_object->process();

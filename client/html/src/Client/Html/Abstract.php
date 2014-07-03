@@ -81,6 +81,46 @@ abstract class Client_Html_Abstract
 
 
 	/**
+	 * Modifies the cached body content to replace content based on sessions or cookies.
+	 *
+	 * @param string $content Cached content
+	 * @return string Modified body content
+	 */
+	public function modifyBody( $content )
+	{
+		$view = $this->getView();
+
+		foreach( $this->_getSubClients() as $subclient )
+		{
+			$subclient->setView( $view );
+			$content = $subclient->modifyBody( $content );
+		}
+
+		return $content;
+	}
+
+
+	/**
+	 * Modifies the cached header content to replace content based on sessions or cookies.
+	 *
+	 * @param string $content Cached content
+	 * @return string Modified header content
+	 */
+	public function modifyHeader( $content )
+	{
+		$view = $this->getView();
+
+		foreach( $this->_getSubClients() as $subclient )
+		{
+			$subclient->setView( $view );
+			$content = $subclient->modifyHeader( $content );
+		}
+
+		return $content;
+	}
+
+
+	/**
 	 * Processes the input, e.g. store given values.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.

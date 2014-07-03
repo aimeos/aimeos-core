@@ -64,6 +64,22 @@ interface Client_Html_Interface
 	public function isCachable( $what );
 
 	/**
+	 * Modifies the cached body content to replace content based on sessions or cookies.
+	 *
+	 * @param string $content Cached content
+	 * @return string Modified body content
+	 */
+	public function modifyBody( $content );
+
+	/**
+	 * Modifies the cached header content to replace content based on sessions or cookies.
+	 *
+	 * @param string $content Cached content
+	 * @return string Modified header content
+	 */
+	public function modifyHeader( $content );
+
+	/**
 	 * Processes the input, e.g. store given values.
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.

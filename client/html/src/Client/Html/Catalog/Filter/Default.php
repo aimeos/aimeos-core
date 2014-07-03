@@ -172,6 +172,10 @@ class Client_Html_Catalog_Filter_Default
 
 			$cache->set( $key, $html, array_unique( $tags ), $expire );
 		}
+		else
+		{
+			$this->modifyBody( $html );
+		}
 
 		return $html;
 	}
@@ -238,6 +242,10 @@ class Client_Html_Catalog_Filter_Default
 			{
 				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
+		}
+		else
+		{
+			$this->modifyHeader( $html );
 		}
 
 		return $html;
