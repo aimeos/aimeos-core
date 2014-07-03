@@ -147,6 +147,10 @@ class Client_Html_Basket_Mini_Default
 			$session->set( 'arcavias/basket/cache', $cached );
 			$session->set( $key, $html );
 		}
+		else
+		{
+			$this->modifyBody( $html );
+		}
 
 		return $html;
 	}
@@ -162,46 +166,65 @@ class Client_Html_Basket_Mini_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		try
-		{
-			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$context = $this->_getContext();
+		$session = $context->getSession();
+		$view = $this->getView();
 
-			$html = '';
-			foreach( $this->_getSubClients() as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
+		$key = 'arcavias/basket/mini/header';
+
+		if( ( $html = $session->get( $key ) ) === null )
+		{
+			try
+			{
+				$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+
+				$html = '';
+				foreach( $this->_getSubClients() as $subclient ) {
+					$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
+				}
+				$view->miniHeader = $html;
+
+				/** client/html/basket/mini/default/template-header
+				 * Relative path to the HTML header template of the basket mini client.
+				 *
+				 * The template file contains the HTML code and processing instructions
+				 * to generate the HTML code that is inserted into the HTML page header
+				 * of the rendered page in the frontend. The configuration string is the
+				 * path to the template file relative to the layouts directory (usually
+				 * in client/html/layouts).
+				 *
+				 * You can overwrite the template file configuration in extensions and
+				 * provide alternative templates. These alternative templates should be
+				 * named like the default one but with the string "default" replaced by
+				 * an unique name. You may use the name of your project for this. If
+				 * you've implemented an alternative client class as well, "default"
+				 * should be replaced by the name of the new class.
+				 *
+				 * @param string Relative path to the template creating code for the HTML page head
+				 * @since 2014.03
+				 * @category Developer
+				 * @see client/html/basket/mini/default/template-body
+				 */
+				$tplconf = 'client/html/basket/mini/default/template-header';
+				$default = 'basket/mini/header-default.html';
+
+				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+
+				$cached = $session->get( 'arcavias/basket/cache', array() ) + array( 'arcavias/basket/mini/header' => true );
+				$session->set( 'arcavias/basket/cache', $cached );
+				$session->set( $key, $html );
 			}
-			$view->miniHeader = $html;
-
-			/** client/html/basket/mini/default/template-header
-			 * Relative path to the HTML header template of the basket mini client.
-			 *
-			 * The template file contains the HTML code and processing instructions
-			 * to generate the HTML code that is inserted into the HTML page header
-			 * of the rendered page in the frontend. The configuration string is the
-			 * path to the template file relative to the layouts directory (usually
-			 * in client/html/layouts).
-			 *
-			 * You can overwrite the template file configuration in extensions and
-			 * provide alternative templates. These alternative templates should be
-			 * named like the default one but with the string "default" replaced by
-			 * an unique name. You may use the name of your project for this. If
-			 * you've implemented an alternative client class as well, "default"
-			 * should be replaced by the name of the new class.
-			 *
-			 * @param string Relative path to the template creating code for the HTML page head
-			 * @since 2014.03
-			 * @category Developer
-			 * @see client/html/basket/mini/default/template-body
-			 */
-			$tplconf = 'client/html/basket/mini/default/template-header';
-			$default = 'basket/mini/header-default.html';
-
-			return $view->render( $this->_getTemplate( $tplconf, $default ) );
+			catch( Exception $e )
+			{
+				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			}
 		}
-		catch( Exception $e )
+		else
 		{
-			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+			$this->modifyHeader( $html );
 		}
+
+		return $html;
 	}
 
 

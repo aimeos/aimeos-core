@@ -229,7 +229,7 @@ abstract class Controller_ExtJS_Abstract
 		$tags = array( $domain );
 
 		foreach( $ids as $id ) {
-			$tags[] = $domain . ':' . $id;
+			$tags[] = $domain . '-' . $id;
 		}
 
 		$this->_context->getCache()->deleteByTags( $tags );
