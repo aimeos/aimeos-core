@@ -203,7 +203,7 @@ abstract class Client_Html_Abstract
 
 
 		if( $tagAll === true ) {
-			$tags[] = $domain . ':' . $item->getId();
+			$tags[] = $domain . '-' . $item->getId();
 		} else {
 			$tags[] = $domain;
 		}
@@ -217,7 +217,7 @@ abstract class Client_Html_Abstract
 			foreach( $item->getListItems( $name ) as $listitem )
 			{
 				if( $tagAll === true ) {
-					$tags[] = $listitem->getDomain() . ':' . $listitem->getRefId();
+					$tags[] = $listitem->getDomain() . '-' . $listitem->getRefId();
 				}
 
 				if( ( $date = $listitem->getDateEnd() ) !== null ) {
