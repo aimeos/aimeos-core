@@ -299,6 +299,24 @@ abstract class MShop_Common_Manager_Type_Abstract
 
 
 	/**
+	 * Returns the search attribute objects used for searching.
+	 *
+	 * @param array $list Associative list of search keys and the lists of search definitions
+	 * @param string $path Configuration path to the sub-domains for fetching the search definitions
+	 * @param array $default List of sub-domains if no others are configured
+	 * @param boolean $withsub True to include search definitions of sub-domains, false if not
+	 * @return array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
+	 * @since 2014.09
+	 */
+	protected function _getSearchAttributes( array $list, $path, array $default, $withsub )
+	{
+		$list += $this->_getSearchConfig();
+
+		return parent::_getSearchAttributes( $list, $path, $default, $withsub );
+	}
+
+
+	/**
 	 * Creates new type item object.
 	 *
 	 * @param array $values Associative list of key/value pairs
