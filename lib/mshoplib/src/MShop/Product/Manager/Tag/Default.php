@@ -331,39 +331,26 @@ class MShop_Product_Manager_Tag_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$list = array();
+		/** classes/product/manager/submanagers
+		 * List of manager names that can be instantiated by the product tag manager
+		 *
+		 * Managers provide a generic interface to the underlying storage.
+		 * Each manager has or can have sub-managers caring about particular
+		 * aspects. Each of these sub-managers can be instantiated by its
+		 * parent manager using the getSubManager() method.
+		 *
+		 * The search keys from sub-managers can be normally used in the
+		 * manager as well. It allows you to search for items of the manager
+		 * using the search keys of the sub-managers to further limit the
+		 * retrieved list of items.
+		 *
+		 * @param array List of sub-manager names
+		 * @since 2014.03
+		 * @category Developer
+		 */
+		$path = 'classes/product/manager/tag/submanagers';
 
-		foreach( $this->_searchConfig as $key => $fields ) {
-			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
-		}
-
-		if( $withsub === true )
-		{
-			/** classes/product/manager/submanagers
-			 * List of manager names that can be instantiated by the product tag manager
-			 *
-			 * Managers provide a generic interface to the underlying storage.
-			 * Each manager has or can have sub-managers caring about particular
-			 * aspects. Each of these sub-managers can be instantiated by its
-			 * parent manager using the getSubManager() method.
-			 *
-			 * The search keys from sub-managers can be normally used in the
-			 * manager as well. It allows you to search for items of the manager
-			 * using the search keys of the sub-managers to further limit the
-			 * retrieved list of items.
-			 *
-			 * @param array List of sub-manager names
-			 * @since 2014.03
-			 * @category Developer
-			 */
-			$path = 'classes/product/manager/tag/submanagers';
-
-			foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
-				$list = array_merge( $list, $this->getSubManager( $domain )->getSearchAttributes() );
-			}
-		}
-
-		return $list;
+		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 
