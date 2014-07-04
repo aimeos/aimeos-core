@@ -168,7 +168,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 	{
 		$context = $this->_getContext();
 		$cache = $context->getCache();
-		$key = 'product:' . $id . ':detail-seen';
+		$key = md5( $id . 'product:detail-seen' );
 
 		if( ( $html = $cache->get( $key ) ) === null )
 		{
