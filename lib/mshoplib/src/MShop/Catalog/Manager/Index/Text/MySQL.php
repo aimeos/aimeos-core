@@ -96,12 +96,7 @@ class MShop_Catalog_Manager_Index_Text_MySQL
 	 */
 	public function createSearch( $default = false )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		$object = new MW_Common_Criteria_MySQL( $conn );
-
-		$dbm->release( $conn );
+		$object = new MW_Common_Criteria_MySQL( new MW_DB_Connection_None() );
 
 		if( $default === true ) {
 			$object->setConditions( parent::createSearch( $default )->getConditions() );
