@@ -68,6 +68,8 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @deprecated Use _getSearchAttributes() instead
+	 * @todo 2015.03 Remove method
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
