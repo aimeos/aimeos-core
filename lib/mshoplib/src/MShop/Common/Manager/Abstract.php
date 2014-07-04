@@ -53,15 +53,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 */
 	public function createSearch( $default = false )
 	{
-		$dbm = $this->_context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		$object = new MW_Common_Criteria_SQL( $conn );
-
-		$dbm->release( $conn, $dbname );
-
-		return $object;
+		return new MW_Common_Criteria_SQL( new MW_DB_Connection_None() );
 	}
 
 

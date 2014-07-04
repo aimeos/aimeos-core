@@ -16,9 +16,6 @@ class MShop_Catalog_Manager_Index_Price_Default
 	extends MShop_Common_Manager_Abstract
 	implements MShop_Catalog_Manager_Index_Price_Interface
 {
-	private $_productManager;
-	private $_submanagers = array();
-
 	private $_searchConfig = array(
 		'catalog.index.price.id' => array(
 			'code'=>'catalog.index.price.id',
@@ -114,8 +111,6 @@ class MShop_Catalog_Manager_Index_Price_Default
 		parent::__construct( $context );
 		$this->_setResourceName( 'db-product' );
 
-		$this->_productManager = MShop_Product_Manager_Factory::createManager( $context );
-
 
 		$site = $context->getLocale()->getSitePath();
 		$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_INT );
@@ -134,13 +129,6 @@ class MShop_Catalog_Manager_Index_Price_Default
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.costs'], 'mcatinpr."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.rebate'], 'mcatinpr."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.taxrate'], 'mcatinpr."siteid"', $site );
-
-
-		$confpath = 'mshop/catalog/manager/index/price/default/submanagers';
-
-		foreach( $context->getConfig()->get( $confpath, array() ) as $domain ) {
-			$this->_submanagers[ $domain ] = $this->getSubManager( $domain );
-		}
 	}
 
 
@@ -164,9 +152,8 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/catalog/manager/index/price/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+		foreach( $this->_getSubManagers() as $submanager ) {
+			$submanager->cleanup( $siteids );
 		}
 
 		$this->_cleanup( $siteids, 'mshop/catalog/manager/index/price/default/item/delete' );
@@ -180,7 +167,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function createItem()
 	{
-		return $this->_productManager->createItem();
+		return MShop_Factory::createManager( $this->_getContext(), 'product' )->createItem();
 	}
 
 
@@ -192,7 +179,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function createSearch( $default = false )
 	{
-		return $this->_productManager->createSearch( $default );
+		return MShop_Factory::createManager( $this->_getContext(), 'product' )->createSearch( $default );
 	}
 
 
@@ -205,7 +192,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	{
 		if( empty( $ids ) ) { return; }
 
-		foreach( $this->_submanagers as $submanager ) {
+		foreach( $this->_getSubManagers() as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}
 
@@ -224,7 +211,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_productManager->getItem( $id, $ref );
+		return MShop_Factory::createManager( $this->_getContext(), 'product' )->getItem( $id, $ref );
 	}
 
 
@@ -236,18 +223,27 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		foreach( $this->_searchConfig as $key => $fields ) {
-			$list[ $key ] = new MW_Common_Criteria_Attribute_Default( $fields );
-		}
+		/** classes/catalog/manager/index/price/submanagers
+		 * List of manager names that can be instantiated by the catalog index price manager
+		 *
+		 * Managers provide a generic interface to the underlying storage.
+		 * Each manager has or can have sub-managers caring about particular
+		 * aspects. Each of these sub-managers can be instantiated by its
+		 * parent manager using the getSubManager() method.
+		 *
+		 * The search keys from sub-managers can be normally used in the
+		 * manager as well. It allows you to search for items of the manager
+		 * using the search keys of the sub-managers to further limit the
+		 * retrieved list of items.
+		 *
+		 * @param array List of sub-manager names
+		 * @since 2014.03
+		 * @category Developer
+		 */
+		$path = 'classes/catalog/manager/index/price/submanagers';
 
-		$list = array_merge( $list, $this->_productManager->getSearchAttributes( $withsub ) );
-
-		if( $withsub === true )
-		{
-			foreach( $this->_submanagers as $submanager ) {
-				$list = array_merge( $list, $submanager->getSearchAttributes( $withsub ) );
-			}
-		}
+		$list = $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		$list += MShop_Factory::createManager( $this->_getContext(), 'product' )->getSearchAttributes( $withsub );
 
 		return $list;
 	}
@@ -404,8 +400,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 			throw $e;
 		}
 
-
-		foreach( $this->_submanagers as $submanager ) {
+		foreach( $this->_getSubManagers() as $submanager ) {
 			$submanager->optimize();
 		}
 	}
@@ -449,7 +444,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 
 		$this->commit();
 
-		foreach ( $this->_submanagers as $submanager ) {
+		foreach ( $this->_getSubManagers() as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
 		}
 	}
@@ -529,7 +524,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 		}
 
 
-		foreach( $this->_submanagers as $submanager ) {
+		foreach( $this->_getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
 		}
 	}
@@ -585,9 +580,10 @@ class MShop_Catalog_Manager_Index_Price_Default
 			throw $e;
 		}
 
-		$search = $this->_productManager->createSearch();
+		$manager = MShop_Factory::createManager( $context, 'product' );
+		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
-		$products = $this->_productManager->searchItems( $search, $ref, $total );
+		$products = $manager->searchItems( $search, $ref, $total );
 
 		foreach( $ids as $id )
 		{
@@ -597,5 +593,23 @@ class MShop_Catalog_Manager_Index_Price_Default
 		}
 
 		return $items;
+	}
+
+
+	/**
+	 * Returns the list of sub-managers available for the catalog index attribute manager.
+	 *
+	 * @return array Associative list of the sub-domain as key and the manager object as value
+	 */
+	protected function _getSubManagers()
+	{
+		$list = array();
+		$path = 'classes/catalog/manager/index/price/submanagers';
+
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$list[$domain] = $this->getSubManager( $domain );
+		}
+
+		return $list;
 	}
 }
