@@ -284,13 +284,12 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 * @param array $default List of sub-domains if no others are configured
 	 * @param boolean $withsub True to include search definitions of sub-domains, false if not
 	 * @return array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
+	 * @todo 2015.03 Remove method as it's a workaround for backward compatibility
 	 * @since 2014.09
 	 */
 	protected function _getSearchAttributes( array $list, $path, array $default, $withsub )
 	{
-		$list += $this->_getSearchConfig();
-
-		return parent::_getSearchAttributes( $list, $path, $default, $withsub );
+		return parent::_getSearchAttributes( $this->_getSearchConfig(), $path, $default, $withsub );
 	}
 
 
