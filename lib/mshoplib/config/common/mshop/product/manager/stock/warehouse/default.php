@@ -7,28 +7,30 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_product_stock_warehouse"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_product_stock_warehouse" ( "siteid", "code", "label", "status", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_product_stock_warehouse" (
+				"siteid", "code", "label", "status", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_product_stock_warehouse"
-			SET "siteid" = ?, "code" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "code" = ?, "label" = ?, "status" = ?,
+				"mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE
-			FROM "mshop_product_stock_warehouse"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT mprostwa."id", mprostwa."siteid", mprostwa."code", mprostwa."label", mprostwa."status",
-				mprostwa."mtime", mprostwa."editor", mprostwa."ctime"
+			SELECT DISTINCT mprostwa."id", mprostwa."siteid", mprostwa."code",
+				mprostwa."label", mprostwa."status", mprostwa."mtime",
+				mprostwa."editor", mprostwa."ctime"
 			FROM "mshop_product_stock_warehouse" AS mprostwa
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',

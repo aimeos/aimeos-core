@@ -9,21 +9,28 @@ return array(
 	'delete' => '
 		DELETE FROM "madmin_job"
 		WHERE :cond
-		AND siteid = ?
+		AND "siteid" = ?
 	',
 	'insert' => '
-		INSERT INTO "madmin_job" ("siteid", "label", "method", "parameter", "result", "status", "editor", "mtime", "ctime")
-		VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+		INSERT INTO "madmin_job" (
+			"siteid", "label", "method", "parameter", "result", "status",
+			"editor", "mtime", "ctime"
+		) VALUES (
+			?, ?, ?, ?, ?, ?, ?, ?, ?
+		)
 	',
 	'update' => '
 		UPDATE "madmin_job"
-		SET "siteid" = ?, "label" = ?, "method" = ?, "parameter" = ?, "result" = ?, "status" = ?, "editor" = ?, "mtime" = ?
+		SET "siteid" = ?, "label" = ?, "method" = ?, "parameter" = ?,
+			"result" = ?, "status" = ?, "editor" = ?, "mtime" = ?
 		WHERE "id" = ?
 	',
 	'search' => '
-		SELECT majob."id", majob."siteid", majob."label", majob."method", majob."parameter",
-			majob."result", majob."status", majob."editor", majob."mtime", majob."ctime"
+		SELECT DISTINCT majob."id", majob."siteid", majob."label",
+			majob."method", majob."parameter", majob."result", majob."status",
+			majob."editor", majob."mtime", majob."ctime"
 		FROM "madmin_job" AS majob
+		:joins
 		WHERE :cond
 		/*-orderby*/ ORDER BY :order /*orderby-*/
 		LIMIT :size OFFSET :start
@@ -33,6 +40,7 @@ return array(
 		FROM(
 			SELECT DISTINCT majob."id"
 			FROM "madmin_job" AS majob
+			:joins
 			WHERE :cond
 			LIMIT 10000 OFFSET 0
 		) AS list

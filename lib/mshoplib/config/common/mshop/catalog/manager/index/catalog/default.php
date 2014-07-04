@@ -7,11 +7,17 @@
 
 return array(
 	'item' => array(
-		'delete' => 'DELETE FROM "mshop_catalog_index_catalog" WHERE :cond AND "siteid" = ?',
+		'delete' => '
+			DELETE FROM "mshop_catalog_index_catalog"
+			WHERE :cond AND "siteid" = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_catalog_index_catalog" ("prodid", "siteid", "catid", "listtype", "pos",
-				"mtime", "editor", "ctime")
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_catalog_index_catalog" (
+				"prodid", "siteid", "catid", "listtype", "pos", "mtime",
+				"editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'search' => '
 			SELECT DISTINCT mpro."id"
@@ -33,6 +39,7 @@ return array(
 		',
 	),
 	'cleanup' => '
-		DELETE FROM "mshop_catalog_index_catalog" WHERE "ctime" < ? AND "siteid" = ?
+		DELETE FROM "mshop_catalog_index_catalog"
+		WHERE "ctime" < ? AND "siteid" = ?
 	',
 );

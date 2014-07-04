@@ -9,21 +9,25 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_supplier"
-			WHERE :cond
-			AND siteid = ?
+			WHERE :cond AND siteid = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_supplier" ("siteid", "code", "label", "status", "mtime", "editor", "ctime")
-			VALUES ( ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_supplier" (
+				"siteid", "code", "label", "status", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_supplier"
-			SET "siteid" = ?, "code" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "code" = ?, "label" = ?, "status" = ?,
+				"mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT DISTINCT msup."id", msup."siteid", msup."code", msup."label", msup."status",
-				msup."mtime", msup."editor", msup."ctime"
+			SELECT DISTINCT msup."id", msup."siteid", msup."code",
+				msup."label", msup."status", msup."mtime", msup."editor",
+				msup."ctime"
 			FROM "mshop_supplier" AS msup
 			:joins
 			WHERE :cond

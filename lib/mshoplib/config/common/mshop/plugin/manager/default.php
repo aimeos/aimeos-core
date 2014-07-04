@@ -7,27 +7,32 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_plugin"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_plugin"( "siteid", "typeid", "label", "provider", "config", "pos", "status", "mtime", "editor", "ctime")
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_plugin"(
+				"siteid", "typeid", "label", "provider", "config", "pos",
+				"status", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_plugin"
-			SET "siteid" = ?, "typeid" = ?, "label" = ?, "provider" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "typeid" = ?, "label" = ?, "provider" = ?,
+				"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?,
+				"editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_plugin"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT DISTINCT mplu."id", mplu."siteid", mplu."typeid", mplu."label", mplu."provider",
-				mplu."config", mplu."pos", mplu."status", mplu."mtime", mplu."editor", mplu."ctime"
+			SELECT DISTINCT mplu."id", mplu."siteid", mplu."typeid",
+				mplu."label", mplu."provider", mplu."config", mplu."pos",
+				mplu."status", mplu."mtime", mplu."editor", mplu."ctime"
 			FROM "mshop_plugin" mplu
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',

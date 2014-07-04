@@ -7,28 +7,31 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_product_tag"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_product_tag"( "siteid", "langid", "typeid", "label", "mtime", "editor", "ctime" )
-			VALUES( ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_product_tag" (
+				"siteid", "langid", "typeid", "label", "mtime", "editor",
+				"ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_product_tag"
-			SET "siteid" = ?, "langid" = ?, "typeid" = ?, "label" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "langid" = ?, "typeid" = ?, "label" = ?,
+				"mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE
-			FROM "mshop_product_tag"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT mprota."id", mprota."siteid", mprota."typeid", mprota."langid", mprota."label",
-				mprota."mtime", mprota."editor", mprota."ctime"
+			SELECT DISTINCT mprota."id", mprota."siteid", mprota."typeid",
+				mprota."langid", mprota."label", mprota."mtime",
+				mprota."editor", mprota."ctime"
 			FROM "mshop_product_tag" AS mprota
 			:joins
-			WHERE
-				:cond
+			WHERE :cond
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',

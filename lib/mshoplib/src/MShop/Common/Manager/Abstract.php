@@ -20,6 +20,8 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	private $_resourceName;
 	private $_stmts = array();
 	private $_keySeparator = '.';
+	private $_subManagers = array();
+	private $_searchAttributes = array();
 
 
 	/**
@@ -267,6 +269,49 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 
 	/**
+	 * Returns the search attribute objects used for searching.
+	 *
+	 * @param array $list Associative list of search keys and the lists of search definitions
+	 * @param string $path Configuration path to the sub-domains for fetching the search definitions
+	 * @param array $default List of sub-domains if no others are configured
+	 * @param boolean $withsub True to include search definitions of sub-domains, false if not
+	 * @return array Associative list of search keys and objects implementing the MW_Common_Criteria_Attribute_Interface
+	 */
+	protected function _getSearchAttributes( array $list, $path, array $default, $withsub )
+	{
+		if( !isset( $this->_searchAttributes[0] ) )
+		{
+			$attr = array();
+
+			foreach( $list as $key => $fields ) {
+				$attr[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
+			}
+
+			$this->_searchAttributes[0] = $attr;
+		}
+
+		if( $withsub === true )
+		{
+			if( !isset( $this->_searchAttributes[1] ) )
+			{
+				$attr = $this->_searchAttributes[0];
+				$domains = $this->_context->getConfig()->get( $path, $default );
+
+				foreach( $domains as $domain ) {
+					$attr += $this->getSubManager( $domain )->getSearchAttributes( true );
+				}
+
+				$this->_searchAttributes[1] = $attr;
+			}
+
+			return $this->_searchAttributes[1];
+		}
+
+		return $this->_searchAttributes[0];
+	}
+
+
+	/**
 	 * Returns a new manager the given extension name.
 	 *
 	 * @param string $domain Name of the domain (product, text, media, etc.)
@@ -278,42 +323,47 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );
+		$key = $domain . $manager . $name;
 
+		if( !isset( $this->_subManagers[$key] ) )
+		{
+			if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
+				throw new MShop_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
+			}
 
-		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
+			if( preg_match( '/^[a-z0-9\/]+$/', $manager ) !== 1 ) {
+				throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
+			}
+
+			if( $name === null ) {
+				$path = 'classes/' . $domain . '/manager/' . $manager . '/name';
+				$name = $this->_context->getConfig()->get( $path, 'Default' );
+			}
+
+			if( empty( $name ) || ctype_alnum( $name ) === false ) {
+				throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
+			}
+
+			$domainname = ucfirst( $domain );
+			$subnames = $this->_createSubNames( $manager );
+
+			$classname = 'MShop_'. $domainname . '_Manager_' . $subnames . '_' . $name;
+			$interface = 'MShop_'. $domainname . '_Manager_' . $subnames . '_Interface';
+
+			if( class_exists( $classname ) === false ) {
+				throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			}
+
+			$subManager = new $classname( $this->_context );
+
+			if( ( $subManager instanceof $interface ) === false ) {
+				throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+			}
+
+			$this->_subManagers[$key] = $this->_addManagerDecorators( $subManager, $manager, $domain );
 		}
 
-		if( preg_match( '/^[a-z0-9\/]+$/', $manager ) !== 1 ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
-		}
-
-		if( $name === null ) {
-			$path = 'classes/' . $domain . '/manager/' . $manager . '/name';
-			$name = $this->_context->getConfig()->get( $path, 'Default' );
-		}
-
-		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new MShop_Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
-		}
-
-		$domainname = ucfirst( $domain );
-		$subnames = $this->_createSubNames( $manager );
-
-		$classname = 'MShop_'. $domainname . '_Manager_' . $subnames . '_' . $name;
-		$interface = 'MShop_'. $domainname . '_Manager_' . $subnames . '_Interface';
-
-		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
-		}
-
-		$subManager = new $classname( $this->_context );
-
-		if( ( $subManager instanceof $interface ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
-		}
-
-		return $this->_addManagerDecorators( $subManager, $manager, $domain );
+		return $this->_subManagers[$key];
 	}
 
 

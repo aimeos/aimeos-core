@@ -9,21 +9,25 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_locale_language"
-			WHERE :cond
-			AND siteid = ?
+			WHERE :cond AND siteid = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_locale_language" ("label", "status", "siteid", "mtime", "editor", "id", "ctime")
-			VALUES( ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_locale_language" (
+				"label", "status", "siteid", "mtime", "editor", "id", "ctime"
+			) VALUES(
+				?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_locale_language"
-			SET "label" = ?, "status" = ?, "siteid"=?, "mtime" = ?, "editor" = ?
+			SET "label" = ?, "status" = ?, "siteid"=?, "mtime" = ?,
+				"editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT mlocla."id", mlocla."label", mlocla."siteid", mlocla."status",
-				mlocla."mtime", mlocla."editor", mlocla."ctime"
+			SELECT DISTINCT mlocla."id", mlocla."label", mlocla."siteid",
+				mlocla."status", mlocla."mtime", mlocla."editor",
+				mlocla."ctime"
 			FROM "mshop_locale_language" AS mlocla
 			WHERE :cond
 			ORDER BY :order

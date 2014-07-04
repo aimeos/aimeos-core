@@ -7,24 +7,28 @@
 
 return array(
 	'item' => array(
+		'delete' => '
+			DELETE FROM "mshop_product_list_type"
+			WHERE :cond AND siteid = ?
+		',
 		'insert' => '
-			INSERT INTO "mshop_product_list_type"( "siteid", "code", "domain", "label", "status",
-				"mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_product_list_type" (
+				"siteid", "code", "domain", "label", "status", "mtime",
+				"editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_product_list_type"
-			SET "siteid"=?, "code" = ?, "domain" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?,
+				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
-			DELETE FROM "mshop_product_list_type"
-			WHERE :cond
-			AND siteid = ?
-		',
 		'search' => '
-			SELECT mprolity."id", mprolity."siteid", mprolity."code", mprolity."domain", mprolity."label",
-				mprolity."status", mprolity."mtime", mprolity."editor", mprolity."ctime"
+			SELECT DISTINCT mprolity."id", mprolity."siteid", mprolity."code",
+				mprolity."domain", mprolity."label", mprolity."status",
+				mprolity."mtime", mprolity."editor", mprolity."ctime"
 			FROM "mshop_product_list_type" AS mprolity
 			:joins
 			WHERE :cond

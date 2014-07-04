@@ -9,24 +9,28 @@ return array(
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_product"
-			WHERE :cond
-			AND siteid = ?
+			WHERE :cond AND siteid = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_product" ( "siteid", "typeid", "code", "suppliercode", "label", "status",
-				"start", "end", "mtime", "editor", "ctime" )
-			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_product" (
+				"siteid", "typeid", "code", "suppliercode", "label", "status",
+				"start", "end", "mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_product"
-			SET "siteid" = ?, "typeid" = ?, "code" = ?, "suppliercode" = ?, "label" = ?, "status" = ?,
-				"start" = ?, "end" = ?, "mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "typeid" = ?, "code" = ?, "suppliercode" = ?,
+				"label" = ?, "status" = ?, "start" = ?, "end" = ?, "mtime" = ?,
+				"editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT DISTINCT mpro."id", mpro."siteid", mpro."typeid", mpro."label",
-				mpro."status", mpro."start", mpro."end", mpro."code", mpro."suppliercode",
-				mpro."ctime", mpro."mtime", mpro."editor"
+			SELECT DISTINCT mpro."id", mpro."siteid", mpro."typeid",
+				mpro."label", mpro."status", mpro."start", mpro."end",
+				mpro."code", mpro."suppliercode", mpro."ctime", mpro."mtime",
+				mpro."editor"
 			FROM "mshop_product" AS mpro
 			:joins
 			WHERE :cond

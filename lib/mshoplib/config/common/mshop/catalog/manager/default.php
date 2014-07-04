@@ -12,20 +12,25 @@ return array(
 			WHERE "siteid" = :siteid AND "nleft" >= ? AND "nright" <= ?
 		',
 		'get' => '
-			SELECT
-				mcat."id", mcat."label", mcat."config", mcat."code", mcat."status", mcat."level",
-				mcat."parentid", mcat."siteid", mcat."nleft" AS "left", mcat."nright" AS "right",
-				mcat."mtime", mcat."editor", mcat."ctime"
+			SELECT DISTINCT mcat."id", mcat."label", mcat."config",
+				mcat."code", mcat."status", mcat."level", mcat."parentid",
+				mcat."siteid", mcat."nleft" AS "left",
+				mcat."nright" AS "right", mcat."mtime", mcat."editor",
+				mcat."ctime"
 			FROM "mshop_catalog" AS mcat, "mshop_catalog" AS parent
-			WHERE
-				mcat."siteid" = :siteid AND mcat."nleft" >= parent."nleft" AND mcat."nleft" <= parent."nright"
-				AND parent."siteid" = :siteid AND parent."id" = ? AND mcat."level" <= parent."level" + ?
-				AND :cond
+			WHERE mcat."siteid" = :siteid AND mcat."nleft" >= parent."nleft"
+				AND mcat."nleft" <= parent."nright"
+				AND parent."siteid" = :siteid AND parent."id" = ?
+				AND mcat."level" <= parent."level" + ? AND :cond
 			ORDER BY mcat."nleft"
 		',
 		'insert' => '
-			INSERT INTO "mshop_catalog" ( "siteid", "label", "code", "status", "parentid", "level", "nleft", "nright" )
-			VALUES ( :siteid, ?, ?, ?, ?, ?, ?, ? )
+			INSERT INTO "mshop_catalog" (
+				"siteid", "label", "code", "status", "parentid", "level",
+				"nleft", "nright"
+			) VALUES (
+				:siteid, ?, ?, ?, ?, ?, ?, ?
+			)
 		',
 		'update' => '
 			UPDATE "mshop_catalog"
@@ -48,17 +53,18 @@ return array(
 			WHERE "siteid" = :siteid AND "nright" >= ? AND "nright" <= ?
 		',
 		'search' => '
-			SELECT
-				mcat."id", mcat."label", mcat."config", mcat."code", mcat."status", mcat."level",
-				mcat."siteid", mcat."nleft" AS "left", mcat."nright" AS "right",
+			SELECT DISTINCT mcat."id", mcat."label", mcat."config",
+				mcat."code", mcat."status", mcat."level", mcat."siteid",
+				mcat."nleft" AS "left", mcat."nright" AS "right",
 				mcat."mtime", mcat."editor", mcat."ctime"
 			FROM "mshop_catalog" AS mcat
-			WHERE mcat."siteid" = :siteid AND mcat."nleft" >= ? AND mcat."nright" <= ? AND :cond
+			WHERE mcat."siteid" = :siteid AND mcat."nleft" >= ?
+				AND mcat."nright" <= ? AND :cond
 			ORDER BY :order
 		',
 		'search-item' => '
-			SELECT DISTINCT
-				mcat."id", mcat."label", mcat."config", mcat."code", mcat."status", mcat."level", mcat."parentid",
+			SELECT DISTINCT mcat."id", mcat."label", mcat."config",
+				mcat."code", mcat."status", mcat."level", mcat."parentid",
 				mcat."siteid", mcat."nleft" AS "left", mcat."nright" AS "right",
 				mcat."mtime", mcat."editor", mcat."ctime"
 			FROM "mshop_catalog" AS mcat
