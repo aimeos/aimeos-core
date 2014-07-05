@@ -176,8 +176,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 
 			if( $customerId != '' && $addr->getAddressId() == '' )
 			{
-				$manager = MShop_Customer_Manager_Factory::createManager( $this->_getContext() );
-				$addrManager = $manager->getSubManager( 'address' );
+				$addrManager = MShop_Factory::createManager( $this->_getContext(), 'customer/address' );
 
 				$item = $addrManager->createItem();
 				$item->setRefId( $customerId );

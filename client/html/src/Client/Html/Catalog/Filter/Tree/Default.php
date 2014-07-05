@@ -186,7 +186,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
-			$manager = MShop_Catalog_Manager_Factory::createManager( $context );
+			$manager = MShop_Factory::createManager( $context, 'catalog' );
 
 			/** client/html/catalog/filter/tree/startid
 			 * The ID of the category node that should be the root of the displayed category tree

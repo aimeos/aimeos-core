@@ -358,7 +358,7 @@ class MShop_Catalog_Manager_Index_Default
 		}
 
 		// index categorized product items only
-		$catalogListManager = MShop_Catalog_Manager_Factory::createManager( $context )->getSubManager( 'list' );
+		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/list' );
 		$catalogSearch = $catalogListManager->createSearch( true );
 
 		$expr = array( $catalogSearch->compare( '==', 'catalog.list.domain', 'product' ) );

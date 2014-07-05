@@ -222,7 +222,7 @@ class Client_Html_Catalog_List_Simple
 
 			$input = $view->param( 'f-search-text' );
 
-			$controller = Controller_Frontend_Catalog_Factory::createController( $context );
+			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 
 			$filter = $controller->createTextFilter( $input );
 			$items = $controller->getTextList( $filter );

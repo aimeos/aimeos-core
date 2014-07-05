@@ -46,7 +46,7 @@ implements MShop_Service_Provider_Interface
 	 */
 	public function calcPrice( MShop_Order_Item_Base_Interface $basket )
 	{
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_context );
+		$priceManager = MShop_Factory::createManager( $this->_context, 'price' );
 		$prices = $this->_serviceItem->getRefItems( 'price', 'default', 'default' );
 
 		if( count( $prices ) > 0 ) {

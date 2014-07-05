@@ -168,7 +168,7 @@ abstract class MShop_Coupon_Provider_Abstract
 	 */
 	protected function _createProduct( $productCode, $quantity = 1, $warehouse = 'default' )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context );
+		$productManager = MShop_Factory::createManager( $this->_context, 'product' );
 		$search = $productManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'product.code', $productCode ) );
 		$products = $productManager->searchItems( $search, array( 'text', 'media', 'price' ) );
@@ -177,7 +177,7 @@ abstract class MShop_Coupon_Provider_Abstract
 			throw new MShop_Coupon_Exception( sprintf( 'No product with code "%1$s" found', $productCode ) );
 		}
 
-		$priceManager = MShop_Price_Manager_Factory::createManager( $this->_context );
+		$priceManager = MShop_Factory::createManager( $this->_context, 'price' );
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
 		if( empty( $prices ) ) {
@@ -187,9 +187,7 @@ abstract class MShop_Coupon_Provider_Abstract
 			$price = $priceManager->getLowestPrice( $prices, $quantity );
 		}
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
-		$orderBaseManager = $orderManager->getSubManager('base');
-		$orderBaseProductManager = $orderBaseManager->getSubManager('product');
+		$orderBaseProductManager = MShop_Factory::createManager( $this->_context, 'order/base/product' );
 		$orderProduct = $orderBaseProductManager->createItem();
 
 		$orderProduct->copyFrom( $product );

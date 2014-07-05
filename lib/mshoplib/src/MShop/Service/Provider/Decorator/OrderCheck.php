@@ -89,7 +89,7 @@ extends MShop_Service_Provider_Decorator_Abstract
 			return false;
 		}
 
-		$manager = MShop_Order_Manager_Factory::createManager( $context );
+		$manager = MShop_Factory::createManager( $context, 'order' );
 
 		if( isset( $config['ordercheck.total-number-min'] ) )
 		{

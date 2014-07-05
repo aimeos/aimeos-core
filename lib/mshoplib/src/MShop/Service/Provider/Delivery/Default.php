@@ -280,7 +280,7 @@ class MShop_Service_Provider_Delivery_Default
 	 */
 	public function buildXML( MShop_Order_Item_Interface $invoice )
 	{
-		$orderBaseManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() )->getSubManager( 'base' );
+		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 		$criteria = $orderBaseManager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.id', $invoice->getBaseId() ) );
 		$result = $orderBaseManager->searchItems( $criteria );

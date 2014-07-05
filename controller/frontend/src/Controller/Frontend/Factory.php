@@ -59,8 +59,6 @@ class Controller_Frontend_Factory
 	 */
 	static public function createController( MShop_Context_Item_Interface $context, $path )
 	{
-		$path = strtolower( trim( $path, "/ \n\t\r\0\x0B" ) );
-
 		if( empty( $path ) ) {
 			throw new Controller_Frontend_Exception( sprintf( 'Controller path is empty' ) );
 		}

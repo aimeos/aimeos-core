@@ -45,7 +45,7 @@ class MShop_Coupon_Provider_PercentRebate
 		}
 
 		$rebate = round( $sum * (float) $config['percentrebate.rebate'] / 100, 2 );
-		$price = MShop_Price_Manager_Factory::createManager( $this->_getContext() )->createItem();
+		$price = MShop_Factory::createManager( $this->_getContext(), 'price' )->createItem();
 		$price->setValue( -$rebate );
 		$price->setRebate( $rebate );
 

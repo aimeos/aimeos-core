@@ -319,7 +319,7 @@ class Client_Html_Catalog_Stage_Default
 			{
 				$context = $this->_getContext();
 				$config = $context->getConfig();
-				$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
 
 				$default = array( 'attribute', 'media', 'text' );
 

@@ -58,7 +58,7 @@ class MShop_Plugin_Provider_Order_Coupon
 		{
 			self::$_lock = true;
 
-			$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
+			$couponManager = MShop_Factory::createManager( $context, 'coupon' );
 			$search = $couponManager->createSearch();
 
 			foreach( $order->getCoupons() as $code => $products )

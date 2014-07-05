@@ -159,12 +159,12 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	public function createItem()
 	{
 		$context = $this->_getContext();
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$values = array('siteid'=> $context->getLocale()->getSiteId());
 
 		$base = $this->_createItem($priceManager->createItem(), clone $context->getLocale(), $values);
 
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
+		$pluginManager = MShop_Factory::createManager( $context, 'plugin' );
 		$pluginManager->register( $base, 'order' );
 
 		return $base;
@@ -440,8 +440,8 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$items = array();
 
 		$context = $this->_getContext();
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$localeManager = MShop_Factory::createManager( $context, 'locale' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();
@@ -514,7 +514,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			return $this->createItem();
 		}
 
-		MShop_Plugin_Manager_Factory::createManager( $context )->register( $order, 'order' );
+		MShop_Factory::createManager( $context, 'plugin' )->register( $order, 'order' );
 
 		return $order;
 	}
@@ -616,8 +616,8 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 			throw $e;
 		}
 
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$localeManager = MShop_Factory::createManager( $context, 'locale' );
 
 		$price = $priceManager->createItem();
 		$price->setCurrencyId( $row['currencyid'] );
@@ -1012,7 +1012,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$basket =  $this->_createItem( $price, $localeItem, $row );
 		$basket->setId( null );
 
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $this->_getContext() );
+		$pluginManager = MShop_Factory::createManager( $this->_getContext(), 'plugin' );
 		$pluginManager->register( $basket, 'order' );
 
 		foreach( $products as $item ) {

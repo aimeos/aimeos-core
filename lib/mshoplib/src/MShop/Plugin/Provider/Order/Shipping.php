@@ -72,7 +72,7 @@ class MShop_Plugin_Provider_Order_Shipping
 			return true;
 		}
 
-		$sum = MShop_Price_Manager_Factory::createManager( $context )->createItem();
+		$sum = MShop_Factory::createManager( $context, 'price' )->createItem();
 
 		foreach( $order->getProducts() as $product ) {
 			$sum->addItem( $product->getPrice(), $product->getQuantity() );

@@ -327,7 +327,7 @@ class Client_Html_Checkout_Standard_Order_Payment_Default
 		{
 			$service = $basket->getService( 'payment' );
 
-			$manager = MShop_Service_Manager_Factory::createManager( $context );
+			$manager = MShop_Factory::createManager( $context, 'service' );
 			$provider = $manager->getProvider( $manager->getItem( $service->getServiceId() ) );
 			$provider->injectGlobalConfigBE( $config );
 

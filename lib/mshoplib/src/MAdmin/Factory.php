@@ -34,8 +34,6 @@ class MAdmin_Factory
 	 */
 	static public function createManager( MShop_Context_Item_Interface $context, $path )
 	{
-		$path = strtolower( trim( $path, "/ \n\t\r\0\x0B" ) );
-
 		if( empty( $path ) ) {
 			throw new MAdmin_Exception( sprintf( 'Manager path is empty' ) );
 		}

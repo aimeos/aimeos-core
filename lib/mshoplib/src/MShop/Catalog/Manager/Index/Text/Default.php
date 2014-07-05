@@ -621,7 +621,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		if( empty( $prodIds ) ) { return; }
 
 
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $this->_getContext() );
+		$attrManager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
 		$search = $attrManager->createSearch(true);
 		$expr = array(
 			$search->compare( '==', 'attribute.id', array_keys( $prodIds ) ),

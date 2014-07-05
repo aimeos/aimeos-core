@@ -67,8 +67,7 @@ class MShop_Plugin_Provider_Order_ProductStock
 			$positions[$pr->getProductId()] = $position;
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$stockManager = $productManager->getSubManager('stock');
+		$stockManager = MShop_Factory::createManager( $context, 'product/stock' );
 
 		$search = $stockManager->createSearch();
 		$expr = array( $search->compare( '==', 'product.stock.productid', array_keys( $productQuantities ) ) );

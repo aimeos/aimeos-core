@@ -197,9 +197,7 @@ abstract class MShop_Service_Provider_Payment_Abstract
 			return;
 		}
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
-		$attributeManager = $orderServiceManager->getSubManager( 'attribute' );
+		$attributeManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service/attribute' );
 
 		$item = $attributeManager->createItem();
 		$item->setType( $type );

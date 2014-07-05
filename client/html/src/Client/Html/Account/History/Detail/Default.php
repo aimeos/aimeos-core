@@ -220,7 +220,7 @@ class Client_Html_Account_History_Detail_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
-			$manager = MShop_Order_Manager_Factory::createManager( $context );
+			$manager = MShop_Factory::createManager( $context, 'order' );
 
 			$orderId = $view->param( 'h-order-id', null );
 
@@ -242,7 +242,8 @@ class Client_Html_Account_History_Detail_Default
 					throw new Client_Html_Exception( sprintf( $msg, $orderId ) );
 				}
 
-				$view->summaryBasket = $manager->getSubManager( 'base' )->load( $orderItem->getBaseId() );
+				$baseManager = MShop_Factory::createManager( $context, 'order/base' );
+				$view->summaryBasket = $baseManager->load( $orderItem->getBaseId() );
 			}
 
 			$this->_cache = $view;

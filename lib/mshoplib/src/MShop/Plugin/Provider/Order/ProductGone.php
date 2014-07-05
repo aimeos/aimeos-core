@@ -62,7 +62,7 @@ class MShop_Plugin_Provider_Order_ProductGone
 			$productIds[] = $pr->getProductId();
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = MShop_Factory::createManager( $context, 'product' );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.id', $productIds ) );

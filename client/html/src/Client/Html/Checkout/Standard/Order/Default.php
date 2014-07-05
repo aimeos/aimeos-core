@@ -222,7 +222,7 @@ class Client_Html_Checkout_Standard_Order_Default
 			$basket->setCustomerId( $context->getUserId() );
 			$basket->finish();
 
-			$cntl = Controller_Frontend_Order_Factory::createController( $context );
+			$cntl = Controller_Frontend_Factory::createController( $context, 'order' );
 			$orderItem = $cntl->store( $basket );
 			$cntl->block( $orderItem );
 

@@ -57,9 +57,8 @@ class MShop_Plugin_Provider_Order_IntelligentSampling
 		$logger->log(__METHOD__ . ':: config: ' . print_r( $config, true ), MW_Logger_Abstract::DEBUG);
 
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $orderManager->getSubManager('base');
-		$orderProductManager = $orderBaseManager->getSubManager('product');
+		$orderManager = MShop_Factory::createManager( $context, 'order' );
+		$orderProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
 
 		$search = $orderManager->createSearch();
 		$expr[] = $search->compare( '==', 'order.base.customerid', $order->getCustomerId() );
@@ -122,7 +121,7 @@ class MShop_Plugin_Provider_Order_IntelligentSampling
 			}
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$search = $productManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'product.code', $sampleCode ) );
 		$products = $productManager->searchItems( $search );

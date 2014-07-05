@@ -165,8 +165,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	public function process( MShop_Order_Item_Interface $order )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
 		$orderBaseItem = $orderBaseManager->load( $order->getBaseId() );
 		$orderid = $order->getId();
@@ -199,8 +198,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	public function query( MShop_Order_Item_Interface $order )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
+		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
 		$baseid = $order->getBaseId();
 		$baseItem = $orderBaseManager->getItem( $baseid );
@@ -231,8 +230,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	public function capture( MShop_Order_Item_Interface $order )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
+		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
 		$baseid = $order->getBaseId();
 		$baseItem = $orderBaseManager->getItem( $baseid );
@@ -278,8 +277,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	public function refund( MShop_Order_Item_Interface $order )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
+		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
 		$baseid = $order->getBaseId();
 		$baseItem = $orderBaseManager->getItem( $baseid );
@@ -317,8 +316,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	public function cancel( MShop_Order_Item_Interface $order )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
+		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
 		$baseid = $order->getBaseId();
 		$baseItem = $orderBaseManager->getItem( $baseid );
@@ -373,8 +372,9 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		}
 
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderBaseManager = $orderManager->getSubManager('base');
+		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
+		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
+
 		$order = $orderManager->getItem( $additional['invoice'] );
 		$baseid = $order->getBaseId();
 		$baseItem = $orderBaseManager->getItem( $baseid );
@@ -426,8 +426,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	protected function _doExpressCheckoutPayment( $additional )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderBaseManager = $orderManager->getSubManager('base');
+		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
+		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
 		$order = $orderManager->getItem( $additional['orderid'] );
 		$baseid = $order->getBaseId();
@@ -499,10 +499,11 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * @param MShop_Order_Manager_Base_Interface $baseManager
 	 * @param MShop_Order_Item_Base_Interface $basket
 	 * @param array $additional
+	 * @todo 2016.03 Remove $baseManager parameter
 	 */
 	protected function _checkIPN( $baseManager, $basket, $additional )
 	{
-		$attrManager = $baseManager->getSubManager('service')->getSubManager('attribute');
+		$attrManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service/attribute' );
 
 		if( $this->_getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $additional['receiver_email'] )
 		{
@@ -708,8 +709,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	protected function _saveAttributes( array $attributes, MShop_Order_Item_Base_Service_Interface $serviceItem, $type = 'payment/paypal' )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$attributeManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
+		$attributeManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service/attribute' );
 
 		$map = array();
 		foreach( $serviceItem->getAttributes() as $attributeItem ) {
@@ -744,8 +744,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 */
 	protected function _getOrderServiceItem( $baseid )
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() );
-		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
+		$orderServiceManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/service' );
 
 		$search = $orderServiceManager->createSearch();
 		$expr = array(

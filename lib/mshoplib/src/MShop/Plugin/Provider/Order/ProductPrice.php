@@ -56,8 +56,8 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		}
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
+		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
 
 		$attrIds = $attributes = $prodCodes = $prodMap = $changedProducts = array();
 		$orderProducts = $order->getProducts();
@@ -81,7 +81,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 
 		if( !empty( $attrIds ) )
 		{
-			$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
+			$attrManager = MShop_Factory::createManager( $context, 'attribute' );
 
 			$search = $attrManager->createSearch( true );
 			$expr = array(
