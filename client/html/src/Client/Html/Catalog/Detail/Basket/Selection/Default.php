@@ -189,8 +189,8 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				$context = $this->_getContext();
 				$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
 
-				$productManager = MShop_Product_Manager_Factory::createManager( $context );
-				$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
+				$productManager = MShop_Factory::createManager( $context, 'product' );
+				$attrManager = MShop_Factory::createManager( $context, 'attribute' );
 
 				$search = $productManager->createSearch( true );
 				$expr = array(

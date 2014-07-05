@@ -264,7 +264,7 @@ class Client_Html_Basket_Mini_Default
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$controller = Controller_Frontend_Basket_Factory::createController( $this->_getContext() );
+			$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
 			$view->miniBasket = $controller->get();
 
 			$this->_cache = $view;

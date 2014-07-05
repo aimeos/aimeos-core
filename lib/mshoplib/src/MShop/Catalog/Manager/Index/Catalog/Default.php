@@ -429,8 +429,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 
 		$listItems = array();
 		$context = $this->_getContext();
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
-		$listManager = $catalogManager->getSubManager( 'list' );
+		$listManager = MShop_Factory::createManager( $context, 'catalog/list' );
 
 		$ids = array();
 		foreach( $items as $id => $item ) {

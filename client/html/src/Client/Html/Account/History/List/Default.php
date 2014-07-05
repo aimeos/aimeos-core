@@ -195,7 +195,7 @@ class Client_Html_Account_History_List_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
-			$manager = MShop_Order_Manager_Factory::createManager( $context );
+			$manager = MShop_Factory::createManager( $context, 'order' );
 
 
 			$search = $manager->createSearch( true );

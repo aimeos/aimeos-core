@@ -190,7 +190,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			}
 
 			$context = $this->_getContext();
-			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
+			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 			$basket = $basketCtrl->get();
 
 
@@ -317,7 +317,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			}
 			else // existing address
 			{
-				$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
+				$customerManager = MShop_Factory::createManager( $context, 'customer' );
 
 				$search = $customerManager->createSearch( true );
 				$expr = array(
@@ -369,7 +369,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
-			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
+			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 			try {
 				$view->billingLanguage = $basketCntl->get()->getAddress( 'payment' )->getLanguageId();

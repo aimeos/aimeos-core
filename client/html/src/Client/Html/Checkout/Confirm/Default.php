@@ -295,7 +295,7 @@ class Client_Html_Checkout_Confirm_Default
 			}
 
 			// Update stock, coupons, etc.
-			Controller_Frontend_Order_Factory::createController( $context )->update( $orderItem );
+			Controller_Frontend_Factory::createController( $context, 'order' )->update( $orderItem );
 		}
 		catch( Client_Html_Exception $e )
 		{
@@ -352,7 +352,7 @@ class Client_Html_Checkout_Confirm_Default
 		{
 			$context = $this->_getContext();
 			$orderid = $context->getSession()->get( 'arcavias/orderid' );
-			$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+			$orderManager = MShop_Factory::createManager( $context, 'order' );
 
 			$view->confirmOrderItem = $orderManager->getItem( $orderid );
 

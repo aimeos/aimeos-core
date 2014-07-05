@@ -376,7 +376,7 @@ class MShop_Order_Manager_Status_Default
 		$items = array();
 
 		$context = $this->_getContext();
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
+		$localeManager = MShop_Factory::createManager( $context, 'locale' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();

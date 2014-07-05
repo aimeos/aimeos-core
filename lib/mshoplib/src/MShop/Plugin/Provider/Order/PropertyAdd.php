@@ -32,8 +32,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	{
 		parent::__construct($context, $item);
 
-		$this->_orderAttrManager = MShop_Order_Manager_Factory::createManager( $this->_getContext() )
-			->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
+		$this->_orderAttrManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/product/attribute' );
 
 		$this->_type = $context->getConfig()->get( 'plugin/provider/order/propertyadd/type', 'property' );
 	}
@@ -76,7 +75,7 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = MShop_Factory::createManager( $context, 'product' );
 
 		$config = $this->_getItem()->getConfig();
 

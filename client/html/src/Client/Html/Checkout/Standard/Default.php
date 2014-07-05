@@ -320,7 +320,7 @@ class Client_Html_Checkout_Standard_Default
 		{
 			$context = $this->_getContext();
 
-			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
+			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 			$view->standardBasket = $basketCntl->get();
 
 			$basketTarget = $view->config( 'client/html/basket/standard/url/target' );

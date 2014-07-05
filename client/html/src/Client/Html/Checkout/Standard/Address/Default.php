@@ -256,7 +256,7 @@ class Client_Html_Checkout_Standard_Address_Default
 			$context = $this->_getContext();
 
 
-			$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
+			$customerManager = MShop_Factory::createManager( $context, 'customer' );
 
 			$search = $customerManager->createSearch( true );
 			$expr = array(
@@ -271,7 +271,7 @@ class Client_Html_Checkout_Standard_Address_Default
 			{
 				$view->addressCustomerItem = $item;
 
-				$customerAddressManager = $customerManager->getSubManager( 'address' );
+				$customerAddressManager = MShop_Factory::createManager( $context, 'customer/address' );
 
 				$search = $customerAddressManager->createSearch();
 				$search->setConditions( $search->compare( '==', 'customer.address.refid', $item->getId() ) );
@@ -280,7 +280,7 @@ class Client_Html_Checkout_Standard_Address_Default
 			}
 
 
-			$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
+			$localeManager = MShop_Factory::createManager( $context, 'locale' );
 			$locales = $localeManager->searchItems( $localeManager->createSearch( true ) );
 
 			$languages = array();

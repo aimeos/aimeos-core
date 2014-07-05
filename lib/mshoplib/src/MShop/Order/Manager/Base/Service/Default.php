@@ -167,8 +167,8 @@ class MShop_Order_Manager_Base_Service_Default
 	public function createItem()
 	{
 		$context = $this->_getContext();
-		$priceManager = MShop_Price_Manager_Factory::createManager($context);
-		$values = array('siteid'=> $context->getLocale()->getSiteId());
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$values = array( 'siteid'=> $context->getLocale()->getSiteId() );
 
 		return $this->_createItem( $priceManager->createItem(), $values );
 	}

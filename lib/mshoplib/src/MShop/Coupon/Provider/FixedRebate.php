@@ -39,7 +39,7 @@ class MShop_Coupon_Provider_FixedRebate
 			) );
 		}
 
-		$price = MShop_Price_Manager_Factory::createManager( $this->_getContext() )->createItem();
+		$price = MShop_Factory::createManager( $this->_getContext(), 'price' )->createItem();
 		$price->setValue( -$config['fixedrebate.rebate'] );
 		$price->setRebate( $config['fixedrebate.rebate'] );
 

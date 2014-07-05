@@ -205,7 +205,7 @@ class Client_Html_Checkout_Update_Default
 
 		try
 		{
-			$orderCntl = Controller_Frontend_Order_Factory::createController( $context );
+			$orderCntl = Controller_Frontend_Factory::createController( $context, 'order' );
 			$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
 			$search = $serviceManager->createSearch();

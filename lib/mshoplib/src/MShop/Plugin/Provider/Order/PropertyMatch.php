@@ -62,7 +62,7 @@ class MShop_Plugin_Provider_Order_PropertyMatch
 			return true;
 		}
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = MShop_Factory::createManager( $context, 'product' );
 
 		$criteria = $productManager->createSearch( true );
 

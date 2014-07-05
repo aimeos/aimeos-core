@@ -189,7 +189,7 @@ class Client_Html_Catalog_Detail_Suggest_Default
 				$context = $this->_getContext();
 				$products = $view->detailProductItem->getRefItems( 'product', null, 'suggestion' );
 
-				$manager = MShop_Product_Manager_Factory::createManager( $context );
+				$manager = MShop_Factory::createManager( $context, 'product' );
 
 				$search = $manager->createSearch( true );
 				$expr = array(

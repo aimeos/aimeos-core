@@ -189,7 +189,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			}
 
 			$context = $this->_getContext();
-			$basketCtrl = Controller_Frontend_Basket_Factory::createController( $context );
+			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 			$basket = $basketCtrl->get();
 
 			/** client/html/common/address/delivery/disable-new
@@ -314,8 +314,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			}
 			else if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) !== '-1' ) // existing address
 			{
-				$customerManager = MShop_Customer_Manager_Factory::createManager( $context );
-				$address = $customerManager->getSubManager( 'address' )->getItem( $option );
+				$customerManager = MShop_Factory::createManager( $context, 'customer' );
+				$address = MShop_Factory::createManager( $context, 'customer/address' )->getItem( $option );
 
 				$search = $customerManager->createSearch( true );
 				$expr = array(
@@ -371,7 +371,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		if( !isset( $this->_cache ) )
 		{
 			$context = $this->_getContext();
-			$basketCntl = Controller_Frontend_Basket_Factory::createController( $context );
+			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 			try {
 				$view->deliveryLanguage = $basketCntl->get()->getAddress( 'delivery' )->getLanguageId();

@@ -661,7 +661,7 @@ class MShop_Product_Manager_Stock_Default
 	{
 		$context = $this->_getContext();
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $productCode ) );
 		$productIds = array_keys( $productManager->searchItems( $search ) );
