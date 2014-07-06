@@ -59,7 +59,7 @@ class Client_Html_Catalog_Detail_Default
 	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
-	 * @since 2014.03
+	 * @since 2014.09
 	 * @category Developer
 	 */
 
