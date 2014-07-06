@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+if( !isset( $this->detailProductItem ) ) {
+	return;
+}
+
+$enc = $this->encoder();
+
+$list = $this->config( 'client/html/catalog/detail/social/list', array( 'facebook', 'gplus', 'twitter', 'pinterest' ) );
+
+$urls = array(
+	'facebook' => 'https://www.facebook.com/sharer.php?u=%1$s',
+	'gplus' => 'https://plus.google.com/share?url=%1$s',
+	'twitter' => 'https://twitter.com/share?url=%1$s',
+	'pinterest' => 'https://pinterest.com/pin/create/button/?url=%1$s&description=%2$s&media=%3$s',
+);
+
+$detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
+$detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+$detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
+$detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( 'absoluteUri' => true ) );
+
+$prodName = $this->detailProductItem->getName();
+$param = array( 'd-product-id' => $this->detailProductItem->getId() );
+$prodUrl = $this->url( $detailTarget, $detailController, $detailAction, array( $param ), array( $prodName ), $detailConfig );
+
+$images = $this->detailProductItem->getRefItems( 'media', 'default', 'default' );
+$prodImage = ( ( $image = reset( $images ) ) !== false ? $this->content( $image->getUrl() ) : '' );
+
+?>
+<div class="catalog-detail-social">
+<?php foreach( $list as $entry ) : ?>
+<?php	if( ( $link = $this->config( 'client/html/catalog/detail/social/url/' . $entry, ( isset( $urls[$entry] ) ? $urls[$entry] : null ) ) ) !== null ) : ?>
+<?php		$link = sprintf( $link, $enc->url( $prodUrl ), $enc->url( $prodName ), $enc->url( $prodImage ) ); ?>
+	<a class="social-button social-button-<?php echo $enc->attr( $entry ); ?>" href="<?php echo $enc->attr( $link ); ?>" title="<?php echo $enc->attr( $entry ); ?>" target="_blank"></a>
+<?php	endif; ?>
+<?php endforeach; ?>
+<?php echo $this->socialBody; ?>
+</div>
