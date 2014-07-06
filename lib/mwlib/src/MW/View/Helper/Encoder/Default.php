@@ -77,4 +77,16 @@ class MW_View_Helper_Encoder_Default
 
 		return htmlspecialchars( $value, ENT_NOQUOTES, 'UTF-8' );
 	}
+
+
+	/**
+	 * Escapes strings for URLs.
+	 *
+	 * @param string $value URI/URL string
+	 * @return string Escaped URI/URL string
+	 */
+	public function url( $value, $trust = self::TAINT )
+	{
+		return urlencode( htmlspecialchars( $value, ENT_NOQUOTES, 'UTF-8' ) );
+	}
 }
