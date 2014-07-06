@@ -993,6 +993,37 @@
 	margin-top: 1em;
 }
 
+/* Product detail, social section */
+.catalog-detail-social {
+	float: right;
+}
+
+.catalog-detail-social .social-button {
+	background-image: url('images/social.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	position: relative;
+	display: block;
+	height: 3em;
+	width: 3em;
+}
+
+.catalog-detail-social .social-button-facebook {
+	background-position: 0 -0em;
+}
+
+.catalog-detail-social .social-button-gplus {
+	background-position: 0 -3em;
+}
+
+.catalog-detail-social .social-button-twitter {
+	background-position: 0 -6em;
+}
+
+.catalog-detail-social .social-button-pinterest {
+	background-position: 0 -9em;
+}
+
 /* Product detail, basket section */
 .catalog-detail-basket {
 	margin: 0px 0px 0px 252px;
