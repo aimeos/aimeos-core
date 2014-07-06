@@ -47,7 +47,7 @@ class Client_Html_Catalog_Detail_Social_Default
 	 * design.
 	 *
 	 * @param array List of sub-client names
-	 * @since 2014.03
+	 * @since 2014.09
 	 * @category Developer
 	 */
 	private $_subPartPath = 'client/html/catalog/detail/social/default/subparts';
@@ -88,7 +88,7 @@ class Client_Html_Catalog_Detail_Social_Default
 		 * should be replaced by the name of the new class.
 		 *
 		 * @param string Relative path to the template creating code for the HTML page body
-		 * @since 2014.03
+		 * @since 2014.09
 		 * @category Developer
 		 * @see client/html/catalog/detail/social/default/template-header
 		 */
@@ -134,7 +134,7 @@ class Client_Html_Catalog_Detail_Social_Default
 		 * should be replaced by the name of the new class.
 		 *
 		 * @param string Relative path to the template creating code for the HTML page head
-		 * @since 2014.03
+		 * @since 2014.09
 		 * @category Developer
 		 * @see client/html/catalog/detail/social/default/template-body
 		 */
