@@ -13,225 +13,24 @@ $enc = $this->encoder();
 $prodid = $this->detailProductItem->getId();
 $params = $this->get( 'actionsParams', array() );
 
-
-/** client/html/account/pinned/url/target
- * Destination of the URL where the controller specified in the URL is known
- *
- * The destination can be a page ID like in a content management system or the
- * module of a software development framework. This "target" must contain or know
- * the controller that should be called by the generated URL.
- * 
- * @param string Destination of the URL
- * @since 2014.09
- * @category Developer
- * @see client/html/account/pinned/url/controller
- * @see client/html/account/pinned/url/action
- * @see client/html/account/pinned/url/config
- */
 $pinTarget = $this->config( 'client/html/account/pinned/url/target' );
-
-/** client/html/account/pinned/url/controller
- * Name of the controller whose action should be called
- *
- * In Model-View-Controller (MVC) applications, the controller contains the methods
- * that create parts of the output displayed in the generated HTML page. Controller
- * names are usually alpha-numeric.
- * 
- * @param string Name of the controller
- * @since 2014.09
- * @category Developer
- * @see client/html/account/pinned/url/target
- * @see client/html/account/pinned/url/action
- * @see client/html/account/pinned/url/config
- */
 $pinController = $this->config( 'client/html/account/pinned/url/controller', 'catalog' );
-
-/** client/html/account/pinned/url/action
- * Name of the action that should create the output
- *
- * In Model-View-Controller (MVC) applications, actions are the methods of a
- * controller that create parts of the output displayed in the generated HTML page.
- * Action names are usually alpha-numeric.
- * 
- * @param string Name of the action
- * @since 2014.09
- * @category Developer
- * @see client/html/account/pinned/url/target
- * @see client/html/account/pinned/url/controller
- * @see client/html/account/pinned/url/config
- */
 $pinAction = $this->config( 'client/html/account/pinned/url/action', 'detail' );
-
-/** client/html/account/pinned/url/config
- * Associative list of configuration options used for generating the URL
- *
- * You can specify additional options as key/value pairs used when generating
- * the URLs, like
- *
- *  client/html/<clientname>/url/config = array( 'absoluteUri' => true )
- *
- * The available key/value pairs depend on the application that embeds the e-commerce
- * framework. This is because the infrastructure of the application is used for
- * generating the URLs. The full list of available config options is referenced
- * in the "see also" section of this page.
- * 
- * @param string Associative list of configuration options
- * @since 2014.09
- * @category Developer
- * @see client/html/account/pinned/url/target
- * @see client/html/account/pinned/url/controller
- * @see client/html/account/pinned/url/action
- * @see client/html/url/config
- */
 $pinConfig = $this->config( 'client/html/account/pinned/url/config', array() );
 
-
-/** client/html/account/watch/url/target
- * Destination of the URL where the controller specified in the URL is known
- *
- * The destination can be a page ID like in a content management system or the
- * module of a software development framework. This "target" must contain or know
- * the controller that should be called by the generated URL.
- * 
- * @param string Destination of the URL
- * @since 2014.09
- * @category Developer
- * @see client/html/account/watch/url/controller
- * @see client/html/account/watch/url/action
- * @see client/html/account/watch/url/config
- */
 $watchTarget = $this->config( 'client/html/account/watch/url/target' );
-
-/** client/html/account/watch/url/controller
- * Name of the controller whose action should be called
- *
- * In Model-View-Controller (MVC) applications, the controller contains the methods
- * that create parts of the output displayed in the generated HTML page. Controller
- * names are usually alpha-numeric.
- * 
- * @param string Name of the controller
- * @since 2014.09
- * @category Developer
- * @see client/html/account/watch/url/target
- * @see client/html/account/watch/url/action
- * @see client/html/account/watch/url/config
- */
 $watchController = $this->config( 'client/html/account/watch/url/controller', 'account' );
-
-/** client/html/account/watch/url/action
- * Name of the action that should create the output
- *
- * In Model-View-Controller (MVC) applications, actions are the methods of a
- * controller that create parts of the output displayed in the generated HTML page.
- * Action names are usually alpha-numeric.
- * 
- * @param string Name of the action
- * @since 2014.09
- * @category Developer
- * @see client/html/account/watch/url/target
- * @see client/html/account/watch/url/controller
- * @see client/html/account/watch/url/config
- */
 $watchAction = $this->config( 'client/html/account/watch/url/action', 'watch' );
-
-/** client/html/account/watch/url/config
- * Associative list of configuration options used for generating the URL
- *
- * You can specify additional options as key/value pairs used when generating
- * the URLs, like
- *
- *  client/html/<clientname>/url/config = array( 'absoluteUri' => true )
- *
- * The available key/value pairs depend on the application that embeds the e-commerce
- * framework. This is because the infrastructure of the application is used for
- * generating the URLs. The full list of available config options is referenced
- * in the "see also" section of this page.
- * 
- * @param string Associative list of configuration options
- * @since 2014.09
- * @category Developer
- * @see client/html/account/watch/url/target
- * @see client/html/account/watch/url/controller
- * @see client/html/account/watch/url/action
- * @see client/html/url/config
- */
 $watchConfig = $this->config( 'client/html/account/watch/url/config', array() );
 
-
-/** client/html/account/favorite/url/target
- * Destination of the URL where the controller specified in the URL is known
- *
- * The destination can be a page ID like in a content management system or the
- * module of a software development framework. This "target" must contain or know
- * the controller that should be called by the generated URL.
- * 
- * @param string Destination of the URL
- * @since 2014.09
- * @category Developer
- * @see client/html/account/favorite/url/controller
- * @see client/html/account/favorite/url/action
- * @see client/html/account/favorite/url/config
- */
 $favTarget = $this->config( 'client/html/account/favorite/url/target' );
-
-/** client/html/account/favorite/url/controller
- * Name of the controller whose action should be called
- *
- * In Model-View-Controller (MVC) applications, the controller contains the methods
- * that create parts of the output displayed in the generated HTML page. Controller
- * names are usually alpha-numeric.
- * 
- * @param string Name of the controller
- * @since 2014.09
- * @category Developer
- * @see client/html/account/favorite/url/target
- * @see client/html/account/favorite/url/action
- * @see client/html/account/favorite/url/config
- */
 $favController = $this->config( 'client/html/account/favorite/url/controller', 'account' );
-
-/** client/html/account/favorite/url/action
- * Name of the action that should create the output
- *
- * In Model-View-Controller (MVC) applications, actions are the methods of a
- * controller that create parts of the output displayed in the generated HTML page.
- * Action names are usually alpha-numeric.
- * 
- * @param string Name of the action
- * @since 2014.09
- * @category Developer
- * @see client/html/account/favorite/url/target
- * @see client/html/account/favorite/url/controller
- * @see client/html/account/favorite/url/config
- */
 $favAction = $this->config( 'client/html/account/favorite/url/action', 'favorite' );
-
-/** client/html/account/favorite/url/config
- * Associative list of configuration options used for generating the URL
- *
- * You can specify additional options as key/value pairs used when generating
- * the URLs, like
- *
- *  client/html/<clientname>/url/config = array( 'absoluteUri' => true )
- *
- * The available key/value pairs depend on the application that embeds the e-commerce
- * framework. This is because the infrastructure of the application is used for
- * generating the URLs. The full list of available config options is referenced
- * in the "see also" section of this page.
- * 
- * @param string Associative list of configuration options
- * @since 2014.09
- * @category Developer
- * @see client/html/account/favorite/url/target
- * @see client/html/account/favorite/url/controller
- * @see client/html/account/favorite/url/action
- * @see client/html/url/config
- */
 $favConfig = $this->config( 'client/html/account/favorite/url/config', array() );
 
 
 /** client/html/catalog/detail/actions/list
- * Name of the actions that should be avaiable in the catalog detail view
+ * List of user action names that should be displayed in the catalog detail view
  *
  * Users can add products to several personal lists that are either only
  * available during the session or permanently if the user is logged in. The list
@@ -242,7 +41,7 @@ $favConfig = $this->config( 'client/html/account/favorite/url/config', array() )
  * The order of the action names in the configuration determines the order of
  * the actions on the catalog detail page.   
  * 
- * @param string List of action names
+ * @param array List of user action names
  * @since 2014.09
  * @category User
  * @category Developer
