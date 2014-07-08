@@ -1024,6 +1024,30 @@
 	background-position: 0 -9em;
 }
 
+/* Product detail, action buttions */
+.catalog-detail-actions .actions-button {
+	background-image: url('images/detail-actions.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	display: inline-block;
+	position: relative;
+	margin: 0.5em 1.5em;
+	height: 2em;
+	width: 2em;
+}
+
+.catalog-detail-actions .actions-button-favorite {
+	background-position: 0 -0em;
+}
+
+.catalog-detail-actions .actions-button-pin {
+	background-position: 0 -2em;
+}
+
+.catalog-detail-actions .actions-button-watch {
+	background-position: 0 -4em;
+}
+
 /* Product detail, basket section */
 .catalog-detail-basket {
 	margin: 0px 0px 0px 252px;
@@ -1237,16 +1261,16 @@
 .catalog-detail-suggest .suggest-item {
 	display: inline-block;
 	vertical-align: top;
+	padding: 2% 1%;
 	width: 90px;
 	margin: 0;
-	padding: 2% 1%;
 }
 
 .catalog-detail-suggest .media-item {
-	background-color: #FFFFFF;
 	background-image: url(images/arcavias.png);
 	background-repeat: no-repeat;
 	background-position: center;
+	background-color: #FFFFFF;
 	background-size: contain;
 	height: 120px;
 	width: 90px;
@@ -1306,20 +1330,24 @@
 	background-color: #679CB8;
 }
 
-.catalog-session-seen .seen-items {
+.catalog-session-seen .seen-items,
+.catalog-session-pinned .pinned-items {
 	text-align: center;
 	padding: 0;
 }
 
-.catalog-session-seen .seen-item {
+.catalog-session-seen .seen-item,
+.catalog-session-pinned .pinned-item {
 	display: inline-block;
 	vertical-align: top;
+	position: relative;
 	width: 90px;
-	margin: 0;
-	padding: 2% 1%;
+	padding: 0;
+	margin: 2% 1%;
 }
 
-.catalog-session-seen .media-item {
+.catalog-session-seen .media-item,
+.catalog-session-pinned .media-item {
 	background-color: #FFFFFF;
 	background-image: url(images/arcavias.png);
 	background-repeat: no-repeat;
@@ -1329,7 +1357,8 @@
 	width: 90px;
 }
 
-.catalog-session-seen .name {
+.catalog-session-seen .name,
+.catalog-session-pinned .name {
 	margin: 0;
 	padding: 0;
 	height: 3em;
@@ -1341,7 +1370,8 @@
 	border-bottom: 1px solid #C3D9E5;
 }
 
-.catalog-session-seen .price-list {
+.catalog-session-seen .price-list,
+.catalog-session-pinned .price-list {
 	font-weight: bold;
 	text-align: left;
 	color: #004266;
@@ -1350,11 +1380,13 @@
 	margin: 0;
 }
 
-.catalog-session-seen .price-item {
+.catalog-session-seen .price-item,
+.catalog-session-pinned .price-item {
 	display: none;
 }
 
-.catalog-session-seen .price-item:first-child {
+.catalog-session-seen .price-item:first-child,
+.catalog-session-pinned .price-item:first-child {
 	display: block;
 }
 
@@ -1362,8 +1394,31 @@
 .catalog-session-seen .price-item:first-child .rebatepercent,
 .catalog-session-seen .price-item:first-child .rebate,
 .catalog-session-seen .price-item:first-child .costs,
-.catalog-session-seen .price-item:first-child .taxrate {
+.catalog-session-seen .price-item:first-child .taxrate,
+.catalog-session-pinned .price-item:first-child .quantity,
+.catalog-session-pinned .price-item:first-child .rebatepercent,
+.catalog-session-pinned .price-item:first-child .rebate,
+.catalog-session-pinned .price-item:first-child .costs,
+.catalog-session-pinned .price-item:first-child .taxrate {
 	display: none;
+}
+
+.catalog-session-pinned .modify {
+	position: absolute;
+	font-weight: bold;
+	font-size: 150%;
+	color: #689DB9;
+	right: 0;
+}
+
+.catalog-session-seen .count:before,
+.catalog-session-pinned .count:before {
+	content: "(";
+}
+
+.catalog-session-seen .count:after,
+.catalog-session-pinned .count:after {
+	content: ")";
 }
 
 

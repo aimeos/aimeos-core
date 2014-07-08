@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+$pinParams = $this->get( 'pinnedParams', array() );
+$pinList = $this->get( 'pinnedProductItems', array() );
+
+$pinTarget = $this->config( 'client/html/account/pinned/url/target' );
+$pinController = $this->config( 'client/html/account/pinned/url/controller', 'catalog' );
+$pinAction = $this->config( 'client/html/account/pinned/url/action', 'detail' );
+$pinConfig = $this->config( 'client/html/account/pinned/url/config', array() );
+
+$detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
+$detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+$detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
+$detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
+
+/// Price format with price value (%1$s) and currency (%2$s)
+$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+/// Percent format with value (%1$s) and % sign
+$percentFormat = $this->translate( 'client/html', '%1$s%%' );
+
+?>
+<section class="catalog-session-pinned">
+	<h2 class="header">
+<?php echo $this->translate( 'client/html', 'Pinned products' ); ?>
+<?php if( $this->config( 'client/html/catalog/session/pinned/count/enable', 1 ) ) : ?>
+		<span class="count"><?php echo count( $pinList ); ?></span>
+<?php endif; ?>
+	</h2>
+	<ul class="pinned-items"> 
+<?php foreach( $pinList as $id => $productItem ) : ?>
+<?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id ); ?>
+		<li class="pinned-item">
+			<a class="modify" href="<?php echo $this->url( $pinTarget, $pinController, $pinAction, array( 'pin-action' => 'delete', 'pin-id' => $id ) + $pinParams, array(), $pinConfig ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
+			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
+<?php	$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
+<?php	if( ( $mediaItem = reset( $mediaItems ) ) !== false ) : ?>
+				<div class="media-item" style="background-image: url('<?php echo $this->content( $mediaItem->getPreview() ); ?>')"></div>
+<?php	else : ?>
+				<div class="media-item"></div>
+<?php	endif; ?>
+				<h3 class="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
+				<div class="price-list">
+<?php	echo $this->price( $productItem->getRefItems( 'price', 'default', 'default' ) ); ?>
+				</div>
+			</a>
+		</li>
+<?php endforeach; ?>
+	</ul>
+<?php echo $this->pinnedBody; ?>
+</section>

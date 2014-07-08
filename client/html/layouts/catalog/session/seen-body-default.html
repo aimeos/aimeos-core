@@ -10,8 +10,12 @@ $seenList = $this->get( 'seenItems', array() );
 
 ?>
 <section class="catalog-session-seen">
-<?php if( !empty( $seenList ) ) : ?>
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Last seen' ); ?></h2>
+	<h2 class="header">
+<?php echo $this->translate( 'client/html', 'Last seen' ); ?>
+<?php if( $this->config( 'client/html/catalog/session/seen/count/enable', 1 ) ) : ?>
+		<span class="count"><?php echo count( $seenList ); ?></span>
+<?php endif; ?>
+	</h2>
 	<ul class="seen-items"> 
 <?php	foreach( $seenList as $seen ) : ?>
 		<li class="seen-item">
@@ -19,6 +23,5 @@ $seenList = $this->get( 'seenItems', array() );
 		</li>
 <?php	endforeach; ?>
 	</ul>
-<?php endif; ?>
 <?php echo $this->seenBody; ?>
 </section>

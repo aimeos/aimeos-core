@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+if( !isset( $this->detailProductItem ) ) {
+	return;
+}
+
+$enc = $this->encoder();
+$prodid = $this->detailProductItem->getId();
+$params = $this->get( 'actionsParams', array() );
+
+$pinTarget = $this->config( 'client/html/account/pinned/url/target' );
+$pinController = $this->config( 'client/html/account/pinned/url/controller', 'catalog' );
+$pinAction = $this->config( 'client/html/account/pinned/url/action', 'detail' );
+$pinConfig = $this->config( 'client/html/account/pinned/url/config', array() );
+
+$watchTarget = $this->config( 'client/html/account/watch/url/target' );
+$watchController = $this->config( 'client/html/account/watch/url/controller', 'account' );
+$watchAction = $this->config( 'client/html/account/watch/url/action', 'watch' );
+$watchConfig = $this->config( 'client/html/account/watch/url/config', array() );
+
+$favTarget = $this->config( 'client/html/account/watch/url/target' );
+$favController = $this->config( 'client/html/account/watch/url/controller', 'account' );
+$favAction = $this->config( 'client/html/account/watch/url/action', 'favorite' );
+$favConfig = $this->config( 'client/html/account/watch/url/config', array() );
+
+$list = $this->config( 'client/html/catalog/detail/actions/list', array( 'pin', 'watch', 'favorite' ) );
+$urls = array(
+	'pin' => $this->url( $pinTarget, $pinController, $pinAction, array( 'pin-action' => 'add', 'pin-id' => $prodid ) + $params, $pinConfig ),
+	'watch' => $this->url( $watchTarget, $watchController, $watchAction, array( 'watch-action' => 'add', 'watch-id' => $prodid ) + $params, $watchConfig ),
+	'favorite' => $this->url( $favTarget, $favController, $favAction, array( 'fav-action' => 'add', 'fav-id' => $prodid ) + $params, $favConfig ),
+);
+
+?>
+<div class="catalog-detail-actions">
+<?php foreach( $list as $entry ) : ?>
+<?php	if( isset( $urls[$entry] ) ) : ?>
+	<a class="actions-button actions-button-<?php echo $enc->attr( $entry ); ?>" href="<?php echo $enc->attr( $urls[$entry] ); ?>" title="<?php echo $enc->attr( $this->translate( 'client/html/code', $entry ) ); ?>"></a>
+<?php	endif; ?>
+<?php endforeach; ?>
+<?php echo $this->actionsBody; ?>
+</div>
