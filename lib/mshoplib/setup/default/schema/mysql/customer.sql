@@ -60,12 +60,12 @@ CREATE TABLE "mshop_customer" (
 	"birthday" date NULL,
 	-- user password
 	"password" VARCHAR(255) NOT NULL,
+	-- Status of the customer item
+	"status" SMALLINT NOT NULL,
 	-- creation time
 	"ctime" DATETIME NOT NULL,
 	-- modification time
 	"mtime" DATETIME NOT NULL,
-	-- Status of the customer item
-	"status" SMALLINT NOT NULL,
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mscus_id"
