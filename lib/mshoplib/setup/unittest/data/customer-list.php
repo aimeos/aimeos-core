@@ -7,6 +7,7 @@
 
 return array (
 	'customer/list/type' => array (
+		'product/default' => array( 'domain' => 'product', 'code' => 'favorite', 'label' => 'Favorite', 'status' => 1 ),
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 	),
 

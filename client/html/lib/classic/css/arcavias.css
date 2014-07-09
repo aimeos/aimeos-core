@@ -807,7 +807,7 @@
 	color: #004266;
 }
 
-/* Product list, pagination section */
+/* Product and favorite list, pagination section */
 .catalog-list-pagination {
 	background-color: #F2F7FA;
 	border: 1px solid #689DB9;
@@ -848,12 +848,15 @@
 	font-weight: bold;
 }
 
+.account-favorite .browser,
 .catalog-list-pagination .browser {
 	display: inline-block;
 	white-space: nowrap;
 	float: right;
 }
 
+.account-favorite  .browser span,
+.account-favorite  .browser a,
 .catalog-list-pagination .browser span,
 .catalog-list-pagination .browser a {
 	display: inline-block;
@@ -1247,78 +1250,21 @@
 	color: #F01800;
 }
 
-/* Product suggestions */
-.catalog-detail-suggest {
-	clear: both;
-	padding: 1em 0;
-}
 
-.catalog-detail-suggest .suggest-items {
-	padding: 0;
-	margin: 0;
-}
-
-.catalog-detail-suggest .suggest-item {
-	display: inline-block;
-	vertical-align: top;
-	padding: 2% 1%;
-	width: 90px;
-	margin: 0;
-}
-
-.catalog-detail-suggest .media-item {
-	background-image: url(images/arcavias.png);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #FFFFFF;
-	background-size: contain;
-	height: 120px;
-	width: 90px;
-}
-
-.catalog-detail-suggest .name {
-	margin: 0;
-	padding: 0;
-	height: 3em;
-	font-size: 100%;
-	font-weight: bold;
-	text-align: left;
-	overflow: hidden;
-	border-top: 1px solid #C3D9E5;
-	border-bottom: 1px solid #C3D9E5;
-}
-
-.catalog-detail-suggest .price-list {
-	font-weight: bold;
-	color: #004266;
-	height: 1em;
-	padding: 0;
-	margin: 0;
-}
-
-.catalog-detail-suggest .price-item {
-	display: none;
-}
-
-.catalog-detail-suggest .price-item:first-child {
-	display: block;
-}
-
-.catalog-detail-suggest .price-item:first-child .quantity,
-.catalog-detail-suggest .price-item:first-child .rebatepercent,
-.catalog-detail-suggest .price-item:first-child .rebate,
-.catalog-detail-suggest .price-item:first-child .costs,
-.catalog-detail-suggest .price-item:first-child .taxrate {
-	display: none;
-}
-
-
-/* Session items */
+/* Product favorites, suggestions and session items */
+.account-favorite,
 .catalog-session {
 	clear: both;
 	padding: 1em 0;
 }
 
+.account-favorite,
+.catalog-session-pinned,
+.catalog-session-seen {
+	margin-bottom: 0.5em;
+}
+
+.account-favorite .header,
 .catalog-session .header {
 	border: 0 none;
 	font-size: 1em;
@@ -1330,12 +1276,16 @@
 	background-color: #679CB8;
 }
 
+.account-favorite .favorite-items,
+.catalog-detail-suggest .suggest-items,
 .catalog-session-seen .seen-items,
 .catalog-session-pinned .pinned-items {
 	text-align: center;
 	padding: 0;
 }
 
+.account-favorite .favorite-item,
+.catalog-detail-suggest .suggest-item,
 .catalog-session-seen .seen-item,
 .catalog-session-pinned .pinned-item {
 	display: inline-block;
@@ -1346,6 +1296,8 @@
 	margin: 2% 1%;
 }
 
+.account-favorite .media-item,
+.catalog-detail-suggest .media-item,
 .catalog-session-seen .media-item,
 .catalog-session-pinned .media-item {
 	background-color: #FFFFFF;
@@ -1357,6 +1309,8 @@
 	width: 90px;
 }
 
+.account-favorite .name,
+.catalog-detail-suggest .name,
 .catalog-session-seen .name,
 .catalog-session-pinned .name {
 	margin: 0;
@@ -1370,6 +1324,8 @@
 	border-bottom: 1px solid #C3D9E5;
 }
 
+.account-favorite .price-list,
+.catalog-detail-suggest .price-list,
 .catalog-session-seen .price-list,
 .catalog-session-pinned .price-list {
 	font-weight: bold;
@@ -1380,16 +1336,30 @@
 	margin: 0;
 }
 
+.account-favorite .price-item,
+.catalog-detail-suggest .price-item,
 .catalog-session-seen .price-item,
 .catalog-session-pinned .price-item {
 	display: none;
 }
 
+.account-favorite .price-item:first-child,
+.catalog-detail-suggest .price-item:first-child,
 .catalog-session-seen .price-item:first-child,
 .catalog-session-pinned .price-item:first-child {
 	display: block;
 }
 
+.account-favorite .price-item:first-child .quantity,
+.account-favorite .price-item:first-child .rebatepercent,
+.account-favorite .price-item:first-child .rebate,
+.account-favorite .price-item:first-child .costs,
+.account-favorite .price-item:first-child .taxrate,
+.catalog-detail-suggest .price-item:first-child .quantity,
+.catalog-detail-suggest .price-item:first-child .rebatepercent,
+.catalog-detail-suggest .price-item:first-child .rebate,
+.catalog-detail-suggest .price-item:first-child .costs,
+.catalog-detail-suggest .price-item:first-child .taxrate,
 .catalog-session-seen .price-item:first-child .quantity,
 .catalog-session-seen .price-item:first-child .rebatepercent,
 .catalog-session-seen .price-item:first-child .rebate,
@@ -1403,6 +1373,7 @@
 	display: none;
 }
 
+.account-favorite .modify,
 .catalog-session-pinned .modify {
 	position: absolute;
 	font-weight: bold;
