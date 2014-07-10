@@ -115,6 +115,82 @@
 	margin: 0;
 }
 
+.arcavias .form-list label {
+	width: 210px;
+	margin: 0.5em 0;
+}
+
+.arcavias .form-list input {
+	width: 215px;
+	height: 1.5em;
+	background-color: #F2F7FA;
+	border: solid 1px #689DB9;
+	vertical-align: bottom;
+	margin: 0.5em 0;
+}
+
+.arcavias .form-list select {
+	width: 219px;
+	border: 1px solid #689DB9;
+	vertical-align: bottom;
+	margin: 0.5em 0;
+}
+
+.arcavias .pagination {
+	padding: 0.5em;
+	clear: left;
+}
+
+.arcavias .sort {
+	display: inline-block;
+}
+
+.arcavias .sort ul {
+	list-style: none outside none;
+	display: inline;
+	margin: 0px;
+}
+
+.arcavias .sort ul li {
+	display: inline;
+}
+
+.arcavias .sort a {
+	text-decoration: none;
+	padding: 0 0.5em;
+	color: #004266;
+}
+
+.arcavias .sort a:hover {
+	text-decoration: underline;
+}
+
+.arcavias .sort a.active {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.arcavias .browser {
+	display: inline-block;
+	white-space: nowrap;
+	float: right;
+}
+
+.arcavias .browser span,
+.arcavias .browser a {
+	display: inline-block;
+	padding: 0 0.5em;
+	color: #004266;
+	text-align: center;
+	text-decoration: none;
+}
+
+.arcavias .loading {
+	background-image: url(images/progress.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 .arcavias-overlay {
 	background-color: #FFFFFF;
 	position: fixed;
@@ -815,55 +891,6 @@
 	-moz-border-radius: 0.5em;
 	border-radius: 0.5em;
 	color: #004266;
-	padding: 0.5em;
-	clear: left;
-}
-
-.catalog-list-pagination .sort {
-	display: inline-block;
-}
-
-.catalog-list-pagination .sort ul {
-	list-style: none outside none;
-	display: inline;
-	margin: 0px;
-}
-
-.catalog-list-pagination .sort ul li {
-	display: inline;
-}
-
-.catalog-list-pagination .sort a {
-	text-decoration: none;
-	padding: 0 0.5em;
-	color: #004266;
-}
-
-.catalog-list-pagination .sort a:hover {
-	text-decoration: underline;
-}
-
-.catalog-list-pagination .sort a.active {
-	text-decoration: none;
-	font-weight: bold;
-}
-
-.account-favorite .browser,
-.catalog-list-pagination .browser {
-	display: inline-block;
-	white-space: nowrap;
-	float: right;
-}
-
-.account-favorite  .browser span,
-.account-favorite  .browser a,
-.catalog-list-pagination .browser span,
-.catalog-list-pagination .browser a {
-	display: inline-block;
-	padding: 0 0.5em;
-	color: #004266;
-	text-align: center;
-	text-decoration: none;
 }
 
 /* Product list, promotion section */
@@ -1729,30 +1756,6 @@
 
 .checkout-standard-address .form-list .mandatory label:after {
 	content: "*";
-}
-
-.checkout-standard-address .form-list label {
-	width: 210px;
-	float: left;
-	padding-top: 0.5em;
-}
-
-.checkout-standard-address .form-list input {
-	width: 215px;
-    float: left;
-	background-color: #F2F7FA;
-	border: solid 1px #689DB9;
-	vertical-align: bottom;
-	height: 1.5em;
-	margin: 0 0 8px;
-}
-
-.checkout-standard-address .form-list select {
-	width: 219px;
-	float: left;
-	border: 1px solid #689DB9;
-	vertical-align: bottom;
-	margin: 0 0 8px;
 }
 
 .checkout-standard .form-list .error {

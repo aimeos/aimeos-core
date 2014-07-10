@@ -38,7 +38,7 @@ if( $sort === 'price' ) {
 ?>
 <?php if( $this->get( 'listProductTotal', 0 ) > 0 ) : ?>
 <div class="catalog-list-pagination">
-	<nav>
+	<nav class="pagination">
 		<div class="sort">
 			<span><?php echo $enc->html( $this->translate( 'client/html', 'Sort by:' ), $enc::TRUST ); ?></span>
 			<ul>
