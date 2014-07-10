@@ -164,7 +164,7 @@ jQuery(document).ready( function($) {
 	}
 
 	/* Remove the overlay container */
-	var arcaviasOverlayDestroy = function() {
+	var arcaviasOverlayRemove = function() {
 		
 		var container = $(".arcavias-container");
 		var overlay = $(".arcavias-overlay");
@@ -213,13 +213,13 @@ jQuery(document).ready( function($) {
 
 	/* Go back to underlying page when back or close button is clicked */
 	$("body").on("click", ".arcavias-container .btn-close", function(event) {
-		return arcaviasOverlayDestroy();
+		return arcaviasOverlayRemove();
 	});
 
 	/* Go back to underlying page when ESC is pressed */
 	$("body").on("keydown", function(event) {
 		if ( event.which == 27 ) {
-			return arcaviasOverlayDestroy();
+			return arcaviasOverlayRemove();
 		}
 	});
 
@@ -344,7 +344,7 @@ jQuery(document).ready( function($) {
 
 	/* Go back to underlying page when back or close button is clicked */
 	$("body").on("click", ".basket-standard .btn-back", function(event) {
-		return arcaviasOverlayDestroy();
+		return arcaviasOverlayRemove();
 	});
 	
 	/* Hide update button an show only on quantity change */
