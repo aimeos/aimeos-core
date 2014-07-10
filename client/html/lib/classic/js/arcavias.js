@@ -155,7 +155,7 @@ jQuery(document).ready( function($) {
 	 */
 
 	/* Add the overlay container */
-	var arcaviasOverlayAdd = function() {
+	var arcaviasOverlayCreate = function() {
 
 		var overlay = $(document.createElement("div"));
 		overlay.addClass("arcavias-overlay");
@@ -164,7 +164,7 @@ jQuery(document).ready( function($) {
 	}
 
 	/* Remove the overlay container */
-	var arcaviasOverlayRemove = function() {
+	var arcaviasOverlayDestroy = function() {
 		
 		var container = $(".arcavias-container");
 		var overlay = $(".arcavias-overlay");
@@ -180,7 +180,7 @@ jQuery(document).ready( function($) {
 		return true;
 	};
 	
-	/* Creates and the container on top of the overlay */
+	/* Creates the container on top of the overlay */
 	var arcaviasContainerCreate = function(content) {
 
 		var container = $(document.createElement("div"));
@@ -213,13 +213,13 @@ jQuery(document).ready( function($) {
 
 	/* Go back to underlying page when back or close button is clicked */
 	$("body").on("click", ".arcavias-container .btn-close", function(event) {
-		return arcaviasOverlayRemove();
+		return arcaviasOverlayDestroy();
 	});
 
 	/* Go back to underlying page when ESC is pressed */
 	$("body").on("keydown", function(event) {
 		if ( event.which == 27 ) {
-			return arcaviasOverlayRemove();
+			return arcaviasOverlayDestroy();
 		}
 	});
 
@@ -231,7 +231,7 @@ jQuery(document).ready( function($) {
 	/* Add to favorite list without page reload */
 	$(".catalog-detail-actions .actions-button-favorite").on("click", function(event) {
 
-		arcaviasOverlayAdd();
+		arcaviasOverlayCreate();
 
 		$.get($(this).attr("href"), function(data) {
 
@@ -247,12 +247,65 @@ jQuery(document).ready( function($) {
 	/* Delete favorite items without page reload */
 	$("body").on("click", ".account-favorite a.modify", function(event) {
 
+		var item = $(this).parents("favorite-item");
+		item.addClass("loading");
+
 		$.get($(this).attr("href"), function(data) {
 
 			var doc = document.createElement("html");
 			doc.innerHTML = data;
 
 			$(".account-favorite").html( $(".account-favorite", doc).html() );
+		});
+
+		return false;
+	});
+	
+	/* Add to watch list without page reload */
+	$(".catalog-detail-actions .actions-button-watch").on("click", function(event) {
+
+		arcaviasOverlayCreate();
+
+		$.get($(this).attr("href"), function(data) {
+
+			var doc = document.createElement("html");
+			doc.innerHTML = data;
+			
+			arcaviasContainerCreate( $(".account-watch", doc) );
+		});
+
+		return false;
+	});
+
+	/* Delete watch items without page reload */
+	$("body").on("click", ".account-watch a.modify", function(event) {
+
+		var item = $(this).parents("watch-item");
+		item.addClass("loading");
+
+		$.get($(this).attr("href"), function(data) {
+
+			var doc = document.createElement("html");
+			doc.innerHTML = data;
+
+			$(".account-watch").html( $(".account-watch", doc).html() );
+		});
+
+		return false;
+	});
+
+	/* Edit watch items without page reload */
+	$("body").on("click", ".account-watch .standardbutton", function(event) {
+
+		var form = $(this).parents("form.watch-details");
+		form.addClass("loading");
+		
+		$.post(form.attr("action"), form.serialize(), function(data) {
+
+			var doc = document.createElement("html");
+			doc.innerHTML = data;
+
+			$(".account-watch").html( $(".account-watch", doc).html() );
 		});
 
 		return false;
@@ -281,7 +334,7 @@ jQuery(document).ready( function($) {
 	/* Add to basket without page reload */
 	$(".catalog-detail-basket form").on("submit", function(event) {
 
-		arcaviasOverlayAdd();
+		arcaviasOverlayCreate();
 		$.post($(this).attr("action"), $(this).serialize(), function(data) {
 			arcaviasContainerCreate( arcaviasBasketUpdate(data) );
 		});
@@ -291,7 +344,7 @@ jQuery(document).ready( function($) {
 
 	/* Go back to underlying page when back or close button is clicked */
 	$("body").on("click", ".basket-standard .btn-back", function(event) {
-		return arcaviasOverlayRemove();
+		return arcaviasOverlayDestroy();
 	});
 	
 	/* Hide update button an show only on quantity change */

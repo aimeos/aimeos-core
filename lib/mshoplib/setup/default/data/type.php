@@ -37,6 +37,7 @@ return array (
 
 	'customer/list/type' => array (
 		array( 'domain' => 'product', 'code' => 'favorite', 'label' => 'Favorite', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'watch', 'label' => 'Watch list', 'status' => 1 ),
 	),
 
 	'media/type' => array (
