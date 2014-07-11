@@ -17,7 +17,7 @@ try
 {
 	/// Payment e-mail form of address with salutation (%1$s), first name (%2$s) and last name (%3$s)
 	$msg = $this->translate( 'client/html', 'Dear %1$s %2$s %3$s' );
-	$addr = $this->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+	$addr = $this->extAddressItem;
 
 	$string = sprintf( $msg,
 		( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html/code', $addr->getSalutation() ) : '' ),

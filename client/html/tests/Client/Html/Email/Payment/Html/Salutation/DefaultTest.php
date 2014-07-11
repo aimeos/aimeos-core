@@ -48,6 +48,7 @@ class Client_Html_Email_Payment_Html_Salutation_DefaultTest extends MW_Unittest_
 		$view = TestHelper::getView();
 		$view->extOrderItem = self::$_orderItem;
 		$view->extOrderBaseItem = self::$_orderBaseItem;
+		$view->extAddressItem = self::$_orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->_emailMock ) );
 
 		$this->_object->setView( $view );
