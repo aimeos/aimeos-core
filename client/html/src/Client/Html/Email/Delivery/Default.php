@@ -150,11 +150,15 @@ class Client_Html_Email_Delivery_Default
 
 
 		$addr = $view->extAddressItem;
+		$billAddr = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
 		$msg = $view->mail();
 		$msg->addHeader( 'X-MailGenerator', 'Arcavias' );
 		$msg->addTo( $addr->getEMail(), $addr->getFirstName() . ' ' . $addr->getLastName() );
 
+		if( $billAddr->getEMail() != $addr->getEmail() ) {
+			$msg->addCc( $billAddr->getEMail(), $billAddr->getFirstName() . ' ' . $billAddr->getLastName() );
+		}
 
 		/** client/html/email/from-name
 		 * Name used when sending e-mails
