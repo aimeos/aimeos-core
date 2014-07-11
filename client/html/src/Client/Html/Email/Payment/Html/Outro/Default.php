@@ -102,7 +102,7 @@ class Client_Html_Email_Payment_Html_Outro_Default
 		$tplconf = 'client/html/email/payment/html/outro/default/template-body';
 
 		$status = $view->extOrderItem->getPaymentStatus();
-		$default = array( 'email/payment/' . $status . '/html-outro-body-default.html', 'email/payment/html-outro-body-default.html' );
+		$default = array( 'email/payment/' . $status . '/html-outro-body-default.html', 'email/common/html-outro-body-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -157,7 +157,7 @@ class Client_Html_Email_Payment_Html_Outro_Default
 		$tplconf = 'client/html/email/payment/html/outro/default/template-header';
 
 		$status = $view->extOrderItem->getPaymentStatus();
-		$default = array( 'email/payment/' . $status . '/html-outro-header-default.html', 'email/payment/html-outro-header-default.html' );
+		$default = array( 'email/payment/' . $status . '/html-outro-header-default.html', 'email/common/html-outro-header-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
