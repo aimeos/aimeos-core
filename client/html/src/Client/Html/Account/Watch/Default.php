@@ -237,7 +237,7 @@ class Client_Html_Account_Watch_Default
 						$search->compare( '==', 'customer.list.domain', 'product' ),
 					);
 					$search->setConditions( $search->combine( '&&', $expr ) );
-					$search->setSlice( 0 , 0 );
+					$search->setSlice( 0, 0 );
 
 					$total = 0;
 					$manager->searchItems( $search, array(), $total );
