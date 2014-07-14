@@ -74,7 +74,7 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 
 		$result = $this->_object->aggregate( $search, 'customer.list.domain' );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
 		$this->assertEquals( 4, $result['text'] );
 	}
@@ -313,7 +313,7 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.list.editor', $this->_editor ) );
-		$this->assertEquals( 4, count( $this->_object->searchItems($search) ) );
+		$this->assertEquals( 5, count( $this->_object->searchItems($search) ) );
 
 		//search with base criteria
 		$search = $this->_object->createSearch(true);
@@ -322,7 +322,7 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 4, count( $this->_object->searchItems($search) ) );
+		$this->assertEquals( 5, count( $this->_object->searchItems($search) ) );
 	}
 
 
