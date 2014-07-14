@@ -421,7 +421,15 @@ class Client_Html_Email_Delivery_Default
 	 */
 	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		$view->extAddressItem = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+		/** @todo 2016.03 Remove as this needs to be set by the calling code */
+		if( !isset( $view->extAddressItem ) )
+		{
+			try {
+				$view->extAddressItem = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+			} catch( Exception $e ) {
+				$view->extAddressItem = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+			}
+		}
 
 		return $view;
 	}

@@ -140,10 +140,16 @@ class Controller_Jobs_Order_Email_Delivery_Default
 					try
 					{
 						$orderBaseItem = $orderBaseManager->load( $item->getBaseId() );
+
+						try {
+							$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+						} catch( Exception $e ) {
+							$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+						}
+
+						$view->extAddressItem = $addr;
 						$view->extOrderBaseItem = $orderBaseItem;
 						$view->extOrderItem = $item;
-
-						$addr = $orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
 						$helper = new MW_View_Helper_Translate_Default( $view, $context->getI18n( $addr->getLanguageId() ) );
 						$view->addHelper( 'translate', $helper );
