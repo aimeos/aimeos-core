@@ -91,7 +91,7 @@ class Client_Html_Email_Watch_DefaultTest extends MW_Unittest_Testcase
 			->with( $this->equalTo( 'me@localhost' ), $this->equalTo( 'My company' ) );
 
 		$this->_emailMock->expects( $this->once() )->method( 'setSubject' )
-			->with( $this->stringContains( 'Your order' ) );
+			->with( $this->stringContains( 'Your watched products' ) );
 
 		$output = $this->_object->getHeader();
 		$this->assertNotNull( $output );
