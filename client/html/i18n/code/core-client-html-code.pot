@@ -154,3 +154,15 @@ msgstr "Bank name"
 #. Warehouse code
 msgid "warehouse:default"
 msgstr ""
+
+#. Favorite action
+msgid "favorite"
+msgstr ""
+
+#. Pin action
+msgid "pin"
+msgstr ""
+
+#. Watch action
+msgid "watch"
+msgstr ""

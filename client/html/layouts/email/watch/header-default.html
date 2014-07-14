@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+/// Product notification e-mail subject
+$this->mail()->setSubject( $this->translate( 'client/html', 'Your watched products' ) );
+
+?>
+<?php echo $this->get( 'watchHeader' ); ?>

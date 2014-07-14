@@ -18,7 +18,7 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'TextAddTestData', 'CustomerAddTestData' );
+		return array( 'MShopSetLocale', 'TextAddTestData', 'ProductAddTestData', 'CustomerAddTestData' );
 	}
 
 
@@ -69,9 +69,42 @@ class MW_Setup_Task_CustomerListAddTestData extends MW_Setup_Task_Abstract
 
 		$refIds = array();
 		$refIds['text'] = $this->_getTextData( $refKeys['text'] );
+		$refIds['product'] = $this->_getProductData( $refKeys['product'] );
 		$this->_addCustomerListData( $testdata, $refIds );
 
 		$this->_status( 'done' );
+	}
+
+
+	/**
+	 * Gets required product item ids.
+	 *
+	 * @param array $keys List of keys for search
+	 * @throws MW_Setup_Exception If no type ID is found
+	 */
+	protected function _getProductData( array $keys )
+	{
+		$manager = MShop_Product_Manager_Factory::createManager( $this->_additional, 'Default' );
+
+		$codes = array();
+		foreach( $keys as $dataset )
+		{
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) == false ) {
+				throw new MW_Setup_Exception( sprintf( 'Some keys for ref products are set wrong "%1$s"', $dataset ) );
+			}
+
+			$codes[] = $str;
+		}
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
+
+		$refIds = array();
+		foreach( $manager->searchItems( $search ) as $item ) {
+			$refIds[ 'product/' . $item->getCode() ] = $item->getId();
+		}
+
+		return $refIds;
 	}
 
 

@@ -102,7 +102,7 @@ class Client_Html_Email_Delivery_Text_Outro_Default
 		$tplconf = 'client/html/email/delivery/text/outro/default/template-body';
 
 		$status = $view->extOrderItem->getDeliveryStatus();
-		$default = array( 'email/delivery/' . $status . '/text-outro-body-default.html', 'email/delivery/text-outro-body-default.html' );
+		$default = array( 'email/delivery/' . $status . '/text-outro-body-default.html', 'email/common/text-outro-body-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}
@@ -157,7 +157,7 @@ class Client_Html_Email_Delivery_Text_Outro_Default
 		$tplconf = 'client/html/email/delivery/text/outro/default/template-header';
 
 		$status = $view->extOrderItem->getDeliveryStatus();
-		$default = array( 'email/delivery/' . $status . '/text-outro-header-default.html', 'email/delivery/text-outro-header-default.html' );
+		$default = array( 'email/delivery/' . $status . '/text-outro-header-default.html', 'email/common/text-outro-header-default.html' );
 
 		return $view->render( $this->_getTemplate( $tplconf, $default ) );
 	}

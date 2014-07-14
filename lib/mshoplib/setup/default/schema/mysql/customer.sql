@@ -60,12 +60,12 @@ CREATE TABLE "mshop_customer" (
 	"birthday" date NULL,
 	-- user password
 	"password" VARCHAR(255) NOT NULL,
+	-- Status of the customer item
+	"status" SMALLINT NOT NULL,
 	-- creation time
 	"ctime" DATETIME NOT NULL,
 	-- modification time
 	"mtime" DATETIME NOT NULL,
-	-- Status of the customer item
-	"status" SMALLINT NOT NULL,
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mscus_id"
@@ -271,3 +271,5 @@ CREATE INDEX "idx_mscusli_pid_sid_start" ON "mshop_customer_list" ("parentid", "
 CREATE INDEX "idx_mscusli_pid_sid_end" ON "mshop_customer_list" ("parentid", "siteid", "end");
 
 CREATE INDEX "idx_mscusli_pid_sid_pos" ON "mshop_customer_list" ("parentid", "siteid", "pos");
+
+CREATE INDEX "idx_mscusli_pid_sid_tid" ON "mshop_customer_list" ("parentid", "siteid", "typeid");

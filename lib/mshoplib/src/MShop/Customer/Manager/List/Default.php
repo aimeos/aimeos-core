@@ -21,6 +21,7 @@ class MShop_Customer_Manager_List_Default
 		'customer.list.id'=> array(
 			'code'=>'customer.list.id',
 			'internalcode'=>'mcusli."id"',
+			'internaldeps' => array( 'LEFT JOIN "mshop_customer_list" AS mcusli ON ( mcus."id" = mcusli."parentid" )' ),
 			'label'=>'Customer list ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,

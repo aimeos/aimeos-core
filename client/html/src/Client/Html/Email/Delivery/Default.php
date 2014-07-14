@@ -149,12 +149,16 @@ class Client_Html_Email_Delivery_Default
 		$view->deliveryHeader = $content;
 
 
-		$addr = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+		$addr = $view->extAddressItem;
+		$billAddr = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
 		$msg = $view->mail();
 		$msg->addHeader( 'X-MailGenerator', 'Arcavias' );
 		$msg->addTo( $addr->getEMail(), $addr->getFirstName() . ' ' . $addr->getLastName() );
 
+		if( $billAddr->getEMail() != $addr->getEmail() ) {
+			$msg->addCc( $billAddr->getEMail(), $billAddr->getFirstName() . ' ' . $billAddr->getLastName() );
+		}
 
 		/** client/html/email/from-name
 		 * Name used when sending e-mails
@@ -404,5 +408,29 @@ class Client_Html_Email_Delivery_Default
 	protected function _getSubClientNames()
 	{
 		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	{
+		/** @todo 2016.03 Remove as this needs to be set by the calling code */
+		if( !isset( $view->extAddressItem ) )
+		{
+			try {
+				$view->extAddressItem = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+			} catch( Exception $e ) {
+				$view->extAddressItem = $view->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
+			}
+		}
+
+		return $view;
 	}
 }

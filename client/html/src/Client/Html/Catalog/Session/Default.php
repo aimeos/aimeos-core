@@ -52,6 +52,17 @@ class Client_Html_Catalog_Session_Default
 	 */
 	private $_subPartPath = 'client/html/catalog/session/default/subparts';
 
+	/** client/html/catalog/session/pinned/name
+	 * Name of the pinned part used by the catalog session client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Catalog_Session_Pinned_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.09
+	 * @category Developer
+	 */
+
 	/** client/html/catalog/session/seen/name
 	 * Name of the seen part used by the catalog session client implementation
 	 *
@@ -62,7 +73,7 @@ class Client_Html_Catalog_Session_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'seen' );
+	private $_subPartNames = array( 'pinned', 'seen' );
 
 
 	/**

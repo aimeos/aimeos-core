@@ -99,13 +99,28 @@ class TestHelper
 	{
 		$view = new MW_View_Default();
 
+
+		$trans = new MW_Translation_None( 'de_DE' );
+		$helper = new MW_View_Helper_Translate_Default( $view, $trans );
+		$view->addHelper( 'translate', $helper );
+
+		$helper = new MW_View_Helper_Url_Default( $view, 'http://baseurl' );
+		$view->addHelper( 'url', $helper );
+
+		$helper = new MW_View_Helper_Number_Default( $view, '.', '' );
+		$view->addHelper( 'number', $helper );
+
+		$helper = new MW_View_Helper_Date_Default( $view, 'Y-m-d' );
+		$view->addHelper( 'date', $helper );
+
 		$helper = new MW_View_Helper_Config_Default( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$sepDec = $config->get( 'client/html/common/format/seperatorDecimal', '.' );
-		$sep1000 = $config->get( 'client/html/common/format/seperator1000', ' ' );
-		$helper = new MW_View_Helper_Number_Default( $view, $sepDec, $sep1000 );
-		$view->addHelper( 'number', $helper );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array() );
+		$view->addHelper( 'param', $helper );
+
+		$helper = new MW_View_Helper_FormParam_Default( $view );
+		$view->addHelper( 'formparam', $helper );
 
 		$helper = new MW_View_Helper_Encoder_Default( $view );
 		$view->addHelper( 'encoder', $helper );
