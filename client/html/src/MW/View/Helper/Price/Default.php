@@ -54,7 +54,7 @@ class MW_View_Helper_Price_Default
 				<span class="value">' . $enc->html( sprintf( $format['value'], $this->number( $priceItem->getValue() ), $currency ), $enc::TRUST ) . '</span>' .
 				( $rebate > 0  ? '
 				<span class="rebate">' . $enc->html( sprintf( $format['rebate'], $this->number( $rebate ), $currency ), $enc::TRUST ) . '</span>
-				<span class="rebatepercent">' . $enc->html( sprintf( $format['rebate%'], $this->number( round( $rebate * 100 / $priceItem->getValue() ), 0 ) ), $enc::TRUST ) . '</span>'
+				<span class="rebatepercent">' . $enc->html( sprintf( $format['rebate%'], $this->number( round( $rebate * 100 / ( $priceItem->getValue() + $rebate ) ), 0 ) ), $enc::TRUST ) . '</span>'
 				: '' ) .
 				( $costs > 0 ? '
 				<span class="costs">' . $enc->html( sprintf( $format['costs'], $this->number( $costs ), $currency ), $enc::TRUST ) . '</span>'
