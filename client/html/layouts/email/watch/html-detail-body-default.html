@@ -14,29 +14,10 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 
 ?>
 <style type="text/css">
-/* From arcavias.css */
-.arcavias li.attr-item,
-.arcavias li.form-item {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
 .arcavias .header {
 	border-radius: 0.5em;
 	-moz-border-radius: 0.5em;
 	-webkit-border-radius: 0.5em;
-}
-
-.arcavias .container {
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border: solid 1px #689DB9;
-	margin: 10px 0px;
-	padding: 0px 5px;
-	min-width: 240px;
-	max-width: 100%;
 }
 
 
@@ -47,58 +28,95 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 
 .common-summary .header,
 .common-summary-detail .header {
-	background-color: #F2F7FA;
+	background-color: #679CB8;
 	padding: 5px 10px;
-	margin: 5px;
-	margin-top: 0;
 }
 
 .common-summary-detail h2 {
-	display: inline-block;
+	font-weight: bold;
 	font-size: 1em;
-}
-
-.common-summary-detail .header {
-	border-bottom: none;
-	background-color: #FFFFFF;
+	color: #FFFFFF;
 }
 
 .common-summary-detail .product {
-	margin: 0px 5px;
+	border-bottom: solid 1px #689DB9;
+	margin: 0.5em;
 }
 
-.common-summary-detail .details img {
+.common-summary-detail img {
 	float: left;
 	max-width: 60px;
 	max-height: 80px;
 	overflow: hidden;
 	margin-right: 1em;
+	font-weight: bold;
 }
 
-.common-summary-detail .details .product-name {
+.common-summary-detail .product-name {
+	text-decoration: none;
 	font-weight: bold;
 	font-size: 133%;
-	margin: 0.5em;
+	margin: 0.5em 0;
 	display: block;
 }
+
+.common-summary-detail .price-item {
+	margin: 0.5em 0;
+}
+
+.common-summary-detail .price-item .quantity,
+.common-summary-detail .price-item .value,
+.common-summary-detail .price-item .costs,
+.common-summary-detail .price-item .rebate,
+.common-summary-detail .price-item .rebatepercent,
+.common-summary-detail .price-item .taxrate {
+	display: inline-block;
+	margin: 0.25em 0;
+	min-width: 5em;
+}
+
+.common-summary-detail .price-item:first-child .quantity,
+.common-summary-detail .price-item .rebate,
+.common-summary-detail .price-item .taxrate {
+	display: none;
+}
+
+.common-summary-detail .price-item:first-child .taxrate {
+	display: inline-block;
+	padding: 0 1em;
+}
+
+.common-summary-detail .price-item .value {
+	font-weight: bold;
+}
+
+.common-summary-detail .price-item .rebatepercent {
+	font-weight: bold;
+	font-size: 120%;
+	color: #FF0000;
+}
 </style>
-<div class="common-summary-detail common-summary content-block container">
+<div class="common-summary-detail common-summary content-block">
 	<div class="header">
 		<h2><?php echo $enc->html( $this->translate( 'client/html', 'Details' ), $enc::TRUST ); ?></h2>
 	</div>
-<?php foreach( $this->extProducts as $id => $product ) : ?>
-	<div class="product">
+<?php foreach( $this->extProducts as $product ) : ?>
+	<div class="product container">
 <?php	$media = $product->getRefItems( 'media', 'default', 'default' ); ?>
 <?php	if( ( $image = reset( $media ) ) !== false && ( $url = $image->getUrl() ) != '' ) : ?>
 		<img src="<?php echo $this->content( $url ); ?>" />
 <?php	endif; ?>
-<?php	$params = array( 'd-product-id' => $id, 'a-name' => str_replace( ' ', '-', strip_tags( $product->getName() ) ) ); ?>
+<?php	$params = array( 'd-product-id' => $product->getId(), 'a-name' => str_replace( ' ', '-', strip_tags( $product->getName() ) ) ); ?>
 		<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php	echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 		</a>
+<?php	$prices = $product->getRefItems( 'price', 'default', 'default' ); ?>
+<?php	if( ( $price = reset( $prices ) ) !== false ) : ?>
 		<div class="price-list">
-<?php	echo $this->price( $product->getRefItems( 'price', 'default', 'default' ) ); ?>
+<?php		echo $this->price( array( $price ) ); ?>
 		</div>
+<?php	endif; ?>
+	</div>
 <?php endforeach; ?>
 <?php echo $this->get( 'detailBody' ); ?>
 </div>

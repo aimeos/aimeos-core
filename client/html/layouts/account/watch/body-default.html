@@ -150,7 +150,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 							<option value="90" <?php echo ( $timeframe == 90 ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html', 'Three month' ) ); ?></option>
 						</select>
 					</li>
-<?php			$price = ( isset( $config['price'] ) ? (int) $config['price'] : 1 ); ?>
+<?php			$price = ( isset( $config['price'] ) ? (int) $config['price'] : 0 ); ?>
 					<li class="form-item price">
 						<label for="watch-price"><?php echo $enc->html( $this->translate( 'client/html', 'If price decreases' ), $enc::TRUST ); ?>
 						</label><input type="checkbox" id="watch-price" name="<?php echo $enc->attr( $this->formparam( array( 'watch-price' ) ) ); ?>" value="1" <?php echo ( $price ? 'checked="checked"' : '' ); ?> />
