@@ -212,6 +212,10 @@ class Client_Html_Catalog_Session_Pinned_Default
 				 * of pinned products. It must be a positive integer value greater
 				 * than 0.
 				 *
+				 * Note: The higher the value is the more data has to be transfered
+				 * to the client each time the user loads a page with the list of
+				 * pinned products.
+				 *
 				 * @param integer Number of products
 				 * @since 2014.09
 				 * @category User

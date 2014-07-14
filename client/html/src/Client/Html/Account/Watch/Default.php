@@ -230,6 +230,38 @@ class Client_Html_Account_Watch_Default
 			{
 				case 'add':
 
+					$search = $manager->createSearch();
+					$expr = array(
+						$search->compare( '==', 'customer.list.parentid', $context->getUserId() ),
+						$search->compare( '==', 'customer.list.typeid', $typeItem->getId() ),
+						$search->compare( '==', 'customer.list.domain', 'product' ),
+					);
+					$search->setConditions( $search->combine( '&&', $expr ) );
+					$search->setSlice( 0 , 0 );
+
+					$total = 0;
+					$manager->searchItems( $search, array(), $total );
+
+					/** client/html/account/watch/default/maxitems
+					 * Maximum number of products that can be watched in parallel
+					 *
+					 * This option limits the number of products that can be watched
+					 * after the users added the products to their watch list.
+					 * It must be a positive integer value greater than 0.
+					 *
+					 * Note: It's recommended to set this value not too high as this
+					 * leads to a high memory consumption when the e-mails are generated
+					 * to notify the customers. The memory used will up to 100*maxitems
+					 * of the footprint of one product item including the associated
+					 * texts, prices and media.
+					 *
+					 * @param integer Number of products
+					 * @since 2014.09
+					 * @category User
+					 * @category Developer
+					 */
+					$max = $context->getConfig()->get( 'client/html/account/watch/default/maxitems', 100 );
+
 					$item = $manager->createItem();
 					$item->setParentId( $context->getUserId() );
 					$item->setTypeId( $typeItem->getId() );
@@ -238,6 +270,13 @@ class Client_Html_Account_Watch_Default
 
 					foreach( (array) $view->param( 'watch-id', array() ) as $id )
 					{
+						if( $total >= $max )
+						{
+							$error = array( sprintf( $context->getI18n()->dt( 'client/html', 'You can only watch up to %1$s products' ), $max ) );
+							$view->watchErrorList = $view->get( 'watchErrorList', array() ) + $error;
+							break;
+						}
+
 						if( !isset( $items[$id] ) )
 						{
 							$item->setId( null );
@@ -245,6 +284,8 @@ class Client_Html_Account_Watch_Default
 
 							$manager->saveItem( $item );
 							$manager->moveItem( $item->getId() );
+
+							$total++;
 						}
 					}
 
