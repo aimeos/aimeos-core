@@ -117,7 +117,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 		{
 			$context = $this->_getContext();
 			$session = $context->getSession();
-			$str = $session->get( 'arcavias/client/html/catalog/session/seen' );
+			$str = $session->get( 'arcavias/catalog/session/seen/list' );
 
 			if( ( $lastSeen = @unserialize( $str ) ) === false ) {
 				$lastSeen = array();
@@ -128,8 +128,6 @@ class Client_Html_Catalog_Detail_Seen_Default
 				$html = $lastSeen[$id];
 				unset( $lastSeen[$id] );
 				$lastSeen[$id] = $html;
-
-				$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
 			}
 			else
 			{
@@ -149,8 +147,12 @@ class Client_Html_Catalog_Detail_Seen_Default
 
 				$lastSeen[$id] = $this->_getHtml( $id );
 				$lastSeen = array_slice( $lastSeen, -$max, $max, true );
+			}
 
-				$session->set( 'arcavias/client/html/catalog/session/seen', serialize( $lastSeen ) );
+			$session->set( 'arcavias/catalog/session/seen/list', serialize( $lastSeen ) );
+
+			foreach( $session->get( 'arcavias/catalog/session/seen/cache', array() ) as $key => $value ) {
+				$session->set( $key, null );
 			}
 		}
 
