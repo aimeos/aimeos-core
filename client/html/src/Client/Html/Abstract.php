@@ -34,7 +34,6 @@ abstract class Client_Html_Abstract
 	private $_context;
 	private $_subclients;
 	private $_templatePaths;
-	private $_hashes = array();
 
 
 	/**
@@ -333,32 +332,19 @@ abstract class Client_Html_Abstract
 	 *
 	 * @param array $prefixes List of prefixes the parameters must start with
 	 * @param string $key Unique identifier if the content is placed more than once on the same page
+	 * @param array $config Multi-dimensional array of configuration options used by the client and sub-clients
 	 * @return string Unique hash
 	 */
-	protected function _getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '' )
+	protected function _getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '', array $config = array() )
 	{
-		$idx = implode( $prefixes ) . '/' . $key;
+		$params = $this->_getClientParams( $this->getView()->param(), $prefixes );
+		ksort( $params );
 
-		if( !isset( $this->_hashes[$idx] ) )
-		{
-			$params = $this->_getClientParams( $this->getView()->param(), $prefixes );
-			ksort( $params );
-
-			foreach( $params as $name => $value )
-			{
-				if( is_array( $value ) ) {
-					$value = implode( $value );
-				}
-
-				if( $value !== '' ) {
-					$key .= $name . $value;
-				}
-			}
-
-			$this->_hashes[$idx] = md5( $key );
+		if( ( $pstr = json_encode( $params ) ) === false || ( $cstr = json_encode( $config ) ) === false ) {
+			throw new Client_Html_Exception( 'Unable to encode parameters or configuration options' );
 		}
 
-		return $this->_hashes[$idx];
+		return md5( $key . $pstr . $cstr );
 	}
 
 

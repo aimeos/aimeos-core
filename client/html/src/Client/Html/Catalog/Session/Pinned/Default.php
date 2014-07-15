@@ -65,8 +65,13 @@ class Client_Html_Catalog_Session_Pinned_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$session = $this->_getContext()->getSession();
-		$key = 'arcavias/client/html/catalog/session/pinned/body';
+		$context = $this->_getContext();
+		$session = $context->getSession();
+		$view = $this->getView();
+
+		$html = null;
+		$config = $context->getConfig()->get( 'client/html/catalog/session/pinned', array() );
+		$key = $this->_getParamHash( array(), $uid . ':catalog:session-pinned-body', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
@@ -103,6 +108,8 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
+			$cached = $session->get( 'arcavias/catalog/session/pinned/cache', array() ) + array( $key => true );
+			$session->set( 'arcavias/catalog/session/pinned/cache', $cached );
 			$session->set( $key, $html );
 		}
 
@@ -120,8 +127,13 @@ class Client_Html_Catalog_Session_Pinned_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$session = $this->_getContext()->getSession();
-		$key = 'arcavias/client/html/catalog/session/pinned/header';
+		$context = $this->_getContext();
+		$session = $context->getSession();
+		$view = $this->getView();
+
+		$html = null;
+		$config = $context->getConfig()->get( 'client/html/catalog/session/pinned', array() );
+		$key = $this->_getParamHash( array(), $uid . ':catalog:session-pinned-header', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
@@ -159,6 +171,8 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
+			$cached = $session->get( 'arcavias/catalog/session/pinned/cache', array() ) + array( $key => true );
+			$session->set( 'arcavias/catalog/session/pinned/cache', $cached );
 			$session->set( $key, $html );
 		}
 
@@ -190,7 +204,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 		$view = $this->getView();
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$str = $session->get( 'arcavias/client/html/catalog/session/pinned/list' );
+		$str = $session->get( 'arcavias/catalog/session/pinned/list' );
 
 		if( ( $pinned = @unserialize( $str ) ) === false ) {
 			$pinned = array();
@@ -240,9 +254,11 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 		if( $refresh )
 		{
-			$session->set( 'arcavias/client/html/catalog/session/pinned/list', serialize( $pinned ) );
-			$session->set( 'arcavias/client/html/catalog/session/pinned/header', null );
-			$session->set( 'arcavias/client/html/catalog/session/pinned/body', null );
+			$session->set( 'arcavias/catalog/session/pinned/list', serialize( $pinned ) );
+
+			foreach( $session->get( 'arcavias/catalog/session/pinned/cache', array() ) as $key => $value ) {
+				$session->set( $key, null );
+			}
 		}
 
 		parent::process();
@@ -301,7 +317,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 			 */
 			$domains = $config->get( 'client/html/catalog/detail/pinned/domains', $default );
 
-			$str = $session->get( 'arcavias/client/html/catalog/session/pinned/list', '' );
+			$str = $session->get( 'arcavias/catalog/session/pinned/list', '' );
 
 			if( ( $pinned = @unserialize( $str ) ) === false ) {
 				$pinned = array();
