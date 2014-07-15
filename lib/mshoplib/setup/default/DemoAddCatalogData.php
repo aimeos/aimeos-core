@@ -47,7 +47,7 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 	 */
 	protected function _process()
 	{
-		$this->_msg( 'Processing service demo data', 0 );
+		$this->_msg( 'Processing catalog demo data', 0 );
 
 		$item = null;
 		$context =  $this->_getContext();
