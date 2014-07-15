@@ -44,10 +44,21 @@ class MW_View_Default implements MW_View_Interface
 				throw new MW_View_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$this->_helper[$name] = new $classname( $this );;
+			$this->_helper[$name] = new $classname( $this );
 		}
 
 		return call_user_func_array( array( $this->_helper[$name], 'transform' ), $args );
+	}
+
+
+	/**
+	 * Clones internal objects of the view.
+	 */
+	public function __clone()
+	{
+		foreach( $this->_helper as $name => $helper ) {
+			$this->_helper[$name] = clone $helper;
+		}
 	}
 
 
