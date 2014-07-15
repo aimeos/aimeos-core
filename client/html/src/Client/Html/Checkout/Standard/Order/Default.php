@@ -9,7 +9,7 @@
 
 
 // Strings for translation
-_('order');
+sprintf('order');
 
 
 /**

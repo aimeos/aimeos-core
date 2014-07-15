@@ -9,7 +9,7 @@
 
 
 // Strings for translation
-_('payment');
+sprintf('payment');
 
 
 /**
