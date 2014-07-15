@@ -229,9 +229,13 @@ class MShop_Customer_Item_Default
 	{
 		if ( $value === $this->getBirthday() ) { return; }
 
-		$this->_checkDateOnlyFormat( $value );
+		if( $value !== null )
+		{
+			$this->_checkDateOnlyFormat( $value );
+			$value = (string) $value;
+		}
 
-		$this->_values['birthday'] = (string) $value;
+		$this->_values['birthday'] = $value;
 		$this->setModified();
 	}
 
@@ -276,7 +280,7 @@ class MShop_Customer_Item_Default
 	/**
 	 * Sets the latest verification date of the customer.
 	 *
-	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD format) or null if unknown
+	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD) or null if unknown
 	 */
 	public function setDateVerified( $value )
 	{
@@ -284,7 +288,7 @@ class MShop_Customer_Item_Default
 
 		$this->_checkDateOnlyFormat( $value );
 
-		$this->_values['vdate'] = $value;
+		$this->_values['vdate'] = ( $value ? (string) $value : null );
 		$this->setModified();
 	}
 

@@ -16,10 +16,10 @@ return array(
 				"siteid", "label", "code", "company", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
-				"email", "telefax", "website", "birthday", "status",
+				"email", "telefax", "website", "birthday", "status", "vdate",
 				"password", "mtime", "editor", "ctime"
 			) VALUES (
-				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 			)
 		',
 		'update' => '
@@ -29,8 +29,8 @@ return array(
 				"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 				"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 				"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?,
-				"birthday" = ?, "status" = ?, "password" = ?, "mtime" = ?,
-				"editor" = ?
+				"birthday" = ?, "status" = ?, "vdate" = ?, "password" = ?,
+				"mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
@@ -40,8 +40,8 @@ return array(
 				mcus."address2", mcus."address3", mcus."postal", mcus."city",
 				mcus."state", mcus."countryid", mcus."langid",
 				mcus."telephone", mcus."email", mcus."telefax", mcus."website",
-				mcus."birthday", mcus."status", mcus."password", mcus."ctime",
-				mcus."mtime", mcus."editor"
+				mcus."birthday", mcus."status", mcus."vdate", mcus."password",
+				mcus."ctime", mcus."mtime", mcus."editor"
 			FROM "mshop_customer" AS mcus
 			:joins
 			WHERE :cond

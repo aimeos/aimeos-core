@@ -62,6 +62,8 @@ CREATE TABLE "mshop_customer" (
 	"password" VARCHAR(255) NOT NULL,
 	-- Status of the customer item
 	"status" SMALLINT NOT NULL,
+	-- last verification time
+	"vdate" DATE NULL,
 	-- creation time
 	"ctime" DATETIME NOT NULL,
 	-- modification time
