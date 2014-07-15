@@ -64,7 +64,7 @@ class Client_Html_Catalog_Session_Seen_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$str = serialize( array( 1 => 'html product one',  2 => 'html product two' ) );
-		$this->_context->getSession()->set( 'arcavias/client/html/catalog/session/seen', $str );
+		$this->_context->getSession()->set( 'arcavias/catalog/session/seen/list', $str );
 
 		$output = $this->_object->getBody();
 

@@ -81,7 +81,9 @@ class Client_Html_Basket_Mini_Default
 		$session = $context->getSession();
 		$view = $this->getView();
 
-		$key = 'arcavias/basket/mini/body';
+		$html = null;
+		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
+		$key = $this->_getParamHash( array(), $uid . ':basket:mini-body', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
@@ -143,7 +145,7 @@ class Client_Html_Basket_Mini_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cached = $session->get( 'arcavias/basket/cache', array() ) + array( 'arcavias/basket/mini/body' => true );
+			$cached = $session->get( 'arcavias/basket/cache', array() ) + array( $key => true );
 			$session->set( 'arcavias/basket/cache', $cached );
 			$session->set( $key, $html );
 		}
@@ -170,7 +172,9 @@ class Client_Html_Basket_Mini_Default
 		$session = $context->getSession();
 		$view = $this->getView();
 
-		$key = 'arcavias/basket/mini/header';
+		$html = null;
+		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
+		$key = $this->_getParamHash( array(), $uid . ':basket:mini-header', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
@@ -210,7 +214,7 @@ class Client_Html_Basket_Mini_Default
 
 				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-				$cached = $session->get( 'arcavias/basket/cache', array() ) + array( 'arcavias/basket/mini/header' => true );
+				$cached = $session->get( 'arcavias/basket/cache', array() ) + array( $key => true );
 				$session->set( 'arcavias/basket/cache', $cached );
 				$session->set( $key, $html );
 			}

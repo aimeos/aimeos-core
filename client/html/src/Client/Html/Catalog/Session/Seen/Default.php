@@ -65,38 +65,55 @@ class Client_Html_Catalog_Session_Seen_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$context = $this->_getContext();
+		$session = $context->getSession();
+		$view = $this->getView();
 
-		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
-			$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
+		$html = null;
+		$config = $context->getConfig()->get( 'client/html/catalog/session/seen', array() );
+		$key = $this->_getParamHash( array(), $uid . ':catalog:session-seen-body', $config );
+
+		if( ( $html = $session->get( $key ) ) === null )
+		{
+			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+
+			$html = '';
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
+			}
+			$view->seenBody = $html;
+
+			/** client/html/catalog/session/seen/default/template-body
+			 * Relative path to the HTML body template of the catalog session seen client.
+			 *
+			 * The template file contains the HTML code and processing instructions
+			 * to generate the result shown in the body of the frontend. The
+			 * configuration string is the path to the template file relative
+			 * to the layouts directory (usually in client/html/layouts).
+			 *
+			 * You can overwrite the template file configuration in extensions and
+			 * provide alternative templates. These alternative templates should be
+			 * named like the default one but with the string "default" replaced by
+			 * an unique name. You may use the name of your project for this. If
+			 * you've implemented an alternative client class as well, "default"
+			 * should be replaced by the name of the new class.
+			 *
+			 * @param string Relative path to the template creating code for the HTML page body
+			 * @since 2014.03
+			 * @category Developer
+			 * @see client/html/catalog/session/seen/default/template-header
+			 */
+			$tplconf = 'client/html/catalog/session/seen/default/template-body';
+			$default = 'catalog/session/seen-body-default.html';
+
+			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+
+			$cached = $session->get( 'arcavias/catalog/session/seen/cache', array() ) + array( $key => true );
+			$session->set( 'arcavias/catalog/session/seen/cache', $cached );
+			$session->set( $key, $html );
 		}
-		$view->seenBody = $html;
 
-		/** client/html/catalog/session/seen/default/template-body
-		 * Relative path to the HTML body template of the catalog session seen client.
-		 *
-		 * The template file contains the HTML code and processing instructions
-		 * to generate the result shown in the body of the frontend. The
-		 * configuration string is the path to the template file relative
-		 * to the layouts directory (usually in client/html/layouts).
-		 *
-		 * You can overwrite the template file configuration in extensions and
-		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
-		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
-		 * should be replaced by the name of the new class.
-		 *
-		 * @param string Relative path to the template creating code for the HTML page body
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/catalog/session/seen/default/template-header
-		 */
-		$tplconf = 'client/html/catalog/session/seen/default/template-body';
-		$default = 'catalog/session/seen-body-default.html';
-
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $html;
 	}
 
 
@@ -110,39 +127,56 @@ class Client_Html_Catalog_Session_Seen_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+		$context = $this->_getContext();
+		$session = $context->getSession();
+		$view = $this->getView();
 
-		$html = '';
-		foreach( $this->_getSubClients() as $subclient ) {
-			$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
+		$html = null;
+		$config = $context->getConfig()->get( 'client/html/catalog/session/seen', array() );
+		$key = $this->_getParamHash( array(), $uid . ':catalog:session-seen-header', $config );
+
+		if( ( $html = $session->get( $key ) ) === null )
+		{
+			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
+
+			$html = '';
+			foreach( $this->_getSubClients() as $subclient ) {
+				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
+			}
+			$view->seenHeader = $html;
+
+			/** client/html/catalog/session/seen/default/template-header
+			 * Relative path to the HTML header template of the catalog session seen client.
+			 *
+			 * The template file contains the HTML code and processing instructions
+			 * to generate the HTML code that is inserted into the HTML page header
+			 * of the rendered page in the frontend. The configuration string is the
+			 * path to the template file relative to the layouts directory (usually
+			 * in client/html/layouts).
+			 *
+			 * You can overwrite the template file configuration in extensions and
+			 * provide alternative templates. These alternative templates should be
+			 * named like the default one but with the string "default" replaced by
+			 * an unique name. You may use the name of your project for this. If
+			 * you've implemented an alternative client class as well, "default"
+			 * should be replaced by the name of the new class.
+			 *
+			 * @param string Relative path to the template creating code for the HTML page head
+			 * @since 2014.03
+			 * @category Developer
+			 * @see client/html/catalog/session/seen/default/template-body
+			 */
+			$tplconf = 'client/html/catalog/session/seen/default/template-header';
+			$default = 'catalog/session/seen-header-default.html';
+
+			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
+
+			$cached = $session->get( 'arcavias/catalog/session/seen/cache', array() ) + array( $key => true );
+			$session->set( 'arcavias/catalog/session/seen/cache', $cached );
+			$session->set( $key, $html );
 		}
-		$view->seenHeader = $html;
 
-		/** client/html/catalog/session/seen/default/template-header
-		 * Relative path to the HTML header template of the catalog session seen client.
-		 *
-		 * The template file contains the HTML code and processing instructions
-		 * to generate the HTML code that is inserted into the HTML page header
-		 * of the rendered page in the frontend. The configuration string is the
-		 * path to the template file relative to the layouts directory (usually
-		 * in client/html/layouts).
-		 *
-		 * You can overwrite the template file configuration in extensions and
-		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
-		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
-		 * should be replaced by the name of the new class.
-		 *
-		 * @param string Relative path to the template creating code for the HTML page head
-		 * @since 2014.03
-		 * @category Developer
-		 * @see client/html/catalog/session/seen/default/template-body
-		 */
-		$tplconf = 'client/html/catalog/session/seen/default/template-header';
-		$default = 'catalog/session/seen-header-default.html';
-
-		return $view->render( $this->_getTemplate( $tplconf, $default ) );
+		return $html;
 	}
 
 
@@ -183,7 +217,7 @@ class Client_Html_Catalog_Session_Seen_Default
 		if( !isset( $this->_cache ) )
 		{
 			$session = $this->_getContext()->getSession();
-			$str = $session->get( 'arcavias/client/html/catalog/session/seen', '' );
+			$str = $session->get( 'arcavias/catalog/session/seen/list', '' );
 
 			if( ( $lastSeen = @unserialize( $str ) ) === false ) {
 				$lastSeen = array();

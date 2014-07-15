@@ -117,7 +117,8 @@ class Client_Html_Catalog_List_Default
 		$view = $this->getView();
 
 		$html = null;
-		$key = $this->_getParamHash( array( 'f', 'l' ), $uid . ':catalog:list-body' );
+		$config = $context->getConfig()->get( 'client/html/catalog/list', array() );
+		$key = $this->_getParamHash( array( 'f', 'l' ), $uid . ':catalog:list-body', $config );
 
 		if( ( $html = $cache->get( $key ) ) === null )
 		{
@@ -205,7 +206,8 @@ class Client_Html_Catalog_List_Default
 		$view = $this->getView();
 
 		$html = null;
-		$key = $this->_getParamHash( array( 'f', 'l' ), $uid . ':catalog:list-header' );
+		$config = $context->getConfig()->get( 'client/html/catalog/list', array() );
+		$key = $this->_getParamHash( array( 'f', 'l' ), $uid . ':catalog:list-header', $config );
 
 		if( ( $html = $cache->get( $key ) ) === null )
 		{
