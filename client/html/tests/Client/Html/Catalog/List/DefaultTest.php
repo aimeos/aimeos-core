@@ -81,8 +81,8 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$output = $this->_object->getHeader( 1, $tags, $expire );
 
 		$this->assertRegexp( '#<title>[^>]*Search result[^<]*</title>#', $output );
-		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 1, count( $tags ) );
+		$this->assertEquals( null, $expire );
+		$this->assertEquals( 0, count( $tags ) );
 	}
 
 
