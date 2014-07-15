@@ -9,7 +9,7 @@
 
 
 // Strings for translation
-_('summary');
+sprintf('summary');
 
 
 /**
