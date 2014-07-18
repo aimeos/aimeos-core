@@ -496,11 +496,12 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	{
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$sitecode = $context->getLocale()->getSite()->getCode();
+		$locale = $context->getLocale();
+		$currency = $locale->getCurrencyId();
+		$sitecode = $locale->getSite()->getCode();
+		$key = 'arcavias/basket/' . $sitecode . '-' . $currency . '-' . strval( $type );
 
-		$name = 'basket_' . strval( $type ) . '_' . $sitecode;
-
-		if( ( $serorder = $session->get( $name ) ) === null ) {
+		if( ( $serorder = $session->get( $key ) ) === null ) {
 			return $this->createItem();
 		}
 
@@ -530,9 +531,12 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	{
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$sitecode = $context->getLocale()->getSite()->getCode();
+		$locale = $context->getLocale();
+		$currency = $locale->getCurrencyId();
+		$sitecode = $locale->getSite()->getCode();
+		$key = 'arcavias/basket-lock/' . $sitecode . '-' . $currency . '-' . strval( $type );
 
-		if( ( $value = $session->get( 'basket-lock_' . strval( $type ) . '_' . $sitecode ) ) !== null ) {
+		if( ( $value = $session->get( $key ) ) !== null ) {
 			return (int) $value;
 		}
 
@@ -550,9 +554,12 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	{
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$sitecode = $context->getLocale()->getSite()->getCode();
+		$locale = $context->getLocale();
+		$currency = $locale->getCurrencyId();
+		$sitecode = $locale->getSite()->getCode();
+		$key = 'arcavias/basket/' . $sitecode . '-' . $currency . '-' . strval( $type );
 
-		$session->set( 'basket_' . strval( $type ) . '_' . $sitecode, serialize( clone $order ) );
+		$session->set( $key, serialize( clone $order ) );
 	}
 
 
@@ -570,9 +577,12 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$sitecode = $context->getLocale()->getSite()->getCode();
+		$locale = $context->getLocale();
+		$currency = $locale->getCurrencyId();
+		$sitecode = $locale->getSite()->getCode();
+		$key = 'arcavias/basket-lock/' . $sitecode . '-' . $currency . '-' . strval( $type );
 
-		$session->set( 'basket-lock_' . strval( $type ) . '_' . $sitecode, strval( $lock ) );
+		$session->set( $key, strval( $lock ) );
 	}
 
 
