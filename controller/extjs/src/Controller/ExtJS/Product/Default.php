@@ -58,7 +58,7 @@ class Controller_ExtJS_Product_Default
 			$indexManager->saveItem( $item );
 		}
 
-		$this->_getContext()->getCache()->deleteByTags( array( 'product' ) );
+		$this->_clearCache( (array) $params->items );
 
 		return array(
 			'success' => true,
@@ -106,6 +106,8 @@ class Controller_ExtJS_Product_Default
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
+
+		$this->_clearCache( $ids );
 
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.id', $ids ) );

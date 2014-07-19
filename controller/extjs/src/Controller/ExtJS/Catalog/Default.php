@@ -173,7 +173,7 @@ class Controller_ExtJS_Catalog_Default
 			$ids[] = $item->getId();
 		}
 
-		$this->_clearCache( (array) $params->items );
+		$this->_clearCache( $ids );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.id', $ids ) );

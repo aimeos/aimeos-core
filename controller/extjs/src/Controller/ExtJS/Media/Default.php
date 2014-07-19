@@ -193,6 +193,8 @@ class Controller_ExtJS_Media_Default
 			$ids[] = $item->getId();
 		}
 
+		$this->_clearCache( $ids );
+
 		$search = $this->_manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'media.id', $ids ) );
 		$search->setSlice( 0, count( $ids ) );
