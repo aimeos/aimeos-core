@@ -3,15 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 # Dimitri <doleiynyk@metaways.de>, 2013
 # Dimitri <doleiynyk@metaways.de>, 2013
 # nsendetzky <n.sendetzky@metaways.de>, 2014
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 13:34+0200\n"
-"PO-Revision-Date: 2014-05-15 11:19+0000\n"
+"POT-Creation-Date: 2014-07-20 18:54+0200\n"
+"PO-Revision-Date: 2014-07-20 16:54+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -57,50 +59,58 @@ msgid ""
 "%15$s\n"
 "%16$s\n"
 "%17$s\n"
-msgstr ""
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
+#: layouts/account/watch/body-default.html:90
+#: layouts/account/favorite/body-default.html:90
 #: layouts/catalog/list/promo-body-default.html:17
 #: layouts/catalog/list/items-body-default.html:16
+#: layouts/catalog/session/pinned-body-default.html:89
 #: layouts/catalog/detail/suggest-body-default.html:18
 #: layouts/catalog/detail/seen-body-default.html:16
 #: layouts/common/summary/detail-body-default.html:68
 #: layouts/basket/mini/main-body-default.html:23
+#: layouts/email/watch/text-detail-body-default.html:19
 #: layouts/email/common/text-summary-detail-body-default.html:55
 #: layouts/checkout/standard/payment-body-default.html:38
 #: layouts/checkout/standard/delivery-body-default.html:38
 #: src/MW/View/Helper/Price/Default.php:78
 #, php-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #. / Rebate format with rebate value (%1$s) and currency (%2$s)
+#: layouts/email/watch/text-detail-body-default.html:25
 #: src/MW/View/Helper/Price/Default.php:82
 #, php-format
 msgid "%1$s %2$s off"
-msgstr ""
+msgstr "скидка %1$s %2$s"
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
 #. value (%2$s) and currency (%3$s)
 #: layouts/catalog/detail/basket-attribute-body-default.html:32
 #, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
-msgstr ""
+msgstr "%1$s ( %4$s%2$s%3$s )"
 
 #: layouts/account/history/list-body-default.html:82
 #: layouts/account/history/list-body-default.html:97
 #, php-format
 msgid "%1$s at %2$s"
-msgstr ""
+msgstr "%1$s в %2$s"
 
 #. / Percent format with value (%1$s) and % sign
+#: layouts/account/watch/body-default.html:92
+#: layouts/account/favorite/body-default.html:92
 #: layouts/catalog/list/promo-body-default.html:19
 #: layouts/catalog/list/items-body-default.html:18
+#: layouts/catalog/session/pinned-body-default.html:91
 #: layouts/catalog/detail/suggest-body-default.html:20
 #: layouts/catalog/detail/seen-body-default.html:18
 #, php-format
 msgid "%1$s%%"
-msgstr ""
+msgstr "%1$s%%"
 
 #. / Service fee value (%1$s) and shipping cost value (%2$s) with currency
 #. (%3$s)
@@ -112,18 +122,19 @@ msgstr "%1$s%3$s + %2$s%3$s"
 
 #: layouts/basket/standard/coupon-body-default.html:30
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #. / Price shipping format with shipping / payment cost value (%1$s) and
 #. currency (%2$s)
+#: layouts/email/watch/text-detail-body-default.html:22
 #: src/MW/View/Helper/Price/Default.php:80
 #, php-format
 msgid "+ %1$s %2$s/item"
-msgstr ""
+msgstr "+ %1$s %2$s/штуку"
 
 #: layouts/email/common/text-summary-detail-body-default.html:91
 msgid "+ Payment costs"
-msgstr "+ Стоимость оплаты"
+msgstr "+ Издержки на оплату"
 
 #: layouts/email/common/text-summary-detail-body-default.html:89
 #: layouts/email/common/text-summary-detail-body-default.html:99
@@ -131,10 +142,11 @@ msgid "+ Shipping"
 msgstr "+ Доставка"
 
 #. / Rebate percent format with rebate percent value (%1$s)
+#: layouts/email/watch/text-detail-body-default.html:28
 #: src/MW/View/Helper/Price/Default.php:84
 #, php-format
 msgid "-%1$s%%"
-msgstr ""
+msgstr "-%1$s%%"
 
 #: layouts/catalog/detail/basket-body-default.html:32
 msgid "Add to basket"
@@ -150,10 +162,10 @@ msgstr "Дополнительно"
 msgid "Additional 2"
 msgstr "Дополнительно 2"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:336
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:330
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
-msgstr "Адрес с номером \"%1$s\" не найден"
+msgstr "Не найден адрес с номером \"%1$s\""
 
 #: layouts/common/summary/address-body-default.html:19
 msgid "Addresses"
@@ -165,21 +177,21 @@ msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
-msgstr ""
+msgstr "Все заказы отгружены в соответствии с условиями, указанными на нашем сайте, и которые Вы приняли при оформлении заказа.\n\nЭто письмо содержит конфиденциальную информацию и предназначено исключительно для указанной в нём персоны. Если это не Вы, то не отвечайте на это письмо, которое можно просто удалить со всеми вложениями."
 
 #: layouts/catalog/detail/basic-body-default.html:16
 msgid "Article no.:"
-msgstr "Номер товара:"
+msgstr "Артикул:"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:319
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:313
 #, php-format
 msgid "At least one billing address part is missing"
-msgstr "Не хватает минимум одной части адреса счета"
+msgstr "Часть платёжного адреса заполнена неверно"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:316
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:310
 #, php-format
 msgid "At least one delivery address part is missing"
-msgstr "Не хватает минимум одной части адреса доставки"
+msgstr "Часть адреса доставки заполнена неверно"
 
 #: layouts/basket/standard/body-default.html:41
 #: layouts/checkout/standard/address-body-default.html:17
@@ -199,43 +211,43 @@ msgstr "Корзина"
 #: layouts/email/common/text-summary-address-body-default.html:17
 #: layouts/checkout/standard/address-billing-body-default.html:47
 msgid "Billing address"
-msgstr "Адрес счета"
+msgstr "Платёжный адрес"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:301
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:312
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:295
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:306
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
-msgstr "\"%1$s\" часть адреса счета не хватает"
+msgstr "Ошибка в части\"%1$s\" платёжного адреса"
 
 #: layouts/checkout/standard/summary-body-default.html:19
 msgid "Buy now"
 msgstr "Купить"
 
-#: src/Client/Html/Catalog/Filter/Tree/Default.php:236
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:234
 #, php-format
 msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
-msgstr ""
+msgstr "Категория с ID \"%1$s\" не ниже ID \"%2$s\""
 
 #: layouts/common/summary/address-body-default.html:24
 #: layouts/common/summary/address-body-default.html:78
 #: layouts/common/summary/detail-body-default.html:78
 #: layouts/common/summary/service-body-default.html:18
 #: layouts/common/summary/service-body-default.html:52
-#: layouts/common/summary/coupon-body-default.html:19
+#: layouts/common/summary/coupon-body-default.html:20
 msgid "Change"
-msgstr "Поменять"
+msgstr "Изменить"
 
 #: layouts/checkout/confirm/retry-body-default.html:23
 msgid "Change payment"
-msgstr "Изменть оплату"
+msgstr "Изменить оплату"
 
 #: layouts/catalog/detail/additional-attribute-body-default.html:15
 msgid "Characteristics"
-msgstr ""
+msgstr "Характеристики"
 
 #: layouts/basket/standard/body-default.html:45
 msgid "Checkout"
-msgstr "Касса"
+msgstr "Оформить"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:147
 #: layouts/checkout/standard/address-billing-body-default.html:143
@@ -245,24 +257,24 @@ msgstr "Город"
 #: src/Client/Html/Common/Factory/Abstract.php:66
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr ""
+msgstr "Класс \"%1$s\" не реализует \"%2$s\""
 
-#: src/Client/Html/Abstract.php:150
+#: src/Client/Html/Abstract.php:290
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 
-#: src/Client/Html/Abstract.php:144
+#: src/Client/Html/Abstract.php:284
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступен класс \"%1$s\""
 
 #: src/Client/Html/Common/Factory/Abstract.php:60
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден класс \"%1$s\""
 
 #: layouts/account/history/detail-body-default.html:17
 #: layouts/account/history/detail-body-default.html:21
@@ -283,19 +295,20 @@ msgstr "Подтверждение"
 msgid "Country"
 msgstr "Страна"
 
+#: layouts/common/summary/coupon-body-default.html:22
 #: layouts/basket/standard/coupon-body-default.html:24
 msgid "Coupon codes"
-msgstr ""
+msgstr "Коды купона"
 
-#: layouts/common/summary/coupon-body-default.html:21
+#: layouts/common/summary/coupon-body-default.html:17
 #: layouts/email/common/text-summary-coupon-body-default.html:11
 msgid "Coupons"
-msgstr ""
+msgstr "Купоны"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:338
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:332
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден покупатель с номером \"%1$s\""
 
 #. / Payment e-mail form of address with salutation (%1$s), first name (%2$s)
 #. and last name (%3$s)
@@ -308,7 +321,7 @@ msgstr "Уважаемый %1$s %2$s %3$s"
 #: layouts/email/common/html-salutation-body-default.html:30
 #: layouts/email/common/text-salutation-body-default.html:28
 msgid "Dear Sir or Madam"
-msgstr "Уважаемый господин или госпожа"
+msgstr "Уважаемая дама или господин"
 
 #: layouts/account/history/list-body-default.html:110
 #: layouts/email/common/text-summary-service-body-default.html:14
@@ -321,28 +334,38 @@ msgstr "Доставка"
 msgid "Delivery address"
 msgstr "Адрес доставки"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:298
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:309
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:292
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:303
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
-msgstr "\"%1$s\" часть адреса доставки не хватает"
+msgstr "Ошибка в части\"%1$s\" адреса доставки"
 
 #: layouts/catalog/detail/additional-text-body-default.html:18
 msgid "Description"
 msgstr "Описание"
 
 #: layouts/common/summary/detail-body-default.html:80
+#: layouts/email/watch/html-detail-body-default.html:101
 msgid "Details"
-msgstr "Подробности"
+msgstr "Информация"
 
 #: layouts/catalog/detail/additional-download-body-default.html:19
 msgid "Downloads"
-msgstr ""
+msgstr "Скачиваемые материалы"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:174
 #: layouts/checkout/standard/address-billing-body-default.html:170
 msgid "E-Mail"
-msgstr "Имейл"
+msgstr "E-Mail"
+
+#. / E-mail HTML title
+#: layouts/email/common/html-body-default.html:12
+msgid "E-mail notification"
+msgstr "Уведомление по e-mail"
+
+#: layouts/account/favorite/body-default.html:103
+msgid "Favorite products"
+msgstr "Избранные товары"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:182
 #: layouts/checkout/standard/address-billing-body-default.html:178
@@ -351,7 +374,7 @@ msgstr "Факс"
 
 #: layouts/checkout/standard/address-body-default.html:13
 msgid "Fields with an * are mandatory"
-msgstr "Поля с * обязательны"
+msgstr "Поля, помеченные звёздочкой (*) обязательны к заполнению"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:123
 #: layouts/checkout/standard/address-billing-body-default.html:119
@@ -360,7 +383,7 @@ msgstr "Имя"
 
 #: layouts/catalog/filter/search-body-default.html:89
 msgid "Go"
-msgstr "Дальше"
+msgstr "Далее"
 
 #: layouts/checkout/standard/summary-option-terms-body-default.html:163
 #, php-format
@@ -369,38 +392,47 @@ msgid ""
 "conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a "
 "href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy "
 "policy\">privacy policy</a>"
-msgstr ""
+msgstr "Я принимаю <a href=\"%1$s\" target=\"_blank\" title=\"условия\" alt=\"условия\">условия</a> и согласен с <a href=\"%2$s\" target=\"_blank\" title=\"политика конфиденциальности\" alt=\"политика конфиденциальности\">политикой конфиденциальности</a>"
 
-#. / Delivery e-mail outro
-#. / Payment e-mail outro
-#: layouts/email/delivery/text-outro-body-default.html:9
-#: layouts/email/delivery/html-outro-body-default.html:11
-#: layouts/email/payment/text-outro-body-default.html:9
-#: layouts/email/payment/html-outro-body-default.html:11
+#: layouts/account/watch/body-default.html:161
+msgid "If back in stock"
+msgstr "Если появится в наличии"
+
+#: layouts/account/watch/body-default.html:155
+msgid "If price decreases"
+msgstr "При снижении цены"
+
+#. / E-mail outro
+#: layouts/email/common/text-outro-body-default.html:9
+#: layouts/email/common/html-outro-body-default.html:11
 msgid "If you have any questions, please reply to this e-mail"
-msgstr ""
+msgstr "Если имеются вопросы, можете задать их в ответе на это письмо"
 
 #. / Tax rate format with tax rate in percent (%1$s)
 #: layouts/common/summary/detail-body-default.html:234
+#: layouts/email/watch/text-detail-body-default.html:31
 #: layouts/email/common/text-summary-detail-body-default.html:104
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
 msgid "Incl. %1$s%% VAT"
-msgstr ""
+msgstr "Вкл. %1$s%% НДС"
 
 #: layouts/common/summary/detail-body-default.html:244
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: layouts/email/common/text-summary-detail-body-default.html:107
 msgid "Included rebates"
-msgstr "Включаемые скидки"
+msgstr "Включены скидки"
 
 #: src/Client/Html/Checkout/Update/Factory.php:72
 #: src/Client/Html/Checkout/Confirm/Factory.php:72
 #: src/Client/Html/Checkout/Standard/Factory.php:72
+#: src/Client/Html/Email/Watch/Factory.php:72
 #: src/Client/Html/Email/Payment/Factory.php:72
 #: src/Client/Html/Email/Delivery/Factory.php:72
 #: src/Client/Html/Basket/Standard/Factory.php:72
 #: src/Client/Html/Basket/Mini/Factory.php:72
+#: src/Client/Html/Account/Watch/Factory.php:72
+#: src/Client/Html/Account/Favorite/Factory.php:72
 #: src/Client/Html/Account/History/Factory.php:72
 #: src/Client/Html/Catalog/Stock/Factory.php:72
 #: src/Client/Html/Catalog/Session/Factory.php:72
@@ -411,27 +443,27 @@ msgstr "Включаемые скидки"
 #: src/Client/Html/Catalog/Count/Factory.php:72
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в названии класса \"%1$s\""
 
-#: src/Client/Html/Abstract.php:96 src/Client/Html/Abstract.php:135
+#: src/Client/Html/Abstract.php:247 src/Client/Html/Abstract.php:275
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в названии покупателя \"%1$s\""
 
 #: src/Client/Html/Common/Factory/Abstract.php:54
 #, php-format
 msgid "Invalid class name \"%1$s\""
-msgstr ""
+msgstr "Недопустимое название класса \"%1$s\""
 
 #: src/Client/Html/Common/Factory/Abstract.php:86
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Недопустимый домен \"%1$s\""
 
-#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:349
+#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:343
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
-msgstr ""
+msgstr "Недопустимый ответ процесса от поставщика услуг с кодом \"%1$s\""
 
 #: layouts/checkout/standard/address-delivery-body-default.html:166
 #: layouts/checkout/standard/address-billing-body-default.html:162
@@ -445,43 +477,62 @@ msgstr "Фамилия"
 
 #: layouts/catalog/session/seen-body-default.html:14
 msgid "Last seen"
-msgstr ""
+msgstr "Недавно смотрели"
+
+#: src/Client/Html/Account/Watch/Default.php:420
+#: src/Client/Html/Account/Favorite/Default.php:355
+#, php-format
+msgid "List type \"%1$s\" is not available"
+msgstr "Недоступен тип списка \"%1$s\""
 
 #: layouts/catalog/list/pagination-body-default.html:27
 msgid "Name"
-msgstr "Имя"
+msgstr "названию"
 
 #: layouts/checkout/standard/address-body-default.html:18
 #: layouts/checkout/standard/payment-body-default.html:93
 #: layouts/checkout/standard/delivery-body-default.html:93
 msgid "Next"
-msgstr "Дальше"
+msgstr "Далее"
 
 #: layouts/catalog/list/head-body-default.html:51
 #, php-format
 msgid ""
 "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
 "try again with a different keyword."
-msgstr ""
+msgstr "Для <span class=\"searchstring\">\"%1$s\"</span> ничего не найдено. Попробуйте искать по другим словосочетаниям."
 
-#: src/Client/Html/Abstract.php:63
+#: src/Client/Html/Abstract.php:61
 #, php-format
 msgid "No view available"
-msgstr ""
+msgstr "Нет доступных режимов вывода"
 
-#: src/Client/Html/Basket/Standard/Coupon/Default.php:203
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:209
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
-msgstr ""
+msgstr "Количество купонов на скидку превышает установленный предел"
 
 #: src/MW/View/Helper/Price/Default.php:44
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
-msgstr ""
+msgstr "Объект не реализует \"%1$s\""
+
+#: layouts/account/watch/body-default.html:149
+msgid "One month"
+msgstr "Один месяц"
+
+#: layouts/email/watch/text-intro-body-default.html:8
+#: layouts/email/watch/html-intro-body-default.html:9
+msgid "One or more products you are watching have been updated."
+msgstr "Были обновлены один или несколько просмотренных товаров."
+
+#: layouts/account/watch/body-default.html:147
+msgid "One week"
+msgstr "Одна неделя"
 
 #: layouts/checkout/standard/summary-option-body-default.html:12
 msgid "Options"
-msgstr "Опции"
+msgstr "Параметры"
 
 #: layouts/account/history/list-body-default.html:96
 #: layouts/checkout/confirm/basic-body-default.html:16
@@ -490,23 +541,27 @@ msgstr "Номер заказа"
 
 #: layouts/account/history/list-body-default.html:100
 msgid "Order channel"
-msgstr ""
+msgstr "Порядок заказов"
 
 #: layouts/account/history/detail-body-default.html:18
 #: layouts/email/common/text-summary-detail-body-default.html:59
 #: layouts/checkout/confirm/basic-body-default.html:12
 msgid "Order details"
-msgstr "Подробности заказа"
+msgstr "Сведения о заказе"
 
 #: layouts/account/history/list-body-default.html:88
 msgid "Order history"
-msgstr "История заказа"
+msgstr "История заказов"
 
-#: src/Client/Html/Account/History/Detail/Default.php:232
+#: src/Client/Html/Account/History/Detail/Default.php:241
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
-msgstr "Заказ с номером \"%1$s\" не найден"
+msgstr "Не найден заказ с номером \"%1$s\""
 
+#: layouts/account/watch/body-default.html:112
+#: layouts/account/watch/body-default.html:182
+#: layouts/account/favorite/body-default.html:112
+#: layouts/account/favorite/body-default.html:150
 #: layouts/catalog/list/pagination-body-default.html:54
 #, php-format
 msgid "Page %1$d of %2$d"
@@ -520,46 +575,50 @@ msgstr "Оплата"
 
 #: layouts/common/summary/detail-body-default.html:217
 msgid "Payment costs"
-msgstr "Стоимость оплаты"
+msgstr "Издержки на оплату"
 
 #: layouts/checkout/confirm/basic-body-default.html:20
 msgid "Payment status"
 msgstr "Статус оплаты"
 
-#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:187
+#: layouts/catalog/session/pinned-body-default.html:96
+msgid "Pinned products"
+msgstr "Закреплённые товары"
+
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:181
 msgid "Please accept the terms and conditions"
-msgstr "Пожалуйста примите договор и его условия"
+msgstr "Примите условия"
 
 #: layouts/checkout/standard/summary-body-default.html:13
 msgid "Please check your order"
-msgstr "Пожалуйста проверьте ваш заказ"
+msgstr "Проверьте заказ"
 
 #: layouts/checkout/standard/delivery-body-default.html:43
 msgid "Please choose your delivery method"
-msgstr "Пожалуйста выберите ваш метод доставки"
+msgstr "Выберете метод доставки"
 
 #: layouts/checkout/standard/payment-body-default.html:43
 msgid "Please choose your payment method"
-msgstr "Пожалуйста выберите ваш метод оплаты"
+msgstr "Выберете метод оплаты"
 
 #: layouts/catalog/filter/search-body-default.html:11
 msgid "Please enter at least three characters"
-msgstr ""
+msgstr "Необходимо ввести, по крайней мере три символа"
 
 #: layouts/catalog/detail/basket-selection-body-default.html:30
 msgid "Please select"
-msgstr "Пожалуйста выберите"
+msgstr "Сделайте выбор"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:143
 #: layouts/checkout/standard/address-billing-body-default.html:139
 msgid "Postal code"
-msgstr "Почтовый индекс"
+msgstr "Индекс"
 
 #: layouts/catalog/list/pagination-body-default.html:35
 #: layouts/common/summary/detail-body-default.html:88
 #: layouts/email/common/text-summary-detail-body-default.html:74
 msgid "Price"
-msgstr "Цена"
+msgstr "цене"
 
 #: layouts/checkout/standard/order-payment-body-default.html:28
 #: layouts/checkout/standard/order-payment-body-default.html:37
@@ -573,7 +632,7 @@ msgstr "Количество"
 
 #: layouts/catalog/list/pagination-body-default.html:45
 msgid "Relevance"
-msgstr "Уместность"
+msgstr "рейтинг"
 
 #. / Product search hint with user provided search string (%1$s)
 #: layouts/catalog/list/header-default.html:22
@@ -592,9 +651,9 @@ msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d arti
 msgid_plural ""
 "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
 "articles)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Результат поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождение)"
+msgstr[1] "Результаты поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождений)"
+msgstr[2] "Результаты поиска для <span class=\"searchstring\">\"%1$s\"</span> (%2$d вхождений)"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:158
 #: layouts/checkout/standard/address-billing-body-default.html:154
@@ -608,11 +667,11 @@ msgstr "Выберите приветствие"
 
 #: layouts/email/common/text-summary-detail-body-default.html:82
 msgid "Service fees"
-msgstr "Плата за сервис"
+msgstr "Издержки на услуги"
 
 #: layouts/common/summary/service-body-default.html:13
 msgid "Services"
-msgstr "Сервисы"
+msgstr "Оплата и доставка"
 
 #: layouts/common/summary/detail-body-default.html:209
 msgid "Shipping"
@@ -624,30 +683,30 @@ msgstr "Показать"
 
 #: layouts/catalog/list/quote-body-default.html:19
 msgid "Show all quotes"
-msgstr ""
+msgstr "Показать все отзывы"
 
 #: layouts/catalog/list/pagination-body-default.html:43
 msgid "Sort by:"
-msgstr "Сортировать по:"
+msgstr "Упорядочить по:"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:151
 #: layouts/checkout/standard/address-billing-body-default.html:147
 msgid "State"
-msgstr "Штат"
+msgstr "Область"
 
 #. / Stock string composition with warehouse name (%1$s, normally left out)
 #. and stock level string (%2$s)
 #: layouts/catalog/stock/body-default.html:45
 #, php-format
 msgid "Stock: %1$s, %2$s"
-msgstr "Ассортимент: %1$s, %2$s"
+msgstr "Запасы: %1$s %2$s"
 
 #. / Stock string composition with warehouse name (%1$s, normally left out),
 #. stock level string (%2$s) and back in stock date (%3$s)
 #: layouts/catalog/stock/body-default.html:47
 #, php-format
 msgid "Stock: %1$s, %2$s, back on %3$s"
-msgstr ""
+msgstr "Запасы: %1$s %2$s, возобновление запасов %3$s"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:131
 #: layouts/checkout/standard/address-billing-body-default.html:127
@@ -658,11 +717,11 @@ msgstr "Улица"
 #: layouts/email/common/text-summary-detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:97
 msgid "Sub-total"
-msgstr ""
+msgstr "Промежуточная сумма"
 
 #: layouts/catalog/detail/suggest-body-default.html:25
 msgid "Suggested products"
-msgstr ""
+msgstr "Рекомендованные товары"
 
 #: layouts/common/summary/detail-body-default.html:89
 #: layouts/email/common/text-summary-detail-body-default.html:76
@@ -674,14 +733,14 @@ msgstr "Сумма"
 msgid "Telephone"
 msgstr "Телефон"
 
-#: src/Client/Html/Abstract.php:236
+#: src/Client/Html/Abstract.php:425
 #, php-format
 msgid "Template \"%1$s\" not available"
-msgstr "Шаблон \"%1$s\" не доступен"
+msgstr "Недоступен шаблон \"%1$s\""
 
 #: layouts/checkout/standard/summary-option-terms-body-default.html:159
 msgid "Terms and conditions"
-msgstr ""
+msgstr "Условия и соглашения"
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -689,7 +748,7 @@ msgstr ""
 #: layouts/email/payment/html-intro-body-default.html:12
 #, php-format
 msgid "Thank you for your order %1$s from %2$s."
-msgstr ""
+msgstr "Благодарим за Ваш заказ %1$s от %2$s."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -700,7 +759,7 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "The order is pending until we receive the final payment. If you've chosen to pay in advance, please transfer the money to our bank account with the order ID %1$s as reference."
-msgstr ""
+msgstr "Благодарим за Ваш заказ %1$s от %2$s.\n\nЗаказ ожидает окончательной оплаты. Если выбрана предварительная оплата, то переведите деньги на наш банковский счёт за заказ № %1$s."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -711,19 +770,19 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "We received the payment and will care about your order immediately."
-msgstr ""
+msgstr "Благодарим за Ваш заказ %1$s от %2$s.\n\nМы получили оплату и позаботимся о незамедлительной доставке."
 
 #: layouts/checkout/confirm/5/intro-body-default.html:12
 msgid ""
 "Thank you for your order and authorizing the payment.\n"
 "An e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "Благодарим Вас за заказ и оплату.\nПисьмо с деталями заказа будет выслано Вам в течение нескольких минут."
 
 #: layouts/checkout/confirm/6/intro-body-default.html:12
 msgid ""
 "Thank you for your order.\n"
 "We received your payment and an e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "Благодарим Вас за заказ.\nМы получили оплату и письмо с деталями заказа будет выслано Вам в течение нескольких минут."
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -733,13 +792,13 @@ msgstr ""
 msgid ""
 "The delivery status of your order %1$s from %2$s has been changed to "
 "\"%3$s\"."
-msgstr ""
+msgstr "Изменился статус Вашего заказа %1$s от %2$s на \"%3$s\"."
 
 #: layouts/checkout/confirm/1/intro-body-default.html:12
 msgid ""
 "The order was canceled.\n"
 "Do you wish to retry your order?"
-msgstr ""
+msgstr "Заказ отменён.\nХотите вернуть свой заказ?"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -747,13 +806,13 @@ msgstr ""
 #: layouts/email/delivery/6/html-intro-body-default.html:12
 #, php-format
 msgid "The parcel for your order %1$s from %2$s could not be delivered."
-msgstr ""
+msgstr "Невозможно переслать Ваш заказ %1$s от %2$s."
 
 #: layouts/checkout/confirm/4/intro-body-default.html:12
 msgid ""
 "The payment confirmation for your order is still pending.\n"
 "You will get an e-mail as soon as the payment is authorized."
-msgstr ""
+msgstr "Подтверждение оплаты за заказ пока ещё не получено.\nКак только оплата будет подтверждена, будет сформировано письмо с извещением об этом."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -761,45 +820,66 @@ msgstr ""
 #: layouts/email/payment/3/html-intro-body-default.html:12
 #, php-format
 msgid "The payment for your order %1$s from %2$s has been refunded."
-msgstr ""
+msgstr "Оплата за заказ %1$s от %2$s была возвращена."
 
-#: layouts/catalog/list/promo-body-default.html:24
+#: layouts/account/watch/body-default.html:150
+msgid "Three month"
+msgstr "Три месяца"
+
+#: layouts/account/watch/body-default.html:145
+msgid "Time frame"
+msgstr "Временные рамки"
+
+#: layouts/catalog/list/promo-body-default.html:26
 msgid "Top seller"
-msgstr ""
+msgstr "Лидеры продаж"
 
 #: layouts/common/summary/detail-body-default.html:225
 #: layouts/email/common/text-summary-detail-body-default.html:93
 #: layouts/email/common/text-summary-detail-body-default.html:101
 msgid "Total"
-msgstr ""
+msgstr "Всего"
 
 #: layouts/common/summary/detail-body-default.html:252
 msgid "Total quantity"
-msgstr ""
+msgstr "Общее количество"
 
 #: layouts/checkout/confirm/retry-body-default.html:24
 msgid "Try again"
 msgstr "Попробуйте еще раз"
 
+#: layouts/account/watch/body-default.html:148
+msgid "Two weeks"
+msgstr "Две недели"
+
 #: src/Client/Html/Common/Decorator/Abstract.php:49
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Невозможно вызвать метод \"%1$s\""
 
-#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:199
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:192
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
-msgstr "Невозможно сохранить адрес для клиента \"%1$s\": %2$s"
+msgstr "Невозможно сохранить адрес для покупателя \"%1$s\": %2$s"
 
 #: layouts/checkout/confirm/2/intro-body-default.html:12
 msgid ""
 "Unfortunately, the payment for your order was refused.\n"
 "Do you wish to retry?"
-msgstr ""
+msgstr "К сожалению, оплата за Ваш заказ была отклонена.\nХотите повторить?"
 
 #: layouts/basket/standard/body-default.html:43
 msgid "Update"
 msgstr "Обновить"
+
+#: layouts/account/watch/body-default.html:166
+msgid "Watch"
+msgstr "Следить"
+
+#: layouts/account/watch/body-default.html:103
+#: layouts/email/watch/text-detail-body-default.html:38
+msgid "Watched products"
+msgstr "Просмотренные товары"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -807,13 +887,16 @@ msgstr "Обновить"
 #: layouts/email/delivery/7/html-intro-body-default.html:12
 #, php-format
 msgid "We received the returned parcel for your order %1$s from %2$s."
-msgstr ""
+msgstr "Посылка с Вашим заказом %1$s от %2$s была нам возвращена."
 
 #: layouts/checkout/standard/address-delivery-body-default.html:186
 #: layouts/checkout/standard/address-billing-body-default.html:182
 msgid "Web site"
-msgstr "Вебсайт"
+msgstr "Сайт"
 
+#: layouts/account/watch/body-default.html:125
+#: layouts/account/favorite/body-default.html:124
+#: layouts/catalog/session/pinned-body-default.html:105
 #: layouts/common/summary/detail-body-default.html:155
 #: layouts/basket/standard/coupon-body-default.html:39
 msgid "X"
@@ -842,16 +925,11 @@ msgstr "Г-м-д"
 
 #: layouts/catalog/stage/breadcrumb-body-default.html:19
 msgid "You are here:"
-msgstr "Вы находитесь здесь:"
+msgstr "Вы здесь:"
 
 #: layouts/checkout/standard/order-payment-body-default.html:25
 msgid "You will now be forwarded to the next step"
-msgstr "Вы не будете перенаправлены к следуйщему шагу"
-
-#. / E-mail HTML title
-#: layouts/email/common/html-body-default.html:12
-msgid "Your order"
-msgstr ""
+msgstr "Переход к следующему шагу"
 
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
@@ -859,7 +937,7 @@ msgstr ""
 #: layouts/email/payment/header-default.html:9
 #, php-format
 msgid "Your order %1$s"
-msgstr ""
+msgstr "Ваш заказ %1$s"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -867,30 +945,38 @@ msgstr ""
 #: layouts/email/delivery/3/html-intro-body-default.html:12
 #, php-format
 msgid "Your order %1$s from %2$s has been dispatched."
-msgstr ""
+msgstr "Отослан Ваш заказ %1$s от %2$s."
+
+#. / Product notification e-mail subject
+#: layouts/email/watch/header-default.html:9
+msgid "Your watched products"
+msgstr "Вы смотрели товары"
 
 #: layouts/checkout/standard/address-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Address/Default.php:12
+#, php-format
 msgid "address"
 msgstr "адрес"
 
 #: layouts/common/summary/service-body-default.html:16
 #: layouts/checkout/standard/delivery-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Delivery/Default.php:12
+#, php-format
 msgid "delivery"
 msgstr "доставка"
 
 #. / Price quantity format with quantity (%1$s)
+#: layouts/email/watch/text-detail-body-default.html:16
 #: src/MW/View/Helper/Price/Default.php:76
 #, php-format
 msgid "from %1$s"
-msgstr ""
+msgstr "от %1$s"
 
 #: layouts/common/summary/address-body-default.html:127
 #: layouts/email/common/text-summary-address-body-default.html:111
 #: layouts/checkout/standard/address-delivery-body-default.html:51
 msgid "like billing address"
-msgstr "как адрес счета"
+msgstr "совпадает с платёжным"
 
 #: layouts/checkout/standard/address-delivery-body-default.html:106
 #: layouts/checkout/standard/address-billing-body-default.html:102
@@ -899,68 +985,87 @@ msgstr "новый адрес"
 
 #: layouts/checkout/standard/order-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Order/Default.php:12
+#, php-format
 msgid "order"
 msgstr "заказ"
 
 #: layouts/common/summary/service-body-default.html:50
 #: layouts/checkout/standard/payment-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Payment/Default.php:12
+#, php-format
 msgid "payment"
 msgstr "оплата"
 
 #. / code for "product is in stock"
 #: layouts/catalog/stock/body-default.html:56
 msgid "stock-high"
-msgstr ""
+msgstr "большие запасы"
 
 #. / code for "only a few products are available"
 #: layouts/catalog/stock/body-default.html:54
 msgid "stock-low"
-msgstr ""
+msgstr "небольшие запасы"
 
-#. / code for "product is out ot stock"
+#. / code for "product is out of stock"
 #: layouts/catalog/stock/body-default.html:52
 msgid "stock-out"
-msgstr ""
+msgstr "нет на складе"
 
 #. / code for "product is available (without stock limit)"
 #: layouts/catalog/stock/body-default.html:58
 msgid "stock-unlimited"
-msgstr ""
+msgstr "запасы неограничены"
 
 #: layouts/checkout/standard/summary-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Summary/Default.php:12
+#, php-format
 msgid "summary"
-msgstr "краткое содержание"
+msgstr "резюме"
 
 #: layouts/catalog/list/pagination-body-default.html:25
 msgid "▲ Name"
-msgstr ""
+msgstr "▲ Название"
 
 #: layouts/catalog/list/pagination-body-default.html:33
 msgid "▲ Price"
-msgstr ""
+msgstr "▲ Цена"
 
+#: layouts/account/watch/body-default.html:113
+#: layouts/account/watch/body-default.html:183
+#: layouts/account/favorite/body-default.html:113
+#: layouts/account/favorite/body-default.html:151
 #: layouts/catalog/list/pagination-body-default.html:55
 msgid "▶"
 msgstr "▶"
 
+#: layouts/account/watch/body-default.html:114
+#: layouts/account/watch/body-default.html:184
+#: layouts/account/favorite/body-default.html:114
+#: layouts/account/favorite/body-default.html:152
 #: layouts/catalog/list/pagination-body-default.html:56
 msgid "▶▶"
 msgstr "▶▶"
 
 #: layouts/catalog/list/pagination-body-default.html:23
 msgid "▼ Name"
-msgstr ""
+msgstr "▼ Название"
 
 #: layouts/catalog/list/pagination-body-default.html:31
 msgid "▼ Price"
-msgstr ""
+msgstr "▼ Цена"
 
+#: layouts/account/watch/body-default.html:111
+#: layouts/account/watch/body-default.html:181
+#: layouts/account/favorite/body-default.html:111
+#: layouts/account/favorite/body-default.html:149
 #: layouts/catalog/list/pagination-body-default.html:53
 msgid "◀"
 msgstr "◀"
 
+#: layouts/account/watch/body-default.html:110
+#: layouts/account/watch/body-default.html:180
+#: layouts/account/favorite/body-default.html:110
+#: layouts/account/favorite/body-default.html:148
 #: layouts/catalog/list/pagination-body-default.html:52
 msgid "◀◀"
 msgstr "◀◀"

@@ -6,14 +6,16 @@
 # Translators:
 # Translators:
 # Translators:
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 # Dimitri <doleiynyk@metaways.de>, 2013
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-11-01 12:55+0000\n"
-"Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
+"PO-Revision-Date: 2014-07-10 11:41+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,19 +24,19 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "AD"
-msgstr ""
+msgstr "Андорра"
 
 msgid "AE"
-msgstr ""
+msgstr "Объединённые Арабские Эмираты"
 
 msgid "AF"
 msgstr "Афганистан"
 
 msgid "AG"
-msgstr ""
+msgstr "Антигуа и Барбуда"
 
 msgid "AI"
-msgstr ""
+msgstr "Ангилья"
 
 msgid "AL"
 msgstr "Албания"
@@ -43,16 +45,16 @@ msgid "AM"
 msgstr "Армения"
 
 msgid "AO"
-msgstr ""
+msgstr "Ангола"
 
 msgid "AQ"
-msgstr ""
+msgstr "Антарктика"
 
 msgid "AR"
 msgstr "Аргентина"
 
 msgid "AS"
-msgstr ""
+msgstr "Американское Самоа"
 
 msgid "AT"
 msgstr "Австрия"
@@ -61,55 +63,55 @@ msgid "AU"
 msgstr "Австралия"
 
 msgid "AW"
-msgstr ""
+msgstr "Аруба"
 
 msgid "AX"
-msgstr ""
+msgstr "Аландские острова"
 
 msgid "AZ"
 msgstr "Азербайджан"
 
 msgid "BA"
-msgstr ""
+msgstr "Босния и Герцеговина"
 
 msgid "BB"
-msgstr ""
+msgstr "Барбадос"
 
 msgid "BD"
-msgstr ""
+msgstr "Бангладеш"
 
 msgid "BE"
 msgstr "Белгия"
 
 msgid "BF"
-msgstr ""
+msgstr "Буркина Фасо"
 
 msgid "BG"
 msgstr "Болгария"
 
 msgid "BH"
-msgstr ""
+msgstr "Бахрейн"
 
 msgid "BI"
-msgstr ""
+msgstr "Бурунди"
 
 msgid "BJ"
-msgstr ""
+msgstr "Бенин"
 
 msgid "BL"
-msgstr ""
+msgstr "Остров святого Бартоломея"
 
 msgid "BM"
-msgstr ""
+msgstr "Бермудские острова"
 
 msgid "BN"
-msgstr ""
+msgstr "Бруней-Даруссалам"
 
 msgid "BO"
-msgstr ""
+msgstr "Многонациона́льное Госуда́рство Боли́вия"
 
 msgid "BQ"
-msgstr ""
+msgstr " Бонэйр, Саба и Синт-Эстатиус"
 
 msgid "BR"
 msgstr "Бразилия"
@@ -118,70 +120,70 @@ msgid "BS"
 msgstr "Багамские Острова"
 
 msgid "BT"
-msgstr ""
+msgstr "Бутан"
 
 msgid "BV"
-msgstr ""
+msgstr "Остров Буве"
 
 msgid "BW"
-msgstr ""
+msgstr "Ботсвана"
 
 msgid "BY"
 msgstr "Белоруссия"
 
 msgid "BZ"
-msgstr ""
+msgstr "Белиз"
 
 msgid "CA"
-msgstr ""
+msgstr "Канада"
 
 msgid "CC"
-msgstr ""
+msgstr "Кокосовые (Килинг) острова"
 
 msgid "CD"
-msgstr ""
+msgstr "Демократическая Республика Конго"
 
 msgid "CF"
-msgstr ""
+msgstr "Центральноафриканская Республика"
 
 msgid "CG"
-msgstr ""
+msgstr "Конго"
 
 msgid "CH"
 msgstr "Швейцария"
 
 msgid "CI"
-msgstr ""
+msgstr "Кот-д’Ивуар"
 
 msgid "CK"
-msgstr ""
+msgstr "Кука острова"
 
 msgid "CL"
 msgstr "Чили"
 
 msgid "CM"
-msgstr ""
+msgstr "Камерун"
 
 msgid "CN"
 msgstr "Китай"
 
 msgid "CO"
-msgstr ""
+msgstr "Колумбия"
 
 msgid "CR"
-msgstr ""
+msgstr "Коста-Рика"
 
 msgid "CU"
 msgstr "Куба"
 
 msgid "CV"
-msgstr ""
+msgstr "Кабо-Верде"
 
 msgid "CW"
-msgstr ""
+msgstr "Кюрасао"
 
 msgid "CX"
-msgstr ""
+msgstr "Рождества остров"
 
 msgid "CY"
 msgstr "Кипр"
@@ -193,22 +195,22 @@ msgid "DE"
 msgstr "Германия"
 
 msgid "DJ"
-msgstr ""
+msgstr "Джибути"
 
 msgid "DK"
 msgstr "Дания"
 
 msgid "DM"
-msgstr ""
+msgstr "Доминика"
 
 msgid "DO"
-msgstr ""
+msgstr "Доминиканская республика"
 
 msgid "DZ"
-msgstr ""
+msgstr "Алжир"
 
 msgid "EC"
-msgstr ""
+msgstr "Эквадор"
 
 msgid "EE"
 msgstr "Эстония"
@@ -217,109 +219,109 @@ msgid "EG"
 msgstr "Египет"
 
 msgid "EH"
-msgstr ""
+msgstr "Западная сахара"
 
 msgid "ER"
-msgstr ""
+msgstr "Эритрея"
 
 msgid "ES"
 msgstr "Испания"
 
 msgid "ET"
-msgstr ""
+msgstr "Эфиопия"
 
 msgid "FI"
 msgstr "Финляндия"
 
 msgid "FJ"
-msgstr ""
+msgstr "Фиджи"
 
 msgid "FK"
-msgstr ""
+msgstr "Фолклендские (Мальвинские) острова"
 
 msgid "FM"
-msgstr ""
+msgstr "Федеративные Штаты Микронезии"
 
 msgid "FO"
-msgstr ""
+msgstr "Фарерские острова"
 
 msgid "FR"
 msgstr "Франция"
 
 msgid "GA"
-msgstr ""
+msgstr "Габон"
 
 msgid "GB"
 msgstr "Великобритания"
 
 msgid "GD"
-msgstr ""
+msgstr "Гренада"
 
 msgid "GE"
 msgstr "Грузия"
 
 msgid "GF"
-msgstr ""
+msgstr "Французская Гвиана"
 
 msgid "GG"
-msgstr ""
+msgstr "Гернси"
 
 msgid "GH"
-msgstr ""
+msgstr "Гана"
 
 msgid "GI"
-msgstr ""
+msgstr "Гибралтар"
 
 msgid "GL"
 msgstr "Гренландия"
 
 msgid "GM"
-msgstr ""
+msgstr "Гамбия"
 
 msgid "GN"
-msgstr ""
+msgstr "Гвинея"
 
 msgid "GP"
-msgstr ""
+msgstr "Гваделупа"
 
 msgid "GQ"
-msgstr ""
+msgstr "Экваториальная гвинея"
 
 msgid "GR"
 msgstr "Греция"
 
 msgid "GS"
-msgstr ""
+msgstr "Южная Георгия и Южные Сандвичевы острова"
 
 msgid "GT"
-msgstr ""
+msgstr "Гватемала"
 
 msgid "GU"
-msgstr ""
+msgstr "Гуам"
 
 msgid "GW"
-msgstr ""
+msgstr "Гвинея-Бисау"
 
 msgid "GY"
-msgstr ""
+msgstr "Гайана"
 
 msgid "HK"
 msgstr "Гонгконг"
 
 msgid "HM"
-msgstr ""
+msgstr "Остров Херд и острова Макдональд"
 
 msgid "HN"
-msgstr ""
+msgstr "Гондурас"
 
 msgid "HR"
 msgstr "Хорватия"
 
 msgid "HT"
-msgstr ""
+msgstr "Гаити"
 
 msgid "HU"
-msgstr ""
+msgstr "Венгрия"
 
 msgid "ID"
 msgstr "Индонезия"
@@ -331,190 +333,190 @@ msgid "IL"
 msgstr "Израиль"
 
 msgid "IM"
-msgstr ""
+msgstr "Остров Мэн"
 
 msgid "IN"
 msgstr "Индия"
 
 msgid "IO"
-msgstr ""
+msgstr "Британская территория в Индийском океане"
 
 msgid "IQ"
 msgstr "Ирак"
 
 msgid "IR"
-msgstr ""
+msgstr "Исламская Республика Иран"
 
 msgid "IS"
-msgstr ""
+msgstr "Исландия"
 
 msgid "IT"
 msgstr "Италия"
 
 msgid "JE"
-msgstr ""
+msgstr "Джерси"
 
 msgid "JM"
 msgstr "Ямайка"
 
 msgid "JO"
-msgstr ""
+msgstr "Иордания"
 
 msgid "JP"
 msgstr "Япония"
 
 msgid "KE"
-msgstr ""
+msgstr "Кения"
 
 msgid "KG"
-msgstr ""
+msgstr "Киргизия"
 
 msgid "KH"
-msgstr ""
+msgstr "Камбоджиа"
 
 msgid "KI"
-msgstr ""
+msgstr "Кирибати"
 
 msgid "KM"
-msgstr ""
+msgstr "Коморские острова"
 
 msgid "KN"
-msgstr ""
+msgstr "Сент-Китс и Невис"
 
 msgid "KP"
-msgstr ""
+msgstr "Корейская Народно-Демократическая Республика"
 
 msgid "KR"
-msgstr ""
+msgstr "Республика Корея"
 
 msgid "KW"
-msgstr ""
+msgstr "Кувейт"
 
 msgid "KY"
-msgstr ""
+msgstr "Каймановы острова"
 
 msgid "KZ"
 msgstr "Казахстан"
 
 msgid "LA"
-msgstr ""
+msgstr "Лаосская Народно-Демократическая Республика"
 
 msgid "LB"
-msgstr ""
+msgstr "Ливан"
 
 msgid "LC"
-msgstr ""
+msgstr "Сент-Люсия"
 
 msgid "LI"
-msgstr ""
+msgstr "Лихтенштейн"
 
 msgid "LK"
-msgstr ""
+msgstr "Шри-Ланка"
 
 msgid "LR"
-msgstr ""
+msgstr "Либерия"
 
 msgid "LS"
-msgstr ""
+msgstr "Лесотто"
 
 msgid "LT"
-msgstr ""
+msgstr "Литва"
 
 msgid "LU"
-msgstr ""
+msgstr "Люксембург"
 
 msgid "LV"
-msgstr ""
+msgstr "Латвия"
 
 msgid "LY"
-msgstr ""
+msgstr "Ливия"
 
 msgid "MA"
-msgstr ""
+msgstr "Марокко"
 
 msgid "MC"
-msgstr ""
+msgstr "Монако"
 
 msgid "MD"
-msgstr ""
+msgstr "Республика Молдова"
 
 msgid "ME"
-msgstr ""
+msgstr "Черногория"
 
 msgid "MF"
-msgstr ""
+msgstr "Сен-Мартен (заморское сообщество Франции)"
 
 msgid "MG"
-msgstr ""
+msgstr "Мадагаскар"
 
 msgid "MH"
-msgstr ""
+msgstr "Маршаловы острова"
 
 msgid "MK"
-msgstr ""
+msgstr "Македония"
 
 msgid "ML"
-msgstr ""
+msgstr "Мали"
 
 msgid "MM"
-msgstr ""
+msgstr "Мьянма"
 
 msgid "MN"
-msgstr ""
+msgstr "Монголия"
 
 msgid "MO"
-msgstr ""
+msgstr "Макао"
 
 msgid "MP"
-msgstr ""
+msgstr "Северные Марианские острова"
 
 msgid "MQ"
-msgstr ""
+msgstr "Мартиника"
 
 msgid "MR"
-msgstr ""
+msgstr "Мавритания"
 
 msgid "MS"
-msgstr ""
+msgstr "Монтсеррат"
 
 msgid "MT"
-msgstr ""
+msgstr "Мальта"
 
 msgid "MU"
-msgstr ""
+msgstr "Маврикий"
 
 msgid "MV"
-msgstr ""
+msgstr "Мальдивы"
 
 msgid "MW"
-msgstr ""
+msgstr "Малави"
 
 msgid "MX"
 msgstr "Мехико"
 
 msgid "MY"
-msgstr ""
+msgstr "Малайзия"
 
 msgid "MZ"
-msgstr ""
+msgstr "Мозамбик"
 
 msgid "NA"
-msgstr ""
+msgstr "Намибия"
 
 msgid "NC"
-msgstr ""
+msgstr "Новая каледония"
 
 msgid "NE"
-msgstr ""
+msgstr "Нигер"
 
 msgid "NF"
-msgstr ""
+msgstr "Норфолк остров"
 
 msgid "NG"
-msgstr ""
+msgstr "Нигерия"
 
 msgid "NI"
-msgstr ""
+msgstr "Никрагуа"
 
 msgid "NL"
 msgstr "Нидерланды"
@@ -523,34 +525,34 @@ msgid "NO"
 msgstr "Норвегия"
 
 msgid "NP"
-msgstr ""
+msgstr "Непал"
 
 msgid "NR"
-msgstr ""
+msgstr "Науру"
 
 msgid "NU"
-msgstr ""
+msgstr "Ниуэ"
 
 msgid "NZ"
 msgstr "Новая Зеландия"
 
 msgid "OM"
-msgstr ""
+msgstr "Оман"
 
 msgid "PA"
-msgstr ""
+msgstr "Панама"
 
 msgid "PE"
-msgstr ""
+msgstr "Перу"
 
 msgid "PF"
-msgstr ""
+msgstr "Французская Полинезия"
 
 msgid "PG"
-msgstr ""
+msgstr "Папуа-Новая Гвинея"
 
 msgid "PH"
-msgstr ""
+msgstr "Филиппины"
 
 msgid "PK"
 msgstr "Пакистан"
@@ -559,34 +561,34 @@ msgid "PL"
 msgstr "Польша"
 
 msgid "PM"
-msgstr ""
+msgstr "Сен-Пьер и Микелон"
 
 msgid "PN"
-msgstr ""
+msgstr "Питкэрн острова"
 
 msgid "PR"
-msgstr ""
+msgstr "Пуэрто-Рико"
 
 msgid "PS"
-msgstr ""
+msgstr "Государство Палестина"
 
 msgid "PT"
 msgstr "Португалия"
 
 msgid "PW"
-msgstr ""
+msgstr "Палау"
 
 msgid "PY"
-msgstr ""
+msgstr "Парагвай"
 
 msgid "QA"
-msgstr ""
+msgstr "Катар"
 
 msgid "RE"
-msgstr ""
+msgstr "Реюньон"
 
 msgid "RO"
-msgstr ""
+msgstr "Румыния"
 
 msgid "RS"
 msgstr "Сербия"
@@ -595,175 +597,175 @@ msgid "RU"
 msgstr "Российская Федерация"
 
 msgid "RW"
-msgstr ""
+msgstr "Руанда"
 
 msgid "SA"
-msgstr ""
+msgstr "Саудовская Аравия"
 
 msgid "SB"
-msgstr ""
+msgstr "Соломоновы Острова"
 
 msgid "SC"
-msgstr ""
+msgstr "Сейшельские Острова"
 
 msgid "SD"
-msgstr ""
+msgstr "Судан"
 
 msgid "SE"
 msgstr "Швеция"
 
 msgid "SG"
-msgstr ""
+msgstr "Сингапур"
 
 msgid "SH"
-msgstr ""
+msgstr "Острова Святой Елены, Вознесения и Тристан-да-Кунья"
 
 msgid "SI"
-msgstr ""
+msgstr "Словения"
 
 msgid "SJ"
-msgstr ""
+msgstr "Шпицберген и Ян-Майен"
 
 msgid "SK"
-msgstr ""
+msgstr "Словакия"
 
 msgid "SL"
-msgstr ""
+msgstr "Сьерра-Леоне"
 
 msgid "SM"
-msgstr ""
+msgstr "Сан-Марино"
 
 msgid "SN"
-msgstr ""
+msgstr "Сенегал"
 
 msgid "SO"
-msgstr ""
+msgstr "Сомали"
 
 msgid "SR"
-msgstr ""
+msgstr "Суринам"
 
 msgid "SS"
-msgstr ""
+msgstr "Южный Судан"
 
 msgid "ST"
-msgstr ""
+msgstr "Сан-Томе и Принсипи"
 
 msgid "SV"
-msgstr ""
+msgstr "Сальвадор"
 
 msgid "SX"
-msgstr ""
+msgstr "Синт-Мартен (территория Нидерландов)"
 
 msgid "SY"
-msgstr ""
+msgstr "Сирийская Арабская Республика"
 
 msgid "SZ"
-msgstr ""
+msgstr "Свазиленд"
 
 msgid "TC"
-msgstr ""
+msgstr "Острова Тёркс и Кайкос"
 
 msgid "TD"
-msgstr ""
+msgstr "Чад"
 
 msgid "TF"
-msgstr ""
+msgstr "Французские Южные территории"
 
 msgid "TG"
-msgstr ""
+msgstr "Того"
 
 msgid "TH"
 msgstr "Таиланд"
 
 msgid "TJ"
-msgstr ""
+msgstr "Таджикистан"
 
 msgid "TK"
-msgstr ""
+msgstr "Токелау"
 
 msgid "TL"
-msgstr ""
+msgstr "Тимор-Лешти"
 
 msgid "TM"
-msgstr ""
+msgstr "Туркменистан"
 
 msgid "TN"
-msgstr ""
+msgstr "Тунис"
 
 msgid "TO"
-msgstr ""
+msgstr "Тонга"
 
 msgid "TR"
 msgstr "Турция"
 
 msgid "TT"
-msgstr ""
+msgstr "Тринидад и Тобаго"
 
 msgid "TV"
-msgstr ""
+msgstr "Тувалу"
 
 msgid "TW"
-msgstr ""
+msgstr "Тайвань"
 
 msgid "TZ"
-msgstr ""
+msgstr "Объединённая Республика Танзания"
 
 msgid "UA"
 msgstr "Украина"
 
 msgid "UG"
-msgstr ""
+msgstr "Уганда"
 
 msgid "UM"
-msgstr ""
+msgstr "США Внешние Малые Острова"
 
 msgid "US"
 msgstr "Соединённые Штаты"
 
 msgid "UY"
-msgstr ""
+msgstr "Уругвай"
 
 msgid "UZ"
 msgstr "Узбекистан"
 
 msgid "VA"
-msgstr ""
+msgstr "Ватикан (Святой Престол)"
 
 msgid "VC"
-msgstr ""
+msgstr "Сент-Винсент и Гренадины"
 
 msgid "VE"
-msgstr ""
+msgstr "Боливарианская Республика Венесуэла"
 
 msgid "VG"
-msgstr ""
+msgstr "Виргинские Острова (Великобритания)"
 
 msgid "VI"
-msgstr ""
+msgstr "Виргинские Острова (США)"
 
 msgid "VN"
-msgstr ""
+msgstr "Вьетнам"
 
 msgid "VU"
-msgstr ""
+msgstr "Вануату"
 
 msgid "WF"
-msgstr ""
+msgstr "Уоллис и Футуна"
 
 msgid "WS"
-msgstr ""
+msgstr "Самоа"
 
 msgid "YE"
-msgstr ""
+msgstr "Йемен"
 
 msgid "YT"
-msgstr ""
+msgstr "Майотта"
 
 msgid "ZA"
-msgstr ""
+msgstr "Южная Африка"
 
 msgid "ZM"
-msgstr ""
+msgstr "Замбия"
 
 msgid "ZW"
-msgstr ""
+msgstr "Зимбабве"

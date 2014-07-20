@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-22 14:20+0200\n"
+"POT-Creation-Date: 2014-07-20 18:54+0200\n"
 "PO-Revision-Date: 2014-05-22 12:24+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
@@ -48,12 +48,12 @@ msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:60
 #: src/Controller/Frontend/Common/Factory/Abstract.php:159
-#: src/Controller/Frontend/Factory.php:86
+#: src/Controller/Frontend/Factory.php:84
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Klasse \"%1$s\" nicht verfügbar"
 
-#: src/Controller/Frontend/Factory.php:65
+#: src/Controller/Frontend/Factory.php:63
 #, php-format
 msgid "Controller path is empty"
 msgstr "Der Pfad zum Controller ist leer"
@@ -88,7 +88,7 @@ msgstr "Ein oder mehrere Adressteile sind ungültig. Bitte überprüfen Sie Ihre
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
-#: src/Controller/Frontend/Factory.php:77
+#: src/Controller/Frontend/Factory.php:75
 #, php-format
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
 msgstr "Controllername \"%1$s\" in \"%2$s\" enthält unerlaubte Zeichen"
@@ -98,7 +98,7 @@ msgstr "Controllername \"%1$s\" in \"%2$s\" enthält unerlaubte Zeichen"
 msgid "Invalid domain \"%1$s\""
 msgstr "Unbekannte Domäne \"%1$s\""
 
-#: src/Controller/Frontend/Factory.php:92
+#: src/Controller/Frontend/Factory.php:90
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr "Ungültige Factory \"%1$s\""
@@ -138,7 +138,7 @@ msgstr "Es wurde kein eindeutiger Artikel für das Produkt mit der ID \"%1$s\" u
 msgid "Requirements for coupon code \"%1$s\" aren't met"
 msgstr "Die Voraussetzungen für den Gutscheincode \"%1$s\" sind nicht erfüllt"
 
-#: src/Controller/Frontend/Service/Default.php:173
+#: src/Controller/Frontend/Service/Default.php:175
 #, php-format
 msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
 msgstr "Es wurde kein Eintrag für den Service mit der ID \"%2$s\" und dem Typ \"%1$s\" gefunden"
@@ -154,7 +154,7 @@ msgstr "Es sind leider nicht genügend Produkte \"%1$s\" vorhanden"
 msgid "Unable to call method \"%1$s::%2$s\""
 msgstr "Die Methode \"%1$s::%2$s\" konnte nicht aufgerufen werden"
 
-#: src/Controller/Frontend/Service/Default.php:67
+#: src/Controller/Frontend/Service/Default.php:69
 #, php-format
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr "Es konnte kein Service \"%1$s\" mit der ID \"%2$s\" erstellt werden"

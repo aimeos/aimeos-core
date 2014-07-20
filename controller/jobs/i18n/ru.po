@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Dimitri <doleiynyk@metaways.de>, 2013
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 13:34+0200\n"
-"PO-Revision-Date: 2014-06-26 17:41+0000\n"
+"POT-Creation-Date: 2014-07-20 18:54+0200\n"
+"PO-Revision-Date: 2014-07-20 16:55+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -20,159 +21,204 @@ msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:28
 msgid "Admin interface jobs"
-msgstr ""
+msgstr "Управление заданиями"
 
 #: src/Controller/Jobs/Order/Service/Payment/Default.php:39
 msgid ""
 "Authorized payments of orders will be captured after dispatching or after a "
 "configurable amount of time"
-msgstr ""
+msgstr "Авторизация платежей по заказам будет получена после отправки, либо после определённого промежутка времени"
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:28
 msgid "Batch update of payment/delivery status"
-msgstr ""
+msgstr "Пакетное обновление статуса платежа/доставки"
+
+#: src/Controller/Jobs/Admin/Cache/Default.php:28
+msgid "Cache cleanup"
+msgstr "Очистка кеша"
 
 #: src/Controller/Jobs/Order/Service/Payment/Default.php:28
 msgid "Capture authorized payments"
-msgstr ""
+msgstr "Загрузка разрешённых платежей"
 
 #: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:28
 msgid "Catalog index optimization"
-msgstr ""
+msgstr "Оптимизация индекса каталога"
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:28
 msgid "Catalog index rebuild"
-msgstr ""
+msgstr "Перестроение индекса каталога"
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
 #: src/Controller/Jobs/Common/Factory/Abstract.php:169
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr "Класс \"%1$s\" не имплементирует интерфейс \"%2$s\""
+msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:81
 #: src/Controller/Jobs/Common/Factory/Abstract.php:61
 #: src/Controller/Jobs/Common/Factory/Abstract.php:163
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr "Класс \"%1$s\" не доступен"
+msgstr "Недоступен класс \"%1$s\""
 
 #: src/Controller/Jobs/Factory.php:58
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден класс \"%1$s\""
 
 #: src/Controller/Jobs/Factory.php:41
 #, php-format
 msgid "Controller path is empty"
-msgstr "Путь контролера пуст"
+msgstr "Путь к контроллеру"
 
-#: src/Controller/Jobs/Order/Coupon/Count/Default.php:39
+#: src/Controller/Jobs/Order/Coupon/Count/Default.php:40
 msgid "Decreases the counts of successfully redeemed coupons"
-msgstr ""
+msgstr "Уменьшение счётчика успешно погашенных купонов"
 
-#: src/Controller/Jobs/Order/Product/Stock/Default.php:39
+#: src/Controller/Jobs/Order/Product/Stock/Default.php:40
 msgid "Decreases the stock levels of products in completed orders"
-msgstr ""
+msgstr "Уменьшение уровней запасов товаров в завершённых заказах"
+
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:39
+msgid ""
+"Deletes unfinished orders an makes their products and coupon codes available"
+" again"
+msgstr "Удаление незавершённых заказов делает снова доступными товары и коды купонов из них"
+
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:39
+msgid "Deletes unpaid orders to keep the database clean"
+msgstr "Удаление неоплаченных заказов для очистки базы данных"
+
+#: src/Controller/Jobs/Order/Product/Stock/Default.php:29
+#: src/Controller/Jobs/Order/Coupon/Count/Default.php:29
+msgid "Deprecated: Use \"Remove unfinised orders\""
+msgstr "Устарело: используйте \"Удалить незавершённые заказы\""
 
 #: src/Controller/Jobs/Service/Delivery/Process/Default.php:29
 msgid "Deprecated: Use order/service/delivery"
-msgstr ""
+msgstr "Устаревшее: использовать заказ/службу/доставку"
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:39
 msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr ""
+msgstr "Запускает службы поставщики услуг платежей или доставки, использующих пакетные обновления"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:39
 msgid ""
 "Executes the jobs created by the admin interface, e.g. the text exports"
-msgstr ""
+msgstr "Запускает задания, созданные администратором, например, экспорт текстов"
 
 #: src/Controller/Jobs/Order/Email/Payment/Factory.php:71
 #: src/Controller/Jobs/Order/Email/Delivery/Factory.php:71
 #: src/Controller/Jobs/Order/Service/Async/Factory.php:71
 #: src/Controller/Jobs/Order/Service/Payment/Factory.php:71
 #: src/Controller/Jobs/Order/Service/Delivery/Factory.php:71
-#: src/Controller/Jobs/Order/Product/Stock/Factory.php:71
-#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:71
+#: src/Controller/Jobs/Order/Product/Stock/Factory.php:46
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Factory.php:71
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Factory.php:71
+#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:46
+#: src/Controller/Jobs/Admin/Cache/Factory.php:71
 #: src/Controller/Jobs/Admin/Job/Factory.php:71
 #: src/Controller/Jobs/Service/Delivery/Process/Factory.php:47
+#: src/Controller/Jobs/Customer/Email/Watch/Factory.php:71
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr "Недопустимые знаки в имени класса \"%1$s\""
+msgstr "Недопустимые символы в названии класса \"%1$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:68
 #, php-format
 msgid "Invalid characters in job name \"%1$s\""
-msgstr "Недопустимые знаки в имени работы \"%1$s\""
+msgstr "Недопустимые символы в названии работы \"%1$s\""
 
 #: src/Controller/Jobs/Factory.php:49
 #, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Недопустимый контроллер \"%1$s\" в \"%2$s\""
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:88
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr "Неправильный домен \"%1$s\""
+msgstr "Недопустимый домен \"%1$s\""
 
 #: src/Controller/Jobs/Factory.php:64
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Недопустимая фабрика \"%1$s\""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:74
 #, php-format
 msgid "Invalid job method \"%1$s\""
-msgstr "Неправильный метод работы \"%1$s\""
+msgstr "Недопустимый метод задания \"%1$s\""
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:221
+#, php-format
+msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
+msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:91
 #, php-format
 msgid "Method \"%1$s\" not available"
-msgstr "Метод \"%1$s\" не доступен"
+msgstr "Недоступен метод \"%1$s\""
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:244
+#, php-format
+msgid "No warehouse \"%1$s\" found"
+msgstr "Не найдено склада \"%1$s\""
 
 #: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:39
 msgid "Optimizes the catalog index for searching products"
-msgstr ""
-
-#: src/Controller/Jobs/Order/Coupon/Count/Default.php:28
-msgid "Order coupon counts"
-msgstr ""
+msgstr "Оптимизация индекса каталога для поиска товаров"
 
 #: src/Controller/Jobs/Order/Email/Delivery/Default.php:28
 msgid "Order delivery related e-mails"
-msgstr ""
+msgstr "Письма относительно доставки заказов"
 
 #: src/Controller/Jobs/Order/Email/Payment/Default.php:28
 msgid "Order payment related e-mails"
-msgstr ""
-
-#: src/Controller/Jobs/Order/Product/Stock/Default.php:28
-msgid "Order product stock levels"
-msgstr ""
+msgstr "Письма относительно платежей по заказам"
 
 #: src/Controller/Jobs/Order/Service/Delivery/Default.php:28
 msgid "Process order delivery services"
-msgstr ""
+msgstr "Обработка служб доставки заказов"
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:28
+msgid "Product notification e-mails"
+msgstr "Письма уведомления о товарах"
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39
 msgid "Rebuilds the catalog index for searching products"
-msgstr ""
+msgstr "Перестроение индекса каталога для поиска товаров"
+
+#: src/Controller/Jobs/Admin/Cache/Default.php:39
+msgid "Removes the expired entries from the cache"
+msgstr "Удаление устаревших записей из кеша"
+
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:28
+msgid "Removes unfinished orders"
+msgstr "Удаление незавершённых заказов"
+
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:28
+msgid "Removes unpaid orders"
+msgstr "Удаление неоплаченных заказов"
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:39
+msgid "Sends e-mails for watched products"
+msgstr "Отсылка писем об отслеживаемых товарах"
 
 #: src/Controller/Jobs/Order/Email/Payment/Default.php:39
 msgid "Sends order confirmation or payment status update e-mails"
-msgstr ""
+msgstr "Отправка писем об обновлении статуса платежей или подтверждению заказов"
 
 #: src/Controller/Jobs/Order/Email/Delivery/Default.php:39
 msgid "Sends order delivery status update e-mails"
-msgstr ""
+msgstr "Отправка писем об обновлении статуса доставки заказов"
 
 #: src/Controller/Jobs/Order/Service/Delivery/Default.php:39
 msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr ""
+msgstr "Отправка оплаченных заказов в систему ERP или партнёру по логистике"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
 #, php-format

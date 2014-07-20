@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Dimitri <doleiynyk@metaways.de>, 2013
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-12-21 23:35+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"PO-Revision-Date: 2014-07-10 09:05+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,52 +24,52 @@ msgstr ""
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr "Не хватает адреса счета "
+msgstr "Ошибка в платёжном адресе"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr "Не хватает адреса доставки"
+msgstr "Ошибка в адресе доставки"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr "Адрес счета не разрешен"
+msgstr "Платёжный адрес не разрешён"
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr "Адрес доставки не разрешен"
+msgstr "Адрес доставки не разрешён"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr "Не хватает опции для оплаты"
+msgstr "Ошибка в параметре оплаты"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr "Не хватает опции для пересылки"
+msgstr "Ошибка в параметре доставки"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr "Опция оплаты не разрешена"
+msgstr "Параметр оплаты не разрешён"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr "Опция доставки не разрешена"
+msgstr "Параметр доставки не разрешён"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr "Извините, минимум один продукт больше не существует. Пожалуйста уберите его из вашей корзины, чтобы продолжить"
+msgstr "Приносим извинения, но по крайней мере один товар из корзины более не доступен. Чтобы продолжит, удалите его из своей корзины."
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr "Извините, минимум один продукт был отключен. Пожалуйста уберите его из вашей корзины, чтобы продолжить"
+msgstr "Приносим извинения, но по крайней мере один товар из корзины теперь недоступен. Чтобы продолжит, удалите его из своей корзины."
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr "Извините, минимум один продукт больше не доступен. Пожалуйста уберите его из вашей корзины, чтобы продолжить"
+msgstr "Приносим извинения, но по крайней мере один товар из корзины теперь недоступен. Чтобы продолжит, удалите его из своей корзины."
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr "Цена минимум одного продукта была изменина и обновлена автоматически"
+msgstr "Цена на, по крайней мере, один товар из корзины была изменена и автоматически обновлена."
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr "Извините, минимум одного продукта больше нету в запасе. Пожалуйста уберите его из вашей корзины, чтобы продолжить"
+msgstr "Приносим извинения, но по крайней мере один товар из корзины отсутствует на складе. Чтобы продолжит, удалите его из своей корзины."

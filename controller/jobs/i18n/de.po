@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 13:34+0200\n"
-"PO-Revision-Date: 2014-06-26 17:45+0000\n"
+"POT-Creation-Date: 2014-07-20 18:54+0200\n"
+"PO-Revision-Date: 2014-07-20 16:57+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -27,15 +27,19 @@ msgstr "Aufgaben aus der Administrationsoberfläche"
 msgid ""
 "Authorized payments of orders will be captured after dispatching or after a "
 "configurable amount of time"
-msgstr "Freigegebene Zahlungen von Bestellungen werden eingezogen nachdem die Ware versandt wurde order nach einer konfigurierbaren Zeitspanne"
+msgstr "Authorisierte Zahlungen für Bestellungen werden eingezogen nachdem die Ware versandt wurde oder nach einer konfigurierbaren Zeitspanne"
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:28
 msgid "Batch update of payment/delivery status"
-msgstr "Blockweise aktualisierung von Liefer- und Zahlungsstatus"
+msgstr "Blockweise Aktualisierung von Liefer- und Zahlungsstatus"
+
+#: src/Controller/Jobs/Admin/Cache/Default.php:28
+msgid "Cache cleanup"
+msgstr "Cache aufräumen"
 
 #: src/Controller/Jobs/Order/Service/Payment/Default.php:28
 msgid "Capture authorized payments"
-msgstr "Freigegebene Zahlungen einziehen"
+msgstr "Authorisierte Zahlungen einziehen"
 
 #: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:28
 msgid "Catalog index optimization"
@@ -68,21 +72,36 @@ msgstr "Die Klasse \"%1$s\" ist unbekannt"
 msgid "Controller path is empty"
 msgstr "Controllerpfad ist leer"
 
-#: src/Controller/Jobs/Order/Coupon/Count/Default.php:39
+#: src/Controller/Jobs/Order/Coupon/Count/Default.php:40
 msgid "Decreases the counts of successfully redeemed coupons"
 msgstr "Erfolgreich eingelöste Gutscheine werden ungültig gemacht"
 
-#: src/Controller/Jobs/Order/Product/Stock/Default.php:39
+#: src/Controller/Jobs/Order/Product/Stock/Default.php:40
 msgid "Decreases the stock levels of products in completed orders"
-msgstr "Der Lagerbestand von Produkten aus abgeschlossenen Bestellungen wird reduziert"
+msgstr "Der Lagerbestand für Produkte aus abgeschlossenen Bestellungen wird reduziert"
+
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:39
+msgid ""
+"Deletes unfinished orders an makes their products and coupon codes available"
+" again"
+msgstr "Löscht nicht abgeschlossene Bestellungen und stellt die Produkte und Gutscheincodes wieder zur Verfügung"
+
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:39
+msgid "Deletes unpaid orders to keep the database clean"
+msgstr "Löscht unbezahlte Bestellungen um den Speicherbedarf zu reduzieren"
+
+#: src/Controller/Jobs/Order/Product/Stock/Default.php:29
+#: src/Controller/Jobs/Order/Coupon/Count/Default.php:29
+msgid "Deprecated: Use \"Remove unfinised orders\""
+msgstr "Veraltet: Verwende \"Löscht nicht abgeschlossene Bestellungen\""
 
 #: src/Controller/Jobs/Service/Delivery/Process/Default.php:29
 msgid "Deprecated: Use order/service/delivery"
-msgstr "Veraltet: Verwende order/service/delivery"
+msgstr "Veraltet: Verwenden Sie order/service/delivery"
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:39
 msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr "Führt Liefer- und Zahlungsdienste aus, die eine stapelweise Verarbeitung der Statusänderungen benötigen"
+msgstr "Verarbeitet Statusänderungen von Liefer- und Zahlungsdiensten, die eine stapelweise Bearbeitung benötigen"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:39
 msgid ""
@@ -94,10 +113,14 @@ msgstr "Führt die Aufgaben aus, die in der Administrationsoberfläche erstellt 
 #: src/Controller/Jobs/Order/Service/Async/Factory.php:71
 #: src/Controller/Jobs/Order/Service/Payment/Factory.php:71
 #: src/Controller/Jobs/Order/Service/Delivery/Factory.php:71
-#: src/Controller/Jobs/Order/Product/Stock/Factory.php:71
-#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:71
+#: src/Controller/Jobs/Order/Product/Stock/Factory.php:46
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Factory.php:71
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Factory.php:71
+#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:46
+#: src/Controller/Jobs/Admin/Cache/Factory.php:71
 #: src/Controller/Jobs/Admin/Job/Factory.php:71
 #: src/Controller/Jobs/Service/Delivery/Process/Factory.php:47
+#: src/Controller/Jobs/Customer/Email/Watch/Factory.php:71
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
@@ -130,18 +153,24 @@ msgstr "Ungültige Factory \"%1$s\""
 msgid "Invalid job method \"%1$s\""
 msgstr "Ungültige Jobmethode \"%1$s\""
 
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:221
+#, php-format
+msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
+msgstr "Für die Domäne \"%1$s\" und den Code \"%2$s\" wurde kein Listentyp gefunden"
+
 #: src/Controller/Jobs/Admin/Job/Default.php:91
 #, php-format
 msgid "Method \"%1$s\" not available"
 msgstr "Methode \"%1$s\" nicht verfügbar"
 
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:244
+#, php-format
+msgid "No warehouse \"%1$s\" found"
+msgstr "Kein Warenlager \"%1$s\" gefunden"
+
 #: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:39
 msgid "Optimizes the catalog index for searching products"
 msgstr "Optimiert den Katalogindex für die Produktsuche"
-
-#: src/Controller/Jobs/Order/Coupon/Count/Default.php:28
-msgid "Order coupon counts"
-msgstr "Gutscheincodes in Bestellungen"
 
 #: src/Controller/Jobs/Order/Email/Delivery/Default.php:28
 msgid "Order delivery related e-mails"
@@ -151,29 +180,45 @@ msgstr "Lieferrelevante E-Mails für Bestellungen"
 msgid "Order payment related e-mails"
 msgstr "Zahlungsrelevante E-Mails für Bestellungen"
 
-#: src/Controller/Jobs/Order/Product/Stock/Default.php:28
-msgid "Order product stock levels"
-msgstr "Lagerbestände nach Bestellungen"
-
 #: src/Controller/Jobs/Order/Service/Delivery/Default.php:28
 msgid "Process order delivery services"
-msgstr "Lieferung von Bestellungen"
+msgstr "Verarbeitung der Bestellungen"
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:28
+msgid "Product notification e-mails"
+msgstr "E-Mail-Benachrichtigungen für Produkte"
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39
 msgid "Rebuilds the catalog index for searching products"
 msgstr "Aktualisiert den Katalogindex für die Produktsuche"
 
+#: src/Controller/Jobs/Admin/Cache/Default.php:39
+msgid "Removes the expired entries from the cache"
+msgstr "Löscht die alten Cache-Einträge"
+
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:28
+msgid "Removes unfinished orders"
+msgstr "Löscht nicht abgeschlossene Bestellungen"
+
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:28
+msgid "Removes unpaid orders"
+msgstr "Löscht unbezahlte Bestellungen"
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:39
+msgid "Sends e-mails for watched products"
+msgstr "Verschickt E-Mails für beobachtete Produkte"
+
 #: src/Controller/Jobs/Order/Email/Payment/Default.php:39
 msgid "Sends order confirmation or payment status update e-mails"
-msgstr "Verschickt E-Mails für Bestellbestätigungen und E-Mails bei Änderungen des Zahlungsstatus"
+msgstr "Verschickt E-Mails für Bestellbestätigungen und bei Änderungen des Zahlungsstatus"
 
 #: src/Controller/Jobs/Order/Email/Delivery/Default.php:39
 msgid "Sends order delivery status update e-mails"
-msgstr "Verschickt E-Mails bei Änderungen des Lieferstatus"
+msgstr "Verschickt E-Mails bei Änderungen des Versandstatus"
 
 #: src/Controller/Jobs/Order/Service/Delivery/Default.php:39
 msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr "Verschickt bezahlte Bestellungen an die Warenwirtschaft oder den Logistikpartner"
+msgstr "Übergibt bezahlte Bestellungen an die Warenwirtschaft oder den Logistikpartner"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
 #, php-format

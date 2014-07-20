@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-21 17:22+0200\n"
-"PO-Revision-Date: 2014-05-21 15:24+0000\n"
+"POT-Creation-Date: 2014-07-20 18:54+0200\n"
+"PO-Revision-Date: 2014-07-20 16:55+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -20,209 +21,208 @@ msgstr ""
 #: src/MShop/Order/Item/Base/Default.php:349
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Недопустим адрес для домена \"%1$s\""
 
 #: src/MShop/Common/Item/Address/Abstract.php:612
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Приветствие \"%1$s\" в адресе вне допустимого диапазона"
 
-#: src/MShop/Common/Manager/Address/Abstract.php:118
+#: src/MShop/Common/Manager/Address/Abstract.php:120
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "Недоступна настройка поиска адреса"
 
 #: src/MShop/Order/Item/Base/Address/Abstract.php:44
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Тип адреса \"%1$s\" вне допусимого диапазона"
 
 #: src/MShop/Order/Item/Base/Default.php:566
 #, php-format
 msgid "Basket empty"
-msgstr ""
+msgstr "Корзина пуста"
 
 #: src/MShop/Context/Item/Default.php:87
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "Объект в кеше недоступен"
 
-#: src/MShop/Catalog/Manager/Default.php:472
+#: src/MShop/Catalog/Manager/Default.php:523
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступен узел каталога № \"%1$s\""
 
-#: src/MShop/Catalog/Manager/Default.php:412
+#: src/MShop/Catalog/Manager/Default.php:463
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден путь для каталога с ID \"%1$s\""
 
 #: src/MShop/Plugin/Provider/Order/AddressesAvailable.php:64
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "Ошибка при проверке доступных адресов в корзине"
 
 #: src/MShop/Plugin/Provider/Order/ServicesAvailable.php:64
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr ""
+msgstr "Ошибка при проверке доступных элементов служб в корзине"
 
 #: src/MShop/Locale/Item/Site/Default.php:181
 #: src/MShop/Catalog/Item/Default.php:257
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "Недоступен дочерний узел с индексом \"%1$d\""
 
-#: src/MAdmin/Common/Manager/Abstract.php:59
+#: src/MAdmin/Common/Manager/Abstract.php:117
 #: src/MShop/Service/Manager/Abstract.php:41
-#: src/MShop/Service/Manager/Default.php:364
+#: src/MShop/Service/Manager/Default.php:595
 #: src/MShop/Common/Factory/Abstract.php:64
-#: src/MShop/Common/Factory/Abstract.php:131
-#: src/MShop/Common/Manager/Abstract.php:268
-#: src/MShop/Common/Manager/Abstract.php:377
-#: src/MShop/Product/Manager/Tag/Default.php:339
+#: src/MShop/Common/Factory/Abstract.php:153
+#: src/MShop/Common/Manager/Abstract.php:353
+#: src/MShop/Common/Manager/Abstract.php:465
 #: src/MShop/Plugin/Manager/Abstract.php:41
-#: src/MShop/Plugin/Manager/Default.php:203
+#: src/MShop/Plugin/Manager/Default.php:219
 #: src/MShop/Coupon/Manager/Abstract.php:40
-#: src/MShop/Coupon/Manager/Default.php:351
+#: src/MShop/Coupon/Manager/Default.php:693
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 
-#: src/MAdmin/Common/Manager/Abstract.php:53 src/MAdmin/Factory.php:66
+#: src/MAdmin/Common/Manager/Abstract.php:111 src/MAdmin/Factory.php:64
 #: src/MShop/Service/Manager/Abstract.php:35
-#: src/MShop/Service/Manager/Default.php:356
+#: src/MShop/Service/Manager/Default.php:587
 #: src/MShop/Common/Factory/Abstract.php:58
-#: src/MShop/Common/Factory/Abstract.php:125
-#: src/MShop/Common/Manager/Abstract.php:262
-#: src/MShop/Common/Manager/Abstract.php:371
-#: src/MShop/Product/Manager/Tag/Default.php:329 src/MShop/Factory.php:93
+#: src/MShop/Common/Factory/Abstract.php:147
+#: src/MShop/Common/Manager/Abstract.php:347
+#: src/MShop/Common/Manager/Abstract.php:459 src/MShop/Factory.php:91
 #: src/MShop/Plugin/Manager/Abstract.php:35
-#: src/MShop/Plugin/Manager/Default.php:195
+#: src/MShop/Plugin/Manager/Default.php:211
 #: src/MShop/Coupon/Manager/Abstract.php:34
-#: src/MShop/Coupon/Manager/Default.php:343
+#: src/MShop/Coupon/Manager/Default.php:685
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступен класс \"%1$s\""
 
 #: src/MShop/Common/Item/Abstract.php:204
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Код не должен быть длиннее 32 символов"
 
-#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:88
+#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:87
 #, php-format
 msgid "Configuration invalid"
-msgstr ""
+msgstr "Ошибка в настройке"
 
-#: src/MShop/Common/Manager/List/Abstract.php:348
-#: src/MShop/Common/Manager/List/Abstract.php:427
+#: src/MShop/Common/Manager/List/Abstract.php:350
+#: src/MShop/Common/Manager/List/Abstract.php:429
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Настройка недоступна"
 
 #: src/MShop/Context/Item/Default.php:113
 #, php-format
 msgid "Configuration object not available"
-msgstr ""
+msgstr "Недоступен конфигурируемый объект"
 
 #: src/MShop/Common/Manager/Type/Abstract.php:55
 #: src/MShop/Common/Manager/Address/Abstract.php:44
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступна  настройка обязательного запроса SQL \"%1$s\" "
 
 #: src/MShop/Service/Provider/Delivery/Default.php:316
 #, php-format
 msgid "Creating XML file with order data for delivery provider failed: %1$s"
-msgstr ""
+msgstr "Ошибка при создании файла XML с данными для поставщика доставки: %1$s"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:154
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Ошибка при инициализации curl"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:327
 #, php-format
 msgid ""
 "DOM tree of XML response from delivery provider could not be converted to "
 "XML string"
-msgstr ""
+msgstr "Невозможно преобразовать дерево DOM из XML ответа в строку XML"
 
 #: src/MShop/Context/Item/Default.php:139
 #, php-format
 msgid "Database manager object not available"
-msgstr ""
+msgstr "Недоступен модуль управления объектами базы данных"
 
 #: src/MShop/Order/Item/Base/Default.php:490
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Дубликат в коде купона \"%1$s\""
 
 #: src/MShop/Order/Item/Base/Abstract.php:64
 #: src/MShop/Order/Item/Base/Product/Abstract.php:39
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Состояния \"%1$s\" вне допустимого диапазона"
 
-#: src/MShop/Common/Manager/Abstract.php:159
+#: src/MShop/Common/Manager/Abstract.php:163
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "Недоступен ID последней вставленной записи"
 
 #. / Locale ID %1$s
 #: src/MShop/Context/Item/Default.php:158
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "Недоступен объект интернационализации для \"%1$s\""
 
 #: src/MShop/Common/Item/Abstract.php:219
 #: src/MShop/Common/Item/Abstract.php:223
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Недопустимый ISO код валюты \"%1$s\""
 
 #: src/MShop/Common/Item/Abstract.php:237
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr ""
+msgstr "Недопустимый языковой ISO код \"%1$s\""
 
-#: src/MAdmin/Job/Manager/Default.php:270
-#: src/MAdmin/Job/Manager/Default.php:277
-#: src/MShop/Locale/Manager/Site/Default.php:304
-#: src/MShop/Service/Manager/Default.php:292
-#: src/MShop/Plugin/Manager/Default.php:349
-#: src/MShop/Coupon/Manager/Default.php:282
+#: src/MAdmin/Job/Manager/Default.php:496
+#: src/MAdmin/Job/Manager/Default.php:503
+#: src/MShop/Locale/Manager/Site/Default.php:441
+#: src/MShop/Service/Manager/Default.php:523
+#: src/MShop/Plugin/Manager/Default.php:575
+#: src/MShop/Coupon/Manager/Default.php:515
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "Недопустимый JSON как результат поиска по ID \"%2$s\" в \"%1$s\": %3$s"
 
-#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:286
+#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:307
 #, php-format
 msgid ""
 "Invalid JSON as result of search for order service attribute with ID "
 "\"%1$d\""
-msgstr ""
+msgstr "Недопустимый JSON как результат поиска атрибута службы заказов с ID \"%1$d\""
 
 #: src/MShop/Locale/Item/Currency/Default.php:94
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в ISO коде валюты \"%1$s\""
 
 #: src/MShop/Locale/Item/Language/Default.php:97
 #: src/MShop/Product/Item/Tag/Default.php:56
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в ISO коде языка \"%1$s\""
 
 #: src/MShop/Service/Provider/Abstract.php:344
 #, php-format
 msgid ""
 "Invalid characters in attribute for provider configuration. Attribute is not"
 " of type \"%1$s\"."
-msgstr ""
+msgstr "Недопустимые символы в атрибуте для настройки поставщика. Атрибут не имеет тип \"%1$s\"."
 
-#: src/MAdmin/Job/Manager/Factory.php:35 src/MAdmin/Log/Manager/Factory.php:35
+#: src/MAdmin/Cache/Manager/Factory.php:37
+#: src/MAdmin/Job/Manager/Factory.php:37 src/MAdmin/Log/Manager/Factory.php:37
 #: src/MShop/Order/Manager/Factory.php:39
 #: src/MShop/Supplier/Manager/Factory.php:39
 #: src/MShop/Locale/Manager/Factory.php:38
@@ -231,7 +231,7 @@ msgstr ""
 #: src/MShop/Customer/Manager/Factory.php:39
 #: src/MShop/Attribute/Manager/Factory.php:39
 #: src/MShop/Common/Factory/Abstract.php:52
-#: src/MShop/Common/Manager/Abstract.php:365
+#: src/MShop/Common/Manager/Abstract.php:453
 #: src/MShop/Text/Manager/Factory.php:39
 #: src/MShop/Catalog/Manager/Factory.php:38
 #: src/MShop/Product/Manager/Factory.php:39
@@ -243,7 +243,7 @@ msgstr ""
 #: src/MShop/Price/Manager/Factory.php:39
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в названии класса \"%1$s\""
 
 #: src/MShop/Order/Item/Abstract.php:161
 #: src/MShop/Common/Item/Abstract.php:190
@@ -251,56 +251,55 @@ msgstr ""
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
-msgstr ""
+msgstr "Недопустимые символы в дате \"%1$s\". Ожидается соблюдение формата ISO \"ГГГГ-ММ-ДД чч:мм:сс\"."
 
-#: src/MShop/Customer/Item/Default.php:345
+#: src/MShop/Customer/Item/Default.php:349
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "Недопустимые символы в дате \"%1$s\". Ожидается соблюдение формата ISO \"ГГГГ-ММ-ДД\"."
 
-#: src/MAdmin/Common/Manager/Abstract.php:35
-#: src/MShop/Service/Manager/Default.php:341
-#: src/MShop/Common/Manager/Abstract.php:239
-#: src/MShop/Plugin/Manager/Default.php:175
+#: src/MAdmin/Common/Manager/Abstract.php:93
+#: src/MShop/Service/Manager/Default.php:572
+#: src/MShop/Common/Manager/Abstract.php:324
+#: src/MShop/Plugin/Manager/Default.php:191
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в названии домена \"%1$s\""
 
 #: src/MShop/Common/Item/Address/Abstract.php:433
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в адресе email: \"%1$s\""
 
-#: src/MAdmin/Common/Manager/Abstract.php:43
-#: src/MShop/Common/Manager/Abstract.php:243
-#: src/MShop/Common/Manager/Abstract.php:252
-#: src/MShop/Common/Manager/Abstract.php:438
-#: src/MShop/Product/Manager/Tag/Default.php:322
+#: src/MAdmin/Common/Manager/Abstract.php:101
+#: src/MShop/Common/Manager/Abstract.php:328
+#: src/MShop/Common/Manager/Abstract.php:337
+#: src/MShop/Common/Manager/Abstract.php:522
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в названии менеджера \"%1$s\""
 
-#: src/MAdmin/Factory.php:52 src/MShop/Factory.php:79
+#: src/MAdmin/Factory.php:50 src/MShop/Factory.php:77
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Недопустимые символы в названии управляющего \"%1$s\" в \"%2$s\""
 
 #: src/MShop/Price/Item/Default.php:360
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в цене \"%1$s\""
 
-#: src/MShop/Service/Manager/Default.php:349
-#: src/MShop/Plugin/Manager/Default.php:183
-#: src/MShop/Coupon/Manager/Default.php:336
+#: src/MShop/Service/Manager/Default.php:580
+#: src/MShop/Plugin/Manager/Default.php:199
+#: src/MShop/Coupon/Manager/Default.php:678
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в названии поставщика \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:350
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Недопустимые символы в дате покупки \"%1$s\""
 
 #: src/MShop/Coupon/Provider/FreeShipping.php:37
 #: src/MShop/Coupon/Provider/PercentRebate.php:37
@@ -308,199 +307,205 @@ msgstr ""
 #: src/MShop/Coupon/Provider/FixedRebate.php:37
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Недопустимая настройка для поставщика купонов \"%1$s\", необходимо \"%2$s\""
 
-#: src/MAdmin/Factory.php:72 src/MShop/Factory.php:99
+#: src/MAdmin/Factory.php:70 src/MShop/Factory.php:97
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Недопустимая фабрика \"%1$s\""
 
 #: src/MShop/Media/Item/Default.php:196
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Недопустимый mime тип \"%1$s\""
 
-#: src/MShop/Order/Manager/Base/Default.php:380
+#: src/MShop/Order/Manager/Base/Default.php:512
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Недопустимая сериализованная корзина. \"%1$s\" возвращает \"%2$s\"."
 
 #: src/MShop/Common/Item/Address/Abstract.php:489
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Недопустимый URL сайта \"%1$s\""
 
 #: src/MShop/Common/Manager/Decorator/Sitecheck.php:53
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Невозможно удалить элемент. ID сайта элемента отличается от текущего ID сайта."
 
-#: src/MShop/Catalog/Manager/Index/Default.php:283
+#: src/MShop/Catalog/Manager/Index/Default.php:410
 #, php-format
 msgid ""
 "Item could not be saved using method saveItem(). Item ID not available."
-msgstr ""
+msgstr "Невозможно сохранить элемент, используя метод saveItem(). Недоступен ID элемента."
 
-#: src/MShop/Common/Manager/Abstract.php:583
+#: src/MShop/Common/Manager/Abstract.php:667
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "Элемент, упомянутый в домене \"%1$s\" не найден: %2$s"
 
-#: src/MShop/Common/Manager/Abstract.php:607
+#: src/MAdmin/Cache/Manager/Default.php:357
+#, php-format
+msgid "Item with ID \"%1$s\" not found"
+msgstr "Не найден элемент с ID \"%1$s\""
+
+#: src/MShop/Common/Manager/Abstract.php:691
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден элемент с ID \"%2$s\" в \"%1$s\""
 
-#: src/MAdmin/Job/Manager/Default.php:231
+#: src/MAdmin/Job/Manager/Default.php:359
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Не найдена задача с ID \"%1$s\""
 
 #: src/MShop/Common/Manager/List/Abstract.php:188
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден элемент списка с ID \"%2$s\" в \"%1$s\""
 
-#: src/MShop/Catalog/Manager/Index/Attribute/Default.php:327
+#: src/MShop/Catalog/Manager/Index/Attribute/Default.php:447
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступен тип списка для элемента атрибута с ID \"%1$s\""
 
-#: src/MShop/Catalog/Manager/Index/Price/Default.php:370
+#: src/MShop/Catalog/Manager/Index/Price/Default.php:490
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступен тип списка для элемента цены с ID \"%1$s\""
 
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:336
-#: src/MShop/Catalog/Manager/Index/Text/Default.php:539
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:457
+#: src/MShop/Catalog/Manager/Index/Text/Default.php:661
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступен тип списка для элемента текста с ID \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:237
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "Ошибка загрузки ответа XML \"%1$s\" от поставщика доставки"
 
-#: src/MShop/Locale/Manager/Default.php:438
+#: src/MShop/Locale/Manager/Default.php:667
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден элемент локали для сайта \"%1$s\""
 
 #: src/MShop/Context/Item/Default.php:196
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "Недоступен объект локали"
 
 #: src/MShop/Order/Manager/Base/Abstract.php:54
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr ""
+msgstr "Флаг блокировки \"%1$d\" вне допустимого диапазона"
 
-#: src/MAdmin/Log/Manager/Default.php:209
+#: src/MAdmin/Log/Manager/Default.php:370
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Не найдена запись журнала с ID \"%1$s\""
 
 #: src/MShop/Context/Item/Default.php:222
 #, php-format
 msgid "Log manager object not available"
-msgstr ""
+msgstr "Недоступен объект управления журналированием"
 
 #: src/MShop/Context/Item/Default.php:274
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "Недоступен объект почты"
 
-#: src/MAdmin/Factory.php:57 src/MShop/Factory.php:84
+#: src/MAdmin/Factory.php:55 src/MShop/Factory.php:82
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr ""
+msgstr "Недопустимый путь к менеджеру \"%1$s\""
 
-#: src/MAdmin/Factory.php:40 src/MShop/Factory.php:67
+#: src/MAdmin/Factory.php:38 src/MShop/Factory.php:65
 #, php-format
 msgid "Manager path is empty"
-msgstr ""
+msgstr "Пустой путь к менеджеру"
 
-#: src/MShop/Locale/Manager/Site/Default.php:479
+#: src/MShop/Locale/Manager/Site/Default.php:616
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr ""
+msgstr "Недоступен метод \"%1$s\" для управления локалью сайта"
 
 #: src/MShop/Service/Provider/Abstract.php:174
-#: src/MShop/Service/Provider/Decorator/Abstract.php:260
+#: src/MShop/Service/Provider/Decorator/Abstract.php:236
 #: src/MShop/Service/Provider/Payment/Abstract.php:129
 #: src/MShop/Service/Provider/Payment/Abstract.php:140
 #: src/MShop/Service/Provider/Payment/Abstract.php:167
 #: src/MShop/Common/Manager/Decorator/Abstract.php:48
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Недоступен метод \"%1$s\" для поставщика"
 
 #: src/MShop/Service/Provider/Decorator/Costs.php:80
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Неверная настройка \"%1$s\""
 
 #: src/MShop/Common/Item/Abstract.php:172
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Новый ID \"%1$s\" элемента отличается от старого ID \"%2$s\""
 
 #: src/MShop/Locale/Manager/Site/Default.php:156
 #, php-format
 msgid ""
 "Newly created site can not be saved using method \"saveItem()\". Try using "
 "method \"insertItem()\" instead."
-msgstr ""
+msgstr "Вновь созданный сайт невозможно сохранить, используя метод \"saveItem()\". Вместо этого попробуйте использовать метод \"insertItem()\"."
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:138
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Недоступна цена на товар с ID \"%1$s\" или товар с кодом \"%2$s\""
 
-#: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:132
-#: src/MShop/Coupon/Provider/Abstract.php:176
+#: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:131
+#: src/MShop/Coupon/Provider/Abstract.php:177
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Не найден товар с кодом \"%1$s\""
 
-#: src/MShop/Product/Manager/Stock/Default.php:327
+#: src/MShop/Product/Manager/Stock/Default.php:675
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "Не найдено склада для кода \"%1$s\""
 
-#: src/MAdmin/Job/Manager/Default.php:145
-#: src/MAdmin/Log/Manager/Default.php:121
-#: src/MShop/Order/Manager/Base/Default.php:233
-#: src/MShop/Order/Manager/Base/Service/Default.php:171
-#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:155
-#: src/MShop/Order/Manager/Base/Product/Default.php:245
-#: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:156
-#: src/MShop/Order/Manager/Base/Address/Default.php:245
-#: src/MShop/Order/Manager/Base/Coupon/Default.php:131
-#: src/MShop/Order/Manager/Status/Default.php:117
-#: src/MShop/Order/Manager/Default.php:184
-#: src/MShop/Supplier/Manager/Default.php:168
+#: src/MAdmin/Cache/Manager/Default.php:256
+#: src/MAdmin/Job/Manager/Default.php:161
+#: src/MAdmin/Log/Manager/Default.php:171
+#: src/MShop/Order/Manager/Base/Default.php:364
+#: src/MShop/Order/Manager/Base/Service/Default.php:187
+#: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:171
+#: src/MShop/Order/Manager/Base/Product/Default.php:261
+#: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:172
+#: src/MShop/Order/Manager/Base/Address/Default.php:261
+#: src/MShop/Order/Manager/Base/Coupon/Default.php:147
+#: src/MShop/Order/Manager/Status/Default.php:133
+#: src/MShop/Order/Manager/Default.php:200
+#: src/MShop/Supplier/Manager/Default.php:212
 #: src/MShop/Locale/Manager/Site/Default.php:152
-#: src/MShop/Locale/Manager/Default.php:228
+#: src/MShop/Locale/Manager/Default.php:252
 #: src/MShop/Locale/Manager/Language/Default.php:123
 #: src/MShop/Locale/Manager/Currency/Default.php:127
-#: src/MShop/Service/Manager/Default.php:198
-#: src/MShop/Customer/Manager/Default.php:309
-#: src/MShop/Attribute/Manager/Default.php:180
+#: src/MShop/Service/Manager/Default.php:242
+#: src/MShop/Customer/Manager/Default.php:362
+#: src/MShop/Attribute/Manager/Default.php:199
 #: src/MShop/Common/Manager/Type/Abstract.php:115
 #: src/MShop/Common/Manager/List/Abstract.php:91
-#: src/MShop/Common/Manager/Address/Abstract.php:135
-#: src/MShop/Text/Manager/Default.php:139
-#: src/MShop/Catalog/Manager/Index/Default.php:279
-#: src/MShop/Catalog/Manager/Default.php:307
-#: src/MShop/Product/Manager/Stock/Warehouse/Default.php:131
-#: src/MShop/Product/Manager/Stock/Default.php:127
-#: src/MShop/Product/Manager/Tag/Default.php:117
-#: src/MShop/Product/Manager/Default.php:165
-#: src/MShop/Media/Manager/Default.php:205
-#: src/MShop/Plugin/Manager/Default.php:246
+#: src/MShop/Common/Manager/Address/Abstract.php:137
+#: src/MShop/Text/Manager/Default.php:155
+#: src/MShop/Catalog/Manager/Index/Default.php:406
+#: src/MShop/Catalog/Manager/Default.php:358
+#: src/MShop/Product/Manager/Stock/Warehouse/Default.php:256
+#: src/MShop/Product/Manager/Stock/Default.php:143
+#: src/MShop/Product/Manager/Tag/Default.php:133
+#: src/MShop/Product/Manager/Default.php:181
+#: src/MShop/Media/Manager/Default.php:249
+#: src/MShop/Plugin/Manager/Default.php:262
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:47
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:52
 #: src/MShop/Plugin/Provider/Order/IntelligentSampling.php:53
@@ -508,17 +513,22 @@ msgstr ""
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:51
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:56
 #: src/MShop/Plugin/Provider/Order/ProductStock.php:52
-#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:71
-#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:76
+#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:70
+#: src/MShop/Plugin/Provider/Order/PropertyAdd.php:75
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:53
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:51
 #: src/MShop/Plugin/Provider/Order/Shipping.php:55
-#: src/MShop/Coupon/Manager/Code/Default.php:198
-#: src/MShop/Coupon/Manager/Default.php:176
+#: src/MShop/Coupon/Manager/Code/Default.php:317
+#: src/MShop/Coupon/Manager/Default.php:198
 #: src/MShop/Price/Manager/Abstract.php:35
-#: src/MShop/Price/Manager/Default.php:226
+#: src/MShop/Price/Manager/Default.php:271
 #, php-format
 msgid "Object is not of required type \"%1$s\""
+msgstr "Объект не принадлежит к требуемому типу \"%1$s\""
+
+#: src/MAdmin/Cache/Manager/None.php:87
+#, php-format
+msgid "Operation not supported"
 msgstr ""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:261
@@ -526,161 +536,161 @@ msgstr ""
 msgid ""
 "Order ID \"%1$s\" in XML response of delivery provider differs from stored "
 "invoice ID \"%2$s\" of the order"
-msgstr ""
+msgstr "ID заказа \"%1$s\" в ответе XML поставщика доставки отличается от хранящегося в счёте ID \"%2$s\" заказа"
 
-#: src/MShop/Order/Manager/Base/Default.php:476
+#: src/MShop/Order/Manager/Base/Default.php:619
 #: src/MShop/Service/Provider/Delivery/Default.php:291
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден базовый элемент заказа с ID заказа \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:249
 #, php-format
 msgid ""
 "Order data sent to delivery provider was rejected with code \"%1$s\" "
 "according to XML response"
-msgstr ""
+msgstr "Данные по заказу, отосланные поставщику доставки были отвергнуты с кодом \"%1$s\", относящимся к ответу XML"
 
 #: src/MShop/Order/Item/Abstract.php:177
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Статус доставки заказа \"%1$s\" находится вне допустимого диапазона"
 
 #: src/MShop/Order/Item/Abstract.php:193
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Статус оплаты заказа \"%1$s\" находится вне допустимого диапазона"
 
 #: src/MShop/Order/Item/Base/Product/Default.php:435
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Позиция товара \"%1$s\" должна быть больше 0"
 
 #: src/MShop/Order/Item/Abstract.php:213
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Тип заказа \"%1$s\" находится вне допустимого диапазона"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:268
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "Заказ с ID \"%1$s\" отвергнут с кодом \"%2$s\": %3$s"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:116
 #: src/MShop/Service/Provider/Delivery/Default.php:150
 #: src/MShop/Service/Provider/Delivery/Default.php:357
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Недоступен параметр \"%1$s\" для настройки"
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:532
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:533
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: дубликат сделки с ID \"%1$s\" и статусом \"%2$s\" "
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:371
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:370
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: недопустимый запрос \"%1$s\""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:210
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:243
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:290
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:328
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:209
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:242
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:289
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:327
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: недоступен ID транзакции для заказа с ID \"%1$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:487
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: ошибка \"%2$s\" в запросе на заказ с ID \"%1$s\""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:517
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:518
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: неверная сумма к оплате \"%1$s\" для заказа с ID \"%2$s\""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:509
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:510
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: недопустимый получатель email \"%1$s\""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:652
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:653
 msgid "Payment costs"
-msgstr ""
+msgstr "Издержки на оплату"
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:179
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Взгляните на цены на товары в своей корзине"
 
 #: src/MShop/Price/Item/Default.php:318
 #, php-format
 msgid ""
 "Price can not be added. Currency ID \"%1$s\" of price item and currently "
 "used currency ID \"%2$s\" does not match."
-msgstr ""
+msgstr "Невозможно добавить цену. Несоответствие в ID валюты \"%1$s\" цены в элементе и используемой валюте с ID \"%2$s\"."
 
 #: src/MShop/Price/Manager/Abstract.php:49
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "Недоступна цена на данное количество \"%1$d\""
 
 #: src/MShop/Price/Manager/Abstract.php:44
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Недоступен элемент цены"
 
 #: src/MShop/Order/Item/Base/Abstract.php:78
 #, php-format
 msgid ""
 "Product does not contain all required values. Product code for item not "
 "available."
-msgstr ""
+msgstr "Товар не содержит всех требуемых значений. Недоступен код товара для элемента."
 
 #: src/MShop/Plugin/Provider/Order/PropertyMatch.php:84
 #, php-format
 msgid "Product matching given properties not found"
-msgstr ""
+msgstr "Не найден товар, соответствующий заданным свойствам"
 
 #: src/MShop/Order/Item/Base/Default.php:239
 #: src/MShop/Order/Item/Base/Default.php:316
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr ""
+msgstr "Недоступен товар с ключом в массиве \"%1$d\""
 
 #: src/MShop/Plugin/Provider/Order/ProductGone.php:100
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Недоступны товары в корзине"
 
-#: src/MShop/Plugin/Provider/Order/ProductStock.php:95
+#: src/MShop/Plugin/Provider/Order/ProductStock.php:94
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Товаров нет в наличии"
 
 #: src/MShop/Order/Item/Default.php:267
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Свойство \"%1$s\" в названии вне допустимого диапазона"
 
-#: src/MShop/Service/Manager/Default.php:345
-#: src/MShop/Plugin/Manager/Default.php:168
-#: src/MShop/Coupon/Manager/Default.php:332
+#: src/MShop/Service/Manager/Default.php:576
+#: src/MShop/Plugin/Manager/Default.php:184
+#: src/MShop/Coupon/Manager/Default.php:674
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступен поставщик в \"%1$s\""
 
 #: src/MShop/Order/Item/Base/Product/Default.php:337
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
-msgstr ""
+msgstr "Количество должно быть положительным числом, не выше %1$d"
 
 #: src/MShop/Service/Provider/Abstract.php:303
 #, php-format
 msgid "Required attribute \"%1$s\" in provider configuration not available"
-msgstr ""
+msgstr "Недоступен обязательный атрибут \"%1$s\" в настройке поставщика"
 
 #: src/MShop/Common/Manager/Type/Abstract.php:68
 #: src/MShop/Common/Manager/Type/Abstract.php:72
@@ -690,7 +700,7 @@ msgstr ""
 #: src/MShop/Common/Manager/Address/Abstract.php:61
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступна настройка поиска для \"%1$s\""
 
 #: src/MShop/Common/Manager/Type/Abstract.php:64
 #: src/MShop/Common/Manager/List/Abstract.php:39
@@ -698,139 +708,139 @@ msgstr ""
 #: src/MShop/Common/Manager/Address/Abstract.php:53
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Недоступна настройка поиска"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:206
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "Ошибка при отсылке заказа поставщику доставки со статусом HTTP \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:200
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr ""
+msgstr "Ошибка при отсылке заказа поставщику доставки: \"%1$s\""
 
 #: src/MShop/Order/Item/Base/Default.php:421
 #: src/MShop/Order/Item/Base/Service/Abstract.php:45
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr ""
+msgstr "Недоступна служба типа \"%1$s\""
 
-#: src/MShop/Service/Provider/Payment/PayPalExpress.php:761
+#: src/MShop/Service/Provider/Payment/PayPalExpress.php:760
 #, php-format
 msgid "Service payment provider for order base ID \"%1$s\" not found"
-msgstr ""
+msgstr "Не найдена служба поставщика оплаты для заказа с основным ID \"%1$s\""
 
 #: src/MShop/Context/Item/Default.php:248
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Недоступен объект сессии"
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:33
 #, php-format
 msgid ""
 "Site can not be inserted. Site ID of site differs from site ID of parent "
 "site."
-msgstr ""
+msgstr "Невозможно добавить сайт. ID сайта отличается от ID родительского сайта."
 
 #: src/MShop/Catalog/Manager/Decorator/Sitecheck.php:61
 #, php-format
 msgid ""
 "Site can not be moved. Site ID of site differs from present site id, site ID"
 " of existing parent site or site id of new parent site."
-msgstr ""
+msgstr "Невозможно переместить сайт. ID сайта отличается от существующего ID сайта, ID существующего родительского сайта, либо ID нового родительского сайта."
 
 #: src/MShop/Locale/Manager/Default.php:122
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден сайт для кода \"%1$s\""
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:85
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "Превышено максимальное количество %1$s в корзине"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:60
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Максимальное количество товаров: %1$d"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:97
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "Превышено максимальное количество из %1$d товаров"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:87
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Максимальное значение для товара %1$s"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:75
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Максимальное количество для всех товаров %1$d"
 
 #: src/MShop/Plugin/Provider/Order/ProductLimit.php:103
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Максимальное значение для всех товаров %1$s"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:79
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "Не достигнуто минимальное значение %1$s в корзине"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:91
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "Не достигнуто минимальное количество товаров %1$d в корзине"
 
 #: src/MShop/Service/Provider/Payment/Abstract.php:96
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
+msgstr "Тип параметра настроек с ключом \"%1$s\" должен быть \"%2$s\""
 
-#: src/MShop/Locale/Manager/Default.php:533
-#: src/MShop/Common/Manager/Abstract.php:789
+#: src/MShop/Locale/Manager/Default.php:844
+#: src/MShop/Common/Manager/Abstract.php:873
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Не найдено общее количество результатов"
 
-#: src/MShop/Locale/Manager/Site/Default.php:414
+#: src/MShop/Locale/Manager/Site/Default.php:551
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Не найден корень дерева с кодом \"%1$s\" в \"%2$s\""
 
 #: src/MShop/Common/Manager/Type/Abstract.php:199
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Не найден тип элемента с ID \"%1$s\" в \"%2$s\""
 
 #: src/MShop/Service/Provider/Abstract.php:255
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr ""
+msgstr "Невозможно упорядочить публичные праздники: \"%1$s\""
 
-#: src/MShop/Common/Manager/Abstract.php:117
+#: src/MShop/Common/Manager/Abstract.php:121
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Неизвестный ключ поиска \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:242
 #, php-format
 msgid ""
 "Validation of XML response from delivery provider against schema \"%1$s\" "
 "failed"
-msgstr ""
+msgstr "Ошибка проверки ответа XML от поставщика доставки, в соответствие со схемой \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:323
 #, php-format
 msgid ""
 "Validation of XML response from delivery provider against schema \"%1$s\" "
 "failed: %2$s"
-msgstr ""
+msgstr "Ошибка проверки ответа XML от поставщика доставки, в соответствие со схемой \"%1$s\": %2$s"
 
 #: src/MShop/Context/Item/Default.php:300
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Недоступен объект режима вывода"

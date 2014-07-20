@@ -6,14 +6,16 @@
 # Translators:
 # Translators:
 # Translators:
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 # Dimitri <doleiynyk@metaways.de>, 2013
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2014-02-27 15:36+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"PO-Revision-Date: 2014-07-20 15:32+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,15 +29,15 @@ msgstr "Компания"
 
 #. Address salutation
 msgid "mr"
-msgstr "Господин"
+msgstr "Мистер"
 
 #. Address salutation
 msgid "mrs"
-msgstr "Госпожа"
+msgstr "Миссис"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "Мисс"
 
 #. Product attribute
 msgid "size"
@@ -55,7 +57,7 @@ msgstr "Цвет"
 
 #. Product attribute
 msgid "option"
-msgstr ""
+msgstr "Параметр"
 
 #. Order type value
 msgid "order:repeat"
@@ -91,7 +93,7 @@ msgstr "возмещен"
 
 #. Payment status value
 msgid "pay:4"
-msgstr "ожидаемый"
+msgstr "в ожидании"
 
 #. Payment status value
 msgid "pay:5"
@@ -111,11 +113,11 @@ msgstr "удален"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "ожидаемый"
+msgstr "в ожидании"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "в прогрессе"
+msgstr "в процессе"
 
 #. Delivery status value
 msgid "stat:3"
@@ -139,20 +141,32 @@ msgstr "возращен"
 
 #. Direct debit service provider
 msgid "directdebit.accountowner"
-msgstr ""
+msgstr "Владелец учётной записи"
 
 #. Direct debit service provider
 msgid "directdebit.accountno"
-msgstr ""
+msgstr "Номер учётной записи"
 
 #. Direct debit service provider
 msgid "directdebit.bankcode"
-msgstr ""
+msgstr "Код банка"
 
 #. Direct debit service provider
 msgid "directdebit.bankname"
-msgstr ""
+msgstr "Название банка"
 
 #. Warehouse code
 msgid "warehouse:default"
 msgstr "склад:стандартный"
+
+#. Favorite action
+msgid "favorite"
+msgstr "в избранное"
+
+#. Pin action
+msgid "pin"
+msgstr "отметить"
+
+#. Watch action
+msgid "watch"
+msgstr "следить"

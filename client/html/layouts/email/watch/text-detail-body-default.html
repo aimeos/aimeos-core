@@ -25,7 +25,7 @@ $costFormat = $this->translate( 'client/html', '+ %1$s %2$s/item' );
 $rebateFormat = $this->translate( 'client/html', '%1$s %2$s off' );
 
 /// Rebate percent format with rebate percent value (%1$s)
-$rebatePercentFormat = $this->translate( 'client/html', '-%1$s%%' );
+$rebatePercentFormat = '(' . $this->translate( 'client/html', '-%1$s%%' ) . ')';
 
 /// Tax rate format with tax rate in percent (%1$s)
 $vatFormat = $this->translate( 'client/html', 'Incl. %1$s%% VAT' );
@@ -43,7 +43,7 @@ $vatFormat = $this->translate( 'client/html', 'Incl. %1$s%% VAT' );
 <?php	$prices = $product->getRefItems( 'price', 'default', 'default' ); ?>
 <?php	if( ( $price = reset( $prices ) ) !== false ) : ?>
 <?php		$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() ); ?>
-<?php		printf( $priceFormat, $this->number( $price->getValue() ), $priceCurrency ); ?> <?php ( $price->getRebate() > '0.00' ? printf( '(' . $rebatePercentFormat . ')', $this->number( round( $price->getRebate() * 100 / ( $price->getValue() + $price->getRebate() ) ), 0 ) ) : '' ); ?>
+<?php		printf( $priceFormat, $this->number( $price->getValue() ), $priceCurrency ); ?> <?php ( $price->getRebate() > '0.00' ? printf( $rebatePercentFormat, $this->number( round( $price->getRebate() * 100 / ( $price->getValue() + $price->getRebate() ) ), 0 ) ) : '' ); ?>
 <?php		if( $price->getCosts() > 0 ) { echo strip_tags( sprintf( $costFormat, $this->number( $price->getCosts() ), $priceCurrency ) ); } ?>
 <?php		if( $price->getTaxrate() > 0 ) { echo ', ' . strip_tags( sprintf( $vatFormat, $this->number( $price->getTaxrate() ) ) ); } ?>
 <?php	endif; ?>

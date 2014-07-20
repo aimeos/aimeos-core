@@ -6,13 +6,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-10-14 17:28+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"PO-Revision-Date: 2014-07-10 10:47+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,556 +22,556 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "aa"
-msgstr ""
+msgstr "Афарский"
 
 msgid "ab"
-msgstr ""
+msgstr "Абхазский"
 
 msgid "ae"
-msgstr ""
+msgstr "Авестийский"
 
 msgid "af"
-msgstr ""
+msgstr "Африкаанс"
 
 msgid "ak"
-msgstr ""
+msgstr "Акан"
 
 msgid "am"
-msgstr ""
+msgstr "Амхарский"
 
 msgid "an"
-msgstr ""
+msgstr "Арагонский"
 
 msgid "ar"
-msgstr ""
+msgstr "Арабский"
 
 msgid "as"
-msgstr ""
+msgstr "Ассамский"
 
 msgid "av"
-msgstr ""
+msgstr "Аварский"
 
 msgid "ay"
-msgstr ""
+msgstr "Аймара"
 
 msgid "az"
-msgstr ""
+msgstr "Азербайджанский"
 
 msgid "ba"
-msgstr ""
+msgstr "Башкирский"
 
 msgid "be"
-msgstr ""
+msgstr "Белорусский"
 
 msgid "bg"
-msgstr ""
+msgstr "Болгарский"
 
 msgid "bh"
-msgstr ""
+msgstr "Бихарский"
 
 msgid "bi"
-msgstr ""
+msgstr "Бислама"
 
 msgid "bm"
-msgstr ""
+msgstr "Бамбара"
 
 msgid "bn"
-msgstr ""
+msgstr "Бенгальский"
 
 msgid "bo"
-msgstr ""
+msgstr "Тибетский"
 
 msgid "br"
-msgstr ""
+msgstr "Бретонский"
 
 msgid "bs"
-msgstr ""
+msgstr "Боснийский"
 
 msgid "ca"
-msgstr ""
+msgstr "Каталонский "
 
 msgid "ce"
-msgstr ""
+msgstr "Чеченский"
 
 msgid "ch"
-msgstr ""
+msgstr "Чаморро"
 
 msgid "co"
-msgstr ""
+msgstr "Корсиканский"
 
 msgid "cr"
-msgstr ""
+msgstr "Кри"
 
 msgid "cs"
-msgstr ""
+msgstr "Чешский"
 
 msgid "cu"
-msgstr ""
+msgstr "Церковнославянский"
 
 msgid "cv"
-msgstr ""
+msgstr "Чувашский"
 
 msgid "cy"
-msgstr ""
+msgstr "Валлийский"
 
 msgid "da"
-msgstr ""
+msgstr "Датский"
 
 msgid "de"
-msgstr ""
+msgstr "Немецкий "
 
 msgid "dv"
-msgstr ""
+msgstr "Дивехи"
 
 msgid "dz"
-msgstr ""
+msgstr "Дзонг-кэ"
 
 msgid "ee"
-msgstr ""
+msgstr "Эве"
 
 msgid "el"
-msgstr ""
+msgstr "Греческий"
 
 msgid "en"
-msgstr ""
+msgstr "Английский"
 
 msgid "eo"
-msgstr ""
+msgstr "Эсперанто"
 
 msgid "es"
-msgstr ""
+msgstr "Испанский"
 
 msgid "et"
-msgstr ""
+msgstr "Эстонский"
 
 msgid "eu"
-msgstr ""
+msgstr "Баскский"
 
 msgid "fa"
-msgstr ""
+msgstr "Персидский"
 
 msgid "ff"
-msgstr ""
+msgstr "Фула"
 
 msgid "fi"
-msgstr ""
+msgstr "Финский"
 
 msgid "fj"
-msgstr ""
+msgstr "Фиджи"
 
 msgid "fo"
-msgstr ""
+msgstr "Фарерский"
 
 msgid "fr"
-msgstr ""
+msgstr "Французский"
 
 msgid "fy"
-msgstr ""
+msgstr "Фризский"
 
 msgid "ga"
-msgstr ""
+msgstr "Ирландский"
 
 msgid "gd"
-msgstr ""
+msgstr "Гэльский (Шотландский)"
 
 msgid "gl"
-msgstr ""
+msgstr "Галисийский"
 
 msgid "gn"
-msgstr ""
+msgstr "Гуарани"
 
 msgid "gu"
-msgstr ""
+msgstr "Гуджарати"
 
 msgid "gv"
-msgstr ""
+msgstr "Гэльский (язык жителей острова Мэн)"
 
 msgid "ha"
-msgstr ""
+msgstr "Хауса"
 
 msgid "he"
-msgstr ""
+msgstr "Иврит"
 
 msgid "hi"
-msgstr ""
+msgstr "Хинди"
 
 msgid "ho"
-msgstr ""
+msgstr "Хири моту"
 
 msgid "hr"
-msgstr ""
+msgstr "Хорватский"
 
 msgid "ht"
-msgstr ""
+msgstr "Гаитянский креольский"
 
 msgid "hu"
-msgstr ""
+msgstr "Венгерский"
 
 msgid "hy"
-msgstr ""
+msgstr "Армянский"
 
 msgid "hz"
-msgstr ""
+msgstr "Гереро"
 
 msgid "ia"
-msgstr ""
+msgstr "Интерлингва"
 
 msgid "id"
-msgstr ""
+msgstr "Индонезийский"
 
 msgid "ie"
-msgstr ""
+msgstr "Интерлингве"
 
 msgid "ig"
-msgstr ""
+msgstr "Игбо"
 
 msgid "ii"
-msgstr ""
+msgstr "И"
 
 msgid "ik"
-msgstr ""
+msgstr "Инупиак"
 
 msgid "io"
-msgstr ""
+msgstr "Идо"
 
 msgid "is"
-msgstr ""
+msgstr "Исландский"
 
 msgid "it"
-msgstr ""
+msgstr "Итальянский"
 
 msgid "iu"
-msgstr ""
+msgstr "Инуктитут"
 
 msgid "ja"
-msgstr ""
+msgstr "Японский"
 
 msgid "jv"
-msgstr ""
+msgstr "Яванский"
 
 msgid "ka"
-msgstr ""
+msgstr "Грузинский"
 
 msgid "kg"
-msgstr ""
+msgstr "Конго"
 
 msgid "ki"
-msgstr ""
+msgstr "Кикуйю"
 
 msgid "kj"
-msgstr ""
+msgstr "Кунама"
 
 msgid "kk"
-msgstr ""
+msgstr "Казахский"
 
 msgid "kl"
-msgstr ""
+msgstr "Гренландский"
 
 msgid "km"
-msgstr ""
+msgstr "Кхмерский"
 
 msgid "kn"
-msgstr ""
+msgstr "Каннада"
 
 msgid "ko"
-msgstr ""
+msgstr "Корейский"
 
 msgid "kr"
-msgstr ""
+msgstr "Канури"
 
 msgid "ks"
-msgstr ""
+msgstr "Кашмири"
 
 msgid "ku"
-msgstr ""
+msgstr "Курдский"
 
 msgid "kv"
-msgstr ""
+msgstr "Коми"
 
 msgid "kw"
-msgstr ""
+msgstr "Корнуоллский"
 
 msgid "ky"
-msgstr ""
+msgstr "Киргизский"
 
 msgid "la"
-msgstr ""
+msgstr "Латынь"
 
 msgid "lb"
-msgstr ""
+msgstr "Люксембургский"
 
 msgid "lg"
-msgstr ""
+msgstr "Луганда"
 
 msgid "li"
-msgstr ""
+msgstr "Лимбургский"
 
 msgid "ln"
-msgstr ""
+msgstr "Лингала"
 
 msgid "lo"
-msgstr ""
+msgstr "Лао"
 
 msgid "lt"
-msgstr ""
+msgstr "Литовский"
 
 msgid "lu"
-msgstr ""
+msgstr "Люба-катанга"
 
 msgid "lv"
-msgstr ""
+msgstr "Латышский"
 
 msgid "mg"
-msgstr ""
+msgstr "Малагасийский"
 
 msgid "mh"
-msgstr ""
+msgstr "Маршалльский"
 
 msgid "mi"
-msgstr ""
+msgstr "Маори"
 
 msgid "mk"
-msgstr ""
+msgstr "Македонский"
 
 msgid "ml"
-msgstr ""
+msgstr "Малаялам"
 
 msgid "mn"
-msgstr ""
+msgstr "Монгольский"
 
 msgid "mo"
-msgstr ""
+msgstr "Молдавский"
 
 msgid "mr"
-msgstr ""
+msgstr "Маратхи"
 
 msgid "ms"
-msgstr ""
+msgstr "Малайский"
 
 msgid "mt"
-msgstr ""
+msgstr "Мальтийский"
 
 msgid "my"
-msgstr ""
+msgstr "Бирманский"
 
 msgid "na"
-msgstr ""
+msgstr "Науру"
 
 msgid "nb"
-msgstr ""
+msgstr "Норвежский букмол"
 
 msgid "nd"
-msgstr ""
+msgstr "Северный ндебеле"
 
 msgid "ne"
-msgstr ""
+msgstr "Непальский"
 
 msgid "ng"
-msgstr ""
+msgstr "Ндунга"
 
 msgid "nl"
-msgstr ""
+msgstr "Голландский"
 
 msgid "nn"
-msgstr ""
+msgstr "Норвежский нюнорск"
 
 msgid "no"
-msgstr ""
+msgstr "Норвежский"
 
 msgid "nr"
-msgstr ""
+msgstr "Южный ндебеле"
 
 msgid "nv"
-msgstr ""
+msgstr "Навахо"
 
 msgid "ny"
-msgstr ""
+msgstr "Чичева"
 
 msgid "oc"
-msgstr ""
+msgstr "Окситанский"
 
 msgid "oj"
-msgstr ""
+msgstr "Оджибве"
 
 msgid "om"
-msgstr ""
+msgstr "Оромо"
 
 msgid "or"
-msgstr ""
+msgstr "Ория"
 
 msgid "os"
-msgstr ""
+msgstr "Осетинский"
 
 msgid "pa"
-msgstr ""
+msgstr "Панджаби"
 
 msgid "pi"
-msgstr ""
+msgstr "Пали"
 
 msgid "pl"
-msgstr ""
+msgstr "Польский"
 
 msgid "ps"
-msgstr ""
+msgstr "Пушту"
 
 msgid "pt"
-msgstr ""
+msgstr "Португальский"
 
 msgid "qu"
-msgstr ""
+msgstr "Кечуа"
 
 msgid "rm"
-msgstr ""
+msgstr "Ретороманский"
 
 msgid "rn"
-msgstr ""
+msgstr "Кирунди"
 
 msgid "ro"
-msgstr ""
+msgstr "Румынский"
 
 msgid "ru"
-msgstr ""
+msgstr "Русский"
 
 msgid "rw"
-msgstr ""
+msgstr "Киньяруанда"
 
 msgid "sa"
-msgstr ""
+msgstr "Санскрит"
 
 msgid "sc"
-msgstr ""
+msgstr "Сардинский"
 
 msgid "sd"
-msgstr ""
+msgstr "Синди"
 
 msgid "se"
-msgstr ""
+msgstr "Северносаамский"
 
 msgid "sg"
-msgstr ""
+msgstr "Санго"
 
 msgid "si"
-msgstr ""
+msgstr "Синигальский"
 
 msgid "sk"
-msgstr ""
+msgstr "Словацкий"
 
 msgid "sl"
-msgstr ""
+msgstr "Словенский"
 
 msgid "sm"
-msgstr ""
+msgstr "Самоа"
 
 msgid "sn"
-msgstr ""
+msgstr "Шона"
 
 msgid "so"
-msgstr ""
+msgstr "Сомалийский"
 
 msgid "sq"
-msgstr ""
+msgstr "Албанский"
 
 msgid "sr"
-msgstr ""
+msgstr "Сербский"
 
 msgid "ss"
-msgstr ""
+msgstr "Свати"
 
 msgid "st"
-msgstr ""
+msgstr "Сесото"
 
 msgid "su"
-msgstr ""
+msgstr "Суданский"
 
 msgid "sv"
-msgstr ""
+msgstr "Шведский"
 
 msgid "sw"
-msgstr ""
+msgstr "Суахили"
 
 msgid "ta"
-msgstr ""
+msgstr "Тамильский"
 
 msgid "te"
-msgstr ""
+msgstr "Телугу"
 
 msgid "tg"
-msgstr ""
+msgstr "Таджикский"
 
 msgid "th"
-msgstr ""
+msgstr "Тайский"
 
 msgid "ti"
-msgstr ""
+msgstr "Тигринья"
 
 msgid "tk"
-msgstr ""
+msgstr "Туркменский"
 
 msgid "tl"
-msgstr ""
+msgstr "Тагальский"
 
 msgid "tn"
-msgstr ""
+msgstr "Сетсвана"
 
 msgid "to"
-msgstr ""
+msgstr "Тонги"
 
 msgid "tr"
-msgstr ""
+msgstr "Турецкий"
 
 msgid "ts"
-msgstr ""
+msgstr "Тсонга"
 
 msgid "tt"
-msgstr ""
+msgstr "Татарский"
 
 msgid "tw"
-msgstr ""
+msgstr "Тви"
 
 msgid "ty"
-msgstr ""
+msgstr "Таитянский"
 
 msgid "ug"
-msgstr ""
+msgstr "Уйгурский"
 
 msgid "uk"
-msgstr ""
+msgstr "Украинский"
 
 msgid "ur"
-msgstr ""
+msgstr "Урду"
 
 msgid "uz"
-msgstr ""
+msgstr "Узбекский"
 
 msgid "ve"
-msgstr ""
+msgstr "Венда"
 
 msgid "vi"
-msgstr ""
+msgstr "Вьетнамский"
 
 msgid "vo"
-msgstr ""
+msgstr "Волапюк"
 
 msgid "wa"
-msgstr ""
+msgstr "Валлонский"
 
 msgid "wo"
-msgstr ""
+msgstr "Волоф"
 
 msgid "xh"
-msgstr ""
+msgstr "Коса"
 
 msgid "yi"
-msgstr ""
+msgstr "Идиш"
 
 msgid "yo"
-msgstr ""
+msgstr "Йоруба"
 
 msgid "za"
-msgstr ""
+msgstr "Чжуан"
 
 msgid "zh"
-msgstr ""
+msgstr "Китайский"
 
 msgid "zu"
-msgstr ""
+msgstr "Зулу"
