@@ -104,7 +104,7 @@ $button = $this->config( 'client/html/catalog/filter/default/button', true );
 	</ul>
 <?php endif; ?>
 	<nav>
-		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction ) ); ?>">
+		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array(), array(), $listConfig ) ); ?>">
 <?php if( ( $sort = $this->param( 'f-sort' ) ) != null ) : ?>
 			<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f-sort' ) ); ?>" value="<?php echo $enc->attr( $sort ); ?>" />
 <?php endif; ?>
