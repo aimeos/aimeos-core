@@ -96,6 +96,22 @@ class MShop_Common_Item_ListRef_AbstractTest extends MW_Unittest_Testcase
 
 	public function testGetListItems()
 	{
+		$result = $this->_object->getListItems();
+		$expected = array(
+			$this->_listItem2->getId() => $this->_listItem2,
+			$this->_listItem1->getId() => $this->_listItem1,
+		);
+
+		$this->assertEquals( $expected, $result );
+
+		foreach( $result as $listItem ) {
+			$this->assertInstanceof( 'MShop_Common_Item_List_Interface', $listItem );
+		}
+	}
+
+
+	public function testGetListItemsWithDomain()
+	{
 		$result = $this->_object->getListItems( 'text' );
 		$expected = array(
 			$this->_listItem2->getId() => $this->_listItem2,

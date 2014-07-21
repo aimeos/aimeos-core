@@ -204,7 +204,8 @@ class Client_Html_Catalog_Detail_Seen_Default
 
 			$view->seenProductItem = MShop_Factory::createManager( $context, 'product' )->getItem( $id, $domains );
 
-			$this->_addMetaData( $view->seenProductItem, 'product', $domains, $tags, $expire );
+			$this->_addMetaItem( $view->seenProductItem, 'product', $expire, $tags );
+			$this->_addMetaList( $view->seenProductItem->getId(), 'product', $expire );
 
 			$output = '';
 			foreach( $this->_getSubClients() as $subclient ) {

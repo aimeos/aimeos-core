@@ -41,16 +41,28 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 
 	/**
 	 * Returns the list items attached, optionally filtered by domain and list type.
+	 *
 	 * The reference parameter in searchItems() must have been set accordingly
 	 * to the requested domain to get the items. Otherwise, no items will be
 	 * returned by this method.
 	 *
-	 * @param string $domain Name of the domain (e.g. product, text, etc.)
-	 * @param string|null $type Name of the list type
+	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
+	 * @param string|null $type Name of the list type or null for all
 	 * @return array List of items implementing MShop_Common_Item_List_Interface
 	 */
-	public function getListItems( $domain, $type = null )
+	public function getListItems( $domain = null, $type = null )
 	{
+		if( $domain === null )
+		{
+			$listItems = array();
+
+			foreach( $this->_listItems as $domain => $items ) {
+				$listItems += $items;
+			}
+
+			return $listItems;
+		}
+
 		if( !isset( $this->_listItems[$domain] ) ) {
 			return array();
 		}
@@ -92,7 +104,8 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 
 
 	/**
-	 * Returns the product, text, etc. items, optionally filtered by domain.
+	 * Returns the product, text, etc. items filtered by domain and optionally by type and list type.
+	 *
 	 * The reference parameter in searchItems() must have been set accordingly
 	 * to the requested domain to get the items. Otherwise, no items will be
 	 * returned by this method.

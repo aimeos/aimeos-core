@@ -206,7 +206,10 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			foreach( $productManager->searchItems( $search, array( 'attribute' ) ) as $subProdId => $subProduct )
+			/** @todo Make referenced domains configurable */
+			$products = $productManager->searchItems( $search, array( 'attribute' ) );
+
+			foreach( $products as $subProdId => $subProduct )
 			{
 				$subItems = $subProduct->getRefItems( 'attribute', null, 'default' );
 				$subItems += $subProduct->getRefItems( 'attribute', null, 'variant' );
@@ -217,6 +220,9 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 					$attrIds[] = $attrId;
 				}
 			}
+
+			$this->_addMetaItem( $products, 'product', $this->_expire, $this->_tags );
+			$this->_addMetaList( array_keys( $products ), 'product', $this->_expire );
 
 
 			$attrManager = MShop_Factory::createManager( $context, 'attribute' );
@@ -229,11 +235,14 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			/** @todo Make referenced domains configurable */
-			foreach( $attrManager->searchItems( $search, array( 'text', 'media') ) as $id => $item )
-			{
-				$this->_addMetaData( $item, 'attribute', array( 'text', 'media' ), $this->_tags, $this->_expire );
+			$attributes = $attrManager->searchItems( $search, array( 'text', 'media') );
+
+			foreach( $attributes as $id => $item ) {
 				$attributeMap[ $item->getType() ][$id] = $item;
 			}
+
+			$this->_addMetaItem( $attributes, 'attribute', $this->_expire, $this->_tags );
+			$this->_addMetaList( array_keys( $attributes ), 'attribute', $this->_expire );
 
 
 			$view->attributeMap = $attributeMap;
@@ -242,7 +251,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			$this->_cache = $view;
 		}
 
-		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;

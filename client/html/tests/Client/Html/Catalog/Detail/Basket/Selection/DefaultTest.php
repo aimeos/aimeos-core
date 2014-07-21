@@ -92,7 +92,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_DefaultTest extends MW_Unittes
 		}
 
 		$this->assertEquals( null, $expire );
-		$this->assertEquals( 8, count( $tags ) );
+		$this->assertEquals( 2, count( $tags ) );
 	}
 
 	public function testGetSubClient()
