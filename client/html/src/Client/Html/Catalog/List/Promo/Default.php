@@ -248,9 +248,8 @@ class Client_Html_Catalog_List_Promo_Default
 			}
 
 
-			foreach( $products as $product ) {
-				$this->_addMetaData( $product, 'product', array( 'media', 'price', 'text' ), $this->_tags, $this->_expire );
-			}
+			$this->_addMetaItem( $products, 'product', $this->_expire, $this->_tags );
+			$this->_addMetaList( array_keys( $products ), 'product', $this->_expire );
 
 
 			$view->promoItems = $products;
@@ -258,7 +257,7 @@ class Client_Html_Catalog_List_Promo_Default
 			$this->_cache = $view;
 		}
 
-		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;

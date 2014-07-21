@@ -189,8 +189,8 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				$context = $this->_getContext();
 				$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
 
+
 				$productManager = MShop_Factory::createManager( $context, 'product' );
-				$attrManager = MShop_Factory::createManager( $context, 'attribute' );
 
 				$search = $productManager->createSearch( true );
 				$expr = array(
@@ -201,6 +201,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 
 				/** @todo Make referenced domains configurable */
 				$domains = array( 'text', 'price', 'media', 'attribute' );
+
 				$subproducts = $productManager->searchItems( $search, $domains );
 				$attrIds = $attrMap = $prodDeps = $attrDeps = $attrTypeDeps = array();
 
@@ -217,6 +218,12 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 
 				ksort( $attrTypeDeps );
 
+				$this->_addMetaItem( $subproducts, 'product', $this->_expire, $this->_tags );
+				$this->_addMetaList( array_keys( $subproducts ), 'product', $this->_expire );
+
+
+				$attrManager = MShop_Factory::createManager( $context, 'attribute' );
+
 				$search = $attrManager->createSearch( true );
 				$expr = array(
 					$search->compare( '==', 'attribute.id', $attrIds ),
@@ -227,13 +234,8 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				/** @todo Make referenced domains configurable */
 				$attributes = $attrManager->searchItems( $search, array( 'text', 'media' ) );
 
-				foreach( $subproducts as $item ) {
-					$this->_addMetaData( $item, 'product', $domains, $this->_tags, $this->_expire );
-				}
-
-				foreach( $attributes as $item ) {
-					$this->_addMetaData( $item, 'attribute', array( 'text', 'media' ), $this->_tags, $this->_expire );
-				}
+				$this->_addMetaItem( $attributes, 'attribute', $this->_expire, $this->_tags );
+				$this->_addMetaList( array_keys( $attributes ), 'attribute', $this->_expire );
 
 
 				$view->selectionProducts = $subproducts;
@@ -246,7 +248,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 			$this->_cache = $view;
 		}
 
-		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;

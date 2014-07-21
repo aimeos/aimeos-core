@@ -360,9 +360,8 @@ class Client_Html_Catalog_Stage_Default
 					$view->stageCurrentCatItem = $categoryItem;
 				}
 
-				foreach( $stageCatPath as $item ) {
-					$this->_addMetaData( $item, 'catalog', $domains, $this->_tags, $this->_expire );
-				}
+				$this->_addMetaItem( $stageCatPath, 'catalog', $this->_expire, $this->_tags );
+				$this->_addMetaList( array_keys( $stageCatPath ), 'catalog', $this->_expire );
 
 
 				$view->stageCatPath = $stageCatPath;
@@ -371,7 +370,7 @@ class Client_Html_Catalog_Stage_Default
 			$this->_cache = $view;
 		}
 
-		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;

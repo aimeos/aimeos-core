@@ -161,13 +161,12 @@ abstract class Client_Html_Abstract
 	/**
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given item.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item, maybe with associated list items
+	 * @param MShop_Common_Item_ListRef_Interface|array $items Item or list of items, maybe with associated list items
 	 * @param string $domain Name of the domain the item is from
-	 * @param array $domains List of domains whose items are associated via the list to the item
-	 * @param array &$tags List of tags the new tags will be added to
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
+	 * @param array &$tags List of tags the new tags will be added to
 	 */
-	protected function _addMetaData( MShop_Common_Item_Interface $item, $domain, array $domains, array &$tags, &$expire )
+	protected function _addMetaItem( $items, $domain, &$expire, array &$tags )
 	{
 		/** client/html/common/cache/mode/tag-all
 		 * Adds tags for all items used in a cache entry
@@ -198,35 +197,71 @@ abstract class Client_Html_Abstract
 		 * @category User
 		 */
 		$tagAll = $this->_context->getConfig()->get( 'client/html/common/cache/tag-all', false );
+
+		$listIface = 'MShop_Common_Item_ListRef_Interface';
 		$expires = array();
 
+		if( !is_array( $items ) ) {
+			$items = array( $items );
+		}
 
-		if( $tagAll === true ) {
-			$tags[] = $domain . '-' . $item->getId();
-		} else {
+		if( $tagAll !== true && !empty( $items ) ) {
 			$tags[] = $domain;
 		}
 
-		if( method_exists( $item, 'getDateEnd' ) && ( $date = $item->getDateEnd() ) !== null ) {
-			$expires[] = $date;
-		}
-
-		foreach( $domains as $name )
+		foreach( $items as $item )
 		{
-			foreach( $item->getListItems( $name ) as $listitem )
-			{
-				if( $tagAll === true ) {
-					$tags[] = $listitem->getDomain() . '-' . $listitem->getRefId();
-				}
+			if( $tagAll === true ) {
+				$tags[] = $domain . '-' . $item->getId();
+			}
 
-				if( ( $date = $listitem->getDateEnd() ) !== null ) {
-					$expires[] = $date;
+			if( method_exists( $item, 'getDateEnd' ) && ( $date = $item->getDateEnd() ) !== null ) {
+				$expires[] = $date;
+			}
+
+			if( $item instanceof $listIface )
+			{
+				foreach( $item->getListItems() as $listitem )
+				{
+					if( $tagAll === true ) {
+						$tags[] = $listitem->getDomain() . '-' . $listitem->getRefId();
+					}
+
+					if( ( $date = $listitem->getDateEnd() ) !== null ) {
+						$expires[] = $date;
+					}
 				}
 			}
-		}
 
-		if( !empty( $expires ) ) {
-			$expire = min( $expires );
+			if( !empty( $expires ) ) {
+				$expire = min( $expires );
+			}
+		}
+	}
+
+
+	/**
+	 * Adds a new expiration date if a list item is activated in the future.
+	 *
+	 * @param array|string $ids Item ID or list of item IDs from the given domain
+	 * @param string $domain Name of the domain the item IDs are from
+	 * @param string|null &$expire Expiration date that will be overwritten if an start date in the future is available
+	 */
+	protected function _addMetaList( $ids, $domain, &$expire )
+	{
+		$manager = MShop_Factory::createManager( $this->_getContext(), $domain . '/list' );
+
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', $domain . '.list.parentid', $ids ),
+			$search->compare( '>', $domain . '.list.datestart', date( 'Y-m-d H:i:00' ) ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', $domain . '.list.datestart' ) ) );
+		$search->setSlice( 0, 1 );
+
+		foreach( $manager->searchItems( $search ) as $listItem ) {
+			$expire = $this->_expires( $expire, $listItem->getDateStart() );
 		}
 	}
 
@@ -446,6 +481,19 @@ abstract class Client_Html_Abstract
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Returns the minimal expiration date.
+	 *
+	 * @param string|null $first First expiration date or null
+	 * @param string|null $second Second expiration date or null
+	 * @return string|null Expiration date
+	 */
+	protected function _expires( $first, $second )
+	{
+		return ( $first !== null ? ( $second !== null ? min( $first, $second ) : $first ) : $second );
 	}
 
 

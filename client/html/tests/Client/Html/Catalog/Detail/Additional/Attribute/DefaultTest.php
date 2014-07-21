@@ -61,7 +61,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends MW_Uni
 		$output = $this->_object->getHeader( 1, $tags, $expire );
 
 		$this->assertEquals( null, $expire );
-		$this->assertEquals( 4, count( $tags ) );
+		$this->assertEquals( 2, count( $tags ) );
 	}
 
 
@@ -79,7 +79,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_DefaultTest extends MW_Uni
 		$this->assertContains( '<span class="attr-name">XS</span>', $output );
 
 		$this->assertEquals( null, $expire );
-		$this->assertEquals( 4, count( $tags ) );
+		$this->assertEquals( 2, count( $tags ) );
 	}
 
 

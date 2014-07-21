@@ -366,9 +366,8 @@ class Client_Html_Catalog_List_Default
 					$view->listCurrentCatItem = $categoryItem;
 				}
 
-				foreach( $view->listCatPath as $id => $item ) {
-					$this->_addMetaData( $item, 'catalog', $domains, $this->_tags, $this->_expire );
-				}
+				$this->_addMetaItem( $listCatPath, 'catalog', $this->_expire, $this->_tags );
+				$this->_addMetaList( array_keys( $listCatPath ), 'catalog', $this->_expire );
 			}
 
 			/** client/html/catalog/list/stock/enable
@@ -473,17 +472,11 @@ class Client_Html_Catalog_List_Default
 			}
 
 
-			$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
+			$this->_addMetaItem( $products, 'product', $this->_expire, $this->_tags );
+			$this->_addMetaList( array_keys( $products ), 'product', $this->_expire );
 
-			/* If a product in a list expires, all subsequent list pages should
-			 * be removed from the cache too to get totally correct results.
-			 * This is non-trivial with performance in mind and needs to be
-			 * evaluated in the future.
-			 */
-			foreach( $products as $product ) {
-				$this->_addMetaData( $product, 'product', $domains, $this->_tags, $this->_expire );
-			}
-
+			// Delete cache when products are added or deleted even when in "tag-all" mode
+			$this->_tags[] = 'product';
 
 			$view->listParams = $this->_getClientParams( $view->param() );
 			$view->listPageCurr = $this->_getProductListPage( $view );
@@ -495,7 +488,7 @@ class Client_Html_Catalog_List_Default
 			$this->_cache = $view;
 		}
 
-		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;

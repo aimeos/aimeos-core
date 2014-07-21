@@ -204,16 +204,14 @@ class Client_Html_Catalog_Detail_Suggest_Default
 				$view->suggestItems = $manager->searchItems( $search, $domains );
 				$view->suggestPosItems = $products;
 
-
-				foreach( $view->suggestItems as $item ) {
-					$this->_addMetaData( $item, 'product', $domains, $this->_tags, $this->_expire );
-				}
+				$this->_addMetaItem( $view->suggestItems, 'product', $this->_expire, $this->_tags );
+				$this->_addMetaList( array_keys( $view->suggestItems ), 'product', $this->_expire );
 			}
 
 			$this->_cache = $view;
 		}
 
-		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;

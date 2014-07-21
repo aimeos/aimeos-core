@@ -66,7 +66,7 @@ class Client_Html_Catalog_Stage_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertNotNull( $output );
 		$this->assertEquals( '2019-01-01 00:00:00', $expire );
-		$this->assertEquals( 3, count( $tags ) );
+		$this->assertEquals( 1, count( $tags ) );
 	}
 
 
@@ -82,7 +82,7 @@ class Client_Html_Catalog_Stage_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertStringStartsWith( '<section class="arcavias catalog-stage home categories coffee">', $output );
 		$this->assertEquals( '2019-01-01 00:00:00', $expire );
-		$this->assertEquals( 3, count( $tags ) );
+		$this->assertEquals( 1, count( $tags ) );
 	}
 
 

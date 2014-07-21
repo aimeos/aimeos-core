@@ -200,18 +200,25 @@ class Client_Html_Catalog_Filter_Attribute_Default
 			$search->setSlice( 0, 1000 );
 
 			/** @todo Make referenced domains configurable */
-			foreach( $manager->searchItems( $search, array( 'text', 'media' ) ) as $id => $item )
-			{
-				$this->_addMetaData( $item, 'attribute', array( 'text', 'media' ), $this->_tags, $this->_expire );
+			$attributes = $manager->searchItems( $search, array( 'text', 'media' ) );
+
+			foreach( $attributes as $id => $item ) {
 				$attrMap[ $item->getType() ][$id] = $item;
 			}
+
+			$this->_addMetaItem( $attributes, 'attribute', $this->_expire, $this->_tags );
+			$this->_addMetaList( array_keys( $attributes ), 'attribute', $this->_expire );
+
+			// Delete cache when attributes are added or deleted even in "tag-all" mode
+			$this->_tags[] = 'attribute';
+
 
 			$view->attributeMap = $attrMap;
 
 			$this->_cache = $view;
 		}
 
-		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;

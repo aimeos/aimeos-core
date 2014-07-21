@@ -67,7 +67,7 @@ class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertStringStartsWith( '<title>Cafe Noire Cappuccino</title>', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 2, count( $tags ) );
+		$this->assertEquals( 4, count( $tags ) );
 	}
 
 
@@ -83,7 +83,7 @@ class Client_Html_Catalog_Detail_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertStringStartsWith( '<section class="arcavias catalog-detail">', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 2, count( $tags ) );
+		$this->assertEquals( 4, count( $tags ) );
 	}
 
 

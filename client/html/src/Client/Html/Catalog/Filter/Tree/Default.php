@@ -312,12 +312,12 @@ class Client_Html_Catalog_Filter_Tree_Default
 			$view->treeCatalogIds = $this->_getCatalogIds( $view->treeCatalogTree, $catItems, $currentid );
 			$view->treeFilterParams = $this->_getClientParams( $view->param(), array( 'f' ) );
 
-			$this->_addMetaDataCatalog( $view->treeCatalogTree, $ref, $this->_tags, $this->_expire );
+			$this->_addMetaItemCatalog( $view->treeCatalogTree, $this->_expire, $this->_tags );
 
 			$this->_cache = $view;
 		}
 
-		$expire = ( $this->_expire !== null ? ( $expire !== null ? min( $this->_expire, $expire ) : $this->_expire ) : $expire );
+		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
 		return $this->_cache;
@@ -362,16 +362,15 @@ class Client_Html_Catalog_Filter_Tree_Default
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given catalog tree.
 	 *
 	 * @param MShop_Common_Item_Interface $item Item, maybe with associated list items
-	 * @param array $domains List of domains whose items are associated via the list to the item
-	 * @param array &$tags List of tags the new tags will be added to
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
+	 * @param array &$tags List of tags the new tags will be added to
 	 */
-	protected function _addMetaDataCatalog( MShop_Catalog_Item_Interface $tree, $domains, array &$tags = array(), &$expire )
+	protected function _addMetaItemCatalog( MShop_Catalog_Item_Interface $tree, &$expire, array &$tags = array() )
 	{
-		$this->_addMetaData( $tree, 'catalog', $domains, $tags, $expire );
+		$this->_addMetaItem( $tree, 'catalog', $expire, $tags );
 
 		foreach( $tree->getChildren() as $child ) {
-			$this->_addMetaDataCatalog( $child, $domains, $tags, $expire );
+			$this->_addMetaItemCatalog( $child, $expire, $tags );
 		}
 	}
 }
