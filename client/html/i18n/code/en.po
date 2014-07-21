@@ -39,6 +39,10 @@ msgstr "Bank code"
 msgid "directdebit.bankname"
 msgstr "Bank name"
 
+#. Favorite action
+msgid "favorite"
+msgstr ""
+
 #. Product attribute
 msgid "length"
 msgstr "Length"
@@ -103,6 +107,11 @@ msgstr "authorized"
 msgid "pay:6"
 msgstr "received"
 
+#. Pin action
+#, fuzzy
+msgid "pin"
+msgstr "Option"
+
 #. Product attribute
 msgid "size"
 msgstr "Size"
@@ -146,6 +155,10 @@ msgstr "returned"
 #. Warehouse code
 msgid "warehouse:default"
 msgstr " "
+
+#. Watch action
+msgid "watch"
+msgstr ""
 
 #. Product attribute
 msgid "width"

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 13:34+0200\n"
-"PO-Revision-Date: 2014-05-15 11:19+0000\n"
+"POT-Creation-Date: 2014-07-20 18:54+0200\n"
+"PO-Revision-Date: 2014-07-20 16:54+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias-core/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -59,12 +59,16 @@ msgid ""
 msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
+#: layouts/account/watch/body-default.html:90
+#: layouts/account/favorite/body-default.html:90
 #: layouts/catalog/list/promo-body-default.html:17
 #: layouts/catalog/list/items-body-default.html:16
+#: layouts/catalog/session/pinned-body-default.html:89
 #: layouts/catalog/detail/suggest-body-default.html:18
 #: layouts/catalog/detail/seen-body-default.html:16
 #: layouts/common/summary/detail-body-default.html:68
 #: layouts/basket/mini/main-body-default.html:23
+#: layouts/email/watch/text-detail-body-default.html:19
 #: layouts/email/common/text-summary-detail-body-default.html:55
 #: layouts/checkout/standard/payment-body-default.html:38
 #: layouts/checkout/standard/delivery-body-default.html:38
@@ -74,6 +78,7 @@ msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
 #. / Rebate format with rebate value (%1$s) and currency (%2$s)
+#: layouts/email/watch/text-detail-body-default.html:25
 #: src/MW/View/Helper/Price/Default.php:82
 #, php-format
 msgid "%1$s %2$s off"
@@ -93,8 +98,11 @@ msgid "%1$s at %2$s"
 msgstr "%1$s tại %2$s"
 
 #. / Percent format with value (%1$s) and % sign
+#: layouts/account/watch/body-default.html:92
+#: layouts/account/favorite/body-default.html:92
 #: layouts/catalog/list/promo-body-default.html:19
 #: layouts/catalog/list/items-body-default.html:18
+#: layouts/catalog/session/pinned-body-default.html:91
 #: layouts/catalog/detail/suggest-body-default.html:20
 #: layouts/catalog/detail/seen-body-default.html:18
 #, php-format
@@ -115,6 +123,7 @@ msgstr ""
 
 #. / Price shipping format with shipping / payment cost value (%1$s) and
 #. currency (%2$s)
+#: layouts/email/watch/text-detail-body-default.html:22
 #: src/MW/View/Helper/Price/Default.php:80
 #, php-format
 msgid "+ %1$s %2$s/item"
@@ -130,6 +139,7 @@ msgid "+ Shipping"
 msgstr "+ Chi phí vận chuyển"
 
 #. / Rebate percent format with rebate percent value (%1$s)
+#: layouts/email/watch/text-detail-body-default.html:28
 #: src/MW/View/Helper/Price/Default.php:84
 #, php-format
 msgid "-%1$s%%"
@@ -149,7 +159,7 @@ msgstr "Bổ sung"
 msgid "Additional 2"
 msgstr "Bổ sung 2"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:336
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:330
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
 msgstr ""
@@ -170,12 +180,12 @@ msgstr ""
 msgid "Article no.:"
 msgstr "Chỉ số bài đăng.:"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:319
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:313
 #, php-format
 msgid "At least one billing address part is missing"
 msgstr "Ít nhất có một phần địa chỉ hóa đơn bị thiếu"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:316
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:310
 #, php-format
 msgid "At least one delivery address part is missing"
 msgstr "Có ít nhất một phần địa chỉ gửi đi bị thiếu"
@@ -200,8 +210,8 @@ msgstr "Giỏ hàng"
 msgid "Billing address"
 msgstr "Địa chỉ hóa đơn"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:301
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:312
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:295
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:306
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "Phần địa chỉ hóa đơn \"%1$s\" bị thiếu"
@@ -210,7 +220,7 @@ msgstr "Phần địa chỉ hóa đơn \"%1$s\" bị thiếu"
 msgid "Buy now"
 msgstr "Mua ngay bây giờ"
 
-#: src/Client/Html/Catalog/Filter/Tree/Default.php:236
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:234
 #, php-format
 msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
 msgstr ""
@@ -220,7 +230,7 @@ msgstr ""
 #: layouts/common/summary/detail-body-default.html:78
 #: layouts/common/summary/service-body-default.html:18
 #: layouts/common/summary/service-body-default.html:52
-#: layouts/common/summary/coupon-body-default.html:19
+#: layouts/common/summary/coupon-body-default.html:20
 msgid "Change"
 msgstr "Thay đổi"
 
@@ -246,13 +256,13 @@ msgstr "Thành phố"
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:150
+#: src/Client/Html/Abstract.php:290
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:144
+#: src/Client/Html/Abstract.php:284
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -282,16 +292,17 @@ msgstr "Xác nhận"
 msgid "Country"
 msgstr "Quốc gia"
 
+#: layouts/common/summary/coupon-body-default.html:22
 #: layouts/basket/standard/coupon-body-default.html:24
 msgid "Coupon codes"
 msgstr ""
 
-#: layouts/common/summary/coupon-body-default.html:21
+#: layouts/common/summary/coupon-body-default.html:17
 #: layouts/email/common/text-summary-coupon-body-default.html:11
 msgid "Coupons"
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:338
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:332
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
 msgstr ""
@@ -320,8 +331,8 @@ msgstr "Vận chuyển"
 msgid "Delivery address"
 msgstr "Địa chỉ gửi"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:298
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:309
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:292
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:303
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "Phần địa chỉ gửi \"%1$s\" bị thiếu"
@@ -331,6 +342,7 @@ msgid "Description"
 msgstr "Mô tả"
 
 #: layouts/common/summary/detail-body-default.html:80
+#: layouts/email/watch/html-detail-body-default.html:101
 msgid "Details"
 msgstr ""
 
@@ -342,6 +354,15 @@ msgstr ""
 #: layouts/checkout/standard/address-billing-body-default.html:170
 msgid "E-Mail"
 msgstr "Email"
+
+#. / E-mail HTML title
+#: layouts/email/common/html-body-default.html:12
+msgid "E-mail notification"
+msgstr ""
+
+#: layouts/account/favorite/body-default.html:103
+msgid "Favorite products"
+msgstr ""
 
 #: layouts/checkout/standard/address-delivery-body-default.html:182
 #: layouts/checkout/standard/address-billing-body-default.html:178
@@ -370,17 +391,23 @@ msgid ""
 "policy\">privacy policy</a>"
 msgstr "Tôi đồng ý với <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">điều kiện sử dụng</a> và <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">chính sách về quyền riêng tư cá nhân của khách hàng</a>"
 
-#. / Delivery e-mail outro
-#. / Payment e-mail outro
-#: layouts/email/delivery/text-outro-body-default.html:9
-#: layouts/email/delivery/html-outro-body-default.html:11
-#: layouts/email/payment/text-outro-body-default.html:9
-#: layouts/email/payment/html-outro-body-default.html:11
+#: layouts/account/watch/body-default.html:161
+msgid "If back in stock"
+msgstr ""
+
+#: layouts/account/watch/body-default.html:155
+msgid "If price decreases"
+msgstr ""
+
+#. / E-mail outro
+#: layouts/email/common/text-outro-body-default.html:9
+#: layouts/email/common/html-outro-body-default.html:11
 msgid "If you have any questions, please reply to this e-mail"
 msgstr ""
 
 #. / Tax rate format with tax rate in percent (%1$s)
 #: layouts/common/summary/detail-body-default.html:234
+#: layouts/email/watch/text-detail-body-default.html:31
 #: layouts/email/common/text-summary-detail-body-default.html:104
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
@@ -396,10 +423,13 @@ msgstr "Bao gồm phần giảm giá"
 #: src/Client/Html/Checkout/Update/Factory.php:72
 #: src/Client/Html/Checkout/Confirm/Factory.php:72
 #: src/Client/Html/Checkout/Standard/Factory.php:72
+#: src/Client/Html/Email/Watch/Factory.php:72
 #: src/Client/Html/Email/Payment/Factory.php:72
 #: src/Client/Html/Email/Delivery/Factory.php:72
 #: src/Client/Html/Basket/Standard/Factory.php:72
 #: src/Client/Html/Basket/Mini/Factory.php:72
+#: src/Client/Html/Account/Watch/Factory.php:72
+#: src/Client/Html/Account/Favorite/Factory.php:72
 #: src/Client/Html/Account/History/Factory.php:72
 #: src/Client/Html/Catalog/Stock/Factory.php:72
 #: src/Client/Html/Catalog/Session/Factory.php:72
@@ -412,7 +442,7 @@ msgstr "Bao gồm phần giảm giá"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:96 src/Client/Html/Abstract.php:135
+#: src/Client/Html/Abstract.php:247 src/Client/Html/Abstract.php:275
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr ""
@@ -427,7 +457,7 @@ msgstr ""
 msgid "Invalid domain \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:349
+#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:343
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
 msgstr ""
@@ -444,6 +474,12 @@ msgstr "Họ"
 
 #: layouts/catalog/session/seen-body-default.html:14
 msgid "Last seen"
+msgstr ""
+
+#: src/Client/Html/Account/Watch/Default.php:420
+#: src/Client/Html/Account/Favorite/Default.php:355
+#, php-format
+msgid "List type \"%1$s\" is not available"
 msgstr ""
 
 #: layouts/catalog/list/pagination-body-default.html:27
@@ -463,12 +499,12 @@ msgid ""
 "try again with a different keyword."
 msgstr ""
 
-#: src/Client/Html/Abstract.php:63
+#: src/Client/Html/Abstract.php:61
 #, php-format
 msgid "No view available"
 msgstr "Hiện không hiển thị được"
 
-#: src/Client/Html/Basket/Standard/Coupon/Default.php:203
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:209
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
 msgstr ""
@@ -476,6 +512,19 @@ msgstr ""
 #: src/MW/View/Helper/Price/Default.php:44
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
+msgstr ""
+
+#: layouts/account/watch/body-default.html:149
+msgid "One month"
+msgstr ""
+
+#: layouts/email/watch/text-intro-body-default.html:8
+#: layouts/email/watch/html-intro-body-default.html:9
+msgid "One or more products you are watching have been updated."
+msgstr ""
+
+#: layouts/account/watch/body-default.html:147
+msgid "One week"
 msgstr ""
 
 #: layouts/checkout/standard/summary-option-body-default.html:12
@@ -501,11 +550,15 @@ msgstr "Chi tiết về hóa đơn"
 msgid "Order history"
 msgstr "Lịch sử đã đặt hàng"
 
-#: src/Client/Html/Account/History/Detail/Default.php:232
+#: src/Client/Html/Account/History/Detail/Default.php:241
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
 msgstr "Đặt hàng với chỉ số \"%1$s\" không tìm thấy"
 
+#: layouts/account/watch/body-default.html:112
+#: layouts/account/watch/body-default.html:182
+#: layouts/account/favorite/body-default.html:112
+#: layouts/account/favorite/body-default.html:150
 #: layouts/catalog/list/pagination-body-default.html:54
 #, php-format
 msgid "Page %1$d of %2$d"
@@ -525,7 +578,11 @@ msgstr "Chi phí chi trả"
 msgid "Payment status"
 msgstr "Trạng thái chi trả"
 
-#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:187
+#: layouts/catalog/session/pinned-body-default.html:96
+msgid "Pinned products"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:181
 msgid "Please accept the terms and conditions"
 msgstr "Vui lòng chấp nhận các điều khoản sau đây"
 
@@ -671,7 +728,7 @@ msgstr "Tổng"
 msgid "Telephone"
 msgstr "Số điện thoại"
 
-#: src/Client/Html/Abstract.php:236
+#: src/Client/Html/Abstract.php:425
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr ""
@@ -760,7 +817,15 @@ msgstr ""
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr ""
 
-#: layouts/catalog/list/promo-body-default.html:24
+#: layouts/account/watch/body-default.html:150
+msgid "Three month"
+msgstr ""
+
+#: layouts/account/watch/body-default.html:145
+msgid "Time frame"
+msgstr ""
+
+#: layouts/catalog/list/promo-body-default.html:26
 msgid "Top seller"
 msgstr ""
 
@@ -778,12 +843,16 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
+#: layouts/account/watch/body-default.html:148
+msgid "Two weeks"
+msgstr ""
+
 #: src/Client/Html/Common/Decorator/Abstract.php:49
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:199
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:192
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr ""
@@ -798,6 +867,15 @@ msgstr ""
 msgid "Update"
 msgstr "Cập nhật"
 
+#: layouts/account/watch/body-default.html:166
+msgid "Watch"
+msgstr ""
+
+#: layouts/account/watch/body-default.html:103
+#: layouts/email/watch/text-detail-body-default.html:38
+msgid "Watched products"
+msgstr ""
+
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
 #: layouts/email/delivery/7/text-intro-body-default.html:11
@@ -811,6 +889,9 @@ msgstr ""
 msgid "Web site"
 msgstr "Trang web"
 
+#: layouts/account/watch/body-default.html:125
+#: layouts/account/favorite/body-default.html:124
+#: layouts/catalog/session/pinned-body-default.html:105
 #: layouts/common/summary/detail-body-default.html:155
 #: layouts/basket/standard/coupon-body-default.html:39
 msgid "X"
@@ -845,11 +926,6 @@ msgstr "Bạn đang ở đây"
 msgid "You will now be forwarded to the next step"
 msgstr ""
 
-#. / E-mail HTML title
-#: layouts/email/common/html-body-default.html:12
-msgid "Your order"
-msgstr ""
-
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
 #: layouts/email/delivery/header-default.html:9
@@ -866,18 +942,26 @@ msgstr ""
 msgid "Your order %1$s from %2$s has been dispatched."
 msgstr ""
 
+#. / Product notification e-mail subject
+#: layouts/email/watch/header-default.html:9
+msgid "Your watched products"
+msgstr ""
+
 #: layouts/checkout/standard/address-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Address/Default.php:12
+#, php-format
 msgid "address"
 msgstr "địa chỉ"
 
 #: layouts/common/summary/service-body-default.html:16
 #: layouts/checkout/standard/delivery-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Delivery/Default.php:12
+#, php-format
 msgid "delivery"
 msgstr "vận chuyển"
 
 #. / Price quantity format with quantity (%1$s)
+#: layouts/email/watch/text-detail-body-default.html:16
 #: src/MW/View/Helper/Price/Default.php:76
 #, php-format
 msgid "from %1$s"
@@ -896,12 +980,14 @@ msgstr "địa chỉ mới"
 
 #: layouts/checkout/standard/order-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Order/Default.php:12
+#, php-format
 msgid "order"
 msgstr "đặt hàng"
 
 #: layouts/common/summary/service-body-default.html:50
 #: layouts/checkout/standard/payment-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Payment/Default.php:12
+#, php-format
 msgid "payment"
 msgstr "thanh toán"
 
@@ -915,7 +1001,7 @@ msgstr ""
 msgid "stock-low"
 msgstr ""
 
-#. / code for "product is out ot stock"
+#. / code for "product is out of stock"
 #: layouts/catalog/stock/body-default.html:52
 msgid "stock-out"
 msgstr ""
@@ -927,6 +1013,7 @@ msgstr ""
 
 #: layouts/checkout/standard/summary-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Summary/Default.php:12
+#, php-format
 msgid "summary"
 msgstr "tóm tắt"
 
@@ -938,10 +1025,18 @@ msgstr ""
 msgid "▲ Price"
 msgstr ""
 
+#: layouts/account/watch/body-default.html:113
+#: layouts/account/watch/body-default.html:183
+#: layouts/account/favorite/body-default.html:113
+#: layouts/account/favorite/body-default.html:151
 #: layouts/catalog/list/pagination-body-default.html:55
 msgid "▶"
 msgstr "▶"
 
+#: layouts/account/watch/body-default.html:114
+#: layouts/account/watch/body-default.html:184
+#: layouts/account/favorite/body-default.html:114
+#: layouts/account/favorite/body-default.html:152
 #: layouts/catalog/list/pagination-body-default.html:56
 msgid "▶▶"
 msgstr "▶▶"
@@ -954,10 +1049,18 @@ msgstr ""
 msgid "▼ Price"
 msgstr ""
 
+#: layouts/account/watch/body-default.html:111
+#: layouts/account/watch/body-default.html:181
+#: layouts/account/favorite/body-default.html:111
+#: layouts/account/favorite/body-default.html:149
 #: layouts/catalog/list/pagination-body-default.html:53
 msgid "◀"
 msgstr "◀"
 
+#: layouts/account/watch/body-default.html:110
+#: layouts/account/watch/body-default.html:180
+#: layouts/account/favorite/body-default.html:110
+#: layouts/account/favorite/body-default.html:148
 #: layouts/catalog/list/pagination-body-default.html:52
 msgid "◀◀"
 msgstr "◀◀"

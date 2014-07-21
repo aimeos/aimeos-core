@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 13:34+0200\n"
-"PO-Revision-Date: 2014-06-22 11:17+0000\n"
-"Last-Translator: shihua16165 <shihua16165@163.com>\n"
+"POT-Creation-Date: 2014-07-20 18:54+0200\n"
+"PO-Revision-Date: 2014-07-20 16:54+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/arcavias-core/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,12 +56,16 @@ msgid ""
 msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
+#: layouts/account/watch/body-default.html:90
+#: layouts/account/favorite/body-default.html:90
 #: layouts/catalog/list/promo-body-default.html:17
 #: layouts/catalog/list/items-body-default.html:16
+#: layouts/catalog/session/pinned-body-default.html:89
 #: layouts/catalog/detail/suggest-body-default.html:18
 #: layouts/catalog/detail/seen-body-default.html:16
 #: layouts/common/summary/detail-body-default.html:68
 #: layouts/basket/mini/main-body-default.html:23
+#: layouts/email/watch/text-detail-body-default.html:19
 #: layouts/email/common/text-summary-detail-body-default.html:55
 #: layouts/checkout/standard/payment-body-default.html:38
 #: layouts/checkout/standard/delivery-body-default.html:38
@@ -71,6 +75,7 @@ msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
 #. / Rebate format with rebate value (%1$s) and currency (%2$s)
+#: layouts/email/watch/text-detail-body-default.html:25
 #: src/MW/View/Helper/Price/Default.php:82
 #, php-format
 msgid "%1$s %2$s off"
@@ -90,8 +95,11 @@ msgid "%1$s at %2$s"
 msgstr "%1$s 在 %2$s"
 
 #. / Percent format with value (%1$s) and % sign
+#: layouts/account/watch/body-default.html:92
+#: layouts/account/favorite/body-default.html:92
 #: layouts/catalog/list/promo-body-default.html:19
 #: layouts/catalog/list/items-body-default.html:18
+#: layouts/catalog/session/pinned-body-default.html:91
 #: layouts/catalog/detail/suggest-body-default.html:20
 #: layouts/catalog/detail/seen-body-default.html:18
 #, php-format
@@ -112,6 +120,7 @@ msgstr ""
 
 #. / Price shipping format with shipping / payment cost value (%1$s) and
 #. currency (%2$s)
+#: layouts/email/watch/text-detail-body-default.html:22
 #: src/MW/View/Helper/Price/Default.php:80
 #, php-format
 msgid "+ %1$s %2$s/item"
@@ -127,6 +136,7 @@ msgid "+ Shipping"
 msgstr "+ 邮费"
 
 #. / Rebate percent format with rebate percent value (%1$s)
+#: layouts/email/watch/text-detail-body-default.html:28
 #: src/MW/View/Helper/Price/Default.php:84
 #, php-format
 msgid "-%1$s%%"
@@ -146,7 +156,7 @@ msgstr "附加"
 msgid "Additional 2"
 msgstr "附加 2"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:336
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:330
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
 msgstr "未找到 ID \"%1$s\" 地址"
@@ -167,12 +177,12 @@ msgstr "所有交付运受限于我们的条款和条件，这是在我们的网
 msgid "Article no.:"
 msgstr "产品号："
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:319
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:313
 #, php-format
 msgid "At least one billing address part is missing"
 msgstr "账单地址有误"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:316
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:310
 #, php-format
 msgid "At least one delivery address part is missing"
 msgstr "送货地址有误"
@@ -197,8 +207,8 @@ msgstr "购物车"
 msgid "Billing address"
 msgstr "账单地址"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:301
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:312
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:295
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:306
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "账单地址 \"%1$s\" 有误"
@@ -207,7 +217,7 @@ msgstr "账单地址 \"%1$s\" 有误"
 msgid "Buy now"
 msgstr "现在购买"
 
-#: src/Client/Html/Catalog/Filter/Tree/Default.php:236
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:234
 #, php-format
 msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
 msgstr "类型 \"%1$s\" 无法抵御 ID \"%2$s\""
@@ -217,7 +227,7 @@ msgstr "类型 \"%1$s\" 无法抵御 ID \"%2$s\""
 #: layouts/common/summary/detail-body-default.html:78
 #: layouts/common/summary/service-body-default.html:18
 #: layouts/common/summary/service-body-default.html:52
-#: layouts/common/summary/coupon-body-default.html:19
+#: layouts/common/summary/coupon-body-default.html:20
 msgid "Change"
 msgstr "改变"
 
@@ -243,13 +253,13 @@ msgstr "市"
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:150
+#: src/Client/Html/Abstract.php:290
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "类型 \"%1$s\" 不实现接口\"%2$s\""
 
-#: src/Client/Html/Abstract.php:144
+#: src/Client/Html/Abstract.php:284
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -279,16 +289,17 @@ msgstr "确认"
 msgid "Country"
 msgstr "国家地区"
 
+#: layouts/common/summary/coupon-body-default.html:22
 #: layouts/basket/standard/coupon-body-default.html:24
 msgid "Coupon codes"
 msgstr ""
 
-#: layouts/common/summary/coupon-body-default.html:21
+#: layouts/common/summary/coupon-body-default.html:17
 #: layouts/email/common/text-summary-coupon-body-default.html:11
 msgid "Coupons"
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:338
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:332
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
 msgstr "客户 ID \"%1$s\" 未找到"
@@ -317,8 +328,8 @@ msgstr "交货"
 msgid "Delivery address"
 msgstr "送货地址"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:298
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:309
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:292
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:303
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "送货地址 \"%1$s\" 有误"
@@ -328,6 +339,7 @@ msgid "Description"
 msgstr "描述"
 
 #: layouts/common/summary/detail-body-default.html:80
+#: layouts/email/watch/html-detail-body-default.html:101
 msgid "Details"
 msgstr "明细"
 
@@ -339,6 +351,15 @@ msgstr ""
 #: layouts/checkout/standard/address-billing-body-default.html:170
 msgid "E-Mail"
 msgstr "电子邮件"
+
+#. / E-mail HTML title
+#: layouts/email/common/html-body-default.html:12
+msgid "E-mail notification"
+msgstr ""
+
+#: layouts/account/favorite/body-default.html:103
+msgid "Favorite products"
+msgstr ""
 
 #: layouts/checkout/standard/address-delivery-body-default.html:182
 #: layouts/checkout/standard/address-billing-body-default.html:178
@@ -367,17 +388,23 @@ msgid ""
 "policy\">privacy policy</a>"
 msgstr "我接受 <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">条款及细则</a> and <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">隐私权政策</a>"
 
-#. / Delivery e-mail outro
-#. / Payment e-mail outro
-#: layouts/email/delivery/text-outro-body-default.html:9
-#: layouts/email/delivery/html-outro-body-default.html:11
-#: layouts/email/payment/text-outro-body-default.html:9
-#: layouts/email/payment/html-outro-body-default.html:11
+#: layouts/account/watch/body-default.html:161
+msgid "If back in stock"
+msgstr ""
+
+#: layouts/account/watch/body-default.html:155
+msgid "If price decreases"
+msgstr ""
+
+#. / E-mail outro
+#: layouts/email/common/text-outro-body-default.html:9
+#: layouts/email/common/html-outro-body-default.html:11
 msgid "If you have any questions, please reply to this e-mail"
 msgstr "如果您有任何疑问，请回复此邮件"
 
 #. / Tax rate format with tax rate in percent (%1$s)
 #: layouts/common/summary/detail-body-default.html:234
+#: layouts/email/watch/text-detail-body-default.html:31
 #: layouts/email/common/text-summary-detail-body-default.html:104
 #: src/MW/View/Helper/Price/Default.php:86
 #, php-format
@@ -393,10 +420,13 @@ msgstr "已经打完折"
 #: src/Client/Html/Checkout/Update/Factory.php:72
 #: src/Client/Html/Checkout/Confirm/Factory.php:72
 #: src/Client/Html/Checkout/Standard/Factory.php:72
+#: src/Client/Html/Email/Watch/Factory.php:72
 #: src/Client/Html/Email/Payment/Factory.php:72
 #: src/Client/Html/Email/Delivery/Factory.php:72
 #: src/Client/Html/Basket/Standard/Factory.php:72
 #: src/Client/Html/Basket/Mini/Factory.php:72
+#: src/Client/Html/Account/Watch/Factory.php:72
+#: src/Client/Html/Account/Favorite/Factory.php:72
 #: src/Client/Html/Account/History/Factory.php:72
 #: src/Client/Html/Catalog/Stock/Factory.php:72
 #: src/Client/Html/Catalog/Session/Factory.php:72
@@ -409,7 +439,7 @@ msgstr "已经打完折"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "类名 \"%1$s\"有无效的字符"
 
-#: src/Client/Html/Abstract.php:96 src/Client/Html/Abstract.php:135
+#: src/Client/Html/Abstract.php:247 src/Client/Html/Abstract.php:275
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "客户名 \"%1$s\"有无效的字符 "
@@ -424,7 +454,7 @@ msgstr ""
 msgid "Invalid domain \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:349
+#: src/Client/Html/Checkout/Standard/Order/Payment/Default.php:343
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
 msgstr "服务提供商反馈无效回答编码 \"%1$s\""
@@ -443,6 +473,12 @@ msgstr "姓名"
 msgid "Last seen"
 msgstr "最后出现"
 
+#: src/Client/Html/Account/Watch/Default.php:420
+#: src/Client/Html/Account/Favorite/Default.php:355
+#, php-format
+msgid "List type \"%1$s\" is not available"
+msgstr ""
+
 #: layouts/catalog/list/pagination-body-default.html:27
 msgid "Name"
 msgstr "名"
@@ -460,12 +496,12 @@ msgid ""
 "try again with a different keyword."
 msgstr "未找到<span class=\"searchstring\">\"%1$s\"</span>产品。请换关键词再试。"
 
-#: src/Client/Html/Abstract.php:63
+#: src/Client/Html/Abstract.php:61
 #, php-format
 msgid "No view available"
 msgstr "没有可用的视图"
 
-#: src/Client/Html/Basket/Standard/Coupon/Default.php:203
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:209
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
 msgstr ""
@@ -473,6 +509,19 @@ msgstr ""
 #: src/MW/View/Helper/Price/Default.php:44
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
+msgstr ""
+
+#: layouts/account/watch/body-default.html:149
+msgid "One month"
+msgstr ""
+
+#: layouts/email/watch/text-intro-body-default.html:8
+#: layouts/email/watch/html-intro-body-default.html:9
+msgid "One or more products you are watching have been updated."
+msgstr ""
+
+#: layouts/account/watch/body-default.html:147
+msgid "One week"
 msgstr ""
 
 #: layouts/checkout/standard/summary-option-body-default.html:12
@@ -498,11 +547,15 @@ msgstr "订单明细"
 msgid "Order history"
 msgstr "订单记录"
 
-#: src/Client/Html/Account/History/Detail/Default.php:232
+#: src/Client/Html/Account/History/Detail/Default.php:241
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
 msgstr "订单 ID为 \"%1$s\" 未找到"
 
+#: layouts/account/watch/body-default.html:112
+#: layouts/account/watch/body-default.html:182
+#: layouts/account/favorite/body-default.html:112
+#: layouts/account/favorite/body-default.html:150
 #: layouts/catalog/list/pagination-body-default.html:54
 #, php-format
 msgid "Page %1$d of %2$d"
@@ -522,7 +575,11 @@ msgstr "支付费"
 msgid "Payment status"
 msgstr "支付状态"
 
-#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:187
+#: layouts/catalog/session/pinned-body-default.html:96
+msgid "Pinned products"
+msgstr ""
+
+#: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:181
 msgid "Please accept the terms and conditions"
 msgstr "请接受条款和条件"
 
@@ -668,7 +725,7 @@ msgstr "合计"
 msgid "Telephone"
 msgstr "电话"
 
-#: src/Client/Html/Abstract.php:236
+#: src/Client/Html/Abstract.php:425
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "模板 \"%1$s\" 不可用"
@@ -757,7 +814,15 @@ msgstr ""
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr "%2$s的订单%1$s退款已经完成。"
 
-#: layouts/catalog/list/promo-body-default.html:24
+#: layouts/account/watch/body-default.html:150
+msgid "Three month"
+msgstr ""
+
+#: layouts/account/watch/body-default.html:145
+msgid "Time frame"
+msgstr ""
+
+#: layouts/catalog/list/promo-body-default.html:26
 msgid "Top seller"
 msgstr "畅销产品"
 
@@ -775,12 +840,16 @@ msgstr ""
 msgid "Try again"
 msgstr "再试一次"
 
+#: layouts/account/watch/body-default.html:148
+msgid "Two weeks"
+msgstr ""
+
 #: src/Client/Html/Common/Decorator/Abstract.php:49
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:199
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:192
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr "无法保存客户 \"%1$s\": %2$s地址"
@@ -795,6 +864,15 @@ msgstr ""
 msgid "Update"
 msgstr "更新"
 
+#: layouts/account/watch/body-default.html:166
+msgid "Watch"
+msgstr ""
+
+#: layouts/account/watch/body-default.html:103
+#: layouts/email/watch/text-detail-body-default.html:38
+msgid "Watched products"
+msgstr ""
+
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
 #: layouts/email/delivery/7/text-intro-body-default.html:11
@@ -808,6 +886,9 @@ msgstr ""
 msgid "Web site"
 msgstr "网址"
 
+#: layouts/account/watch/body-default.html:125
+#: layouts/account/favorite/body-default.html:124
+#: layouts/catalog/session/pinned-body-default.html:105
 #: layouts/common/summary/detail-body-default.html:155
 #: layouts/basket/standard/coupon-body-default.html:39
 msgid "X"
@@ -842,11 +923,6 @@ msgstr "您现在的位置："
 msgid "You will now be forwarded to the next step"
 msgstr "正在转到下一步"
 
-#. / E-mail HTML title
-#: layouts/email/common/html-body-default.html:12
-msgid "Your order"
-msgstr "您的订单"
-
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
 #: layouts/email/delivery/header-default.html:9
@@ -863,18 +939,26 @@ msgstr "您的订单 %1$s"
 msgid "Your order %1$s from %2$s has been dispatched."
 msgstr ""
 
+#. / Product notification e-mail subject
+#: layouts/email/watch/header-default.html:9
+msgid "Your watched products"
+msgstr ""
+
 #: layouts/checkout/standard/address-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Address/Default.php:12
+#, php-format
 msgid "address"
 msgstr "地址"
 
 #: layouts/common/summary/service-body-default.html:16
 #: layouts/checkout/standard/delivery-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Delivery/Default.php:12
+#, php-format
 msgid "delivery"
 msgstr "交货"
 
 #. / Price quantity format with quantity (%1$s)
+#: layouts/email/watch/text-detail-body-default.html:16
 #: src/MW/View/Helper/Price/Default.php:76
 #, php-format
 msgid "from %1$s"
@@ -893,12 +977,14 @@ msgstr "新地址"
 
 #: layouts/checkout/standard/order-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Order/Default.php:12
+#, php-format
 msgid "order"
 msgstr "订单"
 
 #: layouts/common/summary/service-body-default.html:50
 #: layouts/checkout/standard/payment-body-default.html:42
 #: src/Client/Html/Checkout/Standard/Payment/Default.php:12
+#, php-format
 msgid "payment"
 msgstr "付款"
 
@@ -912,7 +998,7 @@ msgstr ""
 msgid "stock-low"
 msgstr ""
 
-#. / code for "product is out ot stock"
+#. / code for "product is out of stock"
 #: layouts/catalog/stock/body-default.html:52
 msgid "stock-out"
 msgstr ""
@@ -924,6 +1010,7 @@ msgstr "库存无限"
 
 #: layouts/checkout/standard/summary-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Summary/Default.php:12
+#, php-format
 msgid "summary"
 msgstr "总结"
 
@@ -935,10 +1022,18 @@ msgstr ""
 msgid "▲ Price"
 msgstr ""
 
+#: layouts/account/watch/body-default.html:113
+#: layouts/account/watch/body-default.html:183
+#: layouts/account/favorite/body-default.html:113
+#: layouts/account/favorite/body-default.html:151
 #: layouts/catalog/list/pagination-body-default.html:55
 msgid "▶"
 msgstr ""
 
+#: layouts/account/watch/body-default.html:114
+#: layouts/account/watch/body-default.html:184
+#: layouts/account/favorite/body-default.html:114
+#: layouts/account/favorite/body-default.html:152
 #: layouts/catalog/list/pagination-body-default.html:56
 msgid "▶▶"
 msgstr ""
@@ -951,10 +1046,18 @@ msgstr ""
 msgid "▼ Price"
 msgstr ""
 
+#: layouts/account/watch/body-default.html:111
+#: layouts/account/watch/body-default.html:181
+#: layouts/account/favorite/body-default.html:111
+#: layouts/account/favorite/body-default.html:149
 #: layouts/catalog/list/pagination-body-default.html:53
 msgid "◀"
 msgstr ""
 
+#: layouts/account/watch/body-default.html:110
+#: layouts/account/watch/body-default.html:180
+#: layouts/account/favorite/body-default.html:110
+#: layouts/account/favorite/body-default.html:148
 #: layouts/catalog/list/pagination-body-default.html:52
 msgid "◀◀"
 msgstr ""

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 13:34+0200\n"
-"PO-Revision-Date: 2014-06-26 17:41+0000\n"
+"POT-Creation-Date: 2014-07-20 18:54+0200\n"
+"PO-Revision-Date: 2014-07-20 16:55+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/arcavias-core/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -29,6 +29,10 @@ msgstr ""
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:28
 msgid "Batch update of payment/delivery status"
+msgstr ""
+
+#: src/Controller/Jobs/Admin/Cache/Default.php:28
+msgid "Cache cleanup"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Service/Payment/Default.php:28
@@ -66,12 +70,27 @@ msgstr ""
 msgid "Controller path is empty"
 msgstr ""
 
-#: src/Controller/Jobs/Order/Coupon/Count/Default.php:39
+#: src/Controller/Jobs/Order/Coupon/Count/Default.php:40
 msgid "Decreases the counts of successfully redeemed coupons"
 msgstr ""
 
-#: src/Controller/Jobs/Order/Product/Stock/Default.php:39
+#: src/Controller/Jobs/Order/Product/Stock/Default.php:40
 msgid "Decreases the stock levels of products in completed orders"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:39
+msgid ""
+"Deletes unfinished orders an makes their products and coupon codes available"
+" again"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:39
+msgid "Deletes unpaid orders to keep the database clean"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Product/Stock/Default.php:29
+#: src/Controller/Jobs/Order/Coupon/Count/Default.php:29
+msgid "Deprecated: Use \"Remove unfinised orders\""
 msgstr ""
 
 #: src/Controller/Jobs/Service/Delivery/Process/Default.php:29
@@ -92,10 +111,14 @@ msgstr ""
 #: src/Controller/Jobs/Order/Service/Async/Factory.php:71
 #: src/Controller/Jobs/Order/Service/Payment/Factory.php:71
 #: src/Controller/Jobs/Order/Service/Delivery/Factory.php:71
-#: src/Controller/Jobs/Order/Product/Stock/Factory.php:71
-#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:71
+#: src/Controller/Jobs/Order/Product/Stock/Factory.php:46
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Factory.php:71
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Factory.php:71
+#: src/Controller/Jobs/Order/Coupon/Count/Factory.php:46
+#: src/Controller/Jobs/Admin/Cache/Factory.php:71
 #: src/Controller/Jobs/Admin/Job/Factory.php:71
 #: src/Controller/Jobs/Service/Delivery/Process/Factory.php:47
+#: src/Controller/Jobs/Customer/Email/Watch/Factory.php:71
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
@@ -128,17 +151,23 @@ msgstr ""
 msgid "Invalid job method \"%1$s\""
 msgstr ""
 
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:221
+#, php-format
+msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
+msgstr ""
+
 #: src/Controller/Jobs/Admin/Job/Default.php:91
 #, php-format
 msgid "Method \"%1$s\" not available"
 msgstr ""
 
-#: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:39
-msgid "Optimizes the catalog index for searching products"
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:244
+#, php-format
+msgid "No warehouse \"%1$s\" found"
 msgstr ""
 
-#: src/Controller/Jobs/Order/Coupon/Count/Default.php:28
-msgid "Order coupon counts"
+#: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:39
+msgid "Optimizes the catalog index for searching products"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Email/Delivery/Default.php:28
@@ -149,16 +178,32 @@ msgstr ""
 msgid "Order payment related e-mails"
 msgstr ""
 
-#: src/Controller/Jobs/Order/Product/Stock/Default.php:28
-msgid "Order product stock levels"
-msgstr ""
-
 #: src/Controller/Jobs/Order/Service/Delivery/Default.php:28
 msgid "Process order delivery services"
 msgstr ""
 
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:28
+msgid "Product notification e-mails"
+msgstr ""
+
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39
 msgid "Rebuilds the catalog index for searching products"
+msgstr ""
+
+#: src/Controller/Jobs/Admin/Cache/Default.php:39
+msgid "Removes the expired entries from the cache"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:28
+msgid "Removes unfinished orders"
+msgstr ""
+
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:28
+msgid "Removes unpaid orders"
+msgstr ""
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:39
+msgid "Sends e-mails for watched products"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Email/Payment/Default.php:39

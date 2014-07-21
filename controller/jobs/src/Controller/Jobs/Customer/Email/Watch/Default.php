@@ -218,7 +218,7 @@ class Controller_Jobs_Customer_Email_Watch_Default
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Controller_Jobs_Exception( sprintf( 'No list type "%1$s" found in "%2$s" domain', $code, 'customer' ) );
+			throw new Controller_Jobs_Exception( sprintf( 'List type for domain "%1$s" and code "%2$s" not found', 'customer', $code ) );
 		}
 
 		return $item;
