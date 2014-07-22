@@ -122,6 +122,62 @@ class Controller_ExtJS_Product_Default
 
 
 	/**
+	* Deletes an item or a list of items.
+	*
+	* @param stdClass $params Associative list of parameters
+	* @return array Associative list with success value
+	*/
+	public function deleteItems( stdClass $params )
+	{
+		$this->_checkParams( $params, array( 'site', 'items' ) );
+		$this->_setLocale( $params->site );
+
+		$idList = array();
+		$ids = (array) $params->items;
+		$context = $this->_getContext();
+		$manager = $this->_getManager();
+
+
+		$manager->deleteItems( $ids );
+
+
+		foreach( array( 'catalog', 'product' ) as $domain )
+		{
+			$manager = MShop_Factory::createManager( $context, $domain . '/list' );
+
+			$search = $manager->createSearch();
+			$expr = array(
+				$search->compare( '==', $domain.'.list.refid', $domainIds ),
+				$search->compare( '==', $domain.'.list.domain', 'product' )
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
+
+			$start = 0;
+
+			do
+			{
+				$result = $manager->searchItems( $search );
+				$manager->deleteItems( array_keys( $result ) );
+
+				$count = count( $result );
+				$start += $count;
+				$search->setSlice( $start );
+			}
+			while( $count >= $search->getSliceSize() );
+		}
+
+
+		$this->_clearCache( $ids );
+
+		return array(
+				'items' => $params->items,
+				'success' => true,
+		);
+	}
+
+
+	/**
 	 * Returns the manager the controller is using.
 	 *
 	 * @return mixed Manager object
