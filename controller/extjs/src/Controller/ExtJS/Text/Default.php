@@ -99,44 +99,50 @@ class Controller_ExtJS_Text_Default
 		$this->_setLocale( $params->site );
 
 		$idList = array();
+		$ids = (array) $params->items;
+		$context = $this->_getContext();
 		$manager = $this->_getManager();
 
-		foreach( (array) $params->items as $id )
-		{
-			$idList[ $manager->getItem( $id )->getDomain() ][] = $id;
-			$manager->deleteItem( $id );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'text.id', $ids ) );
+		$search->setSlice( 0, count( $ids ) );
+
+		foreach( $manager->searchItems( $search ) as $id => $item ) {
+			$idList[ $item->getDomain() ][] = $id;
 		}
 
-		foreach( $idList as $manager => $ids )
-		{
-			$refDomainListManager = MShop_Factory::createManager( $this->_getContext(), $manager . '/list' );
+		$manager->deleteItems( $ids );
 
-			$search = $refDomainListManager->createSearch();
+
+		foreach( $idList as $domain => $domainIds )
+		{
+			$manager = MShop_Factory::createManager( $context, $domain . '/list' );
+
+			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', $manager.'.list.refid', $ids ),
-				$search->compare( '==', $manager.'.list.domain', 'text' )
+				$search->compare( '==', $domain.'.list.refid', $domainIds ),
+				$search->compare( '==', $domain.'.list.domain', 'text' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', $manager.'.list.id' ) ) );
+			$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
 
 			$start = 0;
 
 			do
 			{
-				$result = $refDomainListManager->searchItems( $search );
-
-				foreach ( $result as $item ) {
-					$refDomainListManager->deleteItem( $item->getId() );
-				}
+				$result = $manager->searchItems( $search );
+				$manager->deleteItems( array_keys( $result ) );
 
 				$count = count( $result );
 				$start += $count;
 				$search->setSlice( $start );
 			}
-			while( $count > 0 );
+			while( $count >= $search->getSliceSize() );
 		}
 
-		$this->_clearCache( (array) $params->items );
+
+		$this->_clearCache( $ids );
 
 		return array(
 				'items' => $params->items,

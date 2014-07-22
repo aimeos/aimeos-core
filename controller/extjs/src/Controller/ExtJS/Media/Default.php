@@ -95,11 +95,19 @@ class Controller_ExtJS_Media_Default
 		 */
 		$uploaddir = $config->get( 'controller/extjs/media/default/upload/directory', 'upload' );
 
+
 		$idList = array();
+		$ids = (array) $params->items;
+		$context = $this->_getContext();
 		$manager = $this->_getManager();
-		foreach( (array) $params->items as $id )
+
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'media.id', $ids ) );
+		$search->setSlice( 0, count( $ids ) );
+
+		foreach( $manager->searchItems( $search ) as $id => $item )
 		{
-			$item = $manager->getItem( $id );
 			$idList[ $item->getDomain() ][] = $id;
 
 			if( is_file( $basedir . $item->getPreview() )
@@ -115,40 +123,39 @@ class Controller_ExtJS_Media_Default
 				$msg = sprintf( 'Deleting file "%1$s" failed', $basedir . $item->getUrl() );
 				$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 			}
-
-			$manager->deleteItem( $id );
 		}
 
-		foreach( (array) $idList as $manager => $ids )
-		{
-			$refDomainListManager = MShop_Factory::createManager( $this->_getContext(), $manager . '/list' );
+		$manager->deleteItems( $ids );
 
-			$search = $refDomainListManager->createSearch();
+
+		foreach( $idList as $domain => $domainIds )
+		{
+			$manager = MShop_Factory::createManager( $context, $domain . '/list' );
+
+			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', $manager.'.list.refid', $ids ),
-				$search->compare( '==', $manager.'.list.domain', 'media' )
+				$search->compare( '==', $domain.'.list.refid', $domainIds ),
+				$search->compare( '==', $domain.'.list.domain', 'media' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', $manager.'.list.id' ) ) );
+			$search->setSortations( array( $search->sort( '+', $domain.'.list.id' ) ) );
 
 			$start = 0;
 
 			do
 			{
-				$result = $refDomainListManager->searchItems( $search );
-
-				foreach ( $result as $item ) {
-					$refDomainListManager->deleteItem( $item->getId() );
-				}
+				$result = $manager->searchItems( $search );
+				$manager->deleteItems( array_keys( $result ) );
 
 				$count = count( $result );
 				$start += $count;
 				$search->setSlice( $start );
 			}
-			while( $count > 0 );
+			while( $count >= $search->getSliceSize() );
 		}
 
-		$this->_clearCache( (array) $params->items );
+
+		$this->_clearCache( $ids );
 
 		return array(
 			'success' => true,
