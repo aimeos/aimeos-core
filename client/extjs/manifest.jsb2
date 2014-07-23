@@ -424,6 +424,9 @@
 			"text": "ItemUi.js",
 			"path": "src/panel/product/stock/warehouse/"
 		}, {
+			"text": "TabUi.js",
+			"path": "src/panel/locale/"
+		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/locale/"
 		}, {
@@ -435,6 +438,18 @@
 		}, {
 			"text": "ItemUi.js",
 			"path": "src/panel/locale/site/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/locale/language/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/locale/language/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/locale/currency/"
+		}, {
+			"text": "ItemUi.js",
+			"path": "src/panel/locale/currency/"
 		}, {
 			"text": "ListUi.js",
 			"path": "src/panel/attribute/type/"
