@@ -25,7 +25,7 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
 	initComponent : function()
 	{
-		this.title = MShop.I18n.dt( 'client/extjs', 'Locale site' );
+		this.title = MShop.I18n.dt( 'client/extjs', 'Site' );
 		
 		MShop.panel.AbstractListUi.prototype.initActions.call( this );
 		MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
@@ -157,4 +157,4 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 Ext.reg('MShop.panel.locale.site.listui', MShop.panel.locale.site.ListUi);
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.locale.site.listui', MShop.panel.locale.site.ListUi, 80);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.locale.tabui', 'MShop.panel.locale.site.listui', MShop.panel.locale.site.ListUi, 20);
