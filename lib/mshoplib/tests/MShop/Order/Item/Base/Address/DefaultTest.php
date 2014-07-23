@@ -44,6 +44,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 			'addrid' => 11,
 			'type' => MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY,
 			'company' => 'unitCompany',
+			'vatno' => 'DE999999999',
 			'salutation' => MShop_Order_Item_Base_Address_Abstract::SALUTATION_MR,
 			'title' => 'Herr',
 			'firstname' => 'firstunit',
@@ -156,6 +157,18 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->setCompany( 'company' );
 		$this->assertTrue($this->_object->isModified());
 		$this->assertEquals( 'company', $this->_object->getCompany() );
+	}
+	
+	public function testGetVatNo()
+	{
+		$this->assertEquals( 'DE999999999', $this->_object->getVatNo() );
+	}
+	
+	public function testSetVatNo()
+	{
+		$this->_object->setVatNo( 'vatno' );
+		$this->assertTrue($this->_object->isModified());
+		$this->assertEquals( 'vatno', $this->_object->getVatNo() );
 	}
 
 	public function testGetSalutation()
@@ -393,6 +406,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 23, $addressCopy->getAddressId() );
 		$this->assertEquals( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $addressCopy->getType() );
 		$this->assertEquals( 'unitCompany', $addressCopy->getCompany() );
+		$this->assertEquals( 'DE999999999', $addressCopy->getVatNo() );
 		$this->assertEquals( MShop_Order_item_Base_Address_Abstract::SALUTATION_MR, $addressCopy->getSalutation() );
 		$this->assertEquals( 'Herr', $addressCopy->getTitle() );
 		$this->assertEquals( 'firstunit', $addressCopy->getFirstname() );
@@ -442,6 +456,7 @@ class MShop_Order_Item_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getAddressId(), $arrayObject['order.base.address.addressid'] );
 		$this->assertEquals( $this->_object->getType(), $arrayObject['order.base.address.type'] );
 		$this->assertEquals( $this->_object->getCompany(), $arrayObject['order.base.address.company'] );
+		$this->assertEquals( $this->_object->getVatNo(), $arrayObject['order.base.address.vatno'] );
 		$this->assertEquals( $this->_object->getSalutation(), $arrayObject['order.base.address.salutation'] );
 		$this->assertEquals( $this->_object->getTitle(), $arrayObject['order.base.address.title'] );
 		$this->assertEquals( $this->_object->getFirstname(), $arrayObject['order.base.address.firstname'] );

@@ -52,12 +52,13 @@ class MW_Setup_Task_CustomerAddBasePerfData extends MW_Setup_Task_ProductAddBase
 
 		$addrItem = $customerItem->getPaymentAddress();
 		$addrItem->setCompany( 'Test company' );
+		$addrItem->setVatNo( 'DE999999999' );
 		$addrItem->setSalutation( 'mr' );
 		$addrItem->setFirstname( 'Testdemo' );
 		$addrItem->setLastname( 'Perfuser' );
 		$addrItem->setAddress1( 'Test street' );
 		$addrItem->setAddress2( '1' );
-		$addrItem->setPostal '1000' );
+		$addrItem->setPostal( '1000' );
 		$addrItem->setCity( 'Test city' );
 		$addrItem->setLanguageId( 'en' );
 		$addrItem->setCountryId( 'DE' );

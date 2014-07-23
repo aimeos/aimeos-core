@@ -103,6 +103,7 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 
 			$supAdr->setId( null );
 			$supAdr->setCompany( $dataset['company'] );
+			$supAdr->setVatNo( $dataset['vatno'] );
 			$supAdr->setSalutation( $dataset['salutation'] );
 			$supAdr->setTitle( $dataset['title'] );
 			$supAdr->setFirstname( $dataset['firstname'] );

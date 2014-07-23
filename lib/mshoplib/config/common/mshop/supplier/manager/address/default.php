@@ -13,7 +13,7 @@ return array(
 		',
 		'insert' => '
 			INSERT INTO "mshop_supplier_address" (
-				"siteid", "refid", "company", "salutation", "title",
+				"siteid", "refid", "company", "vatno", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
 				"email", "telefax", "website", "flag", "pos", "mtime",
@@ -24,7 +24,7 @@ return array(
 		',
 		'update' => '
 			UPDATE "mshop_supplier_address"
-			SET "siteid" = ?, "refid" = ?, "company" = ?, "salutation" = ?,
+			SET "siteid" = ?, "refid" = ?, "company" = ?, "vatno" = ?, "salutation" = ?,
 				"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 				"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 				"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
@@ -34,7 +34,7 @@ return array(
 		',
 		'search' => '
 			SELECT DISTINCT msupad."id", msupad."siteid", msupad."refid",
-				msupad."company", msupad."salutation", msupad."title",
+				msupad."company", msupad."vatno", msupad."salutation", msupad."title",
 				msupad."firstname", msupad."lastname", msupad."address1",
 				msupad."address2", msupad."address3", msupad."postal",
 				msupad."city", msupad."state", msupad."countryid",

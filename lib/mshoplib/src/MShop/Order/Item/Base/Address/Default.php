@@ -119,6 +119,7 @@ class MShop_Order_Item_Base_Address_Default
 	{
 		$this->setAddressId( $address->getId() );
 		$this->setCompany( $address->getCompany() );
+		$this->setVatNo( $address->getVatNo() );
 		$this->setSalutation( $address->getSalutation() );
 		$this->setTitle( $address->getTitle() );
 		$this->setFirstname( $address->getFirstname() );

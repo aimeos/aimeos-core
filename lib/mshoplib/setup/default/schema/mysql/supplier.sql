@@ -49,6 +49,8 @@ CREATE TABLE "mshop_supplier_address" (
 	"refid" INTEGER NOT NULL,
 	-- company name
 	"company" VARCHAR(100) NOT NULL,
+	-- vatno
+	"vatno" VARCHAR(64) NOT NULL,
 	-- customer/supplier categorization
 	"salutation" VARCHAR(8) NOT NULL,
 	-- title of the customer/supplier

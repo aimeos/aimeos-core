@@ -59,6 +59,7 @@ class Controller_ExtJS_Order_Base_Address_Default
 			if( isset( $entry->{'order.base.address.type'} ) ) { $item->setType( $entry->{'order.base.address.type'} ); }
 
 			if( isset( $entry->{'order.base.address.company'} ) ) { $item->setCompany( $entry->{'order.base.address.company'} ); }
+			if( isset( $entry->{'order.base.address.vatno'} ) ) { $item->setVatNo( $entry->{'order.base.address.vatno'} ); }
 			if( isset( $entry->{'order.base.address.salutation'} ) ) { $item->setSalutation( $entry->{'order.base.address.salutation'} ); }
 			if( isset( $entry->{'order.base.address.title'} ) ) { $item->setTitle( $entry->{'order.base.address.title'} ); }
 			if( isset( $entry->{'order.base.address.firstname'} ) ) { $item->setFirstname( $entry->{'order.base.address.firstname'} ); }

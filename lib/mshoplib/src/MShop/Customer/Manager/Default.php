@@ -64,6 +64,13 @@ class MShop_Customer_Manager_Default
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'customer.vatno'=> array(
+			'label' => 'Customer vatno',
+			'code' => 'customer.vatno',
+			'internalcode' => 'mcus."vatno"',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'customer.title' => array(
 			'label' => 'Customer title',
 			'code' => 'customer.title',

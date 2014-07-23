@@ -20,11 +20,11 @@ $salutations = array(
 	{
 		$addr = $this->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 
-		echo preg_replace( array( "/\n+/m", '/  /' ), array( "\n", ' ' ), trim( strip_tags( sprintf(
+		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
 			/// address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
-			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language (%13$s),
-			/// e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s)
+			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), vatno (%13$s), language (%14$s),
+			/// e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site (%18$s)
 			$this->translate( 'client/html', '%1$s
 %2$s %3$s %4$s %5$s
 %6$s %7$s
@@ -37,6 +37,7 @@ $salutations = array(
 %15$s
 %16$s
 %17$s
+%18$s
 '
 			),
 			$addr->getCompany(),
@@ -50,6 +51,7 @@ $salutations = array(
 			$addr->getPostal(),
 			$addr->getCity(),
 			$addr->getState(),
+			$addr->getVatNo(),
 			$this->translate( 'client/html/country', $addr->getCountryId() ),
 			$this->translate( 'client/html/language', $addr->getLanguageId() ),
 			$addr->getEmail(),
@@ -68,11 +70,11 @@ $salutations = array(
 	{
 		$addr = $this->extOrderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
 
-		echo preg_replace( array( "/\n+/m", '/  /' ), array( "\n", ' ' ), trim( strip_tags( sprintf(
+		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
 			/// address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
-			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language (%13$s),
-			/// e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s)
+			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), vatno (%13$s), language (%14$s),
+			/// e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site (%18$s)
 			$this->translate( 'client/html', '%1$s
 %2$s %3$s %4$s %5$s
 %6$s %7$s
@@ -85,6 +87,7 @@ $salutations = array(
 %15$s
 %16$s
 %17$s
+%18$s
 '
 			),
 			$addr->getCompany(),
@@ -98,6 +101,7 @@ $salutations = array(
 			$addr->getPostal(),
 			$addr->getCity(),
 			$addr->getState(),
+			$addr->getVatNo(),
 			$this->translate( 'client/html/country', $addr->getCountryId() ),
 			$this->translate( 'client/html/language', $addr->getLanguageId() ),
 			$addr->getEmail(),

@@ -725,6 +725,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	{
 		$fixture = array(
 			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
+			'order.base.address.vatno' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
 			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
 			'order.base.address.firstname' => 'firstunit',
@@ -791,6 +792,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	{
 		$fixture = array(
 			'order.base.address.company' => '<p onclick="javascript: alert(\'gotcha\');">Metaways</p>',
+			'order.base.address.vatno' => 'DE999999999',
 			'order.base.address.title' => '<br/>Dr.',
 			'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
 			'order.base.address.firstname' => 'firstunit',

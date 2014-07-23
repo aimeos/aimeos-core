@@ -80,6 +80,30 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 		$this->_values['company'] = (string) $company;
 		$this->setModified();
 	}
+	
+	/**
+	 * Returns the vatno.
+	 *
+	 * @return string vatno
+	 */
+	public function getVatNo()
+	{
+		return ( isset( $this->_values['vatno'] ) ? (string) $this->_values['vatno'] : '' );
+	}
+
+
+	/**
+	 * Sets a new vatno.
+	 *
+	 * @param string $vatno New vatno
+	 */
+	public function setVatNo($vatno)
+	{
+		if ( $vatno == $this->getVatNo() ) { return; }
+
+		$this->_values['vatno'] = (string) $vatno;
+		$this->setModified();
+	}
 
 
 	/**
@@ -536,6 +560,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 			{
 				case $this->_prefix . 'salutation': $this->setSalutation( $value ); break;
 				case $this->_prefix . 'company': $this->setCompany( $value ); break;
+				case $this->_prefix . 'vatno': $this->setVatNo( $value ); break;
 				case $this->_prefix . 'title': $this->setTitle( $value ); break;
 				case $this->_prefix . 'firstname': $this->setFirstname( $value ); break;
 				case $this->_prefix . 'lastname': $this->setLastname( $value ); break;
@@ -571,6 +596,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 
 		$list[$this->_prefix . 'salutation'] = $this->getSalutation();
 		$list[$this->_prefix . 'company'] = $this->getCompany();
+		$list[$this->_prefix . 'vatno'] = $this->getVatNo();
 		$list[$this->_prefix . 'title'] = $this->getTitle();
 		$list[$this->_prefix . 'firstname'] = $this->getFirstname();
 		$list[$this->_prefix . 'lastname'] = $this->getLastname();

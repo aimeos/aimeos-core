@@ -60,8 +60,8 @@ $allFields = array_keys( $deliveryCss );
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
 			/// address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
-			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language (%13$s),
-			/// e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s)
+			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), vatno (%13$s), language (%14$s),
+			/// e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site (%18$s)
 			$this->translate( 'client/html', '%1$s
 %2$s %3$s %4$s %5$s
 %6$s %7$s
@@ -74,6 +74,7 @@ $allFields = array_keys( $deliveryCss );
 %15$s
 %16$s
 %17$s
+%18$s
 '
 			),
 			$addr->getCompany(),
@@ -87,6 +88,7 @@ $allFields = array_keys( $deliveryCss );
 			$addr->getPostal(),
 			$addr->getCity(),
 			$addr->getState(),
+			$addr->getVatNo(),
 			$this->translate( 'client/html/country', $addr->getCountryId() ),
 			$this->translate( 'client/html/language', $addr->getLanguageId() ),
 			$addr->getEmail(),
@@ -150,6 +152,10 @@ $allFields = array_keys( $deliveryCss );
 			<li class="form-item state <?php echo ( isset( $deliveryCss['order.base.address.state'] ) ? join( ' ', $deliveryCss['order.base.address.state'] ) : '' ); ?>">
 				<label for="address-delivery-state"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
 				</label><input type="text" id="address-delivery-state" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.state' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-delivery/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
+			</li>
+			<li class="form-item vatno <?php echo ( isset( $deliveryCss['order.base.address.vatno'] ) ? join( ' ', $deliveryCss['order.base.address.vatno'] ) : '' ); ?>">
+				<label for="address-delivery-vatno"><?php echo $enc->html( $this->translate( 'client/html', 'Vat Number' ), $enc::TRUST ); ?>
+				</label><input type="text" id="address-delivery-vatno" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.vatno' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-delivery/order.base.address.vatno', ( isset( $addrArray['order.base.address.vatno'] ) ? $addrArray['order.base.address.vatno'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.vatno', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
 			<li class="form-item countryid <?php echo ( isset( $deliveryCss['order.base.address.countryid'] ) ? join( ' ', $deliveryCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-delivery-countryid"><?php echo $enc->html( $this->translate( 'client/html', 'Country' ), $enc::TRUST ); ?>

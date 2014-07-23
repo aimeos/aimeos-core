@@ -139,6 +139,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getAddressId(), $itemSaved->getAddressId() );
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCompany(), $itemSaved->getCompany() );
+		$this->assertEquals( $item->getVatNo(), $itemSaved->getVatNo() );
 		$this->assertEquals( $item->getSalutation(), $itemSaved->getSalutation() );
 		$this->assertEquals( $item->getTitle(), $itemSaved->getTitle() );
 		$this->assertEquals( $item->getFirstname(), $itemSaved->getFirstname() );
@@ -167,6 +168,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getAddressId(), $itemUpd->getAddressId() );
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCompany(), $itemUpd->getCompany() );
+		$this->assertEquals( $itemExp->getVatNo(), $itemUpd->getVatNo() );
 		$this->assertEquals( $itemExp->getSalutation(), $itemUpd->getSalutation() );
 		$this->assertEquals( $itemExp->getTitle(), $itemUpd->getTitle() );
 		$this->assertEquals( $itemExp->getFirstname(), $itemUpd->getFirstname() );
@@ -207,6 +209,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.address.addressid', '103' );
 		$expr[] = $search->compare( '==', 'order.base.address.type', 'payment' );
 		$expr[] = $search->compare( '==', 'order.base.address.company', '' );
+		$expr[] = $search->compare( '==', 'order.base.address.vatno', '' );
 		$expr[] = $search->compare( '==', 'order.base.address.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'order.base.address.title', '' );
 		$expr[] = $search->compare( '==', 'order.base.address.firstname', 'Our' );

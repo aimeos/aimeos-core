@@ -51,6 +51,13 @@ class MShop_Customer_Manager_Address_Default
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'customer.address.vatno'=> array(
+			'label' => 'Customer address vatno',
+			'code' => 'customer.address.vatno',
+			'internalcode' => 'mcusad."vatno"',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'customer.address.salutation' => array(
 			'label' => 'Customer address salutation',
 			'code' => 'customer.address.salutation',

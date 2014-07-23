@@ -41,6 +41,10 @@ class MShop_Customer_Item_Default
 		if( isset( $values['company'] ) ) {
 			$address->setCompany( (string) $values['company'] );
 		}
+		
+		if( isset( $values['vatno'] ) ) {
+			$address->setVatNo( (string) $values['vatno'] );
+		}
 
 		if( isset( $values['title'] ) ) {
 			$address->setTitle( (string) $values['title'] );
@@ -310,6 +314,7 @@ class MShop_Customer_Item_Default
 		$list['customer.dateverified'] = $this->getDateVerified();
 		$list['customer.salutation'] = $this->getPaymentAddress()->getSalutation();
 		$list['customer.company'] = $this->getPaymentAddress()->getCompany();
+		$list['customer.vatno'] = $this->getPaymentAddress()->getVatNo();
 		$list['customer.title'] = $this->getPaymentAddress()->getTitle();
 		$list['customer.firstname'] = $this->getPaymentAddress()->getFirstname();
 		$list['customer.lastname'] = $this->getPaymentAddress()->getLastname();
