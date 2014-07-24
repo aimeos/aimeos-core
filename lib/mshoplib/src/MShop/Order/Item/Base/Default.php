@@ -16,14 +16,15 @@
  */
 class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 {
-	private $_locale;
 	private $_price;
+	private $_locale;
+	private $_values;
 	private $_products;
 	private $_addresses;
-	private $_coupons;
 	private $_services;
+	private $_coupons;
 	private $_modified = false;
-	private $_values;
+
 
 	/**
 	 * Initializes the shopping cart.
@@ -45,10 +46,9 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			MW_Common_Abstract::checkClassList( 'MShop_Order_Item_Base_Product_Interface', $couponProducts );
 		}
 
-		$this->_values = $values;
-
-		$this->_locale = $locale;
 		$this->_price = $price;
+		$this->_locale = $locale;
+		$this->_values = $values;
 		$this->_products = $products;
 		$this->_addresses = $addresses;
 		$this->_services = $services;
