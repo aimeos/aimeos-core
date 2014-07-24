@@ -65,10 +65,10 @@ class MShop_Order_Manager_Base_Address_Default
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'order.base.address.vatno' => array(
-			'code' => 'order.base.address.vatno',
-			'internalcode' => 'mordbaad."vatno"',
-			'label' => 'Order base address vatno',
+		'order.base.address.vatid' => array(
+			'code' => 'order.base.address.vatid',
+			'internalcode' => 'mordbaad."vatid"',
+			'label' => 'Order base address Vat ID',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
@@ -289,7 +289,7 @@ class MShop_Order_Manager_Base_Address_Default
 			$stmt->bind( 3, $item->getAddressId(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 4, $item->getType(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 5, $item->getCompany(), MW_DB_Statement_Abstract::PARAM_STR );
-			$stmt->bind( 6, $item->getVatNo(), MW_DB_Statement_Abstract::PARAM_STR );
+			$stmt->bind( 6, $item->getVatID(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 7, $item->getSalutation(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 8, $item->getTitle(), MW_DB_Statement_Abstract::PARAM_STR );
 			$stmt->bind( 9, $item->getFirstname(), MW_DB_Statement_Abstract::PARAM_STR );

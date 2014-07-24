@@ -158,7 +158,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 			$stmt->bind( 1, $this->_context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getRefId(), MW_DB_Statement_Abstract::PARAM_STR ); //reference id
 			$stmt->bind( 3, $item->getCompany(), MW_DB_Statement_Abstract::PARAM_STR ); //company
-			$stmt->bind( 4, $item->getVatNo(), MW_DB_Statement_Abstract::PARAM_STR ); //vatno
+			$stmt->bind( 4, $item->getVatID(), MW_DB_Statement_Abstract::PARAM_STR ); //vatid
 			$stmt->bind( 5, $item->getSalutation(), MW_DB_Statement_Abstract::PARAM_STR ); //salutation
 			$stmt->bind( 6, $item->getTitle(), MW_DB_Statement_Abstract::PARAM_STR ); //title
 			$stmt->bind( 7, $item->getFirstname(), MW_DB_Statement_Abstract::PARAM_STR ); //firstname

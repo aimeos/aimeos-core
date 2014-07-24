@@ -13,18 +13,18 @@ return array(
 		',
 		'insert' => '
 			INSERT INTO "mshop_customer" (
-				"siteid", "label", "code", "company", "vatno", "salutation", "title",
+				"siteid", "label", "code", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
 				"email", "telefax", "website", "birthday", "status", "vdate",
 				"password", "mtime", "editor", "ctime"
 			) VALUES (
-				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 			)
 		',
 		'update' => '
 			UPDATE "mshop_customer"
-			SET "siteid" = ?, "label" = ?, "code" = ?, "company" = ?, "vatno" = ?,
+			SET "siteid" = ?, "label" = ?, "code" = ?, "company" = ?, "vatid" = ?,
 				"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 				"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 				"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
@@ -35,7 +35,7 @@ return array(
 		',
 		'search' => '
 			SELECT DISTINCT mcus."id", mcus."siteid", mcus."label",
-				mcus."code", mcus."company", mcus."vatno", mcus."salutation", mcus."title",
+				mcus."code", mcus."company", mcus."vatid", mcus."salutation", mcus."title",
 				mcus."firstname", mcus."lastname", mcus."address1",
 				mcus."address2", mcus."address3", mcus."postal", mcus."city",
 				mcus."state", mcus."countryid", mcus."langid",

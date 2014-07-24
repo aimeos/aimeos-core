@@ -54,7 +54,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 			'password' => '',
 			'vdate' => null,
 			'company' => 'unitCompany',
-			'vatno' => 'DE999999999',
+			'vatid' => 'DE999999999',
 			'salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
 			'title' => 'Dr.',
 			'firstname' => 'firstunit',
@@ -196,7 +196,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$address = $this->_object->getPaymentAddress();
 		$this->assertEquals( $address->getRefId(), 'referenceid' );
 		$this->assertEquals( $address->getCompany(), 'unitCompany' );
-		$this->assertEquals( $address->getVatNo(), 'DE999999999' );
+		$this->assertEquals( $address->getVatID(), 'DE999999999' );
 		$this->assertEquals( $address->getSalutation(), MShop_Common_Item_Address_Abstract::SALUTATION_MR );
 		$this->assertEquals( $address->getTitle(), 'Dr.' );
 		$this->assertEquals( $address->getFirstname(), 'firstunit' );
@@ -239,7 +239,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getEditor(), $arrayObject['customer.editor'] );
 		$address = $this->_object->getPaymentAddress();
 		$this->assertEquals( $address->getCompany(), $arrayObject['customer.company'] );
-		$this->assertEquals( $address->getVatNo(), $arrayObject['customer.vatno'] );
+		$this->assertEquals( $address->getVatID(), $arrayObject['customer.vatid'] );
 		$this->assertEquals( $address->getSalutation(), $arrayObject['customer.salutation'] );
 		$this->assertEquals( $address->getTitle(), $arrayObject['customer.title'] );
 		$this->assertEquals( $address->getFirstname(), $arrayObject['customer.firstname'] );

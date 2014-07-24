@@ -42,8 +42,8 @@ MShop.panel.order.base.address.DeliveryItemUi = Ext.extend(Ext.FormPanel, {
 				name: 'order.base.address.company'
 			}, {
 				xtype: 'displayfield',
-				fieldLabel: MShop.I18n.dt( 'client/extjs', 'VatNo' ),
-				name: 'order.base.address.vatno'
+				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Vat ID' ),
+				name: 'order.base.address.vatid'
 			}, {
 				xtype: 'displayfield',
 				fieldLabel: MShop.I18n.dt( 'client/extjs', 'Salutation' ),

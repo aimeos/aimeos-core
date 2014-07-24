@@ -82,26 +82,26 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	}
 	
 	/**
-	 * Returns the vatno.
+	 * Returns the vatid.
 	 *
-	 * @return string vatno
+	 * @return string vatid
 	 */
-	public function getVatNo()
+	public function getVatID()
 	{
-		return ( isset( $this->_values['vatno'] ) ? (string) $this->_values['vatno'] : '' );
+		return ( isset( $this->_values['vatid'] ) ? (string) $this->_values['vatid'] : '' );
 	}
 
 
 	/**
-	 * Sets a new vatno.
+	 * Sets a new vatid.
 	 *
-	 * @param string $vatno New vatno
+	 * @param string $vatid New vatid
 	 */
-	public function setVatNo($vatno)
+	public function setVatID($vatid)
 	{
-		if ( $vatno == $this->getVatNo() ) { return; }
+		if ( $vatid == $this->getVatID() ) { return; }
 
-		$this->_values['vatno'] = (string) $vatno;
+		$this->_values['vatid'] = (string) $vatid;
 		$this->setModified();
 	}
 
@@ -560,7 +560,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 			{
 				case $this->_prefix . 'salutation': $this->setSalutation( $value ); break;
 				case $this->_prefix . 'company': $this->setCompany( $value ); break;
-				case $this->_prefix . 'vatno': $this->setVatNo( $value ); break;
+				case $this->_prefix . 'vatid': $this->setVatID( $value ); break;
 				case $this->_prefix . 'title': $this->setTitle( $value ); break;
 				case $this->_prefix . 'firstname': $this->setFirstname( $value ); break;
 				case $this->_prefix . 'lastname': $this->setLastname( $value ); break;
@@ -596,7 +596,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 
 		$list[$this->_prefix . 'salutation'] = $this->getSalutation();
 		$list[$this->_prefix . 'company'] = $this->getCompany();
-		$list[$this->_prefix . 'vatno'] = $this->getVatNo();
+		$list[$this->_prefix . 'vatid'] = $this->getVatID();
 		$list[$this->_prefix . 'title'] = $this->getTitle();
 		$list[$this->_prefix . 'firstname'] = $this->getFirstname();
 		$list[$this->_prefix . 'lastname'] = $this->getLastname();

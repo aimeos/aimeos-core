@@ -124,8 +124,8 @@ CREATE TABLE "mshop_order_base_address" (
 	"type" VARCHAR(8) NOT NULL,
 	-- company name
 	"company" VARCHAR(100) NOT NULL,
-	-- vatno
-	"vatno" VARCHAR(64) NOT NULL,
+	-- vatid
+	"vatid" VARCHAR(32) NOT NULL,
 	-- customer categorization
 	"salutation" VARCHAR(8) NOT NULL,
 	-- title of the customer

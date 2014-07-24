@@ -169,7 +169,7 @@ class MShop_Customer_Manager_DefaultTest extends MW_Unittest_Testcase
 
 		$expr[] = $search->compare( '>=', 'customer.salutation', '' );
 		$expr[] = $search->compare( '>=', 'customer.company', '' );
-		$expr[] = $search->compare( '>=', 'customer.vatno', '' );
+		$expr[] = $search->compare( '>=', 'customer.vatid', '' );
 		$expr[] = $search->compare( '>=', 'customer.title', '' );
 		$expr[] = $search->compare( '>=', 'customer.firstname', '' );
 		$expr[] = $search->compare( '>=', 'customer.lastname', '' );
@@ -199,7 +199,7 @@ class MShop_Customer_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'customer.address.siteid', null );
 		$expr[] = $search->compare( '!=', 'customer.address.refid', null );
 		$expr[] = $search->compare( '==', 'customer.address.company', 'Metaways GmbH' );
-		$expr[] = $search->compare( '==', 'customer.address.vatno', 'DE999999999' );
+		$expr[] = $search->compare( '==', 'customer.address.vatid', 'DE999999999' );
 		$expr[] = $search->compare( '==', 'customer.address.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'customer.address.title', 'Dr.' );
 		$expr[] = $search->compare( '==', 'customer.address.firstname', 'Good' );

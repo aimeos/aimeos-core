@@ -42,7 +42,7 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 			'siteid' => 12,
 			'refid' => 'referenceid',
 			'company' => 'unitCompany',
-			'vatno' => 'DE999999999',
+			'vatid' => 'DE999999999',
 			'salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
 			'title' => 'Herr',
 			'firstname' => 'firstunit',
@@ -116,16 +116,16 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 'company', $this->_object->getCompany() );
 	}
 	
-	public function testGetVatNo()
+	public function testGetVatID()
 	{
-		$this->assertEquals( 'DE999999999', $this->_object->getVatNo() );
+		$this->assertEquals( 'DE999999999', $this->_object->getVatID() );
 	}
 
-	public function testSetVatNo()
+	public function testSetVatID()
 	{
-		$this->_object->setVatNo( 'vatno' );
+		$this->_object->setVatID( 'vatid' );
 		$this->assertTrue($this->_object->isModified());
-		$this->assertEquals( 'vatno', $this->_object->getVatNo() );
+		$this->assertEquals( 'vatid', $this->_object->getVatID() );
 	}
 
 	public function testGetSalutation()
@@ -382,7 +382,7 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertNull( $object->getId() );
 		$this->assertEquals( $this->_values['salutation'], $object->getSalutation() );
 		$this->assertEquals( $this->_values['company'], $object->getCompany() );
-		$this->assertEquals( $this->_values['vatno'], $object->getVatNo() );
+		$this->assertEquals( $this->_values['vatid'], $object->getVatID() );
 		$this->assertEquals( $this->_values['title'], $object->getTitle() );
 		$this->assertEquals( $this->_values['firstname'], $object->getFirstname() );
 		$this->assertEquals( $this->_values['lastname'], $object->getLastname() );
@@ -408,7 +408,7 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 			'common.address.refid' => 2,
 			'common.address.salutation' => 'mr',
 			'common.address.company' => 'mw',
-			'common.address.vatno' => 'vatnumber',
+			'common.address.vatid' => 'vatnumber',
 			'common.address.title' => 'dr',
 			'common.address.firstname' => 'first',
 			'common.address.lastname' => 'last',
@@ -435,7 +435,7 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $list['common.address.refid'], $object->getRefId() );
 		$this->assertEquals( $list['common.address.salutation'], $object->getSalutation() );
 		$this->assertEquals( $list['common.address.company'], $object->getCompany() );
-		$this->assertEquals( $list['common.address.vatno'], $object->getVatNo() );
+		$this->assertEquals( $list['common.address.vatid'], $object->getVatID() );
 		$this->assertEquals( $list['common.address.title'], $object->getTitle() );
 		$this->assertEquals( $list['common.address.firstname'], $object->getFirstname() );
 		$this->assertEquals( $list['common.address.lastname'], $object->getLastname() );
@@ -465,7 +465,7 @@ class MShop_Common_Item_Address_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( $this->_object->getRefID(), $arrayObject['common.address.refid'] );
 		$this->assertEquals( $this->_object->getPosition(), $arrayObject['common.address.position'] );
 		$this->assertEquals( $this->_object->getCompany(), $arrayObject['common.address.company'] );
-		$this->assertEquals( $this->_object->getVatNo(), $arrayObject['common.address.vatno'] );
+		$this->assertEquals( $this->_object->getVatID(), $arrayObject['common.address.vatid'] );
 		$this->assertEquals( $this->_object->getSalutation(), $arrayObject['common.address.salutation'] );
 		$this->assertEquals( $this->_object->getTitle(), $arrayObject['common.address.title'] );
 		$this->assertEquals( $this->_object->getFirstname(), $arrayObject['common.address.firstname'] );

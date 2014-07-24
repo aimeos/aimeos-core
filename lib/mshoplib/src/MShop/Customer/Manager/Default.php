@@ -64,10 +64,10 @@ class MShop_Customer_Manager_Default
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
-		'customer.vatno'=> array(
-			'label' => 'Customer vatno',
-			'code' => 'customer.vatno',
-			'internalcode' => 'mcus."vatno"',
+		'customer.vatid'=> array(
+			'label' => 'Customer vatid',
+			'code' => 'customer.vatid',
+			'internalcode' => 'mcus."vatid"',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),

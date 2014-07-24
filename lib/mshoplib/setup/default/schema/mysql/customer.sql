@@ -26,8 +26,8 @@ CREATE TABLE "mshop_customer" (
 	"salutation" varchar(8) NOT NULL,
 	-- company of the customer
 	"company" varchar(100) NOT NULL,
-	-- vatno of the customer
-	"vatno" varchar(64) NOT NULL,
+	-- vatid of the customer
+	"vatid" varchar(32) NOT NULL,
 	-- title of the customer
 	"title" varchar(64) NOT NULL,
 	-- firstname of the customer
@@ -109,8 +109,8 @@ CREATE TABLE "mshop_customer_address" (
 	"refid" INTEGER NOT NULL,
 	-- company name
 	"company" VARCHAR(100) NOT NULL,
-	-- vatno
-	"vatno" VARCHAR(16) NOT NULL,
+	-- vatid
+	"vatid" VARCHAR(32) NOT NULL,
 	-- customer/supplier categorization
 	"salutation" VARCHAR(8) NOT NULL,
 	-- title of the customer/supplier

@@ -52,7 +52,7 @@ class MW_Setup_Task_CustomerAddBasePerfData extends MW_Setup_Task_ProductAddBase
 
 		$addrItem = $customerItem->getPaymentAddress();
 		$addrItem->setCompany( 'Test company' );
-		$addrItem->setVatNo( 'DE999999999' );
+		$addrItem->setVatID( 'DE999999999' );
 		$addrItem->setSalutation( 'mr' );
 		$addrItem->setFirstname( 'Testdemo' );
 		$addrItem->setLastname( 'Perfuser' );

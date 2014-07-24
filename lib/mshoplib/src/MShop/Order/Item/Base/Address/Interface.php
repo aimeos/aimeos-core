@@ -59,18 +59,18 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	public function setCompany( $company );
 	
 	/**
-	 * Returns the vatno.
+	 * Returns the vatid.
 	 *
-	 * @return string vatno
+	 * @return string vatid
 	 */
-	public function getVatNo();
+	public function getVatID();
 
 	/**
-	 * Sets a new vatno.
+	 * Sets a new vatid.
 	 *
-	 * @param string $vatno New vatno
+	 * @param string $vatid New vatid
 	 */
-	public function setVatNo( $vatno );
+	public function setVatID( $vatid );
 
 	/**
 	 * Returns the salutation constant for the person described by the address.

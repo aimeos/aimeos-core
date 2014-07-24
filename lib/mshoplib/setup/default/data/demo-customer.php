@@ -8,7 +8,7 @@
 return array(
 	array(
 		'code' => 'demo-test', 'label' => 'Test user', 'salutation' => 'mr',
-		'company' => 'Test company', 'vatno' => 'DE999999999', 'title' => '', 'firstname' => 'Test', 'lastname' => 'User',
+		'company' => 'Test company', 'vatid' => 'DE999999999', 'title' => '', 'firstname' => 'Test', 'lastname' => 'User',
 		'address1' => 'Test street', 'address2' => '1', 'address3' => '', 'postal' => '1000',
 		'city' => 'Test city', 'state' => '', 'langid' => 'en', 'countryid' => 'DE',
 		'telephone' => '', 'email' => 'me@localhost', 'telefax' => '', 'website' => '',

@@ -66,7 +66,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 	private $_optional = array(
 		'order.base.address.company',
-		'order.base.address.vatno',
+		'order.base.address.vatid',
 		'order.base.address.address2',
 	);
 
@@ -221,7 +221,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				 * necessary and must be filled by the customer before he can
 				 * continue the checkout process. Available field keys are:
 				 * * order.base.address.company
-				 * * order.base.address.vatno
+				 * * order.base.address.vatid
 				 * * order.base.address.salutation
 				 * * order.base.address.firstname
 				 * * order.base.address.lastname
@@ -257,7 +257,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 				 * customers can fill but don't have to before they can
 				 * continue the checkout process. Available field keys are:
 				 * * order.base.address.company
-				 * * order.base.address.vatno
+				 * * order.base.address.vatid
 				 * * order.base.address.salutation
 				 * * order.base.address.firstname
 				 * * order.base.address.lastname
@@ -389,7 +389,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			 * are hidden when a customer enters his delivery address.
 			 * Available field keys are:
 			 * * order.base.address.company
-			 * * order.base.address.vatno
+			 * * order.base.address.vatid
 			 * * order.base.address.salutation
 			 * * order.base.address.firstname
 			 * * order.base.address.lastname

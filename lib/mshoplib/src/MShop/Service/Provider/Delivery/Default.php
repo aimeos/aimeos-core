@@ -606,7 +606,7 @@ class MShop_Service_Provider_Delivery_Default
 		$this->_appendChildCDATA( 'firstname', $address->getFirstname(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'lastname', $address->getLastname(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'company', $address->getCompany(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'vatno', $address->getVatNo(), $dom, $addressitem );
+		$this->_appendChildCDATA( 'vatid', $address->getVatID(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'address1', $address->getAddress1(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'address2', $address->getAddress2(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'address3', $address->getAddress3(), $dom, $addressitem );

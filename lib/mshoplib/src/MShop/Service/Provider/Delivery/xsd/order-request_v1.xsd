@@ -138,7 +138,7 @@
 		<xs:element name="firstname" type="xs:string"/>
 		<xs:element name="lastname" type="xs:string"/>
 		<xs:element name="company" type="xs:string"/>
-		<xs:element name="vatno" type="xs:string"/>
+		<xs:element name="vatid" type="xs:string"/>
 		<xs:element name="address1" type="xs:string"/>
 		<xs:element name="address2" type="xs:string"/>
 		<xs:element name="address3" type="xs:string"/>

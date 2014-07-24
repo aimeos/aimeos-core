@@ -47,19 +47,19 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	public function setCompany($company);
 	
 	/**
-	 * Returns the vatno.
+	 * Returns the vatid.
 	 *
-	 * @return string vatno
+	 * @return string vatid
 	 */
-	public function getVatNo();
+	public function getVatID();
 
 
 	/**
-	 * Sets a new vatno.
+	 * Sets a new vatid.
 	 *
-	 * @param string $vatno New vatno
+	 * @param string $vatid New vatid
 	 */
-	public function setVatNo($vatno);
+	public function setVatID($vatid);
 
 
 	/**

@@ -94,7 +94,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 		foreach( $testdata['customer'] as $key => $dataset )
 		{
 			$address->setCompany( $dataset['company'] );
-			$address->setVatNo( $dataset['vatno'] );
+			$address->setVatID( $dataset['vatid'] );
 			$address->setSalutation( $dataset['salutation'] );
 			$address->setTitle( $dataset['title'] );
 			$address->setFirstname( $dataset['firstname'] );
@@ -147,7 +147,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 
 			$address->setId(null);
 			$address->setCompany( $dataset['company'] );
-			$address->setVatNo( $dataset['vatno'] );
+			$address->setVatID( $dataset['vatid'] );
 			$address->setSalutation( $dataset['salutation'] );
 			$address->setTitle( $dataset['title'] );
 			$address->setFirstname( $dataset['firstname'] );

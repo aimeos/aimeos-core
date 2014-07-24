@@ -310,7 +310,7 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'order.base.address.baseid', null );
 		$expr[] = $search->compare( '==', 'order.base.address.type', 'payment' );
 		$expr[] = $search->compare( '==', 'order.base.address.company', '' );
-		$expr[] = $search->compare( '==', 'order.base.address.vatno', '' );
+		$expr[] = $search->compare( '==', 'order.base.address.vatid', '' );
 		$expr[] = $search->compare( '==', 'order.base.address.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'order.base.address.title', '' );
 		$expr[] = $search->compare( '==', 'order.base.address.firstname', 'Our' );

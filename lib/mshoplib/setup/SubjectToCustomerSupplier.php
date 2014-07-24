@@ -21,17 +21,17 @@ class MW_Setup_Task_SubjectToCustomerSupplier extends MW_Setup_Task_Abstract
 			'DROP TABLE "mshop_subject_supplier"',
 		),
 		'mshop_subject_common_address' => array(
-			'INSERT INTO "mshop_customer_address" ("siteid", "refid", "company", "vatno", "salutation",
+			'INSERT INTO "mshop_customer_address" ("siteid", "refid", "company", "salutation",
 				"title", "firstname", "lastname", "address1", "address2", "address3", "postal", "city", "state",
-				"langid", "telephone", "email", "telefax", "website", "pos") SELECT ms."siteid", msca."refid", msca."company", msca."vatno", msca."salutation",
+				"langid", "telephone", "email", "telefax", "website", "pos") SELECT ms."siteid", msca."refid", msca."company", msca."salutation",
 				msca."title", msca."firstname", msca."lastname", msca."address1", msca."address2", msca."address3", msca."postal", msca."city", msca."state",
 				msca."countryid", msca."telephone", msca."email", msca."telefax", msca."website", msca."pos"
 				FROM "mshop_subject_common_address" AS msca
 				LEFT JOIN "mshop_subject" AS ms ON ( msca."domain" = ms."domain" )
 				WHERE msca."domain" = \'customer\'',
-			'INSERT INTO "mshop_supplier_address" ("siteid", "refid", "company", "vatno", "salutation",
+			'INSERT INTO "mshop_supplier_address" ("siteid", "refid", "company", "salutation",
 				"title", "firstname", "lastname", "address1", "address2", "address3", "postal", "city", "state",
-				"langid", "telephone", "email", "telefax", "website", "pos") SELECT ms."siteid", msca."refid", msca."company", msca."vatno", msca."salutation",
+				"langid", "telephone", "email", "telefax", "website", "pos") SELECT ms."siteid", msca."refid", msca."company", msca."salutation",
 				msca."title", msca."firstname", msca."lastname", msca."address1", msca."address2", msca."address3", msca."postal", msca."city", msca."state",
 				msca."countryid", msca."telephone", msca."email", msca."telefax", msca."website", msca."pos"
 				FROM "mshop_subject_common_address" AS msca

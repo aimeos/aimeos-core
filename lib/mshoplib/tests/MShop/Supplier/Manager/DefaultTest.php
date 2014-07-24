@@ -158,7 +158,7 @@ class MShop_Supplier_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'supplier.address.siteid', null );
 		$expr[] = $search->compare( '!=', 'supplier.address.refid', '' );
 		$expr[] = $search->compare( '==', 'supplier.address.company', 'Metaways' );
-		$expr[] = $search->compare( '==', 'supplier.address.vatno', 'DE999999999' );
+		$expr[] = $search->compare( '==', 'supplier.address.vatid', 'DE999999999' );
 		$expr[] = $search->compare( '==', 'supplier.address.salutation', 'mrs' );
 		$expr[] = $search->compare( '==', 'supplier.address.title', '' );
 		$expr[] = $search->compare( '==', 'supplier.address.firstname', 'Our' );
