@@ -137,6 +137,11 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 			unset( $list[$this->_prefix . 'id'] );
 		}
 
+		unset( $list[$this->_prefix . 'siteid'] );
+		unset( $list[$this->_prefix . 'ctime'] );
+		unset( $list[$this->_prefix . 'mtime'] );
+		unset( $list[$this->_prefix . 'editor'] );
+
 		return $list;
 	}
 
