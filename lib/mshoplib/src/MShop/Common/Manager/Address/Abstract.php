@@ -158,32 +158,33 @@ abstract class MShop_Common_Manager_Address_Abstract
 			$stmt->bind( 1, $this->_context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $item->getRefId(), MW_DB_Statement_Abstract::PARAM_STR ); //reference id
 			$stmt->bind( 3, $item->getCompany(), MW_DB_Statement_Abstract::PARAM_STR ); //company
-			$stmt->bind( 4, $item->getSalutation(), MW_DB_Statement_Abstract::PARAM_STR ); //salutation
-			$stmt->bind( 5, $item->getTitle(), MW_DB_Statement_Abstract::PARAM_STR ); //title
-			$stmt->bind( 6, $item->getFirstname(), MW_DB_Statement_Abstract::PARAM_STR ); //firstname
-			$stmt->bind( 7, $item->getLastname(), MW_DB_Statement_Abstract::PARAM_STR ); //lastname
-			$stmt->bind( 8, $item->getAddress1(), MW_DB_Statement_Abstract::PARAM_STR ); //address1
-			$stmt->bind( 9, $item->getAddress2(), MW_DB_Statement_Abstract::PARAM_STR ); //address2
-			$stmt->bind( 10, $item->getAddress3(), MW_DB_Statement_Abstract::PARAM_STR ); //address3
-			$stmt->bind( 11, $item->getPostal(), MW_DB_Statement_Abstract::PARAM_STR ); //postal
-			$stmt->bind( 12, $item->getCity(), MW_DB_Statement_Abstract::PARAM_STR ); //city
-			$stmt->bind( 13, $item->getState(), MW_DB_Statement_Abstract::PARAM_STR ); //state
-			$stmt->bind( 14, $item->getCountryId(), MW_DB_Statement_Abstract::PARAM_STR ); //countryid
-			$stmt->bind( 15, $item->getLanguageId(), MW_DB_Statement_Abstract::PARAM_STR ); //langid
-			$stmt->bind( 16, $item->getTelephone(), MW_DB_Statement_Abstract::PARAM_STR ); //telephone
-			$stmt->bind( 17, $item->getEmail(), MW_DB_Statement_Abstract::PARAM_STR ); //email
-			$stmt->bind( 18, $item->getTelefax(), MW_DB_Statement_Abstract::PARAM_STR ); //telefax
-			$stmt->bind( 19, $item->getWebsite(), MW_DB_Statement_Abstract::PARAM_STR ); //website
-			$stmt->bind( 20, $item->getFlag(), MW_DB_Statement_Abstract::PARAM_INT ); //generic flag
-			$stmt->bind( 21, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT ); //position
-			$stmt->bind( 22, date('Y-m-d H:i:s', time()));//mtime
-			$stmt->bind( 23, $this->_context->getEditor());// editor
+			$stmt->bind( 4, $item->getVatID(), MW_DB_Statement_Abstract::PARAM_STR ); //vatid
+			$stmt->bind( 5, $item->getSalutation(), MW_DB_Statement_Abstract::PARAM_STR ); //salutation
+			$stmt->bind( 6, $item->getTitle(), MW_DB_Statement_Abstract::PARAM_STR ); //title
+			$stmt->bind( 7, $item->getFirstname(), MW_DB_Statement_Abstract::PARAM_STR ); //firstname
+			$stmt->bind( 8, $item->getLastname(), MW_DB_Statement_Abstract::PARAM_STR ); //lastname
+			$stmt->bind( 9, $item->getAddress1(), MW_DB_Statement_Abstract::PARAM_STR ); //address1
+			$stmt->bind( 10, $item->getAddress2(), MW_DB_Statement_Abstract::PARAM_STR ); //address2
+			$stmt->bind( 11, $item->getAddress3(), MW_DB_Statement_Abstract::PARAM_STR ); //address3
+			$stmt->bind( 12, $item->getPostal(), MW_DB_Statement_Abstract::PARAM_STR ); //postal
+			$stmt->bind( 13, $item->getCity(), MW_DB_Statement_Abstract::PARAM_STR ); //city
+			$stmt->bind( 14, $item->getState(), MW_DB_Statement_Abstract::PARAM_STR ); //state
+			$stmt->bind( 15, $item->getCountryId(), MW_DB_Statement_Abstract::PARAM_STR ); //countryid
+			$stmt->bind( 16, $item->getLanguageId(), MW_DB_Statement_Abstract::PARAM_STR ); //langid
+			$stmt->bind( 17, $item->getTelephone(), MW_DB_Statement_Abstract::PARAM_STR ); //telephone
+			$stmt->bind( 18, $item->getEmail(), MW_DB_Statement_Abstract::PARAM_STR ); //email
+			$stmt->bind( 19, $item->getTelefax(), MW_DB_Statement_Abstract::PARAM_STR ); //telefax
+			$stmt->bind( 20, $item->getWebsite(), MW_DB_Statement_Abstract::PARAM_STR ); //website
+			$stmt->bind( 21, $item->getFlag(), MW_DB_Statement_Abstract::PARAM_INT ); //generic flag
+			$stmt->bind( 22, $item->getPosition(), MW_DB_Statement_Abstract::PARAM_INT ); //position
+			$stmt->bind( 23, date('Y-m-d H:i:s', time()));//mtime
+			$stmt->bind( 24, $this->_context->getEditor());// editor
 
 			if ( $id !== null ) {
-				$stmt->bind( 24, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 25, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 24, date('Y-m-d H:i:s', time()));// ctime
+				$stmt->bind( 25, date('Y-m-d H:i:s', time()));// ctime
 			}
 
 			$result = $stmt->execute()->finish();

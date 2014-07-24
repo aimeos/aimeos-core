@@ -13,19 +13,19 @@ return array(
 		',
 		'insert' => '
 			INSERT INTO "mshop_order_base_address" (
-				"baseid", "siteid", "addrid", "type", "company", "salutation",
+				"baseid", "siteid", "addrid", "type", "company", "vatid", "salutation",
 				"title", "firstname", "lastname", "address1", "address2",
 				"address3", "postal", "city", "state", "countryid", "langid",
 				"telephone", "email", "telefax", "website", "flag", "mtime",
 				"editor", "ctime"
 			) VALUES (
-				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 			)
 		',
 		'update' => '
 			UPDATE "mshop_order_base_address"
 			SET "baseid" = ?, "siteid" = ?, "addrid" = ?, "type" = ?,
-				"company" = ?, "salutation" = ?, "title" = ?, "firstname" = ?,
+				"company" = ?, "vatid" = ?, "salutation" = ?, "title" = ?, "firstname" = ?,
 				"lastname" = ?, "address1" = ?, "address2" = ?,
 				"address3" = ?, "postal" = ?, "city" = ?, "state" = ?,
 				"countryid" = ?, "langid" = ?, "telephone" = ?, "email" = ?,
@@ -36,7 +36,7 @@ return array(
 		'search' => '
 			SELECT DISTINCT mordbaad."id", mordbaad."baseid",
 				mordbaad."siteid", mordbaad."addrid", mordbaad."type",
-				mordbaad."company", mordbaad."salutation", mordbaad."title",
+				mordbaad."company", mordbaad."vatid", mordbaad."salutation", mordbaad."title",
 				mordbaad."firstname", mordbaad."lastname", mordbaad."address1",
 				mordbaad."address2", mordbaad."address3", mordbaad."postal",
 				mordbaad."city", mordbaad."state", mordbaad."countryid",

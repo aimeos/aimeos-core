@@ -115,6 +115,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends MW_Unittest_Testca
 				'order.base.address.addressid' => '-1',
 				'order.base.address.type' => 'payment',
 				'order.base.address.company' => 'MusterMax',
+				'order.base.address.vatid' => 'DE999999999',
 				'order.base.address.salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
 				'order.base.address.title' => 'Herr',
 				'order.base.address.firstname' => 'Max',
@@ -160,6 +161,7 @@ class Controller_ExtJS_Order_Base_Address_DefaultTest extends MW_Unittest_Testca
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.addressid'}, $searched['items'][0]->{'order.base.address.addressid'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.type'}, $searched['items'][0]->{'order.base.address.type'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.company'}, $searched['items'][0]->{'order.base.address.company'} );
+		$this->assertEquals( $savedAddress['items']->{'order.base.address.vatid'}, $searched['items'][0]->{'order.base.address.vatid'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.salutation'}, $searched['items'][0]->{'order.base.address.salutation'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.title'}, $searched['items'][0]->{'order.base.address.title'} );
 		$this->assertEquals( $savedAddress['items']->{'order.base.address.firstname'}, $searched['items'][0]->{'order.base.address.firstname'} );
