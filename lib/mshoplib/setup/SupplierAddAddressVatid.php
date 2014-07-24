@@ -25,7 +25,7 @@ class MW_Setup_Task_SupplierAddAddressVatid extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('SupplierRenameConstraints');
+		return array('SubjectToCustomerSupplier');
 	}
 
 
