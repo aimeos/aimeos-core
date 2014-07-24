@@ -67,6 +67,10 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
+		$i18n = new MW_Translation_None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
+
+
 		$session = new MW_Session_None();
 		$ctx->setSession( $session );
 
