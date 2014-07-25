@@ -167,6 +167,10 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$orderAddr->setLanguageId( $dataset['langid'] );
 			$orderAddr->setFlag( $dataset['flag'] );
 
+			if( isset( $dataset['vatid'] ) ) {
+				$orderAddr->setVatID( $dataset['vatid'] );
+			}
+
 			$orderBaseAddressManager->saveItem( $orderAddr, false );
 		}
 
