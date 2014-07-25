@@ -9,7 +9,7 @@
 
 
 /**
- * Factory for order favorite HTML clients in accounts.
+ * Factory for product favorite HTML client in user accounts.
  *
  * @package Client
  * @subpackage Html

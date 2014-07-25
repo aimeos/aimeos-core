@@ -94,9 +94,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 		foreach( $testdata['customer'] as $key => $dataset )
 		{
 			$address->setCompany( $dataset['company'] );
-			if(isset($dataset['vatid'])){
-				$address->setVatID( $dataset['vatid'] );
-			}
+			$address->setVatID( ( isset( $dataset['vatid'] ) ? $dataset['vatid'] : '' ) );
 			$address->setSalutation( $dataset['salutation'] );
 			$address->setTitle( $dataset['title'] );
 			$address->setFirstname( $dataset['firstname'] );
@@ -113,10 +111,6 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			$address->setTelefax( $dataset['telefax'] );
 			$address->setWebsite( $dataset['website'] );
 			$address->setLanguageId( $dataset['langid'] );
-
-			if( isset( $dataset['vatid'] ) ) {
-				$address->setVatID( $dataset['vatid'] );
-			}
 
 			$customer->setId( null );
 			$customer->setLabel( $dataset['label'] );
@@ -153,9 +147,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 
 			$address->setId(null);
 			$address->setCompany( $dataset['company'] );
-			if(isset($dataset['vatid'])){
-				$address->setVatID( $dataset['vatid'] );
-			}
+			$address->setVatID( ( isset( $dataset['vatid'] ) ? $dataset['vatid'] : '' ) );
 			$address->setSalutation( $dataset['salutation'] );
 			$address->setTitle( $dataset['title'] );
 			$address->setFirstname( $dataset['firstname'] );
@@ -175,10 +167,6 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			$address->setFlag( $dataset['flag'] );
 			$address->setPosition( $dataset['pos'] );
 			$address->setRefId( $parentIds[ $dataset['refid'] ] );
-
-			if( isset( $dataset['vatid'] ) ) {
-				$address->setVatID( $dataset['vatid'] );
-			}
 
 			$customerAddressManager->saveItem( $address, false );
 		}
