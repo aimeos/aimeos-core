@@ -114,6 +114,10 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			$address->setWebsite( $dataset['website'] );
 			$address->setLanguageId( $dataset['langid'] );
 
+			if( isset( $dataset['vatid'] ) ) {
+				$address->setVatID( $dataset['vatid'] );
+			}
+
 			$customer->setId( null );
 			$customer->setLabel( $dataset['label'] );
 			$customer->setCode( $dataset['code'] );
@@ -171,6 +175,10 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 			$address->setFlag( $dataset['flag'] );
 			$address->setPosition( $dataset['pos'] );
 			$address->setRefId( $parentIds[ $dataset['refid'] ] );
+
+			if( isset( $dataset['vatid'] ) ) {
+				$address->setVatID( $dataset['vatid'] );
+			}
 
 			$customerAddressManager->saveItem( $address, false );
 		}
