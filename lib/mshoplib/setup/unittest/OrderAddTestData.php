@@ -148,6 +148,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$orderAddr->setAddressId( ( isset( $dataset['addrid'] ) ? $dataset['addrid'] : '' ) );
 			$orderAddr->setType( $dataset['type'] );
 			$orderAddr->setCompany( $dataset['company'] );
+			$orderAddr->setVatID( ( isset( $dataset['vatid'] ) ? $dataset['vatid'] : '' ) );
 			$orderAddr->setSalutation( $dataset['salutation'] );
 			$orderAddr->setTitle( $dataset['title'] );
 			$orderAddr->setFirstname( $dataset['firstname'] );
@@ -165,10 +166,6 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$orderAddr->setWebsite( $dataset['website'] );
 			$orderAddr->setLanguageId( $dataset['langid'] );
 			$orderAddr->setFlag( $dataset['flag'] );
-
-			if( isset( $dataset['vatid'] ) ) {
-				$orderAddr->setVatID( $dataset['vatid'] );
-			}
 
 			$orderBaseAddressManager->saveItem( $orderAddr, false );
 		}
