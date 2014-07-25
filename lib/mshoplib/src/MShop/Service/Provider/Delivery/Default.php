@@ -606,7 +606,6 @@ class MShop_Service_Provider_Delivery_Default
 		$this->_appendChildCDATA( 'firstname', $address->getFirstname(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'lastname', $address->getLastname(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'company', $address->getCompany(), $dom, $addressitem );
-		$this->_appendChildCDATA( 'vatid', $address->getVatID(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'address1', $address->getAddress1(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'address2', $address->getAddress2(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'address3', $address->getAddress3(), $dom, $addressitem );
@@ -616,6 +615,7 @@ class MShop_Service_Provider_Delivery_Default
 		$this->_appendChildCDATA( 'countrycode', strtoupper( $address->getCountryId() ), $dom, $addressitem );
 		$this->_appendChildCDATA( 'email', $address->getEmail(), $dom, $addressitem );
 		$this->_appendChildCDATA( 'phone', $address->getTelephone(), $dom, $addressitem );
+		$this->_appendChildCDATA( 'vatid', $address->getVatID(), $dom, $addressitem );
 
 		$addresslist->appendChild( $addressitem );
 	}
