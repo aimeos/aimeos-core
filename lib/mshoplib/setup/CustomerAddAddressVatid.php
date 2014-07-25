@@ -12,8 +12,8 @@
 class MW_Setup_Task_CustomerAddAddressVatid extends MW_Setup_Task_Abstract
 {
 	private $_mysql = array(
-		'mshop_customer' => 'ALTER TABLE "mshop_customer" ADD "vatid" VARCHAR(32) AFTER "ctime"',
-		'mshop_customer_address' => 'ALTER TABLE "mshop_customer_address" ADD "vatid" VARCHAR(32) AFTER "ctime"',
+		'mshop_customer' => 'ALTER TABLE "mshop_customer" ADD "vatid" VARCHAR(32) AFTER "company"',
+		'mshop_customer_address' => 'ALTER TABLE "mshop_customer_address" ADD "vatid" VARCHAR(32) AFTER "company"',
 	);
 
 
