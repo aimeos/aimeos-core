@@ -93,6 +93,7 @@ class MShop_Common_Item_Address_Default
 	public function copyFrom( MShop_Order_Item_Base_Address_Interface $item )
 	{
 		$this->setCompany( $item->getCompany() );
+		$this->setVatID( $item->getVatID() );
 		$this->setSalutation( $item->getSalutation() );
 		$this->setTitle( $item->getTitle() );
 		$this->setFirstname( $item->getFirstname() );

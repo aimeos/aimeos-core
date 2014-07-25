@@ -64,6 +64,13 @@ class MShop_Customer_Manager_Default
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'customer.vatid'=> array(
+			'label' => 'Customer vatid',
+			'code' => 'customer.vatid',
+			'internalcode' => 'mcus."vatid"',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'customer.title' => array(
 			'label' => 'Customer title',
 			'code' => 'customer.title',
@@ -446,34 +453,35 @@ class MShop_Customer_Manager_Default
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, $item->getCode() );
 			$stmt->bind( 4, $billingAddress->getCompany() );
-			$stmt->bind( 5, $billingAddress->getSalutation() );
-			$stmt->bind( 6, $billingAddress->getTitle() );
-			$stmt->bind( 7, $billingAddress->getFirstname() );
-			$stmt->bind( 8, $billingAddress->getLastname() );
-			$stmt->bind( 9, $billingAddress->getAddress1() );
-			$stmt->bind( 10, $billingAddress->getAddress2() );
-			$stmt->bind( 11, $billingAddress->getAddress3() );
-			$stmt->bind( 12, $billingAddress->getPostal() );
-			$stmt->bind( 13, $billingAddress->getCity() );
-			$stmt->bind( 14, $billingAddress->getState() );
-			$stmt->bind( 15, $billingAddress->getCountryId() );
-			$stmt->bind( 16, $billingAddress->getLanguageId() );
-			$stmt->bind( 17, $billingAddress->getTelephone() );
-			$stmt->bind( 18, $billingAddress->getEmail() );
-			$stmt->bind( 19, $billingAddress->getTelefax() );
-			$stmt->bind( 20, $billingAddress->getWebsite() );
-			$stmt->bind( 21, $item->getBirthday() );
-			$stmt->bind( 22, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 23, $item->getDateVerified() );
-			$stmt->bind( 24, $item->getPassword() );
-			$stmt->bind( 25, $date ); // Modification time
-			$stmt->bind( 26, $context->getEditor() );
+			$stmt->bind( 5, $billingAddress->getVatID() );
+			$stmt->bind( 6, $billingAddress->getSalutation() );
+			$stmt->bind( 7, $billingAddress->getTitle() );
+			$stmt->bind( 8, $billingAddress->getFirstname() );
+			$stmt->bind( 9, $billingAddress->getLastname() );
+			$stmt->bind( 10, $billingAddress->getAddress1() );
+			$stmt->bind( 11, $billingAddress->getAddress2() );
+			$stmt->bind( 12, $billingAddress->getAddress3() );
+			$stmt->bind( 13, $billingAddress->getPostal() );
+			$stmt->bind( 14, $billingAddress->getCity() );
+			$stmt->bind( 15, $billingAddress->getState() );
+			$stmt->bind( 16, $billingAddress->getCountryId() );
+			$stmt->bind( 17, $billingAddress->getLanguageId() );
+			$stmt->bind( 18, $billingAddress->getTelephone() );
+			$stmt->bind( 19, $billingAddress->getEmail() );
+			$stmt->bind( 20, $billingAddress->getTelefax() );
+			$stmt->bind( 21, $billingAddress->getWebsite() );
+			$stmt->bind( 22, $item->getBirthday() );
+			$stmt->bind( 23, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 24, $item->getDateVerified() );
+			$stmt->bind( 25, $item->getPassword() );
+			$stmt->bind( 26, $date ); // Modification time
+			$stmt->bind( 27, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 27, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 28, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 27, $date ); // Creation time
+				$stmt->bind( 28, $date ); // Creation time
 			}
 
 			$result = $stmt->execute()->finish();

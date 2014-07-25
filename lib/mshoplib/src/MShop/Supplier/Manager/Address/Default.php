@@ -51,6 +51,13 @@ class MShop_Supplier_Manager_Address_Default
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
 		),
+		'supplier.address.vatid'=> array(
+			'code' => 'supplier.address.vatid',
+			'internalcode' => 'msupad."vatid"',
+			'label' => 'Supplier address Vat ID',
+			'type' => 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'supplier.address.salutation' => array(
 			'code' => 'supplier.address.salutation',
 			'internalcode' => 'msupad."salutation"',

@@ -55,6 +55,7 @@ class MShop_Common_Manager_Address_AbstractTest extends MW_Unittest_Testcase
 		$this->_fixture = array(
 			'refid' => $customerItem->getId(),
 			'company' => 'Metaways',
+			'vatid' => 'DE999999999',
 			'salutation' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
 			'titlekey' => MShop_Common_Item_Address_Abstract::SALUTATION_MR,
 			'title' => 'Herr',
@@ -145,6 +146,7 @@ class MShop_Common_Manager_Address_AbstractTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition());
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId());
 		$this->assertEquals( $item->getCompany(), $itemSaved->getCompany());
+		$this->assertEquals( $item->getVatID(), $itemSaved->getVatID());
 		$this->assertEquals( $item->getSalutation(), $itemSaved->getSalutation());
 		$this->assertEquals( $item->getTitle(), $itemSaved->getTitle());
 		$this->assertEquals( $item->getFirstname(), $itemSaved->getFirstname());
@@ -172,6 +174,7 @@ class MShop_Common_Manager_Address_AbstractTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition());
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId());
 		$this->assertEquals( $itemExp->getCompany(), $itemUpd->getCompany());
+		$this->assertEquals( $itemExp->getVatID(), $itemUpd->getVatID());
 		$this->assertEquals( $itemExp->getSalutation(), $itemUpd->getSalutation());
 		$this->assertEquals( $itemExp->getTitle(), $itemUpd->getTitle());
 		$this->assertEquals( $itemExp->getFirstname(), $itemUpd->getFirstname());

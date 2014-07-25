@@ -83,6 +83,7 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 				$addr->setTitle( $entry['title'] );
 				$addr->setSalutation( $entry['salutation'] );
 				$addr->setCompany( $entry['company'] );
+				$addr->setVatID( $entry['vatid'] );
 				$addr->setFirstname( $entry['firstname'] );
 				$addr->setLastname( $entry['lastname'] );
 				$addr->setAddress1( $entry['address1'] );

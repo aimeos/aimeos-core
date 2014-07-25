@@ -45,6 +45,21 @@ interface MShop_Common_Item_Address_Interface extends MShop_Common_Item_Interfac
 	 * @param string $company New company name
 	 */
 	public function setCompany($company);
+	
+	/**
+	 * Returns the vatid.
+	 *
+	 * @return string vatid
+	 */
+	public function getVatID();
+
+
+	/**
+	 * Sets a new vatid.
+	 *
+	 * @param string $vatid New vatid
+	 */
+	public function setVatID($vatid);
 
 
 	/**
