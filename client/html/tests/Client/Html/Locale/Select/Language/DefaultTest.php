@@ -66,7 +66,7 @@ class Client_Html_Locale_Select_Language_DefaultTest extends MW_Unittest_Testcas
 		$output = $this->_object->getBody( 1, $tags, $expire );
 
 		$this->assertStringStartsWith( '<div class="locale-select-language">', $output );
-		$this->assertContains( '<li class="select-dropdown select-current">de', $output );
+		$this->assertContains( '<li class="select-dropdown select-current"><a href="#">de', $output );
 		$this->assertContains( '<li class="select-item active">', $output );
 
 		$this->assertEquals( 0, count( $tags ) );
