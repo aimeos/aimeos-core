@@ -13,7 +13,8 @@ return array(
 
 	'locale' => array(
 		array( 'siteid' => 'default', 'langid' => 'en', 'currencyid' => 'EUR', 'pos' => 0, 'status' => 1 ),
-		array( 'siteid' => 'default', 'langid' => 'de', 'currencyid' => 'EUR', 'pos' => 1, 'status' => 1 ),
+		array( 'siteid' => 'default', 'langid' => 'en', 'currencyid' => 'USD', 'pos' => 1, 'status' => 1 ),
+		array( 'siteid' => 'default', 'langid' => 'de', 'currencyid' => 'EUR', 'pos' => 2, 'status' => 1 ),
 	),
 
 );

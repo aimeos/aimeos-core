@@ -53,6 +53,13 @@ return array(
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
+			array(
+				'label' => 'Demo: DHL',
+				'value' => '0.00', 'costs' => '7.90', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
 		),
 		'media' => array(
 			array(
@@ -103,6 +110,13 @@ return array(
 				'label' => 'Demo: DHL',
 				'value' => '0.00', 'costs' => '11.90', 'rebate' => '0.00', 'taxrate' => '20.00',
 				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: DHL',
+				'value' => '0.00', 'costs' => '15.90', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -159,6 +173,13 @@ return array(
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
+			array(
+				'label' => 'Demo: Fedex',
+				'value' => '0.00', 'costs' => '8.50', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
 		),
 		'media' => array(
 			array(
@@ -209,6 +230,13 @@ return array(
 				'label' => 'Demo: TNT',
 				'value' => '0.00', 'costs' => '8.90', 'rebate' => '0.00', 'taxrate' => '20.00',
 				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: TNT',
+				'value' => '0.00', 'costs' => '12.90', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -273,6 +301,13 @@ return array(
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
+			array(
+				'label' => 'Demo: Invoice',
+				'value' => '0.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
 		),
 		'media' => array(
 			array(
@@ -329,6 +364,13 @@ return array(
 				'label' => 'Demo: Direct debit',
 				'value' => '0.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '20.00',
 				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Direct debit',
+				'value' => '0.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -401,6 +443,13 @@ return array(
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
+			array(
+				'label' => 'Demo: PayPal',
+				'value' => '0.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
 		),
 		'media' => array(
 			array(
@@ -450,6 +499,13 @@ return array(
 				'label' => 'Demo: Cache on delivery',
 				'value' => '0.00', 'costs' => '8.00', 'rebate' => '0.00', 'taxrate' => '20.00',
 				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Cache on delivery',
+				'value' => '0.00', 'costs' => '12.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -509,6 +565,13 @@ return array(
 				'label' => 'Demo: Prepayment',
 				'value' => '0.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '20.00',
 				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Prepayment',
+				'value' => '0.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
