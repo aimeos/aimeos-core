@@ -535,8 +535,14 @@ class Controller_Frontend_Basket_Default
 			$context = clone $context;
 			$context->getLocale()->setCurrencyId( $currency );
 
-			$manager = MShop_Order_Manager_Factory::createManager( $context );
-			$basket = $manager->getSubManager( 'base' )->getSession();
+			$manager = MShop_Order_Manager_Factory::createManager( $context )->getSubManager( 'base' );
+			$basket = $manager->getSession();
+
+			foreach( $basket->getAddresses() as $type => $item )
+			{
+				$this->setAddress( $type, $item->toArray() );
+				$basket->deleteAddress( $type );
+			}
 
 			foreach( $basket->getProducts() as $pos => $product )
 			{
@@ -545,7 +551,7 @@ class Controller_Frontend_Basket_Default
 					$attrIds = array();
 
 					foreach( $product->getAttributes() as $attrItem ) {
-						$attrIds[ $attrItem-getType() ][] = $attrItem->getAttributeId();
+						$attrIds[ $attrItem->getType() ][] = $attrItem->getAttributeId();
 					}
 
 					$this->addProduct(
@@ -566,12 +572,10 @@ class Controller_Frontend_Basket_Default
 				}
 			}
 
-			foreach( $basket->getAddresses() as $type => $item ) {
-				$this->setAddress( $type, $item->toArray() );
-			}
-
-			foreach( $basket->getCoupons() as $code => $list ) {
+			foreach( $basket->getCoupons() as $code => $list )
+			{
 				$this->addCoupon( $code );
+				$basket->deleteCoupon( $code, true );
 			}
 
 			foreach( $basket->getServices() as $type => $item )
@@ -583,7 +587,10 @@ class Controller_Frontend_Basket_Default
 				}
 
 				$this->setService( $type, $item->getServiceId(), $attributes );
+				$basket->deleteService( $type );
 			}
+
+			$manager->setSession( $basket );
 		}
 
 		$session->set( 'arcavias/basket/currency', $basketCurrency );
