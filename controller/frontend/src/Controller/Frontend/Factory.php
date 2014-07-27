@@ -21,19 +21,19 @@ class Controller_Frontend_Factory
 	/**
 	 * Removes all controller objects from the cache.
 	 *
-	 * If neither a site ID nor a path is given, the complete cache will be pruned.
+	 * If neither a context ID nor a path is given, the complete cache will be pruned.
 	 *
-	 * @param integer $siteid ID of the site to clear
+	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Interface)
 	 * @param string $path Path describing the controller to clear, e.g. "basket"
 	 */
-	static public function clear( $siteid = null, $path = null )
+	static public function clear( $id = null, $path = null )
 	{
-		if( $siteid !== null )
+		if( $id !== null )
 		{
 			if( $path !== null ) {
-				self::$_controllers[$siteid][$path] = null;
+				self::$_controllers[$id][$path] = null;
 			} else {
-				self::$_controllers[$siteid] = array();
+				self::$_controllers[$id] = array();
 			}
 
 			return;
@@ -63,9 +63,9 @@ class Controller_Frontend_Factory
 			throw new Controller_Frontend_Exception( sprintf( 'Controller path is empty' ) );
 		}
 
-		$siteid = $context->getLocale()->getSiteId();
+		$id = (string) $context;
 
-		if( self::$_cache === false || !isset( self::$_controllers[$siteid][$path] ) )
+		if( self::$_cache === false || !isset( self::$_controllers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -90,10 +90,10 @@ class Controller_Frontend_Factory
 				throw new Controller_Frontend_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 			}
 
-			self::$_controllers[$siteid][$path] = $manager;
+			self::$_controllers[$id][$path] = $manager;
 		}
 
-		return self::$_controllers[$siteid][$path];
+		return self::$_controllers[$id][$path];
 	}
 
 

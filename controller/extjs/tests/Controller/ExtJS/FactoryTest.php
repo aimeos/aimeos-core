@@ -92,7 +92,7 @@ class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
 
 		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
 		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
-		Controller_ExtJS_Factory::clear( $context->getLocale()->getSiteId() );
+		Controller_ExtJS_Factory::clear( (string) $context );
 
 		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
 		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
@@ -112,7 +112,7 @@ class Controller_ExtJS_FactoryTest extends MW_Unittest_Testcase
 
 		$cntlA1 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
 		$cntlB1 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );
-		Controller_ExtJS_Factory::clear( $context->getLocale()->getSiteId(), 'attribute' );
+		Controller_ExtJS_Factory::clear( (string) $context, 'attribute' );
 
 		$cntlA2 = Controller_ExtJS_Factory::createController( $context, 'attribute' );
 		$cntlB2 = Controller_ExtJS_Factory::createController( $context, 'attribute/list/type' );

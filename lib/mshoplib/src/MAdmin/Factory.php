@@ -14,7 +14,33 @@
  */
 class MAdmin_Factory
 {
+	static private $_cache = true;
 	static private $_managers = array();
+
+
+	/**
+	 * Removes all manager objects from the cache.
+	 *
+	 * If neither a context ID nor a path is given, the complete cache will be pruned.
+	 *
+	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Interface)
+	 * @param string $path Path describing the manager to clear, e.g. "product/list/type"
+	 */
+	static public function clear( $id = null, $path = null )
+	{
+		if( $id !== null )
+		{
+			if( $path !== null ) {
+				self::$_managers[$id][$path] = null;
+			} else {
+				self::$_managers[$id] = array();
+			}
+
+			return;
+		}
+
+		self::$_managers = array();
+	}
 
 
 	/**
@@ -38,9 +64,9 @@ class MAdmin_Factory
 			throw new MAdmin_Exception( sprintf( 'Manager path is empty' ) );
 		}
 
-		$siteid = $context->getLocale()->getSiteId();
+		$id = (string) $context;
 
-		if( !isset( self::$_managers[$siteid][$path] ) )
+		if( !isset( self::$_managers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -56,7 +82,7 @@ class MAdmin_Factory
 			}
 
 
-			if( !isset( self::$_managers[$siteid][$name] ) )
+			if( !isset( self::$_managers[$id][$name] ) )
 			{
 				$factory = 'MAdmin_' . ucwords( $name ) . '_Manager_Factory';
 
@@ -70,7 +96,7 @@ class MAdmin_Factory
 					throw new MAdmin_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
-				self::$_managers[$siteid][$name] = $manager;
+				self::$_managers[$id][$name] = $manager;
 			}
 
 
@@ -78,14 +104,29 @@ class MAdmin_Factory
 			{
 				$tmpname = $name .  '/' . $part;
 
-				if( !isset( self::$_managers[$siteid][$tmpname] ) ) {
-					self::$_managers[$siteid][$tmpname] = self::$_managers[$siteid][$name]->getSubManager( $part );
+				if( !isset( self::$_managers[$id][$tmpname] ) ) {
+					self::$_managers[$id][$tmpname] = self::$_managers[$id][$name]->getSubManager( $part );
 				}
 
 				$name = $tmpname;
 			}
 		}
 
-		return self::$_managers[$siteid][$path];
+		return self::$_managers[$id][$path];
+	}
+
+
+	/**
+	 * Enables or disables caching of class instances.
+	 *
+	 * @param boolean $value True to enable caching, false to disable it.
+	 * @return boolean Previous cache setting
+	 */
+	static public function setCache( $value )
+	{
+		$old = self::$_cache;
+		self::$_cache = (boolean) $value;
+
+		return $old;
 	}
 }

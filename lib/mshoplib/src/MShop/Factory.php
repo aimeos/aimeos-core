@@ -21,19 +21,19 @@ class MShop_Factory
 	/**
 	 * Removes all manager objects from the cache.
 	 *
-	 * If neither a site ID nor a path is given, the complete cache will be pruned.
+	 * If neither a context ID nor a path is given, the complete cache will be pruned.
 	 *
-	 * @param integer $siteid ID of the site to clear
+	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Interface)
 	 * @param string $path Path describing the manager to clear, e.g. "product/list/type"
 	 */
-	static public function clear( $siteid = null, $path = null )
+	static public function clear( $id = null, $path = null )
 	{
-		if( $siteid !== null )
+		if( $id !== null )
 		{
 			if( $path !== null ) {
-				self::$_managers[$siteid][$path] = null;
+				self::$_managers[$id][$path] = null;
 			} else {
-				self::$_managers[$siteid] = array();
+				self::$_managers[$id] = array();
 			}
 
 			return;
@@ -65,9 +65,9 @@ class MShop_Factory
 			throw new MShop_Exception( sprintf( 'Manager path is empty' ) );
 		}
 
-		$siteid = $context->getLocale()->getSiteId();
+		$id = (string) $context;
 
-		if( self::$_cache === false || !isset( self::$_managers[$siteid][$path] ) )
+		if( self::$_cache === false || !isset( self::$_managers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -83,7 +83,7 @@ class MShop_Factory
 			}
 
 
-			if( self::$_cache === false || !isset( self::$_managers[$siteid][$name] ) )
+			if( self::$_cache === false || !isset( self::$_managers[$id][$name] ) )
 			{
 				$factory = 'MShop_' . ucwords( $name ) . '_Manager_Factory';
 
@@ -97,7 +97,7 @@ class MShop_Factory
 					throw new MShop_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
-				self::$_managers[$siteid][$name] = $manager;
+				self::$_managers[$id][$name] = $manager;
 			}
 
 
@@ -105,15 +105,15 @@ class MShop_Factory
 			{
 				$tmpname = $name .  '/' . $part;
 
-				if( self::$_cache === false || !isset( self::$_managers[$siteid][$tmpname] ) ) {
-					self::$_managers[$siteid][$tmpname] = self::$_managers[$siteid][$name]->getSubManager( $part );
+				if( self::$_cache === false || !isset( self::$_managers[$id][$tmpname] ) ) {
+					self::$_managers[$id][$tmpname] = self::$_managers[$id][$name]->getSubManager( $part );
 				}
 
 				$name = $tmpname;
 			}
 		}
 
-		return self::$_managers[$siteid][$path];
+		return self::$_managers[$id][$path];
 	}
 
 

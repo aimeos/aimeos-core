@@ -8,6 +8,7 @@
 class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_context;
 	private $_testItem;
 
 
@@ -22,7 +23,8 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 	protected function setUp()
 	{
-		$this->_object = new Controller_Frontend_Basket_Default( TestHelper::getContext() );
+		$this->_context = TestHelper::getContext();
+		$this->_object = new Controller_Frontend_Basket_Default( $this->_context );
 
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 
@@ -40,6 +42,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	protected function tearDown()
 	{
 		$this->_object->clear();
+		$this->_context->getSession()->set( 'arcavias', array() );
 
 		unset( $this->_object, $this->_testItem );
 	}
@@ -703,16 +706,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetBillingAddressByItem()
 	{
-		$customer = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext() );
-		$addressManager = $customer->getSubManager( 'address', 'Default' );
-
-		$search = $addressManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.company', 'Metaways' ) );
-		$items = $addressManager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No address item with company "Metaways" found' );
-		}
+		$item = $this->_getAddress( 'Metaways' );
 
 		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $item );
 
@@ -770,16 +764,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetDeliveryAddressByItem()
 	{
-		$customer = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext() );
-		$addressManager = $customer->getSubManager( 'address', 'Default' );
-
-		$search = $addressManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.company', 'Metaways' ) );
-		$items = $addressManager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No address item with company "Metaways" found' );
-		}
+		$item = $this->_getAddress( 'Metaways' );
 
 		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY, $item );
 
@@ -836,15 +821,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetServicePayment()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
-
-		$search = $serviceManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.code', 'unitpaymentcode') );
-		$result = $serviceManager->searchItems( $search, array( 'text' ) );
-
-		if( ( $service = reset( $result ) ) === false ) {
-			throw new Exception('No item found');
-		}
+		$service = $this->_getService( 'unitpaymentcode' );
 
 		$this->_object->setService( 'payment', $service->getId(), array() );
 		$this->assertEquals( 'unitpaymentcode', $this->_object->get()->getService( 'payment' )->getCode() );
@@ -856,21 +833,103 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSetDeliveryOption()
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
-
-		$search = $serviceManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'service.code', 'unitcode') );
-
-		$result = $serviceManager->searchItems( $search, array( 'text' ) );
-
-		if( ( $service = reset( $result ) ) === false ) {
-			throw new Exception('No item found');
-		}
+		$service = $this->_getService( 'unitcode' );
 
 		$this->_object->setService( 'delivery', $service->getId(), array() );
 		$this->assertEquals( 'unitcode', $this->_object->get()->getService( 'delivery' )->getCode() );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
 		$this->_object->setService( 'delivery', $service->getId(), array( 'fast shipping' => true, 'air shipping' => false ) );
+	}
+
+
+	public function testCheckCurrency()
+	{
+		$this->_object->addProduct( $this->_testItem->getId(), 2 );
+		$this->_object->addCoupon( 'OPQR' );
+
+		$this->_object->setService( 'payment', $this->_getService( 'unitpaymentcode' )->getId() );
+		$this->_object->setService( 'delivery', $this->_getService( 'unitcode' )->getId() );
+
+		$basket = $this->_object->get();
+		$price = $basket->getPrice();
+
+		foreach( $basket->getProducts() as $product )
+		{
+			$this->assertEquals( 2, $product->getQuantity() );
+			$product->getPrice()->setCurrencyId( 'CHF' );
+		}
+
+		$basket->getService( 'delivery' )->getPrice()->setCurrencyId( 'CHF' );
+		$basket->getService( 'payment' )->getPrice()->setCurrencyId( 'CHF' );
+		$basket->getLocale()->setCurrencyId( 'CHF' );
+		$price->setCurrencyId( 'CHF' );
+
+		$this->_context->getLocale()->setCurrencyId( 'CHF' );
+		$this->_object->setAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT, $this->_getAddress( 'Metaways' ) );
+
+		$this->_context->getSession()->set( 'arcavias/basket/currency', 'CHF' );
+		$this->_context->getLocale()->setCurrencyId( 'EUR' );
+
+		$this->_context->getSession()->set( 'arcavias/basket/content-unittest-EUR-', null );
+
+		$object = new Controller_Frontend_Basket_Default( $this->_context );
+		$basket = $object->get();
+
+		foreach( $basket->getProducts() as $product )
+		{
+			$this->assertEquals( 'EUR', $product->getPrice()->getCurrencyId() );
+			$this->assertEquals( 2, $product->getQuantity() );
+		}
+
+		$this->assertEquals( 'EUR', $basket->getService( 'payment' )->getPrice()->getCurrencyId() );
+		$this->assertEquals( 'EUR', $basket->getService( 'delivery' )->getPrice()->getCurrencyId() );
+		$this->assertEquals( 'EUR', $basket->getLocale()->getCurrencyId() );
+		$this->assertEquals( 'EUR', $basket->getPrice()->getCurrencyId() );
+	}
+
+
+	public function testCheckCurrencyProductError()
+	{
+		$this->_object->addProduct( $this->_testItem->getId(), 2 );
+
+		$this->_context->getLocale()->setCurrencyId( 'CHF' );
+
+		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
+		$object = new Controller_Frontend_Basket_Default( $this->_context );
+	}
+
+
+	protected function _getAddress( $company )
+	{
+		$customer = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
+		$addressManager = $customer->getSubManager( 'address', 'Default' );
+
+		$search = $addressManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.address.company', $company ) );
+		$items = $addressManager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( sprintf( 'No address item with company "%1$s" found', $company ) );
+		}
+
+		return $item;
+	}
+
+
+	protected function _getService( $code )
+	{
+		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $serviceManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'service.code', $code ) );
+
+		$result = $serviceManager->searchItems( $search, array( 'text' ) );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( sprintf( 'No service item with code "%1$s" found', $code ) );
+		}
+
+		return $item;
 	}
 }

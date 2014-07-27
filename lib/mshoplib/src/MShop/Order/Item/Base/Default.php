@@ -604,7 +604,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 			}
 		}
 
-		return clone $this->_price;
+		return $this->_price;
 	}
 
 

@@ -85,7 +85,7 @@ class Controller_Frontend_FactoryTest extends MW_Unittest_Testcase
 
 		$basket1 = Controller_Frontend_Factory::createController( $context, 'basket' );
 		$catalog1 = Controller_Frontend_Factory::createController( $context, 'catalog' );
-		Controller_Frontend_Factory::clear( $context->getLocale()->getSiteId() );
+		Controller_Frontend_Factory::clear( (string) $context );
 
 		$basket2 = Controller_Frontend_Factory::createController( $context, 'basket' );
 		$catalog2 = Controller_Frontend_Factory::createController( $context, 'catalog' );
@@ -105,7 +105,7 @@ class Controller_Frontend_FactoryTest extends MW_Unittest_Testcase
 
 		$basket1 = Controller_Frontend_Factory::createController( $context, 'basket' );
 		$catalog1 = Controller_Frontend_Factory::createController( $context, 'catalog' );
-		Controller_Frontend_Factory::clear( $context->getLocale()->getSiteId(), 'basket' );
+		Controller_Frontend_Factory::clear( (string) $context, 'basket' );
 
 		$basket2 = Controller_Frontend_Factory::createController( $context, 'basket' );
 		$catalog2 = Controller_Frontend_Factory::createController( $context, 'catalog' );

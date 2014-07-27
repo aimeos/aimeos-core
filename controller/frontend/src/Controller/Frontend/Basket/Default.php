@@ -35,6 +35,8 @@ class Controller_Frontend_Basket_Default
 
 		$this->_domainManager = MShop_Factory::createManager( $context, 'order/base' );
 		$this->_basket = $this->_domainManager->getSession();
+
+		$this->_checkCurrency();
 	}
 
 
@@ -510,6 +512,97 @@ class Controller_Frontend_Basket_Default
 		if( reset( $result ) === false )
 		{
 			$msg = sprintf( 'Adding product with ID "%1$s" is not allowed', $prodid );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+	}
+
+
+	/**
+	 * Checks for a currency mismatch and migrates the products to the new basket if necessary.
+	 *
+	 * @throws Controller_Basket_Exception If one or more products couldn't migrated
+	 */
+	protected function _checkCurrency()
+	{
+		$errors = 0;
+		$context = $this->_getContext();
+		$session = $context->getSession();
+		$currency = $session->get( 'arcavias/basket/currency' );
+		$basketCurrency = $this->_basket->getPrice()->getCurrencyId();
+
+		if( $currency !== null && $currency !== $basketCurrency )
+		{
+			$context = clone $context;
+			$context->getLocale()->setCurrencyId( $currency );
+
+			$manager = MShop_Order_Manager_Factory::createManager( $context )->getSubManager( 'base' );
+			$basket = $manager->getSession();
+
+			foreach( $basket->getAddresses() as $type => $item )
+			{
+				$this->setAddress( $type, $item->toArray() );
+				$basket->deleteAddress( $type );
+			}
+
+			foreach( $basket->getProducts() as $pos => $product )
+			{
+				try
+				{
+					$attrIds = array();
+
+					foreach( $product->getAttributes() as $attrItem ) {
+						$attrIds[ $attrItem->getType() ][] = $attrItem->getAttributeId();
+					}
+
+					$this->addProduct(
+						$product->getProductId(),
+						$product->getQuantity(),
+						array(),
+						( isset( $attrIds['variant'] ) ? $attrIds['variant'] : array() ),
+						( isset( $attrIds['config'] ) ? $attrIds['config'] : array() ),
+						( isset( $attrIds['hidden'] ) ? $attrIds['hidden'] : array() ),
+						$product->getWarehouseCode()
+					);
+
+					$basket->deleteProduct( $pos );
+				}
+				catch( Exception $e )
+				{
+					$errors++;
+				}
+			}
+
+			foreach( $basket->getCoupons() as $code => $list )
+			{
+				$this->addCoupon( $code );
+				$basket->deleteCoupon( $code, true );
+			}
+
+			foreach( $basket->getServices() as $type => $item )
+			{
+				$attributes = array();
+
+				foreach( $item->getAttributes() as $attrItem ) {
+					$attributes[ $attrItem->getCode() ] = $attrItem->getValue();
+				}
+
+				$this->setService( $type, $item->getServiceId(), $attributes );
+				$basket->deleteService( $type );
+			}
+
+			$manager->setSession( $basket );
+		}
+
+		$session->set( 'arcavias/basket/currency', $basketCurrency );
+
+		if( $errors > 0 )
+		{
+			$msg = $context->getI18n()->dn(
+				'controller/frontend',
+				sprintf( 'One of the products isn\'t available for the currency "%1$s"', $basketCurrency ),
+				sprintf( '%2$s products aren\'t available for the currency "%1$s"', $basketCurrency, $errors ),
+				$errors
+			);
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 	}

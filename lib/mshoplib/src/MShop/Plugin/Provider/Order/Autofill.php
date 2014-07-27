@@ -82,8 +82,11 @@ class MShop_Plugin_Provider_Order_Autofill
 					$search->setConditions( $search->compare( '==', 'order.base.service.baseid', $item->getBaseId() ) );
 					$services = $manager->searchItems( $search );
 
-					foreach( $services as $service ) {
-						$order->setService( $service, $service->getType() );
+					foreach( $services as $service )
+					{
+						$type = $service->getType();
+						$item = $this->_getServiceItem( $order, $type, $service->getCode() );
+						$order->setService( $service, $type );
 					}
 				}
 			}

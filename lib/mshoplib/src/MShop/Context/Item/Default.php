@@ -66,6 +66,21 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 
 
 	/**
+	 * Returns a hash identifying the context object.
+	 *
+	 * @return string Hash for identifying the context object
+	 */
+	public function __toString()
+	{
+		if( isset( $this->_locale ) ) {
+			return spl_object_hash( $this->_locale );
+		}
+
+		return '0';
+	}
+
+
+	/**
 	 * Sets the cache object.
 	 *
 	 * @param MW_Cache_Interface $cache Cache object
