@@ -372,6 +372,7 @@ abstract class Client_Html_Abstract
 	 */
 	protected function _getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '', array $config = array() )
 	{
+		$locale = $this->_getContext()->getLocale();
 		$params = $this->_getClientParams( $this->getView()->param(), $prefixes );
 		ksort( $params );
 
@@ -379,7 +380,7 @@ abstract class Client_Html_Abstract
 			throw new Client_Html_Exception( 'Unable to encode parameters or configuration options' );
 		}
 
-		return md5( $key . $pstr . $cstr );
+		return md5( $key . $pstr . $cstr . $locale->getLanguageId() . $locale->getCurrencyId() );
 	}
 
 
