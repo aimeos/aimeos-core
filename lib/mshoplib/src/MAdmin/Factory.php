@@ -38,9 +38,9 @@ class MAdmin_Factory
 			throw new MAdmin_Exception( sprintf( 'Manager path is empty' ) );
 		}
 
-		$siteid = $context->getLocale()->getSiteId();
+		$id = (string) $context;
 
-		if( !isset( self::$_managers[$siteid][$path] ) )
+		if( !isset( self::$_managers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -56,7 +56,7 @@ class MAdmin_Factory
 			}
 
 
-			if( !isset( self::$_managers[$siteid][$name] ) )
+			if( !isset( self::$_managers[$id][$name] ) )
 			{
 				$factory = 'MAdmin_' . ucwords( $name ) . '_Manager_Factory';
 
@@ -70,7 +70,7 @@ class MAdmin_Factory
 					throw new MAdmin_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
-				self::$_managers[$siteid][$name] = $manager;
+				self::$_managers[$id][$name] = $manager;
 			}
 
 
@@ -78,14 +78,14 @@ class MAdmin_Factory
 			{
 				$tmpname = $name .  '/' . $part;
 
-				if( !isset( self::$_managers[$siteid][$tmpname] ) ) {
-					self::$_managers[$siteid][$tmpname] = self::$_managers[$siteid][$name]->getSubManager( $part );
+				if( !isset( self::$_managers[$id][$tmpname] ) ) {
+					self::$_managers[$id][$tmpname] = self::$_managers[$id][$name]->getSubManager( $part );
 				}
 
 				$name = $tmpname;
 			}
 		}
 
-		return self::$_managers[$siteid][$path];
+		return self::$_managers[$id][$path];
 	}
 }

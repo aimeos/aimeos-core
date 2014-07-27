@@ -63,9 +63,9 @@ class Controller_Frontend_Factory
 			throw new Controller_Frontend_Exception( sprintf( 'Controller path is empty' ) );
 		}
 
-		$siteid = $context->getLocale()->getSiteId();
+		$id = (string) $context;
 
-		if( self::$_cache === false || !isset( self::$_controllers[$siteid][$path] ) )
+		if( self::$_cache === false || !isset( self::$_controllers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -90,10 +90,10 @@ class Controller_Frontend_Factory
 				throw new Controller_Frontend_Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 			}
 
-			self::$_controllers[$siteid][$path] = $manager;
+			self::$_controllers[$id][$path] = $manager;
 		}
 
-		return self::$_controllers[$siteid][$path];
+		return self::$_controllers[$id][$path];
 	}
 
 
