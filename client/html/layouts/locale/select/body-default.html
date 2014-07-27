@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
+ * @license LGPLv3, http://www.arcavias.com/en/license
+ */
+
+$enc = $this->encoder();
+
+?>
+<section class="arcavias locale-select">
+<?php if( ( $errors = $this->get( 'selectErrorList', array() ) ) !== array() ) : ?>
+	<ul class="error-list">
+<?php foreach( $errors as $error ) : ?>
+		<li class="error-item"><?php echo $enc->html( $error ); ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+<?php echo $this->get( 'selectBody' ); ?>
+</section>

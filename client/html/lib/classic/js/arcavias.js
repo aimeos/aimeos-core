@@ -51,6 +51,16 @@ arcaviasLazyLoader();
 jQuery(document).ready( function($) {
 
 	/*
+	 * Locale selector
+	 */
+	$( ".select-menu .select-dropdown" ).click( function() {
+		$( "ul", this ).toggleClass( "active" );
+		$( this ).toggleClass( "active" );
+	});
+
+	
+	
+	/*
 	 * Catalog clients
 	 */
 
