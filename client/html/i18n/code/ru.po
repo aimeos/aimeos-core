@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2014-07-20 15:32+0000\n"
+"PO-Revision-Date: 2014-07-22 09:59+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +117,7 @@ msgstr "в ожидании"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "в процессе"
+msgstr "в обработке"
 
 #. Delivery status value
 msgid "stat:3"

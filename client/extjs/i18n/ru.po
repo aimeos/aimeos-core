@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-20 18:54+0200\n"
-"PO-Revision-Date: 2014-07-20 15:24+0000\n"
+"PO-Revision-Date: 2014-07-24 09:14+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -253,7 +253,7 @@ msgstr "Невозможно загрузить файл. Известите а�
 
 #: src/panel/coupon/code/ListUi.js:59 src/panel/coupon/code/ItemUi.js:66
 msgid "Count"
-msgstr "Счётчик"
+msgstr "Цикл"
 
 #: src/panel/order/address/DeliveryItemUi.js:85
 #: src/panel/order/address/ItemUi.js:100
@@ -1251,7 +1251,7 @@ msgstr "Такая комбинация уже имеется"
 #: src/panel/order/address/DeliveryItemUi.js:49
 #: src/panel/order/address/ItemUi.js:64
 msgid "Title"
-msgstr "Заголовок"
+msgstr "Титул"
 
 #: src/panel/order/OrderItemUi.js:51
 msgid "Total"
