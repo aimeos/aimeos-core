@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-20 18:54+0200\n"
-"PO-Revision-Date: 2014-07-20 16:54+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"PO-Revision-Date: 2014-07-23 09:15+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,7 +139,7 @@ msgstr "+ Издержки на оплату"
 #: layouts/email/common/text-summary-detail-body-default.html:89
 #: layouts/email/common/text-summary-detail-body-default.html:99
 msgid "+ Shipping"
-msgstr "+ Доставка"
+msgstr "+ Перевозка"
 
 #. / Rebate percent format with rebate percent value (%1$s)
 #: layouts/email/watch/text-detail-body-default.html:28
@@ -675,7 +675,7 @@ msgstr "Оплата и доставка"
 
 #: layouts/common/summary/detail-body-default.html:209
 msgid "Shipping"
-msgstr "Пересылка"
+msgstr "Перевозка"
 
 #: layouts/catalog/filter/body-default.html:114
 msgid "Show"
