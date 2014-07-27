@@ -21,19 +21,19 @@ class MShop_Factory
 	/**
 	 * Removes all manager objects from the cache.
 	 *
-	 * If neither a site ID nor a path is given, the complete cache will be pruned.
+	 * If neither a context ID nor a path is given, the complete cache will be pruned.
 	 *
-	 * @param integer $siteid ID of the site to clear
+	 * @param integer $id Context ID the objects have been created with (string of MShop_Context_Item_Interface)
 	 * @param string $path Path describing the manager to clear, e.g. "product/list/type"
 	 */
-	static public function clear( $siteid = null, $path = null )
+	static public function clear( $id = null, $path = null )
 	{
-		if( $siteid !== null )
+		if( $id !== null )
 		{
 			if( $path !== null ) {
-				self::$_managers[$siteid][$path] = null;
+				self::$_managers[$id][$path] = null;
 			} else {
-				self::$_managers[$siteid] = array();
+				self::$_managers[$id] = array();
 			}
 
 			return;

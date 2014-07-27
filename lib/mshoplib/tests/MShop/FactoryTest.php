@@ -92,7 +92,7 @@ class MShop_FactoryTest extends MW_Unittest_Testcase
 
 		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
 		$managerB1 = MShop_Factory::createManager( $context, 'attribute/list/type' );
-		MShop_Factory::clear( $context->getLocale()->getSiteId() );
+		MShop_Factory::clear( (string) $context );
 
 		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
 		$managerB2 = MShop_Factory::createManager( $context, 'attribute/list/type' );
@@ -112,7 +112,7 @@ class MShop_FactoryTest extends MW_Unittest_Testcase
 
 		$managerA1 = MShop_Factory::createManager( $context, 'attribute' );
 		$managerB1 = MShop_Factory::createManager( $context, 'attribute/list/type' );
-		MShop_Factory::clear( $context->getLocale()->getSiteId(), 'attribute' );
+		MShop_Factory::clear( (string) $context, 'attribute' );
 
 		$managerA2 = MShop_Factory::createManager( $context, 'attribute' );
 		$managerB2 = MShop_Factory::createManager( $context, 'attribute/list/type' );
