@@ -49,9 +49,14 @@ class MW_Jsb2_Default
 	 */
 	public function getHTML( $type = null )
 	{
+		$sep = '?';
 		$html = '';
 		$filesToDisplay = array();
 		$ds = DIRECTORY_SEPARATOR;
+
+		if( strpos( $this->_baseURL, '?' ) !== false ) {
+			$sep = '&';
+		}
 
 		foreach ( $this->_registeredPackages as $filetype => $packageList )
 		{
@@ -63,7 +68,6 @@ class MW_Jsb2_Default
 			{
 				$usePackage = true;
 				$packageFile = $this->_deployDir . $package->file;
-				$packageFileURL = $this->_baseURL . $packageFile;
 				$packageFileFilesystem = $this->_basePath . $packageFile;
 				$packageFileTime = 0;
 
@@ -93,11 +97,11 @@ class MW_Jsb2_Default
 						$usePackage = false;
 					}
 
-					$filesToDisplay[] = $this->_baseURL . $singleFile->path . $singleFile->text . '?v=' . $fileTime;
+					$filesToDisplay[] = $this->_baseURL . $singleFile->path . $singleFile->text . $sep . 'v=' . $fileTime;
 				}
 
 				if( $usePackage === true) {
-					$filesToDisplay = array( $packageFileURL . '?v=' . $packageFileTime );
+					$filesToDisplay = array( $this->_baseURL . $packageFile . $sep . 'v=' . $packageFileTime );
 				}
 
 				foreach( $filesToDisplay as $singleFile )
