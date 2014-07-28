@@ -492,9 +492,10 @@
 }
 
 .locale-select ul.select-menu {
-	border: 1px solid #FFF;
 	text-transform: uppercase;
+	border: 1px solid #FFF;
 	position: relative;
+	list-style: none;
 	padding: 4px;
 }
 
