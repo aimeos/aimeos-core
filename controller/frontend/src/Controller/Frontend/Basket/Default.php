@@ -36,7 +36,7 @@ class Controller_Frontend_Basket_Default
 		$this->_domainManager = MShop_Factory::createManager( $context, 'order/base' );
 		$this->_basket = $this->_domainManager->getSession();
 
-		$this->_checkCurrency();
+		$this->_checkLocale();
 	}
 
 
@@ -518,30 +518,47 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
-	 * Checks for a currency mismatch and migrates the products to the new basket if necessary.
+	 * Checks for a locale mismatch and migrates the products to the new basket if necessary.
 	 *
 	 * @throws Controller_Basket_Exception If one or more products couldn't migrated
 	 */
-	protected function _checkCurrency()
+	protected function _checkLocale()
 	{
-		$errors = 0;
+		$errors = array();
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$currency = $session->get( 'arcavias/basket/currency' );
-		$basketCurrency = $this->_basket->getPrice()->getCurrencyId();
+		$locale = $this->_basket->getLocale();
 
-		if( $currency !== null && $currency !== $basketCurrency )
+		$localeStr = $session->get( 'arcavias/basket/locale' );
+		$localeKey = $locale->getSite()->getCode() . '|' . $locale->getLanguageId() . '|' . $locale->getCurrencyId();
+
+		if( $localeStr !== null && $localeStr !== $localeKey )
 		{
+			$locParts = explode( '|', $localeStr );
+			$locSite = ( isset( $locParts[0] ) ? $locParts[0] : '' );
+			$locLanguage = ( isset( $locParts[1] ) ? $locParts[1] : '' );
+			$locCurrency = ( isset( $locParts[2] ) ? $locParts[2] : '' );
+
+			$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
+			$locale = $localeManager->bootstrap( $locSite, $locLanguage, $locCurrency, false );
+
 			$context = clone $context;
-			$context->getLocale()->setCurrencyId( $currency );
+			$context->setLocale( $locale );
 
 			$manager = MShop_Order_Manager_Factory::createManager( $context )->getSubManager( 'base' );
 			$basket = $manager->getSession();
 
 			foreach( $basket->getAddresses() as $type => $item )
 			{
-				$this->setAddress( $type, $item->toArray() );
-				$basket->deleteAddress( $type );
+				try
+				{
+					$this->setAddress( $type, $item->toArray() );
+					$basket->deleteAddress( $type );
+				}
+				catch( Exception $e )
+				{
+					$errors['address'][$type] = $e->getMessage();
+				}
 			}
 
 			foreach( $basket->getProducts() as $pos => $product )
@@ -568,42 +585,54 @@ class Controller_Frontend_Basket_Default
 				}
 				catch( Exception $e )
 				{
-					$errors++;
+					$errors['product'][$pos] = $e->getMessage();
 				}
 			}
 
 			foreach( $basket->getCoupons() as $code => $list )
 			{
-				$this->addCoupon( $code );
-				$basket->deleteCoupon( $code, true );
+				try
+				{
+					$this->addCoupon( $code );
+					$basket->deleteCoupon( $code, true );
+				}
+				catch( Exception $e )
+				{
+					$errors['coupon'][$code] = $e->getMessage();
+				}
 			}
 
 			foreach( $basket->getServices() as $type => $item )
 			{
-				$attributes = array();
+				try
+				{
+					$attributes = array();
 
-				foreach( $item->getAttributes() as $attrItem ) {
-					$attributes[ $attrItem->getCode() ] = $attrItem->getValue();
+					foreach( $item->getAttributes() as $attrItem ) {
+						$attributes[ $attrItem->getCode() ] = $attrItem->getValue();
+					}
+
+					$this->setService( $type, $item->getServiceId(), $attributes );
+					$basket->deleteService( $type );
 				}
-
-				$this->setService( $type, $item->getServiceId(), $attributes );
-				$basket->deleteService( $type );
+				catch( Exception $e )
+				{
+					$errors['service'][$type] = $e->getMessage();
+				}
 			}
 
 			$manager->setSession( $basket );
 		}
 
-		$session->set( 'arcavias/basket/currency', $basketCurrency );
+		$session->set( 'arcavias/basket/locale', $localeKey );
 
-		if( $errors > 0 )
+		if( !empty( $errors ) )
 		{
-			$msg = $context->getI18n()->dn(
+			$msg = $context->getI18n()->dt(
 				'controller/frontend',
-				sprintf( 'One of the products isn\'t available for the currency "%1$s"', $basketCurrency ),
-				sprintf( '%2$s products aren\'t available for the currency "%1$s"', $basketCurrency, $errors ),
-				$errors
+				sprintf( 'One or more items aren\'t available for the current locale' )
 			);
-			throw new Controller_Frontend_Basket_Exception( $msg );
+			throw new Controller_Frontend_Basket_Exception( $msg, 0, null, $errors );
 		}
 	}
 
