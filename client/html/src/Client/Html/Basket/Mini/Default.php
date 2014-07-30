@@ -79,11 +79,12 @@ class Client_Html_Basket_Mini_Default
 	{
 		$context = $this->_getContext();
 		$session = $context->getSession();
+		$site = $context->getLocale()->getSiteId();
 		$view = $this->getView();
 
 		$html = null;
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
-		$key = $this->_getParamHash( array(), $uid . ':basket:mini-body', $config );
+		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-body', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
@@ -170,11 +171,12 @@ class Client_Html_Basket_Mini_Default
 	{
 		$context = $this->_getContext();
 		$session = $context->getSession();
+		$site = $context->getLocale()->getSiteId();
 		$view = $this->getView();
 
 		$html = null;
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
-		$key = $this->_getParamHash( array(), $uid . ':basket:mini-header', $config );
+		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-header', $config );
 
 		if( ( $html = $session->get( $key ) ) === null )
 		{
