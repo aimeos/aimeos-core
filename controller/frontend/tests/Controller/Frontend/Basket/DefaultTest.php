@@ -843,7 +843,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testCheckCurrency()
+	public function testCheckLocale()
 	{
 		$this->_object->addProduct( $this->_testItem->getId(), 2 );
 		$this->_object->addCoupon( 'OPQR' );
@@ -871,7 +871,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$this->_context->getSession()->set( 'arcavias/basket/currency', 'CHF' );
 		$this->_context->getLocale()->setCurrencyId( 'EUR' );
 
-		$this->_context->getSession()->set( 'arcavias/basket/content-unittest-EUR-', null );
+		$this->_context->getSession()->set( 'arcavias/basket/content-unittest-en-EUR-', null );
 
 		$object = new Controller_Frontend_Basket_Default( $this->_context );
 		$basket = $object->get();
@@ -889,7 +889,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testCheckCurrencyProductError()
+	public function testCheckLocaleProductError()
 	{
 		$this->_object->addProduct( $this->_testItem->getId(), 2 );
 
