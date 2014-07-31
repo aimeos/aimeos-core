@@ -100,6 +100,7 @@ class Client_Html_Catalog_List_Default
 	private $_tags = array();
 	private $_expire;
 	private $_cache;
+	private $_view;
 
 
 	/**
@@ -112,16 +113,11 @@ class Client_Html_Catalog_List_Default
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
-		$cache = $context->getCache();
-		$view = $this->getView();
-
-		$html = null;
-		$config = $context->getConfig()->get( 'client/html/catalog/list', array() );
-		$key = $this->_getParamHash( array( 'f', 'l' ), $uid . ':catalog:list-body', $config );
-
-		if( ( $html = $cache->get( $key ) ) === null )
+		if( ( $html = $this->_getCached( 'body', $uid ) ) === null )
 		{
+			$context = $this->_getContext();
+			$view = $this->getView();
+
 			try
 			{
 				$view = $this->_setViewParams( $view, $tags, $expire );
@@ -180,7 +176,7 @@ class Client_Html_Catalog_List_Default
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-			$cache->set( $key, $html, array_unique( $tags ), $expire );
+			$this->_setCached( 'body', $uid, $html, $tags, $expire );
 		}
 		else
 		{
@@ -201,16 +197,11 @@ class Client_Html_Catalog_List_Default
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		$context = $this->_getContext();
-		$cache = $context->getCache();
-		$view = $this->getView();
-
-		$html = null;
-		$config = $context->getConfig()->get( 'client/html/catalog/list', array() );
-		$key = $this->_getParamHash( array( 'f', 'l' ), $uid . ':catalog:list-header', $config );
-
-		if( ( $html = $cache->get( $key ) ) === null )
+		if( ( $html = $this->_getCached( 'header', $uid ) ) === null )
 		{
+			$context = $this->_getContext();
+			$view = $this->getView();
+
 			try
 			{
 				$view = $this->_setViewParams( $view, $tags, $expire );
@@ -247,7 +238,7 @@ class Client_Html_Catalog_List_Default
 
 				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
 
-				$cache->set( $key, $html, array_unique( $tags ), $expire );
+				$this->_setCached( 'header', $uid, $html, $tags, $expire );
 			}
 			catch( Exception $e )
 			{
@@ -319,6 +310,67 @@ class Client_Html_Catalog_List_Default
 
 
 	/**
+	 * Returns the cache entry for the given unique ID and type.
+	 *
+	 * @param string $type Type of the cache entry, i.e. "body" or "header"
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @return string Cached entry or empty string if not available
+	 */
+	protected function _getCached( $type, $uid )
+	{
+		if( !isset( $this->_cache ) )
+		{
+			$context = $this->_getContext();
+			$config = $context->getConfig()->get( 'client/html/catalog/list', array() );
+
+			$keys = array(
+				'body' => $this->_getParamHash( array( 'f', 'l' ), $uid . ':catalog:list-body', $config ),
+				'header' => $this->_getParamHash( array( 'f', 'l' ), $uid . ':catalog:list-header', $config ),
+			);
+
+			$entries = $context->getCache()->getList( $keys );
+			$this->_cache = array();
+
+			foreach( $keys as $key => $hash ) {
+				$this->_cache[$key] = ( array_key_exists( $hash, $entries ) ? $entries[$hash] : null );
+			}
+		}
+
+		return ( array_key_exists( $type, $this->_cache ) ? $this->_cache[$type] : null );
+	}
+
+
+	/**
+	 * Returns the cache entry for the given type and unique ID.
+	 *
+	 * @param string $type Type of the cache entry, i.e. "body" or "header"
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @param mixed $value Value string that should be stored for the given key
+	 * @param array $tags List of tag strings that should be assoicated to the
+	 * 	given value in the cache
+	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * 	format when the cache entry expires
+	 */
+	protected function _setCached( $type, $uid, $value, array $tags, $expire )
+	{
+		$context = $this->_getContext();
+
+		try
+		{
+			$config = $context->getConfig()->get( 'client/html/catalog/list', array() );
+			$key = $this->_getParamHash( array( 'f', 'l' ), $uid . ':catalog:list-' . $type, $config );
+
+			$context->getCache()->set( $key, $value, array_unique( $tags ), $expire );
+		}
+		catch( Exception $e )
+		{
+			$msg = sprintf( 'Unable to set cache entry: %1$s', $e->getMessage() );
+			$context->getLogger()->log( $msg, MW_Logger_Abstract::NOTICE );
+		}
+	}
+
+
+	/**
 	 * Returns the list of sub-client names configured for the client.
 	 *
 	 * @return array List of HTML client names
@@ -339,7 +391,7 @@ class Client_Html_Catalog_List_Default
 	 */
 	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
 	{
-		if( !isset( $this->_cache ) )
+		if( !isset( $this->_view ) )
 		{
 			$context = $this->_getContext();
 			$config = $context->getConfig();
@@ -485,12 +537,12 @@ class Client_Html_Catalog_List_Default
 			$view->listProductSort = $view->param( 'f-sort', 'relevance' );
 			$view->listProductItems = $products;
 
-			$this->_cache = $view;
+			$this->_view = $view;
 		}
 
 		$expire = $this->_expires( $this->_expire, $expire );
 		$tags = array_merge( $tags, $this->_tags );
 
-		return $this->_cache;
+		return $this->_view;
 	}
 }
