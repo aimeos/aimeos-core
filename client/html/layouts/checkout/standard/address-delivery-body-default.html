@@ -153,10 +153,6 @@ $allFields = array_keys( $deliveryCss );
 				<label for="address-delivery-state"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
 				</label><input type="text" id="address-delivery-state" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.state' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-delivery/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item vatid <?php echo ( isset( $deliveryCss['order.base.address.vatid'] ) ? join( ' ', $deliveryCss['order.base.address.vatid'] ) : '' ); ?>">
-				<label for="address-delivery-vatid"><?php echo $enc->html( $this->translate( 'client/html', 'Vat ID' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-delivery-vatid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.vatid' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-delivery/order.base.address.vatid', ( isset( $addrArray['order.base.address.vatid'] ) ? $addrArray['order.base.address.vatid'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.vatid', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
 			<li class="form-item countryid <?php echo ( isset( $deliveryCss['order.base.address.countryid'] ) ? join( ' ', $deliveryCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-delivery-countryid"><?php echo $enc->html( $this->translate( 'client/html', 'Country' ), $enc::TRUST ); ?>
 				</label><select id="address-delivery-countryid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.countryid' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
@@ -175,6 +171,10 @@ $allFields = array_keys( $deliveryCss );
 					<option value="<?php echo $enc->attr( $languageId ); ?>" <?php echo ( $languageId === $deliveryLanguage ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/language', $languageId ) ); ?></option>
 <?php	endforeach; ?>
 				</select>
+			</li>
+			<li class="form-item vatid <?php echo ( isset( $deliveryCss['order.base.address.vatid'] ) ? join( ' ', $deliveryCss['order.base.address.vatid'] ) : '' ); ?>">
+				<label for="address-delivery-vatid"><?php echo $enc->html( $this->translate( 'client/html', 'Vat ID' ), $enc::TRUST ); ?>
+				</label><input type="text" id="address-delivery-vatid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.vatid' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-delivery/order.base.address.vatid', ( isset( $addrArray['order.base.address.vatid'] ) ? $addrArray['order.base.address.vatid'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.vatid', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
 			<li class="form-item email <?php echo ( isset( $deliveryCss['order.base.address.email'] ) ? join( ' ', $deliveryCss['order.base.address.email'] ) : '' ); ?>">
 				<label for="address-delivery-email"><?php echo $enc->html( $this->translate( 'client/html', 'E-Mail' ), $enc::TRUST ); ?>

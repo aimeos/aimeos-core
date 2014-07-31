@@ -392,7 +392,18 @@ jQuery(document).ready( function($) {
 	/* Initial state: Hide form for new address if not selected */
 	$(".checkout-standard-address .item-new[data-option!='null'] .form-list").hide();
 
-	/* Initial state: Hide form fields if not delivery/payment option is not selected */
+	/* Initial state: Hide VAT ID if salution is not "company" */
+	if( $(".checkout-standard-address .form-list .salutation select").val() !== "company" ) {
+		$(".checkout-standard-address .form-list").find(".company,.vatid").hide();
+	}
+
+	/* Show company and VAT ID fields if salutation is "company", otherwise hide the fields */
+	$(".checkout-standard-address .form-list").on("change", ".salutation select", function(e) {
+		var fields = $(".company,.vatid", e.delegateTarget);
+		$(this).val() === "company" ? fields.show() : fields.hide();
+	});
+
+	/* Initial state: Hide form fields if delivery/payment option is not selected */
 	$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".form-list" ).hide();
 	$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".item-service" ).has( "input:checked" ).find( ".form-list" ).show();
 
