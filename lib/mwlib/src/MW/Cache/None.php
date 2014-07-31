@@ -92,7 +92,7 @@ class MW_Cache_None
 	 */
 	public function getList( array $keys )
 	{
-
+		return array();
 	}
 
 
@@ -106,7 +106,7 @@ class MW_Cache_None
 	 */
 	public function getListByTags( array $tags )
 	{
-
+		return array();
 	}
 
 
