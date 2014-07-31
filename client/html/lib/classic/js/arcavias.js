@@ -399,11 +399,8 @@ jQuery(document).ready( function($) {
 
 	/* Show company and VAT ID fields if salutation is "company", otherwise hide the fields */
 	$(".checkout-standard-address .form-list").on("change", ".salutation select", function(e) {
-		if( $(this).val() === "company" ) {
-			$(".company,.vatid", e.delegateTarget).show();
-		} else {
-			$(".company,.vatid", e.delegateTarget).hide();
-		}
+		var fields = $(".company,.vatid", e.delegateTarget);
+		$(this).val() === "company" ? fields.show() : fields.hide();
 	});
 
 	/* Initial state: Hide form fields if delivery/payment option is not selected */
