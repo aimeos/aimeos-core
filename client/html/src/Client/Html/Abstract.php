@@ -185,16 +185,19 @@ abstract class Client_Html_Abstract
 		 * request.
 		 *
 		 * Important: As a list or detail view can use several hundred items,
-		 * this configuration option would also add this number of tags to the
-		 * cache entry. When using the default database cache, this slows down
-		 * the initial cache insert (and therefore the page speed) drastically!
-		 * It's not recommended to enable this option unless you use a cache
-		 * implementation that can insert all tags at once!
+		 * this configuration option will also add this number of tags to the
+		 * cache entry. When using a cache adapter that can't insert all tags
+		 * at once, this slows down the initial cache insert (and therefore the
+		 * page speed) drastically! It's only recommended to enable this option
+		 * if you use the DB, Mysql or Redis adapter that can insert all tags
+		 * at once.
 		 *
 		 * @param boolean True to add tags for all items, false to use only a domain tag
 		 * @since 2014.07
 		 * @category Developer
 		 * @category User
+		 * @see classes/cache/manager/name
+		 * @see classes/cache/name
 		 */
 		$tagAll = $this->_context->getConfig()->get( 'client/html/common/cache/tag-all', false );
 
