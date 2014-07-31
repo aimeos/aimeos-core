@@ -393,9 +393,11 @@ jQuery(document).ready( function($) {
 	$(".checkout-standard-address .item-new[data-option!='null'] .form-list").hide();
 
 	/* Initial state: Hide VAT ID if salution is not "company" */
-	if( $(".checkout-standard-address .form-list .salutation select").val() !== "company" ) {
-		$(".checkout-standard-address .form-list").find(".company,.vatid").hide();
-	}
+	$(".checkout-standard-address .form-list .salutation select").each( function(idx, elem) {
+		if( $(elem).val() !== "company" ) {
+			$(this).parents(".form-list").find(".company,.vatid").hide();
+		}
+	});
 
 	/* Show company and VAT ID fields if salutation is "company", otherwise hide the fields */
 	$(".checkout-standard-address .form-list").on("change", ".salutation select", function(e) {
