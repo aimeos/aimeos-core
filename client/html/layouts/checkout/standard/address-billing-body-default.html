@@ -149,10 +149,6 @@ $allFields = array_keys( $paymentCss );
 				<label for="address-billing-state"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
 				</label><input type="text" id="address-billing-state" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing', 'order.base.address.state' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-billing/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item vatid <?php echo ( isset( $paymentCss['order.base.address.vatid'] ) ? join( ' ', $paymentCss['order.base.address.vatid'] ) : '' ); ?>">
-				<label for="address-billing-vatid"><?php echo $enc->html( $this->translate( 'client/html', 'Vat ID' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-vatid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing', 'order.base.address.vatid' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-billing/order.base.address.vatid', ( isset( $addrArray['order.base.address.vatid'] ) ? $addrArray['order.base.address.vatid'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.vatid', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
 			<li class="form-item countryid <?php echo ( isset( $paymentCss['order.base.address.countryid'] ) ? join( ' ', $paymentCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-billing-countryid"><?php echo $enc->html( $this->translate( 'client/html', 'Country' ), $enc::TRUST ); ?>
 				</label><select id="address-billing-countryid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing', 'order.base.address.countryid' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
@@ -171,6 +167,10 @@ $allFields = array_keys( $paymentCss );
 					<option value="<?php echo $enc->attr( $languageId ); ?>" <?php echo ( $languageId === $billingLanguage ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/language', $languageId ) ); ?></option>
 <?php	endforeach; ?>
 				</select>
+			</li>
+			<li class="form-item vatid <?php echo ( isset( $paymentCss['order.base.address.vatid'] ) ? join( ' ', $paymentCss['order.base.address.vatid'] ) : '' ); ?>">
+				<label for="address-billing-vatid"><?php echo $enc->html( $this->translate( 'client/html', 'Vat ID' ), $enc::TRUST ); ?>
+				</label><input type="text" id="address-billing-vatid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing', 'order.base.address.vatid' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-billing/order.base.address.vatid', ( isset( $addrArray['order.base.address.vatid'] ) ? $addrArray['order.base.address.vatid'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.vatid', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
 			<li class="form-item email <?php echo ( isset( $paymentCss['order.base.address.email'] ) ? join( ' ', $paymentCss['order.base.address.email'] ) : '' ); ?>">
 				<label for="address-billing-email"><?php echo $enc->html( $this->translate( 'client/html', 'E-Mail' ), $enc::TRUST ); ?>
