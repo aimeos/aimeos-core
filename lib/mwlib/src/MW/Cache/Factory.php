@@ -34,7 +34,7 @@ class MW_Cache_Factory
 		}
 
 		$iface = 'MW_Cache_Interface';
-		$classname = 'MW_Cache_' . $name;
+		$classname = 'MW_Cache_' . ucwords( $name );
 
 		if( class_exists( $classname ) === false ) {
 			throw new MW_Cache_Exception( sprintf( 'Class "%1$s" not available', $classname ) );

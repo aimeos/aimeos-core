@@ -164,16 +164,44 @@ class MAdmin_Cache_Manager_Default
 			 */
 
 			$context = $this->_getContext();
+			$config = $context->getConfig();
 
+			$name = $config->get( 'resource/db/adapter' );
+			$name = $config->get( 'resource/db-cache/adapter', $name );
+
+			/** classes/cache/name
+			 * Specifies the name of the cache class implementation
+			 *
+			 * There are several implementations available for integrating caches
+			 * or providing optimized implementations for certain environments.
+			 * This configuration option allows to change the cache implementation
+			 * by setting the name of the MW_Cache_* class.
+			 *
+			 * @param string Name of the cache class
+			 * @since 2014.09
+			 * @category Developer
+			 */
+			$name = $config->get( 'classes/cache/name', $name );
 			$config = array(
 				'search' => $this->_searchConfig,
 				'dbname' => $this->_getResourceName(),
 				'siteid' => $context->getLocale()->getSiteId(),
-				'sql' => $context->getConfig()->get( 'madmin/cache/manager/default', array() ),
+				'sql' => array(
+					'delete' => $config->get( 'madmin/cache/manager/default/delete' ),
+					'deletebytag' => $config->get( 'madmin/cache/manager/default/deletebytag' ),
+					'getbytag' => $config->get( 'madmin/cache/manager/default/getbytag' ),
+					'get' => $config->get( 'madmin/cache/manager/default/get' ),
+					'set' => $config->get( 'madmin/cache/manager/default/set' ),
+					'settag' => $config->get( 'madmin/cache/manager/default/settag' ),
+				),
 			);
 			$dbm = $context->getDatabaseManager();
 
-			$this->_object = MW_Cache_Factory::createManager( 'DB', $config, $dbm );
+			try {
+				$this->_object = MW_Cache_Factory::createManager( $name, $config, $dbm );
+			} catch( Excpetion $e ) {
+				$this->_object = MW_Cache_Factory::createManager( 'DB', $config, $dbm );
+			}
 		}
 
 		return $this->_object;
