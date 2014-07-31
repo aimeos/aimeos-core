@@ -347,11 +347,13 @@ class MW_Cache_DB
 		// Remove existing entries first to avoid duplicate key conflicts
 		$this->deleteList( array_keys( $pairs ) );
 
+		$type = ( count( $pairs ) > 1 ? MW_DB_Connection_Abstract::TYPE_PREP : MW_DB_Connection_Abstract::TYPE_SIMPLE );
 		$conn = $this->_dbm->acquire( $this->_dbname );
 
 		try
 		{
-			$stmt = $conn->create( $this->_sql['set'], MW_DB_Connection_Abstract::TYPE_PREP );
+			$conn->begin();
+			$stmt = $conn->create( $this->_sql['set'], $type );
 			$stmtTag = $conn->create( $this->_sql['settag'], MW_DB_Connection_Abstract::TYPE_PREP );
 
 			foreach( $pairs as $key => $value )
@@ -366,7 +368,7 @@ class MW_Cache_DB
 
 				if( isset( $tags[$key] ) )
 				{
-					foreach( $tags[$key] as $name )
+					foreach( (array) $tags[$key] as $name )
 					{
 						$stmtTag->bind( 1, $key );
 						$stmtTag->bind( 2, $this->_siteid, MW_DB_Statement_Abstract::PARAM_INT );
@@ -376,10 +378,12 @@ class MW_Cache_DB
 				}
 			}
 
+			$conn->commit();
 			$this->_dbm->release( $conn, $this->_dbname );
 		}
 		catch( Exception $e )
 		{
+			$conn->rollback();
 			$this->_dbm->release( $conn, $this->_dbname );
 			throw $e;
 		}
