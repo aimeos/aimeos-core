@@ -260,7 +260,7 @@ class Client_Html_Checkout_Standard_Address_Default
 
 			$search = $customerManager->createSearch( true );
 			$expr = array(
-				$search->compare( '==', 'customer.code', $context->getEditor() ),
+				$search->compare( '==', 'customer.id', $context->getUserId() ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
