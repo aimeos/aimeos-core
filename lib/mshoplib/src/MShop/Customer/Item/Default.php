@@ -41,7 +41,7 @@ class MShop_Customer_Item_Default
 		if( isset( $values['company'] ) ) {
 			$address->setCompany( (string) $values['company'] );
 		}
-		
+
 		if( isset( $values['vatid'] ) ) {
 			$address->setVatID( (string) $values['vatid'] );
 		}
@@ -104,6 +104,10 @@ class MShop_Customer_Item_Default
 
 		if( isset( $values['website'] ) ) {
 			$address->setWebsite( (string) $values['website'] );
+		}
+
+		if( isset( $values['id'] ) ) {
+			$address->setId( (string) $values['id'] );
 		}
 
 		$this->_billingaddress = $address;
@@ -206,7 +210,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function setPaymentAddress( MShop_Common_Item_Address_Interface $address )
 	{
-		if ( $address === $this->_billingaddress ) { return; }
+		if ( $address === $this->_billingaddress && $address->isModified() === false ) { return; }
 
 		$this->_billingaddress = $address;
 		$this->setModified();
