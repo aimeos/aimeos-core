@@ -53,9 +53,9 @@ jQuery(document).ready( function($) {
 	/*
 	 * Locale selector
 	 */
-	$( ".select-menu .select-dropdown" ).click( function() {
-		$( "ul", this ).toggleClass( "active" );
-		$( this ).toggleClass( "active" );
+	$(".select-menu .select-dropdown").click( function() {
+		$("ul", this).toggleClass("active");
+		$(this).toggleClass("active");
 	});
 
 	
@@ -71,7 +71,7 @@ jQuery(document).ready( function($) {
 	
 
 	/* Catalog filter */
-	$(".catalog-filter form").on("submit", function( event ) {
+	$(".catalog-filter form").on("submit", function(ev) {
 		
 		var result = true;
 		var form = $(this);
@@ -108,9 +108,9 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Submit form when clicking on filter attribute names or counts */
-	$(".catalog-filter-attribute li.attr-item").on("click", ".attr-name, .attr-count", function(event) {
+	$(".catalog-filter-attribute li.attr-item").on("click", ".attr-name, .attr-count", function(ev) {
 
-		var input = $("input", event.delegateTarget);
+		var input = $("input", ev.delegateTarget);
 		input.prop("checked") ? input.prop("checked", false) : input.prop("checked", true);
 
 		$(this).parents(".catalog-filter form").submit();
@@ -125,31 +125,31 @@ jQuery(document).ready( function($) {
 
 
 	/* Autocompleter for quick search */
-	var arcaviasInputComplete = $( ".catalog-filter-search .value" );
+	var arcaviasInputComplete = $(".catalog-filter-search .value");
 	arcaviasInputComplete.autocomplete( {
 		minLength: 3,
 		delay: 200,
-		source: function( req, add ) {
+		source: function(req, add) {
 			var nameTerm = {};
-			nameTerm[arcaviasInputComplete.attr( "name" )] = req.term;
+			nameTerm[arcaviasInputComplete.attr("name")] = req.term;
 
 			$.getJSON(
-				arcaviasInputComplete.data( "url" ),
+				arcaviasInputComplete.data("url"),
 				nameTerm,
-				function( data ) {
+				function(data) {
 					var suggestions = [];
 
-					$.each( data, function( i, val ) {
-						suggestions.push( val.name );
+					$.each(data, function(idx, val) {
+						suggestions.push(val.name);
 					} );
 			
-					add( suggestions );
+					add(suggestions);
 				}
 			);
 		},
-		select: function(event, ui) {
-			arcaviasInputComplete.val( ui.item.value );
-			$(event.target).parents(".catalog-filter form").submit();
+		select: function(ev, ui) {
+			arcaviasInputComplete.val(ui.item.value);
+			$(ev.target).parents(".catalog-filter form").submit();
 		}
 	} );
 
@@ -222,13 +222,13 @@ jQuery(document).ready( function($) {
 	}
 
 	/* Go back to underlying page when back or close button is clicked */
-	$("body").on("click", ".arcavias-container .btn-close", function(event) {
+	$("body").on("click", ".arcavias-container .btn-close", function(ev) {
 		return arcaviasOverlayRemove();
 	});
 
 	/* Go back to underlying page when ESC is pressed */
-	$("body").on("keydown", function(event) {
-		if ( event.which == 27 ) {
+	$("body").on("keydown", function(ev) {
+		if ( ev.which == 27 ) {
 			return arcaviasOverlayRemove();
 		}
 	});
@@ -239,7 +239,7 @@ jQuery(document).ready( function($) {
 	 */
 	
 	/* Add to favorite list without page reload */
-	$(".catalog-detail-actions .actions-button-favorite").on("click", function(event) {
+	$(".catalog-detail-actions .actions-button-favorite").on("click", function(ev) {
 
 		arcaviasOverlayCreate();
 
@@ -255,7 +255,7 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Delete favorite items without page reload */
-	$("body").on("click", ".account-favorite a.modify", function(event) {
+	$("body").on("click", ".account-favorite a.modify", function(ev) {
 
 		var item = $(this).parents("favorite-item");
 		item.addClass("loading");
@@ -272,7 +272,7 @@ jQuery(document).ready( function($) {
 	});
 	
 	/* Add to watch list without page reload */
-	$(".catalog-detail-actions .actions-button-watch").on("click", function(event) {
+	$(".catalog-detail-actions .actions-button-watch").on("click", function(ev) {
 
 		arcaviasOverlayCreate();
 
@@ -288,7 +288,7 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Delete watch items without page reload */
-	$("body").on("click", ".account-watch a.modify", function(event) {
+	$("body").on("click", ".account-watch a.modify", function(ev) {
 
 		var item = $(this).parents("watch-item");
 		item.addClass("loading");
@@ -305,7 +305,7 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Edit watch items without page reload */
-	$("body").on("click", ".account-watch .standardbutton", function(event) {
+	$("body").on("click", ".account-watch .standardbutton", function(ev) {
 
 		var form = $(this).parents("form.watch-details");
 		form.addClass("loading");
@@ -342,7 +342,7 @@ jQuery(document).ready( function($) {
 	};
 	
 	/* Add to basket without page reload */
-	$(".catalog-detail-basket form").on("submit", function(event) {
+	$(".catalog-detail-basket form").on("submit", function(ev) {
 
 		arcaviasOverlayCreate();
 		$.post($(this).attr("action"), $(this).serialize(), function(data) {
@@ -353,18 +353,18 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Go back to underlying page when back or close button is clicked */
-	$("body").on("click", ".basket-standard .btn-back", function(event) {
+	$("body").on("click", ".basket-standard .btn-back", function(ev) {
 		return arcaviasOverlayRemove();
 	});
 	
 	/* Hide update button an show only on quantity change */
 	$(".basket-standard .btn-update").hide();
-	$("body").on("focusin", ".basket-standard .basket .product .quantity .value", {}, function(event) {
-		$(".btn-update", event.delegateTarget).show();
+	$("body").on("focusin", ".basket-standard .basket .product .quantity .value", {}, function(ev) {
+		$(".btn-update", ev.delegateTarget).show();
 	});
 
 	/* Update without page reload */
-	$("body").on("submit", ".basket-standard form", function(event) {
+	$("body").on("submit", ".basket-standard form", function(ev) {
 		var form = $(this);
 
 		$.post(form.attr("action"), form.serialize(), function(data) {
@@ -375,7 +375,7 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Update quantity and delete without page reload */
-	$("body").on("click", ".basket-standard a.change", function(event) {
+	$("body").on("click", ".basket-standard a.change", function(ev) {
 
 		$.post($(this).attr("href"), function(data) {
 			$(".basket-standard").html( arcaviasBasketUpdate(data).html() );
@@ -400,57 +400,48 @@ jQuery(document).ready( function($) {
 	});
 
 	/* Show company and VAT ID fields if salutation is "company", otherwise hide the fields */
-	$(".checkout-standard-address .form-list").on("change", ".salutation select", function(e) {
-		var fields = $(".company,.vatid", e.delegateTarget);
+	$(".checkout-standard-address .form-list").on("change", ".salutation select", function(ev) {
+		var fields = $(".company,.vatid", ev.delegateTarget);
 		$(this).val() === "company" ? fields.show() : fields.hide();
 	});
 
 	/* Initial state: Hide form fields if delivery/payment option is not selected */
-	$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".form-list" ).hide();
-	$( ".checkout-standard-delivery,.checkout-standard-payment" ).find( ".item-service" ).has( "input:checked" ).find( ".form-list" ).show();
+	$( ".checkout-standard-delivery,.checkout-standard-payment" ).each( function(idx, elem) {
+		$(elem).find(".form-list").hide();
+		$(elem).find(".item-service").has("input:checked").find(".form-list").show();
+	});
 
 	/* Address form slide up/down when selected */
-	$( ".checkout-standard-address-billing .header input" ).bind( "click",
-		function( event ) {
-			$( ".checkout-standard-address-billing .form-list" ).slideUp( 400 );
-			$( ".checkout-standard-address-billing .item-address" ).has( this ).find( ".form-list" ).slideDown( 400 );
-		}
-	);
-
-	/* Address form slide up/down when selected */
-	$( ".checkout-standard-address-delivery .header input" ).bind( "click",
-		function( event ) {
-			$( ".checkout-standard-address-delivery .form-list" ).slideUp( 400 );
-			$( ".checkout-standard-address-delivery .item-address" ).has( this ).find( ".form-list" ).slideDown( 400 );
-		}
-	);
+	$( ".checkout-standard-address-billing,.checkout-standard-address-delivery" ).on( "click", ".header input", function(ev) {
+		$(".form-list", ev.delegateTarget).slideUp( 400 );
+		$(".item-address", ev.delegateTarget).has(this).find(".form-list").slideDown(400);
+	});
 
 	/* Delivery/payment form slide up/down when selected */
-	$( ".checkout-standard-delivery, .checkout-standard-payment .option" ).bind( "click",
-		function( event ) {
-			$( ".checkout-standard .form-list" ).slideUp( 400 );
-			$( ".checkout-standard .item-service" ).has( this ).find( ".form-list" ).slideDown( 400 );
-		}
-	);
+	$( ".checkout-standard-delivery, .checkout-standard-payment .option" ).on( "click", function(ev) {
+		$(".checkout-standard .form-list").slideUp( 400 );
+		$(".checkout-standard .item-service").has(this).find(".form-list").slideDown(400);
+	});
 	
 	/* Check for mandatory fields in all forms */
-	$( ".checkout-standard form" ).on( "submit", function( event ) {
-			var retval = true;
-			$( ".checkout-standard .item-new, .item-service" )
-				.has( ".header,label" ).has( "input:checked" ) // combining in one has() doesn't work
-				.find( ".form-list .mandatory" )
-				.each( function() {
-					var value = $(this).find( "input,select" ).val();
-					if( value == null || value.trim() === "" ) {
-						$(this).addClass( "error" );
-						retval = false;
-					} else {
-						$(this).removeClass( "error" );
-					}
-				} );
-			return retval;
-		}
-	);
+	$(".checkout-standard form").on("submit", function(ev) {
+		var retval = true;
+		
+		$(".checkout-standard .item-new, .item-service")
+			.has(".header,label").has("input:checked") // combining in one has() doesn't work
+			.find(".form-list .mandatory")
+			.each( function() {
+				var value = $(this).find("input,select").val();
+				if( value == null || value.trim() === "" ) {
+					$(this).addClass("error");
+					retval = false;
+				} else {
+					$(this).removeClass("error");
+				}
+			});
+
+		return retval;
+	});
 	
 	/* Redirect to payment provider / confirm page when order has been created successfully */
 	var arcavias_checkout_form = $( ".checkout-standard-order-payment > form" ).first();
@@ -467,9 +458,9 @@ jQuery(document).ready( function($) {
 	 */
 	
 	/* Show order details without page reload */
-	$(".account-history .history-item").on("click", "a", function(event) {
+	$(".account-history .history-item").on("click", "a", function(ev) {
 
-		var details = $(".account-history-detail", event.delegateTarget);
+		var details = $(".account-history-detail", ev.delegateTarget);
 		
 		if( details.length === 0 ) {
 			
@@ -480,7 +471,7 @@ jQuery(document).ready( function($) {
 				
 				var node = $(".account-history-detail", doc);
 				node.css("display", "none");
-				$(event.delegateTarget).append(node);
+				$(ev.delegateTarget).append(node);
 				node.slideDown();
 			});
 			
@@ -493,8 +484,8 @@ jQuery(document).ready( function($) {
 
 
 	/* Close order details */
-	$(".account-history .history-item").on("click", ".btn-close", function(event) {
-		$(".account-history-detail", event.delegateTarget).slideUp();
+	$(".account-history .history-item").on("click", ".btn-close", function(ev) {
+		$(".account-history-detail", ev.delegateTarget).slideUp();
 		return false;
 	});
 
