@@ -106,10 +106,6 @@ class MShop_Customer_Item_Default
 			$address->setWebsite( (string) $values['website'] );
 		}
 
-		if( isset( $values['id'] ) ) {
-			$address->setId( (string) $values['id'] );
-		}
-
 		$this->_billingaddress = $address;
 		$this->_salt = $salt;
 	}
