@@ -389,8 +389,8 @@ jQuery(document).ready( function($) {
 	 * Checkout clients
 	 */
 
-	/* Initial state: Hide form for new address if not selected */
-	$(".checkout-standard-address .item-new[data-option!='null'] .form-list").hide();
+	/* Initial state: Hide form for address if not selected */
+	$(".checkout-standard-address .item-address").has(".header input:not(:checked)").find(".form-list").hide();
 
 	/* Initial state: Hide VAT ID if salution is not "company" */
 	$(".checkout-standard-address .form-list .salutation select").each( function(idx, elem) {

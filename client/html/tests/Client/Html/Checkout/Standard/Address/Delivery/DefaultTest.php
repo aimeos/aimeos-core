@@ -163,6 +163,102 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	}
 
 
+	public function testProcessNewAddressUnknown()
+	{
+		$view = TestHelper::getView();
+
+		$param = array(
+			'ca-delivery-option' => 'null',
+			'ca-delivery' => array(
+				'order.base.address.salutation' => 'mr',
+				'order.base.address.firstname' => 'test',
+				'order.base.address.lastname' => 'user',
+				'order.base.address.address1' => 'mystreet 1',
+				'order.base.address.postal' => '20000',
+				'order.base.address.city' => 'hamburg',
+				'order.base.address.languageid' => 'en',
+				'order.base.address.flag' => '1',
+			),
+		);
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+		$this->_object->process();
+
+		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
+		$this->assertEquals( 0, $basket->getAddress( 'delivery' )->getFlag() );
+	}
+
+
+	public function testProcessAddressDelete()
+	{
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context )->getSubManager( 'address' );
+		$search = $manager->createSearch();
+		$search->setSlice( 0, 1 );
+		$result = $manager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No customer addres found' );
+		}
+
+		$item->getId( null );
+		$manager->saveItem( $item );
+
+		$view = TestHelper::getView();
+		$this->_context->setUserId( $item->getRefId() );
+
+		$param = array( 'ca-delivery-delete' => $item->getId() );
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+		$this->_object->process();
+
+		$this->setExpectedException( 'MShop_Exception' );
+		$manager->getItem( $item->getId() );
+	}
+
+
+	public function testProcessAddressDeleteUnknown()
+	{
+		$view = TestHelper::getView();
+
+		$param = array( 'ca-delivery-delete' => '-1' );
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->process();
+	}
+
+
+	public function testProcessAddressDeleteNoLogin()
+	{
+		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context )->getSubManager( 'address' );
+		$search = $manager->createSearch();
+		$search->setSlice( 0, 1 );
+		$result = $manager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( 'No customer addres found' );
+		}
+
+		$view = TestHelper::getView();
+
+		$param = array( 'ca-delivery-delete' => $item->getId() );
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+
+		$this->setExpectedException( 'Client_Html_Exception' );
+		$this->_object->process();
+	}
+
+
 	public function testProcessExistingAddress()
 	{
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );

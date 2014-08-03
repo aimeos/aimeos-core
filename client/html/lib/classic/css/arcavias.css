@@ -1832,6 +1832,11 @@
 	padding: 10px;
 	margin: 0px 0px 10px 0px;
 }
+
+.checkout-standard-address .item-address .modify {
+	float: right;
+}
+
 .checkout-standard-address .item-address .header input {
 	display: inline;
 	vertical-align: middle;

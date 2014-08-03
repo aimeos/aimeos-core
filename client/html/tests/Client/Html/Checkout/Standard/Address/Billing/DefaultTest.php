@@ -166,6 +166,35 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 	}
 
 
+	public function testProcessNewAddressUnknown()
+	{
+		$view = TestHelper::getView();
+
+		$param = array(
+			'ca-billing-option' => 'null',
+			'ca-billing' => array(
+				'order.base.address.salutation' => 'mr',
+				'order.base.address.firstname' => 'test',
+				'order.base.address.lastname' => 'user',
+				'order.base.address.address1' => 'mystreet 1',
+				'order.base.address.postal' => '20000',
+				'order.base.address.city' => 'hamburg',
+				'order.base.address.email' => 'me@localhost',
+				'order.base.address.languageid' => 'en',
+				'order.base.address.flag' => '1',
+			),
+		);
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+		$this->_object->process();
+
+		$basket = Controller_Frontend_Basket_Factory::createController( $this->_context )->get();
+		$this->assertEquals( 0, $basket->getAddress( 'payment' )->getFlag() );
+	}
+
+
 	public function testProcessExistingAddress()
 	{
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );

@@ -216,99 +216,8 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 
 			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
-				/** client/html/common/address/billing/mandatory
-				 * List of billing address input fields that are required
-				 *
-				 * You can configure the list of billing address fields that are
-				 * necessary and must be filled by the customer before he can
-				 * continue the checkout process. Available field keys are:
-				 * * order.base.address.company
-				 * * order.base.address.vatid
-				 * * order.base.address.salutation
-				 * * order.base.address.firstname
-				 * * order.base.address.lastname
-				 * * order.base.address.address1
-				 * * order.base.address.address2
-				 * * order.base.address.address3
-				 * * order.base.address.postal
-				 * * order.base.address.city
-				 * * order.base.address.state
-				 * * order.base.address.languageid
-				 * * order.base.address.countryid
-				 * * order.base.address.telephone
-				 * * order.base.address.telefax
-				 * * order.base.address.email
-				 * * order.base.address.website
-				 *
-				 * @param array List of field keys
-				 * @since 2014.03
-				 * @category User
-				 * @category Developer
-				 * @see client/html/common/address/billing/disable-new
-				 * @see client/html/common/address/billing/salutations
-				 * @see client/html/common/address/billing/optional
-				 * @see client/html/common/address/billing/hidden
-				 * @see client/html/common/address/countries
-				 */
-				$list = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );
-
-				/** client/html/common/address/billing/optional
-				 * List of billing address input fields that are optional
-				 *
-				 * You can configure the list of billing address fields that
-				 * customers can fill but don't have to before they can
-				 * continue the checkout process. Available field keys are:
-				 * * order.base.address.company
-				 * * order.base.address.vatid
-				 * * order.base.address.salutation
-				 * * order.base.address.firstname
-				 * * order.base.address.lastname
-				 * * order.base.address.address1
-				 * * order.base.address.address2
-				 * * order.base.address.address3
-				 * * order.base.address.postal
-				 * * order.base.address.city
-				 * * order.base.address.state
-				 * * order.base.address.languageid
-				 * * order.base.address.countryid
-				 * * order.base.address.telephone
-				 * * order.base.address.telefax
-				 * * order.base.address.email
-				 * * order.base.address.website
-				 *
-				 * @param array List of field keys
-				 * @since 2014.03
-				 * @category User
-				 * @category Developer
-				 * @see client/html/common/address/billing/disable-new
-				 * @see client/html/common/address/billing/salutations
-				 * @see client/html/common/address/billing/mandatory
-				 * @see client/html/common/address/billing/hidden
-				 * @see client/html/common/address/countries
-				 */
-				$optional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
-
-				$param = $view->param( 'ca-billing', array() );
-				$missing = array();
-
-				foreach( $list as $mandatory )
-				{
-					if( !isset( $param[$mandatory] ) || $param[$mandatory] == '' )
-					{
-						$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is missing' );
-						$missing[$mandatory] = sprintf( $msg, substr( $mandatory, 19 ) );
-					}
-				}
-
-				if( !isset( $missing['order.base.address.company'] )
-					&& isset( $param['order.base.address.salutation'] )
-					&& $param['order.base.address.salutation'] === MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY
-					&& in_array( 'order.base.address.company', $optional )
-					&& $param['order.base.address.company'] == ''
-				) {
-					$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is missing' );
-					$missing['order.base.address.company'] = sprintf( $msg, 'salutation' );
-				}
+				$params = $view->param( 'ca-billing', array() );
+				$missing = $this->_checkFields( $params );
 
 				if( count( $missing ) > 0 )
 				{
@@ -316,7 +225,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing' ) );
 				}
 
-				$basketCtrl->setAddress( $type, $param );
+				$basketCtrl->setAddress( $type, $params );
 			}
 			else // existing address
 			{
@@ -335,7 +244,32 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( sprintf( 'Customer with ID "%1$s" not found', $option ) );
 				}
 
-				$basketCtrl->setAddress( $type, $item->getPaymentAddress() );
+				$missing = array();
+				$addr = $item->getPaymentAddress();
+				$params = $view->param( 'ca-billing-' . $option, array() );
+
+				if( !empty( $params ) )
+				{
+					$list = array();
+					$missing = $this->_checkFields( $params );
+
+					foreach( $params as $key => $value ) {
+						$list[ str_replace( 'order.base', 'customer', $key ) ] = $value;
+					}
+
+					$addr->fromArray( $list );
+					$item->setPaymentAddress( $addr );
+
+					$customerManager->saveItem( $item );
+				}
+
+				if( count( $missing ) > 0 )
+				{
+					$view->billingError = $missing;
+					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing' ) );
+				}
+
+				$basketCtrl->setAddress( $type, $addr );
 			}
 
 			parent::process();
@@ -345,6 +279,124 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			$view->billingError = $e->getErrorList();
 			throw $e;
 		}
+	}
+
+
+	/**
+	 * Checks the address fields for missing data and sanitizes the given parameter list.
+	 *
+	 * @param array &$params Associative list of address keys (order.base.address.* or customer.address.*) and their values
+	 * @return array List of missing field names
+	 */
+	protected function _checkFields( array &$params )
+	{
+		$view = $this->getView();
+
+		/** client/html/common/address/billing/mandatory
+		 * List of billing address input fields that are required
+		 *
+		 * You can configure the list of billing address fields that are
+		 * necessary and must be filled by the customer before he can
+		 * continue the checkout process. Available field keys are:
+		 * * order.base.address.company
+		 * * order.base.address.vatid
+		 * * order.base.address.salutation
+		 * * order.base.address.firstname
+		 * * order.base.address.lastname
+		 * * order.base.address.address1
+		 * * order.base.address.address2
+		 * * order.base.address.address3
+		 * * order.base.address.postal
+		 * * order.base.address.city
+		 * * order.base.address.state
+		 * * order.base.address.languageid
+		 * * order.base.address.countryid
+		 * * order.base.address.telephone
+		 * * order.base.address.telefax
+		 * * order.base.address.email
+		 * * order.base.address.website
+		 *
+		 * @param array List of field keys
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see client/html/common/address/billing/disable-new
+		 * @see client/html/common/address/billing/salutations
+		 * @see client/html/common/address/billing/optional
+		 * @see client/html/common/address/billing/hidden
+		 * @see client/html/common/address/countries
+		 */
+		$mandatory = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );
+
+		/** client/html/common/address/billing/optional
+		 * List of billing address input fields that are optional
+		 *
+		 * You can configure the list of billing address fields that
+		 * customers can fill but don't have to before they can
+		 * continue the checkout process. Available field keys are:
+		 * * order.base.address.company
+		 * * order.base.address.vatid
+		 * * order.base.address.salutation
+		 * * order.base.address.firstname
+		 * * order.base.address.lastname
+		 * * order.base.address.address1
+		 * * order.base.address.address2
+		 * * order.base.address.address3
+		 * * order.base.address.postal
+		 * * order.base.address.city
+		 * * order.base.address.state
+		 * * order.base.address.languageid
+		 * * order.base.address.countryid
+		 * * order.base.address.telephone
+		 * * order.base.address.telefax
+		 * * order.base.address.email
+		 * * order.base.address.website
+		 *
+		 * @param array List of field keys
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see client/html/common/address/billing/disable-new
+		 * @see client/html/common/address/billing/salutations
+		 * @see client/html/common/address/billing/mandatory
+		 * @see client/html/common/address/billing/hidden
+		 * @see client/html/common/address/countries
+		 */
+		$optional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
+
+
+		$allFields = array_flip( array_merge( $mandatory, $optional ) );
+
+		foreach( $params as $key => $value )
+		{
+			if( !isset( $allFields[$key] ) ) {
+				unset( $params[$key] );
+			}
+		}
+
+
+		if( isset( $params['order.base.address.salutation'] )
+			&& $params['order.base.address.salutation'] === MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY
+			&& in_array( 'order.base.address.company', $mandatory ) === false
+		) {
+			$mandatory[] = 'order.base.address.company';
+		} else {
+			$params['order.base.address.company'] = $params['order.base.address.vatid'] = '';
+		}
+
+		$missing = array();
+
+		foreach( $mandatory as $key )
+		{
+			if( !isset( $params[$key] ) || $params[$key] == '' )
+			{
+				$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is missing' );
+				$missing[$key] = sprintf( $msg, substr( $key, 19 ) );
+				unset( $params[$key] );
+			}
+		}
+
+		return $missing;
 	}
 
 
@@ -381,7 +433,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			}
 
 			/** client/html/common/address/billing/hidden
-			 * List of billing address input fields that are optional
+			 * List of billing address input fields that are optional and should be hidden
 			 *
 			 * You can configure the list of billing address fields that
 			 * are hidden when a customer enters his new billing address.

@@ -177,6 +177,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 			if( $customerId != '' && $addr->getAddressId() == '' )
 			{
 				$addrManager = MShop_Factory::createManager( $this->_getContext(), 'customer/address' );
+				$orderAddrManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/address' );
 
 				$item = $addrManager->createItem();
 				$item->setRefId( $customerId );
@@ -185,6 +186,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 				$addrManager->saveItem( $item );
 
 				$addr->setAddressId( $item->getId() );
+				$orderAddrManager->saveItem( $addr, false );
 			}
 		}
 		catch( Exception $e )

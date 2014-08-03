@@ -180,16 +180,28 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 	 */
 	public function process()
 	{
+		$context = $this->_getContext();
 		$view = $this->getView();
 
 		try
 		{
+			if( ( $id = $view->param( 'ca-delivery-delete', null ) ) !== null )
+			{
+				$customerAddressManager = MShop_Factory::createManager( $context, 'customer/address' );
+				$address = $customerAddressManager->getItem( $id );
+
+				if( $address->getRefId() != $context->getUserId() ) {
+					throw new Client_Html_Exception( sprintf( 'Address with ID "%1$s" not found', $id ) );
+				}
+
+				$customerAddressManager->deleteItem( $id );
+			}
+
 			// only start if there's something to do
 			if( $view->param( 'ca-delivery-option', null ) === null ) {
 				return;
 			}
 
-			$context = $this->_getContext();
 			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 			$basket = $basketCtrl->get();
 
@@ -214,98 +226,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 			if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
-				/** client/html/common/address/delivery/mandatory
-				 * List of delivery address input fields that are required
-				 *
-				 * You can configure the list of delivery address fields that are
-				 * necessary and must be filled by the customer before he can
-				 * continue the checkout process. Available field keys are:
-				 * * order.base.address.company
-				 * * order.base.address.vatid
-				 * * order.base.address.salutation
-				 * * order.base.address.firstname
-				 * * order.base.address.lastname
-				 * * order.base.address.address1
-				 * * order.base.address.address2
-				 * * order.base.address.address3
-				 * * order.base.address.postal
-				 * * order.base.address.city
-				 * * order.base.address.state
-				 * * order.base.address.languageid
-				 * * order.base.address.countryid
-				 * * order.base.address.telephone
-				 * * order.base.address.telefax
-				 * * order.base.address.email
-				 * * order.base.address.website
-				 *
-				 * @param array List of field keys
-				 * @since 2014.03
-				 * @category User
-				 * @category Developer
-				 * @see client/html/common/address/delivery/disable-new
-				 * @see client/html/common/address/delivery/salutations
-				 * @see client/html/common/address/delivery/optional
-				 * @see client/html/common/address/delivery/hidden
-				 * @see client/html/common/address/countries
-				 */
-				$list = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
-
-				/** client/html/common/address/delivery/optional
-				 * List of delivery address input fields that are optional
-				 *
-				 * You can configure the list of delivery address fields that
-				 * customers can fill but don't have to before they can
-				 * continue the checkout process. Available field keys are:
-				 * * order.base.address.company
-				 * * order.base.address.vatid
-				 * * order.base.address.salutation
-				 * * order.base.address.firstname
-				 * * order.base.address.lastname
-				 * * order.base.address.address1
-				 * * order.base.address.address2
-				 * * order.base.address.address3
-				 * * order.base.address.postal
-				 * * order.base.address.city
-				 * * order.base.address.state
-				 * * order.base.address.languageid
-				 * * order.base.address.countryid
-				 * * order.base.address.telephone
-				 * * order.base.address.telefax
-				 * * order.base.address.email
-				 * * order.base.address.website
-				 *
-				 * @param array List of field keys
-				 * @since 2014.03
-				 * @category User
-				 * @category Developer
-				 * @see client/html/common/address/delivery/disable-new
-				 * @see client/html/common/address/delivery/salutations
-				 * @see client/html/common/address/delivery/mandatory
-				 * @see client/html/common/address/delivery/hidden
-				 * @see client/html/common/address/countries
-				 */
-				$optional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
-				$param = $view->param( 'ca-delivery', array() );
-				$missing = array();
-
-				foreach( $list as $mandatory )
-				{
-					if( !isset( $param[$mandatory] ) || $param[$mandatory] == '' )
-					{
-						$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is missing' );
-						$missing[$mandatory] = sprintf( $msg, substr( $mandatory, 19 ) );
-					}
-				}
-
-				if( !isset( $missing['order.base.address.company'] )
-					&& isset( $param['order.base.address.salutation'] )
-					&& $param['order.base.address.salutation'] === MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY
-					&& in_array( 'order.base.address.company', $optional )
-					&& $param['order.base.address.company'] == ''
-				) {
-					$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is missing' );
-					$missing['order.base.address.company'] = sprintf( $msg, 'salutation' );
-				}
+				$params = $view->param( 'ca-delivery', array() );
+				$missing = $this->_checkFields( $params );
 
 				if( count( $missing ) > 0 )
 				{
@@ -313,24 +235,37 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 					throw new Client_Html_Exception( sprintf( 'At least one delivery address part is missing' ) );
 				}
 
-				$basketCtrl->setAddress( $type, $param );
+				$basketCtrl->setAddress( $type, $params );
 			}
 			else if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) !== '-1' ) // existing address
 			{
-				$customerManager = MShop_Factory::createManager( $context, 'customer' );
-				$address = MShop_Factory::createManager( $context, 'customer/address' )->getItem( $option );
+				$customerAddressManager = MShop_Factory::createManager( $context, 'customer/address' );
+				$address = $customerAddressManager->getItem( $option );
 
-				$search = $customerManager->createSearch( true );
-				$expr = array(
-					$search->compare( '==', 'customer.id', $address->getRefId() ),
-					$search->getConditions(),
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-
-				$items = $customerManager->searchItems( $search );
-
-				if( ( $item = reset( $items ) ) === false || $address->getRefId() != $context->getUserId() ) {
+				if( $address->getRefId() != $context->getUserId() ) {
 					throw new Client_Html_Exception( sprintf( 'Address with ID "%1$s" not found', $option ) );
+				}
+
+				$missing = array();
+				$params = $view->param( 'ca-delivery-' . $option, array() );
+
+				if( !empty( $params ) )
+				{
+					$list = array();
+					$missing = $this->_checkFields( $params );
+
+					foreach( $params as $key => $value ) {
+						$list[ str_replace( 'order.base', 'customer', $key ) ] = $value;
+					}
+
+					$address->fromArray( $list );
+					$customerAddressManager->saveItem( $address );
+				}
+
+				if( count( $missing ) > 0 )
+				{
+					$view->deliveryError = $missing;
+					throw new Client_Html_Exception( sprintf( 'At least one delivery address part is missing' ) );
 				}
 
 				$basketCtrl->setAddress( $type, $address );
@@ -347,6 +282,125 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			$view->deliveryError = $e->getErrorList();
 			throw $e;
 		}
+	}
+
+
+	/**
+	 * Checks the address fields for missing data and sanitizes the given parameter list.
+	 *
+	 * @param array &$params Associative list of address keys (order.base.address.* or customer.address.*) and their values
+	 * @return array List of missing field names
+	 */
+	protected function _checkFields( array &$params )
+	{
+		$view = $this->getView();
+
+		/** client/html/common/address/delivery/mandatory
+		 * List of delivery address input fields that are required
+		 *
+		 * You can configure the list of delivery address fields that are
+		 * necessary and must be filled by the customer before he can
+		 * continue the checkout process. Available field keys are:
+		 * * order.base.address.company
+		 * * order.base.address.vatid
+		 * * order.base.address.salutation
+		 * * order.base.address.firstname
+		 * * order.base.address.lastname
+		 * * order.base.address.address1
+		 * * order.base.address.address2
+		 * * order.base.address.address3
+		 * * order.base.address.postal
+		 * * order.base.address.city
+		 * * order.base.address.state
+		 * * order.base.address.languageid
+		 * * order.base.address.countryid
+		 * * order.base.address.telephone
+		 * * order.base.address.telefax
+		 * * order.base.address.email
+		 * * order.base.address.website
+		 *
+		 * @param array List of field keys
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see client/html/common/address/delivery/disable-new
+		 * @see client/html/common/address/delivery/salutations
+		 * @see client/html/common/address/delivery/optional
+		 * @see client/html/common/address/delivery/hidden
+		 * @see client/html/common/address/countries
+		 */
+		$mandatory = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
+
+		/** client/html/common/address/delivery/optional
+		 * List of delivery address input fields that are optional
+		 *
+		 * You can configure the list of delivery address fields that
+		 * customers can fill but don't have to before they can
+		 * continue the checkout process. Available field keys are:
+		 * * order.base.address.company
+		 * * order.base.address.vatid
+		 * * order.base.address.salutation
+		 * * order.base.address.firstname
+		 * * order.base.address.lastname
+		 * * order.base.address.address1
+		 * * order.base.address.address2
+		 * * order.base.address.address3
+		 * * order.base.address.postal
+		 * * order.base.address.city
+		 * * order.base.address.state
+		 * * order.base.address.languageid
+		 * * order.base.address.countryid
+		 * * order.base.address.telephone
+		 * * order.base.address.telefax
+		 * * order.base.address.email
+		 * * order.base.address.website
+		 *
+		 * @param array List of field keys
+		 * @since 2014.03
+		 * @category User
+		 * @category Developer
+		 * @see client/html/common/address/delivery/disable-new
+		 * @see client/html/common/address/delivery/salutations
+		 * @see client/html/common/address/delivery/mandatory
+		 * @see client/html/common/address/delivery/hidden
+		 * @see client/html/common/address/countries
+		 */
+		$optional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
+
+
+		$allFields = array_flip( array_merge( $mandatory, $optional ) );
+
+		foreach( $params as $key => $value )
+		{
+			if( !isset( $allFields[$key] ) ) {
+				unset( $params[$key] );
+			}
+		}
+
+
+		if( isset( $params['order.base.address.salutation'] )
+			&& $params['order.base.address.salutation'] === MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY
+			&& in_array( 'order.base.address.company', $mandatory ) === false
+		) {
+			$mandatory[] = 'order.base.address.company';
+		} else {
+			$params['order.base.address.company'] = $params['order.base.address.vatid'] = '';
+		}
+
+
+		$missing = array();
+
+		foreach( $mandatory as $key )
+		{
+			if( !isset( $params[$key] ) || $params[$key] == '' )
+			{
+				$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is missing' );
+				$missing[$key] = sprintf( $msg, substr( $key, 19 ) );
+				unset( $params[$key] );
+			}
+		}
+
+		return $missing;
 	}
 
 
