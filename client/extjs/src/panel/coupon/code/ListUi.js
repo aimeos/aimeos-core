@@ -12,6 +12,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	idProperty : 'coupon.code.id',
 	siteidProperty : 'coupon.code.siteid',
 	itemUiXType : 'MShop.panel.coupon.code.itemui',
+	importMethod: 'Coupon_Code.uploadFile',
 
 	ParentItemUi : null,
 
@@ -29,9 +30,6 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	initComponent : function()
 	{
 		this.title = MShop.I18n.dt( 'client/extjs', 'Codes' );
-
-		MShop.panel.AbstractListUi.prototype.initActions.call(this);
-		MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
 		MShop.panel.coupon.code.ListUi.superclass.initComponent.call(this);
 	},
@@ -111,7 +109,9 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 	        	MShop.I18n.dt( 'client/extjs', 'Please save the coupon first before you can add codes' ) );
 
 	        this.actionAdd.setDisabled( true );
-			return false;
+	        this.importButton.setDisabled( true );
+
+	        return false;
 		}
 
 		// filter for refid
@@ -129,12 +129,17 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 	
 	afterRender: function() {
-		
+
 		MShop.panel.coupon.code.ListUi.superclass.afterRender.apply(this, arguments);
 
 		this.ParentItemUi = this.findParentBy(function(c) {
 			return c.isXType(MShop.panel.AbstractItemUi, false);
 		});
+	},
+	
+
+	onFileSelect: function(fileSelector) {
+		this.importButton.onFileSelect(fileSelector, {couponid: this.ParentItemUi.record.id});
 	}
 
 } );
