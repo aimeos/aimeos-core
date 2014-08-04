@@ -17,9 +17,11 @@ $billingDefault = ( isset( $this->addressCustomerItem ) ? $this->addressCustomer
 $billingOption = $this->param( 'ca-billing-option', ( isset( $addrArray['order.base.address.addressid'] ) && $addrArray['order.base.address.addressid'] != '' ? $addrArray['order.base.address.addressid'] : $billingDefault ) );
 $billingSalutation = $this->param( 'ca-billing/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $billingCountry = $this->param( 'ca-billing/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
+$billingState = $this->param( 'ca-billing/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) );
 
 $billingSalutations = $this->get( 'billingSalutations', array() );
 $billingCountries = $this->get( 'addressCountries', array() );
+$billingStates = $this->get( 'addressStates', array() );
 $billingLanguage = $this->get( 'billingLanguage', 'en' );
 
 $paymentCssAll = array();
@@ -48,7 +50,7 @@ $allFields = array_keys( $paymentCssAll );
 			<div class="values">
 <?php
 		$addr = $this->addressCustomerItem->getPaymentAddress();
-		$id = $addr->getId();
+		$id = $this->addressCustomerItem->getId();
 
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
 			/// Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
@@ -143,21 +145,32 @@ $allFields = array_keys( $paymentCssAll );
 				<label for="address-billing-city-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'City' ), $enc::TRUST ); ?>
 				</label><input type="text" id="address-billing-city-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing-' . $id, 'order.base.address.city' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getCity() ); ?>" <?php echo ( in_array( 'order.base.address.city', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item state <?php echo ( isset( $paymentCss['order.base.address.state'] ) ? join( ' ', $paymentCss['order.base.address.state'] ) : '' ); ?>">
-				<label for="address-billing-state-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-state-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing-' . $id, 'order.base.address.state' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getState() ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
+<?php	if( count( $billingCountries ) > 1 ) : ?>
 			<li class="form-item countryid <?php echo ( isset( $paymentCss['order.base.address.countryid'] ) ? join( ' ', $paymentCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-billing-countryid-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Country' ), $enc::TRUST ); ?>
 				</label><select id="address-billing-countryid-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing-' . $id, 'order.base.address.countryid' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-<?php	if( count( $billingCountries ) > 1 ) : ?>
 					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select country' ), $enc::TRUST ); ?></option>
-<?php	endif; ?>
 <?php	foreach( $billingCountries as $countryId ) : ?>
 					<option value="<?php echo $enc->attr( $countryId ); ?>" <?php echo ( $countryId === $addr->getCountryId() ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
 <?php	endforeach; ?>
 				</select>
 			</li>
+<?php	endif; ?>
+<?php	if( count( $billingStates ) > 1 ) : ?>
+			<li class="form-item state <?php echo ( isset( $paymentCss['order.base.address.state'] ) ? join( ' ', $paymentCss['order.base.address.state'] ) : '' ); ?>">
+				<label for="address-billing-state-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
+				</label><select id="address-billing-state-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing-' . $id, 'order.base.address.state' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
+					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select state' ), $enc::TRUST ); ?></option>
+<?php	foreach( $billingStates as $countryCode => $stateList ) : ?>
+					<optgroup class="<?php echo $countryCode; ?>" label="<?php echo $enc->attr( $this->translate( 'client/html/country', $countryCode ) ); ?>">
+<?php		foreach( $stateList as $stateCode => $stateName ) : ?>
+						<option value="<?php echo $enc->attr( $stateCode ); ?>" <?php echo ( $stateCode === $addr->getState() ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $stateName ); ?></option>
+<?php		endforeach; ?>
+					</optgroup>
+<?php	endforeach; ?>
+				</select>
+			</li>
+<?php	endif; ?>
 			<li class="form-item languageid <?php echo ( isset( $paymentCss['order.base.address.languageid'] ) ? join( ' ', $paymentCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 				<label for="address-billing-languageid-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Language' ), $enc::TRUST ); ?>
 				</label><select id="address-billing-languageid-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing-' . $id, 'order.base.address.languageid' ) ) ); ?>">
@@ -246,21 +259,32 @@ $allFields = array_keys( $paymentCssAll );
 				<label for="address-billing-city"><?php echo $enc->html( $this->translate( 'client/html', 'City' ), $enc::TRUST ); ?>
 				</label><input type="text" id="address-billing-city" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing', 'order.base.address.city' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-billing/order.base.address.city', ( isset( $addrArray['order.base.address.city'] ) ? $addrArray['order.base.address.city'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.city', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item state <?php echo ( isset( $paymentCss['order.base.address.state'] ) ? join( ' ', $paymentCss['order.base.address.state'] ) : '' ); ?>">
-				<label for="address-billing-state"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-billing-state" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing', 'order.base.address.state' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-billing/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
+<?php	if( count( $billingCountries ) > 1 ) : ?>
 			<li class="form-item countryid <?php echo ( isset( $paymentCss['order.base.address.countryid'] ) ? join( ' ', $paymentCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-billing-countryid"><?php echo $enc->html( $this->translate( 'client/html', 'Country' ), $enc::TRUST ); ?>
 				</label><select id="address-billing-countryid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing', 'order.base.address.countryid' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-<?php	if( count( $billingCountries ) > 1 ) : ?>
 					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select country' ), $enc::TRUST ); ?></option>
-<?php	endif; ?>
 <?php	foreach( $billingCountries as $countryId ) : ?>
 					<option value="<?php echo $enc->attr( $countryId ); ?>" <?php echo ( $countryId === $billingCountry ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
 <?php	endforeach; ?>
 				</select>
 			</li>
+<?php	endif; ?>
+<?php	if( count( $billingStates ) > 1 ) : ?>
+			<li class="form-item state <?php echo ( isset( $paymentCss['order.base.address.state'] ) ? join( ' ', $paymentCss['order.base.address.state'] ) : '' ); ?>">
+				<label for="address-billing-state"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
+				</label><select id="address-billing-state" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing', 'order.base.address.state' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
+					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select state' ), $enc::TRUST ); ?></option>
+<?php	foreach( $billingStates as $countryCode => $stateList ) : ?>
+					<optgroup class="<?php echo $countryCode; ?>" label="<?php echo $enc->attr( $this->translate( 'client/html/country', $countryCode ) ); ?>">
+<?php		foreach( $stateList as $stateCode => $stateName ) : ?>
+						<option class="<?php echo $countryCode; ?>" value="<?php echo $enc->attr( $stateCode ); ?>" <?php echo ( $stateCode === $billingState ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $stateName ); ?></option>
+<?php		endforeach; ?>
+					</optgroup>
+<?php	endforeach; ?>
+				</select>
+			</li>
+<?php	endif; ?>
 			<li class="form-item languageid <?php echo ( isset( $paymentCss['order.base.address.languageid'] ) ? join( ' ', $paymentCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 				<label for="address-billing-languageid"><?php echo $enc->html( $this->translate( 'client/html', 'Language' ), $enc::TRUST ); ?>
 				</label><select id="address-billing-languageid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-billing', 'order.base.address.languageid' ) ) ); ?>">

@@ -320,6 +320,50 @@ class Client_Html_Checkout_Standard_Address_Default
 			 */
 			$view->addressCountries = $view->config( 'client/html/common/address/countries', array() );
 
+			/** client/html/common/address/states
+			 * List of available states that that users can select from in the front-end
+			 *
+			 * This configration option is used whenever a list of states is
+			 * shown in the front-end users can select from. It's used e.g.
+			 * if the customer should select the state he is living in the
+			 * checkout process. In case that the list is empty, no state
+			 * selection is shown.
+			 *
+			 * A two letter ISO country code must be the key for the list of
+			 * states that belong to this country. The list of states must then
+			 * contain the state code as key and its name as values, e.g.
+			 *
+			 *  array(
+			 *      'US' => array(
+			 *          'CA' => 'California',
+			 *          'NY' => 'New York',
+			 *          ...
+			 *      ),
+			 *      ...
+			 *  );
+			 *
+			 * The codes have to be upper case characters like "US" for the
+			 * United States or "DE" for Germany. The order of the country and
+			 * state codes determine the order of the states in the frontend and
+			 * the state codes are later used for per state tax calculation.
+			 *
+			 * To display the country selection, you have to add the key for the
+			 * state (order.base.address.state) to the "mandatory" or
+			 * "optional" configuration option for billing and delivery addresses.
+			 * You also need to add order.base.address.countryid as well because
+			 * it is required to display the states that belong to this country.
+			 *
+			 * @param array Multi-dimensional list ISO country codes and state codes/names
+			 * @since 2014.09
+			 * @category User
+			 * @category Developer
+			 * @see client/html/common/address/billing/mandatory
+			 * @see client/html/common/address/billing/optional
+			 * @see client/html/common/address/delivery/mandatory
+			 * @see client/html/common/address/delivery/optional
+			 */
+			$view->addressStates = $view->config( 'client/html/common/address/states', array() );
+
 
 			$this->_cache = $view;
 		}

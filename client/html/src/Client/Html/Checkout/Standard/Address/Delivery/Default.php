@@ -68,6 +68,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		'order.base.address.company',
 		'order.base.address.vatid',
 		'order.base.address.address2',
+		'order.base.address.countryid',
+		'order.base.address.state',
 	);
 
 

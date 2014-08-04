@@ -22,9 +22,11 @@ $deliveryDefault = ( $addrArray === array() ? -1 : 'null' );
 $deliveryOption = $this->param( 'ca-delivery-option', ( isset( $addrArray['order.base.address.addressid'] ) && $addrArray['order.base.address.addressid'] != '' ? $addrArray['order.base.address.addressid'] : $deliveryDefault ) );
 $deliverySalutation = $this->param( 'ca-delivery/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $deliveryCountry = $this->param( 'ca-delivery/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
+$deliveryState = $this->param( 'ca-delivery/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) );
 
 $deliverySalutations = $this->get( 'deliverySalutations', array() );
 $deliveryCountries = $this->get( 'addressCountries', array() );
+$deliveryStates = $this->get( 'addressStates', array() );
 $deliveryLanguage = $this->get( 'deliveryLanguage', '' );
 
 
@@ -153,21 +155,32 @@ $allFields = array_keys( $deliveryCssAll );
 				<label for="address-delivery-city-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'City' ), $enc::TRUST ); ?>
 				</label><input type="text" id="address-delivery-city-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery-' . $id, 'order.base.address.city' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getCity() ); ?>" <?php echo ( in_array( 'order.base.address.city', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
-			<li class="form-item state <?php echo ( isset( $deliveryCss['order.base.address.state'] ) ? join( ' ', $deliveryCss['order.base.address.state'] ) : '' ); ?>">
-				<label for="address-delivery-state-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
-				</label><input type="text" id="address-delivery-state-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery-' . $id, 'order.base.address.state' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getState() ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
-			</li>
+<?php	if( count( $deliveryCountries ) > 1 ) : ?>
 			<li class="form-item countryid <?php echo ( isset( $deliveryCss['order.base.address.countryid'] ) ? join( ' ', $deliveryCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-delivery-countryid-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Country' ), $enc::TRUST ); ?>
 				</label><select id="address-delivery-countryid-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery-' . $id, 'order.base.address.countryid' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-<?php	if( count( $deliveryCountries ) > 1 ) : ?>
 					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select country' ), $enc::TRUST ); ?></option>
-<?php	endif; ?>
 <?php	foreach( $deliveryCountries as $countryId ) : ?>
 					<option value="<?php echo $enc->attr( $countryId ) ?>" <?php echo ( $countryId === $addr->getCountryId() ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
 <?php	endforeach; ?>
 				</select>
 			</li>
+<?php	endif; ?>
+<?php	if( count( $deliveryStates ) > 1 ) : ?>
+			<li class="form-item state <?php echo ( isset( $deliveryCss['order.base.address.state'] ) ? join( ' ', $deliveryCss['order.base.address.state'] ) : '' ); ?>">
+				<label for="address-delivery-state-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
+				</label><select id="address-delivery-state-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery-' . $id, 'order.base.address.state' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
+					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select state' ), $enc::TRUST ); ?></option>
+<?php	foreach( $deliveryStates as $countryCode => $stateList ) : ?>
+					<optgroup class="<?php echo $countryCode; ?>" label="<?php echo $enc->attr( $this->translate( 'client/html/country', $countryCode ) ); ?>">
+<?php		foreach( $stateList as $stateCode => $stateName ) : ?>
+						<option value="<?php echo $enc->attr( $stateCode ); ?>" <?php echo ( $stateCode === $addr->getState() ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $stateName ); ?></option>
+<?php		endforeach; ?>
+					</optgroup>
+<?php	endforeach; ?>
+				</select>
+			</li>
+<?php	endif; ?>
 			<li class="form-item langid <?php echo ( isset( $deliveryCss['order.base.address.languageid'] ) ? join( ' ', $deliveryCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 				<label for="address-delivery-languageid-<?php echo $id; ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Language' ), $enc::TRUST ); ?>
 				</label><select id="address-delivery-languageid-<?php echo $id; ?>" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery-' . $id, 'order.base.address.languageid' ) ) ); ?>">
@@ -260,17 +273,32 @@ $allFields = array_keys( $deliveryCssAll );
 				<label for="address-delivery-state"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
 				</label><input type="text" id="address-delivery-state" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.state' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'ca-delivery/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> />
 			</li>
+<?php	if( count( $deliveryCountries ) > 1 ) : ?>
 			<li class="form-item countryid <?php echo ( isset( $deliveryCss['order.base.address.countryid'] ) ? join( ' ', $deliveryCss['order.base.address.countryid'] ) : '' ); ?>">
 				<label for="address-delivery-countryid"><?php echo $enc->html( $this->translate( 'client/html', 'Country' ), $enc::TRUST ); ?>
 				</label><select id="address-delivery-countryid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.countryid' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.countryid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
-<?php	if( count( $deliveryCountries ) > 1 ) : ?>
 					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select country' ), $enc::TRUST ); ?></option>
-<?php	endif; ?>
 <?php	foreach( $deliveryCountries as $countryId ) : ?>
 					<option value="<?php echo $enc->attr( $countryId ) ?>" <?php echo ( $countryId === $deliveryCountry ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
 <?php	endforeach; ?>
 				</select>
 			</li>
+<?php	endif; ?>
+<?php	if( count( $deliveryStates ) > 1 ) : ?>
+			<li class="form-item state <?php echo ( isset( $deliveryCss['order.base.address.state'] ) ? join( ' ', $deliveryCss['order.base.address.state'] ) : '' ); ?>">
+				<label for="address-delivery-state"><?php echo $enc->html( $this->translate( 'client/html', 'State' ), $enc::TRUST ); ?>
+				</label><select id="address-delivery-state" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.state' ) ) ); ?>" <?php echo ( in_array( 'order.base.address.state', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
+					<option value=""><?php echo $enc->html( $this->translate( 'client/html', 'Select state' ), $enc::TRUST ); ?></option>
+<?php	foreach( $deliveryStates as $countryCode => $stateList ) : ?>
+					<optgroup class="<?php echo $countryCode; ?>" label="<?php echo $enc->attr( $this->translate( 'client/html/country', $countryCode ) ); ?>">
+<?php		foreach( $stateList as $stateCode => $stateName ) : ?>
+						<option class="<?php echo $countryCode; ?>" value="<?php echo $enc->attr( $stateCode ); ?>" <?php echo ( $stateCode === $deliveryState ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $stateName ); ?></option>
+<?php		endforeach; ?>
+					</optgroup>
+<?php	endforeach; ?>
+				</select>
+			</li>
+<?php	endif; ?>
 			<li class="form-item langid <?php echo ( isset( $deliveryCss['order.base.address.languageid'] ) ? join( ' ', $deliveryCss['order.base.address.languageid'] ) : '' ); ?>" <?php echo ( in_array( 'order.base.address.languageid', $allFields ) ? '' : 'disabled="disabled"' ); ?> >
 				<label for="address-delivery-languageid"><?php echo $enc->html( $this->translate( 'client/html', 'Language' ), $enc::TRUST ); ?>
 				</label><select id="address-delivery-languageid" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery', 'order.base.address.languageid' ) ) ); ?>">
