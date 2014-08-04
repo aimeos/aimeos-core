@@ -404,6 +404,20 @@ jQuery(document).ready( function($) {
 		var fields = $(".company,.vatid", ev.delegateTarget);
 		$(this).val() === "company" ? fields.show() : fields.hide();
 	});
+	
+	/* Initial state: Hide states from not selected countries */
+	$(".checkout-standard-address .form-list .countryid select").each( function(idx,elem) {
+		if( $(this).val() !== "" ) {
+			$(this).parents(".form-list").find(".state optgroup:not(." + $(this).val() + ")").hide();
+		}
+	});
+	
+	/* Show states that belong to the selected country */
+	$(".checkout-standard-address .form-list").on("change", ".countryid select", function(ev) {
+		$(".state select", ev.delegateTarget).val("");
+		$(".state optgroup", ev.delegateTarget).hide();
+		$(".state ." + $(this).val(), ev.delegateTarget).show();
+	});
 
 	/* Initial state: Hide form fields if delivery/payment option is not selected */
 	$( ".checkout-standard-delivery,.checkout-standard-payment" ).each( function(idx, elem) {
