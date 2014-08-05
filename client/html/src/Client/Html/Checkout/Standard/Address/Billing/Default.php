@@ -219,12 +219,12 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			if( ( $option = $view->param( 'ca-billing-option', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
 				$params = $view->param( 'ca-billing', array() );
-				$missing = $this->_checkFields( $params );
+				$invalid = $this->_checkFields( $params );
 
-				if( count( $missing ) > 0 )
+				if( count( $invalid ) > 0 )
 				{
-					$view->billingError = $missing;
-					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing' ) );
+					$view->billingError = $invalid;
+					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing or invalid' ) );
 				}
 
 				$basketCtrl->setAddress( $type, $params );
@@ -246,14 +246,14 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					throw new Client_Html_Exception( sprintf( 'Customer with ID "%1$s" not found', $option ) );
 				}
 
-				$missing = array();
+				$invalid = array();
 				$addr = $item->getPaymentAddress();
 				$params = $view->param( 'ca-billing-' . $option, array() );
 
 				if( !empty( $params ) )
 				{
 					$list = array();
-					$missing = $this->_checkFields( $params );
+					$invalid = $this->_checkFields( $params );
 
 					foreach( $params as $key => $value ) {
 						$list[ str_replace( 'order.base', 'customer', $key ) ] = $value;
@@ -265,10 +265,10 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 					$customerManager->saveItem( $item );
 				}
 
-				if( count( $missing ) > 0 )
+				if( count( $invalid ) > 0 )
 				{
-					$view->billingError = $missing;
-					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing' ) );
+					$view->billingError = $invalid;
+					throw new Client_Html_Exception( sprintf( 'At least one billing address part is missing or invalid' ) );
 				}
 
 				$basketCtrl->setAddress( $type, $addr );
@@ -327,6 +327,7 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * @see client/html/common/address/billing/optional
 		 * @see client/html/common/address/billing/hidden
 		 * @see client/html/common/address/countries
+		 * @see client/html/common/address/validate
 		 */
 		$mandatory = $view->config( 'client/html/common/address/billing/mandatory', $this->_mandatory );
 
@@ -363,15 +364,76 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * @see client/html/common/address/billing/mandatory
 		 * @see client/html/common/address/billing/hidden
 		 * @see client/html/common/address/countries
+		 * @see client/html/common/address/validate
 		 */
 		$optional = $view->config( 'client/html/common/address/billing/optional', $this->_optional );
 
+		/** client/html/common/address/validate
+		 * List of regular expressions to validate the data of the address fields
+		 *
+		 * To validate the address input data of the customer, an individual
+		 * {@link http://php.net/manual/en/pcre.pattern.php Perl compatible regular expression}
+		 * can be applied to each field. Available fields are:
+		 * * order.base.address.company
+		 * * order.base.address.vatid
+		 * * order.base.address.salutation
+		 * * order.base.address.firstname
+		 * * order.base.address.lastname
+		 * * order.base.address.address1
+		 * * order.base.address.address2
+		 * * order.base.address.address3
+		 * * order.base.address.postal
+		 * * order.base.address.city
+		 * * order.base.address.state
+		 * * order.base.address.languageid
+		 * * order.base.address.countryid
+		 * * order.base.address.telephone
+		 * * order.base.address.telefax
+		 * * order.base.address.email
+		 * * order.base.address.website
+		 *
+		 * Some fields are validated automatically because they are not
+		 * dependent on a country specific rule. These fields are:
+		 * * order.base.address.salutation
+		 * * order.base.address.email
+		 * * order.base.address.website
+		 *
+		 * To validate e.g the postal/zip code, you can define a regular
+		 * expression like this if you want to allow only digits:
+		 *
+		 *  client/html/common/address/validate/order.base.address.postal = '/^[0-9]+$/'
+		 *
+		 * Several regular expressions can be defined line this:
+		 *
+		 *  client/html/common/address/validate = array(
+		 *      'order.base.address.postal' = '/^[0-9]+$/',
+		 *      'order.base.address.vatid' = '/^[A-Z]{2}[0-9]{8}$/',
+		 *  )
+		 *
+		 * @param array Associative list of field names and regular expressions
+		 * @since 2014.09
+		 * @category Developer
+		 * @see client/html/common/address/billing/mandatory
+		 * @see client/html/common/address/billing/optional
+		 */
+		$regex = $view->config( 'client/html/common/address/validate', array() );
 
+		$invalid = array();
 		$allFields = array_flip( array_merge( $mandatory, $optional ) );
 
 		foreach( $params as $key => $value )
 		{
-			if( !isset( $allFields[$key] ) ) {
+			if( isset( $allFields[$key] ) )
+			{
+				if( isset( $regex[$key] ) && preg_match( $regex[$key], $value ) !== 1 )
+				{
+					$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is invalid' );
+					$invalid[$key] = sprintf( $msg, substr( $key, 19 ) );
+					unset( $params[$key] );
+				}
+			}
+			else
+			{
 				unset( $params[$key] );
 			}
 		}
@@ -386,19 +448,17 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 			$params['order.base.address.company'] = $params['order.base.address.vatid'] = '';
 		}
 
-		$missing = array();
-
 		foreach( $mandatory as $key )
 		{
 			if( !isset( $params[$key] ) || $params[$key] == '' )
 			{
 				$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is missing' );
-				$missing[$key] = sprintf( $msg, substr( $key, 19 ) );
+				$invalid[$key] = sprintf( $msg, substr( $key, 19 ) );
 				unset( $params[$key] );
 			}
 		}
 
-		return $missing;
+		return $invalid;
 	}
 
 
