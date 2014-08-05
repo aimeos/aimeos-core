@@ -199,10 +199,10 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No customer addres found' );
+			throw new Exception( 'No customer address found' );
 		}
 
-		$item->getId( null );
+		$item->setId( null );
 		$manager->saveItem( $item );
 
 		$view = TestHelper::getView();
@@ -243,7 +243,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( 'No customer addres found' );
+			throw new Exception( 'No customer address found' );
 		}
 
 		$view = TestHelper::getView();
