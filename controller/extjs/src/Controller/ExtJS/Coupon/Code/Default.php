@@ -98,7 +98,7 @@ class Controller_ExtJS_Coupon_Code_Default
 		 * at the end of the upload directory string!
 		 *
 		 * @param string Absolute path including a leading slash
-		 * @since 2014.03
+		 * @since 2014.09
 		 * @category Developer
 		 */
 		$dir = $config->get( 'controller/extjs/coupon/code/default/uploaddir', 'uploads' );
@@ -111,7 +111,7 @@ class Controller_ExtJS_Coupon_Code_Default
 		 * would give attackers the possibility to infiltrate your installation!
 		 *
 		 * @param boolean True to enable, false to disable
-		 * @since 2014.03
+		 * @since 2014.09
 		 * @category Developer
 		 */
 		if( $config->get( 'controller/extjs/coupon/code/default/enablecheck', true ) ) {
@@ -147,7 +147,7 @@ class Controller_ExtJS_Coupon_Code_Default
 		 * {@link https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation file system permissions}
 		 *
 		 * @param integer Octal Unix permission representation
-		 * @since 2014.03
+		 * @since 2014.09
 		 * @category Developer
 		 */
 		$perms = $config->get( 'controller/extjs/coupon/code/default/fileperms', 0660 );
@@ -193,80 +193,80 @@ class Controller_ExtJS_Coupon_Code_Default
 		$this->_checkParams( $params, array( 'site', 'couponid', 'items' ) );
 		$this->_setLocale( $params->site );
 
+		/** controller/extjs/coupon/code/default/container/type
+		 * Container file type storing all coupon code files to import
+		 *
+		 * All coupon code files or content objects must be put into one
+		 * container file so editors don't have to upload one file for each
+		 * coupon code file.
+		 *
+		 * The container file types that are supported by default are:
+		 * * Zip
+		 *
+		 * Extensions implement other container types like spread sheets, XMLs or
+		 * more advanced ways of handling the exported data.
+		 *
+		 * @param string Container file type
+		 * @since 2014.09
+		 * @category Developer
+		 * @category User
+		 * @see controller/extjs/coupon/code/default/container/format
+		 */
+
+		/** controller/extjs/coupon/code/default/container/format
+		 * Format of the coupon code files to import
+		 *
+		 * The coupon codes are stored in one or more files or content
+		 * objects. The format of that file or content object can be configured
+		 * with this option but most formats are bound to a specific container
+		 * type.
+		 *
+		 * The formats that are supported by default are:
+		 * * CSV (requires container type "Zip")
+		 *
+		 * Extensions implement other container types like spread sheets, XMLs or
+		 * more advanced ways of handling the exported data.
+		 *
+		 * @param string Content file type
+		 * @since 2014.09
+		 * @category Developer
+		 * @category User
+		 * @see controller/extjs/coupon/code/default/container/type
+		 * @see controller/extjs/coupon/code/default/container/options
+		 */
+
+		/** controller/extjs/coupon/code/default/container/options
+		 * Options changing the expected format of the coupon codes to import
+		 *
+		 * Each content format may support some configuration options to change
+		 * the output for that content type.
+		 *
+		 * The options for the CSV content format are:
+		 * * csv-separator, default ','
+		 * * csv-enclosure, default '"'
+		 * * csv-escape, default '"'
+		 * * csv-lineend, default '\n'
+		 *
+		 * For format options provided by other container types implemented by
+		 * extensions, please have a look into the extension documentation.
+		 *
+		 * @param array Associative list of options with the name as key and its value
+		 * @since 2014.09
+		 * @category Developer
+		 * @category User
+		 * @see controller/extjs/coupon/code/default/container/format
+		 */
+
+		$config = $this->_getContext()->getConfig();
+
+		$type = $config->get( 'controller/extjs/coupon/code/default/container/type', 'Zip' );
+		$format = $config->get( 'controller/extjs/coupon/code/default/container/format', 'CSV' );
+		$options = $config->get( 'controller/extjs/coupon/code/default/container/options', array() );
+
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $path )
 		{
-			/** controller/extjs/coupon/code/default/container/type
-			 * Container file type storing all coupon code files to import
-			 *
-			 * All coupon code files or content objects must be put into one
-			 * container file so editors don't have to upload one file for each
-			 * coupon code file.
-			 *
-			 * The container file types that are supported by default are:
-			 * * Zip
-			 *
-			 * Extensions implement other container types like spread sheets, XMLs or
-			 * more advanced ways of handling the exported data.
-			 *
-			 * @param string Container file type
-			 * @since 2014.09
-			 * @category Developer
-			 * @category User
-			 * @see controller/extjs/coupon/code/default/container/format
-			 */
-
-			/** controller/extjs/coupon/code/default/container/format
-			 * Format of the coupon code files to import
-			 *
-			 * The coupon codes are stored in one or more files or content
-			 * objects. The format of that file or content object can be configured
-			 * with this option but most formats are bound to a specific container
-			 * type.
-			 *
-			 * The formats that are supported by default are:
-			 * * CSV (requires container type "Zip")
-			 *
-			 * Extensions implement other container types like spread sheets, XMLs or
-			 * more advanced ways of handling the exported data.
-			 *
-			 * @param string Content file type
-			 * @since 2014.09
-			 * @category Developer
-			 * @category User
-			 * @see controller/extjs/coupon/code/default/container/type
-			 * @see controller/extjs/coupon/code/default/container/options
-			 */
-
-			/** controller/extjs/coupon/code/default/container/options
-			 * Options changing the expected format of the coupon codes to import
-			 *
-			 * Each content format may support some configuration options to change
-			 * the output for that content type.
-			 *
-			 * The options for the CSV content format are:
-			 * * csv-separator, default ','
-			 * * csv-enclosure, default '"'
-			 * * csv-escape, default '"'
-			 * * csv-lineend, default '\n'
-			 *
-			 * For format options provided by other container types implemented by
-			 * extensions, please have a look into the extension documentation.
-			 *
-			 * @param array Associative list of options with the name as key and its value
-			 * @since 2014.09
-			 * @category Developer
-			 * @category User
-			 * @see controller/extjs/coupon/code/default/container/format
-			 */
-
-			$config = $this->_getContext()->getConfig();
-
-			$type = $config->get( 'controller/extjs/coupon/code/default/container/type', 'Zip' );
-			$format = $config->get( 'controller/extjs/coupon/code/default/container/format', 'CSV' );
-			$options = $config->get( 'controller/extjs/coupon/code/default/container/options', array() );
-
 			$container = MW_Container_Factory::getContainer( $path, $type, $format, $options );
 
 			foreach( $container as $content ) {
