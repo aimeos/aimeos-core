@@ -95,7 +95,7 @@ class MW_Container_Content_CSV
 	{
 		$enclosure = $this->_enclosure;
 
-		foreach( $data as $key => $entry ) {
+		foreach( (array) $data as $key => $entry ) {
 			$data[$key] = $enclosure . str_replace( $enclosure, $this->_escape . $enclosure, $entry ) . $enclosure;
 		}
 
