@@ -9,13 +9,14 @@ Ext.ns('MShop.elements');
 MShop.elements.ImportButton = Ext.extend(Ext.Button, {
 
 	/**
-	 * @cfg {Object} importMethod (required)
+	 * @cfg {String} importMethod (required)
 	 */
 	importMethod: null,
 
+
 	initComponent: function() {
 		this.scope = this;
-		this.handler = this.onFileSelect;
+		this.handler = this.handler || this.onFileSelect;
 
 		this.plugins = this.plugins || [];
 		this.browsePlugin = new Ext.ux.file.BrowsePlugin();
@@ -32,8 +33,11 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
 	/**
 	 * @private
 	 */
-	onFileSelect: function(fileSelector) {
+	onFileSelect: function(fileSelector, params) {
 		this.loadMask.show();
+		
+		var list = params || {};
+		list['site'] = MShop.config.site['locale.site.code'];
 
 		var uploader = new Ext.ux.file.Uploader({
 			fileSelector: fileSelector,
@@ -41,9 +45,7 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
 			methodName: this.importMethod,
 			allowHTML5Uploads: false,
 			HTML4params: {
-				'params' : Ext.encode({
-					site: MShop.config.site['locale.site.code']
-				})
+				'params' : Ext.encode(list)
 			}
 		});
 

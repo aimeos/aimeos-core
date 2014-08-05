@@ -201,6 +201,42 @@ abstract class Controller_ExtJS_Abstract
 
 
 	/**
+	 * Checks if the uploaded file is valid.
+	 *
+	 * @param string $filename Name of the uploaded file in the file system of the server
+	 * @param integer $errcode Status code of the uploaded file
+	 * @throws Controller_ExtJS_Exception If file upload is invalid
+	 */
+	protected function _checkFileUpload( $filename, $errcode )
+	{
+		switch( $errcode )
+		{
+			case UPLOAD_ERR_OK:
+				break;
+			case UPLOAD_ERR_INI_SIZE:
+			case UPLOAD_ERR_FORM_SIZE:
+				throw new Controller_ExtJS_Exception( 'The uploaded file exceeds the max. allowed filesize' );
+			case UPLOAD_ERR_PARTIAL:
+				throw new Controller_ExtJS_Exception( 'The uploaded file was only partially uploaded' );
+			case UPLOAD_ERR_NO_FILE:
+				throw new Controller_ExtJS_Exception( 'No file was uploaded' );
+			case UPLOAD_ERR_NO_TMP_DIR:
+				throw new Controller_ExtJS_Exception( 'Temporary folder is missing' );
+			case UPLOAD_ERR_CANT_WRITE:
+				throw new Controller_ExtJS_Exception( 'Failed to write file to disk' );
+			case UPLOAD_ERR_EXTENSION:
+				throw new Controller_ExtJS_Exception( 'File upload stopped by extension' );
+			default:
+				throw new Controller_ExtJS_Exception( 'Unknown upload error' );
+		}
+
+		if( is_uploaded_file( $filename ) === false ) {
+			throw new Controller_ExtJS_Exception( 'File was not uploaded' );
+		}
+	}
+
+
+	/**
 	 * Checks if the required parameter are available.
 	 *
 	 * @param stdClass $params Item object containing the parameter

@@ -68,18 +68,18 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
     itemUi: '',
 
     /**
-     * @cfg {Object} rowCssClass (inherited)
+     * @cfg {String} rowCssClass (inherited)
      */
     rowCssClass: 'site-mismatch',
 
-
     /**
-     * @cfg {Object} importMethod (optional)
+     * @cfg {String} importMethod (optional)
      */
     importMethod: null,
 
     border: false,
     layout: 'fit',
+
 
     initComponent: function() {
         this.initActions();
@@ -165,7 +165,8 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
         this.importButton = new MShop.elements.ImportButton({
             text: MShop.I18n.dt( 'client/extjs', 'Import' ),
             disabled: (this.importMethod === null),
-            importMethod: this.importMethod
+            importMethod: this.importMethod,
+            handler: this.onFileSelect ? this.onFileSelect.createDelegate(this) : null
         });
 
     },

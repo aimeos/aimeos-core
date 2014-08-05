@@ -95,7 +95,7 @@ class MW_Container_Content_CSV
 	{
 		$enclosure = $this->_enclosure;
 
-		foreach( $data as $key => $entry ) {
+		foreach( (array) $data as $key => $entry ) {
 			$data[$key] = $enclosure . str_replace( $enclosure, $this->_escape . $enclosure, $entry ) . $enclosure;
 		}
 
@@ -119,7 +119,7 @@ class MW_Container_Content_CSV
 	/**
 	 * Returns the key of the current element.
 	 *
-	 * @return integer Position within the CSV file
+	 * @return integer|null Position within the CSV file or null if end of file is reached
 	 */
 	function key()
 	{
@@ -168,7 +168,7 @@ class MW_Container_Content_CSV
 	 */
 	function valid()
 	{
-		return !feof( $this->_fh );
+		return ( $this->_data === null ? !feof( $this->_fh ) : true );
 	}
 
 
