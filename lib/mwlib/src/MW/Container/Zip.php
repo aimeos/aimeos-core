@@ -87,6 +87,25 @@ class MW_Container_Zip
 
 
 	/**
+	 * Returns the element specified by its name.
+	 *
+	 * @return MW_Container_Content_Interface Content object
+	 * @todo 2015.03 Add to interface to enforce method and signature
+	 */
+	function get( $name )
+	{
+		if( $this->_container->locateName( $name ) === false )
+		{
+			$msg = 'No content object "%1$s" available in "%2$s"';
+			throw new MW_Container_Exception( sprintf( $msg, $name, $this->_container->filename ) );
+		}
+
+		// $this->_container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
+		return new $this->_classname( 'zip://' . $this->_resourcepath . '#' . $name, $name );
+	}
+
+
+	/**
 	 * Cleans up and saves the container.
 	 */
 	public function close()
@@ -113,9 +132,9 @@ class MW_Container_Zip
 
 
 	/**
-	 * Return the current element.
+	 * Returns the current element.
 	 *
-	 * @return array List of values
+	 * @return MW_Container_Content_Interface Current content object
 	 */
 	function current()
 	{
