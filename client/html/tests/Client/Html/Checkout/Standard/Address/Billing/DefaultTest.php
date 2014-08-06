@@ -195,6 +195,48 @@ class Client_Html_Checkout_Standard_Address_Billing_DefaultTest extends MW_Unitt
 	}
 
 
+	public function testProcessNewAddressInvalid()
+	{
+		$view = TestHelper::getView();
+
+		$config = $this->_context->getConfig();
+		$config->set( 'client/html/common/address/validate/order.base.address.postal', '/^[0-9]{5}$/' );
+		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		$param = array(
+			'ca-billing-option' => 'null',
+			'ca-billing' => array(
+				'order.base.address.salutation' => 'mr',
+				'order.base.address.firstname' => 'test',
+				'order.base.address.lastname' => 'user',
+				'order.base.address.address1' => 'mystreet 1',
+				'order.base.address.postal' => '20AB',
+				'order.base.address.city' => 'hamburg',
+				'order.base.address.email' => 'me@localhost',
+				'order.base.address.languageid' => 'en',
+			),
+		);
+		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
+
+		try
+		{
+			$this->_object->process();
+		}
+		catch( Client_Html_Exception $e )
+		{
+			$this->assertEquals( 1, count( $view->billingError ) );
+			$this->assertArrayHasKey( 'order.base.address.postal', $view->billingError );
+			return;
+		}
+
+		$this->fail( 'Expected exception not thrown' );
+	}
+
+
 	public function testProcessExistingAddress()
 	{
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );

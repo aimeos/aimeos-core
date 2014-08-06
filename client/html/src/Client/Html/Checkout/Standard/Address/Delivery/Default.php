@@ -229,12 +229,12 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
 				$params = $view->param( 'ca-delivery', array() );
-				$missing = $this->_checkFields( $params );
+				$invalid = $this->_checkFields( $params );
 
-				if( count( $missing ) > 0 )
+				if( count( $invalid ) > 0 )
 				{
-					$view->deliveryError = $missing;
-					throw new Client_Html_Exception( sprintf( 'At least one delivery address part is missing' ) );
+					$view->deliveryError = $invalid;
+					throw new Client_Html_Exception( sprintf( 'At least one delivery address part is missing or invalid' ) );
 				}
 
 				$basketCtrl->setAddress( $type, $params );
@@ -248,13 +248,13 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 					throw new Client_Html_Exception( sprintf( 'Address with ID "%1$s" not found', $option ) );
 				}
 
-				$missing = array();
+				$invalid = array();
 				$params = $view->param( 'ca-delivery-' . $option, array() );
 
 				if( !empty( $params ) )
 				{
 					$list = array();
-					$missing = $this->_checkFields( $params );
+					$invalid = $this->_checkFields( $params );
 
 					foreach( $params as $key => $value ) {
 						$list[ str_replace( 'order.base', 'customer', $key ) ] = $value;
@@ -264,10 +264,10 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 					$customerAddressManager->saveItem( $address );
 				}
 
-				if( count( $missing ) > 0 )
+				if( count( $invalid ) > 0 )
 				{
-					$view->deliveryError = $missing;
-					throw new Client_Html_Exception( sprintf( 'At least one delivery address part is missing' ) );
+					$view->deliveryError = $invalid;
+					throw new Client_Html_Exception( sprintf( 'At least one delivery address part is missing or invalid' ) );
 				}
 
 				$basketCtrl->setAddress( $type, $address );
@@ -330,6 +330,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		 * @see client/html/common/address/delivery/optional
 		 * @see client/html/common/address/delivery/hidden
 		 * @see client/html/common/address/countries
+		 * @see client/html/common/address/validate
 		 */
 		$mandatory = $view->config( 'client/html/common/address/delivery/mandatory', $this->_mandatory );
 
@@ -366,15 +367,33 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		 * @see client/html/common/address/delivery/mandatory
 		 * @see client/html/common/address/delivery/hidden
 		 * @see client/html/common/address/countries
+		 * @see client/html/common/address/validate
 		 */
 		$optional = $view->config( 'client/html/common/address/delivery/optional', $this->_optional );
 
+		/** client/html/common/address/validate
+		 *
+		 * @see client/html/common/address/delivery/mandatory
+		 * @see client/html/common/address/delivery/optional
+		 */
+		$regex = $view->config( 'client/html/common/address/validate', array() );
 
+		$invalid = array();
 		$allFields = array_flip( array_merge( $mandatory, $optional ) );
 
 		foreach( $params as $key => $value )
 		{
-			if( !isset( $allFields[$key] ) ) {
+			if( isset( $allFields[$key] ) )
+			{
+				if( isset( $regex[$key] ) && preg_match( $regex[$key], $value ) !== 1 )
+				{
+					$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is invalid' );
+					$invalid[$key] = sprintf( $msg, substr( $key, 19 ) );
+					unset( $params[$key] );
+				}
+			}
+			else
+			{
 				unset( $params[$key] );
 			}
 		}
@@ -390,19 +409,17 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		}
 
 
-		$missing = array();
-
 		foreach( $mandatory as $key )
 		{
 			if( !isset( $params[$key] ) || $params[$key] == '' )
 			{
 				$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is missing' );
-				$missing[$key] = sprintf( $msg, substr( $key, 19 ) );
+				$invalid[$key] = sprintf( $msg, substr( $key, 19 ) );
 				unset( $params[$key] );
 			}
 		}
 
-		return $missing;
+		return $invalid;
 	}
 
 
