@@ -22,6 +22,7 @@ class MW_Container_Content_CSV
 	private $_enclosure;
 	private $_escape;
 	private $_lineend;
+	private $_endsubst;
 	private $_fh;
 	private $_data;
 	private $_position = 0;
@@ -65,6 +66,7 @@ class MW_Container_Content_CSV
 		$this->_enclosure = $this->_getOption( 'csv-enclosure', '"' );
 		$this->_escape = $this->_getOption( 'csv-escape', '"' );
 		$this->_lineend = $this->_getOption( 'csv-lineend', chr( 10 ) );
+		$this->_endsubst = $this->_getOption( 'csv-lineend-subst', ' ' );
 		$this->_data = $this->_getData();
 	}
 
@@ -95,7 +97,9 @@ class MW_Container_Content_CSV
 	{
 		$enclosure = $this->_enclosure;
 
-		foreach( (array) $data as $key => $entry ) {
+		foreach( (array) $data as $key => $entry )
+		{
+			$entry = str_replace( $this->_lineend, $this->_endsubst, $entry );
 			$data[$key] = $enclosure . str_replace( $enclosure, $this->_escape . $enclosure, $entry ) . $enclosure;
 		}
 
