@@ -57,6 +57,7 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 			'csv-enclosure' => ':',
 			'csv-escape' => '\\',
 			'csv-lineend' => "\r\n",
+			'csv-lineend-subst' => " ",
 		);
 
 		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile';
@@ -65,14 +66,14 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 
 		$data = array(
 			array( 'test', 'file', 'data' ),
-			array( ':', pack( 'x' ), '\\' ),
+			array( ":\r\n", pack( 'x' ), '\\' ),
 		);
 
 		foreach( $data as $entry ) {
 			$csv->add( $entry );
 		}
 
-		$expected = ":test:;:file:;:data:\r\n:\\::;:" . pack( 'x' ) . ":;:\\:\r\n";
+		$expected = ":test:;:file:;:data:\r\n:\\: :;:" . pack( 'x' ) . ":;:\\:\r\n";
 
 		if( ( $actual = file_get_contents( $csv->getResource() ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to get content of file "%1$s"', $csv->getResource() ) );

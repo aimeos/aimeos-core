@@ -72,6 +72,14 @@ class MW_Container_ZipTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGet()
+	{
+		$zip = new MW_Container_Zip( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
+
+		$this->assertInstanceOf( 'MW_Container_Content_Interface', $zip->get( 'tempfile.csv' ) );
+	}
+
+
 	public function testIterator()
 	{
 		$zip = new MW_Container_Zip( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );

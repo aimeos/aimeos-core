@@ -9,8 +9,6 @@
 class Controller_Jobs_Admin_Cache_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-	private $_jobItemStub;
-	private $_jobManagerStub;
 
 
 	/**
