@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-20 18:54+0200\n"
+"POT-Creation-Date: 2014-08-06 16:31+0200\n"
 "PO-Revision-Date: 2014-07-20 16:55+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Address for domain \"%1$s\" not available"
 msgstr "La dirección del dominio \"%1$s\" no está disponible"
 
-#: src/MShop/Common/Item/Address/Abstract.php:612
+#: src/MShop/Common/Item/Address/Abstract.php:638
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
 msgstr "El encabezamiento de la dirección \"%1$s\" está fuera del rango permitido"
@@ -43,7 +43,7 @@ msgstr "La dirección tipo \"%1$s\" está fuera del rango permitido"
 msgid "Basket empty"
 msgstr "Cesta vacía"
 
-#: src/MShop/Context/Item/Default.php:87
+#: src/MShop/Context/Item/Default.php:102
 #, php-format
 msgid "Cache object not available"
 msgstr "El Objeto de caché no disponible"
@@ -89,7 +89,7 @@ msgstr "El nodo hijo con índice \"%1$d\" no está disponible"
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
 
-#: src/MAdmin/Common/Manager/Abstract.php:111 src/MAdmin/Factory.php:64
+#: src/MAdmin/Common/Manager/Abstract.php:111 src/MAdmin/Factory.php:90
 #: src/MShop/Service/Manager/Abstract.php:35
 #: src/MShop/Service/Manager/Default.php:587
 #: src/MShop/Common/Factory/Abstract.php:58
@@ -104,7 +104,7 @@ msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
 msgid "Class \"%1$s\" not available"
 msgstr "La clase \"%1$s\" no está disponible"
 
-#: src/MShop/Common/Item/Abstract.php:204
+#: src/MShop/Common/Item/Abstract.php:209
 #, php-format
 msgid "Code must not be longer than 32 characters"
 msgstr "El código no debe superar los 32 caracteres"
@@ -120,7 +120,7 @@ msgstr "Configuración no válida"
 msgid "Configuration not available"
 msgstr "Configuración no disponible"
 
-#: src/MShop/Context/Item/Default.php:113
+#: src/MShop/Context/Item/Default.php:128
 #, php-format
 msgid "Configuration object not available"
 msgstr "Objeto de configuración no disponible"
@@ -148,7 +148,7 @@ msgid ""
 "XML string"
 msgstr "El árbol DOM de la respuesta XML del proveedor de entrega no puede convertirse en cadena XML"
 
-#: src/MShop/Context/Item/Default.php:139
+#: src/MShop/Context/Item/Default.php:154
 #, php-format
 msgid "Database manager object not available"
 msgstr "Objeto de administrador de base de datos no disponible"
@@ -170,18 +170,18 @@ msgid "ID of last inserted database record not available"
 msgstr "La ID del último registro de la base de datos instalada no está disponible"
 
 #. / Locale ID %1$s
-#: src/MShop/Context/Item/Default.php:158
+#: src/MShop/Context/Item/Default.php:173
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
 msgstr "El objeto de internacionalización para \"%1$s\" no está disponible"
 
-#: src/MShop/Common/Item/Abstract.php:219
-#: src/MShop/Common/Item/Abstract.php:223
+#: src/MShop/Common/Item/Abstract.php:224
+#: src/MShop/Common/Item/Abstract.php:228
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
 msgstr "Hay caracteres no válidos en el código ISO de divisa \"%1$s\""
 
-#: src/MShop/Common/Item/Abstract.php:237
+#: src/MShop/Common/Item/Abstract.php:242
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
 msgstr "Hay caracteres no válidos en el código de lenguaje ISO \"%1$s\""
@@ -246,14 +246,14 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Caracteres no válidos en nombre de clase \"%1$s\""
 
 #: src/MShop/Order/Item/Abstract.php:161
-#: src/MShop/Common/Item/Abstract.php:190
+#: src/MShop/Common/Item/Abstract.php:195
 #, php-format
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
 msgstr "Caracteres no válidos en la fecha \"%1$s\". Se espera el formato ISO \"YYYY-MM-DD hh:mm:ss\"."
 
-#: src/MShop/Customer/Item/Default.php:349
+#: src/MShop/Customer/Item/Default.php:354
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr "Hay caracteres no válidos en la fecha \"%1$s\". Se espera formato ISO \"YYYY-MM-DD\"."
@@ -266,7 +266,7 @@ msgstr "Hay caracteres no válidos en la fecha \"%1$s\". Se espera formato ISO \
 msgid "Invalid characters in domain name \"%1$s\""
 msgstr "Hay caracteres no válidos en el nombre de dominio \"%1$s\""
 
-#: src/MShop/Common/Item/Address/Abstract.php:433
+#: src/MShop/Common/Item/Address/Abstract.php:457
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
 msgstr "Caracteres no válidos en la dirección de correo electrónico: \"%1$s\""
@@ -279,7 +279,7 @@ msgstr "Caracteres no válidos en la dirección de correo electrónico: \"%1$s\"
 msgid "Invalid characters in manager name \"%1$s\""
 msgstr "Hay caracteres no válidos en el nombre del administrador \"%1$s\""
 
-#: src/MAdmin/Factory.php:50 src/MShop/Factory.php:77
+#: src/MAdmin/Factory.php:76 src/MShop/Factory.php:77
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
 msgstr "Hay caracteres no válidos en el nombre de administrador \"%1$s\" en \"%2$s\""
@@ -309,7 +309,7 @@ msgstr "Caracteres no válidos en la fecha de compra \"%1$s\""
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
 msgstr ""
 
-#: src/MAdmin/Factory.php:70 src/MShop/Factory.php:97
+#: src/MAdmin/Factory.php:96 src/MShop/Factory.php:97
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr "Fábrica no válida: \"%1$s\""
@@ -319,12 +319,12 @@ msgstr "Fábrica no válida: \"%1$s\""
 msgid "Invalid mime type \"%1$s\""
 msgstr "Tipo de MIME \"%1$s\" no válido"
 
-#: src/MShop/Order/Manager/Base/Default.php:512
+#: src/MShop/Order/Manager/Base/Default.php:513
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr "Cesta serializada no válida. \"%1$s\" devuelve \"%2$s\"."
 
-#: src/MShop/Common/Item/Address/Abstract.php:489
+#: src/MShop/Common/Item/Address/Abstract.php:513
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
 msgstr "La URL de sitio web \"%1$s\" no es válida"
@@ -345,7 +345,7 @@ msgstr "No se ha podido guardar el elemento con el método saveItem(). ID de ele
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
 msgstr "No se ha encontrado el elemento referenciado en dominio \"%1$s\": %2$s"
 
-#: src/MAdmin/Cache/Manager/Default.php:357
+#: src/MAdmin/Cache/Manager/Default.php:385
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
 msgstr ""
@@ -391,7 +391,7 @@ msgstr "Ha fallado la carga de la respuesta XML \"%1$s\" desde el proveedor de e
 msgid "Locale item for site \"%1$s\" not found"
 msgstr "Elemento local para el sitio \"%1$s\" no encontrado"
 
-#: src/MShop/Context/Item/Default.php:196
+#: src/MShop/Context/Item/Default.php:211
 #, php-format
 msgid "Locale object not available"
 msgstr "Objeto local no disponible"
@@ -406,22 +406,22 @@ msgstr "La bandera de bloqueo \"%1$d\" no está dentro del rango permitido"
 msgid "Log entry with ID \"%1$s\" not found"
 msgstr "Entrada de registro con ID \"%1$s\" no encontrada"
 
-#: src/MShop/Context/Item/Default.php:222
+#: src/MShop/Context/Item/Default.php:237
 #, php-format
 msgid "Log manager object not available"
 msgstr "El objeto del administrador de registro no está disponible"
 
-#: src/MShop/Context/Item/Default.php:274
+#: src/MShop/Context/Item/Default.php:289
 #, php-format
 msgid "Mail object not available"
 msgstr "Objeto de correo no disponible"
 
-#: src/MAdmin/Factory.php:55 src/MShop/Factory.php:82
+#: src/MAdmin/Factory.php:81 src/MShop/Factory.php:82
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
 msgstr "La ruta de administrador \"%1$s\" no es válida"
 
-#: src/MAdmin/Factory.php:38 src/MShop/Factory.php:65
+#: src/MAdmin/Factory.php:64 src/MShop/Factory.php:65
 #, php-format
 msgid "Manager path is empty"
 msgstr "La ruta del administrador está vacía"
@@ -446,7 +446,7 @@ msgstr "El método \"%1$s\" para proveedor no está disponible"
 msgid "Missing configuration \"%1$s\""
 msgstr ""
 
-#: src/MShop/Common/Item/Abstract.php:172
+#: src/MShop/Common/Item/Abstract.php:177
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "La nueva ID \"%1$s\" del elemento difiere de la antigua ID \"%2$s\""
@@ -474,7 +474,7 @@ msgstr ""
 msgid "No warehouse for code \"%1$s\" found"
 msgstr ""
 
-#: src/MAdmin/Cache/Manager/Default.php:256
+#: src/MAdmin/Cache/Manager/Default.php:284
 #: src/MAdmin/Job/Manager/Default.php:161
 #: src/MAdmin/Log/Manager/Default.php:171
 #: src/MShop/Order/Manager/Base/Default.php:364
@@ -482,7 +482,7 @@ msgstr ""
 #: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:171
 #: src/MShop/Order/Manager/Base/Product/Default.php:261
 #: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:172
-#: src/MShop/Order/Manager/Base/Address/Default.php:261
+#: src/MShop/Order/Manager/Base/Address/Default.php:268
 #: src/MShop/Order/Manager/Base/Coupon/Default.php:147
 #: src/MShop/Order/Manager/Status/Default.php:133
 #: src/MShop/Order/Manager/Default.php:200
@@ -492,7 +492,7 @@ msgstr ""
 #: src/MShop/Locale/Manager/Language/Default.php:123
 #: src/MShop/Locale/Manager/Currency/Default.php:127
 #: src/MShop/Service/Manager/Default.php:242
-#: src/MShop/Customer/Manager/Default.php:362
+#: src/MShop/Customer/Manager/Default.php:369
 #: src/MShop/Attribute/Manager/Default.php:199
 #: src/MShop/Common/Manager/Type/Abstract.php:115
 #: src/MShop/Common/Manager/List/Abstract.php:91
@@ -538,7 +538,7 @@ msgid ""
 "invoice ID \"%2$s\" of the order"
 msgstr "La ID del pedido \"%1$s\" en la respuesta XML del proveedor de entrega difiere de la ID de factura almacenada \"%2$s\" del pedido"
 
-#: src/MShop/Order/Manager/Base/Default.php:619
+#: src/MShop/Order/Manager/Base/Default.php:623
 #: src/MShop/Service/Provider/Delivery/Default.php:291
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
@@ -731,7 +731,7 @@ msgstr "El servicio de tipo \"%1$s\" no está disponible"
 msgid "Service payment provider for order base ID \"%1$s\" not found"
 msgstr "No se ha encontrado el proveedor de servicios de pago para la base de pedido con ID \"%1$s\""
 
-#: src/MShop/Context/Item/Default.php:248
+#: src/MShop/Context/Item/Default.php:263
 #, php-format
 msgid "Session object not available"
 msgstr "Objeto de sesión no disponible"
@@ -840,7 +840,7 @@ msgid ""
 "failed: %2$s"
 msgstr "Ha fallado la validación de la respuesta XML desde el proveedor de entrega contra esquema \"%1$s\": %2$s"
 
-#: src/MShop/Context/Item/Default.php:300
+#: src/MShop/Context/Item/Default.php:315
 #, php-format
 msgid "View object not available"
 msgstr "La vista del objeto no está disponible"

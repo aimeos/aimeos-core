@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-20 18:54+0200\n"
-"PO-Revision-Date: 2014-07-22 07:45+0000\n"
-"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
+"POT-Creation-Date: 2014-08-06 16:31+0200\n"
+"PO-Revision-Date: 2014-08-06 14:11+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,6 +119,7 @@ msgstr "Запускает задания, созданные администр
 #: src/Controller/Jobs/Order/Coupon/Count/Factory.php:46
 #: src/Controller/Jobs/Admin/Cache/Factory.php:71
 #: src/Controller/Jobs/Admin/Job/Factory.php:71
+#: src/Controller/Jobs/Admin/Log/Factory.php:71
 #: src/Controller/Jobs/Service/Delivery/Process/Factory.php:47
 #: src/Controller/Jobs/Customer/Email/Watch/Factory.php:71
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
@@ -158,6 +159,10 @@ msgstr "Недопустимый метод задания \"%1$s\""
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Не найден тип списка для домена \"%1$s\" и код \"%2$s\""
 
+#: src/Controller/Jobs/Admin/Log/Default.php:28
+msgid "Log cleanup"
+msgstr ""
+
 #: src/Controller/Jobs/Admin/Job/Default.php:91
 #, php-format
 msgid "Method \"%1$s\" not available"
@@ -195,6 +200,11 @@ msgstr "Перестроение индекса каталога для поис
 #: src/Controller/Jobs/Admin/Cache/Default.php:39
 msgid "Removes the expired entries from the cache"
 msgstr "Удаление устаревших записей из кеша"
+
+#: src/Controller/Jobs/Admin/Log/Default.php:39
+msgid ""
+"Removes the old log entries from the database and archives them (optional)"
+msgstr ""
 
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:28
 msgid "Removes unfinished orders"
