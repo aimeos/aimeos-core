@@ -272,6 +272,7 @@
 		<propertyprompt propertyName="extname" promptText="Enter extension name (only A-Z, a-z, 0-9 and -)" promptCharacter=":" useExistingValue="true"/>
 		<copy todir="${extdir}/${extname}" >
 			<fileset dir="${coredir}/misc/ext-template">
+				<exclude name="**/.gitkeep" />
 				<include name="**" />
 			</fileset>
 		</copy>
