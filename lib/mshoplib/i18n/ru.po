@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-20 18:54+0200\n"
+"POT-Creation-Date: 2014-08-06 16:31+0200\n"
 "PO-Revision-Date: 2014-07-22 07:45+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Address for domain \"%1$s\" not available"
 msgstr "Недопустим адрес для домена \"%1$s\""
 
-#: src/MShop/Common/Item/Address/Abstract.php:612
+#: src/MShop/Common/Item/Address/Abstract.php:638
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
 msgstr "Приветствие \"%1$s\" в адресе вне допустимого диапазона"
@@ -43,7 +43,7 @@ msgstr "Тип адреса \"%1$s\" вне допусимого диапазо�
 msgid "Basket empty"
 msgstr "Корзина пуста"
 
-#: src/MShop/Context/Item/Default.php:87
+#: src/MShop/Context/Item/Default.php:102
 #, php-format
 msgid "Cache object not available"
 msgstr "Объект в кеше недоступен"
@@ -89,7 +89,7 @@ msgstr "Недоступен дочерний узел с индексом \"%1$
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 
-#: src/MAdmin/Common/Manager/Abstract.php:111 src/MAdmin/Factory.php:64
+#: src/MAdmin/Common/Manager/Abstract.php:111 src/MAdmin/Factory.php:90
 #: src/MShop/Service/Manager/Abstract.php:35
 #: src/MShop/Service/Manager/Default.php:587
 #: src/MShop/Common/Factory/Abstract.php:58
@@ -104,7 +104,7 @@ msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 msgid "Class \"%1$s\" not available"
 msgstr "Недоступен класс \"%1$s\""
 
-#: src/MShop/Common/Item/Abstract.php:204
+#: src/MShop/Common/Item/Abstract.php:209
 #, php-format
 msgid "Code must not be longer than 32 characters"
 msgstr "Код не должен быть длиннее 32 символов"
@@ -120,7 +120,7 @@ msgstr "Ошибка в настройке"
 msgid "Configuration not available"
 msgstr "Настройка недоступна"
 
-#: src/MShop/Context/Item/Default.php:113
+#: src/MShop/Context/Item/Default.php:128
 #, php-format
 msgid "Configuration object not available"
 msgstr "Недоступен конфигурируемый объект"
@@ -148,7 +148,7 @@ msgid ""
 "XML string"
 msgstr "Невозможно преобразовать дерево DOM из XML ответа в строку XML"
 
-#: src/MShop/Context/Item/Default.php:139
+#: src/MShop/Context/Item/Default.php:154
 #, php-format
 msgid "Database manager object not available"
 msgstr "Недоступен модуль управления объектами базы данных"
@@ -170,18 +170,18 @@ msgid "ID of last inserted database record not available"
 msgstr "Недоступен ID последней вставленной записи"
 
 #. / Locale ID %1$s
-#: src/MShop/Context/Item/Default.php:158
+#: src/MShop/Context/Item/Default.php:173
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
 msgstr "Недоступен объект интернационализации для \"%1$s\""
 
-#: src/MShop/Common/Item/Abstract.php:219
-#: src/MShop/Common/Item/Abstract.php:223
+#: src/MShop/Common/Item/Abstract.php:224
+#: src/MShop/Common/Item/Abstract.php:228
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
 msgstr "Недопустимый ISO код валюты \"%1$s\""
 
-#: src/MShop/Common/Item/Abstract.php:237
+#: src/MShop/Common/Item/Abstract.php:242
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
 msgstr "Недопустимый языковой ISO код \"%1$s\""
@@ -246,14 +246,14 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Недопустимые символы в названии класса \"%1$s\""
 
 #: src/MShop/Order/Item/Abstract.php:161
-#: src/MShop/Common/Item/Abstract.php:190
+#: src/MShop/Common/Item/Abstract.php:195
 #, php-format
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
 msgstr "Недопустимые символы в дате \"%1$s\". Ожидается соблюдение формата ISO \"ГГГГ-ММ-ДД чч:мм:сс\"."
 
-#: src/MShop/Customer/Item/Default.php:349
+#: src/MShop/Customer/Item/Default.php:354
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr "Недопустимые символы в дате \"%1$s\". Ожидается соблюдение формата ISO \"ГГГГ-ММ-ДД\"."
@@ -266,7 +266,7 @@ msgstr "Недопустимые символы в дате \"%1$s\". Ожида
 msgid "Invalid characters in domain name \"%1$s\""
 msgstr "Недопустимые символы в названии домена \"%1$s\""
 
-#: src/MShop/Common/Item/Address/Abstract.php:433
+#: src/MShop/Common/Item/Address/Abstract.php:457
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
 msgstr "Недопустимые символы в адресе email: \"%1$s\""
@@ -279,7 +279,7 @@ msgstr "Недопустимые символы в адресе email: \"%1$s\""
 msgid "Invalid characters in manager name \"%1$s\""
 msgstr "Недопустимые символы в названии менеджера \"%1$s\""
 
-#: src/MAdmin/Factory.php:50 src/MShop/Factory.php:77
+#: src/MAdmin/Factory.php:76 src/MShop/Factory.php:77
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
 msgstr "Недопустимые символы в названии управляющего \"%1$s\" в \"%2$s\""
@@ -309,7 +309,7 @@ msgstr "Недопустимые символы в дате покупки \"%1$
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
 msgstr "Недопустимая настройка для поставщика купонов \"%1$s\", необходимо \"%2$s\""
 
-#: src/MAdmin/Factory.php:70 src/MShop/Factory.php:97
+#: src/MAdmin/Factory.php:96 src/MShop/Factory.php:97
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr "Недопустимая фабрика \"%1$s\""
@@ -319,12 +319,12 @@ msgstr "Недопустимая фабрика \"%1$s\""
 msgid "Invalid mime type \"%1$s\""
 msgstr "Недопустимый mime тип \"%1$s\""
 
-#: src/MShop/Order/Manager/Base/Default.php:512
+#: src/MShop/Order/Manager/Base/Default.php:513
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr "Недопустимая сериализованная корзина. \"%1$s\" возвращает \"%2$s\"."
 
-#: src/MShop/Common/Item/Address/Abstract.php:489
+#: src/MShop/Common/Item/Address/Abstract.php:513
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
 msgstr "Недопустимый URL сайта \"%1$s\""
@@ -345,7 +345,7 @@ msgstr "Невозможно сохранить элемент, использу
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
 msgstr "Элемент, упомянутый в домене \"%1$s\" не найден: %2$s"
 
-#: src/MAdmin/Cache/Manager/Default.php:357
+#: src/MAdmin/Cache/Manager/Default.php:385
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
 msgstr "Не найден элемент с ID \"%1$s\""
@@ -391,7 +391,7 @@ msgstr "Ошибка загрузки ответа XML \"%1$s\" от поста�
 msgid "Locale item for site \"%1$s\" not found"
 msgstr "Не найден элемент локали для сайта \"%1$s\""
 
-#: src/MShop/Context/Item/Default.php:196
+#: src/MShop/Context/Item/Default.php:211
 #, php-format
 msgid "Locale object not available"
 msgstr "Недоступен объект локали"
@@ -406,22 +406,22 @@ msgstr "Флаг блокировки \"%1$d\" вне допустимого д�
 msgid "Log entry with ID \"%1$s\" not found"
 msgstr "Не найдена запись журнала с ID \"%1$s\""
 
-#: src/MShop/Context/Item/Default.php:222
+#: src/MShop/Context/Item/Default.php:237
 #, php-format
 msgid "Log manager object not available"
 msgstr "Недоступен объект управления журналированием"
 
-#: src/MShop/Context/Item/Default.php:274
+#: src/MShop/Context/Item/Default.php:289
 #, php-format
 msgid "Mail object not available"
 msgstr "Недоступен объект почты"
 
-#: src/MAdmin/Factory.php:55 src/MShop/Factory.php:82
+#: src/MAdmin/Factory.php:81 src/MShop/Factory.php:82
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
 msgstr "Недопустимый путь к менеджеру \"%1$s\""
 
-#: src/MAdmin/Factory.php:38 src/MShop/Factory.php:65
+#: src/MAdmin/Factory.php:64 src/MShop/Factory.php:65
 #, php-format
 msgid "Manager path is empty"
 msgstr "Пустой путь к менеджеру"
@@ -446,7 +446,7 @@ msgstr "Недоступен метод \"%1$s\" для поставщика"
 msgid "Missing configuration \"%1$s\""
 msgstr "Неверная настройка \"%1$s\""
 
-#: src/MShop/Common/Item/Abstract.php:172
+#: src/MShop/Common/Item/Abstract.php:177
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "Новый ID \"%1$s\" элемента отличается от старого ID \"%2$s\""
@@ -474,7 +474,7 @@ msgstr "Не найден товар с кодом \"%1$s\""
 msgid "No warehouse for code \"%1$s\" found"
 msgstr "Не найдено склада для кода \"%1$s\""
 
-#: src/MAdmin/Cache/Manager/Default.php:256
+#: src/MAdmin/Cache/Manager/Default.php:284
 #: src/MAdmin/Job/Manager/Default.php:161
 #: src/MAdmin/Log/Manager/Default.php:171
 #: src/MShop/Order/Manager/Base/Default.php:364
@@ -482,7 +482,7 @@ msgstr "Не найдено склада для кода \"%1$s\""
 #: src/MShop/Order/Manager/Base/Service/Attribute/Default.php:171
 #: src/MShop/Order/Manager/Base/Product/Default.php:261
 #: src/MShop/Order/Manager/Base/Product/Attribute/Default.php:172
-#: src/MShop/Order/Manager/Base/Address/Default.php:261
+#: src/MShop/Order/Manager/Base/Address/Default.php:268
 #: src/MShop/Order/Manager/Base/Coupon/Default.php:147
 #: src/MShop/Order/Manager/Status/Default.php:133
 #: src/MShop/Order/Manager/Default.php:200
@@ -492,7 +492,7 @@ msgstr "Не найдено склада для кода \"%1$s\""
 #: src/MShop/Locale/Manager/Language/Default.php:123
 #: src/MShop/Locale/Manager/Currency/Default.php:127
 #: src/MShop/Service/Manager/Default.php:242
-#: src/MShop/Customer/Manager/Default.php:362
+#: src/MShop/Customer/Manager/Default.php:369
 #: src/MShop/Attribute/Manager/Default.php:199
 #: src/MShop/Common/Manager/Type/Abstract.php:115
 #: src/MShop/Common/Manager/List/Abstract.php:91
@@ -538,7 +538,7 @@ msgid ""
 "invoice ID \"%2$s\" of the order"
 msgstr "ID заказа \"%1$s\" в ответе XML поставщика доставки отличается от хранящегося в счёте ID \"%2$s\" заказа"
 
-#: src/MShop/Order/Manager/Base/Default.php:619
+#: src/MShop/Order/Manager/Base/Default.php:623
 #: src/MShop/Service/Provider/Delivery/Default.php:291
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
@@ -731,7 +731,7 @@ msgstr "Недоступна служба типа \"%1$s\""
 msgid "Service payment provider for order base ID \"%1$s\" not found"
 msgstr "Не найдена служба поставщика оплаты для заказа с основным ID \"%1$s\""
 
-#: src/MShop/Context/Item/Default.php:248
+#: src/MShop/Context/Item/Default.php:263
 #, php-format
 msgid "Session object not available"
 msgstr "Недоступен объект сессии"
@@ -840,7 +840,7 @@ msgid ""
 "failed: %2$s"
 msgstr "Ошибка проверки ответа XML от поставщика доставки, в соответствие со схемой \"%1$s\": %2$s"
 
-#: src/MShop/Context/Item/Default.php:300
+#: src/MShop/Context/Item/Default.php:315
 #, php-format
 msgid "View object not available"
 msgstr "Недоступен объект режима вывода"

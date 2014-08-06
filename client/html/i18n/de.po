@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-20 18:54+0200\n"
-"PO-Revision-Date: 2014-07-20 16:54+0000\n"
+"POT-Creation-Date: 2014-08-06 16:31+0200\n"
+"PO-Revision-Date: 2014-08-06 14:32+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -37,13 +37,29 @@ msgstr[1] "%1$d Artikel"
 #. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
 #. language (%13$s),
 #. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
-#. (%17$s)
+#. (%17$s), vatid (%18$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. vatid (%13$s), language (%14$s),
+#. / e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site
+#. (%18$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. language (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
+#. (%17$s), vatid (%18$s)
 #: layouts/common/summary/address-body-default.html:38
-#: layouts/common/summary/address-body-default.html:92
+#: layouts/common/summary/address-body-default.html:94
 #: layouts/email/common/text-summary-address-body-default.html:28
-#: layouts/email/common/text-summary-address-body-default.html:76
-#: layouts/checkout/standard/address-delivery-body-default.html:65
-#: layouts/checkout/standard/address-billing-body-default.html:61
+#: layouts/email/common/text-summary-address-body-default.html:78
+#: layouts/checkout/standard/address-delivery-body-default.html:70
+#: layouts/checkout/standard/address-billing-body-default.html:60
 #, php-format
 msgid ""
 "%1$s\n"
@@ -58,7 +74,8 @@ msgid ""
 "%15$s\n"
 "%16$s\n"
 "%17$s\n"
-msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n"
+"%18$s\n"
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n%18$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: layouts/account/watch/body-default.html:90
@@ -151,17 +168,22 @@ msgstr "-%1$s%%"
 msgid "Add to basket"
 msgstr "In den Warenkorb"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:135
-#: layouts/checkout/standard/address-billing-body-default.html:131
+#: layouts/checkout/standard/address-delivery-body-default.html:143
+#: layouts/checkout/standard/address-delivery-body-default.html:257
+#: layouts/checkout/standard/address-billing-body-default.html:133
+#: layouts/checkout/standard/address-billing-body-default.html:247
 msgid "Additional"
 msgstr "Zusatz"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:139
-#: layouts/checkout/standard/address-billing-body-default.html:135
+#: layouts/checkout/standard/address-delivery-body-default.html:147
+#: layouts/checkout/standard/address-delivery-body-default.html:261
+#: layouts/checkout/standard/address-billing-body-default.html:137
+#: layouts/checkout/standard/address-billing-body-default.html:251
 msgid "Additional 2"
 msgstr "Zusatz 2"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:330
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:196
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:248
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
 msgstr "Es ist keine Adresse mit der ID \"%1$s\" vorhanden"
@@ -182,15 +204,17 @@ msgstr "Alle Lieferungen erfolgen gemäß unseren AGBs, die Sie auf unserer Webs
 msgid "Article no.:"
 msgstr "Artikelnummer:"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:313
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:227
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:271
 #, php-format
-msgid "At least one billing address part is missing"
-msgstr "Mindestens ein erforderliches Feld in der Rechnungsadresse wurde nicht ausgefüllt"
+msgid "At least one billing address part is missing or invalid"
+msgstr "Mindestens ein Teil der Rechnungsadresse fehlt oder ist ungültig"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:310
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:237
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:270
 #, php-format
-msgid "At least one delivery address part is missing"
-msgstr "Mindestens ein erforderliches Feld in der Versandadresse wurde nicht ausgefüllt"
+msgid "At least one delivery address part is missing or invalid"
+msgstr "Mindestens ein Teil der Lieferadresse fehlt oder ist ungültig"
 
 #: layouts/basket/standard/body-default.html:41
 #: layouts/checkout/standard/address-body-default.html:17
@@ -208,12 +232,16 @@ msgstr "Warenkorb"
 
 #: layouts/common/summary/address-body-default.html:22
 #: layouts/email/common/text-summary-address-body-default.html:17
-#: layouts/checkout/standard/address-billing-body-default.html:47
+#: layouts/checkout/standard/address-billing-body-default.html:45
 msgid "Billing address"
 msgstr "Rechnungsadresse"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:295
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:306
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:432
+#, php-format
+msgid "Billing address part \"%1$s\" is invalid"
+msgstr "Der Teil \"%1$s\" der Rechnungsadresse ist ungültig"
+
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:457
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "Bitte tragen Sie in der Rechnungsadresse Ihre Daten in das Feld \"%1$s\" ein"
@@ -228,7 +256,7 @@ msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
 msgstr "Kategorie mit der ID \"%1$s\" ist nicht unterhalb der ID \"%2$s\""
 
 #: layouts/common/summary/address-body-default.html:24
-#: layouts/common/summary/address-body-default.html:78
+#: layouts/common/summary/address-body-default.html:80
 #: layouts/common/summary/detail-body-default.html:78
 #: layouts/common/summary/service-body-default.html:18
 #: layouts/common/summary/service-body-default.html:52
@@ -248,8 +276,10 @@ msgstr "Eigenschaften"
 msgid "Checkout"
 msgstr "Zur Kasse"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:147
-#: layouts/checkout/standard/address-billing-body-default.html:143
+#: layouts/checkout/standard/address-delivery-body-default.html:155
+#: layouts/checkout/standard/address-delivery-body-default.html:269
+#: layouts/checkout/standard/address-billing-body-default.html:145
+#: layouts/checkout/standard/address-billing-body-default.html:259
 msgid "City"
 msgstr "Ort"
 
@@ -258,13 +288,13 @@ msgstr "Ort"
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "Die Klasse \"%1$s\" implementiert nicht \"%2$s\""
 
-#: src/Client/Html/Abstract.php:290
+#: src/Client/Html/Abstract.php:328
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
-#: src/Client/Html/Abstract.php:284
+#: src/Client/Html/Abstract.php:322
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -280,8 +310,10 @@ msgstr "Die Klasse \"%1$s\" ist unbekannt"
 msgid "Close"
 msgstr "Schließen"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:119
-#: layouts/checkout/standard/address-billing-body-default.html:115
+#: layouts/checkout/standard/address-delivery-body-default.html:127
+#: layouts/checkout/standard/address-delivery-body-default.html:241
+#: layouts/checkout/standard/address-billing-body-default.html:117
+#: layouts/checkout/standard/address-billing-body-default.html:231
 msgid "Company"
 msgstr "Firma"
 
@@ -289,8 +321,10 @@ msgstr "Firma"
 msgid "Confirmation"
 msgstr "Bestätigung"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:155
-#: layouts/checkout/standard/address-billing-body-default.html:151
+#: layouts/checkout/standard/address-delivery-body-default.html:160
+#: layouts/checkout/standard/address-delivery-body-default.html:278
+#: layouts/checkout/standard/address-billing-body-default.html:150
+#: layouts/checkout/standard/address-billing-body-default.html:264
 msgid "Country"
 msgstr "Land"
 
@@ -304,7 +338,7 @@ msgstr "Gutscheincodes"
 msgid "Coupons"
 msgstr "Gutscheine"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:332
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:246
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
 msgstr "Die Kundennummer \"%1$s\" ist unbekannt"
@@ -327,14 +361,18 @@ msgstr "Sehr geehrte Damen und Herren"
 msgid "Delivery"
 msgstr "Versand"
 
-#: layouts/common/summary/address-body-default.html:76
-#: layouts/email/common/text-summary-address-body-default.html:65
-#: layouts/checkout/standard/address-delivery-body-default.html:47
+#: layouts/common/summary/address-body-default.html:78
+#: layouts/email/common/text-summary-address-body-default.html:67
+#: layouts/checkout/standard/address-delivery-body-default.html:51
 msgid "Delivery address"
 msgstr "Lieferadresse"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:292
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:303
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:392
+#, php-format
+msgid "Delivery address part \"%1$s\" is invalid"
+msgstr "Der Teil \"%1$s\" der Lieferadresse ist ungültig"
+
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:418
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "Bitte tragen Sie in der Versandadresse Ihre Daten in das Feld \"%1$s\" ein"
@@ -352,8 +390,10 @@ msgstr "Details"
 msgid "Downloads"
 msgstr "Downloads"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:174
-#: layouts/checkout/standard/address-billing-body-default.html:170
+#: layouts/checkout/standard/address-delivery-body-default.html:197
+#: layouts/checkout/standard/address-delivery-body-default.html:315
+#: layouts/checkout/standard/address-billing-body-default.html:187
+#: layouts/checkout/standard/address-billing-body-default.html:301
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -366,8 +406,10 @@ msgstr "E-Mail Benachrichtigung"
 msgid "Favorite products"
 msgstr "Lieblingsprodukte"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:182
-#: layouts/checkout/standard/address-billing-body-default.html:178
+#: layouts/checkout/standard/address-delivery-body-default.html:205
+#: layouts/checkout/standard/address-delivery-body-default.html:323
+#: layouts/checkout/standard/address-billing-body-default.html:195
+#: layouts/checkout/standard/address-billing-body-default.html:309
 msgid "Fax"
 msgstr "Fax"
 
@@ -375,8 +417,10 @@ msgstr "Fax"
 msgid "Fields with an * are mandatory"
 msgstr "Felder mit einem * müssen ausgefüllt werden"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:123
-#: layouts/checkout/standard/address-billing-body-default.html:119
+#: layouts/checkout/standard/address-delivery-body-default.html:131
+#: layouts/checkout/standard/address-delivery-body-default.html:245
+#: layouts/checkout/standard/address-billing-body-default.html:121
+#: layouts/checkout/standard/address-billing-body-default.html:235
 msgid "First name"
 msgstr "Vorname"
 
@@ -425,6 +469,7 @@ msgstr "Enthaltene Rabatte"
 #: src/Client/Html/Checkout/Update/Factory.php:72
 #: src/Client/Html/Checkout/Confirm/Factory.php:72
 #: src/Client/Html/Checkout/Standard/Factory.php:72
+#: src/Client/Html/Locale/Select/Factory.php:72
 #: src/Client/Html/Email/Watch/Factory.php:72
 #: src/Client/Html/Email/Payment/Factory.php:72
 #: src/Client/Html/Email/Delivery/Factory.php:72
@@ -444,7 +489,7 @@ msgstr "Enthaltene Rabatte"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
-#: src/Client/Html/Abstract.php:247 src/Client/Html/Abstract.php:275
+#: src/Client/Html/Abstract.php:285 src/Client/Html/Abstract.php:313
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "Client-Name \"%1$s\" enthält unerlaubte Zeichen"
@@ -464,13 +509,17 @@ msgstr "Unbekannte Domäne \"%1$s\""
 msgid "Invalid process response from service provider with code \"%1$s\""
 msgstr "Ungültige Antwort auf die Prozessanfrage vom Serviceanbieter mit dem Code \"%1$s\""
 
-#: layouts/checkout/standard/address-delivery-body-default.html:166
-#: layouts/checkout/standard/address-billing-body-default.html:162
+#: layouts/checkout/standard/address-delivery-body-default.html:185
+#: layouts/checkout/standard/address-delivery-body-default.html:303
+#: layouts/checkout/standard/address-billing-body-default.html:175
+#: layouts/checkout/standard/address-billing-body-default.html:289
 msgid "Language"
 msgstr "Sprache"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:127
-#: layouts/checkout/standard/address-billing-body-default.html:123
+#: layouts/checkout/standard/address-delivery-body-default.html:135
+#: layouts/checkout/standard/address-delivery-body-default.html:249
+#: layouts/checkout/standard/address-billing-body-default.html:125
+#: layouts/checkout/standard/address-billing-body-default.html:239
 msgid "Last name"
 msgstr "Nachname"
 
@@ -608,8 +657,10 @@ msgstr "Bitte geben Sie mindestens drei Zeichen ein"
 msgid "Please select"
 msgstr "Bitte wählen"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:143
-#: layouts/checkout/standard/address-billing-body-default.html:139
+#: layouts/checkout/standard/address-delivery-body-default.html:151
+#: layouts/checkout/standard/address-delivery-body-default.html:265
+#: layouts/checkout/standard/address-billing-body-default.html:141
+#: layouts/checkout/standard/address-billing-body-default.html:255
 msgid "Postal code"
 msgstr "PLZ"
 
@@ -639,8 +690,10 @@ msgstr "Relevanz"
 msgid "Result for \"%1$s\""
 msgstr "Suchergebnis für \"%1$s\""
 
-#: layouts/checkout/standard/address-delivery-body-default.html:110
-#: layouts/checkout/standard/address-billing-body-default.html:106
+#: layouts/checkout/standard/address-delivery-body-default.html:118
+#: layouts/checkout/standard/address-delivery-body-default.html:232
+#: layouts/checkout/standard/address-billing-body-default.html:108
+#: layouts/checkout/standard/address-billing-body-default.html:222
 msgid "Salutation"
 msgstr "Anrede"
 
@@ -653,15 +706,34 @@ msgid_plural ""
 msgstr[0] "Ihr Suchergebnis für <span class=\"searchstring\">\"%1$s\"</span> (%2$d Artikel)"
 msgstr[1] "Ihr Suchergebnis für <span class=\"searchstring\">\"%1$s\"</span> (%2$d Artikel)"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:158
-#: layouts/checkout/standard/address-billing-body-default.html:154
+#: layouts/checkout/standard/address-delivery-body-default.html:162
+#: layouts/checkout/standard/address-delivery-body-default.html:280
+#: layouts/checkout/standard/address-billing-body-default.html:152
+#: layouts/checkout/standard/address-billing-body-default.html:266
 msgid "Select country"
 msgstr "Bitte wählen"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:112
-#: layouts/checkout/standard/address-billing-body-default.html:108
+#: layouts/locale/select/currency-body-default.html:18
+msgid "Select currency"
+msgstr "Wählen Sie eine Währung"
+
+#: layouts/locale/select/language-body-default.html:15
+msgid "Select language"
+msgstr "Wählen Sie eine Sprache"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:120
+#: layouts/checkout/standard/address-delivery-body-default.html:234
+#: layouts/checkout/standard/address-billing-body-default.html:110
+#: layouts/checkout/standard/address-billing-body-default.html:224
 msgid "Select salutation"
 msgstr "Bitte wählen"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:173
+#: layouts/checkout/standard/address-delivery-body-default.html:291
+#: layouts/checkout/standard/address-billing-body-default.html:163
+#: layouts/checkout/standard/address-billing-body-default.html:277
+msgid "Select state"
+msgstr "Wählen Sie ein Bundesland"
 
 #: layouts/email/common/text-summary-detail-body-default.html:82
 msgid "Service fees"
@@ -687,8 +759,11 @@ msgstr "Alle Bewertungen zeigen"
 msgid "Sort by:"
 msgstr "Sortierung:"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:151
-#: layouts/checkout/standard/address-billing-body-default.html:147
+#: layouts/checkout/standard/address-delivery-body-default.html:171
+#: layouts/checkout/standard/address-delivery-body-default.html:273
+#: layouts/checkout/standard/address-delivery-body-default.html:289
+#: layouts/checkout/standard/address-billing-body-default.html:161
+#: layouts/checkout/standard/address-billing-body-default.html:275
 msgid "State"
 msgstr "Bundesland"
 
@@ -706,8 +781,10 @@ msgstr "%2$s %1$s"
 msgid "Stock: %1$s, %2$s, back on %3$s"
 msgstr "%2$s, wieder verfügbar am %3$s %1$s"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:131
-#: layouts/checkout/standard/address-billing-body-default.html:127
+#: layouts/checkout/standard/address-delivery-body-default.html:139
+#: layouts/checkout/standard/address-delivery-body-default.html:253
+#: layouts/checkout/standard/address-billing-body-default.html:129
+#: layouts/checkout/standard/address-billing-body-default.html:243
 msgid "Street"
 msgstr "Straße"
 
@@ -726,12 +803,14 @@ msgstr "Empfohlene Produkte"
 msgid "Sum"
 msgstr "Summe"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:178
-#: layouts/checkout/standard/address-billing-body-default.html:174
+#: layouts/checkout/standard/address-delivery-body-default.html:201
+#: layouts/checkout/standard/address-delivery-body-default.html:319
+#: layouts/checkout/standard/address-billing-body-default.html:191
+#: layouts/checkout/standard/address-billing-body-default.html:305
 msgid "Telephone"
 msgstr "Telefon"
 
-#: src/Client/Html/Abstract.php:425
+#: src/Client/Html/Abstract.php:464
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "Es wurde keine Vorlage für \"%1$s\" gefunden"
@@ -855,10 +934,18 @@ msgstr "Zwei Wochen"
 msgid "Unable to call method \"%1$s\""
 msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"
 
-#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:192
+#: src/Client/Html/Checkout/Standard/Order/Address/Default.php:194
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr "Die Adresse des Kunden \"%1$s\" konnte nicht gespeichert werden: %2$s"
+
+#: src/Client/Html/Catalog/Filter/Default.php:361
+#: src/Client/Html/Catalog/Stage/Default.php:343
+#: src/Client/Html/Catalog/Detail/Default.php:411
+#: src/Client/Html/Catalog/List/Default.php:367
+#, php-format
+msgid "Unable to set cache entry: %1$s"
+msgstr "Im Cache konnte kein Eintrag werden: %1$s"
 
 #: layouts/checkout/confirm/2/intro-body-default.html:12
 msgid ""
@@ -869,6 +956,13 @@ msgstr "Leider wurde die Zahlung für Ihre Bestellung verweigert.\nMöchten Sie 
 #: layouts/basket/standard/body-default.html:43
 msgid "Update"
 msgstr "Aktualisieren"
+
+#: layouts/checkout/standard/address-delivery-body-default.html:193
+#: layouts/checkout/standard/address-delivery-body-default.html:311
+#: layouts/checkout/standard/address-billing-body-default.html:183
+#: layouts/checkout/standard/address-billing-body-default.html:297
+msgid "Vat ID"
+msgstr "USt-Id"
 
 #: layouts/account/watch/body-default.html:166
 msgid "Watch"
@@ -887,8 +981,10 @@ msgstr "Beobachtete Produkte"
 msgid "We received the returned parcel for your order %1$s from %2$s."
 msgstr "Wir haben Ihre Rücksendung für Ihre Bestellung %1$s vom %2$s erhalten."
 
-#: layouts/checkout/standard/address-delivery-body-default.html:186
-#: layouts/checkout/standard/address-billing-body-default.html:182
+#: layouts/checkout/standard/address-delivery-body-default.html:209
+#: layouts/checkout/standard/address-delivery-body-default.html:327
+#: layouts/checkout/standard/address-billing-body-default.html:199
+#: layouts/checkout/standard/address-billing-body-default.html:313
 msgid "Web site"
 msgstr "Webseite"
 
@@ -970,14 +1066,14 @@ msgstr "Versand"
 msgid "from %1$s"
 msgstr "ab %1$s"
 
-#: layouts/common/summary/address-body-default.html:127
-#: layouts/email/common/text-summary-address-body-default.html:111
-#: layouts/checkout/standard/address-delivery-body-default.html:51
+#: layouts/common/summary/address-body-default.html:131
+#: layouts/email/common/text-summary-address-body-default.html:115
+#: layouts/checkout/standard/address-delivery-body-default.html:55
 msgid "like billing address"
 msgstr "wie Rechnungsadresse"
 
-#: layouts/checkout/standard/address-delivery-body-default.html:106
-#: layouts/checkout/standard/address-billing-body-default.html:102
+#: layouts/checkout/standard/address-delivery-body-default.html:219
+#: layouts/checkout/standard/address-billing-body-default.html:209
 msgid "new address"
 msgstr "Neue Adresse"
 
