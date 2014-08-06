@@ -350,9 +350,9 @@ class Controller_ExtJS_Coupon_Code_Default
 
 				$item->setId( null );
 				$item->setCode( $code );
-				$item->setCount( ( isset( $row[1] ) ? $row[1] : 1 ) );
-				$item->setDateStart( ( isset( $row[2] ) ? $row[2] : null ) );
-				$item->setDateEnd( ( isset( $row[3] ) ? $row[3] : null ) );
+				$item->setCount( ( isset( $row[1] ) && ( $data = trim( $row[1] ) ) != '' ? $data : 1 ) );
+				$item->setDateStart( ( isset( $row[2] ) && ( $data = trim( $row[2] ) ) != '' ? $data : null ) );
+				$item->setDateEnd( ( isset( $row[3] ) && ( $data = trim( $row[3] ) ) != '' ? $data : null ) );
 
 				$manager->saveItem( $item, false );
 			}
