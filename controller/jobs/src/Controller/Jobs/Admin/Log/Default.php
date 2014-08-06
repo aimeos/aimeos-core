@@ -171,9 +171,9 @@ class Controller_Jobs_Admin_Log_Default
 			 * @see controller/jobs/admin/log/default/limit-days
 			 */
 
-			$type = $config->get( 'controller/extjs/coupon/code/default/container/type', 'Zip' );
-			$format = $config->get( 'controller/extjs/coupon/code/default/container/format', 'CSV' );
-			$options = $config->get( 'controller/extjs/coupon/code/default/container/options', array() );
+			$type = $config->get( 'controller/jobs/admin/log/default/container/type', 'Zip' );
+			$format = $config->get( 'controller/jobs/admin/log/default/container/format', 'CSV' );
+			$options = $config->get( 'controller/jobs/admin/log/default/container/options', array() );
 
 			$path .= DIRECTORY_SEPARATOR . str_replace( ' ', '_', $limitDate );
 			$container = MW_Container_Factory::getContainer( $path, $type, $format, $options );
