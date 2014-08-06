@@ -38,7 +38,6 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$paths = TestHelper::getHtmlTemplatePaths();
 		$this->_object = new Client_Html_Checkout_Standard_Default( $this->_context, $paths );
-		$this->_object->setView( TestHelper::getView() );
 	}
 
 
@@ -56,6 +55,7 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
+		$this->_object->setView( TestHelper::getView() );
 		$output = $this->_object->getHeader();
 		$this->assertNotNull( $output );
 	}
@@ -63,6 +63,13 @@ class Client_Html_Checkout_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBody()
 	{
+		$view = TestHelper::getView();
+		$view->standardStepActive = 'payment';
+
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'c-step' => 'address' ) );
+		$view->addHelper( 'param', $helper );
+
+		$this->_object->setView( $view );
 		$output = $this->_object->getBody();
 
 		$this->assertStringStartsWith( '<section class="arcavias checkout-standard">', $output );
