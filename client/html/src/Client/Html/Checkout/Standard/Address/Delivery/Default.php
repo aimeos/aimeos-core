@@ -385,10 +385,12 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 		{
 			if( isset( $allFields[$key] ) )
 			{
-				if( isset( $regex[$key] ) && preg_match( $regex[$key], $value ) !== 1 )
+				$name = substr( $key, 19 );
+
+				if( isset( $regex[$name] ) && preg_match( $regex[$name], $value ) !== 1 )
 				{
 					$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is invalid' );
-					$invalid[$key] = sprintf( $msg, substr( $key, 19 ) );
+					$invalid[$key] = sprintf( $msg, $name );
 					unset( $params[$key] );
 				}
 			}

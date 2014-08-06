@@ -374,40 +374,40 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		 * To validate the address input data of the customer, an individual
 		 * {@link http://php.net/manual/en/pcre.pattern.php Perl compatible regular expression}
 		 * can be applied to each field. Available fields are:
-		 * * order.base.address.company
-		 * * order.base.address.vatid
-		 * * order.base.address.salutation
-		 * * order.base.address.firstname
-		 * * order.base.address.lastname
-		 * * order.base.address.address1
-		 * * order.base.address.address2
-		 * * order.base.address.address3
-		 * * order.base.address.postal
-		 * * order.base.address.city
-		 * * order.base.address.state
-		 * * order.base.address.languageid
-		 * * order.base.address.countryid
-		 * * order.base.address.telephone
-		 * * order.base.address.telefax
-		 * * order.base.address.email
-		 * * order.base.address.website
+		 * * company
+		 * * vatid
+		 * * salutation
+		 * * firstname
+		 * * lastname
+		 * * address1
+		 * * address2
+		 * * address3
+		 * * postal
+		 * * city
+		 * * state
+		 * * languageid
+		 * * countryid
+		 * * telephone
+		 * * telefax
+		 * * email
+		 * * website
 		 *
 		 * Some fields are validated automatically because they are not
 		 * dependent on a country specific rule. These fields are:
-		 * * order.base.address.salutation
-		 * * order.base.address.email
-		 * * order.base.address.website
+		 * * salutation
+		 * * email
+		 * * website
 		 *
 		 * To validate e.g the postal/zip code, you can define a regular
 		 * expression like this if you want to allow only digits:
 		 *
-		 *  client/html/common/address/validate/order.base.address.postal = '/^[0-9]+$/'
+		 *  client/html/common/address/validate/postal = '/^[0-9]+$/'
 		 *
 		 * Several regular expressions can be defined line this:
 		 *
 		 *  client/html/common/address/validate = array(
-		 *      'order.base.address.postal' = '/^[0-9]+$/',
-		 *      'order.base.address.vatid' = '/^[A-Z]{2}[0-9]{8}$/',
+		 *      'postal' = '/^[0-9]+$/',
+		 *      'vatid' = '/^[A-Z]{2}[0-9]{8}$/',
 		 *  )
 		 *
 		 * @param array Associative list of field names and regular expressions
@@ -425,10 +425,12 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 		{
 			if( isset( $allFields[$key] ) )
 			{
-				if( isset( $regex[$key] ) && preg_match( $regex[$key], $value ) !== 1 )
+				$name = substr( $key, 19 );
+
+				if( isset( $regex[$name] ) && preg_match( $regex[$name], $value ) !== 1 )
 				{
 					$msg = $view->translate( 'client/html', 'Billing address part "%1$s" is invalid' );
-					$invalid[$key] = sprintf( $msg, substr( $key, 19 ) );
+					$invalid[$key] = sprintf( $msg, $name );
 					unset( $params[$key] );
 				}
 			}
