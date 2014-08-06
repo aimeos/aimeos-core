@@ -430,9 +430,16 @@ class Client_Html_Checkout_Standard_Default
 			$default = $view->config( 'client/html/checkout/standard/url/step-active', 'summary' );
 			$default = ( !in_array( $default, $steps ) ? reset( $steps ) : $default );
 
-			if( !isset( $view->standardStepActive ) ) {
-				$view->standardStepActive = $view->param( 'c-step', $default );
+			$current = $view->param( 'c-step', $default );
+
+			if( !isset( $view->standardStepActive )
+				|| ( ( $cpos = array_search( $current, $steps ) ) !== false
+				&& ( $apos = array_search( $view->standardStepActive, $steps ) ) !== false
+				&& $cpos < $apos )
+			) {
+				$view->standardStepActive = $current;
 			}
+
 			$activeStep = $view->standardStepActive;
 
 
