@@ -25,7 +25,7 @@ abstract class Client_Html_Common_Decorator_Abstract
 	/**
 	 * Initializes the client decorator.
 	 *
-	 * @param MShop_Context_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param Client_Html_Interface $client Client object
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, Client_Html_Interface $client )

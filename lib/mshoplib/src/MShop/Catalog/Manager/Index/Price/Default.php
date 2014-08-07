@@ -148,7 +148,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -205,7 +205,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 * Returns the price item for the given ID
 	 *
 	 * @param integer $id Id of item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Product_Item_Interface Returns the product item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
@@ -454,7 +454,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 	 * Rebuilds the catalog index price for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
+	 * @param MShop_Common_Item_Interface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{

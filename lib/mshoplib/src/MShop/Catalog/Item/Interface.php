@@ -27,6 +27,7 @@ interface MShop_Catalog_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new name of the item.
 	 *
 	 * @param string $name New name of the item
+	 * @return void
 	 */
 	public function setLabel( $name );
 
@@ -41,6 +42,7 @@ interface MShop_Catalog_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the code of the item.
 	 *
 	 * @param string $name New code of the item
+	 * @return void
 	 */
 	public function setCode( $name );
 
@@ -55,6 +57,7 @@ interface MShop_Catalog_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the config property of the catalog item.
 	 *
 	 * @param array $options Options to be set for the catalog node
+	 * @return void
 	 */
 	public function setConfig( array $options );
 
@@ -69,6 +72,7 @@ interface MShop_Catalog_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new status of the item.
 	 *
 	 * @param boolean $status True if enabled, false if not
+	 * @return void
 	 */
 	public function setStatus( $status );
 
@@ -98,6 +102,7 @@ interface MShop_Catalog_Item_Interface extends MShop_Common_Item_Interface
 	 * Adds a child node to this node.
 	 *
 	 * @param MShop_Catalog_Item_Interface $item Child node to add
+	 * @return void
 	 */
 	public function addChild( MShop_Catalog_Item_Interface $item );
 }

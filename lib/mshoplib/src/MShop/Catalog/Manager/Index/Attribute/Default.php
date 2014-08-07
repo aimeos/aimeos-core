@@ -105,7 +105,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -411,7 +411,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 	 * Rebuilds the catalog index attribute for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
+	 * @param MShop_Common_Item_Interface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{

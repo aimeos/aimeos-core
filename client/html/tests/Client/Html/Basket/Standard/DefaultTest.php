@@ -380,6 +380,11 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	/**
+	 * @param string $code
+	 * @param integer $quantity
+	 * @param string $warehouse
+	 */
 	protected function _addProduct( $code, $quantity, $warehouse )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );
@@ -406,6 +411,9 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	/**
+	 * @param string $code
+	 */
 	protected function _getProductItem( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );

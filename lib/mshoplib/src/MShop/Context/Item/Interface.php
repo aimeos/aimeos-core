@@ -20,6 +20,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the cache object.
 	 *
 	 * @param MW_Cache_Interface $cache Cahce object
+	 * @return void
 	 */
 	public function setCache( MW_Cache_Interface $cache );
 
@@ -34,6 +35,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the configuration object.
 	 *
 	 * @param MW_Config_Interface $config Configuration object
+	 * @return void
 	 */
 	public function setConfig( MW_Config_Interface $config );
 
@@ -48,6 +50,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the database connection manager object.
 	 *
 	 * @param MW_DB_Manager_Interface $databaseManager Database manager object
+	 * @return void
 	 */
 	public function setDatabaseManager( MW_DB_Manager_Interface $databaseManager );
 
@@ -63,6 +66,7 @@ interface MShop_Context_Item_Interface
 	 *
 	 * @param array $translations Associative list of internationalization objects implementing
 	 * 	MW_Translation_Interface with locale as key
+	 * @return void
 	 */
 	public function setI18n( array $translations );
 
@@ -78,6 +82,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the localization object.
 	 *
 	 * @param MShop_Locale_Item_Interface $locale Localization object
+	 * @return void
 	 */
 	public function setLocale( MShop_Locale_Item_Interface $locale );
 
@@ -92,6 +97,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the logger object.
 	 *
 	 * @param MW_Logger_Interface $logger Logger object
+	 * @return void
 	 */
 	public function setLogger( MW_Logger_Interface $logger );
 
@@ -106,6 +112,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the session object.
 	 *
 	 * @param MW_Session_Interface $session Session object
+	 * @return void
 	 */
 	public function setSession( MW_Session_Interface $session );
 
@@ -120,6 +127,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the mail object.
 	 *
 	 * @param MW_Mail_Interface $mail Mail object
+	 * @return void
 	 */
 	public function setMail( MW_Mail_Interface $mail );
 
@@ -134,6 +142,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the view object.
 	 *
 	 * @param MW_View_Interface $view View object
+	 * @return void
 	 */
 	public function setView( MW_View_Interface $view );
 
@@ -148,6 +157,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the account name of the user/editor.
 	 *
 	 * @param string $name Account name of the user/editor
+	 * @return void
 	 */
 	public function setEditor( $name );
 
@@ -162,6 +172,7 @@ interface MShop_Context_Item_Interface
 	 * Sets the user ID of the logged in user.
 	 *
 	 * @param string $userid User ID of the logged in user
+	 * @return void
 	 */
 	public function setUserId( $userid );
 

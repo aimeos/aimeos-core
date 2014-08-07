@@ -23,6 +23,7 @@ interface MShop_Service_Provider_Decorator_Interface
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration for the provider
 	 * @param MShop_Service_Provider_Interface $provider Service provider or decorator
+	 * @return void
 	 */
 	public function __construct(MShop_Context_Item_Interface $context,
 		MShop_Service_Item_Interface $serviceItem, MShop_Service_Provider_Interface $provider );

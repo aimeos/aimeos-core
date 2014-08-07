@@ -160,7 +160,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * separately isn't supported or not configured by the shop owner.
 	 *
 	 * @param MShop_Order_Item_Interface $order Order invoice object
-	 * @return MW_Common_Form_Interface Form object with URL, action and parameters to redirect to
+	 * @return MShop_Common_Item_Helper_Form_Default Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
 	public function process( MShop_Order_Item_Interface $order )
@@ -705,7 +705,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Saves a list of attributes for the order service.
 	 *
 	 * @param array $attributes Attributes which have to be saved
-	 * @param MShop_Order_Item_Base_Serive_Interface $serviceItem Service Item which saves the attributes
+	 * @param MShop_Order_Item_Base_Service_Interface $serviceItem Service Item which saves the attributes
 	 */
 	protected function _saveAttributes( array $attributes, MShop_Order_Item_Base_Service_Interface $serviceItem, $type = 'payment/paypal' )
 	{

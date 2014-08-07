@@ -20,6 +20,7 @@ interface MW_Setup_Manager_Interface
 	 * Executes all tasks for the given database type.
 	 *
 	 * @param string $dbtype Name of the database type (mysql, etc.)
+	 * @return void
 	 */
 	public function run( $dbtype );
 }

@@ -21,7 +21,7 @@ class MShop_Customer_Manager_Factory
 	/**
 	 * Creates a customer DAO object.
 	 *
-	 * @param MShop_Context_Interface $context Shop context instance with necessary objects
+	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
 	 * @param string $name Manager name
 	 * @return MShop_Common_Manager_Interface Manager object
 	 * @throws MShop_Customer_Exception|MShop_Exception If requested manager

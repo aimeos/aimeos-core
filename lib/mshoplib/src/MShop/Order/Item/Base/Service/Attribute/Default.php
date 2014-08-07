@@ -73,7 +73,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	/**
 	 * Sets the order service id.
 	 *
-	 * @param integer Order service id for the order service attribute item.
+	 * @param integer $id Order service id for the order service attribute item.
 	 */
 	public function setServiceId( $id )
 	{
@@ -98,9 +98,9 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	/**
 	 * Sets a new type for the service attribute item.
 	 *
-	 * @param string $name Type as defined by the service provider
+	 * @param string $type Type of the service attribute
 	 */
-	public function setType($type)
+	public function setType( $type )
 	{
 		if ( $type == $this->getType() ) { return; }
 
@@ -173,7 +173,7 @@ class MShop_Order_Item_Base_Service_Attribute_Default
 	/**
 	 * Sets a new value for the service item.
 	 *
-	 * @param mixed $value service attribute item value
+	 * @param string $value service attribute item value
 	 */
 	public function setValue( $value )
 	{

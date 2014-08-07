@@ -348,7 +348,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * Adds all texts belonging to an catalog item.
 	 *
 	 * @param MW_Container_Content_Interface $contentItem Content item
-	 * @param MShop_Product_Item_Interface $item product item object
+	 * @param MShop_Catalog_Item_Interface $item product item object
 	 * @param string $langid Language id
 	 */
 	protected function _addItem( MW_Container_Content_Interface $contentItem, MShop_Catalog_Item_Interface $item, $langid )
@@ -393,7 +393,7 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 	 * Get all child nodes.
 	 *
 	 * @param MShop_Catalog_Item_Interface $node
-	 * @return array $nodes List of nodes
+	 * @return MShop_Catalog_Item_Interface[] $nodes List of nodes
 	 */
 	protected function _getNodeList( MShop_Catalog_Item_Interface $node )
 	{

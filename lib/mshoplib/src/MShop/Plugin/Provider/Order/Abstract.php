@@ -49,7 +49,7 @@ abstract class MShop_Plugin_Provider_Order_Abstract
 	 *
 	 * @param string $key Configuration key
 	 * @param mixed $default Default value if configuration key isn't available
-	 * @return mixed Value from service item configuration
+	 * @return string|null Value from service item configuration
 	 */
 	protected function _getConfigValue( $key, $default = null )
 	{

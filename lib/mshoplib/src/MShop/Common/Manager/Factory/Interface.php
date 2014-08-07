@@ -20,6 +20,7 @@ interface MShop_Common_Manager_Factory_Interface extends MShop_Common_Manager_In
 	 * Initializes the manager by using the given context object.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @return void
 	 */
 	public function __construct( MShop_Context_Item_Interface $context );
 }

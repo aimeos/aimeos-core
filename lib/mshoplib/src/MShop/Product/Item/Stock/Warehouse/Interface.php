@@ -26,6 +26,7 @@ interface MShop_Product_Item_Stock_Warehouse_Interface extends MShop_Common_Item
 	 * Sets the code of the warehouse item.
 	 *
 	 * @param string $code New Code of the warehouse item
+	 * @return void
 	 */
 	public function setCode( $code );
 
@@ -40,6 +41,7 @@ interface MShop_Product_Item_Stock_Warehouse_Interface extends MShop_Common_Item
 	 * Sets the label of the warehouse item.
 	 *
 	 * @param string $label New label of the warehouse item
+	 * @return void
 	 */
 	public function setLabel( $label );
 
@@ -54,6 +56,7 @@ interface MShop_Product_Item_Stock_Warehouse_Interface extends MShop_Common_Item
 	 * Sets the status of the warehouse item.
 	 *
 	 * @param integer $status New status of the warehouse item
+	 * @return void
 	 */
 	public function setStatus( $status );
 

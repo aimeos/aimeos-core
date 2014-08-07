@@ -105,7 +105,7 @@ class MAdmin_Cache_Manager_None
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withSub Return also attributes of sub-managers if true
+	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Interface
 	 */
 	public function getSearchAttributes( $withsub = true )

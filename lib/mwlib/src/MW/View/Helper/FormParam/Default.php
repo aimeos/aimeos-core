@@ -25,7 +25,7 @@ class MW_View_Helper_FormParam_Default
 	 * Initializes the URL view helper.
 	 *
 	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param array $names Prefix names when generating form parameters (will be "name1[name2][name3]..." )
+	 * @param string[] $names Prefix names when generating form parameters (will be "name1[name2][name3]..." )
 	 */
 	public function __construct( $view, array $names = array() )
 	{

@@ -22,6 +22,7 @@ interface MW_Setup_Task_Interface
 	 * @param MW_Setup_DBSchema_Interface $schema Database schema object
 	 * @param MW_DB_Connection_Interface $conn Database connection
 	 * @param mixed $additional Additionally provided information for the setup tasks if required
+	 * @return void
 	 */
 	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null );
 
@@ -43,6 +44,7 @@ interface MW_Setup_Task_Interface
 	 * Executes the task for the given database type.
 	 *
 	 * @param string $dbtype Database type (mysql)
+	 * @return void
 	 */
 	public function run( $dbtype );
 }

@@ -78,7 +78,7 @@ class Controller_ExtJS_Order_Base_Coupon_Default extends Controller_ExtJS_Abstra
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return mixed Manager object
+	 * @return MShop_Common_Manager_Interface Manager object
 	 */
 	protected function _getManager()
 	{

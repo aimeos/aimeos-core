@@ -110,7 +110,8 @@ class MShop_Plugin_Item_Default
 	/**
 	 * Sets the new provider of the plugin item which is the short
 	 * name of the plugin class name.
-	 * @param string $name Plugin provider, esp. short plugin class name
+	 *
+	 * @param string $provider Plugin provider, esp. short plugin class name
 	 */
 	public function setProvider( $provider )
 	{
@@ -124,11 +125,11 @@ class MShop_Plugin_Item_Default
 	/**
 	 * Returns the configuration of the plugin item.
 	 *
-	 * @return string Custom configuration values
+	 * @return array Custom configuration values
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->_values['config'] ) ? $this->_values['config'] : array() );
+		return ( isset( $this->_values['config'] ) ? (array) $this->_values['config'] : array() );
 	}
 
 

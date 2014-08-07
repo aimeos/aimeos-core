@@ -14,7 +14,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -25,7 +25,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -93,8 +93,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 * Gets recursive all sub-sites of a site sorted on their level.
 	 *
 	 * @param MShop_Locale_Item_Site_Interface $site Site which can contain sub-sites
-	 * @param array $sites List with sites
-	 * @return array $sites List with sites
+	 * @return MShop_Locale_Item_Site_Interface[] $sites List with sites
 	 */
 	private function _getSites( MShop_Locale_Item_Site_Interface $site )
 	{
@@ -112,6 +111,7 @@ class MW_Setup_Task_LocaleAddTestData extends MW_Setup_Task_MShopAddLocaleData
 	 *
 	 * Deletes old sites and their subsites.
 	 *
+	 * @param MShop_Locale_Manager_Interface $localeManager
 	 */
 	private function _cleanupSites( $localeManager )
 	{

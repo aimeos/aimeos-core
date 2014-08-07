@@ -26,7 +26,7 @@ class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -44,17 +44,17 @@ class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Abstract
 	/**
 	 * Changes site ID to NULL in madmin_log.
 	 *
-	 * @param array $colstmts Associative array of tables names and SQL statements.
+	 * @param string $stmt SQL statement to execute
 	 */
 	protected function _process( $stmt )
 	{
 		$table = 'madmin_log';
-		
+
 		$this->_msg( 'Changing site ID to NULL in madmin_log', 0 );
 		$this->_status('');
 
 		$this->_msg(sprintf('Changing table "%1$s": ', $table), 1);
-		
+
 		if( $this->_schema->tableExists($table) &&
 			!$this->_schema->getColumnDetails( $table, 'siteid' )->isNullable() )
 		{
@@ -63,7 +63,7 @@ class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Abstract
 		} else {
 			$this->_status( 'OK' );
 		}
-		
+
 	}
 
 }

@@ -77,7 +77,7 @@ class MW_Config_Decorator_Memory
 	 * Sets the value for the specified key.
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
-	 * @param mixed $value Value that should be associated with the given path
+	 * @param string $value Value that should be associated with the given path
 	 */
 	public function set( $name, $value )
 	{

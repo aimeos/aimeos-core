@@ -115,7 +115,7 @@ class MShop_Attribute_Manager_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -175,7 +175,7 @@ class MShop_Attribute_Manager_Default
 	 * Returns the attributes item specified by its ID.
 	 *
 	 * @param integer $id Unique ID of the attribute item in the storage
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Attribute_Item_Interface Returns the attribute item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
@@ -188,7 +188,7 @@ class MShop_Attribute_Manager_Default
 	/**
 	 * Saves an attribute item to the storage.
 	 *
-	 * @param MShop_Attribute_Item_Interface $attribute Attribute implementing the Attribute interface
+	 * @param MShop_Common_Item_Interface $item Attribute item
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @throws MShop_Attribute_Exception If Attribute couldn't be saved
 	 */
@@ -682,8 +682,8 @@ class MShop_Attribute_Manager_Default
 	 * Creates a new attribute item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_List_Interface
-	 * @param array $textItems List of items implementing MShop_Text_Item_Interface
+	 * @param array $listItems List of items implementing MShop_Common_Item_List_Interface
+	 * @param array $refItems List of items implementing MShop_Text_Item_Interface
 	 * @return MShop_Attribute_Item_Interface New product item
 	 */
 	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )

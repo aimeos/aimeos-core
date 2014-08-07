@@ -28,6 +28,7 @@ interface MShop_Common_Item_Helper_Form_Interface
 	 * Sets the url.
 	 *
 	 * @param string $url Url
+	 * @return void
 	 */
 	public function setUrl( $url );
 
@@ -44,6 +45,7 @@ interface MShop_Common_Item_Helper_Form_Interface
 	 * Sets the method.
 	 *
 	 * @param string $method Method
+	 * @return void
 	 */
 	public function setMethod( $method );
 
@@ -62,6 +64,7 @@ interface MShop_Common_Item_Helper_Form_Interface
 	 *
 	 * @param string $key Key of value
 	 * @param string $value Value for the given key
+	 * @return void
 	 */
 	public function setValue( $key, $value );
 

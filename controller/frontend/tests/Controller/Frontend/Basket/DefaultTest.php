@@ -900,6 +900,9 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	/**
+	 * @param string $company
+	 */
 	protected function _getAddress( $company )
 	{
 		$customer = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
@@ -917,6 +920,9 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	/**
+	 * @param string $code
+	 */
 	protected function _getService( $code )
 	{
 		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );

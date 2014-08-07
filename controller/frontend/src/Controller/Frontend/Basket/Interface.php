@@ -18,6 +18,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 {
 	/**
 	 * Empties the basket and removing all products, addresses, services, etc.
+	 * @return void
 	 */
 	public function clear();
 
@@ -47,6 +48,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 * @param array $hiddenAttributeIds List of attribute IDs that should be stored along with the product in the order
 	 * @param string $warehouse Unique code of the warehouse to deliver the products from
 	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
+	 * @return void
 	 */
 	public function addProduct( $prodid, $quantity = 1, $options = array(), $variantAttributeIds = array(),
 		$configAttributeIds = array(), $hiddenAttributeIds = array(), $warehouse = 'default' );
@@ -56,6 +58,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 * Deletes a product item from the basket.
 	 *
 	 * @param integer $position Position number (key) of the order product item
+	 * @return void
 	 */
 	public function deleteProduct( $position );
 
@@ -66,6 +69,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 * @param integer $position Position number (key) of the order product item
 	 * @param integer $quantity New quantiy of the product item
 	 * @param array $configAttributeCodes Codes of the product config attributes that should be REMOVED
+	 * @return void
 	 */
 	public function editProduct( $position, $quantity, $configAttributeCodes = array() );
 
@@ -75,6 +79,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 *
 	 * @param string $code Coupon code entered by the user
 	 * @throws Controller_Frontend_Basket_Exception if the coupon code is invalid or not allowed
+	 * @return void
 	 */
 	public function addCoupon( $code );
 
@@ -84,6 +89,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 *
 	 * @param string $code Coupon code entered by the user
 	 * @throws Controller_Frontend_Basket_Exception if the coupon code is invalid
+	 * @return void
 	 */
 	public function deleteCoupon( $code );
 
@@ -92,11 +98,10 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 * Sets the address of the customer in the basket.
 	 *
 	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract
-	 * @param MShop_Common_Item_Address_Interface|array $billing Address object or array with key/value pairs.
-	 * 	In case of an array, the keys must be the same as the keys returned when calling toArray()
-	 *  on the order base address object like "order.base.address.salutation"
+	 * @param MShop_Common_Item_Address_Interface|array|null $value Address object or array with key/value pairs of address or null to remove address from basket
 	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
 	 * 	if one of the keys is invalid when using an array with key/value pairs
+	 * @return void
 	 */
 	public function setAddress( $type, $value );
 
@@ -109,6 +114,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 * @param array $attributes Associative list of key/value pairs containing the attributes selected or
 	 * 	entered by the customer when choosing one of the delivery or payment options
 	 * @throws Controller_Frontend_Basket_Exception If there is no price to the service item attached
+	 * @return void
 	 */
 	public function setService( $type, $id, array $attributes = array() );
 }

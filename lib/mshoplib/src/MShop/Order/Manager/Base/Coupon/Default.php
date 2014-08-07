@@ -97,7 +97,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -137,17 +137,17 @@ class MShop_Order_Manager_Base_Coupon_Default
 	/**
 	 * Adds a new item to the storage or updates an existing one.
 	 *
-	 * @param MShop_Order_Item_Base_Coupon_Interface $item Item that should be saved to the storage
+	 * @param MShop_Common_Item_Interface $item Item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $coupon, $fetch = true )
+	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
 		$iface = 'MShop_Order_Item_Base_Coupon_Interface';
-		if( !( $coupon instanceof $iface ) ) {
+		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if ( !$coupon->isModified() ) {
+		if ( !$item->isModified() ) {
 			return;
 		}
 
@@ -159,17 +159,17 @@ class MShop_Order_Manager_Base_Coupon_Default
 
 		try
 		{
-			$id = $coupon->getId();
+			$id = $item->getId();
 
 			$path = 'mshop/order/manager/base/coupon/default/item/';
 			$path .=  ( $id === null ? 'insert' : 'update' );
 
 			$stmt = $this->_getCachedStatement($conn, $path);
 
-			$stmt->bind( 1, $coupon->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $item->getBaseId(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $coupon->getProductId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 4, $coupon->getCode() );
+			$stmt->bind( 3, $item->getProductId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getCode() );
 			$stmt->bind( 5, date( 'Y-m-d H:i:s' ) );
 			$stmt->bind( 6, $context->getEditor() );
 
@@ -185,9 +185,9 @@ class MShop_Order_Manager_Base_Coupon_Default
 			{
 				if( $id === null ) {
 					$path = 'mshop/order/manager/base/coupon/default/item/newid';
-					$coupon->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+					$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 				} else {
-					$coupon->setId( $id );
+					$item->setId( $id );
 				}
 			}
 
@@ -248,6 +248,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array Return a list of items implementing MShop_Order_Item_Base_Coupon_Interface
 	 * @throws MShop_Order_Exception If creation of an item fails
@@ -422,7 +423,7 @@ class MShop_Order_Manager_Base_Coupon_Default
 	/**
 	 * Create new order base coupon item object initialized with given parameters.
 	 *
-	 * @return MShop_Order_Item_Base_Product_Interface New item
+	 * @return MShop_Order_Item_Base_Coupon_Default New item
 	 */
 	protected function _createItem(array $values = array())
 	{

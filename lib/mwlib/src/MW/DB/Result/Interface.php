@@ -35,6 +35,7 @@ interface MW_DB_Result_Interface
 
 	/**
 	 * Cleans up pending database result sets.
+	 * @return void
 	 */
 	public function finish();
 
@@ -42,7 +43,7 @@ interface MW_DB_Result_Interface
 	/**
 	 * Retrieves next database result set.
 	 *
-	 * @return True if another result is available, false if not
+	 * @return boolean True if another result is available, false if not
 	 */
 	public function nextResult();
 }

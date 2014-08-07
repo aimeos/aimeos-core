@@ -26,7 +26,7 @@ class Controller_Common_Order_Factory
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param Controller_Frontend_Interface|null $controller Frontend controller object
+	 * @param null|Controller_Common_Order_Interface $controller Frontend controller object
 	 */
 	public static function injectController( $classname, Controller_Common_Order_Interface $controller = null )
 	{
@@ -38,7 +38,6 @@ class Controller_Common_Order_Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object required by controllers
-	 * @param Arcavias $arcavias Arcavias object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return Controller_Common_Order_Interface New order controller object
 	 * @throws Controller_Common_Exception

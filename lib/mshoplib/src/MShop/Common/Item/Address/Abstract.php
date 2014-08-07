@@ -46,6 +46,12 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	private $_values;
 
 
+	/**
+	 * Initializes the address item.
+	 *
+	 * @param string $prefix Key prefix that should be used for toArray()/fromArray() like "customer.address."
+	 * @param array $values Associative list of key/value pairs containing address data
+	 */
 	public function __construct( $prefix, array $values )
 	{
 		parent::__construct( $prefix, $values );
@@ -80,7 +86,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 		$this->_values['company'] = (string) $company;
 		$this->setModified();
 	}
-	
+
 	/**
 	 * Returns the vatid.
 	 *
@@ -361,7 +367,7 @@ abstract class MShop_Common_Item_Address_Abstract extends MShop_Common_Item_Abst
 	/**
 	 * Sets the ID of the country the address is in.
 	 *
-	 * @param string $countyid Unique ID of the country
+	 * @param string $countryid Unique ID of the country
 	 */
 	public function setCountryId($countryid)
 	{

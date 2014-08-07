@@ -27,6 +27,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the base ID.
 	 *
 	 * @param integer $baseid New base ID
+	 * @return void
 	 */
 	public function setBaseId( $baseid );
 
@@ -43,6 +44,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
 	 * @param integer|null Order product ID
+	 * @return void
 	 */
 	public function setOrderProductId( $orderProductId );
 
@@ -57,6 +59,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the type of the ordered product.
 	 *
 	 * @param string $type order product type
+	 * @return void
 	 */
 	public function setType( $type );
 
@@ -71,6 +74,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the supplier code.
 	 *
 	 * @param string $suppliercode
+	 * @return void
 	 */
 	public function setSupplierCode( $suppliercode );
 
@@ -85,6 +89,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the ID of a product the customer has selected.
 	 *
 	 * @param string $id Original product ID
+	 * @return void
 	 */
 	public function setProductId( $id );
 
@@ -99,6 +104,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the code of a product the customer has selected.
 	 *
 	 * @param string $code product code
+	 * @return void
 	 */
 	public function setProductCode( $code );
 
@@ -113,6 +119,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the code of the warehouse the product should be retrieved from.
 	 *
 	 * @param string $code Warehouse code
+	 * @return void
 	 */
 	public function setWarehouseCode( $code );
 
@@ -127,6 +134,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the localized name of the product.
 	 *
 	 * @param string $value Value of the localized name of the product
+	 * @return void
 	 */
 	public function setName($value);
 
@@ -134,6 +142,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the media url of the product the customer has added.
 	 *
 	 * @param string $value Location of the media/picture
+	 * @return void
 	 */
 	public function setMediaUrl( $value );
 
@@ -155,6 +164,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the number of product packages the customer has added.
 	 *
 	 * @param integer $quantitiy Amount of product packages
+	 * @return void
 	 */
 	public function setQuantity( $quantitiy );
 
@@ -169,6 +179,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the new price item for the selected product and package.
 	 *
 	 * @param MShop_Price_Item_Interface $price Price item containing price and additional costs
+	 * @return void
 	 */
 	public function setPrice( MShop_Price_Item_Interface $price );
 
@@ -190,6 +201,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 *	Sets the new value for the product item flags.
 	 *
 	 * @param integer $value Flags, e.g. for immutable products
+	 * @return void
 	 */
 	public function setFlags( $value );
 
@@ -205,6 +217,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 *
 	 * @param integer Product position in the order from 1-n
 	 * @throws MShop_Order_Exception If there's already a position set
+	 * @return void
 	 */
 	public function setPosition( $value );
 
@@ -223,6 +236,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * MShop_Order_Item_Abstract class
 	 *
 	 * @param integer $value New delivery status of the product
+	 * @return void
 	 */
 	public function setStatus( $value );
 
@@ -254,6 +268,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Sets the new list of attribute items for the product.
 	 *
 	 * @param array $attributes List of attribute items implementing MShop_Order_Item_Base_Product_Attribute_Interface
+	 * @return void
 	 */
 	public function setAttributes( array $attributes );
 
@@ -261,6 +276,7 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * Copys all data from a given product.
 	 *
 	 * @param MShop_Product_Item_Interface $product New product
+	 * @return void
 	 */
 	public function copyFrom( MShop_Product_Item_Interface $product );
 }

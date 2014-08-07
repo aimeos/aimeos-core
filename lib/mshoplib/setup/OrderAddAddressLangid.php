@@ -21,7 +21,7 @@ class MW_Setup_Task_OrderAddAddressLangid extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -32,7 +32,7 @@ class MW_Setup_Task_OrderAddAddressLangid extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -54,7 +54,7 @@ class MW_Setup_Task_OrderAddAddressLangid extends MW_Setup_Task_Abstract
 	 * Add columns to tables if they doesn't exist.
 	 *
 	 * @param string $table Table name
-	 * @param string $colum Column name to add
+	 * @param string $column Column name to add
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
 	protected function _process( $table, $column, $stmts )

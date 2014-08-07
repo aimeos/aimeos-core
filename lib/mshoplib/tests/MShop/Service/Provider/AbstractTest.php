@@ -69,6 +69,9 @@ class MShop_Service_Provider_AbstractTest extends MW_Unittest_Testcase
 
 class Test_MShop_Service_Provider_Abstract extends MShop_Service_Provider_Abstract
 {
+	/**
+	 * @param integer $ts
+	 */
 	public function calcDateLimit( $ts, $days = 0, $bd = false, $hd = '' )
 	{
 		return $this->_calcDateLimit( $ts, $days, $bd, $hd );

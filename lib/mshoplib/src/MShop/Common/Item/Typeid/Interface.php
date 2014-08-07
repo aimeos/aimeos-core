@@ -34,6 +34,7 @@ interface MShop_Common_Item_Typeid_Interface
 	 * Sets the new type ID of the item.
 	 *
 	 * @param integer $typeid type ID of the item
+	 * @return void
 	 */
 	public function setTypeId( $typeid );
 }

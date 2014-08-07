@@ -26,7 +26,7 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Initializes the service provider object.
 	 *
-	 * @param MShop_Context_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration for the provider
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Service_Item_Interface $serviceItem )
@@ -215,7 +215,7 @@ implements MShop_Service_Provider_Interface
 	/**
 	 * Returns the communication object for the service provider.
 	 *
-	 * @param MW_Communication_Interface $communication Object of communication
+	 * @return MW_Communication_Interface Object for communication
 	 */
 	protected function _getCommunication()
 	{

@@ -104,7 +104,7 @@ class MW_Tree_Manager_LDAP extends MW_Tree_Manager_Abstract
 	 * @param mixed $id ID of the node that should be moved
 	 * @param mixed $oldParentId ID of the old parent node which currently contains the node that should be removed
 	 * @param mixed $newParentId ID of the new parent node where the node should be moved to
-	 * @param mixed $index Position in the list of children of the new parent where the node should be inserted
+	 * @param integer $index Position in the list of children of the new parent where the node should be inserted
 	 */
 	public function moveNode( $id, $oldParentId, $newParentId, $index = 0 )
 	{

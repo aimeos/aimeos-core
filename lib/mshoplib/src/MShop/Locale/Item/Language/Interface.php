@@ -29,6 +29,7 @@ interface MShop_Locale_Item_Language_Interface
 	 * Sets the two letter ISO language code.
 	 *
 	 * @param string $key two letter ISO language code
+	 * @return void
 	 */
 	public function setCode( $key );
 
@@ -45,6 +46,7 @@ interface MShop_Locale_Item_Language_Interface
 	 * Sets the label property of the language.
 	 *
 	 * @param string $label Label or symbol of the language
+	 * @return void
 	 */
 	public function setLabel( $label );
 
@@ -61,6 +63,7 @@ interface MShop_Locale_Item_Language_Interface
 	 * Sets the status of the item.
 	 *
 	 * @param integer $status Status of the language
+	 * @return void
 	 */
 	public function setStatus( $status );
 

@@ -27,6 +27,7 @@ interface MShop_Common_Item_Position_Interface
 	 * Sets the new position of the item in the list.
 	 *
 	 * @param integer $pos position of the item in the list
+	 * @return void
 	 */
 	public function setPosition( $pos );
 }

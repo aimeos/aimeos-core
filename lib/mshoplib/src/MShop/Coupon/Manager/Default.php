@@ -175,8 +175,9 @@ class MShop_Coupon_Manager_Default
 	 * Returns the coupons item specified by its ID.
 	 *
 	 * @param integer $itemId Unique ID of the coupon item in the storage
-	 * @return MShop_Coupon_Item_Interface Returns the coupon item of the given id
-	 * @throws MShop_Coupon_Exception If coupon couldn't be found
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Coupon_Item_Interface Returns the coupon item of the given ID
+	 * @throws MShop_Exception If coupon couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -742,7 +743,7 @@ class MShop_Coupon_Manager_Default
 	/**
 	 * Creates a new coupon item instance
 	 *
-	 * @param array $data Optional values to set
+	 * @param array $values Values of the coupon item from the storage
 	 * @return MShop_Coupon_Item_Default Returns a new created coupon item instance
 	 */
 	protected function _createItem( array $values = array() )

@@ -59,7 +59,7 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 	 * Calls assertType() or assertInternalType() depending on the PHPUnit version.
 	 * Available from PHPUnit >= 3.5
 	 *
-	 * @param mixed $expected Expected value
+	 * @param string $expected Expected value
 	 * @param mixed $actual Actual value
 	 * @param string $message Message to print if assertion is wrong
 	 */
@@ -79,7 +79,7 @@ class MW_Unittest_Testcase extends PHPUnit_Framework_TestCase
 	 * Calls assertType() or assertInstanceOf() depending on the PHPUnit version.
 	 * Available from PHPUnit >= 3.5
 	 *
-	 * @param mixed $expected Expected value
+	 * @param string $expected Expected value
 	 * @param mixed $actual Actual value
 	 * @param string $message Message to print if assertion is wrong
 	 */

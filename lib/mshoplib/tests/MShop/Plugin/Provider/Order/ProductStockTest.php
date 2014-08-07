@@ -122,6 +122,9 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 	}
 
 
+	/**
+	 * @param string $code
+	 */
 	protected function _getOrderProduct( $code )
 	{
 		$productManager = MShop_Factory::createManager( $this->_context, 'product' );

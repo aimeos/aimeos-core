@@ -28,6 +28,7 @@ interface MShop_Text_Item_Interface
 	 * Sets the domain of the text item.
 	 *
 	 * @param string $domain Domain of the text item
+	 * @return void
 	 */
 	public function setDomain( $domain );
 
@@ -43,6 +44,7 @@ interface MShop_Text_Item_Interface
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
 	 * @throws MShop_Exception If the language ID is invalid
+	 * @return void
 	 */
 		public function setLanguageId( $langid );
 
@@ -57,6 +59,7 @@ interface MShop_Text_Item_Interface
 	 * Sets the content of the text item.
 	 *
 	 * @param string $text Content of the text item
+	 * @return void
 	 */
 	public function setContent( $text );
 
@@ -71,6 +74,7 @@ interface MShop_Text_Item_Interface
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
+	 * @return void
 	 */
 	public function setLabel( $label );
 
@@ -85,6 +89,7 @@ interface MShop_Text_Item_Interface
 	 * Sets the status of the text item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return void
 	 */
 	public function setStatus( $status );
 

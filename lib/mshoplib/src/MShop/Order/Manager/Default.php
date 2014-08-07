@@ -138,7 +138,7 @@ class MShop_Order_Manager_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -190,7 +190,7 @@ class MShop_Order_Manager_Default
 	/**
 	 * Creates a one-time order in the storage from the given invoice object.
 	 *
-	 * @param MShop_Order_Item_Interface $item Invoice with necessary values
+	 * @param MShop_Common_Item_Interface $item Order item with necessary values
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
@@ -460,6 +460,7 @@ class MShop_Order_Manager_Default
 	 * Searches for orders based on the given criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing MShop_Order_Item_Interface
 	 * @throws MShop_Order_Exception If creating items failed

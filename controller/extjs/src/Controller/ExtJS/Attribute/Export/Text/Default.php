@@ -219,7 +219,6 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	 * @param array $ids List of item IDs that should be part of the document
 	 * @param array $lang List of languages to export (empty array for all)
 	 * @param string $filename Temporary folder name where to write export files
-	 * @param string $contentFormat Content format in the container e.g. ".csv"
 	 * @return string Path to the exported file
 	 */
 	protected function _exportData( array $ids, array $lang, $filename )
@@ -373,7 +372,7 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 	 * Adds all texts belonging to an attribute item.
 	 *
 	 * @param MW_Container_Content_Interface $contentItem Content item
-	 * @param MShop_Product_Item_Interface $item product item object
+	 * @param MShop_Attribute_Item_Interface $item product item object
 	 * @param string $langid Language id
 	 */
 	protected function _addItem( MW_Container_Content_Interface $contentItem, MShop_Attribute_Item_Interface $item, $langid )

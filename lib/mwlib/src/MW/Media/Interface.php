@@ -29,6 +29,7 @@ interface MW_Media_Interface
 	 *
 	 * @param string $filename Name of the file to save the media data into
 	 * @param string $mimetype Mime type to save the image as
+	 * @return void
 	 */
 	public function save( $filename, $mimetype );
 }

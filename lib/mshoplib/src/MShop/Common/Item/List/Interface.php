@@ -28,6 +28,7 @@ interface MShop_Common_Item_List_Interface
 	 * Sets the parent Id (DB-field paremntid) of the common list item, like the unique Id of a product or a tree node.
 	 *
 	 * @param integer $parentid New parent Id of the common list item
+	 * @return void
 	 */
 	public function setParentId( $parentid );
 
@@ -42,6 +43,7 @@ interface MShop_Common_Item_List_Interface
 	 * Sets the new domain of the common list item, e.g. text od media.
 	 *
 	 * @param string $domain New domain of the common list item
+	 * @return void
 	 */
 	public function setDomain( $domain );
 
@@ -56,6 +58,7 @@ interface MShop_Common_Item_List_Interface
 	 * Sets the new reference id of the common list item, like the unique id of a text item or a media item.
 	 *
 	 * @param string $refid New reference id of the common list item
+	 * @return void
 	 */
 	public function setRefId( $refid );
 
@@ -70,6 +73,7 @@ interface MShop_Common_Item_List_Interface
 	 * Sets the new start date of the common list item (YYYY-MM-DD hh:mm:ss).
 	 *
 	 * @param string $date New start date of the common list item (YYYY-MM-DD hh:mm:ss)
+	 * @return void
 	 */
 	public function setDateStart( $date );
 
@@ -84,6 +88,7 @@ interface MShop_Common_Item_List_Interface
 	 * Sets the new end date of the common list item (YYYY-MM-DD hh:mm:ss).
 	 *
 	 * @param string $date New end date of the common list item (YYYY-MM-DD hh:mm:ss)
+	 * @return void
 	 */
 	public function setDateEnd( $date );
 
@@ -98,6 +103,7 @@ interface MShop_Common_Item_List_Interface
 	 * Sets the new configuration for the list item.
 	 *
 	 * @param array $config Custom configuration values
+	 * @return void
 	 */
 	public function setConfig( array $config );
 
@@ -112,6 +118,7 @@ interface MShop_Common_Item_List_Interface
 	 * Sets the new status of the list item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return void
 	 */
 	public function setStatus( $status );
 
@@ -126,6 +133,7 @@ interface MShop_Common_Item_List_Interface
 	 * Stores the item referenced by the list item.
 	 *
 	 * @param MShop_Common_Item_Interface $refItem Item referenced by the list item
+	 * @return void
 	 */
 	public function setRefItem( MShop_Common_Item_Interface $refItem );
 }

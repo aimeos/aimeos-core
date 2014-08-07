@@ -14,7 +14,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -82,7 +82,7 @@ class MW_Setup_Task_CustomerAddTestData extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $testdata Associative list of key/list pairs
 	 * @param MShop_Common_Manager_Interface $customerManager Customer manager
-	 * @param MShop_Customer_Item_Address_Interface $address Customer address item
+	 * @param MShop_Common_Item_Address_Interface $address Customer address item
 	 * @throws MW_Setup_Exception If a required ID is not available
 	 */
 	protected function _addCustomerData( array $testdata, MShop_Common_Manager_Interface $customerManager,

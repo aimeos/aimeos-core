@@ -46,6 +46,7 @@ interface MW_View_Interface
 	 * Removes a key from the stored values.
 	 *
 	 * @param string $key Name of the value that should be removed
+	 * @return void
 	 */
 	public function __unset( $key );
 
@@ -54,6 +55,7 @@ interface MW_View_Interface
 	 *
 	 * @param string $key Name of the value that should be set
 	 * @param mixed $value Value associated to the given key
+	 * @return void
 	 */
 	public function __set( $key, $value );
 
@@ -62,6 +64,7 @@ interface MW_View_Interface
 	 *
 	 * @param string $name Name of the view helper as called in the template
 	 * @param MW_View_Helper_Interface $helper View helper instance
+	 * @return void
 	 */
 	public function addHelper( $name, MW_View_Helper_Interface $helper );
 
@@ -70,6 +73,7 @@ interface MW_View_Interface
 	 * This method overwrites already existing key/value pairs set by the magic method.
 	 *
 	 * @param array $values Associative list of key/value pairs
+	 * @return void
 	 */
 	public function assign( array $values );
 

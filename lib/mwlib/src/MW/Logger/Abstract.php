@@ -57,6 +57,12 @@ abstract class MW_Logger_Abstract
 	const DEBUG = 7;
 
 
+	/**
+	 * Checks if the given log constant is valid
+	 *
+	 * @param integer $level Log constant
+	 * @throws MW_Logger_Exception If log constant is unknown
+	 */
 	protected function _checkLogLevel( $level )
 	{
 		switch( $level )

@@ -23,9 +23,9 @@ class MW_DB_Exception extends MW_Exception
 	/**
 	 * Initializes the exception.
 	 *
-	 * @param string $_message Error message
-	 * @param int $_code Error code
-	 * @param mixed $_info Additional error info
+	 * @param string $message Error message
+	 * @param integer $state SQL error code
+	 * @param mixed $info Additional error info
 	 */
 	public function __construct( $message, $state = '', $info = null )
 	{
@@ -50,7 +50,7 @@ class MW_DB_Exception extends MW_Exception
 	/**
 	 * Returns the addtional error information.
 	 *
-	 * @return mixed Additional error info
+	 * @return string Additional error info
 	 */
 	public function getInfo()
 	{

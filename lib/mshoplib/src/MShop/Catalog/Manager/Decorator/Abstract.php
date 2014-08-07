@@ -63,7 +63,7 @@ abstract class MShop_Catalog_Manager_Decorator_Abstract
 	 * @param mixed $id ID of the item that should be moved
 	 * @param mixed $oldParentId ID of the old parent item which currently contains the item that should be removed
 	 * @param mixed $newParentId ID of the new parent item where the item should be moved to
-	 * @param mixed $newRefId ID of the item where the item should be inserted before (null to append)
+	 * @param mixed $refId ID of the item where the item should be inserted before (null to append)
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{

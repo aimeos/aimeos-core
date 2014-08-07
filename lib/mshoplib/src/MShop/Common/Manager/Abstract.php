@@ -100,6 +100,8 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
+	 * @param string $cfgPath Configuration key for the SQL statement
+	 * @param array $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
 	protected function _aggregate( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )
@@ -207,8 +209,8 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 * Sets the base criteria "status".
 	 * (setConditions overwrites the base criteria)
 	 *
-	 * @param $domain
-	 * @return MW_Common_Criteria_Interface
+	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
+	 * @return MW_Common_Criteria_Interface Search critery object
 	 */
 	protected function _createSearch( $domain )
 	{
@@ -562,7 +564,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 * Creates the items with address item, list items and referenced items.
 	 *
 	 * @param array $map Associative list of IDs as keys and the associative array of values
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param array $domains List of domains to fetch list items and referenced items for
 	 * @param string $prefix Domain prefix
 	 * @return array List of items implementing MShop_Common_Item_Interface
 	 */
@@ -633,7 +635,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	/**
 	 * Returns the referenced items for the given IDs.
 	 *
-	 * @param array $textIdMap Associative list of domain/ref-ID/parent-item-ID key/value pairs
+	 * @param array $refIdMap Associative list of domain/ref-ID/parent-item-ID key/value pairs
 	 * @return array Associative list of parent-item-ID/domain/items key/value pairs
 	 */
 	protected function _getRefItems( array $refIdMap )
@@ -724,7 +726,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	/**
 	 * Sets the name of the database resource that should be used.
 	 *
-	 * @param $name Name of the resource
+	 * @param string $name Name of the resource
 	 */
 	protected function _setResourceName( $name )
 	{

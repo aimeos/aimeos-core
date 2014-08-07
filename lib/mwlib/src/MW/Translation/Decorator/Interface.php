@@ -20,6 +20,7 @@ interface MW_Translation_Decorator_Interface extends MW_Translation_Interface
 	 * Initializes the decorator.
 	 *
 	 * @param MW_Translation_Interface $object Translation object or decorator
+	 * @return void
 	 */
 	public function __construct( MW_Translation_Interface $object );
 }

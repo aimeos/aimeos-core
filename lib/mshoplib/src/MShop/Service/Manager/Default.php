@@ -123,7 +123,7 @@ class MShop_Service_Manager_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -219,7 +219,7 @@ class MShop_Service_Manager_Default
 	 * Returns the service item specified by the given id.
 	 *
 	 * @param int $id Unique ID of the service item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Service_Item_Interface Returns the service item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
@@ -232,7 +232,7 @@ class MShop_Service_Manager_Default
 	/**
 	 * Adds a new or updates an existing service item in the storage.
 	 *
-	 * @param MShop_Service_Item_Interface $service New or existing service item that should be saved to the storage
+	 * @param MShop_Common_Item_Interface $item New or existing service item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )

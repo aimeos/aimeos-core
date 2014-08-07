@@ -43,6 +43,7 @@ interface MShop_Catalog_Manager_Interface
 	 * @param MShop_Catalog_Item_Interface $item Item which should be inserted
 	 * @param integer $parentId ID of the parent item where the item should be inserted into
 	 * @param integer $refId ID of the item where the item should be inserted before (null to append)
+	 * @return void
 	 */
 	public function insertItem( MShop_Catalog_Item_Interface $item, $parentId = null, $refId = null );
 
@@ -53,7 +54,8 @@ interface MShop_Catalog_Manager_Interface
 	 * @param mixed $id ID of the item that should be moved
 	 * @param mixed $oldParentId ID of the old parent item which currently contains the item that should be removed
 	 * @param mixed $newParentId ID of the new parent item where the item should be moved to
-	 * @param mixed $newRefId ID of the item where the item should be inserted before (null to append)
+	 * @param mixed $refId ID of the item where the item should be inserted before (null to append)
+	 * @return void
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null );
 }

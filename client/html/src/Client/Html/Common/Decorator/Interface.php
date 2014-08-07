@@ -22,6 +22,7 @@ interface Client_Html_Common_Decorator_Interface
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param Client_Html_Interface $client Client object
+	 * @return void
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, Client_Html_Interface $client );
 }

@@ -252,7 +252,7 @@ class MShop_Plugin_Manager_Default
 	/**
 	 * Saves a new or modified plugin to the storage.
 	 *
-	 * @param MShop_Plugin_Item_Interface $plugin Plugin item
+	 * @param MShop_Common_Item_Interface $item Plugin item
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )

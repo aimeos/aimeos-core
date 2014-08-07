@@ -68,15 +68,16 @@ interface MW_Template_Interface
 	 * Substitutes the marker by given text.
 	 *
 	 * @param array $substitute Array of marker names (keys) and text to substitute (values)
+	 * @return MW_Template_Interface Own Instance for method chaining
 	 */
 	public function substitute( array $substitute );
 
 
 	/**
-	 * Generates the statement by replacing substrings and remove markers.
+	 * Generates the result string by replacing sub-strings and remove markers.
 	 *
 	 * @param bool $remove Remove still disabled markers from template
-	 * @return string
+	 * @return string String with replaced sub-strings and removed markers
 	 */
 	public function str( $remove = true );
 }

@@ -96,7 +96,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -234,7 +234,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	/**
 	 * Creates new warehouse item object.
 	 *
-	 * @return MShop_Product_Item_Warehouse_Interface New product warehouse item object
+	 * @return MShop_Product_Item_Stock_Warehouse_Default New product warehouse item object
 	 */
 	public function createItem()
 	{
@@ -436,7 +436,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 *
 	 * @param integer $id Id of the warehouse item
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Product_Item_Warehouse_Interface Returns product warehouse item of the given id
+	 * @return MShop_Common_Item_Interface Returns product warehouse item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -482,6 +482,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 * Possible search keys: 'product.warehouse.id', 'product.warehouse.siteid', 'product.warehouse.code'
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of warehouse items implementing MShop_Product_Item_Warehouse_Interface
 	 * @throws MShop_Product_Exception if creating items failed
@@ -622,7 +623,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 * Creates new warehouse item object.
 	 *
 	 * @param array $values Possible optional array keys can be given: id, siteid, code
-	 * @return MShop_Product_Item_Warehouse_Default New Warehouse item object
+	 * @return MShop_Product_Item_Stock_Warehouse_Default New Warehouse item object
 	 */
 	protected function _createItem( array $values = array() )
 	{

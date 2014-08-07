@@ -37,6 +37,7 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the identifier of the shop instance.
 	 *
 	 * @param ID of the shop instance.
+	 * @return void
 	 */
 	public function setSiteId( $id );
 
@@ -53,6 +54,7 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
+	 * @return void
 	 */
 	public function setLanguageId( $langid );
 
@@ -70,6 +72,7 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
 	 * @throws MShop_Exception If the currency ID is invalid
+	 * @return void
 	 */
 	public function setCurrencyId( $currencyid );
 
@@ -77,7 +80,7 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 	/**
 	 * Returns the position of the item.
 	 *
-	 * @param integer $pos Position of the item
+	 * @return integer Position of the item
 	 */
 	public function getPosition();
 
@@ -86,6 +89,7 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the position of the item.
 	 *
 	 * @param integer $pos Position of the item
+	 * @return void
 	 */
 	public function setPosition( $pos );
 
@@ -102,6 +106,7 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the status property
 	 *
 	 * @param integer $status The status of the locale item
+	 * @return void
 	 */
 	public function setStatus( $status );
 

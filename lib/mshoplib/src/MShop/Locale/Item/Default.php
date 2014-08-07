@@ -29,7 +29,7 @@ class MShop_Locale_Item_Default
 	 *
 	 * @param array $values Values to be set on initialisation
 	 * @param MShop_Locale_Item_Site_Interface|null $site Site object
-	 * @param array $sitepath List of site IDs up to the root site item
+	 * @param array $sitePath List of site IDs up to the root site item
 	 * @param array $siteSubTree List of site IDs from all sites below the current site
 	 */
 	public function __construct( array $values = array( ), MShop_Locale_Item_Site_Interface $site = null,
@@ -179,7 +179,7 @@ class MShop_Locale_Item_Default
 	/**
 	 * Returns the position of the item.
 	 *
-	 * @param integer $pos Position of the item
+	 * @return integer Position of the item relative to the other items
 	 */
 	public function getPosition()
 	{

@@ -122,7 +122,7 @@ interface MW_Common_Criteria_Interface
 	/**
 	 * Stores the sortation objects for sorting the result.
 	 *
-	 * @param array $sortation List of objects implementing MW_Common_Criteria_Expression_Sort_Interface
+	 * @param MW_Common_Criteria_Expression_Sort_Interface[] $sortation List of objects implementing MW_Common_Criteria_Expression_Sort_Interface
 	 * @return MW_Common_Criteria_Interface Object instance for fluent interface
 	 */
 	public function setSortations( array $sortation );
@@ -147,8 +147,8 @@ interface MW_Common_Criteria_Interface
 	/**
 	 * Sets the start number and the size of the requested data slice.
 	 *
-	 * @param integer Start number of the items
-	 * @param integer Number of items
+	 * @param integer $start Start number of the items
+	 * @param integer $size Number of items
 	 * @return MW_Common_Criteria_Interface Object instance for fluent interface
 	 */
 	public function setSlice( $start, $size = 100 );

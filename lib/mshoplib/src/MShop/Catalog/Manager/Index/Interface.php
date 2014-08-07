@@ -31,6 +31,7 @@ interface MShop_Catalog_Manager_Index_Interface
 	 * Optimizes the index if necessary.
 	 * This operation can last very long and it shouldn't be called by a script
 	 * executed by a web server.
+	 * @return void
 	 */
 	public function optimize();
 
@@ -40,6 +41,7 @@ interface MShop_Catalog_Manager_Index_Interface
 	 * This can be a long lasting operation.
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
+	 * @return void
 	 */
 	public function cleanupIndex( $timestamp );
 
@@ -49,6 +51,7 @@ interface MShop_Catalog_Manager_Index_Interface
 	 * This can be a long lasting operation.
 	 *
 	 * @param array $items Optional list with products
+	 * @return void
 	 */
 	public function rebuildIndex( array $items = array() );
 }

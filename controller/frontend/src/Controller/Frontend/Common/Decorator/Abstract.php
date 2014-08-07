@@ -24,7 +24,7 @@ abstract class Controller_Frontend_Common_Decorator_Abstract
 	/**
 	 * Initializes the controller decorator.
 	 *
-	 * @param MShop_Context_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param Controller_Frontend_Interface $controller Controller object
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, Controller_Frontend_Interface $controller )

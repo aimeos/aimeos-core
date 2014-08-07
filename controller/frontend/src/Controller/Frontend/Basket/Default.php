@@ -406,9 +406,7 @@ class Controller_Frontend_Basket_Default
 	 * Sets the address of the customer in the basket.
 	 *
 	 * @param string $type Address type constant from MShop_Order_Item_Base_Address_Abstract
-	 * @param MShop_Common_Item_Address_Interface|array|null $billing Address object or array with key/value pairs.
-	 * 	In case of an array, the keys must be the same as the keys returned when calling toArray()
-	 *  on the order base address object like "order.base.address.salutation"
+	 * @param MShop_Common_Item_Address_Interface|array|null $value Address object or array with key/value pairs of address or null to remove address from basket
 	 * @throws Controller_Frontend_Basket_Exception If the billing or delivery address is not of any required type of
 	 * 	if one of the keys is invalid when using an array with key/value pairs
 	 */
@@ -767,8 +765,6 @@ class Controller_Frontend_Basket_Default
 	 * @param MShop_Order_Item_Base_Address_Interface $address Address item to store the values into
 	 * @param array $map Associative array of key/value pairs. The keys must be the same as when calling toArray() from
 	 * 	an address item.
-	 * @param string $prefix Key prefix like "customer." for a billing address or "customer.address." for a delivery
-	 * 	address
 	 * @throws Controller_Frontend_Basket_Exception
 	 */
 	protected function _setAddressFromArray( MShop_Order_Item_Base_Address_Interface $address, array $map )
@@ -791,7 +787,7 @@ class Controller_Frontend_Basket_Default
 	 * Returns the attribute items for the given attribute IDs.
 	 *
 	 * @param array $attributeIds List of attribute IDs
-	 * @param array $domains Names of the domain items that should be fetched too
+	 * @param string[] $domains Names of the domain items that should be fetched too
 	 * @return array List of items implementing MShop_Attribute_Item_Interface
 	 * @throws Controller_Frontend_Basket_Exception If the actual attribute number doesn't match the expected one
 	 */

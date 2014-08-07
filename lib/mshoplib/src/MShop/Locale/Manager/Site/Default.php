@@ -141,7 +141,7 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Adds a new site to the storage or updates an existing one.
 	 *
-	 * @param MShop_Common_Item_Interface $site New site item  for saving to the storage
+	 * @param MShop_Common_Item_Interface $item New site item for saving to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @throws MShop_Locale_Exception
 	 */
@@ -229,10 +229,10 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Returns the site item specified by its ID.
 	 *
-	 * @param string $siteId Site id to create the Site object
+	 * @param string $siteId Unique ID of the site data in the storage
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Locale_Item_Site_Interface Returns the site item of the given id
-	 * @throws MShop_Exception If item couldn't be found
+	 * @throws MShop_Exception If the item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
@@ -509,7 +509,7 @@ class MShop_Locale_Manager_Site_Default
 	 *
 	 * @param integer $id ID of item to get the path for
 	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return array Associative list of items implementing MShop_Locale_Item_Site_Interface with IDs as keys
+	 * @return MShop_Locale_Item_Site_Interface[] Associative list of items implementing MShop_Locale_Item_Site_Interface with IDs as keys
 	 */
 	public function getPath( $id, array $ref = array() )
 	{
@@ -609,7 +609,7 @@ class MShop_Locale_Manager_Site_Default
 	 * @param mixed $id ID of the item that should be moved
 	 * @param mixed $oldParentId ID of the old parent item which currently contains the item that should be removed
 	 * @param mixed $newParentId ID of the new parent item where the item should be moved to
-	 * @param mixed $newRefId ID of the item where the item should be inserted before (null to append)
+	 * @param mixed $refId ID of the item where the item should be inserted before (null to append)
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{

@@ -146,7 +146,7 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -177,7 +177,7 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Adds or updates an order base service item to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Interface $service Order service object
+	 * @param MShop_Common_Item_Interface $item Order base service object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
@@ -276,6 +276,7 @@ class MShop_Order_Manager_Base_Service_Default
 	 * Searches for order service items based on the given criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing MShop_Order_Item_Base_Service_Interface
 	 */
@@ -513,7 +514,7 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Searches for attribute items connected with order service item.
 	 *
-	 * @param integer $id of order service item
+	 * @param integer $ids of order service item
 	 * @return array List of items implementing MShop_Order_Item_Base_Service_Attribute_Interface
 	 */
 	protected function _getAttributeItems( $ids )

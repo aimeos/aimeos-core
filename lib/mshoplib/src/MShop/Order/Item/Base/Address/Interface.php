@@ -27,6 +27,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets the order base ID the address belongs to.
 	 *
 	 * @param integer|null $value New base ID
+	 * @return void
 	 */
 	public function setBaseId( $value );
 
@@ -41,6 +42,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets the new type of the address which can be billing or delivery.
 	 *
 	 * @param string $type New type of the address
+	 * @return void
 	 */
 	public function setType( $type );
 
@@ -55,6 +57,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new company name.
 	 *
 	 * @param string $company New company name
+	 * @return void
 	 */
 	public function setCompany( $company );
 	
@@ -69,6 +72,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new vatid.
 	 *
 	 * @param string $vatid New vatid
+	 * @return void
 	 */
 	public function setVatID( $vatid );
 
@@ -83,6 +87,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets the new salutation for the person described by the address.
 	 *
 	 * @param string $salutation Salutation constant defined in MShop_Order_Item_Base_Address_Abstract
+	 * @return void
 	 */
 	public function setSalutation( $salutation );
 
@@ -97,6 +102,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new title of the person.
 	 *
 	 * @param string $title New title of the person
+	 * @return void
 	 */
 	public function setTitle( $title );
 
@@ -111,6 +117,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new first name of the person.
 	 *
 	 * @param string $firstname New first name of the person
+	 * @return void
 	 */
 	public function setFirstname( $firstname );
 
@@ -125,6 +132,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new last name of the person.
 	 *
 	 * @param string $lastname New last name of the person
+	 * @return void
 	 */
 	public function setLastname( $lastname );
 
@@ -139,6 +147,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new first address part, e.g. the street name.
 	 *
 	 * @param string $address1 New first address part
+	 * @return void
 	 */
 	public function setAddress1( $address1 );
 
@@ -153,6 +162,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new second address part, e.g. the house number.
 	 *
 	 * @param string $address2 New second address part
+	 * @return void
 	 */
 	public function setAddress2( $address2 );
 
@@ -167,6 +177,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new third address part, e.g. the house name or floor number.
 	 *
 	 * @param string $address3 New third address part
+	 * @return void
 	 */
 	public function setAddress3( $address3 );
 
@@ -181,6 +192,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new postal code.
 	 *
 	 * @param string $postal New postal code
+	 * @return void
 	 */
 	public function setPostal( $postal );
 
@@ -195,6 +207,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new city name.
 	 *
 	 * @param string $city New city name
+	 * @return void
 	 */
 	public function setCity( $city );
 
@@ -209,13 +222,15 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new state name.
 	 *
 	 * @param string $state New state name
+	 * @return void
 	 */
 	public function setState( $state );
 
 	/**
 	 * Sets the ID of the country the address is in.
 	 *
-	 * @param string $countyid Unique ID of the country
+	 * @param string $countryid Unique ID of the country
+	 * @return void
 	 */
 	public function setCountryId( $countryid );
 
@@ -237,6 +252,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new telephone number.
 	 *
 	 * @param string $telephone New telephone number
+	 * @return void
 	 */
 	public function setTelephone( $telephone );
 
@@ -251,6 +267,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new email address.
 	 *
 	 * @param string $email New email address
+	 * @return void
 	 */
 	public function setEmail( $email );
 
@@ -265,6 +282,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new telefax number.
 	 *
 	 * @param string $telefax New telefax number
+	 * @return void
 	 */
 	public function setTelefax( $telefax );
 
@@ -279,6 +297,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Sets a new website URL.
 	 *
 	 * @param string $website New website URL
+	 * @return void
 	 */
 	public function setWebsite( $website );
 
@@ -286,6 +305,7 @@ interface MShop_Order_Item_Base_Address_Interface extends MShop_Common_Item_Inte
 	 * Copys all data from a given address.
 	 *
 	 * @param MShop_Common_Item_Address_Interface $address New address
+	 * @return void
 	 */
 	public function copyFrom( MShop_Common_Item_Address_Interface $address );
 

@@ -28,6 +28,7 @@ interface MShop_Product_Item_Tag_Interface
 	 * Sets the Language Id of the tag item
 	 *
 	 * @param string $id New Language ID of the tag item
+	 * @return void
 	 */
 	public function setLanguageId( $id );
 
@@ -42,6 +43,7 @@ interface MShop_Product_Item_Tag_Interface
 	 * Sets the new label of the tag item.
 	 *
 	 * @param string $label Label of the tag item
+	 * @return void
 	 */
 	public function setLabel( $label );
 

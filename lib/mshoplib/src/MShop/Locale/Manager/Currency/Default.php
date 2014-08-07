@@ -114,7 +114,7 @@ class MShop_Locale_Manager_Currency_Default
 	/**
 	 * Saves a currency item to the storage.
 	 *
-	 * @param MShop_Common_Item_Interface $currency Currency item to save in the storage
+	 * @param MShop_Common_Item_Interface $item Currency item to save in the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 *
 	 * @throws MW_DB_Exception If currency object couldn't be saved

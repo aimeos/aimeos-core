@@ -30,6 +30,7 @@ interface MW_Session_Interface
 	 *
 	 * @param string $name Key to the value which should be stored in the session
 	 * @param string $value Value that should be associated with the given key
+	 * @return void
 	 */
 	public function set( $name, $value );
 }

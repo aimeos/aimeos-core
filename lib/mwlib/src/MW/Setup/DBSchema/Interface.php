@@ -21,6 +21,7 @@ interface MW_Setup_DBSchema_Interface
 	 *
 	 * @param MW_DB_Connection_Interface $conn Database connection
 	 * @param string $dbname Database name
+	 * @return void
 	 */
 	public function __construct( MW_DB_Connection_Interface $conn, $dbname );
 

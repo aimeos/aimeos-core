@@ -29,6 +29,7 @@ interface MShop_Locale_Item_Currency_Interface
 	 * Sets the code of the currency.
 	 *
 	 * @param string $key Code of the currency
+	 * @return void
 	 */
 	public function setCode( $key );
 
@@ -45,6 +46,7 @@ interface MShop_Locale_Item_Currency_Interface
 	 * Sets the label or symbol of the currency.
 	 *
 	 * @param string $label Label or symbol of the currency
+	 * @return void
 	 */
 	public function setLabel( $label );
 
@@ -61,6 +63,7 @@ interface MShop_Locale_Item_Currency_Interface
 	 * Sets the status of the item
 	 *
 	 * @param integer $status Status of the item
+	 * @return void
 	 */
 	public function setStatus( $status );
 

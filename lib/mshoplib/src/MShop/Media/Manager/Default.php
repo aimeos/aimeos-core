@@ -710,7 +710,7 @@ class MShop_Media_Manager_Default
 	 * Creates a new media item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_List_Interface
+	 * @param array $listItems List of items implementing MShop_Common_Item_List_Interface
 	 * @param array $refItems List of items reference to this item
 	 * @return MShop_Media_Item_Interface New product item
 	 */

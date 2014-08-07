@@ -23,6 +23,7 @@ interface Controller_Jobs_Common_Decorator_Interface
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param Arcavias $arcavias Arcavias object
 	 * @param Controller_Jobs_Interface $controller Controller object
+	 * @return void
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, Arcavias $arcavias,
 		Controller_Jobs_Interface $controller );

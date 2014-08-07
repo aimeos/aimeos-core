@@ -63,7 +63,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	/**
 	 * Returns the right side of the compare expression.
 	 *
-	 * @return mixed Value that the variable or column should be compared to
+	 * @return string Value that the variable or column should be compared to
 	 */
 	public function getValue()
 	{
@@ -74,7 +74,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	/**
 	 * Generates a string from the expression objects.
 	 *
-	 * @param array $names Associative list of variable or column names as keys and their corresponding types
+	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
 	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Interface
 	 * @return string Expression that evaluates to a boolean result
@@ -110,7 +110,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 *
 	 * @param string $name Translated name of variable or column that should be compared
 	 * @param integer $type Type constant
-	 * @param mixed $value Value that the variable or column should be compared to
+	 * @param string $value Value that the variable or column should be compared to
 	 * @return string Created term string (name operator value)
 	 */
 	abstract protected function _createTerm( $name, $type, $value );

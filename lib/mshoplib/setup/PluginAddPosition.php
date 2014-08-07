@@ -28,7 +28,7 @@ class MW_Setup_Task_PluginAddPosition extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -48,7 +48,7 @@ class MW_Setup_Task_PluginAddPosition extends MW_Setup_Task_Abstract
 	/**
 	 * Add column to table if the column doesn't exist.
 	 *
-	 * @param array $stmt SQL statement to execute for adding columns
+	 * @param string $stmt SQL statement to execute for adding columns
 	 */
 	protected function _process( $stmt )
 	{

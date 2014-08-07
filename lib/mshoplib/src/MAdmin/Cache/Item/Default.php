@@ -64,7 +64,7 @@ class MAdmin_Cache_Item_Default
 	 */
 	public function getSiteId()
 	{
-		return ( isset( $this->_values['siteid'] ) ? (string) $this->_values['siteid'] : null );
+		return ( isset( $this->_values['siteid'] ) ? (int) $this->_values['siteid'] : null );
 	}
 
 
@@ -105,7 +105,7 @@ class MAdmin_Cache_Item_Default
 	/**
 	 * Sets the new expiration time of the item.
 	 *
-	 * @param string|null Expiration time of the item
+	 * @param string|null $timestamp Expiration time of the item
 	 */
 	public function setTimeExpire( $timestamp )
 	{

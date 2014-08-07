@@ -89,6 +89,7 @@ class MW_Container_Zip
 	/**
 	 * Returns the element specified by its name.
 	 *
+	 * @param string $name Name of the content object that should be returned
 	 * @return MW_Container_Content_Interface Content object
 	 * @todo 2015.03 Add to interface to enforce method and signature
 	 */

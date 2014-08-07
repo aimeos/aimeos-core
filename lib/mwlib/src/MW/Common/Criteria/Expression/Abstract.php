@@ -145,7 +145,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 *
 	 * @param string $name Name of variable or column that should be translated
 	 * @param mixed $value Original value
-	 * @return mixed Translated value
+	 * @return string Translated value
 	 */
 	protected function _translateValue( $name, $value )
 	{
@@ -175,7 +175,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	 *
 	 * @param string $operator Operator used for the expression
 	 * @param integer $type Type constant
-	 * @param mixed $value Value that the variable or column should be compared to
+	 * @param string $value Value that the variable or column should be compared to
 	 * @return string Escaped value
 	 */
 	abstract protected function _escape( $operator, $type, $value );
@@ -194,7 +194,7 @@ abstract class MW_Common_Criteria_Expression_Abstract
 	/**
 	 * Extracts the function parameters from the parameter strings.
 	 *
-	 * @param array $strings List of matched strings
+	 * @param string[] $strings List of matched strings
 	 * @return array List of found parameters
 	 */
 	private function _extractParams( array $strings )

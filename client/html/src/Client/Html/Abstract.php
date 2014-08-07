@@ -124,8 +124,6 @@ abstract class Client_Html_Abstract
 	 * A view must be available and this method doesn't generate any output
 	 * besides setting view variables.
 	 *
-	 * @param string $confpath Path to the configuration that contains the configured sub-clients
-	 * @param array $default List of sub-client names that should be used if no other configuration is available
 	 * @return boolean False if processing is stopped, otherwise all processing was completed successfully
 	 */
 	public function process()
@@ -432,9 +430,9 @@ abstract class Client_Html_Abstract
 	 * Returns the absolute path to the given template file.
 	 * It uses the first one found from the configured paths in the manifest files, but in reverse order.
 	 *
-	 * @param string $file Relative file path segments and its name separated by slashes
 	 * @param string|array $default Relative file name or list of file names to use when nothing else is configured
-	 * @return Absolute path the to the template file
+	 * @param string $confpath Configuration key of the path to the template file
+	 * @return string path the to the template file
 	 * @throws Client_Html_Exception If no template file was found
 	 */
 	protected function _getTemplate( $confpath, $default )

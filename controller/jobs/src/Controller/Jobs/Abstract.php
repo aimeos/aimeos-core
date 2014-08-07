@@ -36,7 +36,7 @@ abstract class Controller_Jobs_Abstract
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop context object implementing MShop_Context_Item_Interface
+	 * @return MShop_Context_Item_Interface Context object
 	 */
 	protected function _getContext()
 	{

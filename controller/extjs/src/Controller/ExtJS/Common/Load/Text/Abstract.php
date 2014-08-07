@@ -96,7 +96,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * Checks if the required parameter are available.
 	 *
 	 * @param stdClass $params Item object containing the parameter
-	 * @param array $names List of names of the required parameter
+	 * @param string[] $names List of names of the required parameter
 	 * @throws Controller_ExtJS_Exception if a required parameter is missing
 	 */
 	protected function _checkParams( stdClass $params, array $names )
@@ -327,9 +327,9 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 
 	/**
-	 * Imports a sheet of texts using the given text types.
+	 * Imports the text content using the given text types.
 	 *
-	 * @param PHPExcel_Worksheet $sheet Sheet containing texts and associated data
+	 * @param MW_Container_Content_Interface $contentItem Content item containing texts and associated data
 	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @return array Two dimensional associated list of codes and text IDs as key
@@ -411,8 +411,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * Creates container for storing export files.
 	 *
 	 * @param string $resource Path to the file
-	 * @param string $container Extension of the container file
-	 * @param array $containerOptions Options for the container
+	 * @param string $key Configuration key prefix for the container type/format/options keys
 	 * @return MW_Container_Interface Container item
 	 */
 	protected function _createContainer( $resource, $key )

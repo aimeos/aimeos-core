@@ -135,7 +135,7 @@ class MShop_Catalog_Manager_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -322,7 +322,7 @@ class MShop_Catalog_Manager_Default
 	 * @param mixed $id ID of the item that should be moved
 	 * @param mixed $oldParentId ID of the old parent item which currently contains the item that should be removed
 	 * @param mixed $newParentId ID of the new parent item where the item should be moved to
-	 * @param mixed $newRefId ID of the item where the item should be inserted before (null to append)
+	 * @param mixed $refId ID of the item where the item should be inserted before (null to append)
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
@@ -382,6 +382,7 @@ class MShop_Catalog_Manager_Default
 	 * @param MW_Common_Criteria_Interface $search Criteria object with conditions, sortations, etc.
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer|null &$total No function. Reference will be set to null in this case.
+	 * @param integer $total
 	 * @return array List of items implementing MShop_Common_Item_Interface
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )

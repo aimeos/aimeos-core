@@ -205,7 +205,7 @@ class MShop_Order_Manager_Base_Product_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -250,8 +250,7 @@ class MShop_Order_Manager_Base_Product_Default
 	/**
 	 * Adds or updates a order base product item to the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $product New or existing
-	 * product item that should be saved to the storage.
+	 * @param MShop_Common_Item_Interface $item New or existing product item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )

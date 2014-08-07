@@ -24,7 +24,7 @@ class Controller_ExtJS_Coupon_Code_Default
 	/**
 	 * Initializes the coupon controller.
 	 *
-	 * @param MShop_Concoupon_Item_Interface $context MShop context object
+	 * @param MShop_Context_Item_Interface $context MShop context object
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
@@ -315,7 +315,7 @@ class Controller_ExtJS_Coupon_Code_Default
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return mixed Manager object
+	 * @return MShop_Common_Manager_Interface Manager object
 	 */
 	protected function _getManager()
 	{

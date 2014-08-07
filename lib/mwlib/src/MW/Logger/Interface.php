@@ -22,6 +22,7 @@ interface MW_Logger_Interface
 	 * @param string $message Message text that should be written to the log facility
 	 * @param integer $priority Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return void
 	 */
 	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' );
 }

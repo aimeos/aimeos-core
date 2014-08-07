@@ -183,7 +183,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param integer $level One of the level constants from MW_Tree_Manager_Abstract
-	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
+	 * * @param MW_Common_Criteria_Interface|null $condition Optional criteria object with conditions
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
 	 */
 	public function getNode( $id = null, $level = MW_Tree_Manager_Abstract::LEVEL_TREE, MW_Common_Criteria_Interface $condition = null )

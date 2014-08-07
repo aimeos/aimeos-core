@@ -20,7 +20,7 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -31,7 +31,7 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -51,9 +51,9 @@ class MW_Setup_Task_OrderAddBaseAttrAddType extends MW_Setup_Task_Abstract
 	/**
 	 * Add column to table if the column doesn't exist.
 	 *
-	 * @param array $sql List of SQL statements to execute for adding columns
+	 * @param array $stmts Associative list of table names and SQL statements to execute for adding columns
 	 */
-	protected function _process(array $stmts)
+	protected function _process( array $stmts )
 	{
 		$this->_msg ('Add column type to order attribute tables', 0);
 		$this->_status('');

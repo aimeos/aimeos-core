@@ -327,11 +327,11 @@ class Controller_ExtJS_Product_Export_Text_Default
 	/**
 	 * Adds data for the given language.
 	 *
+	 * @param MW_Container_Content_Interface $contentItem Content object
 	 * @param string $langid Language id
-	 * @param array $items List of of item ids whose texts should be added
-	 * @param MW_Container_Content_Interface $contentItem Content item
+	 * @param array $ids List of product IDs
 	 */
-	protected function _addLanguage( MW_Container_Content_Interface $contentItem, $langid, array $ids)
+	protected function _addLanguage( MW_Container_Content_Interface $contentItem, $langid, array $ids )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_getContext() );
 		$search = $manager->createSearch();

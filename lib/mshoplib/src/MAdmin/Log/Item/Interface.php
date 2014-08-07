@@ -27,6 +27,7 @@ interface MAdmin_Log_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new facility of the item.
 	 *
 	 * @param string $facility Facility of the item
+	 * @return void
 	 */
 	public function setFacility( $facility );
 
@@ -48,6 +49,7 @@ interface MAdmin_Log_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new priority of the item.
 	 *
 	 * @param integer $priority Priority of the item
+	 * @return void
 	 */
 	public function setPriority( $priority );
 
@@ -62,6 +64,7 @@ interface MAdmin_Log_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new message of the item.
 	 *
 	 * @param string $message Message of the item
+	 * @return void
 	 */
 	public function setMessage( $message );
 
@@ -76,6 +79,7 @@ interface MAdmin_Log_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new request of the item.
 	 *
 	 * @param string $request Request of the item
+	 * @return void
 	 */
 	public function setRequest( $request );
 }

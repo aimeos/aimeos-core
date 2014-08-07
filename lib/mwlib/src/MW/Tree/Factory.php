@@ -21,7 +21,7 @@ class MW_Tree_Factory
 	 *
 	 * @param string $name Manager type name
 	 * @param array $config Associative list of configuration strings for managing the tree
-	 * @param mixed $resource Reference to the resource which should be used for managing the tree
+	 * @param MW_DB_Manager_Interface|null $resource Reference to the resource which should be used for managing the tree
 	 * @return MW_Tree_Manager_Interface Tree manager object of the requested type
 	 * @throws MW_Tree_Exception if class isn't found
 	 */

@@ -617,6 +617,9 @@ class MShop_Order_Item_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	/**
+	 * @param string $code
+	 */
 	protected function _createProduct( $code )
 	{
 		$orderManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext());

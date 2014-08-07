@@ -14,7 +14,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -201,7 +201,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 	/**
 	 * Adds locale data.
 	 *
-	 * @param MShop_Common_Manager_Interface $localeManager Locale manager
+	 * @param MShop_Common_Manager_Interface $localeItemManager Locale manager
 	 * @param array $data Associative list of locale data
 	 */
 	protected function _addLocaleData( MShop_Common_Manager_Interface $localeItemManager, array $data, array $siteIds )

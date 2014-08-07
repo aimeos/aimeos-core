@@ -113,7 +113,7 @@ class MShop_Locale_Manager_Language_Default
 	/**
 	 * Saves the language object to the storage.
 	 *
-	 * @param MShop_Common_Item_Interface $language Language object
+	 * @param MShop_Common_Item_Interface $item Language object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )

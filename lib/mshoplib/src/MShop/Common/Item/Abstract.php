@@ -184,7 +184,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	/**
 	 * Tests if the date parameter represents an ISO format.
 	 *
-	 * @param string ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format or null
 	 * @throws MShop_Exception If the date is invalid
 	 */
 	protected function _checkDateFormat( $date )
@@ -214,8 +214,8 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	/**
 	 * Tests if the currency ID parameter represents an ISO currency format.
 	 *
-	 * @param string Three letter ISO currency format, e.g. EUR
-	 * @param boolean True if null is allowed, false if not
+	 * @param string|null $currencyid Three letter ISO currency format, e.g. EUR
+	 * @param boolean $null True if null is allowed, false if not
 	 * @throws MShop_Exception If the currency ID is invalid
 	 */
 	protected function _checkCurrencyId( $currencyid, $null = true )
@@ -233,7 +233,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	/**
 	 * Tests if the language ID parameter represents an ISO language format.
 	 *
-	 * @param string ISO language format, e.g. de or de_DE
+	 * @param string|null $langid ISO language format, e.g. de or de_DE
 	 * @throws MShop_Exception If the language ID is invalid
 	 */
 	protected function _checkLanguageId( $langid )

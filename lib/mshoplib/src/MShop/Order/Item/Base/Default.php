@@ -172,7 +172,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	/**
 	 * Sets the customer ID of the customer who has ordered.
 	 *
-	 * @param string $customerId Unique ID of the customer
+	 * @param string $customerid Unique ID of the customer
 	 */
 	public function setCustomerId( $customerid )
 	{
@@ -230,7 +230,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	/**
 	 * Returns the product item of an (future) order specified by its key.
 	 *
-	 * @param mixed $key Key returned by getProducts() identifying the requested product
+	 * @param integer $key Key returned by getProducts() identifying the requested product
 	 * @return MShop_Order_Item_Base_Product_Interface Product item of an order
 	 */
 	public function getProduct( $key )

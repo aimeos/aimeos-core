@@ -64,7 +64,7 @@ class MAdmin_Cache_Proxy_Default
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $keys List of key strings that identify the cache entries
+	 * @param string[] $keys List of key strings that identify the cache entries
 	 * 	that should be removed
 	 * @throws MW_Cache_Exception If the cache server doesn't respond
 	 */
@@ -79,7 +79,7 @@ class MAdmin_Cache_Proxy_Default
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $tags List of tag strings that are associated to one or more
+	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
 	 * @throws MW_Cache_Exception If the cache server doesn't respond
 	 */
@@ -124,7 +124,7 @@ class MAdmin_Cache_Proxy_Default
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $keys List of key strings for the requested cache entries
+	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
@@ -141,7 +141,7 @@ class MAdmin_Cache_Proxy_Default
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $tags List of tag strings associated to the requested cache entries
+	 * @param string[] $tags List of tag strings associated to the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
 	 * 	for that tag
@@ -173,8 +173,8 @@ class MAdmin_Cache_Proxy_Default
 	 * @inheritDoc
 	 *
 	 * @param string $key Key string for the given value like product/id/123
-	 * @param mixed $value Value string that should be stored for the given key
-	 * @param array $tags List of tag strings that should be assoicated to the
+	 * @param string $value Value string that should be stored for the given key
+	 * @param string[] $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
 	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format when the cache entry expires
@@ -194,7 +194,7 @@ class MAdmin_Cache_Proxy_Default
 	 *
 	 * @param array $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
-	 * @param array $tags Associative list of key/tag or key/tags pairs that should be
+	 * @param string[] $tags Associative list of key/tag or key/tags pairs that should be
 	 * 	associated to the values identified by their key. The value associated
 	 * 	to the key can either be a tag string or an array of tag strings
 	 * @param array $expires Associative list of key/datetime pairs.

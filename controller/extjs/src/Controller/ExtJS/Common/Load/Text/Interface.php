@@ -20,6 +20,7 @@ interface Controller_ExtJS_Common_Load_Text_Interface
 	 * Initializes the controller.
 	 *
 	 * @param MShop_Context_Item_Interface $context MShop context object
+	 * @return void
 	 */
 	public function __construct( MShop_Context_Item_Interface $context );
 

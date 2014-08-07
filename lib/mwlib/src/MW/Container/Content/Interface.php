@@ -20,11 +20,13 @@ interface MW_Container_Content_Interface extends Iterator
 	 * Adds data to the content object.
 	 *
 	 * @param mixed $data Content data
+	 * @return void
 	 */
 	public function add( $data );
 
 	/**
 	 * Cleans up and saves the content.
+	 * @return void
 	 */
 	public function close();
 

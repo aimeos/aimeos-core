@@ -38,6 +38,7 @@ interface MW_Cache_Interface
 	 * simply do nothing and return immediately.
 	 *
 	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @return void
 	 */
 	public function cleanup();
 
@@ -59,6 +60,7 @@ interface MW_Cache_Interface
 	 *
 	 * @param string $key Key string that identifies the single cache entry
 	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @return void
 	 */
 	public function delete( $key );
 
@@ -337,6 +339,7 @@ interface MW_Cache_Interface
 	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format when the cache entry expires
 	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @return void
 	 */
 	public function set( $key, $value, array $tags = array(), $expires = null );
 

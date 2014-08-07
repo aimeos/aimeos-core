@@ -34,6 +34,7 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new type ID of the plugin item.
 	 *
 	 * @param integer $typeid New plugin type ID
+	 * @return void
 	 */
 	public function setTypeId( $typeid );
 
@@ -48,6 +49,7 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new label of the plugin item.
 	 *
 	 * @param string $label New label of the plugin item
+	 * @return void
 	 */
 	public function setLabel( $label );
 
@@ -62,6 +64,7 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new provider of the plugin item which is the short name of the plugin class name.
 	 *
 	 * @param string $provider Plugin provider, esp. short plugin class name
+	 * @return void
 	 */
 	public function setProvider($provider);
 
@@ -75,7 +78,8 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	/**
 	 * Sets the new configuration for the plugin item.
 	 *
-	 * @param array $_config Custom configuration values
+	 * @param array $config Custom configuration values
+	 * @return void
 	 */
 	public function setConfig( array $config );
 
@@ -90,6 +94,7 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new position of the plugin item.
 	 *
 	 * @param integer $position Position of the item
+	 * @return void
 	 */
 	public function setPosition($position);
 
@@ -104,6 +109,7 @@ interface MShop_Plugin_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new status of the plugin item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return void
 	 */
 	public function setStatus($status);
 }

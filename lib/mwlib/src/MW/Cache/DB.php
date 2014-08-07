@@ -162,7 +162,7 @@ class MW_Cache_DB
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $tags List of tag strings that are associated to one or more
+	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
 	 * @throws MW_Cache_Exception If the cache server doesn't respond
 	 */
@@ -226,7 +226,7 @@ class MW_Cache_DB
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $keys List of key strings for the requested cache entries
+	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
@@ -279,7 +279,7 @@ class MW_Cache_DB
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $tags List of tag strings associated to the requested cache entries
+	 * @param string[] $tags List of tag strings associated to the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
 	 * 	for that tag
