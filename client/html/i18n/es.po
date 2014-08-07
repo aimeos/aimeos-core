@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 16:31+0200\n"
-"PO-Revision-Date: 2014-08-06 14:11+0000\n"
+"POT-Creation-Date: 2014-08-07 16:28+0200\n"
+"PO-Revision-Date: 2014-08-07 14:29+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/arcavias-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -284,13 +284,13 @@ msgstr "Ciudad"
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
 
-#: src/Client/Html/Abstract.php:328
+#: src/Client/Html/Abstract.php:326
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
 
-#: src/Client/Html/Abstract.php:322
+#: src/Client/Html/Abstract.php:320
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -485,7 +485,7 @@ msgstr "Rebajas incluidas"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Caracteres no válidos en el nombre de clase \"%1$s\""
 
-#: src/Client/Html/Abstract.php:285 src/Client/Html/Abstract.php:313
+#: src/Client/Html/Abstract.php:283 src/Client/Html/Abstract.php:311
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "Caracteres no válidos en el nombre del cliente \"%1$s\""
@@ -806,7 +806,7 @@ msgstr "Suma"
 msgid "Telephone"
 msgstr "Teléfono"
 
-#: src/Client/Html/Abstract.php:464
+#: src/Client/Html/Abstract.php:462
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "Plantilla \"%1$s\" no disponible"
@@ -903,7 +903,7 @@ msgstr ""
 msgid "Time frame"
 msgstr ""
 
-#: layouts/catalog/list/promo-body-default.html:26
+#: layouts/catalog/list/promo-body-default.html:24
 msgid "Top seller"
 msgstr "Éxito de ventas"
 
@@ -1013,7 +1013,7 @@ msgstr "X"
 msgid "Y-m-d"
 msgstr "A-m-d"
 
-#: layouts/catalog/stage/breadcrumb-body-default.html:19
+#: layouts/catalog/stage/breadcrumb-body-default.html:20
 msgid "You are here:"
 msgstr "Usted está aquí:"
 
@@ -1036,6 +1036,10 @@ msgstr "Su pedido %1$s"
 #, php-format
 msgid "Your order %1$s from %2$s has been dispatched."
 msgstr "Su pedido %1$s desde %2$s ha sido enviado."
+
+#: layouts/catalog/stage/breadcrumb-body-default.html:28
+msgid "Your search result"
+msgstr ""
 
 #. / Product notification e-mail subject
 #: layouts/email/watch/header-default.html:9

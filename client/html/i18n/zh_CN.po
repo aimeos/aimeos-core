@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 16:31+0200\n"
-"PO-Revision-Date: 2014-08-06 14:11+0000\n"
+"POT-Creation-Date: 2014-08-07 16:28+0200\n"
+"PO-Revision-Date: 2014-08-07 14:29+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/arcavias-core/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -283,13 +283,13 @@ msgstr "市"
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:328
+#: src/Client/Html/Abstract.php:326
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "类型 \"%1$s\" 不实现接口\"%2$s\""
 
-#: src/Client/Html/Abstract.php:322
+#: src/Client/Html/Abstract.php:320
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -484,7 +484,7 @@ msgstr "已经打完折"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "类名 \"%1$s\"有无效的字符"
 
-#: src/Client/Html/Abstract.php:285 src/Client/Html/Abstract.php:313
+#: src/Client/Html/Abstract.php:283 src/Client/Html/Abstract.php:311
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "客户名 \"%1$s\"有无效的字符 "
@@ -804,7 +804,7 @@ msgstr "合计"
 msgid "Telephone"
 msgstr "电话"
 
-#: src/Client/Html/Abstract.php:464
+#: src/Client/Html/Abstract.php:462
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "模板 \"%1$s\" 不可用"
@@ -901,7 +901,7 @@ msgstr ""
 msgid "Time frame"
 msgstr ""
 
-#: layouts/catalog/list/promo-body-default.html:26
+#: layouts/catalog/list/promo-body-default.html:24
 msgid "Top seller"
 msgstr "畅销产品"
 
@@ -1011,7 +1011,7 @@ msgstr "X"
 msgid "Y-m-d"
 msgstr "年-月-日"
 
-#: layouts/catalog/stage/breadcrumb-body-default.html:19
+#: layouts/catalog/stage/breadcrumb-body-default.html:20
 msgid "You are here:"
 msgstr "您现在的位置："
 
@@ -1033,6 +1033,10 @@ msgstr "您的订单 %1$s"
 #: layouts/email/delivery/3/html-intro-body-default.html:12
 #, php-format
 msgid "Your order %1$s from %2$s has been dispatched."
+msgstr ""
+
+#: layouts/catalog/stage/breadcrumb-body-default.html:28
+msgid "Your search result"
 msgstr ""
 
 #. / Product notification e-mail subject

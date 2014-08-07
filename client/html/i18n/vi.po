@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 16:31+0200\n"
-"PO-Revision-Date: 2014-08-06 14:11+0000\n"
+"POT-Creation-Date: 2014-08-07 16:28+0200\n"
+"PO-Revision-Date: 2014-08-07 14:29+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/arcavias-core/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -286,13 +286,13 @@ msgstr "Thành phố"
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:328
+#: src/Client/Html/Abstract.php:326
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:322
+#: src/Client/Html/Abstract.php:320
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -487,7 +487,7 @@ msgstr "Bao gồm phần giảm giá"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:285 src/Client/Html/Abstract.php:313
+#: src/Client/Html/Abstract.php:283 src/Client/Html/Abstract.php:311
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr ""
@@ -807,7 +807,7 @@ msgstr "Tổng"
 msgid "Telephone"
 msgstr "Số điện thoại"
 
-#: src/Client/Html/Abstract.php:464
+#: src/Client/Html/Abstract.php:462
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr ""
@@ -904,7 +904,7 @@ msgstr ""
 msgid "Time frame"
 msgstr ""
 
-#: layouts/catalog/list/promo-body-default.html:26
+#: layouts/catalog/list/promo-body-default.html:24
 msgid "Top seller"
 msgstr ""
 
@@ -1014,7 +1014,7 @@ msgstr ""
 msgid "Y-m-d"
 msgstr "Năm-tháng-ngày"
 
-#: layouts/catalog/stage/breadcrumb-body-default.html:19
+#: layouts/catalog/stage/breadcrumb-body-default.html:20
 msgid "You are here:"
 msgstr "Bạn đang ở đây"
 
@@ -1036,6 +1036,10 @@ msgstr ""
 #: layouts/email/delivery/3/html-intro-body-default.html:12
 #, php-format
 msgid "Your order %1$s from %2$s has been dispatched."
+msgstr ""
+
+#: layouts/catalog/stage/breadcrumb-body-default.html:28
+msgid "Your search result"
 msgstr ""
 
 #. / Product notification e-mail subject
