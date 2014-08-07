@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 16:04+0200\n"
+"POT-Creation-Date: 2014-08-07 16:28+0200\n"
 "PO-Revision-Date: 2012-12-24 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/arcavias/language/en/)\n"
@@ -267,13 +267,13 @@ msgstr ""
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:328
+#: src/Client/Html/Abstract.php:326
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:322
+#: src/Client/Html/Abstract.php:320
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -463,7 +463,7 @@ msgstr ""
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Client/Html/Abstract.php:285 src/Client/Html/Abstract.php:313
+#: src/Client/Html/Abstract.php:283 src/Client/Html/Abstract.php:311
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr ""
@@ -778,7 +778,7 @@ msgstr ""
 msgid "Telephone"
 msgstr ""
 
-#: src/Client/Html/Abstract.php:464
+#: src/Client/Html/Abstract.php:462
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr ""
@@ -867,7 +867,7 @@ msgstr ""
 msgid "Time frame"
 msgstr ""
 
-#: layouts/catalog/list/promo-body-default.html:26
+#: layouts/catalog/list/promo-body-default.html:24
 msgid "Top seller"
 msgstr ""
 
@@ -976,7 +976,7 @@ msgstr ""
 msgid "Y-m-d"
 msgstr "m/d/Y"
 
-#: layouts/catalog/stage/breadcrumb-body-default.html:19
+#: layouts/catalog/stage/breadcrumb-body-default.html:20
 msgid "You are here:"
 msgstr ""
 
@@ -997,6 +997,10 @@ msgstr ""
 #: layouts/email/delivery/3/html-intro-body-default.html:12
 #, php-format
 msgid "Your order %1$s from %2$s has been dispatched."
+msgstr ""
+
+#: layouts/catalog/stage/breadcrumb-body-default.html:28
+msgid "Your search result"
 msgstr ""
 
 #. / Product notification e-mail subject
