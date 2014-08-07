@@ -347,6 +347,35 @@ class Client_Html_Catalog_Stage_Default
 
 
 	/**
+	 * Generates an unique hash from based on the input suitable to be used as part of the cache key
+	 *
+	 * @param array $prefixes List of prefixes the parameters must start with
+	 * @param string $key Unique identifier if the content is placed more than once on the same page
+	 * @param array $config Multi-dimensional array of configuration options used by the client and sub-clients
+	 * @return string Unique hash
+	 */
+	protected function _getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '', array $config = array() )
+	{
+		$locale = $this->_getContext()->getLocale();
+		$params = $this->_getClientParams( $this->getView()->param(), $prefixes );
+
+		if( empty( $params ) )
+		{
+			$params = $this->_getContext()->getSession()->get( 'arcavias/catalog/list/params/last', '' );
+			$params = ( ( $data = json_decode( $params, true ) ) !== null ? $data : array() );
+		}
+
+		ksort( $params );
+
+		if( ( $pstr = json_encode( $params ) ) === false || ( $cstr = json_encode( $config ) ) === false ) {
+			throw new Client_Html_Exception( 'Unable to encode parameters or configuration options' );
+		}
+
+		return md5( $key . $pstr . $cstr . $locale->getLanguageId() . $locale->getCurrencyId() );
+	}
+
+
+	/**
 	 * Returns the list of sub-client names configured for the client.
 	 *
 	 * @return array List of HTML client names
@@ -369,9 +398,18 @@ class Client_Html_Catalog_Stage_Default
 	{
 		if( !isset( $this->_view ) )
 		{
-			if( ( $catid = $view->param( 'f-catalog-id' ) ) != '' )
+			$context = $this->_getContext();
+			$params = $this->_getClientParams( $view->param(), array( 'f' ) );
+
+			if( empty( $params ) )
 			{
-				$context = $this->_getContext();
+				$params = $context->getSession()->get( 'arcavias/catalog/list/params/last', '' );
+				$params = ( ( $data = json_decode( $params, true ) ) !== null ? $data : array() );
+			}
+
+			if( isset( $params['f-catalog-id'] ) )
+			{
+				$catid = $params['f-catalog-id'];
 				$config = $context->getConfig();
 				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
 
@@ -415,9 +453,10 @@ class Client_Html_Catalog_Stage_Default
 				$this->_addMetaItem( $stageCatPath, 'catalog', $this->_expire, $this->_tags );
 				$this->_addMetaList( array_keys( $stageCatPath ), 'catalog', $this->_expire );
 
-
 				$view->stageCatPath = $stageCatPath;
 			}
+
+			$view->stageParams = $params;
 
 			$this->_view = $view;
 		}

@@ -81,6 +81,16 @@ class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends MW_Unittest_Testc
 	}
 
 
+	public function testGetBodyNoCatId()
+	{
+		$this->_object->setView( TestHelper::getView() );
+
+		$output = $this->_object->getBody();
+		$this->assertRegExp( '#Your search result#smU', $output );
+		$this->assertStringStartsWith( '<div class="catalog-stage-breadcrumb">', $output );
+	}
+
+
 	public function testGetSubClient()
 	{
 		$this->setExpectedException( 'Client_Html_Exception' );

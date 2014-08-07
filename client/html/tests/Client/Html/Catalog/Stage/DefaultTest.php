@@ -72,6 +72,18 @@ class Client_Html_Catalog_Stage_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBody()
 	{
+		$tags = array();
+		$expire = null;
+		$output = $this->_object->getBody( 1, $tags, $expire );
+
+		$this->assertStringStartsWith( '<section class="arcavias catalog-stage">', $output );
+		$this->assertEquals( null, $expire );
+		$this->assertEquals( 0, count( $tags ) );
+	}
+
+
+	public function testGetBodyCatId()
+	{
 		$view = $this->_object->getView();
 		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $this->_getCatalogItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
