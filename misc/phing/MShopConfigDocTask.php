@@ -89,6 +89,8 @@ class MShopConfigDocTask extends Task
 				unset( $options[$key] );
 			} else if( strpos( $key, 'unknown' ) !== false ) {
 				unset( $options[$key] );
+			} else if( !isset( $values['short'] ) && $key[0] !== "\n" ) {
+				$this->log( 'No doc: ' . $key );
 			}
 		}
 
