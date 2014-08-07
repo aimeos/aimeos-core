@@ -20,7 +20,7 @@ interface MW_Communication_Interface
 	 *
 	 * @param string $target Receivers address e.g. url.
 	 * @param string $method Initial method (e.g. post or get)
-	 * @param mixed $payload Update information whose format depends on the payment provider
+	 * @param string $payload Update information whose format depends on the payment provider
 	 * @return string response body of a http request
 	 */
 	public function transmit( $target, $method, $payload );

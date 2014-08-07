@@ -99,7 +99,7 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	/**
 	 * Returns the unique ID of the node.
 	 *
-	 * @return mixed Unique ID of th node
+	 * @return string|null Unique ID of th node
 	 */
 	public function getId()
 	{
@@ -187,7 +187,7 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	/**
 	 * Sets the new status of the node.
 	 *
-	 * @return integer Greater than zero if enabled, zero or less than if not
+	 * @param integer Greater than zero if enabled, zero or less than if not
 	 */
 	public function setStatus( $status )
 	{

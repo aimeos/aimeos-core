@@ -30,6 +30,7 @@ interface MW_Tree_Node_Interface
 	 *
 	 * @param string $name Name of member variable tried to access
 	 * @param mixed $value Value of member variable tried to access
+	 * @return void
 	 */
 	public function __set( $name, $value );
 
@@ -45,13 +46,14 @@ interface MW_Tree_Node_Interface
 	 * Removes the value associated to the given name.
 	 *
 	 * @param string $name Name of member variable tried to access
+	 * @return void
 	 */
 	public function __unset( $name );
 
 	/**
 	 * Returns the unique ID of the node.
 	 *
-	 * @return mixed|null Unique ID of the node
+	 * @return string|null Unique ID of the node
 	 */
 	public function getId();
 
@@ -59,6 +61,7 @@ interface MW_Tree_Node_Interface
 	 * Sets the unique ID of the node.
 	 *
 	 * @param mixed|null Unique ID of the node
+	 * @return void
 	 */
 	public function setId( $id );
 
@@ -73,6 +76,7 @@ interface MW_Tree_Node_Interface
 	 * Sets the new name of the node.
 	 *
 	 * @param string $name New default name of the node
+	 * @return void
 	 */
 	public function setLabel( $name );
 
@@ -87,6 +91,7 @@ interface MW_Tree_Node_Interface
 	 * Sets the new code of the node.
 	 *
 	 * @param string $name New code of the node
+	 * @return void
 	 */
 	public function setCode( $name );
 
@@ -131,6 +136,7 @@ interface MW_Tree_Node_Interface
 	 * Adds a child node to this node.
 	 *
 	 * @param MW_Tree_Node_Interface $node Child node to add
+	 * @return void
 	 */
 	public function addChild( MW_Tree_Node_Interface $node );
 

@@ -167,10 +167,10 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 
 
 	/**
-	 * Get the parameter type
+	 * Returns the parameter type.
 	 *
-	 * @param string $item
-	 * @return parameter type
+	 * @param string &$item Parameter string to evaluate (double quotes will be removed if necessary)
+	 * @return string Data type (string, float, int)
 	 */
 	protected function _getParamType( &$item )
 	{

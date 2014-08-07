@@ -149,6 +149,9 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	/**
+	 * @return MShop_Order_Item_Base_Interface
+	 */
 	protected function _getServiceItem()
 	{
 		$serviceManager = MShop_Service_Manager_Factory::createManager( TestHelper::getContext() );

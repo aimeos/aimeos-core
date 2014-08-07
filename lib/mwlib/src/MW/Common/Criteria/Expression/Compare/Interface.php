@@ -27,7 +27,7 @@ interface MW_Common_Criteria_Expression_Compare_Interface extends MW_Common_Crit
 	/**
 	 * Returns the right side of the compare expression.
 	 *
-	 * @return mixed Value that the variable or column should be compared to.
+	 * @return string Value that the variable or column should be compared to.
 	 */
 	public function getValue();
 }

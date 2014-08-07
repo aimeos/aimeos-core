@@ -27,6 +27,7 @@ interface MShop_Supplier_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new label of the supplier item.
 	 *
 	 * @param string $value label of the supplier item
+	 * @return void
 	 */
 	public function setLabel($value);
 
@@ -41,6 +42,7 @@ interface MShop_Supplier_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new code of the supplier item.
 	 *
 	 * @param string $value Code of the supplier item
+	 * @return void
 	 */
 	public function setCode($value);
 
@@ -55,6 +57,7 @@ interface MShop_Supplier_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the status of the item
 	 *
 	 * @param integer $value Status of the item
+	 * @return void
 	 */
 	public function setStatus($value);
 }

@@ -80,7 +80,7 @@ class Controller_ExtJS_Locale_Default
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return mixed Manager object
+	 * @return MShop_Locale_Manager_Interface Manager object
 	 */
 	protected function _getManager()
 	{

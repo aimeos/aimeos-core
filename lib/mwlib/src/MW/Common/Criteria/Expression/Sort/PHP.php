@@ -75,7 +75,7 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	/**
 	 * Generates a string from the expression objects.
 	 *
-	 * @param array $names Associative list of variable or column names as keys and their corresponding types
+	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
 	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Interface
 	 * @return string Expression that evaluates to a boolean result
@@ -125,8 +125,8 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	/**
 	 * @param string &$item Reference to parameter value (will be updated if necessary)
 	 *
-	 * @param string $item Parameter value
-	 * @return integer Internal parameter type
+	 * @param string &$item Parameter value
+	 * @return string Internal parameter type
 	 * @throws MW_Common_Exception If an error occurs
 	 */
 	protected function _getParamType( &$item )

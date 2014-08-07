@@ -28,7 +28,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -39,7 +39,7 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -110,6 +110,10 @@ class MW_Setup_Task_ProductAddBasePerfData extends MW_Setup_Task_Abstract
 	}
 
 
+	/**
+	 * @param string $domain
+	 * @param string $code
+	 */
 	protected function _getProductListItem( $domain, $code )
 	{
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/list/type' );

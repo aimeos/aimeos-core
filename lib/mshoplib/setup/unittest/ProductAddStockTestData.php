@@ -15,7 +15,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -26,7 +26,7 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -73,8 +73,6 @@ class MW_Setup_Task_ProductAddStockTestData extends MW_Setup_Task_Abstract
 	 * Adds the product stock test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @param MShop_Product_Manager_Interface $productManager Product Manager
-	 * @param array $parentIds Associative list of key/list pairs
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */
 	private function _addProductStockData( array $testdata )

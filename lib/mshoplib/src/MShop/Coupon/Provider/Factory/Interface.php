@@ -23,6 +23,7 @@ interface MShop_Coupon_Provider_Factory_Interface
 	 * @param MShop_Context_Item_Interface $context Context object
 	 * @param MShop_Coupon_Item_Interface $item Coupon item to set
 	 * @param string $code Coupon code entered by the customer
+	 * @return void
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Coupon_Item_Interface $item, $code );
 
@@ -58,6 +59,7 @@ interface MShop_Coupon_Provider_Factory_Interface
 	 * call isAvailable() if itself which would lead to a result of "true".
 	 *
 	 * @param MShop_Coupon_Provider_Interface $object Reference to the outside provider or decorator
+	 * @return void
 	 */
 	public function setObject( MShop_Coupon_Provider_Interface $object );
 }

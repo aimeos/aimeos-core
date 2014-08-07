@@ -227,7 +227,7 @@ class MShop_Customer_Item_Default
 	/**
 	 * Sets the birthday of the customer item.
 	 *
-	 * @param date $value Birthday of the customer item
+	 * @param string $value Birthday of the customer item
 	 */
 	public function setBirthday( $value )
 	{

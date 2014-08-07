@@ -103,6 +103,9 @@ class Client_Html_Checkout_Standard_Summary_Detail_DefaultTest extends MW_Unitte
 	}
 
 
+	/**
+	 * @param string $code
+	 */
 	protected function _getProductItem( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );

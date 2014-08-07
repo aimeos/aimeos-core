@@ -49,7 +49,7 @@ class MShop_Service_Item_Default
 	/**
 	 * Sets the new position of the service item in the list of deliveries.
 	 *
-	 * @param integer $position Position in item list
+	 * @param integer $pos Position in item list
 	 */
 	public function setPosition( $pos )
 	{

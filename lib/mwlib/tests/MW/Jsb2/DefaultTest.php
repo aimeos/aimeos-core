@@ -12,6 +12,9 @@ class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 	private $_manifestPath;
 	private $_deployPath;
 
+	/**
+	 * @param string $dir
+	 */
 	protected function _delTree( $dir )
 	{
 		if( !is_dir( $dir ) ) {

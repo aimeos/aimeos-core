@@ -72,7 +72,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	/**
 	 * Sets the associative list of schemas with the resource name as key.
 	 *
-	 * @param array $conns Associative list of schemas
+	 * @param array $schemas Associative list of schemas
 	 */
 	public function setSchemas( array $schemas )
 	{
@@ -118,6 +118,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	 * Executes a given SQL statement and returns the value of the named column and first row.
 	 *
 	 * @param string $sql SQL statement to execute
+	 * @param string $column Column name to retrieve
 	 * @param string $name Name from the resource configuration
 	 */
 	protected function _getValue( $sql, $column, $name = 'db' )

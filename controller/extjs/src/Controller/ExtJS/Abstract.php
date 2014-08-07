@@ -240,7 +240,7 @@ abstract class Controller_ExtJS_Abstract
 	 * Checks if the required parameter are available.
 	 *
 	 * @param stdClass $params Item object containing the parameter
-	 * @param array $names List of names of the required parameter
+	 * @param string[] $names List of names of the required parameter
 	 * @throws Controller_ExtJS_Exception if a required parameter is missing
 	 */
 	protected function _checkParams( stdClass $params, array $names )
@@ -455,7 +455,7 @@ abstract class Controller_ExtJS_Abstract
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop context object implementing MShop_Context_Item_Interface
+	 * @return MShop_Context_Item_Interface Context object
 	 */
 	protected function _getContext()
 	{

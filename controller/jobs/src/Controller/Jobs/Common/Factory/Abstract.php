@@ -38,7 +38,7 @@ class Controller_Jobs_Common_Factory_Abstract
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param Arcavias $arcavias Arcavias object
-	 * @param Controller_Jobs_Common_Interface $controller Controller object
+	 * @param Controller_Jobs_Interface $controller Controller object
 	 * @param string $classprefix Decorator class prefix, e.g. "Controller_Jobs_Attribute_Decorator_"
 	 * @return Controller_Jobs_Common_Interface Controller object
 	 */
@@ -77,7 +77,7 @@ class Controller_Jobs_Common_Factory_Abstract
 	 *
 	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param Arcavias $arcavias Arcavias object
-	 * @param Controller_Jobs_Common_Interface $controller Controller object
+	 * @param Controller_Jobs_Interface $controller Controller object
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return Controller_Jobs_Common_Interface Controller object
 	 */

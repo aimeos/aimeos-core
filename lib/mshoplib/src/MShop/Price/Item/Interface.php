@@ -22,6 +22,7 @@ interface MShop_Price_Item_Interface
 	 *
 	 * @param MShop_Price_Item_Interface $item Price item which should be added
 	 * @param integer $quantity Number of times the Price should be added
+	 * @return void
 	 */
 	public function addItem( MShop_Price_Item_Interface $item, $quantity = 1 );
 
@@ -36,6 +37,7 @@ interface MShop_Price_Item_Interface
 	 * Sets the new domain the price is valid for.
 	 *
 	 * @param string $domain Domain name
+	 * @return void
 	 */
 	public function setDomain( $domain );
 
@@ -50,13 +52,14 @@ interface MShop_Price_Item_Interface
 	 * Sets the quantity.
 	 *
 	 * @param integer Quantity
+	 * @return void
 	 */
 	public function setQuantity( $quantity );
 
 	/**
 	 * Returns the amount of money.
 	 *
-	 * @return numeric Price
+	 * @return string Price
 	 */
 	public function getValue();
 
@@ -64,13 +67,14 @@ interface MShop_Price_Item_Interface
 	 * Sets the new amount of money.
 	 *
 	 * @param numeric $price Amount with two digits precision
+	 * @return void
 	 */
 	public function setValue( $price );
 
 	/**
 	 * Returns the costs.
 	 *
-	 * @return numeric Costs
+	 * @return string Costs
 	 */
 	public function getCosts();
 
@@ -78,27 +82,29 @@ interface MShop_Price_Item_Interface
 	 * Sets the new costs.
 	 *
 	 * @param numeric $price Amount with two digits precision
+	 * @return void
 	 */
 	public function setCosts( $price );
 
 	/**
 	 * Returns the rebate amount.
 	 *
-	 * @return numeric Rebate amount
+	 * @return string Rebate amount
 	 */
 	public function getRebate();
 
 	/**
 	 * Sets the new Tax rate.
 	 *
-	 * @param numeric $taxrate Tax rate with two digits precision
+	 * @param string $taxrate Tax rate with two digits precision
+	 * @return void
 	 */
 	public function setTaxRate( $taxrate );
 
 	/**
 	 * Returns the taxrate amount.
 	 *
-	 * @return Tax rate of product
+	 * @return string rate of product
 	 */
 	public function getTaxRate();
 
@@ -106,6 +112,7 @@ interface MShop_Price_Item_Interface
 	 * Sets the new rebate amount.
 	 *
 	 * @param numeric $price Rebate amount with two digits precision
+	 * @return void
 	 */
 	public function setRebate( $price );
 
@@ -121,6 +128,7 @@ interface MShop_Price_Item_Interface
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
 	 * @throws MShop_Exception If the currency ID is invalid
+	 * @return void
 	 */
 	public function setCurrencyId( $currencyid );
 
@@ -135,6 +143,7 @@ interface MShop_Price_Item_Interface
 	 * Sets the status of the item
 	 *
 	 * @param integer $status Status of the item
+	 * @return void
 	 */
 	public function setStatus( $status );
 

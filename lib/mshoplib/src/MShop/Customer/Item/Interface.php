@@ -27,6 +27,7 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new label of the customer item.
 	 *
 	 * @param string $value Label of the customer item
+	 * @return void
 	 */
 	public function setLabel($value);
 
@@ -41,6 +42,7 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the status of the item.
 	 *
 	 * @param integer $value Status of the item
+	 * @return void
 	 */
 	public function setStatus($value);
 
@@ -56,6 +58,7 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the code of the customer item.
 	 *
 	 * @param string $value Code of the customer item
+	 * @return void
 	 */
 	public function setCode( $value );
 
@@ -70,6 +73,7 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the birthday of the customer item.
 	 *
 	 * @param date $value Birthday of the customer item (YYYY-MM-DD format)
+	 * @return void
 	 */
 	public function setBirthday( $value );
 
@@ -84,6 +88,7 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the billing address of the customer item.
 	 *
 	 * @param MShop_Common_Item_Address_Interface $address Billing address of the customer item
+	 * @return void
 	 */
 	public function setPaymentAddress( MShop_Common_Item_Address_Interface $address );
 
@@ -98,6 +103,7 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the password of the customer item.
 	 *
 	 * @param string $value Password of the customer item
+	 * @return void
 	 */
 	public function setPassword( $value );
 
@@ -112,6 +118,7 @@ interface MShop_Customer_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the latest verification date of the customer.
 	 *
 	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD format) or null if unknown
+	 * @return void
 	 */
 	public function setDateVerified( $value );
 }

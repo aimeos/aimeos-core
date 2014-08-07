@@ -112,7 +112,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -419,7 +419,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 * Rebuilds the catalog index text for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param array $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
+	 * @param MShop_Common_Item_Interface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -698,7 +698,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	/**
 	 * Saves the text record with given set of parameters.
 	 *
-	 * @param MW_Database_Statement_Interface $stmt Prepared SQL statement with place holders
+	 * @param MW_DB_Statement_Interface $stmt Prepared SQL statement with place holders
 	 * @param integer $id ID of the product item
 	 * @param integer $siteid Site ID
 	 * @param string $refid ID of the text item that contains the text

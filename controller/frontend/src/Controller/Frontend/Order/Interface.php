@@ -47,6 +47,7 @@ interface Controller_Frontend_Order_Interface
 	 * meantime. This can lead to an oversell of products!
 	 *
 	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @return void
 	 */
 	public function block( MShop_Order_Item_Interface $orderItem );
 
@@ -68,6 +69,7 @@ interface Controller_Frontend_Order_Interface
 	 * meantime. This can lead to an oversell of products!
 	 *
 	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @return void
 	 */
 	public function unblock( MShop_Order_Item_Interface $orderItem );
 
@@ -85,6 +87,7 @@ interface Controller_Frontend_Order_Interface
 	 * nothing as long as the payment status hasn't changed in the meantime.
 	 *
 	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @return void
 	 */
 	public function update( MShop_Order_Item_Interface $orderItem );
 }

@@ -27,6 +27,7 @@ interface MAdmin_Cache_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new value of the item.
 	 *
 	 * @param string $value Value of the item
+	 * @return void
 	 */
 	public function setValue( $value );
 
@@ -41,6 +42,7 @@ interface MAdmin_Cache_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new expiration time of the item.
 	 *
 	 * @param string|null Expiration time of the item or null for no expiration
+	 * @return void
 	 */
 	public function setTimeExpire( $timestamp );
 
@@ -55,6 +57,7 @@ interface MAdmin_Cache_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new tags associated to the item.
 	 *
 	 * @param array Tags associated to the item
+	 * @return void
 	 */
 	public function setTags( array $tags );
 }

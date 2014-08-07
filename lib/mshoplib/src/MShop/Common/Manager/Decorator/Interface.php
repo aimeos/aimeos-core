@@ -22,6 +22,7 @@ interface MShop_Common_Manager_Decorator_Interface
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param MShop_Common_Manager_Interface $manager Manager object
+	 * @return void
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Common_Manager_Interface $manager );
 }

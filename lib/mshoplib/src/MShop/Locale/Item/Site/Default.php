@@ -39,18 +39,18 @@ class MShop_Locale_Item_Site_Default
 	/**
 	 * Returns the id of the site.
 	 *
-	 * @return integer Id of the site
+	 * @return integer|null Id of the site
 	 */
 	public function getSiteId()
 	{
-		return parent::getId();
+		return (int) parent::getId();
 	}
 
 
 	/**
 	 * Returns the code of the site.
 	 *
-	 * @return string|null Returns the code of the item
+	 * @return string Returns the code of the item
 	 */
 	public function getCode()
 	{

@@ -30,7 +30,7 @@ class MW_Setup_Task_MediaAddDomain extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -52,8 +52,6 @@ class MW_Setup_Task_MediaAddDomain extends MW_Setup_Task_Abstract
 	/**
 	 * Add column to table if the column doesn't exist.
 	 *
-	 * @param string $table Table name
-	 * @param string $colum Column name to add
 	 * @param array $stmts List of SQL statements to execute for adding columns
 	 */
 	protected function _process( array $stmts )

@@ -81,7 +81,7 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	/**
 	 * Returns the default of the column.
 	 *
-	 * @return mixed Default of the column
+	 * @return string Default of the column
 	 */
 	public function getDefaultValue()
 	{

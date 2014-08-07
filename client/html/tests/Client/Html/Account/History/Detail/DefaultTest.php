@@ -97,6 +97,9 @@ class Client_Html_Account_History_Detail_DefaultTest extends MW_Unittest_Testcas
 	}
 
 
+	/**
+	 * @param string $code
+	 */
 	protected function _getCustomerItem( $code )
 	{
 		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context );

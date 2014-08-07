@@ -42,6 +42,7 @@ interface MShop_Common_Manager_Interface
 	 * Deletes the item specified by its ID.
 	 *
 	 * @param mixed $id ID of the item object
+	 * @return void
 	 */
 	public function deleteItem( $id );
 
@@ -87,6 +88,7 @@ interface MShop_Common_Manager_Interface
 	 * Searches for all items matching the given critera.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Criteria object with conditions, sortations, etc.
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing MShop_Common_Item_Interface
 	 */

@@ -17,6 +17,9 @@
 class Controller_ExtJS_Plugin_Factorylocal
 	extends Controller_ExtJS_Common_Factory_Abstract
 {
+	/**
+	 * @param string $name
+	 */
 	public static function createController( MShop_Context_Item_Interface $context, $name = null, $domainToTest='plugin' )
 	{
 		if ( $name === null ) {

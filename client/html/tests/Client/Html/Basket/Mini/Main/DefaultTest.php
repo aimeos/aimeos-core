@@ -115,6 +115,9 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	/**
+	 * @param string $code
+	 */
 	protected function _getProductItem( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( $this->_context );

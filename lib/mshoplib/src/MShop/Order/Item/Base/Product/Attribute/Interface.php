@@ -28,6 +28,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	 * Sets the original attribute ID of the ordered product attribute.
 	 *
 	 * @param string $id Attribute ID of the ordered product attribute
+	 * @return void
 	 */
 	public function setAttributeId( $id );
 
@@ -42,6 +43,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	 * Sets the product ID of the ordered product.
 	 *
 	 * @param string $id product ID of the ordered product
+	 * @return void
 	 */
 	public function setProductId( $id );
 
@@ -56,6 +58,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	 * Sets the type of the product attribute.
 	 *
 	 * @param string $type Type of the attribute
+	 * @return void
 	 */
 	public function setType( $type );
 
@@ -70,6 +73,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	 * Sets the code of the product attribute.
 	 *
 	 * @param string $code Code of the attribute
+	 * @return void
 	 */
 	public function setCode( $code );
 
@@ -84,6 +88,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	 * Sets the value of the product attribute.
 	 *
 	 * @param string $value Value of the product attribute
+	 * @return void
 	 */
 	public function setValue($value);
 
@@ -98,6 +103,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	 * Sets the localized name of the product attribute.
 	 *
 	 * @param string $name Localized name of the product attribute
+	 * @return void
 	 */
 	public function setName($name);
 
@@ -105,6 +111,7 @@ interface MShop_Order_Item_Base_Product_Attribute_Interface
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param MShop_Attribute_Item_Interface $item Attribute item to copy from
+	 * @return void
 	 */
 	public function copyFrom( MShop_Attribute_Item_Interface $item );
 }

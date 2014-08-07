@@ -22,6 +22,7 @@ interface MW_Container_Interface extends Iterator
 	 * @param string $resourcepath Path to the resource like a file
 	 * @param string $format Format of the content objects inside the container
 	 * @param array $options Associative list of key/value pairs for configuration
+	 * @return void
 	 */
 	public function __construct( $resourcepath, $format, array $options = array() );
 
@@ -29,11 +30,13 @@ interface MW_Container_Interface extends Iterator
 	 * Adds content data to the container.
 	 *
 	 * @param MW_Container_Content_Interface $content Content object
+	 * @return void
 	 */
 	public function add( MW_Container_Content_Interface $content );
 
 	/**
 	 * Cleans up and saves the container.
+	 * @return void
 	 */
 	public function close();
 

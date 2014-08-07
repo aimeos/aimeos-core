@@ -47,7 +47,7 @@ interface MW_Tree_Manager_Interface
 	/**
 	 * Returns a node and its descendants depending on the given resource.
 	 *
-	 * @param mixed $id Retrieve nodes starting from the given ID
+	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param int $level One of the level constants from MW_Tree_Manager_Abstract
 	 * @param MW_Common_Criteria_Interface|null $criteria Optional criteria object with conditions
 	 * @return MW_Tree_Node_Interface Node, maybe with subnodes
@@ -58,8 +58,8 @@ interface MW_Tree_Manager_Interface
 	 * Inserts a new node before the given reference node to the parent in the storage.
 	 *
 	 * @param MW_Tree_Node_Interface $node New node that should be inserted
-	 * @param mixed $parentId ID of the parent node where the new node should be inserted below (null for root node)
-	 * @param mixed $refId ID of the node where the node node should be inserted before (null to append)
+	 * @param integer|null $parentId ID of the parent node where the new node should be inserted below (null for root node)
+	 * @param integer|null $refId ID of the node where the node node should be inserted before (null to append)
 	 */
 	public function insertNode( MW_Tree_Node_Interface $node, $parentId = null, $refId = null );
 
@@ -101,7 +101,7 @@ interface MW_Tree_Manager_Interface
 	/**
 	 * Returns a list if node ids, that are in the path of given node id
 	 *
-	 * @param mixed $id Id of node to get path
+	 * @param integer $id Id of node to get path
 	 * @return array List of MW_Tree_Node_Interface in Path with node id as key
 	 */
 	public function getPath( $id );

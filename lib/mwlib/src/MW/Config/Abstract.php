@@ -22,8 +22,8 @@ abstract class MW_Config_Abstract implements MW_Config_Interface
 	/**
 	* Includes config files using a simple caching.
 	*
-	* @param string path and file name of a config file
-	* @return array return value of the requested config file
+	* @param string $file Path and file name of a config file
+	* @return array Value of the requested config file
 	**/
 	protected function _include( $file )
 	{

@@ -25,7 +25,7 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	/**
 	 * Initializes the controller decorator.
 	 *
-	 * @param MShop_Context_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param Controller_Jobs_Interface $controller Controller object
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, Arcavias $arcavias,
@@ -91,7 +91,7 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	/**
 	 * Returns the context object.
 	 *
-	 * @return MShop context object implementing MShop_Context_Item_Interface
+	 * @return MShop_Context_Item_Interface context object implementing MShop_Context_Item_Interface
 	 */
 	protected function _getContext()
 	{

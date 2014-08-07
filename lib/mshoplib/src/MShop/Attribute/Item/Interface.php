@@ -29,6 +29,7 @@ interface MShop_Attribute_Item_Interface
 	 * Set the name of the domain for this attribute item.
 	 *
 	 * @param string $domain Name of the domain e.g. text, media, price...
+	 * @return void
 	 */
 	public function setDomain( $domain );
 
@@ -43,6 +44,7 @@ interface MShop_Attribute_Item_Interface
 	 * Sets a unique code for the attribute item.
 	 *
 	 * @param string $code Code of the attribute item
+	 * @return void
 	 */
 	public function setCode($code);
 
@@ -57,6 +59,7 @@ interface MShop_Attribute_Item_Interface
 	 * Sets the new status of the attribute item.
 	 *
 	 * @param integer $status Status of attribute item
+	 * @return void
 	 */
 	public function setStatus($status);
 
@@ -71,6 +74,7 @@ interface MShop_Attribute_Item_Interface
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
+	 * @return void
 	 */
 	public function setLabel( $label );
 

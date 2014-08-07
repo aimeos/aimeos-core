@@ -22,6 +22,7 @@ interface MShop_Product_Manager_Stock_Interface
 	 * @param string $productCode Unique code of a product
 	 * @param string $warehouseCode Unique code of the warehouse
 	 * @param integer $amount Amount the stock level should be decreased
+	 * @return void
 	 */
 	public function decrease( $productCode, $warehouseCode, $amount );
 
@@ -32,6 +33,7 @@ interface MShop_Product_Manager_Stock_Interface
 	 * @param string $productCode Unique code of a product
 	 * @param string $warehouseCode Unique code of the warehouse
 	 * @param integer $amount Amount the stock level should be increased
+	 * @return void
 	 */
 	public function increase( $productCode, $warehouseCode, $amount );
 }

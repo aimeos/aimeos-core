@@ -34,7 +34,7 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -45,7 +45,7 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -65,7 +65,8 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 	/**
 	 * Adapts mshop_locale_site table if it exists.
 	 *
-	 * @param array $stmts Associative array of table name and lists of SQL statements to execute.
+	 * @param array $colstmts Associative array of table name and lists of ALTER TABLE SQL statements to execute
+	 * @param array $migstmts Associative array of action and SQL statements for content migration to execute
 	 */
 	protected function _process( array $colstmts, array $migstmts )
 	{

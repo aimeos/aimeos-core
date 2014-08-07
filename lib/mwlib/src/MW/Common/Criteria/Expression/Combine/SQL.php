@@ -24,6 +24,7 @@ class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Ex
 	/**
 	 * Initializes the object.
 	 *
+	 * @param string $operator The used combine operator
 	 * @param array $list List of expression objects
 	 */
 	public function __construct( $operator, array $list )
@@ -75,7 +76,7 @@ class MW_Common_Criteria_Expression_Combine_SQL implements MW_Common_Criteria_Ex
 	/**
 	 * Generates a string from the expression objects.
 	 *
-	 * @param array $names Associative list of variable or column names as keys and their corresponding types
+	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
 	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Interface
 	 * @return string Expression that evaluates to a boolean result

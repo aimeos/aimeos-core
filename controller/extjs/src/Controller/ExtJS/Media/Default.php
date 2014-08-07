@@ -323,7 +323,7 @@ class Controller_ExtJS_Media_Default
 	/**
 	 * Returns the manager the controller is using.
 	 *
-	 * @return mixed Manager object
+	 * @return MShop_Common_Manager_Interface Manager object
 	 */
 	protected function _getManager()
 	{
@@ -704,7 +704,7 @@ class Controller_ExtJS_Media_Default
 	 *
 	 * @param MW_Media_Image_Interface $mediaFile Media object
 	 * @param unknown_type $domain Domain the image belongs to, e.g. "product", "attribute", etc.
-	 * @param unknown_type $filename Name of the new file without file extension
+	 * @param string $filename Name of the new file without file extension
 	 * @throws Controller_ExtJS_Exception If the configuration is invalid or due to insufficient permissions
 	 */
 	protected function _copyFile( MW_Media_Interface $mediaFile, $domain, $filename )

@@ -27,6 +27,7 @@ interface MShop_Coupon_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the label of the coupon item.
 	 *
 	 * @param string $name Name/label of the coupon item.
+	 * @return void
 	 */
 	public function setLabel( $name );
 
@@ -41,6 +42,7 @@ interface MShop_Coupon_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets a new starting point of time, in which the coupon is available.
 	 *
 	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return void
 	 */
 	public function setDateStart( $date );
 
@@ -55,6 +57,7 @@ interface MShop_Coupon_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets a new ending point of time, in which the coupon is available.
 	 *
 	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return void
 	 */
 	public function setDateEnd( $date );
 
@@ -69,6 +72,7 @@ interface MShop_Coupon_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new provider of the coupon item which is the short name of the provider class name.
 	 *
 	 * @param string $provider Coupon provider, esp. short provider class name
+	 * @return void
 	 */
 	public function setProvider( $provider );
 
@@ -83,6 +87,7 @@ interface MShop_Coupon_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new configuration for the coupon item.
 	 *
 	 * @param array $config Custom configuration values
+	 * @return void
 	 */
 	public function setConfig( array $config );
 
@@ -97,6 +102,7 @@ interface MShop_Coupon_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the new status of the coupon item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return void
 	 */
 	public function setStatus( $status );
 

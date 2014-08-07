@@ -28,8 +28,9 @@ interface MW_DB_Manager_Interface
 	/**
 	 * Releases the connection for reuse
 	 *
-	 * @param mixed $connection Connection object
+	 * @param MW_DB_Connection_Interface $connection Connection object
 	 * @param string $name Name of resource
+	 * @return void
 	 */
 	public function release( MW_DB_Connection_Interface $connection, $name = 'db' );
 }

@@ -22,6 +22,7 @@ interface MShop_Coupon_Manager_Code_Interface
 	 *
 	 * @param string $couponCode Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be decreased
+	 * @return void
 	 */
 	public function decrease( $couponCode, $amount );
 
@@ -31,6 +32,7 @@ interface MShop_Coupon_Manager_Code_Interface
 	 *
 	 * @param string $couponCode Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be increased
+	 * @return void
 	 */
 	public function increase( $couponCode, $amount );
 }

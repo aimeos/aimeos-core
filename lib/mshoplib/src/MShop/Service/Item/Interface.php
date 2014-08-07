@@ -28,6 +28,7 @@ interface MShop_Service_Item_Interface
 	 * Sets a new code for the service item.
 	 *
 	 * @param string $code Code as defined by the service provider
+	 * @return void
 	 */
 	public function setCode( $code );
 
@@ -42,6 +43,7 @@ interface MShop_Service_Item_Interface
 	 * Sets the new name of the service provider the item belongs to.
 	 *
 	 * @param string $provider Name of the service provider
+	 * @return void
 	 */
 	public function setProvider( $provider );
 
@@ -56,6 +58,7 @@ interface MShop_Service_Item_Interface
 	 * Sets a new label for the service item.
 	 *
 	 * @param string $label Label as defined by the service provider
+	 * @return void
 	 */
 	public function setLabel( $label );
 
@@ -70,6 +73,7 @@ interface MShop_Service_Item_Interface
 	 * Sets the configuration values of the item.
 	 *
 	 * @param array $config Configuration values
+	 * @return void
 	 */
 	public function setConfig( array $config );
 
@@ -84,6 +88,7 @@ interface MShop_Service_Item_Interface
 	 * Sets the status of the item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return void
 	 */
 	public function setStatus( $status );
 }

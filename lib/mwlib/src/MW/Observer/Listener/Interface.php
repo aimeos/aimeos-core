@@ -20,6 +20,7 @@ interface MW_Observer_Listener_Interface
 	 * Subscribes itself to a publisher.
 	 *
 	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @return void
 	 */
 	public function register( MW_Observer_Publisher_Interface $p );
 

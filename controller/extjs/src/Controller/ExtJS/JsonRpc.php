@@ -117,7 +117,7 @@ class Controller_ExtJS_JsonRpc
 	 *
 	 * @param array $reqparams Associative list of request parameters (usually $_REQUEST)
 	 * @param string $inputstream Name of the input stream (usually php://input)
-	 * @return JSON 2.0 RPC message response
+	 * @return string|null JSON RPC 2.0 message response
 	 */
 	public function process( array $reqparams, $inputstream )
 	{

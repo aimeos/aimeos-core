@@ -138,8 +138,8 @@ abstract class MW_Common_Criteria_Abstract implements MW_Common_Criteria_Interfa
 	/**
 	 * Creates a "compare" expression.
 	 *
-	 * @param string $operator One of the "compare" operators
-	 * @param array $list Associative list containing one name/value pair
+	 * @param string $op One of the "compare" operators
+	 * @param array $pair Associative list containing one name/value pair
 	 * @throws MW_Common_Exception If no name/value pair is available
 	 */
 	protected function _createCompareExpression( $op, array $pair )

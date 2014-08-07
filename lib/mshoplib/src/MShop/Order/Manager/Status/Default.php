@@ -95,7 +95,7 @@ class MShop_Order_Manager_Status_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -368,6 +368,7 @@ class MShop_Order_Manager_Status_Default
 	 * Searches for all items matching the given critera.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Criteria object with conditions, sortations, etc.
+	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing MShop_Order_Item_Status_Interface
 	 */

@@ -16,8 +16,18 @@
 abstract class MShop_Coupon_Manager_Abstract
 	extends MShop_Common_Manager_Abstract
 {
+	/**
+	 * Wraps the named coupon decorators around the coupon provider.
+	 *
+	 * @param MShop_Coupon_Item_Interface $item Coupon item object
+	 * @param string $code Coupon code
+	 * @param MShop_Coupon_Provider_Interface $provider Coupon provider object
+	 * @param array $names List of decorator names
+	 * @return MShop_Coupon_Provider_Interface Coupon provider wrapped by one or more coupon decorators
+	 * @throws MShop_Coupon_Exception If a coupon decorator couldn't be instantiated
+	 */
 	protected function _addCouponDecorators( MShop_Coupon_Item_Interface $item, $code,
-		MShop_Coupon_Provider_Interface $provider, $names )
+		MShop_Coupon_Provider_Interface $provider, array $names )
 	{
 		$iface = 'MShop_Coupon_Provider_Decorator_Interface';
 		$classprefix = 'MShop_Coupon_Provider_Decorator_';

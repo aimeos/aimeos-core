@@ -28,7 +28,8 @@ interface MShop_Locale_Item_Site_Interface
 	/**
 	 * Sets the code of the Site.
 	 *
-	 * @param string $key The code to set
+	 * @param string $code The code to set
+	 * @return void
 	 */
 	public function setCode( $code );
 
@@ -45,6 +46,7 @@ interface MShop_Locale_Item_Site_Interface
 	 * Sets the label property of the Site.
 	 *
 	 * @param string $label The label of the Site
+	 * @return void
 	 */
 	public function setLabel( $label );
 
@@ -61,6 +63,7 @@ interface MShop_Locale_Item_Site_Interface
 	 * Sets the config property of the Site.
 	 *
 	 * @param array $options Options to be set for the Site
+	 * @return void
 	 */
 	public function setConfig( array $options );
 
@@ -77,6 +80,7 @@ interface MShop_Locale_Item_Site_Interface
 	 * Sets the status of the item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return void
 	 */
 	public function setStatus( $status );
 
@@ -106,6 +110,7 @@ interface MShop_Locale_Item_Site_Interface
 	 * Adds a child node to this node.
 	 *
 	 * @param MShop_Locale_Item_Site_Interface $item Child node to add
+	 * @return void
 	 */
 	public function addChild( MShop_Locale_Item_Site_Interface $item );
 }

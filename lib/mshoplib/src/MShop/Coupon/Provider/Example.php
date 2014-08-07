@@ -31,7 +31,7 @@ class MShop_Coupon_Provider_Example
 	/**
 	 * Removes the result of a coupon from the order base instance.
 	 *
-	 * @param MShop_Order_Base_Interface $base Basic order of the customer
+	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
 	 */
 	public function deleteCoupon( MShop_Order_Item_Base_Interface $base )
 	{

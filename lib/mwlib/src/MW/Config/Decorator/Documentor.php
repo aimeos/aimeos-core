@@ -54,12 +54,24 @@ class MW_Config_Decorator_Documentor
 }
 
 
+/**
+ * File writer for the documentor decorator config classe.
+ *
+ * @package MW
+ * @subpackage Config
+ */
 class My_Config_File
 {
 	private $_config = array();
 	private $_file;
 
 
+	/**
+	 * Initializes the instance.
+	 *
+	 * @param string $filename
+	 * @throws MW_Config_Exception If file could not be opened or created
+	 */
 	public function __construct( $filename )
 	{
 		if( ( $this->_file = fopen( $filename, 'w' ) ) === false ) {
@@ -68,6 +80,9 @@ class My_Config_File
 	}
 
 
+	/**
+	 * Cleans up when the object is destroyed.
+	 */
 	public function __destruct()
 	{
 		if( fwrite( $this->_file, serialize( $this->_config ) ) === false ) {
@@ -78,6 +93,13 @@ class My_Config_File
 	}
 
 
+	/**
+	 * Stores the configuration key, the actual and the default value
+	 *
+	 * @param string $name Configuration key
+	 * @param string $value Configuration value
+	 * @param string $default Default value
+	 */
 	public function set( $name, $value, $default )
 	{
 		$this->_config[$name]['value'] = $value;

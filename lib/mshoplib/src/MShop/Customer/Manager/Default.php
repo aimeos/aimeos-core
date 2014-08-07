@@ -231,7 +231,7 @@ class MShop_Customer_Manager_Default
 	/**
 	 * Initializes a new customer manager object using the given context object.
 	 *
-	 * @param MShop_Context_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
@@ -245,7 +245,7 @@ class MShop_Customer_Manager_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -310,7 +310,8 @@ class MShop_Customer_Manager_Default
 	 *
 	 * @param MShop_Common_Item_Address_Interface $address billingaddress of customer item
 	 * @param array $values List of attributes for customer item
-	 * @param string $salt Salt for password encryption that will be concatenated at the end of customer password
+	 * @param array $listItems List items associated to the customer item
+	 * @param array $refItems Items referenced by the customer item via the list items
 	 * @return MShop_Customer_Item_Interface New customer item
 	 */
 	protected function _createItem( MShop_Common_Item_Address_Interface $address, array $values = array(),

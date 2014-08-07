@@ -20,6 +20,7 @@ interface MW_Config_Decorator_Interface extends MW_Config_Interface
 	 * Initializes the decorator.
 	 *
 	 * @param MW_Config_Interface $object Config object or decorator
+	 * @return void
 	 */
 	public function __construct( MW_Config_Interface $object );
 }

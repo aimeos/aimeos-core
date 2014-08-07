@@ -201,7 +201,7 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Abstract
 	/**
 	 * Stores the sortation objects for sorting the result.
 	 *
-	 * @param array $sortation List of objects implementing MW_Common_Criteria_Expression_Sort_Interface
+	 * @param array $sortations List of objects implementing MW_Common_Criteria_Expression_Sort_Interface
 	 * @return MW_Common_Criteria_Interface Object instance for fluent interface
 	 */
 	public function setSortations( array $sortations )
@@ -239,9 +239,9 @@ class MW_Common_Criteria_PHP extends MW_Common_Criteria_Abstract
 	/**
 	* Sets the start number and the size of the requested data slice.
 	*
-	* @param integer Start number of the items
-	* @param integer Number of items
-	* @return MW_Common_Criteria_SQL Object instance for fluent interface
+	* @param integer $start Start number of the items
+	* @param integer $size Number of items
+	* @return MW_Common_Criteria_PHP Object instance for fluent interface
 	*/
 	public function setSlice( $start, $size = 100 )
 	{

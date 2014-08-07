@@ -127,7 +127,7 @@ class MAdmin_Log_Manager_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -378,8 +378,8 @@ class MAdmin_Log_Manager_Default
 	 * Search for log entries based on the given criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 *
 	 * @return array List of jobs implementing MAdmin_Job_Item_Interface
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
@@ -517,7 +517,7 @@ class MAdmin_Log_Manager_Default
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withSub Return also attributes of sub-managers if true
+	 * @param boolean $withsub Return also attributes of sub-managers if true
 	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Interface
 	 */
 	public function getSearchAttributes( $withsub = true )

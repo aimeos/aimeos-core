@@ -361,7 +361,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 	/**
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given catalog tree.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item, maybe with associated list items
+	 * @param MShop_Catalog_Item_Interface $tree Tree node, maybe with sub-nodes
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
 	 */

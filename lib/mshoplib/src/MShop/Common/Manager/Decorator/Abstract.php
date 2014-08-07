@@ -24,7 +24,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	/**
 	 * Initializes the manager decorator.
 	 *
-	 * @param MShop_Context_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param MShop_Common_Manager_Interface $manager Manager object
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Common_Manager_Interface $manager )
@@ -89,7 +89,7 @@ abstract class MShop_Common_Manager_Decorator_Abstract
 	/**
 	 * Deletes the item specified by its ID.
 	 *
-	 * @param mixed $id ID of the item object
+	 * @param integer $id ID of the item object
 	 */
 	public function deleteItem( $id )
 	{

@@ -15,7 +15,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -26,7 +26,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -262,7 +262,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * Returns the product tag test data.
 	 *
 	 * @param MShop_Product_Manager_Interface $productManager Product Manager
-	 * @param array $testdata Associative list of key/list pairs
+	 * @param array $keys List of keys for tag lookup
 	 * @return array $refIds List with referenced Ids
 	 * @throws MW_Setup_Exception If no type ID is found
 	 */

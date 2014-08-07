@@ -29,6 +29,7 @@ interface MW_Mail_Interface
 	 * Sends the e-mail message to the mail server.
 	 *
 	 * @param MW_Mail_Message_Interface $message E-mail message object
+	 * @return void
 	 */
 	public function send( MW_Mail_Message_Interface $message );
 }

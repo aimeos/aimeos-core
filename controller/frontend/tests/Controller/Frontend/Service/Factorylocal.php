@@ -17,6 +17,9 @@
 class Controller_Frontend_Service_Factorylocal
 	extends Controller_Frontend_Common_Factory_Abstract
 {
+	/**
+	 * @param string $name
+	 */
 	public static function createController( MShop_Context_Item_Interface $context, $name = null, $domainToTest='service' )
 	{
 		if ( $name === null ) {

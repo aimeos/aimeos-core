@@ -24,6 +24,7 @@ interface MShop_Coupon_Provider_Decorator_Interface
 	 * @param MShop_Coupon_Item_Interface $item Coupon item to set
 	 * @param string $code Coupon code entered by the customer
 	 * @param MShop_Coupon_Provider_Interface $provider Coupon provider
+	 * @return void
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, MShop_Coupon_Item_Interface $item,
 		$code, MShop_Coupon_Provider_Interface $provider );

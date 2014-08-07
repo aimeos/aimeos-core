@@ -37,7 +37,7 @@ class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Int
 	/**
 	 * Returns the number of rows affected by a INSERT, UPDATE or DELETE statement.
 	 *
-	 * @return Number of touched records
+	 * @return integer Number of touched records
 	 * @throws MW_DB_Exception if an error occured in the unterlying driver
 	 */
 	public function affectedRows()
@@ -85,7 +85,7 @@ class MW_DB_Result_PDO extends MW_DB_Result_Abstract implements MW_DB_Result_Int
 	/**
 	 * Retrieves the next database result set.
 	 *
-	 * @return True if another result is available, false if not
+	 * @return boolean True if another result is available, false if not
 	 * @throws MW_DB_Exception if an error occured in the unterlying driver
 	 */
 	public function nextResult()

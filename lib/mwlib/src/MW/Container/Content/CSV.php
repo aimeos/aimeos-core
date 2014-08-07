@@ -37,7 +37,7 @@ class MW_Container_Content_CSV
 	 * - csv-escape (default: '"')
 	 * - csv-lineend (default: LF)
 	 *
-	 * @param resource|string $resource File pointer or path to the actual file
+	 * @param string $resource File pointer or path to the actual file
 	 * @param string $name Name of the CSV file
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
@@ -91,7 +91,7 @@ class MW_Container_Content_CSV
 	/**
 	 * Adds row to the content object.
 	 *
-	 * @param mixed $data Data to add
+	 * @param string[] $data Data to add
 	 */
 	public function add( $data )
 	{

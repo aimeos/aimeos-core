@@ -29,6 +29,7 @@ interface MShop_Media_Item_Interface
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
 	 * @throws MShop_Exception If the language ID is invalid
+	 * @return void
 	 */
 	public function setLanguageId( $langid );
 
@@ -43,6 +44,7 @@ interface MShop_Media_Item_Interface
 	 * Sets the new label of the media item.
 	 *
 	 * @param string $label Type label of the media item
+	 * @return void
 	 */
 	public function setLabel( $label );
 
@@ -57,6 +59,7 @@ interface MShop_Media_Item_Interface
 	 * Sets the new status of the media item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return void
 	 */
 	public function setStatus( $status );
 
@@ -71,6 +74,7 @@ interface MShop_Media_Item_Interface
 	 * Sets the new mime type of the media.
 	 *
 	 * @param string $mimetype Mime type of the media item
+	 * @return void
 	 */
 	public function setMimeType( $mimetype );
 
@@ -85,6 +89,7 @@ interface MShop_Media_Item_Interface
 	 * Sets the new url of the media item.
 	 *
 	 * @param string $url URL of the media file
+	 * @return void
 	 */
 	public function setUrl( $url );
 
@@ -99,6 +104,7 @@ interface MShop_Media_Item_Interface
 	 * Sets the new preview url of the media item.
 	 *
 	 * @param string $url Preview URL of the media file
+	 * @return void
 	 */
 	public function setPreview( $url );
 }

@@ -321,10 +321,10 @@ class Client_Html_Catalog_Stage_Default
 	 *
 	 * @param string $type Type of the cache entry, i.e. "body" or "header"
 	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
-	 * @param mixed $value Value string that should be stored for the given key
+	 * @param string $value Value string that should be stored for the given key
 	 * @param array $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
-	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * @param string|null $expire Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format when the cache entry expires
 	 */
 	protected function _setCached( $type, $uid, $value, array $tags, $expire )

@@ -94,7 +94,7 @@ class MShop_Order_Item_Base_Product_Default
 	 * Sets the parent ID of the ordered product.
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
-	 * @param integer|null Order product ID
+	 * @param integer|null $orderProductId Order product ID
 	 */
 	public function setOrderProductId( $orderProductId )
 	{
@@ -424,7 +424,7 @@ class MShop_Order_Item_Base_Product_Default
 	/**
 	 * Sets the position of the product within the list of ordered products.
 	 *
-	 * @param integer|null Product position in the order from 1-n or null for resetting the position
+	 * @param integer|null $value Product position in the order from 1-n or null for resetting the position
 	 * @throws MShop_Order_Exception If there's already a position set
 	 */
 	public function setPosition( $value )

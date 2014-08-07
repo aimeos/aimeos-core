@@ -155,6 +155,10 @@ class Controller_Common_Order_Default
 	}
 
 
+	/**
+	 * @param integer $parentid
+	 * @param integer $value
+	 */
 	protected function _addStatusItem( $parentid, $type, $value )
 	{
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );
@@ -174,6 +178,9 @@ class Controller_Common_Order_Default
 	}
 
 
+	/**
+	 * @param integer $parentid
+	 */
 	protected function _getLastStatusItem( $parentid, $type )
 	{
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );

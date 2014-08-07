@@ -28,6 +28,7 @@ interface MShop_Coupon_Item_Code_Interface extends MShop_Common_Item_Interface
 	 * Sets the new unique ID of the coupon item the code belongs to.
 	 *
 	 * @param integer $id Unique ID of the coupon item
+	 * @return void
 	 */
 	public function setCouponId( $id );
 
@@ -44,6 +45,7 @@ interface MShop_Coupon_Item_Code_Interface extends MShop_Common_Item_Interface
 	 * Sets the new code for the coupon item.
 	 *
 	 * @param string $code Coupon code
+	 * @return void
 	 */
 	public function setCode( $code );
 
@@ -60,6 +62,7 @@ interface MShop_Coupon_Item_Code_Interface extends MShop_Common_Item_Interface
 	 * Sets the new number of tries the code is valid.
 	 *
 	 * @param integer $count Number of tries
+	 * @return void
 	 */
 	public function setCount( $count );
 
@@ -76,6 +79,7 @@ interface MShop_Coupon_Item_Code_Interface extends MShop_Common_Item_Interface
 	 * Sets a new starting point of time, in which the code is available.
 	 *
 	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return void
 	 */
 	public function setDateStart( $date );
 
@@ -92,6 +96,7 @@ interface MShop_Coupon_Item_Code_Interface extends MShop_Common_Item_Interface
 	 * Sets a new ending point of time, in which the code is available.
 	 *
 	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return void
 	 */
 	public function setDateEnd( $date );
 

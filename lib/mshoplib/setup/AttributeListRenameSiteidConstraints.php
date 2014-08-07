@@ -37,7 +37,7 @@ class MW_Setup_Task_AttributeListRenameSiteidConstraints extends MW_Setup_Task_A
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{

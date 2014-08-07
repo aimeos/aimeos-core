@@ -105,7 +105,7 @@ class MShop_Product_Manager_Stock_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -376,6 +376,7 @@ class MShop_Product_Manager_Stock_Default
 	 * 'product.stock.warehouseid', 'product.stock.stocklevel', 'product.stock.backdate'
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of stock items implementing MShop_Product_Item_Stock_Interface
 	 * @throws MShop_Product_Exception if creating items failed

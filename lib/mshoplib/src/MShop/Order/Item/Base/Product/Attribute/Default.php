@@ -98,9 +98,9 @@ class MShop_Order_Item_Base_Product_Attribute_Default
 	/**
 	 * Sets the value of the product attribute.
 	 *
-	 * @param string $value Value of the product attribute
+	 * @param string $type Type of the product attribute
 	 */
-	public function setType($type)
+	public function setType( $type )
 	{
 		if ( $type == $this->getType() ) { return; }
 

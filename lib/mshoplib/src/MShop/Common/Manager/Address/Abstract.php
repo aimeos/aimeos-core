@@ -27,7 +27,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 	/**
 	 * Initializes a new common address manager object using the given context object.
 	 *
-	 * @param MShop_Context_Interface $_context Context object with required objects
+	 * @param MShop_Context_Interface $context Context object with required objects
 	 *
 	 * @throws MShop_Exception if no configuration is available
 	 */

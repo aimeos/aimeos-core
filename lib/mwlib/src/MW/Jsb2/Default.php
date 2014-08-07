@@ -130,8 +130,8 @@ class MW_Jsb2_Default
 	 *
 	 * @param string $type Specific filetypes to create output
 	 * @param boolean $debug If true no compression is applied to the files
-	 * @param octal $filepermission Set permissions for created package files
-	 * @param octal $dirpermission Set permissions for created directorys
+	 * @param integer $filepermission Set permissions for created package files
+	 * @param integer $dirpermission Set permissions for created directorys
 	 */
 	public function deploy( $type = null, $debug = true, $filepermission = 0644, $dirpermission = 0755 )
 	{
@@ -171,7 +171,7 @@ class MW_Jsb2_Default
 	 *
 	 * @param object $package Package object from manifest to minify
 	 * @param boolean $debug Create debug files if true
-	 * @param octal $permissions File permissions to set on new files
+	 * @param integer $permissions File permissions to set on new files
 	 */
 	protected function _minify( $package, $debug, $permissions )
 	{

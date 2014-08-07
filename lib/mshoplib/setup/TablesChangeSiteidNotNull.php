@@ -192,7 +192,7 @@ class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
@@ -202,7 +202,7 @@ class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -220,7 +220,7 @@ class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Abstract
 	/**
 	 * Changes site ID to NOT NULL and migrates existing entries.
 	 *
-	 * @param array $colstmts Associative array of tables names and SQL statements.
+	 * @param array $stmts Associative array of tables names and SQL statements.
 	 */
 	protected function _process( array $stmts )
 	{

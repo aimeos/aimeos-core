@@ -30,7 +30,7 @@ class MW_Setup_Task_ProductChangeStockWarehouseIdNotNull extends MW_Setup_Task_A
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{

@@ -115,7 +115,7 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 * Creates a list of search values.
 	 *
 	 * @param integer $type Type constant
-	 * @param array $values Value list for the variable or column name
+	 * @param string[] $values Value list for the variable or column name
 	 * @return string String of comma separated values in parenthesis
 	 */
 	protected function _createValueList( $type, array $values )

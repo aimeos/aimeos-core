@@ -19,7 +19,7 @@ interface MShop_Common_Factory_Interface
 	/**
 	 *	Creates a manager object.
 	 *
-	 * @param MShop_Context_Interface $context Context instance with necessary objects
+	 * @param MShop_Context_Item_Interface $context Context instance with necessary objects
 	 * @param string $name Manager name (from configuration or "Default" if null)
 	 * @return MShop_Common_Manager_Interface New manager object
 	 */

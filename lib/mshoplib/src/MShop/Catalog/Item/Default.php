@@ -158,7 +158,7 @@ class MShop_Catalog_Item_Default
 	/**
 	 * Returns the status of the item.
 	 *
-	 * @return boolean True if enabled, false if not
+	 * @return integer Greater than zero if enabled, zero or negative values if disabled
 	 */
 	public function getStatus()
 	{

@@ -30,7 +30,12 @@ abstract class MShop_Order_Item_Base_Product_Abstract extends MShop_Order_Item_A
 	const FLAG_IMMUTABLE = 1;
 
 
-	protected function _checkFlags($value)
+	/**
+	 * Checks if the given flag constant is valid.
+	 *
+	 * @param integer $value Flag constant value
+	 */
+	protected function _checkFlags( $value )
 	{
 		$value = (int) $value;
 

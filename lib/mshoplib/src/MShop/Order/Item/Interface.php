@@ -27,8 +27,9 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the ID of the basic order item which contains the order details.
 	 *
 	 * @param integer $id ID of the basic order item
+	 * @return void
 	 */
-	public function setBaseId( $base );
+	public function setBaseId( $id );
 
 	/**
 	 * Returns the type of the invoice (repeating, web, phone, etc).
@@ -41,6 +42,7 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the type of the invoice.
 	 *
 	 * @param integer $type Invoice type
+	 * @return void
 	 */
 	public function setType( $type );
 
@@ -55,6 +57,7 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the delivery date of the invoice.
 	 *
 	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @return void
 	 */
 	public function setDateDelivery( $date );
 
@@ -69,6 +72,7 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the payment date of the invoice.
 	 *
 	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @return void
 	 */
 	public function setDatePayment( $date );
 
@@ -83,6 +87,7 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the delivery status of the invoice.
 	 *
 	 * @param integer $status Status code constant from MShop_Order_Item_Abstract
+	 * @return void
 	 */
 	public function setDeliveryStatus( $status );
 
@@ -97,13 +102,14 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	 * Sets the payment status of the invoice.
 	 *
 	 * @param integer $status Payment constant from MShop_Order_Item_Abstract
+	 * @return void
 	 */
 	public function setPaymentStatus( $status );
 
 	/**
 	 * Returns the related invoice ID.
 	 *
-	 * @param integer|null $id Related invoice ID
+	 * @return integer|null Related invoice ID
 	 */
 	public function getRelatedId();
 
@@ -112,6 +118,7 @@ interface MShop_Order_Item_Interface extends MShop_Common_Item_Interface
 	 *
 	 * @param integer|null Related invoice ID
 	 * @throws MShop_Order_Exception If ID is invalid
+	 * @return void
 	 */
 	public function setRelatedId( $id );
 

@@ -39,18 +39,21 @@ interface MW_DB_Connection_Interface
 	 * Starts a transaction for this connection.
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.
+	 * @return void
 	 */
 	public function begin();
 
 
 	/**
 	 * Commits the changes done inside of the transaction to the storage.
+	 * @return void
 	 */
 	public function commit();
 
 
 	/**
 	 * Discards the changes done inside of the transaction.
+	 * @return void
 	 */
 	public function rollback();
 }

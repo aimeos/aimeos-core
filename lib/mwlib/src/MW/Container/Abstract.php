@@ -23,6 +23,7 @@ abstract class MW_Container_Abstract
 	/**
 	 * Initializes the object.
 	 *
+	 * @param string $name File path and name of the resource
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
 	public function __construct( $name, array $options )
@@ -58,8 +59,8 @@ abstract class MW_Container_Abstract
 	 * Returns the configured value for the given name or the default value if nothing is configured.
 	 *
 	 * @param string $name Name of the configuration option
-	 * @param mixed $default Default value if option is not configured
-	 * @return mixed Option value
+	 * @param string $default Default value if option is not configured
+	 * @return string Option value
 	 */
 	protected function _getOption( $name, $default = null )
 	{

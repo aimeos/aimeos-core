@@ -73,8 +73,8 @@ abstract class MW_Cache_Abstract
 	 * @inheritDoc
 	 *
 	 * @param string $key Key string for the given value like product/id/123
-	 * @param mixed $value Value string that should be stored for the given key
-	 * @param array $tags List of tag strings that should be assoicated to the
+	 * @param string $value Value string that should be stored for the given key
+	 * @param string[] $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
 	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format when the cache entry expires

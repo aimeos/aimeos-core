@@ -116,7 +116,7 @@ class MShop_Text_Manager_Default
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -694,7 +694,7 @@ class MShop_Text_Manager_Default
 	 * Creates a new text item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_List_Interface
+	 * @param array $listItems List of items implementing MShop_Common_Item_List_Interface
 	 * @param array $refItems List of items implementing MShop_Text_Item_Interface
 	 * @return MShop_Text_Item_Interface New product item
 	 */

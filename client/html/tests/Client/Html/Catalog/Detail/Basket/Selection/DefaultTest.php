@@ -102,6 +102,9 @@ class Client_Html_Catalog_Detail_Basket_Selection_DefaultTest extends MW_Unittes
 	}
 
 
+	/**
+	 * @param string $code
+	 */
 	protected function _getProductItem( $code )
 	{
 		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );

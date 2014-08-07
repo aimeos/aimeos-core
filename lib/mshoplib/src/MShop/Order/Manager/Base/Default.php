@@ -136,7 +136,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -354,7 +354,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	/**
 	 * Adds or updates an order base item in the storage.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Order base object without sub-elements
+	 * @param MShop_Common_Item_Interface $item Order base object (sub-items are not saved)
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
@@ -995,7 +995,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param MShop_Price_Item $price
 	 * @param MShop_Locale_Item $localeItem
 	 * @param array $row Array of values with all relevant order information
-	 * @return MShop_Order_Base_Item The loaded order item for the given ID
+	 * @return MShop_Order_Item_Base_Default The loaded order item for the given ID
 	 */
 	protected function _load( $id, $price, $localeItem, $row )
 	{
@@ -1017,7 +1017,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 	 * @param MShop_Price_Item $price
 	 * @param MShop_Locale_Item $localeItem
 	 * @param array $row Array of values with all relevant order information
-	 * @return MShop_Order_Base_Item The loaded order item for the given ID
+	 * @return MShop_Order_Item_Base_Default The loaded order item for the given ID
 	 */
 	protected function _loadFresh( $id, $price, $localeItem, $row )
 	{

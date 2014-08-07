@@ -28,6 +28,7 @@ interface MShop_Order_Item_Base_Service_Attribute_Interface
 	 * Sets the original attribute ID of the ordered service attribute.
 	 *
 	 * @param string $id Attribute ID of the ordered service attribute
+	 * @return void
 	 */
 	public function setAttributeId( $id );
 
@@ -42,6 +43,7 @@ interface MShop_Order_Item_Base_Service_Attribute_Interface
 	 * Sets the order service id.
 	 *
 	 * @param integer Order service id for the order service attribute item.
+	 * @return void
 	 */
 	public function setServiceId( $id );
 
@@ -56,6 +58,7 @@ interface MShop_Order_Item_Base_Service_Attribute_Interface
 	 * Sets the type for the service attribute item.
 	 *
 	 * @param string $type Type as defined by the service provider
+	 * @return void
 	 */
 	public function setType( $type );
 
@@ -70,6 +73,7 @@ interface MShop_Order_Item_Base_Service_Attribute_Interface
 	 * Sets a new name for the service attribute item.
 	 *
 	 * @param string $name Name as defined by the service provider
+	 * @return void
 	 */
 	public function setName( $name );
 
@@ -84,6 +88,7 @@ interface MShop_Order_Item_Base_Service_Attribute_Interface
 	 * Sets a new code for the service attribute item.
 	 *
 	 * @param string $code Code as defined by the service provider
+	 * @return void
 	 */
 	public function setCode( $code );
 
@@ -97,7 +102,8 @@ interface MShop_Order_Item_Base_Service_Attribute_Interface
 	/**
 	 * Sets a new value for the service attribute item.
 	 *
-	 * @param mixed $value service attribute item value
+	 * @param string $value service attribute item value
+	 * @return void
 	 */
 	public function setValue( $value );
 
@@ -105,6 +111,7 @@ interface MShop_Order_Item_Base_Service_Attribute_Interface
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param MShop_Attribute_Item_Interface $item Attribute item to copy from
+	 * @return void
 	 */
 	public function copyFrom( MShop_Attribute_Item_Interface $item );
 }

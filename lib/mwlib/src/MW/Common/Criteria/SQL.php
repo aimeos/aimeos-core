@@ -160,7 +160,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	/**
 	 * Returns the string for sorting the result
 	 *
-	 * @param array $names List of item names
+	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of item names that should be translated
 	 * @return string Order string for sorting the items
 	 */
@@ -205,7 +205,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	/**
 	 * Stores the sortation objects for sorting the result.
 	 *
-	 * @param array $sortation List of objects implementing MW_Common_Criteria_Expression_Sort_Interface
+	 * @param array $sortations List of objects implementing MW_Common_Criteria_Expression_Sort_Interface
 	 * @return MW_Common_Criteria_Interface Object instance for fluent interface
 	 */
 	public function setSortations( array $sortations )

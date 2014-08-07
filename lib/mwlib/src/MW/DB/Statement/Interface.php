@@ -22,6 +22,7 @@ interface MW_DB_Statement_Interface
 	 * @param integer $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
 	 * @param integer $type Type of given value defined in MW_DB_Stmt_Abstract as constant
+	 * @return void
 	 */
 	public function bind( $position, $value, $type = MW_DB_Statement_Abstract::PARAM_STR);
 

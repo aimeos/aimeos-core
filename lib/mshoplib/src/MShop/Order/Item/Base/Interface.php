@@ -47,7 +47,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	/**
 	 * Sets the customer code of the customer who has ordered.
 	 *
-	 * @param string $customerID Unique ID of the customer
+	 * @param string $customerid Unique ID of the customer
 	 */
 	public function setCustomerId($customerid);
 
@@ -75,7 +75,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	/**
 	 * Returns the product item of an (future) order specified by its key.
 	 *
-	 * @param mixed $key Key returned by getProducts() identifying the requested product
+	 * @param integer $key Key returned by getProducts() identifying the requested product
 	 * @return MShop_Order_Product_Interface Product item of an order
 	 */
 	public function getProduct( $key );
@@ -165,7 +165,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 * Adds a coupon code entered by the customer and the given product item to the basket.
 	 *
 	 * @param string $code Coupon code
-	 * @param array $products List of coupon products
+	 * @param MShop_Order_Base_Product_Interface[] $products List of coupon products
 	 */
 	public function addCoupon( $code, array $products = array() );
 

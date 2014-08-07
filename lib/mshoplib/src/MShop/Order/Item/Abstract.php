@@ -152,7 +152,7 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 	/**
 	 * Tests if the date parameter represents an ISO date format.
 	 *
-	 * @param string ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @throws MShop_Order_Exception If validating the date string failed
 	 */
 	protected function _checkDateFormat( $date )

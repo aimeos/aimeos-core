@@ -22,6 +22,7 @@ interface Controller_ExtJS_Common_Decorator_Interface
 	 *
 	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 * @param Controller_ExtJS_Interface $controller Controller object
+	 * @return void
 	 */
 	public function __construct( MShop_Context_Item_Interface $context, Controller_ExtJS_Interface $controller );
 }

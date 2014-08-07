@@ -16,14 +16,7 @@
  */
 class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 {
-	/**
-	 * @var filters
-	 */
 	private $_loglevel = MW_Logger_Abstract::ERR;
-
-	/**
-	 * @var stream handle
-	 */
 	private $_stream;
 
 
@@ -33,13 +26,13 @@ class MW_Logger_File extends MW_Logger_Abstract implements MW_Logger_Interface
 	 * @param string $filename Log file name
 	 * @param integer $priority Default priority
 	 */
-	public function __construct( $filename, $filterPriority = MW_Logger_Abstract::ERR )
+	public function __construct( $filename, $priority = MW_Logger_Abstract::ERR )
 	{
 		if ( !$this->_stream = fopen( $filename, 'a', false ) ) {
 			throw new MW_Logger_Exception( sprintf( 'Unable to open file "%1$s" for appending' ), $filename );
 		}
 
-		$this->_loglevel = $filterPriority;
+		$this->_loglevel = $priority;
 	}
 
 
