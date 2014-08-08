@@ -4,47 +4,46 @@
  * $Id: Downloader.js 14263 2011-12-11 16:36:17Z nsendetzky $
  */
 
-
 Ext.ns('Ext.ux.file');
 
 /**
- * @namespace   Ext.ux.file
- * @class       Ext.ux.file.Downloader
- * @extends     Ext.util.Observable
+ * @namespace Ext.ux.file
+ * @class Ext.ux.file.Downloader
+ * @extends Ext.util.Observable
  */
 Ext.ux.file.Downloader = function(config) {
     config = config || {};
     Ext.apply(this, config);
-    
+
     Ext.ux.file.Downloader.superclass.constructor.call(this);
-    
+
     this.addEvents({
-        'success': true,
-        'fail': true,
-        'abort': true
+        'success' : true,
+        'fail' : true,
+        'abort' : true
     });
 };
 
-Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {    
-    url: null,
-    method: 'POST',
-    params: null,
-    timeout: 1800000, // 30 minutes
-    
+Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {
+    url : null,
+    method : 'POST',
+    params : null,
+    timeout : 1800000, // 30 minutes
+
     /**
-     * @private 
+     * @private
      */
-    form: null,
-    transactionId: null,
-    
+    form : null,
+    transactionId : null,
+
     /**
      * start download
      */
-    start: function() {
+    start : function() {
         this.form = Ext.getBody().createChild({
-            tag:'form',
-            method: this.method,
-            cls:'x-hidden'
+            tag : 'form',
+            method : this.method,
+            cls : 'x-hidden'
         });
 
         var con = new Ext.data.Connection({
@@ -54,46 +53,44 @@ Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {
             //
             // TODO check if we can handle firefox event 'onSaveAsSubmit' (or something like that)
             //
-            debugUploads: Ext.isGecko
+            debugUploads : Ext.isGecko
         });
-        
+
         this.transactionId = con.request({
-            isUpload: true,
-            form: this.form,
-            params: this.params,
-            scope: this,
-            success: this.onSuccess,
-            failure: this.onFailure,
-            url: this.url,
-            timeout: this.timeout
+            isUpload : true,
+            form : this.form,
+            params : this.params,
+            scope : this,
+            success : this.onSuccess,
+            failure : this.onFailure,
+            url : this.url,
+            timeout : this.timeout
         });
     },
-    
+
     /**
      * abort download
      */
-    abort: function() {
+    abort : function() {
         Ext.Ajax.abort(this.transactionId);
         this.form.remove();
         this.fireEvent('abort', this);
     },
-    
+
     /**
      * @private
-     * 
      */
-    onSuccess: function() {
+    onSuccess : function() {
         this.form.remove();
         this.fireEvent('success', this);
     },
-    
+
     /**
      * @private
-     * 
      */
-    onFailure: function() {
+    onFailure : function() {
         this.form.remove();
         this.fireEvent('fail', this);
     }
-    
+
 });
