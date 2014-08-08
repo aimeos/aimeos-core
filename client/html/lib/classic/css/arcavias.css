@@ -757,35 +757,63 @@
 
 
 /* Product list, stage section */
-.catalog-stage-breadcrumb .breadcrumb {
+.catalog-stage-breadcrumb {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 1.25em;
 	margin: 1em 0;
+	width: 49%;
+}
+
+.catalog-stage-breadcrumb .breadcrumb {
 }
 
 .catalog-stage-breadcrumb .title {
 	color: #004266;
-	font-size: 1em;
-	font-weight: bold;
 }
 
-.catalog-stage-breadcrumb ol{
+.catalog-stage-breadcrumb ol {
 	display: inline;
 	list-style: none;
 }
 
-.catalog-stage-breadcrumb li{
+.catalog-stage-breadcrumb li {
 	display: inline;
-	font-size: 1em;
 }	
 
 .catalog-stage-breadcrumb li:after {
 	content: ' > ';
 	color: #004266;
-	font-weight: bold;
 }
 
 .catalog-stage-breadcrumb li:last-child:after {
 	content: '';
 }
+
+.catalog-stage-navigator {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 1.25em;
+	text-align: right;
+	width: 49.9%;
+}
+
+.catalog-stage-navigator a:before {
+	content: ' | ';
+}
+
+.catalog-stage-navigator a:first-child:before {
+	content: '';
+}
+
+.catalog-stage-navigator a.prev:before {
+	content: '◀ ';
+}
+
+.catalog-stage-navigator a.next:after {
+	content: ' ▶';
+}
+
 
 /* Product list */
 .catalog-list a:focus {

@@ -224,7 +224,7 @@ class Client_Html_Catalog_Detail_Default
 		}
 		else
 		{
-			$this->modifyBody( $html );
+			$html = $this->modifyBody( $html, $uid );
 		}
 
 		return $html;
@@ -291,7 +291,7 @@ class Client_Html_Catalog_Detail_Default
 		}
 		else
 		{
-			$this->modifyHeader( $html );
+			$html = $this->modifyHeader( $html, $uid );
 		}
 
 		return $html;

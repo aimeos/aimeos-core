@@ -17,10 +17,12 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 /// Percent format with value (%1$s) and % sign
 $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
+$position = $this->get( 'itemPosition', 0 );
+
 ?>
 <div class="catalog-list-items">
 <?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : $firstImage = true; ?>
-<?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id ); ?>
+<?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id, 'l-pos' => $position++ ); ?>
 	<div class="product">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 			<div class="media-list">

@@ -73,10 +73,22 @@ class Client_Html_Catalog_Stage_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'image', 'breadcrumb' );
+
+	/** client/html/catalog/stage/navigator/name
+	 * Name of the navigator part used by the catalog stage client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Catalog_Stage_Breadcrumb_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.09
+	 * @category Developer
+	 */
+	private $_subPartNames = array( 'image', 'breadcrumb', 'navigator' );
 
 	private $_tags = array();
 	private $_expire;
+	private $_params;
 	private $_cache;
 	private $_view;
 
@@ -159,7 +171,7 @@ class Client_Html_Catalog_Stage_Default
 		}
 		else
 		{
-			$this->modifyBody( $html );
+			$html = $this->modifyBody( $html, $uid );
 		}
 
 		return $html;
@@ -226,7 +238,7 @@ class Client_Html_Catalog_Stage_Default
 		}
 		else
 		{
-			$this->modifyHeader( $html );
+			$html = $this->modifyHeader( $html, $uid );
 		}
 
 		return $html;
@@ -258,6 +270,8 @@ class Client_Html_Catalog_Stage_Default
 
 		try
 		{
+			$view->stageParams = $this->_getParamStage( $view );
+
 			parent::process();
 		}
 		catch( Client_Html_Exception $e )
@@ -376,6 +390,31 @@ class Client_Html_Catalog_Stage_Default
 
 
 	/**
+	 * Returns the required params for the stage clients, either from GET/POST or from the session.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @return array List of parameters
+	 */
+	protected function _getParamStage( MW_View_Interface $view )
+	{
+		if( !isset( $this->_params ) )
+		{
+			$params = $this->_getClientParams( $view->param(), array( 'f' ) );
+
+			if( empty( $params ) )
+			{
+				$params = $this->_getContext()->getSession()->get( 'arcavias/catalog/list/params/last', '[]' );
+				$params = ( ( $data = json_decode( $params, true ) ) !== null && is_array( $data ) ? $data : array() );
+			}
+
+			$this->_params = $params;
+		}
+
+		return $this->_params;
+	}
+
+
+	/**
 	 * Returns the list of sub-client names configured for the client.
 	 *
 	 * @return array List of HTML client names
@@ -398,18 +437,11 @@ class Client_Html_Catalog_Stage_Default
 	{
 		if( !isset( $this->_view ) )
 		{
-			$context = $this->_getContext();
-			$params = $this->_getClientParams( $view->param(), array( 'f' ) );
-
-			if( empty( $params ) )
-			{
-				$params = $context->getSession()->get( 'arcavias/catalog/list/params/last', '' );
-				$params = ( ( $data = json_decode( $params, true ) ) !== null ? $data : array() );
-			}
+			$params = $this->_getParamStage( $view );
 
 			if( isset( $params['f-catalog-id'] ) )
 			{
-				$catid = $params['f-catalog-id'];
+				$context = $this->_getContext();
 				$config = $context->getConfig();
 				$catalogManager = MShop_Factory::createManager( $context, 'catalog' );
 
@@ -444,7 +476,7 @@ class Client_Html_Catalog_Stage_Default
 				 * @see client/html/catalog/list/domains
 				 */
 				$domains = $config->get( 'client/html/catalog/stage/default/domains', $domains );
-				$stageCatPath = $catalogManager->getPath( $catid, $domains );
+				$stageCatPath = $catalogManager->getPath( $params['f-catalog-id'], $domains );
 
 				if( ( $categoryItem = end( $stageCatPath ) ) !== false ) {
 					$view->stageCurrentCatItem = $categoryItem;

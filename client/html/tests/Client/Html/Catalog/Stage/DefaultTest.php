@@ -100,13 +100,13 @@ class Client_Html_Catalog_Stage_DefaultTest extends MW_Unittest_Testcase
 
 	public function testModifyBody()
 	{
-		$this->assertEquals( 'test', $this->_object->modifyBody( 'test' ) );
+		$this->assertEquals( 'test', $this->_object->modifyBody( 'test', 1 ) );
 	}
 
 
 	public function testModifyHeader()
 	{
-		$this->assertEquals( 'test', $this->_object->modifyHeader( 'test' ) );
+		$this->assertEquals( 'test', $this->_object->modifyHeader( 'test', 1 ) );
 	}
 
 
