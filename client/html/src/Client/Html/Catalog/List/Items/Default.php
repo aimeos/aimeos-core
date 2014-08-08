@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Catalog_List_Items_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Catalog_Abstract
 {
 	/** client/html/catalog/list/items/default/subparts
 	 * List of HTML sub-clients rendered within the catalog list items section
@@ -167,4 +167,25 @@ class Client_Html_Catalog_List_Items_Default
 	{
 		return $this->_getContext()->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param MW_View_Interface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
+	 * @return MW_View_Interface Modified view object
+	 */
+	protected function _setViewParams( MW_View_Interface $view, array &$tags = array(), &$expire = null )
+	{
+		if( !isset( $this->_view ) )
+		{
+			$view->itemPosition = ( $this->_getProductListPage( $view ) - 1 ) * $this->_getProductListSize( $view );
+
+			$this->_view = $view;
+		}
+
+		return $this->_view;
 	}
+}
