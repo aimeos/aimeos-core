@@ -83,16 +83,17 @@ abstract class Client_Html_Abstract
 	 * Modifies the cached body content to replace content based on sessions or cookies.
 	 *
 	 * @param string $content Cached content
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
 	 * @return string Modified body content
 	 */
-	public function modifyBody( $content )
+	public function modifyBody( $content, $uid )
 	{
 		$view = $this->getView();
 
 		foreach( $this->_getSubClients() as $subclient )
 		{
 			$subclient->setView( $view );
-			$content = $subclient->modifyBody( $content );
+			$content = $subclient->modifyBody( $content, $uid );
 		}
 
 		return $content;
@@ -103,16 +104,17 @@ abstract class Client_Html_Abstract
 	 * Modifies the cached header content to replace content based on sessions or cookies.
 	 *
 	 * @param string $content Cached content
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
 	 * @return string Modified header content
 	 */
-	public function modifyHeader( $content )
+	public function modifyHeader( $content, $uid )
 	{
 		$view = $this->getView();
 
 		foreach( $this->_getSubClients() as $subclient )
 		{
 			$subclient->setView( $view );
-			$content = $subclient->modifyHeader( $content );
+			$content = $subclient->modifyHeader( $content, $uid );
 		}
 
 		return $content;
@@ -524,6 +526,26 @@ abstract class Client_Html_Abstract
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Replaces the section in the content that is enclosed by the marker.
+	 *
+	 * @param string $content Cached content
+	 * @param string $section New section content
+	 * @param string $marker Name of the section marker without "<!-- " and " -->" parts
+	 */
+	protected function _replaceSection( $content, $section, $marker )
+	{
+		$marker = '<!-- ' . $marker . ' -->';
+		$start = strpos( $content, $marker );
+
+		if( $start !== false && ( $end = $end = strpos( $content, $marker, $start+1 ) ) !== false ) {
+			return substr_replace( $content, $section, $start, $end - $start + strlen( $marker) );
+		}
+
+		return $content;
 	}
 
 

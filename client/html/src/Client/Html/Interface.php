@@ -68,17 +68,19 @@ interface Client_Html_Interface
 	 * Modifies the cached body content to replace content based on sessions or cookies.
 	 *
 	 * @param string $content Cached content
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
 	 * @return string Modified body content
 	 */
-	public function modifyBody( $content );
+	public function modifyBody( $content, $uid );
 
 	/**
 	 * Modifies the cached header content to replace content based on sessions or cookies.
 	 *
 	 * @param string $content Cached content
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
 	 * @return string Modified header content
 	 */
-	public function modifyHeader( $content );
+	public function modifyHeader( $content, $uid );
 
 	/**
 	 * Processes the input, e.g. store given values.
