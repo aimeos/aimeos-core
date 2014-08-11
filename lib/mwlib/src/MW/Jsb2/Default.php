@@ -64,7 +64,6 @@ class MW_Jsb2_Default
 
 			foreach( $packageList as $package )
 			{
-				$usePackage = true;
 				$packageFile = $this->_deployDir . $package->file;
 				$packageFileFilesystem = $this->_basePath . $packageFile;
 				$packageFileTime = 0;
