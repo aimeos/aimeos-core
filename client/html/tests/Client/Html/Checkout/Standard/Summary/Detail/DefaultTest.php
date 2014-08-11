@@ -96,13 +96,6 @@ class Client_Html_Checkout_Standard_Summary_Detail_DefaultTest extends MW_Unitte
 	}
 
 
-	public function testIsCachable()
-	{
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
-	}
-
-
 	/**
 	 * @param string $code
 	 */

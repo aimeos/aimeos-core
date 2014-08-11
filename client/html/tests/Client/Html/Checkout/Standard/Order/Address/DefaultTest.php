@@ -81,13 +81,6 @@ class Client_Html_Checkout_Standard_Order_Address_DefaultTest extends MW_Unittes
 	}
 
 
-	public function testIsCachable()
-	{
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
-	}
-
-
 	public function testProcess()
 	{
 		$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;

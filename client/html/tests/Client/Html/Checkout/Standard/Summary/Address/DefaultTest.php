@@ -103,13 +103,6 @@ class Client_Html_Checkout_Standard_Summary_Address_DefaultTest extends MW_Unitt
 	}
 
 
-	public function testIsCachable()
-	{
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
-	}
-
-
 	protected function _getBasket()
 	{
 		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_context );

@@ -82,13 +82,6 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends MW_
 	}
 
 
-	public function testIsCachable()
-	{
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
-	}
-
-
 	public function testProcess()
 	{
 		$this->_object->process();

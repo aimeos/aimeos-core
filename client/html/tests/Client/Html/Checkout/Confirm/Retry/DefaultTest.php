@@ -81,13 +81,6 @@ class Client_Html_Checkout_Confirm_Retry_DefaultTest extends MW_Unittest_Testcas
 	}
 
 
-	public function testIsCachable()
-	{
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
-	}
-
-
 	public function testProcess()
 	{
 		$this->_object->process();

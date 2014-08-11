@@ -74,12 +74,6 @@ class Client_Html_Common_Decorator_ExampleTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testIsCachable()
-	{
-		$this->assertInternalType( 'boolean', $this->_object->isCachable( Client_Html_Abstract::CACHE_BODY ) );
-	}
-
-
 	public function testModifyBody()
 	{
 		$this->assertEquals( 'test', $this->_object->modifyBody( 'test', 1 ) );

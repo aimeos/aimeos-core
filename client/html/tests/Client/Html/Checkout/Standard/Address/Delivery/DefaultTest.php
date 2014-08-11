@@ -87,13 +87,6 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	}
 
 
-	public function testIsCachable()
-	{
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
-	}
-
-
 	public function testProcess()
 	{
 		$this->_object->process();

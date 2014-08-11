@@ -84,13 +84,6 @@ class Client_Html_Checkout_Standard_Order_Payment_DefaultTest extends MW_Unittes
 	}
 
 
-	public function testIsCachable()
-	{
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_BODY ) );
-		$this->assertEquals( false, $this->_object->isCachable( Client_HTML_Abstract::CACHE_HEADER ) );
-	}
-
-
 	public function testProcessNoService()
 	{
 		$basketCntl = Controller_Frontend_Basket_Factory::createController( $this->_context );
