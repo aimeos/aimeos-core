@@ -11,21 +11,6 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 	protected static $_object;
 
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_ExtJS_JsonRpcTest' );
-		$result = PHPUnit_TextUI_TestRunner::run( $suite );
-	}
-
-
 	public static function setUpBeforeClass()
 	{
 		$cntlPaths = TestHelper::getControllerPaths();

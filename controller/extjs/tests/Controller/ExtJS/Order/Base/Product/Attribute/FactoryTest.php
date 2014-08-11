@@ -12,21 +12,6 @@ class Controller_ExtJS_Order_Base_Product_Attribute_FactoryTest extends MW_Unitt
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_ExtJS_Order_Base_Product_Attribute_FactoryTest' );
-		$result = PHPUnit_TextUI_TestRunner::run( $suite );
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
