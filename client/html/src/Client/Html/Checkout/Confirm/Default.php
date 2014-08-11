@@ -85,6 +85,7 @@ class Client_Html_Checkout_Confirm_Default
 	 * @category Developer
 	 */
 	private $_subPartNames = array( 'intro', 'basic', 'retry' );
+	private $_cache;
 
 
 	/**

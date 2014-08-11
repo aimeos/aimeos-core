@@ -211,6 +211,8 @@ class Client_Html_Checkout_Update_Default
 			$search = $serviceManager->createSearch();
 			$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
+			$start = 0;
+
 			do
 			{
 				$serviceItems = $serviceManager->searchItems( $search );

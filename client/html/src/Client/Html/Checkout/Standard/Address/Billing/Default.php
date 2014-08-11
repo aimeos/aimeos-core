@@ -194,7 +194,6 @@ class Client_Html_Checkout_Standard_Address_Billing_Default
 
 			$context = $this->_getContext();
 			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
-			$basket = $basketCtrl->get();
 
 
 			/** client/html/common/address/billing/disable-new

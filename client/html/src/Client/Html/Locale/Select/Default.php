@@ -241,7 +241,6 @@ class Client_Html_Locale_Select_Default
 		{
 			$map = array();
 			$context = $this->_getContext();
-			$session = $context->getSession();
 			$locale = $context->getLocale();
 
 			$manager = MShop_Factory::createManager( $context, 'locale' );

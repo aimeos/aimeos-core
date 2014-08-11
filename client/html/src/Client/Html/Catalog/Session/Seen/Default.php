@@ -67,9 +67,7 @@ class Client_Html_Catalog_Session_Seen_Default
 	{
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$view = $this->getView();
 
-		$html = null;
 		$config = $context->getConfig()->get( 'client/html/catalog/session/seen', array() );
 		$key = $this->_getParamHash( array(), $uid . ':catalog:session-seen-body', $config );
 
@@ -77,11 +75,11 @@ class Client_Html_Catalog_Session_Seen_Default
 		{
 			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
-			$html = '';
+			$output = '';
 			foreach( $this->_getSubClients() as $subclient ) {
-				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
+				$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
-			$view->seenBody = $html;
+			$view->seenBody = $output;
 
 			/** client/html/catalog/session/seen/default/template-body
 			 * Relative path to the HTML body template of the catalog session seen client.
@@ -129,9 +127,7 @@ class Client_Html_Catalog_Session_Seen_Default
 	{
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$view = $this->getView();
 
-		$html = null;
 		$config = $context->getConfig()->get( 'client/html/catalog/session/seen', array() );
 		$key = $this->_getParamHash( array(), $uid . ':catalog:session-seen-header', $config );
 
@@ -139,11 +135,11 @@ class Client_Html_Catalog_Session_Seen_Default
 		{
 			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
-			$html = '';
+			$output = '';
 			foreach( $this->_getSubClients() as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
+				$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
-			$view->seenHeader = $html;
+			$view->seenHeader = $output;
 
 			/** client/html/catalog/session/seen/default/template-header
 			 * Relative path to the HTML header template of the catalog session seen client.

@@ -217,12 +217,9 @@ class Client_Html_Catalog_List_Simple
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$context = $this->_getContext();
-			$config = $context->getConfig();
-
 			$input = $view->param( 'f-search-text' );
 
-			$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+			$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'catalog' );
 
 			$filter = $controller->createTextFilter( $input );
 			$items = $controller->getTextList( $filter );

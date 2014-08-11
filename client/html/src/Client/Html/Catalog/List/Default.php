@@ -199,7 +199,6 @@ class Client_Html_Catalog_List_Default
 	{
 		if( ( $html = $this->_getCached( 'header', $uid ) ) === null )
 		{
-			$context = $this->_getContext();
 			$view = $this->getView();
 
 			try
