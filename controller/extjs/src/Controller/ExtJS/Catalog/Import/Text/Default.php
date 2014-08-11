@@ -289,8 +289,10 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 			do
 			{
 				$criteria = $listManager->createSearch();
-				$expr[] = $criteria->compare( '==', 'catalog.list.parentid', $catalogIds );
-				$expr[] = $criteria->compare( '==', 'catalog.list.domain', 'text' );
+				$expr = array(
+					$criteria->compare( '==', 'catalog.list.parentid', $catalogIds ),
+					$criteria->compare( '==', 'catalog.list.domain', 'text' ),
+				);
 				$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 				$listItems = $listManager->searchItems( $criteria, array(), $listTotal );
 				$listStart += count( $catalogItems );
