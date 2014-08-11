@@ -83,8 +83,10 @@ class MShop_Coupon_Provider_FixedRebateTest extends MW_Unittest_Testcase
 
 		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
 		$search = $priceManager->createSearch();
-		$expr[] = $search->compare( '==', 'price.id', $priceIds );
-		$expr[] = $search->compare( '==', 'price.quantity', 1 );
+		$expr = array(
+			$search->compare( '==', 'price.id', $priceIds ),
+			$search->compare( '==', 'price.quantity', 1 ),
+		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		foreach( $priceManager->searchItems( $search ) as $priceItem )
