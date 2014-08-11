@@ -11,25 +11,8 @@
  */
 class MShop_Supplier_Item_DefaultTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MShop_Supplier_Item_Default
-	 * @access protected
-	 */
 	private $_object;
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Supplier_Item_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -118,7 +101,7 @@ class MShop_Supplier_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->assertTrue( $this->_object->isModified() );
 		$this->assertEquals( 0, $this->_object->getStatus() );
 	}
-	
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->_object->getTimeModified() );
@@ -143,7 +126,7 @@ class MShop_Supplier_Item_DefaultTest extends MW_Unittest_Testcase
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
-		
+
 		$this->assertEquals( 541, $arrayObject['supplier.id'] );
 		$this->assertEquals( 99, $arrayObject['supplier.siteid'] );
 		$this->assertEquals( 'unitObject', $arrayObject['supplier.label'] );

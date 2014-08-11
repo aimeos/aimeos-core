@@ -12,23 +12,8 @@
 class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
 
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Product_Manager_List_DefaultTest');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 	/**
 	 * Sets up the fixture.
@@ -42,6 +27,7 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
 		$this->_object = $productManager->getSubManager('list');
 	}
+
 
 	/**
 	 * Tears down the fixture, for example, closes a network connection.

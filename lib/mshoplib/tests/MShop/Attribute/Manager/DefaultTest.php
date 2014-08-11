@@ -11,32 +11,8 @@
  */
 class MShop_Attribute_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MShop_Attribute_Manager_Default
-	 * @access protected
-	 */
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
-
-
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Attribute_Manager_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	/**

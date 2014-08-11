@@ -18,21 +18,6 @@ class MShop_Service_Provider_Decorator_OrderCheckTest extends MW_Unittest_Testca
 	private $_mockProvider;
 
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Service_Provider_Decorator_OrderCheckTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
 	protected function setUp()
 	{
 		$this->_context = TestHelper::getContext();

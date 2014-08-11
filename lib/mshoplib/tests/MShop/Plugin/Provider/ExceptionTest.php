@@ -7,22 +7,7 @@
 
 class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 {
-
 	private $_codes;
-
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Plugin_Provider_ExceptionTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	/**

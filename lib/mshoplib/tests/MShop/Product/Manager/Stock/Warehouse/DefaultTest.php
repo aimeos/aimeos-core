@@ -12,12 +12,8 @@
 class MShop_Product_Manager_Stock_Warehouse_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
+
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

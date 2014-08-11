@@ -10,17 +10,7 @@
  */
 class MShop_Locale_Item_Currency_DefaultTest extends MW_Unittest_Testcase
 {
-
 	private $_object;
-
-
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite = new PHPUnit_Framework_TestSuite('MShop_Locale_Item_Currency_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	protected function setUp()
@@ -143,7 +133,7 @@ class MShop_Locale_Item_Currency_DefaultTest extends MW_Unittest_Testcase
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->_object->getTimeCreated() );
 	}
-	
+
 	public function testGetEditor()
 	{
 		$this->assertEquals( 'unitTestUser', $this->_object->getEditor() );

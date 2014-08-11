@@ -11,19 +11,9 @@
  */
 class MShop_Locale_Item_DefaultTest extends MW_Unittest_Testcase
 {
-
 	private $_object;
 	private $_siteItem;
 	private $_values;
-
-
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite = new PHPUnit_Framework_TestSuite('MShop_Locale_Item_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	protected function setUp()

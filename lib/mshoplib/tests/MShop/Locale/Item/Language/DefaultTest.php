@@ -10,7 +10,6 @@
  */
 class MShop_Locale_Item_Language_DefaultTest extends MW_Unittest_Testcase
 {
-
 	private $_object;
 
 

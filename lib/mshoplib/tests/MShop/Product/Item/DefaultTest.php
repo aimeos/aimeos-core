@@ -11,26 +11,9 @@
  */
 class MShop_Product_Item_DefaultTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MShop_Product_Item_Default
-	 * @access protected
-	 */
 	private $_object;
 	private $_values;
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Product_Item_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
