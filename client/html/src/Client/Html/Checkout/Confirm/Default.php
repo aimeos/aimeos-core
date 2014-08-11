@@ -237,6 +237,7 @@ class Client_Html_Checkout_Confirm_Default
 		{
 			$context = $this->_getContext();
 			$params = $this->getView()->param();
+			$orderid = $context->getSession()->get( 'arcavias/orderid' );
 
 			$serviceManager = MShop_Factory::createManager( $context, 'service' );
 
@@ -283,7 +284,6 @@ class Client_Html_Checkout_Confirm_Default
 			parent::process();
 
 
-			$orderid = $context->getSession()->get( 'arcavias/orderid' );
 			$orderManager = MShop_Factory::createManager( $context, 'order' );
 			$orderItem = $orderManager->getItem( $orderid );
 
