@@ -161,7 +161,7 @@ class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 	public function testGetHTMLWithoutPackage()
 	{
 		$html = '<script type="text/javascript" src="/./../%1$s"></script>';
-		$mtime = filemtime( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'test.js' );
+		$mtime = filemtime( __DIR__ . DIRECTORY_SEPARATOR . 'test.js' );
 
 		$this->assertEquals( sprintf( $html, 'test.js?v=' . $mtime ), trim( $this->_object->getHTML( 'js' ) ) );
 	}
