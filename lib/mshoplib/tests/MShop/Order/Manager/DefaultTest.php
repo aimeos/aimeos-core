@@ -268,6 +268,7 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 		$param = array( MShop_Order_Item_Status_Abstract::STATUS_PAYMENT, MShop_Order_Item_Abstract::PAY_RECEIVED );
 		$funcStatPayment = $search->createFunction( 'order.containsStatus', $param );
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.id', null );
 		$expr[] = $search->compare( '==', 'order.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.baseid', null );

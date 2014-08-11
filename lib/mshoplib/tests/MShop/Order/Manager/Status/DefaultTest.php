@@ -146,6 +146,7 @@ class MShop_Order_Manager_Status_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.status.id', null );
 		$expr[] = $search->compare( '==', 'order.status.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.status.parentid', null );

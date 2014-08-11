@@ -80,6 +80,7 @@ class MAdmin_Job_Manager_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'job.id', null );
 		$expr[] = $search->compare( '!=', 'job.siteid', null);
 		$expr[] = $search->compare( '==', 'job.label', 'unittest job' );

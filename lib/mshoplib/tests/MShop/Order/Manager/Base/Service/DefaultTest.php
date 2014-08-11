@@ -79,6 +79,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.base.service.id', null );
 		$expr[] = $search->compare( '==', 'order.base.service.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );

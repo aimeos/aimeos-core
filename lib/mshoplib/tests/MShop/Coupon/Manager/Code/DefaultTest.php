@@ -164,6 +164,7 @@ class MShop_Coupon_Manager_Code_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'coupon.code.id', null );
 		$expr[] = $search->compare( '!=', 'coupon.code.siteid', null );
 		$expr[] = $search->compare( '!=', 'coupon.code.couponid', null );

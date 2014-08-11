@@ -82,6 +82,7 @@ class MShop_Text_Manager_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'text.id', null );
 		$expr[] = $search->compare( '!=', 'text.siteid', null);
 		$expr[] = $search->compare( '==', 'text.languageid', 'de' );

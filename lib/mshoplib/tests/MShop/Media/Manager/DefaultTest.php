@@ -77,6 +77,7 @@ class MShop_Media_Manager_DefaultTest extends MW_Unittest_Testcase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'media.id', null );
 		$expr[] = $search->compare( '!=', 'media.siteid', null);
 		$expr[] = $search->compare( '==', 'media.languageid', 'de');

@@ -80,6 +80,7 @@ class MAdmin_Log_Manager_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'log.id', null );
 		$expr[] = $search->compare( '!=', 'log.siteid', null);
 		$expr[] = $search->compare( '==', 'log.facility', 'unittest facility' );

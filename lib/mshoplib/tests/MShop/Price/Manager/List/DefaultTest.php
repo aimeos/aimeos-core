@@ -272,6 +272,7 @@ class MShop_Price_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'price.list.id', null );
 		$expr[] = $search->compare( '!=', 'price.list.siteid', null );
 		$expr[] = $search->compare( '>', 'price.list.parentid', 0 );

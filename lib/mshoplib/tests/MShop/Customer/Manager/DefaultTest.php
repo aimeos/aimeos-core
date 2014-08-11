@@ -162,6 +162,7 @@ class MShop_Customer_Manager_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '!=', 'customer.siteid', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'unitCustomer002' );

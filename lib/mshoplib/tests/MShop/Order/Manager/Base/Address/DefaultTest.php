@@ -203,6 +203,7 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.base.address.id', null );
 		$expr[] = $search->compare( '==', 'order.base.address.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.address.baseid', null );

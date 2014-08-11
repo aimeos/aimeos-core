@@ -78,6 +78,7 @@ class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends MW_Unittest
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.id', null );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.attributeid', null );

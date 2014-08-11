@@ -184,6 +184,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.base.id', null );
 		$expr[] = $search->compare( '==', 'order.base.siteid', $siteid );
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );

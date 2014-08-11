@@ -139,6 +139,7 @@ class MShop_Product_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'product.list.type.id', null );
 		$expr[] = $search->compare( '!=', 'product.list.type.siteid', null );
 		$expr[] = $search->compare( '==', 'product.list.type.domain', 'product' );

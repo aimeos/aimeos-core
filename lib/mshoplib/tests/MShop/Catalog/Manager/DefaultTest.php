@@ -93,6 +93,7 @@ class MShop_Catalog_Manager_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'catalog.id', null );
 		$expr[] = $search->compare( '!=', 'catalog.siteid', null );
 		$expr[] = $search->compare( '==', 'catalog.code', 'cafe' );

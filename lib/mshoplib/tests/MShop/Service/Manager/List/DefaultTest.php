@@ -283,6 +283,7 @@ class MShop_Service_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'service.list.id', null );
 		$expr[] = $search->compare( '!=', 'service.list.siteid', null );
 		$expr[] = $search->compare( '>', 'service.list.parentid', 0 );

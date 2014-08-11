@@ -139,6 +139,7 @@ class MShop_Catalog_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'catalog.list.type.id', null );
 		$expr[] = $search->compare( '!=', 'catalog.list.type.siteid', null );
 		$expr[] = $search->compare( '==', 'catalog.list.type.code', 'default' );

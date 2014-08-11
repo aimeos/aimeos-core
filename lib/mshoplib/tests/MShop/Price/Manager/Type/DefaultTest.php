@@ -151,6 +151,7 @@ class MShop_Price_Manager_Type_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'price.type.id', null );
 		$expr[] = $search->compare( '!=', 'price.type.siteid', null );
 		$expr[] = $search->compare( '==', 'price.type.domain', 'product' );

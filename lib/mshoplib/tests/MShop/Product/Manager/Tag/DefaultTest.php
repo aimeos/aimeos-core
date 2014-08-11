@@ -151,6 +151,7 @@ class MShop_Product_Manager_Tag_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'product.tag.id', null );
 		$expr[] = $search->compare( '!=', 'product.tag.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.tag.typeid', null );

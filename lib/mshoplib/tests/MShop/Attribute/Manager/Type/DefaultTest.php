@@ -85,6 +85,7 @@ class MShop_Attribute_Manager_Type_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'attribute.type.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.type.siteid', null );
 		$expr[] = $search->compare( '==', 'attribute.type.domain', 'product' );

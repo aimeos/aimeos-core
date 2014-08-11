@@ -140,6 +140,7 @@ class MShop_Attribute_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'attribute.list.type.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.list.type.siteid', null );
 		$expr[] = $search->compare( '==', 'attribute.list.type.code', 'default' );

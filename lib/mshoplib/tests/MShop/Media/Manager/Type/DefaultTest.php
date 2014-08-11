@@ -84,6 +84,7 @@ class MShop_Media_Manager_Type_DefaultTest extends MW_Unittest_Testcase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'media.type.id', null );
 		$expr[] = $search->compare( '!=', 'media.type.siteid', null );
 		$expr[] = $search->compare( '==', 'media.type.domain', 'product' );

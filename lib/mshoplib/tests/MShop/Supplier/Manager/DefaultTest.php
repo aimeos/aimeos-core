@@ -145,6 +145,7 @@ class MShop_Supplier_Manager_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'supplier.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.siteid', null );
 		$expr[] = $search->compare( '==', 'supplier.label', 'unitSupplier001' );
