@@ -85,7 +85,6 @@ MShop.panel.price.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.quantity',
                 header : MShop.I18n.dt( 'client/extjs', 'Quantity' ),
-                align : 'right',
                 sortable : true,
                 width : 70,
                 align : 'right'
