@@ -13,20 +13,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_context;
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
-
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Order_Manager_Base_Service_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	protected function setUp()
@@ -79,6 +66,7 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'order.base.service.id', null );
 		$expr[] = $search->compare( '==', 'order.base.service.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );

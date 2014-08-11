@@ -109,11 +109,11 @@ class MW_View_Helper_Media_Default
 		$string = '';
 		$enc = $this->encoder();
 
-		foreach( $mediaItems as $mediaItem )
+		foreach( $mediaItems as $item )
 		{
 			$url = $item->getUrl();
 			$previewUrl = $item->getPreview();
-			$parts = explode( '/', $mediaItem->getMimetype() );
+			$parts = explode( '/', $item->getMimetype() );
 
 			switch( $parts[0] )
 			{

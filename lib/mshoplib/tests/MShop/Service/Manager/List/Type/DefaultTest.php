@@ -12,23 +12,7 @@
 class MShop_Service_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
-
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Service_Item_List_Type_DefaultTest');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	/**

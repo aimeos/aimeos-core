@@ -17,21 +17,6 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Plugin_Provider_Order_BasketLimitsTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
@@ -115,12 +100,8 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	{
 		$this->_order->addProduct( $this->_products['CNC'] );
 
-		try
-		{
-			$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
-			$this->fail( 'Min-products should have failed' );
-		}
-		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
+		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
+		$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
 	}
 
 
@@ -129,12 +110,8 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->_products['CNE']->setQuantity( 6 );
 		$this->_order->addProduct( $this->_products['CNE'] );
 
-		try
-		{
-			$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
-			$this->fail( 'Max-products should have failed' );
-		}
-		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
+		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
+		$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
 	}
 
 
@@ -142,12 +119,8 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	{
 		$this->_order->addProduct( $this->_products['CNE'] );
 
-		try
-		{
-			$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
-			$this->fail( 'Min-value should have failed' );
-		}
-		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
+		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
+		$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
 	}
 
 
@@ -156,11 +129,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->_products['CNC']->setQuantity( 2 );
 		$this->_order->addProduct( $this->_products['CNC'] );
 
-		try
-		{
-			$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
-			$this->fail( 'Max-value should have failed' );
-		}
-		catch ( MShop_Plugin_Provider_Exception $e ) { ; }
+		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
+		$this->_object->update($this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT);
 	}
 }

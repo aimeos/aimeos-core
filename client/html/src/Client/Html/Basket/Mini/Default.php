@@ -82,7 +82,6 @@ class Client_Html_Basket_Mini_Default
 		$site = $context->getLocale()->getSiteId();
 		$view = $this->getView();
 
-		$html = null;
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
 		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-body', $config );
 
@@ -92,11 +91,11 @@ class Client_Html_Basket_Mini_Default
 			{
 				$view = $this->_setViewParams( $view, $tags, $expire );
 
-				$html = '';
+				$output = '';
 				foreach( $this->_getSubClients() as $subclient ) {
-					$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
+					$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 				}
-				$view->miniBody = $html;
+				$view->miniBody = $output;
 			}
 			catch( Client_Html_Exception $e )
 			{
@@ -174,7 +173,6 @@ class Client_Html_Basket_Mini_Default
 		$site = $context->getLocale()->getSiteId();
 		$view = $this->getView();
 
-		$html = null;
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
 		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-header', $config );
 
@@ -184,11 +182,11 @@ class Client_Html_Basket_Mini_Default
 			{
 				$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
-				$html = '';
+				$output = '';
 				foreach( $this->_getSubClients() as $subclient ) {
-					$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
+					$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
-				$view->miniHeader = $html;
+				$view->miniHeader = $output;
 
 				/** client/html/basket/mini/default/template-header
 				 * Relative path to the HTML header template of the basket mini client.

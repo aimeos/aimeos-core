@@ -12,26 +12,7 @@
 class MShop_Plugin_Manager_Type_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
-
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Plugin_Manager_Type_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	/**
@@ -85,6 +66,7 @@ class MShop_Plugin_Manager_Type_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'plugin.type.id', null );
 		$expr[] = $search->compare( '!=', 'plugin.type.siteid', null );
 		$expr[] = $search->compare( '==', 'plugin.type.code', 'order' );

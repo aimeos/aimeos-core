@@ -211,7 +211,6 @@ class Client_Html_Catalog_Filter_Tree_Default
 
 			/** @todo Make referenced domains configurable */
 			$ref = array( 'text', 'media', 'attribute' );
-			$catItems = array();
 
 
 			if( $currentid != '' )

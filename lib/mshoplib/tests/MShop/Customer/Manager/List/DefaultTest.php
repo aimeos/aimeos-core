@@ -12,23 +12,7 @@
 class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
-
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Customer_Manager_List_DefaultTest');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	/**
@@ -275,6 +259,7 @@ class MShop_Customer_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.list.id', null );
 		$expr[] = $search->compare( '!=', 'customer.list.siteid', null );
 		$expr[] = $search->compare( '>', 'customer.list.parentid', 0 );

@@ -62,7 +62,7 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 			$this->_removeItems( $item->getId(), 'catalog/list', 'catalog', 'text' );
 			$this->_removeListItems( $item->getId(), 'catalog/list', 'product' );
 		}
-		catch( Exception $e ) { ; }
+		catch( Exception $e ) { ; } // If no root node was already inserted into the database
 
 
 		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )

@@ -13,23 +13,8 @@ class MShop_Media_Manager_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_fixtures = array( );
 	private $_object = null;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
 
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite = new PHPUnit_Framework_TestSuite('MShop_Media_Manager_DefaultTest');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 	/**
 	 * Sets up the fixture. This method is called before a test is executed.
@@ -77,6 +62,7 @@ class MShop_Media_Manager_DefaultTest extends MW_Unittest_Testcase
 		//search without base criteria
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'media.id', null );
 		$expr[] = $search->compare( '!=', 'media.siteid', null);
 		$expr[] = $search->compare( '==', 'media.languageid', 'de');

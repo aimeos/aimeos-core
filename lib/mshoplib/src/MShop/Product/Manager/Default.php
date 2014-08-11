@@ -702,14 +702,16 @@ class MShop_Product_Manager_Default
 
 			$expr = array( $object->getConditions() );
 
-			$temp = array();
-			$temp[] = $object->compare( '==', 'product.datestart', null );
-			$temp[] = $object->compare( '<=', 'product.datestart', $curDate );
+			$temp = array(
+				$object->compare( '==', 'product.datestart', null ),
+				$object->compare( '<=', 'product.datestart', $curDate ),
+			);
 			$expr[] = $object->combine( '||', $temp );
 
-			$temp = array();
-			$temp[] = $object->compare( '==', 'product.dateend', null );
-			$temp[] = $object->compare( '>=', 'product.dateend', $curDate );
+			$temp = array(
+				$object->compare( '==', 'product.dateend', null ),
+				$object->compare( '>=', 'product.dateend', $curDate ),
+			);
 			$expr[] = $object->combine( '||', $temp );
 
 			$object->setConditions( $object->combine( '&&', $expr ) );

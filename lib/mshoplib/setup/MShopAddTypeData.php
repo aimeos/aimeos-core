@@ -100,7 +100,7 @@ class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 				try {
 					$domainManager->saveItem( $type );
 					$num++;
-				} catch( Exception $e ) { ; }
+				} catch( Exception $e ) { ; } // if type was already available
 			}
 
 			$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );

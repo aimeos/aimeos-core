@@ -8,11 +8,8 @@
  */
 class MW_Logger_DBTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MW_Logger_DB
-	 * @access protected
-	 */
 	private $_object;
+
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

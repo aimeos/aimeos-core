@@ -49,13 +49,11 @@ class MW_Jsb2_Default
 	 */
 	public function getHTML( $type = null )
 	{
-		$sep = '?';
 		$html = '';
-		$filesToDisplay = array();
-		$ds = DIRECTORY_SEPARATOR;
+		$param = '?v=';
 
 		if( strpos( $this->_baseURL, '?' ) !== false ) {
-			$sep = '&';
+			$param = '&v=';
 		}
 
 		foreach ( $this->_registeredPackages as $filetype => $packageList )
@@ -66,58 +64,26 @@ class MW_Jsb2_Default
 
 			foreach( $packageList as $package )
 			{
-				$usePackage = true;
 				$packageFile = $this->_deployDir . $package->file;
 				$packageFileFilesystem = $this->_basePath . $packageFile;
 				$packageFileTime = 0;
+				$timestamp = 0;
 
-				if( $ds !== '/' ) {
-					$packageFileFilesystem = str_replace( '/', $ds, $packageFileFilesystem );
+				if( DIRECTORY_SEPARATOR !== '/' ) {
+					$packageFileFilesystem = str_replace( '/', DIRECTORY_SEPARATOR, $packageFileFilesystem );
 				}
 
 				if( is_file( $packageFileFilesystem ) ) {
 					$packageFileTime = filemtime( $packageFileFilesystem );
 				}
 
-				$filesToDisplay = array();
+				$filesToDisplay = $this->_getFileUrls( $this->_baseURL, $this->_basePath, $param, $package, $timestamp );
 
-				foreach( $package->fileIncludes as $singleFile )
-				{
-					$filename = $this->_basePath . $singleFile->path . $singleFile->text;
-
-					if( $ds !== '/' ) {
-						$filename = str_replace( '/', $ds, $filename );
-					}
-
-					if( !is_file( $filename ) || ( $fileTime = filemtime( $filename ) ) === false ) {
-						throw new MW_Jsb2_Exception( sprintf( 'Unable to read filetime of file "%1$s"', $filename ) );
-					}
-
-					if( !$packageFileTime || $fileTime > $packageFileTime ) {
-						$usePackage = false;
-					}
-
-					$filesToDisplay[] = $this->_baseURL . $singleFile->path . $singleFile->text . $sep . 'v=' . $fileTime;
+				if( $packageFileTime >= $timestamp ) {
+					$filesToDisplay = array( $this->_baseURL . $packageFile . $param . $packageFileTime );
 				}
 
-				if( $usePackage === true) {
-					$filesToDisplay = array( $this->_baseURL . $packageFile . $sep . 'v=' . $packageFileTime );
-				}
-
-				foreach( $filesToDisplay as $singleFile )
-				{
-					switch( $filetype )
-					{
-						case 'js':
-							$html .= '<script type="text/javascript" src="' . $singleFile . '"></script>' . PHP_EOL;
-							break;
-						case 'css':
-							$html .= '<link rel="stylesheet" type="text/css" href="' . $singleFile . '"/>' . PHP_EOL;
-							break;
-						default:
-							throw new MW_Jsb2_Exception( sprintf( 'Unknown file extension: "%1$s"', $filetype ) );
-					}
-				}
+				$html .= $this->_createHtml( $filesToDisplay, $filetype );
 			}
 		}
 
@@ -135,8 +101,6 @@ class MW_Jsb2_Default
 	 */
 	public function deploy( $type = null, $debug = true, $filepermission = 0644, $dirpermission = 0755 )
 	{
-		$ds = DIRECTORY_SEPARATOR;
-
 		foreach( $this->_registeredPackages as $filetype => $packageFiles )
 		{
 			if( $type !== null && $filetype !== $type ) {
@@ -149,8 +113,8 @@ class MW_Jsb2_Default
 
 				$packageDir = dirname( $packageFile );
 
-				if( $ds !== '/' ) {
-					$packageDir = str_replace( '/', $ds, $packageDir );
+				if( DIRECTORY_SEPARATOR !== '/' ) {
+					$packageDir = str_replace( '/', DIRECTORY_SEPARATOR, $packageDir );
 				}
 
 				if( !is_dir( $packageDir ) )
@@ -163,6 +127,73 @@ class MW_Jsb2_Default
 				$this->_minify( $package, $debug, $filepermission );
 			}
 		}
+	}
+
+
+	/**
+	 * Generates the tags for the HTML head.
+	 *
+	 * @param array $files List of file URLs that should be HTML tags generated for
+	 * @param string $filetype Typ of the given files, e.g. 'js' or 'css'
+	 * @return string Generated string for inclusion into the HTML head
+	 * @throws MW_Jsb2_Exception If the file type is unknown
+	 */
+	protected function _createHtml( array $files, $filetype )
+	{
+		$html = '';
+
+		foreach( $files as $file )
+		{
+			switch( $filetype )
+			{
+				case 'js':
+					$html .= '<script type="text/javascript" src="' . $file . '"></script>' . PHP_EOL;
+					break;
+				case 'css':
+					$html .= '<link rel="stylesheet" type="text/css" href="' . $file . '"/>' . PHP_EOL;
+					break;
+				default:
+					throw new MW_Jsb2_Exception( sprintf( 'Unknown file extension: "%1$s"', $filetype ) );
+			}
+		}
+
+		return $html;
+	}
+
+
+	/**
+	 * Returns the file URLs of the given package object.
+	 *
+	 * @param string $baseUrl URL the file location is relative to
+	 * @param string $basePath Absolute path to the base directory of the files
+	 * @param string $param Name and separator for the modification time parameter
+	 * @param stdClass $package Object with "fileIncludes" property containing a
+	 * 	list of file objects with "path" and "text" properties
+	 * @param integer &$timestamp Value/result parameter that will contain the latest file modification timestamp
+	 * @throws MW_Jsb2_Exception If the file modification timestamp couldn't be determined
+	 */
+	protected function _getFileUrls( $baseUrl, $basePath, $param, stdClass $package, &$timestamp )
+	{
+		$timestamp = (int) $timestamp;
+		$filesToDisplay = array();
+
+		foreach( $package->fileIncludes as $singleFile )
+		{
+			$filename = $basePath . $singleFile->path . $singleFile->text;
+
+			if( DIRECTORY_SEPARATOR !== '/' ) {
+				$filename = str_replace( '/', DIRECTORY_SEPARATOR, $filename );
+			}
+
+			if( !is_file( $filename ) || ( $fileTime = filemtime( $filename ) ) === false ) {
+				throw new MW_Jsb2_Exception( sprintf( 'Unable to read filetime of file "%1$s"', $filename ) );
+			}
+
+			$timestamp = max( $timestamp, $fileTime );
+			$filesToDisplay[] = $baseUrl . $singleFile->path . $singleFile->text . $param . $fileTime;
+		}
+
+		return $filesToDisplay;
 	}
 
 

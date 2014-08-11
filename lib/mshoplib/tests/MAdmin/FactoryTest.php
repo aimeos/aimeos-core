@@ -11,21 +11,6 @@
  */
 class MAdmin_FactoryTest extends MW_Unittest_Testcase
 {
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MAdmin_FactoryTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
 	public function testCreateManager()
 	{
 		$manager = MAdmin_Factory::createManager( TestHelper::getContext(), 'job' );

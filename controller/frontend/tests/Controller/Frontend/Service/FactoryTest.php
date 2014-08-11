@@ -10,15 +10,6 @@ class Controller_Frontend_Service_FactoryTest extends MW_Unittest_Testcase
 	private $_object;
 
 
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('Controller_Frontend_Service_FactoryTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
 	protected function setUp()
 	{
 	}

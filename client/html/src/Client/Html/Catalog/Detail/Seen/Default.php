@@ -117,11 +117,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 		{
 			$context = $this->_getContext();
 			$session = $context->getSession();
-			$str = $session->get( 'arcavias/catalog/session/seen/list' );
-
-			if( ( $lastSeen = @unserialize( $str ) ) === false ) {
-				$lastSeen = array();
-			}
+			$lastSeen = $session->get( 'arcavias/catalog/session/seen/list', array() );
 
 			if( isset( $lastSeen[$id] ) )
 			{
@@ -149,7 +145,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 				$lastSeen = array_slice( $lastSeen, -$max, $max, true );
 			}
 
-			$session->set( 'arcavias/catalog/session/seen/list', serialize( $lastSeen ) );
+			$session->set( 'arcavias/catalog/session/seen/list', $lastSeen );
 
 			foreach( $session->get( 'arcavias/catalog/session/seen/cache', array() ) as $key => $value ) {
 				$session->set( $key, null );
@@ -200,7 +196,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 			 * @see client/html/catalog/list/domains
 			 * @see client/html/catalog/detail/domains
 			 */
-			$domains = $config->get( 'client/html/catalog/detail/seen/domains', $default );
+			$domains = $config->get( 'client/html/catalog/detail/seen/domains', $domains );
 
 			$view->seenProductItem = MShop_Factory::createManager( $context, 'product' )->getItem( $id, $domains );
 

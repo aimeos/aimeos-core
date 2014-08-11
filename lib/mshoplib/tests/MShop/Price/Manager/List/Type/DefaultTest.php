@@ -12,23 +12,7 @@
 class MShop_Price_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
-
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/PriceUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Price_Item_List_Type_DefaultTest');
-		PHPUnit_PriceUI_TestRunner::run($suite);
-	}
 
 
 	/**
@@ -142,6 +126,7 @@ class MShop_Price_Manager_List_Type_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'price.list.type.id', null );
 		$expr[] = $search->compare( '!=', 'price.list.type.siteid', null );
 		$expr[] = $search->compare( '==', 'price.list.type.code', 'default' );

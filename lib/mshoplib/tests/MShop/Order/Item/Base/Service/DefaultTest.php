@@ -18,14 +18,6 @@ class MShop_Order_Item_Base_Service_DefaultTest extends MW_Unittest_Testcase
 	private $_attribute = array();
 
 
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Order_Item_Base_Service_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
 	protected function setUp()
 	{
 		$this->_price = MShop_Price_Manager_Factory::createManager( TestHelper::getContext() )->createItem();

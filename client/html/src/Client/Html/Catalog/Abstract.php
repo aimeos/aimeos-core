@@ -82,7 +82,7 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
 	 * @param boolean $textfilter True to include text criteria in product filter, false if not
 	 * @param boolean $attrfilter True to include attribute criteria in product filter, false if not
-	 * @return array List of products implementing MShop_Product_Item_Interface
+	 * @return MW_Common_Criteria_Interface Search criteria object
 	 */
 	protected function _getProductListFilterByParam( array $params, $catfilter = true, $textfilter = true, $attrfilter = true )
 	{
@@ -155,7 +155,7 @@ abstract class Client_Html_Catalog_Abstract
 	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
 	 * @param boolean $textfilter True to include text criteria in product filter, false if not
 	 * @param boolean $attrfilter True to include attribute criteria in product filter, false if not
-	 * @return array List of products implementing MShop_Product_Item_Interface
+	 * @return MW_Common_Criteria_Interface Search criteria object
 	 */
 	protected function _getProductListFilter( MW_View_Interface $view, $catfilter = true, $textfilter = true, $attrfilter = true )
 	{

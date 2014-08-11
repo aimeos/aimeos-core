@@ -17,21 +17,6 @@ class MShop_Coupon_Provider_FreeShippingTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Coupon_Provider_FreeShippingTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
@@ -84,8 +69,10 @@ class MShop_Coupon_Provider_FreeShippingTest extends MW_Unittest_Testcase
 
 		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
 		$search = $priceManager->createSearch();
-		$expr[] = $search->compare( '==', 'price.id', $priceIds );
-		$expr[] = $search->compare( '==', 'price.quantity', 1 );
+		$expr = array(
+			$search->compare( '==', 'price.id', $priceIds ),
+			$search->compare( '==', 'price.quantity', 1 ),
+		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		foreach( $priceManager->searchItems( $search ) as $priceItem )

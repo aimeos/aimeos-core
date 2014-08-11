@@ -11,25 +11,8 @@
  */
 class MShop_Plugin_Provider_Order_ExampleTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MShop_Plugin_Provider_Order_Example
-	 * @access protected
-	 */
 	private $_object;
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Plugin_Provider_Order_ExampleTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

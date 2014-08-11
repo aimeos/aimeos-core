@@ -13,20 +13,6 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 	private $_testfile;
 	private $_context;
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_ExtJS_Attribute_Import_Text_DefaultTest' );
-		$result = PHPUnit_TextUI_TestRunner::run( $suite );
-	}
-
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -76,6 +62,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 
 	public function testImportFromCSVFile()
 	{
+		$data = array();
 		$data[] = '"Language ID","Type","Code","List type","Text type","Text ID","Text"'."\n";
 		$data[] = '"en","color","white","default","name","","unittest: white"'."\n";
 		$data[] = '"en","color","blue","default","name","","unittest: blue"' ."\n";

@@ -15,18 +15,6 @@ class MShop_Common_Item_List_DefaultTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Common_Item_List_DefaultTest');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
-	/**
 	 * Sets up the fixture. This method is called before a test is executed.
 	 */
 	protected function setUp()

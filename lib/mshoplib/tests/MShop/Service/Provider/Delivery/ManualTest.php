@@ -11,27 +11,7 @@
  */
 class MShop_Service_Provider_Delivery_ManualTest extends PHPUnit_Framework_TestCase
 {
-
-	/**
-	 * @var    MShop_Service_Provider_Delivery_Manual
-	 * @access protected
-	 */
 	private $_object;
-
-
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Service_Provider_Delivery_ManualTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	/**

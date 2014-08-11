@@ -16,21 +16,6 @@ class MShop_Coupon_Manager_DefaultTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Coupon_Manager_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
@@ -203,6 +188,7 @@ class MShop_Coupon_Manager_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'coupon.id', null );
 		$expr[] = $search->compare( '!=', 'coupon.siteid', null );
 		$expr[] = $search->compare( '==', 'coupon.label', 'Unit test fixed rebate' );

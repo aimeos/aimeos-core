@@ -11,20 +11,6 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 	private $_plugin;
 	private $_address;
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Plugin_Provider_Order_AddressesAvailableTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

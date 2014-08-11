@@ -8,23 +8,8 @@
  */
 class MW_Config_ArrayTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MW_Config_Array
-	 * @access protected
-	 */
 	private $_object;
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_Config_ArrayTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

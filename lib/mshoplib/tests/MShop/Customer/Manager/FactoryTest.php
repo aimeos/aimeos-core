@@ -11,20 +11,6 @@
  */
 class MShop_Customer_Manager_FactoryTest extends MW_Unittest_Testcase
 {
-
-
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite = new PHPUnit_Framework_TestSuite('MShop_Customer_Manager_FactoryTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
-	/**
-	 * testCreateManager().
-	 */
 	public function testCreateManager()
 	{
 		$target = 'MShop_Common_Manager_Interface';

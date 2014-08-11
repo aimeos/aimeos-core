@@ -471,7 +471,7 @@ class Client_Html_Catalog_Detail_Default
 			 * @see client/html/catalog/domains
 			 * @see client/html/catalog/list/domains
 			 */
-			$domains = $config->get( 'client/html/catalog/detail/domains', $default );
+			$domains = $config->get( 'client/html/catalog/detail/domains', $domains );
 
 			$manager = MShop_Factory::createManager( $context, 'product' );
 			$productItem = $manager->getItem( $prodid, $domains );

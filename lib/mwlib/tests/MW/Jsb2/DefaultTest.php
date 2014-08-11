@@ -12,35 +12,6 @@ class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 	private $_manifestPath;
 	private $_deployPath;
 
-	/**
-	 * @param string $dir
-	 */
-	protected function _delTree( $dir )
-	{
-		if( !is_dir( $dir ) ) {
-			return;
-		}
-
-		$dirIterator = new DirectoryIterator( $dir );
-
-		foreach( $dirIterator as $iterator )
-		{
-			if( $iterator->isDot() ) {
-				continue;
-			}
-
-			if( $iterator->isDir() )
-			{
-				$this->_delTree( $iterator->getPathname() );
-			}
-			else
-			{
-				unlink( $iterator->getPathname() );
-			}
-		}
-
-		rmdir( $dir );
-	}
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -161,7 +132,7 @@ class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 	public function testGetHTMLWithoutPackage()
 	{
 		$html = '<script type="text/javascript" src="/./../%1$s"></script>';
-		$mtime = filemtime( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'test.js' );
+		$mtime = filemtime( __DIR__ . DIRECTORY_SEPARATOR . 'test.js' );
 
 		$this->assertEquals( sprintf( $html, 'test.js?v=' . $mtime ), trim( $this->_object->getHTML( 'js' ) ) );
 	}
@@ -187,5 +158,36 @@ class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 
 		$this->setExpectedException( 'MW_Jsb2_Exception' );
 		$this->_object->getHTML();
+	}
+
+
+	/**
+	 * @param string $dir
+	 */
+	protected function _delTree( $dir )
+	{
+		if( !is_dir( $dir ) ) {
+			return;
+		}
+
+		$dirIterator = new DirectoryIterator( $dir );
+
+		foreach( $dirIterator as $iterator )
+		{
+			if( $iterator->isDot() ) {
+				continue;
+			}
+
+			if( $iterator->isDir() )
+			{
+				$this->_delTree( $iterator->getPathname() );
+			}
+			else
+			{
+				unlink( $iterator->getPathname() );
+			}
+		}
+
+		rmdir( $dir );
 	}
 }

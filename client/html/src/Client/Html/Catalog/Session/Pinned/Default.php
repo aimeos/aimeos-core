@@ -67,7 +67,6 @@ class Client_Html_Catalog_Session_Pinned_Default
 	{
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$view = $this->getView();
 
 		$html = null;
 		$config = $context->getConfig()->get( 'client/html/catalog/session/pinned', array() );
@@ -77,11 +76,11 @@ class Client_Html_Catalog_Session_Pinned_Default
 		{
 			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
-			$html = '';
+			$output = '';
 			foreach( $this->_getSubClients() as $subclient ) {
-				$html .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
+				$output .= $subclient->setView( $view )->getBody( $uid, $tags, $expire );
 			}
-			$view->pinnedBody = $html;
+			$view->pinnedBody = $output;
 
 			/** client/html/catalog/session/pinned/default/template-body
 			 * Relative path to the HTML body template of the catalog session pinned client.
@@ -129,9 +128,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 	{
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$view = $this->getView();
 
-		$html = null;
 		$config = $context->getConfig()->get( 'client/html/catalog/session/pinned', array() );
 		$key = $this->_getParamHash( array(), $uid . ':catalog:session-pinned-header', $config );
 
@@ -139,11 +136,11 @@ class Client_Html_Catalog_Session_Pinned_Default
 		{
 			$view = $this->_setViewParams( $this->getView(), $tags, $expire );
 
-			$html = '';
+			$output = '';
 			foreach( $this->_getSubClients() as $subclient ) {
-				$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
+				$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 			}
-			$view->pinnedHeader = $html;
+			$view->pinnedHeader = $output;
 
 			/** client/html/catalog/session/pinned/default/template-header
 			 * Relative path to the HTML header template of the catalog session pinned client.

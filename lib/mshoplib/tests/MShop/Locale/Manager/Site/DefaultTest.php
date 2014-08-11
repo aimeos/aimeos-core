@@ -114,6 +114,7 @@ class MShop_Locale_Manager_Site_DefaultTest extends MW_Unittest_Testcase
 
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'locale.site.id', null );
 		$expr[] = $search->compare( '==', 'locale.site.siteid', $siteid );
 		$expr[] = $search->compare( '==', 'locale.site.code', 'unittest' );

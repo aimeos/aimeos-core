@@ -11,30 +11,9 @@
  */
 class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MShop_Service_Provider_Payment_PayPal
-	 * @access protected
-	 */
 	private $_object;
-
 	private $_serviceItem;
-
 	private $_order;
-
-
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Service_Provider_Payment_PayPalExpressTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	/**

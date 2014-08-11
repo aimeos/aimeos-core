@@ -8,11 +8,8 @@
  */
 class MW_Setup_DBSchema_Column_ItemTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MW_Setup_DBSchema_Column_Item
-	 * @access protected
-	 */
 	private $_object;
+
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

@@ -10,17 +10,6 @@ class MW_Translation_Decorator_MemoryTest extends MW_Unittest_Testcase
 {
 	private $_object;
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_Translation_Decorator_MemoryTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 	/**
 	 * This method is called before a test is executed.

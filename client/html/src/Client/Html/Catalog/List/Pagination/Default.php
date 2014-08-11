@@ -191,7 +191,6 @@ class Client_Html_Catalog_List_Pagination_Default
 		{
 			$total = $view->listProductTotal;
 			$current = $view->listPageCurr;
-			$size = $view->listPageSize;
 			$last = ( $total != 0 ? ceil( $total / $view->listPageSize ) : 1 );
 
 			$view->pagiPageFirst = 1;

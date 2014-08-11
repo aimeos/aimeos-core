@@ -594,8 +594,10 @@ class MShop_Price_Manager_Default
 
 			if( $currencyid !== null )
 			{
-				$expr[] = $object->compare( '==', 'price.currencyid', $currencyid );
-				$expr[] = $object->getConditions();
+				$expr = array(
+					$object->compare( '==', 'price.currencyid', $currencyid ),
+					$object->getConditions(),
+				);
 
 				$object->setConditions( $object->combine( '&&', $expr ) );
 			}

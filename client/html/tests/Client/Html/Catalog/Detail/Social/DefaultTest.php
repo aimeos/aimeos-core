@@ -10,12 +10,6 @@ class Client_Html_Catalog_Detail_Social_DefaultTest extends MW_Unittest_Testcase
 	private $_object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$paths = TestHelper::getHtmlTemplatePaths();

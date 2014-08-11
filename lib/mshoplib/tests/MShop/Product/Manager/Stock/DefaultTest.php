@@ -12,12 +12,8 @@
 class MShop_Product_Manager_Stock_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
+
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -164,6 +160,7 @@ class MShop_Product_Manager_Stock_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'product.stock.id', null );
 		$expr[] = $search->compare( '!=', 'product.stock.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.stock.productid', null );

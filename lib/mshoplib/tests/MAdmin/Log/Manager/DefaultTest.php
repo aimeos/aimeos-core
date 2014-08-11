@@ -11,21 +11,6 @@ class MAdmin_Log_Manager_DefaultTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MAdmin_Log_Manager_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
@@ -80,6 +65,7 @@ class MAdmin_Log_Manager_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'log.id', null );
 		$expr[] = $search->compare( '!=', 'log.siteid', null);
 		$expr[] = $search->compare( '==', 'log.facility', 'unittest facility' );

@@ -15,18 +15,6 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 	protected static $_products;
 
 
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Catalog_Manager_Index_Customer_DefaultTest');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
 	public static function setUpBeforeClass()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );

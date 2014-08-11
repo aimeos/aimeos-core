@@ -12,12 +12,8 @@
 class MShop_Product_Manager_Tag_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
+
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -28,6 +24,7 @@ class MShop_Product_Manager_Tag_DefaultTest extends MW_Unittest_Testcase
 		$this->_editor = TestHelper::getContext()->getEditor();
 		$this->_object = new MShop_Product_Manager_Tag_Default( TestHelper::getContext() );
 	}
+
 
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
@@ -151,6 +148,7 @@ class MShop_Product_Manager_Tag_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'product.tag.id', null );
 		$expr[] = $search->compare( '!=', 'product.tag.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.tag.typeid', null );

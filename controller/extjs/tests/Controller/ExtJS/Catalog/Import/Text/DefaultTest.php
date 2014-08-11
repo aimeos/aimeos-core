@@ -15,21 +15,6 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_ExtJS_Catalog_Import_Text_DefaultTest' );
-		$result = PHPUnit_TextUI_TestRunner::run( $suite );
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
@@ -83,6 +68,7 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		}
 		$id = $root->getId();
 
+		$data = array();
 		$data[] = '"Language ID","Catalog code","Catalog ID","List type","Text type","Text ID","Text"'."\n";
 		$data[] = '"en","Root","'.$id.'","default","name","","Root: long"'."\n";
 		$data[] = '"en","Root","'.$id.'","default","name","","Root: meta desc"' ."\n";

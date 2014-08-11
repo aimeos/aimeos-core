@@ -8,10 +8,6 @@
  */
 class MW_Tree_Node_DBNestedSetTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MW_Tree_Node_DBNestedSet
-	 * @access protected
-	 */
 	private $_object;
 
 	/**

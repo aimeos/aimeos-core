@@ -8,23 +8,7 @@
 class MShop_Supplier_Manager_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object = null;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $_editor = '';
-
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Supplier_Manager_DefaultTest');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 
 	/**
@@ -145,6 +129,7 @@ class MShop_Supplier_Manager_DefaultTest extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'supplier.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.siteid', null );
 		$expr[] = $search->compare( '==', 'supplier.label', 'unitSupplier001' );

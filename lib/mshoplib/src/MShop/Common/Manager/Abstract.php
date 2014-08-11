@@ -621,9 +621,11 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 		$search = $manager->createSearch( true );
 
-		$expr[] = $search->compare( '==', $prefix . '.list.parentid', $ids );
-		$expr[] = $search->compare( '==', $prefix . '.list.domain', $domains );
-		$expr[] = $search->getConditions();
+		$expr = array(
+			$search->compare( '==', $prefix . '.list.parentid', $ids ),
+			$search->compare( '==', $prefix . '.list.domain', $domains ),
+			$search->getConditions(),
+		);
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
@@ -806,6 +808,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 			$keys = array_merge( $keys, $this->_getCriteriaKeys( $required, $sortation ) );
 		}
 
+		$cond = array();
 		$sep = $this->_getKeySeparator();
 		$basekey = array_shift( $required );
 		$keys = array_unique( array_merge( $required, $keys ) );

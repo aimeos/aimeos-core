@@ -8,24 +8,16 @@
  */
 class MW_Template_SQLTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MW_Template_CMSLite
-	 * @access protected
-	 */
 	private $_object;
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function setUp()
 	{
 		$template = 'SELECT * FROM /*-FROM*/table/*FROM-*/';
 
 		$this->_object = new MW_Template_SQL( $template );
 	}
+
 
 	/**
 	 * Tears down the fixture, for example, closes a network connection.

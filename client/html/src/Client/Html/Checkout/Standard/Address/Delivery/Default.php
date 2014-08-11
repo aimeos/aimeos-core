@@ -205,7 +205,6 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			}
 
 			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
-			$basket = $basketCtrl->get();
 
 			/** client/html/common/address/delivery/disable-new
 			 * Disables the option to enter a different delivery address for an order

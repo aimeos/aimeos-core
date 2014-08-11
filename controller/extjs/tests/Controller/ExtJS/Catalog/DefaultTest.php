@@ -9,23 +9,7 @@
 class Controller_ExtJS_Catalog_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-
 	private $_rootnode;
-
-
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_ExtJS_Catalog_DefaultTest' );
-		$result = PHPUnit_TextUI_TestRunner::run( $suite );
-	}
 
 
 	/**

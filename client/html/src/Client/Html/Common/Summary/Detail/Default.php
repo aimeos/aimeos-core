@@ -201,7 +201,7 @@ class Client_Html_Common_Summary_Detail_Default
 				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getCosts();
 			}
 		}
-		catch( Exception $e ) { ; }
+		catch( Exception $e ) { ; } // if delivery service isn't available
 
 		try
 		{
@@ -213,7 +213,7 @@ class Client_Html_Common_Summary_Detail_Default
 				$taxrates[ $price->getTaxrate() ] = $price->getValue() + $price->getCosts();
 			}
 		}
-		catch( Exception $e ) { ; }
+		catch( Exception $e ) { ; } // if payment service isn't available
 
 		return $taxrates;
 	}
