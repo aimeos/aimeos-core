@@ -19,6 +19,7 @@ class MW_View_Helper_Content_Default
 	implements MW_View_Helper_Interface
 {
 	private $_baseurl;
+	private $_enc;
 
 
 	/**
