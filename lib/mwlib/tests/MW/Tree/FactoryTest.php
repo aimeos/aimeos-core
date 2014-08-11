@@ -8,10 +8,6 @@
  */
 class MW_Tree_FactoryTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MW_Tree_Factory
-	 * @access protected
-	 */
 	private $_object;
 	private $_dbm;
 	private $_config;

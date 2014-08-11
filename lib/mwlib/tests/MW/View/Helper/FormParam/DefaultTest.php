@@ -11,19 +11,6 @@
  */
 class MW_View_Helper_FormParam_DefaultTest extends MW_Unittest_Testcase
 {
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_View_Helper_FormParam_Default');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
 	public function testTransform()
 	{
 		$view = new MW_View_Default();

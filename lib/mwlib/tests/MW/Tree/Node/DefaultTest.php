@@ -8,10 +8,6 @@
  */
 class MW_Tree_Node_DefaultTest extends MW_Unittest_Testcase
 {
-	/**
-	 * @var    MW_Tree_Node_Default
-	 * @access protected
-	 */
 	private $_object;
 
 	/**

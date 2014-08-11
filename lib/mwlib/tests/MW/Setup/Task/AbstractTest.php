@@ -1,8 +1,6 @@
 <?php
 
 
-
-
 class MW_Setup_Task_AbstractImpl extends MW_Setup_Task_Abstract
 {
 	public function getPreDependencies()
