@@ -28,8 +28,6 @@ class Arcavias
 	 */
 	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
-		$ds = DIRECTORY_SEPARATOR;
-
 		if( $basedir === null ) {
 			$basedir = dirname( __FILE__ );
 		}
