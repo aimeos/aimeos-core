@@ -107,6 +107,7 @@ class Client_Html_Checkout_Standard_Default
 	 * @category Developer
 	 */
 	private $_subPartNames = array( 'address', 'delivery', 'payment', 'summary', 'order' );
+	private $_cache;
 
 
 	/**
@@ -431,11 +432,11 @@ class Client_Html_Checkout_Standard_Default
 			$default = ( !in_array( $default, $steps ) ? reset( $steps ) : $default );
 
 			$current = $view->param( 'c-step', $default );
+			$cpos = $cpos = array_search( $current, $steps );
 
 			if( !isset( $view->standardStepActive )
-				|| ( ( $cpos = array_search( $current, $steps ) ) !== false
-				&& ( $apos = array_search( $view->standardStepActive, $steps ) ) !== false
-				&& $cpos < $apos )
+				|| ( ( $apos = array_search( $view->standardStepActive, $steps ) ) !== false
+				&& $cpos !== false && $cpos < $apos )
 			) {
 				$view->standardStepActive = $current;
 			}
