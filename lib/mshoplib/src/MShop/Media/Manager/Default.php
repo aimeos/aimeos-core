@@ -569,11 +569,15 @@ class MShop_Media_Manager_Default
 
 			if( $langid !== null )
 			{
-				$temp[] = $object->compare( '==', 'media.languageid', $langid );
-				$temp[] = $object->compare( '==', 'media.languageid', null );
+				$temp = array(
+					$object->compare( '==', 'media.languageid', $langid ),
+					$object->compare( '==', 'media.languageid', null ),
+				);
 
-				$expr[] = $object->getConditions();
-				$expr[] = $object->combine( '||', $temp );
+				$expr = array(
+					$object->getConditions(),
+					$object->combine( '||', $temp ),
+				);
 
 				$object->setConditions( $object->combine( '&&', $expr ) );
 			}

@@ -78,7 +78,7 @@ class MShop_Service_Provider_Payment_DirectDebit
 				$feconfig['directdebit.accountowner']['default'] = $fn . ' ' . $ln;
 			}
 		}
-		catch( MShop_Order_Exception $e ) { ; }
+		catch( MShop_Order_Exception $e ) { ; } // If address isn't available
 
 		foreach( $feconfig as $key => $config ) {
 			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );

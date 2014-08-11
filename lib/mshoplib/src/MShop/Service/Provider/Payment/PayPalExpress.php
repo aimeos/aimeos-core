@@ -382,7 +382,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		$this->_checkIPN( $orderBaseManager, $baseItem, $additional );
 
-		$status['PAYMENTSTATUS'] = $additional['payment_status'];
+		$status = array( 'PAYMENTSTATUS' => $additional['payment_status'] );
+
 		if( isset( $additional['pending_reason'] ) ) {
 			$status['PENDINGREASON'] = $additional['pending_reason'];
 		}
@@ -622,7 +623,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $orderAddressDelivery->getCountryId();
 			$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $orderAddressDelivery->getPostal();
 		}
-		catch( Exception $e ) { ; }
+		catch( Exception $e ) { ; } // If no address is available
 
 		$lastPos = 0;
 		foreach( $orderBase->getProducts() as $product )
@@ -678,7 +679,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
 		}
-		catch( Exception $e ) { ; }
+		catch( Exception $e ) { ; } // If no delivery service is available
 
 
 		return $values;

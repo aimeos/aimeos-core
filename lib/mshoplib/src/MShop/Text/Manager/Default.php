@@ -674,11 +674,15 @@ class MShop_Text_Manager_Default
 
 			if( $langid !== null )
 			{
-				$temp[] = $object->compare( '==', 'text.languageid', $langid );
-				$temp[] = $object->compare( '==', 'text.languageid', null );
+				$temp = array(
+					$object->compare( '==', 'text.languageid', $langid ),
+					$object->compare( '==', 'text.languageid', null ),
+				);
 
-				$expr[] = $object->getConditions();
-				$expr[] = $object->combine( '||', $temp );
+				$expr = array(
+					$object->getConditions(),
+					$object->combine( '||', $temp ),
+				);
 
 				$object->setConditions( $object->combine( '&&', $expr ) );
 			}
