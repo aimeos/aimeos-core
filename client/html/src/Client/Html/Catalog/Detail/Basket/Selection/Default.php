@@ -203,7 +203,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_Default
 				$domains = array( 'text', 'price', 'media', 'attribute' );
 
 				$subproducts = $productManager->searchItems( $search, $domains );
-				$attrIds = $attrMap = $prodDeps = $attrDeps = $attrTypeDeps = array();
+				$attrIds = $prodDeps = $attrDeps = $attrTypeDeps = array();
 
 				foreach( $subproducts as $subProdId => $subProduct )
 				{
