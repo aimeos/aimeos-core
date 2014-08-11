@@ -70,7 +70,7 @@ class Client_Html_Catalog_Detail_Seen_DefaultTest extends MW_Unittest_Testcase
 		$this->_object->process();
 
 		$str = $this->_context->getSession()->get( 'arcavias/catalog/session/seen/list' );
-		$this->assertStringStartsWith( 'a:1:{', $str );
+		$this->assertInternalType( 'array', $str );
 	}
 
 
