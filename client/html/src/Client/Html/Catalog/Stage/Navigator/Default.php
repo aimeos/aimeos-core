@@ -52,6 +52,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 	 */
 	private $_subPartPath = 'client/html/catalog/stage/navigator/default/subparts';
 	private $_subPartNames = array();
+	private $_view;
 
 
 	/**
@@ -209,12 +210,10 @@ class Client_Html_Catalog_Stage_Navigator_Default
 		{
 			if( ( $pos = $view->param( 'l-pos' ) ) !== null && ( $pid = $view->param( 'd-product-id' ) ) !== null )
 			{
-				$start = 0; $size = 3;
-
 				if( $pos < 1 ) {
 					$start = 0; $size = 2;
 				} else {
-					$start = $pos - 1;
+					$start = $pos - 1; $size = 3;
 				}
 
 				$filter = $this->_getProductListFilterByParam( $view->get( 'stageParams', array() ) );
