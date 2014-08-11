@@ -76,6 +76,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 
 	public function testImportFromCSVFile()
 	{
+		$data = array();
 		$data[] = '"Language ID","Type","Code","List type","Text type","Text ID","Text"'."\n";
 		$data[] = '"en","color","white","default","name","","unittest: white"'."\n";
 		$data[] = '"en","color","blue","default","name","","unittest: blue"' ."\n";

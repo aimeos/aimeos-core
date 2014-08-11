@@ -73,6 +73,7 @@ class Controller_ExtJS_Product_Import_Text_DefaultTest extends MW_Unittest_Testc
 
 	public function testImportFromCSVFile()
 	{
+		$data = array();
 		$data[] = '"Language ID","Type","Code","List type","Text type","Text ID","Text"'."\n";
 		$data[] = '"en","product","ABCD","default","long","","ABCD: long"'."\n";
 		$data[] = '"en","product","ABCD","default","metadescription","","ABCD: meta desc"' ."\n";

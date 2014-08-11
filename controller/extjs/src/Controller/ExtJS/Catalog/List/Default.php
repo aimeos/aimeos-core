@@ -45,7 +45,7 @@ class Controller_ExtJS_Catalog_List_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
-		$ids = array();
+		$ids = $refIds = array();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
