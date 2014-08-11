@@ -65,37 +65,7 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 					throw new MW_DB_Exception( sprintf( 'Maximum number of connections (%1$d) exceeded', $limit ) );
 				}
 
-				$host = $this->_config->get( 'resource/' . $name . '/host' );
-				$port = $this->_config->get( 'resource/' . $name . '/port' );
-				$user = $this->_config->get( 'resource/' . $name . '/username' );
-				$pass = $this->_config->get( 'resource/' . $name . '/password' );
-				$sock = $this->_config->get( 'resource/' . $name . '/socket' );
-				$dbase = $this->_config->get( 'resource/' . $name . '/database' );
-
-				$dsn = $adapter . ':dbname=' . $dbase;
-				if( $sock == null )
-				{
-					$dsn .= isset( $host ) ? ';host=' . $host : '';
-					$dsn .= isset( $port ) ? ';port=' . $port : '';
-				}
-				else
-				{
-					$dsn .= ';unix_socket=' . $sock;
-				}
-
-				$attr = array(
-					PDO::ATTR_PERSISTENT => $this->_config->get( 'resource/' . $name . '/opt-persistent', false ),
-				);
-
-				$pdo = new PDO( $dsn, $user, $pass, $attr );
-				$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-				$dbc = new MW_DB_Connection_PDO( $pdo );
-
-				foreach( $this->_config->get( 'resource/' . $name . '/stmt', array() ) as $stmt ) {
-					$dbc->create( $stmt )->execute()->finish();
-				}
-
-				$this->_connections[$name] = array( $dbc );
+				$this->_connections[$name] = array( $this->_createConnection( $name, $adapter ) );
 				$this->_count[$name]++;
 			}
 
@@ -131,5 +101,48 @@ class MW_DB_Manager_PDO implements MW_DB_Manager_Interface
 		}
 
 		$this->_connections[$name][] = $connection;
+	}
+
+
+	/**
+	 * Creates a new database connection.
+	 *
+	 * @param string $name Name to the database configuration in the resource file
+	 * @param string $adapter Name of the database adapter, e.g. "mysql"
+	 * @return MW_DB_Connection_Interface Database connection
+	 */
+	protected function _createConnection( $name, $adapter )
+	{
+		$host = $this->_config->get( 'resource/' . $name . '/host' );
+		$port = $this->_config->get( 'resource/' . $name . '/port' );
+		$user = $this->_config->get( 'resource/' . $name . '/username' );
+		$pass = $this->_config->get( 'resource/' . $name . '/password' );
+		$sock = $this->_config->get( 'resource/' . $name . '/socket' );
+		$dbase = $this->_config->get( 'resource/' . $name . '/database' );
+
+		$dsn = $adapter . ':dbname=' . $dbase;
+		if( $sock == null )
+		{
+			$dsn .= isset( $host ) ? ';host=' . $host : '';
+			$dsn .= isset( $port ) ? ';port=' . $port : '';
+		}
+		else
+		{
+			$dsn .= ';unix_socket=' . $sock;
+		}
+
+		$attr = array(
+			PDO::ATTR_PERSISTENT => $this->_config->get( 'resource/' . $name . '/opt-persistent', false ),
+		);
+
+		$pdo = new PDO( $dsn, $user, $pass, $attr );
+		$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$dbc = new MW_DB_Connection_PDO( $pdo );
+
+		foreach( $this->_config->get( 'resource/' . $name . '/stmt', array() ) as $stmt ) {
+			$dbc->create( $stmt )->execute()->finish();
+		}
+
+		return $dbc;
 	}
 }
