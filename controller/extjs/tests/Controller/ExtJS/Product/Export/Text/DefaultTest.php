@@ -95,10 +95,14 @@ class Controller_ExtJS_Product_Export_Text_DefaultTest extends MW_Unittest_Testc
 
 		$this->assertTrue( file_exists( $deCSV ) );
 		$fh = fopen( $deCSV, 'r' );
+		$lines = array();
+
 		while( ( $data = fgetcsv( $fh ) ) != false ) {
 			$lines[] = $data;
 		}
+
 		fclose( $fh );
+
 		if( unlink( $deCSV ) === false ) {
 			throw new Exception( 'Unable to remove export file' );
 		}
