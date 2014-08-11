@@ -159,7 +159,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 			try {
 				$currencyItemManager->saveItem($currencyItem);
 				$num++;
-			} catch( Exception $e ) { ; }
+			} catch( Exception $e ) { ; } // if currency was already available
 		}
 
 		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
@@ -191,7 +191,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 			try {
 				$languageItemManager->saveItem( $languageItem );
 				$num++;
-			} catch( Exception $e ) { ; }
+			} catch( Exception $e ) { ; } // if language was already available
 		}
 
 		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
@@ -225,7 +225,7 @@ class MW_Setup_Task_MShopAddLocaleData extends MW_Setup_Task_Abstract
 
 			try {
 				$localeItemManager->saveItem( $localeItem );
-			} catch( Exception $e ) { ; }
+			} catch( Exception $e ) { ; } // if locale combination was already available
 		}
 
 		$this->_status( 'done' );

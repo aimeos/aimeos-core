@@ -114,7 +114,7 @@ class MW_Setup_Task_MShopAddPluginData extends MW_Setup_Task_Abstract
 			try {
 				$pluginManager->saveItem( $item );
 				$num++;
-			} catch( Exception $e ) { ; }
+			} catch( Exception $e ) { ; } // if plugin configuration was already available
 		}
 
 		$this->_status( $num > 0 ? $num . '/' . $total : 'OK' );
