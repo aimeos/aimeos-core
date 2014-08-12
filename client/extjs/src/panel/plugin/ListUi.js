@@ -4,9 +4,9 @@
  */
 
 
-Ext.ns( 'MShop.panel.plugin' );
+Ext.ns('MShop.panel.plugin');
 
-MShop.panel.plugin.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
+MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     recordName : 'Plugin',
     idProperty : 'plugin.id',
@@ -21,30 +21,30 @@ MShop.panel.plugin.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
     },
 
     filterConfig : {
-        filters : [ {
+        filters : [{
             dataIndex : 'plugin.label',
             operator : '=~',
             value : ''
-        } ]
+        }]
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt( 'client/extjs', 'Plugin' );
+        this.title = MShop.I18n.dt('client/extjs', 'Plugin');
 
-        MShop.panel.AbstractListUi.prototype.initActions.call( this );
-        MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
+        MShop.panel.AbstractListUi.prototype.initActions.call(this);
+        MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
-        MShop.panel.plugin.ListUi.superclass.initComponent.call( this );
+        MShop.panel.plugin.ListUi.superclass.initComponent.call(this);
     },
 
     getColumns : function() {
         // make sure plugin type store gets loaded in same batch as this grid data
-        this.typeStore = MShop.GlobalStoreMgr.get( 'Plugin_Type' );
+        this.typeStore = MShop.GlobalStoreMgr.get('Plugin_Type');
 
-        return [ {
+        return [{
             xtype : 'gridcolumn',
             dataIndex : 'plugin.id',
-            header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+            header : MShop.I18n.dt('client/extjs', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -52,28 +52,28 @@ MShop.panel.plugin.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.status',
-            header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+            header : MShop.I18n.dt('client/extjs', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
-            renderer : this.statusColumnRenderer.createDelegate( this )
+            renderer : this.statusColumnRenderer.createDelegate(this)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.typeid',
-            header : MShop.I18n.dt( 'client/extjs', 'Type' ),
+            header : MShop.I18n.dt('client/extjs', 'Type'),
             width : 100,
-            renderer : this.typeColumnRenderer.createDelegate( this, [ this.typeStore, "plugin.type.label" ], true )
+            renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "plugin.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.provider',
-            header : MShop.I18n.dt( 'client/extjs', 'Provider' ),
+            header : MShop.I18n.dt('client/extjs', 'Provider'),
             id : 'plugin-list-provider',
             sortable : true,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.label',
-            header : MShop.I18n.dt( 'client/extjs', 'Label' ),
+            header : MShop.I18n.dt('client/extjs', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -81,30 +81,30 @@ MShop.panel.plugin.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.position',
-            header : MShop.I18n.dt( 'client/extjs', 'Position' ),
+            header : MShop.I18n.dt('client/extjs', 'Position'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.config',
-            header : MShop.I18n.dt( 'client/extjs', 'Configuration' ),
+            header : MShop.I18n.dt('client/extjs', 'Configuration'),
             width : 200,
             editable : false,
-            renderer : function( value ) {
+            renderer : function(value) {
                 var s = "";
-                Ext.iterate( value, function( key, value, object ) {
-                    if( typeof value === "object" ) {
-                        value = Ext.util.JSON.encode( value );
+                Ext.iterate(value, function(key, value, object) {
+                    if(typeof value === "object") {
+                        value = Ext.util.JSON.encode(value);
                     }
-                    s = s + String.format( '<div>{0}: {1}</div>', key, value );
-                }, this );
+                    s = s + String.format('<div>{0}: {1}</div>', key, value);
+                }, this);
                 return s;
             }
         }, {
             xtype : 'datecolumn',
             dataIndex : 'plugin.ctime',
-            header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+            header : MShop.I18n.dt('client/extjs', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -112,7 +112,7 @@ MShop.panel.plugin.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'plugin.mtime',
-            header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+            header : MShop.I18n.dt('client/extjs', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -120,16 +120,16 @@ MShop.panel.plugin.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.editor',
-            header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+            header : MShop.I18n.dt('client/extjs', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
-        } ];
+        }];
     }
 
-} );
+});
 
-Ext.reg( 'MShop.panel.plugin.listui', MShop.panel.plugin.ListUi );
+Ext.reg('MShop.panel.plugin.listui', MShop.panel.plugin.ListUi);
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem( 'MShop.MainTabPanel', 'MShop.panel.plugin.listui', MShop.panel.plugin.ListUi, 60 );
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.plugin.listui', MShop.panel.plugin.ListUi, 60);

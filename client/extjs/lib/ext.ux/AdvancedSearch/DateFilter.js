@@ -7,7 +7,7 @@ Ext.ns('Ext.ux.AdvancedSearch');
 
 Ext.ux.AdvancedSearch.DateFilter = Ext.extend(Ext.ux.AdvancedSearch.Filter, {
 
-    operators : [ '>', '>=', '==', '!=', '<', '<=' ],
+    operators : ['>', '>=', '==', '!=', '<', '<='],
     defaultOperator : '==',
     defaultValue : '',
 
@@ -25,7 +25,7 @@ Ext.ux.AdvancedSearch.DateFilter = Ext.extend(Ext.ux.AdvancedSearch.Filter, {
 
         v = Ext.ux.AdvancedSearch.DateFilter.superclass.getValue.call(this);
 
-        if (v) {
+        if(v) {
             return new Date(v).format('Y-m-d H:i:s');
         }
 

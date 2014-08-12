@@ -41,54 +41,55 @@ Ext.ux.AdvancedSearch.Filter = Ext.extend(Ext.Container, {
         this.initOperatorField();
         this.initValueField();
 
-        this.items = [ Ext.applyIf(this.operatorField, {
+        this.items = [Ext.applyIf(this.operatorField, {
             flex : 1
         }), Ext.applyIf(this.valueField, {
             flex : 2
-        }) ];
+        })];
 
         Ext.ux.AdvancedSearch.Filter.superclass.initComponent.call(this);
     },
 
     initOperatorField : function() {
         this.operatorStore = new Ext.data.ArrayStore({
-            fields : [ 'operator', 'displayText' ]
+            fields : ['operator', 'displayText']
         });
 
         Ext.each(this.operators, function(operator) {
-            this.operatorStore.loadData([ [ operator, _(operator) ] ], true);
+            this.operatorStore.loadData([[operator, _(operator)]], true);
         }, this);
 
-        this.operatorField = Ext.ComponentMgr.create(Ext
-                        .apply({
-                            xtype : 'combo',
-                            typeAhead : true,
-                            triggerAction : 'all',
-                            lazyRender : true,
-                            forceSelection : true,
-                            mode : 'local',
-                            store : this.operatorStore,
-                            valueField : 'operator',
-                            displayField : 'displayText',
-                            isValid : function(preventMark) {
-                                var isValid = Ext.form.ComboBox.prototype.isValid.apply(this, arguments), val = this
-                                                .getRawValue(), rec = this.findRecord(this.valueField, val);
+        this.operatorField = Ext.ComponentMgr.create(Ext.apply({
+            xtype : 'combo',
+            typeAhead : true,
+            triggerAction : 'all',
+            lazyRender : true,
+            forceSelection : true,
+            mode : 'local',
+            store : this.operatorStore,
+            valueField : 'operator',
+            displayField : 'displayText',
+            isValid : function(preventMark) {
 
-                                if (!isValid || !rec) {
-                                    if (!preventMark) {
-                                        this.markInvalid(this.blankText);
-                                    }
-                                    return false;
-                                }
+                var val = this.getRawValue();
+                var rec = this.findRecord(this.valueField, val);
+                var isValid = Ext.form.ComboBox.prototype.isValid.apply(this, arguments);
 
-                                return true;
-                            },
-                            value : this.operator ? this.operator : this.defaultOperator,
-                            listeners : {
-                                scope : this,
-                                select : this.onOperatorSelect
-                            }
-                        }, this.operatorFieldConfig));
+                if(!isValid || !rec) {
+                    if(!preventMark) {
+                        this.markInvalid(this.blankText);
+                    }
+                    return false;
+                }
+
+                return true;
+            },
+            value : this.operator ? this.operator : this.defaultOperator,
+            listeners : {
+                scope : this,
+                select : this.onOperatorSelect
+            }
+        }, this.operatorFieldConfig));
     },
 
     initValueField : function() {
@@ -98,7 +99,7 @@ Ext.ux.AdvancedSearch.Filter = Ext.extend(Ext.Container, {
             listeners : {
                 scope : this,
                 specialkey : function(field, e) {
-                    if (e.getKey() == e.ENTER) {
+                    if(e.getKey() == e.ENTER) {
                         this.fireEvent('filtertrigger', this);
                     }
                 }
@@ -106,8 +107,8 @@ Ext.ux.AdvancedSearch.Filter = Ext.extend(Ext.Container, {
             isValid : function(preventMark) {
                 var isValid = Ext.form.TextField.prototype.isValid.apply(this, arguments), val = this.getRawValue();
 
-                if (!isValid || !Ext.isString(val)) {
-                    if (!preventMark) {
+                if(!isValid || !Ext.isString(val)) {
+                    if(!preventMark) {
                         this.markInvalid();
                     }
                     return false;

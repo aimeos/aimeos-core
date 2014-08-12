@@ -105,12 +105,12 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
             method : 'post',
             cls : 'x-hidden',
             id : Ext.id(),
-            cn : [ {
+            cn : [{
                 tag : 'input',
                 type : 'hidden',
                 name : 'MAX_FILE_SIZE',
                 value : this.maxFileSize
-            } ]
+            }]
         });
         return form;
     },
@@ -123,7 +123,7 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
      * @return {Ext.Record} Ext.ux.file.Uploader.file
      */
     upload : function(file) {
-        if (this.allowHTML5Uploads && ((!Ext.isGecko && window.XMLHttpRequest && window.File && window.FileList) || // safari, chrome, ...?
+        if(this.allowHTML5Uploads && ((!Ext.isGecko && window.XMLHttpRequest && window.File && window.FileList) || // safari, chrome, ...?
         (Ext.isGecko && window.FileReader)) && file) {
             return this.html5upload(file);
         } else {
@@ -168,14 +168,14 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
                 "X-File-Size" : fileRecord.get('size')
             },
             xmlData : file,
-            success : this.onUploadSuccess.createDelegate(this, [ fileRecord ], true),
-            failure : this.onUploadFail.createDelegate(this, [ fileRecord ], true),
+            success : this.onUploadSuccess.createDelegate(this, [fileRecord], true),
+            failure : this.onUploadFail.createDelegate(this, [fileRecord], true),
             fileRecord : fileRecord
         });
 
         var upload = transaction.conn.upload;
 
-        upload['onprogress'] = this.onUploadProgress.createDelegate(this, [ fileRecord ], true);
+        upload['onprogress'] = this.onUploadProgress.createDelegate(this, [fileRecord], true);
 
         return fileRecord;
     },
@@ -210,8 +210,8 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
             method : 'post',
             form : form,
             timeout : this.timeout,
-            success : this.onUploadSuccess.createDelegate(this, [ fileRecord ], true),
-            failure : this.onUploadFail.createDelegate(this, [ fileRecord ], true),
+            success : this.onUploadSuccess.createDelegate(this, [fileRecord], true),
+            failure : this.onUploadFail.createDelegate(this, [fileRecord], true),
             params : params
         });
 
@@ -235,17 +235,17 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
     onUploadSuccess : function(response, options, fileRecord) {
         try {
             response = Ext.util.JSON.decode(response.responseText);
-        } catch (e) {
+        } catch(e) {
             return this.onUploadFail(response, options, fileRecord);
         }
 
-        if (response.status && response.status !== 'success') {
+        if(response.status && response.status !== 'success') {
             this.onUploadFail(response, options, fileRecord);
         } else {
             fileRecord.beginEdit();
             fileRecord.set('status', 'complete');
             fileRecord.set('tempFile', response.tempFile);
-            if (response.tempFile) {
+            if(response.tempFile) {
                 fileRecord.set('name', response.tempFile.name);
                 fileRecord.set('size', response.tempFile.size);
                 fileRecord.set('type', response.tempFile.type);
@@ -266,7 +266,7 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
     onUploadFail : function(response, options, fileRecord) {
         fileRecord.set('status', 'failure');
 
-        if (response.error) {
+        if(response.error) {
             fileRecord.set('error', response.error);
         }
 
@@ -275,7 +275,7 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
 
     // private
     getInput : function() {
-        if (!this.input) {
+        if(!this.input) {
             this.input = this.fileSelector.detachInputFile();
         }
 
@@ -283,7 +283,7 @@ Ext.extend(Ext.ux.file.Uploader, Ext.util.Observable, {
     }
 });
 
-Ext.ux.file.Uploader.file = Ext.data.Record.create([ {
+Ext.ux.file.Uploader.file = Ext.data.Record.create([{
     name : 'id',
     type : 'text',
     system : true
@@ -322,4 +322,4 @@ Ext.ux.file.Uploader.file = Ext.data.Record.create([ {
 }, {
     name : 'tempFile',
     system : true
-} ]);
+}]);

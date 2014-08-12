@@ -56,7 +56,7 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
             }
         });
 
-        this.items = [ this.filterGroup, {
+        this.items = [this.filterGroup, {
             border : false,
             layout : 'vbox',
             flex : 0,
@@ -72,9 +72,9 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
                     align : 'stretchmax',
                     pack : 'start'
                 },
-                items : [ this.searchBtn, this.resetBtn ]
+                items : [this.searchBtn, this.resetBtn]
             }
-        } ];
+        }];
 
         Ext.ux.AdvancedSearchPanel.superclass.initComponent.call(this);
     },
@@ -89,13 +89,13 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
 
         options.params[this.searchParam]['&&'] = options.params[this.searchParam]['&&'].concat(pn['&&']);
 
-        if (this.rendered && this.refresh) {
+        if(this.rendered && this.refresh) {
             this.searchBtn.disable();
         }
     },
 
     doLayout : function() {
-        if (this.filterGroup && this.filterGroup.rendered) {
+        if(this.filterGroup && this.filterGroup.rendered) {
             this.setHeight(this.filterGroup.getHeight());
         }
 
@@ -104,7 +104,7 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
 
     // private
     doLoad : function() {
-        if (this.fireEvent('beforechange', this) !== false) {
+        if(this.fireEvent('beforechange', this) !== false) {
             this.store.load();
         }
     },
@@ -118,7 +118,7 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
         var pnGroup = {}, pnFilters = [];
 
         Ext.each(filterData.filters, function(filter) {
-            if (filter.hasOwnProperty('condition')) {
+            if(filter.hasOwnProperty('condition')) {
                 pnFilters.push(this.getPolishNotation(filter));
             } else {
                 var pnCrit = {}, pnVal = {};
@@ -137,8 +137,8 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
 
     // private
     onLoad : function(store, r, o) {
-        if (!this.rendered) {
-            this.dsLoaded = [ store, r, o ];
+        if(!this.rendered) {
+            this.dsLoaded = [store, r, o];
             return;
         }
 
@@ -147,7 +147,7 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
 
     // private
     onLoadError : function() {
-        if (!this.rendered) {
+        if(!this.rendered) {
             return;
         }
         this.searchBtn.enable();
@@ -163,19 +163,19 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
      */
     bindStore : function(store, initial) {
         var doLoad;
-        if (!initial && this.store) {
-            if (store !== this.store && this.store.autoDestroy) {
+        if(!initial && this.store) {
+            if(store !== this.store && this.store.autoDestroy) {
                 this.store.destroy();
             } else {
                 this.store.un('beforeload', this.beforeLoad, this);
                 this.store.un('load', this.onLoad, this);
                 this.store.un('exception', this.onLoadError, this);
             }
-            if (!store) {
+            if(!store) {
                 this.store = null;
             }
         }
-        if (store) {
+        if(store) {
             store = Ext.StoreMgr.lookup(store);
             store.on({
                 scope : this,
@@ -186,7 +186,7 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
             doLoad = true;
         }
         this.store = store;
-        if (doLoad) {
+        if(doLoad) {
             this.onLoad(store, null, {});
         }
     },

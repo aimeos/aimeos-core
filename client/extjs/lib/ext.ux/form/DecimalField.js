@@ -12,7 +12,7 @@ Ext.ux.form.DecimalField = Ext.extend(Ext.form.NumberField, {
 
         v = Ext.isNumber(v) ? v : parseFloat(String(v).replace(this.decimalSeparator, "."));
 
-        if (isNaN(v)) {
+        if(isNaN(v)) {
             v = 0.0;
         }
 

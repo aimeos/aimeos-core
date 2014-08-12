@@ -20,8 +20,7 @@ Ext.ns('Ext.ux');
  *          Ext.extend(Ext.Container, { ... plugins: [{ ptype:
  *          'ux.itemregistry', key: 'myDialog' }] })
  */
-Ext.ux.ItemRegistry = function() {
-};
+Ext.ux.ItemRegistry = function() {};
 
 /**
  * @static
@@ -41,7 +40,7 @@ Ext.ux.ItemRegistry.itemMap = {};
  *            pos (optional)
  */
 Ext.ux.ItemRegistry.registerItem = function(key, itemkey, item, pos) {
-    if (!Ext.ux.ItemRegistry.itemMap.hasOwnProperty(key)) {
+    if(!Ext.ux.ItemRegistry.itemMap.hasOwnProperty(key)) {
         Ext.ux.ItemRegistry.itemMap[key] = {};
     }
 
@@ -61,13 +60,13 @@ Ext.ux.ItemRegistry.prototype = {
     init : function(cmp) {
         this.cmp = cmp;
 
-        if (!this.key) {
+        if(!this.key) {
             this.key = cmp.getItemId();
         }
 
         // give static item pos to existing items
         this.cmp.items.each(function(item, idx) {
-            if (!item.hasOwnProperty('registerdItemPos')) {
+            if(!item.hasOwnProperty('registerdItemPos')) {
                 item.registerdItemPos = idx * 10;
             }
         }, this);
@@ -78,7 +77,7 @@ Ext.ux.ItemRegistry.prototype = {
             var addItem = this.getItem(value), addPos = null;
 
             this.cmp.items.each(function(item, idx) {
-                if (addItem.registerdItemPos < item.registerdItemPos) {
+                if(addItem.registerdItemPos < item.registerdItemPos) {
                     this.cmp.insert(idx, addItem);
                     addPos = idx;
                     return false;
@@ -86,7 +85,7 @@ Ext.ux.ItemRegistry.prototype = {
                 return true;
             }, this);
 
-            if (!Ext.isNumber(addPos)) {
+            if(!Ext.isNumber(addPos)) {
                 this.cmp.add(addItem);
             }
         }, this);
@@ -95,10 +94,10 @@ Ext.ux.ItemRegistry.prototype = {
     getItem : function(reg) {
         var def = reg.item, item;
 
-        if (typeof def === 'function') {
+        if(typeof def === 'function') {
             item = new def;
         } else {
-            if (Ext.isString(def)) {
+            if(Ext.isString(def)) {
                 def = {
                     xtype : def
                 };

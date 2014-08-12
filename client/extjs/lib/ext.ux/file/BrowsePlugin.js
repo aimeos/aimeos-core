@@ -81,34 +81,34 @@ Ext.ux.file.BrowsePlugin.prototype = {
         cmp.on('render', this.onRender, this);
 
         // chain fns
-        if (typeof cmp.setDisabled == 'function') {
+        if(typeof cmp.setDisabled == 'function') {
             cmp.setDisabled = cmp.setDisabled.createSequence(function(disabled) {
-                if (this.input_file) {
+                if(this.input_file) {
                     this.input_file.dom.disabled = disabled;
                 }
             }, this);
         }
 
-        if (typeof cmp.enable == 'function') {
+        if(typeof cmp.enable == 'function') {
             cmp.enable = cmp.enable.createSequence(function() {
-                if (this.input_file) {
+                if(this.input_file) {
                     this.input_file.dom.disabled = false;
                 }
             }, this);
         }
 
-        if (typeof cmp.disable == 'function') {
+        if(typeof cmp.disable == 'function') {
             cmp.disable = cmp.disable.createSequence(function() {
-                if (this.input_file) {
+                if(this.input_file) {
                     this.input_file.dom.disabled = true;
                 }
             }, this);
         }
 
-        if (typeof cmp.destroy == 'function') {
+        if(typeof cmp.destroy == 'function') {
             cmp.destroy = cmp.destroy.createSequence(function() {
                 var input_file = this.detachInputFile(true);
-                if (input_file) {
+                if(input_file) {
                     input_file.remove();
                 }
                 input_file = null;
@@ -127,9 +127,9 @@ Ext.ux.file.BrowsePlugin.prototype = {
         });
 
         // NOTE: wrap a button in a toolbar is complex, the toolbar doLayout moves the wrap at the end
-        if (this.component.ownerCt && this.component.ownerCt.el.hasClass('x-toolbar')) {
+        if(this.component.ownerCt && this.component.ownerCt.el.hasClass('x-toolbar')) {
             this.component.ownerCt.on('afterlayout', function() {
-                if (this.wrap.first() !== this.component.el) {
+                if(this.wrap.first() !== this.component.el) {
                     this.wrap.insertBefore(this.component.el);
                     this.wrap.insertFirst(this.component.el);
                 }
@@ -142,9 +142,9 @@ Ext.ux.file.BrowsePlugin.prototype = {
 
         this.createInputFile();
 
-        if (this.enableFileDrop) {
-            if (!this.dropEl) {
-                if (this.dropElSelector) {
+        if(this.enableFileDrop) {
+            if(!this.dropEl) {
+                if(this.dropElSelector) {
                     this.dropEl = this.wrap.up(this.dropElSelector);
                 } else {
                     this.dropEl = this.button_container;
@@ -157,7 +157,7 @@ Ext.ux.file.BrowsePlugin.prototype = {
                 e.preventDefault();
 
                 // prevents drop in FF ;-(
-                if (!Ext.isGecko) {
+                if(!Ext.isGecko) {
                     e.browserEvent.dataTransfer.dropEffect = 'copy';
                 }
             }, this);
@@ -174,7 +174,7 @@ Ext.ux.file.BrowsePlugin.prototype = {
     },
 
     syncWrap : function() {
-        if (this.button_container) {
+        if(this.button_container) {
             var button_size = this.button_container.getSize();
             this.wrap.setSize(button_size);
         }
@@ -199,18 +199,18 @@ Ext.ux.file.BrowsePlugin.prototype = {
 
         this.wrap.on('mousemove', function(e) {
             var xy = e.getXY();
-            this.input_file.setXY([ xy[0] - this.input_file.getWidth() / 4, xy[1] - 10 ]);
+            this.input_file.setXY([xy[0] - this.input_file.getWidth() / 4, xy[1] - 10]);
         }, this);
         this.input_file.setOpacity(0.0);
 
-        if (this.component.handleMouseEvents) {
+        if(this.component.handleMouseEvents) {
             this.wrap.on('mouseover', this.component.onMouseOver || Ext.emptyFn, this.component);
             this.wrap.on('mousedown', this.component.onMouseDown || Ext.emptyFn, this.component);
             this.wrap.on('contextmenu', this.component.onContextMenu || Ext.emptyFn, this.component);
         }
 
-        if (this.component.tooltip) {
-            if (typeof this.component.tooltip == 'object') {
+        if(this.component.tooltip) {
+            if(typeof this.component.tooltip == 'object') {
                 Ext.QuickTips.register(Ext.apply({
                     target : this.input_file
                 }, this.component.tooltip));
@@ -233,16 +233,16 @@ Ext.ux.file.BrowsePlugin.prototype = {
      * @private
      */
     onInputFileChange : function(e, target, options, files) {
-        if (window.FileList) { // HTML5 FileList support
+        if(window.FileList) { // HTML5 FileList support
             this.files = files ? files : this.input_file.dom.files;
         } else {
-            this.files = [ {
+            this.files = [{
                 name : this.input_file.getValue().split(/[\/\\]/).pop()
-            } ];
+            }];
             this.files[0].type = this.getFileCls();
         }
 
-        if (this.originalHandler) {
+        if(this.originalHandler) {
             this.originalHandler.call(this.originalScope, this);
         }
     },
@@ -263,8 +263,8 @@ Ext.ux.file.BrowsePlugin.prototype = {
 
         no_create = no_create || false;
 
-        if (this.input_file) {
-            if (typeof this.component.tooltip == 'object') {
+        if(this.input_file) {
+            if(typeof this.component.tooltip == 'object') {
                 Ext.QuickTips.unregister(this.input_file);
             } else {
                 this.input_file.dom[this.component.tooltipType] = null;
@@ -273,7 +273,7 @@ Ext.ux.file.BrowsePlugin.prototype = {
         }
         this.input_file = null;
 
-        if (!no_create) {
+        if(!no_create) {
             this.createInputFile();
         }
         return result;
@@ -306,7 +306,7 @@ Ext.ux.file.BrowsePlugin.prototype = {
      */
     getFileCls : function() {
         var fparts = this.getFileName().split('.');
-        if (fparts.length === 1) {
+        if(fparts.length === 1) {
             return '';
         } else {
             return fparts.pop().toLowerCase();

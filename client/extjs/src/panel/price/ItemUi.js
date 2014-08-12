@@ -4,41 +4,41 @@
  */
 
 
-Ext.ns( 'MShop.panel.price' );
+Ext.ns('MShop.panel.price');
 
-MShop.panel.price.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
+MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     siteidProperty : 'price.siteid',
 
     initComponent : function() {
 
-        MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
+        MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
 
-        this.items = [ {
+        this.items = [{
             xtype : 'tabpanel',
             activeTab : 0,
             border : false,
             itemId : 'MShop.panel.price.ItemUi',
-            plugins : [ 'ux.itemregistry' ],
-            items : [ {
+            plugins : ['ux.itemregistry'],
+            items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
+                title : MShop.I18n.dt('client/extjs', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
                     align : 'stretch'
                 },
                 itemId : 'MShop.panel.price.ItemUi.BasicPanel',
-                plugins : [ 'ux.itemregistry' ],
+                plugins : ['ux.itemregistry'],
                 defaults : {
                     bodyCssClass : this.readOnlyClass
                 },
-                items : [ {
+                items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt( 'client/extjs', 'Details' ),
+                    title : MShop.I18n.dt('client/extjs', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
-                    items : [ {
+                    items : [{
                         xtype : 'fieldset',
                         style : 'padding-right: 25px;',
                         border : false,
@@ -47,16 +47,16 @@ MShop.panel.price.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
                             readOnly : this.fieldsReadOnly,
                             anchor : '100%'
                         },
-                        items : [ {
+                        items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
                             name : 'price.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'price.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Type' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
                             name : 'price.typeid',
                             mode : 'local',
                             store : this.listUI.ItemTypeStore,
@@ -69,84 +69,84 @@ MShop.panel.price.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
                             listeners : {
                                 'render' : {
                                     fn : function() {
-                                        var record, index = this.store.find( 'price.type.code', 'default' );
-                                        if( ( record = this.store.getAt( index ) ) ) {
-                                            this.setValue( record.id );
+                                        var record, index = this.store.find('price.type.code', 'default');
+                                        if((record = this.store.getAt(index))) {
+                                            this.setValue(record.id);
                                         }
                                     }
                                 }
                             }
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Label' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
                             name : 'price.label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt( 'client/extjs', 'Internal name (required)' )
+                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
                         }, {
                             xtype : 'MShop.elements.currency.combo',
                             name : 'price.currencyid',
-                            emptyText : MShop.I18n.dt( 'client/extjs', 'Currency (required)' )
+                            emptyText : MShop.I18n.dt('client/extjs', 'Currency (required)')
                         }, {
                             xtype : 'numberfield',
                             name : 'price.quantity',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Minimum quantity' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Minimum quantity'),
                             allowNegative : false,
                             allowDecimals : false,
                             allowBlank : false,
                             value : 1
                         }, {
                             xtype : 'ux.decimalfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Actual current price' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Actual current price'),
                             name : 'price.value',
                             allowBlank : false,
                             value : '0.00'
                         }, {
                             xtype : 'ux.decimalfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Substracted rebate amount' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Substracted rebate amount'),
                             name : 'price.rebate',
                             allowBlank : false,
                             value : '0.00'
                         }, {
                             xtype : 'ux.decimalfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Costs per item' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Costs per item'),
                             name : 'price.costs',
                             allowBlank : false,
                             value : '0.00'
                         }, {
                             xtype : 'ux.decimalfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Tax rate in %' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Tax rate in %'),
                             name : 'price.taxrate',
                             allowBlank : false,
                             value : '0.00'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
                             name : 'price.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
                             name : 'price.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
                             name : 'price.editor'
-                        } ]
-                    } ]
-                } ]
-            } ]
-        } ];
+                        }]
+                    }]
+                }]
+            }]
+        }];
 
-        MShop.panel.price.ItemUi.superclass.initComponent.call( this );
+        MShop.panel.price.ItemUi.superclass.initComponent.call(this);
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['price.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+        var label = this.record ? this.record.data['price.label'] : MShop.I18n.dt('client/extjs', 'new');
         //#: Price item panel title with price label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt( 'client/extjs', 'Price: {0} ({1})' );
-        this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
+        var string = MShop.I18n.dt('client/extjs', 'Price: {0} ({1})');
+        this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
-        MShop.panel.price.ItemUi.superclass.afterRender.apply( this, arguments );
+        MShop.panel.price.ItemUi.superclass.afterRender.apply(this, arguments);
     }
-} );
+});
 
-Ext.reg( 'MShop.panel.price.itemui', MShop.panel.price.ItemUi );
+Ext.reg('MShop.panel.price.itemui', MShop.panel.price.ItemUi);

@@ -3,10 +3,10 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-Ext.ns( 'MShop.panel.service' );
+Ext.ns('MShop.panel.service');
 
 //hook text picker into the product ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.service.ItemUi', 'MShop.panel.service.TextItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.service.TextItemPickerUi', {
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Service_List',
@@ -17,11 +17,11 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.service.ItemUi', 'MShop.panel.ser
         listTypeLabelProperty : 'service.list.type.label',
         listTypeControllerName : 'Service_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'service.list.type.domain' : 'text'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'service/list/type/text'
     },
@@ -29,4 +29,4 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.service.ItemUi', 'MShop.panel.ser
         domain : 'service',
         prefix : 'text.'
     }
-}, 10 );
+}, 10);

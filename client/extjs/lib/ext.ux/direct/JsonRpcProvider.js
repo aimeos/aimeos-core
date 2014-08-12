@@ -33,7 +33,7 @@ Ext.ux.direct.JsonRpcProvider = Ext.extend(Ext.direct.RemotingProvider, {
 
     // private
     initAPI : function() {
-        for ( var method in this.services) {
+        for( var method in this.services) {
             var mparts = method.split('.');
             var cls = this.namespace[mparts[0]] || (this.namespace[mparts[0]] = {});
             cls[mparts[1]] = this.createMethod(mparts[0], Ext.apply(this.services[method], {
@@ -46,9 +46,9 @@ Ext.ux.direct.JsonRpcProvider = Ext.extend(Ext.direct.RemotingProvider, {
     // private
     doCall : function(c, m, args) {
         // support named/hashed parameters e.g. from DirectProxy
-        if (args[args.length - 1].paramsAsHash) {
+        if(args[args.length - 1].paramsAsHash) {
             var o = args.shift();
-            for ( var i = 0; i < m.parameters.length; i++) {
+            for( var i = 0; i < m.parameters.length; i++) {
                 args.splice(i, 0, o[m.parameters[i].name]);
             }
         }
@@ -62,7 +62,7 @@ Ext.ux.direct.JsonRpcProvider = Ext.extend(Ext.direct.RemotingProvider, {
         var m = t.provider.services[method];
         var data = t.data || [];
 
-        if (this.useNamedParams) {
+        if(this.useNamedParams) {
             data = {};
             Ext.each(m.parameters, function(param, i) {
                 data[param['name']] = t.data[i];
@@ -97,7 +97,7 @@ Ext.ux.direct.JsonRpcProvider = Ext.extend(Ext.direct.RemotingProvider, {
 
         xhr.responseText = [];
         Ext.each(rs, function(rpcresponse, i) {
-            if (rpcresponse == undefined) {
+            if(rpcresponse == undefined) {
                 rpcresponse = [];
                 rpcresponse.result = false;
                 rpcresponse.id = -1;
@@ -111,7 +111,7 @@ Ext.ux.direct.JsonRpcProvider = Ext.extend(Ext.direct.RemotingProvider, {
                 error : rpcresponse.error
             };
 
-            if (xhr.responseText[i].type === 'rpc') {
+            if(xhr.responseText[i].type === 'rpc') {
                 delete xhr.responseText.error;
             }
         });

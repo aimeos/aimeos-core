@@ -4,9 +4,9 @@
  */
 
 
-Ext.ns( 'MShop.panel.order' );
+Ext.ns('MShop.panel.order');
 
-MShop.panel.order.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
+MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
     maximized : true,
     layout : 'fit',
@@ -17,36 +17,36 @@ MShop.panel.order.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt( 'client/extjs', 'Order item details' );
+        this.title = MShop.I18n.dt('client/extjs', 'Order item details');
 
-        MShop.panel.AbstractItemUi.prototype.setSiteCheck( this );
+        MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
 
-        this.items = [ {
+        this.items = [{
             xtype : 'tabpanel',
             activeTab : 0,
             border : false,
             itemId : 'MShop.panel.order.ItemUi',
-            plugins : [ 'ux.itemregistry' ],
-            items : [ {
+            plugins : ['ux.itemregistry'],
+            items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt( 'client/extjs', 'Basic' ),
+                title : MShop.I18n.dt('client/extjs', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
                     align : 'stretch'
                 },
                 itemId : 'MShop.panel.order.ItemUi.BasicPanel',
-                plugins : [ 'ux.itemregistry' ],
+                plugins : ['ux.itemregistry'],
                 defaults : {
                     bodyCssClass : this.readOnlyClass
                 },
-                items : [ {
+                items : [{
                     xtype : 'form',
                     title : 'Invoice',
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
-                    items : [ {
+                    items : [{
                         xtype : 'fieldset',
                         style : 'padding-right: 25px;',
                         border : false,
@@ -55,23 +55,23 @@ MShop.panel.order.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
                             readOnly : this.fieldsReadOnly,
                             anchor : '100%'
                         },
-                        items : [ {
+                        items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'ID' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
                             name : 'order.id'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Source' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Source'),
                             name : 'order.type'
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Payment date' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Payment date'),
                             name : 'order.datepayment',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
+                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Payment status' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Payment status'),
                             name : 'order.statuspayment',
                             mode : 'local',
                             store : MShop.elements.paymentstatus._store,
@@ -82,13 +82,13 @@ MShop.panel.order.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
                             typeAhead : true
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Delivery date' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Delivery date'),
                             name : 'order.datedelivery',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
+                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Delivery status' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Delivery status'),
                             name : 'order.statusdelivery',
                             mode : 'local',
                             store : MShop.elements.deliverystatus._store,
@@ -99,24 +99,24 @@ MShop.panel.order.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
                             typeAhead : true
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Created' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
                             name : 'order.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
                             name : 'order.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
                             name : 'order.editor'
-                        } ]
-                    } ]
-                } ]
-            } ]
-        } ];
+                        }]
+                    }]
+                }]
+            }]
+        }];
 
-        MShop.panel.order.ItemUi.superclass.initComponent.call( this );
+        MShop.panel.order.ItemUi.superclass.initComponent.call(this);
     }
-} );
+});
 
-Ext.reg( 'MShop.panel.order.itemui', MShop.panel.order.ItemUi );
+Ext.reg('MShop.panel.order.itemui', MShop.panel.order.ItemUi);

@@ -42,7 +42,7 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
     getFilterData : function() {
         var filters = [];
         this.items.each(function(item) {
-            if (item.criteria) {
+            if(item.criteria) {
                 filters.push(item.criteria.filter.getFilterData());
             }
         }, this);
@@ -64,11 +64,11 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
         });
         criteria.addBtn = new Ext.Button({
             iconCls : 'ux-advancedsearch-action-addcriteria',
-            handler : this.onAddBtnClick.createDelegate(this, [ criteria ])
+            handler : this.onAddBtnClick.createDelegate(this, [criteria])
         });
         criteria.delBtn = new Ext.Button({
             iconCls : 'ux-advancedsearch-action-delcriteria',
-            handler : this.onDelBtnClick.createDelegate(this, [ criteria ])
+            handler : this.onDelBtnClick.createDelegate(this, [criteria])
         });
 
         criteria.cmp = Ext.ComponentMgr.create({
@@ -77,7 +77,7 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
             layoutConfig : {
                 align : 'stretchmax'
             },
-            items : [ criteria.addBtn, criteria.delBtn, criteria.filter ],
+            items : [criteria.addBtn, criteria.delBtn, criteria.filter],
             criteria : criteria
         });
 
@@ -85,11 +85,11 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
 
         // relayout
         this.doLayout();
-        if (this.ownerCt) {
+        if(this.ownerCt) {
             this.ownerCt.doLayout();
         }
 
-        this.relayEvents(criteria.filter, [ 'filtertrigger' ]);
+        this.relayEvents(criteria.filter, ['filtertrigger']);
     },
 
     afterRender : function() {
@@ -114,27 +114,27 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
         // init fieldStore
         var data = [];
         Ext.each(this.filterModel, function(filter) {
-            data.push([ filter.dataIndex, filter.label, filter ]);
+            data.push([filter.dataIndex, filter.label, filter]);
         }, this);
         this.filterModel = new Ext.data.ArrayStore({
             idIndex : 0,
-            fields : [ 'dataIndex', 'label', 'definition' ],
+            fields : ['dataIndex', 'label', 'definition'],
             data : data
         });
 
         // init default filter
-        if (!this.defaultFilter) {
+        if(!this.defaultFilter) {
             this.defaultFilter = this.filterModel.getAt(0).get('dataIndex');
         }
-        if (Ext.isString(this.defaultFilter)) {
+        if(Ext.isString(this.defaultFilter)) {
             this.defaultFilter = {
                 dataIndex : this.defaultFilter
             };
         }
 
         // init filters
-        if (!Ext.isArray(this.filters) || Ext.isEmpty(this.filters)) {
-            this.filters = [ this.defaultFilter ];
+        if(!Ext.isArray(this.filters) || Ext.isEmpty(this.filters)) {
+            this.filters = [this.defaultFilter];
         }
 
         // add filters to this group
@@ -155,7 +155,7 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
 
     onContextMenu : function(e) {
         e.preventDefault();
-        if (!this.menu) {
+        if(!this.menu) {
             this.menu = new Ext.menu.Menu({
                 items : this.action_reset
             });
@@ -168,7 +168,7 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
         this.remove(criteria.cmp, true);
 
         this.doLayout();
-        if (this.ownerCt) {
+        if(this.ownerCt) {
             this.ownerCt.doLayout();
         }
 
@@ -185,7 +185,7 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
         }, this);
 
         this.doLayout();
-        if (this.ownerCt) {
+        if(this.ownerCt) {
             this.ownerCt.doLayout();
         }
 
@@ -198,7 +198,7 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
             this.remove(item.criteria.cmp, true);
         }, this);
 
-        critera = Ext.isArray(critera) ? critera : [ critera ];
+        critera = Ext.isArray(critera) ? critera : [critera];
         Ext.each(critera, function(criterium) {
             this.addFilter(criterium);
         }, this);
@@ -206,7 +206,7 @@ Ext.ux.AdvancedSearch.FilterGroup = Ext.extend(Ext.Container, {
         this.combineOperator = operator || 'AND';
 
         this.doLayout();
-        if (this.ownerCt) {
+        if(this.ownerCt) {
             this.ownerCt.doLayout();
         }
 

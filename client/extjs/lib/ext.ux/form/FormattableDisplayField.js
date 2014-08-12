@@ -21,7 +21,7 @@ Ext.ux.form.FormattableDisplayField = Ext.extend(Ext.form.DisplayField, {
 
     setValue : function(v) {
 
-        if (this.renderer) {
+        if(this.renderer) {
             v = this.renderer(v);
         }
 

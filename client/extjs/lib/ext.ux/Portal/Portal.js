@@ -27,7 +27,7 @@ Ext.ux.Portal = Ext.extend(Ext.Panel, {
     },
 
     beforeDestroy : function() {
-        if (this.dd) {
+        if(this.dd) {
             this.dd.unreg();
         }
         Ext.ux.Portal.superclass.beforeDestroy.call(this);
@@ -70,15 +70,15 @@ Ext.ux.Portal.DropZone = Ext.extend(Ext.dd.DropTarget, {
         var xy = e.getXY(), portal = this.portal, px = dd.proxy;
 
         // case column widths
-        if (!this.grid) {
+        if(!this.grid) {
             this.grid = this.getGrid();
         }
 
         // handle case scroll where scrollbars appear during drag
         var cw = portal.body.dom.clientWidth;
-        if (!this.lastCW) {
+        if(!this.lastCW) {
             this.lastCW = cw;
-        } else if (this.lastCW != cw) {
+        } else if(this.lastCW != cw) {
             this.lastCW = cw;
             portal.doLayout();
             this.grid = this.getGrid();
@@ -86,26 +86,26 @@ Ext.ux.Portal.DropZone = Ext.extend(Ext.dd.DropTarget, {
 
         // determine column
         var col = 0, xs = this.grid.columnX, cmatch = false;
-        for ( var len = xs.length; col < len; col++) {
-            if (xy[0] < (xs[col].x + xs[col].w)) {
+        for( var len = xs.length; col < len; col++) {
+            if(xy[0] < (xs[col].x + xs[col].w)) {
                 cmatch = true;
                 break;
             }
         }
         // no match, fix last index
-        if (!cmatch) {
+        if(!cmatch) {
             col--;
         }
 
         // find insert position
         var p, match = false, pos = 0, c = portal.items.itemAt(col), items = c.items.items, overSelf = false;
 
-        for ( var length = items.length; pos < length; pos++) {
+        for( var length = items.length; pos < length; pos++) {
             p = items[pos];
             var h = p.el.getHeight();
-            if (h === 0) {
+            if(h === 0) {
                 overSelf = true;
-            } else if ((p.el.getY() + (h / 2)) > xy[1]) {
+            } else if((p.el.getY() + (h / 2)) > xy[1]) {
                 match = true;
                 break;
             }
@@ -114,13 +114,13 @@ Ext.ux.Portal.DropZone = Ext.extend(Ext.dd.DropTarget, {
         pos = (match && p ? pos : c.items.getCount()) + (overSelf ? -1 : 0);
         var overEvent = this.createEvent(dd, e, data, col, c, pos);
 
-        if (portal.fireEvent('validatedrop', overEvent) !== false
-            && portal.fireEvent('beforedragover', overEvent) !== false) {
+        if(portal.fireEvent('validatedrop', overEvent) !== false &&
+            portal.fireEvent('beforedragover', overEvent) !== false) {
 
             // make sure proxy width is fluid
             px.getProxy().setWidth('auto');
 
-            if (p) {
+            if(p) {
                 px.moveProxy(p.el.dom.parentNode, match ? p.el.dom : null);
             } else {
                 px.moveProxy(c.el.dom, null);
@@ -148,19 +148,22 @@ Ext.ux.Portal.DropZone = Ext.extend(Ext.dd.DropTarget, {
 
     notifyDrop : function(dd, e, data) {
         delete this.grid;
-        if (!this.lastPos) {
+        if(!this.lastPos) {
             return;
         }
-        var c = this.lastPos.c, col = this.lastPos.col, pos = this.lastPos.p, panel = dd.panel, dropEvent = this
-                        .createEvent(dd, e, data, col, c, pos !== false ? pos : c.items.getCount());
+        var c = this.lastPos.c;
+        var col = this.lastPos.col;
+        var pos = this.lastPos.p;
+        var panel = dd.panel;
+        var dropEvent = this.createEvent(dd, e, data, col, c, pos !== false ? pos : c.items.getCount());
 
-        if (this.portal.fireEvent('validatedrop', dropEvent) !== false
-            && this.portal.fireEvent('beforedrop', dropEvent) !== false) {
+        if(this.portal.fireEvent('validatedrop', dropEvent) !== false &&
+            this.portal.fireEvent('beforedrop', dropEvent) !== false) {
 
             dd.proxy.getProxy().remove();
             panel.el.dom.parentNode.removeChild(dd.panel.el.dom);
 
-            if (pos !== false) {
+            if(pos !== false) {
                 c.insert(pos, panel);
             } else {
                 c.add(panel);
@@ -172,7 +175,7 @@ Ext.ux.Portal.DropZone = Ext.extend(Ext.dd.DropTarget, {
 
             // scroll position is lost on drop, fix it
             var st = this.scrollPos.top;
-            if (st) {
+            if(st) {
                 var d = this.portal.body.dom;
                 setTimeout(function() {
                     d.scrollTop = st;

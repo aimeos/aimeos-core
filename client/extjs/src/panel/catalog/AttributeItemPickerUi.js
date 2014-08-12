@@ -4,10 +4,10 @@
  */
 
 
-Ext.ns( 'MShop.panel.catalog' );
+Ext.ns('MShop.panel.catalog');
 
 // hook attribute picker into the catalog ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.AttributeItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.AttributeItemPickerUi', {
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Catalog_List',
@@ -18,11 +18,11 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.catalog.ItemUi', 'MShop.panel.cat
         listTypeLabelProperty : 'catalog.list.type.label',
         listTypeControllerName : 'Catalog_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'catalog.list.type.domain' : 'attribute'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'catalog/list/type/attribute'
     },
@@ -30,4 +30,4 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.catalog.ItemUi', 'MShop.panel.cat
         domain : 'catalog',
         prefix : 'attribute.'
     }
-}, 50 );
+}, 50);

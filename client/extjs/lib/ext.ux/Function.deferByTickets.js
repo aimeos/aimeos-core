@@ -31,7 +31,7 @@ Ext.applyIf(Function.prototype, {
 
         // run if all tickets are back
         var run = function() {
-            if (Ext.isEmpty(waitTickets)) {
+            if(Ext.isEmpty(waitTickets)) {
                 fn();
             }
         };

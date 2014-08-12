@@ -4,10 +4,10 @@
  */
 
 
-Ext.ns( 'MShop.panel.catalog' );
+Ext.ns('MShop.panel.catalog');
 
 // hook product picker into the catalog ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.ProductItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.ProductItemPickerUi', {
     xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
         recordName : 'Catalog_List',
@@ -18,15 +18,15 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.catalog.ItemUi', 'MShop.panel.cat
         listTypeLabelProperty : 'catalog.list.type.label',
         listTypeControllerName : 'Catalog_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'catalog.list.type.domain' : 'product'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'catalog/list/type/product'
     },
     listConfig : {
         prefix : 'product.'
     }
-}, 30 );
+}, 30);

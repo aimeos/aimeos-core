@@ -3,9 +3,9 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-Ext.ns( 'MShop.panel.supplier' );
+Ext.ns('MShop.panel.supplier');
 
-MShop.panel.supplier.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
+MShop.panel.supplier.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     recordName : 'Supplier',
     idProperty : 'supplier.id',
@@ -15,27 +15,27 @@ MShop.panel.supplier.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
     autoExpandColumn : 'supplier-list-label',
 
     filterConfig : {
-        filters : [ {
+        filters : [{
             dataIndex : 'supplier.label',
             operator : '=~',
             value : ''
-        } ]
+        }]
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt( 'client/extjs', 'Supplier' );
+        this.title = MShop.I18n.dt('client/extjs', 'Supplier');
 
-        MShop.panel.AbstractListUi.prototype.initActions.call( this );
-        MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
+        MShop.panel.AbstractListUi.prototype.initActions.call(this);
+        MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
-        MShop.panel.supplier.ListUi.superclass.initComponent.call( this );
+        MShop.panel.supplier.ListUi.superclass.initComponent.call(this);
     },
 
     getColumns : function() {
-        return [ {
+        return [{
             xtype : 'gridcolumn',
             dataIndex : 'supplier.id',
-            header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+            header : MShop.I18n.dt('client/extjs', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -43,15 +43,15 @@ MShop.panel.supplier.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.status',
-            header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+            header : MShop.I18n.dt('client/extjs', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
-            renderer : this.statusColumnRenderer.createDelegate( this )
+            renderer : this.statusColumnRenderer.createDelegate(this)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.label',
-            header : MShop.I18n.dt( 'client/extjs', 'Label' ),
+            header : MShop.I18n.dt('client/extjs', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -59,7 +59,7 @@ MShop.panel.supplier.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'supplier.ctime',
-            header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+            header : MShop.I18n.dt('client/extjs', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -67,7 +67,7 @@ MShop.panel.supplier.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'supplier.mtime',
-            header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+            header : MShop.I18n.dt('client/extjs', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -75,16 +75,16 @@ MShop.panel.supplier.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.editor',
-            header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+            header : MShop.I18n.dt('client/extjs', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
-        } ];
+        }];
     }
 
-} );
+});
 
-Ext.reg( 'MShop.panel.supplier.listui', MShop.panel.supplier.ListUi );
+Ext.reg('MShop.panel.supplier.listui', MShop.panel.supplier.ListUi);
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem( 'MShop.MainTabPanel', 'MShop.panel.supplier.listui', MShop.panel.supplier.ListUi, 55 );
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.supplier.listui', MShop.panel.supplier.ListUi, 55);
