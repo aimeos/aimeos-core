@@ -561,6 +561,10 @@ class Controller_Frontend_Basket_Default
 
 			foreach( $basket->getProducts() as $pos => $product )
 			{
+				if( $product->getFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) ) {
+					continue;
+				}
+
 				try
 				{
 					$attrIds = array();
@@ -626,6 +630,7 @@ class Controller_Frontend_Basket_Default
 
 		if( !empty( $errors ) )
 		{
+print_r( $errors );
 			$msg = $context->getI18n()->dt(
 				'controller/frontend',
 				sprintf( 'One or more items aren\'t available for the chosen locale' )
