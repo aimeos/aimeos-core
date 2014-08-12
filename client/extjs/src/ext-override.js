@@ -17,11 +17,7 @@ Ext.apply(Ext.data.JsonReader.prototype, {
             if(Ext.isFunction(expr)) {
                 return expr;
             }
-            var i = String( expr ).search( re );
-            if( i >= 0 ) {
-                return new Function( 'obj', 'return obj' + ( i > 0 ? '.' : '' ) + expr );
-            }
-            return function( obj ) {
+            return function(obj) {
                 return obj[expr];
             };
         };
