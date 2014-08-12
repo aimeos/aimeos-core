@@ -29,9 +29,11 @@ class MShop_Coupon_Provider_FixedRebate
 			return;
 		}
 
+		$rebate = '0.00';
+		$currency = $base->getPrice()->getCurrencyId();
 		$config = $this->_getItem()->getConfig();
 
-		if( !isset( $config['fixedrebate.productcode'] ) || !isset( $config['fixedrebate.rebate']) )
+		if( !isset( $config['fixedrebate.productcode'] ) || !isset( $config['fixedrebate.rebate'] ) )
 		{
 			throw new MShop_Coupon_Exception( sprintf(
 				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
@@ -39,9 +41,20 @@ class MShop_Coupon_Provider_FixedRebate
 			) );
 		}
 
+		if( is_array( $config['fixedrebate.rebate'] ) )
+		{
+			if( isset( $config['fixedrebate.rebate'][$currency] ) ) {
+				$rebate = $config['fixedrebate.rebate'][$currency];
+			}
+		}
+		else
+		{
+			$rebate = $config['fixedrebate.rebate'];
+		}
+
 		$price = MShop_Factory::createManager( $this->_getContext(), 'price' )->createItem();
-		$price->setValue( -$config['fixedrebate.rebate'] );
-		$price->setRebate( $config['fixedrebate.rebate'] );
+		$price->setValue( -$rebate );
+		$price->setRebate( $rebate );
 
 		$orderProduct = $this->_createProduct( $config['fixedrebate.productcode'], 1 );
 		$orderProduct->setPrice( $price );
