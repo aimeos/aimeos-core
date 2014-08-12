@@ -3,17 +3,17 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-Ext.ns( 'MShop.panel' );
+Ext.ns('MShop.panel');
 
-MShop.panel.ListItemItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
+MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     getAdditionalFields : Ext.emptyFn,
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt( 'client/extjs', 'List item details' );
+        this.title = MShop.I18n.dt('client/extjs', 'List item details');
 
-        this.items = [ {
+        this.items = [{
             xtype : 'form',
             border : false,
             flex : 1,
@@ -23,17 +23,17 @@ MShop.panel.ListItemItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
             },
             ref : 'mainForm',
             autoScroll : true,
-            items : [ {
+            items : [{
                 xtype : 'fieldset',
                 border : false,
                 flex : 1,
                 labelAlign : 'top',
-                items : [ {
+                items : [{
                     xtype : 'MShop.elements.status.combo',
                     name : this.listUI.listNamePrefix + 'status'
                 }, {
                     xtype : 'combo',
-                    fieldLabel : MShop.I18n.dt( 'client/extjs', 'List type' ),
+                    fieldLabel : MShop.I18n.dt('client/extjs', 'List type'),
                     name : this.listUI.listNamePrefix + 'typeid',
                     mode : 'local',
                     store : this.listUI.itemTypeStore,
@@ -44,38 +44,38 @@ MShop.panel.ListItemItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
                     allowBlank : false,
                     typeAhead : true,
                     anchor : '100%',
-                    emptyText : MShop.I18n.dt( 'client/extjs', 'List type' )
+                    emptyText : MShop.I18n.dt('client/extjs', 'List type')
                 }, {
                     xtype : 'datefield',
-                    fieldLabel : MShop.I18n.dt( 'client/extjs', 'Start date' ),
+                    fieldLabel : MShop.I18n.dt('client/extjs', 'Start date'),
                     name : this.listUI.listNamePrefix + 'datestart',
                     format : 'Y-m-d H:i:s',
                     anchor : '100%',
-                    emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
+                    emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
                 }, {
                     xtype : 'datefield',
-                    fieldLabel : MShop.I18n.dt( 'client/extjs', 'End date' ),
+                    fieldLabel : MShop.I18n.dt('client/extjs', 'End date'),
                     name : this.listUI.listNamePrefix + 'dateend',
                     format : 'Y-m-d H:i:s',
                     anchor : '100%',
-                    emptyText : MShop.I18n.dt( 'client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)' )
-                } ].concat( this.getAdditionalFields() || [] )
+                    emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                }].concat(this.getAdditionalFields() || [])
             }, {
                 xtype : 'MShop.panel.configui',
                 layout : 'fit',
                 flex : 1,
-                data : ( this.record ? this.record.get( this.listUI.listNamePrefix + 'config' ) : {} )
-            } ]
-        } ];
+                data : (this.record ? this.record.get(this.listUI.listNamePrefix + 'config') : {})
+            }]
+        }];
 
-        MShop.panel.ListItemItemUi.superclass.initComponent.call( this );
+        MShop.panel.ListItemItemUi.superclass.initComponent.call(this);
     },
 
     onSaveItem : function() {
         // validate data
-        if( !this.mainForm.getForm().isValid() && this.fireEvent( 'validate', this ) !== false ) {
-            Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), MShop.I18n.dt( 'client/extjs',
-                'Please recheck your data' ) );
+        if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
+            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+                'Please recheck your data'));
             return;
         }
 
@@ -85,9 +85,9 @@ MShop.panel.ListItemItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
         // force record to be saved!
         this.record.dirty = true;
 
-        this.getConfigRecords( this.store, this.record );
+        this.getConfigRecords(this.store, this.record);
 
-        if( this.fireEvent( 'beforesave', this, this.record ) === false ) {
+        if(this.fireEvent('beforesave', this, this.record) === false) {
             this.isSaveing = false;
             this.saveMask.hide();
         }
@@ -95,59 +95,59 @@ MShop.panel.ListItemItemUi = Ext.extend( MShop.panel.AbstractItemUi, {
         var recordRefIdProperty = this.listUI.listNamePrefix + "refid";
         var recordTypeIdProperty = this.listUI.listNamePrefix + "typeid";
 
-        var index = this.store.findBy( function( item, index ) {
-            var recordRefId = this.record.get( recordRefIdProperty );
+        var index = this.store.findBy(function(item, index) {
+            var recordRefId = this.record.get(recordRefIdProperty);
             var recordTypeId = this.mainForm.getForm().getFieldValues()[recordTypeIdProperty];
 
-            var itemRefId = item.get( recordRefIdProperty );
-            var itemTypeId = item.get( recordTypeIdProperty );
+            var itemRefId = item.get(recordRefIdProperty);
+            var itemTypeId = item.get(recordTypeIdProperty);
 
             var recordId = this.record.id;
             var itemId = index;
 
-            if( !recordRefId || !recordTypeId || !itemRefId || !itemTypeId )
+            if(!recordRefId || !recordTypeId || !itemRefId || !itemTypeId)
                 return false;
 
-            return ( recordRefId == itemRefId && recordTypeId == itemTypeId && recordId != itemId );
-        }, this );
+            return (recordRefId == itemRefId && recordTypeId == itemTypeId && recordId != itemId);
+        }, this);
 
-        if( index != -1 ) {
+        if(index != -1) {
             this.isSaveing = false;
             this.saveMask.hide();
-            Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), MShop.I18n.dt( 'client/extjs',
-                'This combination already exists' ) );
+            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+                'This combination already exists'));
             return;
         }
 
-        this.mainForm.getForm().updateRecord( this.record );
+        this.mainForm.getForm().updateRecord(this.record);
 
-        if( this.action == 'add' || this.action == 'copy' ) {
-            this.store.add( this.record );
+        if(this.action == 'add' || this.action == 'copy') {
+            this.store.add(this.record);
         }
 
         // store async action is triggered. {@see onStoreWrite/onStoreException}
-        if( !this.store.autoSave ) {
+        if(!this.store.autoSave) {
             this.onAfterSave();
         }
     },
 
-    getConfigRecords : function( store, record ) {
+    getConfigRecords : function(store, record) {
         var config = {};
-        var editorGrid = this.findByType( 'MShop.panel.configui' );
+        var editorGrid = this.findByType('MShop.panel.configui');
         var first = editorGrid.shift();
 
-        if( first ) {
-            Ext.each( first.data, function( item, index ) {
-                Ext.iterate( item, function( key, value, object ) {
-                    if( ( key = key.trim() ) !== '' ) {
-                        config[key] = ( typeof value === "string" ) ? value.trim() : value;
+        if(first) {
+            Ext.each(first.data, function(item, index) {
+                Ext.iterate(item, function(key, value, object) {
+                    if((key = key.trim()) !== '') {
+                        config[key] = (typeof value === "string") ? value.trim() : value;
                     }
-                }, this );
-            } );
+                }, this);
+            });
         }
         record.data[this.listUI.listNamePrefix + 'config'] = config;
     }
 
-} );
+});
 
-Ext.reg( 'MShop.panel.listitemitemui', MShop.panel.ListItemItemUi );
+Ext.reg('MShop.panel.listitemitemui', MShop.panel.ListItemItemUi);

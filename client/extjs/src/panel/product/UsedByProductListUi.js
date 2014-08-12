@@ -3,9 +3,9 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-Ext.ns( 'MShop.panel.product' );
+Ext.ns('MShop.panel.product');
 
-MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedByListUi, {
+MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByListUi, {
 
     recordName : 'Product_List',
     idProperty : 'product.list.id',
@@ -24,9 +24,9 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
     parentRefIdProperty : 'product.list.refid',
 
     initComponent : function() {
-        MShop.panel.product.UsedByProductListUi.superclass.initComponent.call( this );
+        MShop.panel.product.UsedByProductListUi.superclass.initComponent.call(this);
 
-        this.title = MShop.I18n.dt( 'client/extjs', 'Used by' );
+        this.title = MShop.I18n.dt('client/extjs', 'Used by');
     },
 
     getColumns : function() {
@@ -34,7 +34,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.id',
-                header : MShop.I18n.dt( 'client/extjs', 'List ID' ),
+                header : MShop.I18n.dt('client/extjs', 'List ID'),
                 sortable : true,
                 width : 50,
                 hidden : true
@@ -42,17 +42,17 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.typeid',
-                header : MShop.I18n.dt( 'client/extjs', 'List type' ),
+                header : MShop.I18n.dt('client/extjs', 'List type'),
                 sortable : true,
                 width : 100,
-                renderer : this.listTypeColumnRenderer.createDelegate( this, [
+                renderer : this.listTypeColumnRenderer.createDelegate(this, [
                     this.listTypeStore,
-                    "product.list.type.label" ], true )
+                    "product.list.type.label"], true)
             },
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.list.datestart',
-                header : MShop.I18n.dt( 'client/extjs', 'List start date' ),
+                header : MShop.I18n.dt('client/extjs', 'List start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120
@@ -60,7 +60,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.list.dateend',
-                header : MShop.I18n.dt( 'client/extjs', 'List end date' ),
+                header : MShop.I18n.dt('client/extjs', 'List end date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120
@@ -68,7 +68,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.position',
-                header : MShop.I18n.dt( 'client/extjs', 'List position' ),
+                header : MShop.I18n.dt('client/extjs', 'List position'),
                 sortable : true,
                 width : 70,
                 hidden : true
@@ -76,7 +76,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.list.mtime',
-                header : MShop.I18n.dt( 'client/extjs', 'List modification time' ),
+                header : MShop.I18n.dt('client/extjs', 'List modification time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120,
@@ -85,7 +85,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.list.ctime',
-                header : MShop.I18n.dt( 'client/extjs', 'List creation time' ),
+                header : MShop.I18n.dt('client/extjs', 'List creation time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120,
@@ -94,7 +94,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.editor',
-                header : MShop.I18n.dt( 'client/extjs', 'List editor' ),
+                header : MShop.I18n.dt('client/extjs', 'List editor'),
                 sortable : true,
                 width : 120,
                 hidden : true
@@ -102,125 +102,125 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+                header : MShop.I18n.dt('client/extjs', 'ID'),
                 sortable : true,
                 width : 100
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+                header : MShop.I18n.dt('client/extjs', 'Status'),
                 sortable : false,
                 width : 50,
-                renderer : this.statusColumnRenderer.createDelegate( this,
-                    [ this.ParentItemUi.store, "product.status" ], true )
+                renderer : this.statusColumnRenderer.createDelegate(this, [this.ParentItemUi.store, "product.status"],
+                    true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'Type' ),
+                header : MShop.I18n.dt('client/extjs', 'Type'),
                 sortable : false,
                 width : 100,
-                renderer : this.productTypeColumnRenderer.createDelegate( this, [
+                renderer : this.productTypeColumnRenderer.createDelegate(this, [
                     this.ParentItemUi.store,
                     this.productTypeStore,
                     "product.typeid",
-                    "product.type.label" ], true )
+                    "product.type.label"], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+                header : MShop.I18n.dt('client/extjs', 'Code'),
                 sortable : false,
                 width : 100,
-                renderer : this.listTypeColumnRenderer.createDelegate( this,
-                    [ this.ParentItemUi.store, "product.code" ], true )
+                renderer : this.listTypeColumnRenderer.createDelegate(this, [this.ParentItemUi.store, "product.code"],
+                    true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'Label' ),
+                header : MShop.I18n.dt('client/extjs', 'Label'),
                 sortable : false,
                 id : 'product-list-autoexpand-column',
-                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate( this, [
+                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
                     this.ParentItemUi.store,
-                    "product.label" ], true )
+                    "product.label"], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'Supplier' ),
+                header : MShop.I18n.dt('client/extjs', 'Supplier'),
                 sortable : false,
                 width : 100,
                 hidden : true,
-                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate( this, [
+                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
                     this.ParentItemUi.store,
-                    "product.suppliercode" ], true )
+                    "product.suppliercode"], true)
             },
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'Start date' ),
+                header : MShop.I18n.dt('client/extjs', 'Start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
                 hidden : true,
-                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate( this, [
+                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
                     this.ParentItemUi.store,
-                    "product.datestart" ], true )
+                    "product.datestart"], true)
             },
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'End date' ),
+                header : MShop.I18n.dt('client/extjs', 'End date'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
                 hidden : true,
-                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate( this, [
+                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
                     this.ParentItemUi.store,
-                    "product.dateend" ], true )
+                    "product.dateend"], true)
             },
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+                header : MShop.I18n.dt('client/extjs', 'Created'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
                 hidden : true,
-                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate( this, [
+                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
                     this.ParentItemUi.store,
-                    "product.ctime" ], true )
+                    "product.ctime"], true)
             },
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+                header : MShop.I18n.dt('client/extjs', 'Last modified'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
                 hidden : true,
-                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate( this, [
+                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
                     this.ParentItemUi.store,
-                    "product.mtime" ], true )
+                    "product.mtime"], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.list.parentid',
-                header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+                header : MShop.I18n.dt('client/extjs', 'Editor'),
                 sortable : false,
                 width : 100,
                 hidden : true,
-                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate( this, [
+                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
                     this.ParentItemUi.store,
-                    "product.editor" ], true )
-            } ];
+                    "product.editor"], true)
+            }];
     }
-} );
+});
 
-Ext.reg( 'MShop.panel.product.usedbyproductlistui', MShop.panel.product.UsedByProductListUi );
+Ext.reg('MShop.panel.product.usedbyproductlistui', MShop.panel.product.UsedByProductListUi);
 
 //hook parent product list into the product ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.product.ItemUi', 'MShop.panel.product.UsedByProductListUi',
-    MShop.panel.product.UsedByProductListUi, 110 );
+Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.UsedByProductListUi',
+    MShop.panel.product.UsedByProductListUi, 110);

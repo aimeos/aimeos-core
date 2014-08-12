@@ -3,7 +3,7 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-Ext.ns( 'MShop.panel.type' );
+Ext.ns('MShop.panel.type');
 
 /**
  * Nest all types in a types tab
@@ -11,7 +11,7 @@ Ext.ns( 'MShop.panel.type' );
  * @class MShop.panel.type.TabUi
  * @extends Ext.Panel
  */
-MShop.panel.type.TabUi = Ext.extend( Ext.Panel, {
+MShop.panel.type.TabUi = Ext.extend(Ext.Panel, {
 
     maximized : true,
     layout : 'fit',
@@ -19,20 +19,20 @@ MShop.panel.type.TabUi = Ext.extend( Ext.Panel, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt( 'client/extjs', 'Types' );
+        this.title = MShop.I18n.dt('client/extjs', 'Types');
 
-        this.items = [ {
+        this.items = [{
             xtype : 'tabpanel',
             activeTab : 0,
             border : false,
             itemId : 'MShop.panel.type.tabUi',
-            plugins : [ 'ux.itemregistry' ]
-        } ];
+            plugins : ['ux.itemregistry']
+        }];
 
-        MShop.panel.type.TabUi.superclass.initComponent.call( this );
+        MShop.panel.type.TabUi.superclass.initComponent.call(this);
     }
-} );
+});
 
-Ext.reg( 'MShop.panel.type.tabui', MShop.panel.type.TabUi );
+Ext.reg('MShop.panel.type.tabui', MShop.panel.type.TabUi);
 
-Ext.ux.ItemRegistry.registerItem( 'MShop.MainTabPanel', 'MShop.panel.type.tabui', MShop.panel.type.TabUi, 120 );
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.type.tabui', MShop.panel.type.TabUi, 120);

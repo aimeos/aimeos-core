@@ -3,10 +3,10 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-Ext.ns( 'MShop.panel.product' );
+Ext.ns('MShop.panel.product');
 
 // hook product tag picker into the product ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.product.ItemUi', 'MShop.panel.product.ProductTagItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.ProductTagItemPickerUi', {
     xtype : 'MShop.panel.product.tag.itempickerui',
     itemConfig : {
         recordName : 'Product_List',
@@ -17,15 +17,15 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.product.ItemUi', 'MShop.panel.pro
         listTypeLabelProperty : 'product.list.type.label',
         listTypeControllerName : 'Product_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'product.list.type.domain' : 'product/tag'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'product/list/type/product/tag'
     },
     listConfig : {
         prefix : 'product.tag.'
     }
-}, 100 );
+}, 100);

@@ -3,10 +3,10 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-Ext.ns( 'MShop.panel.text' );
+Ext.ns('MShop.panel.text');
 
 // hook media picker into the text ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.text.ItemUi', 'MShop.panel.text.AttributeItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.text.ItemUi', 'MShop.panel.text.AttributeItemPickerUi', {
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Text_List',
@@ -17,16 +17,16 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.text.ItemUi', 'MShop.panel.text.A
         listTypeLabelProperty : 'text.list.type.label',
         listTypeControllerName : 'Text_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'text.list.type.domain' : 'attribute'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'text/list/type/attribute'
     },
     listConfig : {
-        domain : [ 'text', 'product' ],
+        domain : ['text', 'product'],
         prefix : 'attribute.'
     }
-}, 20 );
+}, 20);

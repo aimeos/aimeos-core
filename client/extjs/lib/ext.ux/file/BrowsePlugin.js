@@ -6,7 +6,7 @@
  * @version     $Id: BrowsePlugin.js 13226 2011-08-29 10:13:30Z nsendetzky $
  *
  */
-Ext.ns( 'Ext.ux.file' );
+Ext.ns('Ext.ux.file');
 
 /**
  * @namespace Ext.ux.file
@@ -14,8 +14,8 @@ Ext.ns( 'Ext.ux.file' );
  * @param {Object}
  *            config Configuration options
  */
-Ext.ux.file.BrowsePlugin = function( config ) {
-    Ext.apply( this, config );
+Ext.ux.file.BrowsePlugin = function(config) {
+    Ext.apply(this, config);
 };
 
 Ext.ux.file.BrowsePlugin.prototype = {
@@ -70,7 +70,7 @@ Ext.ux.file.BrowsePlugin.prototype = {
     /**
      * @see Ext.Button.initComponent
      */
-    init : function( cmp ) {
+    init : function(cmp) {
         this.originalHandler = cmp.handler || null;
         this.originalScope = cmp.scope || window;
         cmp.handler = null;
@@ -78,41 +78,41 @@ Ext.ux.file.BrowsePlugin.prototype = {
 
         this.component = cmp;
 
-        cmp.on( 'render', this.onRender, this );
+        cmp.on('render', this.onRender, this);
 
         // chain fns
-        if( typeof cmp.setDisabled == 'function' ) {
-            cmp.setDisabled = cmp.setDisabled.createSequence( function( disabled ) {
-                if( this.input_file ) {
+        if(typeof cmp.setDisabled == 'function') {
+            cmp.setDisabled = cmp.setDisabled.createSequence(function(disabled) {
+                if(this.input_file) {
                     this.input_file.dom.disabled = disabled;
                 }
-            }, this );
+            }, this);
         }
 
-        if( typeof cmp.enable == 'function' ) {
-            cmp.enable = cmp.enable.createSequence( function() {
-                if( this.input_file ) {
+        if(typeof cmp.enable == 'function') {
+            cmp.enable = cmp.enable.createSequence(function() {
+                if(this.input_file) {
                     this.input_file.dom.disabled = false;
                 }
-            }, this );
+            }, this);
         }
 
-        if( typeof cmp.disable == 'function' ) {
-            cmp.disable = cmp.disable.createSequence( function() {
-                if( this.input_file ) {
+        if(typeof cmp.disable == 'function') {
+            cmp.disable = cmp.disable.createSequence(function() {
+                if(this.input_file) {
                     this.input_file.dom.disabled = true;
                 }
-            }, this );
+            }, this);
         }
 
-        if( typeof cmp.destroy == 'function' ) {
-            cmp.destroy = cmp.destroy.createSequence( function() {
-                var input_file = this.detachInputFile( true );
-                if( input_file ) {
+        if(typeof cmp.destroy == 'function') {
+            cmp.destroy = cmp.destroy.createSequence(function() {
+                var input_file = this.detachInputFile(true);
+                if(input_file) {
                     input_file.remove();
                 }
                 input_file = null;
-            }, this );
+            }, this);
         }
     },
 
@@ -120,109 +120,109 @@ Ext.ux.file.BrowsePlugin.prototype = {
      * @see Ext.Button.onRender
      */
     onRender : function() {
-        this.button_container = this.buttonCt || this.component.el.child( 'tbody' ) || this.component.el;
-        this.button_container.position( 'relative' );
-        this.wrap = this.component.el.wrap( {
+        this.button_container = this.buttonCt || this.component.el.child('tbody') || this.component.el;
+        this.button_container.position('relative');
+        this.wrap = this.component.el.wrap({
             cls : 'tbody'
-        } );
+        });
 
         // NOTE: wrap a button in a toolbar is complex, the toolbar doLayout moves the wrap at the end
-        if( this.component.ownerCt && this.component.ownerCt.el.hasClass( 'x-toolbar' ) ) {
-            this.component.ownerCt.on( 'afterlayout', function() {
-                if( this.wrap.first() !== this.component.el ) {
-                    this.wrap.insertBefore( this.component.el );
-                    this.wrap.insertFirst( this.component.el );
+        if(this.component.ownerCt && this.component.ownerCt.el.hasClass('x-toolbar')) {
+            this.component.ownerCt.on('afterlayout', function() {
+                if(this.wrap.first() !== this.component.el) {
+                    this.wrap.insertBefore(this.component.el);
+                    this.wrap.insertFirst(this.component.el);
                 }
                 this.syncWrap();
-            }, this );
+            }, this);
 
-            this.component.ownerCt.on( 'show', this.syncWrap, this );
-            this.component.ownerCt.on( 'resize', this.syncWrap, this );
+            this.component.ownerCt.on('show', this.syncWrap, this);
+            this.component.ownerCt.on('resize', this.syncWrap, this);
         }
 
         this.createInputFile();
 
-        if( this.enableFileDrop ) {
-            if( !this.dropEl ) {
-                if( this.dropElSelector ) {
-                    this.dropEl = this.wrap.up( this.dropElSelector );
+        if(this.enableFileDrop) {
+            if(!this.dropEl) {
+                if(this.dropElSelector) {
+                    this.dropEl = this.wrap.up(this.dropElSelector);
                 } else {
                     this.dropEl = this.button_container;
                 }
             }
 
             // @see http://dev.w3.org/html5/spec/Overview.html#the-dragevent-and-datatransfer-interfaces
-            this.dropEl.on( 'dragover', function( e ) {
+            this.dropEl.on('dragover', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
 
                 // prevents drop in FF ;-(
-                if( !Ext.isGecko ) {
+                if(!Ext.isGecko) {
                     e.browserEvent.dataTransfer.dropEffect = 'copy';
                 }
-            }, this );
+            }, this);
 
-            this.dropEl.on( 'drop', function( e ) {
+            this.dropEl.on('drop', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
                 var dt = e.browserEvent.dataTransfer;
                 var files = dt.files;
 
-                this.onInputFileChange( null, null, null, files );
-            }, this );
+                this.onInputFileChange(null, null, null, files);
+            }, this);
         }
     },
 
     syncWrap : function() {
-        if( this.button_container ) {
+        if(this.button_container) {
             var button_size = this.button_container.getSize();
-            this.wrap.setSize( button_size );
+            this.wrap.setSize(button_size);
         }
     },
 
     createInputFile : function() {
-        this.input_file = this.wrap.createChild( Ext.apply( {
+        this.input_file = this.wrap.createChild(Ext.apply({
             tag : 'input',
             type : 'file',
             size : 1,
-            name : this.inputFileName || Ext.id( this.component.el ),
+            name : this.inputFileName || Ext.id(this.component.el),
             style : "position: absolute; display: block; border: none; cursor: pointer;"
         }, this.multiple ? {
             multiple : true
-        } : {} ) );
+        } : {}));
 
         var button_box = this.button_container.getBox();
 
-        this.wrap.setBox( button_box );
+        this.wrap.setBox(button_box);
 
-        this.wrap.applyStyles( 'overflow: hidden; position: relative;' );
+        this.wrap.applyStyles('overflow: hidden; position: relative;');
 
-        this.wrap.on( 'mousemove', function( e ) {
+        this.wrap.on('mousemove', function(e) {
             var xy = e.getXY();
-            this.input_file.setXY( [ xy[0] - this.input_file.getWidth() / 4, xy[1] - 10 ] );
-        }, this );
-        this.input_file.setOpacity( 0.0 );
+            this.input_file.setXY([xy[0] - this.input_file.getWidth() / 4, xy[1] - 10]);
+        }, this);
+        this.input_file.setOpacity(0.0);
 
-        if( this.component.handleMouseEvents ) {
-            this.wrap.on( 'mouseover', this.component.onMouseOver || Ext.emptyFn, this.component );
-            this.wrap.on( 'mousedown', this.component.onMouseDown || Ext.emptyFn, this.component );
-            this.wrap.on( 'contextmenu', this.component.onContextMenu || Ext.emptyFn, this.component );
+        if(this.component.handleMouseEvents) {
+            this.wrap.on('mouseover', this.component.onMouseOver || Ext.emptyFn, this.component);
+            this.wrap.on('mousedown', this.component.onMouseDown || Ext.emptyFn, this.component);
+            this.wrap.on('contextmenu', this.component.onContextMenu || Ext.emptyFn, this.component);
         }
 
-        if( this.component.tooltip ) {
-            if( typeof this.component.tooltip == 'object' ) {
-                Ext.QuickTips.register( Ext.apply( {
+        if(this.component.tooltip) {
+            if(typeof this.component.tooltip == 'object') {
+                Ext.QuickTips.register(Ext.apply({
                     target : this.input_file
-                }, this.component.tooltip ) );
+                }, this.component.tooltip));
             } else {
                 this.input_file.dom[this.component.tooltipType] = this.component.tooltip;
             }
         }
 
-        this.input_file.on( 'change', this.onInputFileChange, this );
-        this.input_file.on( 'click', function( e ) {
+        this.input_file.on('change', this.onInputFileChange, this);
+        this.input_file.on('click', function(e) {
             e.stopPropagation();
-        } );
+        });
     },
 
     /**
@@ -232,18 +232,18 @@ Ext.ux.file.BrowsePlugin.prototype = {
      *            files when input comes from drop...
      * @private
      */
-    onInputFileChange : function( e, target, options, files ) {
-        if( window.FileList ) { // HTML5 FileList support
+    onInputFileChange : function(e, target, options, files) {
+        if(window.FileList) { // HTML5 FileList support
             this.files = files ? files : this.input_file.dom.files;
         } else {
-            this.files = [ {
-                name : this.input_file.getValue().split( /[\/\\]/ ).pop()
-            } ];
+            this.files = [{
+                name : this.input_file.getValue().split(/[\/\\]/).pop()
+            }];
             this.files[0].type = this.getFileCls();
         }
 
-        if( this.originalHandler ) {
-            this.originalHandler.call( this.originalScope, this );
+        if(this.originalHandler) {
+            this.originalHandler.call(this.originalScope, this);
         }
     },
 
@@ -258,14 +258,14 @@ Ext.ux.file.BrowsePlugin.prototype = {
      *            Defaults to false.
      * @return {Ext.Element} the detached input file element.
      */
-    detachInputFile : function( no_create ) {
+    detachInputFile : function(no_create) {
         var result = this.input_file;
 
         no_create = no_create || false;
 
-        if( this.input_file ) {
-            if( typeof this.component.tooltip == 'object' ) {
-                Ext.QuickTips.unregister( this.input_file );
+        if(this.input_file) {
+            if(typeof this.component.tooltip == 'object') {
+                Ext.QuickTips.unregister(this.input_file);
             } else {
                 this.input_file.dom[this.component.tooltipType] = null;
             }
@@ -273,7 +273,7 @@ Ext.ux.file.BrowsePlugin.prototype = {
         }
         this.input_file = null;
 
-        if( !no_create ) {
+        if(!no_create) {
             this.createInputFile();
         }
         return result;
@@ -305,8 +305,8 @@ Ext.ux.file.BrowsePlugin.prototype = {
      * @return {String} class to use for file type icon
      */
     getFileCls : function() {
-        var fparts = this.getFileName().split( '.' );
-        if( fparts.length === 1 ) {
+        var fparts = this.getFileName().split('.');
+        if(fparts.length === 1) {
             return '';
         } else {
             return fparts.pop().toLowerCase();
@@ -314,6 +314,6 @@ Ext.ux.file.BrowsePlugin.prototype = {
     },
     isImage : function() {
         var cls = this.getFileCls();
-        return ( cls == 'jpg' || cls == 'gif' || cls == 'png' || cls == 'jpeg' );
+        return (cls == 'jpg' || cls == 'gif' || cls == 'png' || cls == 'jpeg');
     }
 };

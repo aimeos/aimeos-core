@@ -4,10 +4,10 @@
  */
 
 
-Ext.ns( 'MShop.panel.media' );
+Ext.ns('MShop.panel.media');
 
 // hook text picker into the media ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.media.ItemUi', 'MShop.panel.media.TextItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.media.ItemUi', 'MShop.panel.media.TextItemPickerUi', {
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Media_List',
@@ -19,11 +19,11 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.media.ItemUi', 'MShop.panel.media
         listTypeLabelProperty : 'media.list.type.label',
         listTypeControllerName : 'Media_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'media.list.type.domain' : 'text'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'media/list/type/text'
     },
@@ -31,4 +31,4 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.media.ItemUi', 'MShop.panel.media
         domain : 'media',
         prefix : 'text.'
     }
-}, 10 );
+}, 10);

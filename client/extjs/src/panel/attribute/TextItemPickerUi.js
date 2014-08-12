@@ -4,10 +4,10 @@
  */
 
 
-Ext.ns( 'MShop.panel.attribute' );
+Ext.ns('MShop.panel.attribute');
 
 // hook text picker into the attribute ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.attribute.ItemUi', 'MShop.panel.attribute.TextItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.attribute.TextItemPickerUi', {
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Attribute_List',
@@ -18,11 +18,11 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.attribute.ItemUi', 'MShop.panel.a
         listTypeLabelProperty : 'attribute.list.type.label',
         listTypeControllerName : 'Attribute_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'attribute.list.type.domain' : 'text'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'attribute/list/type/text'
     },
@@ -30,4 +30,4 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.attribute.ItemUi', 'MShop.panel.a
         domain : 'attribute',
         prefix : 'text.'
     }
-}, 10 );
+}, 10);

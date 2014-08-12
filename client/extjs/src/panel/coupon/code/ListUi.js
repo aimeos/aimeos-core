@@ -4,9 +4,9 @@
  */
 
 
-Ext.ns( 'MShop.panel.coupon.code' );
+Ext.ns('MShop.panel.coupon.code');
 
-MShop.panel.coupon.code.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
+MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     recordName : 'Coupon_Code',
     idProperty : 'coupon.code.id',
@@ -19,59 +19,59 @@ MShop.panel.coupon.code.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
     autoExpandColumn : 'coupon-code-list-code',
 
     filterConfig : {
-        filters : [ {
+        filters : [{
             dataIndex : 'coupon.code.code',
             operator : 'startswith',
             value : ''
-        } ]
+        }]
     },
 
 
     initComponent : function() {
-        this.title = MShop.I18n.dt( 'client/extjs', 'Codes' );
+        this.title = MShop.I18n.dt('client/extjs', 'Codes');
 
-        MShop.panel.coupon.code.ListUi.superclass.initComponent.call( this );
+        MShop.panel.coupon.code.ListUi.superclass.initComponent.call(this);
     },
 
 
     getColumns : function() {
-        return [ {
+        return [{
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.id',
-            header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+            header : MShop.I18n.dt('client/extjs', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.code',
-            header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+            header : MShop.I18n.dt('client/extjs', 'Code'),
             id : 'coupon-code-list-code',
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.count',
-            header : MShop.I18n.dt( 'client/extjs', 'Count' ),
+            header : MShop.I18n.dt('client/extjs', 'Count'),
             sortable : true,
             width : 100
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.datestart',
-            header : MShop.I18n.dt( 'client/extjs', 'Start date' ),
+            header : MShop.I18n.dt('client/extjs', 'Start date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.dateend',
-            header : MShop.I18n.dt( 'client/extjs', 'End date' ),
+            header : MShop.I18n.dt('client/extjs', 'End date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.ctime',
-            header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+            header : MShop.I18n.dt('client/extjs', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -79,7 +79,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.mtime',
-            header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+            header : MShop.I18n.dt('client/extjs', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -87,24 +87,24 @@ MShop.panel.coupon.code.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.editor',
-            header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+            header : MShop.I18n.dt('client/extjs', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
-        } ];
+        }];
     },
 
 
-    onBeforeLoad : function( store, options ) {
+    onBeforeLoad : function(store, options) {
 
-        MShop.panel.coupon.code.ListUi.superclass.onBeforeLoad.apply( this, arguments );
+        MShop.panel.coupon.code.ListUi.superclass.onBeforeLoad.apply(this, arguments);
 
-        if( !this.ParentItemUi.record.data['coupon.id'] ) {
-            Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Notice' ), MShop.I18n.dt( 'client/extjs',
-                'Please save the coupon first before you can add codes' ) );
+        if(!this.ParentItemUi.record.data['coupon.id']) {
+            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Notice'), MShop.I18n.dt('client/extjs',
+                'Please save the coupon first before you can add codes'));
 
-            this.actionAdd.setDisabled( true );
-            this.importButton.setDisabled( true );
+            this.actionAdd.setDisabled(true);
+            this.importButton.setDisabled(true);
 
             return false;
         }
@@ -112,11 +112,11 @@ MShop.panel.coupon.code.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         // filter for refid
         options.params = options.params || {};
         options.params.condition = {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'coupon.code.couponid' : this.ParentItemUi.record.data['coupon.id']
                 }
-            } ]
+            }]
         };
 
         return true;
@@ -125,23 +125,23 @@ MShop.panel.coupon.code.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
     afterRender : function() {
 
-        MShop.panel.coupon.code.ListUi.superclass.afterRender.apply( this, arguments );
+        MShop.panel.coupon.code.ListUi.superclass.afterRender.apply(this, arguments);
 
-        this.ParentItemUi = this.findParentBy( function( c ) {
-            return c.isXType( MShop.panel.AbstractItemUi, false );
-        } );
+        this.ParentItemUi = this.findParentBy(function(c) {
+            return c.isXType(MShop.panel.AbstractItemUi, false);
+        });
     },
 
 
-    onFileSelect : function( fileSelector ) {
-        this.importButton.onFileSelect( fileSelector, {
+    onFileSelect : function(fileSelector) {
+        this.importButton.onFileSelect(fileSelector, {
             couponid : this.ParentItemUi.record.id
-        } );
+        });
     }
 
-} );
+});
 
-Ext.reg( 'MShop.panel.coupon.code.listui', MShop.panel.coupon.code.ListUi );
+Ext.reg('MShop.panel.coupon.code.listui', MShop.panel.coupon.code.ListUi);
 
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.coupon.ItemUi', 'MShop.panel.coupon.code.listui',
-    MShop.panel.coupon.code.ListUi, 10 );
+Ext.ux.ItemRegistry.registerItem('MShop.panel.coupon.ItemUi', 'MShop.panel.coupon.code.listui',
+    MShop.panel.coupon.code.ListUi, 10);

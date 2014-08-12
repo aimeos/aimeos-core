@@ -5,25 +5,25 @@
  */
 
 
-Ext.ns( 'MShop.panel.plugin.type' );
+Ext.ns('MShop.panel.plugin.type');
 
-MShop.panel.plugin.type.ItemUi = Ext.extend( MShop.panel.AbstractTypeItemUi, {
+MShop.panel.plugin.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     siteidProperty : 'plugin.type.siteid',
     typeDomain : 'plugin.type',
 
     initComponent : function() {
-        MShop.panel.AbstractTypeItemUi.prototype.setSiteCheck( this );
-        MShop.panel.plugin.type.ItemUi.superclass.initComponent.call( this );
+        MShop.panel.AbstractTypeItemUi.prototype.setSiteCheck(this);
+        MShop.panel.plugin.type.ItemUi.superclass.initComponent.call(this);
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['plugin.type.label'] : MShop.I18n.dt( 'client/extjs', 'new' );
+        var label = this.record ? this.record.data['plugin.type.label'] : MShop.I18n.dt('client/extjs', 'new');
         //#: Plugin type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt( 'client/extjs', 'Plugin type: {0} ({1})' );
-        this.setTitle( String.format( string, label, MShop.config.site["locale.site.label"] ) );
+        var string = MShop.I18n.dt('client/extjs', 'Plugin type: {0} ({1})');
+        this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
-        MShop.panel.plugin.type.ItemUi.superclass.afterRender.apply( this, arguments );
+        MShop.panel.plugin.type.ItemUi.superclass.afterRender.apply(this, arguments);
     }
-} );
+});
 
-Ext.reg( 'MShop.panel.plugin.type.itemui', MShop.panel.plugin.type.ItemUi );
+Ext.reg('MShop.panel.plugin.type.itemui', MShop.panel.plugin.type.ItemUi);

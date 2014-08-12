@@ -4,10 +4,10 @@
  */
 
 
-Ext.ns( 'MShop.panel.media' );
+Ext.ns('MShop.panel.media');
 
 // hook media picker into the media ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.media.ItemUi', 'MShop.panel.media.AttributeItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.media.ItemUi', 'MShop.panel.media.AttributeItemPickerUi', {
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Media_List',
@@ -19,16 +19,16 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.media.ItemUi', 'MShop.panel.media
         listTypeLabelProperty : 'media.list.type.label',
         listTypeControllerName : 'Media_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'media.list.type.domain' : 'attribute'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'media/list/type/attribute'
     },
     listConfig : {
-        domain : [ 'media', 'product' ],
+        domain : ['media', 'product'],
         prefix : 'attribute.'
     }
-}, 20 );
+}, 20);

@@ -4,11 +4,11 @@
  */
 
 
-Ext.ns( 'MShop.panel.order.base.product.attribute' );
+Ext.ns('MShop.panel.order.base.product.attribute');
 
-MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
+MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
-    title : MShop.I18n.dt( 'client/extjs', 'Attribute' ),
+    title : MShop.I18n.dt('client/extjs', 'Attribute'),
     recordName : 'Order_Base_Product_Attribute',
     idProperty : 'order.base.product.attribute.id',
     siteidProperty : 'order.base.product.attribute.siteid',
@@ -21,19 +21,19 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend( MShop.panel.A
     },
 
     filterConfig : {
-        filters : [ {
+        filters : [{
             dataIndex : 'order.base.product.attribute.code',
             operator : '=~',
             value : ''
-        } ]
+        }]
     },
 
 
     initComponent : function() {
-        MShop.panel.order.base.product.attribute.ListUiSmall.superclass.initComponent.apply( this, arguments );
+        MShop.panel.order.base.product.attribute.ListUiSmall.superclass.initComponent.apply(this, arguments);
 
-        this.grid.un( 'rowcontextmenu', this.onGridContextMenu, this );
-        this.grid.un( 'rowdblclick', this.onOpenEditWindow.createDelegate( this, [ 'edit' ] ), this );
+        this.grid.un('rowcontextmenu', this.onGridContextMenu, this);
+        this.grid.un('rowdblclick', this.onOpenEditWindow.createDelegate(this, ['edit']), this);
     },
 
 
@@ -41,77 +41,77 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend( MShop.panel.A
 
 
     afterRender : function() {
-        MShop.panel.order.base.product.attribute.ListUiSmall.superclass.afterRender.apply( this, arguments );
+        MShop.panel.order.base.product.attribute.ListUiSmall.superclass.afterRender.apply(this, arguments);
 
-        this.itemUi = this.findParentBy( function( c ) {
-            return c.isXType( MShop.panel.AbstractItemUi, false );
-        } );
+        this.itemUi = this.findParentBy(function(c) {
+            return c.isXType(MShop.panel.AbstractItemUi, false);
+        });
     },
 
 
-    onBeforeLoad : function( store, options ) {
-        MShop.panel.order.base.product.attribute.ListUiSmall.superclass.onBeforeLoad.apply( this, arguments );
+    onBeforeLoad : function(store, options) {
+        MShop.panel.order.base.product.attribute.ListUiSmall.superclass.onBeforeLoad.apply(this, arguments);
 
         options.params = options.params || {};
         options.params.condition = {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'order.base.product.attribute.productid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
-            } ]
+            }]
         };
 
     },
 
     getColumns : function() {
-        return [ {
+        return [{
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.id',
-            header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+            header : MShop.I18n.dt('client/extjs', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.type',
-            header : MShop.I18n.dt( 'client/extjs', 'Type' ),
+            header : MShop.I18n.dt('client/extjs', 'Type'),
             width : 150
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.name',
-            header : MShop.I18n.dt( 'client/extjs', 'Name' ),
+            header : MShop.I18n.dt('client/extjs', 'Name'),
             id : 'order-base-product-attribute-name'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.code',
-            header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+            header : MShop.I18n.dt('client/extjs', 'Code'),
             width : 150
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.value',
-            header : MShop.I18n.dt( 'client/extjs', 'Value' ),
+            header : MShop.I18n.dt('client/extjs', 'Value'),
             width : 150
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.product.attribute.ctime',
-            header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+            header : MShop.I18n.dt('client/extjs', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.product.attribute.mtime',
-            header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+            header : MShop.I18n.dt('client/extjs', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.editor',
-            header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+            header : MShop.I18n.dt('client/extjs', 'Editor'),
             width : 130,
             hidden : true
-        } ];
+        }];
     }
-} );
+});
 
-Ext.reg( 'MShop.panel.order.base.product.attribute.listuismall', MShop.panel.order.base.product.attribute.ListUiSmall );
+Ext.reg('MShop.panel.order.base.product.attribute.listuismall', MShop.panel.order.base.product.attribute.ListUiSmall);

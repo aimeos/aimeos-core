@@ -3,9 +3,9 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-Ext.ns( 'MShop.panel.service' );
+Ext.ns('MShop.panel.service');
 
-MShop.panel.service.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
+MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     recordName : 'Service',
     idProperty : 'service.id',
@@ -15,30 +15,30 @@ MShop.panel.service.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
     autoExpandColumn : 'service-list-label',
 
     filterConfig : {
-        filters : [ {
+        filters : [{
             dataIndex : 'service.label',
             operator : '=~',
             value : ''
-        } ]
+        }]
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt( 'client/extjs', 'Service' );
+        this.title = MShop.I18n.dt('client/extjs', 'Service');
 
-        MShop.panel.AbstractListUi.prototype.initActions.call( this );
-        MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
+        MShop.panel.AbstractListUi.prototype.initActions.call(this);
+        MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
-        MShop.panel.service.ListUi.superclass.initComponent.call( this );
+        MShop.panel.service.ListUi.superclass.initComponent.call(this);
     },
 
     getColumns : function() {
         // make sure service type store gets loaded in same batch as this grid data
-        this.typeStore = MShop.GlobalStoreMgr.get( 'Service_Type' );
+        this.typeStore = MShop.GlobalStoreMgr.get('Service_Type');
 
-        return [ {
+        return [{
             xtype : 'gridcolumn',
             dataIndex : 'service.id',
-            header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+            header : MShop.I18n.dt('client/extjs', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -46,35 +46,35 @@ MShop.panel.service.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.status',
-            header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+            header : MShop.I18n.dt('client/extjs', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
-            renderer : this.statusColumnRenderer.createDelegate( this )
+            renderer : this.statusColumnRenderer.createDelegate(this)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.typeid',
-            header : MShop.I18n.dt( 'client/extjs', 'Type' ),
+            header : MShop.I18n.dt('client/extjs', 'Type'),
             width : 100,
-            renderer : this.typeColumnRenderer.createDelegate( this, [ this.typeStore, "service.type.label" ], true )
+            renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "service.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.code',
-            header : MShop.I18n.dt( 'client/extjs', 'Code' ),
+            header : MShop.I18n.dt('client/extjs', 'Code'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.provider',
-            header : MShop.I18n.dt( 'client/extjs', 'Provider' ),
+            header : MShop.I18n.dt('client/extjs', 'Provider'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.label',
-            header : MShop.I18n.dt( 'client/extjs', 'Label' ),
+            header : MShop.I18n.dt('client/extjs', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -82,30 +82,30 @@ MShop.panel.service.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.position',
-            header : MShop.I18n.dt( 'client/extjs', 'Position' ),
+            header : MShop.I18n.dt('client/extjs', 'Position'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.config',
-            header : MShop.I18n.dt( 'client/extjs', 'Configuration' ),
+            header : MShop.I18n.dt('client/extjs', 'Configuration'),
             width : 200,
             editable : false,
-            renderer : function( value ) {
+            renderer : function(value) {
                 var s = "";
-                Ext.iterate( value, function( key, value, object ) {
-                    if( typeof value === "object" ) {
-                        value = Ext.util.JSON.encode( value );
+                Ext.iterate(value, function(key, value, object) {
+                    if(typeof value === "object") {
+                        value = Ext.util.JSON.encode(value);
                     }
-                    s = s + String.format( '<div>{0}: {1}</div>', key, value );
-                }, this );
+                    s = s + String.format('<div>{0}: {1}</div>', key, value);
+                }, this);
                 return s;
             }
         }, {
             xtype : 'datecolumn',
             dataIndex : 'service.ctime',
-            header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+            header : MShop.I18n.dt('client/extjs', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -113,7 +113,7 @@ MShop.panel.service.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'service.mtime',
-            header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+            header : MShop.I18n.dt('client/extjs', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -121,16 +121,16 @@ MShop.panel.service.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.editor',
-            header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+            header : MShop.I18n.dt('client/extjs', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
-        } ];
+        }];
     }
 
-} );
+});
 
-Ext.reg( 'MShop.panel.service.listui', MShop.panel.service.ListUi );
+Ext.reg('MShop.panel.service.listui', MShop.panel.service.ListUi);
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem( 'MShop.MainTabPanel', 'MShop.panel.service.listui', MShop.panel.service.ListUi, 50 );
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.service.listui', MShop.panel.service.ListUi, 50);

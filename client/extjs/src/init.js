@@ -5,44 +5,44 @@
 
 /* superglobal lang stubs */
 
-_ = function( string ) {
-    return MShop.I18n.dt( 'client/extjs/ext', string );
+_ = function(string) {
+    return MShop.I18n.dt('client/extjs/ext', string);
 };
 
-_n = function( singular, plural, num ) {
-    return MShop.I18n.dn( 'client/extjs/ext', singular, plural, num );
+_n = function(singular, plural, num) {
+    return MShop.I18n.dn('client/extjs/ext', singular, plural, num);
 };
 
 //init config and translations
-if( MShop.config.data ) {
-    MShop.Config.init( MShop.config.data );
+if(MShop.config.data) {
+    MShop.Config.init(MShop.config.data);
 }
 
-if( MShop.i18n ) {
-    MShop.I18n.init( MShop.i18n.content, MShop.i18n.locale );
+if(MShop.i18n) {
+    MShop.I18n.init(MShop.i18n.content, MShop.i18n.locale);
 }
 
-Ext.onReady( function() {
+Ext.onReady(function() {
 
-    Ext.ns( 'MShop.API' );
+    Ext.ns('MShop.API');
 
     // init jsonSMD
-    Ext.Direct.addProvider( Ext.apply( MShop.config.smd, {
+    Ext.Direct.addProvider(Ext.apply(MShop.config.smd, {
         'type' : 'jsonrpcprovider',
         'namespace' : 'MShop.API',
         'url' : MShop.config.smd.target,
         'useNamedParams' : true
-    } ) );
+    }));
 
     // init schemas
-    MShop.Schema.register( MShop.config.itemschema, MShop.config.searchschema );
+    MShop.Schema.register(MShop.config.itemschema, MShop.config.searchschema);
 
-    MShop.urlManager = new MShop.UrlManager( window.location.href );
+    MShop.urlManager = new MShop.UrlManager(window.location.href);
 
     // build interface
-    new Ext.Viewport( {
+    new Ext.Viewport({
         layout : 'fit',
-        items : [ {
+        items : [{
             layout : 'fit',
             border : false,
             tbar : [ '->', MShop.i18n.available ? {
@@ -56,13 +56,13 @@ Ext.onReady( function() {
                 activeTab : MShop.urlManager.getActiveTab(),
                 id : 'MShop.MainTabPanel',
                 itemId : 'MShop.MainTabPanel',
-                plugins : [ 'ux.itemregistry' ]
-            } ]
-        } ]
-    } );
+                plugins : ['ux.itemregistry']
+            }]
+        }]
+    });
 
     /*
      * Apply scrolling fix for Chrome Have a look at ext-override.js
      */
-    Ext.get( document.body ).addClass( 'ext-chrome-fixes' );
-} );
+    Ext.get(document.body).addClass('ext-chrome-fixes');
+});

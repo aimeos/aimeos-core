@@ -4,9 +4,9 @@
  */
 
 
-Ext.ns( 'MShop.panel.catalog' );
+Ext.ns('MShop.panel.catalog');
 
-MShop.panel.catalog.TreeUi = Ext.extend( MShop.panel.AbstractTreeUi, {
+MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 
     rootVisible : true,
     useArrows : true,
@@ -26,24 +26,24 @@ MShop.panel.catalog.TreeUi = Ext.extend( MShop.panel.AbstractTreeUi, {
 
 
     initComponent : function() {
-        this.title = MShop.I18n.dt( 'client/extjs', 'Catalog' );
+        this.title = MShop.I18n.dt('client/extjs', 'Catalog');
         this.domain = 'catalog';
-        MShop.panel.AbstractListUi.prototype.initActions.call( this );
-        MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
+        MShop.panel.AbstractListUi.prototype.initActions.call(this);
+        MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
-        this.recordClass = MShop.Schema.getRecord( this.recordName );
+        this.recordClass = MShop.Schema.getRecord(this.recordName);
 
-        this.initLoader( true );
+        this.initLoader(true);
 
         // fake a root -> needed by extjs
-        this.root = new Ext.tree.AsyncTreeNode( {
+        this.root = new Ext.tree.AsyncTreeNode({
             id : 'root'
-        } );
+        });
 
-        MShop.panel.catalog.TreeUi.superclass.initComponent.call( this );
+        MShop.panel.catalog.TreeUi.superclass.initComponent.call(this);
     },
 
-    inspectCreateNode : function( attr ) {
+    inspectCreateNode : function(attr) {
         // adding label to object as text is necessary
         var status = attr['catalog.status'];
 
@@ -53,11 +53,11 @@ MShop.panel.catalog.TreeUi = Ext.extend( MShop.panel.AbstractTreeUi, {
         attr.cls = 'statustext-' + status;
 
         // create record and insert into own store
-        this.store.suspendEvents( false );
-        var oldRecord = this.store.getById( attr['catalog.id'] );
-        this.store.remove( oldRecord );
+        this.store.suspendEvents(false);
+        var oldRecord = this.store.getById(attr['catalog.id']);
+        this.store.remove(oldRecord);
 
-        this.store.add( [ new this.recordClass( {
+        this.store.add([new this.recordClass({
             id : attr.id,
             status : status,
             code : attr['catalog.code'],
@@ -68,12 +68,12 @@ MShop.panel.catalog.TreeUi = Ext.extend( MShop.panel.AbstractTreeUi, {
             'catalog.ctime' : attr['catalog.ctime'],
             'catalog.mtime' : attr['catalog.mtime'],
             'catalog.editor' : attr['catalog.editor']
-        }, attr.id ) ] );
+        }, attr.id)]);
 
         this.store.resumeEvents();
     }
-} );
+});
 
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem( 'MShop.MainTabPanel', 'MShop.panel.catalog.treeui', MShop.panel.catalog.TreeUi, 30 );
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.catalog.treeui', MShop.panel.catalog.TreeUi, 30);

@@ -4,10 +4,10 @@
  */
 
 
-Ext.ns( 'MShop.panel.catalog' );
+Ext.ns('MShop.panel.catalog');
 
 // hook text picker into the catalog ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.TextItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.TextItemPickerUi', {
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Catalog_List',
@@ -18,11 +18,11 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.catalog.ItemUi', 'MShop.panel.cat
         listTypeLabelProperty : 'catalog.list.type.label',
         listTypeControllerName : 'Catalog_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'catalog.list.type.domain' : 'text'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'catalog/list/type/text'
     },
@@ -30,4 +30,4 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.catalog.ItemUi', 'MShop.panel.cat
         domain : 'catalog',
         prefix : 'text.'
     }
-}, 10 );
+}, 10);

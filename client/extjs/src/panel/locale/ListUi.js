@@ -4,9 +4,9 @@
  */
 
 
-Ext.ns( 'MShop.panel.locale' );
+Ext.ns('MShop.panel.locale');
 
-MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
+MShop.panel.locale.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     recordName : 'Locale',
     idProperty : 'locale.id',
@@ -21,49 +21,49 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
     autoExpandColumn : 'locale-currencyid',
 
     filterConfig : {
-        filters : [ {
+        filters : [{
             dataIndex : 'locale.position',
             operator : '>=',
             value : 0
-        } ]
+        }]
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt( 'client/extjs', 'List' );
+        this.title = MShop.I18n.dt('client/extjs', 'List');
 
-        MShop.panel.AbstractListUi.prototype.initActions.call( this );
-        MShop.panel.AbstractListUi.prototype.initToolbar.call( this );
+        MShop.panel.AbstractListUi.prototype.initActions.call(this);
+        MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
-        MShop.panel.locale.ListUi.superclass.initComponent.call( this );
+        MShop.panel.locale.ListUi.superclass.initComponent.call(this);
     },
 
     getColumns : function() {
-        return [ {
+        return [{
             xtype : 'gridcolumn',
             dataIndex : 'locale.id',
-            header : MShop.I18n.dt( 'client/extjs', 'ID' ),
+            header : MShop.I18n.dt('client/extjs', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.status',
-            header : MShop.I18n.dt( 'client/extjs', 'Status' ),
+            header : MShop.I18n.dt('client/extjs', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
-            renderer : this.statusColumnRenderer.createDelegate( this )
+            renderer : this.statusColumnRenderer.createDelegate(this)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.languageid',
-            header : MShop.I18n.dt( 'client/extjs', 'Language' ),
+            header : MShop.I18n.dt('client/extjs', 'Language'),
             sortable : true,
             width : 100,
             renderer : MShop.elements.language.renderer
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.currencyid',
-            header : MShop.I18n.dt( 'client/extjs', 'Currency' ),
+            header : MShop.I18n.dt('client/extjs', 'Currency'),
             sortable : true,
             width : 100,
             id : 'locale-currencyid',
@@ -71,13 +71,13 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.position',
-            header : MShop.I18n.dt( 'client/extjs', 'Position' ),
+            header : MShop.I18n.dt('client/extjs', 'Position'),
             sortable : true,
             width : 50
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.ctime',
-            header : MShop.I18n.dt( 'client/extjs', 'Created' ),
+            header : MShop.I18n.dt('client/extjs', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -86,7 +86,7 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.mtime',
-            header : MShop.I18n.dt( 'client/extjs', 'Last modified' ),
+            header : MShop.I18n.dt('client/extjs', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -95,17 +95,16 @@ MShop.panel.locale.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.editor',
-            header : MShop.I18n.dt( 'client/extjs', 'Editor' ),
+            header : MShop.I18n.dt('client/extjs', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
             hidden : true
-        } ];
+        }];
     }
-} );
+});
 
-Ext.reg( 'MShop.panel.locale.listui', MShop.panel.locale.ListUi );
+Ext.reg('MShop.panel.locale.listui', MShop.panel.locale.ListUi);
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.locale.tabui', 'MShop.panel.locale.listui', MShop.panel.locale.ListUi,
-    10 );
+Ext.ux.ItemRegistry.registerItem('MShop.panel.locale.tabui', 'MShop.panel.locale.listui', MShop.panel.locale.ListUi, 10);

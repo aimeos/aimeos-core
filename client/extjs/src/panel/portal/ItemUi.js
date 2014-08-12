@@ -4,26 +4,26 @@
  */
 
 
-Ext.ns( 'MShop.panel.portal' );
+Ext.ns('MShop.panel.portal');
 
 /**
  * @todo this class is misnamed, it's actually not a itemUi'
  */
-MShop.panel.portal.ItemUi = Ext.extend( Ext.Panel, {
+MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
 
     idProperty : 'id',
     autoScroll : true,
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt( 'client/extjs', 'Overview' );
+        this.title = MShop.I18n.dt('client/extjs', 'Overview');
 
-        this.items = [ {
+        this.items = [{
             xtype : 'portal',
             region : 'center',
-            items : [ {
+            items : [{
                 columnWidth : 1,
-                items : [ {
+                items : [{
                     xtype : 'MShop.panel.job.listuismall',
                     style : 'margin:5px',
                     layout : 'fit',
@@ -50,15 +50,15 @@ MShop.panel.portal.ItemUi = Ext.extend( Ext.Panel, {
                     draggable : true,
                     collapsible : true,
                     collapsed : false
-                } ]
-            } ]
-        } ];
+                }]
+            }]
+        }];
 
-        MShop.panel.portal.ItemUi.superclass.initComponent.call( this );
+        MShop.panel.portal.ItemUi.superclass.initComponent.call(this);
     }
-} );
+});
 
-Ext.reg( 'MShop.panel.portal.itemui', MShop.panel.portal.ItemUi );
+Ext.reg('MShop.panel.portal.itemui', MShop.panel.portal.ItemUi);
 
 //hook this into the main tab panel
-Ext.ux.ItemRegistry.registerItem( 'MShop.MainTabPanel', 'MShop.panel.portal.itemui', MShop.panel.portal.ItemUi, 10 );
+Ext.ux.ItemRegistry.registerItem('MShop.MainTabPanel', 'MShop.panel.portal.itemui', MShop.panel.portal.ItemUi, 10);

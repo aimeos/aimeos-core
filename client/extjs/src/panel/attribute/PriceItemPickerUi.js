@@ -4,10 +4,10 @@
  */
 
 
-Ext.ns( 'MShop.panel.attribute' );
+Ext.ns('MShop.panel.attribute');
 
 // hook price picker into the attribute ItemUi
-Ext.ux.ItemRegistry.registerItem( 'MShop.panel.attribute.ItemUi', 'MShop.panel.attribute.PriceItemPickerUi', {
+Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.attribute.PriceItemPickerUi', {
     xtype : 'MShop.panel.price.itempickerui',
     itemConfig : {
         recordName : 'Attribute_List',
@@ -18,11 +18,11 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.attribute.ItemUi', 'MShop.panel.a
         listTypeLabelProperty : 'attribute.list.type.label',
         listTypeControllerName : 'Attribute_List_Type',
         listTypeCondition : {
-            '&&' : [ {
+            '&&' : [{
                 '==' : {
                     'attribute.list.type.domain' : 'media'
                 }
-            } ]
+            }]
         },
         listTypeKey : 'attribute/list/type/media'
     },
@@ -30,4 +30,4 @@ Ext.ux.ItemRegistry.registerItem( 'MShop.panel.attribute.ItemUi', 'MShop.panel.a
         domain : 'attribute',
         prefix : 'price.'
     }
-}, 30 );
+}, 30);
