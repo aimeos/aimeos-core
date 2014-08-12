@@ -85,8 +85,8 @@ MShop.panel.AbstractListUi = Ext.extend( Ext.Panel, {
         this.initStore();
 
         if( this.filterConfig ) {
-            this.filterConfig.filterModel = this.filterConfig.filterModel
-                || MShop.Schema.getFilterModel( this.recordName );
+            this.filterConfig.filterModel = this.filterConfig.filterModel ||
+                MShop.Schema.getFilterModel( this.recordName );
         }
 
         this.grid = new Ext.grid.GridPanel( Ext.apply( {
@@ -123,7 +123,7 @@ MShop.panel.AbstractListUi = Ext.extend( Ext.Panel, {
                     var siteid = MShop.config.site['locale.site.id'];
                     var recSiteid = record.get( this.siteidProperty );
 
-                    if( record.phantom === false && recSiteid != null && recSiteid != siteid ) {
+                    if( record.phantom === false && recSiteid !== null && recSiteid != siteid ) {
                         return this.rowCssClass;
                     }
                     return '';
@@ -252,8 +252,8 @@ MShop.panel.AbstractListUi = Ext.extend( Ext.Panel, {
 
         Ext.Msg.show( {
             title : MShop.I18n.dt( 'client/extjs', 'Delete items?' ),
-            msg : MShop.I18n
-                .dt( 'client/extjs', 'You are going to delete one or more items. Would you like to proceed?' ),
+            msg : MShop.I18n.dt( 'client/extjs',
+                'You are going to delete one or more items. Would you like to proceed?' ),
             buttons : Ext.Msg.YESNO,
             fn : function( btn ) {
                 if( btn == 'yes' ) {

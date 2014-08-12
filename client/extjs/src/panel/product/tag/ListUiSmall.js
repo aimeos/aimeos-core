@@ -41,8 +41,8 @@ MShop.panel.product.tag.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
                 header : MShop.I18n.dt( 'client/extjs', 'Type' ),
                 sortable : true,
                 width : 70,
-                renderer : this.typeColumnRenderer
-                .createDelegate( this, [ this.typeStore, "product.tag.type.label" ], true )
+                renderer : this.typeColumnRenderer.createDelegate( this, [ this.typeStore, "product.tag.type.label" ],
+                    true )
             },
             {
                 xtype : 'gridcolumn',

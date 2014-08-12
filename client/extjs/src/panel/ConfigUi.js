@@ -119,8 +119,8 @@ MShop.panel.ConfigUi = Ext.extend( Ext.grid.EditorGridPanel, {
                     try {
                         obj.record.data.value = Ext.util.JSON.decode( obj.record.data.value );
                     } catch( err ) {
-                        Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), String.format( MShop.I18n
-                        .dt( 'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
+                        Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), String.format( MShop.I18n.dt(
+                            'client/extjs', 'Invalid value for configuration key "{0}"' ), obj.record.data.name ) );
 
                         throw new Ext.Error( 'InvalidData', obj.record.data );
                     }

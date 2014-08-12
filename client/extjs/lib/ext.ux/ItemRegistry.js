@@ -4,7 +4,7 @@
  * $Id: ItemRegistry.js 14263 2011-12-11 16:36:17Z nsendetzky $
  */
 
-Ext.ns('Ext.ux');
+Ext.ns( 'Ext.ux' );
 
 /**
  * plugin to insert additional registered items into a container
@@ -20,8 +20,7 @@ Ext.ns('Ext.ux');
  *          Ext.extend(Ext.Container, { ... plugins: [{ ptype:
  *          'ux.itemregistry', key: 'myDialog' }] })
  */
-Ext.ux.ItemRegistry = function() {
-};
+Ext.ux.ItemRegistry = function() {};
 
 /**
  * @static
@@ -40,8 +39,8 @@ Ext.ux.ItemRegistry.itemMap = {};
  * @param {Number}
  *            pos (optional)
  */
-Ext.ux.ItemRegistry.registerItem = function(key, itemkey, item, pos) {
-    if (!Ext.ux.ItemRegistry.itemMap.hasOwnProperty(key)) {
+Ext.ux.ItemRegistry.registerItem = function( key, itemkey, item, pos ) {
+    if( !Ext.ux.ItemRegistry.itemMap.hasOwnProperty( key ) ) {
         Ext.ux.ItemRegistry.itemMap[key] = {};
     }
 
@@ -58,53 +57,53 @@ Ext.ux.ItemRegistry.prototype = {
      */
     key : null,
 
-    init : function(cmp) {
+    init : function( cmp ) {
         this.cmp = cmp;
 
-        if (!this.key) {
+        if( !this.key ) {
             this.key = cmp.getItemId();
         }
 
         // give static item pos to existing items
-        this.cmp.items.each(function(item, idx) {
-            if (!item.hasOwnProperty('registerdItemPos')) {
+        this.cmp.items.each( function( item, idx ) {
+            if( !item.hasOwnProperty( 'registerdItemPos' ) ) {
                 item.registerdItemPos = idx * 10;
             }
-        }, this);
+        }, this );
 
         var regItems = Ext.ux.ItemRegistry.itemMap[this.key] || [];
 
-        Ext.iterate(regItems, function(key, value) {
-            var addItem = this.getItem(value), addPos = null;
+        Ext.iterate( regItems, function( key, value ) {
+            var addItem = this.getItem( value ), addPos = null;
 
-            this.cmp.items.each(function(item, idx) {
-                if (addItem.registerdItemPos < item.registerdItemPos) {
-                    this.cmp.insert(idx, addItem);
+            this.cmp.items.each( function( item, idx ) {
+                if( addItem.registerdItemPos < item.registerdItemPos ) {
+                    this.cmp.insert( idx, addItem );
                     addPos = idx;
                     return false;
                 }
                 return true;
-            }, this);
+            }, this );
 
-            if (!Ext.isNumber(addPos)) {
-                this.cmp.add(addItem);
+            if( !Ext.isNumber( addPos ) ) {
+                this.cmp.add( addItem );
             }
-        }, this);
+        }, this );
     },
 
-    getItem : function(reg) {
+    getItem : function( reg ) {
         var def = reg.item, item;
 
-        if (typeof def === 'function') {
+        if( typeof def === 'function' ) {
             item = new def;
         } else {
-            if (Ext.isString(def)) {
+            if( Ext.isString( def ) ) {
                 def = {
                     xtype : def
                 };
             }
 
-            item = this.cmp.lookupComponent(def);
+            item = this.cmp.lookupComponent( def );
         }
 
         item.registerdItemPos = reg.pos ? reg.pos : this.cmp.items.length * 10;
@@ -113,7 +112,7 @@ Ext.ux.ItemRegistry.prototype = {
     }
 
 };
-Ext.ComponentMgr.registerPlugin('ux.itemregistry', Ext.ux.ItemRegistry);
+Ext.ComponentMgr.registerPlugin( 'ux.itemregistry', Ext.ux.ItemRegistry );
 
 /*
  * test

@@ -137,5 +137,5 @@ MShop.panel.order.base.service.ListUi = Ext.extend( MShop.panel.AbstractListUi, 
 Ext.reg( 'MShop.panel.order.base.service.listui', MShop.panel.order.base.service.ListUi );
 
 //hook order base service into the order ItemUi
-Ext.ux.ItemRegistry
-.registerItem( 'MShop.panel.order.ItemUi', 'MShop.panel.order.base.service.ListUi', MShop.panel.order.base.service.ListUi, 30 );
+Ext.ux.ItemRegistry.registerItem( 'MShop.panel.order.ItemUi', 'MShop.panel.order.base.service.ListUi',
+    MShop.panel.order.base.service.ListUi, 30 );

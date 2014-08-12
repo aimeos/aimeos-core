@@ -118,8 +118,8 @@ MShop.panel.locale.site.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
 
     onSaveItem : function() {
         if( !this.mainForm.getForm().isValid() && this.fireEvent( 'validate', this ) !== false ) {
-            Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), MShop.I18n
-            .dt( 'client/extjs', 'Please recheck your data' ) );
+            Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), MShop.I18n.dt( 'client/extjs',
+                'Please recheck your data' ) );
             return;
         }
 

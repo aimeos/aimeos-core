@@ -184,8 +184,11 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 
     onListItemDrop : function( ddSource, e, data ) {
 
-        var records = ddSource.dragData.selections, store = this.itemListUi.store, view = this.itemListUi.grid
-        .getView(), t = e.getTarget( view.rowSelector ), rowIndex = t ? view.findRowIndex( t ) : store.getCount();
+        var records = ddSource.dragData.selections;
+        var store = this.itemListUi.store;
+        var view = this.itemListUi.grid.getView();
+        var t = e.getTarget( view.rowSelector );
+        var rowIndex = t ? view.findRowIndex( t ) : store.getCount();
 
         if( ddSource.grid.store === store ) {
             // reorder in same list
@@ -249,8 +252,8 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
                 total : 0
             };
 
-            if( this.itemListUi.store.reader.jsonData && this.itemListUi.store.reader.jsonData.graph
-                && this.itemListUi.store.reader.jsonData.graph[recordName] ) {
+            if( this.itemListUi.store.reader.jsonData && this.itemListUi.store.reader.jsonData.graph &&
+                this.itemListUi.store.reader.jsonData.graph[recordName] ) {
                 data = this.itemListUi.store.reader.jsonData.graph[recordName];
             }
 
@@ -312,8 +315,8 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend( Ext.Panel, {
 
     refDecimalColumnRenderer : function( refId, metaData, record, rowIndex, colIndex, store, displayField ) {
 
-        var refItem = this.getRefStore().getById( refId ), renderer = Ext.util.Format
-        .numberRenderer( Ext.grid.NumberColumn.prototype.format );
+        var refItem = this.getRefStore().getById( refId );
+        var renderer = Ext.util.Format.numberRenderer( Ext.grid.NumberColumn.prototype.format );
 
         return ( refItem ? renderer( refItem.get( displayField ) ) : '' );
     },

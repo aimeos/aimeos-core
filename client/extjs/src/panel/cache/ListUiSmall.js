@@ -97,11 +97,10 @@ MShop.panel.cache.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
     onFlush : function() {
         var that = this;
 
-        Ext.Msg
-        .show( {
+        Ext.Msg.show( {
             title : MShop.I18n.dt( 'client/extjs', 'Flush cache?' ),
-            msg : MShop.I18n
-            .dt( 'client/extjs', 'You are going to flush the complete cache for the current site. Would you like to proceed?' ),
+            msg : MShop.I18n.dt( 'client/extjs',
+                'You are going to flush the complete cache for the current site. Would you like to proceed?' ),
             buttons : Ext.Msg.YESNO,
             fn : function( btn ) {
                 if( btn == 'yes' ) {

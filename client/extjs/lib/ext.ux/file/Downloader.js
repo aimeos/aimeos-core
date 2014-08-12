@@ -4,27 +4,27 @@
  * $Id: Downloader.js 14263 2011-12-11 16:36:17Z nsendetzky $
  */
 
-Ext.ns('Ext.ux.file');
+Ext.ns( 'Ext.ux.file' );
 
 /**
  * @namespace Ext.ux.file
  * @class Ext.ux.file.Downloader
  * @extends Ext.util.Observable
  */
-Ext.ux.file.Downloader = function(config) {
+Ext.ux.file.Downloader = function( config ) {
     config = config || {};
-    Ext.apply(this, config);
+    Ext.apply( this, config );
 
-    Ext.ux.file.Downloader.superclass.constructor.call(this);
+    Ext.ux.file.Downloader.superclass.constructor.call( this );
 
-    this.addEvents({
+    this.addEvents( {
         'success' : true,
         'fail' : true,
         'abort' : true
-    });
+    } );
 };
 
-Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {
+Ext.extend( Ext.ux.file.Downloader, Ext.util.Observable, {
     url : null,
     method : 'POST',
     params : null,
@@ -40,13 +40,13 @@ Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {
      * start download
      */
     start : function() {
-        this.form = Ext.getBody().createChild({
+        this.form = Ext.getBody().createChild( {
             tag : 'form',
             method : this.method,
             cls : 'x-hidden'
-        });
+        } );
 
-        var con = new Ext.data.Connection({
+        var con = new Ext.data.Connection( {
             // firefox specific problem -> see http://www.extjs.com/forum/archive/index.php/t-44862.html
             //  It appears that this is because the "load" is completing once the initial download dialog is displayed, 
             //  but the frame is then destroyed before the "save as" dialog is shown.
@@ -54,9 +54,9 @@ Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {
             // TODO check if we can handle firefox event 'onSaveAsSubmit' (or something like that)
             //
             debugUploads : Ext.isGecko
-        });
+        } );
 
-        this.transactionId = con.request({
+        this.transactionId = con.request( {
             isUpload : true,
             form : this.form,
             params : this.params,
@@ -65,16 +65,16 @@ Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {
             failure : this.onFailure,
             url : this.url,
             timeout : this.timeout
-        });
+        } );
     },
 
     /**
      * abort download
      */
     abort : function() {
-        Ext.Ajax.abort(this.transactionId);
+        Ext.Ajax.abort( this.transactionId );
         this.form.remove();
-        this.fireEvent('abort', this);
+        this.fireEvent( 'abort', this );
     },
 
     /**
@@ -82,7 +82,7 @@ Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {
      */
     onSuccess : function() {
         this.form.remove();
-        this.fireEvent('success', this);
+        this.fireEvent( 'success', this );
     },
 
     /**
@@ -90,7 +90,7 @@ Ext.extend(Ext.ux.file.Downloader, Ext.util.Observable, {
      */
     onFailure : function() {
         this.form.remove();
-        this.fireEvent('fail', this);
+        this.fireEvent( 'fail', this );
     }
 
-});
+} );

@@ -3,9 +3,9 @@
  * LGPLv3, http://www.arcavias.com/en/license
  */
 
-Ext.ns('Ext.ux.AdvancedSearch');
+Ext.ns( 'Ext.ux.AdvancedSearch' );
 
-Ext.ux.AdvancedSearch.DateFilter = Ext.extend(Ext.ux.AdvancedSearch.Filter, {
+Ext.ux.AdvancedSearch.DateFilter = Ext.extend( Ext.ux.AdvancedSearch.Filter, {
 
     operators : [ '>', '>=', '==', '!=', '<', '<=' ],
     defaultOperator : '==',
@@ -18,19 +18,19 @@ Ext.ux.AdvancedSearch.DateFilter = Ext.extend(Ext.ux.AdvancedSearch.Filter, {
             format : 'Y-m-d H:i:s'
         };
 
-        Ext.ux.AdvancedSearch.DateFilter.superclass.initComponent.call(this);
+        Ext.ux.AdvancedSearch.DateFilter.superclass.initComponent.call( this );
     },
 
     getValue : function() {
 
-        v = Ext.ux.AdvancedSearch.DateFilter.superclass.getValue.call(this);
+        v = Ext.ux.AdvancedSearch.DateFilter.superclass.getValue.call( this );
 
-        if (v) {
-            return new Date(v).format('Y-m-d H:i:s');
+        if( v ) {
+            return new Date( v ).format( 'Y-m-d H:i:s' );
         }
 
         return v;
     }
-});
+} );
 
-Ext.reg('ux.datefilter', Ext.ux.AdvancedSearch.DateFilter);
+Ext.reg( 'ux.datefilter', Ext.ux.AdvancedSearch.DateFilter );

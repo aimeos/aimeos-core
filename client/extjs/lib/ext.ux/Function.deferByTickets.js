@@ -4,7 +4,7 @@
  * $Id: Function.deferByTickets.js 14263 2011-12-11 16:36:17Z nsendetzky $
  */
 
-Ext.applyIf(Function.prototype, {
+Ext.applyIf( Function.prototype, {
 
     /**
      * defers execution on a ticket bases. The function gets executed when all
@@ -26,24 +26,24 @@ Ext.applyIf(Function.prototype, {
      *            the specified position
      * @return {Function} ticketFn
      */
-    deferByTickets : function(obj, args, appendArgs) {
-        var fn = this.createDelegate(obj, args, appendArgs), waitTickets = [];
+    deferByTickets : function( obj, args, appendArgs ) {
+        var fn = this.createDelegate( obj, args, appendArgs ), waitTickets = [];
 
         // run if all tickets are back
         var run = function() {
-            if (Ext.isEmpty(waitTickets)) {
+            if( Ext.isEmpty( waitTickets ) ) {
                 fn();
             }
         };
 
         return function() {
             var ticket = Ext.id();
-            waitTickets.push(ticket);
+            waitTickets.push( ticket );
             // fn to return wait ticket
             return function() {
-                waitTickets.remove(ticket);
+                waitTickets.remove( ticket );
                 run();
             };
         };
     }
-});
+} );

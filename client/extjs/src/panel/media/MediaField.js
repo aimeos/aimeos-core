@@ -62,8 +62,8 @@ MShop.panel.media.MediaField = Ext.extend( Ext.form.Field, {
 
         // the click to edit text container
         var clickToEditText = MShop.I18n.dt( 'client/extjs', 'Click to upload' );
-        this.textCt = Ext.DomHelper.insertFirst( this.buttonCt, '<div class="x-ux-from-imagefield-text">'
-            + clickToEditText + '</div>', true );
+        this.textCt = Ext.DomHelper.insertFirst( this.buttonCt, '<div class="x-ux-from-imagefield-text">' +
+            clickToEditText + '</div>', true );
         this.textCt.setSize( this.width, this.height / 3 );
         var tm = Ext.util.TextMetrics.createInstance( this.textCt );
         tm.setFixedWidth( this.width );
@@ -73,8 +73,8 @@ MShop.panel.media.MediaField = Ext.extend( Ext.form.Field, {
 
         // the image container
         // NOTE: this will atm. always be the default image for the first few miliseconds
-        this.imageCt = Ext.DomHelper.insertFirst( this.buttonCt, '<img class="' + this.cls + '" src="'
-            + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>', true );
+        this.imageCt = Ext.DomHelper.insertFirst( this.buttonCt, '<img class="' + this.cls + '" src="' +
+            MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>', true );
         this.imageCt.setOpacity( 0.2 );
         this.imageCt.setStyle( {
             top : ( ( this.height - this.imageCt.getHeight() ) / 2 ) + 'px',
@@ -186,8 +186,8 @@ MShop.panel.media.MediaField = Ext.extend( Ext.form.Field, {
         if( this.imageSrc && this.imageCt.dom.src.substr( -1 * this.imageSrc.length ) !== this.imageSrc ) {
 
             var ct = this.imageCt.up( 'div' );
-            var img = Ext.DomHelper.insertAfter( this.imageCt, '<img class="' + this.cls + '" src="'
-                + MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>', true );
+            var img = Ext.DomHelper.insertAfter( this.imageCt, '<img class="' + this.cls + '" src="' +
+                MShop.urlManager.getAbsoluteUrl( this.imageSrc ) + '"/>', true );
 
             // replace image after load
             img.on( 'load', function() {
@@ -204,9 +204,8 @@ MShop.panel.media.MediaField = Ext.extend( Ext.form.Field, {
             }, this );
 
             img.on( 'error', function() {
-                Ext.MessageBox.alert( MShop.I18n.dt( 'client/extjs', 'Upload failed' ), MShop.I18n
-                .dt( 'client/extjs', 'Could not upload file. Please notify your administrator' ) )
-                .setIcon( Ext.MessageBox.ERROR );
+                Ext.MessageBox.alert( MShop.I18n.dt( 'client/extjs', 'Upload failed' ),
+                    MShop.I18n.dt( 'client/extjs', 'Could not upload file. Please notify your administrator' ) ).setIcon( Ext.MessageBox.ERROR );
                 this.loadMask.hide();
             }, this );
         }

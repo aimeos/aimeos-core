@@ -122,8 +122,8 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.productid',
                 header : MShop.I18n.dt( 'client/extjs', 'Product name' ),
-                renderer : this.typeColumnRenderer
-                .createDelegate( this, [ this.productStore, "order.base.product.name" ], true ),
+                renderer : this.typeColumnRenderer.createDelegate( this,
+                    [ this.productStore, "order.base.product.name" ], true ),
                 id : 'order-base-coupon-name'
             },
             {
@@ -202,5 +202,5 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 Ext.reg( 'MShop.panel.order.base.coupon.listui', MShop.panel.order.base.coupon.ListUi );
 
 //hook order base product into the order ItemUi
-Ext.ux.ItemRegistry
-.registerItem( 'MShop.panel.order.ItemUi', 'MShop.panel.order.base.coupon.ListUi', MShop.panel.order.base.coupon.ListUi, 50 );
+Ext.ux.ItemRegistry.registerItem( 'MShop.panel.order.ItemUi', 'MShop.panel.order.base.coupon.ListUi',
+    MShop.panel.order.base.coupon.ListUi, 50 );

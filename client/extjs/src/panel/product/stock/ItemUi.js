@@ -81,8 +81,8 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
                                 listeners : {
                                     'render' : {
                                         fn : function() {
-                                            var record, index = this.store
-                                            .find( 'product.stock.warehouse.code', 'default' );
+                                            var record, index = this.store.find( 'product.stock.warehouse.code',
+                                                'default' );
                                             if( ( record = this.store.getAt( index ) ) ) {
                                                 this.setValue( record.id );
                                             }
@@ -129,8 +129,8 @@ MShop.panel.product.stock.ItemUi = Ext.extend( MShop.panel.AbstractListItemUi, {
     onSaveItem : function() {
         // validate data
         if( !this.mainForm.getForm().isValid() && this.fireEvent( 'validate', this ) !== false ) {
-            Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), MShop.I18n
-            .dt( 'client/extjs', 'Please recheck your data' ) );
+            Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), MShop.I18n.dt( 'client/extjs',
+                'Please recheck your data' ) );
             return;
         }
 

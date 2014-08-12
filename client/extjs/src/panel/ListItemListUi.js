@@ -83,9 +83,8 @@ MShop.panel.ListItemListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
     onOpenEditWindow : function( action ) {
         if( action === 'add' ) {
-            return Ext.Msg
-            .alert( MShop.I18n.dt( 'client/extjs', 'Select Item' ), MShop.I18n
-            .dt( 'client/extjs', 'Please select an item on the right side and add it via drag and drop to this list.' ) );
+            return Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Select Item' ), MShop.I18n.dt( 'client/extjs',
+                'Please select an item on the right side and add it via drag and drop to this list.' ) );
         }
 
         return MShop.panel.ListItemListUi.superclass.onOpenEditWindow.apply( this, arguments );

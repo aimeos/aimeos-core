@@ -110,5 +110,5 @@ MShop.panel.media.type.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
 Ext.reg( 'MShop.panel.media.type.listui', MShop.panel.media.type.ListUi );
 
-Ext.ux.ItemRegistry
-.registerItem( 'MShop.panel.type.tabUi', 'MShop.panel.media.type.listui', MShop.panel.media.type.ListUi, 20 );
+Ext.ux.ItemRegistry.registerItem( 'MShop.panel.type.tabUi', 'MShop.panel.media.type.listui',
+    MShop.panel.media.type.ListUi, 20 );

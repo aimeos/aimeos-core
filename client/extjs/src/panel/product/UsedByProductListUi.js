@@ -112,8 +112,8 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
                 header : MShop.I18n.dt( 'client/extjs', 'Status' ),
                 sortable : false,
                 width : 50,
-                renderer : this.statusColumnRenderer
-                .createDelegate( this, [ this.ParentItemUi.store, "product.status" ], true )
+                renderer : this.statusColumnRenderer.createDelegate( this,
+                    [ this.ParentItemUi.store, "product.status" ], true )
             },
             {
                 xtype : 'gridcolumn',
@@ -133,8 +133,8 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
                 header : MShop.I18n.dt( 'client/extjs', 'Code' ),
                 sortable : false,
                 width : 100,
-                renderer : this.listTypeColumnRenderer
-                .createDelegate( this, [ this.ParentItemUi.store, "product.code" ], true )
+                renderer : this.listTypeColumnRenderer.createDelegate( this,
+                    [ this.ParentItemUi.store, "product.code" ], true )
             },
             {
                 xtype : 'gridcolumn',
@@ -222,5 +222,5 @@ MShop.panel.product.UsedByProductListUi = Ext.extend( MShop.panel.AbstractUsedBy
 Ext.reg( 'MShop.panel.product.usedbyproductlistui', MShop.panel.product.UsedByProductListUi );
 
 //hook parent product list into the product ItemUi
-Ext.ux.ItemRegistry
-.registerItem( 'MShop.panel.product.ItemUi', 'MShop.panel.product.UsedByProductListUi', MShop.panel.product.UsedByProductListUi, 110 );
+Ext.ux.ItemRegistry.registerItem( 'MShop.panel.product.ItemUi', 'MShop.panel.product.UsedByProductListUi',
+    MShop.panel.product.UsedByProductListUi, 110 );

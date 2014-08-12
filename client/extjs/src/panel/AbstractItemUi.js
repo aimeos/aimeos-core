@@ -236,8 +236,8 @@ MShop.panel.AbstractItemUi = Ext.extend( Ext.Window, {
     onSaveItem : function() {
         // validate data
         if( !this.mainForm.getForm().isValid() && this.fireEvent( 'validate', this ) !== false ) {
-            Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), MShop.I18n
-            .dt( 'client/extjs', 'Please recheck your data' ) );
+            Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Invalid data' ), MShop.I18n.dt( 'client/extjs',
+                'Please recheck your data' ) );
             return;
         }
 

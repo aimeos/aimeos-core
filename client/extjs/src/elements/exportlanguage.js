@@ -54,8 +54,8 @@ MShop.elements.exportlanguage.Window = Ext.extend( Ext.Window, {
         this.initActions();
 
         if( this.filterConfig ) {
-            this.filterConfig.filterModel = this.filterConfig.filterModel
-                || MShop.Schema.getFilterModel( this.recordName );
+            this.filterConfig.filterModel = this.filterConfig.filterModel ||
+                MShop.Schema.getFilterModel( this.recordName );
         }
 
         this.gridItemList = new Ext.grid.GridPanel( Ext.apply( {
@@ -230,8 +230,11 @@ MShop.elements.exportlanguage.Window = Ext.extend( Ext.Window, {
     },
 
     onListItemDrop : function( ddSource, e, data ) {
-        var records = ddSource.dragData.selections, store = this.gridItemList.store, view = this.gridItemList.getView(), t = e
-        .getTarget( view.rowSelector ), rowIndex = t ? view.findRowIndex( t ) : store.getCount();
+        var records = ddSource.dragData.selections;
+        var store = this.gridItemList.store;
+        var view = this.gridItemList.getView();
+        var t = e.getTarget( view.rowSelector );
+        var rowIndex = t ? view.findRowIndex( t ) : store.getCount();
 
         if( ddSource.grid.store === store ) {
             // reorder in same list
@@ -285,8 +288,8 @@ MShop.elements.exportlanguage.Window = Ext.extend( Ext.Window, {
 
         Ext.Msg.show( {
             title : MShop.I18n.dt( 'client/extjs', 'Delete items?' ),
-            msg : MShop.I18n
-            .dt( 'client/extjs', 'You are going to delete one or more items. Would you like to proceed?' ),
+            msg : MShop.I18n.dt( 'client/extjs',
+                'You are going to delete one or more items. Would you like to proceed?' ),
             buttons : Ext.Msg.YESNO,
             fn : function( btn ) {
                 if( btn == 'yes' ) {
@@ -438,9 +441,11 @@ MShop.elements.exportlanguage.Window = Ext.extend( Ext.Window, {
         this.fireEvent( 'save', this, rs );
         this.close();
 
-        Ext.MessageBox
-        .alert( MShop.I18n.dt( 'client/extjs', 'Export successful' ), MShop.I18n
-        .dt( 'client/extjs', 'The file with the exported texts will be available within a few minutes. It can then be downloaded from the "Job" panel of the "Overview" tab.' ) );
+        Ext.MessageBox.alert(
+            MShop.I18n.dt( 'client/extjs', 'Export successful' ),
+            MShop.I18n.dt(
+                'client/extjs',
+                'The file with the exported texts will be available within a few minutes. It can then be downloaded from the "Job" panel of the "Overview" tab.' ) );
     },
 
     statusColumnRenderer : function( status, metaData ) {
@@ -454,8 +459,8 @@ MShop.elements.exportlanguage.Window = Ext.extend( Ext.Window, {
                 total : 0
             };
 
-            if( this.gridItemList.store.reader.jsonData && this.gridItemList.store.reader.jsonData.graph
-                && this.gridItemList.store.reader.jsonData.graph[recordName] ) {
+            if( this.gridItemList.store.reader.jsonData && this.gridItemList.store.reader.jsonData.graph &&
+                this.gridItemList.store.reader.jsonData.graph[recordName] ) {
                 data = this.gridItemList.store.reader.jsonData.graph[recordName];
             }
 

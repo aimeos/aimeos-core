@@ -115,8 +115,8 @@ MShop.panel.order.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 
     onOpenEditWindow : function( action ) {
         if( action === 'add' ) {
-            return Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Not implemented' ), MShop.I18n
-            .dt( 'client/extjs', 'Sorry, adding orders manually is currently not implemented' ) );
+            return Ext.Msg.alert( MShop.I18n.dt( 'client/extjs', 'Not implemented' ), MShop.I18n.dt( 'client/extjs',
+                'Sorry, adding orders manually is currently not implemented' ) );
         }
 
         return MShop.panel.order.ListUi.superclass.onOpenEditWindow.apply( this, arguments );

@@ -147,5 +147,5 @@ MShop.panel.locale.site.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 Ext.reg( 'MShop.panel.locale.site.listui', MShop.panel.locale.site.ListUi );
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry
-.registerItem( 'MShop.panel.locale.tabui', 'MShop.panel.locale.site.listui', MShop.panel.locale.site.ListUi, 20 );
+Ext.ux.ItemRegistry.registerItem( 'MShop.panel.locale.tabui', 'MShop.panel.locale.site.listui',
+    MShop.panel.locale.site.ListUi, 20 );

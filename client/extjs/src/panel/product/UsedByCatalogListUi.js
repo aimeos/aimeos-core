@@ -133,8 +133,8 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend( MShop.panel.AbstractUsedBy
                 header : MShop.I18n.dt( 'client/extjs', 'Status' ),
                 sortable : false,
                 width : 50,
-                renderer : this.statusColumnRenderer
-                .createDelegate( this, [ this.catalogStore, "catalog.status" ], true )
+                renderer : this.statusColumnRenderer.createDelegate( this, [ this.catalogStore, "catalog.status" ],
+                    true )
             },
             {
                 xtype : 'gridcolumn',
@@ -142,8 +142,8 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend( MShop.panel.AbstractUsedBy
                 header : MShop.I18n.dt( 'client/extjs', 'Code' ),
                 sortable : false,
                 width : 100,
-                renderer : this.listTypeColumnRenderer
-                .createDelegate( this, [ this.catalogStore, "catalog.code" ], true )
+                renderer : this.listTypeColumnRenderer.createDelegate( this, [ this.catalogStore, "catalog.code" ],
+                    true )
             },
             {
                 xtype : 'gridcolumn',
@@ -152,8 +152,8 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend( MShop.panel.AbstractUsedBy
                 sortable : false,
                 width : 100,
                 id : 'catalog-list-autoexpand-column',
-                renderer : this.listTypeColumnRenderer
-                .createDelegate( this, [ this.catalogStore, "catalog.label" ], true )
+                renderer : this.listTypeColumnRenderer.createDelegate( this, [ this.catalogStore, "catalog.label" ],
+                    true )
             },
             {
                 xtype : 'datecolumn',
@@ -196,5 +196,5 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend( MShop.panel.AbstractUsedBy
 Ext.reg( 'MShop.panel.product.usedbycataloglistui', MShop.panel.product.UsedByCatalogListUi );
 
 //hook parent product list into the product ItemUi
-Ext.ux.ItemRegistry
-.registerItem( 'MShop.panel.product.ItemUi', 'MShop.panel.product.UsedByCatalogListUi', MShop.panel.product.UsedByCatalogListUi, 100 );
+Ext.ux.ItemRegistry.registerItem( 'MShop.panel.product.ItemUi', 'MShop.panel.product.UsedByCatalogListUi',
+    MShop.panel.product.UsedByCatalogListUi, 100 );

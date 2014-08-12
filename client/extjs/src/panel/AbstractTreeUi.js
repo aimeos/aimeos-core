@@ -94,8 +94,8 @@ MShop.panel.AbstractTreeUi = Ext.extend( Ext.tree.TreePanel, {
     onExpandNode : function( node ) {
         var domain = this.domain;
         Ext.each( node["childNodes"], function( node ) {
-            if( node["attributes"].hasOwnProperty( domain + ".hasChildren" )
-                && node["attributes"][domain + ".hasChildren"] === false ) {
+            if( node["attributes"].hasOwnProperty( domain + ".hasChildren" ) &&
+                node["attributes"][domain + ".hasChildren"] === false ) {
                 node.ui.ecNode.style.visibility = 'hidden';
             }
         }, this );
@@ -124,11 +124,17 @@ MShop.panel.AbstractTreeUi = Ext.extend( Ext.tree.TreePanel, {
                 if( node.id === 'root' ) {
                     // we create the node to have it in the store
                     var newNode = this.createNode( response.responseText.items );
+                    var text;
+                    
+                    if( showRootId !== true ) {
+                        text = response.responseText.items[domain + '.label'];
+                    } else {
+                        text = response.responseText.items[domain + '.id'] + " - ";
+                        text += response.responseText.items[domain + '.label'];
+                    }
 
                     node.setId( response.responseText.items[domain + '.id'] );
-                    node.setText( ( showRootId !== true ) ? response.responseText.items[domain + '.label']
-                        : response.responseText.items[domain + '.id'] + " - "
-                            + response.responseText.items[domain + '.label'] );
+                    node.setText( text );
                     node.getUI().addClass( newNode.attributes.cls );
                     node.getOwnerTree().enable();
                     node.getOwnerTree().actionAdd.setDisabled( node.id !== 'root' );
@@ -216,8 +222,8 @@ MShop.panel.AbstractTreeUi = Ext.extend( Ext.tree.TreePanel, {
 
         Ext.Msg.show( {
             title : MShop.I18n.dt( 'client/extjs', 'Delete items?' ),
-            msg : MShop.I18n
-            .dt( 'client/extjs', 'You are going to delete one or more items. Would you like to proceed?' ),
+            msg : MShop.I18n.dt( 'client/extjs',
+                'You are going to delete one or more items. Would you like to proceed?' ),
             buttons : Ext.Msg.YESNO,
             fn : function( btn ) {
                 if( btn == 'yes' ) {
@@ -255,44 +261,44 @@ MShop.panel.AbstractTreeUi = Ext.extend( Ext.tree.TreePanel, {
     onMoveNode : function( tree, node, oldParent, newParent, index ) {
         var ref = node.nextSibling ? node.nextSibling.id : null;
 
-        MShop.API[this.recordName]
-        .moveItems( MShop.config.site["locale.site.code"], node.id, oldParent.id, newParent.id, ref, function( success, response ) {
-            if( !success ) {
-                this.onStoreException( null, null, null, null, response );
-            }
-        }, this );
+        MShop.API[this.recordName].moveItems( MShop.config.site["locale.site.code"], node.id, oldParent.id,
+            newParent.id, ref, function( success, response ) {
+                if( !success ) {
+                    this.onStoreException( null, null, null, null, response );
+                }
+            }, this );
     },
 
     onWrite : function( store, action, result, t, rs ) {
         var selectedNode = this.getSelectionModel().getSelectedNode();
 
-        Ext
-        .each( [].concat( rs ), function( r ) {
+        Ext.each( [].concat( rs ), function( r ) {
             var newNode = this.getLoader().createNode( r.data );
             switch( action ) {
-            case 'create':
-                if( selectedNode ) {
-                    selectedNode.ui.ecNode.style.visibility = 'visible';
-                    selectedNode.appendChild( newNode );
-                } else {
-                    this.setRootNode( newNode );
-                }
-                break;
-            case 'update':
-                // @TODO: rethink update vs.
-                // recreate -> affects expands
-                // of subnodes
-                var oldNode = this.getNodeById( r.id );
-                if( oldNode === this.getRootNode() ) {
-                    this.setRootNode( newNode );
-                } else {
-                    oldNode.parentNode.replaceChild( newNode, oldNode );
-                }
-                break;
-            case 'destroy':
-                break; // do nothing
-            default:
-                throw new Ext.Error( String.format( MShop.I18n.dt( 'client/extjs', 'Invalid action "{0}"' ), action ) );
+                case 'create':
+                    if( selectedNode ) {
+                        selectedNode.ui.ecNode.style.visibility = 'visible';
+                        selectedNode.appendChild( newNode );
+                    } else {
+                        this.setRootNode( newNode );
+                    }
+                    break;
+                case 'update':
+                    // @TODO: rethink update vs.
+                    // recreate -> affects expands
+                    // of subnodes
+                    var oldNode = this.getNodeById( r.id );
+                    if( oldNode === this.getRootNode() ) {
+                        this.setRootNode( newNode );
+                    } else {
+                        oldNode.parentNode.replaceChild( newNode, oldNode );
+                    }
+                    break;
+                case 'destroy':
+                    break; // do nothing
+                default:
+                    throw new Ext.Error( String.format( MShop.I18n.dt( 'client/extjs', 'Invalid action "{0}"' ),
+                        action ) );
             }
         }, this );
     },

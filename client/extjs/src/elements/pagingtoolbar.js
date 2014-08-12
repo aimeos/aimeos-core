@@ -17,9 +17,7 @@ MShop.elements.PagingToolbar = function( config ) {
 };
 
 /**
- * MShop paging adoption
- * - set default page size
- * - removes the extjs need to
+ * MShop paging adoption - set default page size - removes the extjs need to
  * define paging in the stores initial load
  * 
  * @namespace MShop

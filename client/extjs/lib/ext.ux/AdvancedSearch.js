@@ -4,9 +4,9 @@
  * $Id: AdvancedSearch.js 14263 2011-12-11 16:36:17Z nsendetzky $
  */
 
-Ext.ns('Ext.ux');
+Ext.ns( 'Ext.ux' );
 
-Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
+Ext.ux.AdvancedSearchPanel = Ext.extend( Ext.Panel, {
 
     /**
      * @cfg {String} searchParam search parameter name (defaults to 'condition')
@@ -30,31 +30,31 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
     border : false,
 
     initComponent : function() {
-        this.bindStore(this.store, true);
+        this.bindStore( this.store, true );
 
-        this.searchBtn = new Ext.Button({
+        this.searchBtn = new Ext.Button( {
             flex : 0,
-            text : _('Search'),
+            text : _( 'Search' ),
             scope : this,
             handler : this.doLoad
-        });
+        } );
 
-        this.resetBtn = new Ext.Button({
+        this.resetBtn = new Ext.Button( {
             flex : 0,
             iconCls : 'ux-advancedsearch-action-resetall',
             scope : this,
             handler : this.doReset
-        });
+        } );
 
-        this.filterGroup = Ext.ComponentMgr.create({
+        this.filterGroup = Ext.ComponentMgr.create( {
             xtype : 'ux.filtergroup',
             flex : 1,
             filterModel : this.filterModel,
             filters : this.filters,
             listeners : {
-                filtertrigger : this.doLoad.createDelegate(this)
+                filtertrigger : this.doLoad.createDelegate( this )
             }
-        });
+        } );
 
         this.items = [ this.filterGroup, {
             border : false,
@@ -76,35 +76,35 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
             }
         } ];
 
-        Ext.ux.AdvancedSearchPanel.superclass.initComponent.call(this);
+        Ext.ux.AdvancedSearchPanel.superclass.initComponent.call( this );
     },
 
     // @todo generalize
-    beforeLoad : function(store, options) {
+    beforeLoad : function( store, options ) {
         options.params = options.params || {};
         options.params[this.searchParam] = options.params[this.searchParam] || {};
         options.params[this.searchParam]['&&'] = options.params[this.searchParam]['&&'] || [];
 
-        var filterData = this.filterGroup.getFilterData(), pn = this.getPolishNotation(filterData);
+        var filterData = this.filterGroup.getFilterData(), pn = this.getPolishNotation( filterData );
 
-        options.params[this.searchParam]['&&'] = options.params[this.searchParam]['&&'].concat(pn['&&']);
+        options.params[this.searchParam]['&&'] = options.params[this.searchParam]['&&'].concat( pn['&&'] );
 
-        if (this.rendered && this.refresh) {
+        if( this.rendered && this.refresh ) {
             this.searchBtn.disable();
         }
     },
 
     doLayout : function() {
-        if (this.filterGroup && this.filterGroup.rendered) {
-            this.setHeight(this.filterGroup.getHeight());
+        if( this.filterGroup && this.filterGroup.rendered ) {
+            this.setHeight( this.filterGroup.getHeight() );
         }
 
-        Ext.ux.AdvancedSearchPanel.superclass.doLayout.apply(this, arguments);
+        Ext.ux.AdvancedSearchPanel.superclass.doLayout.apply( this, arguments );
     },
 
     // private
     doLoad : function() {
-        if (this.fireEvent('beforechange', this) !== false) {
+        if( this.fireEvent( 'beforechange', this ) !== false ) {
             this.store.load();
         }
     },
@@ -114,21 +114,21 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
     },
 
     // TODO move this to some sort of `serializer`
-    getPolishNotation : function(filterData) {
+    getPolishNotation : function( filterData ) {
         var pnGroup = {}, pnFilters = [];
 
-        Ext.each(filterData.filters, function(filter) {
-            if (filter.hasOwnProperty('condition')) {
-                pnFilters.push(this.getPolishNotation(filter));
+        Ext.each( filterData.filters, function( filter ) {
+            if( filter.hasOwnProperty( 'condition' ) ) {
+                pnFilters.push( this.getPolishNotation( filter ) );
             } else {
                 var pnCrit = {}, pnVal = {};
 
                 pnVal[filter.dataIndex] = filter.value;
                 pnCrit[filter.operator] = pnVal;
 
-                pnFilters.push(pnCrit);
+                pnFilters.push( pnCrit );
             }
-        }, this);
+        }, this );
 
         pnGroup[filterData.condition == 'AND' ? '&&' : '||'] = pnFilters;
 
@@ -136,8 +136,8 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
     },
 
     // private
-    onLoad : function(store, r, o) {
-        if (!this.rendered) {
+    onLoad : function( store, r, o ) {
+        if( !this.rendered ) {
             this.dsLoaded = [ store, r, o ];
             return;
         }
@@ -147,7 +147,7 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
 
     // private
     onLoadError : function() {
-        if (!this.rendered) {
+        if( !this.rendered ) {
             return;
         }
         this.searchBtn.enable();
@@ -161,41 +161,41 @@ Ext.ux.AdvancedSearchPanel = Ext.extend(Ext.Panel, {
      * @param {Boolean}
      *            initial (Optional) true to not remove listeners
      */
-    bindStore : function(store, initial) {
+    bindStore : function( store, initial ) {
         var doLoad;
-        if (!initial && this.store) {
-            if (store !== this.store && this.store.autoDestroy) {
+        if( !initial && this.store ) {
+            if( store !== this.store && this.store.autoDestroy ) {
                 this.store.destroy();
             } else {
-                this.store.un('beforeload', this.beforeLoad, this);
-                this.store.un('load', this.onLoad, this);
-                this.store.un('exception', this.onLoadError, this);
+                this.store.un( 'beforeload', this.beforeLoad, this );
+                this.store.un( 'load', this.onLoad, this );
+                this.store.un( 'exception', this.onLoadError, this );
             }
-            if (!store) {
+            if( !store ) {
                 this.store = null;
             }
         }
-        if (store) {
-            store = Ext.StoreMgr.lookup(store);
-            store.on({
+        if( store ) {
+            store = Ext.StoreMgr.lookup( store );
+            store.on( {
                 scope : this,
                 beforeload : this.beforeLoad,
                 load : this.onLoad,
                 exception : this.onLoadError
-            });
+            } );
             doLoad = true;
         }
         this.store = store;
-        if (doLoad) {
-            this.onLoad(store, null, {});
+        if( doLoad ) {
+            this.onLoad( store, null, {} );
         }
     },
 
     // private
     onDestroy : function() {
-        this.bindStore(null);
-        Ext.ux.AdvancedSearchPanel.superclass.onDestroy.call(this);
+        this.bindStore( null );
+        Ext.ux.AdvancedSearchPanel.superclass.onDestroy.call( this );
     }
-});
+} );
 
-Ext.reg('ux.advancedsearch', Ext.ux.AdvancedSearchPanel);
+Ext.reg( 'ux.advancedsearch', Ext.ux.AdvancedSearchPanel );

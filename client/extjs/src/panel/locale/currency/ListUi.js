@@ -101,5 +101,5 @@ MShop.panel.locale.currency.ListUi = Ext.extend( MShop.panel.AbstractListUi, {
 Ext.reg( 'MShop.panel.locale.currency.listui', MShop.panel.locale.currency.ListUi );
 
 // hook this into the main tab panel
-Ext.ux.ItemRegistry
-.registerItem( 'MShop.panel.locale.tabui', 'MShop.panel.locale.currency.listui', MShop.panel.locale.currency.ListUi, 30 );
+Ext.ux.ItemRegistry.registerItem( 'MShop.panel.locale.tabui', 'MShop.panel.locale.currency.listui',
+    MShop.panel.locale.currency.ListUi, 30 );

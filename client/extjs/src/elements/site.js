@@ -22,8 +22,7 @@ MShop.elements.site.ComboBox = function( config ) {
     MShop.elements.site.ComboBox.superclass.constructor.call( this, config );
 };
 
-Ext
-.extend( MShop.elements.site.ComboBox, Ext.form.ComboBox, {
+Ext.extend( MShop.elements.site.ComboBox, Ext.form.ComboBox, {
 
     initComponent : function() {
         this.store = MShop.elements.site.getStore();
@@ -33,8 +32,10 @@ Ext
     },
 
     onSiteSelect : function( ComboBox, site ) {
-        var mainTabPanel = Ext.getCmp( 'MShop.MainTabPanel' ), activeTabPanel = mainTabPanel.getActiveTab(), domainTabIdx = mainTabPanel.items
-        .indexOf( activeTabPanel ), siteCode = site ? site.get( 'locale.site.code' ) : 'default';
+        var mainTabPanel = Ext.getCmp( 'MShop.MainTabPanel' );
+        var activeTabPanel = mainTabPanel.getActiveTab();
+        var domainTabIdx = mainTabPanel.items.indexOf( activeTabPanel );
+        var siteCode = site ? site.get( 'locale.site.code' ) : 'default';
 
         new Ext.LoadMask( Ext.getBody(), {
             msg : MShop.I18n.dt( 'client/extjs', 'Switching site ...' )

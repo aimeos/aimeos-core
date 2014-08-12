@@ -123,8 +123,8 @@ MShop.panel.price.ListUiSmall = Ext.extend( MShop.panel.AbstractListUi, {
                 sortable : true,
                 width : 70,
                 align : 'right',
-                hidden : !MShop.Config.get( 'client/extjs/panel/price/listuismall/taxrate', MShop.Config
-                .get( 'client/extjs/panel/price/taxrate', false ) )
+                hidden : !MShop.Config.get( 'client/extjs/panel/price/listuismall/taxrate', MShop.Config.get(
+                    'client/extjs/panel/price/taxrate', false ) )
             },
             {
                 xtype : 'gridcolumn',
