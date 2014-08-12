@@ -27,71 +27,24 @@ class MShop_Coupon_Provider_FreeShippingTest extends MW_Unittest_Testcase
 		$context = TestHelper::getContext();
 
 
-		$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
-		$search = $couponManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'CDEF') );
-		$results = $couponManager->searchItems( $search );
+		$couponItem = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
+		$couponItem->setConfig( array( 'freeshipping.productcode' => 'U:SD' ) );
 
-		if( ( $couponItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No coupon item found' );
-		}
-
-		$this->_object = new MShop_Coupon_Provider_FreeShipping( $context, $couponItem, 'CDEF' );
-
-
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $orderManager->getSubManager('base');
-		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
-
-
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC' ) ) );
-		$products = $productManager->searchItems( $search, array('price') );
-
-		$priceIds = $priceMap = array();
-
-		foreach( $products as $product )
-		{
-			foreach ( $product->getListItems( 'price' ) AS $listItem )
-			{
-				$priceIds[] = $listItem->getRefId();
-				$priceMap[ $listItem->getRefId() ] = $product->getCode();
-			}
-
-			$orderProduct = $orderProductManager->createItem();
-			$orderProduct->setName( $product->getName() );
-			$orderProduct->setProductCode( $product->getCode() );
-			$orderProduct->setQuantity( 1 );
-
-			$this->orderProducts[ $product->getCode() ] = $orderProduct;
-		}
-
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
-		$search = $priceManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'price.id', $priceIds ),
-			$search->compare( '==', 'price.quantity', 1 ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		foreach( $priceManager->searchItems( $search ) as $priceItem )
-		{
-			$productCode = $priceMap[ $priceItem->getId() ];
-			$this->orderProducts[ $productCode ]->setPrice( $priceItem );
-		}
+		$this->_object = new MShop_Coupon_Provider_FreeShipping( $context, $couponItem, 'zyxw' );
 
 
 		$delPrice = MShop_Price_Manager_Factory::createManager( $context )->createItem();
-		$delPrice->setCosts('5.00');
-		$delPrice->setCurrencyId('EUR');
+		$delPrice->setCosts( '5.00' );
+		$delPrice->setCurrencyId( 'EUR' );
 
-		$orderBaseServiceManager = $orderBaseManager->getSubManager('service');
-		$delivery = $orderBaseServiceManager->createItem();
-		$delivery->setCode('73');
-		$delivery->setType('delivery');
-		$delivery->setPrice($delPrice);
+		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
+		$manager = MShop_Order_Manager_Factory::createManager( $context )
+			->getSubManager( 'base' )->getSubManager('service');
 
+		$delivery = $manager->createItem();
+		$delivery->setCode( 'test' );
+		$delivery->setType( 'delivery' );
+		$delivery->setPrice( $delPrice );
 
 		// Don't create order base item by createItem() as this would already register the plugins
 		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
@@ -113,17 +66,15 @@ class MShop_Coupon_Provider_FreeShippingTest extends MW_Unittest_Testcase
 
 	public function testAddCoupon()
 	{
-		$this->_orderBase->addProduct( $this->orderProducts['CNC'] );
-
 		$this->_object->addCoupon( $this->_orderBase );
 		$coupons = $this->_orderBase->getCoupons();
 
-		if( ( $product = reset( $coupons['CDEF'] ) ) === false ) {
+		if( ( $product = reset( $coupons['zyxw'] ) ) === false ) {
 			throw new Exception( 'No coupon available' );
 		}
 
 		$delivery = $this->_orderBase->getService( 'delivery' );
-		$this->assertEquals( 2, count( $this->_orderBase->getProducts() ) );
+		$this->assertEquals( 1, count( $this->_orderBase->getProducts() ) );
 		$this->assertEquals( '-5.00', $product->getPrice()->getCosts() );
 		$this->assertEquals( '5.00', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'unitSupplier', $product->getSupplierCode() );
@@ -136,31 +87,28 @@ class MShop_Coupon_Provider_FreeShippingTest extends MW_Unittest_Testcase
 
 	public function testDeleteCoupon()
 	{
-		$this->_orderBase->addProduct( $this->orderProducts['CNC'] );
-
 		$this->_object->addCoupon( $this->_orderBase );
 		$this->_object->deleteCoupon($this->_orderBase);
 
 		$products = $this->_orderBase->getProducts();
 		$coupons = $this->_orderBase->getCoupons();
 
-		$this->assertEquals( 1, count( $products ) );
-		$this->assertArrayNotHasKey( 'CDEF', $coupons );
+		$this->assertEquals( 0, count( $products ) );
+		$this->assertArrayNotHasKey( 'zyxw', $coupons );
 	}
 
 
 	public function testAddCouponInvalidConfig()
 	{
 		$context = TestHelper::getContext();
-		$this->manager = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() );
-		$couponItem=$this->manager->createItem();
 
-		$outer = null;
-		$this->manager = new MShop_Coupon_Provider_FreeShipping( $context, $couponItem, '5678', $outer );
+		$couponItem = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
+		$object = new MShop_Coupon_Provider_FreeShipping( $context, $couponItem, 'zyxw' );
 
-		$this->setExpectedException('MShop_Coupon_Exception');
-		$this->manager->addCoupon($this->_orderBase);
+		$this->setExpectedException( 'MShop_Coupon_Exception' );
+		$object->addCoupon( $this->_orderBase );
 	}
+
 
 	public function testIsAvailable()
 	{
