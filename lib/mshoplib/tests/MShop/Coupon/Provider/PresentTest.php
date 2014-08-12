@@ -26,62 +26,13 @@ class MShop_Coupon_Provider_PresentTest extends MW_Unittest_Testcase
 	{
 		$context = TestHelper::getContext();
 
-		$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
-		$search = $couponManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'GHIJ') );
-		$results = $couponManager->searchItems( $search );
-
-		if( ( $couponItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No coupon item found' );
-		}
-
-		$this->_object = new MShop_Coupon_Provider_Present( $context, $couponItem, 'GHIJ' );
-
-
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $orderManager->getSubManager('base');
-		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
-
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE' ) ) );
-		$products = $productManager->searchItems( $search, array( 'price' ) );
-
-		$priceIds = $priceMap = array();
-
-		foreach( $products as $product )
-		{
-			foreach ( $product->getListItems( 'price' ) AS $listItem )
-			{
-				$priceIds[] = $listItem->getRefId();
-				$priceMap[ $listItem->getRefId() ] = $product->getCode();
-			}
-
-			$orderProduct = $orderProductManager->createItem();
-			$orderProduct->setName( $product->getName() );
-			$orderProduct->setProductCode( $product->getCode() );
-			$orderProduct->setQuantity( 1 );
-
-			$this->orderProducts[ $product->getCode() ] = $orderProduct;
-		}
-
 		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
-		$search = $priceManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'price.id', $priceIds ),
-			$search->compare( '==', 'price.quantity', 1 ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		foreach( $priceManager->searchItems( $search ) as $priceItem )
-		{
-			$productCode = $priceMap[ $priceItem->getId() ];
-			$this->orderProducts[ $productCode ]->setPrice( $priceItem );
-		}
-
+		$couponItem = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
+		$couponItem->setConfig( array( 'present.productcode' => 'U:PD', 'present.quantity' => '1' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins
 		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->_object = new MShop_Coupon_Provider_Present( $context, $couponItem, 'zyxw' );
 	}
 
 
@@ -100,19 +51,18 @@ class MShop_Coupon_Provider_PresentTest extends MW_Unittest_Testcase
 
 	public function testAddCoupon()
 	{
-		$this->_orderBase->addProduct( $this->orderProducts['CNE'] );
 		$this->_object->addCoupon( $this->_orderBase );
 
 		$coupons = $this->_orderBase->getCoupons();
 		$products = $this->_orderBase->getProducts();
 
-		if( !isset( $coupons['GHIJ'][0] ) ) {
+		if( !isset( $coupons['zyxw'][0] ) ) {
 			throw new Exception( 'Missing coupon product' );
 		}
-		$product = $coupons['GHIJ'][0];
+		$product = $coupons['zyxw'][0];
 
-		$this->assertEquals( 2, count( $products ) );
-		$this->assertEquals( 1, count( $coupons['GHIJ'] ) );
+		$this->assertEquals( 1, count( $products ) );
+		$this->assertEquals( 1, count( $coupons['zyxw'] ) );
 		$this->assertEquals( 'unitSupplier', $product->getSupplierCode() );
 		$this->assertEquals( 'U:PD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
@@ -123,30 +73,28 @@ class MShop_Coupon_Provider_PresentTest extends MW_Unittest_Testcase
 
 	public function testDeleteCoupon()
 	{
-		$this->_orderBase->addProduct( $this->orderProducts['CNE'] );
 		$this->_object->addCoupon( $this->_orderBase );
 		$this->_object->deleteCoupon( $this->_orderBase );
 
 		$coupons = $this->_orderBase->getCoupons();
 		$products = $this->_orderBase->getProducts();
 
-		$this->assertEquals( 1, count( $products ) );
-		$this->assertArrayNotHasKey( 'GHIJ', $coupons );
+		$this->assertEquals( 0, count( $products ) );
+		$this->assertArrayNotHasKey( 'zyxw', $coupons );
 	}
 
 
 	public function testAddCouponInvalidConfig()
 	{
 		$context = TestHelper::getContext();
-		$this->manager = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() );
-		$couponItem=$this->manager->createItem();
+		$couponItem = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
 
-		$outer = null;
-		$this->manager = new MShop_Coupon_Provider_Present( $context, $couponItem, '5678', $outer );
+		$object = new MShop_Coupon_Provider_Present( $context, $couponItem, 'zyxw' );
 
-		$this->setExpectedException('MShop_Coupon_Exception');
-		$this->manager->addCoupon($this->_orderBase);
+		$this->setExpectedException( 'MShop_Coupon_Exception' );
+		$object->addCoupon( $this->_orderBase );
 	}
+
 
 	public function testIsAvailable()
 	{

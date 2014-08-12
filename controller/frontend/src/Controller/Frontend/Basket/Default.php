@@ -561,6 +561,10 @@ class Controller_Frontend_Basket_Default
 
 			foreach( $basket->getProducts() as $pos => $product )
 			{
+				if( $product->getFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) ) {
+					continue;
+				}
+
 				try
 				{
 					$attrIds = array();

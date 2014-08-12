@@ -25,62 +25,13 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 	{
 		$context = TestHelper::getContext();
 
-		$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
-		$search = $couponManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'coupon.code.code', '90AB') );
-		$results = $couponManager->searchItems( $search );
-
-		if( ( $couponItem = reset( $results ) ) === false ) {
-			throw new Exception( 'No coupon item found' );
-		}
-
-		$this->_object = new MShop_Coupon_Provider_PercentRebate( $context, $couponItem, '90AB' );
-
-
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $orderManager->getSubManager('base');
-		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
-
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE' ) ) );
-		$products = $productManager->searchItems( $search, array('price') );
-
-		$priceIds = $priceMap = array();
-
-		foreach( $products as $product )
-		{
-			foreach ( $product->getListItems( 'price' ) AS $listItem )
-			{
-				$priceIds[] = $listItem->getRefId();
-				$priceMap[ $listItem->getRefId() ] = $product->getCode();
-			}
-
-			$orderProduct = $orderProductManager->createItem();
-			$orderProduct->setName( $product->getName() );
-			$orderProduct->setProductCode( $product->getCode() );
-			$orderProduct->setQuantity( 1 );
-
-			$this->orderProducts[ $product->getCode() ] = $orderProduct;
-		}
-
 		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
-		$search = $priceManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'price.id', $priceIds ),
-			$search->compare( '==', 'price.quantity', 1 ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		foreach( $priceManager->searchItems( $search ) as $priceItem )
-		{
-			$productCode = $priceMap[ $priceItem->getId() ];
-			$this->orderProducts[ $productCode ]->setPrice( $priceItem );
-		}
-
+		$couponItem = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
+		$couponItem->setConfig( array( 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins
 		$this->_orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->_object = new MShop_Coupon_Provider_PercentRebate( $context, $couponItem, 'zyxw' );
 	}
 
 
@@ -99,18 +50,18 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 
 	public function testAddCoupon()
 	{
-		$this->_orderBase->addProduct( $this->orderProducts['CNE'] );
+		$this->_orderBase->addProduct( $this->_getOrderProduct( 'CNE' ) );
 		$this->_object->addCoupon( $this->_orderBase );
 
 		$coupons = $this->_orderBase->getCoupons();
 		$products = $this->_orderBase->getProducts();
 
-		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
+		if( ( $product = reset( $coupons['zyxw'] ) ) === false ) {
 			throw new Exception( 'No coupon available' );
 		}
 
 		$this->assertEquals( 2, count( $products ) );
-		$this->assertEquals( 1, count( $coupons['90AB'] ) );
+		$this->assertEquals( 1, count( $coupons['zyxw'] ) );
 		$this->assertEquals( '-1.80', $product->getPrice()->getValue() );
 		$this->assertEquals( '1.80', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'unitSupplier', $product->getSupplierCode() );
@@ -123,7 +74,7 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 
 	public function testDeleteCoupon()
 	{
-		$this->_orderBase->addProduct( $this->orderProducts['CNE'] );
+		$this->_orderBase->addProduct( $this->_getOrderProduct( 'CNE' ) );
 
 		$this->_object->addCoupon( $this->_orderBase );
 		$this->_object->deleteCoupon($this->_orderBase);
@@ -132,27 +83,61 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 		$coupons = $this->_orderBase->getCoupons();
 
 		$this->assertEquals( 1, count( $products ) );
-		$this->assertArrayNotHasKey( '90AB', $coupons );
+		$this->assertArrayNotHasKey( 'zyxw', $coupons );
 	}
 
 
 	public function testAddCouponInvalidConfig()
 	{
-		$outer = null;
-
 		$context = TestHelper::getContext();
-		$this->manager = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() );
-		$couponItem=$this->manager->createItem();
+		$couponItem = MShop_Coupon_Manager_Factory::createManager( TestHelper::getContext() )->createItem();
 
-		$this->manager = new MShop_Coupon_Provider_PercentRebate( $context, $couponItem, '5678', $outer );
+		$object = new MShop_Coupon_Provider_PercentRebate( $context, $couponItem, 'zyxw' );
 
-		$this->setExpectedException('MShop_Coupon_Exception');
-		$this->manager->addCoupon($this->_orderBase);
+		$this->setExpectedException( 'MShop_Coupon_Exception' );
+		$object->addCoupon( $this->_orderBase );
 	}
+
 
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->_object->isAvailable( $this->_orderBase ) );
+	}
+
+
+	/**
+	 * Return the order product for the given code.
+	 *
+	 * @param string $code
+	 * @param integer $quantity
+	 * @return MShop_Order_Item_Base_Product_Interface
+	 * @throws Exception
+	 */
+	protected function _getOrderProduct( $code, $quantity = 1 )
+	{
+		$context = TestHelper::getContext();
+
+		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
+		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$orderProductManager = MShop_Order_Manager_Factory::createManager( $context )
+			->getSubManager( 'base' )->getSubManager( 'product' );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
+		$result = $productManager->searchItems( $search, array( 'price' ) );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( sprintf( 'No product with code "%1$s" found', $code ) );
+		}
+
+		$priceItems = $item->getRefItems( 'price', 'default', 'default' );
+
+		$orderProductItem = $orderProductManager->createItem();
+		$orderProductItem->copyFrom( $item );
+		$orderProductItem->setQuantity( $quantity );
+		$orderProductItem->setPrice( $priceManager->getLowestPrice( $priceItems, $quantity ) );
+
+		return $orderProductItem;
 	}
 
 }
