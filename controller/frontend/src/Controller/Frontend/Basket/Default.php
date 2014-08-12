@@ -630,7 +630,6 @@ class Controller_Frontend_Basket_Default
 
 		if( !empty( $errors ) )
 		{
-print_r( $errors );
 			$msg = $context->getI18n()->dt(
 				'controller/frontend',
 				sprintf( 'One or more items aren\'t available for the chosen locale' )
