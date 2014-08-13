@@ -16,7 +16,7 @@
  * @method MW_View_Helper_Interface encoder() Returns the encoder object
  * @method string formparam(string|array $names) Returns the name for the HTML form parameter
  * @method MW_Mail_Message_Interface mail() Returns the e-mail message object
- * @method string number(integer|float|decimal $number, integer $decimals) Returns the formatted number
+ * @method string number(integer|float|decimal $number, integer $decimals = 2) Returns the formatted number
  * @method string|array param(string|null $name, string|array $default) Returns the parameter value
  * @method string translate(string $domain, string $singular, string $plural = '', integer $number = 1) Returns the translated string or the original one if no translation is available
  * @method string url(string|null $target, string|null $controller = null, string|null $action = null, array $params = array(), array $trailing = array(), array $config = array()) Returns the URL assembled from the given arguments
