@@ -372,7 +372,7 @@ class MShop_Order_Manager_Base_Product_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager object
+	 * @return MShop_Common_Manager_Interface Manager object
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

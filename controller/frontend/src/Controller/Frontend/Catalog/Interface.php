@@ -21,7 +21,7 @@ interface Controller_Frontend_Catalog_Interface
 	 * Returns the list of categries that are in the path to the root node including the one specified by its ID.
 	 *
 	 * @param integer $id Category ID to start from, null for root node
-	 * @param array $domains Domain names of items that are associated with the categories and that should be fetched too
+	 * @param string[] $domains Domain names of items that are associated with the categories and that should be fetched too
 	 * @return array Associative list of items implementing MShop_Catalog_Item_Interface with their IDs as keys
 	 */
 	public function getCatalogPath( $id, array $domains = array( 'text', 'media' ) );
@@ -31,7 +31,7 @@ interface Controller_Frontend_Catalog_Interface
 	 * Returns the hierarchical catalog tree starting from the given ID.
 	 *
 	 * @param integer|null $id Category ID to start from, null for root node
-	 * @param array $domains Domain names of items that are associated with the categories and that should be fetched too
+	 * @param string[] $domains Domain names of items that are associated with the categories and that should be fetched too
 	 * @param integer $level Constant from MW_Tree_Manager_Abstract for the depth of the returned tree, LEVEL_ONE for
 	 * 	specific node only, LEVEL_LIST for node and all direct child nodes, LEVEL_TREE for the whole tree
 	 * @return MShop_Catalog_Item_Interface Catalog node, maybe with children depending on the level constant

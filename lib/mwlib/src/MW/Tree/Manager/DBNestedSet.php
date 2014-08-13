@@ -345,10 +345,10 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 	/**
 	 * Moves an existing node to the new parent in the storage.
 	 *
-	 * @param mixed $id ID of the node that should be moved
-	 * @param mixed $oldParentId ID of the old parent node which currently contains the node that should be removed
-	 * @param mixed $newParentId ID of the new parent node where the node should be moved to
-	 * @param mixed $newRefId ID of the node where the node should be inserted before (null to append)
+	 * @param string|null $id ID of the node that should be moved
+	 * @param string|null $oldParentId ID of the old parent node which currently contains the node that should be removed
+	 * @param string|null $newParentId ID of the new parent node where the node should be moved to
+	 * @param null|string $newRefId ID of the node where the node should be inserted before (null to append)
 	 */
 	public function moveNode( $id, $oldParentId, $newParentId, $newRefId = null )
 	{

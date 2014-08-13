@@ -205,7 +205,7 @@ class MW_Common_Criteria_SQL extends MW_Common_Criteria_Abstract
 	/**
 	 * Stores the sortation objects for sorting the result.
 	 *
-	 * @param array $sortations List of objects implementing MW_Common_Criteria_Expression_Sort_Interface
+	 * @param MW_Common_Criteria_Expression_Sort_SQL[] $sortations List of objects implementing MW_Common_Criteria_Expression_Sort_Interface
 	 * @return MW_Common_Criteria_Interface Object instance for fluent interface
 	 */
 	public function setSortations( array $sortations )

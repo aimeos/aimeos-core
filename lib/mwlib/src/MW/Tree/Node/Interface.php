@@ -107,6 +107,7 @@ interface MW_Tree_Node_Interface
 	 * Sets the new status of the node.
 	 *
 	 * @param integer $status Greater than zero if enabled, zero or less than if not
+	 * @return void
 	 */
 	public function setStatus( $status );
 

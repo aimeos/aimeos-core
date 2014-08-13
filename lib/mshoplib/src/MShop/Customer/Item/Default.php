@@ -344,9 +344,9 @@ class MShop_Customer_Item_Default
 
 
 	/**
-	 * Tests if the date param represents an ISO format
+	 * Tests if the date param represents an ISO format.
 	 *
-	 * @param string ISO date in yyyy-mm-dd format
+	 * @param string|null ISO date in YYYY-MM-DD format or null for no date
 	 */
 	protected function _checkDateOnlyFormat( $date )
 	{

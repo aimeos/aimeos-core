@@ -453,7 +453,7 @@ class MShop_Order_Manager_Base_Address_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager for different extensions
+	 * @return MShop_Common_Manager_Interface Manager for different extensions
 	 * @throws MShop_Order_Exception If creating manager failed
 	 */
 

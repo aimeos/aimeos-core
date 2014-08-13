@@ -113,7 +113,7 @@ interface MW_Cache_Interface
 	 * extremely handy if e.g. all cached entries that relates to one product
 	 * should be deleted because the product has changed.
 	 *
-	 * @param array $tags List of tag strings that are associated to one or more
+	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
 	 * @throws MW_Cache_Exception If the cache server doesn't respond
 	 */
@@ -247,7 +247,7 @@ interface MW_Cache_Interface
 	 * several given tags are associated to one key, the key and its cached
 	 * value is only returned once in the array.
 	 *
-	 * @param array $tags List of tag strings associated to the requested cache entries
+	 * @param string[] $tags List of tag strings associated to the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
 	 * 	for that tag

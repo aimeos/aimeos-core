@@ -363,7 +363,7 @@ class Client_Html_Catalog_Stage_Default
 	/**
 	 * Generates an unique hash from based on the input suitable to be used as part of the cache key
 	 *
-	 * @param array $prefixes List of prefixes the parameters must start with
+	 * @param string[] $prefixes List of prefixes the parameters must start with
 	 * @param string $key Unique identifier if the content is placed more than once on the same page
 	 * @param array $config Multi-dimensional array of configuration options used by the client and sub-clients
 	 * @return string Unique hash
