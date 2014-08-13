@@ -52,6 +52,7 @@ class Client_Html_Catalog_List_Items_Default
 	 */
 	private $_subPartPath = 'client/html/catalog/list/items/default/subparts';
 	private $_subPartNames = array();
+	private $_view;
 
 
 	/**
