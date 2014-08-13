@@ -95,7 +95,7 @@ Ext.ux.ItemRegistry.prototype = {
         var def = reg.item, item;
 
         if(typeof def === 'function') {
-            item = new def;
+            item = new def();
         } else {
             if(Ext.isString(def)) {
                 def = {
