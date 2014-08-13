@@ -68,7 +68,6 @@ class Client_Html_Catalog_Session_Pinned_Default
 		$context = $this->_getContext();
 		$session = $context->getSession();
 
-		$html = null;
 		$config = $context->getConfig()->get( 'client/html/catalog/session/pinned', array() );
 		$key = $this->_getParamHash( array(), $uid . ':catalog:session-pinned-body', $config );
 

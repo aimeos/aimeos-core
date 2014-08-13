@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
-class Controller_ExtJS_Product_Import_Text_FactoryTest extends MW_Unittest_Testcase
+class Controller_ExtJS_Order_Base_Coupon_FactoryTest extends MW_Unittest_Testcase
 {
 	private $_object;
 
@@ -35,29 +35,29 @@ class Controller_ExtJS_Product_Import_Text_FactoryTest extends MW_Unittest_Testc
 
 	public function testCreateController()
 	{
-		$obj = Controller_ExtJS_Product_Import_Text_Factory::createController( TestHelper::getContext() );
-		$this->assertInstanceOf( 'Controller_ExtJS_Common_Load_Text_Interface', $obj);
+		$obj = Controller_ExtJS_Order_Base_Coupon_Factory::createController( TestHelper::getContext() );
+		$this->assertInstanceOf( 'Controller_ExtJS_Interface', $obj);
 	}
 
 
 	public function testFactoryExceptionWrongName()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Product_Import_Text_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
+		Controller_ExtJS_Order_Base_Coupon_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Product_Import_Text_Factory::createController(TestHelper::getContext(), 'WrongClass' );
+		Controller_ExtJS_Order_Base_Coupon_Factory::createController(TestHelper::getContext(), 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		Controller_ExtJS_Product_Import_Text_Factory::createController(TestHelper::getContext(), 'Factory' );
+		Controller_ExtJS_Order_Base_Coupon_Factory::createController(TestHelper::getContext(), 'Factory' );
 	}
 
 }

@@ -221,7 +221,7 @@ class Controller_ExtJS_Catalog_Import_Text_Default
 			}
 
 			foreach( $container as $content ) {
-				$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'catalog' );
+				$this->_importTextsFromContent( $content, $textTypeMap, 'catalog' );
 			}
 
 			unlink( $path );

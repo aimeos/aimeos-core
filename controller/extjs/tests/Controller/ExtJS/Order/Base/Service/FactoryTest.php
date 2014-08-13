@@ -43,21 +43,21 @@ class Controller_ExtJS_Order_Base_Service_FactoryTest extends MW_Unittest_Testca
 	public function testFactoryExceptionWrongName()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_Order_Base_Service_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
+		Controller_ExtJS_Order_Base_Service_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_Order_Base_Service_Factory::createController(TestHelper::getContext(), 'WrongClass' );
+		Controller_ExtJS_Order_Base_Service_Factory::createController(TestHelper::getContext(), 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_Order_Base_Service_Factory::createController(TestHelper::getContext(), 'Factory' );
+		Controller_ExtJS_Order_Base_Service_Factory::createController(TestHelper::getContext(), 'Factory' );
 	}
 
 }

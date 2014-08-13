@@ -42,7 +42,6 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 
 		$context = $this->_getContext();
 		$config = $context->getConfig();
-		$dir = $config->get( 'controller/extjs/catalog/export/text/default/exportdir', 'uploads' );
 
 		$items = (array) $params->items;
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();

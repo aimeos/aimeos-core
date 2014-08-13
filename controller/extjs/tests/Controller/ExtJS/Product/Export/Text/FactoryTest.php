@@ -43,21 +43,21 @@ class Controller_ExtJS_Product_Export_Text_FactoryTest extends MW_Unittest_Testc
 	public function testFactoryExceptionWrongName()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_Product_Export_Text_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
+		Controller_ExtJS_Product_Export_Text_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_Product_Export_Text_Factory::createController(TestHelper::getContext(), 'WrongClass' );
+		Controller_ExtJS_Product_Export_Text_Factory::createController(TestHelper::getContext(), 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_Product_Export_Text_Factory::createController(TestHelper::getContext(), 'Factory' );
+		Controller_ExtJS_Product_Export_Text_Factory::createController(TestHelper::getContext(), 'Factory' );
 	}
 
 }

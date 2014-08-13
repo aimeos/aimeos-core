@@ -332,7 +332,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param MW_Container_Content_Interface $contentItem Content item containing texts and associated data
 	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
-	 * @return array Two dimensional associated list of codes and text IDs as key
+	 * @return void
 	 */
 	protected function _importTextsFromContent( MW_Container_Content_Interface $contentItem, array $textTypeMap, $domain )
 	{
@@ -341,7 +341,6 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		$context = $this->_getContext();
 		$textManager = MShop_Text_Manager_Factory::createManager( $context );
 		$manager = MShop_Factory::createManager( $context, $domain );
-		$listManager = $manager->getSubManager( 'list' );
 
 		$contentItem->next(); // skip description row
 

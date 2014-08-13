@@ -222,7 +222,7 @@ class Controller_ExtJS_Product_Import_Text_Default
 			}
 
 			foreach( $container as $content ) {
-				$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'product' );
+				$this->_importTextsFromContent( $content, $textTypeMap, 'product' );
 			}
 
 			unlink( $path );

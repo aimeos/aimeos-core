@@ -132,7 +132,6 @@ class Controller_ExtJS_Product_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
-		$idList = array();
 		$ids = (array) $params->items;
 		$context = $this->_getContext();
 		$manager = $this->_getManager();

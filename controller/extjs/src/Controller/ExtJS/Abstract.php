@@ -371,8 +371,6 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	protected function _setLocale( $site, $langid = null, $currencyid = null )
 	{
-		$locale = $this->_context->getLocale();
-
 		$siteManager = MShop_Locale_Manager_Factory::createManager( $this->_context )->getSubManager( 'site' );
 
 		$search = $siteManager->createSearch();

@@ -81,7 +81,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends MW_Unittest_Testcase
 	public function testAbstractAddControllerDecoratorsNoDomainException()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$controller = Controller_ExtJS_Plugin_Factorylocal::createController( TestHelper::getContext(), 'Default', '' );
+		Controller_ExtJS_Plugin_Factorylocal::createController( TestHelper::getContext(), 'Default', '' );
 	}
 
 
@@ -106,7 +106,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends MW_Unittest_Testcase
 		$config->set( 'controller/extjs/common/decorators/default', array( '$$' ) );
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$controller = Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin');
+		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin');
 	}
 
 
@@ -117,7 +117,7 @@ class Controller_ExtJS_Plugin_FactoryTest extends MW_Unittest_Testcase
 		$config->set( 'controller/extjs/common/decorators/default', array( 'WrongClass' ) );
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$controller = Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin');
+		Controller_ExtJS_Plugin_Factorylocal::createController( $context, 'Default', 'plugin');
 	}
 
 }
