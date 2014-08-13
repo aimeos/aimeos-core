@@ -41,9 +41,9 @@ interface MShop_Coupon_Provider_Interface
 	public function deleteCoupon( MShop_Order_Item_Base_Interface $base );
 
 	/**
-	 * Tests if a coupon should be granted
+	 * Tests if a coupon should be granted.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base
+	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
 	 * @return bool
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $base );

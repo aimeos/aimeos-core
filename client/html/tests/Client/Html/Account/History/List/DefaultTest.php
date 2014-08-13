@@ -45,6 +45,7 @@ class Client_Html_Account_History_List_DefaultTest extends MW_Unittest_Testcase
 		$this->_context->setUserId( $customer->getId() );
 
 		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

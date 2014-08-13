@@ -39,7 +39,7 @@ class Client_Html_Catalog_Detail_Social_DefaultTest extends MW_Unittest_Testcase
 		$expire = null;
 		$output = $this->_object->getHeader( 1, $tags, $expire );
 
-		$this->assertEquals( '', $output );
+		$this->assertNotNull( $output );
 		$this->assertEquals( null, $expire );
 		$this->assertEquals( 0, count( $tags ) );
 	}

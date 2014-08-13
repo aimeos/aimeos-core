@@ -41,7 +41,8 @@ class Client_Html_Catalog_Detail_Actions_DefaultTest extends MW_Unittest_Testcas
 		$view = $this->_object->getView();
 		$view->detailProductItem = $this->_getProductItem();
 
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

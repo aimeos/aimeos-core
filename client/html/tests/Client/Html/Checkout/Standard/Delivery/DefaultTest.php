@@ -43,6 +43,7 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

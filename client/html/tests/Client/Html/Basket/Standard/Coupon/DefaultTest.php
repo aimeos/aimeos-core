@@ -47,6 +47,7 @@ class Client_Html_Basket_Standard_Coupon_DefaultTest extends MW_Unittest_Testcas
 		$view->standardBasket = $controller->get();
 
 		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

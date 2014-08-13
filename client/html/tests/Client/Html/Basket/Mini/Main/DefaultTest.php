@@ -49,7 +49,7 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 		$view->miniBasket = $controller->get();
 
 		$output = $this->_object->getHeader();
-		$this->assertEquals( '', $output );
+		$this->assertNotNull( $output );
 	}
 
 

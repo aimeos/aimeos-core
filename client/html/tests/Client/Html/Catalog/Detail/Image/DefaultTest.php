@@ -42,6 +42,7 @@ class Client_Html_Catalog_Detail_Image_DefaultTest extends MW_Unittest_Testcase
 		$view->detailProductItem = $this->_getProductItem();
 
 		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

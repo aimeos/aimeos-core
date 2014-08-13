@@ -42,6 +42,7 @@ class Client_Html_Catalog_Detail_Additional_Download_DefaultTest extends MW_Unit
 		$view->detailProductItem = $this->_getProductItem();
 
 		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

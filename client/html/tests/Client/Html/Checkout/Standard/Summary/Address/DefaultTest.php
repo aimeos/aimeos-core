@@ -46,7 +46,8 @@ class Client_Html_Checkout_Standard_Summary_Address_DefaultTest extends MW_Unitt
 		$view->standardBasket = $this->_getBasket();
 		$this->_object->setView( $view );
 
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

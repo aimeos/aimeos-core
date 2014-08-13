@@ -47,7 +47,7 @@ class Client_Html_Basket_Standard_Detail_DefaultTest extends MW_Unittest_Testcas
 		$view->standardBasket = $controller->get();
 
 		$output = $this->_object->getHeader();
-		$this->assertEquals( '', $output );
+		$this->assertNotNull( $output );
 	}
 
 

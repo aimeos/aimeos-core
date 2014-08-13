@@ -54,7 +54,7 @@ class Client_Html_Catalog_Stage_Breadcrumb_DefaultTest extends MW_Unittest_Testc
 	public function testGetHeader()
 	{
 		$output = $this->_object->getHeader();
-		$this->assertEquals( '', $output );
+		$this->assertNotNull( $output );
 	}
 
 
