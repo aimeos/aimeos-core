@@ -46,12 +46,12 @@ return array(
 		',
 		'updatepos' => '
 			UPDATE "mshop_attribute_list"
-				SET "pos" = ?, "mtime" = ?, "editor" = ?
+			SET "pos" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'move' => '
 			UPDATE "mshop_attribute_list"
-				SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
+			SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
 			WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
 				AND "domain" = ? AND "pos" >= ?
 		',
