@@ -71,7 +71,7 @@ class MW_Translation_SerializedArray
 				}
 			}
 		}
-		catch( Exception $e ) { ; }
+		catch( Exception $e ) { ; } // no translation found
 
 		return (string) $string;
 	}
@@ -100,7 +100,7 @@ class MW_Translation_SerializedArray
 				}
 			}
 		}
-		catch( Exception $e ) { ; }
+		catch( Exception $e ) { ; } // no translation found
 
 		if( $index > 0 ) {
 			return (string) $plural;

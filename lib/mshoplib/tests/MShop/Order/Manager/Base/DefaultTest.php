@@ -414,6 +414,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '==', 'order.base.rebate', 14.50 );
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );
@@ -472,6 +473,7 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '==', 'order.base.rebate', 14.50 );
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );
@@ -521,6 +523,8 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	public function testStoreBundles()
 	{
 		$search = $this->_object->createSearch();
+
+		$expr = array();
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 4800.00 );
 		$search->setConditions( $search->combine( '&&', $expr ) );

@@ -50,7 +50,7 @@ MShop.Config = {
             if(config[current] !== undefined) {
                 config[current] = this._set(config[current], path, value);
             } else {
-                config[current] = this._set(new Object(), path, value);
+                config[current] = this._set({}, path, value);
             }
 
             return config;

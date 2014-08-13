@@ -77,7 +77,7 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 			throw new Exception( 'Unable to remove export file' );
 		}
 
-		$lines = array();
+		$lines = $langs = array();
 		$langs['fr'] = $testdir . DIRECTORY_SEPARATOR . 'fr.csv';
 		$langs['de'] = $testdir . DIRECTORY_SEPARATOR . 'de.csv';
 

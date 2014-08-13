@@ -99,6 +99,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 	 */
 	protected function _addOrderBaseData( $localeManager, $orderBaseManager, array $testdata )
 	{
+		$customercodes = $customerIds = array();
 		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address', 'Default' );
 
 		foreach ($testdata['order/base'] as $key => $dataset) {
