@@ -12,6 +12,7 @@
 class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_context;
 	private $_editor = '';
 
 
@@ -23,9 +24,10 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
-		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_object = $productManager->getSubManager('list');
+		$this->_context = TestHelper::getContext();
+		$this->_editor = $this->_context->getEditor();
+		$productManager = MShop_Product_Manager_Factory::createManager( $this->_context, 'Default' );
+		$this->_object = $productManager->getSubManager( 'list', 'Default' );
 	}
 
 
@@ -164,124 +166,86 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testMoveItem()
+	public function testMoveItemLastToFront()
 	{
-		// test newpos < oldpos
-		$search = $this->_object->createSearch();
-		$expr = array(
-			$search->compare( '==', 'product.list.position', 0 ),
-			$search->compare( '==', 'product.list.domain', 'text' ),
-			$search->compare( '==', 'product.list.editor', $this->_editor ),
-			$search->compare( '==', 'product.list.type.code', 'unittype13' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 1 );
-		$results = $this->_object->searchItems( $search );
+		$listItems = $this->_getListItems();
+		$this->assertGreaterThan( 1, count( $listItems ) );
 
-		if( ( $first = reset($results) ) === false ) {
-			throw new Exception( 'No list item found' );
+		if( ( $first = reset( $listItems ) ) === false ) {
+			throw new Exception( 'No first product list item' );
 		}
 
-		$firstId = $first->getId();
-		$firstParentId = $first->getParentId();
-
-		$search = $this->_object->createSearch();
-		$expr = array(
-			$search->compare( '==', 'product.list.parentid', $firstParentId ),
-			$search->compare( '==', 'product.list.domain', 'text' ),
-			$search->compare( '==', 'product.list.editor', $this->_editor ),
-			$search->compare( '==', 'product.list.type.code', 'unittype13' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'product.list.position' ) ) );
-		$results = $this->_object->searchItems( $search );
-
-		if( ( $first = reset( $results ) ) === false ) {
-			throw new Exception( 'Can not find a list item.' );
+		if( ( $last = end( $listItems ) ) === false ) {
+			throw new Exception( 'No last product list item' );
 		}
 
-		$firstId = $first->getId();
-		$firstParentId = $first->getParentId();
+		$this->_object->moveItem( $last->getId(), $first->getId() );
 
-		$search = $this->_object->createSearch();
-		$terms[] = $search->compare( '==', 'product.list.domain', 'text' );
-		$terms[] = $search->compare( '==', 'product.list.editor', $this->_editor );
-		$terms[] = $search->compare( '==', 'product.list.parentid', $firstParentId );
-		$search->setConditions( $search->combine( '&&', $terms ) );
-		$search->setSortations( array(  $search->sort('+', 'product.list.position') ) );
-		$results = $this->_object->searchItems($search);
+		$newFirst = $this->_object->getItem( $last->getId() );
+		$newSecond = $this->_object->getItem( $first->getId() );
 
-		if( ( $second = end($results) ) === false ) {
-			$msg = 'No product list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'text', $firstParentId ) );
+		$this->_object->moveItem( $last->getId() );
+
+		$this->assertEquals( 0, $newFirst->getPosition() );
+		$this->assertEquals( 1, $newSecond->getPosition() );
+	}
+
+
+	public function testMoveItemFirstToLast()
+	{
+		$listItems = $this->_getListItems();
+		$this->assertGreaterThan( 1, count( $listItems ) );
+
+		if( ( $first = reset( $listItems ) ) === false ) {
+			throw new Exception( 'No first product list item' );
 		}
 
-		$secondId = $second->getId();
-		$this->_object->moveItem( $firstId, $secondId );
-
-		$first = $this->_object->getItem( $firstId );
-		$second = $this->_object->getItem( $secondId );
-
-		$results = $this->_object->searchItems($search);
-		if( ( $secondSearch = end($results) ) === false ) {
-			$msg = 'No product list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'text', $firstParentId ) );
+		if( ( $second = next( $listItems ) ) === false ) {
+			throw new Exception( 'No second product list item' );
 		}
 
-		if( ( $firstSearch = prev($results) ) === false ) {
-			$msg = 'No product list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'text', $firstParentId ) );
+		if( ( $last = end( $listItems ) ) === false ) {
+			throw new Exception( 'No last product list item' );
 		}
 
-		$this->assertEquals( $first, $firstSearch );
-		$this->assertEquals( $second, $secondSearch );
+		$this->_object->moveItem( $first->getId() );
 
-		// test newpos < oldpos
-		if( ( $third = reset($results) ) === false ) {
-			$msg = 'No product list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'text', $firstParentId ) );
+		$newBefore = $this->_object->getItem( $last->getId() );
+		$newLast = $this->_object->getItem( $first->getId() );
+
+		$this->_object->moveItem( $first->getId(), $second->getId() );
+
+		$this->assertEquals( $last->getPosition() - 1, $newBefore->getPosition() );
+		$this->assertEquals( $last->getPosition(), $newLast->getPosition() );
+	}
+
+
+	public function testMoveItemFirstUp()
+	{
+		$listItems = $this->_getListItems();
+		$this->assertGreaterThan( 1, count( $listItems ) );
+
+		if( ( $first = reset( $listItems ) ) === false ) {
+			throw new Exception( 'No first product list item' );
 		}
 
-		$thirdId = $third->getId();
-		$this->_object->moveItem( $firstId, $thirdId );
-
-		$first = $this->_object->getItem( $firstId );
-		$third = $this->_object->getItem( $thirdId );
-
-		$results = $this->_object->searchItems($search);
-		if( ( $firstSearch = reset($results) ) === false ) {
-			$msg = 'No product list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'text', $firstParentId ) );
+		if( ( $second = next( $listItems ) ) === false ) {
+			throw new Exception( 'No second product list item' );
 		}
 
-		if( ( $thirdSearch = next($results) ) === false ) {
-			$msg = 'No product list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'text', $firstParentId ) );
+		if( ( $last = end( $listItems ) ) === false ) {
+			throw new Exception( 'No last product list item' );
 		}
 
-		$this->assertEquals( $first, $firstSearch );
-		$this->assertEquals( $third, $thirdSearch );
+		$this->_object->moveItem( $first->getId(), $last->getId() );
 
-		// test with ref=null
-		$this->_object->moveItem( $firstId );
-		$first = $this->_object->getItem( $firstId );
+		$newLast = $this->_object->getItem( $last->getId() );
+		$newUp = $this->_object->getItem( $first->getId() );
 
-		$results = $this->_object->searchItems($search);
-		if( ( $firstSearch = end($results) ) === false ) {
-			$msg = 'No product list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'text', $firstParentId ) );
-		}
+		$this->_object->moveItem( $first->getId(), $second->getId() );
 
-		$this->assertEquals( $first, $firstSearch );
-
-		// reset database
-		if( ( $third = reset($results) ) === false ) {
-			$msg = 'No product list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'text', $firstParentId ) );
-		}
-
-		$thirdId = $third->getId();
-		$this->_object->moveItem( $firstId, $thirdId );
+		$this->assertEquals( $last->getPosition() - 1, $newUp->getPosition() );
+		$this->assertEquals( $last->getPosition(), $newLast->getPosition() );
 	}
 
 
@@ -373,5 +337,33 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		// this is the total of list items, not the total of referenced items
 		// whose number might be lower due to duplicates
 		$this->assertEquals( 37, $total );
+	}
+
+
+	protected function _getListItems()
+	{
+		$manager = MShop_Product_Manager_Factory::createManager( $this->_context, 'Default' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
+		$search->setSlice( 0, 1 );
+
+		$results = $manager->searchItems( $search );
+
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new Exception( 'No product item found' );
+		}
+
+		$search = $this->_object->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.list.parentid', $item->getId() ),
+			$search->compare( '==', 'product.list.domain', 'product' ),
+			$search->compare( '==', 'product.list.editor', $this->_editor ),
+			$search->compare( '==', 'product.list.type.code', 'default' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'product.list.position' ) ) );
+
+		return $this->_object->searchItems( $search );
 	}
 }

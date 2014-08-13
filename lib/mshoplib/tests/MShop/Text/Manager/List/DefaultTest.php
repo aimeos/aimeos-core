@@ -12,6 +12,7 @@
 class MShop_Text_Manager_List_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_context;
 	private $_editor = '';
 
 
@@ -23,9 +24,10 @@ class MShop_Text_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
-		$manager = MShop_Text_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_object = $manager->getSubManager('list');
+		$this->_context = TestHelper::getContext();
+		$this->_editor = $this->_context->getEditor();
+		$manager = MShop_Text_Manager_Factory::createManager( $this->_context, 'Default' );
+		$this->_object = $manager->getSubManager( 'list', 'Default' );
 	}
 
 
@@ -144,110 +146,86 @@ class MShop_Text_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public function testMoveItem()
+	public function testMoveItemLastToFront()
 	{
-		// test newpos < oldpos
-		$search = $this->_object->createSearch();
-		$expr = array(
-			$search->compare( '==', 'text.list.position', 0 ),
-			$search->compare( '==', 'text.list.domain', 'media' ),
-			$search->compare( '==', 'text.list.editor', $this->_editor ),
-			$search->compare( '==', 'text.list.type.code', 'align-left' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 1 );
-		$results = $this->_object->searchItems( $search );
+		$listItems = $this->_getListItems();
+		$this->assertGreaterThan( 1, count( $listItems ) );
 
-		if( ( $first = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+		if( ( $first = reset( $listItems ) ) === false ) {
+			throw new Exception( 'No first text list item' );
 		}
 
-		$firstId = $first->getId();
-		$firstParentId = $first->getParentId();
-
-		$search = $this->_object->createSearch();
-		$expr = array(
-			$search->compare( '==', 'text.list.parentid', $firstParentId ),
-			$search->compare( '==', 'text.list.domain', 'media' ),
-			$search->compare( '==', 'text.list.editor', $this->_editor ),
-			$search->compare( '==', 'text.list.type.code', 'align-left' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'text.list.position' ) ) );
-		$results = $this->_object->searchItems($search);
-
-		if( ( $second = end($results) ) === false ) {
-			$msg = 'No text list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'media', $firstParentId ) );
+		if( ( $last = end( $listItems ) ) === false ) {
+			throw new Exception( 'No last text list item' );
 		}
 
-		$secondId = $second->getId();
-		$this->_object->moveItem( $firstId, $secondId );
+		$this->_object->moveItem( $last->getId(), $first->getId() );
 
-		$first = $this->_object->getItem( $firstId );
-		$second = $this->_object->getItem( $secondId );
+		$newFirst = $this->_object->getItem( $last->getId() );
+		$newSecond = $this->_object->getItem( $first->getId() );
 
-		$results = $this->_object->searchItems($search);
-		if( ( $secondSearch = end($results) ) === false ) {
-			$msg = 'No text list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'media', $firstParentId ) );
+		$this->_object->moveItem( $last->getId() );
+
+		$this->assertEquals( 0, $newFirst->getPosition() );
+		$this->assertEquals( 1, $newSecond->getPosition() );
+	}
+
+
+	public function testMoveItemFirstToLast()
+	{
+		$listItems = $this->_getListItems();
+		$this->assertGreaterThan( 1, count( $listItems ) );
+
+		if( ( $first = reset( $listItems ) ) === false ) {
+			throw new Exception( 'No first text list item' );
 		}
 
-		if( ( $firstSearch = prev($results) ) === false ) {
-			$msg = 'No text list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'media', $firstParentId ) );
+		if( ( $second = next( $listItems ) ) === false ) {
+			throw new Exception( 'No second text list item' );
 		}
 
-		$this->assertEquals( $first, $firstSearch );
-		$this->assertEquals( $second, $secondSearch );
-
-		// test newpos < oldpos
-		if( ( $third = reset($results) ) === false ) {
-			$msg = 'No media list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'media', $firstParentId ) );
+		if( ( $last = end( $listItems ) ) === false ) {
+			throw new Exception( 'No last text list item' );
 		}
 
-		$thirdId = $third->getId();
-		$this->_object->moveItem( $firstId, $thirdId );
+		$this->_object->moveItem( $first->getId() );
 
-		$first = $this->_object->getItem( $firstId );
-		$third = $this->_object->getItem( $thirdId );
+		$newBefore = $this->_object->getItem( $last->getId() );
+		$newLast = $this->_object->getItem( $first->getId() );
 
-		$results = $this->_object->searchItems($search);
-		if( ( $firstSearch = reset($results) ) === false ) {
-			$msg = 'No text list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'media', $firstParentId ) );
+		$this->_object->moveItem( $first->getId(), $second->getId() );
+
+		$this->assertEquals( $last->getPosition() - 1, $newBefore->getPosition() );
+		$this->assertEquals( $last->getPosition(), $newLast->getPosition() );
+	}
+
+
+	public function testMoveItemFirstUp()
+	{
+		$listItems = $this->_getListItems();
+		$this->assertGreaterThan( 1, count( $listItems ) );
+
+		if( ( $first = reset( $listItems ) ) === false ) {
+			throw new Exception( 'No first text list item' );
 		}
 
-		if( ( $thirdSearch = next($results) ) === false ) {
-			$msg = 'No text list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'media', $firstParentId ) );
+		if( ( $second = next( $listItems ) ) === false ) {
+			throw new Exception( 'No second text list item' );
 		}
 
-		$this->assertEquals( $first, $firstSearch );
-		$this->assertEquals( $third, $thirdSearch );
-
-		// test with ref=null
-		$this->_object->moveItem( $firstId );
-		$first = $this->_object->getItem( $firstId );
-
-		$results = $this->_object->searchItems($search);
-		if( ( $firstSearch = end($results) ) === false ) {
-			$msg = 'No text list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'media', $firstParentId ) );
+		if( ( $last = end( $listItems ) ) === false ) {
+			throw new Exception( 'No last text list item' );
 		}
 
-		$this->assertEquals( $first, $firstSearch );
+		$this->_object->moveItem( $first->getId(), $last->getId() );
 
-		// reset database
-		if( ( $third = reset($results) ) === false ) {
-			$msg = 'No text list item with domain "%1$s" and parentid "%2$d" found';
-			throw new Exception( sprintf( $msg, 'media', $firstParentId )
-			);
-		}
+		$newLast = $this->_object->getItem( $last->getId() );
+		$newUp = $this->_object->getItem( $first->getId() );
 
-		$thirdId = $third->getId();
-		$this->_object->moveItem( $firstId, $thirdId );
+		$this->_object->moveItem( $first->getId(), $second->getId() );
+
+		$this->assertEquals( $last->getPosition() - 1, $newUp->getPosition() );
+		$this->assertEquals( $last->getPosition(), $newLast->getPosition() );
 	}
 
 
@@ -313,5 +291,38 @@ class MShop_Text_Manager_List_DefaultTest extends MW_Unittest_Testcase
 
 		$this->setExpectedException('MShop_Exception');
 		$this->_object->getSubManager('unknown');
+	}
+
+
+	protected function _getListItems()
+	{
+		$manager = MShop_Text_Manager_Factory::createManager( $this->_context, 'Default' );
+
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'text.label', 'cafe_long_desc' ),
+			$search->compare( '==', 'text.domain', 'catalog' ),
+			$search->compare( '==', 'text.type.code', 'long' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
+
+		$results = $manager->searchItems( $search );
+
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new Exception( 'No text item found' );
+		}
+
+		$search = $this->_object->createSearch();
+		$expr = array(
+			$search->compare( '==', 'text.list.parentid', $item->getId() ),
+			$search->compare( '==', 'text.list.domain', 'media' ),
+			$search->compare( '==', 'text.list.editor', $this->_editor ),
+			$search->compare( '==', 'text.list.type.code', 'align-left' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'text.list.position' ) ) );
+
+		return $this->_object->searchItems( $search );
 	}
 }
