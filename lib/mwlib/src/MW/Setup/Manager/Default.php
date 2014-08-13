@@ -14,7 +14,7 @@
  * @package MW
  * @subpackage Setup
  */
-class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
+class MW_Setup_Manager_Default extends MW_Setup_Manager_Abstract
 {
 	private $_conn;
 	private $_schema;
@@ -42,7 +42,7 @@ class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
 		}
 
 		$this->_conn = $conn;
-		$this->_schema = $this->_createSchema( $dbconfig['adapter'], $dbconfig['database'] );
+		$this->_schema = $this->_createSchema( $conn, $dbconfig['adapter'], $dbconfig['database'] );
 		$this->_additional = $additional;
 
 		if( !is_array( $taskpath ) ) { $taskpath = (array) $taskpath; }
@@ -59,42 +59,6 @@ class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
 	{
 		foreach( $this->_tasks as $taskname => $task ) {
 			$this->_runTasks( $dbtype, array( $taskname ) );
-		}
-	}
-
-
-	/**
-	 * Creates a new database schema object.
-	 *
-	 * @param string $adapter Database adapter, e.g. "mysql", "pgsql", etc.
-	 * @param string $dbname Name of the database that will be used
-	 * @return MW_Setup_DBSchema_Interface Database schema object
-	 */
-	protected  function _createSchema( $adapter, $dbname )
-	{
-		if( empty( $adapter ) || ctype_alnum( $adapter ) === false ) {
-			throw new MW_Setup_Exception( sprintf( 'Invalid database adapter "%1$s"', $adapter ) );
-		}
-
-		$classname = 'MW_Setup_DBSchema_' . ucwords( strtolower( $adapter ) );
-
-		if( class_exists( $classname ) === false ) {
-			throw new MW_Setup_Exception( sprintf( 'Database schema class "%1$s" not found', $classname ) );
-		}
-
-		return new $classname( $this->_conn, $dbname );
-	}
-
-
-	/**
-	 * Includes a PHP file.
-	 *
-	 * @param string $pathname Path to the file including the file name
-	 */
-	protected function _includeFile( $pathname )
-	{
-		if( ( include_once $pathname ) === false ) {
-			throw new MW_Setup_Exception( sprintf( 'Unable to include file "%1$s"', $pathname ) );
 		}
 	}
 
@@ -139,35 +103,12 @@ class MW_Setup_Manager_Default implements MW_Setup_Manager_Interface
 	 */
 	protected function _setupTasks( array $paths )
 	{
-		foreach( $paths as $path )
-		{
-			foreach( new DirectoryIterator( $path ) as $item )
-			{
-				if( $item->isDir() === true || substr( $item->getFilename(), -4 ) != '.php' ) { continue; }
-
-				$this->_includeFile( $item->getPathName() );
-
-				$taskname = substr( $item->getFilename(), 0, -4 );
-				$classname = 'MW_Setup_Task_' . $taskname;
-
-				if( class_exists( $classname ) === false ) {
-					throw new MW_Setup_Exception( sprintf( 'Class "%1$s" not found', $classname ) );
-				}
-
-				$interface = 'MW_Setup_Task_Interface';
-				$task = new $classname( $this->_schema, $this->_conn, $this->_additional );
-
-				if( ( $task instanceof $interface ) === false ) {
-					throw new MW_Setup_Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, 'MW_Setup_Task_Interface' ) );
-				}
-
-				$this->_tasks[$taskname] = $task;
-				$this->_dependencies[$taskname] = (array) $task->getPreDependencies();
-			}
-		}
+		$this->_tasks = $this->_createTasks( $paths, $this->_schema, $this->_conn, $this->_additional );
 
 		foreach( $this->_tasks as $name => $task )
 		{
+			$this->_dependencies[$name] = (array) $task->getPreDependencies();
+
 			foreach( (array) $task->getPostDependencies() as $taskname ) {
 				$this->_dependencies[$taskname][] = $name;
 			}
