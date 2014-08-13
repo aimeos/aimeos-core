@@ -54,7 +54,7 @@ class Controller_Frontend_Service_FactoryTest extends MW_Unittest_Testcase
 	public function testAbstractAddControllerDecoratorsNoDomainException()
 	{
 		$context = TestHelper::getContext();
-		$controller = Controller_Frontend_Service_Factorylocal::createController( $context, 'Default', 'service/type');
+		Controller_Frontend_Service_Factorylocal::createController( $context, 'Default', 'service/type');
 
 		$this->setExpectedException( 'Controller_Frontend_Exception' );
 		Controller_Frontend_Service_Factorylocal::createController( $context, 'Default', '' );

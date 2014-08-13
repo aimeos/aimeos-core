@@ -44,7 +44,7 @@ class MW_Media_Image_DefaultTest extends MW_Unittest_Testcase
 	public function testConstructFileException()
 	{
 		$this->setExpectedException( 'MW_Media_Exception' );
-		$media = new MW_Media_Image_Default( 'notexisting', '', array() );
+		new MW_Media_Image_Default( 'notexisting', '', array() );
 	}
 
 
@@ -54,7 +54,7 @@ class MW_Media_Image_DefaultTest extends MW_Unittest_Testcase
 		$filename = dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'application.txt';
 
 		$this->setExpectedException( 'MW_Media_Exception' );
-		$media = new MW_Media_Image_Default( $filename, 'text/plain', array() );
+		new MW_Media_Image_Default( $filename, 'text/plain', array() );
 	}
 
 

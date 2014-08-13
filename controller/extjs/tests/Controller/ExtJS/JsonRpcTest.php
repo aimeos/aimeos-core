@@ -211,7 +211,6 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 
 	public function testProcessJsonObject()
 	{
-		$ds = DIRECTORY_SEPARATOR;
 		$result = self::$_object->process( array(), $this->_testdir . 'object.txt' );
 		$object = json_decode( $result );
 
@@ -233,7 +232,6 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 
 	public function testProcessJsonArray()
 	{
-		$ds = DIRECTORY_SEPARATOR;
 		$result = self::$_object->process( array(), $this->_testdir . 'array.txt' );
 		$list = json_decode( $result );
 
@@ -265,7 +263,6 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 
 	public function testProcessJsonWrongFormat()
 	{
-		$ds = DIRECTORY_SEPARATOR;
 		$result = self::$_object->process( array(), $this->_testdir . 'invalid.txt' );
 		$object = json_decode( $result );
 
@@ -276,7 +273,6 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 
 	public function testProcessJsonWrongType()
 	{
-		$ds = DIRECTORY_SEPARATOR;
 		$result = self::$_object->process( array(), $this->_testdir . 'string.txt' );
 		$object = json_decode( $result );
 
@@ -287,7 +283,6 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 
 	public function testProcessJsonNoMethod()
 	{
-		$ds = DIRECTORY_SEPARATOR;
 		$result = self::$_object->process( array(), $this->_testdir . 'nomethod.txt' );
 		$object = json_decode( $result );
 
@@ -298,7 +293,6 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 
 	public function testProcessJsonNoParams()
 	{
-		$ds = DIRECTORY_SEPARATOR;
 		$result = self::$_object->process( array(), $this->_testdir . 'noparams.txt' );
 		$object = json_decode( $result );
 
@@ -309,7 +303,6 @@ class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 
 	public function testProcessJsonNoId()
 	{
-		$ds = DIRECTORY_SEPARATOR;
 		$result = self::$_object->process( array(), $this->_testdir . 'noid.txt' );
 		$this->assertEquals( null, $result );
 	}
