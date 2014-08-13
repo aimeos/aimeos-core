@@ -624,7 +624,6 @@ class Controller_Frontend_Basket_Default
 
 					$this->setService( $type, $item->getServiceId(), $attributes );
 					$basket->deleteService( $type );
-echo 'no service error';
 				}
 				catch( Exception $e )
 				{
