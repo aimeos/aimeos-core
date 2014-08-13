@@ -210,6 +210,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 
 	protected function _getSelectionProductIds()
 	{
+		$textTypeItems = array();
 		$context = $this->_getContext();
 
 

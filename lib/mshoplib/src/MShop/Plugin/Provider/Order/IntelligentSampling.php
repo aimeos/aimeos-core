@@ -61,8 +61,10 @@ class MShop_Plugin_Provider_Order_IntelligentSampling
 		$orderProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
 
 		$search = $orderManager->createSearch();
-		$expr[] = $search->compare( '==', 'order.base.customerid', $order->getCustomerId() );
-		$expr[] = $search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_RECEIVED );
+		$expr = array(
+			$search->compare( '==', 'order.base.customerid', $order->getCustomerId() ),
+			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_RECEIVED ),
+		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$orderItems = $orderManager->searchItems( $search );
 

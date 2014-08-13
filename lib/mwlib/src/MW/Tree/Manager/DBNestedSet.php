@@ -603,8 +603,10 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 
 		$search = $this->createSearch();
 
-		$expr[] = $search->compare( '<=', $this->_searchConfig['left']['code'], $node->left );
-		$expr[] = $search->compare( '>=', $this->_searchConfig['right']['code'], $node->right );
+		$expr = array(
+			$search->compare( '<=', $this->_searchConfig['left']['code'], $node->left ),
+			$search->compare( '>=', $this->_searchConfig['right']['code'], $node->right ),
+		);
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', $this->_searchConfig['left']['code'] ) ) );

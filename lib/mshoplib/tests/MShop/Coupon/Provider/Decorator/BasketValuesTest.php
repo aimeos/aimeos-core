@@ -24,6 +24,7 @@ class MShop_Coupon_Provider_Decorator_BasketValuesTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
+		$orderProducts = array();
 		$context = TestHelper::getContext();
 
 		$couponManager = MShop_Coupon_Manager_Factory::createManager( $context );
