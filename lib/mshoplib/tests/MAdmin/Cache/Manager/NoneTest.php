@@ -58,8 +58,6 @@ class MAdmin_Cache_Manager_NoneTest extends MW_Unittest_Testcase
 
 	public function testSearchItems()
 	{
-		$siteid = $this->_context->getLocale()->getSiteId();
-
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'cache.id', 'unittest' ) );
 		$results = $this->_object->searchItems( $search );

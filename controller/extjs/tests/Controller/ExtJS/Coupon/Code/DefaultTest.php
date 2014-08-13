@@ -296,7 +296,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends MW_Unittest_Testcase
 		$_FILES = array();
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$result = $this->_object->uploadFile( $params );
+		$this->_object->uploadFile( $params );
 	}
 
 

@@ -50,7 +50,7 @@ class MW_Translation_NoneTest extends MW_Unittest_Testcase
 	public function testConstructInvalidUnderscoreLocale()
 	{
 		$this->setExpectedException( 'MW_Translation_Exception' );
-		$object = new MW_Translation_None( 'de_' );
+		new MW_Translation_None( 'de_' );
 	}
 
 

@@ -199,7 +199,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	public function query( MShop_Order_Item_Interface $order )
 	{
 		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
-		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
 		if( ( $tid = $this->_getOrderServiceItem( $order->getBaseId() )->getAttribute('TRANSACTIONID') ) === null )
 		{
@@ -275,7 +274,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	public function refund( MShop_Order_Item_Interface $order )
 	{
 		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
-		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
 		$serviceItem = $this->_getOrderServiceItem( $order->getBaseId() );
 
@@ -312,7 +310,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	public function cancel( MShop_Order_Item_Interface $order )
 	{
 		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
-		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
 		if( ( $tid = $this->_getOrderServiceItem( $order->getBaseId() )->getAttribute('TRANSACTIONID') ) === null )
 		{

@@ -13,18 +13,6 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_DB_PDOTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
@@ -299,7 +287,7 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 		try {
 			$stmt = $conn->create( $sqlinsert );
-			$result = $stmt->execute();
+			$stmt->execute();
 		} catch ( MW_DB_Exception $de ) {
 			$this->_object->release( $conn );
 			return;
@@ -400,13 +388,15 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 		$this->_object->release( $conn );
 
 
+		/** @todo This doesn't work with PHP 5.3.11 and later but up to PHP 5.3.10, 5.4.x and 5.5.x are OK */
+		/*
 		$expected = array(
 			array( 'id' => 1, 'name' => 'test' ),
 			array( 'id' => 1, 'name' => 'test' ),
 		);
 
-		/** @todo This doesn't work with PHP 5.3.11 and later but up to PHP 5.3.10, 5.4.x and 5.5.x are OK */
-		// $this->assertEquals( $expected, $resultSets );
+		$this->assertEquals( $expected, $resultSets );
+		*/
 	}
 
 	public function testWrongFieldType()
@@ -456,7 +446,7 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 		try
 		{
-			$stmt = $conn->create( 'SELECT *' )->execute()->finish();
+			$conn->create( 'SELECT *' )->execute()->finish();
 		}
 		catch ( MW_DB_Exception $e )
 		{
@@ -475,7 +465,7 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 		try
 		{
-			$stmt = $conn->create( $sql, 123 );
+			$conn->create( $sql, 123 );
 		}
 		catch (MW_DB_Exception $e)
 		{
@@ -499,7 +489,7 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 	public function testFactoryFail()
 	{
 		$this->setExpectedException('MW_DB_Exception');
-		$this->_object = MW_DB_Factory::createManager( TestHelper::getConfig(), 'notDefined' );
+		MW_DB_Factory::createManager( TestHelper::getConfig(), 'notDefined' );
 	}
 }
 

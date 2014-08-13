@@ -12,19 +12,6 @@ class MW_Logger_ErrorlogTest extends MW_Unittest_Testcase
 
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		$suite  = new PHPUnit_Framework_TestSuite('MW_Logger_ZendTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
-	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *

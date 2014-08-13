@@ -95,8 +95,6 @@ class MAdmin_Cache_Manager_DefaultTest extends MW_Unittest_Testcase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$siteid = $this->_context->getLocale()->getSiteId();
-
 		$item = $this->_object->createItem();
 		$item->setId( 'unittest2' );
 		$item->setValue( 'test2' );
@@ -109,8 +107,6 @@ class MAdmin_Cache_Manager_DefaultTest extends MW_Unittest_Testcase
 		$itemUpd = $this->_object->getItem( $item->getId() );
 
 		$this->_object->deleteItem( $item->getId() );
-
-		$context = TestHelper::getContext();
 
 		$this->assertEquals( 'unittest2', $item->getId() );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );

@@ -250,7 +250,7 @@ class MShop_Text_Manager_Default
 				$stmt->bind( 10, $date ); // ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if ( $id === null && $fetch === true )
 			{
