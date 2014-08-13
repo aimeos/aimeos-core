@@ -360,7 +360,7 @@ implements MShop_Service_Provider_Interface
 	 * be returned.
 	 *
 	 * @param array $keys List of key names that should be tested for in the order to test
-	 * @param mixed $default Returned value if the key wasn't was found
+	 * @param string $default Returned value if the key wasn't was found
 	 * @return mixed Value of the first key that matches or null if none was found
 	 */
 	protected function _getConfigValue( array $keys, $default = null )

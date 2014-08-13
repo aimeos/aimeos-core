@@ -27,7 +27,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 	/**
 	 * Initializes a new common address manager object using the given context object.
 	 *
-	 * @param MShop_Context_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
 	 *
 	 * @throws MShop_Exception if no configuration is available
 	 */
@@ -253,7 +253,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager for different extensions, e.g type, etc.
+	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g type, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

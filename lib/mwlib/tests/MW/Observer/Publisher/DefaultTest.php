@@ -67,6 +67,10 @@ class MW_Observer_Publisher_DefaultTest extends MW_Unittest_Testcase
 
 class MW_Observer_Publisher_Test extends MW_Observer_Publisher_Abstract
 {
+	/**
+	 * @param string $action
+	 * @param string $value
+	 */
 	public function notifyListeners($action, $value = null)
 	{
 		$this->_notifyListeners($action, $value);

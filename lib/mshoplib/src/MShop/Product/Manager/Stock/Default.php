@@ -521,7 +521,7 @@ class MShop_Product_Manager_Stock_Default
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager for different extensions, e.g base, etc.
+	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g base, etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

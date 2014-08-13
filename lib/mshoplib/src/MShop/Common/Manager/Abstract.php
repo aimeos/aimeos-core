@@ -101,7 +101,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 * @param MW_Common_Criteria_Interface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @param string $cfgPath Configuration key for the SQL statement
-	 * @param array $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
+	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
 	protected function _aggregate( MW_Common_Criteria_Interface $search, $key, $cfgPath, $required = array() )

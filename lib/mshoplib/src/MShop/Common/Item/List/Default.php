@@ -287,7 +287,7 @@ class MShop_Common_Item_List_Default
 	/**
 	 * Returns the referenced item if it's available.
 	 *
-	 * @return MShop_Common_Item_Interface|null Referenced list item
+	 * @return MShop_Common_Item_Interface Referenced list item
 	 */
 	public function getRefItem()
 	{

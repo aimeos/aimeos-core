@@ -519,7 +519,7 @@ class MShop_Product_Manager_Tag_Default
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from
 	 * configuration (or Default) if null
-	 * @return mixed Manager for different extensions, e.g tag types, tag lists etc.
+	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g tag types, tag lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{

@@ -392,14 +392,15 @@ class Controller_ExtJS_Product_Export_Text_Default
 						$items[5] = $textItem->getId();
 						$items[6] = $textItem->getContent();
 					}
+
+					$contentItem->add( $items );
 				}
 			}
 			else
 			{
 				$items = array( $langid, $item->getType(), $item->getCode(), 'default', $textTypeItem->getCode(), '', '' );
+				$contentItem->add( $items );
 			}
-
-			$contentItem->add( $items );
 		}
 	}
 }

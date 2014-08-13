@@ -429,7 +429,7 @@ class MW_DB_PDOTest extends MW_Unittest_Testcase
 
 		try
 		{
-			$stmt = $conn->create( $sql )->execute()->finish();
+			$conn->create( $sql )->execute()->finish();
 		}
 		catch ( MW_DB_Exception $e )
 		{

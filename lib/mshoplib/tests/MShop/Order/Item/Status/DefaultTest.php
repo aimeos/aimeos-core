@@ -22,9 +22,6 @@ class MShop_Order_Item_Status_DefaultTest extends MW_Unittest_Testcase
 	*/
 	protected function setUp()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager(TestHelper::getContext());
-		$orderStatusManager = $orderManager->getSubManager( 'status' );
-
 		$this->_values = array(
 			'id' => 1,
 			'siteid'=>99,

@@ -375,14 +375,15 @@ class Controller_ExtJS_Catalog_Export_Text_Default
 						$items[5] = $textItem->getId();
 						$items[6] = $textItem->getContent();
 					}
+
+					$contentItem->add( $items );
 				}
 			}
 			else
 			{
 				$items = array( $langid, $item->getLabel(), $item->getId(), 'default', $textTypeItem->getCode(), '', '' );
+				$contentItem->add( $items );
 			}
-
-			$contentItem->add( $items );
 		}
 	}
 
