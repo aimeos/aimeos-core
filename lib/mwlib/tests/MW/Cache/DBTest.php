@@ -134,7 +134,7 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 	public function testConstructorNoConfig()
 	{
 		$this->setExpectedException( 'MW_Cache_Exception' );
-		$obj = new MW_Cache_DB( array(), $this->_dbm );
+		new MW_Cache_DB( array(), $this->_dbm );
 	}
 
 
@@ -144,7 +144,7 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 		unset( $config['sql'] );
 
 		$this->setExpectedException( 'MW_Cache_Exception' );
-		$obj = new MW_Cache_DB( $config, $this->_dbm );
+		new MW_Cache_DB( $config, $this->_dbm );
 	}
 
 
@@ -154,7 +154,7 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 		unset( $config['search'] );
 
 		$this->setExpectedException( 'MW_Cache_Exception' );
-		$obj = new MW_Cache_DB( $config, $this->_dbm );
+		new MW_Cache_DB( $config, $this->_dbm );
 	}
 
 
@@ -164,7 +164,7 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 		unset( $config['sql']['delete'] );
 
 		$this->setExpectedException( 'MW_Cache_Exception' );
-		$obj = new MW_Cache_DB( $config, $this->_dbm );
+		new MW_Cache_DB( $config, $this->_dbm );
 	}
 
 
@@ -174,7 +174,7 @@ class MW_Cache_DBTest extends MW_Unittest_Testcase
 		unset( $config['search']['cache.id'] );
 
 		$this->setExpectedException( 'MW_Cache_Exception' );
-		$obj = new MW_Cache_DB( $config, $this->_dbm );
+		new MW_Cache_DB( $config, $this->_dbm );
 	}
 
 

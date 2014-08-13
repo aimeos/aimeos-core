@@ -402,8 +402,6 @@ class MShop_Order_Manager_Base_Product_Attribute_Default
 	public function searchItems(MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null)
 	{
 		$context = $this->_getContext();
-		$logger = $context->getLogger();
-		$config = $context->getConfig();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();

@@ -111,7 +111,7 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 
 		$result = $attributeTypeManager->searchItems( $search );
 
-		$typeids = $types = array();
+		$typeids = array();
 		foreach( $result as $item ) {
 			$typeids[] = $item->getId();
 		}
@@ -174,7 +174,6 @@ class MW_Setup_Task_MediaListAddTestData extends MW_Setup_Task_Abstract
 	private function _addMediaListData( array $testdata, array $refIds )
 	{
 		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->_additional, 'Default' );
-		$mediaTypeManager = $mediaManager->getSubManager( 'type', 'Default' );
 		$mediaListManager = $mediaManager->getSubmanager( 'list', 'Default' );
 		$mediaListTypeManager = $mediaListManager->getSubManager( 'type', 'Default' );
 

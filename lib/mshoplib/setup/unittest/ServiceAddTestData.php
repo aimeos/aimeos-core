@@ -96,8 +96,8 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 			$typeIds[ $key ] = $type->getId();
 		}
 
-		$parentIds = array ();
 		$parent = $serviceManager->createItem();
+
 		foreach( $testdata['service'] as $key => $dataset )
 		{
 			if( !isset( $typeIds[ $dataset['typeid'] ] ) ) {

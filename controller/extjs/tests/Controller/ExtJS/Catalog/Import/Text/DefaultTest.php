@@ -155,7 +155,6 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$jobController = Controller_ExtJS_Admin_Job_Factory::createController( $this->_context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
-		$directory = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testdir';
 
 		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->_testdir ) ) );
 
@@ -203,6 +202,6 @@ class Controller_ExtJS_Catalog_Import_Text_DefaultTest extends MW_Unittest_Testc
 		$_FILES = array();
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$result = $this->_object->uploadFile( $params );
+		$this->_object->uploadFile( $params );
 	}
 }

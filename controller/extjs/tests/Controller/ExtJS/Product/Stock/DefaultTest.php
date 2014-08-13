@@ -58,7 +58,7 @@ class Controller_ExtJS_Product_Stock_DefaultTest extends MW_Unittest_Testcase
 	{
 		$ctx = TestHelper::getContext();
 
-		$productManager = $manager = MShop_Product_Manager_Factory::createManager( $ctx );
+		$productManager = MShop_Product_Manager_Factory::createManager( $ctx );
 		$warehouseManager = $productManager->getSubManager('stock')->getSubManager('warehouse');
 
 		$search = $warehouseManager->createSearch();

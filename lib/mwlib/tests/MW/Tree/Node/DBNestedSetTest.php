@@ -61,7 +61,7 @@ class MW_Tree_Node_DBNestedSetTest extends MW_Unittest_Testcase
 	public function testMagicGet()
 	{
 		$this->setExpectedException('MW_Tree_Exception');
-		$test = $this->_object->notDefined;
+		$this->_object->notDefined;
 	}
 
 }

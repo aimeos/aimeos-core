@@ -18,49 +18,49 @@ class MShop_Context_Item_DefaultTest extends MW_Unittest_Testcase
 	public function testGetConfig()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$config = $this->_object->getConfig();
+		$this->_object->getConfig();
 	}
 
 	public function testGetDatabaseManager()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$dbm = $this->_object->getDatabaseManager();
+		$this->_object->getDatabaseManager();
 	}
 
 	public function testGetLocale()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$locale = $this->_object->getLocale();
+		$this->_object->getLocale();
 	}
 
 	public function testGetI18n()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$locale = $this->_object->getI18n();
+		$this->_object->getI18n();
 	}
 
 	public function testGetLogger()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$logger = $this->_object->getLogger();
+		$this->_object->getLogger();
 	}
 
 	public function testGetSession()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$config = $this->_object->getSession();
+		$this->_object->getSession();
 	}
 
 	public function testGetMail()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$config = $this->_object->getMail();
+		$this->_object->getMail();
 	}
 
 	public function testGetView()
 	{
 		$this->setExpectedException('MShop_Exception');
-		$config = $this->_object->getView();
+		$this->_object->getView();
 	}
 
 	public function testSetConfig()

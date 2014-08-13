@@ -195,7 +195,7 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 		$_FILES = array();
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$result = $this->_object->uploadFile( $params );
+		$this->_object->uploadFile( $params );
 	}
 
 
@@ -413,7 +413,6 @@ class Controller_ExtJS_Attribute_Import_Text_DefaultTest extends MW_Unittest_Tes
 		$object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
-		$directory = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testdir';
 
 		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->_testdir ) ) );
 

@@ -87,7 +87,7 @@ class MW_Common_Criteria_Expression_Combine_SQLTest extends MW_Unittest_Testcase
 		$this->assertEquals('', $obj->toString($types));
 
 		$this->setExpectedException('MW_Common_Exception');
-		$obj = new MW_Common_Criteria_Expression_Combine_SQL('', array());
+		new MW_Common_Criteria_Expression_Combine_SQL('', array());
 
 	}
 }

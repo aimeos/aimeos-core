@@ -121,7 +121,6 @@ class MShop_Plugin_Provider_Order_PropertyAdd
 	protected function _addAttributes( MShop_Common_Item_Interface $item, MShop_Order_Item_Base_Product_Interface $product , array $properties )
 	{
 		$attributeList = $product->getAttributes();
-		$config = $this->_getItem()->getConfig();
 		$itemProperties = $item->toArray();
 
 		foreach( $properties as $current )

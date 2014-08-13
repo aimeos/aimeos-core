@@ -53,7 +53,6 @@ class Controller_Jobs_Order_Email_Payment_Default
 		$mailer = $context->getMail();
 		$view = $context->getView();
 
-		$i18nPaths = $arcavias->getI18nPaths();
 		$templatePaths = $arcavias->getCustomPaths( 'client/html' );
 
 		$helper = new MW_View_Helper_Config_Default( $view, $config );

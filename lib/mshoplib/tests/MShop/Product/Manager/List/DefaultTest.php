@@ -320,7 +320,6 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 	public function testSearchRefItems()
 	{
 		$total = 0;
-		$siteid = TestHelper::getContext()->getLocale()->getSiteId();
 
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.list.domain', array( 'attribute', 'media' ) ) );

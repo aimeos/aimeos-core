@@ -115,7 +115,6 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 
 		try
 		{
-			$reqkey = '';
 			$search = clone $search;
 			$attrList = $this->getSearchAttributes();
 
@@ -312,7 +311,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 	 * @param string $domain Name of the domain (product, text, media, etc.)
 	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager for different extensions
+	 * @return MShop_Common_Manager_Interface Manager for different extensions
 	 */
 	protected function _getSubManager( $domain, $manager, $name )
 	{
@@ -426,7 +425,7 @@ abstract class MShop_Common_Manager_Abstract extends MW_Common_Manager_Abstract
 		if( $noprefix )
 		{
 			if( ( $pos = strrpos( $string, $sep ) ) !== false ) {
-				$result[] = $string = substr( $string, 0, $pos );
+				$result[] = substr( $string, 0, $pos );
 			} else {
 				$result[] = $string;
 			}

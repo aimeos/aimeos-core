@@ -63,7 +63,7 @@ class MW_Setup_Task_ProductAddTestData extends MW_Setup_Task_Abstract
 			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
-		$parentIds = $this->_addProductData( $testdata );
+		$this->_addProductData( $testdata );
 
 		$this->_status( 'done' );
 	}

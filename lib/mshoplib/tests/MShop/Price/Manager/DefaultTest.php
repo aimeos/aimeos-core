@@ -245,7 +245,7 @@ class MShop_Price_Manager_DefaultTest extends MW_Unittest_Testcase
 	public function testGetLowestPriceNoPrice()
 	{
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$lowest = $this->_object->getLowestPrice( array(), 1 );
+		$this->_object->getLowestPrice( array(), 1 );
 	}
 
 
@@ -256,13 +256,13 @@ class MShop_Price_Manager_DefaultTest extends MW_Unittest_Testcase
 		$item->setQuantity( 5 );
 
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$lowest = $this->_object->getLowestPrice( array( $item ), 1 );
+		$this->_object->getLowestPrice( array( $item ), 1 );
 	}
 
 
 	public function testGetLowestPriceWrongItem()
 	{
 		$this->setExpectedException( 'MShop_Price_Exception' );
-		$lowest = $this->_object->getLowestPrice( array( new stdClass() ), 1 );
+		$this->_object->getLowestPrice( array( new stdClass() ), 1 );
 	}
 }

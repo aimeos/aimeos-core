@@ -88,12 +88,14 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 		$object->register( $this->_order );
 	}
 
+
 	public function testUpdateNone()
 	{
 		// MShop_Order_Item_Base_Abstract::PARTS_PRODUCT not set, so check shall not be executed
 		$object = new MShop_Plugin_Provider_Order_ProductGone(TestHelper::getContext(), $this->_plugin);
 		$this->AssertTrue( $object->update( $this->_order, 'check.after' ) );
 	}
+
 
 	public function testUpdateOk()
 	{
@@ -102,6 +104,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 
 		$this->assertTrue( $result );
 	}
+
 
 	public function testUpdateProductDeleted()
 	{
@@ -119,6 +122,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
 		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
+
 
 	public function testUpdateProductEnded()
 	{
@@ -140,6 +144,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
 
+
 	public function testUpdateProductNotStarted()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
@@ -160,6 +165,7 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 		$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 	}
 
+
 	public function testUpdateProductDeactivated()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
@@ -169,28 +175,29 @@ class MShop_Plugin_Provider_Order_ProductGoneTest extends PHPUnit_Framework_Test
 		$badItem = $orderBaseProductManager->createItem();
 		$badItem->copyFrom( $this->_product );
 
-		$this->_product->setStatus(0);
-
+		$this->_product->setStatus( 0 );
 		$productManager->saveItem( $this->_product );
 
 		$this->_order->addProduct( $badItem );
-
 		$products = $this->_order->getProducts();
+
 		if ( count( $products ) < 1 ) {
 			throw new Exception( 'Product for testing not in basket.' );
 		}
-		list($badItemPosition, $product) = each( $products );
+
+		$badItemPosition = key( $products );
 
 		$object = new MShop_Plugin_Provider_Order_ProductGone(TestHelper::getContext(), $this->_plugin);
-		try {
+
+		try
+		{
 			$object->update( $this->_order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+			$this->fail( 'MShop_Plugin_Provider_Exception not thrown.' );
 		}
-		catch( MShop_Plugin_Provider_Exception $e ) {
+		catch( MShop_Plugin_Provider_Exception $e )
+		{
 			$ref = array('product' => array( $badItemPosition => 'gone.status' ) );
 			$this->assertEquals( $ref, $e->getErrorCodes() );
-			return;
 		}
-
-		$this->fail( 'MShop_Plugin_Provider_Exception not thrown.' );
 	}
 }

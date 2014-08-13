@@ -146,7 +146,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 
 		$this->_txBegin();
 
-		$start = $num = 0;
+		$start = 0;
 
 		do
 		{

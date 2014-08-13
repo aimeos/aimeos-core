@@ -201,10 +201,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
 		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
-		$baseid = $order->getBaseId();
-		$baseItem = $orderBaseManager->getItem( $baseid );
-
-		if( ( $tid = $this->_getOrderServiceItem( $baseid )->getAttribute('TRANSACTIONID') ) === null )
+		if( ( $tid = $this->_getOrderServiceItem( $order->getBaseId() )->getAttribute('TRANSACTIONID') ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
@@ -280,9 +277,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
 		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
-		$baseid = $order->getBaseId();
-		$baseItem = $orderBaseManager->getItem( $baseid );
-		$serviceItem = $this->_getOrderServiceItem( $baseid );
+		$serviceItem = $this->_getOrderServiceItem( $order->getBaseId() );
 
 		if( ( $tid = $serviceItem->getAttribute('TRANSACTIONID') ) === null )
 		{
@@ -319,10 +314,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$orderManager = MShop_Factory::createManager( $this->_getContext(), 'order' );
 		$orderBaseManager = MShop_Factory::createManager( $this->_getContext(), 'order/base' );
 
-		$baseid = $order->getBaseId();
-		$baseItem = $orderBaseManager->getItem( $baseid );
-
-		if( ( $tid = $this->_getOrderServiceItem( $baseid )->getAttribute('TRANSACTIONID') ) === null )
+		if( ( $tid = $this->_getOrderServiceItem( $order->getBaseId() )->getAttribute('TRANSACTIONID') ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
 			throw new MShop_Service_Exception( $msg );
@@ -334,7 +326,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
-		$rvals = $this->_checkResponse( $order->getId(), $response, __METHOD__ );
+		$this->_checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
 		$orderManager->saveItem( $order );
@@ -442,7 +434,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$values['PAYMENTACTION'] = $this->_getConfigValue( array( 'paypalexpress.PaymentAction' ), 'Sale' );
 		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
 		$values['NOTIFYURL'] = $this->_getConfigValue( array( 'payment.url-update', 'payment.url-success' ) );
-		$values['AMT'] = $amount = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
+		$values['AMT'] = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->_getCommunication()->transmit( $this->_apiendpoint, 'POST', $urlQuery );
@@ -646,7 +638,6 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			}
 		}
 
-		$paymentCosts = '0.00';
 		$paymentItem = $orderBase->getService('payment');
 		if( ( $paymentCosts = $paymentItem->getPrice()->getCosts() ) > '0.00' )
 		{

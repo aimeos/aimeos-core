@@ -147,7 +147,7 @@ abstract class MShop_Common_Manager_Type_Abstract
 				$statement->bind( 8, date('Y-m-d H:i:s', time()));//ctime
 			}
 
-			$result = $statement->execute()->finish();
+			$statement->execute()->finish();
 
 			if( $fetch === true )
 			{

@@ -238,7 +238,7 @@ class MShop_Product_Manager_Stock_Default
 				$stmt->bind( 8, $date ); //ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{
@@ -738,7 +738,7 @@ class MShop_Product_Manager_Stock_Default
 			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
 			$stmt->bind( 3, $context->getEditor() );
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
 		}

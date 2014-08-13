@@ -161,9 +161,10 @@ class MShop_Plugin_Manager_Default
 
 		$search = $this->createSearch( true );
 
-		$expr = array();
-		$expr[] = $search->compare( '==', 'plugin.type.code', $domain);
-		$expr[] = $search->getConditions();
+		$expr = array(
+			$search->compare( '==', 'plugin.type.code', $domain ),
+			$search->getConditions(),
+		);
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
@@ -171,7 +172,6 @@ class MShop_Plugin_Manager_Default
 		$pluginItems = $this->searchItems( $search );
 
 		$interface = 'MShop_Plugin_Provider_Interface';
-
 		$context = $this->_getContext();
 
 		foreach( $pluginItems as $pluginItem )
@@ -185,37 +185,34 @@ class MShop_Plugin_Manager_Default
 				throw new MShop_Service_Exception( $msg );
 			}
 
-			if ( ctype_alnum( $domain ) === false )
+			if( ctype_alnum( $domain ) === false )
 			{
-				$context->getLogger()->log(
-					sprintf( 'Invalid characters in domain name "%1$s"', $domain ), MW_Logger_Abstract::WARN
-				);
+				$msg = sprintf( 'Invalid characters in domain name "%1$s"', $domain );
+				$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				continue;
 			}
 
-			if ( ctype_alnum( $providername ) === false )
+			if( ctype_alnum( $providername ) === false )
 			{
-				$context->getLogger()->log(
-					sprintf( 'Invalid characters in provider name "%1$s"', $providername ), MW_Logger_Abstract::WARN
-				);
+				$msg = sprintf( 'Invalid characters in provider name "%1$s"', $providername );
+				$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				continue;
 			}
 
 
 			$classname = 'MShop_Plugin_Provider_' . ucfirst( $domain ) . '_' . $providername;
-			$filename = 'MShop/Plugin/Provider/' . ucfirst( $domain ) . '/' . $providername . '.php';
 
-			if ( class_exists( $classname ) === false )
+			if( class_exists( $classname ) === false )
 			{
-				$context->getLogger()->log(
-					sprintf( 'Class "%1$s" not available', $classname ), MW_Logger_Abstract::WARN
-				);
+				$msg = sprintf( 'Class "%1$s" not available', $classname );
+				$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN );
 				continue;
 			}
 
 			$provider = new $classname( $context, $pluginItem );
 
-			if ( ( $provider instanceof $interface ) === false ) {
+			if( ( $provider instanceof $interface ) === false )
+			{
 				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
 				throw new MShop_Service_Exception( $msg );
 			}
@@ -357,7 +354,7 @@ class MShop_Plugin_Manager_Default
 				$stmt->bind( 10, $date ); //ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{

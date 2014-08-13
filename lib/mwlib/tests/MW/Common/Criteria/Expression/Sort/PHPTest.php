@@ -78,7 +78,7 @@ class MW_Common_Criteria_Expression_Sort_PHPTest extends MW_Unittest_Testcase
 	public function testException1()
 	{
 		$this->setExpectedException('MW_Common_Exception');
-		$object = new MW_Common_Criteria_Expression_Sort_PHP( '/', 'test(1,2)' );
+		new MW_Common_Criteria_Expression_Sort_PHP( '/', 'test(1,2)' );
 	}
 
 	public function testException2()

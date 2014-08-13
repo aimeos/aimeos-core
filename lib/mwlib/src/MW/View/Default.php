@@ -54,7 +54,13 @@ class MW_View_Default implements MW_View_Interface
 				throw new MW_View_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$this->_helper[$name] = new $classname( $this );
+			$helper = new $classname( $this );
+
+			if( !( $helper instanceof $iface ) ) {
+				throw new MW_View_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+			}
+
+			$this->_helper[$name] = $helper;
 		}
 
 		return call_user_func_array( array( $this->_helper[$name], 'transform' ), $args );

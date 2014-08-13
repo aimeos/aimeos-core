@@ -173,7 +173,7 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 	{
 		$manager = new MW_Tree_Manager_DBNestedSet( $this->_config, $this->_dbm );
 
-		$manager->isReadOnly();
+		$this->assertFalse( $manager->isReadOnly() );
 	}
 
 
@@ -962,14 +962,14 @@ class MW_Tree_Manager_DBNestedSetTest extends MW_Unittest_Testcase
 	public function testConstructor()
 	{
 		$this->setExpectedException( 'MW_Tree_Exception' );
-		$obj = new MW_Tree_Manager_DBNestedSet($this->_config, null);
+		new MW_Tree_Manager_DBNestedSet($this->_config, null);
 	}
 
 
 	public function testConstructor2()
 	{
 		$this->setExpectedException( 'MW_Tree_Exception' );
-		$obj = new MW_Tree_Manager_DBNestedSet(array(), $this->_dbm);
+		new MW_Tree_Manager_DBNestedSet(array(), $this->_dbm);
 	}
 
 }

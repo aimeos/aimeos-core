@@ -100,7 +100,7 @@ class MW_Setup_DBSchema_MysqlTest extends MW_Unittest_Testcase
 		$this->assertTrue( $columnItem->isNullable() );
 
 		$this->setExpectedException('MW_Setup_Exception');
-		$columnItem = $this->_object->getColumnDetails( 'mw_setup_dbschema_test', 'notexisting' );
+		$this->_object->getColumnDetails( 'mw_setup_dbschema_test', 'notexisting' );
 	}
 
 	public function testIndexExists()

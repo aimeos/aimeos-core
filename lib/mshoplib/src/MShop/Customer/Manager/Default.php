@@ -485,7 +485,7 @@ class MShop_Customer_Manager_Default
 				$stmt->bind( 28, $date ); // Creation time
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{

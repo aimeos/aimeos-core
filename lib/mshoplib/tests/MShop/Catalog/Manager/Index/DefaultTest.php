@@ -735,7 +735,6 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function _getValue( MW_DB_Manager_Interface $dbm, $sql, $column, $siteId, $productId )
 	{
-		$value = null;
 		$config = $this->_context->getConfig();
 
 		if( $config->get( 'resource/db-product' ) === null ) {

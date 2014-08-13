@@ -39,9 +39,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$this->_object = new MShop_Service_Provider_Payment_PayPalExpress( $context, $this->_serviceItem );
 
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service' );
-		$orderBaseServiceAttributesManager = $orderBaseServiceManager->getSubManager( 'attribute' );
 
 		$search = $orderManager->createSearch();
 		$expr = array(
@@ -124,10 +121,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$helperForm = $this->_object->process( $this->_order );
 
-		$values = $testData = array(
-			'TOKEN' => 'UT-99999999'
-		);
-
 		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
@@ -144,6 +137,10 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=UT-99999999', $helperForm->getUrl() );
 		$this->assertEquals( 'POST', $helperForm->getMethod() );
 		$this->assertEquals( array(), $helperForm->getValues() );
+
+		$testData = array(
+			'TOKEN' => 'UT-99999999'
+		);
 
 		foreach( $testData AS $key => $value ) {
 			$this->assertEquals( $attributeList[ $key ]->getValue(), $testData[ $key ] );

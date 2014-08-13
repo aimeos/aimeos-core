@@ -37,13 +37,13 @@ class MW_Translation_NoneTest extends MW_Unittest_Testcase
 
 	public function testConstructTwoLetterLocale()
 	{
-		$object = new MW_Translation_None( 'de' );
+		new MW_Translation_None( 'de' );
 	}
 
 
 	public function testConstructFiveLetterLocale()
 	{
-		$object = new MW_Translation_None( 'de_DE' );
+		new MW_Translation_None( 'de_DE' );
 	}
 
 
@@ -57,14 +57,14 @@ class MW_Translation_NoneTest extends MW_Unittest_Testcase
 	public function testConstructInvalidCaseLocale()
 	{
 		$this->setExpectedException( 'MW_Translation_Exception' );
-		$object = new MW_Translation_None( 'de_de' );
+		new MW_Translation_None( 'de_de' );
 	}
 
 
 	public function testConstructInvalidCharLocale()
 	{
 		$this->setExpectedException( 'MW_Translation_Exception' );
-		$object = new MW_Translation_None( 'd' );
+		new MW_Translation_None( 'd' );
 	}
 
 

@@ -311,7 +311,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 			 * @see client/html/catalog/list/domains
 			 * @see client/html/catalog/detail/domains
 			 */
-			$domains = $config->get( 'client/html/catalog/detail/pinned/domains', $default );
+			$domains = $config->get( 'client/html/catalog/detail/pinned/domains', $domains );
 
 			$str = $session->get( 'arcavias/catalog/session/pinned/list', '' );
 

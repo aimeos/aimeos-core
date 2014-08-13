@@ -43,8 +43,6 @@ abstract class MShop_Coupon_Provider_Abstract
 	 */
 	public function updateCoupon( MShop_Order_Item_Base_Interface $base )
 	{
-		$config = $this->_getItem()->getConfig();
-
 		if( $this->_getObject()->isAvailable( $base ) !== true )
 		{
 			$base->deleteCoupon( $this->_code );

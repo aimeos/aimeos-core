@@ -135,8 +135,8 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 			$bases['ids'][ $key ] = $bases['items'][ $key ]->getId();
 		}
 
-		$order = array();
 		$orderAddr = $orderBaseAddressManager->createItem();
+
 		foreach( $testdata['order/base/address'] as $dataset )
 		{
 			if( !isset( $bases['ids'][ $dataset['baseid'] ] ) ) {

@@ -248,7 +248,6 @@ class MW_Jsb2_Default
 	 */
 	protected function _getPackages( $manifest, $filter = array() )
 	{
-		$filenames = array();
 		$packageContainer = array();
 
 		if( !isset( $manifest->pkgs ) || !is_array( $manifest->pkgs ) ) {

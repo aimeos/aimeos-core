@@ -22,12 +22,6 @@ class MW_View_Helper_Translate_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$ds = DIRECTORY_SEPARATOR;
-
-		$translationSources = array(
-			'test' => dirname(__FILE__) . $ds . 'testfiles' . $ds . 'translate',
-		);
-
 		$view = new MW_View_Default();
 		$translate = new MW_Translation_None( 'en_GB' );
 		$this->_object = new MW_View_Helper_Translate_Default( $view, $translate );

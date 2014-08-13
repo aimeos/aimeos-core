@@ -42,21 +42,6 @@ class MShop_Product_Manager_Stock_Warehouse_DefaultTest extends MW_Unittest_Test
 	}
 
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite( 'MShop_Product_Manager_Stock_Warehouse_DefaultTest' );
-		$result = PHPUnit_TextUI_TestRunner::run( $suite );
-	}
-
-
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( 'MShop_Product_Item_Stock_Warehouse_Interface', $this->_object->createItem() );

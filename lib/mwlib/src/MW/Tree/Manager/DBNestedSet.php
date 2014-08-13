@@ -513,7 +513,7 @@ class MW_Tree_Manager_DBNestedSet extends MW_Tree_Manager_Abstract
 			$stmt->bind( 2, $node->getCode() );
 			$stmt->bind( 3, $node->getStatus() );
 			$stmt->bind( 4, $node->getId() );
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			$this->_dbm->release( $conn, $this->_dbname );
 		}

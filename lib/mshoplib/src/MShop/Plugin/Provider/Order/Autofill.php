@@ -45,7 +45,6 @@ class MShop_Plugin_Provider_Order_Autofill
 		$context = $this->_getContext();
 		$services = $order->getServices();
 		$addresses = $order->getAddresses();
-		$config = $this->_getItem()->getConfig();
 
 
 		if( ( $userid = $context->getUserId() ) !== null

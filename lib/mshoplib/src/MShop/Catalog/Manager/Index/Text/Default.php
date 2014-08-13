@@ -77,18 +77,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		parent::__construct( $context );
 		$this->_setResourceName( 'db-product' );
 
-
 		$site = $context->getLocale()->getSitePath();
-		$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_INT );
-
-		$search = $this->createSearch();
-		$expr = array(
-			$search->compare( '==', 'siteid', null ),
-			$search->compare( '==', 'siteid', $site ),
-		);
-		$search->setConditions( $search->combine( '||', $expr ) );
-
-		$string = $search->getConditionString( $types, array( 'siteid' => 'mcatinte."siteid"' ) );
 
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.value'], 'mcatinte."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
@@ -343,7 +332,6 @@ class MShop_Catalog_Manager_Index_Text_Default
 	public function optimize()
 	{
 		$context = $this->_getContext();
-		$config = $context->getConfig();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();
@@ -533,7 +521,6 @@ class MShop_Catalog_Manager_Index_Text_Default
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			$ids = array();
 			while( ( $row = $results->fetch() ) !== false )	{
 				$ids[] = $row['id'];
 			}
@@ -609,7 +596,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 	 */
 	protected function _saveAttributeTexts( array $items )
 	{
-		$attrIds = $prodIds = array();
+		$prodIds = array();
 
 		foreach( $items as $item )
 		{
@@ -726,7 +713,7 @@ class MShop_Catalog_Manager_Index_Text_Default
 		$stmt->bind( 11, $date );//ctime
 
 		try {
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 		} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
 	}
 

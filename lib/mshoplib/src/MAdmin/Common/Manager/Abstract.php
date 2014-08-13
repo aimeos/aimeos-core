@@ -80,9 +80,9 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 	 * @param string $domain Name of the domain (product, text, media, etc.)
 	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager for different extensions
+	 * @return MShop_Common_Manager_Interface Manager for different extensions
 	 */
-	protected function _getSubManager( $domain, $manager, $name, $subdomain = '' )
+	protected function _getSubManager( $domain, $manager, $name )
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );

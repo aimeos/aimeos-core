@@ -82,7 +82,7 @@ class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
 		$this->_msg( 'Adding parentid column to catalog and locale_site', 0 );
 		$this->_status( '' );
 
-		foreach( $this->_mysql as $table => $stmt )
+		foreach( $stmts as $table => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking parentid column in "%1$s"', $table ), 1 );
 

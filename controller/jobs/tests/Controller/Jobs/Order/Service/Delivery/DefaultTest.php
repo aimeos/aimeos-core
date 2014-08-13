@@ -183,11 +183,6 @@ class Controller_Jobs_Order_Service_Delivery_DefaultTest extends MW_Unittest_Tes
 
 		$serviceItem = $serviceManagerStub->createItem();
 
-		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Delivery_Manual' )
-			->setConstructorArgs( array( $context, $serviceItem ) )
-			->getMock();
-
-
 		$serviceManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $serviceItem ), array() ) );
 

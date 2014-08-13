@@ -86,11 +86,11 @@ class Controller_ExtJS_Plugin_Decorator_ExampleTest extends MW_Unittest_Testcase
 		);
 
 		$saved = $this->_object->saveItems( $saveParams );
-		$searched = $this->_object->searchItems( $searchParams );
+		$this->_object->searchItems( $searchParams );
 
 		$deleteParams = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'plugin.id'} );
 		$this->_object->deleteItems( $deleteParams );
-		$result = $this->_object->searchItems( $searchParams );
+		$this->_object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 	}

@@ -401,7 +401,6 @@ class MAdmin_Cache_Manager_Default
 	{
 		$items = array();
 		$context = $this->_getContext();
-		$logger = $context->getLogger();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();

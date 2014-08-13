@@ -301,7 +301,7 @@ class MShop_Order_Manager_Default
 				$stmt->bind( 11, $date ); //ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{
@@ -469,8 +469,6 @@ class MShop_Order_Manager_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->_getContext();
-		$logger = $context->getLogger();
-		$config = $context->getConfig();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();

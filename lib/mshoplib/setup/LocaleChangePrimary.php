@@ -73,7 +73,6 @@ class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Abstract
 		foreach( $stmts as $table => $stmt )
 		{
 			$this->_msg( sprintf( 'Checking table "%1$s" for PRIMARY": ', $table ), 1 );
-			$counter = 0;
 			$counter = $this->_getValue( sprintf( $search, $table ), 'counter' );
 
 			if( $counter == 2 )
