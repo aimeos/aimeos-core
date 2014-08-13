@@ -526,6 +526,7 @@ class Controller_Frontend_Basket_Default
 		$context = $this->_getContext();
 		$session = $context->getSession();
 		$locale = $this->_basket->getLocale();
+		$logger = $context->getLogger();
 
 		$localeStr = $session->get( 'arcavias/basket/locale' );
 		$localeKey = $locale->getSite()->getCode() . '|' . $locale->getLanguageId() . '|' . $locale->getCurrencyId();
@@ -555,6 +556,8 @@ class Controller_Frontend_Basket_Default
 				}
 				catch( Exception $e )
 				{
+					$str = 'Error migrating address with type "%1$s" in basket to locale "%2$s": %3$s';
+					$logger->log( sprintf( $str, $type, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
 					$errors['address'][$type] = $e->getMessage();
 				}
 			}
@@ -587,6 +590,9 @@ class Controller_Frontend_Basket_Default
 				}
 				catch( Exception $e )
 				{
+					$code = $product->getProductCode();
+					$str = 'Error migrating product with code "%1$s" in basket to locale "%2$s": %3$s';
+					$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
 					$errors['product'][$pos] = $e->getMessage();
 				}
 			}
@@ -600,6 +606,8 @@ class Controller_Frontend_Basket_Default
 				}
 				catch( Exception $e )
 				{
+					$str = 'Error migrating coupon with code "%1$s" in basket to locale "%2$s": %3$s';
+					$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
 					$errors['coupon'][$code] = $e->getMessage();
 				}
 			}
@@ -619,6 +627,9 @@ class Controller_Frontend_Basket_Default
 				}
 				catch( Exception $e )
 				{
+					$code = $item->getCode();
+					$str = 'Error migrating service with code "%1$s" and type "%2$s" in basket to locale "%3$s": %4$s';
+					$logger->log( sprintf( $str, $code, $type, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
 					$errors['service'][$type] = $e->getMessage();
 				}
 			}
