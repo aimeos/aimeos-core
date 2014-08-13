@@ -378,7 +378,7 @@ class MShop_Order_Item_Base_Product_Default
 
 		$price->setValue( $price->getValue() * $this->_values['quantity'] );
 		$price->setCosts( $price->getCosts() * $this->_values['quantity'] );
-		$price->getRebate( $price->getRebate() * $this->_values['quantity'] );
+		$price->setRebate( $price->getRebate() * $this->_values['quantity'] );
 
 		return $price;
 	}
