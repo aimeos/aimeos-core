@@ -43,21 +43,21 @@ class Controller_ExtJS_Product_Stock_Warehouse_FactoryTest extends MW_Unittest_T
 	public function testFactoryExceptionWrongName()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_Product_Stock_Warehouse_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
+		Controller_ExtJS_Product_Stock_Warehouse_Factory::createController(TestHelper::getContext(), 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_Product_Stock_Warehouse_Factory::createController(TestHelper::getContext(), 'WrongClass' );
+		Controller_ExtJS_Product_Stock_Warehouse_Factory::createController(TestHelper::getContext(), 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$object = Controller_ExtJS_Product_Stock_Warehouse_Factory::createController(TestHelper::getContext(), 'Factory' );
+		Controller_ExtJS_Product_Stock_Warehouse_Factory::createController(TestHelper::getContext(), 'Factory' );
 	}
 
 }

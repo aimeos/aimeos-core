@@ -403,7 +403,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 				$stmt->bind(13, date( 'Y-m-d H:i:s', time() ), MW_DB_Statement_Abstract::PARAM_STR );// ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $fetch === true )
 			{

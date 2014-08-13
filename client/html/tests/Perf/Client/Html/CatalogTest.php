@@ -12,15 +12,6 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 	protected $_view;
 
 
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('Perf_Client_Html_CatalogTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
 	protected function setUp()
 	{
 		$this->_paths = TestHelper::getHtmlTemplatePaths();
@@ -60,16 +51,16 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 		// parser warm up so files are already parsed (same as APC is used)
 		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getBody();
-		$result = $client->getHeader();
+		$client->getBody();
+		$client->getHeader();
 
 
 		$start = microtime( true );
 
 		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getHeader();
-		$result = $client->getBody();
+		$client->getHeader();
+		$client->getBody();
 
 		$stop = microtime( true );
 		echo "\n    catalog filter: " . ( ( $stop - $start ) * 1000 ) . " msec\n";
@@ -82,7 +73,7 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 
 		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getHeader();
+		$client->getHeader();
 
 		$stop = microtime( true );
 		echo "\n    catalog filter header: " . ( ( $stop - $start ) * 1000 ) . " msec\n";
@@ -95,7 +86,7 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 
 		$client = Client_Html_Catalog_Filter_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getBody();
+		$client->getBody();
 
 		$stop = microtime( true );
 		echo "\n    catalog filter body: " . ( ( $stop - $start ) * 1000 ) . " msec\n";
@@ -107,16 +98,16 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 		// parser warm up so files are already parsed (same as APC is used)
 		$client = Client_Html_Catalog_List_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getBody();
-		$result = $client->getHeader();
+		$client->getBody();
+		$client->getHeader();
 
 
 		$start = microtime( true );
 
 		$client = Client_Html_Catalog_List_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getHeader();
-		$result = $client->getBody();
+		$client->getHeader();
+		$client->getBody();
 
 		$stop = microtime( true );
 		echo "\n    catalog list: " . ( ( $stop - $start ) * 1000 ) . " msec\n";
@@ -129,7 +120,7 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 
 		$client = Client_Html_Catalog_List_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getHeader();
+		$client->getHeader();
 
 		$stop = microtime( true );
 		echo "\n    catalog list header: " . ( ( $stop - $start ) * 1000 ) . " msec\n";
@@ -142,7 +133,7 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 
 		$client = Client_Html_Catalog_List_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getBody();
+		$client->getBody();
 
 		$stop = microtime( true );
 		echo "\n    catalog list body: " . ( ( $stop - $start ) * 1000 ) . " msec\n";
@@ -154,16 +145,16 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 		// parser warm up so files are already parsed (same as APC is used)
 		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getBody();
-		$result = $client->getHeader();
+		$client->getBody();
+		$client->getHeader();
 
 
 		$start = microtime( true );
 
 		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getHeader();
-		$result = $client->getBody();
+		$client->getHeader();
+		$client->getBody();
 
 		$stop = microtime( true );
 		echo "\n    catalog detail: " . ( ( $stop - $start ) * 1000 ) . " msec\n";
@@ -176,7 +167,7 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 
 		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getHeader();
+		$client->getHeader();
 
 		$stop = microtime( true );
 		echo "\n    catalog detail header: " . ( ( $stop - $start ) * 1000 ) . " msec\n";
@@ -189,7 +180,7 @@ class Perf_Client_Html_CatalogTest extends MW_Unittest_Testcase
 
 		$client = Client_Html_Catalog_Detail_Factory::createClient( $this->_context, $this->_paths );
 		$client->setView( $this->_view );
-		$result = $client->getBody();
+		$client->getBody();
 
 		$stop = microtime( true );
 		echo "\n    catalog detail body: " . ( ( $stop - $start ) * 1000 ) . " msec\n";

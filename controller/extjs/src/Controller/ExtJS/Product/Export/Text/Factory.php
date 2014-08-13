@@ -57,10 +57,10 @@ class Controller_ExtJS_Product_Export_Text_Factory
 			$name = $context->getConfig()->get('classes/controller/extjs/product/export/text/name', 'Default');
 		}
 
-		if ( ctype_alnum($name) === false )
+		if ( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? 'Controller_ExtJS_Product_Export_Text_' . $name : '<not a string>';
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $name ) );
+			$classname = is_string( $name ) ? 'Controller_ExtJS_Product_Export_Text_' . $name : '<not a string>';
+			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'Controller_ExtJS_Common_Load_Text_Interface';

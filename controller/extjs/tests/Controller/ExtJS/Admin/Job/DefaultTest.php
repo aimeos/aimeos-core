@@ -99,7 +99,7 @@ class Controller_ExtJS_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 		);
 
 		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$saved = $this->_object->saveItems( $saveParams );
+		$this->_object->saveItems( $saveParams );
 	}
 
 }

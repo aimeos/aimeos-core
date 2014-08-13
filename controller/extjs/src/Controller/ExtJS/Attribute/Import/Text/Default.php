@@ -221,7 +221,7 @@ class Controller_ExtJS_Attribute_Import_Text_Default
 			}
 
 			foreach( $container as $content ) {
-				$itemTextMap = $this->_importTextsFromContent( $content, $textTypeMap, 'attribute' );
+				$this->_importTextsFromContent( $content, $textTypeMap, 'attribute' );
 			}
 
 			unlink( $path );
