@@ -887,7 +887,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		$this->_context->getLocale()->setCurrencyId( 'CHF' );
 
 		$this->setExpectedException( 'Controller_Frontend_Basket_Exception' );
-		$object = new Controller_Frontend_Basket_Default( $this->_context );
+		new Controller_Frontend_Basket_Default( $this->_context );
 	}
 
 

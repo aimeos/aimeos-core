@@ -838,8 +838,8 @@ class MShop_Catalog_Manager_Default
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->_getContext();
 
-		$dbname = $this->_getResourceName( 'db-catalog' );
 		$dbm = $context->getDatabaseManager();
+		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -869,7 +869,7 @@ class MShop_Catalog_Manager_Default
 				$stmt->bind( 6, $id, MW_DB_Statement_Abstract::PARAM_INT );
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
 		}

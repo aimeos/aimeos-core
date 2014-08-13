@@ -95,7 +95,7 @@ class MW_Setup_Task_LocaleChangeSitesToTree extends MW_Setup_Task_Abstract
 		{
 			$this->_msg( 'Migrating site items to tree structure', 1 );
 
-			$stmt = $this->_conn->create( $migstmts['insert'] )->execute();
+			$this->_conn->create( $migstmts['insert'] )->execute();
 
 			$stmt = $this->_conn->create( $migstmts['search'] );
 			$result = $stmt->execute();

@@ -191,12 +191,6 @@ class Controller_Jobs_Order_Service_Payment_DefaultTest extends MW_Unittest_Test
 
 		$serviceItem = $serviceManagerStub->createItem();
 
-		$serviceProviderStub = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
-			->setMethods( array( 'isImplemented', 'capture' ) )
-			->setConstructorArgs( array( $context, $serviceItem ) )
-			->getMock();
-
-
 		$serviceManagerStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->onConsecutiveCalls( array( $serviceItem ), array() ) );
 

@@ -166,7 +166,7 @@ class MShop_Order_Manager_Status_Default
 				$stmt->bind(7, date('Y-m-d H:i:s', time()));//ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{
@@ -375,9 +375,7 @@ class MShop_Order_Manager_Status_Default
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
-
 		$context = $this->_getContext();
-		$localeManager = MShop_Factory::createManager( $context, 'locale' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();

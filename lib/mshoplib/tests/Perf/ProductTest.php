@@ -41,7 +41,7 @@ class Perf_ProductTest extends MW_Unittest_Testcase
 		{
 			$search = $productManager->createSearch( true );
 			$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
-			$result = $productManager->searchItems( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
+			$productManager->searchItems( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
 		}
 
 		$stop = microtime( true );

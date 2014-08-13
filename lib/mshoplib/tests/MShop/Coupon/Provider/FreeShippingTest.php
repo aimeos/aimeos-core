@@ -73,7 +73,9 @@ class MShop_Coupon_Provider_FreeShippingTest extends MW_Unittest_Testcase
 			throw new Exception( 'No coupon available' );
 		}
 
-		$delivery = $this->_orderBase->getService( 'delivery' );
+		// Test if service delivery item is available
+		$this->_orderBase->getService( 'delivery' );
+
 		$this->assertEquals( 1, count( $this->_orderBase->getProducts() ) );
 		$this->assertEquals( '-5.00', $product->getPrice()->getCosts() );
 		$this->assertEquals( '5.00', $product->getPrice()->getRebate() );

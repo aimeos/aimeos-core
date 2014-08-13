@@ -43,7 +43,6 @@ class Controller_ExtJS_Attribute_Export_Text_Default
 		$this->_setLocale( $params->site );
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
 
 		$items = (array) $params->items;
 		$lang = ( property_exists( $params, 'lang' ) ) ? (array) $params->lang : array();

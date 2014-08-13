@@ -284,9 +284,6 @@ class MShop_Order_Manager_Base_Service_Default
 	{
 		$items = array();
 		$context = $this->_getContext();
-		$logger = $context->getLogger();
-		$config = $context->getConfig();
-
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 
 		$dbm = $context->getDatabaseManager();
@@ -329,8 +326,9 @@ class MShop_Order_Manager_Base_Service_Default
 			throw $e;
 		}
 
-		$attributes = $this->_getAttributeItems( array_keys( $items ) );
 		$result = array();
+		$attributes = $this->_getAttributeItems( array_keys( $items ) );
+
 		foreach ( $items as $id => $row )
 		{
 			$attrList = array();
@@ -339,6 +337,7 @@ class MShop_Order_Manager_Base_Service_Default
 			}
 			$result[ $id ] = $this->_createItem( $row['price'], $row['item'], $attrList );
 		}
+
 		return $result;
 	}
 

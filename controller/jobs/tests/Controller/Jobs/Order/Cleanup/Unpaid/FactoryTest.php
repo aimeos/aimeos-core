@@ -25,7 +25,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_FactoryTest
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
+		Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
 	}
 
 
@@ -35,7 +35,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_FactoryTest
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias, 'WrongClass' );
+		Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias, 'WrongClass' );
 	}
 
 
@@ -45,7 +45,7 @@ class Controller_Jobs_Order_Cleanup_Unpaid_FactoryTest
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias, 'Factory' );
+		Controller_Jobs_Order_Cleanup_Unpaid_Factory::createController( $context, $arcavias, 'Factory' );
 	}
 
 }

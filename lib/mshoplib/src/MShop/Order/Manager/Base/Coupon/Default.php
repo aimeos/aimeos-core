@@ -255,15 +255,12 @@ class MShop_Order_Manager_Base_Coupon_Default
 	 */
 	public function searchItems(MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null)
 	{
+		$items = array();
 		$context = $this->_getContext();
-		$logger = $context->getLogger();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->_getResourceName();
 		$conn = $dbm->acquire( $dbname );
-
-		$items = array();
-		$config = $context->getConfig();
 
 		try
 		{

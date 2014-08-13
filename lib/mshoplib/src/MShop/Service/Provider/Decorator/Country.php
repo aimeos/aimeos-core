@@ -100,7 +100,6 @@ class MShop_Service_Provider_Decorator_Country
 	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
 	{
 		$addresses = $basket->getAddresses();
-		$config = $this->getServiceItem()->getConfig();
 
 		$paymentType = MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT;
 		$deliveryType = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;

@@ -83,7 +83,7 @@ class Controller_Jobs_Admin_Log_DefaultTest extends MW_Unittest_Testcase
 			if( $file->isFile() && $file->getExtension() === 'zip' )
 			{
 				$container = MW_Container_Factory::getContainer( $file->getPathName(), 'Zip', 'CSV', array() );
-				$content = $container->get( 'unittest facility.csv' );
+				$container->get( 'unittest facility.csv' );
 				unlink( $file->getPathName() );
 				return;
 			}

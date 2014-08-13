@@ -51,7 +51,7 @@ abstract class MW_Setup_Task_Abstract implements MW_Setup_Task_Interface
 	{
 		switch( $dbtype )
 		{
-			case 'mysql': $this->_mysql( $this->_schema ); break;
+			case 'mysql': $this->_mysql(); break;
 			default:
 				throw new MW_Setup_Exception( sprintf( 'Unknown database type "%1$s"', $dbtype ) );
 		}

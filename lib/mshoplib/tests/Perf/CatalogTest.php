@@ -17,7 +17,7 @@ class Perf_CatalogTest extends MW_Unittest_Testcase
 		// parser warm up so files are already parsed (same as APC is used)
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
-		$this->_root = $catalogManager->getTree( null, array( 'text', 'media' ), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$catalogManager->getTree( null, array( 'text', 'media' ), MW_Tree_Manager_Abstract::LEVEL_ONE );
 	}
 
 
@@ -26,7 +26,7 @@ class Perf_CatalogTest extends MW_Unittest_Testcase
 		$start = microtime( true );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
-		$result = $catalogManager->getTree( null, array( 'text', 'media' ) );
+		$catalogManager->getTree( null, array( 'text', 'media' ) );
 
 		$stop = microtime( true );
 		echo "\n    catalog tree w/o ID: " . ( ( $stop - $start ) * 1000 ) . " msec\n";
@@ -38,7 +38,7 @@ class Perf_CatalogTest extends MW_Unittest_Testcase
 		$start = microtime( true );
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
-		$result = $catalogManager->getTree( $this->_root->getId(), array( 'text', 'media' ) );
+		$catalogManager->getTree( $this->_root->getId(), array( 'text', 'media' ) );
 
 		$stop = microtime( true );
 		echo "\n    catalog tree with ID: " . ( ( $stop - $start ) * 1000 ) . " msec\n";

@@ -51,7 +51,7 @@ class MW_Config_Decorator_APC
 
 		// negative cache
 		$success = false;
-		$value = apc_fetch( '-' . $this->_prefix . $path, $success );
+		apc_fetch( '-' . $this->_prefix . $path, $success );
 
 		if( $success === true ) {
 			return $default;

@@ -369,7 +369,7 @@ class MShop_Price_Manager_Default
 				$stmt->bind( 14, $date ); //ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{

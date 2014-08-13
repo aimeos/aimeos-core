@@ -178,9 +178,6 @@ class MShop_Product_Manager_DefaultTest extends MW_Unittest_Testcase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$siteid = TestHelper::getContext()->getLocale()->getSiteId();
-
-
 		$listManager = $this->_object->getSubManager( 'list' );
 
 		$search = $listManager->createSearch();

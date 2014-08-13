@@ -70,18 +70,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 		parent::__construct( $context );
 		$this->_setResourceName( 'db-product' );
 
-
 		$site = $context->getLocale()->getSitePath();
-		$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_INT );
-
-		$search = $this->createSearch();
-		$expr = array(
-			$search->compare( '==', 'siteid', null ),
-			$search->compare( '==', 'siteid', $site ),
-		);
-		$search->setConditions( $search->combine( '||', $expr ) );
-
-		$string = $search->getConditionString( $types, array( 'siteid' => 'mcatinat."siteid"' ) );
 
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.attribute.code'], 'mcatinat."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.attributecount'], 'mcatinat2."siteid"', $site );
@@ -461,7 +450,7 @@ class MShop_Catalog_Manager_Index_Attribute_Default
 						$stmt->bind( 9, $date ); // ctime
 
 						try {
-							$result = $stmt->execute()->finish();
+							$stmt->execute()->finish();
 						} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
 					}
 				}

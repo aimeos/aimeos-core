@@ -174,8 +174,6 @@ class MW_Common_Criteria_PHPTest extends MW_Unittest_Testcase
 
 	public function testGetConditionStringInvalidOperator()
 	{
-		$types = array( 'int_value' => MW_DB_Statement_Abstract::PARAM_INT );
-
 		$this->setExpectedException('MW_Common_Exception');
 		$this->_object->setConditions( $this->_object->compare( '?', 'int_value', 10 ) );
 	}
@@ -224,9 +222,6 @@ class MW_Common_Criteria_PHPTest extends MW_Unittest_Testcase
 
 	public function testGetSortationStringInvalidDirection()
 	{
-		$types = array( 'asc_array' => 'int' );
-		$translations = array( 'asc_array' => 'asc_int_list' );
-
 		$this->setExpectedException('MW_Common_Exception');
 		$this->_object->setSortations( array( $this->_object->sort( '/', 'asc_array' ) ) );
 	}

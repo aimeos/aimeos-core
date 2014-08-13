@@ -237,7 +237,7 @@ class MW_Setup_Task_AttributeListAddTestData extends MW_Setup_Task_Abstract
 			$typeids[] = $item->getId();
 		}
 
-		$serch = $attributeManager->createSearch();
+		$search = $attributeManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'attribute.code', $codes ),
 			$search->compare( '==', 'attribute.typeid', $typeids ),

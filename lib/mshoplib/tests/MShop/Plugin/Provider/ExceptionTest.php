@@ -18,8 +18,6 @@ class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-
 		$this->_codes = array( 'something' => array( 'went', 'terribly', 'wrong' ) );
 
 	}

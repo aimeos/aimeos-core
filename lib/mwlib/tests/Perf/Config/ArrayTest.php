@@ -7,15 +7,6 @@
 
 class Perf_Config_ArrayTest extends MW_Unittest_Testcase
 {
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('Perf_Config_ArrayTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
 	public function testArray()
 	{
 		$start = microtime( true );

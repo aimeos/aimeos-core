@@ -111,18 +111,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 		parent::__construct( $context );
 		$this->_setResourceName( 'db-product' );
 
-
 		$site = $context->getLocale()->getSitePath();
-		$types = array( 'siteid' => MW_DB_Statement_Abstract::PARAM_INT );
-
-		$search = $this->createSearch();
-		$expr = array(
-			$search->compare( '==', 'siteid', null ),
-			$search->compare( '==', 'siteid', $site ),
-		);
-		$search->setConditions( $search->combine( '||', $expr ) );
-
-		$string = $search->getConditionString( $types, array( 'siteid' => 'mcatinpr."siteid"' ) );
 
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.quantity'], 'mcatinpr."siteid"', $site );
 		$this->_replaceSiteMarker( $this->_searchConfig['catalog.index.price.value'], 'mcatinpr."siteid"', $site );
@@ -509,7 +498,7 @@ class MShop_Catalog_Manager_Index_Price_Default
 						$stmt->bind( 14, $date );//ctime
 
 						try {
-							$result = $stmt->execute()->finish();
+							$stmt->execute()->finish();
 						} catch( MW_DB_Exception $e ) { ; } // Ignore duplicates
 					}
 				}

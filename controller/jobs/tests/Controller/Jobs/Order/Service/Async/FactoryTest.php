@@ -24,7 +24,7 @@ class Controller_Jobs_Order_Service_Async_FactoryTest extends MW_Unittest_Testca
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Order_Service_Async_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
+		Controller_Jobs_Order_Service_Async_Factory::createController( $context, $arcavias, 'Wrong$$$Name' );
 	}
 
 
@@ -34,7 +34,7 @@ class Controller_Jobs_Order_Service_Async_FactoryTest extends MW_Unittest_Testca
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Order_Service_Async_Factory::createController( $context, $arcavias, 'WrongClass' );
+		Controller_Jobs_Order_Service_Async_Factory::createController( $context, $arcavias, 'WrongClass' );
 	}
 
 
@@ -44,7 +44,7 @@ class Controller_Jobs_Order_Service_Async_FactoryTest extends MW_Unittest_Testca
 		$arcavias = TestHelper::getArcavias();
 
 		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		$object = Controller_Jobs_Order_Service_Async_Factory::createController( $context, $arcavias, 'Factory' );
+		Controller_Jobs_Order_Service_Async_Factory::createController( $context, $arcavias, 'Factory' );
 	}
 
 }

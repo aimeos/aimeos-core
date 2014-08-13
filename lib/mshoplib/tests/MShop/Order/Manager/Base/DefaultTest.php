@@ -421,9 +421,6 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$search->setConditions( $search->combine('&&', $expr) );
 		$results = $this->_object->searchItems($search);
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->_object->searchItems( $search );
-
 		if ( ( $item = reset($results) ) === false ) {
 			throw new Exception('No order found');
 		}
@@ -479,8 +476,6 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );
 		$expr[] = $search->compare( '==', 'order.base.editor', $this->_editor );
-		$search->setConditions( $search->combine('&&', $expr) );
-		$results = $this->_object->searchItems($search);
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->_object->searchItems( $search );

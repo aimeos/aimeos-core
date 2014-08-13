@@ -414,7 +414,7 @@ class MShop_Coupon_Manager_Code_Default
 				$stmt->bind( 9, $date ); // ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{
@@ -726,7 +726,7 @@ class MShop_Coupon_Manager_Code_Default
 			$stmt->bind( 3, $context->getEditor() );
 			$stmt->bind( 4, $code );
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 		}
 		catch( Exception $e )
 		{

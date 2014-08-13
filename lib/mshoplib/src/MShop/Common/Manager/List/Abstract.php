@@ -131,7 +131,7 @@ abstract class MShop_Common_Manager_List_Abstract
 				$statement->bind( 13, $time ); //ctime
 			}
 
-			$result = $statement->execute()->finish();
+			$statement->execute()->finish();
 
 			if( $fetch === true )
 			{
@@ -240,7 +240,7 @@ abstract class MShop_Common_Manager_List_Abstract
 				$stmt->bind( 7, $domain );
 				$stmt->bind( 8, $refListItem->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
 
-				$result = $stmt->execute()->finish();
+				$stmt->execute()->finish();
 			}
 			else
 			{
@@ -270,7 +270,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			$stmt->bind( 3, $this->_getContext()->getEditor() );
 			$stmt->bind( 4, $id, MW_DB_Statement_Abstract::PARAM_INT );
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if ( $oldpos > $newpos ) {
 				$oldpos++;
@@ -288,7 +288,7 @@ abstract class MShop_Common_Manager_List_Abstract
 			$stmt->bind( 7, $domain );
 			$stmt->bind( 8, $oldpos, MW_DB_Statement_Abstract::PARAM_INT );
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
 		}

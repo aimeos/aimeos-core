@@ -86,7 +86,7 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 	public function testGetServiceAttributesNoItems()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
-		$attributes = $this->_object->getServiceAttributes( 'invalid', -1, self::$_basket );
+		$this->_object->getServiceAttributes( 'invalid', -1, self::$_basket );
 	}
 
 
@@ -127,7 +127,7 @@ class Controller_Frontend_Service_DefaultTest extends MW_Unittest_Testcase
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
-		$attributes = $this->_object->getServicePrice( 'invalid', -1, $basket );
+		$this->_object->getServicePrice( 'invalid', -1, $basket );
 	}
 
 

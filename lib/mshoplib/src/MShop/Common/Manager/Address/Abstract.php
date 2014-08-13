@@ -187,7 +187,7 @@ abstract class MShop_Common_Manager_Address_Abstract
 				$stmt->bind( 25, date('Y-m-d H:i:s', time()));// ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if ( $id === null && $fetch === true) {
 				$item->setId( $this->_newId( $conn, $this->_config['newid'] ) );

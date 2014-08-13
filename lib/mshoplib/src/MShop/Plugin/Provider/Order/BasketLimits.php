@@ -62,7 +62,6 @@ class MShop_Plugin_Provider_Order_BasketLimits
 
 
 		$count = 0;
-		$failures = array();
 		$config = $this->_getItem()->getConfig();
 		$sum = MShop_Factory::createManager( $context, 'price' )->createItem();
 

@@ -225,7 +225,7 @@ class MShop_Product_Manager_Tag_Default
 				$stmt->bind( 7, $date ); //ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{

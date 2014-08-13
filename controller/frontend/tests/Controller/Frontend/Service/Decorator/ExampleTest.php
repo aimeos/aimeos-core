@@ -40,7 +40,7 @@ class Controller_Frontend_Plugin_Decorator_ExampleTest extends MW_Unittest_Testc
 	public function testCall()
 	{
 		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
-		$result = $this->_object->checkServiceAttributes( 'delivery', -1, array() );
+		$this->_object->checkServiceAttributes( 'delivery', -1, array() );
 	}
 
 }

@@ -153,7 +153,7 @@ class MW_Common_Criteria_Expression_Compare_PHPTest extends MW_Unittest_Testcase
 	public function testToStringExcept3()
 	{
 		$this->setExpectedException('MW_Common_Exception');
-		$obj = new MW_Common_Criteria_Expression_Compare_PHP('=', 'undefined', null);
+		new MW_Common_Criteria_Expression_Compare_PHP('=', 'undefined', null);
 	}
 
 	public function testToStringFunction()

@@ -26,15 +26,6 @@ class MShop_Locale_Manager_Currency_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite = new PHPUnit_Framework_TestSuite('MShop_Locale_Manager_Currency_DefaultTest');
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf('MShop_Locale_Item_Currency_Interface', $this->_object->createItem());

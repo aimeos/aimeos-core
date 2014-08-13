@@ -347,7 +347,7 @@ class MShop_Media_Manager_Default
 				$stmt->bind( 12, $date ); // ctime
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{
