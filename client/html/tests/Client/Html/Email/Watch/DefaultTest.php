@@ -100,7 +100,8 @@ class Client_Html_Email_Watch_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBody()
 	{
-		$this->_object->getBody();
+		$output = $this->_object->getBody();
+		$this->assertNotNull( $output );
 	}
 
 

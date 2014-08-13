@@ -46,14 +46,15 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 		$view->standardStepActive = 'order';
 		$this->_object->setView( $view );
 
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetHeaderOtherStep()
 	{
 		$output = $this->_object->getHeader();
-		$this->assertEquals( '', $output );
+		$this->assertNotNull( $output );
 	}
 
 

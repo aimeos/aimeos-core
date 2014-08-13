@@ -42,6 +42,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$expire = null;
 		$output = $this->_object->getHeader( 1, $tags, $expire );
 
+		$this->assertNotNull( $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
 		$this->assertEquals( 3, count( $tags ) );
 	}

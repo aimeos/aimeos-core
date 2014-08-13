@@ -38,7 +38,8 @@ class Client_Html_Catalog_Filter_Search_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetHeader()
 	{
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

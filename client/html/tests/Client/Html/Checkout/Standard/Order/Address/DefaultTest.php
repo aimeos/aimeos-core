@@ -42,13 +42,15 @@ class Client_Html_Checkout_Standard_Order_Address_DefaultTest extends MW_Unittes
 
 	public function testGetHeader()
 	{
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$this->_object->getBody();
+		$output = $this->_object->getBody();
+		$this->assertNotNull( $output );
 	}
 
 

@@ -42,7 +42,7 @@ class Client_Html_Catalog_Detail_Basket_Attribute_DefaultTest extends MW_Unittes
 		$view->detailProductItem = $this->_getProductItem();
 
 		$output = $this->_object->getHeader();
-		$this->assertEquals( '', $output );
+		$this->assertNotNull( $output );
 	}
 
 

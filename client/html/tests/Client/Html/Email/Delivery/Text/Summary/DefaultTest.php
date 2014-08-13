@@ -68,13 +68,15 @@ class Client_Html_Email_Delivery_Text_Summary_DefaultTest extends MW_Unittest_Te
 
 	public function testGetHeader()
 	{
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 
 	public function testGetBody()
 	{
-		$this->_object->getBody();
+		$output = $this->_object->getBody();
+		$this->assertNotNull( $output );
 	}
 
 

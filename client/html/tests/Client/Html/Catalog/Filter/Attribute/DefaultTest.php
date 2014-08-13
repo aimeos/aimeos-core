@@ -42,6 +42,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 		$expire = null;
 		$output = $this->_object->getHeader( 1, $tags, $expire );
 
+		$this->assertNotNull( $output );
 		$this->assertEquals( 2, count( $tags ) );
 		$this->assertEquals( null, $expire );
 	}

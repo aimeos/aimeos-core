@@ -50,7 +50,8 @@ class Client_Html_Checkout_Standard_Summary_Coupon_DefaultTest
 		$view->standardBasket = $basket;
 		$this->_object->setView( $view );
 
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

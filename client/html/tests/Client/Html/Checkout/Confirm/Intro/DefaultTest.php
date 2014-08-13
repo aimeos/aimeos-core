@@ -56,7 +56,8 @@ class Client_Html_Checkout_Confirm_Intro_DefaultTest extends MW_Unittest_Testcas
 		$view->confirmOrderItem = $item;
 		$this->_object->setView( $view );
 
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

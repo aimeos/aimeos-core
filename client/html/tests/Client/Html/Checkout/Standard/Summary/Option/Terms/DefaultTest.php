@@ -42,7 +42,8 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends MW_
 
 	public function testGetHeader()
 	{
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

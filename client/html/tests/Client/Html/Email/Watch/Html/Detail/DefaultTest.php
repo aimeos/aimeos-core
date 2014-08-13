@@ -74,7 +74,8 @@ class Client_Html_Email_Watch_Html_Detail_DefaultTest extends MW_Unittest_Testca
 
 	public function testGetHeader()
 	{
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

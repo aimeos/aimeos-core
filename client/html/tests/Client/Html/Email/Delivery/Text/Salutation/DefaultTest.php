@@ -69,7 +69,8 @@ class Client_Html_Email_Delivery_Text_Salutation_DefaultTest extends MW_Unittest
 
 	public function testGetHeader()
 	{
-		$this->_object->getHeader();
+		$output = $this->_object->getHeader();
+		$this->assertNotNull( $output );
 	}
 
 

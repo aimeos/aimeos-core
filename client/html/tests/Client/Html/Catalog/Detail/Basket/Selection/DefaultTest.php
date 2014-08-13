@@ -45,7 +45,7 @@ class Client_Html_Catalog_Detail_Basket_Selection_DefaultTest extends MW_Unittes
 		$expire = null;
 		$output = $this->_object->getHeader( 1, $tags, $expire );
 
-		$this->assertEquals( '', $output );
+		$this->assertNotNull( $output );
 		$this->assertEquals( null, $expire );
 		$this->assertEquals( 1, count( $tags ) );
 	}
