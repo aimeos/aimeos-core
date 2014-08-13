@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-06 16:31+0200\n"
-"PO-Revision-Date: 2014-08-06 14:31+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"PO-Revision-Date: 2014-08-11 07:06+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -136,7 +136,7 @@ msgstr "По выбранным атрибутам и номеру товара 
 #: src/Controller/Frontend/Basket/Default.php:633
 #, php-format
 msgid "One or more items aren't available for the chosen locale"
-msgstr ""
+msgstr "Один или несколько элементов недоступны для выбранной локали"
 
 #: src/Controller/Frontend/Basket/Default.php:372
 #, php-format
