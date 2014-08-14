@@ -51,7 +51,10 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 	public function testAddCoupon()
 	{
 		$orderProducts = $this->_getOrderProducts();
+
 		$this->_orderBase->addProduct( $orderProducts['CNE'] );
+		$this->_orderBase->addProduct( $orderProducts['CNC'] );
+
 		$this->_object->addCoupon( $this->_orderBase );
 
 		$coupons = $this->_orderBase->getCoupons();
@@ -61,10 +64,10 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 			throw new Exception( 'No coupon available' );
 		}
 
-		$this->assertEquals( 2, count( $products ) );
+		$this->assertEquals( 3, count( $products ) );
 		$this->assertEquals( 1, count( $coupons['zyxw'] ) );
-		$this->assertEquals( '-3.70', $product->getPrice()->getValue() );
-		$this->assertEquals( '3.70', $product->getPrice()->getRebate() );
+		$this->assertEquals( '-66.70', $product->getPrice()->getValue() );
+		$this->assertEquals( '66.70', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'unitSupplier', $product->getSupplierCode() );
 		$this->assertEquals( 'U:MD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
@@ -97,10 +100,10 @@ class MShop_Coupon_Provider_PercentRebateTest extends MW_Unittest_Testcase
 		}
 
 		$this->assertEquals( 4, count( $products ) );
-		$this->assertEquals( '-3.70', $couponProduct20->getPrice()->getValue() );
-		$this->assertEquals( '3.70', $couponProduct20->getPrice()->getRebate() );
-		$this->assertEquals( '-63.00', $couponProduct10->getPrice()->getValue() );
-		$this->assertEquals( '63.00', $couponProduct10->getPrice()->getRebate() );
+		$this->assertEquals( '-37.00', $couponProduct20->getPrice()->getValue() );
+		$this->assertEquals( '37.00', $couponProduct20->getPrice()->getRebate() );
+		$this->assertEquals( '-29.70', $couponProduct10->getPrice()->getValue() );
+		$this->assertEquals( '29.70', $couponProduct10->getPrice()->getRebate() );
 	}
 
 
