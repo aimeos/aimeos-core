@@ -103,6 +103,50 @@ class MShop_Coupon_Provider_FixedRebateTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAddCouponMultipleTaxRates()
+	{
+		$products = $this->_getOrderProducts();
+
+		$products['CNC']->getPrice()->setTaxRate( '10.00' );
+		$products['CNE']->getPrice()->setTaxRate( '20.00' );
+
+		$this->_orderBase->addProduct( $products['CNE'] );
+		$this->_orderBase->addProduct( $products['CNC'] );
+
+		$context = TestHelper::getContext();
+		$config = array(
+			'fixedrebate.productcode' => 'U:MD',
+			'fixedrebate.rebate' => array(
+				'EUR' => '50.00',
+			),
+		);
+
+		$couponItem = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
+		$couponItem->setConfig( $config );
+
+		$object = new MShop_Coupon_Provider_FixedRebate( $context, $couponItem, 'zyxw' );
+
+		$object->addCoupon( $this->_orderBase );
+
+		$coupons = $this->_orderBase->getCoupons();
+		$products = $this->_orderBase->getProducts();
+
+		if( ( $couponProduct20 = reset( $coupons['zyxw'] ) ) === false ) {
+			throw new Exception( 'No coupon available' );
+		}
+
+		if( ( $couponProduct10 = end( $coupons['zyxw'] ) ) === false ) {
+			throw new Exception( 'No coupon available' );
+		}
+
+		$this->assertEquals( 4, count( $products ) );
+		$this->assertEquals( '-37.00', $couponProduct20->getPrice()->getValue() );
+		$this->assertEquals( '37.00', $couponProduct20->getPrice()->getRebate() );
+		$this->assertEquals( '-13.00', $couponProduct10->getPrice()->getValue() );
+		$this->assertEquals( '13.00', $couponProduct10->getPrice()->getRebate() );
+	}
+
+
 	public function testDeleteCoupon()
 	{
 		$this->_object->addCoupon( $this->_orderBase );
@@ -128,8 +172,33 @@ class MShop_Coupon_Provider_FixedRebateTest extends MW_Unittest_Testcase
 		$object->addCoupon( $this->_orderBase );
 	}
 
+
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->_object->isAvailable( $this->_orderBase ) );
+	}
+
+
+	protected function _getOrderProducts()
+	{
+		$products = array();
+		$manager = MShop_Factory::createManager( TestHelper::getContext(), 'order/base/product' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->combine('&&', array(
+			$search->compare( '==', 'order.base.product.prodcode', array('CNE', 'CNC') ),
+			$search->compare( '==', 'order.base.product.price', array('600.00', '36.00') )
+		)));
+		$items = $manager->searchItems( $search );
+
+		if ( count( $items ) < 2 ) {
+			throw new Exception( 'Please fix the test data in your database.' );
+		}
+
+		foreach( $items as $item ) {
+			$products[ $item->getProductCode() ] = $item;
+		}
+
+		return $products;
 	}
 }

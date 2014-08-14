@@ -538,7 +538,7 @@ class Controller_Frontend_Basket_Default
 			$locLanguage = ( isset( $locParts[1] ) ? $locParts[1] : '' );
 			$locCurrency = ( isset( $locParts[2] ) ? $locParts[2] : '' );
 
-			$localeManager = MShop_Locale_Manager_Factory::createManager( $context );
+			$localeManager = MShop_Factory::createManager( $context, 'locale' );
 			$locale = $localeManager->bootstrap( $locSite, $locLanguage, $locCurrency, false );
 
 			$context = clone $context;
@@ -560,6 +560,22 @@ class Controller_Frontend_Basket_Default
 					$logger->log( sprintf( $str, $type, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
 					$errors['address'][$type] = $e->getMessage();
 				}
+			}
+
+			foreach( $basket->getServices() as $type => $item )
+			{
+				try
+				{
+					$attributes = array();
+
+					foreach( $item->getAttributes() as $attrItem ) {
+						$attributes[ $attrItem->getCode() ] = $attrItem->getValue();
+					}
+
+					$this->setService( $type, $item->getServiceId(), $attributes );
+					$basket->deleteService( $type );
+				}
+				catch( Exception $e ) { ; } // Don't notify the user as appropriate services can be added automatically
 			}
 
 			foreach( $basket->getProducts() as $pos => $product )
@@ -609,28 +625,6 @@ class Controller_Frontend_Basket_Default
 					$str = 'Error migrating coupon with code "%1$s" in basket to locale "%2$s": %3$s';
 					$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
 					$errors['coupon'][$code] = $e->getMessage();
-				}
-			}
-
-			foreach( $basket->getServices() as $type => $item )
-			{
-				try
-				{
-					$attributes = array();
-
-					foreach( $item->getAttributes() as $attrItem ) {
-						$attributes[ $attrItem->getCode() ] = $attrItem->getValue();
-					}
-
-					$this->setService( $type, $item->getServiceId(), $attributes );
-					$basket->deleteService( $type );
-				}
-				catch( Exception $e )
-				{
-					$code = $item->getCode();
-					$str = 'Error migrating service with code "%1$s" and type "%2$s" in basket to locale "%3$s": %4$s';
-					$logger->log( sprintf( $str, $code, $type, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
-					$errors['service'][$type] = $e->getMessage();
 				}
 			}
 

@@ -39,19 +39,29 @@ class MShop_Coupon_Provider_PercentRebate
 			) );
 		}
 
-		$sum = 0.00;
-		foreach( $base->getProducts() as $product ) {
-			$sum += $product->getPrice()->getValue() * $product->getQuantity();
+
+		$priceManager = MShop_Factory::createManager( $this->_getContext(), 'price' );
+		$prices = $this->_getPriceByTaxRate( $base );
+		$orderProducts = array();
+
+		krsort( $prices );
+
+		foreach( $prices as $taxrate => $price )
+		{
+			$sum = $price->getValue() + $price->getCosts();
+			$rebate = round( $sum * (float) $config['percentrebate.rebate'] / 100, 2 );
+
+			$price = $priceManager->createItem();
+			$price->setValue( -$rebate );
+			$price->setRebate( $rebate );
+			$price->setTaxRate( $taxrate );
+
+			$orderProduct = $this->_createProduct( $config['percentrebate.productcode'], 1 );
+			$orderProduct->setPrice( $price );
+
+			$orderProducts[] = $orderProduct;
 		}
 
-		$rebate = round( $sum * (float) $config['percentrebate.rebate'] / 100, 2 );
-		$price = MShop_Factory::createManager( $this->_getContext(), 'price' )->createItem();
-		$price->setValue( -$rebate );
-		$price->setRebate( $rebate );
-
-		$orderProduct = $this->_createProduct( $config['percentrebate.productcode'], 1 );
-		$orderProduct->setPrice( $price );
-
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->_getCode(), $orderProducts );
 	}
 }
