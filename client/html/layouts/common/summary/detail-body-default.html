@@ -143,7 +143,6 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php			endif; ?>
 						<input class="value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'quantity' ) ) ); ?>" value="<?php echo $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required" />
 						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', $position, 'position' ) ) ); ?>" value="<?php echo $enc->attr( $position ); ?>" />
-						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-action' ) ) ); ?>" value="edit" />
 						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'edit', 'b-position' => $position, 'b-quantity' => $product->getQuantity() + 1 ) + $backParams, array(), $basketConfig ) ); ?>">+</a>
 <?php		else : ?>	
 <?php 			echo $enc->html( $product->getQuantity() ); ?>

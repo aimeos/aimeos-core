@@ -325,7 +325,7 @@ class Client_Html_Basket_Standard_Default
 
 					break;
 
-				case 'edit':
+				default:
 
 					$this->_clearCached();
 					$products = (array) $view->param( 'b-prod', array() );
