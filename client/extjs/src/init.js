@@ -45,12 +45,17 @@ Ext.onReady(function() {
         items : [{
             layout : 'fit',
             border : false,
-            tbar : [ '->', MShop.i18n.available ? {
-                xtype : 'MShop.elements.siteLanguage.combo'
-            } : {}, ' ', {
-                xtype : 'MShop.elements.site.combo'
-            } ],
-            items : [ {
+            tbar : [
+                '<a href="https://www.arcavias.com" target="_blank"><img src="https://updates.arcavias.com/check.php" /></a>',
+                '->',
+                MShop.i18n.available ? {
+                    xtype : 'MShop.elements.siteLanguage.combo'
+                } : {},
+                ' ',
+                {
+                    xtype : 'MShop.elements.site.combo'
+                }],
+            items : [{
                 xtype : 'tabpanel',
                 border : false,
                 activeTab : MShop.urlManager.getActiveTab(),
