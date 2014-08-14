@@ -196,4 +196,56 @@ abstract class MShop_Coupon_Provider_Abstract
 
 		return $orderProduct;
 	}
+
+
+	/**
+	 * Returns a list of tax rates and their price items for the given basket.
+	 *
+	 * @param MShop_Order_Item_Base_Interface $basket Basket containing the products, services, etc.
+	 * @return array Associative list of tax rates as key and corresponding price items as value
+	 */
+	protected function _getPriceByTaxRate( MShop_Order_Item_Base_Interface $basket )
+	{
+		$taxrates = array();
+
+		foreach( $basket->getProducts() as $product )
+		{
+			$price = $product->getPrice();
+			$taxrate = $price->getTaxrate();
+
+			if( isset( $taxrates[$taxrate] ) ) {
+				$taxrates[$taxrate] = $taxrates[$taxrate]->add( $price );
+			} else {
+				$taxrates[$taxrate] = $price;
+			}
+		}
+
+		try
+		{
+			$price = $basket->getService( 'delivery' )->getPrice();
+			$taxrate = $price->getTaxrate();
+
+			if( isset( $taxrates[$taxrate] ) ) {
+				$taxrates[$taxrate] = $taxrates[$taxrate]->add( $price );
+			} else {
+				$taxrates[$taxrate] = $price;
+			}
+		}
+		catch( Exception $e ) { ; } // if delivery service isn't available
+
+		try
+		{
+			$price = $basket->getService( 'payment' )->getPrice();
+			$taxrate = $price->getTaxrate();
+
+			if( isset( $taxrates[$taxrate] ) ) {
+				$taxrates[$taxrate] = $taxrates[$taxrate]->add( $price );
+			} else {
+				$taxrates[$taxrate] = $price;
+			}
+		}
+		catch( Exception $e ) { ; } // if payment service isn't available
+
+		return $taxrates;
+	}
 }

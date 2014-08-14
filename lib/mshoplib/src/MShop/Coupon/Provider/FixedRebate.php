@@ -52,13 +52,47 @@ class MShop_Coupon_Provider_FixedRebate
 			$rebate = $config['fixedrebate.rebate'];
 		}
 
-		$price = MShop_Factory::createManager( $this->_getContext(), 'price' )->createItem();
-		$price->setValue( -$rebate );
-		$price->setRebate( $rebate );
 
-		$orderProduct = $this->_createProduct( $config['fixedrebate.productcode'], 1 );
-		$orderProduct->setPrice( $price );
+		$priceManager = MShop_Factory::createManager( $this->_getContext(), 'price' );
+		$prices = $this->_getPriceByTaxRate( $base );
+		$orderProducts = array();
 
-		$base->addCoupon( $this->_getCode(), array( $orderProduct ) );
+		krsort( $prices );
+
+		if( empty( $prices ) ) {
+			$prices = array( '0.00' => $priceManager->createItem() );
+		}
+
+		foreach( $prices as $taxrate => $price )
+		{
+			if( abs( $rebate ) < 0.01 ) {
+				break;
+			}
+
+			$amount = $price->getValue() + $price->getCosts();
+
+			if( $amount > 0 && $amount < $rebate )
+			{
+				$value = $price->getValue() + $price->getCosts();
+				$rebate -= $value;
+			}
+			else
+			{
+				$value = $rebate;
+				$rebate = '0.00';
+			}
+
+			$price = $priceManager->createItem();
+			$price->setValue( -$value );
+			$price->setRebate( $value );
+			$price->setTaxRate( $taxrate );
+
+			$orderProduct = $this->_createProduct( $config['fixedrebate.productcode'], 1 );
+			$orderProduct->setPrice( $price );
+
+			$orderProducts[] = $orderProduct;
+		}
+
+		$base->addCoupon( $this->_getCode(), $orderProducts );
 	}
 }
