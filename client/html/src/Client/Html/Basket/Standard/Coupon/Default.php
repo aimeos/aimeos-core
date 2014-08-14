@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Basket_Standard_Coupon_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Basket_Abstract
 {
 	/** client/html/basket/standard/coupon/default/subparts
 	 * List of HTML sub-clients rendered within the basket standard coupon section
@@ -167,6 +167,7 @@ class Client_Html_Basket_Standard_Coupon_Default
 	public function process()
 	{
 		$view = $this->getView();
+		$context = $this->_getContext();
 
 		switch( $view->param( 'b-action' ) )
 		{
@@ -174,7 +175,8 @@ class Client_Html_Basket_Standard_Coupon_Default
 
 				if( ( $coupon = $view->param( 'b-coupon' ) ) != '' )
 				{
-					$cntl = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+					$this->_clearCached();
+					$cntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 					$cntl->deleteCoupon( $coupon );
 				}
 
@@ -184,7 +186,7 @@ class Client_Html_Basket_Standard_Coupon_Default
 
 				if( ( $coupon = $view->param( 'b-coupon' ) ) != '' )
 				{
-					$context = $this->_getContext();
+					$this->_clearCached();
 					$cntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 					/** client/html/basket/standard/coupon/allowed

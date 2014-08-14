@@ -423,42 +423,42 @@ return array(
 		'price' => array(
 			array(
 				'label' => 'Demo: Selection article from 1',
-				'value' => '150.00', 'costs' => '10.00', 'rebate' => '0.00', 'taxrate' => '20.00',
+				'value' => '150.00', 'costs' => '10.00', 'rebate' => '0.00', 'taxrate' => '10.00',
 				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article from 5',
-				'value' => '135.00', 'costs' => '10.00', 'rebate' => '15.00', 'taxrate' => '20.00',
+				'value' => '135.00', 'costs' => '10.00', 'rebate' => '15.00', 'taxrate' => '10.00',
 				'quantity' => 5, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article from 10',
-				'value' => '120.00', 'costs' => '10.00', 'rebate' => '30.00', 'taxrate' => '20.00',
+				'value' => '120.00', 'costs' => '10.00', 'rebate' => '30.00', 'taxrate' => '10.00',
 				'quantity' => 10, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article from 1',
-				'value' => '200.00', 'costs' => '15.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'value' => '200.00', 'costs' => '15.00', 'rebate' => '0.00', 'taxrate' => '5.00',
 				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article from 5',
-				'value' => '175.00', 'costs' => '15.00', 'rebate' => '25.00', 'taxrate' => '10.00',
+				'value' => '175.00', 'costs' => '15.00', 'rebate' => '25.00', 'taxrate' => '5.00',
 				'quantity' => 5, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 4, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article from 10',
-				'value' => '150.00', 'costs' => '15.00', 'rebate' => '50.00', 'taxrate' => '10.00',
+				'value' => '150.00', 'costs' => '15.00', 'rebate' => '50.00', 'taxrate' => '5.00',
 				'quantity' => 10, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 5, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -523,14 +523,14 @@ return array(
 				'price' => array(
 					array(
 						'label' => 'Demo: Small sticker',
-						'value' => '2.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '20.00',
+						'value' => '2.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
 						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
 					array(
 						'label' => 'Demo: Small sticker',
-						'value' => '3.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+						'value' => '3.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
 						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -561,14 +561,14 @@ return array(
 				'price' => array(
 					array(
 						'label' => 'Demo: Large sticker',
-						'value' => '5.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '20.00',
+						'value' => '5.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
 						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
 					array(
 						'label' => 'Demo: Large sticker',
-						'value' => '7.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+						'value' => '7.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
 						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -590,6 +590,19 @@ return array(
 			array(
 				'code' => 'demo-article',
 				'list-type' => 'suggestion', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+	),
+	array(
+		'code' => 'demo-rebate', 'type' => 'default', 'label' => 'Demo rebate',
+		'supplier' => '', 'start' => null, 'end' => null, 'status' => 1,
+		'text' => array(
+			array(
+				'label' => 'Demo name/de: Rabatt',
+				'content' => 'Demorabatt',
+				'type' => 'name', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
