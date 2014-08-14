@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Basket_Standard_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Basket_Abstract
 {
 	/** client/html/basket/standard/default/subparts
 	 * List of HTML sub-clients rendered within the basket standard section
@@ -222,7 +222,6 @@ class Client_Html_Basket_Standard_Default
 	 */
 	public function process()
 	{
-		$refresh = false;
 		$view = $this->getView();
 		$context = $this->_getContext();
 
@@ -285,7 +284,7 @@ class Client_Html_Basket_Standard_Default
 			{
 				case 'add':
 
-					$refresh = true;
+					$this->_clearCached();
 					$products = (array) $view->param( 'b-prod', array() );
 
 					if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
@@ -317,7 +316,7 @@ class Client_Html_Basket_Standard_Default
 
 				case 'delete':
 
-					$refresh = true;
+					$this->_clearCached();
 					$products = (array) $view->param( 'b-position', array() );
 
 					foreach( $products as $position ) {
@@ -328,7 +327,7 @@ class Client_Html_Basket_Standard_Default
 
 				case 'edit':
 
-					$refresh = true;
+					$this->_clearCached();
 					$products = (array) $view->param( 'b-prod', array() );
 
 					if( ( $positon = $view->param( 'b-position', null ) ) !== null )
@@ -353,32 +352,23 @@ class Client_Html_Basket_Standard_Default
 					break;
 			}
 
-			if( $refresh ) // Remove the cached HTML from the session for all baskets
-			{
-				$session = $context->getSession();
-
-				foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
-					$session->set( $key, null );
-				}
-			}
-
 			parent::process();
 
 			$controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 		}
 		catch( Client_Html_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( MShop_Plugin_Provider_Exception $e )
 		{
-			$errors = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$errors = array_merge( $errors, $this->_translatePluginErrorCodes( $e->getErrorCodes() ) );
 
 			$view->summaryErrorCodes = $e->getErrorCodes();
@@ -386,7 +376,7 @@ class Client_Html_Basket_Standard_Default
 		}
 		catch( MShop_Exception $e )
 		{
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
 		catch( Exception $e )

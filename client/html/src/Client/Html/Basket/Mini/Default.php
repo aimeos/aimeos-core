@@ -15,7 +15,7 @@
  * @subpackage Html
  */
 class Client_Html_Basket_Mini_Default
-	extends Client_Html_Abstract
+	extends Client_Html_Basket_Abstract
 {
 	/** client/html/basket/mini/default/subparts
 	 * List of HTML sub-clients rendered within the basket mini section
@@ -78,14 +78,13 @@ class Client_Html_Basket_Mini_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$context = $this->_getContext();
-		$session = $context->getSession();
 		$site = $context->getLocale()->getSiteId();
 		$view = $this->getView();
 
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
 		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-body', $config );
 
-		if( ( $html = $session->get( $key ) ) === null )
+		if( ( $html = $this->_getCached( $key ) ) === null )
 		{
 			try
 			{
@@ -99,17 +98,17 @@ class Client_Html_Basket_Mini_Default
 			}
 			catch( Client_Html_Exception $e )
 			{
-				$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+				$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 				$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 			}
 			catch( Controller_Frontend_Exception $e )
 			{
-				$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+				$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 				$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 			}
 			catch( MShop_Exception $e )
 			{
-				$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+				$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 				$view->miniErrorList = $view->get( 'miniErrorList', array() ) + $error;
 			}
 			catch( Exception $e )
@@ -144,10 +143,7 @@ class Client_Html_Basket_Mini_Default
 			$default = 'basket/mini/body-default.html';
 
 			$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
-
-			$cached = $session->get( 'arcavias/basket/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/basket/cache', $cached );
-			$session->set( $key, $html );
+			$this->_setCached( $key, $html );
 		}
 		else
 		{
@@ -169,14 +165,13 @@ class Client_Html_Basket_Mini_Default
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$context = $this->_getContext();
-		$session = $context->getSession();
 		$site = $context->getLocale()->getSiteId();
 		$view = $this->getView();
 
 		$config = $context->getConfig()->get( 'client/html/basket/mini', array() );
 		$key = $this->_getParamHash( array(), $uid . $site . ':basket:mini-header', $config );
 
-		if( ( $html = $session->get( $key ) ) === null )
+		if( ( $html = $this->_getCached( $key ) ) === null )
 		{
 			try
 			{
@@ -213,10 +208,7 @@ class Client_Html_Basket_Mini_Default
 				$default = 'basket/mini/header-default.html';
 
 				$html = $view->render( $this->_getTemplate( $tplconf, $default ) );
-
-				$cached = $session->get( 'arcavias/basket/cache', array() ) + array( $key => true );
-				$session->set( 'arcavias/basket/cache', $cached );
-				$session->set( $key, $html );
+				$this->_setCached( $key, $html );
 			}
 			catch( Exception $e )
 			{
