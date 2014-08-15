@@ -25,7 +25,8 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 	 */
 	protected function _addManagerDecorators( MShop_Common_Manager_Interface $manager, $managerpath, $domain )
 	{
-		$config = $this->_context->getConfig();
+		$context = $this->_getContext();
+		$config = $context->getConfig();
 
 		/** madmin/common/manager/decorators/default
 		 * Configures the list of decorators applied to all admin managers
@@ -60,17 +61,17 @@ abstract class MAdmin_Common_Manager_Abstract extends MShop_Common_Manager_Abstr
 		}
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
-		$manager =  $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
+		$manager =  $this->_addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = 'MShop_Common_Manager_Decorator_';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/global', array() );
-		$manager =  $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
+		$manager =  $this->_addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$subpath = $this->_createSubNames( $managerpath );
 		$classprefix = 'MShop_'. ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/local', array() );
 
-		return $this->_addDecorators( $this->_context, $manager, $decorators, $classprefix );
+		return $this->_addDecorators( $context, $manager, $decorators, $classprefix );
 	}
 
 

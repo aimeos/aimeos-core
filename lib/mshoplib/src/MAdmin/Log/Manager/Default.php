@@ -18,6 +18,7 @@ class MAdmin_Log_Manager_Default
 	extends MAdmin_Common_Manager_Abstract
 	implements MAdmin_Log_Manager_Interface, MW_Logger_Interface
 {
+	private $_loglevel;
 	private $_requestid;
 
 	private $_searchConfig = array(
