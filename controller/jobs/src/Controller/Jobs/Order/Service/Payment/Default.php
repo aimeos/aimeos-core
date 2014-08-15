@@ -80,11 +80,7 @@ class Controller_Jobs_Order_Service_Payment_Default
 		 * @category User
 		 * @category Developer
 		 */
-		if( ( $capDays = $config->get( 'controller/jobs/order/service/payment/capture-days' ) ) !== null ) {
-			$capDate = date( 'Y-m-d 00:00:00', time() - 86400 * $capDays );
-		} {
-			$capDate = date( 'Y-m-d 00:00:00' );
-		}
+		$capDays = $config->get( 'controller/jobs/order/service/payment/capture-days', null );
 
 
 		$serviceManager = MShop_Factory::createManager( $context, 'service' );
@@ -116,16 +112,17 @@ class Controller_Jobs_Order_Service_Payment_Default
 					$expr[] = $orderSearch->compare( '==', 'order.siteid', $serviceItem->getSiteId() );
 					$expr[] = $orderSearch->compare( '>', 'order.datepayment', $date );
 
-					if( $capDays !== null ) {
-						$expr[] = $orderSearch->compare( '<=', 'order.datepayment', $capDate );
+					if( $capDays !== null )
+					{
+						$capdate = date( 'Y-m-d 00:00:00', time() - 86400 * $capDays );
+						$expr[] = $orderSearch->compare( '<=', 'order.datepayment', $capdate );
 					}
-
-					$expr[] = $orderSearch->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED );
-
-					if( $capDays === null ) {
+					else
+					{
 						$expr[] = $orderSearch->compare( '==', 'order.statusdelivery', $status );
 					}
 
+					$expr[] = $orderSearch->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED );
 					$expr[] = $orderSearch->compare( '==', 'order.base.service.code', $serviceItem->getCode() );
 					$expr[] = $orderSearch->compare( '==', 'order.base.service.type', 'payment' );
 

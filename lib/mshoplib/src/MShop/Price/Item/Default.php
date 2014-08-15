@@ -152,7 +152,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Returns the amount of money.
 	 *
-	 * @return string Price value
+	 * @return integer|double Price value
 	 */
 	public function getValue()
 	{
@@ -163,7 +163,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Sets the new amount of money.
 	 *
-	 * @param numeric $price Amount with two digits precision
+	 * @param integer|double $price Amount with two digits precision
 	 */
 	public function setValue( $price )
 	{
@@ -179,7 +179,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Returns costs.
 	 *
-	 * @return string Costs
+	 * @return integer|double Costs
 	 */
 	public function getCosts()
 	{
@@ -190,7 +190,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Sets the new costs.
 	 *
-	 * @param numeric $price Amount with two digits precision
+	 * @param integer|double $price Amount with two digits precision
 	 */
 	public function setCosts( $price )
 	{
@@ -206,7 +206,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Returns the rebate amount.
 	 *
-	 * @return string Rebate amount
+	 * @return integer|double Rebate amount
 	 */
 	public function getRebate()
 	{
@@ -217,7 +217,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Sets the new rebate amount.
 	 *
-	 * @param string $price Rebate amount with two digits precision
+	 * @param integer|double $price Rebate amount with two digits precision
 	 */
 	public function setRebate( $price )
 	{
