@@ -450,7 +450,7 @@ class MShop_Plugin_Manager_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$map = $typeIds = array();
+		$items = $map = $typeIds = array();
 		$context = $this->_getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -596,12 +596,14 @@ class MShop_Plugin_Manager_Default
 			foreach( $map as $id => $row )
 			{
 				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+					$row['type'] = $typeItems[ $row['typeid'] ]->getCode();
 				}
+
+				$items[$id] = $this->_createItem( $row );
 			}
 		}
 
-		return $this->_buildItems( $map, $ref, 'plugin' );
+		return $items;
 	}
 
 
@@ -657,7 +659,7 @@ class MShop_Plugin_Manager_Default
 	 *
 	 * @return MShop_Plugin_Item_Interface New plugin object
 	 */
-	public function _createItem( array $values = array() )
+	protected function _createItem( array $values = array() )
 	{
 		return new MShop_Plugin_Item_Default( $values );
 	}

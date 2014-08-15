@@ -14,7 +14,7 @@
  * @subpackage Attribute
  */
 class MShop_Attribute_Manager_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Attribute_Manager_Interface
 {
 	private $_searchConfig = array(

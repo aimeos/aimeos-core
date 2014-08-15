@@ -15,7 +15,7 @@
  * @subpackage Price
  */
 class MShop_Price_Item_Default
-	extends MShop_Common_Item_Abstract
+	extends MShop_Common_Item_ListRef_Abstract
 	implements MShop_Price_Item_Interface
 {
 	private $_values;
@@ -25,10 +25,12 @@ class MShop_Price_Item_Default
 	 * Initalizes the object with the given values
 	 *
 	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
+	 * @param MShop_Common_List_Item_Interface[] $listItems List of list items
+	 * @param MShop_Common_Item_Interface[] $refItems List of referenced items
 	 */
-	public function __construct( array $values = array( ) )
+	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		parent::__construct( 'price.', $values );
+		parent::__construct( 'price.', $values, $listItems, $refItems );
 
 		$this->_values = $values;
 	}

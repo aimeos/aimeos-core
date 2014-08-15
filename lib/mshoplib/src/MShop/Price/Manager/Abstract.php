@@ -15,7 +15,7 @@
  * @subpackage Price
  */
 abstract class MShop_Price_Manager_Abstract
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_ListRef_Abstract
 {
 	/**
 	 * Returns the price item with the lowest price for the given quantity.

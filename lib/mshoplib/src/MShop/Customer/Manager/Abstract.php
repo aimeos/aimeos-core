@@ -15,17 +15,37 @@
  * @subpackage Customer
  */
 abstract class MShop_Customer_Manager_Abstract
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Customer_Manager_Interface
 {
+	private $_salt;
+	private $_addressManager;
+
+
+	/**
+	 * Initializes a new customer manager object using the given context object.
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 */
+	public function __construct( MShop_Context_Item_Interface $context )
+	{
+		parent::__construct( $context );
+		$this->_setResourceName( 'db-customer' );
+
+		$this->_salt = $context->getConfig()->get( 'mshop/customer/manager/default/salt/', 'mshop' );
+	}
+
+
 	/**
 	 * Instantiates a new customer item object.
 	 *
-	 * @return MShop_Customer_Item_Interface New customer item object
+	 * @return MShop_Customer_Item_Interface
 	 */
 	public function createItem()
 	{
-		return $this->_createItem( $this->getSubManager( 'address' )->createItem() );
+		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
+
+		return $this->_createItem( $values );
 	}
 
 
@@ -62,12 +82,20 @@ abstract class MShop_Customer_Manager_Abstract
 	/**
 	 * Creates a new customer item.
 	 *
-	 * @param MShop_Common_Item_Address_Interface $address $address Billingaddress of the customer item
 	 * @param array $values List of attributes for customer item
+	 * @param array $listItems List items associated to the customer item
+	 * @param array $refItems Items referenced by the customer item via the list items
+	 * @param MShop_Common_Item_Address_Interface $address billingaddress of customer item
 	 * @return MShop_Customer_Item_Interface New customer item
 	 */
-	protected function _createItem( MShop_Common_Item_Address_Interface $address, array $values = array() )
+	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		return new MShop_Customer_Item_Default( $address, $values );
+		if( !isset( $this->_addressManager ) ) {
+			$this->_addressManager = $this->getSubManager( 'address' );
+		}
+
+		$address = $this->_addressManager->createItem();
+
+		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems, $this->_salt );
 	}
 }

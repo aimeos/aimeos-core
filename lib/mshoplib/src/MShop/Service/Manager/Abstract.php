@@ -15,7 +15,7 @@
  * @subpackage Service
  */
 abstract class MShop_Service_Manager_Abstract
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_ListRef_Abstract
 {
 	protected function _addServiceDecorators( MShop_Service_Item_Interface $serviceItem,
 		MShop_Service_Provider_Interface $provider, $names )

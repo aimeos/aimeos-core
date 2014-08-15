@@ -735,10 +735,12 @@ class MShop_Price_Manager_Default
 	 * Creates a new price item
 	 *
 	 * @param array $values List of attributes for price item
+	 * @param array $listitems List of items implementing MShop_Common_Item_List_Interface
+	 * @param array $refItems List of items implementing MShop_Common_Item_Interface
 	 * @return MShop_Price_Item_Interface New price item
 	 */
-	protected function _createItem( array $values = array() )
+	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		return new MShop_Price_Item_Default( $values );
+		return new MShop_Price_Item_Default( $values, $listItems, $refItems );
 	}
 }
