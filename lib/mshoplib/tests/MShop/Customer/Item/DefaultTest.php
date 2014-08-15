@@ -13,6 +13,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 	private $_values;
+	private $_address;
 
 
 	/**
@@ -74,9 +75,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
-		$this->_address = null;
-		$this->_values = null;
+		unset( $this->_object, $this->_address, $this->_values );
 	}
 
 	public function testGetId()

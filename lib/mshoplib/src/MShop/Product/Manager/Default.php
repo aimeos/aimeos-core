@@ -724,39 +724,6 @@ class MShop_Product_Manager_Default
 
 
 	/**
-	* Returns the type search configurations array for the type manager.
-	*
-	* @return array associative array of the search code as key and the definitions as associative array
-	*/
-	protected function _getListTypeSearchConfig()
-	{
-		return $this->_listTypeSearchConfig;
-	}
-
-
-	/**
-	* Returns the list search definitions for the list manager.
-	*
-	* @return array Associative array of the search code as key and the definition as associative array
-	*/
-	protected function _getListSearchConfig()
-	{
-		return $this->_listSearchConfig;
-	}
-
-
-	/**
-	* Returns the type search configuration definitons for the type manager.
-	*
-	* @return array Associative array of the search code as key and the definition as associative array
-	*/
-	protected function _getTypeSearchConfig()
-	{
-		return $this->_typeSearchConfig;
-	}
-
-
-	/**
 	 * Create new product item object initialized with given parameters.
 	 *
 	 * @param MShop_Product_Item_Interface $item Product item object

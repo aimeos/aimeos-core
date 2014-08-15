@@ -368,7 +368,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 	 */
 	protected function _addItem( MW_Container_Content_Interface $contentItem, MShop_Product_Item_Interface $item, $langid )
 	{
-		$listTypes = $items = array();
+		$listTypes = array();
 		foreach( $item->getListItems( 'text' ) as $listItem ) {
 			$listTypes[ $listItem->getRefId() ] = $listItem->getType();
 		}

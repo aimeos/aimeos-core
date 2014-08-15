@@ -503,10 +503,10 @@ class MShop_Order_Manager_Base_Service_Default
 	 * @param array $attributes List of order service attribute items
 	 * @return MShop_Order_Item_Base_Service_Interface Order item service object
 	 */
-	protected function _createItem( MShop_Price_Item_Interface $price=null,
+	protected function _createItem( MShop_Price_Item_Interface $price,
 		array $values = array(), array $attributes = array() )
 	{
-		return new MShop_Order_Item_Base_Service_Default($price, $values, $attributes);
+		return new MShop_Order_Item_Base_Service_Default( $price, $values, $attributes );
 	}
 
 

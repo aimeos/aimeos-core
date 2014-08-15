@@ -19,7 +19,7 @@ class Controller_ExtJS_Media_List_Type_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->object = new Controller_ExtJS_Media_List_Type_Default( TestHelper::getContext() );
+		$this->_object = new Controller_ExtJS_Media_List_Type_Default( TestHelper::getContext() );
 	}
 
 
@@ -46,7 +46,7 @@ class Controller_ExtJS_Media_List_Type_DefaultTest extends MW_Unittest_Testcase
 			'limit' => 1,
 		);
 
-		$result = $this->object->searchItems( $params );
+		$result = $this->_object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 1, $result['total'] );
@@ -72,12 +72,12 @@ class Controller_ExtJS_Media_List_Type_DefaultTest extends MW_Unittest_Testcase
 		);
 
 
-		$saved = $this->object->saveItems( $saveParams );
-		$searched = $this->object->searchItems( $searchParams );
+		$saved = $this->_object->saveItems( $saveParams );
+		$searched = $this->_object->searchItems( $searchParams );
 
 		$params = (object) array( 'site' => 'unittest', 'items' => $saved['items']->{'media.list.type.id'} );
-		$this->object->deleteItems( $params );
-		$result = $this->object->searchItems( $searchParams );
+		$this->_object->deleteItems( $params );
+		$result = $this->_object->searchItems( $searchParams );
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'media.list.type.id'} );

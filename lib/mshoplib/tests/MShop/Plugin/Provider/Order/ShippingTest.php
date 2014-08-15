@@ -11,7 +11,9 @@
  */
 class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 {
+	private $_order;
 	private $_object;
+	private $_product;
 
 
 	/**
@@ -22,18 +24,20 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
+		$context = TestHelper::getContext();
+
+		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
 		$plugin = $pluginManager->createItem();
 		$plugin->setTypeId( 2 );
 		$plugin->setProvider( 'Shipping' );
 		$plugin->setConfig( array('threshold' => array ('EUR' => '34.00' ) ) );
 		$plugin->setStatus( '1' );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
 		$orderBaseManager = $orderManager->getSubManager('base');
 		$orderBaseProductManager = $orderBaseManager->getSubManager('product');
 
-		$manager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = MShop_Product_Manager_Factory::createManager( $context );
 		$search = $manager->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC', 'IJKL' ) ) );
@@ -54,17 +58,17 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 		}
 		$price->setValue(10.00);
 
-		$this->product1 = $orderBaseProductManager->createItem();
-		$this->product1->copyFrom( $products['CNE'] );
-		$this->product1->setPrice( $price );
+		$this->_product = $orderBaseProductManager->createItem();
+		$this->_product->copyFrom( $products['CNE'] );
+		$this->_product->setPrice( $price );
 
-		$this->product2 = $orderBaseProductManager->createItem();
-		$this->product2->copyFrom( $products['CNC'] );
-		$this->product2->setPrice( $price );
+		$product2 = $orderBaseProductManager->createItem();
+		$product2->copyFrom( $products['CNC'] );
+		$product2->setPrice( $price );
 
-		$this->product3 = $orderBaseProductManager->createItem();
-		$this->product3->copyFrom( $products['IJKL'] );
-		$this->product3->setPrice( $price );
+		$product3 = $orderBaseProductManager->createItem();
+		$product3->copyFrom( $products['IJKL'] );
+		$product3->setPrice( $price );
 
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service' );
 
@@ -80,14 +84,14 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 			throw new Exception('No order base item found');
 		}
 
-		$this->order = $orderBaseManager->createItem();
+		$this->_order = $orderBaseManager->createItem();
 
-		$this->order->setService( $delivery, 'delivery' );
-		$this->order->addProduct( $this->product1 );
-		$this->order->addProduct( $this->product2 );
-		$this->order->addProduct( $this->product3 );
+		$this->_order->setService( $delivery, 'delivery' );
+		$this->_order->addProduct( $this->_product );
+		$this->_order->addProduct( $product2 );
+		$this->_order->addProduct( $product3 );
 
-		$this->_object = new MShop_Plugin_Provider_Order_Shipping(TestHelper::getContext(), $plugin);
+		$this->_object = new MShop_Plugin_Provider_Order_Shipping( $context, $plugin );
 	}
 
 	/**
@@ -98,7 +102,7 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset( $this->_object, $this->_product );
 	}
 
 	/**
@@ -117,12 +121,12 @@ class MShop_Plugin_Provider_Order_ShippingTest extends MW_Unittest_Testcase
 	 */
 	public function testUpdate()
 	{
-		$this->assertEquals( 5.00, $this->order->getPrice()->getCosts() );
-		$this->_object->update($this->order, 'addProduct');
+		$this->assertEquals( 5.00, $this->_order->getPrice()->getCosts() );
+		$this->_object->update($this->_order, 'addProduct');
 
-		$this->order->addProduct( $this->product1 );
-		$this->_object->update($this->order, 'addProduct');
+		$this->_order->addProduct( $this->_product );
+		$this->_object->update($this->_order, 'addProduct');
 
-		$this->assertEquals( 0.00, $this->order->getPrice()->getCosts());
+		$this->assertEquals( 0.00, $this->_order->getPrice()->getCosts());
 	}
 }

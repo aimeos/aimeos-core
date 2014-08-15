@@ -16,9 +16,9 @@
  */
 class MW_Template_Base implements MW_Template_Interface
 {
-	private $_begin = '[$]';
-	private $_end = '[/$]';
-	private $_text = '';
+	private $_begin;
+	private $_end;
+	private $_text;
 
 
 	/**
@@ -144,8 +144,8 @@ class MW_Template_Base implements MW_Template_Interface
 		foreach( $substitute as $marker => $value )
 		{
 			$begin = 0;
-			$mbegin = str_replace( '$', $marker, $this->_begin );
-			$mend = str_replace( '$', $marker, $this->_end );
+			$mbegin = (string) str_replace( '$', $marker, $this->_begin );
+			$mend = (string) str_replace( '$', $marker, $this->_end );
 
 			while( ( $begin = strpos( $this->_text, $mbegin, $begin ) ) !== false )
 			{

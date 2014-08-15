@@ -12,6 +12,7 @@
 class MShop_Product_Item_Stock_Warehouse_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_values;
 
 
 	/**

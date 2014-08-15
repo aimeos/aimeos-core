@@ -11,6 +11,9 @@
 /**
  * Default implementation of an order invoice item.
  *
+ * @property integer oldPaymentStatus Last delivery status before it was changed by setDeliveryStatus()
+ * @property integer oldDeliveryStatus Last payment status before it was changed by setPaymentStatus()
+ *
  * @package MShop
  * @subpackage Order
  */

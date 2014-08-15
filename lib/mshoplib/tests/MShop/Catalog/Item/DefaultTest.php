@@ -10,6 +10,7 @@
  */
 class MShop_Catalog_Item_DefaultTest extends MW_Unittest_Testcase
 {
+	private $_node;
 	private $_object;
 	private $_values;
 	private $_listItems;

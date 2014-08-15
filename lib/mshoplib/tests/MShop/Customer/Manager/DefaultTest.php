@@ -10,8 +10,9 @@
  */
 class MShop_Customer_Manager_DefaultTest extends MW_Unittest_Testcase
 {
-	private $_fixture = null;
-	private $_object = null;
+	private $_object;
+	private $_fixture;
+	private $_address;
 	private $_editor = '';
 
 

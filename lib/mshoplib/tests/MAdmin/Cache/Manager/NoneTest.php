@@ -8,6 +8,7 @@
 class MAdmin_Cache_Manager_NoneTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_context;
 
 
 	/**

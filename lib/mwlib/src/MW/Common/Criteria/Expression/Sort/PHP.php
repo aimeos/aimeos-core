@@ -19,7 +19,8 @@ class MW_Common_Criteria_Expression_Sort_PHP
 	implements MW_Common_Criteria_Expression_Sort_Interface
 {
 	private static $_operators = array( '+' => 'asort', '-' => 'arsort' );
-	private $_operator = '+';
+	private $_operator;
+	private $_name;
 
 
 	/**

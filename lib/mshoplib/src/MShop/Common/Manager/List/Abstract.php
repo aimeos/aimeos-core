@@ -208,14 +208,14 @@ abstract class MShop_Common_Manager_List_Abstract
 
 		$listItem = $this->getItem( $id );
 
-		$newpos = 0;
+		$newpos = $pos = 0;
 		$oldpos = $listItem->getPosition();
 		$parentid = $listItem->getParentId();
 		$typeid = $listItem->getTypeId();
 		$domain = $listItem->getDomain();
 
 		if( $ref !== null ) {
-			$refListItem = $this->getItem( $ref );
+			$pos = $this->getItem( $ref )->getPosition();
 		}
 
 		$dbm = $context->getDatabaseManager();
@@ -226,7 +226,7 @@ abstract class MShop_Common_Manager_List_Abstract
 		{
 			if( $ref !== null )
 			{
-				$newpos = $refListItem->getPosition();
+				$newpos = $pos;
 
 				$sql = $config->get( $this->_configPath . 'move' );
 
@@ -238,7 +238,7 @@ abstract class MShop_Common_Manager_List_Abstract
 				$stmt->bind( 5, $parentid, MW_DB_Statement_Abstract::PARAM_INT );
 				$stmt->bind( 6, $typeid, MW_DB_Statement_Abstract::PARAM_INT );
 				$stmt->bind( 7, $domain );
-				$stmt->bind( 8, $refListItem->getPosition(), MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 8, $pos, MW_DB_Statement_Abstract::PARAM_INT );
 
 				$stmt->execute()->finish();
 			}

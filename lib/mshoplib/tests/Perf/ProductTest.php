@@ -7,6 +7,7 @@
 
 class Perf_ProductTest extends MW_Unittest_Testcase
 {
+	private $_item;
 	private $_context;
 
 

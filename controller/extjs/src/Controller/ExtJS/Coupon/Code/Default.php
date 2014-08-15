@@ -348,11 +348,19 @@ class Controller_ExtJS_Coupon_Code_Default
 					continue;
 				}
 
+				foreach( $row as $idx => $value ) {
+					$row[$idx] = trim( $value );
+				}
+
+				$count = ( isset( $row[1] ) && $row[1] != '' ? $row[1] : 1 );
+				$start = ( isset( $row[2] ) && $row[2] != '' ? $row[2] : null );
+				$end = ( isset( $row[3] ) && $row[3] != '' ? $row[3] : null );
+
 				$item->setId( null );
 				$item->setCode( $code );
-				$item->setCount( ( isset( $row[1] ) && ( $data = trim( $row[1] ) ) != '' ? $data : 1 ) );
-				$item->setDateStart( ( isset( $row[2] ) && ( $data = trim( $row[2] ) ) != '' ? $data : null ) );
-				$item->setDateEnd( ( isset( $row[3] ) && ( $data = trim( $row[3] ) ) != '' ? $data : null ) );
+				$item->setCount( $count );
+				$item->setDateStart( $start );
+				$item->setDateEnd( $end );
 
 				$manager->saveItem( $item, false );
 			}
