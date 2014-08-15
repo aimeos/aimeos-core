@@ -15,7 +15,7 @@
  * @subpackage Catalog
  */
 class MShop_Catalog_Manager_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Catalog_Manager_Interface, MShop_Common_Manager_Factory_Interface
 {
 	private $_treeManagers = array();
@@ -185,12 +185,9 @@ class MShop_Catalog_Manager_Default
 	 */
 	public function createItem()
 	{
-		$siteid = $this->_getContext()->getLocale()->getSiteId();
+		$values = array( 'siteid' => $this->_getContext()->getLocale()->getSiteId() );
 
-		$node = $this->_createTreeManager( $siteid )->createNode();
-		$node->siteid = $siteid;
-
-		return $this->_createItem( $node );
+		return $this->_createItem( $values );
 	}
 
 
@@ -515,7 +512,7 @@ class MShop_Catalog_Manager_Default
 				$refItems = $refItemMap[ $nodeid ];
 			}
 
-			$item = $this->_createItem( $node, array(), $listItems, $refItems );
+			$item = $this->_createItem( array(), $listItems, $refItems, array(), $node );
 			$this->_createTree( $node, $item, $listItemMap, $refItemMap );
 
 			return $item;
@@ -687,7 +684,7 @@ class MShop_Catalog_Manager_Default
 				$refItems = $refItemMap[$id];
 			}
 
-			$items[ $id ] = $this->_createItem( $node, array(), $listItems, $refItems );
+			$items[ $id ] = $this->_createItem( array(), $listItems, $refItems, array(), $node );
 		}
 
 		return $items;
@@ -703,9 +700,19 @@ class MShop_Catalog_Manager_Default
 	 * @param array $refItems Associative list of referenced items grouped by domain
 	 * @return MShop_Catalog_Item_Interface New catalog item
 	 */
-	protected function _createItem( MW_Tree_Node_Interface $node = null, array $children = array(),
-		array $listItems = array(), array $refItems = array() )
+	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array(),
+		array $children = array(), MW_Tree_Node_Interface $node = null )
 	{
+		if( $node === null )
+		{
+			if( !isset( $values['siteid'] ) ) {
+				throw new MShop_Catalog_Exception( 'No site ID available for creating a catalog item' );
+			}
+
+			$node = $this->_createTreeManager( $values['siteid'] )->createNode();
+			$node->siteid = $values['siteid'];
+		}
+
 		if( isset( $node->config ) && ( $result = json_decode( $node->config, true ) ) !== null ) {
 			$node->config = $result;
 		}
@@ -737,7 +744,7 @@ class MShop_Catalog_Manager_Default
 				$refItems = $refItemMap[ $child->getId() ];
 			}
 
-			$newItem = $this->_createItem( $child, array(), $listItems, $refItems );
+			$newItem = $this->_createItem( array(), $listItems, $refItems, array(), $child );
 			$item->addChild( $newItem );
 
 			$this->_createTree( $child, $newItem, $listItemMap, $refItemMap );
@@ -780,28 +787,6 @@ class MShop_Catalog_Manager_Default
 		}
 
 		return $this->_treeManagers[$siteid];
-	}
-
-
-	/**
-	 * Returns the list search config array.
-	 *
-	 * @return array List of associative arrays which contains the search config
-	 */
-	protected function _getListSearchConfig()
-	{
-		return $this->_listSearchConfig;
-	}
-
-
-	/**
-	 * Returns the list type search config array.
-	 *
-	 * @return array List of associative arrays which contains the search config
-	 */
-	protected function _getListTypeSearchConfig()
-	{
-		return $this->_listTypeSearchConfig;
 	}
 
 

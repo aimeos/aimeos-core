@@ -18,8 +18,6 @@ class MShop_Customer_Manager_Default
 	extends MShop_Customer_Manager_Abstract
 	implements MShop_Customer_Manager_Interface
 {
-	private $_salt;
-
 	private $_searchConfig = array(
 		'customer.id' => array(
 			'label' => 'Customer ID',
@@ -229,20 +227,6 @@ class MShop_Customer_Manager_Default
 
 
 	/**
-	 * Initializes a new customer manager object using the given context object.
-	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
-	 */
-	public function __construct( MShop_Context_Item_Interface $context )
-	{
-		parent::__construct( $context );
-		$this->_setResourceName( 'db-customer' );
-
-		$this->_salt = $context->getConfig()->get( 'mshop/customer/manager/default/salt/', 'mshop' );
-	}
-
-
-	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
@@ -286,38 +270,6 @@ class MShop_Customer_Manager_Default
 		$path = 'classes/customer/manager/submanagers';
 
 		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'address', 'list' ), $withsub );
-	}
-
-
-	/**
-	 * Instantiates a new customer item object.
-	 *
-	 * @return MShop_Customer_Item_Interface
-	 */
-	public function createItem()
-	{
-		$values = array( 'siteid'=> $this->_getContext()->getLocale()->getSiteId() );
-
-		$addressManager = $this->getSubManager( 'address' );
-		$address = $addressManager->createItem();
-
-		return $this->_createItem( $address, $values );
-	}
-
-
-	/**
-	 * Creates a new customer item.
-	 *
-	 * @param MShop_Common_Item_Address_Interface $address billingaddress of customer item
-	 * @param array $values List of attributes for customer item
-	 * @param array $listItems List items associated to the customer item
-	 * @param array $refItems Items referenced by the customer item via the list items
-	 * @return MShop_Customer_Item_Interface New customer item
-	 */
-	protected function _createItem( MShop_Common_Item_Address_Interface $address, array $values = array(),
-		array $listItems = array(), array $refItems = array() )
-	{
-		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems, $this->_salt );
 	}
 
 
@@ -791,55 +743,5 @@ class MShop_Customer_Manager_Default
 		 */
 
 		return $this->_getSubManager( 'customer', $manager, $name );
-	}
-
-
-	/**
-	 * Creates the items with address item, list items and referenced items.
-	 *
-	 * @param array $map Associative list of IDs as keys and the associative array of values
-	 * @param array $domains List of domain names whose referenced items should be attached
-	 * @param string $prefix Domain prefix
-	 * @return array List of items implementing MShop_Common_Item_Interface
-	 */
-	protected function _buildItems( array $map, array $domains, $prefix )
-	{
-		$items = $listItemMap = $refItemMap = $refIdMap = array();
-
-		if( !empty( $domains ) )
-		{
-			$listItems = $this->_getListItems( array_keys( $map ), $domains, $prefix );
-
-			foreach( $listItems as $listItem )
-			{
-				$domain = $listItem->getDomain();
-				$parentid = $listItem->getParentId();
-
-				$listItemMap[ $parentid ][ $domain ][ $listItem->getId() ] = $listItem;
-				$refIdMap[ $domain ][ $listItem->getRefId() ][] = $parentid;
-			}
-
-			$refItemMap = $this->_getRefItems( $refIdMap );
-		}
-
-		$addressManager = $this->getSubManager( 'address' );
-
-		foreach ( $map as $id => $values )
-		{
-			$listItems = array();
-			if ( isset( $listItemMap[$id] ) ) {
-				$listItems = $listItemMap[$id];
-			}
-
-			$refItems = array();
-			if ( isset( $refItemMap[$id] ) ) {
-				$refItems = $refItemMap[$id];
-			}
-
-			// Hand over empty address item, which will be filled in the customer item constructor
-			$items[ $id ] = $this->_createItem( $addressManager->createItem(), $values, $listItems, $refItems );
-		}
-
-		return $items;
 	}
 }

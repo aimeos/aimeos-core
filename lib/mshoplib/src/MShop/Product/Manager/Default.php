@@ -15,7 +15,7 @@
  * @subpackage Product
  */
 class MShop_Product_Manager_Default
-	extends MShop_Common_Manager_Abstract
+	extends MShop_Common_Manager_ListRef_Abstract
 	implements MShop_Product_Manager_Interface
 {
 	private $_searchConfig = array(
@@ -753,11 +753,11 @@ class MShop_Product_Manager_Default
 	 *
 	 * @param array $values Associative list of key/value pairs
 	 * @param array $listitems List of items implementing MShop_Common_Item_List_Interface
-	 * @param array $textItems List of items implementing MShop_Text_Item_Interface
+	 * @param array $refItems List of items implementing MShop_Common_Item_Interface
 	 * @return MShop_Product_Item_Interface New product item
 	 */
-	protected function _createItem( array $values = array(), array $listitems = array(), array $textItems = array() )
+	protected function _createItem( array $values = array(), array $listitems = array(), array $refItems = array() )
 	{
-		return new MShop_Product_Item_Default( $values, $listitems, $textItems );
+		return new MShop_Product_Item_Default( $values, $listitems, $refItems );
 	}
 }

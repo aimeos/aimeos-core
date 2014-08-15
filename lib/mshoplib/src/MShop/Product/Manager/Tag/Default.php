@@ -366,7 +366,7 @@ class MShop_Product_Manager_Tag_Default
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$map = $typeIds = array();
+		$items = $map = $typeIds = array();
 		$context = $this->_getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -504,12 +504,14 @@ class MShop_Product_Manager_Tag_Default
 			foreach( $map as $id => $row )
 			{
 				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+					$row['type'] = $typeItems[ $row['typeid'] ]->getCode();
 				}
+
+				$items[$id] = $this->_createItem( $row );
 			}
 		}
 
-		return $this->_buildItems( $map, $ref, 'product.tag' );
+		return $items;
 	}
 
 
