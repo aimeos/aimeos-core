@@ -199,7 +199,7 @@ class MAdmin_Cache_Manager_Default
 
 			try {
 				$this->_object = MW_Cache_Factory::createManager( $name, $config, $dbm );
-			} catch( Excpetion $e ) {
+			} catch( Exception $e ) {
 				$this->_object = MW_Cache_Factory::createManager( 'DB', $config, $dbm );
 			}
 		}

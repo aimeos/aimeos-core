@@ -12,6 +12,7 @@
 class Controller_Jobs_Common_Decorator_AbstractTest extends MW_Unittest_Testcase
 {
 	private $_stub;
+	private $_object;
 
 
 	/**

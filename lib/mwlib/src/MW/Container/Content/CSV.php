@@ -36,24 +36,18 @@ class MW_Container_Content_CSV
 	 * - csv-enclosure (default: '"')
 	 * - csv-escape (default: '"')
 	 * - csv-lineend (default: LF)
+	 * - csv-lineend-subst (default: ' ')
 	 *
-	 * @param string $resource File pointer or path to the actual file
+	 * @param string $resource Path to the actual file
 	 * @param string $name Name of the CSV file
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
 	public function __construct( $resource, $name, array $options = array() )
 	{
-		if( !is_resource( $resource ) )
-		{
-			if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
-				&& ( $this->_fh = fopen( $resource, 'r' ) ) === false
-			) {
-				throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
-			}
-		}
-		else
-		{
-			$this->_fh = $resource;
+		if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
+			&& ( $this->_fh = fopen( $resource, 'r' ) ) === false
+		) {
+			throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 		}
 
 		if( substr( $name, -4 ) !== '.csv' ) {
@@ -79,11 +73,11 @@ class MW_Container_Content_CSV
 	public function close()
 	{
 		if( fflush( $this->_fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to flush file "%1$s"', $this->_getResource() ) );
+			throw new MW_Container_Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
 		}
 
 		if( fclose( $this->_fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->_getResource() ) );
+			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
 	}
 
@@ -104,7 +98,7 @@ class MW_Container_Content_CSV
 		}
 
 		if( fwrite( $this->_fh, implode( $this->_separator, $data ) . $this->_lineend ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->_getName() ) );
+			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
 	}
 

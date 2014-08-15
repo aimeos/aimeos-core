@@ -595,13 +595,11 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetSetSession()
 	{
-		$manager = new MShop_Common_Manager_Decorator_Sitecheck( TestHelper::getContext(), $this->_object );
-
-		$order = $manager->createItem();
+		$order = $this->_object->createItem();
 		$order->setComment( 'test comment' );
 
-		$manager->setSession( $order, 'test' );
-		$session = $manager->getSession( 'test' );
+		$this->_object->setSession( $order, 'test' );
+		$session = $this->_object->getSession( 'test' );
 
 		$this->assertInstanceof( 'MShop_Order_Item_Base_Interface', $session );
 		$this->assertEquals( 'test comment', $order->getComment() );
@@ -611,14 +609,12 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetSetSessionLock()
 	{
-		$manager = new MShop_Common_Manager_Decorator_Sitecheck( TestHelper::getContext(), $this->_object );
-
-		$lock = $manager->getSessionLock( 'test' );
+		$lock = $this->_object->getSessionLock( 'test' );
 		$this->assertEquals( MShop_Order_Manager_Base_Abstract::LOCK_DISABLE, $lock );
 
-		$manager->setSessionLock( MShop_Order_Manager_Base_Abstract::LOCK_ENABLE, 'test' );
+		$this->_object->setSessionLock( MShop_Order_Manager_Base_Abstract::LOCK_ENABLE, 'test' );
 
-		$lock = $manager->getSessionLock( 'test' );
+		$lock = $this->_object->getSessionLock( 'test' );
 		$this->assertEquals( MShop_Order_Manager_Base_Abstract::LOCK_ENABLE, $lock );
 	}
 

@@ -102,7 +102,7 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 			default:
 				$terms = array();
 
-				foreach( $this->getValue() as $val ) {
+				foreach( (array) $this->getValue() as $val ) {
 					$terms[] = $this->_createTerm( $name, $type, $val );
 				}
 

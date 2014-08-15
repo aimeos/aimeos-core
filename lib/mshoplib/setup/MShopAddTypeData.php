@@ -12,6 +12,8 @@
 class MW_Setup_Task_MShopAddTypeData extends MW_Setup_Task_Abstract
 {
 	private $_editor = '';
+	private $_domainManagers = array();
+
 
 	/**
 	 * Returns the list of task names which this task depends on.
