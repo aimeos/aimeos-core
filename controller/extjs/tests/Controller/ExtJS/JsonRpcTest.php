@@ -8,7 +8,8 @@
 
 class Controller_ExtJS_JsonRpcTest extends MW_Unittest_Testcase
 {
-	protected static $_object;
+	private static $_object;
+	private $_testdir;
 
 
 	public static function setUpBeforeClass()

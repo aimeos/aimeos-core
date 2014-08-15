@@ -12,6 +12,7 @@
 class MShop_Coupon_Item_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_values;
 
 
 	/**
@@ -22,7 +23,7 @@ class MShop_Coupon_Item_DefaultTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->values = array(
+		$this->_values = array(
 			'siteid' => 123,
 			'label' => 'test coupon',
 			'provider' => 'Example',
@@ -35,7 +36,7 @@ class MShop_Coupon_Item_DefaultTest extends MW_Unittest_Testcase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Coupon_Item_Default( $this->values );
+		$this->_object = new MShop_Coupon_Item_Default( $this->_values );
 	}
 
 	/**
@@ -160,7 +161,7 @@ class MShop_Coupon_Item_DefaultTest extends MW_Unittest_Testcase
 	public function testToArray()
 	{
 		$arrayObject = $this->_object->toArray();
-		$this->assertEquals( (count( $this->values ) + 1), count( $arrayObject ) );
+		$this->assertEquals( (count( $this->_values ) + 1), count( $arrayObject ) );
 
 		$this->assertEquals( $this->_object->getId(), $arrayObject['coupon.id'] );
 		$this->assertEquals( $this->_object->getSiteId(), $arrayObject['coupon.siteid'] );

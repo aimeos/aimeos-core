@@ -146,7 +146,7 @@ class Controller_ExtJS_Product_Default
 
 			$search = $manager->createSearch();
 			$expr = array(
-				$search->compare( '==', $domain.'.list.refid', $domainIds ),
+				$search->compare( '==', $domain.'.list.refid', $ids ),
 				$search->compare( '==', $domain.'.list.domain', 'product' )
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );

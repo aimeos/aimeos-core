@@ -27,7 +27,7 @@ class MW_Jsb2_Default
 	 * Initializes the Jsb2 object.
 	 *
 	 * @param string $filename Path to manifest file
-	 * @param string_type $baseURL Base URL for HTML output
+	 * @param string $baseURL Base URL for HTML output
 	 * @param array $filter Which packages  schould NOT be returned
 	 */
 	public function __construct( $filename, $baseURL = "", $filter = array() )

@@ -45,7 +45,7 @@ class Controller_ExtJS_Catalog_List_Default
 		$this->_checkParams( $params, array( 'site', 'items' ) );
 		$this->_setLocale( $params->site );
 
-		$ids = $refIds = array();
+		$ids = $refIds = $domains = array();
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $entry )
@@ -81,12 +81,13 @@ class Controller_ExtJS_Catalog_List_Default
 
 			$this->_manager->saveItem( $item );
 
+			$domains[ $item->getDomain() ] = true;
 			$refIds[] = $item->getRefId();
 			$ids[] = $item->getId();
 		}
 
 
-		if( $item->getDomain() === 'product' )
+		if( isset( $domains['product'] ) )
 		{
 			$context = $this->_getContext();
 			$productManager = MShop_Factory::createManager( $context, 'product' );

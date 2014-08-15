@@ -12,6 +12,7 @@
 class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
+	private $_context;
 	private $_editor = '';
 
 

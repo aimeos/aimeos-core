@@ -18,9 +18,9 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	extends MW_Common_Criteria_Expression_Abstract
 	implements MW_Common_Criteria_Expression_Compare_Interface
 {
-	private $_operator = '==';
-	private $_name = '';
-	private $_value = '';
+	private $_operator;
+	private $_name;
+	private $_value;
 
 
 	/**
@@ -28,7 +28,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	 *
 	 * @param string $operator Operator used for the expression
 	 * @param string $name Name of variable or column that should be compared.
-	 * @param mixed $value Value that the variable or column should be compared to
+	 * @param string|array $value Value that the variable or column should be compared to
 	 */
 	public function __construct( $operator, $name, $value )
 	{
@@ -63,7 +63,7 @@ abstract class MW_Common_Criteria_Expression_Compare_Abstract
 	/**
 	 * Returns the right side of the compare expression.
 	 *
-	 * @return string Value that the variable or column should be compared to
+	 * @return string|array Value that the variable or column should be compared to
 	 */
 	public function getValue()
 	{

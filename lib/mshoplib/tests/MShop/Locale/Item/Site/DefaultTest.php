@@ -11,7 +11,7 @@
 class MShop_Locale_Item_Site_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
-	private $_value;
+	private $_values;
 
 
 	protected function setUp()

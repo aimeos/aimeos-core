@@ -9,6 +9,7 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 {
 	private $_order;
 	private $_plugin;
+	private $_products;
 
 
 	/**
@@ -26,8 +27,7 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 		$this->_plugin->setProvider( 'IntelligentSampling' );
 		$this->_plugin->setStatus( 1 );
 
-		$this->_orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $this->_orderManager->getSubManager('base');
+		$orderBaseManager = MShop_Order_Manager_Factory::createManager( $context )->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager('product');
 
 		$manager = MShop_Product_Manager_Factory::createManager( $context );
@@ -40,19 +40,19 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 			throw new Exception('Wrong number of products');
 		}
 
-		$this->products = array();
+		$this->_products = array();
 		foreach( $pResults as $prod ) {
-			$this->products[ $prod->getCode() ] = $prod;
+			$this->_products[ $prod->getCode() ] = $prod;
 		}
 
 		$product1 = $orderBaseProductManager->createItem();
-		$product1->copyFrom( $this->products['EFGH'] );
+		$product1->copyFrom( $this->_products['EFGH'] );
 
 		$product2 = $orderBaseProductManager->createItem();
-		$product2->copyFrom( $this->products['IJKL'] );
+		$product2->copyFrom( $this->_products['IJKL'] );
 
 		$product3 = $orderBaseProductManager->createItem();
-		$product3->copyFrom( $this->products['MNOP'] );
+		$product3->copyFrom( $this->_products['MNOP'] );
 
 		$this->_order = $orderBaseManager->createItem();
 
@@ -80,7 +80,6 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_orderManager );
 		unset($this->_plugin);
 	}
 
@@ -121,7 +120,7 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 			"samples" => array(
 				'CNE' => array(
 					'conditions' => array(
-						'!=' => array( 'exists("' . $this->products['EFGH']->getCode() . '")' => true ),
+						'!=' => array( 'exists("' . $this->_products['EFGH']->getCode() . '")' => true ),
 					)
 				)
 			),
@@ -161,7 +160,7 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 					'conditions' => array(
 						'&&' => array(
 							array( '!=' => array( 'exists("CNC")' => true ) ),
-							array( '==' => array( 'exists("' . $this->products['EFGH']->getCode() . '")' => true ) ),
+							array( '==' => array( 'exists("' . $this->_products['EFGH']->getCode() . '")' => true ) ),
 						)
 					)
 				)
@@ -181,7 +180,7 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 			"samples" => array(
 				'CNC' => array(
 					'conditions' => array(
-						'!=' => array( 'exists("' . $this->products['MNOP']->getCode() . '")' => true ),
+						'!=' => array( 'exists("' . $this->_products['MNOP']->getCode() . '")' => true ),
 					)
 				)
 			),
@@ -197,7 +196,7 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 		$this->assertTrue( $result );
 		$this->assertEquals( 3, count( $products ) );
 
-		$codes = array( $this->products['EFGH']->getCode(), $this->products['IJKL']->getCode(), 'CNC');
+		$codes = array( $this->_products['EFGH']->getCode(), $this->_products['IJKL']->getCode(), 'CNC');
 		foreach( $products as $product ) {
 			$this->assertTrue( in_array( $product->getProductCode(), $codes ) );
 		}
@@ -211,7 +210,7 @@ class MShop_Plugin_Provider_Order_IntelligentSamplingTest extends MW_Unittest_Te
 			"samples" => array(
 				'CNC' => array(
 					'conditions' => array(
-						'!=' => array( 'exists("' . $this->products['EFGH']->getCode() . '")' => true ),
+						'!=' => array( 'exists("' . $this->_products['EFGH']->getCode() . '")' => true ),
 					)
 				)
 			),

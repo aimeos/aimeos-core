@@ -16,6 +16,7 @@
  */
 class MW_Setup_Manager_Multiple implements MW_Setup_Manager_Interface
 {
+	private $_dbm;
 	private $_additional;
 	private $_tasks = array();
 	private $_tasksDone = array();

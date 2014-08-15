@@ -10,6 +10,7 @@ class Controller_ExtJS_Coupon_Code_DefaultTest extends MW_Unittest_Testcase
 {
 	private $_object;
 	private $_context;
+	private $_testdir;
 
 
 	/**

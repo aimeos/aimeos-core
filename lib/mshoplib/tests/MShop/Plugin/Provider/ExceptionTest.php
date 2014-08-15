@@ -36,12 +36,11 @@ class MShop_Plugin_Provider_ExceptionTest extends PHPUnit_Framework_TestCase
 		}
 
 		try {
-			throw new MShop_Plugin_Provider_Exception( 'msg2', 11, $mppe );
+			throw new MShop_Plugin_Provider_Exception( 'msg2', 11 );
 		}
 		catch ( MShop_Plugin_Provider_Exception $e )
 		{
 			$this->assertEquals( array(), $e->getErrorCodes() );
-			$this->assertEquals( $mppe, $e->getPrevious() );
 		}
 	}
 }

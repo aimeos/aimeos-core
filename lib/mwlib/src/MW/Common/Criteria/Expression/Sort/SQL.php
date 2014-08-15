@@ -19,7 +19,9 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	implements MW_Common_Criteria_Expression_Sort_Interface
 {
 	private static $_operators = array( '+' => 'ASC', '-' => 'DESC' );
-	private $_operator = '+';
+	private $_operator;
+	private $_conn;
+	private $_name;
 
 
 	/**
@@ -35,8 +37,8 @@ class MW_Common_Criteria_Expression_Sort_SQL
 			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		$this->_conn = $conn;
 		$this->_operator = $operator;
+		$this->_conn = $conn;
 		$this->_name = $name;
 	}
 

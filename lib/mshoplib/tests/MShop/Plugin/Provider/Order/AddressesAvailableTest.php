@@ -27,13 +27,10 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 		$this->_plugin->setProvider( 'AddressesAvailable' );
 		$this->_plugin->setStatus( 1 );
 
-		$this->_orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $this->_orderManager->getSubManager('base');
-		$this->_order = $orderBaseManager->createItem();
-
-		$this->_plugin->setConfig( array() );
-
+		$orderBaseManager = MShop_Order_Manager_Factory::createManager( $context )->getSubManager( 'base' );
 		$orderBaseAddressManager = $orderBaseManager->getSubManager('address');
+
+		$this->_order = $orderBaseManager->createItem();
 
 		$this->_address = $orderBaseAddressManager->createItem();
 		$this->_address->setLastName('Available');
@@ -48,7 +45,6 @@ class MShop_Plugin_Provider_Order_AddressesAvailableTest extends PHPUnit_Framewo
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_orderManager );
 		unset( $this->_plugin );
 		unset( $this->_order );
 		unset( $this->_address );

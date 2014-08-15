@@ -79,11 +79,11 @@ class MW_Container_Content_CSV
 	public function close()
 	{
 		if( fflush( $this->_fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to flush file "%1$s"', $this->_resource ) );
+			throw new MW_Container_Exception( sprintf( 'Unable to flush file "%1$s"', $this->_getResource() ) );
 		}
 
 		if( fclose( $this->_fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->_resource ) );
+			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->_getResource() ) );
 		}
 	}
 
@@ -104,7 +104,7 @@ class MW_Container_Content_CSV
 		}
 
 		if( fwrite( $this->_fh, implode( $this->_separator, $data ) . $this->_lineend ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->_filename ) );
+			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->_getName() ) );
 		}
 	}
 

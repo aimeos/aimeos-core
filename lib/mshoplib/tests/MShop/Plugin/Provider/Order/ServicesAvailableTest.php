@@ -27,15 +27,10 @@ class MShop_Plugin_Provider_Order_ServicesAvailableTest extends PHPUnit_Framewor
 		$this->_plugin->setProvider( 'ServicesAvailable' );
 		$this->_plugin->setStatus( 1 );
 
-		$this->_orderManager = MShop_Order_Manager_Factory::createManager( $context );
-		$orderBaseManager = $this->_orderManager->getSubManager('base');
+		$orderBaseManager = MShop_Order_Manager_Factory::createManager( $context )->getSubManager( 'base' );
+		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service' );
 
 		$this->_order = $orderBaseManager->createItem();
-
-		$this->_plugin->setConfig( array() );
-
-		$orderBaseServiceManager = $orderBaseManager->getSubManager('service');
-
 		$this->_service = $orderBaseServiceManager->createItem();
 	}
 

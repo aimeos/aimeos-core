@@ -8,6 +8,7 @@
 class MShop_Plugin_Provider_Order_ProductPriceTest extends PHPUnit_Framework_TestCase
 {
 	private $_order;
+	private $_price;
 	private $_plugin;
 	private $_product;
 

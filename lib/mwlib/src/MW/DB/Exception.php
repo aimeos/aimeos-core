@@ -16,8 +16,8 @@
  */
 class MW_DB_Exception extends MW_Exception
 {
-	protected $_info = '';
-	protected $_state = '';
+	protected $_info;
+	protected $_state;
 
 
 	/**
@@ -25,9 +25,9 @@ class MW_DB_Exception extends MW_Exception
 	 *
 	 * @param string $message Error message
 	 * @param integer $state SQL error code
-	 * @param mixed $info Additional error info
+	 * @param string $info Additional error info
 	 */
-	public function __construct( $message, $state = '', $info = null )
+	public function __construct( $message, $state = '', $info = '' )
 	{
 		parent::__construct( $message );
 

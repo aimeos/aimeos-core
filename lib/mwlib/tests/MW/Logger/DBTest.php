@@ -8,6 +8,7 @@
  */
 class MW_Logger_DBTest extends MW_Unittest_Testcase
 {
+	private $_dbm;
 	private $_object;
 
 

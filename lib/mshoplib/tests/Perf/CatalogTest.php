@@ -8,6 +8,7 @@
 class Perf_CatalogTest extends MW_Unittest_Testcase
 {
 	private $_context;
+	private $_root;
 
 
 	protected function setUp()
@@ -17,7 +18,7 @@ class Perf_CatalogTest extends MW_Unittest_Testcase
 		// parser warm up so files are already parsed (same as APC is used)
 
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
-		$catalogManager->getTree( null, array( 'text', 'media' ), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$this->_root = $catalogManager->getTree( null, array( 'text', 'media' ), MW_Tree_Manager_Abstract::LEVEL_ONE );
 	}
 
 

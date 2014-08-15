@@ -114,7 +114,7 @@ class MShop_Attribute_Manager_DefaultTest extends MW_Unittest_Testcase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$typeItems = $typeManager->searchItems( $search );
 
-		if( ( $this->typeItem = reset($typeItems) ) === false ) {
+		if( ( $typeItem = reset($typeItems) ) === false ) {
 			throw new Exception('No attribute type item available in setUp()');
 		}
 
@@ -123,7 +123,7 @@ class MShop_Attribute_Manager_DefaultTest extends MW_Unittest_Testcase
 		$item->setDomain( 'tmpDomainx' );
 		$item->setCode( '106x' );
 		$item->setLabel( '106x' );
-		$item->setTypeId( $this->typeItem->getId() );
+		$item->setTypeId( $typeItem->getId() );
 		$item->setPosition( 0 );
 		$item->setStatus( 7 );
 		$this->_object->saveItem( $item );

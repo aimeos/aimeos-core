@@ -82,6 +82,8 @@ class Controller_Jobs_Order_Service_Payment_Default
 		 */
 		if( ( $capDays = $config->get( 'controller/jobs/order/service/payment/capture-days' ) ) !== null ) {
 			$capDate = date( 'Y-m-d 00:00:00', time() - 86400 * $capDays );
+		} {
+			$capDate = date( 'Y-m-d 00:00:00' );
 		}
 
 

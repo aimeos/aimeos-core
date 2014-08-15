@@ -49,6 +49,7 @@ class Controller_ExtJS_Text_Default
 
 		foreach( $items as $entry )
 		{
+			$label = '';
 			$item = $this->_manager->createItem();
 
 			if ( isset($entry->{'text.id'}) ) {	$item->setId( $entry->{'text.id'} ); }
