@@ -482,7 +482,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 	 * Adds a coupon code entered by the customer and the given product item to the basket.
 	 *
 	 * @param string $code Coupon code
-	 * @param array $products List of coupon products implementing MShop_Order_Item_Base_Product_Interface
+	 * @param MShop_Order_Item_Base_Product_Interface[] $products List of coupon products
 	 */
 	public function addCoupon( $code, array $products = array() )
 	{

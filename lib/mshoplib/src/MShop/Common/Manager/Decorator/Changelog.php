@@ -30,6 +30,6 @@ class MShop_Common_Manager_Decorator_Changelog
 		$manager->saveItem( $item, $fetch );
 		$new = $manager->getItem( $item->getId() );
 
-		$this->_getContext()->getLogger()->log( $new->toArray(), MW_Logger_Abstract::NOTICE, 'changelog' );
+		$this->_getContext()->getLogger()->log( json_encode( $new->toArray() ), MW_Logger_Abstract::NOTICE, 'changelog' );
 	}
 }

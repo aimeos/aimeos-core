@@ -24,7 +24,7 @@ abstract class MW_Container_Content_Abstract
 	/**
 	 * Initializes the CSV content object.
 	 *
-	 * @param resource|string $resource File pointer or path to the actual file
+	 * @param mixed $resource Path to the actual file
 	 * @param string $name Name of the CSV file
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */

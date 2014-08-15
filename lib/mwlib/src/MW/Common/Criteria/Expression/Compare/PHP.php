@@ -96,7 +96,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 			case '==':
 
 				$list = array();
-				foreach( $this->getValue() as $value ) {
+				foreach( (array) $this->getValue() as $value ) {
 					$list[] = $this->_createTerm( $name, $type, $value );
 				}
 				return '( ' . implode( ' || ', $list ) . ' )';
@@ -104,7 +104,7 @@ class MW_Common_Criteria_Expression_Compare_PHP extends MW_Common_Criteria_Expre
 			case '!=':
 
 				$list = array();
-				foreach( $this->getValue() as $value ) {
+				foreach( (array) $this->getValue() as $value ) {
 					$list[] = $this->_createTerm( $name, $type, $value );
 				}
 				return '( ' . implode( ' && ', $list ) . ' )';
