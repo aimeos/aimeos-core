@@ -50,35 +50,7 @@ class Controller_ExtJS_Catalog_List_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'catalog.list.id'} ) ) { $item->setId( $entry->{'catalog.list.id'} ); }
-			if( isset( $entry->{'catalog.list.domain'} ) ) { $item->setDomain( $entry->{'catalog.list.domain'} ); }
-			if( isset( $entry->{'catalog.list.parentid'} ) ) { $item->setParentId( $entry->{'catalog.list.parentid'} ); }
-			if( isset( $entry->{'catalog.list.refid'} ) ) { $item->setRefId( $entry->{'catalog.list.refid'} ); }
-			if( isset( $entry->{'catalog.list.position'} ) ) { $item->setPosition( $entry->{'catalog.list.position'} ); }
-			if( isset( $entry->{'catalog.list.status'} ) ) { $item->setStatus( $entry->{'catalog.list.status'} );	}
-			if( isset( $entry->{'catalog.list.config'} ) ) { $item->setConfig( (array) $entry->{'catalog.list.config'} ); }
-
-
-			if( isset( $entry->{'catalog.list.typeid'} ) && $entry->{'catalog.list.typeid'} != '' ) {
-				$item->setTypeId( $entry->{'catalog.list.typeid'} );
-			}
-
-			if( isset( $entry->{'catalog.list.datestart'} ) && $entry->{'catalog.list.datestart'} != '' )
-			{
-				$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.datestart'} );
-				$entry->{'catalog.list.datestart'} = $datetime;
-				$item->setDateStart( $datetime );
-			}
-
-			if( isset( $entry->{'catalog.list.dateend'} ) && $entry->{'catalog.list.dateend'} != '' )
-			{
-				$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.dateend'} );
-				$entry->{'catalog.list.dateend'} = $datetime;
-				$item->setDateEnd( $datetime );
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 
 			$domains[ $item->getDomain() ] = true;
@@ -145,6 +117,47 @@ class Controller_ExtJS_Catalog_List_Default
 			'graph' => $this->_getDomainItems( $idLists ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new catalog list item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "catalog.list" prefix
+	 * @return MShop_Common_Item_List_Interface List item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		if( isset( $entry->{'catalog.list.id'} ) ) { $item->setId( $entry->{'catalog.list.id'} ); }
+		if( isset( $entry->{'catalog.list.domain'} ) ) { $item->setDomain( $entry->{'catalog.list.domain'} ); }
+		if( isset( $entry->{'catalog.list.parentid'} ) ) { $item->setParentId( $entry->{'catalog.list.parentid'} ); }
+		if( isset( $entry->{'catalog.list.refid'} ) ) { $item->setRefId( $entry->{'catalog.list.refid'} ); }
+		if( isset( $entry->{'catalog.list.position'} ) ) { $item->setPosition( $entry->{'catalog.list.position'} ); }
+		if( isset( $entry->{'catalog.list.status'} ) ) { $item->setStatus( $entry->{'catalog.list.status'} );	}
+		if( isset( $entry->{'catalog.list.config'} ) ) { $item->setConfig( (array) $entry->{'catalog.list.config'} ); }
+
+
+		if( isset( $entry->{'catalog.list.typeid'} ) && $entry->{'catalog.list.typeid'} != '' ) {
+			$item->setTypeId( $entry->{'catalog.list.typeid'} );
+		}
+
+		if( isset( $entry->{'catalog.list.datestart'} ) && $entry->{'catalog.list.datestart'} != '' )
+		{
+			$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.datestart'} );
+			$entry->{'catalog.list.datestart'} = $datetime;
+			$item->setDateStart( $datetime );
+		}
+
+		if( isset( $entry->{'catalog.list.dateend'} ) && $entry->{'catalog.list.dateend'} != '' )
+		{
+			$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.dateend'} );
+			$entry->{'catalog.list.dateend'} = $datetime;
+			$item->setDateEnd( $datetime );
+		}
+
+		return $item;
 	}
 
 
