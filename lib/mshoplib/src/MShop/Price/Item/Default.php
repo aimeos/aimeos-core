@@ -296,7 +296,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Sets the label of the item
 	 *
-	 * @param integer $label Label of the item
+	 * @param string $label Label of the item
 	 */
 	public function setLabel( $label )
 	{
@@ -329,7 +329,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @return Associative list of item properties and their values
+	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray()
 	{
@@ -354,7 +354,7 @@ class MShop_Price_Item_Default
 	/**
 	 * Tests if the price is within the requirements.
 	 *
-	 * @param numeric $value Monetary value
+	 * @param integer|double $value Monetary value
 	 */
 	protected function _checkPrice( $value )
 	{
