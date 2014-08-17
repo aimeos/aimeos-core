@@ -165,7 +165,7 @@ interface MShop_Order_Item_Base_Interface extends MW_Observer_Publisher_Interfac
 	 * Adds a coupon code entered by the customer and the given product item to the basket.
 	 *
 	 * @param string $code Coupon code
-	 * @param MShop_Order_Base_Product_Interface[] $products List of coupon products
+	 * @param MShop_Order_Item_Base_Product_Interface[] $products List of coupon products
 	 */
 	public function addCoupon( $code, array $products = array() );
 
