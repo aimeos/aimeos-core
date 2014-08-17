@@ -606,6 +606,8 @@ class MShop_Locale_Manager_Default
 		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
 	{
 		// Try to find exact match
+		$search = $this->createSearch( $active );
+
 		$expr = array( $search->compare( '==', 'locale.siteid', $sitePath ) );
 
 		if( !empty( $lang ) ) {
