@@ -57,7 +57,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 
 		foreach( $orderProducts as $pos => $item )
 		{
-			if( $item->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE != 0 ) {
+			if( $item->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) {
 				continue;
 			}
 
@@ -95,8 +95,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			if( ( $orderPosPrice->getValue() !== $price->getValue()
 				|| $orderPosPrice->getCosts() !== $price->getCosts()
 				|| $orderPosPrice->getTaxrate() !== $price->getTaxrate() )
-				&& $orderProduct->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
-			{
+			) {
 				$orderProduct->setPrice( $price );
 
 				$order->deleteProduct( $pos );
