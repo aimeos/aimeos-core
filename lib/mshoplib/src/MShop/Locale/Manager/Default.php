@@ -576,7 +576,7 @@ class MShop_Locale_Manager_Default
 			return $result;
 		}
 
-		$result = $this->_bootstrapClosest( $siteId, $lang, $currency, $active, $siteItem, $sitePath, $siteSubTree );
+		$result = $this->_bootstrapClosest( $siteId, $lang, $active, $siteItem, $sitePath, $siteSubTree );
 
 		if( $result !== false ) {
 			return $result;
@@ -658,14 +658,13 @@ class MShop_Locale_Manager_Default
 	 *
 	 * @param string $siteId Site ID
 	 * @param string $lang Language code
-	 * @param string $currency Currency code
 	 * @param boolean $active Flag to get only active items
 	 * @param MShop_Locale_Item_Site_Interface Site item
 	 * @param array $sitePath List of site IDs up to the root site
 	 * @param array $siteSubTree List of site IDs below and including the current site
 	 * @return MShop_Locale_Item_Interface|boolean Locale item for the given parameters or false if no item was found
 	 */
-	private function _bootstrapClosest( $siteId, $lang, $currency, $active,
+	private function _bootstrapClosest( $siteId, $lang, $active,
 		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
 	{
 		// Try to find the best matching locale
