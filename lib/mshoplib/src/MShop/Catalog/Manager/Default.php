@@ -814,11 +814,11 @@ class MShop_Catalog_Manager_Default
 	 * Updates the usage information of a node.
 	 *
 	 * @param integer $id Id of the record
-	 * @param MShop_Common_Item_Interface $item Catalog item
+	 * @param MShop_Catalog_Item_Interface $item Catalog item
 	 * @param boolean $case True if the record shoud be added or false for an update
 	 *
 	 */
-	private function _updateUsage( $id, MShop_Common_Item_Interface $item, $case = false )
+	private function _updateUsage( $id, MShop_Catalog_Item_Interface $item, $case = false )
 	{
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->_getContext();

@@ -14,7 +14,8 @@
  * @package MShop
  * @subpackage Catalog
  */
-interface MShop_Catalog_Item_Interface extends MShop_Common_Item_Interface
+interface MShop_Catalog_Item_Interface
+	extends MShop_Common_Item_ListRef_Interface
 {
 	/**
 	 * Returns the name of the item.

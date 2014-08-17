@@ -16,7 +16,7 @@
  */
 class MShop_Catalog_Item_Default
 	extends MShop_Common_Item_ListRef_Abstract
-	implements MShop_Catalog_Item_Interface, MShop_Common_Item_ListRef_Interface
+	implements MShop_Catalog_Item_Interface
 {
 	private $_node;
 	private $_children;
@@ -168,7 +168,7 @@ class MShop_Catalog_Item_Default
 	/**
 	 * Sets the new status of the item.
 	 *
-	 * @param boolean $status True if enabled, false if not
+	 * @param integer $status True if enabled, false if not
 	 */
 	public function setStatus( $status )
 	{
