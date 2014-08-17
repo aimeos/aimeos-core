@@ -50,8 +50,8 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
 	 * @return void
 	 */
-	public function addProduct( $prodid, $quantity = 1, $options = array(), $variantAttributeIds = array(),
-		$configAttributeIds = array(), $hiddenAttributeIds = array(), $warehouse = 'default' );
+	public function addProduct( $prodid, $quantity = 1, array $options = array(), array $variantAttributeIds = array(),
+		array $configAttributeIds = array(), array $hiddenAttributeIds = array(), $warehouse = 'default' );
 
 
 	/**
@@ -71,7 +71,7 @@ interface Controller_Frontend_Basket_Interface extends Controller_Frontend_Commo
 	 * @param array $configAttributeCodes Codes of the product config attributes that should be REMOVED
 	 * @return void
 	 */
-	public function editProduct( $position, $quantity, $configAttributeCodes = array() );
+	public function editProduct( $position, $quantity, array $configAttributeCodes = array() );
 
 
 	/**

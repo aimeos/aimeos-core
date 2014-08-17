@@ -79,8 +79,8 @@ class Controller_Frontend_Basket_Default
 	 * @param string $warehouse Unique code of the warehouse to deliver the products from
 	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
 	 */
-	public function addProduct( $prodid, $quantity = 1, $options = array(), $variantAttributeIds = array(),
-		$configAttributeIds = array(), $hiddenAttributeIds = array(), $warehouse = 'default' )
+	public function addProduct( $prodid, $quantity = 1, array $options = array(), array $variantAttributeIds = array(),
+		array $configAttributeIds = array(), array $hiddenAttributeIds = array(), $warehouse = 'default' )
 	{
 		$this->_checkCategory( $prodid );
 
@@ -208,10 +208,10 @@ class Controller_Frontend_Basket_Default
 	 * @param integer $quantity New quantiy of the product item
 	 * @param array $options Possible options are: 'stock'=>true|false
 	 * 	The 'stock'=>false option allows adding products without being in stock.
-	 * @param array $configAttributeCodes Codes of the product config attributes that should be REMOVED
+	 * @param string[] $configAttributeCodes Codes of the product config attributes that should be REMOVED
 	 */
-	public function editProduct( $position, $quantity, $options = array(),
-		$configAttributeCodes = array() )
+	public function editProduct( $position, $quantity, array $options = array(),
+		array $configAttributeCodes = array() )
 	{
 		$product = $this->_basket->getProduct( $position );
 		$product->setQuantity( $quantity ); // Enforce check immediately
