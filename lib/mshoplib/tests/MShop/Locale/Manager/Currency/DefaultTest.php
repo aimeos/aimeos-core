@@ -37,7 +37,7 @@ class MShop_Locale_Manager_Currency_DefaultTest extends MW_Unittest_Testcase
 		// insert case
 		$item = $this->_object->createItem();
 		$item->setLabel( 'new name' );
-		$item->setStatus( true );
+		$item->setStatus( 1 );
 		$item->setCode( 'XXX' );
 
 		$this->_object->saveItem( $item );
