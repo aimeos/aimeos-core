@@ -130,31 +130,51 @@ class Controller_ExtJS_Catalog_List_Default
 	{
 		$item = $this->_manager->createItem();
 
-		if( isset( $entry->{'catalog.list.id'} ) ) { $item->setId( $entry->{'catalog.list.id'} ); }
-		if( isset( $entry->{'catalog.list.domain'} ) ) { $item->setDomain( $entry->{'catalog.list.domain'} ); }
-		if( isset( $entry->{'catalog.list.parentid'} ) ) { $item->setParentId( $entry->{'catalog.list.parentid'} ); }
-		if( isset( $entry->{'catalog.list.refid'} ) ) { $item->setRefId( $entry->{'catalog.list.refid'} ); }
-		if( isset( $entry->{'catalog.list.position'} ) ) { $item->setPosition( $entry->{'catalog.list.position'} ); }
-		if( isset( $entry->{'catalog.list.status'} ) ) { $item->setStatus( $entry->{'catalog.list.status'} );	}
-		if( isset( $entry->{'catalog.list.config'} ) ) { $item->setConfig( (array) $entry->{'catalog.list.config'} ); }
-
-
-		if( isset( $entry->{'catalog.list.typeid'} ) && $entry->{'catalog.list.typeid'} != '' ) {
-			$item->setTypeId( $entry->{'catalog.list.typeid'} );
-		}
-
-		if( isset( $entry->{'catalog.list.datestart'} ) && $entry->{'catalog.list.datestart'} != '' )
+		foreach( (array) $entry as $name => $value )
 		{
-			$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.datestart'} );
-			$entry->{'catalog.list.datestart'} = $datetime;
-			$item->setDateStart( $datetime );
-		}
-
-		if( isset( $entry->{'catalog.list.dateend'} ) && $entry->{'catalog.list.dateend'} != '' )
-		{
-			$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.dateend'} );
-			$entry->{'catalog.list.dateend'} = $datetime;
-			$item->setDateEnd( $datetime );
+			switch( $name )
+			{
+				case 'catalog.list.id':
+					$item->setId( $entry->{'catalog.list.id'} );
+					break;
+				case 'catalog.list.domain':
+					$item->setDomain( $entry->{'catalog.list.domain'} );
+					break;
+				case 'catalog.list.parentid':
+					$item->setParentId( $entry->{'catalog.list.parentid'} );
+					break;
+				case 'catalog.list.refid':
+					$item->setRefId( $entry->{'catalog.list.refid'} );
+					break;
+				case 'catalog.list.position':
+					$item->setPosition( $entry->{'catalog.list.position'} );
+					break;
+				case 'catalog.list.status':
+					$item->setStatus( $entry->{'catalog.list.status'} );
+					break;
+				case 'catalog.list.config':
+					$item->setConfig( $entry->{'catalog.list.config'} );
+					break;
+				case 'catalog.list.typeid':
+					$item->setTypeId( $entry->{'catalog.list.typeid'} );
+					break;
+				case 'catalog.list.datestart':
+					if( $entry->{'catalog.list.datestart'} != '' )
+					{
+						$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.datestart'} );
+						$entry->{'catalog.list.datestart'} = $datetime;
+						$item->setDateStart( $datetime );
+					}
+					break;
+				case 'catalog.list.dateend':
+					if( $entry->{'catalog.list.dateend'} != '' )
+					{
+						$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.dateend'} );
+						$entry->{'catalog.list.dateend'} = $datetime;
+						$item->setDateEnd( $datetime );
+					}
+					break;
+			}
 		}
 
 		return $item;
