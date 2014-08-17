@@ -278,82 +278,21 @@ class Client_Html_Basket_Standard_Default
 				'variant' => $view->config( 'client/html/basket/require-variant', $reqvariant ),
 			);
 
-			$controller = Controller_Frontend_Factory::createController( $context, 'basket' );
-
 			switch( $view->param( 'b-action' ) )
 			{
 				case 'add':
-
-					$this->_clearCached();
-					$products = (array) $view->param( 'b-prod', array() );
-
-					if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
-					{
-						$products[] = array(
-							'prod-id' => $prodid,
-							'quantity' => $view->param( 'b-quantity', 1 ),
-							'attrvar-id' => array_filter( (array) $view->param( 'b-attrvar-id', array() ) ),
-							'attrconf-id' => array_filter( (array) $view->param( 'b-attrconf-id', array() ) ),
-							'attrhide-id' => array_filter( (array) $view->param( 'b-attrhide-id', array() ) ),
-							'warehouse' => $view->param( 'b-warehouse', 'default' ),
-						);
-					}
-
-					foreach( $products as $values )
-					{
-						$controller->addProduct(
-							( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
-							( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
-							$options,
-							( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
-							( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
-							( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() ),
-							( isset( $values['warehouse'] ) ? $values['warehouse'] : 'default' )
-						);
-					}
-
+					$this->_addProducts( $view, $options );
 					break;
-
 				case 'delete':
-
-					$this->_clearCached();
-					$products = (array) $view->param( 'b-position', array() );
-
-					foreach( $products as $position ) {
-						$controller->deleteProduct( $position );
-					}
-
+					$this->_deleteProducts( $view );
 					break;
-
 				default:
-
-					$this->_clearCached();
-					$products = (array) $view->param( 'b-prod', array() );
-
-					if( ( $positon = $view->param( 'b-position', null ) ) !== null )
-					{
-						$products[] = array(
-							'position' => $positon,
-							'quantity' => $view->param( 'b-quantity', 1 ),
-							'attrconf-code' => array_filter( (array) $view->param( 'b-attrconf-code', array() ) )
-						);
-					}
-
-					foreach( $products as $values )
-					{
-						$controller->editProduct(
-							( isset( $values['position'] ) ? $values['position'] : null ),
-							( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
-							$options,
-							( isset( $values['attrconf-code'] ) ? array_filter( (array) $values['attrconf-code'] ) : array() )
-						);
-					}
-
-					break;
+					$this->_editProducts( $view, $options );
 			}
 
 			parent::process();
 
+			$controller = Controller_Frontend_Factory::createController( $context, 'basket' );
 			$controller->get()->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
 		}
 		catch( Client_Html_Exception $e )
@@ -428,5 +367,94 @@ class Client_Html_Basket_Standard_Default
 		}
 
 		return $this->_cache;
+	}
+
+
+	/**
+	 * Adds the products specified by the view parameters to the basket.
+	 *
+	 * @param MW_View_Interface $view View object
+	 * @param array $options List of options for addProducts() in basket controller
+	 */
+	protected function _addProducts( MW_View_Interface $view, array $options )
+	{
+		$this->_clearCached();
+		$products = (array) $view->param( 'b-prod', array() );
+		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+
+		if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
+		{
+			$products[] = array(
+				'prod-id' => $prodid,
+				'quantity' => $view->param( 'b-quantity', 1 ),
+				'attrvar-id' => array_filter( (array) $view->param( 'b-attrvar-id', array() ) ),
+				'attrconf-id' => array_filter( (array) $view->param( 'b-attrconf-id', array() ) ),
+				'attrhide-id' => array_filter( (array) $view->param( 'b-attrhide-id', array() ) ),
+				'warehouse' => $view->param( 'b-warehouse', 'default' ),
+			);
+		}
+
+		foreach( $products as $values )
+		{
+			$controller->addProduct(
+				( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
+				( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
+				$options,
+				( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
+				( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
+				( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() ),
+				( isset( $values['warehouse'] ) ? $values['warehouse'] : 'default' )
+			);
+		}
+	}
+
+
+	/**
+	 * Removes the products specified by the view parameters from the basket.
+	 *
+	 * @param MW_View_Interface $view View object
+	 */
+	protected function _deleteProducts( MW_View_Interface $view )
+	{
+		$this->_clearCached();
+		$products = (array) $view->param( 'b-position', array() );
+		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+
+		foreach( $products as $position ) {
+			$controller->deleteProduct( $position );
+		}
+	}
+
+
+	/**
+	 * Edits the products specified by the view parameters to the basket.
+	 *
+	 * @param MW_View_Interface $view View object
+	 * @param array $options List of options for editProducts() in basket controller
+	 */
+	protected function _editProducts( MW_View_Interface $view, array $options )
+	{
+		$this->_clearCached();
+		$products = (array) $view->param( 'b-prod', array() );
+		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
+
+		if( ( $positon = $view->param( 'b-position', null ) ) !== null )
+		{
+			$products[] = array(
+				'position' => $positon,
+				'quantity' => $view->param( 'b-quantity', 1 ),
+				'attrconf-code' => array_filter( (array) $view->param( 'b-attrconf-code', array() ) )
+			);
+		}
+
+		foreach( $products as $values )
+		{
+			$controller->editProduct(
+				( isset( $values['position'] ) ? $values['position'] : null ),
+				( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
+				$options,
+				( isset( $values['attrconf-code'] ) ? array_filter( (array) $values['attrconf-code'] ) : array() )
+			);
+		}
 	}
 }
