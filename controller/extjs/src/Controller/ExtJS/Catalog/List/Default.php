@@ -134,30 +134,14 @@ class Controller_ExtJS_Catalog_List_Default
 		{
 			switch( $name )
 			{
-				case 'catalog.list.id':
-					$item->setId( $entry->{'catalog.list.id'} );
-					break;
-				case 'catalog.list.domain':
-					$item->setDomain( $entry->{'catalog.list.domain'} );
-					break;
-				case 'catalog.list.parentid':
-					$item->setParentId( $entry->{'catalog.list.parentid'} );
-					break;
-				case 'catalog.list.refid':
-					$item->setRefId( $entry->{'catalog.list.refid'} );
-					break;
-				case 'catalog.list.position':
-					$item->setPosition( $entry->{'catalog.list.position'} );
-					break;
-				case 'catalog.list.status':
-					$item->setStatus( $entry->{'catalog.list.status'} );
-					break;
-				case 'catalog.list.config':
-					$item->setConfig( $entry->{'catalog.list.config'} );
-					break;
-				case 'catalog.list.typeid':
-					$item->setTypeId( $entry->{'catalog.list.typeid'} );
-					break;
+				case 'catalog.list.id': $item->setId( $entry->{'catalog.list.id'} ); break;
+				case 'catalog.list.domain': $item->setDomain( $entry->{'catalog.list.domain'} ); break;
+				case 'catalog.list.parentid': $item->setParentId( $entry->{'catalog.list.parentid'} ); break;
+				case 'catalog.list.refid': $item->setRefId( $entry->{'catalog.list.refid'} ); break;
+				case 'catalog.list.position': $item->setPosition( $entry->{'catalog.list.position'} ); break;
+				case 'catalog.list.status': $item->setStatus( $entry->{'catalog.list.status'} ); break;
+				case 'catalog.list.config': $item->setConfig( $entry->{'catalog.list.config'} ); break;
+				case 'catalog.list.typeid': $item->setTypeId( $entry->{'catalog.list.typeid'} ); break;
 				case 'catalog.list.datestart':
 					if( $entry->{'catalog.list.datestart'} != '' )
 					{
