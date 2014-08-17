@@ -26,7 +26,7 @@ class MW_Config_Array
 	 * Initialize config object
 	 *
 	 * @param array $config Configuration array
-	 * @param string[] $paths Filesystem path or list of paths to the configuration files
+	 * @param string|array $paths Filesystem path or list of paths to the configuration files
 	 */
 	public function __construct( $config = array(), $paths = array() )
 	{

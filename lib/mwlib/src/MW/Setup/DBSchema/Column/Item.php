@@ -33,7 +33,8 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 	 * @param string $type Type of the column
 	 * @param integer $length Length of the column if the column type is of variable length
 	 * @param string $default Default value if not specified
-	 * @param boolean $nullable If null values are allowed
+	 * @param string $nullable "YES" if null values are allowed, "NO" if not
+	 * @param string $collation Used collation for text type columns
 	 */
 	public function __construct( $tablename, $name, $type, $length, $default, $nullable, $collation )
 	{
