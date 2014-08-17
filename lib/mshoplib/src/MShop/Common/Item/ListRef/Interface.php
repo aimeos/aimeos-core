@@ -15,6 +15,7 @@
  * @subpackage Common
  */
 interface MShop_Common_Item_ListRef_Interface
+	extends MShop_Common_Item_Interface
 {
 	/**
 	 * Returns the list items attached, optionally filtered by domain and list type.

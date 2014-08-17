@@ -461,7 +461,6 @@ class Controller_Frontend_Basket_Default
 		$context = $this->_getContext();
 		$session = $context->getSession();
 		$locale = $this->_basket->getLocale();
-		$logger = $context->getLogger();
 
 		$localeStr = $session->get( 'arcavias/basket/locale' );
 		$localeKey = $locale->getSite()->getCode() . '|' . $locale->getLanguageId() . '|' . $locale->getCurrencyId();
@@ -482,10 +481,10 @@ class Controller_Frontend_Basket_Default
 			$manager = MShop_Order_Manager_Factory::createManager( $context )->getSubManager( 'base' );
 			$basket = $manager->getSession();
 
-			$errors = $this->_copyAddresses( $basket->getAddresses(), $errors, $localeKey );
-			$errors = $this->_copyServices( $basket->getServices(), $errors, $localeKey );
-			$errors = $this->_copyProducts( $basket->getProducts(), $errors, $localeKey );
-			$errors = $this->_copyCoupons( $basket->getCoupons(), $errors, $localeKey );
+			$errors = $this->_copyAddresses( $basket, $errors, $localeKey );
+			$errors = $this->_copyServices( $basket, $errors );
+			$errors = $this->_copyProducts( $basket, $errors, $localeKey );
+			$errors = $this->_copyCoupons( $basket, $errors, $localeKey );
 
 			$manager->setSession( $basket );
 		}
@@ -506,15 +505,14 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Migrates the addresses from the old basket to the current one.
 	 *
-	 * @param MShop_Order_Item_Base_Address_Interface[] $addresses Associative
-	 * 	list of address types as key and order address items as values
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @param array $errors Associative list of previous errors
 	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function _copyAddresses( array $addresses, array $errors, $localeKey )
+	private function _copyAddresses( MShop_Order_Item_Base_Interface $basket, array $errors, $localeKey )
 	{
-		foreach( $addresses as $type => $item )
+		foreach( $basket->getAddresses() as $type => $item )
 		{
 			try
 			{
@@ -537,15 +535,14 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Migrates the coupons from the old basket to the current one.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface[] $coupons Associative
-	 * 	list of coupon codes as key and order product items as values
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @param array $errors Associative list of previous errors
 	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function _copyCoupons( array $coupons, array $errors, $localeKey )
+	private function _copyCoupons( MShop_Order_Item_Base_Interface $basket, array $errors, $localeKey )
 	{
-		foreach( $coupons as $code => $list )
+		foreach( $basket->getCoupons() as $code => $list )
 		{
 			try
 			{
@@ -568,15 +565,14 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Migrates the products from the old basket to the current one.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface[] $products Associative
-	 * 	list of product types as key and order product items as values
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @param array $errors Associative list of previous errors
 	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function _copyProducts( array $products, array $errors, $localeKey )
+	private function _copyProducts( MShop_Order_Item_Base_Interface $basket, array $errors, $localeKey )
 	{
-		foreach( $products as $pos => $product )
+		foreach( $basket->getProducts() as $pos => $product )
 		{
 			if( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) {
 				continue;
@@ -619,15 +615,13 @@ class Controller_Frontend_Basket_Default
 	/**
 	 * Migrates the services from the old basket to the current one.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Interface[] $services Associative
-	 * 	list of service types as key and order service items as values
+	 * @param MShop_Order_Item_Base_Interface $basket Basket object
 	 * @param array $errors Associative list of previous errors
-	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function _copyServices( array $services, array $errors, $localeKey )
+	private function _copyServices( MShop_Order_Item_Base_Interface $basket, array $errors )
 	{
-		foreach( $services as $type => $item )
+		foreach( $basket->getServices() as $type => $item )
 		{
 			try
 			{
