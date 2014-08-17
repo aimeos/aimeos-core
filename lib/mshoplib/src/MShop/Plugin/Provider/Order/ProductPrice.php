@@ -42,10 +42,6 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
-		$context = $this->_getContext();
-
-		$context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
-
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) ) {
 			throw new MShop_Plugin_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
@@ -56,10 +52,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		}
 
 
-		$productManager = MShop_Factory::createManager( $context, 'product' );
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
-
-		$attrIds = $attributes = $prodCodes = $prodMap = $changedProducts = array();
+		$attrIds = $prodCodes = $changedProducts = array();
 		$orderProducts = $order->getProducts();
 
 		foreach( $orderProducts as $pos => $item )
@@ -79,36 +72,8 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		}
 
 
-		if( !empty( $attrIds ) )
-		{
-			$attrManager = MShop_Factory::createManager( $context, 'attribute' );
-
-			$search = $attrManager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'attribute.id', array_keys( $attrIds ) ),
-				$search->getConditions(),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$attributes = $attrManager->searchItems( $search, array( 'price' ) );
-		}
-
-
-		if( !empty( $prodCodes ) )
-		{
-			$search = $productManager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'product.code', $prodCodes ),
-				$search->getConditions(),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$products = $productManager->searchItems( $search, array( 'price' ) );
-
-			foreach( $products as $item ) {
-				$prodMap[ $item->getCode() ] = $item;
-			}
-		}
+		$attributes = $this->_getAttributes( array_keys( $attrIds ) );
+		$prodMap = $this->_getProducts( $prodCodes );
 
 
 		foreach( $orderProducts as $pos => $orderProduct )
@@ -118,46 +83,14 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			if( $orderProduct->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE != 0 ) {
 				continue;
 			}
+
 			// fetch prices of articles/sub-products
 			if( isset( $prodMap[ $orderProduct->getProductCode() ] ) ) {
 				$refPrices = $prodMap[ $orderProduct->getProductCode() ]->getRefItems( 'price', 'default', 'default' );
 			}
 
-			// fetch prices of selection/parent products
-			if( empty( $refPrices ) )
-			{
-				$product = $productManager->getItem( $orderProduct->getProductId(), array( 'price' ) );
-				$refPrices = $product->getRefItems( 'price', 'default', 'default' );
-			}
-
-			if( empty( $refPrices ) )
-			{
-				$pid = $orderProduct->getProductId();
-				$pcode = $orderProduct->getProductCode();
-				$codes = array( 'product' => array( $pos => 'product.price' ) );
-				$msg = sprintf( 'No price for product ID "%1$s" or product code "%2$s" available', $pid, $pcode );
-
-				throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $codes );
-			}
-
-			$price = $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
-
-			// add prices of product attributes to compute the end price for comparison
-			foreach( $orderProduct->getAttributes() as $orderAttribute )
-			{
-				$attrPrices = array();
-				$attrId = $orderAttribute->getAttributeId();
-
-				if( isset( $attributes[$attrId] ) ) {
-					$attrPrices = $attributes[$attrId]->getRefItems( 'price', 'default', 'default' );
-				}
-
-				if( !empty( $attrPrices ) ) {
-					$price->addItem( $priceManager->getLowestPrice( $attrPrices, $orderProduct->getQuantity() ) );
-				}
-			}
-
 			$orderPosPrice = $orderProduct->getPrice();
+			$price = $this->_getPrice( $orderProduct, $refPrices, $attributes );
 
 			if( ( $orderPosPrice->getValue() !== $price->getValue()
 				|| $orderPosPrice->getCosts() !== $price->getCosts()
@@ -181,5 +114,114 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Returns the attribute items for the given IDs.
+	 *
+	 * @param array $ids List of attribute IDs
+	 * @return MShop_Attribute_Item_Interface[] List of attribute items
+	 */
+	protected function _getAttributes( array $ids )
+	{
+		if( empty( $ids ) ) {
+			return array();
+		}
+
+		$attrManager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+
+		$search = $attrManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'attribute.id', $ids ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		return $attrManager->searchItems( $search, array( 'price' ) );
+	}
+
+
+	/**
+	 * Returns the product items for the given product codes.
+	 *
+	 * @param string[] $prodCodes Product codes
+	 */
+	protected function _getProducts( array $prodCodes )
+	{
+		if( empty( $prodCodes ) ) {
+			return array();
+		}
+
+		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+
+		$search = $productManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.code', $prodCodes ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$products = $productManager->searchItems( $search, array( 'price' ) );
+
+		$prodMap = array();
+
+		foreach( $products as $item ) {
+			$prodMap[ $item->getCode() ] = $item;
+		}
+
+		return $prodMap;
+	}
+
+
+	/**
+	 * Returns the actual price for the given order product.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $orderProduct Ordered product
+	 * @param array $refPrices Prices associated to the original product
+	 * @param array $attributes Attribute items with prices
+	 * @return MShop_Price_Item_Interface Price item including the calculated price
+	 */
+	protected function _getPrice( MShop_Order_Item_Base_Product_Interface $orderProduct, array $refPrices, array $attributes )
+	{
+		$context = $this->_getContext();
+
+		// fetch prices of selection/parent products
+		if( empty( $refPrices ) )
+		{
+			$productManager = MShop_Factory::createManager( $context, 'product' );
+			$product = $productManager->getItem( $orderProduct->getProductId(), array( 'price' ) );
+			$refPrices = $product->getRefItems( 'price', 'default', 'default' );
+		}
+
+		if( empty( $refPrices ) )
+		{
+			$pid = $orderProduct->getProductId();
+			$pcode = $orderProduct->getProductCode();
+			$codes = array( 'product' => array( $pos => 'product.price' ) );
+			$msg = sprintf( 'No price for product ID "%1$s" or product code "%2$s" available', $pid, $pcode );
+
+			throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $codes );
+		}
+
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$price = $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
+
+		// add prices of product attributes to compute the end price for comparison
+		foreach( $orderProduct->getAttributes() as $orderAttribute )
+		{
+			$attrPrices = array();
+			$attrId = $orderAttribute->getAttributeId();
+
+			if( isset( $attributes[$attrId] ) ) {
+				$attrPrices = $attributes[$attrId]->getRefItems( 'price', 'default', 'default' );
+			}
+
+			if( !empty( $attrPrices ) ) {
+				$price->addItem( $priceManager->getLowestPrice( $attrPrices, $orderProduct->getQuantity() ) );
+			}
+		}
+
+		return $price;
 	}
 }

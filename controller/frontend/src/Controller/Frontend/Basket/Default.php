@@ -547,86 +547,10 @@ class Controller_Frontend_Basket_Default
 			$manager = MShop_Order_Manager_Factory::createManager( $context )->getSubManager( 'base' );
 			$basket = $manager->getSession();
 
-			foreach( $basket->getAddresses() as $type => $item )
-			{
-				try
-				{
-					$this->setAddress( $type, $item->toArray() );
-					$basket->deleteAddress( $type );
-				}
-				catch( Exception $e )
-				{
-					$str = 'Error migrating address with type "%1$s" in basket to locale "%2$s": %3$s';
-					$logger->log( sprintf( $str, $type, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
-					$errors['address'][$type] = $e->getMessage();
-				}
-			}
-
-			foreach( $basket->getServices() as $type => $item )
-			{
-				try
-				{
-					$attributes = array();
-
-					foreach( $item->getAttributes() as $attrItem ) {
-						$attributes[ $attrItem->getCode() ] = $attrItem->getValue();
-					}
-
-					$this->setService( $type, $item->getServiceId(), $attributes );
-					$basket->deleteService( $type );
-				}
-				catch( Exception $e ) { ; } // Don't notify the user as appropriate services can be added automatically
-			}
-
-			foreach( $basket->getProducts() as $pos => $product )
-			{
-				if( $product->getFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) ) {
-					continue;
-				}
-
-				try
-				{
-					$attrIds = array();
-
-					foreach( $product->getAttributes() as $attrItem ) {
-						$attrIds[ $attrItem->getType() ][] = $attrItem->getAttributeId();
-					}
-
-					$this->addProduct(
-						$product->getProductId(),
-						$product->getQuantity(),
-						array(),
-						( isset( $attrIds['variant'] ) ? $attrIds['variant'] : array() ),
-						( isset( $attrIds['config'] ) ? $attrIds['config'] : array() ),
-						( isset( $attrIds['hidden'] ) ? $attrIds['hidden'] : array() ),
-						$product->getWarehouseCode()
-					);
-
-					$basket->deleteProduct( $pos );
-				}
-				catch( Exception $e )
-				{
-					$code = $product->getProductCode();
-					$str = 'Error migrating product with code "%1$s" in basket to locale "%2$s": %3$s';
-					$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
-					$errors['product'][$pos] = $e->getMessage();
-				}
-			}
-
-			foreach( $basket->getCoupons() as $code => $list )
-			{
-				try
-				{
-					$this->addCoupon( $code );
-					$basket->deleteCoupon( $code, true );
-				}
-				catch( Exception $e )
-				{
-					$str = 'Error migrating coupon with code "%1$s" in basket to locale "%2$s": %3$s';
-					$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
-					$errors['coupon'][$code] = $e->getMessage();
-				}
-			}
+			$errors = $this->_copyAddresses( $basket->getAddresses(), $errors, $localeKey );
+			$errors = $this->_copyServices( $basket->getServices(), $errors, $localeKey );
+			$errors = $this->_copyProducts( $basket->getProducts(), $errors, $localeKey );
+			$errors = $this->_copyCoupons( $basket->getCoupons(), $errors, $localeKey );
 
 			$manager->setSession( $basket );
 		}
@@ -641,6 +565,150 @@ class Controller_Frontend_Basket_Default
 			);
 			throw new Controller_Frontend_Basket_Exception( $msg, 0, null, $errors );
 		}
+	}
+
+
+	/**
+	 * Migrates the addresses from the old basket to the current one.
+	 *
+	 * @param MShop_Order_Item_Base_Address_Interface[] $addresses Associative
+	 * 	list of address types as key and order address items as values
+	 * @param array $errors Associative list of previous errors
+	 * @param string $localeKey Unique identifier of the site, language and currency
+	 * @return array Associative list of errors occured
+	 */
+	private function _copyAddresses( array $addresses, array $errors, $localeKey )
+	{
+		foreach( $addresses as $type => $item )
+		{
+			try
+			{
+				$this->setAddress( $type, $item->toArray() );
+				$basket->deleteAddress( $type );
+			}
+			catch( Exception $e )
+			{
+				$logger = $this->_getContext()->getLogger();
+				$str = 'Error migrating address with type "%1$s" in basket to locale "%2$s": %3$s';
+				$logger->log( sprintf( $str, $type, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
+				$errors['address'][$type] = $e->getMessage();
+			}
+		}
+
+		return $errors;
+	}
+
+
+	/**
+	 * Migrates the coupons from the old basket to the current one.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface[] $coupons Associative
+	 * 	list of coupon codes as key and order product items as values
+	 * @param array $errors Associative list of previous errors
+	 * @param string $localeKey Unique identifier of the site, language and currency
+	 * @return array Associative list of errors occured
+	 */
+	private function _copyCoupons( array $coupons, array $errors, $localeKey )
+	{
+		foreach( $coupons as $code => $list )
+		{
+			try
+			{
+				$this->addCoupon( $code );
+				$basket->deleteCoupon( $code, true );
+			}
+			catch( Exception $e )
+			{
+				$logger = $this->_getContext()->getLogger();
+				$str = 'Error migrating coupon with code "%1$s" in basket to locale "%2$s": %3$s';
+				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
+				$errors['coupon'][$code] = $e->getMessage();
+			}
+		}
+
+		return $errors;
+	}
+
+
+	/**
+	 * Migrates the products from the old basket to the current one.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface[] $products Associative
+	 * 	list of product types as key and order product items as values
+	 * @param array $errors Associative list of previous errors
+	 * @param string $localeKey Unique identifier of the site, language and currency
+	 * @return array Associative list of errors occured
+	 */
+	private function _copyProducts( array $products, array $errors, $localeKey )
+	{
+		foreach( $products as $pos => $product )
+		{
+			if( $product->getFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) ) {
+				continue;
+			}
+
+			try
+			{
+				$attrIds = array();
+
+				foreach( $product->getAttributes() as $attrItem ) {
+					$attrIds[ $attrItem->getType() ][] = $attrItem->getAttributeId();
+				}
+
+				$this->addProduct(
+					$product->getProductId(),
+					$product->getQuantity(),
+					array(),
+					( isset( $attrIds['variant'] ) ? $attrIds['variant'] : array() ),
+					( isset( $attrIds['config'] ) ? $attrIds['config'] : array() ),
+					( isset( $attrIds['hidden'] ) ? $attrIds['hidden'] : array() ),
+					$product->getWarehouseCode()
+				);
+
+				$basket->deleteProduct( $pos );
+			}
+			catch( Exception $e )
+			{
+				$code = $product->getProductCode();
+				$logger = $this->_getContext()->getLogger();
+				$str = 'Error migrating product with code "%1$s" in basket to locale "%2$s": %3$s';
+				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
+				$errors['product'][$pos] = $e->getMessage();
+			}
+		}
+
+		return $errors;
+	}
+
+
+	/**
+	 * Migrates the services from the old basket to the current one.
+	 *
+	 * @param MShop_Order_Item_Base_Service_Interface[] $services Associative
+	 * 	list of service types as key and order service items as values
+	 * @param array $errors Associative list of previous errors
+	 * @param string $localeKey Unique identifier of the site, language and currency
+	 * @return array Associative list of errors occured
+	 */
+	private function _copyServices( array $services, array $errors, $localeKey )
+	{
+		foreach( $services as $type => $item )
+		{
+			try
+			{
+				$attributes = array();
+
+				foreach( $item->getAttributes() as $attrItem ) {
+					$attributes[ $attrItem->getCode() ] = $attrItem->getValue();
+				}
+
+				$this->setService( $type, $item->getServiceId(), $attributes );
+				$basket->deleteService( $type );
+			}
+			catch( Exception $e ) { ; } // Don't notify the user as appropriate services can be added automatically
+		}
+
+		return $errors;
 	}
 
 

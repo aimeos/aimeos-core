@@ -59,14 +59,14 @@ interface MShop_Price_Item_Interface
 	/**
 	 * Returns the amount of money.
 	 *
-	 * @return string Price
+	 * @return integer|double Price
 	 */
 	public function getValue();
 
 	/**
 	 * Sets the new amount of money.
 	 *
-	 * @param numeric $price Amount with two digits precision
+	 * @param integer|double $price Amount with two digits precision
 	 * @return void
 	 */
 	public function setValue( $price );
@@ -74,14 +74,14 @@ interface MShop_Price_Item_Interface
 	/**
 	 * Returns the costs.
 	 *
-	 * @return string Costs
+	 * @return integer|double Costs
 	 */
 	public function getCosts();
 
 	/**
 	 * Sets the new costs.
 	 *
-	 * @param numeric $price Amount with two digits precision
+	 * @param integer|double $price Amount with two digits precision
 	 * @return void
 	 */
 	public function setCosts( $price );
@@ -89,17 +89,17 @@ interface MShop_Price_Item_Interface
 	/**
 	 * Returns the rebate amount.
 	 *
-	 * @return string Rebate amount
+	 * @return integer|double Rebate amount
 	 */
 	public function getRebate();
 
 	/**
-	 * Sets the new Tax rate.
+	 * Sets the new rebate amount.
 	 *
-	 * @param string $taxrate Tax rate with two digits precision
+	 * @param integer|double $price Rebate amount with two digits precision
 	 * @return void
 	 */
-	public function setTaxRate( $taxrate );
+	public function setRebate( $price );
 
 	/**
 	 * Returns the taxrate amount.
@@ -109,12 +109,12 @@ interface MShop_Price_Item_Interface
 	public function getTaxRate();
 
 	/**
-	 * Sets the new rebate amount.
+	 * Sets the new Tax rate.
 	 *
-	 * @param numeric $price Rebate amount with two digits precision
+	 * @param string $taxrate Tax rate with two digits precision
 	 * @return void
 	 */
-	public function setRebate( $price );
+	public function setTaxRate( $taxrate );
 
 	/**
 	 * Returns the currency ID.
