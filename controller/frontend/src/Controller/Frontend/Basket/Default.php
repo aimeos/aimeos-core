@@ -217,7 +217,7 @@ class Controller_Frontend_Basket_Default
 		$product->setQuantity( $quantity ); // Enforce check immediately
 
 
-		if( $product->getFlags() === MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
+		if( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 		{
 			$msg = sprintf( 'Basket item at position "%1$d" cannot be changed', $position );
 			throw new Controller_Frontend_Basket_Exception( $msg );
@@ -643,7 +643,7 @@ class Controller_Frontend_Basket_Default
 	{
 		foreach( $products as $pos => $product )
 		{
-			if( $product->getFlags( MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) ) {
+			if( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) {
 				continue;
 			}
 

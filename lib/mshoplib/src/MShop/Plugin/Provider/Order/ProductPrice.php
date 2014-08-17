@@ -57,7 +57,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 
 		foreach( $orderProducts as $pos => $item )
 		{
-			if( $item->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE != 0 ) {
+			if( $item->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) {
 				continue;
 			}
 
@@ -80,7 +80,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		{
 			$refPrices = array();
 
-			if( $orderProduct->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE != 0 ) {
+			if( $orderProduct->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) {
 				continue;
 			}
 
@@ -90,13 +90,12 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			}
 
 			$orderPosPrice = $orderProduct->getPrice();
-			$price = $this->_getPrice( $orderProduct, $refPrices, $attributes );
+			$price = $this->_getPrice( $orderProduct, $refPrices, $attributes, $pos );
 
 			if( ( $orderPosPrice->getValue() !== $price->getValue()
 				|| $orderPosPrice->getCosts() !== $price->getCosts()
 				|| $orderPosPrice->getTaxrate() !== $price->getTaxrate() )
-				&& $orderProduct->getFlags() !== MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
-			{
+			) {
 				$orderProduct->setPrice( $price );
 
 				$order->deleteProduct( $pos );
@@ -180,9 +179,10 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	 * @param MShop_Order_Item_Base_Product_Interface $orderProduct Ordered product
 	 * @param array $refPrices Prices associated to the original product
 	 * @param array $attributes Attribute items with prices
+	 * @param integer $pos Position of the product in the basket
 	 * @return MShop_Price_Item_Interface Price item including the calculated price
 	 */
-	protected function _getPrice( MShop_Order_Item_Base_Product_Interface $orderProduct, array $refPrices, array $attributes )
+	private function _getPrice( MShop_Order_Item_Base_Product_Interface $orderProduct, array $refPrices, array $attributes, $pos )
 	{
 		$context = $this->_getContext();
 

@@ -105,7 +105,7 @@ class MShop_Locale_Item_Default
 	/**
 	 * Sets the identifier of the shop instance.
 	 *
-	 * @param ID of the shop instance.
+	 * @param integer ID of the shop instance.
 	 */
 	public function setSiteId( $id )
 	{

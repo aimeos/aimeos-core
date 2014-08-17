@@ -121,7 +121,7 @@ class MW_Template_Base implements MW_Template_Interface
 	/**
 	 * Replaces a string or a list of strings.
 	 *
-	 * @param string[] $old String or list of strings to remove
+	 * @param string|array $old String or list of strings to remove
 	 * @param string|array $new String or list of strings to insert instead
 	 * @return MW_Template_Interface Own Instance for method chaining
 	 */
@@ -165,7 +165,7 @@ class MW_Template_Base implements MW_Template_Interface
 	/**
 	 * Generates the template by replacing substrings and remove markers.
 	 *
-	 * @param bool $remove Remove still disabled markers from statement
+	 * @param boolean $remove Remove still disabled markers from statement
 	 * @return string
 	 */
 	public function str( $remove = true )

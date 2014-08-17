@@ -568,13 +568,15 @@ class MShop_Locale_Manager_Default
 	protected function _bootstrap( $site, $lang, $currency, $active,
 		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
 	{
-		$result = $this->_bootstrapMatch( $site, $lang, $currency, $active, $siteItem, $sitePath, $siteSubTree );
+		$siteId = $siteItem->getId();
+
+		$result = $this->_bootstrapMatch( $siteId, $lang, $currency, $active, $siteItem, $sitePath, $siteSubTree );
 
 		if( $result !== false ) {
 			return $result;
 		}
 
-		$result = $this->_bootstrapClosest( $site, $lang, $currency, $active, $siteItem, $sitePath, $siteSubTree );
+		$result = $this->_bootstrapClosest( $siteId, $lang, $currency, $active, $siteItem, $sitePath, $siteSubTree );
 
 		if( $result !== false ) {
 			return $result;
@@ -591,7 +593,7 @@ class MShop_Locale_Manager_Default
 	 * is changed to the site ID of the actual site. This ensures that items assigned to
 	 * the same site as the site item are still used.
 	 *
-	 * @param string $site Site code
+	 * @param string $siteId Site ID
 	 * @param string $lang Language code
 	 * @param string $currency Currency code
 	 * @param boolean $active Flag to get only active items
@@ -600,11 +602,9 @@ class MShop_Locale_Manager_Default
 	 * @param array $siteSubTree List of site IDs below and including the current site
 	 * @return MShop_Locale_Item_Interface|boolean Locale item for the given parameters or false if no item was found
 	 */
-	private function _bootstrapMatch( $site, $lang, $currency, $active,
+	private function _bootstrapMatch( $siteId, $lang, $currency, $active,
 		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
 	{
-		$siteId = $siteItem->getId();
-
 		// Try to find exact match
 		$search = $this->createSearch( $active );
 
@@ -656,7 +656,7 @@ class MShop_Locale_Manager_Default
 	 * is changed to the site ID of the actual site. This ensures that items assigned to
 	 * the same site as the site item are still used.
 	 *
-	 * @param string $site Site code
+	 * @param string $siteId Site ID
 	 * @param string $lang Language code
 	 * @param string $currency Currency code
 	 * @param boolean $active Flag to get only active items
@@ -665,11 +665,9 @@ class MShop_Locale_Manager_Default
 	 * @param array $siteSubTree List of site IDs below and including the current site
 	 * @return MShop_Locale_Item_Interface|boolean Locale item for the given parameters or false if no item was found
 	 */
-	private function _bootstrapClosest( $site, $lang, $currency, $active,
+	private function _bootstrapClosest( $siteId, $lang, $currency, $active,
 		MShop_Locale_Item_Site_Interface $siteItem, array $sitePath, array $siteSubTree )
 	{
-		$siteId = $siteItem->getId();
-
 		// Try to find the best matching locale
 		$search = $this->createSearch( $active );
 
