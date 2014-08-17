@@ -79,8 +79,8 @@ class Controller_Frontend_Basket_Default
 	 * @param string $warehouse Unique code of the warehouse to deliver the products from
 	 * @throws Controller_Frontend_Basket_Exception If the product isn't available
 	 */
-	public function addProduct( $prodid, $quantity = 1, $options = array(), $variantAttributeIds = array(),
-		$configAttributeIds = array(), $hiddenAttributeIds = array(), $warehouse = 'default' )
+	public function addProduct( $prodid, $quantity = 1, array $options = array(), array $variantAttributeIds = array(),
+		array $configAttributeIds = array(), array $hiddenAttributeIds = array(), $warehouse = 'default' )
 	{
 		$this->_checkCategory( $prodid );
 
@@ -208,14 +208,13 @@ class Controller_Frontend_Basket_Default
 	 * @param integer $quantity New quantiy of the product item
 	 * @param array $options Possible options are: 'stock'=>true|false
 	 * 	The 'stock'=>false option allows adding products without being in stock.
-	 * @param array $configAttributeCodes Codes of the product config attributes that should be REMOVED
+	 * @param string[] $configAttributeCodes Codes of the product config attributes that should be REMOVED
 	 */
-	public function editProduct( $position, $quantity, $options = array(),
-		$configAttributeCodes = array() )
+	public function editProduct( $position, $quantity, array $options = array(),
+		array $configAttributeCodes = array() )
 	{
 		$product = $this->_basket->getProduct( $position );
 		$product->setQuantity( $quantity ); // Enforce check immediately
-
 
 		if( $product->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE )
 		{
@@ -223,81 +222,18 @@ class Controller_Frontend_Basket_Default
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
 
-
-		$context = $this->_getContext();
-		$productManager = MShop_Factory::createManager( $context, 'product' );
-
-		$search = $productManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'product.code', $product->getProductCode() ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$result = $productManager->searchItems( $search, array( 'price', 'text' ) );
-
-		if( ( $productItem = reset( $result ) ) === false )
+		$attributes = $product->getAttributes();
+		foreach( $attributes as $key => $attribute )
 		{
-			$msg = sprintf( 'No product with code "%1$s" found', $product->getProductCode() );
-			throw new Controller_Frontend_Basket_Exception( $msg );
+			if( in_array( $attribute->getCode(), $configAttributeCodes ) ) {
+				unset( $attributes[$key] );
+			}
 		}
+		$product->setAttributes( $attributes );
 
-
+		$productItem = $this->_getProductItem( $product->getProductCode() );
 		$prices = $productItem->getRefItems( 'price', 'default' );
-
-		if( empty( $prices ) )
-		{
-			$parentItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
-			$prices = $parentItem->getRefItems( 'price', 'default' );
-		}
-
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
-		$price = $priceManager->getLowestPrice( $prices, $quantity );
-
-
-		$expr = array();
-		$attributes = array();
-
-		$attributeManager = MShop_Factory::createManager( $context, 'attribute' );
-		$search = $attributeManager->createSearch( true );
-
-		foreach( $product->getAttributes() as $item )
-		{
-			if( !in_array( $item->getCode(), $configAttributeCodes ) )
-			{
-				$tmp = array(
-					$search->compare( '==', 'attribute.domain', 'product' ),
-					$search->compare( '==', 'attribute.code', $item->getValue() ),
-					$search->compare( '==', 'attribute.type.domain', 'product' ),
-					$search->compare( '==', 'attribute.type.code', $item->getCode() ),
-					$search->compare( '>', 'attribute.type.status', 0 ),
-					$search->getConditions(),
-				);
-				$expr[] = $search->combine( '&&', $tmp );
-
-				$attributes[] = $item;
-			}
-		}
-
-		if( !empty( $expr ) )
-		{
-			$search->setConditions( $search->combine( '||', $expr ) );
-			$attributeItems = $attributeManager->searchItems( $search, array( 'price' ) );
-
-			foreach( $attributeItems as $attrItem )
-			{
-				$prices = $attrItem->getRefItems( 'price', 'default' );
-
-				if( count( $prices ) > 0 )
-				{
-					$attrPrice = $priceManager->getLowestPrice( $prices, $quantity );
-					$price->addItem( $attrPrice );
-				}
-			}
-		}
-
-		// remove product rebate of original price in favor to rebates granted for the order
-		$price->setRebate( '0.00' );
+		$price = $this->_calcPrice( $product, $prices, $quantity );
 
 		$stocklevel = null;
 		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
@@ -306,7 +242,6 @@ class Controller_Frontend_Basket_Default
 
 		$product->setPrice( $price );
 		$product->setQuantity( ( $stocklevel !== null && $stocklevel > 0 ? min( $stocklevel, $quantity ) : $quantity ) );
-		$product->setAttributes( $attributes );
 
 		$this->_basket->deleteProduct( $position );
 
@@ -861,6 +796,40 @@ class Controller_Frontend_Basket_Default
 
 
 	/**
+	 * Returns the attribute items using the given order attribute items.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Attribute_Item[] $orderAttributes List of order product attribute items
+	 * @return MShop_Attribute_Item_Interface[] Associative list of attribute IDs as key and attribute items as values
+	 */
+	private function _getAttributeItems( array $orderAttributes )
+	{
+		if( empty( $orderAttributes ) ) {
+			return array();
+		}
+
+		$attributeManager = MShop_Factory::createManager( $this->_getContext(), 'attribute' );
+		$search = $attributeManager->createSearch( true );
+		$expr = array();
+
+		foreach( $orderAttributes as $item )
+		{
+			$tmp = array(
+				$search->compare( '==', 'attribute.domain', 'product' ),
+				$search->compare( '==', 'attribute.code', $item->getValue() ),
+				$search->compare( '==', 'attribute.type.domain', 'product' ),
+				$search->compare( '==', 'attribute.type.code', $item->getCode() ),
+				$search->compare( '>', 'attribute.type.status', 0 ),
+				$search->getConditions(),
+			);
+			$expr[] = $search->combine( '&&', $tmp );
+		}
+
+		$search->setConditions( $search->combine( '||', $expr ) );
+		return $attributeManager->searchItems( $search, array( 'price' ) );
+	}
+
+
+	/**
 	 * Returns the attribute items for the given attribute IDs.
 	 *
 	 * @param array $attributeIds List of attribute IDs
@@ -896,6 +865,76 @@ class Controller_Frontend_Basket_Default
 		}
 
 		return $attrItems;
+	}
+
+
+	/**
+	 * Calculates and returns the current price for the given order product and product prices.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $product Ordered product item
+	 * @param MShop_Price_Item_Interface[] $prices List of price items
+	 * @param integer $quantity New product quantity
+	 * @return MShop_Price_Item_Interface Price item with calculated price
+	 */
+	private function _calcPrice( MShop_Order_Item_Base_Product_Interface $product, array $prices, $quantity )
+	{
+		$context = $this->_getContext();
+
+		if( empty( $prices ) )
+		{
+			$productManager = MShop_Factory::createManager( $context, 'product' );
+			$parentItem = $productManager->getItem( $product->getProductId(), array( 'price' ) );
+			$prices = $parentItem->getRefItems( 'price', 'default' );
+		}
+
+		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$price = $priceManager->getLowestPrice( $prices, $quantity );
+
+		foreach( $this->_getAttributeItems( $product->getAttributes() ) as $attrItem )
+		{
+			$prices = $attrItem->getRefItems( 'price', 'default' );
+
+			if( count( $prices ) > 0 )
+			{
+				$attrPrice = $priceManager->getLowestPrice( $prices, $quantity );
+				$price->addItem( $attrPrice );
+			}
+		}
+
+		// remove product rebate of original price in favor to rebates granted for the order
+		$price->setRebate( '0.00' );
+
+		return $price;
+	}
+
+
+	/**
+	 * Retrieves the product item specified by the given code.
+	 *
+	 * @param string $code Unique product code
+	 * @return MShop_Product_Item_Interface Product item
+	 * @throws Controller_Frontend_Basket_Exception
+	 */
+	protected function _getProductItem( $code )
+	{
+		$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+
+		$search = $productManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.code', $code ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$result = $productManager->searchItems( $search, array( 'price', 'text' ) );
+
+		if( ( $productItem = reset( $result ) ) === false )
+		{
+			$msg = sprintf( 'No product with code "%1$s" found', $code );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+
+		return $productItem;
 	}
 
 
