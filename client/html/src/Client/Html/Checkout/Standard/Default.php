@@ -231,7 +231,6 @@ class Client_Html_Checkout_Standard_Default
 		}
 		catch( Exception $e )
 		{
-echo $e->getMessage() . PHP_EOL;
 			$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 		}
 	}
