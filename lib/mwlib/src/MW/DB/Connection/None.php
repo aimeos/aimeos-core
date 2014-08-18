@@ -39,7 +39,7 @@ class MW_DB_Connection_None implements MW_DB_Connection_Interface
 	 */
 	public function escape( $data )
 	{
-		return str_replace( '\'', '\'\'', $data);
+		return str_replace( '\'', '\'\'', $data );
 	}
 
 

@@ -308,6 +308,31 @@ abstract class MShop_Common_Manager_Abstract
 
 
 	/**
+	 * Returns the site IDs for the given site level constant.
+	 *
+	 * @param integer $sitelevel Site level constant from MShop_Locale_Manager_Abstract
+	 * @return string[] List of site IDs
+	 */
+	private function _getSiteIds( $sitelevel )
+	{
+		$locale = $this->_context->getLocale();
+		$siteIds = array( $locale->getSiteId() );
+
+		if( $sitelevel & MShop_Locale_Manager_Abstract::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $sitelevel & MShop_Locale_Manager_Abstract::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$siteIds = array_unique( $siteIds );
+
+		return $siteIds;
+	}
+
+
+	/**
 	 * Returns a new manager the given extension name.
 	 *
 	 * @param string $domain Name of the domain (product, text, media, etc.)
@@ -390,6 +415,28 @@ abstract class MShop_Common_Manager_Abstract
 		}
 
 		return $result;
+	}
+
+
+	/**
+	 * Returns a sorted list of required criteria keys.
+	 *
+	 * @param MW_Common_Criteria_Interface $criteria Search criteria object
+	 * @param array $required List of prefixes of required search conditions
+	 * @return string[] Sorted list of criteria keys
+	 */
+	private function _getCriteriaKeyList( MW_Common_Criteria_Interface $criteria, array $required )
+	{
+		$keys = array_merge( $required, $this->_getCriteriaKeys( $required, $criteria->getConditions() ) );
+
+		foreach( $criteria->getSortations() as $sortation ) {
+			$keys = array_merge( $keys, $this->_getCriteriaKeys( $required, $sortation ) );
+		}
+
+		$keys = array_unique( array_merge( $required, $keys ) );
+		sort( $keys );
+
+		return $keys;
 	}
 
 
@@ -584,6 +631,30 @@ abstract class MShop_Common_Manager_Abstract
 
 
 	/**
+	 * Returns the SQL strings for joining dependent tables.
+	 *
+	 * @param array $attributes List of search attributes
+	 * @param string $prefix Search key prefix
+	 * @return array List of JOIN SQL strings
+	 */
+	private function _getJoins( array $attributes, $prefix )
+	{
+		$iface = 'MW_Common_Criteria_Attribute_Interface';
+		$sep = $this->_getKeySeparator();
+		$name = $prefix . $sep . 'id';
+
+		if( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
+			return $attributes[$name]->getInternalDeps();
+		}
+		else if( isset( $attributes['id'] ) && $attributes['id'] instanceof $iface ) {
+			return $attributes['id']->getInternalDeps();
+		}
+
+		return array();
+	}
+
+
+	/**
 	 * Returns the used separator inside the search keys.
 	 *
 	 * @return string Separator string (default: ".")
@@ -666,50 +737,19 @@ abstract class MShop_Common_Manager_Abstract
 		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
 		$sitelevel = MShop_Locale_Manager_Abstract::SITE_ONE, array $plugins = array() )
 	{
-		$joins = array();
+		$joins = $cond = array();
+		$sep = $this->_getKeySeparator();
 		$conditions = $search->getConditions();
 		$attributes = $this->getSearchAttributes();
-		$iface = 'MW_Common_Criteria_Attribute_Interface';
+		$siteIds = $this->_getSiteIds( $sitelevel );
+		$keys = $this->_getCriteriaKeyList( $search, $required );
 
-
-		$locale = $this->_context->getLocale();
-		$siteIds = array( $locale->getSiteId() );
-
-		if( $sitelevel & MShop_Locale_Manager_Abstract::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $sitelevel & MShop_Locale_Manager_Abstract::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
-
-		$siteIds = array_unique( $siteIds );
-
-
-		$keys = array_merge( $required, $this->_getCriteriaKeys( $required, $conditions ) );
-
-		foreach( $search->getSortations() as $sortation ) {
-			$keys = array_merge( $keys, $this->_getCriteriaKeys( $required, $sortation ) );
-		}
-
-		$cond = array();
-		$sep = $this->_getKeySeparator();
 		$basekey = array_shift( $required );
-		$keys = array_unique( array_merge( $required, $keys ) );
-		sort( $keys );
 
 		foreach( $keys as $key )
 		{
-			if( $key !== $basekey )
-			{
-				$name = $key . $sep . 'id';
-
-				if( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
-					$joins = array_merge( $joins, $attributes[$name]->getInternalDeps() );
-				}
-				else if( isset( $attributes['id'] ) && $attributes['id'] instanceof $iface ) {
-					$joins = array_merge( $joins, $attributes['id']->getInternalDeps() );
-				}
+			if( $key !== $basekey ) {
+				$joins = array_merge( $joins, $this->_getJoins( $attributes, $key ) );
 			}
 
 			$name = $key . $sep . 'siteid';

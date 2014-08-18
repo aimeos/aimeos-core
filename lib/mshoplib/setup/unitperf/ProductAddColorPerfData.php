@@ -69,19 +69,6 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		);
 
 
-		$context = $this->_getContext();
-
-		$attrTypeManager = MShop_Factory::createManager( $context, 'attribute/type' );
-
-		$search = $attrTypeManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'color' ) );
-		$result = $attrTypeManager->searchItems( $search );
-
-		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute type "color" found' );
-		}
-
-
 		$this->_txBegin();
 
 		$attrList = $this->_getAttributeIds( $colors );
@@ -89,6 +76,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		$this->_txCommit();
 
 
+		$context = $this->_getContext();
 		$productManager = MShop_Factory::createManager( $context, 'product' );
 		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
 
@@ -132,24 +120,21 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 	}
 
 
-	protected function _getAttributeIds( $colors )
+	/**
+	 * Creates and returns the attribute IDs for the given attribute codes.
+	 *
+	 * @param array $colors List of attribute codes
+	 * @throws Exception If a type isn't found
+	 */
+	protected function _getAttributeIds( array $colors )
 	{
 		$context = $this->_getContext();
 
 
-		$mediaTypeManager = MShop_Factory::createManager( $context, 'media/type' );
+		$attrTypeItem = $this->_getTypeItem( 'attribute/type', 'product', 'color' );
+		$mediaTypeItem = $this->_getTypeItem( 'media/type', 'attribute', 'default' );
+		$attrListTypeItem = $this->_getTypeItem( 'attribute/list/type', 'media', 'default' );
 
-		$search = $mediaTypeManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'media.type.domain', 'attribute' ),
-			$search->compare( '==', 'media.type.code', 'default' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $mediaTypeManager->searchItems( $search );
-
-		if( ( $mediaTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No media type "attribute/default" found' );
-		}
 
 		$mediaManager = MShop_Factory::createManager( $context, 'media' );
 
@@ -160,20 +145,6 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		$mediaItem->setUrl( '' );
 
 
-		$attrTypeManager = MShop_Factory::createManager( $context, 'attribute/type' );
-
-		$search = $attrTypeManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'attribute.type.domain', 'product' ),
-			$search->compare( '==', 'attribute.type.code', 'color' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $attrTypeManager->searchItems( $search );
-
-		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute type "product/color" found' );
-		}
-
 		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
 
 		$attrItem = $attrManager->createItem();
@@ -181,20 +152,6 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		$attrItem->setDomain( 'product' );
 		$attrItem->setStatus( 1 );
 
-
-		$attrListTypeManager = MShop_Factory::createManager( $context, 'attribute/list/type' );
-
-		$search = $attrListTypeManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'attribute.list.type.domain', 'media' ),
-			$search->compare( '==', 'attribute.list.type.code', 'default' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $attrListTypeManager->searchItems( $search );
-
-		if( ( $attrListTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute list type "media/default" found' );
-		}
 
 		$attrListManager = MShop_Factory::createManager( $context, 'attribute/list' );
 
@@ -205,51 +162,12 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 
 
 		$pos = 0;
+		$mime = '';
 		$attrList = array();
 
 		foreach( $colors as $code => $name )
 		{
-			$list = str_split( ltrim( $code, '#' ), 2 );
-
-			if( count( $list ) !== 3 ) {
-				throw new Exception( sprintf( 'Invalid color code "%1$s"', $code ) );
-			}
-
-			if( ( $img = imagecreate( 1, 1 ) ) === false ) {
-				throw new Exception( 'Unable to create image' );
-			}
-
-			if( imagecolorallocate( $img, hexdec( $list[0] ), hexdec( $list[1] ), hexdec( $list[2] ) ) === false ) {
-				throw new Exception( 'Unable to allocate color' );
-			}
-
-			try
-			{
-				ob_start();
-
-				if( function_exists( 'imagegif' ) === true && imagegif( $img ) === true ) {
-					$mime = 'image/gif';
-				} else if( function_exists( 'imagepng' ) === true && imagepng( $img ) === true ) {
-					$mime = 'image/png';
-				} else {
-					throw new Exception( 'Unable to create image. php-gd not installed?' );
-				}
-
-				$image = ob_get_contents();
-				ob_end_clean();
-			}
-			catch( Exception $e )
-			{
-				ob_end_clean();
-				throw $e;
-			}
-
-			if( imagedestroy( $img ) === false ) {
-				throw new Exception( 'Unable to destroy image' );
-			}
-
-			$imageData = 'data:' . $mime . ';base64,' . base64_encode( $image );
-
+			$imageData = $this->_getImageData( $code, $mime );
 
 			$attrItem->setId( null );
 			$attrItem->setCode( $code );
@@ -272,5 +190,87 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 		}
 
 		return $attrList;
+	}
+
+
+	/**
+	 * Returns the base64 encoded image data for the given color code.
+	 *
+	 * @param string $code Color code in hex notation, e.g. "#000000"
+	 * @param string &$mime Contains the mime type of the created image as result
+	 * @throws Exception If the image couldn't be created
+	 */
+	protected function _getImageData( $code, &$mime )
+	{
+		$list = str_split( ltrim( $code, '#' ), 2 );
+
+		if( count( $list ) !== 3 ) {
+			throw new Exception( sprintf( 'Invalid color code "%1$s"', $code ) );
+		}
+
+		if( ( $img = imagecreate( 1, 1 ) ) === false ) {
+			throw new Exception( 'Unable to create image' );
+		}
+
+		if( imagecolorallocate( $img, hexdec( $list[0] ), hexdec( $list[1] ), hexdec( $list[2] ) ) === false ) {
+			throw new Exception( 'Unable to allocate color' );
+		}
+
+		try
+		{
+			ob_start();
+
+			if( function_exists( 'imagegif' ) === true && imagegif( $img ) === true ) {
+				$mime = 'image/gif';
+			} else if( function_exists( 'imagepng' ) === true && imagepng( $img ) === true ) {
+				$mime = 'image/png';
+			} else {
+				throw new Exception( 'Unable to create image. php-gd not installed?' );
+			}
+
+			$image = ob_get_contents();
+			ob_end_clean();
+		}
+		catch( Exception $e )
+		{
+			ob_end_clean();
+			throw $e;
+		}
+
+		if( imagedestroy( $img ) === false ) {
+			throw new Exception( 'Unable to destroy image' );
+		}
+
+		return 'data:' . $mime . ';base64,' . base64_encode( $image );
+	}
+
+
+	/**
+	 * Returns the attribute type item specified by the code.
+	 *
+	 * @param $string $prefix Domain prefix for the manager, e.g. "media/type"
+	 * @param string $domain Domain of the type item
+	 * @param string $code Code of the type item
+	 * @return MShop_Common_Item_Type_Interface Type item
+	 * @throws Exception If no item is found
+	 */
+	protected function _getTypeItem( $prefix, $domain, $code )
+	{
+		$manager = MShop_Factory::createManager( $this->_getContext(), $prefix );
+		$prefix = str_replace( '/', '.', $prefix );
+
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', $prefix . '.domain', $domain ),
+			$search->compare( '==', $prefix . '.code', $code ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$result = $manager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new Exception( sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $prefix ) );
+		}
+
+		return $item;
 	}
 }
