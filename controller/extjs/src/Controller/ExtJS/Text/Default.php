@@ -49,28 +49,8 @@ class Controller_ExtJS_Text_Default
 
 		foreach( $items as $entry )
 		{
-			$label = '';
-			$item = $this->_manager->createItem();
-
-			if ( isset($entry->{'text.id'}) ) {	$item->setId( $entry->{'text.id'} ); }
-			if ( isset($entry->{'text.typeid'} ) ) { $item->setTypeId( $entry->{'text.typeid'} ); }
-			if ( isset($entry->{'text.domain'} ) ) { $item->setDomain( $entry->{'text.domain'} ); }
-			if ( isset($entry->{'text.status'} ) ) { $item->setStatus( $entry->{'text.status'} ); }
-			if ( isset($entry->{'text.languageid'} ) && $entry->{'text.languageid'} != '' ) { $item->setLanguageId( $entry->{'text.languageid'} ); }
-
-			if ( isset( $entry->{'text.label'} ) && $entry->{'text.label'} != '' ) {
-				$label = mb_strcut( $entry->{'text.label'}, 0, 255 );
-			} else if( isset( $entry->{'text.content'} ) && $entry->{'text.content'} != '' ) {
-				$label = mb_strcut( $entry->{'text.content'}, 0, 255 );
-			}
-			$item->setLabel( trim( preg_replace( array( "/(<br>|\r|\n)+/", '/  +/' ), ' ', $label ) ) );
-
-			if ( isset($entry->{'text.content'} ) ) {
-				$item->setContent( trim( preg_replace( "/(<br>|\r|\n)+$/", '', $entry->{'text.content'} ) ) );
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -149,6 +129,42 @@ class Controller_ExtJS_Text_Default
 				'items' => $params->items,
 				'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new text item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "text" prefix
+	 * @return MShop_Text_Item_Interface Text item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'text.id': $item->setId( $value ); break;
+				case 'text.domain': $item->setDomain( $value ); break;
+				case 'text.typeid': $item->setTypeId( $value ); break;
+				case 'text.status': $item->setStatus( $value ); break;
+				case 'text.content': $item->setContent( trim( preg_replace( '/(<br>|\r|\n)+$/', '', $value ) ) ); break;
+				case 'text.label': $item->setLabel( trim( preg_replace( '/(<br>|\r|\n)+/', ' ', $value ) ) ); break;
+				case 'text.languageid':
+					if( $value != '' ) {
+						$item->setLanguageId( $value );
+					}
+					break;
+			}
+		}
+
+		if( $item->getLabel() == '' ) {
+			$item->setLabel( mb_strcut( $item->getContent(), 0, 255 ) );
+		}
+
+		return $item;
 	}
 
 

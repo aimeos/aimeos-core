@@ -51,14 +51,7 @@ class Controller_ExtJS_Catalog_List_Type_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'catalog.list.type.id'} ) ) { $item->setId( $entry->{'catalog.list.type.id'} ); }
-			if( isset( $entry->{'catalog.list.type.code'} ) ) { $item->setCode( $entry->{'catalog.list.type.code'} ); }
-			if( isset( $entry->{'catalog.list.type.domain'} ) ) { $item->setDomain( $entry->{'catalog.list.type.domain'} ); }
-			if( isset( $entry->{'catalog.list.type.label'} ) ) {	$item->setLabel( $entry->{'catalog.list.type.label'} ); }
-			if( isset( $entry->{'catalog.list.type.status'} ) ) { $item->setStatus( $entry->{'catalog.list.type.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 
 			$ids[] = $item->getId();
@@ -73,6 +66,32 @@ class Controller_ExtJS_Catalog_List_Type_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new catalog list type item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "catalog.list.type" prefix
+	 * @return MShop_Common_Item_Type_Interface Common type item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'catalog.list.type.id': $item->setId( $value ); break;
+				case 'catalog.list.type.code': $item->setCode( $value ); break;
+				case 'catalog.list.type.domain': $item->setDomain( $value ); break;
+				case 'catalog.list.type.label': $item->setLabel( $value ); break;
+				case 'catalog.list.type.status': $item->setStatus( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

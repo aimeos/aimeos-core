@@ -50,36 +50,8 @@ class Controller_ExtJS_Service_List_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'service.list.id'} ) ) { $item->setId( $entry->{'service.list.id'} ); }
-			if( isset( $entry->{'service.list.domain'} ) ) { $item->setDomain( $entry->{'service.list.domain'} ); }
-			if( isset( $entry->{'service.list.parentid'} ) ) { $item->setParentId( $entry->{'service.list.parentid'} ); }
-			if( isset( $entry->{'service.list.refid'} ) ) { $item->setRefId( $entry->{'service.list.refid'} ); }
-			if( isset( $entry->{'service.list.config'} ) ) { $item->setConfig( (array) $entry->{'service.list.config'} ); }
-			if( isset( $entry->{'service.list.position'} ) ) { $item->setPosition( $entry->{'service.list.position'} ); }
-			if( isset( $entry->{'service.list.status'} ) ) { $item->setStatus( $entry->{'service.list.status'} );	}
-
-			if( isset( $entry->{'service.list.typeid'} ) && $entry->{'service.list.typeid'} != '' ) {
-				$item->setTypeId( $entry->{'service.list.typeid'} );
-			}
-
-			if( isset( $entry->{'service.list.datestart'} ) && $entry->{'service.list.datestart'} != '' )
-			{
-				$datetime = str_replace( 'T', ' ', $entry->{'service.list.datestart'} );
-				$entry->{'service.list.datestart'} = $datetime;
-				$item->setDateStart( $datetime );
-			}
-
-			if( isset( $entry->{'service.list.dateend'} ) && $entry->{'service.list.dateend'} != '' )
-			{
-				$datetime = str_replace( 'T', ' ', $entry->{'service.list.dateend'} );
-				$entry->{'service.list.dateend'} = $datetime;
-				$item->setDateEnd( $datetime );
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -127,6 +99,51 @@ class Controller_ExtJS_Service_List_Default
 			'graph' => $this->_getDomainItems( $idLists ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new service list item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "service.list" prefix
+	 * @return MShop_Common_Item_List_Interface Common list item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'service.list.id': $item->setId( $value ); break;
+				case 'service.list.domain': $item->setDomain( $value ); break;
+				case 'service.list.parentid': $item->setParentId( $value ); break;
+				case 'service.list.position': $item->setPosition( $value ); break;
+				case 'service.list.config': $item->setConfig( (array) $value ); break;
+				case 'service.list.status': $item->setStatus( $value ); break;
+				case 'service.list.typeid': $item->setTypeId( $value ); break;
+				case 'service.list.refid': $item->setRefId( $value ); break;
+				case 'service.list.datestart':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'service.list.datestart'} = $value;
+						$item->setDateStart( $value );
+					}
+					break;
+				case 'service.list.dateend':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'service.list.dateend'} = $value;
+						$item->setDateEnd( $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
 	}
 
 

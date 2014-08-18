@@ -90,16 +90,4 @@ class Controller_ExtJS_Admin_Job_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 1, count( $searched['items'] ) );
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}
-
-	public function testSaveItemException()
-	{
-		$saveParams = (object) array(
-			'site' => 'unittest',
-			'items' => 'bad data',
-		);
-
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->_object->saveItems( $saveParams );
-	}
-
 }

@@ -51,15 +51,7 @@ class Controller_ExtJS_Media_List_Type_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'media.list.type.id'} ) ) { $item->setId( $entry->{'media.list.type.id'} ); }
-			if( isset( $entry->{'media.list.type.code'} ) ) { $item->setCode( $entry->{'media.list.type.code'} ); }
-			if( isset( $entry->{'media.list.type.domain'} ) ) { $item->setDomain( $entry->{'media.list.type.domain'} ); }
-			if( isset( $entry->{'media.list.type.label'} ) ) {	$item->setLabel( $entry->{'media.list.type.label'} ); }
-			if( isset( $entry->{'media.list.type.status'} ) ) { $item->setStatus( $entry->{'media.list.type.status'} ); }
-
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 
 			$ids[] = $item->getId();
@@ -74,6 +66,32 @@ class Controller_ExtJS_Media_List_Type_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new media list type item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "media.list.type" prefix
+	 * @return MShop_Common_Item_Type_Interface Common type item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'media.list.type.id': $item->setId( $value ); break;
+				case 'media.list.type.code': $item->setCode( $value ); break;
+				case 'media.list.type.domain': $item->setDomain( $value ); break;
+				case 'media.list.type.label': $item->setLabel( $value ); break;
+				case 'media.list.type.status': $item->setStatus( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

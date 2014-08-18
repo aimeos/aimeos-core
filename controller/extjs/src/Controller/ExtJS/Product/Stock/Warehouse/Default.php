@@ -51,15 +51,8 @@ class Controller_ExtJS_Product_Stock_Warehouse_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'product.stock.warehouse.id'} ) ) { $item->setId( $entry->{'product.stock.warehouse.id'} ); }
-			if( isset( $entry->{'product.stock.warehouse.code'} ) ) { $item->setCode( $entry->{'product.stock.warehouse.code'} ); }
-			if( isset( $entry->{'product.stock.warehouse.label'} ) ) { $item->setLabel( $entry->{'product.stock.warehouse.label'} ); }
-			if( isset( $entry->{'product.stock.warehouse.status'} ) ) { $item->setStatus( $entry->{'product.stock.warehouse.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -72,6 +65,31 @@ class Controller_ExtJS_Product_Stock_Warehouse_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new product stock warehouse item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "product.stock.warehouse" prefix
+	 * @return MShop_Product_Item_Stock_Warehouse_Interface Product warehouse item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'product.stock.warehouse.id': $item->setId( $value ); break;
+				case 'product.stock.warehouse.code': $item->setCode( $value ); break;
+				case 'product.stock.warehouse.label': $item->setLabel( $value ); break;
+				case 'product.stock.warehouse.status': $item->setStatus( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

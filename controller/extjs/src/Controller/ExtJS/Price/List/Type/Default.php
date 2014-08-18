@@ -51,14 +51,7 @@ class Controller_ExtJS_Price_List_Type_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'price.list.type.id'} ) ) { $item->setId( $entry->{'price.list.type.id'} ); }
-			if( isset( $entry->{'price.list.type.code'} ) ) { $item->setCode( $entry->{'price.list.type.code'} ); }
-			if( isset( $entry->{'price.list.type.domain'} ) ) { $item->setDomain( $entry->{'price.list.type.domain'} ); }
-			if( isset( $entry->{'price.list.type.label'} ) ) {	$item->setLabel( $entry->{'price.list.type.label'} ); }
-			if( isset( $entry->{'price.list.type.status'} ) ) { $item->setStatus( $entry->{'price.list.type.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 
 			$ids[] = $item->getId();
@@ -73,6 +66,32 @@ class Controller_ExtJS_Price_List_Type_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new price list type item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "price.list.type" prefix
+	 * @return MShop_Common_Item_Type_Interface Common type item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'price.list.type.id': $item->setId( $value ); break;
+				case 'price.list.type.code': $item->setCode( $value ); break;
+				case 'price.list.type.domain': $item->setDomain( $value ); break;
+				case 'price.list.type.label': $item->setLabel( $value ); break;
+				case 'price.list.type.status': $item->setStatus( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

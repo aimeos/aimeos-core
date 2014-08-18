@@ -49,17 +49,8 @@ class Controller_ExtJS_Coupon_Code_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'coupon.code.id'} ) ) { $item->setId( $entry->{'coupon.code.id'} ); }
-			if( isset( $entry->{'coupon.code.couponid'} ) ) { $item->setCouponId( $entry->{'coupon.code.couponid'} ); }
-			if( isset( $entry->{'coupon.code.code'} ) ) { $item->setCode( $entry->{'coupon.code.code'} ); }
-			if( isset( $entry->{'coupon.code.count'} ) ) { $item->setCount( $entry->{'coupon.code.count'} ); }
-			if( isset( $entry->{'coupon.code.datestart'} ) ) { $item->setDateStart( $entry->{'coupon.code.datestart'} ); }
-			if( isset ($entry->{'coupon.code.dateend'} ) ) { $item->setDateEnd( $entry->{'coupon.code.dateend'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -311,6 +302,48 @@ class Controller_ExtJS_Coupon_Code_Default
 
 		return $list;
 	}
+
+
+	/**
+	 * Creates a new coupon code item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "coupon.code" prefix
+	 * @return MShop_Coupon_Item_Code Interface Coupon code item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'coupon.code.id': $item->setId( $value ); break;
+				case 'coupon.code.code': $item->setCode( $value ); break;
+				case 'coupon.code.count': $item->setCount( $value ); break;
+				case 'coupon.code.couponid': $item->setCouponId( $value ); break;
+				case 'coupon.code.datestart':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'coupon.code.datestart'} = $value;
+						$item->setDateStart( $value );
+					}
+					break;
+				case 'coupon.code.dateend':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'coupon.code.dateend'} = $value;
+						$item->setDateEnd( $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
+	}
+
 
 	/**
 	 * Returns the manager the controller is using.

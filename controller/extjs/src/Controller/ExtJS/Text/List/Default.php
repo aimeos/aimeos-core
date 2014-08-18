@@ -50,36 +50,8 @@ class Controller_ExtJS_Text_List_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'text.list.id'} ) ) { $item->setId( $entry->{'text.list.id'} ); }
-			if( isset( $entry->{'text.list.domain'} ) ) { $item->setDomain( $entry->{'text.list.domain'} ); }
-			if( isset( $entry->{'text.list.parentid'} ) ) { $item->setParentId( $entry->{'text.list.parentid'} ); }
-			if( isset( $entry->{'text.list.refid'} ) ) { $item->setRefId( $entry->{'text.list.refid'} ); }
-			if( isset( $entry->{'text.list.config'} ) ) { $item->setConfig( (array) $entry->{'text.list.config'} ); }
-			if( isset( $entry->{'text.list.position'} ) ) { $item->setPosition( $entry->{'text.list.position'} ); }
-			if( isset( $entry->{'text.list.status'} ) ) {	$item->setStatus( $entry->{'text.list.status'} ); }
-
-			if( isset( $entry->{'text.list.typeid'} ) && $entry->{'text.list.typeid'} != '' ) {
-				$item->setTypeId( $entry->{'text.list.typeid'} );
-			}
-
-			if( isset( $entry->{'text.list.datestart'} ) && $entry->{'text.list.datestart'} != '' )
-			{
-				$datetime = str_replace( 'T', ' ', $entry->{'text.list.datestart'} );
-				$entry->{'text.list.datestart'} = $datetime;
-				$item->setDateStart( $datetime );
-			}
-
-			if( isset( $entry->{'text.list.dateend'} ) && $entry->{'text.list.dateend'} != '' )
-			{
-				$datetime = str_replace( 'T', ' ', $entry->{'text.list.dateend'} );
-				$entry->{'text.list.dateend'} = $datetime;
-				$item->setDateEnd( $datetime );
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -127,6 +99,51 @@ class Controller_ExtJS_Text_List_Default
 			'graph' => $this->_getDomainItems( $idLists ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new text list item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "text.list" prefix
+	 * @return MShop_Common_Item_List_Interface Common list item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'text.list.id': $item->setId( $value ); break;
+				case 'text.list.domain': $item->setDomain( $value ); break;
+				case 'text.list.parentid': $item->setParentId( $value ); break;
+				case 'text.list.position': $item->setPosition( $value ); break;
+				case 'text.list.config': $item->setConfig( (array) $value ); break;
+				case 'text.list.status': $item->setStatus( $value ); break;
+				case 'text.list.typeid': $item->setTypeId( $value ); break;
+				case 'text.list.refid': $item->setRefId( $value ); break;
+				case 'text.list.datestart':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'text.list.datestart'} = $value;
+						$item->setDateStart( $value );
+					}
+					break;
+				case 'text.list.dateend':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'text.list.dateend'} = $value;
+						$item->setDateEnd( $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
 	}
 
 

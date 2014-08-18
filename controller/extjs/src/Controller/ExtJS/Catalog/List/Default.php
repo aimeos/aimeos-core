@@ -124,7 +124,7 @@ class Controller_ExtJS_Catalog_List_Default
 	 * Creates a new catalog list item and sets the properties from the given object.
 	 *
 	 * @param stdClass $entry Object with public properties using the "catalog.list" prefix
-	 * @return MShop_Common_Item_List_Interface List item
+	 * @return MShop_Common_Item_List_Interface Common list item
 	 */
 	protected function _createItem( stdClass $entry )
 	{
@@ -134,28 +134,28 @@ class Controller_ExtJS_Catalog_List_Default
 		{
 			switch( $name )
 			{
-				case 'catalog.list.id': $item->setId( $entry->{'catalog.list.id'} ); break;
-				case 'catalog.list.domain': $item->setDomain( $entry->{'catalog.list.domain'} ); break;
-				case 'catalog.list.parentid': $item->setParentId( $entry->{'catalog.list.parentid'} ); break;
-				case 'catalog.list.refid': $item->setRefId( $entry->{'catalog.list.refid'} ); break;
-				case 'catalog.list.position': $item->setPosition( $entry->{'catalog.list.position'} ); break;
-				case 'catalog.list.status': $item->setStatus( $entry->{'catalog.list.status'} ); break;
-				case 'catalog.list.config': $item->setConfig( $entry->{'catalog.list.config'} ); break;
-				case 'catalog.list.typeid': $item->setTypeId( $entry->{'catalog.list.typeid'} ); break;
+				case 'catalog.list.id': $item->setId( $value ); break;
+				case 'catalog.list.domain': $item->setDomain( $value ); break;
+				case 'catalog.list.parentid': $item->setParentId( $value ); break;
+				case 'catalog.list.position': $item->setPosition( $value ); break;
+				case 'catalog.list.config': $item->setConfig( (array) $value ); break;
+				case 'catalog.list.status': $item->setStatus( $value ); break;
+				case 'catalog.list.typeid': $item->setTypeId( $value ); break;
+				case 'catalog.list.refid': $item->setRefId( $value ); break;
 				case 'catalog.list.datestart':
-					if( $entry->{'catalog.list.datestart'} != '' )
+					if( $value != '' )
 					{
-						$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.datestart'} );
-						$entry->{'catalog.list.datestart'} = $datetime;
-						$item->setDateStart( $datetime );
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'catalog.list.datestart'} = $value;
+						$item->setDateStart( $value );
 					}
 					break;
 				case 'catalog.list.dateend':
-					if( $entry->{'catalog.list.dateend'} != '' )
+					if( $value != '' )
 					{
-						$datetime = str_replace( 'T', ' ', $entry->{'catalog.list.dateend'} );
-						$entry->{'catalog.list.dateend'} = $datetime;
-						$item->setDateEnd( $datetime );
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'catalog.list.dateend'} = $value;
+						$item->setDateEnd( $value );
 					}
 					break;
 			}
