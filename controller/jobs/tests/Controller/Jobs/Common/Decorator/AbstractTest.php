@@ -62,11 +62,7 @@ class Controller_Jobs_Common_Decorator_AbstractTest extends MW_Unittest_Testcase
 
 	public function testRun()
 	{
-		$this->_stub->expects( $this->once() )
-			->method( 'run' )
-			->will( $this->returnValue( true ) );
-
-		$this->assertTrue( $this->_object->run() );
+		$this->_object->run();
 	}
 
 
