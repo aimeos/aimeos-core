@@ -308,7 +308,7 @@ class Controller_ExtJS_Coupon_Code_Default
 	 * Creates a new coupon code item and sets the properties from the given array.
 	 *
 	 * @param array $entry Associative list of name and value properties using the "coupon.code" prefix
-	 * @return MShop_Common_Item_Interface Interface Coupon code item
+	 * @return MShop_Coupon_Item_Code_Interface Coupon code item
 	 */
 	protected function _createItem( array $entry )
 	{
