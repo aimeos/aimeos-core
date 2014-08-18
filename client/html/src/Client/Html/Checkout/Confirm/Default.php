@@ -234,9 +234,10 @@ class Client_Html_Checkout_Confirm_Default
 	 */
 	public function process()
 	{
+		$context = $this->_getContext();
+
 		try
 		{
-			$context = $this->_getContext();
 			$params = $this->getView()->param();
 			$orderid = $context->getSession()->get( 'arcavias/orderid' );
 
@@ -288,9 +289,15 @@ class Client_Html_Checkout_Confirm_Default
 			$orderManager = MShop_Factory::createManager( $context, 'order' );
 			$orderItem = $orderManager->getItem( $orderid );
 
-			// Clear basket
+			// Clear basket and cache
 			if( $orderItem->getPaymentStatus() > MShop_Order_Item_Abstract::PAY_REFUSED )
 			{
+				$session = $context->getSession();
+
+				foreach( $session->get( 'arcavias/basket/cache', array() ) as $key => $value ) {
+					$session->set( $key, null );
+				}
+
 				$orderBaseManager = MShop_Factory::createManager( $context, 'order/base' );
 				$orderBaseManager->setSession( $orderBaseManager->createItem() );
 			}
@@ -301,24 +308,23 @@ class Client_Html_Checkout_Confirm_Default
 		catch( Client_Html_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( Controller_Frontend_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'controller/frontend', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( MShop_Exception $e )
 		{
 			$view = $this->getView();
-			$error = array( $this->_getContext()->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( Exception $e )
 		{
-			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
 			$view = $this->getView();

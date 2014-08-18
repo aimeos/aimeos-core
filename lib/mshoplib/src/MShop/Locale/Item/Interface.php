@@ -36,7 +36,7 @@ interface MShop_Locale_Item_Interface extends MShop_Common_Item_Interface
 	/**
 	 * Sets the identifier of the shop instance.
 	 *
-	 * @param ID of the shop instance.
+	 * @param integer ID of the shop instance.
 	 * @return void
 	 */
 	public function setSiteId( $id );
