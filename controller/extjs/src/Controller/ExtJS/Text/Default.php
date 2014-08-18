@@ -161,7 +161,7 @@ class Controller_ExtJS_Text_Default
 		}
 
 		if( $item->getLabel() == '' ) {
-			$item->setLabel( mb_strcut( $item->getContent(), 0, 255 ) );
+			$item->setLabel( mb_strcut( trim( preg_replace( '/(<br>|\r|\n)+/', ' ', $item->getContent() ) ), 0, 255 ) );
 		}
 
 		return $item;
