@@ -178,7 +178,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	 *
 	 * @param MShop_Order_Item_Base_Product_Interface $orderProduct Ordered product
 	 * @param array $refPrices Prices associated to the original product
-	 * @param array $attributes Attribute items with prices
+	 * @param MShop_Attribute_Item_Interface[] $attributes Attribute items with prices
 	 * @param integer $pos Position of the product in the basket
 	 * @return MShop_Price_Item_Interface Price item including the calculated price
 	 */

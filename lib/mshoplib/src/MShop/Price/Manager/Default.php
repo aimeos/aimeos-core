@@ -735,7 +735,7 @@ class MShop_Price_Manager_Default
 	 * Creates a new price item
 	 *
 	 * @param array $values List of attributes for price item
-	 * @param array $listitems List of items implementing MShop_Common_Item_List_Interface
+	 * @param array $listItems List of items implementing MShop_Common_Item_List_Interface
 	 * @param array $refItems List of items implementing MShop_Common_Item_Interface
 	 * @return MShop_Price_Item_Interface New price item
 	 */

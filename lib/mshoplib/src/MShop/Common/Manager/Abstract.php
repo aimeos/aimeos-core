@@ -656,7 +656,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * @param MW_Common_Criteria_Interface $search Search criteria
 	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
 	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
-	 * @param array $required Additional search keys to add conditions for even if no conditions are available
+	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
 	 * @param integer|null $total Contains the number of all records matching the criteria if not null
 	 * @param integer $sitelevel Constant from MShop_Locale_Manager_Abstract for defining which site IDs should be used for searching
 	 * @return MW_DB_Result_Interface SQL result object for accessing the found records
