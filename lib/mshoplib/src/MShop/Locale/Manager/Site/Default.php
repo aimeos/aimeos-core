@@ -229,7 +229,7 @@ class MShop_Locale_Manager_Site_Default
 	/**
 	 * Returns the site item specified by its ID.
 	 *
-	 * @param string $siteId Unique ID of the site data in the storage
+	 * @param string $id Unique ID of the site data in the storage
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Locale_Item_Site_Interface Returns the site item of the given id
 	 * @throws MShop_Exception If the item couldn't be found

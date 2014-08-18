@@ -33,6 +33,7 @@ interface Controller_Jobs_Interface
 	/**
 	 * Executes the job.
 	 *
+	 * @return void
 	 * @throws Controller_Jobs_Exception If an error occurs
 	 */
 	public function run();

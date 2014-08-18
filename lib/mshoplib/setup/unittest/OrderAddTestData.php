@@ -135,7 +135,7 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Adds the order address data.
 	 *
-	 * @param MShop_Order_Manager_Base_Address_Interface $orderBaseAddressManager
+	 * @param MShop_Common_Manager_Interface $manager
 	 * @param array $testdata
 	 */
 	protected function _addOrderBaseAddressData( MShop_Common_Manager_Interface $manager,
@@ -321,10 +321,10 @@ class MW_Setup_Task_OrderAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Adds the order product attribute test data.
 	 *
-	 * @param MShop_Order_Manager_Base_Product_Attribute_Interface $manager
+	 * @param MShop_Common_Manager_Interface $manager
 	 * @param array $testdata
 	 * @param array $ordProds
-	 * @param array $products
+	 * @param MShop_Product_Item_Interface[] $products
 	 * @throws MW_Setup_Exception
 	 */
 	protected function _addOrderBaseProductAttributeData( MShop_Common_Manager_Interface $manager,

@@ -248,7 +248,7 @@ class MW_Setup_Task_ProductAddColorPerfData extends MW_Setup_Task_ProductAddBase
 	/**
 	 * Returns the attribute type item specified by the code.
 	 *
-	 * @param $string $prefix Domain prefix for the manager, e.g. "media/type"
+	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"
 	 * @param string $domain Domain of the type item
 	 * @param string $code Code of the type item
 	 * @return MShop_Common_Item_Type_Interface Type item

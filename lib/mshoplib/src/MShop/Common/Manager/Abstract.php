@@ -422,7 +422,7 @@ abstract class MShop_Common_Manager_Abstract
 	 * Returns a sorted list of required criteria keys.
 	 *
 	 * @param MW_Common_Criteria_Interface $criteria Search criteria object
-	 * @param array $required List of prefixes of required search conditions
+	 * @param string[] $required List of prefixes of required search conditions
 	 * @return string[] Sorted list of criteria keys
 	 */
 	private function _getCriteriaKeyList( MW_Common_Criteria_Interface $criteria, array $required )
