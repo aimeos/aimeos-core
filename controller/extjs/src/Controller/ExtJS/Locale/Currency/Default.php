@@ -67,7 +67,7 @@ class Controller_ExtJS_Locale_Currency_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -145,12 +145,12 @@ class Controller_ExtJS_Locale_Currency_Default
 
 
 	/**
-	 * Creates a new locale currency item and sets the properties from the given object.
+	 * Creates a new locale currency item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "locale.currency" prefix
+	 * @param array $entry Associative list of name and value properties using the "locale.currency" prefix
 	 * @return MShop_Locale_Item_Currency_Interface Locale currency item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 

@@ -49,7 +49,7 @@ class Controller_ExtJS_Text_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -135,10 +135,10 @@ class Controller_ExtJS_Text_Default
 	/**
 	 * Creates a new text item and sets the properties from the given object.
 	 *
-	 * @param stdClass $entry Object with public properties using the "text" prefix
+	 * @param array $entry Associative list of name and value properties using the "text" prefix
 	 * @return MShop_Text_Item_Interface Text item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 
