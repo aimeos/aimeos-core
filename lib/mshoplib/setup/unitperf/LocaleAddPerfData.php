@@ -77,7 +77,9 @@ class MW_Setup_Task_LocaleAddPerfData extends MW_Setup_Task_MShopAddLocaleData
 		$search = $localeSiteManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unitperf' ) );
 
-		foreach( $localeSiteManager->searchItems( $search ) as $site ) {
+		foreach( $localeSiteManager->searchItems( $search ) as $site )
+		{
+			$this->_additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
 			$localeSiteManager->deleteItem( $site->getId() );
 		}
 
