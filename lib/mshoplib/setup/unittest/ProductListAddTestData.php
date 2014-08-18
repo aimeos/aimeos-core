@@ -305,7 +305,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	private function _addProductData( array $testdata, $productManager, array $refIds, array $keys )
 	{
 		$parentIds = $this->_getProductIds( $productManager, $testdata );
-		$refIds['product'] = $this->_getProductRefIds( $productManager, $testdata, $keys );
+		$refIds['product'] = $this->_getProductRefIds( $productManager, $keys );
 
 		$productListManager = $productManager->getSubManager( 'list', 'Default' );
 		$listItem = $productListManager->createItem();
@@ -416,7 +416,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * @param array $testdata Test data
 	 * @throws MW_Setup_Exception
 	 */
-	private function _getProductRefIds( MShop_Common_Manager_Interface $manager, array $testdata, array $keys )
+	private function _getProductRefIds( MShop_Common_Manager_Interface $manager, array $keys )
 	{
 		$codes = $refIds = array();
 
