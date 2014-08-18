@@ -32,81 +32,33 @@ class MShop_Customer_Item_Default
 	{
 		parent::__construct('customer.', $values, $listItems, $refItems);
 
-		$this->_values = $values;
-
-		if( isset( $values['salutation'] ) ) {
-			$address->setSalutation( (string) $values['salutation'] );
-		}
-
-		if( isset( $values['company'] ) ) {
-			$address->setCompany( (string) $values['company'] );
-		}
-
-		if( isset( $values['vatid'] ) ) {
-			$address->setVatID( (string) $values['vatid'] );
-		}
-
-		if( isset( $values['title'] ) ) {
-			$address->setTitle( (string) $values['title'] );
-		}
-
-		if( isset( $values['firstname'] ) ) {
-			$address->setFirstname( (string) $values['firstname'] );
-		}
-
-		if( isset( $values['lastname'] ) ) {
-			$address->setLastname( (string) $values['lastname'] );
-		}
-
-		if( isset( $values['address1'] ) ) {
-			$address->setAddress1( (string) $values['address1'] );
-		}
-
-		if( isset( $values['address2'] ) ) {
-			$address->setAddress2( (string) $values['address2'] );
-		}
-
-		if( isset( $values['address3'] ) ) {
-			$address->setAddress3( (string) $values['address3'] );
-		}
-
-		if( isset( $values['postal'] ) ) {
-			$address->setPostal( (string) $values['postal'] );
-		}
-
-		if( isset( $values['city'] ) ) {
-			$address->setCity( (string) $values['city'] );
-		}
-
-		if( isset( $values['state'] ) ) {
-			$address->setState( (string) $values['state'] );
-		}
-
-		if( isset( $values['langid'] ) ) {
-			$address->setLanguageId( (string) $values['langid'] );
-		}
-
-		if( isset( $values['countryid'] ) ) {
-			$address->setCountryId( (string) $values['countryid'] );
-		}
-
-		if( isset( $values['telephone'] ) ) {
-			$address->setTelephone( (string) $values['telephone'] );
-		}
-
-		if( isset( $values['email'] ) ) {
-			$address->setEmail( (string) $values['email'] );
-		}
-
-		if( isset( $values['telefax'] ) ) {
-			$address->setTelefax( (string) $values['telefax'] );
-		}
-
-		if( isset( $values['website'] ) ) {
-			$address->setWebsite( (string) $values['website'] );
+		foreach( $values as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'salutation': $address->setSalutation( $values['salutation'] ); break;
+				case 'company': $address->setCompany( $values['company'] ); break;
+				case 'vatid': $address->setVatID( $values['vatid'] ); break;
+				case 'title': $address->setTitle( $values['title'] ); break;
+				case 'firstname': $address->setFirstname( $values['firstname'] ); break;
+				case 'lastname': $address->setLastname( $values['lastname'] ); break;
+				case 'address1': $address->setAddress1( $values['address1'] ); break;
+				case 'address2': $address->setAddress2( $values['address2'] ); break;
+				case 'address3': $address->setAddress3( $values['address3'] ); break;
+				case 'postal': $address->setPostal( $values['postal'] ); break;
+				case 'city': $address->setCity( $values['city'] ); break;
+				case 'state': $address->setState( $values['state'] ); break;
+				case 'langid': $address->setLanguageId( $values['langid'] ); break;
+				case 'countryid': $address->setCountryId( $values['countryid'] ); break;
+				case 'telephone': $address->setTelephone( $values['telephone'] ); break;
+				case 'telefax': $address->setTelefax( $values['telefax'] ); break;
+				case 'website': $address->setWebsite( $values['website'] ); break;
+				case 'email': $address->setEmail( $values['email'] ); break;
+			}
 		}
 
 		$this->_billingaddress = $address;
+		$this->_values = $values;
 		$this->_salt = $salt;
 	}
 
