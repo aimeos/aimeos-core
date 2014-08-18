@@ -52,7 +52,7 @@ class Controller_ExtJS_Order_Base_Service_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -70,12 +70,12 @@ class Controller_ExtJS_Order_Base_Service_Default
 
 
 	/**
-	 * Creates a new order base service item and sets the properties from the given object.
+	 * Creates a new order base service item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "order.base.service" prefix
+	 * @param array $entry Associative list of name and value properties using the "order.base.service" prefix
 	 * @return MShop_Order_Item_Base_Product_Interface Order service item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 

@@ -51,7 +51,7 @@ class Controller_ExtJS_Product_Stock_Warehouse_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -69,12 +69,12 @@ class Controller_ExtJS_Product_Stock_Warehouse_Default
 
 
 	/**
-	 * Creates a new product stock warehouse item and sets the properties from the given object.
+	 * Creates a new product stock warehouse item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "product.stock.warehouse" prefix
+	 * @param array $entry Associative list of name and value properties using the "product.stock.warehouse" prefix
 	 * @return MShop_Product_Item_Stock_Warehouse_Interface Product warehouse item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 

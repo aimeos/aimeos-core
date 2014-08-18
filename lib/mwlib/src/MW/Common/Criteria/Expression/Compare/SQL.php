@@ -96,9 +96,9 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 		switch( $this->getOperator() )
 		{
 			case '==':
-				return $name . ' IN ' . $this->_createValueList( $type, $this->getValue() );
+				return $name . ' IN ' . $this->_createValueList( $type, (array) $this->getValue() );
 			case '!=':
-				return $name . ' NOT IN ' . $this->_createValueList( $type, $this->getValue() );
+				return $name . ' NOT IN ' . $this->_createValueList( $type, (array) $this->getValue() );
 			default:
 				$terms = array();
 

@@ -49,7 +49,7 @@ class Controller_ExtJS_Supplier_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -69,12 +69,12 @@ class Controller_ExtJS_Supplier_Default
 
 
 	/**
-	 * Creates a new supplier item and sets the properties from the given object.
+	 * Creates a new supplier item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "supplier" prefix
+	 * @param array $entry Associative list of name and value properties using the "supplier" prefix
 	 * @return MShop_Supplier_Item_Interface Supplier item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 

@@ -51,7 +51,7 @@ class Controller_ExtJS_Service_List_Type_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 
 			$ids[] = $item->getId();
@@ -70,12 +70,12 @@ class Controller_ExtJS_Service_List_Type_Default
 
 
 	/**
-	 * Creates a new service list type item and sets the properties from the given object.
+	 * Creates a new service list type item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "service.list.type" prefix
+	 * @param array $entry Associative list of name and value properties using the "service.list.type" prefix
 	 * @return MShop_Common_Item_Type_Interface Common type item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 

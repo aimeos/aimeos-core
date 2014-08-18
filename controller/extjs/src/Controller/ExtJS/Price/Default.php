@@ -49,7 +49,7 @@ class Controller_ExtJS_Price_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -219,12 +219,12 @@ class Controller_ExtJS_Price_Default
 
 
 	/**
-	 * Creates a new price item and sets the properties from the given object.
+	 * Creates a new price item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "price" prefix
+	 * @param array $entry Associative list of name and value properties using the "price" prefix
 	 * @return MShop_Attribute_Item_Interface Attribute item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 

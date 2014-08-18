@@ -54,7 +54,7 @@ class Controller_ExtJS_Order_Base_Default
 
 			$this->_setLocale( $params->site, $langid, $currencyid );
 
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -72,12 +72,12 @@ class Controller_ExtJS_Order_Base_Default
 
 
 	/**
-	 * Creates a new order base item and sets the properties from the given object.
+	 * Creates a new order base item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "order.base" prefix
+	 * @param array $entry Associative list of name and value properties using the "order.base" prefix
 	 * @return MShop_Order_Item_Base_Interface Order base item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 

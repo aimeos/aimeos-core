@@ -50,7 +50,7 @@ class Controller_ExtJS_Admin_Job_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 
 			$ids[] = $item->getId();
@@ -69,12 +69,12 @@ class Controller_ExtJS_Admin_Job_Default
 
 
 	/**
-	 * Creates a new job item and sets the properties from the given object.
+	 * Creates a new job item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "job" prefix
+	 * @param array $entry Associative list of name and value properties using the "job" prefix
 	 * @return MAdmin_Job_Item_Interface Job item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 

@@ -178,7 +178,7 @@ class Controller_ExtJS_Media_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -304,12 +304,12 @@ class Controller_ExtJS_Media_Default
 
 
 	/**
-	 * Creates a new media item and sets the properties from the given object.
+	 * Creates a new media item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "media" prefix
+	 * @param array $entry Associative list of name and value properties using the "media" prefix
 	 * @return MShop_Media_Item_Interface Media item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 

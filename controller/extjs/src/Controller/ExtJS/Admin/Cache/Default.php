@@ -89,7 +89,7 @@ class Controller_ExtJS_Admin_Cache_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_createItem( $entry );
+			$item = $this->_createItem( (array) $entry );
 			$this->_manager->saveItem( $item );
 		}
 
@@ -101,12 +101,12 @@ class Controller_ExtJS_Admin_Cache_Default
 
 
 	/**
-	 * Creates a new cache item and sets the properties from the given object.
+	 * Creates a new cache item and sets the properties from the given array.
 	 *
-	 * @param stdClass $entry Object with public properties using the "cache" prefix
+	 * @param array $entry Associative list of name and value properties using the "cache" prefix
 	 * @return MAdmin_Cache_Item_Interface Cache item
 	 */
-	protected function _createItem( stdClass $entry )
+	protected function _createItem( array $entry )
 	{
 		$item = $this->_manager->createItem();
 
