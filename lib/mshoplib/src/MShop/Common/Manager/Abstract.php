@@ -738,14 +738,13 @@ abstract class MShop_Common_Manager_Abstract
 		$sitelevel = MShop_Locale_Manager_Abstract::SITE_ONE, array $plugins = array() )
 	{
 		$joins = $cond = array();
-		$basekey = array_shift( $required );
-
 		$sep = $this->_getKeySeparator();
 		$conditions = $search->getConditions();
 		$attributes = $this->getSearchAttributes();
 		$siteIds = $this->_getSiteIds( $sitelevel );
 		$keys = $this->_getCriteriaKeyList( $search, $required );
 
+		$basekey = array_shift( $required );
 
 		foreach( $keys as $key )
 		{
