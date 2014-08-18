@@ -568,7 +568,7 @@ class MShop_Order_Manager_Base_Product_Default
 	/**
 	 * Searches for attribute items connected with order product item.
 	 *
-	 * @param array $ids Ids of order product item
+	 * @param string[] $ids List of order product item IDs
 	 * @return array List of items implementing MShop_Order_Item_Base_Product_Attribute_Interface
 	 */
 	protected function _getAttributeItems( $ids )

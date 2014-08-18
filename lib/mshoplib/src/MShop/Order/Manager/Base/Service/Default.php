@@ -513,7 +513,7 @@ class MShop_Order_Manager_Base_Service_Default
 	/**
 	 * Searches for attribute items connected with order service item.
 	 *
-	 * @param integer $ids of order service item
+	 * @param string[] $ids List of order service item IDs
 	 * @return array List of items implementing MShop_Order_Item_Base_Service_Attribute_Interface
 	 */
 	protected function _getAttributeItems( $ids )
