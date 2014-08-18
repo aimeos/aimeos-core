@@ -118,8 +118,9 @@ class Controller_ExtJS_Text_DefaultTest extends MW_Unittest_Testcase
 		$managerStub->expects( $this->once() )->method( 'createItem' )->will( $this->returnValue( $itemStub ) );
 		$managerStub->expects( $this->once() )->method( 'saveItem' );
 
-		$itemStub->expects( $this->once() )->method( 'setLabel' )->with( $this->equalTo( 'test content' ) );
+		$itemStub->expects( $this->once() )->method( 'getContent' )->will( $this->returnValue( "<br>\ntest<br>\n<br>\ncontent" ) );
 		$itemStub->expects( $this->once() )->method( 'setContent' )->with( $this->equalTo( "<br>\ntest<br>\n<br>\ncontent" ) );
+		$itemStub->expects( $this->once() )->method( 'setLabel' )->with( $this->equalTo( 'test content' ) );
 
 		MShop_Text_Manager_Factory::injectManager( 'MShop_Text_Manager_Default', $managerStub );
 

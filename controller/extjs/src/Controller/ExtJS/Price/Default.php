@@ -49,22 +49,8 @@ class Controller_ExtJS_Price_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'price.id'} ) ) { $item->setId( $entry->{'price.id'} ); }
-			if( isset( $entry->{'price.typeid'} ) ) { $item->setTypeId( $entry->{'price.typeid'} ); }
-			if( isset( $entry->{'price.currencyid'} ) ) { $item->setCurrencyId( $entry->{'price.currencyid'} ); }
-			if( isset( $entry->{'price.domain'} ) ) { $item->setDomain( $entry->{'price.domain'} ); }
-			if( isset( $entry->{'price.label'} ) ) { $item->setLabel( $entry->{'price.label'} ); }
-			if( isset( $entry->{'price.quantity'} ) ) { $item->setQuantity( $entry->{'price.quantity'} ); }
-			if( isset( $entry->{'price.value'} ) ) { $item->setValue( $entry->{'price.value'} ); }
-			if( isset( $entry->{'price.costs'} ) ) { $item->setCosts( $entry->{'price.costs'} ); }
-			if( isset( $entry->{'price.rebate'} ) ) { $item->setRebate( $entry->{'price.rebate'} ); }
-			if( isset( $entry->{'price.taxrate'} ) ) { $item->setTaxRate( $entry->{'price.taxrate'} ); }
-			if( isset( $entry->{'price.status'} ) ) { $item->setStatus( $entry->{'price.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -229,6 +215,38 @@ class Controller_ExtJS_Price_Default
 				'items' => $params->items,
 				'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new price item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "price" prefix
+	 * @return MShop_Attribute_Item_Interface Attribute item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'price.id': $item->setId( $value ); break;
+				case 'price.label': $item->setLabel( $value ); break;
+				case 'price.domain': $item->setDomain( $value ); break;
+				case 'price.typeid': $item->setTypeId( $value ); break;
+				case 'price.status': $item->setStatus( $value ); break;
+				case 'price.value': $item->setValue( $value ); break;
+				case 'price.costs': $item->setCosts( $value ); break;
+				case 'price.rebate': $item->setRebate( $value ); break;
+				case 'price.taxrate': $item->setTaxRate( $value ); break;
+				case 'price.quantity': $item->setQuantity( $value ); break;
+				case 'price.currencyid': $item->setCurrencyId( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

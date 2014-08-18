@@ -52,22 +52,8 @@ class Controller_ExtJS_Order_Base_Product_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'order.base.product.id'} ) ) { $item->setId( $entry->{'order.base.product.id'} ); }
-			if( isset( $entry->{'order.base.product.baseid'} ) ) { $item->setBaseId( $entry->{'order.base.product.baseid'} ); }
-			if( isset( $entry->{'order.base.product.orderproductid'} ) ) { $item->setOrderProductId( $entry->{'order.base.product.orderproductid'} ); }
-			if( isset( $entry->{'order.base.product.type'} ) ) { $item->setType( $entry->{'order.base.product.type'} ); }
-			if( isset( $entry->{'order.base.product.suppliercode'} ) ) { $item->setSupplierCode( $entry->{'order.base.product.suppliercode'} ); }
-			if( isset( $entry->{'order.base.product.prodcode'} ) ) { $item->setProductCode( $entry->{'order.base.product.prodcode'} ); }
-			if( isset( $entry->{'order.base.product.name'} ) ) { $item->setName( $entry->{'order.base.product.name'} ); }
-			if( isset( $entry->{'order.base.product.quantity'} ) ) { $item->setQuantity( $entry->{'order.base.product.quantity'} ); }
-			if( isset( $entry->{'order.base.product.flags'} ) ) { $item->setFlags( $entry->{'order.base.product.flags'} ); }
-			if( isset( $entry->{'order.base.product.status'} ) ) { $item->setStatus( $entry->{'order.base.product.status'} ); }
-			if( isset( $entry->{'order.base.product.position'} ) ) { $item->setPosition( $entry->{'order.base.product.position'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -80,6 +66,38 @@ class Controller_ExtJS_Order_Base_Product_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new order base product item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "order.base.product" prefix
+	 * @return MShop_Order_Item_Base_Product_Interface Order product item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'order.base.product.id': $item->setId( $value ); break;
+				case 'order.base.product.type': $item->setType( $value ); break;
+				case 'order.base.product.baseid': $item->setBaseId( $value ); break;
+				case 'order.base.product.orderproductid': $item->setOrderProductId( $value ); break;
+				case 'order.base.product.suppliercode': $item->setSupplierCode( $value ); break;
+				case 'order.base.product.prodcode': $item->setProductCode( $value ); break;
+				case 'order.base.product.quantity': $item->setQuantity( $value ); break;
+				case 'order.base.product.name': $item->setName( $value ); break;
+				case 'order.base.product.flags': $item->setFlags( $value ); break;
+				case 'order.base.product.status': $item->setStatus( $value ); break;
+				case 'order.base.product.position': $item->setPosition( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

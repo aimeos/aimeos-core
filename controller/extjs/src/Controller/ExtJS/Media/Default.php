@@ -178,25 +178,8 @@ class Controller_ExtJS_Media_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'media.id'} ) ) { $item->setId( $entry->{'media.id'} ); }
-			if( isset( $entry->{'media.typeid'} ) ) { $item->setTypeId( $entry->{'media.typeid'} ); }
-			if( isset( $entry->{'media.domain'} ) ) { $item->setDomain( $entry->{'media.domain'} ); }
-			if( isset( $entry->{'media.label'} ) ) { $item->setLabel( $entry->{'media.label'} ); }
-			if( isset( $entry->{'media.status'} ) ) { $item->setStatus( $entry->{'media.status'} ); }
-			if( isset( $entry->{'media.url'} ) ) { $item->setUrl( $entry->{'media.url'} ); }
-			if( isset( $entry->{'media.preview'} ) ) { $item->setPreview( $entry->{'media.preview'} ); }
-			if( isset( $entry->{'media.mimetype'} ) ) { $item->setMimeType( $entry->{'media.mimetype'} ); }
-
-			if( isset( $entry->{'media.languageid'} ) )
-			{
-				$langid = ( $entry->{'media.languageid'} != '' ? $entry->{'media.languageid'} : null );
-				$item->setLanguageId( $langid );
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -317,6 +300,40 @@ class Controller_ExtJS_Media_Default
 		);
 
 		return $smd;
+	}
+
+
+	/**
+	 * Creates a new media item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "media" prefix
+	 * @return MShop_Media_Item_Interface Media item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'media.id': $item->setId( $value ); break;
+				case 'media.label': $item->setLabel( $value ); break;
+				case 'media.typeid': $item->setTypeId( $value ); break;
+				case 'media.domain': $item->setDomain( $value ); break;
+				case 'media.status': $item->setStatus( $value ); break;
+				case 'media.mimetype': $item->setMimeType( $value ); break;
+				case 'media.preview': $item->setPreview( $value ); break;
+				case 'media.url': $item->setUrl( $value ); break;
+				case 'media.languageid':
+					if( $value != null ) {
+						$item->setLanguageId( $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
 	}
 
 

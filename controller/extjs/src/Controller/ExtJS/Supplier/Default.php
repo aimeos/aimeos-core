@@ -49,14 +49,8 @@ class Controller_ExtJS_Supplier_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'supplier.id'} ) ) { $item->setId( $entry->{'supplier.id'} ); }
-			if( isset( $entry->{'supplier.label'} ) ) { $item->setLabel( $entry->{'supplier.label'} ); }
-			if( isset( $entry->{'supplier.status'} ) ) { $item->setStatus( $entry->{'supplier.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -71,6 +65,30 @@ class Controller_ExtJS_Supplier_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new supplier item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "supplier" prefix
+	 * @return MShop_Supplier_Item_Interface Supplier item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'supplier.id': $item->setId( $value ); break;
+				case 'supplier.label': $item->setLabel( $value ); break;
+				case 'supplier.status': $item->setStatus( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

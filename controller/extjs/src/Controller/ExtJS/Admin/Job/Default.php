@@ -50,35 +50,7 @@ class Controller_ExtJS_Admin_Job_Default
 
 		foreach( $items as $entry )
 		{
-			if( !is_object( $entry ) ) {
-				throw new Controller_ExtJS_Exception( 'Given item is not of type "object"' );
-			}
-
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'job.id'} ) ) { $item->setId( $entry->{'job.id'} ); }
-			if( isset( $entry->{'job.label'} ) ) { $item->setLabel( $entry->{'job.label'} ); }
-			if( isset( $entry->{'job.method'} ) ) { $item->setMethod( $entry->{'job.method'} ); }
-			if( isset( $entry->{'job.status'} ) ) { $item->setStatus( $entry->{'job.status'} ); }
-
-			if( isset( $entry->{'job.parameter'} ) )
-			{
-				if( is_string( $entry->{'job.parameter'} ) ) {
-					$item->setParameter( json_decode( $entry->{'job.parameter'}, true ) );
-				} else {
-					$item->setParameter( (array) $entry->{'job.parameter'} );
-				}
-			}
-
-			if( isset( $entry->{'job.result'} ) )
-			{
-				if( is_string( $entry->{'job.result'} ) ) {
-					$item->setResult( json_decode( $entry->{'job.result'}, true ) );
-				} else {
-					$item->setResult( (array) $entry->{'job.result'} );
-				}
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 
 			$ids[] = $item->getId();
@@ -93,6 +65,45 @@ class Controller_ExtJS_Admin_Job_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new job item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "job" prefix
+	 * @return MAdmin_Job_Item_Interface Job item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'job.id': $item->setId( $value ); break;
+				case 'job.label': $item->setLabel( $value ); break;
+				case 'job.method': $item->setMethod( $value ); break;
+				case 'job.status': $item->setStatus( $value ); break;
+				case 'job.parameter':
+					if( is_string( $value ) ) {
+						$item->setParameter( json_decode( $value, true ) );
+					} else {
+						$item->setParameter( (array) $value );
+					}
+					break;
+				case 'job.result':
+					if( is_string( $value ) ) {
+						$item->setResult( json_decode( $value, true ) );
+					} else {
+						$item->setResult( (array) $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
 	}
 
 

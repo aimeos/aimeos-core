@@ -67,16 +67,8 @@ class Controller_ExtJS_Locale_Site_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'locale.site.id'} ) ) { $item->setId( $entry->{'locale.site.id'} ); }
-			if( isset( $entry->{'locale.site.code'} ) ) { $item->setCode( $entry->{'locale.site.code'} ); }
-			if( isset( $entry->{'locale.site.label'} ) ) { $item->setLabel( $entry->{'locale.site.label'} ); }
-			if( isset( $entry->{'locale.site.config'} ) ) { $item->setConfig( (array) $entry->{'locale.site.config'} ); }
-			if( isset( $entry->{'locale.site.status'} ) ) { $item->setStatus( $entry->{'locale.site.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -283,6 +275,32 @@ class Controller_ExtJS_Locale_Site_Default
 				"returns" => "array",
 			),
 		);
+	}
+
+
+	/**
+	 * Creates a new locale site item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "locale.site" prefix
+	 * @return MShop_Locale_Item_Site_Interface Locale site item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'locale.site.id': $item->setId( $value ); break;
+				case 'locale.site.code': $item->setCode( $value ); break;
+				case 'locale.site.label': $item->setLabel( $value ); break;
+				case 'locale.site.status': $item->setStatus( $value ); break;
+				case 'locale.site.config': $item->setConfig( (array) $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

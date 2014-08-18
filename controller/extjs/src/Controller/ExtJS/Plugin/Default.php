@@ -52,16 +52,7 @@ class Controller_ExtJS_Plugin_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'plugin.id'} ) ) { $item->setId( $entry->{'plugin.id'} ); }
-			if( isset( $entry->{'plugin.typeid'} ) ) { $item->setTypeId( $entry->{'plugin.typeid'} ); }
-			if( isset( $entry->{'plugin.label'} ) ) {$item->setLabel( $entry->{'plugin.label'} );}
-			if( isset( $entry->{'plugin.provider'} ) ) { $item->setProvider( $entry->{'plugin.provider'} ); }
-			if( isset( $entry->{'plugin.config'} ) ) { $item->setConfig( (array) $entry->{'plugin.config'} ); }
-			if( isset( $entry->{'plugin.position'} ) ) { $item->setPosition( $entry->{'plugin.position'} ); }
-			if( isset( $entry->{'plugin.status'} ) ) { $item->setStatus( $entry->{'plugin.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -77,6 +68,34 @@ class Controller_ExtJS_Plugin_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new plugin item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "plugin" prefix
+	 * @return MShop_Plugin_Item_Interface Plugin item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'plugin.id': $item->setId( $value ); break;
+				case 'plugin.code': $item->setCode( $value ); break;
+				case 'plugin.typeid': $item->setTypeId( $value ); break;
+				case 'plugin.status': $item->setStatus( $value ); break;
+				case 'plugin.provider': $item->setProvider( $value ); break;
+				case 'plugin.position': $item->setPosition( $value ); break;
+				case 'plugin.config': $item->setConfig( (array) $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

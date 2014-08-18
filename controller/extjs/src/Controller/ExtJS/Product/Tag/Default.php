@@ -50,17 +50,8 @@ class Controller_ExtJS_Product_Tag_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'product.tag.id'} ) ) { $item->setId( $entry->{'product.tag.id'} ); }
-			if( isset( $entry->{'product.tag.typeid'} ) ) { $item->setTypeId( $entry->{'product.tag.typeid'} ); }
-			if( isset( $entry->{'product.tag.label'} ) ) { $item->setLabel( $entry->{'product.tag.label'} ); }
-			if( isset( $entry->{'product.tag.languageid'} ) && $entry->{'product.tag.languageid'} != '' ) {
-				$item->setLanguageId( $entry->{'product.tag.languageid'} );
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -73,6 +64,35 @@ class Controller_ExtJS_Product_Tag_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new product tag item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "product.tag" prefix
+	 * @return MShop_Product_Item_Tag_Interface Product tag item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'product.tag.id': $item->setId( $value ); break;
+				case 'product.tag.label': $item->setLabel( $value ); break;
+				case 'product.tag.typeid': $item->setTypeId( $value ); break;
+				case 'product.tag.languageid':
+					if( $value != '' ) {
+						$item->setLanguageId( $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
 	}
 
 

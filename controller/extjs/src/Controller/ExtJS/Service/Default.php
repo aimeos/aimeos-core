@@ -52,17 +52,7 @@ class Controller_ExtJS_Service_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'service.id'} ) ) { $item->setId( $entry->{'service.id'} ); }
-			if( isset( $entry->{'service.position'} ) ) { $item->setPosition( $entry->{'service.position'} ); }
-			if( isset( $entry->{'service.typeid'} ) ) { $item->setTypeId( $entry->{'service.typeid'} ); }
-			if( isset( $entry->{'service.code'} ) ) { $item->setCode( $entry->{'service.code'} ); }
-			if( isset( $entry->{'service.label'} ) ) { $item->setLabel( $entry->{'service.label'} ); }
-			if( isset( $entry->{'service.provider'} ) ) { $item->setProvider( $entry->{'service.provider'} ); }
-			if( isset( $entry->{'service.config'} ) ) { $item->setConfig( (array) $entry->{'service.config'} ); }
-			if( isset( $entry->{'service.status'} ) ) { $item->setStatus( $entry->{'service.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -78,6 +68,35 @@ class Controller_ExtJS_Service_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new service item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "service" prefix
+	 * @return MShop_Service_Item_Interface Service item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'service.id': $item->setId( $value ); break;
+				case 'service.code': $item->setCode( $value ); break;
+				case 'service.label': $item->setLabel( $value ); break;
+				case 'service.typeid': $item->setTypeId( $value ); break;
+				case 'service.status': $item->setStatus( $value ); break;
+				case 'service.position': $item->setPosition( $value ); break;
+				case 'service.provider': $item->setProvider( $value ); break;
+				case 'service.config': $item->setConfig( (array) $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

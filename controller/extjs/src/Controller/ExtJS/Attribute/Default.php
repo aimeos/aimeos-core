@@ -50,18 +50,8 @@ class Controller_ExtJS_Attribute_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'attribute.id'} ) ) { $item->setId( $entry->{'attribute.id'} ); }
-			if( isset( $entry->{'attribute.typeid'} ) ) { $item->setTypeId( $entry->{'attribute.typeid'} ); }
-			if( isset( $entry->{'attribute.domain'} ) ) { $item->setDomain( $entry->{'attribute.domain'} ); }
-			if( isset( $entry->{'attribute.code'} ) ) { $item->setCode( $entry->{'attribute.code'} ); }
-			if( isset( $entry->{'attribute.label'} ) ) { $item->setLabel( $entry->{'attribute.label'} ); }
-			if( isset( $entry->{'attribute.position'} ) ) { $item->setPosition( $entry->{'attribute.position'} ); }
-			if( isset( $entry->{'attribute.status'} ) ) { $item->setStatus( $entry->{'attribute.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -140,6 +130,34 @@ class Controller_ExtJS_Attribute_Default
 				'items' => $params->items,
 				'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new attribute item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "attribute" prefix
+	 * @return MShop_Attribute_Item_Interface Attribute item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'attribute.id': $item->setId( $value ); break;
+				case 'attribute.code': $item->setCode( $value ); break;
+				case 'attribute.label': $item->setLabel( $value ); break;
+				case 'attribute.domain': $item->setDomain( $value ); break;
+				case 'attribute.typeid': $item->setTypeId( $value ); break;
+				case 'attribute.status': $item->setStatus( $value ); break;
+				case 'attribute.position': $item->setPosition( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

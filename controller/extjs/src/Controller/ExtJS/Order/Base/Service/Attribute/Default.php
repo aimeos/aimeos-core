@@ -52,16 +52,8 @@ class Controller_ExtJS_Order_Base_Service_Attribute_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'order.base.service.attribute.id'} ) ) { $item->setId( $entry->{'order.base.service.attribute.id'} ); }
-			if( isset( $entry->{'order.base.service.attribute.ordservid'} ) ) { $item->setServiceId( $entry->{'order.base.service.attribute.ordservid'} ); }
-			if( isset( $entry->{'order.base.service.attribute.name'} ) ) { $item->setName( $entry->{'order.base.service.attribute.name'} ); }
-			if( isset( $entry->{'order.base.service.attribute.code'} ) ) { $item->setCode( $entry->{'order.base.service.attribute.code'} ); }
-			if( isset( $entry->{'order.base.service.attribute.value'} ) ) { $item->setValue( $entry->{'order.base.service.attribute.value'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -74,6 +66,32 @@ class Controller_ExtJS_Order_Base_Service_Attribute_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new order base service attribute item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "order.base.service.attribute" prefix
+	 * @return MShop_Order_Item_Base_Service_Attribute_Interface Order service attribute item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'order.base.service.attribute.id': $item->setId( $value ); break;
+				case 'order.base.service.attribute.name': $item->setName( $value ); break;
+				case 'order.base.service.attribute.code': $item->setCode( $value ); break;
+				case 'order.base.service.attribute.value': $item->setValue( $value ); break;
+				case 'order.base.service.attribute.ordservid': $item->setServiceId( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

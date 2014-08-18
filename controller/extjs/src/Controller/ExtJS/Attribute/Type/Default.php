@@ -15,7 +15,7 @@
  * @subpackage ExtJS
  */
 class Controller_ExtJS_Attribute_Type_Default
-	extends Controller_ExtJS_Abstract 
+	extends Controller_ExtJS_Abstract
 	implements Controller_ExtJS_Common_Interface
 {
 	private $_manager = null;
@@ -50,14 +50,7 @@ class Controller_ExtJS_Attribute_Type_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'attribute.type.id'} ) ) { $item->setId( $entry->{'attribute.type.id'} ); }
-			if( isset( $entry->{'attribute.type.code'} ) ) { $item->setCode( $entry->{'attribute.type.code'} ); }
-			if( isset( $entry->{'attribute.type.domain'} ) ) { $item->setDomain( $entry->{'attribute.type.domain'} ); }
-			if( isset( $entry->{'attribute.type.label'} ) ) { $item->setLabel( $entry->{'attribute.type.label'} ); }
-			if( isset( $entry->{'attribute.type.status'} ) ) { $item->setStatus( $entry->{'attribute.type.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 
 			$ids[] = $item->getId();
@@ -72,6 +65,32 @@ class Controller_ExtJS_Attribute_Type_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new attribute type item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "attribute.type" prefix
+	 * @return MShop_Common_Item_Type_Interface Common type item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'attribute.type.id': $item->setId( $value ); break;
+				case 'attribute.type.code': $item->setCode( $value ); break;
+				case 'attribute.type.domain': $item->setDomain( $value ); break;
+				case 'attribute.type.label': $item->setLabel( $value ); break;
+				case 'attribute.type.status': $item->setStatus( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

@@ -82,27 +82,7 @@ class Controller_ExtJS_Product_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'product.id'} ) ) { $item->setId( $entry->{'product.id'} ); }
-			if( isset( $entry->{'product.typeid'} ) ) { $item->setTypeId( $entry->{'product.typeid'} ); }
-			if( isset( $entry->{'product.code'} ) ) { $item->setCode( $entry->{'product.code'} ); }
-			if( isset( $entry->{'product.label'} ) ) { $item->setLabel( $entry->{'product.label'} ); }
-			if( isset( $entry->{'product.status'} ) ) { $item->setStatus( $entry->{'product.status'} ); }
-			if( isset( $entry->{'product.suppliercode'} ) ) { $item->setSupplierCode( $entry->{'product.suppliercode'} ); }
-
-			if( isset( $entry->{'product.datestart'} ) && $entry->{'product.datestart'} != '' )
-			{
-				$entry->{'product.datestart'} = $entry->{'product.datestart'};
-				$item->setDateStart( $entry->{'product.datestart'} );
-			}
-
-			if( isset( $entry->{'product.dateend'} ) && $entry->{'product.dateend'} != '' )
-			{
-				$entry->{'product.dateend'} = $entry->{'product.dateend'};
-				$item->setDateEnd( $entry->{'product.dateend'} );
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 			$ids[] = $item->getId();
 		}
@@ -173,6 +153,49 @@ class Controller_ExtJS_Product_Default
 				'items' => $params->items,
 				'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new product item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "product" prefix
+	 * @return MShop_Product_Item_Interface Product item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'product.id': $item->setId( $value ); break;
+				case 'product.code': $item->setCode( $value ); break;
+				case 'product.label': $item->setLabel( $value ); break;
+				case 'product.typeid': $item->setTypeId( $value ); break;
+				case 'product.status': $item->setStatus( $value ); break;
+				case 'product.suppliercode': $item->setSupplierCode( $value ); break;
+				case 'product.datestart':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'product.datestart'} = $value;
+						$item->setDateStart( $value );
+					}
+					break;
+				case 'product.dateend':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'product.dateend'} = $value;
+						$item->setDateEnd( $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
 	}
 
 

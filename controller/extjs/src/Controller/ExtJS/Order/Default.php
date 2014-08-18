@@ -50,30 +50,8 @@ class Controller_ExtJS_Order_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'order.id'} ) ) { $item->setId( $entry->{'order.id'} ); }
-			if( isset( $entry->{'order.baseid'} ) ) { $item->setBaseId( $entry->{'order.baseid'} ); }
-			if( isset( $entry->{'order.type'} ) ) { $item->setType( $entry->{'order.type'} ); }
-
-			if( isset( $entry->{'order.datepayment'} ) && $entry->{'order.datepayment'} != '' )
-			{
-				$entry->{'order.datepayment'} = $entry->{'order.datepayment'};
-				$item->setDatePayment( $entry->{'order.datepayment'} );
-			}
-
-			if( isset( $entry->{'order.datedelivery'} ) && $entry->{'order.datedelivery'} != '' )
-			{
-				$entry->{'order.datedelivery'} = $entry->{'order.datedelivery'};
-				$item->setDateDelivery( $entry->{'order.datedelivery'} );
-			}
-
-			if( isset( $entry->{'order.statusdelivery'} ) ) { $item->setDeliveryStatus( $entry->{'order.statusdelivery'} ); }
-			if( isset( $entry->{'order.statuspayment'} ) ) { $item->setPaymentStatus( $entry->{'order.statuspayment'} ); }
-			if( isset( $entry->{'order.relatedid'} ) ) { $item->setRelatedId( $entry->{'order.relatedid'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -88,6 +66,49 @@ class Controller_ExtJS_Order_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new order item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "order" prefix
+	 * @return MShop_Order_Item_Interface Order item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'order.id': $item->setId( $value ); break;
+				case 'order.type': $item->setType( $value ); break;
+				case 'order.baseid': $item->setBaseId( $value ); break;
+				case 'order.relatedid': $item->setRelatedId( $value ); break;
+				case 'order.statuspayment': $item->setPaymentStatus( $value ); break;
+				case 'order.statusdelivery': $item->setDeliveryStatus( $value ); break;
+				case 'order.datepayment':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'order.datepayment'} = $value;
+						$item->setDatePayment( $value );
+					}
+					break;
+				case 'order.datedelivery':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'order.datedelivery'} = $value;
+						$item->setDateDelivery( $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
 	}
 
 

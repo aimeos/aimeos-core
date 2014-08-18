@@ -52,34 +52,8 @@ class Controller_ExtJS_Order_Base_Address_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'order.base.address.baseid'} ) ) { $item->setBaseId( $entry->{'order.base.address.baseid'} ); }
-			if( isset( $entry->{'order.base.address.addressid'} ) ) { $item->setAddressId( $entry->{'order.base.address.addressid'} ); }
-			if( isset( $entry->{'order.base.address.type'} ) ) { $item->setType( $entry->{'order.base.address.type'} ); }
-
-			if( isset( $entry->{'order.base.address.company'} ) ) { $item->setCompany( $entry->{'order.base.address.company'} ); }
-			if( isset( $entry->{'order.base.address.vatid'} ) ) { $item->setVatID( $entry->{'order.base.address.vatid'} ); }
-			if( isset( $entry->{'order.base.address.salutation'} ) ) { $item->setSalutation( $entry->{'order.base.address.salutation'} ); }
-			if( isset( $entry->{'order.base.address.title'} ) ) { $item->setTitle( $entry->{'order.base.address.title'} ); }
-			if( isset( $entry->{'order.base.address.firstname'} ) ) { $item->setFirstname( $entry->{'order.base.address.firstname'} ); }
-			if( isset( $entry->{'order.base.address.lastname'} ) ) { $item->setLastname( $entry->{'order.base.address.lastname'} ); }
-			if( isset( $entry->{'order.base.address.address1'} ) ) { $item->setAddress1( $entry->{'order.base.address.address1'} ); }
-			if( isset( $entry->{'order.base.address.address2'} ) ) { $item->setAddress2( $entry->{'order.base.address.address2'} ); }
-			if( isset( $entry->{'order.base.address.address3'} ) ) { $item->setAddress3( $entry->{'order.base.address.address3'} ); }
-			if( isset( $entry->{'order.base.address.postal'} ) ) { $item->setPostal( $entry->{'order.base.address.postal'} ); }
-			if( isset( $entry->{'order.base.address.city'} ) ) { $item->setCity( $entry->{'order.base.address.city'} ); }
-			if( isset( $entry->{'order.base.address.state'} ) ) { $item->setState( $entry->{'order.base.address.state'} ); }
-			if( isset( $entry->{'order.base.address.countryid'} ) ) { $item->setCountryId( $entry->{'order.base.address.countryid'} ); }
-			if( isset( $entry->{'order.base.address.languageid'} ) ) { $item->setLanguageId( $entry->{'order.base.address.languageid'} ); }
-			if( isset( $entry->{'order.base.address.telephone'} ) ) { $item->setTelephone( $entry->{'order.base.address.telephone'} ); }
-			if( isset( $entry->{'order.base.address.email'} ) ) { $item->setEmail( $entry->{'order.base.address.email'} ); }
-			if( isset( $entry->{'order.base.address.telefax'} ) ) { $item->setTelefax( $entry->{'order.base.address.telefax'} ); }
-			if( isset( $entry->{'order.base.address.website'} ) ) { $item->setWebsite( $entry->{'order.base.address.website'} ); }
-
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -92,6 +66,49 @@ class Controller_ExtJS_Order_Base_Address_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new order.base.address item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "order.base.address" prefix
+	 * @return MShop_Attribute_Item_Interface Attribute item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'order.base.address.type': $item->setType( $value ); break;
+				case 'order.base.address.baseid': $item->setBaseId( $value ); break;
+				case 'order.base.address.addressid': $item->setAddressId( $value ); break;
+
+				case 'order.base.address.vatid': $item->setVatID( $value ); break;
+				case 'order.base.address.company': $item->setCompany( $value ); break;
+				case 'order.base.address.salutation': $item->setSalutation( $value ); break;
+				case 'order.base.address.title': $item->setTitle( $value ); break;
+				case 'order.base.address.firstname': $item->setFirstname( $value ); break;
+				case 'order.base.address.lastname': $item->setLastname( $value ); break;
+				case 'order.base.address.address1': $item->setAddress1( $value ); break;
+				case 'order.base.address.address2': $item->setAddress2( $value ); break;
+				case 'order.base.address.address3': $item->setAddress3( $value ); break;
+				case 'order.base.address.postal': $item->setPostal( $value ); break;
+				case 'order.base.address.city': $item->setCity( $value ); break;
+				case 'order.base.address.state': $item->setState( $value ); break;
+				case 'order.base.address.countryid': $item->setCountryId( $value ); break;
+				case 'order.base.address.languageid': $item->setLanguageId( $value ); break;
+				case 'order.base.address.telephone': $item->setTelephone( $value ); break;
+				case 'order.base.address.telefax': $item->setTelefax( $value ); break;
+				case 'order.base.address.website': $item->setWebsite( $value ); break;
+				case 'order.base.address.email': $item->setEmail( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

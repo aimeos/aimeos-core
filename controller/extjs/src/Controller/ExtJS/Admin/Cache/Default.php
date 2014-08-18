@@ -89,18 +89,7 @@ class Controller_ExtJS_Admin_Cache_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'cache.id'} ) ) { $item->setId( $entry->{'cache.id'} ); }
-			if( isset( $entry->{'cache.value'} ) ) { $item->setValue( $entry->{'cache.value'} ); }
-			if( isset( $entry->{'cache.tags'} ) ) { $item->setTags( (array) $entry->{'cache.tags'} ); }
-
-			if( isset( $entry->{'cache.expire'} ) && $entry->{'cache.expire'} != '' )
-			{
-				$entry->{'cache.expire'} = $entry->{'cache.expire'};
-				$item->setTimeExpire( $entry->{'cache.expire'} );
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 		}
 
@@ -108,6 +97,38 @@ class Controller_ExtJS_Admin_Cache_Default
 			'items' => $params->items,
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new cache item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "cache" prefix
+	 * @return MAdmin_Cache_Item_Interface Cache item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'cache.id': $item->setId( $value ); break;
+				case 'cache.value': $item->setValue( $value ); break;
+				case 'cache.tags': $item->setTags( (array) $value ); break;
+				case 'cache.expire':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'cache.expire'} = $value;
+						$item->setTimeExpire( $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
 	}
 
 

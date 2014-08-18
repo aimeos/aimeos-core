@@ -50,36 +50,8 @@ class Controller_ExtJS_Attribute_List_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'attribute.list.id'} ) ) { $item->setId( $entry->{'attribute.list.id'} ); }
-			if( isset( $entry->{'attribute.list.domain'} ) ) { $item->setDomain( $entry->{'attribute.list.domain'} ); }
-			if( isset( $entry->{'attribute.list.parentid'} ) ) { $item->setParentId( $entry->{'attribute.list.parentid'} ); }
-			if( isset( $entry->{'attribute.list.refid'} ) ) { $item->setRefId( $entry->{'attribute.list.refid'} ); }
-			if( isset( $entry->{'attribute.list.config'} ) ) { $item->setConfig( (array) $entry->{'attribute.list.config'} ); }
-			if( isset( $entry->{'attribute.list.position'} ) ) { $item->setPosition( $entry->{'attribute.list.position'} ); }
-			if( isset( $entry->{'attribute.list.status'} ) ) { $item->setStatus( $entry->{'attribute.list.status'} ); }
-
-			if( isset( $entry->{'attribute.list.typeid'} ) && $entry->{'attribute.list.typeid'} != '' ) {
-				$item->setTypeId( $entry->{'attribute.list.typeid'} );
-			}
-
-			if( isset( $entry->{'attribute.list.datestart'} ) && $entry->{'attribute.list.datestart'} != '' )
-			{
-				$datetime = str_replace( 'T', ' ', $entry->{'attribute.list.datestart'} );
-				$entry->{'attribute.list.datestart'} = $datetime;
-				$item->setDateStart( $datetime );
-			}
-
-			if( isset( $entry->{'attribute.list.dateend'} ) && $entry->{'attribute.list.dateend'} != '' )
-			{
-				$datetime = str_replace( 'T', ' ', $entry->{'attribute.list.dateend'} );
-				$entry->{'attribute.list.dateend'} = $datetime;
-				$item->setDateEnd( $datetime );
-			}
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -127,6 +99,51 @@ class Controller_ExtJS_Attribute_List_Default
 			'graph' => $this->_getDomainItems( $idLists ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new attribute list item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "attribute.list" prefix
+	 * @return MShop_Common_Item_List_Interface Common list item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'attribute.list.id': $item->setId( $value ); break;
+				case 'attribute.list.domain': $item->setDomain( $value ); break;
+				case 'attribute.list.parentid': $item->setParentId( $value ); break;
+				case 'attribute.list.position': $item->setPosition( $value ); break;
+				case 'attribute.list.config': $item->setConfig( (array) $value ); break;
+				case 'attribute.list.status': $item->setStatus( $value ); break;
+				case 'attribute.list.typeid': $item->setTypeId( $value ); break;
+				case 'attribute.list.refid': $item->setRefId( $value ); break;
+				case 'attribute.list.datestart':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'attribute.list.datestart'} = $value;
+						$item->setDateStart( $value );
+					}
+					break;
+				case 'attribute.list.dateend':
+					if( $value != '' )
+					{
+						$value = str_replace( 'T', ' ', $value );
+						$entry->{'attribute.list.dateend'} = $value;
+						$item->setDateEnd( $value );
+					}
+					break;
+			}
+		}
+
+		return $item;
 	}
 
 

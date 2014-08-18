@@ -160,16 +160,8 @@ class Controller_ExtJS_Catalog_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $manager->createItem();
-
-			if( isset( $entry->{'catalog.id'} ) ) { $item->setId( $entry->{'catalog.id'} ); }
-			if( isset( $entry->{'catalog.code'} ) ) { $item->setCode( $entry->{'catalog.code'} ); }
-			if( isset( $entry->{'catalog.label'} ) ) { $item->setLabel( $entry->{'catalog.label'} ); }
-			if( isset( $entry->{'catalog.config'} ) ) {	$item->setConfig( (array) $entry->{'catalog.config'} );	}
-			if( isset( $entry->{'catalog.status'} ) ) { $item->setStatus( $entry->{'catalog.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$manager->saveItem( $item );
-
 			$ids[] = $item->getId();
 		}
 
@@ -227,6 +219,33 @@ class Controller_ExtJS_Catalog_Default
 		);
 
 		return array_merge($desc, $catdesc);
+	}
+
+
+	/**
+	 * Creates a new catalog item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "catalog" prefix
+	 * @return MShop_Catalog_Item_Interface Catalog item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_getManager()->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'catalog.id': $item->setId( $value ); break;
+				case 'catalog.code': $item->setCode( $value ); break;
+				case 'catalog.label': $item->setLabel( $value ); break;
+				case 'catalog.domain': $item->setDomain( $value ); break;
+				case 'catalog.status': $item->setStatus( $value ); break;
+				case 'catalog.config': $item->setConfig( (array) $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 

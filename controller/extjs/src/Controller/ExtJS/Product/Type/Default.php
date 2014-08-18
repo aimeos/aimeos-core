@@ -50,14 +50,7 @@ class Controller_ExtJS_Product_Type_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $this->_manager->createItem();
-
-			if( isset( $entry->{'product.type.id'} ) ) { $item->setId( $entry->{'product.type.id'} ); }
-			if( isset( $entry->{'product.type.code'} ) ) { $item->setCode( $entry->{'product.type.code'} ); }
-			if( isset( $entry->{'product.type.domain'} ) ) { $item->setDomain( $entry->{'product.type.domain'} ); }
-			if( isset( $entry->{'product.type.label'} ) ) { $item->setLabel( $entry->{'product.type.label'} ); }
-			if( isset( $entry->{'product.type.status'} ) ) { $item->setStatus( $entry->{'product.type.status'} ); }
-
+			$item = $this->_createItem( $entry );
 			$this->_manager->saveItem( $item );
 
 			$ids[] = $item->getId();
@@ -72,6 +65,32 @@ class Controller_ExtJS_Product_Type_Default
 			'items' => ( !is_array( $params->items ) ? reset( $items ) : $items ),
 			'success' => true,
 		);
+	}
+
+
+	/**
+	 * Creates a new product type item and sets the properties from the given object.
+	 *
+	 * @param stdClass $entry Object with public properties using the "product.type" prefix
+	 * @return MShop_Common_Item_Type_Interface Common type item
+	 */
+	protected function _createItem( stdClass $entry )
+	{
+		$item = $this->_manager->createItem();
+
+		foreach( $entry as $name => $value )
+		{
+			switch( $name )
+			{
+				case 'product.type.id': $item->setId( $value ); break;
+				case 'product.type.code': $item->setCode( $value ); break;
+				case 'product.type.domain': $item->setDomain( $value ); break;
+				case 'product.type.label': $item->setLabel( $value ); break;
+				case 'product.type.status': $item->setStatus( $value ); break;
+			}
+		}
+
+		return $item;
 	}
 
 
