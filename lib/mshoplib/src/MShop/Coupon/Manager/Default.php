@@ -174,7 +174,7 @@ class MShop_Coupon_Manager_Default
 	/**
 	 * Returns the coupons item specified by its ID.
 	 *
-	 * @param integer $itemId Unique ID of the coupon item in the storage
+	 * @param string $id Unique ID of the coupon item in the storage
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return MShop_Coupon_Item_Interface Returns the coupon item of the given ID
 	 * @throws MShop_Exception If coupon couldn't be found

@@ -304,63 +304,17 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 */
 	private function _addProductData( array $testdata, $productManager, array $refIds, array $keys )
 	{
+		$parentIds = $this->_getProductIds( $productManager, $testdata );
+		$refIds['product'] = $this->_getProductRefIds( $productManager, $keys );
+
 		$productListManager = $productManager->getSubManager( 'list', 'Default' );
-		$productListTypeManager = $productListManager->getSubmanager( 'type', 'Default' );
-
-		$parentCodes = array();
-		foreach( $testdata['product/list'] as $dataset )
-		{
-			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) == false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
-			}
-
-			$parentCodes[] = $str;
-		}
-
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array_unique( $parentCodes ) ) );
-
-		$parentIds = array();
-		foreach( $productManager->searchItems( $search ) as $item ) {
-			$parentIds[ 'product/'.$item->getCode() ] = $item->getId();
-		}
-
-		$products = array();
-		foreach( $keys as $dataset )
-		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) == false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ref product are set wrong "%1$s"', $dataset ) );
-			}
-
-			$products[] = $str;
-		}
-
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', $products ) );
-
-		foreach( $productManager->searchItems( $search ) as $item ) {
-			$refIds['product'][ 'product/'.$item->getCode() ] = $item->getId();
-		}
+		$listItem = $productListManager->createItem();
 
 		//LIST-PRODUCT
-		$listItemTypeIds = array();
-		$listItemType = $productListTypeManager->createItem();
-
 		$this->_conn->begin();
 
-		foreach( $testdata['product/list/type'] as $key => $dataset )
-		{
-			$listItemType->setId( null );
-			$listItemType->setCode( $dataset['code'] );
-			$listItemType->setDomain( $dataset['domain'] );
-			$listItemType->setLabel( $dataset['label'] );
-			$listItemType->setStatus( $dataset['status'] );
+		$listItemTypeIds = $this->_addListTypeData( $productListManager, $testdata );
 
-			$productListTypeManager->saveItem( $listItemType );
-			$listItemTypeIds[ $key ] = $listItemType->getId();
-		}
-
-		$listItem = $productListManager->createItem();
 		foreach( $testdata['product/list'] as $dataset )
 		{
 			if( !isset( $parentIds[ $dataset['parentid'] ] ) ) {
@@ -390,5 +344,98 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$this->_conn->commit();
+	}
+
+
+	/**
+	 * Adds the list types from the test data and returns their IDs.
+	 *
+	 * @param MShop_Common_Manager_Interface $manager Product list manager
+	 * @param array $testdata Test data
+	 * @param array List of type IDs
+	 */
+	private function _addListTypeData( MShop_Common_Manager_Interface $manager, array $testdata )
+	{
+		$listItemTypeIds = array();
+		$productListTypeManager = $manager->getSubmanager( 'type', 'Default' );
+		$listItemType = $productListTypeManager->createItem();
+
+		foreach( $testdata['product/list/type'] as $key => $dataset )
+		{
+			$listItemType->setId( null );
+			$listItemType->setCode( $dataset['code'] );
+			$listItemType->setDomain( $dataset['domain'] );
+			$listItemType->setLabel( $dataset['label'] );
+			$listItemType->setStatus( $dataset['status'] );
+
+			$productListTypeManager->saveItem( $listItemType );
+			$listItemTypeIds[ $key ] = $listItemType->getId();
+		}
+
+		return $listItemTypeIds;
+	}
+
+
+	/**
+	 * Returns the product IDs from the test data.
+	 *
+	 * @param MShop_Common_Manager_Interface $manager Product manager
+	 * @param array $testdata Test data
+	 * @throws MW_Setup_Exception
+	 */
+	private function _getProductIds( MShop_Common_Manager_Interface $manager, array $testdata )
+	{
+		$parentCodes = $parentIds = array();
+
+		foreach( $testdata['product/list'] as $dataset )
+		{
+			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false
+				|| ( $str = substr( $dataset['parentid'], $pos+1 ) ) == false
+			) {
+				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
+			}
+
+			$parentCodes[] = $str;
+		}
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', array_unique( $parentCodes ) ) );
+
+		foreach( $manager->searchItems( $search ) as $item ) {
+			$parentIds[ 'product/' . $item->getCode() ] = $item->getId();
+		}
+
+		return $parentIds;
+	}
+
+
+	/**
+	 * Returns the referenced product IDs from the test data.
+	 *
+	 * @param MShop_Common_Manager_Interface $manager Product manager
+	 * @param array $testdata Test data
+	 * @throws MW_Setup_Exception
+	 */
+	private function _getProductRefIds( MShop_Common_Manager_Interface $manager, array $keys )
+	{
+		$codes = $refIds = array();
+
+		foreach( $keys as $dataset )
+		{
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) == false ) {
+				throw new MW_Setup_Exception( sprintf( 'Some keys for ref product are set wrong "%1$s"', $dataset ) );
+			}
+
+			$codes[] = $str;
+		}
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
+
+		foreach( $manager->searchItems( $search ) as $item ) {
+			$refIds[ 'product/' . $item->getCode() ] = $item->getId();
+		}
+
+		return $refIds;
 	}
 }

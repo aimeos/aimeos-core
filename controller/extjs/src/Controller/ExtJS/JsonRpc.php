@@ -121,19 +121,30 @@ class Controller_ExtJS_JsonRpc
 	 */
 	public function process( array $reqparams, $inputstream )
 	{
+		if( isset( $reqparams['method'] ) ) {
+			return $this->_processRequest( $reqparams );
+		}
+
+		return $this->_processStream( $inputstream );
+	}
+
+
+	/**
+	 * Processes a request using the request paramters.
+	 *
+	 * @param array $reqparams Associative list of request parameters (usually $_REQUEST)
+	 * @return string|null JSON RPC 2.0 message response
+	 */
+	protected function _processRequest( array $reqparams )
+	{
 		try
 		{
-			if( isset( $reqparams['method'] ) )
-			{
-				if( !isset( $reqparams['params'] ) || ( $params = json_decode( $reqparams['params'] ) ) === null ) {
-					throw new Controller_ExtJS_Exception( 'Required parameters are missing or not JSON encoded' );
-				}
+			if( !isset( $reqparams['params'] ) || ( $params = json_decode( $reqparams['params'] ) ) === null ) {
+				throw new Controller_ExtJS_Exception( 'Required parameters are missing or not JSON encoded' );
+			}
 
-				if( ( $result = $this->_callMethod( $reqparams['method'], $params ) ) !== null ) {
-					return json_encode( $result );
-				}
-
-				return;
+			if( ( $result = $this->_callMethod( $reqparams['method'], $params ) ) !== null ) {
+				return json_encode( $result );
 			}
 		}
 		catch( Exception $e )
@@ -149,7 +160,18 @@ class Controller_ExtJS_JsonRpc
 			return json_encode( $response );
 		}
 
+		return null;
+	}
 
+
+	/**
+	 * Processes a request using the input stream.
+	 *
+	 * @param string $inputstream Name of the input stream (usually php://input)
+	 * @return string|null JSON RPC 2.0 message response
+	 */
+	protected function _processStream( $inputstream )
+	{
 		$response = array();
 
 		try
@@ -196,6 +218,8 @@ class Controller_ExtJS_JsonRpc
 		if( !empty( $response ) ) {
 			return json_encode( $response );
 		}
+
+		return null;
 	}
 
 
