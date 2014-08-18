@@ -85,7 +85,6 @@ abstract class MShop_Customer_Manager_Abstract
 	 * @param array $values List of attributes for customer item
 	 * @param array $listItems List items associated to the customer item
 	 * @param array $refItems Items referenced by the customer item via the list items
-	 * @param MShop_Common_Item_Address_Interface $address billingaddress of customer item
 	 * @return MShop_Customer_Item_Interface New customer item
 	 */
 	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )

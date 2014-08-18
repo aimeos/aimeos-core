@@ -22,7 +22,7 @@ abstract class MShop_Common_Manager_ListRef_Abstract
 	 * Creates a new item for the specific manager.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_List_Interface
+	 * @param array $listItems List of items implementing MShop_Common_Item_List_Interface
 	 * @param array $refItems List of items implementing MShop_Common_Item_Interface
 	 * @return MShop_Common_Item_Interface New item
 	 */

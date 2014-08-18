@@ -84,7 +84,7 @@ abstract class Controller_Jobs_Common_Decorator_Abstract
 	 */
 	public function run()
 	{
-		return $this->_controller->run();
+		$this->_controller->run();
 	}
 
 

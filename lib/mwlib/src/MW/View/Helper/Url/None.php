@@ -25,7 +25,7 @@ class MW_View_Helper_Url_None
 	 * @param string|null $controller Name of the controller which should be part of the link (if any)
 	 * @param string|null $action Name of the action which should be part of the link (if any)
 	 * @param array $params Associative list of parameters that should be part of the URL
-	 * @param array $trailing Trailing URL parts that are not relevant to identify the resource (for pretty URLs)
+	 * @param string[] $trailing Trailing URL parts that are not relevant to identify the resource (for pretty URLs)
 	 * @param array $config Additional configuration parameter per URL
 	 * @return string Complete URL that can be used in the template
 	 */

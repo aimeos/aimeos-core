@@ -59,7 +59,7 @@ interface MShop_Price_Item_Interface
 	/**
 	 * Returns the amount of money.
 	 *
-	 * @return integer|double Price
+	 * @return string Price
 	 */
 	public function getValue();
 
@@ -74,7 +74,7 @@ interface MShop_Price_Item_Interface
 	/**
 	 * Returns the costs.
 	 *
-	 * @return integer|double Costs
+	 * @return string Costs
 	 */
 	public function getCosts();
 
@@ -89,7 +89,7 @@ interface MShop_Price_Item_Interface
 	/**
 	 * Returns the rebate amount.
 	 *
-	 * @return integer|double Rebate amount
+	 * @return string Rebate amount
 	 */
 	public function getRebate();
 
