@@ -36,24 +36,24 @@ class MShop_Customer_Item_Default
 		{
 			switch( $name )
 			{
-				case 'salutation': $address->setSalutation( $values['salutation'] ); break;
-				case 'company': $address->setCompany( $values['company'] ); break;
-				case 'vatid': $address->setVatID( $values['vatid'] ); break;
-				case 'title': $address->setTitle( $values['title'] ); break;
-				case 'firstname': $address->setFirstname( $values['firstname'] ); break;
-				case 'lastname': $address->setLastname( $values['lastname'] ); break;
-				case 'address1': $address->setAddress1( $values['address1'] ); break;
-				case 'address2': $address->setAddress2( $values['address2'] ); break;
-				case 'address3': $address->setAddress3( $values['address3'] ); break;
-				case 'postal': $address->setPostal( $values['postal'] ); break;
-				case 'city': $address->setCity( $values['city'] ); break;
-				case 'state': $address->setState( $values['state'] ); break;
-				case 'langid': $address->setLanguageId( $values['langid'] ); break;
-				case 'countryid': $address->setCountryId( $values['countryid'] ); break;
-				case 'telephone': $address->setTelephone( $values['telephone'] ); break;
-				case 'telefax': $address->setTelefax( $values['telefax'] ); break;
-				case 'website': $address->setWebsite( $values['website'] ); break;
-				case 'email': $address->setEmail( $values['email'] ); break;
+				case 'salutation': $address->setSalutation( $value ); break;
+				case 'company': $address->setCompany( $value ); break;
+				case 'vatid': $address->setVatID( $value ); break;
+				case 'title': $address->setTitle( $value ); break;
+				case 'firstname': $address->setFirstname( $value ); break;
+				case 'lastname': $address->setLastname( $value ); break;
+				case 'address1': $address->setAddress1( $value ); break;
+				case 'address2': $address->setAddress2( $value ); break;
+				case 'address3': $address->setAddress3( $value ); break;
+				case 'postal': $address->setPostal( $value ); break;
+				case 'city': $address->setCity( $value ); break;
+				case 'state': $address->setState( $value ); break;
+				case 'langid': $address->setLanguageId( $value ); break;
+				case 'countryid': $address->setCountryId( $value ); break;
+				case 'telephone': $address->setTelephone( $value ); break;
+				case 'telefax': $address->setTelefax( $value ); break;
+				case 'website': $address->setWebsite( $value ); break;
+				case 'email': $address->setEmail( $value ); break;
 			}
 		}
 
