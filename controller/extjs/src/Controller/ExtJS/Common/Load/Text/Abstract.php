@@ -374,7 +374,7 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
 	 * @throws Controller_ExtJS_Exception If text type is invalid
 	 */
-	protected function _importTextRow( MShop_Common_Manager_Interface $textManager, array $row, array $textTypeMap,
+	private function _importTextRow( MShop_Common_Manager_Interface $textManager, array $row, array $textTypeMap,
 		array $codeIdMap, $domain )
 	{
 		if( count( $row ) !== 7 )
