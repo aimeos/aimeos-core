@@ -55,6 +55,21 @@ class MShop_Price_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->_object = null;
 	}
 
+	public function testCompare()
+	{
+		$price = new MShop_Price_Item_Default( $this->_values );
+		$this->assertTrue( $this->_object->compare( $price ) );
+	}
+
+	public function testCompareFail()
+	{
+		$values = $this->_values;
+		$values['value'] = '200.00';
+
+		$price = new MShop_Price_Item_Default( $values );
+		$this->assertFalse( $this->_object->compare( $price ) );
+	}
+
 	public function testGetId()
 	{
 		$this->assertEquals( 199, $this->_object->getId() );
