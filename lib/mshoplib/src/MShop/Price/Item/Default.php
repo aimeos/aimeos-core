@@ -327,6 +327,39 @@ class MShop_Price_Item_Default
 
 
 	/**
+	 * Compares the properties of the given price item with its own one.
+	 *
+	 * This method compare only the essential price properties:
+	 * * Value
+	 * * Costs
+	 * * Rebate
+	 * * Taxrate
+	 * * Quantity
+	 * * Currency ID
+	 *
+	 * All other item properties are not compared.
+	 *
+	 * @param MShop_Price_Item_Interface $price Price item to compare with
+	 * @return boolean True if equal, false if not
+	 * @since 2014.09
+	 */
+	public function compare( MShop_Price_Item_Interface $price )
+	{
+		if( $this->getValue() === $price->getValue()
+			&& $this->getCosts() === $price->getCosts()
+			&& $this->getRebate() === $price->getRebate()
+			&& $this->getTaxrate() === $price->getTaxrate()
+			&& $this->getQuantity() === $price->getQuantity()
+			&& $this->getCurrencyId() === $price->getCurrencyId()
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
 	 * Returns the item values as array.
 	 *
 	 * @return array Associative list of item properties and their values

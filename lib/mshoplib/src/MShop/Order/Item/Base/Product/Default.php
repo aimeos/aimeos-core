@@ -572,6 +572,27 @@ class MShop_Order_Item_Base_Product_Default
 		return $list;
 	}
 
+	/**
+	 * Compares the properties of the given order product item with its own ones.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item
+	 * @return boolean True if the item properties are equal, false if not
+	 * @since 2014.09
+	 */
+	public function compare( MShop_Order_Item_Base_Product_Interface $item )
+	{
+		if( $this->getFlags() === $item->getFlags()
+			&& $this->getName() === $item->getName()
+			&& $this->getProductCode() === $item->getProductCode()
+			&& $this->getSupplierCode() === $item->getSupplierCode()
+			&& $this->getPrice()->compare( $item->getPrice() ) === true
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
 
 	/**
 	 * Copys all data from a given product item.

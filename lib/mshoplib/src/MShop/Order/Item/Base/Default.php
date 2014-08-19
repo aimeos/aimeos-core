@@ -750,35 +750,7 @@ class MShop_Order_Item_Base_Default extends MShop_Order_Item_Base_Abstract
 
 		foreach( $this->_products as $position => $product )
 		{
-			if( $product->getProductCode() !== $item->getProductCode() ) {
-				continue;
-			}
-
-			if( $product->getSupplierCode() !== $item->getSupplierCode() ) {
-				continue;
-			}
-
-			if( $product->getFlags() !== $item->getFlags() ) {
-				continue;
-			}
-
-			if( $product->getName() !== $item->getName() ) {
-				continue;
-			}
-
-			if( $product->getPrice()->getValue() !== $item->getPrice()->getValue() ) {
-				continue;
-			}
-
-			if( $product->getPrice()->getCosts() !== $item->getPrice()->getCosts() ) {
-				continue;
-			}
-
-			if( $product->getPrice()->getRebate() !== $item->getPrice()->getRebate() ) {
-				continue;
-			}
-
-			if( $product->getPrice()->getTaxRate() !== $item->getPrice()->getTaxRate() ) {
+			if( $product->compare( $item ) === false ) {
 				continue;
 			}
 

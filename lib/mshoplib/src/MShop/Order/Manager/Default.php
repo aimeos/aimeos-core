@@ -348,29 +348,7 @@ class MShop_Order_Manager_Default
 		}
 
 
-		if( $item->getPaymentStatus() != $item->oldPaymentStatus )
-		{
-			$statusManager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );
-
-			$statusItem = $statusManager->createItem();
-			$statusItem->setParentId( $item->getId() );
-			$statusItem->setType( MShop_Order_Item_Status_Abstract::STATUS_PAYMENT );
-			$statusItem->setValue( $item->getPaymentStatus() );
-
-			$statusManager->saveItem( $statusItem, false );
-		}
-
-		if( $item->getDeliveryStatus() != $item->oldDeliveryStatus )
-		{
-			$statusManager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );
-
-			$statusItem = $statusManager->createItem();
-			$statusItem->setParentId( $item->getId() );
-			$statusItem->setType( MShop_Order_Item_Status_Abstract::STATUS_DELIVERY );
-			$statusItem->setValue( $item->getDeliveryStatus() );
-
-			$statusManager->saveItem( $statusItem, false );
-		}
+		$this->_addStatus( $item );
 	}
 
 
@@ -727,6 +705,38 @@ class MShop_Order_Manager_Default
 		 */
 
 		return $this->_getSubManager( 'order', $manager, $name );
+	}
+
+
+	/**
+	 * Adds the new payment and delivery values to the order status log.
+	 *
+	 * @param MShop_Order_Item_Interface $item Order item object
+	 */
+	protected function _addStatus( MShop_Order_Item_Interface $item )
+	{
+		$statusManager = MShop_Factory::createManager( $this->_getContext(), 'order/status' );
+
+		$statusItem = $statusManager->createItem();
+		$statusItem->setParentId( $item->getId() );
+
+		if( $item->getPaymentStatus() != $item->oldPaymentStatus )
+		{
+			$statusItem->setId( null );
+			$statusItem->setType( MShop_Order_Item_Status_Abstract::STATUS_PAYMENT );
+			$statusItem->setValue( $item->getPaymentStatus() );
+
+			$statusManager->saveItem( $statusItem, false );
+		}
+
+		if( $item->getDeliveryStatus() != $item->oldDeliveryStatus )
+		{
+			$statusItem->setId( null );
+			$statusItem->setType( MShop_Order_Item_Status_Abstract::STATUS_DELIVERY );
+			$statusItem->setValue( $item->getDeliveryStatus() );
+
+			$statusManager->saveItem( $statusItem, false );
+		}
 	}
 
 

@@ -47,22 +47,35 @@ class MShop_Plugin_Provider_Order_ProductLimit
 			throw new MShop_Plugin_Provider_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		$class = 'MShop_Order_Item_Base_Product_Interface';
-		if( !( $value instanceof $class ) ) {
-			throw new MShop_Plugin_Provider_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
-		}
+		$this->_checkWithoutCurrency( $order, $value );
+		$this->_checkWithCurrency( $order, $value );
 
+		return true;
+	}
+
+
+	/**
+	 * Checks for the product limits when the configuration doesn't contain limits per currency.
+	 *
+	 * @param MShop_Order_Item_Base_Interface $order Basket object
+	 * @param MShop_Order_Item_Base_Product_Interface $value Order product item
+	 * @throws MShop_Plugin_Provider_Exception If one limit is exceeded
+	 */
+	protected function _checkWithoutCurrency( MShop_Order_Item_Base_Interface $order,
+		MShop_Order_Item_Base_Product_Interface $value )
+	{
 		$config = $this->_getItem()->getConfig();
 
-
-		if( isset( $config['single-number-max'] ) && $value->getQuantity() > (int) $config['single-number-max'] )
-		{
+		if( isset( $config['single-number-max'] )
+			&& !is_array( $config['single-number-max'] )
+			&& $value->getQuantity() > (int) $config['single-number-max']
+		) {
 			$msg = sprintf( 'The maximum product quantity is %1$d', (int) $config['single-number-max'] );
 			throw new MShop_Plugin_Provider_Exception( $msg );
 		}
 
 
-		if( isset( $config['total-number-max'] ) )
+		if( isset( $config['total-number-max'] ) && !is_array( $config['total-number-max'] ) )
 		{
 			$total = $value->getQuantity();
 
@@ -76,10 +89,21 @@ class MShop_Plugin_Provider_Order_ProductLimit
 				throw new MShop_Plugin_Provider_Exception( $msg );
 			}
 		}
+	}
 
 
+	/**
+	 * Checks for the product limits when the configuration contains limits per currency.
+	 *
+	 * @param MShop_Order_Item_Base_Interface $order Basket object
+	 * @param MShop_Order_Item_Base_Product_Interface $value Order product item
+	 * @throws MShop_Plugin_Provider_Exception If one limit is exceeded
+	 */
+	protected function _checkWithCurrency( MShop_Order_Item_Base_Interface $order,
+		MShop_Order_Item_Base_Product_Interface $value )
+	{
+		$config = $this->_getItem()->getConfig();
 		$currencyId = $value->getPrice()->getCurrencyId();
-
 
 		if( isset( $config['single-value-max'][$currencyId] )
 			&& $value->getPrice()->getValue() * $value->getQuantity() > (float) $config['single-value-max'][$currencyId]
@@ -104,7 +128,5 @@ class MShop_Plugin_Provider_Order_ProductLimit
 				throw new MShop_Plugin_Provider_Exception( $msg );
 			}
 		}
-
-		return true;
 	}
 }

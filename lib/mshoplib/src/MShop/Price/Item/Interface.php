@@ -27,6 +27,25 @@ interface MShop_Price_Item_Interface
 	public function addItem( MShop_Price_Item_Interface $item, $quantity = 1 );
 
 	/**
+	 * Compares the properties of the given price item with its own one.
+	 *
+	 * This method compare only the essential price properties:
+	 * * Value
+	 * * Costs
+	 * * Rebate
+	 * * Taxrate
+	 * * Quantity
+	 * * Currency ID
+	 *
+	 * All other item properties are not compared.
+	 *
+	 * @param MShop_Price_Item_Interface $price Price item to compare with
+	 * @return boolean True if equal, false if not
+	 * @since 2014.09
+	 */
+	public function compare( MShop_Price_Item_Interface $price );
+
+	/**
 	 * Returns the domain the price is valid for.
 	 *
 	 * @return string Domain name

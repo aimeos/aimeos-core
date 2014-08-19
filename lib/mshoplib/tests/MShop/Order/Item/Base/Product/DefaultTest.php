@@ -82,6 +82,21 @@ class MShop_Order_Item_Base_Product_DefaultTest extends MW_Unittest_Testcase
 		unset($this->_object);
 	}
 
+	public function testCompare()
+	{
+		$product = new MShop_Order_Item_Base_Product_Default( $this->_price, $this->_values, $this->_attribute, $this->_subProducts );
+		$this->assertTrue( $this->_object->compare( $product ) );
+	}
+
+	public function testCompareFail()
+	{
+		$price = clone $this->_price;
+		$price->setValue( '1.00' );
+
+		$product = new MShop_Order_Item_Base_Product_Default( $price, $this->_values, $this->_attribute, $this->_subProducts );
+		$this->assertFalse( $this->_object->compare( $product ) );
+	}
+
 	public function testGetId()
 	{
 		$this->assertEquals($this->_values['id'], $this->_object->getId());
