@@ -71,58 +71,81 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 
 		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
 		{
-			$ds = DIRECTORY_SEPARATOR;
-			$path = __DIR__ . $ds . 'data' . $ds . 'demo-product.php';
-
-			if( ( $data = include( $path ) ) == false ) {
-				throw new MShop_Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
-			}
-
-
-			foreach( $data as $entry )
-			{
-				$item = $manager->createItem();
-				$item->setTypeId( $this->_getTypeId( 'product/type', 'product', $entry['type'] ) );
-				$item->setCode( $entry['code'] );
-				$item->setLabel( $entry['label'] );
-				$item->setSupplierCode( $entry['supplier'] );
-				$item->setDateStart( $entry['start'] );
-				$item->setDateEnd( $entry['end'] );
-				$item->setStatus( $entry['status'] );
-
-				$manager->saveItem( $item );
-
-
-				if( isset( $entry['stock'] ) ) {
-					$this->_addProductStock( $item->getId(), $entry['stock'] );
-				}
-
-				if( isset( $entry['attribute'] ) ) {
-					$this->_addAttributes( $item->getId(), $entry['attribute'], 'product' );
-				}
-
-				if( isset( $entry['media'] ) ) {
-					$this->_addMedia( $item->getId(), $entry['media'], 'product' );
-				}
-
-				if( isset( $entry['price'] ) ) {
-					$this->_addPrices( $item->getId(), $entry['price'], 'product' );
-				}
-
-				if( isset( $entry['text'] ) ) {
-					$this->_addTexts( $item->getId(), $entry['text'], 'product' );
-				}
-
-				if( isset( $entry['product'] ) ) {
-					$this->_addProducts( $item->getId(), $entry['product'], 'product' );
-				}
-			}
-
+			$this->_addDemoData();
 			$this->_status( 'added' );
 		}
 		else
 		{
 			$this->_status( 'removed' );
+		}
+	}
+
+
+	/**
+	 * Adds the demo data to the database.
+	 *
+	 * @throws MShop_Exception If the file isn't found
+	 */
+	protected function _addDemoData()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$path = __DIR__ . $ds . 'data' . $ds . 'demo-product.php';
+
+		if( ( $data = include( $path ) ) == false ) {
+			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
+		}
+
+		$context =  $this->_getContext();
+		$manager = MShop_Factory::createManager( $context, 'product' );
+
+		foreach( $data as $entry )
+		{
+			$item = $manager->createItem();
+			$item->setTypeId( $this->_getTypeId( 'product/type', 'product', $entry['type'] ) );
+			$item->setCode( $entry['code'] );
+			$item->setLabel( $entry['label'] );
+			$item->setSupplierCode( $entry['supplier'] );
+			$item->setDateStart( $entry['start'] );
+			$item->setDateEnd( $entry['end'] );
+			$item->setStatus( $entry['status'] );
+
+			$manager->saveItem( $item );
+
+			$this->_addRefItems( $entry, $item->getId() );
+		}
+	}
+
+
+	/**
+	 * Adds the referenced items from the given entry data.
+	 *
+	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
+	 * @param string $id Parent ID for inserting the items
+	 */
+	protected function _addRefItems( array $entry, $id )
+	{
+		if( isset( $entry['stock'] ) ) {
+			$this->_addProductStock( $id, $entry['stock'] );
+		}
+
+		if( isset( $entry['attribute'] ) ) {
+			$this->_addAttributes( $id, $entry['attribute'], 'product' );
+		}
+
+		if( isset( $entry['media'] ) ) {
+			$this->_addMedia( $id, $entry['media'], 'product' );
+		}
+
+		if( isset( $entry['price'] ) ) {
+			$this->_addPrices( $id, $entry['price'], 'product' );
+		}
+
+		if( isset( $entry['text'] ) ) {
+			$this->_addTexts( $id, $entry['text'], 'product' );
+		}
+
+		if( isset( $entry['product'] ) ) {
+			$this->_addProducts( $id, $entry['product'], 'product' );
 		}
 	}
 }
