@@ -63,32 +63,8 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		$this->_txCommit();
 
 
-		$productTypeManager = MShop_Factory::createManager( $this->_getContext(), 'product/type' );
-
-		$expr = array();
-		$search = $productTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.type.domain', 'product');
-		$expr[] = $search->compare('==', 'product.type.code', 'default');
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productTypeManager->searchItems($search);
-
-		if ( ($productTypeItem = reset($types)) === false) {
-			throw new Exception('Product type item not found');
-		}
-
-
-		$productListTypeManager = MShop_Factory::createManager( $this->_getContext(), 'product/list/type' );
-
-		$expr = array();
-		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'product');
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
-
-		if ( ($listTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
-		}
+		$productTypeItem = $this->_getTypeItem( 'product/type', 'product', 'default' );
+		$listTypeItem = $this->_getTypeItem( 'product/list/type', 'product', 'default' );
 
 
 		$productListManager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
@@ -158,16 +134,7 @@ class MW_Setup_Task_ProductAddSelectPerfData extends MW_Setup_Task_ProductAddBas
 		$this->_txCommit();
 
 
-		$expr = array();
-		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare('==', 'product.list.type.code', 'default');
-		$expr[] = $search->compare('==', 'product.list.type.domain', 'price');
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems($search);
-
-		if ( ($listTypeItem = reset($types)) === false) {
-			throw new Exception('Product list type item not found');
-		}
+		$listTypeItem = $this->_getTypeItem( 'product/list/type', 'price', 'default' );
 
 		$listItem->setTypeId( $listTypeItem->getId() );
 		$listItem->setDomain( 'price' );
