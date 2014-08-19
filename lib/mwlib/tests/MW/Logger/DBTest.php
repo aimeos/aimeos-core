@@ -52,11 +52,14 @@ class MW_Logger_DBTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		$conn = $this->_dbm->acquire();
+		if( isset( $this->_dbm ) )
+		{
+			$conn = $this->_dbm->acquire();
 
-		$conn->create( 'DROP TABLE "mw_log_test"' )->execute()->finish();
+			$conn->create( 'DROP TABLE "mw_log_test"' )->execute()->finish();
 
-		$this->_dbm->release( $conn );
+			$this->_dbm->release( $conn );
+		}
 	}
 
 	public function testLog()
