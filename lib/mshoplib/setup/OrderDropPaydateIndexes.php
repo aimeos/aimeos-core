@@ -24,7 +24,7 @@ class MW_Setup_Task_OrderDropPaydateIndexes extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'TablesCreateMShop' );
+		return array();
 	}
 
 
@@ -35,7 +35,7 @@ class MW_Setup_Task_OrderDropPaydateIndexes extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return array( 'TablesCreateMShop' );
 	}
 
 

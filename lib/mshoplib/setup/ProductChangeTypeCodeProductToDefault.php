@@ -32,7 +32,7 @@ class MW_Setup_Task_ProductChangeTypeCodeProductToDefault extends MW_Setup_Task_
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return array( 'TablesCreateMShop' );
 	}
 
 

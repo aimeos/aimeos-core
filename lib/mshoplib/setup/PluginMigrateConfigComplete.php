@@ -23,7 +23,7 @@ class MW_Setup_Task_PluginMigrateConfigComplete extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array();
+		return array( 'TablesCreateMShop' );
 	}
 
 
