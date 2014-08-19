@@ -119,8 +119,33 @@ abstract class Client_Html_Catalog_Abstract
 		$size = $this->_getProductListSizeByParam( $params );
 		$sort = $this->_getProductListSortByParam( $params, $sortdir );
 
+		$filter = $this->_createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter );
 
-		$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
+		if( $attrfilter === true ) {
+			$this->_addAttributeFilterByParam( $params, $filter );
+		}
+
+
+		return $filter;
+	}
+
+
+	/**
+	 * Creates the filter from the given parameters for the product list.
+	 *
+	 * @param string $text Text to search for
+	 * @param string $catid Category ID to search for
+	 * @param string $sort Sortation string (relevance, name, price)
+	 * @param string $sortdir Sortation direction (+ or -)
+	 * @param integer $page Page number starting from 1
+	 * @param integer $size Page size
+	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
+	 * @param boolean $textfilter True to include text criteria in product filter, false if not
+	 * @return MW_Common_Criteria_Interface Search criteria object
+	 */
+	private function _createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter )
+	{
+		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'catalog' );
 
 		if( $text !== '' && $textfilter === true )
 		{
@@ -129,22 +154,17 @@ abstract class Client_Html_Catalog_Abstract
 			if( $catid !== '' && $catfilter === true ) {
 				$filter = $controller->addProductFilterCategory( $filter, $catid );
 			}
+
+			return $filter;
 		}
 		elseif( $catid !== '' && $catfilter === true )
 		{
-			$filter = $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
+			return $controller->createProductFilterByCategory( $catid, $sort, $sortdir, ($page-1) * $size, $size );
 		}
 		else
 		{
-			$filter = $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
+			return $controller->createProductFilterDefault( $sort, $sortdir, ($page-1) * $size, $size );
 		}
-
-		if( $attrfilter === true ) {
-			$this->_addAttributeFilterByParam( $params, $filter );
-		}
-
-
-		return $filter;
 	}
 
 
