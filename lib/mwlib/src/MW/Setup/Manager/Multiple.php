@@ -97,7 +97,6 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 			}
 
 			if( isset( $this->_tasks[$taskname] ) ) {
-file_put_contents( 'setup.log', $taskname . "\n", FILE_APPEND );
 				$this->_tasks[$taskname]->run( $dbtype );
 			}
 
