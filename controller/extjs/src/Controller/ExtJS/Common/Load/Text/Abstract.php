@@ -346,55 +346,13 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 		while( ( $row = $contentItem->current() ) !== null )
 		{
-			if( count( $row ) !== 7 )
+			$codeIdMap = $this->_importTextRow( $textManager, $row, $textTypeMap, $codeIdMap, $domain );
+
+			if( ++$count == 1000 )
 			{
-				$msg = sprintf( 'Invalid row from %1$s text import: %2$s', $domain, print_r( $row, true ) );
-				$context->getLogger()->log( $msg, MW_Logger_Abstract::WARN, 'import' );
-			}
-
-			try
-			{
-				$value = isset( $row[6] ) ? $row[6] : '';
-				$textId = isset( $row[5] ) ? $row[5] : '';
-				$textType =  isset( $row[4] ) ? $row[4] : null;
-
-				if( !isset( $textTypeMap[ $textType ] ) ) {
-					throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
-				}
-
-				if( $textId != '' || $value != '' )
-				{
-					$item = $textManager->createItem();
-
-					if( $textId != '' ) {
-						$item->setId( $textId );
-					}
-
-					$item->setLanguageId( ( $row[0] != '' ? $row[0] : null ) );
-					$item->setTypeId( $textTypeMap[ $textType ] );
-					$item->setDomain( $domain );
-					$item->setLabel( mb_strcut( $value, 0, 255 ) );
-					$item->setContent( $value );
-					$item->setStatus( 1 );
-
-					$textManager->saveItem( $item );
-
-					if( $textId === '' ) {
-						$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
-					}
-
-					if( ++$count == 1000 )
-					{
-						$this->_importReferences( $manager, $codeIdMap, $domain );
-						$codeIdMap = array();
-						$count = 0;
-					}
-				}
-			}
-			catch( Exception $e )
-			{
-				$msg = sprintf( 'Error in %1$s text import: %2$s', $domain, $e->getMessage() );
-				$context->getLogger()->log( $msg, MW_Logger_Abstract::ERR, 'import' );
+				$this->_importReferences( $manager, $codeIdMap, $domain );
+				$codeIdMap = array();
+				$count = 0;
 			}
 
 			$contentItem->next();
@@ -403,6 +361,67 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 		if( !empty( $codeIdMap ) ) {
 			$this->_importReferences( $manager, $codeIdMap, $domain );
 		}
+	}
+
+
+	/**
+	 * Inserts a single text item from the given import row.
+	 *
+	 * @param MShop_Common_Manager_Interface $textManager Text manager object
+	 * @param array $row Row from import file
+	 * @param array $codeIdMap Two dimensional associated list of codes and text IDs as key
+	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
+	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
+	 * @throws Controller_ExtJS_Exception If text type is invalid
+	 */
+	private function _importTextRow( MShop_Common_Manager_Interface $textManager, array $row, array $textTypeMap,
+		array $codeIdMap, $domain )
+	{
+		if( count( $row ) !== 7 )
+		{
+			$msg = sprintf( 'Invalid row from %1$s text import: %2$s', $domain, print_r( $row, true ) );
+			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::WARN, 'import' );
+		}
+
+		try
+		{
+			$value = isset( $row[6] ) ? $row[6] : '';
+			$textId = isset( $row[5] ) ? $row[5] : '';
+			$textType =  isset( $row[4] ) ? $row[4] : null;
+
+			if( !isset( $textTypeMap[ $textType ] ) ) {
+				throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
+			}
+
+			if( $textId != '' || $value != '' )
+			{
+				$item = $textManager->createItem();
+
+				if( $textId != '' ) {
+					$item->setId( $textId );
+				}
+
+				$item->setLanguageId( ( $row[0] != '' ? $row[0] : null ) );
+				$item->setTypeId( $textTypeMap[ $textType ] );
+				$item->setDomain( $domain );
+				$item->setLabel( mb_strcut( $value, 0, 255 ) );
+				$item->setContent( $value );
+				$item->setStatus( 1 );
+
+				$textManager->saveItem( $item );
+
+				if( $textId === '' ) {
+					$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
+				}
+			}
+		}
+		catch( Exception $e )
+		{
+			$msg = sprintf( 'Error in %1$s text import: %2$s', $domain, $e->getMessage() );
+			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::ERR, 'import' );
+		}
+
+		return $codeIdMap;
 	}
 
 

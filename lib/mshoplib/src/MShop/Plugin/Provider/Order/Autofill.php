@@ -88,7 +88,12 @@ class MShop_Plugin_Provider_Order_Autofill
 
 		$search = $serviceManager->createSearch( true );
 
-		$expr = ( $code !== null ? array( $search->compare( '==', 'service.code', $code ) ) : array() );
+		$expr = array();
+
+		if( $code !== null ) {
+			$expr[] = $search->compare( '==', 'service.code', $code );
+		}
+
 		$expr[] = $search->compare( '==', 'service.type.code', $type );
 		$expr[] = $search->getConditions();
 
@@ -158,8 +163,10 @@ class MShop_Plugin_Provider_Order_Autofill
 			foreach( $services as $service )
 			{
 				$type = $service->getType();
-				$item = $this->_getServiceItem( $order, $type, $service->getCode() );
-				$order->setService( $service, $type );
+
+				if( ( $item = $this->_getServiceItem( $order, $type, $service->getCode() ) ) !== null ) {
+					$order->setService( $item, $type );
+				}
 			}
 		}
 	}

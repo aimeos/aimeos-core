@@ -181,8 +181,11 @@ class MShop_Plugin_Provider_Order_AutofillTest extends PHPUnit_Framework_TestCas
 
 		$item1 = $orderBaseServiceStub->createItem();
 		$item1->setType( MShop_Order_Item_Base_Service_Abstract::TYPE_DELIVERY );
+		$item1->setCode( 'unitcode' );
+
 		$item2 = $orderBaseServiceStub->createItem();
 		$item2->setType( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$item2->setCode( 'unitpaymentcode' );
 
 		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
 		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseServiceStub ) );
