@@ -312,7 +312,24 @@ abstract class Controller_ExtJS_Abstract
 	 */
 	protected function _initCriteria( MW_Common_Criteria_Interface $criteria, stdClass $params )
 	{
-		if( isset( $params->condition ) && is_object( $params->condition ) ) {
+		$this->_initCriteriaConditions( $criteria, $params );
+		$this->_initCriteriaSortations( $criteria, $params );
+		$this->_initCriteriaSlice( $criteria, $params );
+
+		return $criteria;
+	}
+
+
+	/**
+	 * Initializes the criteria object with conditions based on the given parameter.
+	 *
+	 * @param MW_Common_Criteria_Interface $criteria Criteria object
+	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
+	 */
+	private function _initCriteriaConditions( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	{
+		if( isset( $params->condition ) && is_object( $params->condition ) )
+		{
 			$existing = $criteria->getConditions();
 			$criteria->setConditions( $criteria->toConditions( (array) $params->condition ) );
 			$expr = array (
@@ -322,8 +339,35 @@ abstract class Controller_ExtJS_Abstract
 
 			$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 		}
+	}
 
 
+	/**
+	 * Initializes the criteria object with the slice based on the given parameter.
+	 *
+	 * @param MW_Common_Criteria_Interface $criteria Criteria object
+	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
+	 */
+	private function _initCriteriaSlice( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	{
+		if( isset( $params->start ) && isset( $params->limit ) )
+		{
+			$start = ( isset( $params->start ) ? $params->start : 0 );
+			$size = ( isset( $params->limit ) ? $params->limit : 25 );
+
+			$criteria->setSlice( $start, $size );
+		}
+	}
+
+
+	/**
+	 * Initializes the criteria object with sortations based on the given parameter.
+	 *
+	 * @param MW_Common_Criteria_Interface $criteria Criteria object
+	 * @param stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
+	 */
+	private function _initCriteriaSortations( MW_Common_Criteria_Interface $criteria, stdClass $params )
+	{
 		if( isset( $params->sort ) && isset( $params->dir ) )
 		{
 			$sortation = array();
@@ -348,17 +392,6 @@ abstract class Controller_ExtJS_Abstract
 			$sort[] = $criteria->sort( '+', $this->_sort );
 			$criteria->setSortations( $sort );
 		}
-
-
-		if( isset( $params->start ) && isset( $params->limit ) )
-		{
-			$start = ( isset( $params->start ) ? $params->start : 0 );
-			$size = ( isset( $params->limit ) ? $params->limit : 25 );
-
-			$criteria->setSlice( $start, $size );
-		}
-
-		return $criteria;
 	}
 
 
