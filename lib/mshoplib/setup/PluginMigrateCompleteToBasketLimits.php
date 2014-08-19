@@ -33,7 +33,7 @@ class MW_Setup_Task_PluginMigrateCompleteToBasketLimits extends MW_Setup_Task_Ab
 	 */
 	public function getPreDependencies()
 	{
-		return array();
+		return array( 'TablesCreateMShop' );
 	}
 
 

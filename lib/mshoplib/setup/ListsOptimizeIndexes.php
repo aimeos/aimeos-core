@@ -121,7 +121,7 @@ class MW_Setup_Task_ListsOptimizeIndexes extends MW_Setup_Task_Abstract
 	{
 		return array(
 			'AttributeModifyIndexes', 'CatalogModifyIndexes', 'CustomerModifyIndexes', 'MediaModifyIndexes',
-			'ProductModifyIndexes', 'ServiceModifyIndexes', 'TextModifyIndexes'
+			'ProductModifyIndexes', 'ServiceModifyIndexes', 'TextModifyIndexes', 'TablesCreateMShop'
 		);
 	}
 

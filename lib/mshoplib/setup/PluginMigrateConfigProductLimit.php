@@ -23,7 +23,7 @@ class MW_Setup_Task_PluginMigrateConfigProductLimit extends MW_Setup_Task_Abstra
 	 */
 	public function getPreDependencies()
 	{
-		return array();
+		return array( 'TablesCreateMShop' );
 	}
 
 
