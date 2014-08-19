@@ -385,40 +385,58 @@ abstract class Controller_ExtJS_Common_Load_Text_Abstract
 
 		try
 		{
-			$value = isset( $row[6] ) ? $row[6] : '';
-			$textId = isset( $row[5] ) ? $row[5] : '';
 			$textType =  isset( $row[4] ) ? $row[4] : null;
 
 			if( !isset( $textTypeMap[ $textType ] ) ) {
 				throw new Controller_ExtJS_Exception( sprintf( 'Invalid text type "%1$s"', $textType ) );
 			}
 
-			if( $textId != '' || $value != '' )
-			{
-				$item = $textManager->createItem();
-
-				if( $textId != '' ) {
-					$item->setId( $textId );
-				}
-
-				$item->setLanguageId( ( $row[0] != '' ? $row[0] : null ) );
-				$item->setTypeId( $textTypeMap[ $textType ] );
-				$item->setDomain( $domain );
-				$item->setLabel( mb_strcut( $value, 0, 255 ) );
-				$item->setContent( $value );
-				$item->setStatus( 1 );
-
-				$textManager->saveItem( $item );
-
-				if( $textId === '' ) {
-					$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
-				}
-			}
+			$codeIdMap = $this->_saveTextItem( $textManager, $row, $textTypeMap, $codeIdMap, $domain );
 		}
 		catch( Exception $e )
 		{
 			$msg = sprintf( 'Error in %1$s text import: %2$s', $domain, $e->getMessage() );
 			$this->_getContext()->getLogger()->log( $msg, MW_Logger_Abstract::ERR, 'import' );
+		}
+
+		return $codeIdMap;
+	}
+
+
+	/**
+	 * Saves a text item from the given data.
+	 *
+	 * @param MShop_Common_Manager_Interface $textManager Text manager object
+	 * @param array $row Row from import file
+	 * @param array $textTypeMap Associative list of text type IDs as keys and text type codes as values
+	 * @param array $codeIdMap Two dimensional associated list of codes and text IDs as key
+	 * @param string $domain Name of the domain this text belongs to, e.g. product, catalog, attribute
+	 * @return array Updated two dimensional associated list of codes and text IDs as key
+	 */
+	private function _saveTextItem( MShop_Common_Manager_Interface $textManager, array $row,
+		array $textTypeMap, array $codeIdMap, $domain )
+	{
+		$value = isset( $row[6] ) ? $row[6] : '';
+		$textId = isset( $row[5] ) ? $row[5] : '';
+
+		if( $textId != '' || $value != '' )
+		{
+			$item = $textManager->createItem();
+
+			if( $textId != '' ) {
+				$item->setId( $textId );
+			}
+
+			$item->setLanguageId( ( $row[0] != '' ? $row[0] : null ) );
+			$item->setTypeId( $textTypeMap[ $row[4] ] );
+			$item->setDomain( $domain );
+			$item->setLabel( mb_strcut( $value, 0, 255 ) );
+			$item->setContent( $value );
+			$item->setStatus( 1 );
+
+			$textManager->saveItem( $item );
+
+			$codeIdMap[ $row[2] ][ $item->getId() ] = $row[3];
 		}
 
 		return $codeIdMap;
