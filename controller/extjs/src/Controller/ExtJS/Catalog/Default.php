@@ -85,13 +85,7 @@ class Controller_ExtJS_Catalog_Default
 
 		foreach( $items as $entry )
 		{
-			$item = $manager->createItem();
-
-			if( isset( $entry->{'catalog.id'} ) ) { $item->setId( $entry->{'catalog.id'} ); }
-			if( isset( $entry->{'catalog.code'} ) ) { $item->setCode( $entry->{'catalog.code'} ); }
-			if( isset( $entry->{'catalog.label'} ) ) { $item->setLabel( $entry->{'catalog.label'} ); }
-			if( isset( $entry->{'catalog.config'} ) ) { $item->setConfig( (array) $entry->{'catalog.config'} );	}
-			if( isset( $entry->{'catalog.status'} ) ) { $item->setStatus( $entry->{'catalog.status'} ); }
+			$item = $this->_createItem( (array) $entry );
 			$manager->insertItem( $item, $parentId, $refId );
 
 			$ids[] = $item->getId();
