@@ -93,7 +93,7 @@ class Controller_Jobs_Product_Suggestions_DefaultTest extends MW_Unittest_Testca
 		$search->setConditions( $search->compare( '==', 'product.list.type.code', $code ) );
 		$items = $prodListTypeMgr->searchItems( $search );
 
-		if( ( $listType = reset( $items ) ) === FALSE ) {
+		if( ( $listType = reset( $items ) ) === false ) {
 			throw new Exception('No product list type with code ' . $code . ' found' );
 		}
 
