@@ -161,7 +161,7 @@ abstract class Client_Html_Abstract
 	/**
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given item.
 	 *
-	 * @param MShop_Common_Item_ListRef_Interface|array $items Item or list of items, maybe with associated list items
+	 * @param array $items Item or list of items, maybe with associated list items
 	 * @param string $domain Name of the domain the item is from
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
@@ -201,9 +201,6 @@ abstract class Client_Html_Abstract
 		 */
 		$tagAll = $this->_context->getConfig()->get( 'client/html/common/cache/tag-all', false );
 
-		$listIface = 'MShop_Common_Item_ListRef_Interface';
-		$expires = array();
-
 		if( !is_array( $items ) ) {
 			$items = array( $items );
 		}
@@ -212,33 +209,49 @@ abstract class Client_Html_Abstract
 			$tags[] = $domain;
 		}
 
-		foreach( $items as $item )
+		foreach( $items as $item ) {
+			$this->_addMetaItemSingle( $item, $expire, $tags, $tagAll );
+		}
+	}
+
+
+	/**
+	 * Adds expire date and tags for a single item.
+	 *
+	 * @param MShop_Common_Item_Interface $item Item, maybe with associated list items
+	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
+	 * @param array &$tags List of tags the new tags will be added to
+	 * @param boolean $tagAll True of tags for all items should be added, false if only for the main item
+	 */
+	private function _addMetaItemSingle( MShop_Common_Item_Interface $item, &$expire, array &$tags, $tagAll )
+	{
+		$listIface = 'MShop_Common_Item_ListRef_Interface';
+		$expires = array();
+
+		if( $tagAll === true ) {
+			$tags[] = $domain . '-' . $item->getId();
+		}
+
+		if( method_exists( $item, 'getDateEnd' ) && ( $date = $item->getDateEnd() ) !== null ) {
+			$expires[] = $date;
+		}
+
+		if( $item instanceof $listIface )
 		{
-			if( $tagAll === true ) {
-				$tags[] = $domain . '-' . $item->getId();
-			}
-
-			if( method_exists( $item, 'getDateEnd' ) && ( $date = $item->getDateEnd() ) !== null ) {
-				$expires[] = $date;
-			}
-
-			if( $item instanceof $listIface )
+			foreach( $item->getListItems() as $listitem )
 			{
-				foreach( $item->getListItems() as $listitem )
-				{
-					if( $tagAll === true ) {
-						$tags[] = $listitem->getDomain() . '-' . $listitem->getRefId();
-					}
+				if( $tagAll === true ) {
+					$tags[] = $listitem->getDomain() . '-' . $listitem->getRefId();
+				}
 
-					if( ( $date = $listitem->getDateEnd() ) !== null ) {
-						$expires[] = $date;
-					}
+				if( ( $date = $listitem->getDateEnd() ) !== null ) {
+					$expires[] = $date;
 				}
 			}
+		}
 
-			if( !empty( $expires ) ) {
-				$expire = min( $expires );
-			}
+		if( !empty( $expires ) ) {
+			$expire = min( $expires );
 		}
 	}
 
