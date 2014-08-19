@@ -58,7 +58,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		foreach( $orderProducts as $pos => $item )
 		{
 			if( $item->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) {
-				continue;
+				unset( $orderProducts[$pos] );
 			}
 
 			$prodCodes[] = $item->getProductCode();
@@ -80,10 +80,6 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		{
 			$refPrices = array();
 
-			if( $orderProduct->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) {
-				continue;
-			}
-
 			// fetch prices of articles/sub-products
 			if( isset( $prodMap[ $orderProduct->getProductCode() ] ) ) {
 				$refPrices = $prodMap[ $orderProduct->getProductCode() ]->getRefItems( 'price', 'default', 'default' );
@@ -92,10 +88,8 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			$orderPosPrice = $orderProduct->getPrice();
 			$price = $this->_getPrice( $orderProduct, $refPrices, $attributes, $pos );
 
-			if( ( $orderPosPrice->getValue() !== $price->getValue()
-				|| $orderPosPrice->getCosts() !== $price->getCosts()
-				|| $orderPosPrice->getTaxrate() !== $price->getTaxrate() )
-			) {
+			if( $orderPosPrice->compare( $price ) === false )
+			{
 				$orderProduct->setPrice( $price );
 
 				$order->deleteProduct( $pos );
