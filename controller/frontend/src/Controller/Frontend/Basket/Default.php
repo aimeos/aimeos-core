@@ -84,7 +84,6 @@ class Controller_Frontend_Basket_Default
 	{
 		$this->_checkCategory( $prodid );
 
-
 		$context = $this->_getContext();
 
 		$productManager = MShop_Factory::createManager( $context, 'product' );
@@ -98,46 +97,9 @@ class Controller_Frontend_Basket_Default
 		$attr = array();
 		$prices = $productItem->getRefItems( 'price', 'default', 'default' );
 
-
-		if( $productItem->getType() === 'select' )
-		{
-			$productItems = $this->_getProductVariants( $productItem, $variantAttributeIds );
-
-			if( count( $productItems ) > 1 )
-			{
-				$msg = sprintf( 'No unique article found for selected attributes and product ID "%1$s"', $prodid );
-				throw new Controller_Frontend_Basket_Exception( $msg );
-			}
-			else if( ( $result = reset( $productItems ) ) !== false ) // count == 1
-			{
-				$productItem = $result;
-				$orderBaseProductItem->setProductCode( $productItem->getCode() );
-
-				$subprices = $productItem->getRefItems( 'price', 'default', 'default' );
-
-				if( count( $subprices ) > 0 ) {
-					$prices = $subprices;
-				}
-
-				$orderProductAttrManager = MShop_Factory::createManager( $context, 'order/base/product/attribute' );
-				$variantAttributes = $productItem->getRefItems( 'attribute', null, 'variant' );
-
-				foreach( $this->_getAttributes( array_keys( $variantAttributes ), array( 'text' ) ) as $attrItem )
-				{
-					$orderAttributeItem = $orderProductAttrManager->createItem();
-					$orderAttributeItem->copyFrom( $attrItem );
-					$orderAttributeItem->setType( 'variant' );
-
-					$attr[] = $orderAttributeItem;
-				}
-			}
-			else if( !isset( $options['variant'] ) || $options['variant'] != false ) // count == 0
-			{
-				$msg = sprintf( 'No article found for selected attributes and product ID "%1$s"', $prodid );
-				throw new Controller_Frontend_Basket_Exception( $msg );
-			}
+		if( $productItem->getType() === 'select' ) {
+			$attr = $this->_getVariantDetails( $orderBaseProductItem, $productItem, $prices, $variantAttributeIds, $options );
 		}
-
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
 		$price = $priceManager->getLowestPrice( $prices, $quantity );
@@ -151,33 +113,7 @@ class Controller_Frontend_Basket_Default
 		$orderBaseProductItem->setPrice( $price );
 		$orderBaseProductItem->setAttributes( $attr );
 
-
-		$stocklevel = null;
-		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
-			$stocklevel = $this->_getStockLevel( $productItem->getId(), $warehouse );
-		}
-
-		if( $stocklevel === null || $stocklevel > 0 )
-		{
-			$position = $this->_basket->addProduct( $orderBaseProductItem );
-			$orderBaseProductItem = clone $this->_basket->getProduct( $position );
-			$quantity = $orderBaseProductItem->getQuantity();
-
-			if( $stocklevel > 0 && $stocklevel < $quantity )
-			{
-				$this->_basket->deleteProduct( $position );
-				$orderBaseProductItem->setQuantity( $stocklevel );
-				$this->_basket->addProduct( $orderBaseProductItem, $position );
-			}
-		}
-
-		$this->_domainManager->setSession( $this->_basket );
-
-		if( $stocklevel !== null && $stocklevel < $quantity )
-		{
-			$msg = sprintf( 'There are not enough products "%1$s" in stock', $orderBaseProductItem->getName() );
-			throw new Controller_Frontend_Basket_Exception( $msg );
-		}
+		$this->_addProductInStock( $orderBaseProductItem, $productItem->getId(), $quantity, $options, $warehouse );
 	}
 
 
@@ -233,29 +169,10 @@ class Controller_Frontend_Basket_Default
 
 		$productItem = $this->_getProductItem( $product->getProductCode() );
 		$prices = $productItem->getRefItems( 'price', 'default' );
-		$price = $this->_calcPrice( $product, $prices, $quantity );
 
-		$stocklevel = null;
-		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
-			$stocklevel = $this->_getStockLevel( $productItem->getId(), $product->getWarehouseCode() );
-		}
+		$product->setPrice( $this->_calcPrice( $product, $prices, $quantity ) );
 
-		$product->setPrice( $price );
-		$product->setQuantity( ( $stocklevel !== null && $stocklevel > 0 ? min( $stocklevel, $quantity ) : $quantity ) );
-
-		$this->_basket->deleteProduct( $position );
-
-		if( $stocklevel === null || $stocklevel > 0 )
-		{
-			$this->_basket->addProduct( $product, $position );
-			$this->_domainManager->setSession( $this->_basket );
-		}
-
-		if( $stocklevel !== null && $stocklevel < $quantity )
-		{
-			$msg = sprintf( 'There are not enough products "%1$s" in stock', $productItem->getName() );
-			throw new Controller_Frontend_Basket_Exception( $msg );
-		}
+		$this->_editProductInStock( $product, $productItem, $quantity, $position, $options );
 	}
 
 
@@ -419,6 +336,84 @@ class Controller_Frontend_Basket_Default
 
 		$this->_basket->setService( $orderServiceItem, $type );
 		$this->_domainManager->setSession( $this->_basket );
+	}
+
+
+	/**
+	 * Edits the changed product to the basket if it's in stock.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $orderBaseProductItem Old order product from basket
+	 * @param string $productId Unique ID of the product item that belongs to the order product
+	 * @param integer $quantity New order quantity
+	 * @param integer $position Position of the old order product in the basket
+	 * @param array Associative list of options
+	 * @throws Controller_Frontend_Basket_Exception If there's not enough stock available
+	 */
+	private function _addProductInStock( MShop_Order_Item_Base_Product_Interface $orderBaseProductItem,
+		$productId, $quantity, array $options, $warehouse )
+	{
+		$stocklevel = null;
+		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
+			$stocklevel = $this->_getStockLevel( $productId, $warehouse );
+		}
+
+		if( $stocklevel === null || $stocklevel > 0 )
+		{
+			$position = $this->_basket->addProduct( $orderBaseProductItem );
+			$orderBaseProductItem = clone $this->_basket->getProduct( $position );
+			$quantity = $orderBaseProductItem->getQuantity();
+
+			if( $stocklevel > 0 && $stocklevel < $quantity )
+			{
+				$this->_basket->deleteProduct( $position );
+				$orderBaseProductItem->setQuantity( $stocklevel );
+				$this->_basket->addProduct( $orderBaseProductItem, $position );
+			}
+		}
+
+		$this->_domainManager->setSession( $this->_basket );
+
+		if( $stocklevel !== null && $stocklevel < $quantity )
+		{
+			$msg = sprintf( 'There are not enough products "%1$s" in stock', $orderBaseProductItem->getName() );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+	}
+
+
+	/**
+	 * Edits the changed product to the basket if it's in stock.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $product Old order product from basket
+	 * @param MShop_Product_Item_Interface $productItem Product item that belongs to the order product
+	 * @param integer $quantity New order quantity
+	 * @param integer $position Position of the old order product in the basket
+	 * @param array Associative list of options
+	 * @throws Controller_Frontend_Basket_Exception If there's not enough stock available
+	 */
+	private function _editProductInStock( MShop_Order_Item_Base_Product_Interface $product,
+		MShop_Product_Item_Interface $productItem, $quantity, $position, array $options )
+	{
+		$stocklevel = null;
+		if( !isset( $options['stock'] ) || $options['stock'] != false ) {
+			$stocklevel = $this->_getStockLevel( $productItem->getId(), $product->getWarehouseCode() );
+		}
+
+		$product->setQuantity( ( $stocklevel !== null && $stocklevel > 0 ? min( $stocklevel, $quantity ) : $quantity ) );
+
+		$this->_basket->deleteProduct( $position );
+
+		if( $stocklevel === null || $stocklevel > 0 )
+		{
+			$this->_basket->addProduct( $product, $position );
+			$this->_domainManager->setSession( $this->_basket );
+		}
+
+		if( $stocklevel !== null && $stocklevel < $quantity )
+		{
+			$msg = sprintf( 'There are not enough products "%1$s" in stock', $productItem->getName() );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
 	}
 
 
@@ -1009,5 +1004,60 @@ class Controller_Frontend_Basket_Default
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $productManager->searchItems( $search, $domains );
+	}
+
+
+	/**
+	 * Returns the variant attributes and updates the price list if necessary.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $orderBaseProductItem Order product item
+	 * @param MShop_Product_Item_Interface &$productItem Product item which is replaced if necessary
+	 * @param array &$prices List of product prices that will be updated if necessary
+	 * @param array $variantAttributeIds List of product variant attribute IDs
+	 * @param array $options Associative list of options
+	 * @return MShop_Order_Item_Base_Product_Attribute_Interface[] List of order product attributes
+	 * @throws Controller_Frontend_Basket_Exception If no product variant is found
+	 */
+	private function _getVariantDetails( MShop_Order_Item_Base_Product_Interface $orderBaseProductItem,
+		MShop_Product_Item_Interface &$productItem, array &$prices, array $variantAttributeIds, array $options )
+	{
+		$attr = array();
+		$productItems = $this->_getProductVariants( $productItem, $variantAttributeIds );
+
+		if( count( $productItems ) > 1 )
+		{
+			$msg = sprintf( 'No unique article found for selected attributes and product ID "%1$s"', $productItem->getId() );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+		else if( ( $result = reset( $productItems ) ) !== false ) // count == 1
+		{
+			$productItem = $result;
+			$orderBaseProductItem->setProductCode( $productItem->getCode() );
+
+			$subprices = $productItem->getRefItems( 'price', 'default', 'default' );
+
+			if( count( $subprices ) > 0 ) {
+				$prices = $subprices;
+			}
+
+			$orderProductAttrManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/product/attribute' );
+			$variantAttributes = $productItem->getRefItems( 'attribute', null, 'variant' );
+
+			foreach( $this->_getAttributes( array_keys( $variantAttributes ), array( 'text' ) ) as $attrItem )
+			{
+				$orderAttributeItem = $orderProductAttrManager->createItem();
+				$orderAttributeItem->copyFrom( $attrItem );
+				$orderAttributeItem->setType( 'variant' );
+
+				$attr[] = $orderAttributeItem;
+			}
+		}
+		else if( !isset( $options['variant'] ) || $options['variant'] != false ) // count == 0
+		{
+			$msg = sprintf( 'No article found for selected attributes and product ID "%1$s"', $productItem->getId() );
+			throw new Controller_Frontend_Basket_Exception( $msg );
+		}
+
+		return $attr;
 	}
 }
