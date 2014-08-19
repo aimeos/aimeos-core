@@ -413,7 +413,7 @@ class MW_Setup_Task_ProductListAddTestData extends MW_Setup_Task_Abstract
 	 * Returns the referenced product IDs from the test data.
 	 *
 	 * @param MShop_Common_Manager_Interface $manager Product manager
-	 * @param array $testdata Test data
+	 * @param string[] keys Unique keys to identify the products
 	 * @throws MW_Setup_Exception
 	 */
 	private function _getProductRefIds( MShop_Common_Manager_Interface $manager, array $keys )

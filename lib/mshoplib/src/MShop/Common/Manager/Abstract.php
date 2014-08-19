@@ -391,7 +391,7 @@ abstract class MShop_Common_Manager_Abstract
 	/**
 	 * Returns a list of unique criteria names shortend by the last element after the ''
 	 *
-	 * @param array $prefix Required base prefixes of the search keys
+	 * @param string[] $prefix Required base prefixes of the search keys
 	 * @param MW_Common_Criteria_Expression_Interface|null Criteria object
 	 * @return array List of shortend criteria names
 	 */
