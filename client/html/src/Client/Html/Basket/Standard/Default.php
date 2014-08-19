@@ -394,18 +394,30 @@ class Client_Html_Basket_Standard_Default
 			);
 		}
 
-		foreach( $products as $values )
-		{
-			$controller->addProduct(
-				( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
-				( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
-				$options,
-				( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
-				( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
-				( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() ),
-				( isset( $values['warehouse'] ) ? $values['warehouse'] : 'default' )
-			);
+		foreach( $products as $values ) {
+			$this->_addProduct( $controller, $values, $options );
 		}
+	}
+
+
+	/**
+	 * Adds a single product specified by its values to the basket.
+	 *
+	 * @param Controller_Frontend_Interface $controller Basket frontend controller
+	 * @param array $values Associative list of key/value pairs from the view specifying the product
+	 * @param array $options List of options for addProducts() in basket frontend controller
+	 */
+	protected function _addProduct( Controller_Frontend_Interface $controller, array $values, array $options )
+	{
+		$controller->addProduct(
+			( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
+			( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
+			$options,
+			( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
+			( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
+			( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() ),
+			( isset( $values['warehouse'] ) ? $values['warehouse'] : 'default' )
+		);
 	}
 
 
