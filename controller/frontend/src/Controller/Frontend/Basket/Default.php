@@ -585,9 +585,9 @@ class Controller_Frontend_Basket_Default
 					$product->getProductId(),
 					$product->getQuantity(),
 					array(),
-					( isset( $attrIds['variant'] ) ? $attrIds['variant'] : array() ),
-					( isset( $attrIds['config'] ) ? $attrIds['config'] : array() ),
-					( isset( $attrIds['hidden'] ) ? $attrIds['hidden'] : array() ),
+					$this->_getValue( $attrIds, 'variant', array() ),
+					$this->_getValue( $attrIds, 'config', array() ),
+					$this->_getValue( $attrIds, 'hidden', array() ),
 					$product->getWarehouseCode()
 				);
 
@@ -1059,5 +1059,23 @@ class Controller_Frontend_Basket_Default
 		}
 
 		return $attr;
+	}
+
+
+	/**
+	 * Returns the value of an array or the default value if it's not available.
+	 *
+	 * @param array $values Associative list of key/value pairs
+	 * @param string $name Name of the key to return the value for
+	 * @param mixed $default Default value if no value is available for the given name
+	 * @return mixed Value from the array or default value
+	 */
+	protected function _getValue( array $values, $name, $default = null )
+	{
+		if( isset( $values[$name] ) ) {
+			return $values[$name];
+		}
+
+		return $default;
 	}
 }

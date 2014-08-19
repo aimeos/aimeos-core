@@ -161,7 +161,7 @@ abstract class Client_Html_Abstract
 	/**
 	 * Adds the cache tags to the given list and sets a new expiration date if necessary based on the given item.
 	 *
-	 * @param array $items Item or list of items, maybe with associated list items
+	 * @param array|MShop_Common_Item_Interface $items Item or list of items, maybe with associated list items
 	 * @param string $domain Name of the domain the item is from
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
@@ -210,7 +210,7 @@ abstract class Client_Html_Abstract
 		}
 
 		foreach( $items as $item ) {
-			$this->_addMetaItemSingle( $item, $expire, $tags, $tagAll );
+			$this->_addMetaItemSingle( $item, $domain, $expire, $tags, $tagAll );
 		}
 	}
 
@@ -219,11 +219,12 @@ abstract class Client_Html_Abstract
 	 * Adds expire date and tags for a single item.
 	 *
 	 * @param MShop_Common_Item_Interface $item Item, maybe with associated list items
+	 * @param string $domain Name of the domain the item is from
 	 * @param string|null &$expire Expiration date that will be overwritten if an earlier date is found
 	 * @param array &$tags List of tags the new tags will be added to
 	 * @param boolean $tagAll True of tags for all items should be added, false if only for the main item
 	 */
-	private function _addMetaItemSingle( MShop_Common_Item_Interface $item, &$expire, array &$tags, $tagAll )
+	private function _addMetaItemSingle( MShop_Common_Item_Interface $item, $domain, &$expire, array &$tags, $tagAll )
 	{
 		$listIface = 'MShop_Common_Item_ListRef_Interface';
 		$expires = array();

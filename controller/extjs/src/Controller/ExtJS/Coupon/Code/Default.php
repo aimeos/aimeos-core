@@ -398,11 +398,11 @@ class Controller_ExtJS_Coupon_Code_Default
 	/**
 	 * Returns the item populated by the data from the row.
 	 *
-	 * @param MShop_Coupon_Item_Interface $item Empty coupon item
+	 * @param MShop_Coupon_Item_Code_Interface $item Empty coupon item
 	 * @param array $row List of coupon data (code, count, start and end)
-	 * @return MShop_Coupon_Item_Interface Populated coupon item
+	 * @return MShop_Coupon_Item_Code_Interface Populated coupon item
 	 */
-	protected function _getItem( MShop_Coupon_Item_Interface $item, array $row )
+	protected function _getItem( MShop_Coupon_Item_Code_Interface $item, array $row )
 	{
 		foreach( $row as $idx => $value ) {
 			$row[$idx] = trim( $value );
