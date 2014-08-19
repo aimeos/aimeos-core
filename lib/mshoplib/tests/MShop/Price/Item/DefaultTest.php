@@ -55,6 +55,27 @@ class MShop_Price_Item_DefaultTest extends MW_Unittest_Testcase
 		$this->_object = null;
 	}
 
+	public function testAddItem()
+	{
+		$price = new MShop_Price_Item_Default( $this->_values );
+		$this->_object->addItem( $price );
+
+		$this->assertEquals( '391.00', $this->_object->getValue() );
+		$this->assertEquals( '39.90', $this->_object->getCosts() );
+		$this->assertEquals( '20.00', $this->_object->getRebate() );
+	}
+
+	public function testAddItemWrongCurrency()
+	{
+		$values = $this->_values;
+		$values['currencyid'] = 'USD';
+
+		$price = new MShop_Price_Item_Default( $values );
+
+		$this->setExpectedException( 'MShop_Price_Exception' );
+		$this->_object->addItem( $price );
+	}
+
 	public function testCompare()
 	{
 		$price = new MShop_Price_Item_Default( $this->_values );
