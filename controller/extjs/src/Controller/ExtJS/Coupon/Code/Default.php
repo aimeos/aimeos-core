@@ -377,24 +377,11 @@ class Controller_ExtJS_Coupon_Code_Default
 		{
 			foreach( $content as $row )
 			{
-				if( ( $code = trim( $row[0] ) ) == '' ) {
+				if( trim( $row[0] ) == '' ) {
 					continue;
 				}
 
-				foreach( $row as $idx => $value ) {
-					$row[$idx] = trim( $value );
-				}
-
-				$count = ( isset( $row[1] ) && $row[1] != '' ? $row[1] : 1 );
-				$start = ( isset( $row[2] ) && $row[2] != '' ? $row[2] : null );
-				$end = ( isset( $row[3] ) && $row[3] != '' ? $row[3] : null );
-
-				$item->setId( null );
-				$item->setCode( $code );
-				$item->setCount( $count );
-				$item->setDateStart( $start );
-				$item->setDateEnd( $end );
-
+				$item = $this->_getItem( $item, $row );
 				$manager->saveItem( $item, false );
 			}
 
@@ -405,5 +392,32 @@ class Controller_ExtJS_Coupon_Code_Default
 			$manager->rollback();
 			throw $e;
 		}
+	}
+
+
+	/**
+	 * Returns the item populated by the data from the row.
+	 *
+	 * @param MShop_Coupon_Item_Interface $item Empty coupon item
+	 * @param array $row List of coupon data (code, count, start and end)
+	 * @return MShop_Coupon_Item_Interface Populated coupon item
+	 */
+	protected function _getItem( MShop_Coupon_Item_Interface $item, array $row )
+	{
+		foreach( $row as $idx => $value ) {
+			$row[$idx] = trim( $value );
+		}
+
+		$count = ( isset( $row[1] ) && $row[1] != '' ? $row[1] : 1 );
+		$start = ( isset( $row[2] ) && $row[2] != '' ? $row[2] : null );
+		$end = ( isset( $row[3] ) && $row[3] != '' ? $row[3] : null );
+
+		$item->setId( null );
+		$item->setCode( $row[0] );
+		$item->setCount( $count );
+		$item->setDateStart( $start );
+		$item->setDateEnd( $end );
+
+		return $item;
 	}
 }
