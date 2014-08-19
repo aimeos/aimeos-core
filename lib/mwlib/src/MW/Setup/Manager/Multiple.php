@@ -97,6 +97,7 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 			}
 
 			if( isset( $this->_tasks[$taskname] ) ) {
+file_put_contents( 'setup.log', $taskname . "\n", FILE_APPEND );
 				$this->_tasks[$taskname]->run( $dbtype );
 			}
 
@@ -124,7 +125,9 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 			$task->setSchemas( $schemas );
 			$task->setConnections( $conns );
 
-			$this->_dependencies[$name] = (array) $task->getPreDependencies();
+			foreach( (array) $task->getPreDependencies() as $taskname ) {
+				$this->_dependencies[$name][] = $taskname;
+			}
 
 			foreach( (array) $task->getPostDependencies() as $taskname ) {
 				$this->_dependencies[$taskname][] = $name;
