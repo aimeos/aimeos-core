@@ -107,7 +107,9 @@ class MW_Setup_Manager_Default extends MW_Setup_Manager_Abstract
 
 		foreach( $this->_tasks as $name => $task )
 		{
-			$this->_dependencies[$name] = (array) $task->getPreDependencies();
+			foreach( (array) $task->getPreDependencies() as $taskname ) {
+				$this->_dependencies[$name][] = $taskname;
+			}
 
 			foreach( (array) $task->getPostDependencies() as $taskname ) {
 				$this->_dependencies[$taskname][] = $name;
