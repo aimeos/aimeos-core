@@ -279,4 +279,13 @@ interface MShop_Order_Item_Base_Product_Interface extends MShop_Common_Item_Inte
 	 * @return void
 	 */
 	public function copyFrom( MShop_Product_Item_Interface $product );
+
+	/**
+	 * Compares the properties of the given order product item with its own ones.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $item Order product item
+	 * @return boolean True if the item properties are equal, false if not
+	 * @since 2014.09
+	 */
+	public function compare( MShop_Order_Item_Base_Product_Interface $item );
 }
