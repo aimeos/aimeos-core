@@ -110,6 +110,9 @@ class MShop_Coupon_Provider_FixedRebateTest extends MW_Unittest_Testcase
 		$products['CNC']->getPrice()->setTaxRate( '10.00' );
 		$products['CNE']->getPrice()->setTaxRate( '20.00' );
 
+		$products['CNC']->setQuantity( 1 );
+		$products['CNE']->setQuantity( 1 );
+
 		$this->_orderBase->addProduct( $products['CNE'] );
 		$this->_orderBase->addProduct( $products['CNC'] );
 
