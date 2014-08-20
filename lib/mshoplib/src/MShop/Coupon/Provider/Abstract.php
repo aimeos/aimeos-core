@@ -79,8 +79,6 @@ abstract class MShop_Coupon_Provider_Abstract
 	/**
 	 * Sets the reference of the outside object.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param MShop_Coupon_Provider_Interface $object Reference to the outside provider or decorator
 	 */
 	public function setObject( MShop_Coupon_Provider_Interface $object )
@@ -263,17 +261,18 @@ abstract class MShop_Coupon_Provider_Abstract
 	protected function _getPriceByTaxRate( MShop_Order_Item_Base_Interface $basket )
 	{
 		$taxrates = array();
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'price' );
 
 		foreach( $basket->getProducts() as $product )
 		{
 			$price = $product->getPrice();
 			$taxrate = $price->getTaxRate();
 
-			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate]->addItem( $price );
-			} else {
-				$taxrates[$taxrate] = $price;
+			if( !isset( $taxrates[$taxrate] ) ) {
+				$taxrates[$taxrate] = $manager->createItem();
 			}
+
+			$taxrates[$taxrate]->addItem( $price, $product->getQuantity() );
 		}
 
 		try
@@ -281,11 +280,11 @@ abstract class MShop_Coupon_Provider_Abstract
 			$price = $basket->getService( 'delivery' )->getPrice();
 			$taxrate = $price->getTaxRate();
 
-			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate]->addItem( $price );
-			} else {
-				$taxrates[$taxrate] = $price;
+			if( !isset( $taxrates[$taxrate] ) ) {
+				$taxrates[$taxrate] = $manager->createItem();
 			}
+
+			$taxrates[$taxrate]->addItem( $price, $product->getQuantity() );
 		}
 		catch( Exception $e ) { ; } // if delivery service isn't available
 
@@ -294,11 +293,11 @@ abstract class MShop_Coupon_Provider_Abstract
 			$price = $basket->getService( 'payment' )->getPrice();
 			$taxrate = $price->getTaxRate();
 
-			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate]->addItem( $price );
-			} else {
-				$taxrates[$taxrate] = $price;
+			if( !isset( $taxrates[$taxrate] ) ) {
+				$taxrates[$taxrate] = $manager->createItem();
 			}
+
+			$taxrates[$taxrate]->addItem( $price, $product->getQuantity() );
 		}
 		catch( Exception $e ) { ; } // if payment service isn't available
 
