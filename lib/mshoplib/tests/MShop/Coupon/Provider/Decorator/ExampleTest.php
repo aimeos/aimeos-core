@@ -62,4 +62,14 @@ class MShop_Coupon_Provider_Decorator_ExampleTest extends MW_Unittest_Testcase
 	{
 		$this->_object->updateCoupon( $this->_orderBase );
 	}
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->_object->isAvailable( $this->_orderBase ) );
+	}
+
+	public function testSetObject()
+	{
+		$this->_object->setObject( $this->_object );
+	}
 }

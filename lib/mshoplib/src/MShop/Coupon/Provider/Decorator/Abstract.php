@@ -19,6 +19,7 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 	implements MShop_Coupon_Provider_Decorator_Interface
 {
 	private $_provider;
+	private $_object;
 
 
 	/**
@@ -71,12 +72,41 @@ abstract class MShop_Coupon_Provider_Decorator_Abstract
 
 
 	/**
+	 * Tests if a coupon should be granted.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base
+	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @return boolean True of coupon can be granted, false if not
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $base )
 	{
 		return $this->_provider->isAvailable( $base );
+	}
+
+
+	/**
+	 * Sets the reference of the outside object.
+	 *
+	 * @param MShop_Coupon_Provider_Interface $object Reference to the outside provider or decorator
+	 */
+	public function setObject( MShop_Coupon_Provider_Interface $object )
+	{
+		$this->_provider->setObject( $object );
+		$this->_object = $object;
+	}
+
+
+	/**
+	 * Returns the outmost decorator or a reference to the provider itself.
+	 *
+	 * @return MShop_Coupon_Provider_Interface Outmost object
+	 */
+	protected function _getObject()
+	{
+		if( isset( $this->_object ) ) {
+			return $this->_object;
+		}
+
+		return $this;
 	}
 
 

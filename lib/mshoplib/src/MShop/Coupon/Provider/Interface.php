@@ -44,7 +44,7 @@ interface MShop_Coupon_Provider_Interface
 	 * Tests if a coupon should be granted.
 	 *
 	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
-	 * @return bool
+	 * @return boolean True of coupon can be granted, false if not
 	 */
 	public function isAvailable( MShop_Order_Item_Base_Interface $base );
 }
