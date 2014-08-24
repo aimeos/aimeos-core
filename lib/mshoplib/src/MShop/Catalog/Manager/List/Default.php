@@ -340,6 +340,7 @@ class MShop_Catalog_Manager_List_Default
 		 * @see mshop/catalog/manager/list/default/item/delete
 		 * @see mshop/catalog/manager/list/default/item/search
 		 * @see mshop/catalog/manager/list/default/item/count
+		 * @see mshop/catalog/manager/list/default/aggregate
 		 */
 
 		/** mshop/catalog/manager/list/default/item/update
@@ -367,6 +368,7 @@ class MShop_Catalog_Manager_List_Default
 		 * @see mshop/catalog/manager/list/default/item/delete
 		 * @see mshop/catalog/manager/list/default/item/search
 		 * @see mshop/catalog/manager/list/default/item/count
+		 * @see mshop/catalog/manager/list/default/aggregate
 		 */
 
 		/** mshop/catalog/manager/list/default/item/newid
@@ -398,6 +400,7 @@ class MShop_Catalog_Manager_List_Default
 		 * @see mshop/catalog/manager/list/default/item/delete
 		 * @see mshop/catalog/manager/list/default/item/search
 		 * @see mshop/catalog/manager/list/default/item/count
+		 * @see mshop/catalog/manager/list/default/aggregate
 		 */
 
 		/** mshop/catalog/manager/list/default/item/delete
@@ -423,6 +426,7 @@ class MShop_Catalog_Manager_List_Default
 		 * @see mshop/catalog/manager/list/default/item/newid
 		 * @see mshop/catalog/manager/list/default/item/search
 		 * @see mshop/catalog/manager/list/default/item/count
+		 * @see mshop/catalog/manager/list/default/aggregate
 		 */
 
 		/** mshop/catalog/manager/list/default/item/search
@@ -475,6 +479,7 @@ class MShop_Catalog_Manager_List_Default
 		 * @see mshop/catalog/manager/list/default/item/newid
 		 * @see mshop/catalog/manager/list/default/item/delete
 		 * @see mshop/catalog/manager/list/default/item/count
+		 * @see mshop/catalog/manager/list/default/aggregate
 		 */
 
 		/** mshop/catalog/manager/list/default/item/count
@@ -521,6 +526,7 @@ class MShop_Catalog_Manager_List_Default
 		 * @see mshop/catalog/manager/list/default/item/newid
 		 * @see mshop/catalog/manager/list/default/item/delete
 		 * @see mshop/catalog/manager/list/default/item/search
+		 * @see mshop/catalog/manager/list/default/aggregate
 		 */
 
 		/** mshop/catalog/manager/list/default/aggregate

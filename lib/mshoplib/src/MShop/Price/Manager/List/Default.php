@@ -340,6 +340,7 @@ class MShop_Price_Manager_List_Default
 		 * @see mshop/price/manager/list/default/item/delete
 		 * @see mshop/price/manager/list/default/item/search
 		 * @see mshop/price/manager/list/default/item/count
+		 * @see mshop/price/manager/list/default/aggregate
 		 */
 
 		/** mshop/price/manager/list/default/item/update
@@ -367,6 +368,7 @@ class MShop_Price_Manager_List_Default
 		 * @see mshop/price/manager/list/default/item/delete
 		 * @see mshop/price/manager/list/default/item/search
 		 * @see mshop/price/manager/list/default/item/count
+		 * @see mshop/price/manager/list/default/aggregate
 		 */
 
 		/** mshop/price/manager/list/default/item/newid
@@ -398,6 +400,7 @@ class MShop_Price_Manager_List_Default
 		 * @see mshop/price/manager/list/default/item/delete
 		 * @see mshop/price/manager/list/default/item/search
 		 * @see mshop/price/manager/list/default/item/count
+		 * @see mshop/price/manager/list/default/aggregate
 		 */
 
 		/** mshop/price/manager/list/default/item/delete
@@ -423,6 +426,7 @@ class MShop_Price_Manager_List_Default
 		 * @see mshop/price/manager/list/default/item/newid
 		 * @see mshop/price/manager/list/default/item/search
 		 * @see mshop/price/manager/list/default/item/count
+		 * @see mshop/price/manager/list/default/aggregate
 		 */
 
 		/** mshop/price/manager/list/default/item/search
@@ -475,6 +479,7 @@ class MShop_Price_Manager_List_Default
 		 * @see mshop/price/manager/list/default/item/newid
 		 * @see mshop/price/manager/list/default/item/delete
 		 * @see mshop/price/manager/list/default/item/count
+		 * @see mshop/price/manager/list/default/aggregate
 		 */
 
 		/** mshop/price/manager/list/default/item/count
@@ -521,6 +526,7 @@ class MShop_Price_Manager_List_Default
 		 * @see mshop/price/manager/list/default/item/newid
 		 * @see mshop/price/manager/list/default/item/delete
 		 * @see mshop/price/manager/list/default/item/search
+		 * @see mshop/price/manager/list/default/aggregate
 		 */
 
 		/** mshop/price/manager/list/default/aggregate

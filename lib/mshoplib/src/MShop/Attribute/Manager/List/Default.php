@@ -340,6 +340,7 @@ class MShop_Attribute_Manager_List_Default
 		 * @see mshop/attribute/manager/list/default/item/delete
 		 * @see mshop/attribute/manager/list/default/item/search
 		 * @see mshop/attribute/manager/list/default/item/count
+		 * @see mshop/attribute/manager/list/default/aggregate
 		 */
 
 		/** mshop/attribute/manager/list/default/item/update
@@ -367,6 +368,7 @@ class MShop_Attribute_Manager_List_Default
 		 * @see mshop/attribute/manager/list/default/item/delete
 		 * @see mshop/attribute/manager/list/default/item/search
 		 * @see mshop/attribute/manager/list/default/item/count
+		 * @see mshop/attribute/manager/list/default/aggregate
 		 */
 
 		/** mshop/attribute/manager/list/default/item/newid
@@ -398,6 +400,7 @@ class MShop_Attribute_Manager_List_Default
 		 * @see mshop/attribute/manager/list/default/item/delete
 		 * @see mshop/attribute/manager/list/default/item/search
 		 * @see mshop/attribute/manager/list/default/item/count
+		 * @see mshop/attribute/manager/list/default/aggregate
 		 */
 
 		/** mshop/attribute/manager/list/default/item/delete
@@ -423,6 +426,7 @@ class MShop_Attribute_Manager_List_Default
 		 * @see mshop/attribute/manager/list/default/item/newid
 		 * @see mshop/attribute/manager/list/default/item/search
 		 * @see mshop/attribute/manager/list/default/item/count
+		 * @see mshop/attribute/manager/list/default/aggregate
 		 */
 
 		/** mshop/attribute/manager/list/default/item/search
@@ -475,6 +479,7 @@ class MShop_Attribute_Manager_List_Default
 		 * @see mshop/attribute/manager/list/default/item/newid
 		 * @see mshop/attribute/manager/list/default/item/delete
 		 * @see mshop/attribute/manager/list/default/item/count
+		 * @see mshop/attribute/manager/list/default/aggregate
 		 */
 
 		/** mshop/attribute/manager/list/default/item/count
@@ -521,6 +526,7 @@ class MShop_Attribute_Manager_List_Default
 		 * @see mshop/attribute/manager/list/default/item/newid
 		 * @see mshop/attribute/manager/list/default/item/delete
 		 * @see mshop/attribute/manager/list/default/item/search
+		 * @see mshop/attribute/manager/list/default/aggregate
 		 */
 
 		/** mshop/attribute/manager/list/default/aggregate
