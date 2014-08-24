@@ -30,6 +30,18 @@ class MShop_Order_Manager_Base_Product_Attribute_DefaultTest extends MW_Unittest
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.editor', 'core:unittest' ) );
+		$result = $this->_object->aggregate( $search, 'order.base.product.attribute.code' );
+	
+		$this->assertEquals( 4, count( $result ) );
+		$this->assertArrayHasKey( 'width', $result );
+		$this->assertEquals( 4, $result['width'] );
+	}
+	
+
 	public function testCleanup()
 	{
 		$this->_object->cleanup( array( -1 ) );

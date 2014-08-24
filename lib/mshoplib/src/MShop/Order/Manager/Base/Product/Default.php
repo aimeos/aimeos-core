@@ -203,6 +203,20 @@ class MShop_Order_Manager_Base_Product_Default
 
 
 	/**
+	 * Counts the number items that are available for the values of the given key.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param string $key Search key to aggregate items for
+	 * @return array List of the search keys as key and the number of counted items as value
+	 */
+	public function aggregate( MW_Common_Criteria_Interface $search, $key )
+	{
+		$cfgkey = 'mshop/order/manager/base/product/default/aggregate';
+		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base.product' ) );
+	}
+
+
+	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted

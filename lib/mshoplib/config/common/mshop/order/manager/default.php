@@ -6,6 +6,18 @@
  */
 
 return array(
+	'aggregate' => '
+		SELECT "key", COUNT("id") AS "count"
+		FROM (
+			SELECT DISTINCT :key AS "key", mord."id" AS "id"
+			FROM "mshop_order" AS mord
+			:joins
+			WHERE :cond
+			/*-orderby*/ ORDER BY :order /*orderby-*/
+			LIMIT :size OFFSET :start
+		) AS list
+		GROUP BY "key"
+	',
 	'item' => array(
 		'insert' => '
 			INSERT INTO "mshop_order" (

@@ -36,6 +36,18 @@ class MShop_Order_Manager_Base_Product_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:unittest' ) );
+		$result = $this->_object->aggregate( $search, 'order.base.product.warehousecode' );
+	
+		$this->assertEquals( 3, count( $result ) );
+		$this->assertArrayHasKey( 'unit_warehouse1', $result );
+		$this->assertEquals( 11, $result['unit_warehouse1'] );
+	}
+	
+
 	public function testCleanup()
 	{
 		$this->_object->cleanup( array( -1 ) );

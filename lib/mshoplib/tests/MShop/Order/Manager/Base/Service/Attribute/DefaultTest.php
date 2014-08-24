@@ -27,6 +27,18 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.editor', 'core:unittest' ) );
+		$result = $this->_object->aggregate( $search, 'order.base.service.attribute.code' );
+	
+		$this->assertEquals( 9, count( $result ) );
+		$this->assertArrayHasKey( 'ACOWNER', $result );
+		$this->assertEquals( 1, $result['ACOWNER'] );
+	}
+	
+
 	public function testCleanup()
 	{
 		$this->_object->cleanup( array( -1 ) );

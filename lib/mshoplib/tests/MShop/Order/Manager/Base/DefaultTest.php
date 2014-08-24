@@ -42,6 +42,18 @@ class MShop_Order_Manager_Base_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:unittest' ) );
+		$result = $this->_object->aggregate( $search, 'order.base.rebate' );
+	
+		$this->assertEquals( 3, count( $result ) );
+		$this->assertArrayHasKey( '5.00', $result );
+		$this->assertEquals( 2, $result['5.00'] );
+	}
+	
+
 	public function testCleanup()
 	{
 		$this->_object->cleanup( array( -1 ) );
