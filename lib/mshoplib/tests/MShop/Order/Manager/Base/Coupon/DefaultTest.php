@@ -40,6 +40,18 @@ class MShop_Order_Manager_Base_Coupon_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.coupon.editor', 'core:unittest' ) );
+		$result = $this->_object->aggregate( $search, 'order.base.coupon.code' );
+	
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( '5678', $result );
+		$this->assertEquals( 2, $result['5678'] );
+	}
+	
+
 	public function testCleanup()
 	{
 		$this->_object->cleanup( array( -1 ) );

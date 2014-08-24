@@ -30,6 +30,18 @@ class MShop_Order_Manager_Base_Service_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:unittest' ) );
+		$result = $this->_object->aggregate( $search, 'order.base.service.code' );
+	
+		$this->assertEquals( 3, count( $result ) );
+		$this->assertArrayHasKey( 'OGONE', $result );
+		$this->assertEquals( 3, $result['OGONE'] );
+	}
+	
+
 	public function testCleanup()
 	{
 		$this->_object->cleanup( array( -1 ) );

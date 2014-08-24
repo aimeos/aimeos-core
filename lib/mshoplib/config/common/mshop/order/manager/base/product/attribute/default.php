@@ -6,6 +6,18 @@
  */
 
 return array(
+	'aggregate' => '
+		SELECT "key", COUNT("id") AS "count"
+		FROM (
+			SELECT DISTINCT :key AS "key", mordbaprat."id" AS "id"
+			FROM "mshop_order_base_product_attr" AS mordbaprat
+			:joins
+			WHERE :cond
+			/*-orderby*/ ORDER BY :order /*orderby-*/
+			LIMIT :size OFFSET :start
+		) AS list
+		GROUP BY "key"
+	',
 	'item' => array(
 		'delete' => '
 			DELETE FROM "mshop_order_base_product_attr"

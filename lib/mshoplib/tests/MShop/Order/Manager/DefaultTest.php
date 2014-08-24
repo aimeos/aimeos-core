@@ -42,6 +42,18 @@ class MShop_Order_Manager_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$result = $this->_object->aggregate( $search, 'order.type' );
+	
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( 'web', $result );
+		$this->assertEquals( 3, $result['web'] );
+	}
+	
+
 	public function testCleanup()
 	{
 		$this->_object->cleanup( array( -1 ) );

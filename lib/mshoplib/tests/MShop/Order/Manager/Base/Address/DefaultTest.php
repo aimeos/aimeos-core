@@ -38,6 +38,18 @@ class MShop_Order_Manager_Base_Address_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->_object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.address.editor', 'core:unittest' ) );
+		$result = $this->_object->aggregate( $search, 'order.base.address.salutation' );
+	
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( MShop_Common_Item_Address_Abstract::SALUTATION_MRS, $result );
+		$this->assertEquals( 4, $result[MShop_Common_Item_Address_Abstract::SALUTATION_MRS] );
+	}
+	
+
 	public function testCleanup()
 	{
 		$this->_object->cleanup( array( -1 ) );
