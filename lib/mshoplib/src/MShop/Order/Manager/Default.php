@@ -144,6 +144,49 @@ class MShop_Order_Manager_Default
 	 */
 	public function aggregate( MW_Common_Criteria_Interface $search, $key )
 	{
+		/** mshop/order/manager/default/aggregate
+		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
+		 *
+		 * Groups all records by the values in the key column and counts their
+		 * occurence. The matched records can be limited by the given criteria
+		 * from the order database. The records must be from one of the sites
+		 * that are configured via the context item. If the current site is part
+		 * of a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * This statement doesn't return any records. Instead, it returns pairs
+		 * of the different values found in the key column together with the
+		 * number of records that have been found for that key values.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for aggregating order items
+		 * @since 2014.09
+		 * @category Developer
+		 * @see mshop/order/manager/default/item/insert
+		 * @see mshop/order/manager/default/item/update
+		 * @see mshop/order/manager/default/item/newid
+		 * @see mshop/order/manager/default/item/delete
+		 * @see mshop/order/manager/default/item/search
+		 * @see mshop/order/manager/default/item/count
+		 */
 		$cfgkey = 'mshop/order/manager/default/aggregate';
 		return $this->_aggregate( $search, $key, $cfgkey, array( 'order' ) );
 	}
