@@ -40,7 +40,6 @@ class MW_Setup_Task_ProductDropLocaleConstraints extends MW_Setup_Task_Abstract
 
 
 
-
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *

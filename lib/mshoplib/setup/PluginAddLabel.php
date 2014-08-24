@@ -15,7 +15,7 @@ class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 		'ALTER TABLE "mshop_plugin" ADD "label" VARCHAR(255) NOT NULL AFTER "typeid"',
 		'UPDATE "mshop_plugin" SET "label" = "provider" WHERE "label" = \'\'',
 	);
-	
+
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
@@ -23,10 +23,10 @@ class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 	 */
 	public function getPreDependencies()
 	{
-		return array('PluginRenameDomainToTypeid');
+		return array('PluginRenameDomainToTypeid', 'TablesCreateMShop' );
 	}
-	
-	
+
+
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
@@ -36,8 +36,8 @@ class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 	{
 		return array();
 	}
-	
-	
+
+
 	/**
 	 * Executes the task for MySQL databases.
 	 */
@@ -45,8 +45,8 @@ class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 	{
 		$this->_process( $this->_mysql );
 	}
-	
-	
+
+
 	/**
 	 * Add column to table if the column doesn't exist.
 	 *
@@ -55,7 +55,7 @@ class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 	protected function _process( array $stmts )
 	{
 		$this->_msg( 'Adding label column to mshop_plugin table', 0 );
-		
+
 		if( $this->_schema->tableExists( 'mshop_plugin' ) === true
 			&& $this->_schema->columnExists( 'mshop_plugin', 'label' ) === false )
 		{
@@ -67,5 +67,5 @@ class MW_Setup_Task_PluginAddLabel extends MW_Setup_Task_Abstract
 			$this->_status( 'OK' );
 		}
 	}
-	
+
 }
