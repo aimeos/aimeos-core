@@ -87,6 +87,7 @@ class Controller_ExtJS_Plugin_Default
 			{
 				case 'plugin.id': $item->setId( $value ); break;
 				case 'plugin.code': $item->setCode( $value ); break;
+				case 'plugin.label': $item->setLabel( $value ); break;
 				case 'plugin.typeid': $item->setTypeId( $value ); break;
 				case 'plugin.status': $item->setStatus( $value ); break;
 				case 'plugin.provider': $item->setProvider( $value ); break;
