@@ -9,7 +9,11 @@
 
 
 /**
+<<<<<<< Updated upstream
  * Product suggestions job controller.
+=======
+ * Job controller for bought together products.
+>>>>>>> Stashed changes
  *
  * @package Controller
  * @subpackage Jobs
@@ -25,7 +29,7 @@ class Controller_Jobs_Product_Suggestions_Default
 	 */
 	public function getName()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Product suggestions' );
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Products bought together' );
 	}
 
 
@@ -36,7 +40,7 @@ class Controller_Jobs_Product_Suggestions_Default
 	 */
 	public function getDescription()
 	{
-		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Generation of product suggestions' );
+		return $this->_getContext()->getI18n()->dt( 'controller/jobs', 'Creates bought together product suggestions' );
 	}
 
 
@@ -51,140 +55,235 @@ class Controller_Jobs_Product_Suggestions_Default
 		$config = $context->getConfig();
 
 
+		/** controller/jobs/product/suggestions/max-items
+		 * Maximum number of suggested items per product
+		 *
+		 * Each product can contain zero or more suggested products based on
+		 * the used algorithm. The maximum number of items limits the quantity
+		 * of products that are associated as suggestions to one product.
+		 * Usually, you don't need more products than shown in the product
+		 * detail view as suggested products.
+		 *
+		 * @param integer Number of suggested products
+		 * @since 2014.09
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/suggestions/min-support
+		 * @see controller/jobs/product/suggestions/min-confidence
+		 * @see controller/jobs/product/suggestions/limit-days
+		 */
+		$maxItems = $config->get( 'controller/jobs/product/suggestions/max-items', 5 );
+
+		/** controller/jobs/product/suggestions/min-support
+		 * Minimum support value to sort out all irrelevant combinations
+		 *
+		 * A minimum support value of 0.02 requires the combination of two
+		 * products to be in at least 2% of all orders to be considered relevant
+		 * enough as product suggestion.
+		 *
+		 * You can tune this value for your needs, e.g. if you sell several
+		 * thousands different products and you have only a few suggestions for
+		 * all products, a lower value might work better for you. The other way
+		 * round, if you sell less than thousand different products, you may
+		 * have a lot of product suggestions of low quality. In this case it's
+		 * better to increase this value, e.g. to 0.05 or higher.
+		 *
+		 * Caution: Decreasing the support to lower values than 0.01 exponentially
+		 * increases the time for generating the suggestions. If your database
+		 * contains a lot of orders, the time to complete the job may rise from
+		 * hours to days!
+		 *
+		 * @param float Minimum support value from 0 to 1
+		 * @since 2014.09
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/suggestions/max-items
+		 * @see controller/jobs/product/suggestions/min-confidence
+		 * @see controller/jobs/product/suggestions/limit-days
+		 */
+		$minSupport = $config->get( 'controller/jobs/product/suggestions/min-support', 0.02 );
+
+		/** controller/jobs/product/suggestions/min-confidence
+		 * Minimum confidence value for high quality suggestions
+		 *
+		 * The confidence value is used to remove low quality suggestions. Using
+		 * a confidence value of 0.95 would only suggest product combinations
+		 * that are almost always bought together. Contrary, a value of 0.1 would
+		 * yield a lot of combinations that are bought together only in very rare
+		 * cases.
+		 *
+		 * To get good product suggestions, the value should be at least above
+		 * 0.5 and the higher the value, the better the suggestions. You can
+		 * either increase the default value to get better suggestions or lower
+		 * the value to get more suggestions per product if you have only a few
+		 * ones in total.
+		 *
+		 * @param float Minimum confidence value from 0 to 1
+		 * @since 2014.09
+		 * @category Developer
+		 * @category User
+		 * @see controller/jobs/product/suggestions/max-items
+		 * @see controller/jobs/product/suggestions/min-support
+		 * @see controller/jobs/product/suggestions/limit-days
+		 */
+		$minConfidence = $config->get( 'controller/jobs/product/suggestions/min-confidence', 0.66 );
+
+		/** controller/jobs/product/suggestions/limit-days
+		 * Only send delivery e-mails of orders that were created in the past within the configured number of days
+		 *
+		 * The delivery e-mails are normally send immediately after the delivery
+		 * status has changed. This option prevents e-mails for old order from
+		 * being send in case anything went wrong or an update failed to avoid
+		 * confusion of customers.
+		 *
+		 * @param integer Number of days
+		 * @since 2014.09
+		 * @category User
+		 * @category Developer
+		 * @see controller/jobs/product/suggestions/max-items
+		 * @see controller/jobs/product/suggestions/min-support
+		 * @see controller/jobs/product/suggestions/min-confidence
+		 */
+		$days = $config->get( 'controller/jobs/product/suggestions/limit-days', 180 );
+		$date = date( 'Y-m-d H:i:s', time() - $days * 86400 );
 
 
-		$prodMgr = MShop_Product_Manager_Factory::createManager( $context );
-		$prodListMgr = $prodMgr->getSubManager('list');
-		$listTypeId = $this->_getProductListTypeId( $prodListMgr, 'suggestion' );
+		$typeItem = $this->_getTypeItem( 'product/list/type', 'product', 'bought-together' );
+
+		$baseManager = MShop_Factory::createManager( $context, 'order/base' );
+		$search = $baseManager->createSearch();
+		$search->setConditions( $search->compare( '>', 'order.base.ctime', $date ) );
+		$search->setSlice( 0, 0 );
+		$totalOrders = 0;
+		$baseManager->searchItems( $search, array(), $totalOrders );
 
 		$baseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
 		$search = $baseProductManager->createSearch();
-		$config->set( 'aggregatekey', 'mshop/order/manager/base/product/default/aggregateAllProductsInOrders' );
+		$search->setConditions( $search->compare( '>', 'order.base.product.ctime', $date ) );
+		$start = 0;
 
-		$totalsCnt = $baseProductManager->aggregate( $search, 'order.base.product.productid' );
-
-
-
-		$search = $baseProductManager->createSearch();
-		$context->getConfig()->set( 'aggregatekey', 'mshop/order/manager/base/product/default/countAll' );
-		$ordersCnt = $baseProductManager->aggregate( $search, 'order.base.product.baseid' );
-		$totalOrders = $ordersCnt[0];
-
-		$minSupport = $config->get( 'controller/jobs/product/suggestions/minsupport', 0.1 );
-
-		$filteredBySupport = array();
-		foreach( $totalsCnt as $id => $totalCnt )
+		do
 		{
-			if( $minSupport <= ( $sup = ( $totalCnt / $totalOrders ) ) ) {
-				$filteredBySupport[$id] = $sup;
-			}
-		}
+			$totalCounts = $baseProductManager->aggregate( $search, 'order.base.product.productid' );
+			$prodIds = array_keys( $totalCounts );
 
-		$minConfidence = $config->get( 'controller/jobs/product/suggestions/minconfidence', 0.3 );
-		$maxSuggestions = $config->get( 'controller/jobs/product/suggestions/maxsuggestions', 10 );
+			foreach( $totalCounts as $id => $count )
+			{
+				$this->_removeListItems( $id, $typeItem->getId() );
 
-		foreach( $filteredBySupport as $id => $sup )
-		{
-			$prodList = array();
-
-			$search = $baseProductManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'order.base.product.productid', $id ) );
-			$this->_getContext()->getConfig()->set( 'aggregatekey', 'mshop/order/manager/base/product/default/aggregateProductsInOrders' );
-			$relativeCnt = $baseProductManager->aggregate($search, 'order.base.product.productid');
-
-			unset( $relativeCnt[$id] );
-
-			foreach( $relativeCnt as $relId => $relCnt ) {
-				if ($minSupport <= ($relCnt / $totalOrders))
+				if( $count / $totalOrders > $minSupport )
 				{
-					if( $minConfidence <= ( $conf = ( $relCnt / $totalsCnt[$id] ) ) ) {
-						$prodList[ $relId ] = $conf;
-					}
+					$productIds = $this->_getSuggestions( $id, $prodIds, $count, $totalOrders, $maxItems, $minSupport, $minConfidence, $date );
+					$this->_addListItems( $id, $typeItem->getId(), $productIds );
 				}
 			}
 
-			arsort( $prodList );
-
-			$prodList = array_slice( $prodList, 0, $maxSuggestions, true );
-
-			$this->_removeProductSuggestions( $id, $listTypeId, $prodListMgr );
-			$this->_createProductListSuggestions( $id, array_keys( $prodList ), $listTypeId, $prodListMgr );
+			$count = count( $totalCounts );
+			$start += $count;
+			$search->setSlice( $start );
 		}
+		while( $count >= $search->getSliceSize() );
 	}
 
+
 	/**
-	 * Gets or creates product list type item with specified code.
+	 * Returns the IDs of the suggested products.
 	 *
-	 * @param MShop_Product_Manager_List_Type_Default $prodListMgr Manager for list types of product domain
-	 * @param string $code Code of product list type
+	 * @param string $id Product ID to calculate the suggestions for
+	 * @param string[] $prodIds List of product IDs to create suggestions for
+	 * @param integer $count Number of ordered products
+	 * @param integer $total Total number of orders
+	 * @param integer $maxItems Maximum number of suggestions
+	 * @param float $minSupport Minium support value for calculating the suggested products
+	 * @param float $minConfidence Minium confidence value for calculating the suggested products
+	 * @param string $date Date in YYYY-MM-DD HH:mm:ss format after which orders should be used for calculations
+	 * @return array List of suggested product IDs as key and their confidence as value
 	 */
-	protected function _getProductListTypeId( $prodListMgr, $code )
+	protected function _getSuggestions( $id, $prodIds, $count, $total, $maxItems, $minSupport, $minConfidence )
 	{
-		$prodListTypeMgr = $prodListMgr->getSubManager('type');
+		$baseProductManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/product' );
 
-		$search = $prodListTypeMgr->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.list.type.code', $code ) );
-		$items = $prodListTypeMgr->searchItems( $search );
+		$search = $baseProductManager->createSearch();
+		$func = $search->createFunction( 'order.base.product.count', array( $id ) );
+		$expr = array(
+			$search->compare( '==', 'order.base.product.productid', $prodIds ),
+			$search->compare( '==', 'order.base.product.ctime', $date ),
+			$search->compare( '==', $func, 1 ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		if( ( $suggestionType = reset( $items ) ) == false  ) {
-			//create suggestion list type
-			$suggestionType = $prodListTypeMgr->createItem();
-			$suggestionType->setCode( $code );
-			$suggestionType->setLabel( ucfirst( $code ) );
-			$suggestionType->setDomain( 'product' );
-			$suggestionType->setStatus( 1 );
-			$suggestionType->setSiteId( $this->_getContext()->getLocale()->getSiteId() );
+		$relativeCounts = $baseProductManager->aggregate( $search, 'order.base.product.productid' );
 
-			$prodListTypeMgr->saveItem( $suggestionType );
+		unset( $relativeCounts[$id] );
+		$supportA = $count / $total;
+		$products = array();
+
+		foreach( $relativeCounts as $prodId => $relCnt )
+		{
+			$supportAB = $relCnt / $total;
+
+			if( $supportAB > $minSupport && ( $conf = ( $supportAB / $supportA ) ) > $minConfidence ) {
+				$products[$prodId] = $conf;
+			}
 		}
 
-		return $suggestionType->getId();
+		arsort( $products );
+
+		return array_keys( array_slice( $products, 0, $maxItems, true ) );
 	}
 
 
 	/**
-	 * Adds products to product list as suggested.
+	 * Adds products as referenced products to the product list.
 	 *
-	 * @param array $suggestedIds List with Id => Ids => %relevance
+	 * @param string $productId Unique ID of the product the given products should be referenced to
+	 * @param integer $typeId Unique ID of the list type used for the referenced products
+	 * @param array $productIds List of position as key and product ID as value
 	 */
-	protected function _createProductListSuggestions( $productId, array $productList, $listTypeId, $prodListMgr )
+	protected function _addListItems( $productId, $typeId, array $productIds )
 	{
 		if( empty( $productList ) ) {
 			return;
 		}
 
-		$listItem = $prodListMgr->createItem();
-		foreach( $productList as $key => $id )
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
+		$item = $manager->createItem();
+
+		foreach( $productIds as $pos => $refid )
 		{
-			$listItem->setId(null);
+			$listItem->setId( null );
 			$listItem->setParentId( $productId );
 			$listItem->setDomain( 'product' );
-			$listItem->setTypeId( $listTypeId );
-			$listItem->setRefId( $id );
+			$listItem->setTypeId( $typeId );
+			$listItem->setPosition( $pos );
+			$listItem->setRefId( $refid );
 			$listItem->setStatus( 1 );
-			$listItem->setPosition( $key );
 
-			$prodListMgr->saveItem( $listItem );
+			$manager->saveItem( $item );
 		}
 	}
 
 
 	/**
-	 * Optionally first remove all suggested products from product list.
+	 * Remove all suggested products from product list.
 	 *
-	 * @param array $suggestedIds List with Id => Ids => %relevance
+	 * @param string $productId Unique ID of the product the references should be removed from
+	 * @param integer $typeId Unique ID of the list type the referenced products should be removed from
 	 */
-	protected function _removeProductSuggestions( $productId, $listTypeId, $prodListMgr )
+	protected function _removeListItems( $productId, $typeId )
 	{
-		$search = $prodListMgr->createSearch();
+		$manager = MShop_Factory::createManager( $this->_getContext(), 'product/list' );
+
+		$search = $manager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'product.list.parentid', $productId ),
-			$search->compare( '==', 'product.list.type.id', $listTypeId )
+			$search->compare( '==', 'product.list.domain', 'product' ),
+			$search->compare( '==', 'product.list.typeid', $typeId ),
 		);
-
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$listItems = $prodListMgr->searchItems( $search );
 
-		$prodListMgr->deleteItems( array_keys( $listItems ) );
+		$listItems = $productsMgr->searchItems( $search );
+
+		$manager->deleteItems( array_keys( $listItems ) );
 	}
 }

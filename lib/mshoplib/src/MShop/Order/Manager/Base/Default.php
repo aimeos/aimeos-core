@@ -188,7 +188,7 @@ class MShop_Order_Manager_Base_Default extends MShop_Order_Manager_Base_Abstract
 		$cfgkey = 'mshop/order/manager/base/default/aggregate';
 		return $this->_aggregate( $search, $key, $cfgkey, array( 'order.base' ) );
 	}
-	
+
 
 	/**
 	 * Removes old entries from the storage.
