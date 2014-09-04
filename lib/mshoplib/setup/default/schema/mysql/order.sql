@@ -51,6 +51,8 @@ CREATE INDEX "idx_msordba_scode_custid" ON "mshop_order_base" ("sitecode", "cust
 
 CREATE INDEX "idx_msordba_sid_custid" ON "mshop_order_base" ("siteid", "customerid");
 
+CREATE INDEX "idx_msordba_sid_ctime" ON "mshop_order_base" ("siteid", "ctime");
+
 
 --
 -- Order invoice and status
@@ -251,6 +253,8 @@ CONSTRAINT "fk_msordbapr_baseid"
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_msordbapr_sid_bid_pcd" ON "mshop_order_base_product" ("siteid", "baseid", "prodcode");
+
+CREATE INDEX "idx_msordbapr_sid_ct_pid_bid" ON "mshop_order_base_product" ("siteid", "ctime", "prodid", "baseid");
 
 
 --

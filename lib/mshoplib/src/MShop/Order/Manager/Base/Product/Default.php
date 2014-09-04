@@ -187,6 +187,15 @@ class MShop_Order_Manager_Base_Product_Default
 			'type'=> 'string',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR
 		),
+		'order.base.product.count()' => array(
+			'code'=>'order.base.product.count()',
+			'internalcode'=>'( SELECT COUNT(*) FROM mshop_order_base_product AS mordbapr_count
+				WHERE mordbapr."baseid" = mordbapr_count."baseid" AND mordbapr_count."prodid" = $1 )',
+			'label'=>'Order base product count, parameter(<product IDs>)',
+			'type'=> 'integer',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
+		),
 	);
 
 
@@ -272,20 +281,6 @@ class MShop_Order_Manager_Base_Product_Default
 		}
 
 		$this->_cleanup( $siteids, 'mshop/order/manager/base/product/default/item/delete' );
-	}
-
-
-	/**
-	 * Counts the number products that are available for the values of the given key.
-	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
-	 * @param string $key Search key (usually the ID) to aggregate products for
-	 * @return array List of ID values as key and the number of counted products as value
-	 */
-	public function aggregate( MW_Common_Criteria_Interface $search, $key )
-	{
-		$aggregateKey = $this->_getContext()->getConfig()->get( 'aggregatekey', 'mshop/dwh/manager/fact/order/default/aggregate' );
-		return $this->_aggregate( $search, $key, $aggregateKey );
 	}
 
 
