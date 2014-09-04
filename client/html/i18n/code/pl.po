@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Jerzy Skalski <jerzy.skalski@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Arcavias Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2014-09-04 18:47+0000\n"
+"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"Language-Team: Polish (http://www.transifex.com/projects/p/arcavias-core/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Firma"
+
+#. Address salutation
+msgid "mr"
+msgstr "Pan"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Pani"
+
+#. Address salutation
+msgid "miss"
+msgstr "Panna"
+
+#. Product attribute
+msgid "size"
+msgstr "Rozmiar"
+
+#. Product attribute
+msgid "length"
+msgstr "Długość"
+
+#. Product attribute
+msgid "width"
+msgstr "Szerokość"
+
+#. Product attribute
+msgid "color"
+msgstr "Kolor"
+
+#. Product attribute
+msgid "option"
+msgstr "Opcja"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "powtórzenie"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefon"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "niedokończone "
+
+#. Payment status value
+msgid "pay:0"
+msgstr "usunięte"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "anulowane"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "odmowa"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "zwrócone"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "w oczekiwaniu"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "autoryzowana"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "otrzymane"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "niedokończone"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "usunięte"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "w oczekiwaniu"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "przetwarzane"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "wysłane"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "dostarczone"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "zgubione"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "odmowa"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "zwrócone"
+
+#. Direct debit service provider
+msgid "directdebit.accountowner"
+msgstr "Właściciel konta"
+
+#. Direct debit service provider
+msgid "directdebit.accountno"
+msgstr "Nr konta"
+
+#. Direct debit service provider
+msgid "directdebit.bankcode"
+msgstr "Kod banku"
+
+#. Direct debit service provider
+msgid "directdebit.bankname"
+msgstr "Nazwa banku"
+
+#. Warehouse code
+msgid "warehouse:default"
+msgstr "Domyślne"
+
+#. Favorite action
+msgid "favorite"
+msgstr ""
+
+#. Pin action
+msgid "pin"
+msgstr ""
+
+#. Watch action
+msgid "watch"
+msgstr ""
