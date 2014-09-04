@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Андрей Аксёнов <aksenovaa@bk.ru>, 2014
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"

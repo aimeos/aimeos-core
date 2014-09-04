@@ -7,6 +7,7 @@
 # Translators:
 # Translators:
 # shihua16165 <shihua16165@163.com>, 2014
+# shihua16165 <shihua16165@163.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"

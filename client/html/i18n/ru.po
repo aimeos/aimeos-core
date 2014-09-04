@@ -7,6 +7,7 @@
 # Dimitri <doleiynyk@metaways.de>, 2013
 # Dimitri <doleiynyk@metaways.de>, 2013
 # nsendetzky <n.sendetzky@metaways.de>, 2014
+# nsendetzky <n.sendetzky@metaways.de>, 2014
 # Андрей Аксёнов <aksenovaa@bk.ru>, 2014
 msgid ""
 msgstr ""

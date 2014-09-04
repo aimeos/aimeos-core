@@ -4,6 +4,8 @@
 # 
 # Translators:
 # Anh Phan <vietnamesel10n@gmail.com>, 2013
+# Anh Phan <vietnamesel10n@gmail.com>, 2013
+# nsendetzky <n.sendetzky@metaways.de>, 2014
 # nsendetzky <n.sendetzky@metaways.de>, 2014
 # Anh Phan <vietnamesel10n@gmail.com>, 2013
 # Anh Phan <vietnamesel10n@gmail.com>, 2013

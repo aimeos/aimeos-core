@@ -4,6 +4,7 @@
 # 
 # Translators:
 # nsendetzky <n.sendetzky@metaways.de>, 2014
+# nsendetzky <n.sendetzky@metaways.de>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
