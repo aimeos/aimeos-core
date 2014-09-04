@@ -50,7 +50,7 @@ class Client_Html_Checkout_Standard_Summary_Detail_Default
 			$view->summaryUrlServiceDelivery = $view->url( $target, $cntl, $action, array( 'c-step' => 'delivery' ), array(), $config );
 			$view->summaryUrlBasket = $view->url( $bTarget, $bCntl, $bAction, array(), array(), $bConfig );
 			$view->summaryTaxRates = $this->_getTaxRates( $basket );
-			$view->summaryBasket = $view->standardBasket;
+			$view->summaryBasket = $basket;
 
 			$this->_cache = $view;
 		}
