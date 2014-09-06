@@ -27,8 +27,8 @@
 		"phing/phing": "2.4.*"
 	},
 	"suggest": {
-        "phpdocumentor/phpdocumentor": "Required for generating the API documentation"
-    },
+		"phpdocumentor/phpdocumentor": "Required for generating the API documentation"
+	},
 	"autoload": {
 		"psr-0": {
 			"MShop": "lib/mshoplib/src",
