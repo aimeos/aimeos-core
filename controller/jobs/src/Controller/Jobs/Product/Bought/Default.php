@@ -9,16 +9,12 @@
 
 
 /**
-<<<<<<< Updated upstream
- * Product suggestions job controller.
-=======
  * Job controller for bought together products.
->>>>>>> Stashed changes
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Product_Suggestions_Default
+class Controller_Jobs_Product_Bought_Default
 	extends Controller_Jobs_Abstract
 	implements Controller_Jobs_Interface
 {
@@ -55,7 +51,7 @@ class Controller_Jobs_Product_Suggestions_Default
 		$config = $context->getConfig();
 
 
-		/** controller/jobs/product/suggestions/max-items
+		/** controller/jobs/product/bought/max-items
 		 * Maximum number of suggested items per product
 		 *
 		 * Each product can contain zero or more suggested products based on
@@ -68,13 +64,13 @@ class Controller_Jobs_Product_Suggestions_Default
 		 * @since 2014.09
 		 * @category Developer
 		 * @category User
-		 * @see controller/jobs/product/suggestions/min-support
-		 * @see controller/jobs/product/suggestions/min-confidence
-		 * @see controller/jobs/product/suggestions/limit-days
+		 * @see controller/jobs/product/bought/min-support
+		 * @see controller/jobs/product/bought/min-confidence
+		 * @see controller/jobs/product/bought/limit-days
 		 */
-		$maxItems = $config->get( 'controller/jobs/product/suggestions/max-items', 5 );
+		$maxItems = $config->get( 'controller/jobs/product/bought/max-items', 5 );
 
-		/** controller/jobs/product/suggestions/min-support
+		/** controller/jobs/product/bought/min-support
 		 * Minimum support value to sort out all irrelevant combinations
 		 *
 		 * A minimum support value of 0.02 requires the combination of two
@@ -97,13 +93,13 @@ class Controller_Jobs_Product_Suggestions_Default
 		 * @since 2014.09
 		 * @category Developer
 		 * @category User
-		 * @see controller/jobs/product/suggestions/max-items
-		 * @see controller/jobs/product/suggestions/min-confidence
-		 * @see controller/jobs/product/suggestions/limit-days
+		 * @see controller/jobs/product/bought/max-items
+		 * @see controller/jobs/product/bought/min-confidence
+		 * @see controller/jobs/product/bought/limit-days
 		 */
-		$minSupport = $config->get( 'controller/jobs/product/suggestions/min-support', 0.02 );
+		$minSupport = $config->get( 'controller/jobs/product/bought/min-support', 0.02 );
 
-		/** controller/jobs/product/suggestions/min-confidence
+		/** controller/jobs/product/bought/min-confidence
 		 * Minimum confidence value for high quality suggestions
 		 *
 		 * The confidence value is used to remove low quality suggestions. Using
@@ -122,29 +118,35 @@ class Controller_Jobs_Product_Suggestions_Default
 		 * @since 2014.09
 		 * @category Developer
 		 * @category User
-		 * @see controller/jobs/product/suggestions/max-items
-		 * @see controller/jobs/product/suggestions/min-support
-		 * @see controller/jobs/product/suggestions/limit-days
+		 * @see controller/jobs/product/bought/max-items
+		 * @see controller/jobs/product/bought/min-support
+		 * @see controller/jobs/product/bought/limit-days
 		 */
-		$minConfidence = $config->get( 'controller/jobs/product/suggestions/min-confidence', 0.66 );
+		$minConfidence = $config->get( 'controller/jobs/product/bought/min-confidence', 0.66 );
 
-		/** controller/jobs/product/suggestions/limit-days
-		 * Only send delivery e-mails of orders that were created in the past within the configured number of days
+		/** controller/jobs/product/bought/limit-days
+		 * Only use orders placed in the past within the configured number of days for calculating bought together products
 		 *
-		 * The delivery e-mails are normally send immediately after the delivery
-		 * status has changed. This option prevents e-mails for old order from
-		 * being send in case anything went wrong or an update failed to avoid
-		 * confusion of customers.
+		 * This option limits the orders that are evaluated for calculating the
+		 * bought together products. Only ordered products that were bought by
+		 * customers within the configured number of days are used.
+		 *
+		 * Limiting the orders taken into account to the last ones increases the
+		 * quality of suggestions if customer interests shifts to new products.
+		 * If you only have a few orders per month, you can also increase this
+		 * value to several years to get enough suggestions. Please keep in mind
+		 * that the more orders are evaluated, the longer the it takes to
+		 * calculate the product combinations.
 		 *
 		 * @param integer Number of days
 		 * @since 2014.09
 		 * @category User
 		 * @category Developer
-		 * @see controller/jobs/product/suggestions/max-items
-		 * @see controller/jobs/product/suggestions/min-support
-		 * @see controller/jobs/product/suggestions/min-confidence
+		 * @see controller/jobs/product/bought/max-items
+		 * @see controller/jobs/product/bought/min-support
+		 * @see controller/jobs/product/bought/min-confidence
 		 */
-		$days = $config->get( 'controller/jobs/product/suggestions/limit-days', 180 );
+		$days = $config->get( 'controller/jobs/product/bought/limit-days', 180 );
 		$date = date( 'Y-m-d H:i:s', time() - $days * 86400 );
 
 
@@ -199,20 +201,38 @@ class Controller_Jobs_Product_Suggestions_Default
 	 * @param string $date Date in YYYY-MM-DD HH:mm:ss format after which orders should be used for calculations
 	 * @return array List of suggested product IDs as key and their confidence as value
 	 */
-	protected function _getSuggestions( $id, $prodIds, $count, $total, $maxItems, $minSupport, $minConfidence )
+	protected function _getSuggestions( $id, $prodIds, $count, $total, $maxItems, $minSupport, $minConfidence, $date )
 	{
-		$baseProductManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/product' );
+		$refIds = array();
+		$context = $this->_getContext();
+
+		$catalogListManager = MShop_Factory::createManager( $context, 'catalog/list' );
+		$baseProductManager = MShop_Factory::createManager( $context, 'order/base/product' );
+
 
 		$search = $baseProductManager->createSearch();
-		$func = $search->createFunction( 'order.base.product.count', array( $id ) );
+		$func = $search->createFunction( 'order.base.product.count', array( (string) $id ) );
 		$expr = array(
 			$search->compare( '==', 'order.base.product.productid', $prodIds ),
-			$search->compare( '==', 'order.base.product.ctime', $date ),
+			$search->compare( '>', 'order.base.product.ctime', $date ),
 			$search->compare( '==', $func, 1 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$relativeCounts = $baseProductManager->aggregate( $search, 'order.base.product.productid' );
+
+
+		$search = $catalogListManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'catalog.list.refid', array_keys( $relativeCounts ) ),
+			$search->compare( '==', 'catalog.list.domain', 'product' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		foreach( $catalogListManager->searchItems( $search ) as $listItem ) {
+			$refIds[ $listItem->getRefId() ] = true;
+		}
+
 
 		unset( $relativeCounts[$id] );
 		$supportA = $count / $total;
@@ -220,6 +240,10 @@ class Controller_Jobs_Product_Suggestions_Default
 
 		foreach( $relativeCounts as $prodId => $relCnt )
 		{
+			if( !isset( $refIds[$prodId] ) ) {
+				continue;
+			}
+
 			$supportAB = $relCnt / $total;
 
 			if( $supportAB > $minSupport && ( $conf = ( $supportAB / $supportA ) ) > $minConfidence ) {
@@ -242,7 +266,7 @@ class Controller_Jobs_Product_Suggestions_Default
 	 */
 	protected function _addListItems( $productId, $typeId, array $productIds )
 	{
-		if( empty( $productList ) ) {
+		if( empty( $productIds ) ) {
 			return;
 		}
 
@@ -251,13 +275,13 @@ class Controller_Jobs_Product_Suggestions_Default
 
 		foreach( $productIds as $pos => $refid )
 		{
-			$listItem->setId( null );
-			$listItem->setParentId( $productId );
-			$listItem->setDomain( 'product' );
-			$listItem->setTypeId( $typeId );
-			$listItem->setPosition( $pos );
-			$listItem->setRefId( $refid );
-			$listItem->setStatus( 1 );
+			$item->setId( null );
+			$item->setParentId( $productId );
+			$item->setDomain( 'product' );
+			$item->setTypeId( $typeId );
+			$item->setPosition( $pos );
+			$item->setRefId( $refid );
+			$item->setStatus( 1 );
 
 			$manager->saveItem( $item );
 		}
@@ -282,7 +306,7 @@ class Controller_Jobs_Product_Suggestions_Default
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$listItems = $productsMgr->searchItems( $search );
+		$listItems = $manager->searchItems( $search );
 
 		$manager->deleteItems( array_keys( $listItems ) );
 	}

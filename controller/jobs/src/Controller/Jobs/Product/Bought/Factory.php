@@ -9,12 +9,12 @@
 
 
 /**
- * Product suggestions controller factory.
+ * Bought together controller factory.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Product_Suggestions_Factory
+class Controller_Jobs_Product_Bought_Factory
 	extends Controller_Jobs_Common_Factory_Abstract
 	implements Controller_Jobs_Common_Factory_Interface
 {
@@ -28,7 +28,7 @@ class Controller_Jobs_Product_Suggestions_Factory
 	 */
 	public static function createController( MShop_Context_Item_Interface $context, Arcavias $arcavias, $name = null )
 	{
-		/** classes/controller/jobs/product/suggestions/name
+		/** classes/controller/jobs/product/bought/name
 		 * Class name of the used product suggestions scheduler controller implementation
 		 *
 		 * Each default job controller can be replace by an alternative imlementation.
@@ -38,15 +38,15 @@ class Controller_Jobs_Product_Suggestions_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_Jobs_Product_Suggestions_Default
+		 *  Controller_Jobs_Product_Bought_Default
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  Controller_Jobs_Product_Suggestions_Myalgorithm
+		 *  Controller_Jobs_Product_Bought_Myalgorithm
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/controller/jobs/product/suggestions/name = Myalgorithm
+		 *  classes/controller/jobs/product/bought/name = Myalgorithm
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -62,21 +62,21 @@ class Controller_Jobs_Product_Suggestions_Factory
 		 * @category Developer
 		 */
 		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/jobs/product/suggestions/name', 'Default');
+			$name = $context->getConfig()->get('classes/controller/jobs/product/bought/name', 'Default');
 		}
 
 		if ( ctype_alnum($name) === false )
 		{
-			$classname = is_string($name) ? 'Controller_Jobs_Product_Suggestions_' . $name : '<not a string>';
+			$classname = is_string($name) ? 'Controller_Jobs_Product_Bought_' . $name : '<not a string>';
 			throw new Controller_Jobs_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = 'Controller_Jobs_Interface';
-		$classname = 'Controller_Jobs_Product_Suggestions_' . $name;
+		$classname = 'Controller_Jobs_Product_Bought_' . $name;
 
 		$controller = self::_createController( $context, $arcavias, $classname, $iface );
 
-		/** controller/jobs/product/suggestions/excludes
+		/** controller/jobs/product/bought/excludes
 		 * Excludes decorators added by the "common" option from the product job controller
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -151,6 +151,6 @@ class Controller_Jobs_Product_Suggestions_Factory
 		 * @see controller/jobs/product/decorators/excludes
 		 * @see controller/jobs/product/decorators/global
 		 */
-		return self::_addControllerDecorators( $context, $arcavias, $controller, 'product/suggestions' );
+		return self::_addControllerDecorators( $context, $arcavias, $controller, 'product/bought' );
 	}
 }
