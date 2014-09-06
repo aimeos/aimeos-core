@@ -135,6 +135,23 @@ class MShop_Factory
 
 
 	/**
+	 * Injects a manager object for the given path of manager names.
+	 *
+	 * This method is for testing only and you must call MShop_Factory::clear()
+	 * afterwards!
+	 *
+	 * @param MShop_Context_Item_Interface $context Context object required by managers
+	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "product/list"
+	 * @param MShop_Common_Manager_Interface $object Manager object for the given manager path
+	 */
+	static public function injectManager( MShop_Context_Item_Interface $context, $path, MShop_Common_Manager_Interface $object )
+	{
+		$id = (string) $context;
+		self::$_managers[$id][$path] = $object;
+	}
+
+
+	/**
 	 * Enables or disables caching of class instances.
 	 *
 	 * @param boolean $value True to enable caching, false to disable it.
