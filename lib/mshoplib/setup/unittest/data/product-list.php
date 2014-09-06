@@ -19,6 +19,7 @@ return array (
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'product/tag/default' => array( 'domain' => 'product/tag', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 		'product/suggestion' => array( 'domain' => 'product', 'code' => 'suggestion', 'label' => 'Suggestion', 'status' => 1 ),
+		'product/bought' => array( 'domain' => 'product', 'code' => 'bought-together', 'label' => 'Bought together', 'status' => 1 ),
 		//pictures
 		'media/unittype1' => array( 'domain' => 'media', 'code' => 'unittype1', 'label' => 'Unit type 1', 'status' => 1 ),
 		'media/unittype2' => array( 'domain' => 'media', 'code' => 'unittype2', 'label' => 'Unit type 2', 'status' => 1 ),
