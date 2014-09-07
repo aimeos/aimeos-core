@@ -186,7 +186,7 @@ class Client_Html_Catalog_Detail_Bought_Default
 			if( isset( $view->detailProductItem ) )
 			{
 				$context = $this->_getContext();
-				$products = $view->detailProductItem->getRefItems( 'product', null/*, 'bought-together'*/ );
+				$products = $view->detailProductItem->getRefItems( 'product', null, 'bought-together' );
 
 				$manager = MShop_Factory::createManager( $context, 'product' );
 
