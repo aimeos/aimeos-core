@@ -56,6 +56,8 @@ return array (
 
 
 	'product/list' => array(
+		array( 'parentid' => 'product/CNC', 'typeid' => 'product/bought', 'domain' => 'product', 'refid' => 'product/CNE', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'product/CNE', 'typeid' => 'product/bought', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'product/suggestion', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/ABCD', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/EFGH', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 2, 'status' => 1 ),
