@@ -279,7 +279,7 @@ class Client_Html_Catalog_List_Default
 		try
 		{
 			$params = $this->_getClientParams( $view->param() );
-			$context->getSession()->set( 'arcavias/catalog/list/params/last', json_encode( $params ) );
+			$context->getSession()->set( 'arcavias/catalog/list/params/last', $params );
 
 			parent::process();
 		}
