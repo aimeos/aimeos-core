@@ -592,6 +592,11 @@ return array(
 				'list-type' => 'suggestion', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
+			array(
+				'code' => 'demo-article',
+				'list-type' => 'bought-together', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
 		),
 	),
 	array(
