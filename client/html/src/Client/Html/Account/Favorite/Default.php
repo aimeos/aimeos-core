@@ -209,7 +209,7 @@ class Client_Html_Account_Favorite_Default
 
 		if( $context->getUserId() != null && !empty( $ids ) )
 		{
-			$typeItem = $this->_getTypeItem();
+			$typeItem = $this->_getTypeItem( 'customer/list/type', 'product', 'favorite' );
 			$manager = MShop_Factory::createManager( $context, 'customer/list' );
 
 			$search = $manager->createSearch();
@@ -330,39 +330,6 @@ class Client_Html_Account_Favorite_Default
 
 
 	/**
-	 * Returns the customer list type item for the "favorite" type.
-	 *
-	 * @return MShop_Customer_List_Type_Interface List type item for "favorite" type
-	 * @throws Client_Html_Exception
-	 */
-	protected function _getTypeItem()
-	{
-		if( !isset( $this->_typeItem ) )
-		{
-			$typeManager = MShop_Factory::createManager( $this->_getContext(), 'customer/list/type' );
-
-
-			$search = $typeManager->createSearch( true );
-			$expr = array(
-				$search->compare( '==', 'customer.list.type.code', 'favorite' ),
-				$search->getConditions(),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$types = $typeManager->searchItems( $search );
-
-			if( ( $typeItem = reset( $types ) ) === false ) {
-				throw new Client_Html_Exception( sprintf( 'List type "%1$s" is not available', 'favorite' ) );
-			}
-
-			$this->_typeItem = $typeItem;
-		}
-
-		return $this->_typeItem;
-	}
-
-
-	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param MW_View_Interface $view The view object which generates the HTML output
@@ -377,7 +344,7 @@ class Client_Html_Account_Favorite_Default
 			$total = 0;
 			$productIds = array();
 			$context = $this->_getContext();
-			$typeItem = $this->_getTypeItem();
+			$typeItem = $this->_getTypeItem( 'customer/list/type', 'product', 'favorite' );
 
 			$size = $this->_getProductListSize( $view );
 			$current = $this->_getProductListPage( $view );
