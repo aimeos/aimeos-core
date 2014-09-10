@@ -29,7 +29,7 @@ class MShop_Order_Manager_Status_DefaultTest extends MW_Unittest_Testcase
 		$this->_object = new MShop_Order_Manager_Status_Default($this->_context);
 	}
 
-
+	
 	/**
 	* Tears down the fixture, for example, closes a network connection.
 	* This method is called after a test is executed.
@@ -47,25 +47,25 @@ class MShop_Order_Manager_Status_DefaultTest extends MW_Unittest_Testcase
 		$search = $this->_object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.editor', 'core:unittest' ) );
 		$result = $this->_object->aggregate( $search, 'order.status.value' );
-
-		$this->assertEquals( 8, count( $result ) );
+	
+		$this->assertEquals( 6, count( $result ) );
 		$this->assertArrayHasKey( 'waiting', $result );
 		$this->assertEquals( 2, $result['waiting'] );
 	}
-
+	
 
 	public function testCleanup()
 	{
 		$this->_object->cleanup( array( -1 ) );
 	}
 
-
+	
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf('MShop_Order_Item_Status_Interface', $this->_object->createItem());
 	}
 
-
+	
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
