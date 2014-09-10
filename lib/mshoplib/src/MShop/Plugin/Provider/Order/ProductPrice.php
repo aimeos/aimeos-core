@@ -216,6 +216,9 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			}
 		}
 
+		// reset product rebates like in the basket controller
+		$price->setRebate( '0.00' );
+
 		return $price;
 	}
 }
