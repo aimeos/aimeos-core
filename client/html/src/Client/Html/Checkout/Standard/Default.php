@@ -401,6 +401,10 @@ class Client_Html_Checkout_Standard_Default
 			 */
 			$checkoutConfig = $view->config( 'client/html/checkout/standard/url/config', array() );
 
+
+			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+			$view->standardSteps = $steps;
+
 			/** client/html/checkout/standard/url/step-active
 			 * Name of the checkout process step to jump to if no previous step requires attention
 			 *
@@ -425,11 +429,20 @@ class Client_Html_Checkout_Standard_Default
 			 * @see client/html/checkout/standard/default/subparts
 			 */
 			$default = $view->config( 'client/html/checkout/standard/url/step-active', 'summary' );
-
-			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 			$default = ( !in_array( $default, $steps ) ? reset( $steps ) : $default );
 
-			$activeStep = $this->_getStepActive( $view, $steps, $default );
+			$current = $view->param( 'c-step', $default );
+			$cpos = $cpos = array_search( $current, $steps );
+
+			if( !isset( $view->standardStepActive )
+				|| ( ( $apos = array_search( $view->standardStepActive, $steps ) ) !== false
+				&& $cpos !== false && $cpos < $apos )
+			) {
+				$view->standardStepActive = $current;
+			}
+
+			$activeStep = $view->standardStepActive;
+
 
 			$step = null;
 			do {
@@ -451,35 +464,10 @@ class Client_Html_Checkout_Standard_Default
 				$view->standardUrlNext = '';
 			}
 
-			$view->standardStepActive = $activeStep;
-			$view->standardSteps = $steps;
 
 			$this->_cache = $view;
 		}
 
 		return $this->_cache;
-	}
-
-
-	/**
-	 * Returns the current active step.
-	 *
-	 * @param MW_View_Interface $view View object
-	 * @param array $steps Ordered list of steps through the checkout process
-	 * @param string $default Default step
-	 */
-	protected function _getStepActive( MW_View_Interface $view, array $steps, $default )
-	{
-		$current = $view->param( 'c-step', $default );
-		$cpos = $cpos = array_search( $current, $steps );
-
-		if( !isset( $view->standardStepActive )
-			|| ( ( $apos = array_search( $view->standardStepActive, $steps ) ) !== false
-			&& $cpos !== false && $cpos < $apos )
-		) {
-			$view->standardStepActive = $current;
-		}
-
-		return $view->standardStepActive;
 	}
 }
