@@ -40,7 +40,7 @@ abstract class MShop_Common_Item_Abstract extends MW_Common_Item_Abstract
 	 */
 	public function getId()
 	{
-		return ( isset( $this->_values['id'] ) ? (string) $this->_values['id'] : null );
+		return ( isset( $this->_values['id'] ) && $this->_values['id'] != '' ? (string) $this->_values['id'] : null );
 	}
 
 
