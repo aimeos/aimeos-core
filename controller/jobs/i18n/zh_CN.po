@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 16:31+0200\n"
-"PO-Revision-Date: 2014-08-06 14:11+0000\n"
+"POT-Creation-Date: 2014-09-10 22:41+0200\n"
+"PO-Revision-Date: 2014-09-10 20:42+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/arcavias-core/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -70,6 +70,10 @@ msgstr ""
 msgid "Controller path is empty"
 msgstr ""
 
+#: src/Controller/Jobs/Product/Bought/Default.php:39
+msgid "Creates bought together product suggestions"
+msgstr ""
+
 #: src/Controller/Jobs/Order/Coupon/Count/Default.php:40
 msgid "Decreases the counts of successfully redeemed coupons"
 msgstr ""
@@ -123,6 +127,7 @@ msgstr ""
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
+#: src/Controller/Jobs/Product/Bought/Factory.php:71
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
@@ -152,7 +157,7 @@ msgstr ""
 msgid "Invalid job method \"%1$s\""
 msgstr ""
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:221
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:222
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr ""
@@ -166,7 +171,12 @@ msgstr ""
 msgid "Method \"%1$s\" not available"
 msgstr ""
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:244
+#: src/Controller/Jobs/Abstract.php:82
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr ""
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:245
 #, php-format
 msgid "No warehouse \"%1$s\" found"
 msgstr ""
@@ -189,6 +199,10 @@ msgstr ""
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:28
 msgid "Product notification e-mails"
+msgstr ""
+
+#: src/Controller/Jobs/Product/Bought/Default.php:28
+msgid "Products bought together"
 msgstr ""
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39

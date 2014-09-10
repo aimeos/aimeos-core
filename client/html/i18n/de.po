@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-07 16:28+0200\n"
-"PO-Revision-Date: 2014-08-07 14:31+0000\n"
+"POT-Creation-Date: 2014-09-10 22:41+0200\n"
+"PO-Revision-Date: 2014-09-10 20:42+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,9 @@ msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%1
 #: layouts/catalog/session/pinned-body-default.html:89
 #: layouts/catalog/detail/suggest-body-default.html:18
 #: layouts/catalog/detail/seen-body-default.html:16
+#: layouts/catalog/detail/bought-body-default.html:17
 #: layouts/common/summary/detail-body-default.html:68
+#: layouts/basket/related/bought-body-default.html:16
 #: layouts/basket/mini/main-body-default.html:23
 #: layouts/email/watch/text-detail-body-default.html:19
 #: layouts/email/common/text-summary-detail-body-default.html:55
@@ -124,6 +126,8 @@ msgstr "%1$s am %2$s"
 #: layouts/catalog/session/pinned-body-default.html:91
 #: layouts/catalog/detail/suggest-body-default.html:20
 #: layouts/catalog/detail/seen-body-default.html:18
+#: layouts/catalog/detail/bought-body-default.html:19
+#: layouts/basket/related/bought-body-default.html:18
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -183,7 +187,7 @@ msgid "Additional 2"
 msgstr "Zusatz 2"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:196
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:248
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:247
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
 msgstr "Es ist keine Adresse mit der ID \"%1$s\" vorhanden"
@@ -204,14 +208,14 @@ msgstr "Alle Lieferungen erfolgen gemäß unseren AGBs, die Sie auf unserer Webs
 msgid "Article no.:"
 msgstr "Artikelnummer:"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:227
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:271
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:226
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:270
 #, php-format
 msgid "At least one billing address part is missing or invalid"
 msgstr "Mindestens ein Teil der Rechnungsadresse fehlt oder ist ungültig"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:237
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:270
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:236
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:269
 #, php-format
 msgid "At least one delivery address part is missing or invalid"
 msgstr "Mindestens ein Teil der Lieferadresse fehlt oder ist ungültig"
@@ -236,12 +240,12 @@ msgstr "Warenkorb"
 msgid "Billing address"
 msgstr "Rechnungsadresse"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:432
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:431
 #, php-format
 msgid "Billing address part \"%1$s\" is invalid"
 msgstr "Der Teil \"%1$s\" der Rechnungsadresse ist ungültig"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:457
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:456
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "Bitte tragen Sie in der Rechnungsadresse Ihre Daten in das Feld \"%1$s\" ein"
@@ -250,7 +254,7 @@ msgstr "Bitte tragen Sie in der Rechnungsadresse Ihre Daten in das Feld \"%1$s\"
 msgid "Buy now"
 msgstr "Jetzt kaufen"
 
-#: src/Client/Html/Catalog/Filter/Tree/Default.php:234
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:233
 #, php-format
 msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
 msgstr "Kategorie mit der ID \"%1$s\" ist nicht unterhalb der ID \"%2$s\""
@@ -288,13 +292,13 @@ msgstr "Ort"
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "Die Klasse \"%1$s\" implementiert nicht \"%2$s\""
 
-#: src/Client/Html/Abstract.php:326
+#: src/Client/Html/Abstract.php:342
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
-#: src/Client/Html/Abstract.php:320
+#: src/Client/Html/Abstract.php:336
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -338,7 +342,7 @@ msgstr "Gutscheincodes"
 msgid "Coupons"
 msgstr "Gutscheine"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:246
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:245
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
 msgstr "Die Kundennummer \"%1$s\" ist unbekannt"
@@ -367,12 +371,12 @@ msgstr "Versand"
 msgid "Delivery address"
 msgstr "Lieferadresse"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:392
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:391
 #, php-format
 msgid "Delivery address part \"%1$s\" is invalid"
 msgstr "Der Teil \"%1$s\" der Lieferadresse ist ungültig"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:418
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:417
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "Bitte tragen Sie in der Versandadresse Ihre Daten in das Feld \"%1$s\" ein"
@@ -475,6 +479,7 @@ msgstr "Enthaltene Rabatte"
 #: src/Client/Html/Email/Delivery/Factory.php:72
 #: src/Client/Html/Basket/Standard/Factory.php:72
 #: src/Client/Html/Basket/Mini/Factory.php:72
+#: src/Client/Html/Basket/Related/Factory.php:71
 #: src/Client/Html/Account/Watch/Factory.php:72
 #: src/Client/Html/Account/Favorite/Factory.php:72
 #: src/Client/Html/Account/History/Factory.php:72
@@ -489,7 +494,7 @@ msgstr "Enthaltene Rabatte"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
-#: src/Client/Html/Abstract.php:283 src/Client/Html/Abstract.php:311
+#: src/Client/Html/Abstract.php:299 src/Client/Html/Abstract.php:327
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "Client-Name \"%1$s\" enthält unerlaubte Zeichen"
@@ -527,16 +532,11 @@ msgstr "Nachname"
 msgid "Last seen"
 msgstr "Zuletzt angesehen"
 
-#: src/Client/Html/Account/Watch/Default.php:420
-#: src/Client/Html/Account/Favorite/Default.php:355
-#, php-format
-msgid "List type \"%1$s\" is not available"
-msgstr "Listentyp für \"%1$s\" ist nicht verfügbar"
-
 #: layouts/catalog/list/pagination-body-default.html:27
 msgid "Name"
 msgstr "Name"
 
+#: layouts/catalog/stage/navigator-body-default.html:19
 #: layouts/checkout/standard/address-body-default.html:18
 #: layouts/checkout/standard/payment-body-default.html:93
 #: layouts/checkout/standard/delivery-body-default.html:93
@@ -550,12 +550,17 @@ msgid ""
 "try again with a different keyword."
 msgstr "Ihre Suche nach <span class=\"searchstring\">\"%1$s\"</span> ergab leider keine Treffer. Bitte versuchen sie es erneut mit einem anderen Suchbegriff."
 
+#: src/Client/Html/Abstract.php:506
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr ""
+
 #: src/Client/Html/Abstract.php:61
 #, php-format
 msgid "No view available"
 msgstr "Es ist kein View vorhanden"
 
-#: src/Client/Html/Basket/Standard/Coupon/Default.php:209
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:211
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
 msgstr "Die Anzahl der Gutscheincodes überschreitet das vorgegebene Limit"
@@ -605,6 +610,10 @@ msgstr "Bestellhistorie"
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
 msgstr "Bestellung mit ID \"%1$s\" nicht gefunden"
+
+#: layouts/catalog/detail/bought-body-default.html:24
+msgid "Other customers also bought"
+msgstr ""
 
 #: layouts/account/watch/body-default.html:112
 #: layouts/account/watch/body-default.html:182
@@ -664,6 +673,10 @@ msgstr "Bitte wählen"
 msgid "Postal code"
 msgstr "PLZ"
 
+#: layouts/catalog/stage/navigator-body-default.html:16
+msgid "Previous"
+msgstr ""
+
 #: layouts/catalog/list/pagination-body-default.html:35
 #: layouts/common/summary/detail-body-default.html:88
 #: layouts/email/common/text-summary-detail-body-default.html:74
@@ -675,10 +688,18 @@ msgstr "Preis"
 msgid "Proceed"
 msgstr "Weiter"
 
+#: layouts/basket/related/bought-body-default.html:23
+msgid "Products you might be also interested in"
+msgstr ""
+
 #: layouts/common/summary/detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:72
 msgid "Quantity"
 msgstr "Anzahl"
+
+#: layouts/basket/related/body-default.html:18
+msgid "Related"
+msgstr ""
 
 #: layouts/catalog/list/pagination-body-default.html:45
 msgid "Relevance"
@@ -810,7 +831,7 @@ msgstr "Summe"
 msgid "Telephone"
 msgstr "Telefon"
 
-#: src/Client/Html/Abstract.php:462
+#: src/Client/Html/Abstract.php:478
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "Es wurde keine Vorlage für \"%1$s\" gefunden"
@@ -939,10 +960,10 @@ msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr "Die Adresse des Kunden \"%1$s\" konnte nicht gespeichert werden: %2$s"
 
-#: src/Client/Html/Catalog/Filter/Default.php:361
-#: src/Client/Html/Catalog/Stage/Default.php:343
-#: src/Client/Html/Catalog/Detail/Default.php:411
-#: src/Client/Html/Catalog/List/Default.php:367
+#: src/Client/Html/Catalog/Filter/Default.php:360
+#: src/Client/Html/Catalog/Stage/Default.php:357
+#: src/Client/Html/Catalog/Detail/Default.php:422
+#: src/Client/Html/Catalog/List/Default.php:366
 #, php-format
 msgid "Unable to set cache entry: %1$s"
 msgstr "Im Cache konnte kein Eintrag werden: %1$s"

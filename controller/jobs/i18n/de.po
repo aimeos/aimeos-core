@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 16:31+0200\n"
-"PO-Revision-Date: 2014-08-06 14:24+0000\n"
+"POT-Creation-Date: 2014-09-10 22:41+0200\n"
+"PO-Revision-Date: 2014-09-10 20:42+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -72,6 +72,10 @@ msgstr "Die Klasse \"%1$s\" ist unbekannt"
 msgid "Controller path is empty"
 msgstr "Controllerpfad ist leer"
 
+#: src/Controller/Jobs/Product/Bought/Default.php:39
+msgid "Creates bought together product suggestions"
+msgstr ""
+
 #: src/Controller/Jobs/Order/Coupon/Count/Default.php:40
 msgid "Decreases the counts of successfully redeemed coupons"
 msgstr "Erfolgreich eingelöste Gutscheine werden ungültig gemacht"
@@ -125,6 +129,7 @@ msgstr "Führt die Aufgaben aus, die in der Administrationsoberfläche erstellt 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
+#: src/Controller/Jobs/Product/Bought/Factory.php:71
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
@@ -154,7 +159,7 @@ msgstr "Ungültige Factory \"%1$s\""
 msgid "Invalid job method \"%1$s\""
 msgstr "Ungültige Jobmethode \"%1$s\""
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:221
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:222
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Für die Domäne \"%1$s\" und den Code \"%2$s\" wurde kein Listentyp gefunden"
@@ -168,7 +173,12 @@ msgstr "Logs aufräumen"
 msgid "Method \"%1$s\" not available"
 msgstr "Methode \"%1$s\" nicht verfügbar"
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:244
+#: src/Controller/Jobs/Abstract.php:82
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr ""
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:245
 #, php-format
 msgid "No warehouse \"%1$s\" found"
 msgstr "Kein Warenlager \"%1$s\" gefunden"
@@ -192,6 +202,10 @@ msgstr "Verarbeitung der Bestellungen"
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:28
 msgid "Product notification e-mails"
 msgstr "E-Mail-Benachrichtigungen für Produkte"
+
+#: src/Controller/Jobs/Product/Bought/Default.php:28
+msgid "Products bought together"
+msgstr ""
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39
 msgid "Rebuilds the catalog index for searching products"

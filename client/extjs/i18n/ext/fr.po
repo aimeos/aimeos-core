@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 16:31+0200\n"
+"POT-Creation-Date: 2014-09-10 22:41+0200\n"
 "PO-Revision-Date: 2014-01-29 19:29+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/arcavias-core/language/fr/)\n"
@@ -38,7 +38,7 @@ msgstr "après"
 msgid ">="
 msgstr "après (inclus)"
 
-#: lib/ext.ux/AdvancedSearch.js:41 lib/ext.ux/AdvancedSearch.js:41
+#: lib/ext.ux/AdvancedSearch.js:41 lib/ext.ux/AdvancedSearch.js:37
 msgid "Search"
 msgstr "Recherche"
 
