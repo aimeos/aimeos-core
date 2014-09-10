@@ -392,7 +392,6 @@ Ext.onReady(function() {
             layout : 'fit',
             border : false,
             tbar : [
-                '<a href="https://www.arcavias.com" target="_blank"><img src="https://updates.arcavias.com/check.php" /></a>',
                 '->',
                 MShop.i18n.available ? {
                     xtype : 'MShop.elements.siteLanguage.combo'
