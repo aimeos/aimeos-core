@@ -135,7 +135,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 
 $prodName = $this->detailProductItem->getName();
 $param = array( 'd-product-id' => $this->detailProductItem->getId() );
-$prodUrl = $this->url( $detailTarget, $detailController, $detailAction, array( $param ), array( $prodName ), $detailConfig );
+$prodUrl = $this->url( $detailTarget, $detailController, $detailAction, $param, array( $prodName ), $detailConfig );
 
 $images = $this->detailProductItem->getRefItems( 'media', 'default', 'default' );
 $prodImage = ( ( $image = reset( $images ) ) !== false ? $this->content( $image->getUrl() ) : '' );
