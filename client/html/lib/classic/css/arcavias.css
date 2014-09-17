@@ -137,8 +137,10 @@
 }
 
 .arcavias .pagination {
+	display: block;
 	padding: 0.5em;
 	clear: left;
+	margin: 0;
 }
 
 .arcavias .sort {
