@@ -213,11 +213,7 @@ class Client_Html_Catalog_Session_Seen_Default
 		if( !isset( $this->_cache ) )
 		{
 			$session = $this->_getContext()->getSession();
-			$str = $session->get( 'arcavias/catalog/session/seen/list', '' );
-
-			if( ( $lastSeen = @unserialize( $str ) ) === false ) {
-				$lastSeen = array();
-			}
+			$lastSeen = $session->get( 'arcavias/catalog/session/seen/list', array() );
 
 			$view->seenItems = array_reverse( $lastSeen );
 
