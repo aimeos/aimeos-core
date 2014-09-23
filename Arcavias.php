@@ -110,11 +110,13 @@ class Arcavias
 
 		foreach ( $this->_manifests as $basePath => $manifest )
 		{
-			if ( isset( $manifest['i18n'] ) )
+			if ( !isset( $manifest['i18n'] ) )
 			{
-				foreach( $manifest['i18n'] as $domain => $location ) {
-					$paths[$domain][] = $basePath . DIRECTORY_SEPARATOR . $location;
-				}
+				continue;
+			}
+
+			foreach( $manifest['i18n'] as $domain => $location ) {
+				$paths[$domain][] = $basePath . DIRECTORY_SEPARATOR . $location;
 			}
 		}
 
@@ -133,11 +135,13 @@ class Arcavias
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
-			if ( isset( $manifest['include'] ) )
+			if ( !isset( $manifest['include'] ) )
 			{
-				foreach ( $manifest['include'] as $paths ) {
-					$includes[] = $path . DIRECTORY_SEPARATOR . $paths;
-				}
+				continue;
+			}
+
+			foreach ( $manifest['include'] as $paths ) {
+				$includes[] = $path . DIRECTORY_SEPARATOR . $paths;
 			}
 		}
 
@@ -157,11 +161,13 @@ class Arcavias
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
-			if ( isset( $manifest['config'][$dbtype] ) )
+			if ( !isset( $manifest['config'][$dbtype] ) )
 			{
-				foreach ( $manifest['config'][$dbtype] as $paths ) {
-					$confpaths[] = $path . DIRECTORY_SEPARATOR . $paths;
-				}
+				continue;
+			}
+
+			foreach ( $manifest['config'][$dbtype] as $paths ) {
+				$confpaths[] = $path . DIRECTORY_SEPARATOR . $paths;
 			}
 		}
 
@@ -202,17 +208,19 @@ class Arcavias
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
-			if( isset( $manifest['setup'] ) )
+			if( !isset( $manifest['setup'] ) )
 			{
-				foreach( $manifest['setup'] as $relpath )
-				{
-					$setupPaths[] = $path . DIRECTORY_SEPARATOR . $relpath;
+				continue;
+			}
 
-					$sitePath = $path . DIRECTORY_SEPARATOR . $relpath . DIRECTORY_SEPARATOR . $site;
+			foreach( $manifest['setup'] as $relpath )
+			{
+				$setupPaths[] = $path . DIRECTORY_SEPARATOR . $relpath;
 
-					if( is_dir( realpath( $sitePath ) ) ) {
-						$setupPaths[] = $sitePath;
-					}
+				$sitePath = $path . DIRECTORY_SEPARATOR . $relpath . DIRECTORY_SEPARATOR . $site;
+
+				if( is_dir( realpath( $sitePath ) ) ) {
+					$setupPaths[] = $sitePath;
 				}
 			}
 		}
@@ -329,4 +337,3 @@ class Arcavias
 		}
 	}
 }
-
