@@ -54,25 +54,11 @@ class Controller_Common_Order_Default
 		$status = 1;
 		$orderId = $orderItem->getId();
 
+		$this->_updateStatus ( MShop_Order_Item_Status_Abstract::STOCK_UPDATE, $orderId,
+								$orderItem, $status, -1 );
 
-		$type = MShop_Order_Item_Status_Abstract::STOCK_UPDATE;
-
-		if( ( $statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type ) ) === false
-			|| $statusItem->getValue() != $status
-		) {
-			$this->_updateStock( $orderItem, -1 );
-			$this->_addStatusItem( $orderId, $type, $status );
-		}
-
-
-		$type = MShop_Order_Item_Status_Abstract::COUPON_UPDATE;
-
-		if( ( $statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type ) ) === false
-			|| $statusItem->getValue() != $status
-		) {
-			$this->_updateCoupons( $orderItem, -1 );
-			$this->_addStatusItem( $orderId, $type, $status );
-		}
+		$this->_updateStatus ( MShop_Order_Item_Status_Abstract::COUPON_UPDATE, $orderId,
+								$orderItem, $status, -1 );
 	}
 
 
@@ -99,25 +85,11 @@ class Controller_Common_Order_Default
 		$status = 0;
 		$orderId = $orderItem->getId();
 
+		$this->_updateStatus ( MShop_Order_Item_Status_Abstract::STOCK_UPDATE, $orderId,
+								$orderItem, $status, +1 );
 
-		$type = MShop_Order_Item_Status_Abstract::STOCK_UPDATE;
-
-		if( ( $statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type ) ) === false
-			|| $statusItem->getValue() != $status
-		) {
-			$this->_updateStock( $orderItem, +1 );
-			$this->_addStatusItem( $orderId, $type, $status );
-		}
-
-
-		$type = MShop_Order_Item_Status_Abstract::COUPON_UPDATE;
-
-		if( ( $statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type ) ) === false
-			|| $statusItem->getValue() != $status
-		) {
-			$this->_updateCoupons( $orderItem, +1 );
-			$this->_addStatusItem( $orderId, $type, $status );
-		}
+		$this->_updateStatus ( MShop_Order_Item_Status_Abstract::COUPON_UPDATE, $orderId,
+								$orderItem, $status, +1 );
 	}
 
 
@@ -260,5 +232,23 @@ class Controller_Common_Order_Default
 		while( $count >= $search->getSliceSize() );
 
 		$stockManager->commit();
+	}
+
+
+	protected function _updateStatus ($type, $orderId, $orderItem, $status, $updateValue)
+	{
+		$statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type );
+
+		if( $statusItem !== false && $statusItem->getValue() == $status ) {
+			return;
+		}
+
+		if ($type == MShop_Order_Item_Status_Abstract::STOCK_UPDATE) {
+			$this->_updateStock( $orderItem, $updateValue );
+			$this->_addStatusItem( $orderId, $type, $status );
+		} elseif ($type == MShop_Order_Item_Status_Abstract::COUPON_UPDATE) {
+			$this->_updateCoupons( $orderItem, $updateValue );
+			$this->_addStatusItem( $orderId, $type, $status );
+		}
 	}
 }
