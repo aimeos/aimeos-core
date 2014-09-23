@@ -239,7 +239,7 @@ class Controller_Common_Order_Default
 	{
 		$statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type );
 
-		if( $statusItem !== false || $statusItem->getValue() == $status ) {
+		if( $statusItem !== false && $statusItem->getValue() == $status ) {
 			return;
 		}
 
