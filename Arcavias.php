@@ -110,8 +110,7 @@ class Arcavias
 
 		foreach ( $this->_manifests as $basePath => $manifest )
 		{
-			if ( !isset( $manifest['i18n'] ) )
-			{
+			if ( !isset( $manifest['i18n'] ) ) {
 				continue;
 			}
 
@@ -135,8 +134,7 @@ class Arcavias
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
-			if ( !isset( $manifest['include'] ) )
-			{
+			if ( !isset( $manifest['include'] ) ) {
 				continue;
 			}
 
@@ -161,8 +159,7 @@ class Arcavias
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
-			if ( !isset( $manifest['config'][$dbtype] ) )
-			{
+			if ( !isset( $manifest['config'][$dbtype] ) ) {
 				continue;
 			}
 
@@ -208,8 +205,7 @@ class Arcavias
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
-			if( !isset( $manifest['setup'] ) )
-			{
+			if( !isset( $manifest['setup'] ) ) {
 				continue;
 			}
 
@@ -253,8 +249,7 @@ class Arcavias
 
 			foreach ( $dir as $dirinfo )
 			{
-				if ( $dirinfo->isDot() !== false )
-				{
+				if ( $dirinfo->isDot() !== false ) {
 					continue;
 				}
 

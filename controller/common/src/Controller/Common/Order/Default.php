@@ -51,14 +51,10 @@ class Controller_Common_Order_Default
 	 */
 	public function block( MShop_Order_Item_Interface $orderItem )
 	{
-		$status = 1;
 		$orderId = $orderItem->getId();
 
-		$this->_updateStatus ( MShop_Order_Item_Status_Abstract::STOCK_UPDATE, $orderId,
-								$orderItem, $status, -1 );
-
-		$this->_updateStatus ( MShop_Order_Item_Status_Abstract::COUPON_UPDATE, $orderId,
-								$orderItem, $status, -1 );
+		$this->_updateStatus( MShop_Order_Item_Status_Abstract::STOCK_UPDATE, $orderId, $orderItem, 1, -1 );
+		$this->_updateStatus( MShop_Order_Item_Status_Abstract::COUPON_UPDATE, $orderId, $orderItem, 1, -1 );
 	}
 
 
@@ -82,14 +78,10 @@ class Controller_Common_Order_Default
 	 */
 	public function unblock( MShop_Order_Item_Interface $orderItem )
 	{
-		$status = 0;
 		$orderId = $orderItem->getId();
 
-		$this->_updateStatus ( MShop_Order_Item_Status_Abstract::STOCK_UPDATE, $orderId,
-								$orderItem, $status, +1 );
-
-		$this->_updateStatus ( MShop_Order_Item_Status_Abstract::COUPON_UPDATE, $orderId,
-								$orderItem, $status, +1 );
+		$this->_updateStatus( MShop_Order_Item_Status_Abstract::STOCK_UPDATE, $orderId, $orderItem, 0, +1 );
+		$this->_updateStatus( MShop_Order_Item_Status_Abstract::COUPON_UPDATE, $orderId, $orderItem, 0, +1 );
 	}
 
 
