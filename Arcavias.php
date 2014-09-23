@@ -233,7 +233,9 @@ class Arcavias
 
 		foreach ( $directories as $directory )
 		{
-			if ( ( $manifest = $this->_getManifestFile( $directory ) ) !== false )
+			$manifest = $this->_getManifestFile( $directory );
+
+			if ( $manifest !== false )
 			{
 				$manifests[ $directory ] = $manifest;
 				continue;
@@ -245,7 +247,8 @@ class Arcavias
 			{
 				if ( $dirinfo->isDot() === false )
 				{
-					if ( ( $manifest = $this->_getManifestFile( $dirinfo->getPathName() ) ) !== false ) {
+					$manifest = $this->_getManifestFile( $dirinfo->getPathName() );
+					if ( $manifest !== false ) {
 						$manifests[$dirinfo->getPathName()] = $manifest;
 					}
 				}
