@@ -245,13 +245,17 @@ class Arcavias
 
 			foreach ( $dir as $dirinfo )
 			{
-				if ( $dirinfo->isDot() === false )
+				if ( $dirinfo->isDot() !== false )
 				{
-					$manifest = $this->_getManifestFile( $dirinfo->getPathName() );
-					if ( $manifest !== false ) {
-						$manifests[$dirinfo->getPathName()] = $manifest;
-					}
+					continue;
 				}
+
+				$manifest = $this->_getManifestFile( $dirinfo->getPathName() );
+				if ( $manifest === false ) {
+					continue;
+				}
+
+				$manifests[$dirinfo->getPathName()] = $manifest;
 			}
 		}
 
