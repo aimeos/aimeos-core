@@ -118,7 +118,7 @@ class Client_Html_Checkout_Standard_Order_Address_Default
 		}
 		$view->addressHeader = $html;
 
-		/** client/html/checkout/standard/order/address/template-header
+		/** client/html/checkout/standard/order/address/default/template-header
 		 * Relative path to the HTML header template of the checkout standard order address client.
 		 *
 		 * The template file contains the HTML code and processing instructions

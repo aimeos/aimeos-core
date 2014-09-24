@@ -51,7 +51,7 @@ class Client_Html_Basket_Related_Default
 	 */
 	private $_subPartPath = 'client/html/basket/related/default/subparts';
 
-	/** client/html/basket/related/detail/name
+	/** client/html/basket/related/bought/name
 	 * Name of the bought together part used by the basket related client implementation
 	 *
 	 * Use "Myname" if your class is named "Client_Html_Basket_Related_Bought_Myname".
