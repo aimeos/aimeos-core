@@ -168,7 +168,7 @@ abstract class Client_Html_Abstract
 	 */
 	protected function _addMetaItem( $items, $domain, &$expire, array &$tags )
 	{
-		/** client/html/common/cache/mode/tag-all
+		/** client/html/common/cache/tag-all
 		 * Adds tags for all items used in a cache entry
 		 *
 		 * Each cache entry storing rendered parts for the HTML header or body
