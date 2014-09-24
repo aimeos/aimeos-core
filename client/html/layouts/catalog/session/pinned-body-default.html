@@ -85,6 +85,21 @@ $detailController = $this->config( 'client/html/catalog/detail/url/controller', 
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
+/** client/html/catalog/session/pinned/count/enable
+ * Displays the number of pinned products in the header of the pinned list
+ *
+ * This configuration option enables or disables displaying the total number
+ * of pinned products in the header of section. This increases the usability if
+ * more than the shown products are available in the list but this depends on
+ * the design of the site.
+ *
+ * @param integer Zero to disable the counter, one to enable it
+ * @since 2014.09
+ * @category Developer
+ * @see client/html/catalog/session/seen/count/enable
+ */
+$count = $this->config( 'client/html/catalog/session/pinned/count/enable', 1 );
+
 /// Price format with price value (%1$s) and currency (%2$s)
 $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 /// Percent format with value (%1$s) and % sign
@@ -94,7 +109,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <section class="catalog-session-pinned">
 	<h2 class="header">
 <?php echo $this->translate( 'client/html', 'Pinned products' ); ?>
-<?php if( $this->config( 'client/html/catalog/session/pinned/count/enable', 1 ) ) : ?>
+<?php if( $count ) : ?>
 		<span class="count"><?php echo count( $pinList ); ?></span>
 <?php endif; ?>
 	</h2>

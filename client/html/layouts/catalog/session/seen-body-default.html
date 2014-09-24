@@ -8,11 +8,26 @@
 $enc = $this->encoder();
 $seenList = $this->get( 'seenItems', array() );
 
+/** client/html/catalog/session/seen/count/enable
+ * Displays the number of last seen products in the header of the last seen list
+ *
+ * This configuration option enables or disables displaying the total number
+ * of last seen products in the header of section. This increases the usability
+ * if more than the shown products are available in the list but this depends on
+ * the design of the site.
+ *
+ * @param integer Zero to disable the counter, one to enable it
+ * @since 2014.09
+ * @category Developer
+ * @see client/html/catalog/session/pinned/count/enable
+ */
+$count = $this->config( 'client/html/catalog/session/seen/count/enable', 1 );
+
 ?>
 <section class="catalog-session-seen">
 	<h2 class="header">
 <?php echo $this->translate( 'client/html', 'Last seen' ); ?>
-<?php if( $this->config( 'client/html/catalog/session/seen/count/enable', 1 ) ) : ?>
+<?php if( $count ) : ?>
 		<span class="count"><?php echo count( $seenList ); ?></span>
 <?php endif; ?>
 	</h2>

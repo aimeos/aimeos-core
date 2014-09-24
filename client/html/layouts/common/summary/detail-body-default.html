@@ -18,6 +18,23 @@ $detailController = $this->config( 'client/html/catalog/detail/url/controller', 
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
+/** client/html/common/summary/detail/product/attribute/types
+ * List of attribute type codes that should be displayed in the basket along with their product
+ *
+ * The products in the basket can store attributes that exactly define an ordered
+ * product or which are important for the back office. By default, the product
+ * variant attributes are always displayed and the configurable product attributes
+ * are displayed separately.
+ *
+ * Additional attributes for each ordered product can be added by basket plugins.
+ * Depending on the attribute types and if they should be shown to the customers,
+ * you need to extend the list of displayed attribute types ab adding their codes
+ * to the configurable list.
+ *
+ * @param array List of attribute type codes
+ * @category Developer
+ * @since 2014.09
+ */
 $attrTypes = $this->config( 'client/html/common/summary/detail/product/attribute/types', array( 'variant' ) );
 
 
