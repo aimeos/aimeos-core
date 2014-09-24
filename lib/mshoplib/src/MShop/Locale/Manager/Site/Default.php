@@ -158,7 +158,6 @@ class MShop_Locale_Manager_Site_Default
 
 		if( !$item->isModified() ) { return	; }
 
-
 		$context = $this->_getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -169,16 +168,40 @@ class MShop_Locale_Manager_Site_Default
 		{
 			$id = $item->getId();
 
+			/** mshop/locale/manager/site/default/item/update
+			 * Updates an existing site record in the database
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the log item to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the saveItems() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for updating records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/locale/manager/site/default/item/insert
+			 * @see mshop/locale/manager/site/default/item/delete
+			 * @see mshop/locale/manager/site/default/item/search
+			 * @see mshop/locale/manager/site/default/item/count
+			 * @see mshop/locale/manager/site/default/item/newid
+			 */
 			$path = 'mshop/locale/manager/site/default/item/update';
+
 			$stmt = $this->_getCachedStatement( $conn, $path );
 
-			$stmt->bind(1, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(2, $item->getLabel(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(3, json_encode($item->getConfig()), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(4, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(5, $context->getEditor() );
-			$stmt->bind(6, date( 'Y-m-d H:i:s', time() ) ); // mtime
-			$stmt->bind(7, $id, MW_DB_Statement_Abstract::PARAM_INT);
+			$stmt->bind( 1, $item->getCode() );
+			$stmt->bind( 2, $item->getLabel() );
+			$stmt->bind( 3, json_encode($item->getConfig()) );
+			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 5, $context->getEditor() );
+			$stmt->bind( 6, date( 'Y-m-d H:i:s' ) ); // mtime
+			$stmt->bind( 7, $id, MW_DB_Statement_Abstract::PARAM_INT );
 
 			$stmt->execute()->finish();
 			$item->setId( $id ); // set Modified false
@@ -203,9 +226,52 @@ class MShop_Locale_Manager_Site_Default
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 
+		/** mshop/locale/manager/site/default/item/delete
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the site records specified by the given IDs from the
+		 * locale database. The records must be from the site that is configured
+		 * via the context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/site/default/item/insert
+		 * @see mshop/locale/manager/site/default/item/update
+		 * @see mshop/locale/manager/site/default/item/search
+		 * @see mshop/locale/manager/site/default/item/count
+		 * @see mshop/locale/manager/site/default/item/newid
+		 */
 		$path = 'mshop/locale/manager/site/default/item/delete';
-		$this->_deleteItems($ids, $config->get( $path, $path ), false );
+		$this->_deleteItems( $ids, $config->get( $path, $path ), false );
 
+		/** mshop/locale/manager/site/cleanup/shop/domains
+		 * List of madmin domains names whose items referring to the same site should be deleted as well
+		 *
+		 * As items for each domain can be stored in a separate database, the
+		 * site manager needs a list of domain names used to connect to the
+		 * correct database and to remove all items that belong the the deleted
+		 * site.
+		 *
+		 * For each domain the cleanup will be done by the corresponding MShop
+		 * manager. To keep records for old sites in the database even if the
+		 * site was already deleted, you can configure a new list with the
+		 * domains removed you would like to keep, e.g. the "order" domain to
+		 * keep all orders ever placed.
+		 *
+		 * @param array List of domain names in lower case
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/site/cleanup/admin/domains
+		 */
 		$path = 'mshop/locale/manager/site/cleanup/shop/domains';
 		$default = array(
 			'attribute', 'catalog', 'catalog/index', 'coupon', 'customer',
@@ -217,6 +283,25 @@ class MShop_Locale_Manager_Site_Default
 			MShop_Factory::createManager( $context, $domain )->cleanup( $ids );
 		}
 
+		/** mshop/locale/manager/site/cleanup/admin/domains
+		 * List of mshop domains names whose items referring to the same site should be deleted as well
+		 *
+		 * As items for each domain can be stored in a separate database, the
+		 * site manager needs a list of domain names used to connect to the
+		 * correct database and to remove all items that belong the the deleted
+		 * site.
+		 *
+		 * For each domain the cleanup will be done by the corresponding MAdmin
+		 * manager. To keep records for old sites in the database even if the
+		 * site was already deleted, you can configure a new list with the
+		 * domains removed you would like to keep, e.g. the "log" domain to
+		 * keep all log entries ever written.
+		 *
+		 * @param array List of domain names in lower case
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/site/cleanup/shop/domains
+		 */
 		$path = 'mshop/locale/manager/site/cleanup/admin/domains';
 		$default = array( 'job', 'log', 'cache' );
 
@@ -397,12 +482,9 @@ class MShop_Locale_Manager_Site_Default
 	 * Searches for site items matching the given criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of site items implementing MShop_Locale_Item_Site_Interface
-	 *
-	 * @throws MW_DB_Exception On failures with the db object
-	 * @throws MShop_Common_Exception On failures with the MW_Common_Criteria_ object
-	 * @throws MShop_Locale_Exception On failures with the site item object
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
@@ -427,15 +509,68 @@ class MShop_Locale_Manager_Site_Default
 				$search->getSliceSize(),
 			);
 
+			/** mshop/locale/manager/site/default/item/search
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * Fetches the records matched by the given criteria from the attribute
+			 * database. The records must be from one of the sites that are
+			 * configured via the context item. If the current site is part of
+			 * a tree of sites, the SELECT statement can retrieve all records
+			 * from the current site and the complete sub-tree of sites.
+			 *
+			 * As the records can normally be limited by criteria from sub-managers,
+			 * their tables must be joined in the SQL context. This is done by
+			 * using the "internaldeps" property from the definition of the ID
+			 * column of the sub-managers. These internal dependencies specify
+			 * the JOIN between the tables and the used columns for joining. The
+			 * ":joins" placeholder is then replaced by the JOIN strings from
+			 * the sub-managers.
+			 *
+			 * To limit the records matched, conditions can be added to the given
+			 * criteria object. It can contain comparisons like column names that
+			 * must match specific values which can be combined by AND, OR or NOT
+			 * operators. The resulting string of SQL conditions replaces the
+			 * ":cond" placeholder before the statement is sent to the database
+			 * server.
+			 *
+			 * If the records that are retrieved should be ordered by one or more
+			 * columns, the generated string of column / sort direction pairs
+			 * replaces the ":order" placeholder. In case no ordering is required,
+			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
+			 * markers is removed to speed up retrieving the records. Columns of
+			 * sub-managers can also be used for ordering the result set but then
+			 * no index can be used.
+			 *
+			 * The number of returned records can be limited and can start at any
+			 * number between the begining and the end of the result set. For that
+			 * the ":size" and ":start" placeholders are replaced by the
+			 * corresponding values from the criteria object. The default values
+			 * are 0 for the start and 100 for the size value.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for searching items
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/locale/manager/site/default/item/insert
+			 * @see mshop/locale/manager/site/default/item/update
+			 * @see mshop/locale/manager/site/default/item/delete
+			 * @see mshop/locale/manager/site/default/item/count
+			 * @see mshop/locale/manager/site/default/item/newid
+			 */
 			$path = 'mshop/locale/manager/site/default/item/search';
-			$sql = $context->getConfig()->get($path, $path);
-			$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
+
+			$sql = $context->getConfig()->get( $path, $path );
+			$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 			try
 			{
 				while ( ($row = $results->fetch()) !== false )
 				{
 					$config = $row['config'];
+
 					if ( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
@@ -453,15 +588,61 @@ class MShop_Locale_Manager_Site_Default
 
 			if ( $total !== null )
 			{
+				/** mshop/locale/manager/site/default/item/count
+				 * Counts the number of records matched by the given criteria in the database
+				 *
+				 * Counts all records matched by the given criteria from the attribute
+				 * database. The records must be from one of the sites that are
+				 * configured via the context item. If the current site is part of
+				 * a tree of sites, the statement can count all records from the
+				 * current site and the complete sub-tree of sites.
+				 *
+				 * As the records can normally be limited by criteria from sub-managers,
+				 * their tables must be joined in the SQL context. This is done by
+				 * using the "internaldeps" property from the definition of the ID
+				 * column of the sub-managers. These internal dependencies specify
+				 * the JOIN between the tables and the used columns for joining. The
+				 * ":joins" placeholder is then replaced by the JOIN strings from
+				 * the sub-managers.
+				 *
+				 * To limit the records matched, conditions can be added to the given
+				 * criteria object. It can contain comparisons like column names that
+				 * must match specific values which can be combined by AND, OR or NOT
+				 * operators. The resulting string of SQL conditions replaces the
+				 * ":cond" placeholder before the statement is sent to the database
+				 * server.
+				 *
+				 * Both, the strings for ":joins" and for ":cond" are the same as for
+				 * the "search" SQL statement.
+				 *
+				 * Contrary to the "search" statement, it doesn't return any records
+				 * but instead the number of records that have been found. As counting
+				 * thousands of records can be a long running task, the maximum number
+				 * of counted records is limited for performance reasons.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for counting items
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/locale/manager/site/default/item/insert
+				 * @see mshop/locale/manager/site/default/item/update
+				 * @see mshop/locale/manager/site/default/item/delete
+				 * @see mshop/locale/manager/site/default/item/search
+				 * @see mshop/locale/manager/site/default/item/newid
+				 */
 				$path = 'mshop/locale/manager/site/default/item/count';
-				$sql = $this->_getContext()->getConfig()->get($path, $path);
-				$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
+
+				$sql = $this->_getContext()->getConfig()->get( $path, $path );
+				$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 				$row = $results->fetch();
 				$results->finish();
 
 				if ( $row === false ) {
-					throw new MShop_Locale_Exception('No total results value found');
+					throw new MShop_Locale_Exception( 'No total results value found' );
 				}
 
 				$total = $row['count'];
@@ -574,22 +755,78 @@ class MShop_Locale_Manager_Site_Default
 
 		try
 		{
-			$curdate = date( 'Y-m-d H:i:s' );
+			$date = date( 'Y-m-d H:i:s' );
 
+			/** mshop/locale/manager/site/default/item/insert
+			 * Inserts a new currency record into the database table
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the log item to the statement before they are
+			 * sent to the database server. The number of question marks must
+			 * be the same as the number of columns listed in the INSERT
+			 * statement. The order of the columns must correspond to the
+			 * order in the saveItems() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/locale/manager/site/default/item/update
+			 * @see mshop/locale/manager/site/default/item/delete
+			 * @see mshop/locale/manager/site/default/item/search
+			 * @see mshop/locale/manager/site/default/item/count
+			 * @see mshop/locale/manager/site/default/item/newid
+			 */
 			$path = 'mshop/locale/manager/site/default/item/insert';
+
 			$stmt = $this->_getCachedStatement( $conn, $path );
 
-			$stmt->bind(1, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(2, $item->getLabel(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(3, json_encode($item->getConfig()), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(4, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(5, 0, MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(6, $context->getEditor() );
-			$stmt->bind(7, $curdate ); // mtime
-			$stmt->bind(8, $curdate ); // ctime
+			$stmt->bind( 1, $item->getCode() );
+			$stmt->bind( 2, $item->getLabel() );
+			$stmt->bind( 3, json_encode( $item->getConfig() ) );
+			$stmt->bind( 4, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
+			$stmt->bind( 5, 0, MW_DB_Statement_Abstract::PARAM_INT);
+			$stmt->bind( 6, $context->getEditor() );
+			$stmt->bind( 7, $date ); // mtime
+			$stmt->bind( 8, $date ); // ctime
 
 			$stmt->execute()->finish();
 
+			/** mshop/locale/manager/site/default/item/newid
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * As soon as a new record is inserted into the database table,
+			 * the database server generates a new and unique identifier for
+			 * that record. This ID can be used for retrieving, updating and
+			 * deleting that specific record from the table again.
+			 *
+			 * For MySQL:
+			 *  SELECT LAST_INSERT_ID()
+			 * For PostgreSQL:
+			 *  SELECT currval('seq_matt_id')
+			 * For SQL Server:
+			 *  SELECT SCOPE_IDENTITY()
+			 * For Oracle:
+			 *  SELECT "seq_matt_id".CURRVAL FROM DUAL
+			 *
+			 * There's no way to retrive the new ID by a SQL statements that
+			 * fits for most database servers as they implement their own
+			 * specific way.
+			 *
+			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/locale/manager/site/default/item/insert
+			 * @see mshop/locale/manager/site/default/item/update
+			 * @see mshop/locale/manager/site/default/item/delete
+			 * @see mshop/locale/manager/site/default/item/search
+			 * @see mshop/locale/manager/site/default/item/count
+			 */
 			$path = 'mshop/locale/manager/default/item/newid';
 			$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 
@@ -627,7 +864,7 @@ class MShop_Locale_Manager_Site_Default
 	protected function _getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
 		$statement = $conn->create($sql);
-		$this->_getContext()->getLogger()->log(__METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG);
+		$this->_getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
 
 		$results = $statement->execute();
 
@@ -642,7 +879,7 @@ class MShop_Locale_Manager_Site_Default
 	 */
 	protected function _createItem( array $data = array( ) )
 	{
-		return new MShop_Locale_Item_Site_Default($data);
+		return new MShop_Locale_Item_Site_Default( $data );
 	}
 
 

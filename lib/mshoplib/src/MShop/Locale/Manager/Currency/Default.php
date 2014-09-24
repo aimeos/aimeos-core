@@ -138,28 +138,81 @@ class MShop_Locale_Manager_Currency_Default
 		try
 		{
 			$id = $item->getId();
+			$date = date( 'Y-m-d H:i:s' );
 
-			$path = 'mshop/locale/manager/currency/default/item/';
-			$path .= ( $id === null ) ? 'insert' : 'update';
+			if( $id === null )
+			{
+				/** mshop/locale/manager/currency/default/item/insert
+				 * Inserts a new currency record into the database table
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the log item to the statement before they are
+				 * sent to the database server. The number of question marks must
+				 * be the same as the number of columns listed in the INSERT
+				 * statement. The order of the columns must correspond to the
+				 * order in the saveItems() method, so the correct values are
+				 * bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for inserting records
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/locale/manager/currency/default/item/update
+				 * @see mshop/locale/manager/currency/default/item/delete
+				 * @see mshop/locale/manager/currency/default/item/search
+				 * @see mshop/locale/manager/currency/default/item/count
+				 */
+				$path = 'mshop/locale/manager/currency/default/item/insert';
+			}
+			else
+			{
+				/** mshop/locale/manager/currency/default/item/update
+				 * Updates an existing currency record in the database
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the log item to the statement before they are
+				 * sent to the database server. The order of the columns must
+				 * correspond to the order in the saveItems() method, so the
+				 * correct values are bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for updating records
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/locale/manager/currency/default/item/insert
+				 * @see mshop/locale/manager/currency/default/item/delete
+				 * @see mshop/locale/manager/currency/default/item/search
+				 * @see mshop/locale/manager/currency/default/item/count
+				 */
+				$path = 'mshop/locale/manager/currency/default/item/update';
+			}
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
 
-			$stmt->bind(1, $item->getLabel(), MW_DB_Statement_Abstract::PARAM_STR);
-			$stmt->bind(2, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(3, $item->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT);
-			$stmt->bind(4, date( 'Y-m-d H:i:s', time() ) ); // mtime
-			$stmt->bind(5, $context->getEditor() );
+			$stmt->bind( 1, $item->getLabel() );
+			$stmt->bind( 2, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $date ); // mtime
+			$stmt->bind( 5, $context->getEditor() );
 			// bind ID but code and id are identical after saveing the stuff
 			// id is the flag to detect updates or inserts!
-			$stmt->bind(6, $item->getCode(), MW_DB_Statement_Abstract::PARAM_STR);
+			$stmt->bind( 6, $item->getCode() );
 
 			if ( $id === null ) {
-				$stmt->bind(7, date( 'Y-m-d H:i:s', time() ) ); // ctime
+				$stmt->bind( 7, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
 
-			$item->setId($item->getCode()); // set modified flag to false
+			$item->setId( $item->getCode() ); // set modified flag to false
 
 			$dbm->release( $conn, $dbname );
 		}
@@ -178,6 +231,29 @@ class MShop_Locale_Manager_Currency_Default
 	 */
 	public function deleteItems( array $ids )
 	{
+		/** mshop/locale/manager/currency/default/item/delete
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the language records specified by the given IDs from the
+		 * locale database. The records must be from the site that is configured
+		 * via the context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/currency/default/item/insert
+		 * @see mshop/locale/manager/currency/default/item/update
+		 * @see mshop/locale/manager/currency/default/item/search
+		 * @see mshop/locale/manager/currency/default/item/count
+		 */
 		$path = 'mshop/locale/manager/currency/default/item/delete';
 		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
@@ -205,7 +281,7 @@ class MShop_Locale_Manager_Currency_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/locale/manager/language/submanagers
+		/** classes/locale/manager/currency/submanagers
 		 * List of manager names that can be instantiated by the locale currency manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -229,16 +305,12 @@ class MShop_Locale_Manager_Currency_Default
 
 
 	/**
-	 * Search for currency items.
+	 * Search for currency items matching the given criteria.
 	 *
 	 * @param MW_Common_Criteria_Interface $search Search object
+	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 *
 	 * @return array List of items implementing MShop_Locale_Item_Currency_Interface
-	 *
-	 * @throws MW_DB_Exception On failures with the db object
-	 * @throws MShop_Common_Exception On failures with the MW_Common_Criteria_ object
-	 * @throws MShop_Locale_Exception On failures with the currency item object
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
@@ -254,8 +326,8 @@ class MShop_Locale_Manager_Currency_Default
 		try
 		{
 			$attributes = $this->getSearchAttributes();
-			$types = $this->_getSearchTypes($attributes);
-			$translations = $this->_getSearchTranslations($attributes);
+			$types = $this->_getSearchTypes( $attributes );
+			$translations = $this->_getSearchTranslations( $attributes );
 
 			$find = array( ':cond', ':order', ':start', ':size' );
 			$replace = array(
@@ -265,9 +337,60 @@ class MShop_Locale_Manager_Currency_Default
 				$search->getSliceSize(),
 			);
 
+			/** mshop/locale/manager/currency/default/item/search
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * Fetches the records matched by the given criteria from the attribute
+			 * database. The records must be from one of the sites that are
+			 * configured via the context item. If the current site is part of
+			 * a tree of sites, the SELECT statement can retrieve all records
+			 * from the current site and the complete sub-tree of sites.
+			 *
+			 * As the records can normally be limited by criteria from sub-managers,
+			 * their tables must be joined in the SQL context. This is done by
+			 * using the "internaldeps" property from the definition of the ID
+			 * column of the sub-managers. These internal dependencies specify
+			 * the JOIN between the tables and the used columns for joining. The
+			 * ":joins" placeholder is then replaced by the JOIN strings from
+			 * the sub-managers.
+			 *
+			 * To limit the records matched, conditions can be added to the given
+			 * criteria object. It can contain comparisons like column names that
+			 * must match specific values which can be combined by AND, OR or NOT
+			 * operators. The resulting string of SQL conditions replaces the
+			 * ":cond" placeholder before the statement is sent to the database
+			 * server.
+			 *
+			 * If the records that are retrieved should be ordered by one or more
+			 * columns, the generated string of column / sort direction pairs
+			 * replaces the ":order" placeholder. In case no ordering is required,
+			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
+			 * markers is removed to speed up retrieving the records. Columns of
+			 * sub-managers can also be used for ordering the result set but then
+			 * no index can be used.
+			 *
+			 * The number of returned records can be limited and can start at any
+			 * number between the begining and the end of the result set. For that
+			 * the ":size" and ":start" placeholders are replaced by the
+			 * corresponding values from the criteria object. The default values
+			 * are 0 for the start and 100 for the size value.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for searching items
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/locale/manager/currency/default/item/insert
+			 * @see mshop/locale/manager/currency/default/item/update
+			 * @see mshop/locale/manager/currency/default/item/delete
+			 * @see mshop/locale/manager/currency/default/item/count
+			 */
 			$path = 'mshop/locale/manager/currency/default/item/search';
-			$sql = $config->get($path, $path);
-			$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
+
+			$sql = $config->get( $path, $path );
+			$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 			try
 			{
@@ -283,15 +406,60 @@ class MShop_Locale_Manager_Currency_Default
 
 			if ( $total !== null )
 			{
+				/** mshop/locale/manager/currency/default/item/count
+				 * Counts the number of records matched by the given criteria in the database
+				 *
+				 * Counts all records matched by the given criteria from the attribute
+				 * database. The records must be from one of the sites that are
+				 * configured via the context item. If the current site is part of
+				 * a tree of sites, the statement can count all records from the
+				 * current site and the complete sub-tree of sites.
+				 *
+				 * As the records can normally be limited by criteria from sub-managers,
+				 * their tables must be joined in the SQL context. This is done by
+				 * using the "internaldeps" property from the definition of the ID
+				 * column of the sub-managers. These internal dependencies specify
+				 * the JOIN between the tables and the used columns for joining. The
+				 * ":joins" placeholder is then replaced by the JOIN strings from
+				 * the sub-managers.
+				 *
+				 * To limit the records matched, conditions can be added to the given
+				 * criteria object. It can contain comparisons like column names that
+				 * must match specific values which can be combined by AND, OR or NOT
+				 * operators. The resulting string of SQL conditions replaces the
+				 * ":cond" placeholder before the statement is sent to the database
+				 * server.
+				 *
+				 * Both, the strings for ":joins" and for ":cond" are the same as for
+				 * the "search" SQL statement.
+				 *
+				 * Contrary to the "search" statement, it doesn't return any records
+				 * but instead the number of records that have been found. As counting
+				 * thousands of records can be a long running task, the maximum number
+				 * of counted records is limited for performance reasons.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for counting items
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/locale/manager/currency/default/item/insert
+				 * @see mshop/locale/manager/currency/default/item/update
+				 * @see mshop/locale/manager/currency/default/item/delete
+				 * @see mshop/locale/manager/currency/default/item/search
+				 */
 				$path = 'mshop/locale/manager/currency/default/item/count';
-				$sql = $config->get($path, $path);
-				$results = $this->_getSearchResults($conn, str_replace($find, $replace, $sql));
+
+				$sql = $config->get( $path, $path );
+				$results = $this->_getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
 
 				$row = $results->fetch();
 				$results->finish();
 
 				if ( $row === false ) {
-					throw new MShop_Locale_Exception('No total results value found.');
+					throw new MShop_Locale_Exception( 'No total results value found' );
 				}
 
 				$total = $row['count'];
@@ -440,7 +608,7 @@ class MShop_Locale_Manager_Currency_Default
 	public function createSearch( $default = false )
 	{
 		if ( $default === true ) {
-			return parent::_createSearch('locale.currency');
+			return parent::_createSearch( 'locale.currency' );
 		}
 
 		return parent::createSearch();
@@ -456,8 +624,8 @@ class MShop_Locale_Manager_Currency_Default
 	 */
 	protected function _getSearchResults( MW_DB_Connection_Interface $conn, $sql )
 	{
-		$statement = $conn->create($sql);
-		$this->_getContext()->getLogger()->log(__METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG);
+		$statement = $conn->create( $sql );
+		$this->_getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, MW_Logger_Abstract::DEBUG );
 
 		$results = $statement->execute();
 
@@ -470,8 +638,8 @@ class MShop_Locale_Manager_Currency_Default
 	 * @return MShop_Locale_Item_Currency_Interface
 	 * @throws MShop_Locale_Exception On failures with the language item object
 	 */
-	protected function _createItem( array $data=array( ) )
+	protected function _createItem( array $data = array() )
 	{
-		return new MShop_Locale_Item_Currency_Default($data);
+		return new MShop_Locale_Item_Currency_Default( $data );
 	}
 }
