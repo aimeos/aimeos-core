@@ -331,7 +331,7 @@ class MShop_Product_Manager_Tag_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/product/manager/submanagers
+		/** classes/product/manager/tag/submanagers
 		 * List of manager names that can be instantiated by the product tag manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
