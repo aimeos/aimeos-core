@@ -695,6 +695,30 @@ class MShop_Coupon_Manager_Default
 			throw new MShop_Coupon_Exception( $msg );
 		}
 
+		/** mshop/coupon/provider/decorators
+		 * Adds a list of decorators to all coupon provider objects automatcally
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap decorators
+		 * ("MShop_Coupon_Provider_Decorator_*") around the coupon provider.
+		 *
+		 *  mshop/coupon/provider/decorators = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "MShop_Coupon_Provider_Decorator_Decorator1" to all coupon provider
+		 * objects.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.05
+		 * @category Developer
+		 * @see client/html/common/decorators/default
+		 * @see client/html/account/favorite/decorators/excludes
+		 * @see client/html/account/favorite/decorators/local
+		 */
 		$decorators = $context->getConfig()->get( 'mshop/coupon/provider/decorators', array() );
 
 		$object = $this->_addCouponDecorators( $item, $code, $provider, $names );

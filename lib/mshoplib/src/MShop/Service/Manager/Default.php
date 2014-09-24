@@ -588,6 +588,7 @@ class MShop_Service_Manager_Default
 		}
 
 		$context = $this->_getContext();
+		$config = $context->getConfig();
 		$provider = new $classname( $context, $item );
 
 		if ( ( $provider instanceof $interface ) === false )
@@ -596,7 +597,51 @@ class MShop_Service_Manager_Default
 			throw new MShop_Service_Exception($msg);
 		}
 
-		$config = $context->getConfig();
+		/** mshop/service/provider/delivery/decorators
+		 * Adds a list of decorators to all delivery provider objects automatcally
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap decorators
+		 * ("MShop_Service_Provider_Decorator_*") around the delivery provider.
+		 *
+		 *  mshop/service/provider/delivery/decorators = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "MShop_Service_Provider_Decorator_Decorator1" to all delivery provider
+		 * objects.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/service/provider/payment/decorators
+		 */
+
+		/** mshop/service/provider/payment/decorators
+		 * Adds a list of decorators to all payment provider objects automatcally
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap decorators
+		 * ("MShop_Service_Provider_Decorator_*") around the payment provider.
+		 *
+		 *  mshop/service/provider/payment/decorators = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "MShop_Service_Provider_Decorator_Decorator1" to all payment provider
+		 * objects.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/service/provider/delivery/decorators
+		 */
 		$decorators = $config->get( 'mshop/service/provider/' . $item->getType() . '/decorators', array() );
 
 		$provider = $this->_addServiceDecorators( $item, $provider, $names );
