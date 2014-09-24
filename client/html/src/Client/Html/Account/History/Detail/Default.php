@@ -55,6 +55,9 @@ class Client_Html_Account_History_Detail_Default
 	/** client/html/account/history/detail/address/name
 	 * Name of the address part used by the account history detail client implementation
 	 *
+	 * Use "Myname" if your class is named "Client_Html_Account_History_Details_Address_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
 	 * @param string Last part of the client class name
 	 * @since 2014.03
 	 * @category Developer
@@ -63,13 +66,30 @@ class Client_Html_Account_History_Detail_Default
 	/** client/html/account/history/detail/service/name
 	 * Name of the service part used by the account history detail client implementation
 	 *
+	 * Use "Myname" if your class is named "Client_Html_Account_History_Details_Service_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
 	 * @param string Last part of the client class name
 	 * @since 2014.03
 	 * @category Developer
 	 */
 
+	/** client/html/account/history/detail/coupon/name
+	 * Name of the coupon part used by the account history detail client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Account_History_Details_Coupon_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.05
+	 * @category Developer
+	 */
+
 	/** client/html/account/history/detail/basket/name
 	 * Name of the basket part used by the account history detail client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Account_History_Details_Basket_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
 	 *
 	 * @param string Last part of the client class name
 	 * @since 2014.03

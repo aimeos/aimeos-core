@@ -51,6 +51,28 @@ class Client_Html_Locale_Select_Default
 	 * @category Developer
 	 */
 	private $_subPartPath = 'client/html/locale/select/default/subparts';
+
+	/** client/html/locale/select/language/name
+	 * Name of the language part used by the locale selector client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Locale_Select_Language_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.09
+	 * @category Developer
+	 */
+
+	/** client/html/locale/select/currency/name
+	 * Name of the currency part used by the locale selector client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Locale_Select_Currency_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.09
+	 * @category Developer
+	 */
 	private $_subPartNames = array( 'language', 'currency' );
 	private $_cache;
 
