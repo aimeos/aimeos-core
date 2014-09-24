@@ -200,11 +200,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 		$view = $this->getView();
 		$context = $this->_getContext();
 		$session = $context->getSession();
-		$str = $session->get( 'arcavias/catalog/session/pinned/list' );
-
-		if( ( $pinned = @unserialize( $str ) ) === false ) {
-			$pinned = array();
-		}
+		$pinned = $session->get( 'arcavias/catalog/session/pinned/list', array() );
 
 		switch( $view->param( 'pin-action' ) )
 		{
@@ -250,7 +246,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 		if( $refresh )
 		{
-			$session->set( 'arcavias/catalog/session/pinned/list', serialize( $pinned ) );
+			$session->set( 'arcavias/catalog/session/pinned/list', $pinned );
 
 			foreach( $session->get( 'arcavias/catalog/session/pinned/cache', array() ) as $key => $value ) {
 				$session->set( $key, null );
@@ -313,11 +309,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 			 */
 			$domains = $config->get( 'client/html/catalog/detail/pinned/domains', $domains );
 
-			$str = $session->get( 'arcavias/catalog/session/pinned/list', '' );
-
-			if( ( $pinned = @unserialize( $str ) ) === false ) {
-				$pinned = array();
-			}
+			$pinned = $session->get( 'arcavias/catalog/session/pinned/list', array() );
 
 			$manager = MShop_Factory::createManager( $context, 'product' );
 			$search = $manager->createSearch( true );
