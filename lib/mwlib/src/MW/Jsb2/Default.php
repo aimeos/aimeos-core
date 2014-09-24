@@ -43,22 +43,19 @@ class MW_Jsb2_Default
 
 
 	/**
-	 * Returns HTML for packages files with given filter.
+	 * Returns the list of URLs for packages files with given filter.
 	 *
 	 * @param string $type Specific filetypes to create output
+	 * @param strig $param URL version string with %s placeholder for the file time
+	 * @return array List of URLs for the package files
 	 */
-	public function getHTML( $type = null )
+	public function getUrls( $type, $version = '?v=%s' )
 	{
-		$html = '';
-		$param = '?v=';
-
-		if( strpos( $this->_baseURL, '?' ) !== false ) {
-			$param = '&v=';
-		}
+		$files = array();
 
 		foreach ( $this->_registeredPackages as $filetype => $packageList )
 		{
-			if( $type !== null && $filetype !== $type ) {
+			if( $filetype !== $type ) {
 				continue;
 			}
 
@@ -77,13 +74,45 @@ class MW_Jsb2_Default
 					$packageFileTime = filemtime( $packageFileFilesystem );
 				}
 
-				$filesToDisplay = $this->_getFileUrls( $this->_baseURL, $this->_basePath, $param, $package, $timestamp );
+				$result = $this->_getFileUrls( $this->_baseURL, $this->_basePath, $package, $timestamp, $version );
 
 				if( $packageFileTime >= $timestamp ) {
-					$filesToDisplay = array( $this->_baseURL . $packageFile . $param . $packageFileTime );
+					$files[] = $this->_baseURL . $packageFile . sprintf( $version, $packageFileTime );
+				} else {
+					$files = array_merge( $files, $result );
 				}
+			}
+		}
 
-				$html .= $this->_createHtml( $filesToDisplay, $filetype );
+		return $files;
+	}
+
+
+	/**
+	 * Returns HTML for packages files with given filter.
+	 *
+	 * @param string $type Specific filetypes to create output
+	 * @return string HTML output with script and stylesheet link tags
+	 */
+	public function getHTML( $type )
+	{
+		$html = '';
+		$version = '?v=%s';
+
+		if( strpos( $this->_baseURL, '?' ) !== false ) {
+			$version = '&v=%s';
+		}
+
+		foreach( $this->getUrls( $type, $version ) as $file )
+		{
+			switch( $type )
+			{
+				case 'js':
+					$html .= '<script type="text/javascript" src="' . $file . '"></script>' . PHP_EOL;
+					break;
+				case 'css':
+					$html .= '<link rel="stylesheet" type="text/css" href="' . $file . '"/>' . PHP_EOL;
+					break;
 			}
 		}
 
@@ -131,48 +160,16 @@ class MW_Jsb2_Default
 
 
 	/**
-	 * Generates the tags for the HTML head.
-	 *
-	 * @param array $files List of file URLs that should be HTML tags generated for
-	 * @param string $filetype Typ of the given files, e.g. 'js' or 'css'
-	 * @return string Generated string for inclusion into the HTML head
-	 * @throws MW_Jsb2_Exception If the file type is unknown
-	 */
-	protected function _createHtml( array $files, $filetype )
-	{
-		$html = '';
-
-		foreach( $files as $file )
-		{
-			switch( $filetype )
-			{
-				case 'js':
-					$html .= '<script type="text/javascript" src="' . $file . '"></script>' . PHP_EOL;
-					break;
-				case 'css':
-					$html .= '<link rel="stylesheet" type="text/css" href="' . $file . '"/>' . PHP_EOL;
-					break;
-				default:
-					throw new MW_Jsb2_Exception( sprintf( 'Unknown file extension: "%1$s"', $filetype ) );
-			}
-		}
-
-		return $html;
-	}
-
-
-	/**
 	 * Returns the file URLs of the given package object.
 	 *
 	 * @param string $baseUrl URL the file location is relative to
 	 * @param string $basePath Absolute path to the base directory of the files
-	 * @param string $param Name and separator for the modification time parameter
 	 * @param stdClass $package Object with "fileIncludes" property containing a
 	 * 	list of file objects with "path" and "text" properties
 	 * @param integer &$timestamp Value/result parameter that will contain the latest file modification timestamp
 	 * @throws MW_Jsb2_Exception If the file modification timestamp couldn't be determined
 	 */
-	protected function _getFileUrls( $baseUrl, $basePath, $param, stdClass $package, &$timestamp )
+	protected function _getFileUrls( $baseUrl, $basePath, stdClass $package, &$timestamp, $version = '?v=%s' )
 	{
 		$timestamp = (int) $timestamp;
 		$filesToDisplay = array();
@@ -190,7 +187,7 @@ class MW_Jsb2_Default
 			}
 
 			$timestamp = max( $timestamp, $fileTime );
-			$filesToDisplay[] = $baseUrl . $singleFile->path . $singleFile->text . $param . $fileTime;
+			$filesToDisplay[] = $baseUrl . $singleFile->path . $singleFile->text . sprintf( $version, $timestamp );
 		}
 
 		return $filesToDisplay;

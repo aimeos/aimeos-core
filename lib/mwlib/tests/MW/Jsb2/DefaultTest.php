@@ -120,10 +120,28 @@ class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetUrlsWithPackage()
+	{
+		$this->_object->deploy();
+		$urls = $this->_object->getUrls( 'js' );
+
+		$this->assertEquals( 1, count( $urls ) );
+		$this->assertContains( '/jsb2-test.js', $urls[0] );
+	}
+
+
+	public function testGetUrlsWithoutPackage()
+	{
+		$urls = $this->_object->getUrls( 'js' );
+
+		$this->assertEquals( 1, count( $urls ) );
+		$this->assertContains( '/test.js', $urls[0] );
+	}
+
+
 	public function testGetHTMLWithPackage()
 	{
 		$this->_object->deploy();
-		$this->assertGreaterThan( 1, strpos( trim( $this->_object->getHTML() ), 'jsb2/js/jsb2-test.js' )  );
 		$this->assertGreaterThan( 1, strpos( trim( $this->_object->getHTML( 'js' ) ), 'jsb2/js/jsb2-test.js' ) );
 		$this->assertEquals( '', $this->_object->getHTML( 'css' ) );
 	}
@@ -138,14 +156,6 @@ class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 	}
 
 
-	public function testGetHTMLUnknownFiletypeException()
-	{
-		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->_object = new MW_Jsb2_Default( $this->_manifestPath . 'manifest_unknown_type.jsb2', '' );
-		$this->_object->getHTML();
-	}
-
-
 	public function testGetHTMLFilemtimeException()
 	{
 		$ds = DIRECTORY_SEPARATOR;
@@ -157,7 +167,7 @@ class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 		unlink( $alteredFilename );
 
 		$this->setExpectedException( 'MW_Jsb2_Exception' );
-		$this->_object->getHTML();
+		$this->_object->getHTML( 'js' );
 	}
 
 
@@ -178,12 +188,9 @@ class MW_Jsb2_Default_Test extends MW_Unittest_Testcase
 				continue;
 			}
 
-			if( $iterator->isDir() )
-			{
+			if( $iterator->isDir() ) {
 				$this->_delTree( $iterator->getPathname() );
-			}
-			else
-			{
+			} else {
 				unlink( $iterator->getPathname() );
 			}
 		}
