@@ -47,9 +47,9 @@ Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
         }).show();
 
         MShop.urlManager.redirect({
-            locale : languageCode,
-            tab : domainTabIdx,
-            site : MShop.urlManager.data.site
+            site : MShop.urlManager.data.site,
+            lang : languageCode,
+            tab : domainTabIdx
         });
     }
 });

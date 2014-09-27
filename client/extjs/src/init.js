@@ -19,7 +19,7 @@ if(MShop.config.data) {
 }
 
 if(MShop.i18n) {
-    MShop.I18n.init(MShop.i18n.content, MShop.i18n.locale);
+    MShop.I18n.init(MShop.i18n.content, MShop.i18n.lang);
 }
 
 Ext.onReady(function() {

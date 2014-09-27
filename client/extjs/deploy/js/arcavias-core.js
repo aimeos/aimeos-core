@@ -171,12 +171,12 @@ Ext.ns('MShop');
 
 MShop.I18n = {
 
-    locale : 'en',
+    lang : 'en',
     tx : {},
 
-    init : function(content, locale) {
+    init : function(content, lang) {
 
-        this.locale = locale;
+        this.lang = lang;
         this.tx = content;
     },
 
@@ -198,7 +198,7 @@ MShop.I18n = {
 
     dn : function(domain, singular, plural, num) {
 
-        var index = this.getPluralIndex(num, this.locale);
+        var index = this.getPluralIndex(num, this.lang);
 
         if(this.tx[domain] && this.tx[domain][singular]) {
 
@@ -216,19 +216,19 @@ MShop.I18n = {
         return singular;
     },
 
-    getPluralIndex : function(num, locale) {
+    getPluralIndex : function(num, lang) {
 
         num = Math.abs(Number(num));
 
-        if(locale === 'pt_BR') {
-            locale = 'xbr'; // temporary set a locale for brasilian
+        if(lang === 'pt_BR') {
+            lang = 'xbr'; // temporary set a lang for brasilian
         }
 
-        if(locale.length > 3) {
-            locale = locale.replace(/_.+/g, '');
+        if(lang.length > 3) {
+            lang = lang.replace(/_.+/g, '');
         }
 
-        switch(locale) {
+        switch(lang) {
 
             case 'af':
             case 'az':
@@ -365,7 +365,7 @@ if(MShop.config.data) {
 }
 
 if(MShop.i18n) {
-    MShop.I18n.init(MShop.i18n.content, MShop.i18n.locale);
+    MShop.I18n.init(MShop.i18n.content, MShop.i18n.lang);
 }
 
 Ext.onReady(function() {
@@ -2589,7 +2589,7 @@ MShop.UrlManager = function(href) {
     this.tmpl = new Ext.Template(MShop.config.urlTemplate);
     this.data = {
         site : MShop.config.site['locale.site.code'],
-        locale : MShop.i18n.locale,
+        lang : MShop.i18n.lang,
         tab : MShop.config.activeTab
     };
 };
@@ -2601,8 +2601,8 @@ MShop.UrlManager.prototype = {
                 this.setSiteCode(config.site);
             }
 
-            if(MShop.i18n.hasOwnProperty('locale')) {
-                this.setLanguageCode(config.locale);
+            if(MShop.i18n.hasOwnProperty('lang')) {
+                this.setLanguageCode(config.lang);
             }
 
             if(config.hasOwnProperty('tab')) {
@@ -2621,7 +2621,7 @@ MShop.UrlManager.prototype = {
     },
 
     getLanguageCode : function() {
-        return this.data.locale;
+        return this.data.lang;
     },
 
     setSiteCode : function(siteCode) {
@@ -2629,7 +2629,7 @@ MShop.UrlManager.prototype = {
     },
 
     setLanguageCode : function(languageCode) {
-        this.data.locale = languageCode;
+        this.data.lang = languageCode;
     },
 
     getAbsoluteUrl : function(url) {
@@ -2767,9 +2767,9 @@ Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
         }).show();
 
         MShop.urlManager.redirect({
-            locale : languageCode,
-            tab : domainTabIdx,
-            site : MShop.urlManager.data.site
+            site : MShop.urlManager.data.site,
+            lang : languageCode,
+            tab : domainTabIdx
         });
     }
 });

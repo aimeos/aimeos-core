@@ -10,7 +10,7 @@ MShop.UrlManager = function(href) {
     this.tmpl = new Ext.Template(MShop.config.urlTemplate);
     this.data = {
         site : MShop.config.site['locale.site.code'],
-        locale : MShop.i18n.locale,
+        lang : MShop.i18n.lang,
         tab : MShop.config.activeTab
     };
 };
@@ -22,8 +22,8 @@ MShop.UrlManager.prototype = {
                 this.setSiteCode(config.site);
             }
 
-            if(MShop.i18n.hasOwnProperty('locale')) {
-                this.setLanguageCode(config.locale);
+            if(MShop.i18n.hasOwnProperty('lang')) {
+                this.setLanguageCode(config.lang);
             }
 
             if(config.hasOwnProperty('tab')) {
@@ -42,7 +42,7 @@ MShop.UrlManager.prototype = {
     },
 
     getLanguageCode : function() {
-        return this.data.locale;
+        return this.data.lang;
     },
 
     setSiteCode : function(siteCode) {
@@ -50,7 +50,7 @@ MShop.UrlManager.prototype = {
     },
 
     setLanguageCode : function(languageCode) {
-        this.data.locale = languageCode;
+        this.data.lang = languageCode;
     },
 
     getAbsoluteUrl : function(url) {
