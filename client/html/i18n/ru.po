@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2014-09-10 20:42+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"PO-Revision-Date: 2014-09-12 09:08+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -555,7 +555,7 @@ msgstr "Для <span class=\"searchstring\">\"%1$s\"</span> ничего не н
 #: src/Client/Html/Abstract.php:506
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "Не найдено типа элементов для \"%1$s/%2$s\" в \"%3$s\""
 
 #: src/Client/Html/Abstract.php:61
 #, php-format
@@ -615,7 +615,7 @@ msgstr "Не найден заказ с номером \"%1$s\""
 
 #: layouts/catalog/detail/bought-body-default.html:24
 msgid "Other customers also bought"
-msgstr ""
+msgstr "Другие клиенты также покупают"
 
 #: layouts/account/watch/body-default.html:112
 #: layouts/account/watch/body-default.html:182
@@ -677,7 +677,7 @@ msgstr "Индекс"
 
 #: layouts/catalog/stage/navigator-body-default.html:16
 msgid "Previous"
-msgstr ""
+msgstr "Назад"
 
 #: layouts/catalog/list/pagination-body-default.html:35
 #: layouts/common/summary/detail-body-default.html:88
@@ -692,7 +692,7 @@ msgstr "Продолжить"
 
 #: layouts/basket/related/bought-body-default.html:23
 msgid "Products you might be also interested in"
-msgstr ""
+msgstr "Товары, которые могут быть Вам интересны"
 
 #: layouts/common/summary/detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:72
@@ -701,7 +701,7 @@ msgstr "Количество"
 
 #: layouts/basket/related/body-default.html:18
 msgid "Related"
-msgstr ""
+msgstr "Связанный"
 
 #: layouts/catalog/list/pagination-body-default.html:45
 msgid "Relevance"

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 22:41+0200\n"
-"PO-Revision-Date: 2014-09-05 12:11+0000\n"
+"PO-Revision-Date: 2014-09-17 07:38+0000\n"
 "Last-Translator: jerzys <jerzy.skalski@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/arcavias-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -162,7 +162,7 @@ msgstr "Pamięć podręczna"
 
 #: src/panel/cache/ItemUi.js:13
 msgid "Cache item details"
-msgstr ""
+msgstr "Obiekt z pamięci podręcznej"
 
 #: src/panel/AbstractItemUi.js:133 src/elements/exportlanguage.js:321
 msgid "Cancel"
@@ -505,11 +505,11 @@ msgstr "Imię"
 
 #: src/panel/cache/ListUiSmall.js:51
 msgid "Flush"
-msgstr ""
+msgstr "Czyść"
 
 #: src/panel/cache/ListUiSmall.js:101
 msgid "Flush cache?"
-msgstr ""
+msgstr "Czyścić pamięć podręczną?"
 
 #: src/panel/plugin/ListUi.js:47 src/panel/plugin/ItemUi.js:47
 #: src/panel/plugin/type/ListUi.js:49 src/panel/cache/ListUiSmall.js:77
@@ -1377,7 +1377,7 @@ msgstr "Wartość"
 #: src/panel/order/address/DeliveryItemUi.js:45
 #: src/panel/order/address/ItemUi.js:60
 msgid "Vat ID"
-msgstr ""
+msgstr "NIP"
 
 #: src/panel/product/stock/ListUiSmall.js:82
 #: src/panel/product/stock/ItemUi.js:69
