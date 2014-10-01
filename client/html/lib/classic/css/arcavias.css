@@ -1391,6 +1391,16 @@
 	margin-bottom: 0.5em;
 }
 
+.account-watch .watch-items,
+.account-favorite .favorite-items,
+.basket-related-bought .bought-items,
+.catalog-detail-bought .bought-items,
+.catalog-detail-suggest .suggest-items,
+.catalog-session-seen .seen-items,
+.catalog-session-pinned .pinned-items {
+	padding: 0;
+}
+
 .account-watch .header,
 .account-favorite .header,
 .basket-related-bought .header,
