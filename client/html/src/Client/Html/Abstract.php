@@ -587,7 +587,7 @@ abstract class Client_Html_Abstract
 		$marker = '<!-- ' . $marker . ' -->';
 		$start = strpos( $content, $marker );
 
-		if( $start !== false && ( $end = $end = strpos( $content, $marker, $start+1 ) ) !== false ) {
+		if( $start !== false && ( $end = strpos( $content, $marker, $start+1 ) ) !== false ) {
 			return substr_replace( $content, $section, $start, $end - $start + strlen( $marker) );
 		}
 
