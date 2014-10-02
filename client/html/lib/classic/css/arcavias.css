@@ -116,6 +116,7 @@
 }
 
 .arcavias .form-list label {
+	display: inline;
 	width: 210px;
 	margin: 0.5em 0;
 }
