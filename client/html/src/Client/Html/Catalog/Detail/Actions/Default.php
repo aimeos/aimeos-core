@@ -147,6 +147,19 @@ class Client_Html_Catalog_Detail_Actions_Default
 
 
 	/**
+	 * Modifies the cached body content to replace content based on sessions or cookies.
+	 *
+	 * @param string $content Cached content
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @return string Modified body content
+	 */
+	public function modifyBody( $content, $uid )
+	{
+		return $this->_replaceSection( $content, $this->getBody( $uid ), 'catalog.detail.actions' );
+	}
+
+
+	/**
 	 * Returns the sub-client given by its name.
 	 *
 	 * @param string $type Name of the client type
@@ -183,6 +196,7 @@ class Client_Html_Catalog_Detail_Actions_Default
 		if( !isset( $this->_cache ) )
 		{
 			$view->actionsParams = $this->_getClientParams( $view->param() );
+			$view->actionsUserId = $this->_getContext()->getUserId();
 
 			$this->_cache = $view;
 		}
