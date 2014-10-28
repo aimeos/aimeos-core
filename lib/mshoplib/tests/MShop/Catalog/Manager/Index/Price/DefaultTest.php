@@ -106,7 +106,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 12, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( $result[ $item->getId() ], 3 );
+		$this->assertEquals( 4, $result[ $item->getId() ] );
 	}
 
 
@@ -173,7 +173,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );
 		$result = $this->_object->searchItems( $search, array() );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 	}
 
 

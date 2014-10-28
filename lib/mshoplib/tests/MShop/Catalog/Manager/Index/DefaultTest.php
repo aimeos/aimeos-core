@@ -104,7 +104,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 11, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 3, $result[ $item->getId() ] );
+		$this->assertEquals( 4, $result[ $item->getId() ] );
 	}
 
 
@@ -236,7 +236,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$products = $this->_object->searchItems( $search );
-		$this->assertEquals( 14, count( $products ) );
+		$this->assertEquals( 15, count( $products ) );
 
 		foreach($products as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );
@@ -302,7 +302,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 3, $total );
 
 
 		$expr = array(
@@ -315,7 +315,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 4, $total );
+		$this->assertEquals( 5, $total );
 
 
 		$attrIds = array( (int) $attrWidthItem->getId(), (int) $attrLenItem->getId() );
@@ -329,7 +329,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 
 
 		$func = $search->createFunction( 'catalog.index.attribute.code', array( 'default', 'size' ) );
@@ -343,7 +343,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 3, $total );
 	}
 
 
@@ -409,7 +409,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 5, $total );
+		$this->assertEquals( 6, $total );
 
 
 		$func = $search->createFunction( 'catalog.index.catalog.position', array( 'promotion', $catItem->getId() ) );
@@ -462,7 +462,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 
 
 		$expr = array(
@@ -474,7 +474,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 5, $total );
+		$this->assertEquals( 6, $total );
 
 
 		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
@@ -491,7 +491,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 4, $total );
+		$this->assertEquals( 5, $total );
 	}
 
 
@@ -518,7 +518,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 
 
 		$expr = array(
@@ -531,7 +531,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 3, $total );
+		$this->assertEquals( 4, $total );
 
 
 		$func = $search->createFunction( 'catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
@@ -547,7 +547,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 
 
 		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
@@ -563,7 +563,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 	}
 
 
@@ -639,10 +639,10 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$config->set( 'mshop/catalog/manager/index/default/index', 'categorized' );
 		$this->_object->rebuildIndex();
 
-		$this->assertEquals( 11, count( $afterInsertAttr ) );
-		$this->assertEquals( 10, count( $afterInsertPrice ) );
-		$this->assertEquals( 8, count( $afterInsertText ) );
-		$this->assertEquals( 6, count( $afterInsertCat ) );
+		$this->assertEquals( 12, count( $afterInsertAttr ) );
+		$this->assertEquals( 11, count( $afterInsertPrice ) );
+		$this->assertEquals( 9, count( $afterInsertText ) );
+		$this->assertEquals( 7, count( $afterInsertCat ) );
 	}
 
 
@@ -715,10 +715,10 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$afterInsertCat = $this->_getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
 
 		//check inserted items
-		$this->assertEquals( 5, count( $afterInsertAttr ) );
-		$this->assertEquals( 6, count( $afterInsertPrice ) );
-		$this->assertEquals( 4, count( $afterInsertText ) );
-		$this->assertEquals( 6, count( $afterInsertCat ) );
+		$this->assertEquals( 6, count( $afterInsertAttr ) );
+		$this->assertEquals( 7, count( $afterInsertPrice ) );
+		$this->assertEquals( 5, count( $afterInsertText ) );
+		$this->assertEquals( 7, count( $afterInsertCat ) );
 	}
 
 

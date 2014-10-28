@@ -68,6 +68,8 @@ return array (
 		array( 'parentid' => 'product/U:TEST', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/U:TESTSUB04', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 3, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TEST', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/U:TESTSUB05', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 4, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TESTP', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/U:TESTPSUB01', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'product/U:BUNDLE', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'product/U:BUNDLE', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/CNE', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
 
 		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/size/xs', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/variant', 'domain' => 'attribute', 'refid' => 'attribute/product/length/30', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
@@ -113,6 +115,7 @@ return array (
 		array( 'parentid' => 'product/U:noSel', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/11.00/0.00', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TESTP', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/18.00/1.00', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TEST', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/18.00/1.00', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'product/U:BUNDLE', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/product/default/600.00/30.00', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 
 		array( 'parentid' => 'product/CNE', 'typeid' => 'media/unittype1', 'domain' => 'media', 'refid' => 'media/prod_123x103/195_prod_123x103.jpg', 'start' => '2000-01-01 00:00:00', 'end' => '2100-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'media/unittype2', 'domain' => 'media', 'refid' => 'media/prod_266x221/198_prod_266x221.jpg', 'start' => '2000-01-01 00:00:00', 'end' => '2100-01-01 00:00:00', 'config' => array(), 'pos' => 1, 'status' => 1 ),
