@@ -1376,6 +1376,7 @@
 /* Watched, favorite, suggested products and session items */
 .account-watch,
 .account-favorite,
+.catalog-detail-bundle,
 .catalog-detail-suggest,
 .catalog-session {
 	clear: both;
@@ -1404,6 +1405,7 @@
 
 .account-watch .watch-item,
 .account-favorite .favorite-item,
+.catalog-detail-bundle .bundle-item,
 .catalog-detail-suggest .suggest-item,
 .catalog-session-seen .seen-item,
 .catalog-session-pinned .pinned-item {
@@ -1428,6 +1430,7 @@
 
 .account-watch .media-item,
 .account-favorite .media-item,
+.catalog-detail-bundle .media-item,
 .catalog-detail-suggest .media-item,
 .catalog-session-seen .media-item,
 .catalog-session-pinned .media-item {
@@ -1442,6 +1445,7 @@
 
 .account-watch .name,
 .account-favorite .name,
+.catalog-detail-bundle .name,
 .catalog-detail-suggest .name,
 .catalog-session-seen .name,
 .catalog-session-pinned .name {
@@ -1458,6 +1462,7 @@
 
 .account-watch .price-list,
 .account-favorite .price-list,
+.catalog-detail-bundle .price-list,
 .catalog-detail-suggest .price-list,
 .catalog-session-seen .price-list,
 .catalog-session-pinned .price-list {
@@ -1471,6 +1476,7 @@
 
 .account-watch .price-item,
 .account-favorite .price-item,
+.catalog-detail-bundle .price-item,
 .catalog-detail-suggest .price-item,
 .catalog-session-seen .price-item,
 .catalog-session-pinned .price-item {
@@ -1479,6 +1485,7 @@
 
 .account-watch .price-item:first-child,
 .account-favorite .price-item:first-child,
+.catalog-detail-bundle .price-item:first-child,
 .catalog-detail-suggest .price-item:first-child,
 .catalog-session-seen .price-item:first-child,
 .catalog-session-pinned .price-item:first-child {
@@ -1495,6 +1502,11 @@
 .account-favorite .price-item:first-child .rebate,
 .account-favorite .price-item:first-child .costs,
 .account-favorite .price-item:first-child .taxrate,
+.catalog-detail-bundle .price-item:first-child .quantity,
+.catalog-detail-bundle .price-item:first-child .rebatepercent,
+.catalog-detail-bundle .price-item:first-child .rebate,
+.catalog-detail-bundle .price-item:first-child .costs,
+.catalog-detail-bundle .price-item:first-child .taxrate,
 .catalog-detail-suggest .price-item:first-child .quantity,
 .catalog-detail-suggest .price-item:first-child .rebatepercent,
 .catalog-detail-suggest .price-item:first-child .rebate,

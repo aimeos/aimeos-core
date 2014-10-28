@@ -107,6 +107,17 @@ class Client_Html_Catalog_Detail_Default
 	 * @category Developer
 	 */
 
+	/** client/html/catalog/detail/bundle/name
+	 * Name of the bundle part used by the catalog detail client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Catalog_Detail_Bundle_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.11
+	 * @category Developer
+	 */
+
 	/** client/html/catalog/detail/additional/name
 	 * Name of the additional part used by the catalog detail client implementation
 	 *
@@ -139,7 +150,7 @@ class Client_Html_Catalog_Detail_Default
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $_subPartNames = array( 'social', 'image', 'basic', 'actions', 'basket', 'additional', 'suggest', 'seen' );
+	private $_subPartNames = array( 'social', 'image', 'basic', 'actions', 'basket', 'bundle', 'additional', 'suggest', 'seen' );
 
 	private $_tags = array();
 	private $_expire;
