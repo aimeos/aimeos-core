@@ -72,6 +72,28 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testAddProductBundle()
+	{
+		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$search = $productManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.code', 'U:BUNDLE' ) );
+
+		$items = $productManager->searchItems( $search );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new Exception( 'Product not found' );
+		}
+
+
+		$this->_object->addProduct( $item->getId(), 1 );
+
+		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
+		$this->assertEquals( 'U:BUNDLE', $this->_object->get()->getProduct( 0 )->getProductCode() );
+		$this->assertEquals( 2, count( $this->_object->get()->getProduct( 0 )->getProducts() ) );
+	}
+
+
 	public function testAddProductVariant()
 	{
 		$productManager = MShop_Product_Manager_Factory::createManager( TestHelper::getContext() );
