@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-07 16:28+0200\n"
-"PO-Revision-Date: 2014-08-11 07:06+0000\n"
+"POT-Creation-Date: 2014-09-10 22:41+0200\n"
+"PO-Revision-Date: 2014-09-12 09:08+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/arcavias-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,9 @@ msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%12$s\n%11$s\n%9$s %10$s\n%8$s\n%1
 #: layouts/catalog/session/pinned-body-default.html:89
 #: layouts/catalog/detail/suggest-body-default.html:18
 #: layouts/catalog/detail/seen-body-default.html:16
+#: layouts/catalog/detail/bought-body-default.html:17
 #: layouts/common/summary/detail-body-default.html:68
+#: layouts/basket/related/bought-body-default.html:16
 #: layouts/basket/mini/main-body-default.html:23
 #: layouts/email/watch/text-detail-body-default.html:19
 #: layouts/email/common/text-summary-detail-body-default.html:55
@@ -126,6 +128,8 @@ msgstr "%1$s в %2$s"
 #: layouts/catalog/session/pinned-body-default.html:91
 #: layouts/catalog/detail/suggest-body-default.html:20
 #: layouts/catalog/detail/seen-body-default.html:18
+#: layouts/catalog/detail/bought-body-default.html:19
+#: layouts/basket/related/bought-body-default.html:18
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -185,7 +189,7 @@ msgid "Additional 2"
 msgstr "Дополнительно 2"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:196
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:248
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:247
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
 msgstr "Не найден адрес с номером \"%1$s\""
@@ -206,14 +210,14 @@ msgstr "Все заказы отгружены в соответствии с у
 msgid "Article no.:"
 msgstr "Артикул:"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:227
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:271
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:226
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:270
 #, php-format
 msgid "At least one billing address part is missing or invalid"
 msgstr "Ошибка в одной из частей адреса"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:237
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:270
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:236
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:269
 #, php-format
 msgid "At least one delivery address part is missing or invalid"
 msgstr "Ошибка в одной из частей адреса доставки"
@@ -238,12 +242,12 @@ msgstr "Корзина"
 msgid "Billing address"
 msgstr "Платёжный адрес"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:432
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:431
 #, php-format
 msgid "Billing address part \"%1$s\" is invalid"
 msgstr "Ошибка в части \"%1$s\" адреса доставки"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:457
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:456
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "Ошибка в части\"%1$s\" платёжного адреса"
@@ -252,7 +256,7 @@ msgstr "Ошибка в части\"%1$s\" платёжного адреса"
 msgid "Buy now"
 msgstr "Купить"
 
-#: src/Client/Html/Catalog/Filter/Tree/Default.php:234
+#: src/Client/Html/Catalog/Filter/Tree/Default.php:233
 #, php-format
 msgid "Category with ID \"%1$s\" not below ID \"%2$s\""
 msgstr "Категория с ID \"%1$s\" не ниже ID \"%2$s\""
@@ -290,13 +294,13 @@ msgstr "Город"
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "Класс \"%1$s\" не реализует \"%2$s\""
 
-#: src/Client/Html/Abstract.php:326
+#: src/Client/Html/Abstract.php:342
 #: src/Client/Html/Common/Factory/Abstract.php:167
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 
-#: src/Client/Html/Abstract.php:320
+#: src/Client/Html/Abstract.php:336
 #: src/Client/Html/Common/Factory/Abstract.php:161
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -340,7 +344,7 @@ msgstr "Коды купона"
 msgid "Coupons"
 msgstr "Купоны"
 
-#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:246
+#: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:245
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
 msgstr "Не найден покупатель с номером \"%1$s\""
@@ -369,12 +373,12 @@ msgstr "Доставка"
 msgid "Delivery address"
 msgstr "Адрес доставки"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:392
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:391
 #, php-format
 msgid "Delivery address part \"%1$s\" is invalid"
 msgstr "Ошибка в части \"%1$s\" адреса доставки"
 
-#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:418
+#: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:417
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "Ошибка в части\"%1$s\" адреса доставки"
@@ -477,6 +481,7 @@ msgstr "Включены скидки"
 #: src/Client/Html/Email/Delivery/Factory.php:72
 #: src/Client/Html/Basket/Standard/Factory.php:72
 #: src/Client/Html/Basket/Mini/Factory.php:72
+#: src/Client/Html/Basket/Related/Factory.php:71
 #: src/Client/Html/Account/Watch/Factory.php:72
 #: src/Client/Html/Account/Favorite/Factory.php:72
 #: src/Client/Html/Account/History/Factory.php:72
@@ -491,7 +496,7 @@ msgstr "Включены скидки"
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Недопустимые символы в названии класса \"%1$s\""
 
-#: src/Client/Html/Abstract.php:283 src/Client/Html/Abstract.php:311
+#: src/Client/Html/Abstract.php:299 src/Client/Html/Abstract.php:327
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "Недопустимые символы в названии покупателя \"%1$s\""
@@ -529,16 +534,11 @@ msgstr "Фамилия"
 msgid "Last seen"
 msgstr "Недавно смотрели"
 
-#: src/Client/Html/Account/Watch/Default.php:420
-#: src/Client/Html/Account/Favorite/Default.php:355
-#, php-format
-msgid "List type \"%1$s\" is not available"
-msgstr "Недоступен тип списка \"%1$s\""
-
 #: layouts/catalog/list/pagination-body-default.html:27
 msgid "Name"
 msgstr "названию"
 
+#: layouts/catalog/stage/navigator-body-default.html:19
 #: layouts/checkout/standard/address-body-default.html:18
 #: layouts/checkout/standard/payment-body-default.html:93
 #: layouts/checkout/standard/delivery-body-default.html:93
@@ -552,12 +552,17 @@ msgid ""
 "try again with a different keyword."
 msgstr "Для <span class=\"searchstring\">\"%1$s\"</span> ничего не найдено. Попробуйте искать по другим словосочетаниям."
 
+#: src/Client/Html/Abstract.php:506
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr "Не найдено типа элементов для \"%1$s/%2$s\" в \"%3$s\""
+
 #: src/Client/Html/Abstract.php:61
 #, php-format
 msgid "No view available"
 msgstr "Нет доступных режимов вывода"
 
-#: src/Client/Html/Basket/Standard/Coupon/Default.php:209
+#: src/Client/Html/Basket/Standard/Coupon/Default.php:211
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
 msgstr "Количество купонов на скидку превышает установленный предел"
@@ -607,6 +612,10 @@ msgstr "История заказов"
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
 msgstr "Не найден заказ с номером \"%1$s\""
+
+#: layouts/catalog/detail/bought-body-default.html:24
+msgid "Other customers also bought"
+msgstr "Другие клиенты также покупают"
 
 #: layouts/account/watch/body-default.html:112
 #: layouts/account/watch/body-default.html:182
@@ -666,6 +675,10 @@ msgstr "Сделайте выбор"
 msgid "Postal code"
 msgstr "Индекс"
 
+#: layouts/catalog/stage/navigator-body-default.html:16
+msgid "Previous"
+msgstr "Назад"
+
 #: layouts/catalog/list/pagination-body-default.html:35
 #: layouts/common/summary/detail-body-default.html:88
 #: layouts/email/common/text-summary-detail-body-default.html:74
@@ -677,10 +690,18 @@ msgstr "цене"
 msgid "Proceed"
 msgstr "Продолжить"
 
+#: layouts/basket/related/bought-body-default.html:23
+msgid "Products you might be also interested in"
+msgstr "Товары, которые могут быть Вам интересны"
+
 #: layouts/common/summary/detail-body-default.html:87
 #: layouts/email/common/text-summary-detail-body-default.html:72
 msgid "Quantity"
 msgstr "Количество"
+
+#: layouts/basket/related/body-default.html:18
+msgid "Related"
+msgstr "Связанный"
 
 #: layouts/catalog/list/pagination-body-default.html:45
 msgid "Relevance"
@@ -813,7 +834,7 @@ msgstr "Сумма"
 msgid "Telephone"
 msgstr "Телефон"
 
-#: src/Client/Html/Abstract.php:462
+#: src/Client/Html/Abstract.php:478
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "Недоступен шаблон \"%1$s\""
@@ -942,10 +963,10 @@ msgstr "Невозможно вызвать метод \"%1$s\""
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr "Невозможно сохранить адрес для покупателя \"%1$s\": %2$s"
 
-#: src/Client/Html/Catalog/Filter/Default.php:361
-#: src/Client/Html/Catalog/Stage/Default.php:343
-#: src/Client/Html/Catalog/Detail/Default.php:411
-#: src/Client/Html/Catalog/List/Default.php:367
+#: src/Client/Html/Catalog/Filter/Default.php:360
+#: src/Client/Html/Catalog/Stage/Default.php:357
+#: src/Client/Html/Catalog/Detail/Default.php:422
+#: src/Client/Html/Catalog/List/Default.php:366
 #, php-format
 msgid "Unable to set cache entry: %1$s"
 msgstr "Невозможно разместить запись в кеше: %1$s"

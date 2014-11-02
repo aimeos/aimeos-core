@@ -49,7 +49,11 @@ class Controller_Jobs_Order_Service_Delivery_Default
 	{
 		$context = $this->_getContext();
 
-		/** @deprecated Only for compatibility reasons */
+		/** controller/jobs/service/delivery/process/limit-days
+		 * Deprecated: Use controller/jobs/order/service/delivery/limit-days instead
+		 *
+		 * @deprecated Only for compatibility reasons
+		 */
 		$days = $context->getConfig()->get( 'controller/jobs/service/delivery/process/limit-days', 90 );
 
 		/** controller/jobs/order/service/delivery/limit-days

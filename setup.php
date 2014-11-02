@@ -150,6 +150,9 @@ try
 	$session = new MW_Session_None();
 	$ctx->setSession( $session );
 
+	$cache = new MW_Cache_None();
+	$ctx->setCache( $cache );
+
 	$manager = new MW_Setup_Manager_Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
 	$manager->run( 'mysql' );
 }

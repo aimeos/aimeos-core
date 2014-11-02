@@ -74,7 +74,7 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 				$item = $manager->createItem();
 				$item->setLabel( $entry['label'] );
 				$item->setProvider( $entry['provider'] );
-				$item->setDateStart( $entry['datastart'] );
+				$item->setDateStart( $entry['datestart'] );
 				$item->setDateEnd( $entry['dateend'] );
 				$item->setConfig( $entry['config'] );
 				$item->setStatus( $entry['status'] );
@@ -109,7 +109,7 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 			$item->setCouponId( $couponId );
 			$item->setCode( $entry['code'] );
 			$item->setCount( $entry['count'] );
-			$item->setDateStart( $entry['datastart'] );
+			$item->setDateStart( $entry['datestart'] );
 			$item->setDateEnd( $entry['dateend'] );
 
 			$manager->saveItem( $item );

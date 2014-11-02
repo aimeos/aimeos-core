@@ -35,14 +35,14 @@ class MAdmin_FactoryTest extends MW_Unittest_Testcase
 	public function testCreateManagerNotExisting()
 	{
 		$this->setExpectedException( 'MAdmin_Exception' );
-		MAdmin_Factory::createManager( TestHelper::getContext(), 'notexist' );
+		MAdmin_Factory::createManager( TestHelper::getContext(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
 		$this->setExpectedException( 'MAdmin_Exception' );
-		MAdmin_Factory::createManager( TestHelper::getContext(), 'job/notexist' );
+		MAdmin_Factory::createManager( TestHelper::getContext(), 'job/unknown' );
 	}
 
 

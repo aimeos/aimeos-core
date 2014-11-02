@@ -354,6 +354,7 @@ class MShop_Catalog_Manager_Index_Default
 			}
 
 			$this->_writeIndex( $search, $domains, $size );
+			$this->_clearCache( $paramIds );
 			return;
 		}
 
@@ -379,13 +380,15 @@ class MShop_Catalog_Manager_Index_Default
 			$catalogSearch->setSlice( $start, $size );
 			$result = $catalogListManager->aggregate( $catalogSearch, 'catalog.list.refid' );
 
+			$prodIds = array_keys( $result );
 			$expr = array(
-				$search->compare( '==', 'product.id', array_keys( $result ) ),
+				$search->compare( '==', 'product.id', $prodIds ),
 				$defaultConditions,
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$this->_writeIndex( $search, $domains, $size );
+			$this->_clearCache( $prodIds );
 
 			$start += $size;
 		}
@@ -465,6 +468,23 @@ class MShop_Catalog_Manager_Index_Default
 		}
 
 		return $items;
+	}
+
+
+	/**
+	 * Deletes the cache entries using the given product IDs.
+	 *
+	 * @param array $productIds List of product IDs
+	 */
+	protected function _clearCache( array $productIds )
+	{
+		$tags = array();
+
+		foreach( $productIds as $prodId ) {
+			$tags[] = 'product-' . $prodId;
+		}
+
+		$this->_getContext()->getCache()->deleteByTags( $tags );
 	}
 
 

@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Michael Spahn <ms@ansta.lt>, 2014
+# Michael Spahn <michael@spahn.me>, 2014
 # nsendetzky <n.sendetzky@metaways.de>, 2014
 # nsendetzky <n.sendetzky@metaways.de>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 16:31+0200\n"
+"POT-Creation-Date: 2014-09-10 22:41+0200\n"
 "PO-Revision-Date: 2014-01-29 22:49+0000\n"
 "Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/arcavias-core/language/de/)\n"
@@ -41,7 +41,7 @@ msgstr "nach"
 msgid ">="
 msgstr "nach (inkl.)"
 
-#: lib/ext.ux/AdvancedSearch.js:41 lib/ext.ux/AdvancedSearch.js:41
+#: lib/ext.ux/AdvancedSearch.js:41 lib/ext.ux/AdvancedSearch.js:37
 msgid "Search"
 msgstr "Suche"
 

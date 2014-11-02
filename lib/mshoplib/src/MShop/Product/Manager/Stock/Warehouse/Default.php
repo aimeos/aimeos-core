@@ -453,7 +453,7 @@ class MShop_Product_Manager_Stock_Warehouse_Default
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/product/manager/submanagers
+		/** classes/product/manager/stock/warehouse/submanagers
 		 * List of manager names that can be instantiated by the product stock warehouse manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.

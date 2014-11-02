@@ -18,6 +18,26 @@ $detailController = $this->config( 'client/html/catalog/detail/url/controller', 
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
+/** client/html/common/summary/detail/product/attribute/types
+ * List of attribute type codes that should be displayed in the basket along with their product
+ *
+ * The products in the basket can store attributes that exactly define an ordered
+ * product or which are important for the back office. By default, the product
+ * variant attributes are always displayed and the configurable product attributes
+ * are displayed separately.
+ *
+ * Additional attributes for each ordered product can be added by basket plugins.
+ * Depending on the attribute types and if they should be shown to the customers,
+ * you need to extend the list of displayed attribute types ab adding their codes
+ * to the configurable list.
+ *
+ * @param array List of attribute type codes
+ * @category Developer
+ * @since 2014.09
+ */
+$attrTypes = $this->config( 'client/html/common/summary/detail/product/attribute/types', array( 'variant' ) );
+
+
 if( isset( $this->summaryBasket ) )
 {
 	$price = $this->summaryBasket->getPrice();
@@ -104,16 +124,16 @@ $backParams = $this->get( 'summaryParams', array() );
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php		echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 						</a>
-<?php		if( ( $attributes = $product->getAttributes( 'variant' ) ) !== array() ) : ?>
-						<ul class="attr-list attr-list-variant">
-<?php			foreach( $attributes as $attribute ) : ?>
+<?php		foreach( $attrTypes as $attrType ) : ?>
+						<ul class="attr-list <?php echo $enc->attr( 'attr-list-' . $attrType ); ?>">
+<?php			foreach( $product->getAttributes( $attrType ) as $attribute ) : ?>
 							<li class="attr-item">
 								<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
 								<span class="value"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?></span>
 							</li>
 <?php			endforeach; ?>
 						</ul>
-<?php		endif; ?>
+<?php		endforeach; ?>
 <?php		if( ( $attributes = $product->getAttributes( 'config' ) ) !== array() ) : ?>
 						<ul class="attr-list attr-list-config">
 <?php			foreach( $attributes as $attribute ) : ?>

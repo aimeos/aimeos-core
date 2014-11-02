@@ -110,11 +110,12 @@ class Arcavias
 
 		foreach ( $this->_manifests as $basePath => $manifest )
 		{
-			if ( isset( $manifest['i18n'] ) )
-			{
-				foreach( $manifest['i18n'] as $domain => $location ) {
-					$paths[$domain][] = $basePath . DIRECTORY_SEPARATOR . $location;
-				}
+			if ( !isset( $manifest['i18n'] ) ) {
+				continue;
+			}
+
+			foreach( $manifest['i18n'] as $domain => $location ) {
+				$paths[$domain][] = $basePath . DIRECTORY_SEPARATOR . $location;
 			}
 		}
 
@@ -133,11 +134,12 @@ class Arcavias
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
-			if ( isset( $manifest['include'] ) )
-			{
-				foreach ( $manifest['include'] as $paths ) {
-					$includes[] = $path . DIRECTORY_SEPARATOR . $paths;
-				}
+			if ( !isset( $manifest['include'] ) ) {
+				continue;
+			}
+
+			foreach ( $manifest['include'] as $paths ) {
+				$includes[] = $path . DIRECTORY_SEPARATOR . $paths;
 			}
 		}
 
@@ -157,11 +159,12 @@ class Arcavias
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
-			if ( isset( $manifest['config'][$dbtype] ) )
-			{
-				foreach ( $manifest['config'][$dbtype] as $paths ) {
-					$confpaths[] = $path . DIRECTORY_SEPARATOR . $paths;
-				}
+			if ( !isset( $manifest['config'][$dbtype] ) ) {
+				continue;
+			}
+
+			foreach ( $manifest['config'][$dbtype] as $paths ) {
+				$confpaths[] = $path . DIRECTORY_SEPARATOR . $paths;
 			}
 		}
 
@@ -202,17 +205,18 @@ class Arcavias
 
 		foreach ( $this->_manifests as $path => $manifest )
 		{
-			if( isset( $manifest['setup'] ) )
+			if( !isset( $manifest['setup'] ) ) {
+				continue;
+			}
+
+			foreach( $manifest['setup'] as $relpath )
 			{
-				foreach( $manifest['setup'] as $relpath )
-				{
-					$setupPaths[] = $path . DIRECTORY_SEPARATOR . $relpath;
+				$setupPaths[] = $path . DIRECTORY_SEPARATOR . $relpath;
 
-					$sitePath = $path . DIRECTORY_SEPARATOR . $relpath . DIRECTORY_SEPARATOR . $site;
+				$sitePath = $path . DIRECTORY_SEPARATOR . $relpath . DIRECTORY_SEPARATOR . $site;
 
-					if( is_dir( realpath( $sitePath ) ) ) {
-						$setupPaths[] = $sitePath;
-					}
+				if( is_dir( realpath( $sitePath ) ) ) {
+					$setupPaths[] = $sitePath;
 				}
 			}
 		}
@@ -233,7 +237,9 @@ class Arcavias
 
 		foreach ( $directories as $directory )
 		{
-			if ( ( $manifest = $this->_getManifestFile( $directory ) ) !== false )
+			$manifest = $this->_getManifestFile( $directory );
+
+			if ( $manifest !== false )
 			{
 				$manifests[ $directory ] = $manifest;
 				continue;
@@ -243,12 +249,16 @@ class Arcavias
 
 			foreach ( $dir as $dirinfo )
 			{
-				if ( $dirinfo->isDot() === false )
-				{
-					if ( ( $manifest = $this->_getManifestFile( $dirinfo->getPathName() ) ) !== false ) {
-						$manifests[$dirinfo->getPathName()] = $manifest;
-					}
+				if ( $dirinfo->isDot() !== false ) {
+					continue;
 				}
+
+				$manifest = $this->_getManifestFile( $dirinfo->getPathName() );
+				if ( $manifest === false ) {
+					continue;
+				}
+
+				$manifests[$dirinfo->getPathName()] = $manifest;
 			}
 		}
 
@@ -322,4 +332,3 @@ class Arcavias
 		}
 	}
 }
-

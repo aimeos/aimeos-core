@@ -7,12 +7,12 @@ Ext.ns('MShop');
 
 MShop.I18n = {
 
-    locale : 'en',
+    lang : 'en',
     tx : {},
 
-    init : function(content, locale) {
+    init : function(content, lang) {
 
-        this.locale = locale;
+        this.lang = lang;
         this.tx = content;
     },
 
@@ -34,7 +34,7 @@ MShop.I18n = {
 
     dn : function(domain, singular, plural, num) {
 
-        var index = this.getPluralIndex(num, this.locale);
+        var index = this.getPluralIndex(num, this.lang);
 
         if(this.tx[domain] && this.tx[domain][singular]) {
 
@@ -52,19 +52,19 @@ MShop.I18n = {
         return singular;
     },
 
-    getPluralIndex : function(num, locale) {
+    getPluralIndex : function(num, lang) {
 
         num = Math.abs(Number(num));
 
-        if(locale === 'pt_BR') {
-            locale = 'xbr'; // temporary set a locale for brasilian
+        if(lang === 'pt_BR') {
+            lang = 'xbr'; // temporary set a lang for brasilian
         }
 
-        if(locale.length > 3) {
-            locale = locale.replace(/_.+/g, '');
+        if(lang.length > 3) {
+            lang = lang.replace(/_.+/g, '');
         }
 
-        switch(locale) {
+        switch(lang) {
 
             case 'af':
             case 'az':

@@ -238,6 +238,10 @@ jQuery(document).ready(
         /* Add to favorite list without page reload */
         $(".catalog-detail-actions .actions-button-favorite").on("click", function(ev) {
 
+            if($(this).data("login")) {
+                return true;
+            }
+
             arcaviasOverlayCreate();
 
             $.get($(this).attr("href"), function(data) {
@@ -270,6 +274,10 @@ jQuery(document).ready(
 
         /* Add to watch list without page reload */
         $(".catalog-detail-actions .actions-button-watch").on("click", function(ev) {
+
+            if($(this).data("login")) {
+                return true;
+            }
 
             arcaviasOverlayCreate();
 

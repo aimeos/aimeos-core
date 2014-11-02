@@ -53,7 +53,7 @@ class Client_Html_Catalog_Detail_Actions_DefaultTest extends MW_Unittest_Testcas
 
 		$output = $this->_object->getBody();
 
-		$this->assertStringStartsWith( '<div class="catalog-detail-actions">', $output );
+		$this->assertStringStartsWith( '<!-- catalog.detail.actions -->', $output );
 		$this->assertContains( 'actions-button-pin', $output );
 		$this->assertContains( 'actions-button-watch', $output );
 		$this->assertContains( 'actions-button-favorite', $output );

@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# jerzys <jerzy.skalski@gmail.com>, 2014
 # Jerzy Skalski <jerzy.skalski@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Arcavias Core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-06 16:31+0200\n"
-"PO-Revision-Date: 2014-09-04 18:47+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
+"POT-Creation-Date: 2014-09-10 22:41+0200\n"
+"PO-Revision-Date: 2014-09-17 07:47+0000\n"
+"Last-Translator: jerzys <jerzy.skalski@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/arcavias-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +35,7 @@ msgstr "Status aktualizacji płatności/dostawy po aktualizacji wsadowej"
 
 #: src/Controller/Jobs/Admin/Cache/Default.php:28
 msgid "Cache cleanup"
-msgstr ""
+msgstr "Czyść pamięć podręczną"
 
 #: src/Controller/Jobs/Order/Service/Payment/Default.php:28
 msgid "Capture authorized payments"
@@ -71,6 +72,10 @@ msgstr "Nie znaleziono klasy \"%1$s\""
 msgid "Controller path is empty"
 msgstr "Ścieżka kontrolera jest pusta"
 
+#: src/Controller/Jobs/Product/Bought/Default.php:39
+msgid "Creates bought together product suggestions"
+msgstr "Sugeruje także zakup produktów"
+
 #: src/Controller/Jobs/Order/Coupon/Count/Default.php:40
 msgid "Decreases the counts of successfully redeemed coupons"
 msgstr "Zmniejszenie liczby wykorzystanych kuponów, zakończonych sukcesem"
@@ -83,16 +88,16 @@ msgstr "Zmniejszenie stanu magazynowego produktów w zamkniętych zamówieniach"
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
 " again"
-msgstr ""
+msgstr "Usuń niezakończone zamówienia i skoryguj stany ilościowe produktów oraz ponownie udostępnij kody"
 
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:39
 msgid "Deletes unpaid orders to keep the database clean"
-msgstr ""
+msgstr "Aby utrzymać porządek w bazie danych, usuń niezapłacone zamówienia"
 
 #: src/Controller/Jobs/Order/Product/Stock/Default.php:29
 #: src/Controller/Jobs/Order/Coupon/Count/Default.php:29
 msgid "Deprecated: Use \"Remove unfinised orders\""
-msgstr ""
+msgstr "Stare i niezalecane: Użyj polecenia \"Usuń niezakończone zamówienia\""
 
 #: src/Controller/Jobs/Service/Delivery/Process/Default.php:29
 msgid "Deprecated: Use order/service/delivery"
@@ -124,6 +129,7 @@ msgstr "Wykonuje zadanie utworzone w interfejsie administratora, na przykład ek
 #: src/Controller/Jobs/Common/Factory/Abstract.php:55
 #: src/Controller/Jobs/Catalog/Index/Optimize/Factory.php:71
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Factory.php:71
+#: src/Controller/Jobs/Product/Bought/Factory.php:71
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Niepoprawny znak w nazwie klasy \"%1$s\""
@@ -153,24 +159,29 @@ msgstr "Niepoprawna fabryka \"%1$s\""
 msgid "Invalid job method \"%1$s\""
 msgstr "Niepoprawna metoda zadania \"%1$s\""
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:221
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:222
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
-msgstr ""
+msgstr "Nie znaleziono typu listy domeny \"%1$s\" i kodu \"%2$s\""
 
 #: src/Controller/Jobs/Admin/Log/Default.php:28
 msgid "Log cleanup"
-msgstr ""
+msgstr "Czyść logi"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:91
 #, php-format
 msgid "Method \"%1$s\" not available"
 msgstr "Metoda \"%1$s\" nie dostępna"
 
-#: src/Controller/Jobs/Customer/Email/Watch/Default.php:244
+#: src/Controller/Jobs/Abstract.php:82
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr ""
+
+#: src/Controller/Jobs/Customer/Email/Watch/Default.php:245
 #, php-format
 msgid "No warehouse \"%1$s\" found"
-msgstr ""
+msgstr "Nie zanaleziono magazynu \"%1$s\""
 
 #: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:39
 msgid "Optimizes the catalog index for searching products"
@@ -190,7 +201,11 @@ msgstr "Przetwarzanie usług dostawy zamówienia"
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:28
 msgid "Product notification e-mails"
-msgstr ""
+msgstr "Maile informujące o produkcie"
+
+#: src/Controller/Jobs/Product/Bought/Default.php:28
+msgid "Products bought together"
+msgstr "Produkty kupione razem"
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39
 msgid "Rebuilds the catalog index for searching products"
@@ -198,24 +213,24 @@ msgstr "Przebudowa indeksów katalogów ułatwiających wyszukiwanie produktów"
 
 #: src/Controller/Jobs/Admin/Cache/Default.php:39
 msgid "Removes the expired entries from the cache"
-msgstr ""
+msgstr "Usuwa rekordy z pamięci podręcznej, których ważność minęła"
 
 #: src/Controller/Jobs/Admin/Log/Default.php:39
 msgid ""
 "Removes the old log entries from the database and archives them (optional)"
-msgstr ""
+msgstr "Usuwa stare logi z bazy danych i je archiwizuje (opcja)"
 
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:28
 msgid "Removes unfinished orders"
-msgstr ""
+msgstr "Usuwa niezakończone zamówienia"
 
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:28
 msgid "Removes unpaid orders"
-msgstr ""
+msgstr "Usuwa niezapłacone zamówienia"
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:39
 msgid "Sends e-mails for watched products"
-msgstr ""
+msgstr "Wysyła maile o obserwowanych produktach"
 
 #: src/Controller/Jobs/Order/Email/Payment/Default.php:39
 msgid "Sends order confirmation or payment status update e-mails"

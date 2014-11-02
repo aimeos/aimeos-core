@@ -74,6 +74,17 @@ class Client_Html_Email_Delivery_Text_Summary_Default
 	 * @category Developer
 	 */
 
+	/** client/html/email/delivery/text/summary/coupon/name
+	 * Name of the coupon part used by the email delivery text client implementation
+	 *
+	 * Use "Myname" if your class is named "Client_Html_Email_Delivery_Text_Summary_Coupon_Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the client class name
+	 * @since 2014.05
+	 * @category Developer
+	 */
+
 	/** client/html/email/delivery/text/summary/detail/name
 	 * Name of the detail part used by the email delivery text client implementation
 	 *

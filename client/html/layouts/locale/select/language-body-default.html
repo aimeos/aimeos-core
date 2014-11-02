@@ -10,6 +10,25 @@ $enc = $this->encoder();
 $params = $this->get( 'selectParams', array() );
 $langId = $this->get( 'selectLanguageId', 'en' );
 
+/** client/html/locale/select/language/url/config
+ * Associative list of configuration options used for generating the URL
+ *
+ * You can specify additional options as key/value pairs used when generating
+ * the URLs, like
+ *
+ *  client/html/<clientname>/url/config = array( 'absoluteUri' => true )
+ *
+ * The available key/value pairs depend on the application that embeds the e-commerce
+ * framework. This is because the infrastructure of the application is used for
+ * generating the URLs. The full list of available config options is referenced
+ * in the "see also" section of this page.
+ * 
+ * @param string Associative list of configuration options
+ * @since 2014.09
+ * @category Developer
+ */
+$config = $this->config( 'client/html/locale/select/language/url/config', array() );
+
 ?>
 <div class="locale-select-language">
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Select language' ); ?></h2>
@@ -18,7 +37,7 @@ $langId = $this->get( 'selectLanguageId', 'en' );
 			<ul class="select-dropdown">
 <?php	foreach( $this->get( 'selectItems', array() ) as $lang => $list ) : ?>
 				<li class="select-item <?php echo ( $lang === $langId ? 'active' : '' ); ?>">
-					<a href="<?php echo $enc->attr( $this->url( $this->param( 'target' ), $this->param( 'controller' ), $this->param( 'action' ), array_merge( $params, array( 'loc-language' => $lang ) ) ) ); ?>">
+					<a href="<?php echo $enc->attr( $this->url( $this->param( 'target' ), $this->param( 'controller' ), $this->param( 'action' ), array_merge( $params, array( 'loc-language' => $lang ) ), array(), $config ) ); ?>">
 <?php		echo $enc->html( $this->translate( 'client/html/language', $lang ), $enc::TRUST ); ?>
 					</a>
 				</li>

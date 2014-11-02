@@ -51,28 +51,8 @@ class Controller_Common_Order_Default
 	 */
 	public function block( MShop_Order_Item_Interface $orderItem )
 	{
-		$status = 1;
-		$orderId = $orderItem->getId();
-
-
-		$type = MShop_Order_Item_Status_Abstract::STOCK_UPDATE;
-
-		if( ( $statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type ) ) === false
-			|| $statusItem->getValue() != $status
-		) {
-			$this->_updateStock( $orderItem, -1 );
-			$this->_addStatusItem( $orderId, $type, $status );
-		}
-
-
-		$type = MShop_Order_Item_Status_Abstract::COUPON_UPDATE;
-
-		if( ( $statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type ) ) === false
-			|| $statusItem->getValue() != $status
-		) {
-			$this->_updateCoupons( $orderItem, -1 );
-			$this->_addStatusItem( $orderId, $type, $status );
-		}
+		$this->_updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::STOCK_UPDATE, 1, -1 );
+		$this->_updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::COUPON_UPDATE, 1, -1 );
 	}
 
 
@@ -96,28 +76,8 @@ class Controller_Common_Order_Default
 	 */
 	public function unblock( MShop_Order_Item_Interface $orderItem )
 	{
-		$status = 0;
-		$orderId = $orderItem->getId();
-
-
-		$type = MShop_Order_Item_Status_Abstract::STOCK_UPDATE;
-
-		if( ( $statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type ) ) === false
-			|| $statusItem->getValue() != $status
-		) {
-			$this->_updateStock( $orderItem, +1 );
-			$this->_addStatusItem( $orderId, $type, $status );
-		}
-
-
-		$type = MShop_Order_Item_Status_Abstract::COUPON_UPDATE;
-
-		if( ( $statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type ) ) === false
-			|| $statusItem->getValue() != $status
-		) {
-			$this->_updateCoupons( $orderItem, +1 );
-			$this->_addStatusItem( $orderId, $type, $status );
-		}
+		$this->_updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::STOCK_UPDATE, 0, +1 );
+		$this->_updateStatus( $orderItem, MShop_Order_Item_Status_Abstract::COUPON_UPDATE, 0, +1 );
 	}
 
 
@@ -156,8 +116,11 @@ class Controller_Common_Order_Default
 
 
 	/**
-	 * @param integer $parentid
-	 * @param integer $value
+	 * Adds a new status record to the order with the type and value.
+	 *
+	 * @param string $parentid Order ID
+	 * @param string $type Status type
+	 * @param string $value Status value
 	 */
 	protected function _addStatusItem( $parentid, $type, $value )
 	{
@@ -172,6 +135,11 @@ class Controller_Common_Order_Default
 	}
 
 
+	/**
+	 * Returns the context item object.
+	 *
+	 * @return MShop_Context_Item_Interface Context item object
+	 */
 	protected function _getContext()
 	{
 		return $this->_context;
@@ -179,7 +147,10 @@ class Controller_Common_Order_Default
 
 
 	/**
-	 * @param integer $parentid
+	 * Returns the last status item for the given order ID.
+	 *
+	 * @param string $parentid Order ID
+	 * @return MShop_Order_Item_Status_Interface|false Order status item or false if no item is available
 	 */
 	protected function _getLastStatusItem( $parentid, $type )
 	{
@@ -201,6 +172,12 @@ class Controller_Common_Order_Default
 	}
 
 
+	/**
+	 * Increases or decreses the coupon code counts referenced in the order by the given value.
+	 *
+	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param integer $how Positive or negative integer number for increasing or decreasing the coupon count
+	 */
 	protected function _updateCoupons( MShop_Order_Item_Interface $orderItem, $how = +1 )
 	{
 		$context = $this->_getContext();
@@ -232,6 +209,12 @@ class Controller_Common_Order_Default
 	}
 
 
+	/**
+	 * Increases or decreses the stock levels of the products referenced in the order by the given value.
+	 *
+	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param integer $how Positive or negative integer number for increasing or decreasing the stock levels
+	 */
 	protected function _updateStock( MShop_Order_Item_Interface $orderItem, $how = +1 )
 	{
 		$context = $this->_getContext();
@@ -260,5 +243,31 @@ class Controller_Common_Order_Default
 		while( $count >= $search->getSliceSize() );
 
 		$stockManager->commit();
+	}
+
+
+	/**
+	 * Increases or decreases the stock level or the coupon code count for referenced items of the given order.
+	 *
+	 * @param MShop_Order_Item_Interface $orderItem Order item object
+	 * @param string $type Constant from MShop_Order_Item_Status_Abstract, e.g. STOCK_UPDATE or COUPON_UPDATE
+	 * @param string $status New status value stored along with the order item
+	 * @param integer $value Number to increse or decrease the stock level or coupon code count
+	 */
+	protected function _updateStatus( MShop_Order_Item_Interface $orderItem, $type, $status, $value )
+	{
+		$statusItem = $this->_getLastStatusItem( $orderItem->getId(), $type );
+
+		if( $statusItem !== false && $statusItem->getValue() == $status ) {
+			return;
+		}
+
+		if( $type == MShop_Order_Item_Status_Abstract::STOCK_UPDATE ) {
+			$this->_updateStock( $orderItem, $value );
+		} elseif( $type == MShop_Order_Item_Status_Abstract::COUPON_UPDATE ) {
+			$this->_updateCoupons( $orderItem, $value );
+		}
+
+		$this->_addStatusItem( $orderItem->getId(), $type, $status );
 	}
 }

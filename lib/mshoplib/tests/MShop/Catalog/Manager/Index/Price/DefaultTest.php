@@ -21,7 +21,7 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
-		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text', 'product' ) );
+		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text' ) );
 
 		if( count( $result ) !== 2 ) {
 			throw new Exception( 'Products not available' );

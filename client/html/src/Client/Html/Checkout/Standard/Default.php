@@ -324,10 +324,10 @@ class Client_Html_Checkout_Standard_Default
 			$basketCntl = Controller_Frontend_Factory::createController( $context, 'basket' );
 			$view->standardBasket = $basketCntl->get();
 
-			$basketTarget = $view->config( 'client/html/basket/standard/url/target' );
-			$basketController = $view->config( 'client/html/basket/standard/url/controller', 'basket' );
-			$basketAction = $view->config( 'client/html/basket/standard/url/action', 'index' );
-			$basketConfig = $view->config( 'client/html/basket/standard/url/config', array() );
+			$bTarget = $view->config( 'client/html/basket/standard/url/target' );
+			$bCntl = $view->config( 'client/html/basket/standard/url/controller', 'basket' );
+			$bAction = $view->config( 'client/html/basket/standard/url/action', 'index' );
+			$bConfig = $view->config( 'client/html/basket/standard/url/config', array() );
 
 
 			/** client/html/checkout/standard/url/target
@@ -344,7 +344,7 @@ class Client_Html_Checkout_Standard_Default
 			 * @see client/html/checkout/standard/url/action
 			 * @see client/html/checkout/standard/url/config
 			 */
-			$checkoutTarget = $view->config( 'client/html/checkout/standard/url/target' );
+			$cTarget = $view->config( 'client/html/checkout/standard/url/target' );
 
 			/** client/html/checkout/standard/url/controller
 			 * Name of the controller whose action should be called
@@ -360,7 +360,7 @@ class Client_Html_Checkout_Standard_Default
 			 * @see client/html/checkout/standard/url/action
 			 * @see client/html/checkout/standard/url/config
 			 */
-			$checkoutController = $view->config( 'client/html/checkout/standard/url/controller', 'checkout' );
+			$cCntl = $view->config( 'client/html/checkout/standard/url/controller', 'checkout' );
 
 			/** client/html/checkout/standard/url/action
 			 * Name of the action that should create the output
@@ -376,7 +376,7 @@ class Client_Html_Checkout_Standard_Default
 			 * @see client/html/checkout/standard/url/controller
 			 * @see client/html/checkout/standard/url/config
 			 */
-			$checkoutAction = $view->config( 'client/html/checkout/standard/url/action', 'index' );
+			$cAction = $view->config( 'client/html/checkout/standard/url/action', 'index' );
 
 			/** client/html/checkout/standard/url/config
 			 * Associative list of configuration options used for generating the URL
@@ -399,7 +399,11 @@ class Client_Html_Checkout_Standard_Default
 			 * @see client/html/checkout/standard/url/action
 			 * @see client/html/url/config
 			 */
-			$checkoutConfig = $view->config( 'client/html/checkout/standard/url/config', array() );
+			$cConfig = $view->config( 'client/html/checkout/standard/url/config', array() );
+
+
+			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
+			$view->standardSteps = $steps;
 
 			/** client/html/checkout/standard/url/step-active
 			 * Name of the checkout process step to jump to if no previous step requires attention
@@ -425,11 +429,20 @@ class Client_Html_Checkout_Standard_Default
 			 * @see client/html/checkout/standard/default/subparts
 			 */
 			$default = $view->config( 'client/html/checkout/standard/url/step-active', 'summary' );
-
-			$steps = (array) $context->getConfig()->get( $this->_subPartPath, $this->_subPartNames );
 			$default = ( !in_array( $default, $steps ) ? reset( $steps ) : $default );
 
-			$activeStep = $this->_getStepActive( $view, $steps, $default );
+			$current = $view->param( 'c-step', $default );
+			$cpos = $cpos = array_search( $current, $steps );
+
+			if( !isset( $view->standardStepActive )
+				|| ( ( $apos = array_search( $view->standardStepActive, $steps ) ) !== false
+				&& $cpos !== false && $cpos < $apos )
+			) {
+				$view->standardStepActive = $current;
+			}
+
+			$activeStep = $view->standardStepActive;
+
 
 			$step = null;
 			do {
@@ -439,47 +452,23 @@ class Client_Html_Checkout_Standard_Default
 
 
 			if( $lastStep !== null ) {
-				$view->standardUrlBack = $view->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c-step' => $lastStep ), array(), $checkoutConfig );
+				$param = array( 'c-step' => $lastStep );
+				$view->standardUrlBack = $view->url( $cTarget, $cCntl, $cAction, $param, array(), $cConfig );
 			} else {
-				$view->standardUrlBack = $view->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig );
+				$view->standardUrlBack = $view->url( $bTarget, $bCntl, $bAction, array(), array(), $bConfig );
 			}
 
 			if( ( $nextStep = array_shift( $steps ) ) !== null ) {
-				$param = ( $activeStep === $default ? array( 'c-step' => $nextStep ) : array() );
-				$view->standardUrlNext = $view->url( $checkoutTarget, $checkoutController, $checkoutAction, $param, array(), $checkoutConfig );
+				$param = array( 'c-step' => $nextStep );
+				$view->standardUrlNext = $view->url( $cTarget, $cCntl, $cAction, $param, array(), $cConfig );
 			} else {
 				$view->standardUrlNext = '';
 			}
 
-			$view->standardStepActive = $activeStep;
-			$view->standardSteps = $steps;
 
 			$this->_cache = $view;
 		}
 
 		return $this->_cache;
-	}
-
-
-	/**
-	 * Returns the current active step.
-	 *
-	 * @param MW_View_Interface $view View object
-	 * @param array $steps Ordered list of steps through the checkout process
-	 * @param string $default Default step
-	 */
-	protected function _getStepActive( MW_View_Interface $view, array $steps, $default )
-	{
-		$current = $view->param( 'c-step', $default );
-		$cpos = $cpos = array_search( $current, $steps );
-
-		if( !isset( $view->standardStepActive )
-			|| ( ( $apos = array_search( $view->standardStepActive, $steps ) ) !== false
-			&& $cpos !== false && $cpos < $apos )
-		) {
-			$view->standardStepActive = $current;
-		}
-
-		return $view->standardStepActive;
 	}
 }

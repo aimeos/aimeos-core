@@ -116,6 +116,7 @@
 }
 
 .arcavias .form-list label {
+	display: inline;
 	width: 210px;
 	margin: 0.5em 0;
 }
@@ -137,8 +138,10 @@
 }
 
 .arcavias .pagination {
+	display: block;
 	padding: 0.5em;
 	clear: left;
+	margin: 0;
 }
 
 .arcavias .sort {
@@ -396,7 +399,6 @@
 .common-summary-detail .attr-list {
 	color: #004266;
 	margin: 0.5em;
-	display: inline-block;
 	vertical-align: top;
 }
 
@@ -880,7 +882,6 @@
 	font-weight: bold;
 	color: #004266;
 	height: 1em;
-	float: left;
 }
 
 .catalog-list .price-item {
@@ -1376,6 +1377,8 @@
 /* Watched, favorite, suggested products and session items */
 .account-watch,
 .account-favorite,
+.basket-related-bought,
+.catalog-detail-bought,
 .catalog-detail-suggest,
 .catalog-session {
 	clear: both;
@@ -1389,8 +1392,19 @@
 	margin-bottom: 0.5em;
 }
 
+.account-watch .watch-items,
+.account-favorite .favorite-items,
+.basket-related-bought .bought-items,
+.catalog-detail-bought .bought-items,
+.catalog-detail-suggest .suggest-items,
+.catalog-session-seen .seen-items,
+.catalog-session-pinned .pinned-items {
+	padding: 0;
+}
+
 .account-watch .header,
 .account-favorite .header,
+.basket-related-bought .header,
 .catalog-session .header {
 	border: 0 none;
 	font-size: 1em;
@@ -1404,6 +1418,8 @@
 
 .account-watch .watch-item,
 .account-favorite .favorite-item,
+.basket-related-bought .bought-item,
+.catalog-detail-bought .bought-item,
 .catalog-detail-suggest .suggest-item,
 .catalog-session-seen .seen-item,
 .catalog-session-pinned .pinned-item {
@@ -1428,6 +1444,8 @@
 
 .account-watch .media-item,
 .account-favorite .media-item,
+.basket-related-bought .media-item,
+.catalog-detail-bought .media-item,
 .catalog-detail-suggest .media-item,
 .catalog-session-seen .media-item,
 .catalog-session-pinned .media-item {
@@ -1442,6 +1460,8 @@
 
 .account-watch .name,
 .account-favorite .name,
+.basket-related-bought .name,
+.catalog-detail-bought .name,
 .catalog-detail-suggest .name,
 .catalog-session-seen .name,
 .catalog-session-pinned .name {
@@ -1458,6 +1478,8 @@
 
 .account-watch .price-list,
 .account-favorite .price-list,
+.basket-related-bought .price-list,
+.catalog-detail-bought .price-list,
 .catalog-detail-suggest .price-list,
 .catalog-session-seen .price-list,
 .catalog-session-pinned .price-list {
@@ -1471,6 +1493,8 @@
 
 .account-watch .price-item,
 .account-favorite .price-item,
+.basket-related-bought .price-item,
+.catalog-detail-bought .price-item,
 .catalog-detail-suggest .price-item,
 .catalog-session-seen .price-item,
 .catalog-session-pinned .price-item {
@@ -1479,6 +1503,8 @@
 
 .account-watch .price-item:first-child,
 .account-favorite .price-item:first-child,
+.basket-related-bought .price-item:first-child,
+.catalog-detail-bought .price-item:first-child,
 .catalog-detail-suggest .price-item:first-child,
 .catalog-session-seen .price-item:first-child,
 .catalog-session-pinned .price-item:first-child {
@@ -1495,6 +1521,16 @@
 .account-favorite .price-item:first-child .rebate,
 .account-favorite .price-item:first-child .costs,
 .account-favorite .price-item:first-child .taxrate,
+.basket-related-bought .price-item:first-child .quantity,
+.basket-related-bought .price-item:first-child .rebatepercent,
+.basket-related-bought .price-item:first-child .rebate,
+.basket-related-bought .price-item:first-child .costs,
+.basket-related-bought .price-item:first-child .taxrate,
+.catalog-detail-bought .price-item:first-child .quantity,
+.catalog-detail-bought .price-item:first-child .rebatepercent,
+.catalog-detail-bought .price-item:first-child .rebate,
+.catalog-detail-bought .price-item:first-child .costs,
+.catalog-detail-bought .price-item:first-child .taxrate,
 .catalog-detail-suggest .price-item:first-child .quantity,
 .catalog-detail-suggest .price-item:first-child .rebatepercent,
 .catalog-detail-suggest .price-item:first-child .rebate,

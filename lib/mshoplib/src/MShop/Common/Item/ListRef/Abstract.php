@@ -121,46 +121,23 @@ abstract class MShop_Common_Item_ListRef_Abstract extends MShop_Common_Item_Abst
 			return array();
 		}
 
-		if( !isset( $this->_sortedRefs[$domain] ) )
+		$list = array();
+		$iface = 'MShop_Common_Item_List_Interface';
+
+		foreach( $this->_listItems[$domain] as $listItem )
 		{
-			$iface = 'MShop_Common_Item_List_Interface';
+			$refId = $listItem->getRefId();
 
-			foreach( $this->_listItems[$domain] as $listItem )
-			{
-				$refId = $listItem->getRefId();
-
-				if( isset( $this->_refItems[$domain][$refId] ) && $listItem instanceof $iface )
-				{
-					$this->_refItems[$domain][$refId]->_listtype = $listItem->getType();
-					$this->_refItems[$domain][$refId]->_position = $listItem->getPosition();
-				}
-			}
-
-			uasort( $this->_refItems[$domain], array( $this, '_compareRefPosition' ) );
-
-			/** @todo: This doesn't work with PHP 5.3 on Solaris -> _listtype gets screwed up if not set again the second time */
-			// $this->_sortedRefs[$domain] = true;
-		}
-
-		if( $type !== null || $listtype !== null )
-		{
-			$list = array();
-			$iface = 'MShop_Common_Item_Typeid_Interface';
-
-			foreach( $this->_refItems[$domain] as $id => $item )
-			{
-				if( $item instanceof $iface
-					&& ( $type === null || $type === $item->getType() )
-					&& ( $listtype === null || $listtype === $item->_listtype ) )
-				{
-					$list[$id] = $item;
-				}
+			if( isset( $this->_refItems[$domain][$refId] ) && $listItem instanceof $iface
+				&& ( $type === null || $type === $this->_refItems[$domain][$refId]->getType() )
+				&& ( $listtype === null || $listtype === $listItem->getType() )
+			) {
+				$list[$refId] = $this->_refItems[$domain][$refId];
+				$list[$refId]->_position = $listItem->getPosition();
 			}
 		}
-		else
-		{
-			$list = $this->_refItems[$domain];
-		}
+
+		uasort( $list, array( $this, '_compareRefPosition' ) );
 
 		return $list;
 	}
