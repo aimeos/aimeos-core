@@ -344,10 +344,14 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	/**
 	 * Sets the user ID of the logged in user.
 	 *
-	 * @param string $userid User ID of the logged in user
+	 * @param string|null $userid User ID of the logged in user
 	 */
 	public function setUserId( $userid )
 	{
+		if( $userid === null ) {
+			$this->_userid = null;
+		}
+
 		$this->_userid = (string) $userid;
 	}
 
