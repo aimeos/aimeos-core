@@ -69,5 +69,10 @@ return array(
 			'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
+		array(
+			'code' => 'demo-bundle-article',
+			'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
+			'list-start' => null, 'list-end' => null, 'list-status' => 1
+		),
 	),
 );

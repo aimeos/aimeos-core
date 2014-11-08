@@ -599,6 +599,144 @@ return array(
 			),
 		),
 	),
+
+	// bundle article
+	array(
+		'code' => 'demo-bundle-article', 'type' => 'bundle', 'label' => 'Demo bundle article',
+		'supplier' => '', 'start' => null, 'end' => null, 'status' => 1,
+		'text' => array(
+			array(
+				'label' => 'Demo name/de: Demoartikel mit Bundle',
+				'content' => 'Demoartikel mit Bundle',
+				'type' => 'name', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
+				'content' => 'Dies ist die Kurzbeschreibung des Demoartikels mit Bundle',
+				'type' => 'short', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
+				'content' => 'Hier folgt eine ausführliche Beschreibung des Artikels mit Bundle, die gerne etwas länger sein darf.',
+				'type' => 'long', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo short/en: This is the short description',
+				'content' => 'This is the short description of the bundle demo article.',
+				'type' => 'short', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo long/en: Add a detailed description',
+				'content' => 'Add a detailed description of the bundle demo article that may be a little bit longer.',
+				'type' => 'long', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 4, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'price' => array(
+			array(
+				'label' => 'Demo: Bundle article from 1',
+				'value' => '250.00', 'costs' => '10.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Bundle article from 5',
+				'value' => '235.00', 'costs' => '10.00', 'rebate' => '15.00', 'taxrate' => '10.00',
+				'quantity' => 5, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Bundle article from 10',
+				'value' => '220.00', 'costs' => '10.00', 'rebate' => '30.00', 'taxrate' => '10.00',
+				'quantity' => 10, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Bundle article from 1',
+				'value' => '250.00', 'costs' => '15.00', 'rebate' => '0.00', 'taxrate' => '5.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Bundle article from 5',
+				'value' => '225.00', 'costs' => '15.00', 'rebate' => '25.00', 'taxrate' => '5.00',
+				'quantity' => 5, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 4, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Bundle article from 10',
+				'value' => '200.00', 'costs' => '15.00', 'rebate' => '50.00', 'taxrate' => '5.00',
+				'quantity' => 10, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 5, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'media' => array(
+			array(
+				'label' => 'Demo: Bundle article 1.jpg', 'mimetype' => 'image/jpeg',
+				'url' => 'https://demo.arcavias.com/images/demo/product/1-big.jpg',
+				'preview' => 'https://demo.arcavias.com/images/demo/product/1.jpg',
+				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Bundle article 2.jpg', 'mimetype' => 'image/jpeg',
+				'url' => 'https://demo.arcavias.com/images/demo/product/2-big.jpg',
+				'preview' => 'https://demo.arcavias.com/images/demo/product/2.jpg',
+				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Bundle article 3.jpg', 'mimetype' => 'image/jpeg',
+				'url' => 'https://demo.arcavias.com/images/demo/product/3-big.jpg',
+				'preview' => 'https://demo.arcavias.com/images/demo/product/3.jpg',
+				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Bundle article 4.jpg', 'mimetype' => 'image/jpeg',
+				'url' => 'https://demo.arcavias.com/images/demo/product/4-big.jpg',
+				'preview' => 'https://demo.arcavias.com/images/demo/product/4.jpg',
+				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'attribute' => array(
+		),
+		'product' => array(
+			array(
+				'code' => 'demo-selection-article',
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'code' => 'demo-article',
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'stock' => array(
+			array( 'stocklevel' => 3, 'warehouse' => 'default', 'dateback' => null ),
+		),
+	),
 	array(
 		'code' => 'demo-rebate', 'type' => 'default', 'label' => 'Demo rebate',
 		'supplier' => '', 'start' => null, 'end' => null, 'status' => 1,

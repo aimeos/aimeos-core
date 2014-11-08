@@ -300,7 +300,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 		$filter = $this->_object->createProductFilterByCategory( $item->getId(), 'position', '+', 1, 1 );
 		$results = $this->_object->getProductList( $filter, $total );
 
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 3, $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
 
@@ -311,7 +311,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 		$filter = $this->_object->createProductFilterByText( 'Expresso', 'relevance', '+', 0, 1, 'unittype13' );
 		$results = $this->_object->getProductList( $filter, $total );
 
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
 
@@ -321,7 +321,7 @@ class Controller_Frontend_Catalog_DefaultTest extends MW_Unittest_Testcase
 		$filter = $this->_object->createTextFilter( 'cafe noire', 'relevance', '-', 0, 25, 'unittype19', 'name' );
 		$results = $this->_object->getTextList( $filter );
 
-		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 2, count( $results ) );
 		$this->assertContains( 'Cafe Noire Cappuccino', $results );
 	}
 

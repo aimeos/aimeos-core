@@ -49,7 +49,7 @@ class Controller_ExtJS_Product_Stock_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
-		$this->assertEquals( 1, $result['total'] );
+		$this->assertEquals( 2, $result['total'] );
 		$this->assertEquals( 1000, $result['items'][0]->{'product.stock.stocklevel'} );
 	}
 

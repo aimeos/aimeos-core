@@ -29,5 +29,6 @@ return array (
 		array ( 'prodid' => 'product/U:TESTSUB02', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:TESTSUB03', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:TESTSUB05', 'warehouseid' => 'default', 'stocklevel' => 100, 'backdate' => null ),
+		array ( 'prodid' => 'product/U:BUNDLE', 'warehouseid' => 'default', 'stocklevel' => 1000, 'backdate' => null ),
 	)
 );

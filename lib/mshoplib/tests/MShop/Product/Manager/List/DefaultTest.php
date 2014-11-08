@@ -62,7 +62,7 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertArrayHasKey( 'price', $result );
-		$this->assertEquals( 21, $result['price'] );
+		$this->assertEquals( 22, $result['price'] );
 	}
 
 
@@ -309,7 +309,7 @@ class MShop_Product_Manager_List_DefaultTest extends MW_Unittest_Testcase
 		$search->setSlice(0, 4);
 		$results = $this->_object->searchItems($search, array(), $total);
 		$this->assertEquals( 4, count( $results ) );
-		$this->assertEquals( 14, $total );
+		$this->assertEquals( 16, $total );
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

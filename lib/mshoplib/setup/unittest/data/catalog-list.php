@@ -106,6 +106,7 @@ return array (
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/CNE', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'catalog/new', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/CNE', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'catalog/new', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => array(), 'pos' => 1, 'status' => 1 ),
+		array( 'parentid' => 'catalog/new', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/U:BUNDLE', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => array(), 'pos' => 2, 'status' => 1 ),
 		array( 'parentid' => 'catalog/internet', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
 
 		array( 'parentid' => 'catalog/internet', 'typeid' => 'product/default', 'domain' => 'product', 'refid' => 'product/IJKL', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),

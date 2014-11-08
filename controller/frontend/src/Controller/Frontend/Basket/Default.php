@@ -97,8 +97,13 @@ class Controller_Frontend_Basket_Default
 		$attr = array();
 		$prices = $productItem->getRefItems( 'price', 'default', 'default' );
 
-		if( $productItem->getType() === 'select' ) {
-			$attr = $this->_getVariantDetails( $orderBaseProductItem, $productItem, $prices, $variantAttributeIds, $options );
+		switch( $productItem->getType() ) {
+			case 'select':
+				$attr = $this->_getVariantDetails( $orderBaseProductItem, $productItem, $prices, $variantAttributeIds, $options );
+				break;
+			case 'bundle':
+				$this->_addBundleProducts( $orderBaseProductItem, $productItem, $variantAttributeIds, $warehouse );
+				break;
 		}
 
 		$priceManager = MShop_Factory::createManager( $context, 'price' );
@@ -414,6 +419,54 @@ class Controller_Frontend_Basket_Default
 			$msg = sprintf( 'There are not enough products "%1$s" in stock', $productItem->getName() );
 			throw new Controller_Frontend_Basket_Exception( $msg );
 		}
+	}
+
+
+	/**
+	 * Adds the bundled products to the order product item.
+	 *
+	 * @param MShop_Order_Item_Base_Product_Interface $orderBaseProductItem Order product item
+	 * @param MShop_Product_Item_Interface $productItem Bundle product item
+	 * @param array $variantAttributeIds List of product variant attribute IDs
+	 */
+	protected function _addBundleProducts( MShop_Order_Item_Base_Product_Interface $orderBaseProductItem,
+		MShop_Product_Item_Interface $productItem, array $variantAttributeIds, $warehouse )
+	{
+		$quantity = $orderBaseProductItem->getQuantity();
+		$products = $subProductIds = $orderProducts = array();
+		$orderProductManager = MShop_Factory::createManager( $this->_getContext(), 'order/base/product' );
+
+		foreach( $productItem->getRefItems( 'product', null, 'default' ) as $item ) {
+			$subProductIds[] = $item->getId();
+		}
+
+		if( count( $subProductIds ) > 0 )
+		{
+			$productManager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+
+			$search = $productManager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', 'product.id', $subProductIds ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$products = $productManager->searchItems( $search, array( 'attribute', 'media', 'price', 'text' ) );
+		}
+
+		foreach( $products as $product )
+		{
+			$prices = $product->getRefItems( 'price', 'default', 'default' );
+
+			$orderProduct = $orderProductManager->createItem();
+			$orderProduct->copyFrom( $product );
+			$orderProduct->setWarehouseCode( $warehouse );
+			$orderProduct->setPrice( $this->_calcPrice( $orderProduct, $prices, $quantity ) );
+
+			$orderProducts[] = $orderProduct;
+		}
+
+		$orderBaseProductItem->setProducts( $orderProducts );
 	}
 
 

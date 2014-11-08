@@ -34,12 +34,12 @@ return array (
 		'product/U:noSel' => array( 'typeid' => 'product/select', 'label' => 'Unittest: Empty Selection', 'code' => 'U:noSel', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/U:TESTP' => array( 'typeid' => 'product/select', 'label' => 'Unittest: Test priced Selection', 'code' => 'U:TESTP', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/U:TESTPSUB01' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Test priced Sub 1', 'code' => 'U:TESTPSUB01', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
-
 		'product/bdl:zyx' => array( 'typeid' => 'product/bundle', 'label' => 'Unittest: Bundle bdl:zyx', 'code' => 'bdl:zyx', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/bdl:EFG' => array( 'typeid' => 'product/bundle', 'label' => 'Unittest: Bundle bdl:EFG', 'code' => 'bdl:EFG', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/bdl:HIJ' => array( 'typeid' => 'product/bundle', 'label' => 'Unittest: Bundle bdl:HIJ', 'code' => 'bdl:HIJ', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/bdl:hal' => array( 'typeid' => 'product/bundle', 'label' => 'Unittest: Bundle bdl:hal', 'code' => 'bdl:hal', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/bdl:EFX' => array( 'typeid' => 'product/bundle', 'label' => 'Unittest: Bundle bdl:EFX', 'code' => 'bdl:EFX', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 		'product/bdl:HKL' => array( 'typeid' => 'product/bundle', 'label' => 'Unittest: Bundle bdl:HKL', 'code' => 'bdl:HKL', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
+		'product/U:BUNDLE' => array( 'typeid' => 'product/bundle', 'label' => 'Unittest: Bundle', 'code' => 'U:BUNDLE', 'suppliercode' => 'unitSupplier', 'status' => 1 ),
 	)
 );
