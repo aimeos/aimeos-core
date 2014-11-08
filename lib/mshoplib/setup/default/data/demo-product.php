@@ -237,7 +237,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 5, 'warehouse' => 'default', 'dateback' => null )
+			array( 'stocklevel' => null, 'warehouse' => 'default', 'dateback' => null )
 		),
 	),
 
