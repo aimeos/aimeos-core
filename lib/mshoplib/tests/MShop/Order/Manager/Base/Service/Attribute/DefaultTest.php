@@ -30,14 +30,19 @@ class MShop_Order_Manager_Base_Service_Attribute_DefaultTest extends MW_Unittest
 	public function testAggregate()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.editor', 'core:unittest' ) );
+		$expr = array(
+			$search->compare( '==', 'order.base.service.attribute.type', 'payment' ),
+			$search->compare( '==', 'order.base.service.attribute.editor', 'core:unittest' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
 		$result = $this->_object->aggregate( $search, 'order.base.service.attribute.code' );
-	
+
 		$this->assertEquals( 9, count( $result ) );
 		$this->assertArrayHasKey( 'ACOWNER', $result );
 		$this->assertEquals( 1, $result['ACOWNER'] );
 	}
-	
+
 
 	public function testCleanup()
 	{
