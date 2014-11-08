@@ -11,6 +11,7 @@
  */
 class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testcase
 {
+	private $_context;
 	private $_object;
 	private $_serviceItem;
 	private $_order;
@@ -24,8 +25,8 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
+		$this->_context = TestHelper::getContext();
+		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->_context );
 
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare('==', 'service.code', 'paypalexpress') );
@@ -36,9 +37,10 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 			throw new Exception( 'No paypalexpress service item available' );
 		}
 
-		$this->_object = new MShop_Service_Provider_Payment_PayPalExpress( $context, $this->_serviceItem );
+		$this->_object = new MShop_Service_Provider_Payment_PayPalExpress( $this->_context, $this->_serviceItem );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
 
 		$search = $orderManager->createSearch();
 		$expr = array(
@@ -52,6 +54,10 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 			throw new Exception( sprintf('No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
 		}
 
+
+		$this->_context->getConfig()->set( 'classes/order/manager/name', 'MockPayPal' );
+		$orderMock = $this->getMock( 'MShop_Order_Manager_Default', array( 'saveItem' ), array( $this->_context ) );
+		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_MockPayPal', $orderMock );
 	}
 
 
@@ -63,15 +69,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 	 */
 	protected function tearDown()
 	{
-		$iface = 'MShop_Order_Item_Interface';
-
-		if( $this->_order instanceof $iface )
-		{
-			$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-			$this->_order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
-			$orderManager->saveItem($this->_order);
-		}
-
 		unset( $this->_object );
 		unset( $this->_serviceItem );
 		unset( $this->_order );
@@ -121,7 +118,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$helperForm = $this->_object->process( $this->_order );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$refOrderBase = $orderBaseManager->load( $this->_order->getBaseId() );
@@ -161,7 +158,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$com->addRule( $what, $error, $success );
 		$this->_object->setCommunication( $com );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$response = array(
@@ -210,12 +207,11 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 			'111111111' => 'Completed'
 		);
 
-		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $this->_object->updateSync( $response ) );
+		$orderItem = $this->_object->updateSync( $response );
+		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $orderItem );
 
 		$refOrderBase = $orderBaseManager->load( $this->_order->getBaseId() );
-
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
-
 		$attrManager = $orderBaseManager->getSubManager('service')->getSubManager('attribute');
 
 		$attributeList = array();
@@ -232,9 +228,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 			$this->assertEquals( $attributeList[ $key ]->getValue(), $testData[ $key ] );
 		}
 
-		$this->_order = $orderManager->getItem( $this->_order->getId() );
-
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->_order->getPaymentStatus() );
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $orderItem->getPaymentStatus() );
 	}
 
 
@@ -262,12 +256,10 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 			'REFUNDTRANSACTIONID' => '88888888'
 		);
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$this->_order = $orderManager->getItem( $this->_order->getId() );
 
 		$refOrderBase = $orderBaseManager->load( $this->_order->getBaseId() );
-
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
 
 		$attributeList = array();
@@ -285,7 +277,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 	public function testCapture()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = MShop_Order_Manager_Factory::createManager( $this->_context );
 		$orderBaseManager = $orderManager->getSubManager('base');
 		$baseItem = $orderBaseManager->getItem( $this->_order->getBaseId() );
 
@@ -306,8 +298,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$this->_object->capture( $this->_order );
 
-		$this->_order = $orderManager->getItem( $this->_order->getId() );
-
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->_order->getPaymentStatus() );
 	}
 
@@ -325,9 +315,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$this->_object->setCommunication( $com );
 
 		$this->_object->query( $this->_order );
-
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_order = $orderManager->getItem( $this->_order->getId() );
 
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->_order->getPaymentStatus() );
 	}
@@ -348,9 +335,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$this->_object->query( $this->_order );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_order = $orderManager->getItem( $this->_order->getId() );
-
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_REFUSED, $this->_order->getPaymentStatus() );
 	}
 
@@ -370,9 +354,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 
 		$this->_object->cancel( $this->_order );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_order = $orderManager->getItem( $this->_order->getId() );
-
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_CANCELED, $this->_order->getPaymentStatus() );
 	}
 
@@ -391,9 +372,6 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends MW_Unittest_Testc
 		$this->_object->setCommunication( $com );
 
 		$this->_object->query( $this->_order );
-
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->_order = $orderManager->getItem( $this->_order->getId() );
 
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_AUTHORIZED, $this->_order->getPaymentStatus() );
 	}
