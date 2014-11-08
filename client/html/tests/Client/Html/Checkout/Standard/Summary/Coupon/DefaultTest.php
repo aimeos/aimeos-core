@@ -59,7 +59,7 @@ class Client_Html_Checkout_Standard_Summary_Coupon_DefaultTest
 	{
 		$controller = Controller_Frontend_Basket_Factory::createController( $this->_context );
 		$basket = $controller->get();
-		$basket->addCoupon( 'test' );
+		$basket->addCoupon( 'OPQR' );
 
 		$view = TestHelper::getView();
 		$view->standardBasket = $basket;

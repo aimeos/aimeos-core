@@ -70,6 +70,7 @@ class MShop_Plugin_Provider_Order_ProductGone
 
 		$notAvailable = array();
 		$now = date( 'Y-m-d H-i-s' );
+
 		foreach ( $order->getProducts() as $position => $orderProduct )
 		{
 			if ( !array_key_exists( $orderProduct->getProductId(), $checkItems ) )

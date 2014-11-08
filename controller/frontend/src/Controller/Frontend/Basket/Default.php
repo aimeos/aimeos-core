@@ -204,7 +204,7 @@ class Controller_Frontend_Basket_Default
 		$result = $codeManager->searchItems( $search );
 
 		if( ( $codeItem = reset( $result ) ) === false ) {
-			throw new Controller_Frontend_Basket_Exception( sprintf( 'Coupon code "%1$s" is invalid', $code ) );
+			throw new Controller_Frontend_Basket_Exception( sprintf( 'Coupon code "%1$s" is invalid or not available any more', $code ) );
 		}
 
 
@@ -219,7 +219,7 @@ class Controller_Frontend_Basket_Default
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Controller_Frontend_Basket_Exception( sprintf( 'Coupon code "%1$s" is not allowed', $code ) );
+			throw new Controller_Frontend_Basket_Exception( sprintf( 'Coupon for code "%1$s" is not available any more', $code ) );
 		}
 
 

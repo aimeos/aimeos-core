@@ -12,6 +12,8 @@ if( isset( $this->summaryBasket ) ) {
 	$coupons = $this->summaryBasket->getCoupons();
 }
 
+$errors = $this->get( 'summaryErrorCodes', array() );
+
 ?>
 <div class="common-summary-coupon container">
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Coupons' ), $enc::TRUST ); ?></h2>
@@ -25,7 +27,7 @@ if( isset( $this->summaryBasket ) ) {
 <?php if( !empty( $coupons ) ) : ?>
 		<ul class="attr-list">
 <?php	foreach( $coupons as $code => $products ) : ?>
-			<li class="attr-item"><?php echo $code; ?></li>
+			<li class="attr-item <?php echo ( isset( $errors['coupon'][$code] ) ? 'error' : '' ); ?>"><?php echo $enc->html( $code ); ?></li>
 <?php	endforeach; ?>
 		</ul>
 <?php endif; ?>

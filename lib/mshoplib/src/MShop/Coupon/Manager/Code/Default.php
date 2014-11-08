@@ -769,7 +769,9 @@ class MShop_Coupon_Manager_Code_Default
 		{
 			$curDate = date( 'Y-m-d H:i:00', time() );
 
-			$expr = array();
+			$expr = array(
+				$object->compare( '>', 'coupon.code.count', 0 )
+			);
 
 			$temp = array();
 			$temp[] = $object->compare( '==', 'coupon.code.datestart', null );

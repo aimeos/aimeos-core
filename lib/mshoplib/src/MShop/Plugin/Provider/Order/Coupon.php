@@ -32,6 +32,7 @@ class MShop_Plugin_Provider_Order_Coupon
 		$p->addListener( $this, 'deleteProduct.after' );
 		$p->addListener( $this, 'setService.after' );
 		$p->addListener( $this, 'addCoupon.after' );
+		$p->addListener( $this, 'check.after' );
 	}
 
 
@@ -44,14 +45,15 @@ class MShop_Plugin_Provider_Order_Coupon
 	 */
 	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
 	{
+		$notAvailable = array();
 		$context = $this->_getContext();
-		$context->getLogger()->log(__METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG);
+		$context->getLogger()->log( __METHOD__ . ': event=' . $action, MW_Logger_Abstract::DEBUG );
 
 		$class = 'MShop_Order_Item_Base_Interface';
 		if( !( $order instanceof $class ) )
 		{
 			$msg = 'Received notification from "%1$s" which doesn\'t implement "%2$s"';
-			throw new MShop_Plugin_Exception(sprintf($msg, get_class($order), $class));
+			throw new MShop_Plugin_Exception( sprintf( $msg, get_class( $order ), $class ) );
 		}
 
 		if( self::$_lock === false )
@@ -59,11 +61,17 @@ class MShop_Plugin_Provider_Order_Coupon
 			self::$_lock = true;
 
 			$couponManager = MShop_Factory::createManager( $context, 'coupon' );
-			$search = $couponManager->createSearch();
 
 			foreach( $order->getCoupons() as $code => $products )
 			{
-				$search->setConditions( $search->compare( '==', 'coupon.code.code', $code ) );
+				$search = $couponManager->createSearch( true );
+				$expr = array(
+					$search->compare( '==', 'coupon.code.code', $code ),
+					$search->getConditions(),
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
+				$search->setSlice( 0, 1 );
+
 				$results = $couponManager->searchItems( $search );
 
 				if( ( $couponItem = reset( $results ) ) !== false )
@@ -71,9 +79,20 @@ class MShop_Plugin_Provider_Order_Coupon
 					$couponProvider = $couponManager->getProvider( $couponItem, $code );
 					$couponProvider->updateCoupon( $order );
 				}
+				else
+				{
+					$notAvailable[$code] = 'coupon.gone';
+				}
 			}
 
 			self::$_lock = false;
+		}
+
+		if ( count( $notAvailable ) > 0 )
+		{
+			$codes = array( 'coupon' => $notAvailable );
+			$msg = sprintf( 'Coupon in basket is not available any more' );
+			throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $codes );
 		}
 
 		return true;
