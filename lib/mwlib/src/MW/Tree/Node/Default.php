@@ -116,8 +116,6 @@ class MW_Tree_Node_Default extends MW_Common_Item_Abstract implements MW_Tree_No
 	{
 		if ( $id === null ) {
 			$this->_modified = true;
-		} else {
-			$this->_modified = false;
 		}
 
 		$this->_values['id'] = $id;

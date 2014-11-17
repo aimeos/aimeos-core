@@ -31,6 +31,7 @@ class Controller_ExtJS_Catalog_Default
 	{
 		parent::__construct( $context, 'Catalog' );
 
+		$this->_manager = MShop_Catalog_Manager_Factory::createManager( $context );
 		$this->_context = $context;
 	}
 
@@ -267,6 +268,6 @@ class Controller_ExtJS_Catalog_Default
 	 */
 	protected function _getManager()
 	{
-		return MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		return $this->_manager;
 	}
 }
