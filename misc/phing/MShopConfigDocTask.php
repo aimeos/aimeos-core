@@ -226,12 +226,12 @@ class MShopConfigDocTask extends Task
 				$deprecated = "* Deprecated: " . $list['deprecated'] . "\n";
 			}
 
-			$default = "* Default: " . str_replace( "\n\t", "\n ", $list['default'] ) . "\n";
-			$value = str_replace( array( '<', '>', "\n\t" ), array( '&lt;', '&gt;', "\n " ), $list['value'] );
+			$default = "* Default: " . str_replace( array( '<', '>', '&', "\n\t" ), array( '&lt;', '&gt;', '&amp;', "\n " ), $list['default'] ) . "\n";
+			$value = str_replace( array( '<', '>', '&', "\n\t" ), array( '&lt;', '&gt;', '&amp;', "\n " ), $list['value'] );
 
 			if( isset( $list['short'] ) )
 			{
-				$short = "\n" . trim( str_replace( array( '<', '>' ), array( '&lt;', '&gt;' ), $list['short'] ) ) . "\n";
+				$short = "\n" . trim( str_replace( array( '<', '>', '&' ), array( '&lt;', '&gt;', '&amp;' ), $list['short'] ) ) . "\n";
 				$options[$key]['short'] = $short;
 			}
 
@@ -246,7 +246,7 @@ class MShopConfigDocTask extends Task
 				$data .= "\n== Description ==\n";
 
 				foreach( $list['long'] as $desc ) {
-					$data .= "\n" . str_replace( array( '<', '>' ), array( '&lt;', '&gt;' ), $desc );
+					$data .= "\n" . str_replace( array( '<', '>', '&' ), array( '&lt;', '&gt;', '&amp;' ), $desc );
 				}
 
 				if( ( $desc = preg_replace( '/\{\@link ([^ ]+) ([^\}]*)\}/', '[\1 \2]', $desc ) ) === null ) {
