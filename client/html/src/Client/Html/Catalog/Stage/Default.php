@@ -435,7 +435,7 @@ class Client_Html_Catalog_Stage_Default
 		{
 			$params = $this->_getParamStage( $view );
 
-			if( isset( $params['f-catalog-id'] ) )
+			if( isset( $params['f-catalog-id'] ) && $params['f-catalog-id'] != '' )
 			{
 				$context = $this->_getContext();
 				$config = $context->getConfig();
