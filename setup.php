@@ -37,7 +37,7 @@ function setup_autoload( $classname )
 
 function usage()
 {
-	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>] [--option=key:value]* [sitecode]\n" );
+	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>]* [--option=key:value]* [sitecode]\n" );
 	exit ( 1 );
 }
 
