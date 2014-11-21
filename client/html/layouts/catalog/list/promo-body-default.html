@@ -22,36 +22,38 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php if( !empty( $productItems ) ) : ?>
 <section class="catalog-list-promo">
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Top seller' ); ?></h2>
+	<div class="promo-items"><!--
 <?php	foreach( $productItems as $id => $productItem ) : ?>
 <?php		$firstImage = true; $params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id ); ?>
-	<div class="product">
-		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
-			<div class="media-list">
+		--><div class="product">
+			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
+				<div class="media-list">
 <?php		foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
 <?php			$mediaUrl = $this->content( $mediaItem->getPreview() ); ?>
 <?php			if( $firstImage === true ) : $firstImage = false; ?>
-				<noscript><div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')"></div></noscript>
-				<div class="media-item lazy-image" data-src="<?php echo $mediaUrl; ?>"></div>
+					<noscript><div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')"></div></noscript>
+					<div class="media-item lazy-image" data-src="<?php echo $mediaUrl; ?>"></div>
 <?php			else : ?>
-				<div class="media-item" data-src="<?php echo $mediaUrl; ?>"></div>
+					<div class="media-item" data-src="<?php echo $mediaUrl; ?>"></div>
 <?php			endif; ?>
 <?php		endforeach; ?>
-			</div>
-			<div class="text-list">
-				<h2><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h2>
-<?php		foreach( $productItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>
-				<div class="text-item">
-<?php			echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?><br/>
 				</div>
+				<div class="text-list">
+					<h2><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h2>
+<?php		foreach( $productItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>
+					<div class="text-item">
+<?php			echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?><br/>
+					</div>
 <?php		endforeach; ?>
-			</div>
-			<div class="price-list">
+				</div>
+				<div class="stock" data-prodid="<?php echo $id; ?>"></div>
+				<div class="price-list">
 <?php	echo $this->price( $productItem->getRefItems( 'price', 'default', 'default' ) ); ?>
-			</div>
-			<div class="stock" data-prodid="<?php echo $id; ?>"></div>
-		</a>
-	</div>
+				</div>
+			</a>
+		</div><!--
 <?php	endforeach; ?>
+	--></div>
 <?php	echo $this->get( 'promoBody' ); ?>
 </section>
 <?php endif; ?>
