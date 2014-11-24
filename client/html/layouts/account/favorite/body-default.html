@@ -95,13 +95,15 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <section class="arcavias account-favorite">
 <?php if( ( $errors = $this->get( 'favoriteErrorList', array() ) ) !== array() ) : ?>
 	<ul class="error-list">
-<?php foreach( $errors as $error ) : ?>
-		<li class="error-item"><?php echo $enc->html( $error ); ?></li>
-<?php endforeach; ?>
+<?php	foreach( $errors as $error ) : ?>
+			<li class="error-item"><?php echo $enc->html( $error ); ?></li>
+<?php	endforeach; ?>
 	</ul>
 <?php endif; ?>
+
+<?php if( !empty( $listItems ) ) : ?>
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Favorite products' ); ?></h2>
-<?php if( $this->get( 'favoritePageLast', 1 ) > 1 ) : ?>
+<?php	if( $this->get( 'favoritePageLast', 1 ) > 1 ) : ?>
 	<nav class="pagination">
 		<div class="sort">
 			<span>&nbsp;</span>
@@ -114,7 +116,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 			<a class="last" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav-page' => $this->favoritePageLast ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '▶▶' ), $enc::TRUST ); ?></a>
 		</div>
 	</nav>
-<?php endif; ?>
+<?php	endif; ?>
 
 	<ul class="favorite-items">
 <?php	foreach( $listItems as $listItem ) : $id = $listItem->getRefId(); ?>
@@ -139,7 +141,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php	endforeach; ?>
 	</ul>
 
-<?php if( $this->get( 'favoritePageLast', 1 ) > 1 ) : ?>
+<?php	if( $this->get( 'favoritePageLast', 1 ) > 1 ) : ?>
 	<nav class="pagination">
 		<div class="sort">
 			<span>&nbsp;</span>
@@ -152,7 +154,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 			<a class="last" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav-page' => $this->favoritePageLast ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '▶▶' ), $enc::TRUST ); ?></a>
 		</div>
 	</nav>
+<?php	endif; ?>
 <?php endif; ?>
-
 <?php echo $this->get( 'favoriteBody' ); ?>
 </section>

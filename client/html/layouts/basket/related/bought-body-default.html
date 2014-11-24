@@ -21,9 +21,9 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php if( !empty( $productItems ) || $this->boughtBody != '' ) : ?>
 <section class="basket-related-bought">
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Products you might be also interested in' ); ?></h2>
-	<ul class="bought-items">
+	<ul class="bought-items"><!--
 <?php	foreach( $productItems as $id => $productItem ) : ?>
-		<li class="bought-item">
+		--><li class="bought-item">
 <?php		$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $productItem->getId() ); ?>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php		$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
@@ -37,9 +37,9 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php		echo $this->price( $productItem->getRefItems( 'price', 'default', 'default' ) ); ?>
 			</div>
 			</a>
-		</li>
+		</li><!--
 <?php	endforeach; ?>
-	</ul>
+	--></ul>
 <?php echo $this->boughtBody; ?>
 </section>
 <?php endif; ?>

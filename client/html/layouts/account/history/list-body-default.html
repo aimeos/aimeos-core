@@ -84,11 +84,12 @@ $attrformat = $this->translate( 'client/html', '%1$s at %2$s' );
 $enc = $this->encoder();
 
 ?>
+<?php if( !empty( $orderItems ) ) : ?>
 <div class="account-history-list">
 	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Order history' ), $enc::TRUST ); ?></h1>
-<?php if( empty( $orderItems ) === false ) : ?>
+<?php	if( empty( $orderItems ) === false ) : ?>
 	<ul class="history-list">
-<?php	foreach( $orderItems as $id => $orderItem ) : ?>
+<?php		foreach( $orderItems as $id => $orderItem ) : ?>
 		<li class="history-item">
 			<a href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction, array( 'h-action' => 'detail', 'h-order-id' => $id ), array(), $accountConfig ) ); ?>">
 				<ul class="attr-list">
@@ -101,20 +102,21 @@ $enc = $this->encoder();
 						<span class="value"><?php $code = 'order:' . $orderItem->getType(); echo $enc->html( $this->translate( 'client/html/code', $code ), $enc::TRUST ); ?></span>
 					</li><!--
 					--><li class="attr-item order-payment">
-<?php		$code = 'pay:' . $orderItem->getPaymentStatus(); $paystatus = $this->translate( 'client/html/code', $code ); ?>
+<?php			$code = 'pay:' . $orderItem->getPaymentStatus(); $paystatus = $this->translate( 'client/html/code', $code ); ?>
 						<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Payment' ), $enc::TRUST ); ?></span>
 						<span class="value"><?php echo ( ( $date = $orderItem->getDatePayment() ) !== null ? $enc->html( sprintf( $attrformat, $paystatus, date_create( $date )->format( $dateformat ) ), $enc::TRUST ) : '' ); ?></span>
 					</li><!--
 					--><li class="attr-item order-delivery">
-<?php		$code = 'stat:' . $orderItem->getDeliveryStatus(); $status = $this->translate( 'client/html/code', $code ); ?>
+<?php			$code = 'stat:' . $orderItem->getDeliveryStatus(); $status = $this->translate( 'client/html/code', $code ); ?>
 						<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Delivery' ), $enc::TRUST ); ?></span>
 						<span class="value"><?php echo ( ( $date = $orderItem->getDateDelivery() ) !== null ? $enc->html( sprintf( $attrformat, $status, date_create( $date )->format( $dateformat ) ), $enc::TRUST ) : '' ); ?></span>
 					</li>
 				</ul>
 			</a>
 		</li>
-<?php	endforeach; ?>
+<?php		endforeach; ?>
 	</ul>
-<?php endif; ?>
+<?php	endif; ?>
 </div>
+<?php endif; ?>
 <?php echo $this->get( 'listBody' ); ?>

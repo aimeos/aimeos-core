@@ -20,10 +20,11 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 $position = $this->get( 'itemPosition', 0 );
 
 ?>
-<div class="catalog-list-items"><!--
+<div class="catalog-list-items">
+	<ul class="list-items"><!--
 <?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : $firstImage = true; ?>
 <?php	$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id, 'l-pos' => $position++ ); ?>
-	--><div class="product">
+	--><li class="product">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
@@ -50,6 +51,6 @@ $position = $this->get( 'itemPosition', 0 );
 			</div>
 <?php	echo $this->get( 'itemsBody' ); ?>
 		</a>
-	</div><!--
+	</li><!--
 <?php endforeach; ?>
 --></div>

@@ -22,10 +22,10 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php if( !empty( $productItems ) ) : ?>
 <section class="catalog-list-promo">
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Top seller' ); ?></h2>
-	<div class="promo-items"><!--
+	<ul class="promo-items"><!--
 <?php	foreach( $productItems as $id => $productItem ) : ?>
 <?php		$firstImage = true; $params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $id ); ?>
-		--><div class="product">
+		--><li class="product">
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 				<div class="media-list">
 <?php		foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
@@ -51,9 +51,9 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php	echo $this->price( $productItem->getRefItems( 'price', 'default', 'default' ) ); ?>
 				</div>
 			</a>
-		</div><!--
+		</li><!--
 <?php	endforeach; ?>
-	--></div>
+	--></ul>
 <?php	echo $this->get( 'promoBody' ); ?>
 </section>
 <?php endif; ?>

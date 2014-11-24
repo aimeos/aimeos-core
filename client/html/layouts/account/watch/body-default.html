@@ -100,8 +100,9 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
+<?php if( !empty( $listItems ) ) : ?>
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Watched products' ); ?></h2>
-<?php if( $this->get( 'watchPageLast', 1 ) > 1 ) : ?>
+<?php	if( $this->get( 'watchPageLast', 1 ) > 1 ) : ?>
 	<nav class="pagination">
 		<div class="sort">
 			<span>&nbsp;</span>
@@ -114,7 +115,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 			<a class="last" href="<?php echo $enc->attr( $this->url( $watchTarget, $watchController, $watchAction, array( 'watch-page' => $this->watchPageLast ) + $watchParams, array(), $watchConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '▶▶' ), $enc::TRUST ); ?></a>
 		</div>
 	</nav>
-<?php endif; ?>
+<?php	endif; ?>
 
 	<ul class="watch-items">
 <?php	foreach( $listItems as $listItem ) : $id = $listItem->getRefId(); ?>
@@ -171,7 +172,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php	endforeach; ?>
 	</ul>
 
-<?php if( $this->get( 'watchPageLast', 1 ) > 1 ) : ?>
+<?php	if( $this->get( 'watchPageLast', 1 ) > 1 ) : ?>
 	<nav class="pagination">
 		<div class="sort">
 			<span>&nbsp;</span>
@@ -184,7 +185,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 			<a class="last" href="<?php echo $enc->attr( $this->url( $watchTarget, $watchController, $watchAction, array( 'watch-page' => $this->watchPageLast ) + $watchParams, array(), $watchConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '▶▶' ), $enc::TRUST ); ?></a>
 		</div>
 	</nav>
+<?php	endif; ?>
 <?php endif; ?>
-
 <?php echo $this->get( 'watchBody' ); ?>
 </section>
