@@ -237,7 +237,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 						$param = array(
 							'a-name' => $product->getName(),
 							'd-product-id' => $product->getId(),
-							'l-pos' => $listPos - 1
+							'l-pos' => $pos - 1
 						);
 						$view->navigationPrev = $view->url( $target, $controller, $action, $param, array(), $config );
 					}
@@ -247,7 +247,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 						$param = array(
 							'a-name' => $product->getName(),
 							'd-product-id' => $product->getId(),
-							'l-pos' => $listPos + 1
+							'l-pos' => $pos + 1
 						);
 						$view->navigationNext = $view->url( $target, $controller, $action, $param, array(), $config );
 					}
