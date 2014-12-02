@@ -23,10 +23,10 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php if( !empty( $productItems ) || $this->suggestBody != '' ) : ?>
 <section class="catalog-detail-suggest">
 	<h2 class="header"><?php echo $this->translate( 'client/html', 'Suggested products' ); ?></h2>
-	<ul class="suggest-items"><!--
+	<ul class="suggest-items">
 <?php	foreach( $positionItems as $id => $item ) : ?>
 <?php		if( isset( $productItems[$id] ) ) : $productItem = $productItems[$id]; ?>
-		--><li class="suggest-item">
+		<li class="suggest-item">
 <?php			$params = array( 'a-name' => str_replace( ' ', '-', strip_tags( $productItem->getName() ) ), 'd-product-id' => $productItem->getId() ); ?>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php			$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
@@ -40,10 +40,10 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php			echo $this->price( $productItem->getRefItems( 'price', 'default', 'default' ) ); ?>
 			</div>
 			</a>
-		</li><!--
+		</li>
 <?php		endif; ?>
 <?php	endforeach; ?>
-	--></ul>
+	</ul>
 <?php echo $this->suggestBody; ?>
 </section>
 <?php endif; ?>

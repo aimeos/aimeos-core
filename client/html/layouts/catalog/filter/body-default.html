@@ -78,22 +78,6 @@ $listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
 
 $enc = $this->encoder();
 
-/** client/html/catalog/filter/default/button
- * Displays the "Search" button in the catalog filter if Javascript is disabled
- *
- * Usually the "Search" button is shown in the catalog filter if the browser
- * doesn't support Javascript or the user has disabled Javascript for the site.
- * If you are using parts of the catalog filter to e.g. render a menu, the
- * button shouldn't be displayed at all. This can be explicitely set via this
- * configuration option.
- *
- * @param boolean A value of "1" to enable the button, "0" to disable it
- * @since 2014.03
- * @category User
- * @category Developer
- */
-$button = $this->config( 'client/html/catalog/filter/default/button', true );
-
 ?>
 <section class="arcavias catalog-filter">
 <?php if( isset( $this->filterErrorList ) ) : ?>
@@ -104,16 +88,12 @@ $button = $this->config( 'client/html/catalog/filter/default/button', true );
 	</ul>
 <?php endif; ?>
 	<nav>
+		<h1><?php echo $enc->html( $this->translate( 'client/html', 'Filter' ), $enc::TRUST ); ?></h1>
 		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array(), array(), $listConfig ) ); ?>">
 <?php if( ( $sort = $this->param( 'f-sort' ) ) != null ) : ?>
 			<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f-sort' ) ); ?>" value="<?php echo $enc->attr( $sort ); ?>" />
 <?php endif; ?>
 <?php echo $this->get( 'filterBody' ); ?>
-<?php if( $button ) : ?>
-			<noscript>
-				<button class="filter standardbutton btn-action" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
-			</noscript>
-<?php endif; ?>
 		</form>
 	</nav>
 </section>

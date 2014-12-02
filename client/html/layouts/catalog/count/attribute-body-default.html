@@ -9,7 +9,7 @@
 
 var attributeCounts = <?php echo json_encode( $this->get( 'attributeCountList', array() ), JSON_FORCE_OBJECT ); ?>;
 
-$( ".catalog-filter-attribute li.attr-item" ).each( function( index, item ) {	
+$( ".catalog-filter-attribute .attribute-lists li.attr-item" ).each( function( index, item ) {	
 	$(item).append( function() {
 		var itemId = $(this).data( "id" );
 		

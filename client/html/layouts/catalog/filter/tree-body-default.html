@@ -17,6 +17,7 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
 	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f-catalog-id' ) ); ?>" value="<?php echo $enc->attr( $catid ); ?>" />
 <?php endif; ?>
 <?php if( $this->treeCatalogTree ) : ?>
+	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Categories' ), $enc::TRUST ); ?></h2>
 	<ul class="level-<?php echo $enc->attr( $this->treeCatalogTree->getNode()->level ); ?>"><!--
 		--><?php echo $this->navtree( $this->treeCatalogTree, $path, $params ); ?><!--
 	--></ul>

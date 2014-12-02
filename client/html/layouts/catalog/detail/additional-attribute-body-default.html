@@ -11,10 +11,12 @@ $attrMap = $this->get( 'attributeMap', array() );
 $enc = $this->encoder();
 
 ?>
+<div class="additional-box">
 <?php if( count( $attrMap ) > 0 ) : ?>
-<h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristics' ), $enc::TRUST ); ?></h2>
-<table class="content attributes">
-	<tbody>
+	<h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristics' ), $enc::TRUST ); ?></h2>
+	<div class="content attributes">
+		<table class="attributes">
+			<tbody>
 <?php foreach( $attrMap as $type => $attrItems ) : ?>
 <?php	foreach( $attrItems as $attrItem ) : ?>
 <?php 	$classes = "";
@@ -26,10 +28,10 @@ $enc = $this->encoder();
 			}
 		}
 ?>
-		<tr class="item<?php echo $classes; ?>">
-			<td class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $type ), $enc::TRUST ); ?></td>
-			<td class="value">
-				<div class="media-list">
+				<tr class="item<?php echo $classes; ?>">
+					<td class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $type ), $enc::TRUST ); ?></td>
+					<td class="value">
+						<div class="media-list">
 <?php
 			foreach( $attrItem->getListItems( 'media', 'default' ) as $listItem )
 			{
@@ -38,13 +40,15 @@ $enc = $this->encoder();
 				}
 			}
 ?>
-				</div>
-				<span class="attr-name"><?php echo $enc->html( $attrItem->getName() ); ?></span>
-			</td>
-		</tr>
+						</div>
+						<span class="attr-name"><?php echo $enc->html( $attrItem->getName() ); ?></span>
+					</td>
+				</tr>
 <?php	endforeach; ?>
 <?php endforeach; ?>
-	</tbody>
-</table>
+			</tbody>
+		</table>
+	</div>
 <?php endif; ?>
 <?php echo $this->get( 'attributeBody' ); ?>
+</div>

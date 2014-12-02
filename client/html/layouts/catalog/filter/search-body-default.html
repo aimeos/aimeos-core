@@ -85,6 +85,7 @@ $listSimpleUrl = $enc->attr( $this->url( $listSimpleTarget, $listSimpleControlle
 
 ?>
 <section class="catalog-filter-search">
+	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Search' ), $enc::TRUST ); ?></h2>
 	<input class="value" type="text" name="<?php echo $name; ?>" value="<?php echo $phrase; ?>" data-url="<?php echo $listSimpleUrl; ?>" data-hint="<?php echo $hint; ?>" /><!--
 	--><button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Go' ), $enc::TRUST ); ?></button>
 <?php echo $this->get( 'searchBody' ); ?>
