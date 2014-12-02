@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.arcavias.com/en/license
+ * @copyright Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2014
  */
 
 $index = 0;
@@ -21,22 +22,46 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 	</div>
 <?php	endif; ?>
 <?php endforeach; ?>
-	<table class="selection">
-<?php foreach( $this->get( 'selectionAttributeTypeDependencies', array() ) as $type => $attrIds ) : asort( $attrIds ); ?>
-		<tr class="select-item">
-			<td class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $type ) ); ?></td>
-			<td class="select-value">
-				<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrvar-id', $type ) ) ); ?>" data-index="<?php echo $index++; ?>">
+	<ul class="selection">
+<?php foreach( $this->get( 'selectionAttributeTypeDependencies', array() ) as $code => $attrIds ) : asort( $attrIds ); ?>
+<?php	$layout = $this->config( 'client/html/catalog/detail/basket/selection/' . $code, 'select' ); ?>
+		<li class="select-item <?php echo $enc->attr( $layout ) . ' ' . $enc->attr( $code ); ?>">
+			<div class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></div>
+			<div class="select-value">
+<?php	if( $layout === 'radio' ) : ?>
+				<ul class="select-list" data-index="<?php echo $index++; ?>">
+<?php		foreach( $attrIds as $attrId => $position ) : ?>
+<?php			if( isset( $attributes[$attrId] ) ) : ?>
+					<li class="select-entry">
+						<input class="select-option" id="option-<?php echo $enc->attr( $attrId ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrvar-id', $code ) ) ); ?>" type="radio" value="<?php echo $enc->attr( $attrId ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : '' ); ?> />
+						<label class="select-label" for="option-<?php echo $enc->attr( $attrId ); ?>"><!--
+<?php
+					foreach( $attributes[$attrId]->getListItems( 'media', 'default' ) as $listItem )
+					{
+						if( ( $item = $listItem->getRefItem() ) !== null ) {
+							echo '-->' . $this->media( $item, $contentUrl, array( 'class' => 'media-item' ) ) . '<!--';
+						}
+					}
+?>
+							--><span><?php echo $enc->html( $attributes[$attrId]->getName() ); ?></span><!--
+						--></label>
+					</li>
+<?php			endif; ?>
+<?php		endforeach; ?>
+				</ul>
+<?php	else : ?>
+				<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrvar-id', $code ) ) ); ?>" data-index="<?php echo $index++; ?>">
 					<option class="select-option" value=""><?php echo $enc->attr( $this->translate( 'client/html', 'Please select' ) ); ?></option>
-<?php	foreach( $attrIds as $attrId => $position ) : ?>
-<?php		if( isset( $attributes[$attrId] ) ) : ?>
+<?php		foreach( $attrIds as $attrId => $position ) : ?>
+<?php			if( isset( $attributes[$attrId] ) ) : ?>
 					<option class="select-option" value="<?php echo $enc->attr( $attrId ); ?>"><?php echo $enc->html( $attributes[$attrId]->getName() ); ?></option>
-<?php		endif; ?>
-<?php	endforeach; ?>
+<?php			endif; ?>
+<?php		endforeach; ?>
 				</select>
-			</td>
-		</tr>
+<?php	endif; ?>
+			</div>
+		</li>
 <?php endforeach; ?>
-	</table>
+	</ul>
 <?php echo $this->get( 'selectionBody' ); ?>
 </div>

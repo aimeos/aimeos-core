@@ -9,13 +9,14 @@ $enc = $this->encoder();
 
 ?>
 <div class="catalog-detail-basket-attribute">
-	<table>
+	<ul class="selection">
 <?php foreach( $this->get( 'attributeConfigItems', array() ) as $code => $attributes ) : ?> 
-		<tr class="select-item">
-			<td class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></td>
-			<td class="select-value">
+<?php	$layout = $this->config( 'client/html/catalog/detail/basket/attribute/' . $code, 'select' ); ?>
+		<li class="select-item <?php echo $enc->attr( $layout ) . ' ' . $enc->attr( $code ); ?>">
+			<div class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></div>
+			<div class="select-value">
 				<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrconf-id' ) ) ); ?>">
-					<option class="select-option" value=""></option>
+					<option class="select-option" value=""><?php echo $enc->html( $this->translate( 'client/html', 'none' ) ); ?></option>
 <?php	foreach( $attributes as $id => $attribute ) : ?>
 					<option class="select-option" value="<?php echo $enc->attr( $id ); ?>">
 <?php
@@ -39,10 +40,10 @@ $enc = $this->encoder();
 					</option>
 <?php	endforeach; ?>
 				</select>
-			</td>
-		</tr>
+			</div>
+		</li>
 <?php endforeach; ?>
-	</table>
+	</ul>
 <?php foreach( $this->get( 'attributeHiddenItems', array() ) as $id => $attribute ) : ?> 
 	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b-prod', 0, 'attrhide-id', $id ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
 <?php endforeach; ?>
