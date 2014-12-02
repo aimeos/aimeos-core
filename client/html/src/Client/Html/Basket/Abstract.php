@@ -52,29 +52,10 @@ abstract class Client_Html_Basket_Abstract
 	 */
 	protected function _setCached( $key, $value )
 	{
-		$context = $this->_getContext();
+		$session = $this->_getContext()->getSession();
 
-		/** client/html/basket/cache/enable
-		 * Enables or disables caching of the basket content
-		 *
-		 * For performance reasons, the content of the small baskets is cached
-		 * in the session of the customer. The cache is updated each time the
-		 * basket content changes either by adding, deleting or editing products.
-		 *
-		 * To ease development, the caching can be disabled but you shouldn't
-		 * disable it in your production environment!
-		 *
-		 * @param boolean True to enable, false to disable basket content caching
-		 * @category Developer
-		 * @since 2014.11
-		 */
-		if( $context->getConfig()->get( 'client/html/basket/cache/enable', true ) != false )
-		{
-			$session = $context->getSession();
-
-			$cached = $session->get( 'arcavias/basket/cache', array() ) + array( $key => true );
-			$session->set( 'arcavias/basket/cache', $cached );
-			$session->set( $key, $value );
-		}
+		$cached = $session->get( 'arcavias/basket/cache', array() ) + array( $key => true );
+		$session->set( 'arcavias/basket/cache', $cached );
+		$session->set( $key, $value );
 	}
 }
