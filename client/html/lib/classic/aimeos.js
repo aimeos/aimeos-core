@@ -9,7 +9,7 @@
 /**
  * Initializes the slider for the thumbnail gallery (small images)
  */
-Aimeos_Catalog_Detail.setupThumbnailSlider = function() {
+AimeosCatalogDetail.setupThumbnailSlider = function() {
 
 	/* Slider for thumbnail gallery (small ones) */
 	$(".catalog-detail-image .thumbs").carouFredSel({
@@ -29,3 +29,9 @@ Aimeos_Catalog_Detail.setupThumbnailSlider = function() {
 		mousewheel: true
 	});
 };
+
+AimeosCatalogDetail.setupAdditionalContentSlider = function() {};
+AimeosCatalogDetail.setupBlockPriceSlider = function() {};
+AimeosCatalogFilter.setupCategoryToggle = function() {};
+AimeosCatalogFilter.setupAttributeToggle = function() {};
+AimeosCatalogFilter.setupAttributeListsToggle = function() {};
