@@ -14,8 +14,8 @@ $accountConfig = $this->config( 'client/html/account/history/url/config', array(
 
 ?>
 <div class="account-history-detail common-summary">
-	<a class="modify btn-close" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction, array(), array(), $accountConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Close' ), $enc::TRUST ); ?></a>
-	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Order details' ), $enc::TRUST ); ?></h2>
+	<a class="modify minibutton btn-close" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction, array(), array(), $accountConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'X' ), $enc::TRUST ); ?></a>
+	<h2 class="header"><?php echo $enc->html( $this->translate( 'client/html', 'Order details' ), $enc::TRUST ); ?></h2>
 <?php echo $this->get( 'detailBody' ); ?>
 	<div class="button-group">
 		<a class="standardbutton btn-close" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction, array(), array(), $accountConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Close' ), $enc::TRUST ); ?></a>

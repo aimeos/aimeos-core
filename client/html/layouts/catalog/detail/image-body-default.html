@@ -81,7 +81,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $this->get( 'detailParams', array() ), array(), $detailConfig ) );
 
 ?>
-<div class="catalog-detail-image">
+<div class="catalog-detail-image" data-dir="horizontal">
 <?php if( isset( $this->detailProductItem ) ) : ?>
 <?php	$mediaItems = $this->detailProductItem->getRefItems( 'media', 'default', 'default' ); ?>
 	<div class="image-single">

@@ -86,7 +86,7 @@ $enc = $this->encoder();
 ?>
 <?php if( !empty( $orderItems ) ) : ?>
 <div class="account-history-list">
-	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Order history' ), $enc::TRUST ); ?></h1>
+	<h1 class="header"><?php echo $enc->html( $this->translate( 'client/html', 'Order history' ), $enc::TRUST ); ?></h1>
 <?php	if( empty( $orderItems ) === false ) : ?>
 	<ul class="history-list">
 <?php		foreach( $orderItems as $id => $orderItem ) : ?>
