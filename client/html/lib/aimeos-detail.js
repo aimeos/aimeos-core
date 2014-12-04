@@ -1,22 +1,4 @@
 /*
- * backgroundSize: A jQuery cssHook adding support for "cover" and "contain" to IE6,7,8
- *
- * Requirements:
- * - jQuery 1.7.0+
- *
- * latest version and complete README available on Github:
- * https://github.com/louisremi/jquery.backgroundSize.js
- *
- * Copyright 2012 @louis_remi
- * Licensed under the MIT license.
- *
- * This saved you an hour of work?
- * Send me music http://www.amazon.co.uk/wishlist/HNTU0468LQON
- */
-(function(e,t,n,r,i){var s=e("<div>")[0],o=/url\(["']?(.*?)["']?\)/,u=[],a={top:0,left:0,bottom:1,right:1,center:.5};if("backgroundSize"in s.style&&!e.debugBGS){return}e.cssHooks.backgroundSize={set:function(t,n){var r=!e.data(t,"bgsImg"),i,s,o;e.data(t,"bgsValue",n);if(r){u.push(t);e.refreshBackgroundDimensions(t,true);s=e("<div>").css({position:"absolute",zIndex:-1,top:0,right:0,left:0,bottom:0,overflow:"hidden"});o=e("<img>").css({position:"absolute"}).appendTo(s),s.prependTo(t);e.data(t,"bgsImg",o[0]);i=(e.css(t,"backgroundPosition")||e.css(t,"backgroundPositionX")+" "+e.css(t,"backgroundPositionY")).split(" ");e.data(t,"bgsPos",[a[i[0]]||parseFloat(i[0])/100,a[i[1]]||parseFloat(i[1])/100]);e.css(t,"zIndex")=="auto"&&(t.style.zIndex=0);e.css(t,"position")=="static"&&(t.style.position="relative");e.refreshBackgroundImage(t)}else{e.refreshBackground(t)}},get:function(t){return e.data(t,"bgsValue")||""}};e.cssHooks.backgroundImage={set:function(t,n){return e.data(t,"bgsImg")?e.refreshBackgroundImage(t,n):n}};e.refreshBackgroundDimensions=function(t,n){var r=e(t),i={width:r.innerWidth(),height:r.innerHeight()},s=e.data(t,"bgsDim"),o=!s||i.width!=s.width||i.height!=s.height;e.data(t,"bgsDim",i);if(o&&!n){e.refreshBackground(t)}};e.refreshBackgroundImage=function(t,n){var r=e.data(t,"bgsImg"),i=(o.exec(n||e.css(t,"backgroundImage"))||[])[1],s=r&&r.src,u=i!=s,a,f;if(u){r.style.height=r.style.width="auto";r.onload=function(){var n={width:r.width,height:r.height};if(n.width==1&&n.height==1){return}e.data(t,"bgsImgDim",n);e.data(t,"bgsConstrain",false);e.refreshBackground(t);r.style.visibility="visible";r.onload=null};r.style.visibility="hidden";r.src=i;if(r.readyState||r.complete){r.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";r.src=i}t.style.backgroundImage="none"}};e.refreshBackground=function(t){var n=e.data(t,"bgsValue"),i=e.data(t,"bgsDim"),s=e.data(t,"bgsImgDim"),o=e(e.data(t,"bgsImg")),u=e.data(t,"bgsPos"),a=e.data(t,"bgsConstrain"),f,l=i.width/i.height,c=s.width/s.height,h;if(n=="contain"){if(c>l){e.data(t,"bgsConstrain",f="width");h=r.floor((i.height-i.width/c)*u[1]);o.css({top:h});if(f!=a){o.css({width:"100%",height:"auto",left:0})}}else{e.data(t,"bgsConstrain",f="height");h=r.floor((i.width-i.height*c)*u[0]);o.css({left:h});if(f!=a){o.css({height:"100%",width:"auto",top:0})}}}else if(n=="cover"){if(c>l){e.data(t,"bgsConstrain",f="height");h=r.floor((i.height*c-i.width)*u[0]);o.css({left:-h});if(f!=a){o.css({height:"100%",width:"auto",top:0})}}else{e.data(t,"bgsConstrain",f="width");h=r.floor((i.width/c-i.height)*u[1]);o.css({top:-h});if(f!=a){o.css({width:"100%",height:"auto",left:0})}}}};var f=e.event,l,c={_:0},h=0,p,d;l=f.special.throttledresize={setup:function(){e(this).on("resize",l.handler)},teardown:function(){e(this).off("resize",l.handler)},handler:function(t,n){var r=this,i=arguments;p=true;if(!d){e(c).animate(c,{duration:Infinity,step:function(){h++;if(h>l.threshold&&p||n){t.type="throttledresize";f.dispatch.apply(r,i);p=false;h=0}if(h>9){e(c).stop();d=false;h=0}}});d=true}},threshold:1};e(t).on("throttledresize",function(){e(u).each(function(){e.refreshBackgroundDimensions(this)})})})(jQuery,window,document,Math);
-
-
-/*
  *	jQuery carouFredSel 6.1.0
  *	Demo's and documentation:
  *	caroufredsel.frebsite.nl
@@ -93,766 +75,454 @@ if(typeof Object.create!=="function"){Object.create=function(e){function t(){}t.
 (function(e){function t(){var e=location.href;hashtag=e.indexOf("#prettyPhoto")!==-1?decodeURI(e.substring(e.indexOf("#prettyPhoto")+1,e.length)):false;return hashtag}function n(){if(typeof theRel=="undefined")return;location.hash=theRel+"/"+rel_index+"/"}function r(){if(location.href.indexOf("#prettyPhoto")!==-1)location.hash="prettyPhoto"}function i(e,t){e=e.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");var n="[\\?&]"+e+"=([^&#]*)";var r=new RegExp(n);var i=r.exec(t);return i==null?"":i[1]}e.prettyPhoto={version:"3.1.5"};e.fn.prettyPhoto=function(s){function g(){e(".pp_loaderIcon").hide();projectedTop=scroll_pos["scrollTop"]+(d/2-a["containerHeight"]/2);if(projectedTop<0)projectedTop=0;$ppt.fadeTo(settings.animation_speed,1);$pp_pic_holder.find(".pp_content").animate({height:a["contentHeight"],width:a["contentWidth"]},settings.animation_speed);$pp_pic_holder.animate({top:projectedTop,left:v/2-a["containerWidth"]/2<0?0:v/2-a["containerWidth"]/2,width:a["containerWidth"]},settings.animation_speed,function(){$pp_pic_holder.find(".pp_hoverContainer,#fullResImage").height(a["height"]).width(a["width"]);$pp_pic_holder.find(".pp_fade").fadeIn(settings.animation_speed);if(isSet&&S(pp_images[set_position])=="image"){$pp_pic_holder.find(".pp_hoverContainer").show()}else{$pp_pic_holder.find(".pp_hoverContainer").hide()}if(settings.allow_expand){if(a["resized"]){e("a.pp_expand,a.pp_contract").show()}else{e("a.pp_expand").hide()}}if(settings.autoplay_slideshow&&!m&&!f)e.prettyPhoto.startSlideshow();settings.changepicturecallback();f=true});C();s.ajaxcallback()}function y(t){$pp_pic_holder.find("#pp_full_res object,#pp_full_res embed").css("visibility","hidden");$pp_pic_holder.find(".pp_fade").fadeOut(settings.animation_speed,function(){e(".pp_loaderIcon").show();t()})}function b(t){t>1?e(".pp_nav").show():e(".pp_nav").hide()}function w(e,t){resized=false;E(e,t);imageWidth=e,imageHeight=t;if((p>v||h>d)&&doresize&&settings.allow_resize&&!u){resized=true,fitting=false;while(!fitting){if(p>v){imageWidth=v-200;imageHeight=t/e*imageWidth}else if(h>d){imageHeight=d-200;imageWidth=e/t*imageHeight}else{fitting=true}h=imageHeight,p=imageWidth}if(p>v||h>d){w(p,h)}E(imageWidth,imageHeight)}return{width:Math.floor(imageWidth),height:Math.floor(imageHeight),containerHeight:Math.floor(h),containerWidth:Math.floor(p)+settings.horizontal_padding*2,contentHeight:Math.floor(l),contentWidth:Math.floor(c),resized:resized}}function E(t,n){t=parseFloat(t);n=parseFloat(n);$pp_details=$pp_pic_holder.find(".pp_details");$pp_details.width(t);detailsHeight=parseFloat($pp_details.css("marginTop"))+parseFloat($pp_details.css("marginBottom"));$pp_details=$pp_details.clone().addClass(settings.theme).width(t).appendTo(e("body")).css({position:"absolute",top:-1e4});detailsHeight+=$pp_details.height();detailsHeight=detailsHeight<=34?36:detailsHeight;$pp_details.remove();$pp_title=$pp_pic_holder.find(".ppt");$pp_title.width(t);titleHeight=parseFloat($pp_title.css("marginTop"))+parseFloat($pp_title.css("marginBottom"));$pp_title=$pp_title.clone().appendTo(e("body")).css({position:"absolute",top:-1e4});titleHeight+=$pp_title.height();$pp_title.remove();l=n+detailsHeight;c=t;h=l+titleHeight+$pp_pic_holder.find(".pp_top").height()+$pp_pic_holder.find(".pp_bottom").height();p=t}function S(e){if(e.match(/youtube\.com\/watch/i)||e.match(/youtu\.be/i)){return"youtube"}else if(e.match(/vimeo\.com/i)){return"vimeo"}else if(e.match(/\b.mov\b/i)){return"quicktime"}else if(e.match(/\b.swf\b/i)){return"flash"}else if(e.match(/\biframe=true\b/i)){return"iframe"}else if(e.match(/\bajax=true\b/i)){return"ajax"}else if(e.match(/\bcustom=true\b/i)){return"custom"}else if(e.substr(0,1)=="#"){return"inline"}else{return"image"}}function x(){if(doresize&&typeof $pp_pic_holder!="undefined"){scroll_pos=T();contentHeight=$pp_pic_holder.height(),contentwidth=$pp_pic_holder.width();projectedTop=d/2+scroll_pos["scrollTop"]-contentHeight/2;if(projectedTop<0)projectedTop=0;if(contentHeight>d)return;$pp_pic_holder.css({top:projectedTop,left:v/2+scroll_pos["scrollLeft"]-contentwidth/2})}}function T(){if(self.pageYOffset){return{scrollTop:self.pageYOffset,scrollLeft:self.pageXOffset}}else if(document.documentElement&&document.documentElement.scrollTop){return{scrollTop:document.documentElement.scrollTop,scrollLeft:document.documentElement.scrollLeft}}else if(document.body){return{scrollTop:document.body.scrollTop,scrollLeft:document.body.scrollLeft}}}function N(){d=e(window).height(),v=e(window).width();if(typeof $pp_overlay!="undefined")$pp_overlay.height(e(document).height()).width(v)}function C(){if(isSet&&settings.overlay_gallery&&S(pp_images[set_position])=="image"){itemWidth=52+5;navWidth=settings.theme=="facebook"||settings.theme=="pp_default"?50:30;itemsPerPage=Math.floor((a["containerWidth"]-100-navWidth)/itemWidth);itemsPerPage=itemsPerPage<pp_images.length?itemsPerPage:pp_images.length;totalPage=Math.ceil(pp_images.length/itemsPerPage)-1;if(totalPage==0){navWidth=0;$pp_gallery.find(".pp_arrow_next,.pp_arrow_previous").hide()}else{$pp_gallery.find(".pp_arrow_next,.pp_arrow_previous").show()}galleryWidth=itemsPerPage*itemWidth;fullGalleryWidth=pp_images.length*itemWidth;$pp_gallery.css("margin-left",-(galleryWidth/2+navWidth/2)).find("div:first").width(galleryWidth+5).find("ul").width(fullGalleryWidth).find("li.selected").removeClass("selected");goToPage=Math.floor(set_position/itemsPerPage)<totalPage?Math.floor(set_position/itemsPerPage):totalPage;e.prettyPhoto.changeGalleryPage(goToPage);$pp_gallery_li.filter(":eq("+set_position+")").addClass("selected")}else{$pp_pic_holder.find(".pp_content").unbind("mouseenter mouseleave")}}function k(t){if(settings.social_tools)facebook_like_link=settings.social_tools.replace("{location_href}",encodeURIComponent(location.href));settings.markup=settings.markup.replace("{pp_social}","");e("body").append(settings.markup);$pp_pic_holder=e(".pp_pic_holder"),$ppt=e(".ppt"),$pp_overlay=e("div.pp_overlay");if(isSet&&settings.overlay_gallery){currentGalleryPage=0;toInject="";for(var n=0;n<pp_images.length;n++){if(!pp_images[n].match(/\b(jpg|jpeg|png|gif)\b/gi)){classname="default";img_src=""}else{classname="";img_src=pp_images[n]}toInject+="<li class='"+classname+"'><a href='#'><img src='"+img_src+"' width='50' alt='' /></a></li>"}toInject=settings.gallery_markup.replace(/{gallery}/g,toInject);$pp_pic_holder.find("#pp_full_res").after(toInject);$pp_gallery=e(".pp_pic_holder .pp_gallery"),$pp_gallery_li=$pp_gallery.find("li");$pp_gallery.find(".pp_arrow_next").click(function(){e.prettyPhoto.changeGalleryPage("next");e.prettyPhoto.stopSlideshow();return false});$pp_gallery.find(".pp_arrow_previous").click(function(){e.prettyPhoto.changeGalleryPage("previous");e.prettyPhoto.stopSlideshow();return false});$pp_pic_holder.find(".pp_content").hover(function(){$pp_pic_holder.find(".pp_gallery:not(.disabled)").fadeIn()},function(){$pp_pic_holder.find(".pp_gallery:not(.disabled)").fadeOut()});itemWidth=52+5;$pp_gallery_li.each(function(t){e(this).find("a").click(function(){e.prettyPhoto.changePage(t);e.prettyPhoto.stopSlideshow();return false})})}if(settings.slideshow){$pp_pic_holder.find(".pp_nav").prepend('<a href="#" class="pp_play">Play</a>');$pp_pic_holder.find(".pp_nav .pp_play").click(function(){e.prettyPhoto.startSlideshow();return false})}$pp_pic_holder.attr("class","pp_pic_holder "+settings.theme);$pp_overlay.css({opacity:0,height:e(document).height(),width:e(window).width()}).bind("click",function(){if(!settings.modal)e.prettyPhoto.close()});e("a.pp_close").bind("click",function(){e.prettyPhoto.close();return false});if(settings.allow_expand){e("a.pp_expand").bind("click",function(t){if(e(this).hasClass("pp_expand")){e(this).removeClass("pp_expand").addClass("pp_contract");doresize=false}else{e(this).removeClass("pp_contract").addClass("pp_expand");doresize=true}y(function(){e.prettyPhoto.open()});return false})}$pp_pic_holder.find(".pp_previous, .pp_nav .pp_arrow_previous").bind("click",function(){e.prettyPhoto.changePage("previous");e.prettyPhoto.stopSlideshow();return false});$pp_pic_holder.find(".pp_next, .pp_nav .pp_arrow_next").bind("click",function(){e.prettyPhoto.changePage("next");e.prettyPhoto.stopSlideshow();return false});x()}s=jQuery.extend({hook:"rel",animation_speed:"fast",ajaxcallback:function(){},slideshow:5e3,autoplay_slideshow:false,opacity:.8,show_title:true,allow_resize:true,allow_expand:true,default_width:500,default_height:344,counter_separator_label:"/",theme:"pp_default",horizontal_padding:20,hideflash:false,wmode:"opaque",autoplay:true,modal:false,deeplinking:true,overlay_gallery:true,overlay_gallery_max:30,keyboard_shortcuts:true,changepicturecallback:function(){},callback:function(){},ie6_fallback:true,markup:'<div class="pp_pic_holder"> 						<div class="ppt"> </div> 						<div class="pp_top"> 							<div class="pp_left"></div> 							<div class="pp_middle"></div> 							<div class="pp_right"></div> 						</div> 						<div class="pp_content_container"> 							<div class="pp_left"> 							<div class="pp_right"> 								<div class="pp_content"> 									<div class="pp_loaderIcon"></div> 									<div class="pp_fade"> 										<a href="#" class="pp_expand" title="Expand the image">Expand</a> 										<div class="pp_hoverContainer"> 											<a class="pp_next" href="#">next</a> 											<a class="pp_previous" href="#">previous</a> 										</div> 										<div id="pp_full_res"></div> 										<div class="pp_details"> 											<div class="pp_nav"> 												<a href="#" class="pp_arrow_previous">Previous</a> 												<p class="currentTextHolder">0/0</p> 												<a href="#" class="pp_arrow_next">Next</a> 											</div> 											<p class="pp_description"></p> 											<div class="pp_social">{pp_social}</div> 											<a class="pp_close" href="#">Close</a> 										</div> 									</div> 								</div> 							</div> 							</div> 						</div> 						<div class="pp_bottom"> 							<div class="pp_left"></div> 							<div class="pp_middle"></div> 							<div class="pp_right"></div> 						</div> 					</div> 					<div class="pp_overlay"></div>',gallery_markup:'<div class="pp_gallery"> 								<a href="#" class="pp_arrow_previous">Previous</a> 								<div> 									<ul> 										{gallery} 									</ul> 								</div> 								<a href="#" class="pp_arrow_next">Next</a> 							</div>',image_markup:'<img id="fullResImage" src="{path}" />',flash_markup:'<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="{width}" height="{height}"><param name="wmode" value="{wmode}" /><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="{path}" /><embed src="{path}" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="{width}" height="{height}" wmode="{wmode}"></embed></object>',quicktime_markup:'<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" height="{height}" width="{width}"><param name="src" value="{path}"><param name="autoplay" value="{autoplay}"><param name="type" value="video/quicktime"><embed src="{path}" height="{height}" width="{width}" autoplay="{autoplay}" type="video/quicktime" pluginspage="http://www.apple.com/quicktime/download/"></embed></object>',iframe_markup:'<iframe src ="{path}" width="{width}" height="{height}" frameborder="no"></iframe>',inline_markup:'<div class="pp_inline">{content}</div>',custom_markup:"",social_tools:'<div class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div><div class="facebook"><iframe src="//www.facebook.com/plugins/like.php?locale=en_US&href={location_href}&layout=button_count&show_faces=true&width=500&action=like&font&colorscheme=light&height=23" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:500px; height:23px;" allowTransparency="true"></iframe></div>'},s);var o=this,u=false,a,f,l,c,h,p,d=e(window).height(),v=e(window).width(),m;doresize=true,scroll_pos=T();e(window).unbind("resize.prettyphoto").bind("resize.prettyphoto",function(){x();N()});if(s.keyboard_shortcuts){e(document).unbind("keydown.prettyphoto").bind("keydown.prettyphoto",function(t){if(typeof $pp_pic_holder!="undefined"){if($pp_pic_holder.is(":visible")){switch(t.keyCode){case 37:e.prettyPhoto.changePage("previous");t.preventDefault();break;case 39:e.prettyPhoto.changePage("next");t.preventDefault();break;case 27:if(!settings.modal)e.prettyPhoto.close();t.preventDefault();break}}}})}e.prettyPhoto.initialize=function(){settings=s;if(settings.theme=="pp_default")settings.horizontal_padding=16;theRel=e(this).attr(settings.hook);galleryRegExp=/\[(?:.*)\]/;isSet=galleryRegExp.exec(theRel)?true:false;pp_images=isSet?jQuery.map(o,function(t,n){if(e(t).attr(settings.hook).indexOf(theRel)!=-1)return e(t).attr("href")}):e.makeArray(e(this).attr("href"));pp_titles=isSet?jQuery.map(o,function(t,n){if(e(t).attr(settings.hook).indexOf(theRel)!=-1)return e(t).find("img").attr("alt")?e(t).find("img").attr("alt"):""}):e.makeArray(e(this).find("img").attr("alt"));pp_descriptions=isSet?jQuery.map(o,function(t,n){if(e(t).attr(settings.hook).indexOf(theRel)!=-1)return e(t).attr("title")?e(t).attr("title"):""}):e.makeArray(e(this).attr("title"));if(pp_images.length>settings.overlay_gallery_max)settings.overlay_gallery=false;set_position=jQuery.inArray(e(this).attr("href"),pp_images);rel_index=isSet?set_position:e("a["+settings.hook+"^='"+theRel+"']").index(e(this));k(this);if(settings.allow_resize)e(window).bind("scroll.prettyphoto",function(){x()});e.prettyPhoto.open();return false};e.prettyPhoto.open=function(t){if(typeof settings=="undefined"){settings=s;pp_images=e.makeArray(arguments[0]);pp_titles=arguments[1]?e.makeArray(arguments[1]):e.makeArray("");pp_descriptions=arguments[2]?e.makeArray(arguments[2]):e.makeArray("");isSet=pp_images.length>1?true:false;set_position=arguments[3]?arguments[3]:0;k(t.target)}if(settings.hideflash)e("object,embed,iframe[src*=youtube],iframe[src*=vimeo]").css("visibility","hidden");b(e(pp_images).size());e(".pp_loaderIcon").show();if(settings.deeplinking)n();if(settings.social_tools){facebook_like_link=settings.social_tools.replace("{location_href}",encodeURIComponent(location.href));$pp_pic_holder.find(".pp_social").html(facebook_like_link)}if($ppt.is(":hidden"))$ppt.css("opacity",0).show();$pp_overlay.show().fadeTo(settings.animation_speed,settings.opacity);$pp_pic_holder.find(".currentTextHolder").text(set_position+1+settings.counter_separator_label+e(pp_images).size());if(typeof pp_descriptions[set_position]!="undefined"&&pp_descriptions[set_position]!=""){$pp_pic_holder.find(".pp_description").show().html(unescape(pp_descriptions[set_position]))}else{$pp_pic_holder.find(".pp_description").hide()}movie_width=parseFloat(i("width",pp_images[set_position]))?i("width",pp_images[set_position]):settings.default_width.toString();movie_height=parseFloat(i("height",pp_images[set_position]))?i("height",pp_images[set_position]):settings.default_height.toString();u=false;if(movie_height.indexOf("%")!=-1){movie_height=parseFloat(e(window).height()*parseFloat(movie_height)/100-150);u=true}if(movie_width.indexOf("%")!=-1){movie_width=parseFloat(e(window).width()*parseFloat(movie_width)/100-150);u=true}$pp_pic_holder.fadeIn(function(){settings.show_title&&pp_titles[set_position]!=""&&typeof pp_titles[set_position]!="undefined"?$ppt.html(unescape(pp_titles[set_position])):$ppt.html(" ");imgPreloader="";skipInjection=false;switch(S(pp_images[set_position])){case"image":imgPreloader=new Image;nextImage=new Image;if(isSet&&set_position<e(pp_images).size()-1)nextImage.src=pp_images[set_position+1];prevImage=new Image;if(isSet&&pp_images[set_position-1])prevImage.src=pp_images[set_position-1];$pp_pic_holder.find("#pp_full_res")[0].innerHTML=settings.image_markup.replace(/{path}/g,pp_images[set_position]);imgPreloader.onload=function(){a=w(imgPreloader.width,imgPreloader.height);g()};imgPreloader.onerror=function(){alert("Image cannot be loaded. Make sure the path is correct and image exist.");e.prettyPhoto.close()};imgPreloader.src=pp_images[set_position];break;case"youtube":a=w(movie_width,movie_height);movie_id=i("v",pp_images[set_position]);if(movie_id==""){movie_id=pp_images[set_position].split("youtu.be/");movie_id=movie_id[1];if(movie_id.indexOf("?")>0)movie_id=movie_id.substr(0,movie_id.indexOf("?"));if(movie_id.indexOf("&")>0)movie_id=movie_id.substr(0,movie_id.indexOf("&"))}movie="http://www.youtube.com/embed/"+movie_id;i("rel",pp_images[set_position])?movie+="?rel="+i("rel",pp_images[set_position]):movie+="?rel=1";if(settings.autoplay)movie+="&autoplay=1";toInject=settings.iframe_markup.replace(/{width}/g,a["width"]).replace(/{height}/g,a["height"]).replace(/{wmode}/g,settings.wmode).replace(/{path}/g,movie);break;case"vimeo":a=w(movie_width,movie_height);movie_id=pp_images[set_position];var t=/http(s?):\/\/(www\.)?vimeo.com\/(\d+)/;var n=movie_id.match(t);movie="http://player.vimeo.com/video/"+n[3]+"?title=0&byline=0&portrait=0";if(settings.autoplay)movie+="&autoplay=1;";vimeo_width=a["width"]+"/embed/?moog_width="+a["width"];toInject=settings.iframe_markup.replace(/{width}/g,vimeo_width).replace(/{height}/g,a["height"]).replace(/{path}/g,movie);break;case"quicktime":a=w(movie_width,movie_height);a["height"]+=15;a["contentHeight"]+=15;a["containerHeight"]+=15;toInject=settings.quicktime_markup.replace(/{width}/g,a["width"]).replace(/{height}/g,a["height"]).replace(/{wmode}/g,settings.wmode).replace(/{path}/g,pp_images[set_position]).replace(/{autoplay}/g,settings.autoplay);break;case"flash":a=w(movie_width,movie_height);flash_vars=pp_images[set_position];flash_vars=flash_vars.substring(pp_images[set_position].indexOf("flashvars")+10,pp_images[set_position].length);filename=pp_images[set_position];filename=filename.substring(0,filename.indexOf("?"));toInject=settings.flash_markup.replace(/{width}/g,a["width"]).replace(/{height}/g,a["height"]).replace(/{wmode}/g,settings.wmode).replace(/{path}/g,filename+"?"+flash_vars);break;case"iframe":a=w(movie_width,movie_height);frame_url=pp_images[set_position];frame_url=frame_url.substr(0,frame_url.indexOf("iframe")-1);toInject=settings.iframe_markup.replace(/{width}/g,a["width"]).replace(/{height}/g,a["height"]).replace(/{path}/g,frame_url);break;case"ajax":doresize=false;a=w(movie_width,movie_height);doresize=true;skipInjection=true;e.get(pp_images[set_position],function(e){toInject=settings.inline_markup.replace(/{content}/g,e);$pp_pic_holder.find("#pp_full_res")[0].innerHTML=toInject;g()});break;case"custom":a=w(movie_width,movie_height);toInject=settings.custom_markup;break;case"inline":myClone=e(pp_images[set_position]).clone().append('<br clear="all" />').css({width:settings.default_width}).wrapInner('<div id="pp_full_res"><div class="pp_inline"></div></div>').appendTo(e("body")).show();doresize=false;a=w(e(myClone).width(),e(myClone).height());doresize=true;e(myClone).remove();toInject=settings.inline_markup.replace(/{content}/g,e(pp_images[set_position]).html());break}if(!imgPreloader&&!skipInjection){$pp_pic_holder.find("#pp_full_res")[0].innerHTML=toInject;g()}});return false};e.prettyPhoto.changePage=function(t){currentGalleryPage=0;if(t=="previous"){set_position--;if(set_position<0)set_position=e(pp_images).size()-1}else if(t=="next"){set_position++;if(set_position>e(pp_images).size()-1)set_position=0}else{set_position=t}rel_index=set_position;if(!doresize)doresize=true;if(settings.allow_expand){e(".pp_contract").removeClass("pp_contract").addClass("pp_expand")}y(function(){e.prettyPhoto.open()})};e.prettyPhoto.changeGalleryPage=function(e){if(e=="next"){currentGalleryPage++;if(currentGalleryPage>totalPage)currentGalleryPage=0}else if(e=="previous"){currentGalleryPage--;if(currentGalleryPage<0)currentGalleryPage=totalPage}else{currentGalleryPage=e}slide_speed=e=="next"||e=="previous"?settings.animation_speed:0;slide_to=currentGalleryPage*itemsPerPage*itemWidth;$pp_gallery.find("ul").animate({left:-slide_to},slide_speed)};e.prettyPhoto.startSlideshow=function(){if(typeof m=="undefined"){$pp_pic_holder.find(".pp_play").unbind("click").removeClass("pp_play").addClass("pp_pause").click(function(){e.prettyPhoto.stopSlideshow();return false});m=setInterval(e.prettyPhoto.startSlideshow,settings.slideshow)}else{e.prettyPhoto.changePage("next")}};e.prettyPhoto.stopSlideshow=function(){$pp_pic_holder.find(".pp_pause").unbind("click").removeClass("pp_pause").addClass("pp_play").click(function(){e.prettyPhoto.startSlideshow();return false});clearInterval(m);m=undefined};e.prettyPhoto.close=function(){if($pp_overlay.is(":animated"))return;e.prettyPhoto.stopSlideshow();$pp_pic_holder.stop().find("object,embed").css("visibility","hidden");e("div.pp_pic_holder,div.ppt,.pp_fade").fadeOut(settings.animation_speed,function(){e(this).remove()});$pp_overlay.fadeOut(settings.animation_speed,function(){if(settings.hideflash)e("object,embed,iframe[src*=youtube],iframe[src*=vimeo]").css("visibility","visible");e(this).remove();e(window).unbind("scroll.prettyphoto");r();settings.callback();doresize=true;f=false;delete settings})};if(!pp_alreadyInitialized&&t()){pp_alreadyInitialized=true;hashIndex=t();hashRel=hashIndex;hashIndex=hashIndex.substring(hashIndex.indexOf("/")+1,hashIndex.length-1);hashRel=hashRel.substring(0,hashRel.indexOf("/"));setTimeout(function(){e("a["+s.hook+"^='"+hashRel+"']:eq("+hashIndex+")").trigger("click")},50)}return this.unbind("click.prettyphoto").bind("click.prettyphoto",e.prettyPhoto.initialize)};})(jQuery);var pp_alreadyInitialized=false;
 
 
-/*
- * Arcavias related Javascript code
+
+/**
+ * Aimeos detail related Javascript code
  * 
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://www.arcavias.com/en/license
+ * @copyright Metaways Infosystems GmbH, 2012
+ * @copyright Aimeos (aimeos.org), 2014
  */
 
 
-/*
- * CSS3 support for IE8
+
+/**
+ * Aimeos catalog detail actions
  */
-document.createElement("nav");
-document.createElement("section");
-document.createElement("article");
+AimeosCatalogDetail = {
+	
+	/**
+	 * Initializes the image zoom for big images
+	 */
+	zoomImage: function(item, container) {
+	
+		var options = {
+			responsive: true,
+			scrollZoom: true,
+			easing : true,
+			borderSize: 1,
+			borderColour: container.css("border-top-color"),
+			loadingIcon: '../css/images/progress.gif',
+			lensFadeIn: 500,
+			lensFadeOut: 500,
+			zoomLevel: 0.75,
+			zoomWindowFadeIn: 500,
+			zoomWindowFadeOut: 500,
+			zoomWindowWidth: container.width(),
+			zoomWindowHeight: container.height(),
+			zoomWindowBgColour: container.css("background-color"),
+			zoomWindowPosition: 1,
+			zoomWindowOffetx: 10
+		};
+		
+		if( item.offset().left + item.outerWidth() + options.zoomWindowWidth + options.zoomWindowOffetx > $(window).width() ) {
+			options.zoomType = 'inner';
+			options.cursor = 'crosshair';
+			options.zoomLevel = 1; // behaves strange on other levels
+		}
+	
+		item.elevateZoom(options);
+	},
+	
+	
+	/**
+	 * Initializes the slider for the thumbnail gallery (small images)
+	 */
+	setupThumbnailSlider: function() {
+	
+		$(".catalog-detail-image").each( function(idx,e) {
+			var dir = "left";
+	
+			if( $(e).data("dir") === "vertical" && $(e).outerWidth() >= $(".image-single .item", e).outerWidth() + $(".thumbs", e).outerWidth() ) {
+				dir = "down";
+			}
+	
+			$(".thumbs", this).carouFredSel({
+				responsive: false,
+				circular: false,
+				infinite: false,
+				auto: false,
+				prev: ".prev-thumbs",
+				next: ".next-thumbs",
+				direction: dir,
+				items: {
+					visible: {
+						min: 5,
+						max: 5
+					}
+				},
+				swipe: true,
+				mousewheel: true
+			});
+		});
+	},
+	
+	
+	/**
+	 * Enables image zoom for first image by default
+	 */
+	setupFirstImageZoom: function() {
+	
+		$(".catalog-detail-image .image-single").each( function() {
+			
+			if(window.location.hash) {
+				AimeosCatalogDetail.zoomImage( $(window.location.hash), $(this) );
+			} else {
+				AimeosCatalogDetail.zoomImage( $(".item", this).first(), $(this) );
+			}
+		});
+	},
+	
+	
+	/**
+	 * Displays the big image and highlight thumbnail after it was selected
+	 */
+	setupImageSwap: function() {
+	
+		$(".catalog-detail-image").on("click", ".thumbs .item", {}, function(event) {
+			
+			var imageId = this.href.split("#").pop();
+			var container = $(".image-single", event.delegateTarget);
+		
+			$(".zoomContainer").remove();
+			AimeosCatalogDetail.zoomImage($("#" + imageId), container);
+			window.location.hash = '#' + imageId;
+			
+			$(".thumbs .item", event.delegateTarget).removeClass("selected");
+			$(this).addClass("selected");
+			
+			return false;
+		});
+	},
+	
+	
+	/**
+	 * Opens the lightbox with big images
+	 */
+	setupImageLightbox: function() {
+	
+		$(".catalog-detail-image .image-single").on("click", ".item", {}, function(event) {
+		
+			var list = [];
+			$(".item", event.delegateTarget).each(function() {
+				list.push( $(this).data("zoom-image") );
+			});
+			
+			$.fn.prettyPhoto({ allow_resize: true, social_tools: false });
+			$.prettyPhoto.open(list);
+		});
+	},
+	
+	
+	/**
+	 * Evaluates the product variant dependencies.
+	 * 
+	 * It does not only work with <select> and <option> tags but also if a
+	 * 
+	 * <div class="select-list" data-index="<index value: 0-31>"> and
+	 * 
+	 * <input class="select-option" type="radio"> or
+	 * <input class="select-option" type="checkbox">
+	 * 
+	 * are used. The data-index attribute of the .select-list container is
+	 * required to calculate the disabled attributes for each option according
+	 * to its dependencies. It must start with "0" and an unique, ascending value
+	 * must be assigned to each container. The maximum number of possible indexes
+	 * (and therefore dependent containers within an .selection node) is 31
+	 * because it's an integer bitmap.
+	 */
+	setupSelectionDependencies: function() {
+	
+		$(".catalog-detail-basket-selection").on("change", ".select-list", function(event) {
+		
+			var elem = $(this);
+			var index = elem.data("index");
+			var value = elem.find(".select-option:checked").val();
+			
+			var attrDeps = $(event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
+			var prodDeps = $(event.delegateTarget).data("proddeps") || {}; // {"<prodid>":["attrid",...],...}
+			var attrMap = {}, attrList = [];
+		
+			
+			if( typeof index === "undefined" ) {
+				throw new Error( "HTML select node has no attribute data-index" );
+			}
+			
+		
+			// Retrieves the list of available attribute ID => product ID
+			// combinations for the selected value
+			if( attrDeps.hasOwnProperty(value) ) {
+		
+				for( var i=0; i<attrDeps[value].length; i++ ) {
+					
+					var prodId = attrDeps[value][i];
+		
+					if( prodDeps.hasOwnProperty(prodId) ) {
+		
+						for( var j=0; j<prodDeps[prodId].length; j++ ) {
+							attrMap[prodDeps[prodId][j]] = prodId;
+						}
+					}
+				}
+			}
+		
+		
+			$(".select-list", event.delegateTarget).each(function(i, select) {
+				
+				if( event.currentTarget == select ) {
+					return;
+				}
+		
+				$(this).find(".select-option").each(function(i, option) {
+					
+					var opt = $(option);
+					var val = opt.val();
+					var by = opt.data("by") || {};
+					var disabled = opt.data("disabled") || 0;
+					
+					
+					// Sets or removes the disabled bits in the bitmap of the
+					// .select-option and by which .select-list it was disabled.
+					// Each option can be disabled by multiple dependencies and
+					// we can remove each of the bits separately again.
+					if( value !== "" && val !== "" && !attrMap.hasOwnProperty(val) ) {
+						disabled |= 2<<index;
+						by[index] = 1;
+					} else if( by.hasOwnProperty(index) ) {
+						disabled &= ~(2<<index);
+						delete by[index];
+					}
+					
+					if( disabled > 0 ) {
+						opt.attr("disabled", "disabled");
+					} else {
+						opt.removeAttr("disabled");
+					}
+		
+					opt.data("disabled", disabled);
+					opt.data("by", by);
+				});
+			});
+		});
+	},
+	
+	
+	/**
+	 * Displays the associated stock level, price items and attributes for the selected product variant
+	 */
+	setupSelectionContent: function() {
+	
+		$(".catalog-detail-basket-selection").on("change", ".select-list", function(event) {
+	
+			var map = {}, len = 0;
+			var attrDeps = $(event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
+	
+			
+			$(".select-option:checked", event.delegateTarget).each(function(i, option) {
+			
+				var value = $(option).val();
+	
+				if( value !== "" && attrDeps.hasOwnProperty(value) ) {
+	
+					for( var i=0; i<attrDeps[value].length; i++ ) {
+						
+						if( map.hasOwnProperty(attrDeps[value][i]) ) {
+							map[attrDeps[value][i]]++;
+						} else {
+							map[attrDeps[value][i]] = 1;
+						}
+					}
+				}
+				
+				len++;
+			});
+			
+			
+			for( var prodId in map ) {
+				
+				if( map.hasOwnProperty(prodId) && map[prodId] === len ) {
+	
+					var parent = $(".catalog-detail-basket");
+					var newPrice = $(".price-prodid-" + prodId, parent);
+					var newStock = $(".stock-prodid-" + prodId, parent);
+					
+					if( newPrice.length === 0 ) {
+						newPrice = $(".price-main", parent);
+					}
+	
+					if( newStock.length === 0 ) {
+						newStock = $(".stockitem:first-child", parent);
+					}
+					
+					$(".price", parent).removeClass("price-actual");
+					newPrice.addClass("price-actual");
+					
+					$(".stockitem", parent).removeClass("stock-actual");
+					newStock.addClass("stock-actual");
+					
+					if( parent.data("reqstock") && newStock.hasClass("stock-out") ) {
+						$(".addbasket .btn-action", parent).addClass("btn-disabled").attr("disabled", "disabled");
+					} else {
+						$(".addbasket .btn-action", parent).removeClass("btn-disabled").removeAttr("disabled");
+					}
+				}
+			}
+			
+			$(".catalog-detail-additional .attributes .subproduct-actual").removeClass("subproduct-actual");
+			$(".catalog-detail-additional .attributes .subproduct-" + prodId).addClass("subproduct-actual");
+		});
+	},
+		
+		
+	/**
+	 * Checks if all required variant attributes are selected
+	 */
+	setupVariantCheck: function() {
+	
+		$(".catalog-detail-basket").on("click", ".addbasket .btn-action", {}, function(event) {
+			
+			var result = true;
+	
+			$(".selection .select-item", event.delegateTarget).each( function() {
+				
+				if( $(".select-list", this).val() != '' || $(".select-option:checked", this).length > 0 ) {
+					$(this).removeClass("error");
+				} else {
+					$(this).addClass("error");
+					result = false;
+				}
+			});
+			
+			return result;
+		});
+	},
+	
+	
+	/**
+	 * Initializes the slide in/out for block prices
+	 */
+	setupBlockPriceSlider: function() {
+	
+		$(".catalog-detail-basket .price-item:not(.price-item:first-child)").hide();
+		
+	    $(".catalog-detail-basket .price").on("click", function(ev) {
+	        $(".price-item:not(.price-item:first-child)", this).slideToggle();
+	    	$(".price-item:first-child", ev.delegateTarget).toggleClass("toggle-js");
+	    });
+	},
+	
+		
+	/**
+	 * Initializes the slide in/out for additional content
+	 */
+	setupAdditionalContentSlider: function() {
+	
+		$(".catalog-detail-additional .content").hide();
+	
+		$(".catalog-detail-additional .additional-box").on("click", ".header", function(ev) {
+	        $(".content", ev.delegateTarget).slideToggle();
+	    	$(".header", ev.delegateTarget).toggleClass("toggle-js");
+	    });
+	},
+	
+	
+	/**
+	 * Adds a product to the favorite list without page reload
+	 */
+	setupFavoriteAction: function() {
+	
+		$(".catalog-detail-actions .actions-button-favorite").on("click", function(ev) {
+		
+		    if($(this).data("login")) {
+		        return true;
+		    }
+		
+		    Aimeos.createOverlay();
+		
+		    $.get($(this).attr("href"), function(data) {
+		
+		        var doc = document.createElement("html");
+		        doc.innerHTML = data;
+		
+		        Aimeos.createContainer($(".account-favorite", doc));
+		    });
+		
+		    return false;
+		});
+	},
+	
+	
+	/**
+	 * Adds a product to the watch list without page reload
+	 */
+	setupWatchAction: function() {
+	
+		$(".catalog-detail-actions .actions-button-watch").on("click", function(ev) {
+		
+		    if($(this).data("login")) {
+		        return true;
+		    }
+		
+		    Aimeos.createOverlay();
+		
+		    $.get($(this).attr("href"), function(data) {
+		
+		        var doc = document.createElement("html");
+		        doc.innerHTML = data;
+		
+		        Aimeos.createContainer($(".account-watch", doc));
+		    });
+		
+		    return false;
+		});
+	},
+	
+	
+	/**
+	 * Adds products to the basket without page reload
+	 */
+	setupBasketAdd: function(data) {
+	
+		$(".catalog-detail-basket form").on("submit", function(ev) {
+		
+		    Aimeos.createOverlay();
+		    $.post($(this).attr("action"), $(this).serialize(), function(data) {
+		        Aimeos.createContainer(AimeosBasketStandard.updateBasket(data));
+		    });
+		
+		    return false;
+		});
+	},
+	
+	
+	/**
+	 * Initialize the catalog detail actions
+	 */
+	init: function() {
+		
+		this.setupBlockPriceSlider();
+		this.setupAdditionalContentSlider();
+	
+		this.setupFirstImageZoom();
+		this.setupThumbnailSlider();
+		this.setupImageLightbox();
+		this.setupImageSwap();
+		
+		this.setupFavoriteAction();
+		this.setupWatchAction();
+		
+		this.setupSelectionDependencies();
+		this.setupSelectionContent();
+		this.setupVariantCheck();
+		this.setupBasketAdd();
+	}
+};
 
 
-/* Lazy product image loading in list view */
-var arcaviasLazyLoader = (function() {
-    var elements = $(".catalog-list-items .lazy-image, .catalog-list-promo .lazy-image");
-    for( var i = 0; i < elements.length; i++) {
-        var element = $(elements[i]);
-        if($(window).scrollTop() + $(window).height() + 2 * element.height() >= element.offset().top) {
-            element.css("background-image", "url('" + element.data("src") + "')");
-            element.removeClass("lazy-image");
-        }
-    }
+
+/**
+ * Setup the JS for the catalog detail section
+ */
+jQuery(document).ready( function($) {
+	AimeosCatalogDetail.init();
 });
-
-arcaviasLazyLoader();
-
-
-jQuery(document).ready(
-    function($) {
-
-        /*
-         * Locale selector
-         */
-        $(".select-menu .select-dropdown").click(function() {
-            $("ul", this).toggleClass("active");
-            $(this).toggleClass("active");
-        });
-
-
-        /*
-         * Catalog clients
-         */
-
-        /* CSS3 "background-size: contain" support for IE8 */
-        $(".catalog-list-items .media-item").css("background-size", "contain");
-        $(".catalog-detail-image .item").css("background-size", "contain");
-
-
-        /* Catalog filter */
-        $(".catalog-filter form").on("submit", function(ev) {
-
-            var result = true;
-            var form = $(this);
-
-            $("input.value", this).each(function() {
-
-                var input = $(this);
-
-                if(input.val() !== '' && input.val().length < 3) {
-
-                    if($(this).has(".search-hint").length === 0) {
-
-                        var node = $('<div/>', {
-                            html : input.data("hint"),
-                            class : "search-hint"
-                        });
-                        $(".catalog-filter-search", form).after(node);
-
-                        var pos = node.position();
-                        node.css("left", pos.left).css("top", pos.top);
-                        node.delay(3000).fadeOut(1000, function() {
-                            node.remove();
-                        });
-                    }
-
-                    result = false;
-                }
-            });
-
-            return result;
-        });
-
-
-        /* Fade out on page reload */
-        $(".catalog-filter-tree li.cat-item").on("click", function() {
-            $(".catalog-list").fadeTo(1000, 0.5);
-        });
-
-        /* Submit form when clicking on filter attribute names or counts */
-        $(".catalog-filter-attribute li.attr-item").on("click", ".attr-name, .attr-count", function(ev) {
-
-            var input = $("input", ev.delegateTarget);
-            input.prop("checked") ? input.prop("checked", false) : input.prop("checked", true);
-
-            $(this).parents(".catalog-filter form").submit();
-            $(".catalog-list").fadeTo(1000, 0.5);
-        });
-
-        /* Submit form when clicking on filter attributes */
-        $(".catalog-filter-attribute input.attr-item").on("click", function() {
-            $(this).parents(".catalog-filter form").submit();
-            $(".catalog-list").fadeTo(1000, 0.5);
-        });
-
-
-        /* Autocompleter for quick search */
-        var arcaviasInputComplete = $(".catalog-filter-search .value");
-        arcaviasInputComplete.autocomplete({
-            minLength : 3,
-            delay : 200,
-            source : function(req, add) {
-                var nameTerm = {};
-                nameTerm[arcaviasInputComplete.attr("name")] = req.term;
-
-                $.getJSON(arcaviasInputComplete.data("url"), nameTerm, function(data) {
-                    var suggestions = [];
-
-                    $.each(data, function(idx, val) {
-                        suggestions.push(val.name);
-                    });
-
-                    add(suggestions);
-                });
-            },
-            select : function(ev, ui) {
-                arcaviasInputComplete.val(ui.item.value);
-                $(ev.target).parents(".catalog-filter form").submit();
-            }
-        });
-
-
-        /* Lazy product image loading in list view */
-        arcaviasLazyLoader();
-        $(window).bind("resize", arcaviasLazyLoader);
-        $(window).bind("scroll", arcaviasLazyLoader);
-
-
-        /*
-         * Integration without page reload
-         */
-
-        /* Add the overlay container */
-        var arcaviasOverlayCreate = function() {
-
-            var overlay = $(document.createElement("div"));
-            overlay.addClass("arcavias-overlay");
-            overlay.fadeTo(1000, 0.5);
-            $("body").append(overlay);
-        };
-
-        /* Remove the overlay container */
-        var arcaviasOverlayRemove = function() {
-
-            var container = $(".arcavias-container");
-            var overlay = $(".arcavias-overlay");
-
-            // remove only if in overlay mode
-            if(container.size() + overlay.size() > 0) {
-
-                container.remove();
-                overlay.remove();
-                return false;
-            }
-
-            return true;
-        };
-
-        /* Creates the container on top of the overlay */
-        var arcaviasContainerCreate = function(content) {
-
-            var container = $(document.createElement("div"));
-            var btnclose = $(document.createElement("a"));
-
-            btnclose.text("X");
-            btnclose.addClass("minibutton");
-            btnclose.addClass("btn-close");
-
-            container.addClass("arcavias-container");
-            container.addClass("arcavias");
-            container.prepend(btnclose);
-            container.fadeTo(400, 1.0);
-            container.append(content);
-
-            $("body").append(container);
-
-            var resize = function() {
-                var jqwin = $(window);
-                var left = (jqwin.width() - container.outerWidth()) / 2;
-                var top = jqwin.scrollTop() + (jqwin.height() - container.outerHeight()) / 2;
-
-                container.css("left", (left > 0 ? left : 0));
-                container.css("top", (top > 0 ? top : 0));
-            };
-
-            $(window).on("resize", resize);
-            resize();
-        };
-
-        /* Go back to underlying page when back or close button is clicked */
-        $("body").on("click", ".arcavias-container .btn-close", function(ev) {
-            return arcaviasOverlayRemove();
-        });
-
-        /* Go back to underlying page when ESC is pressed */
-        $("body").on("keydown", function(ev) {
-            if(ev.which == 27) {
-                return arcaviasOverlayRemove();
-            }
-        });
-
-
-        /*
-         * Catalog detail actions
-         */
-
-    	/* Image zoom */
-    	var arcaviasImageZoom = function(item, container) {
-    		
-    		var options = {
-    			responsive: true,
-    			scrollZoom: true,
-    			easing : true,
-    			borderSize: 1,
-    			borderColour: container.css("border-top-color"),
-    			loadingIcon: '../css/images/progress.gif',
-    			lensFadeIn: 500,
-    			lensFadeOut: 500,
-    			zoomLevel: 0.75,
-    			zoomWindowFadeIn: 500,
-    			zoomWindowFadeOut: 500,
-    			zoomWindowWidth: container.width(),
-    			zoomWindowHeight: container.height(),
-    			zoomWindowBgColour: container.css("background-color"),
-    			zoomWindowPosition: 1,
-    			zoomWindowOffetx: 10
-    		};
-    		
-    		if( item.offset().left + item.outerWidth() + options.zoomWindowWidth + options.zoomWindowOffetx > $(window).width() ) {
-    			options.zoomType = 'inner';
-    			options.cursor = 'crosshair';
-    			options.zoomLevel = 1; // behaves strange on other levels
-    		}
-    	
-    		item.elevateZoom(options);
-    	};
-    	
-    	/* Enable image zoom for first image by default */
-    	$(".catalog-detail-image .image-single").each( function() {
-    		
-    		if(window.location.hash) {
-    			arcaviasImageZoom( $(window.location.hash), $(this) );
-    		} else {
-    			arcaviasImageZoom( $(".item", this).first(), $(this) );
-    		}
-    	});
-    	
-    	/* Display big image and highlight thumbnail after it was selected */
-    	$(".catalog-detail-image").on("click", ".thumbs .item", {}, function(event) {
-    		
-    		var imageId = this.href.split("#").pop();
-    		var container = $(".image-single", event.delegateTarget);
-
-    		$(".zoomContainer").remove();
-    		arcaviasImageZoom($("#" + imageId), container);
-    		window.location.hash = '#' + imageId;
-    		
-    		$(".thumbs .item", event.delegateTarget).removeClass("selected");
-    		$(this).addClass("selected");
-    		
-    		return false;
-    	});
-    	
-    	/* Opens the lightbox with big images */ 
-    	$(".catalog-detail-image .image-single").on("click", ".item", {}, function(event) {
-
-    		var list = [];
-    		$(".item", event.delegateTarget).each(function() {
-    			list.push( $(this).data("zoom-image") );
-    		});
-    		
-    		$.fn.prettyPhoto({ allow_resize: false, social_tools: false });
-    		$.prettyPhoto.open(list);
-    	});
-
-    	
-    	/* Slider for thumbnail gallery (small ones) */
-    	$(".catalog-detail-image .thumbs").carouFredSel({
-    		responsive: false,
-    		circular: false,
-    		infinite: false,
-    		auto: false,
-    		prev: ".prev-thumbs",
-    		next: ".next-thumbs",
-    		items: {
-    			visible: {
-    				min: 2,
-    				max: 3
-    			}
-    		},
-    		swipe: true,
-    		mousewheel: true
-    	});
-
-    	
-
-    	/**
-    	 * Evaluates the product variant dependencies.
-    	 * 
-    	 * It does not only work with <select> and <option> tags but also if a
-    	 * 
-    	 * <div class="select-list" data-index="<index value: 0-31>"> and
-    	 * 
-    	 * <input class="select-option" type="radio"> or
-    	 * <input class="select-option" type="checkbox">
-    	 * 
-    	 * are used. The data-index attribute of the .select-list container is
-    	 * required to calculate the disabled attributes for each option according
-    	 * to its dependencies. It must start with "0" and an unique, ascending value
-    	 * must be assigned to each container. The maximum number of possible indexes
-    	 * (and therefore dependent containers within an .selection node) is 31
-    	 * because it's an integer bitmap.
-    	 */
-    	$(".catalog-detail-basket-selection").on("change", ".select-list", function(event) {
-
-    		var elem = $(this);
-    		var index = elem.data("index");
-    		var value = elem.find(".select-option:checked").val();
-    		
-    		var attrDeps = $(event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
-    		var prodDeps = $(event.delegateTarget).data("proddeps") || {}; // {"<prodid>":["attrid",...],...}
-    		var attrMap = {}, attrList = [];
-
-    		
-    		if( typeof index === "undefined" ) {
-    			throw new Error( "HTML select node has no attribute data-index" );
-    		}
-    		
-
-    		// Retrieves the list of available attribute ID => product ID
-    		// combinations for the selected value
-    		if( attrDeps.hasOwnProperty(value) ) {
-
-    			for( var i=0; i<attrDeps[value].length; i++ ) {
-    				
-    				var prodId = attrDeps[value][i];
-
-    				if( prodDeps.hasOwnProperty(prodId) ) {
-
-    					for( var j=0; j<prodDeps[prodId].length; j++ ) {
-    						attrMap[prodDeps[prodId][j]] = prodId;
-    					}
-    				}
-    			}
-    		}
-
-    	
-    		$(".select-list", event.delegateTarget).each(function(i, select) {
-    			
-    			if( event.currentTarget == select ) {
-    				return;
-    			}
-
-    			$(this).find(".select-option").each(function(i, option) {
-    				
-    				var opt = $(option);
-    				var val = opt.val();
-    				var by = opt.data("by") || {};
-    				var disabled = opt.data("disabled") || 0;
-    				
-    				
-    				// Sets or removes the disabled bits in the bitmap of the
-    				// .select-option and by which .select-list it was disabled.
-    				// Each option can be disabled by multiple dependencies and
-    				// we can remove each of the bits separately again.
-    				if( value !== "" && val !== "" && !attrMap.hasOwnProperty(val) ) {
-    					disabled |= 2<<index;
-    					by[index] = 1;
-    				} else if( by.hasOwnProperty(index) ) {
-    					disabled &= ~(2<<index);
-    					delete by[index];
-    				}
-    				
-    				if( disabled > 0 ) {
-    					opt.attr("disabled", "disabled");
-    				} else {
-    					opt.removeAttr("disabled");
-    				}
-
-    				opt.data("disabled", disabled);
-    				opt.data("by", by);
-    			});
-    		});
-    	});
-    		
-
-    		
-    	$(".catalog-detail-basket").on("change", ".selection .select-list", function(event) {
-
-    		var map = {}, len = 0;
-    		var attrDeps = $(".catalog-detail-basket-selection", event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
-
-    		
-    		$(".selection .select-option:checked", event.delegateTarget).each(function(i, option) {
-    		
-    			var value = $(option).val();			
-
-    			if( value !== "" && attrDeps.hasOwnProperty(value) ) {
-
-    				for( var i=0; i<attrDeps[value].length; i++ ) {
-    					
-    					if( map.hasOwnProperty(attrDeps[value][i]) ) {
-    						map[attrDeps[value][i]]++;
-    					} else {
-    						map[attrDeps[value][i]] = 1;
-    					}
-    				}
-    			}
-    			
-    			len++;
-    		});
-    		
-    		
-    		for( var prodId in map ) {
-    			
-    			if( map.hasOwnProperty(prodId) && map[prodId] === len ) {
-
-    				var parent = $(event.delegateTarget);
-    				var newPrice = parent.find(".price-prodid-" + prodId);
-    				var newStock = parent.find(".stock-prodid-" + prodId);
-    				
-    				if( newPrice.length === 0 ) {
-    					newPrice = $(".price-main", parent);
-    				}
-
-    				if( newStock.length === 0 ) {
-    					newStock = $(".stockitem:first-child", parent);
-    				}
-    				
-    				parent.find(".price").removeClass("price-actual");
-    				newPrice.addClass("price-actual");
-    				
-    				parent.find(".stockitem").removeClass("stock-actual");
-    				newStock.addClass("stock-actual");
-    				
-    				if( parent.data("reqstock") && newStock.hasClass("stock-out") ) {
-    					parent.find(".addbasket .btn-action").addClass("btn-disabled").attr("disabled", "disabled");
-    				} else {
-    					parent.find(".addbasket .btn-action").removeClass("btn-disabled").removeAttr("disabled");
-    				}
-    			}
-    		}
-    		
-    		$(".catalog-detail-additional .attributes .subproduct-actual").removeClass("subproduct-actual");
-    		$(".catalog-detail-additional .attributes .subproduct-" + prodId).addClass("subproduct-actual");
-    	});
-    	
-    	
-    	/* Checks if all variant attributes are selected */
-    	$(".catalog-detail-basket").on("click", ".addbasket .btn-action", {}, function(event) {
-    		
-    		var result = true;
-
-    		$(".selection .select-item", event.delegateTarget).each( function() {
-    			
-    			if( $(".select-list", this).val() == '' ) {
-    				$(this).addClass("error");
-    				result = false;
-    			} else {
-    				$(this).removeClass("error");
-    			}
-    		});
-    		
-    		return result;
-    	});
-
-        /* Add to favorite list without page reload */
-        $(".catalog-detail-actions .actions-button-favorite").on("click", function(ev) {
-
-            if($(this).data("login")) {
-                return true;
-            }
-
-            arcaviasOverlayCreate();
-
-            $.get($(this).attr("href"), function(data) {
-
-                var doc = document.createElement("html");
-                doc.innerHTML = data;
-
-                arcaviasContainerCreate($(".account-favorite", doc));
-            });
-
-            return false;
-        });
-
-        /* Delete favorite items without page reload */
-        $("body").on("click", ".account-favorite a.modify", function(ev) {
-
-            var item = $(this).parents("favorite-item");
-            item.addClass("loading");
-
-            $.get($(this).attr("href"), function(data) {
-
-                var doc = document.createElement("html");
-                doc.innerHTML = data;
-
-                $(".account-favorite").html($(".account-favorite", doc).html());
-            });
-
-            return false;
-        });
-
-        /* Add to watch list without page reload */
-        $(".catalog-detail-actions .actions-button-watch").on("click", function(ev) {
-
-            if($(this).data("login")) {
-                return true;
-            }
-
-            arcaviasOverlayCreate();
-
-            $.get($(this).attr("href"), function(data) {
-
-                var doc = document.createElement("html");
-                doc.innerHTML = data;
-
-                arcaviasContainerCreate($(".account-watch", doc));
-            });
-
-            return false;
-        });
-
-        /* Delete watch items without page reload */
-        $("body").on("click", ".account-watch a.modify", function(ev) {
-
-            var item = $(this).parents("watch-item");
-            item.addClass("loading");
-
-            $.get($(this).attr("href"), function(data) {
-
-                var doc = document.createElement("html");
-                doc.innerHTML = data;
-
-                $(".account-watch").html($(".account-watch", doc).html());
-            });
-
-            return false;
-        });
-
-        /* Edit watch items without page reload */
-        $("body").on("click", ".account-watch .standardbutton", function(ev) {
-
-            var form = $(this).parents("form.watch-details");
-            form.addClass("loading");
-
-            $.post(form.attr("action"), form.serialize(), function(data) {
-
-                var doc = document.createElement("html");
-                doc.innerHTML = data;
-
-                $(".account-watch").html($(".account-watch", doc).html());
-            });
-
-            return false;
-        });
-
-
-        /*
-         * Basket clients
-         */
-
-        /* Update baskets */
-        var arcaviasBasketUpdate = function(data) {
-
-            var doc = document.createElement("html");
-            doc.innerHTML = data;
-
-            var basket = $(".basket-standard", doc);
-
-            $(".btn-update", basket).hide();
-            $(".basket-mini-main .value").text($(".basket .total .price", basket).text());
-            $(".basket-mini-main .quantity").text($(".basket .quantity .value", basket).text());
-
-            return basket;
-        };
-
-        /* Add to basket without page reload */
-        $(".catalog-detail-basket form").on("submit", function(ev) {
-
-            arcaviasOverlayCreate();
-            $.post($(this).attr("action"), $(this).serialize(), function(data) {
-                arcaviasContainerCreate(arcaviasBasketUpdate(data));
-            });
-
-            return false;
-        });
-
-        /* Go back to underlying page when back or close button is clicked */
-        $("body").on("click", ".basket-standard .btn-back", function(ev) {
-            return arcaviasOverlayRemove();
-        });
-
-        /* Hide update button an show only on quantity change */
-        $(".basket-standard .btn-update").hide();
-        $("body").on("focusin", ".basket-standard .basket .product .quantity .value", {}, function(ev) {
-            $(".btn-update", ev.delegateTarget).show();
-        });
-
-        /* Update without page reload */
-        $("body").on("submit", ".basket-standard form", function(ev) {
-            var form = $(this);
-
-            $.post(form.attr("action"), form.serialize(), function(data) {
-                $(".basket-standard").html(arcaviasBasketUpdate(data).html());
-            });
-
-            return false;
-        });
-
-        /* Update quantity and delete without page reload */
-        $("body").on("click", ".basket-standard a.change", function(ev) {
-
-            $.post($(this).attr("href"), function(data) {
-                $(".basket-standard").html(arcaviasBasketUpdate(data).html());
-            });
-
-            return false;
-        });
-
-
-        /*
-         * Checkout clients
-         */
-
-        /* Initial state: Hide form for address if not selected */
-        $(".checkout-standard-address .item-address").has(".header input:not(:checked)").find(".form-list").hide();
-
-        /* Initial state: Hide VAT ID if salution is not "company" */
-        $(".checkout-standard-address .form-list .salutation select").each(function(idx, elem) {
-            if($(elem).val() !== "company") {
-                $(this).parents(".form-list").find(".company,.vatid").hide();
-            }
-        });
-
-        /*
-         * Show company and VAT ID fields if salutation is "company", otherwise
-         * hide the fields
-         */
-        $(".checkout-standard-address .form-list").on("change", ".salutation select", function(ev) {
-            var fields = $(".company,.vatid", ev.delegateTarget);
-            $(this).val() === "company" ? fields.show() : fields.hide();
-        });
-
-        /* Initial state: Hide states from not selected countries */
-        $(".checkout-standard-address .form-list .countryid select").each(function(idx, elem) {
-            if($(this).val() !== "") {
-                $(this).parents(".form-list").find(".state optgroup:not(." + $(this).val() + ")").hide();
-            }
-        });
-
-        /* Show states that belong to the selected country */
-        $(".checkout-standard-address .form-list").on("change", ".countryid select", function(ev) {
-            $(".state select", ev.delegateTarget).val("");
-            $(".state optgroup", ev.delegateTarget).hide();
-            $(".state ." + $(this).val(), ev.delegateTarget).show();
-        });
-
-        /*
-         * Initial state: Hide form fields if delivery/payment option is not
-         * selected
-         */
-        $(".checkout-standard-delivery,.checkout-standard-payment").each(function(idx, elem) {
-            $(elem).find(".form-list").hide();
-            $(elem).find(".item-service").has("input:checked").find(".form-list").show();
-        });
-
-        /* Address form slide up/down when selected */
-        $(".checkout-standard-address-billing,.checkout-standard-address-delivery").on("click", ".header input",
-            function(ev) {
-                $(".form-list", ev.delegateTarget).slideUp(400);
-                $(".item-address", ev.delegateTarget).has(this).find(".form-list").slideDown(400);
-            });
-
-        /* Delivery/payment form slide up/down when selected */
-        $(".checkout-standard-delivery, .checkout-standard-payment .option").on("click", function(ev) {
-            $(".checkout-standard .form-list").slideUp(400);
-            $(".checkout-standard .item-service").has(this).find(".form-list").slideDown(400);
-        });
-
-        /* Check for mandatory fields in all forms */
-        $(".checkout-standard form").on("submit", function(ev) {
-            var retval = true;
-
-            $(".checkout-standard .item-new, .item-service").has(".header,label").has("input:checked") // combining in one has() doesn't work
-            .find(".form-list .mandatory").each(function() {
-                var value = $(this).find("input,select").val();
-                if(value === null || value.trim() === "") {
-                    $(this).addClass("error");
-                    retval = false;
-                } else {
-                    $(this).removeClass("error");
-                }
-            });
-
-            return retval;
-        });
-
-        /*
-         * Redirect to payment provider / confirm page when order has been
-         * created successfully
-         */
-        var arcavias_checkout_form = $(".checkout-standard-order-payment > form").first();
-        if(arcavias_checkout_form.length === 0 || arcavias_checkout_form.submit() === false) {
-            $(".checkout-standard-order-payment").first().each(function(index, element) {
-                var url = $(element).data("url");
-                if(url) {
-                    window.location = url;
-                }
-            });
-        }
-
-
-        /*
-         * Account clients
-         */
-
-        /* Show order details without page reload */
-        $(".account-history .history-item").on("click", "a", function(ev) {
-
-            var details = $(".account-history-detail", ev.delegateTarget);
-
-            if(details.length === 0) {
-
-                $.get($(this).attr("href"), function(data) {
-
-                    var doc = document.createElement("html");
-                    doc.innerHTML = data;
-
-                    var node = $(".account-history-detail", doc);
-                    node.css("display", "none");
-                    $(ev.delegateTarget).append(node);
-                    node.slideDown();
-                });
-
-            } else {
-                details.slideToggle();
-            }
-
-            return false;
-        });
-
-
-        /* Close order details */
-        $(".account-history .history-item").on("click", ".btn-close", function(ev) {
-            $(".account-history-detail", ev.delegateTarget).slideUp();
-            return false;
-        });
-
-    });
