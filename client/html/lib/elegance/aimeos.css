@@ -890,7 +890,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 }
 
 .catalog-detail-image .image-single {
-	background-image: url(images/arcavias.png);
+	background-image: url(images/aimeos.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -1483,7 +1483,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 .catalog-session-seen .media-item,
 .catalog-session-pinned .media-item {
 	background-color: #FFFFFF;
-	background-image: url(images/arcavias.png);
+	background-image: url(images/aimeos.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -1670,6 +1670,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	background-repeat: no-repeat;
 	background-position: left center;
 	background-size: contain;
+	display: inline-block;
 	padding-left: 36px;
 }
 
