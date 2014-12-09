@@ -92,7 +92,7 @@ if(typeof Object.create!=="function"){Object.create=function(e){function t(){}t.
 AimeosCatalogDetail = {
 	
 	/**
-	 * Initializes the image zoom for big images
+	 * Initializes the image zoom for big images given in the item parameter within the container
 	 */
 	zoomImage: function(item, container) {
 	
@@ -496,7 +496,7 @@ AimeosCatalogDetail = {
 	
 	
 	/**
-	 * Initialize the catalog detail actions
+	 * Initializes the catalog detail actions
 	 */
 	init: function() {
 		

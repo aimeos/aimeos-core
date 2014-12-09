@@ -32,7 +32,7 @@
 Aimeos = {
 	
 	/**
-	 * Creates the container on top of the overlay
+	 * Creates a floating container over the page displaying the given content node
 	 */
 	createContainer: function(content) {
 
@@ -66,7 +66,7 @@ Aimeos = {
 	
 
 	/**
-	 * Adds an overlay container
+	 *  Adds an overlay on top of the current page
 	 */
 	createOverlay: function() {
 
@@ -78,7 +78,7 @@ Aimeos = {
 	
 	
 	/**
-	 * Removes the overlay container
+	 * Removes an existing overlay from the current page
 	 */
 	removeOverlay: function() {
 
@@ -98,7 +98,7 @@ Aimeos = {
 	
 
 	/**
-	 * Lazy load product image in list view
+	 * Lazy load product image in list views
 	 */
 	loadImages: function() {
 
@@ -116,7 +116,7 @@ Aimeos = {
 	
 	
 	/**
-	 * Sets up ways to close the container
+	 * Sets up the ways to close the container by the user
 	 */
 	setupContainerClose: function() {
 
@@ -175,7 +175,7 @@ AimeosAccountFavorite = {
 	
 	
 	/**
-	 * Initialize the account favorite actions
+	 * Initializes the account favorite actions
 	 */
 	init: function() {
 		this.setupProductRemoval();
@@ -235,7 +235,7 @@ AimeosAccountHistory = {
 	
 	
 	/**
-	 * Initialize the account history actions
+	 * Initializes the account history actions
 	 */
 	init: function() {
 		
@@ -299,7 +299,7 @@ AimeosAccountWatch = {
 	
 	
 	/**
-	 * Initialize the account watch actions
+	 * Initializes the account watch actions
 	 */
 	init: function() {
 		
@@ -307,6 +307,38 @@ AimeosAccountWatch = {
 		this.setupProductSave();
 	}
 };
+
+
+
+
+
+/**
+ * Basket mini client actions
+ */
+AimeosBasketMini = {
+
+	/**
+	 * Initializes the basket mini actions
+	 */
+	init: function() {
+	}
+}
+
+
+
+
+
+/**
+ * Basket related client actions
+ */
+AimeosBasketRelated = {
+
+	/**
+	 * Initializes the basket related actions
+	 */
+	init: function() {
+	}
+}
 
 
 
@@ -393,7 +425,7 @@ AimeosBasketStandard = {
 	
 	
 	/**
-	 * Initialize the account watch actions
+	 * Initializes the basket standard actions
 	 */
 	init: function() {
 		
@@ -446,7 +478,7 @@ AimeosCatalogFilter = {
 	
 	
 	/**
-	 * Initializes the form checks
+	 * Sets up the form checks
 	 */
 	setupFormChecks: function() {
 	
@@ -486,7 +518,7 @@ AimeosCatalogFilter = {
 	
 	
 	/**
-	 * Initializes the fade out of the catalog list
+	 * Sets up the fade out of the catalog list
 	 */
 	setupListFadeout: function() {
 	
@@ -624,12 +656,44 @@ AimeosCatalogList = {
 	
 	
 	/**
-	 * Initialize the catalog list actions
+	 * Initializes the catalog list actions
 	 */
 	init: function() {
 		this.setupImageSwitch();
 	}
 };
+
+
+
+
+
+/**
+ * Catalog session actions
+ */
+AimeosCatalogSession = {
+		
+	/**
+	 * Initializes the catalog session actions
+	 */
+	init: function() {
+	}
+}
+
+
+
+
+
+/**
+ * Catalog stage actions
+ */
+AimeosCatalogStage = {
+		
+	/**
+	 * Initializes the catalog stage actions
+	 */
+	init: function() {
+	}
+}
 
 
 
@@ -777,6 +841,22 @@ AimeosCheckoutStandard = {
 
 
 /**
+ * Checkout confirm client actions
+ */
+AimeosCheckoutConfirm = {
+		
+	/**
+	 * Initializes the checkout confirm section
+	 */
+	init: function() {
+	}
+}
+
+
+
+
+
+/**
  * Locale selector actions
  */
 AimeosLocaleSelect = {
@@ -794,7 +874,7 @@ AimeosLocaleSelect = {
 
 
 	/**
-	 * Initialize the locale selector actions
+	 * Initializes the locale selector actions
 	 */
 	init: function() {
 		this.setupMenuToggle();
@@ -830,12 +910,22 @@ jQuery(document).ready(function($) {
     
     
     Aimeos.init();
+    
     AimeosLocaleSelect.init();
+    
+    AimeosCatalogStage.init();
     AimeosCatalogFilter.init();
     AimeosCatalogList.init();
+    AimeosCatalogSession.init();
+    
+    AimeosBasketMini.init();
+    AimeosBasketRelated.init();
+    AimeosBasketStandard.init();
+    
+    AimeosCheckoutStandard.init();
+    AimeosCheckoutConfirm.init();
+    
     AimeosAccountHistory.init();
     AimeosAccountFavorite.init();
     AimeosAccountWatch.init();
-    AimeosBasketStandard.init();
-    AimeosCheckoutStandard.init();
 });
