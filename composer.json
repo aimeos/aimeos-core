@@ -10,6 +10,7 @@
 		"forum": "https://forum.arcavias.com",
 		"wiki": "https://docs.arcavias.com"
 	},
+	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.2.0",
 		"ext-curl": "*",
