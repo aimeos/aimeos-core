@@ -115,17 +115,17 @@ foreach( $stockProductIds as $prodId )
 
 ?>
 // <!--
-var arcaviasStockHtml = <?php echo json_encode( $result, JSON_FORCE_OBJECT ); ?>;
+var aimeosStockHtml = <?php echo json_encode( $result, JSON_FORCE_OBJECT ); ?>;
 
-$(".arcavias .product .stock").each(function() {
+$(".aimeos .product .stock").each(function() {
 
 	var html = "";
 	var elem = $(this);
 	var productIds = String( elem.data("prodid") ).split(" ");
 	
 	for( var i=0; i<productIds.length; i++ ) {
-		if( arcaviasStockHtml.hasOwnProperty( productIds[i] ) ) {
-			html += arcaviasStockHtml[productIds[i]];
+		if( aimeosStockHtml.hasOwnProperty( productIds[i] ) ) {
+			html += aimeosStockHtml[productIds[i]];
 		}
 	}
 	
@@ -135,7 +135,7 @@ $(".arcavias .product .stock").each(function() {
 	}
 });
 
-$(".arcavias .catalog-detail-basket").each(function() {
+$(".aimeos .catalog-detail-basket").each(function() {
 
 	var elem = $(this);
 

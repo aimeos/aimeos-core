@@ -24,7 +24,7 @@ $title = $this->translate( 'client/html', 'E-mail notification' );
  * @category User
  * @see client/html/email/from-email
  */
-if( ( $logo = $this->config( 'client/html/email/logo', 'client/html/lib/classic/css/images/arcavias.png' ) ) != '' )
+if( ( $logo = $this->config( 'client/html/email/logo', 'client/html/themes/elegance/images/arcavias.png' ) ) != '' )
 {
 	$filename = basename( $logo );
 
@@ -62,19 +62,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 	display: block;
 }
 
-.arcavias .content-block {
+.aimeos .content-block {
 	margin: 1.5em 5%;
 }
-.arcavias .logo {
+.aimeos .logo {
 	margin: 1.5em 5%;
 	margin-top: 0;
 	float: right;
 }
-.arcavias .common-summary {
+.aimeos .common-summary {
 	clear: both;
 }
 		</style>
-		<div class="arcavias">
+		<div class="aimeos">
 <?php if( $content !== false ) : ?>
 			<img class="logo" src="<?php echo $this->mail()->embedAttachment( $content, $mimetype, $filename ); ?>" />
 <?php endif; ?>

@@ -6,20 +6,20 @@
  * @copyright Aimeos (aimeos.org), 2014
  */
 
-.arcavias li.attr-item,
-.arcavias li.form-item {
+.aimeos li.attr-item,
+.aimeos li.form-item {
 	list-style: none;
 	margin: 0.5em 0;
 	padding: 0;
 }
 
-.arcavias .header {
+.aimeos .header {
 	border-radius: 0.5em;
 	-moz-border-radius: 0.5em;
 	-webkit-border-radius: 0.5em;
 }
 
-.arcavias .container {
+.aimeos .container {
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;

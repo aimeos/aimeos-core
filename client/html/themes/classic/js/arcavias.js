@@ -96,8 +96,8 @@ if(typeof Object.create!=="function"){Object.create=function(e){function t(){}t.
 /*
  * Arcavias related Javascript code
  * 
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
- * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
 
@@ -250,8 +250,8 @@ jQuery(document).ready(
         /* Remove the overlay container */
         var arcaviasOverlayRemove = function() {
 
-            var container = $(".arcavias-container");
-            var overlay = $(".arcavias-overlay");
+            var container = $(".aimeos-container");
+            var overlay = $(".aimeos-overlay");
 
             // remove only if in overlay mode
             if(container.size() + overlay.size() > 0) {
@@ -296,7 +296,7 @@ jQuery(document).ready(
         };
 
         /* Go back to underlying page when back or close button is clicked */
-        $("body").on("click", ".arcavias-container .btn-close", function(ev) {
+        $("body").on("click", ".aimeos-container .btn-close", function(ev) {
             return arcaviasOverlayRemove();
         });
 
