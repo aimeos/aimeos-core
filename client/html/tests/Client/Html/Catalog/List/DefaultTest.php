@@ -81,7 +81,7 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$expire = null;
 		$output = $this->_object->getBody( 1, $tags, $expire );
 
-		$this->assertStringStartsWith( '<section class="arcavias catalog-list home categories coffee">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-list home categories coffee">', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
 		$this->assertEquals( 4, count( $tags ) );
 	}
@@ -94,7 +94,7 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="arcavias catalog-list">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-list">', $output );
 		$this->assertNotRegExp( '#.*U:TESTPSUB01.*#smu', $output );
 		$this->assertNotRegExp( '#.*U:TESTSUB03.*#smu', $output );
 		$this->assertNotRegExp( '#.*U:TESTSUB04.*#smu', $output );
@@ -116,7 +116,7 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="arcavias catalog-list home categories coffee">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-list home categories coffee">', $output );
 	}
 
 
@@ -127,7 +127,7 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="arcavias catalog-list">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-list">', $output );
 	}
 
 
@@ -138,7 +138,7 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="arcavias catalog-list">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-list">', $output );
 	}
 
 
@@ -149,7 +149,7 @@ class Client_Html_Catalog_List_DefaultTest extends MW_Unittest_Testcase
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="arcavias catalog-list">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-list">', $output );
 	}
 
 

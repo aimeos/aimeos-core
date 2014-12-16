@@ -50,7 +50,7 @@ class Client_Html_Account_History_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="arcavias account-history">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos account-history">', $output );
 	}
 
 

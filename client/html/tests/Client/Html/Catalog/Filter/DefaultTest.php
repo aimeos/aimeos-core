@@ -54,7 +54,7 @@ class Client_Html_Catalog_Filter_DefaultTest extends MW_Unittest_Testcase
 		$expire = null;
 		$output = $this->_object->getBody( 1, $tags, $expire );
 
-		$this->assertStringStartsWith( '<section class="arcavias catalog-filter">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-filter">', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
 		$this->assertEquals( 5, count( $tags ) );
 	}

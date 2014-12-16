@@ -52,7 +52,7 @@ class Client_Html_Basket_Mini_DefaultTest extends MW_Unittest_Testcase
 		$output = $this->_object->getBody();
 		$miniBasket = $this->_object->getView()->miniBasket;
 		$this->assertTrue( $miniBasket instanceof MShop_Order_Item_Base_Interface );
-		$this->assertStringStartsWith( '<section class="arcavias basket-mini">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos basket-mini">', $output );
 	}
 
 

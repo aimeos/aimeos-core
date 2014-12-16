@@ -50,7 +50,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="arcavias basket-standard">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos basket-standard">', $output );
 	}
 
 

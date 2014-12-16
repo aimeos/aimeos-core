@@ -54,7 +54,7 @@ class Client_Html_Checkout_Confirm_DefaultTest extends MW_Unittest_Testcase
 		$this->_context->getSession()->set( 'arcavias/orderid', $this->_getOrderId() );
 
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="arcavias checkout-confirm">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos checkout-confirm">', $output );
 	}
 
 

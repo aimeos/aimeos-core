@@ -61,7 +61,7 @@ class Client_Html_Catalog_Stage_DefaultTest extends MW_Unittest_Testcase
 		$expire = null;
 		$output = $this->_object->getBody( 1, $tags, $expire );
 
-		$this->assertStringStartsWith( '<section class="arcavias catalog-stage">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-stage">', $output );
 		$this->assertEquals( null, $expire );
 		$this->assertEquals( 0, count( $tags ) );
 	}
@@ -77,7 +77,7 @@ class Client_Html_Catalog_Stage_DefaultTest extends MW_Unittest_Testcase
 		$expire = null;
 		$output = $this->_object->getBody( 1, $tags, $expire );
 
-		$this->assertStringStartsWith( '<section class="arcavias catalog-stage home categories coffee">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-stage home categories coffee">', $output );
 		$this->assertEquals( '2019-01-01 00:00:00', $expire );
 		$this->assertEquals( 1, count( $tags ) );
 	}
