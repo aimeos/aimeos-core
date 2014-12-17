@@ -111,7 +111,36 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 
 			$manager->saveItem( $item );
 
+			$this->_addPropertyItems( $entry, $item->getId() );
 			$this->_addRefItems( $entry, $item->getId() );
+		}
+	}
+
+
+	/**
+	 * Adds the properties from the given entry data.
+	 *
+	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
+	 * @param string $id Parent ID for inserting the items
+	 */
+	protected function _addPropertyItems( array $entry, $id )
+	{
+		if( isset( $entry['property'] ) )
+		{
+			$context =  $this->_getContext();
+			$manager = MShop_Factory::createManager( $context, 'product/property' );
+
+			foreach( (array) $entry['property'] as $values )
+			{
+				$item = $manager->createItem();
+				$item->setParentId( $id );
+				$item->setLanguageId( $values['languageid'] );
+				$item->setTypeId( $this->_getTypeId( 'product/property/type', 'product/property', $values['type'] ) );
+				$item->setLanguageId( $values['languageid'] );
+				$item->setValue( $values['value'] );
+
+				$manager->saveItem( $item, false );
+			}
 		}
 	}
 

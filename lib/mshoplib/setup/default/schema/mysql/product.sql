@@ -201,6 +201,86 @@ CREATE INDEX "idx_msproli_pid_sid_pos" ON "mshop_product_list" ("parentid", "sit
 
 
 --
+-- Table structure for table `mshop_product_property_type`
+--
+
+CREATE TABLE "mshop_product_property_type" (
+	-- Unique id
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	-- site id, references mshop_locale_site.id
+	"siteid" INTEGER NOT NULL,
+	-- domain
+	"domain" VARCHAR(32) NOT NULL,
+	-- code
+	"code"  VARCHAR(32) NOT NULL COLLATE utf8_bin,
+	-- Name of the tag type
+	"label" VARCHAR(255) NOT NULL,
+	-- Status (0=disabled, 1=enabled, >1 for special)
+	"status" SMALLINT NOT NULL,
+	-- Date of last modification of this database entry
+	"mtime" DATETIME NOT NULL,
+	-- Date of creation of this database entry
+	"ctime" DATETIME NOT NULL,
+	-- Editor who modified this entry at last
+	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "pk_msproprty_id"
+	PRIMARY KEY ("id"),
+CONSTRAINT "unq_msproprty_sid_dom_code"
+	UNIQUE ("siteid", "domain", "code")
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX "idx_msproprty_sid_status" ON "mshop_product_property_type" ("siteid", "status");
+
+CREATE INDEX "idx_msproprty_sid_label" ON "mshop_product_property_type" ("siteid", "label");
+
+CREATE INDEX "idx_msproprty_sid_code" ON "mshop_product_property_type" ("siteid", "code");
+
+
+--
+-- Product properties
+--
+
+CREATE TABLE "mshop_product_property" (
+	-- Unique ID
+	"id" INTEGER NOT NULL AUTO_INCREMENT,
+	-- Parent product id
+	"parentid" INTEGER NOT NULL,
+	-- Site id
+	"siteid" INTEGER NOT NULL,
+	-- Property type id
+	"typeid" INTEGER NOT NULL,
+	-- ISO language id
+	"langid" VARCHAR(5) DEFAULT NULL,
+	-- Property value
+	"value" VARCHAR(255) NOT NULL,
+	-- Date of last modification of this database entry
+	"mtime" DATETIME NOT NULL,
+	-- Date of creation of this database entry
+	"ctime" DATETIME NOT NULL,
+	-- Editor who modified this entry at last
+	"editor" VARCHAR(255) NOT NULL,
+CONSTRAINT "pk_mspropr_pid"
+	PRIMARY KEY ("id"),
+CONSTRAINT "unq_mspropr_sid_tid_lid_value"
+	UNIQUE ("parentid", "siteid", "typeid", "langid", "value"),
+CONSTRAINT "fk_mspropr_parentid"
+	FOREIGN KEY ("parentid")
+	REFERENCES "mshop_product" ("id")
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+CONSTRAINT "fk_mspropr_typeid"
+	FOREIGN KEY ("typeid")
+	REFERENCES "mshop_product_property_type" ("id")
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+) ENGINE=InnoDB CHARACTER SET = utf8;
+
+CREATE INDEX "idx_mspropr_sid_value" ON "mshop_product_property" ("siteid", "value");
+
+CREATE INDEX "idx_mspropr_sid_langid" ON "mshop_product_property" ("siteid", "langid");
+
+
+--
 -- Table structure for table `mshop_product_tag_type`
 --
 
