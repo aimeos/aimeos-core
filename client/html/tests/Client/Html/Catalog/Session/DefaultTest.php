@@ -49,7 +49,7 @@ class Client_Html_Catalog_Session_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBody()
 	{
 		$output = $this->_object->getBody();
-		$this->assertStringStartsWith( '<section class="arcavias catalog-session">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-session">', $output );
 	}
 
 

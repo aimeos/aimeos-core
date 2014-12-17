@@ -5,14 +5,14 @@
  * @copyright Aimeos (aimeos.org), 2014
  */
 
-.arcavias li.attr-item,
-.arcavias li.form-item {
+.aimeos li.attr-item,
+.aimeos li.form-item {
 	list-style: none;
 	margin: 0.5em 0;
 	padding: 0;
 }
 
-.arcavias .container {
+.aimeos .container {
 	border: solid 1px #D0D0D0;
 	min-width: 240px;
 	max-width: 98%;

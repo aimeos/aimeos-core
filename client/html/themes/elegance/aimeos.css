@@ -5,32 +5,32 @@
  * @copyright Aimeos (aimeos.org), 2014
  */
 
-.arcavias,
-.arcavias h1, .arcavias h2,
-.arcavias h3, .arcavias h4 {
+.aimeos,
+.aimeos h1, .aimeos h2,
+.aimeos h3, .aimeos h4 {
 	font-weight: normal;
 	font-size: 100%;
 	color: #555;
 }
 
-.arcavias h1, .arcavias h2 {
+.aimeos h1, .aimeos h2 {
 	text-transform: uppercase;
 }
 
-.arcavias h1 {
+.aimeos h1 {
 	font-size: 125%;
 }
 
-.arcavias h2 {
+.aimeos h2 {
 	font-size: 110%;
 }
 
-.arcavias a:link,
-.arcavias a:visited {
+.aimeos a:link,
+.aimeos a:visited {
 	color: #B0A060;
 }
 
-.arcavias .standardbutton {
+.aimeos .standardbutton {
 	background-color: #B0A060;
 	border: none;
 	text-decoration: none;
@@ -46,21 +46,21 @@
 	cursor: pointer;
 }
 
-.arcavias .standardbutton:link,
-.arcavias .standardbutton:visited {
+.aimeos .standardbutton:link,
+.aimeos .standardbutton:visited {
 	color: #FFFFFF;
 }
 
-.arcavias .standardbutton:hover {
+.aimeos .standardbutton:hover {
 	background-color: #B0A060;
 }
 
 /* Buttons calculate width incl. padding, links not! */
-.arcavias button.standardbutton {
+.aimeos button.standardbutton {
 	min-width: 8.01em;
 }
 
-.arcavias .minibutton {
+.aimeos .minibutton {
 	color: #D0D0D0;
 	font-size: 125%;
 	font-weight: bold;
@@ -69,46 +69,46 @@
 	margin: 0;
 }
 
-.arcavias .standardbutton::-moz-focus-inner,
-.arcavias .minibutton::-moz-focus-inner {
+.aimeos .standardbutton::-moz-focus-inner,
+.aimeos .minibutton::-moz-focus-inner {
 	padding: 0;
 	border: 0; 
 }
 
-.arcavias .btn-action {
+.aimeos .btn-action {
 	background-color: #B0A060;
 	line-height: normal;
 	font-size: 125%;
 }
 
-.arcavias .btn-action:hover {
+.aimeos .btn-action:hover {
 	background-color: #C0B070;
 }
 
-.arcavias .btn-disabled {
+.aimeos .btn-disabled {
 	background-color: #AAA;
 	box-shadow: none;
 	cursor: not-allowed;
 	
 }
 
-.arcavias .btn-disabled:hover {
+.aimeos .btn-disabled:hover {
 	cursor: not-allowed;
 }
 
-.arcavias .button-group {
+.aimeos .button-group {
 	text-align: center;
 	padding: 1em 0;
 }
 
 @media (max-width: 480px) {
-	.arcavias .button-group a.standardbutton {
+	.aimeos .button-group a.standardbutton {
 		font-size: 0.95em;
 		padding: 0.5em 0.5em 0.5em;
 	}
 }
 
-.arcavias .error-list {
+.aimeos .error-list {
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
 	padding: 0.5em;
@@ -117,23 +117,23 @@
 	list-style: disc;
 }
 
-.arcavias .error-item {
+.aimeos .error-item {
 	padding: 0.25em;
 }
 
-.arcavias .attr-list,
-.arcavias .form-list {
+.aimeos .attr-list,
+.aimeos .form-list {
 	padding: 0;
 	margin: 0;
 }
 
-.arcavias .form-list label {
+.aimeos .form-list label {
 	display: inline;
 	width: 210px;
 	margin: 0.25em 0;
 }
 
-.arcavias .form-list input {
+.aimeos .form-list input {
 	width: 215px;
 	height: 1.5em;
 	background-color: #F0F0F0;
@@ -142,59 +142,59 @@
 	margin: 0.25em 0;
 }
 
-.arcavias .form-list select {
+.aimeos .form-list select {
 	width: 219px;
 	border: 1px solid #D0D0D0;
 	vertical-align: bottom;
 	margin: 0.25em 0;
 }
 
-.arcavias .pagination {
+.aimeos .pagination {
 	display: block;
 	clear: left;
 	margin: 0;
 }
 
-.arcavias .sort {
+.aimeos .sort {
 	display: inline-block;
 	margin: 0 5%;
 }
 
-.arcavias .sort ul {
+.aimeos .sort ul {
 	list-style: none outside none;
 	display: inline;
 	padding: 0;
 	margin: 0;
 }
 
-.arcavias .sort ul li {
+.aimeos .sort ul li {
 	display: inline;
 }
 
-.arcavias .sort a {
+.aimeos .sort a {
 	text-decoration: none;
 	white-space: nowrap;
 	padding: 0 0.25em;
 	color: #555;
 }
 
-.arcavias .sort a:hover {
+.aimeos .sort a:hover {
 	text-decoration: underline;
 }
 
-.arcavias .sort a.active {
+.aimeos .sort a.active {
 	text-decoration: none;
 	font-weight: bold;
 }
 
-.arcavias .browser {
+.aimeos .browser {
 	display: inline-block;
 	white-space: nowrap;
 	margin: 0 5%;
 }
 
-.arcavias .browser span,
-.arcavias .browser a {
+.aimeos .browser span,
+.aimeos .browser a {
 	display: inline-block;
 	padding: 0 0.5em;
 	color: #555;
@@ -202,13 +202,13 @@
 	text-decoration: none;
 }
 
-.arcavias .loading {
+.aimeos .loading {
 	background-image: url(media/progress.gif);
 	background-repeat: no-repeat;
 	background-position: center;
 }
 
-.arcavias-overlay {
+.aimeos-overlay {
 	background-color: #FFFFFF;
 	position: fixed;
 	z-index: 1000;
@@ -219,7 +219,7 @@
 	top: 0;
 }
 
-.arcavias-container {
+.aimeos-container {
 	position: absolute;
 	z-index: 1001;
 	opacity: 1;
@@ -230,7 +230,7 @@
 	padding: 1%;
 }
 
-.arcavias-container .btn-close {
+.aimeos-container .btn-close {
 	display: block;
 	cursor: pointer;
 	text-align: right;

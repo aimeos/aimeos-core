@@ -79,7 +79,7 @@ if(typeof Object.create!=="function"){Object.create=function(e){function t(){}t.
 /**
  * Aimeos detail related Javascript code
  * 
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2014
  */

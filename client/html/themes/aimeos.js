@@ -20,7 +20,7 @@
 /**
  * Aimeos related Javascript code
  * 
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2014
  */
@@ -82,8 +82,8 @@ Aimeos = {
 	 */
 	removeOverlay: function() {
 
-	    var container = $(".arcavias-container");
-	    var overlay = $(".arcavias-overlay");
+	    var container = $(".aimeos-container");
+	    var overlay = $(".aimeos-overlay");
 
 	    // remove only if in overlay mode
 	    if(container.size() + overlay.size() > 0) {
@@ -121,7 +121,7 @@ Aimeos = {
 	setupContainerClose: function() {
 
 		/* Go back to underlying page when back or close button is clicked */
-		$("body").on("click", ".arcavias-container .btn-close", function(ev) {
+		$("body").on("click", ".aimeos-container .btn-close", function(ev) {
 		    return Aimeos.removeOverlay();
 		});
 		
@@ -622,7 +622,7 @@ AimeosCatalogList = {
 	 */
 	setupImageSwitch: function() {
 	
-		$(".arcavias .product .media-list").on("mouseenter", function() {
+		$(".aimeos .product .media-list").on("mouseenter", function() {
 		    var list = $(".media-item", this);
 		
 		    if( list.length > 1 ) {
@@ -640,7 +640,7 @@ AimeosCatalogList = {
 		    }
 		});
 	
-		$(".arcavias .product .media-list").on("mouseleave", function() {
+		$(".aimeos .product .media-list").on("mouseleave", function() {
 		    var list = $(".media-item", this);
 		
 		    if( list.length > 1 ) {

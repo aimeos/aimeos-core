@@ -54,7 +54,7 @@ class Client_Html_Locale_Select_DefaultTest extends MW_Unittest_Testcase
 		$expire = null;
 		$output = $this->_object->getBody( 1, $tags, $expire );
 
-		$this->assertStringStartsWith( '<section class="arcavias locale-select">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos locale-select">', $output );
 		$this->assertEquals( null, $expire );
 		$this->assertEquals( 0, count( $tags ) );
 	}

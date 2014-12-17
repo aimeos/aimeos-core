@@ -1,22 +1,22 @@
 /*
  * Arcavias classic template CSS
  * 
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
- * @license LGPLv3, http://www.arcavias.com/en/license
  */
 
-.arcavias,
-.arcavias h1, .arcavias h2,
-.arcavias h3, .arcavias h4 {
+.aimeos,
+.aimeos h1, .aimeos h2,
+.aimeos h3, .aimeos h4 {
 	color: #004266;
 }
 
-.arcavias a:link,
-.arcavias a:visited {
+.aimeos a:link,
+.aimeos a:visited {
 	color: #689DB9;
 }
 
-.arcavias .standardbutton {
+.aimeos .standardbutton {
 	background-image: url("images/buttonfond.png");
 	background-repeat: repeat-x;
 	background-size: contain;
@@ -38,21 +38,21 @@
 	cursor: pointer;
 }
 
-.arcavias .standardbutton:link,
-.arcavias .standardbutton:visited {
+.aimeos .standardbutton:link,
+.aimeos .standardbutton:visited {
 	color: #FFFFFF;
 }
 
-.arcavias .standardbutton:hover {
+.aimeos .standardbutton:hover {
 	background-image: url("images/buttonfond-active.png");
 }
 
 /* Buttons calculate width incl. padding, links not! */
-.arcavias button.standardbutton {
+.aimeos button.standardbutton {
 	min-width: 8.01em;
 }
 
-.arcavias .minibutton {
+.aimeos .minibutton {
 	color: #689DB9;
 	font-size: 150%;
 	font-weight: bold;
@@ -61,24 +61,24 @@
 	margin: 0;
 }
 
-.arcavias .standardbutton::-moz-focus-inner,
-.arcavias .minibutton::-moz-focus-inner {
+.aimeos .standardbutton::-moz-focus-inner,
+.aimeos .minibutton::-moz-focus-inner {
 	padding: 0;
 	border: 0; 
 }
 
-.arcavias .btn-action {
+.aimeos .btn-action {
 	background-image: url("images/buttonfond-action.png");
 	box-shadow: 2px 2px 4px #48A7A1;
 	line-height: normal;
 	font-size: 133%;
 }
 
-.arcavias .btn-action:hover {
+.aimeos .btn-action:hover {
 	background-image: url("images/buttonfond-action-active.png");
 }
 
-.arcavias .btn-disabled {
+.aimeos .btn-disabled {
 	background-image: url("images/buttonfond-disabled.png");
 	border: 1px solid #A7A7A7;
 	box-shadow: none;
@@ -86,17 +86,17 @@
 	
 }
 
-.arcavias .btn-disabled:hover {
+.aimeos .btn-disabled:hover {
 	background-image: url("images/buttonfond-disabled.png");
 	cursor: not-allowed;
 }
 
-.arcavias .button-group {
+.aimeos .button-group {
 	text-align: center;
 	padding: 10px 0px;
 }
 
-.arcavias .error-list {
+.aimeos .error-list {
 	background-color: #ffeeee;
 	border: solid 1px #FF3300;
 	padding: 0.5em;
@@ -105,23 +105,23 @@
 	list-style: disc;
 }
 
-.arcavias .error-item {
+.aimeos .error-item {
 	padding: 0.25em;
 }
 
-.arcavias .attr-list,
-.arcavias .form-list {
+.aimeos .attr-list,
+.aimeos .form-list {
 	padding: 0;
 	margin: 0;
 }
 
-.arcavias .form-list label {
+.aimeos .form-list label {
 	display: inline;
 	width: 210px;
 	margin: 0.5em 0;
 }
 
-.arcavias .form-list input {
+.aimeos .form-list input {
 	width: 215px;
 	height: 1.5em;
 	background-color: #F2F7FA;
@@ -130,52 +130,52 @@
 	margin: 0.5em 0;
 }
 
-.arcavias .form-list select {
+.aimeos .form-list select {
 	width: 219px;
 	border: 1px solid #689DB9;
 	vertical-align: bottom;
 	margin: 0.5em 0;
 }
 
-.arcavias .pagination {
+.aimeos .pagination {
 	display: block;
 	padding: 0.5em;
 	clear: left;
 	margin: 0;
 }
 
-.arcavias .sort {
+.aimeos .sort {
 	display: inline-block;
 	margin: 0 4%;
 }
 
-.arcavias .sort ul {
+.aimeos .sort ul {
 	list-style: none outside none;
 	display: inline;
 	padding-left: 10px;
 	margin: 0px;
 }
 
-.arcavias .sort ul li {
+.aimeos .sort ul li {
 	display: inline;
 }
 
-.arcavias .sort a {
+.aimeos .sort a {
 	text-decoration: none;
 	padding: 0 0.25em;
 	color: #004266;
 }
 
-.arcavias .sort a:hover {
+.aimeos .sort a:hover {
 	text-decoration: underline;
 }
 
-.arcavias .sort a.active {
+.aimeos .sort a.active {
 	text-decoration: none;
 	font-weight: bold;
 }
 
-.arcavias .browser {
+.aimeos .browser {
 	display: inline-block;
 	white-space: nowrap;
 	margin: 0 4%;
@@ -183,8 +183,8 @@
 
 
 
-.arcavias .browser span,
-.arcavias .browser a {
+.aimeos .browser span,
+.aimeos .browser a {
 	display: inline-block;
 	padding: 0 0.5em;
 	color: #004266;
@@ -192,13 +192,13 @@
 	text-decoration: none;
 }
 
-.arcavias .loading {
+.aimeos .loading {
 	background-image: url(images/progress.gif);
 	background-repeat: no-repeat;
 	background-position: center;
 }
 
-.arcavias-overlay {
+.aimeos-overlay {
 	background-color: #FFFFFF;
 	position: fixed;
 	z-index: 1000;
@@ -209,7 +209,7 @@
 	top: 0;
 }
 
-.arcavias-container {
+.aimeos-container {
 	position: absolute;
 	z-index: 1001;
 	opacity: 1;
@@ -223,7 +223,7 @@
 	padding: 1%;
 }
 
-.arcavias-container .btn-close {
+.aimeos-container .btn-close {
 	display: block;
 	cursor: pointer;
 	text-align: right;
@@ -232,20 +232,20 @@
 
 /* Common summary CSS also used in e-mail ===>>> */
 
-.arcavias li.attr-item,
-.arcavias li.form-item {
+.aimeos li.attr-item,
+.aimeos li.form-item {
 	list-style: none;
 	margin: 0.5em 0;
 	padding: 0;
 }
 
-.arcavias .header {
+.aimeos .header {
 	border-radius: 0.5em;
 	-moz-border-radius: 0.5em;
 	-webkit-border-radius: 0.5em;
 }
 
-.arcavias .container {
+.aimeos .container {
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
