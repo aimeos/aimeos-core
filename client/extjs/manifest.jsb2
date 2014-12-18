@@ -275,6 +275,12 @@
 			"path": "src/panel/product/"
 		}, {
 			"text": "ItemUi.js",
+			"path": "src/panel/product/property/"
+		}, {
+			"text": "ListUi.js",
+			"path": "src/panel/product/property/"
+		}, {
+			"text": "ItemUi.js",
 			"path": "src/panel/product/tag/"
 		}, {
 			"text": "ListUiSmall.js",

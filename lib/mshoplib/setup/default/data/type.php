@@ -98,6 +98,13 @@ return array (
 		array( 'domain' => 'product', 'code' => 'bought-together', 'label' => 'Bought together', 'status' => 1 ),
 	),
 
+	'product/property/type' => array(
+		array( 'domain' => 'product/property', 'code' => 'package-height', 'label' => 'Package height', 'status' => 1 ),
+		array( 'domain' => 'product/property', 'code' => 'package-length', 'label' => 'Package length', 'status' => 1 ),
+		array( 'domain' => 'product/property', 'code' => 'package-width', 'label' => 'Package width', 'status' => 1 ),
+		array( 'domain' => 'product/property', 'code' => 'package-weight', 'label' => 'Package Weight', 'status' => 1 ),
+	),
+
 	'product/tag/type' => array(
 		array( 'domain' => 'product/tag', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
 	),
