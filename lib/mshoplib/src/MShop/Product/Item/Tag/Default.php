@@ -51,14 +51,7 @@ class MShop_Product_Item_Tag_Default
 	{
 		if ( $id === $this->getLanguageId() ) { return; }
 
-		if ( $id !== null ) {
-			if ( strlen($id) !== 2 || ctype_alpha($id) === false ) {
-				throw new MShop_Product_Exception(sprintf('Invalid characters in ISO language code "%1$s"', $id));
-			}
-
-			$id = (string) $id;
-		}
-
+		$this->_checkLanguageId( $id );
 		$this->_values['langid'] = $id;
 		$this->setModified();
 	}

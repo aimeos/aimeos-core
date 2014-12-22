@@ -236,6 +236,12 @@ return array(
 				),
 			),
 		),
+		'property' => array(
+			array( 'type' => 'package-length', 'languageid' => null, 'value' => '20.00' ),
+			array( 'type' => 'package-width', 'languageid' => null, 'value' => '10.00' ),
+			array( 'type' => 'package-height', 'languageid' => null, 'value' => '5.00' ),
+			array( 'type' => 'package-weight', 'languageid' => null, 'value' => '2.5' ),
+		),
 		'stock' => array(
 			array( 'stocklevel' => null, 'warehouse' => 'default', 'dateback' => null )
 		),

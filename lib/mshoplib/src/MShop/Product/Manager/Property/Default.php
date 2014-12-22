@@ -1,142 +1,102 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2014
  * @package MShop
  * @subpackage Product
  */
 
 
 /**
- * Default product manager.
+ * Default property manager implementation.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Manager_Default
-	extends MShop_Common_Manager_ListRef_Abstract
-	implements MShop_Product_Manager_Interface
+class MShop_Product_Manager_Property_Default
+	extends MShop_Common_Manager_Abstract
+	implements MShop_Product_Manager_Property_Interface
 {
 	private $_searchConfig = array(
-		'product.id'=> array(
-			'code'=>'product.id',
-			'internalcode'=>'mpro."id"',
-			'label'=>'Product ID',
+		'product.property.id'=> array(
+			'code'=>'product.property.id',
+			'internalcode'=>'mpropr."id"',
+			'label'=>'Product property ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
 		),
-		'product.siteid'=> array(
-			'code'=>'product.siteid',
-			'internalcode'=>'mpro."siteid"',
-			'label'=>'Product site ID',
-			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
-			'public' => false,
-		),
-		'product.typeid'=> array(
-			'code'=>'product.typeid',
-			'internalcode'=>'mpro."typeid"',
-			'label'=>'Product type ID',
+		'product.property.parentid'=> array(
+			'code'=>'product.property.parentid',
+			'internalcode'=>'mpropr."parentid"',
+			'label'=>'Product property parent ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
 		),
-		'product.code'=> array(
-			'code'=>'product.code',
-			'internalcode'=>'mpro."code"',
-			'label'=>'Product code',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.label'=> array(
-			'code'=>'product.label',
-			'internalcode'=>'mpro."label"',
-			'label'=>'Product label',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.suppliercode'=> array(
-			'code'=>'product.suppliercode',
-			'internalcode'=>'mpro."suppliercode"',
-			'label'=>'Product supplier code',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.datestart'=> array(
-			'code'=>'product.datestart',
-			'internalcode'=>'mpro."start"',
-			'label'=>'Product start date/time',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.dateend'=> array(
-			'code'=>'product.dateend',
-			'internalcode'=>'mpro."end"',
-			'label'=>'Product end date/time',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.ctime'=> array(
-			'code'=>'product.ctime',
-			'internalcode'=>'mpro."ctime"',
-			'label'=>'Product create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.mtime'=> array(
-			'code'=>'product.mtime',
-			'internalcode'=>'mpro."mtime"',
-			'label'=>'Product modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.editor'=> array(
-			'code'=>'product.editor',
-			'internalcode'=>'mpro."editor"',
-			'label'=>'Product editor',
-			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
-		),
-		'product.status'=> array(
-			'code'=>'product.status',
-			'internalcode'=>'mpro."status"',
-			'label'=>'Product status',
+		'product.property.siteid'=> array(
+			'code'=>'product.property.siteid',
+			'internalcode'=>'mpropr."siteid"',
+			'label'=>'Product property site ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'public' => false,
 		),
-		'product.contains' => array(
-			'code'=>'product.contains()',
-			'internalcode'=>'',
-			'label'=>'Number of product list items, parameter(<domain>,<list type ID>,<reference IDs>)',
+		'product.property.typeid' => array(
+			'code'=>'product.property.typeid',
+			'internalcode'=>'mpropr."typeid"',
+			'label'=>'Product property type id',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
 			'public' => false,
+		),
+		'product.property.languageid' => array(
+			'code'=>'product.property.languageid',
+			'internalcode'=>'mpropr."langid"',
+			'label'=>'Product property language id',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.property.value' => array(
+			'code'=>'product.property.value',
+			'internalcode'=>'mpropr."value"',
+			'label'=>'Product property value',
+			'type'=> 'string',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.property.mtime'=> array(
+			'code'=>'product.property.mtime',
+			'internalcode'=>'mpropr."mtime"',
+			'label'=>'Product property modification date',
+			'type'=> 'datetime',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.property.ctime'=> array(
+			'code'=>'product.property.ctime',
+			'internalcode'=>'mpropr."ctime"',
+			'label'=>'Product property creation date/time',
+			'type'=> 'datetime',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+		),
+		'product.property.editor'=> array(
+			'code'=>'product.property.editor',
+			'internalcode'=>'mpropr."editor"',
+			'label'=>'Product property editor',
+			'type'=> 'string',
+			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
 		),
 	);
 
 
 	/**
-	 * Creates the product manager that will use the given context object.
+	 * Initializes the object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object with required objects
+	 * @param MShop_Context_Item_Interface $context Context object
 	 */
-	public function __construct(MShop_Context_Item_Interface $context)
+	public function __construct( MShop_Context_Item_Interface $context )
 	{
 		parent::__construct( $context );
 		$this->_setResourceName( 'db-product' );
-
-		$date = date( 'Y-m-d H:i:00' );
-
-		$this->_searchConfig['product.contains']['internalcode'] =
-			'( SELECT COUNT(mproli2."parentid") FROM "mshop_product_list" AS mproli2
-				WHERE mpro."id" = mproli2."parentid" AND :site
-					AND mproli2."domain" = $1 AND mproli2."refid" IN ( $3 ) AND mproli2."typeid" = $2
-					AND ( mproli2."start" IS NULL OR mproli2."start" <= \'' . $date . '\' )
-					AND ( mproli2."end" IS NULL OR mproli2."end" >= \'' . $date . '\' ) )';
-
-		$sites = $context->getLocale()->getSitePath();
-		$this->_replaceSiteMarker( $this->_searchConfig['product.contains'], 'mproli2."siteid"', $sites, ':site' );
 	}
 
 
@@ -147,38 +107,63 @@ class MShop_Product_Manager_Default
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/product/manager/submanagers';
-		$default = array( 'type', 'property', 'stock', 'list' );
-
-		foreach( $this->_getContext()->getConfig()->get( $path, $default ) as $domain ) {
+		$path = 'classes/product/manager/property/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/product/manager/default/item/delete' );
+		$this->_cleanup( $siteids, 'mshop/product/manager/property/default/item/delete' );
 	}
 
 
 	/**
-	 * Create new product item object.
+	 * Creates new property item object.
 	 *
-	 * @return MShop_Product_Item_Interface
+	 * @return MShop_Product_Item_Property_Interface New property item object
 	 */
 	public function createItem()
 	{
 		$values = array('siteid' => $this->_getContext()->getLocale()->getSiteId());
-		return $this->_createItem($values);
+		return $this->_createItem( $values );
 	}
 
 
 	/**
-	 * Adds a new product to the storage.
+	 * Creates a search object and optionally sets base criteria.
 	 *
-	 * @param MShop_Common_Item_Interface $item Product item that should be saved to the storage
+	 * @param boolean $default Add default criteria
+	 * @return MW_Common_Criteria_Interface Criteria object
+	 */
+	public function createSearch( $default = false )
+	{
+		$object = parent::createSearch();
+
+		if( $default === true )
+		{
+			$langid = $this->_getContext()->getLocale()->getLanguageId();
+
+			$temp = array(
+				$object->compare( '==', 'product.property.languageid', null ),
+				$object->compare( '==', 'product.property.languageid', $langid ),
+			);
+			$expr[] = $object->combine( '||', $temp );
+	
+			$object->setConditions( $object->combine( '&&', $expr ) );
+		}
+	
+		return $object;
+	}
+	
+
+	/**
+	 * Inserts the new property items for product item
+	 *
+	 * @param MShop_Product_Item_Property_Interface $item Property item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
 	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
 	{
-		$iface = 'MShop_Product_Item_Interface';
+		$iface = 'MShop_Product_Item_Property_Interface';
 		if( !( $item instanceof $iface ) ) {
 			throw new MShop_Product_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
@@ -198,8 +183,8 @@ class MShop_Product_Manager_Default
 
 			if( $id === null )
 			{
-				/** mshop/product/manager/default/item/insert
-				 * Inserts a new product record into the database table
+				/** mshop/product/manager/property/default/item/insert
+				 * Inserts a new product property record into the database table
 				 *
 				 * Items with no ID yet (i.e. the ID is NULL) will be created in
 				 * the database and the newly created ID retrieved afterwards
@@ -207,7 +192,7 @@ class MShop_Product_Manager_Default
 				 *
 				 * The SQL statement must be a string suitable for being used as
 				 * prepared statement. It must include question marks for binding
-				 * the values from the product item to the statement before they are
+				 * the values from the product property item to the statement before they are
 				 * sent to the database server. The number of question marks must
 				 * be the same as the number of columns listed in the INSERT
 				 * statement. The order of the columns must correspond to the
@@ -219,27 +204,27 @@ class MShop_Product_Manager_Default
 				 * includes using double quotes for table and column names.
 				 *
 				 * @param string SQL statement for inserting records
-				 * @since 2014.03
+				 * @since 2015.01
 				 * @category Developer
-				 * @see mshop/product/manager/default/item/update
-				 * @see mshop/product/manager/default/item/newid
-				 * @see mshop/product/manager/default/item/delete
-				 * @see mshop/product/manager/default/item/search
-				 * @see mshop/product/manager/default/item/count
+				 * @see mshop/product/manager/property/default/item/update
+				 * @see mshop/product/manager/property/default/item/newid
+				 * @see mshop/product/manager/property/default/item/delete
+				 * @see mshop/product/manager/property/default/item/search
+				 * @see mshop/product/manager/property/default/item/count
 				 */
-				$path = 'mshop/product/manager/default/item/insert';
+				$path = 'mshop/product/manager/property/default/item/insert';
 			}
 			else
 			{
-				/** mshop/product/manager/default/item/update
-				 * Updates an existing product record in the database
+				/** mshop/product/manager/property/default/item/update
+				 * Updates an existing product property record in the database
 				 *
 				 * Items which already have an ID (i.e. the ID is not NULL) will
 				 * be updated in the database.
 				 *
 				 * The SQL statement must be a string suitable for being used as
 				 * prepared statement. It must include question marks for binding
-				 * the values from the product item to the statement before they are
+				 * the values from the product property item to the statement before they are
 				 * sent to the database server. The order of the columns must
 				 * correspond to the order in the saveItems() method, so the
 				 * correct values are bound to the columns.
@@ -249,41 +234,38 @@ class MShop_Product_Manager_Default
 				 * includes using double quotes for table and column names.
 				 *
 				 * @param string SQL statement for updating records
-				 * @since 2014.03
+				 * @since 2015.01
 				 * @category Developer
-				 * @see mshop/product/manager/default/item/insert
-				 * @see mshop/product/manager/default/item/newid
-				 * @see mshop/product/manager/default/item/delete
-				 * @see mshop/product/manager/default/item/search
-				 * @see mshop/product/manager/default/item/count
+				 * @see mshop/product/manager/property/default/item/insert
+				 * @see mshop/product/manager/property/default/item/newid
+				 * @see mshop/product/manager/property/default/item/delete
+				 * @see mshop/product/manager/property/default/item/search
+				 * @see mshop/product/manager/property/default/item/count
 				 */
-				$path = 'mshop/product/manager/default/item/update';
+				$path = 'mshop/product/manager/property/default/item/update';
 			}
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 3, $item->getCode() );
-			$stmt->bind( 4, $item->getSupplierCode() );
-			$stmt->bind( 5, $item->getLabel() );
-			$stmt->bind( 6, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 7, $item->getDateStart() );
-			$stmt->bind( 8, $item->getDateEnd() );
-			$stmt->bind( 9, $date ); // mtime
-			$stmt->bind( 10, $context->getEditor() );
+			$stmt->bind( 1, $item->getParentId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 4, $item->getLanguageId() );
+			$stmt->bind( 5, $item->getValue() );
+			$stmt->bind( 6, $date ); //mtime
+			$stmt->bind( 7, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 11, $id, MW_DB_Statement_Abstract::PARAM_INT );
-				$item->setId( $id ); //so item is no longer modified
+				$stmt->bind( 8, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 11, $date ); // ctime
+				$stmt->bind( 8, $date ); //ctime
 			}
 
 			$stmt->execute()->finish();
 
 			if( $id === null && $fetch === true )
 			{
-				/** mshop/product/manager/default/item/newid
+				/** mshop/product/manager/property/default/item/newid
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
 				 * As soon as a new record is inserted into the database table,
@@ -294,26 +276,26 @@ class MShop_Product_Manager_Default
 				 * For MySQL:
 				 *  SELECT LAST_INSERT_ID()
 				 * For PostgreSQL:
-				 *  SELECT currval('seq_mpro_id')
+				 *  SELECT currval('seq_mpropr_id')
 				 * For SQL Server:
 				 *  SELECT SCOPE_IDENTITY()
 				 * For Oracle:
-				 *  SELECT "seq_mpro_id".CURRVAL FROM DUAL
+				 *  SELECT "seq_mpropr_id".CURRVAL FROM DUAL
 				 *
 				 * There's no way to retrive the new ID by a SQL statements that
 				 * fits for most database servers as they implement their own
 				 * specific way.
 				 *
 				 * @param string SQL statement for retrieving the last inserted record ID
-				 * @since 2014.03
+				 * @since 2015.01
 				 * @category Developer
-				 * @see mshop/product/manager/default/item/insert
-				 * @see mshop/product/manager/default/item/update
-				 * @see mshop/product/manager/default/item/delete
-				 * @see mshop/product/manager/default/item/search
-				 * @see mshop/product/manager/default/item/count
+				 * @see mshop/product/manager/property/default/item/insert
+				 * @see mshop/product/manager/property/default/item/update
+				 * @see mshop/product/manager/property/default/item/delete
+				 * @see mshop/product/manager/property/default/item/search
+				 * @see mshop/product/manager/property/default/item/count
 				 */
-				$path = 'mshop/product/manager/default/item/newid';
+				$path = 'mshop/product/manager/property/default/item/newid';
 				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
@@ -334,7 +316,7 @@ class MShop_Product_Manager_Default
 	 */
 	public function deleteItems( array $ids )
 	{
-		/** mshop/product/manager/default/item/delete
+		/** mshop/product/manager/property/default/item/delete
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the product database.
@@ -350,45 +332,77 @@ class MShop_Product_Manager_Default
 		 * includes using double quotes for table and column names.
 		 *
 		 * @param string SQL statement for deleting items
-		 * @since 2014.03
+		 * @since 2015.01
 		 * @category Developer
-		 * @see mshop/product/manager/default/item/insert
-		 * @see mshop/product/manager/default/item/update
-		 * @see mshop/product/manager/default/item/newid
-		 * @see mshop/product/manager/default/item/search
-		 * @see mshop/product/manager/default/item/count
+		 * @see mshop/product/manager/property/default/item/insert
+		 * @see mshop/product/manager/property/default/item/update
+		 * @see mshop/product/manager/property/default/item/newid
+		 * @see mshop/product/manager/property/default/item/search
+		 * @see mshop/product/manager/property/default/item/count
 		 */
-		$path = 'mshop/product/manager/default/item/delete';
+		$path = 'mshop/product/manager/property/default/item/delete';
 		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ) );
 	}
 
 
 	/**
-	 * Returns the product item for the given product ID.
+	 * Returns product property item with given Id.
 	 *
-	 * @param integer $id Unique ID of the product item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return MShop_Product_Item_Interface Returns the product item of the given id
+	 * @param integer $id Id of the product property item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return MShop_Product_Item_Property_Interface Returns the product property item of the given id
 	 * @throws MShop_Exception If item couldn't be found
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return $this->_getItem( 'product.id', $id, $ref );
+		return $this->_getItem( 'product.property.id', $id, $ref );
 	}
 
 
 	/**
-	 * Search for products based on the given criteria.
+	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search object containing the conditions
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Interface
+	 */
+	public function getSearchAttributes( $withsub = true )
+	{
+		/** classes/product/manager/property/submanagers
+		 * List of manager names that can be instantiated by the product property manager
+		 *
+		 * Managers provide a generic interface to the underlying storage.
+		 * Each manager has or can have sub-managers caring about particular
+		 * aspects. Each of these sub-managers can be instantiated by its
+		 * parent manager using the getSubManager() method.
+		 *
+		 * The search keys from sub-managers can be normally used in the
+		 * manager as well. It allows you to search for items of the manager
+		 * using the search keys of the sub-managers to further limit the
+		 * retrieved list of items.
+		 *
+		 * @param array List of sub-manager names
+		 * @since 2015.01
+		 * @category Developer
+		 */
+		$path = 'classes/product/manager/property/submanagers';
+
+		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'type' ), $withsub );
+	}
+
+
+	/**
+	 * Search for all property items based on the given critera.
+	 *
+	 * @param MW_Common_Criteria_Interface $search Search object with search conditions
+	 * @param array List of referenced items that should be fetched too
 	 * @param integer &$total Number of items that are available in total
-	 *
-	 * @return array List of products implementing MShop_Product_Item_Interface
+	 * @return array List of property items implementing MShop_Product_Item_Property_Interface
+	 * @throws MShop_Product_Exception if creating items failed
+	 * @see MW_Common_Criteria_SQL
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$map = $typeIds = array();
+		$items = $map = $typeIds = array();
 		$context = $this->_getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -397,10 +411,10 @@ class MShop_Product_Manager_Default
 
 		try
 		{
-			$required = array( 'product' );
+			$required = array( 'product.property' );
 			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
 
-			/** mshop/product/manager/default/item/search
+			/** mshop/product/manager/property/default/item/search
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the product
@@ -443,17 +457,17 @@ class MShop_Product_Manager_Default
 			 * includes using double quotes for table and column names.
 			 *
 			 * @param string SQL statement for searching items
-			 * @since 2014.03
+			 * @since 2015.01
 			 * @category Developer
-			 * @see mshop/product/manager/default/item/insert
-			 * @see mshop/product/manager/default/item/update
-			 * @see mshop/product/manager/default/item/newid
-			 * @see mshop/product/manager/default/item/delete
-			 * @see mshop/product/manager/default/item/count
+			 * @see mshop/product/manager/property/default/item/insert
+			 * @see mshop/product/manager/property/default/item/update
+			 * @see mshop/product/manager/property/default/item/newid
+			 * @see mshop/product/manager/property/default/item/delete
+			 * @see mshop/product/manager/property/default/item/count
 			 */
-			$cfgPathSearch = 'mshop/product/manager/default/item/search';
+			$cfgPathSearch = 'mshop/product/manager/property/default/item/search';
 
-			/** mshop/product/manager/default/item/count
+			/** mshop/product/manager/property/default/item/count
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the product
@@ -490,18 +504,17 @@ class MShop_Product_Manager_Default
 			 * includes using double quotes for table and column names.
 			 *
 			 * @param string SQL statement for counting items
-			 * @since 2014.03
+			 * @since 2015.01
 			 * @category Developer
-			 * @see mshop/product/manager/default/item/insert
-			 * @see mshop/product/manager/default/item/update
-			 * @see mshop/product/manager/default/item/newid
-			 * @see mshop/product/manager/default/item/delete
-			 * @see mshop/product/manager/default/item/search
+			 * @see mshop/product/manager/property/default/item/insert
+			 * @see mshop/product/manager/property/default/item/update
+			 * @see mshop/product/manager/property/default/item/newid
+			 * @see mshop/product/manager/property/default/item/delete
+			 * @see mshop/product/manager/property/default/item/search
 			 */
-			$cfgPathCount =  'mshop/product/manager/default/item/count';
+			$cfgPathCount =  'mshop/product/manager/property/default/item/count';
 
 			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				$map[ $row['id'] ] = $row;
@@ -520,82 +533,53 @@ class MShop_Product_Manager_Default
 		{
 			$typeManager = $this->getSubManager( 'type' );
 			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'product.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setConditions( $typeSearch->compare( '==', 'product.property.type.id', array_keys( $typeIds ) ) );
 			$typeSearch->setSlice( 0, $search->getSliceSize() );
 			$typeItems = $typeManager->searchItems( $typeSearch );
 
 			foreach( $map as $id => $row )
 			{
 				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$map[$id]['type'] = $typeItems[ $row['typeid'] ]->getCode();
+					$row['type'] = $typeItems[ $row['typeid'] ]->getCode();
 				}
+
+				$items[$id] = $this->_createItem( $row );
 			}
 		}
 
-		return $this->_buildItems( $map, $ref, 'product' );
+		return $items;
 	}
 
 
 	/**
-	 * Returns the attributes that can be used for searching.
-	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing MW_Common_Criteria_Attribute_Interface
-	 */
-	public function getSearchAttributes( $withsub = true )
-	{
-		/** classes/product/manager/submanagers
-		 * List of manager names that can be instantiated by the product manager
-		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
-		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
-		 *
-		 * @param array List of sub-manager names
-		 * @since 2014.03
-		 * @category Developer
-		 */
-		$path = 'classes/product/manager/submanagers';
-		$default = array( 'type', 'property', 'list', 'stock' );
-
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, $default, $withsub );
-	}
-
-
-	/**
-	 * Returns a new manager for product extensions.
+	 * Returns a new manager for product extensions
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @param string|null $name Name of the implementation, will be from
+	 * configuration (or Default) if null
+	 * @return MShop_Common_Manager_Interface Manager for different extensions, e.g property types, property lists etc.
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/product/manager/name
-		 * Class name of the used product manager implementation
+		/** classes/product/manager/property/name
+		 * Class name of the used product property manager implementation
 		 *
-		 * Each default product manager can be replaced by an alternative imlementation.
+		 * Each default product property manager can be replaced by an alternative imlementation.
 		 * To use this implementation, you have to set the last part of the class
 		 * name as configuration value so the manager factory knows which class it
 		 * has to instantiate.
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Product_Manager_Default
+		 *  MShop_Product_Manager_Property_Default
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Product_Manager_Myproduct
+		 *  MShop_Product_Manager_Property_Myproperty
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/product/manager/name = Myproduct
+		 *  classes/product/manager/property/name = Myproperty
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -604,15 +588,15 @@ class MShop_Product_Manager_Default
 		 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
 		 * characters are possible! You should always start the last part of the class
 		 * name with an upper case character and continue only with lower case characters
-		 * or numbers. Avoid chamel case names like "MyProduct"!
+		 * or numbers. Avoid chamel case names like "MyProperty"!
 		 *
 		 * @param string Last part of the class name
-		 * @since 2014.03
+		 * @since 2015.01
 		 * @category Developer
 		 */
 
-		/** mshop/product/manager/decorators/excludes
-		 * Excludes decorators added by the "common" option from the product manager
+		/** mshop/product/manager/property/decorators/excludes
+		 * Excludes decorators added by the "common" option from the product property manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -621,24 +605,24 @@ class MShop_Product_Manager_Default
 		 *
 		 * This option allows you to remove a decorator added via
 		 * "mshop/common/manager/decorators/default" before they are wrapped
-		 * around the product manager.
+		 * around the product property manager.
 		 *
-		 *  mshop/product/manager/decorators/excludes = array( 'decorator1' )
+		 *  mshop/product/manager/property/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
-		 * "mshop/common/manager/decorators/default" for the product manager.
+		 * "mshop/common/manager/decorators/default" for the product property manager.
 		 *
 		 * @param array List of decorator names
-		 * @since 2014.03
+		 * @since 2015.01
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/product/manager/decorators/global
-		 * @see mshop/product/manager/decorators/local
+		 * @see mshop/product/manager/property/decorators/global
+		 * @see mshop/product/manager/property/decorators/local
 		 */
 
-		/** mshop/product/manager/decorators/global
-		 * Adds a list of globally available decorators only to the product manager
+		/** mshop/product/manager/property/decorators/global
+		 * Adds a list of globally available decorators only to the product property manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -646,23 +630,23 @@ class MShop_Product_Manager_Default
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product manager.
+		 * ("MShop_Common_Manager_Decorator_*") around the product property manager.
 		 *
-		 *  mshop/product/manager/decorators/global = array( 'decorator1' )
+		 *  mshop/product/manager/property/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
 		 * "MShop_Common_Manager_Decorator_Decorator1" only to the product controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2014.03
+		 * @since 2015.01
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/product/manager/decorators/excludes
-		 * @see mshop/product/manager/decorators/local
+		 * @see mshop/product/manager/property/decorators/excludes
+		 * @see mshop/product/manager/property/decorators/local
 		 */
 
-		/** mshop/product/manager/decorators/local
-		 * Adds a list of local decorators only to the product manager
+		/** mshop/product/manager/property/decorators/local
+		 * Adds a list of local decorators only to the product property manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -670,97 +654,35 @@ class MShop_Product_Manager_Default
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the product manager.
+		 * ("MShop_Common_Manager_Decorator_*") around the product property manager.
 		 *
-		 *  mshop/product/manager/decorators/local = array( 'decorator2' )
+		 *  mshop/product/manager/property/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
 		 * "MShop_Common_Manager_Decorator_Decorator2" only to the product
 		 * controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2014.03
+		 * @since 2015.01
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/product/manager/decorators/excludes
-		 * @see mshop/product/manager/decorators/global
+		 * @see mshop/product/manager/property/decorators/excludes
+		 * @see mshop/product/manager/property/decorators/global
 		 */
 
-		return $this->_getSubManager( 'product', $manager, $name );
+		return $this->_getSubManager( 'product', 'property/' . $manager, $name );
 	}
 
 
 	/**
-	 * Creates a search object and optionally sets base criteria.
+	 * Creates new property item object.
 	 *
-	 * @param boolean $default Add default criteria
-	 * @return MW_Common_Criteria_Interface Criteria object
+	 * @see MShop_Product_Item_Property_Default Default property item
+	 * @param array $values Possible optional array keys can be given: id, typeid, langid, type, value
+	 * @return MShop_Product_Item_Property_Default New property item object
 	 */
-	public function createSearch( $default = false )
+	protected function _createItem( array $values = array() )
 	{
-		if( $default === true )
-		{
-			$curDate = date( 'Y-m-d H:i:00', time() );
-			$object = $this->_createSearch( 'product' );
-
-			$expr = array( $object->getConditions() );
-
-			$temp = array(
-				$object->compare( '==', 'product.datestart', null ),
-				$object->compare( '<=', 'product.datestart', $curDate ),
-			);
-			$expr[] = $object->combine( '||', $temp );
-
-			$temp = array(
-				$object->compare( '==', 'product.dateend', null ),
-				$object->compare( '>=', 'product.dateend', $curDate ),
-			);
-			$expr[] = $object->combine( '||', $temp );
-
-			$object->setConditions( $object->combine( '&&', $expr ) );
-
-			return $object;
-		}
-
-		return parent::createSearch();
-	}
-
-
-	/**
-	 * Create new product item object initialized with given parameters.
-	 *
-	 * @param MShop_Product_Item_Interface $item Product item object
-	 * @return array Associative list of key/value pairs suitable for product item constructor
-	 */
-	protected function _createArray( MShop_Product_Item_Interface $item )
-	{
-		return array(
-			'id' => $item->getId(),
-			'typeid' => $item->getTypeId(),
-			'type' => $item->getType(),
-			'status' => $item->getStatus(),
-			'label' => $item->getLabel(),
-			'start' => $item->getDateStart(),
-			'end' => $item->getDateEnd(),
-			'code' => $item->getCode(),
-			'suppliercode' => $item->getSupplierCode(),
-			'ctime' => $item->getTimeCreated(),
-			'mtime' => $item->getTimeModified(),
-			'editor' => $item->getEditor(),
-		);
-	}
-
-
-	/**
-	 * Create new product item object initialized with given parameters.
-	 *
-	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing MShop_Common_Item_List_Interface
-	 * @param array $refItems List of items implementing MShop_Common_Item_Interface
-	 * @return MShop_Product_Item_Interface New product item
-	 */
-	protected function _createItem( array $values = array(), array $listitems = array(), array $refItems = array() )
-	{
-		return new MShop_Product_Item_Default( $values, $listitems, $refItems );
+		return new MShop_Product_Item_Property_Default( $values );
 	}
 }
