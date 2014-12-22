@@ -19,8 +19,10 @@ class MShop_Customer_Item_Default
 	implements MShop_Customer_Item_Interface
 {
 	private $_billingaddress;
-	private $_salt;
 	private $_values;
+	private $_helper;
+	private $_salt;
+
 
 	/**
 	 * Initializes the customer item object
@@ -28,7 +30,8 @@ class MShop_Customer_Item_Default
 	 * @param array $values List of attributes that belong to the customer item
 	 */
 	public function __construct( MShop_Common_Item_Address_Interface $address, array $values = array(),
-		array $listItems = array(), array $refItems = array(), $salt = '' )
+		array $listItems = array(), array $refItems = array(), $salt = '',
+		MShop_Common_Item_Helper_Password_Interface $helper = null )
 	{
 		parent::__construct('customer.', $values, $listItems, $refItems);
 
@@ -59,6 +62,7 @@ class MShop_Customer_Item_Default
 
 		$this->_billingaddress = $address;
 		$this->_values = $values;
+		$this->_helper = $helper;
 		$this->_salt = $salt;
 	}
 
@@ -214,7 +218,7 @@ class MShop_Customer_Item_Default
 	 */
 	public function setPassword( $value )
 	{
-		$password = sha1( (string) $value . $this->_salt );
+		$password = ( $this->_helper !== null ? $this->_helper->encode( $value, $this->_salt ) : $value );
 		if ( $password == $this->getPassword() ) { return; }
 
 		$this->_values['password'] = $password;

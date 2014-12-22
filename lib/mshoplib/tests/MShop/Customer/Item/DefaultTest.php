@@ -64,7 +64,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->_object = new MShop_Customer_Item_Default( $this->_address, $this->_values, array(), array(), 'mshop' );
+		$this->_object = new MShop_Customer_Item_Default( $this->_address, $this->_values, array(), array(), 'mshop', null );
 	}
 
 	/**
@@ -134,7 +134,7 @@ class MShop_Customer_Item_DefaultTest extends MW_Unittest_Testcase
 	public function testSetAndGetPassword()
 	{
 		$this->_object->setPassword( '08154712' );
-		$this->assertEquals( $this->_object->getPassword(), sha1( '08154712mshop' ) );
+		$this->assertEquals( '08154712', $this->_object->getPassword() );
 		$this->assertTrue( $this->_object->isModified() );
 	}
 

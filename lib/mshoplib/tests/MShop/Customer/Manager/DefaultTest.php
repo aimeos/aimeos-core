@@ -173,7 +173,7 @@ class MShop_Customer_Manager_DefaultTest extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>=', 'customer.website', '' );
 
 		$expr[] = $search->compare( '==', 'customer.birthday', null );
-		$expr[] = $search->compare( '==', 'customer.password', '' );
+		$expr[] = $search->compare( '>=', 'customer.password', '' );
 		$expr[] = $search->compare( '>=', 'customer.ctime', '0000-00-00 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.mtime', '0000-00-00 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
