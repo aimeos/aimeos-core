@@ -17,6 +17,13 @@
 interface MShop_Common_Item_Helper_Password_Interface
 {
 	/**
+	 * Initializes the password helper.
+	 *
+	 * @param array Associative list of key/value pairs of options specific for the hashing method
+	 */
+	public function __construct( array $options );
+
+	/**
 	 * Returns the hashed password.
 	 *
 	 * @return string Hashed password
