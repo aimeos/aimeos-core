@@ -73,7 +73,7 @@ class Client_Html_Basket_Mini_Main_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 
-		$controller->addProduct( $productItem->getId(), 9, array(), array(), array(), array(), 'unit_warehouse1' );
+		$controller->addProduct( $productItem->getId(), 9, array(), array(), array(), array(), 'default' );
 		$view->miniBasket = $controller->get();
 
 		$output = $this->_object->getBody();

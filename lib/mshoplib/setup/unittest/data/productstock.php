@@ -15,8 +15,8 @@ return array (
 	),
 
 	'product/stock' => array (
-		array ( 'prodid' => 'product/CNE', 'warehouseid' => 'unit_warehouse1', 'stocklevel' => 1000, 'backdate' => '2010-04-01 00:00:00' ),
-		array ( 'prodid' => 'product/CNC', 'warehouseid' => 'unit_warehouse2', 'stocklevel' => 1200, 'backdate' => '2015-05-01 00:00:00' ),
+		array ( 'prodid' => 'product/CNE', 'warehouseid' => 'default', 'stocklevel' => 1000, 'backdate' => '2010-04-01 00:00:00' ),
+		array ( 'prodid' => 'product/CNC', 'warehouseid' => 'default', 'stocklevel' => 1200, 'backdate' => '2015-05-01 00:00:00' ),
 		array ( 'prodid' => 'product/U:MD', 'warehouseid' => 'unit_warehouse3', 'stocklevel' => 200, 'backdate' => '2006-06-01 00:00:00' ),
 		array ( 'prodid' => 'product/U:SD', 'warehouseid' => 'unit_warehouse4', 'stocklevel' => 100, 'backdate' => null ),
 		array ( 'prodid' => 'product/U:PD', 'warehouseid' => 'unit_warehouse5', 'stocklevel' => 2000, 'backdate' => null ),

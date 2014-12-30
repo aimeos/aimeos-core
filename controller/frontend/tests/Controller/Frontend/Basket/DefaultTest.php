@@ -62,7 +62,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 			throw new Exception( 'Product not found' );
 		}
 
-		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'unit_warehouse2' );
+		$this->_object->addProduct( $item->getId(), 2, array(), array(), array(), array(), 'default' );
 		$item2 = $this->_object->get()->getProduct( 1 );
 		$this->_object->deleteProduct( 0 );
 
@@ -119,7 +119,7 @@ class Controller_Frontend_Basket_DefaultTest extends MW_Unittest_Testcase
 		}
 
 
-		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ), array(), array(), 'unit_warehouse2' );
+		$this->_object->addProduct( $item->getId(), 1, array(), array_keys( $attributes ), array(), array(), 'default' );
 
 		$this->assertEquals( 1, count( $this->_object->get()->getProducts() ) );
 		$this->assertEquals( 'CNC', $this->_object->get()->getProduct( 0 )->getProductCode() );

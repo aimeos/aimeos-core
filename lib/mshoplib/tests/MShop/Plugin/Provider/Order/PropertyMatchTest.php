@@ -86,7 +86,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends MW_Unittest_Testcase
 		// single condition
 		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
 
-		$this->_plugin->setConfig( array( 'product.stock.warehouse.code' => 'unit_warehouse2' ) );
+		$this->_plugin->setConfig( array( 'product.stock.warehouse.code' => 'default' ) );
 		$this->_object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->_plugin );
 
 		$this->assertTrue( $this->_object->update( $this->_order, 'addProduct.before', $this->_products['CNC'] ) );
@@ -94,7 +94,7 @@ class MShop_Plugin_Provider_Order_PropertyMatchTest extends MW_Unittest_Testcase
 
 		// two conditions
 		$this->_plugin->setConfig( array(
-			'product.stock.warehouse.code' => 'unit_warehouse2',
+			'product.stock.warehouse.code' => 'default',
 			'product.suppliercode' => 'unitSupplier',
 		) );
 		$this->_object = new MShop_Plugin_Provider_Order_PropertyMatch( TestHelper::getContext(), $this->_plugin );

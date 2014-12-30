@@ -271,7 +271,7 @@ class MShop_Product_Manager_DefaultTest extends MW_Unittest_Testcase
 
 		$expr[] = $search->compare( '!=', 'product.stock.warehouse.id', null );
 		$expr[] = $search->compare( '!=', 'product.stock.warehouse.siteid', null );
-		$expr[] = $search->compare( '==', 'product.stock.warehouse.code', 'unit_warehouse1' );
+		$expr[] = $search->compare( '==', 'product.stock.warehouse.code', 'default' );
 		$expr[] = $search->compare( '==', 'product.stock.warehouse.editor', $this->_editor );
 
 

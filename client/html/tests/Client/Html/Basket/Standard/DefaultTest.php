@@ -61,7 +61,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b-action' => 'add',
 			'b-prod-id' => $this->_getProductItem( 'CNE' )->getId(),
 			'b-quantity' => 1,
-			'b-warehouse' => 'unit_warehouse1',
+			'b-warehouse' => 'default',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -87,12 +87,12 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 				array(
 					'prod-id' => $this->_getProductItem( 'CNC' )->getId(),
 					'quantity' => 1,
-					'warehouse' => 'unit_warehouse2',
+					'warehouse' => 'default',
 				),
 				array(
 					'prod-id' => $this->_getProductItem( 'CNE' )->getId(),
 					'quantity' => 1,
-					'warehouse' => 'unit_warehouse1',
+					'warehouse' => 'default',
 				),
 			),
 		);
@@ -173,7 +173,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b-prod-id' => $this->_getProductItem( 'CNE' )->getId(),
 			'b-quantity' => 1,
 			'b-attrconf-id' => $attribute->getId(),
-			'b-warehouse' => 'unit_warehouse1',
+			'b-warehouse' => 'default',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -209,7 +209,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b-prod-id' => $this->_getProductItem( 'CNE' )->getId(),
 			'b-quantity' => 1,
 			'b-attrhide-id' => $attribute->getId(),
-			'b-warehouse' => 'unit_warehouse1',
+			'b-warehouse' => 'default',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -224,7 +224,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyEditSingle()
 	{
-		$this->_addProduct( 'CNE', 2, 'unit_warehouse1' );
+		$this->_addProduct( 'CNE', 2, 'default' );
 
 		$view = $this->_object->getView();
 		$param = array(
@@ -248,8 +248,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyEditMulti()
 	{
-		$this->_addProduct( 'CNE', 1, 'unit_warehouse1' );
-		$this->_addProduct( 'CNC', 2, 'unit_warehouse2' );
+		$this->_addProduct( 'CNE', 1, 'default' );
+		$this->_addProduct( 'CNC', 2, 'default' );
 
 		$view = $this->_object->getView();
 		$param = array(
@@ -282,8 +282,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyDeleteSingle()
 	{
-		$this->_addProduct( 'CNE', 2, 'unit_warehouse1' );
-		$this->_addProduct( 'CNC', 1, 'unit_warehouse2' );
+		$this->_addProduct( 'CNE', 2, 'default' );
+		$this->_addProduct( 'CNC', 1, 'default' );
 
 		$view = $this->_object->getView();
 		$param = array(
@@ -306,8 +306,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 	public function testGetBodyDeleteMulti()
 	{
-		$this->_addProduct( 'CNE', 1, 'unit_warehouse1' );
-		$this->_addProduct( 'CNC', 1, 'unit_warehouse2' );
+		$this->_addProduct( 'CNE', 1, 'default' );
+		$this->_addProduct( 'CNC', 1, 'default' );
 
 		$view = $this->_object->getView();
 		$param = array(
