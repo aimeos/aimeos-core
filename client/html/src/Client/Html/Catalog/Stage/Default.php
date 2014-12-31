@@ -374,7 +374,7 @@ class Client_Html_Catalog_Stage_Default
 		$params = $this->_getClientParams( $this->getView()->param(), $prefixes );
 
 		if( empty( $params ) ) {
-			$params = $this->_getContext()->getSession()->get( 'arcavias/catalog/list/params/last', array() );
+			$params = (array) $this->_getContext()->getSession()->get( 'arcavias/catalog/list/params/last', array() );
 		}
 
 		ksort( $params );
