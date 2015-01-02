@@ -1094,6 +1094,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 /* Product detail, basket section */
 .catalog-detail-basket {
 	margin: 1% 2%;
+	clear: right;
 }
 
 .catalog-detail-basket .price {
