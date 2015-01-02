@@ -95,32 +95,32 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: Article 1.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/1-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/1.jpg',
+				'url' => 'http://demo.aimeos.org/media/1-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/1.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Article 2.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/2-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/2.jpg',
+				'url' => 'http://demo.aimeos.org/media/2-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/2.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Article 3.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/3-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/3.jpg',
+				'url' => 'http://demo.aimeos.org/media/3-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/3.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Article 4.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/4-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/4.jpg',
+				'url' => 'http://demo.aimeos.org/media/4-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/4.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -473,32 +473,32 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: Selection article 1.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/1-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/1.jpg',
+				'url' => 'http://demo.aimeos.org/media/1-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/1.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article 2.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/2-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/2.jpg',
+				'url' => 'http://demo.aimeos.org/media/2-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/2.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article 3.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/3-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/3.jpg',
+				'url' => 'http://demo.aimeos.org/media/3-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/3.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article 4.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/4-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/4.jpg',
+				'url' => 'http://demo.aimeos.org/media/4-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/4.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -694,32 +694,32 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: Bundle article 1.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/1-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/1.jpg',
+				'url' => 'http://demo.aimeos.org/media/1-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/1.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Bundle article 2.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/2-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/2.jpg',
+				'url' => 'http://demo.aimeos.org/media/2-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/2.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Bundle article 3.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/3-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/3.jpg',
+				'url' => 'http://demo.aimeos.org/media/3-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/3.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Bundle article 4.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.arcavias.com/images/demo/product/4-big.jpg',
-				'preview' => 'https://demo.arcavias.com/images/demo/product/4.jpg',
+				'url' => 'http://demo.aimeos.org/media/4-big.jpg',
+				'preview' => 'http://demo.aimeos.org/media/4.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1

@@ -64,8 +64,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: dhl.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/dhl.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/dhl.png',
+				'url' => 'http://demo.aimeos.org/media/service/dhl.png',
+				'preview' => 'http://demo.aimeos.org/media/service/dhl.png',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -124,8 +124,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: dhl-express.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/dhl-express.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/dhl-express.png',
+				'url' => 'http://demo.aimeos.org/media/service/dhl-express.png',
+				'preview' => 'http://demo.aimeos.org/media/service/dhl-express.png',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -184,8 +184,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: fedex.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/fedex.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/fedex.png',
+				'url' => 'http://demo.aimeos.org/media/service/fedex.png',
+				'preview' => 'http://demo.aimeos.org/media/service/fedex.png',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -244,8 +244,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: tnt.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/tnt.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/tnt.png',
+				'url' => 'http://demo.aimeos.org/media/service/tnt.png',
+				'preview' => 'http://demo.aimeos.org/media/service/tnt.png',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -312,8 +312,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: payment-in-advance.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/payment-in-advance.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/payment-in-advance.png',
+				'url' => 'http://demo.aimeos.org/media/service/payment-in-advance.png',
+				'preview' => 'http://demo.aimeos.org/media/service/payment-in-advance.png',
 				'type' => 'default', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -378,16 +378,16 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: sepa.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/sepa.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/sepa.png',
+				'url' => 'http://demo.aimeos.org/media/service/sepa.png',
+				'preview' => 'http://demo.aimeos.org/media/service/sepa.png',
 				'type' => 'default', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: direct-debit.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/direct-debit.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/direct-debit.png',
+				'url' => 'http://demo.aimeos.org/media/service/direct-debit.png',
+				'preview' => 'http://demo.aimeos.org/media/service/direct-debit.png',
 				'type' => 'default', 'languageid' => 'en', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -454,8 +454,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: paypal.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/paypal.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/paypal.png',
+				'url' => 'http://demo.aimeos.org/media/service/paypal.png',
+				'preview' => 'http://demo.aimeos.org/media/service/paypal.png',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -513,8 +513,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: dhl-cod.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/dhl-cod.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/dhl-cod.png',
+				'url' => 'http://demo.aimeos.org/media/service/dhl-cod.png',
+				'preview' => 'http://demo.aimeos.org/media/service/dhl-cod.png',
 				'type' => 'default', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -579,8 +579,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: payment-in-advance-alternative.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.arcavias.com/images/demo/service/payment-in-advance-alternative.png',
-				'preview' => 'https://demo.arcavias.com/images/demo/service/payment-in-advance-alternative.png',
+				'url' => 'http://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
+				'preview' => 'http://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
 				'type' => 'default', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
