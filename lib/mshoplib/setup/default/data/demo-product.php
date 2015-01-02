@@ -697,7 +697,7 @@ return array(
 				'url' => 'http://demo.aimeos.org/media/1-big.jpg',
 				'preview' => 'http://demo.aimeos.org/media/1.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => array(),
+				'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
@@ -705,7 +705,7 @@ return array(
 				'url' => 'http://demo.aimeos.org/media/2-big.jpg',
 				'preview' => 'http://demo.aimeos.org/media/2.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
@@ -713,7 +713,7 @@ return array(
 				'url' => 'http://demo.aimeos.org/media/3-big.jpg',
 				'preview' => 'http://demo.aimeos.org/media/3.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
@@ -721,7 +721,7 @@ return array(
 				'url' => 'http://demo.aimeos.org/media/4-big.jpg',
 				'preview' => 'http://demo.aimeos.org/media/4.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => array(),
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
