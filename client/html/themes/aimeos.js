@@ -43,8 +43,8 @@ Aimeos = {
 	    btnclose.addClass("minibutton");
 	    btnclose.addClass("btn-close");
 
-	    container.addClass("arcavias-container");
-	    container.addClass("arcavias");
+	    container.addClass("aimeos-container");
+	    container.addClass("aimeos");
 	    container.prepend(btnclose);
 	    container.fadeTo(400, 1.0);
 	    container.append(content);
@@ -71,7 +71,7 @@ Aimeos = {
 	createOverlay: function() {
 
 	    var overlay = $(document.createElement("div"));
-	    overlay.addClass("arcavias-overlay");
+	    overlay.addClass("aimeos-overlay");
 	    overlay.fadeTo(1000, 0.5);
 	    $("body").append(overlay);
 	},
@@ -450,16 +450,16 @@ AimeosCatalogFilter = {
 	 */
 	setupSearchAutocompletion: function() {
 	
-		var arcaviasInputComplete = $(".catalog-filter-search .value");
+		var aimeosInputComplete = $(".catalog-filter-search .value");
 		
-		arcaviasInputComplete.autocomplete({
+		aimeosInputComplete.autocomplete({
 		    minLength : 3,
 		    delay : 200,
 		    source : function(req, add) {
 		        var nameTerm = {};
-		        nameTerm[arcaviasInputComplete.attr("name")] = req.term;
+		        nameTerm[aimeosInputComplete.attr("name")] = req.term;
 		
-		        $.getJSON(arcaviasInputComplete.data("url"), nameTerm, function(data) {
+		        $.getJSON(aimeosInputComplete.data("url"), nameTerm, function(data) {
 		            var suggestions = [];
 		
 		            $.each(data, function(idx, val) {
@@ -470,7 +470,7 @@ AimeosCatalogFilter = {
 		        });
 		    },
 		    select : function(ev, ui) {
-		        arcaviasInputComplete.val(ui.item.value);
+		        aimeosInputComplete.val(ui.item.value);
 		        $(ev.target).parents(".catalog-filter form").submit();
 		    }
 		});
@@ -807,9 +807,9 @@ AimeosCheckoutStandard = {
 	 */
 	setupPaymentRedirect: function() {
 	
-		var arcavias_checkout_form = $(".checkout-standard-order-payment > form").first();
+		var aimeos_checkout_form = $(".checkout-standard-order-payment > form").first();
 	
-		if(arcavias_checkout_form.length === 0 || arcavias_checkout_form.submit() === false) {
+		if(aimeos_checkout_form.length === 0 || aimeos_checkout_form.submit() === false) {
 		    $(".checkout-standard-order-payment").first().each(function(index, element) {
 		        var url = $(element).data("url");
 		        if(url) {
