@@ -1,53 +1,41 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
  * @package MW
  * @subpackage Container
  */
 
 
 /**
- * Implementation of the csv content object.
+ * Implementation of the binary content object.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_Content_CSV
+class MW_Container_Content_Binary
 	extends MW_Container_Content_Abstract
 	implements MW_Container_Content_Interface
 {
-	private $_separator;
-	private $_enclosure;
-	private $_escape;
-	private $_lineend;
-	private $_endsubst;
 	private $_fh;
 	private $_data;
 	private $_position = 0;
+	private $_size;
 
 
 	/**
-	 * Initializes the CSV content object.
+	 * Initializes the text content object.
 	 *
 	 * Supported options are:
-	 * - csv-separator (default: ',')
-	 * - csv-enclosure (default: '"')
-	 * - csv-escape (default: '"')
-	 * - csv-lineend (default: LF)
-	 * - csv-lineend-subst (default: ' ')
+	 * - bin-maxsize (default: 1MB)
 	 *
 	 * @param string $resource Path to the actual file
-	 * @param string $name Name of the CSV file
+	 * @param string $name Name of the file
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
 	public function __construct( $resource, $name, array $options = array() )
 	{
-		if( !is_file( $resource ) && substr( $resource, -4 ) !== '.csv' ) {
-			$resource .= '.csv';
-		}
-
 		if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
 			&& ( $this->_fh = fopen( $resource, 'r' ) ) === false
 		) {
@@ -56,17 +44,13 @@ class MW_Container_Content_CSV
 
 		parent::__construct( $resource, $name, $options );
 
-		$this->_separator = $this->_getOption( 'csv-separator', ',' );
-		$this->_enclosure = $this->_getOption( 'csv-enclosure', '"' );
-		$this->_escape = $this->_getOption( 'csv-escape', '"' );
-		$this->_lineend = $this->_getOption( 'csv-lineend', chr( 10 ) );
-		$this->_endsubst = $this->_getOption( 'csv-lineend-subst', ' ' );
+		$this->_size = $this->_getOption( 'bin-maxsize', 0x100000 );
 		$this->_data = $this->_getData();
 	}
 
 
 	/**
-	 * Closes the CSV file so it's written to disk.
+	 * Closes the text file so it's written to disk.
 	 *
 	 * @throws MW_Container_Exception If the file handle couldn't be flushed or closed
 	 */
@@ -89,15 +73,7 @@ class MW_Container_Content_CSV
 	 */
 	public function add( $data )
 	{
-		$enclosure = $this->_enclosure;
-
-		foreach( (array) $data as $key => $entry )
-		{
-			$entry = str_replace( $this->_lineend, $this->_endsubst, $entry );
-			$data[$key] = $enclosure . str_replace( $enclosure, $this->_escape . $enclosure, $entry ) . $enclosure;
-		}
-
-		if( fwrite( $this->_fh, implode( $this->_separator, $data ) . $this->_lineend ) === false ) {
+		if( fwrite( $this->_fh, $data ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
 	}
@@ -106,7 +82,7 @@ class MW_Container_Content_CSV
 	/**
 	 * Return the current element.
 	 *
-	 * @return array List of values
+	 * @return string Content line ending with
 	 */
 	function current()
 	{
@@ -117,7 +93,7 @@ class MW_Container_Content_CSV
 	/**
 	 * Returns the key of the current element.
 	 *
-	 * @return integer|null Position within the CSV file or null if end of file is reached
+	 * @return integer|null Position within the text file or null if end of file is reached
 	 */
 	function key()
 	{
@@ -144,14 +120,8 @@ class MW_Container_Content_CSV
 	 */
 	function rewind()
 	{
-		$filename = $this->getResource();
-
-		if( fclose( $this->_fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to close file handle for %1$s', $filename ) );
-		}
-
-		if( ( $this->_fh = fopen( $filename, 'r' ) ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to open file %1$s', $filename ) );
+		if( rewind( $this->_fh ) === 0 ) {
+			throw new MW_Container_Exception( sprintf( 'Rewind file handle for %1$s failed', $this->getResource() ) );
 		}
 
 		$this->_position = 0;
@@ -171,21 +141,15 @@ class MW_Container_Content_CSV
 
 
 	/**
-	 * Reads the next line from the file.
+	 * Reads the next chunk from the file.
 	 *
-	 * @return array List of values
+	 * @return string Data
 	 */
 	protected function _getData()
 	{
-		do
-		{
-			$data = fgetcsv( $this->_fh, 0, $this->_separator, $this->_enclosure, $this->_escape );
-
-			if( $data === false || $data === null ) {
-				return null;
-			}
+		if( ( $data = fgets( $this->_fh, $this->_size ) ) === false ) {
+			return null;
 		}
-		while( $data === array( null ) );
 
 		return $data;
 	}

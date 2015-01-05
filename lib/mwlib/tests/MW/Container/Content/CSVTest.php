@@ -72,7 +72,8 @@ class MW_Container_Content_CSVTest extends MW_Unittest_Testcase
 		foreach( $data as $entry ) {
 			$csv->add( $entry );
 		}
-
+		$csv->close();
+		
 		$expected = ":test:;:file:;:data:\r\n:\\: :;:" . pack( 'x' ) . ":;:\\:\r\n";
 
 		if( ( $actual = file_get_contents( $csv->getResource() ) ) === false ) {

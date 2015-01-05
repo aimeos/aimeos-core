@@ -91,9 +91,8 @@ class MW_Container_Zip
 	 *
 	 * @param string $name Name of the content object that should be returned
 	 * @return MW_Container_Content_Interface Content object
-	 * @todo 2015.03 Add to interface to enforce method and signature
 	 */
-	function get( $name )
+	public function get( $name )
 	{
 		if( $this->_container->locateName( $name ) === false )
 		{
