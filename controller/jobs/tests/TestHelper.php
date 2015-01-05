@@ -58,7 +58,7 @@ class TestHelper
 
 
 		$paths = $arcavias->getConfigPaths( 'mysql' );
-		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
+		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
 		$conf = new MW_Config_Array( array(), $paths );
