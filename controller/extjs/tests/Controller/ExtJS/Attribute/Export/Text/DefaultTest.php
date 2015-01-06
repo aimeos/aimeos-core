@@ -63,7 +63,7 @@ class Controller_ExtJS_Attribute_Export_Text_DefaultTest extends MW_Unittest_Tes
 		$zip->open($file);
 
 		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
-		if( mkdir( $testdir ) === false ) {
+		if( !is_dir( $testdir ) && mkdir( $testdir, 0755, true ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
 		}
 
