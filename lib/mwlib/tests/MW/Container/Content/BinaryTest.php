@@ -6,8 +6,16 @@
  */
 
 
-class MW_Container_Content_TextTest extends MW_Unittest_Testcase
+class MW_Container_Content_BinaryTest extends MW_Unittest_Testcase
 {
+	protected function setUp()
+	{
+		if( !is_dir( 'tmp' ) ) {
+			mkdir( 'tmp', 0755 );
+		}
+	}
+
+
 	public function testNewFile()
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';

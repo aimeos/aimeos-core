@@ -85,7 +85,7 @@ class MW_Container_Directory
 	 */
 	function get( $name )
 	{
-		return new $this->_classname( $this->_resource->getPath(), $name );
+		return new $this->_classname( $this->_resource->getPath() . DIRECTORY_SEPARATOR . $name, $name );
 	}
 
 

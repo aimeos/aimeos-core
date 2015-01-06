@@ -8,6 +8,14 @@
 
 class MW_Container_Content_TextTest extends MW_Unittest_Testcase
 {
+	protected function setUp()
+	{
+		if( !is_dir( 'tmp' ) ) {
+			mkdir( 'tmp', 0755 );
+		}
+	}
+
+
 	public function testNewFile()
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
@@ -54,7 +62,7 @@ class MW_Container_Content_TextTest extends MW_Unittest_Testcase
 
 	public function testIterator()
 	{
-		$path = __DIR__ . DIRECTORY_SEPARATOR . 'testfile';
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'testfile.txt';
 		$file = new MW_Container_Content_Text( $path, 'test' );
 
 		$expected = array( 'test text' );

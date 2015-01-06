@@ -39,6 +39,10 @@ class MW_Container_Content_Gzip
 			$resource .= '.gz';
 		}
 
+		if( substr( $name, -3 ) !== '.gz' ) {
+			$name .= '.gz';
+		}
+
 		$level = $this->_getOption( 'gzip-level', 5 );
 
 		if( ( $this->_fh = @gzopen( $resource, 'rb' . $level ) ) === false

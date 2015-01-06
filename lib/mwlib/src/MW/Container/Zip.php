@@ -43,7 +43,7 @@ class MW_Container_Zip
 			throw new MW_Container_Exception( sprintf( 'Unknown format "%1$s"', $format ) );
 		}
 
-		if( is_file( $resourcepath ) === false ) {
+		if( is_file( $resourcepath ) === false && substr( $resourcepath, -4 ) !== '.zip' ) {
 			$resourcepath .= '.zip';
 		}
 

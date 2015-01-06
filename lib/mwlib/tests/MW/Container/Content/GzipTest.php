@@ -8,6 +8,14 @@
 
 class MW_Container_Content_GzipTest extends MW_Unittest_Testcase
 {
+	protected function setUp()
+	{
+		if( !is_dir( 'tmp' ) ) {
+			mkdir( 'tmp', 0755 );
+		}
+	}
+
+
 	public function testNewFile()
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
@@ -56,7 +64,7 @@ class MW_Container_Content_GzipTest extends MW_Unittest_Testcase
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'testfile';
 		$file = new MW_Container_Content_Gzip( $filename, 'test' );
 
-		$expected = array( "test data\n" );
+		$expected = array( "test data" );
 
 		$actual = array();
 		foreach( $file as $entry ) {

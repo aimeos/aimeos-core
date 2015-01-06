@@ -48,6 +48,10 @@ class MW_Container_Content_CSV
 			$resource .= '.csv';
 		}
 
+		if( substr( $name, -4 ) !== '.csv' ) {
+			$name .= '.csv';
+		}
+
 		if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
 			&& ( $this->_fh = fopen( $resource, 'r' ) ) === false
 		) {

@@ -42,6 +42,10 @@ class MW_Container_Content_Text
 			$resource .= '.txt';
 		}
 
+		if( substr( $name, -4 ) !== '.txt' ) {
+			$name .= '.txt';
+		}
+
 		if( ( $this->_fh = @fopen( $resource, 'a+' ) ) === false
 			&& ( $this->_fh = fopen( $resource, 'r' ) ) === false
 		) {
