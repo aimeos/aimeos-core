@@ -581,6 +581,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 .catalog-filter-attribute .attr-width li.attr-item {
 	display: inline-block;
 	min-width: 7.5em;
+	width: 50%;
 }
 
 .catalog-filter-attribute button.filter {
@@ -1339,13 +1340,15 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	display: table-row;
 }
 
-/* Product detail, additional attributes section */
-.catalog-detail-additional table.attributes {
+/* Product detail, additional attributes/properties section */
+.catalog-detail-additional table.attributes,
+.catalog-detail-additional table.properties {
 	margin: 1%;
 	width: 98%;
 }
 
-.catalog-detail-additional .attributes td {
+.catalog-detail-additional .attributes td,
+.catalog-detail-additional .properties td {
 	padding: 1%;
 	width: 48%;
 }	
