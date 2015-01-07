@@ -43,7 +43,7 @@ class MW_Container_Zip
 			throw new MW_Container_Exception( sprintf( 'Unknown format "%1$s"', $format ) );
 		}
 
-		if( is_file( $resourcepath ) === false ) {
+		if( is_file( $resourcepath ) === false && substr( $resourcepath, -4 ) !== '.zip' ) {
 			$resourcepath .= '.zip';
 		}
 
@@ -91,9 +91,8 @@ class MW_Container_Zip
 	 *
 	 * @param string $name Name of the content object that should be returned
 	 * @return MW_Container_Content_Interface Content object
-	 * @todo 2015.03 Add to interface to enforce method and signature
 	 */
-	function get( $name )
+	public function get( $name )
 	{
 		if( $this->_container->locateName( $name ) === false )
 		{

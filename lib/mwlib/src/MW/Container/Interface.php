@@ -47,4 +47,12 @@ interface MW_Container_Interface extends Iterator
 	 * @return MW_Container_Content_Interface New content object
 	 */
 	public function create( $name );
+
+	/**
+	 * Returns the element specified by its name.
+	 *
+	 * @param string $name Name of the content object that should be returned
+	 * @return MW_Container_Content_Interface Content object
+	 */
+	public function get( $name );
 }

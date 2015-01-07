@@ -65,8 +65,8 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$zip = new ZipArchive();
 		$zip->open($file);
 
-		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'catalogcsvexport';
-		if( mkdir( $testdir ) === false ) {
+		$testdir = 'tmp' . DIRECTORY_SEPARATOR . 'csvexport';
+		if( !is_dir( $testdir ) && mkdir( $testdir, 0755, true ) === false ) {
 			throw new Controller_ExtJS_Exception( sprintf( 'Couldn\'t create directory "csvexport"' ) );
 		}
 

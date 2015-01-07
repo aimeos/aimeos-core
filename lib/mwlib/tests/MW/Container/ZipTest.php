@@ -8,31 +8,17 @@
  */
 class MW_Container_ZipTest extends MW_Unittest_Testcase
 {
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
-	}
-
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function tearDown()
-	{
+		if( !is_dir( 'tmp' ) ) {
+			mkdir( 'tmp', 0755 );
+		}
 	}
 
 
 	public function testNewFile()
 	{
-		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile';
+		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
 
 		$zip = new MW_Container_Zip( $filename, 'CSV' );
 		$zip->add( $zip->create( 'test' ) );
@@ -49,7 +35,7 @@ class MW_Container_ZipTest extends MW_Unittest_Testcase
 
 	public function testAdd()
 	{
-		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile';
+		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
 
 		$zip = new MW_Container_Zip( $filename, 'CSV' );
 
@@ -74,7 +60,7 @@ class MW_Container_ZipTest extends MW_Unittest_Testcase
 
 	public function testGet()
 	{
-		$zip = new MW_Container_Zip( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
+		$zip = new MW_Container_Zip( __DIR__ . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
 
 		$this->assertInstanceOf( 'MW_Container_Content_Interface', $zip->get( 'tempfile.csv' ) );
 	}
@@ -82,7 +68,7 @@ class MW_Container_ZipTest extends MW_Unittest_Testcase
 
 	public function testIterator()
 	{
-		$zip = new MW_Container_Zip( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
+		$zip = new MW_Container_Zip( __DIR__ . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
 
 		$expected = array(
 			'tempfile.csv' => 2,
