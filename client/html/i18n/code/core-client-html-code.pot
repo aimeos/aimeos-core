@@ -166,3 +166,19 @@ msgstr ""
 #. Watch action
 msgid "watch"
 msgstr ""
+
+#. Product property package-length
+msgid "package-length"
+msgstr ""
+
+#. Product property package-width
+msgid "package-width"
+msgstr ""
+
+#. Product property package-height
+msgid "package-height"
+msgstr ""
+
+#. Product property package-weight
+msgid "package-weight"
+msgstr ""

@@ -10,6 +10,7 @@ msgstr ""
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2013-01-18 16:33+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
+"Language-Team: Aimeos (aimeos@aimeos.org)\n"
 "Language: English\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -163,3 +164,19 @@ msgstr ""
 #. Product attribute
 msgid "width"
 msgstr "Width"
+
+#. Product property package-length
+msgid "package-length"
+msgstr "Package length"
+
+#. Product property package-width
+msgid "package-width"
+msgstr "Package width"
+
+#. Product property package-height
+msgid "package-height"
+msgstr "Package height"
+
+#. Product property package-weight
+msgid "package-weight"
+msgstr "Package weight"
