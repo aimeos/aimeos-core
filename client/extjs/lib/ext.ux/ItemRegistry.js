@@ -134,7 +134,7 @@ Ext.ComponentMgr.registerPlugin('ux.itemregistry', Ext.ux.ItemRegistry);
  * itemRegTestPanel20.superclass.initComponent.call(this); } });
  * Ext.ux.ItemRegistry.registerItem('testWin', itemRegTestPanel20, 20);
  * 
- * itemRegTestPanel60 = { xtype: 'panel', title: 'add panel pos 60', html: 'add
- * panel pos 60' }; Ext.ux.ItemRegistry.registerItem('testWin',
+ * itemRegTestPanel60 = { xtype: 'panel', title: 'add panel pos 60', html:
+ * 'add panel pos 60' }; Ext.ux.ItemRegistry.registerItem('testWin',
  * itemRegTestPanel60, 60);
  */

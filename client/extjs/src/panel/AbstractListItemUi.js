@@ -6,8 +6,10 @@
 Ext.ns('MShop.panel');
 
 /**
- * Abtract List ItemUi For uses by parent listUi subclasses need to provide -
- * this.items - this.mainForm reference - this.listUI
+ * Abtract List ItemUi For uses by parent listUi subclasses need to provide
+ * - this.items
+ * - this.mainForm reference
+ * - this.listUI
  * 
  * @namespace MShop
  * @class MShop.panel.AbstractListItemUi
@@ -15,8 +17,7 @@ Ext.ns('MShop.panel');
  */
 MShop.panel.AbstractListItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     /**
-     * Reference to his parent listUi, a itemUi can't be opened without any
-     * parent referenc
+     * Reference to his parent listUi, a itemUi can not be opened without any parent reference
      * 
      * @required
      */

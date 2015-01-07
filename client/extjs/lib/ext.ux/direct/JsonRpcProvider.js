@@ -68,8 +68,8 @@ Ext.ux.direct.JsonRpcProvider = Ext.extend(Ext.direct.RemotingProvider, {
                 data[param['name']] = t.data[i];
 
                 /*
-                 * NOTE: Ext.Direct and the automatically creaeted DirectFn's
-                 * don't support optional params, cause callback and scope are
+                 * NOTE: Ext.Direct and the automatically creaeted DirectFns
+                 * do not support optional params, cause callback and scope are
                  * expected on fixed positions!
                  * 
                  * var value = typeof t.data[i] !== 'function' ? t.data[i] :
