@@ -1381,8 +1381,8 @@ Ext.ux.direct.JsonRpcProvider = Ext.extend(Ext.direct.RemotingProvider, {
                 data[param['name']] = t.data[i];
 
                 /*
-                 * NOTE: Ext.Direct and the automatically creaeted DirectFn's
-                 * don't support optional params, cause callback and scope are
+                 * NOTE: Ext.Direct and the automatically creaeted DirectFns
+                 * do not support optional params, cause callback and scope are
                  * expected on fixed positions!
                  * 
                  * var value = typeof t.data[i] !== 'function' ? t.data[i] :
@@ -1619,8 +1619,8 @@ Ext.ComponentMgr.registerPlugin('ux.itemregistry', Ext.ux.ItemRegistry);
  * itemRegTestPanel20.superclass.initComponent.call(this); } });
  * Ext.ux.ItemRegistry.registerItem('testWin', itemRegTestPanel20, 20);
  * 
- * itemRegTestPanel60 = { xtype: 'panel', title: 'add panel pos 60', html: 'add
- * panel pos 60' }; Ext.ux.ItemRegistry.registerItem('testWin',
+ * itemRegTestPanel60 = { xtype: 'panel', title: 'add panel pos 60', html:
+ * 'add panel pos 60' }; Ext.ux.ItemRegistry.registerItem('testWin',
  * itemRegTestPanel60, 60);
  */
 /*
@@ -3920,8 +3920,10 @@ Ext.reg('MShop.panel.abstracttypeitemui', MShop.panel.AbstractTypeItemUi);
 Ext.ns('MShop.panel');
 
 /**
- * Abtract List ItemUi For uses by parent listUi subclasses need to provide -
- * this.items - this.mainForm reference - this.listUI
+ * Abtract List ItemUi For uses by parent listUi subclasses need to provide
+ * - this.items
+ * - this.mainForm reference
+ * - this.listUI
  * 
  * @namespace MShop
  * @class MShop.panel.AbstractListItemUi
@@ -3929,8 +3931,7 @@ Ext.ns('MShop.panel');
  */
 MShop.panel.AbstractListItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     /**
-     * Reference to his parent listUi, a itemUi can't be opened without any
-     * parent referenc
+     * Reference to his parent listUi, a itemUi can not be opened without any parent reference
      * 
      * @required
      */
