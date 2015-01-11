@@ -639,6 +639,12 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	margin: 0.5em;
 }
 
+.catalog-stage-navigator a,
+.catalog-stage-navigator a:focus,
+.catalog-stage-navigator a:hover {
+	text-decoration: none;
+}
+
 .catalog-stage-navigator a:before {
 	content: '   |   ';
 	white-space: pre;
