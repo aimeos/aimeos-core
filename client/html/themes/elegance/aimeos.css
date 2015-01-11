@@ -457,6 +457,7 @@ html.no-js .catalog-filter-tree:hover > ul {
 }
 
 .catalog-filter-attribute .attribute-lists {
+	text-align: left;
 	display: none;
 	clear: both;
 }
@@ -503,7 +504,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	font-weight: normal;
 	text-align: left;
 	min-width: 280px;
-	width: 24%;
+	width: 24.9%;
 	color: #555;
 	line-height: 1;
 	margin: 0.5em 0;
