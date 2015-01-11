@@ -43,7 +43,7 @@ class MW_Container_Directory
 
 		parent::__construct( $resourcepath, $options );
 		
-		$perm = $this->_getOption( 'dir-perm', 0755 );
+		$perm = octdec( $this->_getOption( 'dir-perm', '0755' ) );
 
 		if( !is_dir( realpath( $resourcepath ) ) && mkdir( $resourcepath, $perm, true ) === false ) {
 			throw new MW_Container_Exception( sprintf( 'Unable to create directory "%1$s"', $resourcepath ) );
