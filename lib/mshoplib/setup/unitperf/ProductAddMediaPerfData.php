@@ -42,6 +42,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 
 		$context = $this->_getContext();
+		$prefix = 'http://demo.aimeos.org/media/';
+
 
 		$mediaManager = MShop_Media_Manager_Factory::createManager( $context );
 		$mediaTypeManager = $mediaManager->getSubManager( 'type' );
@@ -98,8 +100,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 		$downloadItem->setDomain( 'product' );
 		$downloadItem->setMimeType( 'application/pdf' );
 		$downloadItem->setLabel( 'PDF download' );
-		$downloadItem->setPreview( 'unitperf/download-preview.jpg' );
-		$downloadItem->setUrl( 'unitperf/download.pdf' );
+		$downloadItem->setPreview( $prefix . 'unitperf/download-preview.jpg' );
+		$downloadItem->setUrl( $prefix . 'unitperf/download.pdf' );
 		$downloadItem->setStatus( 1 );
 
 		$mediaManager->saveItem( $downloadItem );
@@ -132,8 +134,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 			{
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '1. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( 'unitperf/' . ( ($pos + 0) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( 'unitperf/' . ( ($pos + 0) % 4 + 1 ) . '-big.jpg' );
+				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ($pos + 0) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ($pos + 0) % 4 + 1 ) . '-big.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
@@ -145,8 +147,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '2. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( 'unitperf/' . ( ($pos + 1) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( 'unitperf/' . ( ($pos + 1) % 4 + 1 ) . '-big.jpg' );
+				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ($pos + 1) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ($pos + 1) % 4 + 1 ) . '-big.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
@@ -158,8 +160,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '3. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( 'unitperf/' . ( ($pos + 2) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( 'unitperf/' . ( ($pos + 2) % 4 + 1 ) . '-big.jpg' );
+				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ($pos + 2) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ($pos + 2) % 4 + 1 ) . '-big.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
@@ -171,8 +173,8 @@ class MW_Setup_Task_ProductAddMediaPerfData extends MW_Setup_Task_ProductAddBase
 
 				$mediaItem->setId( null );
 				$mediaItem->setLabel( '4. picture for ' . $item->getLabel() );
-				$mediaItem->setPreview( 'unitperf/' . ( ($pos + 3) % 4 + 1 ) . '.jpg' );
-				$mediaItem->setUrl( 'unitperf/' . ( ($pos + 3) % 4 + 1 ) . '-big.jpg' );
+				$mediaItem->setPreview( $prefix . 'unitperf/' . ( ($pos + 3) % 4 + 1 ) . '.jpg' );
+				$mediaItem->setUrl( $prefix . 'unitperf/' . ( ($pos + 3) % 4 + 1 ) . '-big.jpg' );
 				$mediaManager->saveItem( $mediaItem );
 
 				$listItem->setId( null );
