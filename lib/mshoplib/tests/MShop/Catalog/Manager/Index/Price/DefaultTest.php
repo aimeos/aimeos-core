@@ -104,9 +104,9 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 		$search = $this->_object->createSearch( true );
 		$result = $this->_object->aggregate( $search, 'catalog.index.price.id' );
 
-		$this->assertEquals( 12, count( $result ) );
+		$this->assertEquals( 6, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 4, $result[ $item->getId() ] );
+		$this->assertEquals( 3, $result[ $item->getId() ] );
 	}
 
 
@@ -255,10 +255,10 @@ class MShop_Catalog_Manager_Index_Price_DefaultTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 
-		$func = $search->createFunction( 'catalog.index.price.rebate', array( 'default', 'EUR', 'default' ) );
-		$search->setConditions( $search->compare( '>', $func, '0.00' ) );
+		$func = $search->createFunction( 'catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
+		$search->setConditions( $search->compare( '==', $func, '1.50' ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.price.rebate', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->_object->searchItems( $search, array() );

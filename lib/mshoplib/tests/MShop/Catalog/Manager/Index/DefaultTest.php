@@ -167,7 +167,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 7, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );
-		$this->assertEquals( 7, $cntPriceA );
+		$this->assertEquals( 2, $cntPriceA );
 		$this->assertEquals( 14, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );

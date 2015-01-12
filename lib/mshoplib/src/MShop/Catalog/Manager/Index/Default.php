@@ -540,8 +540,8 @@ class MShop_Catalog_Manager_Index_Default
 	protected function _saveSubProducts( array $items )
 	{
 		$context = $this->_getContext();
-		$default = array( 'attribute', 'price', 'text', 'product' );
-		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/default/domains', $default );
+		$default = array( 'attribute', 'text', 'product' );
+		$domains = $context->getConfig()->get( 'mshop/catalog/manager/index/default/subdomains', $default );
 		$size = $context->getConfig()->get( 'mshop/catalog/manager/index/default/chunksize', 1000 );
 
 		$manager = MShop_Factory::createManager( $context, 'product' );
