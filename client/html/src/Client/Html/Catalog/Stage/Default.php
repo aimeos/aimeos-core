@@ -373,8 +373,11 @@ class Client_Html_Catalog_Stage_Default
 		$locale = $this->_getContext()->getLocale();
 		$params = $this->_getClientParams( $this->getView()->param(), $prefixes );
 
-		if( empty( $params ) ) {
-			$params = (array) $this->_getContext()->getSession()->get( 'arcavias/catalog/list/params/last', array() );
+		if( empty( $params ) )
+		{
+			$context = $this->_getContext();
+			$site = $context->getLocale()->getSite()->getCode();
+			$params = (array) $context->getSession()->get( 'arcavias/catalog/list/params/last/' . $site, array() );
 		}
 
 		ksort( $params );
@@ -399,8 +402,11 @@ class Client_Html_Catalog_Stage_Default
 		{
 			$params = $this->_getClientParams( $view->param(), array( 'f' ) );
 
-			if( empty( $params ) ) {
-				$params = $this->_getContext()->getSession()->get( 'arcavias/catalog/list/params/last', array() );
+			if( empty( $params ) )
+			{
+				$context = $this->_getContext();
+				$site = $context->getLocale()->getSite()->getCode();
+				$params = $context->getSession()->get( 'arcavias/catalog/list/params/last/' . $site, array() );
 			}
 
 			$this->_params = $params;
