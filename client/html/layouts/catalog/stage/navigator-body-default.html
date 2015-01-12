@@ -8,8 +8,8 @@
 $enc = $this->encoder();
 
 ?>
-<?php if( $this->param( 'l-pos' ) !== null ) : ?>
 <!-- catalog.stage.navigator -->
+<?php if( $this->param( 'l-pos' ) !== null ) : ?>
 <div class="catalog-stage-navigator">
 	<nav>
 <?php if( isset( $this->navigationPrev ) ) : ?>
@@ -21,5 +21,5 @@ $enc = $this->encoder();
 	</nav>
 <?php echo $this->get( 'navigatorBody' ); ?>
 </div>
-<!-- catalog.stage.navigator -->
 <?php endif; ?>
+<!-- catalog.stage.navigator -->
