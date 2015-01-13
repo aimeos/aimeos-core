@@ -278,8 +278,9 @@ class Client_Html_Catalog_List_Default
 
 		try
 		{
+			$site = $context->getLocale()->getSite()->getCode();
 			$params = $this->_getClientParams( $view->param() );
-			$context->getSession()->set( 'arcavias/catalog/list/params/last', $params );
+			$context->getSession()->set( 'arcavias/catalog/list/params/last/' . $site, $params );
 
 			parent::process();
 		}
