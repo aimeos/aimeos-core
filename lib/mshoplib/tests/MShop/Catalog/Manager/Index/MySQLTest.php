@@ -110,7 +110,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 1, $total );
 
 
 		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype19', 'de', 'name', 'product' ) );
@@ -124,7 +124,7 @@ class MShop_Catalog_Manager_Index_MySQLTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 1, $total );
 
 		foreach($result as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );
