@@ -571,7 +571,7 @@ class Controller_Frontend_Basket_Default
 			{
 				$logger = $this->_getContext()->getLogger();
 				$str = 'Error migrating address with type "%1$s" in basket to locale "%2$s": %3$s';
-				$logger->log( sprintf( $str, $type, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
+				$logger->log( sprintf( $str, $type, $localeKey, $e->getMessage() ), MW_Logger_Abstract::INFO );
 				$errors['address'][$type] = $e->getMessage();
 			}
 		}
@@ -601,7 +601,7 @@ class Controller_Frontend_Basket_Default
 			{
 				$logger = $this->_getContext()->getLogger();
 				$str = 'Error migrating coupon with code "%1$s" in basket to locale "%2$s": %3$s';
-				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
+				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::INFO );
 				$errors['coupon'][$code] = $e->getMessage();
 			}
 		}
@@ -651,7 +651,7 @@ class Controller_Frontend_Basket_Default
 				$code = $product->getProductCode();
 				$logger = $this->_getContext()->getLogger();
 				$str = 'Error migrating product with code "%1$s" in basket to locale "%2$s": %3$s';
-				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::WARN );
+				$logger->log( sprintf( $str, $code, $localeKey, $e->getMessage() ), MW_Logger_Abstract::INFO );
 				$errors['product'][$pos] = $e->getMessage();
 			}
 		}
