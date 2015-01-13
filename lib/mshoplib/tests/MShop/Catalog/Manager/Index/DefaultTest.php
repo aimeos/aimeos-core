@@ -168,7 +168,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$this->assertEquals( 7, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );
 		$this->assertEquals( 2, $cntPriceA );
-		$this->assertEquals( 14, $cntTextA );
+		$this->assertEquals( 9, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
@@ -531,7 +531,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		$result = $object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 4, $total );
+		$this->assertEquals( 2, $total );
 
 
 		$func = $search->createFunction( 'catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
@@ -641,7 +641,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 
 		$this->assertEquals( 12, count( $afterInsertAttr ) );
 		$this->assertEquals( 11, count( $afterInsertPrice ) );
-		$this->assertEquals( 9, count( $afterInsertText ) );
+		$this->assertEquals( 7, count( $afterInsertText ) );
 		$this->assertEquals( 7, count( $afterInsertCat ) );
 	}
 
@@ -717,7 +717,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends MW_Unittest_Testcase
 		//check inserted items
 		$this->assertEquals( 6, count( $afterInsertAttr ) );
 		$this->assertEquals( 7, count( $afterInsertPrice ) );
-		$this->assertEquals( 5, count( $afterInsertText ) );
+		$this->assertEquals( 3, count( $afterInsertText ) );
 		$this->assertEquals( 7, count( $afterInsertCat ) );
 	}
 

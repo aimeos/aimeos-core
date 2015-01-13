@@ -99,9 +99,9 @@ class MShop_Catalog_Manager_Index_Text_DefaultTest extends MW_Unittest_Testcase
 		$search = $this->_object->createSearch( true );
 		$result = $this->_object->aggregate( $search, 'catalog.index.text.id' );
 
-		$this->assertEquals( 22, count( $result ) );
+		$this->assertEquals( 17, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 3, $result[ $item->getId() ] );
+		$this->assertEquals( 2, $result[ $item->getId() ] );
 	}
 
 

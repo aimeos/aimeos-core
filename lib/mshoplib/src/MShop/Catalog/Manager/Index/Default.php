@@ -602,7 +602,17 @@ class MShop_Catalog_Manager_Index_Default
 	protected function _saveSubProductsChunk( MW_Common_Criteria_Interface $search, array $domains, array $list, $size )
 	{
 		$manager = MShop_Factory::createManager( $this->_getContext(), 'product' );
+		$submanagers = array();
 		$start = 0;
+
+		// Execute only the sub-managers which correspond to one of the given domains
+		// This will prevent adding product names of sub-products which messes up the sortation
+		foreach( $this->_getSubManagers() as $domain => $submanager )
+		{
+			if( in_array( $domain, $domains ) ) {
+				$submanagers[$domain] = $submanager;
+			}
+		}
 
 		do
 		{
@@ -615,10 +625,10 @@ class MShop_Catalog_Manager_Index_Default
 					$refItem->setId( null );
 					$refItem->setId( $list[$refId] );
 				}
+			}
 
-				foreach( $this->_getSubManagers() as $submanager ) {
-					$submanager->rebuildIndex( $result );
-				}
+			foreach( $submanagers as $submanager ) {
+				$submanager->rebuildIndex( $result );
 			}
 
 			$count = count( $result );
