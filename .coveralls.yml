@@ -1,0 +1,10 @@
+src_dir: ./
+json_path: misc/coveralls.json
+coverage_clover:
+  - client/html/tests/coverage.xml
+  - controller/common/tests/coverage.xml
+  - controller/extjs/tests/coverage.xml
+  - controller/frontend/tests/coverage.xml
+  - controller/jobs/tests/coverage.xml
+  - lib/mshoplib/tests/coverage.xml
+  - lib/mwlib/tests/coverage.xml

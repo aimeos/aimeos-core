@@ -20,7 +20,7 @@
 	<target name="coverage" description="Generates code coverage report">
 		<echo msg="Generating code coverage report" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
-		<delete dir="tests/coverage" quiet="true" failonerror="false" />
+		<delete file="tests/coverage.xml" quiet="true" failonerror="false" />
 		<exec command="${bindir}phpunit -d memory_limit=-1 --configuration=phpunit-coverage.xml"
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>

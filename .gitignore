@@ -3,7 +3,8 @@ vendor/
 
 misc/apidoc/
 misc/confdoc/
-coverage/
+misc/coveralls.json
+coverage.xml
 tmp/
 confdoc.ser
 *.junit.xml

@@ -1,6 +1,7 @@
 # Arcavias core - high performance e-commerce
 
 [![Build Status](https://travis-ci.org/Arcavias/arcavias-core.png?branch=master)](https://travis-ci.org/Arcavias/arcavias-core)
+[![Coverage Status](https://coveralls.io/repos/aimeos/arcavias-core/badge.svg?branch=master)](https://coveralls.io/r/aimeos/arcavias-core?branch=master)
 [![Total Downloads](https://poser.pugx.org/arcavias/arcavias-core/downloads.svg)](https://packagist.org/packages/arcavias/arcavias-core)
 [![License](https://poser.pugx.org/arcavias/arcavias-core/license.svg)](https://packagist.org/packages/arcavias/arcavias-core)
 
