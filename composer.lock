@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7e382f87b7902ffc6def1c510ae92bfe",
+    "hash": "70feb275efd0cc8484a0f691b6bb7fe2",
     "packages": [],
     "packages-dev": [
         {
@@ -965,13 +965,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/satooshi/php-coveralls.git",
-                "reference": "2fbf803803d179ab1082807308a67bbd5a760c70"
+                "url": "https://github.com/aimeos/php-coveralls.git",
+                "reference": "f57d99fe399f997c377182453849f17e8171f53c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/satooshi/php-coveralls/zipball/2fbf803803d179ab1082807308a67bbd5a760c70",
-                "reference": "2fbf803803d179ab1082807308a67bbd5a760c70",
+                "url": "https://api.github.com/repos/aimeos/php-coveralls/zipball/f57d99fe399f997c377182453849f17e8171f53c",
+                "reference": "f57d99fe399f997c377182453849f17e8171f53c",
                 "shasum": ""
             },
             "require": {
@@ -1014,7 +1014,6 @@
                     "Satooshi\\Bundle": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1033,7 +1032,10 @@
                 "github",
                 "test"
             ],
-            "time": "2014-11-11 15:35:34"
+            "support": {
+                "source": "https://github.com/aimeos/php-coveralls/tree/master"
+            },
+            "time": "2015-01-14 13:36:02"
         },
         {
             "name": "squizlabs/php_codesniffer",

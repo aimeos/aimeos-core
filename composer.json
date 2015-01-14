@@ -10,6 +10,12 @@
 		"forum": "https://forum.arcavias.com",
 		"wiki": "https://docs.arcavias.com"
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/aimeos/php-coveralls.git"
+		}
+	],
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
