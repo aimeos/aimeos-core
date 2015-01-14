@@ -10,6 +10,7 @@
 		"forum": "https://forum.arcavias.com",
 		"wiki": "https://docs.arcavias.com"
 	},
+	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.2.0",
@@ -23,6 +24,7 @@
 		"ext-zip": "*"
 	},
 	"require-dev": {
+		"satooshi/php-coveralls": "dev-master",
 		"squizlabs/php_codesniffer": "1.*",
 		"phpunit/phpunit": "3.7.*",
 		"phing/phing": "2.4.*"
