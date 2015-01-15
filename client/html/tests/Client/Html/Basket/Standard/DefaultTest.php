@@ -58,9 +58,9 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	{
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'add',
-			'b-prod-id' => $this->_getProductItem( 'CNE' )->getId(),
-			'b-quantity' => 1,
+			'b_action' => 'add',
+			'b_prodid' => $this->_getProductItem( 'CNE' )->getId(),
+			'b_quantity' => 1,
 			'b-warehouse' => 'default',
 		);
 
@@ -82,15 +82,15 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	{
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'add',
-			'b-prod' => array(
+			'b_action' => 'add',
+			'b_prod' => array(
 				array(
-					'prod-id' => $this->_getProductItem( 'CNC' )->getId(),
+					'prodid' => $this->_getProductItem( 'CNC' )->getId(),
 					'quantity' => 1,
 					'warehouse' => 'default',
 				),
 				array(
-					'prod-id' => $this->_getProductItem( 'CNE' )->getId(),
+					'prodid' => $this->_getProductItem( 'CNE' )->getId(),
 					'quantity' => 1,
 					'warehouse' => 'default',
 				),
@@ -134,9 +134,9 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'add',
-			'b-prod-id' => $this->_getProductItem( 'U:TEST' )->getId(),
-			'b-quantity' => 1,
+			'b_action' => 'add',
+			'b_prodid' => $this->_getProductItem( 'U:TEST' )->getId(),
+			'b_quantity' => 1,
 			'b-attrvar-id' => array_keys( $attributes ),
 		);
 
@@ -169,10 +169,10 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'add',
-			'b-prod-id' => $this->_getProductItem( 'CNE' )->getId(),
-			'b-quantity' => 1,
-			'b-attrconf-id' => $attribute->getId(),
+			'b_action' => 'add',
+			'b_prodid' => $this->_getProductItem( 'CNE' )->getId(),
+			'b_quantity' => 1,
+			'b-attrconfid' => $attribute->getId(),
 			'b-warehouse' => 'default',
 		);
 
@@ -205,9 +205,9 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'add',
-			'b-prod-id' => $this->_getProductItem( 'CNE' )->getId(),
-			'b-quantity' => 1,
+			'b_action' => 'add',
+			'b_prodid' => $this->_getProductItem( 'CNE' )->getId(),
+			'b_quantity' => 1,
 			'b-attrhide-id' => $attribute->getId(),
 			'b-warehouse' => 'default',
 		);
@@ -228,9 +228,9 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'edit',
-			'b-position' => 0,
-			'b-quantity' => 1,
+			'b_action' => 'edit',
+			'b_position' => 0,
+			'b_quantity' => 1,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -253,8 +253,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'edit',
-			'b-prod' => array(
+			'b_action' => 'edit',
+			'b_prod' => array(
 				array(
 					'position' => 0,
 					'quantity' => 2,
@@ -287,8 +287,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'delete',
-			'b-position' => 1,
+			'b_action' => 'delete',
+			'b_position' => 1,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -311,8 +311,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'delete',
-			'b-position' => array( 0, 1 ),
+			'b_action' => 'delete',
+			'b_position' => array( 0, 1 ),
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -331,8 +331,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 	{
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'delete',
-			'b-position' => -1,
+			'b_action' => 'delete',
+			'b_position' => -1,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -383,9 +383,9 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'b-action' => 'add',
-			'b-prod-id' => $item->getId(),
-			'b-quantity' => $quantity,
+			'b_action' => 'add',
+			'b_prodid' => $item->getId(),
+			'b_quantity' => $quantity,
 			'b-warehouse' => $warehouse,
 		);
 

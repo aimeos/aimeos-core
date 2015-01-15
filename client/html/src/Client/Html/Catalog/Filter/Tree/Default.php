@@ -207,7 +207,7 @@ class Client_Html_Catalog_Filter_Tree_Default
 			 * @see client/html/catalog/filter/tree/levels-only
 			 */
 			$startid = $view->config( 'client/html/catalog/filter/tree/startid', '' );
-			$currentid = (string) $view->param( 'f-catalog-id', '' );
+			$currentid = (string) $view->param( 'f_catid', '' );
 
 			/** @todo Make referenced domains configurable */
 			$ref = array( 'text', 'media', 'attribute' );

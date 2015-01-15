@@ -204,7 +204,7 @@ class Client_Html_Account_Favorite_Default
 	{
 		$view = $this->getView();
 		$context = $this->_getContext();
-		$ids = $view->param( 'fav-id', array() );
+		$ids = $view->param( 'fav_id', array() );
 
 
 		if( $context->getUserId() != null && !empty( $ids ) )
@@ -227,7 +227,7 @@ class Client_Html_Account_Favorite_Default
 			}
 
 
-			switch( $view->param( 'fav-action' ) )
+			switch( $view->param( 'fav_action' ) )
 			{
 				case 'add':
 
@@ -237,7 +237,7 @@ class Client_Html_Account_Favorite_Default
 					$item->setDomain( 'product' );
 					$item->setStatus( 1 );
 
-					foreach( (array) $view->param( 'fav-id', array() ) as $id )
+					foreach( (array) $view->param( 'fav_id', array() ) as $id )
 					{
 						if( !isset( $items[$id] ) )
 						{
@@ -255,7 +255,7 @@ class Client_Html_Account_Favorite_Default
 
 					$listIds = array();
 
-					foreach( (array) $view->param( 'fav-id', array() ) as $id )
+					foreach( (array) $view->param( 'fav_id', array() ) as $id )
 					{
 						if( isset( $items[$id] ) ) {
 							$listIds[] = $items[$id]->getId();
@@ -290,7 +290,7 @@ class Client_Html_Account_Favorite_Default
 	 */
 	protected function _getProductListPage( MW_View_Interface $view )
 	{
-		$page = (int) $view->param( 'fav-page', 1 );
+		$page = (int) $view->param( 'fav_page', 1 );
 		return ( $page < 1 ? 1 : $page );
 	}
 

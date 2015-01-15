@@ -135,7 +135,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 $detailConfig['absoluteUri'] = true;
 
 $prodName = $this->detailProductItem->getName();
-$param = array( 'd-product-id' => $this->detailProductItem->getId() );
+$param = array( 'd_prodid' => $this->detailProductItem->getId() );
 $prodUrl = $this->url( $detailTarget, $detailController, $detailAction, $param, array( $prodName ), $detailConfig );
 
 $images = $this->detailProductItem->getRefItems( 'media', 'default', 'default' );

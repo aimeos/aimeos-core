@@ -194,7 +194,7 @@ class Client_Html_Catalog_Detail_Additional_Attribute_Default
 			}
 
 
-			// find regular attributes from sub-products
+			// find regular attributes from sub_products
 			$products = $view->detailProductItem->getRefItems( 'product', 'default', 'default' );
 
 			$productManager = MShop_Factory::createManager( $context, 'product' );

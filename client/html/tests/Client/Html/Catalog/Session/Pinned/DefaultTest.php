@@ -71,8 +71,8 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends MW_Unittest_Testcas
 
 		$view = $this->_object->getView();
 		$param = array(
-			'pin-action' => 'add',
-			'pin-id' => $prodId,
+			'pin_action' => 'add',
+			'pin_id' => $prodId,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -92,8 +92,8 @@ class Client_Html_Catalog_Session_Pinned_DefaultTest extends MW_Unittest_Testcas
 
 		$view = $this->_object->getView();
 		$param = array(
-			'pin-action' => 'delete',
-			'pin-id' => $prodId,
+			'pin_action' => 'delete',
+			'pin_id' => $prodId,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );

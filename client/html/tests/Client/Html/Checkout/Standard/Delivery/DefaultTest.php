@@ -106,7 +106,7 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 		$view = TestHelper::getView();
 
 		$param = array(
-			'c-delivery-option' => $service->getId(),
+			'c_deliveryoption' => $service->getId(),
 		);
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
@@ -124,7 +124,7 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 	{
 		$view = TestHelper::getView();
 
-		$param = array( 'c-delivery-option' => -1 );
+		$param = array( 'c_deliveryoption' => -1 );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -149,8 +149,8 @@ class Client_Html_Checkout_Standard_Delivery_DefaultTest extends MW_Unittest_Tes
 		$view = TestHelper::getView();
 
 		$param = array(
-			'c-delivery-option' => $service->getId(),
-			'c-delivery' => array(
+			'c_deliveryoption' => $service->getId(),
+			'c_delivery' => array(
 				$service->getId() => array(
 					'notexisting' => 'invalid value',
 				),

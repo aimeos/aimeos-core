@@ -68,7 +68,7 @@ class Client_Html_Catalog_List_Head_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBodySearch()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-search-text' => '<b>Search result</b>' ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_search' => '<b>Search result</b>' ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();

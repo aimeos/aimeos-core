@@ -29,7 +29,7 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _addAttributeFilterByParam( array $params, MW_Common_Criteria_Interface $filter )
 	{
-		$attrids = ( isset( $params['f-attr-id'] ) ? $params['f-attr-id'] : array() );
+		$attrids = ( isset( $params['f_attrid'] ) ? $params['f_attrid'] : array() );
 
 		if( is_string( $attrids ) && $attrids !== '' ) {
 			$attrids = explode( ' ', $attrids );
@@ -90,8 +90,8 @@ abstract class Client_Html_Catalog_Abstract
 		$context = $this->_getContext();
 		$config = $context->getConfig();
 
-		$text = ( isset( $params['f-search-text'] ) ? (string) $params['f-search-text'] : '' );
-		$catid = ( isset( $params['f-catalog-id'] ) ? (string) $params['f-catalog-id'] : '' );
+		$text = ( isset( $params['f_search'] ) ? (string) $params['f_search'] : '' );
+		$catid = ( isset( $params['f_catid'] ) ? (string) $params['f_catid'] : '' );
 
 		if( $catid == '' && $catfilter === true )
 		{
@@ -207,7 +207,7 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _getProductListPageByParam( array $params )
 	{
-		return ( isset( $params['l-page'] ) && $params['l-page'] > 0 ? (int) $params['l-page'] : 1 );
+		return ( isset( $params['l_page'] ) && $params['l_page'] > 0 ? (int) $params['l_page'] : 1 );
 	}
 
 
@@ -279,7 +279,7 @@ abstract class Client_Html_Catalog_Abstract
 	 */
 	protected function _getProductListSortByParam( array $params, &$sortdir )
 	{
-		$sortation = ( isset( $params['f-sort'] ) ? (string) $params['f-sort'] : 'relevance' );
+		$sortation = ( isset( $params['f_sort'] ) ? (string) $params['f_sort'] : 'relevance' );
 
 		$sortdir = ( $sortation[0] === '-' ? '-' : '+' );
 		$sort = ltrim( $sortation, '-' );

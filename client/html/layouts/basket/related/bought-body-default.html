@@ -24,7 +24,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 	<ul class="bought-items">
 <?php	foreach( $productItems as $id => $productItem ) : ?>
 		<li class="bought-item">
-<?php		$params = array( 'a-name' => str_replace( ' ', '_', strip_tags( $productItem->getName() ) ), 'd-product-id' => $productItem->getId() ); ?>
+<?php		$params = array( 'a_name' => str_replace( ' ', '_', strip_tags( $productItem->getName() ) ), 'd_prodid' => $productItem->getId() ); ?>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php		$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
 <?php		if( ( $mediaItem = reset( $mediaItems ) ) !== false ) : ?>

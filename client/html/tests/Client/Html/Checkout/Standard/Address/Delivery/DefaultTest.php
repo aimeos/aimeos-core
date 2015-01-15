@@ -84,7 +84,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-delivery-option' => 'null',
+			'ca-deliveryoption' => 'null',
 			'ca-delivery' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
@@ -112,7 +112,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-delivery-option' => 'null',
+			'ca-deliveryoption' => 'null',
 			'ca-delivery' => array(
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
@@ -147,7 +147,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-delivery-option' => 'null',
+			'ca-deliveryoption' => 'null',
 			'ca-delivery' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
@@ -180,7 +180,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view->addHelper( 'config', $helper );
 
 		$param = array(
-			'ca-delivery-option' => 'null',
+			'ca-deliveryoption' => 'null',
 			'ca-delivery' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
@@ -304,7 +304,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 
 		$view = TestHelper::getView();
 
-		$param = array( 'ca-delivery-option' => $address->getId() );
+		$param = array( 'ca-deliveryoption' => $address->getId() );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -322,7 +322,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	{
 		$view = TestHelper::getView();
 
-		$param = array( 'ca-delivery-option' => -1 );
+		$param = array( 'ca-deliveryoption' => -1 );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 

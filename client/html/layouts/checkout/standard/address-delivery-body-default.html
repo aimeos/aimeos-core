@@ -19,7 +19,7 @@ try {
 }
 
 $deliveryDefault = ( $addrArray === array() ? -1 : 'null' );
-$deliveryOption = $this->param( 'ca-delivery-option', ( isset( $addrArray['order.base.address.addressid'] ) && $addrArray['order.base.address.addressid'] != '' ? $addrArray['order.base.address.addressid'] : $deliveryDefault ) );
+$deliveryOption = $this->param( 'ca-deliveryoption', ( isset( $addrArray['order.base.address.addressid'] ) && $addrArray['order.base.address.addressid'] != '' ? $addrArray['order.base.address.addressid'] : $deliveryDefault ) );
 $deliverySalutation = $this->param( 'ca-delivery/order.base.address.salutation', ( isset( $addrArray['order.base.address.salutation'] ) ? $addrArray['order.base.address.salutation'] : '' ) );
 $deliveryCountry = $this->param( 'ca-delivery/order.base.address.countryid', ( isset( $addrArray['order.base.address.countryid'] ) ? $addrArray['order.base.address.countryid'] : '' ) );
 $deliveryState = $this->param( 'ca-delivery/order.base.address.state', ( isset( $addrArray['order.base.address.state'] ) ? $addrArray['order.base.address.state'] : '' ) );
@@ -51,7 +51,7 @@ $allFields = array_keys( $deliveryCssAll );
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Delivery address' ), $enc::TRUST ); ?></h2>
 	<div class="item-address item-like">
 		<div class="header">
-			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery-option' ) ) ); ?>" value="-1" <?php echo ( $deliveryOption == -1 ? 'checked="checked"' : '' ); ?> />
+			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca-deliveryoption' ) ) ); ?>" value="-1" <?php echo ( $deliveryOption == -1 ? 'checked="checked"' : '' ); ?> />
 			<div class="values"><span class="value value-like"><?php echo $enc->html( $this->translate( 'client/html', 'like billing address' ), $enc::TRUST ); ?></span></div>
 		</div>
 	</div>
@@ -59,7 +59,7 @@ $allFields = array_keys( $deliveryCssAll );
 	<div class="item-address">
 		<div class="header">
 			<a class="modify minibutton" href="<?php echo $enc->attr( $this->url( $target, $controller, $action, array( 'step' => 'address', 'ca-delivery-delete' => $id ), array(), $config ) ); ?>">X</a>
-			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery-option' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getId() ); ?>" <?php echo ( $deliveryOption == $id ? 'checked="checked"' : '' ); ?> />
+			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca-deliveryoption' ) ) ); ?>" value="<?php echo $enc->attr( $addr->getId() ); ?>" <?php echo ( $deliveryOption == $id ? 'checked="checked"' : '' ); ?> />
 			<div class="values">
 <?php
 		echo preg_replace( "/\n+/m", "<br/>", trim( $enc->html( sprintf(
@@ -215,7 +215,7 @@ $allFields = array_keys( $deliveryCssAll );
 <?php if( $this->config( 'client/html/common/address/delivery/disable-new', false ) === false ) : ?>
 	<div class="item-address item-new" data-option="<?php echo $enc->attr( $deliveryOption ); ?>">
 		<div class="header">
-			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca-delivery-option' ) ) ); ?>" value="null" <?php echo ( $deliveryOption == 'null' ? 'checked="checked"' : '' ); ?> />
+			<input type="radio" name="<?php echo $enc->attr( $this->formparam( array( 'ca-deliveryoption' ) ) ); ?>" value="null" <?php echo ( $deliveryOption == 'null' ? 'checked="checked"' : '' ); ?> />
 			<div class="values"><span class="value value-new"><?php echo $enc->html( $this->translate( 'client/html', 'new address' ), $enc::TRUST ); ?></span></div>
 		</div>
 		<ul class="form-list" >
