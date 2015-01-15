@@ -462,7 +462,7 @@ class Client_Html_Catalog_Detail_Default
 			$context = $this->_getContext();
 			$config = $context->getConfig();
 
-			$prodid = $view->param( 'd-product-id' );
+			$prodid = $view->param( 'd_prodid' );
 			$default = array( 'media', 'price', 'text', 'attribute', 'product' );
 
 			/** client/html/catalog/domains

@@ -80,8 +80,8 @@ class Client_Html_Account_Favorite_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'fav-action' => 'add',
-			'fav-id' => 321,
+			'fav_action' => 'add',
+			'fav_id' => 321,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -122,8 +122,8 @@ class Client_Html_Account_Favorite_DefaultTest extends MW_Unittest_Testcase
 
 		$view = $this->_object->getView();
 		$param = array(
-			'fav-action' => 'delete',
-			'fav-id' => 321,
+			'fav_action' => 'delete',
+			'fav_id' => 321,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );

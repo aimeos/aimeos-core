@@ -202,11 +202,11 @@ class Client_Html_Catalog_Session_Pinned_Default
 		$session = $context->getSession();
 		$pinned = $session->get( 'arcavias/catalog/session/pinned/list', array() );
 
-		switch( $view->param( 'pin-action' ) )
+		switch( $view->param( 'pin_action' ) )
 		{
 			case 'add':
 
-				foreach( (array) $view->param( 'pin-id', array() ) as $id ) {
+				foreach( (array) $view->param( 'pin_id', array() ) as $id ) {
 					$pinned[$id] = $id;
 				}
 
@@ -235,7 +235,7 @@ class Client_Html_Catalog_Session_Pinned_Default
 
 			case 'delete':
 
-				foreach( (array) $view->param( 'pin-id', array() ) as $id ) {
+				foreach( (array) $view->param( 'pin_id', array() ) as $id ) {
 					unset( $pinned[$id] );
 				}
 

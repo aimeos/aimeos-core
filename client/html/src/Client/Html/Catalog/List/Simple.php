@@ -217,7 +217,7 @@ class Client_Html_Catalog_List_Simple
 	{
 		if( !isset( $this->_cache ) )
 		{
-			$input = $view->param( 'f-search-text' );
+			$input = $view->param( 'f_search' );
 
 			$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'catalog' );
 

@@ -200,7 +200,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			}
 
 			// only start if there's something to do
-			if( $view->param( 'ca-delivery-option', null ) === null ) {
+			if( $view->param( 'ca-deliveryoption', null ) === null ) {
 				return;
 			}
 
@@ -225,7 +225,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 			$disable = $view->config( 'client/html/common/address/delivery/disable-new', false );
 			$type = MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY;
 
-			if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) === 'null' && $disable === false ) // new address
+			if( ( $option = $view->param( 'ca-deliveryoption', 'null' ) ) === 'null' && $disable === false ) // new address
 			{
 				$params = $view->param( 'ca-delivery', array() );
 				$invalid = $this->_checkFields( $params );
@@ -238,7 +238,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_Default
 
 				$basketCtrl->setAddress( $type, $params );
 			}
-			else if( ( $option = $view->param( 'ca-delivery-option', 'null' ) ) !== '-1' ) // existing address
+			else if( ( $option = $view->param( 'ca-deliveryoption', 'null' ) ) !== '-1' ) // existing address
 			{
 				$customerAddressManager = MShop_Factory::createManager( $context, 'customer/address' );
 				$address = $customerAddressManager->getItem( $option );

@@ -190,11 +190,11 @@ class Client_Html_Checkout_Standard_Delivery_Default
 			$basketCtrl = Controller_Frontend_Factory::createController( $context, 'basket' );
 
 			// only start if there's something to do
-			if( ( $serviceId = $view->param( 'c-delivery-option', null ) ) !== null )
+			if( ( $serviceId = $view->param( 'c_deliveryoption', null ) ) !== null )
 			{
 				$serviceCtrl = Controller_Frontend_Factory::createController( $context, 'service' );
 
-				$attributes = $view->param( 'c-delivery/' . $serviceId, array() );
+				$attributes = $view->param( 'c_delivery/' . $serviceId, array() );
 				$errors = $serviceCtrl->checkServiceAttributes( 'delivery', $serviceId, $attributes );
 
 				foreach( $errors as $key => $msg )

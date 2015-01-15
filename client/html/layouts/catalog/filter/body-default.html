@@ -90,8 +90,8 @@ $enc = $this->encoder();
 	<nav>
 		<h1><?php echo $enc->html( $this->translate( 'client/html', 'Filter' ), $enc::TRUST ); ?></h1>
 		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array(), array(), $listConfig ) ); ?>">
-<?php if( ( $sort = $this->param( 'f-sort' ) ) != null ) : ?>
-			<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f-sort' ) ); ?>" value="<?php echo $enc->attr( $sort ); ?>" />
+<?php if( ( $sort = $this->param( 'f_sort' ) ) != null ) : ?>
+			<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f_sort' ) ); ?>" value="<?php echo $enc->attr( $sort ); ?>" />
 <?php endif; ?>
 <?php echo $this->get( 'filterBody' ); ?>
 		</form>

@@ -169,11 +169,11 @@ class Client_Html_Basket_Standard_Coupon_Default
 		$view = $this->getView();
 		$context = $this->_getContext();
 
-		switch( $view->param( 'b-action' ) )
+		switch( $view->param( 'b_action' ) )
 		{
 			case 'coupon-delete':
 
-				if( ( $coupon = $view->param( 'b-coupon' ) ) != '' )
+				if( ( $coupon = $view->param( 'b_coupon' ) ) != '' )
 				{
 					$this->_clearCached();
 					$cntl = Controller_Frontend_Factory::createController( $context, 'basket' );
@@ -184,7 +184,7 @@ class Client_Html_Basket_Standard_Coupon_Default
 
 			default:
 
-				if( ( $coupon = $view->param( 'b-coupon' ) ) != '' )
+				if( ( $coupon = $view->param( 'b_coupon' ) ) != '' )
 				{
 					$this->_clearCached();
 					$cntl = Controller_Frontend_Factory::createController( $context, 'basket' );

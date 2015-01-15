@@ -113,7 +113,7 @@ class Client_Html_Catalog_Detail_Seen_Default
 	 */
 	public function process()
 	{
-		if( ( $id = $this->getView()->param( 'd-product-id' ) ) !== null )
+		if( ( $id = $this->getView()->param( 'd_prodid' ) ) !== null )
 		{
 			$context = $this->_getContext();
 			$session = $context->getSession();

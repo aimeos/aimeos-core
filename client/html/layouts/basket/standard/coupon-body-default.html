@@ -26,7 +26,7 @@ if( isset( $this->standardBasket ) ) {
 	<div class="content">
 <?php if( $allowed > count( $coupons ) ) : ?>
 		<div class="coupon-new">
-			<input class="coupon-code" name="<?php echo $enc->attr( $this->formparam( 'b-coupon' ) ); ?>" type="text" maxlength="255" />
+			<input class="coupon-code" name="<?php echo $enc->attr( $this->formparam( 'b_coupon' ) ); ?>" type="text" maxlength="255" />
 			<button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', '+' ) ); ?></button>
 		</div>
 <?php endif; ?>
@@ -35,7 +35,7 @@ if( isset( $this->standardBasket ) ) {
 <?php	foreach( $coupons as $code => $products ) : ?>
 			<li class="attr-item">
 				<span class="coupon-code"><?php echo $enc->html( $code ); ?></span>
-				<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b-action' => 'coupon-delete', 'b-coupon' => $code ), array(), $basketConfig ) ); ?>">
+				<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b_action' => 'coupon-delete', 'b_coupon' => $code ), array(), $basketConfig ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/html', 'X' ) ); ?>
 				</a>
 			</li>

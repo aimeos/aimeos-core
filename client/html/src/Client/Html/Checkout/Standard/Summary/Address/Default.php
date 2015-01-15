@@ -39,7 +39,7 @@ class Client_Html_Checkout_Standard_Summary_Address_Default
 			$action = $view->config( 'client/html/checkout/standard/url/action', 'index' );
 			$config = $view->config( 'client/html/checkout/standard/url/config', array() );
 
-			$url = $view->url( $target, $cntl, $action, array( 'c-step' => 'address' ), array(), $config );
+			$url = $view->url( $target, $cntl, $action, array( 'c_step' => 'address' ), array(), $config );
 
 			$view->summaryUrlAddressBilling = $url;
 			$view->summaryUrlAddressDelivery = $url;

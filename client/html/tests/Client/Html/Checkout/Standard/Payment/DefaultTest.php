@@ -110,7 +110,7 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 		$view = TestHelper::getView();
 
 		$param = array(
-			'c-payment-option' => $service->getId(),
+			'c_paymentoption' => $service->getId(),
 		);
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
@@ -128,7 +128,7 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 	{
 		$view = TestHelper::getView();
 
-		$param = array( 'c-payment-option' => -1 );
+		$param = array( 'c_paymentoption' => -1 );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -153,8 +153,8 @@ class Client_Html_Checkout_Standard_Payment_DefaultTest extends MW_Unittest_Test
 		$view = TestHelper::getView();
 
 		$param = array(
-			'c-payment-option' => $service->getId(),
-			'c-payment' => array(
+			'c_paymentoption' => $service->getId(),
+			'c_payment' => array(
 				$service->getId() => array(
 					'notexisting' => 'invalid value',
 				),

@@ -398,8 +398,8 @@ class Client_Html_Catalog_List_Default
 
 			$products = $this->_getProductList( $view );
 
-			$text = (string) $view->param( 'f-search-text' );
-			$catid = (string) $view->param( 'f-catalog-id' );
+			$text = (string) $view->param( 'f_search' );
+			$catid = (string) $view->param( 'f_catid' );
 
 			if( $catid == '' ) {
 				$catid = $config->get( 'client/html/catalog/list/catid-default', '' );
@@ -534,7 +534,7 @@ class Client_Html_Catalog_List_Default
 			$view->listPageCurr = $this->_getProductListPage( $view );
 			$view->listPageSize = $this->_getProductListSize( $view );
 			$view->listProductTotal = $this->_getProductListTotal( $view );
-			$view->listProductSort = $view->param( 'f-sort', 'relevance' );
+			$view->listProductSort = $view->param( 'f_sort', 'relevance' );
 			$view->listProductItems = $products;
 
 			$this->_view = $view;
