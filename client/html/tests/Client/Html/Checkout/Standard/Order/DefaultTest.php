@@ -119,7 +119,7 @@ class Client_Html_Checkout_Standard_Order_DefaultTest extends MW_Unittest_Testca
 
 		$view = TestHelper::getView();
 
-		$param = array( 'cs-order' => 1 );
+		$param = array( 'cs_order' => 1 );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 

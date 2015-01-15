@@ -387,10 +387,10 @@ class Client_Html_Basket_Standard_Default
 			$products[] = array(
 				'prodid' => $prodid,
 				'quantity' => $view->param( 'b_quantity', 1 ),
-				'attrvar-id' => array_filter( (array) $view->param( 'b-attrvar-id', array() ) ),
-				'attrconfid' => array_filter( (array) $view->param( 'b-attrconfid', array() ) ),
-				'attrhide-id' => array_filter( (array) $view->param( 'b-attrhide-id', array() ) ),
-				'warehouse' => $view->param( 'b-warehouse', 'default' ),
+				'attrvarid' => array_filter( (array) $view->param( 'b_attrvarid', array() ) ),
+				'attrconfid' => array_filter( (array) $view->param( 'b_attrconfid', array() ) ),
+				'attrhideid' => array_filter( (array) $view->param( 'b_attrhideid', array() ) ),
+				'warehouse' => $view->param( 'b_warehouse', 'default' ),
 			);
 		}
 
@@ -413,9 +413,9 @@ class Client_Html_Basket_Standard_Default
 			( isset( $values['prodid'] ) ? $values['prodid'] : null ),
 			( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
 			$options,
-			( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
+			( isset( $values['attrvarid'] ) ? array_filter( (array) $values['attrvarid'] ) : array() ),
 			( isset( $values['attrconfid'] ) ? array_filter( (array) $values['attrconfid'] ) : array() ),
-			( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() ),
+			( isset( $values['attrhideid'] ) ? array_filter( (array) $values['attrhideid'] ) : array() ),
 			( isset( $values['warehouse'] ) ? $values['warehouse'] : 'default' )
 		);
 	}

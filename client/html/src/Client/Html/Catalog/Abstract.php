@@ -242,7 +242,7 @@ abstract class Client_Html_Catalog_Abstract
 		 *
 		 * The value must be an integer number from 1 to 100. Negative values as
 		 * well as values above 100 are not allowed. The value can be overwritten
-		 * per request if the "l-size" parameter is part of the URL.
+		 * per request if the "l_size" parameter is part of the URL.
 		 *
 		 * @param integer Number of products
 		 * @since 2014.03
@@ -253,7 +253,7 @@ abstract class Client_Html_Catalog_Abstract
 		 */
 		$defaultSize = $this->_getContext()->getConfig()->get( 'client/html/catalog/list/size', 48 );
 
-		$size = ( isset( $params['l-size'] ) ? (int) $params['l-size'] : $defaultSize );
+		$size = ( isset( $params['l_size'] ) ? (int) $params['l_size'] : $defaultSize );
 		return ( $size < 1 || $size > 100 ? $defaultSize : $size );
 	}
 

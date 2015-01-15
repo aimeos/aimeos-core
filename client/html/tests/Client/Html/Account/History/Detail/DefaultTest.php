@@ -56,8 +56,8 @@ class Client_Html_Account_History_Detail_DefaultTest extends MW_Unittest_Testcas
 
 		$view = $this->_object->getView();
 		$param = array(
-			'h-action' => 'detail',
-			'h-order-id' => $this->_getOrderItem( $customer->getId() )->getId()
+			'h_action' => 'detail',
+			'h_orderid' => $this->_getOrderItem( $customer->getId() )->getId()
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );

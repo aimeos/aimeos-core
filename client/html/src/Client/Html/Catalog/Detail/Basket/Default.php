@@ -236,7 +236,7 @@ class Client_Html_Catalog_Detail_Basket_Default
 
 				$prodIds = array_keys( $view->detailProductItem->getRefItems( 'product', null, 'default' ) );
 				array_unshift( $prodIds, $view->detailProductItem->getId() );
-				$params = array( 's-product-id' => $prodIds );
+				$params = array( 's_prodid' => $prodIds );
 
 				$view->basketStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
 				$view->basketProductIds = $prodIds;

@@ -80,8 +80,8 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends MW_
 		$view = $this->_object->getView();
 
 		$param = array(
-			'cs-option-terms' => '1',
-			'cs-option-terms-value' => '1',
+			'cs_option_terms' => '1',
+			'cs_option_terms_value' => '1',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -97,7 +97,7 @@ class Client_Html_Checkout_Standard_Summary_Option_Terms_DefaultTest extends MW_
 		$view = $this->_object->getView();
 
 		$param = array(
-			'cs-option-terms' => '1',
+			'cs_option_terms' => '1',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
