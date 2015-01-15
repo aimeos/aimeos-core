@@ -16,8 +16,8 @@ $enc = $this->encoder();
 		$action = $this->config( 'client/html/checkout/standard/url/action', 'index' );
 		$config = $this->config( 'client/html/checkout/standard/url/config', array() );
 
-		$changeUrl = $this->url( $target, $controller, $action, array( 'c-step' => 'payment' ), array(), $config );
-		$retryUrl = $this->url( $target, $controller, $action, array( 'c-step' => 'order', 'cs-option-terms' => 1, 'cs-option-terms-value' => 1, 'cs-order' => 1 ), array(), $config );
+		$changeUrl = $this->url( $target, $controller, $action, array( 'c_step' => 'payment' ), array(), $config );
+		$retryUrl = $this->url( $target, $controller, $action, array( 'c_step' => 'order', 'cs_option_terms' => 1, 'cs_option_terms_value' => 1, 'cs_order' => 1 ), array(), $config );
 ?>
 	<div class="button-group">
 		<a class="standardbutton" href="<?php echo $enc->attr( $changeUrl ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change payment' ), $enc::TRUST ); ?></a> 

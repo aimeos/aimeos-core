@@ -278,7 +278,7 @@ class Client_Html_Basket_Standard_Default
 				'variant' => $view->config( 'client/html/basket/require-variant', $reqvariant ),
 			);
 
-			switch( $view->param( 'b-action' ) )
+			switch( $view->param( 'b_action' ) )
 			{
 				case 'add':
 					$this->_addProducts( $view, $options );
@@ -379,18 +379,18 @@ class Client_Html_Basket_Standard_Default
 	protected function _addProducts( MW_View_Interface $view, array $options )
 	{
 		$this->_clearCached();
-		$products = (array) $view->param( 'b-prod', array() );
+		$products = (array) $view->param( 'b_prod', array() );
 		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
 
-		if( ( $prodid = $view->param( 'b-prod-id', null ) ) !== null )
+		if( ( $prodid = $view->param( 'b_prodid', null ) ) !== null )
 		{
 			$products[] = array(
-				'prod-id' => $prodid,
-				'quantity' => $view->param( 'b-quantity', 1 ),
-				'attrvar-id' => array_filter( (array) $view->param( 'b-attrvar-id', array() ) ),
-				'attrconf-id' => array_filter( (array) $view->param( 'b-attrconf-id', array() ) ),
-				'attrhide-id' => array_filter( (array) $view->param( 'b-attrhide-id', array() ) ),
-				'warehouse' => $view->param( 'b-warehouse', 'default' ),
+				'prodid' => $prodid,
+				'quantity' => $view->param( 'b_quantity', 1 ),
+				'attrvarid' => array_filter( (array) $view->param( 'b_attrvarid', array() ) ),
+				'attrconfid' => array_filter( (array) $view->param( 'b_attrconfid', array() ) ),
+				'attrhideid' => array_filter( (array) $view->param( 'b_attrhideid', array() ) ),
+				'warehouse' => $view->param( 'b_warehouse', 'default' ),
 			);
 		}
 
@@ -410,12 +410,12 @@ class Client_Html_Basket_Standard_Default
 	protected function _addProduct( Controller_Frontend_Interface $controller, array $values, array $options )
 	{
 		$controller->addProduct(
-			( isset( $values['prod-id'] ) ? $values['prod-id'] : null ),
+			( isset( $values['prodid'] ) ? $values['prodid'] : null ),
 			( isset( $values['quantity'] ) ? $values['quantity'] : 1 ),
 			$options,
-			( isset( $values['attrvar-id'] ) ? array_filter( (array) $values['attrvar-id'] ) : array() ),
-			( isset( $values['attrconf-id'] ) ? array_filter( (array) $values['attrconf-id'] ) : array() ),
-			( isset( $values['attrhide-id'] ) ? array_filter( (array) $values['attrhide-id'] ) : array() ),
+			( isset( $values['attrvarid'] ) ? array_filter( (array) $values['attrvarid'] ) : array() ),
+			( isset( $values['attrconfid'] ) ? array_filter( (array) $values['attrconfid'] ) : array() ),
+			( isset( $values['attrhideid'] ) ? array_filter( (array) $values['attrhideid'] ) : array() ),
 			( isset( $values['warehouse'] ) ? $values['warehouse'] : 'default' )
 		);
 	}
@@ -429,7 +429,7 @@ class Client_Html_Basket_Standard_Default
 	protected function _deleteProducts( MW_View_Interface $view )
 	{
 		$this->_clearCached();
-		$products = (array) $view->param( 'b-position', array() );
+		$products = (array) $view->param( 'b_position', array() );
 		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
 
 		foreach( $products as $position ) {
@@ -447,15 +447,15 @@ class Client_Html_Basket_Standard_Default
 	protected function _editProducts( MW_View_Interface $view, array $options )
 	{
 		$this->_clearCached();
-		$products = (array) $view->param( 'b-prod', array() );
+		$products = (array) $view->param( 'b_prod', array() );
 		$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'basket' );
 
-		if( ( $positon = $view->param( 'b-position', null ) ) !== null )
+		if( ( $positon = $view->param( 'b_position', null ) ) !== null )
 		{
 			$products[] = array(
 				'position' => $positon,
-				'quantity' => $view->param( 'b-quantity', 1 ),
-				'attrconf-code' => array_filter( (array) $view->param( 'b-attrconf-code', array() ) )
+				'quantity' => $view->param( 'b_quantity', 1 ),
+				'attrconf-code' => array_filter( (array) $view->param( 'b_attrconfcode', array() ) )
 			);
 		}
 

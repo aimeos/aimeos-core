@@ -204,7 +204,7 @@ class Client_Html_Account_Watch_Default
 	{
 		$view = $this->getView();
 		$context = $this->_getContext();
-		$ids = $view->param( 'watch-id', array() );
+		$ids = $view->param( 'watch_id', array() );
 
 		if( $context->getUserId() != null && !empty( $ids ) )
 		{
@@ -226,7 +226,7 @@ class Client_Html_Account_Watch_Default
 			}
 
 
-			switch( $view->param( 'watch-action' ) )
+			switch( $view->param( 'watch_action' ) )
 			{
 				case 'add':
 
@@ -268,7 +268,7 @@ class Client_Html_Account_Watch_Default
 					$item->setDomain( 'product' );
 					$item->setStatus( 1 );
 
-					foreach( (array) $view->param( 'watch-id', array() ) as $id )
+					foreach( (array) $view->param( 'watch_id', array() ) as $id )
 					{
 						if( $total >= $max )
 						{
@@ -293,17 +293,17 @@ class Client_Html_Account_Watch_Default
 
 				case 'edit':
 
-					foreach( (array) $view->param( 'watch-id', array() ) as $id )
+					foreach( (array) $view->param( 'watch_id', array() ) as $id )
 					{
 						if( isset( $items[$id] ) )
 						{
 							$item = $items[$id];
 
 							$config = array(
-								'timeframe' => $view->param( 'watch-timeframe', 7 ),
-								'price-value' => $view->param( 'watch-price-value', '0.00' ),
-								'price' => $view->param( 'watch-price', 0 ),
-								'stock' => $view->param( 'watch-stock', 0 ),
+								'timeframe' => $view->param( 'watch_timeframe', 7 ),
+								'pricevalue' => $view->param( 'watch_pricevalue', '0.00' ),
+								'price' => $view->param( 'watch_price', 0 ),
+								'stock' => $view->param( 'watch_stock', 0 ),
 							);
 							$time = time() + ( $config['timeframe'] + 1 ) * 86400;
 
@@ -320,7 +320,7 @@ class Client_Html_Account_Watch_Default
 
 					$listIds = array();
 
-					foreach( (array) $view->param( 'watch-id', array() ) as $id )
+					foreach( (array) $view->param( 'watch_id', array() ) as $id )
 					{
 						if( isset( $items[$id] ) ) {
 							$listIds[] = $items[$id]->getId();
@@ -355,7 +355,7 @@ class Client_Html_Account_Watch_Default
 	 */
 	protected function _getProductListPage( MW_View_Interface $view )
 	{
-		$page = (int) $view->param( 'watch-page', 1 );
+		$page = (int) $view->param( 'watch_page', 1 );
 		return ( $page < 1 ? 1 : $page );
 	}
 
@@ -379,7 +379,7 @@ class Client_Html_Account_Watch_Default
 		 *
 		 * The value must be an integer number from 1 to 100. Negative values as
 		 * well as values above 100 are not allowed. The value can be overwritten
-		 * per request if the "l-size" parameter is part of the URL.
+		 * per request if the "l_size" parameter is part of the URL.
 		 *
 		 * @param integer Number of products
 		 * @since 2014.09

@@ -45,7 +45,7 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 $listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
 
 $attrMap = $this->get( 'attributeMap', array() );
-$attrIds = $this->param( 'f-attr-id', array() );
+$attrIds = $this->param( 'f_attrid', array() );
 $params = $this->param(); unset( $params['target'] );
 
 if( is_string( $attrIds ) ) {
@@ -65,14 +65,14 @@ $attrIds = array_flip( $attrIds );
 <?php		foreach( $attrMap as $attrType => $attributes ) : ?>
 <?php			foreach( $attributes as $id => $attribute ) : ?>
 <?php				if( in_array( $id, $attrIds ) ) : ?>
-<?php					$current = $params; if( is_array( $current['f-attr-id'] ) ) { unset( $current['f-attr-id'][$id] ); } ?>
+<?php					$current = $params; if( is_array( $current['f_attrid'] ) ) { unset( $current['f_attrid'][$id] ); } ?>
 			<li class="attr-item"><a class="attr-name" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $current, array(), $listConfig ) ); ?>"><?php echo $enc->html( $attribute->getName(), $enc::TRUST ); ?></a></li>
 <?php				endif; ?>
 <?php			endforeach; ?>
 <?php		endforeach; ?>
 		</ul>
 <?php	if( count( $attrIds ) > 1 ) : ?>
-<?php		$current = $params; if( isset( $current['f-attr-id'] ) ) { unset( $current['f-attr-id'] ); } ?>
+<?php		$current = $params; if( isset( $current['f_attrid'] ) ) { unset( $current['f_attrid'] ); } ?>
 		<a class="selected-all" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $current, array(), $listConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'clear all' ), $enc::TRUST ); ?></a>
 <?php	endif; ?>
 	</div>
@@ -85,7 +85,7 @@ $attrIds = array_flip( $attrIds );
 		<ul class="attr-list"><!--
 <?php			foreach( $attributes as $id => $attribute ) : ?>
 			--><li class="attr-item" data-id="<?php echo $enc->attr( $id ); ?>">
-				<input class="attr-item" id="attr-<?php echo $enc->attr( $id ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'f-attr-id', $id ) ) ); ?>" type="checkbox" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : '' ); ?> />
+				<input class="attr-item" id="attr-<?php echo $enc->attr( $id ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'f_attrid', $id ) ) ); ?>" type="checkbox" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( isset( $attrIds[$id] ) ? 'checked="checked"' : '' ); ?> />
 				<label class="attr-name" for="attr-<?php echo $enc->attr( $id ); ?>"><!--
 					--><div class="media-list"><!--
 <?php

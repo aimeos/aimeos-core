@@ -67,7 +67,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 	public function testGetBodyCategory()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => -1 ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => -1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
@@ -78,7 +78,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 	public function testGetBodySearchText()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-search-text' => 'test' ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_search' => 'test' ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
@@ -89,7 +89,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 	public function testGetBodySearchAttributeList()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-attr-id' => array( -1, -2 ) ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_attrid' => array( -1, -2 ) ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
@@ -100,7 +100,7 @@ class Client_Html_Catalog_Filter_Attribute_DefaultTest extends MW_Unittest_Testc
 	public function testGetBodySearchAttributeString()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-attr-id' => '-1 -2' ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_attrid' => '-1 -2' ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();

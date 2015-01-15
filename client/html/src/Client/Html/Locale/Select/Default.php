@@ -226,11 +226,11 @@ class Client_Html_Locale_Select_Default
 		$view = $this->getView();
 		$session = $this->_getContext()->getSession();
 
-		if( ( $languageId = $view->param( 'loc-languageid' ) ) !== null ) {
+		if( ( $languageId = $view->param( 'loc_languageid' ) ) !== null ) {
 			$session->set( 'arcavias/locale/languageid', $languageId );
 		}
 
-		if( ( $currencyId = $view->param( 'loc-currencyid' ) ) !== null ) {
+		if( ( $currencyId = $view->param( 'loc_currencyid' ) ) !== null ) {
 			$session->set( 'arcavias/locale/currencyId', $currencyId );
 		}
 

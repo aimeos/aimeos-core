@@ -54,7 +54,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_LIST );
 
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getChild( 1 )->getId() ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $node->getChild( 1 )->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -81,7 +81,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Config_Default( $view, $conf );
 		$view->addHelper( 'config', $helper );
 
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getId() ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $node->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -105,7 +105,7 @@ class Client_Html_Catalog_Filter_Tree_DefaultTest extends MW_Unittest_Testcase
 		$helper = new MW_View_Helper_Config_Default( $view, $conf );
 		$view->addHelper( 'config', $helper );
 
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f-catalog-id' => $node->getChild( 0 )->getId() ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $node->getChild( 0 )->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();

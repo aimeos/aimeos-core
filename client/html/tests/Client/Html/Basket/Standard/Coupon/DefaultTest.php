@@ -70,7 +70,7 @@ class Client_Html_Basket_Standard_Coupon_DefaultTest extends MW_Unittest_Testcas
 
 		$view = $this->_object->getView();
 
-		$param = array( 'b-coupon' => '90AB' );
+		$param = array( 'b_coupon' => '90AB' );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -91,14 +91,14 @@ class Client_Html_Basket_Standard_Coupon_DefaultTest extends MW_Unittest_Testcas
 
 		$view = $this->_object->getView();
 
-		$param = array( 'b-coupon' => '90AB' );
+		$param = array( 'b_coupon' => '90AB' );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->_object->process();
 
 
-		$param = array( 'b-action' => 'coupon-delete', 'b-coupon' => '90AB' );
+		$param = array( 'b_action' => 'coupon-delete', 'b_coupon' => '90AB' );
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );

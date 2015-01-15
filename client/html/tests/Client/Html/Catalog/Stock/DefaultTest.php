@@ -52,7 +52,7 @@ class Client_Html_Catalog_Stock_DefaultTest extends MW_Unittest_Testcase
 		$productId = $this->_getProductItem()->getId();
 
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 's-product-id' => $productId ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 's_prodid' => $productId ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();
@@ -63,7 +63,7 @@ class Client_Html_Catalog_Stock_DefaultTest extends MW_Unittest_Testcase
 	public function testGetBodyStockUnlimited()
 	{
 		$view = $this->_object->getView();
-		$helper = new MW_View_Helper_Parameter_Default( $view, array( 's-product-id' => -1 ) );
+		$helper = new MW_View_Helper_Parameter_Default( $view, array( 's_prodid' => -1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->_object->getBody();

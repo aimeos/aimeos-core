@@ -6,8 +6,8 @@
  */
 
 $enc = $this->encoder();
-$phrase = $enc->attr( $this->param( 'f-search-text' ) );
-$name = $enc->attr( $this->formparam( 'f-search-text' ) );
+$phrase = $enc->attr( $this->param( 'f_search' ) );
+$name = $enc->attr( $this->formparam( 'f_search' ) );
 $hint = $this->translate( 'client/html', 'Please enter at least three characters' );
 
 /** client/html/catalog/listsimple/url/target

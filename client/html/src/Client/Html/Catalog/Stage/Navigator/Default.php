@@ -208,7 +208,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 	{
 		if( !isset( $this->_view ) )
 		{
-			if( ( $pos = $view->param( 'l-pos' ) ) !== null && ( $pid = $view->param( 'd-product-id' ) ) !== null )
+			if( ( $pos = $view->param( 'l_pos' ) ) !== null && ( $pid = $view->param( 'd_prodid' ) ) !== null )
 			{
 				if( $pos < 1 ) {
 					$start = 0; $size = 2;
@@ -235,9 +235,9 @@ class Client_Html_Catalog_Stage_Navigator_Default
 					if( $listPos > 0 && ( $product = reset( $products ) ) !== false )
 					{
 						$param = array(
-							'a-name' => $product->getName(),
-							'd-product-id' => $product->getId(),
-							'l-pos' => $pos - 1
+							'a_name' => $product->getName(),
+							'd_prodid' => $product->getId(),
+							'l_pos' => $pos - 1
 						);
 						$view->navigationPrev = $view->url( $target, $controller, $action, $param, array(), $config );
 					}
@@ -245,9 +245,9 @@ class Client_Html_Catalog_Stage_Navigator_Default
 					if( $listPos < $count - 1 && ( $product = end( $products ) ) !== false )
 					{
 						$param = array(
-							'a-name' => $product->getName(),
-							'd-product-id' => $product->getId(),
-							'l-pos' => $pos + 1
+							'a_name' => $product->getName(),
+							'd_prodid' => $product->getId(),
+							'l_pos' => $pos + 1
 						);
 						$view->navigationNext = $view->url( $target, $controller, $action, $param, array(), $config );
 					}

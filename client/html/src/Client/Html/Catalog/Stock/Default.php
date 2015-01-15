@@ -221,7 +221,7 @@ class Client_Html_Catalog_Stock_Default
 			 * @see client/html/catalog/stock/low
 			 */
 			$sortkey = $context->getConfig()->get( 'client/html/catalog/stock/sort', 'product.stock.warehouseid' );
-			$productIds = $view->param( 's-product-id' );
+			$productIds = $view->param( 's_prodid' );
 
 			if( !is_array( $productIds ) ) {
 				$productIds = explode( ' ', $productIds );

@@ -44,7 +44,7 @@ $stepActive = $this->get( 'standardStepActive', false );
 ?>
 			<li class="step <?php echo $name . $class; ?>">
 <?php	if( $stepActive && $link ) : ?>
-				<a href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c-step' => $name ), array(), $checkoutConfig ) ); ?>">
+				<a href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c_step' => $name ), array(), $checkoutConfig ) ); ?>">
 <?php	endif; ?>
 					<?php echo $enc->html( $this->translate( 'client/html', $name ) ); ?>
 <?php	if( $stepActive && $link ) : ?>
