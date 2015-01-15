@@ -238,7 +238,7 @@ class Client_Html_Checkout_Standard_Summary_Default
 	{
 		$view = $this->getView();
 
-		if( $view->param( 'cs-order', null ) === null ) {
+		if( $view->param( 'cs_order', null ) === null ) {
 			return;
 		}
 

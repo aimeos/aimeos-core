@@ -84,8 +84,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-deliveryoption' => 'null',
-			'ca-delivery' => array(
+			'ca_deliveryoption' => 'null',
+			'ca_delivery' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
@@ -112,8 +112,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-deliveryoption' => 'null',
-			'ca-delivery' => array(
+			'ca_deliveryoption' => 'null',
+			'ca_delivery' => array(
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
 				'order.base.address.address1' => 'mystreet 1',
@@ -147,8 +147,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 
 		$param = array(
-			'ca-deliveryoption' => 'null',
-			'ca-delivery' => array(
+			'ca_deliveryoption' => 'null',
+			'ca_delivery' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
@@ -180,8 +180,8 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view->addHelper( 'config', $helper );
 
 		$param = array(
-			'ca-deliveryoption' => 'null',
-			'ca-delivery' => array(
+			'ca_deliveryoption' => 'null',
+			'ca_delivery' => array(
 				'order.base.address.salutation' => 'mr',
 				'order.base.address.firstname' => 'test',
 				'order.base.address.lastname' => 'user',
@@ -229,7 +229,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 		$view = TestHelper::getView();
 		$this->_context->setUserId( $item->getRefId() );
 
-		$param = array( 'ca-delivery-delete' => $item->getId() );
+		$param = array( 'ca_delivery_delete' => $item->getId() );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -245,7 +245,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	{
 		$view = TestHelper::getView();
 
-		$param = array( 'ca-delivery-delete' => '-1' );
+		$param = array( 'ca_delivery_delete' => '-1' );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -269,7 +269,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 
 		$view = TestHelper::getView();
 
-		$param = array( 'ca-delivery-delete' => $item->getId() );
+		$param = array( 'ca_delivery_delete' => $item->getId() );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -304,7 +304,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 
 		$view = TestHelper::getView();
 
-		$param = array( 'ca-deliveryoption' => $address->getId() );
+		$param = array( 'ca_deliveryoption' => $address->getId() );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 
@@ -322,7 +322,7 @@ class Client_Html_Checkout_Standard_Address_Delivery_DefaultTest extends MW_Unit
 	{
 		$view = TestHelper::getView();
 
-		$param = array( 'ca-deliveryoption' => -1 );
+		$param = array( 'ca_deliveryoption' => -1 );
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
 		$view->addHelper( 'param', $helper );
 

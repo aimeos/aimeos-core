@@ -45,7 +45,7 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 	</ul>
 <?php foreach( $this->get( 'attributeHiddenItems', array() ) as $id => $attribute ) : ?> 
-	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrhide-id', $id ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
+	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrhideid', $id ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
 <?php endforeach; ?>
 <?php echo $this->get( 'attributeBody' ); ?>
 </div>

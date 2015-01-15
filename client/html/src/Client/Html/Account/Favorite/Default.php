@@ -314,7 +314,7 @@ class Client_Html_Account_Favorite_Default
 		 *
 		 * The value must be an integer number from 1 to 100. Negative values as
 		 * well as values above 100 are not allowed. The value can be overwritten
-		 * per request if the "l-size" parameter is part of the URL.
+		 * per request if the "l_size" parameter is part of the URL.
 		 *
 		 * @param integer Number of products
 		 * @since 2014.09

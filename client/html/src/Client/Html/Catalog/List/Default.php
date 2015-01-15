@@ -519,7 +519,7 @@ class Client_Html_Catalog_List_Default
 				$productIds = array_keys( $products );
 				sort( $productIds );
 
-				$params = array( 's-product-id' => implode( ' ', $productIds ) );
+				$params = array( 's_prodid' => implode( ' ', $productIds ) );
 				$view->listStockUrl = $view->url( $stockTarget, $stockController, $stockAction, $params, array(), $stockConfig );
 			}
 

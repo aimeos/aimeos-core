@@ -61,7 +61,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b_action' => 'add',
 			'b_prodid' => $this->_getProductItem( 'CNE' )->getId(),
 			'b_quantity' => 1,
-			'b-warehouse' => 'default',
+			'b_warehouse' => 'default',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -137,7 +137,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b_action' => 'add',
 			'b_prodid' => $this->_getProductItem( 'U:TEST' )->getId(),
 			'b_quantity' => 1,
-			'b-attrvar-id' => array_keys( $attributes ),
+			'b_attrvarid' => array_keys( $attributes ),
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -172,8 +172,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b_action' => 'add',
 			'b_prodid' => $this->_getProductItem( 'CNE' )->getId(),
 			'b_quantity' => 1,
-			'b-attrconfid' => $attribute->getId(),
-			'b-warehouse' => 'default',
+			'b_attrconfid' => $attribute->getId(),
+			'b_warehouse' => 'default',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -208,8 +208,8 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b_action' => 'add',
 			'b_prodid' => $this->_getProductItem( 'CNE' )->getId(),
 			'b_quantity' => 1,
-			'b-attrhide-id' => $attribute->getId(),
-			'b-warehouse' => 'default',
+			'b_attrhideid' => $attribute->getId(),
+			'b_warehouse' => 'default',
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
@@ -386,7 +386,7 @@ class Client_Html_Basket_Standard_DefaultTest extends MW_Unittest_Testcase
 			'b_action' => 'add',
 			'b_prodid' => $item->getId(),
 			'b_quantity' => $quantity,
-			'b-warehouse' => $warehouse,
+			'b_warehouse' => $warehouse,
 		);
 
 		$helper = new MW_View_Helper_Parameter_Default( $view, $param );
