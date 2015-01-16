@@ -91,7 +91,7 @@ $enc = $this->encoder();
 	<ul class="history-list">
 <?php		foreach( $orderItems as $id => $orderItem ) : ?>
 		<li class="history-item">
-			<a href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction, array( 'h_action' => 'detail', 'h_orderid' => $id ), array(), $accountConfig ) ); ?>">
+			<a href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction, array( 'his_action' => 'detail', 'his_orderid' => $id ), array(), $accountConfig ) ); ?>">
 				<ul class="attr-list">
 					<li class="attr-item order-basic">
 						<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Order ID' ), $enc::TRUST ); ?></span>

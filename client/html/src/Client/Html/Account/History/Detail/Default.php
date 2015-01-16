@@ -112,7 +112,7 @@ class Client_Html_Account_History_Detail_Default
 	{
 		$view = $this->getView();
 
-		if( $view->param( 'h_action' ) != 'detail' ) {
+		if( $view->param( 'his_action' ) != 'detail' ) {
 			return '';
 		}
 
@@ -163,7 +163,7 @@ class Client_Html_Account_History_Detail_Default
 	{
 		$view = $this->getView();
 
-		if( $view->param( 'h_action' ) != 'detail' ) {
+		if( $view->param( 'his_action' ) != 'detail' ) {
 			return '';
 		}
 
@@ -242,7 +242,7 @@ class Client_Html_Account_History_Detail_Default
 			$context = $this->_getContext();
 			$manager = MShop_Factory::createManager( $context, 'order' );
 
-			$orderId = $view->param( 'h_orderid', null );
+			$orderId = $view->param( 'his_orderid', null );
 
 			if( $orderId !== null )
 			{
