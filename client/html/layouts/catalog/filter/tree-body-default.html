@@ -13,9 +13,6 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
 
 ?>
 <section class="catalog-filter-tree <?php echo ( $counts == true ? 'catalog-filter-count' : '' ); ?>">
-<?php if( ( $catid = $this->param( 'f_catid' ) ) != null ) : ?>
-	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f_catid' ) ); ?>" value="<?php echo $enc->attr( $catid ); ?>" />
-<?php endif; ?>
 <?php if( $this->treeCatalogTree ) : ?>
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Categories' ), $enc::TRUST ); ?></h2>
 	<ul class="level-<?php echo $enc->attr( $this->treeCatalogTree->getNode()->level ); ?>"><!--

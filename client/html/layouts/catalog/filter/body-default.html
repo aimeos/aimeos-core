@@ -76,6 +76,13 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
  */
 $listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
 
+$listParams = array();
+$params = $this->param();
+
+foreach( array( 'f_catid', 'f_name', 'f_sort' ) as $name ) {
+	if( isset( $params[$name] ) ) { $listParams[$name] = $params[$name]; }
+}
+
 $enc = $this->encoder();
 
 ?>
@@ -89,10 +96,7 @@ $enc = $this->encoder();
 <?php endif; ?>
 	<nav>
 		<h1><?php echo $enc->html( $this->translate( 'client/html', 'Filter' ), $enc::TRUST ); ?></h1>
-		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, array(), array(), $listConfig ) ); ?>">
-<?php if( ( $sort = $this->param( 'f_sort' ) ) != null ) : ?>
-			<input type="hidden" name="<?php echo $enc->attr( $this->formparam( 'f_sort' ) ); ?>" value="<?php echo $enc->attr( $sort ); ?>" />
-<?php endif; ?>
+		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $listParams, array(), $listConfig ) ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
 		</form>
 	</nav>
