@@ -53,7 +53,7 @@ class Client_Html_Catalog_Detail_Additional_Download_DefaultTest extends MW_Unit
 
 		$output = $this->_object->getBody();
 		$this->assertContains( '<h2 class="header downloads">', $output );
-		$this->assertContains( '<span class="media_name">example image 1</span>', $output );
+		$this->assertContains( '<span class="media-name">example image 1</span>', $output );
 	}
 
 

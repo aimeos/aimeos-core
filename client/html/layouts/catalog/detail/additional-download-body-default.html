@@ -24,7 +24,7 @@ $enc = $this->encoder();
 		<li class="item">
 			<a href="<?php echo $this->content( $item->getUrl() ); ?>" title="<?php echo $enc->attr( $item->getName() ); ?>">
 				<img class="media-image" src="<?php echo $this->content( $item->getPreview() ); ?>" alt="<?php echo $enc->attr( $item->getName() ); ?>" />
-				<span class="media_name"><?php echo $enc->html( $item->getName() ); ?></span>
+				<span class="media-name"><?php echo $enc->html( $item->getName() ); ?></span>
 			</a>
 		</li>
 <?php endforeach; ?>

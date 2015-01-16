@@ -143,8 +143,8 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php			$config = $listItem->getConfig(); ?>
 <?php			$timeframe = ( isset( $config['timeframe'] ) ? (int) $config['timeframe'] : 7 ); ?>
 					<li class="form-item timeframe">
-						<label for="watch_timeframe"><?php echo $enc->html( $this->translate( 'client/html', 'Time frame' ), $enc::TRUST ); ?>
-						</label><select id="watch_timeframe" name="<?php echo $enc->attr( $this->formparam( array( 'watch_timeframe' ) ) ); ?>">
+						<label for="watch-timeframe"><?php echo $enc->html( $this->translate( 'client/html', 'Time frame' ), $enc::TRUST ); ?>
+						</label><select id="watch-timeframe" name="<?php echo $enc->attr( $this->formparam( array( 'watch_timeframe' ) ) ); ?>">
 							<option value="7" <?php echo ( $timeframe == 7 ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html', 'One week' ) ); ?></option>
 							<option value="14" <?php echo ( $timeframe == 14 ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html', 'Two weeks' ) ); ?></option>
 							<option value="30" <?php echo ( $timeframe == 30 ? 'selected="selected"' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/html', 'One month' ) ); ?></option>
@@ -153,14 +153,14 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 					</li>
 <?php			$price = ( isset( $config['price'] ) ? (int) $config['price'] : 0 ); ?>
 					<li class="form-item price">
-						<label for="watch_price"><?php echo $enc->html( $this->translate( 'client/html', 'If price decreases' ), $enc::TRUST ); ?>
-						</label><input type="checkbox" id="watch_price" name="<?php echo $enc->attr( $this->formparam( array( 'watch_price' ) ) ); ?>" value="1" <?php echo ( $price ? 'checked="checked"' : '' ); ?> />
+						<label for="watch-price"><?php echo $enc->html( $this->translate( 'client/html', 'If price decreases' ), $enc::TRUST ); ?>
+						</label><input type="checkbox" id="watch-price" name="<?php echo $enc->attr( $this->formparam( array( 'watch_price' ) ) ); ?>" value="1" <?php echo ( $price ? 'checked="checked"' : '' ); ?> />
 						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'watch_pricevalue' ) ) ); ?>" value="<?php echo $enc->attr( ( $priceItem = reset( $prices ) ) !== false ? $priceItem->getValue() : '0.00' ); ?>" />
 					</li>
 <?php			$stock = ( isset( $config['stock'] ) ? (int) $config['stock'] : 0 ); ?>
 					<li class="form-item stock">
-						<label for="watch_stock"><?php echo $enc->html( $this->translate( 'client/html', 'If back in stock' ), $enc::TRUST ); ?>
-						</label><input type="checkbox" id="watch_stock" name="<?php echo $enc->attr( $this->formparam( array( 'watch_stock' ) ) ); ?>" value="1" <?php echo ( $stock ? 'checked="checked"' : '' ); ?> />
+						<label for="watch-stock"><?php echo $enc->html( $this->translate( 'client/html', 'If back in stock' ), $enc::TRUST ); ?>
+						</label><input type="checkbox" id="watch-stock" name="<?php echo $enc->attr( $this->formparam( array( 'watch_stock' ) ) ); ?>" value="1" <?php echo ( $stock ? 'checked="checked"' : '' ); ?> />
 					</li>
 				</ul>
 				<div class="button-group">
