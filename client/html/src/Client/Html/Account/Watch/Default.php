@@ -204,7 +204,7 @@ class Client_Html_Account_Watch_Default
 	{
 		$view = $this->getView();
 		$context = $this->_getContext();
-		$ids = $view->param( 'watch_id', array() );
+		$ids = $view->param( 'wat_id', array() );
 
 		if( $context->getUserId() != null && !empty( $ids ) )
 		{
@@ -226,7 +226,7 @@ class Client_Html_Account_Watch_Default
 			}
 
 
-			switch( $view->param( 'watch_action' ) )
+			switch( $view->param( 'wat_action' ) )
 			{
 				case 'add':
 
@@ -268,7 +268,7 @@ class Client_Html_Account_Watch_Default
 					$item->setDomain( 'product' );
 					$item->setStatus( 1 );
 
-					foreach( (array) $view->param( 'watch_id', array() ) as $id )
+					foreach( (array) $view->param( 'wat_id', array() ) as $id )
 					{
 						if( $total >= $max )
 						{
@@ -293,17 +293,17 @@ class Client_Html_Account_Watch_Default
 
 				case 'edit':
 
-					foreach( (array) $view->param( 'watch_id', array() ) as $id )
+					foreach( (array) $view->param( 'wat_id', array() ) as $id )
 					{
 						if( isset( $items[$id] ) )
 						{
 							$item = $items[$id];
 
 							$config = array(
-								'timeframe' => $view->param( 'watch_timeframe', 7 ),
-								'pricevalue' => $view->param( 'watch_pricevalue', '0.00' ),
-								'price' => $view->param( 'watch_price', 0 ),
-								'stock' => $view->param( 'watch_stock', 0 ),
+								'timeframe' => $view->param( 'wat_timeframe', 7 ),
+								'pricevalue' => $view->param( 'wat_pricevalue', '0.00' ),
+								'price' => $view->param( 'wat_price', 0 ),
+								'stock' => $view->param( 'wat_stock', 0 ),
 							);
 							$time = time() + ( $config['timeframe'] + 1 ) * 86400;
 
@@ -320,7 +320,7 @@ class Client_Html_Account_Watch_Default
 
 					$listIds = array();
 
-					foreach( (array) $view->param( 'watch_id', array() ) as $id )
+					foreach( (array) $view->param( 'wat_id', array() ) as $id )
 					{
 						if( isset( $items[$id] ) ) {
 							$listIds[] = $items[$id]->getId();
@@ -355,7 +355,7 @@ class Client_Html_Account_Watch_Default
 	 */
 	protected function _getProductListPage( MW_View_Interface $view )
 	{
-		$page = (int) $view->param( 'watch_page', 1 );
+		$page = (int) $view->param( 'wat_page', 1 );
 		return ( $page < 1 ? 1 : $page );
 	}
 

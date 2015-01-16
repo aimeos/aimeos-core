@@ -47,7 +47,7 @@ $list = $this->config( 'client/html/catalog/detail/actions/list', array( 'pin', 
 
 $urls = array(
 	'pin' => $this->url( $pinTarget, $pinController, $pinAction, array( 'pin_action' => 'add', 'pin_id' => $prodid ) + $params, $pinConfig ),
-	'watch' => $this->url( $watchTarget, $watchController, $watchAction, array( 'watch_action' => 'add', 'watch_id' => $prodid ) + $params, $watchConfig ),
+	'watch' => $this->url( $watchTarget, $watchController, $watchAction, array( 'wat_action' => 'add', 'wat_id' => $prodid ) + $params, $watchConfig ),
 	'favorite' => $this->url( $favTarget, $favController, $favAction, array( 'fav_action' => 'add', 'fav_id' => $prodid ) + $params, $favConfig ),
 );
 
