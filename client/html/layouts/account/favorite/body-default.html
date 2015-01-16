@@ -122,7 +122,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php	foreach( $listItems as $listItem ) : $id = $listItem->getRefId(); ?>
 <?php		if( isset( $productItems[$id] ) ) : $productItem = $productItems[$id]; ?>
 		<li class="favorite-item">
-<?php			$params = array( 'a_name' => str_replace( ' ', '_', strip_tags( $productItem->getName() ) ), 'd_prodid' => $productItem->getId() ); ?>
+<?php			$params = array( 'd_name' => str_replace( ' ', '_', strip_tags( $productItem->getName() ) ), 'd_prodid' => $productItem->getId() ); ?>
 			<a class="modify" href="<?php echo $this->url( $favTarget, $favController, $favAction, array( 'fav_action' => 'delete', 'fav_id' => $id ) + $favParams, array(), $favConfig ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php			$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
