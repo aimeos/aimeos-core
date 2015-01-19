@@ -93,7 +93,7 @@ class MShop_Text_Manager_Type_DefaultTest extends MW_Unittest_Testcase
 		$search->setSlice(0, 2);
 		$results = $this->_object->searchItems( $search, array(), $total );
 		$this->assertEquals( 2, count( $results ) );
-		$this->assertEquals( 3, $total);
+		$this->assertEquals( 4, $total);
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

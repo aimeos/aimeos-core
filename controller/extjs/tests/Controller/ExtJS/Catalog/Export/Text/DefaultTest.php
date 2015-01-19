@@ -109,12 +109,12 @@ class Controller_ExtJS_Catalog_Export_Text_DefaultTest extends MW_Unittest_Testc
 		$this->assertEquals( 'name', $lines['de'][3][4] );
 		$this->assertEquals( '', $lines['de'][3][6] );
 
-		$this->assertEquals( 'de', $lines['de'][20][0] );
-		$this->assertEquals( 'Tee', $lines['de'][20][1] );
-		$this->assertEquals( $ids['Tee'], $lines['de'][20][2] );
-		$this->assertEquals( 'unittype8', $lines['de'][20][3] );
-		$this->assertEquals( 'long', $lines['de'][20][4] );
-		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $lines['de'][20][6] );
+		$this->assertEquals( 'de', $lines['de'][23][0] );
+		$this->assertEquals( 'Tee', $lines['de'][23][1] );
+		$this->assertEquals( $ids['Tee'], $lines['de'][23][2] );
+		$this->assertEquals( 'unittype8', $lines['de'][23][3] );
+		$this->assertEquals( 'long', $lines['de'][23][4] );
+		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $lines['de'][23][6] );
 	}
 
 

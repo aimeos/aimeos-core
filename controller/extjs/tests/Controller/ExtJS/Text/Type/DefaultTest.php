@@ -49,8 +49,8 @@ class Controller_ExtJS_Text_Type_DefaultTest extends MW_Unittest_Testcase
 		$result = $this->_object->searchItems( $params );
 
 		$this->assertEquals( 1, count( $result['items'] ) );
-		$this->assertEquals( 4, $result['total'] );
-		$this->assertEquals( 'short', $result['items'][0]->{'text.type.code'} );
+		$this->assertEquals( 5, $result['total'] );
+		$this->assertEquals( 'url', $result['items'][0]->{'text.type.code'} );
 	}
 
 
